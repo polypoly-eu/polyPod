@@ -21,6 +21,15 @@ const DataStructureMiniStory = ({ data }) => {
     const dataBubblesLightColor = "#f7fafc";
     const [selectedFolder, setSelectedFolder] = useState(data[0].title);
 
+    const amountOfFiles = data.find(
+        (bubble) => bubble.title === selectedFolder
+    )?.count;
+
+    const extendedDataStructure = [
+        ...data,
+        { title: "Total", count: amountOfFiles, value: amountOfFiles },
+    ];
+
     const handleFolderSelected = (buttonContent) => {
         setSelectedFolder(buttonContent);
     };
@@ -36,10 +45,6 @@ const DataStructureMiniStory = ({ data }) => {
             return dataBubblesDarkColor;
         }
     };
-
-    const amountOfFiles = data.find(
-        (bubble) => bubble.title === selectedFolder
-    )?.count;
 
     return (
         <>
@@ -63,7 +68,7 @@ const DataStructureMiniStory = ({ data }) => {
                 />
             </div>
             <ChartButtons
-                buttonsContent={data.map((d) => {
+                buttonsContent={extendedDataStructure.map((d) => {
                     return { id: d.title };
                 })}
                 activeButton={selectedFolder}
