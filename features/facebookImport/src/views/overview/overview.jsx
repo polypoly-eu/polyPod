@@ -148,7 +148,7 @@ const Overview = () => {
             )}
             {showNewImportDialog ? (
                 <PolypolyDialog
-                    message={i18n.t("overview:new.import.dialog")}
+                    title={i18n.t("overview:new.import.dialog")}
                     backButton={{
                         text: i18n.t("overview:new.import.dialog.back"),
                         onClick: () => setShowNewImportDialog(false),
