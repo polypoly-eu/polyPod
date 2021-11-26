@@ -1,14 +1,8 @@
-import React, { useContext } from "react";
-import { ImporterContext } from "../../context/importer-context.jsx";
+import React from "react";
 
 import "./progressBar.css";
 
-const ProgressBar = ({
-    onUpdateImportStatus,
-    importStatus,
-    importSections,
-    file,
-}) => {
+const ProgressBar = ({ onUpdateImportStatus, importSections }) => {
     return (
         <div className="progress-bar" id="progress-bar">
             {importSections.map((section, index) => (
