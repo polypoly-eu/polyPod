@@ -13,5 +13,6 @@
     "analyzing.data": "Your data is being analysed",
     "new.import.dialog": "Do you really want to replace your current file with a new one?",
     "new.import.dialog.back": "Back",
-    "new.import.dialog.continue": "Continue"
+    "new.import.dialog.continue": "Continue",
+    "time.format": "en-GB"
 }

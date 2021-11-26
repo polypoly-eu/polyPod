@@ -6,7 +6,6 @@ import BarChart from "../dataViz/barChart.jsx";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
 import "./messagesMiniStory.css";
-import { formatTime } from "../../utils/formatTime";
 
 const SummaryText = ({
     messagesCount,
@@ -63,7 +62,7 @@ export const MessagesMiniStoryDetails = ({
                         <div className="bar-extra-info">
                             <p>{i18n.t("messagesMiniStory:first.chat")}</p>
                             {extraData.firstChatDate
-                                ? formatTime(extraData.firstChatDate)
+                                ? extraData.firstChatDate.toDateString()
                                 : "unknown"}
                         </div>
                         <div className="bar-extra-info">
@@ -71,7 +70,7 @@ export const MessagesMiniStoryDetails = ({
                                 {i18n.t("messagesMiniStory:last.interaction")}
                             </p>
                             {extraData.lastChatDate
-                                ? formatTime(extraData.lastChatDate)
+                                ? extraData.lastChatDate.toDateString()
                                 : "unknown"}
                         </div>
                     </>
