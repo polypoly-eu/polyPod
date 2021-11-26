@@ -34,5 +34,7 @@
     "import.name": "Name:",
     "import.size": "Dateigröße:",
     "explore.1": "Nachdem Sie Ihre Facebook-Daten in Ihren polyPod importiert haben, können Sie diese erkunden und sehen, was Facebook wirklich über Sie weiß. Das heruntergeladene zip-Archiv kann nun auch sicher wieder von Ihrem Smartphone gelöscht werden.",
-    "explore.button": "Erkunden Sie Ihre Daten"
+    "explore.button": "Erkunden Sie Ihre Daten",
+    "file.too.big.dialog.title": "Die ausgewählte Datei ist zu groß.",
+    "file.too.big.dialog.message": "Bitte wählen Sie eine aus die kleiner als {{max_file_size}} ist. Sie können die Dateiengröße verringern, indem Sie eine Datei mit kürzerer Zeitspanne bei Facebook beantragen oder unsere Beispieldatensätze benutzen."
 }
