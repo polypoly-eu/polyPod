@@ -35,7 +35,7 @@
 "button_url_open_reject" = "No";
 "button_update_notification_close" = "OK";
 "auth_prompt_set_up" = "Set up authentification";
-"auth_prompt_unlock" = "Unlock";
+"auth_prompt_unlock" = "Login to your polyPod";
 
 "settings_imprint_text" = "
 <p>Details according to § 5 TMG</p>
