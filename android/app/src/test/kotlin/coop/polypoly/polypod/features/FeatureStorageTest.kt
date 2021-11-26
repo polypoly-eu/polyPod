@@ -62,7 +62,12 @@ class FeatureStorageTest {
     }
 
     @Test
-    @Ignore("Features not in the order file are currently being ignored, mock data needs updating")
+    @Ignore(
+        """
+            Features not in the order file are currently being ignored, mock \
+            data needs updating
+        """
+    )
     fun whenOneFeatureIsInstalled_featuresListContainsItsName() {
         createMockFeaturePackage(featuresDir, "feature1.zip")
         val result = featureStorage.listFeatures(context)
