@@ -401,7 +401,7 @@ class BrowserPolyNav implements PolyNav {
                     const dataUrl = this.result as string;
                     resolve({
                         name: selectedFile.name,
-                        url: dataUrl,
+                        url: FileUrl.fromParts(dataUrl, selectedFile.name).url,
                         size: selectedFile.size,
                     });
                 };
