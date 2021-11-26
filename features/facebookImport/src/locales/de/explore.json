@@ -1,6 +1,6 @@
 {
     "messages.title": "Ihre Nachrichten",
-    "messages.summary": "In Ihren Facebook-Daten finden sich {{messages}} Nachrichten aus {{threads}} Chats mit {{people}} Personen.",
+    "messages.summary": "In Ihren Facebook-Daten befinden sich {{messages}} Nachrichten aus {{threads}} Chats mit {{people}} Personen.",
     "report.success": "Ihr Report wurde an uns gesendet. Vielen Dank!",
     "report.error": "Report nicht gesendet. Bitte erneut versuchen!",
     "loading": "Ihre Daten werden analysiert",
