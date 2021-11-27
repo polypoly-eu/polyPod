@@ -38,4 +38,3 @@
     "file.too.big.dialog.title": "The file you selected is too big.",
     "file.too.big.dialog.message": "Please pick one that is smaller than {{max_file_size}}. You can reduce the file size by requesting a shorter timespan from Facebook or as an alternative use our example data sets."
 }
-}
