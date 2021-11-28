@@ -1,6 +1,6 @@
 {
     "on.off.events.title": "Machen diese Unternehmen auch Werbung?",
-    "general": "Ihre Facebook-Daten enthalten auch Informationen über Aktivitäten außerhalb der Plattform, z.B. aus der Nutzung anderer Apps oder Webseiten",
+    "general": "Ihre Facebook-Daten enthalten auch Informationen über Aktivitäten außerhalb der Plattform, z. B. aus der Nutzung anderer Apps oder Webseiten.",
     "companies": "Firmen, die solche sogenannten Off-Facebook Events weiterleiten, sind in Ihren Daten zu finden.",
     "companiesWithAds": "von diesen Firmen haben auch Werbung geschaltet, um Sie zu erreichen. Ein Zufall?",
     "total": "Insgesamt <strong>{{number_companies}}</strong> Apps und Websites, die Sie außerhalb von Facebook verwenden, senden Informationen darüber an Facebook zurück. <strong>{{number_companiesWithAds}}</strong> davon senden z. B. Infos über Ihre Einkäufe.",
