@@ -1,6 +1,6 @@
 {
     "title": "Auch Andere liefern Daten über Sie an Facebook",
-    "summary.text.1": "Ihre Facebook-Daten listen {{number_companies}} Firmen, also sogenannte \"connected advertisers\", auf. Dabei handelt es sich um Firmen, die Adresslisten an Facebook geliefert haben, auf denen auch Ihre Kontaktinformationen standen. Das Ziel dabei: Ihnen gezielt Werbung zu zeigen. Damit das möglich wird, müssen Sie selbst diesen Firmen oder deren Datenpartnern eine Erlaubnis erteilt haben. Waren Sie sich dessen bewusst?",
+    "summary.text.1": "Ihre Facebook-Daten listen {{number_companies}} Firmen, als sogenannte \"connected advertisers\", auf. Dabei handelt es sich um Firmen, die Adresslisten an Facebook geliefert haben, auf denen auch Ihre Kontaktinformationen standen. Das Ziel dabei: Ihnen gezielt Werbung zu zeigen. Damit das möglich wird, müssen Sie selbst diesen Firmen oder deren Datenpartnern eine Erlaubnis erteilt haben. Waren Sie sich dessen bewusst?",
     "summary.text.2": "Auf seiner Website schreibt Facebook, dass Firmen nicht nur ihre eigenen Adresslisten nutzen können, um Werbung gezielt zu schalten, sondern auch die Listen anderer Unternehmen. Auf Basis solcher Listen können Sie ohne direkte Zustimmung als Nutzer:in bei der Planung von Kampagnen ein- oder ausgeschlossen werden, z. B. auf Grund Ihres Wohnorts.",
     "details.text": "Dies ist die gesamte Liste der {{number_companies}} sogenannten \"connected advertisers\" aus Ihren Facebook Daten."
 }
