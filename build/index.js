@@ -262,7 +262,7 @@ async function main() {
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
 
-    if (command !== "list" && command !== "list-deps" && command !== "clean") {
+    if (!["list", "list-deps", "clean"].includes(command)) {
         logDetail(`👷👷‍♀️ ...`);
         await npm("ci", "--no-update-notifier", "--no-fund");
     }
