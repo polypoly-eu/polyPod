@@ -29,7 +29,6 @@
     "@polypoly-eu/rdf": "file:../../api/rdf",
     "@polypoly-eu/rdf-convert": "file:../../api/rdf-convert",
     "@rdfjs/dataset": "^1.0.1",
-    "@types/rdf-js": "^4.0.0",
     "fp-ts": "^2.8.2",
     "io-ts": "2.2.10",
     "memfs": "^3.2.0"
