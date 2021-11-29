@@ -234,14 +234,14 @@ class LocalStoragePolyOut implements PolyOut {
     }
 
     writeFile(
-        path: string,
+        url: string,
         content: string,
-        options: EncodingOptions
-    ): Promise<void> {
-        throw "Not implemented: writeFile";
-    }
+        options?: EncodingOptions
+    ): Promise<string> {
+        if (options) {
+            throw new Error("Not implemented: writeFile with options");
+        }
 
-    async importArchive(url: string): Promise<string> {
         return new Promise((resolve) => {
             const filesInDir = new Map(
                 JSON.parse(
@@ -250,20 +250,27 @@ class LocalStoragePolyOut implements PolyOut {
             );
 
             const fileId = "polypod://" + createUUID();
-            const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
+
             filesInDir.set(fileId, {
                 id: fileId,
-                name: fileName,
+                name: url,
                 time: new Date().toISOString(),
-                size: dataUrl.length,
+                size: content.length,
             });
             localStorage.setItem(
                 BrowserPolyNav.filesKey,
                 JSON.stringify(Array.from(filesInDir))
             );
-            localStorage.setItem(fileId, dataUrl);
+
+            localStorage.setItem(url, content);
             resolve(fileId);
         });
+
+    }
+
+    async importArchive(url: string): Promise<string> {
+        const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
+        return this.writeFile(fileName, dataUrl);
     }
 
     async removeArchive(fileId: string): Promise<void> {

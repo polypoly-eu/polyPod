@@ -110,7 +110,7 @@ export class DefaultPod implements Pod {
                 return fs.stat(path);
             }
 
-            writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
+            writeFile(path: string, content: string, options?: EncodingOptions): Promise<string> {
                 return fs.writeFile(path, content, options);
             }
 

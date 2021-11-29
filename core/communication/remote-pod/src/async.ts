@@ -27,7 +27,7 @@ class AsyncPolyOut implements PolyOut {
         else return (await this.promise).readFile(path);
     }
 
-    async writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
+    async writeFile(path: string, content: string, options?: EncodingOptions): Promise<string> {
         return (await this.promise).writeFile(path, content, options);
     }
     async stat(path: string): Promise<Stats> {
