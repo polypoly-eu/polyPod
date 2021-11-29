@@ -168,7 +168,7 @@ const ActivitiesMiniStory = ({ totalEvents }) => {
                 />
                 <p className="below-chart">
                     {activeTab.id == "total"
-                        ? i18n.t("total.years")
+                        ? i18n.t("common:total.years")
                         : selectedYear}
                 </p>
             </div>
