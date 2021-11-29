@@ -1,11 +1,11 @@
-import dataStructureBubbles from "./dataStructureBubbles.svg";
+import bubblesChartInfoScreen from "./bubblesChartInfoScreen.svg";
 import activitiesBarChart from "./activitiesBarChart.svg";
-import messagesBarChart from "./messagesBarChart.svg";
+import barChartInfoScreen from "./barChartInfoScreen.svg";
 import onOffFacebookChart from "./onOffFacebookChart.svg";
 
 export default {
-    dataStructureBubbles: dataStructureBubbles,
+    bubblesChartInfoScreen: bubblesChartInfoScreen,
     activitiesBarChart: activitiesBarChart,
-    messagesBarChart: messagesBarChart,
+    barChartInfoScreen: barChartInfoScreen,
     onOffFacebookChart: onOffFacebookChart,
 };
