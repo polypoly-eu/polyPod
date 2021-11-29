@@ -23,12 +23,7 @@ const DatePicker = ({ year, yearRange, onYearChange }) => {
                     className="arrow left"
                     onClick={() => onYearChange(yearRange[rangeIndex - 1])}
                 >
-                    <img
-                        src="./images/angle-left.svg"
-                        alt="arrow-left"
-                        className="space-right"
-                    />
-                    <p>{i18n.t("activitiesMiniStory:tab.arrow.left")}</p>
+                    <img src="./images/angle-left.svg" alt="arrow-left" />
                 </button>
             ) : (
                 <div className="arrow filler"></div>
@@ -39,12 +34,7 @@ const DatePicker = ({ year, yearRange, onYearChange }) => {
                     className="arrow right"
                     onClick={() => onYearChange(yearRange[rangeIndex + 1])}
                 >
-                    <p>{i18n.t("activitiesMiniStory:tab.arrow.right")}</p>
-                    <img
-                        src="./images/angle-right.svg"
-                        alt="arrow-right"
-                        className="space-left"
-                    />
+                    <img src="./images/angle-right.svg" alt="arrow-right" />
                 </button>
             ) : (
                 <div className="arrow filler"></div>
@@ -53,23 +43,7 @@ const DatePicker = ({ year, yearRange, onYearChange }) => {
     );
 };
 
-export const ActivitiesMiniStorySummary = ({ totalEvents }) => {
-    return (
-        <div className="render-summary">
-            <p className="highlighted-number">
-                {totalEvents.total.toLocaleString("de-DE")}
-            </p>
-            {i18n.t("activitiesMiniStory:summary", {
-                number_activities: totalEvents.total,
-            })}
-            <p className="source">
-                {i18n.t("common:source.your.facebook.data")}
-            </p>
-        </div>
-    );
-};
-
-export const ActivitiesMiniStoryDetails = ({ totalEvents }) => {
+const ActivitiesMiniStory = ({ totalEvents }) => {
     const yearRange = fillArray(Object.keys(totalEvents.values));
 
     const yearlyTotals = yearRange.map((year) => {
@@ -147,11 +121,6 @@ export const ActivitiesMiniStoryDetails = ({ totalEvents }) => {
 
     return (
         <div className="activities-ministory">
-            <p>
-                {i18n.t("activitiesMiniStory:summary", {
-                    number_activities: totalEvents.total,
-                })}
-            </p>
             <div className="tab-container">
                 <div className="tab-button-container">
                     {tabs.map((tab, index) => (
@@ -199,7 +168,7 @@ export const ActivitiesMiniStoryDetails = ({ totalEvents }) => {
                 />
                 <p className="below-chart">
                     {activeTab.id == "total"
-                        ? "Years since you joined Facebook"
+                        ? i18n.t("common:total.years")
                         : selectedYear}
                 </p>
             </div>
@@ -210,3 +179,5 @@ export const ActivitiesMiniStoryDetails = ({ totalEvents }) => {
         </div>
     );
 };
+
+export default ActivitiesMiniStory;
