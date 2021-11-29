@@ -265,7 +265,6 @@ class LocalStoragePolyOut implements PolyOut {
             localStorage.setItem(url, content);
             resolve(fileId);
         });
-
     }
 
     async importArchive(url: string): Promise<string> {
