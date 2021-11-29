@@ -1,6 +1,6 @@
 {
-    "dataStructureBubbles.text1": "Total value for this category",
-    "dataStructureBubbles.text2": "Category",
+    "bubblesChartInfoScreen.text1": "Total value for this category",
+    "bubblesChartInfoScreen.text2": "Category",
     "activitiesBarChart.text1": "Number of entries for this specific month",
     "activitiesBarChart.bigbold1": "Events",
     "activitiesBarChart.bold1": "Number of events",

@@ -1,4 +1,5 @@
 {
     "text1": "This diagram shows the number of reactions for each of the six options recorded inside your Facebook data. ",
-    "text2": "This diagram is called a <strong>bubble chart</strong>. Each bubble represents one datatype. The number of bubbles shows how many data types there are. The size of each bubble is dependent on the amount of data inside."
+    "text2": "This diagram is called a <strong>bubble chart</strong>. Each bubble represents one datatype. The number of bubbles shows how many data types there are. The size of each bubble is dependent on the amount of data inside.",
+    "legend": "Representation of the number of entries per reaction"
 } 
