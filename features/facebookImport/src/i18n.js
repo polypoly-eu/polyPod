@@ -1,6 +1,7 @@
 import { determineLanguage, I18n } from "@polypoly-eu/silly-i18n";
 
 import commonEn from "./locales/en/common.json";
+import facebookAccountEn from "./locales/en/facebookAccount.json";
 import navbarTitlesEn from "./locales/en/navbarTitles.json";
 import importEn from "./locales/en/import.json";
 import overviewEn from "./locales/en/overview.json";
@@ -26,6 +27,7 @@ import offFacebookInfoScreenEn from "./locales/en/infoScreens/offFacebookInfoScr
 import infographicsEn from "./locales/en/infographics.json";
 
 import commonDe from "./locales/de/common.json";
+import facebookAccountDe from "./locales/de/facebookAccount.json";
 import navbarTitlesDe from "./locales/de/navbarTitles.json";
 import importDe from "./locales/de/import.json";
 import overviewDe from "./locales/de/overview.json";
@@ -53,6 +55,7 @@ import infographicsDe from "./locales/de/infographics.json";
 export default new I18n(determineLanguage(), {
     en: {
         common: commonEn,
+        facebookAccount: facebookAccountEn,
         navbarTitles: navbarTitlesEn,
         import: importEn,
         overview: overviewEn,
@@ -79,6 +82,7 @@ export default new I18n(determineLanguage(), {
     },
     de: {
         common: commonDe,
+        facebookAccount: facebookAccountDe,
         navbarTitles: navbarTitlesDe,
         import: importDe,
         overview: overviewDe,
