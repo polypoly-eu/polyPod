@@ -21,10 +21,13 @@
     "messagesBarChart.text2": "Gesamtzahl für diesen Chat",
     "messagesBarChart.bigbold1": "Darstellung der Anzahl der ausgetauschten Nachrichten",
     "messagesBarChart.bold2": "Name der Gruppe oder Person",
-    "messagesBarChart.highlighted": "Max: 725",
     "onOffFacebookChart.bigbold1": "Off Facebook events",
     "onOffFacebookChart.bigbold2": "On Facebook events",
     "onOffFacebookChart.greylegend1": "Number of events",
     "onOffFacebookChart.greylegend2": "Last 90 days",
-    "onOffFacebookChart.bold1": "Company Name"
+    "onOffFacebookChart.bold1": "Company Name",
+    "offFacebookBarChart.text1": "Einträge",
+    "offFacebookBarChart.text2": "Anzahl der Einträge",
+    "offFacebookBarChart.bigbold1": "Darstellung der Anzahl an Einträgen per Kategorie",
+    "offFacebookBarChart.bold2": "Anzahl der Einträge für diese Aktivität"
 }

@@ -9,15 +9,12 @@ const MessagesScreen = () => {
         <>
             <p>{i18n.t("messagesInfoScreen:text1")}</p>
             <Infographic
-                type="messagesBarChart"
+                type="barChartInfoScreen"
                 texts={{
                     text1: i18n.t("infographics:messagesBarChart.text1"),
                     text2: i18n.t("infographics:messagesBarChart.text2"),
                     bigbold1: i18n.t("infographics:messagesBarChart.bigbold1"),
                     bold2: i18n.t("infographics:messagesBarChart.bold2"),
-                    highlighted: i18n.t(
-                        "infographics:messagesBarChart.highlighted"
-                    ),
                 }}
             />
             <p
