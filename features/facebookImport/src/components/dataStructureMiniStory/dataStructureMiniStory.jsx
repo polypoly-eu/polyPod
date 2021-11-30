@@ -65,7 +65,11 @@ const DataStructureMiniStory = ({ data }) => {
                     data={data}
                     width={bubbleVizWidth}
                     height={bubbleVizHeight}
-                    bubbleColor={bubbleColor}
+                    bubbleColor={
+                        selectedFolder === "Total"
+                            ? dataBubblesLightColor
+                            : bubbleColor
+                    }
                     textColor={dataBubblesDarkColor}
                     onBubbleClick={handleBubbleClick}
                 />
