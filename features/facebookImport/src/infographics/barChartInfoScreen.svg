@@ -1,5 +1,5 @@
 <svg width="266" height="370" viewBox="0 0 266 370" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="messagesBarChart">
+<g id="barChartInfoScreen">
 <g id="Horizontal Bar Chart">
 <g id="Legend">
 <g id="bigbold1">
@@ -15,10 +15,10 @@
 <text id="550" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="155.455" y="216.67">550</tspan></text>
 <text id="126" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="22.9783" y="263.67">126</tspan></text>
 <text id="22" fill="#3749A9" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="19" y="310.67">22</tspan></text>
-<text id="bold2_4" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="7" y="151.365">Name of group or person </tspan></text>
-<text id="bold2_3" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="7" y="198.365">Name of group or person </tspan></text>
-<text id="bold2_2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="7" y="245.365">Name of group or person </tspan></text>
-<text id="bold2_1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="7" y="292.365">Name of group or person </tspan></text>
+<text id="bold2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="7" y="151.365">Name of group or person </tspan></text>
+<text id="bold2_2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="7" y="198.365">Name of group or person </tspan></text>
+<text id="bold2_3" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="7" y="245.365">Name of group or person </tspan></text>
+<text id="bold2_4" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="7" y="292.365">Name of group or person </tspan></text>
 </g>
 <g id="x-axis (max value)">
 <g id="Scale">

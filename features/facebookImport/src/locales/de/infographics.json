@@ -1,6 +1,6 @@
 {
-    "dataStructureBubbles.text1": "Gesamtwert für diese Kategorie",
-    "dataStructureBubbles.text2": "Kategorie",
+    "bubblesChartInfoScreen.text1": "Gesamtwert für diese Kategorie",
+    "bubblesChartInfoScreen.text2": "Kategorie",
     "activitiesBarChart.text1": "Anzahl der Einträge für diesen Monat",
     "activitiesBarChart.bigbold1": "Einträge",
     "activitiesBarChart.bold1": "Anzahl der Einträge",
@@ -22,9 +22,13 @@
     "messagesBarChart.bigbold1": "Darstellung der Anzahl der ausgetauschten Nachrichten",
     "messagesBarChart.bold2": "Name der Gruppe oder Person",
     "messagesBarChart.highlighted": "Max: 725",
-    "onOffFacebookChart.bigbold1": "Off-Facebook Events",
-    "onOffFacebookChart.bigbold2": "On-Facebook Events",
+    "onOffFacebookChart.bigbold1": "Off-Facebook events",
+    "onOffFacebookChart.bigbold2": "On-Facebook events",
     "onOffFacebookChart.greylegend1": "Anzahl an Events",
     "onOffFacebookChart.greylegend2": "Die letzten 90 Tage",
-    "onOffFacebookChart.bold1": "Firmenname"
+    "onOffFacebookChart.bold1": "Firmenname",
+    "offFacebookBarChart.text1": "Einträge",
+    "offFacebookBarChart.text2": "Anzahl der Einträge",
+    "offFacebookBarChart.bigbold1": "Darstellung der Anzahl an Einträgen per Kategorie",
+    "offFacebookBarChart.bold2": "Anzahl der Einträge für diese Aktivität"
 }

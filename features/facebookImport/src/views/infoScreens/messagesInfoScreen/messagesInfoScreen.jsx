@@ -14,10 +14,10 @@ const MessagesScreen = () => {
                     text1: i18n.t("infographics:messagesBarChart.text1"),
                     text2: i18n.t("infographics:messagesBarChart.text2"),
                     bigbold1: i18n.t("infographics:messagesBarChart.bigbold1"),
-                    bold2: i18n.t("infographics:messagesBarChart.bold2"),
-                    highlighted: i18n.t(
-                        "infographics:messagesBarChart.highlighted"
-                    ),
+                    bold2_1: i18n.t("infographics:messagesBarChart.bold2"),
+                    bold2_2: i18n.t("infographics:messagesBarChart.bold2"),
+                    bold2_3: i18n.t("infographics:messagesBarChart.bold2"),
+                    bold2_4: i18n.t("infographics:messagesBarChart.bold2"),
                 }}
             />
             <p
