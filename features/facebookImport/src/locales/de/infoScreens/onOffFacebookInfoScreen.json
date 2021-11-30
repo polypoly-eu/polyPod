@@ -1,0 +1,11 @@
+{
+    "text1": "Dieses Diagram zeigt zwei Datentypen aus Ihren Facebook-Daten - die sogenannten On- und Off-Facebook Events - im Bezug zu jeweils einer Firma über die letzten 90 Tage vor dem Herunterladen Ihrer Daten. Obwohl Ìhre Facebook-Daten durchaus Hunderte oder Tausende solcher Events beinhalten können, zeigen wir hier derzeit nur wenige Beispiele, um Ihnen einen Eindruck von den entstehenden Mustern zu geben.",
+    "text2": "Dieses Diagramm heißt <strong>Balkendiagramm</strong>, ist aber ebenfalls ein Zeitstrahl. Es listet Events pro Tag und zeigt die Anzahl der Events pro Tag durch die Länge der Balken.",
+    "text3": "Bitte beachten Sie, dass wir die beiden Datentypen deutlich getrennt von einander zeigen, um Ihnen diese Muster zu zeigen und gleichzeitig deutlich zumachen, dass die Daten keinen direkte Abhängigkeit von On- und Off-Facebook Event beweisen.",
+    "text4": "Der polyPod Importer hat erkannt, dass Ihre Facebokk-Daten mindestens einen sogenannten Off-Facebook Event enthalten.",
+    "text5": "Off-Facebook Events sind Informationen über Ihr Verhalten (z. B. Logins oder Einkäufe) in Apps oder auf Webseiten außerhalb von Facebook, welche von den Firmen, die diese Websiten oder Apps betreiben, an Facebook zurück gemeldet werden. Die Firmen tun das in der Regel, um Ihre eigenen Werbeanzeigen, Verkäufe oder Analysen zu verbessern.",
+    "text6": "Für diese Analyse nutzen wir eine Datei aus Ihren Facebook-Daten, die genau diese Off-Facebook Events enthält. Sie enthält Angaben über Zeitpunkt, Art der Aktivität, sowie Firmennamen oder Webadressen.",
+    "text7": "On-Facebook Events ermitteln wir aus einer Daten in Ihren Facebook-Daten, welche Inhalte auflistet, die Sie angeschaut haben. Dafür importieren wir derzeit den Teil über gesehene Werbeanzeigen und ermitteln den Absender (Firmenname, Webadresse). So können wir Firmen finden, die in Ihren On- und Off-Facebook Events erscheinen.",
+    "text8": "Wir analysieren nur Daten aus den letzten 90 Tage vor dem Herunterladen Ihrer Daten, da Facebook diese Daten scheinbar nur für diesen Zeitraum speichert.",
+    "text9": "Obwohl Ìhre Facebook-Daten durchaus Hunderte oder Tausende solcher Events beinhalten können, zeigen wir hier derzeit nur wenige Beispiele, um Ihnen einen Eindruck von den entstehenden Mustern zu geben."
+}

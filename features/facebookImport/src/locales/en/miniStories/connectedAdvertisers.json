@@ -1,6 +1,6 @@
 {
     "title": "When others provide data about you to Facebook",
-    "summary.text.1": "Your Facebook data lists {{number_companies}} companies as so-called “connected advertisers”. Those companies have uploaded contact lists – which also include your contact information – to Facebook. Their aim: To target you with their advertising. For that to happen you gave them or one of their data partners permission. Where you aware of that?",
-    "summary.text.2": "Facebook says on their website that advertisers are not only using their own contact lists but can also use lists of other companies to target their advertising. This means they can include or exclude you from certain campaigns e.g based on your location.",
+    "summary.text.1": "Your Facebook data lists {{number_companies}} companies as so-called “connected advertisers”. Those companies have uploaded contact lists – which also include your contact information – to Facebook. Their aim: To target you with their advertising. For that to happen you gave them or one of their data partners permission. Were you aware of that?",
+    "summary.text.2": "Facebook says on their website that advertisers are not only using their own contact lists but can also use lists of other companies to target their advertising. This means companies you did not consciously give permission can include or exclude you from their campaigns e.g based on your location.",
     "details.text": "This is the full list of {{number_companies}} so-called \"connected advertisers\" from your Facebook data."
 }

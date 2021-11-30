@@ -7,7 +7,7 @@
     "lint:fix": "eslint --fix src test scripts --ext .js --ext .jsx",
     "build": "rollup -c",
     "watch": "rollup --watch -c",
-    "test": "mocha",
+    "test": "mocha && npm run cypress:run",
     "polypedia:fetch": "node scripts/fetch-polypedia-data 162daa1",
     "polypedia:convert": "node scripts/convert-polypedia-data",
     "update-polypedia-data": "npm run polypedia:fetch && npm run polypedia:convert",

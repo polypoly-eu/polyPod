@@ -1,0 +1,132 @@
+<svg width="281" height="260" viewBox="0 0 281 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="onOffFacebookChart">
+<g id="y axis: events">
+<text id="greylegend1" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="166" y="75.17">Number of events</tspan></text>
+<text id="bold1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="2" y="75.17">Company Name</tspan></text>
+<g id="Values">
+<text id="grey0" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="238" y="155.17">0</tspan></text>
+<text id="grey50" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="238" y="185.17">50</tspan></text>
+<text id="grey100" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="238" y="215.17">100</tspan></text>
+<text id="grey50_2" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="238" y="125.17">50</tspan></text>
+<text id="grey100_2" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="238" y="95.17">100</tspan></text>
+</g>
+</g>
+<g id="X axis: Timescale (90 days)">
+<g id="Values_2">
+<text id="grey90" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0.993912" y="237.67">90</tspan></text>
+<text id="grey80" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="21.6965" y="237.67">80</tspan></text>
+<text id="grey70" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="47.3396" y="237.67">70</tspan></text>
+<text id="grey60" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="71.4855" y="237.67">60</tspan></text>
+<text id="grey50_3" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="98.0994" y="237.67">50</tspan></text>
+<text id="grey40" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="122.392" y="237.67">40</tspan></text>
+<text id="grey30" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="149.217" y="237.67">30</tspan></text>
+<text id="grey20" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="173.55" y="237.67">20</tspan></text>
+<text id="grey10" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="200.329" y="237.67">10</tspan></text>
+<text id="grey0_2" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="228.681" y="237.67">0</tspan></text>
+</g>
+<text id="greylegend2" fill="#8D9CAF" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="1" y="256.67">Last 90 days</tspan></text>
+</g>
+<g id="Graph">
+<g id="Vertical lines">
+<line id="Line 591" opacity="0.5" x1="3.5" y1="91" x2="3.49999" y2="211" stroke="#8D9CAF"/>
+<line id="Line 592" opacity="0.5" x1="28.9443" y1="91" x2="28.9443" y2="211" stroke="#8D9CAF" stroke-dasharray="2 2"/>
+<line id="Line 593" opacity="0.5" x1="54.3887" y1="91" x2="54.3887" y2="211" stroke="#8D9CAF" stroke-dasharray="2 2"/>
+<line id="Line 594" opacity="0.5" x1="79.833" y1="91" x2="79.833" y2="211" stroke="#8D9CAF"/>
+<line id="Line 595" opacity="0.5" x1="105.277" y1="91" x2="105.277" y2="211" stroke="#8D9CAF" stroke-dasharray="2 2"/>
+<line id="Line 596" opacity="0.5" x1="130.723" y1="91" x2="130.723" y2="211" stroke="#8D9CAF" stroke-dasharray="2 2"/>
+<line id="Line 597" opacity="0.5" x1="156.167" y1="91" x2="156.167" y2="211" stroke="#8D9CAF"/>
+<line id="Line 598" opacity="0.5" x1="181.611" y1="91" x2="181.611" y2="211" stroke="#8D9CAF" stroke-dasharray="2 2"/>
+<line id="Line 599" opacity="0.5" x1="207.056" y1="91" x2="207.056" y2="211" stroke="#8D9CAF" stroke-dasharray="2 2"/>
+<line id="Line 600" opacity="0.5" x1="232.5" y1="91" x2="232.5" y2="211" stroke="#8D9CAF"/>
+</g>
+<g id="Horizontal lines">
+<line id="Line 392" opacity="0.5" y1="-0.5" x2="229" y2="-0.5" transform="matrix(1 -8.74228e-08 -8.74228e-08 -1 3 121)" stroke="#8D9CAF"/>
+<line id="Line 395" x1="3.84863" y1="151.5" x2="232" y2="151.5" stroke="#8D9CAF"/>
+<line id="Line 393" opacity="0.5" y1="-0.5" x2="229" y2="-0.5" transform="matrix(1 -8.74228e-08 -8.74228e-08 -1 3 91)" stroke="#8D9CAF"/>
+<line id="Line 391" opacity="0.5" x1="3" y1="210.5" x2="232" y2="210.5" stroke="#8D9CAF"/>
+<line id="Line 396" opacity="0.5" y1="-0.5" x2="229" y2="-0.5" transform="matrix(1 -8.74228e-08 -8.74228e-08 -1 3 181)" stroke="#8D9CAF"/>
+</g>
+<g id="Off FB Events">
+<path id="Line 564" d="M126.83 151L126.83 149" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 572" d="M147.186 151L147.186 140" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 578" d="M162.452 151V130" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 580" d="M167.541 151L167.541 125" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 582" d="M172.63 151L172.63 149" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 584" d="M177.719 151L177.719 144" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 585" d="M180.263 151L180.263 135" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 587" d="M185.352 151L185.352 109" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 588" d="M187.896 151L187.896 142" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 589" d="M190.44 151V118" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 595_2" d="M205.707 151V103" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 601" d="M220.974 151L220.974 143" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 602" d="M223.519 151L223.519 127" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 603" d="M226.062 151L226.062 136" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 605" d="M231.152 151L231.152 149" stroke="#3749A9" stroke-width="2"/>
+</g>
+<g id="FB Events" opacity="0.4">
+<path id="Line 391_2" d="M4.69629 152L4.69629 159" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 393_2" d="M9.78516 152L9.78516 154" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 394" d="M12.3301 152L12.3301 162" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 395_2" d="M14.874 152L14.874 159" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 396_2" d="M17.4189 152L17.4189 172" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 401" d="M30.1406 152L30.1406 163" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 403" d="M35.2295 152L35.2295 154" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 404" d="M37.7744 152L37.7744 154" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 405" d="M40.3184 152L40.3184 186" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 407" d="M45.4072 152L45.4072 163" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 409" d="M50.4961 152L50.4961 160" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 410" d="M53.041 152L53.041 169" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 411" d="M55.585 152L55.585 161" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 412" d="M58.1299 152L58.1299 154" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 414" d="M63.2188 152L63.2187 174" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 415" d="M65.7627 152V191" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 416" d="M68.3076 152L68.3076 166" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 418" d="M73.3965 152L73.3965 169" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 420" d="M78.4854 152L78.4854 157" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 428" d="M98.8408 152L98.8408 160" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 429" d="M101.385 152L101.385 156" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 431" d="M106.474 152V208" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 433" d="M111.562 152L111.562 178" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 434" d="M114.107 152L114.107 197" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 435" d="M116.652 152L116.652 166" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 437" d="M121.741 152L121.741 154" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 438" d="M124.285 152V204" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 441" d="M131.919 152V160" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 443" d="M137.008 152L137.008 174" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 447" d="M147.186 152L147.186 212" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 448" d="M149.729 152L149.729 184" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 449" d="M152.274 152V187" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 451" d="M157.363 152L157.363 154" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 453" d="M162.452 152V194" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 454" d="M164.996 152V187" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 458" d="M175.174 152L175.174 202" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 459" d="M177.719 152L177.719 181" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 460" d="M180.263 152L180.263 182" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 462" d="M185.352 152L185.352 169" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 464" d="M190.44 152L190.44 154" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 465" d="M192.985 152V183" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 467" d="M198.074 152L198.074 159" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 469" d="M203.163 152L203.163 170" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 470" d="M205.707 152V170" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 471" d="M208.252 152V198" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 474" d="M215.885 152V168" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 476" d="M220.974 152V207" stroke="#3749A9" stroke-width="2"/>
+<path id="Line 478" d="M226.062 152L226.062 156" stroke="#3749A9" stroke-width="2"/>
+</g>
+</g>
+<g id="Legend">
+<text id="bigbold2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="14" y="34.365">On Facebook Events</tspan></text>
+<text id="bigbold1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="14" y="12.365">Off Facebook Events</tspan></text>
+<g id="Group 2823">
+<line id="Line 403_2" x1="4" y1="5" x2="4" y2="12" stroke="#3749A9" stroke-width="2"/>
+<line id="Line 412_2" x1="7" y1="-4.37114e-08" x2="7" y2="12" stroke="#3749A9" stroke-width="2"/>
+<line id="Line 413" x1="10" y1="9" x2="10" y2="12" stroke="#3749A9" stroke-width="2"/>
+</g>
+<g id="Group 2824" opacity="0.4">
+<line id="Line 403_3" y1="-1" x2="7" y2="-1" transform="matrix(4.37114e-08 -1 -1 -4.37114e-08 3 41)" stroke="#3749A9" stroke-width="2"/>
+<line id="Line 412_3" y1="-1" x2="12" y2="-1" transform="matrix(4.37114e-08 -1 -1 -4.37114e-08 6 46)" stroke="#3749A9" stroke-width="2"/>
+<line id="Line 413_2" y1="-1" x2="3" y2="-1" transform="matrix(4.37115e-08 -1 -1 -4.37115e-08 9 37)" stroke="#3749A9" stroke-width="2"/>
+</g>
+</g>
+</g>
+</svg>

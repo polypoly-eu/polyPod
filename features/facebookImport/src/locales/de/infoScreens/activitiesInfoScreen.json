@@ -1,7 +1,7 @@
 {
-    "text1": "This diagram shows the number of entries in your downloaded data with a time and date attached - and its development over time.",
-    "legend": "Representation of the number of entries with a timestamp",
-    "text2": "This diagram is called a <strong>bar chart</strong>. The length of each bar is proportional to the values that it represents.",
-    "text3": "Please note, that we are only processing parts of your Facebook data for this analysis so far. So the numbers on this screen show a tendency, but not the total number in your download.",
-    "text4": "The data with timestamps is not very consistent. In some cases, we do not have a timestamp where we would expect one. In another  case, we saw a larger number of timestamps for watching a single advertising video. It seems that Facebook creates a timestamp every few seconds to check how long you watched."
+    "text1": "Dieses Diagramm zeigt die Anzahl der Daten in Ihrem heruntergeladenen Datensatz, die mit Uhrzeit und Datum gespeichert wurden, sowie die Entwicklung dieser Daten über die Zeit.",
+    "legend": "Darstellung der Anzahl von Daten mit Uhrzeit und Datum",
+    "text2": "Dieses Diagramm heisst <strong>Balkendiagramm</strong>. Die Länge jedes Balkens ist proportional zu dem Wert, den er darstellt.",
+    "text3": "Bitte beachten Sie, dass wir bisher nur einen Teil der Facebook-Daten analysieren. Daher zeigen die Werte hier eine Tendenz, aber nicht die kompletten Daten in Ihrem Datensatz.",
+    "text4": "Die Daten, die mit Uhrzeit und Datum gespeichert sind, erscheinen nicht sehr konsistent. In manchen Fällen fehlen zu erwartende Zeitangabe. In anderen Fällen gab es sehr viele Zeitangaben für ein einzelnes Werbevideo. Anscheinend hatte Facebook alle paar Sekunden Daten gespeichert, um zu sehen, wie weit Nutzer:innen ein solches Video anschauen."
 }

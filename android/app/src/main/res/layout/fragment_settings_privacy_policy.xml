@@ -13,7 +13,7 @@
         <coop.polypoly.polypod.settings.HTMLTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/settings_privacy_policy_text" />
+            android:id="@+id/privacy_policy_text" />
 
     </LinearLayout>
 
