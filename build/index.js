@@ -261,7 +261,11 @@ async function main() {
     process.chdir(path.dirname(scriptPath));
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
-    await npm("ci", "--no-update-notifier", "--no-fund");
+
+    if (!["list", "list-deps", "clean"].includes(command)) {
+        logDetail(`👷👷‍♀️ ...`);
+        await npm("ci", "--no-update-notifier", "--no-fund");
+    }
 
     if (command === "lint") {
         logDetail(`🧹 ...`);
