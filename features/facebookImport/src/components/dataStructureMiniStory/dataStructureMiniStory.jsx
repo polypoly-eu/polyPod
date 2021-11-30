@@ -49,12 +49,18 @@ const DataStructureMiniStory = ({ data }) => {
         }
     };
 
+    const category =
+        selectedFolder === "Total"
+            ? ""
+            : i18n.t("dataStructureMiniStory:category");
+
     return (
         <>
             <div>
                 <p
                     dangerouslySetInnerHTML={{
                         __html: i18n.t("dataStructureMiniStory:folder.info", {
+                            category: category,
                             selected_folder: selectedFolder,
                             amount_of_files: amountOfFiles,
                         }),
