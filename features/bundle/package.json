@@ -32,6 +32,16 @@
       "archiveName": "lexicon",
       "moduleName": "lexicon-feature",
       "artifactPath": "public"
+    },
+    {
+      "archiveName": "polyExplorer",
+      "moduleName": "poly-explorer-feature",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "demo",
+      "moduleName": "demo-feature",
+      "artifactPath": "dist"
     }
   ]
 }
