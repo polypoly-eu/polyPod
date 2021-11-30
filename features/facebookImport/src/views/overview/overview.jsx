@@ -6,7 +6,6 @@ import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import i18n from "../../i18n.js";
 import { useHistory } from "react-router";
-import { formatTime } from "../../utils/formatTime.js";
 
 import "./overview.css";
 
@@ -45,6 +44,21 @@ const Overview = () => {
         return b.value - a.value;
     });
 
+    const getFormattedTime = (time) => {
+        let t = new Date(1970, 0, 1);
+        t.setUTCSeconds(+time);
+
+        // for testing in browser, where 'time' is a real date, use instead of the above this one:
+        // const t = new Date(time);
+
+        const options = {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        };
+        return t.toLocaleDateString(i18n.t("overview:time.format"), options);
+    };
+
     const formatSize = (size) => {
         const k = 1024;
         const decimals = 2;
@@ -62,43 +76,43 @@ const Overview = () => {
         <div className="overview">
             {Object.values(files).length ? (
                 <>
-                    <h1 className="overview-title">
-                        {i18n.t("overview:above.chart.title")}
-                    </h1>
-
-                    <p
-                        dangerouslySetInnerHTML={{
-                            __html: i18n.t("overview:above.chart.text", {
-                                number_categories: bubbleData.length,
-                            }),
-                        }}
-                    />
-                    <PolyChart
-                        type="bubble-cluster"
-                        data={bubbleData}
-                        width={bubbleVizWidth}
-                        height={bubbleVizHeight}
-                        bubbleColor={dataBubblesLightColor}
-                        onBubbleClick={() => history.push("/explore")}
-                        showValues={false}
-                    />
                     <div className="details">
+                        <h1>{files[0].name}</h1>
                         <p>
-                            {i18n.t("overview:file")} {files[0].name}
+                            {i18n.t("overview:imported.time")}{" "}
+                            {getFormattedTime(files[0].time)}
                         </p>
-                        <div className="inline-block">
-                            <p>
-                                {i18n.t("overview:imported.time")}{" "}
-                                {formatTime(files[0].time)}
-                            </p>
-                            <p>
+                        <p>
+                            <span className="size">
+                                {" "}
                                 {i18n.t("overview:size")}{" "}
                                 {formatSize(files[0].size)}
-                            </p>
-                        </div>
+                            </span>
+                        </p>
+                        <div className="separator"></div>
+                    </div>
+
+                    <div className="overview-visualisation">
+                        <p
+                            dangerouslySetInnerHTML={{
+                                __html: i18n.t("overview:above.chart.text", {
+                                    number_categories: bubbleData.length,
+                                }),
+                            }}
+                        />
+                        <PolyChart
+                            type="bubble-cluster"
+                            data={bubbleData}
+                            width={bubbleVizWidth}
+                            height={bubbleVizHeight}
+                            bubbleColor={dataBubblesLightColor}
+                            onBubbleClick={() => history.push("/explore")}
+                            showValues={false}
+                        />
                     </div>
 
                     <div className="footer">
+                        <div className="overlay"></div>
                         <div className="btn-holder">
                             <RouteButton
                                 className="btn primary"
@@ -133,7 +147,7 @@ const Overview = () => {
             )}
             {showNewImportDialog ? (
                 <PolypolyDialog
-                    title={i18n.t("overview:new.import.dialog")}
+                    message={i18n.t("overview:new.import.dialog")}
                     backButton={{
                         text: i18n.t("overview:new.import.dialog.back"),
                         onClick: () => setShowNewImportDialog(false),

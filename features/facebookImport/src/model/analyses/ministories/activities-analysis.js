@@ -1,11 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import i18n from "../../../i18n.js";
 import RootAnalysis from "./root-analysis.js";
 
-import {
-    ActivitiesMiniStorySummary,
-    ActivitiesMiniStoryDetails,
-} from "../../../components/activitiesMiniStory/activitiesMiniStory.jsx";
+import ActivitiesMiniStory from "../../../components/activitiesMiniStory/activitiesMiniStory.jsx";
+import "./ministories.css";
 
 export default class ActivitiesAnalysis extends RootAnalysis {
     get label() {
@@ -76,11 +74,53 @@ export default class ActivitiesAnalysis extends RootAnalysis {
         this.active = groupedActivities.total > 0;
     }
 
+    _calculateFontSize(text, maxWidth) {
+        // TODO: Extract text size affecting styles from target element
+        const minFontSize = 10;
+        const maxFontSize = 60;
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        for (let fontSize = maxFontSize; fontSize > minFontSize; fontSize--) {
+            context.font = `${fontSize}px Jost Medium`;
+            if (context.measureText(text).width <= maxWidth) return fontSize;
+        }
+        return minFontSize;
+    }
+
     renderSummary() {
-        return <ActivitiesMiniStorySummary totalEvents={this._totalEvents} />;
+        const refWidth = useRef(0);
+
+        const fontSize = this._calculateFontSize(
+            this._messagesCount,
+            refWidth.current.clientWidth
+        );
+
+        return (
+            <div className="render-summary">
+                <h2
+                    style={{ fontSize: fontSize, marginBottom: "30px" }}
+                    ref={refWidth}
+                >
+                    {" "}
+                    {this._totalEvents.total.toLocaleString("de-DE")}
+                </h2>
+                {i18n.t("activitiesMiniStory:summary", {
+                    number_activities: this._totalEvents.total,
+                })}
+            </div>
+        );
     }
 
     renderDetails() {
-        return <ActivitiesMiniStoryDetails totalEvents={this._totalEvents} />;
+        return (
+            <>
+                <p>
+                    {i18n.t("activitiesMiniStory:summary", {
+                        number_activities: this._totalEvents.total,
+                    })}
+                </p>
+                <ActivitiesMiniStory totalEvents={this._totalEvents} />
+            </>
+        );
     }
 }

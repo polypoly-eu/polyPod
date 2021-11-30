@@ -1,9 +1,8 @@
 {
-    "overview": "Facebook-Daten Importer",
-    "import": "Facebook-Daten Importer",
-    "explore": "Daten erkunden",
+    "overview": "Facebook Daten Importer",
+    "import": "Facebook Daten Importer",
+    "explore": "Daten Exploration",
     "explore/details": "Story Details",
     "report": "Unbekannte/fehlende Daten",
-    "report/details": "Datenreport Details",
-    "info": "Hintergrundinformation"
+    "report/details": "Datenreport Details"
 }

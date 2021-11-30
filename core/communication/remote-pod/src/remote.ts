@@ -5,7 +5,6 @@ import {
     PolyOut,
     PolyNav,
     EncodingOptions,
-    ExternalFile,
     Stats,
     Matcher,
     Network,
@@ -65,7 +64,7 @@ type PolyNavEndpoint = ObjectEndpointSpec<{
     openUrl(url: string): ValueEndpointSpec<void>;
     setActiveActions(actions: string[]): ValueEndpointSpec<void>;
     setTitle(title: string): ValueEndpointSpec<void>;
-    pickFile(type?: string): ValueEndpointSpec<ExternalFile | null>;
+    pickFile(type?: string): ValueEndpointSpec<string | null>;
 }>;
 
 type InfoEndpoint = ObjectEndpointSpec<{

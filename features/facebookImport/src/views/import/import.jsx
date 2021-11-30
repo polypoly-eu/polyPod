@@ -7,16 +7,10 @@ import ImportExplanationExpandable from "../../components/importExplanationExpan
 
 import "./import.css";
 import i18n from "../../i18n.js";
-import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
 
 //These are just the sections that are shown as a visual part of the import
 //importSteps are all steps like loading and finished that have logical relevance for the process
 const importSections = ["request", "download", "import", "explore"];
-
-const maxFileSizeSupported = {
-    value: 2000000000,
-    text: "2 GB",
-};
 
 const Import = () => {
     const {
@@ -24,10 +18,7 @@ const Import = () => {
         navigationState,
         updateImportStatus,
         files,
-        selectedFile,
-        setSelectedFile,
         handleRemoveFile,
-        handleSelectFile,
         handleImportFile,
     } = useContext(ImporterContext);
     const importStatus = navigationState.importStatus;
@@ -49,8 +40,6 @@ const Import = () => {
                 importSteps={importSteps}
                 importSections={importSections}
                 importStatus={importStatus}
-                selectedFile={selectedFile}
-                onSelectFile={handleSelectFile}
                 onImportFile={handleImportFile}
                 onUpdateImportStatus={updateImportStatus}
                 file={file}
@@ -65,18 +54,6 @@ const Import = () => {
                     />
                 </div>
             )}
-            {selectedFile?.size > maxFileSizeSupported.value ? (
-                <PolypolyDialog
-                    title={i18n.t("import:file.too.big.dialog.title")}
-                    message={i18n.t("import:file.too.big.dialog.message", {
-                        max_file_size: maxFileSizeSupported.text,
-                    })}
-                    proceedButton={{
-                        text: "OK",
-                        onClick: () => setSelectedFile(null),
-                    }}
-                />
-            ) : null}
         </div>
     );
 };

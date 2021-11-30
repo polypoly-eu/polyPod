@@ -7,7 +7,6 @@ class Feature {
     let author: String?
     let description: String?
     let primaryColor: Color?
-    let thumbnailColor: Color?
     let thumbnail: URL?
     private let links: [String: String]
     
@@ -29,17 +28,12 @@ class Feature {
         name = translations?.name ?? manifest.name ?? id
         author = translations?.author ?? manifest.author
         description = translations?.description ?? manifest.description
-        let primaryColor = parseColor(hexValue: translations?.primaryColor ?? manifest.primaryColor)
-        self.primaryColor = primaryColor
-        thumbnailColor = parseColor(hexValue: translations?.thumbnailColor ?? manifest.thumbnailColor) ?? primaryColor
+        primaryColor = parseColor(hexValue: translations?.primaryColor ?? manifest.primaryColor)
         thumbnail = findThumbnail(
             featurePath: path,
             thumbnailPath: translations?.thumbnail ?? manifest.thumbnail
         )
-        links = mergeLinks(
-            original: manifest.links,
-            translated: translations?.links
-        )
+        links = translations?.links ?? manifest.links ?? [:]
     }
     
     func findUrl(target: String) -> String? {
@@ -64,7 +58,6 @@ private func readManifest(_ basePath: URL) -> FeatureManifest {
         author: nil,
         description: nil,
         thumbnail: nil,
-        thumbnailColor: nil,
         primaryColor: nil,
         links: nil,
         translations: nil
@@ -91,15 +84,4 @@ private func findThumbnail(featurePath: URL, thumbnailPath: String?) -> URL? {
         return nil
     }
     return fullPath
-}
-
-private func mergeLinks(
-    original: [String: String]?,
-    translated: [String: String]?
-) -> [String: String] {
-    var links = original ?? [:]
-    if let translated = translated {
-        links = links.merging(translated) { (_, new) in new }
-    }
-    return links
 }

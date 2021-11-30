@@ -14,8 +14,6 @@ import sadIcon from "../../static/images/reactions-ministory/sad.svg";
 import angerIcon from "../../static/images/reactions-ministory/anger.svg";
 import ChartButtons from "../chartButtons/chartButtons.jsx";
 
-import "./postReactionTypesMiniStory.css";
-
 const reactionEmoji = {
     LIKE: likeIcon,
     LOVE: loveIcon,
@@ -39,19 +37,14 @@ export function mapEmojiToReaction(reactions) {
 const PostReactionTypesMiniStory = ({ reactionData }) => {
     const [selectedReaction, setSelectedReaction] = useState("TOTAL");
 
-    const handleIconSelected = (_, d) => setSelectedReaction(d.data.title);
-    const iconFilter = {
-        filterElement: "feColorMatrix",
-        type: "saturate",
-        in: "SourceGraphic",
-        values: 0,
-        activationCondition: (d) =>
-            selectedReaction != d.data.title && selectedReaction != "TOTAL",
-    };
+    const handleIconSelected = (e, d) => setSelectedReaction(d.data.title);
+    const iconSaturation = (d) =>
+        selectedReaction == d.data.title || selectedReaction == "TOTAL"
+            ? "saturate(1)"
+            : "saturate(0)";
 
     const totalAmountOfReactions = reactionData.reduce(
-        (prev, curr) => (prev.count || prev) + curr.count,
-        0
+        (prev, curr) => (prev.count || prev) + curr.count
     );
 
     const extendedReactionData = [
@@ -86,7 +79,7 @@ const PostReactionTypesMiniStory = ({ reactionData }) => {
                 data={mapEmojiToReaction(reactionData)}
                 onBubbleClick={handleIconSelected}
                 showValues={false}
-                filter={iconFilter}
+                filter={iconSaturation}
             />
             <ChartButtons
                 buttonsContent={extendedReactionData.map((r) => {

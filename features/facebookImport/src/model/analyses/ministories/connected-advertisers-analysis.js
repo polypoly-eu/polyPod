@@ -39,9 +39,6 @@ export default class ConnectedAdvertisersAnalysis extends RootAnalysis {
                     })}
                 </p>
                 <p>{i18n.t("connectedAdvertisersMiniStory:summary.text.2")}</p>
-                <p className="source">
-                    {i18n.t("common:source.your.facebook.data")}
-                </p>
             </div>
         );
     }

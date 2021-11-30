@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="update_notification_title">Ihr polyPod wurde gerade mächtiger!</string>
+    <string name="update_notification_title">Unerwartete Benachrichtigung</string>
     <string name="update_notification_text">
-        Ihr polyPod kann jetzt Facebook Daten importieren und analysieren. Lernen Sie, was Facebook nicht von selbst zeigt!
+        Wenn Sie diese Nachricht lesen, haben Sie fehlerhaftes Verhalten im polyPod entdeckt. Bitte berichten Sie uns darüber!
     </string>
 </resources>

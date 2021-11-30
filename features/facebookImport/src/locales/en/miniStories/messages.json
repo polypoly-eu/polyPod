@@ -1,6 +1,7 @@
 {
-    "headline": "Your messages",
+    "headline": "My messages history",
+    "number.chats": "Your Facebook data contains {{number_chats}} chats. Here is a list of all interactions.",
     "chart.title": "Number of messages exchanged",
-    "first.chat": "First message: ",
-    "last.interaction": "Last message: "
+    "first.chat": "First chat: ",
+    "last.interaction": "Last interaction: "
 }

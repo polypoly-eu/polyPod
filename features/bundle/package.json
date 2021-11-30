@@ -14,6 +14,11 @@
   "private": true,
   "polyPodFeatures": [
     {
+      "archiveName": "facebookImport",
+      "moduleName": "facebook-import-feature",
+      "artifactPath": "dist"
+    },
+    {
       "archiveName": "polyPreview",
       "moduleName": "poly-preview-feature",
       "artifactPath": "dist"
@@ -24,14 +29,19 @@
       "artifactPath": "dist"
     },
     {
-      "archiveName": "facebookImport",
-      "moduleName": "facebook-import-feature",
+      "archiveName": "polyExplorer",
+      "moduleName": "poly-explorer-feature",
       "artifactPath": "dist"
     },
     {
       "archiveName": "lexicon",
       "moduleName": "lexicon-feature",
       "artifactPath": "public"
+    },
+    {
+      "archiveName": "demo",
+      "moduleName": "demo-feature",
+      "artifactPath": "dist"
     }
   ]
 }

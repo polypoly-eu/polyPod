@@ -1,7 +1,6 @@
 package coop.polypoly.polypod.features
 
 import android.content.Context
-import coop.polypoly.polypod.Language
 import coop.polypoly.polypod.logging.LoggerFactory
 import java.io.File
 import java.io.FileOutputStream
@@ -57,16 +56,19 @@ class FeatureStorage {
         val manifestEntry = content.getEntry("manifest.json")
         if (manifestEntry == null) {
             logger.warn("Missing manifest for '${content.name}'")
-            return FeatureManifest(
-                null, null, null, null, null, null, null, null
-            )
+            return FeatureManifest(null, null, null, null, null, null, null)
         }
         val manifestString =
             content.getInputStream(manifestEntry).reader().readText()
-        return FeatureManifest.parse(
-            manifestString,
-            Language.determine(context)
+        return FeatureManifest.parse(manifestString, determineLanguage(context))
+    }
+
+    private fun determineLanguage(context: Context): String {
+        val supportedLocales = arrayOf("en", "de")
+        val userLocale = context.resources.configuration.locales.getFirstMatch(
+            supportedLocales
         )
+        return userLocale?.language ?: "en"
     }
 
     private fun sortFeatures(
@@ -75,15 +77,13 @@ class FeatureStorage {
     ): List<Feature> {
         val order = readOrder(context)
         val sorted = mutableListOf<Feature>()
-        // Features present on disk, e.g. because they were previously present
-        // and then removed, or because they were manually installed via adb,
-        // will not show up in the list. We might want to include a setting
-        // to allow users to still show them, or we might want to add some
-        // logic for removing features that are not supposed to be shown.
         for (id in order)
             features.find { it.id == id }?.let {
                 sorted.add(it)
             }
+        for (feature in features)
+            if (!order.contains(feature.id))
+                sorted.add(feature)
         return sorted
     }
 

@@ -56,7 +56,6 @@ describe("Post reactions analysis from export data", () => {
             { type: "LIKE", count: 3 },
             { type: "WOW", count: 2 },
             { type: "SAD", count: 1 },
-            { type: "ANGER", count: 1 },
         ]);
     });
 });

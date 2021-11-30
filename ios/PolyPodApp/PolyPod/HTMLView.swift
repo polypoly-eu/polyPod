@@ -2,15 +2,7 @@ import SwiftUI
 import WebKit
 
 struct HTMLView: UIViewRepresentable {
-    private let content: String
-    
-    init(content: String) {
-        self.content = content
-    }
-    
-    init(text: LocalizedStringKey) {
-        content = text.toLocalizedString()
-    }
+    let text: LocalizedStringKey
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -31,7 +23,7 @@ struct HTMLView: UIViewRepresentable {
             >
         </header>
         """
-        webView.loadHTMLString(header + content, baseURL: nil)
+        webView.loadHTMLString(header + text.toLocalizedString(), baseURL: nil)
     }
     
     class Coordinator: NSObject, WKNavigationDelegate {

@@ -1,13 +1,23 @@
 package coop.polypoly.polypod
 
+import android.app.AlertDialog
+import android.app.admin.DevicePolicyManager
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.biometric.BiometricManager
 import com.synnapps.carouselview.CarouselView
 
 class OnboardingActivity : AppCompatActivity() {
+    companion object {
+        val desiredLockScreenType =
+            BiometricManager.Authenticators.BIOMETRIC_WEAK or
+                BiometricManager.Authenticators.DEVICE_CREDENTIAL
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var isInfo = false
@@ -39,22 +49,23 @@ class OnboardingActivity : AppCompatActivity() {
             ),
         )
 
-        if (!isInfo) {
-            if (Authentication.shouldShowBiometricsPrompt(this)) {
-                strings = strings.plus(
-                    mapOf(
-                        R.id.headline_main to
-                            R.string.onboarding_slide4_headline,
-                        R.id.headline_sub to
-                            R.string.onboarding_slide4_sub_headline,
-                        R.id.body_text to R.string.onboarding_slide4_body_text,
-                    )
-                ).toMutableList()
-            }
+        if (shouldShowBiometricsPrompt()) {
+            strings = strings.plus(
+                mapOf(
+                    R.id.headline_main to R.string.onboarding_slide4_headline,
+                    R.id.headline_sub to
+                        R.string.onboarding_slide4_sub_headline,
+                    R.id.body_text to R.string.onboarding_slide4_body_text,
+                )
+            ).toMutableList()
+        }
 
-            if (!Preferences.isFirstRun(baseContext)) {
-                strings = mutableListOf(strings[3])
+        if (!Preferences.isFirstRun(baseContext) && !isInfo) {
+            if (!shouldShowBiometricsPrompt()) {
+                close()
+                return
             }
+            strings = mutableListOf(strings[3])
         }
 
         carousel.pageCount = strings.size
@@ -73,10 +84,8 @@ class OnboardingActivity : AppCompatActivity() {
                 )
                 button.visibility = View.VISIBLE
                 button.setOnClickListener {
-                    Authentication.setUp(this) {
-                        Preferences.setBiometricEnabled(this, true)
-                        close()
-                    }
+                    Preferences.setBiometricEnabled(this, true)
+                    close()
                 }
                 val doNotAskButton = slide.findViewById<View>(
                     R.id.onboarding_button_do_not_ask
@@ -111,5 +120,53 @@ class OnboardingActivity : AppCompatActivity() {
             Preferences.setFirstRun(baseContext, false)
         }
         finish()
+    }
+
+    fun shouldShowBiometricsPrompt(): Boolean {
+        return biometricsAvailable() &&
+            Preferences.getBiometricCheck(this) &&
+            !Preferences.getBiometricEnabled(this)
+    }
+    fun biometricsAvailable(): Boolean {
+        val biometricManager = BiometricManager.from(this)
+        if (biometricManager.canAuthenticate(
+                desiredLockScreenType
+            ) != BiometricManager.BIOMETRIC_SUCCESS
+        ) {
+            return false
+        }
+        return true
+    }
+
+    fun ensureLockScreen(
+        noScreenLock: (() -> Unit),
+        authAvailable: (() -> Unit)
+    ) {
+        if (!Preferences.getBiometricCheck(this)) {
+            return noScreenLock()
+        }
+        if (biometricsAvailable()) {
+            return authAvailable()
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle(R.string.auth_enable_lock_title)
+            .setMessage(R.string.auth_enable_lock_message)
+            .setPositiveButton(R.string.auth_enable_lock_yes) { dialog, _ ->
+                run {
+                    dialog.dismiss()
+                    startActivity(
+                        Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD)
+                    )
+                }
+            }
+            .setNegativeButton(R.string.auth_enable_lock_no) { dialog, _ ->
+                run {
+                    noScreenLock()
+                    dialog.dismiss()
+                }
+            }
+            .setOnCancelListener { this.finish() }
+            .show()
     }
 }

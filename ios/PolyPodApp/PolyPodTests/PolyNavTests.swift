@@ -1,13 +1,12 @@
 import XCTest
 import Zip
-@testable import PolyPod
 
 private class PolyNavDelegateStub: PolyNavDelegate {
-    var pickFileResult: ExternalFile?
+    var pickFileResult: URL?
     func doHandleOpenUrl(url: String) {
     }
     
-    func doHandlePickFile(type: String?, completion: @escaping (ExternalFile?) -> Void) {
+    func doHandlePickFile(type: String?, completion: @escaping (URL?) -> Void) {
         completion(pickFileResult)
     }
     
@@ -21,11 +20,8 @@ private let testFolderPath = FileManager.default.temporaryDirectory
     .appendingPathComponent("tests")
 private let testFilePath = testFolderPath
     .appendingPathComponent("testFile.json")
-private let testZipFileName = "testFile.zip"
 private let testZipFilePath = testFolderPath.appendingPathComponent("testFile.zip")
 private let zipMimeType = "application/zip"
-
-private let testExternalFile = ExternalFile(url: testZipFilePath.absoluteString, name: testZipFileName , size: 12324)
 
 private func removeTestFile() {
     let fileManager = FileManager.default
@@ -59,9 +55,9 @@ class PolyNavTests: XCTestCase {
     
     func testPickFileReturnsFileSelectedByUser() {
         let delegateStub = PolyNavDelegateStub()
-        delegateStub.pickFileResult = testExternalFile
+        delegateStub.pickFileResult = testZipFilePath
         polyNav.delegate = delegateStub
-        expectPickFileResult(testExternalFile)
+        expectPickFileResult("file://")
     }
     
     func testPickFileReturnsNullIfUserCancelled() {
@@ -71,20 +67,17 @@ class PolyNavTests: XCTestCase {
         expectPickFileResult(nil)
     }
     
-    private func expectPickFileResult(_ expected: ExternalFile?) {
+    private func expectPickFileResult(_ expected: String?) {
         let expectation = XCTestExpectation()
         polyNav.pickFile(type: zipMimeType) { actual in
             expectation.fulfill()
-            guard let expected = expected else {
-                XCTAssertEqual(nil, actual?.url)
-                return
+            if expected == nil {
+                XCTAssertEqual(expected, actual)
             }
-            if let actual = actual {
-                let start = actual.url.startIndex
-                let end = actual.url.index(start, offsetBy: expected.url.count)
-                XCTAssertEqual(expected.url, String(actual.url[start..<end]))
-            } else {
-                XCTAssertEqual(expected.url, nil)
+            else if let actual = actual {
+                let start = actual.startIndex
+                let end = actual.index(start, offsetBy: expected!.count)
+                XCTAssertEqual(expected, String(actual[start..<end]))
             }
         }
         wait(for: [expectation], timeout: 10)

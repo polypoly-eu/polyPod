@@ -4,20 +4,28 @@ import "./listOfDetails.css";
 const optimalGradientScrollingRatio = 0.84;
 
 const ListOfDetails = ({ list }) => {
-    const gradient = useRef();
+    const gradient1 = useRef();
+    const gradient2 = useRef();
     const listRef = useRef();
     const handleScroll = (e) => {
+        if (e.target.scrollTop === 0) {
+            gradient1.current.classList.remove("gradient");
+        } else {
+            gradient1.current.classList.add("gradient");
+        }
+
         if (
             e.target.scrollTop / e.target.scrollHeight >
             optimalGradientScrollingRatio
         ) {
-            gradient.current.classList.remove("gradient");
+            gradient2.current.classList.remove("gradient");
         } else {
-            gradient.current.classList.add("gradient");
+            gradient2.current.classList.add("gradient");
         }
     };
     return (
         <div className="scrollable-list">
+            <div className="list-gradient reverse" ref={gradient1}></div>
             <ul ref={listRef} onScroll={handleScroll}>
                 {list.map((interest, index) => {
                     return (
@@ -27,7 +35,7 @@ const ListOfDetails = ({ list }) => {
                     );
                 })}
             </ul>
-            <div className="list-gradient gradient" ref={gradient}></div>
+            <div className="list-gradient gradient" ref={gradient2}></div>
         </div>
     );
 };

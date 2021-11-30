@@ -31,7 +31,7 @@ private class InAppNotification {
         }
 
         fun close() {
-            onView(withText(R.string.button_update_notification_close))
+            onView(withText(R.string.button_acknowledge))
                 .inRoot(isDialog())
                 .check(matches(isDisplayed()))
                 .perform(click())

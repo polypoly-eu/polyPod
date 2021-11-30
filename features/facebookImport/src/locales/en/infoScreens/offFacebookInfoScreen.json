@@ -1,8 +1,0 @@
-{
-    "text1": "These diagrams show the number of companies that share your activities on their websites and apps with Facebook and the types of activities they share.",
-    "text2": "This diagram is called a <strong>bar chart</strong>. The length of each bar is proportional to the values that it represents.",
-    "text3": "The polyPod importer detected that you have at least one so-called off Facebook event in your Facebook data.",
-    "text4": "Off Facebook events are information about your behaviour (e.g. login or purchase) in an app or on a website outside of Facebook, which is reported back to Facebook by the companies running those apps or websites. They usually do this to optimise their own advertising, sales, and analytics.",
-    "text5": "For this analysis, we use a distinct file about off Facebook events in your dataset, which contains information about time, type, and also about company names or URLs.",
-    "text6": "The on Facebook events are drawn from a file that lists items you have recently viewed. From that, we currently import the part about ads and extract the senders (URLs/ company names), so that we can find the companies which appear in off and on Facebook events."
-}

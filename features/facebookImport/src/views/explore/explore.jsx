@@ -6,7 +6,6 @@ import { ImporterContext } from "../../context/importer-context.jsx";
 import i18n from "../../i18n.js";
 
 import "./explore.css";
-import "./ministory-styles.css";
 
 const PopUpMessage = ({ children, reportResultAnswer }) => {
     return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
@@ -21,7 +20,7 @@ const AnalysisCard = ({
         <>
             <div className="analysis-card">
                 <div className="card-container">
-                    <h1 className="ministory-title">{analysis.title}</h1>
+                    <h1>{analysis.title}</h1>
                     {analysis.label !== null && (
                         <label>
                             {i18n.t(`explore:analysis.label.${analysis.label}`)}

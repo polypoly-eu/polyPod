@@ -20,10 +20,6 @@ class Feature(
         get() = runCatching { Color.parseColor(manifest.primaryColor) }
             .getOrDefault(0)
 
-    val thumbnailColor: Int
-        get() = runCatching { Color.parseColor(manifest.thumbnailColor) }
-            .getOrDefault(primaryColor)
-
     val thumbnail: Bitmap?
         get() {
             if (manifest.thumbnail == null) return null

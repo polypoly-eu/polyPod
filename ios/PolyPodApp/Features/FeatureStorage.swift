@@ -39,7 +39,7 @@ class FeatureStorage {
             for featureDir in subDirs {
                 if let feature = Feature.load(
                     path: featureDir,
-                    languageCode: Language.current
+                    languageCode: Locale.current.languageCode
                 ) {
                     featuresList.append(feature)
                 }

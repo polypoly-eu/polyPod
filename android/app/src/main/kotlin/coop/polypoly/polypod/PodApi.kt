@@ -209,14 +209,7 @@ open class PodApi(
         }
         logger.debug("dispatch() -> polyNav.pickFile")
         polyNav.pickFile(type)?.let {
-            val resultEncoded = mutableMapOf<Value, Value>()
-            resultEncoded[ValueFactory.newString("url")] =
-                ValueFactory.newString(it.url)
-            resultEncoded[ValueFactory.newString("name")] =
-                ValueFactory.newString(it.name)
-            resultEncoded[ValueFactory.newString("size")] =
-                ValueFactory.newInteger(it.size)
-            return ValueFactory.newMap(resultEncoded)
+            return ValueFactory.newString(it.toString())
         }
         return ValueFactory.newNil()
     }

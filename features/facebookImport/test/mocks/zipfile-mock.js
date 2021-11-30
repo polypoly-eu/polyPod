@@ -12,10 +12,6 @@ export class ZipFileMock {
         this._entries = {};
     }
 
-    async hasEntry(entryId) {
-        return entryId in this._entries;
-    }
-
     async getEntries() {
         return Object.keys(this._entries);
     }
