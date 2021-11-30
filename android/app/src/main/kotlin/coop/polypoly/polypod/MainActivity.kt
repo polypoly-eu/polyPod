@@ -20,7 +20,10 @@ class MainActivity : AppCompatActivity() {
                 setContentView(R.layout.activity_main)
                 setSupportActionBar(findViewById(R.id.toolbar))
             } else {
-                finish()
+                // Since we do not have a dedicated unlocking activity yet,
+                // we simply keep restarting the activity until unlocking
+                // succeeds.
+                recreate()
             }
         }
     }
