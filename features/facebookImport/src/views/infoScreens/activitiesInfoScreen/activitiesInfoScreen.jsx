@@ -46,12 +46,7 @@ const ActivitiesInfoScreen = () => {
         </>,
     ];
 
-    return (
-        <InfoScreen
-            child1={activitiesInfoText[0]}
-            child2={activitiesInfoText[1]}
-        />
-    );
+    return <InfoScreen infoChildren={activitiesInfoText} />;
 };
 
 export default ActivitiesInfoScreen;

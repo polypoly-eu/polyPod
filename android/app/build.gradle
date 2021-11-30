@@ -25,13 +25,13 @@ ktlint {
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "coop.polypoly.polypod"
         minSdkVersion 24 // as long as we use the system WebView, going lower would mean a lot of limitations for feature developers
-        targetSdkVersion 29 // cannot use 30 because of Robolectric's lack of support for that, see https://github.com/robolectric/robolectric/issues/5644
+        targetSdkVersion 30
         versionCode polyEpoch()
         versionName "1.4.0"
 

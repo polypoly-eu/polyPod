@@ -1,7 +1,8 @@
 import SwiftUI
 import LocalAuthentication
 
-private struct FirstRun {
+// TODO: This, and other user defaults we use, should move to a central place.
+struct FirstRun {
     static private let key = UserDefaults.Keys.firstRun.rawValue
     
     static func read() -> Bool {
@@ -50,10 +51,6 @@ struct ContentView: View {
         .edgesIgnoringSafeArea([.top, .bottom])
     }
     
-    private func devicePasscodeSet() -> Bool {
-        return LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
-    }
-    
     private func initState() -> ViewState {
         let state = self.state ?? firstRunState()
         setStatusBarStyle?(
@@ -82,7 +79,7 @@ struct ContentView: View {
     
     private func securityReminderState() -> ViewState {
         if !Authentication.shared.shouldShowPrompt() {
-            return featureListState()
+            return lockedState()
         }
         
         return ViewState(
@@ -97,6 +94,43 @@ struct ContentView: View {
         )
     }
     
+    private func lockedState() -> ViewState {
+        return ViewState(
+            AnyView(
+                Text("").onAppear {
+                    authenticateRelentlessly {
+                        // Checking whether a notification needs to be shown
+                        // used to be in featureListState, where it makes more
+                        // sense, but ever since we added a dedicated
+                        // lockedState, they wouldn't show up anymore, the
+                        // state change in featureListState's onAppear did not
+                        // trigger a rerender, even though it should.
+                        // Yet another SwiftUI bug it seems...
+                        showUpdateNotification = UpdateNotification().showInApp
+                        
+                        state = featureListState()
+                    }
+                }
+            )
+        )
+    }
+    
+    private func authenticateRelentlessly(
+        _ completeAction: @escaping () -> Void
+    ) {
+        // Apple doesn't want us to close the app programmatically, e.g. in case
+        // authentication fails. Since we don't have a dedicated screen for the
+        // locked state yet, we simply keep asking the user until they stop
+        // cancelling or leave the app.
+        Authentication.shared.authenticate { success in
+            if success {
+                completeAction()
+                return
+            }
+            authenticateRelentlessly(completeAction)
+        }
+    }
+    
     private func featureListState() -> ViewState {
         let notification = UpdateNotification()
         return ViewState(
@@ -104,9 +138,7 @@ struct ContentView: View {
                 FeatureListView(
                     features: FeatureStorage.shared.featuresList(),
                     openFeatureAction: { feature in
-                        Authentication.shared.authenticate {
-                            state = featureState(feature)
-                        }
+                        state = featureState(feature)
                     },
                     openInfoAction: {
                         state = infoState()
@@ -114,9 +146,7 @@ struct ContentView: View {
                     openSettingsAction: {
                         state = settingsState()
                     }
-                ).onAppear {
-                    showUpdateNotification = notification.showInApp
-                }.alert(isPresented: $showUpdateNotification) {
+                ).alert(isPresented: $showUpdateNotification) {
                     Alert(
                         title: Text(notification.title),
                         message: Text(notification.text),

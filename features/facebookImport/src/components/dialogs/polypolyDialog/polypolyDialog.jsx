@@ -4,14 +4,17 @@ import RouteButton from "../../buttons/routeButton.jsx";
 
 import "./polypolyDialog.css";
 
-const PolypolyDialog = ({ message, backButton, proceedButton }) => {
+const PolypolyDialog = ({ title, message, backButton, proceedButton }) => {
     return (
         <div className="polypoly-dialog">
             <div className="polypoly-dialog-window">
-                <p>{message}</p>
-                <button className="btn back" onClick={backButton.onClick}>
-                    {backButton.text}
-                </button>
+                {title ? <h2>{title}</h2> : null}
+                {message ? <p>{message}</p> : null}
+                {backButton ? (
+                    <button className="btn back" onClick={backButton.onClick}>
+                        {backButton.text}
+                    </button>
+                ) : null}
                 <RouteButton
                     className="btn proceed"
                     route={proceedButton.route}

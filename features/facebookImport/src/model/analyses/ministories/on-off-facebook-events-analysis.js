@@ -14,7 +14,6 @@ import i18n from "../../../i18n.js";
 import {
     OnOffFacebookMiniStorySummary,
     OnOffFacebookMiniStoryDetails,
-    OffFacebookEventsMiniStoryDetails,
 } from "../../../components/onOffFacebookMiniStory/onOffFacebookMiniStory.jsx";
 
 const detailDisplayTypes = {
@@ -28,9 +27,7 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
     }
 
     get title() {
-        return this._displayType == detailDisplayTypes.off
-            ? i18n.t("offFacebookEventsMiniStory:fallback.title")
-            : i18n.t("offFacebookEventsMiniStory:title");
+        return i18n.t("offFacebookEventsMiniStory:off.events.title");
     }
 
     get customReportData() {
@@ -60,14 +57,11 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
         const selectedCompanies = selectMeaningfulCompanies(
             this._commonAdvertisersData
         );
-        if (selectedCompanies.length > 0) {
-            this._displayData = buildDisplayData(
-                selectedCompanies,
-                facebookAccount.offFacebookEventsLatestTimestamp
-            );
-            this._displayType = detailDisplayTypes.onOff;
-        } else if (facebookAccount._offFacebookCompanies.length > 0) {
-            this._displayData = {
+
+        this._displayData = {};
+
+        if (facebookAccount._offFacebookCompanies.length > 0) {
+            this._displayData.offEvents = {
                 companies: topOffFacebookCompanies(facebookAccount),
                 activityTypes: groupOffFacebookEventsByType(
                     facebookAccount
@@ -78,9 +72,18 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
                     };
                 }),
             };
-            this._displayType = detailDisplayTypes.off;
         }
-        this.active = this._displayData ? true : false;
+
+        if (selectedCompanies.length > 0) {
+            this._displayData.onOffEvents = buildDisplayData(
+                selectedCompanies,
+                facebookAccount.offFacebookEventsLatestTimestamp
+            );
+        }
+        this.active = Object.keys(this._displayData).length > 0;
+        this._displayType = this._displayData?.onOffEvents
+            ? detailDisplayTypes.onOff
+            : detailDisplayTypes.off;
     }
 
     renderSummary() {
@@ -93,12 +96,8 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
     }
 
     renderDetails() {
-        return this._displayType == detailDisplayTypes.onOff ? (
+        return (
             <OnOffFacebookMiniStoryDetails displayData={this._displayData} />
-        ) : (
-            <OffFacebookEventsMiniStoryDetails
-                displayData={this._displayData}
-            />
         );
     }
 }

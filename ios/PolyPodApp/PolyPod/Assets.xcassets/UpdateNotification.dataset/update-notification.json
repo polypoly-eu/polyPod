@@ -1,12 +1,12 @@
 {
-    "id": 0,
+    "id": 80989465,
     "pushDelay": 120,
     "title": {
-        "en": "Unexpected notification",
-        "de": "Unerwartete Benachrichtigung"
+        "en": "Your polyPod just got better!",
+        "de": "Ihr polyPod wurde gerade mächtiger!"
     },
     "text": {
-        "en": "If you read this, you've found a bug in the polyPod: Please report it to us!",
-        "de": "Wenn Sie diese Nachricht lesen, haben Sie fehlerhaftes Verhalten im polyPod entdeckt. Bitte berichten Sie uns darüber!"
+        "en": "Your polyPod can now import and analyse your Facebook data. Learn what Facebook hides from you!",
+        "de": "Ihr polyPod kann jetzt Facebook Daten importieren und analysieren. Lernen Sie, was Facebook nicht von selbst zeigt!"
     }
 }

@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
+import android.provider.OpenableColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,6 +74,8 @@ private enum class ActionButton(val action: Action, val buttonId: Int) {
     SEARCH(Action.SEARCH, R.id.search_button)
 }
 
+data class ExternalFile(val url: String, val name: String, val size: Long)
+
 /**
  * A [Fragment] that is responsible for handling a single Feature
  */
@@ -87,6 +90,16 @@ open class FeatureFragment : Fragment() {
     private lateinit var feature: Feature
     private lateinit var foregroundResources: ForegroundResources
     private lateinit var featureContainer: FeatureContainer
+
+    private val errorDialog: AlertDialog by lazy {
+        AlertDialog.Builder(context)
+            .setPositiveButton(
+                context?.getString(R.string.button_feature_error_close)
+            ) { _, _ ->
+                close()
+            }
+            .create()
+    }
 
     private var pickFileResult: CompletableDeferred<Uri?>? = null
 
@@ -147,14 +160,14 @@ open class FeatureFragment : Fragment() {
 
     @Suppress("unused")
     private fun handleError(error: String) {
-        val acknowledgeLabel =
-            context?.getString(R.string.button_acknowledge)
-        val featureErrorMessage =
-            context?.getString(R.string.feature_error, feature.name, error)
-        AlertDialog.Builder(context)
-            .setMessage(featureErrorMessage)
-            .setPositiveButton(acknowledgeLabel) { _, _ -> close() }
-            .show()
+        val featureErrorMessage = context?.getString(
+            R.string.message_feature_error,
+            feature.name,
+            error
+        )
+        if (errorDialog.isShowing) return
+        errorDialog.setMessage(featureErrorMessage)
+        errorDialog.show()
     }
 
     private fun setupNavigation(view: View) {
@@ -212,7 +225,7 @@ open class FeatureFragment : Fragment() {
         view.findViewById<TextView>(R.id.feature_title).text = title
     }
 
-    private suspend fun pickFile(type: String?): Uri? {
+    private suspend fun pickFile(type: String?): ExternalFile? {
         if (pickFileResult?.isActive == true)
             return null
         pickFileResult = CompletableDeferred()
@@ -229,7 +242,25 @@ open class FeatureFragment : Fragment() {
             }
         }
         startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
-        return pickFileResult?.await()
+        var url: String = ""
+        var name: String = ""
+        var size: Long = 0
+        (pickFileResult?.await())?.let {
+            it.let { returnUri ->
+                url = returnUri.toString()
+                context?.contentResolver
+                    ?.query(returnUri, null, null, null, null)
+            }?.use { cursor ->
+                if (cursor != null && cursor.moveToFirst()) {
+                    val nameIndex =
+                        cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                    val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
+                    name = cursor.getString(nameIndex)
+                    size = cursor.getLong(sizeIndex)
+                }
+            }
+        }
+        return ExternalFile(url = url, name = name, size = size)
     }
 
     override fun onActivityResult(

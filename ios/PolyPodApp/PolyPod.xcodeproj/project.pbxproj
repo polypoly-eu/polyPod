@@ -92,6 +92,7 @@
 		1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B1242A34D700E51B6D /* PolyOut.swift */; };
 		1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DB24349E6B00E51B6D /* PodApi.swift */; };
 		1AF468DE24361D9D00E51B6D /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */; };
+		3B3CEDFA274FC37C000C3E6E /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989B350269CA6B7000EE977 /* FilePicker.swift */; };
 		5B0F7B6126AD840E00F4EFF4 /* PolyIn+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */; };
 		5B0F7B6326AD841D00F4EFF4 /* PolyIn+Has.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */; };
 		5B8653022643FC310014208C /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
@@ -103,6 +104,7 @@
 		E923AAF7261E155500E0A2A8 /* polyNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* polyNav.js */; };
 		E923AAF8261E155500E0A2A8 /* polyNav.js in Resources */ = {isa = PBXBuildFile; fileRef = E923AAF6261E155500E0A2A8 /* polyNav.js */; };
 		E924F5C4263BF5F60014834B /* ContentViewHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = E924F5C3263BF5F60014834B /* ContentViewHost.swift */; };
+		E93EC98C273D65D400E20512 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93EC98B273D65D400E20512 /* Authentication.swift */; };
 		E9545EAE273530ED001E8C7F /* UpdateNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EAD273530ED001E8C7F /* UpdateNotification.swift */; };
 		E9545EB12735412B001E8C7F /* UpdateNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EAD273530ED001E8C7F /* UpdateNotification.swift */; };
 		E9545EC1273542F5001E8C7F /* UpdateNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EAF27353F78001E8C7F /* UpdateNotificationTest.swift */; };
@@ -110,7 +112,8 @@
 		E9545EC827359A34001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
 		E9545EC927359C34001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
 		E9545ECA27359C38001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
-		E93EC98C273D65D400E20512 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93EC98B273D65D400E20512 /* Authentication.swift */; };
+		E96817F1274D032A00206602 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96817F0274D032A00206602 /* Language.swift */; };
+		E96817F2274D592500206602 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96817F0274D032A00206602 /* Language.swift */; };
 		E97D325626307CE100A5A180 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325526307CE100A5A180 /* ColorExtensions.swift */; };
 		E97D3260263084C500A5A180 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325F263084C500A5A180 /* SettingsView.swift */; };
 		E97D3276263152CE00A5A180 /* FeatureManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D3275263152CE00A5A180 /* FeatureManifest.swift */; };
@@ -237,12 +240,13 @@
 		E92373C126289FAC00D2CFF3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E923AAF6261E155500E0A2A8 /* polyNav.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = polyNav.js; sourceTree = "<group>"; };
 		E924F5C3263BF5F60014834B /* ContentViewHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewHost.swift; sourceTree = "<group>"; };
+		E93EC98B273D65D400E20512 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		E9545EAD273530ED001E8C7F /* UpdateNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNotification.swift; sourceTree = "<group>"; };
 		E9545EAF27353F78001E8C7F /* UpdateNotificationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNotificationTest.swift; sourceTree = "<group>"; };
 		E9545EB6273542CC001E8C7F /* PolyPodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PolyPodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9545EC3273543EB001E8C7F /* UpdateNotificationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNotificationTest.swift; sourceTree = "<group>"; };
 		E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensions.swift; sourceTree = "<group>"; };
-		E93EC98B273D65D400E20512 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		E96817F0274D032A00206602 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		E97D325526307CE100A5A180 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		E97D325F263084C500A5A180 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E97D3275263152CE00A5A180 /* FeatureManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureManifest.swift; sourceTree = "<group>"; };
@@ -428,6 +432,7 @@
 				E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */,
 				E9545EAD273530ED001E8C7F /* UpdateNotification.swift */,
 				E93EC98B273D65D400E20512 /* Authentication.swift */,
+				E96817F0274D032A00206602 /* Language.swift */,
 			);
 			path = PolyPod;
 			sourceTree = "<group>";
@@ -589,7 +594,7 @@
 				1AA6DE2D24191C94008DB1B2 /* Resources */,
 				E9CF1B7D2627365600216B70 /* Update Bundle Version */,
 				E923739E2628228F00D2CFF3 /* Copy polyPod Features */,
-				E98F3756266F32AE00874FB9 /* Copy licenses */,
+				E98F3756266F32AE00874FB9 /* Copy licenses and legal */,
 			);
 			buildRules = (
 			);
@@ -728,7 +733,7 @@
 			shellPath = /bin/sh;
 			shellScript = "SOURCE_PATH=\"$PROJECT_DIR/../..\"\nTARGET_PATH=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nFEATURES_TARGET_PATH=\"$TARGET_PATH/features\"\n\ncp \"$SOURCE_PATH/core/communication/remote-pod/dist/bootstrap.js\" \"$TARGET_PATH/pod.js\"\nmkdir -p \"$FEATURES_TARGET_PATH\"\ncp \"$SOURCE_PATH\"/features/bundle/dist/* \"$FEATURES_TARGET_PATH\"\n";
 		};
-		E98F3756266F32AE00874FB9 /* Copy licenses */ = {
+		E98F3756266F32AE00874FB9 /* Copy licenses and legal */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -737,14 +742,14 @@
 			);
 			inputPaths = (
 			);
-			name = "Copy licenses";
+			name = "Copy licenses and legal";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SOURCE=\"$PROJECT_DIR/../../3rd-party-licenses\"\nTARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/3rd-party-licenses\"\nrm -rf \"$TARGET\"\ncp -r \"$SOURCE\" \"$TARGET\"\n";
+			shellScript = "LICENSES_SOURCE=\"$PROJECT_DIR/../../3rd-party-licenses\"\nLICENSES_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/3rd-party-licenses\"\nLEGAL_SOURCE=\"$PROJECT_DIR/../../assets/legal\"\nLEGAL_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/legal\"\nrm -rf \"$LICENSES_TARGET\" \"$LEGAL_TARGET\"\ncp -r \"$LICENSES_SOURCE\" \"$LICENSES_TARGET\"\ncp -r \"$LEGAL_SOURCE\" \"$LEGAL_TARGET\"\n";
 		};
 		E9CF1B7D2627365600216B70 /* Update Bundle Version */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -813,10 +818,12 @@
 				1ABADBFD24EE710B00369791 /* Quad+Additions.swift in Sources */,
 				1ABADBD424EBC5EF00369791 /* PolyIn.swift in Sources */,
 				1A66F7812493794000ED4308 /* NetworkSession.swift in Sources */,
+				3B3CEDFA274FC37C000C3E6E /* FilePicker.swift in Sources */,
 				1ABADC0F24EFB9F300369791 /* Models.swift in Sources */,
 				1A66F77F249378E400ED4308 /* PolyOutTests.swift in Sources */,
 				1ABADBFA24EE710B00369791 /* BlankNode+CoreDataProperties.swift in Sources */,
 				1ABADC0324EE710C00369791 /* Term+CoreDataClass.swift in Sources */,
+				E96817F2274D592500206602 /* Language.swift in Sources */,
 				1AB4F37F2508D6E800E66BCC /* AppDelegate.swift in Sources */,
 				1ABADC0124EE710B00369791 /* Literal+CoreDataProperties.swift in Sources */,
 				1ABADBD924EBC5FC00369791 /* PolyOut+Fetch.swift in Sources */,
@@ -865,6 +872,7 @@
 				1A00DFFB245AAC3F0049F3F7 /* MessageName.swift in Sources */,
 				E97D3260263084C500A5A180 /* SettingsView.swift in Sources */,
 				1A4C21F624A63E4C006CC1FD /* Literal+CoreDataClass.swift in Sources */,
+				E96817F1274D032A00206602 /* Language.swift in Sources */,
 				1A4C21DE24A63DD4006CC1FD /* Term+CoreDataClass.swift in Sources */,
 				1A4C21EE24A63E4B006CC1FD /* NamedNode+CoreDataClass.swift in Sources */,
 				E9CF1B722627304800216B70 /* FeatureContainerView.swift in Sources */,
