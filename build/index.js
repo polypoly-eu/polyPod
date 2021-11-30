@@ -4,6 +4,7 @@ const fs = require("fs");
 const fsPromises = require("fs/promises");
 const path = require("path");
 const { spawn } = require("child_process");
+const { performance } = require("perf_hooks");
 const validCommands = [
     "build",
     "clean",
@@ -247,8 +248,13 @@ function ANSIBold(string) {
     return `\x1b[1m${string}\x1b[0m`;
 }
 
-function logSuccess(command) {
-    logMain(`✅ Command «${ANSIBold(command)}» succeeded!`);
+function logSuccess(command, timeLapsed) {
+    let message = `✅ Command «${ANSIBold(command)}» succeeded`;
+    const secondsLapsed = (timeLapsed / 1000).toFixed(2);
+    if (timeLapsed) {
+        message = message.concat(` in ⏰ ${ANSIBold(secondsLapsed)}s!`);
+    }
+    logMain(message);
 }
 
 async function main() {
@@ -292,10 +298,11 @@ async function main() {
     }
 
     try {
+        const startTime = performance.now();
         const packageTree = createPackageTree(metaManifest);
         if (start) skipPackages(packageTree, start);
         await processAll(packageTree, command);
-        logSuccess(command);
+        logSuccess(command, performance.now() - startTime);
         return 0;
     } catch (error) {
         logMain(`Command '${command}' failed: ${error}\n`);
