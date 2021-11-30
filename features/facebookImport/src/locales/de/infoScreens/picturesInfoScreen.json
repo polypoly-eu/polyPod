@@ -1,5 +1,0 @@
-{
-    "text1": "Der polyPod Importer hat erkannt, dass die Daten, welche Sie von Facebook heruntergeladen haben, mindestens ein Foto in einem Album beinhalten. Wir anylsieren Ihre Fotos nicht, aber da Facebook dies tut, möchten wir Sie über mögliche Auswirkungen informieren.",
-    "text2": "Die Beispiele die wir hier nennen, basieren auf Medienberichten, akademischen Forschungsberichten oder auch Informationen von Facebook selbst. Wir können nicht beweisen, was genau Facebook mit Ihren Fotos macht, aber wir möchten Ihnen ein besseres Verständis davon geben, was möglich ist.",
-    "text3": "Im Moment importieren wir weder Posts noch Alben, daher zählen wir nur die Anzahl der Bilddaten im Ordner \"photos_and_videos\" für diese Analyse. Dies ist der Ordner, der Bilder speichert (Dateien im Format jpg oder jpeg) wnn Nutzer:innen Bilder posten. Bitte beachten Sie, dass es auch an anderen Stellen Ihres Datensatzes Fotos geben mag, welche wir bislang nicht einbeziehen."
-}

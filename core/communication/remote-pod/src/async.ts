@@ -4,7 +4,6 @@ import {
     PolyLifecycle,
     PolyIn,
     PolyNav,
-    ExternalFile,
     EncodingOptions,
     Matcher,
     Network,
@@ -86,7 +85,7 @@ class AsyncPolyNav implements PolyNav {
         return (await this.promise).setTitle(title);
     }
 
-    async pickFile(type?: string): Promise<ExternalFile | null> {
+    async pickFile(type?: string): Promise<string | null> {
         return (await this.promise).pickFile(type);
     }
 }

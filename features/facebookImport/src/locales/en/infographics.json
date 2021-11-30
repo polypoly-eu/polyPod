@@ -17,14 +17,9 @@
     "activitiesBarChart.boldOct": "O",
     "activitiesBarChart.boldNov": "N",
     "activitiesBarChart.boldDec": "D",
-    "messagesBarChart.text1": "Max number of messages in one chat",
-    "messagesBarChart.text2": "Total value for this chat",
+    "messagesBarChart.text1": "Max number of messages across all threads",
+    "messagesBarChart.text2": "Total value for this conversation",
     "messagesBarChart.bigbold1": "Representation of the number of messages exchanged",
     "messagesBarChart.bold2": "Name of group or person",
-    "messagesBarChart.highlighted": "Max: 725",
-    "onOffFacebookChart.bigbold1": "Off Facebook events",
-    "onOffFacebookChart.bigbold2": "On Facebook events",
-    "onOffFacebookChart.greylegend1": "Number of events",
-    "onOffFacebookChart.greylegend2": "Last 90 days",
-    "onOffFacebookChart.bold1": "Company name"
+    "messagesBarChart.highlighted": "Max: 725"
 }

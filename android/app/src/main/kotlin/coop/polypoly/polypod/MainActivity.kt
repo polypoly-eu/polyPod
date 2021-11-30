@@ -13,19 +13,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        Authentication.authenticate(this) { success ->
-            if (success) {
-                FeatureStorage().installBundledFeatures(this)
-                setContentView(R.layout.activity_main)
-                setSupportActionBar(findViewById(R.id.toolbar))
-            } else {
-                // Since we do not have a dedicated unlocking activity yet,
-                // we simply keep restarting the activity until unlocking
-                // succeeds.
-                recreate()
-            }
-        }
+        FeatureStorage().installBundledFeatures(this)
+        setContentView(R.layout.activity_main)
+        setSupportActionBar(findViewById(R.id.toolbar))
     }
 
     override fun onResume() {
@@ -34,14 +24,8 @@ class MainActivity : AppCompatActivity() {
         val notification = UpdateNotification(this)
         notification.handleStartup()
 
-        val firstRun = Preferences.isFirstRun(this)
-        if (firstRun) {
+        if (Preferences.isFirstRun(this)) {
             notification.handleFirstRun()
-        }
-
-        val shouldShowOnboarding =
-            firstRun || Authentication.shouldShowBiometricsPrompt(this)
-        if (!onboardingShown && shouldShowOnboarding) {
             onboardingShown = true
             startActivity(
                 Intent(
@@ -49,6 +33,7 @@ class MainActivity : AppCompatActivity() {
                     OnboardingActivity::class.java
                 )
             )
+            return
         }
 
         if (notification.showInApp) {
@@ -62,5 +47,15 @@ class MainActivity : AppCompatActivity() {
                 }
                 .show()
         }
+        if (!onboardingShown) {
+            onboardingShown = true
+            startActivity(
+                Intent(
+                    this,
+                    OnboardingActivity::class.java
+                )
+            )
+        }
+        return
     }
 }

@@ -7,18 +7,11 @@ import androidx.core.text.HtmlCompat
 
 class HTMLTextView(context: Context, attrs: AttributeSet) :
     androidx.appcompat.widget.AppCompatTextView(context, attrs) {
-
-    var htmlContent: CharSequence = ""
-        set(value) {
-            field = HtmlCompat.fromHtml(
-                value.toString(),
-                HtmlCompat.FROM_HTML_MODE_LEGACY
-            )
-            text = field
-        }
-
     init {
-        htmlContent = text
+        text = HtmlCompat.fromHtml(
+            text.toString(),
+            HtmlCompat.FROM_HTML_MODE_LEGACY
+        )
         movementMethod = LinkMovementMethod.getInstance()
     }
 }

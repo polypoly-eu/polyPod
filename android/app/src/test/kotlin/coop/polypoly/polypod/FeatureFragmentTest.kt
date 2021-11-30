@@ -20,7 +20,6 @@ import org.robolectric.annotation.LooperMode
  */
 @LooperMode(LooperMode.Mode.PAUSED)
 @RunWith(AndroidJUnit4::class)
-@Ignore("Needs Robolectric upgrade")
 class FeatureFragmentTest {
 
     @get:Rule

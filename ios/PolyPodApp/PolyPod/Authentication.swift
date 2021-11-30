@@ -3,9 +3,8 @@ import LocalAuthentication
 private func isSimulator() -> Bool {
     #if targetEnvironment(simulator)
     return true
-    #else
-    return false
     #endif
+    return false
 }
 
 class Authentication {
@@ -20,43 +19,35 @@ class Authentication {
     private init() {}
     
     func shouldShowPrompt() -> Bool {
-        let firstRun = FirstRun.read()
-        return !(firstRun || isCheckDisabled() || isSetUp()) && isAvailable()
-    }
-    
-    private func isAvailable() -> Bool {
-        return !isSimulator() && LAContext().canEvaluatePolicy(
-            .deviceOwnerAuthentication,
-            error: nil
-        )
+        return !isCheckDisabled() && !isSetUp()
     }
     
     func disableCheck() {
         UserDefaults.standard.set(true, forKey: Authentication.disableCheckKey)
     }
     
-    func setUp(_ completeAction: @escaping (Bool) -> Void) {
-        authenticateLocally(reason: "auth_prompt_set_up") { success in
-            self.authenticated = success
+    func setUp(_ completeAction: @escaping () -> Void) {
+        authenticateLocally(reason: "auth_prompt_set_up") {
+            self.authenticated = true
             UserDefaults.standard.set(true, forKey: Authentication.setUpKey)
-            completeAction(success)
+            completeAction()
         }
     }
     
-    func authenticate(_ completeAction: @escaping (Bool) -> Void) {
+    func authenticate(_ successAction: @escaping () -> Void) {
         if isCheckDisabled() || !isSetUp() || authenticated {
-            completeAction(true)
+            successAction()
             return
         }
         
-        authenticateLocally(reason: "auth_prompt_unlock") { success in
-            self.authenticated = success
-            completeAction(success)
+        authenticateLocally(reason: "auth_prompt_unlock") {
+            self.authenticated = true
+            successAction()
         }
     }
     
     private func isCheckDisabled() -> Bool {
-        return UserDefaults.standard.bool(
+        return isSimulator() || UserDefaults.standard.bool(
             forKey: Authentication.disableCheckKey
         )
     }
@@ -67,7 +58,7 @@ class Authentication {
     
     private func authenticateLocally(
         reason: String,
-        _ completeAction: @escaping (Bool) -> Void
+        _ successAction: @escaping () -> Void
     ) {
         let context = LAContext()
         context.evaluatePolicy(
@@ -76,8 +67,9 @@ class Authentication {
         ) { (success, error) in
             if !success {
                 print("Authentication failed: \(String(describing: error))")
+                return
             }
-            completeAction(success)
+            successAction()
         }
     }
     

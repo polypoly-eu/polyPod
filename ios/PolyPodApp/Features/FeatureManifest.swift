@@ -5,7 +5,6 @@ struct FeatureManifest: Decodable {
     let author: String?
     let description: String?
     let thumbnail: String?
-    let thumbnailColor: String?
     let primaryColor: String?
     let links: [String: String]?
     let translations: [String: Override]?
@@ -28,7 +27,6 @@ struct FeatureManifest: Decodable {
         let author: String?
         let description: String?
         let thumbnail: String?
-        let thumbnailColor: String?
         let primaryColor: String?
         let links: [String: String]?
     }

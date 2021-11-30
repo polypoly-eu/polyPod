@@ -23,8 +23,6 @@ const ImportExplanationExpandable = ({
     importSections,
     importStatus,
     onUpdateImportStatus,
-    selectedFile,
-    onSelectFile,
     onImportFile,
     file,
     onRemoveFile,
@@ -46,18 +44,6 @@ const ImportExplanationExpandable = ({
 
     const handleRequestStatus = () => {
         onUpdateImportStatus(importSteps.download);
-        window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
-        setStartRequest(true);
-    };
-
-    const handleExampleDataRequest = () => {
-        onUpdateImportStatus(importSteps.import);
-        window.pod.polyNav.openUrl("example-data-download");
-        setStartRequest(true);
-    };
-
-    const handleDownloadDataLinkClick = () => {
-        onUpdateImportStatus(importSteps.import);
         window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
         setStartRequest(true);
     };
@@ -103,19 +89,13 @@ const ImportExplanationExpandable = ({
                     className="full-screen"
                     alt="select-json"
                 />
+                <InfoBox textContent={i18n.t("import:request.info.2")} />
                 <button
                     className="btn-highlighted"
                     onClick={() => handleRequestStatus()}
                 >
                     {i18n.t("import:request.button")}
                 </button>
-                <button
-                    className="btn-secondary"
-                    onClick={() => handleExampleDataRequest()}
-                >
-                    {i18n.t("import:request.example.data")}
-                </button>
-                <InfoBox textContent={i18n.t("import:request.info.2")} />
             </>
         ),
         download: (
@@ -133,10 +113,7 @@ const ImportExplanationExpandable = ({
                 <p>{i18n.t("import:download.2")}</p>
                 <img src="./images/download.svg" alt="document" />
                 <p>{i18n.t("import:download.3")}</p>
-                <button
-                    className="btn-highlighted btn-1"
-                    onClick={() => handleDownloadDataLinkClick()}
-                >
+                <button className="btn-highlighted btn-1">
                     {i18n.t("import:download.button.1")}
                 </button>
                 <button
@@ -168,46 +145,28 @@ const ImportExplanationExpandable = ({
                                 {formatSize(file.size)}
                             </p>
                         </div>
-                    ) : selectedFile ? (
-                        <div className="file-info">
-                            <h5>{i18n.t("import:import.chosen")}</h5>
-                            <p>{selectedFile?.name}</p>
-                            <p>
-                                {i18n.t("import:import.size")}{" "}
-                                {formatSize(selectedFile.size)}
-                            </p>
-                        </div>
                     ) : (
                         <h5>{i18n.t("import:import.none.chosen")}</h5>
                     )}
                 </div>
+                <InfoBox textContent={i18n.t("import:import.info")} />
                 <button
                     className={"btn-secondary btn-2"}
                     onClick={async () => {
                         if (file) await onRemoveFile();
-                        onSelectFile();
+                        onImportFile();
                     }}
                 >
-                    {file || selectedFile
+                    {file
                         ? i18n.t("import:import.button.1.different")
                         : i18n.t("import:import.button.1")}
                 </button>
                 <button
-                    className={`btn-highlighted ${
-                        selectedFile ? "" : "deactivated"
-                    }`}
-                    onClick={
-                        selectedFile
-                            ? async () => {
-                                  await onImportFile();
-                                  handleImportStatus();
-                              }
-                            : () => {}
-                    }
+                    className={`btn-highlighted ${file ? "" : "deactivated"}`}
+                    onClick={file ? () => handleImportStatus() : () => {}}
                 >
                     {i18n.t("import:import.button.2")}
                 </button>
-                <InfoBox textContent={i18n.t("import:import.info")} />
             </>
         ),
         explore: (

@@ -1,3 +1,4 @@
+import { terser } from "rollup-plugin-terser";
 import resolve from "@rollup/plugin-node-resolve";
 import svg from "rollup-plugin-svg";
 import sucrase from "@rollup/plugin-sucrase";
@@ -22,6 +23,15 @@ export default {
       production: true,
     }),
     resolve(),
+    terser({
+      module: true,
+      warnings: true,
+      mangle: {
+        properties: {
+          regex: /^__/,
+        },
+      },
+    }),
   ],
   external: ["react", "react-dom"],
   onwarn: (warning) => {

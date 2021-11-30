@@ -1,24 +1,7 @@
 import UIKit
-import MessagePack
-
-struct ExternalFile {
-    let url: String
-    let name: String
-    let size: Int64
-    
-    public var messagePackObject: MessagePackValue {
-        var messagePackMap: [MessagePackValue: MessagePackValue] = [:]
-        
-        messagePackMap["url"] = .string(url)
-        messagePackMap["name"] = .string(name)
-        messagePackMap["size"] = .int(size)
-        
-        return MessagePackValue.map(messagePackMap)
-    }
-}
 
 class FilePicker: NSObject, UIDocumentPickerDelegate {
-    private var currentCompletion: ((ExternalFile?) -> Void)?
+    private var currentCompletion: ((URL?) -> Void)?
     
     func mimeToUti(_ mime: String?) -> String {
         guard let mime = mime else { return "public.item" }
@@ -28,21 +11,7 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         return mimeToUti(nil)
     }
     
-    func loadExternalFileData(url: URL) -> ExternalFile {
-        var fileSize: Int64 = 0
-        do {
-            let fileAttribute: [FileAttributeKey : Any] =
-            try FileManager.default.attributesOfItem(atPath: url.path)
-            if let fileNumberSize: NSNumber = fileAttribute[FileAttributeKey.size] as? NSNumber {
-                fileSize = Int64(truncating: fileNumberSize)
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
-        return ExternalFile(url: url.absoluteString, name: url.lastPathComponent, size: fileSize)
-    }
-    
-    func pick(type: String?, completion: @escaping (ExternalFile?) -> Void) {
+    func pick(type: String?, completion: @escaping (URL?) -> Void) {
         if currentCompletion != nil {
             completion(nil)
             return
@@ -72,7 +41,7 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         documentPickerController.modalPresentationStyle = .fullScreen
         
         let viewController =
-        UIApplication.shared.windows.first!.rootViewController!
+            UIApplication.shared.windows.first!.rootViewController!
         viewController.present(
             documentPickerController,
             animated: true,
@@ -84,17 +53,17 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         _ controller: UIDocumentPickerViewController,
         didPickDocumentsAt urls: [URL]
     ) {
-        complete(externalFile: loadExternalFileData(url: urls.first!))
+        complete(url: urls.first!)
     }
     
     func documentPickerWasCancelled(
         _ controller: UIDocumentPickerViewController
     ) {
-        complete(externalFile: nil)
+        complete(url: nil)
     }
     
-    private func complete(externalFile: ExternalFile?) {
-        currentCompletion?(externalFile)
+    private func complete(url: URL?) {
+        currentCompletion?(url)
         currentCompletion = nil
     }
 }

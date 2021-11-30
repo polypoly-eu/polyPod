@@ -12,24 +12,21 @@ async function relevantZipEntries(zipFile) {
 }
 
 async function readJSONFile(relativeFileName, zipFile) {
-    let fullEntryName;
-    // TODO: This is a hack to handle the fact that ids are
-    // different between the browser pod and the app one.
-    if (zipFile.id.toLowerCase().startsWith("polypod://")) {
-        fullEntryName = `${zipFile.id}/${relativeFileName}`;
-    } else {
-        fullEntryName = `FeatureFiles/${zipFile.id}/${relativeFileName}`;
-    }
-
+    const fullEntryName = `${zipFile.id}/${relativeFileName}`;
     return readFullPathJSONFile(fullEntryName, zipFile);
 }
 
 async function readFullPathJSONFile(fullEntryName, zipFile) {
-    if (!(await zipFile.hasEntry(fullEntryName))) {
+    const entries = await zipFile.getEntries();
+    const dataZipEntry = entries.find((entryName) =>
+        entryName.endsWith(fullEntryName)
+    );
+
+    if (!dataZipEntry) {
         throw new MissingFileImportException(fullEntryName);
     }
 
-    const rawContent = await zipFile.getContent(fullEntryName);
+    const rawContent = await zipFile.getContent(dataZipEntry);
     const fileContent = new TextDecoder("utf-8").decode(rawContent);
 
     if (!fileContent) {

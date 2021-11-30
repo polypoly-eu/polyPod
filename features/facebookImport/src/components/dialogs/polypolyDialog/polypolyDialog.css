@@ -13,7 +13,7 @@
 
 .polypoly-dialog .polypoly-dialog-window {
     width: 318px;
-    max-height: 60%;
+    height: 332px;
     background-color: var(--color-gray-50);
     box-shadow: 0px 15px 12px rgba(0, 0, 0, 0.22),
         0px 19px 38px rgba(0, 0, 0, 0.3);
@@ -24,7 +24,7 @@
     box-sizing: border-box;
 }
 
-.polypoly-dialog .polypoly-dialog-window h2 {
+.polypoly-dialog .polypoly-dialog-window p {
     font-weight: 600;
     font-size: 24px;
     color: var(--color-indigo-950);
@@ -33,10 +33,6 @@
     align-items: center;
     line-height: 120%;
     flex: 1 1 auto;
-}
-
-.polypoly-dialog .polypoly-dialog-window p {
-    color: var(--color-indigo-950);
 }
 
 .polypoly-dialog .polypoly-dialog-window .btn {

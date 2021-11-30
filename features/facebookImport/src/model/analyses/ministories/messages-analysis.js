@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import i18n from "../../../i18n";
 import RootAnalysis from "./root-analysis";
+import InfoButton from "../../../components/buttons/infoButton/infoButton.jsx";
 
-import {
-    MessagesMiniStoryDetails,
-    MessagesMiniStorySummary,
-} from "../../../components/messagesMiniStory/messagesMiniStory.jsx";
+import BarChart from "../../../components/dataViz/barChart.jsx";
+import "./ministories.css";
 
 export default class MessagesAnalysis extends RootAnalysis {
     get label() {
@@ -62,23 +61,88 @@ export default class MessagesAnalysis extends RootAnalysis {
         this.active = this._messagesThreadsData.length > 0;
     }
 
+    _calculateFontSize(text, maxWidth) {
+        // TODO: Extract text size affecting styles from target element
+        const minFontSize = 10;
+        const maxFontSize = 80;
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        for (let fontSize = maxFontSize; fontSize > minFontSize; fontSize--) {
+            context.font = `${fontSize}px Jost`;
+            if (context.measureText(text).width <= maxWidth) return fontSize;
+        }
+        return minFontSize;
+    }
+
     renderSummary() {
+        const refWidth = useRef(0);
+
+        const fontSize = this._calculateFontSize(
+            this._messagesCount,
+            refWidth.current.clientWidth
+        );
+
         return (
-            <MessagesMiniStorySummary
-                messagesCount={this._messagesCount}
-                messagesThreadsData={this._messagesThreadsData}
-                totalUsernamesCount={this._totalUsernamesCount}
-            />
+            <div className="render-summary">
+                <h2
+                    style={{
+                        fontSize: fontSize,
+                        marginBottom: "35px",
+                        marginTop: "25px",
+                    }}
+                    ref={refWidth}
+                >
+                    {this._messagesCount.toLocaleString("de-DE")}
+                </h2>
+                <p>
+                    {i18n.t("explore:messages.summary", {
+                        messages: this._messagesCount,
+                        threads: this._messagesThreadsData.length,
+                        people: this._totalUsernamesCount,
+                    })}
+                </p>
+            </div>
         );
     }
 
     renderDetails() {
         return (
-            <MessagesMiniStoryDetails
-                messagesCount={this._messagesCount}
-                messagesThreadsData={this._messagesThreadsData}
-                totalUsernamesCount={this._totalUsernamesCount}
-            />
+            <>
+                <p>
+                    {i18n.t("messagesMiniStory:number.chats", {
+                        number_chats: this._totalUsernamesCount,
+                    })}
+                </p>
+                <p> {i18n.t("messagesMiniStory:chart.title")}</p>
+                <BarChart
+                    data={this._messagesThreadsData}
+                    screenPadding={48}
+                    footerContent={({ extraData }) => (
+                        <>
+                            <div className="bar-extra-info">
+                                <p>{i18n.t("messagesMiniStory:first.chat")}</p>
+                                {extraData.firstChatDate
+                                    ? extraData.firstChatDate.toDateString()
+                                    : "unknown"}
+                            </div>
+                            <div className="bar-extra-info">
+                                <p>
+                                    {i18n.t(
+                                        "messagesMiniStory:last.interaction"
+                                    )}
+                                </p>
+                                {extraData.lastChatDate
+                                    ? extraData.lastChatDate.toDateString()
+                                    : "unknown"}
+                            </div>
+                        </>
+                    )}
+                />
+                <InfoButton route="/report/details/messages-info" />
+                <p className="source">
+                    {i18n.t("common:source.your.facebook.data")}
+                </p>
+            </>
         );
     }
 }

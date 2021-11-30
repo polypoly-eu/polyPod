@@ -1,3 +1,3 @@
-import { INDEX_ROUTE, startWithCompanies, navigation } from "./navigation";
+import { navigation } from "./navigation";
 
-export default { INDEX_ROUTE, startWithCompanies, navigation };
+export default { navigation };

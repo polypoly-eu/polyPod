@@ -30,12 +30,12 @@
 "message_url_open_prevented %@ %@" = "I have blocked %1$s from opening a URL:\n%@";
 "message_url_open_requested %@ %@" = "%@ wants to open a URL in your browser:\n\n%@\n\nAllow?";
 "message_security_warning_title" = "Security warning";
-"message_security_warning_text" = "To ensure your data is secured, we recommend using your device screen lock.";
+"message_security_warning_text" = "To ensure your data is encrypted we recommend setting up passcode lock on your device";
 "button_url_open_confirm" = "Yes";
 "button_url_open_reject" = "No";
 "button_update_notification_close" = "OK";
 "auth_prompt_set_up" = "Set up authentification";
-"auth_prompt_unlock" = "Login to your polyPod";
+"auth_prompt_unlock" = "Unlock";
 
 "settings_imprint_text" = "
 <p>Details according to § 5 TMG</p>
@@ -62,6 +62,516 @@
 <p>Reichenberger Straße 121</p>
 <p>10999 Berlin Deutschland</p>
 ";
+
+"settings_privacy_policy_text" = '
+<h1>Privacy Policy</h1>
+<p>Data protection is a fundamental concern for us, and we also put the
+  protection of personal data concretely into practice. As a first point, we
+  try to collect as little data as possible. Where we do, you can expect us
+  to handle your data sensitively and carefully.&nbsp;</p>
+<p>We act in compliance with the following regulations: <a href="https://dejure.org/gesetze/DSGVO"
+
+    rel="nofollow">Datenschutzgrundverordnung</a>
+  (EU General Data Protection Regulation, GDPR), <a href="https://dejure.org/gesetze/BDSG"
+
+    rel="nofollow">Bundesdatenschutz</a>
+  and <a href="https://www.gesetze-im-internet.de/tmg/index.html"
+    rel="nofollow">Telemediengesetz</a>
+  (German Federal Data Protection Act and Telemedia Act). We will collect
+  and process users\' personal information only to the extent described in
+  this Privacy Policy.</p>
+<h3>What
+  this policy is applicable to</h3>
+<p>This privacy policy applies to the following applications and extensions
+  ("features"):</p>
+<ul>
+  <li>polyPod core application</li>
+  <li>polyExplorer feature</li>
+  <li>polyPreview feature</li>
+  <li>Lexicon feature</li>
+</ul>
+<h3>Which
+  data we collect</h3>
+<ul>
+  <li>When the app makes requests to our servers your IP address, app
+    version, and time of access will be stored temporarily. For analytical
+    purposes we only use your IP address in abbreviated form.</li>
+  <li>At this time we do not collect or process any other personal data in
+    polyPod directly.</li>
+  <li>For Android devices we may receive basic error and crash analytics
+    data from Google provided you have opted in to Google collecting this
+    data from your device. We only receive this data in aggregated form.</li>
+</ul>
+<h3>What
+  we use your data for</h3>
+<ul>
+  <li>For statistical analysis and for regular operation of our servers and
+    Websites.</li>
+  <li>To resolve technical issues and prevent spam or other attacks</li>
+  <li>Stored IP addresses and browser data are deleted after a maximum of 45
+    days. The data we use for statistical analysis is stored without any
+    reference to you personally.</li>
+</ul>
+<h3>Your
+  rights</h3>
+<p>You can always contact us and ask for...</p>
+<ul>
+  <li>Information</li>
+  <li>Correction</li>
+  <li>Deletion</li>
+  <li>Restriction of processing</li>
+  <li>Access</li>
+</ul>
+<p>...concerning the data stored about you, please contact us by email:
+  Artur Andretta (<a href="mailto:artur.andretta@port-zero.com"
+    rel="nofollow">artur.andretta@port-zero.com</a>).</p>
+<p><br>
+</p>
+<h1>Privacy
+  Policy - Detailed Version</h1>
+<h3>I. Name
+  and address of the responsible person</h3>
+<p>The person responsible within the meaning of the General Data Protection
+  Regulation and other national data protection laws of the member states as
+  well as other data protection regulations is:</p>
+<p style="margin-left: 30.0px;">pc polypoly coop SCE mbH<br>
+  ("The polypoly Cooperative")</p>
+<p style="margin-left: 30.0px;">Reichenberger Str. 121<br>
+  10999 Berlin<br>
+  Germany</p>
+<p>The controller\'s data protection officer is:</p>
+<p style="margin-left: 30.0px;">Port Zero GmbH<br>
+  Artur Andretta<br>
+  Paul-Lincke-Ufer 7e<br>
+  10999 Berlin<br>
+  Email: <a href="mailto:artur.andretta@port-zero.com"
+    rel="nofollow">artur.andretta@port-zero.com</a></p>
+<h3>II.
+  General information about data processing</h3>
+<h4>1.
+  Nature and extent of the collection and processing of personal data</h4>
+<p>In principle, we process the personal data of our users only insofar as
+  this is necessary to provide a functioning website and our content and
+  services. Personal data is collected and processed when you register for
+  our newsletter or mailing lists. Furthermore, we store data that arises
+  when using our service but only for statistical reasons, and in an
+  anonymised manner. A creation of profiles, tracking, or other evaluation
+  on the level of individual visitors does not take place.</p>
+<h4>2.
+  Legal basis for the processing of personal data</h4>
+<p>We obtain the consent of the data subject for processing of personal data
+  under Art. 6 para. 1 lit. a EU General Data Protection Regulation (GDPR)
+  as legal basis. Insofar as processing of personal data is required to
+  fulfill a legal obligation that is subject to polypoly, Art. 6 para. 1
+  lit. c GDPR as legal basis. If processing is necessary to safeguard the
+  legitimate interests of our company or a third party, and if the interest,
+  fundamental rights and fundamental freedoms of the data subject do not
+  outweigh the former interest, Art. 6 para. 1 lit. f GDPR as legal basis
+  for processing.</p>
+<h4>3. Data
+  deletion and storage duration</h4>
+<p>The personal data of the data subject will be deleted or blocked as soon
+  as the purpose of the storage is deleted. It may also be stored if
+  provided for by the European or national legislator in EU regulations,
+  laws or other regulations to which polypoly is subject. A blocking or
+  deletion of the data takes place also if a storage period prescribed by
+  the cited standards expires, unless there is a need for further storage of
+  the data for a contract conclusion, or a contract fulfilment. Details can
+  be found in the following sub-items.</p>
+<p><br>
+</p>
+<div>
+  <div>
+    <h3>III.
+      Provision of Web services and creation of log files</h3>
+    <h4>1.
+      Description and scope of data processing</h4>
+    <p>Each time you access our website, our system automatically collects
+      data and information from the computer system of the accessing
+      computer.</p>
+    <p>The following data will be collected:</p>
+    <ol>
+      <li>Information about polyPod version or the browser type and the
+        version used</li>
+      <li>The operating system of your computer</li>
+      <li>The Internet service provider you are using</li>
+      <li>The IP address of your computer</li>
+      <li>Date and time of access</li>
+      <li>Websites from which the user\'s system accesses our website
+        ("referrers")</li>
+      <li>Websites accessed by your system through our website</li>
+    </ol>
+    <p>The data is stored temporarily in the log files of our system, and
+      not stored together with other personal data.</p>
+    <h4>2. Purpose of
+      data processing</h4>
+    <p>The temporary storage of the IP address by the system is necessary to
+      enable delivery of the website to your computer. For this purpose, the
+      IP address of your computer must remain stored for the duration of the
+      session. Log files are stored to ensure the functionality of the
+      website and the security of our information technology systems. We do
+      not use IP addresses to identify you. The data is not evaluated for
+      marketing purposes.</p>
+    <h4>3. Legal
+      basis for data processing</h4>
+    <p>The legal basis for the temporary storage of data and log files is
+      Art. 6 para. 1 lit. f GDPR.</p>
+    <h4>4. Duration of storage</h4>
+    <p>The data will be deleted as soon as they are no longer necessary to
+      achieve the purpose for which they were collected.</p>
+    <ul>
+      <li>In the case of the collection of data to provide the website, this
+        is the case when the respective session is terminated.</li>
+      <li>If the IP address is stored in log files, this is the case after
+        45 days at the latest.</li>
+    </ul>
+    <h4>5.
+      Possibility of opposition and removal</h4>
+    <p>The collection of data for the provision of the website and the
+      storage of data in log files is mandatory for the operation of the
+      website. Consequently, there is no possibility of opposition.</p>
+  </div>
+</div>
+<div>
+  <h3>IV. Customer Service</h3>
+  <h4>1.
+    Description and scope of data processing</h4>
+  <p>You can contact the support team by e-mail. In this case, we will
+    process the data you provide to us as part of your inquiry to the extent
+    necessary for customer support.</p>
+  <h4>2. Purpose of
+    data processing</h4>
+  <ul>
+    <li>Customer service and answering other customer and user inquiries</li>
+    <li>Error analysis in order to solve technical problems</li>
+  </ul>
+  <h4>3. Legal
+    basis for data processing</h4>
+  <p>The legal basis for the processing of data for customer service
+    inquiries is the fulfillment of a contract pursuant to Art. 6 para. 1 b
+    DSGVO.</p>
+  <p>If requests are not based on a contract, the legal basis is the
+    safegarding of our legitimate interests pursuant to Art 6 para 1 lit f
+    DSGVO.</p>
+  <h4>4. Duration of storage</h4>
+  <p>All personal data transmitted to us in the context of customer support
+    will be automatically deleted six months after the last activity in the
+    respective support case, unless we are obliged to further storage due to
+    commercial and tax law reasons.</p>
+  <h4>5.
+    Possibility of opposition and removal</h4>
+  <p>You can contact us or our data protection officer at any time regarding
+    your personal data that you have transmitted to us. Further detailed
+    information about your rights can be found in the section "Rights of the
+    data subject" below.</p>
+  <div>
+    <div>
+      <h3>V. Data Processors</h3>
+      <p>Commissioned data processing only proceeds on the basis of a data
+        processing contract. We have entered such an agreement with all of
+        our Processors. </p>
+      <p>The following service providers will have access to your personal
+        data in whole or in part:</p>
+      <ul>
+        <li>Hetzner&nbsp;– We host our polyPod services and polypoly website
+          with our contract processor Hetzner Online GmbH, Industriestr. 25,
+          91710 Gunzenhausen, Germany. Connection data is processed for the
+          purpose of monitoring the technical function and increasing the
+          operational security of our server. - <a href="https://www.hetzner.de/rechtliches/datenschutz/"
+
+            rel="nofollow">https://www.hetzner.de/rechtliches/datenschutz/</a></li>
+        <li>polypoly&nbsp;– Our contract processor polypoly GmbH,
+          Reichenberger Str. 121, 10999 Berlin, Germany supports us with
+          various services, including the operation of polyPod services,
+          Website and e-mail service and finally the administrative services
+          related to customer support. - <a href="https://polypoly.com/en-gb/privacy-policy"
+
+            rel="nofollow">https://polypoly.com/en-gb/privacy-policy</a></li>
+        <li>sipgate&nbsp;– Our contract processor sipgate GmbH, Gladbacher
+          Str. 74, 40219 Düsseldorf, Germany is used to handle our incoming
+          and outgoing telephone calls with our members and/or interested
+          parties. Your data will also be stored there if you leave a
+          message on our answering machine. - <a href="https://www.sipgate.de/datenschutz"
+
+            rel="nofollow">https://www.sipgate.de/datenschutz</a></li>
+        <li>Kreuzwerker – Some of our customer service tools are hosted with
+          our contract processor kreuzwerker GmbH, Ritterstraße 12-14, 10969
+          Berlin, Germany - <a rel="nofollow">https://kreuzwerker.de/en/privacy-policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div>
+        <h3>VI.
+          Data processing when downloading the app</h3>
+        <p>When you download the application from the Google Play Store or
+          Apple App Store, your personal data gets processed by Google and
+          Apple, respectively. Among other things, this may include the
+          following data:</p>
+        <ul>
+          <li>information about your user account (e.g., user ID).</li>
+          <li>the information that the app has been downloaded and installed</li>
+          <li>which version of the app was installed</li>
+          <li>when the app was installed</li>
+          <li>the IP address from which the download was made</li>
+          <li>information about the devices on which the app was installed</li>
+          <li>depending on your settings, the above information may be used
+            to display personalized ads in the Play Store or App Store.</li>
+        </ul>
+        <p>The privacy policies of Google and Apple apply. You can find out
+          more details about them here:</p>
+        <ul>
+          <li>Google Play Store: <a href="https://policies.google.com/privacy?hl=en"
+
+              rel="nofollow">https://policies.google.com/privacy?hl=en</a></li>
+          <li>Apple App Store: <a href="https://www.apple.com/legal/privacy/en-ww/"
+
+              rel="nofollow">https://www.apple.com/legal/privacy/en-ww/</a></li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div>
+        <div>
+          <h3>VII.
+            Data deletion when uninstalling the app</h3>
+          <p>When uninstalling the application, our polyPod services will no
+            longer be available to you. The data stored on your device
+            during use will be deleted.</p>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div>
+            <h3>VIII.
+              Other transmission of data to third parties</h3>
+            <p>polypoly does not pass on any personal data to third parties
+              unless there is a legal obligation to do so. We do not sell or
+              market any personal data. </p>
+          </div>
+        </div>
+        <div>
+          <h3>IX. Rights
+            of the data subject</h3>
+          <p>If your personal data is processed by us, you are the data
+            subject within the meaning of the GDPR and you have the
+            following rights against us:</p>
+          <h4>1. Right to
+            information</h4>
+          <p>You may request confirmation from us as to whether personal
+            data relating to you will be processed by us.</p>
+          <p>In the event of such processing, you may request the following
+            information from us:</p>
+          <ol>
+            <li>the purposes for which the personal data are processed;</li>
+            <li>the categories of personal data processed;</li>
+            <li>the recipients or categories of recipients to whom the
+              personal data relating to you has been or will be disclosed;</li>
+            <li>the planned duration of the retention of the personal data
+              concerning you or, if it is not possible to provide specific
+              information in this regard, criteria for determining the
+              retention period;</li>
+            <li>the existence of a right to rectify or delete personal data
+              concerning you, a right to limit the processing by the
+              controller or a right to object to such processing;</li>
+            <li>the existence of a right of appeal to a supervisory
+              authority;</li>
+            <li>all available information on the origin of the data, if the
+              personal data is not collected from the data subject;</li>
+            <li>the existence of automated decision-making including
+              profiling in accordance with Article 22(1) and (4) GDPR and -
+              at least in these cases - meaningful information on the logic
+              involved and the scope and intended effects of such processing
+              for the data subject.</li>
+          </ol>
+          <p>You have the right to request information as to whether the
+            personal data concerning you will be transferred to a third
+            country or to an international organisation. In this context,
+            you may request to be informed of the relevant guarantees
+            pursuant to Art. 46 GDPR in connection with the transfer.</p>
+          <h4>2. Right to
+            rectification</h4>
+          <p>You have a right of rectification and/or integration with us if
+            the personal data processed concerning you is inaccurate or
+            incomplete. The person responsible must rectify the data without
+            delay.</p>
+          <h4>3.
+            Right of restriction of processing</h4>
+          <p>Under the following conditions, you may request that the
+            processing of your personal data be restricted:</p>
+          <ol>
+            <li>if you dispute the accuracy of the personally identifiable
+              information about you for a period of time that allows us to
+              verify the accuracy of the personally identifiable
+              information;</li>
+            <li>the processing is unlawful and you refuse to delete the
+              personal data and instead request the restriction of the use
+              of the personal data;</li>
+            <li>we no longer need the personal data for the purposes of
+              processing, but you need it to assert, exercise or defend
+              legal claims, or</li>
+            <li>if you have lodged an objection against the processing
+              pursuant to Art. 21 para. 1 GDPR and it has not yet been
+              established whether the legitimate reasons of the data
+              controller outweigh your reasons.</li>
+          </ol>
+          <p>Where the processing of personal data concerning you has been
+            restricted, such data may not be processed, with the exception
+            of their storage, without your consent or for the purpose of
+            asserting, exercising or defending rights or protecting the
+            rights of another natural or legal person or for reasons of an
+            important public interest of the Union or of a Member State. If
+            the processing restriction has been restricted in accordance
+            with the above conditions, you will be informed by us before the
+            restriction is lifted.</p>
+          <h4>4. Right to erasure</h4>
+          <h5>a)
+            Cancellation obligation</h5>
+          <p>You may request us to delete your personal information
+            immediately and we are obligated to delete that information
+            immediately for any of the following reasons:</p>
+          <ol>
+            <li>Personal data concerning you are no longer necessary for the
+              purposes for which they were collected or otherwise processed.</li>
+            <li>You revoke the consent on which the processing was based
+              pursuant to Art. 6 para. 1 lit. a or Art. 9 para. 2 lit. a
+              GDPR, and there is no other legal basis for the processing.</li>
+            <li>You object to the processing pursuant to Art. 21 (1) GDPR
+              and there are no overriding legitimate reasons for the
+              processing or you object to the processing pursuant to Art. 21
+              (2) GDPR.</li>
+            <li>The personal data concerning you have been processed
+              unlawfully.</li>
+            <li>The deletion of your personal data is necessary to fulfil a
+              legal obligation under Union law or the law of the Member
+              States to which we are subject.</li>
+            <li>The personal data concerning you have been collected in
+              relation to information society services offered pursuant to
+              Art. 8 Para. 1 GDPR.</li>
+          </ol>
+          <h5>b)
+            Information to third parties</h5>
+          <p>If the person responsible has made the personal data concerning
+            you public and is obliged to delete them in accordance with Art.
+            17 (1) GDPR, he shall take appropriate measures, including
+            technical measures, taking into account the available technology
+            and the implementation costs, to inform the persons responsible
+            for data processing who process the personal data that you, as
+            the person concerned, have requested them to delete all links to
+            this personal data or copies or replications of this personal
+            data.</p>
+          <h5>c) Exceptions</h5>
+          <p>The right to deletion does not exist if the processing is
+            necessary</p>
+          <ol>
+            <li>to the exercise of freedom of expression and of information;</li>
+            <li>to fulfil a legal obligation which the processing requires
+              under the law of the Union or of the Member States to which
+              the controller is subject or to perform a task carried out in
+              the public interest or in the exercise of official authority
+              vested in the controller;</li>
+            <li>on grounds of public interest in the field of public health
+              pursuant to Article 9(2)(h) and (i) and Article 9(3) GDPR;</li>
+            <li>for archival purposes in the public interest, scientific or
+              historical research purposes or for statistical purposes
+              pursuant to Art. 89 para. 1 GDPR, insofar as the law referred
+              to under section a) presumably makes it impossible or
+              seriously impairs the attainment of the objectives of such
+              processing, or</li>
+            <li>for the assertion, exercise or defence of legal claims.</li>
+          </ol>
+          <h4>5. Right to
+            information</h4>
+          <p>If you have exercised the right to correction, deletion or
+            limitation of processing against us, we are obliged to notify
+            all recipients to whom the personal data concerning you have
+            been disclosed of this correction, deletion or limitation of
+            processing, unless this proves impossible or involves
+            disproportionate effort.</p>
+          <p>You have the right to be informed about these recipients.</p>
+          <h4>6.
+            Right to data transferability</h4>
+          <p>You have the right to receive the personal data concerning you
+            that you have provided to us in a structured, common and
+            machine-readable format. In addition, you have the right to
+            communicate this data to another responsible person without
+            being hindered by the responsible person to whom the personal
+            data has been provided, provided that</p>
+          <ol>
+            <li>the processing is based on a consent pursuant to Art. 6
+              para. 1 lit. a GDPR or Art. 9 para. 2 lit. a GDPR or on a
+              contract pursuant to Art. 6 para. 1 lit. b GDPR and</li>
+            <li>processing is carried out using automated procedures.</li>
+          </ol>
+          <p>In exercising this right, you also have the right to request
+            that the personal data concerning you be transmitted directly by
+            one responsible person to another responsible person, insofar as
+            this is technically feasible. Freedoms and rights of other
+            persons must not be affected by this. The right to data transfer
+            does not apply to the processing of personal data necessary for
+            the performance of a task carried out in the public interest or
+            in the exercise of official authority vested in the controller.</p>
+          <h4>7. Right to object</h4>
+          <p>You have the right, for reasons arising from your particular
+            situation, to object at any time to the processing of personal
+            data concerning you on the basis of Art. 6 para. 1 lit. e or f
+            GDPR. We will no longer process your personal data unless we can
+            prove compelling reasons for the processing worthy of protection
+            which outweigh your interests, rights and freedoms, or the
+            processing serves the assertion, exercise or defence of legal
+            claims.</p>
+          <h4>8.
+            Right to withdraw data protection consent</h4>
+          <p>You have the right to revoke your privacy statement at any
+            time. The revocation of consent does not affect the legality of
+            the processing carried out on the basis of the consent until the
+            revocation.</p>
+          <h4>9.
+            Right of appeal to a supervisory authority</h4>
+          <p>Without prejudice to any other administrative or judicial
+            remedy, you have the right to complain to a supervisory
+            authority, in particular in the Member State where you reside,
+            at your place of work or at the place where the alleged
+            infringement is alleged, if you consider that the processing of
+            your personal data is in breach of the GDPR. The supervisory
+            authority with which the complaint was lodged will inform the
+            complainant of the status and outcome of the complaint,
+            including the possibility of a judicial remedy under Art. 78
+            GDPR.</p>
+          <p style="margin-left: 30.0px;">Berlin Commissioner for Data
+            Protection and Freedom of Information<br>
+            Maja Smoltczyk<br>
+            An der Urania 4-10<br>
+            10787 Berlin<br>
+            <a href="mailto:mailbox@datenschutz-berlin.de"
+              rel="nofollow">mailbox@datenschutz-berlin.de</a></p>
+          <div>
+            <div>
+              <h3>X.
+                Changes to our privacy policy</h3>
+              <p>We reserve the right to adapt this privacy policy for newer
+                versions of polyPod so that it always corresponds to the
+                current legal requirements or to implement changes to our
+                services in the data protection declaration, e.g. when
+                introducing new services. If we make material changes to
+                this&nbsp;privacy policy, we may notify you either by
+                prominently posting a notice of such changes or by directly
+                sending you a notification. We encourage you to review
+                this&nbsp;privacy policy&nbsp;frequently to be informed of
+                how we are protecting your information.</p>
+              <p>Last updated: 11 June 2021</p>
+            </div>
+          </div>
+          <div><br>
+          </div>
+          <p style="margin-left: 0px;"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+';
 
 "settings_terms_of_use_text" = '
 <p>These terms and conditions ("Terms", "Agreement") are an agreement between <strong>pc polypoly coop SCE mbH</strong> ("Mobile Application Developer", "us", "we" or "our") and you ("User", "you" or "your"). This Agreement sets forth the general terms and conditions of your use of the <strong>polyPod</strong> mobile application and any of its products or services (collectively, "Mobile Application" or "Services").</p>
