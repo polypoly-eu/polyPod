@@ -24,14 +24,14 @@ const DataStructureMiniStory = ({ data }) => {
     const dataBubblesLightColor = "#f7fafc";
     const [selectedFolder, setSelectedFolder] = useState(data[0].title);
 
-    const amountOfFiles = data.find(
-        (bubble) => bubble.title === selectedFolder
-    )?.count;
-
     const extendedDataStructure = [
         ...data,
         { title: "Total", count: totalFiles, value: totalFiles },
     ];
+
+    const amountOfFiles = extendedDataStructure.find(
+        (bubble) => bubble.title === selectedFolder
+    )?.count;
 
     const handleFolderSelected = (buttonContent) => {
         setSelectedFolder(buttonContent);
