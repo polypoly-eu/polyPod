@@ -76,7 +76,7 @@ const engineDecoder = Decode.type({
             try {
                 return Decode.success(new Range(string));
             } catch (err) {
-                return Decode.failure(string, err.message);
+                return Decode.failure(string, (err as Error).message);
             }
         })
     ),
