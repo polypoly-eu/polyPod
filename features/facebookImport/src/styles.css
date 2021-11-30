@@ -115,6 +115,7 @@ button:focus {
 }
 
 .source {
+    margin-top: 36px;
     color: var(--color-gray-400);
     font-size: 12px;
 }
@@ -123,4 +124,10 @@ strong {
     font-weight: 600;
     font-size: 18px;
     font-family: "Jost Medium";
+}
+
+.separator {
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-gray-400);
 }
