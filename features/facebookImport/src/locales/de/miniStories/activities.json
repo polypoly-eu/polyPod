@@ -1,6 +1,6 @@
 {
     "title": "Daten von Ihnen und über Sie",
-    "summary": "Seit Sie Facebook beigetreten sind, wurden von Ihnen diese {{number_activities}} Dateneinträge mit Uhrzeit und Datum erfasst:",
+    "summary": "Seit Sie Facebook beigetreten sind, wurden von Ihnen {{number_activities}} Dateneinträge mit Uhrzeit und Datum erfasst.",
     "tab.year": "Jahr",
     "tab.total": "Gesamt",
     "tab.events.total": "Einträge ({{number_events}} gesamt)",
