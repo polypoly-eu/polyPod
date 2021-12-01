@@ -1,5 +1,6 @@
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
+    ExternalFile,
     Info,
     Matcher,
     Network,
@@ -380,7 +381,7 @@ class BrowserPolyNav implements PolyNav {
         document.title = title;
     }
 
-    async pickFile(type?: string): Promise<string | null> {
+    async pickFile(type?: string): Promise<ExternalFile | null> {
         return new Promise((resolve) => {
             const fileInput = document.createElement("input");
             fileInput.setAttribute("type", "file");
@@ -398,7 +399,11 @@ class BrowserPolyNav implements PolyNav {
                 const reader = new FileReader();
                 reader.onload = async function () {
                     const dataUrl = this.result as string;
-                    resolve(FileUrl.fromParts(dataUrl, selectedFile.name).url);
+                    resolve({
+                        name: selectedFile.name,
+                        url: FileUrl.fromParts(dataUrl, selectedFile.name).url,
+                        size: selectedFile.size,
+                    });
                 };
                 reader.readAsDataURL(selectedFile);
             });

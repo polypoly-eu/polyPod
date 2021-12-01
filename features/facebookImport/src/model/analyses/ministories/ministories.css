@@ -7,3 +7,7 @@
     margin-bottom: 3px;
     letter-spacing: -0.01em;
 }
+
+.messages-info-button {
+    bottom: 50px;
+}

@@ -38,7 +38,10 @@ private func createFixture(
         "description": "description",
         "thumbnail": "\(withThumbnail ? thumbnailFileName : "")",
         "primaryColor": "#0000ff",
-        "links": { "example": "https://example.com" },
+        "links": {
+            "example": "https://example.com",
+            "uk-example": "https://example.co.uk"
+        },
         "translations": {
             "de": {
                 "description": "description_de",
@@ -95,6 +98,14 @@ class FeatureTests: XCTestCase {
         XCTAssertEqual(
             "https://example.de",
             feature.findUrl(target: "example")
+        )
+    }
+    
+    func testNonTranslatedLinkAccessWorks() {
+        let feature = createFixture(languageCode: "de")
+        XCTAssertEqual(
+            "https://example.co.uk",
+            feature.findUrl(target: "uk-example")
         )
     }
     

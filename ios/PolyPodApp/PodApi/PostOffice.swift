@@ -105,7 +105,12 @@ extension PostOffice {
         
         for arg in args {
             guard let extendedData = arg as? ExtendedData else {
-                completionHandler(nil, MessagePackValue("Bad data"))
+                let message = """
+                    Bad argument data: \(arg)
+                    \(Thread.callStackSymbols.joined(separator: "\n"))
+                """
+                print(message)
+                completionHandler(nil, MessagePackValue(message))
                 return extendedDataSet
             }
             
@@ -370,8 +375,8 @@ extension PostOffice {
     
     private func handlePolyNavPickFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let type = args[0] as? String
-        PodApi.shared.polyNav.pickFile(type: type) { url in
-            completionHandler(url == nil ? nil : .string(url!), nil)
+        PodApi.shared.polyNav.pickFile(type: type) { externalFile in
+            completionHandler(externalFile == nil ? nil : externalFile?.messagePackObject, nil)
         }
     }
 }

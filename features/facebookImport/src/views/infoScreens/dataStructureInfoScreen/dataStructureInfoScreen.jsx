@@ -12,10 +12,10 @@ const DataStructureInfoScreen = () => {
                 <strong>{i18n.t("dataStructureInfoScreen:legend")}</strong>
             </p>
             <Infographic
-                type="dataStructureBubbles"
+                type="bubblesChartInfoScreen"
                 texts={{
-                    text1: i18n.t("infographics:dataStructureBubbles.text1"),
-                    text2: i18n.t("infographics:dataStructureBubbles.text2"),
+                    text1: i18n.t("infographics:bubblesChartInfoScreen.text1"),
+                    text2: i18n.t("infographics:bubblesChartInfoScreen.text2"),
                 }}
             />
             <p
@@ -27,12 +27,7 @@ const DataStructureInfoScreen = () => {
         <p>{i18n.t("dataStructureInfoScreen:text3")}</p>,
     ];
 
-    return (
-        <InfoScreen
-            child1={dataStructureInfoText[0]}
-            child2={dataStructureInfoText[1]}
-        />
-    );
+    return <InfoScreen infoChildren={dataStructureInfoText} />;
 };
 
 export default DataStructureInfoScreen;

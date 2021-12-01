@@ -1,0 +1,5 @@
+{
+    "text1": "The polyPod importer detected that the data you have downloaded from Facebook includes at least one picture in an album. We are not analysing those photos, but since Facebook might do, we want to inform you about possible impacts.",
+    "text2": "The examples we are presenting here are based on media articles, research papers, and even documents published by Facebook itself. We cannot prove what Facebook is doing with your photos, but we want to give you a better sense of what is possible.",
+    "text3": "At the moment we do not import posts and albums, therefore we count only the number of picture files in the folder \"photos_and_videos\" for this analysis. This is the folder that stores images (files with extensions jpg or jpeg) if a user posted a picture. Please note, that photos might also exist in other places in the dataset, that we do not use or know yet."
+}

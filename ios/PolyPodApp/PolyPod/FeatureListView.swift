@@ -122,7 +122,7 @@ private struct FeatureCard: View {
             .background(Color.white)
         }
         .frame(maxWidth: .infinity)
-        .background(feature.primaryColor)
+        .background(feature.thumbnailColor)
         .cornerRadius(15)
         .overlay(
             RoundedRectangle(cornerRadius: 15)

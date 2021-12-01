@@ -3,6 +3,7 @@
     "author": "polypoly Cooperative",
     "description": "Your polyPod is constantly being improved. If you want to know what's planned, here is a preview.",
     "thumbnail": "images/thumbnail.png",
+    "thumbnailColor": "#fb8a89",
     "primaryColor": "#fff5f5",
     "links": {
         "membership": "https://polypoly.coop/en-de/membership"

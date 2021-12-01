@@ -1,5 +1,5 @@
 <svg width="255" height="223" viewBox="0 0 255 223" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="dataStructureBubbles">
+<g id="bubblesChartInfoScreen">
 <g id="text2">
 <rect x="155" width="54" height="16" rx="2" fill="#F7FAFC" fill-opacity="0.7"/>
 <text id="Category" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="159.316" y="12.17">Category</tspan></text>
@@ -21,6 +21,6 @@
 <rect x="37" y="194" width="91" height="29" rx="2" fill="#F7FAFC" fill-opacity="0.7"/>
 <text id="Total value for this category.     " fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="41" y="206.17">Total value for </tspan><tspan x="41" y="220.17">this category</tspan></text>
 </g>
-<text id="725" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="12" font-weight="500" letter-spacing="-0.01em"><tspan x="66.5966" y="99.67">725</tspan></text>
+<text id="725" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="66.5966" y="99.67">725</tspan></text>
 </g>
 </svg>

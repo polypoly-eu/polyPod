@@ -1,8 +1,10 @@
 .datepicker {
     height: 50px;
     width: 100%;
+    margin: auto;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .datepicker button {
@@ -11,17 +13,21 @@
 }
 
 .datepicker .arrow {
-    width: 20px;
     height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    font-size: 14px;
+    color: var(--color-gray-400);
     align-items: center;
 }
 
 .datepicker .year {
+    position: absolute;
     display: flex;
-    height: 100%;
+    width: 100%;
+    height: 50px;
     flex: 1 1 auto;
     justify-content: center;
     align-items: center;
+    pointer-events: none 
 }

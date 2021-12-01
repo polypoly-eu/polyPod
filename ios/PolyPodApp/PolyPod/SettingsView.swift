@@ -40,7 +40,7 @@ struct SettingsView: View {
             case .imprint:
                 HTMLView(text: "settings_imprint_text")
             case .privacyPolicy:
-                HTMLView(text: "settings_privacy_policy_text")
+                PrivacyPolicyView()
             case .termsOfUse:
                 HTMLView(text: "settings_terms_of_use_text")
             case .licenses:
@@ -148,6 +148,23 @@ private struct SettingsButton: View {
                 .font(.custom("Jost-Regular", size: 18))
                 .kerning(-0.18)
         }.padding(.leading, 32)
+    }
+}
+
+private struct PrivacyPolicyView: View {
+    var body: some View {
+        HTMLView(content: loadPrivacyPolicyText())
+    }
+    
+    private func loadPrivacyPolicyText() -> String {
+        let url = Bundle.main.bundleURL
+            .appendingPathComponent("legal")
+            .appendingPathComponent(Language.current)
+            .appendingPathComponent("privacy-policy.html")
+        guard let content = try? String(contentsOf: url) else {
+            return ""
+        }
+        return content.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 

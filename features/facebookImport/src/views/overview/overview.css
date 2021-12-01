@@ -13,6 +13,16 @@
     box-sizing: border-box;
     overflow: hidden;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.overview .overview-title {
+    max-width: 320px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28.8px;
+    margin: 0 0 16px 0;
 }
 
 .overview h3,
@@ -29,65 +39,39 @@ h4 {
     font-size: 16px;
 }
 
-.overview p {
-    margin: 0px;
-    font-size: 14;
-}
-
-.overview .details h1 {
-    font-size: 20px;
-    margin: 4px 0px !important;
-}
-
-.overview .details p {
-    font-size: 14px;
-}
-
-.overview .details .size {
-    color: var(--color-gray-400);
-}
-
-.overview .details .separator {
-    width: 100%;
-    height: 1px;
-    box-sizing: border-box;
-    background-color: var(--color-gray-400);
-    margin: 20px 0px 16px;
-}
-
-.overview .imported-files {
-    overflow-y: scroll;
-    height: 100%;
-}
-
-.overview .imported-files .align-illustration {
+.overview .bubble-cluster {
     display: flex;
-    align-items: flex-start;
-    margin-top: 4px;
+    overflow: hidden;
+    flex-grow: 1;
 }
 
-.overview .imported-files .align-illustration h4 {
-    padding-left: 12px;
+.overview .bubble-cluster svg {
+    flex-grow: 1;
+}
+
+.overview p {
+    margin: 0;
+}
+
+.overview .details {
+    color: var(--color-gray-400);
+    font-size: 12px;
+}
+
+.overview .details .inline-block p {
+    display: inline-block;
+    margin-right: 8px;
 }
 
 .overview .footer {
     width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
     box-sizing: border-box;
 }
 
-.overview .footer .overlay {
-    background: linear-gradient(180deg, #0f1938 0%, rgba(15, 25, 56, 0) 100%);
-    transform: rotate(-180deg);
-    height: 93px;
-}
-
 .overview .footer .btn-holder {
-    padding: 0 16px 24px 16px;
+    padding-top: 16px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
     width: 100%;
     background-color: var(--background-dark);
     box-sizing: border-box;
@@ -96,10 +80,8 @@ h4 {
 .overview .footer .btn-holder .btn {
     height: 48px;
     display: flex;
-    flex: 1 1 0;
     justify-content: center;
     align-items: center;
-    padding: 4px 16px;
     border-radius: 4px;
     font-weight: 600;
     font-size: 18px;
@@ -109,7 +91,7 @@ h4 {
 .overview .footer .btn-holder .btn.primary {
     background-color: var(--color-gray-50);
     color: var(--color-indigo-950);
-    margin-right: 16px;
+    margin-top: 16px;
 }
 
 .overview .footer .btn-holder .btn.secondary {
