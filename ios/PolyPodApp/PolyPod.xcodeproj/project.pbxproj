@@ -154,6 +154,7 @@
 		E9F370DD262EE9EE006254C1 /* WidthReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370DC262EE9EE006254C1 /* WidthReader.swift */; };
 		E9F370E1262EEB2C006254C1 /* ParagraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370E0262EEB2C006254C1 /* ParagraphView.swift */; };
 		E9F370E7262EEF13006254C1 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370E6262EEF13006254C1 /* UIColorExtensions.swift */; };
+		E9F68ED227580A0B009ED2C1 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E996EBD12756BBE900EAC9F7 /* Log.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -808,6 +809,7 @@
 				1ABADBF224EE70B500369791 /* DataFactory.swift in Sources */,
 				1ABADBFC24EE710B00369791 /* Quad+CoreDataProperties.swift in Sources */,
 				E9545ECA27359C38001E8C7F /* UserDefaultsExtensions.swift in Sources */,
+				E9F68ED227580A0B009ED2C1 /* Log.swift in Sources */,
 				1ABADBF424EE70E700369791 /* LocationTracker.swift in Sources */,
 				1ABADBF724EE710B00369791 /* NamedNode+CoreDataClass.swift in Sources */,
 				1ABADC0724EE717000369791 /* Bubblewrap.swift in Sources */,
