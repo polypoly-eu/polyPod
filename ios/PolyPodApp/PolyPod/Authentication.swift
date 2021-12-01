@@ -75,7 +75,7 @@ class Authentication {
             localizedReason: NSLocalizedString(reason, comment: "")
         ) { (success, error) in
             if !success {
-                print("Authentication failed: \(String(describing: error))")
+                Log.error("Authentication failed: \(String(describing: error))")
             }
             completeAction(success)
         }

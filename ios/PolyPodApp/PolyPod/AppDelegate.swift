@@ -11,7 +11,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let defaults = UserDefaults.standard
         if defaults.bool(forKey: UserDefaults.Keys.resetUserDefaults.rawValue) {
-            print("Resetting all user defaults")
+            Log.info("Resetting all user defaults")
             UserDefaults.standard.reset()
         }
         
@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let managedContext = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
         let count = try! managedContext.count(for: fetchRequest)
-        print("Number of quads in Core Data:", count)
+        Log.debug("Number of quads in Core Data: \(count)")
         
         self.registerUpdateNotificationCheck()
         
@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func handleUpdateNotificationCheck(_ task: BGTask) {
         task.expirationHandler = {
-            print("Update notification check expired")
+            Log.error("Update notification check expired")
             task.setTaskCompleted(success: false)
         }
         
@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.add(request) { error in
             if error != nil {
-                print("Error showing update notification: \(error!.localizedDescription)")
+                Log.error("Error showing update notification: \(error!.localizedDescription)")
             }
         }
     }
@@ -163,7 +163,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             try BGTaskScheduler.shared.submit(task)
         } catch {
-            print("Failed to schedule task \(AppDelegate.updateNotificationCheckIdentifier): \(error.localizedDescription)")
+            Log.error("Failed to schedule task \(AppDelegate.updateNotificationCheckIdentifier): \(error.localizedDescription)")
         }
     }
 }

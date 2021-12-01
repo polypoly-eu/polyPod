@@ -122,7 +122,7 @@ struct FeatureView: View {
             return
         }
         guard let url = URL(string: urlString) else {
-            print("Error: Invalid URL format: \(urlString)")
+            Log.error("openUrl: Invalid URL format: \(urlString)")
             return
         }
         let alert = UIAlertController(
