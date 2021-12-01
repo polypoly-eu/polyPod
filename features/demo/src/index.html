@@ -7,6 +7,10 @@
         <script src="pod.js"></script>
         <script src="demo.js"></script>
         <style>
+            body {
+                background: white;
+            }
+
             button {
                 display: block;
                 margin-top: 20px;
@@ -19,5 +23,12 @@
             Provoke multiple unhandled errors async
         </button>
         <button class="unhandled-rejection">Provoke unhandled rejection</button>
+        <hr>
+        <div>
+            <label>Wasted memory (MB):</label>
+            <span class="wasted-memory">0</span>
+        </div>
+        <button class="reserve-10-mb">Reserve 10 MB of memory</button>
+        <button class="reserve-100-mb">Reserve 100 MB of memory</button>
     </body>
 </html>

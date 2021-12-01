@@ -6,6 +6,7 @@ import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import i18n from "../../i18n.js";
 import { useHistory } from "react-router";
+import { formatTime } from "../../utils/formatTime.js";
 
 import "./overview.css";
 
@@ -43,21 +44,6 @@ const Overview = () => {
     bubbleData.sort(function (a, b) {
         return b.value - a.value;
     });
-
-    const getFormattedTime = (time) => {
-        let t = new Date(1970, 0, 1);
-        t.setUTCSeconds(+time);
-
-        // for testing in browser, where 'time' is a real date, use instead of the above this one:
-        // const t = new Date(time);
-
-        const options = {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-        };
-        return t.toLocaleDateString(i18n.t("overview:time.format"), options);
-    };
 
     const formatSize = (size) => {
         const k = 1024;
@@ -97,11 +83,13 @@ const Overview = () => {
                         showValues={false}
                     />
                     <div className="details">
-                        <p>{files[0].name}</p>
+                        <p>
+                            {i18n.t("overview:file")} {files[0].name}
+                        </p>
                         <div className="inline-block">
                             <p>
                                 {i18n.t("overview:imported.time")}{" "}
-                                {getFormattedTime(files[0].time)}
+                                {formatTime(files[0].time)}
                             </p>
                             <p>
                                 {i18n.t("overview:size")}{" "}
@@ -145,7 +133,7 @@ const Overview = () => {
             )}
             {showNewImportDialog ? (
                 <PolypolyDialog
-                    message={i18n.t("overview:new.import.dialog")}
+                    title={i18n.t("overview:new.import.dialog")}
                     backButton={{
                         text: i18n.t("overview:new.import.dialog.back"),
                         onClick: () => setShowNewImportDialog(false),

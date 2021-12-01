@@ -4,9 +4,9 @@
     text-align: center;
     width: 100%;
     max-width: var(--max-width);
-    height: 60px;
+    height: 80px;
     right: 0;
-    bottom: 62px;
+    bottom: 88px;
     position: fixed;
 }
 

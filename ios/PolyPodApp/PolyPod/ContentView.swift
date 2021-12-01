@@ -99,6 +99,15 @@ struct ContentView: View {
             AnyView(
                 Text("").onAppear {
                     authenticateRelentlessly {
+                        // Checking whether a notification needs to be shown
+                        // used to be in featureListState, where it makes more
+                        // sense, but ever since we added a dedicated
+                        // lockedState, they wouldn't show up anymore, the
+                        // state change in featureListState's onAppear did not
+                        // trigger a rerender, even though it should.
+                        // Yet another SwiftUI bug it seems...
+                        showUpdateNotification = UpdateNotification().showInApp
+                        
                         state = featureListState()
                     }
                 }
@@ -137,9 +146,7 @@ struct ContentView: View {
                     openSettingsAction: {
                         state = settingsState()
                     }
-                ).onAppear {
-                    showUpdateNotification = notification.showInApp
-                }.alert(isPresented: $showUpdateNotification) {
+                ).alert(isPresented: $showUpdateNotification) {
                     Alert(
                         title: Text(notification.title),
                         message: Text(notification.text),

@@ -1,12 +1,12 @@
 {
-    "id": 80208905,
+    "id": 80989465,
     "pushDelay": 120,
     "title": {
-        "en": "Update notification test",
-        "de": "Update-Benachrichtigungstest"
+        "en": "Your polyPod just got better!",
+        "de": "Ihr polyPod wurde gerade mächtiger!"
     },
     "text": {
-        "en": "This is a test for our update notification system - if you see this message more than once, please report it to us.",
-        "de": "Dies ist ein Test für unser Update-Benachrichtigungssystem. Wenn Sie diese Nachricht mehr als einmal sehen, melden Sie es uns bitte."
+        "en": "Your polyPod can now import and analyse your Facebook data. Learn what Facebook hides from you!",
+        "de": "Ihr polyPod kann jetzt Facebook Daten importieren und analysieren. Lernen Sie, was Facebook nicht von selbst zeigt!"
     }
 }

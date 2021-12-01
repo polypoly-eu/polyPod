@@ -1,8 +1,8 @@
 {
-    "text1": "These diagrams show the number of companies that share your activities on their websites and apps back with Facebook and the types of activities they share.",
-    "text2": "This diagram is called a <strong>bar chart</strong>. The length of each bar is proportional to the values that it represents.",
-    "text3": "The polyPod importer detected that you have at least one so-called off Facebook event in your Facebook data.",
-    "text4": "Off Facebook events are information about your behavior (e.g. login or purchase) in an app or on a website outside of Facebook, which is reported back to Facebook by the companies running those apps or websites. They usually do this to optimize their own advertising, sales, and analytics.",
-    "text5": "For this analysis, we use a distinct file about off Facebook events in your dataset, which contains information about time, type, and also about company names or URLs.",
-    "text6": "On Facebook events are drawn from a file that lists items you have recently viewed. From that, we currently import the part about ads and extract the senders (URLs/ company names), so that we can find the companies which appear in off and on Facebook events."
+    "text1": "Diese Diagramme zeigen die Anzahl der Firmen, welche Ihre Aktivitäten auf deren Websites oder in deren Apps zurück an Facebook melden und die verschiedene Arten an Aktivitäten die dabei unterschieden werden.",
+    "text2": "Dieses Diagramm heißt <strong>Balkendiagramm</strong>. Die Länge jedes Balkens ist proportional zu dem Wert, den er darstellt.",
+    "text3": "Der Facebook-Daten Importer hat erkannt, dass Ihre Facebook-Daten mindestens einen sogenannten Off-Facebook Event beinhalten.",
+    "text4": "Off-Facebook Events sind Informationen über Ihr Verhalten (z. B. Logins oder Einkäufe) in Apps oder auf Webseiten außerhalb von Facebook, welche von den Firmen, die diese Websiten oder Apps betreiben, an Facebook zurück gemeldet werden. Die Firmen tun das in der Regel, um Ihre eigenen Werbeanzeigen, Verkäufe oder Analysen zu verbessern.",
+    "text5": "Für diese Analyse nutzen wir eine Datei aus Ihren Facebook-Daten, die genau diese Off-Facebook Events enthält. Sie enthält Angaben über Zeitpunkt, Art der Aktivität, sowie Firmennamen oder Webadressen.",
+    "text6": "On-Facebook Events ermitteln wir aus einer Daten in Ihren Facebook-Daten, welche Inhalte auflistet, die Sie angeschaut haben. Dafür importieren wir derzeit den Teil über gesehene Werbeanzeigen und ermitteln den Absender (Firmenname, Webadresse). So können wir Firmen finden, die in Ihren On- und Off-Facebook Events erscheinen."
 }

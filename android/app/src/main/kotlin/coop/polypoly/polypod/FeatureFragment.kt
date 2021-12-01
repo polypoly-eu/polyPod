@@ -94,7 +94,7 @@ open class FeatureFragment : Fragment() {
     private val errorDialog: AlertDialog by lazy {
         AlertDialog.Builder(context)
             .setPositiveButton(
-                context?.getString(R.string.button_acknowledge)
+                context?.getString(R.string.button_feature_error_close)
             ) { _, _ ->
                 close()
             }
@@ -160,8 +160,11 @@ open class FeatureFragment : Fragment() {
 
     @Suppress("unused")
     private fun handleError(error: String) {
-        val featureErrorMessage =
-            context?.getString(R.string.feature_error, feature.name, error)
+        val featureErrorMessage = context?.getString(
+            R.string.message_feature_error,
+            feature.name,
+            error
+        )
         if (errorDialog.isShowing) return
         errorDialog.setMessage(featureErrorMessage)
         errorDialog.show()

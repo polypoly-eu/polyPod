@@ -11,8 +11,8 @@
     "request.1": "To import your data to your polyPod you need to request it from Facebook first.",
     "request.2": "Go to facebook.com/dyi.",
     "request.3": "The browser will then ask you whether you want to continue with the browser version or to use your mobile app in case you have it installed. Select to continue with the browser.",
-    "request.4": "On the Facebook page scroll down and change the file format to ‘JSON' and the media quality to ‘Low’, then request the file. You will get an email confirmation of your request.",
-    "request.info.1": "You will need your login details at a hand",
+    "request.4": "On the Facebook page scroll down and change the file format to ‘JSON' and the media quality to ‘Low’, then request the file. Also make sure you select 'All Time' to get all of your data. You will get an email confirmation of your request.",
+    "request.info.1": "You will need your login details at hand",
     "request.info.2": "IMPORTANT: Now you need to wait for the email notification by Facebook that your data is available for download, which can take up to 24 hours.",
     "request.button": "Make your request",
     "request.example.data": "Use example data",
@@ -33,6 +33,8 @@
     "import.name": "Name:",
     "import.size": "Size:",
     "importing.data": "Your data is being imported",
-    "explore.1": "After you have imported your Facebook data to your polyPod you can explore it and see what Facebook really knows about you.",
-    "explore.button": "Start exploring"
+    "explore.1": "After you have imported your Facebook data to your polyPod you can explore it and see what Facebook really knows about you. If you want to be extra cautious with the data on your phone, you can safely delete the downloaded zip archive now.",
+    "explore.button": "Start exploring",
+    "file.too.big.dialog.title": "The file you selected is too big.",
+    "file.too.big.dialog.message": "Please pick one that is smaller than {{max_file_size}}. You can reduce the file size by requesting a shorter timespan from Facebook or as an alternative use our example data sets."
 }

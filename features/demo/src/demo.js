@@ -27,4 +27,39 @@ window.addEventListener("DOMContentLoaded", () => {
                 reject(error);
             });
         });
+
+    (function() {
+        let wastedMemory = "";
+
+        function wasteMemory(mb) {
+            let oneMbString = "";
+            for (i = 0; i < 1024 * 1024; i++)
+                oneMbString += Math.floor(Math.random() * 10);
+            for (i = 0; i < mb; i++)
+                wastedMemory += oneMbString;
+        }
+
+        function updateWastedMemory() {
+            document.querySelector(".wasted-memory")
+                .innerText = wastedMemory.length / 1024 / 1024;
+        }
+
+        document
+            .querySelector(".reserve-10-mb")
+            .addEventListener("click", function () {
+                this.disabled = true;
+                wasteMemory(10);
+                updateWastedMemory();
+                this.disabled = false;
+            });
+
+        document
+            .querySelector(".reserve-100-mb")
+            .addEventListener("click", function () {
+                this.disabled = true;
+                wasteMemory(100);
+                updateWastedMemory();
+                this.disabled = false;
+            });
+    })();
 });

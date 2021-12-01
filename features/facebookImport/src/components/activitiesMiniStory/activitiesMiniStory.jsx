@@ -199,7 +199,7 @@ export const ActivitiesMiniStoryDetails = ({ totalEvents }) => {
                 />
                 <p className="below-chart">
                     {activeTab.id == "total"
-                        ? "Years since you joined Facebook"
+                        ? i18n.t("common:total.years")
                         : selectedYear}
                 </p>
             </div>

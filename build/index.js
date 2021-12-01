@@ -262,9 +262,13 @@ async function main() {
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
 
+    if (!["list", "list-deps", "clean"].includes(command)) {
+        logDetail(`👷👷‍♀️ ...`);
+        await npm("ci", "--no-update-notifier", "--no-fund");
+    }
+
     if (command === "lint") {
         logDetail(`🧹 ...`);
-        await npm("ci", "--no-update-notifier", "--no-fund");
         await executeProcess("npx", ["eslint", ...eslintOptions]);
         logSuccess(command);
         return 0;

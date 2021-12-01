@@ -1,11 +1,11 @@
 {
-    "text1": "This Diagram shows two types of data from your Facebook dataset - the so-called on and off Facebook events - in relation to one company over the last 90 days prior to downloading the data. While your data can easily contain hundreds or thousands of such events, we picked up to three examples for now to give you a sense of different patterns.",
+    "text1": "This Diagram shows two types of data from your Facebook dataset – the so-called on and off Facebook events – in relation to one company over the last 90 days prior to downloading the data. While your data can easily contain hundreds or thousands of such events, we picked up to three examples for now to give you a sense of different patterns.",
     "text2": "This diagram is a <strong>bar chart</strong>, but also a timeline. It lists events per day and indicates the number of events per day by the length of the bars.",
     "text3": "Please note that we show the two types of events separately here to give you a sense of the pattern but also to underline that the data does not prove causality between them.",
-    "text4": "The polyPod importer detected that you have at least one so-called off Facebook event in your Facebook data.",
-    "text5": "Off Facebook events are information about your behavior (e.g. login or purchase) in an app or on a website outside of Facebook, which is reported back to Facebook by the companies running those apps or websites. They usually do this to optimize their own advertising, sales, and analytics.",
+    "text4": "The Facebook data importer detected that you have at least one so-called off Facebook event in your Facebook data.",
+    "text5": "Off Facebook events are information about your behaviour (e.g. login or purchase) in an app or on a website outside of Facebook, which is reported back to Facebook by the companies running those apps or websites. They usually do this to optimise their own advertising, sales, and analytics.",
     "text6": "For this analysis, we use a distinct file about off Facebook events in your dataset, which contains information about time, type, and also about company names or URLs.",
     "text7": "On Facebook, events are drawn from a file that lists items you have recently viewed. From that, we currently import the part about ads and extract the senders (URLs/ company names), so that we can find the companies which appear in off and on Facebook events.",
-    "text8": "We only analyze the data from the last 90 days prior to your export since it seems that on Facebook events are only stored for that period of time.",
+    "text8": "We only analyse the data from the last 90 days prior to your export since it seems that on Facebook events are only stored for that period of time.",
     "text9": "While your data can easily contain hundreds or thousands of such events, we picked up to three examples for now to give you a sense of different patterns."
 }

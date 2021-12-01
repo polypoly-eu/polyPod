@@ -43,8 +43,8 @@ class Authentication {
             }
 
             val promptInfo = BiometricPrompt.PromptInfo.Builder()
-                .setTitle(activity.getString(R.string.auth_title))
-                .setSubtitle(activity.getString(R.string.auth_subtitle))
+                .setTitle(activity.getString(R.string.auth_prompt_title))
+                .setSubtitle(activity.getString(R.string.auth_prompt_subtitle))
                 .setAllowedAuthenticators(desiredLockScreenType)
                 .build()
 
@@ -72,7 +72,7 @@ class Authentication {
             super.onAuthenticationSucceeded(result)
             Toast.makeText(
                 context,
-                context.getString(R.string.auth_success),
+                context.getString(R.string.auth_prompt_success),
                 Toast.LENGTH_SHORT
             ).show()
             authComplete(true)
