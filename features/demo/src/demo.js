@@ -33,9 +33,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
         function wasteMemory(mb) {
             let oneMbString = "";
-            for (i = 0; i < 1024 * 1024; i++)
+            for (let i = 0; i < 1024 * 1024; i++)
                 oneMbString += Math.floor(Math.random() * 10);
-            for (i = 0; i < mb; i++) wastedMemory += oneMbString;
+            for (let i = 0; i < mb; i++) wastedMemory += oneMbString;
         }
 
         function updateWastedMemory() {
