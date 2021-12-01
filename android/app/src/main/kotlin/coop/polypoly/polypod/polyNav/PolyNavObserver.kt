@@ -1,10 +1,10 @@
 package coop.polypoly.polypod.polyNav
 
-import android.net.Uri
+import coop.polypoly.polypod.ExternalFile
 
 class PolyNavObserver(
     val onActionsChanged: ((List<String>) -> Unit)? = null,
     val onTitleChanged: ((String) -> Unit)? = null,
     val onOpenUrl: ((String) -> Unit)? = null,
-    val onPickFile: (suspend (String?) -> Uri?)? = null
+    val onPickFile: (suspend (String?) -> ExternalFile?)? = null
 )

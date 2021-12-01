@@ -50,18 +50,18 @@ import MinistoriesStatusAnalysis from "./analyses/report/ministories-status-anal
 const subAnalyses = [
     DataStructureBubblesAnalysis,
     ActivitiesAnalysis,
+    PostReactionsTypesAnalysis,
     MessagesAnalysis,
-    OnOffFacebookEventsAnalysis,
     AboutPicturesDataAnalysis,
     AdvertisingValueAnalysis,
+    OnOffFacebookEventsAnalysis,
+    ConnectedAdvertisersAnalysis,
 
-    PostReactionsTypesAnalysis,
     ExportTitleAnalysis,
     ExportSizeAnalysis,
     DataChartsAnalysis,
     DataGroupsAnalysis,
     JsonFilesBubblesAnalysis,
-    ConnectedAdvertisersAnalysis,
     InteractedWithAdvertisersAnalysis,
     AdInterestsAnalysis,
     OffFacebookEventsTypesChartAnalysis,
@@ -95,6 +95,18 @@ const subAnalyses = [
     // them before too long - or show them behind some kind of flag, or
     // developer mode.
     return ![
+        DataChartsAnalysis,
+        InteractedWithAdvertisersAnalysis,
+        OffFacebookEventsTypesChartAnalysis,
+        MessagesDetailsAnalysis,
+        EmailAddressesAnalysis,
+        SearchesAnalysis,
+        FriendsAnalysis,
+        ReceivedFriendRequestsAnalysis,
+        PagesOverviewAnalysis,
+        SesssionActivityLocationsAnalysis,
+        AdViewsAnalysis,
+        OnOffFacebookAdvertisersAnalysis,
         ExportTitleAnalysis,
         ExportSizeAnalysis,
         DataGroupsAnalysis,
@@ -242,6 +254,6 @@ export async function analyzeZip(zipData, zipFile, facebookAccount, pod) {
 }
 
 export async function analyzeFile(zipData, facebookAccount) {
-    const zipFile = new ZipFile(zipData, window.pod);
+    const zipFile = await ZipFile.createWithCache(zipData, window.pod);
     return await analyzeZip(zipData, zipFile, facebookAccount, window.pod);
 }

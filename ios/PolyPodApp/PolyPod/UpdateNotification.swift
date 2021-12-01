@@ -89,9 +89,7 @@ class UpdateNotification {
         private static func readLocalizedValue(
             _ values: [String: String]
         ) -> String {
-            let defaultLanguage = "en"
-            let userLanguage = Locale.current.languageCode ?? defaultLanguage
-            return values[userLanguage] ?? values[defaultLanguage]!
+            return values[Language.current] ?? values[Language.fallback]!
         }
         
         let id: Int

@@ -98,23 +98,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let container = NSPersistentContainer(name: "PolyPodModel")
         
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            // Enforce encryption
-            do {
-                let persistentStore = container.persistentStoreCoordinator.persistentStores[0]
-                var metadata = persistentStore.metadata
-                if !metadata!.contains(where: {(key: String, value: Any) in
-                    return key == NSPersistentStoreFileProtectionKey
-                }) {
-                    metadata?[NSPersistentStoreFileProtectionKey] = FileProtectionType.complete
-                    container.persistentStoreCoordinator.setMetadata(metadata, for: persistentStore)
-                    try container.viewContext.save()
-                }
-            } catch {
-                if let error = error as NSError? {
-                    fatalError("Encryption error \(error), \(error.userInfo)")
-                }
-            }
-            
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -128,6 +111,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                  Check the error message to determine what the actual problem was.
                  */
                 fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+            
+            // Enforce encryption
+            do {
+                let persistentStores = container.persistentStoreCoordinator.persistentStores
+                guard persistentStores.count >= 0 else {
+                    fatalError("Error enforcing encryption: No persistent stores found")
+                }
+                let persistentStore = persistentStores[0]
+                var metadata = persistentStore.metadata
+                if !metadata!.contains(where: {(key: String, value: Any) in
+                    return key == NSPersistentStoreFileProtectionKey
+                }) {
+                    metadata?[NSPersistentStoreFileProtectionKey] = FileProtectionType.complete
+                    container.persistentStoreCoordinator.setMetadata(metadata, for: persistentStore)
+                    try container.viewContext.save()
+                }
+            } catch {
+                if let error = error as NSError? {
+                    fatalError("Encryption error \(error), \(error.userInfo)")
+                }
             }
         })
         return container
