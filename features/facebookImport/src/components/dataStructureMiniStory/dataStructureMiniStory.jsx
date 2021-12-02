@@ -15,8 +15,10 @@ const DataStructureMiniStory = ({ data }) => {
         return b.value - a.value;
     });
 
-    let totalFiles = 0;
-    data.forEach((a) => (totalFiles += a.count));
+    const totalFiles = data.reduce(
+        (previous, current) => previous + current.count,
+        0
+    );
 
     const bubbleVizWidth = 400;
     const bubbleVizHeight = 400;
@@ -24,12 +26,12 @@ const DataStructureMiniStory = ({ data }) => {
     const dataBubblesLightColor = "#f7fafc";
     const [selectedFolder, setSelectedFolder] = useState(data[0].title);
 
-    const extendedDataStructure = [
+    const dataWithTotal = [
         ...data,
         { title: "Total", count: totalFiles, value: totalFiles },
     ];
 
-    const amountOfFiles = extendedDataStructure.find(
+    const amountOfFiles = dataWithTotal.find(
         (bubble) => bubble.title === selectedFolder
     )?.count;
 
@@ -81,7 +83,7 @@ const DataStructureMiniStory = ({ data }) => {
                 />
             </div>
             <ChartButtons
-                buttonsContent={extendedDataStructure.map((d) => {
+                buttonsContent={dataWithTotal.map((d) => {
                     return { id: d.title };
                 })}
                 activeButton={selectedFolder}
