@@ -100,7 +100,7 @@ extension PolyOut {
                 completionHandler(nil, PodApiError.unknown)
             }
         } else {
-            print("stat: No such file: \(filePath.path)")
+            Log.error("stat: No such file: \(filePath.path)")
             completionHandler(nil, PodApiError.noSuchFile(url))
         }
     }
@@ -119,7 +119,7 @@ extension PolyOut {
                 completionHandler(content, nil)
             }
         } catch {
-            print(error)
+            Log.error("fileRead for \(url) failed: \(String(describing: error))")
             completionHandler(nil, PolyOutError.platform(error))
         }
     }
@@ -211,7 +211,7 @@ extension PolyOut {
             completionHandler(newUrl)
         }
         catch {
-            print("importArchive for '\(url)' failed: \(error)")
+            Log.error("importArchive for '\(url)' failed: \(error)")
             completionHandler(nil)
         }
     }

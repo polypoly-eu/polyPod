@@ -58,7 +58,7 @@ private func readManifest(_ basePath: URL) -> FeatureManifest {
     if let manifest = FeatureManifest.load(path: manifestPath) {
         return manifest
     }
-    print("Failed to load feature manifest from: \(manifestPath)")
+    Log.error("Failed to load feature manifest from: \(manifestPath)")
     return FeatureManifest(
         name: nil,
         author: nil,
@@ -87,7 +87,7 @@ private func findThumbnail(featurePath: URL, thumbnailPath: String?) -> URL? {
     }
     let fullPath = featurePath.appendingPathComponent(thumbnailPath)
     if !FileManager.default.fileExists(atPath: fullPath.path) {
-        print("Error: Feature thumbnail at \(thumbnailPath) does not exist")
+        Log.error("Error: Feature thumbnail at \(thumbnailPath) does not exist")
         return nil
     }
     return fullPath

@@ -59,7 +59,7 @@ class PostOffice {
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
         default:
-            print("API unknown:", api)
+            Log.error("API unknown: \(api)")
         }
     }
     
@@ -96,7 +96,7 @@ extension PostOffice {
         case "has":
             handlePolyInHas(args: args, completionHandler: completionHandler)
         default:
-            print("PolyIn method unknown:", method)
+            Log.error("PolyIn method unknown: \(method)")
         }
     }
 
@@ -109,7 +109,7 @@ extension PostOffice {
                     Bad argument data: \(arg)
                     \(Thread.callStackSymbols.joined(separator: "\n"))
                 """
-                print(message)
+                Log.error(message)
                 completionHandler(nil, MessagePackValue(message))
                 return extendedDataSet
             }
@@ -219,7 +219,7 @@ extension PostOffice {
         case "removeArchive":
             handlePolyOutRemoveArchive(args: args, completionHandler: completionHandler)
         default:
-            print("PolyOut method unknown:", method)
+            Log.error("PolyOut method unknown: \(method)")
         }
     }
     
@@ -351,7 +351,7 @@ extension PostOffice {
         case "pickFile":
             handlePolyNavPickFile(args: args, completionHandler: completionHandler)
         default:
-            print("PolyNav method unknown:", method)
+            Log.error("PolyNav method unknown: \(method)")
         }
     }
     
@@ -389,7 +389,7 @@ extension PostOffice {
         case "getVersion":
             handleInfoGetVersion(completionHandler: completionHandler)
         default:
-            print("Info method unknown:", method)
+            Log.error("Info method unknown: \(method)")
         }
     }
     
@@ -408,7 +408,7 @@ extension PostOffice {
         case "httpPost":
             handleNetworkHttpPost(args: args, completionHandler: completionHandler)
         default:
-            print("PolyNav method unknown:", method)
+            Log.error("PolyNav method unknown: \(method)")
         }
     }
     

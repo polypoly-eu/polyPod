@@ -24,7 +24,7 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         guard let mime = mime else { return "public.item" }
         if mime == "application/zip" { return "com.pkware.zip-archive" }
         // TODO: Throw proper error
-        print("Unsupported MIME type: \(mime)")
+        Log.error("Unsupported MIME type: \(mime)")
         return mimeToUti(nil)
     }
     
@@ -37,7 +37,7 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
                 fileSize = Int64(truncating: fileNumberSize)
             }
         } catch {
-            print(error.localizedDescription)
+            Log.error("Failed to load file data: \(error.localizedDescription)")
         }
         return ExternalFile(url: url.absoluteString, name: url.lastPathComponent, size: fileSize)
     }
