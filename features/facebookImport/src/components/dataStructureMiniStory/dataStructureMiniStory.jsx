@@ -26,9 +26,11 @@ const DataStructureMiniStory = ({ data }) => {
     const dataBubblesLightColor = "#f7fafc";
     const [selectedFolder, setSelectedFolder] = useState(data[0].title);
 
+    const totalTitle = i18n.t("dataStructureMiniStory:total.chip");
+
     const dataWithTotal = [
         ...data,
-        { title: "Total", count: totalFiles, value: totalFiles },
+        { title: totalTitle, count: totalFiles, value: totalFiles },
     ];
 
     const amountOfFiles = dataWithTotal.find(
@@ -52,7 +54,7 @@ const DataStructureMiniStory = ({ data }) => {
     };
 
     const category =
-        selectedFolder === "Total"
+        selectedFolder === totalTitle
             ? ""
             : i18n.t("dataStructureMiniStory:category");
 
@@ -74,7 +76,7 @@ const DataStructureMiniStory = ({ data }) => {
                     width={bubbleVizWidth}
                     height={bubbleVizHeight}
                     bubbleColor={
-                        selectedFolder === "Total"
+                        selectedFolder === totalTitle
                             ? dataBubblesLightColor
                             : bubbleColor
                     }
