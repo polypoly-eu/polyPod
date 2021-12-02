@@ -28,8 +28,12 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
      * Determine the pictures posted by the user.
      *
      * At the moment, since we do not import posts and albums,
-     * we count only the number of picture files in the folder
-     * "photos_and_videos" where posted pictures are exported.
+     * we count only the number of picture files posted by the
+     * user. For that we look in a list of folders where user
+     * pictures are saved. Depending on the export, posted pictures
+     * are exported in one of two folders:
+     *   - "photos_and_videos"
+     *   - "posts/media"
      *
      * Depending on the export that folder might contain also
      * other picture files like "emptyalbum.png" which was not
@@ -43,12 +47,17 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
      * simply include all pictures in that folder.
      */
     async _userPicturesFromExport(zipFile) {
+        const photoRegexes = [
+            /^photos_and_videos\/(.+)\.(jpg|jpeg)$/,
+            /^posts\/media\/(.+)\.(jpg|jpeg)$/,
+        ];
         const relevantEntries = await relevantZipEntries(zipFile);
-        return relevantEntries.filter((zipEntry) =>
-            /^photos_and_videos\/(.+)\.(jpg|jpeg)$/.test(
-                removeEntryPrefix(zipEntry)
-            )
-        );
+        return relevantEntries.filter((zipEntry) => {
+            const entryNameWithoutPrefix = removeEntryPrefix(zipEntry);
+            return photoRegexes.find((regex) =>
+                regex.test(entryNameWithoutPrefix)
+            );
+        });
     }
 
     async analyze({ zipFile }) {
