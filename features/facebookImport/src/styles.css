@@ -58,6 +58,11 @@
     src: url("../fonts/jost_medium.ttf");
 }
 
+@font-face {
+    font-family: "Jost Bold";
+    src: url("../fonts/Jost-700-Bold.ttf");
+}
+
 * {
     font-family: "Jost";
     font-weight: 400;
