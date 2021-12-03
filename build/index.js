@@ -252,7 +252,7 @@ function logSuccess(command, timeLapsed) {
     let message = `✅ Command «${ANSIBold(command)}» succeeded`;
     const secondsLapsed = (timeLapsed / 1000).toFixed(2);
     if (timeLapsed) {
-        message = message.concat(` in ⏰ ${ANSIBold(secondsLapsed)}s!`);
+        message += ` in ⏰ ${ANSIBold(secondsLapsed)}s!`;
     }
     logMain(message);
 }
