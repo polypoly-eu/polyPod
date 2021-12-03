@@ -18,7 +18,7 @@ extension PolyIn {
             try managedContext.save()
             completionHandler(true)
         } catch {
-            print("Could not save. \(error)")
+            Log.error("Could not save. \(error)")
             completionHandler(false)
         }
     }
@@ -39,7 +39,7 @@ extension PolyIn {
                 node.setValue(childNode, forKey: key)
             } else {
                 if entity.attributesByName[key] == nil {
-                    print("Warning: Attempted to set attribute \(key) which is not in \(entityName)")
+                    Log.error("Warning: Attempted to set attribute \(key) which is not in \(entityName)")
                     continue
                 }
                 node.setValue(value, forKeyPath: key)

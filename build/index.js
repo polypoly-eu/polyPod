@@ -156,12 +156,20 @@ function executeProcess(executable, args, env = process.env) {
     });
 }
 
-const npm = (...args) =>
-    executeProcess("npm", args, { ...process.env, FORCE_COLOR: 1 });
+const npm = async (...args) => {
+    const start = new Date();
+    await executeProcess(
+        "npm",
+        ["--no-update-notifier", "--no-fund", ...args],
+        { ...process.env, FORCE_COLOR: 1 }
+    );
+    const elapsed = new Date() - start;
+    logDetail(`NPM finished in ${elapsed} ms`);
+};
 
 async function npmInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
-    await npm("ci", "--no-update-notifier", "--no-fund");
+    await npm("ci");
 }
 
 async function npmRun(script, pkg) {
@@ -264,7 +272,7 @@ async function main() {
 
     if (!["list", "list-deps", "clean"].includes(command)) {
         logDetail(`👷👷‍♀️ ...`);
-        await npm("ci", "--no-update-notifier", "--no-fund");
+        await npmInstall("/");
     }
 
     if (command === "lint") {

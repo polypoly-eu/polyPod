@@ -128,6 +128,7 @@
 		E98BA80226D4DD9A0039E41E /* PolyIn+Has.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */; };
 		E98BA80326D4DD9D0039E41E /* PolyIn+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */; };
 		E98D506A26F3741100C3FCF4 /* handleErrors.js in Resources */ = {isa = PBXBuildFile; fileRef = E98D506926F3741100C3FCF4 /* handleErrors.js */; };
+		E996EBD22756BBE900EAC9F7 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E996EBD12756BBE900EAC9F7 /* Log.swift */; };
 		E9B2203C263314AD005E8881 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B2F2625866800216B70 /* Feature.swift */; };
 		E9B2203D263314AD005E8881 /* FeatureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4689D2420D5F600E51B6D /* FeatureStorage.swift */; };
 		E9B2203E263314AD005E8881 /* FeatureManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D3275263152CE00A5A180 /* FeatureManifest.swift */; };
@@ -153,6 +154,7 @@
 		E9F370DD262EE9EE006254C1 /* WidthReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370DC262EE9EE006254C1 /* WidthReader.swift */; };
 		E9F370E1262EEB2C006254C1 /* ParagraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370E0262EEB2C006254C1 /* ParagraphView.swift */; };
 		E9F370E7262EEF13006254C1 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370E6262EEF13006254C1 /* UIColorExtensions.swift */; };
+		E9F68ED227580A0B009ED2C1 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E996EBD12756BBE900EAC9F7 /* Log.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +259,7 @@
 		E989B352269DDC9E000EE977 /* PolyNavTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyNavTests.swift; sourceTree = "<group>"; };
 		E98BA7FE26D3CA2F0039E41E /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		E98D506926F3741100C3FCF4 /* handleErrors.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = handleErrors.js; sourceTree = "<group>"; };
+		E996EBD12756BBE900EAC9F7 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		E9CF1B2F2625866800216B70 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureListView.swift; sourceTree = "<group>"; };
 		E9CF1B632625EA3200216B70 /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
@@ -433,6 +436,7 @@
 				E9545EAD273530ED001E8C7F /* UpdateNotification.swift */,
 				E93EC98B273D65D400E20512 /* Authentication.swift */,
 				E96817F0274D032A00206602 /* Language.swift */,
+				E996EBD12756BBE900EAC9F7 /* Log.swift */,
 			);
 			path = PolyPod;
 			sourceTree = "<group>";
@@ -805,6 +809,7 @@
 				1ABADBF224EE70B500369791 /* DataFactory.swift in Sources */,
 				1ABADBFC24EE710B00369791 /* Quad+CoreDataProperties.swift in Sources */,
 				E9545ECA27359C38001E8C7F /* UserDefaultsExtensions.swift in Sources */,
+				E9F68ED227580A0B009ED2C1 /* Log.swift in Sources */,
 				1ABADBF424EE70E700369791 /* LocationTracker.swift in Sources */,
 				1ABADBF724EE710B00369791 /* NamedNode+CoreDataClass.swift in Sources */,
 				1ABADC0724EE717000369791 /* Bubblewrap.swift in Sources */,
@@ -846,6 +851,7 @@
 				1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */,
 				E9040D4726F0A30E00A88593 /* Info.swift in Sources */,
 				1A66F7692490DB8700ED4308 /* FetchRequestInit.swift in Sources */,
+				E996EBD22756BBE900EAC9F7 /* Log.swift in Sources */,
 				1A66F77D2493774100ED4308 /* NetworkSession.swift in Sources */,
 				E97D325626307CE100A5A180 /* ColorExtensions.swift in Sources */,
 				1A6F4DF424C1A76E00874DF9 /* PolyIn+Select.swift in Sources */,
@@ -1143,7 +1149,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.polypod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1169,7 +1175,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.polypod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
