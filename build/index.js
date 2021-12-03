@@ -1,9 +1,9 @@
 "use strict";
-
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 const path = require("path");
 const { spawn } = require("child_process");
+const windowsEnvironment = process.platform === 'win32';
 const validCommands = [
     "build",
     "clean",
@@ -139,7 +139,8 @@ function logDependencies(packageTree) {
 }
 
 function executeProcess(executable, args, env = process.env) {
-    const spawnedProcess = spawn(executable, args, { env: env });
+    const spawnedProcess = spawn(executable, args, { env:env });
+
     spawnedProcess.stdout.on("data", (data) => {
         console.log(data.toString());
     });
@@ -156,8 +157,14 @@ function executeProcess(executable, args, env = process.env) {
     });
 }
 
-const npm = (...args) =>
-    executeProcess("npm", args, { ...process.env, FORCE_COLOR: 1 });
+const npm = (...args) =>{
+    // if you are using windows replace npm to npm.cmd
+    if (windowsEnvironment) {
+        var cmd = 'npm.cmd'
+      } else {
+        var cmd = 'npm'
+      }
+    executeProcess(cmd, args, { ...process.env, FORCE_COLOR: 1 });}
 
 async function npmInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
@@ -271,6 +278,7 @@ async function main() {
         logDetail(`🧹 ...`);
         await executeProcess("npx", ["eslint", ...eslintOptions]);
         logSuccess(command);
+
         return 0;
     }
 
