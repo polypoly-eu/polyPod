@@ -16,8 +16,6 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.14.2",
-    "@cypress/request": "^2.88.10",
-    "cypress": "^9.1.0",
     "jsdoc": "^3.6.7"
   },
   "private": true,
