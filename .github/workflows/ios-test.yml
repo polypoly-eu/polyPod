@@ -1,5 +1,16 @@
 name: Testing polyPod in iOS
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - 'ios/**'
+      - 'core/**'
+      - 'features/**'
+      - 'build/**'
+  pull_request
+      - 'ios/**'
+      - 'core/**'
+      - 'features/**'
+      - 'build/**'
 jobs:
     test:
         name: Testing polyPod iOS app
