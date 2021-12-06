@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "scripts": {
     "clean": "rm -rf dist",
+    "win-clean": "del /Q dist",
     "prebuild": "npm run clean",
-    "build": "cp -r src dist && cp node_modules/@polypoly-eu/podjs/dist/pod.js dist"
+    "win-prebuild":"npm run win-clean",
+    "build": "cp -r src dist && cp node_modules/@polypoly-eu/podjs/dist/pod.js dist",
+    "win-build": "Xcopy /Y .\\src .\\dist\\ && Xcopy /Y .\\node_modules\\@polypoly-eu\\podjs\\dist\\pod.js .\\dist\\"
   },
   "devDependencies": {
     "@polypoly-eu/podjs": "file:../../podjs"

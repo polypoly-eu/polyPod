@@ -13,6 +13,7 @@
     "test:watch": "web-test-runner --watch",
     "storybook": "web-dev-server -c .storybook/server.mjs",
     "build": "rollup -c rollup.config.js",
+    "win-build": "rollup -c rollup.config.js",
     "build-downstream": "../../../build.js --start @polypoly-eu/poly-look"
   },
   "dependencies": {

@@ -2,11 +2,13 @@
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 const path = require("path");
+const windowsEnvironment = process.platform === "win32";
 const { spawn } = require("child_process");
-const windowsEnvironment = process.platform === 'win32';
 const validCommands = [
     "build",
+    "win-build",
     "clean",
+    "win-clean",
     "test",
     "lint",
     "lintfix",
@@ -139,7 +141,7 @@ function logDependencies(packageTree) {
 }
 
 function executeProcess(executable, args, env = process.env) {
-    const spawnedProcess = spawn(executable, args, { env:env });
+    const spawnedProcess = spawn(executable, args, { env: env });
 
     spawnedProcess.stdout.on("data", (data) => {
         console.log(data.toString());
@@ -156,15 +158,13 @@ function executeProcess(executable, args, env = process.env) {
         });
     });
 }
-
-const npm = (...args) =>{
-    // if you are using windows replace npm to npm.cmd
-    if (windowsEnvironment) {
-        var cmd = 'npm.cmd'
-      } else {
-        var cmd = 'npm'
-      }
-    executeProcess(cmd, args, { ...process.env, FORCE_COLOR: 1 });}
+const npm = async (...args) => {
+    const start = new Date();
+    const cmd = windowsEnvironment ? "npm.cmd" : "npm";
+    await executeProcess(cmd, args, { ...process.env, FORCE_COLOR: 1 });
+    const elapsed = new Date() - start;
+    logDetail(`NPM finished in ${elapsed} ms`);
+};
 
 async function npmInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
@@ -180,7 +180,8 @@ async function npmRun(script, pkg) {
 }
 
 async function cleanPackage(pkg) {
-    if (await npmRun("clean", pkg)) return;
+    const cleanCmd = windowsEnvironment ? "win-clean" : "clean";
+    if (await npmRun(cleanCmd, pkg)) return;
 
     // Just so that we don't have to add a 'clean' script to every single
     // package, we cover the conventional case as a fallback - but it's
@@ -190,8 +191,13 @@ async function cleanPackage(pkg) {
         await fsPromises.rm(path, { recursive: true, force: true });
 }
 
+async function buildPackage(pkg){
+    const buildCmd = windowsEnvironment ? "win-build" : "build";
+    await npmRun(buildCmd, pkg);
+} 
+
 const commands = {
-    build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
+    build: (pkg) => npmInstall(pkg.name).then(() => buildPackage(pkg)),
     test: (pkg) => npmRun("test", pkg),
     clean: (pkg) => cleanPackage(pkg),
 };

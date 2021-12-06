@@ -51,13 +51,13 @@ export default (commandLineArgs) => {
                         dest: "dist/css",
                     },
                     {
-                        src: ["src/static/*", "!src/static/fonts"],
+                        src: ["src/static/"],
                         dest: "dist",
                     },
                     {
-                        src: ["src/static/fonts/*"],
-                        dest: "dist/fonts",
-                    },
+                        src: ["../../assets/fonts"],
+                        dest: "dist/fonts"
+                    }
                 ],
             }),
             resolve(),

@@ -6,6 +6,7 @@
     "lint": "npm run eslint",
     "lint:fix": "eslint --fix src test scripts --ext .js --ext .jsx",
     "build": "rollup -c",
+    "win-build": "rollup -c",
     "watch": "rollup --watch -c",
     "test": "mocha && npm run cypress:run",
     "polypedia:fetch": "node scripts/fetch-polypedia-data 9499b4c",

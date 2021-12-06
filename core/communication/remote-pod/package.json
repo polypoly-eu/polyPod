@@ -12,6 +12,7 @@
   },
   "scripts": {
     "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
+    "win-build": "del /Q tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "lint": "eslint src --ext .ts",
     "pretest": "start-dummy-server &",
     "test": "rollup -c && npm run test:electron && npm run test:node",

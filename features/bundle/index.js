@@ -3,7 +3,7 @@
 const child_process = require("child_process");
 const fs = require("fs");
 const path = require("path");
-
+const windowsEnvironment = process.platform === "win32";
 function packageFeature({ archiveName, moduleName, artifactPath }, targetDir) {
     console.log(`Packaging ${archiveName}`);
     const targetArchive = path.join(targetDir, `${archiveName}.zip`);
@@ -13,8 +13,14 @@ function packageFeature({ archiveName, moduleName, artifactPath }, targetDir) {
         moduleName,
         artifactPath
     );
-    const args = ["-r", targetArchive, "."];
-    child_process.execFileSync("zip", args, { cwd: sourceDir });
+    const args = windowsEnvironment
+        ? ["-cfM", targetArchive, "."]
+        : ["-r", targetArchive, "."];
+    if (windowsEnvironment) {
+        child_process.execFileSync("jar", args, { cwd: sourceDir });
+    } else {
+        child_process.execFileSync("zip", args, { cwd: sourceDir });
+    }
 }
 
 function writeOrder(features, targetDir) {

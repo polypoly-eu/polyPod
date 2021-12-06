@@ -1,7 +1,8 @@
 {
   "name": "feature-bundle",
   "scripts": {
-    "build": "node index.js"
+    "build": "node index.js",
+    "win-build": "node index.js"
   },
   "devDependencies": {
     "demo-feature": "file:../demo",
