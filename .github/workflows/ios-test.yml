@@ -6,7 +6,7 @@ on:
       - 'core/**'
       - 'features/**'
       - 'build/**'
-  pull_request
+  pull_request:
       - 'ios/**'
       - 'core/**'
       - 'features/**'
