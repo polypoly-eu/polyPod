@@ -37,9 +37,9 @@
 }
 
 .detail-view .items {
+    font-family: "Jost Medium";
     color: var(--color-gray-50);
     font-size: 20px;
-    font-weight: 400;
 }
 
 .detail-view .source {

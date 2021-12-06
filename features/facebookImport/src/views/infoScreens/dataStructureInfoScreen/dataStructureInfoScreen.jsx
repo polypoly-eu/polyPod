@@ -4,13 +4,15 @@ import i18n from "../../../i18n.js";
 import InfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 
+import "./dataStructureInfoScreen.css";
+
 const DataStructureInfoScreen = () => {
     const dataStructureInfoText = [
         <>
             <p>{i18n.t("dataStructureInfoScreen:text1")}</p>
-            <p className="legend">
-                <strong>{i18n.t("dataStructureInfoScreen:legend")}</strong>
-            </p>
+            <div className="data-structure-legend">
+                {i18n.t("dataStructureInfoScreen:legend")}
+            </div>
             <Infographic
                 type="bubblesChartInfoScreen"
                 texts={{
