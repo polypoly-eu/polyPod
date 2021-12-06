@@ -54,11 +54,6 @@
 }
 
 @font-face {
-    font-family: "Jost Book";
-    src: url("../fonts/jost_book.ttf");
-}
-
-@font-face {
     font-family: "Jost Light";
     src: url("../fonts/jost_light.ttf");
 }
