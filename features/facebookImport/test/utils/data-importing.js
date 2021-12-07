@@ -17,6 +17,7 @@ import InteractedWithAdvertisersImporter from "../../src/model/importers/interac
 import PostReactionsImporter from "../../src/model/importers/post-reactions-importer.js";
 import CommentsImporter from "../../src/model/importers/comments-importer.js";
 import PostsImporter from "../../src/model/importers/posts-importer.js";
+import ConnectedAdvertisersAllTypesImporter from "../../src/model/importers/connected-advertisers-all-types-importer.js";
 
 export async function runMultipleImporters(importerClasses, zipFile) {
     const facebookAccount = new FacebookAccount();
@@ -40,6 +41,10 @@ export async function runAdInterestsImporter(zipFile) {
 
 export async function runConnectedAdvertisersImporter(zipFile) {
     return runSingleImporter(ConnectedAdvertisersImporter, zipFile);
+}
+
+export async function runConnectedAdvertisersWitlAllTypesImporter(zipFile) {
+    return runSingleImporter(ConnectedAdvertisersAllTypesImporter, zipFile);
 }
 
 export async function runLanguageAndLocaleImporter(zipFile) {
