@@ -12,19 +12,23 @@ export function wrapConnectedAdvertisersData(data) {
     return { [CONNECTED_ADVERTISERS_DATA_KEY]: data };
 }
 
+export const CONNECTED_ADVERTISERS_DATA_SPECIFICATION = [
+    "Jones Inc",
+    "Company One LLC",
+    "Moen Inc",
+    "Roob Group",
+    "MacGyver LLC",
+    "Krajcik Inc",
+    "Parker Inc",
+    "Website",
+    "Jane and John",
+    "Company Two Shop",
+];
+
 export function createConnectedAdvertisersDataset() {
-    return wrapConnectedAdvertisersData([
-        "Jones Inc",
-        "Company One LLC",
-        "Moen Inc",
-        "Roob Group",
-        "MacGyver LLC",
-        "Krajcik Inc",
-        "Parker Inc",
-        "Website",
-        "Jane and John",
-        "Company Two Shop",
-    ]);
+    return wrapConnectedAdvertisersData(
+        CONNECTED_ADVERTISERS_DATA_SPECIFICATION
+    );
 }
 
 export function zipFileWithConnectedAdvertisers() {
