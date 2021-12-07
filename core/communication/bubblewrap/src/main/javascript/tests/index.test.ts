@@ -159,4 +159,16 @@ describe("Bubblewrap", () => {
             expect(() => bubblewrapPlus.addClasses(someOtherClasses)).toThrowError(/Duplicate/);
         });
     });
+
+    describe("Tests undefined", () => {
+        it("Tries to encode/decode undefined/null", () => {
+            const bw = Bubblewrap.create();
+            let encodedUndefined = bw.encode(undefined);
+            expect(encodedUndefined).not.toBeNull();
+            expect(bw.decode(encodedUndefined)).toBeNull();
+            encodedUndefined = bw.encode(null);
+            expect(encodedUndefined).not.toBeNull();
+            expect(bw.decode(encodedUndefined)).toBeNull();
+        });
+    });
 });
