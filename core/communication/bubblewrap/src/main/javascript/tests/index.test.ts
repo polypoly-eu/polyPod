@@ -150,11 +150,13 @@ describe("Bubblewrap", () => {
     });
 
     describe("Add class", () => {
-        it("Adds classes", () => {
+        it("Adds classes, throws if duplicated", () => {
             const bubblewrap = Bubblewrap.create();
             const someClasses: Classes = { TestA: TestA, TestB: TestB };
             const bubblewrapPlus = bubblewrap.addClasses(someClasses);
             expect(bubblewrapPlus).not.toBeNull();
+            const someOtherClasses: Classes = { TestB: TestB };
+            expect(() => bubblewrapPlus.addClasses(someOtherClasses)).toThrowError(/Duplicate/);
         });
     });
 });
