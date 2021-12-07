@@ -222,10 +222,10 @@ export class Bubblewrap {
      * This method throws an exception if there is a duplicate class identifier.
      */
     addClasses(more: Classes): Bubblewrap {
-        const thisKeys = Object.keys(this.classes);
-        const thatKeys = Object.keys(more);
-        for (const thisKey of thisKeys)
-            if (thatKeys.includes(thisKey)) throw new Error(`Duplicate identifier ${thisKey}`);
+        const theseKeys = Object.keys(this.classes);
+        const thoseKeys = Object.keys(more);
+        for (const thatKey of thoseKeys)
+            if (theseKeys.includes(thatKey)) throw new Error(`Duplicate identifier ${thatKey}`);
         return new Bubblewrap({ ...this.classes, ...more }, this.strict);
     }
 
