@@ -1,8 +1,7 @@
 .section-title-container {
-  width: 80%;
   display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
-  grid-gap: 7px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 12px;
   align-items: center;
 }
 
