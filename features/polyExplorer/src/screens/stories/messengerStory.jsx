@@ -171,24 +171,22 @@ const MessengerStory = () => {
             animationEvent={scrollStory}
             debugMode={scrollTellingDebug}
         >
-            <div className="messenger-parts">
-                <Introduction
-                    heightEvent={updateIntroHeight}
-                    listOfMessengerApps={listOfMessengerApps}
-                ></Introduction>
-                <Summary
-                    heightEvent={updateSummaryHeight}
-                    animation={summaryAnimations}
-                ></Summary>
-                <Overview
-                    products={products}
-                    heightEvent={updateOverviewHeight}
-                ></Overview>
-                <Details
-                    data={products}
-                    listOfMessengerApps={listOfMessengerApps}
-                ></Details>
-            </div>
+            <Introduction
+                heightEvent={updateIntroHeight}
+                listOfMessengerApps={listOfMessengerApps}
+            ></Introduction>
+            <Summary
+                heightEvent={updateSummaryHeight}
+                animation={summaryAnimations}
+            ></Summary>
+            <Overview
+                products={products}
+                heightEvent={updateOverviewHeight}
+            ></Overview>
+            <Details
+                data={products}
+                listOfMessengerApps={listOfMessengerApps}
+            ></Details>
         </DataStory>
     );
 };

@@ -1,5 +1,4 @@
 .messenger-intro {
-  width: 100%;
   background: linear-gradient(180deg, var(--color-primary-messenger-story) 0%, var(--color-secondary-messenger-story) 50%);
 }
 
@@ -14,7 +13,8 @@
   line-height: 120%;
   text-align: center;
   letter-spacing: -0.01em;
-  margin: 25px 0px;
+  margin: 0 0 25px 0;
+  padding-top: 25px;
 }
 
 .story-intro-img {

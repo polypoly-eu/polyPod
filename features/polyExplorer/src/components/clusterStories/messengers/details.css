@@ -1,7 +1,3 @@
-.messenger-details {
-    width: 100%;
-}
-
 .messenger-details * {
     color: var(--color-text-dark);
 }

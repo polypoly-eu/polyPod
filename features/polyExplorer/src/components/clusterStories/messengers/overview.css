@@ -1,7 +1,3 @@
-.messenger-overview {
-  width: 100%;
-}
-
 .messenger-overview * {
   color: var(--color-dark);
 }
