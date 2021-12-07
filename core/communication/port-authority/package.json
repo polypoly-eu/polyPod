@@ -25,10 +25,6 @@
     "connect": "^3.7.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^17.0.0",
-    "@rollup/plugin-node-resolve": "^11.1.0",
-    "@rollup/plugin-sucrase": "^3.1.0",
-    "@rollup/plugin-typescript": "^8.1.0",
     "@types/chai-as-promised": "^7.1.3",
     "@types/node": "^16.11.6",
     "@types/promise-timeout": "^1.3.0",
@@ -38,7 +34,6 @@
     "node-fetch": "^2.6.1",
     "promise-timeout": "^1.3.0",
     "puppeteer": "^9.0.0",
-    "rollup": "^2.37.0",
     "tslib": "^2.0.1",
     "typedoc": "^0.20.36"
   },
