@@ -18,6 +18,7 @@ export default [
     "ads_and_businesses/advertisers_who_uploaded_a_contact_list_with_your_information.json",
     "ads_information",
     "ads_information/advertisers_who_uploaded_a_contact_list_with_your_information.json",
+    "ads_information/advertisers_using_your_activity_or_information.json",
     "ads_information/advertisers_you've_interacted_with.json",
     "apps_and_websites",
     "apps_and_websites/apps_and_websites.json",
