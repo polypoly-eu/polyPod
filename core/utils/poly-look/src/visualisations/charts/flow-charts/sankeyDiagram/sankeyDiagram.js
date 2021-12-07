@@ -4,8 +4,7 @@ import * as d3 from "d3";
 import * as d3Sankey from "d3-sankey";
 
 //default values
-const align = "justify",
-  linkSource = ({ source }) => source,
+const linkSource = ({ source }) => source,
   linkTarget = ({ target }) => target,
   linkValue = ({ value }) => value,
   intern = (value) =>
@@ -33,17 +32,6 @@ const align = "justify",
   defaultNodeLabelBoxColor = "white",
   defaultNodeLabelBoxOpacity = 0.7;
 
-const exampleData = {
-  links: [
-    { source: "a", target: "1", value: 32 },
-    { source: "a", target: "5", value: 32 },
-    { source: "benedict", target: "1", value: 23 },
-    { source: "b", target: "2", value: 40 },
-    { source: "c", target: "2", value: 50 },
-    { source: "c", target: "5", value: 20 },
-  ],
-};
-
 /**
  * Visualizes data as a flow from n to m entitites
  *
@@ -67,7 +55,7 @@ export class SankeyDiagram extends Chart {
     color,
   }) {
     super({ selector, width, height });
-    this._links = exampleData.links;
+    this._links = links;
     this._nodeAlign =
       {
         left: d3Sankey.sankeyLeft,
