@@ -23,9 +23,7 @@
     "semver": "^7.3.2"
   },
   "devDependencies": {
-    "@rollup/plugin-sucrase": "^3.1.0",
-    "@types/node": "^16.7.1",
-    "rollup": "^2.56.3"
+    "@types/node": "^16.7.1"
   },
   "private": true
 }
