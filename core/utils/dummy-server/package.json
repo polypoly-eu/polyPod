@@ -15,7 +15,6 @@
     "scripts": {
         "start": "node bin/server.start.js",
         "build": "",
-        "win-build": "",
         "test": "jest",
         "stop": "node bin/server.stop.js",
         "eslint": "eslint . --ext .js",

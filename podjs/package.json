@@ -10,8 +10,7 @@
     "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
   "scripts": {
-    "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
-    "win-build": "del /Q tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
+    "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "build-downstream": "../build.js --start @polypoly-eu/podjs",
     "lint": "eslint src --ext .ts"
   },

@@ -1,8 +1,7 @@
 {
   "name": "test-feature",
   "scripts": {
-    "build": "rollup -c",
-    "win-build": "rollup -c"
+    "build": "rollup -c"
   },
   "dependencies": {
     "@polypoly-eu/pod-api": "file:../../core/api/pod-api",

@@ -14,13 +14,13 @@ function packageFeature({ archiveName, moduleName, artifactPath }, targetDir) {
         artifactPath
     );
     const args = windowsEnvironment
-        ? ["-cfM", targetArchive, "."]
+        ? ["bestzip", targetArchive, sourceDir]
         : ["-r", targetArchive, "."];
-    if (windowsEnvironment) {
-        child_process.execFileSync("jar", args, { cwd: sourceDir });
-    } else {
-        child_process.execFileSync("zip", args, { cwd: sourceDir });
-    }
+    const zipCmd = windowsEnvironment ? "npx.cmd" : "zip";
+    const params = windowsEnvironment
+        ? [zipCmd, args]
+        : [zipCmd, args, { cwd: sourceDir }];
+    child_process.execFileSync(...params);
 }
 
 function writeOrder(features, targetDir) {

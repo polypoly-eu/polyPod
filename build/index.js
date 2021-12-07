@@ -2,19 +2,17 @@
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 const path = require("path");
-const windowsEnvironment = process.platform === "win32";
 const { spawn } = require("child_process");
 const validCommands = [
     "build",
-    "win-build",
     "clean",
-    "win-clean",
     "test",
     "lint",
     "lintfix",
     "list",
     "list-deps",
 ];
+const windowsEnvironment = process.platform === "win32";
 
 function parseCommandLine() {
     const [, scriptPath, ...parameters] = process.argv;
@@ -142,7 +140,6 @@ function logDependencies(packageTree) {
 
 function executeProcess(executable, args, env = process.env) {
     const spawnedProcess = spawn(executable, args, { env: env });
-
     spawnedProcess.stdout.on("data", (data) => {
         console.log(data.toString());
     });
@@ -180,9 +177,7 @@ async function npmRun(script, pkg) {
 }
 
 async function cleanPackage(pkg) {
-    const cleanCmd = windowsEnvironment ? "win-clean" : "clean";
-    if (await npmRun(cleanCmd, pkg)) return;
-
+    if (await npmRun("clean", pkg)) return;
     // Just so that we don't have to add a 'clean' script to every single
     // package, we cover the conventional case as a fallback - but it's
     // arguably a bit dangerous.
@@ -191,13 +186,8 @@ async function cleanPackage(pkg) {
         await fsPromises.rm(path, { recursive: true, force: true });
 }
 
-async function buildPackage(pkg){
-    const buildCmd = windowsEnvironment ? "win-build" : "build";
-    await npmRun(buildCmd, pkg);
-} 
-
 const commands = {
-    build: (pkg) => npmInstall(pkg.name).then(() => buildPackage(pkg)),
+    build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
     test: (pkg) => npmRun("test", pkg),
     clean: (pkg) => cleanPackage(pkg),
 };

@@ -3,7 +3,6 @@
     "version": "0.0.1",
     "scripts": {
         "build": "rollup -c",
-        "win-build": "rollup -c",
         "watch": "rollup --watch -c",
         "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
         "check": "tsc"

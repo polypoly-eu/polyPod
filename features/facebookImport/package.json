@@ -4,7 +4,6 @@
     "eslint": "eslint src --ext .js --ext .jsx",
     "lint": "npm run eslint",
     "build": "rollup -c",
-    "win-build": "rollup -c",
     "build-downstream": "../../build.js --start facebook-import-feature",
     "watch": "rollup --watch -c",
     "serve": "rollup --watch --configServe -c",

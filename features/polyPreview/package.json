@@ -3,7 +3,6 @@
   "scripts": {
     "lint": "eslint src",
     "build": "rollup -c",
-    "win-build": "rollup -c",
     "watch": "rollup --watch -c"
   },
   "dependencies": {

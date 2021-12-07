@@ -14,8 +14,7 @@
   },
   "scripts": {
     "benchmark": "./bin/run-benchmarks.sh",
-    "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && npm run rollup",
-    "win-build": "del /Q tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && npm run rollup",
+    "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && npm run rollup",
     "rollup": "rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
