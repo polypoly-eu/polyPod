@@ -17,18 +17,11 @@
     "@babel/core": "^7.12.13",
     "@polypoly-eu/podjs": "file:../../podjs",
     "@polypoly-eu/poly-look": "file:../../core/utils/poly-look",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^11.2.0",
-    "@rollup/plugin-sucrase": "^3.1.0",
     "cypress": "^9.0.0",
     "cypress-promise": "^1.1.0",
     "mocha": "^9.1.3",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "rollup": "^2.26.11",
-    "rollup-plugin-copy": "^3.3.0",
-    "rollup-plugin-css-only": "^3.1.0",
-    "rollup-plugin-svg": "^2.0.0"
+    "react-dom": "^16.13.1"
   },
   "private": true,
   "dependencies": {
