@@ -148,4 +148,13 @@ describe("Bubblewrap", () => {
             expect(() => bubblewrap.encode(err)).toThrowError(/unknown prototype/);
         });
     });
+
+    describe("Add class", () => {
+        it("Adds classes", () => {
+            const bubblewrap = Bubblewrap.create();
+            const someClasses: Classes = { TestA: TestA, TestB: TestB };
+            const bubblewrapPlus = bubblewrap.addClasses(someClasses);
+            expect(bubblewrapPlus).not.toBeNull();
+        });
+    });
 });
