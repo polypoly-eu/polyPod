@@ -25,7 +25,7 @@ const Introduction = ({ heightEvent, listOfMessengerApps }) => {
     return (
         <ClusterSections as="div" className="messenger-intro" ref={wholeIntro}>
             <h1 className="story-title">{i18n.t(`${i18nHeader}:title`)}</h1>
-            <StoryParagraph as="p" className="one">
+            <StoryParagraph as="p" className="cluster-story-big-letter">
                 {i18n.t(`${i18nHeader}:intro.paragraph.one`)}
             </StoryParagraph>
             <img

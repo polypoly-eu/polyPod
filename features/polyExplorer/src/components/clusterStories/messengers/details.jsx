@@ -505,7 +505,7 @@ const Details = ({ data, listOfMessengerApps }) => {
     return (
         <ClusterSections as="div" className="messenger-details">
             <SectionTitle title="Details"></SectionTitle>
-            <StoryParagraph as="p" className="one">
+            <StoryParagraph as="p" className="cluster-story-big-letter">
                 Today our digital lives are all about being connected. Messenger
                 apps play a key role in that. They shape our communication and
                 our relationships. Many of us use these apps very, very often. A

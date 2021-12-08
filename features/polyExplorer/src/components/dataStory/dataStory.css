@@ -38,3 +38,10 @@
 .story .content::-webkit-scrollbar-track {
     margin-top: 8px;
 }
+
+.cluster-story-big-letter::first-letter {
+    float: left;
+    font-size: 60px;
+    line-height: 40px;
+    padding: 0 12px;
+  }
