@@ -12,7 +12,6 @@ const validCommands = [
     "list",
     "list-deps",
 ];
-const windowsEnvironment = process.platform === "win32";
 
 function parseCommandLine() {
     const [, scriptPath, ...parameters] = process.argv;
@@ -157,7 +156,7 @@ function executeProcess(executable, args, env = process.env) {
 }
 const npm = async (...args) => {
     const start = new Date();
-    const cmd = windowsEnvironment ? "npm.cmd" : "npm";
+    const cmd = process.platform === "win32" ? "npm.cmd" : "npm";
     await executeProcess(cmd, args, { ...process.env, FORCE_COLOR: 1 });
     const elapsed = new Date() - start;
     logDetail(`NPM finished in ${elapsed} ms`);
