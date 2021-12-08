@@ -23,7 +23,6 @@
     "jest": "^27.2.5",
     "prettier": "^2.3.0",
     "rollup": "^2.60.2",
-    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-serve": "^1.1.0",
