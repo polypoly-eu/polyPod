@@ -7,7 +7,6 @@
 }
 
 .story-title {
-  width: 85%;
   font-size: 24px;
   font-weight: 600;
   line-height: 120%;
@@ -25,10 +24,4 @@
 
 .messenger-el {
   font-weight: 600;
-}
-
-@media(min-width: 321px) {
-  .story-title {
-    width: 100%;
-  }
 }
