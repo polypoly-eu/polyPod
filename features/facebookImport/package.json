@@ -21,7 +21,8 @@
     "identity-obj-proxy": "^3.0.0",
     "jszip": "^3.6.0",
     "memfs": "^3.2.2",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "rollup-plugin-serve": "^1.1.0"
   },
   "private": true,
   "dependencies": {
