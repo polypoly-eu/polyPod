@@ -10,7 +10,7 @@ const PostReactionInfoScreen = () => {
     const postReactionInfoText = [
         <>
             <p>{i18n.t("postReactionInfoScreen:text1")}</p>
-            <div className="chart-description-title">
+            <div className="legend chart-description-title">
                 {i18n.t("dataStructureInfoScreen:legend")}
             </div>
             <Infographic

@@ -10,7 +10,7 @@ const DataStructureInfoScreen = () => {
     const dataStructureInfoText = [
         <>
             <p>{i18n.t("dataStructureInfoScreen:text1")}</p>
-            <div className="chart-description-title">
+            <div className="legend chart-description-title">
                 {i18n.t("dataStructureInfoScreen:legend")}
             </div>
             <Infographic
