@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/jost_medium"
+            android:fontFamily="@font/jost_light"
             android:textSize="@dimen/onboarding_headline_size"
             android:lineSpacingExtra="@dimen/onboarding_headline_extra_spacing" />
 
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-6dp"
             android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/jost_light"
+            android:fontFamily="@font/jost_medium"
             android:textSize="@dimen/onboarding_headline_size"
             android:lineSpacingExtra="@dimen/onboarding_headline_extra_spacing" />
 

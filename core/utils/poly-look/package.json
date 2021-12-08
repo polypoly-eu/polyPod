@@ -23,12 +23,10 @@
   },
   "devDependencies": {
     "@open-wc/testing": "^3.0.3",
-    "@web/dev-server": "^0.1.22",
     "@web/dev-server-rollup": "^0.3.13",
     "@web/dev-server-storybook": "^0.0.2",
     "@web/test-runner": "^0.13.22",
     "@web/test-runner-chrome": "^0.10.5",
-    "identity-obj-proxy": "^3.0.0",
-    "prettier": "^2.2.1"
+    "identity-obj-proxy": "^3.0.0"
   }
 }
