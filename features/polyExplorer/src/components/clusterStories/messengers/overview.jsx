@@ -203,7 +203,6 @@ const Overview = ({ products }) => {
     }
 
     useEffect(() => {
-        const { height } = wholeOverview.current.getBoundingClientRect();
         let donutGraphData;
         if (!donutData) {
             donutGraphData = buildDonutData();
