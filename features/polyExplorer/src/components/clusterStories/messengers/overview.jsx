@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import i18n from "../../../i18n";
 import DonutChart from "../../dataViz/donutChart.jsx";
 import { DONUT_CHART } from "../../../constants";
@@ -12,8 +12,7 @@ import "./overview.css";
 
 const i18nHeader = "clusterMessengerStory";
 
-const Overview = ({ products, heightEvent }) => {
-    const wholeOverview = useRef();
+const Overview = ({ products }) => {
     const messageInstalls = "overview.donut.installs.message";
     const messageUsers = "overview.donut.users.message";
     const typeDonutsChar = {
@@ -206,8 +205,6 @@ const Overview = ({ products, heightEvent }) => {
     useEffect(() => {
         const { height } = wholeOverview.current.getBoundingClientRect();
         let donutGraphData;
-
-        heightEvent(height);
         if (!donutData) {
             donutGraphData = buildDonutData();
             updateDonutData(donutGraphData);
@@ -219,11 +216,7 @@ const Overview = ({ products, heightEvent }) => {
     }, [products]);
 
     return (
-        <ClusterSections
-            as="div"
-            className="messenger-overview"
-            ref={wholeOverview}
-        >
+        <ClusterSections as="div" className="messenger-overview">
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:overview.section`)}
             ></SectionTitle>

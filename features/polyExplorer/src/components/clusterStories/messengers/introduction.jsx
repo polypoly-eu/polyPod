@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import i18n from "../../../i18n";
 import { StoryParagraph } from "./storyParagraph";
 import { ClusterSections } from "../clusterSections";
@@ -7,9 +7,7 @@ import "./introduction.css";
 
 const i18nHeader = "clusterMessengerStory";
 
-const Introduction = ({ heightEvent, listOfMessengerApps }) => {
-    const wholeIntro = useRef();
-
+const Introduction = ({ listOfMessengerApps }) => {
     function _getBulletsMessengerApps() {
         return listOfMessengerApps.map((messenger, index) => (
             <li key={index} className="messenger-el">
@@ -17,13 +15,8 @@ const Introduction = ({ heightEvent, listOfMessengerApps }) => {
             </li>
         ));
     }
-
-    useEffect(() => {
-        const { height } = wholeIntro.current.getBoundingClientRect();
-        heightEvent(height);
-    }, []);
     return (
-        <ClusterSections as="div" className="messenger-intro" ref={wholeIntro}>
+        <ClusterSections as="div" className="messenger-intro">
             <h1 className="story-title">{i18n.t(`${i18nHeader}:title`)}</h1>
             <StoryParagraph as="p" className="one">
                 {i18n.t(`${i18nHeader}:intro.paragraph.one`)}

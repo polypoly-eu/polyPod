@@ -12,27 +12,6 @@ import "./exampleStory.css";
 const animationPause = "pause";
 
 const ExampleStory = () => {
-    const [allMarks, updateAllMarks] = useState([]);
-
-    const sections = {
-        introduction: "introduction",
-        summary: "summary",
-        overview: "overview",
-    };
-    const marks = [
-        {
-            sectionName: sections,
-            totalHeight: 0,
-            marks: [
-                {
-                    animation: animationPause,
-                    heightPercentage: 30,
-                    debugColor: "red",
-                },
-            ],
-        },
-    ];
-
     const mockData = {
         rangeDates: [new Date("2015-01-01"), new Date("2021-01-01")],
         rangeY: [0, 1000],
@@ -298,14 +277,7 @@ const ExampleStory = () => {
         changeCurrentData(mockData1);
     }
 
-    function updateMarks() {
-        if (!marks.find((section) => section.totalHeight === 0)) {
-            updateAllMarks(marks);
-        }
-    }
-
     useEffect(() => {
-        updateMarks(marks);
         d3.select(svgCanvas.current)
             .attr("xmlns", "http://www.w3.org/2000/svg")
             .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
@@ -322,21 +294,12 @@ const ExampleStory = () => {
         { title: "Example for a Longer Label", value: 6400000 },
     ];
 
-    const fakeAnimationEvent = () => {
-        return true;
-    };
-
     const purposesChartTranslation = i18n.t(
         "clusterMessengerStory:purposes.chart.legend"
     );
 
     return (
-        <DataStory
-            progressBarColor="#3BA6FF"
-            className="example-story"
-            scrollEvent={fakeEvent}
-            marks={allMarks}
-        >
+        <DataStory progressBarColor="#3BA6FF" className="example-story">
             <LinesChart data={mockData}></LinesChart>
             <BarChart
                 data={data}
