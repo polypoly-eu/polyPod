@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import Screen from "../screen/screen.jsx";
+import Screen from "../../screen/screen.jsx";
 
 import "./baseClusterStory.css";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import i18n from "../../i18n.js";
 import BarChart from "../../components/dataViz/barChart.jsx";
-import ClusterStory from "../../components/baseClusterStory/baseClusterStory.jsx";
+import ClusterStory from "../../components/clusterStories/baseClusterStory/baseClusterStory.jsx";
 import LinesChart from "../../components/dataViz/linesChart.jsx";
 import { BUBBLES_SPEECH_SIZES } from "../../constants";
 import OneMessagerBubblesChart from "../../components/clusterStories/messengers/oneMessagerBubblesChart.jsx";

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext } from "react";
 
-import ClusterStory from "../../components/baseClusterStory/baseClusterStory.jsx";
+import ClusterStory from "../../components/clusterStories/baseClusterStory/baseClusterStory.jsx";
 import Introduction from "../../components/clusterStories/messengers/introduction.jsx";
 import Summary from "../../components/clusterStories/messengers/summary.jsx";
 import Overview from "../../components/clusterStories/messengers/overview.jsx";
