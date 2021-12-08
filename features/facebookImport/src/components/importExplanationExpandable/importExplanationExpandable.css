@@ -31,10 +31,6 @@
     font-family: "Jost Semi";
 }
 
-.import-view .explanation-expandable .intro .bold {
-    font-weight: 600 !important;
-}
-
 .import-view .explanation-expandable .head {
     width: 100%;
     max-width: var(--max-width);
