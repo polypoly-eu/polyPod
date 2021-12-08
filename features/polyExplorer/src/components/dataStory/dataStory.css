@@ -3,13 +3,6 @@
     color: var(--color-text-dark);
     overflow: hidden scroll;
     scroll-behavior: smooth;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.story .content .story-sections {
-    width: 99%;
 }
 
 .story .content .scrollytelling-marks {

@@ -121,7 +121,7 @@ const DataStory = ({
                 <div className="scrollytelling-marks" ref={marksContainer}>
                     {buildMarks()}
                 </div>
-                <div className="story-sections">{children}</div>
+                {children}
             </div>
         </Screen>
     );
