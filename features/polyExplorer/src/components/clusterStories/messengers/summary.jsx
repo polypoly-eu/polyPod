@@ -69,7 +69,7 @@ const Summary = () => {
 
     return (
         <ClusterSections as="div" className="messenger-summary">
-            <h1 className="title-messenger-story">
+            <h1 className="cluster-story-title">
                 {i18n.t(`${i18nHeader}:summary.title`)}
             </h1>
             <SectionTitle

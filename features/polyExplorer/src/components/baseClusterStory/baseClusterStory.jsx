@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import Screen from "../screen/screen.jsx";
 
-import "./dataStory.css";
+import "./baseClusterStory.css";
 
 const defaultProgressBarColor = "#3BA6FF";
 
@@ -17,7 +17,7 @@ function isInViewport(el) {
     );
 }
 
-const DataStory = ({
+const ClusterStory = ({
     children,
     progressBarColor = defaultProgressBarColor,
     className,
@@ -106,7 +106,7 @@ const DataStory = ({
     }, [marks]);
 
     return (
-        <Screen className={`story ${className}`} light={true}>
+        <Screen className={`cluster-story ${className}`} light={true}>
             <div
                 className="progress-bar"
                 style={{ backgroundColor: progressBarColor }}
@@ -127,4 +127,4 @@ const DataStory = ({
     );
 };
 
-export default DataStory;
+export default ClusterStory;

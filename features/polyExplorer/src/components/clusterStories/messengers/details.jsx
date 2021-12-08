@@ -512,7 +512,7 @@ const Details = ({ data, listOfMessengerApps }) => {
                 lot of information is sent and received. Some of that
                 information might be personal or even secret.
             </StoryParagraph>
-            <h1 className="title-messenger-story">But is it safe?</h1>
+            <h1 className="cluster-story-title">But is it safe?</h1>
             <StoryParagraph as="p">
                 When WhatsApp was acquired by Facebook eyebrows were raised.
                 Some people already stopped using it because of Facebook&rsquo;s
@@ -529,7 +529,7 @@ const Details = ({ data, listOfMessengerApps }) => {
                 also be due to privacy concerns.
             </StoryParagraph>
             <LinesChart data={chartData}></LinesChart>
-            <h1 className="title-messenger-story">So, what is the Deal?</h1>
+            <h1 className="cluster-story-title">So, what is the Deal?</h1>
             <StoryParagraph as="p">
                 WhatsApp, Instagram, and Facebook Messenger are services that
                 belong to Facebook. Facebook shares data with their subsidiary
@@ -541,7 +541,7 @@ const Details = ({ data, listOfMessengerApps }) => {
                 Facebook does to improve these services for its paying customers
                 may also bring unwanted consequences for users.
             </StoryParagraph>
-            <h1 className="title-messenger-story">What is in the data?</h1>
+            <h1 className="cluster-story-title">What is in the data?</h1>
             <StoryParagraph as="p">
                 To understand this better we looked at the data types messenger
                 apps share with other companies, the purposes given, and the

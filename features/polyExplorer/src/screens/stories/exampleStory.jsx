@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import i18n from "../../i18n.js";
 import BarChart from "../../components/dataViz/barChart.jsx";
-import DataStory from "../../components/dataStory/dataStory.jsx";
+import ClusterStory from "../../components/baseClusterStory/baseClusterStory.jsx";
 import LinesChart from "../../components/dataViz/linesChart.jsx";
 import { BUBBLES_SPEECH_SIZES } from "../../constants";
 import OneMessagerBubblesChart from "../../components/clusterStories/messengers/oneMessagerBubblesChart.jsx";
@@ -331,7 +331,7 @@ const ExampleStory = () => {
     );
 
     return (
-        <DataStory
+        <ClusterStory
             progressBarColor="#3BA6FF"
             className="example-story"
             scrollEvent={fakeEvent}
@@ -412,7 +412,7 @@ const ExampleStory = () => {
                 invidunt ut labore et dolore magna aliquyam erat, sed diam
                 voluptua.
             </p>
-        </DataStory>
+        </ClusterStory>
     );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext } from "react";
 
-import DataStory from "../../components/dataStory/dataStory.jsx";
+import ClusterStory from "../../components/baseClusterStory/baseClusterStory.jsx";
 import Introduction from "../../components/clusterStories/messengers/introduction.jsx";
 import Summary from "../../components/clusterStories/messengers/summary.jsx";
 import Overview from "../../components/clusterStories/messengers/overview.jsx";
@@ -164,7 +164,7 @@ const MessengerStory = () => {
     }
 
     return (
-        <DataStory
+        <ClusterStory
             progressBarColor="black"
             className="messenger"
             marks={allMarks}
@@ -187,7 +187,7 @@ const MessengerStory = () => {
                 data={products}
                 listOfMessengerApps={listOfMessengerApps}
             ></Details>
-        </DataStory>
+        </ClusterStory>
     );
 };
 
