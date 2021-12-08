@@ -73,7 +73,6 @@ android {
         main {
             assets.srcDirs += file('build/generated-assets')
             java.srcDirs += file('src/main/kotlin')
-            res.srcDirs += file('build/generated/res/global')
         }
         test {
             java.srcDirs += file('src/test/kotlin')
@@ -182,11 +181,6 @@ task copyThirdPartyLicenses(type: Copy) {
     into "build/generated-assets/3rd-party-licenses"
 }
 
-task copyFonts(type: Copy) {
-    from "../../assets/fonts"
-    into "build/generated/res/global/font"
-}
-
 task packageTestFeature(type: Zip) {
     archiveFileName = "test.zip"
     destinationDirectory = file("$buildDir")
@@ -220,7 +214,6 @@ tasks.whenTaskAdded { task ->
         task.dependsOn copyRemotePod
         task.dependsOn copyBundledFeatures
         task.dependsOn copyThirdPartyLicenses
-        task.dependsOn copyFonts
     }
     if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
         task.dependsOn copyTestFeatureOntoDevice
