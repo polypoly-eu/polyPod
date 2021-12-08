@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import i18n from "../../../i18n";
 import { StoryParagraph } from "./storyParagraph";
 import { ClusterSections } from "../clusterSections";
@@ -7,14 +7,7 @@ import "./summary.css";
 
 const i18nHeader = "clusterMessengerStory";
 
-const Summary = ({ animation, heightEvent }) => {
-    const wholeSummary = useRef();
-    const [bulletsAnimation, fireBulletsAnimation] = useState([
-        "hidden",
-        "hidden",
-        "hidden",
-    ]);
-
+const Summary = () => {
     const bullets = [
         {
             strongText: "summary.paragraph.two.strong",
@@ -44,7 +37,7 @@ const Summary = ({ animation, heightEvent }) => {
                             : index === 1
                             ? "bullet-two"
                             : "bullet-three"
-                    } ${bulletsAnimation[index]}`}
+                    }`}
                     key={index}
                 >
                     <span
@@ -54,7 +47,7 @@ const Summary = ({ animation, heightEvent }) => {
                                 : index === 1
                                 ? "bullet-two"
                                 : "bullet-three"
-                        } ${bulletsAnimation[index]}`}
+                        }`}
                     >
                         {i18n.t(`${i18nHeader}:${copyBullet.strongText}`)}
                     </span>
@@ -65,7 +58,7 @@ const Summary = ({ animation, heightEvent }) => {
                                 : index === 1
                                 ? "bullet-two"
                                 : "bullet-three"
-                        } ${bulletsAnimation[index]}`}
+                        } `}
                     >
                         {i18n.t(`${i18nHeader}:${copyBullet.lightText}`)}
                     </span>
@@ -74,33 +67,8 @@ const Summary = ({ animation, heightEvent }) => {
         });
     }
 
-    function _showBullet(numBullets) {
-        const copyBulletsAnimation = [...bulletsAnimation];
-        const leng = copyBulletsAnimation.length;
-
-        for (let i = 0; i < leng; i++) {
-            if (i < numBullets) {
-                copyBulletsAnimation[i] = "visible";
-            } else {
-                copyBulletsAnimation[i] = "hidden";
-            }
-        }
-
-        fireBulletsAnimation(copyBulletsAnimation);
-    }
-
-    useEffect(() => {
-        const { height } = wholeSummary.current.getBoundingClientRect();
-        heightEvent(height);
-        _showBullet(animation);
-    }, [animation]);
-
     return (
-        <ClusterSections
-            as="div"
-            className="messenger-summary"
-            ref={wholeSummary}
-        >
+        <ClusterSections as="div" className="messenger-summary">
             <h1 className="title-messenger-story">
                 {i18n.t(`${i18nHeader}:summary.title`)}
             </h1>
