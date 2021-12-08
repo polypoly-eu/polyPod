@@ -257,7 +257,7 @@ class FeatureWebView: WKWebView {
         """
         evaluateJavaScript(script) { (_, error) in
             if error != nil {
-                print(
+                Log.error(
                     """
                     Failed to trigger polyNav action '\(action)': \
                     \(String(describing: error))
@@ -302,7 +302,7 @@ extension FeatureWebView: WKScriptMessageHandler {
                         jsExpression,
                         completionHandler: { result, error in
                             if error != nil {
-                                print(
+                                Log.error(
                                     """
                                     Received an error from JavaScript: \
                                     \(error!)
@@ -318,16 +318,16 @@ extension FeatureWebView: WKScriptMessageHandler {
 
     private func doLog(data: [String: Any]) {
         guard let text = data["text"] as? String else {
-            print("Error: WebView sent bad log message")
+            Log.error("WebView sent bad log message")
             return
         }
 
-        print("Message from FeatureContainer: \(text)")
+        Log.info("Message from FeatureContainer: \(text)")
     }
     
     private func doLogError(_ error: [String: Any]) {
         let message = error["message"] as? String ?? "Unknown"
-        print("Error from FeatureContainer: \(message)")
+        Log.error("Error from FeatureContainer: \(message)")
         errorHandler(message)
     }
 }

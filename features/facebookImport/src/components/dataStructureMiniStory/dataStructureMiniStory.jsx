@@ -15,11 +15,27 @@ const DataStructureMiniStory = ({ data }) => {
         return b.value - a.value;
     });
 
+    const totalFiles = data.reduce(
+        (previous, current) => previous + current.count,
+        0
+    );
+
     const bubbleVizWidth = 400;
     const bubbleVizHeight = 400;
     const dataBubblesDarkColor = "#0f1938";
     const dataBubblesLightColor = "#f7fafc";
     const [selectedFolder, setSelectedFolder] = useState(data[0].title);
+
+    const totalTitle = i18n.t("dataStructureMiniStory:total.chip");
+
+    const dataWithTotal = [
+        ...data,
+        { title: totalTitle, count: totalFiles, value: totalFiles },
+    ];
+
+    const amountOfFiles = dataWithTotal.find(
+        (bubble) => bubble.title === selectedFolder
+    )?.count;
 
     const handleFolderSelected = (buttonContent) => {
         setSelectedFolder(buttonContent);
@@ -37,9 +53,10 @@ const DataStructureMiniStory = ({ data }) => {
         }
     };
 
-    const amountOfFiles = data.find(
-        (bubble) => bubble.title === selectedFolder
-    )?.count;
+    const category =
+        selectedFolder === totalTitle
+            ? ""
+            : i18n.t("dataStructureMiniStory:category");
 
     return (
         <>
@@ -47,6 +64,7 @@ const DataStructureMiniStory = ({ data }) => {
                 <p
                     dangerouslySetInnerHTML={{
                         __html: i18n.t("dataStructureMiniStory:folder.info", {
+                            category: category,
                             selected_folder: selectedFolder,
                             amount_of_files: amountOfFiles,
                         }),
@@ -57,13 +75,17 @@ const DataStructureMiniStory = ({ data }) => {
                     data={data}
                     width={bubbleVizWidth}
                     height={bubbleVizHeight}
-                    bubbleColor={bubbleColor}
+                    bubbleColor={
+                        selectedFolder === totalTitle
+                            ? dataBubblesLightColor
+                            : bubbleColor
+                    }
                     textColor={dataBubblesDarkColor}
                     onBubbleClick={handleBubbleClick}
                 />
             </div>
             <ChartButtons
-                buttonsContent={data.map((d) => {
+                buttonsContent={dataWithTotal.map((d) => {
                     return { id: d.title };
                 })}
                 activeButton={selectedFolder}
