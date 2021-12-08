@@ -54,8 +54,23 @@
 }
 
 @font-face {
+    font-family: "Jost Light";
+    src: url("../fonts/jost_light.ttf");
+}
+
+@font-face {
     font-family: "Jost Medium";
     src: url("../fonts/jost_medium.ttf");
+}
+
+@font-face {
+    font-family: "Jost Semi";
+    src: url("../fonts/jost_semi.ttf");
+}
+
+@font-face {
+    font-family: "Jost Bold";
+    src: url("../fonts/jost_bold.ttf");
 }
 
 * {
@@ -79,6 +94,7 @@ button:focus {
 
 .btn-highlighted,
 .btn-secondary {
+    font-family: "Jost Medium";
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -88,7 +104,6 @@ button:focus {
     height: 48px;
     color: var(--color-indigo-950);
     border-radius: 4px;
-    font-weight: 600;
     font-size: 18px;
     box-sizing: border-box;
 }

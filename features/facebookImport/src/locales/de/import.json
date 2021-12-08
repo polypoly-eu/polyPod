@@ -1,8 +1,8 @@
 {
-    "heading.request": "<strong>Daten anfordern</strong>",
-    "heading.download": "<strong>Daten herunterladen</strong>",
-    "heading.import": "<strong>Daten importieren</strong>",
-    "heading.explore": "<strong>Daten erkunden</strong>",
+    "heading.request": "Daten anfordern",
+    "heading.download": "Daten herunterladen",
+    "heading.import": "Daten importieren",
+    "heading.explore": "Daten erkunden",
     "importing.data": "Ihre Daten werden importiert",
     "intro.text.1": "Finden Sie heraus, was Facebook über Sie weiß!",
     "intro.text.2": "So laden Sie Ihre Facebook-Daten in Ihren polyPod",
