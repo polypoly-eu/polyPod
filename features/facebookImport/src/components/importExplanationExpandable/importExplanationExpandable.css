@@ -23,10 +23,6 @@
     margin: 0 0 16px 0;
 }
 
-.import-view .explanation-expandable .intro p.blue {
-    color: var(--color-indigo-500);
-}
-
 .import-view .explanation-expandable .head {
     width: 100%;
     max-width: var(--max-width);

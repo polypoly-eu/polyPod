@@ -238,7 +238,7 @@ const ImportExplanationExpandable = ({
             className="explanation-expandable"
         >
             <div className="intro">
-                <p className="blue">{i18n.t("import:intro.text.1")}</p>
+                <p>{i18n.t("import:intro.text.1")}</p>
                 <p>{i18n.t("import:intro.text.2")}</p>
                 <InfoBox textContent={i18n.t("import:intro.info")} />
             </div>
