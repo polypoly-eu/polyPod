@@ -27,8 +27,7 @@ export default class ConnectedAdvertisersAnalysis extends RootAnalysis {
                 <h2
                     style={{
                         fontSize: "60px",
-                        fontFamily: "Jost Medium",
-                        fontWeight: 600,
+                        fontFamily: "Jost Bold",
                     }}
                 >
                     {this._connectedAdvertisersCount}

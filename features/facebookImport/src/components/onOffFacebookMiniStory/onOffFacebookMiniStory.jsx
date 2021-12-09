@@ -123,11 +123,11 @@ export const OnOffFacebookMiniStoryDetails = ({ displayData }) => {
                                     height="200"
                                     numberTicks={{ x: 9, y: 3 }}
                                 />
-                                <p className="source">
+                                <div className="source">
                                     {i18n.t(
                                         "offFacebookEventsMiniStory:last.90.days"
                                     )}
-                                </p>
+                                </div>
                             </div>
                         )
                     )}

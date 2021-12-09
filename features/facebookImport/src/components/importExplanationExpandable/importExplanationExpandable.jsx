@@ -238,8 +238,8 @@ const ImportExplanationExpandable = ({
             className="explanation-expandable"
         >
             <div className="intro">
-                <p>{i18n.t("import:intro.text.1")}</p>
-                <p className="bold">{i18n.t("import:intro.text.2")}</p>
+                <p className="light">{i18n.t("import:intro.text.1")}</p>
+                <p className="semi">{i18n.t("import:intro.text.2")}</p>
                 <InfoBox textContent={i18n.t("import:intro.info")} />
             </div>
             <ScrollButton

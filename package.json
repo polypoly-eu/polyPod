@@ -1,4 +1,9 @@
 {
+  "name": "@polypoly-eu/polyPod",
+  "description": "Common monorepo and build script dependencies",
+  "scripts": {
+    "clean": "rm -rf node_modules"
+  },
   "devDependencies": {
     "@types/jest": "^27.0.3",
     "@typescript-eslint/eslint-plugin": "^4.26.0",

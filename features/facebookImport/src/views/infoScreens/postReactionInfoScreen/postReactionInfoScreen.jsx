@@ -5,14 +5,14 @@ import InfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 
 import "./postReactionInfoScreen.css";
-
+import "../infoScreens.css";
 const PostReactionInfoScreen = () => {
     const postReactionInfoText = [
         <>
             <p>{i18n.t("postReactionInfoScreen:text1")}</p>
-            <p className="legend">
-                <strong>{i18n.t("dataStructureInfoScreen:legend")}</strong>
-            </p>
+            <div className="legend chart-description-title">
+                {i18n.t("dataStructureInfoScreen:legend")}
+            </div>
             <Infographic
                 type="bubblesChartInfoScreen"
                 texts={{

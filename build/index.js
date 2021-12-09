@@ -4,6 +4,7 @@ const fs = require("fs");
 const fsPromises = require("fs/promises");
 const path = require("path");
 const { spawn } = require("child_process");
+const { performance } = require("perf_hooks");
 const validCommands = [
     "build",
     "clean",
@@ -155,17 +156,22 @@ function executeProcess(executable, args, env = process.env) {
         });
     });
 }
+
 const npm = async (...args) => {
     const start = new Date();
     const cmd = process.platform === "win32" ? "npm.cmd" : "npm";
-    await executeProcess(cmd, args, { ...process.env, FORCE_COLOR: 1 });
+    await executeProcess(
+        cmd,
+        ["--no-update-notifier", "--no-fund", ...args],
+        { ...process.env, FORCE_COLOR: 1 }
+    );
     const elapsed = new Date() - start;
     logDetail(`NPM finished in ${elapsed} ms`);
 };
 
 async function npmInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
-    await npm("ci", "--no-update-notifier", "--no-fund");
+    await npm("ci");
 }
 
 async function npmRun(script, pkg) {
@@ -251,8 +257,13 @@ function ANSIBold(string) {
     return `\x1b[1m${string}\x1b[0m`;
 }
 
-function logSuccess(command) {
-    logMain(`✅ Command «${ANSIBold(command)}» succeeded!`);
+function logSuccess(command, timeLapsed) {
+    let message = `✅ Command «${ANSIBold(command)}» succeeded`;
+    const secondsLapsed = (timeLapsed / 1000).toFixed(2);
+    if (timeLapsed) {
+        message += ` in ⏰ ${ANSIBold(secondsLapsed)}s!`;
+    }
+    logMain(message);
 }
 
 async function main() {
@@ -268,7 +279,7 @@ async function main() {
 
     if (!["list", "list-deps"].includes(command)) {
         logDetail(`👷👷‍♀️ ...`);
-        await npm("ci", "--no-update-notifier", "--no-fund");
+        await npmInstall("/");
     }
 
     if (command === "lint") {
@@ -285,6 +296,10 @@ async function main() {
         return 0;
     }
 
+    if (command === "clean") {
+        await npm("run", "clean");
+    }
+
     const metaManifest = parseManifest("build/packages.json");
     const nodeMajorVersion = parseInt(process.version.slice(1, 3), 10);
     if (nodeMajorVersion < metaManifest.requiredNodeMajorVersion) {
@@ -296,10 +311,11 @@ async function main() {
     }
 
     try {
+        const startTime = performance.now();
         const packageTree = createPackageTree(metaManifest);
         if (start) skipPackages(packageTree, start);
         await processAll(packageTree, command);
-        logSuccess(command);
+        logSuccess(command, performance.now() - startTime);
         return 0;
     } catch (error) {
         logMain(`Command '${command}' failed: ${error}\n`);

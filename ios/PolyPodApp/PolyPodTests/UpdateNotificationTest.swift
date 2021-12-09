@@ -53,6 +53,7 @@ class UpdateNotificationTest: XCTestCase {
     func testInAppNotSeenAfterPushSeen() {
         let notification = loadNotification(1)
         notification.handlePushSeen()
+        XCTAssertTrue(notification.showInApp)
         XCTAssertFalse(notification.showPush)
     }
     
