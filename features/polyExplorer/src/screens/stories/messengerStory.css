@@ -1,29 +1,49 @@
-.messenger-parts {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-
 .messenger-parts .one::first-letter {
-  float: left;
-  font-size: 60px;
-  line-height: 40px;
-  padding: 3px;
+    float: left;
+    font-size: 60px;
+    line-height: 40px;
+    padding: 3px;
 }
 
 .title-messenger-story {
-  padding-left: 20px;
-  width: 85%;
-  font-weight: bold;
-  font-size: 45px;
-  line-height: 100%;
-  letter-spacing: -0.01em;
-  color: var(--color-primary-messenger-story) !important;
+    padding-left: 20px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 45px;
+    line-height: 100%;
+    letter-spacing: -0.01em;
+    color: var(--color-primary-messenger-story);
 }
 
-@media(min-width: 321px) {
-  .title-messenger-story {
+.messenger-intro {
     width: 100%;
-  }
+    background: linear-gradient(
+        180deg,
+        var(--color-primary-messenger-story) 0%,
+        var(--color-secondary-messenger-story) 50%
+    );
+}
+
+.messenger-intro * {
+    color: var(--color-dark);
+}
+
+.story-title {
+    width: 85%;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 120%;
+    text-align: center;
+    letter-spacing: -0.01em;
+    margin: 25px 0px;
+}
+
+.story-intro-img {
+    width: 348px;
+    height: 468px;
+    margin-bottom: 60px;
+}
+
+.messenger-el {
+    font-weight: 600;
 }

@@ -39,7 +39,7 @@ const DataStory = ({
                 ref={scrollRef}
                 onScroll={() => handleProgress()}
             >
-                <div className="story-sections">{children}</div>
+                {children}
             </div>
         </Screen>
     );

@@ -4,19 +4,7 @@
     overflow: hidden scroll;
     scroll-behavior: smooth;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.story .content .story-sections {
-    width: 99%;
-}
-
-.story .content .scrollytelling-marks {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
 }
 
 .story .scroll-up-btn,
