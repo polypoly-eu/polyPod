@@ -296,10 +296,6 @@ async function main() {
         return 0;
     }
 
-    if (command === "clean") {
-        await npm("run", "clean");
-    }
-
     const metaManifest = parseManifest("build/packages.json");
     const nodeMajorVersion = parseInt(process.version.slice(1, 3), 10);
     if (nodeMajorVersion < metaManifest.requiredNodeMajorVersion) {
@@ -320,6 +316,10 @@ async function main() {
     } catch (error) {
         logMain(`Command '${command}' failed: ${error}\n`);
         return 1;
+    }
+
+    if (command === "clean") {
+        await npm("run", "clean");
     }
 }
 
