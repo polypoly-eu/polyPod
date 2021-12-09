@@ -1,0 +1,24 @@
+.bullet-points {
+    list-style: none;
+    counter-reset: bullet-point-counter;
+    padding-left: 60px;
+}
+
+li {
+    counter-increment: bullet-point-counter;
+    position: relative;
+}
+
+.bullet-points li p::before {
+    content: counter(bullet-point-counter);
+    position: absolute;
+    --size: 32px;
+    left: calc(-16px - var(--size));
+    line-height: var(--size);
+    width: var(--size);
+    height: var(--size);
+    top: -2px;
+    background: var(--color-primary-messenger-story);
+    border-radius: 50%;
+    text-align: center;
+}

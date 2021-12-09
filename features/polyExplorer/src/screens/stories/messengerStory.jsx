@@ -1,19 +1,18 @@
 import React, { useContext } from "react";
 
-import DataStory from "../../components/dataStory/dataStory.jsx";
-import Summary from "../../components/clusterStories/messengers/summary.jsx";
-import Overview from "../../components/clusterStories/messengers/overview.jsx";
-import Details from "../../components/clusterStories/messengers/details.jsx";
+import DataStory from "../../components/clusterStory/clusterStory.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
-import { StoryParagraph } from "../../components/clusterStories/messengers/storyParagraph.js";
+import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
+import Tab from "../../components/clusterStories/tab.jsx";
 
 import "./messengerStory.css";
+import BulletPoints from "../../components/bulletPoints/bulletPoints.jsx";
 
 const i18nHeader = "clusterMessengerStory";
 
 const MessengerStory = () => {
-    const { products } = useContext(ExplorerContext);
+    //const { products } = useContext(ExplorerContext);
 
     const listOfMessengerApps = [
         "Facebook Messenger",
@@ -27,35 +26,55 @@ const MessengerStory = () => {
         "iMessage",
     ];
 
+    const summaryBullets = [
+        i18n.t(`${i18nHeader}:summary.bullet.1`),
+        i18n.t(`${i18nHeader}:summary.bullet.2`),
+        i18n.t(`${i18nHeader}:summary.bullet.3`),
+    ];
+
     return (
-        <DataStory progressBarColor="black" className="messenger">
-            <div className="messenger-intro">
-                <h1 className="story-title">{i18n.t(`${i18nHeader}:title`)}</h1>
-                <StoryParagraph as="p" className="one">
-                    {i18n.t(`${i18nHeader}:intro.paragraph.one`)}
-                </StoryParagraph>
-                <img
-                    className="story-intro-img"
-                    src="images/stories/messenger/intro-guy.svg"
-                    alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
-                />
-                <StoryParagraph as="p" className="two upper">
-                    {i18n.t(`${i18nHeader}:intro.paragraph.two`)}
-                </StoryParagraph>
-                <StoryParagraph as="ul" className="messenger-list upper">
-                    {listOfMessengerApps.map((messenger, index) => (
-                        <li key={index} className="messenger-el">
-                            {messenger}
-                        </li>
-                    ))}
-                </StoryParagraph>
-            </div>
-            <Summary></Summary>
-            <Overview products={products}></Overview>
-            <Details
-                data={products}
-                listOfMessengerApps={listOfMessengerApps}
-            ></Details>
+        <DataStory progressBarColor="black" className="messenger-story">
+            <div className="messenger-intro-background"></div>
+            <h1 className="story-title">{i18n.t(`${i18nHeader}:title`)}</h1>
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:intro.paragraph.one`)}
+            </p>
+            <img
+                className="story-intro-img"
+                src="images/stories/messenger/intro-guy.svg"
+                alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
+            />
+            <p>{i18n.t(`${i18nHeader}:intro.paragraph.two`)}</p>
+            <ul className="messenger-list">
+                {listOfMessengerApps.map((messenger, index) => (
+                    <li key={index} className="messenger-el">
+                        {messenger}
+                    </li>
+                ))}
+            </ul>
+            <h1 className="title-messenger-story">
+                {i18n.t(`${i18nHeader}:summary.title`)}
+            </h1>
+            <SectionTitle
+                title={i18n.t(`${i18nHeader}:summary.section`)}
+            ></SectionTitle>
+            <p className="introduction-summary">
+                {i18n.t(`${i18nHeader}:summary.paragraph.one`)}
+            </p>
+            <BulletPoints bullets={summaryBullets} />
+            <SectionTitle
+                title={i18n.t(`${i18nHeader}:overview.section`)}
+            ></SectionTitle>
+            <p>{i18n.t(`${i18nHeader}:overview.paragraph.one`)}</p>
+            <Tab>
+                <div
+                    label={i18n.t(`${i18nHeader}:overview.tab.installs`)}
+                ></div>
+                <div label={i18n.t(`${i18nHeader}:overview.tab.users`)}></div>
+                <div label={i18n.t(`${i18nHeader}:overview.tab.partof`)}></div>
+            </Tab>
+            <div className="chart-container"></div>
+            <p>{i18n.t(`${i18nHeader}:overview.paragraph.two`)}</p>
         </DataStory>
     );
 };

@@ -24,29 +24,10 @@ const Summary = () => {
     ];
 
     return (
-        <ClusterSections as="div" className="messenger-summary">
-            <h1 className="title-messenger-story">
-                {i18n.t(`${i18nHeader}:summary.title`)}
-            </h1>
-            <SectionTitle
-                title={i18n.t(`${i18nHeader}:summary.section`)}
-            ></SectionTitle>
-            <StoryParagraph as="div" className="introduction-summary">
-                {i18n.t(`${i18nHeader}:summary.paragraph.one`)}
-            </StoryParagraph>
-            <ol className="things-to-be-aware">
-                {bullets.map(({ strongText, lightText }, i) => (
-                    <li className={`bullet-summary`} key={i}>
-                        <span className={`strong-text`}>
-                            {i18n.t(`${i18nHeader}:${strongText}`)}
-                        </span>
-                        <span className={`light-text`}>
-                            {i18n.t(`${i18nHeader}:${lightText}`)}
-                        </span>
-                    </li>
-                ))}
-            </ol>
-        </ClusterSections>
+        <ClusterSections
+            as="div"
+            className="messenger-summary"
+        ></ClusterSections>
     );
 };
 

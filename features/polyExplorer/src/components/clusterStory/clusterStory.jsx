@@ -1,14 +1,15 @@
 import React, { useRef } from "react";
 import Screen from "../screen/screen.jsx";
 
-import "./dataStory.css";
+import "./clusterStory.css";
 
 const defaultProgressBarColor = "#3BA6FF";
 
-const DataStory = ({
+const ClusterStory = ({
     children,
     progressBarColor = defaultProgressBarColor,
     className,
+    fadingTopBackground,
 }) => {
     const scrollRef = useRef();
     const progressRef = useRef();
@@ -27,7 +28,7 @@ const DataStory = ({
     };
 
     return (
-        <Screen className={`story ${className}`} light={true}>
+        <Screen className={`cluster-story ${className}`} light={true}>
             <div
                 className="progress-bar"
                 style={{ backgroundColor: progressBarColor }}
@@ -38,6 +39,13 @@ const DataStory = ({
                 className="content"
                 ref={scrollRef}
                 onScroll={() => handleProgress()}
+                style={
+                    true
+                        ? {
+                              background: `linear-gradient( 180deg, ${"var(--color-primary-messenger-story)"} 0%, var(--color-secondary-messenger-story) 600px)`,
+                          }
+                        : null
+                }
             >
                 {children}
             </div>
@@ -45,4 +53,4 @@ const DataStory = ({
     );
 };
 
-export default DataStory;
+export default ClusterStory;
