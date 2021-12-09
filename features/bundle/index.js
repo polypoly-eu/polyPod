@@ -3,6 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 const zip = require("bestzip");
+
 function packageFeature({ archiveName, moduleName, artifactPath }, targetDir) {
     console.log(`Packaging ${archiveName}`);
     const targetArchive = path.join(targetDir, `${archiveName}.zip`);

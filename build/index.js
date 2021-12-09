@@ -1,4 +1,5 @@
 "use strict";
+
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 const path = require("path");
@@ -177,6 +178,7 @@ async function npmRun(script, pkg) {
 
 async function cleanPackage(pkg) {
     if (await npmRun("clean", pkg)) return;
+
     // Just so that we don't have to add a 'clean' script to every single
     // package, we cover the conventional case as a fallback - but it's
     // arguably a bit dangerous.
@@ -273,7 +275,6 @@ async function main() {
         logDetail(`🧹 ...`);
         await executeProcess("npx", ["eslint", ...eslintOptions]);
         logSuccess(command);
-
         return 0;
     }
 
