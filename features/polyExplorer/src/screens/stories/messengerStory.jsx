@@ -61,9 +61,9 @@ const MessengerStory = () => {
                     </li>
                 ))}
             </ul>
-            <h1 className="cluster-story-title">
+            <h2 className="cluster-story-title">
                 {i18n.t(`${i18nHeader}:summary.title`)}
-            </h1>
+            </h2>
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:summary.section`)}
             ></SectionTitle>
