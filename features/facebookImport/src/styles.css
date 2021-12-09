@@ -64,11 +64,6 @@
 }
 
 @font-face {
-    font-family: "Jost Semi";
-    src: url("../fonts/jost_semi.ttf");
-}
-
-@font-face {
     font-family: "Jost Bold";
     src: url("../fonts/jost_bold.ttf");
 }
