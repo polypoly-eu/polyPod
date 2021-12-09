@@ -13,8 +13,8 @@ function packageFeature({ archiveName, moduleName, artifactPath }, targetDir) {
         moduleName,
         artifactPath
     );
-    zip({
-        source: "",
+    return zip({
+        source: ".",
         destination: targetArchive,
         cwd: sourceDir,
     }).catch((error) => {
