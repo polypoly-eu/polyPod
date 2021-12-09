@@ -1,7 +1,5 @@
 .cluster-story .content {
     width: 100%;
-    display: flex;
-    flex-direction: column;
     padding: 0 16px;
     box-sizing: border-box;
     z-index: 2;
@@ -50,6 +48,7 @@
 .cluster-story-img {
     width: 348px;
     height: 468px;
+    display: block;
     margin: 0 auto 60px auto;
 }
 
@@ -61,6 +60,7 @@
 }
 
 .cluster-story-title {
+    margin-top: 50px;
     font-weight: bold;
     font-size: 45px;
     line-height: 120%;
