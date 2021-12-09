@@ -4,7 +4,7 @@
     padding-left: 60px;
 }
 
-li {
+.bullet-points li {
     counter-increment: bullet-point-counter;
     position: relative;
 }

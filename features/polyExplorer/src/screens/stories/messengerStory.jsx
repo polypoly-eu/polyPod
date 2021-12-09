@@ -7,7 +7,7 @@ import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import Tab from "../../components/clusterStories/tab.jsx";
 
 import "./messengerStory.css";
-import BulletPoints from "../../components/bulletPoints/bulletPoints.jsx";
+import OrderedList from "../../components/orderedList/orderedList.jsx";
 
 const i18nHeader = "clusterMessengerStory";
 
@@ -68,7 +68,7 @@ const MessengerStory = () => {
             <p className="introduction-summary">
                 {i18n.t(`${i18nHeader}:summary.paragraph.one`)}
             </p>
-            <BulletPoints bullets={summaryBullets} />
+            <OrderedList bullets={summaryBullets} />
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:overview.section`)}
             ></SectionTitle>
