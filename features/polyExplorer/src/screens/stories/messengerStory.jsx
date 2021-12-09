@@ -42,7 +42,9 @@ const MessengerStory = () => {
             }}
         >
             <div className="messenger-intro-background"></div>
-            <h1 className="story-title">{i18n.t(`${i18nHeader}:title`)}</h1>
+            <h1 className="cluster-story-title">
+                {i18n.t(`${i18nHeader}:title`)}
+            </h1>
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:intro.paragraph.one`)}
             </p>

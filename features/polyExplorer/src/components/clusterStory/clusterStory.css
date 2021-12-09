@@ -30,3 +30,20 @@
 .cluster-story .content::-webkit-scrollbar-track {
     margin-top: 8px;
 }
+
+.cluster-story-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 120%;
+    text-align: center;
+    letter-spacing: -0.01em;
+    margin: 0 0 25px 0;
+    padding-top: 25px;
+}
+
+.big-first-letter::first-letter {
+    float: left;
+    font-size: 60px;
+    line-height: 40px;
+    padding: 0 12px;
+}
