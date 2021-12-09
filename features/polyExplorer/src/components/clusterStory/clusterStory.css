@@ -9,6 +9,12 @@
 
 .cluster-story .content * {
     max-width: var(--max-width);
+    color: var(--color-text-dark);
+}
+
+.cluster-story .content p {
+    line-height: 120%;
+    letter-spacing: -0.01em;
 }
 
 .cluster-story .scroll-up-btn,
@@ -31,7 +37,7 @@
     margin-top: 8px;
 }
 
-.cluster-story-title {
+.cluster-story-main-title {
     font-size: 24px;
     font-weight: 600;
     line-height: 120%;
@@ -41,9 +47,21 @@
     padding-top: 25px;
 }
 
+.cluster-story-img {
+    width: 348px;
+    height: 468px;
+    margin: 0 auto 60px auto;
+}
+
 .big-first-letter::first-letter {
     float: left;
     font-size: 60px;
     line-height: 40px;
     padding: 0 12px;
+}
+
+.cluster-story-title {
+    font-weight: bold;
+    font-size: 45px;
+    line-height: 120%;
 }

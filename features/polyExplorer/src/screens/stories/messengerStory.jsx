@@ -42,14 +42,14 @@ const MessengerStory = () => {
             }}
         >
             <div className="messenger-intro-background"></div>
-            <h1 className="cluster-story-title">
+            <h1 className="cluster-story-main-title">
                 {i18n.t(`${i18nHeader}:title`)}
             </h1>
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:intro.paragraph.one`)}
             </p>
             <img
-                className="story-intro-img"
+                className="cluster-story-img"
                 src="images/stories/messenger/intro-guy.svg"
                 alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
             />
@@ -61,7 +61,7 @@ const MessengerStory = () => {
                     </li>
                 ))}
             </ul>
-            <h1 className="title-messenger-story">
+            <h1 className="cluster-story-title">
                 {i18n.t(`${i18nHeader}:summary.title`)}
             </h1>
             <SectionTitle
