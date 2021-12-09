@@ -70,7 +70,7 @@ const MessengerStory = () => {
             <p className="introduction-summary">
                 {i18n.t(`${i18nHeader}:summary.paragraph.one`)}
             </p>
-            <OrderedList bullets={summaryBullets} />
+            <OrderedList list={summaryBullets} />
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:overview.section`)}
             ></SectionTitle>
