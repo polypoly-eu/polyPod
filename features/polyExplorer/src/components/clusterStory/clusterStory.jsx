@@ -40,9 +40,9 @@ const ClusterStory = ({
                 ref={scrollRef}
                 onScroll={() => handleProgress()}
                 style={
-                    true
+                    fadingTopBackground
                         ? {
-                              background: `linear-gradient( 180deg, ${"var(--color-primary-messenger-story)"} 0%, var(--color-secondary-messenger-story) 600px)`,
+                              background: `linear-gradient( 180deg, ${fadingTopBackground.color} 0%, transparent ${fadingTopBackground.distance})`,
                           }
                         : null
                 }

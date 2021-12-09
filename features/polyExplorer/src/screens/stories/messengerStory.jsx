@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import DataStory from "../../components/clusterStory/clusterStory.jsx";
-import { ExplorerContext } from "../../context/explorer-context.jsx";
+//import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import Tab from "../../components/clusterStories/tab.jsx";
@@ -33,7 +33,14 @@ const MessengerStory = () => {
     ];
 
     return (
-        <DataStory progressBarColor="black" className="messenger-story">
+        <DataStory
+            progressBarColor="black"
+            className="messenger-story"
+            fadingTopBackground={{
+                color: "var(--color-primary-messenger-story)",
+                distance: "600px",
+            }}
+        >
             <div className="messenger-intro-background"></div>
             <h1 className="story-title">{i18n.t(`${i18nHeader}:title`)}</h1>
             <p className="big-first-letter">
