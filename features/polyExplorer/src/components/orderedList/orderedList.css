@@ -1,15 +1,15 @@
-.bullet-points {
+.ordered-list {
     list-style: none;
     counter-reset: bullet-point-counter;
     padding-left: 60px;
 }
 
-.bullet-points li {
+.ordered-list li {
     counter-increment: bullet-point-counter;
     position: relative;
 }
 
-.bullet-points li p::before {
+.ordered-list li p::before {
     content: counter(bullet-point-counter);
     position: absolute;
     --size: 32px;
