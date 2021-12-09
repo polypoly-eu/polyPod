@@ -1,6 +1,6 @@
 import React from "react";
 
-import DataStory from "../../components/clusterStory/clusterStory.jsx";
+import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 //import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
@@ -33,7 +33,7 @@ const MessengerStory = () => {
     ];
 
     return (
-        <DataStory
+        <ClusterStory
             progressBarColor="black"
             className="messenger-story"
             fadingTopBackground={{
@@ -82,7 +82,7 @@ const MessengerStory = () => {
             </Tab>
             <div className="chart-container"></div>
             <p>{i18n.t(`${i18nHeader}:overview.paragraph.two`)}</p>
-        </DataStory>
+        </ClusterStory>
     );
 };
 

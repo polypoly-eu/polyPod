@@ -18,9 +18,9 @@
 }
 
 .overview .overview-title {
+    font-family: "Jost Medium";
     max-width: 320px;
     font-size: 24px;
-    font-weight: 600;
     line-height: 28.8px;
     margin: 0 0 16px 0;
 }
@@ -78,12 +78,12 @@ h4 {
 }
 
 .overview .footer .btn-holder .btn {
+    font-family: "Jost Medium";
     height: 48px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 4px;
-    font-weight: 600;
     font-size: 18px;
     box-sizing: border-box;
 }

@@ -23,8 +23,12 @@
     margin: 0 0 16px 0;
 }
 
-.import-view .explanation-expandable .intro .bold {
-    font-weight: 600 !important;
+.import-view .explanation-expandable .intro .light {
+    font-family: "Jost Light";
+}
+
+.import-view .explanation-expandable .intro .semi {
+    font-family: "Jost Semi";
 }
 
 .import-view .explanation-expandable .head {
@@ -53,13 +57,10 @@
 }
 
 .import-view .explanation-expandable .head .heading {
+    font-family: "Jost Medium";
     margin-left: 18px;
     font-size: 24px;
     flex: 1 1 auto;
-}
-
-.import-view .explanation-expandable .head strong {
-    font-weight: 600;
 }
 
 .import-view .explanation-expandable .head .rotate-180 {
@@ -142,6 +143,7 @@ h5 {
 }
 
 .import-view .explanation-expandable .section-body h4 {
+    font-family: "Jost Medium";
     font-size: 24px;
     margin-bottom: 36px;
     margin-top: 20px;

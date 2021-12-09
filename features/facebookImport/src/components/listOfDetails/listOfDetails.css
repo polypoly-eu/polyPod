@@ -8,6 +8,15 @@
     overflow: hidden scroll;
 }
 
+.scrollable-list ul li {
+    margin-bottom: 18px;
+}
+
+.scrollable-list ul .items {
+    font-family: "Jost Medium";
+    font-size: 20px;
+}
+
 .list-gradient {
     position: absolute;
     width: 100%;
