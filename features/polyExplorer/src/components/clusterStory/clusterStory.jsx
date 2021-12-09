@@ -58,7 +58,7 @@ const ClusterStory = ({
                 style={
                     fadingTopBackground
                         ? {
-                              background: `linear-gradient( 180deg, ${fadingTopBackground.color} 0%, transparent ${fadingTopBackground.distance})`,
+                              background: `linear-gradient( 180deg, ${fadingTopBackground.color} 0%, #FFFFFF ${fadingTopBackground.distance})`,
                           }
                         : null
                 }
