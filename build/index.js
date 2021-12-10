@@ -3,7 +3,7 @@
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 const path = require("path");
-const { spawn } = require("child_process");
+const shell = require("shelljs");
 const { performance } = require("perf_hooks");
 const validCommands = [
     "build",
@@ -139,32 +139,19 @@ function logDependencies(packageTree) {
     }
 }
 
-function executeProcess(executable, args, env = process.env) {
-    const spawnedProcess = spawn(executable, args, { env: env });
-    spawnedProcess.stdout.on("data", (data) => {
-        console.log(data.toString());
-    });
-
-    spawnedProcess.stderr.on("data", (data) => {
-        console.error(data.toString());
-    });
+function executeProcess(executable, args) {
+    const execString = [executable, ...args].join(" ");
+    const shellProcess = shell.exec(execString);
 
     return new Promise((resolve, reject) => {
-        spawnedProcess.on("exit", (code) => {
-            if (code === 0) resolve();
-            else reject(`Process exited with ${code}`);
-        });
+        if (shellProcess.code === 0) resolve();
+        else reject(`Process exited with ${shellProcess.code}`);
     });
 }
 
 const npm = async (...args) => {
     const start = new Date();
-    const cmd = process.platform === "win32" ? "npm.cmd" : "npm";
-    await executeProcess(
-        cmd,
-        ["--no-update-notifier", "--no-fund", ...args],
-        { ...process.env, FORCE_COLOR: 1 }
-    );
+    await executeProcess("npm", ["--no-update-notifier", "--no-fund", ...args]);
     const elapsed = new Date() - start;
     logDetail(`NPM finished in ${elapsed} ms`);
 };
