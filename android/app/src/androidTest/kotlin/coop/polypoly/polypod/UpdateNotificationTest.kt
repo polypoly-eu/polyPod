@@ -11,7 +11,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import coop.polypoly.polypod.updatenotification.UpdateNotification
+import coop.polypoly.polypod.core.UpdateNotification
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

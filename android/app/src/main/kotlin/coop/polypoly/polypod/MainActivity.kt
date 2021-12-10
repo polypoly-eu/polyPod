@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import coop.polypoly.polypod.features.FeatureStorage
-import coop.polypoly.polypod.updatenotification.UpdateNotification
+import coop.polypoly.polypod.core.UpdateNotification
 
 class MainActivity : AppCompatActivity() {
 
