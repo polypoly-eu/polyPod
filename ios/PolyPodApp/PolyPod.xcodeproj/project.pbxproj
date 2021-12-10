@@ -384,6 +384,7 @@
 		1AA6DE2624191C94008DB1B2 = {
 			isa = PBXGroup;
 			children = (
+				E9018EDF276370B500FDF34A /* Core */,
 				E97D3274263151BC00A5A180 /* Features */,
 				E97D326726308BC700A5A180 /* Extensions */,
 				1A57E65424A4C3FB0043E3AD /* Bubblewrap */,
@@ -433,7 +434,6 @@
 				E97D3279263153C200A5A180 /* NavigationBar.swift */,
 				E97D32A72631BF7700A5A180 /* HTMLView.swift */,
 				E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */,
-				E9545EAD273530ED001E8C7F /* UpdateNotification.swift */,
 				E93EC98B273D65D400E20512 /* Authentication.swift */,
 				E96817F0274D032A00206602 /* Language.swift */,
 				E996EBD12756BBE900EAC9F7 /* Log.swift */,
@@ -509,6 +509,14 @@
 				5B8653012643FC310014208C /* PolyNav.swift */,
 			);
 			path = PolyNav;
+			sourceTree = "<group>";
+		};
+		E9018EDF276370B500FDF34A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E9545EAD273530ED001E8C7F /* UpdateNotification.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		E9040D4526F0A2FB00A88593 /* Info */ = {
