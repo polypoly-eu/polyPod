@@ -1,8 +1,8 @@
 import ConnectedAdvertisersImporter, {
     CONNECTED_ADVERTISERS_INTERESTS_FILE_PATH,
 } from "../../src/model/importers/connected-advertisers-importer";
+import { CONNECTED_ADVERTISERS_DATA_SPECIFICATION } from "../datasets/connected-advertisers-all-types-data";
 import {
-    CONNECTED_ADVERTISERS_DATA_SPECIFICATION,
     DATASET_EXPECTED_VALUES,
     zipFileWithConnectedAdvertisers,
 } from "../datasets/connected-advertisers-data";
@@ -64,7 +64,9 @@ describe("Import connected advertisers", () => {
             (connectedAdvertiser) => connectedAdvertiser.name
         );
         expect(obtainedData).toStrictEqual(
-            CONNECTED_ADVERTISERS_DATA_SPECIFICATION
+            CONNECTED_ADVERTISERS_DATA_SPECIFICATION.map(
+                (dataRow) => dataRow[0]
+            )
         );
     });
 });
