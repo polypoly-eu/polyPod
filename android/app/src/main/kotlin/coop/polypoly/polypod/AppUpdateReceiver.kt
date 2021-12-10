@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
-import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.core.UpdateNotification
+import coop.polypoly.polypod.logging.LoggerFactory
 import java.util.concurrent.TimeUnit
 
 class AppUpdateReceiver : BroadcastReceiver() {
