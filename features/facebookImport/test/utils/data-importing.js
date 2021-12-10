@@ -43,7 +43,7 @@ export async function runConnectedAdvertisersImporter(zipFile) {
     return runSingleImporter(ConnectedAdvertisersImporter, zipFile);
 }
 
-export async function runConnectedAdvertisersWitlAllTypesImporter(zipFile) {
+export async function runConnectedAdvertisersWithAllTypesImporter(zipFile) {
     return runSingleImporter(ConnectedAdvertisersAllTypesImporter, zipFile);
 }
 

@@ -8,7 +8,7 @@ import {
 } from "../datasets/connected-advertisers-all-types-data";
 import { ZipFileMock } from "../mocks/zipfile-mock";
 import { zipWithWrongDatasetKey } from "../utils/data-creation";
-import { runConnectedAdvertisersWitlAllTypesImporter } from "../utils/data-importing";
+import { runConnectedAdvertisersWithAllTypesImporter } from "../utils/data-importing";
 import {
     expectImportSuccess,
     expectInvalidContentError,
@@ -22,7 +22,7 @@ describe("Import connected advertisers with all types from empty export", () => 
     });
 
     it("triggers missing files error", async () => {
-        const { result } = await runConnectedAdvertisersWitlAllTypesImporter(
+        const { result } = await runConnectedAdvertisersWithAllTypesImporter(
             zipFile
         );
         expectMissingFileError(result, ConnectedAdvertisersAllTypesImporter);
@@ -38,7 +38,7 @@ describe("Import connected advertisers with all types from empty export with wro
     });
 
     it("triggers missing data key error", async () => {
-        const { result } = await runConnectedAdvertisersWitlAllTypesImporter(
+        const { result } = await runConnectedAdvertisersWithAllTypesImporter(
             zipFile
         );
         expectInvalidContentError(result, ConnectedAdvertisersAllTypesImporter);
@@ -52,7 +52,7 @@ describe("Import connected advertisers with all types", () => {
     beforeAll(async () => {
         const zipFile = zipFileWithConnectedAdvertisersAllTypes();
         ({ result, facebookAccount } =
-            await runConnectedAdvertisersWitlAllTypesImporter(zipFile));
+            await runConnectedAdvertisersWithAllTypesImporter(zipFile));
     });
 
     it("returns success status", () => expectImportSuccess(result));
