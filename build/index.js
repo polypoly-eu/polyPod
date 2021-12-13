@@ -3,7 +3,7 @@
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 const path = require("path");
-const shell = require("shelljs");
+const { spawn } = require("child_process");
 const { performance } = require("perf_hooks");
 const validCommands = [
     "build",
@@ -139,13 +139,22 @@ function logDependencies(packageTree) {
     }
 }
 
-function executeProcess(executable, args) {
-    const execString = [executable, ...args].join(" ");
-    const shellProcess = shell.exec(execString);
+function executeProcess(executable, args, env = process.env) {
+    const cmd = process.platform === "win32" ? `${executable}.cmd` : executable;
+    const spawnedProcess = spawn(executable, args, { env: env });
+    spawnedProcess.stdout.on("data", (data) => {
+        console.log(data.toString());
+    });
+
+    spawnedProcess.stderr.on("data", (data) => {
+        console.error(data.toString());
+    });
 
     return new Promise((resolve, reject) => {
-        if (shellProcess.code === 0) resolve();
-        else reject(`Process exited with ${shellProcess.code}`);
+        spawnedProcess.on("exit", (code) => {
+            if (code === 0) resolve();
+            else reject(`Process exited with ${code}`);
+        });
     });
 }
 
