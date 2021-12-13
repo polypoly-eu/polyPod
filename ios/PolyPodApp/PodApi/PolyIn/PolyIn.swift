@@ -1,10 +1,10 @@
 import CoreData
 
 protocol PolyInProtocol {
-    func addQuads(quads: [ExtendedData], completionHandler: (Bool) -> Void)
+    func addQuads(quads: [ExtendedData], completionHandler: (Error?) -> Void)
     func matchQuads(matcher: ExtendedData, completionHandler: ([ExtendedData]?, Error?) -> Void)
     func selectQuads(matcher: ExtendedData, completionHandler: ([ExtendedData]?, Error?) -> Void)
-    func deleteQuads(quads: [ExtendedData], completionHandler: (Bool) -> Void)
+    func deleteQuads(quads: [ExtendedData], completionHandler: (Error?) -> Void)
     func hasQuads(quads: [ExtendedData], completionHandler: (Bool) -> Void) -> Void
 }
 
