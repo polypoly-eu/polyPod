@@ -1,4 +1,4 @@
-package coop.polypoly.polypod.updatenotification
+package coop.polypoly.polypod
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -11,8 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import coop.polypoly.polypod.MainActivity
-import coop.polypoly.polypod.R
+import coop.polypoly.polypod.core.UpdateNotification
 
 private const val CHANNEL_ID = "coop.polypoly.polypod.update"
 private const val CHANNEL_NAME = "polyPod updates"

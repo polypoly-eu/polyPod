@@ -1,4 +1,4 @@
-package coop.polypoly.polypod.updatenotification
+package coop.polypoly.polypod.core
 
 import android.content.Context
 import coop.polypoly.polypod.Preferences
