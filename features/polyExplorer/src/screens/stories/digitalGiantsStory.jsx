@@ -6,12 +6,12 @@ import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import Tab from "../../components/clusterStories/tab.jsx";
 
-import "./messengerStory.css";
-import OrderedList from "../../components/orderedList/orderedList.jsx";
+import "./digitalGiantsStory.css";
+import BulletPoints from "../../components/bulletPoints/bulletPoints.jsx";
 
-const i18nHeader = "clusterMessengerStory";
+const i18nHeader = "digitalGiantsStory";
 
-const MessengerStory = () => {
+const DigitalGiantsStory = () => {
     //const { products } = useContext(ExplorerContext);
 
     const listOfMessengerApps = [
@@ -42,14 +42,12 @@ const MessengerStory = () => {
             }}
         >
             <div className="messenger-intro-background"></div>
-            <h1 className="cluster-story-main-title">
-                {i18n.t(`${i18nHeader}:title`)}
-            </h1>
+            <h1 className="story-title">{i18n.t(`${i18nHeader}:title`)}</h1>
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:intro.paragraph.one`)}
             </p>
             <img
-                className="cluster-story-img"
+                className="story-intro-img"
                 src="images/stories/messenger/intro-guy.svg"
                 alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
             />
@@ -61,16 +59,16 @@ const MessengerStory = () => {
                     </li>
                 ))}
             </ul>
-            <h2 className="cluster-story-title">
+            <h1 className="title-messenger-story">
                 {i18n.t(`${i18nHeader}:summary.title`)}
-            </h2>
+            </h1>
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:summary.section`)}
             ></SectionTitle>
             <p className="introduction-summary">
                 {i18n.t(`${i18nHeader}:summary.paragraph.one`)}
             </p>
-            <OrderedList list={summaryBullets} />
+            <BulletPoints bullets={summaryBullets} />
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:overview.section`)}
             ></SectionTitle>
@@ -88,4 +86,4 @@ const MessengerStory = () => {
     );
 };
 
-export default MessengerStory;
+export default DigitalGiantsStory;
