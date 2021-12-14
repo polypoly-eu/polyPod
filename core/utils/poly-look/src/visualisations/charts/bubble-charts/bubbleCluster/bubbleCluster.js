@@ -10,6 +10,7 @@ const bigBubblesFont = "20px";
 const mediumBubblesFont = "16px";
 const defaultBubbleColor = "blue";
 const defaultTextColor = "white";
+const defaultStrokeColor = "#f7fafc";
 const defaultOpacity = 1;
 const defaultValueShowing = true;
 const defaultOnClickFunction = () => {};
@@ -32,6 +33,7 @@ const defaultOnClickFunction = () => {};
  * @param {number = 300} height - The height of the svg
  * @param {string|callback = "blue"} [bubbleColor] - The color of the bubble (callbacks receive event and data)
  * @param {string|callback = "white"} [textColor] - The color of the bubble text (callbacks receive event and data)
+ * @param {string|callback = "#f7fafc"} [strokeColor] - The color of the bubble stroke/border (callbacks receive event and data)
  * @param {number|callback = 1} [opacity] - The opacity of the bubbles color 0 <= opacity <= 1 (callbacks receive event and data)
  * @param {boolean = true} [showValues] - Whether texts displaying the value of the bubble are added
  * @param {callback = () => {}} [onBubbleClick] - Bubble onclick function
@@ -50,6 +52,7 @@ export class BubbleCluster extends Chart {
     height,
     bubbleColor = defaultBubbleColor,
     textColor = defaultTextColor,
+    strokeColor = defaultStrokeColor,
     opacity = defaultOpacity,
     showValues = defaultValueShowing,
     onBubbleClick = defaultOnClickFunction,
@@ -58,6 +61,7 @@ export class BubbleCluster extends Chart {
     super({ selector, data, width, height });
     this._bubbleColor = bubbleColor;
     this._textColor = textColor;
+    this._strokeColor = strokeColor;
     this._opacity = opacity;
     this._showValues = showValues;
     this._onBubbleClick = onBubbleClick;
@@ -113,7 +117,7 @@ export class BubbleCluster extends Chart {
     leaves
       .selectAll(".bubble")
       .style("fill", this._bubbleColor)
-      .style("stroke", "#f7fafc")
+      .style("stroke", this._strokeColor)
       .style("vertical-align", "center")
       .attr("filter", this._filterActivationCondition);
 
@@ -140,7 +144,7 @@ export class BubbleCluster extends Chart {
       .attr("class", "bubble")
       .attr("r", (d) => d.r)
       .style("fill", this._bubbleColor)
-      .style("stroke", "#f7fafc")
+      .style("stroke", this._strokeColor)
       .style("vertical-align", "center")
       .attr("fill-opacity", this._opacity);
   }

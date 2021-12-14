@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
-//import { ExplorerContext } from "../../context/explorer-context.jsx";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import Tab from "../../components/clusterStories/tab.jsx";
+import MatrixBubblesChart from "../../components/clusterStories/messengers/MatrixBubblesChart.jsx";
 
 import "./messengerStory.css";
 import OrderedList from "../../components/orderedList/orderedList.jsx";
@@ -12,7 +13,7 @@ import OrderedList from "../../components/orderedList/orderedList.jsx";
 const i18nHeader = "clusterMessengerStory";
 
 const MessengerStory = () => {
-    //const { products } = useContext(ExplorerContext);
+    const { products, globalData } = useContext(ExplorerContext);
 
     const listOfMessengerApps = [
         "Facebook Messenger",
@@ -26,11 +27,32 @@ const MessengerStory = () => {
         "iMessage",
     ];
 
+    const listOfDataCategories = Object.keys(
+        globalData.personal_data_categories
+    );
+
     const summaryBullets = [
         i18n.t(`${i18nHeader}:summary.bullet.1`),
         i18n.t(`${i18nHeader}:summary.bullet.2`),
         i18n.t(`${i18nHeader}:summary.bullet.3`),
     ];
+
+    const example = [{ value: 100 }, { value: 200 }, { value: 5000 }];
+
+    console.log(products["Signal"]._data.dataTypesShared);
+
+    // const dataTypes = [
+    //     {
+    //         data: listOfMessengerApps.map((messenger) => {
+    //             return {
+    //                 title: messenger,
+    //                 bubbles: products[messenger]._data.dataTypesShared.map(
+    //                     () => 1
+    //                 ),
+    //             };
+    //         }),
+    //     },
+    // ];
 
     return (
         <ClusterStory
@@ -84,6 +106,7 @@ const MessengerStory = () => {
             </Tab>
             <div className="chart-container"></div>
             <p>{i18n.t(`${i18nHeader}:overview.paragraph.two`)}</p>
+            <MatrixBubblesChart data={example} />
         </ClusterStory>
     );
 };
