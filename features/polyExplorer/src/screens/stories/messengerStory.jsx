@@ -22,7 +22,7 @@ const MessengerStory = () => {
         <ClusterStory
             progressBarColor="black"
             className="messenger-story"
-            primaryColor={"#3BA6FF"}
+            primaryColor={"var(--color-primary-messenger-story)"}
             fadingTopBackground={{
                 distance: "600px",
             }}
