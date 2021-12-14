@@ -6,8 +6,6 @@ import i18n from "../../i18n.js";
 //import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 //import Tab from "../../components/clusterStories/tab.jsx";
 
-import "./digitalGiantsStory.css";
-
 const i18nHeader = "clusterDigitalGiantsStory";
 
 const bigSixNames = [

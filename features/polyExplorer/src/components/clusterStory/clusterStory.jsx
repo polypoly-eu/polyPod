@@ -11,11 +11,7 @@ const fadingTopBackgroundDefaultDistance = "600px";
     to the HTML tags in the "children" component.
     These are the mentioned classNames and how to implement them:
       - "cluster-story-main-title" to the first <h1> tag.
-      - "cluster-story-title" to the rest of headers. You will also need to add the "color" attribute
-        to its related CSS file. For example, in messengerStory.css:
-                .messenger-story .cluster-story-title {
-                    color: var(--color-primary-messenger-story);
-                }
+      - "cluster-story-title" to the rest of headers. 
       - "cluster-story-img" to the image in the introduction part. 
       - "big-first-letter" to all the paragraphs with a first big letter in it.
     
