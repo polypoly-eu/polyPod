@@ -4,6 +4,7 @@ import Screen from "../screen/screen.jsx";
 import "./clusterStory.css";
 
 const defaultProgressBarColor = "#3BA6FF";
+const fadingTopBackgroundDefaultDistance = "600px";
 
 /* This component is used as a base for the different Cluster Stories screens. In order to style the screen,
     some classes with CSS properties already implemented have been created. You just need to add those classNames 
@@ -25,6 +26,7 @@ const ClusterStory = ({
     children,
     progressBarColor = defaultProgressBarColor,
     className,
+    primaryColor,
     fadingTopBackground,
 }) => {
     const scrollRef = useRef();
@@ -55,13 +57,17 @@ const ClusterStory = ({
                 className="content"
                 ref={scrollRef}
                 onScroll={() => handleProgress()}
-                style={
-                    fadingTopBackground
-                        ? {
-                              background: `linear-gradient( 180deg, ${fadingTopBackground.color} 0%, #FFFFFF ${fadingTopBackground.distance})`,
-                          }
-                        : null
-                }
+                style={{
+                    "--story-color-primary": primaryColor,
+                    background: fadingTopBackground
+                        ? `linear-gradient( 180deg, ${
+                              fadingTopBackground.color || primaryColor
+                          } 0%, #FFFFFF ${
+                              fadingTopBackground.distance ||
+                              fadingTopBackgroundDefaultDistance
+                          })`
+                        : null,
+                }}
             >
                 {children}
             </div>
