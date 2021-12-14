@@ -5,8 +5,6 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import Tab from "../../components/clusterStories/tab.jsx";
-
-import "./messengerStory.css";
 import OrderedList from "../../components/orderedList/orderedList.jsx";
 
 const i18nHeader = "clusterMessengerStory";

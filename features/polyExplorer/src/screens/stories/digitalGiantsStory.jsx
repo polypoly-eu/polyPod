@@ -7,8 +7,6 @@ import { createDataRegionLinks } from "./story-utils.js";
 //import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 //import Tab from "../../components/clusterStories/tab.jsx";
 
-import "./digitalGiantsStory.css";
-
 const i18nHeader = "clusterDigitalGiantsStory";
 
 const bigSixNames = [
