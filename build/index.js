@@ -308,14 +308,15 @@ async function main() {
         if (start) skipPackages(packageTree, start);
         await processAll(packageTree, command);
         logSuccess(command, performance.now() - startTime);
+
+        if (command === "clean") {
+            await npm("run", "clean");
+        }
+
         return 0;
     } catch (error) {
         logMain(`Command '${command}' failed: ${error}\n`);
         return 1;
-    }
-
-    if (command === "clean") {
-        await npm("run", "clean");
     }
 }
 
