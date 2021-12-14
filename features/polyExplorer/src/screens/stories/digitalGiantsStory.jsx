@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
+import { createDataRegionLinks } from "./story-utils.js";
 //import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 //import Tab from "../../components/clusterStories/tab.jsx";
 
@@ -20,16 +21,17 @@ const bigSixNames = [
 ];
 
 const DigitalGiantsStory = () => {
-    const { featuredEntities } = useContext(ExplorerContext);
+    const { featuredEntities, entityDataRegionByPpid } =
+        useContext(ExplorerContext);
 
-    const bigSix = Object.fromEntries(
-        bigSixNames.map((n) => [
-            n,
-            featuredEntities.find((e) => e.ppid.indexOf(n) !== -1),
-        ])
+    const bigSix = bigSixNames.map((n) =>
+        featuredEntities.find((e) => e.ppid.indexOf(n) !== -1)
     );
 
-    console.log(bigSix);
+    const dataRegionLinks = createDataRegionLinks(
+        bigSix,
+        entityDataRegionByPpid
+    );
 
     return (
         <ClusterStory
