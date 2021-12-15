@@ -169,7 +169,7 @@ export const ExplorerProvider = ({ children }) => {
         return entities[ppid];
     }
 
-    function entityDataRegionByPpid(ppid) {
+    function entityJurisdictionByPpid(ppid) {
         return entityObjectByPpid(ppid).jurisdiction;
     }
 
@@ -287,7 +287,7 @@ export const ExplorerProvider = ({ children }) => {
                 featuredEntities,
                 selectedEntityObject,
                 entityObjectByPpid,
-                entityDataRegionByPpid,
+                entityJurisdictionByPpid,
                 dataRecipients,
                 globalData,
                 featuredEntityMaxValues,
