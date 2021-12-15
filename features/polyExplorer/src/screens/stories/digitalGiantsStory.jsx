@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
 
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
+import GradientCircleList from "../../components/gradientCircleList/gradientCircleList.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
-//import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
+import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 //import Tab from "../../components/clusterStories/tab.jsx";
 
 const i18nHeader = "clusterDigitalGiantsStory";
+const i18nHeaderCommon = "clusterStoryCommon";
+const primaryColor = "#f95f5a";
 
 const bigSixNames = [
     "Amazon",
@@ -33,25 +36,57 @@ const DigitalGiantsStory = () => {
         <ClusterStory
             progressBarColor="black"
             className="digital-giants-story"
-            primaryColor="#f95f5a"
+            primaryColor={primaryColor}
             fadingTopBackground={{
                 distance: "600px",
             }}
         >
-            <div className="messenger-intro-background"></div>
             <h1 className="cluster-story-main-title">
                 {i18n.t(`${i18nHeader}:title`)}
             </h1>
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:intro.p.1`)}
+            </p>
             <img
-                className="story-intro-img"
-                src="images/stories/messenger/intro-guy.svg"
+                className="cluster-story-img"
+                src="images/stories/digital-giants/intro.svg"
                 alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
             />
-            <ul>
-                {bigSixNames.map((company, index) => (
-                    <li key={index}>{company}</li>
-                ))}
-            </ul>
+            <GradientCircleList
+                introText={i18n.t(`${i18nHeader}:intro.p.2`)}
+                list={bigSixNames}
+                color={primaryColor}
+            />
+            <h2 className="cluster-story-title">
+                {i18n.t(`${i18nHeaderCommon}:what.we.found`)}
+            </h2>
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.dataTypes`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:data.types.p`)}
+            </p>
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:purposes.p`)}
+            </p>
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:companies.p.1`)}
+            </p>
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.dataRegions`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:data.regions.p.1`)}
+            </p>
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
+            />
         </ClusterStory>
     );
 };
