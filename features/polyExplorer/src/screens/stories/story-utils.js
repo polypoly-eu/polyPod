@@ -5,21 +5,27 @@ export function countOccurences(array) {
     return occurences;
 }
 
-export function createDataRegionLinks(companyList, entityDataRegionByPpid) {
-    const dataRegions = companyList.map((e) => ({
+export function createDataRegionLinks(companyList, entityJurisdictionByPpid) {
+    const jurisdictions = companyList.map((e) => ({
         id: e.ppid,
-        dataRegions: countOccurences(
-            e.dataRecipients.map((r) => entityDataRegionByPpid(r))
+        jurisdictions: countOccurences(
+            e.dataRecipients.map((r) => entityJurisdictionByPpid(r))
         ),
     }));
 
-    const dataRegionLinks = [];
+    const jurisdictionLinks = [];
 
-    dataRegions.forEach((company) =>
-        Object.entries(company.dataRegions).forEach(([region, value]) => {
-            dataRegionLinks.push({ source: company.id, target: region, value });
-        })
+    jurisdictions.forEach((company) =>
+        Object.entries(company.jurisdictions).forEach(
+            ([jurisdiction, value]) => {
+                jurisdictionLinks.push({
+                    source: company.id,
+                    target: jurisdiction,
+                    value,
+                });
+            }
+        )
     );
 
-    return dataRegionLinks;
+    return jurisdictionLinks;
 }

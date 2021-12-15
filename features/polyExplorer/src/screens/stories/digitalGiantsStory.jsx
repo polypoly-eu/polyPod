@@ -4,22 +4,23 @@ import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import { createDataRegionLinks } from "./story-utils.js";
+import { PolyChart } from "@polypoly-eu/poly-look";
 //import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 //import Tab from "../../components/clusterStories/tab.jsx";
 
 const i18nHeader = "clusterDigitalGiantsStory";
 
 const bigSixNames = [
-    "Amazon",
     "Apple",
-    "Google",
-    "Facebook",
     "PayPal",
+    "Google",
+    "Amazon",
+    "Facebook",
     "TikTok",
 ];
 
 const DigitalGiantsStory = () => {
-    const { featuredEntities, entityDataRegionByPpid } =
+    const { featuredEntities, entityJurisdictionByPpid } =
         useContext(ExplorerContext);
 
     const bigSix = bigSixNames.map((n) =>
@@ -28,7 +29,7 @@ const DigitalGiantsStory = () => {
 
     const dataRegionLinks = createDataRegionLinks(
         bigSix,
-        entityDataRegionByPpid
+        entityJurisdictionByPpid
     );
 
     return (
@@ -54,6 +55,7 @@ const DigitalGiantsStory = () => {
                     <li key={index}>{company}</li>
                 ))}
             </ul>
+            <PolyChart type="sankey-diagram" links={dataRegionLinks} />
         </ClusterStory>
     );
 };
