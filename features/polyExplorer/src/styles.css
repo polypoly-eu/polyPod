@@ -5,8 +5,6 @@
     --color-medium: #a9b6c6;
     --color-semi-light: #edf2f7;
     --color-light: #f7fafc;
-    --color-primary-messenger-story: rgba(59, 166, 255, 1);
-    --color-secondary-messenger-story: rgba(59, 166, 255, 0);
 
     /* Buttons colors */
     --color-button-dark-grey: #3e495b;
@@ -30,6 +28,9 @@
     --jurisdiction-russia: #fe8988;
     --jurisdiction-china: #c5271e;
     --jurisdiction-others: #a9b6c6;
+
+    /* Cluster stories colors */
+    --color-primary-messenger-story: #3ba6ff;
 
     /* Size */
     --max-width: 412px;
