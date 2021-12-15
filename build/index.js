@@ -160,7 +160,11 @@ function executeProcess(executable, args, env = process.env) {
 
 const npm = async (...args) => {
     const start = new Date();
-    await executeProcess("npm", ["--no-update-notifier", "--no-fund", ...args]);
+    await executeProcess(
+        "npm",
+        ["--no-update-notifier", "--no-fund", ...args],
+        { ...process.env, FORCE_COLOR: 1 }
+    );
     const elapsed = new Date() - start;
     logDetail(`NPM finished in ${elapsed} ms`);
 };
