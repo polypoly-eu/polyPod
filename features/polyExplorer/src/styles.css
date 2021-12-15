@@ -29,6 +29,9 @@
     --jurisdiction-china: #c5271e;
     --jurisdiction-others: #a9b6c6;
 
+    /* Cluster stories colors */
+    --color-primary-messenger-story: #3ba6ff;
+
     /* Size */
     --max-width: 412px;
     --line-height: 120%;
