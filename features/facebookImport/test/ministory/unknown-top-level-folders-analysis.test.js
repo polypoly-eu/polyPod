@@ -1,4 +1,4 @@
-import UknownTopLevelFoldersAnalysis from "../../src/model/analyses/report/unknown-top-level-folders-analysis";
+import UnknownTopLevelFoldersAnalysis from "../../src/model/analyses/report/unknown-top-level-folders-analysis";
 import { INTERACTED_WITH_ADVERTISERS_FILE_PATH } from "../../src/model/importers/interacted-with-advertisers-importer";
 import { OFF_FACEBOOK_EVENTS_FILE_PATH } from "../../src/model/importers/off-facebook-events-importer";
 import { createInteractedWithAdvertisersDataset } from "../datasets/interacted-with-advertisers-data";
@@ -26,11 +26,11 @@ describe("Unknown top level folders analysis", () => {
                 createInteractedWithAdvertisersDataset(),
             ],
         ]);
-        zipFile.addJsonEntry("unknow_folder/unknown_file.json", '""');
-        zipFile.addJsonEntry("another_unknow_folder/file.json", '""');
-        zipFile.addTextEntry("unknow_folder_with_text/some_file.txt", '""');
+        zipFile.addJsonEntry("unknown_folder/unknown_file.json", '""');
+        zipFile.addJsonEntry("another_unknown_folder/file.json", '""');
+        zipFile.addTextEntry("unknown_folder_with_text/some_file.txt", '""');
         const { analysisResult } = await runAnalysisForExport(
-            UknownTopLevelFoldersAnalysis,
+            UnknownTopLevelFoldersAnalysis,
             zipFile
         );
         ({ analysis, status } = analysisResult);
@@ -46,14 +46,14 @@ describe("Unknown top level folders analysis", () => {
     });
 
     it("has id in JSON report", async () => {
-        expect(jsonReport.id).toBe(UknownTopLevelFoldersAnalysis.name);
+        expect(jsonReport.id).toBe(UnknownTopLevelFoldersAnalysis.name);
     });
 
-    it("has correct unknow folders in JSON report", async () => {
+    it("has correct unknown folders in JSON report", async () => {
         expect(jsonReport.data).toStrictEqual([
-            "unknow_folder",
-            "another_unknow_folder",
-            "unknow_folder_with_text",
+            "unknown_folder",
+            "another_unknown_folder",
+            "unknown_folder_with_text",
         ]);
     });
 });
