@@ -30,6 +30,7 @@ import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
 //stories
 import MessengerStory from "./screens/stories/messengerStory.jsx";
 import ExampleStory from "./screens/stories/exampleStory.jsx";
+import DigitalGiantsStory from "./screens/stories/digitalGiantsStory.jsx";
 
 const PolyExplorerApp = () => {
     const {
@@ -91,6 +92,9 @@ const PolyExplorerApp = () => {
                 </Route>
                 <Route exact path="/story/messenger-story">
                     <MessengerStory />
+                </Route>
+                <Route exact path="/story/digital-giants-story">
+                    <DigitalGiantsStory />
                 </Route>
                 <Route exact path="/story/example-story">
                     <ExampleStory />
