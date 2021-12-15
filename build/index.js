@@ -140,6 +140,7 @@ function logDependencies(packageTree) {
 }
 
 function executeProcess(executable, args, env = process.env) {
+    const cmd = process.platform === "win32" ? `${executable}.cmd` : executable;
     const spawnedProcess = spawn(executable, args, { env: env });
     spawnedProcess.stdout.on("data", (data) => {
         console.log(data.toString());
@@ -276,7 +277,7 @@ async function main() {
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
 
-    if (!["list", "list-deps", "clean"].includes(command)) {
+    if (!["list", "list-deps"].includes(command)) {
         logDetail(`👷👷‍♀️ ...`);
         await npmInstall("/");
     }
@@ -295,10 +296,6 @@ async function main() {
         return 0;
     }
 
-    if (command === "clean") {
-        await npm("run", "clean");
-    }
-
     const metaManifest = parseManifest("build/packages.json");
     const nodeMajorVersion = parseInt(process.version.slice(1, 3), 10);
     if (nodeMajorVersion < metaManifest.requiredNodeMajorVersion) {
@@ -315,6 +312,7 @@ async function main() {
         if (start) skipPackages(packageTree, start);
         await processAll(packageTree, command);
         logSuccess(command, performance.now() - startTime);
+        if (command === "clean") await npm("run", "clean");
         return 0;
     } catch (error) {
         logMain(`Command '${command}' failed: ${error}\n`);

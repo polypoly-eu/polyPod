@@ -1,16 +1,20 @@
-import { storybookPlugin } from '@web/dev-server-storybook';
-import baseConfig from '../web-dev-server.config.mjs';
-import { fromRollup } from '@web/dev-server-rollup'; 
+import { storybookPlugin } from "@web/dev-server-storybook";
+import baseConfig from "../web-dev-server.config.mjs";
+import { fromRollup } from "@web/dev-server-rollup";
 import svg from "rollup-plugin-svg";
 
 const svgForWebServer = fromRollup(svg);
 
-export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
+export default {
   ...baseConfig,
-  open: '/',
+  open: "/",
   mimeTypes: {
     "**/*.svg": "js",
-    ...baseConfig.mimeTypes
+    ...baseConfig.mimeTypes,
   },
-  plugins: [ storybookPlugin({ type: 'web-components' }), svgForWebServer(), ...baseConfig.plugins],
-});
+  plugins: [
+    storybookPlugin({ type: "web-components" }),
+    svgForWebServer(),
+    ...baseConfig.plugins,
+  ],
+};

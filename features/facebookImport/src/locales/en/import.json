@@ -1,8 +1,8 @@
 {
-    "heading.request": "<strong>Request your data</strong>",
-    "heading.download": "<strong>Download your data</strong>",
-    "heading.import": "<strong>Import your data</strong>",
-    "heading.explore": "<strong>Explore your data</strong>",
+    "heading.request": "Request your data",
+    "heading.download": "Download your data",
+    "heading.import": "Import your data",
+    "heading.explore": "Explore your data",
     "intro.text.1": "Find out what Facebook knows about you!",
     "intro.text.2": "How to add your Facebook data to your polyPod",
     "intro.info": "Only a copy of your data is created and your Facebook account remains unchanged!",

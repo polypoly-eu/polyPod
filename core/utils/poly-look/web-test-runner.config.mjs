@@ -3,11 +3,11 @@ import svg from "rollup-plugin-svg";
 
 const svgForWebServer = fromRollup(svg);
 
-export default /** @type {import("@web/test-runner").TestRunnerConfig} */ ({
-  files: 'test/**/*.test.js',
+export default {
+  files: "test/**/*.test.js",
   nodeResolve: true,
   mimeTypes: {
-    "**/*.svg": "js"
+    "**/*.svg": "js",
   },
-  plugins: [svgForWebServer()]
-});
+  plugins: [svgForWebServer()],
+};
