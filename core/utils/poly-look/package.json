@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "d3": "^7.0.4",
+    "d3-sankey": "^0.12.3",
     "lit-element": "^2.5.1",
     "lit-html": "^1.4.1",
     "react": "^17.0.2"

@@ -6,6 +6,7 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import { SwipableTabs, Tab } from "../../components/tabs/swipableTabs.jsx";
+import { createDataRegionLinks } from "./story-utils";
 
 const i18nHeader = "clusterDigitalGiantsStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -21,12 +22,16 @@ const bigSixNames = [
 ];
 
 const DigitalGiantsStory = () => {
-    const { featuredEntities } = useContext(ExplorerContext);
+    const { featuredEntities, entityJurisdictionByPpid } =
+        useContext(ExplorerContext);
 
-    const bigSix = Object.fromEntries(
-        bigSixNames.map((n) =>
-            featuredEntities.find((e) => e.ppid.indexOf(n) !== -1)
-        )
+    const bigSix = bigSixNames.map((n) =>
+        featuredEntities.find((e) => e.ppid.indexOf(n) !== -1)
+    );
+
+    const dataRegionLinks = createDataRegionLinks(
+        bigSix,
+        entityJurisdictionByPpid
     );
 
     return (
