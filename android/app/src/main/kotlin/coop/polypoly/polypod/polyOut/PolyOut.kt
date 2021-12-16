@@ -19,7 +19,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 open class PolyOut(
     val context: Context
 ) {
-    private var readdirCache = mutableMapOf<String, Array<String>>()
+    private var readdirCache = mutableMapOf<String, Array<Map<String,String>>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
     private val coroutineScope = CoroutineScope(EmptyCoroutineContext)
 
@@ -103,27 +103,47 @@ open class PolyOut(
 
     open suspend fun readdir(
         id: String
-    ): Array<String> {
-
+    ): Array<Map<String, String>> {
         val fs = Preferences.getFileSystem(context)
         if (id == "") {
             val newFs = fs.filter {
                 File(idToPath(it.key, context)).exists()
             }
             Preferences.setFileSystem(context, newFs)
-            return newFs.keys.toTypedArray()
+
+            val allIds = newFs.keys;
+            val retList = mutableListOf(mapOf<String,String>())
+            retList.removeFirst()
+            
+            for (idPath in allIds){
+                val relPath = getRelativePathFromId(idPath)
+                val idMap = mapOf<String,String>("id" to idPath, "path" to relPath)
+                retList.add(idMap)
+            }
+            return retList.toTypedArray()
         }
         if (readdirCache.contains(id)) {
             return readdirCache.get(id)!!
         }
-        val retList = mutableListOf<String>()
+
+        val retList = mutableListOf(mapOf<String,String>())
+        retList.removeFirst()
+
         File(idToPath(id, context)).walkTopDown().forEach {
-            retList.add(
-                "$fsFilesRoot/" + pathToId(it, context).removePrefix(fsPrefix)
-            )
+            val idValue = "$fsFilesRoot/" + pathToId(it, context).removePrefix(fsPrefix)
+            val relPath = getRelativePathFromId(idValue)
+            val idMap = mapOf<String,String>("id" to idValue,"path" to relPath)
+            retList.add(idMap)
         }
         readdirCache[id] = retList.toTypedArray()
         return retList.toTypedArray()
+    }
+
+    open suspend fun getRelativePathFromId(id : String): String{
+        val separationIndex = if (id.contains("https")) 4 else 2
+        val arrayCompletePath = id.split("/").toTypedArray()
+        val arrayRelativePath = arrayCompletePath.copyOfRange(separationIndex,arrayCompletePath.size)
+        return arrayRelativePath.joinToString(separator = "/")
     }
 
     open suspend fun importArchive(url: String): Uri? {
