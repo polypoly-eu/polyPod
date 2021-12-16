@@ -4,7 +4,7 @@ import i18n from "../../i18n.js";
 import EntityShortInfo from "../entityShortInfo/entityShortInfo.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import "./entityList.css";
+import "./filteredEntityList.css";
 import LinkButton from "../buttons/linkButton/linkButton.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
@@ -58,7 +58,7 @@ function getStartGroups(entityGroups) {
     return keys.pop();
 }
 
-const EntityList = () => {
+const FilteredEntityList = () => {
     const { entities, globalData, activeFilters, handleRemoveFilter } =
         useContext(ExplorerContext);
     const onRemoveFilter = handleRemoveFilter;
@@ -115,7 +115,11 @@ const EntityList = () => {
     }, []);
 
     return (
-        <div id="entity-list" className="entity-list" ref={listRef}>
+        <div
+            id="filtered-entity-list"
+            className="filtered-entity-list"
+            ref={listRef}
+        >
             <ActiveFilters
                 activeFilters={activeFilters}
                 globalData={globalData}
@@ -143,7 +147,7 @@ const EntityList = () => {
                     next={handleLoadMoreData}
                     scrollThreshold="80%"
                     hasMore={hasMore}
-                    scrollableTarget="entity-list"
+                    scrollableTarget="filtered-entity-list"
                 >
                     {Object.entries(loadedEntities).map(
                         ([label, entities], index) => (
@@ -168,4 +172,4 @@ const EntityList = () => {
     );
 };
 
-export default EntityList;
+export default FilteredEntityList;

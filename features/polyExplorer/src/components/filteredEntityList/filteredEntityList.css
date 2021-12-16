@@ -1,9 +1,9 @@
-.entity-list {
+.filtered-entity-list {
     flex: 1 1 auto;
     overflow-y: auto;
 }
 
-.entity-list::-webkit-scrollbar-track {
+.filtered-entity-list::-webkit-scrollbar-track {
     margin-top: 0;
 }
 
@@ -97,7 +97,7 @@ button::after {
 }
 
 .filter-button-active {
-    margin-top: -28px; 
+    margin-top: -28px;
 }
 
 .entity-group {
