@@ -5,7 +5,7 @@ import GradientCircleList from "../../components/gradientCircleList/gradientCirc
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
-import { SwipableTabs, Tab } from "../../components/tabs/swipableTabs.jsx";
+import { SwipableTabs, Tab } from "@polypoly-eu/poly-look";
 import { createDataRegionLinks } from "./story-utils";
 
 const i18nHeader = "clusterDigitalGiantsStory";
