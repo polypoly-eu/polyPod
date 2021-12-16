@@ -4,7 +4,6 @@ import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
-import Tab from "../../components/clusterStories/tab.jsx";
 import OrderedList from "../../components/orderedList/orderedList.jsx";
 
 const i18nHeader = "clusterMessengerStory";
@@ -59,13 +58,6 @@ const MessengerStory = () => {
                 title={i18n.t(`${i18nHeader}:overview.section`)}
             ></SectionTitle>
             <p>{i18n.t(`${i18nHeader}:overview.paragraph.one`)}</p>
-            <Tab>
-                <div
-                    label={i18n.t(`${i18nHeader}:overview.tab.installs`)}
-                ></div>
-                <div label={i18n.t(`${i18nHeader}:overview.tab.users`)}></div>
-                <div label={i18n.t(`${i18nHeader}:overview.tab.partof`)}></div>
-            </Tab>
             <div className="chart-container"></div>
             <p>{i18n.t(`${i18nHeader}:overview.paragraph.two`)}</p>
         </ClusterStory>

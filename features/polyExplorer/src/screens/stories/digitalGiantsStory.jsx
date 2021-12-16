@@ -5,7 +5,7 @@ import GradientCircleList from "../../components/gradientCircleList/gradientCirc
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
-//import Tab from "../../components/clusterStories/tab.jsx";
+import { SwipableTabs, Tab } from "../../components/tabs/swipableTabs.jsx";
 
 const i18nHeader = "clusterDigitalGiantsStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -24,13 +24,10 @@ const DigitalGiantsStory = () => {
     const { featuredEntities } = useContext(ExplorerContext);
 
     const bigSix = Object.fromEntries(
-        bigSixNames.map((n) => [
-            n,
-            featuredEntities.find((e) => e.ppid.indexOf(n) !== -1),
-        ])
+        bigSixNames.map((n) =>
+            featuredEntities.find((e) => e.ppid.indexOf(n) !== -1)
+        )
     );
-
-    console.log(bigSix);
 
     return (
         <ClusterStory
@@ -63,6 +60,14 @@ const DigitalGiantsStory = () => {
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.dataTypes`)}
             />
+            <SwipableTabs>
+                <Tab label="Hello">
+                    <div style={{ width: "100%", height: "200px" }}></div>
+                </Tab>
+                <Tab label="Bye">
+                    <div style={{ width: "100%", height: "200px" }}></div>
+                </Tab>
+            </SwipableTabs>
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:data.types.p`)}
             </p>
