@@ -1,0 +1,25 @@
+.entity-list {
+    overflow-y: scroll;
+}
+
+.entity-list .entity-group {
+    display: flex;
+    position: relative;
+    padding-left: 28px;
+}
+
+.entity-list .entity-group-label {
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    z-index: 1;
+    font-family: "Jost Medium";
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--color-medium);
+}
+
+.entity-list .entity-group-entities {
+    width: 100%;
+    margin-left: -4px;
+}

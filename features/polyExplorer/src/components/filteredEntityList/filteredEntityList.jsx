@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import i18n from "../../i18n.js";
-import EntityShortInfo from "../entityShortInfo/entityShortInfo.jsx";
-import InfiniteScroll from "react-infinite-scroll-component";
 
-import "./filteredEntityList.css";
+import EntityList from "../entityList/entityList.jsx";
 import LinkButton from "../buttons/linkButton/linkButton.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
+
+// TODO: Check if scrollbar is supposed to be on top of filter button
+import "./filteredEntityList.css";
 
 function groupEntities(entities) {
     const sorted = entities.sort((a, b) => a.compareNames(b));
@@ -45,89 +46,36 @@ const ActiveFilters = ({ activeFilters, globalData, onRemoveFilter }) => {
     );
 };
 
-//number of groups needed to fill first screen
-function getStartGroups(entityGroups) {
-    let numberGroups = 0;
-    let numberValues = 0;
-    const keys = Object.keys(entityGroups);
-    for (let e of keys) {
-        numberGroups++;
-        numberValues += entityGroups[e].length;
-        if (numberValues > 15) return keys[numberGroups];
-    }
-    return keys.pop();
-}
-
 const FilteredEntityList = () => {
-    const { entities, globalData, activeFilters, handleRemoveFilter } =
-        useContext(ExplorerContext);
-    const onRemoveFilter = handleRemoveFilter;
-    const filteredEntities = activeFilters.apply(entities);
-    const entityGroups = groupEntities(filteredEntities);
-    const allKeys = Object.keys(entityGroups);
-    const [loadedEntities, setLoadedEntities] = useState({});
-    const [toLoadKeys, setToLoadKeys] = useState(allKeys);
-    const [hasMore, setHasMore] = useState(true);
-    const listRef = useRef();
+    const {
+        entities,
+        globalData,
+        activeFilters,
+        handleRemoveFilter: onRemoveFilter,
+    } = useContext(ExplorerContext);
+    const [entityGroups, setEntityGroups] = useState(createEntityGroups());
 
-    const handleLoadMoreData = () => {
-        if (toLoadKeys.length > 0) {
-            const moreEntities = { ...loadedEntities };
-            const loadKeys = [...toLoadKeys];
-            const newKey = loadKeys.shift();
-            moreEntities[newKey] = entityGroups[newKey];
-            setToLoadKeys(loadKeys);
-            setLoadedEntities(moreEntities);
-        } else setHasMore(false);
-    };
-
-    const handleReloadEntities = (field, value) => {
-        onRemoveFilter(field, value);
-        const newLoadedEntities = {};
+    function createEntityGroups() {
         const filteredEntities = activeFilters.apply(entities);
-        const newEntityGroups = groupEntities(filteredEntities);
-        const newKeys = Object.keys(newEntityGroups);
-        const newStartGroups = getStartGroups(newEntityGroups);
-        for (
-            let i = 0;
-            i <= Object.keys(newEntityGroups).indexOf(newStartGroups);
-            i++
-        ) {
-            newLoadedEntities[newKeys[i]] = newEntityGroups[newKeys[i]];
-        }
-        setLoadedEntities(newLoadedEntities);
-        const toLoadKeys = [...newKeys];
-        toLoadKeys.splice(0, newKeys.indexOf(newStartGroups));
-        setToLoadKeys(toLoadKeys);
-        listRef.current.scrollTop = 0;
-    };
+        return groupEntities(filteredEntities);
+    }
 
-    useEffect(() => {
-        const loadedEntities = {};
-        const startGroups = getStartGroups(entityGroups);
-        for (let i = 0; i <= allKeys.indexOf(startGroups); i++) {
-            loadedEntities[allKeys[i]] = entityGroups[allKeys[i]];
-        }
-        setLoadedEntities(loadedEntities);
-        const toLoadKeys = [...allKeys];
-        toLoadKeys.splice(0, allKeys.indexOf(startGroups));
-        setToLoadKeys(toLoadKeys);
-    }, []);
+    function handleRemoveFilter(field, value) {
+        onRemoveFilter(field, value);
+        setEntityGroups(createEntityGroups());
+    }
 
     return (
-        <div
-            id="filtered-entity-list"
-            className="filtered-entity-list"
-            ref={listRef}
-        >
+        <div className="filtered-entity-list">
             <ActiveFilters
                 activeFilters={activeFilters}
                 globalData={globalData}
-                onRemoveFilter={handleReloadEntities}
+                onRemoveFilter={handleRemoveFilter}
             />
             <div
                 className={
-                    "entities" + (activeFilters.empty ? "" : " filters-visible")
+                    "entity-list-wrapper" +
+                    (activeFilters.empty ? "" : " filters-visible")
                 }
             >
                 <LinkButton
@@ -142,31 +90,7 @@ const FilteredEntityList = () => {
                         alt="Filter button"
                     />
                 </LinkButton>
-                <InfiniteScroll
-                    dataLength={allKeys.length - toLoadKeys.length}
-                    next={handleLoadMoreData}
-                    scrollThreshold="80%"
-                    hasMore={hasMore}
-                    scrollableTarget="filtered-entity-list"
-                >
-                    {Object.entries(loadedEntities).map(
-                        ([label, entities], index) => (
-                            <div key={index} className="entity-group">
-                                <div className="entity-group-label">
-                                    {label}
-                                </div>
-                                <div className="entity-group-entities">
-                                    {entities.map((entity, index) => (
-                                        <EntityShortInfo
-                                            key={index}
-                                            entity={entity}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                        )
-                    )}
-                </InfiniteScroll>
+                <EntityList entityGroups={entityGroups} />
             </div>
         </div>
     );

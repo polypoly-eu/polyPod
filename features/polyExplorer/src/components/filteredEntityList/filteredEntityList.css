@@ -1,5 +1,6 @@
 .filtered-entity-list {
-    overflow-y: auto;
+    display: flex;
+    overflow-y: hidden;
 }
 
 .filtered-entity-list::-webkit-scrollbar-track {
@@ -71,11 +72,12 @@ button::after {
     margin-left: 4px;
 }
 
-.entities {
+.entity-list-wrapper {
+    display: flex;
     margin: 24px auto 0 auto;
 }
 
-.entities.filters-visible {
+.entity-list-wrapper.filters-visible {
     margin-top: 100px;
 }
 
@@ -97,26 +99,4 @@ button::after {
 
 .filter-button-active {
     margin-top: -28px;
-}
-
-.entity-group {
-    display: flex;
-    position: relative;
-    padding-left: 28px;
-}
-
-.entity-group-label {
-    position: absolute;
-    top: 12px;
-    left: 16px;
-    z-index: 1;
-    font-family: "Jost Medium";
-    font-weight: 500;
-    font-size: 16px;
-    color: var(--color-medium);
-}
-
-.entity-group-entities {
-    width: 100%;
-    margin-left: -4px;
 }
