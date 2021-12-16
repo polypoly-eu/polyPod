@@ -33,16 +33,28 @@ const linkSource = ({ source }) => source,
   defaultNodeLabelBoxOpacity = 0.7;
 
 /**
- * Visualizes data as a flow from n to m entitites
+ * Visualizes data as a flow from n to m (to x to y ..) entitites
  *
  * @class
  * @param {Object[]} links - The data to be visualized as a sankey diagram
  * @param {string} links[].source - Source of the link
  * @param {string} links[].target - Target of the link
  * @param {number} links[].value - Value of the link
- * @param {number = 400} width - The width of the svg
- * @param {number = 300} height - The height of the svg
- *
+ * @param {number = 400} [width] - The width of the svg
+ * @param {number = 300} [height] - The height of the svg
+ * @param {Object} [options] - Options
+ * @param {boolean = true} [options.labels] - Showing labels of the nodes in the diagram
+ * @param {string} [options.align] - Alignment of the diagram (defaults to justify)
+ * @param {Object} [margin] - Margins of the chart
+ * @param {number = 0} [margin.top/right/bottom/left] - The respective margins
+ * @param {Object} [color] - All color attributes
+ * @param {string/callback = "black"} [color.node] - Color of the nodes
+ * @param {string/callback = "#0F1938"} [color.text] - Color of the label text of the nodes
+ * @param {number/callback = 1} [color.textOpacity] - Opacity of the label text of the nodes
+ * @param {string/callback = "white"} [color.nodeLabelBoxColor] - Color of the box surrounding the node label
+ * @param {number/callback =0.7"} [color.nodeLabelBoxOpacity] - Opacity of the box surrounding the node label
+ * @param {string/callback = "blue"} [color.link] - Color of the link
+ * @param {number/callback = 0.5} [color.linkOpacity] - Opacity of the link
  */
 export class SankeyDiagram extends Chart {
   constructor({
@@ -62,6 +74,7 @@ export class SankeyDiagram extends Chart {
         right: d3Sankey.sankeyRight,
         center: d3Sankey.sankeyCenter,
       }[options?.align] ?? d3Sankey.sankeyJustify;
+    this._labelsShowing = options.labels == false ? false : true;
     this._margin = margin || defaultMargin;
     this._nodeColor = color?.node || defaultNodeColor;
     this._nodeLabelTextColor = color?.text || defaultTextColor;
@@ -99,7 +112,7 @@ export class SankeyDiagram extends Chart {
 
   _addNodes(nodesData) {
     let nodes = this.chart.select(".nodes");
-    if (nodes.empty()) this.chart.append("g").attr("class", "nodes");
+    if (nodes.empty()) nodes = this.chart.append("g").attr("class", "nodes");
     nodes
       .selectAll("rect")
       .data(nodesData)
@@ -112,12 +125,12 @@ export class SankeyDiagram extends Chart {
 
   _addLinks(linksData) {
     let links = this.chart.select(".links");
-    if (links.empty()) this.chart.append("g").attr("class", "links");
+    if (links.empty()) links = this.chart.append("g").attr("class", "links");
     let pathGroups = links
       .selectAll("g")
-      .attr("fill", "none")
       .data(linksData)
       .join("g")
+      .attr("fill", "none")
       .style("mix-blend-mode", linkMixBlendMode);
 
     if (pathGroups.select("path").empty()) pathGroups.append("path");
@@ -198,6 +211,6 @@ export class SankeyDiagram extends Chart {
     this._computeSankeyLayout(nodes, links);
     this._addNodes(nodes);
     this._addLinks(links);
-    this._addNodeLabels(nodes);
+    if (this._labelsShowing) this._addNodeLabels(nodes);
   }
 }

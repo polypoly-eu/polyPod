@@ -66,3 +66,7 @@
     font-size: 45px;
     line-height: 120%;
 }
+
+.cluster-story svg {
+    width: 100%;
+}

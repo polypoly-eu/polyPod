@@ -6,7 +6,8 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import { SwipableTabs, Tab } from "@polypoly-eu/poly-look";
-import { createDataRegionLinks } from "./story-utils";
+import { createJurisdictionLinks } from "./story-utils";
+import { PolyChart } from "@polypoly-eu/poly-look";
 
 const i18nHeader = "clusterDigitalGiantsStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -29,7 +30,7 @@ const DigitalGiantsStory = () => {
         featuredEntities.find((e) => e.ppid.indexOf(n) !== -1)
     );
 
-    const dataRegionLinks = createDataRegionLinks(
+    const jurisdictionLinks = createJurisdictionLinks(
         bigSix,
         entityJurisdictionByPpid
     );
@@ -94,6 +95,12 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:data.regions.p.1`)}
             </p>
+            <PolyChart
+                type="sankey-diagram"
+                links={jurisdictionLinks}
+                className="full-size-svg"
+                options={{ labels: false }}
+            />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
             />
