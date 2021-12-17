@@ -140,7 +140,7 @@ export class PodSpec {
 
                             await polyOut.writeFile(path, content, { encoding: "utf-8" });
                             const filesWithPath = (await polyOut.readdir(this.path)).map(
-                                (path) => this.path + "/" + path
+                                (path) => this.path + "/" + path["id"]
                             );
                             assert.include(filesWithPath, path);
                         })
