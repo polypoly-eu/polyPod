@@ -18,30 +18,28 @@ const AnalysisCard = ({
     exploreScrollingProgress,
 }) => {
     return (
-        <>
-            <div className="analysis-card">
-                <div className="card-container">
-                    <h1 className="ministory-title">{analysis.title}</h1>
-                    {analysis.label !== null && (
-                        <label>
-                            {i18n.t(`explore:analysis.label.${analysis.label}`)}
-                        </label>
-                    )}
-                </div>
-                <div className="summary-text">{analysis.renderSummary()}</div>
-                {analysis.renderDetails ? (
-                    <RouteButton
-                        route="/explore/details"
-                        className="details-button"
-                        onClick={() => setActiveDetails(analysis)}
-                        stateChange={{ exploreScrollingProgress }}
-                    >
-                        {i18n.t("explore:details.button")}
-                    </RouteButton>
-                ) : null}
+        <div className="analysis-card">
+            <div className="card-container">
+                <h1 className="ministory-title">{analysis.title}</h1>
+                {analysis.label !== null && (
+                    <label>
+                        {i18n.t(`explore:analysis.label.${analysis.label}`)}
+                    </label>
+                )}
             </div>
+            <div className="summary-text">{analysis.renderSummary()}</div>
+            {analysis.renderDetails ? (
+                <RouteButton
+                    route="/explore/details"
+                    className="details-button"
+                    onClick={() => setActiveDetails(analysis)}
+                    stateChange={{ exploreScrollingProgress }}
+                >
+                    {i18n.t("explore:details.button")}
+                </RouteButton>
+            ) : null}
             <div className="card-separator"></div>
-        </>
+        </div>
         // <div className="analysis-card">
         //     <h1>{analysis.title}</h1>
         //     <div>{analysis.renderSummary()}</div>

@@ -1,14 +1,12 @@
 import React from "react";
-import DataStory from "../../components/dataStory/dataStory.jsx";
-
-import "./exampleStory.css";
+import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 
 const ExampleStory = () => {
     return (
-        <DataStory
+        <ClusterStory
             progressBarColor="#3BA6FF"
             className="example-story"
-        ></DataStory>
+        ></ClusterStory>
     );
 };
 

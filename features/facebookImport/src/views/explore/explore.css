@@ -53,14 +53,6 @@
     box-sizing: border-box;
 }
 
-.card-separator {
-    border-bottom: solid 1px var(--color-gray-400);
-}
-
-.card-separator:last-of-type {
-    border-bottom: none;
-}
-
 .explore-view .pop-up {
     width: 100%;
     height: 56px;
@@ -89,8 +81,13 @@
     overflow-x: scroll;
 }
 
-.analysis-card:last-child {
-    border-bottom: none;
+.analysis-card .card-separator {
+    margin-top: 30px;
+    border-bottom: solid 1px var(--color-gray-400);
+}
+
+.analysis-card:last-child .card-separator {
+    display: none;
 }
 .analysis-card .card-container {
     display: flex;
