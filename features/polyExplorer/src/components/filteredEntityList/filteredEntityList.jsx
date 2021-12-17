@@ -6,7 +6,6 @@ import EntityList from "../entityList/entityList.jsx";
 import LinkButton from "../buttons/linkButton/linkButton.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
-// TODO: Check if scrollbar is supposed to be on top of filter button
 import "./filteredEntityList.css";
 
 function groupEntities(entities) {
