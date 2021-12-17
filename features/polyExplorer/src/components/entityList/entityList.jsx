@@ -5,20 +5,20 @@ import EntityShortInfo from "../entityShortInfo/entityShortInfo.jsx";
 
 import "./entityList.css";
 
-function getStartGroups(entityGroups) {
+function getStartGroups(entities) {
     let numberGroups = 0;
     let numberValues = 0;
-    const keys = Object.keys(entityGroups);
+    const keys = Object.keys(entities);
     for (let e of keys) {
         numberGroups++;
-        numberValues += entityGroups[e].length;
+        numberValues += entities[e].length;
         if (numberValues > 15) return keys[numberGroups];
     }
     return keys.pop();
 }
 
-function EntityList({ entityGroups, sideLabel }) {
-    const allKeys = Object.keys(entityGroups);
+function EntityList({ entities, sideLabel }) {
+    const allKeys = Object.keys(entities);
     const [loadedEntities, setLoadedEntities] = useState({});
     const [toLoadKeys, setToLoadKeys] = useState(allKeys);
     const [hasMore, setHasMore] = useState(true);
@@ -26,9 +26,9 @@ function EntityList({ entityGroups, sideLabel }) {
 
     function loadEntities() {
         const loadedEntities = {};
-        const startGroups = getStartGroups(entityGroups);
+        const startGroups = getStartGroups(entities);
         for (let i = 0; i <= allKeys.indexOf(startGroups); i++) {
-            loadedEntities[allKeys[i]] = entityGroups[allKeys[i]];
+            loadedEntities[allKeys[i]] = entities[allKeys[i]];
         }
         setLoadedEntities(loadedEntities);
         const toLoadKeys = [...allKeys];
@@ -41,7 +41,7 @@ function EntityList({ entityGroups, sideLabel }) {
             const moreEntities = { ...loadedEntities };
             const loadKeys = [...toLoadKeys];
             const newKey = loadKeys.shift();
-            moreEntities[newKey] = entityGroups[newKey];
+            moreEntities[newKey] = entities[newKey];
             setToLoadKeys(loadKeys);
             setLoadedEntities(moreEntities);
         } else setHasMore(false);
@@ -54,7 +54,7 @@ function EntityList({ entityGroups, sideLabel }) {
     useEffect(() => {
         loadEntities();
         listRef.current.scrollTop = 0;
-    }, [entityGroups]);
+    }, [entities]);
 
     return (
         <div id="entity-list" className="entity-list" ref={listRef}>
@@ -99,9 +99,7 @@ export default (props) => {
     const sideLabel =
         "sideLabel" in props
             ? props.sideLabel
-            : Object.keys(props.entityGroups).every(
-                  (label) => label?.length === 1
-              );
+            : Object.keys(props.entities).every((label) => label?.length === 1);
     return EntityList({
         ...props,
         sideLabel,

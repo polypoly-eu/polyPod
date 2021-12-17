@@ -13,7 +13,7 @@ import "./companyIndustryList.css";
 class CompanyIndustryList extends React.PureComponent {
     render() {
         if (!this.props.ecoItems)
-            return <EntityList entityGroups={this.props.companyIndustryMap} />;
+            return <EntityList entities={this.props.companyIndustryMap} />;
 
         return (
             <Scrollable className="eco-company-industry-list">

@@ -90,7 +90,7 @@ const FilteredEntityList = () => {
                         alt="Filter button"
                     />
                 </LinkButton>
-                <EntityList entityGroups={entityGroups} />
+                <EntityList entities={entityGroups} />
             </div>
         </div>
     );
