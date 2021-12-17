@@ -37,7 +37,8 @@
     flex: 1 1 0px;
     height: 100%;
     padding-bottom: 12px;
-    font-size: 16px;
+    font-family: "Jost Medium";
+    font-size: 14px;
     line-height: 16px;
     color: var(--color-medium);
     border-color: transparent;
@@ -207,13 +208,13 @@
 }
 
 .entity-details-source {
-    transform: translateY(-20px);
+    /* transform: translateY(-20px); */
     color: var(--color-medium);
     flex: 0 0 auto;
+    font-family: "Jost Medium";
     font-size: 12px;
-    margin: 0px auto;
+    margin: 0px 16px;
     width: 100%;
-    padding: 0 30px 12px 30px;
     max-width: var(--max-width);
 }
 
@@ -254,11 +255,50 @@
     margin: 38px 16px 0 16px;
 }
 
+.featured-map-container {
+    margin-bottom: 20px;
+}
+
+.featured-map-container .separator-unit h2,
+.location-map .separator-unit h2 {
+    margin: 32px 16px;
+    font-family: "Jost Medium";
+    font-size: 20px;
+    text-align: center;
+}
+
+.revenue .separator-unit h2 {
+    text-align: center;
+    margin: 24px 16px;
+    font-family: "Jost Medium";
+    font-size: 20px;
+}
+.featured-map-container .separator-unit,
+.location-map .separator-unit,
+.revenue .separator-unit {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 16px;
+}
+.featured-map-container .separator-unit .partial-separator,
+.location-map .separator-unit .partial-separator,
+.revenue .separator-unit .partial-separator {
+    background-color: #a9b6c6;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    width: 50%;
+}
+
 .featured-map-container h2,
-.location-map h2,
-.revenue h2 {
+.location-map h2 {
     text-align: center;
     margin: 0 0 12px 0;
+    font-family: "Jost Medium";
+    font-size: 20px;
 }
 
 .about {
@@ -270,7 +310,7 @@
     overflow: hidden scroll;
     max-height: 300px;
     padding-bottom: 40px;
-    margin: 32px 30px 0 30px;
+    margin: 32px 16px 0 16px;
 }
 
 .about .gradient {
