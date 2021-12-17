@@ -17,7 +17,7 @@ function getStartGroups(entityGroups) {
     return keys.pop();
 }
 
-export default function EntityList({ entityGroups }) {
+function EntityList({ entityGroups, sideLabel }) {
     const allKeys = Object.keys(entityGroups);
     const [loadedEntities, setLoadedEntities] = useState({});
     const [toLoadKeys, setToLoadKeys] = useState(allKeys);
@@ -67,8 +67,18 @@ export default function EntityList({ entityGroups }) {
             >
                 {Object.entries(loadedEntities).map(
                     ([label, entities], index) => (
-                        <div key={index} className="entity-group">
-                            <div className="entity-group-label">{label}</div>
+                        <div
+                            key={index}
+                            className={
+                                "entity-group" +
+                                (sideLabel ? " side-label" : "")
+                            }
+                        >
+                            <hr />
+                            <div className="entity-group-label">
+                                {label +
+                                    (sideLabel ? "" : ` (${entities.length})`)}
+                            </div>
                             <div className="entity-group-entities">
                                 {entities.map((entity, index) => (
                                     <EntityShortInfo
@@ -84,3 +94,16 @@ export default function EntityList({ entityGroups }) {
         </div>
     );
 }
+
+export default (props) => {
+    const sideLabel =
+        "sideLabel" in props
+            ? props.sideLabel
+            : Object.keys(props.entityGroups).every(
+                  (label) => label?.length === 1
+              );
+    return EntityList({
+        ...props,
+        sideLabel,
+    });
+};

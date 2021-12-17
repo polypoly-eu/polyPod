@@ -4,22 +4,42 @@
 
 .entity-list .entity-group {
     display: flex;
+    flex-direction: column;
     position: relative;
+}
+
+.entity-list .entity-group.side-label {
     padding-left: 28px;
 }
 
 .entity-list .entity-group-label {
-    position: absolute;
-    top: 12px;
-    left: 16px;
-    z-index: 1;
+    margin-bottom: 8px;
+    margin-left: 34px;
     font-family: "Jost Medium";
     font-weight: 500;
     font-size: 16px;
     color: var(--color-medium);
 }
 
+.entity-list .entity-group.side-label .entity-group-label {
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    z-index: 1;
+    margin: 0;
+}
+
+.entity-list .entity-group > hr {
+    border: none;
+    border-top: 1px solid #525e72;
+    margin-left: 34px;
+    margin-right: 34px;
+}
+
+.entity-list .entity-group.side-label > hr {
+    display: none;
+}
+
 .entity-list .entity-group-entities {
     width: 100%;
-    margin-left: -4px;
 }
