@@ -105,6 +105,9 @@ open class PolyOut(
         id: String
     ): Array<Map<String, String>> {
         val fs = Preferences.getFileSystem(context)
+        val retList = mutableListOf(mapOf<String,String>())
+        
+        retList.removeFirst()
         if (id == "") {
             val newFs = fs.filter {
                 File(idToPath(it.key, context)).exists()
@@ -112,8 +115,6 @@ open class PolyOut(
             Preferences.setFileSystem(context, newFs)
 
             val allIds = newFs.keys;
-            val retList = mutableListOf(mapOf<String,String>())
-            retList.removeFirst()
             
             for (idPath in allIds){
                 val relPath = getRelativePathFromId(idPath)
@@ -125,9 +126,6 @@ open class PolyOut(
         if (readdirCache.contains(id)) {
             return readdirCache.get(id)!!
         }
-
-        val retList = mutableListOf(mapOf<String,String>())
-        retList.removeFirst()
 
         File(idToPath(id, context)).walkTopDown().forEach {
             val idValue = "$fsFilesRoot/" + pathToId(it, context).removePrefix(fsPrefix)
