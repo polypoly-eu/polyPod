@@ -66,9 +66,14 @@ const EntityDetails = () => {
                             </p>
                         ) : null}
                         <div className="location-map">
-                            <h2>
-                                {i18n.t("entityDetailsScreen:jurisdiction")}
-                            </h2>
+                            <div className="separator-unit">
+                                <div className="partial-separator" />
+                                <h2>
+                                    {i18n.t("entityDetailsScreen:jurisdiction")}
+                                </h2>
+                                <div className="partial-separator" />
+                            </div>
+
                             {entity.jurisdiction ? (
                                 <div
                                     className={`location-block ${entity.jurisdiction}`}
@@ -155,9 +160,14 @@ const EntityDetails = () => {
                             </p>
                         ) : null}
                         <div className="featured-map-container">
-                            <h2>
-                                {i18n.t("entityDetailsScreen:jurisdiction")}
-                            </h2>
+                            <div className="separator-unit">
+                                <div className="partial-separator" />
+                                <h2>
+                                    {i18n.t("entityDetailsScreen:jurisdiction")}
+                                </h2>
+                                <div className="partial-separator" />
+                            </div>
+
                             {entity.jurisdiction ? (
                                 <div className={`location-block`}>
                                     {entity.location ? (
