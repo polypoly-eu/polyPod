@@ -47,7 +47,7 @@ type PolyInEndpoint = ObjectEndpointSpec<{
 }>;
 
 type PolyOutEndpoint = ObjectEndpointSpec<{
-    readdir(path: string): ValueEndpointSpec<string[]>;
+    readdir(path: string): ValueEndpointSpec<{ [key: string]: string }[]>;
     readFile(path: string, options?: EncodingOptions): ValueEndpointSpec<string | Uint8Array>;
     writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
     stat(path: string): ValueEndpointSpec<Stats>;
@@ -243,7 +243,7 @@ export class RemoteClientPod implements Pod {
                     });
             }
 
-            readdir(path: string): Promise<string[]> {
+            readdir(path: string): Promise<{ [key: string]: string }[]> {
                 return rpcClient.polyOut().readdir(path)();
             }
 

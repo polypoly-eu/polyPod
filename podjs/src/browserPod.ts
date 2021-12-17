@@ -159,30 +159,41 @@ class LocalStoragePolyOut implements PolyOut {
         });
     }
 
-    readdir(path: string): Promise<string[]> {
+    readdir(id: string): Promise<{ [key: string]: string }[]> {
         files = new Map<string, Stats>(
             JSON.parse(localStorage.getItem(BrowserPolyNav.filesKey) || "[]")
         );
+        console.log({ files });
         return new Promise((resolve, reject) => {
             const filteredFiles = Array.from(files)
-                .filter((file) => file[0].startsWith(path))
+                .filter((file) => file[0].startsWith(id))
                 .map((file) => file[0]);
-
-            if (path == "") {
-                resolve(filteredFiles);
+            const retList: { [key: string]: string }[] = [];
+            if (id == "") {
+                for (let i = 0; i < filteredFiles.length; i++) {
+                    const file = filteredFiles[i];
+                    retList.push({ id: file, path: "" });
+                }
+                resolve(retList);
                 return;
             }
-            const dataUrl = localStorage.getItem(path);
+            const dataUrl = localStorage.getItem(id);
             if (!dataUrl) {
-                reject(new Error(`File not found: ${path}`));
+                reject(new Error(`File not found: ${id}`));
                 return;
             }
             const reader = new zip.ZipReader(new zip.Data64URIReader(dataUrl));
-            reader
-                .getEntries()
-                .then((entries) =>
-                    resolve(entries.map((entry) => `${path}/${entry.filename}`))
-                );
+            reader.getEntries().then((entries) => {
+                for (let i = 0; i < entries.length; i++) {
+                    const entry = entries[i];
+                    retList.push({
+                        id: `${id}/${entry.filename}`,
+                        path: entry.filename,
+                    });
+                }
+                console.log(retList);
+                resolve(retList);
+            });
         });
     }
 

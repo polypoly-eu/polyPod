@@ -14,7 +14,7 @@ export default class Storage {
         const files = await polyOut.readdir("");
         const statResults = {};
         for (let file of files) {
-            statResults[file] = await polyOut.stat(file);
+            statResults[file] = await polyOut.stat(file["id"]);
         }
         this._files = statResults;
         return files;
@@ -53,7 +53,8 @@ export class ZipFile {
     async _ensureCachedEntries() {
         if (this._entriesSet !== null) return;
         const entriesList = await this._readEntriesList();
-        this._entriesSet = new Set(entriesList);
+        const entriesIdList = entriesList.map((entry) => entry["id"]);
+        this._entriesSet = new Set(entriesIdList);
     }
 
     async getEntries() {
