@@ -102,7 +102,7 @@ export class DefaultPod implements Pod {
                 else return fs.readFile(path, options);
             }
 
-            readdir(path: string): Promise<string[]> {
+            readdir(path: string): Promise<{ [key: string]: string }[]> {
                 return fs.readdir(path);
             }
 
