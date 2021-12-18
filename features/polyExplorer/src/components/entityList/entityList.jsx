@@ -5,46 +5,49 @@ import EntityShortInfo from "../entityShortInfo/entityShortInfo.jsx";
 
 import "./entityList.css";
 
-function getStartGroups(entities) {
-    let numberGroups = 0;
-    let numberValues = 0;
-    const keys = Object.keys(entities);
-    for (let e of keys) {
-        numberGroups++;
-        numberValues += entities[e].length;
-        if (numberValues > 15) return keys[numberGroups];
+function determineInitialGroups(entities) {
+    const groups = Object.keys(entities);
+    let remainingValues = 15;
+    for (let i = 0; i < groups.length; i++) {
+        remainingValues -= entities[groups[i]].length;
+        if (remainingValues < 0) return Math.min(i + 2, groups.length);
     }
-    return keys.pop();
+    return groups.length;
 }
 
 function EntityList({ entities, sideLabel }) {
-    const allKeys = Object.keys(entities);
+    const allGroups = Object.keys(entities);
     const [loadedEntities, setLoadedEntities] = useState({});
-    const [toLoadKeys, setToLoadKeys] = useState(allKeys);
+    const [groupsToLoad, setGroupsToLoad] = useState(allGroups);
     const [hasMore, setHasMore] = useState(true);
     const listRef = useRef();
 
     function loadEntities() {
+        // This logic is currently not very efficient for an initial group with
+        // a large amount of entities in it, since it never loads partial groups.
+        const initialGroupCount = determineInitialGroups(entities);
+
+        const initialGroups = allGroups.slice(0, initialGroupCount);
         const loadedEntities = {};
-        const startGroups = getStartGroups(entities);
-        for (let i = 0; i <= allKeys.indexOf(startGroups); i++) {
-            loadedEntities[allKeys[i]] = entities[allKeys[i]];
-        }
+        for (let group of initialGroups)
+            loadedEntities[group] = entities[group];
         setLoadedEntities(loadedEntities);
-        const toLoadKeys = [...allKeys];
-        toLoadKeys.splice(0, allKeys.indexOf(startGroups));
-        setToLoadKeys(toLoadKeys);
+
+        setGroupsToLoad(allGroups.slice(initialGroupCount));
     }
 
     function handleLoadMoreData() {
-        if (toLoadKeys.length > 0) {
-            const moreEntities = { ...loadedEntities };
-            const loadKeys = [...toLoadKeys];
-            const newKey = loadKeys.shift();
-            moreEntities[newKey] = entities[newKey];
-            setToLoadKeys(loadKeys);
-            setLoadedEntities(moreEntities);
-        } else setHasMore(false);
+        if (groupsToLoad.length <= 0) {
+            setHasMore(false);
+            return;
+        }
+        const remainingGroupsToLoad = [...groupsToLoad];
+        const newGroup = remainingGroupsToLoad.shift();
+        setGroupsToLoad(remainingGroupsToLoad);
+        setLoadedEntities({
+            ...loadedEntities,
+            [newGroup]: entities[newGroup],
+        });
     }
 
     useEffect(() => {
@@ -59,7 +62,7 @@ function EntityList({ entities, sideLabel }) {
     return (
         <div id="entity-list" className="entity-list" ref={listRef}>
             <InfiniteScroll
-                dataLength={allKeys.length - toLoadKeys.length}
+                dataLength={allGroups.length - groupsToLoad.length}
                 next={handleLoadMoreData}
                 scrollThreshold="80%"
                 hasMore={hasMore}
