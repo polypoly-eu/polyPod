@@ -89,6 +89,7 @@ const DataStructureMiniStory = ({ data }) => {
                 })}
                 activeChip={selectedFolder}
                 onChipClick={handleFolderSelected}
+                theme={"dark"}
             />
             <InfoButton route="/report/data-structure-info" />
             <p className="source data-structure-source">

@@ -4,7 +4,7 @@ import "./chips.css";
 
 const Chips = ({ chipsContent, activeChip, onChipClick, theme = "light" }) => {
   return (
-    <div className={`chips-container`}>
+    <div className={`poly-theme-${theme} chips-container`}>
       {chipsContent.map(({ id, translation }) => {
         return (
           <button
