@@ -5,6 +5,5 @@ import {
   VerticalBarChart,
   MirroredBarChart,
 } from "./visualisations/charts";
-import { Chips } from "./react/index";
 import { PolyChart } from "./visualisations/wrappers/react/polyChart.jsx";
-export { BubbleCluster, VerticalBarChart, MirroredBarChart, PolyChart, Chips };
+export { BubbleCluster, VerticalBarChart, MirroredBarChart, PolyChart };
