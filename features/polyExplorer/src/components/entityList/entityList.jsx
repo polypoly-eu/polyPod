@@ -23,8 +23,11 @@ function EntityList({ entities, showGrouped, sideLabel }) {
     const listRef = useRef();
 
     function loadEntities() {
-        // This logic is currently not very efficient for an initial group with
-        // a large amount of entities in it, since it never loads partial groups.
+        // The current logic decides what to load on a group level, i.e. it
+        // either loads an entire group, or it doesn't load it at all. For large
+        // groups with many entities, this can lead to so many entity entries
+        // being loaded (initially) that it causes notable performance problems.
+
         const initialGroupCount = determineInitialGroups(entities);
 
         const initialGroups = allGroups.slice(0, initialGroupCount);
