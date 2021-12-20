@@ -39,6 +39,10 @@ export class DefaultPod implements Pod {
         public readonly fetch: Fetch
     ) {}
 
+    private checkQuad(quad: RDF.Quad) {
+        if (!quad.graph.equals(dataFactory.defaultGraph()))
+            throw new Error("Only default graph allowed");
+    }
     /**
      * The [[PolyIn]] interface. See [[PolyIn]] for the description.
      */
@@ -64,20 +68,17 @@ export class DefaultPod implements Pod {
                 ),
             add: async (...quads) =>
                 quads.forEach((quad) => {
-                    if (!quad.graph.equals(dataFactory.defaultGraph()))
-                        throw new Error("Only default graph allowed");
+                    this.checkQuad(quad);
                     this.store.add(quad);
                 }),
             delete: async (...quads) =>
                 quads.forEach((quad) => {
-                    if (!quad.graph.equals(dataFactory.defaultGraph()))
-                        throw new Error("Only default graph allowed");
+                    this.checkQuad(quad);
                     this.store.delete(quad);
                 }),
             has: async (...quads) =>
                 quads.some((quad) => {
-                    if (!quad.graph.equals(dataFactory.defaultGraph()))
-                        throw new Error("Only default graph allowed");
+                    this.checkQuad(quad);
                     return this.store.has(quad);
                 }),
         };
