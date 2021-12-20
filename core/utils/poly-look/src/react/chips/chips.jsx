@@ -5,14 +5,15 @@ import "./chips.css";
 const Chips = ({ chipsContent, activeChip, onChipClick, theme = "light" }) => {
   return (
     <div className={`poly-theme-${theme} chips-container`}>
-      {chipsContent.map(({ id, translation }) => {
+      {chipsContent.map((e) => {
+        const title = e.title || e.id || e;
         return (
           <button
-            className={activeChip == id ? "chip selected" : "chip"}
-            onClick={() => onChipClick(id)}
-            key={id}
+            className={activeChip == title ? "chip selected" : "chip"}
+            onClick={() => onChipClick(title)}
+            key={title}
           >
-            {translation || id}
+            {e.translation || title}
           </button>
         );
       })}
