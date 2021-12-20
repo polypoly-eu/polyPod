@@ -6,7 +6,7 @@ import {
   SankeyDiagram,
 } from "./visualisations/charts";
 import { PolyChart } from "./visualisations/wrappers/react/polyChart.jsx";
-import { Tabs, Tab, SwipeableTabs } from "./react";
+import { Tab, Tabs } from "./react";
 export {
   BubbleCluster,
   VerticalBarChart,
@@ -15,5 +15,4 @@ export {
   PolyChart,
   Tab,
   Tabs,
-  SwipeableTabs,
 };

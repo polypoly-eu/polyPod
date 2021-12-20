@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import Tab from "./tab.jsx";
 
 import "./tabs.css";
 
-const Tabs = ({ children }) => {
+const Tabs = ({ children, swipe = true }) => {
   const [activeTab, setActiveTab] = useState(children[0].props.label);
 
   const onTabClick = (ev, newActiveTabId) => {
@@ -26,9 +27,21 @@ const Tabs = ({ children }) => {
           </button>
         ))}
       </div>
-      <div className="tab-content">
-        {children.find((tab) => tab.props.label == activeTab).props.children}
-      </div>
+      <Swiper
+        spaceBetween={1}
+        slidesPerView={1}
+        initialSlide={0}
+        watchOverflow={true}
+        onSlideChange={(swiper) =>
+          setActiveTab(children[swiper.activeIndex].props.label)
+        }
+      >
+        {swipe
+          ? children.map((tab, index) => (
+              <SwiperSlide key={index}>{tab.props.children}</SwiperSlide>
+            ))
+          : children.find((tab) => tab.props.label == activeTab).props.children}
+      </Swiper>
     </div>
   );
 };

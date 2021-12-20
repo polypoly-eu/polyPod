@@ -1,5 +1,4 @@
-import { Tabs } from "./tabs/tabs.jsx";
 import Tab from "./tabs/tab.jsx";
-import { SwipeableTabs } from "./tabs/swipeableTabs.jsx";
+import { Tabs } from "./tabs/tabs.jsx";
 
-export { Tab, Tabs, SwipeableTabs };
+export { Tab, Tabs };
