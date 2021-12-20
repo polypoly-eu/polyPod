@@ -15,7 +15,7 @@ function determineInitialGroups(entities) {
     return groups.length;
 }
 
-function EntityList({ entities, sideLabel }) {
+function EntityList({ entities, showGrouped, sideLabel }) {
     const allGroups = Object.keys(entities);
     const [loadedEntities, setLoadedEntities] = useState({});
     const [groupsToLoad, setGroupsToLoad] = useState(allGroups);
@@ -74,14 +74,20 @@ function EntityList({ entities, sideLabel }) {
                             key={index}
                             className={
                                 "entity-group" +
-                                (sideLabel ? " side-label" : "")
+                                (showGrouped && sideLabel ? " side-label" : "")
                             }
                         >
-                            <hr />
-                            <div className="entity-group-label">
-                                {label +
-                                    (sideLabel ? "" : ` (${entities.length})`)}
-                            </div>
+                            {showGrouped && (
+                                <>
+                                    <hr />
+                                    <div className="entity-group-label">
+                                        {label +
+                                            (sideLabel
+                                                ? ""
+                                                : ` (${entities.length})`)}
+                                    </div>
+                                </>
+                            )}
                             <div className="entity-group-entities">
                                 {entities.map((entity, index) => (
                                     <EntityShortInfo
@@ -98,13 +104,25 @@ function EntityList({ entities, sideLabel }) {
     );
 }
 
+function normalizeEntities(entities) {
+    const validEntities = typeof entities == "object" ? entities : [];
+    return Array.isArray(validEntities)
+        ? { null: validEntities }
+        : validEntities;
+}
+
 export default (props) => {
+    const entities = normalizeEntities(props.entities);
+    const showGrouped =
+        "showGrouped" in props ? props.showGrouped : Object.keys(entities) > 1;
     const sideLabel =
         "sideLabel" in props
             ? props.sideLabel
             : Object.keys(props.entities).every((label) => label?.length === 1);
     return EntityList({
         ...props,
+        entities,
+        showGrouped,
         sideLabel,
     });
 };
