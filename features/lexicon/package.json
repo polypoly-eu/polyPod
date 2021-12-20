@@ -10,7 +10,7 @@
     "start": "sirv public --no-clear",
     "update-lexicon-data": "func(){ node ./scripts/update-lexicon-data.js \"$1\";}; func",
     "test": "jest",
-    "clean": "rm -rf node_modules public/{build,pod.js,poly-look.css}"
+    "clean": "shx rm -rf node_modules public/{build,pod.js,poly-look.css}"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.14.7",

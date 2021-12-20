@@ -20,6 +20,8 @@
 }
 
 .explore-view .report-button {
+    font-family: "Jost Medium";
+    font-size: 18px;
     background-color: var(--background-dark);
     padding: 4px 12px;
     margin: 0 auto;
@@ -30,13 +32,13 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-weight: 600;
     color: var(--text-light);
     border-radius: 4px;
     box-sizing: border-box;
 }
 
 .explore-view .details-button {
+    font-family: "Jost Medium";
     background-color: var(--background-light);
     color: var(--text-dark);
     margin: 24px auto 0 auto;
@@ -46,18 +48,9 @@
     justify-content: center;
     align-items: center;
     border-radius: 4px;
-    font-weight: 600;
     font-size: 18px;
     line-height: 21.6px;
     box-sizing: border-box;
-}
-
-.card-separator {
-    border-bottom: solid 1px var(--color-gray-400);
-}
-
-.card-separator:last-of-type {
-    border-bottom: none;
 }
 
 .explore-view .pop-up {
@@ -88,8 +81,13 @@
     overflow-x: scroll;
 }
 
-.analysis-card:last-child {
-    border-bottom: none;
+.analysis-card .card-separator {
+    margin-top: 30px;
+    border-bottom: solid 1px var(--color-gray-400);
+}
+
+.analysis-card:last-child .card-separator {
+    display: none;
 }
 .analysis-card .card-container {
     display: flex;
@@ -139,8 +137,8 @@
 }
 
 .unrecognized-analysis-card .unrecognized-analysis-title h1 {
+    font-family: "Jost Medium";
     font-size: 24px;
-    font-weight: 500;
     margin: 0;
 }
 
