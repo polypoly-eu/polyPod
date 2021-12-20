@@ -4,7 +4,7 @@ import Tab from "./tab.jsx";
 
 import "./tabs.css";
 
-const SwipableTabs = ({ children }) => {
+const SwipeableTabs = ({ children }) => {
   const [activeTab, setActiveTab] = useState(children[0].props.label);
 
   const onTabClick = (ev, newActiveTabId) => {
@@ -43,4 +43,4 @@ const SwipableTabs = ({ children }) => {
   );
 };
 
-export { SwipableTabs, Tab };
+export { SwipeableTabs, Tab };

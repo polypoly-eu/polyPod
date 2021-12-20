@@ -5,7 +5,7 @@ import GradientCircleList from "../../components/gradientCircleList/gradientCirc
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
-import { SwipableTabs, Tab } from "@polypoly-eu/poly-look";
+import { SwipeableTabs, Tab } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import { PolyChart } from "@polypoly-eu/poly-look";
 
@@ -66,14 +66,14 @@ const DigitalGiantsStory = () => {
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.dataTypes`)}
             />
-            <SwipableTabs>
+            <SwipeableTabs>
                 <Tab label="Hello">
                     <div style={{ width: "100%", height: "200px" }}></div>
                 </Tab>
                 <Tab label="Bye">
                     <div style={{ width: "100%", height: "200px" }}></div>
                 </Tab>
-            </SwipableTabs>
+            </SwipeableTabs>
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:data.types.p`)}
             </p>
