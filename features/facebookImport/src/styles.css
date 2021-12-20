@@ -38,6 +38,10 @@
     /* Size */
     --max-width: 412px;
     --line-height: 120%;
+
+    /* Theme */
+    --theme-primary-color: var(--color-dark);
+    --theme-secondary-color: var(--color-contrast-white);
 }
 
 .facebook-importer {
