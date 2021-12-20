@@ -39,7 +39,7 @@ export class DefaultPod implements Pod {
         public readonly fetch: Fetch
     ) {}
 
-    private checkQuad(quad: RDF.Quad) {
+    private checkQuad(quad: RDF.Quad): void {
         if (!quad.graph.equals(dataFactory.defaultGraph()))
             throw new Error("Only default graph allowed");
     }
