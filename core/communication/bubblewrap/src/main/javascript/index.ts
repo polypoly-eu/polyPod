@@ -245,27 +245,6 @@ export class Bubblewrap {
 
     private makeAndRegisterCodec(): ExtensionCodec {
         const codec = new ExtensionCodec();
-
-        if (this.strict) {
-            const knownPrototypes = this.knownPrototypes;
-            codec.register({
-                type: msgPackEtypeStrict,
-                encode: (value) => {
-                    if (typeof value === "object" && !Array.isArray(value)) {
-                        if (knownPrototypes.includes(Object.getPrototypeOf(value)))
-                            // this value is probably fine, please go on
-                            return null;
-
-                        throw new Error("Attempted to encode an object with an unknown prototype");
-                    }
-                    return null;
-                },
-                decode: () => {
-                    throw new Error("Attempted to decode a dummy type");
-                },
-            });
-        }
-
         codec.register({
             type: msgPackEtypeUndef,
             encode: (value) => (value instanceof Undefined ? encode(null) : null),
@@ -321,6 +300,15 @@ export class Bubblewrap {
     }
 
     encode(value: unknown): Uint8Array {
+        if (
+            this.strict &&
+            typeof value === "object" &&
+            !Array.isArray(value) &&
+            !this.knownPrototypes.includes(Object.getPrototypeOf(value))
+        ) {
+            throw new Error("Attempted to encode an object with an unknown prototype");
+        }
+
         return encode(value, { extensionCodec: this.codec });
     }
 
