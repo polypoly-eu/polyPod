@@ -23,7 +23,7 @@ const Tabs = ({ children, swipe = true }) => {
               tab.props.label === activeTab ? "tab-button active" : "tab-button"
             }
           >
-            {tab.props.label}
+            {tab.props.translation || tab.props.label}
           </button>
         ))}
       </div>
