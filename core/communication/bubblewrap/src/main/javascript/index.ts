@@ -44,6 +44,7 @@ export interface Serializable extends MaybeSerializable {
     [serialize]: () => any;
 }
 
+// Type guard for Serializable
 function isSerializable(t: MaybeSerializable): t is Serializable {
     return t[serialize] !== undefined;
 }
