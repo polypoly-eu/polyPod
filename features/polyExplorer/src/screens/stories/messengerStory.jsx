@@ -37,23 +37,6 @@ const MessengerStory = () => {
         i18n.t(`${i18nHeader}:summary.bullet.3`),
     ];
 
-    const example = [{ value: 100 }, { value: 200 }, { value: 5000 }];
-
-    console.log(products["Signal"]._data.dataTypesShared);
-
-    // const dataTypes = [
-    //     {
-    //         data: listOfMessengerApps.map((messenger) => {
-    //             return {
-    //                 title: messenger,
-    //                 bubbles: products[messenger]._data.dataTypesShared.map(
-    //                     () => 1
-    //                 ),
-    //             };
-    //         }),
-    //     },
-    // ];
-
     return (
         <ClusterStory
             progressBarColor="black"
