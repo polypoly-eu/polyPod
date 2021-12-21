@@ -208,6 +208,7 @@ export class Bubblewrap {
      * Creates a new instance of [[Bubblewrap]] with the specified dictionary of registered classes.
      *
      * If no dictionary is specified, no classes are registered.
+     * Classes will need to be added later via [[addClasses]]
      *
      * @param strict if `true`, then `encode` will throw an exception when encountering any object with an unknown
      * prototype; this is only recommended for testing purposes
