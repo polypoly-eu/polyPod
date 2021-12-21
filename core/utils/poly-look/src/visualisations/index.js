@@ -1,2 +1,7 @@
-import { VerticalBarChart, MirroredBarChart, BubbleCluster } from "./charts";
-export { VerticalBarChart, MirroredBarChart, BubbleCluster };
+import {
+  VerticalBarChart,
+  MirroredBarChart,
+  BubbleCluster,
+  SankeyDiagram,
+} from "./charts";
+export { VerticalBarChart, MirroredBarChart, BubbleCluster, SankeyDiagram };

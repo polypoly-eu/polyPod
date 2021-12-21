@@ -22,7 +22,8 @@ import infographicEn from "./locales/en/infographic.json";
 import storiesPreviewScreenEn from "./locales/en/stories/storiesPreviewScreen.json";
 import clusterStoriesPreviewEn from "./locales/en/stories/clusterStoriesPreview.json";
 import clusterMessengerStoryEn from "./locales/en/stories/clusterMessengerStory.json";
-import clusterDigitalGiantsStoryEn from "./locales/en/stories/clusterDigitalGiantsStory.json";
+import clusterDigitalGiantsStoryEn from "./locales/en/stories/clusterDigitalGiants.json";
+import clusterStoryCommonEn from "./locales/en/stories/common.json";
 import barChartEn from "./locales/en/barChart.json";
 
 import commonDe from "./locales/de/common.json";
@@ -47,7 +48,8 @@ import infographicDe from "./locales/de/infographic.json";
 import storiesPreviewScreenDe from "./locales/de/stories/storiesPreviewScreen.json";
 import clusterStoriesPreviewDe from "./locales/de/stories/clusterStoriesPreview.json";
 import clusterMessengerStoryDe from "./locales/de/stories/clusterMessengerStory.json";
-import clusterDigitalGiantsStoryDe from "./locales/de/stories/clusterDigitalGiantsStory.json";
+import clusterDigitalGiantsStoryDe from "./locales/de/stories/clusterDigitalGiants.json";
+import clusterStoryCommonDe from "./locales/de/stories/common.json";
 import barChartDe from "./locales/de/barChart.json";
 
 export default new I18n(determineLanguage(), {
@@ -75,6 +77,7 @@ export default new I18n(determineLanguage(), {
         clusterStoriesPreview: clusterStoriesPreviewEn,
         clusterMessengerStory: clusterMessengerStoryEn,
         clusterDigitalGiantsStory: clusterDigitalGiantsStoryEn,
+        clusterStoryCommon: clusterStoryCommonEn,
         barChart: barChartEn,
     },
     de: {
@@ -101,6 +104,7 @@ export default new I18n(determineLanguage(), {
         clusterStoriesPreview: clusterStoriesPreviewDe,
         clusterMessengerStory: clusterMessengerStoryDe,
         clusterDigitalGiantsStory: clusterDigitalGiantsStoryDe,
+        clusterStoryCommon: clusterStoryCommonDe,
         barChart: barChartDe,
     },
 });

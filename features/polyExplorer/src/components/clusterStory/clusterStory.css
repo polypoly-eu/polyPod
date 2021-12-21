@@ -35,7 +35,7 @@
     margin-top: 8px;
 }
 
-.cluster-story-main-title {
+.cluster-story .cluster-story-main-title {
     font-size: 24px;
     font-weight: 600;
     line-height: 120%;
@@ -45,24 +45,28 @@
     padding-top: 25px;
 }
 
-.cluster-story-img {
+.cluster-story .cluster-story-img {
     width: 348px;
     height: 468px;
     display: block;
     margin: 0 auto 60px auto;
 }
 
-.big-first-letter::first-letter {
+.cluster-story .big-first-letter::first-letter {
     float: left;
     font-size: 60px;
     line-height: 40px;
     padding: 0 12px;
 }
 
-.cluster-story-title {
+.cluster-story .cluster-story-title {
     color: var(--story-color-primary) !important;
     margin-top: 50px;
     font-weight: bold;
     font-size: 45px;
     line-height: 120%;
+}
+
+.cluster-story svg {
+    width: 100%;
 }
