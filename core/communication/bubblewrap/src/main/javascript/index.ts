@@ -13,11 +13,10 @@
  *
  * We leverage [MessagePack's](https://msgpack.org/) extension types for mapping JavaScript objects to byte arrays.
  * This library defines four extension types:
- * 1. [[msgPackEtypeStrict]] is reserved for implementation purposes and will never be emitted
- * 2. [[msgPackEtypeUndef]] tags a sentinel value of class [[Undefined]]; used to distinguish `undefined` from
+ * 1. [[msgPackEtypeUndef]] tags a sentinel value of class [[Undefined]]; used to distinguish `undefined` from
  *    `null` (see [[Class]] for details)
- * 3. [[msgPackEtypeClass]] tags an registered JavaScript class; there is one tag for all classes
- * 4. [[msgPackEtypeError]] tags an error of the built-in `Error` type; it is possible to specify custom logic
+ * 2. [[msgPackEtypeClass]] tags an registered JavaScript class; there is one tag for all classes
+ * 3. [[msgPackEtypeError]] tags an error of the built-in `Error` type; it is possible to specify custom logic
  *    for subclasses of `Error`
  *
  * @packageDocumentation
@@ -172,7 +171,6 @@ export type Class<T extends MaybeSerializable> = Function & {
  */
 export type Classes = Record<string, Class<any>>;
 
-export const msgPackEtypeStrict = 0x00;
 export const msgPackEtypeUndef = 0x01;
 export const msgPackEtypeClass = 0x02;
 export const msgPackEtypeError = 0x03;
