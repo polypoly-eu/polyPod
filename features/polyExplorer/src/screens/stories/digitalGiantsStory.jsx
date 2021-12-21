@@ -99,7 +99,6 @@ const DigitalGiantsStory = () => {
                 type="sankey-diagram"
                 links={jurisdictionLinks}
                 className="full-size-svg"
-                options={{ labels: false }}
             />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
