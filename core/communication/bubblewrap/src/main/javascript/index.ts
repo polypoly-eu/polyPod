@@ -230,6 +230,7 @@ export class Bubblewrap {
 
     /**
      * Constructs a new, independent [[Bubblewrap]] instance with additional registered classes.
+     * There must be a reason for this creating an additional object; unclear to me right now
      *
      * This method throws an exception if there is a duplicate class identifier.
      */
