@@ -204,7 +204,7 @@ export class Undefined {}
  */
 export class Bubblewrap {
     codec: ExtensionCodec;
-    knownPrototypes: Array<Object>;
+    knownPrototypes: Array<unknown>;
 
     private constructor(private readonly classes: Classes, private readonly strict: boolean) {
         this.knownPrototypes = [
