@@ -1,8 +1,6 @@
 import React from "react";
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 
-import "./exampleStory.css";
-
 const ExampleStory = () => {
     return (
         <ClusterStory

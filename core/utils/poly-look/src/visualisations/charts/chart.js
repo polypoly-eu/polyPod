@@ -59,7 +59,7 @@ export class Chart {
 
   get chart() {
     const chart = d3.select(this._selector).select(".chart");
-    return chart.empty() ? this.generateChart() : chart;
+    return chart.empty() ? this._generateChart() : chart;
   }
 
   get type() {
@@ -72,15 +72,15 @@ export class Chart {
       .reduce((prev, curr) => prev.toLowerCase() + "-" + curr.toLowerCase());
   }
 
-  createSVG() {
+  _createSVG() {
     return d3
       .select(this._selector)
       .append("svg")
       .attr("viewBox", `0 0 ${this.width} ${this.height}`);
   }
 
-  generateChart() {
-    return this.createSVG()
+  _generateChart() {
+    return this._createSVG()
       .append("g")
       .attr("width", this.chartWidth)
       .attr("height", this.chartHeight)

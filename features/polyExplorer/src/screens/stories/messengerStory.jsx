@@ -4,10 +4,7 @@ import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
-import Tab from "../../components/clusterStories/tab.jsx";
 import MatrixBubblesChart from "../../components/clusterStories/MatrixBubblesChart.jsx";
-
-import "./messengerStory.css";
 import OrderedList from "../../components/orderedList/orderedList.jsx";
 
 const i18nHeader = "clusterMessengerStory";
@@ -41,8 +38,8 @@ const MessengerStory = () => {
         <ClusterStory
             progressBarColor="black"
             className="messenger-story"
+            primaryColor="#3ba6ff"
             fadingTopBackground={{
-                color: "var(--color-primary-messenger-story)",
                 distance: "600px",
             }}
         >
@@ -59,11 +56,9 @@ const MessengerStory = () => {
                 alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
             />
             <p>{i18n.t(`${i18nHeader}:intro.paragraph.two`)}</p>
-            <ul className="messenger-list">
-                {listOfMessengerApps.map((messenger, index) => (
-                    <li key={index} className="messenger-el">
-                        {messenger}
-                    </li>
+            <ul>
+                {Object.keys(products).map((messenger, index) => (
+                    <li key={index}>{messenger}</li>
                 ))}
             </ul>
             <h2 className="cluster-story-title">
@@ -80,13 +75,6 @@ const MessengerStory = () => {
                 title={i18n.t(`${i18nHeader}:overview.section`)}
             ></SectionTitle>
             <p>{i18n.t(`${i18nHeader}:overview.paragraph.one`)}</p>
-            <Tab>
-                <div
-                    label={i18n.t(`${i18nHeader}:overview.tab.installs`)}
-                ></div>
-                <div label={i18n.t(`${i18nHeader}:overview.tab.users`)}></div>
-                <div label={i18n.t(`${i18nHeader}:overview.tab.partof`)}></div>
-            </Tab>
             <div className="chart-container"></div>
             <p>{i18n.t(`${i18nHeader}:overview.paragraph.two`)}</p>
             <MatrixBubblesChart data={example} />

@@ -4,6 +4,7 @@
     "build": "node index.js"
   },
   "devDependencies": {
+    "bestzip": "^2.2.0",
     "demo-feature": "file:../demo",
     "facebook-import-feature": "file:../facebookImport",
     "lexicon-feature": "file:../lexicon",
