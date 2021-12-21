@@ -5,9 +5,8 @@ import GradientCircleList from "../../components/gradientCircleList/gradientCirc
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
-import { Tabs, Tab } from "@polypoly-eu/poly-look";
+import { Tabs, Tab, EmbeddedSankey } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
-import { PolyChart } from "@polypoly-eu/poly-look";
 
 const i18nHeader = "clusterDigitalGiantsStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -95,11 +94,7 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:data.regions.p.1`)}
             </p>
-            <PolyChart
-                type="sankey-diagram"
-                links={jurisdictionLinks}
-                className="full-size-svg"
-            />
+            <EmbeddedSankey links={jurisdictionLinks} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
             />
