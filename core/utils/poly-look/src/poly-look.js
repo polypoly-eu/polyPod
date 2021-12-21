@@ -1,4 +1,5 @@
 import "./styles.css";
+import "./colors.css";
 import {
   BubbleCluster,
   VerticalBarChart,
