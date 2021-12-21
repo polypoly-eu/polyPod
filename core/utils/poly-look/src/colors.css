@@ -1,0 +1,4 @@
+:root {
+  /* We use this instead of transparent for ios compatibility */
+  --transparent: rgba(0, 0, 0, 0);
+}
