@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import EntityShortInfo from "../entityShortInfo/entityShortInfo.jsx";
@@ -15,14 +15,35 @@ function determineInitialGroups(entities) {
     return groups.length;
 }
 
-function EntityList({ entities, showGrouped, sideLabel }) {
+function EntityList({ entities, showGrouped, sideLabel, expand }) {
     const allGroups = Object.keys(entities);
     const [loadedEntities, setLoadedEntities] = useState({});
     const [groupsToLoad, setGroupsToLoad] = useState(allGroups);
     const [hasMore, setHasMore] = useState(true);
     const listRef = useRef();
 
+    function Content({ children }) {
+        if (expand) return <>{children}</>;
+        return (
+            <InfiniteScroll
+                dataLength={allGroups.length - groupsToLoad.length}
+                next={handleLoadMoreData}
+                scrollThreshold="80%"
+                hasMore={hasMore}
+                scrollableTarget="entity-list"
+            >
+                {children}
+            </InfiniteScroll>
+        );
+    }
+
     function loadEntities() {
+        if (expand) {
+            setLoadedEntities(entities);
+            setGroupsToLoad([]);
+            return;
+        }
+
         // The current logic decides what to load on a group level, i.e. it
         // either loads an entire group, or it doesn't load it at all. For large
         // groups with many entities, this can lead to so many entity entries
@@ -63,14 +84,12 @@ function EntityList({ entities, showGrouped, sideLabel }) {
     }, [entities]);
 
     return (
-        <div id="entity-list" className="entity-list" ref={listRef}>
-            <InfiniteScroll
-                dataLength={allGroups.length - groupsToLoad.length}
-                next={handleLoadMoreData}
-                scrollThreshold="80%"
-                hasMore={hasMore}
-                scrollableTarget="entity-list"
-            >
+        <div
+            id="entity-list"
+            className={"entity-list" + (expand ? " expand" : "")}
+            ref={listRef}
+        >
+            <Content>
                 {Object.entries(loadedEntities).map(
                     ([label, entities], index) => (
                         <div
@@ -102,7 +121,7 @@ function EntityList({ entities, showGrouped, sideLabel }) {
                         </div>
                     )
                 )}
-            </InfiniteScroll>
+            </Content>
         </div>
     );
 }
@@ -115,7 +134,10 @@ function normalizeEntities(entities) {
 }
 
 export default (props) => {
-    const entities = normalizeEntities(props.entities);
+    const entities = useMemo(
+        () => normalizeEntities(props.entities),
+        [props.entities]
+    );
     const showGrouped =
         "showGrouped" in props ? props.showGrouped : Object.keys(entities) > 1;
     const sideLabel =

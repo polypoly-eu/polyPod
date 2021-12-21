@@ -8,6 +8,7 @@ import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import { Tabs, Tab } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import { PolyChart } from "@polypoly-eu/poly-look";
+import EntityList from "../../components/entityList/entityList.jsx";
 
 const i18nHeader = "clusterDigitalGiantsStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -103,6 +104,7 @@ const DigitalGiantsStory = () => {
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
             />
+            <EntityList entities={bigSix} expand={true} />
         </ClusterStory>
     );
 };
