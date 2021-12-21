@@ -204,8 +204,16 @@ export class Undefined {}
  */
 export class Bubblewrap {
     codec?: ExtensionCodec;
+    knownPrototypes: Array<Object>;
 
-    private constructor(private readonly classes: Classes, private readonly strict: boolean) {}
+    private constructor(private readonly classes: Classes, private readonly strict: boolean) {
+        this.knownPrototypes = [
+            Object.prototype,
+            Error.prototype,
+            Undefined.prototype,
+            ...Object.values(this.classes).map((cls) => cls.prototype),
+        ];
+    }
 
     /**
      * Creates a new instance of [[Bubblewrap]] with the specified dictionary of registered classes.
@@ -237,13 +245,7 @@ export class Bubblewrap {
         const codec = new ExtensionCodec();
 
         if (this.strict) {
-            const knownPrototypes = [
-                Object.prototype,
-                Error.prototype,
-                Undefined.prototype,
-                ...Object.values(this.classes).map((cls) => cls.prototype),
-            ];
-
+            const knownPrototypes = this.knownPrototypes;
             codec.register({
                 type: msgPackEtypeStrict,
                 encode: (value) => {
