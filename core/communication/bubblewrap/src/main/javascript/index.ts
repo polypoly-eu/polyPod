@@ -83,7 +83,7 @@ function isSerializable(t: MaybeSerializable): t is Serializable {
  * value `MyCoolClass`, which in JavaScript is a function that constructs objects of this class.
  *
  * In the simplest case, a class' author does not have to implement any additional methods. Encoding will still use
- * `Object.entries`, but additionally include the object's prototype.
+ * `Object.entries`, but will additionally include the object's prototype.
  *
  * Applied to the above example, the object will be encoded as follows:
  *
