@@ -67,10 +67,10 @@ const DigitalGiantsStory = () => {
                 title={i18n.t(`${i18nHeaderCommon}:section.dataTypes`)}
             />
             <Tabs>
-                <Tab label="Hello" translation="Hallo">
+                <Tab id="tab-hello" label="Hallo">
                     <div style={{ width: "100%", height: "200px" }}></div>
                 </Tab>
-                <Tab label="Bye" translation="Tschüß">
+                <Tab id="tab-bye" label="Tschüß">
                     <div style={{ width: "100%", height: "200px" }}></div>
                 </Tab>
             </Tabs>
