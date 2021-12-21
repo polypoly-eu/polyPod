@@ -27,6 +27,7 @@ import { encode, decode, ExtensionCodec } from "@msgpack/msgpack";
 
 /**
  * Symbol for static class methods that provide custom deserialization logic. See [[Class]] for an example.
+ * Making them a symbol excludes from conversion, that's the whole point of it.
  */
 export const deserialize: unique symbol = Symbol();
 
@@ -190,11 +191,12 @@ export class Undefined {}
  * 1. the dictionary of registered classes
  * 2. a low-level MessagePack codec (implementation detail)
  *
- * The latter is initialized lazily for performance reasons. Otherwise, this class is immutable and may freely be
+ * The latter is initialized lazily for performance reasons.
+ * Otherwise, this class is immutable and may freely be
  * shared.
  *
- * New instances are created using the [[Bubblewrap.create]] static method. Additional classes can be registered with
- * [[Bubblewrap.addClasses]].
+ * New instances are created using the [[Bubblewrap.create]] static method.
+ * Additional classes can be registered with [[Bubblewrap.addClasses]].
  *
  * It is crucial that in any given application, class keys are not reused. They are required for identifying custom
  * (de)serialization logic. Keys of registered classes are stored
