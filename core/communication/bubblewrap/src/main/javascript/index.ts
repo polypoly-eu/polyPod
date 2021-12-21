@@ -203,7 +203,7 @@ export class Undefined {}
  * (de)serialization logic. Keys of registered classes are stored
  */
 export class Bubblewrap {
-    codec?: ExtensionCodec;
+    codec: ExtensionCodec;
     knownPrototypes: Array<Object>;
 
     private constructor(private readonly classes: Classes, private readonly strict: boolean) {
@@ -213,6 +213,7 @@ export class Bubblewrap {
             Undefined.prototype,
             ...Object.values(this.classes).map((cls) => cls.prototype),
         ];
+        this.codec = this.makeAndRegisterCodec();
     }
 
     /**
@@ -320,14 +321,10 @@ export class Bubblewrap {
     }
 
     encode(value: unknown): Uint8Array {
-        if (!this.codec) this.codec = this.makeAndRegisterCodec();
-
         return encode(value, { extensionCodec: this.codec });
     }
 
     decode(_buffer: ArrayLike<number> | ArrayBuffer): any {
-        if (!this.codec) this.codec = this.makeAndRegisterCodec();
-
         const buffer = new Uint8Array(_buffer);
         return decode(buffer, { extensionCodec: this.codec });
     }
