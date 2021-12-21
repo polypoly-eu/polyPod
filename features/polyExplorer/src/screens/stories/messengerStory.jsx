@@ -5,8 +5,10 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import OrderedList from "../../components/orderedList/orderedList.jsx";
+import EntityList from "../../components/entityList/entityList.jsx";
 
 const i18nHeader = "clusterMessengerStory";
+const i18nHeaderCommon = "clusterStoryCommon";
 
 const MessengerStory = () => {
     const { products } = useContext(ExplorerContext);
@@ -60,6 +62,10 @@ const MessengerStory = () => {
             <p>{i18n.t(`${i18nHeader}:overview.paragraph.one`)}</p>
             <div className="chart-container"></div>
             <p>{i18n.t(`${i18nHeader}:overview.paragraph.two`)}</p>
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
+            />
+            <EntityList entities={Object.values(products)} expand={true} />
         </ClusterStory>
     );
 };
