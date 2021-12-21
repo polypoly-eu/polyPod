@@ -4,9 +4,7 @@ import * as d3 from "d3";
 
 import "./MatrixBubblesChart.css";
 
-const MatrixBubblesChart = ({ data }) => {
-    const bubblesColor = "#FB8A89";
-    const strokeColor = "none";
+const MatrixBubblesChart = ({ data, bubbleColor, textColor, strokeColor }) => {
     const matrixBubbleChartWidth = 65;
     const matrixBubbleChartHeight = 50;
     const chartRef = useRef();
@@ -29,8 +27,8 @@ const MatrixBubblesChart = ({ data }) => {
                             data={dataBubble.bubbles}
                             width={matrixBubbleChartWidth}
                             height={matrixBubbleChartHeight}
-                            bubbleColor={bubblesColor}
-                            textColor={bubblesColor}
+                            bubbleColor={bubbleColor}
+                            textColor={textColor}
                             strokeColor={strokeColor}
                         />
                         <h4>{dataBubble.title}</h4>

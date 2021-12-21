@@ -17,5 +17,14 @@
     "overview.tab.partof": "Part of",
     "overview.donut.installs.message": "Android app installs in millions",
     "overview.donut.users.message": "Monthly active users in millions",
+    "datatypes.title": "Data Types",
+    "datatypes.legend": "data type",
+    "datatypes.tab.messenger": "By Messenger",
+    "datatypes.text.messenger": "Some data types need to be shared for what we expect from a messenger. But not all messengers share the same amount of data types. The extra sharing indicates that they make money with it.",
+    "datatypes.tab.shares": "By Shares",
+    "datatypes.text.shares": "Different messengers share different data types more often than others.",
+    "datatypes.tab.types": "By Types",
+    "datatypes.text.types": "Some of the data types shared the most indicate the use for targeted advertising.",
+    "datatypes.legend.types": "Data Types: {{amount_of_data_types}} (shared {{amount_of_shares}} Times)",
     "purposes.chart.legend": "Number of mentions"
 }
