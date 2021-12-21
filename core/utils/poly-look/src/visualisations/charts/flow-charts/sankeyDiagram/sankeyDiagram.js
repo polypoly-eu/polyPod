@@ -10,7 +10,7 @@ const linkSource = ({ source }) => source,
   intern = (value) =>
     value !== null && typeof value === "object" ? value.valueOf() : value,
   nodeWidth = 5,
-  nodePadding = 5,
+  nodePadding = 12,
   linkMixBlendMode = "multiply",
   linkPath = d3Sankey.sankeyLinkHorizontal(),
   defaultNodeTitle = (d) => `${d.id}: ${d.value}`,
@@ -74,7 +74,7 @@ export class SankeyDiagram extends Chart {
         right: d3Sankey.sankeyRight,
         center: d3Sankey.sankeyCenter,
       }[options?.align] ?? d3Sankey.sankeyJustify;
-    this._labelsShowing = options.labels !== false;
+    this._labelsShowing = options?.labels !== false;
     this._margin = margin || defaultMargin;
     this._nodeColor = color?.node || defaultNodeColor;
     this._nodeLabelTextColor = color?.text || defaultTextColor;
