@@ -5,7 +5,7 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import Tab from "../../components/clusterStories/tab.jsx";
-import MatrixBubblesChart from "../../components/clusterStories/messengers/MatrixBubblesChart.jsx";
+import MatrixBubblesChart from "../../components/clusterStories/MatrixBubblesChart.jsx";
 
 import "./messengerStory.css";
 import OrderedList from "../../components/orderedList/orderedList.jsx";
