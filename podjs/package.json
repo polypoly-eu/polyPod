@@ -12,7 +12,10 @@
   "scripts": {
     "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "build-downstream": "../build.js --start @polypoly-eu/podjs",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint src --ext .ts",
+    "pretest": "start-dummy-server &",
+    "test": "jest",
+    "posttest": "stop-dummy-server"
   },
   "dependencies": {
     "@polypoly-eu/fetch-spec": "file:../core/api/fetch-spec",
@@ -22,6 +25,7 @@
     "rdf-js": "^4.0.2"
   },
   "devDependencies": {
+    "@polypoly-eu/dummy-server": "file:../core/utils/dummy-server",
     "@polypoly-eu/rdf-spec": "file:../core/api/rdf-spec",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.1.0",

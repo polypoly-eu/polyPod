@@ -1,7 +1,7 @@
 {
   "name": "@polypoly-eu/pod-api",
   "version": "0.7.2",
-  "description": "Definitions, spec, and dummy implementation for the API of a Pod",
+  "description": "Definitions and spec for the API of a Pod",
   "files": [
     "dist/*.js",
     "dist/*.d.ts"
@@ -17,9 +17,6 @@
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
     "lint": "npm run eslint",
-    "pretest": "start-dummy-server &",
-    "test": "jest",
-    "posttest": "stop-dummy-server",
     "docs": "typedoc"
   },
   "dependencies": {
@@ -27,7 +24,6 @@
     "@polypoly-eu/rdf": "file:../rdf"
   },
   "devDependencies": {
-    "@polypoly-eu/dummy-server": "file:../../utils/dummy-server",
     "@polypoly-eu/rdf-spec": "file:../rdf-spec",
     "@rdfjs/dataset": "^1.0.1",
     "@rollup/plugin-sucrase": "^3.1.0",
