@@ -233,38 +233,34 @@ export class Bubblewrap {
         return new Bubblewrap({ ...this.classes, ...more }, this.strict);
     }
 
-    private registerStrict(codec: ExtensionCodec): void {
-        if (!this.strict) return;
-
-        const knownPrototypes = [
-            Object.prototype,
-            Error.prototype,
-            Undefined.prototype,
-            ...Object.values(this.classes).map((cls) => cls.prototype),
-        ];
-
-        codec.register({
-            type: msgPackEtypeStrict,
-            encode: (value) => {
-                if (typeof value === "object" && !Array.isArray(value)) {
-                    if (knownPrototypes.includes(Object.getPrototypeOf(value)))
-                        // this value is probably fine, please go on
-                        return null;
-
-                    throw new Error("Attempted to encode an object with an unknown prototype");
-                }
-                return null;
-            },
-            decode: () => {
-                throw new Error("Attempted to decode a dummy type");
-            },
-        });
-    }
-
-    private makeCodec(): ExtensionCodec {
+    private makeAndRegisterCodec(): ExtensionCodec {
         const codec = new ExtensionCodec();
 
-        this.registerStrict(codec);
+        if (this.strict) {
+            const knownPrototypes = [
+                Object.prototype,
+                Error.prototype,
+                Undefined.prototype,
+                ...Object.values(this.classes).map((cls) => cls.prototype),
+            ];
+
+            codec.register({
+                type: msgPackEtypeStrict,
+                encode: (value) => {
+                    if (typeof value === "object" && !Array.isArray(value)) {
+                        if (knownPrototypes.includes(Object.getPrototypeOf(value)))
+                            // this value is probably fine, please go on
+                            return null;
+
+                        throw new Error("Attempted to encode an object with an unknown prototype");
+                    }
+                    return null;
+                },
+                decode: () => {
+                    throw new Error("Attempted to decode a dummy type");
+                },
+            });
+        }
 
         codec.register({
             type: msgPackEtypeUndef,
@@ -321,13 +317,13 @@ export class Bubblewrap {
     }
 
     encode(value: unknown): Uint8Array {
-        if (!this.codec) this.codec = this.makeCodec();
+        if (!this.codec) this.codec = this.makeAndRegisterCodec();
 
         return encode(value, { extensionCodec: this.codec });
     }
 
     decode(_buffer: ArrayLike<number> | ArrayBuffer): any {
-        if (!this.codec) this.codec = this.makeCodec();
+        if (!this.codec) this.codec = this.makeAndRegisterCodec();
 
         const buffer = new Uint8Array(_buffer);
         return decode(buffer, { extensionCodec: this.codec });
