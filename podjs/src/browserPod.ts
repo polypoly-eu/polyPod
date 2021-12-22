@@ -9,7 +9,7 @@ import type {
     PolyOut,
     PolyNav,
 } from "@polypoly-eu/pod-api";
-import { EncodingOptions, Stats } from "@polypoly-eu/pod-api";
+import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
@@ -159,7 +159,7 @@ class LocalStoragePolyOut implements PolyOut {
         });
     }
 
-    readdir(id: string): Promise<{ [key: string]: string }[]> {
+    readdir(id: string): Promise<Entry[]> {
         files = new Map<string, Stats>(
             JSON.parse(localStorage.getItem(BrowserPolyNav.filesKey) || "[]")
         );

@@ -12,6 +12,7 @@ import { dataFactory } from "@polypoly-eu/rdf";
 import { Pod, PolyIn, PolyOut, PolyNav, Info, Network } from "./api";
 import type { Fetch, Response, RequestInit } from "@polypoly-eu/fetch-spec";
 import { EncodingOptions, ExternalFile, FS, Stats } from "./fs";
+import { Entry } from ".";
 
 /**
  * The _default Pod_ provides the bare minimum implementation to satisfy the [[Pod]] API. It should only be used in
@@ -102,11 +103,11 @@ export class DefaultPod implements Pod {
                 else return fs.readFile(path, options);
             }
 
-            readdir(path: string): Promise<{ [key: string]: string }[]> {
+            readdir(path: string): Promise<Entry[]> {
                 //mock readdir
                 const newFiles = fs.readdir(path).then((files) => {
                     const objectFiles = files.map((file) => ({ id: file, path: file }));
-                    return new Promise<{ [key: string]: string }[]>((resolve) => {
+                    return new Promise<Entry[]>((resolve) => {
                         resolve(objectFiles);
                     });
                 });
