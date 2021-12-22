@@ -124,8 +124,8 @@ const MessengerStory = () => {
                     bubbles: dataTypesSharedCombined.map((bubble) => {
                         return { value: bubble.total };
                     }),
-                    width: 500,
-                    height: 500,
+                    width: 400,
+                    height: 400,
                 },
             ],
         },
