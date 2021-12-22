@@ -6,18 +6,20 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 import "./receivingCompanies.css";
 
-const Companies = ({ entities }) => (
-    <table>
-        <tbody>
-            {entities.map(({ name, dataRecipients }, index) => (
-                <tr key={index}>
-                    <td>{name}</td>
-                    <td>{dataRecipients.length}</td>
-                </tr>
-            ))}
-        </tbody>
-    </table>
-);
+function Companies({ entities }) {
+    const data = entities.map(({ name, dataRecipients }) => ({
+        title: name,
+        value: dataRecipients.length,
+    }));
+    return (
+        <PolyChart
+            type="vertical-bar-chart"
+            data={data}
+            barColor="#7ee8a2"
+            barValueColor="#0f1938"
+        />
+    );
+}
 
 function IndustriesChart({ recipientsPerIndustry }) {
     const industries = Object.keys(recipientsPerIndustry);
