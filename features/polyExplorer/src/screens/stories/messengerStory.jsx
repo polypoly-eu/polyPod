@@ -4,9 +4,11 @@ import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
+import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
 import OrderedList from "../../components/orderedList/orderedList.jsx";
 
 const i18nHeader = "clusterMessengerStory";
+const i18nHeaderCommon = "clusterStoryCommon";
 
 const MessengerStory = () => {
     const { products } = useContext(ExplorerContext);
@@ -60,6 +62,14 @@ const MessengerStory = () => {
             <p>{i18n.t(`${i18nHeader}:overview.paragraph.one`)}</p>
             <div className="chart-container"></div>
             <p>{i18n.t(`${i18nHeader}:overview.paragraph.two`)}</p>
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:companies.p.1`)}
+            </p>
+            <p>{i18n.t(`${i18nHeader}:companies.p.2`)}</p>
+            <ReceivingCompanies entities={Object.values(products)} />
         </ClusterStory>
     );
 };
