@@ -36,7 +36,8 @@
     background-color: var(--color-background-dark);
     flex: 1 1 0px;
     height: 100%;
-    padding-bottom: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     font-family: "Jost Medium";
     font-size: 14px;
     line-height: 16px;
@@ -202,8 +203,8 @@
 
 .entity-details-text {
     box-sizing: border-box;
-    width: 100%;
-    max-width: var(--max-width);
+    /* width: 100%; */
+    /* max-width: var(--max-width); */
     margin: 0 auto;
 }
 
@@ -269,7 +270,7 @@
 
 .revenue .separator-unit h2 {
     text-align: center;
-    margin: 24px 16px;
+    margin: 8px 16px;
     font-family: "Jost Medium";
     font-size: 20px;
 }
@@ -306,17 +307,21 @@
     overflow: hidden scroll;
 }
 
+.about .entity-details-text {
+    overflow: hidden scroll;
+    max-height: 300px;
+    margin: 32px 16px 0 16px;
+}
 .about .scroll-box {
     overflow: hidden scroll;
     max-height: 300px;
     padding-bottom: 40px;
-    margin: 32px 16px 0 16px;
 }
 
 .about .gradient {
-    height: 40px;
+    height: 32px;
     background: linear-gradient(#0f193800 0%, #0f1938);
-    transform: translateY(-40px);
+    transform: translateY(-32px);
 }
 
 .about .scroll-box::-webkit-scrollbar {

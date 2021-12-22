@@ -7,7 +7,7 @@
     position: relative;
     width: 100%;
     height: 165px;
-    margin-top: 20px;
+    margin-top: 32px;
 }
 
 .revenue-chart-container .gridline {
@@ -48,7 +48,7 @@
     background-color: #3ba6ff;
     width: 12%;
     max-width: 80px;
-    bottom: 23%;
+    bottom: 24.5%;
     z-index: 200;
     transform: translateX(4px);
 }

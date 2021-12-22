@@ -1,5 +1,5 @@
 .location-legend {
-    margin: 16px 16px 0 16px;
+    margin: 16px 16px 16px 16px;
 }
 
 .location-legend p {
@@ -23,12 +23,24 @@
     font-size: 12px;
 }
 
+.location-legend .leg p {
+    margin: 0 8px 0 0;
+}
+
+.location-legend .leg {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
 .location-legend .legend {
     flex: 0 0 auto;
-    width: 172px;
+    width: 80%;
     margin-bottom: 24px;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 4px;
 }
 
 .location-legend .legend p {
