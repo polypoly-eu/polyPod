@@ -184,7 +184,14 @@ const MessengerStory = () => {
             {dataTypes.map((dataType, i) => {
                 if (dataType.label)
                     return (
-                        <p key={i} className="big-first-letter">
+                        <p
+                            key={i}
+                            className={
+                                dataType.label === "By Messenger"
+                                    ? "big-first-letter"
+                                    : null
+                            }
+                        >
                             {dataType.description}
                         </p>
                     );
@@ -217,20 +224,21 @@ const MessengerStory = () => {
                                     strokeColor={dataType.bubbleStroke}
                                 />
                             ) : (
-                                <>
-                                    <div ref={byTypesChartRef}>
-                                        <PolyChart
-                                            type="bubble-cluster"
-                                            data={dataType.data[0].bubbles}
-                                            width={dataType.data[0].width}
-                                            height={dataType.data[0].height}
-                                            bubbleColor={dataType.bubbleColor}
-                                            textColor={dataType.bubbleTextColor}
-                                            strokeColor={dataType.bubbleStroke}
-                                        />
-                                    </div>
+                                <div
+                                    className="by-types-bubble-chart"
+                                    ref={byTypesChartRef}
+                                >
+                                    <PolyChart
+                                        type="bubble-cluster"
+                                        data={dataType.data[0].bubbles}
+                                        width={dataType.data[0].width}
+                                        height={dataType.data[0].height}
+                                        bubbleColor={dataType.bubbleColor}
+                                        textColor={dataType.bubbleTextColor}
+                                        strokeColor={dataType.bubbleStroke}
+                                    />
                                     <h4>{dataType.data[0].title}</h4>
-                                </>
+                                </div>
                             )}
                         </Tab>
                     );

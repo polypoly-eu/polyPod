@@ -13,3 +13,8 @@
 .messenger-story .data-types-lengend p {
     margin: 0 0 0 8px;
 }
+
+.messenger-story .by-types-bubble-chart h4 {
+    margin: 0;
+    text-align: center;
+}
