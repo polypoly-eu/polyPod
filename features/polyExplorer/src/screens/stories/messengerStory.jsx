@@ -78,6 +78,7 @@ const MessengerStory = () => {
 
     const dataTypes = [
         {
+            id: "by-messenger",
             label: "By Messenger",
             translation: i18n.t(`${i18nHeader}:datatypes.tab.messenger`),
             bubbleColor: "#FB8A89",
@@ -99,6 +100,7 @@ const MessengerStory = () => {
             }),
         },
         {
+            id: "by-shares",
             label: "By Shares",
             translation: i18n.t(`${i18nHeader}:datatypes.tab.shares`),
             bubbleColor: "#FB8A89",
@@ -124,6 +126,7 @@ const MessengerStory = () => {
             }),
         },
         {
+            id: "by-types",
             label: "By Types",
             translation: i18n.t(`${i18nHeader}:datatypes.tab.types`),
             bubbleColor: "#FB8A89",
@@ -206,7 +209,7 @@ const MessengerStory = () => {
                     <p
                         key={i}
                         className={
-                            dataType.label === "By Messenger"
+                            dataType.id === "by-messenger"
                                 ? "big-first-letter"
                                 : null
                         }
@@ -219,6 +222,7 @@ const MessengerStory = () => {
                 {dataTypes.map((dataType, i) => {
                     return (
                         <Tab
+                            id={dataType.id}
                             label={dataType.label}
                             translation={dataType.translation}
                             key={i}
@@ -235,7 +239,7 @@ const MessengerStory = () => {
                                     {i18n.t(`${i18nHeader}:datatypes.legend`)}
                                 </p>
                             </div>
-                            {dataType.label !== "By Types" ? (
+                            {dataType.id !== "by-types" ? (
                                 <MatrixBubblesChart
                                     data={dataType.data}
                                     bubbleColor={dataType.bubbleColor}
