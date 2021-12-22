@@ -3,6 +3,7 @@
     height: 40px;
     width: 100%;
     z-index: 20;
+    background-color: var(--color-background-dark);
 }
 
 .main-screen .nav-button {
