@@ -105,43 +105,28 @@ open class PolyOut(
         id: String
     ): Array<Map<String, String>> {
         val fs = Preferences.getFileSystem(context)
-        val retList = mutableListOf(mapOf<String,String>())
-        
-        retList.removeFirst()
         if (id == "") {
             val newFs = fs.filter {
                 File(idToPath(it.key, context)).exists()
             }
             Preferences.setFileSystem(context, newFs)
-
-            val allIds = newFs.keys;
-            
-            for (idPath in allIds){
-                val relPath = getRelativePathFromId(idPath)
-                val idMap = mapOf<String,String>("id" to idPath, "path" to relPath)
-                retList.add(idMap)
-            }
-            return retList.toTypedArray()
+            return newFs.keys.map {
+                mutableMapOf<String, String>("id" to it, "path" to it)
+            }.toTypedArray();
         }
         if (readdirCache.contains(id)) {
             return readdirCache.get(id)!!
         }
+        val retList = mutableListOf<Map<String, String>>()
 
         File(idToPath(id, context)).walkTopDown().forEach {
-            val idValue = "$fsFilesRoot/" + pathToId(it, context).removePrefix(fsPrefix)
-            val relPath = getRelativePathFromId(idValue)
-            val idMap = mapOf<String,String>("id" to idValue,"path" to relPath)
+            val idPath = "$fsFilesRoot/"+pathToId(it, context).removePrefix(fsPrefix)
+            val relPath = pathToId(it, context).removePrefix(fsPrefix).removePrefix(idPath.split("/")[1])
+            val idMap = mutableMapOf<String,String>("id" to idPath,"path" to relPath)
             retList.add(idMap)
         }
         readdirCache[id] = retList.toTypedArray()
         return retList.toTypedArray()
-    }
-
-    open suspend fun getRelativePathFromId(id : String): String{
-        val separationIndex = if (id.contains("https")) 4 else 2
-        val arrayCompletePath = id.split("/").toTypedArray()
-        val arrayRelativePath = arrayCompletePath.copyOfRange(separationIndex,arrayCompletePath.size)
-        return arrayRelativePath.joinToString(separator = "/")
     }
 
     open suspend fun importArchive(url: String): Uri? {

@@ -134,7 +134,14 @@ open class PodApi(
         var path = ""
         if (!args[0].isNilValue) { path = args[0].asStringValue().toString() }
         val result = polyOut.readdir(path)
-        return ValueFactory.newArray(result.map { ValueFactory.newString(it["id"]) })
+
+        return ValueFactory.newArray(result.map {
+            ValueFactory.newMap( mutableMapOf<Value, Value>(
+                ValueFactory.newString("id") to
+                    ValueFactory.newString(it["id"]),
+                ValueFactory.newString("path") to
+                    ValueFactory.newString(it["path"])))
+        })
     }
 
     private suspend fun handlePolyOutImportArchive(args: List<Value>): Value {
