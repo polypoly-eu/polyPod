@@ -236,7 +236,7 @@ const MessengerStory = () => {
                     );
                 })}
             </Tabs>
-            <p>{i18n.t("common:source")}: PolyPedia</p>
+            <p className="source">{i18n.t("common:source")}: PolyPedia</p>
         </ClusterStory>
     );
 };
