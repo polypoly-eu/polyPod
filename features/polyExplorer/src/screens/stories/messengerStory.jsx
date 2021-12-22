@@ -199,19 +199,18 @@ const MessengerStory = () => {
                 title={i18n.t(`${i18nHeader}:datatypes.title`)}
             ></SectionTitle>
             {dataTypes.map((dataType, i) => {
-                if (dataType.label)
-                    return (
-                        <p
-                            key={i}
-                            className={
-                                dataType.label === "By Messenger"
-                                    ? "big-first-letter"
-                                    : null
-                            }
-                        >
-                            {dataType.description}
-                        </p>
-                    );
+                return (
+                    <p
+                        key={i}
+                        className={
+                            dataType.label === "By Messenger"
+                                ? "big-first-letter"
+                                : null
+                        }
+                    >
+                        {dataType.description}
+                    </p>
+                );
             })}
             <Tabs>
                 {dataTypes.map((dataType, i) => {
