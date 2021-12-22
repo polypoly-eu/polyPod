@@ -6,6 +6,7 @@ import {
     PolyNav,
     ExternalFile,
     EncodingOptions,
+    Entry,
     Matcher,
     Network,
     Stats,
@@ -34,7 +35,7 @@ class AsyncPolyOut implements PolyOut {
     async stat(path: string): Promise<Stats> {
         return (await this.promise).stat(path);
     }
-    async readdir(path: string): Promise<{ [key: string]: string }[]> {
+    async readdir(path: string): Promise<Entry[]> {
         return (await this.promise).readdir(path);
     }
 

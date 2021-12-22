@@ -10,6 +10,7 @@ import {
     Matcher,
     Network,
     Info,
+    Entry,
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
@@ -47,7 +48,7 @@ type PolyInEndpoint = ObjectEndpointSpec<{
 }>;
 
 type PolyOutEndpoint = ObjectEndpointSpec<{
-    readdir(path: string): ValueEndpointSpec<{ [key: string]: string }[]>;
+    readdir(path: string): ValueEndpointSpec<Entry[]>;
     readFile(path: string, options?: EncodingOptions): ValueEndpointSpec<string | Uint8Array>;
     writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
     stat(path: string): ValueEndpointSpec<Stats>;
@@ -243,7 +244,7 @@ export class RemoteClientPod implements Pod {
                     });
             }
 
-            readdir(path: string): Promise<{ [key: string]: string }[]> {
+            readdir(path: string): Promise<Entry[]> {
                 return rpcClient.polyOut().readdir(path)();
             }
 
