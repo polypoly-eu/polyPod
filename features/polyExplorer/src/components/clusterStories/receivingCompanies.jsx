@@ -6,18 +6,34 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 import "./receivingCompanies.css";
 
+const displayIndex = (i) => (Number.isInteger(i) ? `${i + 1}` : "");
+
+const IndexedLegend = ({ items }) => (
+    <div>
+        {items.map((item, index) => (
+            <p key={index}>
+                {displayIndex(index)}: {item}
+            </p>
+        ))}
+    </div>
+);
+
 function Companies({ entities }) {
+    const entityNames = entities.map(({ name }) => name);
     const data = entities.map(({ name, dataRecipients }) => ({
-        title: name,
+        title: displayIndex(entityNames.indexOf(name)),
         value: dataRecipients.length,
     }));
     return (
-        <PolyChart
-            type="vertical-bar-chart"
-            data={data}
-            barColor="#7ee8a2"
-            barValueColor="#0f1938"
-        />
+        <>
+            <PolyChart
+                type="vertical-bar-chart"
+                data={data}
+                barColor="#7ee8a2"
+                barValueColor="#0f1938"
+            />
+            <IndexedLegend items={entityNames} />
+        </>
     );
 }
 
@@ -25,7 +41,7 @@ function IndustriesChart({ recipientsPerIndustry }) {
     const industries = Object.keys(recipientsPerIndustry);
     const data = Object.entries(recipientsPerIndustry).map(
         ([industry, recipients]) => ({
-            label: `${industries.indexOf(industry) + 1}`,
+            label: displayIndex(industries.indexOf(industry)),
             children: recipients.map((sharingCount) => ({
                 value: sharingCount,
             })),
@@ -45,13 +61,7 @@ function IndustriesChart({ recipientsPerIndustry }) {
                 text={(d) => d.data.label}
                 textColor="#0f1938"
             />
-            <div>
-                {industries.map((industry, index) => (
-                    <p key={index}>
-                        {index + 1}: {industry}
-                    </p>
-                ))}
-            </div>
+            <IndexedLegend items={industries} />
         </>
     );
 }
