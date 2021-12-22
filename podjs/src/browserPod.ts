@@ -167,13 +167,10 @@ class LocalStoragePolyOut implements PolyOut {
             const filteredFiles = Array.from(files)
                 .filter((file) => file[0].startsWith(id))
                 .map((file) => file[0]);
-            const retList: { [key: string]: string }[] = [];
             if (id == "") {
-                for (let i = 0; i < filteredFiles.length; i++) {
-                    const file = filteredFiles[i];
-                    retList.push({ id: file, path: "" });
-                }
-                resolve(retList);
+                resolve(
+                    filteredFiles.map((file) => ({ id: file, path: file }))
+                );
                 return;
             }
             const dataUrl = localStorage.getItem(id);
@@ -183,14 +180,12 @@ class LocalStoragePolyOut implements PolyOut {
             }
             const reader = new zip.ZipReader(new zip.Data64URIReader(dataUrl));
             reader.getEntries().then((entries) => {
-                for (let i = 0; i < entries.length; i++) {
-                    const entry = entries[i];
-                    retList.push({
+                resolve(
+                    entries.map((entry) => ({
                         id: `${id}/${entry.filename}`,
                         path: entry.filename,
-                    });
-                }
-                resolve(retList);
+                    }))
+                );
             });
         });
     }
