@@ -37,7 +37,30 @@ function Companies({ entities }) {
     );
 }
 
-function IndustriesChart({ recipientsPerIndustry }) {
+function extractRecipientsPerIndustry(entities, companies) {
+    const sharingCounts = {};
+    for (let { dataRecipients } of entities)
+        for (let recipient of dataRecipients)
+            sharingCounts[recipient] = (sharingCounts[recipient] || 0) + 1;
+
+    const result = {};
+    for (let [recipient, sharingCount] of Object.entries(sharingCounts)) {
+        const industry = companies[recipient]?.industryCategoryName();
+        if (!industry) {
+            console.error(`Unable to determine industry of ${recipient}`);
+            continue;
+        }
+        result[industry] = (result[industry] || []).concat(sharingCount);
+    }
+    return result;
+}
+
+function Industries({ entities }) {
+    const { companies } = useContext(ExplorerContext);
+    const recipientsPerIndustry = useMemo(
+        () => extractRecipientsPerIndustry(entities, companies),
+        [entities]
+    );
     const industries = Object.keys(recipientsPerIndustry);
     const data = Object.entries(recipientsPerIndustry).map(
         ([industry, recipients]) => ({
@@ -64,35 +87,6 @@ function IndustriesChart({ recipientsPerIndustry }) {
             <IndexedLegend items={industries} />
         </>
     );
-}
-
-function Industries({ entities }) {
-    const { companies } = useContext(ExplorerContext);
-
-    const recipientSharingCounts = useMemo(() => {
-        const result = {};
-        for (let { dataRecipients } of entities)
-            for (let recipient of dataRecipients)
-                result[recipient] = (result[recipient] || 0) + 1;
-        return result;
-    }, [entities]);
-
-    const recipientsPerIndustry = useMemo(() => {
-        const result = {};
-        for (let [recipient, sharingCount] of Object.entries(
-            recipientSharingCounts
-        )) {
-            const industry = companies[recipient]?.industryCategoryName();
-            if (!industry) {
-                console.error(`Unable to determine industry of ${recipient}`);
-                continue;
-            }
-            result[industry] = (result[industry] || []).concat(sharingCount);
-        }
-        return result;
-    }, [entities]);
-
-    return <IndustriesChart recipientsPerIndustry={recipientsPerIndustry} />;
 }
 
 export default function ReceivingCompanies({ entities }) {
