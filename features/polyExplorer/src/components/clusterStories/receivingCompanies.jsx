@@ -19,32 +19,46 @@ const Companies = ({ entities }) => (
 
 function Industries({ entities }) {
     const { companies } = useContext(ExplorerContext);
-    const recipients = [].concat.apply(
-        [],
-        entities.map(({ dataRecipients }) => dataRecipients)
-    );
 
-    const companiesPerIndustry = useMemo(() => {
-        const map = {};
-        for (let recipient of recipients) {
+    const recipientSharingCounts = useMemo(() => {
+        const result = {};
+        for (let { dataRecipients } of entities)
+            for (let recipient of dataRecipients)
+                result[recipient] = (result[recipient] || 0) + 1;
+        return result;
+    }, [entities]);
+
+    const recipientsPerIndustry = useMemo(() => {
+        const result = {};
+        for (let [recipient, sharingCount] of Object.entries(
+            recipientSharingCounts
+        )) {
             const industry = companies[recipient]?.industryCategoryName();
             if (!industry) {
                 console.error(`Unable to determine industry of ${recipient}`);
                 continue;
             }
-            map[industry] = (map[industry] || 0) + 1;
+            result[industry] = (result[industry] || []).concat(sharingCount);
         }
-        return map;
+        return result;
     }, [entities]);
 
     return (
         <table>
             <tbody>
-                {Object.entries(companiesPerIndustry).map(
-                    ([industry, companyCount], index) => (
+                {Object.entries(recipientsPerIndustry).map(
+                    ([industry, recipients], index) => (
                         <tr key={index}>
                             <td>{industry}</td>
-                            <td>{companyCount}</td>
+                            <td>
+                                <ul>
+                                    {Object.values(recipients).map(
+                                        (sharingCount, index) => (
+                                            <li key={index}>{sharingCount}</li>
+                                        )
+                                    )}
+                                </ul>
+                            </td>
                         </tr>
                     )
                 )}
