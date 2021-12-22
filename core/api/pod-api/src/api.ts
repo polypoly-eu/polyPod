@@ -110,12 +110,13 @@ export interface PolyIn {
  * - [[FS]] for Node.js-style file-system access
  * - [[Fetch]] for DOM-style HTTP requests
  */
-export interface PolyOut extends FS {
+export interface PolyOut extends Omit<FS, "readdir"> {
     /**
      * @deprecated Use [[Network]] and its facilities instead.
      * A standard-compliant implementation of `Fetch`. This feature is deprecated in favor of the [[Network]] interface
      */
     readonly fetch: Fetch;
+    readdir(id: string): Promise<{ [key: string]: string }[]>;
 }
 
 /**
