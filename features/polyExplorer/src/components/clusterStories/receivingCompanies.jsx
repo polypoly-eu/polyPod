@@ -78,8 +78,11 @@ function Industries({ entities }) {
         () => extractRecipientsPerIndustry(entities, companies),
         [entities]
     );
-    const industries = Object.keys(recipientsPerIndustry);
-    const legend = new IndexedLegend(industries);
+    const top3Industries = Object.entries(recipientsPerIndustry)
+        .sort((a, b) => b[1].length - a[1].length)
+        .map(([industry, _]) => industry)
+        .slice(0, 3);
+    const legend = new IndexedLegend(top3Industries);
     const data = Object.entries(recipientsPerIndustry).map(
         ([industry, recipients]) => ({
             label: legend.labelOf(industry),
