@@ -11,22 +11,34 @@ const chartColors = {
     secondary: "#0f1938",
 };
 
-const displayIndex = (i) => (Number.isInteger(i) ? `${i + 1}` : "");
+class IndexedLegend {
+    constructor(items) {
+        this.items = items;
+    }
 
-const IndexedLegend = ({ items }) => (
-    <div>
-        {items.map((item, index) => (
-            <p key={index}>
-                {displayIndex(index)}: {item}
-            </p>
-        ))}
-    </div>
-);
+    labelOf(item) {
+        const index = this.items.indexOf(item);
+        if (index === -1) return "";
+        return `${index + 1}`;
+    }
+
+    render() {
+        return (
+            <div>
+                {this.items.map((item, index) => (
+                    <p key={index}>
+                        {this.labelOf(item)}: {item}
+                    </p>
+                ))}
+            </div>
+        );
+    }
+}
 
 function Companies({ entities }) {
-    const entityNames = entities.map(({ name }) => name);
+    const legend = new IndexedLegend(entities.map(({ name }) => name));
     const data = entities.map(({ name, dataRecipients }) => ({
-        title: displayIndex(entityNames.indexOf(name)),
+        title: legend.labelOf(name),
         value: dataRecipients.length,
     }));
     return (
@@ -37,7 +49,7 @@ function Companies({ entities }) {
                 barColor={chartColors.primary}
                 barValueColor={chartColors.secondary}
             />
-            <IndexedLegend items={entityNames} />
+            {legend.render()}
         </>
     );
 }
@@ -67,9 +79,10 @@ function Industries({ entities }) {
         [entities]
     );
     const industries = Object.keys(recipientsPerIndustry);
+    const legend = new IndexedLegend(industries);
     const data = Object.entries(recipientsPerIndustry).map(
         ([industry, recipients]) => ({
-            label: displayIndex(industries.indexOf(industry)),
+            label: legend.labelOf(industry),
             children: recipients.map((sharingCount) => ({
                 value: sharingCount,
             })),
@@ -93,7 +106,7 @@ function Industries({ entities }) {
                 text={(d) => d.data.label}
                 textColor={chartColors.secondary}
             />
-            <IndexedLegend items={industries} />
+            {legend.render()}
         </>
     );
 }
