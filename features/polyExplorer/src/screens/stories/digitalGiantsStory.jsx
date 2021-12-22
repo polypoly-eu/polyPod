@@ -5,6 +5,7 @@ import GradientCircleList from "../../components/gradientCircleList/gradientCirc
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
+import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
 import { Tabs, Tab } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import { PolyChart } from "@polypoly-eu/poly-look";
@@ -90,6 +91,8 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:companies.p.1`)}
             </p>
+            <p>{i18n.t(`${i18nHeader}:companies.p.2`)}</p>
+            <ReceivingCompanies entities={bigSix} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.dataRegions`)}
             />
