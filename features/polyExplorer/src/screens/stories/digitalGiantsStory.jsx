@@ -5,8 +5,9 @@ import GradientCircleList from "../../components/gradientCircleList/gradientCirc
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
-import { Tabs, Tab, EmbeddedSankey } from "@polypoly-eu/poly-look";
+import { Tabs, Tab } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
+import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 
 const i18nHeader = "clusterDigitalGiantsStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -32,7 +33,15 @@ const DigitalGiantsStory = () => {
     const jurisdictionLinks = createJurisdictionLinks(
         bigSix,
         entityJurisdictionByPpid
-    );
+    ).map(({ source, target, value }) => ({
+        source: bigSixNames.find((name) => source.indexOf(name) !== -1),
+        target,
+        value,
+    }));
+
+    const otherJurisdictions = [
+        ...new Set(jurisdictionLinks.map(({ target }) => target)),
+    ].filter((j) => j !== "EU-GDPR");
 
     return (
         <ClusterStory
@@ -94,7 +103,20 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:data.regions.p.1`)}
             </p>
-            <EmbeddedSankey links={jurisdictionLinks} />
+            <EmbeddedSankey
+                links={jurisdictionLinks}
+                groups={{
+                    source: {
+                        label: "Messengers",
+                        all: true,
+                    },
+                    target: {
+                        label: "Regions",
+                        all: false,
+                        others: otherJurisdictions,
+                    },
+                }}
+            />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
             />

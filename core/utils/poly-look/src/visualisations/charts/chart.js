@@ -23,7 +23,7 @@ const noMargin = {
  * @param {number = 0} [margin.left] - Left left
  */
 export class Chart {
-  constructor({ selector, data, width, height, margin }) {
+  constructor({ selector, data, width, height, margin, gradients }) {
     this._selector = selector;
     this._data = data;
     this._width = width || 400;
@@ -31,6 +31,7 @@ export class Chart {
     this._margin = margin || noMargin;
     this._chartHeight = height - this.margin.bottom - this.margin.top;
     this._chartWidth = width - this.margin.left - this.margin.right;
+    this._gradients = gradients;
   }
 
   get data() {
@@ -72,11 +73,30 @@ export class Chart {
       .reduce((prev, curr) => prev.toLowerCase() + "-" + curr.toLowerCase());
   }
 
+  _createGradients(svg) {
+    const defs = svg.append("defs");
+    for (let gradientData of this._gradients) {
+      const gradient = defs
+        .append("linearGradient")
+        .attr("id", gradientData.id);
+
+      for (let stop of gradientData.stops) {
+        gradient
+          .append("stop")
+          .attr("offset", stop.offset)
+          .attr("stop-color", stop.color)
+          .attr("stop-opacity", stop.opacity);
+      }
+    }
+  }
+
   _createSVG() {
-    return d3
+    const svg = d3
       .select(this._selector)
       .append("svg")
       .attr("viewBox", `0 0 ${this.width} ${this.height}`);
+    if (this._gradients) this._createGradients(svg);
+    return svg;
   }
 
   _generateChart() {

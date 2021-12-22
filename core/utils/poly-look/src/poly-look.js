@@ -11,7 +11,6 @@ import {
 import { Chips } from "./react/index";
 import { PolyChart } from "./visualisations/wrappers/react/polyChart.jsx";
 import { Tab, Tabs } from "./react";
-import { EmbeddedSankey } from "./react/composed";
 export {
   BubbleCluster,
   VerticalBarChart,
@@ -21,5 +20,4 @@ export {
   Chips,
   Tab,
   Tabs,
-  EmbeddedSankey,
 };
