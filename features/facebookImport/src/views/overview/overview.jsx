@@ -80,7 +80,7 @@ const Overview = () => {
                         height={bubbleVizHeight}
                         bubbleColor={dataBubblesLightColor}
                         onBubbleClick={() => history.push("/explore")}
-                        showValues={false}
+                        text=""
                     />
                     <div className="details">
                         <p>

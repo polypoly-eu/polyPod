@@ -5,32 +5,33 @@ import i18n from "../../i18n.js";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 function IndustriesChart({ recipientsPerIndustry }) {
-    // TODO: Cluster bubbles by industry in a single chart
-
-    function RecipientBubbles({ recipients }) {
-        const data = recipients.map((sharingCount) => ({
-            value: sharingCount,
-        }));
-        return (
-            <PolyChart type="bubble-cluster" data={data} showValues={false} />
-        );
-    }
-
+    const industries = Object.keys(recipientsPerIndustry);
+    const data = Object.entries(recipientsPerIndustry).map(
+        ([industry, recipients]) => ({
+            label: `${industries.indexOf(industry) + 1}`,
+            children: recipients.map((sharingCount) => ({
+                value: sharingCount,
+            })),
+        })
+    );
     return (
-        <table>
-            <tbody>
-                {Object.entries(recipientsPerIndustry).map(
-                    ([industry, recipients], index) => (
-                        <tr key={index}>
-                            <td>{industry}</td>
-                            <td>
-                                <RecipientBubbles recipients={recipients} />
-                            </td>
-                        </tr>
-                    )
-                )}
-            </tbody>
-        </table>
+        <>
+            <PolyChart
+                type="bubble-cluster"
+                data={data}
+                bubbleColor={(d) => (d.children ? "transparent" : "#7ee8a2")}
+                strokeColor={(d) => (d.children ? "#0f1938" : "transparent")}
+                text={(d) => d.data.label}
+                textColor="#0f1938"
+            />
+            <div>
+                {industries.map((industry, index) => (
+                    <p key={index}>
+                        {index + 1}: {industry}
+                    </p>
+                ))}
+            </div>
+        </>
     );
 }
 
