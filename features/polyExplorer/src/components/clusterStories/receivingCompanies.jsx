@@ -1,8 +1,38 @@
 import React, { useContext, useMemo } from "react";
-import { Tabs, Tab } from "@polypoly-eu/poly-look";
+import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
+
+function IndustriesChart({ recipientsPerIndustry }) {
+    // TODO: Cluster bubbles by industry in a single chart
+
+    function RecipientBubbles({ recipients }) {
+        const data = recipients.map((sharingCount) => ({
+            value: sharingCount,
+        }));
+        return (
+            <PolyChart type="bubble-cluster" data={data} showValues={false} />
+        );
+    }
+
+    return (
+        <table>
+            <tbody>
+                {Object.entries(recipientsPerIndustry).map(
+                    ([industry, recipients], index) => (
+                        <tr key={index}>
+                            <td>{industry}</td>
+                            <td>
+                                <RecipientBubbles recipients={recipients} />
+                            </td>
+                        </tr>
+                    )
+                )}
+            </tbody>
+        </table>
+    );
+}
 
 const Companies = ({ entities }) => (
     <table>
@@ -43,28 +73,7 @@ function Industries({ entities }) {
         return result;
     }, [entities]);
 
-    return (
-        <table>
-            <tbody>
-                {Object.entries(recipientsPerIndustry).map(
-                    ([industry, recipients], index) => (
-                        <tr key={index}>
-                            <td>{industry}</td>
-                            <td>
-                                <ul>
-                                    {Object.values(recipients).map(
-                                        (sharingCount, index) => (
-                                            <li key={index}>{sharingCount}</li>
-                                        )
-                                    )}
-                                </ul>
-                            </td>
-                        </tr>
-                    )
-                )}
-            </tbody>
-        </table>
-    );
+    return <IndustriesChart recipientsPerIndustry={recipientsPerIndustry} />;
 }
 
 export default function ReceivingCompanies({ entities }) {
