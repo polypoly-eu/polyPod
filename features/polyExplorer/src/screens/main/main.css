@@ -22,6 +22,12 @@
 }
 
 .main-screen .nav-button.active {
+    /*
+     * Without this, a thin stripe of nav-button-container is visible below the
+     * active element.
+     */
+    padding-top: 0;
+
     border-color: var(--color-semi-light);
     color: var(--color-text-light);
 }
