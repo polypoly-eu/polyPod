@@ -163,7 +163,6 @@ class LocalStoragePolyOut implements PolyOut {
         files = new Map<string, Stats>(
             JSON.parse(localStorage.getItem(BrowserPolyNav.filesKey) || "[]")
         );
-        console.log({ files });
         return new Promise((resolve, reject) => {
             const filteredFiles = Array.from(files)
                 .filter((file) => file[0].startsWith(id))
@@ -191,7 +190,6 @@ class LocalStoragePolyOut implements PolyOut {
                         path: entry.filename,
                     });
                 }
-                console.log(retList);
                 resolve(retList);
             });
         });
