@@ -24,11 +24,11 @@ class IndexedLegend {
 
     render() {
         return (
-            <div>
+            <div className="indexed-legend">
                 {this.items.map((item, index) => (
-                    <p key={index}>
+                    <div key={index}>
                         {this.labelOf(item)}: {item}
-                    </p>
+                    </div>
                 ))}
             </div>
         );

@@ -1,8 +1,13 @@
+.receiving-companies .indexed-legend>*,
+.receiving-companies .bubble-legend-companies,
+.receiving-companies .bubble-legend-industries {
+    font-family: "Jost Medium";
+    font-size: 14px;
+}
+
 .receiving-companies .bubble-legend-companies,
 .receiving-companies .bubble-legend-industries {
     margin-right: 12px;
-    font-family: "Jost Medium";
-    font-size: 14px;
 }
 
 .receiving-companies .bubble-legend-companies::before,
