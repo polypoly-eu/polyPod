@@ -79,7 +79,10 @@ const MessengerStory = () => {
             description: i18n.t(`${i18nHeader}:datatypes.text.messenger`),
             data: listOfMessengerApps.map((messenger) => {
                 return {
-                    title: messenger,
+                    title:
+                        messenger +
+                        ": " +
+                        products[messenger]._data.dataTypesShared.length,
                     bubbles: products[messenger]._data.dataTypesShared.map(
                         () => {
                             return { value: 1 };
@@ -98,7 +101,13 @@ const MessengerStory = () => {
             `),
             data: listOfMessengerApps.map((messenger) => {
                 return {
-                    title: messenger,
+                    title:
+                        messenger +
+                        ": " +
+                        products[messenger]._data.dataTypesShared.reduce(
+                            (acc, bubble) => acc + bubble.count,
+                            0
+                        ),
                     bubbles: products[messenger]._data.dataTypesShared.map(
                         (bubble) => {
                             return { value: bubble.count };
