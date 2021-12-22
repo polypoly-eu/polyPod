@@ -4,6 +4,19 @@ import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import i18n from "../../i18n.js";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 
+const Companies = ({ entities }) => (
+    <table>
+        <tbody>
+            {entities.map(({ name, dataRecipients }, index) => (
+                <tr key={index}>
+                    <td>{name}</td>
+                    <td>{dataRecipients.length}</td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
+);
+
 function IndustriesChart({ recipientsPerIndustry }) {
     const industries = Object.keys(recipientsPerIndustry);
     const data = Object.entries(recipientsPerIndustry).map(
@@ -34,19 +47,6 @@ function IndustriesChart({ recipientsPerIndustry }) {
         </>
     );
 }
-
-const Companies = ({ entities }) => (
-    <table>
-        <tbody>
-            {entities.map(({ name, dataRecipients }, index) => (
-                <tr key={index}>
-                    <td>{name}</td>
-                    <td>{dataRecipients.length}</td>
-                </tr>
-            ))}
-        </tbody>
-    </table>
-);
 
 function Industries({ entities }) {
     const { companies } = useContext(ExplorerContext);
