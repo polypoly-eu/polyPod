@@ -4,5 +4,7 @@
     "section.purposes": "Zwecke",
     "section.companies": "Unternehmen",
     "section.dataRegions": "Daten Regionen",
-    "section.explore.further": "Erkunde Weiter"
+    "section.explore.further": "Erkunde Weiter",
+    "label.receivingCompanies": "Receiving companies",
+    "label.receivingIndustries": "Receiving industries"
 }

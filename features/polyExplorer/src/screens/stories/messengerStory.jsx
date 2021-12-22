@@ -5,6 +5,8 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import MatrixBubblesChart from "../../components/clusterStories/MatrixBubblesChart.jsx";
+import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
+import EntityList from "../../components/entityList/entityList.jsx";
 import OrderedList from "../../components/orderedList/orderedList.jsx";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import * as d3 from "d3";
@@ -12,6 +14,7 @@ import * as d3 from "d3";
 import "./messengerStory.css";
 
 const i18nHeader = "clusterMessengerStory";
+const i18nHeaderCommon = "clusterStoryCommon";
 
 const MessengerStory = () => {
     const { products, globalData } = useContext(ExplorerContext);
@@ -269,6 +272,18 @@ const MessengerStory = () => {
                 })}
             </Tabs>
             <p className="source">{i18n.t("common:source")}: PolyPedia</p>
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:companies.p.1`)}
+            </p>
+            <p>{i18n.t(`${i18nHeader}:companies.p.2`)}</p>
+            <ReceivingCompanies entities={Object.values(products)} />
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
+            />
+            <EntityList entities={Object.values(products)} expand={true} />
         </ClusterStory>
     );
 };
