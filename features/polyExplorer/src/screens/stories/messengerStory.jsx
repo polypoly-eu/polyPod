@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from "react";
+import React, { useContext, useRef, useEffect, useState } from "react";
 
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
@@ -68,6 +68,10 @@ const MessengerStory = () => {
         })
         .filter((e) => e)
         .sort((a, b) => b.total - a.total);
+
+    const [selectedDataTypeBubble, setSelectedDataTypeBubble] = useState(
+        dataTypesSharedCombined[0].total
+    );
 
     const dataTypes = [
         {
@@ -139,6 +143,10 @@ const MessengerStory = () => {
             ],
         },
     ];
+
+    const handleBubbleClick = (_, node) => {
+        setSelectedDataTypeBubble(node.data.value);
+    };
 
     useEffect(() => {
         d3.select(byTypesChartRef.current);
@@ -243,8 +251,16 @@ const MessengerStory = () => {
                                         width={dataType.data[0].width}
                                         height={dataType.data[0].height}
                                         bubbleColor={dataType.bubbleColor}
-                                        textColor={dataType.bubbleTextColor}
+                                        textColor={dataType.data[0].bubbles.map(
+                                            (bubble) => {
+                                                selectedDataTypeBubble ===
+                                                bubble.value
+                                                    ? dataType.activeBubbleTextColor
+                                                    : dataType.bubbleTextColor;
+                                            }
+                                        )}
                                         strokeColor={dataType.bubbleStroke}
+                                        onBubbleClick={handleBubbleClick}
                                     />
                                     <h4>{dataType.data[0].title}</h4>
                                 </div>
