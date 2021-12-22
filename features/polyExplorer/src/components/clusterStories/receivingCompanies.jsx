@@ -6,6 +6,11 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 import "./receivingCompanies.css";
 
+const chartColors = {
+    primary: "#7ee8a2",
+    secondary: "#0f1938",
+};
+
 const displayIndex = (i) => (Number.isInteger(i) ? `${i + 1}` : "");
 
 const IndexedLegend = ({ items }) => (
@@ -29,8 +34,8 @@ function Companies({ entities }) {
             <PolyChart
                 type="vertical-bar-chart"
                 data={data}
-                barColor="#7ee8a2"
-                barValueColor="#0f1938"
+                barColor={chartColors.primary}
+                barValueColor={chartColors.secondary}
             />
             <IndexedLegend items={entityNames} />
         </>
@@ -79,10 +84,14 @@ function Industries({ entities }) {
             <PolyChart
                 type="bubble-cluster"
                 data={data}
-                bubbleColor={(d) => (d.children ? "transparent" : "#7ee8a2")}
-                strokeColor={(d) => (d.children ? "#0f1938" : "transparent")}
+                bubbleColor={(d) =>
+                    d.children ? "transparent" : chartColors.primary
+                }
+                strokeColor={(d) =>
+                    d.children ? chartColors.secondary : "transparent"
+                }
                 text={(d) => d.data.label}
-                textColor="#0f1938"
+                textColor={chartColors.secondary}
             />
             <IndexedLegend items={industries} />
         </>
