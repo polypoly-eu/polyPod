@@ -90,9 +90,7 @@ const MessengerStory = () => {
             </p>
             <p>{i18n.t(`${i18nHeader}:companies.p.2`)}</p>
             <ReceivingCompanies entities={Object.values(products)} />
-            <SectionTitle
-                title={i18n.t(`${i18nHeader}:tips.section`)}
-            />
+            <SectionTitle title={i18n.t(`${i18nHeader}:tips.section`)} />
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:tips.p.1`)}
             </p>

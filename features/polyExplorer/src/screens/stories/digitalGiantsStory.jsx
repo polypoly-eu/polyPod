@@ -10,7 +10,6 @@ import { Tabs, Tab } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import { PolyChart } from "@polypoly-eu/poly-look";
 import EntityList from "../../components/entityList/entityList.jsx";
-import OrderedList from "../../components/orderedList/orderedList.jsx";
 
 const i18nHeader = "clusterDigitalGiantsStory";
 const i18nHeaderCommon = "clusterStoryCommon";
