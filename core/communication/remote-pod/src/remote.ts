@@ -48,7 +48,7 @@ type PolyInEndpoint = ObjectEndpointSpec<{
 }>;
 
 type PolyOutEndpoint = ObjectEndpointSpec<{
-    readdir(path: string): ValueEndpointSpec<Entry[]>;
+    readDir(path: string): ValueEndpointSpec<Entry[]>;
     readFile(path: string, options?: EncodingOptions): ValueEndpointSpec<string | Uint8Array>;
     writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
     stat(path: string): ValueEndpointSpec<Stats>;
@@ -347,7 +347,7 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
                 if (options === undefined) return polyOut.readFile(path);
                 else return polyOut.readFile(path, options);
             },
-            readdir: (path) => polyOut.readdir(path),
+            readDir: (path) => polyOut.readDir(path),
             stat: async (path) => {
                 const stats = await polyOut.stat(path);
                 return FileStats.of(stats);
