@@ -19,7 +19,8 @@ import kotlin.coroutines.EmptyCoroutineContext
 open class PolyOut(
     val context: Context
 ) {
-    private var readdirCache = mutableMapOf<String, Array<Map<String,String>>>()
+    private var readdirCache =
+        mutableMapOf<String, Array<Map<String, String>>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
     private val coroutineScope = CoroutineScope(EmptyCoroutineContext)
 
@@ -101,7 +102,7 @@ open class PolyOut(
         return result
     }
 
-    open suspend fun readdir(
+    open suspend fun readDir(
         id: String
     ): Array<Map<String, String>> {
         val fs = Preferences.getFileSystem(context)
@@ -111,8 +112,11 @@ open class PolyOut(
             }
             Preferences.setFileSystem(context, newFs)
             return newFs.keys.map {
-                mutableMapOf<String, String>("id" to it, "path" to it)
-            }.toTypedArray();
+                mutableMapOf<String, String>(
+                    "id" to it,
+                    "path" to it.removePrefix(fsPrefix)
+                )
+            }.toTypedArray()
         }
         if (readdirCache.contains(id)) {
             return readdirCache.get(id)!!
@@ -121,9 +125,11 @@ open class PolyOut(
 
         val dir = File(idToPath(id, context))
         dir.walkTopDown().forEach {
-            val idPath = "$fsFilesRoot/"+pathToId(it, context).removePrefix(fsPrefix)
-            val relPath = it.relativeTo(dir).path 
-            val idMap = mutableMapOf<String,String>("id" to idPath,"path" to relPath)
+            val idPath =
+                "$fsFilesRoot/" + pathToId(it, context).removePrefix(fsPrefix)
+            val relPath = it.relativeTo(dir).path
+            val idMap =
+                mutableMapOf<String, String>("id" to idPath, "path" to relPath)
             retList.add(idMap)
         }
         readdirCache[id] = retList.toTypedArray()
