@@ -212,7 +212,7 @@ extension PostOffice {
             handlePolyOutReadFile(args: args, completionHandler: completionHandler)
         case "writeFile":
             handlePolyOutWriteFile(args: args, completionHandler: completionHandler)
-        case "readdir":
+        case "readDir":
             handlePolyOutReadDir(args: args, completionHandler: completionHandler)
         case "importArchive":
             handlePolyOutImportArchive(args: args, completionHandler: completionHandler)
@@ -307,13 +307,17 @@ extension PostOffice {
     private func handlePolyOutReadDir(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let path = args[0] as! String
         
-        PodApi.shared.polyOut.readdir(url: path) { fileList, error in
+        PodApi.shared.polyOut.readDir(url: path) { fileList, error in
             if let error = error {
                 completionHandler(nil, MessagePackValue(error.localizedDescription))
             } else {
                 var encodedList: [MessagePackValue] = [];
                 for file in fileList ?? [] {
-                    encodedList.append(MessagePackValue(file));
+                    var entry = [MessagePackValue: MessagePackValue]()
+                    ["id", "path"].forEach { key in
+                        entry[.string(key)] = .string(file[key] ?? "")
+                    }
+                    encodedList.append(MessagePackValue.map(entry))
                 }
                 completionHandler(MessagePackValue(encodedList), nil)
             }

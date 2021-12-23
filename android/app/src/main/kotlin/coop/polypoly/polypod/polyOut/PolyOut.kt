@@ -19,7 +19,8 @@ import kotlin.coroutines.EmptyCoroutineContext
 open class PolyOut(
     val context: Context
 ) {
-    private var readdirCache = mutableMapOf<String, Array<String>>()
+    private var readDirCache =
+        mutableMapOf<String, Array<Map<String, String>>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
     private val coroutineScope = CoroutineScope(EmptyCoroutineContext)
 
@@ -101,28 +102,37 @@ open class PolyOut(
         return result
     }
 
-    open suspend fun readdir(
+    open suspend fun readDir(
         id: String
-    ): Array<String> {
-
+    ): Array<Map<String, String>> {
         val fs = Preferences.getFileSystem(context)
         if (id == "") {
             val newFs = fs.filter {
                 File(idToPath(it.key, context)).exists()
             }
             Preferences.setFileSystem(context, newFs)
-            return newFs.keys.toTypedArray()
+            return newFs.keys.map {
+                mutableMapOf<String, String>(
+                    "id" to it,
+                    "path" to it.removePrefix(fsPrefix)
+                )
+            }.toTypedArray()
         }
-        if (readdirCache.contains(id)) {
-            return readdirCache.get(id)!!
+        if (readDirCache.contains(id)) {
+            return readDirCache.get(id)!!
         }
-        val retList = mutableListOf<String>()
-        File(idToPath(id, context)).walkTopDown().forEach {
-            retList.add(
+        val retList = mutableListOf<Map<String, String>>()
+
+        val dir = File(idToPath(id, context))
+        dir.walkTopDown().forEach {
+            val idPath =
                 "$fsFilesRoot/" + pathToId(it, context).removePrefix(fsPrefix)
-            )
+            val relPath = it.relativeTo(dir).path
+            val idMap =
+                mutableMapOf<String, String>("id" to idPath, "path" to relPath)
+            retList.add(idMap)
         }
-        readdirCache[id] = retList.toTypedArray()
+        readDirCache[id] = retList.toTypedArray()
         return retList.toTypedArray()
     }
 
