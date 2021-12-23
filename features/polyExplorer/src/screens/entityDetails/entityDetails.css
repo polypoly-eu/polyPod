@@ -16,15 +16,21 @@
     flex: 1 1 auto;
 }
 
+.tab-data-story {
+    height: 100%;
+    overflow: hidden scroll;
+}
+
 .tab-data-story p {
     max-width: var(--max-width);
     margin: auto;
-    padding: 32px;
-    font-size: 10px;
+    padding: 40px 24px 12px;
+    font-family: "Jost Medium";
+    font-size: 12px;
 }
 
 .tab-data-story .info-button {
-    bottom: 100px;
+    bottom: 80px;
 }
 
 .details .swiper-container {
@@ -221,23 +227,23 @@
 
 .explore-data-btn-area {
     margin: 0 auto;
-    padding: 12px 30px 0 30px;
+    padding: 12px 24px 0 24px;
 }
 
 .explore-data-btn {
-    position: fixed;
-    bottom: 0;
+    position: relative;
+    /* bottom: 0;
     right: 0;
-    left: 0;
+    left: 0; */
     flex: 0 0 auto;
     box-sizing: border-box;
-    width: 296px;
+    width: 100%;
     max-width: var(--max-width);
     height: 48px;
     background-color: var(--color-background-light);
     color: var(--color-text-dark);
+    font-family: "Jost Medium";
     font-size: 18px;
-    font-weight: 600;
     margin: auto auto 24px auto;
     border-radius: 4px;
     border: transparent;
