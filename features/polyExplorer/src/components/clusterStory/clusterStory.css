@@ -70,3 +70,8 @@
 .cluster-story svg {
     width: 100%;
 }
+
+.cluster-story .source {
+    color: #9E9E9E;
+    font-size: 12px;
+}
