@@ -120,8 +120,10 @@ extension PostOffice {
                 throw PodApiError.badArgumentData(arg)
             }
             
-            guard let graph = extendedData.properties["graph"] as? ExtendedData, graph.classname == "@polypoly-eu/rdf.DefaultGraph" else {
-                throw PodApiError.failedToReadGraph
+            let graph = extendedData.properties["graph"] as? ExtendedData
+            let graphType = graph?.classname
+            if (graphType != "@polypoly-eu/rdf.DefaultGraph") {
+                throw PodApiError.failedToReadGraph(graphType ?? "<missing>")
             }
             
             extendedDataSet.append(extendedData)
@@ -149,7 +151,7 @@ extension PostOffice {
     
     private func handlePolyInSelect(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         guard let extendedData = extractMatcher(args[0]) else {
-            completionHandler(nil, createErrorResponse(#function, PodApiError.badData))
+            completionHandler(nil, createErrorResponse(#function, PodApiError.badData(args[0])))
             return
         }
         PodApi.shared.polyIn.selectQuads(matcher: extendedData) { quads, error in

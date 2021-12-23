@@ -8,8 +8,8 @@ enum PodApiError: Error {
     case noSuchFile(_ path: String)
     case noAppDelegate
     case badArgumentData(_ arg: Any)
-    case failedToReadGraph
-    case badData
+    case failedToReadGraph(_ type: String)
+    case badData(_ data: Any)
 }
 
 extension PodApiError: LocalizedError {
@@ -29,10 +29,10 @@ extension PodApiError: LocalizedError {
             return "AppDelegate not available"
         case .badArgumentData(let arg):
             return "Bad argument data: \(arg)"
-        case .failedToReadGraph:
-            return "Failed to read graph"
-        case .badData:
-            return "Bad data"
+        case .failedToReadGraph(let type):
+            return "Failed to read graph: \(type)"
+        case .badData(let data):
+            return "Bad data: \(data)"
         }
     }
 }
