@@ -13,8 +13,8 @@
 .revenue-chart-container .gridline {
     position: absolute;
     box-sizing: border-box;
-    left: 12.5%;
-    width: 83%;
+    left: 16%;
+    width: 76%;
     height: 1px;
     background-color: var(--color-semi-dark);
 }
@@ -32,7 +32,7 @@
     position: absolute;
     font-family: "Jost Medium";
     font-size: 10px;
-    left: 4.444%;
+    left: 7%;
     transform: translateY(6px);
 }
 
@@ -40,7 +40,7 @@
     position: absolute;
     font-family: "Jost Medium";
     font-size: 12px;
-    transform: translate(16px, -22px);
+    transform: translate(28px, -22px);
 }
 
 .revenue-chart-container .bar {
@@ -54,7 +54,7 @@
 }
 
 .revenue-chart-container .source {
-    margin-left: 4.444%;
+    margin-left: 7%;
     margin-top: 2px;
     font-family: "Jost Medium";
     font-size: 12px;
