@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
@@ -9,7 +9,6 @@ import ReceivingCompanies from "../../components/clusterStories/receivingCompani
 import EntityList from "../../components/entityList/entityList.jsx";
 import OrderedList from "../../components/orderedList/orderedList.jsx";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
-import * as d3 from "d3";
 
 import "./messengerStory.css";
 
@@ -18,7 +17,6 @@ const i18nHeaderCommon = "clusterStoryCommon";
 
 const MessengerStory = () => {
     const { products, globalData } = useContext(ExplorerContext);
-    const byTypesChartRef = useRef();
 
     const listOfMessengerApps = [
         "Facebook Messenger",
@@ -154,10 +152,6 @@ const MessengerStory = () => {
         setSelectedDataTypeBubble(node.data.value);
     };
 
-    useEffect(() => {
-        d3.select(byTypesChartRef.current);
-    }, []);
-
     return (
         <ClusterStory
             progressBarColor="black"
@@ -247,10 +241,7 @@ const MessengerStory = () => {
                                     strokeColor={dataType.bubbleStroke}
                                 />
                             ) : (
-                                <div
-                                    className="by-types-bubble-chart"
-                                    ref={byTypesChartRef}
-                                >
+                                <div className="by-types-bubble-chart">
                                     <PolyChart
                                         type="bubble-cluster"
                                         data={dataType.data[0].bubbles}

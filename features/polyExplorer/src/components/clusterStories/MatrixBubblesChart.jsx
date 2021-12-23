@@ -1,27 +1,17 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { PolyChart } from "@polypoly-eu/poly-look";
-import * as d3 from "d3";
 
 import "./MatrixBubblesChart.css";
 
 const MatrixBubblesChart = ({ data, bubbleColor, textColor, strokeColor }) => {
     const matrixBubbleChartWidth = 65;
     const matrixBubbleChartHeight = 50;
-    const chartRef = useRef();
-
-    useEffect(() => {
-        d3.select(chartRef.current);
-    }, []);
 
     return (
         <div className="matrix-bubble-chart">
             {data.map((dataBubble, i) => {
                 return (
-                    <div
-                        className="bubble-cluster-container"
-                        key={i}
-                        ref={chartRef}
-                    >
+                    <div className="bubble-cluster-container" key={i}>
                         <PolyChart
                             type="bubble-cluster"
                             data={dataBubble.bubbles}
