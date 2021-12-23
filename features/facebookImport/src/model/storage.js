@@ -11,10 +11,10 @@ export default class Storage {
 
     async refreshFiles() {
         const { polyOut } = this._pod;
-        const files = await polyOut.readdir("");
+        const files = await polyOut.readDir("");
         const statResults = {};
         for (let file of files) {
-            statResults[file] = await polyOut.stat(file["id"]);
+            statResults[file] = await polyOut.stat(file.id);
         }
         this._files = statResults;
         return files;
@@ -47,13 +47,13 @@ export class ZipFile {
 
     async _readEntriesList() {
         const { polyOut } = this._pod;
-        return polyOut.readdir(this.id);
+        return polyOut.readDir(this.id);
     }
 
     async _ensureCachedEntries() {
         if (this._entriesSet !== null) return;
         const entriesList = await this._readEntriesList();
-        const entriesIdList = entriesList.map((entry) => entry["id"]);
+        const entriesIdList = entriesList.map((entry) => entry.id);
         this._entriesSet = new Set(entriesIdList);
     }
 

@@ -35,8 +35,8 @@ class AsyncPolyOut implements PolyOut {
     async stat(path: string): Promise<Stats> {
         return (await this.promise).stat(path);
     }
-    async readdir(path: string): Promise<Entry[]> {
-        return (await this.promise).readdir(path);
+    async readDir(path: string): Promise<Entry[]> {
+        return (await this.promise).readDir(path);
     }
 
     async importArchive(url: string): Promise<string> {

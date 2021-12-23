@@ -119,9 +119,10 @@ open class PolyOut(
         }
         val retList = mutableListOf<Map<String, String>>()
 
-        File(idToPath(id, context)).walkTopDown().forEach {
+        val dir = File(idToPath(id, context))
+        dir.walkTopDown().forEach {
             val idPath = "$fsFilesRoot/"+pathToId(it, context).removePrefix(fsPrefix)
-            val relPath = pathToId(it, context).removePrefix(fsPrefix).removePrefix(idPath.split("/")[1])
+            val relPath = it.relativeTo(dir).path 
             val idMap = mutableMapOf<String,String>("id" to idPath,"path" to relPath)
             retList.add(idMap)
         }

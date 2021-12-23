@@ -17,10 +17,7 @@ export interface Matcher {
     predicate: RDF.Quad_Predicate;
     object: RDF.Quad_Object;
 }
-export interface Entry {
-    id: string;
-    path: string;
-}
+
 
 /**
  * `PolyIn` specifies the interaction of the Feature with the Pod store. It is concerned with creating and manipulating
@@ -105,7 +102,10 @@ export interface PolyIn {
      */
     has(...quads: RDF.Quad[]): Promise<boolean>;
 }
-
+ export interface Entry {
+    id: string;
+    path: string;
+}
 /**
  * `PolyOut` specifies the interaction of the Feature with the environment. It is concerned with file system operations
  * and HTTP requests.
@@ -120,7 +120,7 @@ export interface PolyOut extends Omit<FS, "readdir"> {
      * A standard-compliant implementation of `Fetch`. This feature is deprecated in favor of the [[Network]] interface
      */
     readonly fetch: Fetch;
-    readdir(id: string): Promise<Entry[]>;
+    readDir(id: string): Promise<Entry[]>;
 }
 
 /**

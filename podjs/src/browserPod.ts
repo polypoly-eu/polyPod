@@ -159,8 +159,8 @@ class LocalStoragePolyOut implements PolyOut {
         });
     }
 
-    readdir(id: string): Promise<Entry[]> {
-        files = new Map<string, Stats>(
+    readDir(id: string): Promise<Entry[]> {
+        const files = new Map<string, Stats>(
             JSON.parse(localStorage.getItem(BrowserPolyNav.filesKey) || "[]")
         );
         return new Promise((resolve, reject) => {

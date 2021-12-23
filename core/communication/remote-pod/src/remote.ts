@@ -244,8 +244,8 @@ export class RemoteClientPod implements Pod {
                     });
             }
 
-            readdir(path: string): Promise<Entry[]> {
-                return rpcClient.polyOut().readdir(path)();
+            readDir(path: string): Promise<Entry[]> {
+                return rpcClient.polyOut().readDir(path)();
             }
 
             stat(path: string): Promise<Stats> {
