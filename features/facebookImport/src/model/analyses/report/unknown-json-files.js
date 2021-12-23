@@ -9,7 +9,7 @@ import {
 import allStructure from "../../../static/allStructure";
 import ReportAnalysis from "./report-analysis.js";
 
-export default class UknownJSONFilesAnalysis extends ReportAnalysis {
+export default class UnknownJSONFilesAnalysis extends ReportAnalysis {
     get title() {
         return "Unknown JSON files";
     }

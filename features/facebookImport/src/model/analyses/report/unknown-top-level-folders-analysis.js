@@ -25,13 +25,13 @@ async function extractTopLevelFolderNamesFromZip(zipFile) {
     return [...topLevelFolderNames];
 }
 
-export default class UknownTopLevelFoldersAnalysis extends ReportAnalysis {
+export default class UnknownTopLevelFoldersAnalysis extends ReportAnalysis {
     get title() {
         return "Unknown top-level folders";
     }
 
     get reportData() {
-        return this._uknownFolderNames;
+        return this._unknownFolderNames;
     }
 
     async analyze({ zipFile }) {
@@ -39,13 +39,13 @@ export default class UknownTopLevelFoldersAnalysis extends ReportAnalysis {
             zipFile
         );
 
-        this._uknownFolderNames = topLevelFolderNames.filter(
+        this._unknownFolderNames = topLevelFolderNames.filter(
             (each) => !topFolderNames.includes(each)
         );
-        this.active = this._uknownFolderNames.length > 0;
+        this.active = this._unknownFolderNames.length > 0;
     }
 
     render() {
-        return <BasicList items={this._uknownFolderNames} />;
+        return <BasicList items={this._unknownFolderNames} />;
     }
 }
