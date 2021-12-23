@@ -543,7 +543,9 @@ const DataExplorationScreen = () => {
     useEffect(() => {
         if (!swiper) return;
 
-        const scrollableElements = document.querySelectorAll(".scrolling-area");
+        const scrollableElements = document.querySelectorAll(
+            ".scrolling-area, .entity-list"
+        );
         for (let element of scrollableElements)
             makeSwiperContentScrollable(element);
 
@@ -670,7 +672,7 @@ const DataExplorationScreen = () => {
                                 <CompanyIndustryList
                                     companyIndustryMap={companyIndustryMap}
                                     ecoItems={dataRecipients.length > 100}
-                                    saveActiveIndex={saveActiveIndex}
+                                    onClick={saveActiveIndex}
                                 />
                             </div>
                         </SwiperSlide>

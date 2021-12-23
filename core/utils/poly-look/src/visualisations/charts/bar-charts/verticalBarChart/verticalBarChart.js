@@ -22,7 +22,7 @@ const gridXMargin = 12;
  * @class
  * @extends Chart
  * @param {CSS-selector} selector - A CSS selector, where the svg will be attached to
- * @param Object[] data - The data to be visualized as a bubble cluster
+ * @param {Object[]} data - The data to be visualized as a bubble cluster
  * @param {string} data[].title - The title/name the bubble has
  * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
  * @param {number = 400} [width] - The width of the svg
