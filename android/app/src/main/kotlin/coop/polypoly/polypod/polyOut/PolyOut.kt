@@ -19,7 +19,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 open class PolyOut(
     val context: Context
 ) {
-    private var readdirCache =
+    private var readDirCache =
         mutableMapOf<String, Array<Map<String, String>>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
     private val coroutineScope = CoroutineScope(EmptyCoroutineContext)
@@ -118,8 +118,8 @@ open class PolyOut(
                 )
             }.toTypedArray()
         }
-        if (readdirCache.contains(id)) {
-            return readdirCache.get(id)!!
+        if (readDirCache.contains(id)) {
+            return readDirCache.get(id)!!
         }
         val retList = mutableListOf<Map<String, String>>()
 
@@ -132,7 +132,7 @@ open class PolyOut(
                 mutableMapOf<String, String>("id" to idPath, "path" to relPath)
             retList.add(idMap)
         }
-        readdirCache[id] = retList.toTypedArray()
+        readDirCache[id] = retList.toTypedArray()
         return retList.toTypedArray()
     }
 
