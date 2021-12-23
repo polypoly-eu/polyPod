@@ -30,7 +30,7 @@ private func calculateFileSize(_ path: String) throws -> Int64 {
     return totalSize
 }
 
-var readDirCache = Dictionary<String, [String]>()
+var readDirCache = Dictionary<String, [[String: String]]>()
 
 extension PolyOut {
     static let fsKey = "fileStoreDict"
@@ -138,7 +138,7 @@ extension PolyOut {
         }
     }
     
-    func readdir(url: String, completionHandler: @escaping ([String]?, Error?) -> Void) {
+    func readDir(url: String, completionHandler: @escaping ([[String: String]]?, Error?) -> Void) {
         let fileStore = UserDefaults.standard.value(
             forKey: PolyOut.fsKey
         ) as? [String:String?] ?? [:]
@@ -150,14 +150,15 @@ extension PolyOut {
                 return
             }
             let targetUrl = PolyOut.pathFromId(id: url)
-            var entries = [String]()
+            var entries = [[String: String]]()
             if let enumerator = FileManager.default.enumerator(at: targetUrl, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
                 for case let fileURL as URL in enumerator {
-                    let filePath = fileURL.resolvingSymlinksInPath().absoluteString.replacingOccurrences(
+                    let relativePath = fileURL.resolvingSymlinksInPath().absoluteString.replacingOccurrences(
                         of: targetUrl.absoluteString,
-                        with: PolyOut.fsFilesRoot + "/" + url + "/"
+                        with: ""
                     )
-                    entries.append(filePath)
+                    let fileId = PolyOut.fsFilesRoot + "/" + url + "/" + relativePath
+                    entries.append(["id": fileId, "path": relativePath])
                 }
             }
             readDirCache[url] = entries
@@ -166,7 +167,7 @@ extension PolyOut {
         }
         
         // Under certain circumstances, fileStore contained files that don't
-        // actually exist - for now we just ignore them in readdir, but it
+        // actually exist - for now we just ignore them in readDir, but it
         // might be smarter to clean fileStore automatically at some point.
         let storedFiles = fileStore.keys.filter { key in
             guard let path = PolyOut.pathFromUrl(url: key)?.path else {
@@ -174,7 +175,12 @@ extension PolyOut {
             }
             return FileManager.default.fileExists(atPath: path)
         }
-        completionHandler(Array(storedFiles), nil)
+        let idPrefix = "\(PolyOut.fsPrefix)\(PolyOut.fsFilesRoot)/"
+        let entries = storedFiles.map {[
+            "id": $0,
+            "path": $0.replacingOccurrences(of: idPrefix, with: "")
+        ]}
+        completionHandler(entries, nil)
     }
     
     func importArchive(url: String, completionHandler: @escaping (String?) -> Void) {

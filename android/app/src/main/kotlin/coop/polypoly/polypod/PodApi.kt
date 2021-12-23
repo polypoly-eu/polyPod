@@ -49,7 +49,7 @@ open class PodApi(
                     "readFile" -> return handlePolyOutReadFile(args)
                     "writeFile" -> return handlePolyOutWriteFile(args)
                     "stat" -> return handlePolyOutStat(args)
-                    "readdir" -> return handlePolyOutReadDir(args)
+                    "readDir" -> return handlePolyOutReadDir(args)
                     "importArchive" -> return handlePolyOutImportArchive(args)
                     "removeArchive" -> return handlePolyOutRemoveArchive(args)
                 }
@@ -130,11 +130,25 @@ open class PodApi(
     }
 
     private suspend fun handlePolyOutReadDir(args: List<Value>): Value {
-        logger.debug("dispatch() -> polyOut.readdir")
+        logger.debug("dispatch() -> polyOut.readDir")
         var path = ""
-        if (!args[0].isNilValue) { path = args[0].asStringValue().toString() }
-        val result = polyOut.readdir(path)
-        return ValueFactory.newArray(result.map { ValueFactory.newString(it) })
+        if (!args[0].isNilValue) {
+            path = args[0].asStringValue().toString()
+        }
+        val result = polyOut.readDir(path)
+
+        return ValueFactory.newArray(
+            result.map {
+                ValueFactory.newMap(
+                    mutableMapOf<Value, Value>(
+                        ValueFactory.newString("id") to
+                            ValueFactory.newString(it["id"]),
+                        ValueFactory.newString("path") to
+                            ValueFactory.newString(it["path"])
+                    )
+                )
+            }
+        )
     }
 
     private suspend fun handlePolyOutImportArchive(args: List<Value>): Value {

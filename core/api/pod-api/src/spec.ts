@@ -132,15 +132,15 @@ export class PodSpec {
                     );
                 });
 
-                it("readdir", async () => {
-                    assert.isFulfilled(polyOut.readdir(this.path));
+                it("readDir", async () => {
+                    assert.isFulfilled(polyOut.readDir(this.path));
                     await fc.assert(
                         fc.asyncProperty(pathGen, fc.fullUnicodeString(), async (path, content) => {
                             await skipIfExists(path);
 
                             await polyOut.writeFile(path, content, { encoding: "utf-8" });
-                            const filesWithPath = (await polyOut.readdir(this.path)).map(
-                                (path) => this.path + "/" + path
+                            const filesWithPath = (await polyOut.readDir(this.path)).map(
+                                (path) => this.path + "/" + path["id"]
                             );
                             assert.include(filesWithPath, path);
                         })
