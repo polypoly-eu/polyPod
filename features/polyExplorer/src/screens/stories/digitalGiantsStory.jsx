@@ -9,7 +9,6 @@ import ReceivingCompanies from "../../components/clusterStories/receivingCompani
 import { Tabs, Tab } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
-import { PolyChart } from "@polypoly-eu/poly-look";
 import EntityList from "../../components/entityList/entityList.jsx";
 
 const i18nHeader = "clusterDigitalGiantsStory";
