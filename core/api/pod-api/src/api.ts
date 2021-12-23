@@ -101,10 +101,12 @@ export interface PolyIn {
      */
     has(...quads: RDF.Quad[]): Promise<boolean>;
 }
+
 export interface Entry {
     id: string;
     path: string;
 }
+
 /**
  * `PolyOut` specifies the interaction of the Feature with the environment. It is concerned with file system operations
  * and HTTP requests.
