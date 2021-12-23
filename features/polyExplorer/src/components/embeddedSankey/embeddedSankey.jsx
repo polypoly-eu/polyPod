@@ -12,6 +12,8 @@ const jurisdictionColors = {
 
 const transparent = "rbga(0, 0, 0, 0)";
 
+const inactiveLabelOpacity = 0.3;
+
 const gradients = Object.entries(jurisdictionColors).map(
     ([jurisdiction, color]) => ({
         id: jurisdiction + "-gradient",
@@ -72,29 +74,23 @@ const EmbeddedSankey = ({ links, groups }) => {
         linkOpacity: "1",
         link: (d) =>
             isPathActive(d) ? `url(#${d.target.id}-gradient)` : transparent,
+        textOpacity: (d) => (activeValue(d) > 0 ? 1 : inactiveLabelOpacity),
+        nodeLabelBoxOpacity: (d) =>
+            activeValue(d) > 0 ? 1 : inactiveLabelOpacity,
     };
-
-    const activeSourceValue = (d) =>
+    const activeValue = (d) =>
         links
             .filter(
                 (link) =>
                     activeSources.indexOf(link.source) !== -1 &&
-                    link.source == d.id
-            )
-            .reduce((prev, curr) => prev.value || prev + curr.value, 0);
-
-    const activeTargetValue = (d) =>
-        links
-            .filter(
-                (link) =>
                     activeTargets.indexOf(link.target) !== -1 &&
-                    link.target == d.id
+                    (link.target == d.id || link.source == d.id)
             )
             .reduce((prev, curr) => prev.value || prev + curr.value, 0);
 
     const nodeLabel = {
-        source: (d) => `${d.id}: ${activeSourceValue(d)}`,
-        target: (d) => `${d.id}: ${activeTargetValue(d)}`,
+        source: (d) => `${d.id}: ${activeValue(d)}`,
+        target: (d) => `${d.id}: ${activeValue(d)}`,
     };
     return (
         <div className="embedded-sankey">
