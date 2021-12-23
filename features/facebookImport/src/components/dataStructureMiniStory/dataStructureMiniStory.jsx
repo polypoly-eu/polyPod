@@ -87,9 +87,7 @@ const DataStructureMiniStory = ({ data }) => {
                 chipsContent={dataWithTotal.map((d) => {
                     return { id: d.title };
                 })}
-                activeButton={selectedFolder}
-                onButtonsClick={handleFolderSelected}
-                activeChip={selectedFolder}
+                activeChips={[selectedFolder]}
                 onChipClick={handleFolderSelected}
                 theme={"dark"}
             />

@@ -8,7 +8,7 @@ import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
 import { Tabs, Tab } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
-import { PolyChart } from "@polypoly-eu/poly-look";
+import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 import EntityList from "../../components/entityList/entityList.jsx";
 
 const i18nHeader = "clusterDigitalGiantsStory";
@@ -35,7 +35,15 @@ const DigitalGiantsStory = () => {
     const jurisdictionLinks = createJurisdictionLinks(
         bigSix,
         entityJurisdictionByPpid
-    );
+    ).map(({ source, target, value }) => ({
+        source: bigSixNames.find((name) => source.indexOf(name) !== -1),
+        target,
+        value,
+    }));
+
+    const otherJurisdictions = [
+        ...new Set(jurisdictionLinks.map(({ target }) => target)),
+    ].filter((j) => j !== "EU-GDPR");
 
     return (
         <ClusterStory
@@ -99,10 +107,19 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:data.regions.p.1`)}
             </p>
-            <PolyChart
-                type="sankey-diagram"
+            <EmbeddedSankey
                 links={jurisdictionLinks}
-                className="full-size-svg"
+                groups={{
+                    source: {
+                        label: "Messengers",
+                        all: true,
+                    },
+                    target: {
+                        label: "Regions",
+                        all: false,
+                        others: otherJurisdictions,
+                    },
+                }}
             />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
