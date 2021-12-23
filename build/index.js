@@ -141,7 +141,7 @@ function logDependencies(packageTree) {
 
 function executeProcess(executable, args, env = process.env) {
     const cmd = process.platform === "win32" ? `${executable}.cmd` : executable;
-    const spawnedProcess = spawn(executable, args, { env: env });
+    const spawnedProcess = spawn(cmd, args, { env: env });
     spawnedProcess.stdout.on("data", (data) => {
         console.log(data.toString());
     });
