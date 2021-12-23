@@ -76,17 +76,20 @@ const DigitalGiantsStory = () => {
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.dataTypes`)}
             />
-            <Tabs>
-                <Tab id="tab-hello" label="Hallo">
-                    <div style={{ width: "100%", height: "200px" }}></div>
-                </Tab>
-                <Tab id="tab-bye" label="Tschüß">
-                    <div style={{ width: "100%", height: "200px" }}></div>
-                </Tab>
-            </Tabs>
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:data.types.p`)}
             </p>
+            <Tabs>
+                <Tab id="by-companies" label="By Companies">
+                    <div style={{ width: "100%", height: "200px" }}></div>
+                </Tab>
+                <Tab id="by-shares" label="By Shares">
+                    <div style={{ width: "100%", height: "200px" }}></div>
+                </Tab>
+                <Tab id="by-types" label="By Types">
+                    <div style={{ width: "100%", height: "200px" }}></div>
+                </Tab>
+            </Tabs>
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
             />
