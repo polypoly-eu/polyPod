@@ -18,7 +18,6 @@ export interface Matcher {
     object: RDF.Quad_Object;
 }
 
-
 /**
  * `PolyIn` specifies the interaction of the Feature with the Pod store. It is concerned with creating and manipulating
  * RDF triples according to the [RDFJS](http://rdf.js.org/) specification.
@@ -102,7 +101,7 @@ export interface PolyIn {
      */
     has(...quads: RDF.Quad[]): Promise<boolean>;
 }
- export interface Entry {
+export interface Entry {
     id: string;
     path: string;
 }
