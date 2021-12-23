@@ -36,6 +36,12 @@ const MessengerStory = () => {
         i18n.t(`${i18nHeader}:summary.bullet.3`),
     ];
 
+    const tipsBullets = [
+        i18n.t(`${i18nHeader}:tips.bullet.1`),
+        i18n.t(`${i18nHeader}:tips.bullet.2`),
+        i18n.t(`${i18nHeader}:tips.bullet.3`),
+    ];
+
     const listOfDataCategories = Object.keys(
         globalData.personal_data_categories
     );
@@ -192,9 +198,22 @@ const MessengerStory = () => {
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:overview.section`)}
             ></SectionTitle>
-            <p>{i18n.t(`${i18nHeader}:overview.paragraph.one`)}</p>
-            <div className="chart-container"></div>
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:overview.paragraph.one`)}
+            </p>
             <p>{i18n.t(`${i18nHeader}:overview.paragraph.two`)}</p>
+            <SectionTitle
+                title={i18n.t(`${i18nHeader}:details.section`)}
+            ></SectionTitle>
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:details.p.1`)}
+            </p>
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
+            </p>
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:datatypes.title`)}
             ></SectionTitle>
@@ -275,9 +294,17 @@ const MessengerStory = () => {
             </p>
             <p>{i18n.t(`${i18nHeader}:companies.p.2`)}</p>
             <ReceivingCompanies entities={Object.values(products)} />
+            <SectionTitle title={i18n.t(`${i18nHeader}:tips.section`)} />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:tips.p.1`)}
+            </p>
+            <OrderedList list={tipsBullets} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
             />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:explore.further.p.1`)}
+            </p>
             <EntityList entities={Object.values(products)} expand={true} />
         </ClusterStory>
     );

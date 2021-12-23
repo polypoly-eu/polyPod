@@ -91,7 +91,7 @@ const DigitalGiantsStory = () => {
                 title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
             />
             <p className="big-first-letter">
-                {i18n.t(`${i18nHeader}:purposes.p`)}
+                {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
@@ -124,6 +124,9 @@ const DigitalGiantsStory = () => {
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
             />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:explore.further.p.1`)}
+            </p>
             <EntityList entities={bigSix} expand={true} />
         </ClusterStory>
     );
