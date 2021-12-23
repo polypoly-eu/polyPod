@@ -1,8 +1,8 @@
 "use strict";
 
-const child_process = require("child_process");
 const fs = require("fs");
 const path = require("path");
+const zip = require("bestzip");
 
 function packageFeature({ archiveName, moduleName, artifactPath }, targetDir) {
     console.log(`Packaging ${archiveName}`);
@@ -13,8 +13,14 @@ function packageFeature({ archiveName, moduleName, artifactPath }, targetDir) {
         moduleName,
         artifactPath
     );
-    const args = ["-r", targetArchive, "."];
-    child_process.execFileSync("zip", args, { cwd: sourceDir });
+    return zip({
+        source: process.platform === "win32" ? "" : ".",
+        destination: targetArchive,
+        cwd: sourceDir,
+    }).catch((error) => {
+        console.error(error.stack);
+        process.exit(1);
+    });
 }
 
 function writeOrder(features, targetDir) {

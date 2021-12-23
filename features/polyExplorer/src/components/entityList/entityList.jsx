@@ -1,171 +1,153 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
-
-import i18n from "../../i18n.js";
-import EntityShortInfo from "../entityShortInfo/entityShortInfo.jsx";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
+import EntityShortInfo from "../entityShortInfo/entityShortInfo.jsx";
+
 import "./entityList.css";
-import LinkButton from "../buttons/linkButton/linkButton.jsx";
-import { ExplorerContext } from "../../context/explorer-context.jsx";
 
-function groupEntities(entities) {
-    const sorted = entities.sort((a, b) => a.compareNames(b));
-    const groups = {};
-    sorted.forEach((entity) => {
-        const key = entity.nameIndexCharacter.toUpperCase();
-        groups[key] = groups[key] || [];
-        groups[key].push(entity);
-    });
-    return groups;
-}
-
-const ActiveFilters = ({ activeFilters, globalData, onRemoveFilter }) => {
-    const filterList = [];
-    for (let field of activeFilters.fields)
-        for (let value of activeFilters.sortedValues(field, i18n, globalData))
-            filterList.push([field, value]);
-    return (
-        <div className="active-filters">
-            {filterList.map(([field, value], index) => (
-                <button
-                    key={index}
-                    className={field}
-                    onClick={() => onRemoveFilter(field, value)}
-                    dangerouslySetInnerHTML={{
-                        __html: activeFilters.displayString(
-                            field,
-                            value,
-                            i18n,
-                            globalData
-                        ),
-                    }}
-                ></button>
-            ))}
-        </div>
-    );
-};
-
-//number of groups needed to fill first screen
-function getStartGroups(entityGroups) {
-    let numberGroups = 0;
-    let numberValues = 0;
-    const keys = Object.keys(entityGroups);
-    for (let e of keys) {
-        numberGroups++;
-        numberValues += entityGroups[e].length;
-        if (numberValues > 15) return keys[numberGroups];
+function determineInitialGroups(entities) {
+    const groups = Object.keys(entities);
+    let remainingValues = 15;
+    for (let i = 0; i < groups.length; i++) {
+        remainingValues -= entities[groups[i]].length;
+        if (remainingValues < 0) return Math.min(i + 2, groups.length);
     }
-    return keys.pop();
+    return groups.length;
 }
 
-const EntityList = () => {
-    const { entities, globalData, activeFilters, handleRemoveFilter } =
-        useContext(ExplorerContext);
-    const onRemoveFilter = handleRemoveFilter;
-    const filteredEntities = activeFilters.apply(entities);
-    const entityGroups = groupEntities(filteredEntities);
-    const allKeys = Object.keys(entityGroups);
+function EntityList({ entities, showGrouped, sideLabel, expand }) {
+    const allGroups = Object.keys(entities);
     const [loadedEntities, setLoadedEntities] = useState({});
-    const [toLoadKeys, setToLoadKeys] = useState(allKeys);
+    const [groupsToLoad, setGroupsToLoad] = useState(allGroups);
     const [hasMore, setHasMore] = useState(true);
     const listRef = useRef();
 
-    const handleLoadMoreData = () => {
-        if (toLoadKeys.length > 0) {
-            const moreEntities = { ...loadedEntities };
-            const loadKeys = [...toLoadKeys];
-            const newKey = loadKeys.shift();
-            moreEntities[newKey] = entityGroups[newKey];
-            setToLoadKeys(loadKeys);
-            setLoadedEntities(moreEntities);
-        } else setHasMore(false);
-    };
+    function Content({ children }) {
+        if (expand) return <>{children}</>;
+        return (
+            <InfiniteScroll
+                dataLength={allGroups.length - groupsToLoad.length}
+                next={handleLoadMoreData}
+                scrollThreshold="80%"
+                hasMore={hasMore}
+                scrollableTarget="entity-list"
+            >
+                {children}
+            </InfiniteScroll>
+        );
+    }
 
-    const handleReloadEntities = (field, value) => {
-        onRemoveFilter(field, value);
-        const newLoadedEntities = {};
-        const filteredEntities = activeFilters.apply(entities);
-        const newEntityGroups = groupEntities(filteredEntities);
-        const newKeys = Object.keys(newEntityGroups);
-        const newStartGroups = getStartGroups(newEntityGroups);
-        for (
-            let i = 0;
-            i <= Object.keys(newEntityGroups).indexOf(newStartGroups);
-            i++
-        ) {
-            newLoadedEntities[newKeys[i]] = newEntityGroups[newKeys[i]];
+    function loadEntities() {
+        if (expand) {
+            setLoadedEntities(entities);
+            setGroupsToLoad([]);
+            return;
         }
-        setLoadedEntities(newLoadedEntities);
-        const toLoadKeys = [...newKeys];
-        toLoadKeys.splice(0, newKeys.indexOf(newStartGroups));
-        setToLoadKeys(toLoadKeys);
-        listRef.current.scrollTop = 0;
-    };
+
+        // The current logic decides what to load on a group level, i.e. it
+        // either loads an entire group, or it doesn't load it at all. For large
+        // groups with many entities, this can lead to so many entity entries
+        // being loaded (initially) that it causes notable performance problems.
+
+        const initialGroupCount = determineInitialGroups(entities);
+
+        const initialGroups = allGroups.slice(0, initialGroupCount);
+        const loadedEntities = {};
+        for (let group of initialGroups)
+            loadedEntities[group] = entities[group];
+        setLoadedEntities(loadedEntities);
+
+        setGroupsToLoad(allGroups.slice(initialGroupCount));
+    }
+
+    function handleLoadMoreData() {
+        if (groupsToLoad.length <= 0) {
+            setHasMore(false);
+            return;
+        }
+        const remainingGroupsToLoad = [...groupsToLoad];
+        const newGroup = remainingGroupsToLoad.shift();
+        setGroupsToLoad(remainingGroupsToLoad);
+        setLoadedEntities({
+            ...loadedEntities,
+            [newGroup]: entities[newGroup],
+        });
+    }
 
     useEffect(() => {
-        const loadedEntities = {};
-        const startGroups = getStartGroups(entityGroups);
-        for (let i = 0; i <= allKeys.indexOf(startGroups); i++) {
-            loadedEntities[allKeys[i]] = entityGroups[allKeys[i]];
-        }
-        setLoadedEntities(loadedEntities);
-        const toLoadKeys = [...allKeys];
-        toLoadKeys.splice(0, allKeys.indexOf(startGroups));
-        setToLoadKeys(toLoadKeys);
+        loadEntities();
     }, []);
 
+    useEffect(() => {
+        loadEntities();
+        listRef.current.scrollTop = 0;
+    }, [entities]);
+
     return (
-        <div id="entity-list" className="entity-list" ref={listRef}>
-            <ActiveFilters
-                activeFilters={activeFilters}
-                globalData={globalData}
-                onRemoveFilter={handleReloadEntities}
-            />
-            <div
-                className={
-                    "entities" + (activeFilters.empty ? "" : " filters-visible")
-                }
-            >
-                <LinkButton
-                    route="/entity-filters"
-                    className={
-                        "filter-button" +
-                        (activeFilters.empty ? "" : " filter-button-active")
-                    }
-                >
-                    <img
-                        src="./images/filter-background.svg"
-                        alt="Filter button"
-                    />
-                </LinkButton>
-                <InfiniteScroll
-                    dataLength={allKeys.length - toLoadKeys.length}
-                    next={handleLoadMoreData}
-                    scrollThreshold="80%"
-                    hasMore={hasMore}
-                    scrollableTarget="entity-list"
-                >
-                    {Object.entries(loadedEntities).map(
-                        ([label, entities], index) => (
-                            <div key={index} className="entity-group">
-                                <div className="entity-group-label">
-                                    {label}
-                                </div>
-                                <div className="entity-group-entities">
-                                    {entities.map((entity, index) => (
-                                        <EntityShortInfo
-                                            key={index}
-                                            entity={entity}
-                                        />
-                                    ))}
-                                </div>
+        <div
+            id="entity-list"
+            className={"entity-list" + (expand ? " expand" : "")}
+            ref={listRef}
+        >
+            <Content>
+                {Object.entries(loadedEntities).map(
+                    ([label, entities], index) => (
+                        <div
+                            key={index}
+                            className={
+                                "entity-group" +
+                                (showGrouped && sideLabel ? " side-label" : "")
+                            }
+                        >
+                            {showGrouped && (
+                                <>
+                                    <hr />
+                                    <div className="entity-group-label">
+                                        {label +
+                                            (sideLabel
+                                                ? ""
+                                                : ` (${entities.length})`)}
+                                    </div>
+                                </>
+                            )}
+                            <div className="entity-group-entities">
+                                {entities.map((entity, index) => (
+                                    <EntityShortInfo
+                                        key={index}
+                                        entity={entity}
+                                    />
+                                ))}
                             </div>
-                        )
-                    )}
-                </InfiniteScroll>
-            </div>
+                        </div>
+                    )
+                )}
+            </Content>
         </div>
     );
-};
+}
 
-export default EntityList;
+function normalizeEntities(entities) {
+    const validEntities = typeof entities == "object" ? entities : [];
+    return Array.isArray(validEntities)
+        ? { null: validEntities }
+        : validEntities;
+}
+
+export default (props) => {
+    const entities = useMemo(
+        () => normalizeEntities(props.entities),
+        [props.entities]
+    );
+    const showGrouped =
+        "showGrouped" in props ? props.showGrouped : Object.keys(entities) > 1;
+    const sideLabel =
+        "sideLabel" in props
+            ? props.sideLabel
+            : Object.keys(props.entities).every((label) => label?.length === 1);
+    return EntityList({
+        ...props,
+        entities,
+        showGrouped,
+        sideLabel,
+    });
+};

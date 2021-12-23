@@ -19,7 +19,7 @@
     width: var(--size);
     height: var(--size);
     top: -2px;
-    background: var(--color-primary-messenger-story);
+    background: #3ba6ff;
     border-radius: 50%;
     text-align: center;
 }

@@ -11,7 +11,7 @@
     "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
   "scripts": {
-    "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
+    "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "lint": "eslint src --ext .ts",
     "pretest": "start-dummy-server &",
     "test": "rollup -c && npm run test:electron && npm run test:node",

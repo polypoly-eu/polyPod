@@ -78,15 +78,7 @@ const loadStoriesMetadata = () => {
                 src: "images/stories/digital-giants/card-image.svg",
                 alt: "story.digitalGiants.alt",
             },
-            route: "/story/example-story",
-        },
-        trackers: {
-            title: "story.trackers.title",
-            previewText: "story.trackers.summarize",
-            img: {
-                src: "images/stories/trackers/card-image.svg",
-                alt: "story.trackers.alt",
-            },
+            route: "/story/digital-giants-story",
         },
     };
 };
@@ -167,6 +159,10 @@ export const ExplorerProvider = ({ children }) => {
 
     function entityObjectByPpid(ppid) {
         return entities[ppid];
+    }
+
+    function entityJurisdictionByPpid(ppid) {
+        return entityObjectByPpid(ppid).jurisdiction;
     }
 
     function handleOnboardingPopupClose() {
@@ -283,6 +279,7 @@ export const ExplorerProvider = ({ children }) => {
                 featuredEntities,
                 selectedEntityObject,
                 entityObjectByPpid,
+                entityJurisdictionByPpid,
                 dataRecipients,
                 globalData,
                 featuredEntityMaxValues,

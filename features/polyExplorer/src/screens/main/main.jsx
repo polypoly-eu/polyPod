@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
-import EntityList from "../../components/entityList/entityList.jsx";
+import FilteredEntityList from "../../components/filteredEntityList/filteredEntityList.jsx";
 import StoriesPreview from "../../components/storiesPreview/storiesPreview.jsx";
 
 import "./main.css";
@@ -42,7 +42,7 @@ const MainScreen = () => {
             {showClusters ? (
                 <StoriesPreview storiesMetadata={storiesMetadata} />
             ) : (
-                <EntityList />
+                <FilteredEntityList />
             )}
         </Screen>
     );
