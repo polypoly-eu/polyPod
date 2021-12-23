@@ -2,6 +2,10 @@
     overflow-y: scroll;
 }
 
+.entity-list.expand {
+    overflow-y: visible;
+}
+
 .entity-list .entity-group {
     display: flex;
     flex-direction: column;

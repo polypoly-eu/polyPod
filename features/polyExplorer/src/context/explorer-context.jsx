@@ -80,14 +80,6 @@ const loadStoriesMetadata = () => {
             },
             route: "/story/digital-giants-story",
         },
-        trackers: {
-            title: "story.trackers.title",
-            previewText: "story.trackers.summarize",
-            img: {
-                src: "images/stories/trackers/card-image.svg",
-                alt: "story.trackers.alt",
-            },
-        },
     };
 };
 

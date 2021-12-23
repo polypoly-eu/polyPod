@@ -5,9 +5,12 @@ import GradientCircleList from "../../components/gradientCircleList/gradientCirc
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
+import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
 import { Tabs, Tab } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
+import { PolyChart } from "@polypoly-eu/poly-look";
+import EntityList from "../../components/entityList/entityList.jsx";
 
 const i18nHeader = "clusterDigitalGiantsStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -75,10 +78,10 @@ const DigitalGiantsStory = () => {
                 title={i18n.t(`${i18nHeaderCommon}:section.dataTypes`)}
             />
             <Tabs>
-                <Tab label="Hello">
+                <Tab id="tab-hello" label="Hallo">
                     <div style={{ width: "100%", height: "200px" }}></div>
                 </Tab>
-                <Tab label="Bye">
+                <Tab id="tab-bye" label="Tschüß">
                     <div style={{ width: "100%", height: "200px" }}></div>
                 </Tab>
             </Tabs>
@@ -97,6 +100,8 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:companies.p.1`)}
             </p>
+            <p>{i18n.t(`${i18nHeader}:companies.p.2`)}</p>
+            <ReceivingCompanies entities={bigSix} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.dataRegions`)}
             />
@@ -120,6 +125,7 @@ const DigitalGiantsStory = () => {
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
             />
+            <EntityList entities={bigSix} expand={true} />
         </ClusterStory>
     );
 };

@@ -5,11 +5,11 @@ import Tab from "./tab.jsx";
 import "./tabs.css";
 
 const Tabs = ({ children, swipe = true }) => {
-  const [activeTab, setActiveTab] = useState(children[0].props.label);
+  const [activeTabId, setActiveTabId] = useState(children[0].props.id);
 
   const onTabClick = (ev, newActiveTabId) => {
     ev.preventDefault();
-    setActiveTab(newActiveTabId);
+    setActiveTabId(newActiveTabId);
   };
 
   return (
@@ -18,9 +18,9 @@ const Tabs = ({ children, swipe = true }) => {
         {children.map((tab, index) => (
           <button
             key={index}
-            onClick={(ev) => onTabClick(ev, tab.props.label)}
+            onClick={(ev) => onTabClick(ev, tab.props.id)}
             className={
-              tab.props.label === activeTab ? "tab-button active" : "tab-button"
+              tab.props.id === activeTabId ? "tab-button active" : "tab-button"
             }
           >
             {tab.props.label}
@@ -33,14 +33,14 @@ const Tabs = ({ children, swipe = true }) => {
         initialSlide={0}
         watchOverflow={true}
         onSlideChange={(swiper) =>
-          setActiveTab(children[swiper.activeIndex].props.label)
+          setActiveTabId(children[swiper.activeIndex].props.id)
         }
       >
         {swipe
-          ? children.map((tab, index) => (
-              <SwiperSlide key={index}>{tab.props.children}</SwiperSlide>
+          ? children.map((tab) => (
+              <SwiperSlide key={tab.props.id}>{tab.props.children}</SwiperSlide>
             ))
-          : children.find((tab) => tab.props.label == activeTab).props.children}
+          : children.find((tab) => tab.props.id == activeTabId).props.children}
       </Swiper>
     </div>
   );

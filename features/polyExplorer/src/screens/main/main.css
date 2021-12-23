@@ -3,6 +3,7 @@
     height: 40px;
     width: 100%;
     z-index: 20;
+    background-color: var(--color-background-dark);
 }
 
 .main-screen .nav-button {
@@ -21,6 +22,12 @@
 }
 
 .main-screen .nav-button.active {
+    /*
+     * Without this, a thin stripe of nav-button-container is visible below the
+     * active element.
+     */
+    padding-top: 0;
+
     border-color: var(--color-semi-light);
     color: var(--color-text-light);
 }
