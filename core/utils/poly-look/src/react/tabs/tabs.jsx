@@ -4,7 +4,9 @@ import Tab from "./tab.jsx";
 
 import "./tabs.css";
 
-const Tabs = ({ children, swipe = true }) => {
+// TODO: swipe should default to true, but clicking on tabs currently does not
+//       change tab content if this is set.
+const Tabs = ({ children, swipe = false }) => {
   const [activeTabId, setActiveTabId] = useState(children[0].props.id);
 
   const onTabClick = (ev, newActiveTabId) => {
