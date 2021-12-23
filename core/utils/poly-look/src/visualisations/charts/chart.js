@@ -77,7 +77,7 @@ export class Chart {
     const defs = svg.append("defs");
     for (let gradientData of this._gradients) {
       const gradient = defs
-        .append("linearGradient")
+        .append(gradientData.type)
         .attr("id", gradientData.id);
 
       for (let stop of gradientData.stops) {

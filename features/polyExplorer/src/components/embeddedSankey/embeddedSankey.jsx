@@ -17,6 +17,7 @@ const inactiveLabelOpacity = 0.3;
 const gradients = Object.entries(jurisdictionColors).map(
     ([jurisdiction, color]) => ({
         id: jurisdiction + "-gradient",
+        type: "linearGradient",
         stops: [
             { offset: "0%", color, opacity: 0.2 },
             { offset: "100%", color, opacity: 1 },
