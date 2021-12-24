@@ -1,0 +1,23 @@
+.matrix-bubble-chart {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 110px);
+    grid-gap: 8px;
+}
+
+.matrix-bubble-chart .bubble-cluster-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.matrix-bubble-chart .bubble-cluster-container .bubble-cluster {
+    height: 60px;
+}
+
+.matrix-bubble-chart .bubble-cluster-container h4 {
+    margin: 0;
+    font-size: 14px;
+    text-align: center;
+}

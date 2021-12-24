@@ -130,7 +130,7 @@ open class PodApi(
     }
 
     private suspend fun handlePolyOutReadDir(args: List<Value>): Value {
-        logger.debug("dispatch() -> polyOut.readdir")
+        logger.debug("dispatch() -> polyOut.readDir")
         var path = ""
         if (!args[0].isNilValue) {
             path = args[0].asStringValue().toString()

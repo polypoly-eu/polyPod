@@ -117,8 +117,7 @@ function Industries({ entities }) {
 export default function ReceivingCompanies({ entities }) {
     return (
         <div className="receiving-companies">
-            <Tabs swipe={false}>
-                {/* TODO: Clicking tabs doesn't work with swipe=true yet. */}
+            <Tabs>
                 <Tab
                     id="companies"
                     label={i18n.t(

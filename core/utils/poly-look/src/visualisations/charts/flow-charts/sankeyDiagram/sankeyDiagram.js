@@ -13,11 +13,11 @@ const linkSource = ({ source }) => source,
   nodePadding = 12,
   linkMixBlendMode = "multiply",
   linkPath = d3Sankey.sankeyLinkHorizontal(),
-  defaultNodeTitle = (d) => `${d.id}: ${d.value}`,
+  defaultNodeLabel = (d) => `${d.id}: ${d.value}`,
   defaultMargin = {
-    top: 0,
+    top: 8,
     right: 0,
-    bottom: 0,
+    bottom: 16,
     left: 0,
   },
   defaultLinkOpacity = 0.5,
@@ -65,8 +65,15 @@ export class SankeyDiagram extends Chart {
     options,
     margin,
     color,
+    gradients,
+    nodeLabel,
   }) {
-    super({ selector, width, height });
+    super({
+      selector,
+      width,
+      height,
+      gradients,
+    });
     this._links = links;
     this._nodeAlign =
       {
@@ -77,6 +84,7 @@ export class SankeyDiagram extends Chart {
     this._labelsShowing = options?.labels !== false;
     this._margin = margin || defaultMargin;
     this._nodeColor = color?.node || defaultNodeColor;
+    this._nodeLabel = nodeLabel;
     this._nodeLabelTextColor = color?.text || defaultTextColor;
     this._nodeLabelTextOpacity =
       color?.textOpacity || defaultNodeLabelTextOpacity;
@@ -89,12 +97,13 @@ export class SankeyDiagram extends Chart {
   }
 
   _createSVG() {
-    return d3
+    const svg = d3
       .select(this._selector)
       .append("svg")
-      .attr("width", this._width)
-      .attr("height", this._height)
-      .attr("viewBox", [0, 0, this._width, this._height]);
+      .attr("viewBox", [0, 0, this._width, this._height])
+      .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+    if (this._gradients) this._createGradients(svg);
+    return svg;
   }
 
   _computeSankeyLayout(nodes, links) {
@@ -136,7 +145,8 @@ export class SankeyDiagram extends Chart {
     if (pathGroups.select("path").empty()) pathGroups.append("path");
     pathGroups
       .select("path")
-      .attr("d", linkPath)
+      //Rectangular paths where d.y0 === d.y1 do not have a width -> with " l0,0.001" we force it to have one so gradients can be applied
+      .attr("d", (d) => linkPath(d) + " l0,0.001")
       .attr("stroke", this._linkColor)
       .attr("stroke-width", ({ width }) => Math.max(1, width))
       .attr("stroke-opacity", this._linkOpacity);
@@ -159,7 +169,13 @@ export class SankeyDiagram extends Chart {
       .attr("text-anchor", (d) => (d.x0 < this._width / 2 ? "start" : "end"))
       .attr("opacity", this._nodeLabelTextOpacity)
       .attr("fill", this._nodeLabelTextColor)
-      .text(defaultNodeTitle);
+      .text((d) => {
+        if (!this._nodeLabel) return defaultNodeLabel(d);
+        if (!this._nodeLabel.source) return this._nodeLabel(d);
+        return d.x0 < this._width / 2
+          ? this._nodeLabel.source(d)
+          : this._nodeLabel.target(d);
+      });
   }
 
   _addNodeLabelsContainer(nodeLabels) {
