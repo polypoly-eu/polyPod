@@ -102,6 +102,10 @@ export interface PolyIn {
     has(...quads: RDF.Quad[]): Promise<boolean>;
 }
 
+/**
+ * `Entry` is used to store filesystem directory entries in a (roughly)
+ * platform independent way.
+ */
 export interface Entry {
     id: string;
     path: string;
