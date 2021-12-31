@@ -43,6 +43,7 @@ export interface SendPort<Out> {
 /**
  * Map operation for [[SendPort]]s. The returned port behaves identically to the original port, but applies a function
  * to outgoing messages _before_ they are sent on the original port.
+ * @returns an instance of [[SendPort]] instantiated to the `In` class.
  */
 export function mapSendPort<Out, In>(port: SendPort<Out>, f: (x: In) => Out): SendPort<In> {
     return {
@@ -70,6 +71,7 @@ export interface ReceivePort<In> {
 /**
  * Map operation for [[ReceivePort]]s. The returned port behaves identically to the original port, but applies a
  * function to incoming messages _before_ they are sent to the handlers.
+ * @returns an instance of [[ReceivePort]] instantiated to the `Out` class.
  */
 export function mapReceivePort<In, Out>(
     port: ReceivePort<In>,
