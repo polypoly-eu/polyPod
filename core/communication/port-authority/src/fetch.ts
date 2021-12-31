@@ -103,7 +103,7 @@ export function bubblewrapFetchPort(
         "application/octet-stream",
         async (body) => {
             const decoded: Try<any> = bubblewrap.decode(new Uint8Array(await body.arrayBuffer()));
-            if (decoded.tag === "failure") throw decoded.err;
+            if ("err" in decoded) throw decoded.err;
             else return decoded.value;
         },
         fetch
