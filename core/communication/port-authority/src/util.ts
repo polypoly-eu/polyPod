@@ -8,7 +8,6 @@
  * An interface representing a successful computation.
  */
 export interface Success<T> {
-    tag: "success";
     value: T;
 }
 
@@ -16,7 +15,6 @@ export interface Success<T> {
  * An interface representing a failed computation.
  */
 export interface Failure {
-    tag: "failure";
     err: unknown;
 }
 
@@ -47,12 +45,10 @@ export async function rethrowPromise<T>(t: Try<T>): Promise<T> {
 export async function recoverPromise<T>(p: Promise<T>): Promise<Try<T>> {
     try {
         return {
-            tag: "success",
             value: await p,
         };
     } catch (err) {
         return {
-            tag: "failure",
             err,
         };
     }
