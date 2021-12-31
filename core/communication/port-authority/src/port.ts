@@ -71,10 +71,10 @@ export interface ReceivePort<In> {
  * Map operation for [[ReceivePort]]s. The returned port behaves identically to the original port, but applies a
  * function to incoming messages _before_ they are sent to the handlers.
  */
-export function mapReceivePort<In, In2>(
+export function mapReceivePort<In, Out>(
     port: ReceivePort<In>,
-    f: (x: In) => In2
-): ReceivePort<In2> {
+    f: (x: In) => Out
+): ReceivePort<Out> {
     return {
         addHandler: (handler) => port.addHandler(mapHandler(handler, f)),
     };
