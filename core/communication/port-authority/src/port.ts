@@ -44,7 +44,7 @@ export interface SendPort<Out> {
  * Map operation for [[SendPort]]s. The returned port behaves identically to the original port, but applies a function
  * to outgoing messages _before_ they are sent on the original port.
  */
-export function mapSendPort<Out, Out2>(port: SendPort<Out>, f: (x: Out2) => Out): SendPort<Out2> {
+export function mapSendPort<Out, In>(port: SendPort<Out>, f: (x: In) => Out): SendPort<In> {
     return {
         send: (value) => port.send(f(value)),
     };
