@@ -8,9 +8,8 @@ import { Handler, mapReceivePort, Port } from "./port";
 import { MessagePort } from "worker_threads";
 import { ResponsePort, WithResolvers } from "./procedure";
 import { recoverPromise, Try } from "./util";
-import { OptionsJson, Options } from "body-parser";
+import { OptionsJson, Options, json, raw } from "body-parser";
 import { Bubblewrap } from "@polypoly-eu/bubblewrap";
-import { json, raw } from "body-parser";
 import { IncomingMessage, RequestListener } from "http";
 import createServer, { NextHandleFunction, HandleFunction } from "connect";
 
