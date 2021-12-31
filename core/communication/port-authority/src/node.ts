@@ -38,7 +38,7 @@ export function fromNodeMessagePort(port: MessagePort): Port<any, any> {
 
 /**
  * Creates a [[ResponsePort]] and an accompanying middleware that reacts on any `POST` request and responds with an
- * arbitrary object.
+ * arbitrary object. Sending a `GET` request will act as a status check.
  *
  * The request's body type can be chosen freely by users. Ensure that
  * [body-parser](https://www.npmjs.com/package/body-parser) middleware or similar middleware is set up for the
