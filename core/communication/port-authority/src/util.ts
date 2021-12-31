@@ -34,7 +34,7 @@ export type Try<T> = Success<T> | Failure;
  * See [[recoverPromise]] for the inverse operation.
  */
 export async function rethrowPromise<T>(t: Try<T>): Promise<T> {
-    if (t.tag === "success") return t.value;
+    if ("value" in t) return t.value;
     else throw t.err;
 }
 
