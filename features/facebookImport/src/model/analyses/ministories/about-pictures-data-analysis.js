@@ -1,8 +1,5 @@
 import React from "react";
-import {
-    relevantZipEntries,
-    removeEntryPrefix,
-} from "../../importers/utils/importer-util";
+import { relevantZipEntries } from "../../importers/utils/importer-util";
 import RootAnalysis from "./root-analysis";
 
 import PicturesMiniStory from "../../../components/picturesMiniStory/picturesMiniStory.jsx";
@@ -51,12 +48,11 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
             /^photos_and_videos\/(.+)\.(jpg|jpeg)$/i,
             /^posts\/media\/(.+)\.(jpg|jpeg)$/i,
         ];
-        const relevantEntries = await relevantZipEntries(zipFile);
-        return relevantEntries.filter((zipEntry) => {
-            const entryNameWithoutPrefix = removeEntryPrefix(zipEntry);
-            return photoRegexes.find((regex) =>
-                regex.test(entryNameWithoutPrefix)
-            );
+        const relevantEntriesPaths = (await relevantZipEntries(zipFile)).map(
+            (entry) => entry.path
+        );
+        return relevantEntriesPaths.filter((zipEntryPath) => {
+            return photoRegexes.find((regex) => regex.test(zipEntryPath));
         });
     }
 

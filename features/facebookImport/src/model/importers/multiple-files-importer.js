@@ -6,7 +6,6 @@ import { MissingFilesException } from "./utils/failed-import-exception";
 import {
     readFullPathJSONFile,
     relevantZipEntries,
-    removeEntryPrefix,
     sliceIntoChunks,
 } from "./utils/importer-util";
 
@@ -25,7 +24,7 @@ export default class MultipleFilesImporter {
     }
 
     async _readJSONFileWithStatus(targetFile, zipFile) {
-        return readFullPathJSONFile(targetFile, zipFile)
+        return readFullPathJSONFile(targetFile.id, zipFile)
             .then((data) => {
                 return { status: createSuccessStatus(), targetFile, data };
             })
@@ -46,8 +45,7 @@ export default class MultipleFilesImporter {
         );
 
         for (const each of successfullResults) {
-            const fileName = removeEntryPrefix(each.targetFile);
-            facebookAccount.addImportedFileName(fileName);
+            facebookAccount.addImportedFileName(each.targetFile.path);
         }
         const dataResults = successfullResults.map((result) => result.data);
         this._importRawDataResults(facebookAccount, dataResults);

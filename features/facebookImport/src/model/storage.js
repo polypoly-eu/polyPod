@@ -53,8 +53,7 @@ export class ZipFile {
     async _ensureCachedEntries() {
         if (this._entriesSet !== null) return;
         const entriesList = await this._readEntriesList();
-        const entriesIdList = entriesList.map((entry) => entry.id);
-        this._entriesSet = new Set(entriesIdList);
+        this._entriesSet = new Set(entriesList);
     }
 
     async getEntries() {
@@ -64,7 +63,7 @@ export class ZipFile {
 
     async hasEntry(entryId) {
         await this._ensureCachedEntries();
-        return this._entriesSet.has(entryId);
+        return [...this._entriesSet].some((entry)=> entryId === entry.id);
     }
 
     async data() {

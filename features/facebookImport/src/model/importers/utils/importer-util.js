@@ -7,7 +7,8 @@ import {
 async function relevantZipEntries(zipFile) {
     const entries = await zipFile.getEntries();
     return entries.filter(
-        (each) => !each.includes(".DS_Store") && !each.includes("__MACOSX")
+        (each) =>
+            !each.id.includes(".DS_Store") && !each.id.includes("__MACOSX")
     );
 }
 
@@ -93,24 +94,10 @@ async function jsonDataEntities(zipFile) {
     const entries = await relevantZipEntries(zipFile);
     const relevantJsonEntries = entries.filter(
         (each) =>
-            !each.includes("/files/") && // Remove user files
-            each.endsWith(".json")
+            !each.id.includes("/files/") && // Remove user files
+            each.id.endsWith(".json")
     );
     return relevantJsonEntries;
-}
-
-function removeEntryPrefix(entryName) {
-    // There is no polyPod API at this time that gives us the relative paths we
-    // want to show, so we have to make assumptions about the URL formats used
-    // by the polyPod.
-    const removalPatterns = [
-        /^polypod:\/\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\//i,
-        /^FeatureFiles\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\//i,
-    ];
-    let cleanedEntry = entryName;
-    for (let pattern of removalPatterns)
-        cleanedEntry = cleanedEntry.replace(pattern, "");
-    return cleanedEntry;
 }
 
 function sliceIntoChunks(array, chunkSize) {
@@ -130,6 +117,5 @@ export {
     anonymizeJsonEntityPath,
     relevantZipEntries,
     jsonDataEntities,
-    removeEntryPrefix,
     sliceIntoChunks,
 };

@@ -2,10 +2,7 @@ import React from "react";
 import BasicList from "../../../components/basicList/basicList.jsx";
 import ReportAnalysis from "./report-analysis";
 import { noDataFileName } from "../../../globals/index";
-import {
-    relevantZipEntries,
-    removeEntryPrefix,
-} from "../../importers/utils/importer-util.js";
+import { relevantZipEntries } from "../../importers/utils/importer-util.js";
 
 export default class NoDataFoldersAnalysis extends ReportAnalysis {
     get title() {
@@ -18,8 +15,8 @@ export default class NoDataFoldersAnalysis extends ReportAnalysis {
 
     async analyze({ zipFile }) {
         const entries = await relevantZipEntries(zipFile);
-        const extractedFolderNames = entries.map((fileName) => {
-            const fileNameWithoutId = removeEntryPrefix(fileName);
+        const extractedFolderNames = entries.map((entry) => {
+            const fileNameWithoutId = entry.path;
             const nameParts = fileNameWithoutId.split("/");
             if (nameParts.length >= 2) {
                 for (const [i, part] of Object.entries(nameParts)) {

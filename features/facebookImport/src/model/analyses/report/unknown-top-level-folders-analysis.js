@@ -2,17 +2,14 @@ import React from "react";
 import BasicList from "../../../components/basicList/basicList.jsx";
 import ReportAnalysis from "./report-analysis.js";
 import topFolderNames from "../../../static/topFolders.js";
-import {
-    relevantZipEntries,
-    removeEntryPrefix,
-} from "../../importers/utils/importer-util.js";
+import { relevantZipEntries } from "../../importers/utils/importer-util.js";
 
 async function extractTopLevelFolderNamesFromZip(zipFile) {
     const relevantEntries = await relevantZipEntries(zipFile);
     const topLevelFolderNames = new Set();
 
-    relevantEntries.forEach((filename) => {
-        const noIdFileName = removeEntryPrefix(filename);
+    relevantEntries.forEach((entry) => {
+        const noIdFileName = entry.path;
         const folderNameMatch = noIdFileName.match(/^([^/]+)\/.*$/);
         if (
             folderNameMatch &&
