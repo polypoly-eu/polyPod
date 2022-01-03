@@ -32,7 +32,6 @@ export interface FeatureManifest {
 
 export interface Manifest extends EngineManifest, MainManifest, RootManifest, FeatureManifest {}
 
-// TODO duplicated code with podigree, should be a library
 function expect<I, A>(input: I, msg: string, decoder: Decode.Decoder<I, A>): A {
     return pipe(
         decoder.decode(input),
