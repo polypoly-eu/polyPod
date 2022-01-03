@@ -217,7 +217,7 @@
     flex: 0 0 auto;
     font-family: "Jost Medium";
     font-size: 12px;
-    margin: 0px 24px;
+    margin: 0px 16px;
     width: 100%;
     max-width: var(--max-width);
 }
@@ -284,7 +284,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 0 24px;
+    margin: 0 16px;
 }
 .featured-map-container .separator-unit .partial-separator,
 .location-map .separator-unit .partial-separator,
@@ -313,7 +313,7 @@
 .about .entity-details-text {
     overflow: hidden scroll;
     max-height: 300px;
-    margin: 32px 24px 0 24px;
+    margin: 32px 16px 0 16px;
 }
 .about .scroll-box {
     overflow: hidden scroll;
@@ -332,5 +332,5 @@
 }
 
 .tab-content-container .owned-products-tab {
-    padding: 28px 20px;
+    padding: 28px 16px;
 }
