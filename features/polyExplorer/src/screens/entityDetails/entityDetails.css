@@ -24,13 +24,13 @@
 .tab-data-story p {
     max-width: var(--max-width);
     margin: auto;
-    padding: 40px 24px 12px;
+    padding: 32px 16px 72px;
     font-family: "Jost Medium";
     font-size: 12px;
 }
 
 .tab-data-story .info-button {
-    bottom: 80px;
+    bottom: 100px;
 }
 
 .details .swiper-container {
@@ -224,17 +224,17 @@
 
 .explore-data-btn-area {
     margin: 0 auto;
-    padding: 12px 24px 0 24px;
+    padding: 12px 30px 0 30px;
 }
 
 .explore-data-btn {
-    position: relative;
-    /* bottom: 0;
+    position: fixed;
+    bottom: 0;
     right: 0;
-    left: 0; */
+    left: 0;
     flex: 0 0 auto;
     box-sizing: border-box;
-    width: 100%;
+    width: 91.112%;
     max-width: var(--max-width);
     height: 48px;
     background-color: var(--color-background-light);
