@@ -23,11 +23,11 @@
     font-size: 12px;
 }
 
-.location-legend .leg p {
+.location-legend .legend-container p {
     margin: 0 8px 0 0;
 }
 
-.location-legend .leg {
+.location-legend .legend-container {
     display: flex;
     flex-direction: row;
     align-items: flex-start;

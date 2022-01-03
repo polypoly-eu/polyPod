@@ -6,7 +6,7 @@ import i18n from "../../i18n.js";
 const DataRegionsLegend = () => {
     return (
         <div className="location-legend">
-            <div className="leg">
+            <div className="legend-container">
                 <p className="jurisdictions-label">
                     {i18n.t("entityDetailsScreen:jurisdictions")}:
                 </p>
