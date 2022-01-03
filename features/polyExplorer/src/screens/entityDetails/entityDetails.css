@@ -209,13 +209,10 @@
 
 .entity-details-text {
     box-sizing: border-box;
-    /* width: 100%; */
-    /* max-width: var(--max-width); */
     margin: 0 auto;
 }
 
 .entity-details-source {
-    /* transform: translateY(-20px); */
     color: var(--color-medium);
     flex: 0 0 auto;
     font-family: "Jost Medium";
