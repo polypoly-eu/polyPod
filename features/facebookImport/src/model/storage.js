@@ -63,7 +63,7 @@ export class ZipFile {
 
     async hasEntry(entryId) {
         await this._ensureCachedEntries();
-        return [...this._entriesSet].some((entry)=> entryId === entry.id);
+        return [...this._entriesSet].some((entry) => entryId === entry.id);
     }
 
     async data() {
