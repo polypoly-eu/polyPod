@@ -325,4 +325,4 @@ async function main() {
     }
 }
 
-module.exports = () => main().then(process.exit);
+main().then(process.exit);

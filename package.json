@@ -2,7 +2,8 @@
   "name": "@polypoly-eu/polyPod",
   "description": "Common monorepo and build script dependencies",
   "scripts": {
-    "clean": "rm -rf node_modules"
+    "clean": "rm -rf node_modules",
+    "build" : "node build/index.js"
   },
   "devDependencies": {
     "@types/jest": "^27.0.3",
