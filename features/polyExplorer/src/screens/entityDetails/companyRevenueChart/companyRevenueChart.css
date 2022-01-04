@@ -40,7 +40,7 @@
     position: absolute;
     font-family: "Jost Medium";
     font-size: 12px;
-    transform: translate(28px, -22px);
+    transform: translate(16px, -22px);
 }
 
 .revenue-chart-container .bar {
