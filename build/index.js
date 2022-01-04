@@ -258,7 +258,7 @@ function ANSIBold(string) {
 }
 
 function ANSIFont2(string) {
-    return `\u001b[11m${string}\u001b[10m`;
+    return `\x1b[7m${string}\x1b[27m`;
 }
 
 function logSuccess(command, timeLapsed) {
