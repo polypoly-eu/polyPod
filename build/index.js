@@ -166,7 +166,8 @@ const npm = async (...args) => {
         { ...process.env, FORCE_COLOR: 1 }
     );
     const elapsed = new Date() - start;
-    logDetail(`${ANSIFont2("npm")} finished in ${elapsed} ms`);
+    const realCommand = args[args.length - 1];
+    logDetail(` ${ANSIFont2("npm " + realCommand)} finished in ${elapsed} ms`);
 };
 
 async function npmInstall(name) {
