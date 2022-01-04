@@ -24,7 +24,7 @@ export default class MultipleFilesImporter {
     }
 
     async _readJSONFileWithStatus(targetFile, zipFile) {
-        return readFullPathJSONFile(targetFile.id, zipFile)
+        return readFullPathJSONFile(targetFile, zipFile)
             .then((data) => {
                 return { status: createSuccessStatus(), targetFile, data };
             })

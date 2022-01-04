@@ -9,19 +9,27 @@ export class ZipFileMock {
         this.time = new Date("2021-09-20T16:37:36.243Z");
         this.name = "facebook-facebookuser.zip";
         this.size = MINIMUM_FILE_SIZE;
-        this._entries = {};
+        this._entries = new Set();
     }
 
-    async hasEntry(entryId) {
-        return entryId in this._entries;
+    async hasEntry(entry) {
+        return this._entries.has(entry);
     }
 
     async getEntries() {
-        return Object.keys(this._entries);
+        return [...this._entries];
+    }
+
+    async hasFilePath(entryPath) {
+        return [...this._entries].some((entry) => entryPath === entry.path);
+    }
+
+    async fileEntryForPath(entryPath) {
+        return [...this._entries].find((entry) => entryPath === entry.path);
     }
 
     async getContent(entry) {
-        return this._entries[entry];
+        return entry.content;
     }
 
     async stat(entry) {
@@ -50,7 +58,12 @@ export class ZipFileMock {
     }
 
     addNamedEntry(fileName, stringContent) {
-        this._entries[this.id + "/" + fileName] = stringContent;
+        const entry = {
+            id: this.id + "/" + fileName,
+            path: fileName,
+            content: stringContent,
+        };
+        this._entries.add(entry);
     }
 
     addEncodingEntry(fileName, escapedString) {

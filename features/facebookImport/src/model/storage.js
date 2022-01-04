@@ -33,12 +33,32 @@ export default class Storage {
     }
 }
 
+export class ZipFileEntry {
+    constructor(pod, zipFile, id, path) {
+        this._pod = pod;
+        this._zipFile = zipFile;
+        this._id = id;
+        this._path = path;
+    }
+
+    async stat() {
+        const { polyOut } = this._pod;
+        return polyOut.stat(this._id);
+    }
+
+    async getContent() {
+        const { polyOut } = this._pod;
+        return polyOut.readFile(this._id);
+    }
+}
+
 export class ZipFile {
     constructor(file, pod) {
         this._pod = pod;
         this._file = file;
 
         this._entriesSet = null;
+        this._entryPathHash = null;
     }
 
     get id() {
@@ -56,14 +76,24 @@ export class ZipFile {
         this._entriesSet = new Set(entriesList);
     }
 
+    async hasFilePath(entryPath) {
+        await this._ensureCachedEntries();
+        return [...this._entriesSet].some((entry) => entryPath === entry.path);
+    }
+
+    async fileEntryForPath(entryPath) {
+        await this._ensureCachedEntries();
+        return [...this._entriesSet].find((entry) => entryPath === entry.path);
+    }
+
     async getEntries() {
         await this._ensureCachedEntries();
         return [...this._entriesSet];
     }
 
-    async hasEntry(entryId) {
+    async hasEntry(entry) {
         await this._ensureCachedEntries();
-        return [...this._entriesSet].some((entry) => entryId === entry.id);
+        return this._entriesSet.has(entry);
     }
 
     async data() {
