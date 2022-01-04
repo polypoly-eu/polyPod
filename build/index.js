@@ -171,7 +171,7 @@ const npm = async (...args) => {
 
 async function npmInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
-    await npm("ci");
+    await npm("--no-audit", "--prefer-offline", "ci");
 }
 
 async function npmRun(script, pkg) {
