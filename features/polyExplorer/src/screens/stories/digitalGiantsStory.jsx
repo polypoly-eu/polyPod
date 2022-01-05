@@ -121,11 +121,10 @@ const DigitalGiantsStory = () => {
             activeBubbleTextColor: "var(--color-text-dark)",
             data: [
                 {
-                    title:
-                        "Number " +
-                        listOfDataCategories.length +
-                        " total " +
-                        totalShares,
+                    title: i18n.t(`${i18nHeader}:datatypes.legend.types`, {
+                        amount_of_data_types: listOfDataCategories.length,
+                        amount_of_shares: totalShares,
+                    }),
                     bubbles: dataTypesSharedCombined.map((bubble) => {
                         return { value: bubble.total };
                     }),

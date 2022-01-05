@@ -8,6 +8,7 @@
     "datatypes.tab.companies": "By Companies",
     "datatypes.tab.shares": "By Shares",
     "datatypes.tab.types": "By Types",
+    "datatypes.legend.types": "Data Types: {{amount_of_data_types}} (shared {{amount_of_shares}} Times)",
     "companies.p.1": "Einige Unternehmen erhalten Daten von mehreren Messenger-Apps. In diesen Fällen macht die Verwendung eines anderen Messengers keinen Unterschied.",
     "companies.p.2": "Die Branchen, in denen datenempfangende Unternehmen tätig sind, geben uns einen Hinweis darauf, warum unsere Daten gesammelt werden. Einige Branchen sind datenhungriger als andere.",
     "data.regions.p.1": "Die Region, in der ein datenempfangendes Unternehmen tätig ist, ist entscheidend für die Rechtmäßigkeit des Datenschutzes. Einige speichern ihre Daten in der GDPR-Region.",
