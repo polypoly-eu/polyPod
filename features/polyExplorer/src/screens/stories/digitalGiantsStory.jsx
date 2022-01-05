@@ -5,6 +5,7 @@ import GradientCircleList from "../../components/gradientCircleList/gradientCirc
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
+import MatrixBubblesChart from "../../components/clusterStories/MatrixBubblesChart.jsx";
 import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
 import { Tabs, Tab } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
@@ -45,6 +46,62 @@ const DigitalGiantsStory = () => {
         ...new Set(jurisdictionLinks.map(({ target }) => target)),
     ].filter((j) => j !== "EU-GDPR");
 
+    console.log(bigSix);
+
+    const dataTypes = [
+        {
+            id: "by-messenger",
+            label: "By Companies",
+            // translation: i18n.t(`${i18nHeader}:datatypes.tab.messenger`),
+            bubbleColor: "#FB8A89",
+            bubbleTextColor: "#FB8A89",
+            bubbleStroke: "none",
+            data: bigSixNames.map((companyName, n) => {
+                return {
+                    title: companyName,
+                    bubbles: bigSix[n]._data.dataTypesShared.map(() => {
+                        return { value: 1 };
+                    }),
+                };
+            }),
+        },
+        {
+            id: "by-shares",
+            label: "By Shares",
+            // translation: i18n.t(`${i18nHeader}:datatypes.tab.shares`),
+            bubbleColor: "#FB8A89",
+            bubbleTextColor: "#FB8A89",
+            bubbleStroke: "none",
+            data: bigSixNames.map((companyName, n) => {
+                return {
+                    title: companyName,
+                    bubbles: bigSix[n]._data.dataTypesShared.map((bubble) => {
+                        return { value: bubble.count };
+                    }),
+                };
+            }),
+        },
+        {
+            id: "by-types",
+            label: "By Types",
+            // translation: i18n.t(`${i18nHeader}:datatypes.tab.types`),
+            bubbleColor: "#FB8A89",
+            bubbleTextColor: "#FB8A89",
+            bubbleStroke: "none",
+            activeBubbleTextColor: "var(--color-text-dark)",
+            data: [
+                {
+                    title: "Example",
+                    bubbles: [{ value: 100 }, { value: 100 }, { value: 100 }],
+                },
+                {
+                    title: "Example",
+                    bubbles: [{ value: 100 }, { value: 100 }, { value: 100 }],
+                },
+            ],
+        },
+    ];
+
     return (
         <ClusterStory
             progressBarColor="black"
@@ -80,16 +137,29 @@ const DigitalGiantsStory = () => {
                 {i18n.t(`${i18nHeader}:data.types.p`)}
             </p>
             <Tabs>
-                <Tab id="by-companies" label="By Companies">
-                    <div style={{ width: "100%", height: "200px" }}></div>
-                </Tab>
-                <Tab id="by-shares" label="By Shares">
-                    <div style={{ width: "100%", height: "200px" }}></div>
-                </Tab>
-                <Tab id="by-types" label="By Types">
-                    <div style={{ width: "100%", height: "200px" }}></div>
-                </Tab>
+                {dataTypes.map((dataType, i) => {
+                    return (
+                        <Tab id={dataType.id} label={dataType.label} key={i}>
+                            <div className="data-types-lengend">
+                                <div
+                                    className="bubble-legend"
+                                    style={{
+                                        backgroundColor:
+                                            dataTypes[0].bubbleColor,
+                                    }}
+                                ></div>
+                            </div>
+                            <MatrixBubblesChart
+                                data={dataType.data}
+                                bubbleColor={dataType.bubbleColor}
+                                textColor={dataType.bubbleTextColor}
+                                strokeColor={dataType.bubbleStroke}
+                            />
+                        </Tab>
+                    );
+                })}
             </Tabs>
+            <p className="source">{i18n.t("common:source")}: PolyPedia</p>
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
             />
