@@ -80,9 +80,9 @@ const DigitalGiantsStory = () => {
 
     const dataTypes = [
         {
-            id: "by-messenger",
+            id: "by-companies",
             label: "By Companies",
-            // translation: i18n.t(`${i18nHeader}:datatypes.tab.messenger`),
+            translation: i18n.t(`${i18nHeader}:datatypes.tab.companies`),
             bubbleColor: "#FB8A89",
             bubbleTextColor: "#FB8A89",
             bubbleStroke: "none",
@@ -98,7 +98,7 @@ const DigitalGiantsStory = () => {
         {
             id: "by-shares",
             label: "By Shares",
-            // translation: i18n.t(`${i18nHeader}:datatypes.tab.shares`),
+            translation: i18n.t(`${i18nHeader}:datatypes.tab.shares`),
             bubbleColor: "#FB8A89",
             bubbleTextColor: "#FB8A89",
             bubbleStroke: "none",
@@ -114,7 +114,7 @@ const DigitalGiantsStory = () => {
         {
             id: "by-types",
             label: "By Types",
-            // translation: i18n.t(`${i18nHeader}:datatypes.tab.types`),
+            translation: i18n.t(`${i18nHeader}:datatypes.tab.types`),
             bubbleColor: "#FB8A89",
             bubbleTextColor: "#FB8A89",
             bubbleStroke: "none",
