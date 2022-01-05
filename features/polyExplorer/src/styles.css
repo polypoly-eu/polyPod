@@ -44,6 +44,11 @@
     src: url("../fonts/jost_medium.ttf");
 }
 
+@font-face {
+    font-family: "Jost Bold";
+    src: url("../fonts/jost_bold.ttf");
+}
+
 * {
     font-family: "Jost";
     font-weight: 400;
@@ -80,5 +85,5 @@ a {
 }
 
 strong {
-    font-weight: 600;
+    font-family: "Jost Bold";
 }

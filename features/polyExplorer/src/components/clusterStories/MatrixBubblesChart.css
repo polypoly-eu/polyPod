@@ -18,6 +18,7 @@
 
 .matrix-bubble-chart .bubble-cluster-container h4 {
     margin: 0;
+    font-family: "Jost Medium";
     font-size: 14px;
     text-align: center;
 }
@@ -36,9 +37,11 @@
 
 .data-types-lengend p {
     margin: 0 0 0 8px;
+    font-family: "Jost Medium";
 }
 
 .by-types-bubble-chart h4 {
     margin: 0;
     text-align: center;
+    font-family: "Jost Medium";
 }
