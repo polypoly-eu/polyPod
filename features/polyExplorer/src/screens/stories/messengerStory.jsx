@@ -10,8 +10,6 @@ import EntityList from "../../components/entityList/entityList.jsx";
 import OrderedList from "../../components/orderedList/orderedList.jsx";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 
-import "./messengerStory.css";
-
 const i18nHeader = "clusterMessengerStory";
 const i18nHeaderCommon = "clusterStoryCommon";
 

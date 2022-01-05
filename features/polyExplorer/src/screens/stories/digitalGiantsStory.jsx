@@ -186,6 +186,9 @@ const DigitalGiantsStory = () => {
                                             dataTypes[0].bubbleColor,
                                     }}
                                 ></div>
+                                <p>
+                                    {i18n.t(`${i18nHeader}:datatypes.legend`)}
+                                </p>
                             </div>
                             {dataType.id !== "by-types" ? (
                                 <MatrixBubblesChart
