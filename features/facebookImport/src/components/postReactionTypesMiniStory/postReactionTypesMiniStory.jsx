@@ -85,7 +85,7 @@ const PostReactionTypesMiniStory = ({ reactionData }) => {
                 type="bubble-cluster"
                 data={mapEmojiToReaction(reactionData)}
                 onBubbleClick={handleIconSelected}
-                showValues={false}
+                text=""
                 filter={iconFilter}
             />
             <ChartButtons

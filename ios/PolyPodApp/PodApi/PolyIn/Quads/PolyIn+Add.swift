@@ -2,9 +2,9 @@ import UIKit
 import CoreData
 
 extension PolyIn {
-    func addQuads(quads: [ExtendedData], completionHandler: (Bool) -> Void) {
+    func addQuads(quads: [ExtendedData], completionHandler: (Error?) -> Void) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            completionHandler(false)
+            completionHandler(PodApiError.noAppDelegate)
             return
         }
         
@@ -16,10 +16,10 @@ extension PolyIn {
         
         do {
             try managedContext.save()
-            completionHandler(true)
+            completionHandler(nil)
         } catch {
             Log.error("Could not save. \(error)")
-            completionHandler(false)
+            completionHandler(error)
         }
     }
     

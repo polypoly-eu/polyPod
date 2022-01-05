@@ -9,8 +9,12 @@
   },
   "devDependencies": {
     "@polypoly-eu/podjs": "file:../../podjs",
+<<<<<<< HEAD
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../core/utils/rollup-plugin-copy-watch",
     "cypress": "^9.0.0",
+=======
+    "@rollup/plugin-sucrase": "^3.1.0",
+>>>>>>> main
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },

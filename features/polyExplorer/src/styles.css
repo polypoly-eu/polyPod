@@ -29,9 +29,6 @@
     --jurisdiction-china: #c5271e;
     --jurisdiction-others: #a9b6c6;
 
-    /* Cluster stories colors */
-    --color-primary-messenger-story: #3ba6ff;
-
     /* Size */
     --max-width: 412px;
     --line-height: 120%;
@@ -45,6 +42,11 @@
 @font-face {
     font-family: "Jost Medium";
     src: url("../fonts/jost_medium.ttf");
+}
+
+@font-face {
+    font-family: "Jost Bold";
+    src: url("../fonts/jost_bold.ttf");
 }
 
 * {
@@ -83,5 +85,5 @@ a {
 }
 
 strong {
-    font-weight: 600;
+    font-family: "Jost Bold";
 }

@@ -1,0 +1,10 @@
+:root,
+.poly-theme-light {
+  --theme-primary-color: var(--color-dark);
+  --theme-secondary-color: var(--color-contrast-white);
+}
+
+.poly-theme-dark {
+  --theme-primary-color: var(--color-contrast-white);
+  --theme-secondary-color: var(--color-dark);
+}

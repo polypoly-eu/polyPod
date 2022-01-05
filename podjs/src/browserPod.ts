@@ -9,7 +9,7 @@ import type {
     PolyOut,
     PolyNav,
 } from "@polypoly-eu/pod-api";
-import { EncodingOptions, Stats } from "@polypoly-eu/pod-api";
+import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
@@ -159,30 +159,34 @@ class LocalStoragePolyOut implements PolyOut {
         });
     }
 
-    readdir(path: string): Promise<string[]> {
-        files = new Map<string, Stats>(
+    readDir(id: string): Promise<Entry[]> {
+        const files = new Map<string, Stats>(
             JSON.parse(localStorage.getItem(BrowserPolyNav.filesKey) || "[]")
         );
         return new Promise((resolve, reject) => {
             const filteredFiles = Array.from(files)
-                .filter((file) => file[0].startsWith(path))
+                .filter((file) => file[0].startsWith(id))
                 .map((file) => file[0]);
-
-            if (path == "") {
-                resolve(filteredFiles);
+            if (id == "") {
+                resolve(
+                    filteredFiles.map((file) => ({ id: file, path: file }))
+                );
                 return;
             }
-            const dataUrl = localStorage.getItem(path);
+            const dataUrl = localStorage.getItem(id);
             if (!dataUrl) {
-                reject(new Error(`File not found: ${path}`));
+                reject(new Error(`File not found: ${id}`));
                 return;
             }
             const reader = new zip.ZipReader(new zip.Data64URIReader(dataUrl));
-            reader
-                .getEntries()
-                .then((entries) =>
-                    resolve(entries.map((entry) => `${path}/${entry.filename}`))
+            reader.getEntries().then((entries) => {
+                resolve(
+                    entries.map((entry) => ({
+                        id: `${id}/${entry.filename}`,
+                        path: entry.filename,
+                    }))
                 );
+            });
         });
     }
 
