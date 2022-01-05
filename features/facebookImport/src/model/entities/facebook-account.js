@@ -47,8 +47,6 @@ class FacebookAccount {
         this._importingResults = importingResults;
     }
 
-    /////
-
     get offFacebookCompaniesCount() {
         return this._offFacebookCompanies.length;
     }
