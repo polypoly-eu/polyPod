@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 import GradientCircleList from "../../components/gradientCircleList/gradientCircleList.jsx";
@@ -7,7 +7,7 @@ import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import MatrixBubblesChart from "../../components/clusterStories/MatrixBubblesChart.jsx";
 import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
-import { Tabs, Tab } from "@polypoly-eu/poly-look";
+import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 import EntityList from "../../components/entityList/entityList.jsx";
@@ -26,7 +26,7 @@ const bigSixNames = [
 ];
 
 const DigitalGiantsStory = () => {
-    const { featuredEntities, entityJurisdictionByPpid } =
+    const { featuredEntities, entityJurisdictionByPpid, globalData } =
         useContext(ExplorerContext);
 
     const bigSix = bigSixNames.map((n) =>
@@ -46,7 +46,37 @@ const DigitalGiantsStory = () => {
         ...new Set(jurisdictionLinks.map(({ target }) => target)),
     ].filter((j) => j !== "EU-GDPR");
 
-    console.log(bigSix);
+    const listOfDataCategories = Object.keys(
+        globalData.personal_data_categories
+    );
+
+    let totalShares = 0;
+    bigSix.forEach((company) => {
+        company._data.dataTypesShared.forEach((i) => (totalShares += i.count));
+    });
+
+    const dataTypesSharedCombined = listOfDataCategories
+        .map((category) => {
+            let total = 0;
+            bigSix.map((company) => {
+                company._data.dataTypesShared.forEach((typeCategory) => {
+                    if (typeCategory["dpv:Category"] === category)
+                        total += typeCategory.count;
+                });
+            });
+            return total !== 0
+                ? {
+                      "dpv:Category": category,
+                      total,
+                  }
+                : null;
+        })
+        .filter((e) => e)
+        .sort((a, b) => b.total - a.total);
+
+    const [selectedDataTypeBubble, setSelectedDataTypeBubble] = useState(
+        dataTypesSharedCombined[0].total
+    );
 
     const dataTypes = [
         {
@@ -91,16 +121,24 @@ const DigitalGiantsStory = () => {
             activeBubbleTextColor: "var(--color-text-dark)",
             data: [
                 {
-                    title: "Example",
-                    bubbles: [{ value: 100 }, { value: 100 }, { value: 100 }],
-                },
-                {
-                    title: "Example",
-                    bubbles: [{ value: 100 }, { value: 100 }, { value: 100 }],
+                    title:
+                        "Number " +
+                        listOfDataCategories.length +
+                        " total " +
+                        totalShares,
+                    bubbles: dataTypesSharedCombined.map((bubble) => {
+                        return { value: bubble.total };
+                    }),
+                    width: 400,
+                    height: 400,
                 },
             ],
         },
     ];
+
+    const handleBubbleClick = (_, node) => {
+        setSelectedDataTypeBubble(node.data.value);
+    };
 
     return (
         <ClusterStory
@@ -149,12 +187,35 @@ const DigitalGiantsStory = () => {
                                     }}
                                 ></div>
                             </div>
-                            <MatrixBubblesChart
-                                data={dataType.data}
-                                bubbleColor={dataType.bubbleColor}
-                                textColor={dataType.bubbleTextColor}
-                                strokeColor={dataType.bubbleStroke}
-                            />
+                            {dataType.id !== "by-types" ? (
+                                <MatrixBubblesChart
+                                    data={dataType.data}
+                                    bubbleColor={dataType.bubbleColor}
+                                    textColor={dataType.bubbleTextColor}
+                                    strokeColor={dataType.bubbleStroke}
+                                />
+                            ) : (
+                                <div className="by-types-bubble-chart">
+                                    <PolyChart
+                                        type="bubble-cluster"
+                                        data={dataType.data[0].bubbles}
+                                        width={dataType.data[0].width}
+                                        height={dataType.data[0].height}
+                                        bubbleColor={dataType.bubbleColor}
+                                        textColor={dataType.data[0].bubbles.map(
+                                            (bubble) => {
+                                                selectedDataTypeBubble ===
+                                                bubble.value
+                                                    ? dataType.activeBubbleTextColor
+                                                    : dataType.bubbleTextColor;
+                                            }
+                                        )}
+                                        strokeColor={dataType.bubbleStroke}
+                                        onBubbleClick={handleBubbleClick}
+                                    />
+                                    <h4>{dataType.data[0].title}</h4>
+                                </div>
+                            )}
                         </Tab>
                     );
                 })}
