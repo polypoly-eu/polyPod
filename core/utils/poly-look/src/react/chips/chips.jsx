@@ -53,7 +53,7 @@ const Chips = ({
     onChipClick(id, chipsContentIds);
   };
 
-  const toggleOthers = () => {
+  const toggleOthers = (id) => {
     if (exclusive || others.exclusive) {
       setActiveChips(others.ids);
       onChipClick(id, others.ids);
