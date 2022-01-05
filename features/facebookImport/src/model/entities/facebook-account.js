@@ -96,7 +96,7 @@ class FacebookAccount {
 
     forEachOffFacebookEvent(callback) {
         for (const offFacebookCompany of this.offFacebookCompanies) {
-            for (const offFacebookEvent of offFacebookCompany?.events) {
+            for (const offFacebookEvent of offFacebookCompany.events) {
                 callback(offFacebookEvent);
             }
         }
