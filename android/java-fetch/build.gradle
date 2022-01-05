@@ -28,7 +28,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 task testJar(type: ShadowJar) {
     archiveClassifier = 'tests'
     from sourceSets.test.output
-    configurations = [project.configurations.testRuntime]
+    configurations = [project.configurations.testRuntimeClasspath]
 }
 
 task mochaTest(type: Exec) {
