@@ -57,8 +57,7 @@ export class ZipFile {
         this._pod = pod;
         this._file = file;
 
-        this._entriesSet = null;
-        this._entryPathHash = null;
+        this._entriesPathHash = null;
     }
 
     get id() {
@@ -71,43 +70,34 @@ export class ZipFile {
     }
 
     async _ensureCachedEntries() {
-        if (this._entriesSet !== null) return;
+        if (this._entriesPathHash !== null) return;
         const entriesList = await this._readEntriesList();
-        this._entriesSet = new Set(entriesList);
+        this._entriesPathHash = new Map();
+        entriesList.forEach((entry) =>
+            this._entriesPathHash.set(
+                entry.path,
+                new ZipFileEntry(this._pod, this, entry.id, entry.path)
+            )
+        );
     }
 
     async hasFilePath(entryPath) {
         await this._ensureCachedEntries();
-        return [...this._entriesSet].some((entry) => entryPath === entry.path);
+        return this._entriesPathHash.has(entryPath);
     }
 
     async fileEntryForPath(entryPath) {
         await this._ensureCachedEntries();
-        return [...this._entriesSet].find((entry) => entryPath === entry.path);
+        return this._entriesPathHash.get(entryPath);
     }
 
     async getEntries() {
         await this._ensureCachedEntries();
-        return [...this._entriesSet];
-    }
-
-    async hasEntry(entry) {
-        await this._ensureCachedEntries();
-        return this._entriesSet.has(entry);
+        return [...this._entriesPathHash.values()];
     }
 
     async data() {
         return this.getContent(this.id);
-    }
-
-    async stat(entry) {
-        const { polyOut } = this._pod;
-        return polyOut.stat(entry);
-    }
-
-    async getContent(entry) {
-        const { polyOut } = this._pod;
-        return polyOut.readFile(entry);
     }
 }
 

@@ -8,7 +8,7 @@ async function relevantZipEntries(zipFile) {
     const entries = await zipFile.getEntries();
     return entries.filter(
         (each) =>
-            !each.id.includes(".DS_Store") && !each.id.includes("__MACOSX")
+            !each._id.includes(".DS_Store") && !each._id.includes("__MACOSX")
     );
 }
 
@@ -17,19 +17,15 @@ async function readJSONFile(relativeFileName, zipFile) {
         throw new MissingFileImportException(relativeFileName);
     }
     const fileEntry = await zipFile.fileEntryForPath(relativeFileName);
-    return readFullPathJSONFile(fileEntry, zipFile);
+    return readFullPathJSONFile(fileEntry);
 }
 
-async function readFullPathJSONFile(fullEntryName, zipFile) {
-    if (!(await zipFile.hasEntry(fullEntryName))) {
-        throw new MissingFileImportException(fullEntryName);
-    }
-
-    const rawContent = await zipFile.getContent(fullEntryName);
+async function readFullPathJSONFile(fileEntry) {
+    const rawContent = await fileEntry.getContent();
     const fileContent = new TextDecoder("utf-8").decode(rawContent);
 
     if (!fileContent) {
-        throw new MissingContentImportException(fullEntryName);
+        throw new MissingContentImportException(fileEntry);
     }
 
     return JSON.parse(fileContent, (key, value) => {
