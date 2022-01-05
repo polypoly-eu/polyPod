@@ -4,10 +4,6 @@ plugins {
     id "com.github.node-gradle.node" version "2.2.4"
 }
 
-repositories {
-    jcenter()
-}
-
 import groovy.json.JsonSlurper
 def packageJson = new JsonSlurper().parse file('package.json')
 version = packageJson.version
