@@ -14,7 +14,7 @@
     "storybook": "web-dev-server -c .storybook/server.mjs",
     "build": "rollup -c rollup.config.js",
     "build-downstream": "../../../build.js --start @polypoly-eu/poly-look",
-    "docs" : "jsdoc -r src -d ./docs"
+    "docs" : "jsdoc -R README.md -r src -d ./docs"
   },
   "dependencies": {
     "d3": "^7.0.4",
