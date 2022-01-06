@@ -31,6 +31,8 @@
     "purposes.chart.legend": "Anzahl der Erwähnungen",
     "companies.p.1": "Some companies receive data from several of the messenger apps. In those cases using a different messenger does not make a difference.",
     "companies.p.2": "The industries in which data-receiving companies operate give us a hint why our data is gathered. Some industries are data-hungrier than others.",
+    "data.regions.p.1": "Die Region, in der ein datenempfangendes Unternehmen tätig ist, ist entscheidend für die Rechtmäßigkeit des Datenschutzes. Einige speichern ihre Daten in der GDPR-Region.",
+    "data.regions.p.2": "Manche gehen auch in Regionen mit schwächerer Rechtslage und geringerem Datenschutz.",
     "tips.section": "Tips",
     "tips.p.1": "The more you learn and understand the relevance of data and data privacy, the more you will feel an urge to act. Here are a few tips:",
     "tips.bullet.1": "When you are concerned about data privacy, you should look very closely at who the company behind the app is, and how they might use your data.",

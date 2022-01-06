@@ -9,6 +9,8 @@ import ReceivingCompanies from "../../components/clusterStories/receivingCompani
 import EntityList from "../../components/entityList/entityList.jsx";
 import OrderedList from "../../components/orderedList/orderedList.jsx";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
+import { createJurisdictionLinks } from "./story-utils";
+import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 
 import "./messengerStory.css";
 
@@ -16,7 +18,8 @@ const i18nHeader = "clusterMessengerStory";
 const i18nHeaderCommon = "clusterStoryCommon";
 
 const MessengerStory = () => {
-    const { products, globalData } = useContext(ExplorerContext);
+    const { products, globalData, entityJurisdictionByPpid } =
+        useContext(ExplorerContext);
 
     const listOfMessengerApps = [
         "Facebook Messenger",
@@ -158,6 +161,19 @@ const MessengerStory = () => {
         setSelectedDataTypeBubble(node.data.value);
     };
 
+    const jurisdictionLinks = createJurisdictionLinks(
+        Object.values(products),
+        entityJurisdictionByPpid
+    ).map(({ source, target, value }) => ({
+        source: listOfMessengerApps.find((name) => source.indexOf(name) !== -1),
+        target,
+        value,
+    }));
+
+    const otherJurisdictions = [
+        ...new Set(jurisdictionLinks.map(({ target }) => target)),
+    ].filter((j) => j !== "EU-GDPR");
+
     return (
         <ClusterStory
             progressBarColor="black"
@@ -294,6 +310,26 @@ const MessengerStory = () => {
             </p>
             <p>{i18n.t(`${i18nHeader}:companies.p.2`)}</p>
             <ReceivingCompanies entities={Object.values(products)} />
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.dataRegions`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:data.regions.p.1`)}
+            </p>
+            <EmbeddedSankey
+                links={jurisdictionLinks}
+                groups={{
+                    source: {
+                        label: "Messengers",
+                        all: true,
+                    },
+                    target: {
+                        label: "Regions",
+                        all: false,
+                        others: otherJurisdictions,
+                    },
+                }}
+            />
             <SectionTitle title={i18n.t(`${i18nHeader}:tips.section`)} />
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:tips.p.1`)}
