@@ -66,9 +66,14 @@ const EntityDetails = () => {
                             </p>
                         ) : null}
                         <div className="location-map">
-                            <h2>
-                                {i18n.t("entityDetailsScreen:jurisdiction")}
-                            </h2>
+                            <div className="separator-unit">
+                                <pre className="partial-separator" />
+                                <h2>
+                                    {i18n.t("entityDetailsScreen:jurisdiction")}
+                                </h2>
+                                <post className="partial-separator" />
+                            </div>
+
                             {entity.jurisdiction ? (
                                 <div
                                     className={`location-block ${entity.jurisdiction}`}
@@ -104,14 +109,25 @@ const EntityDetails = () => {
                                 </div>
                             )}
                             <DataRegionsLegend />
-                            <div className="revenue">
-                                <div className="separator"></div>
-                                <br />
-                                <h2>{i18n.t("entityDetailsScreen:revenue")}</h2>
-                                <CompanyRevenueChart
-                                    annualRevenues={entity.annualRevenues}
-                                />
-                            </div>
+                            {!entity?.annualRevenues ? (
+                                <></>
+                            ) : (
+                                <div className="revenue">
+                                    <div className="separator-unit">
+                                        <pre className="partial-separator" />
+                                        <h2>
+                                            {i18n.t(
+                                                "entityDetailsScreen:revenue"
+                                            )}
+                                        </h2>
+                                        <post className="partial-separator" />
+                                    </div>
+
+                                    <CompanyRevenueChart
+                                        annualRevenues={entity.annualRevenues}
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
                 ),
@@ -144,9 +160,14 @@ const EntityDetails = () => {
                             </p>
                         ) : null}
                         <div className="featured-map-container">
-                            <h2>
-                                {i18n.t("entityDetailsScreen:jurisdiction")}
-                            </h2>
+                            <div className="separator-unit">
+                                <pre className="partial-separator" />
+                                <h2>
+                                    {i18n.t("entityDetailsScreen:jurisdiction")}
+                                </h2>
+                                <post className="partial-separator" />
+                            </div>
+
                             {entity.jurisdiction ? (
                                 <div className={`location-block`}>
                                     {entity.location ? (
@@ -182,14 +203,24 @@ const EntityDetails = () => {
                                 </div>
                             )}
                             <DataRegionsLegend />
-                            <div className="revenue">
-                                <div className="separator"></div>
-                                <br />
-                                <h2>{i18n.t("entityDetailsScreen:revenue")}</h2>
-                                <CompanyRevenueChart
-                                    annualRevenues={entity.annualRevenues}
-                                />
-                            </div>
+                            {entity?.annualRevenues?.length === 0 ? (
+                                <></>
+                            ) : (
+                                <div className="revenue">
+                                    <div className="separator-unit">
+                                        <pre className="partial-separator" />
+                                        <h2>
+                                            {i18n.t(
+                                                "entityDetailsScreen:revenue"
+                                            )}
+                                        </h2>
+                                        <post className="partial-separator" />
+                                    </div>
+                                    <CompanyRevenueChart
+                                        annualRevenues={entity.annualRevenues}
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
                 ),
@@ -199,6 +230,9 @@ const EntityDetails = () => {
                 content: (
                     <div className="tab-data-story">
                         <FeaturedEntity />
+                        <p className="source">
+                            {i18n.t("entityDetailsScreen:source")}: polyPedia
+                        </p>
                         <InfoButton route="featured-entity-info" />
                         <div className="explore-data-btn-area">
                             <LinkButton
@@ -297,6 +331,9 @@ const EntityDetails = () => {
                 content: (
                     <div className="tab-data-story">
                         <FeaturedEntity />
+                        <p className="source">
+                            {i18n.t("entityDetailsScreen:source")}: polyPedia
+                        </p>
                         <InfoButton route="featured-entity-info" />
                         <div className="explore-data-btn-area">
                             <LinkButton
@@ -353,40 +390,52 @@ const EntityDetails = () => {
         }
         return tabs;
     };
-
     return (
         <Screen className="entity-details-screen">
             <div className="details">
-                <div className="tab-button-container">
-                    {loadTabs().map((tab, index) => (
-                        <button
-                            key={index}
-                            className={
-                                initialTab === index
-                                    ? "tab-button active"
-                                    : "tab-button"
-                            }
-                            onClick={() => swiper.slideTo(index)}
-                        >
-                            {tab.name}
-                        </button>
-                    ))}
-                </div>
-                <div className="tab-content-container">
-                    <Swiper
-                        onSwiper={setSwiper}
-                        spaceBetween={1}
-                        slidesPerView={1}
-                        initialSlide={initialTab}
-                        onSlideChange={(swiper) =>
-                            setInitialTab(swiper.activeIndex)
-                        }
-                    >
+                {loadTabs().length > 1 && (
+                    <div className="tab-button-container">
                         {loadTabs().map((tab, index) => (
-                            <SwiperSlide key={index}>{tab.content}</SwiperSlide>
+                            <button
+                                key={index}
+                                className={
+                                    initialTab === index
+                                        ? "tab-button active"
+                                        : "tab-button"
+                                }
+                                onClick={() => swiper.slideTo(index)}
+                            >
+                                {tab.name}
+                            </button>
                         ))}
-                    </Swiper>
-                </div>
+                    </div>
+                )}
+                {loadTabs().length === 1 ? (
+                    loadTabs().map((tab, index) => (
+                        <div key={index} className="tab-content-container">
+                            {" "}
+                            {tab.content}
+                        </div>
+                    ))
+                ) : (
+                    <div className="tab-content-container">
+                        <Swiper
+                            onSwiper={setSwiper}
+                            spaceBetween={1}
+                            slidesPerView={1}
+                            initialSlide={initialTab}
+                            onSlideChange={(swiper) =>
+                                setInitialTab(swiper.activeIndex)
+                            }
+                        >
+                            {loadTabs().map((tab, index) => (
+                                <SwiperSlide key={index}>
+                                    {tab.content}
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    </div>
+                )}
             </div>
         </Screen>
     );
