@@ -15,7 +15,7 @@ describe("renders Chips", () => {
     mount(
       <Chips
         chipsContent={chipsContent}
-        defaultActiveChips={[chip1]}
+        defaultActiveChips={["chip1"]}
         onChipClick={onChipClick}
       />
     );
