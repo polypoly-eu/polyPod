@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Chips } from "@polypoly-eu/poly-look";
-import { PolyChart } from "@polypoly-eu/poly-look";
+import { ChipGroup, PolyChart } from "@polypoly-eu/poly-look";
 
 const jurisdictionColors = {
     "EU-GDPR": "#60E6DE",
@@ -82,15 +81,15 @@ const EmbeddedSankey = ({ links, groups }) => {
                 nodeLabel={nodeLabel}
             />
             <p>{groups.source.label}</p>
-            <Chips
+            <ChipGroup
                 chipsContent={sources}
                 defaultActiveChips={
                     activeSources.length > 1 ? ["all"] : activeSources
                 }
                 onChipClick={handleActiveSourceChange}
                 exclusive={false}
-                all={groups.source.all ? { translation: "All" } : null}
-                others={
+                allChip={groups.source.all ? { translation: "All" } : null}
+                othersChip={
                     groups.source.others
                         ? {
                               translation: "others",
@@ -101,13 +100,13 @@ const EmbeddedSankey = ({ links, groups }) => {
                 }
             />
             <p>{groups.target.label}</p>
-            <Chips
+            <ChipGroup
                 chipsContent={targets}
                 defaultActiveChips={[...targets, "others"]}
                 onChipClick={handleActiveTargetChange}
                 exclusive={false}
-                all={groups.target.all ? { translation: "All" } : null}
-                others={
+                allChip={groups.target.all ? { translation: "All" } : null}
+                othersChip={
                     groups.target.others
                         ? {
                               translation: "Others",
