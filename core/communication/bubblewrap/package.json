@@ -37,8 +37,7 @@
     "benchmark": "^2.1.4",
     "fast-check": "^2.11.0",
     "n3": "^1.7.0",
-    "rollup": "^2.37.0",
-    "typedoc": "^0.20.36"
+    "rollup": "^2.37.0"
   },
   "private": true
 }
