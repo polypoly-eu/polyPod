@@ -40,21 +40,21 @@ const linkSource = ({ source }) => source,
  * @param {string} links[].source - Source of the link
  * @param {string} links[].target - Target of the link
  * @param {number} links[].value - Value of the link
- * @param {number = 400} [width] - The width of the svg
- * @param {number = 300} [height] - The height of the svg
+ * @param {number} [width = 400] - The width of the svg
+ * @param {number} [height = 300] - The height of the svg
  * @param {Object} [options] - Options
- * @param {boolean = true} [options.labels] - Showing labels of the nodes in the diagram
+ * @param {boolean} [options.labels  = true] - Showing labels of the nodes in the diagram
  * @param {string} [options.align] - Alignment of the diagram (defaults to justify)
  * @param {Object} [margin] - Margins of the chart
- * @param {number = 0} [margin.top/right/bottom/left] - The respective margins
+ * @param {number} [margin.top/right/bottom/left = 0] - The respective margins
  * @param {Object} [color] - All color attributes
- * @param {string/callback = "black"} [color.node] - Color of the nodes
- * @param {string/callback = "#0F1938"} [color.text] - Color of the label text of the nodes
- * @param {number/callback = 1} [color.textOpacity] - Opacity of the label text of the nodes
- * @param {string/callback = "white"} [color.nodeLabelBoxColor] - Color of the box surrounding the node label
- * @param {number/callback =0.7"} [color.nodeLabelBoxOpacity] - Opacity of the box surrounding the node label
- * @param {string/callback = "blue"} [color.link] - Color of the link
- * @param {number/callback = 0.5} [color.linkOpacity] - Opacity of the link
+ * @param {string/callback} [color.node  = "black"] - Color of the nodes
+ * @param {string/callback} [color.text  = "#0F1938" ] - Color of the label text of the nodes
+ * @param {number/callback} [color.textOpacity  = 1 ] - Opacity of the label text of the nodes
+ * @param {string/callback} [color.nodeLabelBoxColor = "white"] - Color of the box surrounding the node label
+ * @param {number/callback} [color.nodeLabelBoxOpacity  =0.7] - Opacity of the box surrounding the node label
+ * @param {string/callback} [color.link  = "blue" ] - Color of the link
+ * @param {number/callback} [color.linkOpacity = 0.5] - Opacity of the link
  */
 export class SankeyDiagram extends Chart {
   constructor({

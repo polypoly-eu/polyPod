@@ -10,7 +10,7 @@ const allId = "allChip";
 /**
  *
  * Group of chips
- * @param {string[] || Object[]} chipsContent -  Content of the Chips
+ * @param { (string[] | Object[]) } chipsContent -  Content of the Chips
  * @param {Object} [chipsContent.id] - Id of the chip (if chipsContent is an array of strings they act as id)
  * @param {Object} [chipsContent.title] - Alternative for id of the chip (if chipsContent is an array of strings they act as id)
  * @param {Object} [chipsContent.translation] - Translation of the chip (if chipsContent is an array of strings they act as translation)
@@ -24,7 +24,7 @@ const allId = "allChip";
  * @param {string} [othersChip.translation = "Others"] - Translation for chips text ("Others")
  * @param {string[]} [othersChip.ids] - Ids of the chips grouped by others
  * @param {boolean} [othersChip.exclusive] - Indicates whether the others chips is exclusive to the rest
- * @returns
+ * @returns A `div` with the content
  */
 const Chips = ({
   chipsContent,
