@@ -85,8 +85,8 @@ async function jsonDataEntities(zipFile) {
     const entries = await relevantZipEntries(zipFile);
     const relevantJsonEntries = entries.filter(
         (each) =>
-            !each.id.includes("/files/") && // Remove user files
-            each.id.endsWith(".json")
+            !each._id.includes("/files/") && // Remove user files
+            each._id.endsWith(".json")
     );
     return relevantJsonEntries;
 }

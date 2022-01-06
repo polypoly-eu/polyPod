@@ -17,7 +17,7 @@ export default class MissingCommonJSONFilesAnalysis extends ReportAnalysis {
 
     async analyze({ zipFile }) {
         const relevantEntries = await jsonDataEntities(zipFile);
-        const formattedPaths = relevantEntries.map((each) => "/" + each.path);
+        const formattedPaths = relevantEntries.map((each) => "/" + each._path);
         this._missingCommonFileNames = commonStructure
             .filter((each) => each.endsWith(".json"))
             .filter((each) => !formattedPaths.includes(each));

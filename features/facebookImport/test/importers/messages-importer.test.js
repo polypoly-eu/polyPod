@@ -18,17 +18,17 @@ import {
     expectImportSuccess,
 } from "../utils/importer-assertions.js";
 
-// describe("Import messages from empty export", () => {
-//     let zipFile = null;
-//     beforeAll(() => {
-//         zipFile = new ZipFileMock();
-//     });
+describe("Import messages from empty export", () => {
+    let zipFile = null;
+    beforeAll(() => {
+        zipFile = new ZipFileMock();
+    });
 
-//     it("triggers missing files error", async () => {
-//         const { result } = await runMessagesImporter(zipFile);
-//         expectError(result, MissingFilesException, MessagesImporter);
-//     });
-// });
+    it("triggers missing files error", async () => {
+        const { result } = await runMessagesImporter(zipFile);
+        expectError(result, MissingFilesException, MessagesImporter);
+    });
+});
 
 describe("Import message from export with three file errors", () => {
     let result = null;
