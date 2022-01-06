@@ -1,5 +1,5 @@
 .stories-preview {
-    padding: 0 16px 212px 16px;
+    padding: 0 16px 0 16px;
 }
 
 .stories-preview .preview-scrollable {
@@ -13,6 +13,7 @@
     font-size: 20px;
     font-family: "Jost Medium";
     margin: 0;
+    margin: 12px 48px 0;
 }
 
 .stories-preview p {
