@@ -9,14 +9,14 @@ import {
   SankeyDiagram,
 } from "./visualisations/charts";
 import { PolyChart } from "./visualisations/wrappers/react/polyChart.jsx";
-import { Tab, Tabs, ChipGroup } from "./react";
+import { Tab, Tabs, Chips } from "./react";
 export {
   BubbleCluster,
   VerticalBarChart,
   MirroredBarChart,
   SankeyDiagram,
   PolyChart,
-  ChipGroup,
+  Chips,
   Tab,
   Tabs,
 };

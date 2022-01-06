@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
-import { ChipGroup, PolyChart } from "@polypoly-eu/poly-look";
+import { Chips, PolyChart } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
 
@@ -83,7 +83,7 @@ const DataStructureMiniStory = ({ data }) => {
                     onBubbleClick={handleBubbleClick}
                 />
             </div>
-            <ChipGroup
+            <Chips
                 chipsContent={dataWithTotal.map((d) => {
                     return { id: d.title };
                 })}

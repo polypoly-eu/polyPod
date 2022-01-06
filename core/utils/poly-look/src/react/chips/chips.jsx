@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "./chipGroup.css";
+import "./chips.css";
 
 const chipId = (e) => e.id || e.title || e;
 
@@ -26,7 +26,7 @@ const allId = "allChip";
  * @param {boolean} [othersChip.exclusive] - Indicates whether the others chips is exclusive to the rest
  * @returns
  */
-const ChipGroup = ({
+const Chips = ({
   chipsContent,
   defaultActiveChips,
   onChipClick,
@@ -133,4 +133,4 @@ const ChipGroup = ({
   );
 };
 
-export default ChipGroup;
+export default Chips;
