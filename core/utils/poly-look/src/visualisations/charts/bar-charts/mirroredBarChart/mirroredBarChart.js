@@ -25,8 +25,8 @@ const yGridMarginRight = 24;
  * @param {number} data[].key - The key x value for both charts
  * @param {number} data[].lower - The y value for the lower bar chart at key x value
  * @param {number} data[].upper - The y value for the lower bar chart at key x value
- * @param {number = 400} [width] - The width of the svg
- * @param {number = 200} [height] - The height of the svg
+ * @param {number} [width = 400] - The width of the svg
+ * @param {number} [height = 200] - The height of the svg
  * @param {Object} [barColor] - The color of the bars
  * @param {string} [barColor.upperBarColor = "red"] - The color of the upper bars
  * @param {string} [barColor.lowerBarColor = "blue"] - The color of the lower bars
