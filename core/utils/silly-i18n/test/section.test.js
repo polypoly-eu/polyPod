@@ -26,7 +26,7 @@ describe("Test basic configuration", () => {
         }
         expect(thrownError).toBeInstanceOf(TranslationKeyError);
         expect(thrownError.message).toEqual(
-            expect.stringMatching(/do not have/)
+            expect.stringMatching(/does not have/)
         );
     });
 });

@@ -158,15 +158,6 @@ export class I18nSection extends I18n {
      * @returns The translated string.
      */
     t(key, options = {}) {
-        let translation = this._translations[this._section][key];
-        if (!translation) {
-            throw new TranslationKeyError(
-                `We do not have a ${key} key for language ${this.language} and section ${this._section}`
-            );
-        }
-
-        for (let [name, value] of Object.entries(options))
-            translation = translation.replace(`{{${name}}}`, value);
-        return translation;
+        return super.t(`${this._section}:${key}`, options);
     }
 }
