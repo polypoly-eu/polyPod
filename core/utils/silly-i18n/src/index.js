@@ -51,11 +51,11 @@ export class I18n {
     /**
      * Class constructor
      *
-     * @param language - two-letter language code, which should be a key in the translation hash.
+     * @param {string} language - two-letter language code, which should be a key in the translation hash.
      *     If this key does not exist, `fallbackLanguage` will be used.
-     * @param translations - translations hash. This is going to have the format `namespace ⇒ key ⇒ string`
+     * @param {Object} translations - translations hash. This is going to have the format `namespace ⇒ key ⇒ string`
      *     within every language. Only the language that's detected will be used.
-     * @param fallbackLanguage - "default" language to use in case the one in `language`
+     * @param {string} [ fallbackLanguage = language ] - "default" language to use in case the one in `language`
      *     is not a part of the `translations` hash.
      *     It's an optional parameter, that defaults to the first key
      *     in the `translations` hash, so you might want to use arrange it
@@ -81,8 +81,8 @@ export class I18n {
     /**
      * Obtains the (translated) string for a `namespace:key` defined in the translations hash.
      *
-     * @param key - the translation key in the `namespace:key` format
-     * @param options - simple templating capabilities; this will be a key-value hash, so that `{{{key}}}` will be substituted by the key value in this hash
+     * @param {string} key - the translation key in the `namespace:key` format
+     * @param {Object} options - simple templating capabilities; this will be a key-value hash, so that `{{{key}}}` will be substituted by the key value in this hash
      * @throws TranslationKeyError - if the translation key does not have the correct format, or is missing the key part, or the key does not exist.
      * @returns The translated string.
      */
