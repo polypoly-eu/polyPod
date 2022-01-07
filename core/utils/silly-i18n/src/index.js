@@ -145,7 +145,7 @@ export class I18nSection extends I18n {
      */
     constructor(i18n, section) {
         super(i18n.language, { [i18n.language]: i18n._translations });
-        this._key = section;
+        this._section = section;
         Object.freeze(this);
     }
 
@@ -158,10 +158,10 @@ export class I18nSection extends I18n {
      * @returns The translated string.
      */
     t(key, options = {}) {
-        let translation = this._translations[this.key][keyInNamespace];
+        let translation = this._translations[this._section][key];
         if (!translation) {
             throw new TranslationKeyError(
-                `We do not have a ${keyInNamespace} key for language ${this.language}`
+                `We do not have a ${key} key for language ${this.language} and section ${this._section}`
             );
         }
 

@@ -22,4 +22,7 @@ describe("Test basic configuration", () => {
     it("is created correctly", () => {
         expect(i18ns).toBeInstanceOf(I18nSection);
     });
+    it("Translates correctly", () => {
+        expect(i18ns.t("bar")).toBe("baz");
+    });
 });
