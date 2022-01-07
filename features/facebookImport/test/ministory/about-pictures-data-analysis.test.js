@@ -8,7 +8,7 @@ import {
 } from "../utils/analysis-assertions";
 
 describe("Pictures ministory on export with no JPEG pictures in correct locations", () => {
-    let analysis = null;
+let analysis = null;
     let status = null;
 
     beforeAll(async () => {

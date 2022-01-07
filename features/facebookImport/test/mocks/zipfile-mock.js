@@ -44,7 +44,7 @@ export class ZipFileMock {
         return this._entriesPathHash.has(entryPath);
     }
 
-    async fileEntryForPath(entryPath) {
+    async fileEntryFromPath(entryPath) {
         return this._entriesPathHash.get(entryPath);
     }
 

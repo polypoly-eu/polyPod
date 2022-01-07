@@ -7,16 +7,16 @@ import {
 async function relevantZipEntries(zipFile) {
     const entries = await zipFile.getEntries();
     return entries.filter(
-        (each) =>
-            !each._id.includes(".DS_Store") && !each._id.includes("__MACOSX")
+        (entry) =>
+            !entry._id.includes(".DS_Store") && !entry._id.includes("__MACOSX")
     );
 }
 
-async function readJSONFile(relativeFileName, zipFile) {
-    if (!(await zipFile.hasFilePath(relativeFileName))) {
-        throw new MissingFileImportException(relativeFileName);
+async function readJSONFile(relativeFilePath, zipFile) {
+    if (!(await zipFile.hasFilePath(relativeFilePath))) {
+        throw new MissingFileImportException(relativeFilePath);
     }
-    const fileEntry = await zipFile.fileEntryForPath(relativeFileName);
+    const fileEntry = await zipFile.fileEntryFromPath(relativeFilePath);
     return readFullPathJSONFile(fileEntry);
 }
 
@@ -25,7 +25,7 @@ async function readFullPathJSONFile(fileEntry) {
     const fileContent = new TextDecoder("utf-8").decode(rawContent);
 
     if (!fileContent) {
-        throw new MissingContentImportException(fileEntry);
+        throw new MissingContentImportException(fileEntry._id);
     }
 
     return JSON.parse(fileContent, (key, value) => {
@@ -36,12 +36,12 @@ async function readFullPathJSONFile(fileEntry) {
     });
 }
 
-async function readJSONDataObject(dataFileName, dataKey, zipFile) {
-    const rawData = await readJSONFile(dataFileName, zipFile);
+async function readJSONDataObject(relativeFilePath, dataKey, zipFile) {
+    const rawData = await readJSONFile(relativeFilePath, zipFile);
 
     if (!(dataKey in rawData)) {
         throw new InvalidContentImportException(
-            dataFileName,
+            relativeFilePath,
             `Missing ${dataKey} key`
         );
     }
@@ -49,12 +49,16 @@ async function readJSONDataObject(dataFileName, dataKey, zipFile) {
     return rawData[dataKey];
 }
 
-async function readJSONDataArray(dataFileName, dataKey, zipFile) {
-    const arrayData = await readJSONDataObject(dataFileName, dataKey, zipFile);
+async function readJSONDataArray(relativeFilePath, dataKey, zipFile) {
+    const arrayData = await readJSONDataObject(
+        relativeFilePath,
+        dataKey,
+        zipFile
+    );
 
     if (!Array.isArray(arrayData)) {
         throw new InvalidContentImportException(
-            dataFileName,
+            relativeFilePath,
             `Wrong data format for ${dataKey} key`
         );
     }
@@ -72,11 +76,11 @@ function anonymizePathSegment(pathSegment, fullPath) {
     return pathSegment;
 }
 
-function anonymizeJsonEntityPath(fileName) {
-    const nameParts = fileName.split("/");
+function anonymizeJsonEntityPath(entryPath) {
+    const nameParts = entryPath.split("/");
 
     const anonymizedParts = nameParts.map((each) =>
-        anonymizePathSegment(each, fileName)
+        anonymizePathSegment(each, entryPath)
     );
     return anonymizedParts.join("/");
 }
@@ -84,9 +88,9 @@ function anonymizeJsonEntityPath(fileName) {
 async function jsonDataEntities(zipFile) {
     const entries = await relevantZipEntries(zipFile);
     const relevantJsonEntries = entries.filter(
-        (each) =>
-            !each._id.includes("/files/") && // Remove user files
-            each._id.endsWith(".json")
+        (entry) =>
+            !entry._id.includes("/files/") && // Remove user files
+            entry._id.endsWith(".json")
     );
     return relevantJsonEntries;
 }

@@ -86,7 +86,7 @@ export class ZipFile {
         return this._entriesPathHash.has(entryPath);
     }
 
-    async fileEntryForPath(entryPath) {
+    async fileEntryFromPath(entryPath) {
         await this._ensureCachedEntries();
         return this._entriesPathHash.get(entryPath);
     }
@@ -94,10 +94,6 @@ export class ZipFile {
     async getEntries() {
         await this._ensureCachedEntries();
         return [...this._entriesPathHash.values()];
-    }
-
-    async data() {
-        return this.getContent(this.id);
     }
 }
 
