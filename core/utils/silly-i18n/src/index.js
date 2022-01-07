@@ -145,8 +145,10 @@ export class I18nSection extends I18n {
      * @throws NonExistingSectionError - if the `section` key is not included in the translations hash
      */
     constructor(i18n, section) {
-        this.key = section;
-        return undefined;
+        const { language, translation, fallbackLanguage } = i18n;
+        super(language, translation, fallbackLanguage);
+        this._key = section;
+        Object.freeze(this);
     }
 
     /**
