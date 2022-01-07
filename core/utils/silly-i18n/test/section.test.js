@@ -25,4 +25,16 @@ describe("Test basic configuration", () => {
     it("Translates correctly", () => {
         expect(i18ns.t("bar")).toBe("baz");
     });
+    it("Throws when key not found", () => {
+        let thrownError;
+        try {
+            i18ns.t("WAT");
+        } catch (error) {
+            thrownError = error;
+        }
+        expect(thrownError).toBeInstanceOf(TranslationKeyError);
+        expect(thrownError.message).toEqual(
+            expect.stringMatching(/do not have/)
+        );
+    });
 });
