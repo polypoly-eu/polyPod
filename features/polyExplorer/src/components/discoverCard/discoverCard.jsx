@@ -7,14 +7,17 @@ import "./discoverCard.css";
 const i18nHeader = "clusterStoriesPreview";
 const DiscoverCard = ({ story }) => {
     return (
-        <LinkButton route={story.route} className="preview">
+        <div className="discover-container">
             <img
                 src={story.img.src}
                 alt={i18n.t(`${i18nHeader}:${story.img.alt}`)}
             />
             <h3>{i18n.t(`${i18nHeader}:${story.title}`)}</h3>
             <p>{i18n.t(`${i18nHeader}:${story.previewText}`)}</p>
-        </LinkButton>
+            <LinkButton route={story.route} className="discover-button">
+                {i18n.t("clusterStoriesPreview:story.button.discover")}
+            </LinkButton>
+        </div>
     );
 };
 
