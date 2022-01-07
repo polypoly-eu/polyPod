@@ -14,7 +14,7 @@ const DiscoverCard = ({ story }) => {
             />
             <h3>{i18n.t(`${i18nHeader}:${story.title}`)}</h3>
             <p>{i18n.t(`${i18nHeader}:${story.previewText}`)}</p>
-            <LinkButton route={story.route} className="preview discover-button">
+            <LinkButton route={story.route} className="discover-button">
                 {i18n.t("clusterStoriesPreview:story.button.discover")}
             </LinkButton>
         </div>
