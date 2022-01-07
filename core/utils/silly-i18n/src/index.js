@@ -25,6 +25,23 @@ export class LanguageError extends Error {
 }
 
 /**
+ * Exception class to use when the section/namespace does not exist
+ *
+ * @class
+ */
+export class NonExistingSectionError extends Error {
+    /**
+     * Class constructor
+     *
+     * @param message - Message to include in the error
+     */
+    constructor(message) {
+        super(message);
+        this.name = "NonExistingSectionError";
+    }
+}
+
+/**
  * Exception class to use when there's some problem with the key used
  * in the translation, either the format or its existence.
  *
@@ -84,6 +101,7 @@ export class I18n {
      * @param {string} key - the translation key in the `namespace:key` format
      * @param {Object} options - simple templating capabilities; this will be a key-value hash, so that `{{{key}}}` will be substituted by the key value in this hash
      * @throws TranslationKeyError - if the translation key does not have the correct format, or is missing the key part, or the key does not exist.
+     * @throws NonExistingSectionError - if the section/namespace does not exist
      * @returns The translated string.
      */
     t(key, options = {}) {
@@ -93,10 +111,57 @@ export class I18n {
             );
         }
         const [namespace, keyInNamespace] = key.split(/:(.+)/);
-        let translation = this._translations?.[namespace]?.[keyInNamespace];
+        if (!(namespace in this._translations)) {
+            throw new NonExistingSectionError(
+                `${namespace} is not a correct section, possible values are ${Object.keys(
+                    this._translations
+                )}`
+            );
+        }
+        let translation = this._translations[namespace]?.[keyInNamespace];
         if (!translation) {
             throw new TranslationKeyError(
                 `${namespace} does not exist or does not have a ${keyInNamespace} key for language ${this.language}`
+            );
+        }
+
+        for (let [name, value] of Object.entries(options))
+            translation = translation.replace(`{{${name}}}`, value);
+        return translation;
+    }
+}
+
+/**
+ * A I18n translator specific to a section, instantiated with a specific namespace.
+ *
+ * @class
+ */
+export class I18nSection extends I18n {
+    /**
+     * Class constructor from a
+     *
+     * @param {I18n} i18n - Translation object, containing basic logic and data
+     * @param {string} section - First-level section this object will handle
+     * @throws NonExistingSectionError - if the `section` key is not included in the translations hash
+     */
+    constructor(i18n, section) {
+        this.key = section;
+        return undefined;
+    }
+
+    /**
+     * Obtains the (translated) string for a `namespace:key` defined in the translations hash.
+     *
+     * @param {string} key - the translation key in the `key` format (implicit namespace)
+     * @param {Object} options - simple templating capabilities; this will be a key-value hash, so that `{{{key}}}` will be substituted by the key value in this hash
+     * @throws TranslationKeyError - if the translation key does not have the correct format, or is missing the key part, or the key does not exist.
+     * @returns The translated string.
+     */
+    t(key, options = {}) {
+        let translation = this._translations[this.key][keyInNamespace];
+        if (!translation) {
+            throw new TranslationKeyError(
+                `We do not have a ${keyInNamespace} key for language ${this.language}`
             );
         }
 
