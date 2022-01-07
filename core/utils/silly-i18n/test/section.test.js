@@ -1,14 +1,6 @@
-import {
-    determineLanguage,
-    LanguageError,
-    NonExistingSectionError,
-    TranslationKeyError,
-    I18n,
-    I18nSection,
-} from "../src/index.js";
+import { TranslationKeyError, I18n, I18nSection } from "../src/index.js";
 
 const LANGUAGE = "foo";
-const FALLBACK_LANGUAGE = "en";
 let i18n, i18ns;
 
 beforeAll(() => {
