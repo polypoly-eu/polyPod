@@ -92,7 +92,6 @@ export class I18n {
         }
         this.language = language in translations ? language : fallbackLanguage;
         this._translations = translations[this.language];
-        Object.freeze(this);
     }
 
     /**
@@ -145,8 +144,7 @@ export class I18nSection extends I18n {
      * @throws NonExistingSectionError - if the `section` key is not included in the translations hash
      */
     constructor(i18n, section) {
-        this.language = i18n.language;
-        this._translations = i18n._translations;
+        super(i18n.language, { [i18n.language]: i18n._translations });
         this._key = section;
         Object.freeze(this);
     }
