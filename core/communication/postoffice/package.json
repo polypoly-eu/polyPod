@@ -16,8 +16,5 @@
     "test": "jest",
     "docs": "typedoc"
   },
-  "devDependencies": {
-    "typedoc": "^0.22.10"
-  },
   "private": true
 }
