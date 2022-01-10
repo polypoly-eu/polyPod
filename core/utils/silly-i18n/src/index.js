@@ -49,11 +49,16 @@ export class TranslationKeyError extends Error {
  * @param path - Full path to import
  * @returns an [[I18n]] object
  */
-export async function createI18n( sections, languages ) {
+export async function createI18n( sections, languages, path ) {
     let i18nData = {};
-    for ( s in sections ) {
-        const section = await import( `${path}/${s}.js`);
-        i18nData[s] = section;
+    for ( const l of languages ) {
+        i18nData[l] = {};
+    }
+    for ( const s of sections ) {
+        for ( const l of languages ) {
+            const section = await import( `${path}/${l}/${s}.json`);
+            i18nData[l][s] = section;
+        }
     }
     return new I18n( determineLanguage(), i18nData);
 }
