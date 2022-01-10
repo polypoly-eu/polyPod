@@ -29,15 +29,12 @@
     "@polypoly-eu/rdf": "file:../../api/rdf",
     "@polypoly-eu/rdf-convert": "file:../../api/rdf-convert",
     "@polypoly-eu/rdf-spec": "file:../../api/rdf-spec",
-    "@rollup/plugin-commonjs": "^17.0.0",
-    "@rollup/plugin-node-resolve": "^11.1.0",
-    "@rollup/plugin-sucrase": "^3.1.0",
     "@types/benchmark": "^2.1.0",
     "@types/n3": "^1.4.4",
     "benchmark": "^2.1.4",
     "fast-check": "^2.11.0",
     "n3": "^1.7.0",
-    "rollup": "^2.37.0"
+    "typedoc": "^0.22.10"
   },
   "private": true
 }

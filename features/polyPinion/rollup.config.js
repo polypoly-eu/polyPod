@@ -1,4 +1,4 @@
-import copy from "rollup-plugin-copy";
+import copy from "@polypoly-eu/rollup-plugin-copy-watch";
 import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
 import css from "rollup-plugin-css-only";

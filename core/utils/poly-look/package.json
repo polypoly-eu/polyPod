@@ -13,7 +13,8 @@
     "test:watch": "web-test-runner --watch",
     "storybook": "web-dev-server -c .storybook/server.mjs",
     "build": "rollup -c rollup.config.js",
-    "build-downstream": "../../../build.js --start @polypoly-eu/poly-look"
+    "build-downstream": "../../../build.js --start @polypoly-eu/poly-look",
+    "docs" : "jsdoc -R README.md -r src -d ./docs"
   },
   "dependencies": {
     "d3": "^7.0.4",
@@ -25,15 +26,11 @@
   },
   "devDependencies": {
     "@open-wc/testing": "^3.0.3",
-    "@rollup/plugin-node-resolve": "^11.2.1",
-    "@rollup/plugin-sucrase": "^4.0.1",
     "@web/dev-server-rollup": "^0.3.13",
     "@web/dev-server-storybook": "^0.0.2",
     "@web/test-runner": "^0.13.22",
     "@web/test-runner-chrome": "^0.10.5",
     "identity-obj-proxy": "^3.0.0",
-    "rollup": "^2.48.0",
-    "rollup-plugin-css-only": "^3.1.0",
-    "rollup-plugin-svg": "^2.0.0"
+    "jsdoc": "^3.6.7"
   }
 }

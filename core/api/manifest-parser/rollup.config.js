@@ -21,7 +21,7 @@ export default {
     external: [
         "@pnpm/read-package-json",
         "fp-ts/lib/Either",
-        "fp-ts/lib/pipeable",
+        "fp-ts/function",
         "io-ts/lib/Decoder",
         "path",
         "semver",
