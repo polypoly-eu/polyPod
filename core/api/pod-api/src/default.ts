@@ -105,9 +105,11 @@ export class DefaultPod implements Pod {
             }
 
             readDir(path: string): Promise<Entry[]> {
-                //mock readdir
                 const newFiles = fs.readdir(path).then((files) => {
-                    const objectFiles = files.map((file) => ({ id: file, path: file }));
+                    const objectFiles = files.map((file) => ({
+                        id: path + "/" + file,
+                        path: file,
+                    }));
                     return new Promise<Entry[]>((resolve) => {
                         resolve(objectFiles);
                     });

@@ -17,7 +17,7 @@
     "docs": "typedoc"
   },
   "devDependencies": {
-    "typedoc": "^0.20.36"
+    "typedoc": "^0.22.10"
   },
   "private": true
 }

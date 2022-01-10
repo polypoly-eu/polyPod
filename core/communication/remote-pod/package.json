@@ -49,7 +49,7 @@
     "node-fetch": "^2.6.1",
     "ts-mocha": "^8.0.0",
     "ts-node": "^7.0.1",
-    "typedoc": "^0.20.36"
+    "typedoc": "^0.22.10"
   },
   "private": true
 }

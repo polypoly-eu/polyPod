@@ -18,3 +18,6 @@ node_modules/
 
 # Andoid specific local config
 android/app/local.properties
+
+# Cypress directories
+**/cypress/support

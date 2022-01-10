@@ -40,7 +40,7 @@
     "fast-check": "^2.11.0",
     "memfs": "^3.2.0",
     "node-fetch": "^2.6.1",
-    "typedoc": "^0.20.36"
+    "typedoc": "^0.22.10"
   },
   "peerDependencies": {
     "@polypoly-eu/rdf-spec": "*",

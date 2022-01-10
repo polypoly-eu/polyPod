@@ -31,7 +31,7 @@
     "@types/rdfjs__dataset": "^1.0.4",
     "n3": "^1.8.0",
     "rdf-data-factory": "^1.0.4",
-    "typedoc": "^0.21.5"
+    "typedoc": "^0.22.10"
   },
   "private": true
 }
