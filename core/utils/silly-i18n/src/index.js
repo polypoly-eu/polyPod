@@ -50,9 +50,9 @@ export class TranslationKeyError extends Error {
  * @returns an [[I18n]] object
  */
 export async function createI18n(sections, languages, path) {
-    let i18nData = {};
+    let i18nData = Object.create(null);
     for (const l of languages) {
-        i18nData[l] = {};
+        i18nData[l] = Object.create(null);
     }
     for (const s of sections) {
         for (const l of languages) {
