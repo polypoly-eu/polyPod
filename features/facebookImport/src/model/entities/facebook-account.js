@@ -47,8 +47,6 @@ class FacebookAccount {
         this._importingResults = importingResults;
     }
 
-    /////
-
     get offFacebookCompaniesCount() {
         return this._offFacebookCompanies.length;
     }
@@ -98,7 +96,7 @@ class FacebookAccount {
 
     forEachOffFacebookEvent(callback) {
         for (const offFacebookCompany of this.offFacebookCompanies) {
-            for (const offFacebookEvent of offFacebookCompany?.events) {
+            for (const offFacebookEvent of offFacebookCompany?.events || []) {
                 callback(offFacebookEvent);
             }
         }
