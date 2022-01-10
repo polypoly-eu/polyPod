@@ -1,6 +1,7 @@
 import {
     determineLanguage,
     LanguageError,
+    NonExistingSectionError,
     TranslationKeyError,
     I18n,
 } from "../src/index.js";
@@ -37,6 +38,17 @@ describe("Test basic configuration", () => {
         }
         expect(thrownError).toBeInstanceOf(TranslationKeyError);
         expect(thrownError.message).toEqual(expect.stringMatching(/format/));
+    });
+
+    it("Throws when the namespace does not exist", () => {
+        let thrownError;
+        try {
+            i18n.t("WAT:WOOT");
+        } catch (error) {
+            thrownError = error;
+        }
+        expect(thrownError).toBeInstanceOf(NonExistingSectionError);
+        expect(thrownError.message).toEqual(expect.stringMatching(/section/));
     });
 
     it("Throws when key not found", () => {

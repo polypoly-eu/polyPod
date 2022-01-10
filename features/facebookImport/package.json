@@ -16,21 +16,13 @@
     "@polypoly-eu/pod-api": "file:../../core/api/pod-api",
     "@polypoly-eu/podjs": "file:../../podjs",
     "@polypoly-eu/poly-look": "file:../../core/utils/poly-look",
-    "@rollup/plugin-commonjs": "^20.0.0",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "11.2.0",
-    "@rollup/plugin-replace": "^3.0.0",
-    "@rollup/plugin-sucrase": "^3.1.0",
+    "@polypoly-eu/rollup-plugin-copy-watch": "file:../../core/utils/rollup-plugin-copy-watch",
     "babel-jest": "^27.2.5",
     "identity-obj-proxy": "^3.0.0",
     "jszip": "^3.6.0",
     "memfs": "^3.2.2",
     "node-fetch": "^2.6.1",
-    "rollup": "^2.55.1",
-    "rollup-plugin-copy": "3.3.0",
-    "rollup-plugin-css-only": "^3.1.0",
-    "rollup-plugin-serve": "1.1.0",
-    "rollup-plugin-svg": "^2.0.0"
+    "rollup-plugin-serve": "^1.1.0"
   },
   "private": true,
   "dependencies": {

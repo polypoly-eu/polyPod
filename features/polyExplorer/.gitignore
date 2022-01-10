@@ -3,3 +3,4 @@
 /scripts/convert-polypedia-data.log
 /cypress/screenshots/**/*(failed)*
 /cypress/videos
+/cypress/support

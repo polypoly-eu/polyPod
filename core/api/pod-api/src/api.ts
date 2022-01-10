@@ -102,6 +102,10 @@ export interface PolyIn {
     has(...quads: RDF.Quad[]): Promise<boolean>;
 }
 
+/**
+ * `Entry` is used to store filesystem directory entries in a (roughly)
+ * platform independent way.
+ */
 export interface Entry {
     id: string;
     path: string;
@@ -113,7 +117,7 @@ export interface Entry {
  *
  * Both of these aspects are separated out into their own modules:
  * - [[FS]] for Node.js-style file-system access
- * - [[Fetch]] for DOM-style HTTP requests
+ * - [[Fetch]] for DOM-style HTTP requests (deprecated)
  */
 export interface PolyOut extends Omit<FS, "readdir"> {
     /**
@@ -121,7 +125,12 @@ export interface PolyOut extends Omit<FS, "readdir"> {
      * A standard-compliant implementation of `Fetch`. This feature is deprecated in favor of the [[Network]] interface
      */
     readonly fetch: Fetch;
-    readDir(id: string): Promise<Entry[]>;
+
+    /**
+     * @param pathToDir system-dependent path to read.
+     * @returns a Promise with id-path pairs [[Entry]] as payload.
+     */
+    readDir(pathToDir: string): Promise<Entry[]>;
 }
 
 /**
