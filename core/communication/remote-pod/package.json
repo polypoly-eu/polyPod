@@ -48,8 +48,7 @@
     "electron-mocha": "^11.0.1",
     "node-fetch": "^2.6.1",
     "ts-mocha": "^8.0.0",
-    "ts-node": "^7.0.1",
-    "typedoc": "^0.22.10"
+    "ts-node": "^7.0.1"
   },
   "private": true
 }
