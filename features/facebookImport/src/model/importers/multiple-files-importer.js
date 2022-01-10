@@ -20,7 +20,7 @@ export default class MultipleFilesImporter {
 
     async _extractTargetEntries(zipFile) {
         const entries = await relevantZipEntries(zipFile);
-        return entries.filter((entry) => this._isTargetPostFile(entry._id));
+        return entries.filter((entry) => this._isTargetPostFile(entry.path));
     }
 
     async _readJSONFileWithStatus(targetEntry, zipFile) {
@@ -45,7 +45,7 @@ export default class MultipleFilesImporter {
         );
 
         for (const each of successfullResults) {
-            facebookAccount.addImportedFileName(each.targetEntry._path);
+            facebookAccount.addImportedFileName(each.targetEntry.path);
         }
         const dataResults = successfullResults.map((result) => result.data);
         this._importRawDataResults(facebookAccount, dataResults);

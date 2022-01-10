@@ -41,6 +41,14 @@ export class ZipFileEntry {
         this._path = path;
     }
 
+    get id() {
+        return this._id;
+    }
+
+    get path() {
+        return this._path;
+    }
+
     async stat() {
         const { polyOut } = this._pod;
         return polyOut.stat(this._id);
@@ -81,12 +89,12 @@ export class ZipFile {
         );
     }
 
-    async hasFilePath(entryPath) {
+    async hasEntryPath(entryPath) {
         await this._ensureCachedEntries();
         return this._entriesPathHash.has(entryPath);
     }
 
-    async fileEntryFromPath(entryPath) {
+    async findEntry(entryPath) {
         await this._ensureCachedEntries();
         return this._entriesPathHash.get(entryPath);
     }

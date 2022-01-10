@@ -39,7 +39,7 @@ export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
 
         const relevantEntries = await jsonDataEntities(zipFile);
         const anonymizedPaths = relevantEntries.map((entry) =>
-            anonymizeJsonEntityPath(entry._path)
+            anonymizeJsonEntityPath(entry.path)
         );
         const knownJsonFiles = this._knownJsonFiles();
         this._missingKnownFileNames = knownJsonFiles.filter(

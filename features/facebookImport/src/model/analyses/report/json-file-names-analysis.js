@@ -23,7 +23,7 @@ export default class JSONFileNamesAnalysis extends ReportAnalysis {
 
         const relevantEntries = await jsonDataEntities(zipFile);
         const anonymizedPaths = relevantEntries.map((entry) =>
-            anonymizeJsonEntityPath(entry._path)
+            anonymizeJsonEntityPath(entry.path)
         );
         this._jsonFileNames = [...new Set(anonymizedPaths)];
 

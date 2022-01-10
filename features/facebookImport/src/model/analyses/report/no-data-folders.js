@@ -16,7 +16,7 @@ export default class NoDataFoldersAnalysis extends ReportAnalysis {
     async analyze({ zipFile }) {
         const entries = await relevantZipEntries(zipFile);
         const extractedFolderNames = entries.map((entry) => {
-            const nameParts = entry._path.split("/");
+            const nameParts = entry.path.split("/");
             if (nameParts.length >= 2) {
                 for (const [i, part] of Object.entries(nameParts)) {
                     if (part === noDataFileName) {
