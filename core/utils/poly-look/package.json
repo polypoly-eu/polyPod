@@ -30,7 +30,7 @@
     "@web/dev-server-storybook": "^0.0.2",
     "@web/test-runner": "^0.13.22",
     "@web/test-runner-chrome": "^0.10.5",
-    "identity-obj-proxy": "^3.0.0"
+    "identity-obj-proxy": "^3.0.0",
     "jsdoc": "^3.6.7"
   }
 }
