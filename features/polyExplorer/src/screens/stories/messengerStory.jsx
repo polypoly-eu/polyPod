@@ -202,60 +202,7 @@ const MessengerStory = () => {
                 {i18n.t(`${i18nHeader}:overview.paragraph.one`)}
             </p>
             <p>{i18n.t(`${i18nHeader}:overview.paragraph.two`)}</p>
-            <Tabs>
-                {dataTypes.map((dataType, i) => {
-                    return (
-                        <Tab
-                            id={dataType.id}
-                            label={dataType.label}
-                            translation={dataType.translation}
-                            key={i}
-                        >
-                            <div className="data-types-lengend">
-                                <div
-                                    className="bubble-legend"
-                                    style={{
-                                        backgroundColor:
-                                            dataTypes[0].bubbleColor,
-                                    }}
-                                ></div>
-                                <p>
-                                    {i18n.t(`${i18nHeader}:datatypes.legend`)}
-                                </p>
-                            </div>
-                            {dataType.id !== "by-types" ? (
-                                <MatrixBubblesChart
-                                    data={dataType.data}
-                                    bubbleColor={dataType.bubbleColor}
-                                    textColor={dataType.bubbleTextColor}
-                                    strokeColor={dataType.bubbleStroke}
-                                />
-                            ) : (
-                                <div className="by-types-bubble-chart">
-                                    <PolyChart
-                                        type="bubble-cluster"
-                                        data={dataType.data[0].bubbles}
-                                        width={dataType.data[0].width}
-                                        height={dataType.data[0].height}
-                                        bubbleColor={dataType.bubbleColor}
-                                        textColor={dataType.data[0].bubbles.map(
-                                            (bubble) => {
-                                                selectedDataTypeBubble ===
-                                                bubble.value
-                                                    ? dataType.activeBubbleTextColor
-                                                    : dataType.bubbleTextColor;
-                                            }
-                                        )}
-                                        strokeColor={dataType.bubbleStroke}
-                                        onBubbleClick={handleBubbleClick}
-                                    />
-                                    <h4>{dataType.data[0].title}</h4>
-                                </div>
-                            )}
-                        </Tab>
-                    );
-                })}
-            </Tabs>
+            <Overview entities={Object.values(products)} />
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:details.section`)}
             ></SectionTitle>
