@@ -33,7 +33,7 @@
     "node-fetch": "^2.6.1",
     "rollup": "^2.37.0",
     "ts-node": "^9.1.1",
-    "typedoc": "^0.20.36"
+    "typedoc": "^0.22.10"
   },
   "peerDependencies": {
     "chai": "^4.2.0",
