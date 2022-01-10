@@ -1,5 +1,5 @@
 import typescript from "@rollup/plugin-typescript";
-import copy from "rollup-plugin-copy";
+import copy from "@polypoly-eu/rollup-plugin-copy-watch";
 
 export default {
     input: "src/test.ts",

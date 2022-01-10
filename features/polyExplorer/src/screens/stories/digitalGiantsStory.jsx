@@ -1,87 +1,136 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
-//import { ExplorerContext } from "../../context/explorer-context.jsx";
+import GradientCircleList from "../../components/gradientCircleList/gradientCircleList.jsx";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
-import Tab from "../../components/clusterStories/tab.jsx";
+import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
+import { Tabs, Tab } from "@polypoly-eu/poly-look";
+import { createJurisdictionLinks } from "./story-utils";
+import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
+import EntityList from "../../components/entityList/entityList.jsx";
 
-import "./digitalGiantsStory.css";
-import BulletPoints from "../../components/bulletPoints/bulletPoints.jsx";
+const i18nHeader = "clusterDigitalGiantsStory";
+const i18nHeaderCommon = "clusterStoryCommon";
+const primaryColor = "#f95f5a";
 
-const i18nHeader = "digitalGiantsStory";
+const bigSixNames = [
+    "Amazon",
+    "Apple",
+    "Google",
+    "Facebook",
+    "PayPal",
+    "TikTok",
+];
 
 const DigitalGiantsStory = () => {
-    //const { products } = useContext(ExplorerContext);
+    const { featuredEntities, entityJurisdictionByPpid } =
+        useContext(ExplorerContext);
 
-    const listOfMessengerApps = [
-        "Facebook Messenger",
-        "WhatsApp",
-        "Instagram",
-        "Signal",
-        "Snapchat",
-        "Telegram",
-        "Threema",
-        "TikTok",
-        "iMessage",
-    ];
+    const bigSix = bigSixNames.map((n) =>
+        featuredEntities.find((e) => e.ppid.indexOf(n) !== -1)
+    );
 
-    const summaryBullets = [
-        i18n.t(`${i18nHeader}:summary.bullet.1`),
-        i18n.t(`${i18nHeader}:summary.bullet.2`),
-        i18n.t(`${i18nHeader}:summary.bullet.3`),
-    ];
+    const jurisdictionLinks = createJurisdictionLinks(
+        bigSix,
+        entityJurisdictionByPpid
+    ).map(({ source, target, value }) => ({
+        source: bigSixNames.find((name) => source.indexOf(name) !== -1),
+        target,
+        value,
+    }));
+
+    const otherJurisdictions = [
+        ...new Set(jurisdictionLinks.map(({ target }) => target)),
+    ].filter((j) => j !== "EU-GDPR");
 
     return (
         <ClusterStory
             progressBarColor="black"
-            className="messenger-story"
+            className="digital-giants-story"
+            primaryColor={primaryColor}
             fadingTopBackground={{
-                color: "var(--color-primary-messenger-story)",
                 distance: "600px",
             }}
         >
-            <div className="messenger-intro-background"></div>
-            <h1 className="story-title">{i18n.t(`${i18nHeader}:title`)}</h1>
+            <h1 className="cluster-story-main-title">
+                {i18n.t(`${i18nHeader}:title`)}
+            </h1>
             <p className="big-first-letter">
-                {i18n.t(`${i18nHeader}:intro.paragraph.one`)}
+                {i18n.t(`${i18nHeader}:intro.p.1`)}
             </p>
             <img
-                className="story-intro-img"
-                src="images/stories/messenger/intro-guy.svg"
+                className="cluster-story-img"
+                src="images/stories/digital-giants/intro.svg"
                 alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
             />
-            <p>{i18n.t(`${i18nHeader}:intro.paragraph.two`)}</p>
-            <ul className="messenger-list">
-                {listOfMessengerApps.map((messenger, index) => (
-                    <li key={index} className="messenger-el">
-                        {messenger}
-                    </li>
-                ))}
-            </ul>
-            <h1 className="title-messenger-story">
-                {i18n.t(`${i18nHeader}:summary.title`)}
-            </h1>
+            <GradientCircleList
+                introText={i18n.t(`${i18nHeader}:intro.p.2`)}
+                list={bigSixNames}
+                color={primaryColor}
+            />
+            <h2 className="cluster-story-title">
+                {i18n.t(`${i18nHeaderCommon}:what.we.found`)}
+            </h2>
             <SectionTitle
-                title={i18n.t(`${i18nHeader}:summary.section`)}
-            ></SectionTitle>
-            <p className="introduction-summary">
-                {i18n.t(`${i18nHeader}:summary.paragraph.one`)}
+                title={i18n.t(`${i18nHeaderCommon}:section.dataTypes`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:data.types.p`)}
             </p>
-            <BulletPoints bullets={summaryBullets} />
+            <Tabs>
+                <Tab id="by-companies" label="By Companies">
+                    <div style={{ width: "100%", height: "200px" }}></div>
+                </Tab>
+                <Tab id="by-shares" label="By Shares">
+                    <div style={{ width: "100%", height: "200px" }}></div>
+                </Tab>
+                <Tab id="by-types" label="By Types">
+                    <div style={{ width: "100%", height: "200px" }}></div>
+                </Tab>
+            </Tabs>
             <SectionTitle
-                title={i18n.t(`${i18nHeader}:overview.section`)}
-            ></SectionTitle>
-            <p>{i18n.t(`${i18nHeader}:overview.paragraph.one`)}</p>
-            <Tab>
-                <div
-                    label={i18n.t(`${i18nHeader}:overview.tab.installs`)}
-                ></div>
-                <div label={i18n.t(`${i18nHeader}:overview.tab.users`)}></div>
-                <div label={i18n.t(`${i18nHeader}:overview.tab.partof`)}></div>
-            </Tab>
-            <div className="chart-container"></div>
-            <p>{i18n.t(`${i18nHeader}:overview.paragraph.two`)}</p>
+                title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
+            </p>
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:companies.p.1`)}
+            </p>
+            <p>{i18n.t(`${i18nHeader}:companies.p.2`)}</p>
+            <ReceivingCompanies entities={bigSix} />
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.dataRegions`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:data.regions.p.1`)}
+            </p>
+            <EmbeddedSankey
+                links={jurisdictionLinks}
+                groups={{
+                    source: {
+                        label: "Messengers",
+                        all: true,
+                    },
+                    target: {
+                        label: "Regions",
+                        all: false,
+                        others: otherJurisdictions,
+                    },
+                }}
+            />
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:explore.further.p.1`)}
+            </p>
+            <EntityList entities={bigSix} expand={true} />
         </ClusterStory>
     );
 };

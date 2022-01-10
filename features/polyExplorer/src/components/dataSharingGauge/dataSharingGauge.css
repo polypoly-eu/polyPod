@@ -92,7 +92,7 @@
 .data-sharing-gauge-average-label {
     position: absolute;
     top: 12px;
-    right: calc(-40px - 1px);
+    right: calc(-65px - 1px);
     width: 100px;
     opacity: 0.7;
     text-align: center;

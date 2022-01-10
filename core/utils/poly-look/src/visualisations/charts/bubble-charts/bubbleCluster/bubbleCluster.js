@@ -9,9 +9,11 @@ const bubblePadding = 3;
 const bigBubblesFont = "20px";
 const mediumBubblesFont = "16px";
 const defaultBubbleColor = "blue";
+const defaultStrokeColor = "#f7fafc";
 const defaultTextColor = "white";
 const defaultOpacity = 1;
-const defaultValueShowing = true;
+const defaultText = (d) =>
+  d.r > smallBubblesRadius ? Math.round(d.value) : "";
 const defaultOnClickFunction = () => {};
 
 /**
@@ -28,13 +30,15 @@ const defaultOnClickFunction = () => {};
  * @param {string} data[].title - The title/name the bubble has
  * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
  * @param {number} data[].icon - A svg that should be displayed as the bubble in string form as you would get it from rollup-svg-plugin (eg. "<svg>...</svg>")
- * @param {number = 400} width - The width of the svg
- * @param {number = 300} height - The height of the svg
- * @param {string|callback = "blue"} [bubbleColor] - The color of the bubble (callbacks receive event and data)
- * @param {string|callback = "white"} [textColor] - The color of the bubble text (callbacks receive event and data)
- * @param {number|callback = 1} [opacity] - The opacity of the bubbles color 0 <= opacity <= 1 (callbacks receive event and data)
- * @param {boolean = true} [showValues] - Whether texts displaying the value of the bubble are added
- * @param {callback = () => {}} [onBubbleClick] - Bubble onclick function
+ * @param {Object[]} data[].children - Data for nested bubbles - only one level of nesting is currently supported, i.e. no grandchildren.
+ * @param {number} [width  = 400] - The width of the svg
+ * @param {number} [height = 300] - The height of the svg
+ * @param {string|callback} [bubbleColor  = "blue" ] - The color of the bubble (callbacks receive event and data)
+ * @param {string|callback} [strokeColor  = "#f7fafc" ] - The color of the bubble outline (callbacks receive event and data)
+ * @param {string|callback} [textColor  = "white" ] - The color of the bubble text (callbacks receive event and data)
+ * @param {number|callback} [opacity  = 1] - The opacity of the bubbles color 0 <= opacity <= 1 (callbacks receive event and data)
+ * @param {string|callback} [text] - The text rendered on top of each bubble, by default its value (callbacks receive event and data)
+ * @param {callback} [onBubbleClick = () => {} ] - Bubble onclick function
  * @param {Object} [filter] - A filter that is applied to the elements
  * @param {SVG-Filter-Element} [filter.filterElement] - The svg filter element created (https://developer.mozilla.org/en-US/docs/Web/SVG/Element#filter_primitive_elements)
  * @param {string} [filter.type] - Filter type has different meanings depending on the context it's used in (https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/type)
@@ -49,17 +53,19 @@ export class BubbleCluster extends Chart {
     width,
     height,
     bubbleColor = defaultBubbleColor,
+    strokeColor = defaultStrokeColor,
     textColor = defaultTextColor,
     opacity = defaultOpacity,
-    showValues = defaultValueShowing,
+    text = defaultText,
     onBubbleClick = defaultOnClickFunction,
     filter,
   }) {
     super({ selector, data, width, height });
     this._bubbleColor = bubbleColor;
+    this._strokeColor = strokeColor;
     this._textColor = textColor;
     this._opacity = opacity;
-    this._showValues = showValues;
+    this._text = text;
     this._onBubbleClick = onBubbleClick;
     this._bubblePadding = bubblePadding;
     this._filter = filter;
@@ -96,8 +102,8 @@ export class BubbleCluster extends Chart {
         .attr("values", filter.values);
   }
 
-  _addNewBubbleGroups(leaves) {
-    return leaves
+  _addNewBubbleGroups(nodes) {
+    return nodes
       .enter()
       .append("g")
       .attr("transform", (d) =>
@@ -109,15 +115,15 @@ export class BubbleCluster extends Chart {
       .style("-webkit-tap-highlight-color", "transparent");
   }
 
-  _updateBubbles(leaves) {
-    leaves
+  _updateBubbles(nodes) {
+    nodes
       .selectAll(".bubble")
       .style("fill", this._bubbleColor)
-      .style("stroke", "#f7fafc")
+      .style("stroke", this._strokeColor)
       .style("vertical-align", "center")
       .attr("filter", this._filterActivationCondition);
 
-    leaves
+    nodes
       .selectAll(".icon")
       .attr("height", (d) => d.r * 2)
       .attr("width", (d) => d.r * 2)
@@ -140,7 +146,7 @@ export class BubbleCluster extends Chart {
       .attr("class", "bubble")
       .attr("r", (d) => d.r)
       .style("fill", this._bubbleColor)
-      .style("stroke", "#f7fafc")
+      .style("stroke", this._strokeColor)
       .style("vertical-align", "center")
       .attr("fill-opacity", this._opacity);
   }
@@ -148,10 +154,8 @@ export class BubbleCluster extends Chart {
   _addTextToBubbleGroup(newBubbleGroups) {
     newBubbleGroups
       .append("text")
-      .attr("class", "bubble-value")
-      .text((d) => {
-        return d.r > smallBubblesRadius ? Math.round(d.value) : "";
-      })
+      .attr("class", "bubble-text")
+      .text(this._text)
       .attr("text-anchor", "middle")
       .attr("y", ".3em")
       .attr("fill", this._textColor)
@@ -166,12 +170,10 @@ export class BubbleCluster extends Chart {
       );
   }
 
-  _updateBubbleValueTexts(leaves) {
-    leaves
-      .selectAll(".bubble-value")
-      .text((d) => {
-        return d.r > smallBubblesRadius ? Math.round(d.value) : "";
-      })
+  _updateBubbleTexts(nodes) {
+    nodes
+      .selectAll(".bubble-text")
+      .text(this._text)
       .attr("fill", this._textColor)
       .style("font-size", (d) => {
         return d.r > bigBubblesRadius ? bigBubblesFont : mediumBubblesFont;
@@ -183,15 +185,24 @@ export class BubbleCluster extends Chart {
     const packLayout = this._pack();
     const root = packLayout(hierarchicalData);
     this._setUpFilters();
-    const leaves = this.chart.selectAll("g").data(root.leaves());
-    leaves.exit().remove();
-    this._updateBubbles(leaves);
-    const newBubbleGroups = this._addNewBubbleGroups(leaves);
+    const nodes = this.chart
+      .selectAll("g")
+      .data(root.descendants().filter(({ parent }) => !!parent));
+    nodes.exit().remove();
+    this._updateBubbles(nodes);
+    const newBubbleGroups = this._addNewBubbleGroups(nodes);
     this._addBubbles(newBubbleGroups);
 
-    if (this._showValues) {
+    if (this._text) {
       this._addTextToBubbleGroup(newBubbleGroups);
-      this._updateBubbleValueTexts(leaves);
+      this._updateBubbleTexts(nodes);
+
+      // Bit of a hack to ensure that the texts of bubbles with children are
+      // rendered on top of those children. As a consequence of this, bubbles
+      // that have both a solid color fill and children will hide their
+      // children. If we were to render all texts on top of all bubbles, we
+      // could avoid this problem.
+      newBubbleGroups.filter((d) => d.children).raise();
     }
   }
 }

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
-import { PolyChart } from "@polypoly-eu/poly-look";
+import { ChipGroup, PolyChart } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
 
 import "./dataStructureMiniStory.css";
-import ChartButtons from "../chartButtons/chartButtons.jsx";
 
 const DataStructureMiniStory = ({ data }) => {
     data.forEach((d) => {
@@ -84,12 +83,13 @@ const DataStructureMiniStory = ({ data }) => {
                     onBubbleClick={handleBubbleClick}
                 />
             </div>
-            <ChartButtons
-                buttonsContent={dataWithTotal.map((d) => {
+            <ChipGroup
+                chipsContent={dataWithTotal.map((d) => {
                     return { id: d.title };
                 })}
-                activeButton={selectedFolder}
-                onButtonsClick={handleFolderSelected}
+                defaultActiveChips={[selectedFolder]}
+                onChipClick={handleFolderSelected}
+                theme={"dark"}
             />
             <InfoButton route="/report/data-structure-info" />
             <p className="source data-structure-source">

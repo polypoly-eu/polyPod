@@ -2,9 +2,9 @@ import UIKit
 import CoreData
 
 extension PolyIn {
-    func deleteQuads(quads: [ExtendedData], completionHandler: (Bool) -> Void) -> Void {
+    func deleteQuads(quads: [ExtendedData], completionHandler: (Error?) -> Void) -> Void {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            completionHandler(false)
+            completionHandler(PodApiError.noAppDelegate)
             return
         }
         
@@ -25,9 +25,9 @@ extension PolyIn {
                     managedContext.delete(quad)
                 }
             } catch {
-                completionHandler(false)
+                completionHandler(error)
             }
         }
-        completionHandler(true)
+        completionHandler(nil)
     }    
 }

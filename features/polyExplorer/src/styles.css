@@ -5,8 +5,6 @@
     --color-medium: #a9b6c6;
     --color-semi-light: #edf2f7;
     --color-light: #f7fafc;
-    --color-primary-messenger-story: rgba(59, 166, 255, 1);
-    --color-secondary-messenger-story: rgba(59, 166, 255, 0);
 
     /* Buttons colors */
     --color-button-dark-grey: #3e495b;
@@ -46,6 +44,11 @@
     src: url("../fonts/jost_medium.ttf");
 }
 
+@font-face {
+    font-family: "Jost Bold";
+    src: url("../fonts/jost_bold.ttf");
+}
+
 * {
     font-family: "Jost";
     font-weight: 400;
@@ -82,5 +85,5 @@ a {
 }
 
 strong {
-    font-weight: 600;
+    font-family: "Jost Bold";
 }

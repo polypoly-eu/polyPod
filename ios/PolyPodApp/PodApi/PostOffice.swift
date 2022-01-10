@@ -1,6 +1,14 @@
 import UIKit
 import MessagePack
 
+private func createErrorResponse(_ origin: String, _ message: String) -> MessagePackValue {
+    return MessagePackValue("\(origin): \(message)")
+}
+
+private func createErrorResponse(_ origin: String, _ error: Error) -> MessagePackValue {
+    return createErrorResponse(origin, error.localizedDescription)
+}
+
 class PostOffice {
     static let shared = PostOffice()
     
@@ -100,23 +108,22 @@ extension PostOffice {
         }
     }
 
-    private func convertArgs(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) -> [ExtendedData] {
+    private func convertArgs(args: [Any]) throws -> [ExtendedData] {
         var extendedDataSet: [ExtendedData] = []
         
         for arg in args {
             guard let extendedData = arg as? ExtendedData else {
-                let message = """
+                Log.error("""
                     Bad argument data: \(arg)
                     \(Thread.callStackSymbols.joined(separator: "\n"))
-                """
-                Log.error(message)
-                completionHandler(nil, MessagePackValue(message))
-                return extendedDataSet
+                """)
+                throw PodApiError.badArgumentData(arg)
             }
             
-            guard let graph = extendedData.properties["graph"] as? ExtendedData, graph.classname == "@polypoly-eu/rdf.DefaultGraph" else {
-                completionHandler(nil, MessagePackValue("/default/"))
-                return extendedDataSet
+            let graph = extendedData.properties["graph"] as? ExtendedData
+            let graphType = graph?.classname
+            if (graphType != "@polypoly-eu/rdf.DefaultGraph") {
+                throw PodApiError.failedToReadGraph(graphType ?? "<missing>")
             }
             
             extendedDataSet.append(extendedData)
@@ -125,30 +132,36 @@ extension PostOffice {
     }
     
     private func handlePolyInAdd(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        let extendedDataSet = convertArgs(args: args, completionHandler: completionHandler)
+        let extendedDataSet: [ExtendedData]
+        do {
+            extendedDataSet = try convertArgs(args: args)
+        } catch {
+            completionHandler(nil, createErrorResponse(#function, error))
+            return
+        }
 
-        PodApi.shared.polyIn.addQuads(quads: extendedDataSet) { didSave in
-            if didSave {
-                completionHandler(MessagePackValue(), nil)
-            } else {
-                completionHandler(nil, MessagePackValue("Failed"))
+        PodApi.shared.polyIn.addQuads(quads: extendedDataSet) { error in
+            if let error = error {
+                completionHandler(nil, createErrorResponse(#function, error))
+                return
             }
+            completionHandler(MessagePackValue(), nil)
         }
     }
     
     private func handlePolyInSelect(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         guard let extendedData = extractMatcher(args[0]) else {
-            completionHandler(nil, MessagePackValue("Bad data"))
+            completionHandler(nil, createErrorResponse(#function, PodApiError.badData(args[0])))
             return
         }
         PodApi.shared.polyIn.selectQuads(matcher: extendedData) { quads, error in
             if let error = error {
-                completionHandler(nil, MessagePackValue(error.localizedDescription))
+                completionHandler(nil, createErrorResponse(#function, error))
                 return
             }
             
             guard let quads = quads else {
-                completionHandler(nil, MessagePackValue(PodApiError.unknown.localizedDescription))
+                completionHandler(nil, createErrorResponse(#function, PodApiError.unknown))
                 return
             }
             
@@ -162,25 +175,39 @@ extension PostOffice {
     }
     
     private func handlePolyInDelete(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        let extendedDataSet = convertArgs(args: args, completionHandler: completionHandler)
+        let extendedDataSet: [ExtendedData]
+        do {
+            extendedDataSet = try convertArgs(args: args)
+        } catch {
+            completionHandler(nil, createErrorResponse(#function, error))
+            return
+        }
         
-        PodApi.shared.polyIn.deleteQuads(quads: extendedDataSet) { didDelete in
-            if didDelete {
-                completionHandler(MessagePackValue(), nil)
-            } else {
-                completionHandler(nil, MessagePackValue("Failed"))
+        PodApi.shared.polyIn.deleteQuads(quads: extendedDataSet) { error in
+            if let error = error {
+                completionHandler(nil, createErrorResponse(#function, error))
+                return
             }
+            completionHandler(MessagePackValue(), nil)
         }
     }
     
     private func handlePolyInHas(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        let extendedDataSet = convertArgs(args: args, completionHandler: completionHandler)
+        let extendedDataSet: [ExtendedData]
+        do {
+            extendedDataSet = try convertArgs(args: args)
+        } catch {
+            completionHandler(nil, createErrorResponse(#function, error))
+            return
+        }
         
         PodApi.shared.polyIn.hasQuads(quads: extendedDataSet) { doesHave in
             if doesHave {
                 completionHandler(MessagePackValue(), true)
             } else {
-                completionHandler(false, MessagePackValue("Failed"))
+                // TODO: This needs a closer look - should we really fail if the
+                //       data we check for is not there?
+                completionHandler(false, createErrorResponse(#function, "Not there"))
             }
         }
     }
@@ -212,7 +239,7 @@ extension PostOffice {
             handlePolyOutReadFile(args: args, completionHandler: completionHandler)
         case "writeFile":
             handlePolyOutWriteFile(args: args, completionHandler: completionHandler)
-        case "readdir":
+        case "readDir":
             handlePolyOutReadDir(args: args, completionHandler: completionHandler)
         case "importArchive":
             handlePolyOutImportArchive(args: args, completionHandler: completionHandler)
@@ -231,11 +258,11 @@ extension PostOffice {
         
         PodApi.shared.polyOut.fetch(urlString: url, requestInit: fetchRequestInit) { fetchResponse, error in
             if let error = error {
-                completionHandler(nil, MessagePackValue(error.localizedDescription))
+                completionHandler(nil, createErrorResponse(#function, error))
                 return
             }
             guard let fetchResponse = fetchResponse else {
-                completionHandler(nil, MessagePackValue(PodApiError.unknown.localizedDescription))
+                completionHandler(nil, createErrorResponse(#function, PodApiError.unknown))
                 return
             }
             
@@ -252,11 +279,11 @@ extension PostOffice {
         
         PodApi.shared.polyOut.stat(url: path) { fileStats, error in
             if let error = error {
-                completionHandler(nil, MessagePackValue(error.localizedDescription))
+                completionHandler(nil, createErrorResponse(#function, error))
                 return
             }
             guard let fileStats = fileStats else {
-                completionHandler(nil, MessagePackValue(PodApiError.unknown.localizedDescription))
+                completionHandler(nil, createErrorResponse(#function, PodApiError.unknown))
                 return
             }
             let object = fileStats.messagePackObject
@@ -276,7 +303,7 @@ extension PostOffice {
         }
         PodApi.shared.polyOut.fileRead(url: path, options: options) { data, error in
             if let error = error {
-                completionHandler(nil, MessagePackValue(error.localizedDescription))
+                completionHandler(nil, createErrorResponse(#function, error))
                 return
             }
             if let asString = data as? String {
@@ -287,7 +314,7 @@ extension PostOffice {
                 completionHandler(.binary(asBinary), nil)
                 return
             }
-            completionHandler(nil, MessagePackValue(PodApiError.unknown.localizedDescription))
+            completionHandler(nil, createErrorResponse(#function, PodApiError.unknown))
         }
     }
     
@@ -297,7 +324,7 @@ extension PostOffice {
         
         PodApi.shared.polyOut.fileWrite(url: path, data: data) { error in
             if let error = error {
-                completionHandler(nil, MessagePackValue(error.localizedDescription))
+                completionHandler(nil, createErrorResponse(#function, error))
             } else {
                 completionHandler(MessagePackValue(), nil)
             }
@@ -307,13 +334,17 @@ extension PostOffice {
     private func handlePolyOutReadDir(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let path = args[0] as! String
         
-        PodApi.shared.polyOut.readdir(url: path) { fileList, error in
+        PodApi.shared.polyOut.readDir(url: path) { fileList, error in
             if let error = error {
-                completionHandler(nil, MessagePackValue(error.localizedDescription))
+                completionHandler(nil, createErrorResponse(#function, error))
             } else {
                 var encodedList: [MessagePackValue] = [];
                 for file in fileList ?? [] {
-                    encodedList.append(MessagePackValue(file));
+                    var entry = [MessagePackValue: MessagePackValue]()
+                    ["id", "path"].forEach { key in
+                        entry[.string(key)] = .string(file[key] ?? "")
+                    }
+                    encodedList.append(MessagePackValue.map(entry))
                 }
                 completionHandler(MessagePackValue(encodedList), nil)
             }
