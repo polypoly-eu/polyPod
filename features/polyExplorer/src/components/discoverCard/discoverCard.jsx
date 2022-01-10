@@ -9,10 +9,7 @@ const i18nP = new I18nSection(i18n, "clusterStoriesPreview");
 const DiscoverCard = ({ story }) => {
     return (
         <div className="discover-container">
-            <img
-                src={story.img.src}
-                alt={i18nP.t(story.img.alt)}
-            />
+            <img src={story.img.src} alt={i18nP.t(story.img.alt)} />
             <h3>{i18nP.t(story.title)}</h3>
             <p>{i18nP.t(story.previewText)}</p>
             <LinkButton route={story.route} className="discover-button">
