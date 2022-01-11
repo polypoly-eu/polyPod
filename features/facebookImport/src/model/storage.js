@@ -33,12 +33,39 @@ export default class Storage {
     }
 }
 
+export class ZipFileEntry {
+    constructor(pod, zipFile, id, path) {
+        this._pod = pod;
+        this._zipFile = zipFile;
+        this._id = id;
+        this._path = path;
+    }
+
+    get id() {
+        return this._id;
+    }
+
+    get path() {
+        return this._path;
+    }
+
+    async stat() {
+        const { polyOut } = this._pod;
+        return polyOut.stat(this._id);
+    }
+
+    async getContent() {
+        const { polyOut } = this._pod;
+        return polyOut.readFile(this._id);
+    }
+}
+
 export class ZipFile {
     constructor(file, pod) {
         this._pod = pod;
         this._file = file;
 
-        this._entriesSet = null;
+        this._entriesPathHash = null;
     }
 
     get id() {
@@ -51,34 +78,30 @@ export class ZipFile {
     }
 
     async _ensureCachedEntries() {
-        if (this._entriesSet !== null) return;
+        if (this._entriesPathHash !== null) return;
         const entriesList = await this._readEntriesList();
-        const entriesIdList = entriesList.map((entry) => entry.id);
-        this._entriesSet = new Set(entriesIdList);
+        this._entriesPathHash = new Map();
+        entriesList.forEach((entry) =>
+            this._entriesPathHash.set(
+                entry.path,
+                new ZipFileEntry(this._pod, this, entry.id, entry.path)
+            )
+        );
+    }
+
+    async hasEntryPath(entryPath) {
+        await this._ensureCachedEntries();
+        return this._entriesPathHash.has(entryPath);
+    }
+
+    async findEntry(entryPath) {
+        await this._ensureCachedEntries();
+        return this._entriesPathHash.get(entryPath);
     }
 
     async getEntries() {
         await this._ensureCachedEntries();
-        return [...this._entriesSet];
-    }
-
-    async hasEntry(entryId) {
-        await this._ensureCachedEntries();
-        return this._entriesSet.has(entryId);
-    }
-
-    async data() {
-        return this.getContent(this.id);
-    }
-
-    async stat(entry) {
-        const { polyOut } = this._pod;
-        return polyOut.stat(entry);
-    }
-
-    async getContent(entry) {
-        const { polyOut } = this._pod;
-        return polyOut.readFile(entry);
+        return [...this._entriesPathHash.values()];
     }
 }
 
