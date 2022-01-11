@@ -1,4 +1,4 @@
-import { createI18n, I18n } from "../src/index.js";
+import { importI18n, createI18n, I18n } from "../src/index.js";
 
 import path from "path";
 
@@ -6,7 +6,7 @@ let i18n;
 
 beforeAll(async () => {
     const thisPath = path.resolve("./test/test-data");
-    i18n = await createI18n(["numbers"], ["en", "de", "es"], thisPath);
+    i18n = await importI18n(["numbers"], ["en", "de", "es"], thisPath);
 });
 
 describe("Loads sections", () => {
