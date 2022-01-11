@@ -36,29 +36,36 @@ export class TreeMap extends Chart {
     return Math.abs(x - y);
   }
 
-  _drawJurisdictionTree = () => {
-    const root = d3
+  _makeHierarchy() {
+    return d3
       .hierarchy(this.data)
       .sum((d) => d.value)
       .sort((a, b) => b.value - a.value);
+  }
 
-    const treemapRoot = d3
-      .treemap()
-      .size([this.width, this.height])
-      .padding(this._padding)(root);
+  _addTreeMapRoot(root) {
+    return d3.treemap().size([this.width, this.height]).padding(this._padding)(
+      root
+    );
+  }
 
-    const nodes = this.chart
+  _addNodes(treemapRoot) {
+    return this.chart
       .selectAll("g")
       .data(treemapRoot.leaves())
       .join("g")
       .attr("transform", (d) => `translate(${d.x0},${d.y0})`);
+  }
 
+  _addRects(nodes) {
     nodes
       .append("rect")
       .attr("width", (d) => d.x1 - d.x0, 3)
       .attr("height", (d) => d.y1 - d.y0, 3)
       .attr("fill", this._color);
+  }
 
+  _addAndWrapTexts(nodes) {
     const texts = nodes
       .append("text")
       .text((d) => `${d.data.name}:\n${d.data.value}`)
@@ -76,10 +83,18 @@ export class TreeMap extends Chart {
         text.text(onUnfittingText || "");
     });
 
-    texts.call(this._wrap);
+    texts.call(this._wrapText);
+  }
+
+  _drawJurisdictionTree = () => {
+    const root = this._makeHierarchy();
+    const treemapRoot = this._addTreeMapRoot(root);
+    const nodes = this._addNodes(treemapRoot);
+    this._addRects(nodes);
+    this._addAndWrapTexts(nodes);
   };
 
-  _wrap(text) {
+  _wrapText(text) {
     text.each(function () {
       let text = d3.select(this),
         rectWidth = +text.attr("data-width"),
