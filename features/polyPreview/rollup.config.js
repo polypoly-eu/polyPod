@@ -28,6 +28,10 @@ export default {
                     dest: "dist",
                 },
                 {
+                    src: ["src/locales/*"],
+                    dest: "dist/locales",
+                },
+                {
                     src: ["src/static/fonts/*"],
                     dest: "dist/fonts",
                 },
