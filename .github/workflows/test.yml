@@ -10,9 +10,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
+            - uses: actions/setup-node@v2
               with:
-                  node-version: 16.8
+                  node-version: 16
+                  cache: "npm"
+                  cache-dependency-path: "**/package-lock.json"
             - name: Checks paths to rebuild Android
               uses: dorny/paths-filter@b2feaf19c27470162a626bd6fa8438ae5b263721 #v2.10.2
               id: changes

@@ -24,7 +24,7 @@ export default class OffFacebookEventsImporter extends DirectKeyDataImporter {
         let uknonwnKeys = new Set();
         // TODO: expand this check; The current one is just a toy example
         for (const companyRawData of rawData) {
-            for (const eventRawData of companyRawData?.events) {
+            for (const eventRawData of companyRawData.events) {
                 const unexpectedKeys = Object.keys(eventRawData).filter(
                     (each) => !OffFacebookEventFields.includes(each)
                 );
