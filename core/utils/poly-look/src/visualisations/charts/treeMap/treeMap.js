@@ -86,13 +86,13 @@ export class TreeMap extends Chart {
     texts.call(this._wrapText);
   }
 
-  _drawJurisdictionTree = () => {
+  _drawJurisdictionTree() {
     const root = this._makeHierarchy();
     const treemapRoot = this._addTreeMapRoot(root);
     const nodes = this._addNodes(treemapRoot);
     this._addRects(nodes);
     this._addAndWrapTexts(nodes);
-  };
+  }
 
   _wrapText(text) {
     text.each(function () {
