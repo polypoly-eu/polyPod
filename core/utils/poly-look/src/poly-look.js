@@ -7,16 +7,19 @@ import {
   VerticalBarChart,
   MirroredBarChart,
   SankeyDiagram,
+  TreeMap,
 } from "./visualisations/charts";
 import { PolyChart } from "./visualisations/wrappers/react/polyChart.jsx";
-import { Tab, Tabs, ChipGroup } from "./react";
+import { Tab, Tabs, ChipGroup, BlockLegend } from "./react";
 export {
   BubbleCluster,
   VerticalBarChart,
   MirroredBarChart,
   SankeyDiagram,
+  TreeMap,
   PolyChart,
   ChipGroup,
   Tab,
   Tabs,
+  BlockLegend,
 };
