@@ -25,11 +25,11 @@ const gridXMargin = 12;
  * @param {Object[]} data - The data to be visualized as a bar chart
  * @param {string} data[].title - The title/name of the bar
  * @param {number} data[].value - The value of the bar, which corresponds to it's height
- * @param {number} [width  = 400 ] - The width of the svg
- * @param {number} [height  = 200 ] - The height of the svg
+ * @param {number} [width = 400] - The width of the svg
+ * @param {number} [height = 200] - The height of the svg
  * @param {string|callback} [barColor = "blue"] - The color of the bar (callbacks receive event and data)
- * @param {string} [barValueColor  = null ] - The color the values are shown in (default = no values shown)
- * @param {number} [numberTicksY  = 4] - Number of Ticks on the y-axis (will deviate by 1 if the values wouldn't make a nice scale otherwise)
+ * @param {string} [barValueColor = null] - The color the values are shown in (default = no values shown)
+ * @param {number} [numberTicksY = 4] - Number of Ticks on the y-axis (will deviate by 1 if the values wouldn't make a nice scale otherwise)
  */
 export class VerticalBarChart extends Chart {
   constructor({
