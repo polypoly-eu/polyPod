@@ -1,5 +1,3 @@
-import { treemap } from "d3";
-
 export function countOccurences(array) {
     const occurences = {};
     for (let element of array)
