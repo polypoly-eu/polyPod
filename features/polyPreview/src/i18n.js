@@ -1,4 +1,3 @@
 import { createI18n } from "@polypoly-eu/silly-i18n";
-let i18n;
-createI18n(["common"], ["en", "de"], "./locales").then( (data) => {console.log(data); i18n=data });
+const {i18n } = await createI18n(["common"], ["en", "de"], "./locales");
 export default i18n;
