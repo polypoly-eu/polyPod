@@ -1,6 +1,5 @@
 import SwiperCore from "swiper/core";
 import i18n from "./i18n.js";
-console.log(i18n);
 import "swiper/swiper-bundle.css";
 import "./styles.css";
 

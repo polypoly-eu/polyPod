@@ -67,7 +67,7 @@ export class TranslationKeyError extends Error {
  * @returns an [[I18n]] promise
  */
 export async function createI18n(sections, languages, path) {
-    let i18nData= Object.create(null);
+    let i18nData = Object.create(null);
     for (const l of languages) {
         i18nData[l] = Object.create(null);
     }

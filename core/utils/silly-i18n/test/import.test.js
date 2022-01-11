@@ -2,7 +2,7 @@ import { createI18n, I18n } from "../src/index.js";
 
 import path from "path";
 
-let i18n, syncI18n;
+let i18n;
 
 beforeAll(async () => {
     const thisPath = path.resolve("./test/test-data");
