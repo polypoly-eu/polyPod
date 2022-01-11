@@ -116,6 +116,14 @@ export class I18n {
     }
 
     /**
+     * Know which sections are present in the original hash
+     * @returns The translated string.
+     */
+    sections() {
+        return Object.keys( this._translations );
+    }
+
+    /**
      * Obtains the (translated) string for a `namespace:key` defined in the translations hash.
      *
      * @param {string} key - the translation key in the `namespace:key` format
