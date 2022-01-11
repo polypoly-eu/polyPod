@@ -167,7 +167,7 @@ const npm = async (...args) => {
     );
     const elapsed = new Date() - start;
     const realCommand = args[args.length - 1];
-    logDetail(` ${ANSIFont2("npm " + realCommand)} finished in ${elapsed} ms`);
+    logDetail(` ${ANSIInvert("npm " + realCommand)} finished in ${elapsed} ms`);
 };
 
 async function npmInstall(name) {
@@ -258,7 +258,7 @@ function ANSIBold(string) {
     return `\x1b[1m${string}\x1b[0m`;
 }
 
-function ANSIFont2(string) {
+function ANSIInvert(string) {
     return `\x1b[7m${string}\x1b[27m`;
 }
 
