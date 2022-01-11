@@ -66,7 +66,7 @@ export class TranslationKeyError extends Error {
  * @param path - Full path to import
  * @returns an [[I18n]] promise
  */
-export async function importI18n(sections, languages, path) {
+export async function createI18n(sections, languages, path) {
     let i18nData= Object.create(null);
     for (const l of languages) {
         i18nData[l] = Object.create(null);
@@ -78,19 +78,6 @@ export async function importI18n(sections, languages, path) {
         }
     }
     return new I18n(determineLanguage(), i18nData);
-}
-
-/**
- * Generates an object by slurping all JSON files
- * @param sections - All different sections
- * @param languages - Sections will come in these two different flavors
- * @param path - Full path to import
- * @returns an [[I18n]] object
- */
- export function createI18n(sections, languages, path) {
-    let i18nData;
-    importI18n( sections, languages).then( (data) => i18nData = data );
-    return i18nData;
 }
 
 /**
