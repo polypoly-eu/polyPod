@@ -33,7 +33,7 @@ android {
         minSdkVersion 24 // as long as we use the system WebView, going lower would mean a lot of limitations for feature developers
         targetSdkVersion 30
         versionCode polyEpoch()
-        versionName "1.4.0"
+        versionName "1.4.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
