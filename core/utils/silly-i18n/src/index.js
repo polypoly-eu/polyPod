@@ -111,6 +111,7 @@ export class I18n {
                     " is not a key in the translations hash provided"
             );
         }
+
         this.language = language in translations ? language : fallbackLanguage;
         this._translations = translations[this.language];
     }
@@ -174,6 +175,11 @@ export class I18nSection extends I18n {
      */
     constructor(i18n, section) {
         super(i18n.language, { [i18n.language]: i18n._translations });
+        if ( ! super.sections().includes( section) ) {
+            throw new NonExistingSectionError(
+                `${section} is not included in translation data, only  ${super.sections()} are`
+            );
+        }
         this._section = section;
         Object.freeze(this);
     }
