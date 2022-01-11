@@ -5,10 +5,12 @@ import {
   MirroredBarChart,
   BubbleCluster,
   SankeyDiagram,
+  HorizontalBarChart,
 } from "../../charts";
 
 const charts = {
   "vertical-bar-chart": VerticalBarChart,
+  "horizontal-bar-chart": HorizontalBarChart,
   "mirrored-bar-chart": MirroredBarChart,
   "bubble-cluster": BubbleCluster,
   "sankey-diagram": SankeyDiagram,

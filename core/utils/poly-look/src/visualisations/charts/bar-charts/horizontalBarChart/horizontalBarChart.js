@@ -62,24 +62,24 @@ export class HorizontalBarChart extends Chart {
   _addAxis() {
     this.chart
       .append("g")
-      .call(
-        d3
-          .axisBottom(this._xScale)
-          .tickFormat((d) => d)
-          .ticks(this._numberTicksX)
-      )
-      .attr("class", "x-axis axis")
+      .call(d3.axisLeft(this._yScale))
+      .attr("class", "y-axis axis")
       .append("text")
-      .attr("x", 6)
-      .attr("dx", "0.71em")
+      .attr("y", 6)
+      .attr("dy", "0.71em")
       .attr("text-anchor", "end")
       .text("value");
 
     this.chart
       .append("g")
-      .attr("class", "y-axis axis")
-      .call(d3.axisLeft(this._yScale))
-      .attr("transform", `translate(0, ${this.chartWidth})`);
+      .attr("class", "x-axis axis")
+      .call(
+        d3
+          .axisBottom(this._xScale)
+          .tickFormat((d) => d)
+          .ticks(this._numberTicksY)
+      )
+      .attr("transform", `translate(0, ${this.chartHeight})`);
   }
 
   //TODO: transition of y-axis
@@ -103,37 +103,37 @@ export class HorizontalBarChart extends Chart {
     this.chart
       .transition()
       .selectAll(".x-axis")
-      .call(d3.axisBottom(this._xScale))
-      .attr("transform", `translate(0, ${this.chartHeight})`);
+      .attr("x", 0)
+      .attr("width", (d) => this._xScale(d.value));
   }
 
   _updateExistingBars(bars) {
     bars
       .transition()
       .duration(750)
-      .attr("x", this.chartWidth - initializingBarHeight)
-      .attr("height", initializingBarHeight)
+      .attr("x", 0)
+      .attr("width", initializingBarHeight)
       .attr("y", (d) =>
         this._barWidth
           ? this._yScale(d.title) +
             (this._yScale.bandwidth() - this._barWidth) / 2
           : this._yScale(d.title)
       )
-      .attr("height", this._barWidth || this._xycale.bandwidth())
+      .attr("height", this._barWidth || this._yScale.bandwidth())
       .attr("fill", this._barColor)
       .attr("class", "bar")
       .transition()
       .duration(750)
-      .attr("x", (d) => this._xScale(d.value))
-      .attr("width", (d) => this.chartWidth - this._xScale(d.value));
+      .attr("x", 0)
+      .attr("width", (d) => this._xScale(d.value));
   }
 
   _addEnteringBars(bars) {
     bars
       .enter()
       .append("rect")
-      .attr("x", this.chartWidth - initializingBarHeight)
-      .attr("height", initializingBarHeight)
+      .attr("x", 0)
+      .attr("width", initializingBarHeight)
       .attr("y", (d) =>
         this._barWidth
           ? this._yScale(d.title) +
@@ -146,18 +146,18 @@ export class HorizontalBarChart extends Chart {
       .transition()
       .duration(750)
       .delay((_, i) => i * 50)
-      .attr("x", (d) => this._xScale(d.value))
-      .attr("width", (d) => this.chartWidth - this._xScale(d.value));
+      .attr("x", 0)
+      .attr("width", (d) => this._xScale(d.value));
   }
 
   _addEnteringBarValues(barValues) {
     barValues
       .enter()
       .append("text")
-      .attr("x", (d) => this._xScale(d.title) + this._xScale.bandwidth() / 2)
+      .attr("y", (d) => this._yScale(d.title) + this._yScale.bandwidth() / 2)
       .attr("class", "bar-value")
       .attr("text-anchor", "middle")
-      .attr("y", (d) => this._yScale(d.value) - barValueMargin)
+      .attr("x", (d) => this._xScale(d.value) - barValueMargin)
       .text((d) => d.value)
       .attr("fill", "transparent")
       .style("font-size", "10px")
@@ -170,7 +170,7 @@ export class HorizontalBarChart extends Chart {
   _updateExistingBarValues(barValues) {
     barValues
       .attr("fill", "transparent")
-      .attr("x", (d) => this._xScale(d.value) - barValueMargin)
+      .attr("x", 0)
       .text((d) => d.value)
       .raise()
       .transition()
@@ -187,11 +187,11 @@ export class HorizontalBarChart extends Chart {
       .call(
         d3
           .axisBottom(this._xScale)
-          .tickSize(-this.chartWidth + gridXMargin)
+          .tickSize(gridXMargin)
           .tickFormat("")
           .ticks(this._numberTicksX)
       )
-      .attr("transform", `translate(${gridXMargin / 2}, 0)`);
+      .attr("transform", `translate(0, ${this.chartHeight - gridXMargin})`);
   }
 
   _displayBars() {
@@ -215,7 +215,7 @@ export class HorizontalBarChart extends Chart {
     if (this.chart.select(".x-axis").empty()) this._addAxis();
     else this._transitionAxis();
     this._displayBars();
-    this._addYAxisGrid();
+    this._addXAxisGrid();
     if (this._barValueColor) this._displayValues();
     else this.chart.selectAll(".bar-value").remove();
   }

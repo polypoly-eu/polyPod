@@ -7,6 +7,7 @@ import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import MatrixBubblesChart from "../../components/clusterStories/MatrixBubblesChart.jsx";
 import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
 import EntityList from "../../components/entityList/entityList.jsx";
+import OverviewBarChart from "../../components/clusterStories/overviewBarChart.jsx";
 import OrderedList from "../../components/orderedList/orderedList.jsx";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 
@@ -202,7 +203,7 @@ const MessengerStory = () => {
                 {i18n.t(`${i18nHeader}:overview.paragraph.one`)}
             </p>
             <p>{i18n.t(`${i18nHeader}:overview.paragraph.two`)}</p>
-            <Overview entities={Object.values(products)} />
+            <OverviewBarChart entities={Object.values(products)} />
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:details.section`)}
             ></SectionTitle>
