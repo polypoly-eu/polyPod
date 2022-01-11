@@ -5,8 +5,29 @@ import * as d3 from "d3";
 const defaultPadding = 2,
   defaultWidth = 300,
   defaultHeight = 250,
-  defaultFontSize = 10;
+  defaultFontSize = 10,
+  defaultColor = "blue",
+  defaultFontColor = "white";
 
+/**
+ * Visualizes data as a tree map
+ *
+ * The data can be infinitely nested to visualize grouping
+ *
+ * @class
+ * @extends Chart
+ * @param {CSS-selector} selector - A CSS selector, where the svg will be attached to
+ * @param {Object[]} data - The data to be visualized as a tree map
+ * @param {string} data[].name - The title/name the leave/ branch
+ * @param {number} data[].value - The value of the leave, which corresponds to it's area
+ * @param {Array} data[].children - Making it a group (branch) with nested data (no value attribute needed in this case)
+ * @param {number} [width  = 400 ] - The width of the svg
+ * @param {number} [height  = 200 ] - The height of the svg
+ * @param {string|callback} [color = "blue"] - The color of the rectangle (callbacks receive data)
+ * @param {string|callback} [fontColor = "white"] - The color of the text (callbacks receive data)
+ * @param {string|callback} [fontSize = 10] - The fontSize of the text (callbacks receive data)
+ * @param {callback} [onUnfittingText] - Callback fired when text does not fit inside of the rectangle (callbacks receive data)
+ */
 export class TreeMap extends Chart {
   constructor({
     selector,
@@ -26,9 +47,9 @@ export class TreeMap extends Chart {
       height: height || defaultHeight,
     });
     this._padding = padding || defaultPadding;
-    this._color = color || "blue";
+    this._color = color || defaultColor;
     this._fontSize = fontSize || defaultFontSize;
-    this._fontColor = fontColor || "white";
+    this._fontColor = fontColor || defaultFontColor;
     this._onUnfittingText = onUnfittingText;
   }
 
