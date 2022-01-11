@@ -28,9 +28,9 @@ describe("Test basic configuration", () => {
     it("is created correctly", () => {
         expect(i18n).toBeInstanceOf(I18n);
     });
-    it( "Includes all sections", () => {
-        expect(i18n.sections()).toStrictEqual( Object.keys(translationData));
-    })
+    it("Includes all sections", () => {
+        expect(i18n.sections()).toStrictEqual(Object.keys(translationData));
+    });
     it("Translates correctly", () => {
         expect(i18n.t("quux:bar")).toBe("baz");
     });

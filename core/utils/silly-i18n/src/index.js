@@ -121,7 +121,7 @@ export class I18n {
      * @returns The translated string.
      */
     sections() {
-        return Object.keys( this._translations );
+        return Object.keys(this._translations);
     }
 
     /**
@@ -175,7 +175,7 @@ export class I18nSection extends I18n {
      */
     constructor(i18n, section) {
         super(i18n.language, { [i18n.language]: i18n._translations });
-        if ( ! super.sections().includes( section) ) {
+        if (!super.sections().includes(section)) {
             throw new NonExistingSectionError(
                 `${section} is not included in translation data, only  ${super.sections()} are`
             );

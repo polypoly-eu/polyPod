@@ -1,4 +1,9 @@
-import { TranslationKeyError, NonExistingSectionError, I18n, I18nSection } from "../src/index.js";
+import {
+    TranslationKeyError,
+    NonExistingSectionError,
+    I18n,
+    I18nSection,
+} from "../src/index.js";
 
 const LANGUAGE = "foo";
 let i18n, i18ns;
@@ -30,12 +35,10 @@ describe("Test basic configuration", () => {
             expect.stringMatching(/does not have/)
         );
     });
-
-    
 });
 
 describe("Throws if there's an error", () => {
-    it ( "Throws the correct exception ", () => {
+    it("Throws the correct exception ", () => {
         let thrownError;
         try {
             i18ns = new I18nSection(i18n, "zuul");
@@ -46,5 +49,5 @@ describe("Throws if there's an error", () => {
         expect(thrownError.message).toEqual(
             expect.stringMatching(/is not included/)
         );
-})
+    });
 });
