@@ -7,33 +7,26 @@ import {
 async function relevantZipEntries(zipFile) {
     const entries = await zipFile.getEntries();
     return entries.filter(
-        (each) => !each.includes(".DS_Store") && !each.includes("__MACOSX")
+        (entry) =>
+            !entry.path.includes(".DS_Store") &&
+            !entry.path.includes("__MACOSX")
     );
 }
 
-async function readJSONFile(relativeFileName, zipFile) {
-    let fullEntryName;
-    // TODO: This is a hack to handle the fact that ids are
-    // different between the browser pod and the app one.
-    if (zipFile.id.toLowerCase().startsWith("polypod://")) {
-        fullEntryName = `${zipFile.id}/${relativeFileName}`;
-    } else {
-        fullEntryName = `FeatureFiles/${zipFile.id}/${relativeFileName}`;
+async function readJSONFile(relativeFilePath, zipFile) {
+    if (!(await zipFile.hasEntryPath(relativeFilePath))) {
+        throw new MissingFileImportException(relativeFilePath);
     }
-
-    return readFullPathJSONFile(fullEntryName, zipFile);
+    const entry = await zipFile.findEntry(relativeFilePath);
+    return readFullPathJSONFile(entry);
 }
 
-async function readFullPathJSONFile(fullEntryName, zipFile) {
-    if (!(await zipFile.hasEntry(fullEntryName))) {
-        throw new MissingFileImportException(fullEntryName);
-    }
-
-    const rawContent = await zipFile.getContent(fullEntryName);
+async function readFullPathJSONFile(entry) {
+    const rawContent = await entry.getContent();
     const fileContent = new TextDecoder("utf-8").decode(rawContent);
 
     if (!fileContent) {
-        throw new MissingContentImportException(fullEntryName);
+        throw new MissingContentImportException(entry._id);
     }
 
     return JSON.parse(fileContent, (key, value) => {
@@ -44,12 +37,12 @@ async function readFullPathJSONFile(fullEntryName, zipFile) {
     });
 }
 
-async function readJSONDataObject(dataFileName, dataKey, zipFile) {
-    const rawData = await readJSONFile(dataFileName, zipFile);
+async function readJSONDataObject(relativeFilePath, dataKey, zipFile) {
+    const rawData = await readJSONFile(relativeFilePath, zipFile);
 
     if (!(dataKey in rawData)) {
         throw new InvalidContentImportException(
-            dataFileName,
+            relativeFilePath,
             `Missing ${dataKey} key`
         );
     }
@@ -57,12 +50,16 @@ async function readJSONDataObject(dataFileName, dataKey, zipFile) {
     return rawData[dataKey];
 }
 
-async function readJSONDataArray(dataFileName, dataKey, zipFile) {
-    const arrayData = await readJSONDataObject(dataFileName, dataKey, zipFile);
+async function readJSONDataArray(relativeFilePath, dataKey, zipFile) {
+    const arrayData = await readJSONDataObject(
+        relativeFilePath,
+        dataKey,
+        zipFile
+    );
 
     if (!Array.isArray(arrayData)) {
         throw new InvalidContentImportException(
-            dataFileName,
+            relativeFilePath,
             `Wrong data format for ${dataKey} key`
         );
     }
@@ -80,11 +77,11 @@ function anonymizePathSegment(pathSegment, fullPath) {
     return pathSegment;
 }
 
-function anonymizeJsonEntityPath(fileName) {
-    const nameParts = fileName.split("/");
+function anonymizeJsonEntityPath(entryPath) {
+    const nameParts = entryPath.split("/");
 
     const anonymizedParts = nameParts.map((each) =>
-        anonymizePathSegment(each, fileName)
+        anonymizePathSegment(each, entryPath)
     );
     return anonymizedParts.join("/");
 }
@@ -92,25 +89,11 @@ function anonymizeJsonEntityPath(fileName) {
 async function jsonDataEntities(zipFile) {
     const entries = await relevantZipEntries(zipFile);
     const relevantJsonEntries = entries.filter(
-        (each) =>
-            !each.includes("/files/") && // Remove user files
-            each.endsWith(".json")
+        (entry) =>
+            !entry.path.includes("/files/") && // Remove user files
+            entry.path.endsWith(".json")
     );
     return relevantJsonEntries;
-}
-
-function removeEntryPrefix(entryName) {
-    // There is no polyPod API at this time that gives us the relative paths we
-    // want to show, so we have to make assumptions about the URL formats used
-    // by the polyPod.
-    const removalPatterns = [
-        /^polypod:\/\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\//i,
-        /^FeatureFiles\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\//i,
-    ];
-    let cleanedEntry = entryName;
-    for (let pattern of removalPatterns)
-        cleanedEntry = cleanedEntry.replace(pattern, "");
-    return cleanedEntry;
 }
 
 function sliceIntoChunks(array, chunkSize) {
@@ -130,6 +113,5 @@ export {
     anonymizeJsonEntityPath,
     relevantZipEntries,
     jsonDataEntities,
-    removeEntryPrefix,
     sliceIntoChunks,
 };
