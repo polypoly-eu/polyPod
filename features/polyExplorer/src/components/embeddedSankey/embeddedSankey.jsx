@@ -84,7 +84,7 @@ const EmbeddedSankey = ({ links, groups }) => {
             <ChipGroup
                 chipsContent={sources}
                 defaultActiveChips={
-                    activeSources.length > 1 ? ["all"] : activeSources
+                    activeSources.length > 1 ? ["allChip"] : activeSources
                 }
                 onChipClick={handleActiveSourceChange}
                 exclusive={false}
@@ -102,7 +102,7 @@ const EmbeddedSankey = ({ links, groups }) => {
             <p>{groups.target.label}</p>
             <ChipGroup
                 chipsContent={targets}
-                defaultActiveChips={[...targets, "others"]}
+                defaultActiveChips={[...targets, "othersChip"]}
                 onChipClick={handleActiveTargetChange}
                 exclusive={false}
                 allChip={groups.target.all ? { translation: "All" } : null}
