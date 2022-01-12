@@ -7,7 +7,8 @@ const defaultPadding = 2,
   defaultHeight = 250,
   defaultFontSize = 10,
   defaultColor = "blue",
-  defaultFontColor = "white";
+  defaultFontColor = "white",
+  defaultOnUnfittingText = "";
 
 /**
  * Visualizes data as a tree map
@@ -50,7 +51,7 @@ export class TreeMap extends Chart {
     this._color = color || defaultColor;
     this._fontSize = fontSize || defaultFontSize;
     this._fontColor = fontColor || defaultFontColor;
-    this._onUnfittingText = onUnfittingText;
+    this._onUnfittingText = onUnfittingText || defaultOnUnfittingText;
   }
 
   _distance(x, y) {
@@ -101,7 +102,7 @@ export class TreeMap extends Chart {
       const text = node.select("text");
       const rect = node.select("rect");
       if (text.node().getBBox().width > rect.node().getBBox().width)
-        text.text(onUnfittingText || "");
+        text.text(onUnfittingText);
     });
 
     texts.call(this._wrapText);
