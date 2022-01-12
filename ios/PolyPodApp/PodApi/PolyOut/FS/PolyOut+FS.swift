@@ -189,36 +189,38 @@ extension PolyOut {
             return
         }
         
-        do {
-            let newId = UUID().uuidString
-            let targetUrl = PolyOut.urlFromId(id: newId)
-            let baseUrl = targetUrl.deletingLastPathComponent()
-            if !FileManager.default.fileExists(atPath: baseUrl.path) {
-                try FileManager.default.createDirectory(
-                    at: baseUrl,
-                    withIntermediateDirectories: true
+        DispatchQueue.global(qos: .background).async {
+            do {
+                let newId = UUID().uuidString
+                let targetUrl = PolyOut.urlFromId(id: newId)
+                let baseUrl = targetUrl.deletingLastPathComponent()
+                if !FileManager.default.fileExists(atPath: baseUrl.path) {
+                    try FileManager.default.createDirectory(
+                        at: baseUrl,
+                        withIntermediateDirectories: true
+                    )
+                }
+                try Zip.unzipFile(
+                    url,
+                    destination: targetUrl,
+                    overwrite: true,
+                    password: nil
                 )
+                try FileManager.default.removeItem(at: url)
+                
+                let newUrl = PolyOut.fsPrefix + PolyOut.fsFilesRoot + "/" + newId
+                var fileStore = UserDefaults.standard.value(
+                    forKey: PolyOut.fsKey
+                ) as? [String:String?] ?? [:]
+                fileStore[newUrl] = url.lastPathComponent
+                UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
+                
+                completionHandler(newUrl)
             }
-            try Zip.unzipFile(
-                url,
-                destination: targetUrl,
-                overwrite: true,
-                password: nil
-            )
-            try FileManager.default.removeItem(at: url)
-            
-            let newUrl = PolyOut.fsPrefix + PolyOut.fsFilesRoot + "/" + newId
-            var fileStore = UserDefaults.standard.value(
-                forKey: PolyOut.fsKey
-            ) as? [String:String?] ?? [:]
-            fileStore[newUrl] = url.lastPathComponent
-            UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
-            
-            completionHandler(newUrl)
-        }
-        catch {
-            Log.error("importArchive for '\(url)' failed: \(error)")
-            completionHandler(nil)
+            catch {
+                Log.error("importArchive for '\(url)' failed: \(error)")
+                completionHandler(nil)
+            }
         }
     }
     
