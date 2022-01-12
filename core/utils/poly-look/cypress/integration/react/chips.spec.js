@@ -1,4 +1,4 @@
-import { Chips } from "../../../src/react";
+import { Chips } from "../../../dist/poly-look";
 import React from "react";
 import { mount } from "@cypress/react";
 

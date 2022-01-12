@@ -20,4 +20,10 @@
 /dist/
 /out-tsc/
 
+# cypress
+/cypress/screenshots/
+/cypress/videos/
+
+
+
 storybook-static
