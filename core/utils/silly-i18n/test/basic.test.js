@@ -1,11 +1,9 @@
-import {
-    determineLanguage,
-    I18n,
-} from "../src/index.js";
+import { determineLanguage, I18n } from "../src/index.js";
 
-import { LanguageError,
+import {
+    LanguageError,
     NonExistingSectionError,
-    TranslationKeyError
+    TranslationKeyError,
 } from "../src/exceptions";
 
 const LANGUAGE = "foo";

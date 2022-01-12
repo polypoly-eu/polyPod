@@ -1,4 +1,8 @@
-import { TranslationKeyError, LanguageError, NonExistingSectionError } from "./exceptions";
+import {
+    TranslationKeyError,
+    LanguageError,
+    NonExistingSectionError,
+} from "./exceptions";
 
 /**
  * Determines the environment language
@@ -7,7 +11,6 @@ import { TranslationKeyError, LanguageError, NonExistingSectionError } from "./e
  */
 export const determineLanguage = () =>
     Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0];
-
 
 /**
  * Simple class for performing string translations, with simple templating capabilities
@@ -125,4 +128,3 @@ export class I18nSection extends I18n {
         return super.t(`${this._section}:${key}`, options);
     }
 }
-
