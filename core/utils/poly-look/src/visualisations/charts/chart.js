@@ -14,13 +14,13 @@ const noMargin = {
  * @param {CSS-selector} selector - A CSS selector, where the svg will be attached to
  * @param {string} type - The type of the chart (eg. vertical-bar-chart)
  * @param {Object[]} data - The data to be visualized by the chart
- * @param {number} [width  = 400] - The width of the svg
+ * @param {number} [width = 400] - The width of the svg
  * @param {number} [height = 300] - The height of the svg
  * @param {Object} [margin] - The margin the chart has to the svg sides (eg. for scales)
- * @param {number} [margin.top  = 0 ] - Top margin
- * @param {number} [margin.right  = 0 ] - Right margin
- * @param {number} [margin.bottom  = 0] - Bottom margin
- * @param {number} [margin.left  = 0] - Left left
+ * @param {number} [margin.top = 0] - Top margin
+ * @param {number} [margin.right = 0] - Right margin
+ * @param {number} [margin.bottom = 0] - Bottom margin
+ * @param {number} [margin.left = 0] - Left left
  */
 export class Chart {
   constructor({ selector, data, width, height, margin, gradients }) {

@@ -13,6 +13,7 @@ import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 
 import "./messengerStory.css";
+import MessengerTreeMap from "../../components/clusterStories/messengerTreeMap.jsx";
 
 const i18nHeader = "clusterMessengerStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -32,6 +33,10 @@ const MessengerStory = () => {
         "TikTok",
         "iMessage",
     ];
+
+    const messengers = Object.values(products).filter(
+        (p) => p.clusters.indexOf("messenger") !== -1
+    );
 
     const summaryBullets = [
         i18n.t(`${i18nHeader}:summary.bullet.1`),
@@ -224,6 +229,10 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:details.p.1`)}
             </p>
+            <MessengerTreeMap
+                messengers={Object.values(products)}
+                i18nHeader={i18nHeader}
+            />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
             />
@@ -309,7 +318,7 @@ const MessengerStory = () => {
                 {i18n.t(`${i18nHeader}:companies.p.1`)}
             </p>
             <p>{i18n.t(`${i18nHeader}:companies.p.2`)}</p>
-            <ReceivingCompanies entities={Object.values(products)} />
+            <ReceivingCompanies entities={messengers} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.dataRegions`)}
             />
