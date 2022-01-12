@@ -1,10 +1,12 @@
 import {
     determineLanguage,
-    LanguageError,
-    NonExistingSectionError,
-    TranslationKeyError,
     I18n,
 } from "../src/index.js";
+
+import { LanguageError,
+    NonExistingSectionError,
+    TranslationKeyError
+} from "../src/exceptions";
 
 const LANGUAGE = "foo";
 const FALLBACK_LANGUAGE = "en";

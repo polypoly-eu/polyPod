@@ -1,9 +1,12 @@
 import {
-    TranslationKeyError,
-    NonExistingSectionError,
     I18n,
-    I18nSection,
-} from "../src/index.js";
+    I18nSection
+} from "../src/index";
+
+import {
+    TranslationKeyError,
+    NonExistingSectionError
+} from "../src/exceptions";
 
 const LANGUAGE = "foo";
 let i18n, i18ns;
