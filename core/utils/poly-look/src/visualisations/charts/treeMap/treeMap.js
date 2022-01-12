@@ -58,14 +58,11 @@ export class TreeMap extends Chart {
     return Math.abs(x - y);
   }
 
-  _makeHierarchy() {
-    return d3
+  _addTreeMapRoot(root) {
+    const root = d3
       .hierarchy(this.data)
       .sum((d) => d.value)
       .sort((a, b) => b.value - a.value);
-  }
-
-  _addTreeMapRoot(root) {
     return d3.treemap().size([this.width, this.height]).padding(this._padding)(
       root
     );
@@ -109,7 +106,6 @@ export class TreeMap extends Chart {
   }
 
   _drawJurisdictionTree() {
-    const root = this._makeHierarchy();
     const treemapRoot = this._addTreeMapRoot(root);
     const nodes = this._addNodes(treemapRoot);
     this._addRects(nodes);
