@@ -107,7 +107,7 @@ export class TreeMap extends Chart {
   }
 
   _drawJurisdictionTree() {
-    const treemapRoot = this._addTreeMapRoot(root);
+    const treemapRoot = this._addTreeMapRoot();
     const nodes = this._addNodes(treemapRoot);
     this._addRects(nodes);
     this._addAndWrapTexts(nodes);
