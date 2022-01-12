@@ -91,9 +91,11 @@ export class TreeMap extends Chart {
       .text((d) => `${d.data.name}:\n${d.data.value}`)
       .attr("font-size", this._fontSize)
       .attr("y", this._fontSize)
+      .attr("x", defaultPadding)
       .attr("fill", this._fontColor);
 
     const onUnfittingText = this._onUnfittingText;
+    texts.call(wrapTexts);
 
     nodes.each(function () {
       const node = d3.select(this);
@@ -102,8 +104,6 @@ export class TreeMap extends Chart {
       if (text.node().getBBox().width > rect.node().getBBox().width)
         text.text(onUnfittingText);
     });
-
-    texts.call(wrapTexts);
   }
 
   _drawJurisdictionTree() {
