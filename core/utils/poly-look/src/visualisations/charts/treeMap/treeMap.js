@@ -59,7 +59,7 @@ export class TreeMap extends Chart {
     return Math.abs(x - y);
   }
 
-  _addTreeMapRoot(root) {
+  _addTreeMapRoot() {
     const root = d3
       .hierarchy(this.data)
       .sum((d) => d.value)
