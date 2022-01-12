@@ -114,7 +114,7 @@ const DigitalGiantsStory = () => {
                 links={jurisdictionLinks}
                 groups={{
                     source: {
-                        label: "Messengers",
+                        label: "Big Six",
                         all: true,
                     },
                     target: {

@@ -6,7 +6,6 @@ import { MissingFilesException } from "./utils/failed-import-exception";
 import {
     readFullPathJSONFile,
     relevantZipEntries,
-    removeEntryPrefix,
     sliceIntoChunks,
 } from "./utils/importer-util";
 
@@ -21,23 +20,23 @@ export default class MultipleFilesImporter {
 
     async _extractTargetEntries(zipFile) {
         const entries = await relevantZipEntries(zipFile);
-        return entries.filter((fileName) => this._isTargetPostFile(fileName));
+        return entries.filter((entry) => this._isTargetPostFile(entry.path));
     }
 
-    async _readJSONFileWithStatus(targetFile, zipFile) {
-        return readFullPathJSONFile(targetFile, zipFile)
+    async _readJSONFileWithStatus(targetEntry, zipFile) {
+        return readFullPathJSONFile(targetEntry, zipFile)
             .then((data) => {
-                return { status: createSuccessStatus(), targetFile, data };
+                return { status: createSuccessStatus(), targetEntry, data };
             })
             .catch((error) => {
                 return { status: createErrorStatus(error) };
             });
     }
 
-    async _importDataFromFiles(targetFiles, zipFile, facebookAccount) {
+    async _importDataFromFiles(targetEntries, zipFile, facebookAccount) {
         const fileDataWithResults = await Promise.all(
-            targetFiles.map((targetFile) =>
-                this._readJSONFileWithStatus(targetFile, zipFile)
+            targetEntries.map((targetEntry) =>
+                this._readJSONFileWithStatus(targetEntry, zipFile)
             )
         );
 
@@ -46,8 +45,7 @@ export default class MultipleFilesImporter {
         );
 
         for (const each of successfullResults) {
-            const fileName = removeEntryPrefix(each.targetFile);
-            facebookAccount.addImportedFileName(fileName);
+            facebookAccount.addImportedFileName(each.targetEntry.path);
         }
         const dataResults = successfullResults.map((result) => result.data);
         this._importRawDataResults(facebookAccount, dataResults);
@@ -62,14 +60,14 @@ export default class MultipleFilesImporter {
     }
 
     async import({ zipFile, facebookAccount }) {
-        const targetFiles = await this._extractTargetEntries(zipFile);
-        if (targetFiles.length === 0) {
+        const targetEntries = await this._extractTargetEntries(zipFile);
+        if (targetEntries.length === 0) {
             throw this._createMissingFilesError();
         }
 
-        const fileChunks = sliceIntoChunks(targetFiles, 5);
+        const entryChunks = sliceIntoChunks(targetEntries, 5);
         const failedStatusChunks = [];
-        for (let currentChunk of fileChunks) {
+        for (let currentChunk of entryChunks) {
             const chunkStatuses = await this._importDataFromFiles(
                 currentChunk,
                 zipFile,
