@@ -38,7 +38,7 @@ describe("Test basic configuration", () => {
 });
 
 describe("Throws if there's an error", () => {
-    it("Throws the correct exception ", () => {
+    it("Throws the right exception ", () => {
         let thrownError;
         try {
             i18ns = new I18nSection(i18n, "zuul");
