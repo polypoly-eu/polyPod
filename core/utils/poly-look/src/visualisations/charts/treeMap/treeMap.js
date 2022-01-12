@@ -22,12 +22,12 @@ const defaultPadding = 2,
  * @param {string} data[].name - The title/name the leave/ branch
  * @param {number} data[].value - The value of the leave, which corresponds to it's area
  * @param {Array} data[].children - Making it a group (branch) with nested data (no value attribute needed in this case)
- * @param {number} [width = 400 ] - The width of the svg
- * @param {number} [height = 200 ] - The height of the svg
- * @param {string|callback} [color = "blue"] - The color of the rectangle (callbacks receive data)
- * @param {string|callback} [fontColor = "white"] - The color of the text (callbacks receive data)
- * @param {string|callback} [fontSize = 10] - The fontSize of the text (callbacks receive data)
- * @param {callback} [onUnfittingText] - Callback fired when text does not fit inside of the rectangle (callbacks receive data)
+ * @param {number} [width  = defaultWidth] - The width of the svg
+ * @param {number} [height = defaultHeight] - The height of the svg
+ * @param {string|callback} [color = defaultColor] - The color of the rectangle (callbacks receive data)
+ * @param {string|callback} [fontColor = defaultFontColor] - The color of the text (callbacks receive data)
+ * @param {string|callback} [fontSize = defaultFontSize] - The fontSize of the text (callbacks receive data)
+ * @param {string|callback} [onUnfittingText = defaultOnUnfittingText] - Callback fired when text does not fit inside of the rectangle (callbacks receive data)
  */
 export class TreeMap extends Chart {
   constructor({
