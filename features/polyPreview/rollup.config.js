@@ -8,7 +8,7 @@ export default {
     input: "src/index.js",
     output: {
         file: "dist/index.js",
-        format: "esm",
+        format: "iife",
     },
     plugins: [
         css({ output: "css/bundle.css" }),
@@ -26,10 +26,6 @@ export default {
                 {
                     src: ["src/static/*", "!src/static/fonts"],
                     dest: "dist",
-                },
-                {
-                    src: ["src/locales/*"],
-                    dest: "dist/locales",
                 },
                 {
                     src: ["src/static/fonts/*"],
