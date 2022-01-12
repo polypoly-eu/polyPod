@@ -2,7 +2,6 @@ import React, { useContext, useMemo } from "react";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
-import { ExplorerContext } from "../../context/explorer-context.jsx";
 
 import "./overviewBarChart.css";
 const chartColors = {
@@ -10,106 +9,59 @@ const chartColors = {
     secondary: "#0f1938",
 };
 
-class IndexedLegend {
-    constructor(items) {
-        this.items = items;
-    }
-
-    labelOf(item) {
-        const index = this.items.indexOf(item);
-        if (index === -1) return "";
-        return `${index + 1}`;
-    }
-
-    render() {
-        return (
-            <div className="indexed-legend">
-                {this.items.map((item, index) => (
-                    <div key={index}>
-                        {this.labelOf(item)}: {item}
-                    </div>
-                ))}
-            </div>
-        );
-    }
-}
-
-function Companies({ entities }) {
-    const legend = new IndexedLegend(entities.map(({ name }) => name));
+function Installs({ entities }) {
     const data = entities.map(({ name, dataRecipients }) => ({
-        title: legend.labelOf(name),
+        title: name,
         value: dataRecipients.length,
     }));
     return (
-        <>
+        <div>
             <PolyChart
                 type="horizontal-bar-chart"
                 data={data}
                 barColor={chartColors.primary}
                 barValueColor={chartColors.secondary}
             />
-            {legend.render()}
-        </>
+        </div>
     );
 }
-
-function extractRecipientsPerIndustry(entities, companies) {
-    const sharingCounts = {};
-    for (let { dataRecipients } of entities)
-        for (let recipient of dataRecipients)
-            sharingCounts[recipient] = (sharingCounts[recipient] || 0) + 1;
-
-    const result = {};
-    for (let [recipient, sharingCount] of Object.entries(sharingCounts)) {
-        const industry = companies[recipient]?.industryCategoryName();
-        if (!industry) {
-            console.error(`Unable to determine industry of ${recipient}`);
-            continue;
-        }
-        result[industry] = (result[industry] || []).concat(sharingCount);
-    }
-    return result;
-}
-
-function Industries({ entities }) {
-    const { companies } = useContext(ExplorerContext);
-    const recipientsPerIndustry = useMemo(
-        () => extractRecipientsPerIndustry(entities, companies),
-        [entities]
-    );
-    const top3Industries = Object.entries(recipientsPerIndustry)
-        .sort((a, b) => b[1].length - a[1].length)
-        .map(([industry]) => industry)
-        .slice(0, 3);
-    const legend = new IndexedLegend(top3Industries);
-    const data = Object.entries(recipientsPerIndustry).map(
-        ([industry, recipients]) => ({
-            label: legend.labelOf(industry),
-            children: recipients.map((sharingCount) => ({
-                value: sharingCount,
-            })),
-        })
-    );
+function Users({ entities }) {
+    const data = entities.map(({ name, activeUsers }) => ({
+        title: name,
+        value: activeUsers.values[activeUsers.values - 1].user_count,
+    }));
     return (
-        <>
-            <div>
-                <span className="bubble-legend-companies">companies</span>
-                <span className="bubble-legend-industries">industries</span>
-            </div>
+        <div>
             <PolyChart
-                type="bubble-cluster"
+                type="horizontal-bar-chart"
                 data={data}
-                bubbleColor={(d) =>
-                    d.children ? "transparent" : chartColors.primary
-                }
-                strokeColor={(d) =>
-                    d.children ? chartColors.secondary : "transparent"
-                }
-                text={(d) => d.data.label}
-                textColor={chartColors.secondary}
+                barColor={chartColors.primary}
+                barValueColor={chartColors.secondary}
             />
-            {legend.render()}
-        </>
+        </div>
+    );
+}
+function PartOf({ entities }) {
+    const data = entities.map(({ name, dataRecipients, productOwner }) => ({
+        title: name,
+        value: dataRecipients.length,
+        group: productOwner.some((owner) => owner.includes("Facebook"))
+            ? "facebook"
+            : "other",
+    }));
+    return (
+        <div>
+            <PolyChart
+                type="horizontal-bar-chart"
+                data={data}
+                groups={[
+                    { translation: "Owned By Facebook", id: "facebook" },
+                    { translation: "Other", id: "other" },
+                ]}
+                barColor={chartColors.primary}
+                barValueColor={chartColors.secondary}
+            />
+        </div>
     );
 }
 
@@ -123,15 +75,23 @@ export default function OverviewBarChart({ entities }) {
                         "clusterStoryCommon:label.receivingCompanies"
                     )}
                 >
-                    <Companies entities={entities} />
+                    <Installs entities={entities} />
                 </Tab>
                 <Tab
-                    id="industries"
+                    id="users"
                     label={i18n.t(
                         "clusterStoryCommon:label.receivingIndustries"
                     )}
                 >
-                    <Industries entities={entities} />
+                    <Users entities={entities} />
+                </Tab>
+                <Tab
+                    id="part-of"
+                    label={i18n.t(
+                        "clusterStoryCommon:label.receivingIndustries"
+                    )}
+                >
+                    <PartOf entities={entities} />
                 </Tab>
             </Tabs>
         </div>

@@ -3,16 +3,17 @@ import * as d3 from "d3";
 import { Chart } from "../../chart";
 
 import "./horizontalBarChart.css";
-
 const initializingBarHeight = 2;
 const margin = {
   top: 10,
   right: 0,
   bottom: 20,
-  left: 40,
+  left: 0,
 };
 const barValueMargin = 4;
-const gridXMargin = 12;
+const barPadding = 0.2;
+const groupHeadlineHeight = 14;
+const headlinePadding = 6;
 
 /**
  * Visualizes data as a cluster of bubbles where the value of the bubble is represented as the radius.
@@ -37,26 +38,50 @@ export class HorizontalBarChart extends Chart {
     data,
     barColor = "blue",
     width = 400,
-    height = 200,
+    height = 400,
     barValueColor,
     barWidth,
     numberTicksX,
+    groups,
   }) {
     super({ selector, data, width, height, margin });
+    this.groups = groups;
     this._barColor = barColor || "blue";
     this._barWidth = barWidth;
     this._xScale = d3.scaleLinear().range([0, this.chartWidth]);
-    this._yScale = d3
-      .scaleBand()
-      .range([this.chartHeight, this.margin.bottom])
-      .padding(0.2);
+    this._yScales = this._getYscales(groups);
     this._barValueColor = barValueColor;
     this._numberTicksX = numberTicksX || 4;
   }
 
+  _getYscales(groups) {
+    if (groups) {
+      const _yScales = [];
+      for (let group of groups) {
+        const relevantBars = this.data.filter((data)=> data.group === group.id).length
+        const scale = d3
+          .scaleBand()
+          .range([groupHeadlineHeight + headlinePadding, relevantBars *  ]);
+      }
+    } else {
+      return [d3.scaleBand().range([0, this.chartHeight]).padding(barPadding)];
+    }
+  }
+
   _adaptScalesToData() {
     this._xScale.domain([0, d3.max(this.data, (d) => d.value)]);
-    this._yScale.domain(this.data.map((d) => d.title));
+    if (this.grouped) {
+      const ownedByFaceBook = this.data
+        .filter((d) => d.facebookGroup)
+        .map((d) => d.title)
+        .unshift("Owned By Facebook");
+      const other = this.data
+        .filter((d) => !d.facebookGroup)
+        .map((d) => d.title)
+        .unshift("Other");
+      const domain = [...ownedByFaceBook, ...other];
+      this._yScale.domain(domain);
+    } else this._yScale.domain(this.data.map((d) => d.title));
   }
 
   _addAxis() {
@@ -65,8 +90,8 @@ export class HorizontalBarChart extends Chart {
       .call(d3.axisLeft(this._yScale))
       .attr("class", "y-axis axis")
       .append("text")
-      .attr("y", 6)
-      .attr("dy", "0.71em")
+      .attr("y", 0)
+      .attr("dy", 0)
       .attr("text-anchor", "end")
       .text("value");
 
@@ -77,7 +102,7 @@ export class HorizontalBarChart extends Chart {
         d3
           .axisBottom(this._xScale)
           .tickFormat((d) => d)
-          .ticks(this._numberTicksY)
+          .ticks(this._numberTicksX)
       )
       .attr("transform", `translate(0, ${this.chartHeight})`);
   }
@@ -128,19 +153,30 @@ export class HorizontalBarChart extends Chart {
       .attr("width", (d) => this._xScale(d.value));
   }
 
+  _addEnteringBarLabels(barLabels) {
+    barLabels
+      .enter()
+      .append("text")
+      .attr("y", (d) => this._yScale(d.title))
+      .attr("class", "bar-value")
+      .attr("x", 0)
+      .text((d) => d.title)
+      .attr("fill", "transparent")
+      .style("font-size", "15px")
+      .transition()
+      .delay(1000)
+      .duration(500)
+      .attr("fill", this._barValueColor);
+  }
+
   _addEnteringBars(bars) {
     bars
       .enter()
       .append("rect")
       .attr("x", 0)
       .attr("width", initializingBarHeight)
-      .attr("y", (d) =>
-        this._barWidth
-          ? this._yScale(d.title) +
-            (this._yScale.bandwidth() - this._barWidth) / 2
-          : this._yScale(d.title)
-      )
-      .attr("height", this._barWidth || this._yScale.bandwidth())
+      .attr("y", (d) => this._yScale(d.title) + this._yScale.bandwidth() / 4)
+      .attr("height", this._yScale.bandwidth() / 2)
       .attr("fill", this._barColor)
       .attr("class", "bar")
       .transition()
@@ -179,26 +215,12 @@ export class HorizontalBarChart extends Chart {
       .attr("fill", this._barValueColor);
   }
 
-  _addXAxisGrid() {
-    this.chart.select(".axis-grid").remove();
-    this.chart
-      .append("g")
-      .attr("class", "axis-grid")
-      .call(
-        d3
-          .axisBottom(this._xScale)
-          .tickSize(gridXMargin)
-          .tickFormat("")
-          .ticks(this._numberTicksX)
-      )
-      .attr("transform", `translate(0, ${this.chartHeight - gridXMargin})`);
-  }
-
   _displayBars() {
     const bars = this.chart.selectAll(".bar").data(this.data, (d) => d.title);
     bars.exit().remove();
-    this._updateExistingBars(bars);
-    this._addEnteringBars(bars);
+    // this._updateExistingBars(bars);
+    if (this.grouped) this._addEnteringBars(bars);
+    else this._addEnteringBar(bars);
   }
 
   _displayValues() {
@@ -206,17 +228,16 @@ export class HorizontalBarChart extends Chart {
       .selectAll(".bar-value")
       .data(this._data, (d) => d.title);
     barValues.exit().remove();
-    this._updateExistingBarValues(barValues);
+    // this._updateExistingBarValues(barValues);
     this._addEnteringBarValues(barValues);
+    if (this.grouped) this._addEnteringBarGroupedLabels(barValues);
+    else this._addEnteringBarLabels(barValues);
   }
 
   render() {
     this._adaptScalesToData();
-    if (this.chart.select(".x-axis").empty()) this._addAxis();
-    else this._transitionAxis();
-    this._displayBars();
-    this._addXAxisGrid();
     if (this._barValueColor) this._displayValues();
-    else this.chart.selectAll(".bar-value").remove();
+    this._displayBars();
+    // else this.chart.selectAll(".bar-value").remove();
   }
 }
