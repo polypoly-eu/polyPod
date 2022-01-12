@@ -32,8 +32,8 @@ export class TreeMap extends Chart {
   constructor({
     selector,
     data,
-    width,
-    height,
+    width = defaultWidth,
+    height = defaultHeight,
     padding,
     color,
     fontSize,
@@ -43,8 +43,8 @@ export class TreeMap extends Chart {
     super({
       selector,
       data,
-      width: width || defaultWidth,
-      height: height || defaultHeight,
+      width,
+      height,
     });
     this._padding = padding || defaultPadding;
     this._color = color || defaultColor;
