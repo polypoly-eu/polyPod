@@ -9,7 +9,7 @@ extension PolyIn {
             return
         }
         
-        appDelegate.coredDataStack?.perform({ managedContext in
+        appDelegate.coredDataStack.perform({ managedContext in
             for quad in quads {
                 let (predicate, filterOperation) = self.quadsPredicateAndFilter(matcher: quad)
                 

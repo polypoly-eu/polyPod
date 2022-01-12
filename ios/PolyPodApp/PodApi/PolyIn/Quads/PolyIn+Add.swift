@@ -9,7 +9,7 @@ extension PolyIn {
             return
         }
         
-        appDelegate.coredDataStack?.perform({ managedContext in
+        appDelegate.coredDataStack.perform({ managedContext in
             for quad in quads {
                 self.createNode(for: quad, in: managedContext)
             }

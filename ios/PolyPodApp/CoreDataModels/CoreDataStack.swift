@@ -4,32 +4,58 @@ import Foundation
 import CoreData
 
 final class CoreDataStack {
-    
-    enum Error: Swift.Error {
-        case modelNotFound
-        case failedToLoadPersistentContainer(Swift.Error)
-    }
-
     private let container: NSPersistentContainer
-    private let context: NSManagedObjectContext
+    private var context: NSManagedObjectContext?
 
-    init(storageURL: URL) throws {
-        guard let model = NSManagedObjectModel.with(name: "PolyPodModel", in: Bundle(for: CoreDataStack.self)) else {
-            throw Error.modelNotFound
+    init() {
+        let modelName = "PolyPodModel"
+        let model = NSManagedObjectModel.with(name: modelName, in: Bundle(for: CoreDataStack.self))
+        container = NSPersistentContainer.load(from: NSPersistentContainer.defaultDirectoryURL().appendingPathComponent("\(modelName).sqlite"),
+                                               name: modelName,
+                                               model: model)
+    }
+    
+    func perform(_ operation: @escaping (NSManagedObjectContext) -> Void,
+                 file: String = #file,
+                 line: Int = #line,
+                 function: String = #function) {
+        guard let context = context else {
+            Log.error("Invalid attempt to execute core data operation in \(function) from \(file) at \(line)")
+            return
+        }
+        context.perform { operation(context) }
+    }
+}
+
+// MARK: - Protected data handling
+
+extension CoreDataStack {
+    func protectedDataDidBecomeAvailable() {
+        var error: Error?
+        container.loadPersistentStores {
+            error = $1
         }
         
-        do {
-            container = try NSPersistentContainer.load(from: storageURL, name: "PolyPodModel", model: model)
-            // Use background context to execute code on background queue
+        if let error = error {
+            Log.debug("Failed to load persistent stores \(error)")
+        } else {
+            Log.debug("Loaded persistent stores")
             context = container.newBackgroundContext()
-        } catch {
-            throw Error.failedToLoadPersistentContainer(error)
         }
     }
     
-    func perform(_ action: @escaping (NSManagedObjectContext) -> Void) {
-        let context = self.context
-        context.perform { action(context) }
+    func protectedDataWillBecomeUnavailable() {
+        let coordinator = self.container.persistentStoreCoordinator
+        perform { context in
+            do {
+                try? context.save()
+                try coordinator.persistentStores.forEach(coordinator.remove)
+                Log.debug("Unloaded persistent stores")
+            } catch {
+                Log.debug("Failed to unload persistent stores -> \(error)")
+            }
+        }
+        context = nil
     }
 }
 
@@ -48,24 +74,19 @@ extension NSPersistentStoreDescription {
 }
 
 extension NSPersistentContainer {
-    static func load(from url: URL, name: String, model: NSManagedObjectModel) throws -> NSPersistentContainer {
+    static func load(from url: URL, name: String, model: NSManagedObjectModel) -> NSPersistentContainer {
         let container = NSPersistentContainer(name: name, managedObjectModel: model)
         container.persistentStoreDescriptions = [NSPersistentStoreDescription.make(for: url)]
-        
-        var loadError: Error?
-        container.loadPersistentStores { loadError = $1 }
-        if let loadError = loadError {
-            throw loadError
-        }
-        
         return container
     }
 }
 
 extension NSManagedObjectModel {
-    static func with(name: String, in bundle: Bundle) -> NSManagedObjectModel? {
+    static func with(name: String, in bundle: Bundle) -> NSManagedObjectModel {
         bundle
             .url(forResource: name, withExtension: "momd")
-            .flatMap(NSManagedObjectModel.init(contentsOf:))
+            // Force unwrap, this code should fail only if core data model is missing from the project.
+            .flatMap(NSManagedObjectModel.init(contentsOf:))!
+        
     }
 }

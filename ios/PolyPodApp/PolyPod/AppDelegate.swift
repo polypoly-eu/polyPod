@@ -6,20 +6,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private static let updateNotificationCheckIdentifier = "coop.polypoly.polypod.updateNotificationCheck"
     
-    lazy var coredDataStack: CoreDataStack? = {
-        do {
-            let stack = try CoreDataStack(storageURL: NSPersistentContainer.defaultDirectoryURL().appendingPathComponent("poly-pod.sqlite"))
-            stack.perform { context in
-                let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
-                let count = try! context.count(for: fetchRequest)
-                Log.debug("Initialised triple store. Number of quads in Core Data: \(count)")
-            }
-            return stack
-        } catch {
-            print("Failed to create stack \(error)")
-            return nil
-        }
-    }()
+    let coredDataStack = CoreDataStack()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -36,6 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Location tracking is disabled for now - no feature needs it
         //LocationTracker.shared.startLocationLogging()
         
+        if application.isProtectedDataAvailable {
+            coredDataStack.protectedDataDidBecomeAvailable()
+            coredDataStack.perform { context in
+                let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
+                let count = try! context.count(for: fetchRequest)
+                Log.debug("Initialised triple store. Number of quads in Core Data: \(count)")
+            }
+        }
         self.registerUpdateNotificationCheck()
         
         return true
@@ -99,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      This notification lets your app know that the device is now unlocked and that you may access certain types of protected files again.
      */
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
-        
+        coredDataStack.protectedDataDidBecomeAvailable()
     }
     
     /*
@@ -111,77 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      Therefore, if your app depends on the file, you might want to take steps to avoid using that file while the device is locked.
      */
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
-        
-    }
-    
-    lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-         */
-        let container = NSPersistentContainer(name: "PolyPodModel")
-        
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-            
-            // Enforce encryption
-            do {
-                let persistentStores = container.persistentStoreCoordinator.persistentStores
-                guard persistentStores.count >= 0 else {
-                    fatalError("Error enforcing encryption: No persistent stores found")
-                }
-                let persistentStore = persistentStores[0]
-                var metadata = persistentStore.metadata
-                if !metadata!.contains(where: {(key: String, value: Any) in
-                    return key == NSPersistentStoreFileProtectionKey
-                }) {
-                    metadata?[NSPersistentStoreFileProtectionKey] = FileProtectionType.complete
-                    container.persistentStoreCoordinator.setMetadata(metadata, for: persistentStore)
-                    try container.viewContext.save()
-                }
-            } catch {
-                if let error = error as NSError? {
-                    fatalError("Encryption error \(error), \(error.userInfo)")
-                }
-            }
-        })
-        
-        let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
-        let count = try! container.viewContext.count(for: fetchRequest)
-        Log.debug("Initialised triple store. Number of quads in Core Data: \(count)")
-        
-        return container
-    }()
-    
-    // MARK: - Core Data Saving support
-    
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
+        coredDataStack.protectedDataWillBecomeUnavailable()
     }
     
     func scheduleUpdateNotificationCheck() {

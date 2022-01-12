@@ -14,7 +14,7 @@ extension PolyIn {
         }
         
         let (predicate, filterOperation) = quadsPredicateAndFilter(matcher: matcher)
-        appDelegate.coredDataStack?.perform({ managedContext in
+        appDelegate.coredDataStack.perform({ managedContext in
             do {
                 let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
                 fetchRequest.predicate = predicate
