@@ -2,27 +2,29 @@ import UIKit
 import CoreData
 
 extension PolyIn {
-    func addQuads(quads: [ExtendedData], completionHandler: (Error?) -> Void) {
+    func addQuads(quads: [ExtendedData], completionHandler: @escaping (Error?) -> Void) {
+        Log.debug("Add quads")
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             completionHandler(PodApiError.noAppDelegate)
             return
         }
         
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        for quad in quads {
-            let _ = createNode(for: quad, in: managedContext)
-        }
-        
-        do {
-            try managedContext.save()
-            completionHandler(nil)
-        } catch {
-            Log.error("Could not save. \(error)")
-            completionHandler(error)
-        }
+        appDelegate.coredDataStack?.perform({ managedContext in
+            for quad in quads {
+                self.createNode(for: quad, in: managedContext)
+            }
+            
+            do {
+                try managedContext.save()
+                completionHandler(nil)
+            } catch {
+                Log.error("Could not save. \(error)")
+                completionHandler(error)
+            }
+        })
     }
     
+    @discardableResult
     private func createNode(for extendedData: ExtendedData, in managedContext: NSManagedObjectContext) -> NSManagedObject? {
         let entityName = extendedData.classname.replacingOccurrences(of: "@polypoly-eu/rdf.", with: "")
         

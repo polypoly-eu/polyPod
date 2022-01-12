@@ -6,6 +6,21 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private static let updateNotificationCheckIdentifier = "coop.polypoly.polypod.updateNotificationCheck"
     
+    lazy var coredDataStack: CoreDataStack? = {
+        do {
+            let stack = try CoreDataStack(storageURL: NSPersistentContainer.defaultDirectoryURL().appendingPathComponent("poly-pod.sqlite"))
+            stack.perform { context in
+                let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
+                let count = try! context.count(for: fetchRequest)
+                Log.debug("Initialised triple store. Number of quads in Core Data: \(count)")
+            }
+            return stack
+        } catch {
+            print("Failed to create stack \(error)")
+            return nil
+        }
+    }()
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         

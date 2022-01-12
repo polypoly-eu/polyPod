@@ -2,33 +2,34 @@ import UIKit
 import CoreData
 
 extension PolyIn {
-    func matchQuads(matcher: ExtendedData, completionHandler: ([ExtendedData]?, Error?) -> Void) {
+    func matchQuads(matcher: ExtendedData, completionHandler: @escaping ([ExtendedData]?, Error?) -> Void) {
         return selectQuads(matcher: matcher, completionHandler: completionHandler)
     }
-    func selectQuads(matcher: ExtendedData, completionHandler: ([ExtendedData]?, Error?) -> Void) {
+
+    func selectQuads(matcher: ExtendedData, completionHandler: @escaping ([ExtendedData]?, Error?) -> Void) {
+        Log.debug("Selecting quads")
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             completionHandler(nil, PodApiError.databaseError)
             return
         }
         
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
         let (predicate, filterOperation) = quadsPredicateAndFilter(matcher: matcher)
-        
-        do {
-            let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
-            fetchRequest.predicate = predicate
-            var quads = try managedContext.fetch(fetchRequest)
-            
-            if let filterOperation = filterOperation {
-                quads = quads.filter(filterOperation)
+        appDelegate.coredDataStack?.perform({ managedContext in
+            do {
+                let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
+                fetchRequest.predicate = predicate
+                var quads = try managedContext.fetch(fetchRequest)
+                
+                if let filterOperation = filterOperation {
+                    quads = quads.filter(filterOperation)
+                }
+                
+                let result = self.extendedData(from: quads)
+                completionHandler(result, nil)
+            } catch {
+                completionHandler(nil, error)
             }
-            
-            let result = extendedData(from: quads)
-            completionHandler(result, nil)
-        } catch {
-            completionHandler(nil, error)
-        }
+        })
     }
     
     private func extendedData(from quads: [Quad]) -> [ExtendedData] {

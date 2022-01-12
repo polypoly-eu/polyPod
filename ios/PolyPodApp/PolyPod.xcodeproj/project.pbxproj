@@ -96,6 +96,7 @@
 		5B0F7B6126AD840E00F4EFF4 /* PolyIn+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */; };
 		5B0F7B6326AD841D00F4EFF4 /* PolyIn+Has.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */; };
 		5B8653022643FC310014208C /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
+		901C0588278EE58700BC8364 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0587278EE58700BC8364 /* CoreDataStack.swift */; };
 		E9040D4726F0A30E00A88593 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4626F0A30E00A88593 /* Info.swift */; };
 		E9040D4926F0B2B400A88593 /* RuntimeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */; };
 		E90F89EA2629822400AD7D96 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89E92629822400AD7D96 /* OnboardingView.swift */; };
@@ -233,6 +234,7 @@
 		5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyIn+Delete.swift"; sourceTree = "<group>"; };
 		5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyIn+Has.swift"; sourceTree = "<group>"; };
 		5B8653012643FC310014208C /* PolyNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyNav.swift; sourceTree = "<group>"; };
+		901C0587278EE58700BC8364 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		E9040D4626F0A30E00A88593 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeInfo.swift; sourceTree = "<group>"; };
 		E90F89E92629822400AD7D96 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 				1A4C21DC24A63DD4006CC1FD /* Term+CoreDataClass.swift */,
 				1A4C21DD24A63DD4006CC1FD /* Term+CoreDataProperties.swift */,
 				1AF1178D24C174A00063EE37 /* Term+Additions.swift */,
+				901C0587278EE58700BC8364 /* CoreDataStack.swift */,
 			);
 			path = CoreDataModels;
 			sourceTree = "<group>";
@@ -893,6 +896,7 @@
 				1A4C21DF24A63DD4006CC1FD /* Term+CoreDataProperties.swift in Sources */,
 				E97D327A263153C200A5A180 /* NavigationBar.swift in Sources */,
 				E9545EAE273530ED001E8C7F /* UpdateNotification.swift in Sources */,
+				901C0588278EE58700BC8364 /* CoreDataStack.swift in Sources */,
 				5B0F7B6326AD841D00F4EFF4 /* PolyIn+Has.swift in Sources */,
 				1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */,
 				5B0F7B6126AD840E00F4EFF4 /* PolyIn+Delete.swift in Sources */,
@@ -1147,7 +1151,7 @@
 				CODE_SIGN_ENTITLEMENTS = PolyPod/PolyPod.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4A6DFU3K82;
+				DEVELOPMENT_TEAM = 4278QW38RV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1158,7 +1162,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.5.0;
-				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.polypod;
+				PRODUCT_BUNDLE_IDENTIFIER = test.polypoly.polypod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -1173,7 +1177,7 @@
 				CODE_SIGN_ENTITLEMENTS = PolyPod/PolyPod.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4A6DFU3K82;
+				DEVELOPMENT_TEAM = 4278QW38RV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1184,7 +1188,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.5.0;
-				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.polypod;
+				PRODUCT_BUNDLE_IDENTIFIER = test.polypoly.polypod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
