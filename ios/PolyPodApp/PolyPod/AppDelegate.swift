@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    // MARK: UISceneSession Lifecycle
+    // MARK: - UISceneSession Lifecycle
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
@@ -77,10 +77,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
     
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    // MARK: - Data protection availability
+
+    /*
+     On a device that uses content protection, protected files are stored in an encrypted form and made available only at certain times, usually when the device is unlocked.
+     This notification lets your app know that the device is now unlocked and that you may access certain types of protected files again.
+     */
+    func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
+        
+    }
+    
+    /*
+     On a device that uses content protection, protected files are stored in an encrypted form and made available only at certain times, usually when the device is unlocked.
+     This notification lets your app know that the device is about to be locked and that any protected files it is currently accessing might become unavailable shortly.
+     
+     If your app is currently accessing a protected file, you can use this method to release any references to that file.
+     Although it is not an error to access the file while the device is locked, any attempts to do so will fail.
+     Therefore, if your app depends on the file, you might want to take steps to avoid using that file while the device is locked.
+     */
+    func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
+        
     }
     
     lazy var persistentContainer: NSPersistentContainer = {
