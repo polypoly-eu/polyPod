@@ -5,10 +5,10 @@ import "./blockLegend.css";
 const BlockLegend = ({ legend }) => {
   return (
     <div className="block-legend">
-      {legend.map((e, i) => (
-        <div key={i} className="legend-entry">
-          <div style={{ backgroundColor: e.color }}></div>
-          {e.description}
+      {legend.map((content, index) => (
+        <div key={index} className="legend-entry">
+          <div style={{ backgroundColor: content.color }}></div>
+          {content.description}
         </div>
       ))}
     </div>
