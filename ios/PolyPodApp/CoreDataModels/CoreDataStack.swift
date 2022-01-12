@@ -4,10 +4,12 @@ import Foundation
 import CoreData
 
 final class CoreDataStack {
+    static let shared = CoreDataStack()
+
     private let container: NSPersistentContainer
     private var context: NSManagedObjectContext?
 
-    init() {
+    private init() {
         let modelName = "PolyPodModel"
         let model = NSManagedObjectModel.with(name: modelName, in: Bundle(for: CoreDataStack.self))
         container = NSPersistentContainer.load(from: NSPersistentContainer.defaultDirectoryURL().appendingPathComponent("\(modelName).sqlite"),

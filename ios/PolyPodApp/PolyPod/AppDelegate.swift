@@ -5,8 +5,6 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private static let updateNotificationCheckIdentifier = "coop.polypoly.polypod.updateNotificationCheck"
-    
-    let coredDataStack = CoreDataStack()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -24,8 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //LocationTracker.shared.startLocationLogging()
         
         if application.isProtectedDataAvailable {
-            coredDataStack.protectedDataDidBecomeAvailable()
-            coredDataStack.perform { context in
+            CoreDataStack.shared.protectedDataDidBecomeAvailable()
+            CoreDataStack.shared.perform { context in
                 let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
                 let count = try! context.count(for: fetchRequest)
                 Log.debug("Initialised triple store. Number of quads in Core Data: \(count)")
@@ -94,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      This notification lets your app know that the device is now unlocked and that you may access certain types of protected files again.
      */
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
-        coredDataStack.protectedDataDidBecomeAvailable()
+        CoreDataStack.shared.protectedDataDidBecomeAvailable()
     }
     
     /*
@@ -106,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      Therefore, if your app depends on the file, you might want to take steps to avoid using that file while the device is locked.
      */
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
-        coredDataStack.protectedDataWillBecomeUnavailable()
+        CoreDataStack.shared.protectedDataWillBecomeUnavailable()
     }
     
     func scheduleUpdateNotificationCheck() {
