@@ -1,5 +1,6 @@
 import { Chart } from "../chart";
 import * as d3 from "d3";
+import { wrapTexts } from "../../d3-utils";
 
 // default constants
 const defaultPadding = 2,
@@ -102,7 +103,7 @@ export class TreeMap extends Chart {
         text.text(onUnfittingText);
     });
 
-    texts.call(this._wrapText);
+    texts.call(wrapTexts);
   }
 
   _drawJurisdictionTree() {
@@ -110,41 +111,6 @@ export class TreeMap extends Chart {
     const nodes = this._addNodes(treemapRoot);
     this._addRects(nodes);
     this._addAndWrapTexts(nodes);
-  }
-
-  _wrapText(text) {
-    text.each(function () {
-      let text = d3.select(this),
-        rectWidth = +text.attr("data-width"),
-        words = text.text().split(/\s+/).reverse(),
-        word,
-        line = [],
-        lineNumber = 0,
-        lineHeight = 1.1, // ems
-        y = 0,
-        dy = 0,
-        tspan = text
-          .text(null)
-          .append("tspan")
-          .attr("x", 0)
-          .attr("y", y)
-          .attr("dy", dy + "em");
-      while ((word = words.pop())) {
-        line.push(word);
-        tspan.text(line.join(" "));
-        if (tspan.node().getComputedTextLength() > rectWidth) {
-          line.pop();
-          tspan.text(line.join(" "));
-          line = [word];
-          tspan = text
-            .append("tspan")
-            .attr("x", 2)
-            .attr("y", y)
-            .attr("dy", ++lineNumber * lineHeight + dy + "em")
-            .text(word);
-        }
-      }
-    });
   }
 
   render() {
