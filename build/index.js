@@ -168,7 +168,6 @@ const npm = async (...args) => {
     );
     const elapsed = new Date() - start;
     logDetail(`NPM finished in ${elapsed} ms`);
-    return result;
 };
 
 async function npmInstall(name) {
