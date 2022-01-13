@@ -5,6 +5,7 @@ const fsPromises = require("fs/promises");
 const path = require("path");
 const { spawn } = require("child_process");
 const { performance } = require("perf_hooks");
+const { exit } = require("process");
 const validCommands = [
     "build",
     "clean",
@@ -266,12 +267,25 @@ function logSuccess(command, timeLapsed) {
     logMain(message);
 }
 
+function checkVersions(metaManifest) {
+    const nodeMajorVersion = parseInt(process.version.slice(1, 3), 10);
+    if (nodeMajorVersion < metaManifest.requiredNodeMajorVersion) {
+        console.error(
+            `⚠️ Node.js v${metaManifest.requiredNodeMajorVersion} or later ` +
+                `required, you are on ${process.version}`
+        );
+        exit( 1 );
+    }
+}
+
 async function main() {
     const { scriptPath, command, start } = parseCommandLine();
     if (!command) {
         showUsage(scriptPath);
         return 1;
     }
+    const metaManifest = parseManifest("build/packages.json");
+    checkVersions(metaManifest);
 
     process.chdir(path.dirname(scriptPath));
 
@@ -294,16 +308,6 @@ async function main() {
         await executeProcess("npx", ["eslint", "--fix", ...eslintOptions]);
         logSuccess(command);
         return 0;
-    }
-
-    const metaManifest = parseManifest("build/packages.json");
-    const nodeMajorVersion = parseInt(process.version.slice(1, 3), 10);
-    if (nodeMajorVersion < metaManifest.requiredNodeMajorVersion) {
-        console.error(
-            `Node.js v${metaManifest.requiredNodeMajorVersion} or later ` +
-                `required, you are on ${process.version}`
-        );
-        return 1;
     }
 
     try {
