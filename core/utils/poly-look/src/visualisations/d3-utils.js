@@ -41,3 +41,17 @@ export function wrapTexts(texts) {
     }
   });
 }
+
+/**
+ * Turns a JS Date into a d3 date
+ *
+ * @param {Date} jsDate
+ * @returns d3-Date
+ */
+export function jsDateToD3Date(jsDate) {
+  const date = `${jsDate.getFullYear()}-${
+    jsDate.getMonth() + 1
+  }-${jsDate.getDate()}`;
+
+  return d3.timeParse("%Y-%m-%d")(date);
+}

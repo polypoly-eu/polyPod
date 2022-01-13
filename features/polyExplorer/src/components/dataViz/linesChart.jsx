@@ -47,63 +47,6 @@ const LinesChart = ({ data }) => {
         },
     };
 
-    const bubblesSpeechSmall = {
-        [screenSizes.smallScreen]: {
-            width: 110,
-            height: 52,
-            fontSize: 14,
-            fontWeight: 800,
-        },
-        [screenSizes.normalScreen]: {
-            width: 110,
-            height: 52,
-            fontSize: 14,
-            fontWeight: 800,
-        },
-        [screenSizes.bigScreen]: {
-            width: 110,
-            height: 52,
-            fontSize: 14,
-            fontWeight: 800,
-        },
-    };
-
-    const bubblesSpeechBig = {
-        [screenSizes.smallScreen]: {
-            width: 204,
-            height: 59,
-            fontSize: 14,
-            fontWeight: 500,
-        },
-        [screenSizes.normalScreen]: {
-            width: 204,
-            height: 59,
-            fontSize: 14,
-            fontWeight: 500,
-        },
-        [screenSizes.bigScreen]: {
-            width: 204,
-            height: 89,
-            fontSize: 14,
-            fontWeight: 500,
-        },
-    };
-
-    const labelYAxisPosition = {
-        [screenSizes.smallScreen]: {
-            left: 20,
-            top: 120,
-        },
-        [screenSizes.normalScreen]: {
-            left: 20,
-            top: 120,
-        },
-        [screenSizes.bigScreen]: {
-            left: 20,
-            top: 120,
-        },
-    };
-
     const legendsConfiguration = {
         [screenSizes.smallScreen]: {
             left: 20,
@@ -190,14 +133,6 @@ const LinesChart = ({ data }) => {
 
     const [scaleX, updateScaleX] = useState(null);
     const [scaleY, updateScaleY] = useState(null);
-
-    function jsDateTo3dDate(jsDate) {
-        const date = `${jsDate.getFullYear()}-${
-            jsDate.getMonth() + 1
-        }-${jsDate.getDate()}`;
-
-        return d3.timeParse("%Y-%m-%d")(date);
-    }
 
     function _getIdName(id) {
         return id.replace(/\s/g, "_");
@@ -310,6 +245,7 @@ const LinesChart = ({ data }) => {
             .select("path")
             .style("stroke-dasharray", "1,2")
             .style("stroke-width", "3");
+
         root.select("#x-axis")
             .selectAll(".tick")
             .selectAll("line")

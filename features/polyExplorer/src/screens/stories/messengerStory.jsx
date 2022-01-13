@@ -14,7 +14,7 @@ import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 
 import "./messengerStory.css";
 import MessengerTreeMap from "../../components/clusterStories/messengerTreeMap.jsx";
-import LinesChart from "../../components/dataViz/linesChart.jsx";
+import MauLineChart from "../../components/clusterStories/mauLineChart.jsx";
 
 const i18nHeader = "clusterMessengerStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -187,155 +187,6 @@ const MessengerStory = () => {
         instructionText: "Explore by tapping on the lines",
         graphDescription:
             "Development of monthly active users (MAU) per messenger over recent years in millions",
-        groups: [
-            {
-                groupName: "Owned by Facebook",
-                color: "#3749A9",
-                lines: [
-                    {
-                        points: [
-                            {
-                                x: new Date("2015-01-01"),
-                                y: 50,
-                            },
-                            {
-                                x: new Date("2016-01-01"),
-                                y: 100,
-                            },
-                            {
-                                x: new Date("2017-01-01"),
-                                y: 300,
-                            },
-                            {
-                                x: new Date("2018-01-01"),
-                                y: 400,
-                            },
-                            {
-                                x: new Date("2019-01-01"),
-                                y: 500,
-                            },
-                        ],
-
-                        points: [
-                            {
-                                x: new Date("2015-01-01"),
-                                y: 100,
-                            },
-                            {
-                                x: new Date("2015-06-01"),
-                                y: 50,
-                            },
-                            {
-                                x: new Date("2016-01-01"),
-                                y: 150,
-                            },
-                            {
-                                x: new Date("2016-06-01"),
-                                y: 100,
-                            },
-                            {
-                                x: new Date("2017-01-01"),
-                                y: 200,
-                            },
-                        ],
-                    },
-                    {
-                        points: [
-                            {
-                                x: new Date("2018-01-01"),
-                                y: 500,
-                            },
-                            {
-                                x: new Date("2019-01-01"),
-                                y: 490,
-                            },
-                            {
-                                x: new Date("2020-01-01"),
-                                y: 450,
-                            },
-                            {
-                                x: new Date("2020-06-01"),
-                                y: 420,
-                            },
-                            {
-                                x: new Date("2021-01-01"),
-                                y: 400,
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                groupName: "Others",
-                color: "#3BA6FF",
-                lines: [
-                    {
-                        points: [
-                            {
-                                x: new Date("2015-01-01"),
-                                y: 500,
-                            },
-                            {
-                                x: new Date("2016-01-01"),
-                                y: 500,
-                            },
-                            {
-                                x: new Date("2017-01-01"),
-                                y: 500,
-                            },
-                            {
-                                x: new Date("2018-01-01"),
-                                y: 500,
-                            },
-                            {
-                                x: new Date("2019-01-01"),
-                                y: 500,
-                            },
-                        ],
-                    },
-                    {
-                        points: [
-                            {
-                                x: new Date("2015-01-01"),
-                                y: 10,
-                            },
-                            {
-                                x: new Date("2015-06-01"),
-                                y: 100,
-                            },
-                            {
-                                x: new Date("2016-01-01"),
-                                y: 1000,
-                            },
-                        ],
-                    },
-                    {
-                        points: [
-                            {
-                                x: new Date("2018-01-01"),
-                                y: 1000,
-                            },
-                            {
-                                x: new Date("2019-01-01"),
-                                y: 100,
-                            },
-                            {
-                                x: new Date("2020-01-01"),
-                                y: 10,
-                            },
-                            {
-                                x: new Date("2020-06-01"),
-                                y: 1,
-                            },
-                            {
-                                x: new Date("2021-01-01"),
-                                y: -10,
-                            },
-                        ],
-                    },
-                ],
-            },
-        ],
     };
 
     return (
@@ -388,7 +239,7 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:details.p.1`)}
             </p>
-            <LinesChart data={mockData} />
+            <MauLineChart messengers={messengers} />
             <MessengerTreeMap
                 messengers={Object.values(products)}
                 i18nHeader={i18nHeader}
