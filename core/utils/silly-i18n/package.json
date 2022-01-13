@@ -18,6 +18,14 @@
     "@babel/preset-env": "^7.14.2",
     "jsdoc": "^3.6.7"
   },
+  "overrides": {
+	"markdown-it-anchor": {
+            "markdown-it": "^12.3.2"
+	},
+	"jsdoc": {
+	    "markdown-it": "^12.3.2"
+	}
+  },
   "private": true,
   "type": "module"
 }
