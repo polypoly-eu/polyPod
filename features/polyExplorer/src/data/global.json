@@ -1599,7 +1599,7 @@
             "dpv:Superclass": "dpv:CommercialInterest",
             "Translation_DE": "Marketing",
             "Translation_EN": "Marketing",
-            "Synonyms": "Publicity;Public Relations",
+            "Synonyms": "Advertising",
             "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben.",
             "Explanation_EN": "Carry out marketing i.e. promoting, selling, and distributing a product or service.",
             "Editorial_Purpose": "Advertising"
@@ -1827,11 +1827,11 @@
         "dpv:ServiceUsageAnalytics": {
             "dpv:Purpose": "dpv:ServiceUsageAnalytics",
             "dpv:Superclass": "dpv:ServiceProvision",
-            "Translation_DE": "Analytik",
-            "Translation_EN": "Analytics",
+            "Translation_DE": "Verwendungsanalyse",
+            "Translation_EN": "Usage Analytics",
             "Synonyms": "",
-            "Explanation_DE": "Durchführung von Analysen und Berichterstattung über die Nutzung von Dienstleistungen oder Produkten",
-            "Explanation_EN": "Conduct analysis and reporting related to usage of services or products",
+            "Explanation_DE": ",Berechnen, Analysieren und Berichten von Benutzer:innen-Verhalten und -Ereignissen für einen Dienst oder ein Produkt.",
+            "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product.",
             "Editorial_Purpose": ""
         },
         "dpv:UsageAnalytics": {
@@ -1922,6 +1922,26 @@
             "Synonyms": "",
             "Explanation_DE": "Gewährleistung und Durchsetzung der Sicherheit, z. B. von Daten und Personal",
             "Explanation_EN": "Ensure and enforce security e.g. of data, personnel",
+            "Editorial_Purpose": ""
+        },
+        "dpv:VendorManagement": {
+            "dpv:Purpose": "dpv:VendorManagement",
+            "dpv:Superclass": "dpv:Purpose",
+            "Translation_DE": "Lieferantenverwaltung",
+            "Translation_EN": "Vendor Management",
+            "Synonyms": "",
+            "Explanation_DE": "Verwaltung von Aufträgen, Zahlungen, Bewertungen und Akquise von Anbietern",
+            "Explanation_EN": "Manage orders, payment, evaluation, and prospecting related to vendors",
+            "Editorial_Purpose": ""
+        },
+        "dpv:OrganisationGovernance": {
+            "dpv:Purpose": "dpv:OrganisationGovernance",
+            "dpv:Superclass": "dpv:Purpose",
+            "Translation_DE": "Verwaltung der Organisation",
+            "Translation_EN": "Organisation Governance",
+            "Synonyms": "",
+            "Explanation_DE": "Durchführung von Aktivitäten und Funktionen für die Leitung der Organisation",
+            "Explanation_EN": "Conduct activities and functions for organisation's governance",
             "Editorial_Purpose": ""
         }
     },
