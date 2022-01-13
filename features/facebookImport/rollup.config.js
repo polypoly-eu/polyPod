@@ -1,5 +1,5 @@
 import resolve from "@rollup/plugin-node-resolve";
-import copy from "rollup-plugin-copy";
+import copy from "@polypoly-eu/rollup-plugin-copy-watch";
 import sucrase from "@rollup/plugin-sucrase";
 import css from "rollup-plugin-css-only";
 import json from "@rollup/plugin-json";

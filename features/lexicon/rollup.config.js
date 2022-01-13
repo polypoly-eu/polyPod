@@ -5,7 +5,7 @@ import livereload from "rollup-plugin-livereload";
 import css from "rollup-plugin-css-only";
 import json from "@rollup/plugin-json";
 import sucrase from "@rollup/plugin-sucrase";
-import copy from "rollup-plugin-copy";
+import copy from "@polypoly-eu/rollup-plugin-copy-watch";
 
 const production = !process.env.ROLLUP_WATCH;
 

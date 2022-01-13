@@ -21,11 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Location tracking is disabled for now - no feature needs it
         //LocationTracker.shared.startLocationLogging()
         
-        let managedContext = persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
-        let count = try! managedContext.count(for: fetchRequest)
-        Log.debug("Number of quads in Core Data: \(count)")
-        
         self.registerUpdateNotificationCheck()
         
         return true
@@ -134,6 +129,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         })
+        
+        let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
+        let count = try! container.viewContext.count(for: fetchRequest)
+        Log.debug("Initialised triple store. Number of quads in Core Data: \(count)")
+        
         return container
     }()
     
