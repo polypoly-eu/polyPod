@@ -40,12 +40,13 @@ export class HorizontalBarChart extends Chart {
     width = 400,
     height = 400,
     barValueColor,
+    //barWidth is actually bar height since it is a horizontal bar chart but for all intents and purposes it is the bar's width
     barWidth,
     numberTicksX,
     groups,
   }) {
     super({ selector, data, width, height, margin });
-    this.groups = groups;
+    this._groups = groups;
     this._barColor = barColor || "blue";
     this._barWidth = barWidth;
     this._xScale = d3.scaleLinear().range([0, this.chartWidth]);
@@ -56,32 +57,47 @@ export class HorizontalBarChart extends Chart {
 
   _getYscales(groups) {
     if (groups) {
-      const _yScales = [];
+      const yScales = [];
+      let headingSpace = groupHeadlineHeight + headlinePadding;
       for (let group of groups) {
-        const relevantBars = this.data.filter((data)=> data.group === group.id).length
+        const relevantBars = this.data.filter(
+          (data) => data.group === group.id
+        ).length;
+        // totalSpan * barPadding = paddingSpan
+        const barsSpan = relevantBars * this._barWidth;
+        const paddingSpan = barsSpan / (1 / barPadding - 1);
+        const totalSpan = barsSpan + relevantBars * paddingSpan;
+        // const totalSpan = barsSpan;
         const scale = d3
           .scaleBand()
-          .range([groupHeadlineHeight + headlinePadding, relevantBars *  ]);
+          .range([headingSpace, totalSpan])
+          .padding(barPadding);
+        headingSpace = headingSpace + totalSpan;
+        yScales.push({ scale, id: group.id });
       }
+      return yScales;
     } else {
-      return [d3.scaleBand().range([0, this.chartHeight]).padding(barPadding)];
+      return [
+        {
+          scale: d3
+            .scaleBand()
+            .range([0, this.chartHeight])
+            .padding(barPadding),
+        },
+      ];
     }
   }
 
   _adaptScalesToData() {
     this._xScale.domain([0, d3.max(this.data, (d) => d.value)]);
-    if (this.grouped) {
-      const ownedByFaceBook = this.data
-        .filter((d) => d.facebookGroup)
-        .map((d) => d.title)
-        .unshift("Owned By Facebook");
-      const other = this.data
-        .filter((d) => !d.facebookGroup)
-        .map((d) => d.title)
-        .unshift("Other");
-      const domain = [...ownedByFaceBook, ...other];
-      this._yScale.domain(domain);
-    } else this._yScale.domain(this.data.map((d) => d.title));
+    for (let scale of this._yScales) {
+      const relevantData = scale.id
+        ? this.data
+            .filter((data) => data.group === scale.id)
+            .map((data) => data.title)
+        : this.data.map((data) => data.title);
+      scale.scale.domain(relevantData);
+    }
   }
 
   _addAxis() {
@@ -140,11 +156,30 @@ export class HorizontalBarChart extends Chart {
       .attr("width", initializingBarHeight)
       .attr("y", (d) =>
         this._barWidth
-          ? this._yScale(d.title) +
-            (this._yScale.bandwidth() - this._barWidth) / 2
-          : this._yScale(d.title)
+          ? this._yScales
+              .map((scale) =>
+                scale.scale(d.title)
+                  ? scale.scale(d.title) +
+                    (scale.scale.bandwidth() - this._barWidth) / 2
+                  : null
+              )
+              .find((value) => value)
+          : this._yScales
+              .map((scale) =>
+                scale.scale(d.title) ? scale.scale(d.title) : null
+              )
+              .find((value) => value)
       )
-      .attr("height", this._barWidth || this._yScale.bandwidth())
+      .attr(
+        "height",
+        this._barWidth ||
+          ((d) => {
+            for (let scale of this._yScales) {
+              if (d.group === scale.id) return scale.scale.bandwidth() / 2;
+            }
+            return this._yScales[0].scale.bandwidth() / 2;
+          })
+      )
       .attr("fill", this._barColor)
       .attr("class", "bar")
       .transition()
@@ -155,10 +190,19 @@ export class HorizontalBarChart extends Chart {
 
   _addEnteringBarLabels(barLabels) {
     barLabels
-      .enter()
       .append("text")
-      .attr("y", (d) => this._yScale(d.title))
-      .attr("class", "bar-value")
+      .attr("y", (d) =>
+        this._yScales
+          .map((scale) =>
+            scale.scale(d.title)
+              ? this._groups
+                ? scale.scale(d.title) + scale.scale.bandwidth()
+                : scale.scale(d.title)
+              : null
+          )
+          .find((value) => value)
+      )
+      .attr("class", "bar-label")
       .attr("x", 0)
       .text((d) => d.title)
       .attr("fill", "transparent")
@@ -169,14 +213,57 @@ export class HorizontalBarChart extends Chart {
       .attr("fill", this._barValueColor);
   }
 
-  _addEnteringBars(bars) {
-    bars
-      .enter()
+  _addEnteringGroupLabels(groupLabels) {
+    groupLabels
+      .append("text")
+      .attr(
+        "y",
+        (d) => this._yScales.find((scale) => scale.id === d.id).scale.range()[0]
+      )
+      .attr("class", "group-label")
+      .attr("x", 0)
+      .text((d) => d.translation)
+      .attr("fill", "transparent")
+      .style("font-size", "15px")
+      .transition()
+      .delay(1000)
+      .duration(500)
+      .attr("fill", this._barValueColor);
+  }
+
+  _addEnteringBars(barGroups) {
+    barGroups
       .append("rect")
       .attr("x", 0)
       .attr("width", initializingBarHeight)
-      .attr("y", (d) => this._yScale(d.title) + this._yScale.bandwidth() / 4)
-      .attr("height", this._yScale.bandwidth() / 2)
+      .attr("y", (d) =>
+        this._barWidth
+          ? this._yScales
+              .map((scale) =>
+                scale.scale(d.title)
+                  ? scale.scale(d.title) +
+                    (scale.scale.bandwidth() - this._barWidth) / 2
+                  : null
+              )
+              .find((value) => value)
+          : this._yScales
+              .map((scale) =>
+                scale.scale(d.title)
+                  ? scale.scale(d.title) + scale.scale.bandwidth() / 4
+                  : null
+              )
+              .find((value) => value)
+      )
+      .attr(
+        "height",
+        this._barWidth ||
+          ((d) => {
+            for (let scale of this._yScales) {
+              if (d.group === scale.id) return scale.scale.bandwidth() / 2;
+            }
+            return this._yScales[0].scale.bandwidth() / 2;
+          })
+      )
       .attr("fill", this._barColor)
       .attr("class", "bar")
       .transition()
@@ -186,13 +273,20 @@ export class HorizontalBarChart extends Chart {
       .attr("width", (d) => this._xScale(d.value));
   }
 
-  _addEnteringBarValues(barValues) {
-    barValues
-      .enter()
+  _addEnteringBarValues(barGroups) {
+    barGroups
       .append("text")
-      .attr("y", (d) => this._yScale(d.title) + this._yScale.bandwidth() / 2)
+      .attr("y", (d) =>
+        this._yScales
+          .map((scale) =>
+            scale.scale(d.title)
+              ? scale.scale(d.title) + scale.scale.bandwidth() / 2
+              : null
+          )
+          .find((value) => value)
+      )
       .attr("class", "bar-value")
-      .attr("text-anchor", "middle")
+      .attr("text-anchor", "end")
       .attr("x", (d) => this._xScale(d.value) - barValueMargin)
       .text((d) => d.value)
       .attr("fill", "transparent")
@@ -201,6 +295,27 @@ export class HorizontalBarChart extends Chart {
       .delay(1000)
       .duration(500)
       .attr("fill", this._barValueColor);
+  }
+
+  _alignBarText() {
+    const xScale = this._xScale;
+    const groups = this._groups;
+    this.chart.selectAll(".bar-group").each(function () {
+      const node = d3.select(this);
+      const text = node.select(".bar-value");
+      const label = node.select(".bar-label");
+      const labelWidth = groups ? label.node().getBBox().width : 0;
+      if (
+        text.node().getBBox().width + labelWidth + barValueMargin >
+        xScale(+text.node().textContent)
+      ) {
+        if (groups)
+          label.attr("text-anchor", "start").attr("x", (d) => xScale(d.value));
+        text
+          .attr("text-anchor", "start")
+          .attr("x", (d) => xScale(d.value) + labelWidth);
+      }
+    });
   }
 
   _updateExistingBarValues(barValues) {
@@ -215,29 +330,40 @@ export class HorizontalBarChart extends Chart {
       .attr("fill", this._barValueColor);
   }
 
-  _displayBars() {
-    const bars = this.chart.selectAll(".bar").data(this.data, (d) => d.title);
-    bars.exit().remove();
-    // this._updateExistingBars(bars);
-    if (this.grouped) this._addEnteringBars(bars);
-    else this._addEnteringBar(bars);
+  _displayBars(barGroups, enteringBarGroups) {
+    this._updateExistingBars(barGroups);
+    this._addEnteringBars(enteringBarGroups);
+    // if (this.grouped) this._addEnteringBars(bars);
+    // else this._addEnteringBar(bars);
   }
 
-  _displayValues() {
-    const barValues = this.chart
-      .selectAll(".bar-value")
-      .data(this._data, (d) => d.title);
-    barValues.exit().remove();
-    // this._updateExistingBarValues(barValues);
-    this._addEnteringBarValues(barValues);
-    if (this.grouped) this._addEnteringBarGroupedLabels(barValues);
-    else this._addEnteringBarLabels(barValues);
+  _displayValues(barGroups, enteringBarGroups) {
+    // this._updateExistingBarValues(barGroups);
+    this._addEnteringBarValues(enteringBarGroups);
+    this._addEnteringBarLabels(enteringBarGroups);
   }
 
   render() {
     this._adaptScalesToData();
-    if (this._barValueColor) this._displayValues();
-    this._displayBars();
-    // else this.chart.selectAll(".bar-value").remove();
+    const barGroups = this.chart
+      .selectAll(".bar-group")
+      .data(this._data, (d) => d.title);
+    const enteringBarGroups = barGroups
+      .enter()
+      .append("g")
+      .attr("class", "bar-group");
+
+    barGroups.exit().remove();
+    this._displayBars(barGroups, enteringBarGroups);
+    if (this._barValueColor) this._displayValues(barGroups, enteringBarGroups);
+    else this.chart.selectAll(".bar-value").remove();
+    if (this._groups) {
+      const groupLabels = this.chart
+        .selectAll(".bar-group")
+        .data(this._groups, (g) => g.id);
+      const enteringGroupLabels = groupLabels.enter();
+      this._addEnteringGroupLabels(enteringGroupLabels);
+    }
+    this._alignBarText(barGroups);
   }
 }

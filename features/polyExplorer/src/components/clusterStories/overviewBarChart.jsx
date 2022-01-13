@@ -10,9 +10,9 @@ const chartColors = {
 };
 
 function Installs({ entities }) {
-    const data = entities.map(({ name, dataRecipients }) => ({
+    const data = entities.map(({ name, totalInstalls }) => ({
         title: name,
-        value: dataRecipients.length,
+        value: totalInstalls / 1000000,
     }));
     return (
         <div>
@@ -28,7 +28,9 @@ function Installs({ entities }) {
 function Users({ entities }) {
     const data = entities.map(({ name, activeUsers }) => ({
         title: name,
-        value: activeUsers.values[activeUsers.values - 1].user_count,
+        value:
+            activeUsers.values[activeUsers.values.length - 1].user_count /
+            1000000,
     }));
     return (
         <div>
@@ -42,9 +44,11 @@ function Users({ entities }) {
     );
 }
 function PartOf({ entities }) {
-    const data = entities.map(({ name, dataRecipients, productOwner }) => ({
+    const data = entities.map(({ name, activeUsers, productOwner }) => ({
         title: name,
-        value: dataRecipients.length,
+        value:
+            activeUsers.values[activeUsers.values.length - 1].user_count /
+            1000000,
         group: productOwner.some((owner) => owner.includes("Facebook"))
             ? "facebook"
             : "other",
@@ -54,6 +58,7 @@ function PartOf({ entities }) {
             <PolyChart
                 type="horizontal-bar-chart"
                 data={data}
+                barWidth={20}
                 groups={[
                     { translation: "Owned By Facebook", id: "facebook" },
                     { translation: "Other", id: "other" },
