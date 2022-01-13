@@ -270,13 +270,14 @@ function logSuccess(command, timeLapsed) {
 }
 
 function checkVersions(metaManifest) {
+    let exitCode = 0;
     const nodeMajorVersion = parseInt(process.version.slice(1, 3), 10);
     if (nodeMajorVersion < metaManifest.requiredNodeMajorVersion) {
         console.error(
             `⚠️ Node.js v${metaManifest.requiredNodeMajorVersion} or later ` +
                 `required, you are on ${process.version}`
         );
-        exit( 1 );
+        exitCode = 1;
     }
     npm( "--version").then( (v) => { 
         const npmMajorVersion = v.match(/^(\d+)\.\d+/)[0];
@@ -285,9 +286,10 @@ function checkVersions(metaManifest) {
                 `⚠️ NPM ${metaManifest.requiredNPMMajorVersion} or later ` +
                 `required, you are on ${npmMajorVersion}`
             );
-            exit( 1 );
+            exitCode = 1;
         }
     });
+    return exitCode;
 }
 
 async function main() {
@@ -297,7 +299,10 @@ async function main() {
         return 1;
     }
     const metaManifest = parseManifest("build/packages.json");
-    checkVersions(metaManifest);
+    const exitCode = checkVersions(metaManifest);
+    if (exitCode == 1 ) {
+        return 1;
+    }
 
     process.chdir(path.dirname(scriptPath));
 
