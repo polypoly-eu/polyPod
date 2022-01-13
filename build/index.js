@@ -298,8 +298,8 @@ async function main() {
     }
     const metaManifest = parseManifest("build/packages.json");
     const exitCode = checkVersions(metaManifest);
-    if (exitCode == 1 ) {
-        return 1;
+    if (exitCode !== 0 ) {
+        return exitCode;
     }
 
     process.chdir(path.dirname(scriptPath));
