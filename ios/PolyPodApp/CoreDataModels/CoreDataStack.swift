@@ -75,7 +75,7 @@ extension CoreDataStack {
         if let error = error {
             Log.debug("Failed to load persistent stores -> \(error)")
         } else {
-            Log.debug("Loaded persistent stores")
+            Log.error("Loaded persistent stores")
             context = container.newBackgroundContext()
         }
     }
@@ -90,7 +90,7 @@ extension CoreDataStack {
                 try coordinator.persistentStores.forEach(coordinator.remove)
                 Log.debug("Unloaded persistent stores")
             } catch {
-                Log.debug("Failed to unload persistent stores -> \(error)")
+                Log.error("Failed to unload persistent stores -> \(error)")
             }
         }
         context = nil
@@ -126,6 +126,5 @@ fileprivate extension NSManagedObjectModel {
             .url(forResource: name, withExtension: "momd")
             // Can use force unwrap, this code should fail only if core data model is missing from the project.
             .flatMap(NSManagedObjectModel.init(contentsOf:))!
-        
     }
 }
