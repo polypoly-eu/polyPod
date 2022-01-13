@@ -32,5 +32,13 @@
     "@web/test-runner-chrome": "^0.10.5",
     "identity-obj-proxy": "^3.0.0",
     "jsdoc": "^3.6.7"
+  },
+    "overrides": {
+	"markdown-it-anchor": {
+            "markdown-it": "^12.3.2"
+	},
+	"jsdoc": {
+	    "markdown-it": "^12.3.2"
+	}
   }
 }
