@@ -22,3 +22,26 @@
     font-size: 14px;
     text-align: center;
 }
+
+.data-types-legend {
+    display: flex;
+    margin: 24px 0;
+}
+
+.data-types-legend .bubble-legend {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin: auto 0;
+}
+
+.data-types-legend p {
+    margin: 0 0 0 8px;
+    font-family: "Jost Medium";
+}
+
+.by-types-bubble-chart h4 {
+    margin: 0;
+    text-align: center;
+    font-family: "Jost Medium";
+}
