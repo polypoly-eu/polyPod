@@ -23,7 +23,6 @@ function mockConsole() {
     return {
         output,
         restore: () => {
-            console.log( "Restoring never");
             for (let [name, fn] of Object.entries(originals))
                 console[name] = fn;
         },
@@ -36,8 +35,7 @@ async function build(...parameters) {
         lastExitCode = exitCode;
     };
     const consoleMock = mockConsole();
-    buildMain();
-    console.error("We shouldn't be here");
+    await buildMain();
     consoleMock.restore();
     return {
         exitCode: lastExitCode,

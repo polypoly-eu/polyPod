@@ -5,7 +5,6 @@ const fsPromises = require("fs/promises");
 const path = require("path");
 const { spawn } = require("child_process");
 const { performance } = require("perf_hooks");
-const { exit } = require("process");
 const validCommands = [
     "build",
     "clean",
