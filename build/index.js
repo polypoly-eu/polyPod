@@ -12,6 +12,7 @@ const validCommands = [
     "lintfix",
     "list",
     "list-deps",
+    "sync",
     "test",
 ];
 
@@ -197,6 +198,7 @@ const commands = {
     build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
     test: (pkg) => npmRun("test", pkg),
     clean: (pkg) => cleanPackage(pkg),
+    sync: (pkg) => npm("i"),
 };
 
 async function executeCommand(pkg, command) {
