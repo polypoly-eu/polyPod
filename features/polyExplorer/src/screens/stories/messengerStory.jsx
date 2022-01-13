@@ -12,6 +12,9 @@ import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 
 const i18nHeader = "clusterMessengerStory";
 const i18nHeaderCommon = "clusterStoryCommon";
+const bubbleColor = "#FB8A89";
+const bubbleStroke = "none";
+const bubbleTextColor = "#0f1938";
 
 const MessengerStory = () => {
     const { products, globalData } = useContext(ExplorerContext);
@@ -83,9 +86,6 @@ const MessengerStory = () => {
             id: "by-messenger",
             label: "By Messenger",
             translation: i18n.t(`${i18nHeader}:data.types.tab.messenger`),
-            bubbleColor: "#FB8A89",
-            bubbleTextColor: "#FB8A89",
-            bubbleStroke: "none",
             description: i18n.t(`${i18nHeader}:data.types.text.messenger`),
             data: listOfMessengerApps.map((messenger) => {
                 return {
@@ -105,9 +105,6 @@ const MessengerStory = () => {
             id: "by-shares",
             label: "By Shares",
             translation: i18n.t(`${i18nHeader}:data.types.tab.shares`),
-            bubbleColor: "#FB8A89",
-            bubbleTextColor: "#FB8A89",
-            bubbleStroke: "none",
             description: i18n.t(`${i18nHeader}:data.types.text.shares
             `),
             data: listOfMessengerApps.map((messenger) => {
@@ -131,10 +128,6 @@ const MessengerStory = () => {
             id: "by-types",
             label: "By Types",
             translation: i18n.t(`${i18nHeader}:data.types.tab.types`),
-            bubbleColor: "#FB8A89",
-            bubbleTextColor: "#FB8A89",
-            bubbleStroke: "none",
-            activeBubbleTextColor: "var(--color-text-dark)",
             description: i18n.t(`${i18nHeader}:data.types.text.types`),
             data: [
                 {
@@ -242,8 +235,7 @@ const MessengerStory = () => {
                                 <div
                                     className="bubble-legend"
                                     style={{
-                                        backgroundColor:
-                                            dataTypes[0].bubbleColor,
+                                        backgroundColor: bubbleColor,
                                     }}
                                 ></div>
                                 <p>
@@ -253,9 +245,9 @@ const MessengerStory = () => {
                             {dataType.id !== "by-types" ? (
                                 <MatrixBubblesChart
                                     data={dataType.data}
-                                    bubbleColor={dataType.bubbleColor}
-                                    textColor={dataType.bubbleTextColor}
-                                    strokeColor={dataType.bubbleStroke}
+                                    bubbleColor={bubbleColor}
+                                    textColor={bubbleColor}
+                                    strokeColor={bubbleStroke}
                                 />
                             ) : (
                                 <div className="by-types-bubble-chart">
@@ -264,16 +256,16 @@ const MessengerStory = () => {
                                         data={dataType.data[0].bubbles}
                                         width={dataType.data[0].width}
                                         height={dataType.data[0].height}
-                                        bubbleColor={dataType.bubbleColor}
+                                        bubbleColor={bubbleColor}
                                         textColor={dataType.data[0].bubbles.map(
                                             (bubble) => {
                                                 selectedDataTypeBubble ===
                                                 bubble.value
-                                                    ? dataType.activeBubbleTextColor
-                                                    : dataType.bubbleTextColor;
+                                                    ? bubbleTextColor
+                                                    : bubbleColor;
                                             }
                                         )}
-                                        strokeColor={dataType.bubbleStroke}
+                                        strokeColor={bubbleStroke}
                                         onBubbleClick={handleBubbleClick}
                                     />
                                     <h4>{dataType.data[0].title}</h4>
