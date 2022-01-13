@@ -296,13 +296,13 @@ async function main() {
         showUsage(scriptPath);
         return 1;
     }
+
+    process.chdir(path.dirname(scriptPath));
     const metaManifest = parseManifest("build/packages.json");
     const exitCode = checkVersions(metaManifest);
     if (exitCode !== 0 ) {
         return exitCode;
     }
-
-    process.chdir(path.dirname(scriptPath));
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
 
