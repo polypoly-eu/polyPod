@@ -143,7 +143,9 @@ function logDependencies(packageTree) {
 function executeProcess(executable, args, env = process.env) {
     const cmd = process.platform === "win32" ? `${executable}.cmd` : executable;
     const spawnedProcess = spawn(cmd, args, { env: env });
+    let output = '';
     spawnedProcess.stdout.on("data", (data) => {
+        output = `${output}${data}`;
         console.log(data.toString());
     });
 
@@ -153,7 +155,7 @@ function executeProcess(executable, args, env = process.env) {
 
     return new Promise((resolve, reject) => {
         spawnedProcess.on("exit", (code) => {
-            if (code === 0) resolve();
+            if (code === 0) resolve(output);
             else reject(`Process exited with ${code}`);
         });
     });
@@ -161,13 +163,14 @@ function executeProcess(executable, args, env = process.env) {
 
 const npm = async (...args) => {
     const start = new Date();
-    await executeProcess(
+    const result = await executeProcess(
         "npm",
         ["--no-update-notifier", "--no-fund", ...args],
         { ...process.env, FORCE_COLOR: 1 }
     );
     const elapsed = new Date() - start;
     logDetail(`NPM finished in ${elapsed} ms`);
+    return result;
 };
 
 async function npmInstall(name) {
@@ -276,6 +279,16 @@ function checkVersions(metaManifest) {
         );
         exit( 1 );
     }
+    npm( "--version").then( (v) => { 
+        const npmMajorVersion = v.match(/^(\d+)\.\d+/)[0];
+        if (npmMajorVersion < metaManifest.requiredNPMMajorVersion) {
+            console.error(
+                `⚠️ NPM ${metaManifest.requiredNPMMajorVersion} or later ` +
+                `required, you are on ${npmMajorVersion}`
+            );
+            exit( 1 );
+        }
+    });
 }
 
 async function main() {
