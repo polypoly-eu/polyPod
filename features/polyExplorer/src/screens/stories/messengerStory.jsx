@@ -238,7 +238,7 @@ const MessengerStory = () => {
                             translation={dataType.translation}
                             key={i}
                         >
-                            <div className="data-types-lengend">
+                            <div className="data-types-legend">
                                 <div
                                     className="bubble-legend"
                                     style={{
