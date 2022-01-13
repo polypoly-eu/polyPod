@@ -194,16 +194,19 @@ async function cleanPackage(pkg) {
         await fsPromises.rm(path, { recursive: true, force: true });
 }
 
+async function syncPackage(pkg) {
+    logDetail(`🕑 ${pkg.name} ...`);
+    if (fs.existsSync("package-lock.json")) { 
+        fs.rmSync("package-lock.json");
+    }
+    await npm("i");
+}
+
 const commands = {
     build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
     test: (pkg) => npmRun("test", pkg),
     clean: (pkg) => cleanPackage(pkg),
-    sync: () => {
-        if (fs.existsSync("package-lock.json")) { 
-            fs.rmSync("package-lock.json");
-        }
-        npm("i");
-    },
+    sync: (pkg) => syncPackage(pkg),
 };
 
 async function executeCommand(pkg, command) {
