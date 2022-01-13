@@ -198,8 +198,11 @@ const commands = {
     build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
     test: (pkg) => npmRun("test", pkg),
     clean: (pkg) => cleanPackage(pkg),
-    sync: (pkg) => {
-        fs.rmSync("package-lock.json"); npmRun("i", pkg)
+    sync: () => {
+        if (fs.existsSync("package-lock.json")) { 
+            fs.rmSync("package-lock.json");
+        }
+        npm("i");
     },
 };
 
