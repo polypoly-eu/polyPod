@@ -169,7 +169,12 @@ const DigitalGiantsStory = () => {
             <Tabs>
                 {dataTypes.map((dataType, i) => {
                     return (
-                        <Tab id={dataType.id} label={dataType.label} key={i}>
+                        <Tab
+                            id={dataType.id}
+                            label={dataType.label}
+                            translation={dataType.translation}
+                            key={i}
+                        >
                             <div className="data-types-legend">
                                 <div
                                     className="bubble-legend"
