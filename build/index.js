@@ -144,7 +144,7 @@ function executeProcess(executable, args, env = process.env) {
     const spawnedProcess = spawn(cmd, args, { env: env });
     let output = '';
     spawnedProcess.stdout.on("data", (data) => {
-        output = `${output}${data}`;
+        output = data;
         console.log(data.toString());
     });
 
