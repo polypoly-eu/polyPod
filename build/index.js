@@ -16,6 +16,10 @@ const validCommands = [
     "list-deps",
 ];
 
+function platformize( executable ) {
+    return process.platform === "win32" ? `${executable}.cmd` : executable;
+}
+
 function parseCommandLine() {
     const [, scriptPath, ...parameters] = process.argv;
     if (parameters.includes("--help")) return { scriptPath, command: null };
@@ -141,7 +145,7 @@ function logDependencies(packageTree) {
 }
 
 function executeProcess(executable, args, env = process.env) {
-    const cmd = process.platform === "win32" ? `${executable}.cmd` : executable;
+    const cmd = platformize( executable );
     const spawnedProcess = spawn(cmd, args, { env: env });
     spawnedProcess.stdout.on("data", (data) => {
         console.log(data.toString());
@@ -268,7 +272,7 @@ function logSuccess(command, timeLapsed) {
 }
 
 function checkVersions(metaManifest) {
-    const thisNPM = process.platform === "win32" ? "npm.cmd" : "npm";
+    const thisNPM = platformize( "npm" );
     let exitCode = 0;
     const nodeMajorVersion = parseInt(process.version.slice(1, 3), 10);
     if (nodeMajorVersion < metaManifest.requiredNodeMajorVersion) {
