@@ -3,7 +3,8 @@
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 const path = require("path");
-const { spawn } = require("child_process");
+const { spawn, execSync } = require("child_process");
+
 const { performance } = require("perf_hooks");
 const validCommands = [
     "build",
@@ -142,9 +143,7 @@ function logDependencies(packageTree) {
 function executeProcess(executable, args, env = process.env) {
     const cmd = process.platform === "win32" ? `${executable}.cmd` : executable;
     const spawnedProcess = spawn(cmd, args, { env: env });
-    let output = '';
     spawnedProcess.stdout.on("data", (data) => {
-        output = data.toString();
         console.log(data.toString());
     });
 
@@ -154,7 +153,7 @@ function executeProcess(executable, args, env = process.env) {
 
     return new Promise((resolve, reject) => {
         spawnedProcess.on("exit", (code) => {
-            if (code === 0) resolve(output);
+            if (code === 0) resolve();
             else reject(`Process exited with ${code}`);
         });
     });
@@ -162,7 +161,7 @@ function executeProcess(executable, args, env = process.env) {
 
 const npm = async (...args) => {
     const start = new Date();
-    const result = await executeProcess(
+    await executeProcess(
         "npm",
         ["--no-update-notifier", "--no-fund", ...args],
         { ...process.env, FORCE_COLOR: 1 }
@@ -270,6 +269,7 @@ function logSuccess(command, timeLapsed) {
 }
 
 function checkVersions(metaManifest) {
+    const thisNPM = process.platform === "win32" ? "npm.cmd" : "npm";
     let exitCode = 0;
     const nodeMajorVersion = parseInt(process.version.slice(1, 3), 10);
     if (nodeMajorVersion < metaManifest.requiredNodeMajorVersion) {
@@ -279,16 +279,15 @@ function checkVersions(metaManifest) {
         );
         exitCode = 1;
     }
-    npm( "--version").then( (v) => { 
-        const npmMajorVersion = v.match(/^(\d+)\.\d+/)[0];
-        if (npmMajorVersion < metaManifest.requiredNPMMajorVersion) {
+    const npmVersion = execSync(`${thisNPM} --version`, { encoding: 'utf-8' });
+    const npmMajorVersion = npmVersion.match(/^(\d+)\.\d+/)[0];
+    if (npmMajorVersion < metaManifest.requiredNPMMajorVersion) {
             console.error(
                 `⚠️ NPM ${metaManifest.requiredNPMMajorVersion} or later ` +
                 `required, you are on ${npmMajorVersion}`
             );
             exitCode = 1;
-        }
-    });
+    }
     return exitCode;
 }
 
