@@ -21,6 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Location tracking is disabled for now - no feature needs it
         //LocationTracker.shared.startLocationLogging()
         
+        CoreDataStack.shared.isProtectedDataAvailable = { completion in
+            dispatchToMainQueue {
+                completion(UIApplication.shared.isProtectedDataAvailable)
+            }
+        }
+
         if application.isProtectedDataAvailable {
             CoreDataStack.shared.protectedDataDidBecomeAvailable()
             CoreDataStack.shared.perform { context in
@@ -51,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             notification.handlePushSeen()
             showUpdateNotification()
         }
+
         task.setTaskCompleted(success: true)
         scheduleUpdateNotificationCheck()
     }
