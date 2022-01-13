@@ -82,7 +82,7 @@ const DigitalGiantsStory = () => {
         {
             id: "by-companies",
             label: "By Companies",
-            translation: i18n.t(`${i18nHeader}:datatypes.tab.companies`),
+            translation: i18n.t(`${i18nHeader}:data.types.tab.companies`),
             bubbleColor: "#FB8A89",
             bubbleTextColor: "#FB8A89",
             bubbleStroke: "none",
@@ -98,7 +98,7 @@ const DigitalGiantsStory = () => {
         {
             id: "by-shares",
             label: "By Shares",
-            translation: i18n.t(`${i18nHeader}:datatypes.tab.shares`),
+            translation: i18n.t(`${i18nHeader}:data.types.tab.shares`),
             bubbleColor: "#FB8A89",
             bubbleTextColor: "#FB8A89",
             bubbleStroke: "none",
@@ -114,14 +114,14 @@ const DigitalGiantsStory = () => {
         {
             id: "by-types",
             label: "By Types",
-            translation: i18n.t(`${i18nHeader}:datatypes.tab.types`),
+            translation: i18n.t(`${i18nHeader}:data.types.tab.types`),
             bubbleColor: "#FB8A89",
             bubbleTextColor: "#FB8A89",
             bubbleStroke: "none",
             activeBubbleTextColor: "var(--color-text-dark)",
             data: [
                 {
-                    title: i18n.t(`${i18nHeader}:datatypes.legend.types`, {
+                    title: i18n.t(`${i18nHeader}:data.types.legend.types`, {
                         amount_of_data_types: listOfDataCategories.length,
                         amount_of_shares: totalShares,
                     }),
@@ -186,7 +186,7 @@ const DigitalGiantsStory = () => {
                                     }}
                                 ></div>
                                 <p>
-                                    {i18n.t(`${i18nHeader}:datatypes.legend`)}
+                                    {i18n.t(`${i18nHeader}:data.types.legend`)}
                                 </p>
                             </div>
                             {dataType.id !== "by-types" ? (

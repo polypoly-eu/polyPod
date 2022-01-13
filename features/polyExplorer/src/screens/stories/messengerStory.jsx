@@ -82,11 +82,11 @@ const MessengerStory = () => {
         {
             id: "by-messenger",
             label: "By Messenger",
-            translation: i18n.t(`${i18nHeader}:datatypes.tab.messenger`),
+            translation: i18n.t(`${i18nHeader}:data.types.tab.messenger`),
             bubbleColor: "#FB8A89",
             bubbleTextColor: "#FB8A89",
             bubbleStroke: "none",
-            description: i18n.t(`${i18nHeader}:datatypes.text.messenger`),
+            description: i18n.t(`${i18nHeader}:data.types.text.messenger`),
             data: listOfMessengerApps.map((messenger) => {
                 return {
                     title:
@@ -104,11 +104,11 @@ const MessengerStory = () => {
         {
             id: "by-shares",
             label: "By Shares",
-            translation: i18n.t(`${i18nHeader}:datatypes.tab.shares`),
+            translation: i18n.t(`${i18nHeader}:data.types.tab.shares`),
             bubbleColor: "#FB8A89",
             bubbleTextColor: "#FB8A89",
             bubbleStroke: "none",
-            description: i18n.t(`${i18nHeader}:datatypes.text.shares
+            description: i18n.t(`${i18nHeader}:data.types.text.shares
             `),
             data: listOfMessengerApps.map((messenger) => {
                 return {
@@ -130,15 +130,15 @@ const MessengerStory = () => {
         {
             id: "by-types",
             label: "By Types",
-            translation: i18n.t(`${i18nHeader}:datatypes.tab.types`),
+            translation: i18n.t(`${i18nHeader}:data.types.tab.types`),
             bubbleColor: "#FB8A89",
             bubbleTextColor: "#FB8A89",
             bubbleStroke: "none",
             activeBubbleTextColor: "var(--color-text-dark)",
-            description: i18n.t(`${i18nHeader}:datatypes.text.types`),
+            description: i18n.t(`${i18nHeader}:data.types.text.types`),
             data: [
                 {
-                    title: i18n.t(`${i18nHeader}:datatypes.legend.types`, {
+                    title: i18n.t(`${i18nHeader}:data.types.legend.types`, {
                         amount_of_data_types: listOfDataCategories.length,
                         amount_of_shares: totalShares,
                     }),
@@ -213,7 +213,7 @@ const MessengerStory = () => {
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
             <SectionTitle
-                title={i18n.t(`${i18nHeader}:datatypes.title`)}
+                title={i18n.t(`${i18nHeader}:data.types.title`)}
             ></SectionTitle>
             {dataTypes.map((dataType, i) => {
                 return (
@@ -247,7 +247,7 @@ const MessengerStory = () => {
                                     }}
                                 ></div>
                                 <p>
-                                    {i18n.t(`${i18nHeader}:datatypes.legend`)}
+                                    {i18n.t(`${i18nHeader}:data.types.legend`)}
                                 </p>
                             </div>
                             {dataType.id !== "by-types" ? (
