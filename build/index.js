@@ -91,7 +91,7 @@ function createPackageTree(metaManifest) {
 
 const logMain = (message) => console.log(`\n 🚧 ${message}`);
 
-const logDetail = async(message) => console.log(`\n 🏗️ ${message}`);
+const logDetail = (message) => console.log(`\n 🏗️ ${message}`);
 
 function collectDependentPackages(name, packageTree) {
     const dependents = Object.keys(packageTree).filter((key) =>
