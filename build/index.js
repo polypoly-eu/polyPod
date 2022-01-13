@@ -278,14 +278,20 @@ function checkVersions(metaManifest) {
         );
         exitCode = 1;
     }
-    const npmVersion = execSync(`${thisNPM} --version`, { encoding: 'utf-8' });
-    const npmMajorVersion = npmVersion.match(/^(\d+)\.\d+/)[0];
-    if (npmMajorVersion < metaManifest.requiredNPMMajorVersion) {
+    let npmVersion;
+    try {
+        npmVersion = execSync(`${thisNPM} --version`, { encoding: 'utf-8' });
+        const npmMajorVersion = npmVersion.match(/^(\d+)\.\d+/)[0];
+        if (npmMajorVersion < metaManifest.requiredNPMMajorVersion) {
             console.error(
                 `⚠️ NPM ${metaManifest.requiredNPMMajorVersion} or later ` +
                 `required, you are on ${npmMajorVersion}`
             );
             exitCode = 1;
+        }
+    } catch (error) {
+        console.error( `⚠️ Error ${error} when trying to find NPM version` );
+        exitCode = 1;
     }
     return exitCode;
 }
