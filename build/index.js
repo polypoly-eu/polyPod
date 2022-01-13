@@ -8,11 +8,11 @@ const { performance } = require("perf_hooks");
 const validCommands = [
     "build",
     "clean",
-    "test",
     "lint",
     "lintfix",
     "list",
     "list-deps",
+    "test",
 ];
 
 function parseCommandLine() {
