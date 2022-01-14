@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ChipGroup, LineLegend, PolyChart } from "@polypoly-eu/poly-look";
 import i18n from "../../i18n";
 
-import "./mauLineChart.css";
+import "./messengerMauChart.css";
 
 const facebookColor = "#3749A9";
 const otherColor = "#3BA6FF";
@@ -32,19 +32,7 @@ const gradients = [
     },
 ];
 
-const coloring = {
-    Signal: otherColorSet,
-    Instagram: facebookColorSet,
-    WhatsApp: facebookColorSet,
-    Threema: otherColorSet,
-    Snapchat: otherColorSet,
-    "Facebook Messenger": facebookColorSet,
-    Telegram: otherColorSet,
-    TikTok: otherColorSet,
-    iMessage: otherColorSet,
-};
-
-const MauLineChart = ({ messengers, i18nHeader }) => {
+const MessengerMauChart = ({ messengers, i18nHeader }) => {
     const [selectedMessenger, setSelectedMessenger] = useState(null);
     const lineChartData = messengers.map((messenger) => ({
         id: messenger.ppid,
@@ -54,18 +42,27 @@ const MauLineChart = ({ messengers, i18nHeader }) => {
             id: messenger.ppid,
         })),
     }));
-    const lineColor = (d) => coloring[d[0].id].color;
-    const areaColor = (d) => {
-        console.log(d);
-        return d[0].id === selectedMessenger
-            ? `url(#${coloring[d[0].id].gradient})`
-            : "rgba(0, 0, 0, 0)";
-    };
 
     const messengerIds = messengers.map((m) => m.ppid);
 
+    const coloring = Object.fromEntries(
+        messengers.map((messenger) => [
+            messenger.ppid,
+            messenger.productOwner.some((e) => e.includes("Facebook"))
+                ? facebookColorSet
+                : otherColorSet,
+        ])
+    );
+    console.log(coloring);
+
+    const lineColor = (d) => coloring[d[0].id].color;
+    const areaColor = (d) =>
+        d[0].id === selectedMessenger
+            ? `url(#${coloring[d[0].id].gradient})`
+            : "rgba(0, 0, 0, 0)";
+
     return (
-        <div className="mau-line-chart">
+        <div className="messenger-mau-chart">
             <p>{i18n.t(`${i18nHeader}:details.monthly.active.users`)}</p>
             <LineLegend
                 legend={[
@@ -98,4 +95,4 @@ const MauLineChart = ({ messengers, i18nHeader }) => {
     );
 };
 
-export default MauLineChart;
+export default MessengerMauChart;
