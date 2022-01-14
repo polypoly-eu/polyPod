@@ -6,6 +6,8 @@
     "section.companies": "Companies",
     "section.dataRegions": "Data Regions",
     "section.explore.further": "Explore Further",
+    "label.purposes.mostMentioned": "Most Mentioned",
+    "label.purposes.multipleMentions": "Multiple Mentions",
     "label.receivingCompanies": "Receiving companies",
     "label.receivingIndustries": "Receiving industries"
 }

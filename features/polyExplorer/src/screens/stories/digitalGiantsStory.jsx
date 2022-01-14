@@ -6,6 +6,7 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import MatrixBubblesChart from "../../components/clusterStories/MatrixBubblesChart.jsx";
+import Purposes from "../../components/clusterStories/purposes.jsx";
 import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
@@ -226,6 +227,7 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
+            <Purposes />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />

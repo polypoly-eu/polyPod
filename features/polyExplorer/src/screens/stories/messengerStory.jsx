@@ -5,6 +5,7 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import MatrixBubblesChart from "../../components/clusterStories/MatrixBubblesChart.jsx";
+import Purposes from "../../components/clusterStories/purposes.jsx";
 import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
 import EntityList from "../../components/entityList/entityList.jsx";
 import OrderedList from "../../components/orderedList/orderedList.jsx";
@@ -226,12 +227,6 @@ const MessengerStory = () => {
                 i18nHeader={i18nHeader}
             />
             <SectionTitle
-                title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
-            />
-            <p className="big-first-letter">
-                {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
-            </p>
-            <SectionTitle
                 title={i18n.t(`${i18nHeader}:data.types.title`)}
             ></SectionTitle>
             {dataTypes.map((dataType, i) => {
@@ -302,6 +297,13 @@ const MessengerStory = () => {
                 })}
             </Tabs>
             <p className="source">{i18n.t("common:source")}: PolyPedia</p>
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
+            </p>
+            <Purposes />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />
