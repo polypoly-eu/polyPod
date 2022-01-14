@@ -14,7 +14,7 @@ const barValueMargin = 4;
 const barPadding = 0.2;
 const groupHeadlineHeight = 14;
 const headlinePadding = 6;
-
+const barTextBottomMargin = 6;
 /**
  * Visualizes data as a cluster of bubbles where the value of the bubble is represented as the radius.
  *
@@ -94,58 +94,11 @@ export class HorizontalBarChart extends Chart {
       const relevantData = scale.id
         ? this.data
             .filter((data) => data.group === scale.id)
+            .sort((a, b) => b.value - a.value)
             .map((data) => data.title)
-        : this.data.map((data) => data.title);
+        : this.data.sort((a, b) => b.value - a.value).map((data) => data.title);
       scale.scale.domain(relevantData);
     }
-  }
-
-  _addAxis() {
-    this.chart
-      .append("g")
-      .call(d3.axisLeft(this._yScale))
-      .attr("class", "y-axis axis")
-      .append("text")
-      .attr("y", 0)
-      .attr("dy", 0)
-      .attr("text-anchor", "end")
-      .text("value");
-
-    this.chart
-      .append("g")
-      .attr("class", "x-axis axis")
-      .call(
-        d3
-          .axisBottom(this._xScale)
-          .tickFormat((d) => d)
-          .ticks(this._numberTicksX)
-      )
-      .attr("transform", `translate(0, ${this.chartHeight})`);
-  }
-
-  //TODO: transition of y-axis
-  _transitionAxis() {
-    this.chart.selectAll(".y-axis").remove();
-    this.chart
-      .append("g")
-      .call(
-        d3
-          .axisLeft(this._yScale)
-          .tickFormat((d) => d)
-          .ticks(5)
-      )
-      .attr("class", "y-axis axis")
-      .append("text")
-      .attr("y", 6)
-      .attr("dy", "0.71em")
-      .attr("text-anchor", "end")
-      .text("value");
-
-    this.chart
-      .transition()
-      .selectAll(".x-axis")
-      .attr("x", 0)
-      .attr("width", (d) => this._xScale(d.value));
   }
 
   _updateExistingBars(bars) {
@@ -196,7 +149,9 @@ export class HorizontalBarChart extends Chart {
           .map((scale) =>
             scale.scale(d.title)
               ? this._groups
-                ? scale.scale(d.title) + scale.scale.bandwidth()
+                ? scale.scale(d.title) +
+                  scale.scale.bandwidth() -
+                  barTextBottomMargin
                 : scale.scale(d.title)
               : null
           )
@@ -210,7 +165,7 @@ export class HorizontalBarChart extends Chart {
       .transition()
       .delay(1000)
       .duration(500)
-      .attr("fill", this._barValueColor);
+      .attr("fill", this._groups ? this._barValueColor : "black");
   }
 
   _addEnteringGroupLabels(groupLabels) {
@@ -228,7 +183,7 @@ export class HorizontalBarChart extends Chart {
       .transition()
       .delay(1000)
       .duration(500)
-      .attr("fill", this._barValueColor);
+      .attr("fill", "black");
   }
 
   _addEnteringBars(barGroups) {
@@ -280,7 +235,11 @@ export class HorizontalBarChart extends Chart {
         this._yScales
           .map((scale) =>
             scale.scale(d.title)
-              ? scale.scale(d.title) + scale.scale.bandwidth() / 2
+              ? scale.scale(d.title) +
+                scale.scale.bandwidth() -
+                (this._groups
+                  ? barTextBottomMargin
+                  : (7 * barTextBottomMargin) / 3)
               : null
           )
           .find((value) => value)
@@ -300,20 +259,37 @@ export class HorizontalBarChart extends Chart {
   _alignBarText() {
     const xScale = this._xScale;
     const groups = this._groups;
+    const barColor = this._barColor;
     this.chart.selectAll(".bar-group").each(function () {
       const node = d3.select(this);
-      const text = node.select(".bar-value");
+      const value = node.select(".bar-value");
       const label = node.select(".bar-label");
       const labelWidth = groups ? label.node().getBBox().width : 0;
       if (
-        text.node().getBBox().width + labelWidth + barValueMargin >
-        xScale(+text.node().textContent)
+        value.node().getBBox().width + labelWidth + barValueMargin >
+        xScale(+value.node().textContent)
       ) {
         if (groups)
-          label.attr("text-anchor", "start").attr("x", (d) => xScale(d.value));
-        text
+          label
+            .attr("text-anchor", "start")
+            .attr("x", (d) => barValueMargin + xScale(d.value))
+            .attr("fill", "transparent")
+            .transition()
+            .delay(1000)
+            .duration(500)
+            .attr("fill", barColor);
+        value
           .attr("text-anchor", "start")
-          .attr("x", (d) => xScale(d.value) + labelWidth);
+          .attr(
+            "x",
+            (d) =>
+              barValueMargin + xScale(d.value) + barValueMargin + labelWidth
+          )
+          .attr("fill", "transparent")
+          .transition()
+          .delay(1000)
+          .duration(500)
+          .attr("fill", barColor);
       }
     });
   }
@@ -331,7 +307,7 @@ export class HorizontalBarChart extends Chart {
   }
 
   _displayBars(barGroups, enteringBarGroups) {
-    this._updateExistingBars(barGroups);
+    //this._updateExistingBars(barGroups);
     this._addEnteringBars(enteringBarGroups);
     // if (this.grouped) this._addEnteringBars(bars);
     // else this._addEnteringBar(bars);
