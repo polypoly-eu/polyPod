@@ -4,7 +4,6 @@ import { jsDateToD3Date } from "../../../d3-utils";
 
 const semiDarkColor = "#8d9caf";
 const yLabelsPosition = "-0.40em";
-const correctionYAxisSize = 10;
 const correctionYAxisLabels = 20;
 const startingLog = -2;
 const xScaleMarginBottom = 16;
