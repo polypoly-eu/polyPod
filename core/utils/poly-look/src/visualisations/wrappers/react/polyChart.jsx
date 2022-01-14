@@ -5,11 +5,8 @@ import {
   MirroredBarChart,
   BubbleCluster,
   SankeyDiagram,
-<<<<<<< HEAD
   HorizontalBarChart,
-=======
   TreeMap,
->>>>>>> main
 } from "../../charts";
 
 const charts = {

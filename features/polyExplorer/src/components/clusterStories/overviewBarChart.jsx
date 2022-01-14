@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import React from "react";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
