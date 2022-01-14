@@ -8,24 +8,25 @@ async function relevantZipEntries(zipFile) {
     const entries = await zipFile.getEntries();
     return entries.filter(
         (entry) =>
-            !entry._id.includes(".DS_Store") && !entry._id.includes("__MACOSX")
+            !entry.path.includes(".DS_Store") &&
+            !entry.path.includes("__MACOSX")
     );
 }
 
 async function readJSONFile(relativeFilePath, zipFile) {
-    if (!(await zipFile.hasFilePath(relativeFilePath))) {
+    if (!(await zipFile.hasEntryPath(relativeFilePath))) {
         throw new MissingFileImportException(relativeFilePath);
     }
-    const fileEntry = await zipFile.fileEntryFromPath(relativeFilePath);
-    return readFullPathJSONFile(fileEntry);
+    const entry = await zipFile.findEntry(relativeFilePath);
+    return readFullPathJSONFile(entry);
 }
 
-async function readFullPathJSONFile(fileEntry) {
-    const rawContent = await fileEntry.getContent();
+async function readFullPathJSONFile(entry) {
+    const rawContent = await entry.getContent();
     const fileContent = new TextDecoder("utf-8").decode(rawContent);
 
     if (!fileContent) {
-        throw new MissingContentImportException(fileEntry._id);
+        throw new MissingContentImportException(entry._id);
     }
 
     return JSON.parse(fileContent, (key, value) => {
@@ -89,8 +90,8 @@ async function jsonDataEntities(zipFile) {
     const entries = await relevantZipEntries(zipFile);
     const relevantJsonEntries = entries.filter(
         (entry) =>
-            !entry._id.includes("/files/") && // Remove user files
-            entry._id.endsWith(".json")
+            !entry.path.includes("/files/") && // Remove user files
+            entry.path.endsWith(".json")
     );
     return relevantJsonEntries;
 }

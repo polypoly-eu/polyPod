@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Tab from "./tab.jsx";
 
 import "./tabs.css";
 
-// TODO: swipe should default to true, but clicking on tabs currently does not
-//       change tab content if this is set.
-const Tabs = ({ children, swipe = false }) => {
+const Tabs = ({ children, swipe = true }) => {
   const [activeTabId, setActiveTabId] = useState(children[0].props.id);
 
-  const onTabClick = (ev, newActiveTabId) => {
+  const swiperRef = useRef();
+
+  const onTabClick = (ev, newActiveTabId, index) => {
     ev.preventDefault();
+    swiperRef.current.swiper.slideTo(index);
     setActiveTabId(newActiveTabId);
   };
 
@@ -20,7 +21,7 @@ const Tabs = ({ children, swipe = false }) => {
         {children.map((tab, index) => (
           <button
             key={index}
-            onClick={(ev) => onTabClick(ev, tab.props.id)}
+            onClick={(ev) => onTabClick(ev, tab.props.id, index)}
             className={
               tab.props.id === activeTabId ? "tab-button active" : "tab-button"
             }
@@ -30,6 +31,7 @@ const Tabs = ({ children, swipe = false }) => {
         ))}
       </div>
       <Swiper
+        ref={swiperRef}
         spaceBetween={1}
         slidesPerView={1}
         initialSlide={0}

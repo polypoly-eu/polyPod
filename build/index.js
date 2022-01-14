@@ -166,12 +166,13 @@ const npm = async (...args) => {
         { ...process.env, FORCE_COLOR: 1 }
     );
     const elapsed = new Date() - start;
-    logDetail(`NPM finished in ${elapsed} ms`);
+    const realCommand = args[args.length - 1];
+    logDetail(` ${ANSIInvert("npm " + realCommand)} finished in ${elapsed} ms`);
 };
 
 async function npmInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
-    await npm("ci");
+    await npm("--no-audit", "--prefer-offline", "ci");
 }
 
 async function npmRun(script, pkg) {
@@ -255,6 +256,10 @@ async function processAll(packageTree, command) {
 
 function ANSIBold(string) {
     return `\x1b[1m${string}\x1b[0m`;
+}
+
+function ANSIInvert(string) {
+    return `\x1b[7m${string}\x1b[27m`;
 }
 
 function logSuccess(command, timeLapsed) {

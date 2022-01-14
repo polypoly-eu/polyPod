@@ -36,19 +36,19 @@ class LocationTracker: NSObject, CLLocationManagerDelegate {
         if let date = UserDefaults.standard.object(forKey: LAST_LOCATION_DATE) as? Date {
             lastLocationDate = date
         }
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
         
         let timeInterval = location.timestamp.timeIntervalSince(lastLocationDate)
         if timeInterval >= SETTINGS_LAST_LOCATION_TIME_INTERVAL {
             print(location)
             UserDefaults.standard.set(location.timestamp, forKey: LAST_LOCATION_DATE)
-            let quads = CLLocation.entityModel().toQuads(entity: location, context: managedContext)
-            // This value was previously unused - since this code isn't being used at the moment, we just print it for now
-            print(quads)
+            CoreDataStack.shared.perform {  managedContext in
+                guard let managedContext = try? managedContext.get() else {
+                    return
+                }
+                let quads = CLLocation.entityModel().toQuads(entity: location, context: managedContext)
+                // This value was previously unused - since this code isn't being used at the moment, we just print it for now
+                print(quads)
+            }
         }
     }
 }

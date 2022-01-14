@@ -1,8 +1,8 @@
 {
   "name": "@polypoly-eu/rollup-plugin-copy-watch",
   "main": "index.js",
+  "private": true,
   "dependencies": {
-    "rollup-plugin-copy": "^3.3.0"
-  },
-  "private": true
+    "rollup-plugin-copy": "^3.4.0"
+  }
 }

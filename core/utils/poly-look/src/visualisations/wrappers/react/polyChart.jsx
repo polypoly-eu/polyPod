@@ -5,7 +5,11 @@ import {
   MirroredBarChart,
   BubbleCluster,
   SankeyDiagram,
+<<<<<<< HEAD
   HorizontalBarChart,
+=======
+  TreeMap,
+>>>>>>> main
 } from "../../charts";
 
 const charts = {
@@ -14,6 +18,7 @@ const charts = {
   "mirrored-bar-chart": MirroredBarChart,
   "bubble-cluster": BubbleCluster,
   "sankey-diagram": SankeyDiagram,
+  "tree-map": TreeMap,
 };
 
 /**

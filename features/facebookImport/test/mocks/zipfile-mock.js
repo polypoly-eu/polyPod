@@ -10,6 +10,13 @@ export class ZipFileEntryMock {
         this.content = content;
     }
 
+    get path() {
+        return this._path;
+    }
+    get id() {
+        return this._id;
+    }
+
     async stat() {
         const entryContent = this.zipFile.entries[this._id];
         return {
@@ -40,11 +47,11 @@ export class ZipFileMock {
         return [...this._entriesPathHash.values()];
     }
 
-    async hasFilePath(entryPath) {
+    async hasEntryPath(entryPath) {
         return this._entriesPathHash.has(entryPath);
     }
 
-    async fileEntryFromPath(entryPath) {
+    async findEntry(entryPath) {
         return this._entriesPathHash.get(entryPath);
     }
 

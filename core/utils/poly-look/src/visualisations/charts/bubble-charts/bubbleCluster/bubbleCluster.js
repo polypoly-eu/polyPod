@@ -31,14 +31,14 @@ const defaultOnClickFunction = () => {};
  * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
  * @param {number} data[].icon - A svg that should be displayed as the bubble in string form as you would get it from rollup-svg-plugin (eg. "<svg>...</svg>")
  * @param {Object[]} data[].children - Data for nested bubbles - only one level of nesting is currently supported, i.e. no grandchildren.
- * @param {number = 400} width - The width of the svg
- * @param {number = 300} height - The height of the svg
- * @param {string|callback = "blue"} [bubbleColor] - The color of the bubble (callbacks receive event and data)
- * @param {string|callback = "#f7fafc"} [strokeColor] - The color of the bubble outline (callbacks receive event and data)
- * @param {string|callback = "white"} [textColor] - The color of the bubble text (callbacks receive event and data)
- * @param {number|callback = 1} [opacity] - The opacity of the bubbles color 0 <= opacity <= 1 (callbacks receive event and data)
+ * @param {number} [width  = 400] - The width of the svg
+ * @param {number} [height = 300] - The height of the svg
+ * @param {string|callback} [bubbleColor = "blue"] - The color of the bubble (callbacks receive event and data)
+ * @param {string|callback} [strokeColor = "#f7fafc"] - The color of the bubble outline (callbacks receive event and data)
+ * @param {string|callback} [textColor = "white"] - The color of the bubble text (callbacks receive event and data)
+ * @param {number|callback} [opacity = 1] - The opacity of the bubbles color 0 <= opacity <= 1 (callbacks receive event and data)
  * @param {string|callback} [text] - The text rendered on top of each bubble, by default its value (callbacks receive event and data)
- * @param {callback = () => {}} [onBubbleClick] - Bubble onclick function
+ * @param {callback} [onBubbleClick = () => {}] - Bubble onclick function
  * @param {Object} [filter] - A filter that is applied to the elements
  * @param {SVG-Filter-Element} [filter.filterElement] - The svg filter element created (https://developer.mozilla.org/en-US/docs/Web/SVG/Element#filter_primitive_elements)
  * @param {string} [filter.type] - Filter type has different meanings depending on the context it's used in (https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/type)

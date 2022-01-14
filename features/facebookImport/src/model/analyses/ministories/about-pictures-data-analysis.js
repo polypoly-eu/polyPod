@@ -48,12 +48,9 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
             /^photos_and_videos\/(.+)\.(jpg|jpeg)$/i,
             /^posts\/media\/(.+)\.(jpg|jpeg)$/i,
         ];
-        const relevantEntriesPaths = (await relevantZipEntries(zipFile)).map(
-            (entry) => entry._path
-        );
-        return relevantEntriesPaths.filter((zipEntryPath) => {
-            return photoRegexes.find((regex) => regex.test(zipEntryPath));
-        });
+        return (await relevantZipEntries(zipFile))
+            .map((entry) => entry.path)
+            .filter((path) => photoRegexes.some((regex) => regex.test(path)));
     }
 
     async analyze({ zipFile }) {

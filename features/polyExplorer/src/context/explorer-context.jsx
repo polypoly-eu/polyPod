@@ -162,7 +162,7 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function entityJurisdictionByPpid(ppid) {
-        return entityObjectByPpid(ppid).jurisdiction;
+        return entityObjectByPpid(ppid)?.jurisdiction;
     }
 
     function handleOnboardingPopupClose() {

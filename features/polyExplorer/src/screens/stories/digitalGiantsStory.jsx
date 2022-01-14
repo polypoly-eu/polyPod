@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 import GradientCircleList from "../../components/gradientCircleList/gradientCircleList.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
+import MatrixBubblesChart from "../../components/clusterStories/MatrixBubblesChart.jsx";
 import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
-import { Tabs, Tab } from "@polypoly-eu/poly-look";
+import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 import EntityList from "../../components/entityList/entityList.jsx";
@@ -14,6 +15,9 @@ import EntityList from "../../components/entityList/entityList.jsx";
 const i18nHeader = "clusterDigitalGiantsStory";
 const i18nHeaderCommon = "clusterStoryCommon";
 const primaryColor = "#f95f5a";
+const bubbleColor = "#FB8A89";
+const bubbleStroke = "none";
+const bubbleTextColor = "#0f1938";
 
 const bigSixNames = [
     "Amazon",
@@ -25,7 +29,7 @@ const bigSixNames = [
 ];
 
 const DigitalGiantsStory = () => {
-    const { featuredEntities, entityJurisdictionByPpid } =
+    const { featuredEntities, entityJurisdictionByPpid, globalData } =
         useContext(ExplorerContext);
 
     const bigSix = bigSixNames.map((n) =>
@@ -44,6 +48,89 @@ const DigitalGiantsStory = () => {
     const otherJurisdictions = [
         ...new Set(jurisdictionLinks.map(({ target }) => target)),
     ].filter((j) => j !== "EU-GDPR");
+
+    const listOfDataCategories = Object.keys(
+        globalData.personal_data_categories
+    );
+
+    let totalShares = 0;
+    bigSix.forEach((company) => {
+        company._data.dataTypesShared.forEach((i) => (totalShares += i.count));
+    });
+
+    const dataTypesSharedCombined = listOfDataCategories
+        .map((category) => {
+            let total = 0;
+            bigSix.map((company) => {
+                company._data.dataTypesShared.forEach((typeCategory) => {
+                    if (typeCategory["dpv:Category"] === category)
+                        total += typeCategory.count;
+                });
+            });
+            return total !== 0
+                ? {
+                      "dpv:Category": category,
+                      total,
+                  }
+                : null;
+        })
+        .filter((e) => e)
+        .sort((a, b) => b.total - a.total);
+
+    const [selectedDataTypeBubble, setSelectedDataTypeBubble] = useState(
+        dataTypesSharedCombined[0].total
+    );
+
+    const dataTypes = [
+        {
+            id: "by-companies",
+            label: "By Companies",
+            translation: i18n.t(`${i18nHeader}:data.types.tab.companies`),
+            data: bigSixNames.map((companyName, n) => {
+                return {
+                    title: companyName,
+                    bubbles: bigSix[n]._data.dataTypesShared.map(() => {
+                        return { value: 1 };
+                    }),
+                };
+            }),
+        },
+        {
+            id: "by-shares",
+            label: "By Shares",
+            translation: i18n.t(`${i18nHeader}:data.types.tab.shares`),
+            data: bigSixNames.map((companyName, n) => {
+                return {
+                    title: companyName,
+                    bubbles: bigSix[n]._data.dataTypesShared.map((bubble) => {
+                        return { value: bubble.count };
+                    }),
+                };
+            }),
+        },
+        {
+            id: "by-types",
+            label: "By Types",
+            translation: i18n.t(`${i18nHeader}:data.types.tab.types`),
+            data: [
+                {
+                    title: i18n.t(`${i18nHeader}:data.types.legend.types`, {
+                        amount_of_data_types: listOfDataCategories.length,
+                        amount_of_shares: totalShares,
+                    }),
+                    bubbles: dataTypesSharedCombined.map((bubble) => {
+                        return { value: bubble.total };
+                    }),
+                    width: 400,
+                    height: 400,
+                },
+            ],
+        },
+    ];
+
+    const handleBubbleClick = (_, node) => {
+        setSelectedDataTypeBubble(node.data.value);
+    };
 
     return (
         <ClusterStory
@@ -80,16 +167,59 @@ const DigitalGiantsStory = () => {
                 {i18n.t(`${i18nHeader}:data.types.p`)}
             </p>
             <Tabs>
-                <Tab id="by-companies" label="By Companies">
-                    <div style={{ width: "100%", height: "200px" }}></div>
-                </Tab>
-                <Tab id="by-shares" label="By Shares">
-                    <div style={{ width: "100%", height: "200px" }}></div>
-                </Tab>
-                <Tab id="by-types" label="By Types">
-                    <div style={{ width: "100%", height: "200px" }}></div>
-                </Tab>
+                {dataTypes.map((dataType, i) => {
+                    return (
+                        <Tab
+                            id={dataType.id}
+                            label={dataType.label}
+                            translation={dataType.translation}
+                            key={i}
+                        >
+                            <div className="data-types-legend">
+                                <div
+                                    className="bubble-legend"
+                                    style={{
+                                        backgroundColor: bubbleColor,
+                                    }}
+                                ></div>
+                                <p>
+                                    {i18n.t(`${i18nHeader}:data.types.legend`)}
+                                </p>
+                            </div>
+                            {dataType.id !== "by-types" ? (
+                                <MatrixBubblesChart
+                                    data={dataType.data}
+                                    bubbleColor={bubbleColor}
+                                    textColor={bubbleColor}
+                                    strokeColor={bubbleStroke}
+                                />
+                            ) : (
+                                <div className="by-types-bubble-chart">
+                                    <PolyChart
+                                        type="bubble-cluster"
+                                        data={dataType.data[0].bubbles}
+                                        width={dataType.data[0].width}
+                                        height={dataType.data[0].height}
+                                        bubbleColor={bubbleColor}
+                                        textColor={dataType.data[0].bubbles.map(
+                                            (bubble) => {
+                                                selectedDataTypeBubble ===
+                                                bubble.value
+                                                    ? bubbleTextColor
+                                                    : bubbleColor;
+                                            }
+                                        )}
+                                        strokeColor={bubbleStroke}
+                                        onBubbleClick={handleBubbleClick}
+                                    />
+                                    <h4>{dataType.data[0].title}</h4>
+                                </div>
+                            )}
+                        </Tab>
+                    );
+                })}
             </Tabs>
+            <p className="source">{i18n.t("common:source")}: PolyPedia</p>
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
             />
@@ -114,7 +244,7 @@ const DigitalGiantsStory = () => {
                 links={jurisdictionLinks}
                 groups={{
                     source: {
-                        label: "Messengers",
+                        label: "Big Six",
                         all: true,
                     },
                     target: {

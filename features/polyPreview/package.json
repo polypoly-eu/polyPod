@@ -7,17 +7,12 @@
   },
   "dependencies": {
     "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
-    "rollup-plugin-css-only": "^3.1.0",
     "swiper": "^6.4.11"
   },
   "devDependencies": {
     "@polypoly-eu/podjs": "file:../../podjs",
     "@polypoly-eu/poly-look": "file:../../core/utils/poly-look",
-    "@polypoly-eu/rollup-plugin-copy-watch": "file:../../core/utils/rollup-plugin-copy-watch",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^11.2.0",
-    "@rollup/plugin-sucrase": "^3.1.0",
-    "rollup": "^2.26.11"
+    "@polypoly-eu/rollup-plugin-copy-watch": "file:../../core/utils/rollup-plugin-copy-watch"
   },
   "private": true
 }

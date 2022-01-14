@@ -21,11 +21,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Location tracking is disabled for now - no feature needs it
         //LocationTracker.shared.startLocationLogging()
         
-        let managedContext = persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
-        let count = try! managedContext.count(for: fetchRequest)
-        Log.debug("Number of quads in Core Data: \(count)")
+        CoreDataStack.shared.isProtectedDataAvailable = { completion in
+            dispatchToMainQueue {
+                completion(UIApplication.shared.isProtectedDataAvailable)
+            }
+        }
         
+        if application.isProtectedDataAvailable {
+            CoreDataStack.shared.protectedDataDidBecomeAvailable()
+            CoreDataStack.shared.perform { context in
+                let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
+                let count = try! context.get().count(for: fetchRequest)
+                Log.debug("Initialised triple store. Number of quads in Core Data: \(count)")
+            }
+        }
         self.registerUpdateNotificationCheck()
         
         return true
@@ -74,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    // MARK: UISceneSession Lifecycle
+    // MARK: - UISceneSession Lifecycle
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
@@ -82,75 +91,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
     
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    // MARK: - Data protection availability
+    
+    /*
+     On a device that uses content protection, protected files are stored in an encrypted form and made available only at certain times, usually when the device is unlocked.
+     This notification lets your app know that the device is now unlocked and that you may access certain types of protected files again.
+     */
+    func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
+        CoreDataStack.shared.protectedDataDidBecomeAvailable()
     }
     
-    lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-         */
-        let container = NSPersistentContainer(name: "PolyPodModel")
-        
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-            
-            // Enforce encryption
-            do {
-                let persistentStores = container.persistentStoreCoordinator.persistentStores
-                guard persistentStores.count >= 0 else {
-                    fatalError("Error enforcing encryption: No persistent stores found")
-                }
-                let persistentStore = persistentStores[0]
-                var metadata = persistentStore.metadata
-                if !metadata!.contains(where: {(key: String, value: Any) in
-                    return key == NSPersistentStoreFileProtectionKey
-                }) {
-                    metadata?[NSPersistentStoreFileProtectionKey] = FileProtectionType.complete
-                    container.persistentStoreCoordinator.setMetadata(metadata, for: persistentStore)
-                    try container.viewContext.save()
-                }
-            } catch {
-                if let error = error as NSError? {
-                    fatalError("Encryption error \(error), \(error.userInfo)")
-                }
-            }
-        })
-        return container
-    }()
-    
-    // MARK: - Core Data Saving support
-    
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
+    /*
+     On a device that uses content protection, protected files are stored in an encrypted form and made available only at certain times, usually when the device is unlocked.
+     This notification lets your app know that the device is about to be locked and that any protected files it is currently accessing might become unavailable shortly.
+     
+     If your app is currently accessing a protected file, you can use this method to release any references to that file.
+     Although it is not an error to access the file while the device is locked, any attempts to do so will fail.
+     Therefore, if your app depends on the file, you might want to take steps to avoid using that file while the device is locked.
+     */
+    func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
+        CoreDataStack.shared.protectedDataWillBecomeUnavailable()
     }
     
     func scheduleUpdateNotificationCheck() {
