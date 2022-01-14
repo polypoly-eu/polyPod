@@ -5,7 +5,7 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private static let updateNotificationCheckIdentifier = "coop.polypoly.polypod.updateNotificationCheck"
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             CoreDataStack.shared.protectedDataDidBecomeAvailable()
             CoreDataStack.shared.perform { context in
                 let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
-                let count = try! context.count(for: fetchRequest)
+                let count = try! context.get().count(for: fetchRequest)
                 Log.debug("Initialised triple store. Number of quads in Core Data: \(count)")
             }
         }
@@ -57,7 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             notification.handlePushSeen()
             showUpdateNotification()
         }
-
         task.setTaskCompleted(success: true)
         scheduleUpdateNotificationCheck()
     }

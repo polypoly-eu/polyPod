@@ -42,6 +42,9 @@ class LocationTracker: NSObject, CLLocationManagerDelegate {
             print(location)
             UserDefaults.standard.set(location.timestamp, forKey: LAST_LOCATION_DATE)
             CoreDataStack.shared.perform {  managedContext in
+                guard let managedContext = try? managedContext.get() else {
+                    return
+                }
                 let quads = CLLocation.entityModel().toQuads(entity: location, context: managedContext)
                 // This value was previously unused - since this code isn't being used at the moment, we just print it for now
                 print(quads)

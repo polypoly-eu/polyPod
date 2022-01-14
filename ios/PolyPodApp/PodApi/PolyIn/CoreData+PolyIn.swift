@@ -6,11 +6,11 @@ import CoreData
 extension CoreDataStack: PolyIn {
     func addQuads(quads: [ExtendedData], completionHandler: @escaping (Error?) -> Void) {
         perform { managedContext in
-            for quad in quads {
-                createNode(for: quad, in: managedContext)
-            }
-            
             do {
+                let managedContext = try managedContext.get()
+                for quad in quads {
+                    createNode(for: quad, in: managedContext)
+                }
                 try managedContext.save()
                 completionHandler(nil)
             } catch {
@@ -28,6 +28,7 @@ extension CoreDataStack: PolyIn {
         let (predicate, filterOperation) = quadsPredicateAndFilter(matcher: matcher)
         perform { managedContext in
             do {
+                let managedContext = try managedContext.get()
                 let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
                 fetchRequest.predicate = predicate
                 var quads = try managedContext.fetch(fetchRequest)
@@ -50,6 +51,7 @@ extension CoreDataStack: PolyIn {
                 let (predicate, filterOperation) = quadsPredicateAndFilter(matcher: quad)
                 
                 do {
+                    let managedContext = try managedContext.get()
                     let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
                     fetchRequest.predicate = predicate
                     var quads = try managedContext.fetch(fetchRequest)
@@ -74,6 +76,7 @@ extension CoreDataStack: PolyIn {
             for quad in quads {
                 let (predicate, filterOperation) = quadsPredicateAndFilter(matcher: quad)
                 do {
+                    let managedContext = try managedContext.get()
                     let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
                     fetchRequest.predicate = predicate
                     var quads = try managedContext.fetch(fetchRequest)

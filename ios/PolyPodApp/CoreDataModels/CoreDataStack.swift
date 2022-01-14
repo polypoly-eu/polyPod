@@ -9,7 +9,7 @@ final class CoreDataStack {
     private let container: NSPersistentContainer
     
     /*
-     This is the context to be used to perform all operation.
+     This is the context to be used to perform all operations.
      
      Note: It is optional, as persistent stores are not loaded at initialization, but only when protected data is available.
            When protected data becomes unavailable, context will be saved and nullified, see protectedDataWillBecomeUnavailable.
@@ -34,24 +34,20 @@ final class CoreDataStack {
            while polypod is in FOREGROUND. Otherwise no events of having protected data unavailable are sent.
            This closure will be used to imperatively ask if protected data is avaialble for use.
      */
-    var isProtectedDataAvailable: ((@escaping (Bool) -> Void) -> Void)?
+    var isProtectedDataAvailable: ((@escaping (Bool) -> Void) -> Void)!
     
     /// Use this function to perform any CoreData operation on PolyPod model.
-    func perform(_ operation: @escaping (NSManagedObjectContext) -> Void,
+    /// The operation will be handed the NSManagedObjectContext if possible, otherwise an error will be handed.
+    func perform(_ operation: @escaping (Result<NSManagedObjectContext, Error>) -> Void,
                  file: String = #file,
                  line: Int = #line,
                  function: String = #function) {
-        guard let context = context else {
-            Log.error("Invalid attempt to execute core data operation in \(function) from \(file) at \(line)")
-            return
-        }
-        
-        isProtectedDataAvailable? { available in
-            if available {
-                context.perform { operation(context) }
-            } else {
+        isProtectedDataAvailable { available in
+            guard let context = self.context, available == true else {
                 Log.error("Invalid attempt to execute core data operation in \(function) from \(file) at \(line)")
+                return operation(.failure(PodApiError.protectedDataUnavailable))
             }
+            context.perform { operation(.success(context)) }
         }
     }
 }
@@ -86,7 +82,7 @@ extension CoreDataStack {
         let coordinator = self.container.persistentStoreCoordinator
         perform { context in
             do {
-                try? context.save()
+                try? context.get().save()
                 try coordinator.persistentStores.forEach(coordinator.remove)
                 Log.debug("Unloaded persistent stores")
             } catch {
