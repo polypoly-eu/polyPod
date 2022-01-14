@@ -3,19 +3,19 @@ import CoreData
 
 final class CoreDataStack {
     static let shared = CoreDataStack()
-
+    
     // MARK: - Private API
-
+    
     private let container: NSPersistentContainer
     
     /*
      This is the context to be used to perform all operations.
      
      Note: It is optional, as persistent stores are not loaded at initialization, but only when protected data is available.
-           When protected data becomes unavailable, context will be saved and nullified, see protectedDataWillBecomeUnavailable.
+     When protected data becomes unavailable, context will be saved and nullified, see protectedDataWillBecomeUnavailable.
      */
     private var context: NSManagedObjectContext?
-
+    
     private init() {
         let modelName = "PolyPodModel"
         let model = NSManagedObjectModel.with(name: modelName, in: Bundle(for: CoreDataStack.self))
@@ -25,14 +25,14 @@ final class CoreDataStack {
     }
     
     // MARK: - Internal API
-
+    
     /*
      Allows asking if protected data is available.
-    
+     
      Note: It is unfortunate that this is needed. We cannot just rely on data protection delegate methods
-           from app delegate. For example, protectedDataWillBecomeUnavailable will only be called if device is locked
-           while polypod is in FOREGROUND. Otherwise no events of having protected data unavailable are sent.
-           This closure will be used to imperatively ask if protected data is avaialble for use.
+     from app delegate. For example, protectedDataWillBecomeUnavailable will only be called if device is locked
+     while polypod is in FOREGROUND. Otherwise no events of having protected data unavailable are sent.
+     This closure will be used to imperatively ask if protected data is avaialble for use.
      */
     var isProtectedDataAvailable: ((@escaping (Bool) -> Void) -> Void)!
     
@@ -62,7 +62,7 @@ extension CoreDataStack {
         /// protectedDataWillBecomeUnavailable will not be called when the device is locked but PolyPod is not in foreground.
         /// Therefore the context and persistent stores didn't get a chance to be cleared. Avoid loading the persistent stores twice.
         guard context == nil else { return }
-
+        
         var error: Error?
         container.loadPersistentStores {
             error = $1
@@ -98,7 +98,7 @@ extension CoreDataStack {
 fileprivate extension NSPersistentStoreDescription {
     static func make(for persistentStoreURL: URL) -> NSPersistentStoreDescription {
         let persistentStoreDescription = NSPersistentStoreDescription(url: persistentStoreURL)
-
+        
         persistentStoreDescription.type = NSSQLiteStoreType
         persistentStoreDescription.shouldMigrateStoreAutomatically = true
         persistentStoreDescription.shouldInferMappingModelAutomatically = true
@@ -120,7 +120,7 @@ fileprivate extension NSManagedObjectModel {
     static func with(name: String, in bundle: Bundle) -> NSManagedObjectModel {
         bundle
             .url(forResource: name, withExtension: "momd")
-            // Can use force unwrap, this code should fail only if core data model is missing from the project.
+        // Can use force unwrap, this code should fail only if core data model is missing from the project.
             .flatMap(NSManagedObjectModel.init(contentsOf:))!
     }
 }

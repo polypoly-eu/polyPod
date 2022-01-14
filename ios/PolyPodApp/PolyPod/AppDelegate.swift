@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 completion(UIApplication.shared.isProtectedDataAvailable)
             }
         }
-
+        
         if application.isProtectedDataAvailable {
             CoreDataStack.shared.protectedDataDidBecomeAvailable()
             CoreDataStack.shared.perform { context in
@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: - Data protection availability
-
+    
     /*
      On a device that uses content protection, protected files are stored in an encrypted form and made available only at certain times, usually when the device is unlocked.
      This notification lets your app know that the device is now unlocked and that you may access certain types of protected files again.

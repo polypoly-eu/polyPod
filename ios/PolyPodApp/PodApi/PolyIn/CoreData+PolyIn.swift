@@ -217,7 +217,7 @@ fileprivate func createExtendedData(
             // wouldn't work for transitive inverse relationships, however.
             if value != sourceRelationship {
                 properties[relationship] =
-                    createExtendedData(for: value, from: managedObject)
+                createExtendedData(for: value, from: managedObject)
             }
         }
     }
