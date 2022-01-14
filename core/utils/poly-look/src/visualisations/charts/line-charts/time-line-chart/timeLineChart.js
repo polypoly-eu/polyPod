@@ -101,8 +101,6 @@ export class TimeLineChart extends Chart {
         return currentX + correctionYAxisLabels;
       });
 
-    //d3.select(yAxis.selectAll(".tick").node()).style("visibility", "hidden");
-
     yAxis.select(".domain").style("visibility", "hidden");
   }
 
