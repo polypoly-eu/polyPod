@@ -1,6 +1,6 @@
 import { Chart } from "../../chart";
 import * as d3 from "d3";
-import { jsDateToD3Date } from "../../../d3-utils";
+import { trimTimeOfDate } from "../../../d3-utils";
 
 const semiDarkColor = "#8d9caf";
 const yLabelsPosition = "-0.40em";
@@ -32,7 +32,7 @@ export class TimeLineChart extends Chart {
       []
     );
     this._timeExtent = d3.extent(allDates, (jsDate) =>
-      jsDateToD3Date(new Date(jsDate))
+      trimTimeOfDate(new Date(jsDate))
     );
     this._ticksX = d3.timeMonths(this._timeExtent[0], this._timeExtent[1]);
   }
@@ -121,7 +121,7 @@ export class TimeLineChart extends Chart {
           "d",
           d3
             .line()
-            .x((d) => xScale(jsDateToD3Date(new Date(d.date))))
+            .x((d) => xScale(trimTimeOfDate(new Date(d.date))))
             .y((d) => yScale(d.value))
         );
     });
@@ -134,7 +134,7 @@ export class TimeLineChart extends Chart {
 
     const areaCalculation = d3
       .area()
-      .x((d) => xScale(jsDateToD3Date(new Date(d.date))))
+      .x((d) => xScale(trimTimeOfDate(new Date(d.date))))
       .y0(this.chartHeight - xScaleMarginBottom)
       .y1((d) => yScale(d.value));
 

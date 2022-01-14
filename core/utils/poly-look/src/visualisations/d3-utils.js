@@ -43,12 +43,12 @@ export function wrapTexts(texts) {
 }
 
 /**
- * Turns a JS Date into a d3 date
+ * Only keeps Day, Month and Yar from a date
  *
- * @param {Date} jsDate
- * @returns d3-Date
+ * @param {Date} Date
+ * @returns Date
  */
-export function jsDateToD3Date(jsDate) {
+export function trimTimeOfDate(jsDate) {
   const date = `${jsDate.getFullYear()}-${
     jsDate.getMonth() + 1
   }-${jsDate.getDate()}`;
