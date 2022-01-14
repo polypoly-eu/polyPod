@@ -107,22 +107,15 @@ export class HorizontalBarChart extends Chart {
       .duration(750)
       .attr("x", 0)
       .attr("width", initializingBarHeight)
-      .attr("y", (d) =>
-        this._barWidth
-          ? this._yScales
-              .map((scale) =>
-                scale.scale(d.title)
-                  ? scale.scale(d.title) +
-                    (scale.scale.bandwidth() - this._barWidth) / 2
-                  : null
-              )
-              .find((value) => value)
-          : this._yScales
-              .map((scale) =>
-                scale.scale(d.title) ? scale.scale(d.title) : null
-              )
-              .find((value) => value)
-      )
+      .attr("y", (d) => {
+        for (let scale of this._yScales) {
+          if (d.group === scale.id)
+            return this._barWidth
+              ? scale.scale(d.title) +
+                  (scale.scale.bandwidth() - this._barWidth) / 2
+              : scale.scale(d.title) + scale.scale.bandwidth() / 4;
+        }
+      })
       .attr(
         "height",
         this._barWidth ||
@@ -144,19 +137,16 @@ export class HorizontalBarChart extends Chart {
   _addEnteringBarLabels(barLabels) {
     barLabels
       .append("text")
-      .attr("y", (d) =>
-        this._yScales
-          .map((scale) =>
-            scale.scale(d.title)
-              ? this._groups
-                ? scale.scale(d.title) +
+      .attr("y", (d) => {
+        for (let scale of this._yScales) {
+          if (d.group === scale.id)
+            return this._groups
+              ? scale.scale(d.title) +
                   scale.scale.bandwidth() -
                   barTextBottomMargin
-                : scale.scale(d.title)
-              : null
-          )
-          .find((value) => value)
-      )
+              : scale.scale(d.title);
+        }
+      })
       .attr("class", "bar-label")
       .attr("x", 0)
       .text((d) => d.title)
@@ -191,24 +181,15 @@ export class HorizontalBarChart extends Chart {
       .append("rect")
       .attr("x", 0)
       .attr("width", initializingBarHeight)
-      .attr("y", (d) =>
-        this._barWidth
-          ? this._yScales
-              .map((scale) =>
-                scale.scale(d.title)
-                  ? scale.scale(d.title) +
-                    (scale.scale.bandwidth() - this._barWidth) / 2
-                  : null
-              )
-              .find((value) => value)
-          : this._yScales
-              .map((scale) =>
-                scale.scale(d.title)
-                  ? scale.scale(d.title) + scale.scale.bandwidth() / 4
-                  : null
-              )
-              .find((value) => value)
-      )
+      .attr("y", (d) => {
+        for (let scale of this._yScales) {
+          if (d.group === scale.id)
+            return this._barWidth
+              ? scale.scale(d.title) +
+                  (scale.scale.bandwidth() - this._barWidth) / 2
+              : scale.scale(d.title) + scale.scale.bandwidth() / 4;
+        }
+      })
       .attr(
         "height",
         this._barWidth ||
@@ -231,19 +212,18 @@ export class HorizontalBarChart extends Chart {
   _addEnteringBarValues(barGroups) {
     barGroups
       .append("text")
-      .attr("y", (d) =>
-        this._yScales
-          .map((scale) =>
-            scale.scale(d.title)
-              ? scale.scale(d.title) +
-                scale.scale.bandwidth() -
-                (this._groups
-                  ? barTextBottomMargin
-                  : (7 * barTextBottomMargin) / 3)
-              : null
-          )
-          .find((value) => value)
-      )
+      .attr("y", (d) => {
+        for (let scale of this._yScales) {
+          if (d.group === scale.id)
+            return (
+              scale.scale(d.title) +
+              scale.scale.bandwidth() -
+              (this._groups
+                ? barTextBottomMargin
+                : (7 * barTextBottomMargin) / 3)
+            );
+        }
+      })
       .attr("class", "bar-value")
       .attr("text-anchor", "end")
       .attr("x", (d) => this._xScale(d.value) - barValueMargin)
@@ -307,14 +287,12 @@ export class HorizontalBarChart extends Chart {
   }
 
   _displayBars(barGroups, enteringBarGroups) {
-    //this._updateExistingBars(barGroups);
+    this._updateExistingBars(barGroups);
     this._addEnteringBars(enteringBarGroups);
-    // if (this.grouped) this._addEnteringBars(bars);
-    // else this._addEnteringBar(bars);
   }
 
   _displayValues(barGroups, enteringBarGroups) {
-    // this._updateExistingBarValues(barGroups);
+    this._updateExistingBarValues(barGroups);
     this._addEnteringBarValues(enteringBarGroups);
     this._addEnteringBarLabels(enteringBarGroups);
   }

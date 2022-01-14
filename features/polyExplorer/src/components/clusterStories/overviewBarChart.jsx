@@ -79,7 +79,7 @@ function PartOf({ entities }) {
 export default function OverviewBarChart({ entities }) {
     return (
         <div className="receiving-companies">
-            <Tabs>
+            <Tabs swipe={false}>
                 <Tab
                     id="installs"
                     label={i18n.t("clusterStoryCommon:label.installs")}
