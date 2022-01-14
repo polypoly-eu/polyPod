@@ -239,7 +239,7 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:details.p.1`)}
             </p>
-            <MauLineChart messengers={messengers} />
+            <MauLineChart messengers={messengers} i18nHeader={i18nHeader} />
             <MessengerTreeMap
                 messengers={Object.values(products)}
                 i18nHeader={i18nHeader}

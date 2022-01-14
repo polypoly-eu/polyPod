@@ -3,13 +3,11 @@ import * as d3 from "d3";
 import { jsDateToD3Date } from "../../../d3-utils";
 
 const semiDarkColor = "#8d9caf";
-const darkColor = "#0f1938";
 const yLabelsPosition = "-0.40em";
 const correctionYAxisSize = 10;
 const correctionYAxisLabels = 20;
 const startingLog = -2;
 const xScaleMarginBottom = 16;
-const xScaleMarginLeft = 12;
 const defaultColor = "blue";
 
 export class TimeLineChart extends Chart {
@@ -28,7 +26,7 @@ export class TimeLineChart extends Chart {
     this._yScale = d3
       .scaleLog()
       .range([this.chartHeight - xScaleMarginBottom, 0]);
-    this._xScale = d3.scaleTime().range([xScaleMarginLeft, this.chartWidth]);
+    this._xScale = d3.scaleTime().range([0, this.chartWidth]);
 
     const allDates = this.data.reduce(
       (prev, curr) => [...prev, ...curr.dataPoints.map((dp) => dp.date)],
@@ -38,6 +36,10 @@ export class TimeLineChart extends Chart {
       jsDateToD3Date(new Date(jsDate))
     );
     this._ticksX = d3.timeMonths(this._timeExtent[0], this._timeExtent[1]);
+  }
+
+  get lineGroups() {
+    return this.chart.selectAll(".line-group");
   }
 
   _adaptScalesToData() {
@@ -50,13 +52,13 @@ export class TimeLineChart extends Chart {
   }
 
   _drawXAxis() {
-    const xAxis = this.chart
-      .append("g")
+    let xAxis = this.chart.select("#x-axis");
+    if (xAxis.empty()) xAxis = this.chart.append("g").attr("id", "x-axis");
+    xAxis
       .attr(
         "transform",
         `translate(0, ${this.chartHeight - xScaleMarginBottom})`
       )
-      .attr("id", "x-axis")
       .call(
         d3
           .axisBottom(this._xScale)
@@ -68,24 +70,19 @@ export class TimeLineChart extends Chart {
   }
 
   _drawYAxis() {
-    const yAxis = this.chart
-      .append("g")
-      .attr("id", "y-axis")
-      .attr(
-        "transform",
-        `translate(${this.chartWidth + correctionYAxisSize}, 0)`
-      )
-      .call(
-        d3
-          .axisLeft(this._yScale)
-          .tickSizeOuter(0)
-          .tickFormat((d) =>
-            Number.isInteger(Math.log10(d)) && Math.log10(d) !== startingLog
-              ? d
-              : ""
-          )
-          .tickSize(this.chartWidth)
-      );
+    let yAxis = this.chart.select("#y-axis");
+    if (yAxis.empty()) yAxis = this.chart.append("g").attr("id", "y-axis");
+    yAxis.attr("transform", `translate(${this.chartWidth}, 0)`).call(
+      d3
+        .axisLeft(this._yScale)
+        .tickSizeOuter(0)
+        .tickFormat((d) =>
+          Number.isInteger(Math.log10(d)) && Math.log10(d) !== startingLog
+            ? d
+            : ""
+        )
+        .tickSize(this.chartWidth)
+    );
 
     yAxis
       .selectAll(".tick")
@@ -110,13 +107,15 @@ export class TimeLineChart extends Chart {
     yAxis.select(".domain").style("visibility", "hidden");
   }
 
-  _drawPath(lineGroups) {
+  _drawPath() {
     const xScale = this._xScale;
     const yScale = this._yScale;
     const lineColor = this._lineColor;
-    lineGroups.each(function (datum) {
-      d3.select(this)
-        .append("path")
+    this.lineGroups.each(function (datum) {
+      const lineGroup = d3.select(this);
+      let line = lineGroup.select(".line");
+      if (line.empty()) line = lineGroup.append("path").attr("class", "line");
+      line
         .datum(datum.dataPoints)
         .attr("fill", "none")
         .attr("stroke", lineColor)
@@ -131,24 +130,26 @@ export class TimeLineChart extends Chart {
     });
   }
 
-  _drawArea(lineGroups) {
+  _drawArea() {
     const xScale = this._xScale;
     const yScale = this._yScale;
     const areaColor = this._areaColor;
 
-    const area = d3
+    const areaCalculation = d3
       .area()
       .x((d) => xScale(jsDateToD3Date(new Date(d.date))))
       .y0(this.chartHeight - xScaleMarginBottom)
       .y1((d) => yScale(d.value));
 
-    lineGroups.each(function (datum) {
-      d3.select(this)
-        .append("path")
+    this.lineGroups.each(function (datum) {
+      const lineGroup = d3.select(this);
+      let area = lineGroup.select(".area");
+      if (area.empty()) area = lineGroup.append("path").attr("class", "area");
+      area
         .datum(datum.dataPoints)
         .attr("fill", areaColor)
         .attr("stroke", "none")
-        .attr("d", area);
+        .attr("d", areaCalculation);
     });
   }
 
@@ -174,17 +175,16 @@ export class TimeLineChart extends Chart {
   }
 
   render() {
-    const chart = this.chart;
     this._adaptScalesToData();
     this._drawXAxis();
     this._drawYAxis();
 
-    const lineGroups = this.chart
-      .selectAll(".line-group")
-      .data(this._data)
+    this.lineGroups
+      .data(this._data, (d) => d.id)
       .enter()
-      .append("g");
-    this._drawPath(lineGroups);
-    this._drawArea(lineGroups);
+      .append("g")
+      .attr("class", "line-group");
+    this._drawPath();
+    this._drawArea();
   }
 }
