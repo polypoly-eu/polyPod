@@ -29,8 +29,8 @@
     font-size: 12px;
 }
 
-.tab-data-story .info-button {
-    bottom: 100px;
+.tab-data-story .source {
+    padding: 0 0 0 16px;
 }
 
 .details .swiper-container {
