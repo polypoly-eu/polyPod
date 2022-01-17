@@ -84,18 +84,35 @@ export default function OverviewBarChart({ entities }) {
                     id="installs"
                     label={i18n.t("clusterStoryCommon:label.installs")}
                 >
+                    <p>
+                        {i18n.t(
+                            `clusterMessengerStory:overview.paragraph.installs`
+                        )}
+                    </p>
                     <Installs entities={entities} />
                 </Tab>
                 <Tab
                     id="users"
                     label={i18n.t("clusterStoryCommon:label.users")}
                 >
+                    <p>
+                        {i18n.t(
+                            `clusterMessengerStory:overview.paragraph.users`
+                        )}
+                    </p>
+
                     <Users entities={entities} />
                 </Tab>
                 <Tab
                     id="part-of"
                     label={i18n.t("clusterStoryCommon:label.partOf")}
                 >
+                    <p>
+                        {i18n.t(
+                            `clusterMessengerStory:overview.paragraph.partOf`
+                        )}
+                    </p>
+
                     <PartOf entities={entities} />
                 </Tab>
             </Tabs>

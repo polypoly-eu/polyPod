@@ -215,7 +215,6 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:overview.paragraph.one`)}
             </p>
-            <p>{i18n.t(`${i18nHeader}:overview.paragraph.two`)}</p>
             <OverviewBarChart entities={Object.values(products)} />
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:details.section`)}

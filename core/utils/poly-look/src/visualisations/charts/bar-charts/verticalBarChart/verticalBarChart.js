@@ -29,7 +29,6 @@ const gridXMargin = 12;
  * @param {number} [height = 200] - The height of the svg
  * @param {string|callback} [barColor = "blue"] - The color of the bar (callbacks receive event and data)
  * @param {string} [barValueColor = null] - The color the values are shown in (default = no values shown)
- * @param {number} [numberTicksY = 4] - Number of Ticks on the y-axis (will deviate by 1 if the values wouldn't make a nice scale otherwise)
  */
 export class VerticalBarChart extends Chart {
   constructor({
@@ -40,7 +39,6 @@ export class VerticalBarChart extends Chart {
     height = 200,
     barValueColor,
     barWidth,
-    numberTicksY,
   }) {
     super({ selector, data, width, height, margin });
     this._barColor = barColor || "blue";
@@ -50,7 +48,6 @@ export class VerticalBarChart extends Chart {
       .scaleLinear()
       .range([this.chartHeight, this.margin.bottom]);
     this._barValueColor = barValueColor;
-    this._numberTicksY = numberTicksY || 4;
   }
 
   _adaptScalesToData() {
