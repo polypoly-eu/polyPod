@@ -15,6 +15,7 @@ const barPaddingProportion = 0.2;
 const groupHeadlineHeight = 14;
 const headlinePadding = 6;
 const barTextBottomMargin = 6;
+const barLabelTopMargin = 2;
 const defaultBarColor = "blue";
 const defaultBarValueColor = "white";
 const defaultBarWidth = 20;
@@ -64,19 +65,20 @@ export class HorizontalBarChart extends Chart {
   _getYscales(groups) {
     if (groups) {
       const yScales = [];
-      let headingSpace = groupHeadlineHeight + headlinePadding;
+      const headingSpace = groupHeadlineHeight + headlinePadding;
+      let headingMargin = headingSpace;
       for (let group of groups) {
         const relevantBars = this.data.filter(
           (data) => data.group === group.id
         ).length;
-        const barsSpan = relevantBars * this._barWidth;
-        const paddingSpan = barsSpan / (1 / barPaddingProportion - 1);
-        const totalSpan = barsSpan + relevantBars * paddingSpan;
+        const step = this._barWidth / (1 - barPaddingProportion);
+        const absolutePad = step * barPaddingProportion;
+        const range = relevantBars * step + absolutePad;
         const scale = d3
           .scaleBand()
-          .range([headingSpace, totalSpan])
+          .range([headingMargin, headingMargin + range])
           .padding(barPaddingProportion);
-        headingSpace = headingSpace + totalSpan;
+        headingMargin = headingSpace + headingMargin + range;
         yScales.push(new ScaleContainer({ scale, id: group.id }));
       }
       return yScales;
@@ -167,7 +169,7 @@ export class HorizontalBarChart extends Chart {
       .append("text")
       .attr("y", (d) => {
         for (let scaleContainer of this._yScales) {
-          if (!scaleContainer.id) return scaleContainer.scale(d.title);
+          if (!scaleContainer.id) return scaleContainer.scale(d.title) + barLabelTopMargin;
           if (d.group === scaleContainer.id)
             return (
               scaleContainer.scale(d.title) +
@@ -214,7 +216,11 @@ export class HorizontalBarChart extends Chart {
       .attr("y", (d) => {
         for (let scaleContainer of this._yScales) {
           if (!scaleContainer.id)
-            return scaleContainer.scale(d.title) + this._barWidth;
+            return (
+              scaleContainer.scale(d.title) +
+              this._barWidth +
+              barTextBottomMargin / 2
+            );
           if (scaleContainer.id === d.group)
             return (
               scaleContainer.scale(d.title) +
@@ -291,7 +297,7 @@ export class HorizontalBarChart extends Chart {
   }
 
   _displayValues(barGroups, enteringBarGroups) {
-    this._updateExistingBarValues(barGroups);
+    // this._updateExistingBarValues(barGroups);
     this._addEnteringBarValues(enteringBarGroups);
     this._addEnteringBarLabels(enteringBarGroups);
   }
