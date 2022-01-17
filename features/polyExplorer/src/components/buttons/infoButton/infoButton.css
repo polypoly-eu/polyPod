@@ -1,8 +1,10 @@
 .source-info-container {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
+    margin-top: 16px;
 }
 
 .source-info-container p {
