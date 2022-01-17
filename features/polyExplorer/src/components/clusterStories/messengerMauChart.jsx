@@ -80,6 +80,7 @@ const MessengerMauChart = ({ messengers, i18nHeader }) => {
                     },
                 ]}
             />
+            <p className="unit">MAU</p>
             <PolyChart
                 type="time-line-chart"
                 data={lineChartData}
