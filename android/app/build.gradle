@@ -119,7 +119,7 @@ dependencies {
     implementation "androidx.preference:preference-ktx:1.1.1"
     implementation 'com.google.android.material:material:1.2.0'
     implementation 'org.slf4j:slf4j-api:1.7.30'
-    implementation 'com.synnapps:carouselview:0.1.6'
+    implementation 'com.synnapps:carouselview:0.1.5'
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation group: 'org.apache.jena', name: 'jena-core', version: '3.17.0'
     implementation 'androidx.work:work-runtime:2.3.4'
