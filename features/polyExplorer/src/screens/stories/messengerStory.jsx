@@ -13,11 +13,14 @@ import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 
-import "./messengerStory.css";
 import MessengerTreeMap from "../../components/clusterStories/messengerTreeMap.jsx";
+import MessengerMauChart from "../../components/clusterStories/messengerMauChart.jsx";
 
 const i18nHeader = "clusterMessengerStory";
 const i18nHeaderCommon = "clusterStoryCommon";
+const bubbleColor = "#FB8A89";
+const bubbleStroke = "none";
+const bubbleTextColor = "#0f1938";
 
 const MessengerStory = () => {
     const { products, globalData, entityJurisdictionByPpid } =
@@ -93,11 +96,8 @@ const MessengerStory = () => {
         {
             id: "by-messenger",
             label: "By Messenger",
-            translation: i18n.t(`${i18nHeader}:datatypes.tab.messenger`),
-            bubbleColor: "#FB8A89",
-            bubbleTextColor: "#FB8A89",
-            bubbleStroke: "none",
-            description: i18n.t(`${i18nHeader}:datatypes.text.messenger`),
+            translation: i18n.t(`${i18nHeader}:data.types.tab.messenger`),
+            description: i18n.t(`${i18nHeader}:data.types.text.messenger`),
             data: listOfMessengerApps.map((messenger) => {
                 return {
                     title:
@@ -115,11 +115,8 @@ const MessengerStory = () => {
         {
             id: "by-shares",
             label: "By Shares",
-            translation: i18n.t(`${i18nHeader}:datatypes.tab.shares`),
-            bubbleColor: "#FB8A89",
-            bubbleTextColor: "#FB8A89",
-            bubbleStroke: "none",
-            description: i18n.t(`${i18nHeader}:datatypes.text.shares
+            translation: i18n.t(`${i18nHeader}:data.types.tab.shares`),
+            description: i18n.t(`${i18nHeader}:data.types.text.shares
             `),
             data: listOfMessengerApps.map((messenger) => {
                 return {
@@ -141,15 +138,11 @@ const MessengerStory = () => {
         {
             id: "by-types",
             label: "By Types",
-            translation: i18n.t(`${i18nHeader}:datatypes.tab.types`),
-            bubbleColor: "#FB8A89",
-            bubbleTextColor: "#FB8A89",
-            bubbleStroke: "none",
-            activeBubbleTextColor: "var(--color-text-dark)",
-            description: i18n.t(`${i18nHeader}:datatypes.text.types`),
+            translation: i18n.t(`${i18nHeader}:data.types.tab.types`),
+            description: i18n.t(`${i18nHeader}:data.types.text.types`),
             data: [
                 {
-                    title: i18n.t(`${i18nHeader}:datatypes.legend.types`, {
+                    title: i18n.t(`${i18nHeader}:data.types.legend.types`, {
                         amount_of_data_types: listOfDataCategories.length,
                         amount_of_shares: totalShares,
                     }),
@@ -230,6 +223,10 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:details.p.1`)}
             </p>
+            <MessengerMauChart
+                messengers={messengers}
+                i18nHeader={i18nHeader}
+            />
             <MessengerTreeMap
                 messengers={Object.values(products)}
                 i18nHeader={i18nHeader}
@@ -251,7 +248,7 @@ const MessengerStory = () => {
                 source={i18n.t("common:source.polyPedia")}
             ></InfoButton>
             <SectionTitle
-                title={i18n.t(`${i18nHeader}:datatypes.title`)}
+                title={i18n.t(`${i18nHeader}:data.types.title`)}
             ></SectionTitle>
             {dataTypes.map((dataType, i) => {
                 return (
@@ -276,24 +273,23 @@ const MessengerStory = () => {
                             translation={dataType.translation}
                             key={i}
                         >
-                            <div className="data-types-lengend">
+                            <div className="data-types-legend">
                                 <div
                                     className="bubble-legend"
                                     style={{
-                                        backgroundColor:
-                                            dataTypes[0].bubbleColor,
+                                        backgroundColor: bubbleColor,
                                     }}
                                 ></div>
                                 <p>
-                                    {i18n.t(`${i18nHeader}:datatypes.legend`)}
+                                    {i18n.t(`${i18nHeader}:data.types.legend`)}
                                 </p>
                             </div>
                             {dataType.id !== "by-types" ? (
                                 <MatrixBubblesChart
                                     data={dataType.data}
-                                    bubbleColor={dataType.bubbleColor}
-                                    textColor={dataType.bubbleTextColor}
-                                    strokeColor={dataType.bubbleStroke}
+                                    bubbleColor={bubbleColor}
+                                    textColor={bubbleColor}
+                                    strokeColor={bubbleStroke}
                                 />
                             ) : (
                                 <div className="by-types-bubble-chart">
@@ -302,16 +298,16 @@ const MessengerStory = () => {
                                         data={dataType.data[0].bubbles}
                                         width={dataType.data[0].width}
                                         height={dataType.data[0].height}
-                                        bubbleColor={dataType.bubbleColor}
+                                        bubbleColor={bubbleColor}
                                         textColor={dataType.data[0].bubbles.map(
                                             (bubble) => {
                                                 selectedDataTypeBubble ===
                                                 bubble.value
-                                                    ? dataType.activeBubbleTextColor
-                                                    : dataType.bubbleTextColor;
+                                                    ? bubbleTextColor
+                                                    : bubbleColor;
                                             }
                                         )}
-                                        strokeColor={dataType.bubbleStroke}
+                                        strokeColor={bubbleStroke}
                                         onBubbleClick={handleBubbleClick}
                                     />
                                     <h4>{dataType.data[0].title}</h4>

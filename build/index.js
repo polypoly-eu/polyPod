@@ -8,11 +8,12 @@ const { performance } = require("perf_hooks");
 const validCommands = [
     "build",
     "clean",
-    "test",
     "lint",
     "lintfix",
     "list",
     "list-deps",
+    "sync-deps",
+    "test",
 ];
 
 function parseCommandLine() {
@@ -166,12 +167,13 @@ const npm = async (...args) => {
         { ...process.env, FORCE_COLOR: 1 }
     );
     const elapsed = new Date() - start;
-    logDetail(`NPM finished in ${elapsed} ms`);
+    const realCommand = args[args.length - 1];
+    logDetail(` ${ANSIInvert("npm " + realCommand)} finished in ${elapsed} ms`);
 };
 
 async function npmInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
-    await npm("ci");
+    await npm("--no-audit", "--prefer-offline", "ci");
 }
 
 async function npmRun(script, pkg) {
@@ -193,10 +195,19 @@ async function cleanPackage(pkg) {
         await fsPromises.rm(path, { recursive: true, force: true });
 }
 
+async function syncPackage(pkg) {
+    logDetail(`🕑 ${pkg.name} ...`);
+    if (fs.existsSync("package-lock.json")) { 
+        fs.rmSync("package-lock.json");
+    }
+    await npm("i");
+}
+
 const commands = {
     build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
     test: (pkg) => npmRun("test", pkg),
     clean: (pkg) => cleanPackage(pkg),
+    "sync-deps": (pkg) => syncPackage(pkg),
 };
 
 async function executeCommand(pkg, command) {
@@ -255,6 +266,10 @@ async function processAll(packageTree, command) {
 
 function ANSIBold(string) {
     return `\x1b[1m${string}\x1b[0m`;
+}
+
+function ANSIInvert(string) {
+    return `\x1b[7m${string}\x1b[27m`;
 }
 
 function logSuccess(command, timeLapsed) {

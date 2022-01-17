@@ -9,4 +9,5 @@
     <color name="onboarding_button_bg">#fb8a89</color>
     <color name="onboarding_bg">#fff5f5</color>
     <color name="app_bar_separator">#a9b6c6</color>
+    <color name="feature_card_border">#a9b6c6</color>
 </resources>
