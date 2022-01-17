@@ -1,7 +1,6 @@
 import React from "react";
 import LinkButton from "../linkButton/linkButton.jsx";
 import "./infoButton.css";
-import i18n from "../../../i18n.js";
 
 const InfoButton = ({
     source,
