@@ -89,6 +89,7 @@
         "jurisdictions",
     "source":
         "Source",
+    "source.polyPedia": "Source: polyPedia",
     "purpose.name.i18nkey":
         "Translation_EN",
     "purpose.description.i18nkey":

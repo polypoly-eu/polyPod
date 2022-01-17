@@ -89,6 +89,7 @@
         "Datenregionen",
     "source":
         "Quelle",
+    "source.polyPedia": "Quelle: polyPedia",
     "purpose.name.i18nkey":
         "Translation_DE",
     "purpose.description.i18nkey":
