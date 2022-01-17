@@ -55,7 +55,6 @@ const MessengerMauChart = ({ messengers, i18nHeader }) => {
                 : otherColorSet,
         ])
     );
-    console.log(coloring);
 
     const lineColor = (d) => coloring[d[0].id].color;
     const areaColor = (d) =>
