@@ -11,6 +11,7 @@ import OrderedList from "../../components/orderedList/orderedList.jsx";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
+import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 
 import "./messengerStory.css";
 import MessengerTreeMap from "../../components/clusterStories/messengerTreeMap.jsx";
@@ -233,12 +234,22 @@ const MessengerStory = () => {
                 messengers={Object.values(products)}
                 i18nHeader={i18nHeader}
             />
+            <InfoButton
+                light
+                route="/line-chart-info"
+                source={i18n.t("common:source.polyPedia")}
+            ></InfoButton>
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
             />
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
+            <InfoButton
+                light
+                route="/purpose-info"
+                source={i18n.t("common:source.polyPedia")}
+            ></InfoButton>
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:datatypes.title`)}
             ></SectionTitle>
@@ -310,7 +321,11 @@ const MessengerStory = () => {
                     );
                 })}
             </Tabs>
-            <p className="source">{i18n.t("common:source")}: PolyPedia</p>
+            <InfoButton
+                light
+                route="/data-types-info"
+                source={i18n.t("common:source.polyPedia")}
+            ></InfoButton>
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />
