@@ -331,10 +331,10 @@ const EntityDetails = () => {
                 content: (
                     <div className="tab-data-story">
                         <FeaturedEntity />
-                        <p className="source">
-                            {i18n.t("entityDetailsScreen:source")}: polyPedia
-                        </p>
-                        <InfoButton route="featured-entity-info" />
+                        <InfoButton
+                            source={i18n.t("common:source.polyPedia")}
+                            route="featured-entity-info"
+                        />
                         <div className="explore-data-btn-area">
                             <LinkButton
                                 className="explore-data-btn"
