@@ -1,7 +1,10 @@
 :root {
     /* Primary colors */
     --color-dark: #0f1938;
+    /* gray-500:  */
+    --color-medium-darker: #718096;
     --color-semi-dark: #8d9caf;
+    /* gray-400:  */
     --color-medium-dark: #8594a7;
     --color-medium: #a9b6c6;
     --color-semi-light: #edf2f7;

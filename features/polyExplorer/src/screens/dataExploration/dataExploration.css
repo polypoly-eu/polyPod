@@ -87,7 +87,8 @@
 }
 
 .data-exploration .static-content .bubble-source {
-    font-size: 10px;
+    font-family: "Jost Medium";
+    font-size: 12px;
     line-height: 14px;
     color: var(--color-medium);
     width: 84%;

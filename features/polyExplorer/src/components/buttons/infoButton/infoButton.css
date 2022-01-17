@@ -11,9 +11,16 @@
     padding: 0;
 }
 
-.source-info-container .source {
+.source-info-container .source-dark {
     margin: 32px 0 0;
+    color: var(--color-medium);
 }
+
+.source-info-container .source-light {
+    margin: 32px 0 0;
+    color: var(--color-medium-darker);
+}
+
 .info-button,
 .info-button-light {
     position: relative;

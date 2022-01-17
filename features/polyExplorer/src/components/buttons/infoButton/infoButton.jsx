@@ -10,7 +10,9 @@ const InfoButton = ({
     stateChange = null,
 }) => (
     <div onClick={saveActiveIndex} className="source-info-container">
-        <p className="source">{source}</p>
+        <p className={light ? "source source-light" : "source source-dark"}>
+            {source}
+        </p>
         <LinkButton
             className={light ? "info-button-light" : "info-button"}
             route={route}
