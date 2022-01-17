@@ -169,7 +169,8 @@ export class HorizontalBarChart extends Chart {
       .append("text")
       .attr("y", (d) => {
         for (let scaleContainer of this._yScales) {
-          if (!scaleContainer.id) return scaleContainer.scale(d.title) + barLabelTopMargin;
+          if (!scaleContainer.id)
+            return scaleContainer.scale(d.title) + barLabelTopMargin;
           if (d.group === scaleContainer.id)
             return (
               scaleContainer.scale(d.title) +
