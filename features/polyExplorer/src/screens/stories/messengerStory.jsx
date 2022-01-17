@@ -14,6 +14,7 @@ import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 
 import MessengerTreeMap from "../../components/clusterStories/messengerTreeMap.jsx";
+import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 
 const i18nHeader = "clusterMessengerStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -343,6 +344,9 @@ const MessengerStory = () => {
                 {i18n.t(`${i18nHeader}:explore.further.p.1`)}
             </p>
             <EntityList entities={Object.values(products)} expand={true} />
+            <LinkButton route={"back"} className="poly-button">
+                {i18n.t("clusterStoriesPreview:story.button.discover")}
+            </LinkButton>
         </ClusterStory>
     );
 };
