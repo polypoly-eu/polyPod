@@ -9,17 +9,21 @@ export default function Purposes() {
             <Tabs>
                 <Tab
                     id="most-mentioned"
-                    label={i18n.t("clusterStoryCommon:label.purposes.mostMentioned")}
+                    label={i18n.t(
+                        "clusterStoryCommon:label.purposes.mostMentioned"
+                    )}
                 >
                     <p>TODO</p>
                 </Tab>
                 <Tab
                     id="multiple-mentions"
-                    label={i18n.t("clusterStoryCommon:label.purposes.multipleMentions")}
+                    label={i18n.t(
+                        "clusterStoryCommon:label.purposes.multipleMentions"
+                    )}
                 >
                     <p>TODO</p>
                 </Tab>
             </Tabs>
         </div>
-    )
+    );
 }
