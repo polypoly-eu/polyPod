@@ -121,7 +121,7 @@ dependencies {
     implementation 'org.slf4j:slf4j-api:1.7.30'
     implementation 'com.synnapps:carouselview:0.1.6'
     implementation 'com.google.code.gson:gson:2.8.9'
-    implementation group: 'org.apache.jena', name: 'jena-core', version: '4.2.0'
+    implementation group: 'org.apache.jena', name: 'jena-core', version: '3.17.0'
     implementation 'androidx.work:work-runtime:2.3.4'
     implementation 'androidx.biometric:biometric:1.1.0'
     implementation 'androidx.biometric:biometric-ktx:1.2.0-alpha03'
