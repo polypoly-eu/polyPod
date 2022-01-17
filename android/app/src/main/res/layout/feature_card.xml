@@ -5,15 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="14dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:background="@drawable/feature_card_border"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_margin="@dimen/feature_card_border_width"
         android:layout_gravity="center_horizontal"
-        app:cardCornerRadius="5dp">
+        app:cardElevation="@dimen/feature_card_elevation"
+        app:cardCornerRadius="@dimen/feature_card_corner_radius">
 
         <LinearLayout
             android:layout_width="match_parent"
