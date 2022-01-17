@@ -55,7 +55,7 @@ export class HorizontalBarChart extends Chart {
     super({ selector, data, width, height, margin });
     this._groups = groups;
     this._barColor = barColor || defaultBarColor;
-    this._barWidth = groups ? defaultBarWidth : barWidth;
+    this._barWidth = defaultBarWidth || barWidth;
     this._xScale = d3.scaleLinear().range([0, this.chartWidth]);
     this._yScales = this._getYscales(groups);
     this._barValueColor = barValueColor || defaultBarValueColor;
@@ -118,25 +118,13 @@ export class HorizontalBarChart extends Chart {
             scaleContainer.scale(d.title) +
               scaleContainer.scale.bandwidth() / 4;
           if (d.group === scaleContainer.id)
-            return this._barWidth
-              ? scaleContainer.scale(d.title) +
-                  (scaleContainer.scale.bandwidth() - this._barWidth) / 2
-              : scaleContainer.scale(d.title) +
-                  scaleContainer.scale.bandwidth() / 4;
+            return (
+              scaleContainer.scale(d.title) +
+              (scaleContainer.scale.bandwidth() - this._barWidth) / 2
+            );
         }
       })
-      .attr(
-        "height",
-        this._barWidth ||
-          ((d) => {
-            for (let scaleContainer of this._yScales) {
-              if (!scaleContainer.id)
-                return scaleContainer.scale.bandwidth() / 2;
-              if (d.group === scaleContainer.id)
-                return scaleContainer.scale.bandwidth() / 2;
-            }
-          })
-      )
+      .attr("height", this._barWidth)
       .attr("fill", this._barColor)
       .attr("class", "bar")
       .transition()
@@ -158,25 +146,13 @@ export class HorizontalBarChart extends Chart {
               scaleContainer.scale.bandwidth() / 4
             );
           if (d.group === scaleContainer.id)
-            return this._barWidth
-              ? scaleContainer.scale(d.title) +
-                  (scaleContainer.scale.bandwidth() - this._barWidth) / 2
-              : scaleContainer.scale(d.title) +
-                  scaleContainer.scale.bandwidth() / 4;
+            return (
+              scaleContainer.scale(d.title) +
+              (scaleContainer.scale.bandwidth() - this._barWidth) / 2
+            );
         }
       })
-      .attr(
-        "height",
-        this._barWidth ||
-          ((d) => {
-            for (let scaleContainer of this._yScales) {
-              if (!scaleContainer.id)
-                return scaleContainer.scale.bandwidth() / 2;
-              if (d.group === scaleContainer.id)
-                return scaleContainer.scale.bandwidth() / 2;
-            }
-          })
-      )
+      .attr("height", this._barWidth)
       .attr("fill", this._barColor)
       .attr("class", "bar")
       .transition()
@@ -238,12 +214,8 @@ export class HorizontalBarChart extends Chart {
       .attr("y", (d) => {
         for (let scaleContainer of this._yScales) {
           if (!scaleContainer.id)
-            return (
-              scaleContainer.scale(d.title) +
-              scaleContainer.scale.bandwidth() -
-              (7 * barTextBottomMargin) / 3
-            );
-          if (d.group === scaleContainer.id)
+            return scaleContainer.scale(d.title) + this._barWidth;
+          if (scaleContainer.id === d.group)
             return (
               scaleContainer.scale(d.title) +
               scaleContainer.scale.bandwidth() -
@@ -314,12 +286,12 @@ export class HorizontalBarChart extends Chart {
   }
 
   _displayBars(barGroups, enteringBarGroups) {
-    this._updateExistingBars(barGroups);
     this._addEnteringBars(enteringBarGroups);
+    this._updateExistingBars(barGroups);
   }
 
   _displayValues(barGroups, enteringBarGroups) {
-    this._updateExistingBarValues(barGroups);
+    // this._updateExistingBarValues(barGroups);
     this._addEnteringBarValues(enteringBarGroups);
     this._addEnteringBarLabels(enteringBarGroups);
   }
