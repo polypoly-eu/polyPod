@@ -14,7 +14,7 @@ const allId = "allChip";
  * @param {Object} [chipsContent.id] - Id of the chip (if chipsContent is an array of strings they act as id)
  * @param {Object} [chipsContent.title] - Alternative for id of the chip (if chipsContent is an array of strings they act as id)
  * @param {Object} [chipsContent.translation] - Translation of the chip (if chipsContent is an array of strings they act as translation)
- * @param {string[]} defaultActiveChips - Chips that are active on load
+ * @param {string[]} [defaultActiveChips = []] - Chips that are active on load
  * @param {callback} onChipClick - Chips onClick function (id of clicked chip, all active chips ids)
  * @param {boolean} [exclusive = true] - Determines whether chips are active exclusively
  * @param {string} [theme] - Sets the theme in this component (preferably done in parent component)
@@ -28,7 +28,7 @@ const allId = "allChip";
  */
 const ChipGroup = ({
   chipsContent,
-  defaultActiveChips,
+  defaultActiveChips = [],
   onChipClick,
   exclusive = true,
   theme,

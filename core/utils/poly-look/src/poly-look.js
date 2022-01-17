@@ -10,7 +10,13 @@ import {
   TreeMap,
 } from "./visualisations/charts";
 import { PolyChart } from "./visualisations/wrappers/react/polyChart.jsx";
-import { Tab, Tabs, ChipGroup, BlockLegend } from "./react-components";
+import {
+  Tab,
+  Tabs,
+  ChipGroup,
+  BlockLegend,
+  LineLegend,
+} from "./react-components";
 export {
   BubbleCluster,
   VerticalBarChart,
@@ -22,4 +28,5 @@ export {
   Tab,
   Tabs,
   BlockLegend,
+  LineLegend,
 };
