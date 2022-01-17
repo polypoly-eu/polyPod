@@ -291,7 +291,7 @@ export class HorizontalBarChart extends Chart {
   }
 
   _displayValues(barGroups, enteringBarGroups) {
-    // this._updateExistingBarValues(barGroups);
+    this._updateExistingBarValues(barGroups);
     this._addEnteringBarValues(enteringBarGroups);
     this._addEnteringBarLabels(enteringBarGroups);
   }
