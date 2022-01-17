@@ -36,11 +36,13 @@ const MessengerMauChart = ({ messengers, i18nHeader }) => {
     const [selectedMessenger, setSelectedMessenger] = useState(null);
     const lineChartData = messengers.map((messenger) => ({
         id: messenger.ppid,
-        dataPoints: messenger.activeUsers.values.map((value) => ({
-            value: value.user_count / 1000000,
-            date: value.end_date,
-            id: messenger.ppid,
-        })),
+        dataPoints: messenger.activeUsers.values
+            .map((value) => ({
+                value: value.user_count / 1000000,
+                date: value.end_date,
+                id: messenger.ppid,
+            }))
+            .sort((a, b) => new Date(a.date) - new Date(b.date)),
     }));
 
     const messengerIds = messengers.map((m) => m.ppid);
