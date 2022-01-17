@@ -271,11 +271,9 @@ const DataExplorationScreen = () => {
                             highestValueObject
                         }
                     />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
 
                     <InfoButton
+                        source={i18n.t("common:source.polyPedia")}
                         route="/data-types-info"
                         saveActiveIndex={saveActiveIndex}
                     />
@@ -325,11 +323,9 @@ const DataExplorationScreen = () => {
                             ].category
                         }
                     />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
 
                     <InfoButton
+                        source={i18n.t("common:source.polyPedia")}
                         route="/data-category-info"
                         saveActiveIndex={saveActiveIndex}
                         stateChange={{
@@ -383,26 +379,16 @@ const DataExplorationScreen = () => {
                         width={visualizationWidth}
                         height={visualizationHeight}
                     />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
 
                     <InfoButton
+                        source={i18n.t("common:source.polyPedia")}
                         route="/data-correlation-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                 </div>
             );
         else if (activeScreen === "purposes")
-            return (
-                <div className="static-content">
-                    {filler}{" "}
-                    <InfoButton
-                        route="/purpose-info"
-                        saveActiveIndex={saveActiveIndex}
-                    />
-                </div>
-            );
+            return <div className="static-content">{filler} </div>;
         else if (activeScreen === "companies")
             return (
                 <div className="static-content">
@@ -422,11 +408,9 @@ const DataExplorationScreen = () => {
                         highlight={highlights[entity.ppid]?.dataRecipient}
                         maxCompanies={maxCompanies}
                     />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
 
                     <InfoButton
+                        source={i18n.t("common:source.polyPedia")}
                         route="/companies-info"
                         saveActiveIndex={saveActiveIndex}
                     />
@@ -490,11 +474,9 @@ const DataExplorationScreen = () => {
                         maxCompanies={maxCompanies}
                         highlight={highlights[entity.ppid]?.dataRecipient}
                     />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
 
                     <InfoButton
+                        source={i18n.t("common:source.polyPedia")}
                         route="/companies-info"
                         saveActiveIndex={saveActiveIndex}
                     />
@@ -517,10 +499,6 @@ const DataExplorationScreen = () => {
             return (
                 <div className="static-content static-content-jurisdictions">
                     {" "}
-                    <InfoButton
-                        route="/jurisdiction-info"
-                        saveActiveIndex={saveActiveIndex}
-                    />
                 </div>
             );
     };
@@ -637,6 +615,15 @@ const DataExplorationScreen = () => {
                                     openPopup={setPurposePopupContent}
                                     saveActiveIndex={saveActiveIndex}
                                 />
+                                <div className="purpose-extra-margin">
+                                    <InfoButton
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                        route="/purpose-info"
+                                        saveActiveIndex={saveActiveIndex}
+                                    />
+                                </div>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide></SwiperSlide>
@@ -691,6 +678,10 @@ const DataExplorationScreen = () => {
                                 />
                                 <DataRegionsLegend
                                     saveActiveIndex={saveActiveIndex}
+                                />
+                                <InfoButton
+                                    source={i18n.t("common:source.polyPedia")}
+                                    route="/jurisdiction-info"
                                 />
                                 <LinkButton
                                     route="/entity-details"

@@ -2,6 +2,10 @@
     margin: 24px 0 0 22px;
 }
 
+.data-exploration .purpose-extra-margin {
+    margin: 4px 0 0;
+}
+
 .data-exploration .company-short-info-container {
     width: 100%;
     max-width: var(--max-width);
@@ -91,6 +95,10 @@
     margin: 8px auto;
 }
 
+.data-exploration .source {
+    padding: 0 0 0 16px;
+}
+
 .data-exploration h1,
 .data-exploration h2 {
     width: 296px;
@@ -156,9 +164,9 @@
     margin-bottom: -8px;
 }
 
-.static-content-jurisdictions .info-button {
+/* .static-content-jurisdictions .info-button {
     bottom: 130px;
-}
+} */
 
 .data-exploration .static-content .data-sharing-legend-fill {
     box-sizing: border-box;
