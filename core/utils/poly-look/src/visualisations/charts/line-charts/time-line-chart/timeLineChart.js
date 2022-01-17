@@ -4,7 +4,7 @@ import { trimTimeOfDate } from "../../../d3-utils";
 
 const semiDarkColor = "#8d9caf";
 const yLabelsPosition = "-0.40em";
-const correctionYAxisLabels = 20;
+const correctionYAxisLabels = 8;
 const startingLog = -2;
 const xScaleMarginBottom = 16;
 const defaultColor = "blue";
@@ -99,7 +99,8 @@ export class TimeLineChart extends Chart {
       .attr("x", function xCorrection() {
         const currentX = Number(d3.select(this).attr("x"));
         return currentX + correctionYAxisLabels;
-      });
+      })
+      .attr("text-anchor", "start");
 
     yAxis.select(".domain").style("visibility", "hidden");
   }
