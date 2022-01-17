@@ -11984,7 +11984,6 @@
                 "Other",
                 "EU Adequate",
                 "China",
-                "Sonstige",
                 "Russia"
             ]
         }
@@ -21154,7 +21153,8 @@
                 "EU-GDPR",
                 "Sonstige",
                 "Five-Eyes",
-                "Other"
+                "Other",
+                "China"
             ]
         }
     },

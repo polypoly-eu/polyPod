@@ -296,6 +296,42 @@
         "industryCategory": "ic:InternetAndMultimedia"
     },
     {
+        "ppid": "Tiger Pistol (AU)",
+        "name": "Tiger Pistol (AU)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Victoria",
+            "countryCode": "AU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
+        "ppid": "Social News Desk Inc (US)",
+        "name": "Social News Desk Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Florida",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Creditsafe Ireland Limited (IE)",
         "name": "Creditsafe Ireland Limited (IE)",
         "jurisdiction": "EU-GDPR",
@@ -332,6 +368,24 @@
         "industryCategory": "ic:IT"
     },
     {
+        "ppid": "SOCI Inc (US)",
+        "name": "SOCI Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Texas",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Red Arrow Studios GmbH (DE)",
         "name": "Red Arrow Studios GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -360,6 +414,24 @@
             "value": null,
             "source": null
         }
+    },
+    {
+        "ppid": "Nexstar Media Group (US)",
+        "name": "Nexstar Media Group (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "MW i Ventures SCS SICAV-RAIF (LU)",
@@ -3594,6 +3666,24 @@
         "industryCategory": "ic:Service"
     },
     {
+        "ppid": "Fetch (GB)",
+        "name": "Fetch (GB)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "London",
+            "countryCode": "GB"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "NEXTSTOP.COM, INC. (US)",
         "name": "NEXTSTOP.COM, INC. (US)",
         "jurisdiction": "Five-Eyes",
@@ -3822,6 +3912,24 @@
         "industryCategory": "ic:Service"
     },
     {
+        "ppid": "Social Native, Inc. (US)",
+        "name": "Social Native, Inc. (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "BMW Australia Ltd. (AU)",
         "name": "BMW Australia Ltd. (AU)",
         "jurisdiction": "Five-Eyes",
@@ -3874,6 +3982,24 @@
             "source": null
         },
         "industryCategory": "ic:Service"
+    },
+    {
+        "ppid": "The Next Ad BV (NL)",
+        "name": "The Next Ad BV (NL)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Amsterdam",
+            "countryCode": "NL"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "DoubleClick International Asia BV (NL)",
@@ -4250,6 +4376,24 @@
             "source": null
         },
         "industryCategory": "ic:RetailAndConsumption"
+    },
+    {
+        "ppid": "SINOINTERACTIVE DIGITAL MARKETING (CN)",
+        "name": "SINOINTERACTIVE DIGITAL MARKETING (CN)",
+        "jurisdiction": "China",
+        "location": {
+            "city": "",
+            "countryCode": "CN"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "PhishMe AKA Cofense Inc. (US)",
@@ -4749,6 +4893,24 @@
         }
     },
     {
+        "ppid": "Napoleon Sp. z o.o. (PL)",
+        "name": "Napoleon Sp. z o.o. (PL)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Warsaw",
+            "countryCode": "PL"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Onavo Inc. (US)",
         "name": "Onavo Inc. (US)",
         "jurisdiction": "Five-Eyes",
@@ -5173,6 +5335,24 @@
         "industryCategory": "ic:InternetAndMultimedia"
     },
     {
+        "ppid": "Jebbit Inc (US)",
+        "name": "Jebbit Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Allianz Arena München Stadion GmbH (DE)",
         "name": "Allianz Arena München Stadion GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -5259,10 +5439,10 @@
     {
         "ppid": "Keepcon (AR)",
         "name": "Keepcon (AR)",
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU Adequate",
         "location": {
             "city": "Buenos Aires",
-            "countryCode": ""
+            "countryCode": "AR"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -6030,6 +6210,24 @@
         "location": {
             "city": "Berlin",
             "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
+        "ppid": "Nepa Sweden AB (SE)",
+        "name": "Nepa Sweden AB (SE)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Stockholm",
+            "countryCode": "SE"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -6815,6 +7013,24 @@
         "industryCategory": "ic:BanksAndFinance"
     },
     {
+        "ppid": "SMILE INTERNET TECHNOLOGIES PRIVATE LIMITED (IN)",
+        "name": "SMILE INTERNET TECHNOLOGIES PRIVATE LIMITED (IN)",
+        "jurisdiction": "Other",
+        "location": {
+            "city": "New Delhi",
+            "countryCode": "IN"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Crossover Communication GmbH (DE)",
         "name": "Crossover Communication GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -6880,6 +7096,24 @@
             "source": null
         },
         "industryCategory": "ic:Service"
+    },
+    {
+        "ppid": "Pebble Media NV (BE)",
+        "name": "Pebble Media NV (BE)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "BE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "BMW Finance S.N.C. (FR)",
@@ -7006,6 +7240,24 @@
             "source": null
         },
         "industryCategory": "ic:HealthAndSocial"
+    },
+    {
+        "ppid": "TRANSCOSMOS ZERO PTE LTD (SG)",
+        "name": "TRANSCOSMOS ZERO PTE LTD (SG)",
+        "jurisdiction": "Other",
+        "location": {
+            "city": "",
+            "countryCode": "SG"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "Bavarian Sky China Leasing 2020-1 (CN)",
@@ -8567,6 +8819,24 @@
         "industryCategory": "ic:RetailAndConsumption"
     },
     {
+        "ppid": "Tap The Table LLC (US)",
+        "name": "Tap The Table LLC (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "South Carolina",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Amazon Deutschland W28 Transport GmbH (DE)",
         "name": "Amazon Deutschland W28 Transport GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -9594,6 +9864,24 @@
         "industryCategory": "ic:InternetAndMultimedia"
     },
     {
+        "ppid": "Yext Inc (US)",
+        "name": "Yext Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "BASF Niedersächsische Grundbesitz GmbH (DE)",
         "name": "BASF Niedersächsische Grundbesitz GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -10373,6 +10661,24 @@
         "industryCategory": "ic:Service"
     },
     {
+        "ppid": "Superare (IT)",
+        "name": "Superare (IT)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "IT"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Amazon (US)",
         "name": "AMAZON.COM, INC",
         "featured": true,
@@ -10853,6 +11159,24 @@
             "source": null
         },
         "industryCategory": "ic:Service"
+    },
+    {
+        "ppid": "Digital Media Services FZ-LLC (AE)",
+        "name": "Digital Media Services FZ-LLC (AE)",
+        "jurisdiction": "Other",
+        "location": {
+            "city": "",
+            "countryCode": "AE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "WorldPay Limited (NL)",
@@ -19674,8 +19998,44 @@
         "industryCategory": "ic:Service"
     },
     {
+        "ppid": "HTTPOOL, INTERNET MARKETING, D.O.O. (SI)",
+        "name": "HTTPOOL, INTERNET MARKETING, D.O.O. (SI)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Ljubljana",
+            "countryCode": "SI"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Power Digital Marketing Inc. (US)",
         "name": "Power Digital Marketing Inc. (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
+        "ppid": "Percolate Industries (US)",
+        "name": "Percolate Industries (US)",
         "jurisdiction": "Five-Eyes",
         "location": {
             "city": "Delaware",
@@ -22586,6 +22946,24 @@
         "industryCategory": "ic:BanksAndFinance"
     },
     {
+        "ppid": "STITCHERADS NORTH AMERICA, LLC (US)",
+        "name": "STITCHERADS NORTH AMERICA, LLC (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Webguerillas GmbH (DE)",
         "name": "Webguerillas GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -23671,6 +24049,24 @@
             "source": null
         },
         "industryCategory": "ic:HealthAndSocial"
+    },
+    {
+        "ppid": "maloon GmbH (DE)",
+        "name": "maloon GmbH (DE)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Ingolstadt",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "Deutsche Post Zahlungsdienste GmbH (DE)",
@@ -25357,6 +25753,24 @@
             "source": null
         },
         "industryCategory": "ic:RetailAndConsumption"
+    },
+    {
+        "ppid": "Swat.io GmbH (AT)",
+        "name": "Swat.io GmbH (AT)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Wien",
+            "countryCode": "AT"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "Fitch Ratings (US)",
@@ -27177,6 +27591,24 @@
         "industryCategory": "ic:InternetAndMultimedia"
     },
     {
+        "ppid": "OPERAM INC. (US)",
+        "name": "OPERAM INC. (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Red Hot Labs Inc. (US)",
         "name": "Red Hot Labs Inc. (US)",
         "jurisdiction": "Five-Eyes",
@@ -28594,6 +29026,24 @@
         "industryCategory": "ic:InternetAndMultimedia"
     },
     {
+        "ppid": "PHOTOSPIRE LIMITED (GB)",
+        "name": "PHOTOSPIRE LIMITED (GB)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "London",
+            "countryCode": "GB"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "ForgeRock (US)",
         "name": "ForgeRock (US)",
         "jurisdiction": "Five-Eyes",
@@ -28787,6 +29237,24 @@
             "source": null
         },
         "industryCategory": "ic:Service"
+    },
+    {
+        "ppid": "NEST PERFORMANCE LIMITED (GB)",
+        "name": "NEST PERFORMANCE LIMITED (GB)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Wales",
+            "countryCode": "GB"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "BMW Renting (Portugal) Lda. (PT)",
@@ -30702,6 +31170,24 @@
         "industryCategory": "ic:HealthAndSocial"
     },
     {
+        "ppid": "Planogram Inc (US)",
+        "name": "Planogram Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Deutsche Post Shop Hannover GmbH (DE)",
         "name": "Deutsche Post Shop Hannover GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -31603,6 +32089,7 @@
             "Kochava Inc. (US)",
             "LARK TECHNOLOGIES PTE. LTD.  (SG)",
             "LinkedIn Corporation (US)",
+            "Social Native, Inc. (US)",
             "TIKTOK AUSTRALIA PTY LTD  (AU)",
             "TIKTOK INC. (US)",
             "TIKTOK LLC (US)",
@@ -31612,7 +32099,9 @@
             "TikTok Technology Limited (IE)",
             "TubeScience USA Inc. (US)",
             "Twitter (US)",
-            "Unified Enterprises, Corp. (US)"
+            "Unified Enterprises, Corp. (US)",
+            "VidMob Inc (US)",
+            "Vidsy Media Limited (GB)"
         ],
         "dataSharingPurposes": [
             {
@@ -32623,6 +33112,24 @@
         "industryCategory": "ic:Service"
     },
     {
+        "ppid": "Scup (BR)",
+        "name": "Scup (BR)",
+        "jurisdiction": "Other",
+        "location": {
+            "city": "",
+            "countryCode": "BR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Moore Stephens International Ltd (GB)",
         "name": "Moore Stephens International Ltd (GB)",
         "jurisdiction": "Five-Eyes",
@@ -32743,34 +33250,64 @@
         "dataRecipients": [
             "Accenture (IE)",
             "Ad Dynamo International (ZA)",
+            "AdParlor LLC (US)",
             "Adjust GmbH (DE)",
             "Agency Within LLC (US)",
             "Amobee Inc (US)",
+            "AppsFlyer (IL)",
+            "Baidu (CN)",
+            "Brand Networks (US)",
+            "CHOMPI CCNETWORKINGS LIMITED DBA Bidalgo (IL)",
+            "COMERCIALIZADORA PUBLICITARIA AVANZADA SL (ES)",
             "Camelot Communications Ltd. (US)",
             "CitizenNet Inc (US)",
             "Decoded Advertising LLC (US)",
+            "Digital Media Services FZ-LLC (AE)",
             "Facebook (US)",
+            "Fetch (GB)",
             "Google (US)",
+            "HTTPOOL, INTERNET MARKETING, D.O.O. (SI)",
+            "HongKong AdTiger Media Co Limited (HK)",
+            "Kenshoo Limited (IL)",
             "Kochava Inc. (US)",
             "LinkedIn Corporation (US)",
+            "Make Me Reach (FR)",
             "Mediaocean LLC (US)",
             "MetaCDN Pty. Ltd. (AU)",
             "Microsoft Corporation (US)",
+            "Miri Growth (GB)",
+            "NEST PERFORMANCE LIMITED (GB)",
+            "OPERAM INC. (US)",
             "Optimizely Inc. (US)",
             "Outbrain Inc. (US)",
             "Pardot LLC (US)",
             "PayPal Holdings Inc (US)",
+            "Pebble Media NV (BE)",
             "Pinterest Inc. (US)",
             "Q4 Inc. (CA)",
             "Q4 Inc. (US)",
+            "QuickFrame Inc (US)",
             "Rokt Ltd (UK)",
             "Rokt Pte Ltd (SG)",
+            "SINOINTERACTIVE DIGITAL MARKETING (CN)",
+            "SMILE INTERNET TECHNOLOGIES PRIVATE LIMITED (IN)",
+            "STITCHERADS NORTH AMERICA, LLC (US)",
             "Salesforce.com Inc. (US)",
+            "Singular (US)",
+            "Smartly (FI)",
             "Snap Inc (US)",
+            "Social Native, Inc. (US)",
+            "Sprinklr (US)",
             "Taboola Inc. (US)",
             "Twelve Inc. (US)",
+            "Twigeo AB (SE)",
             "Twitter (US)",
-            "Unified Enterprises, Corp. (US)"
+            "Unified Enterprises, Corp. (US)",
+            "VidMob Inc (US)",
+            "Vidsy Media Limited (GB)",
+            "Voodoo (FR)",
+            "esome advertising technologies GmbH (DE)",
+            "mParticle (US)"
         ],
         "dataSharingPurposes": [
             {
@@ -32980,6 +33517,8 @@
                 "EU-GDPR",
                 "Sonstige",
                 "Five-Eyes",
+                "EU Adequate",
+                "China",
                 "Other"
             ]
         }
@@ -33313,6 +33852,24 @@
             "source": null
         },
         "industryCategory": "ic:TextilesAndFashion"
+    },
+    {
+        "ppid": "Tenjin Inc (US)",
+        "name": "Tenjin Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "Deutsche Telekom AG (DE)",
@@ -33663,6 +34220,24 @@
             "source": null
         },
         "industryCategory": "ic:LawAndTaxes"
+    },
+    {
+        "ppid": "MACRO KIOSK Berhad (MY)",
+        "name": "MACRO KIOSK Berhad (MY)",
+        "jurisdiction": "Other",
+        "location": {
+            "city": "Kuala Lumpur",
+            "countryCode": "MY"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "Moody's Analytics (US)",
@@ -34227,6 +34802,24 @@
             "source": null
         },
         "industryCategory": "ic:RetailAndConsumption"
+    },
+    {
+        "ppid": "esome advertising technologies GmbH (DE)",
+        "name": "esome advertising technologies GmbH (DE)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "King (MT)",
@@ -35966,6 +36559,24 @@
         "industryCategory": "ic:BanksAndFinance"
     },
     {
+        "ppid": "Instagram Inc (US)",
+        "name": "Instagram Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "California",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Giesecke+Devrient Mobile Security GmbH (DE)",
         "name": "Giesecke+Devrient Mobile Security GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -36054,6 +36665,24 @@
             "source": null
         },
         "industryCategory": "ic:Telecommunication"
+    },
+    {
+        "ppid": "QuickFrame Inc (US)",
+        "name": "QuickFrame Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "Partner Path (US)",
@@ -37043,6 +37672,24 @@
             "value": null,
             "source": null
         }
+    },
+    {
+        "ppid": "Alembic Inc (US)",
+        "name": "Alembic Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "California",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "Telegram (AE)",
@@ -38151,6 +38798,24 @@
         "industryCategory": "ic:Service"
     },
     {
+        "ppid": "Vidsy Media Limited (GB)",
+        "name": "Vidsy Media Limited (GB)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "London",
+            "countryCode": "GB"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "RedSeven Entertainment GmbH (DE)",
         "name": "RedSeven Entertainment GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -38393,6 +39058,7 @@
             "Khoros LLC (US)",
             "Kokatto (ID)",
             "Lumanu Inc. (US)",
+            "MACRO KIOSK Berhad (MY)",
             "MF Management Ltd (CY)",
             "Merkle UK One Limited (GB)",
             "MessageBird GmbH (DE)",
@@ -38986,6 +39652,24 @@
             "source": null
         },
         "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
+        "ppid": "Federal Government (US)",
+        "name": "Federal Government (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Washington DC",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:LawAndTaxes"
     },
     {
         "ppid": "Zevas Communications Ltd (IE)",
@@ -40242,6 +40926,24 @@
         "industryCategory": "ic:Automotive"
     },
     {
+        "ppid": "HongKong AdTiger Media Co Limited (HK)",
+        "name": "HongKong AdTiger Media Co Limited (HK)",
+        "jurisdiction": "China",
+        "location": {
+            "city": "Hong Kong",
+            "countryCode": "HK"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Bank of Montreal (CA)",
         "name": "Bank of Montreal (CA)",
         "jurisdiction": "Five-Eyes",
@@ -40866,6 +41568,24 @@
         "industryCategory": "ic:InternetAndMultimedia"
     },
     {
+        "ppid": "Zoho Corporation Private Limited (IN)",
+        "name": "Zoho Corporation Private Limited (IN)",
+        "jurisdiction": "Other",
+        "location": {
+            "city": "Kancheepuram",
+            "countryCode": "IN"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Amazon Deutschland N14 Transport GmbH (DE)",
         "name": "Amazon Deutschland N14 Transport GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -41097,7 +41817,7 @@
         "name": "BETAPOND LIMITED t_a StitcherAds (IE)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Waterford",
             "countryCode": "IE"
         },
         "annualRevenues": null,
@@ -41855,6 +42575,24 @@
             "source": null
         },
         "industryCategory": "ic:Telecommunication"
+    },
+    {
+        "ppid": "SocialFlow Inc (US)",
+        "name": "SocialFlow Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "Fichier des Incidents de Remboursement des Crédits aux Particuliers (FICP) (FR)",
@@ -42973,6 +43711,24 @@
         "industryCategory": "ic:Automotive"
     },
     {
+        "ppid": "Bridesview Inc (US)",
+        "name": "Bridesview Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:CultureAndEntertainmentAndEvents"
+    },
+    {
         "ppid": "BigCommerce Software Ireland (IE)",
         "name": "BigCommerce Software Ireland (IE)",
         "jurisdiction": "EU-GDPR",
@@ -43087,6 +43843,24 @@
         "location": {
             "city": "New South Wales",
             "countryCode": "AU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
+        "ppid": "Sprinklr Germany GmbH (DE)",
+        "name": "Sprinklr Germany GmbH (DE)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Hamburg",
+            "countryCode": "DE"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -44106,6 +44880,24 @@
         "industryCategory": "ic:Service"
     },
     {
+        "ppid": "CrowdTangle (US)",
+        "name": "CrowdTangle (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Bürohaus Petuelring GmbH (DE)",
         "name": "Bürohaus Petuelring GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -44392,6 +45184,24 @@
             "source": null
         },
         "industryCategory": "ic:TrafficAndTransportAndLogistics"
+    },
+    {
+        "ppid": "Altavia RetailTech (FR)",
+        "name": "Altavia RetailTech (FR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "FR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "Modulr Finance Ltd (GB)",
@@ -45483,6 +46293,24 @@
         "industryCategory": "ic:InternetAndMultimedia"
     },
     {
+        "ppid": "LUNA LABS LIMITED (GB)",
+        "name": "LUNA LABS LIMITED (GB)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "London",
+            "countryCode": "GB"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "GoPro Inc (US)",
         "name": "GoPro Inc (US)",
         "jurisdiction": "Five-Eyes",
@@ -46229,10 +47057,10 @@
     {
         "ppid": "Digitaliseringsstyrelsen (DK)",
         "name": "Digitaliseringsstyrelsen (DK)",
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "city": "København",
-            "countryCode": ""
+            "countryCode": "DK"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -46482,10 +47310,10 @@
     {
         "ppid": "BBK Electronics (CN)",
         "name": "BBK Electronics (CN)",
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "China",
         "location": {
             "city": "Guangdong",
-            "countryCode": ""
+            "countryCode": "CN"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -46503,6 +47331,24 @@
         "jurisdiction": "Five-Eyes",
         "location": {
             "city": "",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
+        "ppid": "Sprout Social Inc (US)",
+        "name": "Sprout Social Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
             "countryCode": "US"
         },
         "annualRevenues": null,
@@ -47747,6 +48593,24 @@
         "industryCategory": "ic:BanksAndFinance"
     },
     {
+        "ppid": "Miri Growth (GB)",
+        "name": "Miri Growth (GB)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "London",
+            "countryCode": "GB"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Stackdriver Inc. (US)",
         "name": "Stackdriver Inc. (US)",
         "jurisdiction": "Five-Eyes",
@@ -47889,6 +48753,24 @@
             "source": null
         },
         "industryCategory": "ic:BanksAndFinance"
+    },
+    {
+        "ppid": "RepCom (US)",
+        "name": "RepCom (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "Paga mas Tarde (ES)",
@@ -51251,6 +52133,24 @@
         "industryCategory": "ic:TrafficAndTransportAndLogistics"
     },
     {
+        "ppid": "VidMob Inc (US)",
+        "name": "VidMob Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Edelman.ergo GmbH (DE)",
         "name": "Edelman.ergo GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -51693,6 +52593,24 @@
             "source": null
         },
         "industryCategory": "ic:BanksAndFinance"
+    },
+    {
+        "ppid": "PinMeTo AB (SE)",
+        "name": "PinMeTo AB (SE)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Malmö",
+            "countryCode": "SE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "2016-2 ABL (JP)",
@@ -53211,6 +54129,24 @@
         "industryCategory": "ic:InternetAndMultimedia"
     },
     {
+        "ppid": "Netino (FR)",
+        "name": "Netino (FR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Paris",
+            "countryCode": "FR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Dentsu Inc. (JP)",
         "name": "Dentsu Inc. (JP)",
         "jurisdiction": "EU Adequate",
@@ -54385,6 +55321,24 @@
         "industryCategory": "ic:InternetAndMultimedia"
     },
     {
+        "ppid": "Revealytics Inc (US)",
+        "name": "Revealytics Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "PaketPLUS Marketing GmbH (DE)",
         "name": "PaketPLUS Marketing GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -54718,6 +55672,24 @@
             "source": null
         },
         "industryCategory": "ic:Telecommunication"
+    },
+    {
+        "ppid": "Meltwater BV (NL)",
+        "name": "Meltwater BV (NL)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Amsterdam",
+            "countryCode": "NL"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:IT"
     },
     {
         "ppid": "Bigtincan Mobile Pty Ltd (AU)",
@@ -55973,6 +56945,24 @@
         "industryCategory": "ic:IT"
     },
     {
+        "ppid": "MomentFeed (US)",
+        "name": "MomentFeed (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "MBS (US)",
         "name": "MBS (US)",
         "jurisdiction": "Five-Eyes",
@@ -56682,6 +57672,24 @@
         "industryCategory": "ic:BanksAndFinance"
     },
     {
+        "ppid": "IMS Media Services Inc (US)",
+        "name": "IMS Media Services Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Florida",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "ProStores Inc. (US)",
         "name": "ProStores Inc. (US)",
         "jurisdiction": "Five-Eyes",
@@ -56787,6 +57795,8 @@
             "Airy Inc (US)",
             "Aivo LLC (US)",
             "Alcmeon (FR)",
+            "Alembic Inc (US)",
+            "Altavia RetailTech (FR)",
             "Ameyo (IN)",
             "Analytic Partners Inc (US)",
             "Appier Group (JP)",
@@ -56802,6 +57812,7 @@
             "Branch Metrics Inc Delaware (US)",
             "Brand Embassy (IL)",
             "BrandBastion Oy (FI)",
+            "Bridesview Inc (US)",
             "Brightblue Consulting Limited (GB)",
             "Buffer Inc (US)",
             "BumpYard (IL)",
@@ -56893,6 +57904,7 @@
             "Local Measure (AU)",
             "LoudDoor LLC (US)",
             "Lumanu Inc. (US)",
+            "MACRO KIOSK Berhad (MY)",
             "MF Management Ltd (CY)",
             "Magento (US)",
             "Makeshop (KR)",
@@ -56900,16 +57912,21 @@
             "Marketo (US)",
             "Maventus Group Inc (US)",
             "Meetrics GmbH (DE)",
+            "Meltwater BV (NL)",
             "Merkle UK One Limited (GB)",
             "MessageBird GmbH (DE)",
             "MessengerPeople GmbH (DE)",
             "MigoChat (EG)",
             "Moat, Inc (US)",
+            "MomentFeed (US)",
             "MuteSix, LLC (US)",
             "NC Ventures LLC (US)",
             "NHN COMMERCE Corp (KR)",
             "Nanigans, Inc. (US)",
+            "Napoleon Sp. z o.o. (PL)",
+            "Nepa Sweden AB (SE)",
             "Netcore Cloud (DE)",
+            "Netino (FR)",
             "New Engen Inc. (US)",
             "Nexmo Inc (US)",
             "Nhanh.vn (VN)",
@@ -56919,6 +57936,7 @@
             "Nuvemshop (BR)",
             "Objective Partners (NL)",
             "Octane AI Inc (US)",
+            "Oktopost Technologies Inc (US)",
             "Omnichat Limited (HK)",
             "OpenCart Limited (HK)",
             "Oracle Data Cloud (US)",
@@ -56934,6 +57952,9 @@
             "PT. Informasi Teknologi Indonesia (ID)",
             "PYS (RO)",
             "Pancake (VN)",
+            "Perfect-Storm (KR)",
+            "PinMeTo AB (SE)",
+            "Planogram Inc (US)",
             "Positus (BR)",
             "Power Digital Marketing Inc. (US)",
             "Praekelt PBC (US)",
@@ -56945,10 +57966,14 @@
             "Quipt (US)",
             "ROI Hunter a.s. (CZ)",
             "Ready Set, Inc. (US)",
+            "RepCom (US)",
             "SAPO Technology JSC (VN)",
+            "SOCI Inc (US)",
             "Salsify (US)",
             "Sanuker Inc. Limited (HK)",
+            "Scup (BR)",
             "SendPulse Inc (US)",
+            "Sendible Limited (GB)",
             "Sheridan Media LLC (US)",
             "Shift4 (US)",
             "Shipnity (TH)",
@@ -56960,14 +57985,22 @@
             "Singular (US)",
             "Smarters (BR)",
             "SmaxBot (VN)",
+            "Social News Desk Inc (US)",
+            "SocialFlow Inc (US)",
+            "Socialbakers (CZ)",
             "Softbaked (TH)",
             "Sparkcentral (US)",
             "Sprinklr (US)",
+            "Sprinklr Germany GmbH (DE)",
+            "Sprout Social Inc (US)",
             "Squarespace (US)",
             "Squeezely (NL)",
+            "Stilingue (BR)",
+            "Superare (IT)",
             "TINUITI INC. (US)",
             "Tealium (US)",
             "The Kantar Group Limited (GB)",
+            "The Next Ad BV (NL)",
             "Ticimax (TR)",
             "Tilda (RU)",
             "Torchlight Inc. (JP)",
@@ -56990,6 +58023,7 @@
             "Wpromote LLC (US)",
             "X-Cart (US)",
             "YReceipts (GB)",
+            "Yext Inc (US)",
             "Zapier (US)",
             "Zentail (US)",
             "comScore (US)",
@@ -56997,6 +58031,7 @@
             "iKala Interactive Media Inc (TW)",
             "ibots App (EG)",
             "mParticle (US)",
+            "maloon GmbH (DE)",
             "uphill GmbH (DE)",
             "Хорошоп (UA)"
         ],
@@ -57256,7 +58291,6 @@
                 "Other",
                 "EU Adequate",
                 "China",
-                "Sonstige",
                 "Russia"
             ]
         }
@@ -58806,7 +59840,7 @@
         "name": "Smartly (FI)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "HELSINKI",
             "countryCode": "FI"
         },
         "annualRevenues": null,
@@ -58817,7 +59851,7 @@
             "value": null,
             "source": null
         },
-        "industryCategory": "ic:Service"
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "Tchibo (DE)",
@@ -59615,6 +60649,24 @@
         "industryCategory": "ic:InternetAndMultimedia"
     },
     {
+        "ppid": "Perfect-Storm (KR)",
+        "name": "Perfect-Storm (KR)",
+        "jurisdiction": "Other",
+        "location": {
+            "city": "",
+            "countryCode": "KR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Akinika Debt Recovery Limited (GB)",
         "name": "Akinika Debt Recovery Limited (GB)",
         "jurisdiction": "Five-Eyes",
@@ -60154,6 +61206,24 @@
         }
     },
     {
+        "ppid": "Jgroup (LB)",
+        "name": "Jgroup (LB)",
+        "jurisdiction": "Other",
+        "location": {
+            "city": "Beirut",
+            "countryCode": "LB"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Compta S.A. (PT)",
         "name": "Compta S.A. (PT)",
         "jurisdiction": "EU-GDPR",
@@ -60201,6 +61271,8 @@
             "Airy Inc (US)",
             "Aivo LLC (US)",
             "Alcmeon (FR)",
+            "Alembic Inc (US)",
+            "Altavia RetailTech (FR)",
             "Ameyo (IN)",
             "Analytic Partners Inc (US)",
             "Appier Group (JP)",
@@ -60214,6 +61286,7 @@
             "Branch Metrics Inc Delaware (US)",
             "Brand Embassy (IL)",
             "BrandBastion Oy (FI)",
+            "Bridesview Inc (US)",
             "Brightblue Consulting Limited (GB)",
             "Buffer Inc (US)",
             "BumpYard (IL)",
@@ -60230,6 +61303,7 @@
             "Computerlogy (TH)",
             "Conversocial (UK) Ltd (GB)",
             "Conversocial Inc (US)",
+            "CrowdTangle (US)",
             "Curalate Inc (US)",
             "CustomerLabs Inc (US)",
             "Cyberbiz (TW)",
@@ -60274,6 +61348,7 @@
             "ImWeb (KR)",
             "Infinity Tracking (GB)",
             "Infobip (HR)",
+            "Instagram Inc (US)",
             "Integral Ad Science, Inc. (US)",
             "Integromat (CZ)",
             "Interaxa (BR)",
@@ -60296,19 +61371,25 @@
             "LiveRamp, Inc. (US)",
             "Local Measure (AU)",
             "LoudDoor LLC (US)",
+            "MACRO KIOSK Berhad (MY)",
             "MF Management Ltd (CY)",
             "Makeshop (KR)",
             "ManyChat (US)",
             "Marketo (US)",
             "Maventus Group Inc (US)",
             "Meetrics GmbH (DE)",
+            "Meltwater BV (NL)",
             "MessageBird GmbH (DE)",
             "MessengerPeople GmbH (DE)",
             "MigoChat (EG)",
             "Moat, Inc (US)",
+            "MomentFeed (US)",
             "NC Ventures LLC (US)",
             "NHN COMMERCE Corp (KR)",
+            "Napoleon Sp. z o.o. (PL)",
+            "Nepa Sweden AB (SE)",
             "Netcore Cloud (DE)",
+            "Netino (FR)",
             "Nexmo Inc (US)",
             "Nhanh.vn (VN)",
             "Nielsen LLC (US)",
@@ -60317,8 +61398,10 @@
             "Nuvemshop (BR)",
             "Objective Partners (NL)",
             "Octane AI Inc (US)",
+            "Oktopost Technologies Inc (US)",
             "Omnichat Limited (HK)",
             "OpenCart Limited (HK)",
+            "Oracle (US)",
             "Oracle Data Cloud (US)",
             "Oribi Limited (IL)",
             "Outrigger Media Inc (US)",
@@ -60328,6 +61411,10 @@
             "PT. Informasi Teknologi Indonesia (ID)",
             "PYS (RO)",
             "Pancake (VN)",
+            "Percolate Industries (US)",
+            "Perfect-Storm (KR)",
+            "PinMeTo AB (SE)",
+            "Planogram Inc (US)",
             "Positus (BR)",
             "Praekelt PBC (US)",
             "PrestaShop (FR)",
@@ -60335,10 +61422,14 @@
             "Qiscus (SG)",
             "Qontak (SG)",
             "Quipt (US)",
+            "RepCom (US)",
             "SAPO Technology JSC (VN)",
+            "SOCI Inc (US)",
             "Salsify (US)",
             "Sanuker Inc. Limited (HK)",
+            "Scup (BR)",
             "SendPulse Inc (US)",
+            "Sendible Limited (GB)",
             "Shift4 (US)",
             "Shipnity (TH)",
             "Shoper (PL)",
@@ -60349,13 +61440,23 @@
             "Singular (US)",
             "Smarters (BR)",
             "SmaxBot (VN)",
+            "Social News Desk Inc (US)",
+            "SocialFlow Inc (US)",
+            "Socialbakers (CZ)",
             "Softbaked (TH)",
             "Sparkcentral (US)",
+            "Spreadshirt (US)",
             "Sprinklr (US)",
+            "Sprinklr Germany GmbH (DE)",
+            "Sprout Social Inc (US)",
             "Squarespace (US)",
             "Squeezely (NL)",
+            "Stilingue (BR)",
+            "Superare (IT)",
+            "TRANSCOSMOS ZERO PTE LTD (SG)",
             "Tealium (US)",
             "The Kantar Group Limited (GB)",
+            "The Next Ad BV (NL)",
             "Ticimax (TR)",
             "Tilda (RU)",
             "Touchcore (TH)",
@@ -60372,6 +61473,7 @@
             "Wicked Reports LLC (US)",
             "X-Cart (US)",
             "YReceipts (GB)",
+            "Yext Inc (US)",
             "Zapier (US)",
             "Zentail (US)",
             "comScore (US)",
@@ -60379,6 +61481,7 @@
             "iKala Interactive Media Inc (TW)",
             "ibots App (EG)",
             "mParticle (US)",
+            "maloon GmbH (DE)",
             "uphill GmbH (DE)",
             "Хорошоп (UA)"
         ],
@@ -60670,7 +61773,6 @@
                 "Other",
                 "EU Adequate",
                 "China",
-                "Sonstige",
                 "Russia"
             ]
         }
@@ -61502,6 +62604,24 @@
             "source": null
         },
         "industryCategory": "ic:Automotive"
+    },
+    {
+        "ppid": "Make Me Reach (FR)",
+        "name": "Make Me Reach (FR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Paris",
+            "countryCode": "FR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "Federal Home Loan Mortgage Corporation (US)",
@@ -63493,6 +64613,24 @@
         "industryCategory": "ic:Service"
     },
     {
+        "ppid": "Twigeo AB (SE)",
+        "name": "Twigeo AB (SE)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "SE"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "McDonald’s (US)",
         "name": "McDonald’s (US)",
         "jurisdiction": "Five-Eyes",
@@ -63692,6 +64830,24 @@
             "value": null,
             "source": null
         }
+    },
+    {
+        "ppid": "Stilingue (BR)",
+        "name": "Stilingue (BR)",
+        "jurisdiction": "Other",
+        "location": {
+            "city": "",
+            "countryCode": "BR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "NETSCOUT Systems, Inc. (US)",
@@ -64121,6 +65277,24 @@
         "location": {
             "city": "Delaware",
             "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
+        "ppid": "Sendible Limited (GB)",
+        "name": "Sendible Limited (GB)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "London",
+            "countryCode": "GB"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -66073,6 +67247,24 @@
             "source": null
         },
         "industryCategory": "ic:TrafficAndTransportAndLogistics"
+    },
+    {
+        "ppid": "Oktopost Technologies Inc (US)",
+        "name": "Oktopost Technologies Inc (US)",
+        "jurisdiction": "Five-Eyes",
+        "location": {
+            "city": "Delaware",
+            "countryCode": "US"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "Blackstone Group (US)",
@@ -71537,6 +72729,24 @@
             "source": null
         },
         "industryCategory": "ic:BanksAndFinance"
+    },
+    {
+        "ppid": "Socialbakers (CZ)",
+        "name": "Socialbakers (CZ)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Plzeň",
+            "countryCode": "CZ"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "DoubleVerify Inc. (DE)",
