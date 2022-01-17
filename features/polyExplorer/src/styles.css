@@ -2,6 +2,7 @@
     /* Primary colors */
     --color-dark: #0f1938;
     --color-semi-dark: #8d9caf;
+    --color-medium-dark: #8594a7;
     --color-medium: #a9b6c6;
     --color-semi-light: #edf2f7;
     --color-light: #f7fafc;
@@ -11,9 +12,11 @@
 
     /* Background colors */
     --color-background-dark: var(--color-dark);
+    --color-background-medium: var(--color-medium-dark);
     --color-background-light: var(--color-light);
     /* Text colors */
     --color-text-dark: var(--color-dark);
+    --color-text-medium: var(--color-medium-dark);
     --color-text-light: var(--color-light);
 
     /* Data exploration colors */
@@ -86,4 +89,9 @@ a {
 
 strong {
     font-family: "Jost Bold";
+}
+
+.source {
+    font-family: "Jost Medium";
+    font-size: 12px;
 }
