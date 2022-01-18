@@ -53,7 +53,7 @@ upload_ipa:
 		--apiKey $(value APPSTORE_API_KEY_ID) \
 		--apiIssuer $(value APPSTORE_API_ISSUER_ID)
 
-install_distribution_prerequisits:
+install_distribution_prerequisites:
 	# 1. Install Distribution certificate. xcodebuild will automatically extract the app certificate from the keychain.
 	@echo $(value DISTRIBUTION_CERTIFICATE) | base64 --decode > Certificate.p12
 	security create-keychain -p "" build.keychain
