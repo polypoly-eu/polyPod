@@ -49,8 +49,8 @@ export class I18n {
     }
 
     /**
-     * Know which sections are present in the original hash
-     * @returns The translated string.
+     * Sections present in the original trnslation hash
+     * @returns Array of strings, every one a section
      */
     get sections() {
         return Object.keys(this._translations);
