@@ -29,7 +29,7 @@ describe("Test basic configuration", () => {
         expect(i18n).toBeInstanceOf(I18n);
     });
     it("Includes all sections", () => {
-        expect(i18n.sections()).toStrictEqual(Object.keys(translationData));
+        expect(i18n.sections).toStrictEqual(Object.keys(translationData));
     });
     it("Translates correctly", () => {
         expect(i18n.t("quux:bar")).toBe("baz");

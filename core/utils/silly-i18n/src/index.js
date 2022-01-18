@@ -52,7 +52,7 @@ export class I18n {
      * Know which sections are present in the original hash
      * @returns The translated string.
      */
-    sections() {
+    get sections() {
         return Object.keys(this._translations);
     }
 
@@ -107,9 +107,11 @@ export class I18nSection extends I18n {
      */
     constructor(i18n, section) {
         super(i18n.language, { [i18n.language]: i18n._translations });
-        if (!super.sections().includes(section)) {
+        if (!i18n.sections.includes(section)) {
             throw new NonExistingSectionError(
-                `${section} is not included in translation data, only  ${super.sections()} are`
+                `${section} is not included in translation data, only  ${
+                    super.sections
+                } are`
             );
         }
         this._section = section;
