@@ -4,7 +4,7 @@ import {
     LanguageError,
     NonExistingSectionError,
     TranslationKeyError,
-} from "../src/exceptions";
+} from "../src/errors";
 
 const LANGUAGE = "foo";
 const FALLBACK_LANGUAGE = "en";

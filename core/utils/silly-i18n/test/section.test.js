@@ -1,9 +1,6 @@
 import { I18n, I18nSection } from "../src/index";
 
-import {
-    TranslationKeyError,
-    NonExistingSectionError,
-} from "../src/exceptions";
+import { TranslationKeyError, NonExistingSectionError } from "../src/errors";
 
 const LANGUAGE = "foo";
 let i18n, i18ns;

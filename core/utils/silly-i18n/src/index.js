@@ -2,7 +2,7 @@ import {
     TranslationKeyError,
     LanguageError,
     NonExistingSectionError,
-} from "./exceptions.js";
+} from "./errors.js";
 
 /**
  * Determines the environment language
