@@ -1,5 +1,6 @@
 "use strict";
 
+// Remember! Only core modules here. It's run before any package install.
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 const path = require("path");
