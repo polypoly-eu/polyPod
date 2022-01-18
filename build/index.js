@@ -197,7 +197,7 @@ async function cleanPackage(pkg) {
 
 async function syncPackage(pkg) {
     logDetail(`🕑 ${pkg.name} ...`);
-    if (fs.existsSync("package-lock.json")) { 
+    if (fs.existsSync("package-lock.json")) {
         fs.rmSync("package-lock.json");
     }
     await npm("i");
