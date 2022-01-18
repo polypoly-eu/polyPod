@@ -6,6 +6,8 @@ const path = require("path");
 const { spawn, execSync } = require("child_process");
 
 const { performance } = require("perf_hooks");
+const semver = require("semver");
+
 const validCommands = [
     "build",
     "clean",
@@ -17,7 +19,7 @@ const validCommands = [
     "test",
 ];
 
-function platformize( executable ) {
+function platformize(executable) {
     return process.platform === "win32" ? `${executable}.cmd` : executable;
 }
 
@@ -146,7 +148,7 @@ function logDependencies(packageTree) {
 }
 
 function executeProcess(executable, args, env = process.env) {
-    const cmd = platformize( executable );
+    const cmd = platformize(executable);
     const spawnedProcess = spawn(cmd, args, { env: env });
     spawnedProcess.stdout.on("data", (data) => {
         console.log(data.toString());
@@ -202,7 +204,7 @@ async function cleanPackage(pkg) {
 
 async function syncPackage(pkg) {
     logDetail(`🕑 ${pkg.name} ...`);
-    if (fs.existsSync("package-lock.json")) { 
+    if (fs.existsSync("package-lock.json")) {
         fs.rmSync("package-lock.json");
     }
     await npm("i");
@@ -287,29 +289,35 @@ function logSuccess(command, timeLapsed) {
 }
 
 function checkVersions(metaManifest) {
-    const thisNPM = platformize( "npm" );
+    const thisNPM = platformize("npm");
     let exitCode = 0;
-    const nodeMajorVersion = parseInt(process.version.slice(1, 3), 10);
-    if (nodeMajorVersion < metaManifest.requiredNodeMajorVersion) {
+    const nodeVersion = process.version;
+    if (
+        semver.lt(nodeVersion, semver.coerce(metaManifest.requiredNodeVersion))
+    ) {
         console.error(
-            `⚠️ Node.js v${metaManifest.requiredNodeMajorVersion} or later ` +
+            `⚠️ Node.js v${metaManifest.requiredNodeVersion} or later ` +
                 `required, you are on ${process.version}`
         );
         exitCode = 1;
     }
     let npmVersion;
     try {
-        npmVersion = execSync(`${thisNPM} --version`, { encoding: 'utf-8' });
-        const npmMajorVersion = npmVersion.match(/^(\d+)\.\d+/)[0];
-        if (npmMajorVersion < metaManifest.requiredNPMMajorVersion) {
+        npmVersion = execSync(`${thisNPM} --version`, { encoding: "utf-8" });
+        if (
+            semver.lt(
+                npmVersion,
+                semver.coerce(metaManifest.requiredNPMVersion)
+            )
+        ) {
             console.error(
-                `⚠️ NPM ${metaManifest.requiredNPMMajorVersion} or later ` +
-                `required, you are on ${npmMajorVersion}`
+                `⚠️ NPM ${metaManifest.requiredNPMVersion} or later ` +
+                    `required, you are on ${npmVersion}`
             );
             exitCode = 1;
         }
     } catch (error) {
-        console.error( `⚠️ Error ${error} when trying to find NPM version` );
+        console.error(`⚠️ Error ${error} when trying to find NPM version`);
         exitCode = 1;
     }
     return exitCode;
@@ -325,7 +333,7 @@ async function main() {
     process.chdir(path.dirname(scriptPath));
     const metaManifest = parseManifest("build/packages.json");
     const exitCode = checkVersions(metaManifest);
-    if (exitCode !== 0 ) {
+    if (exitCode !== 0) {
         return exitCode;
     }
 
