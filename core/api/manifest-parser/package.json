@@ -19,8 +19,7 @@
     "@pnpm/read-package-json": "^3.1.5",
     "@types/semver": "^7.3.3",
     "fp-ts": "^2.8.2",
-    "io-ts": "2.2.10",
-    "semver": "^7.3.2"
+    "io-ts": "2.2.10"
   },
   "devDependencies": {
     "@types/node": "^16.7.1"
