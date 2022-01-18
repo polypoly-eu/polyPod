@@ -6,7 +6,7 @@ enum PodApiError: Error {
     case badSearchQuery
     case parameterMissing
     case noSuchFile(_ path: String)
-    case noAppDelegate
+    case protectedDataUnavailable
     case badArgumentData(_ arg: Any)
     case failedToReadGraph(_ type: String)
     case badData(_ data: Any)
@@ -25,8 +25,8 @@ extension PodApiError: LocalizedError {
             return "Parameter missing"
         case .noSuchFile(let path):
             return "No such file: \(path)"
-        case .noAppDelegate:
-            return "AppDelegate not available"
+        case .protectedDataUnavailable:
+            return "Protected data is unavailable to be accessed"
         case .badArgumentData(let arg):
             return "Bad argument data: \(arg)"
         case .failedToReadGraph(let type):

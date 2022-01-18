@@ -41,3 +41,17 @@ export function wrapTexts(texts) {
     }
   });
 }
+
+/**
+ * Only keeps Day, Month and Yar from a date
+ *
+ * @param {Date} Date
+ * @returns Date
+ */
+export function trimTimeOfDate(jsDate) {
+  const date = `${jsDate.getFullYear()}-${
+    jsDate.getMonth() + 1
+  }-${jsDate.getDate()}`;
+
+  return d3.timeParse("%Y-%m-%d")(date);
+}

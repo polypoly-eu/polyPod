@@ -33,8 +33,6 @@
 		1A66F77F249378E400ED4308 /* PolyOutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F77E249378E400ED4308 /* PolyOutTests.swift */; };
 		1A66F7802493793D00ED4308 /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B1242A34D700E51B6D /* PolyOut.swift */; };
 		1A66F7812493794000ED4308 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F77C2493774100ED4308 /* NetworkSession.swift */; };
-		1A6F4DF224C1A76200874DF9 /* PolyIn+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F4DF124C1A76200874DF9 /* PolyIn+Add.swift */; };
-		1A6F4DF424C1A76E00874DF9 /* PolyIn+Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F4DF324C1A76E00874DF9 /* PolyIn+Select.swift */; };
 		1A8F4875247E40C600089217 /* PostOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8F4874247E40C600089217 /* PostOffice.swift */; };
 		1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3224191C94008DB1B2 /* AppDelegate.swift */; };
 		1AA6DE3524191C94008DB1B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6DE3424191C94008DB1B2 /* SceneDelegate.swift */; };
@@ -47,8 +45,6 @@
 		1ABADBD224EBC5D500369791 /* FetchRequestInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F7682490DB8700ED4308 /* FetchRequestInit.swift */; };
 		1ABADBD324EBC5D900369791 /* FetchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F76A2490DFA000ED4308 /* FetchResponse.swift */; };
 		1ABADBD424EBC5EF00369791 /* PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468AF242A34CF00E51B6D /* PolyIn.swift */; };
-		1ABADBD524EBC5F200369791 /* PolyIn+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F4DF124C1A76200874DF9 /* PolyIn+Add.swift */; };
-		1ABADBD624EBC5F500369791 /* PolyIn+Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F4DF324C1A76E00874DF9 /* PolyIn+Select.swift */; };
 		1ABADBD724EBC5F700369791 /* PolyOut+FS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1179524C1A4A80063EE37 /* PolyOut+FS.swift */; };
 		1ABADBD824EBC5F900369791 /* FileStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178524BE22D50063EE37 /* FileStats.swift */; };
 		1ABADBD924EBC5FC00369791 /* PolyOut+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1179124C1A20E0063EE37 /* PolyOut+Fetch.swift */; };
@@ -93,9 +89,13 @@
 		1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DB24349E6B00E51B6D /* PodApi.swift */; };
 		1AF468DE24361D9D00E51B6D /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */; };
 		3B3CEDFA274FC37C000C3E6E /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989B350269CA6B7000EE977 /* FilePicker.swift */; };
-		5B0F7B6126AD840E00F4EFF4 /* PolyIn+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */; };
-		5B0F7B6326AD841D00F4EFF4 /* PolyIn+Has.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */; };
 		5B8653022643FC310014208C /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
+		901C0588278EE58700BC8364 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0587278EE58700BC8364 /* CoreDataStack.swift */; };
+		901C058A278F2AF800BC8364 /* CoreData+PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */; };
+		901C058B278F2D4A00BC8364 /* CoreData+PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */; };
+		901C058C278F34A800BC8364 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0587278EE58700BC8364 /* CoreDataStack.swift */; };
+		904D4A7027905D5B00A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
+		904D4A712790633000A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
 		E9040D4726F0A30E00A88593 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4626F0A30E00A88593 /* Info.swift */; };
 		E9040D4926F0B2B400A88593 /* RuntimeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */; };
 		E90F89EA2629822400AD7D96 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89E92629822400AD7D96 /* OnboardingView.swift */; };
@@ -125,8 +125,6 @@
 		E989B354269DDE4A000EE977 /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
 		E98BA7FF26D3CA2F0039E41E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98BA7FE26D3CA2F0039E41E /* Network.swift */; };
 		E98BA80026D3CA2F0039E41E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98BA7FE26D3CA2F0039E41E /* Network.swift */; };
-		E98BA80226D4DD9A0039E41E /* PolyIn+Has.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */; };
-		E98BA80326D4DD9D0039E41E /* PolyIn+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */; };
 		E98D506A26F3741100C3FCF4 /* handleErrors.js in Resources */ = {isa = PBXBuildFile; fileRef = E98D506926F3741100C3FCF4 /* handleErrors.js */; };
 		E996EBD22756BBE900EAC9F7 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E996EBD12756BBE900EAC9F7 /* Log.swift */; };
 		E9B2203C263314AD005E8881 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B2F2625866800216B70 /* Feature.swift */; };
@@ -201,8 +199,6 @@
 		1A66F7762493743D00ED4308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A66F77C2493774100ED4308 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
 		1A66F77E249378E400ED4308 /* PolyOutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOutTests.swift; sourceTree = "<group>"; };
-		1A6F4DF124C1A76200874DF9 /* PolyIn+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyIn+Add.swift"; sourceTree = "<group>"; };
-		1A6F4DF324C1A76E00874DF9 /* PolyIn+Select.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyIn+Select.swift"; sourceTree = "<group>"; };
 		1A8F4874247E40C600089217 /* PostOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOffice.swift; sourceTree = "<group>"; };
 		1AA6DE2F24191C94008DB1B2 /* PolyPod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PolyPod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AA6DE3224191C94008DB1B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -230,9 +226,10 @@
 		1AF468DB24349E6B00E51B6D /* PodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodApi.swift; sourceTree = "<group>"; };
 		1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
 		5B0F7B5F26A924DF00F4EFF4 /* PolyPod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PolyPod.entitlements; sourceTree = "<group>"; };
-		5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyIn+Delete.swift"; sourceTree = "<group>"; };
-		5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolyIn+Has.swift"; sourceTree = "<group>"; };
 		5B8653012643FC310014208C /* PolyNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyNav.swift; sourceTree = "<group>"; };
+		901C0587278EE58700BC8364 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+PolyIn.swift"; sourceTree = "<group>"; };
+		904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchToMainQueue.swift; sourceTree = "<group>"; };
 		E9040D4626F0A30E00A88593 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeInfo.swift; sourceTree = "<group>"; };
 		E90F89E92629822400AD7D96 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -326,7 +323,7 @@
 		1A66F76D2493719B00ED4308 /* PolyIn */ = {
 			isa = PBXGroup;
 			children = (
-				1A6F4DF524C1A82F00874DF9 /* Quads */,
+				901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */,
 				1AF468AF242A34CF00E51B6D /* PolyIn.swift */,
 			);
 			path = PolyIn;
@@ -344,17 +341,6 @@
 				E9CFFA4B26A0240300F7BE65 /* ColorExtensionsTests.swift */,
 			);
 			path = PolyPodTests;
-			sourceTree = "<group>";
-		};
-		1A6F4DF524C1A82F00874DF9 /* Quads */ = {
-			isa = PBXGroup;
-			children = (
-				1A6F4DF124C1A76200874DF9 /* PolyIn+Add.swift */,
-				1A6F4DF324C1A76E00874DF9 /* PolyIn+Select.swift */,
-				5B0F7B6026AD840E00F4EFF4 /* PolyIn+Delete.swift */,
-				5B0F7B6226AD841D00F4EFF4 /* PolyIn+Has.swift */,
-			);
-			path = Quads;
 			sourceTree = "<group>";
 		};
 		1A6F4DF624C1B9BE00874DF9 /* CoreDataModels */ = {
@@ -377,6 +363,7 @@
 				1A4C21DC24A63DD4006CC1FD /* Term+CoreDataClass.swift */,
 				1A4C21DD24A63DD4006CC1FD /* Term+CoreDataProperties.swift */,
 				1AF1178D24C174A00063EE37 /* Term+Additions.swift */,
+				901C0587278EE58700BC8364 /* CoreDataStack.swift */,
 			);
 			path = CoreDataModels;
 			sourceTree = "<group>";
@@ -384,6 +371,7 @@
 		1AA6DE2624191C94008DB1B2 = {
 			isa = PBXGroup;
 			children = (
+				904D4A6E27905D4C00A75AED /* Utils */,
 				E9018EDF276370B500FDF34A /* Core */,
 				E97D3274263151BC00A5A180 /* Features */,
 				E97D326726308BC700A5A180 /* Extensions */,
@@ -509,6 +497,14 @@
 				5B8653012643FC310014208C /* PolyNav.swift */,
 			);
 			path = PolyNav;
+			sourceTree = "<group>";
+		};
+		904D4A6E27905D4C00A75AED /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		E9018EDF276370B500FDF34A /* Core */ = {
@@ -791,10 +787,12 @@
 			files = (
 				E9B22041263314DC005E8881 /* JSONSerializationExtensions.swift in Sources */,
 				E9B22042263314DC005E8881 /* FileManagerExtensions.swift in Sources */,
+				901C058B278F2D4A00BC8364 /* CoreData+PolyIn.swift in Sources */,
 				E9B22043263314DC005E8881 /* LocalizedStringKeyExtensions.swift in Sources */,
 				E9CFFA4C26A0240300F7BE65 /* ColorExtensionsTests.swift in Sources */,
 				E9B22044263314DC005E8881 /* UIColorExtensions.swift in Sources */,
 				E9B22045263314DC005E8881 /* ColorExtensions.swift in Sources */,
+				901C058C278F34A800BC8364 /* CoreDataStack.swift in Sources */,
 				E9B2203C263314AD005E8881 /* Feature.swift in Sources */,
 				E9B2203D263314AD005E8881 /* FeatureStorage.swift in Sources */,
 				E9B2203E263314AD005E8881 /* FeatureManifest.swift in Sources */,
@@ -806,12 +804,11 @@
 				1ABADBFE24EE710B00369791 /* Variable+CoreDataClass.swift in Sources */,
 				1ABADBF924EE710B00369791 /* BlankNode+CoreDataClass.swift in Sources */,
 				E989B353269DDC9E000EE977 /* PolyNavTests.swift in Sources */,
-				E98BA80326D4DD9D0039E41E /* PolyIn+Delete.swift in Sources */,
 				1ABADBFF24EE710B00369791 /* Variable+CoreDataProperties.swift in Sources */,
+				904D4A712790633000A75AED /* DispatchToMainQueue.swift in Sources */,
 				E989B354269DDE4A000EE977 /* PolyNav.swift in Sources */,
 				1ABADC0624EE712F00369791 /* PolyPodModel.xcdatamodeld in Sources */,
 				1A66F7802493793D00ED4308 /* PolyOut.swift in Sources */,
-				E98BA80226D4DD9A0039E41E /* PolyIn+Has.swift in Sources */,
 				1ABADBD824EBC5F900369791 /* FileStats.swift in Sources */,
 				E9CFFA4F26A1983700F7BE65 /* UIColorExtensionsTest.swift in Sources */,
 				1ABADBF224EE70B500369791 /* DataFactory.swift in Sources */,
@@ -843,9 +840,7 @@
 				1ABADBEF24ED282A00369791 /* PodApiError.swift in Sources */,
 				1ABADC0D24EFB8A500369791 /* CLLocation+Model.swift in Sources */,
 				1ABADBD724EBC5F700369791 /* PolyOut+FS.swift in Sources */,
-				1ABADBD524EBC5F200369791 /* PolyIn+Add.swift in Sources */,
 				1ABADBF524EE710B00369791 /* DefaultGraph+CoreDataClass.swift in Sources */,
-				1ABADBD624EBC5F500369791 /* PolyIn+Select.swift in Sources */,
 				1ABADBD324EBC5D900369791 /* FetchResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -862,12 +857,10 @@
 				E996EBD22756BBE900EAC9F7 /* Log.swift in Sources */,
 				1A66F77D2493774100ED4308 /* NetworkSession.swift in Sources */,
 				E97D325626307CE100A5A180 /* ColorExtensions.swift in Sources */,
-				1A6F4DF424C1A76E00874DF9 /* PolyIn+Select.swift in Sources */,
 				E9E6A01C262DB9CC00B6416E /* PreviewUtils.swift in Sources */,
 				5B8653022643FC310014208C /* PolyNav.swift in Sources */,
 				E9F370E1262EEB2C006254C1 /* ParagraphView.swift in Sources */,
 				1A4C21F424A63E4C006CC1FD /* Variable+CoreDataClass.swift in Sources */,
-				1A6F4DF224C1A76200874DF9 /* PolyIn+Add.swift in Sources */,
 				1ABADC0924EFAA3600369791 /* CLLocation+Model.swift in Sources */,
 				E9CF1B5D2625CDBB00216B70 /* FeatureListView.swift in Sources */,
 				E9CF1B302625866800216B70 /* Feature.swift in Sources */,
@@ -875,6 +868,7 @@
 				E97D32A82631BF7700A5A180 /* HTMLView.swift in Sources */,
 				1A57E65624A4C4110043E3AD /* Bubblewrap.swift in Sources */,
 				E98BA7FF26D3CA2F0039E41E /* Network.swift in Sources */,
+				901C058A278F2AF800BC8364 /* CoreData+PolyIn.swift in Sources */,
 				1AF1178E24C174A00063EE37 /* Term+Additions.swift in Sources */,
 				1A183E9224AF1E860025F6BB /* PodApiError.swift in Sources */,
 				1A4C21F124A63E4C006CC1FD /* BlankNode+CoreDataProperties.swift in Sources */,
@@ -893,9 +887,9 @@
 				1A4C21DF24A63DD4006CC1FD /* Term+CoreDataProperties.swift in Sources */,
 				E97D327A263153C200A5A180 /* NavigationBar.swift in Sources */,
 				E9545EAE273530ED001E8C7F /* UpdateNotification.swift in Sources */,
-				5B0F7B6326AD841D00F4EFF4 /* PolyIn+Has.swift in Sources */,
+				901C0588278EE58700BC8364 /* CoreDataStack.swift in Sources */,
+				904D4A7027905D5B00A75AED /* DispatchToMainQueue.swift in Sources */,
 				1AA6DE3324191C94008DB1B2 /* AppDelegate.swift in Sources */,
-				5B0F7B6126AD840E00F4EFF4 /* PolyIn+Delete.swift in Sources */,
 				E9F370D5262EABFF006254C1 /* LocalizedStringKeyExtensions.swift in Sources */,
 				E9F370E7262EEF13006254C1 /* UIColorExtensions.swift in Sources */,
 				1ABADBEC24EBD02C00369791 /* LocationTracker.swift in Sources */,
@@ -981,7 +975,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CXY8G76CEJ;
+				DEVELOPMENT_TEAM = 4A6DFU3K82;
 				INFOPLIST_FILE = PolyPodTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1005,7 +999,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CXY8G76CEJ;
+				DEVELOPMENT_TEAM = 4A6DFU3K82;
 				INFOPLIST_FILE = PolyPodTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1207,7 +1201,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.eu.PolyPodUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.polypod.UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1231,7 +1225,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.eu.PolyPodUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.polypod.UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;

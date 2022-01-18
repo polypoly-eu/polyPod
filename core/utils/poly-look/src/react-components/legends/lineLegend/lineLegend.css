@@ -1,0 +1,11 @@
+.line-legend div {
+  display: flex;
+  align-items: center;
+}
+
+.line-legend .legend-entry div {
+  width: 15px;
+  height: 2px;
+  margin-right: 4px;
+  display: inline-block;
+}
