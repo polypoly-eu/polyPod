@@ -10,6 +10,7 @@ const { performance } = require("perf_hooks");
 const validCommands = [
     "build",
     "clean",
+    "install",
     "lint",
     "lintfix",
     "list",
@@ -210,7 +211,8 @@ async function syncPackage(pkg) {
 }
 
 const commands = {
-    build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
+    install: (pkg) => npmInstall(pkg.name),
+    build: (pkg) => npmRun("build", pkg),
     test: (pkg) => npmRun("test", pkg),
     clean: (pkg) => cleanPackage(pkg),
     "sync-deps": (pkg) => syncPackage(pkg),
