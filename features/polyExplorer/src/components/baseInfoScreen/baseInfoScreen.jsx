@@ -21,9 +21,11 @@ const BaseInfoScreen = ({ className, infoChildren }) => {
                         {infoChild}
                     </div>
                 ))}
-                <button onClick={() => handleBack()}>
-                    {i18n.t("common:button.ok")}
-                </button>
+                <div className="base-info-padding">
+                    <button onClick={() => handleBack()}>
+                        {i18n.t("common:button.ok")}
+                    </button>
+                </div>
             </div>
         </Screen>
     );
