@@ -17,6 +17,7 @@ jobs:
                   cache-dependency-path: "**/package-lock.json"
             - name: Cache multiple paths
               uses: actions/cache@v2
+              id: cache
               with:
                   path: "**/node_modules"
                   key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
@@ -48,6 +49,9 @@ jobs:
             - name: Lint core and features
               if: steps.changes.outputs.js == 'true'
               run: ./build.js lint
+            - name: Install modules if needed
+              if: steps.cache.output.cache-hit != 'true'
+              run: ./build.js install
             - name: Build core and features
               if: steps.changes.outputs.coreAndFeatures == 'true' || steps.changes.outputs.android == 'true'
               run: ./build.js
