@@ -50,7 +50,7 @@ function showUsage(scriptPath) {
     console.error(
         `Usage: ${baseName} [ --start PACKAGE_NAME ] [ ${validCommandString} ]`
     );
-    console.error("  Run without arguments to build all packages");
+    console.error(" Run without arguments to build all packages");
 }
 
 function parseManifest(path) {
