@@ -39,13 +39,13 @@ jobs:
           make test | xcpretty
       - name: Install distribution prerequisites
         working-directory: ios
+        run: make install_distribution_prerequisites
         env:
           POLYPOD_APPLE_IOS_DISTRIBUTION_CERTIFICATE: ${{ secrets.POLYPOD_APPLE_IOS_DISTRIBUTION_CERTIFICATE }}
           POLYPOD_APPLE_IOS_DISTRIBUTION_CERTIFICATE_PWD: ${{ secrets.POLYPOD_APPLE_IOS_DISTRIBUTION_CERTIFICATE_PWD }}
           POLYPOD_APPLE_IOS_DISTRIBUTION_PROVISIONING_PROFILE: ${{ secrets.POLYPOD_APPLE_IOS_DISTRIBUTION_PROVISIONING_PROFILE }}
           POLYPOD_APPLE_APP_STORE_CONNECT_API_KEY: ${{ secrets.POLYPOD_APPLE_APP_STORE_CONNECT_API_KEY }}
           POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
-        run: make install_distribution_prerequisites
       - name: Archive application
         working-directory: ios
         run: |
@@ -58,9 +58,9 @@ jobs:
           make export_ipa | xcpretty
       - name: Upload IPA
         working-directory: ios
-        env:
-          POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID }}
-          POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
         run: |
           set -o pipefail
           make upload_ipa | xcpretty
+        env:
+          POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID }}
+          POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}

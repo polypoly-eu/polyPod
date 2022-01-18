@@ -69,4 +69,4 @@ install_distribution_prerequisits:
 
 	# 3. App Store Connect API Key. altool will automtically use the private key from private_keys folder. 
 	mkdir -p ~/private_keys
-	@echo $(value STORE_CONNECT_API_KEY) | base64 --decode > ~/private_keys/AuthKey_$(value APPSTORE_API_KEY_ID).p8
+	@echo $(value APPSTORE_CONNECT_API_KEY) | base64 --decode > ~/private_keys/AuthKey_$(value APPSTORE_API_KEY_ID).p8
