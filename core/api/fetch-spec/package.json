@@ -10,7 +10,7 @@
   "module": "dist/index.es.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/polypoly-eu/polyPod.git"
+    "url": "https://github.com/polypoly-eu/polyPod"
   },
   "scripts": {
     "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
