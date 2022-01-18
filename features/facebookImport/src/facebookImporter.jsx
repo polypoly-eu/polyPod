@@ -62,7 +62,7 @@ const FacebookImporter = () => {
     }
 
     return (
-        <div className="facebook-importer poly-theme-dark">
+        <div className="facebook-importer poly-theme dark">
             {pod ? (
                 <Switch>
                     <Route exact path="/">
