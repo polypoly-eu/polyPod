@@ -10,29 +10,31 @@ const margin = {
   bottom: 20,
   left: 0,
 };
+
 const barValueMargin = 4;
 const barPaddingProportion = 0.2;
 const groupHeadlineHeight = 14;
 const headlinePadding = 6;
 const barTextBottomMargin = 6;
 const barLabelTopMargin = 2;
+const defaultBarWidth = 20;
 const defaultBarColor = "blue";
 const defaultBarValueColor = "white";
-const defaultBarWidth = 20;
+
 /**
  *
  * @class
  * @extends Chart
  * @param {CSS-selector} selector - A CSS selector, where the svg will be attached to
- * @param {Object[]} data - The data to be visualized as a bubble cluster
- * @param {string} data[].title - The title/name the bubble has
- * @param {number} data[].value - The value of the bubble, which corresponds to it's radius
+ * @param {Object[]} data - The data to be visualized as a bar chart
+ * @param {string} data[].title - The title/name the bar has
+ * @param {number} data[].value - The value of the bar, which corresponds to it's radius
  * @param {number} [width  = 400] - The width of the svg
  * @param {number} [height = 400] - The height of the svg
- * @param {string|callback} [barColor = defaultBarColor] - The color of the bar (callbacks receive event and data)
- * @param {string} [barValueColor] - The color the values are shown in (default = no values shown)
- * @param {string} [barWidth] - barWidth is actually bar height since it is a horizontal bar chart but for all intents and purposes it is the bar's width
  * @param {Object[]} [groups] - This holds the information of what groups are associated with the data (default: dafta is not grouped)
+ * @param {string|callback} [barColor] - The color of the bar (callbacks receive event and data)
+ * @param {string} [barWidth] - barWidth is actually bar height since it is a horizontal bar chart but for all intents and purposes it is the bar's width
+ * @param {string} [barValueColor] - The color the values are shown in (default = no values shown)
  */
 
 class ScaleContainer {
@@ -56,10 +58,10 @@ export class HorizontalBarChart extends Chart {
     super({ selector, data, width, height, margin });
     this._groups = groups;
     this._barColor = barColor || defaultBarColor;
-    this._barWidth = defaultBarWidth || barWidth;
+    this._barWidth = barWidth || defaultBarWidth;
+    this._barValueColor = barValueColor || defaultBarValueColor;
     this._xScale = d3.scaleLinear().range([0, this.chartWidth]);
     this._yScales = this._getYscales(groups);
-    this._barValueColor = barValueColor || defaultBarValueColor;
   }
 
   _getYscales(groups) {
@@ -108,31 +110,35 @@ export class HorizontalBarChart extends Chart {
     }
   }
 
-  _updateExistingBars(bars) {
-    bars
-      .transition()
-      .duration(750)
-      .attr("x", 0)
-      .attr("width", initializingBarHeight)
-      .attr("y", (d) => {
-        for (let scaleContainer of this._yScales) {
-          if (!scaleContainer.id)
-            scaleContainer.scale(d.title) +
-              scaleContainer.scale.bandwidth() / 4;
-          if (d.group === scaleContainer.id)
-            return (
-              scaleContainer.scale(d.title) +
-              (scaleContainer.scale.bandwidth() - this._barWidth) / 2
-            );
-        }
-      })
-      .attr("height", this._barWidth)
-      .attr("fill", this._barColor)
-      .attr("class", "bar")
-      .transition()
-      .duration(750)
-      .attr("x", 0)
-      .attr("width", (d) => this._xScale(d.value));
+  _setValueYAttribute(d) {
+    for (let scaleContainer of this._yScales) {
+      if (!scaleContainer.id)
+        return (
+          scaleContainer.scale(d.title) +
+          this._barWidth +
+          barTextBottomMargin / 2
+        );
+      if (scaleContainer.id === d.group)
+        return (
+          scaleContainer.scale(d.title) +
+          scaleContainer.scale.bandwidth() -
+          barTextBottomMargin
+        );
+    }
+  }
+
+  _setBarYAttribute(d) {
+    for (let scaleContainer of this._yScales) {
+      if (!scaleContainer.id)
+        return (
+          scaleContainer.scale(d.title) + scaleContainer.scale.bandwidth() / 4
+        );
+      if (d.group === scaleContainer.id)
+        return (
+          scaleContainer.scale(d.title) +
+          (scaleContainer.scale.bandwidth() - this._barWidth) / 2
+        );
+    }
   }
 
   _addEnteringBars(barGroups) {
@@ -140,26 +146,29 @@ export class HorizontalBarChart extends Chart {
       .append("rect")
       .attr("x", 0)
       .attr("width", initializingBarHeight)
-      .attr("y", (d) => {
-        for (let scaleContainer of this._yScales) {
-          if (!scaleContainer.id)
-            return (
-              scaleContainer.scale(d.title) +
-              scaleContainer.scale.bandwidth() / 4
-            );
-          if (d.group === scaleContainer.id)
-            return (
-              scaleContainer.scale(d.title) +
-              (scaleContainer.scale.bandwidth() - this._barWidth) / 2
-            );
-        }
-      })
+      .attr("y", (d) => this._setBarYAttribute(d))
       .attr("height", this._barWidth)
       .attr("fill", this._barColor)
       .attr("class", "bar")
       .transition()
       .duration(750)
       .delay((_, i) => i * 50)
+      .attr("x", 0)
+      .attr("width", (d) => this._xScale(d.value));
+  }
+
+  _updateExistingBars(bars) {
+    bars
+      .transition()
+      .duration(750)
+      .attr("x", 0)
+      .attr("width", initializingBarHeight)
+      .attr("y", (d) => this._setBarYAttribute(d))
+      .attr("height", this._barWidth)
+      .attr("fill", this._barColor)
+      .attr("class", "bar")
+      .transition()
+      .duration(750)
       .attr("x", 0)
       .attr("width", (d) => this._xScale(d.value));
   }
@@ -214,22 +223,7 @@ export class HorizontalBarChart extends Chart {
   _addEnteringBarValues(barGroups) {
     barGroups
       .append("text")
-      .attr("y", (d) => {
-        for (let scaleContainer of this._yScales) {
-          if (!scaleContainer.id)
-            return (
-              scaleContainer.scale(d.title) +
-              this._barWidth +
-              barTextBottomMargin / 2
-            );
-          if (scaleContainer.id === d.group)
-            return (
-              scaleContainer.scale(d.title) +
-              scaleContainer.scale.bandwidth() -
-              barTextBottomMargin
-            );
-        }
-      })
+      .attr("y", (d) => this._setValueYAttribute(d))
       .attr("class", "bar-value")
       .attr("text-anchor", "end")
       .attr("x", (d) => this._xScale(d.value) - barValueMargin)
@@ -244,8 +238,10 @@ export class HorizontalBarChart extends Chart {
 
   _updateExistingBarValues(barValues) {
     barValues
-      .attr("fill", "transparent")
-      .attr("x", 0)
+      .attr("y", (d) => this._setValueYAttribute(d))
+      .attr("class", "bar-value")
+      .attr("text-anchor", "end")
+      .attr("x", (d) => this._xScale(d.value) - barValueMargin)
       .text((d) => d.value)
       .raise()
       .transition()
@@ -298,7 +294,7 @@ export class HorizontalBarChart extends Chart {
   }
 
   _displayValues(barGroups, enteringBarGroups) {
-    // this._updateExistingBarValues(barGroups);
+    this._updateExistingBarValues(barGroups);
     this._addEnteringBarValues(enteringBarGroups);
     this._addEnteringBarLabels(enteringBarGroups);
   }
