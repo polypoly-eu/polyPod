@@ -20,6 +20,7 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v2
             - uses: actions/setup-node@v2
+              id: setup
               with:
                   node-version: 16
                   cache: "npm"
