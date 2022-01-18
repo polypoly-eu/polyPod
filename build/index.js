@@ -6,7 +6,6 @@ const path = require("path");
 const { spawn, execSync } = require("child_process");
 
 const { performance } = require("perf_hooks");
-const semver = require("semver");
 
 const validCommands = [
     "build",
@@ -291,10 +290,8 @@ function logSuccess(command, timeLapsed) {
 function checkVersions(metaManifest) {
     const thisNPM = platformize("npm");
     let exitCode = 0;
-    const nodeVersion = process.version;
-    if (
-        semver.lt(nodeVersion, semver.coerce(metaManifest.requiredNodeVersion))
-    ) {
+    const nodeVersion = process.version.split(".")[0];
+    if (nodeVersion < metaManifest.requiredNodeVersion) {
         console.error(
             `⚠️ Node.js v${metaManifest.requiredNodeVersion} or later ` +
                 `required, you are on ${process.version}`
@@ -303,13 +300,10 @@ function checkVersions(metaManifest) {
     }
     let npmVersion;
     try {
-        npmVersion = execSync(`${thisNPM} --version`, { encoding: "utf-8" });
-        if (
-            semver.lt(
-                npmVersion,
-                semver.coerce(metaManifest.requiredNPMVersion)
-            )
-        ) {
+        npmVersion = execSync(`${thisNPM} --version`, {
+            encoding: "utf-8",
+        }).split(".")[0];
+        if (npmVersion < metaManifest.requiredNPMVersion) {
             console.error(
                 `⚠️ NPM ${metaManifest.requiredNPMVersion} or later ` +
                     `required, you are on ${npmVersion}`
