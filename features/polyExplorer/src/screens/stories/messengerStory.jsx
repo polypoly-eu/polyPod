@@ -176,7 +176,7 @@ const MessengerStory = () => {
     return (
         <ClusterStory
             progressBarColor="black"
-            className="messenger-story"
+            className="messenger-story poly-theme.light"
             primaryColor="#3ba6ff"
             fadingTopBackground={{
                 distance: "600px",

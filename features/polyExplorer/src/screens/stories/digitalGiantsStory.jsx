@@ -136,7 +136,7 @@ const DigitalGiantsStory = () => {
     return (
         <ClusterStory
             progressBarColor="black"
-            className="digital-giants-story"
+            className="digital-giants-story poly-theme.light"
             primaryColor={primaryColor}
             fadingTopBackground={{
                 distance: "600px",
