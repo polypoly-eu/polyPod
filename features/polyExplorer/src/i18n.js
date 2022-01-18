@@ -24,7 +24,6 @@ import clusterMessengerStoryEn from "./locales/en/stories/clusterMessengerStory.
 import clusterDigitalGiantsStoryEn from "./locales/en/stories/clusterDigitalGiants.json";
 import clusterStoryCommonEn from "./locales/en/stories/common.json";
 import barChartEn from "./locales/en/barChart.json";
-import baseInfoScreenEn from "./locales/en/infoScreens/baseInfoScreen.json";
 
 import commonDe from "./locales/de/common.json";
 import entityFilterScreenDe from "./locales/de/entityFilterScreen.json";
@@ -50,7 +49,6 @@ import clusterMessengerStoryDe from "./locales/de/stories/clusterMessengerStory.
 import clusterDigitalGiantsStoryDe from "./locales/de/stories/clusterDigitalGiants.json";
 import clusterStoryCommonDe from "./locales/de/stories/common.json";
 import barChartDe from "./locales/de/barChart.json";
-import baseInfoScreenDe from "./locales/de/infoScreens/baseInfoScreen.json";
 
 export default new I18n(determineLanguage(), {
     en: {
@@ -78,7 +76,6 @@ export default new I18n(determineLanguage(), {
         clusterDigitalGiantsStory: clusterDigitalGiantsStoryEn,
         clusterStoryCommon: clusterStoryCommonEn,
         barChart: barChartEn,
-        baseInfoScreen: baseInfoScreenEn,
     },
     de: {
         common: commonDe,
@@ -105,6 +102,5 @@ export default new I18n(determineLanguage(), {
         clusterDigitalGiantsStory: clusterDigitalGiantsStoryDe,
         clusterStoryCommon: clusterStoryCommonDe,
         barChart: barChartDe,
-        baseInfoScreen: baseInfoScreenDe,
     },
 });
