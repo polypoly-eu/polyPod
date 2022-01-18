@@ -1,8 +1,5 @@
-import "./styles.css";
-import "./themes.css";
-import "./colors.css";
-import "./buttons/buttons.css";
-
+import { cssBundler } from "./css";
+cssBundler();
 import {
   BubbleCluster,
   VerticalBarChart,

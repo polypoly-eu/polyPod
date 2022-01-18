@@ -1,0 +1,16 @@
+:root,
+.poly-theme {
+  --theme-font-base: var(--jost);
+  --theme-font-medium: var(--jost-medium);
+}
+
+:root,
+.poly-theme.light {
+  --theme-primary-color: var(--color-gray-50);
+  --theme-secondary-color: var(--color-indigo-950);
+}
+
+.poly-theme.dark {
+  --theme-primary-color: var(--color-indigo-950);
+  --theme-secondary-color: var(--color-gray-50);
+}
