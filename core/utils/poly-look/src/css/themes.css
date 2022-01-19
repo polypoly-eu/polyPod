@@ -10,12 +10,12 @@
 }
 
 :root,
-.poly-theme.light {
+.poly-theme-light {
   --theme-primary-color: var(--color-gray-50);
   --theme-secondary-color: var(--color-indigo-950);
 }
 
-.poly-theme.dark {
+.poly-theme-dark {
   --theme-primary-color: var(--color-indigo-950);
   --theme-secondary-color: var(--color-gray-50);
 }
