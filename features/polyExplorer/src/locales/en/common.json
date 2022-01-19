@@ -23,6 +23,12 @@
         "How to read this?",
     "screenTitle.line-chart-info":
         "Background Information",
+    "screenTitle.company-data-types-info":
+        "Background Information",
+    "screenTitle.shares-data-types-info":
+        "Background Information",
+    "screenTitle.types-data-types-info":
+        "Background Information",
     "screenTitle.search":
         "Search",
     "screenTitle.info":
