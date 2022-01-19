@@ -1943,6 +1943,16 @@
             "Explanation_DE": "Durchführung von Aktivitäten und Funktionen für die Leitung der Organisation",
             "Explanation_EN": "Conduct activities and functions for organisation's governance",
             "Editorial_Purpose": ""
+        },
+        "dpv:CustomerSolvencyMonitoring": {
+            "dpv:Purpose": "dpv:CustomerSolvencyMonitoring",
+            "dpv:Superclass": "dpv:CustomerManagement",
+            "Translation_DE": "Überwachung der Kundenbonität",
+            "Translation_EN": "Customer Solvency Monitoring",
+            "Synonyms": "",
+            "Explanation_DE": "Überwachung der Zahlungsfähigkeit der Kunden im Rahmen der finanziellen Sorgfaltspflicht",
+            "Explanation_EN": "Monitor solvency of customers for financial diligence",
+            "Editorial_Purpose": ""
         }
     },
     "personal_data_categories": {
