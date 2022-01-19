@@ -7,35 +7,28 @@ import Infographic from "../../../components/infographic/infographic.jsx";
 const CompanyDataTypesInfo = () => {
     const companyDataTypesInfoContent = [
         <div className="base-info-padding">
-            <p>{i18n.t("lineChartInfoScreen:p1")}</p>
+            <p>{i18n.t("dataTypesInfoScreens:company.p1")}</p>
             <Infographic
-                type="lineChartInfo"
+                type="companyDataTypes"
                 texts={{
-                    textLegend1: i18n.t(
-                        "infographic:lineChartInfo.textLegend1"
+                    text: i18n.t("infographic:companyDataTypes.text"),
+                    boldLabel1: i18n.t(
+                        "infographic:companyDataTypes.boldLabel1"
                     ),
-                    textLegend2: i18n.t(
-                        "infographic:lineChartInfo.textLegend2"
+                    boldLabel2: i18n.t(
+                        "infographic:companyDataTypes.boldLabel2"
                     ),
-                    textLabel1: i18n.t("infographic:lineChartInfo.textLabel1"),
-                    textLabel2: i18n.t("infographic:lineChartInfo.textLabel2"),
-                    textXaxis: i18n.t("infographic:lineChartInfo.textXaxis"),
-                    boldYaxis: i18n.t("infographic:lineChartInfo.boldYaxis"),
                 }}
             />
             <p
                 dangerouslySetInnerHTML={{
-                    __html: i18n.t(`lineChartInfoScreen:p2`),
+                    __html: i18n.t(`dataTypesInfoScreens:p2`),
                 }}
             />
-            <p>{i18n.t("lineChartInfoScreen:p3")}</p>
         </div>,
-        <p
-            className="base-info-padding"
-            dangerouslySetInnerHTML={{
-                __html: i18n.t(`lineChartInfoScreen:p4`),
-            }}
-        />,
+        <p className="base-info-padding">
+            {i18n.t("dataTypesInfoScreens:p3")}
+        </p>,
     ];
     return (
         <StoriesInfoScreen

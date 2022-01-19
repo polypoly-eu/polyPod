@@ -29,5 +29,13 @@
     "lineChartInfo.textLabel1": "Each line shows the development of values over time",
     "lineChartInfo.textLabel2": "Nonlinear logarithmic scale displaying monthly active users",
     "lineChartInfo.textXaxis": "timescale",
-    "lineChartInfo.boldYaxis": "MAU"
+    "lineChartInfo.boldYaxis": "MAU",
+    "companyDataTypes.text": "one data type",
+    "companyDataTypes.boldLabel1": "8 data types",
+    "companyDataTypes.boldLabel2": "30 data types",
+    "sharesDataTypes.text": "one data type, shared 20 times",
+    "sharesDataTypes.boldLabel1": "8 data types shared 100 times",
+    "sharesDataTypes.boldLabel2": "30 data types shared 100 times",
+    "typesDataTypes.textLabel": "Data Type",
+    "typesDataTypes.boldLabel": "205 data types shared 1543 times"
 }

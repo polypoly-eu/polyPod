@@ -7,6 +7,9 @@ import featuredEntity from "./featuredEntity.svg";
 import jurisdiction from "./jurisdiction.svg";
 import jurisdiction2 from "./jurisdiction2.svg";
 import lineChartInfo from "./lineChartInfo.svg";
+import companyDataTypes from "./companyDataTypes.svg";
+import sharesDataTypes from "./sharesDataTypes.svg";
+import typesDataTypes from "./typesDataTypes.svg";
 
 export default {
     dataTypes: dataTypes,
@@ -18,4 +21,7 @@ export default {
     jurisdiction: jurisdiction,
     jurisdiction2: jurisdiction2,
     lineChartInfo: lineChartInfo,
+    companyDataTypes: companyDataTypes,
+    sharesDataTypes: sharesDataTypes,
+    typesDataTypes: typesDataTypes,
 };
