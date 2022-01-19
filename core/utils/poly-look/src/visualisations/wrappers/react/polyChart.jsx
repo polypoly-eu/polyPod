@@ -7,6 +7,7 @@ import {
   SankeyDiagram,
   HorizontalBarChart,
   TreeMap,
+  TimeLineChart,
 } from "../../charts";
 
 const charts = {
@@ -16,6 +17,7 @@ const charts = {
   "bubble-cluster": BubbleCluster,
   "sankey-diagram": SankeyDiagram,
   "tree-map": TreeMap,
+  "time-line-chart": TimeLineChart,
 };
 
 /**

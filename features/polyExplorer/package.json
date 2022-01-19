@@ -21,7 +21,7 @@
     "mocha": "^9.1.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "shelljs": "^0.8.4"
+    "shelljs": "^0.8.5"
   },
   "private": true,
   "dependencies": {

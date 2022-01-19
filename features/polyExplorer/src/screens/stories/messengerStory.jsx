@@ -15,6 +15,7 @@ import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 
 import MessengerTreeMap from "../../components/clusterStories/messengerTreeMap.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
+import MessengerMauChart from "../../components/clusterStories/messengerMauChart.jsx";
 
 const i18nHeader = "clusterMessengerStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -223,6 +224,10 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:details.p.1`)}
             </p>
+            <MessengerMauChart
+                messengers={messengers}
+                i18nHeader={i18nHeader}
+            />
             <MessengerTreeMap
                 messengers={Object.values(products)}
                 i18nHeader={i18nHeader}
