@@ -11,6 +11,7 @@ import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 import EntityList from "../../components/entityList/entityList.jsx";
+import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 
 const i18nHeader = "clusterDigitalGiantsStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -94,6 +95,7 @@ const DigitalGiantsStory = () => {
                     }),
                 };
             }),
+            route: "/company-data-types-info",
         },
         {
             id: "by-shares",
@@ -107,6 +109,7 @@ const DigitalGiantsStory = () => {
                     }),
                 };
             }),
+            route: "/shares-data-types-info",
         },
         {
             id: "by-types",
@@ -125,6 +128,7 @@ const DigitalGiantsStory = () => {
                     height: 400,
                 },
             ],
+            route: "/types-data-types-info",
         },
     ];
 
@@ -187,33 +191,51 @@ const DigitalGiantsStory = () => {
                                 </p>
                             </div>
                             {dataType.id !== "by-types" ? (
-                                <MatrixBubblesChart
-                                    data={dataType.data}
-                                    bubbleColor={bubbleColor}
-                                    textColor={bubbleColor}
-                                    strokeColor={bubbleStroke}
-                                />
-                            ) : (
-                                <div className="by-types-bubble-chart">
-                                    <PolyChart
-                                        type="bubble-cluster"
-                                        data={dataType.data[0].bubbles}
-                                        width={dataType.data[0].width}
-                                        height={dataType.data[0].height}
+                                <>
+                                    <MatrixBubblesChart
+                                        data={dataType.data}
                                         bubbleColor={bubbleColor}
-                                        textColor={dataType.data[0].bubbles.map(
-                                            (bubble) => {
-                                                selectedDataTypeBubble ===
-                                                bubble.value
-                                                    ? bubbleTextColor
-                                                    : bubbleColor;
-                                            }
-                                        )}
+                                        textColor={bubbleColor}
                                         strokeColor={bubbleStroke}
-                                        onBubbleClick={handleBubbleClick}
                                     />
-                                    <h4>{dataType.data[0].title}</h4>
-                                </div>
+                                    <InfoButton
+                                        light
+                                        route={dataType.route}
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                    ></InfoButton>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="by-types-bubble-chart">
+                                        <PolyChart
+                                            type="bubble-cluster"
+                                            data={dataType.data[0].bubbles}
+                                            width={dataType.data[0].width}
+                                            height={dataType.data[0].height}
+                                            bubbleColor={bubbleColor}
+                                            textColor={dataType.data[0].bubbles.map(
+                                                (bubble) => {
+                                                    selectedDataTypeBubble ===
+                                                    bubble.value
+                                                        ? bubbleTextColor
+                                                        : bubbleColor;
+                                                }
+                                            )}
+                                            strokeColor={bubbleStroke}
+                                            onBubbleClick={handleBubbleClick}
+                                        />
+                                        <h4>{dataType.data[0].title}</h4>
+                                    </div>
+                                    <InfoButton
+                                        light
+                                        route={dataType.route}
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                    ></InfoButton>
+                                </>
                             )}
                         </Tab>
                     );
