@@ -3,7 +3,7 @@ ipa_path = ./build/PolyPod.ipa
 project_path = PolyPodApp/PolyPod.xcodeproj
 scheme_name = PolyPod
 export_options_plist = exportOptions.plist
-destination = 14.4
+destination = 15.2
 
 # Github secrets
 DISTRIBUTION_CERTIFICATE = $POLYPOD_APPLE_IOS_DISTRIBUTION_CERTIFICATE
@@ -37,7 +37,6 @@ export_ipa:
 		-archivePath $(archive_path) \
 		-exportPath ./build \
 		-exportOptionsPlist exportOptions.plist \
-		-allowProvisioningUpdates
 
 upload_ipa:
 	# Validte the app before uploading, to catch any possible issues.
@@ -63,10 +62,10 @@ install_distribution_prerequisites:
 	security unlock-keychain -p "" ~/Library/Keychains/build.keychain
 	security set-key-partition-list -S apple-tool:,apple: -s -k "" ~/Library/Keychains/build.keychain
 
-	# 2. Install Distribution provisioning profile. xcodebuild will automatically extract the prfile from Provisioning Profiles directory
+	# 2. Install Distribution provisioning profile. xcodebuild will automatically extract the profile from the Provisioning Profiles directory
 	mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
 	@echo $(value DISTRIBUTION_PROVISIONING_PROFILE) | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/cooppolypolypolypod__iOS_App_Store_Distribution.mobileprovision
 
-	# 3. App Store Connect API Key. altool will automtically use the private key from private_keys folder. 
+	# 3. App Store Connect API Key. altool will automtically use the private key from the private_keys folder. 
 	mkdir -p ~/private_keys
 	@echo $(value APPSTORE_CONNECT_API_KEY) | base64 --decode > ~/private_keys/AuthKey_$(value APPSTORE_API_KEY_ID).p8

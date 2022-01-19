@@ -3,7 +3,7 @@ on: workflow_dispatch
 jobs:
   check_branch:
     name: "Check branch ('release*' or 'main')."
-    runs-on: macos-latest
+    runs-on: macos-11
     steps:
       - id: early_exit
         if: ${{ github.ref != 'refs/heads/main' && startsWith(github.ref, 'refs/heads/release') != true }}
@@ -12,7 +12,7 @@ jobs:
   build_test_upload:
     name: Build, test, and upload to App Store
     needs: check_branch
-    runs-on: macos-latest
+    runs-on: macos-11
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -26,12 +26,8 @@ jobs:
         env:
             POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
             POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
-      - name: Lint core and features
-        run: ./build.js lint
-      - name: Test core and features
-        run: xvfb-run --auto-servernum ./build.js test
       - name: Lock xcode version
-        run: sudo xcode-select -switch /Applications/Xcode_12.4.app
+        run: sudo xcode-select -s "/Applications/Xcode_13.2.1.app"
       - name: Run tests
         working-directory: ios
         run: |
