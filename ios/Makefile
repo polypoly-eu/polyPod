@@ -3,7 +3,7 @@ ipa_path = ./build/PolyPod.ipa
 project_path = PolyPodApp/PolyPod.xcodeproj
 scheme_name = PolyPod
 export_options_plist = exportOptions.plist
-destination = 15.2
+destination = 14.4
 
 # Github secrets
 DISTRIBUTION_CERTIFICATE = $POLYPOD_APPLE_IOS_DISTRIBUTION_CERTIFICATE
