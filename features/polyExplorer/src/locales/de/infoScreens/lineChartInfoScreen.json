@@ -1,0 +1,6 @@
+{
+    "p1": "This diagram shows how the number of monthly active users (MAU) developed over recent years.",
+    "p2": "This diagram is called <strong>logarithmic line chart</strong> and shows in lines how different values developed over time.",
+    "p3": "The chart uses a so-called logarithmic scale to display numerical data over a very wide range of values in a compact way. Such a scale is non-linear. instead, the steps from 1 to 10 to 100, and to 1000 are all the same distance. Through that, some changes in the dynamic of the development become more visible.",
+    "p4": "<strong>Monthly active users (MAU)</strong> are an indicator for the user base and level of activity, mainly used in the context of advertising. Each company might have a different way (and reason) to measure it. That difference and the fact that the messengers were launched at different times are the reason why the lines in this chart are not covering the same period. But they still give a sense of each service's role in the market."
+}
