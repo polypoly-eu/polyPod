@@ -227,7 +227,7 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
-            <Purposes />
+            <Purposes companies={bigSix} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />

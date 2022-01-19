@@ -23,8 +23,6 @@ export default function Purposes({ companies }) {
             translation: purpose.translation,
         }));
 
-    console.log(data);
-
     return (
         <div className="purposes">
             <PurposesBarChart data={data} animation={true} />
