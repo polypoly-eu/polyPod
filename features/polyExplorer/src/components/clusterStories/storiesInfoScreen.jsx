@@ -4,9 +4,9 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import Screen from "../screen/screen.jsx";
 
-import "./baseInfoScreen.css";
+import "./storiesInfoScreen.css";
 
-const BaseInfoScreen = ({ className, infoChildren }) => {
+const StoriesInfoScreen = ({ className, infoChildren }) => {
     const { handleBack } = useContext(ExplorerContext);
     return (
         <Screen className={className} light={true}>
@@ -31,4 +31,4 @@ const BaseInfoScreen = ({ className, infoChildren }) => {
     );
 };
 
-export default BaseInfoScreen;
+export default StoriesInfoScreen;
