@@ -151,7 +151,7 @@ const PurposesBarChart = ({ data, animation }) => {
             const labelTitleDiv = labelTitle.append("xhtml:div");
             const labelTitleP = labelTitleDiv
                 .append("p")
-                .text((d) => d.title)
+                .text((d) => d.translation || d.title)
                 .attr("height", labelTitleHeight.p)
                 .style("margin", legendMargin)
                 .style("display", "inline-block")
@@ -177,7 +177,7 @@ const PurposesBarChart = ({ data, animation }) => {
             const legendTitle = svgChart
                 .append("foreignObject")
                 .attr("x", 0)
-                .attr("y", 0)
+                .attr("y", legendHeight / 2)
                 .attr("width", legendWidth)
                 .attr("height", legendHeight);
             legendTitle
