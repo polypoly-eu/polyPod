@@ -29,5 +29,12 @@
     "lineChartInfo.textLabel1": "Each line shows the development of values over time",
     "lineChartInfo.textLabel2": "Nonlinear logarithmic scale displaying monthly active users",
     "lineChartInfo.textXaxis": "timescale",
-    "lineChartInfo.boldYaxis": "MAU"
+    "lineChartInfo.boldYaxis": "MAU",
+    "barChartInfo.textMaximum": "Maximum",
+    "barChartInfo.textAverage": "Average",
+    "barChartInfo.textAverageValue": "Average value from all messenger information currently available in this category",
+    "barChartInfo.textHighestValue": "Highest value for a single purpose, based on currently available messenger information",
+    "barChartInfo.textMaxValue": "Max value for this purpose",
+    "barChartInfo.textNameOfPurpose": "Name of the purpose",
+    "barChartInfo.boldNumber": "Number of mentions"
 }
