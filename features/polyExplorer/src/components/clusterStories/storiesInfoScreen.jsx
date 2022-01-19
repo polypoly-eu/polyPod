@@ -10,7 +10,7 @@ const StoriesInfoScreen = ({ className, infoChildren }) => {
     const { handleBack } = useContext(ExplorerContext);
     return (
         <Screen className={className} light={true}>
-            <div className="base-info">
+            <div className="stories-info">
                 {infoChildren.map((infoChild, i) => (
                     <div key={i}>
                         <div className="info-title">
@@ -21,7 +21,7 @@ const StoriesInfoScreen = ({ className, infoChildren }) => {
                         {infoChild}
                     </div>
                 ))}
-                <div className="base-info-padding">
+                <div className="stories-info-padding">
                     <button onClick={() => handleBack()}>
                         {i18n.t("common:button.ok")}
                     </button>
