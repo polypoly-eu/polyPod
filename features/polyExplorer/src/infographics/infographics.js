@@ -6,6 +6,7 @@ import purpose from "./purpose.svg";
 import featuredEntity from "./featuredEntity.svg";
 import jurisdiction from "./jurisdiction.svg";
 import jurisdiction2 from "./jurisdiction2.svg";
+import lineChartInfo from "./lineChartInfo.svg";
 
 export default {
     dataTypes: dataTypes,
@@ -16,4 +17,5 @@ export default {
     featuredEntity: featuredEntity,
     jurisdiction: jurisdiction,
     jurisdiction2: jurisdiction2,
+    lineChartInfo: lineChartInfo,
 };

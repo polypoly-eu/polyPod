@@ -23,5 +23,11 @@
     "companies.text5": "Industry 2",
     "companies.text6": "Industry 3",
     "companies.text7": "Industry 4",
-    "companies.text8": "Here you can see if data from interactions with this company will be shared with others in a particular industry, e.g. Advertising/Marketing."
+    "companies.text8": "Here you can see if data from interactions with this company will be shared with others in a particular industry, e.g. Advertising/Marketing.",
+    "lineChartInfo.textLegend1": "Messenger A",
+    "lineChartInfo.textLegend2": "Messenger B",
+    "lineChartInfo.textLabel1": "Each line shows the development of values over time",
+    "lineChartInfo.textLabel2": "Nonlinear logarithmic scale displaying monthly active users",
+    "lineChartInfo.textXaxis": "timescale",
+    "lineChartInfo.boldYaxis": "MAU"
 }

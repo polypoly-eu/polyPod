@@ -23,5 +23,11 @@
     "companies.text5": "Branche 2",
     "companies.text6": "Branche 3",
     "companies.text7": "Branche 4",
-    "companies.text8": "Hier sehen Sie, ob Daten aus der Interaktion mit dieser Firma bei anderen Firmen in einer bestimmten Branche, z. B. Werbung/Marketing, landen."
+    "companies.text8": "Hier sehen Sie, ob Daten aus der Interaktion mit dieser Firma bei anderen Firmen in einer bestimmten Branche, z. B. Werbung/Marketing, landen.",
+    "lineChartInfo.textLegend1": "Messenger A",
+    "lineChartInfo.textLegend2": "Messenger B",
+    "lineChartInfo.textLabel1": "Each line shows the development of values over time",
+    "lineChartInfo.textLabel2": "Nonlinear logarithmic scale displaying monthly active users",
+    "lineChartInfo.textXaxis": "timescale",
+    "lineChartInfo.boldYaxis": "MAU"
 }
