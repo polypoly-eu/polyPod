@@ -37,5 +37,7 @@
     "sharesDataTypes.boldLabel1": "8 data types shared 100 times",
     "sharesDataTypes.boldLabel2": "30 data types shared 100 times",
     "typesDataTypes.textLabel": "Data Type",
-    "typesDataTypes.boldLabel": "205 data types shared 1543 times"
+    "typesDataTypes.boldLabel": "205 data types shared 1543 times",
+    "industries.textLabel1": "Industry",
+    "industries.textLabel2": "Data receiving company"
 }

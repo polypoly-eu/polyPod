@@ -10,6 +10,7 @@ import lineChartInfo from "./lineChartInfo.svg";
 import companyDataTypes from "./companyDataTypes.svg";
 import sharesDataTypes from "./sharesDataTypes.svg";
 import typesDataTypes from "./typesDataTypes.svg";
+import industries from "./industries.svg";
 
 export default {
     dataTypes: dataTypes,
@@ -24,4 +25,5 @@ export default {
     companyDataTypes: companyDataTypes,
     sharesDataTypes: sharesDataTypes,
     typesDataTypes: typesDataTypes,
+    industries: industries,
 };
