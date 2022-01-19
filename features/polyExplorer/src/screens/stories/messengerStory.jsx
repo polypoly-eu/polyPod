@@ -177,7 +177,7 @@ const MessengerStory = () => {
     return (
         <ClusterStory
             progressBarColor="black"
-            className="messenger-story poly-theme.light"
+            className="messenger-story poly-theme light"
             primaryColor="#3ba6ff"
             fadingTopBackground={{
                 distance: "600px",
@@ -349,8 +349,8 @@ const MessengerStory = () => {
                 {i18n.t(`${i18nHeader}:explore.further.p.1`)}
             </p>
             <EntityList entities={Object.values(products)} expand={true} />
-            <LinkButton route={"back"} className="poly-button">
-                {i18n.t("clusterStoriesPreview:story.button.discover")}
+            <LinkButton route={"back"} className="poly-button margin-top">
+                {i18n.t(`${i18nHeaderCommon}:discover.other.topics`)}
             </LinkButton>
         </ClusterStory>
     );

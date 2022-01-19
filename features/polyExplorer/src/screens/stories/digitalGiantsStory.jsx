@@ -136,7 +136,7 @@ const DigitalGiantsStory = () => {
     return (
         <ClusterStory
             progressBarColor="black"
-            className="digital-giants-story poly-theme.light"
+            className="digital-giants-story poly-theme light"
             primaryColor={primaryColor}
             fadingTopBackground={{
                 distance: "600px",
@@ -262,8 +262,8 @@ const DigitalGiantsStory = () => {
                 {i18n.t(`${i18nHeader}:explore.further.p.1`)}
             </p>
             <EntityList entities={bigSix} expand={true} />
-            <LinkButton route={"back"} className="poly-button">
-                {i18n.t("clusterStoriesPreview:story.button.discover")}
+            <LinkButton route={"back"} className="poly-button margin-top">
+                {i18n.t(`${i18nHeaderCommon}:discover.other.topics`)}
             </LinkButton>
         </ClusterStory>
     );
