@@ -228,6 +228,11 @@ const MessengerStory = () => {
                 messengers={messengers}
                 i18nHeader={i18nHeader}
             />
+            <InfoButton
+                light
+                route="/line-chart-info"
+                source={i18n.t("common:source.polyPedia")}
+            ></InfoButton>
             <MessengerTreeMap
                 messengers={Object.values(products)}
                 i18nHeader={i18nHeader}
