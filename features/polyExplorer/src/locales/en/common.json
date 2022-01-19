@@ -23,6 +23,10 @@
         "How to read this?",
     "screenTitle.line-chart-info":
         "Background Information",
+    "screenTitle.bar-chart-info":
+        "Background Information",
+    "screenTitle.flow-diagram-info":
+        "Background Information",
     "screenTitle.search":
         "Search",
     "screenTitle.info":

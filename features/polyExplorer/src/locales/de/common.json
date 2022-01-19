@@ -23,6 +23,10 @@
         "Wie ist das zu verstehen?",
     "screenTitle.line-chart-info":
         "Hintergrundinformation",
+    "screenTitle.bar-chart-info":
+        "Hintergrundinformation",
+    "screenTitle.flow-diagram-info":
+        "Hintergrundinformation",
     "screenTitle.search":
         "Suche",
     "screenTitle.info":
