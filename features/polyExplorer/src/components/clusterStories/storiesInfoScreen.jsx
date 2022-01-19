@@ -15,7 +15,11 @@ const StoriesInfoScreen = ({ className, infoChildren }) => {
                     <div key={i}>
                         <div className="info-title">
                             <div className="line"></div>
-                            <h1>{i18n.t(`baseInfoScreen:title${i + 1}`)}</h1>
+                            <h1>
+                                {i18n.t(
+                                    `commonInfoScreen:baseInfo.title${i + 1}`
+                                )}
+                            </h1>
                             <div className="line"></div>
                         </div>
                         {infoChild}

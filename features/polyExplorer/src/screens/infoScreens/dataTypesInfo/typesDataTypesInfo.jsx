@@ -17,12 +17,12 @@ const TypesDataTypesInfo = () => {
             />
             <p
                 dangerouslySetInnerHTML={{
-                    __html: i18n.t(`dataTypesInfoScreens:p2`),
+                    __html: i18n.t(`commonInfoScreen:circle.packing`),
                 }}
             />
         </div>,
         <p className="base-info-padding">
-            {i18n.t("dataTypesInfoScreens:p3")}
+            {i18n.t("dataTypesInfoScreens:p2")}
         </p>,
     ];
     return (

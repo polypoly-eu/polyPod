@@ -24,7 +24,7 @@ import clusterMessengerStoryEn from "./locales/en/stories/clusterMessengerStory.
 import clusterDigitalGiantsStoryEn from "./locales/en/stories/clusterDigitalGiants.json";
 import clusterStoryCommonEn from "./locales/en/stories/common.json";
 import barChartEn from "./locales/en/barChart.json";
-import baseInfoScreenEn from "./locales/en/infoScreens/baseInfoScreen.json";
+import commonInfoScreenEn from "./locales/en/infoScreens/commonInfoScreen.json";
 import lineChartInfoScreenEn from "./locales/en/infoScreens/lineChartInfoScreen.json";
 import dataTypesInfoScreensEn from "./locales/en/infoScreens/dataTypesInfoScreens.json";
 
@@ -52,7 +52,7 @@ import clusterMessengerStoryDe from "./locales/de/stories/clusterMessengerStory.
 import clusterDigitalGiantsStoryDe from "./locales/de/stories/clusterDigitalGiants.json";
 import clusterStoryCommonDe from "./locales/de/stories/common.json";
 import barChartDe from "./locales/de/barChart.json";
-import baseInfoScreenDe from "./locales/de/infoScreens/baseInfoScreen.json";
+import commonInfoScreenDe from "./locales/de/infoScreens/commonInfoScreen.json";
 import lineChartInfoScreenDe from "./locales/de/infoScreens/lineChartInfoScreen.json";
 import dataTypesInfoScreensDe from "./locales/de/infoScreens/dataTypesInfoScreens.json";
 
@@ -82,7 +82,7 @@ export default new I18n(determineLanguage(), {
         clusterDigitalGiantsStory: clusterDigitalGiantsStoryEn,
         clusterStoryCommon: clusterStoryCommonEn,
         barChart: barChartEn,
-        baseInfoScreen: baseInfoScreenEn,
+        commonInfoScreen: commonInfoScreenEn,
         lineChartInfoScreen: lineChartInfoScreenEn,
         dataTypesInfoScreens: dataTypesInfoScreensEn,
     },
@@ -111,7 +111,7 @@ export default new I18n(determineLanguage(), {
         clusterDigitalGiantsStory: clusterDigitalGiantsStoryDe,
         clusterStoryCommon: clusterStoryCommonDe,
         barChart: barChartDe,
-        baseInfoScreen: baseInfoScreenDe,
+        commonInfoScreen: commonInfoScreenDe,
         lineChartInfoScreen: lineChartInfoScreenDe,
         dataTypesInfoScreens: dataTypesInfoScreensDe,
     },
