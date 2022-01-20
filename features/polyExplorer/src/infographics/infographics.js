@@ -8,6 +8,7 @@ import jurisdiction from "./jurisdiction.svg";
 import jurisdiction2 from "./jurisdiction2.svg";
 import lineChartInfo from "./lineChartInfo.svg";
 import barChartInfo from "./barChartInfo.svg";
+import flowDiagramInfo from "./flowDiagramInfo.svg";
 
 export default {
     dataTypes: dataTypes,
@@ -20,4 +21,5 @@ export default {
     jurisdiction2: jurisdiction2,
     lineChartInfo: lineChartInfo,
     barChartInfo: barChartInfo,
+    flowDiagramInfo: flowDiagramInfo,
 };

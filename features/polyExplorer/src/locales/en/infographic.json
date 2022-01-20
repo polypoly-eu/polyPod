@@ -36,5 +36,7 @@
     "barChartInfo.textHighestValue": "Highest value for a single purpose, based on currently available messenger information",
     "barChartInfo.textMaxValue": "Max value for this purpose",
     "barChartInfo.textNameOfPurpose": "Name of the purpose",
-    "barChartInfo.boldNumber": "Number of mentions"
+    "barChartInfo.boldNumber": "Number of mentions",
+    "flowDiagramInfo.textYear1": "Year 1",
+    "flowDiagramInfo.textYear2": "Year 2"
 }
