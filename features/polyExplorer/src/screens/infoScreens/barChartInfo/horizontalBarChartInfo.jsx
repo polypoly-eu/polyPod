@@ -23,10 +23,10 @@ const HorizontalBarChartInfo = () => {
                     textVariableB: i18n.t(
                         "infographic:horizontalBarChartInfo.textVariableB"
                     ),
-                    textVariableA: i18n.t(
+                    textVariableC: i18n.t(
                         "infographic:horizontalBarChartInfo.textVariableC"
                     ),
-                    textVariableA: i18n.t(
+                    textVariableD: i18n.t(
                         "infographic:horizontalBarChartInfo.textVariableD"
                     ),
                     textVariableE: i18n.t(
