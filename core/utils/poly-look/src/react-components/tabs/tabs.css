@@ -2,7 +2,7 @@
   margin: 0 auto;
   display: flex;
   width: 100%;
-  height: 40px;
+  height: 100%;
 }
 
 .tabs .tab-buttons .tab-button {
@@ -14,6 +14,7 @@
   color: #757575;
   font-size: 14px;
   font-family: "Jost Medium";
+  line-height: 120%;
 }
 
 .tabs .tab-button.active {

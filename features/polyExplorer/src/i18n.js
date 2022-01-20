@@ -28,6 +28,8 @@ import commonInfoScreenEn from "./locales/en/infoScreens/commonInfoScreen.json";
 import lineChartInfoScreenEn from "./locales/en/infoScreens/lineChartInfoScreen.json";
 import dataTypesInfoScreensEn from "./locales/en/infoScreens/dataTypesInfoScreens.json";
 import industriesInfoScreenEn from "./locales/en/infoScreens/industriesInfoScreen.json";
+import barChartInfoScreenEn from "./locales/en/infoScreens/barChartInfoScreen.json";
+import flowDiagramInfoScreenEn from "./locales/en/infoScreens/flowDiagramInfoScreen.json";
 
 import commonDe from "./locales/de/common.json";
 import entityFilterScreenDe from "./locales/de/entityFilterScreen.json";
@@ -57,6 +59,8 @@ import commonInfoScreenDe from "./locales/de/infoScreens/commonInfoScreen.json";
 import lineChartInfoScreenDe from "./locales/de/infoScreens/lineChartInfoScreen.json";
 import industriesInfoScreenDe from "./locales/de/infoScreens/industriesInfoScreen.json";
 import dataTypesInfoScreensDe from "./locales/de/infoScreens/dataTypesInfoScreens.json";
+import barChartInfoScreenDe from "./locales/de/infoScreens/barChartInfoScreen.json";
+import flowDiagramInfoScreenDe from "./locales/de/infoScreens/flowDiagramInfoScreen.json";
 
 export default new I18n(determineLanguage(), {
     en: {
@@ -88,6 +92,8 @@ export default new I18n(determineLanguage(), {
         lineChartInfoScreen: lineChartInfoScreenEn,
         dataTypesInfoScreens: dataTypesInfoScreensEn,
         industriesInfoScreen: industriesInfoScreenEn,
+        barChartInfoScreen: barChartInfoScreenEn,
+        flowDiagramInfoScreen: flowDiagramInfoScreenEn,
     },
     de: {
         common: commonDe,
@@ -118,5 +124,7 @@ export default new I18n(determineLanguage(), {
         lineChartInfoScreen: lineChartInfoScreenDe,
         industriesInfoScreen: industriesInfoScreenDe,
         dataTypesInfoScreens: dataTypesInfoScreensDe,
+        barChartInfoScreen: barChartInfoScreenDe,
+        flowDiagramInfoScreen: flowDiagramInfoScreenDe,
     },
 });

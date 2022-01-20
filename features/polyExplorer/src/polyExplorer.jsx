@@ -31,6 +31,8 @@ import CompanyDataTypesInfo from "./screens/infoScreens/dataTypesInfo/companyDat
 import SharesDataTypesInfo from "./screens/infoScreens/dataTypesInfo/sharesDataTypesInfo.jsx";
 import TypesDataTypesInfo from "./screens/infoScreens/dataTypesInfo/typesDataTypesInfo.jsx";
 import IndustriesInfo from "./screens/infoScreens/industriesInfo/industriesInfo.jsx";
+import BarChartInfo from "./screens/infoScreens/barChartInfo/barChartInfo.jsx";
+import FlowDiagramInfo from "./screens/infoScreens/flowDiagramInfo/flowDiagramInfo.jsx";
 
 //stories
 import MessengerStory from "./screens/stories/messengerStory.jsx";
@@ -88,6 +90,12 @@ const PolyExplorerApp = () => {
                 </Route>
                 <Route exact path="/industries-info">
                     <IndustriesInfo />
+                </Route>
+                <Route exact path="/bar-chart-info">
+                    <BarChartInfo />
+                </Route>
+                <Route exact path="/flow-diagram-info">
+                    <FlowDiagramInfo />
                 </Route>
                 <Route exact path="/data-region-info">
                     <DataRegionInfoScreen />
