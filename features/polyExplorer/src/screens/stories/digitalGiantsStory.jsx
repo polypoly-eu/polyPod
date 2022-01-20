@@ -250,7 +250,7 @@ const DigitalGiantsStory = () => {
             </p>
             <InfoButton
                 light
-                route="/bar-chart-info"
+                route="/horizontal-bar-chart-info"
                 source={i18n.t("common:source.polyPedia")}
             ></InfoButton>
             <SectionTitle
