@@ -12,6 +12,7 @@ import sharesDataTypes from "./sharesDataTypes.svg";
 import typesDataTypes from "./typesDataTypes.svg";
 import industries from "./industries.svg";
 import barChartInfo from "./barChartInfo.svg";
+import horizontalBarChartInfo from "./horizontalBarChartInfo.svg";
 import flowDiagramInfo from "./flowDiagramInfo.svg";
 
 export default {
@@ -29,5 +30,6 @@ export default {
     typesDataTypes: typesDataTypes,
     industries: industries,
     barChartInfo: barChartInfo,
+    horizontalBarChartInfo: horizontalBarChartInfo,
     flowDiagramInfo: flowDiagramInfo,
 };
