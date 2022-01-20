@@ -13,6 +13,7 @@ import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
+import GradientCircleList from "../../components/gradientCircleList/gradientCircleList.jsx";
 
 import MessengerTreeMap from "../../components/clusterStories/messengerTreeMap.jsx";
 import MessengerMauChart from "../../components/clusterStories/messengerMauChart.jsx";
@@ -22,6 +23,8 @@ const i18nHeaderCommon = "clusterStoryCommon";
 const bubbleColor = "#FB8A89";
 const bubbleStroke = "none";
 const bubbleTextColor = "#0f1938";
+
+const primaryColor = "#3ba6ff";
 
 const MessengerStory = () => {
     const { products, globalData, entityJurisdictionByPpid } =
@@ -177,8 +180,8 @@ const MessengerStory = () => {
     return (
         <ClusterStory
             progressBarColor="black"
-            className="messenger-story"
-            primaryColor="#3ba6ff"
+            className="messenger-story poly-theme light"
+            primaryColor={primaryColor}
             fadingTopBackground={{
                 distance: "600px",
             }}
@@ -196,11 +199,12 @@ const MessengerStory = () => {
                 alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
             />
             <p>{i18n.t(`${i18nHeader}:intro.paragraph.two`)}</p>
-            <ul>
-                {Object.keys(products).map((messenger, index) => (
-                    <li key={index}>{messenger}</li>
-                ))}
-            </ul>
+            <GradientCircleList
+                introText={i18n.t(`${i18nHeader}:intro.paragraph.two`)}
+                list={Object.keys(products)}
+                color={primaryColor}
+                rotation="90deg"
+            />
             <h2 className="cluster-story-title">
                 {i18n.t(`${i18nHeader}:summary.title`)}
             </h2>
