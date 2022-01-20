@@ -12,8 +12,14 @@ const DataRegionInfo = ({ onClose }) => {
             className="data-region-info-screen"
             light={true}
             onClose={onClose}
-            headline={i18n.t("dataRegionInfoScreen:heading")}
         >
+            {" "}
+            <div className="base-info-padding">
+                <SectionTitle
+                    title={i18n.t("dataRegionInfoScreen:heading")}
+                    infoScreenSize={true}
+                />
+            </div>
             <img src="./images/maps/jurisdictions/world.svg" className="map" />
             <div className="base-info-padding">
                 <div className="legend-container">
