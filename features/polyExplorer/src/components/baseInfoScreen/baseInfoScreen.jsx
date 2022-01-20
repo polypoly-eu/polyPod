@@ -12,7 +12,7 @@ const BaseInfoScreen = ({ className, headline, children }) => {
         <Screen className={className} light={true}>
             <div className="base-info">
                 <div className="base-info-padding">
-                    <h1>{headline}</h1>
+                    {headline && <h1>{headline}</h1>}
                 </div>
                 {children}
                 <div className="base-info-padding">

@@ -248,6 +248,11 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
+            <InfoButton
+                light
+                route="/bar-chart-info"
+                source={i18n.t("common:source.polyPedia")}
+            ></InfoButton>
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />
@@ -276,6 +281,11 @@ const DigitalGiantsStory = () => {
                     },
                 }}
             />
+            <InfoButton
+                light
+                route="/flow-diagram-info"
+                source={i18n.t("common:source.polyPedia")}
+            ></InfoButton>
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
             />

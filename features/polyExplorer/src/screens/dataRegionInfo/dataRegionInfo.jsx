@@ -2,6 +2,7 @@ import React from "react";
 
 import i18n from "../../i18n.js";
 import BaseInfoScreen from "../../components/baseInfoScreen/baseInfoScreen.jsx";
+import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 
 import "./dataRegionInfo.css";
 
@@ -12,9 +13,13 @@ const DataRegionInfo = ({ onClose }) => {
             light={true}
             onClose={onClose}
         >
-            <h1 className="heading">
-                {i18n.t("dataRegionInfoScreen:heading")}
-            </h1>
+            {" "}
+            <div className="base-info-padding">
+                <SectionTitle
+                    title={i18n.t("dataRegionInfoScreen:heading")}
+                    infoScreenSize={true}
+                />
+            </div>
             <img src="./images/maps/jurisdictions/world.svg" className="map" />
             <div className="base-info-padding">
                 <div className="legend-container">
@@ -45,9 +50,10 @@ const DataRegionInfo = ({ onClose }) => {
                     </div>
                 </div>
                 <p>{i18n.t("dataRegionInfoScreen:world")}</p>
-                <h2 className="sub-heading">
-                    {i18n.t("common:jurisdiction.euGdpr")}
-                </h2>
+                <SectionTitle
+                    title={i18n.t("common:jurisdiction.euGdpr")}
+                    infoScreenSize={true}
+                />
             </div>
             <img
                 src="./images/maps/jurisdictions/eu-gdpr.svg"
@@ -70,9 +76,10 @@ const DataRegionInfo = ({ onClose }) => {
                         __html: i18n.t("dataRegionInfoScreen:euGdpr.text"),
                     }}
                 ></div>
-                <h2 className="sub-heading">
-                    {i18n.t("dataRegionInfoScreen:subHeading.fiveEyes")}
-                </h2>
+                <SectionTitle
+                    title={i18n.t("dataRegionInfoScreen:subHeading.fiveEyes")}
+                    infoScreenSize={true}
+                />
             </div>
             <img
                 src="./images/maps/jurisdictions/five-eyes.svg"
@@ -90,23 +97,27 @@ const DataRegionInfo = ({ onClose }) => {
                         </div>
                     </div>
                 </div>
-                <h2 className="sub-sub-heading">USA</h2>
+                <SectionTitle title="USA" infoScreenSize={true} />
+
                 <div
                     dangerouslySetInnerHTML={{
                         __html: i18n.t("dataRegionInfoScreen:USA.text"),
                     }}
                 ></div>
-                <h2 className="sub-sub-heading">
-                    {i18n.t("common:jurisdiction.fiveEyes")}
-                </h2>
+                <SectionTitle
+                    title={i18n.t("common:jurisdiction.fiveEyes")}
+                    infoScreenSize={true}
+                />
+
                 <div
                     dangerouslySetInnerHTML={{
                         __html: i18n.t("dataRegionInfoScreen:fiveEyes.text"),
                     }}
                 ></div>
-                <h2 className="sub-heading">
-                    {i18n.t("common:jurisdiction.russia")}
-                </h2>
+                <SectionTitle
+                    title={i18n.t("common:jurisdiction.russia")}
+                    infoScreenSize={true}
+                />
             </div>
             <img src="./images/maps/jurisdictions/russia.svg" className="map" />
             <div className="base-info-padding">
@@ -126,9 +137,10 @@ const DataRegionInfo = ({ onClose }) => {
                         __html: i18n.t("dataRegionInfoScreen:russia.text"),
                     }}
                 ></div>
-                <h2 className="sub-heading">
-                    {i18n.t("common:jurisdiction.china")}
-                </h2>
+                <SectionTitle
+                    title={i18n.t("common:jurisdiction.china")}
+                    infoScreenSize={true}
+                />
             </div>
             <img src="./images/maps/jurisdictions/china.svg" className="map" />
             <div className="base-info-padding">
@@ -148,9 +160,10 @@ const DataRegionInfo = ({ onClose }) => {
                         __html: i18n.t("dataRegionInfoScreen:china.text"),
                     }}
                 ></div>
-                <h2 className="sub-heading">
-                    {i18n.t("common:jurisdiction.undisclosed")}
-                </h2>
+                <SectionTitle
+                    title={i18n.t("common:jurisdiction.undisclosed")}
+                    infoScreenSize={true}
+                />
             </div>
             <img src="./images/maps/jurisdictions/others.svg" className="map" />
             <div className="base-info-padding">
