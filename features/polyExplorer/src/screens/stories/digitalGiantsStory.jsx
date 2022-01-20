@@ -11,6 +11,7 @@ import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 import EntityList from "../../components/entityList/entityList.jsx";
+import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 
 const i18nHeader = "clusterDigitalGiantsStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -226,6 +227,11 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
+            <InfoButton
+                light
+                route="/bar-chart-info"
+                source={i18n.t("common:source.polyPedia")}
+            ></InfoButton>
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />
@@ -254,6 +260,11 @@ const DigitalGiantsStory = () => {
                     },
                 }}
             />
+            <InfoButton
+                light
+                route="/flow-diagram-info"
+                source={i18n.t("common:source.polyPedia")}
+            ></InfoButton>
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
             />
