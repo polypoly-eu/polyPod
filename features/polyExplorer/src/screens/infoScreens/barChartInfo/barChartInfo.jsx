@@ -7,7 +7,7 @@ import Infographic from "../../../components/infographic/infographic.jsx";
 const BarChartInfo = () => {
     const barChartInfoContent = [
         <div className="base-info-padding">
-            <p>{i18n.t("barChartInfoScreen:p1")}</p>
+            <p>{i18n.t("commonInfoScreen:bar.chart.p1")}</p>
             <Infographic
                 type="barChartInfo"
                 texts={{
@@ -30,13 +30,13 @@ const BarChartInfo = () => {
             />
             <p
                 dangerouslySetInnerHTML={{
-                    __html: i18n.t(`barChartInfoScreen:p2`),
+                    __html: i18n.t(`commonInfoScreen:bar.chart.p2`),
                 }}
             />
         </div>,
         <div className="base-info-padding">
-            <p>{i18n.t("barChartInfoScreen:p3")}</p>
-            <p>{i18n.t("barChartInfoScreen:p4")}</p>
+            <p>{i18n.t("commonInfoScreen:bar.chart.p3")}</p>
+            <p>{i18n.t("commonInfoScreen:bar.chart.p4")}</p>
         </div>,
     ];
     return (
