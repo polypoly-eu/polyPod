@@ -2,5 +2,8 @@
     "baseInfo.title1": "How to read this?",
     "baseInfo.title2": "About the data",
     "circle.packing": "<strong>Circle Packing</strong> is a method to visualize large amounts of hierarchically structured data. It provides a good overview of large data sets and the clear representation of groupings and structural relationships.",
-    "bar.chart": "This diagram is called a <strong>bar chart</strong>. The length of each bar is proportional to the values that it represents. One axis of the chart shows the specific categories being compared, and the other axis represents a measured value."
+    "bar.chart.p1": "Companies must list purposes for the data they are sharing.",
+    "bar.chart.p2": "This diagram is called a <strong>bar chart</strong>. The length of each bar is proportional to the values that it represents. One axis of the chart shows the specific categories being compared, and the other axis represents a measured value.",
+    "bar.chart.p3": "To get to this number we research how often this purpose is mentioned as a reason for sharing across all data types a company shares. We multiply this by the number of companies each data type is shared with.",
+    "bar.chart.p4": "For structure and terminology in ordering the purposes, we refer to the Data Protection Vocabulary standard by the W3C - as we also do for the data types."
 }
