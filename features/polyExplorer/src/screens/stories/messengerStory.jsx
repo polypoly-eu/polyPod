@@ -248,7 +248,7 @@ const MessengerStory = () => {
             />
             <InfoButton
                 light
-                route="/line-chart-info"
+                route="/messenger-treemap-info"
                 source={i18n.t("common:source.polyPedia")}
             ></InfoButton>
             <SectionTitle

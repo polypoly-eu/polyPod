@@ -1,5 +1,6 @@
 {
     "baseInfo.title1": "How to read this?",
     "baseInfo.title2": "About the data",
-    "circle.packing": "<strong>Circle Packing</strong> is a method to visualize large amounts of hierarchically structured data. It provides a good overview of large data sets and the clear representation of groupings and structural relationships."
+    "circle.packing": "<strong>Circle Packing</strong> is a method to visualize large amounts of hierarchically structured data. It provides a good overview of large data sets and the clear representation of groupings and structural relationships.",
+    "treemap": "This diagram is called a <strong>treemap</strong> and displays hierarchical data as a set of nested rectangles. Each branch of the structure is represented by a rectangle, which is then broken down into smaller rectangles representing sub-branches. Areas of rectangles are proportional to the value they represent. Colors separate rectangles or branches from one another."
 }

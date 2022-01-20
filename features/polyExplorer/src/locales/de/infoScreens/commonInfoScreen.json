@@ -1,5 +1,6 @@
 {
     "baseInfo.title1": "Wie ist das zu verstehen?",
     "baseInfo.title2": "Über diese Daten",
-    "circle.packing": "<strong>Circle Packing</strong> is a method to visualize large amounts of hierarchically structured data. It provides a good overview of large data sets and the clear representation of groupings and structural relationships."
+    "circle.packing": "<strong>Circle Packing</strong> is a method to visualize large amounts of hierarchically structured data. It provides a good overview of large data sets and the clear representation of groupings and structural relationships.",
+    "treemap": "Dieses Diagramm heisst <strong>Treemap</strong> oder Kacheldiagramm. Es zeigt hierarchische Datenstrukturen in Form von ineinander verschachtelten Rechtecken. Jeder Strang einer Struktur wird von einem Rechteck repräsentiert. Unterstränge werden innerhalb durch kleinere Rechtecke dargestellt. Die Flächen der Rechtecke sind proportional zu den Werten, die sie darstellen. Farben unterscheiden verschiedene Stränge und Rechtecke voneinander."
 }

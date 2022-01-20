@@ -33,6 +33,7 @@ import TypesDataTypesInfo from "./screens/infoScreens/dataTypesInfo/typesDataTyp
 import IndustriesInfo from "./screens/infoScreens/industriesInfo/industriesInfo.jsx";
 import BarChartInfo from "./screens/infoScreens/barChartInfo/barChartInfo.jsx";
 import FlowDiagramInfo from "./screens/infoScreens/flowDiagramInfo/flowDiagramInfo.jsx";
+import MessengerTreemapInfo from "./screens/infoScreens/messengerTreemapInfo/messengerTreemapInfo.jsx";
 
 //stories
 import MessengerStory from "./screens/stories/messengerStory.jsx";
@@ -96,6 +97,9 @@ const PolyExplorerApp = () => {
                 </Route>
                 <Route exact path="/flow-diagram-info">
                     <FlowDiagramInfo />
+                </Route>
+                <Route exact path="/messenger-treemap-info">
+                    <MessengerTreemapInfo />
                 </Route>
                 <Route exact path="/data-region-info">
                     <DataRegionInfoScreen />
