@@ -1,5 +1,6 @@
 {
     "baseInfo.title1": "Wie ist das zu verstehen?",
     "baseInfo.title2": "Über diese Daten",
-    "circle.packing": "<strong>Circle Packing</strong> is a method to visualize large amounts of hierarchically structured data. It provides a good overview of large data sets and the clear representation of groupings and structural relationships."
+    "circle.packing": "<strong>Circle Packing</strong> is a method to visualize large amounts of hierarchically structured data. It provides a good overview of large data sets and the clear representation of groupings and structural relationships.",
+    "bar.chart": "Dieses Diagramm heisst <strong>Balkendiagramm</strong>. Die Länge jedes Balkens ist proportional zum dem Wert, den er darstellt. One axis of the chart shows the specific categories being compared, and the other axis represents a measured value."
 }
