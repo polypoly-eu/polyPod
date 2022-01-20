@@ -356,6 +356,11 @@ const MessengerStory = () => {
                     },
                 }}
             />
+            <InfoButton
+                light
+                route="/flow-diagram-info"
+                source={i18n.t("common:source.polyPedia")}
+            ></InfoButton>
             <SectionTitle title={i18n.t(`${i18nHeader}:tips.section`)} />
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:tips.p.1`)}
