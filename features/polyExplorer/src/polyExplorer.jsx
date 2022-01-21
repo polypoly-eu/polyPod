@@ -26,16 +26,16 @@ import CompaniesInfoScreen from "./screens/explorationInfo/companiesInfo/compani
 import JurisdictionInfoScreen from "./screens/explorationInfo/jurisdictionInfo/jurisdictionInfo.jsx";
 import FeaturedEntityInfoScreen from "./screens/featuredEntityInfo/featuredEntityInfo.jsx";
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
-import LineChartInfo from "./screens/infoScreens/lineChartInfo/lineChartInfo.jsx";
-import CompanyDataTypesInfo from "./screens/infoScreens/dataTypesInfo/companyDataTypesInfo.jsx";
-import SharesDataTypesInfo from "./screens/infoScreens/dataTypesInfo/sharesDataTypesInfo.jsx";
-import TypesDataTypesInfo from "./screens/infoScreens/dataTypesInfo/typesDataTypesInfo.jsx";
-import IndustriesInfo from "./screens/infoScreens/industriesInfo/industriesInfo.jsx";
-import BarChartInfo from "./screens/infoScreens/barChartInfo/barChartInfo.jsx";
-import HorizontalBarChartInfo from "./screens/infoScreens/barChartInfo/horizontalBarChartInfo.jsx";
-import FlowDiagramInfo from "./screens/infoScreens/flowDiagramInfo/flowDiagramInfo.jsx";
-import MessengerTreemapInfo from "./screens/infoScreens/messengerTreemapInfo/messengerTreemapInfo.jsx";
-import CompaniesBarChartInfo from "./screens/infoScreens/companiesBarChartInfo/companiesBarChartInfo.jsx";
+import LineChartInfo from "./screens/storiesInfoScreens/lineChartInfo/lineChartInfo.jsx";
+import CompanyDataTypesInfo from "./screens/storiesInfoScreens/dataTypesInfo/companyDataTypesInfo.jsx";
+import SharesDataTypesInfo from "./screens/storiesInfoScreens/dataTypesInfo/sharesDataTypesInfo.jsx";
+import TypesDataTypesInfo from "./screens/storiesInfoScreens/dataTypesInfo/typesDataTypesInfo.jsx";
+import IndustriesInfo from "./screens/storiesInfoScreens/industriesInfo/industriesInfo.jsx";
+import BarChartInfo from "./screens/storiesInfoScreens/barChartInfo/barChartInfo.jsx";
+import HorizontalBarChartInfo from "./screens/storiesInfoScreens/barChartInfo/horizontalBarChartInfo.jsx";
+import FlowDiagramInfo from "./screens/storiesInfoScreens/flowDiagramInfo/flowDiagramInfo.jsx";
+import MessengerTreemapInfo from "./screens/storiesInfoScreens/messengerTreemapInfo/messengerTreemapInfo.jsx";
+import CompaniesBarChartInfo from "./screens/storiesInfoScreens/companiesBarChartInfo/companiesBarChartInfo.jsx";
 
 //stories
 import MessengerStory from "./screens/stories/messengerStory.jsx";
