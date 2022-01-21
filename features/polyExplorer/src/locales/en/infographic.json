@@ -57,5 +57,9 @@
     "flowDiagramInfo.textYear1": "Year 1",
     "flowDiagramInfo.textYear2": "Year 2",
     "treemapInfo.textLabel1": "Category 1",
-    "treemapInfo.textLabel2": "Category 2"
+    "treemapInfo.textLabel2": "Category 2",
+    "verticalBarChartInfo.text1": "Value",
+    "verticalBarChartInfo.boldLegend": "Legend",
+    "verticalBarChartInfo.textYaxis": "Y-Axis Title (units)",
+    "verticalBarChartInfo.textXaxis": "X-Axis Title (units)"
 }
