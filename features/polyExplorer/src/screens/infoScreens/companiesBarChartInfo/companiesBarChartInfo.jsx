@@ -8,7 +8,7 @@ const CompaniesBarChartInfo = () => {
     const CompaniesBarChartInfoContent = [
         <div className="base-info-padding">
             <p>{i18n.t("companiesBarChartInfoScreen:p1")}</p>
-            <Infographic
+            {/* <Infographic
                 type="verticalBarChartInfo"
                 texts={{
                     text1: i18n.t("infographic:verticalBarChartInfo.text1"),
@@ -22,7 +22,7 @@ const CompaniesBarChartInfo = () => {
                         "infographic:verticalBarChartInfo.textXaxis"
                     ),
                 }}
-            />
+            /> */}
             <p
                 dangerouslySetInnerHTML={{
                     __html: i18n.t(`commonInfoScreen:bar.chart.p2`),
