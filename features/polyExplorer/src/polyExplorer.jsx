@@ -41,7 +41,7 @@ const PolyExplorerApp = () => {
     const { firstRun } = navigationState;
 
     return (
-        <div className="poly-explorer">
+        <div className="poly-explorer poly-theme poly-theme-dark">
             <Switch>
                 <Route exact path="/">
                     <Redirect

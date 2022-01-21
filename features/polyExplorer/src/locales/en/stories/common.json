@@ -10,5 +10,6 @@
     "label.receivingIndustries": "Receiving industries",
     "label.installs": "Installs",
     "label.users": "Users",
-    "label.partOf": "Part of"
+    "label.partOf": "Part of",
+    "discover.other.topics": "Discover other topics"
 }

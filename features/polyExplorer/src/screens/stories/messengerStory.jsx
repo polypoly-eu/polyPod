@@ -15,6 +15,7 @@ import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 import GradientCircleList from "../../components/gradientCircleList/gradientCircleList.jsx";
 
 import MessengerTreeMap from "../../components/clusterStories/messengerTreeMap.jsx";
+import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 import MessengerMauChart from "../../components/clusterStories/messengerMauChart.jsx";
 
 const i18nHeader = "clusterMessengerStory";
@@ -352,6 +353,9 @@ const MessengerStory = () => {
                 {i18n.t(`${i18nHeader}:explore.further.p.1`)}
             </p>
             <EntityList entities={Object.values(products)} expand={true} />
+            <LinkButton route={"back"} className="poly-button margin-top">
+                {i18n.t(`${i18nHeaderCommon}:discover.other.topics`)}
+            </LinkButton>
         </ClusterStory>
     );
 };
