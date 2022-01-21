@@ -11,15 +11,10 @@ const MessengerTreemapInfo = () => {
             <p>{i18n.t("messengerTreemapInfoScreen:p2")}</p>
             <p>{i18n.t("messengerTreemapInfoScreen:p3")}</p>
             <Infographic
-                type="companyDataTypes"
+                type="treemapInfo"
                 texts={{
-                    text: i18n.t("infographic:companyDataTypes.text"),
-                    boldLabel1: i18n.t(
-                        "infographic:companyDataTypes.boldLabel1"
-                    ),
-                    boldLabel2: i18n.t(
-                        "infographic:companyDataTypes.boldLabel2"
-                    ),
+                    textLabel1: i18n.t("infographic:treemapInfo.textLabel1"),
+                    textLabel2: i18n.t("infographic:treemapInfo.textLabel2"),
                 }}
             />
             <p

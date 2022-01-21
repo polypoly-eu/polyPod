@@ -55,5 +55,7 @@
     "horizontalBarChartInfo.textVariableD": "Variable D",
     "horizontalBarChartInfo.textVariableE": "Variable E",
     "flowDiagramInfo.textYear1": "Jahr 1",
-    "flowDiagramInfo.textYear2": "Jahr 2"
+    "flowDiagramInfo.textYear2": "Jahr 2",
+    "treemapInfo.textLabel1": "Category 1",
+    "treemapInfo.textLabel2": "Category 2"
 }
