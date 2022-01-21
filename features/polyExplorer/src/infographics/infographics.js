@@ -10,7 +10,7 @@ import lineChartInfo from "./lineChartInfo.svg";
 import companyDataTypes from "./companyDataTypes.svg";
 import sharesDataTypes from "./sharesDataTypes.svg";
 import typesDataTypes from "./typesDataTypes.svg";
-import industries from "./industries.svg";
+import packedCircleInfo from "./packedCircleInfo.svg";
 import barChartInfo from "./barChartInfo.svg";
 import horizontalBarChartInfo from "./horizontalBarChartInfo.svg";
 import flowDiagramInfo from "./flowDiagramInfo.svg";
@@ -30,7 +30,7 @@ export default {
     companyDataTypes: companyDataTypes,
     sharesDataTypes: sharesDataTypes,
     typesDataTypes: typesDataTypes,
-    industries: industries,
+    packedCircleInfo: packedCircleInfo,
     barChartInfo: barChartInfo,
     horizontalBarChartInfo: horizontalBarChartInfo,
     flowDiagramInfo: flowDiagramInfo,

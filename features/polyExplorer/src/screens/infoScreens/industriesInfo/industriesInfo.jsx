@@ -9,10 +9,14 @@ const IndustriesInfo = () => {
         <div className="base-info-padding">
             <p>{i18n.t("industriesInfoScreen:p1")}</p>
             <Infographic
-                type="industries"
+                type="packedCircleInfo"
                 texts={{
-                    textLabel1: i18n.t("infographic:industries.textLabel1"),
-                    textLabel2: i18n.t("infographic:industries.textLabel2"),
+                    textLabel1: i18n.t(
+                        "infographic:packedCircleInfo.textLabel1"
+                    ),
+                    textLabel2: i18n.t(
+                        "infographic:packedCircleInfo.textLabel2"
+                    ),
                 }}
             />
             <p
