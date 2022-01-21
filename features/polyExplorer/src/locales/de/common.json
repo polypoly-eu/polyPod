@@ -37,6 +37,8 @@
         "Hintergrundinformation",
     "screenTitle.messenger-treemap-info":
         "Hintergrundinformation",
+    "screenTitle.horizontal-bar-chart-info": 
+        "Hintergrundinformation",
     "screenTitle.search":
         "Suche",
     "screenTitle.info":
@@ -106,14 +108,9 @@
     "source":
         "Quelle",
     "source.polyPedia": "Quelle: polyPedia",
-    "purpose.name.i18nkey":
-        "Translation_DE",
-    "purpose.description.i18nkey":
-        "Explanation_DE",
-    "country.code":
-        "de",
-    "button.ok":
-        "OK",
-    "button.scroll":
-        "Scrolle hoch für mehr"
+    "purpose.name.i18nkey": "Translation_DE",
+    "purpose.description.i18nkey": "Explanation_DE",
+    "country.code": "de",
+    "button.ok": "OK",
+    "button.scroll": "Scrolle hoch für mehr"
 }
