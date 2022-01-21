@@ -126,6 +126,11 @@ export default function ReceivingCompanies({ entities }) {
                     )}
                 >
                     <Companies entities={entities} />
+                    <InfoButton
+                        light
+                        route="/companies-bar-chart-info"
+                        source={i18n.t("common:source.polyPedia")}
+                    ></InfoButton>
                 </Tab>
                 <Tab
                     id="industries"

@@ -15,6 +15,7 @@ import barChartInfo from "./barChartInfo.svg";
 import horizontalBarChartInfo from "./horizontalBarChartInfo.svg";
 import flowDiagramInfo from "./flowDiagramInfo.svg";
 import treemapInfo from "./treemapInfo.svg";
+import verticalBarChartInfo from "./verticalBarChartInfo.svg";
 
 export default {
     dataTypes: dataTypes,
@@ -34,4 +35,5 @@ export default {
     horizontalBarChartInfo: horizontalBarChartInfo,
     flowDiagramInfo: flowDiagramInfo,
     treemapInfo: treemapInfo,
+    verticalBarChartInfo: verticalBarChartInfo,
 };
