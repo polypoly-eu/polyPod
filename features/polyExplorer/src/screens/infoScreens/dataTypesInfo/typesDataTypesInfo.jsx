@@ -17,7 +17,7 @@ const TypesDataTypesInfo = () => {
             />
             <p
                 dangerouslySetInnerHTML={{
-                    __html: i18n.t(`commonInfoScreen:circle.packing`),
+                    __html: i18n.t(`commonInfoScreen:bubble.chart`),
                 }}
             />
         </div>,
