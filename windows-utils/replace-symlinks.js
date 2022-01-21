@@ -1,20 +1,15 @@
 const shell = require("shelljs");
-
+const path = require("path");
+const symlinkMode = "120000";
 async function getSymlinks(dirPath) {
     let symlinks = [];
-    const path = dirPath
-        .replaceAll("/", "\\")
-        .replace("..", "")
-        .split("\\")
-        .slice(2)
-        .join("\\");
+    const relPath = dirPath.replaceAll("../", "/").replaceAll("/", "\\");
     const cwd = process.cwd();
-    const changeDir = cwd + path;
-    console.log("All good");
+    const changeDir = path.join(cwd, relPath);
+    shell.cd(changeDir);
     const fileList = await shellExec("git ls-files -s");
-    console.log({ fileList });
 
-    if (fileList.stdout.includes("120000")) {
+    if (fileList.stdout.includes(symlinkMode)) {
         const output = fileList.stdout.split("\n");
         symlinks.push(...extractSymlinks(output, changeDir));
     }
@@ -30,21 +25,19 @@ const shellExec = (cmd) =>
 
 function extractSymlinks(output, cwd) {
     const extractedSymlinks = [];
-    for (let i = 0; i < output.length; i++) {
-        const parsedElement = output[i].split(" ");
-        if (parsedElement[0] === "120000") {
-            const relDir = parsedElement[2]
-                .replace("0\t", "")
-                .replaceAll("/", "\\");
+    for (let file of output) {
+        let [mode, id, _, relDir] = file.split(/\s/);
+        if (mode === symlinkMode) {
+            relDir = relDir.replaceAll("/", "\\");
             const fileName = relDir.split("\\").pop();
-            const fileDir = cwd + "\\" + relDir.replace(fileName, "");
+            const fileDir = path.join(cwd, relDir.replace(fileName, ""));
             const linkText = shell
-                .head(fileDir + "\\" + fileName)
+                .cat(path.join(fileDir, fileName))
                 .toString()
                 .replaceAll("/", "\\");
             extractedSymlinks.push({
-                mode: parsedElement[0],
-                id: parsedElement[1],
+                mode: mode,
+                id: id,
                 link: linkText,
                 fileName: fileName,
                 target: fileDir,
@@ -62,32 +55,26 @@ async function makeNewSymlink(symlink) {
     console.log(output);
 }
 
-async function deleteSymlink(symlink) {
-    shell.cd(symlink.target);
-    const delOutput = await shellExec("del " + symlink.fileName);
-    console.log(symlink.target);
-    console.log(delOutput.stderr);
-}
-
-async function deleteExistingSymlinks(symlinks) {
-    for (let i = 0; i < symlinks.length; i++) {
-        const symlink = symlinks[i];
-        await deleteSymlink(symlink);
+function deleteExistingSymlinks(symlinks) {
+    for (let symlink of symlinks) {
+        shell.rm(path.join(symlink.target, symlink.fileName));
     }
 }
 
 async function addSymlinks(symlinks) {
-    for (let i = 0; i < symlinks.length; i++) {
-        const symlink = symlinks[i];
+    for (let symlink of symlinks) {
         await makeNewSymlink(symlink);
     }
 }
 
 async function start() {
-    const symlinks = await getSymlinks("..");
-    console.log("Removing existing symlinks");
-    await deleteExistingSymlinks(symlinks);
-    console.log("Adding new symLinks");
-    await addSymlinks(symlinks);
+    if (process.platform === "win32") {
+        const symlinks = await getSymlinks("../features/lexicon");
+        console.log("Removing existing symlinks");
+        deleteExistingSymlinks(symlinks);
+        console.log("Adding new symLinks");
+        await addSymlinks(symlinks);
+        console.log("All set up!");
+    } else console.log("You are not running windows, you should be A-Okay! ");
 }
 start();
