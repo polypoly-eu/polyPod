@@ -39,7 +39,7 @@
     "chai-as-promised": "^7.1.1",
     "fast-check": "^2.11.0",
     "memfs": "^3.2.0",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^3.1.1"
   },
   "peerDependencies": {
     "@polypoly-eu/rdf-spec": "*",
