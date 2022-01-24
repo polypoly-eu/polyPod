@@ -48,7 +48,7 @@ To run the linter:
 > Please note that this won't trigger tests or linting for non-JS code, for
 example [android](android).
 
-If linting reveals some error, they can be fixed with
+If linting reveals some error, most can be fixed with
 
     $ ./build.js lintfix
 
