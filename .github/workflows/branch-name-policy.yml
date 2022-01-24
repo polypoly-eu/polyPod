@@ -10,9 +10,10 @@ jobs:
     steps:
       - name: If this is triggered, it should fail
         run: |
-          echo "::error::This branch ${GITHUB_REF_NAME} has a slash; please don't use slashes in branch names"
-          echo "::error::Please close this PR and rename the local branch with"
-          echo "::error::    git checkout ${GITHUB_REF_NAME}"
-          echo "::error::    git branch -m branch-no-slashes"
+          __msg="echo "::error::This branch ${GITHUB_REF_NAME} has a slash; please don't use slashes in branch names
+          Please close this PR and rename the local branch with
+              git checkout ${GITHUB_REF_NAME//\//-}
+              git branch -m branch-no-slashes"
+          echo "$__msg"
           echo ::set-output name=status::failure
           exit 1
