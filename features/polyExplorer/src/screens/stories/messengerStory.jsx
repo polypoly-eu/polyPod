@@ -227,6 +227,11 @@ const MessengerStory = () => {
                 {i18n.t(`${i18nHeader}:overview.paragraph.one`)}
             </p>
             <OverviewBarChart entities={Object.values(products)} />
+            <InfoButton
+                light
+                route="/overview-bar-chart-info"
+                source={i18n.t("common:source.polyPedia")}
+            ></InfoButton>
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:details.section`)}
             ></SectionTitle>

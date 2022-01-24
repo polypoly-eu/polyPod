@@ -32,6 +32,7 @@ import purposesBarChartInfoScreenEn from "./locales/en/infoScreens/purposesBarCh
 import flowDiagramInfoScreenEn from "./locales/en/infoScreens/flowDiagramInfoScreen.json";
 import messengerTreemapInfoScreenEn from "./locales/en/infoScreens/messengerTreemapInfoScreen.json";
 import companiesBarChartInfoScreenEn from "./locales/en/infoScreens/companiesBarChartInfoScreen.json";
+import overviewBarChartInfoScreenEn from "./locales/en/infoScreens/overviewBarChartInfoScreen.json";
 
 import commonDe from "./locales/de/common.json";
 import entityFilterScreenDe from "./locales/de/entityFilterScreen.json";
@@ -65,6 +66,7 @@ import purposesBarChartInfoScreenDe from "./locales/de/infoScreens/purposesBarCh
 import flowDiagramInfoScreenDe from "./locales/de/infoScreens/flowDiagramInfoScreen.json";
 import messengerTreemapInfoScreenDe from "./locales/de/infoScreens/messengerTreemapInfoScreen.json";
 import companiesBarChartInfoScreenDe from "./locales/de/infoScreens/companiesBarChartInfoScreen.json";
+import overviewBarChartInfoScreenDe from "./locales/de/infoScreens/overviewBarChartInfoScreen.json";
 
 export default new I18n(determineLanguage(), {
     en: {
@@ -100,6 +102,7 @@ export default new I18n(determineLanguage(), {
         flowDiagramInfoScreen: flowDiagramInfoScreenEn,
         messengerTreemapInfoScreen: messengerTreemapInfoScreenEn,
         companiesBarChartInfoScreen: companiesBarChartInfoScreenEn,
+        overviewBarChartInfoScreen: overviewBarChartInfoScreenEn,
     },
     de: {
         common: commonDe,
@@ -134,5 +137,6 @@ export default new I18n(determineLanguage(), {
         flowDiagramInfoScreen: flowDiagramInfoScreenDe,
         messengerTreemapInfoScreen: messengerTreemapInfoScreenDe,
         companiesBarChartInfoScreen: companiesBarChartInfoScreenDe,
+        overviewBarChartInfoScreen: overviewBarChartInfoScreenDe,
     },
 });

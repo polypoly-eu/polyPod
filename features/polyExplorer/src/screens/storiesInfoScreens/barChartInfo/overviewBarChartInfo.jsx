@@ -4,10 +4,11 @@ import i18n from "../../../i18n.js";
 import StoriesInfoScreen from "../../../components/clusterStories/storiesInfoScreen.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 
-const HorizontalBarChartInfo = () => {
-    const horizontalBarChartInfoContent = [
+const OverviewBarChartInfo = () => {
+    const overviewBarChartInfoContent = [
         <div className="base-info-padding">
-            <p>{i18n.t("commonInfoScreen:bar.chart.p1")}</p>
+            <p>{i18n.t("overviewBarChartInfoScreen:p1")}</p>
+            <p>{i18n.t("overviewBarChartInfoScreen:p2")}</p>
             <Infographic
                 type="horizontalBarChartInfo"
                 texts={{
@@ -41,16 +42,16 @@ const HorizontalBarChartInfo = () => {
             />
         </div>,
         <div className="base-info-padding">
-            <p>{i18n.t("commonInfoScreen:bar.chart.p3")}</p>
-            <p>{i18n.t("commonInfoScreen:bar.chart.p4")}</p>
+            <p>{i18n.t("overviewBarChartInfoScreen:p3")}</p>
+            <p>{i18n.t("overviewBarChartInfoScreen:p4")}</p>
         </div>,
     ];
     return (
         <StoriesInfoScreen
-            className="horizontal-bar-chart-info"
-            infoChildren={horizontalBarChartInfoContent}
+            className="overview-bar-chart-info"
+            infoChildren={overviewBarChartInfoContent}
         />
     );
 };
 
-export default HorizontalBarChartInfo;
+export default OverviewBarChartInfo;
