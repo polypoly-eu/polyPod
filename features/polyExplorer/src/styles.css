@@ -55,13 +55,6 @@
     src: url("../fonts/jost_bold.ttf");
 }
 
-* {
-    font-family: "Jost";
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    color: var(--color-text-light);
-}
-
 body {
     margin: 0;
 }

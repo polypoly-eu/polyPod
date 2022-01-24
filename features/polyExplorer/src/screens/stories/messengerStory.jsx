@@ -5,6 +5,7 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import MatrixBubblesChart from "../../components/clusterStories/MatrixBubblesChart.jsx";
+import Purposes from "../../components/clusterStories/purposes.jsx";
 import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
 import EntityList from "../../components/entityList/entityList.jsx";
 import OverviewBarChart from "../../components/clusterStories/overviewBarChart.jsx";
@@ -16,6 +17,7 @@ import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
 import GradientCircleList from "../../components/gradientCircleList/gradientCircleList.jsx";
 
 import MessengerTreeMap from "../../components/clusterStories/messengerTreeMap.jsx";
+import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 import MessengerMauChart from "../../components/clusterStories/messengerMauChart.jsx";
 
 import "./messengerStory.css";
@@ -356,6 +358,13 @@ const MessengerStory = () => {
                 })}
             </Tabs>
             <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
+            </p>
+            <Purposes companies={messengers} globalData={globalData} />
+            <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />
             <p className="big-first-letter">
@@ -400,6 +409,9 @@ const MessengerStory = () => {
                 {i18n.t(`${i18nHeader}:explore.further.p.1`)}
             </p>
             <EntityList entities={Object.values(products)} expand={true} />
+            <LinkButton route={"back"} className="poly-button margin-top">
+                {i18n.t(`${i18nHeaderCommon}:discover.other.topics`)}
+            </LinkButton>
         </ClusterStory>
     );
 };

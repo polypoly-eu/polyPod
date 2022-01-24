@@ -13,6 +13,10 @@
     --color-text-dark: var(--color-dark);
     --color-text-light: var(--color-light);
 
+    /* Base Theme */
+    --theme-secondary-color: var(--color-dark);
+    --theme-primary-color: var(--color-light);
+
     /* Data exploration colors */
     --data-exp-data-types: #fe8988;
     --data-exp-purposes: #3ba6ff;

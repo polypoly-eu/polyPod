@@ -43,7 +43,10 @@ const ClusterStory = ({
     };
 
     return (
-        <Screen className={`cluster-story ${className}`} light={true}>
+        <Screen
+            className={`cluster-story ${className}`}
+            theme={"poly-theme-light"}
+        >
             <div
                 className="progress-bar"
                 style={{ backgroundColor: progressBarColor }}

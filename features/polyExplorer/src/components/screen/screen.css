@@ -2,17 +2,7 @@
     display: flex;
     flex-flow: column;
     position: absolute;
-    background-color: var(--color-background-dark);
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.explorer-container-light {
-    display: flex;
-    flex-flow: column;
-    position: relative;
-    background-color: var(--color-background-light);
+    background-color: var(--theme-primary-color);
     width: 100%;
     height: 100%;
     overflow: hidden;
