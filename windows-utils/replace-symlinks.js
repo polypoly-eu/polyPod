@@ -26,6 +26,7 @@ const shellExec = (cmd) =>
 function extractSymlinks(output, cwd) {
     const extractedSymlinks = [];
     for (let file of output) {
+        // eslint-disable-next-line no-unused-vars
         let [mode, id, _, relDir] = file.split(/\s/);
         if (mode === symlinkMode) {
             relDir = relDir.replaceAll("/", "\\");
