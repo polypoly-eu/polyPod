@@ -27,7 +27,7 @@ import barChartEn from "./locales/en/barChart.json";
 import commonInfoScreenEn from "./locales/en/infoScreens/commonInfoScreen.json";
 import lineChartInfoScreenEn from "./locales/en/infoScreens/lineChartInfoScreen.json";
 import dataTypesInfoScreensEn from "./locales/en/infoScreens/dataTypesInfoScreens.json";
-import industriesInfoScreenEn from "./locales/en/infoScreens/industriesInfoScreen.json";
+import industriesPackedCircleInfoScreenEn from "./locales/en/infoScreens/industriesPackedCircleInfoScreen.json";
 import purposesBarChartInfoScreenEn from "./locales/en/infoScreens/purposesBarChartInfoScreen.json";
 import flowDiagramInfoScreenEn from "./locales/en/infoScreens/flowDiagramInfoScreen.json";
 import messengerTreemapInfoScreenEn from "./locales/en/infoScreens/messengerTreemapInfoScreen.json";
@@ -60,7 +60,7 @@ import clusterStoryCommonDe from "./locales/de/stories/common.json";
 import barChartDe from "./locales/de/barChart.json";
 import commonInfoScreenDe from "./locales/de/infoScreens/commonInfoScreen.json";
 import lineChartInfoScreenDe from "./locales/de/infoScreens/lineChartInfoScreen.json";
-import industriesInfoScreenDe from "./locales/de/infoScreens/industriesInfoScreen.json";
+import industriesPackedCircleInfoScreenDe from "./locales/de/infoScreens/industriesPackedCircleInfoScreen.json";
 import dataTypesInfoScreensDe from "./locales/de/infoScreens/dataTypesInfoScreens.json";
 import purposesBarChartInfoScreenDe from "./locales/de/infoScreens/purposesBarChartInfoScreen.json";
 import flowDiagramInfoScreenDe from "./locales/de/infoScreens/flowDiagramInfoScreen.json";
@@ -97,7 +97,7 @@ export default new I18n(determineLanguage(), {
         commonInfoScreen: commonInfoScreenEn,
         lineChartInfoScreen: lineChartInfoScreenEn,
         dataTypesInfoScreens: dataTypesInfoScreensEn,
-        industriesInfoScreen: industriesInfoScreenEn,
+        industriesPackedCircleInfoScreen: industriesPackedCircleInfoScreenEn,
         purposesBarChartInfoScreen: purposesBarChartInfoScreenEn,
         flowDiagramInfoScreen: flowDiagramInfoScreenEn,
         messengerTreemapInfoScreen: messengerTreemapInfoScreenEn,
@@ -131,7 +131,7 @@ export default new I18n(determineLanguage(), {
         barChart: barChartDe,
         commonInfoScreen: commonInfoScreenDe,
         lineChartInfoScreen: lineChartInfoScreenDe,
-        industriesInfoScreen: industriesInfoScreenDe,
+        industriesPackedCircleInfoScreen: industriesPackedCircleInfoScreenDe,
         dataTypesInfoScreens: dataTypesInfoScreensDe,
         purposesBarChartInfoScreen: purposesBarChartInfoScreenDe,
         flowDiagramInfoScreen: flowDiagramInfoScreenDe,

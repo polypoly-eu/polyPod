@@ -141,7 +141,7 @@ export default function ReceivingCompanies({ entities }) {
                     <Industries entities={entities} />
                     <InfoButton
                         light
-                        route="/industries-info"
+                        route="/industries-packed-circle-info"
                         source={i18n.t("common:source.polyPedia")}
                     ></InfoButton>
                 </Tab>

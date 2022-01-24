@@ -4,10 +4,10 @@ import i18n from "../../../i18n.js";
 import StoriesInfoScreen from "../../../components/clusterStories/storiesInfoScreen.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 
-const IndustriesInfo = () => {
-    const companyDataTypesInfoContent = [
+const IndustriesPackedCircleInfo = () => {
+    const industriesPackedCircleInfoContent = [
         <div className="base-info-padding">
-            <p>{i18n.t("industriesInfoScreen:p1")}</p>
+            <p>{i18n.t("industriesPackedCircleInfoScreen:p1")}</p>
             <Infographic
                 type="packedCircleInfo"
                 texts={{
@@ -26,15 +26,15 @@ const IndustriesInfo = () => {
             />
         </div>,
         <p className="base-info-padding">
-            {i18n.t("industriesInfoScreen:p2")}
+            {i18n.t("industriesPackedCircleInfoScreen:p2")}
         </p>,
     ];
     return (
         <StoriesInfoScreen
-            className="company-data-types-info"
-            infoChildren={companyDataTypesInfoContent}
+            className="industries-packed-circle-info"
+            infoChildren={industriesPackedCircleInfoContent}
         />
     );
 };
 
-export default IndustriesInfo;
+export default IndustriesPackedCircleInfo;
