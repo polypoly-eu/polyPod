@@ -1,5 +1,0 @@
-{
-    "p1": "This diagram shows how much data flows from the messengers into different data regions. ",
-    "p2": "Alluvial diagrams are a type of flow diagram originally developed to represent changes in network structure over time. In allusion to both their visual appearance and their emphasis on flow, alluvial diagrams are named after alluvial fans that are naturally formed by the soil deposited from streaming water.",
-    "p3": "Blocks represent clusters of nodes, and stream fields between the blocks represent changes in the composition of these clusters over time. The height of a block represents the size of the cluster and the height of a stream field represents the size of the components contained in both blocks connected by the stream field."
-}

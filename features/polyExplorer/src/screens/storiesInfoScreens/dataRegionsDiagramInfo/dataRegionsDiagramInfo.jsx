@@ -3,12 +3,12 @@ import React from "react";
 import i18n from "../../../i18n.js";
 import StoriesInfoScreen from "../../../components/clusterStories/storiesInfoScreen.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
-import DataRegionInfoScreen from "../../../screens/dataRegionInfo/dataRegionInfo.jsx";
+import DataRegionInfoScreen from "../../dataRegionInfo/dataRegionInfo.jsx";
 
-const FlowDiagramInfo = () => {
-    const flowDiagramInfoContent = [
+const DataRegionsDiagramInfo = () => {
+    const dataRegionsDiagramInfoContent = [
         <div className="base-info-padding">
-            <p>{i18n.t("flowDiagramInfoScreen:p1")}</p>
+            <p>{i18n.t("dataRegionsDiagramInfoScreen:p1")}</p>
             <Infographic
                 type="flowDiagramInfo"
                 texts={{
@@ -18,17 +18,17 @@ const FlowDiagramInfo = () => {
             />
             <p
                 dangerouslySetInnerHTML={{
-                    __html: i18n.t(`flowDiagramInfoScreen:p2`),
+                    __html: i18n.t(`commonInfoScreen:alluvial.diagram1`),
                 }}
             />
-            <p>{i18n.t("flowDiagramInfoScreen:p3")}</p>
+            <p>{i18n.t("commonInfoScreen:alluvial.diagram2")}</p>
         </div>,
     ];
     return (
         <div>
             <StoriesInfoScreen
-                className="flow-diagram-info"
-                infoChildren={flowDiagramInfoContent}
+                className="data-regions-diagram-info"
+                infoChildren={dataRegionsDiagramInfoContent}
                 noButton
             ></StoriesInfoScreen>
             <DataRegionInfoScreen />
@@ -36,4 +36,4 @@ const FlowDiagramInfo = () => {
     );
 };
 
-export default FlowDiagramInfo;
+export default DataRegionsDiagramInfo;

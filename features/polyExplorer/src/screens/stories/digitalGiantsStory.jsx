@@ -283,7 +283,7 @@ const DigitalGiantsStory = () => {
             />
             <InfoButton
                 light
-                route="/flow-diagram-info"
+                route="/data-regions-diagram-info"
                 source={i18n.t("common:source.polyPedia")}
             ></InfoButton>
             <SectionTitle
