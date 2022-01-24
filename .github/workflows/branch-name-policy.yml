@@ -1,9 +1,13 @@
-name: Fail when frozen files are changed in a PR
+name: Fail when incorrect branch names are used
 on:
+  push:
+    branches:
+    - '*/**'
+    - '**/*'
   pull_request:
     branches:
     - '*/**'
-    - '**/*
+    - '**/*'
 
 jobs:
   no_slash_in_branch_names:
