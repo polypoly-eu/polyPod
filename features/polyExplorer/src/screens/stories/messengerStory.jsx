@@ -259,7 +259,7 @@ const MessengerStory = () => {
             </p>
             <InfoButton
                 light
-                route="/bar-chart-info"
+                route="/purposes-bar-chart-info"
                 source={i18n.t("common:source.polyPedia")}
             ></InfoButton>
             <SectionTitle

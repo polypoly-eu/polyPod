@@ -31,7 +31,7 @@ import CompanyDataTypesInfo from "./screens/storiesInfoScreens/dataTypesInfo/com
 import SharesDataTypesInfo from "./screens/storiesInfoScreens/dataTypesInfo/sharesDataTypesInfo.jsx";
 import TypesDataTypesInfo from "./screens/storiesInfoScreens/dataTypesInfo/typesDataTypesInfo.jsx";
 import IndustriesInfo from "./screens/storiesInfoScreens/industriesInfo/industriesInfo.jsx";
-import BarChartInfo from "./screens/storiesInfoScreens/barChartInfo/barChartInfo.jsx";
+import PurposesBarChartInfo from "./screens/storiesInfoScreens/barChartInfo/purposesBarChartInfo.jsx";
 import HorizontalBarChartInfo from "./screens/storiesInfoScreens/barChartInfo/horizontalBarChartInfo.jsx";
 import FlowDiagramInfo from "./screens/storiesInfoScreens/flowDiagramInfo/flowDiagramInfo.jsx";
 import MessengerTreemapInfo from "./screens/storiesInfoScreens/messengerTreemapInfo/messengerTreemapInfo.jsx";
@@ -94,8 +94,8 @@ const PolyExplorerApp = () => {
                 <Route exact path="/industries-info">
                     <IndustriesInfo />
                 </Route>
-                <Route exact path="/bar-chart-info">
-                    <BarChartInfo />
+                <Route exact path="/purposes-bar-chart-info">
+                    <PurposesBarChartInfo />
                 </Route>
                 <Route exact path="/horizontal-bar-chart-info">
                     <HorizontalBarChartInfo />

@@ -25,7 +25,7 @@ const CompaniesBarChartInfo = () => {
             /> */}
             <p
                 dangerouslySetInnerHTML={{
-                    __html: i18n.t(`commonInfoScreen:bar.chart.p2`),
+                    __html: i18n.t(`commonInfoScreen:bar.chart`),
                 }}
             />
         </div>,

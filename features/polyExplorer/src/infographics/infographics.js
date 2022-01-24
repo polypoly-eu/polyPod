@@ -11,7 +11,7 @@ import companyDataTypes from "./companyDataTypes.svg";
 import sharesDataTypes from "./sharesDataTypes.svg";
 import typesDataTypes from "./typesDataTypes.svg";
 import packedCircleInfo from "./packedCircleInfo.svg";
-import barChartInfo from "./barChartInfo.svg";
+import purposesBarChart from "./purposesBarChart.svg";
 import horizontalBarChartInfo from "./horizontalBarChartInfo.svg";
 import flowDiagramInfo from "./flowDiagramInfo.svg";
 import treemapInfo from "./treemapInfo.svg";
@@ -31,7 +31,7 @@ export default {
     sharesDataTypes: sharesDataTypes,
     typesDataTypes: typesDataTypes,
     packedCircleInfo: packedCircleInfo,
-    barChartInfo: barChartInfo,
+    purposesBarChart: purposesBarChart,
     horizontalBarChartInfo: horizontalBarChartInfo,
     flowDiagramInfo: flowDiagramInfo,
     treemapInfo: treemapInfo,
