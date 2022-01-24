@@ -34,11 +34,11 @@
     "entityFilter.countryNameKey":
         "Name_EN",
     "entityFilter.revenueRange.0":
-        "€ 0 - 100k",
+        "€ 0 - 100K",
     "entityFilter.revenueRange.100":
-        "€ 100k - 500k",
+        "€ 100K - 500K",
     "entityFilter.revenueRange.500":
-        "€ 500k - 1M",
+        "€ 500K - 1M",
     "entityFilter.revenueRange.1000":
         "€ 1M - 5M",
     "entityFilter.revenueRange.5000":
@@ -86,7 +86,7 @@
     "sharing.detailPrefix.jurisdictions":
         "shares data in",
     "sharing.jurisdictions":
-        "jurisdictions",
+        "Data Regions",
     "source":
         "Source",
     "purpose.name.i18nkey":
