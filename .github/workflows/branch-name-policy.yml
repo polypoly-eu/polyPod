@@ -1,5 +1,9 @@
-name: Fail when frozen files are changed in a PR
+name: Fail when incorrect branch names are used
 on:
+  push:
+    branches:
+    - '*/**'
+    - '**/*
   pull_request:
     branches:
     - '*/**'
@@ -14,6 +18,6 @@ jobs:
           echo "::error::This branch ${GITHUB_REF_NAME} has a slash; please don't use slashes in branch names"
           echo "::error::Please close this PR and rename the local branch with"
           echo "::error::    git checkout branch/with/slashes"
-          echo "::error::    git -m branch-without-slashes"
+          echo "::error::    git -m branch-no-slashes"
           echo ::set-output name=status::failure
           exit 1
