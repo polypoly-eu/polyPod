@@ -2,14 +2,14 @@ import React, { useRef, useEffect, useState } from "react";
 import i18n from "../../i18n.js";
 import * as d3 from "d3";
 
-const BarChart = ({ data, animation, legendTitle }) => {
+const PurposesBarChart = ({ data, animation }) => {
     const [barWidth, setBarWidth] = useState(0);
     const [labelXPosition, setLabelXPosition] = useState(0);
 
     const legendTranslations = {
-        title: legendTitle,
-        max: i18n.t("barChart:max"),
-        average: i18n.t("barChart:average"),
+        title: i18n.t("clusterStoryCommon:purposes.barChart.legendTitle"),
+        max: i18n.t("clusterStoryCommon:purposes.barChart.max"),
+        average: i18n.t("clusterStoryCommon:purposes.barChart.average"),
     };
 
     const svgBarRef = useRef();
@@ -151,7 +151,7 @@ const BarChart = ({ data, animation, legendTitle }) => {
             const labelTitleDiv = labelTitle.append("xhtml:div");
             const labelTitleP = labelTitleDiv
                 .append("p")
-                .text((d) => d.title)
+                .text((d) => d.translation || d.title)
                 .attr("height", labelTitleHeight.p)
                 .style("margin", legendMargin)
                 .style("display", "inline-block")
@@ -177,7 +177,7 @@ const BarChart = ({ data, animation, legendTitle }) => {
             const legendTitle = svgChart
                 .append("foreignObject")
                 .attr("x", 0)
-                .attr("y", 0)
+                .attr("y", legendHeight / 2)
                 .attr("width", legendWidth)
                 .attr("height", legendHeight);
             legendTitle
@@ -295,4 +295,4 @@ const BarChart = ({ data, animation, legendTitle }) => {
     return <div ref={svgBarRef}></div>;
 };
 
-export default BarChart;
+export default PurposesBarChart;
