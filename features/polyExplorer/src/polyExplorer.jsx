@@ -34,7 +34,7 @@ import IndustriesPackedCircleInfo from "./screens/storiesInfoScreens/industriesP
 import PurposesBarChartInfo from "./screens/storiesInfoScreens/barChartInfo/purposesBarChartInfo.jsx";
 import OverviewBarChartInfo from "./screens/storiesInfoScreens/barChartInfo/overviewBarChartInfo.jsx";
 import DataRegionsDiagramInfo from "./screens/storiesInfoScreens/dataRegionsDiagramInfo/dataRegionsDiagramInfo.jsx";
-import MessengerTreemapInfo from "./screens/storiesInfoScreens/messengerTreemapInfo/messengerTreemapInfo.jsx";
+import DetailsTreemapInfo from "./screens/storiesInfoScreens/detailsTreemapInfo/detailsTreemapInfo.jsx";
 import CompaniesBarChartInfo from "./screens/storiesInfoScreens/barChartInfo/companiesBarChartInfo.jsx";
 
 //stories
@@ -103,8 +103,8 @@ const PolyExplorerApp = () => {
                 <Route exact path="/data-regions-diagram-info">
                     <DataRegionsDiagramInfo />
                 </Route>
-                <Route exact path="/messenger-treemap-info">
-                    <MessengerTreemapInfo />
+                <Route exact path="/details-treemap-info">
+                    <DetailsTreemapInfo />
                 </Route>
                 <Route exact path="/companies-bar-chart-info">
                     <CompaniesBarChartInfo />
