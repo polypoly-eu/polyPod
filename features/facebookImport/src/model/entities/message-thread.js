@@ -78,4 +78,16 @@ export default class MessageThread {
             callback(messageTimestamp);
         }
     }
+
+    mergeThread(messageThread) {
+        this._messagesCount += messageThread.messagesCount;
+        this._totalWordCount += messageThread.totalWordCount;
+        this._callsCount += messageThread.callsCount;
+        this._callsDuration += messageThread.callsDuration;
+        for (let type of messageThread.messageTypes) {
+            if (this._messageTypes.includes(type)) continue;
+            this._messageTypes.push(messageThread.type);
+        }
+        this._messageTimestamps.push(...messageThread.messageTimestamps);
+    }
 }
