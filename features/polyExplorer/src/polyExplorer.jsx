@@ -35,7 +35,7 @@ import PurposesBarChartInfo from "./screens/storiesInfoScreens/barChartInfo/purp
 import OverviewBarChartInfo from "./screens/storiesInfoScreens/barChartInfo/overviewBarChartInfo.jsx";
 import FlowDiagramInfo from "./screens/storiesInfoScreens/flowDiagramInfo/flowDiagramInfo.jsx";
 import MessengerTreemapInfo from "./screens/storiesInfoScreens/messengerTreemapInfo/messengerTreemapInfo.jsx";
-import CompaniesBarChartInfo from "./screens/storiesInfoScreens/companiesBarChartInfo/companiesBarChartInfo.jsx";
+import CompaniesBarChartInfo from "./screens/storiesInfoScreens/barChartInfo/companiesBarChartInfo.jsx";
 
 //stories
 import MessengerStory from "./screens/stories/messengerStory.jsx";

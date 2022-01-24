@@ -2,7 +2,7 @@ import React from "react";
 
 import i18n from "../../../i18n.js";
 import StoriesInfoScreen from "../../../components/clusterStories/storiesInfoScreen.jsx";
-import Infographic from "../../../components/infographic/infographic.jsx";
+// import Infographic from "../../../components/infographic/infographic.jsx";
 
 const CompaniesBarChartInfo = () => {
     const CompaniesBarChartInfoContent = [
