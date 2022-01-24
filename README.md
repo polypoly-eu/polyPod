@@ -14,7 +14,7 @@ But it will be much more than that. For more information please read the
 - [features](features): polyPod features
 - [core](core): The polyPod core modules
 - [build](build): The build logic
-- [assets](assets): Assets shared across the polyPod and features.
+- [assets](assets): Assets shared across the polyPod and features
 
 ## Requirements
 
