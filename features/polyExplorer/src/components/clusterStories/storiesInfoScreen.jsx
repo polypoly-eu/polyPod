@@ -9,7 +9,7 @@ import "./storiesInfoScreen.css";
 const StoriesInfoScreen = ({ className, infoChildren, noButton = false }) => {
     const { handleBack } = useContext(ExplorerContext);
     return (
-        <Screen className={className} light={true}>
+        <Screen className={className} theme={"poly-theme-light"}>
             <div className="stories-info">
                 {infoChildren.map((infoChild, i) => (
                     <div key={i}>

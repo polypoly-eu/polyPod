@@ -9,7 +9,7 @@ import "./baseInfoScreen.css";
 const BaseInfoScreen = ({ className, headline, children }) => {
     const { handleBack } = useContext(ExplorerContext);
     return (
-        <Screen className={className} light={true}>
+        <Screen className={className} theme={"poly-theme-light"}>
             <div className="base-info">
                 <div className="base-info-padding">
                     {headline && <h1>{headline}</h1>}
