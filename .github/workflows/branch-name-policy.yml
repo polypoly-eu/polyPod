@@ -1,0 +1,16 @@
+name: Fail when frozen files are changed in a PR
+on:
+  pull_request:
+    branches:
+    - '*/**'
+    - '**/*
+
+jobs:
+  no_slash_in_branch_names:
+    runs-on: ubuntu-latest
+    steps:
+      - name: If this is triggered, it should fail
+        run: |
+          echo "::error::This branch has a slash; please don't use slashes in branch names"
+          echo ::set-output name=status::failure
+          exit 1
