@@ -4,10 +4,6 @@ on:
     branches:
     - '*/**'
     - '**/*'
-  pull_request:
-    branches:
-    - '*/**'
-    - '**/*'
 
 jobs:
   no_slash_in_branch_names:
