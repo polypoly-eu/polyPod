@@ -25,7 +25,7 @@ import clusterDigitalGiantsStoryEn from "./locales/en/stories/clusterDigitalGian
 import clusterStoryCommonEn from "./locales/en/stories/common.json";
 import barChartEn from "./locales/en/barChart.json";
 import commonInfoScreenEn from "./locales/en/infoScreens/commonInfoScreen.json";
-import lineChartInfoScreenEn from "./locales/en/infoScreens/lineChartInfoScreen.json";
+import detailsLineChartInfoScreenEn from "./locales/en/infoScreens/detailsLineChartInfoScreen.json";
 import dataTypesInfoScreensEn from "./locales/en/infoScreens/dataTypesInfoScreens.json";
 import industriesPackedCircleInfoScreenEn from "./locales/en/infoScreens/industriesPackedCircleInfoScreen.json";
 import purposesBarChartInfoScreenEn from "./locales/en/infoScreens/purposesBarChartInfoScreen.json";
@@ -59,7 +59,7 @@ import clusterDigitalGiantsStoryDe from "./locales/de/stories/clusterDigitalGian
 import clusterStoryCommonDe from "./locales/de/stories/common.json";
 import barChartDe from "./locales/de/barChart.json";
 import commonInfoScreenDe from "./locales/de/infoScreens/commonInfoScreen.json";
-import lineChartInfoScreenDe from "./locales/de/infoScreens/lineChartInfoScreen.json";
+import detailsLineChartInfoScreenDe from "./locales/de/infoScreens/detailsLineChartInfoScreen.json";
 import industriesPackedCircleInfoScreenDe from "./locales/de/infoScreens/industriesPackedCircleInfoScreen.json";
 import dataTypesInfoScreensDe from "./locales/de/infoScreens/dataTypesInfoScreens.json";
 import purposesBarChartInfoScreenDe from "./locales/de/infoScreens/purposesBarChartInfoScreen.json";
@@ -95,7 +95,7 @@ export default new I18n(determineLanguage(), {
         clusterStoryCommon: clusterStoryCommonEn,
         barChart: barChartEn,
         commonInfoScreen: commonInfoScreenEn,
-        lineChartInfoScreen: lineChartInfoScreenEn,
+        detailsLineChartInfoScreen: detailsLineChartInfoScreenEn,
         dataTypesInfoScreens: dataTypesInfoScreensEn,
         industriesPackedCircleInfoScreen: industriesPackedCircleInfoScreenEn,
         purposesBarChartInfoScreen: purposesBarChartInfoScreenEn,
@@ -130,7 +130,7 @@ export default new I18n(determineLanguage(), {
         clusterStoryCommon: clusterStoryCommonDe,
         barChart: barChartDe,
         commonInfoScreen: commonInfoScreenDe,
-        lineChartInfoScreen: lineChartInfoScreenDe,
+        detailsLineChartInfoScreen: detailsLineChartInfoScreenDe,
         industriesPackedCircleInfoScreen: industriesPackedCircleInfoScreenDe,
         dataTypesInfoScreens: dataTypesInfoScreensDe,
         purposesBarChartInfoScreen: purposesBarChartInfoScreenDe,

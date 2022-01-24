@@ -26,7 +26,7 @@ import CompaniesInfoScreen from "./screens/explorationInfo/companiesInfo/compani
 import JurisdictionInfoScreen from "./screens/explorationInfo/jurisdictionInfo/jurisdictionInfo.jsx";
 import FeaturedEntityInfoScreen from "./screens/featuredEntityInfo/featuredEntityInfo.jsx";
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
-import LineChartInfo from "./screens/storiesInfoScreens/lineChartInfo/lineChartInfo.jsx";
+import DetailsLineChartInfo from "./screens/storiesInfoScreens/detailsLineChartInfo/detailsLineChartInfo.jsx";
 import CompanyDataTypesInfo from "./screens/storiesInfoScreens/dataTypesInfo/companyDataTypesInfo.jsx";
 import SharesDataTypesInfo from "./screens/storiesInfoScreens/dataTypesInfo/sharesDataTypesInfo.jsx";
 import TypesDataTypesInfo from "./screens/storiesInfoScreens/dataTypesInfo/typesDataTypesInfo.jsx";
@@ -79,8 +79,8 @@ const PolyExplorerApp = () => {
                 <Route exact path="/info">
                     <InfoScreen />
                 </Route>
-                <Route exact path="/line-chart-info">
-                    <LineChartInfo />
+                <Route exact path="/details-line-chart-info">
+                    <DetailsLineChartInfo />
                 </Route>
                 <Route exact path="/company-data-types-info">
                     <CompanyDataTypesInfo />

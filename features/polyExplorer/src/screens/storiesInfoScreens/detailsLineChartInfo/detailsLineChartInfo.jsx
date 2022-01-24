@@ -4,10 +4,10 @@ import i18n from "../../../i18n.js";
 import StoriesInfoScreen from "../../../components/clusterStories/storiesInfoScreen.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 
-const LineChartInfo = () => {
-    const lineChartInfoContent = [
+const DetailsLineChartInfo = () => {
+    const detailsLineChartInfoContent = [
         <div className="base-info-padding">
-            <p>{i18n.t("lineChartInfoScreen:p1")}</p>
+            <p>{i18n.t("detailsLineChartInfoScreen:p1")}</p>
             <Infographic
                 type="lineChartInfo"
                 texts={{
@@ -25,24 +25,24 @@ const LineChartInfo = () => {
             />
             <p
                 dangerouslySetInnerHTML={{
-                    __html: i18n.t(`lineChartInfoScreen:p2`),
+                    __html: i18n.t(`commonInfoScreen:line.chart1`),
                 }}
             />
-            <p>{i18n.t("lineChartInfoScreen:p3")}</p>
+            <p>{i18n.t("commonInfoScreen:line.chart2")}</p>
         </div>,
         <p
             className="base-info-padding"
             dangerouslySetInnerHTML={{
-                __html: i18n.t(`lineChartInfoScreen:p4`),
+                __html: i18n.t(`detailsLineChartInfoScreen:p2`),
             }}
         />,
     ];
     return (
         <StoriesInfoScreen
-            className="line-chart-info"
-            infoChildren={lineChartInfoContent}
+            className="details-line-chart-info"
+            infoChildren={detailsLineChartInfoContent}
         />
     );
 };
 
-export default LineChartInfo;
+export default DetailsLineChartInfo;
