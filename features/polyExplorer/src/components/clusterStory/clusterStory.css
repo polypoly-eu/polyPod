@@ -35,7 +35,6 @@
 .cluster-story .cluster-story-main-title {
     font-size: 24px;
     font-family: "Jost Medium";
-    font-weight: 400;
     line-height: 120%;
     text-align: center;
     letter-spacing: -0.01em;
@@ -62,7 +61,6 @@
     color: var(--story-color-primary) !important;
     margin-top: 50px;
     font-family: "Jost Bold";
-    font-weight: 400;
     font-size: 45px;
     line-height: 120%;
 }
