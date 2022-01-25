@@ -63,8 +63,6 @@ const MessengerMauChart = ({ messengers, i18nHeader }) => {
             ? `url(#${coloring[d[0].id].gradient})`
             : "rgba(0, 0, 0, 0)";
 
-    console.log(lineChartData);
-
     return (
         <div className="messenger-mau-chart">
             <p>{i18n.t(`${i18nHeader}:details.monthly.active.users`)}</p>
