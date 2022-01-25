@@ -1,6 +1,5 @@
 <svg width="260" height="281" viewBox="0 0 260 281" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="verticalBarChartInfo">
-<g id="Group">
 <g id="Horizontal gridlines">
 <line id="Line 304" x1="20" y1="240.102" x2="254" y2="240.102" stroke="#CBD5E0"/>
 <line id="Line 295" x1="20" y1="218.102" x2="254" y2="218.102" stroke="#CBD5E0"/>
@@ -60,7 +59,6 @@
 <g id="Label">
 <rect id="Rectangle 924" opacity="0.3" y="1" width="22" height="13" fill="#3749A9"/>
 <text id="boldLegend" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="27" y="14.365">Legend</tspan></text>
-</g>
 </g>
 </g>
 <text id="text1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="190.865" y="49.17">Value</tspan></text>
