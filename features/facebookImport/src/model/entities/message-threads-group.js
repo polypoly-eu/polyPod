@@ -6,9 +6,7 @@ export default class MessageThreadsGroup {
     }
 
     get messagesThreads() {
-        return Object.keys(this._messagesThreads).map(
-            (key) => this._messagesThreads[key]
-        );
+        return Object.values(this._messagesThreads);
     }
 
     get messageThreadsCount() {
@@ -27,7 +25,7 @@ export default class MessageThreadsGroup {
     }
 
     forEachMessageThread(callback) {
-        for (const messageThread of this._messagesThreads) {
+        for (const messageThread of this.messagesThreads) {
             callback(messageThread);
         }
     }
