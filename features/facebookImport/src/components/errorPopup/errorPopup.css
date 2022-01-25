@@ -5,12 +5,13 @@
     left: 16px;
     right: 16px;
     padding: 20px;
-    background: #FFB2B3; /* TODO: use var */
-    color: #0F1938; /* TODO: use var */
+    background: #ffb2b3; /* TODO: use var */
+    color: #0f1938; /* TODO: use var */
 }
 
 .error-popup h1 {
     text-align: center;
+    font-family: "Jost Medium";
 }
 
 .error-popup a {

@@ -1,4 +1,5 @@
-.report-view, .report-details {
+.report-view,
+.report-details {
     background-color: var(--background-light);
     color: var(--text-dark);
     line-height: var(--line-height);
@@ -12,23 +13,26 @@
     overflow: hidden scroll;
 }
 
-.report-view .report-view-title, .report-details h1 {
+.report-view .report-view-title,
+.report-details h1 {
     text-align: center;
     font-weight: 500;
     margin: 8px auto 20px auto;
     font-size: 24px;
     line-height: 120%;
+    font-family: "Jost Medium";
 }
 
 .report-view .report-view-title {
     max-width: var(--max-width);
-    margin: 68px auto 32px auto;
+    margin: 16px auto 32px auto;
     line-height: 28.8px;
 }
 
 .report-view p {
     margin: auto;
     max-width: var(--max-width);
+    font-size: 18px;
 }
 
 .report-view .button-area::before {
@@ -56,7 +60,8 @@
 .report-view .view-details,
 .report-view .send-later,
 .report-view .send {
-    font-size: 16px;
+    font-family: "Jost Medium";
+    font-size: 18px;
     margin-top: 12px;
     text-align: center;
 }
@@ -66,7 +71,8 @@
     text-decoration: underline;
 }
 
-.report-view .send-later, .report-view .send {
+.report-view .send-later,
+.report-view .send {
     width: 100%;
     height: 51px;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
