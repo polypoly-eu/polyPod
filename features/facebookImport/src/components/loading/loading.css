@@ -9,9 +9,9 @@
 }
 
 .loading p {
+    font-family: "Jost Medium";
     margin-bottom: 0;
     margin-top: 0;
-    font-weight: 500;
 }
 
 .loading img {

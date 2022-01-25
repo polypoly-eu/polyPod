@@ -1,10 +1,10 @@
 import Foundation
 
 class PodApi {
-    static let  shared = PodApi()
+    static let shared = PodApi()
     
     lazy var polyIn: PolyIn  = {
-        return PolyIn()
+        return CoreDataStack.shared
     }()
     
     lazy var polyOut: PolyOut  = {

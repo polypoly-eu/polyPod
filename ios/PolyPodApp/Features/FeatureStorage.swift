@@ -4,13 +4,15 @@ import Zip
 class FeatureStorage {
     static let shared = FeatureStorage()
     
+    var activeFeature: Feature? = nil
+    
     lazy var featuresFileUrl: URL = {
         do {
             let documentsUrl = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             let featuresUrl = documentsUrl.appendingPathComponent("Features")
             return featuresUrl
         } catch {
-            print(error.localizedDescription);
+            Log.error("Failed to determine features path: \(error.localizedDescription)");
         }
         return URL(fileURLWithPath: "")
     }()
@@ -24,7 +26,7 @@ class FeatureStorage {
             let featuresUrl = documentsUrl.appendingPathComponent("Features")
             try FileManager.default.removeItem(at: featuresUrl)
         } catch {
-            print(error.localizedDescription);
+            Log.error("Failed to clean features: \(error.localizedDescription)");
         }
     }
     
@@ -37,13 +39,13 @@ class FeatureStorage {
             for featureDir in subDirs {
                 if let feature = Feature.load(
                     path: featureDir,
-                    languageCode: Locale.current.languageCode
+                    languageCode: Language.current
                 ) {
                     featuresList.append(feature)
                 }
             }
         } catch {
-            print(error.localizedDescription)
+            Log.error("Failed to list features: \(error.localizedDescription)")
         }
         
         return sortFeatures(featuresList)
@@ -87,7 +89,7 @@ class FeatureStorage {
         do {
             try FileManager.default.createDirectory(atPath: featureDirUrl.absoluteString, withIntermediateDirectories: true, attributes: nil)
         } catch {
-            print(error.localizedDescription);
+            Log.error("Failed to create features folder: \(error.localizedDescription)");
         }
     }
     
@@ -101,12 +103,12 @@ class FeatureStorage {
                     try FileManager.default.copyBundleFile(forResource: "pod", ofType: "html", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
                     try FileManager.default.copyBundleFile(forResource: "initIframe", ofType: "js", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
                     try importPodJs(toFeature: featureName, atUrl: featuresFileUrl)
-                    print("Imported feature: ", featureName)
+                    Log.info("Imported feature: \(featureName)")
                 } else {
-                    print("Feature for import not found: ", featureName)
+                    Log.error("Feature for import not found: \(featureName)")
                 }
             } catch {
-                print("Failed to import feature \(featureName): \(error.localizedDescription)");
+                Log.error("Failed to import feature \(featureName): \(error.localizedDescription)");
             }
         }
     }
@@ -122,7 +124,7 @@ class FeatureStorage {
             ofType: resourceType,
             atDestinationUrl: destinationUrl
         ) {
-            print("""
+            Log.info("""
                 Ignoring \(resourceName).\(resourceType) provided by \
                 \(featureName)
                 """)

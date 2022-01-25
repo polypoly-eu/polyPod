@@ -1,0 +1,15 @@
+.chart-button {
+    height: 32px;
+    margin: 4px;
+    padding: 0 12px;
+    border: solid 1px var(--color-contrast-white);
+    border-radius: 16px;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.chart-button.selected {
+    background-color: var(--background-light);
+    color: var(--text-dark);
+}

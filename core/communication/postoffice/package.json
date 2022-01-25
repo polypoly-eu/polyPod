@@ -9,23 +9,12 @@
     "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
   "scripts": {
-    "build": "rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
+    "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
     "lint": "npm run eslint",
     "test": "jest",
     "docs": "typedoc"
-  },
-  "devDependencies": {
-    "@rollup/plugin-sucrase": "^3.1.0",
-    "@types/jest": "^27.0.1",
-    "@typescript-eslint/eslint-plugin": "^4.1.0",
-    "jest": "27.1",
-    "prettier": "^2.1.2",
-    "rollup": "^2.37.0",
-    "ts-jest": "^27.0.5",
-    "typedoc": "^0.20.36",
-    "typescript": "^3.9.7"
   },
   "private": true
 }

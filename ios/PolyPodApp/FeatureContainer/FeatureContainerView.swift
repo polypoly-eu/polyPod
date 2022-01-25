@@ -8,7 +8,7 @@ struct FeatureContainerView: UIViewRepresentable {
     var queuedAction: (String, DispatchTime)?
     let errorHandler: (String) -> Void
     let openUrlHandler: (String) -> Void
-    let pickFileHandler: (String?, @escaping (URL?) -> Void) -> Void
+    let pickFileHandler: (String?, @escaping (ExternalFile?) -> Void) -> Void
 
     func makeUIView(context: Context) -> FeatureWebView {
         let featureWebView = FeatureWebView(
@@ -130,7 +130,7 @@ class FeatureWebView: WKWebView {
     private let activeActions: Binding<[String]>
     private let errorHandler: (String) -> Void
     private let openUrlHandler: (String) -> Void
-    private let pickFileHandler: (String?, @escaping (URL?) -> Void) -> Void
+    private let pickFileHandler: (String?, @escaping (ExternalFile?) -> Void) -> Void
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
 
     init(
@@ -139,8 +139,10 @@ class FeatureWebView: WKWebView {
         activeActions: Binding<[String]>,
         errorHandler: @escaping (String) -> Void,
         openUrlHandler: @escaping (String) -> Void,
-        pickFileHandler: @escaping (String?, @escaping (URL?) -> Void) -> Void
+        pickFileHandler: @escaping (String?, @escaping (ExternalFile?) -> Void) -> Void
     ) {
+        FeatureStorage.shared.activeFeature = feature
+        
         self.featureTitle = title
         self.activeActions = activeActions
         self.errorHandler = errorHandler
@@ -255,7 +257,7 @@ class FeatureWebView: WKWebView {
         """
         evaluateJavaScript(script) { (_, error) in
             if error != nil {
-                print(
+                Log.error(
                     """
                     Failed to trigger polyNav action '\(action)': \
                     \(String(describing: error))
@@ -300,7 +302,7 @@ extension FeatureWebView: WKScriptMessageHandler {
                         jsExpression,
                         completionHandler: { result, error in
                             if error != nil {
-                                print(
+                                Log.error(
                                     """
                                     Received an error from JavaScript: \
                                     \(error!)
@@ -316,16 +318,16 @@ extension FeatureWebView: WKScriptMessageHandler {
 
     private func doLog(data: [String: Any]) {
         guard let text = data["text"] as? String else {
-            print("Error: WebView sent bad log message")
+            Log.error("WebView sent bad log message")
             return
         }
 
-        print("Message from FeatureContainer: \(text)")
+        Log.info("Message from FeatureContainer: \(text)")
     }
     
     private func doLogError(_ error: [String: Any]) {
         let message = error["message"] as? String ?? "Unknown"
-        print("Error from FeatureContainer: \(message)")
+        Log.error("Error from FeatureContainer: \(message)")
         errorHandler(message)
     }
 }
@@ -343,7 +345,7 @@ extension FeatureWebView: PolyNavDelegate {
         openUrlHandler(url)
     }
     
-    func doHandlePickFile(type: String?, completion: @escaping (URL?) -> Void) {
+    func doHandlePickFile(type: String?, completion: @escaping (ExternalFile?) -> Void) {
         pickFileHandler(type, completion)
     }
 }

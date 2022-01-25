@@ -122,7 +122,7 @@ struct FeatureView: View {
             return
         }
         guard let url = URL(string: urlString) else {
-            print("Error: Invalid URL format: \(urlString)")
+            Log.error("openUrl: Invalid URL format: \(urlString)")
             return
         }
         let alert = UIAlertController(
@@ -153,7 +153,7 @@ struct FeatureView: View {
         viewController.present(alert, animated: true, completion: nil)
     }
     
-    private func pickFile(type: String?, completion: @escaping (URL?) -> Void) {
+    private func pickFile(type: String?, completion: @escaping (ExternalFile?) -> Void) {
         filePicker.pick(type: type, completion: completion)
     }
     

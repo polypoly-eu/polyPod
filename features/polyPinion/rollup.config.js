@@ -1,10 +1,10 @@
-import copy from "rollup-plugin-copy";
+import copy from "@polypoly-eu/rollup-plugin-copy-watch";
 import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
 import css from "rollup-plugin-css-only";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
-import replace from "rollup-plugin-replace";
+import replace from "@rollup/plugin-replace";
 
 export default {
     input: "src/index.tsx",
@@ -42,6 +42,7 @@ export default {
         commonjs(),
         replace({
             "process.env.NODE_ENV": JSON.stringify("production"),
+            preventAssignment: true,
         }),
     ],
     external: ["react", "react-dom", "uuid"],

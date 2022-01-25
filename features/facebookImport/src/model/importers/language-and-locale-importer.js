@@ -1,4 +1,4 @@
-import { IMPORT_WARNING } from "./utils/importer-status.js";
+import { createWarningStatus } from "../analyses/utils/analysis-status.js";
 import { readJSONDataArray } from "./utils/importer-util.js";
 
 export const LANGUAGE_AND_LOCALE_FILE_PATH =
@@ -68,12 +68,7 @@ export default class LanguageAndLocaleImporter {
             this.extractPreferredLanguge(languageData);
 
         if (!facebookAccount.preferredLanguage) {
-            // TODO: Refactor how warnings are created within the importer.
-            return {
-                status: IMPORT_WARNING,
-                importerClass: this.constructor.name,
-                message: "Could not extract preferredLanguage",
-            };
+            return createWarningStatus("Could not extract preferredLanguage");
         }
     }
 }

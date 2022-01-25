@@ -14,10 +14,11 @@ describe("Post reactions analysis for empty zip", () => {
 
     beforeAll(async () => {
         let zipFile = new ZipFileMock();
-        ({ analysis, status } = await runAnalysisForExport(
+        const { analysisResult } = await runAnalysisForExport(
             PostReactionsTypesAnalysis,
             zipFile
-        ));
+        );
+        ({ analysis, status } = analysisResult);
     });
 
     it("has success status", async () => {
@@ -35,10 +36,11 @@ describe("Post reactions analysis from export data", () => {
 
     beforeAll(async () => {
         const zipFile = zipFileWithPostReactions();
-        ({ analysis, status } = await runAnalysisForExport(
+        const { analysisResult } = await runAnalysisForExport(
             PostReactionsTypesAnalysis,
             zipFile
-        ));
+        );
+        ({ analysis, status } = analysisResult);
     });
 
     it("has success status", async () => {
@@ -54,6 +56,7 @@ describe("Post reactions analysis from export data", () => {
             { type: "LIKE", count: 3 },
             { type: "WOW", count: 2 },
             { type: "SAD", count: 1 },
+            { type: "ANGER", count: 1 },
         ]);
     });
 });

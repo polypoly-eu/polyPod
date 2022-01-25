@@ -36,7 +36,7 @@ import SesssionActivityLocationsAnalysis from "./analyses/ministories/activity-l
 import MessagesActivityAnalysis from "./analyses/ministories/messages-activity-analysis.js";
 import JSONFileNamesAnalysis from "./analyses/report/json-file-names-analysis.js";
 import OffFacebookEventTypesAnalysis from "./analyses/report/off-facebook-event-types-analysis.js";
-import UknownTopLevelFoldersAnalysis from "./analyses/report/unknown-top-level-folders-analysis.js";
+import UnknownTopLevelFoldersAnalysis from "./analyses/report/unknown-top-level-folders-analysis.js";
 import InactiveCardsSummary from "./analyses/report/inactive-cards-summary.js";
 import ActivitiesAnalysis from "./analyses/ministories/activities-analysis.js";
 import AdvertisingValueAnalysis from "./analyses/ministories/advertising-value-analysis.js";
@@ -44,22 +44,24 @@ import AboutPicturesDataAnalysis from "./analyses/ministories/about-pictures-dat
 import AdViewsAnalysis from "./analyses/ministories/ad-views-analysis.js";
 import OnOffFacebookAdvertisersAnalysis from "./analyses/ministories/on-off-facebook-advertisers-analysis.js";
 import PostReactionsTypesAnalysis from "./analyses/ministories/post-reactions-types-analysis.js";
+import { Telemetry } from "./analyses/utils/performance-telemetry.js";
+import MinistoriesStatusAnalysis from "./analyses/report/ministories-status-analysis.js";
 
 const subAnalyses = [
     DataStructureBubblesAnalysis,
     ActivitiesAnalysis,
+    PostReactionsTypesAnalysis,
     MessagesAnalysis,
-    OnOffFacebookEventsAnalysis,
     AboutPicturesDataAnalysis,
     AdvertisingValueAnalysis,
+    OnOffFacebookEventsAnalysis,
+    ConnectedAdvertisersAnalysis,
 
-    PostReactionsTypesAnalysis,
     ExportTitleAnalysis,
     ExportSizeAnalysis,
     DataChartsAnalysis,
     DataGroupsAnalysis,
     JsonFilesBubblesAnalysis,
-    ConnectedAdvertisersAnalysis,
     InteractedWithAdvertisersAnalysis,
     AdInterestsAnalysis,
     OffFacebookEventsTypesChartAnalysis,
@@ -79,7 +81,7 @@ const subAnalyses = [
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,
-    UknownTopLevelFoldersAnalysis,
+    UnknownTopLevelFoldersAnalysis,
     MissingCommonJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
     OffFacebookEventTypesAnalysis,
@@ -93,6 +95,18 @@ const subAnalyses = [
     // them before too long - or show them behind some kind of flag, or
     // developer mode.
     return ![
+        DataChartsAnalysis,
+        InteractedWithAdvertisersAnalysis,
+        OffFacebookEventsTypesChartAnalysis,
+        MessagesDetailsAnalysis,
+        EmailAddressesAnalysis,
+        SearchesAnalysis,
+        FriendsAnalysis,
+        ReceivedFriendRequestsAnalysis,
+        PagesOverviewAnalysis,
+        SesssionActivityLocationsAnalysis,
+        AdViewsAnalysis,
+        OnOffFacebookAdvertisersAnalysis,
         ExportTitleAnalysis,
         ExportSizeAnalysis,
         DataGroupsAnalysis,
@@ -110,6 +124,8 @@ const subAnalyses = [
     ].includes(analysis);
 });
 
+export const NUMBER_OF_ANALYSES = subAnalyses.length;
+
 class UnrecognizedData {
     constructor(analysesResults) {
         this._activeReportAnalyses = analysesResults
@@ -124,6 +140,11 @@ class UnrecognizedData {
         const inactiveCardsSummary = new InactiveCardsSummary(analysesResults);
         if (inactiveCardsSummary.active) {
             this._activeReportAnalyses.push(inactiveCardsSummary);
+        }
+
+        const statusAnalysis = new MinistoriesStatusAnalysis(analysesResults);
+        if (statusAnalysis.active) {
+            this._activeReportAnalyses.push(statusAnalysis);
         }
 
         this.active = this._activeReportAnalyses.length > 0;
@@ -158,30 +179,61 @@ class UnrecognizedData {
     }
 }
 
+class AnalysisExecutionResult {
+    constructor(analysis, status, executionTime) {
+        this._analysis = analysis;
+        this._status = status || createSuccessStatus();
+        this._executionTime = executionTime;
+    }
+
+    get analysis() {
+        return this._analysis;
+    }
+
+    get status() {
+        return this._status;
+    }
+
+    get executionTime() {
+        return this._executionTime;
+    }
+
+    get reportJsonData() {
+        return {
+            analysisName: this.analysis.id,
+            activationStatus: this.analysis.active ? "ACTIVE" : "INACTIVE",
+            executionStatus: {
+                name: this.status.name,
+                message: this.status.message,
+            },
+            executionTime: this.executionTime.toFixed(0),
+            customData: this.analysis.customReportData,
+        };
+    }
+}
+
 export async function runAnalysis(analysisClass, enrichedData) {
     const subAnalysis = new analysisClass();
 
-    return subAnalysis
-        .analyze(enrichedData)
-        .then((status) => {
-            const runStatus = status || createSuccessStatus(analysisClass);
-            return {
-                analysis: subAnalysis,
-                status: runStatus,
-            };
-        })
-        .catch((error) => {
-            console.log(error);
-            return {
-                analysis: subAnalysis,
-                status: createErrorStatus(analysisClass, error),
-            };
-        });
+    const telemetry = new Telemetry();
+    try {
+        const status = await subAnalysis.analyze(enrichedData);
+        return new AnalysisExecutionResult(
+            subAnalysis,
+            status,
+            telemetry.elapsedTime()
+        );
+    } catch (error) {
+        return new AnalysisExecutionResult(
+            subAnalysis,
+            createErrorStatus(error),
+            telemetry.elapsedTime()
+        );
+    }
 }
 
-export async function analyzeFile(file, facebookAccount) {
-    const zipFile = new ZipFile(file, window.pod);
-    const enrichedData = { ...file, zipFile, facebookAccount };
+export async function analyzeZip(zipData, zipFile, facebookAccount, pod) {
+    const enrichedData = { ...zipData, zipFile, facebookAccount, pod };
     const analysesResults = await Promise.all(
         subAnalyses.map(async (subAnalysisClass) => {
             return runAnalysis(subAnalysisClass, enrichedData);
@@ -199,4 +251,9 @@ export async function analyzeFile(file, facebookAccount) {
         analyses: activeGlobalAnalyses,
         unrecognizedData: new UnrecognizedData(analysesResults),
     };
+}
+
+export async function analyzeFile(zipData, facebookAccount) {
+    const zipFile = await ZipFile.createWithCache(zipData, window.pod);
+    return await analyzeZip(zipData, zipFile, facebookAccount, window.pod);
 }

@@ -276,7 +276,7 @@ const DataExplorationScreen = () => {
                     </p>
 
                     <InfoButton
-                        route="data-types-info"
+                        route="/data-types-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                     {filler}
@@ -306,10 +306,6 @@ const DataExplorationScreen = () => {
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <InfoButton
-                        route="data-types-info"
-                        saveActiveIndex={saveActiveIndex}
-                    />
                 </div>
             );
         else if (activeScreen.startsWith("dataTypesCategory"))
@@ -334,7 +330,7 @@ const DataExplorationScreen = () => {
                     </p>
 
                     <InfoButton
-                        route="data-category-info"
+                        route="/data-category-info"
                         saveActiveIndex={saveActiveIndex}
                         stateChange={{
                             explorationState: {
@@ -367,10 +363,6 @@ const DataExplorationScreen = () => {
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <InfoButton
-                        route="data-correlation-info"
-                        saveActiveIndex={saveActiveIndex}
-                    />
                 </div>
             );
         else if (activeScreen === "dataTypesCorrelation")
@@ -396,7 +388,7 @@ const DataExplorationScreen = () => {
                     </p>
 
                     <InfoButton
-                        route="data-correlation-info"
+                        route="/data-correlation-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                 </div>
@@ -435,7 +427,7 @@ const DataExplorationScreen = () => {
                     </p>
 
                     <InfoButton
-                        route="companies-info"
+                        route="/companies-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                 </div>
@@ -463,10 +455,6 @@ const DataExplorationScreen = () => {
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <InfoButton
-                        route="companies-info"
-                        saveActiveIndex={saveActiveIndex}
-                    />
                 </div>
             );
         else if (
@@ -507,7 +495,7 @@ const DataExplorationScreen = () => {
                     </p>
 
                     <InfoButton
-                        route="companies-info"
+                        route="/companies-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                 </div>
@@ -555,7 +543,9 @@ const DataExplorationScreen = () => {
     useEffect(() => {
         if (!swiper) return;
 
-        const scrollableElements = document.querySelectorAll(".scrolling-area");
+        const scrollableElements = document.querySelectorAll(
+            ".scrolling-area, .entity-list"
+        );
         for (let element of scrollableElements)
             makeSwiperContentScrollable(element);
 
@@ -682,7 +672,7 @@ const DataExplorationScreen = () => {
                                 <CompanyIndustryList
                                     companyIndustryMap={companyIndustryMap}
                                     ecoItems={dataRecipients.length > 100}
-                                    saveActiveIndex={saveActiveIndex}
+                                    onClick={saveActiveIndex}
                                 />
                             </div>
                         </SwiperSlide>

@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.provider.OpenableColumns
 import coop.polypoly.polypod.Preferences
+import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.polyNav.ZipTools
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
@@ -18,7 +19,8 @@ import kotlin.coroutines.EmptyCoroutineContext
 open class PolyOut(
     val context: Context
 ) {
-    private var readdirCache = mutableMapOf<String, Array<String>>()
+    private var readDirCache =
+        mutableMapOf<String, Array<Map<String, String>>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
     private val coroutineScope = CoroutineScope(EmptyCoroutineContext)
 
@@ -31,25 +33,25 @@ open class PolyOut(
             context.filesDir.absolutePath + "/featureFiles"
 
         fun idToPath(id: String, context: Context): String {
-            if (Preferences.currentFeatureName == null) {
+            if (FeatureStorage.activeFeature == null) {
                 throw Exception("Cannot execute without a feature")
             }
-            val currentFeatureName = Preferences.currentFeatureName!!
+            val activeFeatureId = FeatureStorage.activeFeature!!.id
             val pureId = id
                 // Previous polyPod builds used polypod:// URLs for files
                 .removePrefix("polypod://")
                 .removePrefix(fsPrefix)
                 .removePrefix("$fsFilesRoot/")
-                .removePrefix("$currentFeatureName/")
+                .removePrefix("$activeFeatureId/")
 
-            return filesPath(context) + "/" + Preferences.currentFeatureName +
+            return filesPath(context) + "/" + activeFeatureId +
                 "/" + pureId
         }
     }
 
     private fun pathToId(path: File, context: Context): String {
         return fsPrefix + path.relativeTo(
-            File(filesPath(context) + "/" + Preferences.currentFeatureName)
+            File(filesPath(context) + "/" + FeatureStorage.activeFeature?.id)
         ).path
     }
 
@@ -100,28 +102,37 @@ open class PolyOut(
         return result
     }
 
-    open suspend fun readdir(
+    open suspend fun readDir(
         id: String
-    ): Array<String> {
-
+    ): Array<Map<String, String>> {
         val fs = Preferences.getFileSystem(context)
         if (id == "") {
             val newFs = fs.filter {
                 File(idToPath(it.key, context)).exists()
             }
             Preferences.setFileSystem(context, newFs)
-            return newFs.keys.toTypedArray()
+            return newFs.keys.map {
+                mutableMapOf<String, String>(
+                    "id" to it,
+                    "path" to it.removePrefix(fsPrefix)
+                )
+            }.toTypedArray()
         }
-        if (readdirCache.contains(id)) {
-            return readdirCache.get(id)!!
+        if (readDirCache.contains(id)) {
+            return readDirCache.get(id)!!
         }
-        val retList = mutableListOf<String>()
-        File(idToPath(id, context)).walkTopDown().forEach {
-            retList.add(
+        val retList = mutableListOf<Map<String, String>>()
+
+        val dir = File(idToPath(id, context))
+        dir.walkTopDown().forEach {
+            val idPath =
                 "$fsFilesRoot/" + pathToId(it, context).removePrefix(fsPrefix)
-            )
+            val relPath = it.relativeTo(dir).path
+            val idMap =
+                mutableMapOf<String, String>("id" to idPath, "path" to relPath)
+            retList.add(idMap)
         }
-        readdirCache[id] = retList.toTypedArray()
+        readDirCache[id] = retList.toTypedArray()
         return retList.toTypedArray()
     }
 
@@ -150,9 +161,9 @@ open class PolyOut(
                     val fs = Preferences.getFileSystem(context).toMutableMap()
                     fs[fsPrefix + newId] = fileName
                     Preferences.setFileSystem(context, fs)
-                    val featureName = Preferences.currentFeatureName
+                    val featureId = FeatureStorage.activeFeature?.id
                         ?: throw Error("Cannot import for unknown feature")
-                    val targetPath = "$featureName/$newId"
+                    val targetPath = "$featureId/$newId"
                     ZipTools.unzipAndEncrypt(inputStream, context, targetPath)
                 }
             }

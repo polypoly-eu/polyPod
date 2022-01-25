@@ -31,7 +31,7 @@ class FeatureCardAdapter(
 
     private fun updateThumbnail(view: View, feature: Feature) {
         val thumbnail = view.findViewById<ImageView>(R.id.thumbnail)
-        thumbnail.setBackgroundColor(feature.primaryColor)
+        thumbnail.setBackgroundColor(feature.thumbnailColor)
         feature.thumbnail?.let {
             thumbnail.setImageBitmap(it)
         }
@@ -55,6 +55,7 @@ class FeatureCardAdapter(
         view.setOnClickListener {
             // FIXME - navigation assumes we're coming from FirstFragment,
             // which might not necessary be true
+
             val action =
                 FeatureListFragmentDirections
                     .actionFeatureListFragmentToFeatureFragment(

@@ -1,10 +1,42 @@
-.advertising-value-mini-story li {
-    font-weight: bold;
+.advertising-value-mini-story ul {
+    font-size: 14px;
+    list-style-type: disc;
+    list-style-position: outside;
+    padding-left: 25px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+.advertising-value-mini-story .summary {
+    margin-bottom: 36px;
+    font-size: 20px;
+}
+.advertising-value-mini-story ul li p {
+    font-family: "Jost Bold";
     font-size: 34px;
-    margin: 20px 0;
     line-height: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.detail-view {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-.advertising-value-mini-story ul {
-    margin-left: 10px;
+.detail-view .intro {
+    margin-bottom: 28px;
+}
+.detail-view ul {
+    margin: 0px;
+    padding-bottom: 60px;
+}
+
+.detail-view .items {
+    font-family: "Jost Medium";
+    color: var(--color-gray-50);
+    font-size: 20px;
+}
+
+.detail-view .source {
+    margin-top: 32px;
 }

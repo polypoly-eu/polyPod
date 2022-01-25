@@ -7,6 +7,7 @@ class Feature {
     let author: String?
     let description: String?
     let primaryColor: Color?
+    let thumbnailColor: Color?
     let thumbnail: URL?
     private let links: [String: String]
     
@@ -28,12 +29,17 @@ class Feature {
         name = translations?.name ?? manifest.name ?? id
         author = translations?.author ?? manifest.author
         description = translations?.description ?? manifest.description
-        primaryColor = parseColor(hexValue: translations?.primaryColor ?? manifest.primaryColor)
+        let primaryColor = parseColor(hexValue: translations?.primaryColor ?? manifest.primaryColor)
+        self.primaryColor = primaryColor
+        thumbnailColor = parseColor(hexValue: translations?.thumbnailColor ?? manifest.thumbnailColor) ?? primaryColor
         thumbnail = findThumbnail(
             featurePath: path,
             thumbnailPath: translations?.thumbnail ?? manifest.thumbnail
         )
-        links = translations?.links ?? manifest.links ?? [:]
+        links = mergeLinks(
+            original: manifest.links,
+            translated: translations?.links
+        )
     }
     
     func findUrl(target: String) -> String? {
@@ -52,12 +58,13 @@ private func readManifest(_ basePath: URL) -> FeatureManifest {
     if let manifest = FeatureManifest.load(path: manifestPath) {
         return manifest
     }
-    print("Failed to load feature manifest from: \(manifestPath)")
+    Log.error("Failed to load feature manifest from: \(manifestPath)")
     return FeatureManifest(
         name: nil,
         author: nil,
         description: nil,
         thumbnail: nil,
+        thumbnailColor: nil,
         primaryColor: nil,
         links: nil,
         translations: nil
@@ -80,8 +87,19 @@ private func findThumbnail(featurePath: URL, thumbnailPath: String?) -> URL? {
     }
     let fullPath = featurePath.appendingPathComponent(thumbnailPath)
     if !FileManager.default.fileExists(atPath: fullPath.path) {
-        print("Error: Feature thumbnail at \(thumbnailPath) does not exist")
+        Log.error("Error: Feature thumbnail at \(thumbnailPath) does not exist")
         return nil
     }
     return fullPath
+}
+
+private func mergeLinks(
+    original: [String: String]?,
+    translated: [String: String]?
+) -> [String: String] {
+    var links = original ?? [:]
+    if let translated = translated {
+        links = links.merging(translated) { (_, new) in new }
+    }
+    return links
 }

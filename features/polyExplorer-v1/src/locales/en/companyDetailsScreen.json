@@ -1,0 +1,30 @@
+{
+    "tab.location":
+        "Location",
+    "tab.location.fallbackText":
+        "No location available yet.",
+    "tab.structure":
+        "Structure",
+    "tab.structure.fallbackText":
+        "No data available yet.",
+    "tab.revenue":
+        "Revenue",
+    "tab.revenue.fallbackText":
+        "No data available yet.",
+    "jurisdictions":
+        "Data regions",
+    "source":
+        "Source",
+    "button.exploreData":
+        "Explore data",
+    "K":
+        "K",
+    "M":
+        "M",
+    "B":
+        "B",
+        "no-data":
+        "No data",
+    "description.fallback":
+        "We don't have a description for this company yet, but we are adding new ones every day!"
+}

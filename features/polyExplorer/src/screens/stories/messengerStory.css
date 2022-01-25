@@ -1,7 +1,0 @@
-.messenger-parts {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background: linear-gradient(180deg, var(--color-primary-messenger-story) 0%, var(--color-secondary-messenger-story) 50%);
-}

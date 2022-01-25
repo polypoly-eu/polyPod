@@ -4,7 +4,8 @@ import FacebookAccount from "./entities/facebook-account.js";
 import OffFacebookEventsImporter from "./importers/off-facebook-events-importer.js";
 import AdInterestsImporter from "./importers/ad-interests-importer.js";
 import ConnectedAdvertisersImporter from "./importers/connected-advertisers-importer.js";
-import InteractedWithAdvertisersImporter from "./importers/interacted-advertisers-importer.js";
+import ConnectedAdvertisersAllTypesImporter from "./importers/connected-advertisers-all-types-importer.js";
+import InteractedWithAdvertisersImporter from "./importers/interacted-with-advertisers-importer.js";
 import FriendsImporter from "./importers/friends-importer.js";
 import FollowedPagesImporter from "./importers/pages-followed-importer.js";
 import ReceivedFriendRequestsImporter from "./importers/friend-requests-received-importer.js";
@@ -16,18 +17,21 @@ import MessagesImporter from "./importers/messages-importer.js";
 import AdminRecordsImporter from "./importers/admin-records-importer.js";
 import AccountSessionActivitiesImporter from "./importers/account-session-activities-importer.js";
 import NameImporter from "./importers/name-importer.js";
-
-import {
-    IMPORT_SUCCESS,
-    createErrorResult,
-} from "./importers/utils/importer-status.js";
 import LanguageAndLocaleImporter from "./importers/language-and-locale-importer.js";
 import RecentlyViewedAdsImporter from "./importers/recently-viewed-ads-importer.js";
+import CommentsImporter from "./importers/comments-importer.js";
 import PostReactionsImporter from "./importers/post-reactions-importer.js";
+import { Telemetry } from "./analyses/utils/performance-telemetry.js";
+import {
+    createErrorStatus,
+    createSuccessStatus,
+} from "./analyses/utils/analysis-status.js";
+import PostsImporter from "./importers/posts-importer.js";
 
 const dataImporters = [
     AdInterestsImporter,
     ConnectedAdvertisersImporter,
+    ConnectedAdvertisersAllTypesImporter,
     OffFacebookEventsImporter,
     InteractedWithAdvertisersImporter,
     FriendsImporter,
@@ -43,8 +47,50 @@ const dataImporters = [
     NameImporter,
     LanguageAndLocaleImporter,
     RecentlyViewedAdsImporter,
+    CommentsImporter,
     PostReactionsImporter,
+    PostsImporter,
 ];
+
+export const NUMBER_OF_IMPORTERS = dataImporters.length;
+
+class ImporterExecutionResult {
+    constructor(importer, status, executionTime) {
+        this._importer = importer;
+        this._status = status || createSuccessStatus();
+        this._executionTime = executionTime;
+    }
+
+    get importer() {
+        return this._importer;
+    }
+
+    get status() {
+        return this._status;
+    }
+
+    get executionTime() {
+        return this._executionTime;
+    }
+
+    _extractDataFromStatus(status) {
+        return {
+            name: status.name,
+            message: status.message,
+        };
+    }
+
+    get reportJsonData() {
+        return {
+            formatVersion: "v2",
+            importerName: this.importer.constructor.name,
+            executionTime: this.executionTime.toFixed(0),
+            status: Array.isArray(this.status)
+                ? this.status.map((each) => this._extractDataFromStatus(each))
+                : this._extractDataFromStatus(this.status),
+        };
+    }
+}
 
 export async function runImporter(
     importerClass,
@@ -53,18 +99,26 @@ export async function runImporter(
     pod
 ) {
     const importer = new importerClass();
-    return importer
-        .import({ zipFile, facebookAccount, pod })
-        .then(
-            (status) =>
-                status || {
-                    status: IMPORT_SUCCESS,
-                    importerClass,
-                }
-        )
-        .catch((error) => {
-            return createErrorResult(importerClass, error);
+
+    const telemetry = new Telemetry();
+    try {
+        const status = await importer.import({
+            zipFile,
+            facebookAccount,
+            pod,
         });
+        return new ImporterExecutionResult(
+            importer,
+            status,
+            telemetry.elapsedTime()
+        );
+    } catch (error) {
+        return new ImporterExecutionResult(
+            importer,
+            createErrorStatus(error),
+            telemetry.elapsedTime()
+        );
+    }
 }
 
 export async function runImporters(
@@ -73,21 +127,11 @@ export async function runImporters(
     facebookAccount,
     pod
 ) {
-    const importingResultsPerImporter = await Promise.all(
+    return await Promise.all(
         importerClasses.map(async (importerClass) => {
             return runImporter(importerClass, zipFile, facebookAccount, pod);
         })
     );
-
-    const importingResults = importingResultsPerImporter.reduce(
-        (results, importResult) =>
-            results.concat(
-                Array.isArray(importResult) ? importResult : [importResult]
-            ),
-        []
-    );
-
-    return importingResults;
 }
 
 export async function importZip(zipFile, pod) {
@@ -105,6 +149,6 @@ export async function importZip(zipFile, pod) {
 }
 
 export async function importData(zipData) {
-    const zipFile = new ZipFile(zipData, window.pod);
-    return importZip(zipFile, zipData, window.pod);
+    const zipFile = await ZipFile.createWithCache(zipData, window.pod);
+    return importZip(zipFile, window.pod);
 }

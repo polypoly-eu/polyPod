@@ -1,9 +1,11 @@
-import React, { useRef } from "react";
+import React from "react";
 import i18n from "../../../i18n";
 import RootAnalysis from "./root-analysis";
-import InfoButton from "../../../components/buttons/infoButton/infoButton.jsx";
 
-import BarChart from "../../../components/dataViz/barChart.jsx";
+import {
+    MessagesMiniStoryDetails,
+    MessagesMiniStorySummary,
+} from "../../../components/messagesMiniStory/messagesMiniStory.jsx";
 
 export default class MessagesAnalysis extends RootAnalysis {
     get label() {
@@ -15,18 +17,11 @@ export default class MessagesAnalysis extends RootAnalysis {
     }
 
     async analyze({ facebookAccount }) {
-        this._messagesThreadsData = [];
-        this._messagesCount = 0;
-        this.active = facebookAccount.messageThreadsCount > 0;
-        if (!this.active) {
-            return;
-        }
-
         this._messagesCount = facebookAccount.messagesCount;
         this._messagesThreadsData = [];
         const usernames = new Set();
+
         facebookAccount.forEachMessageThread((messageThread) => {
-            var wordCount = messageThread.totalWordCount;
             var firstChatTimestamp = 0;
             var lastChatTimestamp = 0;
 
@@ -55,92 +50,35 @@ export default class MessagesAnalysis extends RootAnalysis {
                 title: messageThread.title,
                 count: messageThread.messagesCount,
                 extraData: {
-                    wordCount,
                     firstChatDate,
                     lastChatDate,
                 },
             });
-
-            this._messagesThreadsData.sort((a, b) => b.count - a.count);
-
-            this._totalUsernamesCount = usernames.size;
         });
-    }
 
-    _calculateFontSize(text, maxWidth) {
-        // TODO: Extract text size affecting styles from target element
-        const minFontSize = 10;
-        const maxFontSize = 80;
-        const canvas = document.createElement("canvas");
-        const context = canvas.getContext("2d");
-        for (let fontSize = maxFontSize; fontSize > minFontSize; fontSize--) {
-            context.font = `${fontSize}px Jost`;
-            if (context.measureText(text).width <= maxWidth) return fontSize;
-        }
-        return minFontSize;
+        this._messagesThreadsData.sort((a, b) => b.count - a.count);
+        this._totalUsernamesCount = usernames.size;
+
+        this.active = this._messagesThreadsData.length > 0;
     }
 
     renderSummary() {
-        const refWidth = useRef(0);
-
-        const fontSize = this._calculateFontSize(
-            this._messagesCount,
-            refWidth.current.clientWidth
-        );
-
         return (
-            <>
-                <h2
-                    className="messages-count"
-                    style={{ fontSize: fontSize }}
-                    ref={refWidth}
-                >
-                    {this._messagesCount}
-                </h2>
-                <p>
-                    {i18n.t("explore:messages.summary", {
-                        messages: this._messagesCount,
-                        threads: this._messagesThreadsData.length,
-                        people: this._totalUsernamesCount,
-                    })}
-                </p>
-            </>
+            <MessagesMiniStorySummary
+                messagesCount={this._messagesCount}
+                messagesThreadsData={this._messagesThreadsData}
+                totalUsernamesCount={this._totalUsernamesCount}
+            />
         );
     }
 
     renderDetails() {
         return (
-            <>
-                <p>
-                    {i18n.t("messagesMiniStory:number.chats", {
-                        number_chats: this._totalUsernamesCount,
-                    })}
-                </p>
-                <BarChart
-                    data={this._messagesThreadsData}
-                    screenPadding={48}
-                    footerContent={({ extraData }) => (
-                        <>
-                            <div className="bar-extra-info">
-                                {i18n.t("messagesMiniStory:first.chat")}
-                                {extraData.firstChatDate
-                                    ? extraData.firstChatDate.toDateString()
-                                    : "unknown"}
-                            </div>
-                            <div className="bar-extra-info">
-                                {i18n.t("messagesMiniStory:last.interaction")}
-                                {extraData.lastChatDate
-                                    ? extraData.lastChatDate.toDateString()
-                                    : "unknown"}
-                            </div>
-                        </>
-                    )}
-                />
-                <InfoButton route="/report/details/messages-info" />
-                <p className="source">
-                    {i18n.t("common:source.your.facebook.data")}
-                </p>
-            </>
+            <MessagesMiniStoryDetails
+                messagesCount={this._messagesCount}
+                messagesThreadsData={this._messagesThreadsData}
+                totalUsernamesCount={this._totalUsernamesCount}
+            />
         );
     }
 }

@@ -6,10 +6,10 @@ export function wrapViewsData(data) {
 
 export const RECENTLY_VIEWED_LOCALE = {
     de: {
-        watched: {
-            categoryName: "Videos und Shows auf Facebook Watch",
+        video: {
+            categoryName: "Gesehene Videos",
             categoryDescription:
-                "Videos und Shows, die du dir kürzlich auf Facebook Watch angesehen hast, und die Zeit, die du mit dem Ansehen verbracht hast.",
+                "Diese Videos hast du dir in den letzten 90 Tagen angesehen.",
         },
         post: {
             categoryName: "Beiträge, die dir im News Feed angezeigt wurden",
@@ -24,10 +24,9 @@ export const RECENTLY_VIEWED_LOCALE = {
         },
     },
     en: {
-        watched: {
-            categoryName: "Facebook Watch Videos and Shows",
-            categoryDescription:
-                "Videos and shows you've recently visited or viewed from Facebook Watch and time you've spent watching shows",
+        video: {
+            categoryName: "Videos you have watched",
+            categoryDescription: "Videos you have watched in the last 90 days.",
         },
         post: {
             categoryName: "Posts that have been shown to you in your News Feed",
@@ -41,10 +40,9 @@ export const RECENTLY_VIEWED_LOCALE = {
         },
     },
     da_DK: {
-        watched: {
-            categoryName: "Videoer og serier på Facebook Watch",
-            categoryDescription:
-                "Videoer og serier, du for nylig har besøgt eller set fra Facebook Watch, og den tid du har brugt på at se serier",
+        video: {
+            categoryName: "Videoer, du har set",
+            categoryDescription: "Videoer, du har set i de seneste 90 dage.",
         },
         post: {
             categoryName: "Opslag, som er blevet vist til dig i dine nyheder",
@@ -59,12 +57,18 @@ export const RECENTLY_VIEWED_LOCALE = {
     },
 };
 
+export const AD_VIEWS_EXPECTED_DATA = {
+    numberOfAds: 3,
+    numberOfAdViews: 4,
+    numberOfRelatedAccounts: 2,
+};
+
 export function createAdViewsData(languageCode) {
     const languageData = RECENTLY_VIEWED_LOCALE[languageCode];
     return wrapViewsData([
         {
-            name: languageData.watched.categoryName,
-            description: languageData.watched.categoryDescription,
+            name: languageData.video.categoryName,
+            description: languageData.video.categoryDescription,
             children: [],
         },
         {
@@ -184,8 +188,8 @@ export function createEnglishDatasetWithMissingAdsCategory() {
     const languageData = RECENTLY_VIEWED_LOCALE["en"];
     return wrapViewsData([
         {
-            name: languageData.watched.categoryName,
-            description: languageData.watched.categoryDescription,
+            name: languageData.video.categoryName,
+            description: languageData.video.categoryDescription,
             children: [],
         },
         {
@@ -200,8 +204,8 @@ export function createEnglishDatasetWithEmptyAdsCategory() {
     const languageData = RECENTLY_VIEWED_LOCALE["en"];
     return wrapViewsData([
         {
-            name: languageData.watched.categoryName,
-            description: languageData.watched.categoryDescription,
+            name: languageData.video.categoryName,
+            description: languageData.video.categoryDescription,
             children: [],
         },
         {

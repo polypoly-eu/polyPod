@@ -1,11 +1,11 @@
 package coop.polypoly.polypod.polynav
 
 import android.content.Context
-import android.net.Uri
 import android.webkit.WebView
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
+import coop.polypoly.polypod.ExternalFile
 import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import kotlinx.coroutines.runBlocking
@@ -25,16 +25,18 @@ class PolyNavTest {
     init {
         val context: Context = ApplicationProvider.getApplicationContext()
         val webView = WebView(context)
-        polyNav = PolyNav(webView, context = context)
+        polyNav = PolyNav(webView)
     }
 
     @Ignore
     @Test
-    fun `pickFile returns file selected by the user`() = runBlocking {
-        val fileData = Uri.parse("*")
-        polyNav.setNavObserver(PolyNavObserver(onPickFile = { fileData }))
+    fun `pickFile returns external file object with url selected by the user`
+    () = runBlocking {
+        val testFile =
+            ExternalFile(name = "testFile.zip", url = "*", size = 912374)
+        polyNav.setNavObserver(PolyNavObserver(onPickFile = { testFile }))
         val result = polyNav.pickFile(mimeType)
-        assertThat(result).isEqualTo(fileData)
+        assertThat(result).isEqualTo(testFile)
     }
 
     @Test

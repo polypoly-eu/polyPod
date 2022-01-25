@@ -1,8 +1,8 @@
 .bar-chart {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 350px;
     margin: 0 auto;
     flex: 1 1 auto;
     min-height: 0;
@@ -58,7 +58,11 @@
 .bar-chart .scale .origin div {
     height: 10px;
     width: 1px;
-    background-color: var(--color-gray-50);
+    background-color: var(--color-gray-500);
+}
+
+.bar-chart .scale .origin p {
+    color: var(--color-gray-400);
 }
 
 .bar-chart .scale .tick-box {
@@ -70,7 +74,7 @@
     position: absolute;
     height: 10px;
     width: 1px;
-    background-color: var(--color-gray-50);
+    background-color: var(--color-gray-500);
     right: 0;
     bottom: 0;
 }
@@ -79,7 +83,7 @@
     position: absolute;
     height: 4px;
     width: 1px;
-    background-color: var(--color-gray-400);
+    background-color: var(--color-gray-500);
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
@@ -90,6 +94,27 @@
     right: 0;
     top: 0;
     transform: translateX(4px);
+    color: var(--color-gray-400);
+}
+
+.bar-chart .scale .max-indicator {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-6px);
+}
+
+.bar-chart .scale .max-indicator p {
+    font-size: 12px;
+    transform: translateX(-38px);
+}
+
+.bar-chart .scale .max-indicator .marker {
+    background-color: var(--color-gray-50);
+    width: 1px;
+    height: 15px;
+    transform: translateX(-1px);
 }
 
 .bar-chart .scrollable-wrapper {
@@ -115,15 +140,19 @@
 }
 
 .bar-chart .bar-box .above-bar p {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 150%;
-    margin: 4px 4px 0 0;
+    margin: 12px 4px 0 0;
 }
 
 .bar-chart .bar-box .above-bar img {
     transform: translateY(12px);
     width: 15px;
     height: 18px;
+}
+
+.bar-chart .bar-box .above-bar .group-icon {
+    margin-right: 8px;
 }
 
 .bar-chart .bar-box .bottom-bar p {
@@ -152,4 +181,15 @@
 .bar-extra-info {
     font-size: 12px;
     line-height: 150%;
+}
+
+.bar-extra-info {
+    font-size: 12px;
+    line-height: 150%;
+}
+
+.bar-extra-info p {
+    display: inline;
+    margin: 0;
+    color: var(--color-gray-400);
 }

@@ -1,10 +1,12 @@
 {
-    "title": "Deine Aktivitäten",
-    "summary": "Seit zu Facebook beigetreten bist haben diese {{number_activities}} deiner Aktivitäten mit Datum und Zeit erfasst",
+    "title": "Daten von Ihnen und über Sie",
+    "summary": "Seit Sie Facebook beigetreten sind, wurden von Ihnen {{number_activities}} Dateneinträge mit Uhrzeit und Datum erfasst.",
     "tab.year": "Jahr",
-    "tab.total": "Total",
-    "tab.events.total": "Events ({{number_events}} gesamt)",
-    "tab.events.yearly": "Events ({{number_events}} gesamt für das angezeigte Jahr",
-    "number.events": "Anzahl der Events",
-    "number.events.thousands": "Anzahl der Events (Tausend)"
+    "tab.total": "Gesamt",
+    "tab.events.total": "Einträge ({{number_events}} gesamt)",
+    "tab.events.yearly": "Einträge ({{number_events}} für das angezeigte Jahr)",
+    "tab.arrow.left": "Vorheriges",
+    "tab.arrow.right": "Nächstes",
+    "number.events": "Anzahl der Einträge",
+    "number.events.thousands": "Anzahl der Einträge (in Tausend)"
 }

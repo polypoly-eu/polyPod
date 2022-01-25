@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
-import { PolyChart } from "@polypoly-eu/poly-look";
+import { ChipGroup, PolyChart } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
 
@@ -14,15 +14,30 @@ const DataStructureMiniStory = ({ data }) => {
         return b.value - a.value;
     });
 
+    const totalFiles = data.reduce(
+        (previous, current) => previous + current.count,
+        0
+    );
+
     const bubbleVizWidth = 400;
     const bubbleVizHeight = 400;
     const dataBubblesDarkColor = "#0f1938";
     const dataBubblesLightColor = "#f7fafc";
     const [selectedFolder, setSelectedFolder] = useState(data[0].title);
 
-    const handleSelectedFolder = (ev, newSelectedFolder) => {
-        ev.preventDefault();
-        setSelectedFolder(newSelectedFolder);
+    const totalTitle = i18n.t("dataStructureMiniStory:total.chip");
+
+    const dataWithTotal = [
+        ...data,
+        { title: totalTitle, count: totalFiles, value: totalFiles },
+    ];
+
+    const amountOfFiles = dataWithTotal.find(
+        (bubble) => bubble.title === selectedFolder
+    )?.count;
+
+    const handleFolderSelected = (buttonContent) => {
+        setSelectedFolder(buttonContent);
     };
 
     const handleBubbleClick = (_, node) => {
@@ -37,52 +52,49 @@ const DataStructureMiniStory = ({ data }) => {
         }
     };
 
-    const amountOfFiles = data.find(
-        (bubble) => bubble.title === selectedFolder
-    )?.count;
+    const category =
+        selectedFolder === totalTitle
+            ? ""
+            : i18n.t("dataStructureMiniStory:category");
 
     return (
         <>
             <div>
-                <p>
-                    {i18n.t("dataStructureMiniStory:folder.info", {
-                        selected_folder: selectedFolder,
-                        amount_of_files: amountOfFiles,
-                    })}
-                </p>
+                <p
+                    dangerouslySetInnerHTML={{
+                        __html: i18n.t("dataStructureMiniStory:folder.info", {
+                            category: category,
+                            selected_folder: selectedFolder,
+                            amount_of_files: amountOfFiles,
+                        }),
+                    }}
+                />
                 <PolyChart
                     type="bubble-cluster"
                     data={data}
                     width={bubbleVizWidth}
                     height={bubbleVizHeight}
-                    bubbleColor={bubbleColor}
+                    bubbleColor={
+                        selectedFolder === totalTitle
+                            ? dataBubblesLightColor
+                            : bubbleColor
+                    }
                     textColor={dataBubblesDarkColor}
                     onBubbleClick={handleBubbleClick}
                 />
             </div>
-            <div className="data-structure">
-                {data.map((bubble, index) => {
-                    return (
-                        <button
-                            className={
-                                bubble.title === selectedFolder
-                                    ? "data-structure-button selected-data"
-                                    : "data-structure-button"
-                            }
-                            onClick={(ev) =>
-                                handleSelectedFolder(ev, bubble.title)
-                            }
-                            key={index}
-                        >
-                            {bubble.title}
-                        </button>
-                    );
+            <ChipGroup
+                chipsContent={dataWithTotal.map((d) => {
+                    return { id: d.title };
                 })}
-                <InfoButton route="/report/data-structure-info" />
-                <p className="source">
-                    {i18n.t("common:source.your.facebook.data")}
-                </p>
-            </div>
+                defaultActiveChips={[selectedFolder]}
+                onChipClick={handleFolderSelected}
+                theme={"dark"}
+            />
+            <InfoButton route="/report/data-structure-info" />
+            <p className="source data-structure-source">
+                {i18n.t("common:source.your.facebook.data")}
+            </p>
         </>
     );
 };

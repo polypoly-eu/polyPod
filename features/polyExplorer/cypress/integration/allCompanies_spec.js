@@ -1,25 +1,11 @@
-const INDEX_ROUTE = "dist/index.html";
+import { startWithCompanies } from "../helpers";
+
 describe("All companies", () => {
     beforeEach(() => {
-        cy.visit(INDEX_ROUTE);
-        cy.get(".button-container button")
-            .click()
-            .then(() => {
-                return cy.get(".nav-button-container > :nth-child(2)").click();
-            });
+        startWithCompanies();
     });
 
-    it(`should arrive at the list of all companies`, () => {
-        cy.get(
-            ":nth-child(1) > .company-group-companies > :nth-child(1)"
-        ).click();
-    });
-
-    it(`should be able to access on the company short info`, () => {
-        cy.get(".company-short-info > .info-box > .company-name");
-    });
-
-    it(`should show the companies which match with the filters`, () => {
+    it(`should show the companies that pass the filters`, () => {
         cy.get(".filter-button")
             .click()
             .then(() => {

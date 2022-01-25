@@ -55,7 +55,7 @@ class Network: NetworkProtocol {
         semaphore.wait()
         
         if let errorMessage = errorMessage {
-            print("network.httpPost failed: \(errorMessage)")
+            Log.error("network.httpPost failed: \(errorMessage)")
         }
         return errorMessage
     }

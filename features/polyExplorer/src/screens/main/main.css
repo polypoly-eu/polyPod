@@ -1,18 +1,12 @@
-.nav-button-container {
+.main-screen .nav-button-container {
     flex: 0 1 auto;
     height: 40px;
     width: 100%;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     z-index: 20;
+    background-color: var(--color-background-dark);
 }
 
-@media not all and (min-resolution: 0.001dpcm) {
-    .nav-button-container {
-        box-shadow: 0px 1px var(--color-medium) !important;
-    }
-}
-
-.nav-button {
+.main-screen .nav-button {
     box-sizing: border-box;
     background-color: var(--color-background-dark);
     width: 50%;
@@ -27,7 +21,17 @@
     outline: none;
 }
 
-.nav-button.active {
+.main-screen .nav-button.active {
+    /*
+     * Without this, a thin stripe of nav-button-container is visible below the
+     * active element.
+     */
+    padding-top: 0;
+
     border-color: var(--color-semi-light);
     color: var(--color-text-light);
+}
+
+.main-screen .filtered-entity-list {
+    flex: 1 1 auto;
 }

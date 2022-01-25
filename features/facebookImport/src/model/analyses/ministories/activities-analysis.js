@@ -2,7 +2,10 @@ import React from "react";
 import i18n from "../../../i18n.js";
 import RootAnalysis from "./root-analysis.js";
 
-import ActivitiesMiniStory from "../../../components/activitiesMiniStory/activitiesMiniStory.jsx";
+import {
+    ActivitiesMiniStorySummary,
+    ActivitiesMiniStoryDetails,
+} from "../../../components/activitiesMiniStory/activitiesMiniStory.jsx";
 
 export default class ActivitiesAnalysis extends RootAnalysis {
     get label() {
@@ -23,6 +26,9 @@ export default class ActivitiesAnalysis extends RootAnalysis {
             ...facebookAccount.recommendedPages,
             ...facebookAccount.searches,
             ...facebookAccount.unfollowedPages,
+            ...facebookAccount.comments,
+            ...facebookAccount.postReactions,
+            ...facebookAccount.posts,
         ].map((each) => new Date(each.timestamp * 1000));
 
         //for nested structures
@@ -71,17 +77,10 @@ export default class ActivitiesAnalysis extends RootAnalysis {
     }
 
     renderSummary() {
-        return i18n.t("activitiesMiniStory:summary", {
-            number_activities: this._totalEvents.total,
-        });
+        return <ActivitiesMiniStorySummary totalEvents={this._totalEvents} />;
     }
 
     renderDetails() {
-        return (
-            <>
-                <p>{this.renderSummary()}</p>
-                <ActivitiesMiniStory totalEvents={this._totalEvents} />
-            </>
-        );
+        return <ActivitiesMiniStoryDetails totalEvents={this._totalEvents} />;
     }
 }

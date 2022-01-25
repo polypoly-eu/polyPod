@@ -1,6 +1,22 @@
 import SwiftUI
 import LocalAuthentication
 
+// TODO: This, and other user defaults we use, should move to a central place.
+struct FirstRun {
+    static private let key = UserDefaults.Keys.firstRun.rawValue
+    
+    static func read() -> Bool {
+        if UserDefaults.standard.object(forKey: key) == nil {
+            return true
+        }
+        return UserDefaults.standard.bool(forKey: key)
+    }
+    
+    static func write(_ firstRun: Bool) {
+        UserDefaults.standard.set(false, forKey: key)
+    }
+}
+
 struct ContentView: View {
     private struct ViewState {
         let backgroundColor: Color
@@ -14,6 +30,7 @@ struct ContentView: View {
     }
     
     @State private var state: ViewState? = nil
+    @State private var showUpdateNotification = false
     var setStatusBarStyle: ((UIStatusBarStyle) -> Void)? = nil
     
     var body: some View {
@@ -34,48 +51,7 @@ struct ContentView: View {
         .edgesIgnoringSafeArea([.top, .bottom])
     }
     
-    private func devicePasscodeSet() -> Bool {
-        return LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
-    }
-    
-    private func checkSecurity() -> Void {
-        let defaults = UserDefaults.standard
-        let skipSecurityKey = "skipSecurity"
-        let skipSecurity = defaults.value(forKey: skipSecurityKey) as? Bool ?? false
-        if !skipSecurity && !devicePasscodeSet() {
-            let alert = UIAlertController(
-                title: NSLocalizedString(
-                    "message_security_warning_title",
-                    comment: ""
-                ),
-                message: NSLocalizedString(
-                    "message_security_warning_text",
-                    comment: ""
-                ),
-                preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString(
-                "button_security_reject",
-                comment: ""
-            ), style: .default, handler: { (action: UIAlertAction!) in
-                UserDefaults.standard.set(true, forKey: skipSecurityKey)
-            })
-            )
-            
-            alert.addAction(UIAlertAction(title: NSLocalizedString(
-                "button_security_setup",
-                comment: ""
-            ), style: .default, handler: { (action: UIAlertAction!) in
-                if let url = URL(string: "App-Prefs:root=TOUCHID_PASSCODE") {
-                    UIApplication.shared.open(url)
-                }
-            })
-            )
-            UIApplication.shared.windows.first!.rootViewController!.present(alert, animated: true, completion:nil)
-        }
-    }
-    
     private func initState() -> ViewState {
-        checkSecurity()
         let state = self.state ?? firstRunState()
         setStatusBarStyle?(
             state.backgroundColor.isLight ? .darkContent : .lightContent
@@ -84,25 +60,80 @@ struct ContentView: View {
     }
     
     private func firstRunState() -> ViewState {
-        let defaults = UserDefaults.standard
-        let firstRunKey = "firstRun"
-        let firstRun = defaults.value(forKey: firstRunKey) as? Bool ?? true
-        if !firstRun {
-            return featureListState()
+        let notification = UpdateNotification()
+        notification.handleStartup()
+        if !FirstRun.read() {
+            return securityReminderState()
         }
         
+        notification.handleFirstRun()
         return ViewState(
             AnyView(
                 OnboardingView(closeAction: {
-                    UserDefaults.standard.set(false, forKey: firstRunKey)
+                    FirstRun.write(false)
                     state = featureListState()
                 })
             )
         )
     }
     
+    private func securityReminderState() -> ViewState {
+        if !Authentication.shared.shouldShowPrompt() {
+            return lockedState()
+        }
+        
+        return ViewState(
+            AnyView(
+                OnboardingView(
+                    securityOnly: true,
+                    closeAction: {
+                        state = featureListState()
+                    }
+                )
+            )
+        )
+    }
+    
+    private func lockedState() -> ViewState {
+        return ViewState(
+            AnyView(
+                Text("").onAppear {
+                    authenticateRelentlessly {
+                        // Checking whether a notification needs to be shown
+                        // used to be in featureListState, where it makes more
+                        // sense, but ever since we added a dedicated
+                        // lockedState, they wouldn't show up anymore, the
+                        // state change in featureListState's onAppear did not
+                        // trigger a rerender, even though it should.
+                        // Yet another SwiftUI bug it seems...
+                        showUpdateNotification = UpdateNotification().showInApp
+                        
+                        state = featureListState()
+                    }
+                }
+            )
+        )
+    }
+    
+    private func authenticateRelentlessly(
+        _ completeAction: @escaping () -> Void
+    ) {
+        // Apple doesn't want us to close the app programmatically, e.g. in case
+        // authentication fails. Since we don't have a dedicated screen for the
+        // locked state yet, we simply keep asking the user until they stop
+        // cancelling or leave the app.
+        Authentication.shared.authenticate { success in
+            if success {
+                completeAction()
+                return
+            }
+            authenticateRelentlessly(completeAction)
+        }
+    }
+    
     private func featureListState() -> ViewState {
-        ViewState(
+        let notification = UpdateNotification()
+        return ViewState(
             AnyView(
                 FeatureListView(
                     features: FeatureStorage.shared.featuresList(),
@@ -115,7 +146,18 @@ struct ContentView: View {
                     openSettingsAction: {
                         state = settingsState()
                     }
-                )
+                ).alert(isPresented: $showUpdateNotification) {
+                    Alert(
+                        title: Text(notification.title),
+                        message: Text(notification.text),
+                        dismissButton: .default(
+                            Text("button_update_notification_close")
+                        ) {
+                            notification.handleInAppSeen()
+                            showUpdateNotification = notification.showInApp
+                        }
+                    )
+                }
             )
         )
     }

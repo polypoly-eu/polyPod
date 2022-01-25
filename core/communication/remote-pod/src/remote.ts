@@ -5,10 +5,12 @@ import {
     PolyOut,
     PolyNav,
     EncodingOptions,
+    ExternalFile,
     Stats,
     Matcher,
     Network,
     Info,
+    Entry,
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
@@ -46,7 +48,7 @@ type PolyInEndpoint = ObjectEndpointSpec<{
 }>;
 
 type PolyOutEndpoint = ObjectEndpointSpec<{
-    readdir(path: string): ValueEndpointSpec<string[]>;
+    readDir(path: string): ValueEndpointSpec<Entry[]>;
     readFile(path: string, options?: EncodingOptions): ValueEndpointSpec<string | Uint8Array>;
     writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
     stat(path: string): ValueEndpointSpec<Stats>;
@@ -64,7 +66,7 @@ type PolyNavEndpoint = ObjectEndpointSpec<{
     openUrl(url: string): ValueEndpointSpec<void>;
     setActiveActions(actions: string[]): ValueEndpointSpec<void>;
     setTitle(title: string): ValueEndpointSpec<void>;
-    pickFile(type?: string): ValueEndpointSpec<string | null>;
+    pickFile(type?: string): ValueEndpointSpec<ExternalFile | null>;
 }>;
 
 type InfoEndpoint = ObjectEndpointSpec<{
@@ -242,8 +244,8 @@ export class RemoteClientPod implements Pod {
                     });
             }
 
-            readdir(path: string): Promise<string[]> {
-                return rpcClient.polyOut().readdir(path)();
+            readDir(path: string): Promise<Entry[]> {
+                return rpcClient.polyOut().readDir(path)();
             }
 
             stat(path: string): Promise<Stats> {
@@ -345,7 +347,7 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
                 if (options === undefined) return polyOut.readFile(path);
                 else return polyOut.readFile(path, options);
             },
-            readdir: (path) => polyOut.readdir(path),
+            readDir: (path) => polyOut.readDir(path),
             stat: async (path) => {
                 const stats = await polyOut.stat(path);
                 return FileStats.of(stats);

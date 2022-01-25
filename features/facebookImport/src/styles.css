@@ -1,39 +1,10 @@
 :root {
-    --color-dark: #0f1938;
-    --color-white: #ffffff;
-    --color-contrast-white: #f7fafc;
-
     --background-dark: var(--color-dark);
     --background-light: var(--color-white);
 
     --text-white: var(--color-white);
     --text-light: var(--color-white);
     --text-dark: var(--color-indigo-950);
-
-    --color-indigo-50: #f0f1fe;
-    --color-indigo-100: #d8dcf9;
-    --color-indigo-200: #b9c0f2;
-    --color-indigo-300: #8f9be7;
-    --color-indigo-400: #737fdb;
-    --color-indigo-500: #5664cd;
-    --color-indigo-600: #475abb;
-    --color-indigo-700: #3749a9;
-    --color-indigo-950: #0f1938;
-
-    --color-red-50: #fff5f5;
-    --color-red-100: #fdd4cd;
-    --color-red-200: #ffb2b3;
-    --color-red-300: #fb8a89;
-    --color-red-900: #581610;
-
-    --color-green-200: #91d4a8;
-    --color-green-800: #0d532a;
-
-    --color-gray-50: #f7fafc;
-    --color-gray-400: #a9b6c6;
-    --color-gray-500: #8d9caf;
-    --color-gray-700: #525e72;
-    --color-gray-800: #3e495b;
 
     /* Size */
     --max-width: 412px;
@@ -54,8 +25,18 @@
 }
 
 @font-face {
+    font-family: "Jost Light";
+    src: url("../fonts/jost_light.ttf");
+}
+
+@font-face {
     font-family: "Jost Medium";
     src: url("../fonts/jost_medium.ttf");
+}
+
+@font-face {
+    font-family: "Jost Bold";
+    src: url("../fonts/jost_bold.ttf");
 }
 
 * {
@@ -79,6 +60,7 @@ button:focus {
 
 .btn-highlighted,
 .btn-secondary {
+    font-family: "Jost Medium";
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -88,7 +70,6 @@ button:focus {
     height: 48px;
     color: var(--color-indigo-950);
     border-radius: 4px;
-    font-weight: 600;
     font-size: 18px;
     box-sizing: border-box;
 }
@@ -115,10 +96,19 @@ button:focus {
 }
 
 .source {
+    margin-top: 36px;
     color: var(--color-gray-400);
     font-size: 12px;
 }
 
 strong {
     font-weight: 600;
+    font-size: 18px;
+    font-family: "Jost Medium";
+}
+
+.separator {
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-gray-400);
 }

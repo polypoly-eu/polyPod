@@ -1,5 +1,5 @@
 import resolve from "@rollup/plugin-node-resolve";
-import copy from "rollup-plugin-copy";
+import copy from "@polypoly-eu/rollup-plugin-copy-watch";
 import sucrase from "@rollup/plugin-sucrase";
 import css from "rollup-plugin-css-only";
 import json from "@rollup/plugin-json";
@@ -10,16 +10,20 @@ import svg from "rollup-plugin-svg";
 
 const fallbackURL = "http://localhost:8000";
 const fallbackAuthorization = "username:password";
+
+const externalPackages = {
+    "@polypoly-eu/poly-look": "polyLook",
+    react: "React",
+    "react-dom": "ReactDOM",
+};
+
 export default (commandLineArgs) => {
     return {
         input: "src/facebookImporter.jsx",
         output: {
             file: "dist/facebook-import.js",
             format: "iife",
-            globals: {
-                react: "React",
-                "react-dom": "ReactDOM",
-            },
+            globals: externalPackages,
         },
         plugins: [
             svg(),
@@ -33,19 +37,26 @@ export default (commandLineArgs) => {
                 targets: [
                     {
                         src: [
-                            "src/static/*",
                             "node_modules/react/umd/react.development.js",
                             "node_modules/react-dom/umd/react-dom.development.js",
                             "node_modules/@polypoly-eu/podjs/dist/pod.js",
-                            "node_modules/poly-look/dist/poly-look.bundled.js",
+                            "node_modules/@polypoly-eu/poly-look/dist/poly-look.js",
                         ],
                         dest: "dist",
                     },
                     {
                         src: [
-                            "node_modules/poly-look/dist/poly-look.bundled.css",
+                            "node_modules/@polypoly-eu/poly-look/dist/css/poly-look.css",
                         ],
                         dest: "dist/css",
+                    },
+                    {
+                        src: ["src/static/*", "!src/static/fonts"],
+                        dest: "dist",
+                    },
+                    {
+                        src: ["src/static/fonts/*"],
+                        dest: "dist/fonts",
                     },
                 ],
             }),
@@ -67,7 +78,7 @@ export default (commandLineArgs) => {
             }),
             commandLineArgs.configServe ? serve("dist") : null,
         ],
-        external: ["react", "react-dom"],
+        external: Object.keys(externalPackages),
         onwarn: (warning) => {
             // overwite the default warning function
             if (

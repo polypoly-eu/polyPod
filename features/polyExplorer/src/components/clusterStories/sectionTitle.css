@@ -1,22 +1,21 @@
 .section-title-container {
-  width: 80%;
-  display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
-  grid-gap: 7px;
-  align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 12px;
+    align-items: center;
 }
 
 .section-title {
-  width: 100%;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 120%;
-  text-align: center;
-  letter-spacing: -0.01em;
+    width: 100%;
+    font-family: "Jost Medium";
+    font-size: 24px;
+    line-height: 120%;
+    text-align: center;
+    letter-spacing: -0.01em;
 }
 
 .line {
-  width: 100%;
-  height: 0px;
-  border: solid 1px var(--color-medium);
+    width: 100%;
+    height: 0px;
+    border: solid 1px var(--color-medium);
 }

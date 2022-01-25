@@ -1,0 +1,41 @@
+<svg width="316" height="191" viewBox="0 0 316 191" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="purpose">
+<g id="Purpose Bar 1">
+<rect id="Rectangle 789" x="10" y="76" width="265" height="12" fill="#3BA6FF"/>
+<text id="632" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost" font-size="8" font-weight="500" letter-spacing="-0.02em"><tspan x="257.984" y="85.28">632</tspan></text>
+<rect id="bold2" x="10" y="57" width="305" height="16" fill="#C4C4C4"/>
+</g>
+<rect id="text2" x="235" y="113" width="59" height="62" fill="#C4C4C4"/>
+<rect id="text1" x="116" y="113" width="81" height="78" fill="#C4C4C4"/>
+<g id="Legend">
+<g id="Scale">
+<line id="Line 101" x1="11.5" y1="35" x2="11.5" y2="45" stroke="#0F1938"/>
+<line id="Line 105" x1="53.5" y1="35" x2="53.5" y2="45" stroke="#0F1938"/>
+<line id="Line 131" x1="32.5" y1="41" x2="32.5" y2="45" stroke="#0F1938"/>
+<line id="Line 109" x1="95.5" y1="35" x2="95.5" y2="45" stroke="#0F1938"/>
+<line id="Line 132" x1="74.5" y1="41" x2="74.5" y2="45" stroke="#0F1938"/>
+<line id="Line 113" x1="137.5" y1="35" x2="137.5" y2="45" stroke="#0F1938"/>
+<line id="Line 133" x1="116.5" y1="41" x2="116.5" y2="45" stroke="#0F1938"/>
+<line id="Line 117" x1="179.5" y1="35" x2="179.5" y2="45" stroke="#0F1938"/>
+<line id="Line 134" x1="158.5" y1="41" x2="158.5" y2="45" stroke="#0F1938"/>
+<line id="Line 121" x1="221.5" y1="35" x2="221.5" y2="45" stroke="#0F1938"/>
+<line id="Line 135" x1="200.5" y1="41" x2="200.5" y2="45" stroke="#0F1938"/>
+<path id="Line 125" d="M263 35V45" stroke="#0F1938"/>
+<path id="Line 136" d="M242 41V45" stroke="#0F1938"/>
+<path id="Line 129" d="M305 35V45" stroke="#0F1938"/>
+<path id="Line 137" d="M284 41V45" stroke="#0F1938"/>
+<text id="0" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="8" letter-spacing="-0.02em"><tspan x="8.60156" y="31.28">0</tspan></text>
+<text id="100" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="8" letter-spacing="-0.02em"><tspan x="46.5623" y="31.28">100</tspan></text>
+<text id="200" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="8" letter-spacing="-0.02em"><tspan x="88.0858" y="31.28">200</tspan></text>
+<text id="300" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="8" letter-spacing="-0.02em"><tspan x="131.18" y="31.28">300</tspan></text>
+<text id="400" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="8" letter-spacing="-0.02em"><tspan x="172.031" y="31.28">400</tspan></text>
+<text id="500" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="8" letter-spacing="-0.02em"><tspan x="214.105" y="31.28">500</tspan></text>
+<text id="600" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="8" letter-spacing="-0.02em"><tspan x="256.058" y="31.28">600</tspan></text>
+<text id="700" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="8" letter-spacing="-0.02em"><tspan x="298.262" y="31.28">700</tspan></text>
+<rect id="bold1" x="10" width="306" height="19" fill="#C4C4C4"/>
+</g>
+</g>
+<path id="Line 163" d="M265.5 113L265.5 87" stroke="#0F1938"/>
+<path id="Line 164" d="M155.5 113L155.5 90" stroke="#0F1938"/>
+</g>
+</svg>

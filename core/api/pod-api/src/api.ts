@@ -7,7 +7,7 @@
 
 import * as RDF from "rdf-js";
 import type { Fetch } from "@polypoly-eu/fetch-spec";
-import { FS } from "./fs";
+import { ExternalFile, FS } from "./fs";
 
 /**
  * A _matcher_ specifies a filter for querying the Pod store.
@@ -103,19 +103,34 @@ export interface PolyIn {
 }
 
 /**
+ * `Entry` is used to store filesystem directory entries in a (roughly)
+ * platform independent way.
+ */
+export interface Entry {
+    id: string;
+    path: string;
+}
+
+/**
  * `PolyOut` specifies the interaction of the Feature with the environment. It is concerned with file system operations
  * and HTTP requests.
  *
  * Both of these aspects are separated out into their own modules:
  * - [[FS]] for Node.js-style file-system access
- * - [[Fetch]] for DOM-style HTTP requests
+ * - [[Fetch]] for DOM-style HTTP requests (deprecated)
  */
-export interface PolyOut extends FS {
+export interface PolyOut extends Omit<FS, "readdir"> {
     /**
      * @deprecated Use [[Network]] and its facilities instead.
      * A standard-compliant implementation of `Fetch`. This feature is deprecated in favor of the [[Network]] interface
      */
     readonly fetch: Fetch;
+
+    /**
+     * @param pathToDir system-dependent path to read.
+     * @returns a Promise with id-path pairs [[Entry]] as payload.
+     */
+    readDir(pathToDir: string): Promise<Entry[]>;
 }
 
 /**
@@ -139,9 +154,9 @@ export interface PolyNav {
      * Ask the user to pick a file
      * @param type the type of file the user is asked to select, as a valid MIME type string. If no type is passed, the user can chose any type of file.
      * @throws if an unsupported MIME type was passed as the type argument.
-     * @return a string representation of a URL or path to the selected file, or `null` if the user cancelled.
+     * @return an ExternalFile Object or `null` if the user cancelled.
      */
-    pickFile(type?: string): Promise<string | null>;
+    pickFile(type?: string): Promise<ExternalFile | null>;
 }
 
 /**

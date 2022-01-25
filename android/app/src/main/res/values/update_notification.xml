@@ -10,9 +10,10 @@
 
     We determine whether the user has already seen a notification from its
     ID; so in order to show a notification with the next update, the ID
-    needs to be changed manually.
+    needs to be changed manually to a value that's higher than all previously
+    used values.
 
-    To avoid clashes, we use the polyEpoch at the time the notification is
+    To avoid mistakes, we use the polyEpoch at the time the notification is
     changed as its ID. The polyEpoch is defined as the number of seconds since
     midnight on 2019-05-04, UTC.
 
@@ -21,13 +22,13 @@
 
     If the notification ID is set to 0, no notifications will be shown at all.
     -->
-    <integer name="update_notification_id">0</integer>
+    <integer name="update_notification_id">80989465</integer>
 
     <!-- Delay after which the push notification is shown, in seconds -->
     <integer name="update_notification_push_delay">120</integer>
 
-    <string name="update_notification_title">Unexpected notification</string>
+    <string name="update_notification_title">Your polyPod just got better!</string>
     <string name="update_notification_text">
-        If you read this, you\'ve found a bug in the polyPod: Please report it to us!
+        Your polyPod can now import and analyse your Facebook data. Learn what Facebook hides from you!
     </string>
 </resources>

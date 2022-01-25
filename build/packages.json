@@ -1,5 +1,6 @@
 {
-    "requiredNodeMajorVersion": 16,
+    "requiredNodeVersion": 16,
+    "requiredNPMVersion": 7,
     "packages": [
         "build",
         "core/api/fetch-spec",
@@ -22,6 +23,7 @@
         "features/facebookImport",
         "features/lexicon",
         "features/polyExplorer",
+        "features/polyExplorer-v1",
         "features/polyPinion",
         "features/polyPreview",
         "features/test",

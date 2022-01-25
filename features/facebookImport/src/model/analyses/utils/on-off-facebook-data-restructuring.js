@@ -116,3 +116,11 @@ export function buildDisplayData(
 
     return getIntoChartStructure(displayData);
 }
+
+export function topOffFacebookCompanies(facebookAccount) {
+    return [...facebookAccount.offFacebookCompanies]
+        .map((e) => {
+            return { title: e.name, count: e.events.length };
+        })
+        .sort((a, b) => b.count - a.count);
+}

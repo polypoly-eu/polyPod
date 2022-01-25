@@ -1,0 +1,117 @@
+.search-bar-container {
+    width: 100%;
+    max-width: var(--max-width);
+    display: flex;
+    justify-content: center;
+    margin: 20px auto 0 auto;
+    /* Solution to fix problem in iOS Safari */
+    flex: 0 0 auto;
+}
+
+.search-bar-container .search-bar {
+    box-sizing: border-box;
+    display: block;
+    background-color: var(--color-background-dark);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    height: 40px;
+    font-size: 18px;
+    border: 1px solid var(--color-semi-dark);
+    border-radius: 20px;
+    outline: none;
+    padding: 1px 12px 0 21px;
+}
+
+.search-bar-container .search-bar .search-bar-input {
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    display: block;
+    background-color: transparent;
+    font-size: 18px;
+    border: none;
+    padding: 0;
+    outline: none;
+}
+
+.search-bar-container .search-bar .search-bar-input::placeholder {
+    color: var(--color-medium);
+}
+
+.search-bar-container .search-bar button {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.company-search {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 16px 0;
+    overflow-y: scroll;
+}
+
+.suggestion-holder .suggestions {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.company-search .no-answers,
+.suggestion-container p,
+.company-search button {
+    width: 80%;
+    max-width: var(--max-width);
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.company-search .no-answers {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    color: var(--color-semi-dark);
+}
+
+.suggestion-container p {
+    box-sizing: border-box;
+    margin-top: 0;
+    padding-left: 1px;
+    padding-right: 1px;
+    font-size: 12px;
+    color: var(--color-semi-dark);
+}
+
+.company-search button {
+    background-color: transparent;
+    border: transparent;
+    outline: none;
+    font-size: 18px;
+    text-align: left;
+    padding: 1px 3px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.clr {
+    opacity: 0;
+}
+@keyframes fadeInClrBtn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.clr.active {
+    opacity: 1;
+    animation-name: fadeInClrBtn;
+    animation-timing-function: ease-in;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+}

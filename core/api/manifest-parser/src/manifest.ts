@@ -1,7 +1,7 @@
 import * as Decode from "io-ts/lib/Decoder";
 import { fold } from "fp-ts/lib/Either";
 import readPkg from "@pnpm/read-package-json";
-import { pipe } from "fp-ts/lib/pipeable";
+import { pipe } from "fp-ts/function";
 import { parse as parseSemVer, SemVer, Range } from "semver";
 import { normalize, isAbsolute, join, dirname } from "path";
 import { promises as fs } from "fs";
@@ -32,7 +32,6 @@ export interface FeatureManifest {
 
 export interface Manifest extends EngineManifest, MainManifest, RootManifest, FeatureManifest {}
 
-// TODO duplicated code with podigree, should be a library
 function expect<I, A>(input: I, msg: string, decoder: Decode.Decoder<I, A>): A {
     return pipe(
         decoder.decode(input),
@@ -76,7 +75,7 @@ const engineDecoder = Decode.type({
             try {
                 return Decode.success(new Range(string));
             } catch (err) {
-                return Decode.failure(string, err.message);
+                return Decode.failure(string, (err as Error).message);
             }
         })
     ),

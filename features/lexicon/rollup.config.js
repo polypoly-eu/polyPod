@@ -2,11 +2,10 @@ import svelte from "rollup-plugin-svelte";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import livereload from "rollup-plugin-livereload";
-import { terser } from "rollup-plugin-terser";
 import css from "rollup-plugin-css-only";
 import json from "@rollup/plugin-json";
 import sucrase from "@rollup/plugin-sucrase";
-import copy from "rollup-plugin-copy";
+import copy from "@polypoly-eu/rollup-plugin-copy-watch";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -65,11 +64,14 @@ export default {
         }),
         commonjs(),
         json(),
-        sucrase({ "transforms": [] }),
+        sucrase({ transforms: [] }),
         copy({
             targets: [
                 {
-                    src: ["node_modules/@polypoly-eu/podjs/dist/pod.js"],
+                    src: [
+                        "node_modules/@polypoly-eu/podjs/dist/pod.js",
+                        "node_modules/@polypoly-eu/poly-look/dist/css/poly-look.css",
+                    ],
                     dest: "public",
                 },
             ],
@@ -82,10 +84,6 @@ export default {
         // Watch the `public` directory and refresh the
         // browser on changes when not in production
         !production && livereload("public"),
-
-        // If we're building for production (npm run build
-        // instead of npm run dev), minify
-        production && terser(),
     ],
     watch: {
         clearScreen: false,

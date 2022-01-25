@@ -1,20 +1,34 @@
 import React from "react";
-import BarChart from "../../../components/dataViz/barChart.jsx";
+
 import { groupPostReactionsByType } from "../utils/post-reactions-utils";
 import RootAnalysis from "./root-analysis";
 
+import PostReactionTypesMiniStory from "../../../components/postReactionTypesMiniStory/postReactionTypesMiniStory.jsx";
+import i18n from "../../../i18n";
+import { KNOWN_REACTION_TYPES } from "../../importers/post-reactions-importer";
+
 export default class PostReactionsTypesAnalysis extends RootAnalysis {
     get title() {
-        return "Post Reactions by Type";
+        return i18n.t("reactionsMiniStory:title");
+    }
+
+    get label() {
+        return RootAnalysis.Labels.NONE;
     }
 
     async analyze({ facebookAccount }) {
-        this._reactionsTypeCountPairs =
-            groupPostReactionsByType(facebookAccount);
+        const allReactionsByType = groupPostReactionsByType(facebookAccount);
+        this._reactionsTypeCountPairs = allReactionsByType.filter((each) =>
+            KNOWN_REACTION_TYPES.includes(each.type)
+        );
         this.active = this._reactionsTypeCountPairs.length > 0;
     }
 
     renderSummary() {
-        return <BarChart data={this._reactionsTypeCountPairs} names="type" />;
+        return (
+            <PostReactionTypesMiniStory
+                reactionData={this._reactionsTypeCountPairs}
+            />
+        );
     }
 }

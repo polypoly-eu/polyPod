@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/jost_medium"
+            android:fontFamily="@font/jost_light"
             android:textSize="@dimen/onboarding_headline_size"
             android:lineSpacingExtra="@dimen/onboarding_headline_extra_spacing" />
 
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-6dp"
             android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/jost_light"
+            android:fontFamily="@font/jost_medium"
             android:textSize="@dimen/onboarding_headline_size"
             android:lineSpacingExtra="@dimen/onboarding_headline_extra_spacing" />
 
@@ -66,5 +66,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/onboarding_button_auth"
+        android:layout_width="300dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="90dp"
+        android:background="@drawable/onboarding_button_bg"
+        android:fontFamily="@font/jost_medium"
+        android:text="@string/onboarding_button_end"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/onboarding_button_do_not_ask"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="45dp"
+        android:text="Do not ask again"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

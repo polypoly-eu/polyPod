@@ -1,5 +1,6 @@
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
+    ExternalFile,
     Info,
     Matcher,
     Network,
@@ -8,7 +9,7 @@ import type {
     PolyOut,
     PolyNav,
 } from "@polypoly-eu/pod-api";
-import { EncodingOptions, Stats } from "@polypoly-eu/pod-api";
+import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
@@ -158,30 +159,34 @@ class LocalStoragePolyOut implements PolyOut {
         });
     }
 
-    readdir(path: string): Promise<string[]> {
-        files = new Map<string, Stats>(
+    readDir(id: string): Promise<Entry[]> {
+        const files = new Map<string, Stats>(
             JSON.parse(localStorage.getItem(BrowserPolyNav.filesKey) || "[]")
         );
         return new Promise((resolve, reject) => {
             const filteredFiles = Array.from(files)
-                .filter((file) => file[0].startsWith(path))
+                .filter((file) => file[0].startsWith(id))
                 .map((file) => file[0]);
-
-            if (path == "") {
-                resolve(filteredFiles);
+            if (id == "") {
+                resolve(
+                    filteredFiles.map((file) => ({ id: file, path: file }))
+                );
                 return;
             }
-            const dataUrl = localStorage.getItem(path);
+            const dataUrl = localStorage.getItem(id);
             if (!dataUrl) {
-                reject(new Error(`File not found: ${path}`));
+                reject(new Error(`File not found: ${id}`));
                 return;
             }
             const reader = new zip.ZipReader(new zip.Data64URIReader(dataUrl));
-            reader
-                .getEntries()
-                .then((entries) =>
-                    resolve(entries.map((entry) => `${path}/${entry.filename}`))
+            reader.getEntries().then((entries) => {
+                resolve(
+                    entries.map((entry) => ({
+                        id: `${id}/${entry.filename}`,
+                        path: entry.filename,
+                    }))
                 );
+            });
         });
     }
 
@@ -312,7 +317,7 @@ class BrowserNetwork implements Network {
                     resolve(`Unexpected response status: ${status}`);
                     return;
                 }
-                resolve();
+                resolve(undefined);
             };
 
             request.onerror = function () {
@@ -380,7 +385,7 @@ class BrowserPolyNav implements PolyNav {
         document.title = title;
     }
 
-    async pickFile(type?: string): Promise<string | null> {
+    async pickFile(type?: string): Promise<ExternalFile | null> {
         return new Promise((resolve) => {
             const fileInput = document.createElement("input");
             fileInput.setAttribute("type", "file");
@@ -391,14 +396,18 @@ class BrowserPolyNav implements PolyNav {
                     // The change listener doesn't seem to be invoked when the
                     // user cancels the file dialog, but if, for some reason,
                     // there is no file anyway, we treat it like cancel.
-                    resolve();
+                    resolve(null);
                     return;
                 }
 
                 const reader = new FileReader();
                 reader.onload = async function () {
                     const dataUrl = this.result as string;
-                    resolve(FileUrl.fromParts(dataUrl, selectedFile.name).url);
+                    resolve({
+                        name: selectedFile.name,
+                        url: FileUrl.fromParts(dataUrl, selectedFile.name).url,
+                        size: selectedFile.size,
+                    });
                 };
                 reader.readAsDataURL(selectedFile);
             });
@@ -412,7 +421,7 @@ class BrowserPolyNav implements PolyNav {
             window.addEventListener("focus", function focusListener() {
                 this.removeEventListener("focus", focusListener);
                 setTimeout(() => {
-                    if (!fileInput.files?.[0]) resolve();
+                    if (!fileInput.files?.[0]) resolve(null);
                 }, 1000);
             });
 

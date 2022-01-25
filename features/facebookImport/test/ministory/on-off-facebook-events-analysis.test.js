@@ -1,10 +1,6 @@
 import OnOffFacebookEventsAnalysis from "../../src/model/analyses/ministories/on-off-facebook-events-analysis";
 import FacebookAccount from "../../src/model/entities/facebook-account";
 import {
-    DATASET_EXPECTED_VALUES,
-    zipFileWithOffFacebookEvents,
-} from "../datasets/off-facebook-events-data";
-import {
     runAnalysisForAccount,
     runAnalysisForExport,
 } from "../utils/analyses-execution";
@@ -20,6 +16,7 @@ import {
 } from "../../src/model/analyses/utils/on-off-facebook-data-restructuring";
 import { toUnixTimestamp } from "../../src/model/importers/utils/timestamps";
 import { createMappedOnOffEventsData } from "../datasets/on-off-facebook-events-data";
+import { zipFileWithOnOffFacebookCompanyMatches } from "../datasets/on-off-events-comparison-data";
 
 describe("Off-Facebook events analysis from empty account", () => {
     let analysis = null;
@@ -80,8 +77,16 @@ describe("Off-Facebook events analysis from account with no purchases", () => {
         expect(analysis._companiesCount).toBe(expectedCompaniesCount);
     });
 
-    it("has correct purchases Count", async () => {
-        expect(analysis._purchasesCount).toBe(0);
+    it("has no companies with ads", async () => {
+        expect(analysis._companiesWithAdsCount).toBe(0);
+    });
+
+    it("has variation with no correlations", async () => {
+        expect(analysis._displayType).toBe("off");
+    });
+
+    it("has correct report data", async () => {
+        expect(analysis.customReportData).toStrictEqual({ displayType: "off" });
     });
 });
 
@@ -90,11 +95,12 @@ describe("Off-Facebook events analysis from export data", () => {
     let status = null;
 
     beforeAll(async () => {
-        const zipFile = zipFileWithOffFacebookEvents();
-        ({ analysis, status } = await runAnalysisForExport(
+        const zipFile = zipFileWithOnOffFacebookCompanyMatches();
+        const { analysisResult } = await runAnalysisForExport(
             OnOffFacebookEventsAnalysis,
             zipFile
-        ));
+        );
+        ({ analysis, status } = analysisResult);
     });
 
     it("has success status", async () => {
@@ -106,13 +112,21 @@ describe("Off-Facebook events analysis from export data", () => {
     });
 
     it("has correct companies count", async () => {
-        expect(analysis._companiesCount).toBe(
-            DATASET_EXPECTED_VALUES.totalCompaniesCount
-        );
+        expect(analysis._companiesCount).toBe(7);
     });
 
-    it("has correct purchases Count", async () => {
-        expect(analysis._purchasesCount).toBe(1);
+    it("has no companies with ads", async () => {
+        expect(analysis._companiesWithAdsCount).toBe(6);
+    });
+
+    it("has variation with on-off correlations", async () => {
+        expect(analysis._displayType).toBe("on-off");
+    });
+
+    it("has correct report data", async () => {
+        expect(analysis.customReportData).toStrictEqual({
+            displayType: "on-off",
+        });
     });
 });
 

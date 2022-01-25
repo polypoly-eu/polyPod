@@ -37,7 +37,13 @@
 
     <activity
         android:id="@+id/OnboardingActivity"
-        android:name="coop.polypoly.polypod.OnboardingActivity" />
+        android:name="coop.polypoly.polypod.OnboardingActivity"
+        app:data="info" >
+        <argument
+            android:name="info"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </activity>
 
     <activity
         android:id="@+id/SettingsActivity"
