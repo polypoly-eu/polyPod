@@ -70,7 +70,7 @@ async function addSymlinks(symlinks) {
 
 async function start() {
     if (process.platform === "win32") {
-        const symlinks = await getSymlinks("../features/lexicon");
+        const symlinks = await getSymlinks("../");
         console.log("Removing existing symlinks");
         deleteExistingSymlinks(symlinks);
         console.log("Adding new symLinks");
