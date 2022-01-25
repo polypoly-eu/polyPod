@@ -62,8 +62,9 @@ function loadProducts() {
 //Will be clearer when we know the content structure
 const loadStoriesMetadata = () => {
     return {
-        messenger: {
+        "messenger-story": {
             title: "story.messenger.title",
+            shortTitle: "story.messenger.title.short",
             previewText: "story.messenger.summarize",
             img: {
                 src: "images/stories/messenger/card-image.svg",
@@ -71,8 +72,9 @@ const loadStoriesMetadata = () => {
             },
             route: "/story/messenger-story",
         },
-        digitalGiants: {
+        "digital-giants-story": {
             title: "story.digitalGiants.title",
+            shortTitle: "story.digitalGiants.title.short",
             previewText: "story.digitalGiants.summarize",
             img: {
                 src: "images/stories/digital-giants/card-image.svg",
@@ -184,7 +186,14 @@ export const ExplorerProvider = ({ children }) => {
         )
             pod.polyNav.setTitle(selectedEntityObject.name);
         else if (currentPath.startsWith("/story/"))
-            pod.polyNav.setTitle("data-story name goes here");
+            pod.polyNav.setTitle(
+                i18n.t(
+                    `clusterStoriesPreview:${
+                        storiesMetadata[currentPath.split("/story/")[1]]
+                            .shortTitle
+                    }`
+                )
+            );
         else
             pod.polyNav.setTitle(
                 i18n.t(`common:screenTitle.${currentPath.slice(1)}`)
