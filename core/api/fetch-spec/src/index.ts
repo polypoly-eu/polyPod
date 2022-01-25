@@ -1,7 +1,3 @@
-import type { Fetch } from "./api";
-import chai, { assert } from "chai";
-import chaiAsPromised from "chai-as-promised";
-
 export * from "./api";
 
 export function getHttpbinUrl(): string {
