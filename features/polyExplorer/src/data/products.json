@@ -418,8 +418,9 @@
             "360dialog GmbH (DE)",
             "8x8 Inc (US)",
             "91APP (TW)",
-            "AB180 Inc (KR) www.airbridge.io",
+            "AB180 Inc (KR)",
             "ACL Mobile Limited (IN)",
+            "AI MEDIA (PL)",
             "ARS Advertising LLC (US)",
             "Accenture (IE)",
             "Acconx Corporation (TH)",
@@ -428,28 +429,27 @@
             "Advermind (TR)",
             "Agorapulse (FR)",
             "AhaChat (VN)",
-            "Aimedia (PL)",
             "Airy Inc (US)",
             "Aivo LLC (US)",
             "Alcmeon (FR)",
             "Alembic Inc (US)",
             "Altavia RetailTech (FR)",
             "Ameyo (IN)",
-            "Analytic Edge Private Limited (IN)",
+            "Analytic Edge (IN)",
             "Analytic Partners Inc (US)",
-            "AnyTrack Analytics Inc (US)",
+            "Anytrack Analytics Inc (US)",
             "Appier Group (JP)",
             "AppsFlyer (IL)",
             "AudienceProject (DK)",
             "Automattic Inc (US)",
+            "BASE Corporation (JP)",
             "BETAPOND LIMITED t_a StitcherAds (IE)",
-            "Base Corporation (JP)",
             "BigCommerce Software Ireland (IE)",
             "Botmaker (UY)",
             "Boutir Limited (HK)",
             "Branch Metrics Inc Delaware (US)",
             "Brand Embassy (IL)",
-            "Brand Networks LLC (US)",
+            "Brand Networks (US)",
             "BrandBastion Oy (FI)",
             "Bridesview Inc (US)",
             "Brightblue Consulting Limited (GB)",
@@ -457,9 +457,8 @@
             "BumpYard (IL)",
             "Buzzmonitor (BR)",
             "CF Manager (TH)",
-            "CM.com (NL)",
             "CURUPIRA S.A (BR)",
-            "Cafe24 (KR)",
+            "Cafe 24 (KR)",
             "Chatbot Vietnam JSC (VN)",
             "Chatisfy (CN)",
             "Citigo Software JSC (VN)",
@@ -486,7 +485,7 @@
             "EKM Systems Limited (GB)",
             "Ecwid (US)",
             "Ekimetrics France (FR)",
-            "Emma Global - (Hong Kong) Limited (HK)",
+            "Emma Global (Hong Kong) Limited (HK)",
             "Emplifi Inc (US)",
             "Exabytes Ecommerce (MY)",
             "Exit Solutions Inc (US)",
@@ -494,7 +493,7 @@
             "FBWS (IL)",
             "Facebook (US)",
             "Facebook Technologies Ireland Limited (IE)",
-            "Facebook Technologies LLC (US)",
+            "Facebook Technologies, LLC (US)",
             "Falcon.io (DK)",
             "Fjord Technologies (FR)",
             "Flashtalking, Inc. (US)",
@@ -506,22 +505,21 @@
             "GfK SE (DE)",
             "GoDaddy (US)",
             "GotU Tech (IT)",
-            "Grade Us LLC (US)",
+            "Grade US LLC (US)",
             "Gubagoo Inc (US)",
             "GupShup (IN)",
             "Haravan (VN)",
             "Hashtag Group (EG)",
-            "Hearsay Social Inc (US)",
+            "Hearsay Systems Inc (US)",
             "HelloTech (SG)",
             "Hootsuite (CA)",
-            "HubSpot Inc (US)",
+            "Hubspot Inc (US)",
             "Hubtype (ES)",
-            "IDO VN (VN)",
-            "IMImobile (GB)",
+            "IDO E-Commerce Services Company Limited (VN)",
+            "IMImobile Limited (GB)",
             "IRI (US)",
             "ImWeb (KR)",
-            "Imweb (KR)",
-            "InSales LLC (RU)",
+            "InSales  LLC (RU)",
             "Infinity Tracking (GB)",
             "Infobip (HR)",
             "Instagram Inc (US)",
@@ -544,9 +542,9 @@
             "LeadsBridge Inc (US)",
             "Lengow (FR)",
             "Linkfluence (FR)",
-            "LivePerson Inc (US)",
             "LiveRamp, Inc. (US)",
-            "LiveWorld Inc (US)",
+            "Liveperson Inc (US)",
+            "Liveworld Inc (US)",
             "Local Measure (AU)",
             "LoudDoor LLC (US)",
             "MACRO KIOSK Berhad (MY)",
@@ -555,15 +553,15 @@
             "ManyChat (US)",
             "Marketo (US)",
             "Maventus Group Inc (US)",
-            "Mediaocean (US)",
+            "Mediaocean LLC (US)",
             "Meetrics GmbH (DE)",
             "Meltwater BV (NL)",
             "MessageBird GmbH (DE)",
             "MessengerPeople GmbH (DE)",
-            "MetricWorks AS (NO)",
+            "MetricWorks (NO)",
             "MigoChat (EG)",
             "Moat, Inc (US)",
-            "MobileMonkey",
+            "MobileMonkey Inc (US)",
             "MomentFeed (US)",
             "NC Ventures LLC (US)",
             "NHN COMMERCE Corp (KR)",
@@ -571,21 +569,21 @@
             "Nepa Sweden AB (SE)",
             "Netcore Cloud (DE)",
             "Netino (FR)",
-            "Neustar Inc (US)",
+            "NeuStar, Inc. (US)",
             "Nexmo Inc (US)",
             "Nhanh.vn (VN)",
             "Nielsen LLC (US)",
             "Nitco (VN)",
-            "NovaonX (VN))",
+            "NovaonX (VN)",
             "Novomind AG (DE)",
             "Nuvemshop (BR)",
             "Objective Partners (NL)",
             "Octane AI Inc (US)",
             "Oktopost Technologies Inc (US)",
             "Omnichat Limited (HK)",
-            "Onavo (IL)",
+            "Onavo Inc. (US)",
             "OpenCart Limited (HK)",
-            "Oracle (US))",
+            "Oracle (US)",
             "Oracle Data Cloud (US)",
             "Oribi Limited (IL)",
             "Outrigger Media Inc (US)",
@@ -594,9 +592,8 @@
             "PT Solusi Pembayaran Elektronik (ID)",
             "PT. Informasi Teknologi Indonesia (ID)",
             "PYS (RO)",
-            "Page365 (TH)",
             "Pancake (VN)",
-            "Percolate Industries Inc (US)",
+            "Percolate Industries (US)",
             "Perfect-Storm (KR)",
             "PinMeTo AB (SE)",
             "Planogram Inc (US)",
@@ -607,18 +604,15 @@
             "Qiscus (SG)",
             "Qontak (SG)",
             "Quipt (US)",
-            "RainMan Consulting (IN)",
+            "Rainman Consulting (IN)",
             "RepCom (US)",
-            "RingCentral Inc (US)",
-            "SAPO Technology JSC",
+            "Ringcentral Inc (US)",
             "SAPO Technology JSC (VN)",
-            "SIRCLO (ID)",
             "SOCI Inc (US)",
-            "Salesforce.com (US)",
+            "Salesforce.com Inc. (US)",
             "Salsify (US)",
             "Sanuker Inc. Limited (HK)",
             "Scup (BR)",
-            "Segment.io Inc (US)",
             "SendPulse Inc (US)",
             "Sendible Limited (GB)",
             "Shift4 (US)",
@@ -629,15 +623,15 @@
             "Shopline (HK)",
             "Sinch (SE)",
             "Singular (US)",
+            "Sirclo (ID)",
             "Smarters (BR)",
             "SmaxBot (VN)",
-            "Social Gear (JP)",
             "Social News Desk Inc (US)",
             "SocialFlow Inc (US)",
             "Socialbakers (CZ)",
             "Softbaked (TH)",
             "Sparkcentral (US)",
-            "Spreadshop (US)",
+            "Spreadshirt (US)",
             "Sprinklr (US)",
             "Sprinklr Germany GmbH (DE)",
             "Sprout Social Inc (US)",
@@ -645,13 +639,14 @@
             "Squeezely (NL)",
             "Stilingue (BR)",
             "Superare (IT)",
-            "Swat.io GmbH (AU)",
-            "Tap The Table LLC",
+            "Swat.io GmbH (AT)",
+            "TRANSCOSMOS ZERO PTE LTD (SG)",
+            "Tap The Table LLC (US)",
             "Tealium (US)",
             "The Kantar Group Limited (GB)",
             "The Next Ad BV (NL)",
             "Ticimax (TR)",
-            "Tiger Pistol Pty Ltd (AU)",
+            "Tiger Pistol (AU)",
             "Tilda (RU)",
             "Touchcore (TH)",
             "Tripnity (FR)",
@@ -659,30 +654,32 @@
             "Twilio Inc (US)",
             "Tyntec (GB)",
             "UIB Holdings (SG)",
-            "Unified Enterprises Corp (US)",
+            "Unified Enterprises, Corp. (US)",
             "Unifonic (SA)",
             "V Rich App (TH)",
-            "Valuefirst (IN)",
+            "ValueFirst (IN)",
             "Vendasta LLC (CA)",
             "Victory Square Media Inc (CA)",
-            "VideoAmp Inc (US)",
+            "Videoamp Inc (US)",
             "Waca Inc (CN)",
-            "WhatsApp Inc (US)",
-            "WhatsApp Ireland Ltd (IE)",
+            "WhatsApp Ireland Limited (IE)",
+            "Whatsapp Inc (US)",
             "Wicked Reports LLC (US)",
             "X-Cart (US)",
             "YReceipts (GB)",
             "Yext Inc (US)",
-            "ZEFR Inc (US)",
             "Zapier (US)",
+            "Zefr Inc (US)",
             "Zentail (US)",
-            "Zoho Corporation (IN)",
+            "Zoho Corporation Private Limited (IN)",
+            "cm.com (NL)",
             "comScore (US)",
             "eclincher Inc (US)",
             "iKala Interactive Media Inc (TW)",
             "ibots App (EG)",
             "mParticle (US)",
             "maloon GmbH (DE)",
+            "segment.io Inc (US)",
             "uphill GmbH (DE)",
             "Хорошоп (UA)"
         ],
@@ -693,7 +690,7 @@
             },
             {
                 "dpv:Purpose": "dpv:CommercialResearch",
-                "count": 889
+                "count": 886
             },
             {
                 "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
@@ -705,7 +702,7 @@
             },
             {
                 "dpv:Purpose": "dpv:CustomerCare",
-                "count": 225
+                "count": 222
             },
             {
                 "dpv:Purpose": "dpv:Marketing",
@@ -725,7 +722,7 @@
             },
             {
                 "dpv:Purpose": "dpv:Payment",
-                "count": 225
+                "count": 222
             },
             {
                 "dpv:Purpose": "dpv:PersonalisedAdvertising",
@@ -753,19 +750,19 @@
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
-                "count": 849
+                "count": 846
             },
             {
                 "dpv:Purpose": "dpv:ServiceUsageAnalytics",
-                "count": 889
+                "count": 886
             },
             {
                 "dpv:Purpose": "dpv:TechnicalServiceProvision",
-                "count": 225
+                "count": 222
             },
             {
                 "dpv:Purpose": "unspecified",
-                "count": 225
+                "count": 222
             }
         ],
         "dataTypesShared": [
@@ -875,7 +872,7 @@
             },
             {
                 "dpv:Category": "dpv:PersonalDataCategory",
-                "count": 1655
+                "count": 1634
             },
             {
                 "dpv:Category": "dpv:PhilosophicalBelief",
@@ -3671,7 +3668,7 @@
                     }
                 }
             },
-            "Facebook Technologies LLC (US)": {
+            "Facebook Technologies, LLC (US)": {
                 "categories": {
                     "dpv:Picture": {
                         "purposes": [
@@ -5479,7 +5476,7 @@
                     }
                 }
             },
-            "Onavo (IL)": {
+            "Onavo Inc. (US)": {
                 "categories": {
                     "dpv:Picture": {
                         "purposes": [
@@ -6383,7 +6380,7 @@
                     }
                 }
             },
-            "WhatsApp Inc (US)": {
+            "WhatsApp Ireland Limited (IE)": {
                 "categories": {
                     "dpv:Picture": {
                         "purposes": [
@@ -7287,7 +7284,7 @@
                     }
                 }
             },
-            "WhatsApp Ireland Ltd (IE)": {
+            "Whatsapp Inc (US)": {
                 "categories": {
                     "dpv:Picture": {
                         "purposes": [
@@ -8446,7 +8443,7 @@
                     }
                 }
             },
-            "AnyTrack Analytics Inc (US)": {
+            "Anytrack Analytics Inc (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -8491,7 +8488,7 @@
                     }
                 }
             },
-            "BETAPOND LIMITED t_a StitcherAds (IE)": {
+            "BASE Corporation (JP)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -8506,7 +8503,7 @@
                     }
                 }
             },
-            "Base Corporation (JP)": {
+            "BETAPOND LIMITED t_a StitcherAds (IE)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -8581,7 +8578,7 @@
                     }
                 }
             },
-            "Brand Networks LLC (US)": {
+            "Brand Networks (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -8686,21 +8683,6 @@
                     }
                 }
             },
-            "CM.com (NL)": {
-                "categories": {
-                    "dpv:PersonalDataCategory": {
-                        "purposes": [
-                            "dpv:CustomerCare",
-                            "dpv:TechnicalServiceProvision",
-                            "dpv:Payment",
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceUsageAnalytics",
-                            "unspecified",
-                            "dpv:CommercialResearch"
-                        ]
-                    }
-                }
-            },
             "CURUPIRA S.A (BR)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
@@ -8716,7 +8698,7 @@
                     }
                 }
             },
-            "Cafe24 (KR)": {
+            "Cafe 24 (KR)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -9031,7 +9013,7 @@
                     }
                 }
             },
-            "Emma Global - (Hong Kong) Limited (HK)": {
+            "Emma Global (Hong Kong) Limited (HK)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -9241,7 +9223,7 @@
                     }
                 }
             },
-            "Grade Us LLC (US)": {
+            "Grade US LLC (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -9316,7 +9298,7 @@
                     }
                 }
             },
-            "Hearsay Social Inc (US)": {
+            "Hearsay Systems Inc (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -9361,7 +9343,7 @@
                     }
                 }
             },
-            "HubSpot Inc (US)": {
+            "Hubspot Inc (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -9391,7 +9373,7 @@
                     }
                 }
             },
-            "IDO VN (VN)": {
+            "IDO E-Commerce Services Company Limited (VN)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -9406,7 +9388,7 @@
                     }
                 }
             },
-            "IMImobile (GB)": {
+            "IMImobile Limited (GB)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -9436,22 +9418,7 @@
                     }
                 }
             },
-            "Imweb (KR)": {
-                "categories": {
-                    "dpv:PersonalDataCategory": {
-                        "purposes": [
-                            "dpv:CustomerCare",
-                            "dpv:TechnicalServiceProvision",
-                            "dpv:Payment",
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceUsageAnalytics",
-                            "unspecified",
-                            "dpv:CommercialResearch"
-                        ]
-                    }
-                }
-            },
-            "InSales LLC (RU)": {
+            "InSales  LLC (RU)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -9736,21 +9703,6 @@
                     }
                 }
             },
-            "LivePerson Inc (US)": {
-                "categories": {
-                    "dpv:PersonalDataCategory": {
-                        "purposes": [
-                            "dpv:CustomerCare",
-                            "dpv:TechnicalServiceProvision",
-                            "dpv:Payment",
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceUsageAnalytics",
-                            "unspecified",
-                            "dpv:CommercialResearch"
-                        ]
-                    }
-                }
-            },
             "LiveRamp, Inc. (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
@@ -9766,7 +9718,22 @@
                     }
                 }
             },
-            "LiveWorld Inc (US)": {
+            "Liveperson Inc (US)": {
+                "categories": {
+                    "dpv:PersonalDataCategory": {
+                        "purposes": [
+                            "dpv:CustomerCare",
+                            "dpv:TechnicalServiceProvision",
+                            "dpv:Payment",
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceUsageAnalytics",
+                            "unspecified",
+                            "dpv:CommercialResearch"
+                        ]
+                    }
+                }
+            },
+            "Liveworld Inc (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -9901,7 +9868,7 @@
                     }
                 }
             },
-            "Mediaocean (US)": {
+            "Mediaocean LLC (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -9976,7 +9943,7 @@
                     }
                 }
             },
-            "MobileMonkey": {
+            "MobileMonkey Inc (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -10111,7 +10078,7 @@
                     }
                 }
             },
-            "NovaonX (VN))": {
+            "NovaonX (VN)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -10216,7 +10183,7 @@
                     }
                 }
             },
-            "Oracle (US))": {
+            "Oracle (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -10321,21 +10288,6 @@
                     }
                 }
             },
-            "Page365 (TH)": {
-                "categories": {
-                    "dpv:PersonalDataCategory": {
-                        "purposes": [
-                            "dpv:CustomerCare",
-                            "dpv:TechnicalServiceProvision",
-                            "dpv:Payment",
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceUsageAnalytics",
-                            "unspecified",
-                            "dpv:CommercialResearch"
-                        ]
-                    }
-                }
-            },
             "Pancake (VN)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
@@ -10351,7 +10303,7 @@
                     }
                 }
             },
-            "Percolate Industries Inc (US)": {
+            "Percolate Industries (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -10531,22 +10483,7 @@
                     }
                 }
             },
-            "RingCentral Inc (US)": {
-                "categories": {
-                    "dpv:PersonalDataCategory": {
-                        "purposes": [
-                            "dpv:CustomerCare",
-                            "dpv:TechnicalServiceProvision",
-                            "dpv:Payment",
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceUsageAnalytics",
-                            "unspecified",
-                            "dpv:CommercialResearch"
-                        ]
-                    }
-                }
-            },
-            "SAPO Technology JSC": {
+            "Ringcentral Inc (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -10576,21 +10513,6 @@
                     }
                 }
             },
-            "SIRCLO (ID)": {
-                "categories": {
-                    "dpv:PersonalDataCategory": {
-                        "purposes": [
-                            "dpv:CustomerCare",
-                            "dpv:TechnicalServiceProvision",
-                            "dpv:Payment",
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceUsageAnalytics",
-                            "unspecified",
-                            "dpv:CommercialResearch"
-                        ]
-                    }
-                }
-            },
             "SOCI Inc (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
@@ -10606,7 +10528,7 @@
                     }
                 }
             },
-            "Salesforce.com (US)": {
+            "Salesforce.com Inc. (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -10652,21 +10574,6 @@
                 }
             },
             "Scup (BR)": {
-                "categories": {
-                    "dpv:PersonalDataCategory": {
-                        "purposes": [
-                            "dpv:CustomerCare",
-                            "dpv:TechnicalServiceProvision",
-                            "dpv:Payment",
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceUsageAnalytics",
-                            "unspecified",
-                            "dpv:CommercialResearch"
-                        ]
-                    }
-                }
-            },
-            "Segment.io Inc (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -10816,6 +10723,21 @@
                     }
                 }
             },
+            "Sirclo (ID)": {
+                "categories": {
+                    "dpv:PersonalDataCategory": {
+                        "purposes": [
+                            "dpv:CustomerCare",
+                            "dpv:TechnicalServiceProvision",
+                            "dpv:Payment",
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceUsageAnalytics",
+                            "unspecified",
+                            "dpv:CommercialResearch"
+                        ]
+                    }
+                }
+            },
             "Smarters (BR)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
@@ -10832,21 +10754,6 @@
                 }
             },
             "SmaxBot (VN)": {
-                "categories": {
-                    "dpv:PersonalDataCategory": {
-                        "purposes": [
-                            "dpv:CustomerCare",
-                            "dpv:TechnicalServiceProvision",
-                            "dpv:Payment",
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceUsageAnalytics",
-                            "unspecified",
-                            "dpv:CommercialResearch"
-                        ]
-                    }
-                }
-            },
-            "Social Gear (JP)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -10936,7 +10843,7 @@
                     }
                 }
             },
-            "Spreadshop (US)": {
+            "Spreadshirt (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -11056,7 +10963,7 @@
                     }
                 }
             },
-            "Swat.io GmbH (AU)": {
+            "Swat.io GmbH (AT)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -11071,7 +10978,22 @@
                     }
                 }
             },
-            "Tap The Table LLC": {
+            "TRANSCOSMOS ZERO PTE LTD (SG)": {
+                "categories": {
+                    "dpv:PersonalDataCategory": {
+                        "purposes": [
+                            "dpv:CustomerCare",
+                            "dpv:TechnicalServiceProvision",
+                            "dpv:Payment",
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceUsageAnalytics",
+                            "unspecified",
+                            "dpv:CommercialResearch"
+                        ]
+                    }
+                }
+            },
+            "Tap The Table LLC (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -11131,7 +11053,7 @@
                     }
                 }
             },
-            "Tiger Pistol Pty Ltd (AU)": {
+            "Tiger Pistol (AU)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -11251,7 +11173,7 @@
                     }
                 }
             },
-            "Unified Enterprises Corp (US)": {
+            "Unified Enterprises, Corp. (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -11296,7 +11218,7 @@
                     }
                 }
             },
-            "Valuefirst (IN)": {
+            "ValueFirst (IN)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -11446,7 +11368,22 @@
                     }
                 }
             },
-            "Zoho Corporation (IN)": {
+            "Zoho Corporation Private Limited (IN)": {
+                "categories": {
+                    "dpv:PersonalDataCategory": {
+                        "purposes": [
+                            "dpv:CustomerCare",
+                            "dpv:TechnicalServiceProvision",
+                            "dpv:Payment",
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceUsageAnalytics",
+                            "unspecified",
+                            "dpv:CommercialResearch"
+                        ]
+                    }
+                }
+            },
+            "cm.com (NL)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -11536,6 +11473,21 @@
                     }
                 }
             },
+            "segment.io Inc (US)": {
+                "categories": {
+                    "dpv:PersonalDataCategory": {
+                        "purposes": [
+                            "dpv:CustomerCare",
+                            "dpv:TechnicalServiceProvision",
+                            "dpv:Payment",
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceUsageAnalytics",
+                            "unspecified",
+                            "dpv:CommercialResearch"
+                        ]
+                    }
+                }
+            },
             "uphill GmbH (DE)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
@@ -11566,7 +11518,17 @@
                     }
                 }
             },
-            "AB180 Inc (KR) www.airbridge.io": {
+            "AB180 Inc (KR)": {
+                "categories": {
+                    "dpv:PersonalDataCategory": {
+                        "purposes": [
+                            "dpv:ServiceUsageAnalytics",
+                            "dpv:CommercialResearch"
+                        ]
+                    }
+                }
+            },
+            "AI MEDIA (PL)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -11596,17 +11558,7 @@
                     }
                 }
             },
-            "Aimedia (PL)": {
-                "categories": {
-                    "dpv:PersonalDataCategory": {
-                        "purposes": [
-                            "dpv:ServiceUsageAnalytics",
-                            "dpv:CommercialResearch"
-                        ]
-                    }
-                }
-            },
-            "Analytic Edge Private Limited (IN)": {
+            "Analytic Edge (IN)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -11796,7 +11748,7 @@
                     }
                 }
             },
-            "MetricWorks AS (NO)": {
+            "MetricWorks (NO)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -11836,7 +11788,7 @@
                     }
                 }
             },
-            "Neustar Inc (US)": {
+            "NeuStar, Inc. (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -11886,7 +11838,7 @@
                     }
                 }
             },
-            "RainMan Consulting (IN)": {
+            "Rainman Consulting (IN)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -11916,7 +11868,7 @@
                     }
                 }
             },
-            "VideoAmp Inc (US)": {
+            "Videoamp Inc (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -11926,7 +11878,7 @@
                     }
                 }
             },
-            "ZEFR Inc (US)": {
+            "Zefr Inc (US)": {
                 "categories": {
                     "dpv:PersonalDataCategory": {
                         "purposes": [
@@ -11982,7 +11934,6 @@
                 "Five-Eyes",
                 "EU-GDPR",
                 "Other",
-                "EU Adequate",
                 "China",
                 "Russia"
             ]
@@ -12112,56 +12063,54 @@
         ],
         "dataRecipients": [
             "9:16 (TR)",
+            "AI Target Inc (US)",
             "AR MORE (AE)",
-            "AdMixt Inc. (US)",
-            "AdSamurai SL (ES)",
             "Adjust GmbH (DE)",
-            "Aitarget Inc. (US)",
+            "Admixt (US)",
+            "Adsmurai S.L. (ES)",
             "Akamai Technologies Inc (US)",
             "AppsFlyer (IL)",
-            "Appsflyer Limited (IL)",
-            "BANDZIE LTD (GB)",
-            "Bare Tree Media Inc. (US)",
-            "Bidshake (IL)",
-            "Branch Metrics, Inc. (US)",
+            "Bandzie Ltd (GB)",
+            "Bare Tree Media Inc (US)",
+            "Branch Metrics Inc California (US)",
             "Byte London Limited (GB)",
             "ByteDance Ltd. (KY)",
-            "CHOMPI CCNETWORKINGS LIMITED (IL)",
-            "Collab, Inc. (US)",
+            "CHOMPI CCNETWORKINGS LIMITED DBA Bidalgo (IL)",
+            "Collab Inc (US)",
             "FF POPLAR LIMITED (GB)",
             "Facebook (US)",
             "Foap Poland SP Z. O O. (PL)",
             "Genero Media Pty Ltd (AU)",
-            "Goldfish Social, Inc. (US)",
+            "Goldfish Social Inc (US)",
             "Google (US)",
             "Happy Finish Limited (GB)",
             "Hogarth Worldwide Limited (GB)",
-            "Ignite XR (US)",
-            "Insense Ads, Inc. (US)",
+            "Ignite XR (CA)",
+            "Insense Ads Inc (US)",
             "Instagram LLC (US)",
             "Kochava Inc. (US)",
+            "LUNA LABS LIMITED (GB)",
             "LinkedIn Corporation (US)",
-            "Luna labs Limited (GB)",
-            "MARS MEDIA GROUP LLC (US)",
-            "MakeMeReach (FR)",
+            "MARS MEDIA GROUP (US)",
+            "Make Me Reach (FR)",
             "Naisu (ID)",
             "Nativex LLC (US)",
-            "Nectar9 Inc. (US)",
-            "Opera Event Inc. (US)",
-            "Outrigger Inc. (US)",
-            "QuickFrame (US)",
-            "RoasUp, Inc. (US)",
-            "Sapphire Apps Media LLC (US)",
+            "Nectar9 Inc (US)",
+            "Opera Event Inc (US)",
+            "Outrigger Media Inc (US)",
+            "QuickFrame Inc (US)",
+            "RoasUP Inc (US)",
+            "Sapphire Media Group LLC (US)",
             "Shuttlerock Limited (NZ)",
-            "Sightworthy Inc. (US)",
-            "Singular Labs Inc. (US)",
+            "Sightworthy Inc (US)",
+            "Singular (US)",
             "Social Native, Inc. (US)",
             "Splashr (FR)",
-            "Sprinklr, Inc. (US)",
-            "Subvrsive Inc. (US)",
+            "Sprinklr (US)",
+            "Subvrsive Inc (US)",
             "TIKTOK INC. (US)",
             "Tactical (AE)",
-            "Tenjin Inc. (US)",
+            "Tenjin Inc (US)",
             "The Kantar Group Limited (GB)",
             "The Source (FR)",
             "This is Tommy Ltd (SG)",
@@ -12173,12 +12122,13 @@
             "Velocity Made Good Limited (NZ)",
             "VidMob Inc (US)",
             "Vidsy Media Limited (GB)",
-            "Visual Amplifiers Pty Limited (AU)",
+            "Visual Amplifiers (AU)",
+            "Voodoo (FR)",
             "Whalar Ltd (GB)",
             "Winclap (AR)",
             "Wisebirds (KR)",
             "Zoomd Limited (IL)",
-            "esome advertising technologies GmbH (DE)"
+            "esome advertising technologies GmbH (DE)"
         ],
         "dataSharingPurposes": [
             {
@@ -15099,6 +15049,13 @@
                             "dpv:UsageAnalytics",
                             "dpv:LegalCompliance"
                         ]
+                    },
+                    "dpv:SocialMediaCommunication": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:OptimisationForConsumer",
+                            "dpv:OptimisationForController"
+                        ]
                     }
                 }
             },
@@ -15682,85 +15639,46 @@
                     }
                 }
             },
+            "AI Target Inc (US)": {
+                "categories": {
+                    "dpv:SocialMediaCommunication": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:OptimisationForConsumer",
+                            "dpv:OptimisationForController"
+                        ]
+                    },
+                    "dpv:Tracking": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceOptimization",
+                            "dpv:ServicePersonalization",
+                            "dpv:SellTargettedAdvertisements",
+                            "dpv:CommercialInterest",
+                            "dpv:CreateProductRecommendations",
+                            "dpv:CreatePersonalizedRecommendations",
+                            "dpv:Marketing",
+                            "dpv:PersonalisedAdvertising",
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:DeviceBased": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceOptimization",
+                            "dpv:ServicePersonalization",
+                            "dpv:SellTargettedAdvertisements",
+                            "dpv:CommercialInterest",
+                            "dpv:CreateProductRecommendations",
+                            "dpv:CreatePersonalizedRecommendations",
+                            "dpv:Marketing",
+                            "dpv:PersonalisedAdvertising",
+                            "dpv:UsageAnalytics"
+                        ]
+                    }
+                }
+            },
             "AR MORE (AE)": {
-                "categories": {
-                    "dpv:SocialMediaCommunication": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController"
-                        ]
-                    },
-                    "dpv:Tracking": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:UsageAnalytics"
-                        ]
-                    },
-                    "dpv:DeviceBased": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:UsageAnalytics"
-                        ]
-                    }
-                }
-            },
-            "AdMixt Inc. (US)": {
-                "categories": {
-                    "dpv:SocialMediaCommunication": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController"
-                        ]
-                    },
-                    "dpv:Tracking": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:UsageAnalytics"
-                        ]
-                    },
-                    "dpv:DeviceBased": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:UsageAnalytics"
-                        ]
-                    }
-                }
-            },
-            "AdSamurai SL (ES)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -15838,7 +15756,7 @@
                     }
                 }
             },
-            "Aitarget Inc. (US)": {
+            "Admixt (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -15877,7 +15795,7 @@
                     }
                 }
             },
-            "Appsflyer Limited (IL)": {
+            "Adsmurai S.L. (ES)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -15916,7 +15834,7 @@
                     }
                 }
             },
-            "BANDZIE LTD (GB)": {
+            "Bandzie Ltd (GB)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -15955,7 +15873,7 @@
                     }
                 }
             },
-            "Bare Tree Media Inc. (US)": {
+            "Bare Tree Media Inc (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -15994,46 +15912,7 @@
                     }
                 }
             },
-            "Bidshake (IL)": {
-                "categories": {
-                    "dpv:SocialMediaCommunication": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:OptimisationForConsumer",
-                            "dpv:OptimisationForController"
-                        ]
-                    },
-                    "dpv:Tracking": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:UsageAnalytics"
-                        ]
-                    },
-                    "dpv:DeviceBased": {
-                        "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:ServiceOptimization",
-                            "dpv:ServicePersonalization",
-                            "dpv:SellTargettedAdvertisements",
-                            "dpv:CommercialInterest",
-                            "dpv:CreateProductRecommendations",
-                            "dpv:CreatePersonalizedRecommendations",
-                            "dpv:Marketing",
-                            "dpv:PersonalisedAdvertising",
-                            "dpv:UsageAnalytics"
-                        ]
-                    }
-                }
-            },
-            "Branch Metrics, Inc. (US)": {
+            "Branch Metrics Inc California (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -16111,7 +15990,7 @@
                     }
                 }
             },
-            "CHOMPI CCNETWORKINGS LIMITED (IL)": {
+            "CHOMPI CCNETWORKINGS LIMITED DBA Bidalgo (IL)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -16150,7 +16029,7 @@
                     }
                 }
             },
-            "Collab, Inc. (US)": {
+            "Collab Inc (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -16306,7 +16185,7 @@
                     }
                 }
             },
-            "Goldfish Social, Inc. (US)": {
+            "Goldfish Social Inc (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -16423,7 +16302,7 @@
                     }
                 }
             },
-            "Ignite XR (US)": {
+            "Ignite XR (CA)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -16462,7 +16341,7 @@
                     }
                 }
             },
-            "Insense Ads, Inc. (US)": {
+            "Insense Ads Inc (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -16540,7 +16419,7 @@
                     }
                 }
             },
-            "Luna labs Limited (GB)": {
+            "LUNA LABS LIMITED (GB)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -16579,7 +16458,7 @@
                     }
                 }
             },
-            "MARS MEDIA GROUP LLC (US)": {
+            "MARS MEDIA GROUP (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -16618,7 +16497,7 @@
                     }
                 }
             },
-            "MakeMeReach (FR)": {
+            "Make Me Reach (FR)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -16735,7 +16614,7 @@
                     }
                 }
             },
-            "Nectar9 Inc. (US)": {
+            "Nectar9 Inc (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -16774,7 +16653,7 @@
                     }
                 }
             },
-            "Opera Event Inc. (US)": {
+            "Opera Event Inc (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -16813,7 +16692,7 @@
                     }
                 }
             },
-            "Outrigger Inc. (US)": {
+            "Outrigger Media Inc (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -16852,7 +16731,7 @@
                     }
                 }
             },
-            "QuickFrame (US)": {
+            "QuickFrame Inc (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -16891,7 +16770,7 @@
                     }
                 }
             },
-            "RoasUp, Inc. (US)": {
+            "RoasUP Inc (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -16930,7 +16809,7 @@
                     }
                 }
             },
-            "Sapphire Apps Media LLC (US)": {
+            "Sapphire Media Group LLC (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -17008,7 +16887,7 @@
                     }
                 }
             },
-            "Sightworthy Inc. (US)": {
+            "Sightworthy Inc (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -17047,7 +16926,7 @@
                     }
                 }
             },
-            "Singular Labs Inc. (US)": {
+            "Singular (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -17164,7 +17043,7 @@
                     }
                 }
             },
-            "Sprinklr, Inc. (US)": {
+            "Sprinklr (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -17203,7 +17082,7 @@
                     }
                 }
             },
-            "Subvrsive Inc. (US)": {
+            "Subvrsive Inc (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -17281,7 +17160,7 @@
                     }
                 }
             },
-            "Tenjin Inc. (US)": {
+            "Tenjin Inc (US)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -17671,7 +17550,46 @@
                     }
                 }
             },
-            "Visual Amplifiers Pty Limited (AU)": {
+            "Visual Amplifiers (AU)": {
+                "categories": {
+                    "dpv:SocialMediaCommunication": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:OptimisationForConsumer",
+                            "dpv:OptimisationForController"
+                        ]
+                    },
+                    "dpv:Tracking": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceOptimization",
+                            "dpv:ServicePersonalization",
+                            "dpv:SellTargettedAdvertisements",
+                            "dpv:CommercialInterest",
+                            "dpv:CreateProductRecommendations",
+                            "dpv:CreatePersonalizedRecommendations",
+                            "dpv:Marketing",
+                            "dpv:PersonalisedAdvertising",
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:DeviceBased": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceOptimization",
+                            "dpv:ServicePersonalization",
+                            "dpv:SellTargettedAdvertisements",
+                            "dpv:CommercialInterest",
+                            "dpv:CreateProductRecommendations",
+                            "dpv:CreatePersonalizedRecommendations",
+                            "dpv:Marketing",
+                            "dpv:PersonalisedAdvertising",
+                            "dpv:UsageAnalytics"
+                        ]
+                    }
+                }
+            },
+            "Voodoo (FR)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -17866,7 +17784,7 @@
                     }
                 }
             },
-            "esome advertising technologies GmbH (DE)": {
+            "esome advertising technologies GmbH (DE)": {
                 "categories": {
                     "dpv:SocialMediaCommunication": {
                         "purposes": [
@@ -17966,9 +17884,9 @@
         ],
         "jurisdictionsShared": {
             "children": [
-                "EU-GDPR",
+                "Other",
                 "Five-Eyes",
-                "EU Adequate"
+                "EU-GDPR"
             ]
         }
     },
@@ -18122,7 +18040,7 @@
         ],
         "jurisdictionsShared": {
             "children": [
-                "EU Adequate"
+                "Other"
             ]
         }
     },
@@ -19482,82 +19400,82 @@
             }
         ],
         "dataRecipients": [
-            "ADP-1, INC. (US)",
+            "ADP-1 INC (US)",
             "Accenture (IE)",
             "Ad Dynamo International (ZA)",
-            "AdMixt Inc. (US)",
             "Adjust GmbH (DE)",
+            "Admixt (US)",
             "Agency Within LLC (US)",
             "Amobee Inc (US)",
-            "AppsFlyer Limited (IL)",
-            "Baidu Inc. (CN)",
-            "Bamboo Technologies Inc (US)",
-            "Bidshake (IL)",
+            "AppsFlyer (IL)",
+            "BAMBOO TECHNOLOGIES INC. (US)",
+            "Baidu (CN)",
             "Bitstrips Inc (CA)",
-            "Branch Metrics Inc (US)",
-            "Brand Networks LLC (US)",
-            "CHOMPI CCNETWORKINGS LIMITED (IL)",
-            "COMERCIALIZADORA PUBLICITARIA AVANZADA, SL (ES)",
+            "Branch Metrics Inc California (US)",
+            "Brand Networks (US)",
+            "CHOMPI CCNETWORKINGS LIMITED DBA Bidalgo (IL)",
+            "COMERCIALIZADORA PUBLICITARIA AVANZADA SL (ES)",
             "Camelot Communications Ltd. (US)",
             "CitizenNet Inc (US)",
             "Decoded Advertising LLC (US)",
             "Digital Media Services FZ-LLC (AE)",
             "Facebook (US)",
             "Fetch (GB)",
+            "GRAHAM HOLDINGS COMPANY (US)",
             "Google (US)",
-            "Graham Holdings Company (US)",
             "HTTPOOL, INTERNET MARKETING, D.O.O. (SI)",
-            "HongKong AdTiger Media Co., Limited (HK)",
-            "IMS Media Services Inc. (US)",
-            "JGROUP (LB)",
-            "Jebbit, Inc. (US)",
-            "Kenshoo Limited. (IL)",
+            "HongKong AdTiger Media Co Limited (HK)",
+            "IMS Media Services Inc (US)",
+            "Jebbit Inc (US)",
+            "Jgroup (LB)",
+            "Kenshoo Limited (IL)",
             "Kochava Inc. (US)",
+            "LUNA LABS LIMITED (GB)",
             "LinkedIn Corporation (US)",
-            "Luna labs Limited (GB)",
-            "MParticle Inc. (US)",
-            "MakeMeReach (FR)",
+            "Make Me Reach (FR)",
             "Mediaocean LLC (US)",
             "MetaCDN Pty. Ltd. (AU)",
             "Microsoft Corporation (US)",
-            "Miri Growth Ltd. (GB)",
+            "Miri Growth (GB)",
             "NEST PERFORMANCE LIMITED (GB)",
-            "NEXSTAR MEDIA GROUP, INC. (US)",
+            "Nexstar Media Group (US)",
             "OPERAM INC. (US)",
             "Optimizely Inc. (US)",
             "Outbrain Inc. (US)",
+            "PHOTOSPIRE LIMITED (GB)",
             "Pardot LLC (US)",
             "PayPal, Inc. (US)",
             "Pebble Media NV (BE)",
-            "Photospire Limited (GB)",
             "Pinterest Inc. (US)",
             "Q4 Inc. (CA)",
             "Q4 Inc. (US)",
-            "QuickFrame Inc. (US)",
-            "Revealbot, Inc. (US)",
+            "QuickFrame Inc (US)",
+            "Revealytics Inc (US)",
             "Rokt Ltd (UK)",
             "Rokt Pte Ltd (SG)",
             "SINOINTERACTIVE DIGITAL MARKETING (CN)",
             "SMILE INTERNET TECHNOLOGIES PRIVATE LIMITED (IN)",
             "STITCHERADS NORTH AMERICA, LLC (US)",
             "Salesforce.com Inc. (US)",
-            "Singular Labs Inc. (US)",
-            "Smartly.io Holding Oy (FI)",
+            "Singular (US)",
+            "Smartly (FI)",
             "Snap Inc (US)",
             "Social Native, Inc. (US)",
-            "Sprinklr, Inc. (US)",
+            "Sprinklr (US)",
+            "TINUITI INC. (US)",
             "Taboola Inc. (US)",
-            "Tenjin Inc. (US)",
-            "Tinuiti Inc. (US)",
+            "Tenjin Inc (US)",
             "Twelve Inc. (US)",
             "Twigeo AB (SE)",
             "Twitter (US)",
             "Unified Enterprises, Corp. (US)",
             "VidMob Inc (US)",
             "Vidsy Media Limited (GB)",
-            "Wpromote, LLC (US)",
+            "Voodoo (FR)",
+            "Wpromote LLC (US)",
             "Zenly (FR)",
-            "esome advertising technologies GmbH (DE)"
+            "esome advertising technologies GmbH (DE)",
+            "mParticle (US)"
         ],
         "dataSharingPurposes": [
             {
@@ -19976,7 +19894,7 @@
                     }
                 }
             },
-            "ADP-1, INC. (US)": {
+            "ADP-1 INC (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20018,7 +19936,7 @@
                     }
                 }
             },
-            "AdMixt Inc. (US)": {
+            "Adjust GmbH (DE)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20032,7 +19950,7 @@
                     }
                 }
             },
-            "Adjust GmbH (DE)": {
+            "Admixt (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20074,7 +19992,7 @@
                     }
                 }
             },
-            "AppsFlyer Limited (IL)": {
+            "AppsFlyer (IL)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20088,7 +20006,7 @@
                     }
                 }
             },
-            "Baidu Inc. (CN)": {
+            "BAMBOO TECHNOLOGIES INC. (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20102,7 +20020,7 @@
                     }
                 }
             },
-            "Bamboo Technologies Inc (US)": {
+            "Baidu (CN)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20116,7 +20034,7 @@
                     }
                 }
             },
-            "Bidshake (IL)": {
+            "Branch Metrics Inc California (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20130,7 +20048,7 @@
                     }
                 }
             },
-            "Branch Metrics Inc (US)": {
+            "Brand Networks (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20144,7 +20062,7 @@
                     }
                 }
             },
-            "Brand Networks LLC (US)": {
+            "CHOMPI CCNETWORKINGS LIMITED DBA Bidalgo (IL)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20158,21 +20076,7 @@
                     }
                 }
             },
-            "CHOMPI CCNETWORKINGS LIMITED (IL)": {
-                "categories": {
-                    "dpv:ServiceConsumptionBehavior": {
-                        "purposes": [
-                            "dpv:SellTargettedAdvertisements"
-                        ]
-                    },
-                    "dpv:Contact": {
-                        "purposes": [
-                            "dpv:SellTargettedAdvertisements"
-                        ]
-                    }
-                }
-            },
-            "COMERCIALIZADORA PUBLICITARIA AVANZADA, SL (ES)": {
+            "COMERCIALIZADORA PUBLICITARIA AVANZADA SL (ES)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20256,7 +20160,7 @@
                     }
                 }
             },
-            "Graham Holdings Company (US)": {
+            "GRAHAM HOLDINGS COMPANY (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20284,7 +20188,7 @@
                     }
                 }
             },
-            "HongKong AdTiger Media Co., Limited (HK)": {
+            "HongKong AdTiger Media Co Limited (HK)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20298,7 +20202,7 @@
                     }
                 }
             },
-            "IMS Media Services Inc. (US)": {
+            "IMS Media Services Inc (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20312,7 +20216,7 @@
                     }
                 }
             },
-            "JGROUP (LB)": {
+            "Jebbit Inc (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20326,7 +20230,7 @@
                     }
                 }
             },
-            "Jebbit, Inc. (US)": {
+            "Jgroup (LB)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20340,7 +20244,7 @@
                     }
                 }
             },
-            "Kenshoo Limited. (IL)": {
+            "Kenshoo Limited (IL)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20368,7 +20272,7 @@
                     }
                 }
             },
-            "Luna labs Limited (GB)": {
+            "LUNA LABS LIMITED (GB)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20382,21 +20286,7 @@
                     }
                 }
             },
-            "MParticle Inc. (US)": {
-                "categories": {
-                    "dpv:ServiceConsumptionBehavior": {
-                        "purposes": [
-                            "dpv:SellTargettedAdvertisements"
-                        ]
-                    },
-                    "dpv:Contact": {
-                        "purposes": [
-                            "dpv:SellTargettedAdvertisements"
-                        ]
-                    }
-                }
-            },
-            "MakeMeReach (FR)": {
+            "Make Me Reach (FR)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20424,7 +20314,7 @@
                     }
                 }
             },
-            "Miri Growth Ltd. (GB)": {
+            "Miri Growth (GB)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20452,7 +20342,7 @@
                     }
                 }
             },
-            "NEXSTAR MEDIA GROUP, INC. (US)": {
+            "Nexstar Media Group (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20480,6 +20370,20 @@
                     }
                 }
             },
+            "PHOTOSPIRE LIMITED (GB)": {
+                "categories": {
+                    "dpv:ServiceConsumptionBehavior": {
+                        "purposes": [
+                            "dpv:SellTargettedAdvertisements"
+                        ]
+                    },
+                    "dpv:Contact": {
+                        "purposes": [
+                            "dpv:SellTargettedAdvertisements"
+                        ]
+                    }
+                }
+            },
             "Pebble Media NV (BE)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
@@ -20494,7 +20398,7 @@
                     }
                 }
             },
-            "Photospire Limited (GB)": {
+            "QuickFrame Inc (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20508,21 +20412,7 @@
                     }
                 }
             },
-            "QuickFrame Inc. (US)": {
-                "categories": {
-                    "dpv:ServiceConsumptionBehavior": {
-                        "purposes": [
-                            "dpv:SellTargettedAdvertisements"
-                        ]
-                    },
-                    "dpv:Contact": {
-                        "purposes": [
-                            "dpv:SellTargettedAdvertisements"
-                        ]
-                    }
-                }
-            },
-            "Revealbot, Inc. (US)": {
+            "Revealytics Inc (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20578,7 +20468,7 @@
                     }
                 }
             },
-            "Singular Labs Inc. (US)": {
+            "Singular (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20592,7 +20482,7 @@
                     }
                 }
             },
-            "Smartly.io Holding Oy (FI)": {
+            "Smartly (FI)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20620,7 +20510,7 @@
                     }
                 }
             },
-            "Sprinklr, Inc. (US)": {
+            "Sprinklr (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20634,7 +20524,7 @@
                     }
                 }
             },
-            "Tenjin Inc. (US)": {
+            "TINUITI INC. (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20648,7 +20538,7 @@
                     }
                 }
             },
-            "Tinuiti Inc. (US)": {
+            "Tenjin Inc (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20718,7 +20608,21 @@
                     }
                 }
             },
-            "Wpromote, LLC (US)": {
+            "Voodoo (FR)": {
+                "categories": {
+                    "dpv:ServiceConsumptionBehavior": {
+                        "purposes": [
+                            "dpv:SellTargettedAdvertisements"
+                        ]
+                    },
+                    "dpv:Contact": {
+                        "purposes": [
+                            "dpv:SellTargettedAdvertisements"
+                        ]
+                    }
+                }
+            },
+            "Wpromote LLC (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -20733,6 +20637,20 @@
                 }
             },
             "esome advertising technologies GmbH (DE)": {
+                "categories": {
+                    "dpv:ServiceConsumptionBehavior": {
+                        "purposes": [
+                            "dpv:SellTargettedAdvertisements"
+                        ]
+                    },
+                    "dpv:Contact": {
+                        "purposes": [
+                            "dpv:SellTargettedAdvertisements"
+                        ]
+                    }
+                }
+            },
+            "mParticle (US)": {
                 "categories": {
                     "dpv:ServiceConsumptionBehavior": {
                         "purposes": [
@@ -21150,9 +21068,9 @@
         ],
         "jurisdictionsShared": {
             "children": [
+                "Five-Eyes",
                 "EU-GDPR",
                 "Sonstige",
-                "Five-Eyes",
                 "Other",
                 "China"
             ]
@@ -21327,7 +21245,7 @@
             "Agency Within LLC (US)",
             "Artefact France (FR)",
             "BAMBOO TECHNOLOGIES INC. (US)",
-            "BETAPOND LIMITED t/a StitcherAds (IE)",
+            "BETAPOND LIMITED t_a StitcherAds (IE)",
             "CHOMPI CCNETWORKINGS LIMITED DBA Bidalgo (IL)",
             "Common Thread Collective LLC (US)",
             "CyberAgent Inc (JP)",
@@ -23281,7 +23199,7 @@
                     }
                 }
             },
-            "BETAPOND LIMITED t/a StitcherAds (IE)": {
+            "BETAPOND LIMITED t_a StitcherAds (IE)": {
                 "categories": {
                     "dpv:Username": {
                         "purposes": [
@@ -32326,7 +32244,7 @@
             "children": [
                 "Five-Eyes",
                 "EU-GDPR",
-                "EU Adequate"
+                "Other"
             ]
         }
     },
@@ -32674,7 +32592,7 @@
             "messenger"
         ],
         "productOwner": [
-            "Telegram Messenger Inc (VG)",
+            "Telegram Messenger Inc. (VG)",
             "Telegram FZ-LLC (AE)"
         ],
         "activeUsers": {
