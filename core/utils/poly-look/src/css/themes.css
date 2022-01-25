@@ -19,3 +19,10 @@
   --theme-primary-color: var(--color-indigo-950);
   --theme-secondary-color: var(--color-gray-50);
 }
+.poly-theme h1,
+.poly-theme h2,
+.poly-theme h3,
+.poly-theme h4,
+.poly-theme h5 {
+  font-weight: var(--font-weight-regular);
+}
