@@ -10,7 +10,7 @@ export default class MessageThreadsGroup {
     }
 
     get messageThreadsCount() {
-        return Object.keys(this._messagesThreads).length;
+        return this.messagesThreads.length;
     }
 
     get messagesCount() {
