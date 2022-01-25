@@ -8,12 +8,7 @@ import "./dataRegionInfo.css";
 
 const DataRegionInfo = ({ onClose }) => {
     return (
-        <BaseInfoScreen
-            className="data-region-info-screen"
-            light={true}
-            onClose={onClose}
-        >
-            {" "}
+        <BaseInfoScreen className="data-region-info-screen" onClose={onClose}>
             <div className="base-info-padding">
                 <SectionTitle
                     title={i18n.t("dataRegionInfoScreen:heading")}
