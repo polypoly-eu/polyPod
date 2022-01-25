@@ -74,7 +74,7 @@ button::after {
 
 .entity-list-wrapper {
     display: flex;
-    margin: 24px auto 0 auto;
+    margin: 0 auto 0 auto;
 }
 
 .entity-list-wrapper.filters-visible {
