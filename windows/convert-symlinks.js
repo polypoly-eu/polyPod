@@ -53,17 +53,21 @@ async function makeNewSymlink(symlink) {
     const output = await shellExec(
         "mklink /d " + symlink.fileName + " " + symlink.link
     );
-    console.log(output);
+    console.log(output, symlink.target);
 }
 
 function deleteExistingSymlinks(symlinks) {
     for (let symlink of symlinks) {
+        //if link has already been converted
+        if (symlink.link === "") continue;
         shell.rm(path.join(symlink.target, symlink.fileName));
     }
 }
 
 async function addSymlinks(symlinks) {
     for (let symlink of symlinks) {
+        //if link has already been converted
+        if (symlink.link === "") continue;
         await makeNewSymlink(symlink);
     }
 }
