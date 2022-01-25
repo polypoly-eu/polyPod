@@ -33,10 +33,10 @@ export default class MessageThreadsGroup {
     addMessageThreadFromData(messageThreadData) {
         const messageThread = new MessageThread();
         messageThread.initializeFromData(messageThreadData);
-        const participant = messageThread.participants.toString();
-        if (this._messagesThreads[participant]) {
-            this.addToExistingThread(participant, messageThread);
-        } else this._messagesThreads[participant] = messageThread;
+        const threadPath = messageThread.threadPath;
+        if (this._messagesThreads[threadPath]) {
+            this.addToExistingThread(threadPath, messageThread);
+        } else this._messagesThreads[threadPath] = messageThread;
     }
 
     addMessageThreadsFromData(messageThreadsData) {
@@ -45,8 +45,8 @@ export default class MessageThreadsGroup {
         );
     }
 
-    addToExistingThread(participant, messageThread) {
-        const existingThread = this._messagesThreads[participant];
+    addToExistingThread(threadPath, messageThread) {
+        const existingThread = this._messagesThreads[threadPath];
         existingThread.mergeThread(messageThread);
     }
 }
