@@ -33,5 +33,9 @@
     "styled-components": "^5.3.0",
     "swiper": "^6.4.11"
   },
-  "type": "module"
+  "type": "module",
+  "jest": {
+    "verbose": true,
+    "testMatch": ["<rootDir>/test/*.js"]
+  }
 }
