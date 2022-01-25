@@ -83,6 +83,8 @@ const loadStoriesMetadata = () => {
     };
 };
 
+const intermediateScreens = ["/search", "/entity-details"];
+
 export const ExplorerProvider = ({ children }) => {
     //router hooks
     const history = useHistory();
@@ -151,9 +153,12 @@ export const ExplorerProvider = ({ children }) => {
     function handleBack() {
         if (currentPath != "/") {
             history.goBack();
-            if (history.location.state) {
-                changeNavigationState(history.location.state);
+            const location = history.location;
+            if (location.state) {
+                changeNavigationState(location.state);
             }
+            if (intermediateScreens.indexOf(location.pathname) > -1)
+                handleBack();
         }
     }
 
@@ -262,6 +267,7 @@ export const ExplorerProvider = ({ children }) => {
     //on-change
     useEffect(() => {
         updatePodNavigation();
+        console.log(history);
     });
 
     return (
