@@ -42,6 +42,7 @@ const MessengerMauChart = ({ messengers, i18nHeader }) => {
                 date: value.end_date,
                 id: messenger.ppid,
             }))
+            .filter((d) => d.value > 0)
             .sort((a, b) => new Date(a.date) - new Date(b.date)),
     }));
 
@@ -61,6 +62,8 @@ const MessengerMauChart = ({ messengers, i18nHeader }) => {
         d[0].id === selectedMessenger
             ? `url(#${coloring[d[0].id].gradient})`
             : "rgba(0, 0, 0, 0)";
+
+    console.log(lineChartData);
 
     return (
         <div className="messenger-mau-chart">
