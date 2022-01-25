@@ -94,9 +94,9 @@ export class TreeMap extends Chart {
       .attr("x", defaultPadding)
       .attr("fill", this._fontColor);
 
-    const onUnfittingText = this._onUnfittingText;
     texts.call(wrapTexts);
 
+    const onUnfittingText = this._onUnfittingText;
     nodes.each(function () {
       const node = d3.select(this);
       const text = node.select("text");
