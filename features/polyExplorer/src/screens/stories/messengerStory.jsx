@@ -259,17 +259,6 @@ const MessengerStory = () => {
                 source={i18n.t("common:source.polyPedia")}
             ></InfoButton>
             <SectionTitle
-                title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
-            />
-            <p className="big-first-letter">
-                {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
-            </p>
-            <InfoButton
-                light
-                route="/purposes-bar-chart-info"
-                source={i18n.t("common:source.polyPedia")}
-            ></InfoButton>
-            <SectionTitle
                 title={i18n.t(`${i18nHeader}:data.types.title`)}
             ></SectionTitle>
             {dataTypes.map((dataType, i) => {

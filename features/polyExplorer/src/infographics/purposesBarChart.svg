@@ -1,29 +1,25 @@
-<svg width="259" height="472" viewBox="0 0 259 472" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="259" height="368" viewBox="0 0 259 368" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="purposesBarChart">
-<line id="Line 264" x1="-4.37114e-08" y1="0.5" x2="55" y2="0.499995" stroke="#A9B6C6"/>
-<line id="Line 265" x1="201" y1="0.5" x2="256" y2="0.499995" stroke="#A9B6C6"/>
-<g id="barChartInfo">
-<text id="textHighestValue" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="157" y="414.17">Highest value for a </tspan><tspan x="157" y="428.17">single purpose, </tspan><tspan x="157" y="442.17">based on currently </tspan><tspan x="157" y="456.17">available messenger </tspan><tspan x="157" y="470.17">information</tspan></text>
-<text id="textAverageValue" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="112" y="115.17">Average value </tspan><tspan x="112" y="129.17">from all messenger </tspan><tspan x="112" y="143.17">information </tspan><tspan x="112" y="157.17">currently available </tspan><tspan x="112" y="171.17">in this category</tspan></text>
-<text id="textMaxValue" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="369.17">Max value </tspan><tspan x="0" y="383.17">for this </tspan><tspan x="0" y="397.17">purpose</tspan></text>
-<path id="Line 163" d="M233 402L233 366" stroke="#0F1938"/>
-<path id="Line 164" d="M161 202L161 179" stroke="#0F1938"/>
-<path id="Line 165" d="M25 357L25 321" stroke="#0F1938"/>
+<text id="textHighestValue" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="157" y="310.17">Highest value for a </tspan><tspan x="157" y="324.17">single purpose, </tspan><tspan x="157" y="338.17">based on currently </tspan><tspan x="157" y="352.17">available messenger </tspan><tspan x="157" y="366.17">information</tspan></text>
+<text id="textAverageValue" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="112" y="11.17">Average value </tspan><tspan x="112" y="25.17">from all messenger </tspan><tspan x="112" y="39.17">information </tspan><tspan x="112" y="53.17">currently available </tspan><tspan x="112" y="67.17">in this category</tspan></text>
+<text id="textMaxValue" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="265.17">Max value </tspan><tspan x="0" y="279.17">for this </tspan><tspan x="0" y="293.17">purpose</tspan></text>
+<path id="Line 163" d="M233 298L233 262" stroke="#0F1938"/>
+<path id="Line 164" d="M161 98L161 75" stroke="#0F1938"/>
+<path id="Line 165" d="M25 253L25 217" stroke="#0F1938"/>
 <g id="Chip Outline Dark">
-<path d="M0 275C0 266.163 7.16344 259 16 259H132C140.837 259 148 266.163 148 275C148 283.837 140.837 291 132 291H16C7.16344 291 0 283.837 0 275Z" fill="#F7FAFC"/>
-<text id="textNameOfPurpose" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="12" y="279.865">Name of the purpose</tspan></text>
-<path d="M16 260H132V258H16V260ZM132 290H16V292H132V290ZM16 290C7.71573 290 1 283.284 1 275H-1C-1 284.389 6.61116 292 16 292V290ZM147 275C147 283.284 140.284 290 132 290V292C141.389 292 149 284.389 149 275H147ZM132 260C140.284 260 147 266.716 147 275H149C149 265.611 141.389 258 132 258V260ZM16 258C6.61116 258 -1 265.611 -1 275H1C1 266.716 7.71573 260 16 260V258Z" fill="#0F1938"/>
+<path d="M0 171C0 162.163 7.16344 155 16 155H132C140.837 155 148 162.163 148 171V171C148 179.837 140.837 187 132 187H16C7.16344 187 0 179.837 0 171V171Z" fill="#F7FAFC"/>
+<text id="textNameOfPurpose" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="12" y="175.865">Name of the purpose</tspan></text>
+<path d="M16 156H132V154H16V156ZM132 186H16V188H132V186ZM16 186C7.71573 186 1 179.284 1 171H-1C-1 180.389 6.61116 188 16 188V186ZM147 171C147 179.284 140.284 186 132 186V188C141.389 188 149 180.389 149 171H147ZM132 156C140.284 156 147 162.716 147 171H149C149 161.611 141.389 154 132 154V156ZM16 154C6.61116 154 -1 161.611 -1 171H1C1 162.716 7.71573 156 16 156V154Z" fill="#0F1938"/>
 </g>
-<text id="400" fill="#3749A9" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="191" y="309.67">400</tspan></text>
-<path id="Rectangle 692" d="M0 306C0 301.582 3.58172 298 8 298H187V314H8C3.58172 314 0 310.418 0 306Z" fill="#3749A9"/>
-<line id="Line 215" opacity="0.7" x1="161.5" y1="298" x2="161.5" y2="314" stroke="#F7FAFC"/>
-<text id="boldNumber" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="219.17">Number of mentions</tspan></text>
-<line id="Line 276" opacity="0.3" x1="161.5" y1="240" x2="160.5" y2="357" stroke="#3749A9" stroke-dasharray="2 2"/>
-<text id="350" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="148.845" y="219.17">350</tspan></text>
-<text id="textAverage" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="139.6" y="230.17">Average</tspan></text>
-<text id="textMaximum" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="208.04" y="230.17">Maximum</tspan></text>
-<text id="500" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="220.057" y="219.17">500</tspan></text>
-<line id="Line 277" opacity="0.3" x1="232.5" y1="240" x2="230.5" y2="357" stroke="#3749A9"/>
-</g>
+<text id="400" fill="#3749A9" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="191" y="205.67">400</tspan></text>
+<path id="Rectangle 692" d="M0 202C0 197.582 3.58172 194 8 194H187V210H8C3.58172 210 0 206.418 0 202V202Z" fill="#3749A9"/>
+<line id="Line 215" opacity="0.7" x1="161.5" y1="194" x2="161.5" y2="210" stroke="#F7FAFC"/>
+<text id="boldNumber" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="115.17">Number of mentions</tspan></text>
+<line id="Line 276" opacity="0.3" x1="161.5" y1="136" x2="160.5" y2="253" stroke="#3749A9" stroke-dasharray="2 2"/>
+<text id="350" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="148.845" y="115.17">350</tspan></text>
+<text id="textAverage" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="139.6" y="126.17">Average</tspan></text>
+<text id="textMaximum" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="208.04" y="126.17">Maximum</tspan></text>
+<text id="500" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="220.057" y="115.17">500</tspan></text>
+<line id="Line 277" opacity="0.3" x1="232.5" y1="136" x2="230.5" y2="253" stroke="#3749A9"/>
 </g>
 </svg>

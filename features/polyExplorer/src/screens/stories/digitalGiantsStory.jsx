@@ -251,11 +251,6 @@ const DigitalGiantsStory = () => {
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
             <Purposes companies={bigSix} />
-            <InfoButton
-                light
-                route="/purposes-bar-chart-info"
-                source={i18n.t("common:source.polyPedia")}
-            ></InfoButton>
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />

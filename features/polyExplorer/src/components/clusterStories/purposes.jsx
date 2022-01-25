@@ -1,5 +1,8 @@
 import React from "react";
+
+import i18n from "../../i18n.js";
 import PurposesBarChart from "../dataViz/purposesBarChart.jsx";
+import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
 export default function Purposes({ companies }) {
     const purposes = {};
@@ -26,6 +29,11 @@ export default function Purposes({ companies }) {
     return (
         <div className="purposes">
             <PurposesBarChart data={data} animation={true} />
+            <InfoButton
+                light
+                route="/purposes-bar-chart-info"
+                source={i18n.t("common:source.polyPedia")}
+            ></InfoButton>
         </div>
     );
 }
