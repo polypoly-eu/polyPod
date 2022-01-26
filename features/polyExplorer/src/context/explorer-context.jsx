@@ -85,6 +85,8 @@ const loadStoriesMetadata = () => {
     };
 };
 
+const routesToSkipOnBack = ["/search"];
+
 export const ExplorerProvider = ({ children }) => {
     //router hooks
     const history = useHistory();
@@ -154,9 +156,12 @@ export const ExplorerProvider = ({ children }) => {
     function handleBack() {
         if (currentPath != "/") {
             history.goBack();
-            if (history.location.state) {
-                changeNavigationState(history.location.state);
+            const location = history.location;
+            if (location.state) {
+                changeNavigationState(location.state);
             }
+            if (routesToSkipOnBack.indexOf(location.pathname) > -1)
+                handleBack();
         }
     }
 
