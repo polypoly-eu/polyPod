@@ -251,7 +251,7 @@ open class FeatureFragment : Fragment() {
                 context?.contentResolver
                     ?.query(returnUri, null, null, null, null)
             }?.use { cursor ->
-                if (cursor.moveToFirst()) {
+                if (cursor != null && cursor.moveToFirst()) {
                     val nameIndex =
                         cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
                     val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
