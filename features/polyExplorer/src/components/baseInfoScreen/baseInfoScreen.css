@@ -1,5 +1,9 @@
 .base-info {
-    padding: 16px;
+    max-width: var(--max-width);
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden scroll;
+    padding-top: 24px;
 }
 
 .base-info * {
@@ -7,42 +11,53 @@
     line-height: var(--line-height);
 }
 
-.base-info .info-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.base-info .info-title h1 {
-    width: 100%;
-    min-width: 134px;
-    margin: 0 8px;
-    font-family: "Jost Medium";
-    font-size: 16px;
+.base-info h1,
+.base-info h2 {
+    margin: 0;
     text-align: center;
-    text-transform: capitalize;
+    font-family: "Jost Medium";
+    font-weight: 500;
 }
 
-.base-info svg {
-    height: 100%;
-    max-width: var(--max-width);
+.base-info h1 {
+    font-size: 24px;
+}
+
+.base-info h2 {
+    font-size: 20px;
+}
+
+.base-info p {
+    font-size: 16px;
+    font-family: "Jost";
+    font-weight: 400;
+}
+
+.base-info img,
+.base-info button {
+    display: block;
 }
 
 .base-info button {
-    display: block;
     width: 100%;
     height: 48px;
-    margin-bottom: 16px;
+    margin: 30px 0;
     border-radius: 4px;
     background: var(--color-background-dark);
-    color: var(--color-text-light);
+    color: white;
     font-size: 18px;
     font-family: "Jost Medium";
+    font-weight: 500;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
 
 .base-info img {
     box-sizing: border-box;
     width: 100%;
     max-width: var(--max-width);
     padding: 4px 0;
+}
+
+.base-info-padding {
+    padding: 0 16px;
 }

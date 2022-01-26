@@ -29,7 +29,7 @@
     "@types/node-fetch": "^2.5.8",
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "ts-node": "^9.1.1"
   },
   "peerDependencies": {
