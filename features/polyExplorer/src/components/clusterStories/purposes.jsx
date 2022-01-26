@@ -3,8 +3,9 @@ import React from "react";
 import i18n from "../../i18n.js";
 import PurposesBarChart from "../dataViz/purposesBarChart.jsx";
 import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
+import PurposeInfoPopup from "../purposeInfoPopup/purposeInfoPopup.jsx";
 
-export default function Purposes({ companies }) {
+export default function Purposes({ companies, setPopUp }) {
     const purposes = {};
 
     for (let company of companies) {
@@ -28,10 +29,19 @@ export default function Purposes({ companies }) {
 
     return (
         <div className="purposes">
-            <PurposesBarChart data={data} animation={true} />
             <SourceInfoButton
                 infoScreenRoute="/purposes-bar-chart-info"
                 source={i18n.t("common:source.polyPedia")}
+            />
+            <PurposesBarChart
+                data={data}
+                animation={true}
+                onClick={(purpose) =>
+                    setPopUp({
+                        component: PurposeInfoPopup,
+                        props: { purpose },
+                    })
+                }
             />
         </div>
     );

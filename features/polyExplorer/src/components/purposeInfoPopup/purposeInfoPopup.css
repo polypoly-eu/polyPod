@@ -56,4 +56,5 @@
     line-height: var(--line-height);
     text-align: center;
     padding: 10px;
+    color: var(--color-text-light);
 }

@@ -62,17 +62,9 @@ function loadProducts() {
 //Will be clearer when we know the content structure
 const loadStoriesMetadata = () => {
     return {
-        messenger: {
-            title: "story.messenger.title",
-            previewText: "story.messenger.summarize",
-            img: {
-                src: "images/stories/messenger/card-image.svg",
-                alt: "story.messenger.alt",
-            },
-            route: "/story/messenger-story",
-        },
-        digitalGiants: {
+        "digital-giants-story": {
             title: "story.digitalGiants.title",
+            shortTitle: "story.digitalGiants.title.short",
             previewText: "story.digitalGiants.summarize",
             img: {
                 src: "images/stories/digital-giants/card-image.svg",
@@ -80,8 +72,20 @@ const loadStoriesMetadata = () => {
             },
             route: "/story/digital-giants-story",
         },
+        "messenger-story": {
+            title: "story.messenger.title",
+            shortTitle: "story.messenger.title.short",
+            previewText: "story.messenger.summarize",
+            img: {
+                src: "images/stories/messenger/card-image.svg",
+                alt: "story.messenger.alt",
+            },
+            route: "/story/messenger-story",
+        },
     };
 };
+
+const routesToSkipOnBack = ["/search"];
 
 export const ExplorerProvider = ({ children }) => {
     //router hooks
@@ -106,6 +110,7 @@ export const ExplorerProvider = ({ children }) => {
         },
     });
     const [activeFilters, setActiveFilters] = useState(new EntityFilter());
+    const [popUp, setPopUp] = useState(null);
 
     //constants
     const companies = loadCompanies();
@@ -151,10 +156,17 @@ export const ExplorerProvider = ({ children }) => {
     function handleBack() {
         if (currentPath != "/") {
             history.goBack();
-            if (history.location.state) {
-                changeNavigationState(history.location.state);
+            const location = history.location;
+            if (location.state) {
+                changeNavigationState(location.state);
             }
+            if (routesToSkipOnBack.indexOf(location.pathname) > -1)
+                handleBack();
         }
+    }
+
+    function closePopUp() {
+        setPopUp(null);
     }
 
     function entityObjectByPpid(ppid) {
@@ -184,7 +196,14 @@ export const ExplorerProvider = ({ children }) => {
         )
             pod.polyNav.setTitle(selectedEntityObject.name);
         else if (currentPath.startsWith("/story/"))
-            pod.polyNav.setTitle("data-story name goes here");
+            pod.polyNav.setTitle(
+                i18n.t(
+                    `clusterStoriesPreview:${
+                        storiesMetadata[currentPath.split("/story/")[1]]
+                            .shortTitle
+                    }`
+                )
+            );
         else
             pod.polyNav.setTitle(
                 i18n.t(`common:screenTitle.${currentPath.slice(1)}`)
@@ -289,6 +308,9 @@ export const ExplorerProvider = ({ children }) => {
                 handleFilterApply,
                 storiesMetadata,
                 products,
+                popUp,
+                setPopUp,
+                closePopUp,
             }}
         >
             {children}

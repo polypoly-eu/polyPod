@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import i18n from "../../i18n.js";
 import * as d3 from "d3";
 
-const PurposesBarChart = ({ data, animation }) => {
+const PurposesBarChart = ({ data, animation, onClick }) => {
     const [barWidth, setBarWidth] = useState(0);
     const [labelXPosition, setLabelXPosition] = useState(0);
 
@@ -147,7 +147,8 @@ const PurposesBarChart = ({ data, animation }) => {
                 .attr("x", labelXPosition)
                 .attr("y", (d) => yScale(d.title) + gHeight)
                 .attr("width", width)
-                .attr("height", labelTitleHeight.fo);
+                .attr("height", labelTitleHeight.fo)
+                .on("click", (_, d) => onClick(d));
             const labelTitleDiv = labelTitle.append("xhtml:div");
             const labelTitleP = labelTitleDiv
                 .append("p")

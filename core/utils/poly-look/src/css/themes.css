@@ -9,6 +9,10 @@
   letter-spacing: -0.01em;
 }
 
+.poly-theme input {
+  color: var(--theme-secondary-color);
+}
+
 :root,
 .poly-theme-light {
   --theme-primary-color: var(--color-gray-50);
@@ -22,4 +26,11 @@
   --theme-secondary-color: var(--color-gray-50);
   --theme-small-print-color: var(--color-gray-400);
   --theme-info-button-color: var(--color-gray-800);
+}
+.poly-theme h1,
+.poly-theme h2,
+.poly-theme h3,
+.poly-theme h4,
+.poly-theme h5 {
+  font-weight: var(--font-weight-regular);
 }
