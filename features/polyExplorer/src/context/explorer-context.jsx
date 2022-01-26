@@ -83,7 +83,7 @@ const loadStoriesMetadata = () => {
     };
 };
 
-const intermediateScreens = ["/search", "/entity-details"];
+const routesToSkipOnBack = ["/search"];
 
 export const ExplorerProvider = ({ children }) => {
     //router hooks
@@ -157,7 +157,7 @@ export const ExplorerProvider = ({ children }) => {
             if (location.state) {
                 changeNavigationState(location.state);
             }
-            if (intermediateScreens.indexOf(location.pathname) > -1)
+            if (routesToSkipOnBack.indexOf(location.pathname) > -1)
                 handleBack();
         }
     }
