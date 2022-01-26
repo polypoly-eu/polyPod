@@ -6,7 +6,7 @@ import Screen from "../screen/screen.jsx";
 
 import "./storiesInfoScreen.css";
 
-const StoriesInfoScreen = ({ className, infoChildren, noButton = false }) => {
+const StoriesInfoScreen = ({ className, infoChildren }) => {
     const { handleBack } = useContext(ExplorerContext);
     return (
         <Screen className={className} theme={"poly-theme-light"}>
@@ -25,13 +25,11 @@ const StoriesInfoScreen = ({ className, infoChildren, noButton = false }) => {
                         {infoChild}
                     </div>
                 ))}
-                {!noButton && (
-                    <div className="stories-info-padding">
-                        <button onClick={() => handleBack()}>
-                            {i18n.t("common:button.ok")}
-                        </button>
-                    </div>
-                )}
+                <div className="stories-info-padding">
+                    <button onClick={() => handleBack()}>
+                        {i18n.t("common:button.ok")}
+                    </button>
+                </div>
             </div>
         </Screen>
     );

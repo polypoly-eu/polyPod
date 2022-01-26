@@ -38,7 +38,6 @@ const DataRegionsDiagramInfo = () => {
             <StoriesInfoScreen
                 className="data-regions-diagram-info"
                 infoChildren={dataRegionsDiagramInfoContent}
-                noButton
             ></StoriesInfoScreen>
         </div>
     );
