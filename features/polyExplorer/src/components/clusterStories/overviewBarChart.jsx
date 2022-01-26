@@ -28,6 +28,7 @@ function Installs({ entities }) {
         </div>
     );
 }
+
 function Users({ entities }) {
     const data = entities
         .map((product) => ({
@@ -46,6 +47,7 @@ function Users({ entities }) {
         </div>
     );
 }
+
 function PartOf({ entities }) {
     const data = entities
         .map((product) => ({
