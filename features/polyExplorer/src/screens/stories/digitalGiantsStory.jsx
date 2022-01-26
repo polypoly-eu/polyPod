@@ -12,7 +12,7 @@ import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 import EntityList from "../../components/entityList/entityList.jsx";
-import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
+import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 
 const i18nHeader = "clusterDigitalGiantsStory";
@@ -200,13 +200,12 @@ const DigitalGiantsStory = () => {
                                         textColor={bubbleColor}
                                         strokeColor={bubbleStroke}
                                     />
-                                    <InfoButton
-                                        light
-                                        route={dataType.route}
+                                    <SourceInfoButton
+                                        infoScreenRoute={dataType.route}
                                         source={i18n.t(
                                             "common:source.polyPedia"
                                         )}
-                                    ></InfoButton>
+                                    />
                                 </>
                             ) : (
                                 <>
@@ -230,20 +229,18 @@ const DigitalGiantsStory = () => {
                                         />
                                         <h4>{dataType.data[0].title}</h4>
                                     </div>
-                                    <InfoButton
-                                        light
-                                        route={dataType.route}
+                                    <SourceInfoButton
+                                        infoScreenRoute={dataType.route}
                                         source={i18n.t(
                                             "common:source.polyPedia"
                                         )}
-                                    ></InfoButton>
+                                    />
                                 </>
                             )}
                         </Tab>
                     );
                 })}
             </Tabs>
-            <p className="source">{i18n.t("common:source")}: PolyPedia</p>
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
             />
@@ -279,11 +276,10 @@ const DigitalGiantsStory = () => {
                     },
                 }}
             />
-            <InfoButton
-                light
-                route="/data-regions-diagram-info"
+            <SourceInfoButton
+                infoScreenRoute="/data-regions-diagram-info"
                 source={i18n.t("common:source.polyPedia")}
-            ></InfoButton>
+            />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
             />

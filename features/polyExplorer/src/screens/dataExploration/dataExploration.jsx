@@ -11,7 +11,7 @@ import CompanyBubbles, {
     buildIndustrySets,
 } from "../../components/dataViz/companyBubbles.jsx";
 import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
-import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
+import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
 import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
 import CompanyIndustryList from "../../components/companyIndustryList/companyIndustryList.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
@@ -272,9 +272,9 @@ const DataExplorationScreen = () => {
                         }
                     />
 
-                    <InfoButton
+                    <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        route="/data-types-info"
+                        infoScreenRoute="/data-types-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                     {filler}
@@ -324,9 +324,9 @@ const DataExplorationScreen = () => {
                         }
                     />
 
-                    <InfoButton
+                    <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        route="/data-category-info"
+                        infoScreenRoute="/data-category-info"
                         saveActiveIndex={saveActiveIndex}
                         stateChange={{
                             explorationState: {
@@ -380,9 +380,9 @@ const DataExplorationScreen = () => {
                         height={visualizationHeight}
                     />
 
-                    <InfoButton
+                    <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        route="/data-correlation-info"
+                        infoScreenRoute="/data-correlation-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                 </div>
@@ -409,9 +409,9 @@ const DataExplorationScreen = () => {
                         maxCompanies={maxCompanies}
                     />
 
-                    <InfoButton
+                    <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        route="/companies-info"
+                        infoScreenRoute="/companies-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                 </div>
@@ -475,9 +475,9 @@ const DataExplorationScreen = () => {
                         highlight={highlights[entity.ppid]?.dataRecipient}
                     />
 
-                    <InfoButton
+                    <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        route="/companies-info"
+                        infoScreenRoute="/companies-info"
                         saveActiveIndex={saveActiveIndex}
                     />
                 </div>
@@ -616,11 +616,11 @@ const DataExplorationScreen = () => {
                                     saveActiveIndex={saveActiveIndex}
                                 />
                                 <div className="purpose-extra-margin">
-                                    <InfoButton
+                                    <SourceInfoButton
                                         source={i18n.t(
                                             "common:source.polyPedia"
                                         )}
-                                        route="/purpose-info"
+                                        infoScreenRoute="/purpose-info"
                                         saveActiveIndex={saveActiveIndex}
                                     />
                                 </div>
@@ -679,9 +679,9 @@ const DataExplorationScreen = () => {
                                 <DataRegionsLegend
                                     saveActiveIndex={saveActiveIndex}
                                 />
-                                <InfoButton
+                                <SourceInfoButton
                                     source={i18n.t("common:source.polyPedia")}
-                                    route="/jurisdiction-info"
+                                    infoScreenRoute="/jurisdiction-info"
                                 />
                                 <LinkButton
                                     route="/entity-details"

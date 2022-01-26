@@ -13,14 +13,12 @@ import OrderedList from "../../components/orderedList/orderedList.jsx";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
-import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
+import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
 import GradientCircleList from "../../components/gradientCircleList/gradientCircleList.jsx";
 
 import MessengerTreeMap from "../../components/clusterStories/messengerTreeMap.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 import MessengerMauChart from "../../components/clusterStories/messengerMauChart.jsx";
-
-import "./messengerStory.css";
 
 const i18nHeader = "clusterMessengerStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -229,11 +227,10 @@ const MessengerStory = () => {
                 {i18n.t(`${i18nHeader}:overview.paragraph.one`)}
             </p>
             <OverviewBarChart entities={Object.values(products)} />
-            <InfoButton
-                light
-                route="/overview-bar-chart-info"
+            <SourceInfoButton
+                infoScreenRoute="/overview-bar-chart-info"
                 source={i18n.t("common:source.polyPedia")}
-            ></InfoButton>
+            />
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:details.section`)}
             ></SectionTitle>
@@ -244,20 +241,18 @@ const MessengerStory = () => {
                 messengers={messengers}
                 i18nHeader={i18nHeader}
             />
-            <InfoButton
-                light
-                route="/details-line-chart-info"
+            <SourceInfoButton
+                infoScreenRoute="/details-line-chart-info"
                 source={i18n.t("common:source.polyPedia")}
-            ></InfoButton>
+            />
             <MessengerTreeMap
                 messengers={Object.values(products)}
                 i18nHeader={i18nHeader}
             />
-            <InfoButton
-                light
-                route="/details-treemap-info"
+            <SourceInfoButton
+                infoScreenRoute="/details-treemap-info"
                 source={i18n.t("common:source.polyPedia")}
-            ></InfoButton>
+            />
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:data.types.title`)}
             ></SectionTitle>
@@ -303,13 +298,12 @@ const MessengerStory = () => {
                                         textColor={bubbleColor}
                                         strokeColor={bubbleStroke}
                                     />
-                                    <InfoButton
-                                        light
-                                        route={dataType.route}
+                                    <SourceInfoButton
+                                        infoScreenRoute={dataType.route}
                                         source={i18n.t(
                                             "common:source.polyPedia"
                                         )}
-                                    ></InfoButton>
+                                    />
                                 </>
                             ) : (
                                 <>
@@ -333,13 +327,12 @@ const MessengerStory = () => {
                                         />
                                         <h4>{dataType.data[0].title}</h4>
                                     </div>
-                                    <InfoButton
-                                        light
-                                        route={dataType.route}
+                                    <SourceInfoButton
+                                        infoScreenRoute={dataType.route}
                                         source={i18n.t(
                                             "common:source.polyPedia"
                                         )}
-                                    ></InfoButton>
+                                    />
                                 </>
                             )}
                         </Tab>
@@ -381,11 +374,10 @@ const MessengerStory = () => {
                     },
                 }}
             />
-            <InfoButton
-                light
-                route="/data-regions-diagram-info"
+            <SourceInfoButton
+                infoScreenRoute="/data-regions-diagram-info"
                 source={i18n.t("common:source.polyPedia")}
-            ></InfoButton>
+            />
             <SectionTitle title={i18n.t(`${i18nHeader}:tips.section`)} />
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:tips.p.1`)}

@@ -92,6 +92,10 @@
     margin: 8px 16px;
 }
 
+.data-exploration .static-content .source-info-container {
+    padding: 0 16px;
+}
+
 .data-exploration .source {
     padding: 0 0 0 16px;
 }
@@ -159,9 +163,9 @@
     margin-bottom: -8px;
 }
 
-/* .static-content-jurisdictions .info-button {
-    bottom: 130px;
-} */
+.data-exploration .jurisdiction-tree-container .source-info-container .source {
+    padding: 0 16px;
+}
 
 .data-exploration .static-content .data-sharing-legend-fill {
     box-sizing: border-box;
@@ -245,6 +249,10 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
+}
+
+.data-exploration .purpose-content .source-info-container .source {
+    padding: 0 16px;
 }
 
 .data-exploration .companies-list-content {

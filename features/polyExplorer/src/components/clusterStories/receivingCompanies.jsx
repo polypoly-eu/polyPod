@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from "react";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
-import InfoButton from "../buttons/infoButton/infoButton.jsx";
+import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
 
 import i18n from "../../i18n.js";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
@@ -126,11 +126,10 @@ export default function ReceivingCompanies({ entities }) {
                     )}
                 >
                     <Companies entities={entities} />
-                    <InfoButton
-                        light
-                        route="/companies-bar-chart-info"
+                    <SourceInfoButton
+                        infoScreenRoute="/companies-bar-chart-info"
                         source={i18n.t("common:source.polyPedia")}
-                    ></InfoButton>
+                    />
                 </Tab>
                 <Tab
                     id="industries"
@@ -139,11 +138,10 @@ export default function ReceivingCompanies({ entities }) {
                     )}
                 >
                     <Industries entities={entities} />
-                    <InfoButton
-                        light
-                        route="/industries-packed-circle-info"
+                    <SourceInfoButton
+                        infoScreenRoute="/industries-packed-circle-info"
                         source={i18n.t("common:source.polyPedia")}
-                    ></InfoButton>
+                    />
                 </Tab>
             </Tabs>
         </div>
