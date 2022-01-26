@@ -34,6 +34,10 @@ async function syncPackage(pkg) {
 }
 
 const commands = {
+    "root-install": () => {
+        logDetail(`👷👷‍♀️ ...`);
+        await npmInstall("/");
+    },
     install: (pkg) => npmInstall(pkg.name),
     build: (pkg) => npmRun("build", pkg),
     test: (pkg) => npmRun("test", pkg),
@@ -110,11 +114,6 @@ async function main() {
     }
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
-
-    if (!["list", "list-deps"].includes(command)) {
-        logDetail(`👷👷‍♀️ ...`);
-        await npmInstall("/");
-    }
 
     if (command === "lint") {
         logDetail(`🧹 ...`);

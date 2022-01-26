@@ -9,6 +9,7 @@ const validCommands = [
     "lintfix",
     "list",
     "list-deps",
+    "root-install",
     "sync-deps",
     "test",
 ];
