@@ -62,7 +62,7 @@ function parseManifest(path) {
     try {
         return JSON.parse(fs.readFileSync(path));
     } catch {
-        throw `Cannot read ${path}`;
+        throw `Cannot read ${path} or parse the result`;
     }
 }
 
