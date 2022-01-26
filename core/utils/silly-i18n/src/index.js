@@ -1,9 +1,3 @@
-import {
-    TranslationKeyError,
-    LanguageError,
-    NonExistingSectionError,
-} from "./errors.js";
-
 /**
  * Determines the environment language
  *
@@ -11,6 +5,59 @@ import {
  */
 export const determineLanguage = () =>
     Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0];
+
+/**
+ * Exception class for errors related to the language that is
+ * requested for the translation object
+ *
+ * @class
+ */
+export class LanguageError extends Error {
+    /**
+     * Class constructor
+     *
+     * @param message - Actual message included in the error
+     */
+    constructor(message) {
+        super(message);
+        this.name = "LanguageError";
+    }
+}
+
+/**
+ * Exception class to use when the section/namespace does not exist
+ *
+ * @class
+ */
+export class NonExistingSectionError extends Error {
+    /**
+     * Class constructor
+     *
+     * @param message - Message to include in the error
+     */
+    constructor(message) {
+        super(message);
+        this.name = "NonExistingSectionError";
+    }
+}
+
+/**
+ * Exception class to use when there's some problem with the key used
+ * in the translation, either the format or its existence.
+ *
+ * @class
+ */
+export class TranslationKeyError extends Error {
+    /**
+     * Class constructor
+     *
+     * @param message - Message to include in the error
+     */
+    constructor(message) {
+        super(message);
+        this.name = "TranslationKeyError";
+    }
+}
 
 /**
  * Simple class for performing string translations, with simple templating capabilities
@@ -43,17 +90,8 @@ export class I18n {
                     " is not a key in the translations hash provided"
             );
         }
-
         this.language = language in translations ? language : fallbackLanguage;
         this._translations = translations[this.language];
-    }
-
-    /**
-     * Sections present in the original trnslation hash
-     * @returns Array of strings, every one a section
-     */
-    get sections() {
-        return Object.keys(this._translations);
     }
 
     /**
@@ -107,13 +145,6 @@ export class I18nSection extends I18n {
      */
     constructor(i18n, section) {
         super(i18n.language, { [i18n.language]: i18n._translations });
-        if (!i18n.sections.includes(section)) {
-            throw new NonExistingSectionError(
-                `${section} is not included in translation data, only  ${
-                    super.sections
-                } are`
-            );
-        }
         this._section = section;
         Object.freeze(this);
     }
