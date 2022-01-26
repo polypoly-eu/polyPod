@@ -65,9 +65,6 @@ function skipPackages(packageTree, start) {
 }
 
 module.exports = {
-    extractDependencies,
-    createPackageData,
     createPackageTree,
-    collectDependentPackages,
     skipPackages,
 };
