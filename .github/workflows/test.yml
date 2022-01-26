@@ -46,6 +46,9 @@ jobs:
                       - 'features/**'
                       - 'podjs/**'
                       - 'build/**'
+            - name: Install root packages
+              if: steps.changes.outputs.coreAndFeatures == 'true' || steps.changes.outputs.js == 'true'
+              run: ./build.js root-install
             - name: Lint core and features
               if: steps.changes.outputs.js == 'true'
               run: ./build.js lint
