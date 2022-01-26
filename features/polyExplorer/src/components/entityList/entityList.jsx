@@ -24,6 +24,8 @@ function EntityList({ entities, showGrouped, sideLabel, expand }) {
 
     function Content({ children }) {
         if (expand) return <>{children}</>;
+
+        const marginStyles = { margin: "40px 0 0 0" };
         return (
             <InfiniteScroll
                 dataLength={allGroups.length - groupsToLoad.length}
@@ -31,6 +33,7 @@ function EntityList({ entities, showGrouped, sideLabel, expand }) {
                 scrollThreshold="80%"
                 hasMore={hasMore}
                 scrollableTarget="entity-list"
+                style={marginStyles}
             >
                 {children}
             </InfiniteScroll>
