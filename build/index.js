@@ -70,7 +70,7 @@ async function cleanPackage(pkg) {
     // package, we cover the conventional case as a fallback - but it's
     // arguably a bit dangerous.
     logDetail(`${pkg.name}: Executing fallback clean logic ...`);
-    for (let path of ["node_modules", "dist", "build"])
+    for (let path of ["node_modules", "dist"])
         await fsPromises.rm(path, { recursive: true, force: true });
 }
 
