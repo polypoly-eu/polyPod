@@ -13,6 +13,7 @@ import OrderedList from "../../components/orderedList/orderedList.jsx";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
+import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
 import GradientCircleList from "../../components/gradientCircleList/gradientCircleList.jsx";
 
 import MessengerTreeMap from "../../components/clusterStories/messengerTreeMap.jsx";
@@ -116,6 +117,7 @@ const MessengerStory = () => {
                     ),
                 };
             }),
+            route: "/company-data-types-info",
         },
         {
             id: "by-shares",
@@ -139,6 +141,7 @@ const MessengerStory = () => {
                     ),
                 };
             }),
+            route: "/shares-data-types-info",
         },
         {
             id: "by-types",
@@ -158,6 +161,7 @@ const MessengerStory = () => {
                     height: 400,
                 },
             ],
+            route: "/types-data-types-info",
         },
     ];
 
@@ -223,6 +227,10 @@ const MessengerStory = () => {
                 {i18n.t(`${i18nHeader}:overview.paragraph.one`)}
             </p>
             <OverviewBarChart entities={Object.values(products)} />
+            <SourceInfoButton
+                infoScreenRoute="/overview-bar-chart-info"
+                source={i18n.t("common:source.polyPedia")}
+            />
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:details.section`)}
             ></SectionTitle>
@@ -233,9 +241,17 @@ const MessengerStory = () => {
                 messengers={messengers}
                 i18nHeader={i18nHeader}
             />
+            <SourceInfoButton
+                infoScreenRoute="/details-line-chart-info"
+                source={i18n.t("common:source.polyPedia")}
+            />
             <MessengerTreeMap
                 messengers={Object.values(products)}
                 i18nHeader={i18nHeader}
+            />
+            <SourceInfoButton
+                infoScreenRoute="/details-treemap-info"
+                source={i18n.t("common:source.polyPedia")}
             />
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:data.types.title`)}
@@ -275,39 +291,54 @@ const MessengerStory = () => {
                                 </p>
                             </div>
                             {dataType.id !== "by-types" ? (
-                                <MatrixBubblesChart
-                                    data={dataType.data}
-                                    bubbleColor={bubbleColor}
-                                    textColor={bubbleColor}
-                                    strokeColor={bubbleStroke}
-                                />
-                            ) : (
-                                <div className="by-types-bubble-chart">
-                                    <PolyChart
-                                        type="bubble-cluster"
-                                        data={dataType.data[0].bubbles}
-                                        width={dataType.data[0].width}
-                                        height={dataType.data[0].height}
+                                <>
+                                    <MatrixBubblesChart
+                                        data={dataType.data}
                                         bubbleColor={bubbleColor}
-                                        textColor={dataType.data[0].bubbles.map(
-                                            (bubble) => {
-                                                selectedDataTypeBubble ===
-                                                bubble.value
-                                                    ? bubbleTextColor
-                                                    : bubbleColor;
-                                            }
-                                        )}
+                                        textColor={bubbleColor}
                                         strokeColor={bubbleStroke}
-                                        onBubbleClick={handleBubbleClick}
                                     />
-                                    <h4>{dataType.data[0].title}</h4>
-                                </div>
+                                    <SourceInfoButton
+                                        infoScreenRoute={dataType.route}
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <div className="by-types-bubble-chart">
+                                        <PolyChart
+                                            type="bubble-cluster"
+                                            data={dataType.data[0].bubbles}
+                                            width={dataType.data[0].width}
+                                            height={dataType.data[0].height}
+                                            bubbleColor={bubbleColor}
+                                            textColor={dataType.data[0].bubbles.map(
+                                                (bubble) => {
+                                                    selectedDataTypeBubble ===
+                                                    bubble.value
+                                                        ? bubbleTextColor
+                                                        : bubbleColor;
+                                                }
+                                            )}
+                                            strokeColor={bubbleStroke}
+                                            onBubbleClick={handleBubbleClick}
+                                        />
+                                        <h4>{dataType.data[0].title}</h4>
+                                    </div>
+                                    <SourceInfoButton
+                                        infoScreenRoute={dataType.route}
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                    />
+                                </>
                             )}
                         </Tab>
                     );
                 })}
             </Tabs>
-            <p className="source">{i18n.t("common:source")}: PolyPedia</p>
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
             />
@@ -342,6 +373,10 @@ const MessengerStory = () => {
                         others: otherJurisdictions,
                     },
                 }}
+            />
+            <SourceInfoButton
+                infoScreenRoute="/data-regions-diagram-info"
+                source={i18n.t("common:source.polyPedia")}
             />
             <SectionTitle title={i18n.t(`${i18nHeader}:tips.section`)} />
             <p className="big-first-letter">

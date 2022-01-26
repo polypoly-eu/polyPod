@@ -1,0 +1,4 @@
+{
+    "p1": "This diagram shows which industries the data receiving companies belong to - and which are the most popular industries.",
+    "p2": "To inform this diagram we mapped the data receiving companies to industry categories. This leads to a few challenges e.g. whether to label a company like Facebook as (industry) or rather as (RetailAndConsumption) since their business model is built on advertising. For now, we assign the main top-level industry."
+}

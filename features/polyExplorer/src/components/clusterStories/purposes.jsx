@@ -1,5 +1,8 @@
 import React from "react";
+
+import i18n from "../../i18n.js";
 import PurposesBarChart from "../dataViz/purposesBarChart.jsx";
+import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
 import PurposeInfoPopup from "../purposeInfoPopup/purposeInfoPopup.jsx";
 
 export default function Purposes({ companies, setPopUp }) {
@@ -35,6 +38,10 @@ export default function Purposes({ companies, setPopUp }) {
                         props: { purpose },
                     })
                 }
+            />
+            <SourceInfoButton
+                infoScreenRoute="/purposes-bar-chart-info"
+                source={i18n.t("common:source.polyPedia")}
             />
         </div>
     );

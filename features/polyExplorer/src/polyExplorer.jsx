@@ -26,6 +26,16 @@ import CompaniesInfoScreen from "./screens/explorationInfo/companiesInfo/compani
 import JurisdictionInfoScreen from "./screens/explorationInfo/jurisdictionInfo/jurisdictionInfo.jsx";
 import FeaturedEntityInfoScreen from "./screens/featuredEntityInfo/featuredEntityInfo.jsx";
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
+import DetailsLineChartInfo from "./screens/storiesInfoScreens/detailsLineChartInfo/detailsLineChartInfo.jsx";
+import CompanyDataTypesInfo from "./screens/storiesInfoScreens/dataTypesInfo/companyDataTypesInfo.jsx";
+import SharesDataTypesInfo from "./screens/storiesInfoScreens/dataTypesInfo/sharesDataTypesInfo.jsx";
+import TypesDataTypesInfo from "./screens/storiesInfoScreens/dataTypesInfo/typesDataTypesInfo.jsx";
+import IndustriesPackedCircleInfo from "./screens/storiesInfoScreens/industriesPackedCircleInfo/industriesPackedCircleInfo.jsx";
+import PurposesBarChartInfo from "./screens/storiesInfoScreens/barChartInfo/purposesBarChartInfo.jsx";
+import OverviewBarChartInfo from "./screens/storiesInfoScreens/barChartInfo/overviewBarChartInfo.jsx";
+import DataRegionsDiagramInfo from "./screens/storiesInfoScreens/dataRegionsDiagramInfo/dataRegionsDiagramInfo.jsx";
+import DetailsTreemapInfo from "./screens/storiesInfoScreens/detailsTreemapInfo/detailsTreemapInfo.jsx";
+import CompaniesBarChartInfo from "./screens/storiesInfoScreens/barChartInfo/companiesBarChartInfo.jsx";
 
 //stories
 import MessengerStory from "./screens/stories/messengerStory.jsx";
@@ -70,6 +80,36 @@ const PolyExplorerApp = () => {
                 </Route>
                 <Route exact path="/info">
                     <InfoScreen />
+                </Route>
+                <Route exact path="/details-line-chart-info">
+                    <DetailsLineChartInfo />
+                </Route>
+                <Route exact path="/company-data-types-info">
+                    <CompanyDataTypesInfo />
+                </Route>
+                <Route exact path="/shares-data-types-info">
+                    <SharesDataTypesInfo />
+                </Route>
+                <Route exact path="/types-data-types-info">
+                    <TypesDataTypesInfo />
+                </Route>
+                <Route exact path="/industries-packed-circle-info">
+                    <IndustriesPackedCircleInfo />
+                </Route>
+                <Route exact path="/purposes-bar-chart-info">
+                    <PurposesBarChartInfo />
+                </Route>
+                <Route exact path="/overview-bar-chart-info">
+                    <OverviewBarChartInfo />
+                </Route>
+                <Route exact path="/data-regions-diagram-info">
+                    <DataRegionsDiagramInfo />
+                </Route>
+                <Route exact path="/details-treemap-info">
+                    <DetailsTreemapInfo />
+                </Route>
+                <Route exact path="/companies-bar-chart-info">
+                    <CompaniesBarChartInfo />
                 </Route>
                 <Route exact path="/data-region-info">
                     <DataRegionInfoScreen />

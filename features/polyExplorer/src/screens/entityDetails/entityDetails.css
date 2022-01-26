@@ -29,10 +29,6 @@
     font-size: 12px;
 }
 
-.tab-data-story .info-button {
-    bottom: 100px;
-}
-
 .details .swiper-container {
     height: 100%;
 }
@@ -217,7 +213,6 @@
     flex: 0 0 auto;
     font-family: "Jost Medium";
     font-size: 12px;
-    margin: 0px 16px;
     width: 100%;
     max-width: var(--max-width);
 }

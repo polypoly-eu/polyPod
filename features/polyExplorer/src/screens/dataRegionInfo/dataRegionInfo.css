@@ -14,12 +14,14 @@
 .data-region-info-screen .map {
     padding: 0 0;
     background-color: var(--color-background-dark);
+    margin-top: 8px;
 }
 
 .data-region-info-screen .legend-container {
     display: flex;
     box-sizing: border-box;
     flex-direction: row;
+    margin-bottom: 8px;
 }
 
 .data-region-info-screen .legend {

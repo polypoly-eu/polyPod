@@ -6,13 +6,13 @@ import Screen from "../screen/screen.jsx";
 
 import "./baseInfoScreen.css";
 
-const InfoScreen = ({ className, headline, children }) => {
+const BaseInfoScreen = ({ className, headline, children }) => {
     const { handleBack } = useContext(ExplorerContext);
     return (
-        <Screen className={className} light={true}>
+        <Screen className={className} theme={"poly-theme-light"}>
             <div className="base-info">
                 <div className="base-info-padding">
-                    <h1>{headline}</h1>
+                    {headline && <h1>{headline}</h1>}
                 </div>
                 {children}
                 <div className="base-info-padding">
@@ -25,4 +25,4 @@ const InfoScreen = ({ className, headline, children }) => {
     );
 };
 
-export default InfoScreen;
+export default BaseInfoScreen;

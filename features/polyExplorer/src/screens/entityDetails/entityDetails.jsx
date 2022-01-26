@@ -4,7 +4,7 @@ import Screen from "../../components/screen/screen.jsx";
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLegend.jsx";
 import FeaturedEntity from "../../components/featuredEntity/featuredEntity.jsx";
-import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
+import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 import EntityShortInfo from "../../components/entityShortInfo/entityShortInfo.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -230,10 +230,10 @@ const EntityDetails = () => {
                 content: (
                     <div className="tab-data-story">
                         <FeaturedEntity />
-                        <p className="source">
-                            {i18n.t("entityDetailsScreen:source")}: polyPedia
-                        </p>
-                        <InfoButton route="featured-entity-info" />
+                        <SourceInfoButton
+                            source={i18n.t("common:source.polyPedia")}
+                            infoScreenRoute="featured-entity-info"
+                        />
                         <div className="explore-data-btn-area">
                             <LinkButton
                                 className="explore-data-btn"
@@ -331,10 +331,10 @@ const EntityDetails = () => {
                 content: (
                     <div className="tab-data-story">
                         <FeaturedEntity />
-                        <p className="source">
-                            {i18n.t("entityDetailsScreen:source")}: polyPedia
-                        </p>
-                        <InfoButton route="featured-entity-info" />
+                        <SourceInfoButton
+                            source={i18n.t("common:source.polyPedia")}
+                            infoScreenRoute="featured-entity-info"
+                        />
                         <div className="explore-data-btn-area">
                             <LinkButton
                                 className="explore-data-btn"

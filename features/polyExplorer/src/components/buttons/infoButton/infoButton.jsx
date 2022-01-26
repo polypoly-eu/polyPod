@@ -3,24 +3,17 @@ import LinkButton from "../linkButton/linkButton.jsx";
 import "./infoButton.css";
 
 const InfoButton = ({
-    light = false,
-    route,
+    infoScreenRoute,
     saveActiveIndex,
     stateChange = null,
 }) => (
     <div onClick={saveActiveIndex}>
         <LinkButton
-            className={light ? "info-button-light" : "info-button"}
-            route={route}
+            className="info-button"
+            route={infoScreenRoute}
             stateChange={stateChange}
         >
-            <img
-                src={
-                    light
-                        ? "images/question-light.svg"
-                        : "images/question-dark.svg"
-                }
-            ></img>
+            <img src="images/question-info.svg"></img>
         </LinkButton>
     </div>
 );

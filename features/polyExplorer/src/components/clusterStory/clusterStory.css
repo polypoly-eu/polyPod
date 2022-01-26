@@ -70,7 +70,7 @@
 }
 
 .cluster-story .source {
-    color: #9e9e9e;
+    color: var(--theme-small-print-color);
     font-family: "Jost Medium";
     font-size: 12px;
 }

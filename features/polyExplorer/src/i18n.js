@@ -24,6 +24,15 @@ import clusterMessengerStoryEn from "./locales/en/stories/clusterMessengerStory.
 import clusterDigitalGiantsStoryEn from "./locales/en/stories/clusterDigitalGiants.json";
 import clusterStoryCommonEn from "./locales/en/stories/common.json";
 import barChartEn from "./locales/en/barChart.json";
+import commonInfoScreenEn from "./locales/en/infoScreens/commonInfoScreen.json";
+import detailsLineChartInfoScreenEn from "./locales/en/infoScreens/detailsLineChartInfoScreen.json";
+import dataTypesInfoScreensEn from "./locales/en/infoScreens/dataTypesInfoScreens.json";
+import industriesPackedCircleInfoScreenEn from "./locales/en/infoScreens/industriesPackedCircleInfoScreen.json";
+import purposesBarChartInfoScreenEn from "./locales/en/infoScreens/purposesBarChartInfoScreen.json";
+import dataRegionsDiagramInfoScreenEn from "./locales/en/infoScreens/dataRegionsDiagramInfoScreen.json";
+import detailsTreemapInfoScreenEn from "./locales/en/infoScreens/detailsTreemapInfoScreen.json";
+import companiesBarChartInfoScreenEn from "./locales/en/infoScreens/companiesBarChartInfoScreen.json";
+import overviewBarChartInfoScreenEn from "./locales/en/infoScreens/overviewBarChartInfoScreen.json";
 
 import commonDe from "./locales/de/common.json";
 import entityFilterScreenDe from "./locales/de/entityFilterScreen.json";
@@ -49,6 +58,15 @@ import clusterMessengerStoryDe from "./locales/de/stories/clusterMessengerStory.
 import clusterDigitalGiantsStoryDe from "./locales/de/stories/clusterDigitalGiants.json";
 import clusterStoryCommonDe from "./locales/de/stories/common.json";
 import barChartDe from "./locales/de/barChart.json";
+import commonInfoScreenDe from "./locales/de/infoScreens/commonInfoScreen.json";
+import detailsLineChartInfoScreenDe from "./locales/de/infoScreens/detailsLineChartInfoScreen.json";
+import industriesPackedCircleInfoScreenDe from "./locales/de/infoScreens/industriesPackedCircleInfoScreen.json";
+import dataTypesInfoScreensDe from "./locales/de/infoScreens/dataTypesInfoScreens.json";
+import purposesBarChartInfoScreenDe from "./locales/de/infoScreens/purposesBarChartInfoScreen.json";
+import dataRegionsDiagramInfoScreenDe from "./locales/de/infoScreens/dataRegionsDiagramInfoScreen.json";
+import detailsTreemapInfoScreenDe from "./locales/de/infoScreens/detailsTreemapInfoScreen.json";
+import companiesBarChartInfoScreenDe from "./locales/de/infoScreens/companiesBarChartInfoScreen.json";
+import overviewBarChartInfoScreenDe from "./locales/de/infoScreens/overviewBarChartInfoScreen.json";
 
 export default new I18n(determineLanguage(), {
     en: {
@@ -76,6 +94,15 @@ export default new I18n(determineLanguage(), {
         clusterDigitalGiantsStory: clusterDigitalGiantsStoryEn,
         clusterStoryCommon: clusterStoryCommonEn,
         barChart: barChartEn,
+        commonInfoScreen: commonInfoScreenEn,
+        detailsLineChartInfoScreen: detailsLineChartInfoScreenEn,
+        dataTypesInfoScreens: dataTypesInfoScreensEn,
+        industriesPackedCircleInfoScreen: industriesPackedCircleInfoScreenEn,
+        purposesBarChartInfoScreen: purposesBarChartInfoScreenEn,
+        dataRegionsDiagramInfoScreen: dataRegionsDiagramInfoScreenEn,
+        detailsTreemapInfoScreen: detailsTreemapInfoScreenEn,
+        companiesBarChartInfoScreen: companiesBarChartInfoScreenEn,
+        overviewBarChartInfoScreen: overviewBarChartInfoScreenEn,
     },
     de: {
         common: commonDe,
@@ -102,5 +129,14 @@ export default new I18n(determineLanguage(), {
         clusterDigitalGiantsStory: clusterDigitalGiantsStoryDe,
         clusterStoryCommon: clusterStoryCommonDe,
         barChart: barChartDe,
+        commonInfoScreen: commonInfoScreenDe,
+        detailsLineChartInfoScreen: detailsLineChartInfoScreenDe,
+        industriesPackedCircleInfoScreen: industriesPackedCircleInfoScreenDe,
+        dataTypesInfoScreens: dataTypesInfoScreensDe,
+        purposesBarChartInfoScreen: purposesBarChartInfoScreenDe,
+        dataRegionsDiagramInfoScreen: dataRegionsDiagramInfoScreenDe,
+        detailsTreemapInfoScreen: detailsTreemapInfoScreenDe,
+        companiesBarChartInfoScreen: companiesBarChartInfoScreenDe,
+        overviewBarChartInfoScreen: overviewBarChartInfoScreenDe,
     },
 });

@@ -1,0 +1,29 @@
+.source-info-container {
+    height: 48px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+.source-info-container .source {
+    padding: 0;
+    color: var(--theme-small-print-color);
+    font-family: "Jost Medium";
+    font-size: 12px;
+}
+
+.source-info-container .info-button {
+    position: static;
+    margin-right: -16px;
+}
+
+.swiper-container .source-info-container .info-button {
+    margin-right: 0;
+}
+
+.tab-data-story .source-info-container .source {
+    margin: 16px;
+}
+
