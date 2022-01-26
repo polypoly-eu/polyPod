@@ -5,7 +5,7 @@
     position: absolute;
     right: 0;
     bottom: 50px;
-    background-color: var(--color-button-dark-grey);
+    background-color: var(--theme-info-button-color);
     filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.06)), drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1));
 }
 

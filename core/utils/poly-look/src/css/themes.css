@@ -13,9 +13,13 @@
 .poly-theme-light {
   --theme-primary-color: var(--color-gray-50);
   --theme-secondary-color: var(--color-indigo-950);
+  --theme-small-print-color: var(--color-gray-500);
+  --theme-info-button-color: var(--color-gray-400);
 }
 
 .poly-theme-dark {
   --theme-primary-color: var(--color-indigo-950);
   --theme-secondary-color: var(--color-gray-50);
+  --theme-small-print-color: var(--color-gray-400);
+  --theme-info-button-color: var(--color-gray-800);
 }
