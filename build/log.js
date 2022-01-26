@@ -1,3 +1,5 @@
+const { ANSIBold } = require("./utils.js");
+
 const logMain = (message) => console.log(`\n 🚧 ${message}`);
 
 const logDetail = (message) => console.log(`\n 🏗️ ${message}`);
@@ -22,4 +24,13 @@ function logDependencies(packageTree) {
     }
 }
 
-module.exports = { logMain, logDetail, logDependencies };
+function logSuccess(command, timeLapsed) {
+    let message = `✅ Command «${ANSIBold(command)}» succeeded`;
+    const secondsLapsed = (timeLapsed / 1000).toFixed(2);
+    if (timeLapsed) {
+        message += ` in ⏰ ${ANSIBold(secondsLapsed)}s!`;
+    }
+    logMain(message);
+}
+
+module.exports = { logMain, logDetail, logDependencies, logSuccess };

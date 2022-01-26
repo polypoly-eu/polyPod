@@ -14,7 +14,7 @@ const {
     ANSIInvert,
 } = require("./utils.js");
 
-const { logMain, logDetail, logDependencies } = require("./log.js");
+const { logMain, logDetail, logDependencies, logSuccess } = require("./log.js");
 
 const validCommands = [
     "build",
@@ -251,15 +251,6 @@ async function processAll(packageTree, command) {
 
     for (let name of Object.keys(packageTree))
         await processPackage(name, packageTree, command);
-}
-
-function logSuccess(command, timeLapsed) {
-    let message = `✅ Command «${ANSIBold(command)}» succeeded`;
-    const secondsLapsed = (timeLapsed / 1000).toFixed(2);
-    if (timeLapsed) {
-        message += ` in ⏰ ${ANSIBold(secondsLapsed)}s!`;
-    }
-    logMain(message);
 }
 
 async function main() {
