@@ -2,12 +2,12 @@
     height: 48px;
     position: relative;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin-top: 16px;
 }
 
 .source-info-container .source {
-    margin: 0;
     padding: 0;
     color: var(--theme-small-print-color);
     font-family: "Jost Medium";
