@@ -29,10 +29,6 @@ export default function Purposes({ companies, setPopUp }) {
 
     return (
         <div className="purposes">
-            <SourceInfoButton
-                infoScreenRoute="/purposes-bar-chart-info"
-                source={i18n.t("common:source.polyPedia")}
-            />
             <PurposesBarChart
                 data={data}
                 animation={true}
@@ -42,6 +38,10 @@ export default function Purposes({ companies, setPopUp }) {
                         props: { purpose },
                     })
                 }
+            />
+            <SourceInfoButton
+                infoScreenRoute="/purposes-bar-chart-info"
+                source={i18n.t("common:source.polyPedia")}
             />
         </div>
     );
