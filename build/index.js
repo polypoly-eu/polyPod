@@ -12,7 +12,7 @@ const { checkVersions, ANSIBold } = require("./utils.js");
 const { logMain, logDetail, logDependencies, logSuccess } = require("./log.js");
 const { parseCommandLine, showUsage, parseManifest } = require("./cli.js");
 const { createPackageTree, skipPackages } = require("./deps.js");
-const { npm, npx, npmInstall, npmRun } = require("./npm.js");
+const { npm, npx, npmInstall, npmRun, runCommand } = require("./npm.js");
 
 async function cleanPackage(pkg) {
     if (await npmRun("clean", pkg)) return;
@@ -112,23 +112,23 @@ async function main() {
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
 
     if (command === "root-install") {
-        logDetail(`👷👷‍♀️ ...`);
-        await npmInstall("/");
-        logSuccess(command);
+        await runCommand("root-install", "👷👷‍♀️", async () => {
+            await npmInstall("/");
+        });
         return 0;
     }
 
     if (command === "lint") {
-        logDetail(`🧹 ...`);
-        await npx(["eslint", ...eslintOptions]);
-        logSuccess(command);
+        await runCommand("lint", "🧹", async () => {
+            await npx(["eslint", ...eslintOptions]);
+        });
         return 0;
     }
 
     if (command === "lintfix") {
-        logDetail(`🚨 ...`);
-        await npx(["eslint", "--fix", ...eslintOptions]);
-        logSuccess(command);
+        await runCommand("lintfix", "🚨", async () => {
+            await npx(["eslint", "--fix", ...eslintOptions]);
+        });
         return 0;
     }
 

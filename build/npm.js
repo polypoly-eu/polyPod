@@ -1,7 +1,7 @@
 const { spawn } = require("child_process");
 
 const { platformize, ANSIInvert } = require("./utils.js");
-const { logDetail } = require("./log.js");
+const { logDetail, logSuccess } = require("./log.js");
 
 function executeProcess(executable, args, env = process.env) {
     const cmd = platformize(executable);
@@ -51,4 +51,10 @@ async function npmRun(script, pkg) {
     return true;
 }
 
-module.exports = { npm, npx, npmInstall, npmRun };
+async function runCommand(command, emojis, callback) {
+    logDetail(`${emojis} ...`);
+    await callback();
+    logSuccess(command);
+}
+
+module.exports = { npm, npx, npmInstall, npmRun, runCommand };
