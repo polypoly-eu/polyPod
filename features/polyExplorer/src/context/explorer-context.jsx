@@ -62,16 +62,6 @@ function loadProducts() {
 //Will be clearer when we know the content structure
 const loadStoriesMetadata = () => {
     return {
-        "messenger-story": {
-            title: "story.messenger.title",
-            shortTitle: "story.messenger.title.short",
-            previewText: "story.messenger.summarize",
-            img: {
-                src: "images/stories/messenger/card-image.svg",
-                alt: "story.messenger.alt",
-            },
-            route: "/story/messenger-story",
-        },
         "digital-giants-story": {
             title: "story.digitalGiants.title",
             shortTitle: "story.digitalGiants.title.short",
@@ -81,6 +71,16 @@ const loadStoriesMetadata = () => {
                 alt: "story.digitalGiants.alt",
             },
             route: "/story/digital-giants-story",
+        },
+        "messenger-story": {
+            title: "story.messenger.title",
+            shortTitle: "story.messenger.title.short",
+            previewText: "story.messenger.summarize",
+            img: {
+                src: "images/stories/messenger/card-image.svg",
+                alt: "story.messenger.alt",
+            },
+            route: "/story/messenger-story",
         },
     };
 };
