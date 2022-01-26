@@ -4,6 +4,7 @@ import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import i18n from "../../i18n.js";
 
 import "./overviewBarChart.css";
+import { latestActiveUsersValue } from "../../screens/stories/story-utils.js";
 const chartColors = {
     primary: "#3aa6ff",
     secondary: "#fff",
@@ -27,13 +28,12 @@ function Installs({ entities }) {
         </div>
     );
 }
+
 function Users({ entities }) {
     const data = entities
-        .map(({ name, activeUsers }) => ({
-            title: name,
-            value:
-                activeUsers.values[activeUsers.values.length - 1].user_count /
-                1000000,
+        .map((product) => ({
+            title: product.name,
+            value: latestActiveUsersValue(product),
         }))
         .filter((data) => data.value);
     return (
@@ -47,14 +47,15 @@ function Users({ entities }) {
         </div>
     );
 }
+
 function PartOf({ entities }) {
     const data = entities
-        .map(({ name, activeUsers, productOwner }) => ({
-            title: name,
-            value:
-                activeUsers.values[activeUsers.values.length - 1].user_count /
-                1000000,
-            group: productOwner.some((owner) => owner.includes("Facebook"))
+        .map((product) => ({
+            title: product.name,
+            value: latestActiveUsersValue(product),
+            group: product.productOwner.some((owner) =>
+                owner.includes("Facebook")
+            )
                 ? "facebook"
                 : "other",
         }))
