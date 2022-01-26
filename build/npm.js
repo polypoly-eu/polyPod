@@ -1,6 +1,6 @@
 const { spawn } = require("child_process");
 
-const { platformize } = require("./utils.js");
+const { platformize, ANSIInvert } = require("./utils.js");
 const { logDetail } = require("./log.js");
 
 function executeProcess(executable, args, env = process.env) {
@@ -34,6 +34,10 @@ const npm = async (...args) => {
     logDetail(` ${ANSIInvert("npm " + realCommand)} finished in ${elapsed} ms`);
 };
 
+const npx = async (...args) => {
+    await executeProcess("npx", ...args);
+};
+
 async function npmInstall(name) {
     logDetail(`${name}: Installing dependencies ...`);
     await npm("--no-audit", "--prefer-offline", "ci");
@@ -47,4 +51,4 @@ async function npmRun(script, pkg) {
     return true;
 }
 
-module.exports = { executeProcess, npm, npmInstall, npmRun };
+module.exports = { npm, npx, npmInstall, npmRun };

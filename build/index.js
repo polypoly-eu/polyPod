@@ -4,21 +4,15 @@
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 const path = require("path");
-const { spawn } = require("child_process");
 
 const { performance } = require("perf_hooks");
 
-const {
-    platformize,
-    checkVersions,
-    ANSIBold,
-    ANSIInvert,
-} = require("./utils.js");
+const { checkVersions, ANSIBold } = require("./utils.js");
 
 const { logMain, logDetail, logDependencies, logSuccess } = require("./log.js");
 const { parseCommandLine, showUsage, parseManifest } = require("./cli.js");
 const { createPackageTree, skipPackages } = require("./deps.js");
-const { executeProcess, npm, npmInstall, npmRun } = require("./npm.js");
+const { npm, npx, npmInstall, npmRun } = require("./npm.js");
 
 async function cleanPackage(pkg) {
     if (await npmRun("clean", pkg)) return;
@@ -124,14 +118,14 @@ async function main() {
 
     if (command === "lint") {
         logDetail(`🧹 ...`);
-        await executeProcess("npx", ["eslint", ...eslintOptions]);
+        await npx(["eslint", ...eslintOptions]);
         logSuccess(command);
         return 0;
     }
 
     if (command === "lintfix") {
         logDetail(`🚨 ...`);
-        await executeProcess("npx", ["eslint", "--fix", ...eslintOptions]);
+        await npx(["eslint", "--fix", ...eslintOptions]);
         logSuccess(command);
         return 0;
     }
