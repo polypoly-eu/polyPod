@@ -53,7 +53,7 @@ export function createFacebookandOtherTreeMapData(products, facebookGroup) {
     return treeMap;
 }
 
-function latestActiveUsersValue(product) {
+export function latestActiveUsersValue(product) {
     let latest = product.activeUsers.values[0];
     for (let entry of product.activeUsers.values) {
         if (new Date(entry.end_date) > new Date(latest.end_date))

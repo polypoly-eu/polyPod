@@ -24,6 +24,7 @@ function EntityList({ entities, showGrouped, sideLabel, expand }) {
 
     function Content({ children }) {
         if (expand) return <>{children}</>;
+
         return (
             <InfiniteScroll
                 dataLength={allGroups.length - groupsToLoad.length}
@@ -31,6 +32,7 @@ function EntityList({ entities, showGrouped, sideLabel, expand }) {
                 scrollThreshold="80%"
                 hasMore={hasMore}
                 scrollableTarget="entity-list"
+                className="scroll-container"
             >
                 {children}
             </InfiniteScroll>

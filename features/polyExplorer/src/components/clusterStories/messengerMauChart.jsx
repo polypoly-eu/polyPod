@@ -42,6 +42,7 @@ const MessengerMauChart = ({ messengers, i18nHeader }) => {
                 date: value.end_date,
                 id: messenger.ppid,
             }))
+            .filter((d) => d.value > 0)
             .sort((a, b) => new Date(a.date) - new Date(b.date)),
     }));
 

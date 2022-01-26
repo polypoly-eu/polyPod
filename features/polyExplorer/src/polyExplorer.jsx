@@ -37,11 +37,13 @@ const PolyExplorerApp = () => {
         navigationState,
         handleOnboardingPopupClose,
         handleOnboardingPopupMoreInfo,
+        popUp,
+        closePopUp,
     } = useContext(ExplorerContext);
     const { firstRun } = navigationState;
 
     return (
-        <div className="poly-explorer">
+        <div className="poly-explorer poly-theme poly-theme-dark">
             <Switch>
                 <Route exact path="/">
                     <Redirect
@@ -100,12 +102,13 @@ const PolyExplorerApp = () => {
                     <ExampleStory />
                 </Route>
             </Switch>
-            {firstRun ? (
+            {firstRun && (
                 <OnboardingPopup
                     onClose={handleOnboardingPopupClose}
                     onMoreInfo={handleOnboardingPopupMoreInfo}
                 />
-            ) : null}
+            )}
+            {popUp && popUp.component({ onClose: closePopUp, ...popUp.props })}
         </div>
     );
 };
