@@ -9,6 +9,10 @@
   letter-spacing: -0.01em;
 }
 
+.poly-theme input {
+  color: var(--theme-secondary-color);
+}
+
 :root,
 .poly-theme-light {
   --theme-primary-color: var(--color-gray-50);
