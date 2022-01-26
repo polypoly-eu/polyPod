@@ -108,6 +108,7 @@ export const ExplorerProvider = ({ children }) => {
         },
     });
     const [activeFilters, setActiveFilters] = useState(new EntityFilter());
+    const [popUp, setPopUp] = useState(null);
 
     //constants
     const companies = loadCompanies();
@@ -157,6 +158,10 @@ export const ExplorerProvider = ({ children }) => {
                 changeNavigationState(history.location.state);
             }
         }
+    }
+
+    function closePopUp() {
+        setPopUp(null);
     }
 
     function entityObjectByPpid(ppid) {
@@ -298,6 +303,9 @@ export const ExplorerProvider = ({ children }) => {
                 handleFilterApply,
                 storiesMetadata,
                 products,
+                popUp,
+                setPopUp,
+                closePopUp,
             }}
         >
             {children}

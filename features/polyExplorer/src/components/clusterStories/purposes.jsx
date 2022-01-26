@@ -1,7 +1,8 @@
 import React from "react";
 import PurposesBarChart from "../dataViz/purposesBarChart.jsx";
+import PurposeInfoPopup from "../purposeInfoPopup/purposeInfoPopup.jsx";
 
-export default function Purposes({ companies }) {
+export default function Purposes({ companies, setPopUp }) {
     const purposes = {};
 
     for (let company of companies) {
@@ -25,7 +26,16 @@ export default function Purposes({ companies }) {
 
     return (
         <div className="purposes">
-            <PurposesBarChart data={data} animation={true} />
+            <PurposesBarChart
+                data={data}
+                animation={true}
+                onClick={(purpose) =>
+                    setPopUp({
+                        component: PurposeInfoPopup,
+                        props: { purpose },
+                    })
+                }
+            />
         </div>
     );
 }

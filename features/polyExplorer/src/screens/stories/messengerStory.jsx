@@ -28,7 +28,7 @@ const bubbleTextColor = "#0f1938";
 const primaryColor = "#3ba6ff";
 
 const MessengerStory = () => {
-    const { products, globalData, entityJurisdictionByPpid } =
+    const { products, globalData, entityJurisdictionByPpid, setPopUp } =
         useContext(ExplorerContext);
 
     const listOfMessengerApps = [
@@ -314,7 +314,7 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
-            <Purposes companies={messengers} globalData={globalData} />
+            <Purposes companies={messengers} setPopUp={setPopUp} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />
