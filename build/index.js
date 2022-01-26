@@ -4,9 +4,18 @@
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 const path = require("path");
-const { spawn, execSync } = require("child_process");
+const { spawn } = require("child_process");
 
 const { performance } = require("perf_hooks");
+
+const {
+    platformize,
+    checkVersions,
+    ANSIBold,
+    ANSIInvert,
+} = require("./utils.js");
+
+const { logMain, logDetail, logDependencies, logSuccess } = require("./log.js");
 
 const validCommands = [
     "build",
@@ -19,10 +28,6 @@ const validCommands = [
     "sync-deps",
     "test",
 ];
-
-function platformize(executable) {
-    return process.platform === "win32" ? `${executable}.cmd` : executable;
-}
 
 function parseCommandLine() {
     const [, scriptPath, ...parameters] = process.argv;
@@ -98,10 +103,6 @@ function createPackageTree(metaManifest) {
     );
 }
 
-const logMain = (message) => console.log(`\n 🚧 ${message}`);
-
-const logDetail = (message) => console.log(`\n 🏗️ ${message}`);
-
 function collectDependentPackages(name, packageTree) {
     const dependents = Object.keys(packageTree).filter((key) =>
         packageTree[key].localDependencies.includes(name)
@@ -126,26 +127,6 @@ function skipPackages(packageTree, start) {
     ]);
     for (let [name, pkg] of Object.entries(packageTree))
         if (!packagesToKeep.has(name)) pkg.processed = true;
-}
-
-function logDependencies(packageTree) {
-    const dependencyMap = {};
-    for (let pkg of Object.values(packageTree)) {
-        for (let dep of pkg.remoteDependencies) {
-            dependencyMap[dep] = dependencyMap[dep] || [];
-            dependencyMap[dep].push(pkg.name);
-        }
-    }
-
-    const sorted = Object.entries(dependencyMap).sort((a, b) =>
-        a[0].localeCompare(b[0])
-    );
-
-    logMain(`Listing dependencies of all packages ${sorted.length}`);
-    for (let [dependency, users] of sorted) {
-        logDetail(dependency);
-        console.log(`Used by: ${users.join(", ")}`);
-    }
 }
 
 function executeProcess(executable, args, env = process.env) {
@@ -271,53 +252,6 @@ async function processAll(packageTree, command) {
 
     for (let name of Object.keys(packageTree))
         await processPackage(name, packageTree, command);
-}
-
-function ANSIBold(string) {
-    return `\x1b[1m${string}\x1b[0m`;
-}
-
-function ANSIInvert(string) {
-    return `\x1b[7m${string}\x1b[27m`;
-}
-
-function logSuccess(command, timeLapsed) {
-    let message = `✅ Command «${ANSIBold(command)}» succeeded`;
-    const secondsLapsed = (timeLapsed / 1000).toFixed(2);
-    if (timeLapsed) {
-        message += ` in ⏰ ${ANSIBold(secondsLapsed)}s!`;
-    }
-    logMain(message);
-}
-
-function checkVersions(metaManifest) {
-    const thisNPM = platformize("npm");
-    let exitCode = 0;
-    const nodeVersion = process.version.split(".")[0];
-    if (nodeVersion < metaManifest.requiredNodeVersion) {
-        console.error(
-            `⚠️ Node.js v${metaManifest.requiredNodeVersion} or later ` +
-                `required, you are on ${process.version}`
-        );
-        exitCode = 1;
-    }
-    let npmVersion;
-    try {
-        npmVersion = execSync(`${thisNPM} --version`, {
-            encoding: "utf-8",
-        }).split(".")[0];
-        if (npmVersion < metaManifest.requiredNPMVersion) {
-            console.error(
-                `⚠️ NPM ${metaManifest.requiredNPMVersion} or later ` +
-                    `required, you are on ${npmVersion}`
-            );
-            exitCode = 1;
-        }
-    } catch (error) {
-        console.error(`⚠️ Error ${error} when trying to find NPM version`);
-        exitCode = 1;
-    }
-    return exitCode;
 }
 
 async function main() {
