@@ -3,9 +3,16 @@
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 const path = require("path");
-const { spawn, execSync } = require("child_process");
+const { spawn } = require("child_process");
 
 const { performance } = require("perf_hooks");
+
+const {
+    platformize,
+    checkVersions,
+    ANSIBold,
+    ANSIInvert,
+} = require("./utils.js");
 
 const validCommands = [
     "build",
@@ -18,10 +25,6 @@ const validCommands = [
     "sync-deps",
     "test",
 ];
-
-function platformize(executable) {
-    return process.platform === "win32" ? `${executable}.cmd` : executable;
-}
 
 function parseCommandLine() {
     const [, scriptPath, ...parameters] = process.argv;
@@ -272,14 +275,6 @@ async function processAll(packageTree, command) {
         await processPackage(name, packageTree, command);
 }
 
-function ANSIBold(string) {
-    return `\x1b[1m${string}\x1b[0m`;
-}
-
-function ANSIInvert(string) {
-    return `\x1b[7m${string}\x1b[27m`;
-}
-
 function logSuccess(command, timeLapsed) {
     let message = `✅ Command «${ANSIBold(command)}» succeeded`;
     const secondsLapsed = (timeLapsed / 1000).toFixed(2);
@@ -287,36 +282,6 @@ function logSuccess(command, timeLapsed) {
         message += ` in ⏰ ${ANSIBold(secondsLapsed)}s!`;
     }
     logMain(message);
-}
-
-function checkVersions(metaManifest) {
-    const thisNPM = platformize("npm");
-    let exitCode = 0;
-    const nodeVersion = process.version.split(".")[0];
-    if (nodeVersion < metaManifest.requiredNodeVersion) {
-        console.error(
-            `⚠️ Node.js v${metaManifest.requiredNodeVersion} or later ` +
-                `required, you are on ${process.version}`
-        );
-        exitCode = 1;
-    }
-    let npmVersion;
-    try {
-        npmVersion = execSync(`${thisNPM} --version`, {
-            encoding: "utf-8",
-        }).split(".")[0];
-        if (npmVersion < metaManifest.requiredNPMVersion) {
-            console.error(
-                `⚠️ NPM ${metaManifest.requiredNPMVersion} or later ` +
-                    `required, you are on ${npmVersion}`
-            );
-            exitCode = 1;
-        }
-    } catch (error) {
-        console.error(`⚠️ Error ${error} when trying to find NPM version`);
-        exitCode = 1;
-    }
-    return exitCode;
 }
 
 async function main() {

@@ -1,4 +1,4 @@
-const buildMain = require(".");
+const buildMain = require("./index.js");
 
 let lastExitCode;
 
@@ -46,6 +46,7 @@ async function build(...parameters) {
 
 test("Valid command", async () => {
     const { exitCode, stderr } = await build("list");
+    console.log(stderr);
     expect(exitCode).toEqual(0);
     expect(stderr).toEqual("");
 });
