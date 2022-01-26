@@ -85,11 +85,12 @@
 }
 
 .data-exploration .static-content .bubble-source {
+    height: 48px;
     font-family: "Jost Medium";
     font-size: 12px;
     line-height: 14px;
     color: var(--color-medium);
-    margin: 8px 16px;
+    margin: 16px 0 0 16px;
 }
 
 .data-exploration .static-content .source-info-container {

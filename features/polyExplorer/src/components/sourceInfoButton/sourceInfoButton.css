@@ -1,4 +1,5 @@
 .source-info-container {
+    height: 48px;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -20,5 +21,9 @@
 
 .swiper-container .source-info-container .info-button {
     margin-right: 0;
+}
+
+.tab-data-story .source-info-container .source {
+    margin: 16px;
 }
 
