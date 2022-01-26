@@ -19,8 +19,10 @@ jobs:
               uses: actions/cache@v2
               id: cache
               with:
-                  path: "**/node_modules"
-                  key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+                  path: |
+                    **/node_modules
+                    ~/.cache
+                  key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('package-lock.json') }}
             - name: Checks paths to rebuild Android
               uses: dorny/paths-filter@b2feaf19c27470162a626bd6fa8438ae5b263721 #v2.10.2
               id: changes
