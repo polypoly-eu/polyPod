@@ -32,7 +32,7 @@
     "data.types.text.shares": "Different messengers share different data types more often than others.",
     "data.types.tab.types": "By Types",
     "data.types.text.types": "Some of the data types shared the most indicate the use for targeted advertising.",
-    "data.types.legend.types": "Data Types: {{amount_of_data_types}} (shared {{amount_of_shares}} Times)",
+    "data.types.legend.types": "Data Types: {{amount_of_data_types}} (shared {{amount_of_shares}} times)",
     "details.owned.by.fb": "Owned by Facebook",
     "details.owned.by.others": "Others",
     "purposes.chart.legend": "Number of mentions",
