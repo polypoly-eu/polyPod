@@ -34,7 +34,7 @@ jobs:
               run: sudo xcode-select -switch /Applications/Xcode_12.4.app
             - name: Install modules if needed
               if: steps.cache.outputs.cache-hit != 'true'
-              run: ./build.js install
+              run: ./build.js root-install && ./build.js install
             - name: Build core and features
               run: ./build.js
             - name: Build and test iOS
