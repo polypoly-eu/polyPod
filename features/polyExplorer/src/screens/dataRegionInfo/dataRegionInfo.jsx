@@ -6,9 +6,9 @@ import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 
 import "./dataRegionInfo.css";
 
-const DataRegionInfo = ({ onClose }) => {
+export const DataRegionInfoContent = () => {
     return (
-        <BaseInfoScreen className="data-region-info-screen" onClose={onClose}>
+        <>
             <div className="base-info-padding">
                 <SectionTitle
                     title={i18n.t("dataRegionInfoScreen:heading")}
@@ -179,6 +179,14 @@ const DataRegionInfo = ({ onClose }) => {
                     }}
                 ></div>
             </div>
+        </>
+    );
+};
+
+const DataRegionInfo = ({ onClose }) => {
+    return (
+        <BaseInfoScreen className="data-region-info-screen" onClose={onClose}>
+            <DataRegionInfoContent />
         </BaseInfoScreen>
     );
 };
