@@ -32,9 +32,6 @@ const npm = async (...args) => {
             FORCE_COLOR: 1,
         }
     );
-    if (result !== 0) {
-        reject("Can't execute process");
-    }
     console.log("Not getting here");
     const elapsed = new Date() - start;
     const realCommand = args[args.length - 1];

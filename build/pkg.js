@@ -68,23 +68,23 @@ class Pkg {
     }
 
     async install() {
-        npmInstall(this.name);
+        await npmInstall(this.name);
     }
 
     async build() {
-        this.npmRun("build");
+        await this.npmRun("build");
     }
 
     async test() {
-        this.npmRun("test");
+        await this.npmRun("test");
     }
 
     async clean() {
-        this.clean();
+        await this.clean();
     }
 
     async syncdeps() {
-        this.sync();
+        await this.sync();
     }
 
     async executeCommand(command) {
