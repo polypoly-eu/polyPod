@@ -91,7 +91,10 @@ const DigitalGiantsStory = () => {
             translation: i18n.t(`${i18nHeader}:data.types.tab.companies`),
             data: bigSixNames.map((companyName, n) => {
                 return {
-                    title: companyName,
+                    title:
+                        companyName +
+                        ": " +
+                        bigSix[n]._data.dataTypesShared.length,
                     bubbles: bigSix[n]._data.dataTypesShared.map(() => {
                         return { value: 1 };
                     }),
@@ -105,7 +108,13 @@ const DigitalGiantsStory = () => {
             translation: i18n.t(`${i18nHeader}:data.types.tab.shares`),
             data: bigSixNames.map((companyName, n) => {
                 return {
-                    title: companyName,
+                    title:
+                        companyName +
+                        ": " +
+                        bigSix[n]._data.dataTypesShared.reduce(
+                            (acc, bubble) => acc + bubble.count,
+                            0
+                        ),
                     bubbles: bigSix[n]._data.dataTypesShared.map((bubble) => {
                         return { value: bubble.count };
                     }),
