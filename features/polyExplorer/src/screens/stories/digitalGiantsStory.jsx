@@ -153,11 +153,13 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:intro.p.1`)}
             </p>
-            <img
-                className="cluster-story-img"
-                src="images/stories/digital-giants/intro.svg"
-                alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
-            />
+            <div className="cluster-story-img-container">
+                <img
+                    className="cluster-story-img"
+                    src="images/stories/digital-giants/intro.svg"
+                    alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
+                />
+            </div>
             <GradientCircleList
                 introText={i18n.t(`${i18nHeader}:intro.p.2`)}
                 list={bigSixNames}

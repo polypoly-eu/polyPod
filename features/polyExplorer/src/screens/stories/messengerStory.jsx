@@ -198,11 +198,13 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:intro.paragraph.one`)}
             </p>
-            <img
-                className="cluster-story-img"
-                src="images/stories/messenger/intro-guy.svg"
-                alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
-            />
+            <div className="cluster-story-img-container">
+                <img
+                    className="cluster-story-img"
+                    src="images/stories/messenger/intro-guy.svg"
+                    alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
+                />
+            </div>
             <p>{i18n.t(`${i18nHeader}:intro.paragraph.two`)}</p>
             <GradientCircleList
                 introText={i18n.t(`${i18nHeader}:intro.paragraph.two`)}
