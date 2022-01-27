@@ -1,4 +1,4 @@
-.main-screen .nav-button-container {
+.nav-button-container {
     flex: 0 0 auto;
     height: 40px;
     width: 100%;
@@ -6,7 +6,7 @@
     background-color: var(--color-background-dark);
 }
 
-.main-screen .nav-button {
+.nav-button {
     box-sizing: border-box;
     background-color: var(--color-background-dark);
     width: 50%;
@@ -21,7 +21,7 @@
     outline: none;
 }
 
-.main-screen .nav-button.active {
+.nav-button.active {
     /*
      * Without this, a thin stripe of nav-button-container is visible below the
      * active element.

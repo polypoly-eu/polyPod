@@ -14,37 +14,33 @@ const MainScreen = () => {
     let showClusters = navigationState.showClusters;
 
     return (
-        <Screen
-            className="main-screen"
-            topShadow={false}
-            theme={showClusters ? "poly-theme-light" : "poly-theme-dark"}
-        >
-            <div className="nav-button-container poly-nav-bar-separator-bottom">
-                <button
-                    onClick={() => routeTo("main", { showClusters: true })}
-                    className={
-                        showClusters ? "nav-button active" : "nav-button"
-                    }
-                >
-                    {i18n.t("mainScreen:tab.discover")}
-                </button>
-                <button
-                    onClick={() => routeTo("main", { showClusters: false })}
-                    className={
-                        showClusters ? "nav-button" : "nav-button active"
-                    }
-                >
-                    {i18n.t("mainScreen:tab.explore", {
-                        total: Object.keys(entities).length,
-                    })}
-                </button>
-            </div>
-            {showClusters ? (
-                <StoriesPreview storiesMetadata={storiesMetadata} />
-            ) : (
-                <FilteredEntityList />
-            )}
-        </Screen>
+        <div className="nav-button-container poly-nav-bar-separator-bottom">
+            <button
+                onClick={() => routeTo("main", { showClusters: true })}
+                className={showClusters ? "nav-button active" : "nav-button"}
+            >
+                {i18n.t("mainScreen:tab.discover")}
+            </button>
+            <button
+                onClick={() => routeTo("main", { showClusters: false })}
+                className={showClusters ? "nav-button" : "nav-button active"}
+            >
+                {i18n.t("mainScreen:tab.explore", {
+                    total: Object.keys(entities).length,
+                })}
+            </button>
+            <Screen
+                className="main-screen"
+                topShadow={false}
+                theme={showClusters ? "poly-theme-light" : "poly-theme-dark"}
+            >
+                {showClusters ? (
+                    <StoriesPreview storiesMetadata={storiesMetadata} />
+                ) : (
+                    <FilteredEntityList />
+                )}
+            </Screen>
+        </div>
     );
 };
 
