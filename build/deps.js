@@ -32,7 +32,7 @@ function skipPackages(packageTree, start) {
         ...collectDependentPackages(start, packageTree),
     ]);
     for (let [name, pkg] of Object.entries(packageTree))
-        if (!packagesToKeep.has(name)) pkg.processed = true;
+        if (!packagesToKeep.has(name)) pkg.setProcessed();
 }
 
 module.exports = {

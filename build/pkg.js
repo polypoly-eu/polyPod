@@ -27,7 +27,7 @@ class Pkg {
     localDependencies;
     remoteDependencies;
     scripts;
-    processed;
+    _processed = false;
 
     constructor(path) {
         const manifest = parseManifest(`${path}/package.json`);
@@ -100,6 +100,14 @@ class Pkg {
         } finally {
             process.chdir(oldPath);
         }
+    }
+
+    get isProcessed() {
+        return this._processed;
+    }
+
+    setProcessed() {
+        this._processed = true;
     }
 }
 
