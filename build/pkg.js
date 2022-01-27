@@ -22,6 +22,12 @@ function extractDependencies(manifest) {
 }
 
 class Pkg {
+    name;
+    path;
+    localDependencies;
+    remoteDependencies;
+    scripts;
+
     constructor(path) {
         const manifest = parseManifest(`${path}/package.json`);
         const { localDependencies, remoteDependencies } =
