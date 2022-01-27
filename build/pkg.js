@@ -1,7 +1,8 @@
 const fsPromises = require("fs/promises");
+const fs = require("fs");
 
 const { parseManifest } = require("./cli.js");
-const { npmRun } = require("./npm.js");
+const { npm, npmRun } = require("./npm.js");
 const { logDetail } = require("./log.js");
 
 function extractDependencies(manifest) {
@@ -30,6 +31,14 @@ class Pkg {
         this.localDependencies = localDependencies;
         this.remoteDependencies = remoteDependencies;
         this.scripts = Object.keys(manifest.scripts || {});
+    }
+
+    async sync() {
+        logDetail(`🕑 ${this.name} ...`);
+        if (fs.existsSync("package-lock.json")) {
+            fs.rmSync("package-lock.json");
+        }
+        await npm("i");
     }
 
     async clean() {

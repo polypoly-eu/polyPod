@@ -1,32 +1,23 @@
 "use strict";
 
 // Remember! Only core modules here. It's run before any package install.
-const fs = require("fs");
 const path = require("path");
 
 const { performance } = require("perf_hooks");
 
 const { checkVersions, ANSIBold } = require("./utils.js");
 
-const { logMain, logDetail, logDependencies, logSuccess } = require("./log.js");
+const { logMain, logDependencies, logSuccess } = require("./log.js");
 const { parseCommandLine, showUsage, parseManifest } = require("./cli.js");
 const { createPackageTree, skipPackages } = require("./deps.js");
 const { npm, npx, npmInstall, npmRun, runCommand } = require("./npm.js");
-
-async function syncPackage(pkg) {
-    logDetail(`🕑 ${pkg.name} ...`);
-    if (fs.existsSync("package-lock.json")) {
-        fs.rmSync("package-lock.json");
-    }
-    await npm("i");
-}
 
 const commands = {
     install: (pkg) => npmInstall(pkg.name),
     build: (pkg) => npmRun("build", pkg),
     test: (pkg) => npmRun("test", pkg),
     clean: (pkg) => pkg.clean(),
-    "sync-deps": (pkg) => syncPackage(pkg),
+    "sync-deps": (pkg) => pkg.sync(),
 };
 
 async function executeCommand(pkg, command) {
