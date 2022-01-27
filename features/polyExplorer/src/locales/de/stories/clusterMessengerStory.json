@@ -25,7 +25,6 @@
     "details.monthly.active.users": "Monatliche aktive Nutzer (MAN in Millionen)",
     "details.monthly.active.users.21": "Monatliche aktive Nutzer 2020/2021 in Millionen",
     "data.types.title": "Data Types",
-    "data.types.legend": "data type",
     "data.types.tab.messenger": "By Messenger",
     "data.types.text.messenger": "Some data types need to be shared for what we expect from a messenger. But not all messengers share the same amount of data types. The extra sharing indicates that they make money with it.",
     "data.types.tab.shares": "By Shares",

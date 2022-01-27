@@ -1,16 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
-import MatrixBubblesChart from "../../components/clusterStories/MatrixBubblesChart.jsx";
+import DataTypes from "../../components/clusterStories/dataTypes.jsx";
 import Purposes from "../../components/clusterStories/purposes.jsx";
 import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
 import EntityList from "../../components/entityList/entityList.jsx";
 import OverviewBarChart from "../../components/clusterStories/overviewBarChart.jsx";
 import OrderedList from "../../components/orderedList/orderedList.jsx";
-import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
@@ -22,9 +21,6 @@ import MessengerMauChart from "../../components/clusterStories/messengerMauChart
 
 const i18nHeader = "clusterMessengerStory";
 const i18nHeaderCommon = "clusterStoryCommon";
-const bubbleColor = "#FB8A89";
-const bubbleStroke = "none";
-const bubbleTextColor = "#0f1938";
 
 const primaryColor = "#3ba6ff";
 
@@ -94,10 +90,6 @@ const MessengerStory = () => {
         .filter((e) => e)
         .sort((a, b) => b.total - a.total);
 
-    const [selectedDataTypeBubble, setSelectedDataTypeBubble] = useState(
-        dataTypesSharedCombined[0].total
-    );
-
     const dataTypes = [
         {
             id: "by-messenger",
@@ -164,10 +156,6 @@ const MessengerStory = () => {
             route: "/types-data-types-info",
         },
     ];
-
-    const handleBubbleClick = (_, node) => {
-        setSelectedDataTypeBubble(node.data.value);
-    };
 
     const jurisdictionLinks = createJurisdictionLinks(
         Object.values(products),
@@ -270,75 +258,10 @@ const MessengerStory = () => {
                     </p>
                 );
             })}
-            <Tabs>
-                {dataTypes.map((dataType, i) => {
-                    return (
-                        <Tab
-                            id={dataType.id}
-                            label={dataType.label}
-                            translation={dataType.translation}
-                            key={i}
-                        >
-                            <div className="data-types-legend">
-                                <div
-                                    className="bubble-legend"
-                                    style={{
-                                        backgroundColor: bubbleColor,
-                                    }}
-                                ></div>
-                                <p>
-                                    {i18n.t(`${i18nHeader}:data.types.legend`)}
-                                </p>
-                            </div>
-                            {dataType.id !== "by-types" ? (
-                                <>
-                                    <MatrixBubblesChart
-                                        data={dataType.data}
-                                        bubbleColor={bubbleColor}
-                                        textColor={bubbleColor}
-                                        strokeColor={bubbleStroke}
-                                    />
-                                    <SourceInfoButton
-                                        infoScreenRoute={dataType.route}
-                                        source={i18n.t(
-                                            "common:source.polyPedia"
-                                        )}
-                                    />
-                                </>
-                            ) : (
-                                <>
-                                    <div className="by-types-bubble-chart">
-                                        <PolyChart
-                                            type="bubble-cluster"
-                                            data={dataType.data[0].bubbles}
-                                            width={dataType.data[0].width}
-                                            height={dataType.data[0].height}
-                                            bubbleColor={bubbleColor}
-                                            textColor={dataType.data[0].bubbles.map(
-                                                (bubble) => {
-                                                    selectedDataTypeBubble ===
-                                                    bubble.value
-                                                        ? bubbleTextColor
-                                                        : bubbleColor;
-                                                }
-                                            )}
-                                            strokeColor={bubbleStroke}
-                                            onBubbleClick={handleBubbleClick}
-                                        />
-                                        <h4>{dataType.data[0].title}</h4>
-                                    </div>
-                                    <SourceInfoButton
-                                        infoScreenRoute={dataType.route}
-                                        source={i18n.t(
-                                            "common:source.polyPedia"
-                                        )}
-                                    />
-                                </>
-                            )}
-                        </Tab>
-                    );
-                })}
-            </Tabs>
+            <DataTypes
+                dataTypes={dataTypes}
+                dataTypesSharedCombined={dataTypesSharedCombined}
+            />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
             />
