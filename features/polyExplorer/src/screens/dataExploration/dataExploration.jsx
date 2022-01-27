@@ -684,7 +684,7 @@ const DataExplorationScreen = () => {
                                     infoScreenRoute="/jurisdiction-info"
                                 />
                                 <LinkButton
-                                    route="/entity-details"
+                                    route="/main"
                                     className="explore-other"
                                 >
                                     {i18n.t(
