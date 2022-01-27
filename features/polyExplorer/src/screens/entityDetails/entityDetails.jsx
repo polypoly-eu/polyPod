@@ -391,10 +391,10 @@ const EntityDetails = () => {
         return tabs;
     };
     return (
-        <Screen className="entity-details-screen">
+        <Screen className="entity-details-screen" topShadow={false}>
             <div className="details">
                 {loadTabs().length > 1 && (
-                    <div className="tab-button-container">
+                    <div className="tab-button-container poly-nav-bar-separator-bottom">
                         {loadTabs().map((tab, index) => (
                             <button
                                 key={index}
@@ -412,7 +412,10 @@ const EntityDetails = () => {
                 )}
                 {loadTabs().length === 1 ? (
                     loadTabs().map((tab, index) => (
-                        <div key={index} className="tab-content-container">
+                        <div
+                            key={index}
+                            className="tab-content-container poly-nav-bar-separator-bottom"
+                        >
                             {" "}
                             {tab.content}
                         </div>
