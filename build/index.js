@@ -2,11 +2,9 @@
 
 // Remember! Only core modules here. It's run before any package install.
 const path = require("path");
-
 const { performance } = require("perf_hooks");
 
 const { checkVersions, ANSIBold } = require("./utils.js");
-
 const { logMain, logDependencies, logSuccess } = require("./log.js");
 const { parseCommandLine, showUsage, parseManifest } = require("./cli.js");
 const { createPackageTree, skipPackages } = require("./deps.js");
