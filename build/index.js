@@ -10,29 +10,6 @@ const { parseCommandLine, showUsage, parseManifest } = require("./cli.js");
 const { createPackageTree, skipPackages } = require("./deps.js");
 const { npm, npx, npmInstall, runCommand } = require("./npm.js");
 
-const commands = {
-    install: (pkg) => npmInstall(pkg.name),
-    build: (pkg) => pkg.npmRun("build"),
-    test: (pkg) => pkg.npmRun("test"),
-    clean: (pkg) => pkg.clean(),
-    "sync-deps": (pkg) => pkg.sync(),
-};
-
-async function executeCommand(pkg, command) {
-    const oldPath = process.cwd();
-    try {
-        process.chdir(pkg.path);
-    } catch {
-        throw `Directory ${pkg.path} for package ${pkg.name} does not exist`;
-    }
-
-    try {
-        await commands[command](pkg);
-    } finally {
-        process.chdir(oldPath);
-    }
-}
-
 async function processPackage(name, packageTree, command) {
     if (!(name in packageTree)) throw `Unable to find package ${name}`;
 

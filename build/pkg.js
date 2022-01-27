@@ -65,6 +65,41 @@ class Pkg {
         for (let path of ["node_modules", "dist"])
             await fsPromises.rm(path, { recursive: true, force: true });
     }
+
+    install() {
+        npmInstall(this.name);
+    }
+
+    build() {
+        this.npmRun("build");
+    }
+
+    test() {
+        this.npmRun("test");
+    }
+
+    clean() {
+        this.clean();
+    }
+
+    syncdeps() {
+        this.sync();
+    }
+
+    async executeCommand(command) {
+        const oldPath = process.cwd();
+        try {
+            process.chdir(this.path);
+        } catch {
+            throw `Directory ${this.path} for package ${this.name} does not exist`;
+        }
+
+        try {
+            await this[command]();
+        } finally {
+            process.chdir(oldPath);
+        }
+    }
 }
 
 module.exports = {

@@ -10,7 +10,7 @@ const validCommands = [
     "list",
     "list-deps",
     "root-install",
-    "sync-deps",
+    "syncdeps",
     "test",
 ];
 
