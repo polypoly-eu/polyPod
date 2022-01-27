@@ -24,11 +24,18 @@ function executeProcess(executable, args, env = process.env) {
 
 const npm = async (...args) => {
     const start = new Date();
-    await executeProcess(
+    const result = await executeProcess(
         "npm",
         ["--no-update-notifier", "--no-fund", ...args],
-        { ...process.env, FORCE_COLOR: 1 }
+        {
+            ...process.env,
+            FORCE_COLOR: 1,
+        }
     );
+    if (result !== 0) {
+        reject("Can't execute process");
+    }
+    console.log("Not getting here");
     const elapsed = new Date() - start;
     const realCommand = args[args.length - 1];
     logDetail(` ${ANSIInvert("npm " + realCommand)} finished in ${elapsed} ms`);

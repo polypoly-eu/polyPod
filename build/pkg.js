@@ -67,23 +67,23 @@ class Pkg {
             await fsPromises.rm(path, { recursive: true, force: true });
     }
 
-    install() {
+    async install() {
         npmInstall(this.name);
     }
 
-    build() {
+    async build() {
         this.npmRun("build");
     }
 
-    test() {
+    async test() {
         this.npmRun("test");
     }
 
-    clean() {
+    async clean() {
         this.clean();
     }
 
-    syncdeps() {
+    async syncdeps() {
         this.sync();
     }
 
