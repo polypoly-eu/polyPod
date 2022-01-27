@@ -1,4 +1,8 @@
+const fsPromises = require("fs/promises");
+
 const { parseManifest } = require("./cli.js");
+const { npmRun } = require("./npm.js");
+const { logDetail } = require("./log.js");
 
 function extractDependencies(manifest) {
     const allDependencies = {
@@ -26,6 +30,17 @@ class Pkg {
         this.localDependencies = localDependencies;
         this.remoteDependencies = remoteDependencies;
         this.scripts = Object.keys(manifest.scripts || {});
+    }
+
+    async clean() {
+        if (await npmRun("clean", this)) return;
+
+        // Just so that we don't have to add a 'clean' script to every single
+        // package, we cover the conventional case as a fallback - but it's
+        // arguably a bit dangerous.
+        logDetail(`${this.name}: Executing fallback clean logic ...`);
+        for (let path of ["node_modules", "dist"])
+            await fsPromises.rm(path, { recursive: true, force: true });
     }
 }
 

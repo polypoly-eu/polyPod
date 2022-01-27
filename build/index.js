@@ -2,7 +2,6 @@
 
 // Remember! Only core modules here. It's run before any package install.
 const fs = require("fs");
-const fsPromises = require("fs/promises");
 const path = require("path");
 
 const { performance } = require("perf_hooks");
@@ -13,17 +12,6 @@ const { logMain, logDetail, logDependencies, logSuccess } = require("./log.js");
 const { parseCommandLine, showUsage, parseManifest } = require("./cli.js");
 const { createPackageTree, skipPackages } = require("./deps.js");
 const { npm, npx, npmInstall, npmRun, runCommand } = require("./npm.js");
-
-async function cleanPackage(pkg) {
-    if (await npmRun("clean", pkg)) return;
-
-    // Just so that we don't have to add a 'clean' script to every single
-    // package, we cover the conventional case as a fallback - but it's
-    // arguably a bit dangerous.
-    logDetail(`${pkg.name}: Executing fallback clean logic ...`);
-    for (let path of ["node_modules", "dist"])
-        await fsPromises.rm(path, { recursive: true, force: true });
-}
 
 async function syncPackage(pkg) {
     logDetail(`🕑 ${pkg.name} ...`);
@@ -37,7 +25,7 @@ const commands = {
     install: (pkg) => npmInstall(pkg.name),
     build: (pkg) => npmRun("build", pkg),
     test: (pkg) => npmRun("test", pkg),
-    clean: (pkg) => cleanPackage(pkg),
+    clean: (pkg) => pkg.clean(),
     "sync-deps": (pkg) => syncPackage(pkg),
 };
 
