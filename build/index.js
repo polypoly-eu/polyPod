@@ -35,7 +35,7 @@ async function processPackage(name, packageTree, command) {
             pkg.path
         )} [${current}/${total}] ...`
     );
-    await executeCommand(pkg, command);
+    await pkg.executeCommand(command);
     pkg.setProcessed();
 }
 
