@@ -1,5 +1,6 @@
 {
-    "requiredNodeMajorVersion": 16,
+    "requiredNodeVersion": 16,
+    "requiredNPMVersion": 7,
     "packages": [
         "build",
         "core/api/fetch-spec",

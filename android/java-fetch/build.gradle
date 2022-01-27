@@ -5,10 +5,6 @@ plugins {
     id "com.github.johnrengelman.shadow" version "6.0.0"
 }
 
-repositories {
-    jcenter()
-}
-
 import groovy.json.JsonSlurper
 def packageJson = new JsonSlurper().parse file('package.json')
 version = packageJson.version
@@ -28,7 +24,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 task testJar(type: ShadowJar) {
     archiveClassifier = 'tests'
     from sourceSets.test.output
-    configurations = [project.configurations.testRuntime]
+    configurations = [project.configurations.testRuntimeClasspath]
 }
 
 task mochaTest(type: Exec) {

@@ -3,8 +3,10 @@
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 const path = require("path");
-const { spawn } = require("child_process");
+const { spawn, execSync } = require("child_process");
+
 const { performance } = require("perf_hooks");
+
 const validCommands = [
     "build",
     "clean",
@@ -15,6 +17,10 @@ const validCommands = [
     "sync-deps",
     "test",
 ];
+
+function platformize(executable) {
+    return process.platform === "win32" ? `${executable}.cmd` : executable;
+}
 
 function parseCommandLine() {
     const [, scriptPath, ...parameters] = process.argv;
@@ -141,7 +147,7 @@ function logDependencies(packageTree) {
 }
 
 function executeProcess(executable, args, env = process.env) {
-    const cmd = process.platform === "win32" ? `${executable}.cmd` : executable;
+    const cmd = platformize(executable);
     const spawnedProcess = spawn(cmd, args, { env: env });
     spawnedProcess.stdout.on("data", (data) => {
         console.log(data.toString());
@@ -281,6 +287,36 @@ function logSuccess(command, timeLapsed) {
     logMain(message);
 }
 
+function checkVersions(metaManifest) {
+    const thisNPM = platformize("npm");
+    let exitCode = 0;
+    const nodeVersion = process.version.split(".")[0];
+    if (nodeVersion < metaManifest.requiredNodeVersion) {
+        console.error(
+            `⚠️ Node.js v${metaManifest.requiredNodeVersion} or later ` +
+                `required, you are on ${process.version}`
+        );
+        exitCode = 1;
+    }
+    let npmVersion;
+    try {
+        npmVersion = execSync(`${thisNPM} --version`, {
+            encoding: "utf-8",
+        }).split(".")[0];
+        if (npmVersion < metaManifest.requiredNPMVersion) {
+            console.error(
+                `⚠️ NPM ${metaManifest.requiredNPMVersion} or later ` +
+                    `required, you are on ${npmVersion}`
+            );
+            exitCode = 1;
+        }
+    } catch (error) {
+        console.error(`⚠️ Error ${error} when trying to find NPM version`);
+        exitCode = 1;
+    }
+    return exitCode;
+}
+
 async function main() {
     const { scriptPath, command, start } = parseCommandLine();
     if (!command) {
@@ -289,6 +325,11 @@ async function main() {
     }
 
     process.chdir(path.dirname(scriptPath));
+    const metaManifest = parseManifest("build/packages.json");
+    const exitCode = checkVersions(metaManifest);
+    if (exitCode !== 0) {
+        return exitCode;
+    }
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
 
@@ -309,16 +350,6 @@ async function main() {
         await executeProcess("npx", ["eslint", "--fix", ...eslintOptions]);
         logSuccess(command);
         return 0;
-    }
-
-    const metaManifest = parseManifest("build/packages.json");
-    const nodeMajorVersion = parseInt(process.version.slice(1, 3), 10);
-    if (nodeMajorVersion < metaManifest.requiredNodeMajorVersion) {
-        console.error(
-            `Node.js v${metaManifest.requiredNodeMajorVersion} or later ` +
-                `required, you are on ${process.version}`
-        );
-        return 1;
     }
 
     try {
