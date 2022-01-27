@@ -2,7 +2,7 @@ const fsPromises = require("fs/promises");
 const fs = require("fs");
 
 const { parseManifest } = require("./cli.js");
-const { npm } = require("./npm.js");
+const { npm, npmInstall } = require("./npm.js");
 const { logDetail } = require("./log.js");
 
 function extractDependencies(manifest) {
