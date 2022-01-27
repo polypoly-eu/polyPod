@@ -32,7 +32,6 @@ const npm = async (...args) => {
             FORCE_COLOR: 1,
         }
     );
-    console.log("Not getting here");
     const elapsed = new Date() - start;
     const realCommand = args[args.length - 1];
     logDetail(` ${ANSIInvert("npm " + realCommand)} finished in ${elapsed} ms`);
