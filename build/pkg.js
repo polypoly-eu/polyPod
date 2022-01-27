@@ -27,6 +27,7 @@ class Pkg {
     localDependencies;
     remoteDependencies;
     scripts;
+    processed;
 
     constructor(path) {
         const manifest = parseManifest(`${path}/package.json`);
