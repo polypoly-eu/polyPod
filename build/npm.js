@@ -43,18 +43,10 @@ async function npmInstall(name) {
     await npm("--no-audit", "--prefer-offline", "ci");
 }
 
-async function npmRun(script, pkg) {
-    if (!pkg.scripts.includes(script)) return false;
-
-    logDetail(`${pkg.name}: Executing ${script} script ...`);
-    await npm("run", script);
-    return true;
-}
-
 async function runCommand(command, emojis, callback) {
     logDetail(`${emojis} ...`);
     await callback();
     logSuccess(command);
 }
 
-module.exports = { npm, npx, npmInstall, npmRun, runCommand };
+module.exports = { npm, npx, npmInstall, runCommand };

@@ -10,12 +10,12 @@ const { checkVersions, ANSIBold } = require("./utils.js");
 const { logMain, logDependencies, logSuccess } = require("./log.js");
 const { parseCommandLine, showUsage, parseManifest } = require("./cli.js");
 const { createPackageTree, skipPackages } = require("./deps.js");
-const { npm, npx, npmInstall, npmRun, runCommand } = require("./npm.js");
+const { npm, npx, npmInstall, runCommand } = require("./npm.js");
 
 const commands = {
     install: (pkg) => npmInstall(pkg.name),
-    build: (pkg) => npmRun("build", pkg),
-    test: (pkg) => npmRun("test", pkg),
+    build: (pkg) => pkg.npmRun("build"),
+    test: (pkg) => pkg.npmRun("test"),
     clean: (pkg) => pkg.clean(),
     "sync-deps": (pkg) => pkg.sync(),
 };

@@ -2,7 +2,7 @@ const fsPromises = require("fs/promises");
 const fs = require("fs");
 
 const { parseManifest } = require("./cli.js");
-const { npm, npmRun } = require("./npm.js");
+const { npm } = require("./npm.js");
 const { logDetail } = require("./log.js");
 
 function extractDependencies(manifest) {
@@ -41,8 +41,16 @@ class Pkg {
         await npm("i");
     }
 
+    async npmRun(script) {
+        if (!this.scripts.includes(script)) return false;
+
+        logDetail(`${this.name}: Executing ${script} script ...`);
+        await npm("run", script);
+        return true;
+    }
+
     async clean() {
-        if (await npmRun("clean", this)) return;
+        if (await this.npmRun("clean")) return;
 
         // Just so that we don't have to add a 'clean' script to every single
         // package, we cover the conventional case as a fallback - but it's
