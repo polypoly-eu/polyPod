@@ -1,39 +1,10 @@
 const { logMain } = require("./log.js");
-const { parseManifest } = require("./cli.js");
-
-function extractDependencies(manifest) {
-    const allDependencies = {
-        ...manifest.dependencies,
-        ...manifest.devDependencies,
-    };
-    const localDependencies = [];
-    const remoteDependencies = [];
-    for (let [name, url] of Object.entries(allDependencies)) {
-        const group = url.startsWith("file:")
-            ? localDependencies
-            : remoteDependencies;
-        group.push(name);
-    }
-    return { localDependencies, remoteDependencies };
-}
-
-function createPackageData(path) {
-    const manifest = parseManifest(`${path}/package.json`);
-    const { localDependencies, remoteDependencies } =
-        extractDependencies(manifest);
-    return {
-        path,
-        name: manifest.name,
-        localDependencies,
-        remoteDependencies,
-        scripts: Object.keys(manifest.scripts || {}),
-    };
-}
+const { Pkg } = require("./pkg.js");
 
 function createPackageTree(metaManifest) {
     return Object.fromEntries(
         metaManifest.packages
-            .map((path) => createPackageData(path))
+            .map((path) => new Pkg(path))
             .map((data) => [data.name, data])
     );
 }

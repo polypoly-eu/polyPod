@@ -1,5 +1,20 @@
 const { parseManifest } = require("./cli.js");
-const { extractDependencies } = require("/deps.js ");
+
+function extractDependencies(manifest) {
+    const allDependencies = {
+        ...manifest.dependencies,
+        ...manifest.devDependencies,
+    };
+    const localDependencies = [];
+    const remoteDependencies = [];
+    for (let [name, url] of Object.entries(allDependencies)) {
+        const group = url.startsWith("file:")
+            ? localDependencies
+            : remoteDependencies;
+        group.push(name);
+    }
+    return { localDependencies, remoteDependencies };
+}
 
 class Pkg {
     constructor(path) {
