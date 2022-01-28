@@ -282,8 +282,8 @@
     height: 48px;
     background-color: var(--color-background-light);
     color: var(--color-text-dark);
+    font-family: "Jost Medium";
     font-size: 18px;
-    font-weight: 600;
     margin: 12px 16px 20px 16px;
     border-radius: 8px;
     border: transparent;
