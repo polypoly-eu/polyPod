@@ -76,6 +76,12 @@ const DigitalGiantsStory = () => {
             <h2 className="cluster-story-title">
                 {i18n.t(`${i18nHeaderCommon}:what.we.found`)}
             </h2>
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.dataTypes`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeader}:data.types.p`)}
+            </p>
             <DataTypes entities={bigSix} i18nHeader={i18nHeader} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}

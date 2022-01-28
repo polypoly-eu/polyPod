@@ -140,6 +140,15 @@ const MessengerStory = () => {
                 infoScreenRoute="/details-treemap-info"
                 source={i18n.t("common:source.polyPedia")}
             />
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.dataTypes`)}
+            />
+            <div
+                className="big-first-letter"
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t(`${i18nHeader}:data.types.p`),
+                }}
+            />
             <DataTypes entities={messengers} i18nHeader={i18nHeader} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}

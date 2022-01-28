@@ -51,85 +51,68 @@ export default function DataTypes({ entities, i18nHeader }) {
     };
 
     return (
-        <>
-            <SectionTitle
-                title={i18n.t("clusterStoryCommon:section.dataTypes")}
-            />
-            <div
-                className="big-first-letter"
-                dangerouslySetInnerHTML={{
-                    __html: i18n.t(`${i18nHeader}:data.types.p`),
-                }}
-            />
-            <Tabs>
-                {dataTypes.map((dataType, i) => {
-                    return (
-                        <Tab id={dataType.id} label={dataType.label} key={i}>
-                            <div className="data-types-legend">
-                                <div
-                                    className="bubble-legend"
-                                    style={{
-                                        backgroundColor: bubbleColor,
-                                    }}
-                                ></div>
-                                <p>
-                                    {i18n.t(
-                                        "clusterStoryCommon:data.types.legend"
-                                    )}
-                                </p>
-                            </div>
-                            {dataType.id !== "by-types" ? (
-                                <>
-                                    <MatrixBubblesChart
-                                        data={dataType.data}
-                                        bubbleColor={(d) =>
-                                            d.data.color
-                                                ? bubbleColor
-                                                : transparentBubble
+        <Tabs>
+            {dataTypes.map((dataType, i) => {
+                return (
+                    <Tab id={dataType.id} label={dataType.label} key={i}>
+                        <div className="data-types-legend">
+                            <div
+                                className="bubble-legend"
+                                style={{
+                                    backgroundColor: bubbleColor,
+                                }}
+                            ></div>
+                            <p>
+                                {i18n.t("clusterStoryCommon:data.types.legend")}
+                            </p>
+                        </div>
+                        {dataType.id !== "by-types" ? (
+                            <>
+                                <MatrixBubblesChart
+                                    data={dataType.data}
+                                    bubbleColor={(d) =>
+                                        d.data.color
+                                            ? bubbleColor
+                                            : transparentBubble
+                                    }
+                                    textColor={bubbleColor}
+                                    strokeColor={bubbleStroke}
+                                />
+                                <SourceInfoButton
+                                    infoScreenRoute={dataType.route}
+                                    source={i18n.t("common:source.polyPedia")}
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <div className="by-types-bubble-chart">
+                                    <PolyChart
+                                        type="bubble-cluster"
+                                        data={dataType.data[0].bubbles}
+                                        width={dataType.data[0].width}
+                                        height={dataType.data[0].height}
+                                        bubbleColor={bubbleColor}
+                                        textColor={(d) =>
+                                            d.data.type ===
+                                            selectedDataTypeBubble
+                                                ? bubbleTextColor
+                                                : bubbleColor
                                         }
-                                        textColor={bubbleColor}
                                         strokeColor={bubbleStroke}
+                                        onBubbleClick={handleBubbleClick}
+                                        label={showLabel}
                                     />
-                                    <SourceInfoButton
-                                        infoScreenRoute={dataType.route}
-                                        source={i18n.t(
-                                            "common:source.polyPedia"
-                                        )}
-                                    />
-                                </>
-                            ) : (
-                                <>
-                                    <div className="by-types-bubble-chart">
-                                        <PolyChart
-                                            type="bubble-cluster"
-                                            data={dataType.data[0].bubbles}
-                                            width={dataType.data[0].width}
-                                            height={dataType.data[0].height}
-                                            bubbleColor={bubbleColor}
-                                            textColor={(d) =>
-                                                d.data.type ===
-                                                selectedDataTypeBubble
-                                                    ? bubbleTextColor
-                                                    : bubbleColor
-                                            }
-                                            strokeColor={bubbleStroke}
-                                            onBubbleClick={handleBubbleClick}
-                                            label={showLabel}
-                                        />
-                                        <h4>{dataType.data[0].title}</h4>
-                                    </div>
-                                    <SourceInfoButton
-                                        infoScreenRoute={dataType.route}
-                                        source={i18n.t(
-                                            "common:source.polyPedia"
-                                        )}
-                                    />
-                                </>
-                            )}
-                        </Tab>
-                    );
-                })}
-            </Tabs>
-        </>
+                                    <h4>{dataType.data[0].title}</h4>
+                                </div>
+                                <SourceInfoButton
+                                    infoScreenRoute={dataType.route}
+                                    source={i18n.t("common:source.polyPedia")}
+                                />
+                            </>
+                        )}
+                    </Tab>
+                );
+            })}
+        </Tabs>
     );
 }
