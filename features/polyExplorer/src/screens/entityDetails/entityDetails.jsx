@@ -402,7 +402,7 @@ const EntityDetails = () => {
         <Screen className="entity-details-screen" topShadow={false}>
             <div className="details">
                 {loadTabs().length > 1 && (
-                    <div className="tab-button-container poly-nav-bar-separator-bottom">
+                    <div className="tab-button-container">
                         {loadTabs().map((tab, index) => (
                             <button
                                 key={index}
