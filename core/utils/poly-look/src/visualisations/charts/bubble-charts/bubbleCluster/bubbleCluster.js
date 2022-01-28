@@ -70,7 +70,7 @@ export class BubbleCluster extends Chart {
     this._onBubbleClick = onBubbleClick;
     this._bubblePadding = bubblePadding;
     this._filter = filter;
-    this._label = false || label;
+    this._label = "" || label;
 
     this._filterActivationCondition = (d) => {
       if (!this._filter) return null;
