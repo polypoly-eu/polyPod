@@ -1,5 +1,5 @@
 import OnboardingPopup from "../components/onboardingPopup/onboardingPopup.jsx";
-import PurposeInfoPopup from "../components/purposeInfoPopup/purposeInfoPopup.jsx";
+import PurposeInfoPopup from "./centerBox/centerBox.jsx";
 
 import InfoScreen from "./infoPopUps/info/info.jsx";
 import DataRegionInfoScreen from "./infoPopUps/dataRegionInfo/dataRegionInfo.jsx";
