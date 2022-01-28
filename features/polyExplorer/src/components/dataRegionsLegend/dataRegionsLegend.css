@@ -24,7 +24,7 @@
 }
 
 .location-legend .legend-container p {
-    margin: 0 8px 0 0;
+    margin: 0 4px 0 0;
 }
 
 .location-legend .legend-container {
@@ -44,7 +44,7 @@
 }
 
 .location-legend .legend p {
-    margin: 0px 4px 0 0;
+    margin: 0px 0px 0 0;
 }
 
 .location-legend .legend div {
@@ -77,8 +77,8 @@
 
 .location-legend .circle {
     display: inline-block;
-    width: 10px;
-    height: 10px !important;
+    width: 8px;
+    height: 8px !important;
     border-radius: 50%;
     transform: translate(2px, 2px);
     flex: 0 0 auto;
