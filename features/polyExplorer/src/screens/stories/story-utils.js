@@ -87,6 +87,28 @@ export function createDataTypesSharedCombined(entities, listOfDataCategories) {
     return dataTypesSharedCombined;
 }
 
+function normalizeDataLengthByCompany(entities) {
+    const largestEntityLength = entities.sort(
+        (a, b) => b.dataTypesShared.length - a.dataTypesShared.length
+    )[0].dataTypesShared.length;
+    return entities.map((entity) => {
+        return {
+            title: `${entity.ppid}: ${entity.dataTypesShared.length}`,
+            bubbles: createBubbleArray(largestEntityLength, entity),
+        };
+    });
+}
+
+function createBubbleArray(largestEntityLength, entity) {
+    const colouredBublesArray = entity.dataTypesShared.map(() => {
+        return { value: 1, color: true };
+    });
+    const notColoredBubblesArray = Array(
+        largestEntityLength - entity.dataTypesShared.length
+    ).fill({ value: 1, color: false });
+    return [...colouredBublesArray, ...notColoredBubblesArray];
+}
+
 export function createDataTypesTabs(
     entities,
     i18nHeader,
@@ -102,14 +124,7 @@ export function createDataTypesTabs(
         {
             id: "by-companies",
             label: i18n.t(`${i18nHeader}:data.types.tab.companies`),
-            data: entities.map((entity) => {
-                return {
-                    title: `${entity.ppid}: ${entity.dataTypesShared.length}`,
-                    bubbles: entity.dataTypesShared.map(() => {
-                        return { value: 1 };
-                    }),
-                };
-            }),
+            data: normalizeDataLengthByCompany(entities),
             route: "/company-data-types-info",
         },
         {
@@ -123,7 +138,7 @@ export function createDataTypesTabs(
                         0
                     )}`,
                     bubbles: entity.dataTypesShared.map((bubble) => {
-                        return { value: bubble.count };
+                        return { value: bubble.count, color: true };
                     }),
                 };
             }),

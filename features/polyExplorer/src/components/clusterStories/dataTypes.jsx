@@ -14,6 +14,7 @@ import i18n from "../../i18n.js";
 export default function DataTypes({ entities, i18nHeader }) {
     const { globalData } = useContext(ExplorerContext);
     const bubbleColor = "#FB8A89";
+    const transparentBubble = "#ffffff00";
     const bubbleStroke = "none";
     const bubbleTextColor = "#0f1938";
 
@@ -81,7 +82,11 @@ export default function DataTypes({ entities, i18nHeader }) {
                                 <>
                                     <MatrixBubblesChart
                                         data={dataType.data}
-                                        bubbleColor={bubbleColor}
+                                        bubbleColor={(d) =>
+                                            d.data.color
+                                                ? bubbleColor
+                                                : transparentBubble
+                                        }
                                         textColor={bubbleColor}
                                         strokeColor={bubbleStroke}
                                     />
