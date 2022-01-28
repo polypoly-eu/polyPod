@@ -9,9 +9,10 @@ export default function SourceInfoButton({
     saveActiveIndex,
     infoScreenRoute,
     stateChange,
+    className,
 }) {
     return (
-        <div className="source-info-container">
+        <div className={`source-info-container ${className ? className : ""}`}>
             <p className="source">{source}</p>
             <InfoButton
                 infoScreenRoute={infoScreenRoute}

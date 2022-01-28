@@ -201,6 +201,11 @@ const EntityDetails = () => {
                                 </div>
                             )}
                             <DataRegionsLegend />
+                            <SourceInfoButton
+                                source={i18n.t("common:source.polyPedia")}
+                                infoScreenRoute="data-region-info"
+                                className="info-extra-margin"
+                            />
                             {entity?.annualRevenues?.length === 0 ? (
                                 <></>
                             ) : (
@@ -216,6 +221,14 @@ const EntityDetails = () => {
                                     </div>
                                     <CompanyRevenueChart
                                         annualRevenues={entity.annualRevenues}
+                                    />
+                                    <SourceInfoButton
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                        //  TO DO: add correct path (maybe HTRT-Screen doesn't exist yet?)
+                                        infoScreenRoute="missing"
+                                        className="info-extra-margin"
                                     />
                                 </div>
                             )}
