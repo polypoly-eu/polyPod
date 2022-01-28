@@ -14,3 +14,9 @@
     flex-flow: column;
     overflow: hidden scroll;
 }
+
+.screen-content .noScroll {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
