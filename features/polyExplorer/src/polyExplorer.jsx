@@ -73,7 +73,6 @@ const PolyExplorerApp = () => {
                     onMoreInfo={handleOnboardingPopupMoreInfo}
                 />
             )}
-            {console.log(popUp)}
             {popUp &&
                 popUp.component({
                     onClose: closePopUp,

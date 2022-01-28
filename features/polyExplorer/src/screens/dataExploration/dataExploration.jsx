@@ -12,7 +12,6 @@ import CompanyBubbles, {
 } from "../../components/dataViz/companyBubbles.jsx";
 import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
 import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
-import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
 import CompanyIndustryList from "../../components/companyIndustryList/companyIndustryList.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 
@@ -32,6 +31,7 @@ const DataExplorationScreen = () => {
         selectedEntityObject,
         featuredEntityMaxValues,
         dataRecipients,
+        throwPopUp,
     } = useContext(ExplorerContext);
     const entity = selectedEntityObject;
     const startSection = navigationState.explorationState.section;
@@ -612,7 +612,15 @@ const DataExplorationScreen = () => {
                                 </h1>
                                 <PurposeChart
                                     purposes={entity.dataSharingPurposes}
-                                    openPopup={setPurposePopupContent}
+                                    openPopup={(purpose) =>
+                                        throwPopUp({
+                                            type: "center-popup",
+                                            content: {
+                                                headline: purpose.translation,
+                                                body: purpose.explanation,
+                                            },
+                                        })
+                                    }
                                     saveActiveIndex={saveActiveIndex}
                                 />
                                 <div className="purpose-extra-margin">
