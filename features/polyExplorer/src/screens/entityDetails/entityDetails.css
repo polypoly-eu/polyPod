@@ -212,6 +212,7 @@
 .entity-details-source {
     color: var(--color-medium);
     flex: 0 0 auto;
+    margin-left: 16px;
     font-family: "Jost Medium";
     font-size: 12px;
     width: 100%;
