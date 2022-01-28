@@ -308,14 +308,8 @@
 }
 
 .about .entity-details-text {
-    overflow: hidden scroll;
     max-height: 300px;
-    margin: 32px 16px 0 16px;
-}
-.about .scroll-box {
-    overflow: hidden scroll;
-    max-height: 300px;
-    padding-bottom: 40px;
+    margin: 32px 16px 16px 16px;
 }
 
 .about .gradient {

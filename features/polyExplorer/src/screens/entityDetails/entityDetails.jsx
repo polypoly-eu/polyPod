@@ -136,23 +136,21 @@ const EntityDetails = () => {
                 name: tabTranslation.about,
                 content: (
                     <div className="about">
-                        <div className="scroll-box">
-                            <p
-                                className="entity-details-text"
-                                dangerouslySetInnerHTML={{
-                                    __html:
-                                        (
-                                            (entity.description?.value || {})[
-                                                i18n.language
-                                            ] || ""
-                                        ).replaceAll("\n", "<br/><br/>") ||
-                                        i18n.t(
-                                            "entityDetailsScreen:description.fallback"
-                                        ),
-                                }}
-                            ></p>
-                        </div>
-                        <div className="gradient"></div>
+                        <p
+                            className="entity-details-text"
+                            dangerouslySetInnerHTML={{
+                                __html:
+                                    (
+                                        (entity.description?.value || {})[
+                                            i18n.language
+                                        ] || ""
+                                    ).replaceAll("\n", "<br/><br/>") ||
+                                    i18n.t(
+                                        "entityDetailsScreen:description.fallback"
+                                    ),
+                            }}
+                        ></p>
+
                         {entity.description?.source ? (
                             <p className="entity-details-source">
                                 {i18n.t("entityDetailsScreen:source")}:{" "}
@@ -273,23 +271,20 @@ const EntityDetails = () => {
                 name: tabTranslation.about,
                 content: (
                     <div className="about">
-                        <div className="scroll-box">
-                            <p
-                                className="entity-details-text"
-                                dangerouslySetInnerHTML={{
-                                    __html:
-                                        (
-                                            (entity.description?.value || {})[
-                                                i18n.language
-                                            ] || ""
-                                        ).replaceAll("\n", "<br/><br/>") ||
-                                        i18n.t(
-                                            "entityDetailsScreen:description.fallback"
-                                        ),
-                                }}
-                            ></p>
-                        </div>
-                        <div className="gradient"></div>
+                        <p
+                            className="entity-details-text"
+                            dangerouslySetInnerHTML={{
+                                __html:
+                                    (
+                                        (entity.description?.value || {})[
+                                            i18n.language
+                                        ] || ""
+                                    ).replaceAll("\n", "<br/><br/>") ||
+                                    i18n.t(
+                                        "entityDetailsScreen:description.fallback"
+                                    ),
+                            }}
+                        ></p>
                         {entity.description?.source ? (
                             <p className="entity-details-source">
                                 {i18n.t("entityDetailsScreen:source")}:{" "}
