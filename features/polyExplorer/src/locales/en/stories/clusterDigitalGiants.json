@@ -3,7 +3,7 @@
     "intro.image.alt": "The user of a the digital giants",
     "intro.p.1": "If you live some sort of a digital life these days, it is almost impossible to not get in touch with some of the big tech companies and their services. What those companies have in common is their vast appetite for data and the intention to use and monetize that data – your data probably – for advertising or some upcoming big data projects.",
     "intro.p.2": "The polyPedia team looked at everything the companies below say about their data privacy rules.",
-    "data.types.p": "Some data types need to be shared for what we expect from a messenger. But not all messengers share the same amount of data types. The extra sharing indicates that they make money with it.",
+    "data.types.p": "<p>Some data types need to be shared for what we expect from a messenger. But not all messengers share the same amount of data types. The extra sharing indicates that they make money with it.</p>",
     "data.types.tab.companies": "By Companies",
     "data.types.tab.shares": "By Shares",
     "data.types.tab.types": "By Types",

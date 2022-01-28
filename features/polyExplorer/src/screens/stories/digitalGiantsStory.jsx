@@ -28,7 +28,7 @@ const bigSixNames = [
 ];
 
 const DigitalGiantsStory = () => {
-    const { featuredEntities, entityJurisdictionByPpid, globalData, setPopUp } =
+    const { featuredEntities, entityJurisdictionByPpid, setPopUp } =
         useContext(ExplorerContext);
 
     const bigSix = bigSixNames.map((n) =>
@@ -47,93 +47,6 @@ const DigitalGiantsStory = () => {
     const otherJurisdictions = [
         ...new Set(jurisdictionLinks.map(({ target }) => target)),
     ].filter((j) => j !== "EU-GDPR");
-
-    const listOfDataCategories = Object.keys(
-        globalData.personal_data_categories
-    );
-
-    let totalShares = 0;
-    bigSix.forEach((company) => {
-        company._data.dataTypesShared.forEach((i) => (totalShares += i.count));
-    });
-
-    const dataTypesSharedCombined = listOfDataCategories
-        .map((category) => {
-            let total = 0;
-            bigSix.map((company) => {
-                company._data.dataTypesShared.forEach((typeCategory) => {
-                    if (typeCategory["dpv:Category"] === category)
-                        total += typeCategory.count;
-                });
-            });
-            return total !== 0
-                ? {
-                      "dpv:Category": category,
-                      total,
-                  }
-                : null;
-        })
-        .filter((e) => e)
-        .sort((a, b) => b.total - a.total);
-
-    const dataTypes = [
-        {
-            id: "by-companies",
-            label: "By Companies",
-            translation: i18n.t(`${i18nHeader}:data.types.tab.companies`),
-            data: bigSixNames.map((companyName, n) => {
-                return {
-                    title:
-                        companyName +
-                        ": " +
-                        bigSix[n]._data.dataTypesShared.length,
-                    bubbles: bigSix[n]._data.dataTypesShared.map(() => {
-                        return { value: 1 };
-                    }),
-                };
-            }),
-            route: "/company-data-types-info",
-        },
-        {
-            id: "by-shares",
-            label: "By Shares",
-            translation: i18n.t(`${i18nHeader}:data.types.tab.shares`),
-            data: bigSixNames.map((companyName, n) => {
-                return {
-                    title:
-                        companyName +
-                        ": " +
-                        bigSix[n]._data.dataTypesShared.reduce(
-                            (acc, bubble) => acc + bubble.count,
-                            0
-                        ),
-                    bubbles: bigSix[n]._data.dataTypesShared.map((bubble) => {
-                        return { value: bubble.count };
-                    }),
-                };
-            }),
-            route: "/shares-data-types-info",
-        },
-        {
-            id: "by-types",
-            label: "By Types",
-            translation: i18n.t(`${i18nHeader}:data.types.tab.types`),
-            data: [
-                {
-                    title: i18n.t(`${i18nHeader}:data.types.legend.types`, {
-                        amount_of_data_types: listOfDataCategories.length,
-                        amount_of_shares: totalShares,
-                    }),
-                    bubbles: dataTypesSharedCombined.map((bubble) => {
-                        return { value: bubble.total };
-                    }),
-                    width: 400,
-                    height: 400,
-                },
-            ],
-            route: "/types-data-types-info",
-        },
-    ];
 
     return (
         <ClusterStory
@@ -163,16 +76,7 @@ const DigitalGiantsStory = () => {
             <h2 className="cluster-story-title">
                 {i18n.t(`${i18nHeaderCommon}:what.we.found`)}
             </h2>
-            <SectionTitle
-                title={i18n.t(`${i18nHeaderCommon}:section.dataTypes`)}
-            />
-            <p className="big-first-letter">
-                {i18n.t(`${i18nHeader}:data.types.p`)}
-            </p>
-            <DataTypes
-                dataTypes={dataTypes}
-                dataTypesSharedCombined={dataTypesSharedCombined}
-            />
+            <DataTypes entities={bigSix} i18nHeader={i18nHeader} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
             />

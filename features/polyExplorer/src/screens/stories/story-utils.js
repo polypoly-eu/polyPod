@@ -1,3 +1,5 @@
+import i18n from "../../i18n.js";
+
 export function countOccurences(array) {
     const occurences = {};
     for (let element of array)
@@ -60,4 +62,96 @@ export function latestActiveUsersValue(product) {
             latest = entry;
     }
     return Math.floor(latest.user_count / 1000000);
+}
+
+export function createDataTypesSharedCombined(entities, listOfDataCategories) {
+    const dataTypesSharedCombined = listOfDataCategories
+        .map((category) => {
+            let total = 0;
+            entities.map((entity) => {
+                entity.dataTypesShared.forEach((typeCategory) => {
+                    if (typeCategory["dpv:Category"] === category)
+                        total += typeCategory.count;
+                });
+            });
+            return total !== 0
+                ? {
+                      "dpv:Category": category,
+                      total,
+                  }
+                : null;
+        })
+        .filter((e) => e)
+        .sort((a, b) => b.total - a.total);
+
+    return dataTypesSharedCombined;
+}
+
+export function createDataTypesTabs(
+    entities,
+    i18nHeader,
+    listOfDataCategories,
+    dataTypesSharedCombined
+) {
+    let totalShares = 0;
+    entities.forEach((entity) => {
+        entity.dataTypesShared.forEach((i) => (totalShares += i.count));
+    });
+
+    return [
+        {
+            id: "by-companies",
+            label: i18n.t(`${i18nHeader}:data.types.tab.companies`),
+            data: entities.map((entity) => {
+                return {
+                    title: `${entity.ppid}: ${entity.dataTypesShared.length}`,
+                    bubbles: entity.dataTypesShared.map(() => {
+                        return { value: 1 };
+                    }),
+                };
+            }),
+            route: "/company-data-types-info",
+        },
+        {
+            id: "by-shares",
+            label: i18n.t(`${i18nHeader}:data.types.tab.shares`),
+            data: entities.map((entity) => {
+                return {
+                    title: `${entity.ppid}: 
+                    ${entity.dataTypesShared.reduce(
+                        (acc, bubble) => acc + bubble.count,
+                        0
+                    )}`,
+                    bubbles: entity.dataTypesShared.map((bubble) => {
+                        return { value: bubble.count };
+                    }),
+                };
+            }),
+            route: "/shares-data-types-info",
+        },
+        {
+            id: "by-types",
+            label: i18n.t(`${i18nHeader}:data.types.tab.types`),
+            data: [
+                {
+                    title: i18n.t(`${i18nHeader}:data.types.legend.types`, {
+                        amount_of_data_types: listOfDataCategories.length,
+                        amount_of_shares: totalShares,
+                    }),
+                    label: listOfDataCategories.map((category) =>
+                        category.replace("dpv:", "")
+                    ),
+                    bubbles: dataTypesSharedCombined.map((bubble) => {
+                        return {
+                            value: bubble.total,
+                            type: bubble["dpv:Category"],
+                        };
+                    }),
+                    width: 400,
+                    height: 400,
+                },
+            ],
+            route: "/types-data-types-info",
+        },
+    ];
 }

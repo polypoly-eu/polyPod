@@ -25,7 +25,7 @@ const i18nHeaderCommon = "clusterStoryCommon";
 const primaryColor = "#3ba6ff";
 
 const MessengerStory = () => {
-    const { products, globalData, entityJurisdictionByPpid, setPopUp } =
+    const { products, entityJurisdictionByPpid, setPopUp } =
         useContext(ExplorerContext);
 
     const listOfMessengerApps = [
@@ -54,107 +54,6 @@ const MessengerStory = () => {
         i18n.t(`${i18nHeader}:tips.bullet.1`),
         i18n.t(`${i18nHeader}:tips.bullet.2`),
         i18n.t(`${i18nHeader}:tips.bullet.3`),
-    ];
-
-    const listOfDataCategories = Object.keys(
-        globalData.personal_data_categories
-    );
-
-    let totalShares = 0;
-    listOfMessengerApps.forEach((messenger) => {
-        products[messenger]._data.dataTypesShared.forEach(
-            (i) => (totalShares += i.count)
-        );
-    });
-
-    const dataTypesShared = listOfMessengerApps.map((messenger) => {
-        return products[messenger]._data.dataTypesShared;
-    });
-
-    const dataTypesSharedCombined = listOfDataCategories
-        .map((category) => {
-            let total = 0;
-            dataTypesShared.forEach((types) => {
-                types.forEach((typeCategory) => {
-                    if (typeCategory["dpv:Category"] === category)
-                        total += typeCategory.count;
-                });
-            });
-            return total !== 0
-                ? {
-                      "dpv:Category": category,
-                      total,
-                  }
-                : null;
-        })
-        .filter((e) => e)
-        .sort((a, b) => b.total - a.total);
-
-    const dataTypes = [
-        {
-            id: "by-messenger",
-            label: "By Messenger",
-            translation: i18n.t(`${i18nHeader}:data.types.tab.messenger`),
-            description: i18n.t(`${i18nHeader}:data.types.text.messenger`),
-            data: listOfMessengerApps.map((messenger) => {
-                return {
-                    title:
-                        messenger +
-                        ": " +
-                        products[messenger]._data.dataTypesShared.length,
-                    bubbles: products[messenger]._data.dataTypesShared.map(
-                        () => {
-                            return { value: 1 };
-                        }
-                    ),
-                };
-            }),
-            route: "/company-data-types-info",
-        },
-        {
-            id: "by-shares",
-            label: "By Shares",
-            translation: i18n.t(`${i18nHeader}:data.types.tab.shares`),
-            description: i18n.t(`${i18nHeader}:data.types.text.shares
-            `),
-            data: listOfMessengerApps.map((messenger) => {
-                return {
-                    title:
-                        messenger +
-                        ": " +
-                        products[messenger]._data.dataTypesShared.reduce(
-                            (acc, bubble) => acc + bubble.count,
-                            0
-                        ),
-                    bubbles: products[messenger]._data.dataTypesShared.map(
-                        (bubble) => {
-                            return { value: bubble.count };
-                        }
-                    ),
-                };
-            }),
-            route: "/shares-data-types-info",
-        },
-        {
-            id: "by-types",
-            label: "By Types",
-            translation: i18n.t(`${i18nHeader}:data.types.tab.types`),
-            description: i18n.t(`${i18nHeader}:data.types.text.types`),
-            data: [
-                {
-                    title: i18n.t(`${i18nHeader}:data.types.legend.types`, {
-                        amount_of_data_types: listOfDataCategories.length,
-                        amount_of_shares: totalShares,
-                    }),
-                    bubbles: dataTypesSharedCombined.map((bubble) => {
-                        return { value: bubble.total };
-                    }),
-                    width: 400,
-                    height: 400,
-                },
-            ],
-            route: "/types-data-types-info",
-        },
     ];
 
     const jurisdictionLinks = createJurisdictionLinks(
@@ -241,27 +140,7 @@ const MessengerStory = () => {
                 infoScreenRoute="/details-treemap-info"
                 source={i18n.t("common:source.polyPedia")}
             />
-            <SectionTitle
-                title={i18n.t(`${i18nHeader}:data.types.title`)}
-            ></SectionTitle>
-            {dataTypes.map((dataType, i) => {
-                return (
-                    <p
-                        key={i}
-                        className={
-                            dataType.id === "by-messenger"
-                                ? "big-first-letter"
-                                : null
-                        }
-                    >
-                        {dataType.description}
-                    </p>
-                );
-            })}
-            <DataTypes
-                dataTypes={dataTypes}
-                dataTypesSharedCombined={dataTypesSharedCombined}
-            />
+            <DataTypes entities={messengers} i18nHeader={i18nHeader} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
             />
