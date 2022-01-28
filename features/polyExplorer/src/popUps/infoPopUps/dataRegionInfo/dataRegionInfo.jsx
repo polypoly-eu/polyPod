@@ -1,8 +1,8 @@
 import React from "react";
 
-import i18n from "../../i18n.js";
-import BaseInfoScreen from "../../components/baseInfoScreen/baseInfoScreen.jsx";
-import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
+import i18n from "../../../i18n.js";
+import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
+import SectionTitle from "../../../components/clusterStories/sectionTitle.jsx";
 
 import "./dataRegionInfo.css";
 

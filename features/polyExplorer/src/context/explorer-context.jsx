@@ -8,6 +8,8 @@ import { Company } from "../model/company.js";
 import { Product } from "../model/product.js";
 import { EntityFilter } from "../model/entityFilter.js";
 
+import popUps from "../popUps";
+
 //local-data imports
 import polyPediaCompanies from "../data/companies.json";
 import globalData from "../data/global.json";
@@ -141,6 +143,14 @@ export const ExplorerProvider = ({ children }) => {
         }
     }
 
+    function throwPopUp({ type, content }) {
+        setPopUp({ component: popUps[type], content });
+    }
+
+    function closePopUp() {
+        setPopUp(null);
+    }
+
     function routeTo(path, changedState) {
         Object.keys(changedState).forEach((key) => {
             if (!navigationStates.includes(key)) {
@@ -163,10 +173,6 @@ export const ExplorerProvider = ({ children }) => {
             if (routesToSkipOnBack.indexOf(location.pathname) > -1)
                 handleBack();
         }
-    }
-
-    function closePopUp() {
-        setPopUp(null);
     }
 
     function entityObjectByPpid(ppid) {
@@ -309,7 +315,7 @@ export const ExplorerProvider = ({ children }) => {
                 storiesMetadata,
                 products,
                 popUp,
-                setPopUp,
+                throwPopUp,
                 closePopUp,
             }}
         >

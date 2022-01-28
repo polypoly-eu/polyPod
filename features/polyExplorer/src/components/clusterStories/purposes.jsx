@@ -3,9 +3,8 @@ import React from "react";
 import i18n from "../../i18n.js";
 import PurposesBarChart from "../dataViz/purposesBarChart.jsx";
 import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
-import PurposeInfoPopup from "../purposeInfoPopup/purposeInfoPopup.jsx";
 
-export default function Purposes({ companies, setPopUp }) {
+export default function Purposes({ companies, throwPopUp }) {
     const purposes = {};
 
     for (let company of companies) {
@@ -33,9 +32,9 @@ export default function Purposes({ companies, setPopUp }) {
                 data={data}
                 animation={true}
                 onClick={(purpose) =>
-                    setPopUp({
-                        component: PurposeInfoPopup,
-                        props: { purpose },
+                    throwPopUp({
+                        type: "center-popup",
+                        content: purpose,
                     })
                 }
             />

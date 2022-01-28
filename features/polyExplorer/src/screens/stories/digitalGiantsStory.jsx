@@ -32,8 +32,12 @@ const bigSixNames = [
 ];
 
 const DigitalGiantsStory = () => {
-    const { featuredEntities, entityJurisdictionByPpid, globalData, setPopUp } =
-        useContext(ExplorerContext);
+    const {
+        featuredEntities,
+        entityJurisdictionByPpid,
+        globalData,
+        throwPopUp,
+    } = useContext(ExplorerContext);
 
     const bigSix = bigSixNames.map((n) =>
         featuredEntities.find((e) => e.ppid.indexOf(n) !== -1)
@@ -249,7 +253,7 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
-            <Purposes companies={bigSix} setPopUp={setPopUp} />
+            <Purposes companies={bigSix} throwPopUp={throwPopUp} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />

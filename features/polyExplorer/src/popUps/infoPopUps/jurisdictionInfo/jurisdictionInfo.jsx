@@ -1,7 +1,7 @@
 import React from "react";
 
 import i18n from "../../../i18n.js";
-import "../jurisdictionInfo/jurisdictionInfo.css";
+import "./jurisdictionInfo.css";
 import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 

@@ -1,7 +1,7 @@
 import React from "react";
 
-import i18n from "../../i18n.js";
-import BaseInfoScreen from "../../components/baseInfoScreen/baseInfoScreen.jsx";
+import i18n from "../../../i18n.js";
+import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
 
 import "./info.css";
 
