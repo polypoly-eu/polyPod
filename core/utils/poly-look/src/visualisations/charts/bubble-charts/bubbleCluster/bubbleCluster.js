@@ -59,6 +59,7 @@ export class BubbleCluster extends Chart {
     text = defaultText,
     onBubbleClick = defaultOnClickFunction,
     filter,
+    label,
   }) {
     super({ selector, data, width, height });
     this._bubbleColor = bubbleColor;
@@ -69,6 +70,7 @@ export class BubbleCluster extends Chart {
     this._onBubbleClick = onBubbleClick;
     this._bubblePadding = bubblePadding;
     this._filter = filter;
+    this._label = false || label;
 
     this._filterActivationCondition = (d) => {
       if (!this._filter) return null;
@@ -116,6 +118,17 @@ export class BubbleCluster extends Chart {
   }
 
   _updateBubbles(nodes) {
+    if (this._label) {
+      nodes
+        .selectAll(".label")
+        .attr("height", 15)
+        .attr("width", 300)
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("fill", this._textColor)
+        .text(this._label);
+    }
+
     nodes
       .selectAll(".bubble")
       .style("fill", this._bubbleColor)
@@ -149,6 +162,18 @@ export class BubbleCluster extends Chart {
       .style("stroke", this._strokeColor)
       .style("vertical-align", "center")
       .attr("fill-opacity", this._opacity);
+
+    if (this._label) {
+      bubbleGroups
+        .append("text")
+        .attr("class", "label")
+        .attr("height", 15)
+        .attr("width", 300)
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("fill", this._textColor)
+        .text(this._label);
+    }
   }
 
   _addTextToBubbleGroup(newBubbleGroups) {

@@ -41,13 +41,13 @@ export default function DataTypes({ entities, i18nHeader }) {
         setSelectedDataTypeBubble(node.data.type);
     };
 
-    // const showLabel = (bubble) => {
-    //     if (selectedDataTypeBubble === bubble.data.type) {
-    //         return bubble.data.type
-    //             .replace("dpv:", "")
-    //             .replace(/([a-z])([A-Z])/, "$1 $2");
-    //     }
-    // };
+    const showLabel = (bubble) => {
+        if (selectedDataTypeBubble === bubble.data.type) {
+            return bubble.data.type
+                .replace("dpv:", "")
+                .replace(/([a-z])([A-Z])/, "$1 $2");
+        }
+    };
 
     return (
         <>
@@ -109,7 +109,7 @@ export default function DataTypes({ entities, i18nHeader }) {
                                             }
                                             strokeColor={bubbleStroke}
                                             onBubbleClick={handleBubbleClick}
-                                            // label={showLabel}
+                                            label={showLabel}
                                         />
                                         <h4>{dataType.data[0].title}</h4>
                                     </div>
