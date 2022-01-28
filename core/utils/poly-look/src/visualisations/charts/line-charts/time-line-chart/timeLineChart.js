@@ -10,6 +10,12 @@ const xScaleMarginBottom = 16;
 const xScaleMarginLeft = 10;
 const defaultColor = "blue";
 
+const xTickSizes = {
+  small: 2,
+  medium: 4,
+  big: 8,
+};
+
 export class TimeLineChart extends Chart {
   constructor({
     selector,
@@ -67,6 +73,14 @@ export class TimeLineChart extends Chart {
       );
 
     xAxis.select("path").style("visibility", "hidden");
+
+    const xTickSize = (d) => {
+      if (d.getMonth() === 0) return xTickSizes.big;
+      if (d.getMonth() === 5) return xTickSizes.medium;
+      return xTickSizes.small;
+    };
+
+    xAxis.selectAll(".tick").select("line").attr("y2", xTickSize);
   }
 
   _drawYAxis() {
