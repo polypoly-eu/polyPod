@@ -25,7 +25,7 @@ jobs:
                   cache: "npm"
                   cache-dependency-path: "**/package-lock.json"
             - name: Lock xcode version
-              run: sudo xcode-select -switch /Applications/Xcode_12.4.app
+              run: make lockxcodeversion
             - name: Build core and features
               run: ./build.js
             - name: Build and test iOS
