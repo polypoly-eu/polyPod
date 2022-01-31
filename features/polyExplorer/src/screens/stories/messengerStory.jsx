@@ -63,7 +63,7 @@ const MessengerStory = () => {
         i18n.t(`${i18nHeader}:summary.bullet.1`, {
             advertising_shared: messengers.filter((m) =>
                 m.dataSharingPurposes.some(
-                    (e) => e["dpv:Category"] === "dpv:Advertising"
+                    (e) => e["dpv:Purpose"] === "dpv:Advertising"
                 )
             ).length,
             total_apps: listOfMessengerApps.length,
