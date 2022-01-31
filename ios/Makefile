@@ -5,7 +5,7 @@ export_options_plist = exportOptions.plist
 destination = 14.4
 
 lockxcodeversion:
-	sudo xcode-select -switch /Applications/Applications/Xcode_13.2.1.app
+	sudo xcode-select -switch /Applications/Xcode_13.2.1.app
 
 build:
 	xcodebuild clean build \
