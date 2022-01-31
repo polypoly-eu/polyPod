@@ -29,8 +29,13 @@ const bubbleTextColor = "#0f1938";
 const primaryColor = "#3ba6ff";
 
 const MessengerStory = () => {
-    const { products, globalData, entityJurisdictionByPpid, setPopUp } =
-        useContext(ExplorerContext);
+    const {
+        products,
+        globalData,
+        entityJurisdictionByPpid,
+        setPopUp,
+        entityObjectByPpid,
+    } = useContext(ExplorerContext);
 
     const listOfMessengerApps = [
         "Facebook Messenger",
@@ -48,10 +53,42 @@ const MessengerStory = () => {
         (p) => p.clusters.indexOf("messenger") !== -1
     );
 
+    const facebookMessengers = messengers.filter((e) =>
+        e.productOwner.some((o) => o.includes("Facebook"))
+    );
+
+    const mainFacebookCompany = "Facebook (US)";
+
     const summaryBullets = [
-        i18n.t(`${i18nHeader}:summary.bullet.1`),
-        i18n.t(`${i18nHeader}:summary.bullet.2`),
-        i18n.t(`${i18nHeader}:summary.bullet.3`),
+        i18n.t(`${i18nHeader}:summary.bullet.1`, {
+            advertising_shared: messengers.filter((m) =>
+                m.dataSharingPurposes.some(
+                    (e) => e["dpv:Category"] === "dpv:Advertising"
+                )
+            ).length,
+            total_apps: listOfMessengerApps.length,
+        }),
+        i18n.t(`${i18nHeader}:summary.bullet.2`, {
+            min_datatypes_shared: messengers.reduce((a, b) =>
+                Math.min(
+                    a.dataTypesShared?.length || a,
+                    b.dataTypesShared.length
+                )
+            ),
+            max_datatypes_shared: messengers.reduce((a, b) =>
+                Math.max(
+                    a.dataTypesShared?.length || a,
+                    b.dataTypesShared.length
+                )
+            ),
+        }),
+        i18n.t(`${i18nHeader}:summary.bullet.3`, {
+            max_facebook_product_recipients: facebookMessengers.reduce((a, b) =>
+                Math.max(a.dataRecipients?.length || a, b.dataRecipients.length)
+            ),
+            facebook_recipients:
+                entityObjectByPpid(mainFacebookCompany).dataRecipients.length,
+        }),
     ];
 
     const tipsBullets = [
