@@ -36,7 +36,7 @@ const DigitalGiantsStory = () => {
         featuredEntities,
         entityJurisdictionByPpid,
         globalData,
-        throwPopUp,
+        createPopUp,
     } = useContext(ExplorerContext);
 
     const bigSix = bigSixNames.map((n) =>
@@ -253,7 +253,7 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
-            <Purposes companies={bigSix} throwPopUp={throwPopUp} />
+            <Purposes companies={bigSix} createPopUp={createPopUp} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />

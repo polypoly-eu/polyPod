@@ -143,7 +143,7 @@ export const ExplorerProvider = ({ children }) => {
         }
     }
 
-    function throwPopUp({ type, content }) {
+    function createPopUp({ type, content }) {
         setPopUp({ component: popUps[type], content });
     }
 
@@ -316,7 +316,7 @@ export const ExplorerProvider = ({ children }) => {
                 storiesMetadata,
                 products,
                 popUp,
-                throwPopUp,
+                createPopUp,
                 closePopUp,
             }}
         >

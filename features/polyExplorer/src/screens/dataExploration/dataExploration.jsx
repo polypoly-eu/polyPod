@@ -31,7 +31,7 @@ const DataExplorationScreen = () => {
         selectedEntityObject,
         featuredEntityMaxValues,
         dataRecipients,
-        throwPopUp,
+        createPopUp,
     } = useContext(ExplorerContext);
     const entity = selectedEntityObject;
     const startSection = navigationState.explorationState.section;
@@ -605,7 +605,7 @@ const DataExplorationScreen = () => {
                                 <PurposeChart
                                     purposes={entity.dataSharingPurposes}
                                     openPopup={(purpose) =>
-                                        throwPopUp({
+                                        createPopUp({
                                             type: "center-popup",
                                             content: {
                                                 headline: purpose.translation,

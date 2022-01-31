@@ -9,12 +9,14 @@ const StoriesInfoScreen = ({ className, infoChildren }) => {
     const { closePopUp } = useContext(ExplorerContext);
     return (
         <div className={`stories-info ${className}`}>
-            {infoChildren.map((infoChild, i) => (
-                <div key={i}>
+            {infoChildren.map((infoChild, index) => (
+                <div key={index}>
                     <div className="info-title">
                         <div className="line"></div>
                         <h1>
-                            {i18n.t(`commonInfoScreen:baseInfo.title${i + 1}`)}
+                            {i18n.t(
+                                `commonInfoScreen:baseInfo.title${index + 1}`
+                            )}
                         </h1>
                         <div className="line"></div>
                     </div>

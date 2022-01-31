@@ -3,11 +3,11 @@ import { ExplorerContext } from "../../../context/explorer-context.jsx";
 import "./infoButton.css";
 
 const InfoButton = ({ infoScreen, stateChange }) => {
-    const { changeNavigationState, throwPopUp } = useContext(ExplorerContext);
+    const { changeNavigationState, createPopUp } = useContext(ExplorerContext);
 
     const handleClick = () => {
         if (stateChange) changeNavigationState(stateChange);
-        throwPopUp({ type: infoScreen });
+        createPopUp({ type: infoScreen });
     };
 
     return (
