@@ -628,8 +628,7 @@ const DataExplorationScreen = () => {
                                         source={i18n.t(
                                             "common:source.polyPedia"
                                         )}
-                                        infoScreenRoute="/purpose-info"
-                                        saveActiveIndex={saveActiveIndex}
+                                        infoScreen="purpose-info"
                                     />
                                 </div>
                             </div>

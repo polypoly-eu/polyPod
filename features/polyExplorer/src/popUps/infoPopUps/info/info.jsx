@@ -1,12 +1,12 @@
 import React from "react";
 
 import i18n from "../../../i18n.js";
-import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
+import BaseInfoPopUp from "../../../components/baseInfoPopUp/baseInfoPopUp.jsx";
 
 import "./info.css";
 
 const InfoScreen = ({ onClose }) => (
-    <BaseInfoScreen className="info-screen" onClose={onClose}>
+    <BaseInfoPopUp className="info-screen" onClose={onClose}>
         <div className="base-info-padding">
             <div
                 dangerouslySetInnerHTML={{
@@ -60,7 +60,7 @@ const InfoScreen = ({ onClose }) => (
                 }}
             ></div>
         </div>
-    </BaseInfoScreen>
+    </BaseInfoPopUp>
 );
 
 export default InfoScreen;

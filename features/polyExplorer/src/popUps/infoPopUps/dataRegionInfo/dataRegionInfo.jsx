@@ -1,7 +1,7 @@
 import React from "react";
 
 import i18n from "../../../i18n.js";
-import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
+import BaseInfoPopUp from "../../../components/baseInfoPopUp/baseInfoPopUp.jsx";
 import SectionTitle from "../../../components/clusterStories/sectionTitle.jsx";
 
 import "./dataRegionInfo.css";
@@ -185,9 +185,9 @@ export const DataRegionInfoContent = () => {
 
 const DataRegionInfo = ({ onClose }) => {
     return (
-        <BaseInfoScreen className="data-region-info-screen" onClose={onClose}>
+        <BaseInfoPopUp className="data-region-info-screen" onClose={onClose}>
             <DataRegionInfoContent />
-        </BaseInfoScreen>
+        </BaseInfoPopUp>
     );
 };
 

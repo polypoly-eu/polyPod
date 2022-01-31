@@ -2,12 +2,12 @@ import React from "react";
 
 import i18n from "../../../i18n.js";
 import "./jurisdictionInfo.css";
-import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
+import BaseInfoPopUp from "../../../components/baseInfoPopUp/baseInfoPopUp.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 
 const JurisdictionInfo = ({ onClose }) => {
     return (
-        <BaseInfoScreen
+        <BaseInfoPopUp
             className="jurisdiction-info"
             headline={i18n.t("explorationJurisdictionInfoScreen:headline")}
             onClose={onClose}
@@ -219,7 +219,7 @@ const JurisdictionInfo = ({ onClose }) => {
                     }}
                 ></div>
             </div>
-        </BaseInfoScreen>
+        </BaseInfoPopUp>
     );
 };
 

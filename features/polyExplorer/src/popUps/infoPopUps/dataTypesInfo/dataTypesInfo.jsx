@@ -1,12 +1,12 @@
 import React from "react";
 
 import i18n from "../../../i18n.js";
-import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
+import BaseInfoPopUp from "../../../components/baseInfoPopUp/baseInfoPopUp.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 
 const DataTypesInfo = ({ onClose }) => {
     return (
-        <BaseInfoScreen
+        <BaseInfoPopUp
             className="data-types-info"
             headline={i18n.t("explorationDataTypesInfoScreen:headline")}
             onClose={onClose}
@@ -24,7 +24,7 @@ const DataTypesInfo = ({ onClose }) => {
                 <h2>{i18n.t("explorationDataTypesInfoScreen:subheading.1")}</h2>
                 <p>{i18n.t("explorationDataTypesInfoScreen:text.2")}</p>
             </div>
-        </BaseInfoScreen>
+        </BaseInfoPopUp>
     );
 };
 

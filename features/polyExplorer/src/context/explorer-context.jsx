@@ -144,6 +144,7 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function throwPopUp({ type, content }) {
+        console.log(type, popUps[type]);
         setPopUp({ component: popUps[type], content });
     }
 

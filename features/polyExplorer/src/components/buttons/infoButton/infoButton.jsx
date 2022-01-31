@@ -1,21 +1,20 @@
-import React from "react";
-import LinkButton from "../linkButton/linkButton.jsx";
+import React, { useContext } from "react";
+import { ExplorerContext } from "../../../context/explorer-context.jsx";
 import "./infoButton.css";
 
-const InfoButton = ({
-    infoScreenRoute,
-    saveActiveIndex,
-    stateChange = null,
-}) => (
-    <div onClick={saveActiveIndex}>
-        <LinkButton
-            className="info-button"
-            route={infoScreenRoute}
-            stateChange={stateChange}
-        >
+const InfoButton = ({ infoScreen, stateChange }) => {
+    const { changeNavigationState, throwPopUp } = useContext(ExplorerContext);
+
+    const handleClick = () => {
+        if (stateChange) changeNavigationState(stateChange);
+        throwPopUp({ type: infoScreen });
+    };
+
+    return (
+        <button className="info-button" onClick={handleClick}>
             <img src="images/question-info.svg"></img>
-        </LinkButton>
-    </div>
-);
+        </button>
+    );
+};
 
 export default InfoButton;
