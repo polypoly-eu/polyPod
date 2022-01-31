@@ -33,9 +33,8 @@ const MessengerStory = () => {
         products,
         globalData,
         entityJurisdictionByPpid,
-        setPopUp,
         entityObjectByPpid,
-          createPopUp
+        createPopUp,
     } = useContext(ExplorerContext);
 
     const listOfMessengerApps = [
