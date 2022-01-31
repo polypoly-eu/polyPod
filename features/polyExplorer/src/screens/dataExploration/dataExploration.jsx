@@ -169,7 +169,6 @@ const DataExplorationScreen = () => {
     //State
     const [swiper, setSwiper] = useState(null);
     const [activeIndex, setActiveIndex] = useState(getStartIndex());
-    const [purposePopupContent, setPurposePopupContent] = useState(null);
 
     //Constants
     const activeScreen = screens[activeIndex];
@@ -702,12 +701,6 @@ const DataExplorationScreen = () => {
                 screens={screens}
                 onClick={() => swiper.slideNext()}
             />
-            {purposePopupContent ? (
-                <PurposeInfoPopup
-                    purpose={purposePopupContent}
-                    onClose={() => setPurposePopupContent(null)}
-                />
-            ) : null}
         </Screen>
     );
 };
