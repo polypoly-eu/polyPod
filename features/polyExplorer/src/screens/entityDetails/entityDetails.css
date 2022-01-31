@@ -310,8 +310,7 @@
 }
 
 .about .entity-details-text {
-    max-height: 300px;
-    margin: 32px 16px 16px 16px;
+    margin: 32px 16px 16px;
 }
 
 .about .gradient {
