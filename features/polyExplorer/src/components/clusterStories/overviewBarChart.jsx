@@ -7,7 +7,7 @@ import "./overviewBarChart.css";
 import { latestActiveUsersValue } from "../../screens/stories/story-utils.js";
 const chartColors = {
     primary: "#3aa6ff",
-    secondary: "#fff",
+    secondary: "#F7FAFC",
 };
 
 function Installs({ entities }) {
@@ -65,7 +65,7 @@ function PartOf({ entities }) {
             <PolyChart
                 type="horizontal-bar-chart"
                 data={data}
-                barWidth={20}
+                barWidth={16}
                 groups={[
                     { translation: "Owned By Facebook", id: "facebook" },
                     { translation: "Other", id: "other" },
@@ -79,8 +79,8 @@ function PartOf({ entities }) {
 
 export default function OverviewBarChart({ entities }) {
     return (
-        <div className="receiving-companies">
-            <Tabs swipe={false}>
+        <div className="overview-bar-chart">
+            <Tabs swipe={true}>
                 <Tab
                     id="installs"
                     label={i18n.t("clusterStoryCommon:label.installs")}

@@ -14,10 +14,11 @@ const margin = {
 const barValueMargin = 4;
 const barPaddingProportion = 0.2;
 const groupHeadlineHeight = 14;
-const headlinePadding = 6;
-const barTextBottomMargin = 6;
+const headlinePadding = 0;
+const barTextBottomMargin = 4;
 const barLabelTopMargin = 2;
-const defaultBarWidth = 20;
+const barLabelLeftMargin = 3;
+const defaultBarWidth = 16;
 const defaultBarColor = "blue";
 const defaultBarValueColor = "white";
 
@@ -114,9 +115,7 @@ export class HorizontalBarChart extends Chart {
     for (let scaleContainer of this._yScales) {
       if (!scaleContainer.id)
         return (
-          scaleContainer.scale(d.title) +
-          this._barWidth +
-          barTextBottomMargin / 2
+          scaleContainer.scale(d.title) + this._barWidth + barTextBottomMargin
         );
       if (scaleContainer.id === d.group)
         return (
@@ -189,10 +188,10 @@ export class HorizontalBarChart extends Chart {
         }
       })
       .attr("class", "bar-label")
-      .attr("x", 0)
+      .attr("x", this._groups ? barLabelLeftMargin : 0)
       .text((d) => d.title)
       .attr("fill", "transparent")
-      .style("font-size", "15px")
+      .style("font-size", this._groups ? "12px" : "14px")
       .transition()
       .delay(1000)
       .duration(500)
@@ -213,7 +212,7 @@ export class HorizontalBarChart extends Chart {
       .attr("x", 0)
       .text((d) => d.translation)
       .attr("fill", "transparent")
-      .style("font-size", "15px")
+      .style("font-size", "14px")
       .transition()
       .delay(1000)
       .duration(500)
@@ -229,7 +228,7 @@ export class HorizontalBarChart extends Chart {
       .attr("x", (d) => this._xScale(d.value) - barValueMargin)
       .text((d) => d.value)
       .attr("fill", "transparent")
-      .style("font-size", "10px")
+      .style("font-size", "12px")
       .transition()
       .delay(1000)
       .duration(500)

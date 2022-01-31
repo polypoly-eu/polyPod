@@ -1,3 +1,7 @@
+text {
+  font-family: var(--jost-medium);
+}
+
 :root,
 .poly-theme {
   --theme-font-base: var(--jost);
