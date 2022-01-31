@@ -232,7 +232,7 @@ const EntityDetails = () => {
                         <FeaturedEntity />
                         <SourceInfoButton
                             source={i18n.t("common:source.polyPedia")}
-                            infoScreenRoute="featured-entity-info"
+                            infoScreen="featured-entity-info"
                         />
                         <div className="explore-data-btn-area">
                             <LinkButton
