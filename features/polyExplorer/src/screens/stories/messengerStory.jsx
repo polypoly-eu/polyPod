@@ -29,7 +29,7 @@ const bubbleTextColor = "#0f1938";
 const primaryColor = "#3ba6ff";
 
 const MessengerStory = () => {
-    const { products, globalData, entityJurisdictionByPpid, setPopUp } =
+    const { products, globalData, entityJurisdictionByPpid, throwPopUp } =
         useContext(ExplorerContext);
 
     const listOfMessengerApps = [
@@ -117,7 +117,7 @@ const MessengerStory = () => {
                     ),
                 };
             }),
-            route: "/company-data-types-info",
+            route: "company-data-types-info",
         },
         {
             id: "by-shares",
@@ -141,7 +141,7 @@ const MessengerStory = () => {
                     ),
                 };
             }),
-            route: "/shares-data-types-info",
+            route: "shares-data-types-info",
         },
         {
             id: "by-types",
@@ -154,6 +154,7 @@ const MessengerStory = () => {
                         amount_of_data_types: listOfDataCategories.length,
                         amount_of_shares: totalShares,
                     }),
+
                     bubbles: dataTypesSharedCombined.map((bubble) => {
                         return { value: bubble.total };
                     }),
@@ -161,7 +162,7 @@ const MessengerStory = () => {
                     height: 400,
                 },
             ],
-            route: "/types-data-types-info",
+            route: "types-data-types-info",
         },
     ];
 
@@ -230,7 +231,7 @@ const MessengerStory = () => {
             </p>
             <OverviewBarChart entities={Object.values(products)} />
             <SourceInfoButton
-                infoScreenRoute="/overview-bar-chart-info"
+                infoScreen="overview-bar-chart-info"
                 source={i18n.t("common:source.polyPedia")}
             />
             <SectionTitle
@@ -244,7 +245,7 @@ const MessengerStory = () => {
                 i18nHeader={i18nHeader}
             />
             <SourceInfoButton
-                infoScreenRoute="/details-line-chart-info"
+                infoScreen="details-line-chart-info"
                 source={i18n.t("common:source.polyPedia")}
             />
             <MessengerTreeMap
@@ -252,7 +253,7 @@ const MessengerStory = () => {
                 i18nHeader={i18nHeader}
             />
             <SourceInfoButton
-                infoScreenRoute="/details-treemap-info"
+                infoScreen="details-treemap-info"
                 source={i18n.t("common:source.polyPedia")}
             />
             <SectionTitle
@@ -301,7 +302,7 @@ const MessengerStory = () => {
                                         strokeColor={bubbleStroke}
                                     />
                                     <SourceInfoButton
-                                        infoScreenRoute={dataType.route}
+                                        infoScreen={dataType.route}
                                         source={i18n.t(
                                             "common:source.polyPedia"
                                         )}
@@ -330,7 +331,7 @@ const MessengerStory = () => {
                                         <h4>{dataType.data[0].title}</h4>
                                     </div>
                                     <SourceInfoButton
-                                        infoScreenRoute={dataType.route}
+                                        infoScreen={dataType.route}
                                         source={i18n.t(
                                             "common:source.polyPedia"
                                         )}
@@ -347,7 +348,7 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
-            <Purposes companies={messengers} setPopUp={setPopUp} />
+            <Purposes companies={messengers} throwPopUp={throwPopUp} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />
@@ -377,7 +378,7 @@ const MessengerStory = () => {
                 }}
             />
             <SourceInfoButton
-                infoScreenRoute="/data-regions-diagram-info"
+                infoScreen="data-regions-diagram-info"
                 source={i18n.t("common:source.polyPedia")}
             />
             <SectionTitle title={i18n.t(`${i18nHeader}:tips.section`)} />

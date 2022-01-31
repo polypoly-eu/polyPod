@@ -34,12 +34,15 @@ export default function Purposes({ companies, throwPopUp }) {
                 onClick={(purpose) =>
                     throwPopUp({
                         type: "center-popup",
-                        content: purpose,
+                        content: {
+                            headline: purpose.translation,
+                            body: purpose.explanation,
+                        },
                     })
                 }
             />
             <SourceInfoButton
-                infoScreenRoute="/purposes-bar-chart-info"
+                infoScreen="purposes-bar-chart-info"
                 source={i18n.t("common:source.polyPedia")}
             />
         </div>

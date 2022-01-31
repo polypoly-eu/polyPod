@@ -39,7 +39,7 @@ export default {
     "shares-data-types-info": SharesDataTypesInfo,
     "types-data-types-info": TypesDataTypesInfo,
     "industries-packed-circle-info": IndustriesPackedCircleInfo,
-    "purpose-bar-chart-info": PurposesBarChartInfo,
+    "purposes-bar-chart-info": PurposesBarChartInfo,
     "overview-bar-chart-info": OverviewBarChartInfo,
     "data-regions-diagram-info": DataRegionsDiagramInfo,
     "details-treemap-info": DetailsTreemapInfo,
