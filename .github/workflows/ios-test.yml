@@ -25,7 +25,7 @@ jobs:
                   cache: "npm"
                   cache-dependency-path: "**/package-lock.json"
             - name: Lock xcode version
-              run: make lockxcodeversion
+              run: cd ios; make lockxcodeversion
             - name: Build core and features
               run: ./build.js
             - name: Build and test iOS
