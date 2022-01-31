@@ -1,25 +1,32 @@
 import Foundation
-import os.log
+import CocoaLumberjackSwift
 
-class Log {
-    static let log = OSLog(
-        subsystem: Bundle.main.bundleIdentifier!,
-        category: "application"
-    )
+enum Log {
+    static func bootstrap() {
+        DDLog.add(DDOSLogger.sharedInstance) // Write to os_log
+        
+        let fileLogger = DDFileLogger() // Write to a file
+        fileLogger.rollingFrequency = 60 * 60 * 24 // 24 hours
+        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
+        DDLog.add(fileLogger)
+    }
     
     static func debug(_ message: String) {
-        log(.debug, message)
+        DDLogDebug(message)
     }
     
     static func info(_ message: String) {
-        log(.info, message)
+        DDLogInfo(message)
     }
     
     static func error(_ message: String) {
-        log(.error, message)
+        DDLogError(message)
     }
-    
-    private static func log(_ type: OSLogType, _ message: String) {
-        os_log("%s", log: log, type: type, message)
+}
+
+extension Log {
+    static var logFiles: [URL] {
+        guard let fileLogger = DDLog.allLoggers.compactMap({ $0 as? DDFileLogger }).first else { return [] }
+        return fileLogger.logFileManager.sortedLogFilePaths.map { URL(fileURLWithPath: $0) }
     }
 }

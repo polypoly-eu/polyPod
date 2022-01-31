@@ -1,4 +1,5 @@
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct SettingsView: View {
     var closeAction: () -> Void = {}
@@ -25,12 +26,12 @@ struct SettingsView: View {
                             return "settings_licenses_title"
                         }
                     }())
-                    .foregroundColor(Color.PolyPod.darkForeground)
-                    .font(.custom("Jost-Medium", size: 16))
-                    .kerning(-0.16)
+                        .foregroundColor(Color.PolyPod.darkForeground)
+                        .font(.custom("Jost-Medium", size: 16))
+                        .kerning(-0.16)
                 )
             )
-            .background(Color.PolyPod.lightBackground)
+                .background(Color.PolyPod.lightBackground)
             
             Divider()
             
@@ -71,6 +72,7 @@ struct SettingsView_Previews: PreviewProvider {
 private struct MainSection: View {
     @Binding var activeSection: Sections
     @State private var showVersion = false
+    @State private var shareLogs = false
     
     var body: some View {
         List() {
@@ -79,12 +81,12 @@ private struct MainSection: View {
                     label: "settings_version",
                     action: { showVersion = true }
                 )
-                .alert(isPresented: $showVersion) {
-                    Alert(
-                        title: Text("settings_version"),
-                        message: Text(RuntimeInfo.version)
-                    )
-                }
+                    .alert(isPresented: $showVersion) {
+                        Alert(
+                            title: Text("settings_version"),
+                            message: Text(RuntimeInfo.version)
+                        )
+                    }
             }
             .listRowInsets(
                 EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
@@ -107,10 +109,16 @@ private struct MainSection: View {
                     label: "settings_licenses_title",
                     action: { activeSection = .licenses }
                 )
+                SettingsButton(label: "Export Logs",
+                               action: {
+                    shareLogs = true
+                })
             }
             .listRowInsets(
                 EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             )
+        }.sheet(isPresented: $shareLogs) {
+            ActivityViewController(activityItems: Log.logFiles)
         }
     }
 }

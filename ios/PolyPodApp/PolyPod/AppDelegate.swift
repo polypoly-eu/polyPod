@@ -9,6 +9,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        Log.bootstrap()
+        
         let defaults = UserDefaults.standard
         if defaults.bool(forKey: UserDefaults.Keys.resetUserDefaults.rawValue) {
             Log.info("Resetting all user defaults")
