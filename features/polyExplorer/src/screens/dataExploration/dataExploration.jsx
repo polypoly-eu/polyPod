@@ -274,8 +274,7 @@ const DataExplorationScreen = () => {
 
                     <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        infoScreenRoute="/data-types-info"
-                        saveActiveIndex={saveActiveIndex}
+                        infoScreen="data-types-info"
                     />
                     {filler}
                 </div>
@@ -326,12 +325,9 @@ const DataExplorationScreen = () => {
 
                     <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        infoScreenRoute="/data-category-info"
-                        saveActiveIndex={saveActiveIndex}
+                        infoScreen="category-info"
                         stateChange={{
                             explorationState: {
-                                section: "dataTypes",
-                                index: activeIndex,
                                 category: activeScreen.split("_")[1],
                             },
                         }}
@@ -382,8 +378,7 @@ const DataExplorationScreen = () => {
 
                     <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        infoScreenRoute="/data-correlation-info"
-                        saveActiveIndex={saveActiveIndex}
+                        infoScreen="data-correlation-info"
                     />
                 </div>
             );
@@ -411,8 +406,7 @@ const DataExplorationScreen = () => {
 
                     <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        infoScreenRoute="/companies-info"
-                        saveActiveIndex={saveActiveIndex}
+                        infoScreen="companies-info"
                     />
                 </div>
             );
@@ -477,8 +471,7 @@ const DataExplorationScreen = () => {
 
                     <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        infoScreenRoute="/companies-info"
-                        saveActiveIndex={saveActiveIndex}
+                        infoScreen="companies-info"
                     />
                 </div>
             );
@@ -688,7 +681,7 @@ const DataExplorationScreen = () => {
                                 />
                                 <SourceInfoButton
                                     source={i18n.t("common:source.polyPedia")}
-                                    infoScreenRoute="/jurisdiction-info"
+                                    infoScreen="jurisdiction-info"
                                 />
                                 <LinkButton
                                     route="/main"

@@ -4,12 +4,11 @@ import i18n from "../../../i18n.js";
 import BaseInfoPopUp from "../../../components/baseInfoPopUp/baseInfoPopUp.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 
-const DataTypesInfo = ({ onClose }) => {
+const DataTypesInfo = () => {
     return (
         <BaseInfoPopUp
             className="data-types-info"
             headline={i18n.t("explorationDataTypesInfoScreen:headline")}
-            onClose={onClose}
         >
             <div className="base-info-padding">
                 <p>{i18n.t("explorationDataTypesInfoScreen:text.1")}</p>

@@ -27,7 +27,7 @@ export default {
 
     "pod-info": InfoScreen,
     "data-region-info": DataRegionInfoScreen,
-    "data-type-info": DataTypesInfoScreen,
+    "data-types-info": DataTypesInfoScreen,
     "category-info": CategoryInfoScreen,
     "correlation-info": CorrelationInfoScreen,
     "purpose-info": PurposeInfoScreen,

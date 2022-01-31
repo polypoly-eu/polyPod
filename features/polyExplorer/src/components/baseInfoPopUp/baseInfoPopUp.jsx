@@ -6,7 +6,7 @@ import i18n from "../../i18n.js";
 import "./baseInfoPopUp.css";
 
 const BaseInfoPopUp = ({ className, headline, children }) => {
-    const { handleBack } = useContext(ExplorerContext);
+    const { closePopUp } = useContext(ExplorerContext);
     return (
         <div className={`base-info ${className}`}>
             <div className="base-info-padding">
@@ -14,7 +14,7 @@ const BaseInfoPopUp = ({ className, headline, children }) => {
             </div>
             {children}
             <div className="base-info-padding">
-                <button onClick={() => handleBack()}>
+                <button onClick={() => closePopUp()}>
                     {i18n.t("common:button.ok")}
                 </button>
             </div>
