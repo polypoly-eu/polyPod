@@ -22,7 +22,6 @@
     },
     "dependencies": {
         "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
-        "@polypoly-eu/pod-api": "file:../../core/api/pod-api",
         "i18next": "^19.7.0",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
