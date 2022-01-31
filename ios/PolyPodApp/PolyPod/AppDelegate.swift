@@ -10,6 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         Log.bootstrap()
+        Log.info("Application initialized")
         
         let defaults = UserDefaults.standard
         if defaults.bool(forKey: UserDefaults.Keys.resetUserDefaults.rawValue) {
@@ -40,6 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.registerUpdateNotificationCheck()
         
         return true
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        Log.info("Application terminated")
     }
     
     private func registerUpdateNotificationCheck() {
