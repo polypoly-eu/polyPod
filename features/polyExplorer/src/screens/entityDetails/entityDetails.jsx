@@ -226,8 +226,7 @@ const EntityDetails = () => {
                                         source={i18n.t(
                                             "common:source.polyPedia"
                                         )}
-                                        //  TO DO: add correct path (maybe HTRT-Screen doesn't exist yet?)
-                                        infoScreenRoute="missing"
+                                        infoScreenRoute="company-revenue-info"
                                         className="info-extra-margin"
                                     />
                                 </div>
