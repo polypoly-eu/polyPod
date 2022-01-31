@@ -1,14 +1,13 @@
 .base-info {
+    position: absolute;
     max-width: var(--max-width);
     width: 100%;
-    margin: 0 auto;
+    height: 100%;
     overflow: hidden scroll;
     padding-top: 24px;
-}
-
-.base-info * {
+    background-color: var(--color-background-light);
     color: var(--color-text-dark);
-    line-height: var(--line-height);
+    z-index: 100;
 }
 
 .base-info h1,
