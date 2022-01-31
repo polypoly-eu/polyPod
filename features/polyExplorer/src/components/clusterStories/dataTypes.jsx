@@ -46,7 +46,7 @@ export default function DataTypes({ entities, i18nHeader }) {
         if (selectedDataTypeBubble === bubble.data.type) {
             return bubble.data.type
                 .replace("dpv:", "")
-                .replace(/([a-z])([A-Z])/, "$1 $2");
+                .replace(/([a-z])([A-Z])/g, "$1 $2");
         }
     };
 
