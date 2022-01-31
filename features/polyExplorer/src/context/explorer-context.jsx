@@ -144,7 +144,6 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function throwPopUp({ type, content }) {
-        console.log(type, popUps[type]);
         setPopUp({ component: popUps[type], content });
     }
 
@@ -165,6 +164,7 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function handleBack() {
+        if (popUp) return setPopUp(null);
         if (currentPath != "/") {
             history.goBack();
             const location = history.location;
