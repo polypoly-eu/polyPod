@@ -5,8 +5,6 @@ import "./infoButton.css";
 const InfoButton = ({ infoScreen, stateChange }) => {
     const { changeNavigationState, throwPopUp } = useContext(ExplorerContext);
 
-    console.log(infoScreen);
-
     const handleClick = () => {
         if (stateChange) changeNavigationState(stateChange);
         throwPopUp({ type: infoScreen });

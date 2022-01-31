@@ -4,7 +4,6 @@ import i18n from "../../i18n.js";
 import "./centerBox.css";
 
 const CenterBox = ({ content, onClose }) => {
-    console.log(content);
     return (
         <div className="center-box-popup-container">
             <div className="center-box-popup">
