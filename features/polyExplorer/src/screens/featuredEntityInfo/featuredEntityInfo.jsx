@@ -4,7 +4,7 @@ import i18n from "../../i18n.js";
 import StoriesInfoScreen from "../../components/clusterStories/storiesInfoScreen.jsx";
 import Infographic from "../../components/infographic/infographic.jsx";
 
-const FeaturedEntityInfoScreen = ({ onClose }) => {
+const FeaturedEntityInfoScreen = () => {
     const FeaturedEntityInfoScreenContent = [
         <div className="base-info-padding">
             <p>{i18n.t("featuredEntityInfoScreen:text.main")}</p>
