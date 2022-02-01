@@ -79,9 +79,9 @@ const DataTypes = ({ entities, i18nHeader }) => {
                                         height={dataType.data[0].height}
                                         bubbleColor={bubbleColor}
                                         text={(d) =>
-                                            d.category ===
+                                            d.data.category ===
                                             selectedDataTypeBubble
-                                                ? d.category
+                                                ? d.data.value
                                                 : ""
                                         }
                                         textColor={bubbleTextColor}

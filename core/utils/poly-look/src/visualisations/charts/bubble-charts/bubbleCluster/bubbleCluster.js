@@ -1,9 +1,10 @@
 import * as d3 from "d3";
+import { attr } from "svelte/internal";
 
 import { Chart } from "../../chart";
 
 const edgePadding = 5;
-const labelPadding = 20;
+const labelMargin = 20;
 const smallBubblesRadius = 20;
 const bigBubblesRadius = 50;
 const bubblePadding = 3;
@@ -16,6 +17,12 @@ const defaultOpacity = 1;
 const defaultText = (d) =>
   d.r > smallBubblesRadius ? Math.round(d.value) : "";
 const defaultOnClickFunction = () => {};
+
+const nodeLabelBoxPaddingX = 4,
+  nodeLabelBoxPaddingY = 1,
+  nodeLabelBoxBorderRadius = 2,
+  defaultNodeLabelBoxColor = "white",
+  defaultNodeLabelBoxOpacity = 0.7;
 
 /**
  * Visualizes data as a cluster of bubbles where the value of the bubble is represented as the radius.
@@ -175,30 +182,108 @@ export class BubbleCluster extends Chart {
   _addLabel(bubbleGroups) {
     const label = this._label;
     const color = this._textColor;
+    const chart = this.chart;
     bubbleGroups.each(function (node) {
       if (label(node)) {
         const labelGroup = d3
           .select(this)
           .append("g")
           .attr("class", "label-group");
-        labelGroup
+        const text = labelGroup
           .append("text")
-          .attr("transform", (d) => `translate(0, ${-d.r - labelPadding})`)
+          .attr("x", 0)
+          .attr("y", (d) => -d.r - labelMargin)
           .attr("text-anchor", "middle")
           .attr("fill", this._textColor)
           .text(label);
 
-        console.log();
+        text.each((_, i, nodes) => {
+          const bBox = nodes[i].getBBox();
+          labelGroup
+            .append("rect")
+            .attr("x", bBox.x - nodeLabelBoxPaddingX)
+            .attr("y", bBox.y - nodeLabelBoxPaddingY)
+            .attr("width", bBox.width + nodeLabelBoxPaddingX * 2)
+            .attr("height", bBox.height + nodeLabelBoxPaddingY * 2)
+            .attr("fill", defaultNodeLabelBoxColor)
+            .attr("opacity", defaultNodeLabelBoxOpacity)
+            .attr("rx", nodeLabelBoxBorderRadius);
+        });
 
-        labelGroup
+        const rect = labelGroup.select("rect");
+
+        const line = labelGroup
           .append("line")
           .attr("x1", 0)
           .attr("x2", 0)
           .attr("y1", (d) => -d.r - 2)
-          .attr("y2", (d) => -d.r - labelPadding + 2)
+          .attr("y2", (d) => -d.r - labelMargin + 7)
           .attr("stroke", color)
           .attr("stroke-width", 2);
 
+        const chartClientRect = chart.node().getBoundingClientRect();
+        const rectClientRect = rect.node().getBoundingClientRect();
+
+        if (chartClientRect.top == rectClientRect.top) {
+          text.attr("y", (d) => d.r + labelMargin + 10);
+
+          text.each((_, i, nodes) => {
+            const bBox = nodes[i].getBBox();
+            rect.attr("y", bBox.y - nodeLabelBoxPaddingY);
+          });
+
+          line
+            .attr("x1", 0)
+            .attr("x2", 0)
+            .attr("y1", (d) => d.r + 2)
+            .attr("y2", (d) => d.r + labelMargin - 7);
+        }
+
+        if (
+          Math.floor(chartClientRect.right) == Math.floor(rectClientRect.right)
+        ) {
+          text
+            .attr("x", (d) => -d.r - labelMargin)
+            .attr("y", 4)
+            .attr("text-anchor", "end");
+
+          text.each((_, i, nodes) => {
+            const bBox = nodes[i].getBBox();
+            rect
+              .attr("x", bBox.x - nodeLabelBoxPaddingX)
+              .attr("y", bBox.y - nodeLabelBoxPaddingY);
+          });
+
+          line
+            .attr("y1", 0)
+            .attr("y2", 0)
+            .attr("x1", (d) => -d.r - 2)
+            .attr("x2", (d) => -d.r - labelMargin + 7);
+        }
+
+        if (
+          Math.floor(chartClientRect.left) == Math.floor(rectClientRect.left)
+        ) {
+          text
+            .attr("x", (d) => d.r + labelMargin)
+            .attr("y", 4)
+            .attr("text-anchor", "start");
+
+          text.each((_, i, nodes) => {
+            const bBox = nodes[i].getBBox();
+            rect
+              .attr("x", bBox.x - nodeLabelBoxPaddingX)
+              .attr("y", bBox.y - nodeLabelBoxPaddingY);
+          });
+
+          line
+            .attr("y1", 0)
+            .attr("y2", 0)
+            .attr("x1", (d) => d.r + 2)
+            .attr("x2", (d) => d.r + labelMargin - 7);
+        }
+
+        text.raise();
         d3.select(this).raise();
       }
     });
