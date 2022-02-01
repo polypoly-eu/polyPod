@@ -1,0 +1,4 @@
+module PolyPodCore {
+    header "polypodcore.h"
+    export *
+}
