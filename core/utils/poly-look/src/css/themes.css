@@ -9,6 +9,10 @@
   letter-spacing: -0.01em;
 }
 
+.poly-theme text {
+  font-family: var(--jost-medium);
+}
+
 .poly-theme input {
   color: var(--theme-secondary-color);
 }
