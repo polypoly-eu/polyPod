@@ -14,7 +14,7 @@ const margin = {
 const barValueMargin = 4;
 const barPaddingProportion = 0.2;
 const groupHeadlineHeight = 14;
-const headlinePadding = 3;
+const headlinePadding = 4;
 const barTextBottomMargin = 4;
 const barLabelTopMargin = 2;
 const barLabelLeftMargin = 3;
@@ -68,7 +68,8 @@ export class HorizontalBarChart extends Chart {
   _getYscales(groups) {
     if (groups) {
       const yScales = [];
-      let headingMargin = groupHeadlineHeight;
+      const headingSpace = headlinePadding+groupHeadlineHeight;
+      let headingMargin = headingSpace;
       for (let group of groups) {
         const relevantBars = this.data.filter(
           (data) => data.group === group.id
@@ -80,7 +81,7 @@ export class HorizontalBarChart extends Chart {
           .scaleBand()
           .range([headingMargin, headingMargin + range])
           .padding(barPaddingProportion);
-        headingMargin = groupHeadlineHeight + headingMargin + range;
+        headingMargin = headingSpace + headingMargin + range;
         yScales.push(new ScaleContainer({ scale, id: group.id }));
       }
       return yScales;
@@ -89,8 +90,8 @@ export class HorizontalBarChart extends Chart {
         new ScaleContainer({
           scale: d3
             .scaleBand()
-            .range([0, this.chartHeight])
-            .padding(barPaddingProportion),
+            .range([groupHeadlineHeight, this.chartHeight])
+            .paddingInner(barPaddingProportion),
           id: null,
         }),
       ];
@@ -205,7 +206,7 @@ export class HorizontalBarChart extends Chart {
         (d) =>
           this._yScales
             .find((scaleContainer) => scaleContainer.id === d.id)
-            .scale.range()[0] - headlinePadding
+            .scale.range()[0]
       )
       .attr("class", "group-label")
       .attr("x", 0)
