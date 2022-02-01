@@ -15,6 +15,7 @@ const MainScreen = () => {
 
     return (
         <Screen
+            noScroll
             className="main-screen"
             topShadow={false}
             theme={showClusters ? "poly-theme-light" : "poly-theme-dark"}

@@ -12,7 +12,6 @@ import CompanyBubbles, {
 } from "../../components/dataViz/companyBubbles.jsx";
 import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
 import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
-import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
 import CompanyIndustryList from "../../components/companyIndustryList/companyIndustryList.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 
@@ -32,6 +31,7 @@ const DataExplorationScreen = () => {
         selectedEntityObject,
         featuredEntityMaxValues,
         dataRecipients,
+        createPopUp,
     } = useContext(ExplorerContext);
     const entity = selectedEntityObject;
     const startSection = navigationState.explorationState.section;
@@ -169,7 +169,6 @@ const DataExplorationScreen = () => {
     //State
     const [swiper, setSwiper] = useState(null);
     const [activeIndex, setActiveIndex] = useState(getStartIndex());
-    const [purposePopupContent, setPurposePopupContent] = useState(null);
 
     //Constants
     const activeScreen = screens[activeIndex];
@@ -274,8 +273,7 @@ const DataExplorationScreen = () => {
 
                     <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        infoScreenRoute="/data-types-info"
-                        saveActiveIndex={saveActiveIndex}
+                        infoScreen="data-types-info"
                     />
                     {filler}
                 </div>
@@ -326,12 +324,9 @@ const DataExplorationScreen = () => {
 
                     <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        infoScreenRoute="/data-category-info"
-                        saveActiveIndex={saveActiveIndex}
+                        infoScreen="category-info"
                         stateChange={{
                             explorationState: {
-                                section: "dataTypes",
-                                index: activeIndex,
                                 category: activeScreen.split("_")[1],
                             },
                         }}
@@ -382,8 +377,7 @@ const DataExplorationScreen = () => {
 
                     <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        infoScreenRoute="/data-correlation-info"
-                        saveActiveIndex={saveActiveIndex}
+                        infoScreen="correlation-info"
                     />
                 </div>
             );
@@ -411,8 +405,7 @@ const DataExplorationScreen = () => {
 
                     <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        infoScreenRoute="/companies-info"
-                        saveActiveIndex={saveActiveIndex}
+                        infoScreen="companies-info"
                     />
                 </div>
             );
@@ -477,8 +470,7 @@ const DataExplorationScreen = () => {
 
                     <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        infoScreenRoute="/companies-info"
-                        saveActiveIndex={saveActiveIndex}
+                        infoScreen="companies-info"
                     />
                 </div>
             );
@@ -612,7 +604,15 @@ const DataExplorationScreen = () => {
                                 </h1>
                                 <PurposeChart
                                     purposes={entity.dataSharingPurposes}
-                                    openPopup={setPurposePopupContent}
+                                    openPopup={(purpose) =>
+                                        createPopUp({
+                                            type: "center-popup",
+                                            content: {
+                                                headline: purpose.translation,
+                                                body: purpose.explanation,
+                                            },
+                                        })
+                                    }
                                     saveActiveIndex={saveActiveIndex}
                                 />
                                 <div className="purpose-extra-margin">
@@ -620,8 +620,7 @@ const DataExplorationScreen = () => {
                                         source={i18n.t(
                                             "common:source.polyPedia"
                                         )}
-                                        infoScreenRoute="/purpose-info"
-                                        saveActiveIndex={saveActiveIndex}
+                                        infoScreen="purpose-info"
                                     />
                                 </div>
                             </div>
@@ -681,10 +680,10 @@ const DataExplorationScreen = () => {
                                 />
                                 <SourceInfoButton
                                     source={i18n.t("common:source.polyPedia")}
-                                    infoScreenRoute="/jurisdiction-info"
+                                    infoScreen="jurisdiction-info"
                                 />
                                 <LinkButton
-                                    route="/entity-details"
+                                    route="/main"
                                     className="explore-other"
                                 >
                                     {i18n.t(
@@ -702,12 +701,6 @@ const DataExplorationScreen = () => {
                 screens={screens}
                 onClick={() => swiper.slideNext()}
             />
-            {purposePopupContent ? (
-                <PurposeInfoPopup
-                    purpose={purposePopupContent}
-                    onClose={() => setPurposePopupContent(null)}
-                />
-            ) : null}
         </Screen>
     );
 };

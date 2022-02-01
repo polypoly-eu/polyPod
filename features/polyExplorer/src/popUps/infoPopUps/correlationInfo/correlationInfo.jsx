@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import i18n from "../../../i18n.js";
 import highlights from "../../../data/highlights.js";
-import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
+import BaseInfoPopUp from "../../../components/baseInfoPopUp/baseInfoPopUp.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 import { ExplorerContext } from "../../../context/explorer-context.jsx";
 
@@ -10,7 +10,7 @@ const CorrelationInfo = () => {
     const { selectedEntityObject } = useContext(ExplorerContext);
     const entity = selectedEntityObject;
     return (
-        <BaseInfoScreen
+        <BaseInfoPopUp
             className="correlation-info"
             headline={i18n.t("explorationCorrelationInfoScreen:headline")}
         >
@@ -32,7 +32,7 @@ const CorrelationInfo = () => {
                     }
                 </p>
             </div>
-        </BaseInfoScreen>
+        </BaseInfoPopUp>
     );
 };
 

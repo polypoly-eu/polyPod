@@ -25,8 +25,13 @@ const i18nHeaderCommon = "clusterStoryCommon";
 const primaryColor = "#3ba6ff";
 
 const MessengerStory = () => {
-    const { products, entityJurisdictionByPpid, setPopUp } =
-        useContext(ExplorerContext);
+    const {
+        products,
+        globalData,
+        entityJurisdictionByPpid,
+        entityObjectByPpid,
+        createPopUp,
+    } = useContext(ExplorerContext);
 
     const listOfMessengerApps = [
         "Facebook Messenger",
@@ -44,10 +49,42 @@ const MessengerStory = () => {
         (p) => p.clusters.indexOf("messenger") !== -1
     );
 
+    const facebookMessengers = messengers.filter((e) =>
+        e.productOwner.some((o) => o.includes("Facebook"))
+    );
+
+    const mainFacebookCompany = "Facebook (US)";
+
     const summaryBullets = [
-        i18n.t(`${i18nHeader}:summary.bullet.1`),
-        i18n.t(`${i18nHeader}:summary.bullet.2`),
-        i18n.t(`${i18nHeader}:summary.bullet.3`),
+        i18n.t(`${i18nHeader}:summary.bullet.1`, {
+            advertising_shared: messengers.filter((m) =>
+                m.dataSharingPurposes.some(
+                    (e) => e["dpv:Purpose"] === "dpv:Advertising"
+                )
+            ).length,
+            total_apps: listOfMessengerApps.length,
+        }),
+        i18n.t(`${i18nHeader}:summary.bullet.2`, {
+            min_datatypes_shared: messengers.reduce((a, b) =>
+                Math.min(
+                    a.dataTypesShared?.length || a,
+                    b.dataTypesShared.length
+                )
+            ),
+            max_datatypes_shared: messengers.reduce((a, b) =>
+                Math.max(
+                    a.dataTypesShared?.length || a,
+                    b.dataTypesShared.length
+                )
+            ),
+        }),
+        i18n.t(`${i18nHeader}:summary.bullet.3`, {
+            max_facebook_product_recipients: facebookMessengers.reduce((a, b) =>
+                Math.max(a.dataRecipients?.length || a, b.dataRecipients.length)
+            ),
+            facebook_recipients:
+                entityObjectByPpid(mainFacebookCompany).dataRecipients.length,
+        }),
     ];
 
     const tipsBullets = [
@@ -85,11 +122,13 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:intro.paragraph.one`)}
             </p>
-            <img
-                className="cluster-story-img"
-                src="images/stories/messenger/intro-guy.svg"
-                alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
-            />
+            <div className="cluster-story-img-container">
+                <img
+                    className="cluster-story-img"
+                    src="images/stories/messenger/intro-guy.svg"
+                    alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
+                />
+            </div>
             <p>{i18n.t(`${i18nHeader}:intro.paragraph.two`)}</p>
             <GradientCircleList
                 introText={i18n.t(`${i18nHeader}:intro.paragraph.two`)}
@@ -115,7 +154,7 @@ const MessengerStory = () => {
             </p>
             <OverviewBarChart entities={Object.values(products)} />
             <SourceInfoButton
-                infoScreenRoute="/overview-bar-chart-info"
+                infoScreen="overview-bar-chart-info"
                 source={i18n.t("common:source.polyPedia")}
             />
             <SectionTitle
@@ -129,7 +168,7 @@ const MessengerStory = () => {
                 i18nHeader={i18nHeader}
             />
             <SourceInfoButton
-                infoScreenRoute="/details-line-chart-info"
+                infoScreen="details-line-chart-info"
                 source={i18n.t("common:source.polyPedia")}
             />
             <MessengerTreeMap
@@ -137,7 +176,7 @@ const MessengerStory = () => {
                 i18nHeader={i18nHeader}
             />
             <SourceInfoButton
-                infoScreenRoute="/details-treemap-info"
+                infoScreen="details-treemap-info"
                 source={i18n.t("common:source.polyPedia")}
             />
             <SectionTitle
@@ -156,7 +195,7 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
-            <Purposes companies={messengers} setPopUp={setPopUp} />
+            <Purposes companies={messengers} createPopUp={createPopUp} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />
@@ -186,7 +225,7 @@ const MessengerStory = () => {
                 }}
             />
             <SourceInfoButton
-                infoScreenRoute="/data-regions-diagram-info"
+                infoScreen="data-regions-diagram-info"
                 source={i18n.t("common:source.polyPedia")}
             />
             <SectionTitle title={i18n.t(`${i18nHeader}:tips.section`)} />

@@ -3,7 +3,7 @@ import React from "react";
 import i18n from "../../../i18n.js";
 import StoriesInfoScreen from "../../../components/clusterStories/storiesInfoScreen.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
-import { DataRegionInfoContent } from "../../dataRegionInfo/dataRegionInfo.jsx";
+import { DataRegionInfoContent } from "../dataRegionInfo/dataRegionInfo.jsx";
 
 const DataRegionsDiagramInfo = () => {
     const dataRegionsDiagramInfoContent = [

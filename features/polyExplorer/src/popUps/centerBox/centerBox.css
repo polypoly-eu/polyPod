@@ -1,4 +1,4 @@
-.purpose-info-popup-container {
+.center-box-popup-container {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -6,7 +6,7 @@
     z-index: 200;
 }
 
-.purpose-info-popup {
+.center-box-popup {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -23,7 +23,7 @@
     padding: 20px;
 }
 
-.purpose-info-popup h1 {
+.center-box-popup h1 {
     height: auto;
     font-weight: 500;
     font-size: 24px;
@@ -32,18 +32,18 @@
     color: var(--color-text-dark);
 }
 
-.purpose-info-popup p {
+.center-box-popup p {
     font-size: 16px;
     line-height: var(--line-height);
     color: var(--color-text-dark);
 }
 
-.purpose-info-popup div {
+.center-box-popup div {
     width: 100%;
     flex: 1 1 auto;
 }
 
-.purpose-info-popup button {
+.center-box-popup button {
     display: block;
     background: var(--color-background-dark);
     border-radius: 4px;

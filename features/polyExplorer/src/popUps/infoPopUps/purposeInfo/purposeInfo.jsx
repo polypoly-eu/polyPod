@@ -1,12 +1,12 @@
 import React from "react";
 
 import i18n from "../../../i18n.js";
-import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
+import BaseInfoPopUp from "../../../components/baseInfoPopUp/baseInfoPopUp.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 
 const PurposeInfo = () => {
     return (
-        <BaseInfoScreen
+        <BaseInfoPopUp
             className="purpose-info"
             headline={i18n.t("explorationPurposeInfoScreen:headline")}
         >
@@ -27,7 +27,7 @@ const PurposeInfo = () => {
                     }}
                 />
             </div>
-        </BaseInfoScreen>
+        </BaseInfoPopUp>
     );
 };
 
