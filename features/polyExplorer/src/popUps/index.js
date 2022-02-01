@@ -20,6 +20,7 @@ import OverviewBarChartInfo from "./infoPopUps/barChartInfo/overviewBarChartInfo
 import DataRegionsDiagramInfo from "./infoPopUps/dataRegionsDiagramInfo/dataRegionsDiagramInfo.jsx";
 import DetailsTreemapInfo from "./infoPopUps/detailsTreemapInfo/detailsTreemapInfo.jsx";
 import CompaniesBarChartInfo from "./infoPopUps/barChartInfo/companiesBarChartInfo.jsx";
+import CompanyRevenueBarChartInfo from "./infoPopUps/companyRevenueBarChartInfo/companyRevenueBarChartInfo.jsx";
 
 export default {
     "onboarding-popup": OnboardingPopup,
@@ -44,4 +45,5 @@ export default {
     "data-regions-diagram-info": DataRegionsDiagramInfo,
     "details-treemap-info": DetailsTreemapInfo,
     "companies-bar-chart-info": CompaniesBarChartInfo,
+    "company-revenue-info": CompanyRevenueBarChartInfo,
 };

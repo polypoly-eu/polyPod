@@ -82,7 +82,7 @@ button::after {
 }
 
 .filter-button {
-    background-color: var(--color-background-dark);
+    background-color: var(--transparent);
     padding: 0 0;
     position: fixed;
     right: 0;

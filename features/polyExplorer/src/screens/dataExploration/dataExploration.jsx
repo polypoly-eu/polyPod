@@ -377,7 +377,7 @@ const DataExplorationScreen = () => {
 
                     <SourceInfoButton
                         source={i18n.t("common:source.polyPedia")}
-                        infoScreen="data-correlation-info"
+                        infoScreen="correlation-info"
                     />
                 </div>
             );
