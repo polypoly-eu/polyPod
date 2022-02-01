@@ -10,44 +10,31 @@ import {
 } from "../../screens/stories/story-utils.js";
 import i18n from "../../i18n.js";
 
-export default function DataTypes({ entities, i18nHeader }) {
-    const { globalData } = useContext(ExplorerContext);
+const DataTypes = ({ entities, i18nHeader }) => {
     const bubbleColor = "#FB8A89";
     const transparentBubble = "#ffffff00";
     const bubbleStroke = "none";
     const bubbleTextColor = "#0f1938";
-
-    const listOfDataCategories = Object.keys(
-        globalData.personal_data_categories
-    );
-
-    const dataTypesSharedCombined = createDataTypesSharedCombined(
-        entities,
-        listOfDataCategories
-    );
+    const dataTypesSharedCombined = createDataTypesSharedCombined(entities);
 
     const dataTypes = createDataTypesTabs(
         entities,
         i18nHeader,
-        listOfDataCategories,
         dataTypesSharedCombined
     );
 
     const [selectedDataTypeBubble, setSelectedDataTypeBubble] = useState(
-        dataTypesSharedCombined[0]["dpv:Category"]
+        dataTypesSharedCombined[0].category
     );
 
     const handleBubbleClick = (_, node) => {
-        setSelectedDataTypeBubble(node.data.type);
+        setSelectedDataTypeBubble(node.data.category);
     };
 
-    const showLabel = (bubble) => {
-        if (selectedDataTypeBubble === bubble.data.type) {
-            return bubble.data.type
-                .replace("dpv:", "")
-                .replace(/([a-z])([A-Z])/g, "$1 $2");
-        }
-    };
+    const showLabel = (bubble) =>
+        selectedDataTypeBubble === bubble.data.category
+            ? bubble.data.category
+            : null;
 
     return (
         <Tabs>
@@ -91,12 +78,13 @@ export default function DataTypes({ entities, i18nHeader }) {
                                         width={dataType.data[0].width}
                                         height={dataType.data[0].height}
                                         bubbleColor={bubbleColor}
-                                        textColor={(d) =>
-                                            d.data.type ===
+                                        text={(d) =>
+                                            d.category ===
                                             selectedDataTypeBubble
-                                                ? bubbleTextColor
-                                                : bubbleColor
+                                                ? d.category
+                                                : ""
                                         }
+                                        textColor={bubbleTextColor}
                                         strokeColor={bubbleStroke}
                                         onBubbleClick={handleBubbleClick}
                                         label={showLabel}
@@ -114,4 +102,6 @@ export default function DataTypes({ entities, i18nHeader }) {
             })}
         </Tabs>
     );
-}
+};
+
+export default DataTypes;

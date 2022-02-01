@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import { Chart } from "../../chart";
 
 const edgePadding = 5;
+const labelPadding = 20;
 const smallBubblesRadius = 20;
 const bigBubblesRadius = 50;
 const bubblePadding = 3;
@@ -108,14 +109,12 @@ export class BubbleCluster extends Chart {
     return nodes
       .enter()
       .append("g")
-      .attr("class", (d) => (this._label?.(d) ? "showing-label" : ""))
+      .attr("class", "bubble-group")
       .attr("transform", (d) =>
         d.data.icon
           ? `translate(${d.x - d.r},${d.y - d.r})`
           : `translate(${d.x},${d.y})`
-      )
-      .on("click", this._onBubbleClick)
-      .style("-webkit-tap-highlight-color", "transparent");
+      );
   }
 
   _updateBubbles(nodes) {
@@ -132,15 +131,6 @@ export class BubbleCluster extends Chart {
       .attr("width", (d) => d.r * 2)
       .attr("filter", this._filterActivationCondition);
   }
-
-  // _updateLabels(nodes) {
-  //   nodes
-  //     .selectAll(".label-text")
-  //     .attr("x", (d) => d.r / -2)
-  //     .attr("y", (d) => d.r / -2)
-  //     .attr("fill", this._textColor)
-  //     .text(this._label);
-  // }
 
   _addBubbles(bubbleGroups) {
     bubbleGroups
@@ -160,7 +150,8 @@ export class BubbleCluster extends Chart {
       .style("fill", this._bubbleColor)
       .style("stroke", this._strokeColor)
       .style("vertical-align", "center")
-      .attr("fill-opacity", this._opacity);
+      .attr("fill-opacity", this._opacity)
+      .on("click", this._onBubbleClick);
   }
 
   _addTextToBubbleGroup(newBubbleGroups) {
@@ -177,38 +168,46 @@ export class BubbleCluster extends Chart {
       .style("font-family", "Jost Medium")
       .style("font-weight", "500")
       .attr("fill", this._textColor)
-      .attr("transform", (d) =>
-        d.data.icon ? `translate(${d.x},${d.y})` : ""
-      );
+      .attr("transform", (d) => (d.data.icon ? `translate(${d.x},${d.y})` : ""))
+      .on("click", this._onBubbleClick);
   }
 
-  _addLabelText(bubbleGroups) {
-    const labelGroups = bubbleGroups.append("g").attr("class", "label-group");
+  _addLabel(bubbleGroups) {
+    const label = this._label;
+    const color = this._textColor;
+    bubbleGroups.each(function (node) {
+      if (label(node)) {
+        const labelGroup = d3
+          .select(this)
+          .append("g")
+          .attr("class", "label-group");
+        labelGroup
+          .append("text")
+          .attr("transform", (d) => `translate(0, ${-d.r - labelPadding})`)
+          .attr("text-anchor", "middle")
+          .attr("fill", this._textColor)
+          .text(label);
 
-    labelGroups
-      .append("text")
-      .attr("class", "label-text")
-      .attr("transform", (d) => `translate(0, ${-d.r - 20})`)
-      .attr("text-anchor", "middle")
-      // .attr("width", 300)
-      // .attr("height", 15)
-      // .attr("x", (d) => d.r / -2)
-      // .attr("y", (d) => d.r / -2)
-      .attr("fill", this._textColor)
-      .text(this._label);
-    // .append("rect")
-    // .attr("class", "area")
-    // .attr("height", 20)
-    // .attr("width", 350)
-    // .attr("fill", "white");
+        console.log();
 
-    labelGroups
-      .selectAll("text")
-      .append("rect")
-      .attr("class", "area")
-      .attr("height", 20)
-      .attr("width", 350)
-      .attr("fill", "white");
+        labelGroup
+          .append("line")
+          .attr("x1", 0)
+          .attr("x2", 0)
+          .attr("y1", (d) => -d.r - 2)
+          .attr("y2", (d) => -d.r - labelPadding + 2)
+          .attr("stroke", color)
+          .attr("stroke-width", 2);
+
+        d3.select(this).raise();
+      }
+    });
+  }
+
+  _updateLabels(nodes) {
+    const labelGroups = nodes.selectAll(".label-group");
+
+    labelGroups.selectAll("text").text(this._label);
   }
 
   _updateBubbleTexts(nodes) {
@@ -226,24 +225,28 @@ export class BubbleCluster extends Chart {
     const packLayout = this._pack();
     const root = packLayout(hierarchicalData);
     this._setUpFilters();
-    const nodes = this.chart
-      .selectAll("g")
-      .data(root.descendants().filter(({ parent }) => !!parent));
+    const nodes = this.chart.selectAll(".bubble-group").data(
+      root.descendants().filter(({ parent }) => !!parent),
+      (d) => d.data.category
+    );
     nodes.exit().remove();
-    this._updateBubbles(nodes);
     const newBubbleGroups = this._addNewBubbleGroups(nodes);
     this._addBubbles(newBubbleGroups);
+    this._updateBubbles(nodes);
 
     if (this._text) {
       this._addTextToBubbleGroup(newBubbleGroups);
       this._updateBubbleTexts(nodes);
+
+      newBubbleGroups.filter((d) => d.children).raise();
     }
 
     if (this._label) {
-      this._addLabelText(newBubbleGroups);
-      // this._updateLabels(nodes);
+      let labelGroup = nodes.select(".label-group");
+      const empty = labelGroup.empty();
+      labelGroup.remove();
+      if (empty) this._addLabel(newBubbleGroups);
+      else this._addLabel(nodes);
     }
-
-    this.chart.selectAll(".showing-label").raise();
   }
 }
