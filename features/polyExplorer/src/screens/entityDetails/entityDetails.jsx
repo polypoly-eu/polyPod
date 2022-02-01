@@ -203,7 +203,7 @@ const EntityDetails = () => {
                             <DataRegionsLegend />
                             <SourceInfoButton
                                 source={i18n.t("common:source.polyPedia")}
-                                infoScreenRoute="data-region-info"
+                                infoScreen="data-region-info"
                                 className="info-extra-margin"
                             />
                             {entity?.annualRevenues?.length === 0 ? (
@@ -226,7 +226,7 @@ const EntityDetails = () => {
                                         source={i18n.t(
                                             "common:source.polyPedia"
                                         )}
-                                        infoScreenRoute="company-revenue-info"
+                                        infoScreen="company-revenue-info"
                                         className="info-extra-margin"
                                     />
                                 </div>
@@ -242,7 +242,7 @@ const EntityDetails = () => {
                         <FeaturedEntity />
                         <SourceInfoButton
                             source={i18n.t("common:source.polyPedia")}
-                            infoScreenRoute="featured-entity-info"
+                            infoScreen="featured-entity-info"
                         />
                         <div className="explore-data-btn-area">
                             <LinkButton

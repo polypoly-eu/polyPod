@@ -32,8 +32,12 @@ const bigSixNames = [
 ];
 
 const DigitalGiantsStory = () => {
-    const { featuredEntities, entityJurisdictionByPpid, globalData, setPopUp } =
-        useContext(ExplorerContext);
+    const {
+        featuredEntities,
+        entityJurisdictionByPpid,
+        globalData,
+        createPopUp,
+    } = useContext(ExplorerContext);
 
     const bigSix = bigSixNames.map((n) =>
         featuredEntities.find((e) => e.ppid.indexOf(n) !== -1)
@@ -97,7 +101,7 @@ const DigitalGiantsStory = () => {
                     }),
                 };
             }),
-            route: "/company-data-types-info",
+            route: "company-data-types-info",
         },
         {
             id: "by-shares",
@@ -111,7 +115,7 @@ const DigitalGiantsStory = () => {
                     }),
                 };
             }),
-            route: "/shares-data-types-info",
+            route: "shares-data-types-info",
         },
         {
             id: "by-types",
@@ -130,7 +134,7 @@ const DigitalGiantsStory = () => {
                     height: 400,
                 },
             ],
-            route: "/types-data-types-info",
+            route: "types-data-types-info",
         },
     ];
 
@@ -203,7 +207,7 @@ const DigitalGiantsStory = () => {
                                         strokeColor={bubbleStroke}
                                     />
                                     <SourceInfoButton
-                                        infoScreenRoute={dataType.route}
+                                        infoScreen={dataType.route}
                                         source={i18n.t(
                                             "common:source.polyPedia"
                                         )}
@@ -232,7 +236,7 @@ const DigitalGiantsStory = () => {
                                         <h4>{dataType.data[0].title}</h4>
                                     </div>
                                     <SourceInfoButton
-                                        infoScreenRoute={dataType.route}
+                                        infoScreen={dataType.route}
                                         source={i18n.t(
                                             "common:source.polyPedia"
                                         )}
@@ -249,7 +253,7 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
-            <Purposes companies={bigSix} setPopUp={setPopUp} />
+            <Purposes companies={bigSix} createPopUp={createPopUp} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />
@@ -279,7 +283,7 @@ const DigitalGiantsStory = () => {
                 }}
             />
             <SourceInfoButton
-                infoScreenRoute="/data-regions-diagram-info"
+                infoScreen="data-regions-diagram-info"
                 source={i18n.t("common:source.polyPedia")}
             />
             <SectionTitle

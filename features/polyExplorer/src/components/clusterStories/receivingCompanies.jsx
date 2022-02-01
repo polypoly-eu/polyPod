@@ -127,7 +127,7 @@ export default function ReceivingCompanies({ entities }) {
                 >
                     <Companies entities={entities} />
                     <SourceInfoButton
-                        infoScreenRoute="/companies-bar-chart-info"
+                        infoScreen="companies-bar-chart-info"
                         source={i18n.t("common:source.polyPedia")}
                     />
                 </Tab>
@@ -139,7 +139,7 @@ export default function ReceivingCompanies({ entities }) {
                 >
                     <Industries entities={entities} />
                     <SourceInfoButton
-                        infoScreenRoute="/industries-packed-circle-info"
+                        infoScreen="industries-packed-circle-info"
                         source={i18n.t("common:source.polyPedia")}
                     />
                 </Tab>

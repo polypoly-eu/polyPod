@@ -1,12 +1,12 @@
 import React from "react";
 
 import i18n from "../../../i18n.js";
-import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
+import BaseInfoPopUp from "../../../components/baseInfoPopUp/baseInfoPopUp.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 
 const CompaniesInfo = ({ onClose }) => {
     return (
-        <BaseInfoScreen
+        <BaseInfoPopUp
             className="companies-info"
             headline={i18n.t("explorationCompaniesInfoScreen:headline")}
             onClose={onClose}
@@ -31,7 +31,7 @@ const CompaniesInfo = ({ onClose }) => {
                     }}
                 />
             </div>
-        </BaseInfoScreen>
+        </BaseInfoPopUp>
     );
 };
 

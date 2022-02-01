@@ -2,9 +2,14 @@
     padding: 0 16px;
 }
 
-.stories-info * {
+.stories-info {
+    position: absolute;
+    width: 100%;
+    max-width: var(--max-width);
+    height: 100%;
+    background-color: var(--color-background-light);
     color: var(--color-text-dark);
-    line-height: var(--line-height);
+    z-index: 100;
 }
 
 .stories-info .info-title {

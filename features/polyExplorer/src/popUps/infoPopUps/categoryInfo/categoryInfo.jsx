@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import i18n from "../../../i18n.js";
 import highlights from "../../../data/highlights.js";
 import globals from "../../../data/global.json";
-import BaseInfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
+import BaseInfoPopUp from "../../../components/baseInfoPopUp/baseInfoPopUp.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 import { ExplorerContext } from "../../../context/explorer-context.jsx";
 
@@ -16,7 +16,7 @@ const CategoryInfo = () => {
     const description = "Description_" + capitalizeCountryCode;
 
     return (
-        <BaseInfoScreen
+        <BaseInfoPopUp
             className="category-info"
             headline={i18n.t("explorationCategoryInfoScreen:headline")}
         >
@@ -52,7 +52,7 @@ const CategoryInfo = () => {
                     </div>
                 ) : null}
             </div>
-        </BaseInfoScreen>
+        </BaseInfoPopUp>
     );
 };
 

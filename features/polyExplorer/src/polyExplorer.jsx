@@ -15,28 +15,9 @@ import MainScreen from "./screens/main/main.jsx";
 import DataExplorationScreen from "./screens/dataExploration/dataExploration.jsx";
 import EntityFilterScreen from "./screens/entityFilter/entityFilter.jsx";
 import EntitySearchScreen from "./screens/entitySearch/entitySearch.jsx";
-import InfoScreen from "./screens/info/info.jsx";
 import EntityDetailsScreen from "./screens/entityDetails/entityDetails.jsx";
-import DataRegionInfoScreen from "./screens/dataRegionInfo/dataRegionInfo.jsx";
-import DataTypesInfoScreen from "./screens/explorationInfo/dataTypesInfo/dataTypesInfo.jsx";
-import CategoryInfoScreen from "./screens/explorationInfo/categoryInfo/categoryInfo.jsx";
-import CorrelationInfoScreen from "./screens/explorationInfo/correlationInfo/correlationInfo.jsx";
-import PurposeInfoScreen from "./screens/explorationInfo/purposeInfo/purposeInfo.jsx";
-import CompaniesInfoScreen from "./screens/explorationInfo/companiesInfo/companiesInfo.jsx";
-import JurisdictionInfoScreen from "./screens/explorationInfo/jurisdictionInfo/jurisdictionInfo.jsx";
-import FeaturedEntityInfoScreen from "./screens/featuredEntityInfo/featuredEntityInfo.jsx";
+
 import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
-import DetailsLineChartInfo from "./screens/storiesInfoScreens/detailsLineChartInfo/detailsLineChartInfo.jsx";
-import CompanyDataTypesInfo from "./screens/storiesInfoScreens/dataTypesInfo/companyDataTypesInfo.jsx";
-import SharesDataTypesInfo from "./screens/storiesInfoScreens/dataTypesInfo/sharesDataTypesInfo.jsx";
-import TypesDataTypesInfo from "./screens/storiesInfoScreens/dataTypesInfo/typesDataTypesInfo.jsx";
-import IndustriesPackedCircleInfo from "./screens/storiesInfoScreens/industriesPackedCircleInfo/industriesPackedCircleInfo.jsx";
-import PurposesBarChartInfo from "./screens/storiesInfoScreens/barChartInfo/purposesBarChartInfo.jsx";
-import OverviewBarChartInfo from "./screens/storiesInfoScreens/barChartInfo/overviewBarChartInfo.jsx";
-import DataRegionsDiagramInfo from "./screens/storiesInfoScreens/dataRegionsDiagramInfo/dataRegionsDiagramInfo.jsx";
-import DetailsTreemapInfo from "./screens/storiesInfoScreens/detailsTreemapInfo/detailsTreemapInfo.jsx";
-import CompaniesBarChartInfo from "./screens/storiesInfoScreens/barChartInfo/companiesBarChartInfo.jsx";
-import CompanyRevenueBarChartInfo from "./screens/entityDetails/companyRevenueChart/companyRevenueBarChartInfo.jsx";
 
 //stories
 import MessengerStory from "./screens/stories/messengerStory.jsx";
@@ -76,66 +57,6 @@ const PolyExplorerApp = () => {
                 <Route exact path="/search">
                     <EntitySearchScreen />
                 </Route>
-                <Route exact path="/featured-entity-info">
-                    <FeaturedEntityInfoScreen />
-                </Route>
-                <Route exact path="/info">
-                    <InfoScreen />
-                </Route>
-                <Route exact path="/details-line-chart-info">
-                    <DetailsLineChartInfo />
-                </Route>
-                <Route exact path="/company-data-types-info">
-                    <CompanyDataTypesInfo />
-                </Route>
-                <Route exact path="/shares-data-types-info">
-                    <SharesDataTypesInfo />
-                </Route>
-                <Route exact path="/types-data-types-info">
-                    <TypesDataTypesInfo />
-                </Route>
-                <Route exact path="/industries-packed-circle-info">
-                    <IndustriesPackedCircleInfo />
-                </Route>
-                <Route exact path="/purposes-bar-chart-info">
-                    <PurposesBarChartInfo />
-                </Route>
-                <Route exact path="/overview-bar-chart-info">
-                    <OverviewBarChartInfo />
-                </Route>
-                <Route exact path="/data-regions-diagram-info">
-                    <DataRegionsDiagramInfo />
-                </Route>
-                <Route exact path="/details-treemap-info">
-                    <DetailsTreemapInfo />
-                </Route>
-                <Route exact path="/companies-bar-chart-info">
-                    <CompaniesBarChartInfo />
-                </Route>
-                <Route exact path="/company-revenue-info">
-                    <CompanyRevenueBarChartInfo />
-                </Route>
-                <Route exact path="/data-region-info">
-                    <DataRegionInfoScreen />
-                </Route>
-                <Route exact path="/data-types-info">
-                    <DataTypesInfoScreen />
-                </Route>
-                <Route exact path="/data-category-info">
-                    <CategoryInfoScreen />
-                </Route>
-                <Route exact path="/data-correlation-info">
-                    <CorrelationInfoScreen />
-                </Route>
-                <Route exact path="/purpose-info">
-                    <PurposeInfoScreen />
-                </Route>
-                <Route exact path="/companies-info">
-                    <CompaniesInfoScreen />
-                </Route>
-                <Route exact path="/jurisdiction-info">
-                    <JurisdictionInfoScreen />
-                </Route>
                 <Route exact path="/story/messenger-story">
                     <MessengerStory />
                 </Route>
@@ -152,7 +73,11 @@ const PolyExplorerApp = () => {
                     onMoreInfo={handleOnboardingPopupMoreInfo}
                 />
             )}
-            {popUp && popUp.component({ onClose: closePopUp, ...popUp.props })}
+            {popUp &&
+                popUp.component({
+                    onClose: closePopUp,
+                    content: popUp.content,
+                })}
         </div>
     );
 };
