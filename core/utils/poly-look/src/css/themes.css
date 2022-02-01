@@ -1,7 +1,3 @@
-text {
-  font-family: var(--jost-medium);
-}
-
 :root,
 .poly-theme {
   --theme-font-base: var(--jost);
@@ -11,6 +7,10 @@ text {
   font-weight: 400;
   line-height: 120%;
   letter-spacing: -0.01em;
+}
+
+.poly-theme text {
+  font-family: var(--jost-medium);
 }
 
 .poly-theme input {

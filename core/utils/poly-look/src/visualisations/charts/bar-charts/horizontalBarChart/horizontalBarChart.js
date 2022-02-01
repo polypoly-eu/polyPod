@@ -21,6 +21,8 @@ const barLabelLeftMargin = 3;
 const defaultBarWidth = 16;
 const defaultBarColor = "blue";
 const defaultBarValueColor = "white";
+const fontSizeAboveBar = "14px";
+const fontSizeInBar = "12px";
 
 /**
  *
@@ -68,7 +70,7 @@ export class HorizontalBarChart extends Chart {
   _getYscales(groups) {
     if (groups) {
       const yScales = [];
-      const headingSpace = headlinePadding+groupHeadlineHeight;
+      const headingSpace = headlinePadding + groupHeadlineHeight;
       let headingMargin = headingSpace;
       for (let group of groups) {
         const relevantBars = this.data.filter(
@@ -191,7 +193,7 @@ export class HorizontalBarChart extends Chart {
       .attr("x", this._groups ? barLabelLeftMargin : 0)
       .text((d) => d.title)
       .attr("fill", "transparent")
-      .style("font-size", this._groups ? "12px" : "14px")
+      .style("font-size", this._groups ? fontSizeInBar : fontSizeAboveBar)
       .transition()
       .delay(1000)
       .duration(500)
@@ -212,7 +214,7 @@ export class HorizontalBarChart extends Chart {
       .attr("x", 0)
       .text((d) => d.translation)
       .attr("fill", "transparent")
-      .style("font-size", "14px")
+      .style("font-size", fontSizeAboveBar)
       .transition()
       .delay(1000)
       .duration(500)
@@ -228,7 +230,7 @@ export class HorizontalBarChart extends Chart {
       .attr("x", (d) => this._xScale(d.value) - barValueMargin)
       .text((d) => d.value)
       .attr("fill", "transparent")
-      .style("font-size", "12px")
+      .style("font-size", fontSizeInBar)
       .transition()
       .delay(1000)
       .duration(500)
