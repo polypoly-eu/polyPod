@@ -14,10 +14,10 @@ const PurposesBarChart = ({ data, animation, onClick }) => {
 
     const svgBarRef = useRef();
     const gHeight = 52;
-    const width = 500;
+    const width = 400;
     const height = data.length * (gHeight * 2);
     const margin = { top: 36, right: 30, bottom: 1, left: 1 };
-    const barHeight = gHeight - margin.top;
+    const barHeight = 16;
     const minBarWidth = 1;
     const barRadius = 8;
     const barColor = "var(--data-exp-purposes)";
@@ -36,7 +36,8 @@ const PurposesBarChart = ({ data, animation, onClick }) => {
         strokeWidth: 2,
         strokeDasharray: "5, 5",
     };
-    const labelTitlePadding = { top: 8, right: 12, bottom: 8, left: 12 };
+    const labelTitlePadding = { top: 4, right: 12, bottom: 4, left: 12 };
+    const labelTitleYAdjust = 62;
     const labelTitleHeight = {
         fo: 42,
         div: 32,
@@ -53,6 +54,7 @@ const PurposesBarChart = ({ data, animation, onClick }) => {
         fontWeight: "400",
         fontWeightBold: "500",
         textAlign: "center",
+        fontFamilyLegendTitle: "Jost Medium",
     };
     const maxValue = d3.max(data, (d) => d.value);
     const averageValue = d3.mean(data, (d) => d.value);
@@ -145,18 +147,18 @@ const PurposesBarChart = ({ data, animation, onClick }) => {
                 .enter()
                 .append("foreignObject")
                 .attr("x", labelXPosition)
-                .attr("y", (d) => yScale(d.title) + gHeight)
+                .attr("y", (d) => yScale(d.title) + labelTitleYAdjust)
                 .attr("width", width)
-                .attr("height", labelTitleHeight.fo)
+                .attr("height", 36)
                 .on("click", (_, d) => onClick(d));
             const labelTitleDiv = labelTitle.append("xhtml:div");
             const labelTitleP = labelTitleDiv
                 .append("p")
                 .text((d) => d.translation || d.title)
-                .attr("height", labelTitleHeight.p)
                 .style("margin", legendMargin)
                 .style("display", "inline-block")
-                .style("font-size", fontConfig.fontSizeTitle)
+                .style("box-sizing", "border-box")
+                .style("height", labelTitleHeight.p + "px")
                 .style(
                     "padding",
                     labelTitlePadding.top +
@@ -186,9 +188,10 @@ const PurposesBarChart = ({ data, animation, onClick }) => {
                 .attr("x", 0)
                 .attr("y", 0)
                 .html(legendTranslations.title)
-                .style("font-size", fontConfig.fontSize)
+                .style("font-size", fontConfig.fontSizeTitle)
                 .style("color", fontConfig.color)
-                .style("font-weight", fontConfig.fontWeightBold);
+                .style("font-weight", fontConfig.fontWeightBold)
+                .style("font-family", fontConfig.fontFamilyLegendTitle);
 
             const averageValueLegend = svgChart
                 .append("foreignObject")
