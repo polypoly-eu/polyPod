@@ -31,9 +31,11 @@ const DigitalGiantsStory = () => {
     const { featuredEntities, entityJurisdictionByPpid, setPopUp } =
         useContext(ExplorerContext);
 
-    const bigSix = bigSixNames.map((n) =>
-        featuredEntities.find((e) => e.ppid.indexOf(n) !== -1)
-    );
+    const bigSix = bigSixNames.map((n) => {
+        const entity = featuredEntities.find((e) => e.ppid.indexOf(n) !== -1);
+        entity["simpleName"] = n;
+        return entity;
+    });
 
     const jurisdictionLinks = createJurisdictionLinks(
         bigSix,

@@ -90,7 +90,7 @@ function normalizeDataLengthByCompany(entities) {
     );
     return entities.map((entity) => {
         return {
-            title: `${entity.ppid}: ${entity.dataTypesShared.length}`,
+            title: `${entity.simpleName}: ${entity.dataTypesShared.length}`,
             bubbles: createBubbleArray(largestEntityLength, entity),
         };
     });
@@ -127,7 +127,7 @@ export function createDataTypesTabs(
             id: "by-shares",
             label: i18n.t(`${i18nHeader}:data.types.tab.shares`),
             data: entities.map((entity) => ({
-                title: `${entity.ppid}: 
+                title: `${entity.simpleName}: 
                     ${entity.dataTypesShared.reduce(
                         (acc, bubble) => acc + bubble.count,
                         0
