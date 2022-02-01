@@ -44,9 +44,11 @@ const MessengerStory = () => {
         "iMessage",
     ];
 
-    const messengers = Object.values(products).filter(
-        (p) => p.clusters.indexOf("messenger") !== -1
-    );
+    const messengers = Object.values(products).filter((p) => {
+        p.clusters.indexOf("messenger") !== -1;
+        p["simpleName"] = p.ppid;
+        return p;
+    });
 
     const facebookMessengers = messengers.filter((e) =>
         e.productOwner.some((o) => o.includes("Facebook"))
