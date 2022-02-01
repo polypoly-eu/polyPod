@@ -28,12 +28,8 @@ const bigSixNames = [
 ];
 
 const DigitalGiantsStory = () => {
-    const {
-        featuredEntities,
-        entityJurisdictionByPpid,
-        globalData,
-        createPopUp,
-    } = useContext(ExplorerContext);
+    const { featuredEntities, entityJurisdictionByPpid, createPopUp } =
+        useContext(ExplorerContext);
 
     const bigSix = bigSixNames.map((n) => {
         const entity = featuredEntities.find((e) => e.ppid.indexOf(n) !== -1);

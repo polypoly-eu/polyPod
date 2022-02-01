@@ -27,7 +27,6 @@ const primaryColor = "#3ba6ff";
 const MessengerStory = () => {
     const {
         products,
-        globalData,
         entityJurisdictionByPpid,
         entityObjectByPpid,
         createPopUp,
