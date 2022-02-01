@@ -108,10 +108,12 @@ private struct MainSection: View {
                     label: "settings_licenses_title",
                     action: { activeSection = .licenses }
                 )
-                SettingsButton(label: "Export Logs",
-                               action: {
-                    shareLogs = true
-                })
+                if !RuntimeInfo.isProduction {
+                    SettingsButton(label: "Export Logs",
+                                   action: {
+                        shareLogs = true
+                    })
+                }
             }
             .listRowInsets(
                 EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
