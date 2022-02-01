@@ -1,5 +1,4 @@
 import * as d3 from "d3";
-import { attr } from "svelte/internal";
 
 import { Chart } from "../../chart";
 

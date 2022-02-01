@@ -1,6 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
-import { ExplorerContext } from "../../context/explorer-context.jsx";
 import MatrixBubblesChart from "./MatrixBubblesChart.jsx";
 import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
