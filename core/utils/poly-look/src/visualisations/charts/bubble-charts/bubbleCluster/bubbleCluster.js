@@ -70,7 +70,7 @@ export class BubbleCluster extends Chart {
     this._onBubbleClick = onBubbleClick;
     this._bubblePadding = bubblePadding;
     this._filter = filter;
-    this._label = "" || label;
+    this._label = label;
 
     this._filterActivationCondition = (d) => {
       if (!this._filter) return null;
@@ -108,6 +108,7 @@ export class BubbleCluster extends Chart {
     return nodes
       .enter()
       .append("g")
+      .attr("class", (d) => (this._label?.(d) ? "showing-label" : ""))
       .attr("transform", (d) =>
         d.data.icon
           ? `translate(${d.x - d.r},${d.y - d.r})`
@@ -118,17 +119,6 @@ export class BubbleCluster extends Chart {
   }
 
   _updateBubbles(nodes) {
-    if (this._label) {
-      nodes
-        .selectAll(".label")
-        .attr("height", 15)
-        .attr("width", 300)
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("fill", this._textColor)
-        .text(this._label);
-    }
-
     nodes
       .selectAll(".bubble")
       .style("fill", this._bubbleColor)
@@ -142,6 +132,15 @@ export class BubbleCluster extends Chart {
       .attr("width", (d) => d.r * 2)
       .attr("filter", this._filterActivationCondition);
   }
+
+  // _updateLabels(nodes) {
+  //   nodes
+  //     .selectAll(".label-text")
+  //     .attr("x", (d) => d.r / -2)
+  //     .attr("y", (d) => d.r / -2)
+  //     .attr("fill", this._textColor)
+  //     .text(this._label);
+  // }
 
   _addBubbles(bubbleGroups) {
     bubbleGroups
@@ -162,18 +161,6 @@ export class BubbleCluster extends Chart {
       .style("stroke", this._strokeColor)
       .style("vertical-align", "center")
       .attr("fill-opacity", this._opacity);
-
-    if (this._label) {
-      bubbleGroups
-        .append("text")
-        .attr("class", "label")
-        .attr("height", 15)
-        .attr("width", 300)
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("fill", this._textColor)
-        .text(this._label);
-    }
   }
 
   _addTextToBubbleGroup(newBubbleGroups) {
@@ -193,6 +180,35 @@ export class BubbleCluster extends Chart {
       .attr("transform", (d) =>
         d.data.icon ? `translate(${d.x},${d.y})` : ""
       );
+  }
+
+  _addLabelText(bubbleGroups) {
+    const labelGroups = bubbleGroups.append("g").attr("class", "label-group");
+
+    labelGroups
+      .append("text")
+      .attr("class", "label-text")
+      .attr("transform", (d) => `translate(0, ${-d.r - 20})`)
+      .attr("text-anchor", "middle")
+      // .attr("width", 300)
+      // .attr("height", 15)
+      // .attr("x", (d) => d.r / -2)
+      // .attr("y", (d) => d.r / -2)
+      .attr("fill", this._textColor)
+      .text(this._label);
+    // .append("rect")
+    // .attr("class", "area")
+    // .attr("height", 20)
+    // .attr("width", 350)
+    // .attr("fill", "white");
+
+    labelGroups
+      .selectAll("text")
+      .append("rect")
+      .attr("class", "area")
+      .attr("height", 20)
+      .attr("width", 350)
+      .attr("fill", "white");
   }
 
   _updateBubbleTexts(nodes) {
@@ -221,13 +237,13 @@ export class BubbleCluster extends Chart {
     if (this._text) {
       this._addTextToBubbleGroup(newBubbleGroups);
       this._updateBubbleTexts(nodes);
-
-      // Bit of a hack to ensure that the texts of bubbles with children are
-      // rendered on top of those children. As a consequence of this, bubbles
-      // that have both a solid color fill and children will hide their
-      // children. If we were to render all texts on top of all bubbles, we
-      // could avoid this problem.
-      newBubbleGroups.filter((d) => d.children).raise();
     }
+
+    if (this._label) {
+      this._addLabelText(newBubbleGroups);
+      // this._updateLabels(nodes);
+    }
+
+    this.chart.selectAll(".showing-label").raise();
   }
 }
