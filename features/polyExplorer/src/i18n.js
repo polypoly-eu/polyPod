@@ -32,6 +32,7 @@ import purposesBarChartInfoScreenEn from "./locales/en/infoScreens/purposesBarCh
 import dataRegionsDiagramInfoScreenEn from "./locales/en/infoScreens/dataRegionsDiagramInfoScreen.json";
 import detailsTreemapInfoScreenEn from "./locales/en/infoScreens/detailsTreemapInfoScreen.json";
 import companiesBarChartInfoScreenEn from "./locales/en/infoScreens/companiesBarChartInfoScreen.json";
+import companyRevenueBarChartInfoScreenEn from "./locales/en/infoScreens/companyRevenueBarChartInfoScreen.json";
 import overviewBarChartInfoScreenEn from "./locales/en/infoScreens/overviewBarChartInfoScreen.json";
 
 import commonDe from "./locales/de/common.json";
@@ -66,6 +67,7 @@ import purposesBarChartInfoScreenDe from "./locales/de/infoScreens/purposesBarCh
 import dataRegionsDiagramInfoScreenDe from "./locales/de/infoScreens/dataRegionsDiagramInfoScreen.json";
 import detailsTreemapInfoScreenDe from "./locales/de/infoScreens/detailsTreemapInfoScreen.json";
 import companiesBarChartInfoScreenDe from "./locales/de/infoScreens/companiesBarChartInfoScreen.json";
+import companyRevenueBarChartInfoScreenDe from "./locales/de/infoScreens/companyRevenueBarChartInfoScreen.json";
 import overviewBarChartInfoScreenDe from "./locales/de/infoScreens/overviewBarChartInfoScreen.json";
 
 export default new I18n(determineLanguage(), {
@@ -102,6 +104,7 @@ export default new I18n(determineLanguage(), {
         dataRegionsDiagramInfoScreen: dataRegionsDiagramInfoScreenEn,
         detailsTreemapInfoScreen: detailsTreemapInfoScreenEn,
         companiesBarChartInfoScreen: companiesBarChartInfoScreenEn,
+        companyRevenueBarChartInfoScreen: companyRevenueBarChartInfoScreenEn,
         overviewBarChartInfoScreen: overviewBarChartInfoScreenEn,
     },
     de: {
@@ -137,6 +140,7 @@ export default new I18n(determineLanguage(), {
         dataRegionsDiagramInfoScreen: dataRegionsDiagramInfoScreenDe,
         detailsTreemapInfoScreen: detailsTreemapInfoScreenDe,
         companiesBarChartInfoScreen: companiesBarChartInfoScreenDe,
+        companyRevenueBarChartInfoScreen: companyRevenueBarChartInfoScreenDe,
         overviewBarChartInfoScreen: overviewBarChartInfoScreenDe,
     },
 });

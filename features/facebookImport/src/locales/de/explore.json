@@ -2,12 +2,12 @@
     "messages.title": "Ihre Nachrichten",
     "messages.summary": "In Ihren Facebook-Daten befinden sich {{messages}} Nachrichten aus {{threads}} Chats mit {{people}} Personen.",
     "report.success": "Ihr Report wurde an uns gesendet. Vielen Dank!",
-    "report.error": "Report nicht gesendet. Bitte erneut versuchen!",
+    "report.error": "Ihr Report wurde nicht gesendet. Bitte erneut versuchen!",
     "loading": "Ihre Daten werden analysiert",
     "unrecognizedCard.headline": "Wir brauchen Ihre Hilfe!",
-    "unrecognizedCard.text": "Wenn Sie uns eine anonymisierte Zusammenfassung der Strukturen Ihres Facebook-Exportes senden, können wir den Facebook-Data Importer für Sie und alle anderen verbessern, so dass Sie mehr Analysen und Berichte angezeigt bekommen.",
+    "unrecognizedCard.text": "Wenn Sie uns eine anonymisierte Zusammenfassung der Strukturen Ihres Facebook-Exportes senden, können wir den Facebook-Daten Importer für Sie und alle anderen verbessern, so dass Sie mehr Analysen und Berichte angezeigt bekommen.",
     "unrecognizedCard.button": "Mehr erfahren",
     "details.button": "Details ansehen",
     "analysis.label.techDemo": "Tech Demo",
-    "scroll": "Scrollen Sie weiter um mehr zu sehen"
+    "scroll": "Scrollen Sie weiter, um mehr zu sehen"
 }

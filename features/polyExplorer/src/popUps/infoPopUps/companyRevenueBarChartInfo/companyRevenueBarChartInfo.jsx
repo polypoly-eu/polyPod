@@ -7,13 +7,13 @@ import Infographic from "../../../components/infographic/infographic.jsx";
 const CompanyRevenueBarChartInfo = () => {
     const CompanyRevenueBarChartInfoContent = [
         <div className="base-info-padding">
-            {/* <p>{i18n.t("companiesBarChartInfoScreen:p1")}</p> */}
+            <p>{i18n.t("companyRevenueBarChartInfoScreen:p1")}</p>
             <Infographic
                 type="verticalBarChartInfo"
                 texts={{
                     text1: i18n.t("infographic:verticalBarChartInfo.text1"),
                     boldLegend: i18n.t(
-                        "infographic:verticalBarChartInfo.boldLegend"
+                        "infographic:verticalRevenueBarChartInfo.boldLegend"
                     ),
                     textYaxis: i18n.t(
                         "infographic:verticalBarChartInfo.textYaxis"
@@ -29,9 +29,9 @@ const CompanyRevenueBarChartInfo = () => {
                 }}
             />
         </div>,
-        // <p className="base-info-padding">
-        //     {i18n.t("companiesBarChartInfoScreen:p2")}
-        // </p>,
+        <p className="base-info-padding">
+            {i18n.t("companyRevenueBarChartInfoScreen:p2")}
+        </p>,
     ];
     return (
         <StoriesInfoScreen
