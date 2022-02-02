@@ -19,17 +19,17 @@ const EntityDetails = () => {
     const [swiper, setSwiper] = useState(null);
 
     const cityImageMap = {
-        München: "munich",
-        "Mountain View": "mountainview",
-        Wiesbaden: "wiesbaden",
-        Berlin: "berlin",
-        Dubai: "dubai",
-        Luxembourg: "luxembourg",
-        "WILMINGTON, New Castle": "wilmington",
-        "WILMINGTON, DELAWARE": "wilmington",
-        WILMINGTON: "wilmington",
-        Cupertino: "cupertino",
-        DUBLIN: "dublin",
+        münchen: "munich",
+        "mountain view": "mountainview",
+        wiesbaden: "wiesbaden",
+        berlin: "berlin",
+        dubai: "dubai",
+        luxembourg: "luxembourg",
+        "wilmington, new castle": "wilmington",
+        "wilmington, delaware": "wilmington",
+        wilmington: "wilmington",
+        cupertino: "cupertino",
+        dublin: "dublin",
     };
 
     const tabTranslation = {
@@ -168,12 +168,15 @@ const EntityDetails = () => {
 
                             {entity.jurisdiction ? (
                                 <div className={`location-block`}>
-                                    {entity.location ? (
+                                    {entity.location &&
+                                    cityImageMap[
+                                        entity.location.city.toLowerCase()
+                                    ] ? (
                                         <div className="featured-map">
                                             <img
                                                 src={`./images/maps/cities/${
                                                     cityImageMap[
-                                                        entity.location.city
+                                                        entity.location.city.toLowerCase()
                                                     ]
                                                 }.svg`}
                                                 className="map"
