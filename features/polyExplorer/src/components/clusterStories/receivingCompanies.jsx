@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import React, { useState, useContext, useMemo } from "react";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
 
@@ -116,9 +116,25 @@ function Industries({ entities }) {
 }
 
 export default function ReceivingCompanies({ entities }) {
+    const [selectedRecievingCompaniesTab, setSelectedRecievingCompaniesTab] =
+        useState("companies-bar-chart-info");
+    const switchCompany = (tabId) => {
+        switch (tabId) {
+            case "companies":
+                setSelectedRecievingCompaniesTab("companies-bar-chart-info");
+                break;
+            case "industries":
+                setSelectedRecievingCompaniesTab(
+                    "industries-packed-circle-info"
+                );
+                break;
+            default:
+                setSelectedRecievingCompaniesTab("companies-bar-chart-info");
+        }
+    };
     return (
         <div className="receiving-companies">
-            <Tabs>
+            <Tabs onTabChange={switchCompany}>
                 <Tab
                     id="companies"
                     label={i18n.t(
@@ -126,10 +142,6 @@ export default function ReceivingCompanies({ entities }) {
                     )}
                 >
                     <Companies entities={entities} />
-                    <SourceInfoButton
-                        infoScreen="companies-bar-chart-info"
-                        source={i18n.t("common:source.polyPedia")}
-                    />
                 </Tab>
                 <Tab
                     id="industries"
@@ -138,12 +150,12 @@ export default function ReceivingCompanies({ entities }) {
                     )}
                 >
                     <Industries entities={entities} />
-                    <SourceInfoButton
-                        infoScreen="industries-packed-circle-info"
-                        source={i18n.t("common:source.polyPedia")}
-                    />
                 </Tab>
             </Tabs>
+            <SourceInfoButton
+                infoScreen={selectedRecievingCompaniesTab}
+                source={i18n.t("common:source.polyPedia")}
+            />
         </div>
     );
 }

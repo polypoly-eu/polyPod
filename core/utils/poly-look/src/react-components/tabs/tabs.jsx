@@ -4,7 +4,7 @@ import Tab from "./tab.jsx";
 
 import "./tabs.css";
 
-const Tabs = ({ children, swipe = true }) => {
+const Tabs = ({ children, swipe = true, onTabChange = () => {} }) => {
   const [activeTabId, setActiveTabId] = useState(children[0].props.id);
 
   const swiperRef = useRef();
@@ -13,6 +13,7 @@ const Tabs = ({ children, swipe = true }) => {
     ev.preventDefault();
     swiperRef.current.swiper.slideTo(index);
     setActiveTabId(newActiveTabId);
+    onTabChange(newActiveTabId);
   };
 
   return (
@@ -36,9 +37,10 @@ const Tabs = ({ children, swipe = true }) => {
         slidesPerView={1}
         initialSlide={0}
         watchOverflow={true}
-        onSlideChange={(swiper) =>
-          setActiveTabId(children[swiper.activeIndex].props.id)
-        }
+        onSlideChange={(swiper) => {
+          setActiveTabId(children[swiper.activeIndex].props.id);
+          onTabChange(children[swiper.activeIndex].props.id);
+        }}
       >
         {swipe
           ? children.map((tab) => (
