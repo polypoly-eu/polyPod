@@ -14,7 +14,7 @@ final class PolyPodCore {
         let path = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).path
         containerPath = NSString(string: path).utf8String!
         
-        corePointer = new_core(.init(tag: .init(0), .init(.init(default_: containerPath))))
+        corePointer = new_core(.default(containerPath))
     }
 }
 
@@ -41,5 +41,11 @@ extension PolyPodCore {
     
     func handleInAppSeen() {
         handle_in_app_seen(corePointer)
+    }
+}
+
+extension OptionKeyValueStore {
+    static func `default`(_ path: UnsafePointer<CChar>) -> OptionKeyValueStore {
+        .init(tag: .init(0), .init(.init(default_: path)))
     }
 }
