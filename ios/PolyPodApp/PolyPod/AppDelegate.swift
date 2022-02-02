@@ -52,9 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             task.setTaskCompleted(success: false)
         }
         
-        let notification = UpdateNotification()
-        if notification.showPush {
-            notification.handlePushSeen()
+        if PolyPodCore.instance.showPush {
+            PolyPodCore.instance.handlePushSeen()
             showUpdateNotification()
         }
         task.setTaskCompleted(success: true)

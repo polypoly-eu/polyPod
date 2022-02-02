@@ -60,13 +60,12 @@ struct ContentView: View {
     }
     
     private func firstRunState() -> ViewState {
-        let notification = UpdateNotification()
-        notification.handleStartup()
+        PolyPodCore.instance.handleStartup()
         if !FirstRun.read() {
             return securityReminderState()
         }
         
-        notification.handleFirstRun()
+        PolyPodCore.instance.handleFirstRun()
         return ViewState(
             AnyView(
                 OnboardingView(closeAction: {
@@ -106,7 +105,7 @@ struct ContentView: View {
                         // state change in featureListState's onAppear did not
                         // trigger a rerender, even though it should.
                         // Yet another SwiftUI bug it seems...
-                        showUpdateNotification = UpdateNotification().showInApp
+                        showUpdateNotification = PolyPodCore.instance.showInApp
                         
                         state = featureListState()
                     }
@@ -153,8 +152,8 @@ struct ContentView: View {
                         dismissButton: .default(
                             Text("button_update_notification_close")
                         ) {
-                            notification.handleInAppSeen()
-                            showUpdateNotification = notification.showInApp
+                            PolyPodCore.instance.handleInAppSeen()
+                            showUpdateNotification = PolyPodCore.instance.showInApp
                         }
                     )
                 }
