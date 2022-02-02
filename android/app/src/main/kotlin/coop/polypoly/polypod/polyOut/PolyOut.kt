@@ -10,7 +10,6 @@ import coop.polypoly.polypod.polyNav.ZipTools
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.supervisorScope
-import org.apache.commons.io.FileUtils
 import java.io.File
 import java.nio.ByteBuffer
 import java.util.UUID
@@ -88,11 +87,7 @@ open class PolyOut(
         if (!file.exists())
             throw Exception("stat: No such file '$id'")
 
-        if (file.isDirectory()) {
-            result["size"] = FileUtils.sizeOfDirectory(file).toString()
-        } else {
-            result["size"] = file.length().toString()
-        }
+        result["size"] = determineSize(file).toString()
         result["name"] = fs.get(id) ?: file.name
         result["time"] = (file.lastModified() / 1000).toString()
         result["id"] = id.removePrefix(fsPrefix).removePrefix(
@@ -100,6 +95,16 @@ open class PolyOut(
         ).trimStart('/')
         statCache[id] = result
         return result
+    }
+
+    private fun determineSize(file: File): Long {
+        if (!file.isDirectory) return file.length()
+        // We previously used FileUtils.sizeOfDirectory here, which had some
+        // special cases for symbolic links and negative file sizes. It did,
+        // however, use java.nio.file.Path.toPath(), which does not exist
+        // on API 24, so we replaced it with this simpler implementation.
+        val files = file.listFiles() ?: return 0L
+        return files.sumOf { determineSize(it) }
     }
 
     open suspend fun readDir(
