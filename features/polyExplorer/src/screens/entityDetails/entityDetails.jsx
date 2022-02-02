@@ -15,9 +15,15 @@ const EntityDetails = () => {
     const { selectedEntityObject, entityObjectByPpid } =
         useContext(ExplorerContext);
     const entity = selectedEntityObject;
+    const years = [2015, 2016, 2017, 2018, 2019];
+    let annualRevenuesFilteredByYear = [];
+    if (entity && entity.annualRevenues) {
+        annualRevenuesFilteredByYear = entity?.annualRevenues?.filter(
+            (revenue) => years.includes(revenue.year)
+        );
+    }
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
-
     const cityImageMap = {
         München: "munich",
         "Mountain View": "mountainview",
@@ -218,7 +224,7 @@ const EntityDetails = () => {
                                 infoScreen="data-region-info"
                                 className="info-extra-margin"
                             />
-                            {entity?.annualRevenues?.length === 0 ? (
+                            {annualRevenuesFilteredByYear.length === 0 ? (
                                 <></>
                             ) : (
                                 <div className="revenue">
