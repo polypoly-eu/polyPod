@@ -11,16 +11,6 @@
     "screenTitle.purpose-info": "Wie ist das zu verstehen?",
     "screenTitle.companies-info": "Wie ist das zu verstehen?",
     "screenTitle.jurisdiction-info": "Wie ist das zu verstehen?",
-    "screenTitle.details-line-chart-info": "Hintergrundinformation",
-    "screenTitle.company-data-types-info": "Hintergrundinformation",
-    "screenTitle.shares-data-types-info": "Hintergrundinformation",
-    "screenTitle.industries-packed-circle-info": "Hintergrundinformation",
-    "screenTitle.types-data-types-info": "Hintergrundinformation",
-    "screenTitle.purposes-bar-chart-info": "Hintergrundinformation",
-    "screenTitle.overview-bar-chart-info": "Hintergrundinformation",
-    "screenTitle.data-regions-diagram-info": "Hintergrundinformation",
-    "screenTitle.details-treemap-info": "Hintergrundinformation",
-    "screenTitle.companies-bar-chart-info": "Hintergrundinformation",
     "screenTitle.search": "Suche",
     "screenTitle.info": "Information",
     "entityFilter.company": "Unternehmen",
@@ -60,5 +50,5 @@
     "purpose.description.i18nkey": "Explanation_DE",
     "country.code": "de",
     "button.ok": "OK",
-    "button.scroll": "Scrolle hoch für mehr"
+    "button.scroll": "Scrollen Sie für mehr"
 }
