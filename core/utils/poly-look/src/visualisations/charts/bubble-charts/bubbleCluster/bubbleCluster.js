@@ -232,8 +232,6 @@ export class BubbleCluster extends Chart {
           });
 
           line
-            .attr("x1", 0)
-            .attr("x2", 0)
             .attr("y1", (d) => d.r + 2)
             .attr("y2", (d) => d.r + labelMargin - 7);
         }
