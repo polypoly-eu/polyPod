@@ -99,6 +99,9 @@
 		90F10A9227A98FB4005D68E9 /* PolyPodCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A9127A98FB4005D68E9 /* PolyPodCore.swift */; };
 		90F10A9827AA89E1005D68E9 /* PolyPodCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F10A9727AA89E1005D68E9 /* PolyPodCore.xcframework */; };
 		90F10A9A27AA8A0C005D68E9 /* UserDefaults+KeyValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A9927AA8A0C005D68E9 /* UserDefaults+KeyValueStore.swift */; };
+		90F10A9C27AAA391005D68E9 /* PolyPodCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F10A9727AA89E1005D68E9 /* PolyPodCore.xcframework */; };
+		90F10A9D27AAA397005D68E9 /* PolyPodCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A9127A98FB4005D68E9 /* PolyPodCore.swift */; };
+		90F10A9F27AAA39B005D68E9 /* UserDefaults+KeyValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A9927AA8A0C005D68E9 /* UserDefaults+KeyValueStore.swift */; };
 		E9040D4726F0A30E00A88593 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4626F0A30E00A88593 /* Info.swift */; };
 		E9040D4926F0B2B400A88593 /* RuntimeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */; };
 		E90F89EA2629822400AD7D96 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89E92629822400AD7D96 /* OnboardingView.swift */; };
@@ -283,6 +286,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90F10A9C27AAA391005D68E9 /* PolyPodCore.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -806,6 +810,7 @@
 				E9B22043263314DC005E8881 /* LocalizedStringKeyExtensions.swift in Sources */,
 				E9CFFA4C26A0240300F7BE65 /* ColorExtensionsTests.swift in Sources */,
 				E9B22044263314DC005E8881 /* UIColorExtensions.swift in Sources */,
+				90F10A9F27AAA39B005D68E9 /* UserDefaults+KeyValueStore.swift in Sources */,
 				E9B22045263314DC005E8881 /* ColorExtensions.swift in Sources */,
 				901C058C278F34A800BC8364 /* CoreDataStack.swift in Sources */,
 				E9B2203C263314AD005E8881 /* Feature.swift in Sources */,
@@ -829,6 +834,7 @@
 				1ABADBFC24EE710B00369791 /* Quad+CoreDataProperties.swift in Sources */,
 				E9545ECA27359C38001E8C7F /* UserDefaultsExtensions.swift in Sources */,
 				E9F68ED227580A0B009ED2C1 /* Log.swift in Sources */,
+				90F10A9D27AAA397005D68E9 /* PolyPodCore.swift in Sources */,
 				1ABADBF424EE70E700369791 /* LocationTracker.swift in Sources */,
 				1ABADBF724EE710B00369791 /* NamedNode+CoreDataClass.swift in Sources */,
 				1ABADC0724EE717000369791 /* Bubblewrap.swift in Sources */,
