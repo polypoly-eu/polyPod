@@ -3,7 +3,10 @@ ipa_path = ./build/PolyPod.ipa
 project_path = PolyPodApp/PolyPod.xcodeproj
 scheme_name = PolyPod
 export_options_plist = exportOptions.plist
-destination = 14.4
+destination = 15.2
+
+lockxcodeversion:
+	sudo xcode-select -switch /Applications/Xcode_13.2.1.app
 
 # Github secrets
 DISTRIBUTION_CERTIFICATE = $POLYPOD_APPLE_IOS_DISTRIBUTION_CERTIFICATE

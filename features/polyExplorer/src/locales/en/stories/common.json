@@ -7,5 +7,8 @@
     "section.dataRegions": "Data Regions",
     "section.explore.further": "Explore Further",
     "label.receivingCompanies": "Receiving companies",
-    "label.receivingIndustries": "Receiving industries"
+    "label.receivingIndustries": "Receiving industries",
+    "label.installs": "Installs",
+    "label.users": "Users",
+    "label.partOf": "Part of"
 }

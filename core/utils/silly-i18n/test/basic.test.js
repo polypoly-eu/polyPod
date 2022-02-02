@@ -1,18 +1,20 @@
+import { determineLanguage, I18n } from "../src/index.js";
+
 import {
-    determineLanguage,
     LanguageError,
     NonExistingSectionError,
     TranslationKeyError,
-    I18n,
-} from "../src/index.js";
+} from "../src/errors";
 
 const LANGUAGE = "foo";
 const FALLBACK_LANGUAGE = "en";
 let i18n;
 
+const translationData = { quux: { bar: "baz" }, options: { opt: "{{opt}}" } };
+
 beforeAll(() => {
     i18n = new I18n(LANGUAGE, {
-        [LANGUAGE]: { quux: { bar: "baz" }, options: { opt: "{{opt}}" } },
+        [LANGUAGE]: translationData,
     });
 });
 
@@ -25,6 +27,9 @@ describe("Test language determination", () => {
 describe("Test basic configuration", () => {
     it("is created correctly", () => {
         expect(i18n).toBeInstanceOf(I18n);
+    });
+    it("Includes all sections", () => {
+        expect(i18n.sections).toStrictEqual(Object.keys(translationData));
     });
     it("Translates correctly", () => {
         expect(i18n.t("quux:bar")).toBe("baz");

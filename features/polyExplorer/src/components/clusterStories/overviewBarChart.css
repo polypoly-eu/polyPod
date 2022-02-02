@@ -1,0 +1,29 @@
+.horizontal-bar-chart .indexed-legend>*,
+.horizontal-bar-chart .bubble-legend-companies,
+.horizontal-bar-chart .bubble-legend-industries {
+    font-family: "Jost Medium";
+    font-size: 14px;
+}
+
+.horizontal-bar-chart .bubble-legend-companies,
+.horizontal-bar-chart .bubble-legend-industries {
+    margin-right: 12px;
+}
+
+.horizontal-bar-chart .bubble-legend-companies::before,
+.horizontal-bar-chart .bubble-legend-industries::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 4px;
+    margin-bottom: -4px;
+    background: #7ee8a2;
+    border: 1px solid transparent;
+    border-radius: 50%;
+}
+
+.horizontal-bar-chart .bubble-legend-industries::before {
+    background: transparent;
+    border-color: #0f1938;
+}
