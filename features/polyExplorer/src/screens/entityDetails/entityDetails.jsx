@@ -4,7 +4,7 @@ import Screen from "../../components/screen/screen.jsx";
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLegend.jsx";
 import FeaturedEntity from "../../components/featuredEntity/featuredEntity.jsx";
-import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
+import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 import EntityShortInfo from "../../components/entityShortInfo/entityShortInfo.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -136,23 +136,21 @@ const EntityDetails = () => {
                 name: tabTranslation.about,
                 content: (
                     <div className="about">
-                        <div className="scroll-box">
-                            <p
-                                className="entity-details-text"
-                                dangerouslySetInnerHTML={{
-                                    __html:
-                                        (
-                                            (entity.description?.value || {})[
-                                                i18n.language
-                                            ] || ""
-                                        ).replaceAll("\n", "<br/><br/>") ||
-                                        i18n.t(
-                                            "entityDetailsScreen:description.fallback"
-                                        ),
-                                }}
-                            ></p>
-                        </div>
-                        <div className="gradient"></div>
+                        <p
+                            className="entity-details-text"
+                            dangerouslySetInnerHTML={{
+                                __html:
+                                    (
+                                        (entity.description?.value || {})[
+                                            i18n.language
+                                        ] || ""
+                                    ).replaceAll("\n", "<br/><br/>") ||
+                                    i18n.t(
+                                        "entityDetailsScreen:description.fallback"
+                                    ),
+                            }}
+                        ></p>
+
                         {entity.description?.source ? (
                             <p className="entity-details-source">
                                 {i18n.t("entityDetailsScreen:source")}:{" "}
@@ -203,6 +201,11 @@ const EntityDetails = () => {
                                 </div>
                             )}
                             <DataRegionsLegend />
+                            <SourceInfoButton
+                                source={i18n.t("common:source.polyPedia")}
+                                infoScreen="data-region-info"
+                                className="info-extra-margin"
+                            />
                             {entity?.annualRevenues?.length === 0 ? (
                                 <></>
                             ) : (
@@ -219,6 +222,13 @@ const EntityDetails = () => {
                                     <CompanyRevenueChart
                                         annualRevenues={entity.annualRevenues}
                                     />
+                                    <SourceInfoButton
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                        infoScreen="company-revenue-info"
+                                        className="info-extra-margin"
+                                    />
                                 </div>
                             )}
                         </div>
@@ -230,10 +240,10 @@ const EntityDetails = () => {
                 content: (
                     <div className="tab-data-story">
                         <FeaturedEntity />
-                        <p className="source">
-                            {i18n.t("entityDetailsScreen:source")}: polyPedia
-                        </p>
-                        <InfoButton route="featured-entity-info" />
+                        <SourceInfoButton
+                            source={i18n.t("common:source.polyPedia")}
+                            infoScreen="featured-entity-info"
+                        />
                         <div className="explore-data-btn-area">
                             <LinkButton
                                 className="explore-data-btn"
@@ -273,23 +283,20 @@ const EntityDetails = () => {
                 name: tabTranslation.about,
                 content: (
                     <div className="about">
-                        <div className="scroll-box">
-                            <p
-                                className="entity-details-text"
-                                dangerouslySetInnerHTML={{
-                                    __html:
-                                        (
-                                            (entity.description?.value || {})[
-                                                i18n.language
-                                            ] || ""
-                                        ).replaceAll("\n", "<br/><br/>") ||
-                                        i18n.t(
-                                            "entityDetailsScreen:description.fallback"
-                                        ),
-                                }}
-                            ></p>
-                        </div>
-                        <div className="gradient"></div>
+                        <p
+                            className="entity-details-text"
+                            dangerouslySetInnerHTML={{
+                                __html:
+                                    (
+                                        (entity.description?.value || {})[
+                                            i18n.language
+                                        ] || ""
+                                    ).replaceAll("\n", "<br/><br/>") ||
+                                    i18n.t(
+                                        "entityDetailsScreen:description.fallback"
+                                    ),
+                            }}
+                        ></p>
                         {entity.description?.source ? (
                             <p className="entity-details-source">
                                 {i18n.t("entityDetailsScreen:source")}:{" "}
@@ -331,10 +338,10 @@ const EntityDetails = () => {
                 content: (
                     <div className="tab-data-story">
                         <FeaturedEntity />
-                        <p className="source">
-                            {i18n.t("entityDetailsScreen:source")}: polyPedia
-                        </p>
-                        <InfoButton route="featured-entity-info" />
+                        <SourceInfoButton
+                            source={i18n.t("common:source.polyPedia")}
+                            infoScreenRoute="featured-entity-info"
+                        />
                         <div className="explore-data-btn-area">
                             <LinkButton
                                 className="explore-data-btn"
@@ -391,7 +398,7 @@ const EntityDetails = () => {
         return tabs;
     };
     return (
-        <Screen className="entity-details-screen">
+        <Screen className="entity-details-screen" topShadow={false}>
             <div className="details">
                 {loadTabs().length > 1 && (
                     <div className="tab-button-container">
@@ -412,7 +419,10 @@ const EntityDetails = () => {
                 )}
                 {loadTabs().length === 1 ? (
                     loadTabs().map((tab, index) => (
-                        <div key={index} className="tab-content-container">
+                        <div
+                            key={index}
+                            className="tab-content-container poly-nav-bar-separator-bottom"
+                        >
                             {" "}
                             {tab.content}
                         </div>

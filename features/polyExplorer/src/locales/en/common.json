@@ -21,6 +21,26 @@
         "How to read this?",
     "screenTitle.jurisdiction-info":
         "How to read this?",
+    "screenTitle.details-line-chart-info":
+      "Background Information",
+    "screenTitle.company-data-types-info":
+      "Background Information",
+    "screenTitle.shares-data-types-info":
+      "Background Information",
+    "screenTitle.types-data-types-info":
+      "Background Information",
+    "screenTitle.industries-packed-circle-info":
+      "Background Information",
+    "screenTitle.purposes-bar-chart-info":
+      "Background Information",
+    "screenTitle.overview-bar-chart-info":
+      "Background Information",
+    "screenTitle.data-regions-diagram-info":
+      "Background Information",
+    "screenTitle.details-treemap-info":
+      "Background Information",
+    "screenTitle.companies-bar-chart-info":
+      "Background Information",
     "screenTitle.search":
         "Search",
     "screenTitle.info":

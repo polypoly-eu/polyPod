@@ -5,6 +5,7 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import MatrixBubblesChart from "../../components/clusterStories/MatrixBubblesChart.jsx";
+import Purposes from "../../components/clusterStories/purposes.jsx";
 import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
 import EntityList from "../../components/entityList/entityList.jsx";
 import OverviewBarChart from "../../components/clusterStories/overviewBarChart.jsx";
@@ -12,6 +13,7 @@ import OrderedList from "../../components/orderedList/orderedList.jsx";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
+import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
 import GradientCircleList from "../../components/gradientCircleList/gradientCircleList.jsx";
 
 import MessengerTreeMap from "../../components/clusterStories/messengerTreeMap.jsx";
@@ -27,8 +29,13 @@ const bubbleTextColor = "#0f1938";
 const primaryColor = "#3ba6ff";
 
 const MessengerStory = () => {
-    const { products, globalData, entityJurisdictionByPpid } =
-        useContext(ExplorerContext);
+    const {
+        products,
+        globalData,
+        entityJurisdictionByPpid,
+        entityObjectByPpid,
+        createPopUp,
+    } = useContext(ExplorerContext);
 
     const listOfMessengerApps = [
         "Facebook Messenger",
@@ -46,10 +53,42 @@ const MessengerStory = () => {
         (p) => p.clusters.indexOf("messenger") !== -1
     );
 
+    const facebookMessengers = messengers.filter((e) =>
+        e.productOwner.some((o) => o.includes("Facebook"))
+    );
+
+    const mainFacebookCompany = "Facebook (US)";
+
     const summaryBullets = [
-        i18n.t(`${i18nHeader}:summary.bullet.1`),
-        i18n.t(`${i18nHeader}:summary.bullet.2`),
-        i18n.t(`${i18nHeader}:summary.bullet.3`),
+        i18n.t(`${i18nHeader}:summary.bullet.1`, {
+            advertising_shared: messengers.filter((m) =>
+                m.dataSharingPurposes.some(
+                    (e) => e["dpv:Purpose"] === "dpv:Advertising"
+                )
+            ).length,
+            total_apps: listOfMessengerApps.length,
+        }),
+        i18n.t(`${i18nHeader}:summary.bullet.2`, {
+            min_datatypes_shared: messengers.reduce((a, b) =>
+                Math.min(
+                    a.dataTypesShared?.length || a,
+                    b.dataTypesShared.length
+                )
+            ),
+            max_datatypes_shared: messengers.reduce((a, b) =>
+                Math.max(
+                    a.dataTypesShared?.length || a,
+                    b.dataTypesShared.length
+                )
+            ),
+        }),
+        i18n.t(`${i18nHeader}:summary.bullet.3`, {
+            max_facebook_product_recipients: facebookMessengers.reduce((a, b) =>
+                Math.max(a.dataRecipients?.length || a, b.dataRecipients.length)
+            ),
+            facebook_recipients:
+                entityObjectByPpid(mainFacebookCompany).dataRecipients.length,
+        }),
     ];
 
     const tipsBullets = [
@@ -115,6 +154,7 @@ const MessengerStory = () => {
                     ),
                 };
             }),
+            route: "company-data-types-info",
         },
         {
             id: "by-shares",
@@ -138,6 +178,7 @@ const MessengerStory = () => {
                     ),
                 };
             }),
+            route: "shares-data-types-info",
         },
         {
             id: "by-types",
@@ -150,6 +191,7 @@ const MessengerStory = () => {
                         amount_of_data_types: listOfDataCategories.length,
                         amount_of_shares: totalShares,
                     }),
+
                     bubbles: dataTypesSharedCombined.map((bubble) => {
                         return { value: bubble.total };
                     }),
@@ -157,6 +199,7 @@ const MessengerStory = () => {
                     height: 400,
                 },
             ],
+            route: "types-data-types-info",
         },
     ];
 
@@ -193,11 +236,13 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:intro.paragraph.one`)}
             </p>
-            <img
-                className="cluster-story-img"
-                src="images/stories/messenger/intro-guy.svg"
-                alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
-            />
+            <div className="cluster-story-img-container">
+                <img
+                    className="cluster-story-img"
+                    src="images/stories/messenger/intro-guy.svg"
+                    alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
+                />
+            </div>
             <p>{i18n.t(`${i18nHeader}:intro.paragraph.two`)}</p>
             <GradientCircleList
                 introText={i18n.t(`${i18nHeader}:intro.paragraph.two`)}
@@ -222,6 +267,10 @@ const MessengerStory = () => {
                 {i18n.t(`${i18nHeader}:overview.paragraph.one`)}
             </p>
             <OverviewBarChart entities={Object.values(products)} />
+            <SourceInfoButton
+                infoScreen="overview-bar-chart-info"
+                source={i18n.t("common:source.polyPedia")}
+            />
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:details.section`)}
             ></SectionTitle>
@@ -232,16 +281,18 @@ const MessengerStory = () => {
                 messengers={messengers}
                 i18nHeader={i18nHeader}
             />
+            <SourceInfoButton
+                infoScreen="details-line-chart-info"
+                source={i18n.t("common:source.polyPedia")}
+            />
             <MessengerTreeMap
                 messengers={Object.values(products)}
                 i18nHeader={i18nHeader}
             />
-            <SectionTitle
-                title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
+            <SourceInfoButton
+                infoScreen="details-treemap-info"
+                source={i18n.t("common:source.polyPedia")}
             />
-            <p className="big-first-letter">
-                {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
-            </p>
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:data.types.title`)}
             ></SectionTitle>
@@ -280,39 +331,61 @@ const MessengerStory = () => {
                                 </p>
                             </div>
                             {dataType.id !== "by-types" ? (
-                                <MatrixBubblesChart
-                                    data={dataType.data}
-                                    bubbleColor={bubbleColor}
-                                    textColor={bubbleColor}
-                                    strokeColor={bubbleStroke}
-                                />
-                            ) : (
-                                <div className="by-types-bubble-chart">
-                                    <PolyChart
-                                        type="bubble-cluster"
-                                        data={dataType.data[0].bubbles}
-                                        width={dataType.data[0].width}
-                                        height={dataType.data[0].height}
+                                <>
+                                    <MatrixBubblesChart
+                                        data={dataType.data}
                                         bubbleColor={bubbleColor}
-                                        textColor={dataType.data[0].bubbles.map(
-                                            (bubble) => {
-                                                selectedDataTypeBubble ===
-                                                bubble.value
-                                                    ? bubbleTextColor
-                                                    : bubbleColor;
-                                            }
-                                        )}
+                                        textColor={bubbleColor}
                                         strokeColor={bubbleStroke}
-                                        onBubbleClick={handleBubbleClick}
                                     />
-                                    <h4>{dataType.data[0].title}</h4>
-                                </div>
+                                    <SourceInfoButton
+                                        infoScreen={dataType.route}
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <div className="by-types-bubble-chart">
+                                        <PolyChart
+                                            type="bubble-cluster"
+                                            data={dataType.data[0].bubbles}
+                                            width={dataType.data[0].width}
+                                            height={dataType.data[0].height}
+                                            bubbleColor={bubbleColor}
+                                            textColor={dataType.data[0].bubbles.map(
+                                                (bubble) => {
+                                                    selectedDataTypeBubble ===
+                                                    bubble.value
+                                                        ? bubbleTextColor
+                                                        : bubbleColor;
+                                                }
+                                            )}
+                                            strokeColor={bubbleStroke}
+                                            onBubbleClick={handleBubbleClick}
+                                        />
+                                        <h4>{dataType.data[0].title}</h4>
+                                    </div>
+                                    <SourceInfoButton
+                                        infoScreen={dataType.route}
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                    />
+                                </>
                             )}
                         </Tab>
                     );
                 })}
             </Tabs>
-            <p className="source">{i18n.t("common:source")}: PolyPedia</p>
+            <SectionTitle
+                title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
+            />
+            <p className="big-first-letter">
+                {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
+            </p>
+            <Purposes companies={messengers} createPopUp={createPopUp} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />
@@ -340,6 +413,10 @@ const MessengerStory = () => {
                         others: otherJurisdictions,
                     },
                 }}
+            />
+            <SourceInfoButton
+                infoScreen="data-regions-diagram-info"
+                source={i18n.t("common:source.polyPedia")}
             />
             <SectionTitle title={i18n.t(`${i18nHeader}:tips.section`)} />
             <p className="big-first-letter">

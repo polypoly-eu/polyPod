@@ -6,11 +6,13 @@ import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import MatrixBubblesChart from "../../components/clusterStories/MatrixBubblesChart.jsx";
+import Purposes from "../../components/clusterStories/purposes.jsx";
 import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 import EntityList from "../../components/entityList/entityList.jsx";
+import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 
 const i18nHeader = "clusterDigitalGiantsStory";
@@ -30,8 +32,12 @@ const bigSixNames = [
 ];
 
 const DigitalGiantsStory = () => {
-    const { featuredEntities, entityJurisdictionByPpid, globalData } =
-        useContext(ExplorerContext);
+    const {
+        featuredEntities,
+        entityJurisdictionByPpid,
+        globalData,
+        createPopUp,
+    } = useContext(ExplorerContext);
 
     const bigSix = bigSixNames.map((n) =>
         featuredEntities.find((e) => e.ppid.indexOf(n) !== -1)
@@ -95,6 +101,7 @@ const DigitalGiantsStory = () => {
                     }),
                 };
             }),
+            route: "company-data-types-info",
         },
         {
             id: "by-shares",
@@ -108,6 +115,7 @@ const DigitalGiantsStory = () => {
                     }),
                 };
             }),
+            route: "shares-data-types-info",
         },
         {
             id: "by-types",
@@ -126,6 +134,7 @@ const DigitalGiantsStory = () => {
                     height: 400,
                 },
             ],
+            route: "types-data-types-info",
         },
     ];
 
@@ -148,11 +157,13 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:intro.p.1`)}
             </p>
-            <img
-                className="cluster-story-img"
-                src="images/stories/digital-giants/intro.svg"
-                alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
-            />
+            <div className="cluster-story-img-container">
+                <img
+                    className="cluster-story-img"
+                    src="images/stories/digital-giants/intro.svg"
+                    alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
+                />
+            </div>
             <GradientCircleList
                 introText={i18n.t(`${i18nHeader}:intro.p.2`)}
                 list={bigSixNames}
@@ -188,45 +199,61 @@ const DigitalGiantsStory = () => {
                                 </p>
                             </div>
                             {dataType.id !== "by-types" ? (
-                                <MatrixBubblesChart
-                                    data={dataType.data}
-                                    bubbleColor={bubbleColor}
-                                    textColor={bubbleColor}
-                                    strokeColor={bubbleStroke}
-                                />
-                            ) : (
-                                <div className="by-types-bubble-chart">
-                                    <PolyChart
-                                        type="bubble-cluster"
-                                        data={dataType.data[0].bubbles}
-                                        width={dataType.data[0].width}
-                                        height={dataType.data[0].height}
+                                <>
+                                    <MatrixBubblesChart
+                                        data={dataType.data}
                                         bubbleColor={bubbleColor}
-                                        textColor={dataType.data[0].bubbles.map(
-                                            (bubble) => {
-                                                selectedDataTypeBubble ===
-                                                bubble.value
-                                                    ? bubbleTextColor
-                                                    : bubbleColor;
-                                            }
-                                        )}
+                                        textColor={bubbleColor}
                                         strokeColor={bubbleStroke}
-                                        onBubbleClick={handleBubbleClick}
                                     />
-                                    <h4>{dataType.data[0].title}</h4>
-                                </div>
+                                    <SourceInfoButton
+                                        infoScreen={dataType.route}
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <div className="by-types-bubble-chart">
+                                        <PolyChart
+                                            type="bubble-cluster"
+                                            data={dataType.data[0].bubbles}
+                                            width={dataType.data[0].width}
+                                            height={dataType.data[0].height}
+                                            bubbleColor={bubbleColor}
+                                            textColor={dataType.data[0].bubbles.map(
+                                                (bubble) => {
+                                                    selectedDataTypeBubble ===
+                                                    bubble.value
+                                                        ? bubbleTextColor
+                                                        : bubbleColor;
+                                                }
+                                            )}
+                                            strokeColor={bubbleStroke}
+                                            onBubbleClick={handleBubbleClick}
+                                        />
+                                        <h4>{dataType.data[0].title}</h4>
+                                    </div>
+                                    <SourceInfoButton
+                                        infoScreen={dataType.route}
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                    />
+                                </>
                             )}
                         </Tab>
                     );
                 })}
             </Tabs>
-            <p className="source">{i18n.t("common:source")}: PolyPedia</p>
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
             />
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
+            <Purposes companies={bigSix} createPopUp={createPopUp} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />
@@ -254,6 +281,10 @@ const DigitalGiantsStory = () => {
                         others: otherJurisdictions,
                     },
                 }}
+            />
+            <SourceInfoButton
+                infoScreen="data-regions-diagram-info"
+                source={i18n.t("common:source.polyPedia")}
             />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}

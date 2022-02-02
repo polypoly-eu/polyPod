@@ -1,0 +1,12 @@
+{
+    "baseInfo.title1": "How to read this?",
+    "baseInfo.title2": "About the data",
+    "circle.packing": "This diagram is called a <strong>packed circle</strong> chart or <strong>circular treemap</strong>. It displays hierarchical data as a set of nested circles. Each branch of the structure is represented by a circle, which is then broken down into smaller circles representing sub-branches. Areas of circles are proportional to the value they represent. Colors separate circles or branches from one another.",
+    "treemap": "This diagram is called a <strong>treemap</strong> and displays hierarchical data as a set of nested rectangles. Each branch of the structure is represented by a rectangle, which is then broken down into smaller rectangles representing sub-branches. Areas of rectangles are proportional to the value they represent. Colors separate rectangles or branches from one another.",
+    "bubble.chart": "This diagram is called a <strong>bubble chart</strong>. Each bubble represents one datatype. The number of bubbles shows how many data types there are. The size of each bubble is dependent on the amount of data inside.",
+    "bar.chart": "This diagram is called a <strong>bar chart</strong>. The length of each bar is proportional to the values that it represents. One axis of the chart shows the specific categories being compared, and the other axis represents a measured value.",
+    "alluvial.diagram1": "This diagram is called <strong>Sankey or alluvial diagram</strong>, which is a type of flow diagram and represents changes in network structure over time or in terms of location.",
+    "alluvial.diagram2": "The height of the blocks on the left and right of the diagram represent the sizes of categories measured. The height of the lines streaming between the blocks represents the size of a subset of the changes for a (sub)set of those categories.",
+    "line.chart1": "This diagram is called a logarithmic line chart and shows in lines how different values developed over time.",
+    "line.chart2": "The chart uses a so-called <strong>logarithmic scale</strong> to show numerical data over a very wide range of values in a compact way. Such a scale is nonlinear: the numbers 10 and 20, and 60 and 70, are not the same distance apart on a log scale. Through that, some changes in the dynamic of the development become more visible."
+}

@@ -8,6 +8,8 @@ import { Company } from "../model/company.js";
 import { Product } from "../model/product.js";
 import { EntityFilter } from "../model/entityFilter.js";
 
+import popUps from "../popUps";
+
 //local-data imports
 import polyPediaCompanies from "../data/companies.json";
 import globalData from "../data/global.json";
@@ -62,17 +64,9 @@ function loadProducts() {
 //Will be clearer when we know the content structure
 const loadStoriesMetadata = () => {
     return {
-        messenger: {
-            title: "story.messenger.title",
-            previewText: "story.messenger.summarize",
-            img: {
-                src: "images/stories/messenger/card-image.svg",
-                alt: "story.messenger.alt",
-            },
-            route: "/story/messenger-story",
-        },
-        digitalGiants: {
+        "digital-giants-story": {
             title: "story.digitalGiants.title",
+            shortTitle: "story.digitalGiants.title.short",
             previewText: "story.digitalGiants.summarize",
             img: {
                 src: "images/stories/digital-giants/card-image.svg",
@@ -80,8 +74,20 @@ const loadStoriesMetadata = () => {
             },
             route: "/story/digital-giants-story",
         },
+        "messenger-story": {
+            title: "story.messenger.title",
+            shortTitle: "story.messenger.title.short",
+            previewText: "story.messenger.summarize",
+            img: {
+                src: "images/stories/messenger/card-image.svg",
+                alt: "story.messenger.alt",
+            },
+            route: "/story/messenger-story",
+        },
     };
 };
+
+const routesToSkipOnBack = ["/search"];
 
 export const ExplorerProvider = ({ children }) => {
     //router hooks
@@ -106,6 +112,7 @@ export const ExplorerProvider = ({ children }) => {
         },
     });
     const [activeFilters, setActiveFilters] = useState(new EntityFilter());
+    const [popUp, setPopUp] = useState(null);
 
     //constants
     const companies = loadCompanies();
@@ -136,6 +143,14 @@ export const ExplorerProvider = ({ children }) => {
         }
     }
 
+    function createPopUp({ type, content }) {
+        setPopUp({ component: popUps[type], content });
+    }
+
+    function closePopUp() {
+        setPopUp(null);
+    }
+
     function routeTo(path, changedState) {
         Object.keys(changedState).forEach((key) => {
             if (!navigationStates.includes(key)) {
@@ -149,11 +164,15 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function handleBack() {
+        if (popUp) return setPopUp(null);
         if (currentPath != "/") {
             history.goBack();
-            if (history.location.state) {
-                changeNavigationState(history.location.state);
+            const location = history.location;
+            if (location.state) {
+                changeNavigationState(location.state);
             }
+            if (routesToSkipOnBack.indexOf(location.pathname) > -1)
+                handleBack();
         }
     }
 
@@ -184,7 +203,14 @@ export const ExplorerProvider = ({ children }) => {
         )
             pod.polyNav.setTitle(selectedEntityObject.name);
         else if (currentPath.startsWith("/story/"))
-            pod.polyNav.setTitle("data-story name goes here");
+            pod.polyNav.setTitle(
+                i18n.t(
+                    `clusterStoriesPreview:${
+                        storiesMetadata[currentPath.split("/story/")[1]]
+                            .shortTitle
+                    }`
+                )
+            );
         else
             pod.polyNav.setTitle(
                 i18n.t(`common:screenTitle.${currentPath.slice(1)}`)
@@ -289,6 +315,9 @@ export const ExplorerProvider = ({ children }) => {
                 handleFilterApply,
                 storiesMetadata,
                 products,
+                popUp,
+                createPopUp,
+                closePopUp,
             }}
         >
             {children}
