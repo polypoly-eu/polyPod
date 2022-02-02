@@ -37,11 +37,11 @@ const PurposesBarChart = ({ data, animation, onClick }) => {
         strokeDasharray: "5, 5",
     };
     const labelTitlePadding = { top: 4, right: 12, bottom: 4, left: 12 };
-    const labelTitleYAdjust = 62;
+    const labelTitleYAdjust = gHeight + 10;
     const labelTitleHeight = {
-        fo: 42,
-        div: 32,
-        p: 32,
+        forForeignObject: 36,
+        forDiv: 32,
+        forParagraph: 32,
     };
     const labelTitleRadius = "16px";
     const labelTitleBorder = "solid 1px var(--color-dark)";
@@ -149,7 +149,7 @@ const PurposesBarChart = ({ data, animation, onClick }) => {
                 .attr("x", labelXPosition)
                 .attr("y", (d) => yScale(d.title) + labelTitleYAdjust)
                 .attr("width", width)
-                .attr("height", 36)
+                .attr("height", labelTitleHeight.forForeignObject)
                 .on("click", (_, d) => onClick(d));
             const labelTitleDiv = labelTitle.append("xhtml:div");
             const labelTitleP = labelTitleDiv
@@ -158,7 +158,7 @@ const PurposesBarChart = ({ data, animation, onClick }) => {
                 .style("margin", legendMargin)
                 .style("display", "inline-block")
                 .style("box-sizing", "border-box")
-                .style("height", labelTitleHeight.p + "px")
+                .style("height", labelTitleHeight.forParagraph + "px")
                 .style(
                     "padding",
                     labelTitlePadding.top +
@@ -175,7 +175,7 @@ const PurposesBarChart = ({ data, animation, onClick }) => {
                 .getBoundingClientRect().width;
             labelTitleDiv
                 .attr("width", labelTitleWidth)
-                .attr("height", labelTitleHeight.div);
+                .attr("height", labelTitleHeight.forDiv);
 
             const legendTitle = svgChart
                 .append("foreignObject")
