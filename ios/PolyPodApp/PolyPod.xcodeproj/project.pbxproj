@@ -111,7 +111,6 @@
 		E9545EAE273530ED001E8C7F /* UpdateNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EAD273530ED001E8C7F /* UpdateNotification.swift */; };
 		E9545EB12735412B001E8C7F /* UpdateNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EAD273530ED001E8C7F /* UpdateNotification.swift */; };
 		E9545EC1273542F5001E8C7F /* UpdateNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EAF27353F78001E8C7F /* UpdateNotificationTest.swift */; };
-		E9545EC4273543EB001E8C7F /* UpdateNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC3273543EB001E8C7F /* UpdateNotificationTest.swift */; };
 		E9545EC827359A34001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
 		E9545EC927359C34001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
 		E9545ECA27359C38001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
@@ -249,7 +248,6 @@
 		E9545EAD273530ED001E8C7F /* UpdateNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNotification.swift; sourceTree = "<group>"; };
 		E9545EAF27353F78001E8C7F /* UpdateNotificationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNotificationTest.swift; sourceTree = "<group>"; };
 		E9545EB6273542CC001E8C7F /* PolyPodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PolyPodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9545EC3273543EB001E8C7F /* UpdateNotificationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNotificationTest.swift; sourceTree = "<group>"; };
 		E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensions.swift; sourceTree = "<group>"; };
 		E96817F0274D032A00206602 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		E97D325526307CE100A5A180 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
@@ -339,7 +337,6 @@
 		1A66F7732493743D00ED4308 /* PolyPodTests */ = {
 			isa = PBXGroup;
 			children = (
-				E9545EC3273543EB001E8C7F /* UpdateNotificationTest.swift */,
 				E9CFFA4E26A1983700F7BE65 /* UIColorExtensionsTest.swift */,
 				1A66F77E249378E400ED4308 /* PolyOutTests.swift */,
 				1A66F7762493743D00ED4308 /* Info.plist */,
@@ -818,7 +815,6 @@
 				E98BA80026D3CA2F0039E41E /* Network.swift in Sources */,
 				1ABADC0424EE710C00369791 /* Term+CoreDataProperties.swift in Sources */,
 				1ABADC0224EE710C00369791 /* Literal+Additions.swift in Sources */,
-				E9545EC4273543EB001E8C7F /* UpdateNotificationTest.swift in Sources */,
 				1ABADBFE24EE710B00369791 /* Variable+CoreDataClass.swift in Sources */,
 				1ABADBF924EE710B00369791 /* BlankNode+CoreDataClass.swift in Sources */,
 				E989B353269DDC9E000EE977 /* PolyNavTests.swift in Sources */,
