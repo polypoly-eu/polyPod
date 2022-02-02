@@ -7,8 +7,14 @@ final class PolyPodCore {
     static let instance = PolyPodCore()
     let corePointer: OpaquePointer
     
+    private let containerPath: UnsafePointer<CChar>
+    
     init() {
-        corePointer = new_core(UserDefaults.keyValueStore)
+        // TODO: Handle possible errors
+        let path = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).path
+        containerPath = NSString(string: path).utf8String!
+        
+        corePointer = new_core(.init(tag: .init(0), .init(.init(default_: containerPath))))
     }
 }
 
@@ -35,15 +41,5 @@ extension PolyPodCore {
     
     func handleInAppSeen() {
         handle_in_app_seen(corePointer)
-    }
-}
-
-extension OptionUsize {
-    static func none() -> Self {
-        .init(tag: .init(0), .init())
-    }
-    
-    static func some(_ value: UInt) -> Self {
-        .init(tag: .init(rawValue: 1), .init(.init(some: value)))
     }
 }

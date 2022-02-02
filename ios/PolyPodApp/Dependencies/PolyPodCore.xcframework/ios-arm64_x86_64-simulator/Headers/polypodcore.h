@@ -25,7 +25,24 @@ typedef struct KeyValueStore {
   void (*write_int)(void *context, const char *key, uintptr_t value);
 } KeyValueStore;
 
-struct PolyPodCore *new_core(struct KeyValueStore key_value_store);
+typedef enum OptionKeyValueStore_Tag {
+  Default,
+  Custom,
+} OptionKeyValueStore_Tag;
+
+typedef struct OptionKeyValueStore {
+  OptionKeyValueStore_Tag tag;
+  union {
+    struct {
+      const char *default_;
+    };
+    struct {
+      struct KeyValueStore custom;
+    };
+  };
+} OptionKeyValueStore;
+
+struct PolyPodCore *new_core(struct OptionKeyValueStore kv_store);
 
 void destroy_core(struct PolyPodCore *core);
 

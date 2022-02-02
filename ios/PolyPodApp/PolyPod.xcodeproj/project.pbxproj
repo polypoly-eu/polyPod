@@ -97,11 +97,9 @@
 		904D4A7027905D5B00A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
 		904D4A712790633000A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
 		90F10A9227A98FB4005D68E9 /* PolyPodCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A9127A98FB4005D68E9 /* PolyPodCore.swift */; };
-		90F10A9827AA89E1005D68E9 /* PolyPodCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F10A9727AA89E1005D68E9 /* PolyPodCore.xcframework */; };
-		90F10A9A27AA8A0C005D68E9 /* UserDefaults+KeyValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A9927AA8A0C005D68E9 /* UserDefaults+KeyValueStore.swift */; };
-		90F10A9C27AAA391005D68E9 /* PolyPodCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F10A9727AA89E1005D68E9 /* PolyPodCore.xcframework */; };
 		90F10A9D27AAA397005D68E9 /* PolyPodCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A9127A98FB4005D68E9 /* PolyPodCore.swift */; };
-		90F10A9F27AAA39B005D68E9 /* UserDefaults+KeyValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A9927AA8A0C005D68E9 /* UserDefaults+KeyValueStore.swift */; };
+		90F10AA827AAB22C005D68E9 /* PolyPodCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F10AA727AAB22C005D68E9 /* PolyPodCore.xcframework */; };
+		90F10AA927AAB22C005D68E9 /* PolyPodCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F10AA727AAB22C005D68E9 /* PolyPodCore.xcframework */; };
 		E9040D4726F0A30E00A88593 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4626F0A30E00A88593 /* Info.swift */; };
 		E9040D4926F0B2B400A88593 /* RuntimeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */; };
 		E90F89EA2629822400AD7D96 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89E92629822400AD7D96 /* OnboardingView.swift */; };
@@ -236,8 +234,7 @@
 		901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+PolyIn.swift"; sourceTree = "<group>"; };
 		904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchToMainQueue.swift; sourceTree = "<group>"; };
 		90F10A9127A98FB4005D68E9 /* PolyPodCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyPodCore.swift; sourceTree = "<group>"; };
-		90F10A9727AA89E1005D68E9 /* PolyPodCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = PolyPodCore.xcframework; sourceTree = "<group>"; };
-		90F10A9927AA8A0C005D68E9 /* UserDefaults+KeyValueStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+KeyValueStore.swift"; sourceTree = "<group>"; };
+		90F10AA727AAB22C005D68E9 /* PolyPodCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = PolyPodCore.xcframework; sourceTree = "<group>"; };
 		E9040D4626F0A30E00A88593 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeInfo.swift; sourceTree = "<group>"; };
 		E90F89E92629822400AD7D96 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -286,7 +283,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90F10A9C27AAA391005D68E9 /* PolyPodCore.xcframework in Frameworks */,
+				90F10AA927AAB22C005D68E9 /* PolyPodCore.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,7 +291,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90F10A9827AA89E1005D68E9 /* PolyPodCore.xcframework in Frameworks */,
+				90F10AA827AAB22C005D68E9 /* PolyPodCore.xcframework in Frameworks */,
 				E9BE2909264BBD67003EC8AE /* Zip in Frameworks */,
 				E9BE2906264BBAA0003EC8AE /* MessagePack in Frameworks */,
 			);
@@ -519,7 +516,7 @@
 		906E407127A9297B009015B7 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				90F10A9727AA89E1005D68E9 /* PolyPodCore.xcframework */,
+				90F10AA727AAB22C005D68E9 /* PolyPodCore.xcframework */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
@@ -529,7 +526,6 @@
 			children = (
 				E9545EAD273530ED001E8C7F /* UpdateNotification.swift */,
 				90F10A9127A98FB4005D68E9 /* PolyPodCore.swift */,
-				90F10A9927AA8A0C005D68E9 /* UserDefaults+KeyValueStore.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -810,7 +806,6 @@
 				E9B22043263314DC005E8881 /* LocalizedStringKeyExtensions.swift in Sources */,
 				E9CFFA4C26A0240300F7BE65 /* ColorExtensionsTests.swift in Sources */,
 				E9B22044263314DC005E8881 /* UIColorExtensions.swift in Sources */,
-				90F10A9F27AAA39B005D68E9 /* UserDefaults+KeyValueStore.swift in Sources */,
 				E9B22045263314DC005E8881 /* ColorExtensions.swift in Sources */,
 				901C058C278F34A800BC8364 /* CoreDataStack.swift in Sources */,
 				E9B2203C263314AD005E8881 /* Feature.swift in Sources */,
@@ -933,7 +928,6 @@
 				1AF1178C24C1740D0063EE37 /* Quad+Additions.swift in Sources */,
 				1A4C21C524A5F6A2006CC1FD /* PolyPodModel.xcdatamodeld in Sources */,
 				E924F5C4263BF5F60014834B /* ContentViewHost.swift in Sources */,
-				90F10A9A27AA8A0C005D68E9 /* UserDefaults+KeyValueStore.swift in Sources */,
 				E93EC98C273D65D400E20512 /* Authentication.swift in Sources */,
 				1AF1179624C1A4A80063EE37 /* PolyOut+FS.swift in Sources */,
 				1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */,
