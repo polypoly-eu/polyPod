@@ -65,7 +65,9 @@ const MessengerMauChart = ({ messengers, i18nHeader }) => {
 
     return (
         <div className="messenger-mau-chart">
-            <p>{i18n.t(`${i18nHeader}:details.monthly.active.users`)}</p>
+            <h4 className="legend">
+                {i18n.t(`${i18nHeader}:details.monthly.active.users`)}
+            </h4>
             <LineLegend
                 legend={[
                     {
