@@ -469,26 +469,38 @@ export default {
         dataTypeCorrelation: {
             types: ["dpv:Picture", "dpv:TelephoneNumber", "dpv:Contact"],
             explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. Auch wenn Signal diese Daten nicht nutzt, so sind sie doch z.B. bei der Strafverfolgung potentiell hilfreich.",
+                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone.",
             },
         },
         dataTypeCategories: {
             [parentCategories.individual]: {
                 category: "dpv:Contact",
                 explanation: {
-                    de: "",
+                    de: "Der Kontaktgraph, also die Übersicht über alle Kontakte einer Person kann genutzt werden, um Interessensgruppen, Clubs, etc. zu identifizieren.",
                     en: "",
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Communication",
+                explanation: {
+                    de: "Kommunikationsverhalten sagt viel darüber aus, wer einem wichtig ist. Und damit eben auch, wessen Ansichten man teilt.",
+                    en: "",
+                },
             },
             [parentCategories.technical]: {
                 category: "dpv:TelephoneNumber",
+                explanation: {
+                    de: "Die Telefonnummer ist ein sehr stabiles Datum, mit dem man an vielfältigen Stellen wiedererkannt werden kann.",
+                    en: "",
+                },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:ServiceConsumptionBehaviour",
+                explanation: {
+                    de: "Zu wissen, wie ein Dienst genutzt wird, ist für Firmen immer wichtig. Zusätzlich können so Metadaten entstehen, die von Behörden abgefragt werden könnten. Signal speichert hier aber schon sehr wenig und verhält sich vorbildlich, wenn Behören Datenanfragen stellen.",
+                    en: "",
+                },
             },
             // TODO: dpv:Financial doesn't exist for Signal?
             /*
@@ -500,11 +512,11 @@ export default {
         dataRecipient: {
             name: "Giphy, Inc. (US)",
             companyExplanation: {
-                de: "",
+                de: "Giphy ist eine Firma, die Memes und sogenannte Reaction Gifs anbietet. Signal hat Giphy Emojis und Bilder eingebunden. Damit kann Giphy über Umwege sehen, wer Signal wie häufig nutzt.",
                 en: "",
             },
             industryExplanation: {
-                de: "",
+                de: "Giphy ist eine amerikanische Online-Datenbank und Suchmaschine, mit der Benutzer animierte GIF-Dateien suchen und teilen können. Giphy hat Sitze in New York und Los Angeles, die Gründer sind Jace Cooke und Alex Chung. Am Freitag, den 15. Mai 2020 wurde Giphy von Facebook gekauft. (aus Wikipedia)",
                 en: "",
             },
         },
@@ -513,26 +525,38 @@ export default {
         dataTypeCorrelation: {
             types: ["dpv:Picture", "dpv:TelephoneNumber", "dpv:Contact"],
             explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. Auch wenn Signal diese Daten nicht nutzt, so sind sie doch z.B. bei der Strafverfolgung potentiell hilfreich.",
+                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone.",
             },
         },
         dataTypeCategories: {
             [parentCategories.individual]: {
                 category: "dpv:Contact",
                 explanation: {
-                    de: "",
+                    de: "Der Kontaktgraph, also die Übersicht über alle Kontakte einer Person kann genutzt werden, um Interessensgruppen, Clubs, etc. zu identifizieren.",
                     en: "",
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Communication",
+                explanation: {
+                    de: "Kommunikationsverhalten sagt viel darüber aus, wer einem wichtig ist. Und damit eben auch, wessen Ansichten man teilt.",
+                    en: "",
+                },
             },
             [parentCategories.technical]: {
                 category: "dpv:TelephoneNumber",
+                explanation: {
+                    de: "Die Telefonnummer ist ein sehr stabiles Datum, mit dem man an vielfältigen Stellen wiedererkannt werden kann.",
+                    en: "",
+                },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:ServiceConsumptionBehaviour",
+                explanation: {
+                    de: "Zu wissen, wie ein Dienst genutzt wird, ist für Firmen immer wichtig. Zusätzlich können so Metadaten entstehen, die von Behörden abgefragt werden könnten. Signal speichert hier aber schon sehr wenig und verhält sich vorbildlich, wenn Behören Datenanfragen stellen.",
+                    en: "",
+                },
             },
             // TODO: dpv:Financial doesn't exist for Signal?
             /*
@@ -544,11 +568,11 @@ export default {
         dataRecipient: {
             name: "Giphy, Inc. (US)",
             companyExplanation: {
-                de: "",
+                de: "Giphy ist eine Firma, die Memes und sogenannte Reaction Gifs anbietet. Signal hat Giphy Emojis und Bilder eingebunden. Damit kann Giphy über Umwege sehen, wer Signal wie häufig nutzt.",
                 en: "",
             },
             industryExplanation: {
-                de: "",
+                de: "Giphy ist eine amerikanische Online-Datenbank und Suchmaschine, mit der Benutzer animierte GIF-Dateien suchen und teilen können. Giphy hat Sitze in New York und Los Angeles, die Gründer sind Jace Cooke und Alex Chung. Am Freitag, den 15. Mai 2020 wurde Giphy von Facebook gekauft. (aus Wikipedia)",
                 en: "",
             },
         },
@@ -558,14 +582,14 @@ export default {
             types: ["dpv:Contact", "dpv:EmailAddress", "dpv:Picture"],
             explanation: {
                 de: "",
-                en: "Threema collects very little data and very little correlation plausible",
+                en: "Threema collects very little data and very little correlation plausible. The contact graph, the email address and a picture for every person can be nonetheless a rich source for law enforcement for example.",
             },
         },
         dataTypeCategories: {
             [parentCategories.individual]: {
                 category: "dpv:EmailAddress",
                 explanation: {
-                    de: "",
+                    de: "Wie die Telefonnummer, ist die Emailadresse ein inzwischen sehr stabiles Datum um Menschen im Internet wiederzuerkennen.",
                     en: "",
                 },
             },
@@ -576,17 +600,20 @@ export default {
             */
             [parentCategories.technical]: {
                 category: "dpv:UID",
-            } /*
+                explanation: {
+                    de: "Threema ist selbst für Messenger sehr Datensparsam. An technischen Daten wird nur eine zufällig generierte Userkennung gespeichert - ohne die der Dienst aber auch nicht möglich wäre.",
+                    en: "",
+                } /*
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
             },*/,
-            /*
+                /*
             [parentCategories.financial]: {
                 category: "dpv:Financial",
             },
             */
-        } /* no data sharing
-        dataRecipient: {
+            }, // no data sharing
+            /* dataRecipient: {
             name: "company name (DE)",
             companyExplanation: {
                 de:
@@ -600,21 +627,22 @@ export default {
                 en:
                     "",
             },
-        }, */,
+        }, */
+        },
     },
     "Threema GmbH (CH)": {
         dataTypeCorrelation: {
             types: ["dpv:Contact", "dpv:EmailAddress", "dpv:Picture"],
             explanation: {
                 de: "",
-                en: "Threema collects very little data and very little correlation plausible",
+                en: "Threema collects very little data and very little correlation plausible. The contact graph, the email address and a picture for every person can be nonetheless a rich source for law enforcement for example.",
             },
         },
         dataTypeCategories: {
             [parentCategories.individual]: {
                 category: "dpv:EmailAddress",
                 explanation: {
-                    de: "",
+                    de: "Wie die Telefonnummer, ist die Emailadresse ein inzwischen sehr stabiles Datum um Menschen im Internet wiederzuerkennen.",
                     en: "",
                 },
             },
@@ -625,17 +653,20 @@ export default {
             */
             [parentCategories.technical]: {
                 category: "dpv:UID",
-            } /*
+                explanation: {
+                    de: "Threema ist selbst für Messenger sehr Datensparsam. An technischen Daten wird nur eine zufällig generierte Userkennung gespeichert - ohne die der Dienst aber auch nicht möglich wäre.",
+                    en: "",
+                } /*
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
             },*/,
-            /*
+                /*
             [parentCategories.financial]: {
                 category: "dpv:Financial",
             },
             */
-        } /* no data sharing
-        dataRecipient: {
+            }, // no data sharing
+            /* dataRecipient: {
             name: "company name (DE)",
             companyExplanation: {
                 de:
@@ -649,49 +680,58 @@ export default {
                 en:
                     "",
             },
-        }, */,
+        }, */
+        },
     },
+
     iMessage: {
         dataTypeCorrelation: {
-            types: ["dpv:OfficialID", "dpv:TelephoneNumber", "dpv:Transaction"],
+            types: [
+                "dpv:VoiceCommunicationRecording",
+                "dpv:PhysicalAddress",
+                "dpv:MentalHealth",
+            ],
             explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die sonst aus den einzelnen Datenpunkten allein nicht möglich wären. Apple hat Zugriff auf eine Menge sehr sensibler persönlicher Daten und gibt an, dass sie diese mit Regierungsbehörden in den USA zum Zweck der nationalen Sicherheit teilen – was natürlich Sinn ergibt, aber möglicherweise nicht gut bei politisch aktiven Personen ankommt, die nicht mit all den Dingen einverstanden sind, die die USA im Namen der besagten nationalen Sicherheit tun.",
+                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. Apple does have access to a lot of very sensitive personal data and they state that they share this with Government agencies in the US for the purpose of national security - which of course makes sense, but might not sit well with politically sensitive individuals who don't agree with all the things the US does in the name of said national security.",
             },
         },
         dataTypeCategories: {
             [parentCategories.individual]: {
-                category: "dpv:OfficialID",
+                category: "dpv:Location",
                 explanation: {
-                    de: "Gemäß der Satzung der polypoly-Genossenschaft muss jede Person, die Mitglied wird, die Staatsangehörigkeit eines EU-Mitgliedsstaates besitzen. Zu diesem Zweck fragt polypoly die Mitglieder im Rahmen ihres Antrags nach ihrer Staatsangehörigkeit.",
-                    en: "According to the statutes of the polypoly cooperative, anyone who becomes a member must have the citizenship of an EU member state. For this purpose we ask members their nationality as part of their application.",
+                    de: "Apple verwendet die von Kund:innen-Verhalten gesammelten Daten und wie sie ihre Geräte verwenden, um stetige Produktverbesserungen anzustreben und die Forschung und Entwicklung zukünftiger Produkte und Dienste zu informieren. Dies geschieht auch, wenn Konten speziell für Kinder eingerichtet werden. ",
+                    en: "Apple uses the data it gathers about the behaviour of its customers - how they use their devices - to inform product improvement and the research and development of future products and services. This happens also if accounts are set up specifically for children. ",
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
             },
             [parentCategories.technical]: {
-                category: "dpv:DeviceSoftware",
+                category: "dpv:GPSCoordinate",
+                explanation: {
+                    de: "Apple verwendet die Standortdaten des Geräts, um u.a. die Dienste wie Echtzeit-Verkehr, Karten und Find my Phone bereitzustellen. Wenn ein:e Benutzer:in die Standortdienste einschaltet, können verschiedene Sensoren den Aufenthaltsort eines Geräts bis auf wenige Meter genau bestimmen.In der Vergangenheit führte das iPhone 11 z.B. regelmäßige Standortprüfungen durch, um festzustellen, ob es sich in einem Land befand, in dem die Verwendung einer neuen Ultra-Wide-Band-Datenübertragungstechnologie genehmigt war. Benutzer:innen können diese Funktion und Suche nicht ausstellen, die nur dann automatisch deaktiviert wird, wenn sich das Gerät an einem Ort befindet, wo diese Technologie noch nicht verfügbar ist.",
+                    en: "Apple uses device location data to provide its services like realtime traffic, maps and Find my Phone, among others. If a user turns on location services, various sensors can pinpoint the whereabouts of a device to within a few metres. In the past, the iPhone 11 made regular location checks to determine if it was in a country where the use of a new Ultra Wide Band data transfer technology was approved, something that couldn't be turned off by the user - unless by travelling to a location where it would become automatically disabled.",
+                },
             },
-            [parentCategories.behavioral]: {
-                category: "dpv:BrowsingBehavior",
-            },
-            // TODO: dpv:Financial doesn't exist for polypoly
+            // TODO: We don't have a category to highlight for behavioral
             /*
+            [parentCategories.behavioral]: {
+            },
+            */
             [parentCategories.financial]: {
                 category: "dpv:Financial",
             },
-            */
         },
         dataRecipient: {
-            name: "elopage GmbH (DE)",
+            name: "IBM (US)",
             companyExplanation: {
-                de: "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool.",
-                en: "elopage GmbH, based in Berlin (DE), offers online solutions for own payment pages, the creation of products and upsells in one tool.",
+                de: "IBM ist eines der weltweit führenden Unternehmen – insbesondere für branchenspezifische Lösungen und Dienstleistungen – im IT-, Software- und Hardware-Bereich. Der Unternehmenssitz ist in Armonk (USA).",
+                en: "IBM is one of the world's leading companies - especially for industry-specific solutions and services - in the IT, software and hardware sectors. The company is headquartered in Armonk (USA).",
             },
             industryExplanation: {
-                de: "Persönliche Daten werden weitergegeben, um Zahlungen barrierearm zu ermöglichen und um die gesetzlichen Verpflichtungen zu erfüllen, die polypoly als europaweite Datengenossenschaft hat.",
-                en: "Data is shared in order to make payment possible, and to fulfil the legal obligations that polypoly has as a Europe wide data cooperative.",
+                de: "Apple ist ein Technologieunternehmen, hat aber ein eigenes Spezialgebiet: Endgeräte für Verbraucher:innen. Andere Aspekte des Geschäfts erfordern andere Fachkenntnisse und die IT-Infrastruktur und Back-End-Systeme werden von strategischen Geschäftspartner:innen aus der IT-Branche bereitgestellt.",
+                en: "Apple is a technology company but has its area of speciality - consumer end devices. Other aspects of business require different expertise and IT infrastructure and back-end systems are provided by their IT strategic business partners.",
             },
         },
     },
@@ -751,39 +791,41 @@ export default {
             [parentCategories.individual]: {
                 category: "dpv:Location",
                 explanation: {
-                    de: "",
+                    de: "Ortsinformationen, wer wann wo war sind hochsensibel und könne auf vielfältige Art verwendet werden. Sind in der eigenen Umgebung teure Geschäfte oder nicht, war man beim Arzt oder im Fitness-Studio?",
                     en: "",
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
-                    de: "",
+                    de: "Natürlich muss ein Dienst wissen, in welcher Sprache ich ihn dargestellt haben möchte. Es ist aber eben auch ein Datum, dass mit anderen korreliert werden kann und dass einen zum Beispiel dann auffällig macht, wenn die Sprache mit dem Aufenthaltsort nicht übereinstimmt.",
                     en: "",
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:DeviceApplications",
                 explanation: {
-                    de: "",
+                    de: "Anwendungen, die mit WhatsApp interagieren können sich verraten. Damit weiß Facebook, welche Apps man sonst noch so benutzt. Eine Dating App vielleicht?",
                     en: "",
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:CallLog",
                 explanation: {
-                    de: "",
+                    de: "Wenn WhatsApp weiß, mit wem ich regelmäßig spreche, dann weiß Facebook auch, wer mir nahe steht.",
                     en: "",
                 },
             },
-
+            /* we should skip this
             [parentCategories.financial]: {
                 category: "dpv:PaymentCardNumber",
                 explanation: {
-                    de: "",
-                    en: "",
+                    de:
+                        "",
+                    en:
+                        "",
                 },
-            },
+            }, */
         },
         dataRecipient: {
             name: "Shopify (CA)",
@@ -809,39 +851,41 @@ export default {
             [parentCategories.individual]: {
                 category: "dpv:Location",
                 explanation: {
-                    de: "",
+                    de: "Ortsinformationen, wer wann wo war sind hochsensibel und könne auf vielfältige Art verwendet werden. Sind in der eigenen Umgebung teure Geschäfte oder nicht, war man beim Arzt oder im Fitness-Studio?",
                     en: "",
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Language",
                 explanation: {
-                    de: "",
+                    de: "Natürlich muss ein Dienst wissen, in welcher Sprache ich ihn dargestellt haben möchte. Es ist aber eben auch ein Datum, dass mit anderen korreliert werden kann und dass einen zum Beispiel dann auffällig macht, wenn die Sprache mit dem Aufenthaltsort nicht übereinstimmt.",
                     en: "",
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:DeviceApplications",
                 explanation: {
-                    de: "",
+                    de: "Anwendungen, die mit WhatsApp interagieren können sich verraten. Damit weiß Facebook, welche Apps man sonst noch so benutzt. Eine Dating App vielleicht?",
                     en: "",
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:CallLog",
                 explanation: {
-                    de: "",
+                    de: "Wenn WhatsApp weiß, mit wem ich regelmäßig spreche, dann weiß Facebook auch, wer mir nahe steht.",
                     en: "",
                 },
             },
-
+            /* we should skip this
             [parentCategories.financial]: {
                 category: "dpv:PaymentCardNumber",
                 explanation: {
-                    de: "",
-                    en: "",
+                    de:
+                        "",
+                    en:
+                        "",
                 },
-            },
+            }, */
         },
         dataRecipient: {
             name: "Shopify (CA)",
@@ -900,6 +944,199 @@ export default {
             industryExplanation: {
                 de: "Der berüchtigte Datenskandal von Cambridge Analytica wurde durch eine Quiz-App ermöglicht, die angeblich Informationen von Facebook-Nutzenden zu Forschungszwecken sammelte und dann für die Durchführung fragwürdiger Wahlkampagnen verkaufte. Die Auswirkungen dieses Skandals trugen maßgeblich zur Einführung der derzeitigen europäischen GDPR-Richtlinien bei.",
                 en: "The infamous Cambridge Analytica data scandal was made possible using a personality quiz app that was supposedly gathering information from Facebook users for research purposes. The fallout from this has contributed significantly to the introduction of the GDPR framework we now enjoy.",
+            },
+        },
+    },
+    TikTok: {
+        dataTypeCorrelation: {
+            types: ["dpv:Age", "dpv:Interest", "dpv:Picture"],
+            explanation: {
+                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die sonst aus den einzelnen Datenpunkten allein nicht möglich wären. TikTok merkt sich alle viralen Videos, die die Nutzer:innen am häufigsten ansehen, und nutzt ein immer tiefer gehendes Wissen über individuelle Präferenzen, die Unterhaltungsauswahl und Trends, um die Firmen, denen TikTok Werbeplatzierungen, verkauft, über das Verhalten der App-Nutzenden, zu informieren.",
+                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. TikTok notes all the viral videos users view the most and harnesses an ever deepening knowledge about tastes, entertainment choices and trends to inform the advertising placements it sells to its customers.",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.individual]: {
+                category: "dpv:Age",
+                explanation: {
+                    de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
+                    en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+                },
+            },
+            [parentCategories.social]: {
+                category: "dpv:Interest",
+                explanation: {
+                    de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
+                    en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+                },
+            },
+            // TODO: Not in there
+            /*
+            [parentCategories.technical]: {
+                category: "dpv:BrowserFingerprint",
+            },
+            */
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+            },
+            [parentCategories.financial]: {
+                category: "dpv:Transactional",
+            },
+        },
+        dataRecipient: {
+            name: "ByteDance Ltd. (KY)",
+            companyExplanation: {
+                de: "ByteDance ist der TikTok-Mutterkonzern – mit dem Hauptquartier in Peking (China). Wie viele chinesische Unternehmen, gehört auch das interne ByteDance-Firmenkomitee der kommunistischen Partei Chinas an, was u.a. zu inhaltlichen Zensuren auf TikTok führt.",
+                en: "ByteDance is the company behind TikTok. Like many Chinese companies - ByteDance's internal corporate committee belongs to the Chinese Communist Party, which leads to content censorship on TikTok, among other things.",
+            },
+            industryExplanation: {
+                de: "Wie viele Firmen, ist auch TikTok ein zusammenhängendes Netzwerk von Unternehmen, die u.a. aus steuerrechtlichen Gründen über verschiedene Länder verteilt sind. Der Datenaustausch zwischen diesen verbundenen Unternehmen ist gängige Praxis und findet regelmäßig statt.",
+                en: "Like many companies, TikTok is an interconnected web of companies spread across different countries. Data sharing between these related companies is standard practice and takes place routinely.",
+            },
+        },
+    },
+    "TikTok Technology Limited (IE)": {
+        dataTypeCorrelation: {
+            types: ["dpv:Age", "dpv:Interest", "dpv:Picture"],
+            explanation: {
+                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die sonst aus den einzelnen Datenpunkten allein nicht möglich wären. TikTok merkt sich alle viralen Videos, die die Nutzer:innen am häufigsten ansehen, und nutzt ein immer tiefer gehendes Wissen über individuelle Präferenzen, die Unterhaltungsauswahl und Trends, um die Firmen, denen TikTok Werbeplatzierungen, verkauft, über das Verhalten der App-Nutzenden, zu informieren.",
+                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. TikTok notes all the viral videos users view the most and harnesses an ever deepening knowledge about tastes, entertainment choices and trends to inform the advertising placements it sells to its customers.",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.individual]: {
+                category: "dpv:Age",
+                explanation: {
+                    de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
+                    en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+                },
+            },
+            [parentCategories.social]: {
+                category: "dpv:Interest",
+                explanation: {
+                    de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
+                    en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+                },
+            },
+            // TODO: Not in there
+            /*
+            [parentCategories.technical]: {
+                category: "dpv:BrowserFingerprint",
+            },
+            */
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+            },
+            [parentCategories.financial]: {
+                category: "dpv:Transactional",
+            },
+        },
+        dataRecipient: {
+            name: "ByteDance Ltd. (KY)",
+            companyExplanation: {
+                de: "ByteDance ist der TikTok-Mutterkonzern – mit dem Hauptquartier in Peking (China). Wie viele chinesische Unternehmen, gehört auch das interne ByteDance-Firmenkomitee der kommunistischen Partei Chinas an, was u.a. zu inhaltlichen Zensuren auf TikTok führt.",
+                en: "ByteDance is the company behind TikTok. Like many Chinese companies - ByteDance's internal corporate committee belongs to the Chinese Communist Party, which leads to content censorship on TikTok, among other things.",
+            },
+            industryExplanation: {
+                de: "Wie viele Firmen, ist auch TikTok ein zusammenhängendes Netzwerk von Unternehmen, die u.a. aus steuerrechtlichen Gründen über verschiedene Länder verteilt sind. Der Datenaustausch zwischen diesen verbundenen Unternehmen ist gängige Praxis und findet regelmäßig statt.",
+                en: "Like many companies, TikTok is an interconnected web of companies spread across different countries. Data sharing between these related companies is standard practice and takes place routinely.",
+            },
+        },
+    },
+    "TikTok Information Technologies UK Limited (GB)": {
+        dataTypeCorrelation: {
+            types: ["dpv:Age", "dpv:Interest", "dpv:Picture"],
+            explanation: {
+                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die sonst aus den einzelnen Datenpunkten allein nicht möglich wären. TikTok merkt sich alle viralen Videos, die die Nutzer:innen am häufigsten ansehen, und nutzt ein immer tiefer gehendes Wissen über individuelle Präferenzen, die Unterhaltungsauswahl und Trends, um die Firmen, denen TikTok Werbeplatzierungen, verkauft, über das Verhalten der App-Nutzenden, zu informieren.",
+                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. TikTok notes all the viral videos users view the most and harnesses an ever deepening knowledge about tastes, entertainment choices and trends to inform the advertising placements it sells to its customers.",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.individual]: {
+                category: "dpv:Age",
+                explanation: {
+                    de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
+                    en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+                },
+            },
+            [parentCategories.social]: {
+                category: "dpv:Interest",
+                explanation: {
+                    de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
+                    en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+                },
+            },
+            // TODO: Not in there
+            /*
+            [parentCategories.technical]: {
+                category: "dpv:BrowserFingerprint",
+            },
+            */
+            [parentCategories.behavioral]: {
+                category: "dpv:BrowsingBehavior",
+            },
+            [parentCategories.financial]: {
+                category: "dpv:Transactional",
+            },
+        },
+        dataRecipient: {
+            name: "ByteDance Ltd. (KY)",
+            companyExplanation: {
+                de: "ByteDance ist der TikTok-Mutterkonzern – mit dem Hauptquartier in Peking (China). Wie viele chinesische Unternehmen, gehört auch das interne ByteDance-Firmenkomitee der kommunistischen Partei Chinas an, was u.a. zu inhaltlichen Zensuren auf TikTok führt.",
+                en: "ByteDance is the company behind TikTok. Like many Chinese companies - ByteDance's internal corporate committee belongs to the Chinese Communist Party, which leads to content censorship on TikTok, among other things.",
+            },
+            industryExplanation: {
+                de: "Wie viele Firmen, ist auch TikTok ein zusammenhängendes Netzwerk von Unternehmen, die u.a. aus steuerrechtlichen Gründen über verschiedene Länder verteilt sind. Der Datenaustausch zwischen diesen verbundenen Unternehmen ist gängige Praxis und findet regelmäßig statt.",
+                en: "Like many companies, TikTok is an interconnected web of companies spread across different countries. Data sharing between these related companies is standard practice and takes place routinely.",
+            },
+        },
+    },
+
+    "Telegram Messenger Inc (VG)": {
+        dataTypeCorrelation: {
+            types: [
+                "dpv:SocialMediaCommunication",
+                "dpv:TelephoneNumber",
+                "dpv:Contact",
+            ],
+            explanation: {
+                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
+                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+            },
+        },
+        dataTypeCategories: {
+            [parentCategories.individual]: {
+                category: "dpv:Picture",
+                explanation: {
+                    de: "",
+                    en: "",
+                },
+            },
+            [parentCategories.social]: {
+                category: "dpv:Contact",
+            },
+            [parentCategories.technical]: {
+                category: "dpv:IPAddress",
+            },
+            [parentCategories.behavioral]: {
+                category: "dpv:ServiceConsumptionBehavior",
+            },
+            // TODO: dpv:Financial doesn't exist for telegram
+            /*
+            [parentCategories.financial]: {
+                category: "dpv:Financial",
+            },
+            */
+        },
+        dataRecipient: {
+            name: "Telegram (AE)",
+            companyExplanation: {
+                de: "",
+                en: "",
+            },
+            industryExplanation: {
+                de: "",
+                en: "",
             },
         },
     },
@@ -981,181 +1218,6 @@ export default {
         },
         dataRecipient: {
             name: "Baidu Inc. (CN)",
-            companyExplanation: {
-                de: "",
-                en: "",
-            },
-            industryExplanation: {
-                de: "",
-                en: "",
-            },
-        },
-    },
-    TikTok: {
-        dataTypeCorrelation: {
-            types: ["dpv:Interest", "dpv:EmailAddress", "dpv:GPSCoordinate"],
-            explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. ",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. ",
-            },
-        },
-        dataTypeCategories: {
-            [parentCategories.individual]: {
-                category: "dpv:Preference",
-                explanation: {
-                    de: "",
-                    en: "",
-                },
-            },
-            [parentCategories.social]: {
-                category: "dpv:VoiceCommunicationRecording",
-            },
-            [parentCategories.technical]: {
-                category: "dpv:GPSCoordinate",
-            },
-            [parentCategories.behavioral]: {
-                category: "dpv:Purchase",
-            },
-
-            [parentCategories.financial]: {
-                category: "dpv:PaymentCard",
-            },
-        },
-        dataRecipient: {
-            name: "The Kantar Group Limited (GB)",
-            companyExplanation: {
-                de: "",
-                en: "",
-            },
-            industryExplanation: {
-                de: "",
-                en: "",
-            },
-        },
-    },
-    "TikTok Technology Limited (IE)": {
-        dataTypeCorrelation: {
-            types: ["dpv:Interest", "dpv:EmailAddress", "dpv:GPSCoordinate"],
-            explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. ",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. ",
-            },
-        },
-        dataTypeCategories: {
-            [parentCategories.individual]: {
-                category: "dpv:Preference",
-                explanation: {
-                    de: "",
-                    en: "",
-                },
-            },
-            [parentCategories.social]: {
-                category: "dpv:VoiceCommunicationRecording",
-            },
-            [parentCategories.technical]: {
-                category: "dpv:GPSCoordinate",
-            },
-            [parentCategories.behavioral]: {
-                category: "dpv:Purchase",
-            },
-
-            [parentCategories.financial]: {
-                category: "dpv:PaymentCard",
-            },
-        },
-        dataRecipient: {
-            name: "The Kantar Group Limited (GB)",
-            companyExplanation: {
-                de: "",
-                en: "",
-            },
-            industryExplanation: {
-                de: "",
-                en: "",
-            },
-        },
-    },
-
-    "TikTok Information Technologies UK Limited (GB)": {
-        dataTypeCorrelation: {
-            types: ["dpv:Interest", "dpv:EmailAddress", "dpv:GPSCoordinate"],
-            explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. ",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. ",
-            },
-        },
-        dataTypeCategories: {
-            [parentCategories.individual]: {
-                category: "dpv:Preference",
-                explanation: {
-                    de: "",
-                    en: "",
-                },
-            },
-            [parentCategories.social]: {
-                category: "dpv:VoiceCommunicationRecording",
-            },
-            [parentCategories.technical]: {
-                category: "dpv:GPSCoordinate",
-            },
-            [parentCategories.behavioral]: {
-                category: "dpv:Purchase",
-            },
-
-            [parentCategories.financial]: {
-                category: "dpv:PaymentCard",
-            },
-        },
-        dataRecipient: {
-            name: "The Kantar Group Limited (GB)",
-            companyExplanation: {
-                de: "",
-                en: "",
-            },
-            industryExplanation: {
-                de: "",
-                en: "",
-            },
-        },
-    },
-    "Telegram Messenger Inc (VG)": {
-        dataTypeCorrelation: {
-            types: [
-                "dpv:SocialMediaCommunication",
-                "dpv:TelephoneNumber",
-                "dpv:Contact",
-            ],
-            explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
-            },
-        },
-        dataTypeCategories: {
-            [parentCategories.individual]: {
-                category: "dpv:Picture",
-                explanation: {
-                    de: "",
-                    en: "",
-                },
-            },
-            [parentCategories.social]: {
-                category: "dpv:Contact",
-            },
-            [parentCategories.technical]: {
-                category: "dpv:IPAddress",
-            },
-            [parentCategories.behavioral]: {
-                category: "dpv:ServiceConsumptionBehavior",
-            },
-            // TODO: dpv:Financial doesn't exist for telegram
-            /*
-            [parentCategories.financial]: {
-                category: "dpv:Financial",
-            },
-            */
-        },
-        dataRecipient: {
-            name: "Telegram (AE)",
             companyExplanation: {
                 de: "",
                 en: "",
