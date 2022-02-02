@@ -109,7 +109,12 @@ const EntityDetails = () => {
                                 </div>
                             )}
                             <DataRegionsLegend />
-                            {!entity?.annualRevenues ? (
+                            <SourceInfoButton
+                                source={i18n.t("common:source.polyPedia")}
+                                infoScreen="data-region-info"
+                                className="info-extra-margin"
+                            />
+                            {annualRevenuesFilteredByYear.length === 0 ? (
                                 <></>
                             ) : (
                                 <div className="revenue">
@@ -125,6 +130,13 @@ const EntityDetails = () => {
 
                                     <CompanyRevenueChart
                                         annualRevenues={entity.annualRevenues}
+                                    />
+                                    <SourceInfoButton
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                        infoScreen="company-revenue-info"
+                                        className="info-extra-margin"
                                     />
                                 </div>
                             )}
