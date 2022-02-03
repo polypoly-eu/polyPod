@@ -227,7 +227,7 @@ export const ExplorerProvider = ({ children }) => {
                   back: handleBack,
               };
         pod.polyNav.setActiveActions(
-            currentPath == "/main" ? ["info", "search"] : ["back"]
+            currentPath == "/main" && !popUp ? ["info", "search"] : ["back"]
         );
     }
 
