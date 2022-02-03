@@ -14,7 +14,6 @@ import popUps from "../popUps";
 import polyPediaCompanies from "../data/companies.json";
 import globalData from "../data/global.json";
 import polyPediaProducts from "../data/products.json";
-import InfoScreen from "../popUps/infoPopUps/info/info.jsx";
 
 export const ExplorerContext = React.createContext();
 
