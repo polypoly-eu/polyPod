@@ -98,15 +98,18 @@ function positionNodeLabel({ chart, labelParts }) {
   const chartClientRect = getBCR(chart);
   const rectClientRect = getBCR(labelParts.rect);
 
-  if (Math.floor(chartClientRect.top) == Math.floor(rectClientRect.top)) {
+  const checkChartEdgeCollision = (side) =>
+    Math.floor(chartClientRect[side]) == Math.floor(rectClientRect[side]);
+
+  if (checkChartEdgeCollision("top")) {
     positionNodeLabelOnY({ ...labelParts, side: "bottom" });
   }
 
-  if (Math.floor(chartClientRect.right) == Math.floor(rectClientRect.right)) {
+  if (checkChartEdgeCollision("right")) {
     positionNodeLabelOnX({ ...labelParts, side: "left" });
   }
 
-  if (Math.floor(chartClientRect.left) == Math.floor(rectClientRect.left)) {
+  if (checkChartEdgeCollision("left")) {
     positionNodeLabelOnX({ ...labelParts, side: "right" });
   }
 }
