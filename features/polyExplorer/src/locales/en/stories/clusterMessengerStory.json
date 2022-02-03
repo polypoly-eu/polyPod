@@ -40,6 +40,8 @@
     "companies.p.2": "The industries in which data-receiving companies operate give us a hint why our data is gathered. Some industries are data-hungrier than others.",
     "data.regions.p.1": "The region in which a data receiving company operates is crucial for the legalities of data protection. Some store their data in the GDPR region.",
     "data.regions.p.2": "Some also share to regions with weaker legal situations and less data privacy protection.",
+    "data.regions.group.1": "Messengers",
+    "data.regions.group.2": "Data Regions",
     "tips.section": "Tips",
     "tips.p.1": "The more you learn and understand the relevance of data and data privacy, the more you will feel an urge to act. Here are a few tips:",
     "tips.bullet.1": "When you are concerned about data privacy, you should look very closely at who the company behind the app is, and how they might use your data.",

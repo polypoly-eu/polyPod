@@ -13,5 +13,7 @@
     "companies.p.2": "Die Branchen, in denen datenempfangende Unternehmen tätig sind, geben uns einen Hinweis darauf, warum unsere Daten gesammelt werden. Einige Branchen sind datenhungriger als andere.",
     "data.regions.p.1": "Die Region, in der ein datenempfangendes Unternehmen tätig ist, ist entscheidend für die Rechtmäßigkeit des Datenschutzes. Einige speichern ihre Daten in der GDPR-Region.",
     "data.regions.p.2": "Manche gehen auch in Regionen mit schwächerer Rechtslage und geringerem Datenschutz.",
+    "data.regions.group.1": "Big 6",
+    "data.regions.group.2": "Daten Regionen",
     "explore.further.p.1": "Chose one company below if you are interested in in-depth information - or continue discovering other topics."
 }

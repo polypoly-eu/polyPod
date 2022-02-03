@@ -13,5 +13,7 @@
     "companies.p.2": "The industries in which data-receiving companies operate give us a hint why our data is gathered. Some industries are data-hungrier than others.",
     "data.regions.p.1": "The region in which a data receiving company operates is crucial for the legalities of data protection. Some store their data in the GDPR region.",
     "data.regions.p.2": "Some also share to regions with weaker legal situations and less data privacy protection.",
+    "data.regions.group.1": "Big 6",
+    "data.regions.group.2": "Data Regions",
     "explore.further.p.1": "Chose one company below if you are interested in in-depth information - or continue discovering other topics."
 }
