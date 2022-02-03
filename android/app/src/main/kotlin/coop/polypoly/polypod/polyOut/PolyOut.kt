@@ -97,13 +97,13 @@ open class PolyOut(
         return result
     }
 
-    private fun determineSize(file: File): Long {
-        if (!file.isDirectory) return file.length()
+    private fun determineSize(fileOrDirectory: File): Long {
+        if (!fileOrDirectory.isDirectory) return fileOrDirectory.length()
         // We previously used FileUtils.sizeOfDirectory here, which had some
         // special cases for symbolic links and negative file sizes. It did,
         // however, use java.nio.file.Path.toPath(), which does not exist
         // on API 24, so we replaced it with this simpler implementation.
-        val files = file.listFiles() ?: return 0L
+        val files = fileOrDirectory.listFiles() ?: return 0L
         return files.sumOf { determineSize(it) }
     }
 
