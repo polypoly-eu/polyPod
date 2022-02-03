@@ -20,8 +20,96 @@ const defaultOnClickFunction = () => {};
 const nodeLabelBoxPaddingX = 4,
   nodeLabelBoxPaddingY = 1,
   nodeLabelBoxBorderRadius = 2,
-  defaultNodeLabelBoxColor = "white",
-  defaultNodeLabelBoxOpacity = 0.7;
+  nodeLabelBoxColor = "white",
+  nodeLabelBoxOpacity = 0.7,
+  nodeLabelLineMargin = 2,
+  nodeLabelLineStrokeWidth = 2;
+
+const getBCR = (selection) => selection.node().getBoundingClientRect();
+
+function positionNodeLabelOnX({ text, rect, line, side = "right" }) {
+  const textClientRect = getBCR(text);
+  const factor = side == "right" ? 1 : -1;
+  text &&
+    text
+      .attr("x", (d) => (d.r + labelMargin) * factor)
+      .attr("y", textClientRect.height / 4)
+      .attr("text-anchor", side == "right" ? "start" : "end");
+
+  text &&
+    text.each((_, i, nodes) => {
+      const bBox = nodes[i].getBBox();
+      rect
+        .attr("x", bBox.x - nodeLabelBoxPaddingX)
+        .attr("y", bBox.y - nodeLabelBoxPaddingY);
+    });
+
+  line &&
+    line
+      .attr("y1", 0)
+      .attr("y2", 0)
+      .attr("x1", (d) => (d.r + nodeLabelLineMargin) * factor)
+      .attr(
+        "x2",
+        (d) =>
+          (d.r + labelMargin - nodeLabelLineMargin - nodeLabelBoxPaddingX) *
+          factor
+      );
+}
+
+function positionNodeLabelOnY({ text, rect, line, side = "top" }) {
+  const textClientRect = getBCR(text);
+  const isTop = side == "top";
+  const factor = isTop ? -1 : 1;
+  text &&
+    text
+      .attr("x", 0)
+      .attr(
+        "y",
+        (d) =>
+          (d.r + labelMargin + (!isTop && textClientRect.height / 2)) * factor
+      )
+      .attr("text-anchor", "middle");
+
+  text &&
+    text.each((_, i, nodes) => {
+      const bBox = nodes[i].getBBox();
+      rect
+        .attr("x", bBox.x - nodeLabelBoxPaddingX)
+        .attr("y", bBox.y - nodeLabelBoxPaddingY);
+    });
+
+  line &&
+    line
+      .attr("x1", 0)
+      .attr("x2", 0)
+      .attr("y1", (d) => (d.r + nodeLabelLineMargin) * factor)
+      .attr(
+        "y2",
+        (d) =>
+          (d.r + labelMargin - nodeLabelLineMargin - nodeLabelBoxPaddingX) *
+          factor
+      );
+}
+
+function positionNodeLabel({ chart, labelParts }) {
+  positionNodeLabelOnY({ ...labelParts, side: "top" });
+
+  const chartClientRect = getBCR(chart);
+  const rectClientRect = getBCR(labelParts.rect);
+
+  if (Math.floor(chartClientRect.top) == Math.floor(rectClientRect.top)) {
+    positionNodeLabelOnY({ ...labelParts, side: "bottom" });
+  }
+
+  if (Math.floor(chartClientRect.right) == Math.floor(rectClientRect.right)) {
+    positionNodeLabelOnX({ ...labelParts, side: "left" });
+  }
+
+  if (Math.floor(chartClientRect.left) == Math.floor(rectClientRect.left)) {
+    positionNodeLabelOnX({ ...labelParts, side: "right" });
+  }
+}
 
 /**
  * Visualizes data as a cluster of bubbles where the value of the bubble is represented as the radius.
@@ -188,11 +276,9 @@ export class BubbleCluster extends Chart {
           .select(this)
           .append("g")
           .attr("class", "label-group");
+
         const text = labelGroup
           .append("text")
-          .attr("x", 0)
-          .attr("y", (d) => -d.r - labelMargin)
-          .attr("text-anchor", "middle")
           .attr("fill", this._textColor)
           .text(label);
 
@@ -200,12 +286,10 @@ export class BubbleCluster extends Chart {
           const bBox = nodes[i].getBBox();
           labelGroup
             .append("rect")
-            .attr("x", bBox.x - nodeLabelBoxPaddingX)
-            .attr("y", bBox.y - nodeLabelBoxPaddingY)
             .attr("width", bBox.width + nodeLabelBoxPaddingX * 2)
             .attr("height", bBox.height + nodeLabelBoxPaddingY * 2)
-            .attr("fill", defaultNodeLabelBoxColor)
-            .attr("opacity", defaultNodeLabelBoxOpacity)
+            .attr("fill", nodeLabelBoxColor)
+            .attr("opacity", nodeLabelBoxOpacity)
             .attr("rx", nodeLabelBoxBorderRadius);
         });
 
@@ -213,72 +297,12 @@ export class BubbleCluster extends Chart {
 
         const line = labelGroup
           .append("line")
-          .attr("x1", 0)
-          .attr("x2", 0)
-          .attr("y1", (d) => -d.r - 2)
-          .attr("y2", (d) => -d.r - labelMargin + 7)
           .attr("stroke", color)
-          .attr("stroke-width", 2);
+          .attr("stroke-width", nodeLabelLineStrokeWidth);
 
-        const chartClientRect = chart.node().getBoundingClientRect();
-        const rectClientRect = rect.node().getBoundingClientRect();
+        const labelParts = { text, rect, line };
 
-        if (chartClientRect.top == rectClientRect.top) {
-          text.attr("y", (d) => d.r + labelMargin + 10);
-
-          text.each((_, i, nodes) => {
-            const bBox = nodes[i].getBBox();
-            rect.attr("y", bBox.y - nodeLabelBoxPaddingY);
-          });
-
-          line
-            .attr("y1", (d) => d.r + 2)
-            .attr("y2", (d) => d.r + labelMargin - 7);
-        }
-
-        if (
-          Math.floor(chartClientRect.right) == Math.floor(rectClientRect.right)
-        ) {
-          text
-            .attr("x", (d) => -d.r - labelMargin)
-            .attr("y", 4)
-            .attr("text-anchor", "end");
-
-          text.each((_, i, nodes) => {
-            const bBox = nodes[i].getBBox();
-            rect
-              .attr("x", bBox.x - nodeLabelBoxPaddingX)
-              .attr("y", bBox.y - nodeLabelBoxPaddingY);
-          });
-
-          line
-            .attr("y1", 0)
-            .attr("y2", 0)
-            .attr("x1", (d) => -d.r - 2)
-            .attr("x2", (d) => -d.r - labelMargin + 7);
-        }
-
-        if (
-          Math.floor(chartClientRect.left) == Math.floor(rectClientRect.left)
-        ) {
-          text
-            .attr("x", (d) => d.r + labelMargin)
-            .attr("y", 4)
-            .attr("text-anchor", "start");
-
-          text.each((_, i, nodes) => {
-            const bBox = nodes[i].getBBox();
-            rect
-              .attr("x", bBox.x - nodeLabelBoxPaddingX)
-              .attr("y", bBox.y - nodeLabelBoxPaddingY);
-          });
-
-          line
-            .attr("y1", 0)
-            .attr("y2", 0)
-            .attr("x1", (d) => d.r + 2)
-            .attr("x2", (d) => d.r + labelMargin - 7);
-        }
+        positionNodeLabel({ chart, labelParts });
 
         text.raise();
         d3.select(this).raise();
