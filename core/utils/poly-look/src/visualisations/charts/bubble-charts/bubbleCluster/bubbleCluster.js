@@ -7,8 +7,9 @@ const labelMargin = 20;
 const smallBubblesRadius = 20;
 const bigBubblesRadius = 50;
 const bubblePadding = 3;
-const bigBubblesFont = "20px";
-const mediumBubblesFont = "16px";
+const bigBubblesFontSize = "20px";
+const mediumBubblesFontSize = "16px";
+const smallBubblesFontSize = "10px";
 const defaultBubbleColor = "blue";
 const defaultStrokeColor = "#f7fafc";
 const defaultTextColor = "white";
@@ -113,6 +114,12 @@ function positionNodeLabel({ chart, labelParts }) {
     positionNodeLabelOnX({ ...labelParts, side: "right" });
   }
 }
+
+const bubbleFontSize = (d) => {
+  if (d.r < smallBubblesRadius) return smallBubblesFontSize;
+  if (d.r > bigBubblesRadius) return bigBubblesFontSize;
+  return mediumBubblesFontSize;
+};
 
 /**
  * Visualizes data as a cluster of bubbles where the value of the bubble is represented as the radius.
@@ -259,9 +266,7 @@ export class BubbleCluster extends Chart {
       .attr("text-anchor", "middle")
       .attr("y", ".3em")
       .attr("fill", this._textColor)
-      .style("font-size", (d) => {
-        return d.r > bigBubblesRadius ? bigBubblesFont : mediumBubblesFont;
-      })
+      .style("font-size", bubbleFontSize)
       .style("font-family", "Jost Medium")
       .style("font-weight", "500")
       .attr("fill", this._textColor)
@@ -313,20 +318,12 @@ export class BubbleCluster extends Chart {
     });
   }
 
-  _updateLabels(nodes) {
-    const labelGroups = nodes.selectAll(".label-group");
-
-    labelGroups.selectAll("text").text(this._label);
-  }
-
   _updateBubbleTexts(nodes) {
     nodes
       .selectAll(".bubble-text")
       .text(this._text)
       .attr("fill", this._textColor)
-      .style("font-size", (d) => {
-        return d.r > bigBubblesRadius ? bigBubblesFont : mediumBubblesFont;
-      });
+      .style("font-size", bubbleFontSize);
   }
 
   render() {
