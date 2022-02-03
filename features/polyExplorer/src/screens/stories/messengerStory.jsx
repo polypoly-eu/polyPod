@@ -277,6 +277,12 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:details.p.1`)}
             </p>
+            <h2 className="cluster-story-title">
+                {i18n.t(`${i18nHeader}:details.is.safe.title`)}
+            </h2>
+            <p>{i18n.t(`${i18nHeader}:details.is.safe.p1`)}</p>
+            <p>{i18n.t(`${i18nHeader}:details.is.safe.p2`)}</p>
+            <p>{i18n.t(`${i18nHeader}:details.is.safe.p3`)}</p>
             <MessengerMauChart
                 messengers={messengers}
                 i18nHeader={i18nHeader}
@@ -285,6 +291,11 @@ const MessengerStory = () => {
                 infoScreen="details-line-chart-info"
                 source={i18n.t("common:source.polyPedia")}
             />
+            <h2 className="cluster-story-title">
+                {i18n.t(`${i18nHeader}:details.what.deal.title`)}
+            </h2>
+            <p>{i18n.t(`${i18nHeader}:details.what.deal.p1`)}</p>
+            <p>{i18n.t(`${i18nHeader}:details.what.deal.p2`)}</p>
             <MessengerTreeMap
                 messengers={Object.values(products)}
                 i18nHeader={i18nHeader}
@@ -293,6 +304,10 @@ const MessengerStory = () => {
                 infoScreen="details-treemap-info"
                 source={i18n.t("common:source.polyPedia")}
             />
+            <h2 className="cluster-story-title">
+                {i18n.t(`${i18nHeader}:details.what.data.title`)}
+            </h2>
+            <p>{i18n.t(`${i18nHeader}:details.what.data.p1`)}</p>
             <SectionTitle
                 title={i18n.t(`${i18nHeader}:data.types.title`)}
             ></SectionTitle>

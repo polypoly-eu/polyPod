@@ -34,7 +34,9 @@ const MessengerTreeMap = ({ messengers, i18nHeader }) => {
 
     return (
         <div className="messenger-tree-map">
-            <p>{i18n.t(`${i18nHeader}:details.monthly.active.users.21`)}</p>
+            <h4 className="legend">
+                {i18n.t(`${i18nHeader}:details.monthly.active.users.21`)}
+            </h4>
             <BlockLegend
                 legend={[
                     {
