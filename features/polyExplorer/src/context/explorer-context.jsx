@@ -222,12 +222,12 @@ export const ExplorerProvider = ({ children }) => {
                   search: () => {},
               }
             : {
-                  info: () => history.push("/info"),
+                  info: () => createPopUp({ type: "pod-info" }),
                   search: () => history.push("/search"),
                   back: handleBack,
               };
         pod.polyNav.setActiveActions(
-            currentPath == "/main" ? ["info", "search"] : ["back"]
+            currentPath == "/main" && !popUp ? ["info", "search"] : ["back"]
         );
     }
 
