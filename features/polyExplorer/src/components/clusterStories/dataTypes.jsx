@@ -101,7 +101,7 @@ const DataTypes = ({ entities, i18nHeader }) => {
                 })}
             </Tabs>
             <SourceInfoButton
-                infoScreenRoute={selectedDataTypesTab}
+                infoScreen={selectedDataTypesTab}
                 source={i18n.t("common:source.polyPedia")}
             />
         </>
