@@ -116,21 +116,12 @@ function Industries({ entities }) {
 }
 
 export default function ReceivingCompanies({ entities }) {
-    const [selectedRecievingCompaniesTab, setSelectedRecievingCompaniesTab] =
+    const [selectedReceivingEntitiesTab, setSelectedReceivingEntitiesTab] =
         useState("companies-bar-chart-info");
     const switchCompany = (tabId) => {
-        switch (tabId) {
-            case "companies":
-                setSelectedRecievingCompaniesTab("companies-bar-chart-info");
-                break;
-            case "industries":
-                setSelectedRecievingCompaniesTab(
-                    "industries-packed-circle-info"
-                );
-                break;
-            default:
-                setSelectedRecievingCompaniesTab("companies-bar-chart-info");
-        }
+        if (tabId === "industries")
+            setSelectedReceivingEntitiesTab("industries-packed-circle-info");
+        else setSelectedReceivingEntitiesTab("companies-bar-chart-info");
     };
     return (
         <div className="receiving-companies">
@@ -153,7 +144,7 @@ export default function ReceivingCompanies({ entities }) {
                 </Tab>
             </Tabs>
             <SourceInfoButton
-                infoScreen={selectedRecievingCompaniesTab}
+                infoScreen={selectedReceivingEntitiesTab}
                 source={i18n.t("common:source.polyPedia")}
             />
         </div>
