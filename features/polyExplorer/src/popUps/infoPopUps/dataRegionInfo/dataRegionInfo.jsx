@@ -1,7 +1,7 @@
 import React from "react";
 
 import i18n from "../../../i18n.js";
-import BaseInfoPopUp from "../../../components/baseInfoPopUp/baseInfoPopUp.jsx";
+import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
 import SectionTitle from "../../../components/clusterStories/sectionTitle.jsx";
 
 import "./dataRegionInfo.css";

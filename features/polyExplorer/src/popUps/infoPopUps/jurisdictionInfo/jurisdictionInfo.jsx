@@ -2,7 +2,7 @@ import React from "react";
 
 import i18n from "../../../i18n.js";
 import "./jurisdictionInfo.css";
-import BaseInfoPopUp from "../../../components/baseInfoPopUp/baseInfoPopUp.jsx";
+import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 
 const JurisdictionInfo = ({ onClose }) => {

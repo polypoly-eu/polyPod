@@ -10,6 +10,7 @@
     background-color: var(--color-background-light);
     color: var(--color-text-dark);
     z-index: 100;
+    overflow: hidden scroll;
 }
 
 .stories-info .info-title {

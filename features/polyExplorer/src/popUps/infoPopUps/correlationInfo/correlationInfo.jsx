@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import i18n from "../../../i18n.js";
 import highlights from "../../../data/highlights.js";
-import BaseInfoPopUp from "../../../components/baseInfoPopUp/baseInfoPopUp.jsx";
+import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 import { ExplorerContext } from "../../../context/explorer-context.jsx";
 

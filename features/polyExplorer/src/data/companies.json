@@ -654,7 +654,7 @@
         "name": "Eksmo PSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -3651,7 +3651,7 @@
         "name": "Mail.ru Group Public Corporation (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -4095,7 +4095,7 @@
         "name": "REGNUM News Agency JS (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -7071,7 +7071,7 @@
         "name": "SCM Holdings Private (UA)",
         "jurisdiction": "Other",
         "location": {
-            "city": "",
+            "city": "Donetsk",
             "countryCode": "UA"
         },
         "annualRevenues": null,
@@ -7730,7 +7730,7 @@
         ],
         "description": {
             "value": {
-                "en": "Signal is a cross-platform centralized encrypted messaging service developed by the Signal Technology Foundation and Signal Messenger LLC. It uses the Internet to send one-to-one and group messages, which can include files, voice notes, images and videos. It can also be used to make one-to-one and group voice and video calls, and the Android version can optionally function as an SMS app.\nSignal uses standard cellular telephone numbers as identifiers and secures all communications to other Signal users with end-to-end encryption. The apps include mechanisms by which users can independently verify the identity of their contacts and the integrity of the data channel.\nSignal's software is free and open-source. Its clients are published under the GPLv3 license, while the server code is published under the AGPLv3. The official Android app generally uses the proprietary Google Play Services (installed on most Android devices), though it is designed to still work without them installed. Signal also has an official client app for iOS and desktop apps for Windows, MacOS and Linux.\nThe non-profit Signal Foundation was launched in February 2018 with initial funding of $50 million from Brian Acton. As of January 2021, Signal had more than 105 million total downloads, and the app had approximately 40 million monthly active users. Signal has been installed on more than 50 million Android devices.",
+                "en": "Signal is a cross-platform centralised encrypted messaging service developed by the Signal Technology Foundation and Signal Messenger LLC. It uses the Internet to send one-to-one and group messages, which can include files, voice notes, images and videos. It can also be used to make one-to-one and group voice and video calls, and the Android version can optionally function as an SMS app.\nSignal uses standard cellular telephone numbers as identifiers and secures all communications to other Signal users with end-to-end encryption. The apps include mechanisms by which users can independently verify the identity of their contacts and the integrity of the data channel.\nSignal's software is free and open-source. Its clients are published under the GPLv3 license, while the server code is published under the AGPLv3. The official Android app generally uses the proprietary Google Play Services (installed on most Android devices), though it is designed to still work without them installed. Signal also has an official client app for iOS and desktop apps for Windows, MacOS and Linux.\nThe non-profit Signal Foundation was launched in February 2018 with initial funding of $50 million from Brian Acton. As of January 2021, Signal had more than 105 million total downloads, and the app had approximately 40 million monthly active users. Signal has been installed on more than 50 million Android devices.",
                 "de": "Signal ist ein freier Messenger für verschlüsselte Kommunikation der US-amerikanischen, gemeinnützigen Signal-Stiftung. Er ist vor allem für seine Datensparsamkeit und Ende-zu-Ende-Verschlüsselung bekannt und wird daher häufig von Sicherheitsexperten und Datenschutzorganisationen empfohlen. Zur Umsetzung der Datensparsamkeit dient das „Zero-Knowledge-Prinzip“, bei dem der Betreiber keinerlei Zugriff auf Nutzerdaten hat.\nSignal ist als App für Android und iOS und als Desktop-Version für Windows, macOS und Linux verfügbar, eine Web-Version gibt es nicht. Die Desktop-Version setzt allerdings voraus, dass die App bereits auf einem Smartphone installiert ist. Für die Verschlüsselung von Nachrichten und Anrufen kommt das freie Signal-Protokoll zum Einsatz, das von Sicherheitsexperten als sicher eingestuft wird."
             },
             "source": "Wikipedia, polyPedia"
@@ -9200,7 +9200,7 @@
         "name": "RBK Group  PJSC  (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -11482,7 +11482,7 @@
         "name": "Southern Telecom OJSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Krasnodar",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -12166,7 +12166,7 @@
         "name": "VEB.RF ex-Vnesheconombank SOC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -13591,7 +13591,7 @@
         "name": "Plus GSM Private (PL)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Warsaw",
             "countryCode": "PL"
         },
         "annualRevenues": null,
@@ -15069,7 +15069,7 @@
         "name": "Credit Bank of Moscow PC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -15919,7 +15919,7 @@
         "name": "Teximbank JSC (BG)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Sofia",
             "countryCode": "BG"
         },
         "annualRevenues": null,
@@ -16392,7 +16392,7 @@
         "name": "IPJSC Ingosstrakh (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -16428,7 +16428,7 @@
         "name": "Sogaz JSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -16608,7 +16608,7 @@
         "name": "Ukraine International Airlines PJSC (UA)",
         "jurisdiction": "Other",
         "location": {
-            "city": "",
+            "city": "Kyiv",
             "countryCode": "UA"
         },
         "annualRevenues": null,
@@ -17426,7 +17426,7 @@
         "name": "RusHydro PJSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -19299,7 +19299,7 @@
         "name": "First Investment Bank PJSC (BG)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Sofia",
             "countryCode": "BG"
         },
         "annualRevenues": null,
@@ -20269,7 +20269,7 @@
         "name": "1C Company PC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -20792,7 +20792,7 @@
         "name": "ZAO \"TK \"Megapolis\" (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -21237,7 +21237,7 @@
         "name": "Sibirtelecom OJSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Novosibirsk",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -21736,7 +21736,7 @@
         "name": "i-Free JSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Saint Petersburg",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -22241,7 +22241,7 @@
         "name": "KDD Group Public (UA)",
         "jurisdiction": "Other",
         "location": {
-            "city": "",
+            "city": "Kyiv",
             "countryCode": "UA"
         },
         "annualRevenues": null,
@@ -22587,7 +22587,7 @@
         "name": "Protek JSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -22623,7 +22623,7 @@
         "name": "11 bit studios Public  (PL)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Warsaw",
             "countryCode": "PL"
         },
         "annualRevenues": null,
@@ -22962,7 +22962,8 @@
         "description": {
             "value": null,
             "source": null
-        }
+        },
+        "industryCategory": "ic:BanksAndFinance"
     },
     {
         "ppid": "BMW Austria Leasing GmbH (AT)",
@@ -23071,7 +23072,7 @@
         "name": "JSC Kalashnikov Concern (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Izhevsk",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -23081,7 +23082,8 @@
         "description": {
             "value": null,
             "source": null
-        }
+        },
+        "industryCategory": "ic:ResearchAndDevelopment"
     },
     {
         "ppid": "CVC Capital Partners (LU)",
@@ -23304,7 +23306,7 @@
         "name": "YouTube, LLC (US)",
         "jurisdiction": "Five-Eyes",
         "location": {
-            "city": "",
+            "city": "Delaware",
             "countryCode": "US"
         },
         "annualRevenues": null,
@@ -23340,7 +23342,7 @@
         "name": "KrioRus LLP (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -23350,7 +23352,8 @@
         "description": {
             "value": null,
             "source": null
-        }
+        },
+        "industryCategory": "ic:ResearchAndDevelopment"
     },
     {
         "ppid": "SIDEWALK LABS LLC (US)",
@@ -24725,7 +24728,7 @@
         "name": "Ericpol Public (PL)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Warsaw",
             "countryCode": "PL"
         },
         "annualRevenues": null,
@@ -25480,7 +25483,7 @@
         "name": "Dixy PJSC  (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -25498,7 +25501,7 @@
         "name": "OJSC Svyazinvest  (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -26759,7 +26762,7 @@
         "name": "Basic Element Ltd (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -26903,7 +26906,7 @@
         "name": "X5 Retail Group JSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -27814,7 +27817,7 @@
         "name": "Rosgosstrakh OJSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -30120,7 +30123,7 @@
         "name": "VK OJSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Saint Petersburg",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -31619,7 +31622,7 @@
         "name": "PJSC VimpelCom (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Amsterdam, Netherlands",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -33733,6 +33736,9 @@
             "source": "Wikipedia, polyPedia"
         },
         "industryCategory": "ic:InternetAndMultimedia",
+        "productsOwned": [
+            "TikTok"
+        ],
         "jurisdictionsShared": {
             "children": [
                 "Other",
@@ -33747,7 +33753,7 @@
         "name": "Synqera PC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Saint Petersburg",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -35368,7 +35374,7 @@
         "name": "Bulgarian National Bank State Company (BG)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Sofia",
             "countryCode": "BG"
         },
         "annualRevenues": null,
@@ -35700,7 +35706,7 @@
         "name": "Raiffeisen Bulgaria AG (BG)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Sofia",
             "countryCode": "BG"
         },
         "annualRevenues": null,
@@ -36388,10 +36394,10 @@
     {
         "ppid": "Gameloft  SE (FR)",
         "name": "Gameloft  SE (FR)",
-        "jurisdiction": "Sonstige",
+        "jurisdiction": "EU-GDPR",
         "location": {
             "city": "",
-            "countryCode": ""
+            "countryCode": "FR"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -36570,7 +36576,7 @@
         "name": "M3 Communications Group, Inc. (BG)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Sofia",
             "countryCode": "BG"
         },
         "annualRevenues": null,
@@ -37305,7 +37311,7 @@
         "name": "State Savings Bank of Ukraine PJSC (UA)",
         "jurisdiction": "Other",
         "location": {
-            "city": "",
+            "city": "Kyiv",
             "countryCode": "UA"
         },
         "annualRevenues": null,
@@ -37359,7 +37365,7 @@
         "name": "Polsat Public (PL)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Warsaw",
             "countryCode": "PL"
         },
         "annualRevenues": null,
@@ -38684,7 +38690,7 @@
         "name": "Yuzhmash State-owned enterprise (UA)",
         "jurisdiction": "Other",
         "location": {
-            "city": "",
+            "city": "Dnipro",
             "countryCode": "UA"
         },
         "annualRevenues": null,
@@ -38864,7 +38870,7 @@
         "name": "VolgaTelecom OJSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Nizhny Novgorod",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -38896,7 +38902,7 @@
         "dataSharingPurposes": [
             {
                 "dpv:Purpose": "dpv:Advertising",
-                "count": 4
+                "count": 25
             },
             {
                 "dpv:Purpose": "dpv:Analytics",
@@ -38946,91 +38952,87 @@
         "dataTypesShared": [
             {
                 "dpv:Category": "dpv:Age",
-                "count": 9
-            },
-            {
-                "dpv:Category": "dpv:Authenticating",
                 "count": 10
             },
             {
+                "dpv:Category": "dpv:Authenticating",
+                "count": 11
+            },
+            {
                 "dpv:Category": "dpv:BankAccount",
-                "count": 9
+                "count": 10
             },
             {
                 "dpv:Category": "dpv:BrowserFingerprint",
-                "count": 9
+                "count": 10
             },
             {
                 "dpv:Category": "dpv:BrowsingBehavior",
-                "count": 9
+                "count": 10
             },
             {
                 "dpv:Category": "dpv:Communication",
-                "count": 9
+                "count": 10
             },
             {
                 "dpv:Category": "dpv:CommunicationsMetadata",
-                "count": 9
+                "count": 10
             },
             {
                 "dpv:Category": "dpv:CreditRecord",
-                "count": 18
+                "count": 20
             },
             {
                 "dpv:Category": "dpv:Demographic",
-                "count": 9
+                "count": 10
             },
             {
                 "dpv:Category": "dpv:DeviceBased",
-                "count": 9
+                "count": 10
             },
             {
                 "dpv:Category": "dpv:EmailAddress",
-                "count": 9
+                "count": 10
             },
             {
                 "dpv:Category": "dpv:Financial",
-                "count": 12
+                "count": 13
             },
             {
                 "dpv:Category": "dpv:IPAddress",
-                "count": 2
+                "count": 3
             },
             {
                 "dpv:Category": "dpv:Interest",
-                "count": 9
+                "count": 10
             },
             {
                 "dpv:Category": "dpv:Location",
-                "count": 9
+                "count": 10
             },
             {
                 "dpv:Category": "dpv:Name",
-                "count": 9
+                "count": 10
             },
             {
                 "dpv:Category": "dpv:OfficialID",
-                "count": 9
-            },
-            {
-                "dpv:Category": "dpv:PersonalDataCategory",
-                "count": 1
+                "count": 10
             },
             {
                 "dpv:Category": "dpv:Preference",
-                "count": 1
+                "count": 2
             },
             {
                 "dpv:Category": "dpv:Purchase",
-                "count": 1
+                "count": 2
             },
             {
                 "dpv:Category": "dpv:ServiceConsumptionBehavior",
-                "count": 9
+                "count": 10
             },
             {
                 "dpv:Category": "dpv:TelephoneNumber",
-                "count": 9
+                "count": 10
             }
         ],
         "description": {
@@ -39339,7 +39341,7 @@
         "name": "Neterra Private (BG)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Sofia",
             "countryCode": "BG"
         },
         "annualRevenues": null,
@@ -40356,7 +40358,7 @@
         "name": "ER-Telecom CJSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Perm",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -41598,7 +41600,7 @@
         "name": "Otkritie Holding JSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -42094,7 +42096,8 @@
         "description": {
             "value": null,
             "source": null
-        }
+        },
+        "industryCategory": "ic:BanksAndFinance"
     },
     {
         "ppid": "Episodic, Inc. (US)",
@@ -43253,7 +43256,7 @@
         "name": "Lenta.ru JSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -43282,6 +43285,24 @@
             "value": null,
             "source": null
         }
+    },
+    {
+        "ppid": "Nordea Danmark (DK)",
+        "name": "Nordea Danmark (DK)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Copenhagen",
+            "countryCode": "DK"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:BanksAndFinance"
     },
     {
         "ppid": "BMW Danmark A_S (DK)",
@@ -43324,7 +43345,7 @@
         "name": "Alawar PC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Novosibirsk",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -43955,7 +43976,7 @@
         "name": "NEWSru PC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -43991,7 +44012,7 @@
         "name": "PrivatBank PJSC (UA)",
         "jurisdiction": "Other",
         "location": {
-            "city": "",
+            "city": "Dnipro",
             "countryCode": "UA"
         },
         "annualRevenues": null,
@@ -47072,7 +47093,7 @@
         "name": "Kaspersky Lab PC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -47780,7 +47801,7 @@
         "name": "Gazprom-Media OJSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -47852,7 +47873,7 @@
         "name": "Rambler OJSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -48995,7 +49016,7 @@
         "name": "Orange Polska Spółka Akcyjna (PL)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Warsaw",
             "countryCode": "PL"
         },
         "annualRevenues": null,
@@ -52960,7 +52981,7 @@
         "name": "ASKA Insurance Company PJSC (UA)",
         "jurisdiction": "Other",
         "location": {
-            "city": "",
+            "city": "Kyiv",
             "countryCode": "UA"
         },
         "annualRevenues": null,
@@ -55369,7 +55390,7 @@
         "name": "Comarc Public (PL)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Kraków",
             "countryCode": "PL"
         },
         "annualRevenues": null,
@@ -55546,7 +55567,7 @@
         "name": "Evalar CJSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Biysk",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -56680,7 +56701,7 @@
         "name": "Moscow City Telephone Network JS (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -57621,7 +57642,7 @@
         "name": "Brainly Private (PL)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Kraków",
             "countryCode": "PL"
         },
         "annualRevenues": null,
@@ -62414,7 +62435,7 @@
         "name": "Kyivstar PJSC (UA)",
         "jurisdiction": "Other",
         "location": {
-            "city": "",
+            "city": "Kyiv",
             "countryCode": "UA"
         },
         "annualRevenues": null,
@@ -62671,7 +62692,7 @@
         "name": "ASCON PC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Saint Petersburg",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -63588,7 +63609,7 @@
         "name": "NVS Telematic Systems LLC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -63598,7 +63619,8 @@
         "description": {
             "value": null,
             "source": null
-        }
+        },
+        "industryCategory": "ic:Telecommunication"
     },
     {
         "ppid": "Opinion Labs Inc. (US)",
@@ -65084,7 +65106,7 @@
         "name": "ATB-Market LLC (UA)",
         "jurisdiction": "Other",
         "location": {
-            "city": "",
+            "city": "Dnipro",
             "countryCode": "UA"
         },
         "annualRevenues": null,
@@ -65294,7 +65316,7 @@
         "name": "Apple Rus LTD (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -65517,6 +65539,24 @@
             "source": null
         },
         "industryCategory": "ic:Service"
+    },
+    {
+        "ppid": "Skatteforvaltningen (DK)",
+        "name": "Skatteforvaltningen (DK)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "Herning",
+            "countryCode": "DK"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:LawAndTaxes"
     },
     {
         "ppid": "Tado GmbH (DE)",
@@ -65868,7 +65908,7 @@
         "name": "Asseco Poland SA (PL)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Rzeszow, Poland",
             "countryCode": "PL"
         },
         "annualRevenues": null,
@@ -67030,7 +67070,7 @@
         "name": "Ukrtelecom JSC (UA)",
         "jurisdiction": "Other",
         "location": {
-            "city": "",
+            "city": "Kyiv",
             "countryCode": "UA"
         },
         "annualRevenues": null,
@@ -67977,7 +68017,7 @@
         "name": "Girdap JS (BG)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Ruse",
             "countryCode": "BG"
         },
         "annualRevenues": null,
@@ -68013,7 +68053,7 @@
         "name": "CTC Media Private (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -68103,7 +68143,7 @@
         "name": "AFK Sistema PAO JSFC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -68912,7 +68952,7 @@
         "name": "Nordea Bank Plc (FI)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Helsinki",
             "countryCode": "FI"
         },
         "annualRevenues": null,
@@ -68923,7 +68963,7 @@
             "value": null,
             "source": null
         },
-        "industryCategory": "ic:Service"
+        "industryCategory": "ic:BanksAndFinance"
     },
     {
         "ppid": "Hanseatische Inkasso-Treuhand GmbH (DE)",
@@ -68948,7 +68988,7 @@
         "name": "Bank Millennium S.A. (PL)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Warsaw",
             "countryCode": "PL"
         },
         "annualRevenues": null,
@@ -69477,7 +69517,7 @@
         "name": "Russian Agricultural Bank JSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -70352,7 +70392,7 @@
         "name": "Gazprombank JSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -70738,7 +70778,7 @@
         "name": "M.video PJSC  (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -71722,7 +71762,8 @@
         "description": {
             "value": null,
             "source": null
-        }
+        },
+        "industryCategory": "ic:ResearchAndDevelopment"
     },
     {
         "ppid": "Smava GmbH (DE)",
@@ -71855,7 +71896,7 @@
         "name": "ITI Group (PL)",
         "jurisdiction": "EU-GDPR",
         "location": {
-            "city": "",
+            "city": "Warsaw",
             "countryCode": "PL"
         },
         "annualRevenues": null,
@@ -72264,7 +72305,7 @@
         "name": "Uralsvyazinform  OJSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Yekaterinburg",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -72282,7 +72323,7 @@
         "name": "PROMT PC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Saint Petersburg",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -73914,7 +73955,7 @@
         "name": "Alfa-Bank JSC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -74303,7 +74344,7 @@
         "name": "Akella PC (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -74314,7 +74355,7 @@
             "value": null,
             "source": null
         },
-        "industryCategory": "ic:IT"
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "ARM LIMITED (GB)",
@@ -74874,7 +74915,7 @@
         "name": "T-Platforms (RU)",
         "jurisdiction": "Russia",
         "location": {
-            "city": "",
+            "city": "Moscow, Russia",
             "countryCode": "RU"
         },
         "annualRevenues": null,
@@ -76233,7 +76274,7 @@
         "name": "EKTA PC (UA)",
         "jurisdiction": "Other",
         "location": {
-            "city": "",
+            "city": "Kyiv",
             "countryCode": "UA"
         },
         "annualRevenues": null,
