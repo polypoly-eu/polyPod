@@ -39,9 +39,9 @@ const DataTypes = ({ entities, i18nHeader }) => {
             : null;
 
     const switchDataTypesTab = (tabId) => {
-        dataTypes.map((dataType) => {
-            if (dataType.id === tabId) setSelectedDataTypesTab(dataType.route);
-        });
+        setSelectedDataTypesTab(
+            dataTypes.find((dataType) => dataType.id == tabId).route
+        );
     };
 
     return (
