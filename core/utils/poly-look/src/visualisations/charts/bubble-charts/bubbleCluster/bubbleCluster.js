@@ -28,6 +28,15 @@ const nodeLabelBoxPaddingX = 4,
 
 const getBCR = (selection) => selection.node().getBoundingClientRect();
 
+function drawBoxAroundText(text, rect) {
+  text.each((_, i, nodes) => {
+    const bBox = nodes[i].getBBox();
+    rect
+      .attr("x", bBox.x - nodeLabelBoxPaddingX)
+      .attr("y", bBox.y - nodeLabelBoxPaddingY);
+  });
+}
+
 function positionNodeLabelOnX({ text, rect, line, side = "right" }) {
   const textClientRect = getBCR(text);
   const factor = side == "right" ? 1 : -1;
@@ -37,13 +46,7 @@ function positionNodeLabelOnX({ text, rect, line, side = "right" }) {
       .attr("y", textClientRect.height / 4)
       .attr("text-anchor", side == "right" ? "start" : "end");
 
-  text &&
-    text.each((_, i, nodes) => {
-      const bBox = nodes[i].getBBox();
-      rect
-        .attr("x", bBox.x - nodeLabelBoxPaddingX)
-        .attr("y", bBox.y - nodeLabelBoxPaddingY);
-    });
+  text && drawBoxAroundText(text, rect);
 
   line &&
     line
@@ -72,13 +75,7 @@ function positionNodeLabelOnY({ text, rect, line, side = "top" }) {
       )
       .attr("text-anchor", "middle");
 
-  text &&
-    text.each((_, i, nodes) => {
-      const bBox = nodes[i].getBBox();
-      rect
-        .attr("x", bBox.x - nodeLabelBoxPaddingX)
-        .attr("y", bBox.y - nodeLabelBoxPaddingY);
-    });
+  text && drawBoxAroundText(text, rect);
 
   line &&
     line
