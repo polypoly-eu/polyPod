@@ -37,9 +37,11 @@ class IndexedLegend {
 }
 
 function Companies({ entities }) {
-    const legend = new IndexedLegend(entities.map(({ name }) => name));
-    const data = entities.map(({ name, dataRecipients }) => ({
-        title: legend.labelOf(name),
+    const legend = new IndexedLegend(
+        entities.map(({ simpleName }) => simpleName)
+    );
+    const data = entities.map(({ simpleName, dataRecipients }) => ({
+        title: legend.labelOf(simpleName),
         value: dataRecipients.length,
     }));
     return (
