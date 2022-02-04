@@ -17,12 +17,12 @@ const smallBubbleThreshold = 10;
 */
 
 const bubbleFontSize = (d) => {
-        if (d.r < smallBubblesRadius) return smallBubblesFontSize;
-        if (d.r > bigBubblesRadius) return bigBubblesFontSize;
-        return mediumBubblesFontSize;
-    };
-    const filterText = (d) =>
-        d.r > smallBubbleThreshold ? Math.round(d.value) : "";
+    if (d.r < smallBubblesRadius) return smallBubblesFontSize;
+    if (d.r > bigBubblesRadius) return bigBubblesFontSize;
+    return mediumBubblesFontSize;
+};
+const filterText = (d) =>
+    d.r > smallBubbleThreshold ? Math.round(d.value) : "";
 
 const DataTypeBubbleAll = ({
     data,
@@ -34,7 +34,6 @@ const DataTypeBubbleAll = ({
     showValues = true,
     highlight = null,
 }) => {
-
     // d3 svg bubble-diagram drawing function
     const drawBubblesLeafs = (leaf, bubbleContainer) => {
         leaf.append("circle")
