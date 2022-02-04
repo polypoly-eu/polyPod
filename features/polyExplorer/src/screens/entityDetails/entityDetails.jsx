@@ -15,21 +15,27 @@ const EntityDetails = () => {
     const { selectedEntityObject, entityObjectByPpid } =
         useContext(ExplorerContext);
     const entity = selectedEntityObject;
+    const years = [2015, 2016, 2017, 2018, 2019];
+    let annualRevenuesFilteredByYear = [];
+    if (entity && entity.annualRevenues) {
+        annualRevenuesFilteredByYear = entity?.annualRevenues?.filter(
+            (revenue) => years.includes(revenue.year)
+        );
+    }
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
-
     const cityImageMap = {
-        München: "munich",
-        "Mountain View": "mountainview",
-        Wiesbaden: "wiesbaden",
-        Berlin: "berlin",
-        Dubai: "dubai",
-        Luxembourg: "luxembourg",
-        "WILMINGTON, New Castle": "wilmington",
-        "WILMINGTON, DELAWARE": "wilmington",
-        WILMINGTON: "wilmington",
-        Cupertino: "cupertino",
-        DUBLIN: "dublin",
+        münchen: "munich",
+        "mountain view": "mountainview",
+        wiesbaden: "wiesbaden",
+        berlin: "berlin",
+        dubai: "dubai",
+        luxembourg: "luxembourg",
+        "wilmington, new castle": "wilmington",
+        "wilmington, delaware": "wilmington",
+        wilmington: "wilmington",
+        cupertino: "cupertino",
+        dublin: "dublin",
     };
 
     const tabTranslation = {
@@ -109,7 +115,12 @@ const EntityDetails = () => {
                                 </div>
                             )}
                             <DataRegionsLegend />
-                            {!entity?.annualRevenues ? (
+                            <SourceInfoButton
+                                source={i18n.t("common:source.polyPedia")}
+                                infoScreen="data-region-info"
+                                className="info-extra-margin"
+                            />
+                            {annualRevenuesFilteredByYear.length === 0 ? (
                                 <></>
                             ) : (
                                 <div className="revenue">
@@ -125,6 +136,13 @@ const EntityDetails = () => {
 
                                     <CompanyRevenueChart
                                         annualRevenues={entity.annualRevenues}
+                                    />
+                                    <SourceInfoButton
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                        infoScreen="company-revenue-info"
+                                        className="info-extra-margin"
                                     />
                                 </div>
                             )}
@@ -168,12 +186,15 @@ const EntityDetails = () => {
 
                             {entity.jurisdiction ? (
                                 <div className={`location-block`}>
-                                    {entity.location ? (
+                                    {entity.location &&
+                                    cityImageMap[
+                                        entity.location.city.toLowerCase()
+                                    ] ? (
                                         <div className="featured-map">
                                             <img
                                                 src={`./images/maps/cities/${
                                                     cityImageMap[
-                                                        entity.location.city
+                                                        entity.location.city.toLowerCase()
                                                     ]
                                                 }.svg`}
                                                 className="map"
@@ -206,7 +227,7 @@ const EntityDetails = () => {
                                 infoScreen="data-region-info"
                                 className="info-extra-margin"
                             />
-                            {entity?.annualRevenues?.length === 0 ? (
+                            {annualRevenuesFilteredByYear.length === 0 ? (
                                 <></>
                             ) : (
                                 <div className="revenue">

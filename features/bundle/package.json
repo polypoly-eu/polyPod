@@ -5,11 +5,9 @@
   },
   "devDependencies": {
     "bestzip": "^2.2.0",
-    "demo-feature": "file:../demo",
     "facebook-import-feature": "file:../facebookImport",
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
-    "poly-explorer-feature-v1": "file:../polyExplorer-v1",
     "poly-preview-feature": "file:../polyPreview"
   },
   "private": true,
@@ -20,8 +18,8 @@
       "artifactPath": "dist"
     },
     {
-      "archiveName": "polyExplorer-v1",
-      "moduleName": "poly-explorer-feature-v1",
+      "archiveName": "polyExplorer",
+      "moduleName": "poly-explorer-feature",
       "artifactPath": "dist"
     },
     {
@@ -33,16 +31,6 @@
       "archiveName": "lexicon",
       "moduleName": "lexicon-feature",
       "artifactPath": "public"
-    },
-    {
-      "archiveName": "polyExplorer",
-      "moduleName": "poly-explorer-feature",
-      "artifactPath": "dist"
-    },
-    {
-      "archiveName": "demo",
-      "moduleName": "demo-feature",
-      "artifactPath": "dist"
     }
   ]
 }

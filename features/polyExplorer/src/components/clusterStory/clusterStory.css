@@ -64,7 +64,7 @@
 }
 
 .cluster-story .cluster-story-title {
-    color: var(--story-color-primary) !important;
+    color: var(--story-color-primary);
     margin-top: 50px;
     font-family: "Jost Bold";
     font-size: 45px;

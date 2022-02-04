@@ -3,11 +3,13 @@ import * as d3 from "d3";
 import { Chart } from "../../chart";
 
 const edgePadding = 5;
+const labelMargin = 20;
 const smallBubblesRadius = 20;
 const bigBubblesRadius = 50;
 const bubblePadding = 3;
-const bigBubblesFont = "20px";
-const mediumBubblesFont = "16px";
+const bigBubblesFontSize = "20px";
+const mediumBubblesFontSize = "16px";
+const smallBubblesFontSize = "10px";
 const defaultBubbleColor = "blue";
 const defaultStrokeColor = "#f7fafc";
 const defaultTextColor = "white";
@@ -15,6 +17,106 @@ const defaultOpacity = 1;
 const defaultText = (d) =>
   d.r > smallBubblesRadius ? Math.round(d.value) : "";
 const defaultOnClickFunction = () => {};
+
+const nodeLabelBoxPaddingX = 4,
+  nodeLabelBoxPaddingY = 1,
+  nodeLabelBoxBorderRadius = 2,
+  nodeLabelBoxColor = "white",
+  nodeLabelBoxOpacity = 0.7,
+  nodeLabelLineMargin = 2,
+  nodeLabelLineStrokeWidth = 2;
+
+const getBCR = (selection) => selection.node().getBoundingClientRect();
+
+function drawBoxAroundText(text, rect) {
+  text.each((_, i, nodes) => {
+    const bBox = nodes[i].getBBox();
+    rect
+      .attr("x", bBox.x - nodeLabelBoxPaddingX)
+      .attr("y", bBox.y - nodeLabelBoxPaddingY);
+  });
+}
+
+function positionNodeLabelOnX({ text, rect, line, side = "right" }) {
+  const textClientRect = getBCR(text);
+  const factor = side == "right" ? 1 : -1;
+  text &&
+    text
+      .attr("x", (d) => (d.r + labelMargin) * factor)
+      .attr("y", textClientRect.height / 4)
+      .attr("text-anchor", side == "right" ? "start" : "end");
+
+  text && drawBoxAroundText(text, rect);
+
+  line &&
+    line
+      .attr("y1", 0)
+      .attr("y2", 0)
+      .attr("x1", (d) => (d.r + nodeLabelLineMargin) * factor)
+      .attr(
+        "x2",
+        (d) =>
+          (d.r + labelMargin - nodeLabelLineMargin - nodeLabelBoxPaddingX) *
+          factor
+      );
+}
+
+function positionNodeLabelOnY({ text, rect, line, side = "top" }) {
+  const textClientRect = getBCR(text);
+  const isTop = side == "top";
+  const factor = isTop ? -1 : 1;
+  text &&
+    text
+      .attr("x", 0)
+      .attr(
+        "y",
+        (d) =>
+          (d.r + labelMargin + (!isTop && textClientRect.height / 2)) * factor
+      )
+      .attr("text-anchor", "middle");
+
+  text && drawBoxAroundText(text, rect);
+
+  line &&
+    line
+      .attr("x1", 0)
+      .attr("x2", 0)
+      .attr("y1", (d) => (d.r + nodeLabelLineMargin) * factor)
+      .attr(
+        "y2",
+        (d) =>
+          (d.r + labelMargin - nodeLabelLineMargin - nodeLabelBoxPaddingX) *
+          factor
+      );
+}
+
+function positionNodeLabel({ chart, labelParts }) {
+  positionNodeLabelOnY({ ...labelParts, side: "top" });
+
+  const chartClientRect = getBCR(chart);
+  const rectClientRect = getBCR(labelParts.rect);
+
+  const checkChartEdgeCollision = (side) =>
+    Math.floor(chartClientRect[side]) == Math.floor(rectClientRect[side]);
+
+  if (checkChartEdgeCollision("top")) {
+    positionNodeLabelOnY({ ...labelParts, side: "bottom" });
+  }
+
+  if (checkChartEdgeCollision("right")) {
+    positionNodeLabelOnX({ ...labelParts, side: "left" });
+  }
+
+  if (checkChartEdgeCollision("left")) {
+    positionNodeLabelOnX({ ...labelParts, side: "right" });
+  }
+}
+
+const bubbleFontSize = (d) => {
+  if (d.r < smallBubblesRadius) return smallBubblesFontSize;
+  if (d.r > bigBubblesRadius) return bigBubblesFontSize;
+  return mediumBubblesFontSize;
+};
 
 /**
  * Visualizes data as a cluster of bubbles where the value of the bubble is represented as the radius.
@@ -59,6 +161,7 @@ export class BubbleCluster extends Chart {
     text = defaultText,
     onBubbleClick = defaultOnClickFunction,
     filter,
+    label,
   }) {
     super({ selector, data, width, height });
     this._bubbleColor = bubbleColor;
@@ -69,6 +172,7 @@ export class BubbleCluster extends Chart {
     this._onBubbleClick = onBubbleClick;
     this._bubblePadding = bubblePadding;
     this._filter = filter;
+    this._label = label;
 
     this._filterActivationCondition = (d) => {
       if (!this._filter) return null;
@@ -106,13 +210,12 @@ export class BubbleCluster extends Chart {
     return nodes
       .enter()
       .append("g")
+      .attr("class", "bubble-group")
       .attr("transform", (d) =>
         d.data.icon
           ? `translate(${d.x - d.r},${d.y - d.r})`
           : `translate(${d.x},${d.y})`
-      )
-      .on("click", this._onBubbleClick)
-      .style("-webkit-tap-highlight-color", "transparent");
+      );
   }
 
   _updateBubbles(nodes) {
@@ -148,7 +251,8 @@ export class BubbleCluster extends Chart {
       .style("fill", this._bubbleColor)
       .style("stroke", this._strokeColor)
       .style("vertical-align", "center")
-      .attr("fill-opacity", this._opacity);
+      .attr("fill-opacity", this._opacity)
+      .on("click", this._onBubbleClick);
   }
 
   _addTextToBubbleGroup(newBubbleGroups) {
@@ -159,15 +263,56 @@ export class BubbleCluster extends Chart {
       .attr("text-anchor", "middle")
       .attr("y", ".3em")
       .attr("fill", this._textColor)
-      .style("font-size", (d) => {
-        return d.r > bigBubblesRadius ? bigBubblesFont : mediumBubblesFont;
-      })
+      .style("font-size", bubbleFontSize)
       .style("font-family", "Jost Medium")
       .style("font-weight", "500")
       .attr("fill", this._textColor)
-      .attr("transform", (d) =>
-        d.data.icon ? `translate(${d.x},${d.y})` : ""
-      );
+      .attr("transform", (d) => (d.data.icon ? `translate(${d.x},${d.y})` : ""))
+      .on("click", this._onBubbleClick);
+  }
+
+  _addLabel(bubbleGroups) {
+    const label = this._label;
+    const color = this._textColor;
+    const chart = this.chart;
+    bubbleGroups.each(function (node) {
+      if (label(node)) {
+        const labelGroup = d3
+          .select(this)
+          .append("g")
+          .attr("class", "label-group");
+
+        const text = labelGroup
+          .append("text")
+          .attr("fill", this._textColor)
+          .text(label);
+
+        text.each((_, i, nodes) => {
+          const bBox = nodes[i].getBBox();
+          labelGroup
+            .append("rect")
+            .attr("width", bBox.width + nodeLabelBoxPaddingX * 2)
+            .attr("height", bBox.height + nodeLabelBoxPaddingY * 2)
+            .attr("fill", nodeLabelBoxColor)
+            .attr("opacity", nodeLabelBoxOpacity)
+            .attr("rx", nodeLabelBoxBorderRadius);
+        });
+
+        const rect = labelGroup.select("rect");
+
+        const line = labelGroup
+          .append("line")
+          .attr("stroke", color)
+          .attr("stroke-width", nodeLabelLineStrokeWidth);
+
+        const labelParts = { text, rect, line };
+
+        positionNodeLabel({ chart, labelParts });
+
+        text.raise();
+        d3.select(this).raise();
+      }
+    });
   }
 
   _updateBubbleTexts(nodes) {
@@ -175,9 +320,7 @@ export class BubbleCluster extends Chart {
       .selectAll(".bubble-text")
       .text(this._text)
       .attr("fill", this._textColor)
-      .style("font-size", (d) => {
-        return d.r > bigBubblesRadius ? bigBubblesFont : mediumBubblesFont;
-      });
+      .style("font-size", bubbleFontSize);
   }
 
   render() {
@@ -185,24 +328,28 @@ export class BubbleCluster extends Chart {
     const packLayout = this._pack();
     const root = packLayout(hierarchicalData);
     this._setUpFilters();
-    const nodes = this.chart
-      .selectAll("g")
-      .data(root.descendants().filter(({ parent }) => !!parent));
+    const nodes = this.chart.selectAll(".bubble-group").data(
+      root.descendants().filter(({ parent }) => !!parent),
+      (d) => d.data.category
+    );
     nodes.exit().remove();
-    this._updateBubbles(nodes);
     const newBubbleGroups = this._addNewBubbleGroups(nodes);
     this._addBubbles(newBubbleGroups);
+    this._updateBubbles(nodes);
 
     if (this._text) {
       this._addTextToBubbleGroup(newBubbleGroups);
       this._updateBubbleTexts(nodes);
 
-      // Bit of a hack to ensure that the texts of bubbles with children are
-      // rendered on top of those children. As a consequence of this, bubbles
-      // that have both a solid color fill and children will hide their
-      // children. If we were to render all texts on top of all bubbles, we
-      // could avoid this problem.
       newBubbleGroups.filter((d) => d.children).raise();
+    }
+
+    if (this._label) {
+      let labelGroup = nodes.select(".label-group");
+      const empty = labelGroup.empty();
+      labelGroup.remove();
+      if (empty) this._addLabel(newBubbleGroups);
+      else this._addLabel(nodes);
     }
   }
 }

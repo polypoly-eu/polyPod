@@ -8,7 +8,7 @@
 }
 
 .source-info-container .source {
-    padding: 32px 0 0 0;
+    padding: 0;
     color: var(--theme-small-print-color);
     font-family: "Jost Medium";
     font-size: 12px;
