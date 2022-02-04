@@ -5141,7 +5141,7 @@
             },
             {
                 "date": "2021-03-17",
-                "amount": 104210000000,
+                "amount": 10421000000,
                 "currency": "EUR",
                 "year": 2021
             },
@@ -10609,50 +10609,345 @@
         },
         "annualRevenues": [],
         "dataRecipients": [
-            "Facebook (US)"
+            "360dialog GmbH (DE)",
+            "3Q Digital Holdings, Inc. (US)",
+            "8x8 Inc (US)",
+            "ACL Mobile Limited (IN)",
+            "AdParlor LLC (US)",
+            "Adsmurai S.L. (ES)",
+            "Agency Within LLC (US)",
+            "Airy Inc (US)",
+            "Ameyo (IN)",
+            "Apple (US)",
+            "Artefact France (FR)",
+            "BAMBOO TECHNOLOGIES INC. (US)",
+            "BETAPOND LIMITED t_a StitcherAds (IE)",
+            "Bitonic Technology Labs Inc (US)",
+            "Botmaker (UY)",
+            "Brand Embassy (IL)",
+            "BumpYard (IL)",
+            "CHOMPI CCNETWORKINGS LIMITED DBA Bidalgo (IL)",
+            "CURUPIRA S.A (BR)",
+            "Clarabridge (US)",
+            "Clare.AI (HK)",
+            "Clickatell Corporation (US)",
+            "Common Thread Collective LLC (US)",
+            "Conversocial Inc (US)",
+            "CyberAgent Inc (JP)",
+            "Dam Corporation (ID)",
+            "Datawords (FR)",
+            "Emma Global (Hong Kong) Limited (HK)",
+            "Essence Global Group Limited (GB)",
+            "FACEBOOK ISRAEL LTD (IL)",
+            "FACEBOOK SINGAPORE PTE. LTD. (SG)",
+            "FACEBOOK UK LTD (GB)",
+            "FACELIFT brand building technologies GmbH (DE)",
+            "Facebook (US)",
+            "Facebook Germany GmbH (DE)",
+            "Facebook Ireland Limited (IE)",
+            "Facebook Spain SL (ES)",
+            "Facebook Technologies, LLC (US)",
+            "Falcon.io (DK)",
+            "Freshworks GmbH (DE)",
+            "GRAHAM HOLDINGS COMPANY (US)",
+            "Genesys Cloud Services (US)",
+            "Google (US)",
+            "GupShup (IN)",
+            "HelloTech (SG)",
+            "Horizon Media Inc. (US)",
+            "Hubspot Inc (US)",
+            "Hubtype (ES)",
+            "IDimension Inc. (US)",
+            "IMImobile Limited (GB)",
+            "Infobip (HR)",
+            "Interaxa (BR)",
+            "Jio Platforms (IN)",
+            "Kaleyra (IT)",
+            "Karix Mobile (IN)",
+            "Kenshoo Limited (IL)",
+            "Kepler Group LLC (US)",
+            "KeyReply (SG)",
+            "Khoros LLC (US)",
+            "Kokatto (ID)",
+            "Liveperson Inc (US)",
+            "Lumanu Inc. (US)",
+            "MACRO KIOSK Berhad (MY)",
+            "MF Management Ltd (CY)",
+            "Merkle UK One Limited (GB)",
+            "MessageBird GmbH (DE)",
+            "MessengerPeople GmbH (DE)",
+            "MuteSix, LLC (US)",
+            "Nanigans, Inc. (US)",
+            "Netcore Cloud (DE)",
+            "New Engen Inc. (US)",
+            "Novomind AG (DE)",
+            "Ovative Group, LLC (US)",
+            "PATHWAY GROUP LLC (US)",
+            "PMG Worldwide, LLC (US)",
+            "PMX AGENCY LLC (US)",
+            "PT Solusi Pembayaran Elektronik (ID)",
+            "PT Yesboss Group (ID)",
+            "PT. Informasi Teknologi Indonesia (ID)",
+            "Positus (BR)",
+            "Power Digital Marketing Inc. (US)",
+            "Praekelt PBC (US)",
+            "Precis Digital AB (SE)",
+            "Qiscus (SG)",
+            "Qontak (SG)",
+            "ROI Hunter a.s. (CZ)",
+            "Ready Set, Inc. (US)",
+            "Ringcentral Inc (US)",
+            "Sanuker Inc. Limited (HK)",
+            "Sheridan Media LLC (US)",
+            "Shopify (CA)",
+            "Sinch (SE)",
+            "Sirclo (ID)",
+            "Smarters (BR)",
+            "Sparkcentral (US)",
+            "Sprinklr (US)",
+            "Syniverse (US)",
+            "TINUITI INC. (US)",
+            "Telesign Corporation (US)",
+            "Torchlight Inc. (JP)",
+            "TubeScience USA Inc. (US)",
+            "Twilio Inc (US)",
+            "Tyntec (GB)",
+            "UIB Holdings (SG)",
+            "UNIVERSAL MCCANN WORLDWIDE, INC. (US)",
+            "Unified Enterprises, Corp. (US)",
+            "Unifonic (SA)",
+            "ValueFirst (IN)",
+            "VaynerX, LLC (US)",
+            "Vonage Holdings (US)",
+            "Whatsapp LLC (US)",
+            "Wpromote LLC (US)",
+            "Yalochat Inc (US)",
+            "ZenDesk (US)",
+            "Zenvia (BR)",
+            "cm.com (NL)"
         ],
         "dataSharingPurposes": [
             {
-                "dpv:Purpose": "dpv:CommercialInterest",
-                "count": 8
+                "dpv:Purpose": "dpv:AccessControl",
+                "count": 185
+            },
+            {
+                "dpv:Purpose": "dpv:CommercialResearch",
+                "count": 46
+            },
+            {
+                "dpv:Purpose": "dpv:CommunicationForCustomerCare",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:CommunicationManagement",
+                "count": 51
+            },
+            {
+                "dpv:Purpose": "dpv:CustomerCare",
+                "count": 55
+            },
+            {
+                "dpv:Purpose": "dpv:CustomerRelationshipManagement",
+                "count": 162
+            },
+            {
+                "dpv:Purpose": "dpv:DisputeManagement",
+                "count": 69
+            },
+            {
+                "dpv:Purpose": "dpv:FraudPreventionAndDetection",
+                "count": 939
+            },
+            {
+                "dpv:Purpose": "dpv:IdentityVerification",
+                "count": 137
+            },
+            {
+                "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
+                "count": 118
+            },
+            {
+                "dpv:Purpose": "dpv:IncreaseServiceRobustness",
+                "count": 18
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
-                "count": 8
+                "count": 1329
+            },
+            {
+                "dpv:Purpose": "dpv:OptimisationForConsumer",
+                "count": 143
+            },
+            {
+                "dpv:Purpose": "dpv:PublicRelations",
+                "count": 92
+            },
+            {
+                "dpv:Purpose": "dpv:RegistrationAuthentication",
+                "count": 6
+            },
+            {
+                "dpv:Purpose": "dpv:ResearchAndDevelopment",
+                "count": 16
+            },
+            {
+                "dpv:Purpose": "dpv:Security",
+                "count": 918
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceOptimization",
+                "count": 93
+            },
+            {
+                "dpv:Purpose": "dpv:ServicePersonalization",
+                "count": 128
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceProvision",
+                "count": 1138
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceUsageAnalytics",
+                "count": 58
+            },
+            {
+                "dpv:Purpose": "dpv:TechnicalServiceProvision",
+                "count": 873
+            },
+            {
+                "dpv:Purpose": "unspecified",
+                "count": 16
             }
         ],
         "dataTypesShared": [
             {
+                "dpv:Category": "dpv:Attitude",
+                "count": 228
+            },
+            {
+                "dpv:Category": "dpv:Authenticating",
+                "count": 19
+            },
+            {
+                "dpv:Category": "dpv:AuthenticationHistory",
+                "count": 17
+            },
+            {
                 "dpv:Category": "dpv:BrowsingBehavior",
-                "count": 2
+                "count": 240
+            },
+            {
+                "dpv:Category": "dpv:Communication",
+                "count": 289
+            },
+            {
+                "dpv:Category": "dpv:CommunicationsMetadata",
+                "count": 233
+            },
+            {
+                "dpv:Category": "dpv:Connection",
+                "count": 337
+            },
+            {
+                "dpv:Category": "dpv:Contact",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:Country",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:DeviceApplications",
+                "count": 15
+            },
+            {
+                "dpv:Category": "dpv:DeviceBased",
+                "count": 316
+            },
+            {
+                "dpv:Category": "dpv:DeviceOperatingSystem",
+                "count": 15
+            },
+            {
+                "dpv:Category": "dpv:DeviceSoftware",
+                "count": 15
             },
             {
                 "dpv:Category": "dpv:EmailAddress",
-                "count": 2
+                "count": 231
+            },
+            {
+                "dpv:Category": "dpv:GPSCoordinate",
+                "count": 297
+            },
+            {
+                "dpv:Category": "dpv:IPAddress",
+                "count": 231
             },
             {
                 "dpv:Category": "dpv:Language",
-                "count": 2
+                "count": 228
+            },
+            {
+                "dpv:Category": "dpv:LifeHistory",
+                "count": 229
+            },
+            {
+                "dpv:Category": "dpv:Location",
+                "count": 354
+            },
+            {
+                "dpv:Category": "dpv:Opinion",
+                "count": 228
+            },
+            {
+                "dpv:Category": "dpv:PINCode",
+                "count": 228
+            },
+            {
+                "dpv:Category": "dpv:Password",
+                "count": 231
             },
             {
                 "dpv:Category": "dpv:Picture",
-                "count": 2
+                "count": 313
             },
             {
                 "dpv:Category": "dpv:PrivacyPreference",
-                "count": 2
+                "count": 266
+            },
+            {
+                "dpv:Category": "dpv:SecretText",
+                "count": 370
             },
             {
                 "dpv:Category": "dpv:ServiceConsumptionBehavior",
-                "count": 2
+                "count": 313
+            },
+            {
+                "dpv:Category": "dpv:SocialMediaCommunication",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:SocialNetwork",
+                "count": 291
             },
             {
                 "dpv:Category": "dpv:TelephoneNumber",
-                "count": 2
+                "count": 470
+            },
+            {
+                "dpv:Category": "dpv:UID",
+                "count": 243
             },
             {
                 "dpv:Category": "dpv:Username",
-                "count": 2
+                "count": 376
+            },
+            {
+                "dpv:Category": "unspecified",
+                "count": 1
             }
         ],
         "description": {
@@ -10665,7 +10960,10 @@
         "industryCategory": "ic:InternetAndMultimedia",
         "jurisdictionsShared": {
             "children": [
-                "Five-Eyes"
+                "EU-GDPR",
+                "Five-Eyes",
+                "Other",
+                "China"
             ]
         }
     },
@@ -33652,6 +33950,7 @@
             "Bare Tree Media Inc (US)",
             "Branch Metrics Inc California (US)",
             "Byte London Limited (GB)",
+            "ByteDance Ltd. (KY)",
             "CHOMPI CCNETWORKINGS LIMITED DBA Bidalgo (IL)",
             "Cheetah Mobile Hong Kong Limited (HK)",
             "Collab Inc (US)",
@@ -33735,7 +34034,7 @@
             },
             {
                 "dpv:Purpose": "dpv:FraudPreventionAndDetection",
-                "count": 49
+                "count": 52
             },
             {
                 "dpv:Purpose": "dpv:IdentityVerification",
@@ -33743,7 +34042,7 @@
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
-                "count": 40
+                "count": 43
             },
             {
                 "dpv:Purpose": "dpv:IncreaseServiceRobustness",
@@ -33837,7 +34136,7 @@
             },
             {
                 "dpv:Category": "dpv:DerivedPersonalData",
-                "count": 20
+                "count": 22
             },
             {
                 "dpv:Category": "dpv:DeviceBased",
@@ -33917,7 +34216,7 @@
             },
             {
                 "dpv:Category": "dpv:Social",
-                "count": 22
+                "count": 24
             },
             {
                 "dpv:Category": "dpv:SocialNetwork",
@@ -33929,7 +34228,7 @@
             },
             {
                 "dpv:Category": "dpv:Tracking",
-                "count": 21
+                "count": 23
             },
             {
                 "dpv:Category": "dpv:Transactional",
@@ -61085,6 +61384,7 @@
             "UNIVERSAL MCCANN WORLDWIDE, INC. (US)",
             "Unified Enterprises, Corp. (US)",
             "Unifonic (SA)",
+            "University College London (GB)",
             "V Rich App (TH)",
             "ValueFirst (IN)",
             "VaynerX, LLC (US)",

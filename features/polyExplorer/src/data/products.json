@@ -32760,7 +32760,9 @@
             }
         ],
         "dataRecipients": [
-            "Apple (US)"
+            "Accenture (IE)",
+            "Apple (US)",
+            "IBM (US)"
         ],
         "dataSharingPurposes": [
             {
@@ -32769,21 +32771,21 @@
             },
             {
                 "dpv:Purpose": "dpv:UsageAnalytics",
-                "count": 4
+                "count": 8
             }
         ],
         "dataTypesShared": [
             {
                 "dpv:Category": "dpv:DeviceBased",
-                "count": 2
+                "count": 3
             },
             {
                 "dpv:Category": "dpv:EmailAddress",
-                "count": 4
+                "count": 5
             },
             {
                 "dpv:Category": "dpv:Location",
-                "count": 1
+                "count": 2
             },
             {
                 "dpv:Category": "dpv:Name",
@@ -32799,7 +32801,7 @@
             },
             {
                 "dpv:Category": "dpv:TelephoneNumber",
-                "count": 3
+                "count": 4
             },
             {
                 "dpv:Category": "dpv:UID",
@@ -32815,14 +32817,12 @@
                 "categories": {
                     "dpv:TelephoneNumber": {
                         "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:UsageAnalytics"
+                            "dpv:ServiceProvision"
                         ]
                     },
                     "dpv:EmailAddress": {
                         "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:UsageAnalytics"
+                            "dpv:ServiceProvision"
                         ]
                     },
                     "dpv:Name": {
@@ -32842,13 +32842,7 @@
                     },
                     "dpv:DeviceBased": {
                         "purposes": [
-                            "dpv:UsageAnalytics",
                             "dpv:ServiceProvision"
-                        ]
-                    },
-                    "dpv:Location": {
-                        "purposes": [
-                            "dpv:UsageAnalytics"
                         ]
                     },
                     "dpv:ServiceConsumptionBehavior": {
@@ -32857,10 +32851,59 @@
                         ]
                     }
                 }
+            },
+            "Accenture (IE)": {
+                "categories": {
+                    "dpv:EmailAddress": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:TelephoneNumber": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:DeviceBased": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:Location": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    }
+                }
+            },
+            "IBM (US)": {
+                "categories": {
+                    "dpv:EmailAddress": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:TelephoneNumber": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:DeviceBased": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:Location": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    }
+                }
             }
         },
         "jurisdictionsShared": {
             "children": [
+                "EU-GDPR",
                 "Five-Eyes"
             ]
         }
