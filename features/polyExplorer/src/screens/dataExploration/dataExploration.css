@@ -88,6 +88,9 @@
     height: 48px;
     font-family: "Jost Medium";
     font-size: 12px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
     line-height: 14px;
     color: var(--color-medium);
     margin: 16px 0 0 16px;
@@ -109,7 +112,7 @@
 
 .data-exploration h1 {
     font-size: 24px;
-    height: 32px;
+    height: 28px;
     margin: 8px 16px;
 }
 
