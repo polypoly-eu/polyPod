@@ -1,6 +1,6 @@
 {
-    "company.p1": "Dieses Diagramm zeigt die verschiedenen Datentypen, die eine Firma sammelt und teilt. Jeder Kreis stellt einen Datentypen dar.",
-    "shares.p1": "Dieses Diagramm zeigt die verschiedenen Datentypen, die eine Firma sammelt und teilt. Jeder Kreis stellt einen Datentypen dar. Die Größe jedes Kreises stellt dar, wie oft dieser Datentyp mit anderen Firmen geteilt wird.",
-    "types.p1": "Dieses Diagramm zeigt die verschiedenen Datentypen, die eine Firma sammelt und teilt. Jeder Kreis stellt einen Datentypen dar.",
+    "company.p1": "Dieses Diagramm zeigt die verschiedenen Datentypen, die Firmen sammeln und teilen. Jeder Kreis stellt einen Datentypen dar.",
+    "shares.p1": "Dieses Diagramm zeigt die verschiedenen Datentypen, die Firmen sammeln und teilen. Jeder Kreis stellt einen Datentypen dar. Die Größe jedes Kreises stellt dar, wie oft dieser Datentyp mit anderen Firmen geteilt wird.",
+    "types.p1": "Dieses Diagramm zeigt die verschiedenen Datentypen, die Firmen sammeln und teilen. Jeder Kreis stellt einen Datentypen dar.",
     "p2": "Diese Information basiert auf einer Recherche der Datenschutzerklärungen der Unternehmen."
 }
