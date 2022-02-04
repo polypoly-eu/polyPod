@@ -14,33 +14,33 @@ final class PolyPodCore {
         let path = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).path
         containerPath = NSString(string: path).utf8String!
         
-        corePointer = new_core(.default(containerPath))
+        corePointer = new_poly_pod_core(.default(containerPath))
     }
 }
 
 extension PolyPodCore {
     var showInApp: Bool {
-        show_in_app(corePointer)
+        update_notification_show_in_app(corePointer)
     }
     
     var showPush: Bool {
-        show_push(corePointer)
+        update_notification_show_push(corePointer)
     }
 
     func handleStartup() {
-        handle_startup(corePointer)
+        update_notification_handle_startup(corePointer)
     }
     
     func handlePushSeen() {
-        handle_push_seen(corePointer)
+        update_notification_handle_push_seen(corePointer)
     }
     
     func handleFirstRun() {
-        handle_first_run(corePointer)
+        update_notification_handle_first_run(corePointer)
     }
     
     func handleInAppSeen() {
-        handle_in_app_seen(corePointer)
+        update_notification_handle_in_app_seen(corePointer)
     }
 }
 

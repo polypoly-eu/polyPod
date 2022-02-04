@@ -3,6 +3,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+/**
+ * Core implementation
+ */
 typedef struct PolyPodCore PolyPodCore;
 
 typedef enum OptionUsize_Tag {
@@ -42,18 +45,18 @@ typedef struct OptionKeyValueStore {
   };
 } OptionKeyValueStore;
 
-struct PolyPodCore *new_core(struct OptionKeyValueStore kv_store);
+struct PolyPodCore *new_poly_pod_core(struct OptionKeyValueStore kv_store);
 
-void destroy_core(struct PolyPodCore *core);
+void destroy_poly_pod_core(struct PolyPodCore *core);
 
-void handle_push_seen(struct PolyPodCore *core);
+void update_notification_handle_push_seen(struct PolyPodCore *core);
 
-void handle_in_app_seen(struct PolyPodCore *core);
+void update_notification_handle_in_app_seen(struct PolyPodCore *core);
 
-void handle_first_run(struct PolyPodCore *core);
+void update_notification_handle_first_run(struct PolyPodCore *core);
 
-void handle_startup(struct PolyPodCore *core);
+void update_notification_handle_startup(struct PolyPodCore *core);
 
-bool show_in_app(const struct PolyPodCore *core);
+bool update_notification_show_in_app(const struct PolyPodCore *core);
 
-bool show_push(const struct PolyPodCore *core);
+bool update_notification_show_push(const struct PolyPodCore *core);
