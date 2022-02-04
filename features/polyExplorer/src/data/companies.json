@@ -39438,6 +39438,9 @@
             "source": "Wikipedia, polyPedia"
         },
         "industryCategory": "ic:InternetAndMultimedia",
+        "productsOwned": [
+            "Telegram"
+        ],
         "jurisdictionsShared": {
             "children": [
                 "Five-Eyes"
