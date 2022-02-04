@@ -5141,7 +5141,7 @@
             },
             {
                 "date": "2021-03-17",
-                "amount": 104210000000,
+                "amount": 10421000000,
                 "currency": "EUR",
                 "year": 2021
             },
@@ -7515,7 +7515,7 @@
         "name": "The Kantar Group Limited (GB)",
         "jurisdiction": "Five-Eyes",
         "location": {
-            "city": "",
+            "city": "London",
             "countryCode": "GB"
         },
         "annualRevenues": null,
@@ -7747,6 +7747,24 @@
         }
     },
     {
+        "ppid": "Athens Mass Transit System (GR)",
+        "name": "Athens Mass Transit System (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:TrafficAndTransportAndLogistics"
+    },
+    {
         "ppid": "Tgcs Rostock GmbH (DE)",
         "name": "Tgcs Rostock GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -7956,6 +7974,24 @@
             "source": null
         },
         "industryCategory": "ic:Consulting"
+    },
+    {
+        "ppid": "Athens Metro (GR)",
+        "name": "Athens Metro (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:TrafficAndTransportAndLogistics"
     },
     {
         "ppid": "Shift4 (US)",
@@ -8929,6 +8965,24 @@
         "industryCategory": "ic:Service"
     },
     {
+        "ppid": "Rosatom (RU)",
+        "name": "Rosatom (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:EnergyAndEnvironment"
+    },
+    {
         "ppid": "Cetelem S.A. (ES)",
         "name": "Cetelem S.A. (ES)",
         "jurisdiction": "EU-GDPR",
@@ -9765,6 +9819,24 @@
         "industryCategory": "ic:InternetAndMultimedia"
     },
     {
+        "ppid": "Magnit PJSC (RU)",
+        "name": "Magnit PJSC (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:RetailAndConsumption"
+    },
+    {
         "ppid": "Deutsche Post Adress GmbH & Co. KG (DE)",
         "name": "Deutsche Post Adress GmbH & Co. KG (DE)",
         "jurisdiction": "EU-GDPR",
@@ -10537,50 +10609,345 @@
         },
         "annualRevenues": [],
         "dataRecipients": [
-            "Facebook (US)"
+            "360dialog GmbH (DE)",
+            "3Q Digital Holdings, Inc. (US)",
+            "8x8 Inc (US)",
+            "ACL Mobile Limited (IN)",
+            "AdParlor LLC (US)",
+            "Adsmurai S.L. (ES)",
+            "Agency Within LLC (US)",
+            "Airy Inc (US)",
+            "Ameyo (IN)",
+            "Apple (US)",
+            "Artefact France (FR)",
+            "BAMBOO TECHNOLOGIES INC. (US)",
+            "BETAPOND LIMITED t_a StitcherAds (IE)",
+            "Bitonic Technology Labs Inc (US)",
+            "Botmaker (UY)",
+            "Brand Embassy (IL)",
+            "BumpYard (IL)",
+            "CHOMPI CCNETWORKINGS LIMITED DBA Bidalgo (IL)",
+            "CURUPIRA S.A (BR)",
+            "Clarabridge (US)",
+            "Clare.AI (HK)",
+            "Clickatell Corporation (US)",
+            "Common Thread Collective LLC (US)",
+            "Conversocial Inc (US)",
+            "CyberAgent Inc (JP)",
+            "Dam Corporation (ID)",
+            "Datawords (FR)",
+            "Emma Global (Hong Kong) Limited (HK)",
+            "Essence Global Group Limited (GB)",
+            "FACEBOOK ISRAEL LTD (IL)",
+            "FACEBOOK SINGAPORE PTE. LTD. (SG)",
+            "FACEBOOK UK LTD (GB)",
+            "FACELIFT brand building technologies GmbH (DE)",
+            "Facebook (US)",
+            "Facebook Germany GmbH (DE)",
+            "Facebook Ireland Limited (IE)",
+            "Facebook Spain SL (ES)",
+            "Facebook Technologies, LLC (US)",
+            "Falcon.io (DK)",
+            "Freshworks GmbH (DE)",
+            "GRAHAM HOLDINGS COMPANY (US)",
+            "Genesys Cloud Services (US)",
+            "Google (US)",
+            "GupShup (IN)",
+            "HelloTech (SG)",
+            "Horizon Media Inc. (US)",
+            "Hubspot Inc (US)",
+            "Hubtype (ES)",
+            "IDimension Inc. (US)",
+            "IMImobile Limited (GB)",
+            "Infobip (HR)",
+            "Interaxa (BR)",
+            "Jio Platforms (IN)",
+            "Kaleyra (IT)",
+            "Karix Mobile (IN)",
+            "Kenshoo Limited (IL)",
+            "Kepler Group LLC (US)",
+            "KeyReply (SG)",
+            "Khoros LLC (US)",
+            "Kokatto (ID)",
+            "Liveperson Inc (US)",
+            "Lumanu Inc. (US)",
+            "MACRO KIOSK Berhad (MY)",
+            "MF Management Ltd (CY)",
+            "Merkle UK One Limited (GB)",
+            "MessageBird GmbH (DE)",
+            "MessengerPeople GmbH (DE)",
+            "MuteSix, LLC (US)",
+            "Nanigans, Inc. (US)",
+            "Netcore Cloud (DE)",
+            "New Engen Inc. (US)",
+            "Novomind AG (DE)",
+            "Ovative Group, LLC (US)",
+            "PATHWAY GROUP LLC (US)",
+            "PMG Worldwide, LLC (US)",
+            "PMX AGENCY LLC (US)",
+            "PT Solusi Pembayaran Elektronik (ID)",
+            "PT Yesboss Group (ID)",
+            "PT. Informasi Teknologi Indonesia (ID)",
+            "Positus (BR)",
+            "Power Digital Marketing Inc. (US)",
+            "Praekelt PBC (US)",
+            "Precis Digital AB (SE)",
+            "Qiscus (SG)",
+            "Qontak (SG)",
+            "ROI Hunter a.s. (CZ)",
+            "Ready Set, Inc. (US)",
+            "Ringcentral Inc (US)",
+            "Sanuker Inc. Limited (HK)",
+            "Sheridan Media LLC (US)",
+            "Shopify (CA)",
+            "Sinch (SE)",
+            "Sirclo (ID)",
+            "Smarters (BR)",
+            "Sparkcentral (US)",
+            "Sprinklr (US)",
+            "Syniverse (US)",
+            "TINUITI INC. (US)",
+            "Telesign Corporation (US)",
+            "Torchlight Inc. (JP)",
+            "TubeScience USA Inc. (US)",
+            "Twilio Inc (US)",
+            "Tyntec (GB)",
+            "UIB Holdings (SG)",
+            "UNIVERSAL MCCANN WORLDWIDE, INC. (US)",
+            "Unified Enterprises, Corp. (US)",
+            "Unifonic (SA)",
+            "ValueFirst (IN)",
+            "VaynerX, LLC (US)",
+            "Vonage Holdings (US)",
+            "Whatsapp LLC (US)",
+            "Wpromote LLC (US)",
+            "Yalochat Inc (US)",
+            "ZenDesk (US)",
+            "Zenvia (BR)",
+            "cm.com (NL)"
         ],
         "dataSharingPurposes": [
             {
-                "dpv:Purpose": "dpv:CommercialInterest",
-                "count": 8
+                "dpv:Purpose": "dpv:AccessControl",
+                "count": 185
+            },
+            {
+                "dpv:Purpose": "dpv:CommercialResearch",
+                "count": 46
+            },
+            {
+                "dpv:Purpose": "dpv:CommunicationForCustomerCare",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:CommunicationManagement",
+                "count": 51
+            },
+            {
+                "dpv:Purpose": "dpv:CustomerCare",
+                "count": 55
+            },
+            {
+                "dpv:Purpose": "dpv:CustomerRelationshipManagement",
+                "count": 162
+            },
+            {
+                "dpv:Purpose": "dpv:DisputeManagement",
+                "count": 69
+            },
+            {
+                "dpv:Purpose": "dpv:FraudPreventionAndDetection",
+                "count": 939
+            },
+            {
+                "dpv:Purpose": "dpv:IdentityVerification",
+                "count": 137
+            },
+            {
+                "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
+                "count": 118
+            },
+            {
+                "dpv:Purpose": "dpv:IncreaseServiceRobustness",
+                "count": 18
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
-                "count": 8
+                "count": 1329
+            },
+            {
+                "dpv:Purpose": "dpv:OptimisationForConsumer",
+                "count": 143
+            },
+            {
+                "dpv:Purpose": "dpv:PublicRelations",
+                "count": 92
+            },
+            {
+                "dpv:Purpose": "dpv:RegistrationAuthentication",
+                "count": 6
+            },
+            {
+                "dpv:Purpose": "dpv:ResearchAndDevelopment",
+                "count": 16
+            },
+            {
+                "dpv:Purpose": "dpv:Security",
+                "count": 918
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceOptimization",
+                "count": 93
+            },
+            {
+                "dpv:Purpose": "dpv:ServicePersonalization",
+                "count": 128
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceProvision",
+                "count": 1138
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceUsageAnalytics",
+                "count": 58
+            },
+            {
+                "dpv:Purpose": "dpv:TechnicalServiceProvision",
+                "count": 873
+            },
+            {
+                "dpv:Purpose": "unspecified",
+                "count": 16
             }
         ],
         "dataTypesShared": [
             {
+                "dpv:Category": "dpv:Attitude",
+                "count": 228
+            },
+            {
+                "dpv:Category": "dpv:Authenticating",
+                "count": 19
+            },
+            {
+                "dpv:Category": "dpv:AuthenticationHistory",
+                "count": 17
+            },
+            {
                 "dpv:Category": "dpv:BrowsingBehavior",
-                "count": 2
+                "count": 240
+            },
+            {
+                "dpv:Category": "dpv:Communication",
+                "count": 289
+            },
+            {
+                "dpv:Category": "dpv:CommunicationsMetadata",
+                "count": 233
+            },
+            {
+                "dpv:Category": "dpv:Connection",
+                "count": 337
+            },
+            {
+                "dpv:Category": "dpv:Contact",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:Country",
+                "count": 16
+            },
+            {
+                "dpv:Category": "dpv:DeviceApplications",
+                "count": 15
+            },
+            {
+                "dpv:Category": "dpv:DeviceBased",
+                "count": 316
+            },
+            {
+                "dpv:Category": "dpv:DeviceOperatingSystem",
+                "count": 15
+            },
+            {
+                "dpv:Category": "dpv:DeviceSoftware",
+                "count": 15
             },
             {
                 "dpv:Category": "dpv:EmailAddress",
-                "count": 2
+                "count": 231
+            },
+            {
+                "dpv:Category": "dpv:GPSCoordinate",
+                "count": 297
+            },
+            {
+                "dpv:Category": "dpv:IPAddress",
+                "count": 231
             },
             {
                 "dpv:Category": "dpv:Language",
-                "count": 2
+                "count": 228
+            },
+            {
+                "dpv:Category": "dpv:LifeHistory",
+                "count": 229
+            },
+            {
+                "dpv:Category": "dpv:Location",
+                "count": 354
+            },
+            {
+                "dpv:Category": "dpv:Opinion",
+                "count": 228
+            },
+            {
+                "dpv:Category": "dpv:PINCode",
+                "count": 228
+            },
+            {
+                "dpv:Category": "dpv:Password",
+                "count": 231
             },
             {
                 "dpv:Category": "dpv:Picture",
-                "count": 2
+                "count": 313
             },
             {
                 "dpv:Category": "dpv:PrivacyPreference",
-                "count": 2
+                "count": 266
+            },
+            {
+                "dpv:Category": "dpv:SecretText",
+                "count": 370
             },
             {
                 "dpv:Category": "dpv:ServiceConsumptionBehavior",
-                "count": 2
+                "count": 313
+            },
+            {
+                "dpv:Category": "dpv:SocialMediaCommunication",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:SocialNetwork",
+                "count": 291
             },
             {
                 "dpv:Category": "dpv:TelephoneNumber",
-                "count": 2
+                "count": 470
+            },
+            {
+                "dpv:Category": "dpv:UID",
+                "count": 243
             },
             {
                 "dpv:Category": "dpv:Username",
-                "count": 2
+                "count": 376
+            },
+            {
+                "dpv:Category": "unspecified",
+                "count": 1
             }
         ],
         "description": {
@@ -10593,7 +10960,10 @@
         "industryCategory": "ic:InternetAndMultimedia",
         "jurisdictionsShared": {
             "children": [
-                "Five-Eyes"
+                "EU-GDPR",
+                "Five-Eyes",
+                "Other",
+                "China"
             ]
         }
     },
@@ -14796,6 +15166,24 @@
         "industryCategory": "ic:RetailAndConsumption"
     },
     {
+        "ppid": "Tatneft PJSC (RU)",
+        "name": "Tatneft PJSC (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:EnergyAndEnvironment"
+    },
+    {
         "ppid": "BMW Floorplan Master Owner Trust Series 2018-1 (US)",
         "name": "BMW Floorplan Master Owner Trust Series 2018-1 (US)",
         "jurisdiction": "Five-Eyes",
@@ -15270,6 +15658,24 @@
         "industryCategory": "ic:Service"
     },
     {
+        "ppid": "Ellinair (GR)",
+        "name": "Ellinair (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:TrafficAndTransportAndLogistics"
+    },
+    {
         "ppid": "Freshworks GmbH (DE)",
         "name": "Freshworks GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -15454,6 +15860,24 @@
             "source": null
         },
         "industryCategory": "ic:RealEstateAndFacilityManagement"
+    },
+    {
+        "ppid": "Rosseti PJSC (RU)",
+        "name": "Rosseti PJSC (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:EnergyAndEnvironment"
     },
     {
         "ppid": "Tesla Inc (US)",
@@ -25479,6 +25903,24 @@
         "industryCategory": "ic:Automotive"
     },
     {
+        "ppid": "Aeroflot (RU)",
+        "name": "Aeroflot (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:TrafficAndTransportAndLogistics"
+    },
+    {
         "ppid": "Dixy PJSC  (RU)",
         "name": "Dixy PJSC  (RU)",
         "jurisdiction": "Russia",
@@ -27795,6 +28237,24 @@
         "industryCategory": "ic:Service"
     },
     {
+        "ppid": "Russian Railways OJSC (RU)",
+        "name": "Russian Railways OJSC (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:TrafficAndTransportAndLogistics"
+    },
+    {
         "ppid": "MAINSTAY MEDICAL INTERNATIONAL LIMITED (IE)",
         "name": "MAINSTAY MEDICAL INTERNATIONAL LIMITED (IE)",
         "jurisdiction": "EU-GDPR",
@@ -29115,6 +29575,24 @@
         "industryCategory": "ic:Service"
     },
     {
+        "ppid": "Avtotor (RU)",
+        "name": "Avtotor (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:ResearchAndDevelopment"
+    },
+    {
         "ppid": "navabi GmbH (DE)",
         "name": "navabi GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -29987,6 +30465,24 @@
         "industryCategory": "ic:BanksAndFinance"
     },
     {
+        "ppid": "North-West Telecom (RU)",
+        "name": "North-West Telecom (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:Telecommunication"
+    },
+    {
         "ppid": "Rainman Consulting (IN)",
         "name": "Rainman Consulting (IN)",
         "jurisdiction": "Other",
@@ -30141,7 +30637,7 @@
         "name": "University College London (GB)",
         "jurisdiction": "Five-Eyes",
         "location": {
-            "city": "",
+            "city": "London",
             "countryCode": "GB"
         },
         "annualRevenues": null,
@@ -32162,6 +32658,24 @@
         "industryCategory": "ic:BanksAndFinance"
     },
     {
+        "ppid": "RussNeft (RU)",
+        "name": "RussNeft (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:EnergyAndEnvironment"
+    },
+    {
         "ppid": "Access Markets Int’L [Ami] Partners (US)",
         "name": "Access Markets Int’L [Ami] Partners (US)",
         "jurisdiction": "Five-Eyes",
@@ -33436,6 +33950,7 @@
             "Bare Tree Media Inc (US)",
             "Branch Metrics Inc California (US)",
             "Byte London Limited (GB)",
+            "ByteDance Ltd. (KY)",
             "CHOMPI CCNETWORKINGS LIMITED DBA Bidalgo (IL)",
             "Cheetah Mobile Hong Kong Limited (HK)",
             "Collab Inc (US)",
@@ -33519,7 +34034,7 @@
             },
             {
                 "dpv:Purpose": "dpv:FraudPreventionAndDetection",
-                "count": 49
+                "count": 52
             },
             {
                 "dpv:Purpose": "dpv:IdentityVerification",
@@ -33527,7 +34042,7 @@
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
-                "count": 40
+                "count": 43
             },
             {
                 "dpv:Purpose": "dpv:IncreaseServiceRobustness",
@@ -33621,7 +34136,7 @@
             },
             {
                 "dpv:Category": "dpv:DerivedPersonalData",
-                "count": 20
+                "count": 22
             },
             {
                 "dpv:Category": "dpv:DeviceBased",
@@ -33701,7 +34216,7 @@
             },
             {
                 "dpv:Category": "dpv:Social",
-                "count": 22
+                "count": 24
             },
             {
                 "dpv:Category": "dpv:SocialNetwork",
@@ -33713,7 +34228,7 @@
             },
             {
                 "dpv:Category": "dpv:Tracking",
-                "count": 21
+                "count": 23
             },
             {
                 "dpv:Category": "dpv:Transactional",
@@ -35881,6 +36396,24 @@
         "industryCategory": "ic:BanksAndFinance"
     },
     {
+        "ppid": "Russia TV (RU)",
+        "name": "Russia TV (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Heartland Payment Systems, Inc. (US)",
         "name": "Heartland Payment Systems, Inc. (US)",
         "jurisdiction": "Five-Eyes",
@@ -37107,6 +37640,24 @@
             "source": null
         },
         "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
+        "ppid": "Krasnoe & Beloe (RU)",
+        "name": "Krasnoe & Beloe (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:RetailAndConsumption"
     },
     {
         "ppid": "Payfone Inc. (US)",
@@ -38810,6 +39361,24 @@
             "source": null
         },
         "industryCategory": "ic:RetailAndConsumption"
+    },
+    {
+        "ppid": "Bluebird Airways (GR)",
+        "name": "Bluebird Airways (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:TrafficAndTransportAndLogistics"
     },
     {
         "ppid": "BMW Italia S.p.A. (IT)",
@@ -43867,6 +44436,24 @@
         "industryCategory": "ic:InternetAndMultimedia"
     },
     {
+        "ppid": "Inter RAO (RU)",
+        "name": "Inter RAO (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:EnergyAndEnvironment"
+    },
+    {
         "ppid": "Eulerian Technologies (FR)",
         "name": "Eulerian Technologies (FR)",
         "jurisdiction": "EU-GDPR",
@@ -44017,6 +44604,24 @@
         "location": {
             "city": "Dnipro",
             "countryCode": "UA"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:BanksAndFinance"
+    },
+    {
+        "ppid": "Uralsib JSC (RU)",
+        "name": "Uralsib JSC (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -45686,6 +46291,24 @@
         "industryCategory": "ic:RetailAndConsumption"
     },
     {
+        "ppid": "Surgutneftegas (RU)",
+        "name": "Surgutneftegas (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:ResearchAndDevelopment"
+    },
+    {
         "ppid": "Chiyoda Corporation (JP)",
         "name": "Chiyoda Corporation (JP)",
         "jurisdiction": "Other",
@@ -46499,6 +47122,24 @@
         "industryCategory": "ic:Service"
     },
     {
+        "ppid": "Air Mediterranean (GR)",
+        "name": "Air Mediterranean (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:TrafficAndTransportAndLogistics"
+    },
+    {
         "ppid": "Automatic Data Processing (US)",
         "name": "Automatic Data Processing (US)",
         "jurisdiction": "Five-Eyes",
@@ -46623,6 +47264,24 @@
             "source": null
         },
         "industryCategory": "ic:Automotive"
+    },
+    {
+        "ppid": "ANT1 Group (GR)",
+        "name": "ANT1 Group (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "HFG Inkasso GmbH (DE)",
@@ -47018,6 +47677,24 @@
             "source": null
         },
         "industryCategory": "ic:TrafficAndTransportAndLogistics"
+    },
+    {
+        "ppid": "Atcom (GR)",
+        "name": "Atcom (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:IT"
     },
     {
         "ppid": "Extole (US)",
@@ -47564,6 +48241,24 @@
             "source": null
         },
         "industryCategory": "ic:Service"
+    },
+    {
+        "ppid": "Rossiya Bank (RU)",
+        "name": "Rossiya Bank (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:BanksAndFinance"
     },
     {
         "ppid": "BMW Finanzdienstleistungen (Schweiz) AG (CH)",
@@ -53070,6 +53765,24 @@
         "industryCategory": "ic:TextilesAndFashion"
     },
     {
+        "ppid": "PIK Group PJSC (RU)",
+        "name": "PIK Group PJSC (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:BanksAndFinance"
+    },
+    {
         "ppid": "T-Mobile Polska S.A. (PL)",
         "name": "T-Mobile Polska S.A. (PL)",
         "jurisdiction": "EU-GDPR",
@@ -53248,6 +53961,24 @@
             "source": null
         },
         "industryCategory": "ic:RetailAndConsumption"
+    },
+    {
+        "ppid": "Athens-Macedonian News Agency (GR)",
+        "name": "Athens-Macedonian News Agency (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "Mondragon Corporation (ES)",
@@ -54609,6 +55340,24 @@
         "industryCategory": "ic:InternetAndMultimedia"
     },
     {
+        "ppid": "Hellenic Petroleum S.A (GR)",
+        "name": "Hellenic Petroleum S.A (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:EnergyAndEnvironment"
+    },
+    {
         "ppid": "AST PC (RU)",
         "name": "AST PC (RU)",
         "jurisdiction": "Russia",
@@ -55908,6 +56657,24 @@
         "industryCategory": "ic:Service"
     },
     {
+        "ppid": "Alpha Bank (GR)",
+        "name": "Alpha Bank (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:BanksAndFinance"
+    },
+    {
         "ppid": "Elgiganten (DK)",
         "name": "Elgiganten (DK)",
         "jurisdiction": "EU-GDPR",
@@ -56896,6 +57663,24 @@
             "source": null
         },
         "industryCategory": "ic:IT"
+    },
+    {
+        "ppid": "Bank Saint Petersburg (RU)",
+        "name": "Bank Saint Petersburg (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:BanksAndFinance"
     },
     {
         "ppid": "Amazon Logistik Frankenthal GmbH (DE)",
@@ -58707,6 +59492,24 @@
             "source": null
         },
         "industryCategory": "ic:Service"
+    },
+    {
+        "ppid": "Transneft (RU)",
+        "name": "Transneft (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:EnergyAndEnvironment"
     },
     {
         "ppid": "Deutsche Post Fleet GmbH (DE)",
@@ -60581,6 +61384,7 @@
             "UNIVERSAL MCCANN WORLDWIDE, INC. (US)",
             "Unified Enterprises, Corp. (US)",
             "Unifonic (SA)",
+            "University College London (GB)",
             "V Rich App (TH)",
             "ValueFirst (IN)",
             "VaynerX, LLC (US)",
@@ -62956,6 +63760,24 @@
         "industryCategory": "ic:BanksAndFinance"
     },
     {
+        "ppid": "National Bank of Greece (GR)",
+        "name": "National Bank of Greece (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:BanksAndFinance"
+    },
+    {
         "ppid": "CeleraOne GmbH (DE)",
         "name": "CeleraOne GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -63325,6 +64147,24 @@
         "location": {
             "city": "",
             "countryCode": "KR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
+        "ppid": "4E TV (GR)",
+        "name": "4E TV (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
         },
         "annualRevenues": null,
         "dataRecipients": null,
@@ -65441,6 +66281,24 @@
         "industryCategory": "ic:InternetAndMultimedia"
     },
     {
+        "ppid": "Interfax (RU)",
+        "name": "Interfax (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Treasure Data (DE)",
         "name": "Treasure Data (DE)",
         "jurisdiction": "EU-GDPR",
@@ -66425,6 +67283,24 @@
             "source": null
         },
         "industryCategory": "ic:Service"
+    },
+    {
+        "ppid": "Piraeus Bank S.A (GR)",
+        "name": "Piraeus Bank S.A (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:BanksAndFinance"
     },
     {
         "ppid": "Caribbean Airmail (US)",
@@ -68969,6 +69845,24 @@
         "industryCategory": "ic:BanksAndFinance"
     },
     {
+        "ppid": "Alpha TV (GR)",
+        "name": "Alpha TV (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:InternetAndMultimedia"
+    },
+    {
         "ppid": "Hanseatische Inkasso-Treuhand GmbH (DE)",
         "name": "Hanseatische Inkasso-Treuhand GmbH (DE)",
         "jurisdiction": "EU-GDPR",
@@ -69789,6 +70683,24 @@
             "source": null
         },
         "industryCategory": "ic:Service"
+    },
+    {
+        "ppid": "Bank of Greece (GR)",
+        "name": "Bank of Greece (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:BanksAndFinance"
     },
     {
         "ppid": "Softserve Inc (US)",
@@ -71211,6 +72123,24 @@
         "industryCategory": "ic:Service"
     },
     {
+        "ppid": "Eurobank Ergasias (GR)",
+        "name": "Eurobank Ergasias (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:BanksAndFinance"
+    },
+    {
         "ppid": "GumTree.com Limited (GB)",
         "name": "GumTree.com Limited (GB)",
         "jurisdiction": "Five-Eyes",
@@ -71391,6 +72321,24 @@
         "industryCategory": "ic:RetailAndConsumption"
     },
     {
+        "ppid": "Russian Post (RU)",
+        "name": "Russian Post (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:TrafficAndTransportAndLogistics"
+    },
+    {
         "ppid": "CartaSi S.p.A - Gruppo ICBPI (IT)",
         "name": "CartaSi S.p.A - Gruppo ICBPI (IT)",
         "jurisdiction": "EU-GDPR",
@@ -71497,6 +72445,24 @@
             "source": null
         },
         "industryCategory": "ic:IT"
+    },
+    {
+        "ppid": "Sinara Group CJSC (RU)",
+        "name": "Sinara Group CJSC (RU)",
+        "jurisdiction": "Russia",
+        "location": {
+            "city": "",
+            "countryCode": "RU"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:BanksAndFinance"
     },
     {
         "ppid": "China International Marine Containers (CN)",
@@ -71713,6 +72679,24 @@
             "source": null
         },
         "industryCategory": "ic:Consulting"
+    },
+    {
+        "ppid": "Cosmote (GR)",
+        "name": "Cosmote (GR)",
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "",
+            "countryCode": "GR"
+        },
+        "annualRevenues": null,
+        "dataRecipients": null,
+        "dataSharingPurposes": null,
+        "dataTypesShared": null,
+        "description": {
+            "value": null,
+            "source": null
+        },
+        "industryCategory": "ic:Telecommunication"
     },
     {
         "ppid": "Renault Public (FR)",
@@ -75055,7 +76039,8 @@
             "Google Sweden AB (SE)",
             "Google Switzerland GmbH (CH)",
             "Google Turkey (TR)",
-            "Google UK Limited (GB)"
+            "Google UK Limited (GB)",
+            "WayToGrow (PL)"
         ],
         "dataSharingPurposes": [
             {

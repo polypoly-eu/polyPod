@@ -21275,49 +21275,50 @@
             "TubeScience USA Inc. (US)",
             "UNIVERSAL MCCANN WORLDWIDE, INC. (US)",
             "Unified Enterprises, Corp. (US)",
+            "University College London (GB)",
             "VaynerX, LLC (US)",
             "Wpromote LLC (US)"
         ],
         "dataSharingPurposes": [
             {
                 "dpv:Purpose": "dpv:Analytics",
-                "count": 38
+                "count": 39
             },
             {
                 "dpv:Purpose": "dpv:CommercialInterest",
-                "count": 685
+                "count": 703
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
-                "count": 230
-            },
-            {
-                "dpv:Purpose": "dpv:Payment",
-                "count": 190
-            },
-            {
-                "dpv:Purpose": "dpv:RequestedServiceProvision",
-                "count": 190
-            },
-            {
-                "dpv:Purpose": "dpv:ResearchAndDevelopment",
-                "count": 270
-            },
-            {
-                "dpv:Purpose": "dpv:Security",
                 "count": 236
             },
             {
+                "dpv:Purpose": "dpv:Payment",
+                "count": 195
+            },
+            {
+                "dpv:Purpose": "dpv:RequestedServiceProvision",
+                "count": 195
+            },
+            {
+                "dpv:Purpose": "dpv:ResearchAndDevelopment",
+                "count": 277
+            },
+            {
+                "dpv:Purpose": "dpv:Security",
+                "count": 242
+            },
+            {
                 "dpv:Purpose": "dpv:ServiceOptimization",
-                "count": 656
+                "count": 673
             },
             {
                 "dpv:Purpose": "dpv:ServicePersonalization",
-                "count": 1599
+                "count": 1641
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
-                "count": 1300
+                "count": 1334
             },
             {
                 "dpv:Purpose": "dpv:TechnicalServiceProvision",
@@ -21325,17 +21326,17 @@
             },
             {
                 "dpv:Purpose": "dpv:UsageAnalytics",
-                "count": 418
+                "count": 429
             },
             {
                 "dpv:Purpose": "unspecified",
-                "count": 38
+                "count": 39
             }
         ],
         "dataTypesShared": [
             {
                 "dpv:Category": "dpv:AccountIdentifier",
-                "count": 152
+                "count": 156
             },
             {
                 "dpv:Category": "dpv:AuthenticationHistory",
@@ -21343,15 +21344,15 @@
             },
             {
                 "dpv:Category": "dpv:BankAccount",
-                "count": 152
+                "count": 156
             },
             {
                 "dpv:Category": "dpv:Behavioral",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:Biometric",
-                "count": 191
+                "count": 196
             },
             {
                 "dpv:Category": "dpv:BrowserFingerprint",
@@ -21359,7 +21360,7 @@
             },
             {
                 "dpv:Category": "dpv:BrowsingBehavior",
-                "count": 152
+                "count": 156
             },
             {
                 "dpv:Category": "dpv:CommunicationsMetadata",
@@ -21367,23 +21368,23 @@
             },
             {
                 "dpv:Category": "dpv:Connection",
-                "count": 304
+                "count": 312
             },
             {
                 "dpv:Category": "dpv:Contact",
-                "count": 570
+                "count": 585
             },
             {
                 "dpv:Category": "dpv:DeviceApplications",
-                "count": 117
+                "count": 120
             },
             {
                 "dpv:Category": "dpv:DeviceBased",
-                "count": 233
+                "count": 239
             },
             {
                 "dpv:Category": "dpv:DeviceOperatingSystem",
-                "count": 117
+                "count": 120
             },
             {
                 "dpv:Category": "dpv:DeviceSoftware",
@@ -21391,27 +21392,27 @@
             },
             {
                 "dpv:Category": "dpv:Disability",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:Dislike",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:EmailAddress",
-                "count": 114
+                "count": 117
             },
             {
                 "dpv:Category": "dpv:EthnicOrigin",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:GPSCoordinate",
-                "count": 119
+                "count": 122
             },
             {
                 "dpv:Category": "dpv:Geographic",
-                "count": 154
+                "count": 158
             },
             {
                 "dpv:Category": "dpv:IPAddress",
@@ -21419,11 +21420,11 @@
             },
             {
                 "dpv:Category": "dpv:Interaction",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:Interest",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:Language",
@@ -21431,87 +21432,87 @@
             },
             {
                 "dpv:Category": "dpv:Like",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:Location",
-                "count": 380
+                "count": 390
             },
             {
                 "dpv:Category": "dpv:MedicalHealth",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:MentalHealth",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:Opinion",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:PaymentCardNumber",
-                "count": 152
+                "count": 156
             },
             {
                 "dpv:Category": "dpv:PhilosophicalBelief",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:Picture",
-                "count": 229
+                "count": 235
             },
             {
                 "dpv:Category": "dpv:PoliticalAffiliation",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:Preference",
-                "count": 152
+                "count": 156
             },
             {
                 "dpv:Category": "dpv:Race",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:Religion",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:ReligiousBelief",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:ServiceConsumptionBehavior",
-                "count": 308
+                "count": 316
             },
             {
                 "dpv:Category": "dpv:Sexual",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:SocialMediaCommunication",
-                "count": 418
+                "count": 429
             },
             {
                 "dpv:Category": "dpv:SpecialCategoryPersonalData",
-                "count": 76
+                "count": 78
             },
             {
                 "dpv:Category": "dpv:TelephoneNumber",
-                "count": 114
+                "count": 117
             },
             {
                 "dpv:Category": "dpv:Tracking",
-                "count": 190
+                "count": 195
             },
             {
                 "dpv:Category": "dpv:Transaction",
-                "count": 114
+                "count": 117
             },
             {
                 "dpv:Category": "dpv:Username",
-                "count": 114
+                "count": 117
             }
         ],
         "description": {
@@ -31649,6 +31650,286 @@
                     }
                 }
             },
+            "University College London (GB)": {
+                "categories": {
+                    "dpv:Username": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceOptimization",
+                            "dpv:ServicePersonalization"
+                        ]
+                    },
+                    "dpv:Picture": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceOptimization",
+                            "dpv:ServicePersonalization",
+                            "dpv:CommercialInterest"
+                        ]
+                    },
+                    "dpv:Contact": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceOptimization",
+                            "dpv:ServicePersonalization",
+                            "dpv:UsageAnalytics",
+                            "dpv:CommercialInterest"
+                        ]
+                    },
+                    "dpv:EmailAddress": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceOptimization",
+                            "dpv:ServicePersonalization"
+                        ]
+                    },
+                    "dpv:TelephoneNumber": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceOptimization",
+                            "dpv:ServicePersonalization"
+                        ]
+                    },
+                    "dpv:SocialMediaCommunication": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceOptimization",
+                            "dpv:ServicePersonalization",
+                            "dpv:Analytics",
+                            "dpv:CommercialInterest"
+                        ]
+                    },
+                    "dpv:Connection": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceOptimization",
+                            "dpv:ServicePersonalization",
+                            "dpv:CommercialInterest",
+                            "unspecified"
+                        ]
+                    },
+                    "dpv:Tracking": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceOptimization",
+                            "dpv:ServicePersonalization",
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:DeviceBased": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceOptimization",
+                            "dpv:ServicePersonalization",
+                            "dpv:ResearchAndDevelopment",
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:DeviceApplications": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:ServiceOptimization",
+                            "dpv:ServicePersonalization"
+                        ]
+                    },
+                    "dpv:Preference": {
+                        "purposes": [
+                            "dpv:ServicePersonalization",
+                            "dpv:ServiceProvision",
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:Opinion": {
+                        "purposes": [
+                            "dpv:ServicePersonalization",
+                            "dpv:ServiceProvision"
+                        ]
+                    },
+                    "dpv:Dislike": {
+                        "purposes": [
+                            "dpv:ServicePersonalization",
+                            "dpv:ServiceProvision"
+                        ]
+                    },
+                    "dpv:Like": {
+                        "purposes": [
+                            "dpv:ServicePersonalization",
+                            "dpv:ServiceProvision"
+                        ]
+                    },
+                    "dpv:ServiceConsumptionBehavior": {
+                        "purposes": [
+                            "dpv:ServicePersonalization",
+                            "dpv:ServiceProvision",
+                            "dpv:ResearchAndDevelopment",
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:BrowsingBehavior": {
+                        "purposes": [
+                            "dpv:ServicePersonalization",
+                            "dpv:ServiceProvision",
+                            "dpv:ResearchAndDevelopment"
+                        ]
+                    },
+                    "dpv:Interest": {
+                        "purposes": [
+                            "dpv:ServicePersonalization",
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:SpecialCategoryPersonalData": {
+                        "purposes": [
+                            "dpv:ServicePersonalization",
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:Behavioral": {
+                        "purposes": [
+                            "dpv:ServicePersonalization",
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:PoliticalAffiliation": {
+                        "purposes": [
+                            "dpv:CommercialInterest",
+                            "dpv:ServicePersonalization"
+                        ]
+                    },
+                    "dpv:Religion": {
+                        "purposes": [
+                            "dpv:CommercialInterest",
+                            "dpv:ServicePersonalization"
+                        ]
+                    },
+                    "dpv:Race": {
+                        "purposes": [
+                            "dpv:CommercialInterest",
+                            "dpv:ServicePersonalization"
+                        ]
+                    },
+                    "dpv:Biometric": {
+                        "purposes": [
+                            "dpv:CommercialInterest",
+                            "dpv:ServicePersonalization",
+                            "dpv:ServiceProvision"
+                        ]
+                    },
+                    "dpv:ReligiousBelief": {
+                        "purposes": [
+                            "dpv:CommercialInterest",
+                            "dpv:ServicePersonalization"
+                        ]
+                    },
+                    "dpv:EthnicOrigin": {
+                        "purposes": [
+                            "dpv:CommercialInterest",
+                            "dpv:ServicePersonalization"
+                        ]
+                    },
+                    "dpv:MedicalHealth": {
+                        "purposes": [
+                            "dpv:CommercialInterest",
+                            "dpv:ServicePersonalization"
+                        ]
+                    },
+                    "dpv:MentalHealth": {
+                        "purposes": [
+                            "dpv:CommercialInterest",
+                            "dpv:ServicePersonalization"
+                        ]
+                    },
+                    "dpv:Disability": {
+                        "purposes": [
+                            "dpv:CommercialInterest",
+                            "dpv:ServicePersonalization"
+                        ]
+                    },
+                    "dpv:Sexual": {
+                        "purposes": [
+                            "dpv:CommercialInterest",
+                            "dpv:ServicePersonalization"
+                        ]
+                    },
+                    "dpv:PhilosophicalBelief": {
+                        "purposes": [
+                            "dpv:CommercialInterest",
+                            "dpv:ServicePersonalization"
+                        ]
+                    },
+                    "dpv:Location": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:CommercialInterest",
+                            "dpv:ServicePersonalization",
+                            "dpv:ResearchAndDevelopment",
+                            "dpv:UsageAnalytics",
+                            "dpv:Payment",
+                            "dpv:RequestedServiceProvision",
+                            "dpv:LegalCompliance",
+                            "dpv:Security"
+                        ]
+                    },
+                    "dpv:GPSCoordinate": {
+                        "purposes": [
+                            "dpv:ServiceOptimization",
+                            "dpv:ServiceProvision"
+                        ]
+                    },
+                    "dpv:Interaction": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:ResearchAndDevelopment"
+                        ]
+                    },
+                    "dpv:DeviceOperatingSystem": {
+                        "purposes": [
+                            "dpv:ServiceOptimization",
+                            "dpv:ServiceProvision",
+                            "dpv:ResearchAndDevelopment"
+                        ]
+                    },
+                    "dpv:Transaction": {
+                        "purposes": [
+                            "dpv:ServiceProvision",
+                            "dpv:LegalCompliance",
+                            "dpv:Security"
+                        ]
+                    },
+                    "dpv:PaymentCardNumber": {
+                        "purposes": [
+                            "dpv:Payment",
+                            "dpv:RequestedServiceProvision",
+                            "dpv:LegalCompliance",
+                            "dpv:Security"
+                        ]
+                    },
+                    "dpv:BankAccount": {
+                        "purposes": [
+                            "dpv:Payment",
+                            "dpv:RequestedServiceProvision",
+                            "dpv:LegalCompliance",
+                            "dpv:Security"
+                        ]
+                    },
+                    "dpv:Geographic": {
+                        "purposes": [
+                            "dpv:Payment",
+                            "dpv:RequestedServiceProvision",
+                            "dpv:LegalCompliance",
+                            "dpv:Security"
+                        ]
+                    },
+                    "dpv:AccountIdentifier": {
+                        "purposes": [
+                            "dpv:Payment",
+                            "dpv:RequestedServiceProvision",
+                            "dpv:LegalCompliance",
+                            "dpv:Security"
+                        ]
+                    }
+                }
+            },
             "VaynerX, LLC (US)": {
                 "categories": {
                     "dpv:Username": {
@@ -32479,7 +32760,9 @@
             }
         ],
         "dataRecipients": [
-            "Apple (US)"
+            "Accenture (IE)",
+            "Apple (US)",
+            "IBM (US)"
         ],
         "dataSharingPurposes": [
             {
@@ -32488,21 +32771,21 @@
             },
             {
                 "dpv:Purpose": "dpv:UsageAnalytics",
-                "count": 4
+                "count": 8
             }
         ],
         "dataTypesShared": [
             {
                 "dpv:Category": "dpv:DeviceBased",
-                "count": 2
+                "count": 3
             },
             {
                 "dpv:Category": "dpv:EmailAddress",
-                "count": 4
+                "count": 5
             },
             {
                 "dpv:Category": "dpv:Location",
-                "count": 1
+                "count": 2
             },
             {
                 "dpv:Category": "dpv:Name",
@@ -32518,7 +32801,7 @@
             },
             {
                 "dpv:Category": "dpv:TelephoneNumber",
-                "count": 3
+                "count": 4
             },
             {
                 "dpv:Category": "dpv:UID",
@@ -32534,14 +32817,12 @@
                 "categories": {
                     "dpv:TelephoneNumber": {
                         "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:UsageAnalytics"
+                            "dpv:ServiceProvision"
                         ]
                     },
                     "dpv:EmailAddress": {
                         "purposes": [
-                            "dpv:ServiceProvision",
-                            "dpv:UsageAnalytics"
+                            "dpv:ServiceProvision"
                         ]
                     },
                     "dpv:Name": {
@@ -32561,13 +32842,7 @@
                     },
                     "dpv:DeviceBased": {
                         "purposes": [
-                            "dpv:UsageAnalytics",
                             "dpv:ServiceProvision"
-                        ]
-                    },
-                    "dpv:Location": {
-                        "purposes": [
-                            "dpv:UsageAnalytics"
                         ]
                     },
                     "dpv:ServiceConsumptionBehavior": {
@@ -32576,10 +32851,59 @@
                         ]
                     }
                 }
+            },
+            "Accenture (IE)": {
+                "categories": {
+                    "dpv:EmailAddress": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:TelephoneNumber": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:DeviceBased": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:Location": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    }
+                }
+            },
+            "IBM (US)": {
+                "categories": {
+                    "dpv:EmailAddress": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:TelephoneNumber": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:DeviceBased": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    },
+                    "dpv:Location": {
+                        "purposes": [
+                            "dpv:UsageAnalytics"
+                        ]
+                    }
+                }
             }
         },
         "jurisdictionsShared": {
             "children": [
+                "EU-GDPR",
                 "Five-Eyes"
             ]
         }
