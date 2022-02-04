@@ -230,11 +230,11 @@ const MessengerStory = () => {
                 links={jurisdictionLinks}
                 groups={{
                     source: {
-                        label: "Messengers",
+                        label: i18n.t(`${i18nHeader}:data.regions.group.1`),
                         all: true,
                     },
                     target: {
-                        label: "Regions",
+                        label: i18n.t(`${i18nHeader}:data.regions.group.2`),
                         all: false,
                         others: otherJurisdictions,
                     },

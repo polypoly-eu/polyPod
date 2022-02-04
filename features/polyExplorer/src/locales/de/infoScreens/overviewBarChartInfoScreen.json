@@ -1,6 +1,6 @@
 {
-    "p1": "This diagram shows the number of installations or monthly active users (MAU) per messenger.",
-    "p2": "Each bar represents one entity. Different colors indicate a grouping across several segments.",
-    "p3": "Monthly active users (MAU) are an indicator for the user base and level of activity, mainly used in the context of advertising. Each company might have a different way (and reason) to measure it. But the numbers we researched from 2020/21 still give a sense of the reach and relevance of each service in the market.",
-    "p4": "Installs give us a sense of popularity or interest for an app among users. Right now we only have numbers from the Google PlayStore, but since most devices use the Google operating system Android, this number gives us a good sense of market shares as well."
+    "p1": "Dieses Diagramm zeigt die Anzahl der Installationen oder der aktiven monatlichen Nutzer (monthly active users, MAU) pro Massaging-App.",
+    "p2": "Jeder Balken stellt eine App dar. Verschiedene Farben stellen eine Gruppierung über mehrere Segmente hinweg dar.",
+    "p3": "Aktive monatliche Nutzer (monthly active users, MAU) sind ein Indikator für die Breite der Nutzer*innenbasis und den Grad an Aktvität, welche vor allem im Zusammenhang mit Werbung genutzt werden. Verschiedene Unternehmen nutzen für die Messungen unterschiedliche Methoden (und Argumente). Wir betrachten hier Daten von 2020/21 welche nicht komplett sind, uns aber denoch einen Eindruck von der Marktposition der jeweiligen Dienste vermitteln.",
+    "p4": "Die Anzahl der Installationen gibt uns einen Eindruck von der Popularität oder dem Interesse von Nutzer*innen an einer App. Derzeit verfügen wir nur über solche Zahlen aus dem Google PlayStore, da aber die meisten Geräte das Google Betriebssystem Android nutzen, geben uns diese Zahlen eine zuverlässigen Eindruck vom gesamten Marktanteil der Messaging-Apps."
 }

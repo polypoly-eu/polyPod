@@ -1,6 +1,6 @@
 {
-    "company.p1": "This diagram shows the different data types a company collects and shares. Each circle represents one data type.",
-    "shares.p1": "This diagram shows the different data types a company collects and shares. Each circle represents one data type. The size of each circle represents the number of times this datatype is shared with other companies.",
-    "types.p1": "This diagram shows the different data types all companies collect and share. Each circle represents one data type.",
-    "p2": "This information is based on research of the companies' privacy policies."
+    "company.p1": "Dieses Diagramm zeigt die verschiedenen Datentypen, die Firmen sammeln und teilen. Jeder Kreis stellt einen Datentypen dar.",
+    "shares.p1": "Dieses Diagramm zeigt die verschiedenen Datentypen, die Firmen sammeln und teilen. Jeder Kreis stellt einen Datentypen dar. Die Größe jedes Kreises stellt dar, wie oft dieser Datentyp mit anderen Firmen geteilt wird.",
+    "types.p1": "Dieses Diagramm zeigt die verschiedenen Datentypen, die Firmen sammeln und teilen. Jeder Kreis stellt einen Datentypen dar.",
+    "p2": "Diese Information basiert auf einer Recherche der Datenschutzerklärungen der Unternehmen."
 }
