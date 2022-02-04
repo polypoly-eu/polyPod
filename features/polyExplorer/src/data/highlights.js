@@ -478,28 +478,28 @@ export default {
                 category: "dpv:Contact",
                 explanation: {
                     de: "Der Kontaktgraph, also die Übersicht über alle Kontakte einer Person kann genutzt werden, um Interessensgruppen, Clubs, etc. zu identifizieren.",
-                    en: "",
+                    en: "The contact graph, i.e. the overview of all contacts someone has, which can be used to identify interest groups, clubs, etc.",
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Communication",
                 explanation: {
                     de: "Kommunikationsverhalten sagt viel darüber aus, wer einem wichtig ist. Und damit eben auch, wessen Ansichten man teilt.",
-                    en: "",
+                    en: "Communication behaviour says a lot about who is important to you, indicating thus whose views you might share.",
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:TelephoneNumber",
                 explanation: {
                     de: "Die Telefonnummer ist ein sehr stabiles Datum, mit dem man an vielfältigen Stellen wiedererkannt werden kann.",
-                    en: "",
+                    en: "Your phone number is a steady and stable data point which can be used to identify you across a number of services.",
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:ServiceConsumptionBehaviour",
                 explanation: {
-                    de: "Zu wissen, wie ein Dienst genutzt wird, ist für Firmen immer wichtig. Zusätzlich können so Metadaten entstehen, die von Behörden abgefragt werden könnten. Signal speichert hier aber schon sehr wenig und verhält sich vorbildlich, wenn Behören Datenanfragen stellen.",
-                    en: "",
+                    de: "Zu wissen, wie ein Dienst genutzt wird, ist für Firmen immer wichtig. Zusätzlich können so Metadaten entstehen, die von Behörden abgefragt werden könnten. Signal speichert hier aber schon sehr wenig und verhält sich vorbildlich, wenn Behörden Datenanfragen stellen.",
+                    en: "It is always important for companies to know how a service is used. In addition, metadata can be created that could be queried by authorities. However, Signal stores very little data and behaves in an exemplary manner when authorities make data requests.",
                 },
             },
             // TODO: dpv:Financial doesn't exist for Signal?
@@ -513,11 +513,11 @@ export default {
             name: "Giphy, Inc. (US)",
             companyExplanation: {
                 de: "Giphy ist eine Firma, die Memes und sogenannte Reaction Gifs anbietet. Signal hat Giphy Emojis und Bilder eingebunden. Damit kann Giphy über Umwege sehen, wer Signal wie häufig nutzt.",
-                en: "",
+                en: "Giphy is a company that offers memes and so-called 'reaction gifs'. Signal has integrated Giphy emojis and images. This allows Giphy to see who uses Signal and how often.",
             },
             industryExplanation: {
                 de: "Giphy ist eine amerikanische Online-Datenbank und Suchmaschine, mit der Benutzer animierte GIF-Dateien suchen und teilen können. Giphy hat Sitze in New York und Los Angeles, die Gründer sind Jace Cooke und Alex Chung. Am Freitag, den 15. Mai 2020 wurde Giphy von Facebook gekauft. (aus Wikipedia)",
-                en: "",
+                en: "Giphy (/ˈɡɪfi/ GHIF-ee), styled as GIPHY, is an American online database and search engine that allows users to search for and share short looping videos with no sound, that resemble animated GIF files. On 15 May 2020, Giphy was acquired by Facebook for a reported $400 million. Giphy has partnered with over 200 companies and brands to host all their existing content on their own branded channel. Giphy's partners include Disney, Calvin Klein, GE, and Pepsi. (Wikipedia)",
             },
         },
     },
@@ -534,28 +534,28 @@ export default {
                 category: "dpv:Contact",
                 explanation: {
                     de: "Der Kontaktgraph, also die Übersicht über alle Kontakte einer Person kann genutzt werden, um Interessensgruppen, Clubs, etc. zu identifizieren.",
-                    en: "",
+                    en: "The contact graph, i.e. the overview of all contacts someone has, which can be used to identify interest groups, clubs, etc.",
                 },
             },
             [parentCategories.social]: {
                 category: "dpv:Communication",
                 explanation: {
                     de: "Kommunikationsverhalten sagt viel darüber aus, wer einem wichtig ist. Und damit eben auch, wessen Ansichten man teilt.",
-                    en: "",
+                    en: "Communication behaviour says a lot about who is important to you, indicating thus whose views you might share.",
                 },
             },
             [parentCategories.technical]: {
                 category: "dpv:TelephoneNumber",
                 explanation: {
                     de: "Die Telefonnummer ist ein sehr stabiles Datum, mit dem man an vielfältigen Stellen wiedererkannt werden kann.",
-                    en: "",
+                    en: "Your phone number is a steady and stable data point which can be used to identify you across a number of services.",
                 },
             },
             [parentCategories.behavioral]: {
                 category: "dpv:ServiceConsumptionBehaviour",
                 explanation: {
                     de: "Zu wissen, wie ein Dienst genutzt wird, ist für Firmen immer wichtig. Zusätzlich können so Metadaten entstehen, die von Behörden abgefragt werden könnten. Signal speichert hier aber schon sehr wenig und verhält sich vorbildlich, wenn Behören Datenanfragen stellen.",
-                    en: "",
+                    en: "It is always important for companies to know how a service is used. In addition, metadata can be created that could be queried by authorities. However, Signal stores very little data and behaves in an exemplary manner when authorities make data requests.",
                 },
             },
             // TODO: dpv:Financial doesn't exist for Signal?
@@ -569,11 +569,11 @@ export default {
             name: "Giphy, Inc. (US)",
             companyExplanation: {
                 de: "Giphy ist eine Firma, die Memes und sogenannte Reaction Gifs anbietet. Signal hat Giphy Emojis und Bilder eingebunden. Damit kann Giphy über Umwege sehen, wer Signal wie häufig nutzt.",
-                en: "",
+                en: "Giphy is a company that offers memes and so-called 'reaction gifs'. Signal has integrated Giphy emojis and images. This allows Giphy to see who uses Signal and how often.",
             },
             industryExplanation: {
                 de: "Giphy ist eine amerikanische Online-Datenbank und Suchmaschine, mit der Benutzer animierte GIF-Dateien suchen und teilen können. Giphy hat Sitze in New York und Los Angeles, die Gründer sind Jace Cooke und Alex Chung. Am Freitag, den 15. Mai 2020 wurde Giphy von Facebook gekauft. (aus Wikipedia)",
-                en: "",
+                en: "Giphy (/ˈɡɪfi/ GHIF-ee), styled as GIPHY, is an American online database and search engine that allows users to search for and share short looping videos with no sound, that resemble animated GIF files. On 15 May 2020, Giphy was acquired by Facebook for a reported $400 million. Giphy has partnered with over 200 companies and brands to host all their existing content on their own branded channel. Giphy's partners include Disney, Calvin Klein, GE, and Pepsi. (Wikipedia)",
             },
         },
     },
@@ -590,7 +590,7 @@ export default {
                 category: "dpv:EmailAddress",
                 explanation: {
                     de: "Wie die Telefonnummer, ist die Emailadresse ein inzwischen sehr stabiles Datum um Menschen im Internet wiederzuerkennen.",
-                    en: "",
+                    en: "Much like a telephone number, your email address has become a stable data point which can be used to identify you on the internet.",
                 },
             },
             /*
@@ -602,7 +602,7 @@ export default {
                 category: "dpv:UID",
                 explanation: {
                     de: "Threema ist selbst für Messenger sehr Datensparsam. An technischen Daten wird nur eine zufällig generierte Userkennung gespeichert - ohne die der Dienst aber auch nicht möglich wäre.",
-                    en: "",
+                    en: "For a messenger at least, Threema minimises data retention. Only a randomly generated user ID is stored as technical data - without which the service would not be possible.",
                 } /*
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
@@ -634,8 +634,8 @@ export default {
         dataTypeCorrelation: {
             types: ["dpv:Contact", "dpv:EmailAddress", "dpv:Picture"],
             explanation: {
-                de: "",
-                en: "Threema collects very little data and very little correlation plausible. The contact graph, the email address and a picture for every person can be nonetheless a rich source for law enforcement for example.",
+                de: "Threema sammelt nur sehr wenige Daten und macht nur sehr wenige Zusammenhänge plausibel. Die Kontaktgrafik, die E-Mail-Adresse und ein Bild für jede Person kann dennoch eine reichhaltige Quelle für die Strafverfolgung sein, zum Beispiel.",
+                en: "Threema collects very little data and very little correlation is therefore plausible. A contact graph, an email address and a picture of every person could nonetheless be a rich source for law enforcement however.",
             },
         },
         dataTypeCategories: {
@@ -643,7 +643,7 @@ export default {
                 category: "dpv:EmailAddress",
                 explanation: {
                     de: "Wie die Telefonnummer, ist die Emailadresse ein inzwischen sehr stabiles Datum um Menschen im Internet wiederzuerkennen.",
-                    en: "",
+                    en: "Much like a telephone number, an email address has become a stable data point which can be used to identify someone on the internet.",
                 },
             },
             /*
@@ -655,7 +655,7 @@ export default {
                 category: "dpv:UID",
                 explanation: {
                     de: "Threema ist selbst für Messenger sehr Datensparsam. An technischen Daten wird nur eine zufällig generierte Userkennung gespeichert - ohne die der Dienst aber auch nicht möglich wäre.",
-                    en: "",
+                    en: "Even for a messenger, Threema really minimises the amount of data they store. Only a randomly generated user ID is stored as technical data - without which the service would not be possible.",
                 } /*
             [parentCategories.behavioral]: {
                 category: "dpv:BrowsingBehavior",
@@ -726,8 +726,8 @@ export default {
         dataRecipient: {
             name: "IBM (US)",
             companyExplanation: {
-                de: "IBM ist eines der weltweit führenden Unternehmen – insbesondere für branchenspezifische Lösungen und Dienstleistungen – im IT-, Software- und Hardware-Bereich. Der Unternehmenssitz ist in Armonk (USA).",
-                en: "IBM is one of the world's leading companies - especially for industry-specific solutions and services - in the IT, software and hardware sectors. The company is headquartered in Armonk (USA).",
+                de: "Apple gibt die iMessage-Nutzerdaten nur an den Empfänger der Nachricht weiter, verwendet aber anonymisierte Daten für umfangreiche Analysen zur Verbesserung seiner Produkte und Dienstleistungen, die es vielleicht mit strategischen Partnern wie IBM teilt.",
+                en: "Apple doesn't specifically share user data from iMessage with anyone, except the message recipient, but they do use anonymised data for massive analytics that are used to improve their products and services – which they perhaps share with strategic partners like IBM.",
             },
             industryExplanation: {
                 de: "Apple ist ein Technologieunternehmen, hat aber ein eigenes Spezialgebiet: Endgeräte für Verbraucher:innen. Andere Aspekte des Geschäfts erfordern andere Fachkenntnisse und die IT-Infrastruktur und Back-End-Systeme werden von strategischen Geschäftspartner:innen aus der IT-Branche bereitgestellt.",
@@ -747,8 +747,8 @@ export default {
             [parentCategories.individual]: {
                 category: "dpv:OfficialID",
                 explanation: {
-                    de: "Gemäß der Satzung der polypoly-Genossenschaft muss jede Person, die Mitglied wird, die Staatsangehörigkeit eines EU-Mitgliedsstaates besitzen. Zu diesem Zweck fragt polypoly die Mitglieder im Rahmen ihres Antrags nach ihrer Staatsangehörigkeit.",
-                    en: "According to the statutes of the polypoly cooperative, anyone who becomes a member must have the citizenship of an EU member state. For this purpose we ask members their nationality as part of their application.",
+                    de: "Ein amtlicher Ausweis wird zur Identitätsüberprüfung oder für einige Dienste verwendet, die mehr als nur ein Konto erfordern, wie z. B. Zahlungen, bei denen eine Zahlungsmethode mit den Finanzen einer Person verbunden sein muss.",
+                    en: "An official ID is usually used for identity verification purposes, or some services which require more than just having an account - like payment, where a payment method needs to be connected to the finances of a person.",
                 },
             },
             [parentCategories.social]: {
@@ -756,67 +756,77 @@ export default {
             },
             [parentCategories.technical]: {
                 category: "dpv:DeviceSoftware",
-            },
-            [parentCategories.behavioral]: {
-                category: "dpv:BrowsingBehavior",
-            },
-            // TODO: dpv:Financial doesn't exist for polypoly
-            /*
+                explanation: {
+                    de: "Die Kenntnis der auf einem Gerät installierten Software kann sehr nützlich sein, um bestimmte Benutzer zu identifizieren - allein die genaue Kombination von Anwendungen auf einem Gerät kann ausreichen, um einen bestimmten Benutzer zu identifizieren.",
+                    en: "Knowing the software installed on a device can be very useful in identifying specific users - the precise combination of applications on a device alone can be enough to identify a specific user.",
+                },
+                [parentCategories.behavioral]: {
+                    category: "dpv:BrowsingBehavior",
+                    explanation: {
+                        de: "Das Browsing-Verhalten allein kann zur Identifizierung einer Person verwendet werden, wenn die Daten eine ausreichend lange Historie aufweisen - für das Browsing-Verhalten reichen bereits zwei Wochen aus. (https://hal.inria.fr/hal-00747841/document)",
+                        en: "Browsing behaviour alone can be used to identify an individual if the data contains a long enough history - for browsing behaviour, as little as two weeks is enough. (https://hal.inria.fr/hal-00747841/document)",
+                    },
+                    // TODO: dpv:Financial doesn't exist for polypoly
+                    /*
             [parentCategories.financial]: {
                 category: "dpv:Financial",
             },
             */
-        },
-        dataRecipient: {
-            name: "elopage GmbH (DE)",
-            companyExplanation: {
-                de: "Die elopage GmbH mit Sitz in Berlin (DE) bietet Onlinelösungen für eigene Bezahlseiten, die Erstellung der Produkte und Upsells in einem Tool.",
-                en: "elopage GmbH, based in Berlin (DE), offers online solutions for own payment pages, the creation of products and upsells in one tool.",
-            },
-            industryExplanation: {
-                de: "Persönliche Daten werden weitergegeben, um Zahlungen barrierearm zu ermöglichen und um die gesetzlichen Verpflichtungen zu erfüllen, die polypoly als europaweite Datengenossenschaft hat.",
-                en: "Data is shared in order to make payment possible, and to fulfil the legal obligations that polypoly has as a Europe wide data cooperative.",
-            },
-        },
-    },
-    WhatsApp: {
-        dataTypeCorrelation: {
-            types: ["dpv:Location", "dpv:TelephoneNumber", "dpv:Username"],
-            explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. WhatsApp assumes your country based on your phone number and your city can be estimated based on your IP address. More precise location information is collected if you choose to use location-related features, and your device characteristics can easily be used link your WhatsApp communication patterns with all of your Facebook Data.",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. WhatsApp assumes your country based on your phone number and your city can be estimated based on your IP address. More precise location information is collected if you choose to use location-related features, and your device characteristics can easily be used link your WhatsApp communication patterns with all of your Facebook Data.",
-            },
-        },
-        dataTypeCategories: {
-            [parentCategories.individual]: {
-                category: "dpv:Location",
-                explanation: {
-                    de: "Ortsinformationen, wer wann wo war sind hochsensibel und könne auf vielfältige Art verwendet werden. Sind in der eigenen Umgebung teure Geschäfte oder nicht, war man beim Arzt oder im Fitness-Studio?",
-                    en: "",
+                },
+                dataRecipient: {
+                    name: "LiveRamp, Inc. (US)",
+                    companyExplanation: {
+                        de: "LiveRamp ist eines der größten Unternehmen für Data Onboarding in den Vereinigten Staaten. Das Unternehmen ist auf die Digitalisierung von Marketingressourcen spezialisiert und bietet darüber hinaus Dienstleistungen wie einen Datenmarktplatz, Analysen und Zugang zu einem Netzwerk von über 500 Partnern.",
+                        en: "LiveRamp is one of the largest data onboarding companies in the United States. They specialise in digitising marketing resources and offer services on top such as a data marketplace, analytics and access to a 500+ partner network.",
+                    },
+                    industryExplanation: {
+                        de: "LiveRamp bietet Dienste zur Identitätsauflösung an, d. h. der Abgleich von Daten, über die Kunden bereits verfügen, mit anderen Datensätzen. LiveRamp verwendet 'RampIDs' als Identifikatoren für die Transkodierung, was es den Kunden ermöglicht, Nutzerdaten über mehrere Datensätze hinweg zu analysieren.",
+                        en: "LiveRamp offer identity resolution services - matching data clients already have to other datasets. LiveRamp uses 'RampIDs' as identifiers for transcoding, which allows clients to analyse user data across multiple datasets.",
+                    },
                 },
             },
-            [parentCategories.social]: {
-                category: "dpv:Language",
-                explanation: {
-                    de: "Natürlich muss ein Dienst wissen, in welcher Sprache ich ihn dargestellt haben möchte. Es ist aber eben auch ein Datum, dass mit anderen korreliert werden kann und dass einen zum Beispiel dann auffällig macht, wenn die Sprache mit dem Aufenthaltsort nicht übereinstimmt.",
-                    en: "",
+            WhatsApp: {
+                dataTypeCorrelation: {
+                    types: [
+                        "dpv:Location",
+                        "dpv:TelephoneNumber",
+                        "dpv:Username",
+                    ],
+                    explanation: {
+                        de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. WhatsApp assumes your country based on your phone number and your city can be estimated based on your IP address. More precise location information is collected if you choose to use location-related features, and your device characteristics can easily be used link your WhatsApp communication patterns with all of your Facebook Data.",
+                        en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. WhatsApp assumes your country based on your phone number and your city can be estimated based on your IP address. More precise location information is collected if you choose to use location-related features, and your device characteristics can easily be used link your WhatsApp communication patterns with all of your Facebook Data.",
+                    },
                 },
-            },
-            [parentCategories.technical]: {
-                category: "dpv:DeviceApplications",
-                explanation: {
-                    de: "Anwendungen, die mit WhatsApp interagieren können sich verraten. Damit weiß Facebook, welche Apps man sonst noch so benutzt. Eine Dating App vielleicht?",
-                    en: "",
-                },
-            },
-            [parentCategories.behavioral]: {
-                category: "dpv:CallLog",
-                explanation: {
-                    de: "Wenn WhatsApp weiß, mit wem ich regelmäßig spreche, dann weiß Facebook auch, wer mir nahe steht.",
-                    en: "",
-                },
-            },
-            /* we should skip this
+                dataTypeCategories: {
+                    [parentCategories.individual]: {
+                        category: "dpv:Location",
+                        explanation: {
+                            de: "Ortsinformationen, wer wann wo war sind hochsensibel und könne auf vielfältige Art verwendet werden. Sind in der eigenen Umgebung teure Geschäfte oder nicht, war man beim Arzt oder im Fitness-Studio?",
+                            en: "Location information, who was where and when, is highly sensitive and can be used in many ways. Have you been to the doctor or to the gym recently? Are there expensive stores in your area or not?",
+                        },
+                    },
+                    [parentCategories.social]: {
+                        category: "dpv:Language",
+                        explanation: {
+                            de: "Natürlich muss ein Dienst wissen, in welcher Sprache ich ihn dargestellt haben möchte. Es ist aber eben auch ein Datum, dass mit anderen korreliert werden kann und dass einen zum Beispiel dann auffällig macht, wenn die Sprache mit dem Aufenthaltsort nicht übereinstimmt.",
+                            en: "Of course, a service must know which language I want to be displayed. But it can also be correlated with other data that makes you conspicuous, for example, if the language does not match the location.",
+                        },
+                    },
+                    [parentCategories.technical]: {
+                        category: "dpv:DeviceApplications",
+                        explanation: {
+                            de: "Anwendungen, die mit WhatsApp interagieren können sich verraten. Damit weiß Facebook, welche Apps man sonst noch so benutzt. Eine Dating App vielleicht?",
+                            en: "Apps that interact with WhatsApp can give themselves away. This lets Facebook know what other apps you use. A dating app, perhaps?",
+                        },
+                    },
+                    [parentCategories.behavioral]: {
+                        category: "dpv:CallLog",
+                        explanation: {
+                            de: "Wenn WhatsApp weiß, mit wem ich regelmäßig spreche, dann weiß Facebook auch, wer mir nahe steht.",
+                            en: "If WhatsApp knows who I talk to regularly, Facebook knows who I'm close to.",
+                        },
+                    },
+                    /* we should skip this
             [parentCategories.financial]: {
                 category: "dpv:PaymentCardNumber",
                 explanation: {
@@ -826,57 +836,61 @@ export default {
                         "",
                 },
             }, */
-        },
-        dataRecipient: {
-            name: "Shopify (CA)",
-            companyExplanation: {
-                de: "",
-                en: "",
-            },
-            industryExplanation: {
-                de: "",
-                en: "",
-            },
-        },
-    },
-    "Whatsapp LLC (US)": {
-        dataTypeCorrelation: {
-            types: ["dpv:Location", "dpv:TelephoneNumber", "dpv:Username"],
-            explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. WhatsApp assumes your country based on your phone number and your city can be estimated based on your IP address. More precise location information is collected if you choose to use location-related features, and your device characteristics can easily be used link your WhatsApp communication patterns with all of your Facebook Data.",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. WhatsApp assumes your country based on your phone number and your city can be estimated based on your IP address. More precise location information is collected if you choose to use location-related features, and your device characteristics can easily be used link your WhatsApp communication patterns with all of your Facebook Data.",
-            },
-        },
-        dataTypeCategories: {
-            [parentCategories.individual]: {
-                category: "dpv:Location",
-                explanation: {
-                    de: "Ortsinformationen, wer wann wo war sind hochsensibel und könne auf vielfältige Art verwendet werden. Sind in der eigenen Umgebung teure Geschäfte oder nicht, war man beim Arzt oder im Fitness-Studio?",
-                    en: "",
+                },
+                dataRecipient: {
+                    name: "Shopify (CA)",
+                    companyExplanation: {
+                        de: "Shopify ist einer der Marktführer im wachsenden Bereich des Online-Handels. Shopify erhält Daten von WhatsApp / Facebook, wenn Kunden sich an sie wenden, um über einen dieser Dienste Geschäfte zu tätigen. (Partnerverzeichnis - Verkaufen auf Facebook)",
+                        en: "Shopify are one of the market leaders in the growing field of online retail. Shopify recieves data from WhatsApp / Facebook when customers approach them looking to do business via one of these services. (Partner Directory - selling on Facebook)",
+                    },
+                    industryExplanation: {
+                        de: "Einzelhandel und Konsum sind die Branchen, die am stärksten von der Werbung beeinflusst werden - die Massen zum Kauf neuer Produkte zu bewegen und den Bekanntheitsgrad der Marke zu steigern, sind die wichtigsten Ziele der Online-Werber. Ihre Kunden wiederum sind Unternehmen, die Konsumgüter herstellen, die verkauft und konsumiert werden sollen.",
+                        en: "Retail and Consumption is the industry most influenced by advertising - persuading the masses to buy new products and increasing brand awareness are chief among the goals of online advertisers. Their clients in turn are companies that produce consumer goods to be sold and consumed.",
+                    },
                 },
             },
-            [parentCategories.social]: {
-                category: "dpv:Language",
-                explanation: {
-                    de: "Natürlich muss ein Dienst wissen, in welcher Sprache ich ihn dargestellt haben möchte. Es ist aber eben auch ein Datum, dass mit anderen korreliert werden kann und dass einen zum Beispiel dann auffällig macht, wenn die Sprache mit dem Aufenthaltsort nicht übereinstimmt.",
-                    en: "",
+            "Whatsapp LLC (US)": {
+                dataTypeCorrelation: {
+                    types: [
+                        "dpv:Location",
+                        "dpv:TelephoneNumber",
+                        "dpv:Username",
+                    ],
+                    explanation: {
+                        de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. WhatsApp assumes your country based on your phone number and your city can be estimated based on your IP address. More precise location information is collected if you choose to use location-related features, and your device characteristics can easily be used link your WhatsApp communication patterns with all of your Facebook Data.",
+                        en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. WhatsApp assumes your country based on your phone number and your city can be estimated based on your IP address. More precise location information is collected if you choose to use location-related features, and your device characteristics can easily be used link your WhatsApp communication patterns with all of your Facebook Data.",
+                    },
                 },
-            },
-            [parentCategories.technical]: {
-                category: "dpv:DeviceApplications",
-                explanation: {
-                    de: "Anwendungen, die mit WhatsApp interagieren können sich verraten. Damit weiß Facebook, welche Apps man sonst noch so benutzt. Eine Dating App vielleicht?",
-                    en: "",
-                },
-            },
-            [parentCategories.behavioral]: {
-                category: "dpv:CallLog",
-                explanation: {
-                    de: "Wenn WhatsApp weiß, mit wem ich regelmäßig spreche, dann weiß Facebook auch, wer mir nahe steht.",
-                    en: "",
-                },
-            },
-            /* we should skip this
+                dataTypeCategories: {
+                    [parentCategories.individual]: {
+                        category: "dpv:Location",
+                        explanation: {
+                            de: "Ortsinformationen, wer wann wo war sind hochsensibel und könne auf vielfältige Art verwendet werden. Sind in der eigenen Umgebung teure Geschäfte oder nicht, war man beim Arzt oder im Fitness-Studio?",
+                            en: "Location information, who was where and when, is highly sensitive and can be used in many ways. Have you been to the doctor or to the gym recently? Are there expensive stores in your area or not?",
+                        },
+                    },
+                    [parentCategories.social]: {
+                        category: "dpv:Language",
+                        explanation: {
+                            de: "Natürlich muss ein Dienst wissen, in welcher Sprache ich ihn dargestellt haben möchte. Es ist aber eben auch ein Datum, dass mit anderen korreliert werden kann und dass einen zum Beispiel dann auffällig macht, wenn die Sprache mit dem Aufenthaltsort nicht übereinstimmt.",
+                            en: "Of course, a service must know which language I want to be displayed. But it can also be correlated with other data that makes you conspicuous, for example, if the language does not match the location.",
+                        },
+                    },
+                    [parentCategories.technical]: {
+                        category: "dpv:DeviceApplications",
+                        explanation: {
+                            de: "Anwendungen, die mit WhatsApp interagieren können sich verraten. Damit weiß Facebook, welche Apps man sonst noch so benutzt. Eine Dating App vielleicht?",
+                            en: "Apps that interact with WhatsApp can give themselves away. This lets Facebook know what other apps you use. A dating app, perhaps?",
+                        },
+                    },
+                    [parentCategories.behavioral]: {
+                        category: "dpv:CallLog",
+                        explanation: {
+                            de: "Wenn WhatsApp weiß, mit wem ich regelmäßig spreche, dann weiß Facebook auch, wer mir nahe steht.",
+                            en: "If WhatsApp knows who I talk to regularly, Facebook knows who I'm close to.",
+                        },
+                    },
+                    /* we should skip this
             [parentCategories.financial]: {
                 category: "dpv:PaymentCardNumber",
                 explanation: {
@@ -886,345 +900,351 @@ export default {
                         "",
                 },
             }, */
-        },
-        dataRecipient: {
-            name: "Shopify (CA)",
-            companyExplanation: {
-                de: "",
-                en: "",
-            },
-            industryExplanation: {
-                de: "",
-                en: "",
-            },
-        },
-    },
-    "Facebook Messenger": {
-        dataTypeCorrelation: {
-            types: ["dpv:TelephoneNumber", "dpv:LifeHistory", "dpv:Biometric"],
-            explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die sonst aus den einzelnen Datenpunkten allein nicht möglich wären. Nur durch die gemeinsame Nutzung von Daten mit potenziellen Werbetreibenden kann Facebook die Nutzenden bis hin zu sehr feinen Spezifikationen ansprechen. Werbung ist nicht mehr etwas, das offen für alle sichtbar ist, sondern eine individuell zugeschnittene Nachricht, die darauf abzielt, die Personen zu beeinflussen, die für ihren Einfluss als empfänglich erachtet werden.",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. Only by sharing data with prospective advertisers can Facebook target their users down to very finely detailed specifications. Advertising is no longer something that is openly visible for all to see, but individually bespoke messaging designed to influence the individuals deemed susceptible to its influence.",
-            },
-        },
-        dataTypeCategories: {
-            [parentCategories.individual]: {
-                category: "dpv:Age",
-            },
-            [parentCategories.social]: {
-                category: "dpv:PoliticalAffiliation",
-                explanation: {
-                    de: 'Für viele der Nutzenden hat Facebook Zugriff auf die Arten von personenbezogenen Daten, die unter der GDPR als „besondere Kategorie personenbezogener Daten" der sensibelsten Art eingestuft werden. Dazu gehören Informationen über die politische Zugehörigkeit, die Religion oder die ethnische Herkunft einer Person. Facebook-Dating erklärt ausdrücklich, dass religiöse Ansichten oder das Interesse an der Partner:innen-Suche mit bestimmten Geschlechtern keinen Einfluss auf die angezeigte Werbung der Nutzenden haben, politische Ansichten sind davon jedoch ausgenommen und werden auch mit dieser Funktion weiter für individualisierte Werbeanzeigen genutzt.',
-                    en: "For many of its users, Facebook has access to the kinds of personal data that are classified under the GDPR as \"Special Category Personal Data\" of the most sensitive kind. This includes information about individual's political affiliations, religion, or that pertaining to ethnic origin. Facebook Dating expressly states that religious views or interest in dating particular gender(s) will not influence a user's experience of advertising, but don't make an exception for political views.",
+                },
+                dataRecipient: {
+                    name: "Shopify (CA)",
+                    companyExplanation: {
+                        de: "Shopify ist einer der Marktführer im wachsenden Bereich des Online-Handels. Shopify erhält Daten von WhatsApp / Facebook, wenn Kunden sich an sie wenden, um über einen dieser Dienste Geschäfte zu tätigen. (Partnerverzeichnis - Verkaufen auf Facebook)",
+                        en: "Shopify are one of the market leaders in the growing field of online retail. Shopify recieves data from WhatsApp / Facebook when customers approach them looking to do business via one of these services. (Partner Directory - selling on Facebook)",
+                    },
+                    industryExplanation: {
+                        de: "Einzelhandel und Konsum sind die Branchen, die am stärksten von der Werbung beeinflusst werden - die Massen zum Kauf neuer Produkte zu bewegen und den Bekanntheitsgrad der Marke zu steigern, sind die wichtigsten Ziele der Online-Werber. Ihre Kunden wiederum sind Unternehmen, die Konsumgüter herstellen, die verkauft und konsumiert werden sollen.",
+                        en: "Retail and Consumption is the industry most influenced by advertising - persuading the masses to buy new products and increasing brand awareness are chief among the goals of online advertisers. Their clients in turn are companies that produce consumer goods to be sold and consumed.",
+                    },
                 },
             },
-            [parentCategories.technical]: {
-                category: "dpv:BrowserFingerprint",
-            },
-            [parentCategories.behavioral]: {
-                category: "dpv:PoliticalAffiliation",
-                explanation: {
-                    de: 'Für viele der Nutzenden hat Facebook Zugriff auf die Arten von personenbezogenen Daten, die unter der GDPR als „besondere Kategorie personenbezogener Daten" der sensibelsten Art eingestuft werden. Dazu gehören Informationen über die politische Zugehörigkeit, die Religion oder die ethnische Herkunft einer Person. Facebook-Dating erklärt ausdrücklich, dass religiöse Ansichten oder das Interesse an der Partner:innen-Suche mit bestimmten Geschlechtern keinen Einfluss auf die angezeigte Werbung der Nutzenden haben, politische Ansichten sind davon jedoch ausgenommen und werden auch mit dieser Funktion weiter für individualisierte Werbeanzeigen genutzt.',
-                    en: "For many of its users, Facebook has access to the kinds of personal data that are classified under the GDPR as \"Special Category Personal Data\" of the most sensitive kind. This includes information about individual's political affiliations, religion, or that pertaining to ethnic origin. Facebook Dating expressly states that religious views or interest in dating particular gender(s) will not influence a user's experience of advertising, but don't make an exception for political views.",
+            "Facebook Messenger": {
+                dataTypeCorrelation: {
+                    types: [
+                        "dpv:TelephoneNumber",
+                        "dpv:LifeHistory",
+                        "dpv:Biometric",
+                    ],
+                    explanation: {
+                        de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die sonst aus den einzelnen Datenpunkten allein nicht möglich wären. Nur durch die gemeinsame Nutzung von Daten mit potenziellen Werbetreibenden kann Facebook die Nutzenden bis hin zu sehr feinen Spezifikationen ansprechen. Werbung ist nicht mehr etwas, das offen für alle sichtbar ist, sondern eine individuell zugeschnittene Nachricht, die darauf abzielt, die Personen zu beeinflussen, die für ihren Einfluss als empfänglich erachtet werden.",
+                        en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. Only by sharing data with prospective advertisers can Facebook target their users down to very finely detailed specifications. Advertising is no longer something that is openly visible for all to see, but individually bespoke messaging designed to influence the individuals deemed susceptible to its influence.",
+                    },
                 },
-            },
-            // TODO: dpv:Financial doesn't seem to be in there
-            /*
+                dataTypeCategories: {
+                    [parentCategories.individual]: {
+                        category: "dpv:Age",
+                    },
+                    [parentCategories.social]: {
+                        category: "dpv:PoliticalAffiliation",
+                        explanation: {
+                            de: 'Für viele der Nutzenden hat Facebook Zugriff auf die Arten von personenbezogenen Daten, die unter der GDPR als „besondere Kategorie personenbezogener Daten" der sensibelsten Art eingestuft werden. Dazu gehören Informationen über die politische Zugehörigkeit, die Religion oder die ethnische Herkunft einer Person. Facebook-Dating erklärt ausdrücklich, dass religiöse Ansichten oder das Interesse an der Partner:innen-Suche mit bestimmten Geschlechtern keinen Einfluss auf die angezeigte Werbung der Nutzenden haben, politische Ansichten sind davon jedoch ausgenommen und werden auch mit dieser Funktion weiter für individualisierte Werbeanzeigen genutzt.',
+                            en: "For many of its users, Facebook has access to the kinds of personal data that are classified under the GDPR as \"Special Category Personal Data\" of the most sensitive kind. This includes information about individual's political affiliations, religion, or that pertaining to ethnic origin. Facebook Dating expressly states that religious views or interest in dating particular gender(s) will not influence a user's experience of advertising, but don't make an exception for political views.",
+                        },
+                    },
+                    [parentCategories.technical]: {
+                        category: "dpv:BrowserFingerprint",
+                    },
+                    [parentCategories.behavioral]: {
+                        category: "dpv:PoliticalAffiliation",
+                        explanation: {
+                            de: 'Für viele der Nutzenden hat Facebook Zugriff auf die Arten von personenbezogenen Daten, die unter der GDPR als „besondere Kategorie personenbezogener Daten" der sensibelsten Art eingestuft werden. Dazu gehören Informationen über die politische Zugehörigkeit, die Religion oder die ethnische Herkunft einer Person. Facebook-Dating erklärt ausdrücklich, dass religiöse Ansichten oder das Interesse an der Partner:innen-Suche mit bestimmten Geschlechtern keinen Einfluss auf die angezeigte Werbung der Nutzenden haben, politische Ansichten sind davon jedoch ausgenommen und werden auch mit dieser Funktion weiter für individualisierte Werbeanzeigen genutzt.',
+                            en: "For many of its users, Facebook has access to the kinds of personal data that are classified under the GDPR as \"Special Category Personal Data\" of the most sensitive kind. This includes information about individual's political affiliations, religion, or that pertaining to ethnic origin. Facebook Dating expressly states that religious views or interest in dating particular gender(s) will not influence a user's experience of advertising, but don't make an exception for political views.",
+                        },
+                    },
+                    // TODO: dpv:Financial doesn't seem to be in there
+                    /*
             [parentCategories.financial]: {
                 category: "dpv:Financial",
             },
             */
-        },
-        dataRecipient: {
-            name: "University College London (GB)",
-            companyExplanation: {
-                de: "Das University College London (UK) gehört zur Universität London und ist als Mitglied der Russell-Gruppe (Verbund 24 führender, britischer Forschungsuniversitäten) eine der angesehensten Eliteuniversitäten der Welt.",
-                en: "University College London (UK) is part of the University of London and, as a member of the Russell Group (an association of 24 leading British research universities), is one of the most prestigious elite universities in the world.",
-            },
-            industryExplanation: {
-                de: "Der berüchtigte Datenskandal von Cambridge Analytica wurde durch eine Quiz-App ermöglicht, die angeblich Informationen von Facebook-Nutzenden zu Forschungszwecken sammelte und dann für die Durchführung fragwürdiger Wahlkampagnen verkaufte. Die Auswirkungen dieses Skandals trugen maßgeblich zur Einführung der derzeitigen europäischen GDPR-Richtlinien bei.",
-                en: "The infamous Cambridge Analytica data scandal was made possible using a personality quiz app that was supposedly gathering information from Facebook users for research purposes. The fallout from this has contributed significantly to the introduction of the GDPR framework we now enjoy.",
-            },
-        },
-    },
-    TikTok: {
-        dataTypeCorrelation: {
-            types: ["dpv:Age", "dpv:Interest", "dpv:Picture"],
-            explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die sonst aus den einzelnen Datenpunkten allein nicht möglich wären. TikTok merkt sich alle viralen Videos, die die Nutzer:innen am häufigsten ansehen, und nutzt ein immer tiefer gehendes Wissen über individuelle Präferenzen, die Unterhaltungsauswahl und Trends, um die Firmen, denen TikTok Werbeplatzierungen, verkauft, über das Verhalten der App-Nutzenden, zu informieren.",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. TikTok notes all the viral videos users view the most and harnesses an ever deepening knowledge about tastes, entertainment choices and trends to inform the advertising placements it sells to its customers.",
-            },
-        },
-        dataTypeCategories: {
-            [parentCategories.individual]: {
-                category: "dpv:Age",
-                explanation: {
-                    de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
-                    en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+                },
+                dataRecipient: {
+                    name: "University College London (GB)",
+                    companyExplanation: {
+                        de: "Das University College London (UK) gehört zur Universität London und ist als Mitglied der Russell-Gruppe (Verbund 24 führender, britischer Forschungsuniversitäten) eine der angesehensten Eliteuniversitäten der Welt.",
+                        en: "University College London (UK) is part of the University of London and, as a member of the Russell Group (an association of 24 leading British research universities), is one of the most prestigious elite universities in the world.",
+                    },
+                    industryExplanation: {
+                        de: "Der berüchtigte Datenskandal von Cambridge Analytica wurde durch eine Quiz-App ermöglicht, die angeblich Informationen von Facebook-Nutzenden zu Forschungszwecken sammelte und dann für die Durchführung fragwürdiger Wahlkampagnen verkaufte. Die Auswirkungen dieses Skandals trugen maßgeblich zur Einführung der derzeitigen europäischen GDPR-Richtlinien bei.",
+                        en: "The infamous Cambridge Analytica data scandal was made possible using a personality quiz app that was supposedly gathering information from Facebook users for research purposes. The fallout from this has contributed significantly to the introduction of the GDPR framework we now enjoy.",
+                    },
                 },
             },
-            [parentCategories.social]: {
-                category: "dpv:Interest",
-                explanation: {
-                    de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
-                    en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+            TikTok: {
+                dataTypeCorrelation: {
+                    types: ["dpv:Age", "dpv:Interest", "dpv:Picture"],
+                    explanation: {
+                        de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die sonst aus den einzelnen Datenpunkten allein nicht möglich wären. TikTok merkt sich alle viralen Videos, die die Nutzer:innen am häufigsten ansehen, und nutzt ein immer tiefer gehendes Wissen über individuelle Präferenzen, die Unterhaltungsauswahl und Trends, um die Firmen, denen TikTok Werbeplatzierungen, verkauft, über das Verhalten der App-Nutzenden, zu informieren.",
+                        en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. TikTok notes all the viral videos users view the most and harnesses an ever deepening knowledge about tastes, entertainment choices and trends to inform the advertising placements it sells to its customers.",
+                    },
                 },
-            },
-            // TODO: Not in there
-            /*
+                dataTypeCategories: {
+                    [parentCategories.individual]: {
+                        category: "dpv:Age",
+                        explanation: {
+                            de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
+                            en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+                        },
+                    },
+                    [parentCategories.social]: {
+                        category: "dpv:Interest",
+                        explanation: {
+                            de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
+                            en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+                        },
+                    },
+                    // TODO: Not in there
+                    /*
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
             },
             */
-            [parentCategories.behavioral]: {
-                category: "dpv:BrowsingBehavior",
-            },
-            [parentCategories.financial]: {
-                category: "dpv:Transactional",
-            },
-        },
-        dataRecipient: {
-            name: "ByteDance Ltd. (KY)",
-            companyExplanation: {
-                de: "ByteDance ist der TikTok-Mutterkonzern – mit dem Hauptquartier in Peking (China). Wie viele chinesische Unternehmen, gehört auch das interne ByteDance-Firmenkomitee der kommunistischen Partei Chinas an, was u.a. zu inhaltlichen Zensuren auf TikTok führt.",
-                en: "ByteDance is the company behind TikTok. Like many Chinese companies - ByteDance's internal corporate committee belongs to the Chinese Communist Party, which leads to content censorship on TikTok, among other things.",
-            },
-            industryExplanation: {
-                de: "Wie viele Firmen, ist auch TikTok ein zusammenhängendes Netzwerk von Unternehmen, die u.a. aus steuerrechtlichen Gründen über verschiedene Länder verteilt sind. Der Datenaustausch zwischen diesen verbundenen Unternehmen ist gängige Praxis und findet regelmäßig statt.",
-                en: "Like many companies, TikTok is an interconnected web of companies spread across different countries. Data sharing between these related companies is standard practice and takes place routinely.",
-            },
-        },
-    },
-    "TikTok Technology Limited (IE)": {
-        dataTypeCorrelation: {
-            types: ["dpv:Age", "dpv:Interest", "dpv:Picture"],
-            explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die sonst aus den einzelnen Datenpunkten allein nicht möglich wären. TikTok merkt sich alle viralen Videos, die die Nutzer:innen am häufigsten ansehen, und nutzt ein immer tiefer gehendes Wissen über individuelle Präferenzen, die Unterhaltungsauswahl und Trends, um die Firmen, denen TikTok Werbeplatzierungen, verkauft, über das Verhalten der App-Nutzenden, zu informieren.",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. TikTok notes all the viral videos users view the most and harnesses an ever deepening knowledge about tastes, entertainment choices and trends to inform the advertising placements it sells to its customers.",
-            },
-        },
-        dataTypeCategories: {
-            [parentCategories.individual]: {
-                category: "dpv:Age",
-                explanation: {
-                    de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
-                    en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+                    [parentCategories.behavioral]: {
+                        category: "dpv:BrowsingBehavior",
+                    },
+                    [parentCategories.financial]: {
+                        category: "dpv:Transactional",
+                    },
+                },
+                dataRecipient: {
+                    name: "ByteDance Ltd. (KY)",
+                    companyExplanation: {
+                        de: "ByteDance ist der TikTok-Mutterkonzern – mit dem Hauptquartier in Peking (China). Wie viele chinesische Unternehmen, gehört auch das interne ByteDance-Firmenkomitee der kommunistischen Partei Chinas an, was u.a. zu inhaltlichen Zensuren auf TikTok führt.",
+                        en: "ByteDance is the company behind TikTok. Like many Chinese companies - ByteDance's internal corporate committee belongs to the Chinese Communist Party, which leads to content censorship on TikTok, among other things.",
+                    },
+                    industryExplanation: {
+                        de: "Wie viele Firmen, ist auch TikTok ein zusammenhängendes Netzwerk von Unternehmen, die u.a. aus steuerrechtlichen Gründen über verschiedene Länder verteilt sind. Der Datenaustausch zwischen diesen verbundenen Unternehmen ist gängige Praxis und findet regelmäßig statt.",
+                        en: "Like many companies, TikTok is an interconnected web of companies spread across different countries. Data sharing between these related companies is standard practice and takes place routinely.",
+                    },
                 },
             },
-            [parentCategories.social]: {
-                category: "dpv:Interest",
-                explanation: {
-                    de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
-                    en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+            "TikTok Technology Limited (IE)": {
+                dataTypeCorrelation: {
+                    types: ["dpv:Age", "dpv:Interest", "dpv:Picture"],
+                    explanation: {
+                        de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die sonst aus den einzelnen Datenpunkten allein nicht möglich wären. TikTok merkt sich alle viralen Videos, die die Nutzer:innen am häufigsten ansehen, und nutzt ein immer tiefer gehendes Wissen über individuelle Präferenzen, die Unterhaltungsauswahl und Trends, um die Firmen, denen TikTok Werbeplatzierungen, verkauft, über das Verhalten der App-Nutzenden, zu informieren.",
+                        en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. TikTok notes all the viral videos users view the most and harnesses an ever deepening knowledge about tastes, entertainment choices and trends to inform the advertising placements it sells to its customers.",
+                    },
                 },
-            },
-            // TODO: Not in there
-            /*
+                dataTypeCategories: {
+                    [parentCategories.individual]: {
+                        category: "dpv:Age",
+                        explanation: {
+                            de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
+                            en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+                        },
+                    },
+                    [parentCategories.social]: {
+                        category: "dpv:Interest",
+                        explanation: {
+                            de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
+                            en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+                        },
+                    },
+                    // TODO: Not in there
+                    /*
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
             },
             */
-            [parentCategories.behavioral]: {
-                category: "dpv:BrowsingBehavior",
-            },
-            [parentCategories.financial]: {
-                category: "dpv:Transactional",
-            },
-        },
-        dataRecipient: {
-            name: "ByteDance Ltd. (KY)",
-            companyExplanation: {
-                de: "ByteDance ist der TikTok-Mutterkonzern – mit dem Hauptquartier in Peking (China). Wie viele chinesische Unternehmen, gehört auch das interne ByteDance-Firmenkomitee der kommunistischen Partei Chinas an, was u.a. zu inhaltlichen Zensuren auf TikTok führt.",
-                en: "ByteDance is the company behind TikTok. Like many Chinese companies - ByteDance's internal corporate committee belongs to the Chinese Communist Party, which leads to content censorship on TikTok, among other things.",
-            },
-            industryExplanation: {
-                de: "Wie viele Firmen, ist auch TikTok ein zusammenhängendes Netzwerk von Unternehmen, die u.a. aus steuerrechtlichen Gründen über verschiedene Länder verteilt sind. Der Datenaustausch zwischen diesen verbundenen Unternehmen ist gängige Praxis und findet regelmäßig statt.",
-                en: "Like many companies, TikTok is an interconnected web of companies spread across different countries. Data sharing between these related companies is standard practice and takes place routinely.",
-            },
-        },
-    },
-    "TikTok Information Technologies UK Limited (GB)": {
-        dataTypeCorrelation: {
-            types: ["dpv:Age", "dpv:Interest", "dpv:Picture"],
-            explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die sonst aus den einzelnen Datenpunkten allein nicht möglich wären. TikTok merkt sich alle viralen Videos, die die Nutzer:innen am häufigsten ansehen, und nutzt ein immer tiefer gehendes Wissen über individuelle Präferenzen, die Unterhaltungsauswahl und Trends, um die Firmen, denen TikTok Werbeplatzierungen, verkauft, über das Verhalten der App-Nutzenden, zu informieren.",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. TikTok notes all the viral videos users view the most and harnesses an ever deepening knowledge about tastes, entertainment choices and trends to inform the advertising placements it sells to its customers.",
-            },
-        },
-        dataTypeCategories: {
-            [parentCategories.individual]: {
-                category: "dpv:Age",
-                explanation: {
-                    de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
-                    en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+                    [parentCategories.behavioral]: {
+                        category: "dpv:BrowsingBehavior",
+                    },
+                    [parentCategories.financial]: {
+                        category: "dpv:Transactional",
+                    },
+                },
+                dataRecipient: {
+                    name: "ByteDance Ltd. (KY)",
+                    companyExplanation: {
+                        de: "ByteDance ist der TikTok-Mutterkonzern – mit dem Hauptquartier in Peking (China). Wie viele chinesische Unternehmen, gehört auch das interne ByteDance-Firmenkomitee der kommunistischen Partei Chinas an, was u.a. zu inhaltlichen Zensuren auf TikTok führt.",
+                        en: "ByteDance is the company behind TikTok. Like many Chinese companies - ByteDance's internal corporate committee belongs to the Chinese Communist Party, which leads to content censorship on TikTok, among other things.",
+                    },
+                    industryExplanation: {
+                        de: "Wie viele Firmen, ist auch TikTok ein zusammenhängendes Netzwerk von Unternehmen, die u.a. aus steuerrechtlichen Gründen über verschiedene Länder verteilt sind. Der Datenaustausch zwischen diesen verbundenen Unternehmen ist gängige Praxis und findet regelmäßig statt.",
+                        en: "Like many companies, TikTok is an interconnected web of companies spread across different countries. Data sharing between these related companies is standard practice and takes place routinely.",
+                    },
                 },
             },
-            [parentCategories.social]: {
-                category: "dpv:Interest",
-                explanation: {
-                    de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
-                    en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+            "TikTok Information Technologies UK Limited (GB)": {
+                dataTypeCorrelation: {
+                    types: ["dpv:Age", "dpv:Interest", "dpv:Picture"],
+                    explanation: {
+                        de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die sonst aus den einzelnen Datenpunkten allein nicht möglich wären. TikTok merkt sich alle viralen Videos, die die Nutzer:innen am häufigsten ansehen, und nutzt ein immer tiefer gehendes Wissen über individuelle Präferenzen, die Unterhaltungsauswahl und Trends, um die Firmen, denen TikTok Werbeplatzierungen, verkauft, über das Verhalten der App-Nutzenden, zu informieren.",
+                        en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. TikTok notes all the viral videos users view the most and harnesses an ever deepening knowledge about tastes, entertainment choices and trends to inform the advertising placements it sells to its customers.",
+                    },
                 },
-            },
-            // TODO: Not in there
-            /*
+                dataTypeCategories: {
+                    [parentCategories.individual]: {
+                        category: "dpv:Age",
+                        explanation: {
+                            de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
+                            en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+                        },
+                    },
+                    [parentCategories.social]: {
+                        category: "dpv:Interest",
+                        explanation: {
+                            de: "TikTok misst, welche Videos von jedem:r Nutzer:in angesehen werden, und nutzt diese Daten, um einen Blackbox-Algorithmus für Inhaltsvorschläge zu entwickeln. Die schiere Größe dieser Aufgabe ist nur mit einem solchen Algorithmus möglich, und eine der Hauptmetriken, nach der dies bestimmt wird, ist das Interesse. Durch die Interaktion mit bestimmten Videokategorien werden die Nutzer:innen gruppiert und können dann von Werbetreibenden auf Basis dieser Daten gezielt angesprochen werden.",
+                            en: "TikTok measures which videos are viewed by each of its users and uses this data to inform a black-box content suggestion algorithm. The sheer scale of this task is only possible using such an algorithm, and one of the chief metrics by which this is determined is interest. By interacting with certain categories of videos, users are grouped and can then be targeted by advertisers based on this data.",
+                        },
+                    },
+                    // TODO: Not in there
+                    /*
             [parentCategories.technical]: {
                 category: "dpv:BrowserFingerprint",
             },
             */
-            [parentCategories.behavioral]: {
-                category: "dpv:BrowsingBehavior",
+                    [parentCategories.behavioral]: {
+                        category: "dpv:BrowsingBehavior",
+                    },
+                    [parentCategories.financial]: {
+                        category: "dpv:Transactional",
+                    },
+                },
+                dataRecipient: {
+                    name: "ByteDance Ltd. (KY)",
+                    companyExplanation: {
+                        de: "ByteDance ist der TikTok-Mutterkonzern – mit dem Hauptquartier in Peking (China). Wie viele chinesische Unternehmen, gehört auch das interne ByteDance-Firmenkomitee der kommunistischen Partei Chinas an, was u.a. zu inhaltlichen Zensuren auf TikTok führt.",
+                        en: "ByteDance is the company behind TikTok. Like many Chinese companies - ByteDance's internal corporate committee belongs to the Chinese Communist Party, which leads to content censorship on TikTok, among other things.",
+                    },
+                    industryExplanation: {
+                        de: "Wie viele Firmen, ist auch TikTok ein zusammenhängendes Netzwerk von Unternehmen, die u.a. aus steuerrechtlichen Gründen über verschiedene Länder verteilt sind. Der Datenaustausch zwischen diesen verbundenen Unternehmen ist gängige Praxis und findet regelmäßig statt.",
+                        en: "Like many companies, TikTok is an interconnected web of companies spread across different countries. Data sharing between these related companies is standard practice and takes place routinely.",
+                    },
+                },
             },
-            [parentCategories.financial]: {
-                category: "dpv:Transactional",
-            },
-        },
-        dataRecipient: {
-            name: "ByteDance Ltd. (KY)",
-            companyExplanation: {
-                de: "ByteDance ist der TikTok-Mutterkonzern – mit dem Hauptquartier in Peking (China). Wie viele chinesische Unternehmen, gehört auch das interne ByteDance-Firmenkomitee der kommunistischen Partei Chinas an, was u.a. zu inhaltlichen Zensuren auf TikTok führt.",
-                en: "ByteDance is the company behind TikTok. Like many Chinese companies - ByteDance's internal corporate committee belongs to the Chinese Communist Party, which leads to content censorship on TikTok, among other things.",
-            },
-            industryExplanation: {
-                de: "Wie viele Firmen, ist auch TikTok ein zusammenhängendes Netzwerk von Unternehmen, die u.a. aus steuerrechtlichen Gründen über verschiedene Länder verteilt sind. Der Datenaustausch zwischen diesen verbundenen Unternehmen ist gängige Praxis und findet regelmäßig statt.",
-                en: "Like many companies, TikTok is an interconnected web of companies spread across different countries. Data sharing between these related companies is standard practice and takes place routinely.",
-            },
-        },
-    },
 
-    "Telegram Messenger Inc (VG)": {
-        dataTypeCorrelation: {
-            types: [
-                "dpv:SocialMediaCommunication",
-                "dpv:TelephoneNumber",
-                "dpv:Contact",
-            ],
-            explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
-            },
-        },
-        dataTypeCategories: {
-            [parentCategories.individual]: {
-                category: "dpv:Picture",
-                explanation: {
-                    de: "",
-                    en: "",
+            "Telegram Messenger Inc (VG)": {
+                dataTypeCorrelation: {
+                    types: [
+                        "dpv:SocialMediaCommunication",
+                        "dpv:TelephoneNumber",
+                        "dpv:Contact",
+                    ],
+                    explanation: {
+                        de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
+                        en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+                    },
                 },
-            },
-            [parentCategories.social]: {
-                category: "dpv:Contact",
-            },
-            [parentCategories.technical]: {
-                category: "dpv:IPAddress",
-            },
-            [parentCategories.behavioral]: {
-                category: "dpv:ServiceConsumptionBehavior",
-            },
-            // TODO: dpv:Financial doesn't exist for telegram
-            /*
+                dataTypeCategories: {
+                    [parentCategories.individual]: {
+                        category: "dpv:Picture",
+                        explanation: {
+                            de: "Ein Bild enthält in der Regel mehr Daten als nur, welche Pixel welche Farbe haben. Neben den in der Bilddatei enthaltenen Metadaten darüber, wo und wann es aufgenommen wurde und mit welchem Gerät, kann ein Computer-Vision-Algorithmus mit hoher Erfolgsquote zusätzliche Informationen wie Geschlecht, ethnische Zugehörigkeit und möglicherweise andere Indikatoren für Lebensstil und Gewohnheiten extrahieren.",
+                            en: "A picture usually contains more data than just which pixels are which colour. As well as metadata included in the image file about where and when it was taken and using which device, a computer vision algorithm can easily extract extra information with high success rate like gender, ethnicity and possibly other indicators of lifestyle and habits.",
+                        },
+                    },
+                    [parentCategories.social]: {
+                        category: "dpv:Contact",
+                    },
+                    [parentCategories.technical]: {
+                        category: "dpv:IPAddress",
+                    },
+                    [parentCategories.behavioral]: {
+                        category: "dpv:ServiceConsumptionBehavior",
+                    },
+                    // TODO: dpv:Financial doesn't exist for telegram
+                    /*
             [parentCategories.financial]: {
                 category: "dpv:Financial",
             },
             */
-        },
-        dataRecipient: {
-            name: "Telegram (AE)",
-            companyExplanation: {
-                de: "",
-                en: "",
-            },
-            industryExplanation: {
-                de: "",
-                en: "",
-            },
-        },
-    },
-    Snapchat: {
-        dataTypeCorrelation: {
-            types: ["dpv:Contact", "dpv:Interest", "dpv:Age"],
-            explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
-            },
-        },
-        dataTypeCategories: {
-            [parentCategories.individual]: {
-                category: "dpv:Picture",
-                explanation: {
-                    de: "",
-                    en: "",
+                },
+                dataRecipient: {
+                    name: "Telegram (AE)",
+                    companyExplanation: {
+                        de: "Der Hauptsitz und die Entwicklungszentrale von Telegram befinden sich in den Vereinigten Arabischen Emiraten. Datenanfragen der Regierung könnten Telegram-Nutzer beunruhigen - zum Beispiel in Bezug auf lokale Gesetze zur Homosexualität.",
+                        en: "Telegram's base of operations and development HQ is in the United Arab Emirates. Government data requests might be of worry to Telegram users - concerning local laws around homosexuality for example.",
+                    },
+                    industryExplanation: {
+                        de: "Telegram ist ein Internet- und Multimediaunternehmen, kein traditionelles Telekommunikationsunternehmen. Wie viele Internetunternehmen sind sie darauf angewiesen, dass die Nutzer Zugang zu App-Stores, kompatiblen Geräten und genügend Freunde haben, damit sich die Nutzung ihrer Software lohnt.",
+                        en: "Telegram is an internet and multimedia company, not a traditional telecommunications company. Like many internet companies, they rely on users having access to app stores, compatible devices and enough friends to make using their software valuable.",
+                    },
                 },
             },
-            [parentCategories.social]: {
-                category: "dpv:Friend",
-            },
-            [parentCategories.technical]: {
-                category: "dpv:BrowserFingerprint",
-            },
-            [parentCategories.behavioral]: {
-                category: "dpv:AuthenticationHistory",
-            },
-            // TODO: dpv:Financial doesn't exist for snapchat
-            /*
+            Snapchat: {
+                dataTypeCorrelation: {
+                    types: ["dpv:Contact", "dpv:Interest", "dpv:Age"],
+                    explanation: {
+                        de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
+                        en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+                    },
+                },
+                dataTypeCategories: {
+                    [parentCategories.individual]: {
+                        category: "dpv:Picture",
+                        explanation: {
+                            de: "Ein Bild enthält in der Regel mehr Daten als nur, welche Pixel welche Farbe haben. Neben den in der Bilddatei enthaltenen Metadaten darüber, wo und wann es aufgenommen wurde und mit welchem Gerät, kann ein Computer-Vision-Algorithmus mit hoher Erfolgsquote zusätzliche Informationen wie Geschlecht, ethnische Zugehörigkeit und möglicherweise andere Indikatoren für Lebensstil und Gewohnheiten extrahieren.",
+                            en: "A picture usually contains more data than just which pixels are which colour. As well as metadata included in the image file about where and when it was taken and using which device, a computer vision algorithm can easily extract extra information with high success rate like gender, ethnicity and possibly other indicators of lifestyle and habits.",
+                        },
+                    },
+                    [parentCategories.social]: {
+                        category: "dpv:Friend",
+                    },
+                    [parentCategories.technical]: {
+                        category: "dpv:BrowserFingerprint",
+                    },
+                    [parentCategories.behavioral]: {
+                        category: "dpv:AuthenticationHistory",
+                    },
+                    // TODO: dpv:Financial doesn't exist for snapchat
+                    /*
             [parentCategories.financial]: {
                 category: "dpv:Financial",
             },
             */
-        },
-        dataRecipient: {
-            name: "Baidu Inc. (CN)",
-            companyExplanation: {
-                de: "",
-                en: "",
-            },
-            industryExplanation: {
-                de: "",
-                en: "",
-            },
-        },
-    },
-    "Snap Inc (US)": {
-        dataTypeCorrelation: {
-            types: ["dpv:Contact", "dpv:Interest", "dpv:Age"],
-            explanation: {
-                de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
-                en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
-            },
-        },
-        dataTypeCategories: {
-            [parentCategories.individual]: {
-                category: "dpv:Picture",
-                explanation: {
-                    de: "",
-                    en: "",
+                },
+                dataRecipient: {
+                    name: "Baidu Inc. (CN)",
+                    companyExplanation: {
+                        de: "Das Geschäftsmodell von Baidu in China ähnelt dem von Google in den USA: Das Unternehmen betreibt eine beliebte Suchmaschine und verkauft Werbung, die neben den Suchergebnissen angezeigt wird.",
+                        en: "Baidu in China operates a business model simlar to that of Google in the US, they operate a popular search engine and sell advertising to be displayed alonside search results.",
+                    },
+                    industryExplanation: {
+                        de: "Die Suche ist ein wesentlicher Bestandteil dessen, was das Internet so nützlich macht, aber viele sehen die Suche nur als einen kostenlosen Dienst. Ein Unternehmen hat letztlich die Macht zu entscheiden, welche Ergebnisse es den Nutzern präsentiert und wie es sie präsentiert, und das ergibt sich zwangsläufig aus seinem Geschäftsmodell.",
+                        en: "Search is a key part of what makes the internet so useful but many see search as just a free service. A company ultimately has the power to choose which results to present and how to present them to users and inevitably this follows from their business model.",
+                    },
                 },
             },
-            [parentCategories.social]: {
-                category: "dpv:Friend",
-            },
-            [parentCategories.technical]: {
-                category: "dpv:BrowserFingerprint",
-            },
-            [parentCategories.behavioral]: {
-                category: "dpv:AuthenticationHistory",
-            },
-            // TODO: dpv:Financial doesn't exist for snapchat
-            /*
+            "Snap Inc (US)": {
+                dataTypeCorrelation: {
+                    types: ["dpv:Contact", "dpv:Interest", "dpv:Age"],
+                    explanation: {
+                        de: "Wenn mehrere Datentypen gemeinsam genutzt werden, können Rückschlüsse auf die betroffenen Personen gezogen werden, die aus den einzelnen gemeinsam genutzten Datenpunkten allein nicht möglich wären. polypoly legt Wert darauf, dass auch mit den rechtlichen Vorgaben, die eine Genossenschaft mit sich bringen, so wenige persönliche Daten eines Mitglieds wie möglich gesammelt werden, um keine Rückschlüsse auf Mitglieder zu ziehen – weder persönlich noch werblich.",
+                        en: "When multiple datatypes are shared together, conclusions about data subjects can be reached that would otherwise be impossible to determine from any of those single data points shared alone. polypoly attaches importance to collecting as little personal data of a member as possible, even with the legal requirements that a cooperative entail, in order not to draw any conclusions about members - neither personally nor for advertising purposes.",
+                    },
+                },
+                dataTypeCategories: {
+                    [parentCategories.individual]: {
+                        category: "dpv:Picture",
+                        explanation: {
+                            de: "Ein Bild enthält in der Regel mehr Daten als nur, welche Pixel welche Farbe haben. Neben den in der Bilddatei enthaltenen Metadaten darüber, wo und wann es aufgenommen wurde und mit welchem Gerät, kann ein Computer-Vision-Algorithmus mit hoher Erfolgsquote zusätzliche Informationen wie Geschlecht, ethnische Zugehörigkeit und möglicherweise andere Indikatoren für Lebensstil und Gewohnheiten extrahieren.",
+                            en: "A picture usually contains more data than just which pixels are which colour. As well as metadata included in the image file about where and when it was taken and using which device, a computer vision algorithm can easily extract extra information with high success rate like gender, ethnicity and possibly other indicators of lifestyle and habits.",
+                        },
+                    },
+                    [parentCategories.social]: {
+                        category: "dpv:Friend",
+                    },
+                    [parentCategories.technical]: {
+                        category: "dpv:BrowserFingerprint",
+                    },
+                    [parentCategories.behavioral]: {
+                        category: "dpv:AuthenticationHistory",
+                    },
+                    // TODO: dpv:Financial doesn't exist for snapchat
+                    /*
             [parentCategories.financial]: {
                 category: "dpv:Financial",
             },
             */
-        },
-        dataRecipient: {
-            name: "Baidu Inc. (CN)",
-            companyExplanation: {
-                de: "",
-                en: "",
-            },
-            industryExplanation: {
-                de: "",
-                en: "",
+                },
+                dataRecipient: {
+                    name: "Baidu Inc. (CN)",
+                    companyExplanation: {
+                        de: "Das Geschäftsmodell von Baidu in China ähnelt dem von Google in den USA: Das Unternehmen betreibt eine beliebte Suchmaschine und verkauft Werbung, die neben den Suchergebnissen angezeigt wird.",
+                        en: "Baidu in China operates a business model simlar to that of Google in the US, they operate a popular search engine and sell advertising to be displayed alonside search results.",
+                    },
+                    industryExplanation: {
+                        de: "Die Suche ist ein wesentlicher Bestandteil dessen, was das Internet so nützlich macht, aber viele sehen die Suche nur als einen kostenlosen Dienst. Ein Unternehmen hat letztlich die Macht zu entscheiden, welche Ergebnisse es den Nutzern präsentiert und wie es sie präsentiert, und das ergibt sich zwangsläufig aus seinem Geschäftsmodell.",
+                        en: "Search is a key part of what makes the internet so useful but many see search as just a free service. A company ultimately has the power to choose which results to present and how to present them to users and inevitably this follows from their business model.",
+                    },
+                },
             },
         },
     },
