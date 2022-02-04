@@ -121,7 +121,7 @@ export function createDataTypesTabs(
             id: "by-companies",
             label: i18n.t(`${i18nHeader}:data.types.tab.companies`),
             data: normalizeDataLengthByCompany(entities),
-            route: "/company-data-types-info",
+            route: "company-data-types-info",
         },
         {
             id: "by-shares",
@@ -137,7 +137,7 @@ export function createDataTypesTabs(
                     color: true,
                 })),
             })),
-            route: "/shares-data-types-info",
+            route: "shares-data-types-info",
         },
         {
             id: "by-types",
@@ -156,7 +156,7 @@ export function createDataTypesTabs(
                     height: 400,
                 },
             ],
-            route: "/types-data-types-info",
+            route: "types-data-types-info",
         },
     ];
 }

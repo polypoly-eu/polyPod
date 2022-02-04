@@ -25,6 +25,9 @@ const DataTypes = ({ entities, i18nHeader }) => {
     const [selectedDataTypeBubble, setSelectedDataTypeBubble] = useState(
         dataTypesSharedCombined[0].category
     );
+    const [selectedDataTypesTab, setSelectedDataTypesTab] = useState(
+        dataTypes[0].route
+    );
 
     const handleBubbleClick = (_, node) => {
         setSelectedDataTypeBubble(node.data.category);
@@ -35,24 +38,32 @@ const DataTypes = ({ entities, i18nHeader }) => {
             ? bubble.data.category
             : null;
 
+    const switchDataTypesTab = (tabId) => {
+        setSelectedDataTypesTab(
+            dataTypes.find((dataType) => dataType.id == tabId).route
+        );
+    };
+
     return (
-        <Tabs>
-            {dataTypes.map((dataType, i) => {
-                return (
-                    <Tab id={dataType.id} label={dataType.label} key={i}>
-                        <div className="data-types-legend">
-                            <div
-                                className="bubble-legend"
-                                style={{
-                                    backgroundColor: bubbleColor,
-                                }}
-                            ></div>
-                            <p>
-                                {i18n.t("clusterStoryCommon:data.types.legend")}
-                            </p>
-                        </div>
-                        {dataType.id !== "by-types" ? (
-                            <>
+        <>
+            <Tabs onTabChange={switchDataTypesTab}>
+                {dataTypes.map((dataType, i) => {
+                    return (
+                        <Tab id={dataType.id} label={dataType.label} key={i}>
+                            <div className="data-types-legend">
+                                <div
+                                    className="bubble-legend"
+                                    style={{
+                                        backgroundColor: bubbleColor,
+                                    }}
+                                ></div>
+                                <p>
+                                    {i18n.t(
+                                        "clusterStoryCommon:data.types.legend"
+                                    )}
+                                </p>
+                            </div>
+                            {dataType.id !== "by-types" ? (
                                 <MatrixBubblesChart
                                     data={dataType.data}
                                     bubbleColor={(d) =>
@@ -63,13 +74,7 @@ const DataTypes = ({ entities, i18nHeader }) => {
                                     textColor={bubbleColor}
                                     strokeColor={bubbleStroke}
                                 />
-                                <SourceInfoButton
-                                    infoScreenRoute={dataType.route}
-                                    source={i18n.t("common:source.polyPedia")}
-                                />
-                            </>
-                        ) : (
-                            <>
+                            ) : (
                                 <div className="by-types-bubble-chart">
                                     <PolyChart
                                         type="bubble-cluster"
@@ -90,16 +95,16 @@ const DataTypes = ({ entities, i18nHeader }) => {
                                     />
                                     <h4>{dataType.data[0].title}</h4>
                                 </div>
-                                <SourceInfoButton
-                                    infoScreenRoute={dataType.route}
-                                    source={i18n.t("common:source.polyPedia")}
-                                />
-                            </>
-                        )}
-                    </Tab>
-                );
-            })}
-        </Tabs>
+                            )}
+                        </Tab>
+                    );
+                })}
+            </Tabs>
+            <SourceInfoButton
+                infoScreen={selectedDataTypesTab}
+                source={i18n.t("common:source.polyPedia")}
+            />
+        </>
     );
 };
 
