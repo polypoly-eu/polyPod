@@ -330,7 +330,7 @@ export class BubbleCluster extends Chart {
     this._setUpFilters();
     const nodes = this.chart.selectAll(".bubble-group").data(
       root.descendants().filter(({ parent }) => !!parent),
-      (d) => d.data.category
+      (d) => d.data.title || d.data.label
     );
     nodes.exit().remove();
     const newBubbleGroups = this._addNewBubbleGroups(nodes);
