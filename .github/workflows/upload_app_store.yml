@@ -6,10 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.ref != 'refs/heads/main' && startsWith(github.ref, 'refs/heads/release') != true }}
     steps:
-      name: No go zone
-      env:
-        REF: ${{github.ref}}
-      run: echo "::error::🚫 ${REF} is not a «main» or «release» branch, only ones allowed"
+      - name: No go zone
+        env:
+          REF: ${{github.ref}}
+        run: echo "::error::🚫 ${REF} is not a «main» or «release» branch, only ones allowed"
+
   build_test_upload:
     name: Build, test, and upload to App Store
     runs-on: macos-11
