@@ -3,6 +3,7 @@
     display: flex;
     flex-flow: column;
     overflow: hidden scroll;
+    background-color: var(--theme-primary-color);
 }
 
 .stories-preview .preview-scrollable {
