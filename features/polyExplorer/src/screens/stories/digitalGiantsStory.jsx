@@ -18,33 +18,34 @@ const i18nHeader = "clusterDigitalGiantsStory";
 const i18nHeaderCommon = "clusterStoryCommon";
 const primaryColor = "#f95f5a";
 
-const bigSixNames = [
-    "Amazon",
-    "Apple",
-    "Google",
-    "Facebook",
-    "PayPal",
-    "TikTok",
-];
+const bigSixNames = ["Amazon", "Apple", "Google", "Meta", "PayPal", "TikTok"];
 
 const DigitalGiantsStory = () => {
     const { featuredEntities, entityJurisdictionByPpid, createPopUp } =
         useContext(ExplorerContext);
 
     const bigSix = bigSixNames.map((n) => {
-        const entity = featuredEntities.find((e) => e.ppid.indexOf(n) !== -1);
+        const entity = featuredEntities
+            .filter((e) => e.type == "company")
+            .find((e) => e.name.toLowerCase().indexOf(n.toLowerCase()) !== -1);
         entity["simpleName"] = n;
         return entity;
     });
+
+    console.log(bigSix);
 
     const jurisdictionLinks = createJurisdictionLinks(
         bigSix,
         entityJurisdictionByPpid
     ).map(({ source, target, value }) => ({
-        source: bigSixNames.find((name) => source.indexOf(name) !== -1),
+        source: bigSixNames.find(
+            (name) => source.toLowerCase().indexOf(name.toLowerCase()) !== -1
+        ),
         target,
         value,
     }));
+
+    console.log(jurisdictionLinks);
 
     const otherJurisdictions = [
         ...new Set(jurisdictionLinks.map(({ target }) => target)),

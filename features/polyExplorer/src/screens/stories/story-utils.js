@@ -9,7 +9,7 @@ export function countOccurences(array) {
 
 export function createJurisdictionLinks(companyList, entityJurisdictionByPpid) {
     const jurisdictions = companyList.map((e) => ({
-        id: e.ppid,
+        id: e.name,
         jurisdictions: countOccurences(
             e.dataRecipients.map((r) => entityJurisdictionByPpid(r))
         ),
