@@ -54,6 +54,6 @@
     "tips.p.1": "The more you learn and understand the relevance of data and data privacy, the more you will feel an urge to act. Here are a few tips:",
     "tips.bullet.1": "When you are concerned about data privacy, you should look very closely at who the company behind the app is, and how they might use your data.",
     "tips.bullet.2": "If you are sensible about the contents of your messages, you might want to use a service with end-to-end encryption. This is true for Signal, Threema, and also for WhatsApp.",
-    "tips.bullet.3": "Using a service in one data region (like GDPR) might not prevent your data to be shared to other regions with less data protection. Be aware of that. ",
-    "explore.further.p.1": "Chose one messaging app below if you are interested in in-depth information - or continue discovering other topics."
+    "tips.bullet.3": "Using a service in one data region (like GDPR) might not prevent your data from being shared with other regions with less data protection. Be aware of that. ",
+    "explore.further.p.1": "Choose one messaging app below if you are interested in in-depth information - or continue discovering other topics."
 }
