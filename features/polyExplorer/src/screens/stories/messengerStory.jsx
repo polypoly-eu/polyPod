@@ -130,7 +130,6 @@ const MessengerStory = () => {
                     alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
                 />
             </div>
-            <p>{i18n.t(`${i18nHeader}:intro.paragraph.two`)}</p>
             <GradientCircleList
                 introText={i18n.t(`${i18nHeader}:intro.paragraph.two`)}
                 list={Object.keys(products)}
