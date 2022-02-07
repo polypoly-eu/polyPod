@@ -87,10 +87,11 @@ function Industries({ entities }) {
         .slice(0, 3);
     const legend = new IndexedLegend(top3Industries);
     const data = Object.entries(recipientsPerIndustry).map(
-        ([industry, recipients]) => ({
+        ([industry, recipients], recipientIndex) => ({
             label: legend.labelOf(industry),
-            children: recipients.map((sharingCount) => ({
+            children: recipients.map((sharingCount, sharingIndex) => ({
                 value: sharingCount,
+                title: `${recipientIndex}-${sharingIndex}`,
             })),
         })
     );
