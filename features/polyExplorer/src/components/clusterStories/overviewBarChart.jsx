@@ -67,8 +67,18 @@ function PartOf({ entities }) {
                 data={data}
                 barWidth={16}
                 groups={[
-                    { translation: "Owned By Facebook", id: "facebook" },
-                    { translation: "Other", id: "other" },
+                    {
+                        translation: i18n.t(
+                            "clusterMessengerStory:overview.owned.by.meta"
+                        ),
+                        id: "facebook",
+                    },
+                    {
+                        translation: i18n.t(
+                            "clusterMessengerStory:overview.other"
+                        ),
+                        id: "other",
+                    },
                 ]}
                 barColor={chartColors.primary}
                 barValueColor={chartColors.secondary}
