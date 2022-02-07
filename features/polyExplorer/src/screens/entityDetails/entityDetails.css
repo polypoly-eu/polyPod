@@ -111,6 +111,10 @@
     background-color: var(--jurisdiction-others);
 }
 
+.location-map .source-info-container .info-button {
+    margin-right: 0;
+}
+
 .location-block .pin {
     display: block;
     width: 36px;
