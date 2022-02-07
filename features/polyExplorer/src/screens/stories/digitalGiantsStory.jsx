@@ -32,8 +32,6 @@ const DigitalGiantsStory = () => {
         return entity;
     });
 
-    console.log(bigSix);
-
     const jurisdictionLinks = createJurisdictionLinks(
         bigSix,
         entityJurisdictionByPpid
@@ -44,8 +42,6 @@ const DigitalGiantsStory = () => {
         target,
         value,
     }));
-
-    console.log(jurisdictionLinks);
 
     const otherJurisdictions = [
         ...new Set(jurisdictionLinks.map(({ target }) => target)),
