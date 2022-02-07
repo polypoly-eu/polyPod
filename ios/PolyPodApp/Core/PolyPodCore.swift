@@ -15,6 +15,8 @@ final class PolyPodCore {
         containerPath = NSString(string: path).utf8String!
         
         corePointer = new_poly_pod_core(.default(containerPath))
+        // or
+        // corePointer = new_poly_pod_core(.custom(UserDefaults.keyValueStore))
     }
 }
 
@@ -48,4 +50,18 @@ extension OptionKeyValueStore {
     static func `default`(_ path: UnsafePointer<CChar>) -> OptionKeyValueStore {
         .init(tag: .init(0), .init(.init(default_: path)))
     }
+    
+    static func custom(_ store: KeyValueStore) -> OptionKeyValueStore {
+        .init(tag: .init(1), .init(.init(custom: store)))
+    }
 }
+
+extension OptionUsize {
+     static func none() -> Self {
+         .init(tag: .init(0), .init())
+     }
+
+     static func some(_ value: UInt) -> Self {
+         .init(tag: .init(rawValue: 1), .init(.init(some: value)))
+     }
+ }
