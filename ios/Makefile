@@ -34,14 +34,14 @@ archive:
 		-scheme $(scheme_name) \
 		-archivePath $(archive_path)
 
-export_ipa:
+export_ipa: archive
 	xcodebuild \
 		-exportArchive \
 		-archivePath $(archive_path) \
 		-exportPath ./build \
 		-exportOptionsPlist exportOptions.plist \
 
-upload_ipa:
+upload_ipa: export_ipa
 	# Validte the app before uploading, to catch any possible issues.
 	xcrun altool --validate-app \
 		-f $(ipa_path) \
