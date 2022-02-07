@@ -73,11 +73,11 @@ const EntityDetails = () => {
                         ) : null}
                         <div className="location-map">
                             <div className="separator-unit">
-                                <pre className="partial-separator" />
+                                <div className="partial-separator"></div>
                                 <h2>
                                     {i18n.t("entityDetailsScreen:jurisdiction")}
                                 </h2>
-                                <post className="partial-separator" />
+                                <div className="partial-separator"></div>
                             </div>
 
                             {entity.jurisdiction ? (
@@ -125,13 +125,13 @@ const EntityDetails = () => {
                             ) : (
                                 <div className="revenue">
                                     <div className="separator-unit">
-                                        <pre className="partial-separator" />
+                                        <div className="partial-separator"></div>
                                         <h2>
                                             {i18n.t(
                                                 "entityDetailsScreen:revenue"
                                             )}
                                         </h2>
-                                        <post className="partial-separator" />
+                                        <div className="partial-separator"></div>
                                     </div>
 
                                     <CompanyRevenueChart
@@ -177,11 +177,11 @@ const EntityDetails = () => {
                         ) : null}
                         <div className="featured-map-container">
                             <div className="separator-unit">
-                                <pre className="partial-separator" />
+                                <div className="partial-separator"></div>
                                 <h2>
                                     {i18n.t("entityDetailsScreen:jurisdiction")}
                                 </h2>
-                                <post className="partial-separator" />
+                                <div className="partial-separator"></div>
                             </div>
 
                             {entity.jurisdiction ? (
@@ -232,13 +232,13 @@ const EntityDetails = () => {
                             ) : (
                                 <div className="revenue">
                                     <div className="separator-unit">
-                                        <pre className="partial-separator" />
+                                        <div className="partial-separator"></div>
                                         <h2>
                                             {i18n.t(
                                                 "entityDetailsScreen:revenue"
                                             )}
                                         </h2>
-                                        <post className="partial-separator" />
+                                        <div className="partial-separator"></div>
                                     </div>
                                     <CompanyRevenueChart
                                         annualRevenues={entity.annualRevenues}

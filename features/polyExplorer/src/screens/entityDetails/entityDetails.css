@@ -264,7 +264,7 @@
 
 .featured-map-container .separator-unit h2,
 .location-map .separator-unit h2 {
-    margin: 32px 16px;
+    margin: 32px 0;
     font-family: "Jost Medium";
     font-size: 20px;
     text-align: center;
@@ -272,16 +272,16 @@
 
 .revenue .separator-unit h2 {
     text-align: center;
-    margin: 8px 16px;
+    margin: 8px 0;
     font-family: "Jost Medium";
     font-size: 20px;
 }
 .featured-map-container .separator-unit,
 .location-map .separator-unit,
 .revenue .separator-unit {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-gap: 16px;
     align-items: center;
     margin: 0 16px;
 }
@@ -293,7 +293,6 @@
     display: inline-block;
     height: 1px;
     position: relative;
-    width: 50%;
 }
 
 .featured-map-container h2,
