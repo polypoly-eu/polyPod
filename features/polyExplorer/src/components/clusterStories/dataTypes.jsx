@@ -23,20 +23,18 @@ const DataTypes = ({ entities, i18nHeader }) => {
     );
 
     const [selectedDataTypeBubble, setSelectedDataTypeBubble] = useState(
-        dataTypesSharedCombined[0].category
+        dataTypesSharedCombined[0].title
     );
     const [selectedDataTypesTab, setSelectedDataTypesTab] = useState(
         dataTypes[0].route
     );
 
     const handleBubbleClick = (_, node) => {
-        setSelectedDataTypeBubble(node.data.category);
+        setSelectedDataTypeBubble(node.data.title);
     };
 
     const showLabel = (bubble) =>
-        selectedDataTypeBubble === bubble.data.category
-            ? bubble.data.category
-            : null;
+        selectedDataTypeBubble === bubble.data.title ? bubble.data.title : null;
 
     const switchDataTypesTab = (tabId) => {
         setSelectedDataTypesTab(
@@ -83,7 +81,7 @@ const DataTypes = ({ entities, i18nHeader }) => {
                                         height={dataType.data[0].height}
                                         bubbleColor={bubbleColor}
                                         text={(d) =>
-                                            d.data.category ===
+                                            d.data.title ===
                                             selectedDataTypeBubble
                                                 ? d.data.value
                                                 : ""

@@ -74,7 +74,7 @@ export function createDataTypesSharedCombined(entities) {
                 currentCategory.value = currentCategory.value + category.count;
             else {
                 categoriesCount[category.translation] = {
-                    category: category.translation,
+                    title: category.translation,
                     value: category.count,
                 };
             }
