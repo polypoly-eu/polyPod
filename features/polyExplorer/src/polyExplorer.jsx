@@ -31,9 +31,9 @@ const PolyExplorerApp = () => {
         handleOnboardingPopupMoreInfo,
         popUp,
         closePopUp,
+        createPopUp,
     } = useContext(ExplorerContext);
     const { firstRun } = navigationState;
-
     return (
         <div className="poly-explorer poly-theme poly-theme-dark">
             <Switch>
@@ -73,7 +73,7 @@ const PolyExplorerApp = () => {
                     onMoreInfo={handleOnboardingPopupMoreInfo}
                 />
             )}
-            {popUp &&
+            {popUp && createPopUp( {type: "onboarding-popup"}) &&
                 popUp.component({
                     onClose: closePopUp,
                     content: popUp.content,
