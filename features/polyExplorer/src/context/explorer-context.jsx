@@ -199,7 +199,26 @@ export const ExplorerProvider = ({ children }) => {
         history.push("/info");
     }
 
-    function updatePodNavigation() {
+    function setPolyNavActions() {
+        pod.polyNav.actions = navigationState.firstRun
+            ? {
+                  info: () => {},
+                  search: () => {},
+              }
+            : {
+                  info: () => createPopUp({ type: "info-main" }),
+                  search: () => history.push("/search"),
+                  back: handleBack,
+              };
+    }
+
+    function activatePolyNavActions() {
+        pod.polyNav.setActiveActions(
+            currentPath == "/main" ? ["info", "search"] : ["back"]
+        );
+    }
+
+    function changePolyNavScreenTitle() {
         // This is a temporary fix - when the HTRT is not full size anymore it should not change the title any longer
         if (popUp) return;
         if (currentPath == "/")
@@ -222,20 +241,12 @@ export const ExplorerProvider = ({ children }) => {
             pod.polyNav.setTitle(
                 i18n.t(`common:screenTitle.${currentPath.slice(1)}`)
             );
+    }
 
-        pod.polyNav.actions = navigationState.firstRun
-            ? {
-                  info: () => {},
-                  search: () => {},
-              }
-            : {
-                  info: () => createPopUp({ type: "info-main" }),
-                  search: () => history.push("/search"),
-                  back: handleBack,
-              };
-        pod.polyNav.setActiveActions(
-            currentPath == "/main" && !popUp ? ["info", "search"] : ["back"]
-        );
+    function updatePodNavigation() {
+        changePolyNavScreenTitle();
+        setPolyNavActions();
+        activatePolyNavActions();
     }
 
     const counts = {
