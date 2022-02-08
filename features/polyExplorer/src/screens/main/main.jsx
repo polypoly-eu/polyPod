@@ -11,15 +11,16 @@ import { Tab, Tabs } from "@polypoly-eu/poly-look";
 
 const MainScreen = () => {
     const { storiesMetadata } = useContext(ExplorerContext);
+
     return (
         <Screen
             noScroll
-            className="main-screen"
+            className={"main-screen"}
             topShadow={false}
             theme="poly-theme-dark"
         >
             <div className="nav-button-container">
-                <Tabs swipe={true}>
+                <Tabs swipe autoHeight>
                     <Tab
                         id="discover"
                         label={i18n.t("mainScreen:tab.discover")}
