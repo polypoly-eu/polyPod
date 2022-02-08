@@ -240,12 +240,14 @@
 }
 
 .data-exploration .on-bubble {
+    background-color: rgba(15, 25, 56, 0.7);
     font-family: "Jost Medium";
     font-weight: 500;
     line-height: var(--line-height);
     font-size: 16px;
     width: 220px;
     margin: 40% auto 0 auto;
+    padding: 4px;
 }
 
 .data-exploration .purpose-content {
