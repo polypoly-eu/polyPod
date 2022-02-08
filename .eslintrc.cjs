@@ -2,29 +2,27 @@ module.exports = {
     extends: [
         "eslint:recommended",
         "plugin:prettier/recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
     ],
-    "plugins": [
-        "cypress"
-    ],
+    plugins: ["cypress", "spellcheck"],
     parserOptions: {
         ecmaVersion: 2020,
         sourceType: "module",
     },
     env: {
-        browser : true,
+        browser: true,
         es6: true,
         mocha: true,
         jest: true,
         node: true,
-        "cypress/globals": true
+        "cypress/globals": true,
     },
     settings: {
         react: {
             version: "latest",
         },
     },
-    "ignorePatterns": [
+    ignorePatterns: [
         "*.conf.*",
         "*.config.*",
         "*.bundled.*",
@@ -40,11 +38,32 @@ module.exports = {
         "**/storybook-static/*",
         "podApi/",
         "**/build/*",
-        "PolyPodApp/"],
+        "PolyPodApp/",
+    ],
     rules: {
         semi: 2,
         "react/prop-types": "off",
         "react/jsx-key": "off",
+        "spellcheck/spell-checker": [
+            1,
+            {
+                comments: false,
+                strings: true,
+                identifiers: false,
+                templates: false,
+                lang: "en_US",
+                skipWords: [
+                    "dict",
+                    "aff",
+                    "hunspellchecker",
+                    "hunspell",
+                    "utils",
+                ],
+                skipIfMatch: ["http://[^s]*", "^[-\\w]+/[-\\w\\.]+$"],
+                skipWordIfMatch: ["^foobar.*$"],
+                minLength: 3,
+            },
+        ],
     },
     overrides: [
         {
@@ -74,8 +93,8 @@ module.exports = {
             files: ["*.jsx"],
             parserOptions: {
                 ecmaFeatures: {
-                    jsx: true
-                }
+                    jsx: true,
+                },
             },
         },
     ],
