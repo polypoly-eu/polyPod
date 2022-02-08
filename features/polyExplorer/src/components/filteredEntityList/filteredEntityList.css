@@ -84,9 +84,9 @@ button::after {
 .filter-button {
     background-color: var(--transparent);
     padding: 0 0;
-    position: fixed;
+    top: 24px;
+    position: absolute;
     right: 0;
-    margin-top: 24px;
     z-index: 2;
     width: 60px;
     height: 48px;
@@ -98,5 +98,5 @@ button::after {
 }
 
 .filter-button-active {
-    margin-top: -28px;
+    top: 72px;
 }

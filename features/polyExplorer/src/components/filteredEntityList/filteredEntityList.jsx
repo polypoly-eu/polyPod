@@ -65,33 +65,32 @@ const FilteredEntityList = () => {
     }
 
     return (
-        <div className="filtered-entity-list">
-            <ActiveFilters
-                activeFilters={activeFilters}
-                globalData={globalData}
-                onRemoveFilter={handleRemoveFilter}
-            />
-            <div
-                className={
-                    "entity-list-wrapper" +
-                    (activeFilters.empty ? "" : " filters-visible")
-                }
-            >
-                <LinkButton
-                    route="/entity-filters"
+        <>
+            <div className="filtered-entity-list">
+                <ActiveFilters
+                    activeFilters={activeFilters}
+                    globalData={globalData}
+                    onRemoveFilter={handleRemoveFilter}
+                />
+                <div
                     className={
-                        "filter-button" +
-                        (activeFilters.empty ? "" : " filter-button-active")
+                        "entity-list-wrapper" +
+                        (activeFilters.empty ? "" : " filters-visible")
                     }
                 >
-                    <img
-                        src="./images/filter-background.svg"
-                        alt="Filter button"
-                    />
-                </LinkButton>
-                <EntityList entities={entityGroups} />
+                    <EntityList entities={entityGroups} />
+                </div>
             </div>
-        </div>
+            <LinkButton
+                route="/entity-filters"
+                className={
+                    "filter-button" +
+                    (activeFilters.empty ? "" : " filter-button-active")
+                }
+            >
+                <img src="./images/filter-background.svg" alt="Filter button" />
+            </LinkButton>
+        </>
     );
 };
 

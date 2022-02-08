@@ -18,7 +18,7 @@ const MainScreen = () => {
             topShadow={false}
             theme="poly-theme-dark"
         >
-            <div className="nav-button-container poly-nav-bar-separator-bottom">
+            <div className="nav-button-container">
                 <Tabs swipe={true}>
                     <Tab
                         id="discover"
