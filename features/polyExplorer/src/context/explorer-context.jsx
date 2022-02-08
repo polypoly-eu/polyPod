@@ -144,6 +144,11 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function createPopUp({ type, content }) {
+        // This is a temporary fix - when the HTRT is not full size anymore it should not change the title any longer
+        if (type.endsWith("-info"))
+            pod.polyNav.setTitle(i18n.t(`common:screenTitle.how.to.read.this`));
+        if (type == "info-main")
+            pod.polyNav.setTitle(i18n.t(`common:screenTitle.info`));
         setPopUp({ component: popUps[type], content });
     }
 
@@ -194,7 +199,26 @@ export const ExplorerProvider = ({ children }) => {
         history.push("/info");
     }
 
-    function updatePodNavigation() {
+    function setPolyNavActions() {
+        pod.polyNav.actions = navigationState.firstRun
+            ? {
+                  info: () => {},
+                  search: () => {},
+              }
+            : {
+                  info: () => createPopUp({ type: "info-main" }),
+                  search: () => history.push("/search"),
+                  back: handleBack,
+              };
+    }
+
+    function activatePolyNavActions() {
+        pod.polyNav.setActiveActions(
+            currentPath == "/main" ? ["info", "search"] : ["back"]
+        );
+    }
+
+    function changePolyNavScreenTitle() {
         if (currentPath == "/")
             pod.polyNav.setTitle(i18n.t(`common:screenTitle.main`));
         else if (
@@ -215,20 +239,12 @@ export const ExplorerProvider = ({ children }) => {
             pod.polyNav.setTitle(
                 i18n.t(`common:screenTitle.${currentPath.slice(1)}`)
             );
+    }
 
-        pod.polyNav.actions = navigationState.firstRun
-            ? {
-                  info: () => {},
-                  search: () => {},
-              }
-            : {
-                  info: () => createPopUp({ type: "pod-info" }),
-                  search: () => history.push("/search"),
-                  back: handleBack,
-              };
-        pod.polyNav.setActiveActions(
-            currentPath == "/main" && !popUp ? ["info", "search"] : ["back"]
-        );
+    function updatePodNavigation() {
+        changePolyNavScreenTitle();
+        setPolyNavActions();
+        activatePolyNavActions();
     }
 
     const counts = {
@@ -287,7 +303,8 @@ export const ExplorerProvider = ({ children }) => {
 
     //on-change
     useEffect(() => {
-        updatePodNavigation();
+        // This is a temporary fix - when the HTRT is not full size anymore it should not change the title any longer
+        if (!popUp) updatePodNavigation();
     });
 
     return (
