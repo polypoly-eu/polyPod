@@ -24,3 +24,6 @@ android/app/local.properties
 
 # Generated docs
 docs/
+
+# Android stuff
+.dccache
