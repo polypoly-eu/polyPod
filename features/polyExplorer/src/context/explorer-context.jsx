@@ -219,8 +219,6 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function changePolyNavScreenTitle() {
-        // This is a temporary fix - when the HTRT is not full size anymore it should not change the title any longer
-        if (popUp) return;
         if (currentPath == "/")
             pod.polyNav.setTitle(i18n.t(`common:screenTitle.main`));
         else if (
@@ -305,7 +303,8 @@ export const ExplorerProvider = ({ children }) => {
 
     //on-change
     useEffect(() => {
-        updatePodNavigation();
+        // This is a temporary fix - when the HTRT is not full size anymore it should not change the title any longer
+        if (!popUp) updatePodNavigation();
     });
 
     return (
