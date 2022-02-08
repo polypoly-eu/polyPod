@@ -26,7 +26,7 @@ export default {
     "onboarding-popup": OnboardingPopup,
     "center-popup": PurposeInfoPopup,
 
-    "pod-info": InfoScreen,
+    "info-main": InfoScreen,
     "data-region-info": DataRegionInfoScreen,
     "data-types-info": DataTypesInfoScreen,
     "category-info": CategoryInfoScreen,

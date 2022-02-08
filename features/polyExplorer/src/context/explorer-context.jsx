@@ -144,6 +144,11 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function createPopUp({ type, content }) {
+        // This is a temporary fix - when the HTRT is not full size anymore it should not change the title any longer
+        if (type.endsWith("-info"))
+            pod.polyNav.setTitle(i18n.t(`common:screenTitle.how.to.read.this`));
+        if (type == "info-main")
+            pod.polyNav.setTitle(i18n.t(`common:screenTitle.info`));
         setPopUp({ component: popUps[type], content });
     }
 
@@ -195,6 +200,8 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function updatePodNavigation() {
+        // This is a temporary fix - when the HTRT is not full size anymore it should not change the title any longer
+        if (popUp) return;
         if (currentPath == "/")
             pod.polyNav.setTitle(i18n.t(`common:screenTitle.main`));
         else if (
@@ -222,7 +229,7 @@ export const ExplorerProvider = ({ children }) => {
                   search: () => {},
               }
             : {
-                  info: () => createPopUp({ type: "pod-info" }),
+                  info: () => createPopUp({ type: "info-main" }),
                   search: () => history.push("/search"),
                   back: handleBack,
               };
