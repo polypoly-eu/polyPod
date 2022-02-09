@@ -23,13 +23,7 @@ import ExampleStory from "./screens/stories/exampleStory.jsx";
 import DigitalGiantsStory from "./screens/stories/digitalGiantsStory.jsx";
 
 const PolyExplorerApp = () => {
-    const {
-        navigationState,
-        handleOnboardingPopupClose,
-        handleOnboardingPopupMoreInfo,
-        popUp,
-        closePopUp,
-    } = useContext(ExplorerContext);
+    const { navigationState, popUp, closePopUp } = useContext(ExplorerContext);
     const { firstRun } = navigationState;
 
     return (
