@@ -11,7 +11,7 @@ describe("Test language determination", () => {
         const i18n = new I18n(LANGUAGE, {
             [LANGUAGE]: { quux: { bar: "baz" }, options: { opt: "{{opt}}" } },
         });
-        expect(i18n).to.have.keys(["language", "_translations"]);
+        expect(i18n).to.have.keys(["_locale", "language", "_translations"]);
         expect(i18n.language).to.equal(LANGUAGE);
     });
 });

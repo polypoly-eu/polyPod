@@ -5,12 +5,19 @@ import {
 } from "./errors.js";
 
 /**
+ * Determines the environment locale in a platform-independent way
+ *
+ * @returns a standard name for the language, such as 'en-US'. The first code corresponds to the language
+ */
+export const determineLocale = () =>
+    Intl.DateTimeFormat().resolvedOptions().locale;
+
+/**
  * Determines the environment language
  *
  * @returns a two-character standard name for the language, such as 'en'
  */
-export const determineLanguage = () =>
-    Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0];
+export const determineLanguage = () => determineLocale().split("-")[0];
 
 /**
  * Simple class for performing string translations, with simple templating capabilities
@@ -43,7 +50,7 @@ export class I18n {
                     " is not a key in the translations hash provided"
             );
         }
-
+        this._locale = determineLocale();
         this.language = language in translations ? language : fallbackLanguage;
         this._translations = translations[this.language];
     }
