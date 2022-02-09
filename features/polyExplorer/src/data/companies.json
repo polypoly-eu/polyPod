@@ -10741,15 +10741,15 @@
             },
             {
                 "dpv:Purpose": "dpv:CommunicationManagement",
-                "count": 51
+                "count": 46
             },
             {
                 "dpv:Purpose": "dpv:CustomerCare",
-                "count": 55
+                "count": 2
             },
             {
                 "dpv:Purpose": "dpv:CustomerRelationshipManagement",
-                "count": 162
+                "count": 161
             },
             {
                 "dpv:Purpose": "dpv:DisputeManagement",
@@ -10757,15 +10757,15 @@
             },
             {
                 "dpv:Purpose": "dpv:FraudPreventionAndDetection",
-                "count": 939
+                "count": 69
             },
             {
                 "dpv:Purpose": "dpv:IdentityVerification",
-                "count": 137
+                "count": 138
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
-                "count": 118
+                "count": 72
             },
             {
                 "dpv:Purpose": "dpv:IncreaseServiceRobustness",
@@ -10773,11 +10773,15 @@
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
-                "count": 1329
+                "count": 163
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForConsumer",
-                "count": 143
+                "count": 81
+            },
+            {
+                "dpv:Purpose": "dpv:OptimisationForController",
+                "count": 1
             },
             {
                 "dpv:Purpose": "dpv:PublicRelations",
@@ -10793,69 +10797,61 @@
             },
             {
                 "dpv:Purpose": "dpv:Security",
-                "count": 918
+                "count": 48
             },
             {
                 "dpv:Purpose": "dpv:ServiceOptimization",
-                "count": 93
+                "count": 46
             },
             {
                 "dpv:Purpose": "dpv:ServicePersonalization",
-                "count": 128
+                "count": 81
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
-                "count": 1138
+                "count": 216
             },
             {
                 "dpv:Purpose": "dpv:ServiceUsageAnalytics",
-                "count": 58
+                "count": 52
             },
             {
                 "dpv:Purpose": "dpv:TechnicalServiceProvision",
-                "count": 873
+                "count": 22
             },
             {
                 "dpv:Purpose": "unspecified",
-                "count": 16
+                "count": 50
             }
         ],
         "dataTypesShared": [
             {
                 "dpv:Category": "dpv:Attitude",
-                "count": 228
-            },
-            {
-                "dpv:Category": "dpv:Authenticating",
-                "count": 19
+                "count": 43
             },
             {
                 "dpv:Category": "dpv:AuthenticationHistory",
-                "count": 17
+                "count": 5
             },
             {
                 "dpv:Category": "dpv:BrowsingBehavior",
-                "count": 240
+                "count": 47
             },
             {
                 "dpv:Category": "dpv:Communication",
-                "count": 289
+                "count": 47
             },
             {
                 "dpv:Category": "dpv:CommunicationsMetadata",
-                "count": 233
+                "count": 45
             },
             {
                 "dpv:Category": "dpv:Connection",
-                "count": 337
-            },
-            {
-                "dpv:Category": "dpv:Contact",
-                "count": 1
+                "count": 60
             },
             {
                 "dpv:Category": "dpv:Country",
-                "count": 16
+                "count": 18
             },
             {
                 "dpv:Category": "dpv:DeviceApplications",
@@ -10863,7 +10859,7 @@
             },
             {
                 "dpv:Category": "dpv:DeviceBased",
-                "count": 316
+                "count": 48
             },
             {
                 "dpv:Category": "dpv:DeviceOperatingSystem",
@@ -10875,75 +10871,71 @@
             },
             {
                 "dpv:Category": "dpv:EmailAddress",
-                "count": 231
+                "count": 46
             },
             {
                 "dpv:Category": "dpv:GPSCoordinate",
-                "count": 297
+                "count": 111
             },
             {
                 "dpv:Category": "dpv:IPAddress",
-                "count": 231
+                "count": 47
             },
             {
                 "dpv:Category": "dpv:Language",
-                "count": 228
+                "count": 45
             },
             {
                 "dpv:Category": "dpv:LifeHistory",
-                "count": 229
+                "count": 44
             },
             {
                 "dpv:Category": "dpv:Location",
-                "count": 354
+                "count": 116
             },
             {
                 "dpv:Category": "dpv:Opinion",
-                "count": 228
+                "count": 43
             },
             {
                 "dpv:Category": "dpv:PINCode",
-                "count": 228
+                "count": 43
             },
             {
                 "dpv:Category": "dpv:Password",
-                "count": 231
+                "count": 45
             },
             {
                 "dpv:Category": "dpv:Picture",
-                "count": 313
+                "count": 84
             },
             {
                 "dpv:Category": "dpv:PrivacyPreference",
-                "count": 266
+                "count": 48
             },
             {
                 "dpv:Category": "dpv:SecretText",
-                "count": 370
+                "count": 185
             },
             {
                 "dpv:Category": "dpv:ServiceConsumptionBehavior",
-                "count": 313
-            },
-            {
-                "dpv:Category": "dpv:SocialMediaCommunication",
-                "count": 1
+                "count": 60
             },
             {
                 "dpv:Category": "dpv:SocialNetwork",
-                "count": 291
+                "count": 46
             },
             {
                 "dpv:Category": "dpv:TelephoneNumber",
-                "count": 470
+                "count": 209
             },
             {
                 "dpv:Category": "dpv:UID",
-                "count": 243
+                "count": 65
             },
             {
                 "dpv:Category": "dpv:Username",
-                "count": 376
+                "count": 86
             },
             {
                 "dpv:Category": "unspecified",
@@ -13173,6 +13165,351 @@
             "source": null
         },
         "industryCategory": "ic:Service"
+    },
+    {
+        "ppid": "Google Ireland, Ltd. (IE)",
+        "name": "GOOGLE IRELAND LIMITED",
+        "featured": true,
+        "clusters": [
+            "BigTech"
+        ],
+        "jurisdiction": "EU-GDPR",
+        "location": {
+            "city": "DUBLIN",
+            "countryCode": "IE"
+        },
+        "annualRevenues": [],
+        "dataRecipients": [
+            "GOOGLE NORWAY AS (NO)",
+            "GOOGLE SPAIN SL (ES)",
+            "Google (US)",
+            "Google Belgium (BE)",
+            "Google Czech Republic, s.r.o. (CZ)",
+            "Google Finland Oy (FI)",
+            "Google France (FR)",
+            "Google Greece (GR)",
+            "Google Hrvatska d.o.o. (HR)",
+            "Google Hungary (HU)",
+            "Google Ireland, Ltd. (IE)",
+            "Google Israel (IL)",
+            "Google Italy (IT)",
+            "Google Lithuania (LT)",
+            "Google Poland Sp. z.o.o (PL)",
+            "Google Portugal (PT)",
+            "Google Romania (RO)",
+            "Google Slovakia, s. r. o. (SK)",
+            "Google Sweden AB (SE)",
+            "Google Switzerland GmbH (CH)",
+            "Google Turkey (TR)",
+            "Google UK Limited (GB)"
+        ],
+        "dataSharingPurposes": [
+            {
+                "dpv:Purpose": "dpv:AcademicResearch",
+                "count": 39
+            },
+            {
+                "dpv:Purpose": "dpv:Advertising",
+                "count": 9
+            },
+            {
+                "dpv:Purpose": "dpv:CommercialResearch",
+                "count": 1
+            },
+            {
+                "dpv:Purpose": "dpv:CommunicationForCustomerCare",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:CommunicationManagement",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:CreatePersonalizedRecommendations",
+                "count": 52
+            },
+            {
+                "dpv:Purpose": "dpv:CreateProductRecommendations",
+                "count": 39
+            },
+            {
+                "dpv:Purpose": "dpv:CustomerCare",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:DirectMarketing",
+                "count": 39
+            },
+            {
+                "dpv:Purpose": "dpv:EnforceSecurity",
+                "count": 41
+            },
+            {
+                "dpv:Purpose": "dpv:FraudPreventionAndDetection",
+                "count": 120
+            },
+            {
+                "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
+                "count": 164
+            },
+            {
+                "dpv:Purpose": "dpv:IncreaseServiceRobustness",
+                "count": 156
+            },
+            {
+                "dpv:Purpose": "dpv:InternalResourceOptimisation",
+                "count": 858
+            },
+            {
+                "dpv:Purpose": "dpv:LegalCompliance",
+                "count": 195
+            },
+            {
+                "dpv:Purpose": "dpv:Marketing",
+                "count": 1
+            },
+            {
+                "dpv:Purpose": "dpv:NonCommercialResearch",
+                "count": 39
+            },
+            {
+                "dpv:Purpose": "dpv:OptimisationForConsumer",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:OptimisationForController",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:OrganisationGovernance",
+                "count": 39
+            },
+            {
+                "dpv:Purpose": "dpv:PersonalisedAdvertising",
+                "count": 195
+            },
+            {
+                "dpv:Purpose": "dpv:RegistrationAuthentication",
+                "count": 3
+            },
+            {
+                "dpv:Purpose": "dpv:RequestedServiceProvision",
+                "count": 5
+            },
+            {
+                "dpv:Purpose": "dpv:ResearchAndDevelopment",
+                "count": 195
+            },
+            {
+                "dpv:Purpose": "dpv:SellProductsToDataSubject",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceOptimization",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "dpv:ServicePersonalization",
+                "count": 161
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceProvision",
+                "count": 178
+            },
+            {
+                "dpv:Purpose": "dpv:ServiceUsageAnalytics",
+                "count": 124
+            },
+            {
+                "dpv:Purpose": "dpv:TechnicalServiceProvision",
+                "count": 79
+            },
+            {
+                "dpv:Purpose": "dpv:UserInterfacePersonalisation",
+                "count": 2
+            },
+            {
+                "dpv:Purpose": "unspecified",
+                "count": 11
+            }
+        ],
+        "dataTypesShared": [
+            {
+                "dpv:Category": "dpv:Accent",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:Acquantaince",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:Association",
+                "count": 70
+            },
+            {
+                "dpv:Category": "dpv:BrowsingBehavior",
+                "count": 76
+            },
+            {
+                "dpv:Category": "dpv:BrowsingReferral",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:CallLog",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:Communication",
+                "count": 71
+            },
+            {
+                "dpv:Category": "dpv:CommunicationsMetadata",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:Connection",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:Contact",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:DeviceApplications",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:DeviceBased",
+                "count": 144
+            },
+            {
+                "dpv:Category": "dpv:DeviceSoftware",
+                "count": 73
+            },
+            {
+                "dpv:Category": "dpv:Dialect",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:EmailAddress",
+                "count": 73
+            },
+            {
+                "dpv:Category": "dpv:EmailContent",
+                "count": 68
+            },
+            {
+                "dpv:Category": "dpv:Financial",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:GPSCoordinate",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:GeneralReputation",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:IPAddress",
+                "count": 70
+            },
+            {
+                "dpv:Category": "dpv:Interest",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:Language",
+                "count": 75
+            },
+            {
+                "dpv:Category": "dpv:LifeHistory",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:LinkClicked",
+                "count": 70
+            },
+            {
+                "dpv:Category": "dpv:Name",
+                "count": 72
+            },
+            {
+                "dpv:Category": "dpv:Password",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:PaymentCard",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:PhysicalAddress",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:Picture",
+                "count": 66
+            },
+            {
+                "dpv:Category": "dpv:Preference",
+                "count": 70
+            },
+            {
+                "dpv:Category": "dpv:PrivacyPreference",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:Professional",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:PublicLife",
+                "count": 1
+            },
+            {
+                "dpv:Category": "dpv:Purchase",
+                "count": 70
+            },
+            {
+                "dpv:Category": "dpv:PurchasesAndSpendingHabit",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:TVViewingBehavior",
+                "count": 70
+            },
+            {
+                "dpv:Category": "dpv:TelephoneNumber",
+                "count": 72
+            },
+            {
+                "dpv:Category": "dpv:Thought",
+                "count": 69
+            },
+            {
+                "dpv:Category": "dpv:UID",
+                "count": 98
+            },
+            {
+                "dpv:Category": "dpv:VoiceCommunicationRecording",
+                "count": 69
+            }
+        ],
+        "description": {
+            "value": {
+                "en": "Google Ireland is the data controller for all Google users' data in the EU. The Irish entity is responsible for Google services in the European Union. \nGoogle has recieved criticism for tax reporting practices that use a network of Irish, Dutch and Bermudan entities to report profits in a way that minimises tax payments. ",
+                "de": "Google Irland ist der für die Datenverarbeitung Verantwortliche für alle Daten der Google-Nutzer in der EU. Die irische Einheit ist für die Google-Dienste in der Europäischen Union verantwortlich. \nGoogle ist wegen seiner Steuererklärungspraktiken in die Kritik geraten, bei denen ein Netz von irischen, niederländischen und bermudischen Unternehmen genutzt wird, um Gewinne so zu melden, dass die Steuerzahlungen möglichst gering ausfallen. "
+            },
+            "source": "Wikipedia, polyPedia"
+        },
+        "industryCategory": "ic:InternetAndMultimedia",
+        "jurisdictionsShared": {
+            "children": [
+                "EU-GDPR",
+                "Five-Eyes",
+                "Other"
+            ]
+        }
     },
     {
         "ppid": "Swisscom Schweiz AG (CH)",
@@ -26328,24 +26665,6 @@
             "source": null
         },
         "industryCategory": "ic:Service"
-    },
-    {
-        "ppid": "Google Ireland, Ltd. (IE)",
-        "name": "Google Ireland, Ltd. (IE)",
-        "jurisdiction": "EU-GDPR",
-        "location": {
-            "city": "",
-            "countryCode": "IE"
-        },
-        "annualRevenues": null,
-        "dataRecipients": null,
-        "dataSharingPurposes": null,
-        "dataTypesShared": null,
-        "description": {
-            "value": null,
-            "source": null
-        },
-        "industryCategory": "ic:InternetAndMultimedia"
     },
     {
         "ppid": "BMW Lease (Malaysia) Sdn Bhd (MY)",
@@ -41391,7 +41710,7 @@
             },
             {
                 "dpv:Purpose": "dpv:CustomerCare",
-                "count": 55
+                "count": 57
             },
             {
                 "dpv:Purpose": "dpv:CustomerRelationshipManagement",
@@ -41407,11 +41726,11 @@
             },
             {
                 "dpv:Purpose": "dpv:IdentityVerification",
-                "count": 137
+                "count": 139
             },
             {
                 "dpv:Purpose": "dpv:ImproveExistingProductsAndServices",
-                "count": 118
+                "count": 126
             },
             {
                 "dpv:Purpose": "dpv:IncreaseServiceRobustness",
@@ -41419,11 +41738,15 @@
             },
             {
                 "dpv:Purpose": "dpv:LegalCompliance",
-                "count": 1329
+                "count": 1331
             },
             {
                 "dpv:Purpose": "dpv:OptimisationForConsumer",
                 "count": 143
+            },
+            {
+                "dpv:Purpose": "dpv:OptimisationForController",
+                "count": 1
             },
             {
                 "dpv:Purpose": "dpv:PublicRelations",
@@ -41447,15 +41770,15 @@
             },
             {
                 "dpv:Purpose": "dpv:ServicePersonalization",
-                "count": 128
+                "count": 136
             },
             {
                 "dpv:Purpose": "dpv:ServiceProvision",
-                "count": 1138
+                "count": 1148
             },
             {
                 "dpv:Purpose": "dpv:ServiceUsageAnalytics",
-                "count": 58
+                "count": 60
             },
             {
                 "dpv:Purpose": "dpv:TechnicalServiceProvision",
@@ -41463,7 +41786,7 @@
             },
             {
                 "dpv:Purpose": "unspecified",
-                "count": 16
+                "count": 6
             }
         ],
         "dataTypesShared": [
@@ -41481,7 +41804,7 @@
             },
             {
                 "dpv:Category": "dpv:BrowsingBehavior",
-                "count": 240
+                "count": 244
             },
             {
                 "dpv:Category": "dpv:Communication",
@@ -41501,7 +41824,7 @@
             },
             {
                 "dpv:Category": "dpv:Country",
-                "count": 16
+                "count": 18
             },
             {
                 "dpv:Category": "dpv:DeviceApplications",
@@ -41509,7 +41832,7 @@
             },
             {
                 "dpv:Category": "dpv:DeviceBased",
-                "count": 316
+                "count": 318
             },
             {
                 "dpv:Category": "dpv:DeviceOperatingSystem",
@@ -41529,11 +41852,11 @@
             },
             {
                 "dpv:Category": "dpv:IPAddress",
-                "count": 231
+                "count": 233
             },
             {
                 "dpv:Category": "dpv:Language",
-                "count": 228
+                "count": 230
             },
             {
                 "dpv:Category": "dpv:LifeHistory",
@@ -41541,7 +41864,7 @@
             },
             {
                 "dpv:Category": "dpv:Location",
-                "count": 354
+                "count": 358
             },
             {
                 "dpv:Category": "dpv:Opinion",
@@ -41581,11 +41904,11 @@
             },
             {
                 "dpv:Category": "dpv:TelephoneNumber",
-                "count": 470
+                "count": 472
             },
             {
                 "dpv:Category": "dpv:UID",
-                "count": 243
+                "count": 250
             },
             {
                 "dpv:Category": "dpv:Username",
