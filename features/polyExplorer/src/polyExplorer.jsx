@@ -24,7 +24,6 @@ import DigitalGiantsStory from "./screens/stories/digitalGiantsStory.jsx";
 
 const PolyExplorerApp = () => {
     const { navigationState, popUp, closePopUp } = useContext(ExplorerContext);
-    const { firstRun } = navigationState;
 
     return (
         <div className="poly-explorer poly-theme poly-theme-dark">
