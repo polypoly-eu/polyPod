@@ -143,13 +143,13 @@ export const ExplorerProvider = ({ children }) => {
         }
     }
 
-    function createPopUp({ type, content, props }) {
+    function createPopUp({ type, content, props, onClose }) {
         // This is a temporary fix - when the HTRT is not full size anymore it should not change the title any longer
         if (type.endsWith("-info"))
             pod.polyNav.setTitle(i18n.t(`common:screenTitle.how.to.read.this`));
         if (type == "info-main")
             pod.polyNav.setTitle(i18n.t(`common:screenTitle.info`));
-        setPopUp({ component: popUps[type], content, props });
+        setPopUp({ component: popUps[type], content, onClose, props });
     }
 
     function closePopUp() {
@@ -285,12 +285,14 @@ export const ExplorerProvider = ({ children }) => {
 
     //on-startup
     useEffect(() => {
-        readFirstRun().then(() =>
-            createPopUp({
-                type: "onboarding-popup",
-                onClose: handleOnboardingPopupClose,
-                props: { onMoreInfo: handleOnboardingPopupMoreInfo },
-            })
+        readFirstRun().then(
+            (firstRun) =>
+                firstRun &&
+                createPopUp({
+                    type: "onboarding-popup",
+                    onClose: handleOnboardingPopupClose,
+                    props: { onMoreInfo: handleOnboardingPopupMoreInfo },
+                })
         );
     }, []);
 
