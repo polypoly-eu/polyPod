@@ -143,7 +143,7 @@ export const ExplorerProvider = ({ children }) => {
         }
     }
 
-    function createPopUp({ type, content, props, onClose }) {
+    function createPopUp({ type, content, onClose = closePopUp, props }) {
         // This is a temporary fix - when the HTRT is not full size anymore it should not change the title any longer
         if (type.endsWith("-info"))
             pod.polyNav.setTitle(i18n.t(`common:screenTitle.how.to.read.this`));

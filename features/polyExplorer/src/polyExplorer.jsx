@@ -23,7 +23,7 @@ import ExampleStory from "./screens/stories/exampleStory.jsx";
 import DigitalGiantsStory from "./screens/stories/digitalGiantsStory.jsx";
 
 const PolyExplorerApp = () => {
-    const { navigationState, popUp, closePopUp } = useContext(ExplorerContext);
+    const { navigationState, popUp } = useContext(ExplorerContext);
 
     return (
         <div className="poly-explorer poly-theme poly-theme-dark">
@@ -60,7 +60,7 @@ const PolyExplorerApp = () => {
             </Switch>
             {popUp &&
                 popUp.component({
-                    onClose: popUp.onClose || closePopUp,
+                    onClose: popUp.onClose,
                     content: popUp.content,
                     ...popUp.props,
                 })}
