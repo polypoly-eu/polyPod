@@ -1,4 +1,4 @@
-import OnboardingPopup from "../components/onboardingPopup/onboardingPopup.jsx";
+import OnboardingPopup from "./onboardingPopup/onboardingPopup.jsx";
 import PurposeInfoPopup from "./centerBox/centerBox.jsx";
 
 import InfoScreen from "./infoPopUps/info/info.jsx";

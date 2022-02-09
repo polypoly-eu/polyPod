@@ -17,22 +17,13 @@ import EntityFilterScreen from "./screens/entityFilter/entityFilter.jsx";
 import EntitySearchScreen from "./screens/entitySearch/entitySearch.jsx";
 import EntityDetailsScreen from "./screens/entityDetails/entityDetails.jsx";
 
-import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
-
 //stories
 import MessengerStory from "./screens/stories/messengerStory.jsx";
 import ExampleStory from "./screens/stories/exampleStory.jsx";
 import DigitalGiantsStory from "./screens/stories/digitalGiantsStory.jsx";
 
 const PolyExplorerApp = () => {
-    const {
-        navigationState,
-        handleOnboardingPopupClose,
-        handleOnboardingPopupMoreInfo,
-        popUp,
-        closePopUp,
-    } = useContext(ExplorerContext);
-    const { firstRun } = navigationState;
+    const { navigationState, popUp } = useContext(ExplorerContext);
 
     return (
         <div className="poly-explorer poly-theme poly-theme-dark">
@@ -67,16 +58,11 @@ const PolyExplorerApp = () => {
                     <ExampleStory />
                 </Route>
             </Switch>
-            {firstRun && (
-                <OnboardingPopup
-                    onClose={handleOnboardingPopupClose}
-                    onMoreInfo={handleOnboardingPopupMoreInfo}
-                />
-            )}
             {popUp &&
                 popUp.component({
-                    onClose: closePopUp,
+                    onClose: popUp.onClose,
                     content: popUp.content,
+                    ...popUp.props,
                 })}
         </div>
     );
