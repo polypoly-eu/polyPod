@@ -143,13 +143,13 @@ export const ExplorerProvider = ({ children }) => {
         }
     }
 
-    function createPopUp({ type, content }) {
+    function createPopUp({ type, content, props }) {
         // This is a temporary fix - when the HTRT is not full size anymore it should not change the title any longer
         if (type.endsWith("-info"))
             pod.polyNav.setTitle(i18n.t(`common:screenTitle.how.to.read.this`));
         if (type == "info-main")
             pod.polyNav.setTitle(i18n.t(`common:screenTitle.info`));
-        setPopUp({ component: popUps[type], content });
+        setPopUp({ component: popUps[type], content, props });
     }
 
     function closePopUp() {
@@ -190,31 +190,26 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function handleOnboardingPopupClose() {
-        changeNavigationState({ firstRun: false });
+        setPopUp(null);
         writeFirstRun(false);
     }
 
     function handleOnboardingPopupMoreInfo() {
-        handleOnboardingPopupClose();
-        history.push("/info");
+        createPopUp({ type: "info-main" });
+        writeFirstRun(false);
     }
 
     function setPolyNavActions() {
-        pod.polyNav.actions = navigationState.firstRun
-            ? {
-                  info: () => {},
-                  search: () => {},
-              }
-            : {
-                  info: () => createPopUp({ type: "info-main" }),
-                  search: () => history.push("/search"),
-                  back: handleBack,
-              };
+        pod.polyNav.actions = {
+            info: () => createPopUp({ type: "info-main" }),
+            search: () => history.push("/search"),
+            back: () => handleBack(),
+        };
     }
 
     function activatePolyNavActions() {
         pod.polyNav.setActiveActions(
-            currentPath == "/main" ? ["info", "search"] : ["back"]
+            currentPath == "/main" && !popUp ? ["info", "search"] : ["back"]
         );
     }
 
@@ -242,7 +237,7 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function updatePodNavigation() {
-        changePolyNavScreenTitle();
+        if (!popUp) changePolyNavScreenTitle();
         setPolyNavActions();
         activatePolyNavActions();
     }
@@ -290,21 +285,19 @@ export const ExplorerProvider = ({ children }) => {
 
     //on-startup
     useEffect(() => {
-        setTimeout(
-            () =>
-                readFirstRun().then((firstRun) =>
-                    changeNavigationState({
-                        firstRun: firstRun,
-                    })
-                ),
-            300
+        readFirstRun().then(() =>
+            createPopUp({
+                type: "onboarding-popup",
+                onClose: handleOnboardingPopupClose,
+                props: { onMoreInfo: handleOnboardingPopupMoreInfo },
+            })
         );
     }, []);
 
     //on-change
     useEffect(() => {
         // This is a temporary fix - when the HTRT is not full size anymore it should not change the title any longer
-        if (!popUp) updatePodNavigation();
+        updatePodNavigation();
     });
 
     return (

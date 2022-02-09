@@ -17,8 +17,6 @@ import EntityFilterScreen from "./screens/entityFilter/entityFilter.jsx";
 import EntitySearchScreen from "./screens/entitySearch/entitySearch.jsx";
 import EntityDetailsScreen from "./screens/entityDetails/entityDetails.jsx";
 
-import OnboardingPopup from "./components/onboardingPopup/onboardingPopup.jsx";
-
 //stories
 import MessengerStory from "./screens/stories/messengerStory.jsx";
 import ExampleStory from "./screens/stories/exampleStory.jsx";
@@ -67,16 +65,11 @@ const PolyExplorerApp = () => {
                     <ExampleStory />
                 </Route>
             </Switch>
-            {firstRun && (
-                <OnboardingPopup
-                    onClose={handleOnboardingPopupClose}
-                    onMoreInfo={handleOnboardingPopupMoreInfo}
-                />
-            )}
             {popUp &&
                 popUp.component({
-                    onClose: closePopUp,
+                    onClose: popUp.onClose || closePopUp,
                     content: popUp.content,
+                    ...popUp.props,
                 })}
         </div>
     );
