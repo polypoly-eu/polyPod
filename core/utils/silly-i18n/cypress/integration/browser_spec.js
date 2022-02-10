@@ -21,3 +21,20 @@ describe("Test language determination", () => {
         expect(i18n.language).to.equal(LANGUAGE);
     });
 });
+
+describe("Test locale numeric options correctly", () => {
+    it("Converts big numbers to locale format", () => {
+        const bigNumber = "1000000.33";
+        const localePairs = {
+            "de-DE": "1.000.000,33",
+            "es-ES": "1.000.000,33",
+            "en-GB": "1,000,000.33",
+        };
+        for (const [locale, l8nString] of Object.entries(localePairs)) {
+            i18n._locale = locale;
+            expect(i18n.t("options:opt", { opt: bigNumber })).to.equal(
+                l8nString
+            );
+        }
+    });
+});
