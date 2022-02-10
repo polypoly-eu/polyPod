@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 import GradientCircleList from "../../components/gradientCircleList/gradientCircleList.jsx";
@@ -24,6 +25,9 @@ const DigitalGiantsStory = () => {
     const { featuredEntities, entityJurisdictionByPpid, createPopUp } =
         useContext(ExplorerContext);
 
+    const [scrollingRef, setScrollingRef] = useState(null);
+    const history = useHistory();
+
     const bigSix = bigSixNames.map((n) => {
         const entity = featuredEntities
             .filter((e) => e.type == "company")
@@ -47,6 +51,19 @@ const DigitalGiantsStory = () => {
         ...new Set(jurisdictionLinks.map(({ target }) => target)),
     ].filter((j) => j !== "EU-GDPR");
 
+    const handleExitStory = () => {
+        history.entries[
+            history.entries.length - 2
+        ].state.storyScrollingProgress = scrollingRef.scrollTop;
+    };
+
+    useEffect(() => {
+        scrollingRef?.scrollTo(
+            0,
+            history.location.state.storyScrollingProgress || 0
+        );
+    });
+
     return (
         <ClusterStory
             progressBarColor="black"
@@ -55,6 +72,7 @@ const DigitalGiantsStory = () => {
             fadingTopBackground={{
                 distance: "600px",
             }}
+            setScrollingRef={setScrollingRef}
         >
             <h1 className="cluster-story-main-title">
                 {i18n.t(`${i18nHeader}:title`)}
@@ -129,7 +147,9 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:explore.further.p.1`)}
             </p>
-            <EntityList entities={bigSix} expand={true} />
+            <div className="save-scrolling-progress" onClick={handleExitStory}>
+                <EntityList entities={bigSix} expand={true} />
+            </div>
             <LinkButton route={"back"} className="poly-button margin-top">
                 {i18n.t(`${i18nHeaderCommon}:discover.other.topics`)}
             </LinkButton>

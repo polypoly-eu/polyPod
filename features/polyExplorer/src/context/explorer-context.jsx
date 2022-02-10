@@ -100,6 +100,7 @@ export const ExplorerProvider = ({ children }) => {
         "showClusters",
         "selectedEntity",
         "explorationState",
+        "storyScrollingProgress",
     ];
     const [navigationState, setNavigationState] = useState({
         firstRun: false,
@@ -110,6 +111,7 @@ export const ExplorerProvider = ({ children }) => {
             index: null,
             category: null,
         },
+        storyScrollingProgress: null,
     });
     const [activeFilters, setActiveFilters] = useState(new EntityFilter());
     const [popUp, setPopUp] = useState(null);
