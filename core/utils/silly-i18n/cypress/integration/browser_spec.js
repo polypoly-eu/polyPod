@@ -1,9 +1,11 @@
-import { determineLanguage, I18n } from "../../src/index.js";
+import { determineLanguage, determineLocale } from "../../src/locale.js";
+import { I18n } from "../../src/index.js";
 
 const LANGUAGE = "foo";
 
 describe("Test language determination", () => {
     it("finds a reasonable two-letter language", () => {
+        expect(determineLocale()).to.match(/^\w{2,}-\w+/);
         expect(determineLanguage()).to.match(/^\w{2,}$/);
     });
 
