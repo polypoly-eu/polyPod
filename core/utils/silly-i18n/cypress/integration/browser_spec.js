@@ -32,6 +32,7 @@ describe("Test locale numeric options correctly", () => {
         };
         for (const [locale, l8nString] of Object.entries(localePairs)) {
             i18n._locale = locale;
+            expect(i18n.locale).to.equal(locale);
             expect(i18n.t("options:opt", { opt: bigNumber })).to.equal(
                 l8nString
             );

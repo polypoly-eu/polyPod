@@ -51,6 +51,16 @@ export class I18n {
     }
 
     /**
+     * Returns the automatically determined (in constructor) locale string.
+     *
+     * @returns locale string in the usual `xx-XX` format.
+     */
+
+    get locale() {
+        return this._locale;
+    }
+
+    /**
      * Obtains the (translated) string for a `namespace:key` defined in the translations hash.
      *
      * @param {string} key - the translation key in the `namespace:key` format

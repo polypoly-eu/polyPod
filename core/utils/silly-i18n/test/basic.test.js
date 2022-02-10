@@ -22,8 +22,9 @@ describe("Test basic configuration", () => {
     it("is created correctly", () => {
         expect(i18n).toBeInstanceOf(I18n);
     });
-    it("Includes all sections", () => {
+    it("Includes all attributes", () => {
         expect(i18n.sections).toStrictEqual(Object.keys(translationData));
+        expect(i18n.locale).toEqual(expect.stringMatching(/^\w+-\w+/));
     });
     it("Translates correctly", () => {
         expect(i18n.t("quux:bar")).toBe("baz");
