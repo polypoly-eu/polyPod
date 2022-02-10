@@ -4,7 +4,7 @@
   "scripts": {
     "lint": "eslint src test",
     "test": "jest && cypress run",
-    "doc": "jsdoc src/index.js -d ./docs"
+    "doc": "jsdoc src/*.js -d ./docs"
   },
   "jest": {
     "collectCoverage": true,
