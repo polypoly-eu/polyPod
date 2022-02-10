@@ -70,8 +70,16 @@ describe("Test basic configuration", () => {
 
 describe("Test locale numeric options correctly", () => {
     it("Converts big numbers to German format", () => {
-        i18n._locale = "de-DE";
-        expect(i18n.t("options:opt", { opt: "1000000" })).toBe("1.000.000");
+        const bigNumber = "1000000.33";
+        const localePairs = {
+            "de-DE": "1.000.000,33",
+            "es-ES": "1.000.000,33",
+            "en-GB": "1,000,000.33",
+        };
+        for (const [locale, l8nString] of Object.entries(localePairs)) {
+            i18n._locale = locale;
+            expect(i18n.t("options:opt", { opt: bigNumber })).toBe(l8nString);
+        }
     });
 });
 
