@@ -200,6 +200,44 @@ export interface PolyLifecycle {
 }
 
 /**
+ * `NetworkManager` is an interface between httpPost and the platform. Keeps the app aware of the requests that are being done by the features.
+ */
+export interface EndpointManager {
+    endpoints : Endpoint [];
+    network: Network;
+    //to get all endpoints existing in polyPedia && storage
+    getAllEndpoints(): Promise<Endpoint[] | undefined>;
+    //to get a specific endpoint from polyPedia or storage
+    getEndpoint(endpointID:string): Promise<Endpoint | undefined>;
+    //to get Endpoint permissions
+    getEndpointPermissions(endpointID:string): Promise<Permission | undefined>;
+    //call is a substitute for network.httpPost in which the network manager can authorize, notify user and react depending on endpoints being reached.
+    callEndpoint(
+        endpoint: Endpoint, 
+        callback: Function,
+        body: string,
+        contentType?: string
+    ): Promise<string | undefined>;
+}
+
+/**
+ * `Endpoint` is an object that the Feature uses in order to perform an http request.
+ */
+export interface Endpoint {
+    baseURL: string;
+    athenticationToken: string;
+}
+
+/** 
+* `Permission` sets the permissions for the specific endpoint 
+*/
+export interface Permission{
+    endpointID:string;
+}
+
+
+
+/**
  * This interface represents the API that a Pod offers to a Feature. It comprises multiple sub-components that are
  * concerned with different aspects. Those sub-components are grouped according to data flow (see member documentation
  * for details).

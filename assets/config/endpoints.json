@@ -1,3 +1,19 @@
+/* {
+    endpointID1: {
+        baseURL: string;
+    athenticationToken: string;
+    },
+    endpointID2: {
+        baseURL: string;
+    athenticationToken: string;
+    },
+    endpointID3: {
+        baseURL: string;
+    athenticationToken: string;
+    }
+
+}*/
+
 {
     "polyPedia": {
         "baseURL": "process.env.POLYPOD_POLYPEDIA_REPORT_URL",
