@@ -69,7 +69,7 @@ describe("Test basic configuration", () => {
 });
 
 describe("Test locale numeric options correctly", () => {
-    it("Converts big numbers to German format", () => {
+    it("Converts big numbers to locale format", () => {
         const bigNumber = "1000000.33";
         const localePairs = {
             "de-DE": "1.000.000,33",
