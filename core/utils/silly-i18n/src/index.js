@@ -6,8 +6,6 @@ import {
 
 import { determineLocale, determineLanguage } from "./locale.js";
 
-export { determineLocale, determineLanguage };
-
 /**
  * Simple class for performing string translations, with simple templating capabilities
  *
@@ -126,3 +124,5 @@ export class I18nSection extends I18n {
         return super.t(`${this._section}:${key}`, options);
     }
 }
+
+export { determineLocale, determineLanguage };
