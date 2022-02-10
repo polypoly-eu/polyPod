@@ -80,8 +80,15 @@ export class I18n {
             );
         }
 
-        for (let [name, value] of Object.entries(options))
-            translation = translation.replace(`{{${name}}}`, value);
+        for (let [key, value] of Object.entries(options)) {
+            let convertedValue = value;
+            if (!isNaN(parseFloat(value))) {
+                convertedValue = Intl.NumberFormat(this._locale).format(
+                    parseFloat(value)
+                );
+            }
+            translation = translation.replace(`{{${key}}}`, convertedValue);
+        }
         return translation;
     }
 }

@@ -68,6 +68,13 @@ describe("Test basic configuration", () => {
     });
 });
 
+describe("Test locale numeric options correctly", () => {
+    it("Converts big numbers to German format", () => {
+        i18n._locale = "de-DE";
+        expect(i18n.t("options:opt", { opt: "1000000" })).toBe("1.000.000");
+    });
+});
+
 describe("Test constructor with faulty translation hash", () => {
     expect(() => {
         new I18n(
