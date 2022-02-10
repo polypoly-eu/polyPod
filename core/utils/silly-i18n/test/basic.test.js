@@ -1,4 +1,4 @@
-import { determineLanguage, I18n } from "../src/index.js";
+import { I18n } from "../src/index.js";
 
 import {
     LanguageError,
@@ -15,12 +15,6 @@ const translationData = { quux: { bar: "baz" }, options: { opt: "{{opt}}" } };
 beforeAll(() => {
     i18n = new I18n(LANGUAGE, {
         [LANGUAGE]: translationData,
-    });
-});
-
-describe("Test language determination", () => {
-    it("finds a reasonable two-letter language", () => {
-        expect(determineLanguage()).toEqual(expect.stringMatching(/\w{2,}/));
     });
 });
 
