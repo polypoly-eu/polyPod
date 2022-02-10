@@ -73,7 +73,8 @@ export class TreeMap extends Chart {
     return this.chart
       .selectAll("g")
       .data(treemapRoot.leaves())
-      .join("g")
+      .enter()
+      .append("g")
       .attr("transform", (d) => `translate(${d.x0},${d.y0})`);
   }
 
