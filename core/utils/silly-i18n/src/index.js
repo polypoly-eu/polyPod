@@ -13,7 +13,7 @@ import { determineLocale, determineLanguage } from "./locale.js";
  */
 export class I18n {
     /**
-     * Class constructor
+     * Class constructor. The locale used will be auto-detected, and stored as a private-ish attribute.
      *
      * @param {string} language - two-letter language code, which should be a key in the translation hash.
      *     If this key does not exist, `fallbackLanguage` will be used.
@@ -54,7 +54,7 @@ export class I18n {
      * Obtains the (translated) string for a `namespace:key` defined in the translations hash.
      *
      * @param {string} key - the translation key in the `namespace:key` format
-     * @param {Object} options - simple templating capabilities; this will be a key-value hash, so that `{{{key}}}` will be substituted by the key value in this hash
+     * @param {Object} options - simple templating capabilities; this will be a key-value hash, so that `{{{key}}}` will be substituted by the key value in this hash. If the value is a number, it will be converted to a string in a format of the current locale
      * @throws TranslationKeyError - if the translation key does not have the correct format, or is missing the key part, or the key does not exist.
      * @throws NonExistingSectionError - if the section/namespace does not exist
      * @returns The translated string.
