@@ -302,6 +302,7 @@ export const ExplorerProvider = ({ children }) => {
     useEffect(() => {
         // This is a temporary fix - when the HTRT is not full size anymore it should not change the title any longer
         updatePodNavigation();
+        console.log("context", history);
     });
 
     return (

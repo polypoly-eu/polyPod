@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
@@ -18,7 +18,7 @@ import GradientCircleList from "../../components/gradientCircleList/gradientCirc
 import MessengerTreeMap from "../../components/clusterStories/messengerTreeMap.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 import MessengerMauChart from "../../components/clusterStories/messengerMauChart.jsx";
-import { useHistory } from "react-router-dom";
+import ScrollingProgressTracker from "../../components/scrollingProgressTracker/scrollingProgressTracker.jsx";
 
 const i18nHeader = "clusterMessengerStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -34,7 +34,6 @@ const MessengerStory = () => {
     } = useContext(ExplorerContext);
 
     const [scrollingRef, setScrollingRef] = useState(null);
-    const history = useHistory();
 
     const listOfMessengerApps = [
         "Facebook Messenger",
@@ -110,19 +109,6 @@ const MessengerStory = () => {
     const otherJurisdictions = [
         ...new Set(jurisdictionLinks.map(({ target }) => target)),
     ].filter((j) => j !== "EU-GDPR");
-
-    const handleExitStory = () => {
-        history.entries[
-            history.entries.length - 2
-        ].state.storyScrollingProgress = scrollingRef.scrollTop;
-    };
-
-    useEffect(() => {
-        scrollingRef?.scrollTo(
-            0,
-            history.location.state.storyScrollingProgress || 0
-        );
-    });
 
     return (
         <ClusterStory
@@ -272,9 +258,12 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:explore.further.p.1`)}
             </p>
-            <div className="save-scrolling-progress" onClick={handleExitStory}>
+            <ScrollingProgressTracker
+                key="messenger"
+                scrollingRef={scrollingRef}
+            >
                 <EntityList entities={Object.values(products)} expand={true} />
-            </div>
+            </ScrollingProgressTracker>
             <LinkButton route={"back"} className="poly-button margin-top">
                 {i18n.t(`${i18nHeaderCommon}:discover.other.topics`)}
             </LinkButton>

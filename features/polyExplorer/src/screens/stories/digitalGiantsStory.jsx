@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useContext, useState } from "react";
 
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 import GradientCircleList from "../../components/gradientCircleList/gradientCircleList.jsx";
@@ -14,6 +13,7 @@ import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 import EntityList from "../../components/entityList/entityList.jsx";
 import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
+import ScrollingProgressTracker from "../../components/scrollingProgressTracker/scrollingProgressTracker.jsx";
 
 const i18nHeader = "clusterDigitalGiantsStory";
 const i18nHeaderCommon = "clusterStoryCommon";
@@ -26,7 +26,6 @@ const DigitalGiantsStory = () => {
         useContext(ExplorerContext);
 
     const [scrollingRef, setScrollingRef] = useState(null);
-    const history = useHistory();
 
     const bigSix = bigSixNames.map((n) => {
         const entity = featuredEntities
@@ -50,19 +49,6 @@ const DigitalGiantsStory = () => {
     const otherJurisdictions = [
         ...new Set(jurisdictionLinks.map(({ target }) => target)),
     ].filter((j) => j !== "EU-GDPR");
-
-    const handleExitStory = () => {
-        history.entries[
-            history.entries.length - 2
-        ].state.storyScrollingProgress = scrollingRef.scrollTop;
-    };
-
-    useEffect(() => {
-        scrollingRef?.scrollTo(
-            0,
-            history.location.state.storyScrollingProgress || 0
-        );
-    });
 
     return (
         <ClusterStory
@@ -147,9 +133,9 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:explore.further.p.1`)}
             </p>
-            <div className="save-scrolling-progress" onClick={handleExitStory}>
+            <ScrollingProgressTracker scrollingRef={scrollingRef}>
                 <EntityList entities={bigSix} expand={true} />
-            </div>
+            </ScrollingProgressTracker>
             <LinkButton route={"back"} className="poly-button margin-top">
                 {i18n.t(`${i18nHeaderCommon}:discover.other.topics`)}
             </LinkButton>
