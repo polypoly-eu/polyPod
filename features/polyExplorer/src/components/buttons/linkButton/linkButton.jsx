@@ -14,7 +14,7 @@ const LinkButton = ({
     const history = useHistory();
     let changedNavigationState = navigationState;
 
-    const onClickButton = async () => {
+    const onClickButton = () => {
         onClick();
         if (stateChange)
             changedNavigationState = { ...navigationState, ...stateChange };
