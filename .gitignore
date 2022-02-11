@@ -27,3 +27,6 @@ docs/
 
 # Android stuff
 .dccache
+
+# Debug Logs
+debug.log

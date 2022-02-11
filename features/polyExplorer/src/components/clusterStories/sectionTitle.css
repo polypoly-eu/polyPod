@@ -1,6 +1,6 @@
 .section-title-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr auto 1fr;
     grid-gap: 12px;
     align-items: center;
 }
@@ -12,6 +12,16 @@
     line-height: 120%;
     text-align: center;
     letter-spacing: -0.01em;
+}
+
+.section-title-info-screen {
+    width: 100%;
+    font-family: "Jost Medium";
+    font-size: 16px;
+    line-height: 120%;
+    text-align: center;
+    letter-spacing: -0.01em;
+    margin: 24px auto;
 }
 
 .line {

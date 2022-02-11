@@ -22,7 +22,6 @@
 .entity-short-info .info-box {
     display: inline-block;
     width: 100%;
-    color: var(--color-text-light);
     text-align: left;
     margin-left: 6px;
 }

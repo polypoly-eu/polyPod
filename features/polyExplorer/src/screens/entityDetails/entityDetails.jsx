@@ -4,7 +4,7 @@ import Screen from "../../components/screen/screen.jsx";
 import CompanyRevenueChart from "./companyRevenueChart/companyRevenueChart.jsx";
 import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLegend.jsx";
 import FeaturedEntity from "../../components/featuredEntity/featuredEntity.jsx";
-import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
+import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 import EntityShortInfo from "../../components/entityShortInfo/entityShortInfo.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,21 +15,27 @@ const EntityDetails = () => {
     const { selectedEntityObject, entityObjectByPpid } =
         useContext(ExplorerContext);
     const entity = selectedEntityObject;
+    const years = [2015, 2016, 2017, 2018, 2019];
+    let annualRevenuesFilteredByYear = [];
+    if (entity && entity.annualRevenues) {
+        annualRevenuesFilteredByYear = entity?.annualRevenues?.filter(
+            (revenue) => years.includes(revenue.year)
+        );
+    }
     const [initialTab, setInitialTab] = useState(0);
     const [swiper, setSwiper] = useState(null);
-
     const cityImageMap = {
-        München: "munich",
-        "Mountain View": "mountainview",
-        Wiesbaden: "wiesbaden",
-        Berlin: "berlin",
-        Dubai: "dubai",
-        Luxembourg: "luxembourg",
-        "WILMINGTON, New Castle": "wilmington",
-        "WILMINGTON, DELAWARE": "wilmington",
-        WILMINGTON: "wilmington",
-        Cupertino: "cupertino",
-        DUBLIN: "dublin",
+        münchen: "munich",
+        "mountain view": "mountainview",
+        wiesbaden: "wiesbaden",
+        berlin: "berlin",
+        dubai: "dubai",
+        luxembourg: "luxembourg",
+        "wilmington, new castle": "wilmington",
+        "wilmington, delaware": "wilmington",
+        wilmington: "wilmington",
+        cupertino: "cupertino",
+        dublin: "dublin",
     };
 
     const tabTranslation = {
@@ -67,11 +73,11 @@ const EntityDetails = () => {
                         ) : null}
                         <div className="location-map">
                             <div className="separator-unit">
-                                <pre className="partial-separator" />
+                                <div className="partial-separator"></div>
                                 <h2>
                                     {i18n.t("entityDetailsScreen:jurisdiction")}
                                 </h2>
-                                <post className="partial-separator" />
+                                <div className="partial-separator"></div>
                             </div>
 
                             {entity.jurisdiction ? (
@@ -109,22 +115,34 @@ const EntityDetails = () => {
                                 </div>
                             )}
                             <DataRegionsLegend />
-                            {!entity?.annualRevenues ? (
+                            <SourceInfoButton
+                                source={i18n.t("common:source.polyPedia")}
+                                infoScreen="data-region-info"
+                                className="info-extra-margin"
+                            />
+                            {annualRevenuesFilteredByYear.length === 0 ? (
                                 <></>
                             ) : (
                                 <div className="revenue">
                                     <div className="separator-unit">
-                                        <pre className="partial-separator" />
+                                        <div className="partial-separator"></div>
                                         <h2>
                                             {i18n.t(
                                                 "entityDetailsScreen:revenue"
                                             )}
                                         </h2>
-                                        <post className="partial-separator" />
+                                        <div className="partial-separator"></div>
                                     </div>
 
                                     <CompanyRevenueChart
                                         annualRevenues={entity.annualRevenues}
+                                    />
+                                    <SourceInfoButton
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                        infoScreen="company-revenue-info"
+                                        className="info-extra-margin"
                                     />
                                 </div>
                             )}
@@ -136,23 +154,21 @@ const EntityDetails = () => {
                 name: tabTranslation.about,
                 content: (
                     <div className="about">
-                        <div className="scroll-box">
-                            <p
-                                className="entity-details-text"
-                                dangerouslySetInnerHTML={{
-                                    __html:
-                                        (
-                                            (entity.description?.value || {})[
-                                                i18n.language
-                                            ] || ""
-                                        ).replaceAll("\n", "<br/><br/>") ||
-                                        i18n.t(
-                                            "entityDetailsScreen:description.fallback"
-                                        ),
-                                }}
-                            ></p>
-                        </div>
-                        <div className="gradient"></div>
+                        <p
+                            className="entity-details-text"
+                            dangerouslySetInnerHTML={{
+                                __html:
+                                    (
+                                        (entity.description?.value || {})[
+                                            i18n.language
+                                        ] || ""
+                                    ).replaceAll("\n", "<br/><br/>") ||
+                                    i18n.t(
+                                        "entityDetailsScreen:description.fallback"
+                                    ),
+                            }}
+                        ></p>
+
                         {entity.description?.source ? (
                             <p className="entity-details-source">
                                 {i18n.t("entityDetailsScreen:source")}:{" "}
@@ -161,21 +177,24 @@ const EntityDetails = () => {
                         ) : null}
                         <div className="featured-map-container">
                             <div className="separator-unit">
-                                <pre className="partial-separator" />
+                                <div className="partial-separator"></div>
                                 <h2>
                                     {i18n.t("entityDetailsScreen:jurisdiction")}
                                 </h2>
-                                <post className="partial-separator" />
+                                <div className="partial-separator"></div>
                             </div>
 
                             {entity.jurisdiction ? (
                                 <div className={`location-block`}>
-                                    {entity.location ? (
+                                    {entity.location &&
+                                    cityImageMap[
+                                        entity.location.city.toLowerCase()
+                                    ] ? (
                                         <div className="featured-map">
                                             <img
                                                 src={`./images/maps/cities/${
                                                     cityImageMap[
-                                                        entity.location.city
+                                                        entity.location.city.toLowerCase()
                                                     ]
                                                 }.svg`}
                                                 className="map"
@@ -203,21 +222,33 @@ const EntityDetails = () => {
                                 </div>
                             )}
                             <DataRegionsLegend />
-                            {entity?.annualRevenues?.length === 0 ? (
+                            <SourceInfoButton
+                                source={i18n.t("common:source.polyPedia")}
+                                infoScreen="data-region-info"
+                                className="info-extra-margin"
+                            />
+                            {annualRevenuesFilteredByYear.length === 0 ? (
                                 <></>
                             ) : (
                                 <div className="revenue">
                                     <div className="separator-unit">
-                                        <pre className="partial-separator" />
+                                        <div className="partial-separator"></div>
                                         <h2>
                                             {i18n.t(
                                                 "entityDetailsScreen:revenue"
                                             )}
                                         </h2>
-                                        <post className="partial-separator" />
+                                        <div className="partial-separator"></div>
                                     </div>
                                     <CompanyRevenueChart
                                         annualRevenues={entity.annualRevenues}
+                                    />
+                                    <SourceInfoButton
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                        infoScreen="company-revenue-info"
+                                        className="info-extra-margin"
                                     />
                                 </div>
                             )}
@@ -230,10 +261,10 @@ const EntityDetails = () => {
                 content: (
                     <div className="tab-data-story">
                         <FeaturedEntity />
-                        <p className="source">
-                            {i18n.t("entityDetailsScreen:source")}: polyPedia
-                        </p>
-                        <InfoButton route="featured-entity-info" />
+                        <SourceInfoButton
+                            source={i18n.t("common:source.polyPedia")}
+                            infoScreen="featured-entity-info"
+                        />
                         <div className="explore-data-btn-area">
                             <LinkButton
                                 className="explore-data-btn"
@@ -273,23 +304,20 @@ const EntityDetails = () => {
                 name: tabTranslation.about,
                 content: (
                     <div className="about">
-                        <div className="scroll-box">
-                            <p
-                                className="entity-details-text"
-                                dangerouslySetInnerHTML={{
-                                    __html:
-                                        (
-                                            (entity.description?.value || {})[
-                                                i18n.language
-                                            ] || ""
-                                        ).replaceAll("\n", "<br/><br/>") ||
-                                        i18n.t(
-                                            "entityDetailsScreen:description.fallback"
-                                        ),
-                                }}
-                            ></p>
-                        </div>
-                        <div className="gradient"></div>
+                        <p
+                            className="entity-details-text"
+                            dangerouslySetInnerHTML={{
+                                __html:
+                                    (
+                                        (entity.description?.value || {})[
+                                            i18n.language
+                                        ] || ""
+                                    ).replaceAll("\n", "<br/><br/>") ||
+                                    i18n.t(
+                                        "entityDetailsScreen:description.fallback"
+                                    ),
+                            }}
+                        ></p>
                         {entity.description?.source ? (
                             <p className="entity-details-source">
                                 {i18n.t("entityDetailsScreen:source")}:{" "}
@@ -331,10 +359,10 @@ const EntityDetails = () => {
                 content: (
                     <div className="tab-data-story">
                         <FeaturedEntity />
-                        <p className="source">
-                            {i18n.t("entityDetailsScreen:source")}: polyPedia
-                        </p>
-                        <InfoButton route="featured-entity-info" />
+                        <SourceInfoButton
+                            source={i18n.t("common:source.polyPedia")}
+                            infoScreen="featured-entity-info"
+                        />
                         <div className="explore-data-btn-area">
                             <LinkButton
                                 className="explore-data-btn"
@@ -391,7 +419,7 @@ const EntityDetails = () => {
         return tabs;
     };
     return (
-        <Screen className="entity-details-screen">
+        <Screen className="entity-details-screen" topShadow={false}>
             <div className="details">
                 {loadTabs().length > 1 && (
                     <div className="tab-button-container">
@@ -412,7 +440,10 @@ const EntityDetails = () => {
                 )}
                 {loadTabs().length === 1 ? (
                     loadTabs().map((tab, index) => (
-                        <div key={index} className="tab-content-container">
+                        <div
+                            key={index}
+                            className="tab-content-container poly-nav-bar-separator-bottom"
+                        >
                             {" "}
                             {tab.content}
                         </div>
