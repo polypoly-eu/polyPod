@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 /*
-    This component is used for saving a scrolling progression in a screen when a children of it is clicked.
+    This component is used for saving a scrolling progression in a screen when a child of it is clicked.
     The problem this solves is that the child's onclick has priority to the parent's one. So when the child's
     onClick moves forward in the history the scrolling progress needs to be saved in the previous history entry.
  */
