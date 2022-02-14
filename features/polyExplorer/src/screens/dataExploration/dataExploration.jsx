@@ -11,8 +11,7 @@ import CompanyBubbles, {
     buildIndustrySets,
 } from "../../components/dataViz/companyBubbles.jsx";
 import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
-import InfoButton from "../../components/buttons/infoButton/infoButton.jsx";
-import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
+import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
 import CompanyIndustryList from "../../components/companyIndustryList/companyIndustryList.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 
@@ -32,6 +31,7 @@ const DataExplorationScreen = () => {
         selectedEntityObject,
         featuredEntityMaxValues,
         dataRecipients,
+        createPopUp,
     } = useContext(ExplorerContext);
     const entity = selectedEntityObject;
     const startSection = navigationState.explorationState.section;
@@ -169,7 +169,6 @@ const DataExplorationScreen = () => {
     //State
     const [swiper, setSwiper] = useState(null);
     const [activeIndex, setActiveIndex] = useState(getStartIndex());
-    const [purposePopupContent, setPurposePopupContent] = useState(null);
 
     //Constants
     const activeScreen = screens[activeIndex];
@@ -271,13 +270,10 @@ const DataExplorationScreen = () => {
                             highestValueObject
                         }
                     />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
 
-                    <InfoButton
-                        route="/data-types-info"
-                        saveActiveIndex={saveActiveIndex}
+                    <SourceInfoButton
+                        source={i18n.t("common:source.polyPedia")}
+                        infoScreen="data-types-info"
                     />
                     {filler}
                 </div>
@@ -325,17 +321,12 @@ const DataExplorationScreen = () => {
                             ].category
                         }
                     />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
 
-                    <InfoButton
-                        route="/data-category-info"
-                        saveActiveIndex={saveActiveIndex}
+                    <SourceInfoButton
+                        source={i18n.t("common:source.polyPedia")}
+                        infoScreen="category-info"
                         stateChange={{
                             explorationState: {
-                                section: "dataTypes",
-                                index: activeIndex,
                                 category: activeScreen.split("_")[1],
                             },
                         }}
@@ -383,26 +374,15 @@ const DataExplorationScreen = () => {
                         width={visualizationWidth}
                         height={visualizationHeight}
                     />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
 
-                    <InfoButton
-                        route="/data-correlation-info"
-                        saveActiveIndex={saveActiveIndex}
+                    <SourceInfoButton
+                        source={i18n.t("common:source.polyPedia")}
+                        infoScreen="correlation-info"
                     />
                 </div>
             );
         else if (activeScreen === "purposes")
-            return (
-                <div className="static-content">
-                    {filler}{" "}
-                    <InfoButton
-                        route="/purpose-info"
-                        saveActiveIndex={saveActiveIndex}
-                    />
-                </div>
-            );
+            return <div className="static-content">{filler} </div>;
         else if (activeScreen === "companies")
             return (
                 <div className="static-content">
@@ -422,13 +402,10 @@ const DataExplorationScreen = () => {
                         highlight={highlights[entity.ppid]?.dataRecipient}
                         maxCompanies={maxCompanies}
                     />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
 
-                    <InfoButton
-                        route="/companies-info"
-                        saveActiveIndex={saveActiveIndex}
+                    <SourceInfoButton
+                        source={i18n.t("common:source.polyPedia")}
+                        infoScreen="companies-info"
                     />
                 </div>
             );
@@ -490,13 +467,10 @@ const DataExplorationScreen = () => {
                         maxCompanies={maxCompanies}
                         highlight={highlights[entity.ppid]?.dataRecipient}
                     />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
 
-                    <InfoButton
-                        route="/companies-info"
-                        saveActiveIndex={saveActiveIndex}
+                    <SourceInfoButton
+                        source={i18n.t("common:source.polyPedia")}
+                        infoScreen="companies-info"
                     />
                 </div>
             );
@@ -517,10 +491,6 @@ const DataExplorationScreen = () => {
             return (
                 <div className="static-content static-content-jurisdictions">
                     {" "}
-                    <InfoButton
-                        route="/jurisdiction-info"
-                        saveActiveIndex={saveActiveIndex}
-                    />
                 </div>
             );
     };
@@ -634,9 +604,25 @@ const DataExplorationScreen = () => {
                                 </h1>
                                 <PurposeChart
                                     purposes={entity.dataSharingPurposes}
-                                    openPopup={setPurposePopupContent}
+                                    openPopup={(purpose) =>
+                                        createPopUp({
+                                            type: "center-popup",
+                                            content: {
+                                                headline: purpose.translation,
+                                                body: purpose.explanation,
+                                            },
+                                        })
+                                    }
                                     saveActiveIndex={saveActiveIndex}
                                 />
+                                <div className="purpose-extra-margin">
+                                    <SourceInfoButton
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                        infoScreen="purpose-info"
+                                    />
+                                </div>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide></SwiperSlide>
@@ -692,8 +678,12 @@ const DataExplorationScreen = () => {
                                 <DataRegionsLegend
                                     saveActiveIndex={saveActiveIndex}
                                 />
+                                <SourceInfoButton
+                                    source={i18n.t("common:source.polyPedia")}
+                                    infoScreen="jurisdiction-info"
+                                />
                                 <LinkButton
-                                    route="/entity-details"
+                                    route="/main"
                                     className="explore-other"
                                 >
                                     {i18n.t(
@@ -711,12 +701,6 @@ const DataExplorationScreen = () => {
                 screens={screens}
                 onClick={() => swiper.slideNext()}
             />
-            {purposePopupContent ? (
-                <PurposeInfoPopup
-                    purpose={purposePopupContent}
-                    onClose={() => setPurposePopupContent(null)}
-                />
-            ) : null}
         </Screen>
     );
 };

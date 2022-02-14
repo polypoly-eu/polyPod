@@ -6,7 +6,7 @@ const jurisdictionColors = {
     "Five-Eyes": "#EC453D",
     Russia: "#EC453D",
     China: "#EC453D",
-    Sonstige: "#EC453D",
+    Other: "#EC453D",
 };
 
 const transparent = "rbga(0, 0, 0, 0)";
