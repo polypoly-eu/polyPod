@@ -8,7 +8,7 @@
     "build": "rollup -c",
     "watch": "rollup --watch -c",
     "test": "jest && npm run cypress:run",
-    "polypedia:fetch": "node scripts/fetch-polypedia-data 162daa1",
+    "polypedia:fetch": "node scripts/fetch-polypedia-data 980e920",
     "polypedia:convert": "node scripts/convert-polypedia-data",
     "update-polypedia-data": "npm run polypedia:fetch && npm run polypedia:convert",
     "cypress:run": "cypress run"

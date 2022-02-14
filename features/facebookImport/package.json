@@ -8,7 +8,8 @@
     "watch": "rollup --watch -c",
     "serve": "rollup --watch --configServe -c",
     "serve-polypedia-stub": "node scripts/serve-polypedia-stub.js",
-    "test": "jest"
+    "test": "jest",
+    "doc": "jsdoc -r src/ -d ./docs"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.14.8",

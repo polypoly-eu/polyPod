@@ -1,12 +1,17 @@
-.mmessenger-mau-chart {
+.messenger-mau-chart {
     font-size: 14px;
 }
 
-.messenger-mau-chart .legend p {
-    margin: 0;
-    font-size: 12px;
+.messenger-mau-chart .legend {
+    margin: 28px 0;
+    font-size: 14px;
+    font-family: var(--jost-medium);
 }
 
 .messenger-mau-chart .unit {
     font-size: 12px;
+}
+
+.messenger-mau-chart .poly-chips {
+    margin-top: 28px;
 }
