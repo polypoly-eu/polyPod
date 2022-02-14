@@ -11,16 +11,17 @@ const MessengerTreeMap = ({ messengers, i18nHeader }) => {
     const facebookTreeMapColor = "#3749A9";
     const otherTreeMapColor = "#3BA6FF";
 
-    const nameAbbreviations = {
-        Telegram: "Tel",
-        Signal: "Sig",
-        Threema: "Thr",
-    };
-
     const treeMapData = createFacebookandOtherTreeMapData(
         messengers,
         facebookGroupName
     );
+    const takeValueFromOther = (name) =>
+        treeMapData.children[1].children.find((e) => e.name == name).value;
+    const nameAbbreviations = {
+        Snapchat: { abbr: "Snp", value: takeValueFromOther("Snapchat") },
+        Signal: { abbr: "Sig", value: takeValueFromOther("Signal") },
+        Threema: { abbr: "Thr", value: takeValueFromOther("Threema") },
+    };
 
     const handleTreeMapColor = (d) =>
         d.parent.data.name == facebookGroupName
@@ -28,12 +29,14 @@ const MessengerTreeMap = ({ messengers, i18nHeader }) => {
             : otherTreeMapColor;
 
     const handleUnfittingText = (d) => {
-        return nameAbbreviations[d.data.name];
+        return nameAbbreviations[d.data.name].abbr;
     };
 
     return (
         <div className="messenger-tree-map">
-            <p>{i18n.t(`${i18nHeader}:details.monthly.active.users.21`)}</p>
+            <h4 className="legend">
+                {i18n.t(`${i18nHeader}:details.monthly.active.users.21`)}
+            </h4>
             <BlockLegend
                 legend={[
                     {
@@ -59,8 +62,8 @@ const MessengerTreeMap = ({ messengers, i18nHeader }) => {
                 onUnfittingText={handleUnfittingText}
             />
             <div className="legend">
-                {Object.entries(nameAbbreviations).map(([name, abbr], i) => (
-                    <p key={i}>{`${abbr}: ${name}`}</p>
+                {Object.entries(nameAbbreviations).map(([name, company], i) => (
+                    <p key={i}>{`${company.abbr}: ${name} ${company.value}`}</p>
                 ))}
             </div>
         </div>

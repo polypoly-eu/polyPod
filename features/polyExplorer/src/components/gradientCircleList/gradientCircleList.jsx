@@ -9,7 +9,7 @@ const GradientCircleList = ({
     rotation = "180deg",
 }) => {
     const style = {
-        background: `linear-gradient(${rotation}, ${color} 0%, transparent 85%)`,
+        background: `linear-gradient(${rotation}, ${color} 0%, var(--transparent-light) 85%)`,
     };
 
     return (

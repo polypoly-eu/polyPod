@@ -3,22 +3,22 @@
         "AD": {
             "Name_EN": "Andorra",
             "Name_DE": "Andorra",
-            "dataRegion": "EU Adequate"
+            "dataRegion": "Other"
         },
         "AE": {
             "Name_EN": "United Arab Emirates",
             "Name_DE": "Vereinigte Arabische Emirate",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "AF": {
             "Name_EN": "Afghanistan",
             "Name_DE": "Afghanistan",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "AG": {
             "Name_EN": "Antigua and Barbuda",
             "Name_DE": "Antigua und Barbuda",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "AI": {
             "Name_EN": "Anguilla",
@@ -28,27 +28,27 @@
         "AL": {
             "Name_EN": "Albania",
             "Name_DE": "Albanien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "AM": {
             "Name_EN": "Armenia",
             "Name_DE": "Armenien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "AO": {
             "Name_EN": "Angola",
             "Name_DE": "Angola",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "AQ": {
             "Name_EN": "Antarctica",
             "Name_DE": "Antarktis",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "AR": {
             "Name_EN": "Argentina",
             "Name_DE": "Argentinien",
-            "dataRegion": "EU Adequate"
+            "dataRegion": "Other"
         },
         "AS": {
             "Name_EN": "American Samoa",
@@ -78,22 +78,22 @@
         "AZ": {
             "Name_EN": "Azerbaijan",
             "Name_DE": "Aserbaidschan",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "BA": {
             "Name_EN": "Bosnia and Herzegovina",
             "Name_DE": "Bosnien und Herzegowina",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "BB": {
             "Name_EN": "Barbados",
             "Name_DE": "Barbados",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "BD": {
             "Name_EN": "Bangladesh",
             "Name_DE": "Bangladesch",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "BE": {
             "Name_EN": "Belgium",
@@ -103,7 +103,7 @@
         "BF": {
             "Name_EN": "Burkina Faso",
             "Name_DE": "Burkina Faso",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "BG": {
             "Name_EN": "Bulgaria",
@@ -113,17 +113,17 @@
         "BH": {
             "Name_EN": "Bahrain",
             "Name_DE": "Bahrain",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "BI": {
             "Name_EN": "Burundi",
             "Name_DE": "Burundi",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "BJ": {
             "Name_EN": "Benin",
             "Name_DE": "Benin",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "BL": {
             "Name_EN": "Saint Barthélemy",
@@ -138,12 +138,12 @@
         "BN": {
             "Name_EN": "Brunei Darussalam",
             "Name_DE": "Brunei Darussalam",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "BO": {
             "Name_EN": "Bolivia",
             "Name_DE": "Bolivien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "BQ": {
             "Name_EN": "Bonaire, Sint Eustatius and Saba",
@@ -153,32 +153,32 @@
         "BR": {
             "Name_EN": "Brazil",
             "Name_DE": "Brasilien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "BS": {
             "Name_EN": "Bahamas",
             "Name_DE": "Bahamas",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "BT": {
             "Name_EN": "Bhutan",
             "Name_DE": "Bhutan",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "BW": {
             "Name_EN": "Botswana",
             "Name_DE": "Botswana",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "BY": {
             "Name_EN": "Belarus",
             "Name_DE": "Weißrussland",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "BZ": {
             "Name_EN": "Belize",
             "Name_DE": "Belize",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "CA": {
             "Name_EN": "Canada",
@@ -188,47 +188,47 @@
         "CC": {
             "Name_EN": "Cocos (Keeling) Islands",
             "Name_DE": "Cocos (Keeling) Inseln",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "CD": {
             "Name_EN": "Congo, The Democratic Republic of the",
             "Name_DE": "Kongo, die Demokratische Republik",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "CF": {
             "Name_EN": "Central African Republic",
             "Name_DE": "Zentralafrikanische Republik",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "CG": {
             "Name_EN": "Congo",
             "Name_DE": "Kongo",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "CH": {
             "Name_EN": "Switzerland",
             "Name_DE": "Schweiz",
-            "dataRegion": "EU Adequate"
+            "dataRegion": "Other"
         },
         "CI": {
             "Name_EN": "Côte d'Ivoire",
             "Name_DE": "Côte d'Ivoire",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "CK": {
             "Name_EN": "Cook Islands",
             "Name_DE": "Cook-Inseln",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "CL": {
             "Name_EN": "Chile",
             "Name_DE": "Chile",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "CM": {
             "Name_EN": "Cameroon",
             "Name_DE": "Kamerun",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "CN": {
             "Name_EN": "China",
@@ -238,22 +238,22 @@
         "CO": {
             "Name_EN": "Colombia",
             "Name_DE": "Kolumbien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "CR": {
             "Name_EN": "Costa Rica",
             "Name_DE": "Costa Rica",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "CU": {
             "Name_EN": "Cuba",
             "Name_DE": "Kuba",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "CV": {
             "Name_EN": "Cape Verde",
             "Name_DE": "Kap Verde",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "CW": {
             "Name_EN": "Curaçao",
@@ -283,7 +283,7 @@
         "DJ": {
             "Name_EN": "Djibouti",
             "Name_DE": "Dschibuti",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "DK": {
             "Name_EN": "Denmark",
@@ -293,22 +293,22 @@
         "DM": {
             "Name_EN": "Dominica",
             "Name_DE": "Dominica",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "DO": {
             "Name_EN": "Dominican Republic",
             "Name_DE": "Dominikanische Republik",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "DZ": {
             "Name_EN": "Algeria",
             "Name_DE": "Algerien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "EC": {
             "Name_EN": "Ecuador",
             "Name_DE": "Ecuador",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "EE": {
             "Name_EN": "Estonia",
@@ -318,17 +318,17 @@
         "EG": {
             "Name_EN": "Egypt",
             "Name_DE": "Ägypten",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "EH": {
             "Name_EN": "Western Sahara",
             "Name_DE": "Westsahara",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "ER": {
             "Name_EN": "Eritrea",
             "Name_DE": "Eritrea",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "ES": {
             "Name_EN": "Spain",
@@ -338,7 +338,7 @@
         "ET": {
             "Name_EN": "Ethiopia",
             "Name_DE": "Äthiopien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "FI": {
             "Name_EN": "Finland",
@@ -348,7 +348,7 @@
         "FJ": {
             "Name_EN": "Fiji",
             "Name_DE": "Fidschi",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "FK": {
             "Name_EN": "Falkland Islands (Malvinas)",
@@ -358,12 +358,12 @@
         "FM": {
             "Name_EN": "Micronesia, Federated States of",
             "Name_DE": "Mikronesien, Föderierte Staaten von",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "FO": {
             "Name_EN": "Faroe Islands",
             "Name_DE": "Färöer Inseln",
-            "dataRegion": "EU Adequate"
+            "dataRegion": "Other"
         },
         "FR": {
             "Name_EN": "France",
@@ -373,7 +373,7 @@
         "GA": {
             "Name_EN": "Gabon",
             "Name_DE": "Gabun",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "GB": {
             "Name_EN": "United Kingdom",
@@ -383,12 +383,12 @@
         "GD": {
             "Name_EN": "Grenada",
             "Name_DE": "Grenada",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "GE": {
             "Name_EN": "Georgia",
             "Name_DE": "Georgien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "GF": {
             "Name_EN": "French Guiana",
@@ -398,12 +398,12 @@
         "GG": {
             "Name_EN": "Guernsey",
             "Name_DE": "Guernsey",
-            "dataRegion": "EU Adequate"
+            "dataRegion": "Other"
         },
         "GH": {
             "Name_EN": "Ghana",
             "Name_DE": "Ghana",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "GI": {
             "Name_EN": "Gibraltar",
@@ -418,12 +418,12 @@
         "GM": {
             "Name_EN": "Gambia",
             "Name_DE": "Gambia",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "GN": {
             "Name_EN": "Guinea",
             "Name_DE": "Guinea",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "GP": {
             "Name_EN": "Guadeloupe",
@@ -433,7 +433,7 @@
         "GQ": {
             "Name_EN": "Equatorial Guinea",
             "Name_DE": "Äquatorial-Guinea",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "GR": {
             "Name_EN": "Greece",
@@ -448,7 +448,7 @@
         "GT": {
             "Name_EN": "Guatemala",
             "Name_DE": "Guatemala",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "GU": {
             "Name_EN": "Guam",
@@ -458,12 +458,12 @@
         "GW": {
             "Name_EN": "Guinea-Bissau",
             "Name_DE": "Guinea-Bissau",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "GY": {
             "Name_EN": "Guyana",
             "Name_DE": "Guyana",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "HK": {
             "Name_EN": "Hong Kong",
@@ -478,7 +478,7 @@
         "HN": {
             "Name_EN": "Honduras",
             "Name_DE": "Honduras",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "HR": {
             "Name_EN": "Croatia",
@@ -488,7 +488,7 @@
         "HT": {
             "Name_EN": "Haiti",
             "Name_DE": "Haiti",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "HU": {
             "Name_EN": "Hungary",
@@ -498,7 +498,7 @@
         "ID": {
             "Name_EN": "Indonesia",
             "Name_DE": "Indonesien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "IE": {
             "Name_EN": "Ireland",
@@ -508,17 +508,17 @@
         "IL": {
             "Name_EN": "Israel",
             "Name_DE": "Israel",
-            "dataRegion": "EU Adequate"
+            "dataRegion": "Other"
         },
         "IM": {
             "Name_EN": "Isle of Man",
             "Name_DE": "Isle of Man",
-            "dataRegion": "EU Adequate"
+            "dataRegion": "Other"
         },
         "IN": {
             "Name_EN": "India",
             "Name_DE": "Indien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "IO": {
             "Name_EN": "British Indian Ocean Territory",
@@ -528,12 +528,12 @@
         "IQ": {
             "Name_EN": "Iraq",
             "Name_DE": "Irak",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "IR": {
             "Name_EN": "Iran, Islamic Republic of",
             "Name_DE": "Iran, Islamische Republik",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "IS": {
             "Name_EN": "Iceland",
@@ -548,67 +548,67 @@
         "JE": {
             "Name_EN": "Jersey",
             "Name_DE": "Jersey",
-            "dataRegion": "EU Adequate"
+            "dataRegion": "Other"
         },
         "JM": {
             "Name_EN": "Jamaica",
             "Name_DE": "Jamaika",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "JO": {
             "Name_EN": "Jordan",
             "Name_DE": "Jordanien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "JP": {
             "Name_EN": "Japan",
             "Name_DE": "Japan",
-            "dataRegion": "EU Adequate"
+            "dataRegion": "Other"
         },
         "KE": {
             "Name_EN": "Kenya",
             "Name_DE": "Kenia",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "KG": {
             "Name_EN": "Kyrgyzstan",
             "Name_DE": "Kirgisistan",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "KH": {
             "Name_EN": "Cambodia",
             "Name_DE": "Kambodscha",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "KI": {
             "Name_EN": "Kiribati",
             "Name_DE": "Kiribati",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "KM": {
             "Name_EN": "Comoros",
             "Name_DE": "Komoren",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "KN": {
             "Name_EN": "Saint Kitts and Nevis",
             "Name_DE": "St. Kitts und Nevis",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "KP": {
             "Name_EN": "Korea, Democratic People's Republic of",
             "Name_DE": "Korea, Demokratische Volksrepublik",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "KR": {
             "Name_EN": "Korea, Republic of",
             "Name_DE": "Korea, Republik",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "KW": {
             "Name_EN": "Kuwait",
             "Name_DE": "Kuwait",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "KY": {
             "Name_EN": "Cayman Islands",
@@ -618,22 +618,22 @@
         "KZ": {
             "Name_EN": "Kazakhstan",
             "Name_DE": "Kasachstan",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "LA": {
             "Name_EN": "Lao People's Democratic Republic",
             "Name_DE": "Laotische Demokratische Volksrepublik",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "LB": {
             "Name_EN": "Lebanon",
             "Name_DE": "Libanon",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "LC": {
             "Name_EN": "Saint Lucia",
             "Name_DE": "St. Lucia",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "LI": {
             "Name_EN": "Liechtenstein",
@@ -643,17 +643,17 @@
         "LK": {
             "Name_EN": "Sri Lanka",
             "Name_DE": "Sri Lanka",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "LR": {
             "Name_EN": "Liberia",
             "Name_DE": "Liberia",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "LS": {
             "Name_EN": "Lesotho",
             "Name_DE": "Lesotho",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "LT": {
             "Name_EN": "Lithuania",
@@ -673,22 +673,22 @@
         "LY": {
             "Name_EN": "Libya",
             "Name_DE": "Libyen",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "MA": {
             "Name_EN": "Morocco",
             "Name_DE": "Marokko",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "MC": {
             "Name_EN": "Monaco",
             "Name_DE": "Monaco",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "MD": {
             "Name_EN": "Moldova, Republic of",
             "Name_DE": "Moldawien, Republik",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "ME": {
             "Name_EN": "Montenegro",
@@ -703,32 +703,32 @@
         "MG": {
             "Name_EN": "Madagascar",
             "Name_DE": "Madagaskar",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "MH": {
             "Name_EN": "Marshall Islands",
             "Name_DE": "Marshall-Inseln",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "MK": {
             "Name_EN": "Macedonia, The former Yugoslav Republic of",
             "Name_DE": "Mazedonien, die ehemalige jugoslawische Republik",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "ML": {
             "Name_EN": "Mali",
             "Name_DE": "Mali",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "MM": {
             "Name_EN": "Myanmar",
             "Name_DE": "Myanmar",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "MN": {
             "Name_EN": "Mongolia",
             "Name_DE": "Mongolei",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "MO": {
             "Name_EN": "Macao",
@@ -748,12 +748,12 @@
         "MR": {
             "Name_EN": "Mauritania",
             "Name_DE": "Mauretanien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "MS": {
             "Name_EN": "Montserrat",
             "Name_DE": "Montserrat",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "MT": {
             "Name_EN": "Malta",
@@ -763,37 +763,37 @@
         "MU": {
             "Name_EN": "Mauritius",
             "Name_DE": "Mauritius",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "MV": {
             "Name_EN": "Maldives",
             "Name_DE": "Malediven",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "MW": {
             "Name_EN": "Malawi",
             "Name_DE": "Malawi",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "MX": {
             "Name_EN": "Mexico",
             "Name_DE": "Mexiko",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "MY": {
             "Name_EN": "Malaysia",
             "Name_DE": "Malaysia",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "MZ": {
             "Name_EN": "Mozambique",
             "Name_DE": "Mosambik",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "NA": {
             "Name_EN": "Namibia",
             "Name_DE": "Namibia",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "NC": {
             "Name_EN": "New Caledonia",
@@ -803,7 +803,7 @@
         "NE": {
             "Name_EN": "Niger",
             "Name_DE": "Niger",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "NF": {
             "Name_EN": "Norfolk Island",
@@ -813,12 +813,12 @@
         "NG": {
             "Name_EN": "Nigeria",
             "Name_DE": "Nigeria",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "NI": {
             "Name_EN": "Nicaragua",
             "Name_DE": "Nicaragua",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "NL": {
             "Name_EN": "Netherlands",
@@ -833,17 +833,17 @@
         "NP": {
             "Name_EN": "Nepal",
             "Name_DE": "Nepal",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "NR": {
             "Name_EN": "Nauru",
             "Name_DE": "Nauru",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "NU": {
             "Name_EN": "Niue",
             "Name_DE": "Niue",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "NZ": {
             "Name_EN": "New Zealand",
@@ -853,17 +853,17 @@
         "OM": {
             "Name_EN": "Oman",
             "Name_DE": "Oman",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "PA": {
             "Name_EN": "Panama",
             "Name_DE": "Panama",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "PE": {
             "Name_EN": "Peru",
             "Name_DE": "Peru",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "PF": {
             "Name_EN": "French Polynesia",
@@ -873,17 +873,17 @@
         "PG": {
             "Name_EN": "Papua New Guinea",
             "Name_DE": "Papua-Neuguinea",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "PH": {
             "Name_EN": "Philippines",
             "Name_DE": "Philippinen",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "PK": {
             "Name_EN": "Pakistan",
             "Name_DE": "Pakistan",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "PL": {
             "Name_EN": "Poland",
@@ -908,7 +908,7 @@
         "PS": {
             "Name_EN": "Palestine, State of",
             "Name_DE": "Palästina, Staat",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "PT": {
             "Name_EN": "Portugal",
@@ -918,17 +918,17 @@
         "PW": {
             "Name_EN": "Palau",
             "Name_DE": "Palau",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "PY": {
             "Name_EN": "Paraguay",
             "Name_DE": "Paraguay",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "QA": {
             "Name_EN": "Qatar",
             "Name_DE": "Katar",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "RE": {
             "Name_EN": "Reunion",
@@ -943,7 +943,7 @@
         "RS": {
             "Name_EN": "Serbia",
             "Name_DE": "Serbien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "RU": {
             "Name_EN": "Russian Federation",
@@ -953,27 +953,27 @@
         "RW": {
             "Name_EN": "Rwanda",
             "Name_DE": "Ruanda",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "SA": {
             "Name_EN": "Saudi Arabia",
             "Name_DE": "Saudi-Arabien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "SB": {
             "Name_EN": "Solomon Islands",
             "Name_DE": "Salomon-Inseln",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "SC": {
             "Name_EN": "Seychelles",
             "Name_DE": "Seychellen",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "SD": {
             "Name_EN": "Sudan",
             "Name_DE": "Sudan",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "SE": {
             "Name_EN": "Sweden",
@@ -983,7 +983,7 @@
         "SG": {
             "Name_EN": "Singapore",
             "Name_DE": "Singapur",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "SH": {
             "Name_EN": "Saint Helena, Ascension and Tristan Da Cunha",
@@ -1008,7 +1008,7 @@
         "SL": {
             "Name_EN": "Sierra Leone",
             "Name_DE": "Sierra Leone",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "SM": {
             "Name_EN": "San Marino",
@@ -1018,32 +1018,32 @@
         "SN": {
             "Name_EN": "Senegal",
             "Name_DE": "Senegal",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "SO": {
             "Name_EN": "Somalia",
             "Name_DE": "Somalia",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "SR": {
             "Name_EN": "Suriname",
             "Name_DE": "Surinam",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "SS": {
             "Name_EN": "South Sudan",
             "Name_DE": "Südsudan",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "ST": {
             "Name_EN": "Sao Tome and Principe",
             "Name_DE": "Sao Tome und Principe",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "SV": {
             "Name_EN": "El Salvador",
             "Name_DE": "El Salvador",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "SX": {
             "Name_EN": "Sint Maarten (Dutch Part)",
@@ -1053,12 +1053,12 @@
         "SY": {
             "Name_EN": "Syrian Arab Republic",
             "Name_DE": "Syrien, Arabische Republik",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "SZ": {
             "Name_EN": "Eswatini",
             "Name_DE": "Eswatini",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "TC": {
             "Name_EN": "Turks and Caicos Islands",
@@ -1068,7 +1068,7 @@
         "TD": {
             "Name_EN": "Chad",
             "Name_DE": "Tschad",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "TF": {
             "Name_EN": "French Southern Territories",
@@ -1078,17 +1078,17 @@
         "TG": {
             "Name_EN": "Togo",
             "Name_DE": "Togo",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "TH": {
             "Name_EN": "Thailand",
             "Name_DE": "Thailand",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "TJ": {
             "Name_EN": "Tajikistan",
             "Name_DE": "Tadschikistan",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "TK": {
             "Name_EN": "Tokelau",
@@ -1098,57 +1098,57 @@
         "TL": {
             "Name_EN": "Timor-Leste",
             "Name_DE": "Timor-Leste",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "TM": {
             "Name_EN": "Turkmenistan",
             "Name_DE": "Turkmenistan",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "TN": {
             "Name_EN": "Tunisia",
             "Name_DE": "Tunesien",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "TO": {
             "Name_EN": "Tonga",
             "Name_DE": "Tonga",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "TR": {
             "Name_EN": "Turkey",
             "Name_DE": "Türkei",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "TT": {
             "Name_EN": "Trinidad and Tobago",
             "Name_DE": "Trinidad und Tobago",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "TV": {
             "Name_EN": "Tuvalu",
             "Name_DE": "Tuvalu",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "TW": {
             "Name_EN": "Taiwan, Province of China",
             "Name_DE": "Taiwan, Provinz China",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "TZ": {
             "Name_EN": "Tanzania, United Republic of",
             "Name_DE": "Tansania, Vereinigte Republik",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "UA": {
             "Name_EN": "Ukraine",
             "Name_DE": "Ukraine",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "UG": {
             "Name_EN": "Uganda",
             "Name_DE": "Uganda",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "UM": {
             "Name_EN": "United States Minor Outlying Islands",
@@ -1163,12 +1163,12 @@
         "UY": {
             "Name_EN": "Uruguay",
             "Name_DE": "Uruguay",
-            "dataRegion": "EU Adequate"
+            "dataRegion": "Other"
         },
         "UZ": {
             "Name_EN": "Uzbekistan",
             "Name_DE": "Usbekistan",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "VA": {
             "Name_EN": "Holy See (Vatican City State)",
@@ -1178,12 +1178,12 @@
         "VC": {
             "Name_EN": "Saint Vincent and the Grenadines",
             "Name_DE": "St. Vincent und die Grenadinen",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "VE": {
             "Name_EN": "Venezuela",
             "Name_DE": "Venezuela",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "VG": {
             "Name_EN": "Virgin Islands, British",
@@ -1198,12 +1198,12 @@
         "VN": {
             "Name_EN": "Viet Nam",
             "Name_DE": "Vietnam",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "VU": {
             "Name_EN": "Vanuatu",
             "Name_DE": "Vanuatu",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "WF": {
             "Name_EN": "Wallis and Futuna",
@@ -1213,17 +1213,17 @@
         "WS": {
             "Name_EN": "Samoa",
             "Name_DE": "Samoa",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "XZ": {
             "Name_EN": "Installations in International Waters",
             "Name_DE": "Anlagen in internationalen Gewässern",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "YE": {
             "Name_EN": "Yemen",
             "Name_DE": "Jemen",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "YT": {
             "Name_EN": "Mayotte",
@@ -1233,27 +1233,22 @@
         "ZA": {
             "Name_EN": "South Africa",
             "Name_DE": "Südafrika",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "ZM": {
             "Name_EN": "Zambia",
             "Name_DE": "Sambia",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "ZW": {
             "Name_EN": "Zimbabwe",
             "Name_DE": "Simbabwe",
-            "dataRegion": "Sonstige"
+            "dataRegion": "Other"
         },
         "XK": {
             "Name_EN": "Kosovo",
             "Name_DE": "Kosovo",
-            "dataRegion": "Sonstige"
-        },
-        "ZZ": {
-            "Name_EN": "Placeholder",
-            "Name_DE": "Placeholder",
-            "dataRegion": ""
+            "dataRegion": "Other"
         }
     },
     "industries": {
@@ -1439,6 +1434,16 @@
             "Explanation_EN": "Conduct research in a commercial setting e.g. in a company.",
             "Editorial_Purpose": ""
         },
+        "dpv:CommunicationManagement": {
+            "dpv:Purpose": "dpv:CommunicationManagement",
+            "dpv:Superclass": "dpv:Purpose",
+            "Translation_DE": "Kommunikationsmanagement",
+            "Translation_EN": "Communication Management",
+            "Synonyms": "",
+            "Explanation_DE": "Kommunikation verwalten oder Mittel für die Kommunikation bereitstellen, z. B. um eine E-Mail mit Informationen zu versenden",
+            "Explanation_EN": "Manage communication or provide means for communication e.g. to send an email notifying some information",
+            "Editorial_Purpose": ""
+        },
         "dpv:CommunicationForCustomerCare": {
             "dpv:Purpose": "dpv:CommunicationForCustomerCare",
             "dpv:Superclass": "dpv:CustomerCare",
@@ -1594,7 +1599,7 @@
             "dpv:Superclass": "dpv:CommercialInterest",
             "Translation_DE": "Marketing",
             "Translation_EN": "Marketing",
-            "Synonyms": "Publicity;Public Relations",
+            "Synonyms": "Advertising",
             "Explanation_DE": "Marketing betreiben, d. h. ein Produkt oder eine Dienstleistung bewerben, verkaufen und vertreiben.",
             "Explanation_EN": "Carry out marketing i.e. promoting, selling, and distributing a product or service.",
             "Editorial_Purpose": "Advertising"
@@ -1669,13 +1674,13 @@
             "Explanation_EN": "Data is shared so a person's details can be registered and later used to make sure that only the same person uses the service they signed up for.",
             "Editorial_Purpose": ""
         },
-        "dpv:RegistrationAndAuthentication": {
-            "dpv:Purpose": "dpv:RegistrationAndAuthentication",
+        "dpv:RegistrationAuthentication": {
+            "dpv:Purpose": "dpv:RegistrationAuthentication",
             "dpv:Superclass": "dpv:ServiceProvision",
             "Translation_DE": "Registrierung und Authentifizierung",
             "Translation_EN": "Registration and Authentication",
             "Synonyms": "",
-            "Explanation_DE": "Sich registrieren, authentifizieren und im Zusammenhang mit einem Dienst identifizieren.",
+            "Explanation_DE": "Registrierung, Authentifizierung und Identifizierung im Kontext eines Dienstes.",
             "Explanation_EN": "Data is shared so a person's details can be registered and later used to make sure that only the same person uses the service they signed up for.",
             "Editorial_Purpose": ""
         },
@@ -1779,6 +1784,16 @@
             "Explanation_EN": "Provide service or activity.",
             "Editorial_Purpose": ""
         },
+        "dpv:TechnicalServiceProvision": {
+            "dpv:Purpose": "dpv:TechnicalServiceProvision",
+            "dpv:Superclass": "dpv:ServiceProvision",
+            "Translation_DE": "Bereitstellung technischer Dienstleistungen",
+            "Translation_EN": "Technical Service Provision",
+            "Synonyms": "",
+            "Explanation_DE": "Verwaltung und Bereitstellung der für die Erbringung von Dienstleistungen erforderlichen technischen Prozesse und Funktionen",
+            "Explanation_EN": "Manage and provide technical processes and functions necessary for delivering services",
+            "Editorial_Purpose": ""
+        },
         "dpv:SocialMediaMarketing": {
             "dpv:Purpose": "dpv:SocialMediaMarketing",
             "dpv:Superclass": "dpv:Marketing",
@@ -1809,8 +1824,8 @@
             "Explanation_EN": "Data is shared to alter the presentation of interfaces that suit a particular user.",
             "Editorial_Purpose": ""
         },
-        "dpv:UsageAnalytics": {
-            "dpv:Purpose": "dpv:UsageAnalytics",
+        "dpv:ServiceUsageAnalytics": {
+            "dpv:Purpose": "dpv:ServiceUsageAnalytics",
             "dpv:Superclass": "dpv:ServiceProvision",
             "Translation_DE": "Verwendungsanalyse",
             "Translation_EN": "Usage Analytics",
@@ -1819,14 +1834,14 @@
             "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product.",
             "Editorial_Purpose": ""
         },
-        "dpv:RegistrationAuthentication": {
-            "dpv:Purpose": "dpv:RegistrationAuthentication",
+        "dpv:UsageAnalytics": {
+            "dpv:Purpose": "dpv:UsageAnalytics",
             "dpv:Superclass": "dpv:ServiceProvision",
-            "Translation_DE": "Registrierung und Authentifizierung",
-            "Translation_EN": "Registration and Authentication",
+            "Translation_DE": "Verwendungsanalyse",
+            "Translation_EN": "Usage Analytics",
             "Synonyms": "",
-            "Explanation_DE": "Registrierung, Authentifizierung und Identifizierung im Kontext eines Dienstes.",
-            "Explanation_EN": "Data is shared so a person's details can be registered and later used to make sure that only the same person uses the service they signed up for.",
+            "Explanation_DE": ",Berechnen, Analysieren und Berichten von Benutzer:innen-Verhalten und -Ereignissen für einen Dienst oder ein Produkt.",
+            "Explanation_EN": "Calculate, analyse, and report user behaviour and events for a service or product.",
             "Editorial_Purpose": ""
         },
         "unspecified": {
@@ -1857,6 +1872,86 @@
             "Synonyms": "",
             "Explanation_DE": "Angefordete Dienstleistung bereitstellen.",
             "Explanation_EN": "Provide requested service of activity.",
+            "Editorial_Purpose": ""
+        },
+        "dpv:DisputeManagement": {
+            "dpv:Purpose": "dpv:DisputeManagement",
+            "dpv:Superclass": "dpv:OrganisationGovernance",
+            "Translation_DE": "Verwaltung von Streitigkeiten",
+            "Translation_EN": "Dispute Management",
+            "Synonyms": "",
+            "Explanation_DE": "Bearbeitung von Streitigkeiten zwischen natürlichen Personen, privaten Einrichtungen oder Behörden, die für die Organisation relevant sind",
+            "Explanation_EN": "Manage disputes by natural persons, private bodies, or public authorities relevant to organisation",
+            "Editorial_Purpose": ""
+        },
+        "dpv:CustomerRelationshipManagement": {
+            "dpv:Purpose": "dpv:CustomerRelationshipManagement",
+            "dpv:Superclass": "dpv:CustomerManagement",
+            "Translation_DE": "Kundenbeziehungsmanagement",
+            "Translation_EN": "Customer Relationship Management",
+            "Synonyms": "",
+            "Explanation_DE": "Verwalten und Analysieren der Interaktionen mit früheren, aktuellen und potenziellen Kunden",
+            "Explanation_EN": "Manage and analyse interactions with past, current, and potential customers",
+            "Editorial_Purpose": ""
+        },
+        "dpv:PublicRelations": {
+            "dpv:Purpose": "dpv:PublicRelations",
+            "dpv:Superclass": "dpv:Marketing",
+            "Translation_DE": "Öffentlichkeitsarbeit",
+            "Translation_EN": "Public Relations",
+            "Synonyms": "",
+            "Explanation_DE": "Verwaltung und Durchführung von Prozessen der Öffentlichkeitsarbeit. Dazu gehört auch die Schaffung von Goodwill für die Organisation.",
+            "Explanation_EN": "Manage and conduct public relations processes. This includes creating goodwill for the organization.",
+            "Editorial_Purpose": ""
+        },
+        "dpv:OrganisationRiskManagement": {
+            "dpv:Purpose": "dpv:OrganisationRiskManagement",
+            "dpv:Superclass": "dpv:OrganisationGovernance",
+            "Translation_DE": "Organisation Risikomanagement",
+            "Translation_EN": "Organisation Risk Management",
+            "Synonyms": "",
+            "Explanation_DE": "Risikomanagement für die Aktivitäten der Organisation",
+            "Explanation_EN": "Manage risk for organisation's activities",
+            "Editorial_Purpose": ""
+        },
+        "dpv:EnforceSecurity": {
+            "dpv:Purpose": "dpv:EnforceSecurity",
+            "dpv:Superclass": "dpv:Purpose",
+            "Translation_DE": "Sicherheit durchsetzen",
+            "Translation_EN": "Enforce Security",
+            "Synonyms": "",
+            "Explanation_DE": "Gewährleistung und Durchsetzung der Sicherheit, z. B. von Daten und Personal",
+            "Explanation_EN": "Ensure and enforce security e.g. of data, personnel",
+            "Editorial_Purpose": ""
+        },
+        "dpv:VendorManagement": {
+            "dpv:Purpose": "dpv:VendorManagement",
+            "dpv:Superclass": "dpv:Purpose",
+            "Translation_DE": "Lieferantenverwaltung",
+            "Translation_EN": "Vendor Management",
+            "Synonyms": "",
+            "Explanation_DE": "Verwaltung von Aufträgen, Zahlungen, Bewertungen und Akquise von Anbietern",
+            "Explanation_EN": "Manage orders, payment, evaluation, and prospecting related to vendors",
+            "Editorial_Purpose": ""
+        },
+        "dpv:OrganisationGovernance": {
+            "dpv:Purpose": "dpv:OrganisationGovernance",
+            "dpv:Superclass": "dpv:Purpose",
+            "Translation_DE": "Verwaltung der Organisation",
+            "Translation_EN": "Organisation Governance",
+            "Synonyms": "",
+            "Explanation_DE": "Durchführung von Aktivitäten und Funktionen für die Leitung der Organisation",
+            "Explanation_EN": "Conduct activities and functions for organisation's governance",
+            "Editorial_Purpose": ""
+        },
+        "dpv:CustomerSolvencyMonitoring": {
+            "dpv:Purpose": "dpv:CustomerSolvencyMonitoring",
+            "dpv:Superclass": "dpv:CustomerManagement",
+            "Translation_DE": "Überwachung der Kundenbonität",
+            "Translation_EN": "Customer Solvency Monitoring",
+            "Synonyms": "",
+            "Explanation_DE": "Überwachung der Zahlungsfähigkeit der Kunden im Rahmen der finanziellen Sorgfaltspflicht",
+            "Explanation_EN": "Monitor solvency of customers for financial diligence",
             "Editorial_Purpose": ""
         }
     },
@@ -3949,7 +4044,7 @@
             "Translation_DE": "unspezifiziert",
             "Translation_EN": "unspecified",
             "Polypoly_Parent_Category": [
-                ""
+                "unspecified"
             ],
             "Synonyms": "",
             "Explanation_DE": "unspezifizierte Zwecke",
