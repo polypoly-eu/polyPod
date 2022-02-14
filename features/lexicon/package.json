@@ -26,5 +26,15 @@
     "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
     "js-levenshtein": "^1.1.6",
     "sirv-cli": "^1.0.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js$": [
+        "babel-jest",
+        {
+          "rootMode": "upward"
+        }
+      ]
+    }
   }
 }
