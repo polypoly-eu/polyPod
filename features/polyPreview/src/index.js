@@ -1,7 +1,7 @@
 import SwiperCore from "swiper/core";
 import i18n from "./i18n.js";
 
-import "swiper/swiper-bundle.min.css";
+import "swiper/css";
 import "./styles.css";
 
 function getStaticContent(progress) {
