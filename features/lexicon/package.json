@@ -13,7 +13,6 @@
     "clean": "shx rm -rf node_modules public/{build,pod.js,poly-look.css}"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.14.7",
     "@polypoly-eu/podjs": "file:../../podjs",
     "@polypoly-eu/poly-look": "file:../../core/utils/poly-look",
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../core/utils/rollup-plugin-copy-watch",
