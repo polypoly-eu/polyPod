@@ -14,7 +14,6 @@
     "cypress:run": "cypress run"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.13",
     "@babel/preset-env": "^7.16.11",
     "@polypoly-eu/podjs": "file:../../podjs",
     "@polypoly-eu/poly-look": "file:../../core/utils/poly-look",
@@ -38,7 +37,12 @@
       "!**/test/test*.js"
     ],
     "transform": {
-      "^.+\\.js$": ["babel-jest", {"rootMode": "upward"}]
+      "^.+\\.js$": [
+        "babel-jest",
+        {
+          "rootMode": "upward"
+        }
+      ]
     }
   }
 }
