@@ -12,13 +12,11 @@
     "doc": "jsdoc -r src/ -d ./docs"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.14.8",
     "@babel/preset-react": "^7.14.5",
     "@polypoly-eu/pod-api": "file:../../core/api/pod-api",
     "@polypoly-eu/podjs": "file:../../podjs",
     "@polypoly-eu/poly-look": "file:../../core/utils/poly-look",
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../core/utils/rollup-plugin-copy-watch",
-    "babel-jest": "^27.2.5",
     "identity-obj-proxy": "^3.0.0",
     "jszip": "^3.6.0",
     "memfs": "^3.2.2",
@@ -41,7 +39,12 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy"
     },
     "transform": {
-      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest"
+      "^.+\\.(js|jsx)$": [
+        "babel-jest",
+        {
+          "rootMode": "upward"
+        }
+      ]
     },
     "transformIgnorePatterns": [
       "/node_modules/(?!(.*))"
