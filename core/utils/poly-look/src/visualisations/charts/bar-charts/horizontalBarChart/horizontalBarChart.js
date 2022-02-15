@@ -292,18 +292,17 @@ export class HorizontalBarChart extends Chart {
 
   _displayBars(barGroups, enteringBarGroups) {
     this._addEnteringBars(enteringBarGroups);
-    this._updateExistingBars(barGroups);
+    if (!called) this._updateExistingBars(barGroups);
   }
 
   _displayValues(barGroups, enteringBarGroups) {
-    this._updateExistingBarValues(barGroups);
+    if (!called) this._updateExistingBarValues(barGroups);
     this._addEnteringBarValues(enteringBarGroups);
     this._addEnteringBarLabels(enteringBarGroups);
   }
 
   render() {
-    if (called > 0) return;
-    called = 1;
+    called = true;
     this._adaptScalesToData();
     const barGroups = this.chart
       .selectAll(".bar-group")
