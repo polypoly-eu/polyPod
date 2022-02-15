@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import Screen from "../screen/screen.jsx";
 
 import "./clusterStory.css";
 
+const defaultProgressBarColor = "#3BA6FF";
 const fadingTopBackgroundDefaultDistance = "600px";
 
 /* This component is used as a base for the different Cluster Stories screens. In order to style the screen,
@@ -20,19 +21,42 @@ const fadingTopBackgroundDefaultDistance = "600px";
 
 const ClusterStory = ({
     children,
+    progressBarColor = defaultProgressBarColor,
     className,
     primaryColor,
     fadingTopBackground,
-    setScrollingRef,
 }) => {
+    const scrollRef = useRef();
+    const progressRef = useRef();
+
+    const handleScrollUp = () => {
+        scrollRef.current.scrollTo(0, 0);
+    };
+
+    const handleProgress = () => {
+        progressRef.current.style.width = `${
+            (scrollRef.current.scrollTop /
+                (scrollRef.current.scrollHeight -
+                    scrollRef.current.offsetHeight)) *
+            100
+        }%`;
+    };
+
     return (
         <Screen
             className={`cluster-story ${className}`}
             theme={"poly-theme-light"}
-            setScrollingRef={setScrollingRef}
         >
             <div
+                className="progress-bar"
+                style={{ backgroundColor: progressBarColor }}
+                ref={progressRef}
+            ></div>
+            <div className="scroll-up-btn" onClick={handleScrollUp}></div>
+            <div
                 className="content"
+                ref={scrollRef}
+                onScroll={() => handleProgress()}
                 style={{
                     "--story-color-primary": primaryColor,
                     background: fadingTopBackground

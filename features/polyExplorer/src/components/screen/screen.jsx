@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 
 import "./screen.css";
 
@@ -8,19 +8,11 @@ const Screen = ({
     topShadow = true,
     children,
     noScroll = false,
-    setScrollingRef,
 }) => {
-    const scrollingRef = useRef();
-
-    useEffect(() => {
-        setScrollingRef && setScrollingRef(scrollingRef.current);
-    }, []);
-
     return (
         <div className={`${theme || ""} explorer-container`}>
             {topShadow && <div className="poly-nav-bar-separator-overlay" />}
             <div
-                ref={scrollingRef}
                 className={`${
                     noScroll && "noScroll"
                 } screen-content ${className}`}

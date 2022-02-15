@@ -12,7 +12,7 @@ const LinkButton = ({
     const { navigationState, changeNavigationState, handleBack } =
         useContext(ExplorerContext);
     const history = useHistory();
-    let changedNavigationState = { ...navigationState };
+    let changedNavigationState = navigationState;
 
     const onClickButton = () => {
         onClick();
