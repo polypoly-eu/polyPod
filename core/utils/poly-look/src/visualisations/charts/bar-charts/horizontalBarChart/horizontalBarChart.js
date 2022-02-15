@@ -11,6 +11,7 @@ const margin = {
   left: 0,
 };
 
+let called = 0;
 const barValueMargin = 4;
 const barPaddingProportion = 0.2;
 const groupHeadlineHeight = 14;
@@ -301,6 +302,8 @@ export class HorizontalBarChart extends Chart {
   }
 
   render() {
+    if (called > 0) return;
+    called = 1;
     this._adaptScalesToData();
     const barGroups = this.chart
       .selectAll(".bar-group")
