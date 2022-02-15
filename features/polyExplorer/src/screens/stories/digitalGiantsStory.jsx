@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { createRef, useContext, useRef } from "react";
 
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 import GradientCircleList from "../../components/gradientCircleList/gradientCircleList.jsx";
@@ -25,7 +25,9 @@ const DigitalGiantsStory = () => {
     const { featuredEntities, entityJurisdictionByPpid, createPopUp } =
         useContext(ExplorerContext);
 
-    const [scrollingRef, setScrollingRef] = useState(null);
+    const storyRefs = useRef({
+        scrollingRef: createRef(),
+    });
 
     const bigSix = bigSixNames.map((n) => {
         const entity = featuredEntities
@@ -58,7 +60,7 @@ const DigitalGiantsStory = () => {
             fadingTopBackground={{
                 distance: "600px",
             }}
-            setScrollingRef={setScrollingRef}
+            scrollingRef={storyRefs.current.scrollingRef}
         >
             <h1 className="cluster-story-main-title">
                 {i18n.t(`${i18nHeader}:title`)}
@@ -133,7 +135,11 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:explore.further.p.1`)}
             </p>
-            <ScrollingProgressTracker scrollingRef={scrollingRef}>
+            <ScrollingProgressTracker
+                key="messenger"
+                scrollingRef={storyRefs.current.scrollingRef}
+                history={history}
+            >
                 <EntityList entities={bigSix} expand={true} />
             </ScrollingProgressTracker>
             <LinkButton route={"back"} className="poly-button margin-top">
