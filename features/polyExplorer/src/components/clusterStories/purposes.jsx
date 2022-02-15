@@ -1,10 +1,11 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import PurposesBarChart from "../dataViz/purposesBarChart.jsx";
 import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
 
-export default function Purposes({ companies, createPopUp }) {
+export default function Purposes({ companies }) {
+    const { createPopUp } = useContext(ExplorerContext);
     const purposes = {};
 
     for (let company of companies) {

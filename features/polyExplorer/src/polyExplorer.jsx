@@ -23,15 +23,11 @@ import ExampleStory from "./screens/stories/exampleStory.jsx";
 import DigitalGiantsStory from "./screens/stories/digitalGiantsStory.jsx";
 
 const PolyExplorerApp = () => {
-    const { navigationState, popUp } = useContext(ExplorerContext);
-
     return (
         <div className="poly-explorer poly-theme poly-theme-dark">
             <Switch>
                 <Route exact path="/">
-                    <Redirect
-                        to={{ pathname: "/main", state: navigationState }}
-                    />
+                    <RedirectToMain />
                 </Route>
                 <Route exact path="/main">
                     <MainScreen />
@@ -58,14 +54,28 @@ const PolyExplorerApp = () => {
                     <ExampleStory />
                 </Route>
             </Switch>
-            {popUp &&
-                popUp.component({
-                    onClose: popUp.onClose,
-                    content: popUp.content,
-                    ...popUp.props,
-                })}
+            <Popup />
         </div>
     );
+};
+
+const RedirectToMain = () => {
+    const { navigationState } = useContext(ExplorerContext);
+    return <Redirect to={{ pathname: "/main", state: navigationState }} />;
+};
+
+const Popup = () => {
+    const { popUp } = useContext(ExplorerContext);
+
+    if (!popUp) {
+        return null;
+    }
+
+    return popUp.component({
+        onClose: popUp.onClose,
+        content: popUp.content,
+        ...popUp.props,
+    });
 };
 
 const PolyExplorer = () => {

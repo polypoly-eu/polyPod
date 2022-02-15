@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { createRef, useContext, useRef } from "react";
 
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
-import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import DataTypes from "../../components/clusterStories/dataTypes.jsx";
@@ -19,33 +18,29 @@ import MessengerTreeMap from "../../components/clusterStories/messengerTreeMap.j
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 import MessengerMauChart from "../../components/clusterStories/messengerMauChart.jsx";
 import ScrollingProgressTracker from "../../components/scrollingProgressTracker/scrollingProgressTracker.jsx";
-
+import { ExplorerContext } from "../../context/explorer-context.jsx";
 const i18nHeader = "clusterMessengerStory";
 const i18nHeaderCommon = "clusterStoryCommon";
 
 const primaryColor = "#3ba6ff";
+const listOfMessengerApps = [
+    "Facebook Messenger",
+    "WhatsApp",
+    "Instagram",
+    "Signal",
+    "Snapchat",
+    "Telegram",
+    "Threema",
+    "TikTok",
+    "iMessage",
+];
 
 const MessengerStory = () => {
-    const {
-        products,
-        entityJurisdictionByPpid,
-        entityObjectByPpid,
-        createPopUp,
-    } = useContext(ExplorerContext);
+    const { products, entityObjectByPpid } = useContext(ExplorerContext);
 
-    const [scrollingRef, setScrollingRef] = useState(null);
-
-    const listOfMessengerApps = [
-        "Facebook Messenger",
-        "WhatsApp",
-        "Instagram",
-        "Signal",
-        "Snapchat",
-        "Telegram",
-        "Threema",
-        "TikTok",
-        "iMessage",
-    ];
+    const storyRefs = useRef({
+        scrollingRef: createRef(),
+    });
 
     const messengers = Object.values(products).filter((p) => {
         p.clusters.indexOf("messenger") !== -1;
@@ -97,19 +92,6 @@ const MessengerStory = () => {
         i18n.t(`${i18nHeader}:tips.bullet.3`),
     ];
 
-    const jurisdictionLinks = createJurisdictionLinks(
-        Object.values(products),
-        entityJurisdictionByPpid
-    ).map(({ source, target, value }) => ({
-        source: listOfMessengerApps.find((name) => source.indexOf(name) !== -1),
-        target,
-        value,
-    }));
-
-    const otherJurisdictions = [
-        ...new Set(jurisdictionLinks.map(({ target }) => target)),
-    ].filter((j) => j !== "EU-GDPR");
-
     return (
         <ClusterStory
             progressBarColor="black"
@@ -118,7 +100,7 @@ const MessengerStory = () => {
             fadingTopBackground={{
                 distance: "600px",
             }}
-            setScrollingRef={setScrollingRef}
+            scrollingRef={storyRefs.current.scrollingRef}
         >
             <div className="messenger-intro-background"></div>
             <h1 className="cluster-story-main-title">
@@ -156,7 +138,7 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:overview.paragraph.one`)}
             </p>
-            <OverviewBarChart entities={Object.values(products)} />
+            <OverviewWrap />
             <SourceInfoButton
                 infoScreen="overview-bar-chart-info"
                 source={i18n.t("common:source.polyPedia")}
@@ -214,7 +196,7 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
-            <Purposes companies={messengers} createPopUp={createPopUp} />
+            <Purposes companies={messengers} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />
@@ -229,20 +211,7 @@ const MessengerStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:data.regions.p.1`)}
             </p>
-            <EmbeddedSankey
-                links={jurisdictionLinks}
-                groups={{
-                    source: {
-                        label: i18n.t(`${i18nHeader}:data.regions.group.1`),
-                        all: true,
-                    },
-                    target: {
-                        label: i18n.t(`${i18nHeader}:data.regions.group.2`),
-                        all: false,
-                        others: otherJurisdictions,
-                    },
-                }}
-            />
+            <SankeyWrap />
             <SourceInfoButton
                 infoScreen="data-regions-diagram-info"
                 source={i18n.t("common:source.polyPedia")}
@@ -260,7 +229,8 @@ const MessengerStory = () => {
             </p>
             <ScrollingProgressTracker
                 key="messenger"
-                scrollingRef={scrollingRef}
+                scrollingRef={storyRefs.current.scrollingRef}
+                history={history}
             >
                 <EntityList entities={Object.values(products)} expand={true} />
             </ScrollingProgressTracker>
@@ -269,6 +239,44 @@ const MessengerStory = () => {
             </LinkButton>
         </ClusterStory>
     );
+};
+
+const SankeyWrap = () => {
+    const { products, entityJurisdictionByPpid } = useContext(ExplorerContext);
+
+    const jurisdictionLinks = createJurisdictionLinks(
+        Object.values(products),
+        entityJurisdictionByPpid
+    ).map(({ source, target, value }) => ({
+        source: listOfMessengerApps.find((name) => source.indexOf(name) !== -1),
+        target,
+        value,
+    }));
+
+    const otherJurisdictions = [
+        ...new Set(jurisdictionLinks.map(({ target }) => target)),
+    ].filter((j) => j !== "EU-GDPR");
+    return (
+        <EmbeddedSankey
+            links={jurisdictionLinks}
+            groups={{
+                source: {
+                    label: i18n.t(`${i18nHeader}:data.regions.group.1`),
+                    all: true,
+                },
+                target: {
+                    label: i18n.t(`${i18nHeader}:data.regions.group.2`),
+                    all: false,
+                    others: otherJurisdictions,
+                },
+            }}
+        />
+    );
+};
+
+const OverviewWrap = () => {
+    const { products } = useContext(ExplorerContext);
+    return <OverviewBarChart entities={Object.values(products)} />;
 };
 
 export default MessengerStory;

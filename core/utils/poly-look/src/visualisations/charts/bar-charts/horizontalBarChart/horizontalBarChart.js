@@ -311,16 +311,20 @@ export class HorizontalBarChart extends Chart {
       .attr("class", "bar-group");
 
     barGroups.exit().remove();
-    this._displayBars(barGroups, enteringBarGroups);
-    if (this._barValueColor) this._displayValues(barGroups, enteringBarGroups);
-    else this.chart.selectAll(".bar-value").remove();
-    if (this._groups) {
-      const groupLabels = this.chart
-        .selectAll(".bar-group")
-        .data(this._groups, (g) => g.id);
-      const enteringGroupLabels = groupLabels.enter();
-      this._addEnteringGroupLabels(enteringGroupLabels);
+    //check if entering bars are empty or not
+    if (enteringBarGroups._groups[0][0]) {
+      this._displayBars(barGroups, enteringBarGroups);
+      if (this._barValueColor)
+        this._displayValues(barGroups, enteringBarGroups);
+      else this.chart.selectAll(".bar-value").remove();
+      if (this._groups) {
+        const groupLabels = this.chart
+          .selectAll(".bar-group")
+          .data(this._groups, (g) => g.id);
+        const enteringGroupLabels = groupLabels.enter();
+        this._addEnteringGroupLabels(enteringGroupLabels);
+      }
+      this._alignBarText(barGroups);
     }
-    this._alignBarText(barGroups);
   }
 }

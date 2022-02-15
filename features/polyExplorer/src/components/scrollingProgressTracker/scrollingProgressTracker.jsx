@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import { useHistory } from "react-router-dom";
 
 /*
@@ -9,19 +8,18 @@ import { useHistory } from "react-router-dom";
  */
 const ScrollingProgressTracker = ({ children, scrollingRef }) => {
     const history = useHistory();
-
     const handleExitStory = () => {
         history.entries[
             history.entries.length - 2
-        ].state.storyScrollingProgress = scrollingRef.scrollTop;
+        ].state.storyScrollingProgress = scrollingRef.current?.scrollTop || 0;
     };
 
     useEffect(() => {
-        scrollingRef?.scrollTo(
+        scrollingRef?.current?.scrollTo(
             0,
             history.location.state.storyScrollingProgress || 0
         );
-    });
+    }, []);
 
     return (
         <div className="scrolling-progress-tracker" onClick={handleExitStory}>

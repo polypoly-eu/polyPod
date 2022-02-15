@@ -23,13 +23,13 @@ const ClusterStory = ({
     className,
     primaryColor,
     fadingTopBackground,
-    setScrollingRef,
+    scrollingRef,
 }) => {
     return (
         <Screen
             className={`cluster-story ${className}`}
             theme={"poly-theme-light"}
-            setScrollingRef={setScrollingRef}
+            scrollingRef={scrollingRef}
         >
             <div
                 className="content"
