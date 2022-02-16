@@ -61,7 +61,7 @@ class UpdateNotificationTest: XCTestCase {
         }
         app.launch()
         let background = app.wait(for: .runningForeground, timeout: 30)
-        XCTAssertTrue( background )
+        XCTAssertTrue(background)
     }
 
     private func assertInAppNotificationShown() {
