@@ -319,5 +319,6 @@ export class HorizontalBarChart extends Chart {
       const enteringGroupLabels = groupLabels.enter();
       this._addEnteringGroupLabels(enteringGroupLabels);
     }
+    this._alignBarText(barGroups);
   }
 }
