@@ -109,7 +109,7 @@ private struct MainSection: View {
                     action: { activeSection = .licenses }
                 )
                 if !RuntimeInfo.isProduction {
-                    SettingsButton(label: "Export Logs",
+                    SettingsButton(label: "settings_export_logs",
                                    action: {
                         shareLogs = true
                     })
