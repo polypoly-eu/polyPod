@@ -289,13 +289,11 @@ export class HorizontalBarChart extends Chart {
     });
   }
 
-  _displayBars(barGroups, enteringBarGroups) {
+  _displayBars(enteringBarGroups) {
     this._addEnteringBars(enteringBarGroups);
-    this._updateExistingBars(barGroups);
   }
 
-  _displayValues(barGroups, enteringBarGroups) {
-    this._updateExistingBarValues(barGroups);
+  _displayValues(enteringBarGroups) {
     this._addEnteringBarValues(enteringBarGroups);
     this._addEnteringBarLabels(enteringBarGroups);
   }
@@ -311,19 +309,15 @@ export class HorizontalBarChart extends Chart {
       .attr("class", "bar-group");
 
     barGroups.exit().remove();
-    if (enteringBarGroups._groups[0][0]) {
-      this._displayBars(barGroups, enteringBarGroups);
-      if (this._barValueColor)
-        this._displayValues(barGroups, enteringBarGroups);
-      else this.chart.selectAll(".bar-value").remove();
-      if (this._groups) {
-        const groupLabels = this.chart
-          .selectAll(".bar-group")
-          .data(this._groups, (g) => g.id);
-        const enteringGroupLabels = groupLabels.enter();
-        this._addEnteringGroupLabels(enteringGroupLabels);
-      }
-      this._alignBarText(barGroups);
+    this._displayBars(enteringBarGroups);
+    if (this._barValueColor) this._displayValues(enteringBarGroups);
+    else this.chart.selectAll(".bar-value").remove();
+    if (this._groups) {
+      const groupLabels = this.chart
+        .selectAll(".bar-group")
+        .data(this._groups, (g) => g.id);
+      const enteringGroupLabels = groupLabels.enter();
+      this._addEnteringGroupLabels(enteringGroupLabels);
     }
   }
 }
