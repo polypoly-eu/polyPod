@@ -311,9 +311,7 @@ export class HorizontalBarChart extends Chart {
       .attr("class", "bar-group");
 
     barGroups.exit().remove();
-    if (!enteringBarGroups._groups[0][0]) {
-      //do nothing if the new entering bar groups are empty
-    } else {
+    if (enteringBarGroups._groups[0][0]) {
       this._displayBars(barGroups, enteringBarGroups);
       if (this._barValueColor)
         this._displayValues(barGroups, enteringBarGroups);
