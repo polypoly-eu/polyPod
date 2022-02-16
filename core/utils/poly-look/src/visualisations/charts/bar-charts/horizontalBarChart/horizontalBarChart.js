@@ -158,22 +158,6 @@ export class HorizontalBarChart extends Chart {
       .attr("width", (d) => this._xScale(d.value));
   }
 
-  _updateExistingBars(bars) {
-    bars
-      .transition()
-      .duration(750)
-      .attr("x", 0)
-      .attr("width", initializingBarHeight)
-      .attr("y", (d) => this._setBarYAttribute(d))
-      .attr("height", this._barWidth)
-      .attr("fill", this._barColor)
-      .attr("class", "bar")
-      .transition()
-      .duration(750)
-      .attr("x", 0)
-      .attr("width", (d) => this._xScale(d.value));
-  }
-
   _addEnteringBarLabels(barLabels) {
     barLabels
       .append("text")
@@ -233,20 +217,6 @@ export class HorizontalBarChart extends Chart {
       .style("font-size", fontSizeInBar)
       .transition()
       .delay(1000)
-      .duration(500)
-      .attr("fill", this._barValueColor);
-  }
-
-  _updateExistingBarValues(barValues) {
-    barValues
-      .attr("y", (d) => this._setValueYAttribute(d))
-      .attr("class", "bar-value")
-      .attr("text-anchor", "end")
-      .attr("x", (d) => this._xScale(d.value) - barValueMargin)
-      .text((d) => d.value)
-      .raise()
-      .transition()
-      .delay(1500)
       .duration(500)
       .attr("fill", this._barValueColor);
   }
