@@ -3,8 +3,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "./tabs.css";
 
+/**
+ * Empty tab, to be filled with whatever properties one want, including using them as one of the tabs in [[Tabs]]
+ */
 const Tab = () => {};
 
+/**
+ *
+ * Group of tabs, that might include a swiper
+ * @param { Object[] } tabList -  a list of elements that are going to be used as tabs
+ * @param {boolean} swipe - Use a Swiper component or not within the tab
+ * @param {function()} onTabChange - called when a tab changes
+ */
 const Tabs = ({ children: tabList, swipe = true, onTabChange }) => {
   const [activeTabId, setActiveTabId] = useState(tabList[0].props.id);
 
