@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Tab from "./tab.jsx";
 
 import "./tabs.css";
+
+const Tab = () => {};
 
 const Tabs = ({ children, swipe = true, onTabChange }) => {
   const [activeTabId, setActiveTabId] = useState(children[0].props.id);
