@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Location tracking is disabled for now - no feature needs it
         //LocationTracker.shared.startLocationLogging()
         
+        UpdateNotification.instance.isProtectedDataAvailable = UIApplication.shared.isProtectedDataAvailable
+        
         CoreDataStack.shared.isProtectedDataAvailable = { completion in
             dispatchToMainQueue {
                 completion(UIApplication.shared.isProtectedDataAvailable)
@@ -52,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             task.setTaskCompleted(success: false)
         }
         
-        let notification = UpdateNotification()
+        let notification = UpdateNotification.instance
         if notification.showPush {
             notification.handlePushSeen()
             showUpdateNotification()
@@ -65,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let identifier = UUID().uuidString
         
         let content = UNMutableNotificationContent()
-        let notification = UpdateNotification()
+        let notification = UpdateNotification.instance
         content.title = notification.title
         content.body = notification.text
         
@@ -99,6 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
         CoreDataStack.shared.protectedDataDidBecomeAvailable()
+        UpdateNotification.instance.protectedDataDidBecomeAvailable()
     }
     
     /*
@@ -111,13 +114,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
         CoreDataStack.shared.protectedDataWillBecomeUnavailable()
+        UpdateNotification.instance.protectedDataDidBecomeUnavailable()
     }
     
     func scheduleUpdateNotificationCheck() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) {_, _ in }
         
         let task = BGProcessingTaskRequest(identifier: AppDelegate.updateNotificationCheckIdentifier)
-        task.earliestBeginDate = Date(timeIntervalSinceNow: TimeInterval(UpdateNotification().pushDelay))
+        task.earliestBeginDate = Date(timeIntervalSinceNow: TimeInterval(UpdateNotification.instance.pushDelay))
         task.requiresExternalPower = false
         task.requiresNetworkConnectivity = false
         do {
