@@ -94,9 +94,9 @@
 		901C058A278F2AF800BC8364 /* CoreData+PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */; };
 		901C058B278F2D4A00BC8364 /* CoreData+PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */; };
 		901C058C278F34A800BC8364 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0587278EE58700BC8364 /* CoreDataStack.swift */; };
+		9049ECA427BCE8B70059605A /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9049ECA327BCE8B70059605A /* CocoaLumberjackSwift */; };
 		904D4A7027905D5B00A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
 		904D4A712790633000A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
-		906E406627A80D20009015B7 /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 906E406527A80D20009015B7 /* CocoaLumberjackSwift */; };
 		906E406C27A82C7F009015B7 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E406B27A82C7F009015B7 /* ActivityViewController.swift */; };
 		E9040D4726F0A30E00A88593 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4626F0A30E00A88593 /* Info.swift */; };
 		E9040D4926F0B2B400A88593 /* RuntimeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */; };
@@ -291,7 +291,7 @@
 			files = (
 				E9BE2909264BBD67003EC8AE /* Zip in Frameworks */,
 				E9BE2906264BBAA0003EC8AE /* MessagePack in Frameworks */,
-				906E406627A80D20009015B7 /* CocoaLumberjackSwift in Frameworks */,
+				9049ECA427BCE8B70059605A /* CocoaLumberjackSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,7 +617,7 @@
 			packageProductDependencies = (
 				E9BE2905264BBAA0003EC8AE /* MessagePack */,
 				E9BE2908264BBD67003EC8AE /* Zip */,
-				906E406527A80D20009015B7 /* CocoaLumberjackSwift */,
+				9049ECA327BCE8B70059605A /* CocoaLumberjackSwift */,
 			);
 			productName = PolyPod;
 			productReference = 1AA6DE2F24191C94008DB1B2 /* PolyPod.app */;
@@ -677,7 +677,7 @@
 			packageReferences = (
 				E9BE2904264BBA9F003EC8AE /* XCRemoteSwiftPackageReference "MessagePack" */,
 				E9BE2907264BBD67003EC8AE /* XCRemoteSwiftPackageReference "Zip" */,
-				906E406427A80D20009015B7 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
+				9049ECA227BCE8B70059605A /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
 			);
 			productRefGroup = 1AA6DE3024191C94008DB1B2 /* Products */;
 			projectDirPath = "";
@@ -1286,12 +1286,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		906E406427A80D20009015B7 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
+		9049ECA227BCE8B70059605A /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack.git";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 3.7.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.7.4;
 			};
 		};
 		E9BE2904264BBA9F003EC8AE /* XCRemoteSwiftPackageReference "MessagePack" */ = {
@@ -1313,9 +1313,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		906E406527A80D20009015B7 /* CocoaLumberjackSwift */ = {
+		9049ECA327BCE8B70059605A /* CocoaLumberjackSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 906E406427A80D20009015B7 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
+			package = 9049ECA227BCE8B70059605A /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
 			productName = CocoaLumberjackSwift;
 		};
 		E9BE2905264BBAA0003EC8AE /* MessagePack */ = {
