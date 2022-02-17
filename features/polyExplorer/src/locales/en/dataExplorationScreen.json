@@ -14,7 +14,7 @@
     "dataTypes.title.financial":
         "Financial Data",
     "dataTypes.heading.correlations":
-        "Possible Data correlations",
+        "Possible Data Correlations",
     "dataTypes.text.correlations":
         "When data types are shared in a packet rather than individually, they provide further insight.",
     "purposes.description.scale":

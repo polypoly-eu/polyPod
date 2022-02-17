@@ -2,9 +2,10 @@
     font-size: 14px;
 }
 
-.messenger-tree-map .legend p {
-    margin: 0;
-    font-size: 12px;
+.messenger-tree-map .legend {
+    margin: 28px 0;
+    font-size: 14px;
+    font-family: var(--jost-medium);
 }
 
 .messenger-tree-map .block-legend > :first-child div {

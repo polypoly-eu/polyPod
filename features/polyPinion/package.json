@@ -17,8 +17,7 @@
         "polypoly": "^0.4.2"
     },
     "polypoly": {
-        "root": "dist",
-        "manifest": ""
+        "root": "dist"
     },
     "dependencies": {
         "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
