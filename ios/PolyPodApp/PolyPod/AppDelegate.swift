@@ -35,7 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 Log.debug("Initialised triple store. Number of quads in Core Data: \(count)")
             }
         }
-        self.registerUpdateNotificationCheck()
+        
+        // Disabled for now, need to investigate the issue with multiple notifications
+        // while the device is locked
+        //self.registerUpdateNotificationCheck()
         
         return true
     }
