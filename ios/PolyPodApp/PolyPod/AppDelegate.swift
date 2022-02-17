@@ -15,9 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.reset()
         }
         
-        FeatureStorage.shared.cleanFeatures()
-        FeatureStorage.shared.importFeatures()
-        
         // Location tracking is disabled for now - no feature needs it
         //LocationTracker.shared.startLocationLogging()
         
@@ -101,6 +98,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      This notification lets your app know that the device is now unlocked and that you may access certain types of protected files again.
      */
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
+        DataProtection.instance.protectedDataDidBecomeAvailable()
+        // Potentially CoreDataStack can use DataProtection class instead
         CoreDataStack.shared.protectedDataDidBecomeAvailable()
     }
     
@@ -113,6 +112,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      Therefore, if your app depends on the file, you might want to take steps to avoid using that file while the device is locked.
      */
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
+        DataProtection.instance.protectedDataWillBecomeUnavailable()
+        // Potentially CoreDataStack can use DataProtection class instead
         CoreDataStack.shared.protectedDataWillBecomeUnavailable()
     }
     
