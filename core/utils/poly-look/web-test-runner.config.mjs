@@ -4,7 +4,7 @@ import svg from "rollup-plugin-svg";
 const svgForWebServer = fromRollup(svg);
 
 export default {
-  files: "test/**/*.test.js",
+  files: "test/lit-components/**/*.test.js",
   nodeResolve: true,
   mimeTypes: {
     "**/*.svg": "js",

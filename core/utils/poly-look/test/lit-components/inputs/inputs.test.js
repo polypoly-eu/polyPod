@@ -1,6 +1,6 @@
 import { html, fixture, expect, oneEvent, waitUntil } from "@open-wc/testing";
-import "../../src/inputs";
-import { polyInput } from "../../src/constants";
+import "../../../src/lit-components/inputs";
+import { polyInput } from "../../../src/lit-components/constants";
 
 describe("Clear input", () => {
   it(`should throw an exception if the theme has an invalid value`, (done) => {

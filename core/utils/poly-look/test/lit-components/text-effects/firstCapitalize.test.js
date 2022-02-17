@@ -1,5 +1,5 @@
 import { html, fixture, expect } from "@open-wc/testing";
-import "../../src/text-effects";
+import "../../../src/lit-components/text-effects";
 
 describe("FirstCapitalize renders", () => {
   it(`has to render the text that gets on the attribute paragraph`, async () => {

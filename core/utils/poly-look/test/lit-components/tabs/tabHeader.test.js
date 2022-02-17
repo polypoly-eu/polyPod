@@ -1,6 +1,6 @@
 import { html, fixture, expect, oneEvent } from "@open-wc/testing";
-import { polyTabs } from "../../src/constants";
-import "../../src/tabs";
+import { polyTabs } from "../../../src/lit-components/constants";
+import "../../../src/lit-components/tabs";
 
 describe("TabHeader", () => {
   let label;
