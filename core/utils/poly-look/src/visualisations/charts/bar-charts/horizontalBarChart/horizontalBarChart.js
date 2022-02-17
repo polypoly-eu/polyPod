@@ -158,6 +158,22 @@ export class HorizontalBarChart extends Chart {
       .attr("width", (d) => this._xScale(d.value));
   }
 
+  _updateExistingBars(bars) {
+    bars
+      .transition()
+      .duration(750)
+      .attr("x", 0)
+      .attr("width", initializingBarHeight)
+      .attr("y", (d) => this._setBarYAttribute(d))
+      .attr("height", this._barWidth)
+      .attr("fill", this._barColor)
+      .attr("class", "bar")
+      .transition()
+      .duration(750)
+      .attr("x", 0)
+      .attr("width", (d) => this._xScale(d.value));
+  }
+
   _addEnteringBarLabels(barLabels) {
     barLabels
       .append("text")
@@ -221,6 +237,23 @@ export class HorizontalBarChart extends Chart {
       .attr("fill", this._barValueColor);
   }
 
+  _updateExistingBarValues(barGroups) {
+    barGroups
+      .selectAll("bar-value")
+      .attr("y", (d) => this._setValueYAttribute(d))
+      .attr("class", "bar-value")
+      .attr("text-anchor", "end")
+      .attr("x", (d) => this._xScale(d.value) - barValueMargin)
+      .text((d) => d.value)
+      .attr("fill", "transparent")
+      .style("font-size", fontSizeInBar)
+      .raise()
+      .transition()
+      .delay(1500)
+      .duration(500)
+      .attr("fill", this._barValueColor);
+  }
+
   _alignBarText() {
     const xScale = this._xScale;
     const groups = this._groups;
@@ -259,13 +292,15 @@ export class HorizontalBarChart extends Chart {
     });
   }
 
-  _displayBars(enteringBarGroups) {
+  _displayBars(barGroups, enteringBarGroups) {
     this._addEnteringBars(enteringBarGroups);
+    this._updateExistingBars(barGroups);
   }
 
-  _displayValues(enteringBarGroups) {
+  _displayValues(barGroups, enteringBarGroups) {
     this._addEnteringBarValues(enteringBarGroups);
     this._addEnteringBarLabels(enteringBarGroups);
+    this._updateExistingBarValues(barGroups);
   }
 
   render() {
@@ -279,8 +314,8 @@ export class HorizontalBarChart extends Chart {
       .attr("class", "bar-group");
 
     barGroups.exit().remove();
-    this._displayBars(enteringBarGroups);
-    if (this._barValueColor) this._displayValues(enteringBarGroups);
+    this._displayBars(barGroups, enteringBarGroups);
+    if (this._barValueColor) this._displayValues(barGroups, enteringBarGroups);
     else this.chart.selectAll(".bar-value").remove();
     if (this._groups) {
       const groupLabels = this.chart
