@@ -1,5 +1,5 @@
 import { html } from "lit-element";
-import "../src/text-effects/";
+import "../../src/lit-components/text-effects/";
 import { themeConfiguration } from "./themeConfiguration";
 
 export default {
