@@ -318,6 +318,7 @@ export class HorizontalBarChart extends Chart {
     if (this._barValueColor) this._displayValues(barGroups, enteringBarGroups);
     else this.chart.selectAll(".bar-value").remove();
     if (this._groups) {
+      this.chart.selectAll(".group-label").remove();
       const groupLabels = this.chart
         .selectAll(".bar-group")
         .data(this._groups, (g) => g.id);
