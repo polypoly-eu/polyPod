@@ -1,8 +1,9 @@
-use serde::{Deserialize};
-use std::{collections::HashMap};
+use serde::Deserialize;
+use std::collections::HashMap;
 
 #[derive(Deserialize, PartialEq, Debug)]
 #[serde(rename_all = "camelCase")]
+#[allow(dead_code)] // Temporary until exposed through C API
 pub struct FeatureManifest {
     name: Option<String>,
     author: Option<String>,
@@ -16,14 +17,18 @@ pub struct FeatureManifest {
 
 #[derive(PartialEq, Debug)]
 pub struct FeatureManifestParsingError {
-    description: String
+    description: String,
 }
 
 // Alias for str, probably will be moved to a centralized place to be reused
 pub type JSONStr = str;
 
+#[allow(dead_code)] // Temporary until exposed through C API
 impl FeatureManifest {
-    pub fn parse(json: &JSONStr, locale: &str) -> Result<FeatureManifest, FeatureManifestParsingError> {
+    pub fn parse(
+        json: &JSONStr,
+        locale: &str,
+    ) -> Result<FeatureManifest, FeatureManifestParsingError> {
         FullFeatureManifest::try_from(json)
             .map(|manifest| FeatureManifest::build_feature_manifest(manifest, locale))
     }
@@ -36,7 +41,7 @@ impl FeatureManifest {
 
         match translation {
             Some(translation) => {
-                let mut links = full_manifest.links.unwrap_or(HashMap::new());
+                let mut links = full_manifest.links.unwrap_or_default();
                 if let Some(translated_links) = translation.links.clone() {
                     links.extend(translated_links.into_iter());
                 }
@@ -44,13 +49,22 @@ impl FeatureManifest {
                     name: translation.name.clone().or(full_manifest.name),
                     author: translation.author.clone().or(full_manifest.author),
                     version: translation.version.clone().or(full_manifest.version),
-                    description: translation.description.clone().or(full_manifest.description),
+                    description: translation
+                        .description
+                        .clone()
+                        .or(full_manifest.description),
                     thumbnail: translation.thumbnail.clone().or(full_manifest.thumbnail),
-                    thumbnail_color: translation.thumbnail_color.clone().or(full_manifest.thumbnail_color),
-                    primary_color: translation.primary_color.clone().or(full_manifest.primary_color),
+                    thumbnail_color: translation
+                        .thumbnail_color
+                        .clone()
+                        .or(full_manifest.thumbnail_color),
+                    primary_color: translation
+                        .primary_color
+                        .clone()
+                        .or(full_manifest.primary_color),
                     links: Some(links),
                 }
-            },
+            }
             None => FeatureManifest {
                 name: full_manifest.name,
                 author: full_manifest.author,
@@ -60,7 +74,7 @@ impl FeatureManifest {
                 thumbnail_color: full_manifest.thumbnail_color,
                 primary_color: full_manifest.primary_color,
                 links: full_manifest.links,
-            }
+            },
         }
     }
 
@@ -96,7 +110,9 @@ impl TryFrom<&JSONStr> for FullFeatureManifest {
     type Error = FeatureManifestParsingError;
 
     fn try_from(value: &JSONStr) -> Result<Self, Self::Error> {
-        serde_json::from_str(value).map_err(|err| FeatureManifestParsingError { description: err.to_string() })
+        serde_json::from_str(value).map_err(|err| FeatureManifestParsingError {
+            description: err.to_string(), 
+        })
     }
 }
 
@@ -225,7 +241,7 @@ mod tests {
             thumbnail: Some("assets/thumbnail.png".to_string()),
             thumbnail_color: Some("#FFFFFF".to_string()),
             primary_color: Some("#000000".to_string()),
-            links: Some(expected_links)
+            links: Some(expected_links),
         };
 
         let parsed = FeatureManifest::parse(json, "de").unwrap();
