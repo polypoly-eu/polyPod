@@ -52,7 +52,16 @@ impl FeatureManifest {
     }
 
     fn build_feature_manifest(full_manifest: FullFeatureManifest) -> FeatureManifest {
-        FeatureManifest::default()
+        FeatureManifest {
+            name: full_manifest.name,
+            author: full_manifest.author,
+            version: full_manifest.version,
+            description: full_manifest.description,
+            thumbnail: full_manifest.thumbnail,
+            thumbnail_color: full_manifest.thumbnail_color,
+            primary_color: full_manifest.primary_color,
+            links: full_manifest.links
+        }
     }
 }
 
@@ -88,5 +97,23 @@ mod tests {
         let parsed = FeatureManifest::parse(r#"{ "somethingElse": true }"#, "");
 
         assert_eq!(parsed, FeatureManifest::default())
+    }
+
+    #[test]
+    fn test_partial_json() {
+        let json = r#"
+        { 
+            "name": "testManifest",
+            "description": "testDescription",
+            "author": "testAuthor",
+            "thumbnail": "assets/thumbnail.png"
+        }"#;
+
+        let parsed = FeatureManifest::parse(json, "");
+
+        assert_eq!(parsed.name.unwrap(), "testManifest");
+        assert_eq!(parsed.description.unwrap(), "testDescription");
+        assert_eq!(parsed.author.unwrap(), "testAuthor");
+        assert_eq!(parsed.thumbnail.unwrap(), "assets/thumbnail.png");
     }
 }
