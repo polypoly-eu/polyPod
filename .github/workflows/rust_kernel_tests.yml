@@ -1,0 +1,46 @@
+# Based on https://github.com/actions-rs/meta/blob/master/recipes/quickstart.md
+on:
+  push:
+    paths:
+      - core/kernel/**
+  pull_request:
+    types: [assigned, opened, ready_for_review]
+    paths:
+      - core/kernel/**
+
+name: Lint and Test Rust code
+
+jobs:
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+
+      - name: Lint -- Run cargo fmt
+        working-directory: ./core/kernel
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: --all -- --check
+
+      - name: Lint -- Run cargo clippy
+        working-directory: ./core/kernel
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: -- -D warnings
+
+      - name: Run cargo test
+        working-directory: ./core/kernel
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
