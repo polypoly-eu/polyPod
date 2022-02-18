@@ -35,5 +35,11 @@
     "@web/test-runner-chrome": "^0.10.5",
     "identity-obj-proxy": "^3.0.0",
     "jsdoc": "^3.6.7"
+  },
+    "jest": {
+    "verbose": true,
+    "moduleNameMapper": {
+      "\\.(css)$": "identity-obj-proxy"
+    }
   }
 }
