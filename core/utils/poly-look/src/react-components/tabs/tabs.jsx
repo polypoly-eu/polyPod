@@ -7,7 +7,9 @@ import "./tabs.css";
  * Empty component, to be used to represent a `Tab`, filled with whatever
  * properties one want, including using them as one of the tabs in [[Tabs]]
  */
-const Tab = () => { return null };
+const Tab = () => {
+  return null;
+};
 
 /**
  *
