@@ -2,6 +2,7 @@ use std::collections::HashMap;
 use serde::{Deserialize};
 
 #[derive(Deserialize, PartialEq, Debug)]
+#[serde(rename_all = "camelCase")]
 pub struct FeatureManifest {
     // Everything is Option? interesting
     name: Option<String>,
@@ -15,6 +16,7 @@ pub struct FeatureManifest {
 }
 
 #[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
 struct FullFeatureManifest {
     name: Option<String>,
     author: Option<String>,
@@ -115,5 +117,48 @@ mod tests {
         assert_eq!(parsed.description.unwrap(), "testDescription");
         assert_eq!(parsed.author.unwrap(), "testAuthor");
         assert_eq!(parsed.thumbnail.unwrap(), "assets/thumbnail.png");
+    }
+
+    #[test]
+    fn test_no_translations() {
+        let json = r##"
+        {
+            "name": "testManifest",
+            "author": "testAuthor",
+            "version": "0.1.2",
+            "description": "testDescription",
+            "thumbnail": "assets/thumbnail.png",
+            "thumbnailColor": "#FFFFFF",
+            "primaryColor": "#000000",
+            "links": {
+                "link1": "https://example.com/1",
+                "link2": "https://example.com/2"
+            }
+        }"##;
+
+        let parsed = FeatureManifest::parse(json, "");
+        let links = HashMap::from([
+            ("link1".to_string(), "https://example.com/1".to_string()),
+            ("link2".to_string(), "https://example.com/2".to_string()),
+        ]);
+        let expected_manifest = FeatureManifest {
+            name: Some("testManifest".to_string()),
+            author: Some("testAuthor".to_string()),
+            version: Some("0.1.2".to_string()),
+            description: Some("testDescription".to_string()),
+            thumbnail: Some("assets/thumbnail.png".to_string()),
+            thumbnail_color: Some("#FFFFFF".to_string()),
+            primary_color: Some("#000000".to_string()),
+            links: Some(links)
+        };
+
+        assert_eq!(parsed.name, expected_manifest.name);
+        assert_eq!(parsed.author, expected_manifest.author);
+        assert_eq!(parsed.version, expected_manifest.version);
+        assert_eq!(parsed.description, expected_manifest.description);
+        assert_eq!(parsed.thumbnail, expected_manifest.thumbnail);
+        assert_eq!(parsed.thumbnail_color, expected_manifest.thumbnail_color);
+        assert_eq!(parsed.primary_color, expected_manifest.primary_color);
+        assert_eq!(parsed.links, expected_manifest.links);
     }
 }
