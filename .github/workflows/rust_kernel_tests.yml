@@ -19,28 +19,16 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install stable toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
+        run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
       - name: Lint -- Run cargo fmt
         working-directory: ./core/kernel
-        uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --all -- --check
+        run: cargo fmt --all -- --check
 
       - name: Lint -- Run cargo clippy
         working-directory: ./core/kernel
-        uses: actions-rs/cargo@v1
-        with:
-          command: clippy
-          args: -- -D warnings
+        run: cargo clippy -- -D warnings
 
       - name: Run cargo test
         working-directory: ./core/kernel
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
+        run: cargo test
