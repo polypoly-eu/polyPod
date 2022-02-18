@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
     "format": "eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
-    "test": "web-test-runner --coverage",
+    "test": "jest --coverage test/react-components/* && web-test-runner --coverage",
     "test:watch": "web-test-runner --watch",
     "storybook": "web-dev-server -c .storybook/server.mjs",
     "build": "rollup -c rollup.config.js",
@@ -36,7 +36,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jsdoc": "^3.6.7"
   },
-    "jest": {
+  "jest": {
     "verbose": true,
     "moduleNameMapper": {
       "\\.(css)$": "identity-obj-proxy"
