@@ -75,4 +75,18 @@ mod tests {
 
         assert_eq!(parsed, FeatureManifest::default(), "Expected to return default manifest if json is empty")
     }
+
+    #[test]
+    fn test_empty_json_object() {
+        let parsed = FeatureManifest::parse("{}", "");
+
+        assert_eq!(parsed, FeatureManifest::default())
+    }
+
+    #[test]
+    fn test_wrong_json() {
+        let parsed = FeatureManifest::parse(r#"{ "somethingElse": true }"#, "");
+
+        assert_eq!(parsed, FeatureManifest::default())
+    }
 }
