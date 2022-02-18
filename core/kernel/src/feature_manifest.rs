@@ -4,7 +4,6 @@ use std::{collections::HashMap};
 #[derive(Deserialize, PartialEq, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct FeatureManifest {
-    // Everything is Option? interesting
     name: Option<String>,
     author: Option<String>,
     version: Option<String>,
@@ -15,27 +14,18 @@ pub struct FeatureManifest {
     links: Option<HashMap<String, String>>,
 }
 
+#[derive(PartialEq, Debug)]
+pub struct FeatureManifestParsingError {
+    description: String
+}
+
 // Alias for str, probably will be moved to a centralized place to be reused
 pub type JSONString = str;
 
 impl FeatureManifest {
-    fn parse(json: &JSONString, locale: &str) -> FeatureManifest {
+    pub fn parse(json: &JSONString, locale: &str) -> Result<FeatureManifest, FeatureManifestParsingError> {
         FullFeatureManifest::try_from(json)
             .map(|manifest| FeatureManifest::build_feature_manifest(manifest, locale))
-            .unwrap_or(FeatureManifest::default()) // TODO: Log error when logging is added
-    }
-
-    fn default() -> FeatureManifest {
-        FeatureManifest {
-            name: None,
-            author: None,
-            version: None,
-            description: None,
-            thumbnail: None,
-            thumbnail_color: None,
-            primary_color: None,
-            links: None,
-        }
     }
 
     fn build_feature_manifest(full_manifest: FullFeatureManifest, locale: &str) -> FeatureManifest {
@@ -43,6 +33,7 @@ impl FeatureManifest {
             .translations
             .as_ref()
             .and_then(|unwrapped| unwrapped.get(locale));
+
         match translation {
             Some(translation) => {
                 let mut links = full_manifest.links.unwrap_or(HashMap::new());
@@ -72,6 +63,19 @@ impl FeatureManifest {
             }
         }
     }
+
+    fn default() -> FeatureManifest {
+        FeatureManifest {
+            name: None,
+            author: None,
+            version: None,
+            description: None,
+            thumbnail: None,
+            thumbnail_color: None,
+            primary_color: None,
+            links: None,
+        }
+    }
 }
 
 #[derive(Deserialize)]
@@ -89,10 +93,10 @@ struct FullFeatureManifest {
 }
 
 impl TryFrom<&JSONString> for FullFeatureManifest {
-    type Error = String;
+    type Error = FeatureManifestParsingError;
 
     fn try_from(value: &JSONString) -> Result<Self, Self::Error> {
-        serde_json::from_str(value).map_err(|err| err.to_string())
+        serde_json::from_str(value).map_err(|err| FeatureManifestParsingError { description: err.to_string() })
     }
 }
 
@@ -104,21 +108,21 @@ mod tests {
     fn test_empty_json() {
         let parsed = FeatureManifest::parse("", "");
 
-        assert_eq!(parsed, FeatureManifest::default())
+        assert!(parsed.is_err())
     }
 
     #[test]
     fn test_empty_json_object() {
         let parsed = FeatureManifest::parse("{}", "");
 
-        assert_eq!(parsed, FeatureManifest::default())
+        assert_eq!(parsed.unwrap(), FeatureManifest::default())
     }
 
     #[test]
     fn test_wrong_json() {
         let parsed = FeatureManifest::parse(r#"{ "somethingElse": true }"#, "");
 
-        assert_eq!(parsed, FeatureManifest::default())
+        assert_eq!(parsed.unwrap(), FeatureManifest::default())
     }
 
     #[test]
@@ -131,7 +135,7 @@ mod tests {
             "thumbnail": "assets/thumbnail.png"
         }"#;
 
-        let parsed = FeatureManifest::parse(json, "");
+        let parsed = FeatureManifest::parse(json, "").unwrap();
 
         assert_eq!(parsed.name.unwrap(), "testManifest");
         assert_eq!(parsed.description.unwrap(), "testDescription");
@@ -171,7 +175,7 @@ mod tests {
             links: Some(expected_links),
         };
 
-        let parsed = FeatureManifest::parse(json, "");
+        let parsed = FeatureManifest::parse(json, "").unwrap();
 
         assert_eq!(parsed.name, expected_manifest.name);
         assert_eq!(parsed.author, expected_manifest.author);
@@ -224,7 +228,7 @@ mod tests {
             links: Some(expected_links)
         };
 
-        let parsed = FeatureManifest::parse(json, "de");
+        let parsed = FeatureManifest::parse(json, "de").unwrap();
 
         assert_eq!(parsed.name, expected_manifest.name);
         assert_eq!(parsed.author, expected_manifest.author);
