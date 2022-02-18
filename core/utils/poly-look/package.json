@@ -40,6 +40,7 @@
     "verbose": true,
     "moduleNameMapper": {
       "\\.(css)$": "identity-obj-proxy"
-    }
+    },
+    "testEnvironment": "jsdom"
   }
 }
