@@ -46,14 +46,26 @@ impl FeatureManifest {
                     links.extend(translated_links.into_iter());
                 }
                 FeatureManifest {
-                    name: translation.name.clone().or(full_manifest.name),
-                    author: translation.author.clone().or(full_manifest.author),
-                    version: translation.version.clone().or(full_manifest.version),
+                    name: translation
+                        .name
+                        .clone()
+                        .or(full_manifest.name),
+                    author: translation
+                        .author
+                        .clone()
+                        .or(full_manifest.author),
+                    version: translation
+                        .version
+                        .clone()
+                        .or(full_manifest.version),
                     description: translation
                         .description
                         .clone()
                         .or(full_manifest.description),
-                    thumbnail: translation.thumbnail.clone().or(full_manifest.thumbnail),
+                    thumbnail: translation
+                        .thumbnail
+                        .clone()
+                        .or(full_manifest.thumbnail),
                     thumbnail_color: translation
                         .thumbnail_color
                         .clone()
