@@ -20,10 +20,10 @@ pub struct FeatureManifestParsingError {
 }
 
 // Alias for str, probably will be moved to a centralized place to be reused
-pub type JSONString = str;
+pub type JSONStr = str;
 
 impl FeatureManifest {
-    pub fn parse(json: &JSONString, locale: &str) -> Result<FeatureManifest, FeatureManifestParsingError> {
+    pub fn parse(json: &JSONStr, locale: &str) -> Result<FeatureManifest, FeatureManifestParsingError> {
         FullFeatureManifest::try_from(json)
             .map(|manifest| FeatureManifest::build_feature_manifest(manifest, locale))
     }
@@ -92,10 +92,10 @@ struct FullFeatureManifest {
     translations: Option<HashMap<String, FeatureManifest>>,
 }
 
-impl TryFrom<&JSONString> for FullFeatureManifest {
+impl TryFrom<&JSONStr> for FullFeatureManifest {
     type Error = FeatureManifestParsingError;
 
-    fn try_from(value: &JSONString) -> Result<Self, Self::Error> {
+    fn try_from(value: &JSONStr) -> Result<Self, Self::Error> {
         serde_json::from_str(value).map_err(|err| FeatureManifestParsingError { description: err.to_string() })
     }
 }
