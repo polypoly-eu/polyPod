@@ -29,11 +29,12 @@ it("Creates a Tabs component", () => {
 });
 
 it("Creates a Tabs component with swipe", () => {
-  expect(
-    render(
-      <Tabs id="tabsID" label="tabsLabel" key="t" swipe={true}>
-        {tabArray}
-      </Tabs>
-    )
-  ).toBeTruthy();
+  const { getAllByText } = render(
+    <Tabs id="tabsID" label="tabsLabel" key="t" swipe={true}>
+      {tabArray}
+    </Tabs>
+  );
+  tabArray.forEach((i) => {
+    getAllByText(i.props.label).forEach((b) => expect(b).toBeInTheDocument());
+  });
 });
