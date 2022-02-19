@@ -14,22 +14,17 @@ const tabArray = Array(3)
 
 it("Creates an empty Tab component", () => {
   const renderedTab = render(singleTab);
-  console.log(renderedTab);
   expect(renderedTab.container).toBeTruthy();
 });
 
 it("Creates a Tabs component", () => {
-  const { findByLabelText, getByText, asFragment } = render(
+  const { getByText } = render(
     <Tabs id="tabsID" label="tabsLabel" key="t">
       {tabArray}
     </Tabs>
   );
-  expect(findByLabelText("tabsLabel")).toBeInTheDocument();
-  console.log(asFragment());
-  const firstRender = asFragment();
   tabArray.forEach((i) => {
-    console.log(i);
-    fireEvent.click(getByText(i.label));
+    expect(getByText(i.props.label)).toBeInTheDocument();
   });
 });
 
