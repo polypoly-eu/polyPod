@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { Tab, Tabs } from "../../src/react-components/tabs/tabs";
+import { Tab, Tabs } from "../../src/react-components/tabs";
 
 /**
  * @jest-environment jsdom
