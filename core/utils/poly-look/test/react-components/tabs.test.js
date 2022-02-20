@@ -39,7 +39,7 @@ it("Creates Tabs components", () => {
 });
 
 it("Checks onTabChange is called", () => {
-  const { getByText, unmount } = render(
+  const { getByText } = render(
     <Tabs id="tabsID" label="tabsLabel" key="t" onTabChange={onTabChange}>
       {tabArray}
     </Tabs>
