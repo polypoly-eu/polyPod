@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Tab, Tabs } from "../../src/react-components/tabs";
 
@@ -18,13 +18,15 @@ it("Creates an empty Tab component", () => {
 });
 
 it("Creates a Tabs component", () => {
-  const { getByText } = render(
+  const { getByText, asFragment } = render(
     <Tabs id="tabsID" label="tabsLabel" key="t">
       {tabArray}
     </Tabs>
   );
   tabArray.forEach((i) => {
     expect(getByText(i.props.label)).toBeInTheDocument();
+    fireEvent.click(getByText(i.props.label));
+    expect(getByText(i.props.label)).toHaveClass("tab-button active");
   });
 });
 
