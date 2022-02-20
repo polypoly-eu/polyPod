@@ -17,26 +17,18 @@ it("Creates an empty Tab component", () => {
   expect(renderedTab.container).toBeTruthy();
 });
 
-it("Creates a Tabs component", () => {
-  const { getByText, asFragment } = render(
-    <Tabs id="tabsID" label="tabsLabel" key="t">
-      {tabArray}
-    </Tabs>
-  );
-  tabArray.forEach((i) => {
-    expect(getByText(i.props.label)).toBeInTheDocument();
-    fireEvent.click(getByText(i.props.label));
-    expect(getByText(i.props.label)).toHaveClass("tab-button active");
-  });
-});
-
-it("Creates a Tabs component with swipe", () => {
-  const { getAllByText } = render(
-    <Tabs id="tabsID" label="tabsLabel" key="t" swipe={true}>
-      {tabArray}
-    </Tabs>
-  );
-  tabArray.forEach((i) => {
-    getAllByText(i.props.label).forEach((b) => expect(b).toBeInTheDocument());
+it("Creates Tabs components", () => {
+  [true, false].forEach((swipe) => {
+    const { getByText, unmount } = render(
+      <Tabs id="tabsID" label="tabsLabel" key="t" swipe={swipe}>
+        {tabArray}
+      </Tabs>
+    );
+    tabArray.forEach((i) => {
+      expect(getByText(i.props.label)).toBeInTheDocument();
+      fireEvent.click(getByText(i.props.label));
+      expect(getByText(i.props.label)).toHaveClass("tab-button active");
+    });
+    unmount();
   });
 });
