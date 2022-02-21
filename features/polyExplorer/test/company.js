@@ -60,4 +60,15 @@ describe("Checks attributes", function () {
             assert.ok(Object.values(jurisdictions).includes(c.jurisdiction));
         });
     });
+    it("Includes only known countries", () => {
+        companiesJSON.map((c) => {
+            if (c.location.countryCode) {
+                assert.ok(
+                    Object.keys(testGlobalJSON.countries).includes(
+                        c.location.countryCode
+                    )
+                );
+            }
+        });
+    });
 });
