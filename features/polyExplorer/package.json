@@ -24,10 +24,10 @@
   },
   "private": true,
   "dependencies": {
-    "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
     "@polypoly-eu/poly-look": "file:../../core/utils/poly-look",
+    "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
     "@types/prop-types": "^15.7.3",
-    "d3": "^7.0.0",
+    "d3": "^7.3.0",
     "lodash": "^4.17.21",
     "react-infinite-scroll-component": "^6.0.0",
     "react-router-dom": "^5.2.0",
