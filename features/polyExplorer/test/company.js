@@ -1,53 +1,46 @@
 "use strict";
+import { readFileSync } from "fs";
 
 import assert from "assert";
 import * as company from "../src/model/company.js";
-import testCompanyJSON from "./testCompanyData.js";
 import testGlobalJSON from "./testGlobal.js";
 
 const i18n = {
     language: "en",
 };
 
+const testCompanyJSON = JSON.parse(readFileSync("src/data/companies.json"));
+const oneCompany = testCompanyJSON.filter((c) => c.ppid === "Apple (US)")[0];
+
 describe("Company", function () {
-    const testCompany = new company.Company(
-        testCompanyJSON,
-        testGlobalJSON,
-        i18n
-    );
+    const testCompany = new company.Company(oneCompany, testGlobalJSON, i18n);
 
     it("City is parsed correctly", function () {
-        assert.strictEqual(
-            testCompany.location.city,
-            testCompanyJSON.location.city
-        );
+        assert.strictEqual(testCompany.location.city, oneCompany.location.city);
     });
 
     it("CountryCode is parsed correctly", function () {
         assert.strictEqual(
             testCompany.location.countryCode,
-            testCompanyJSON.location.countryCode
+            oneCompany.location.countryCode
         );
     });
 
     it("Jurisdiction is parsed correctly", function () {
-        assert.strictEqual(
-            testCompany.jurisdiction,
-            testCompanyJSON.jurisdiction
-        );
+        assert.strictEqual(testCompany.jurisdiction, oneCompany.jurisdiction);
     });
 
     it("AnnualRevenue is parsed correctly", function () {
         assert.strictEqual(
             testCompany.annualRevenues,
-            testCompanyJSON.annualRevenues
+            oneCompany.annualRevenues
         );
     });
 
     it("IndustryCategory is parsed correctly", function () {
         assert.strictEqual(
             testCompany.industryCategory,
-            testCompanyJSON.industryCategory
+            oneCompany.industryCategory
         );
     });
 });
