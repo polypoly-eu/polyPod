@@ -27,17 +27,17 @@ pub type JSONStr = str;
 impl FeatureManifest {
     pub fn parse(
         json: &JSONStr,
-        locale: &str,
+        language_code: &str,
     ) -> Result<FeatureManifest, FeatureManifestParsingError> {
         FullFeatureManifest::try_from(json)
-            .map(|manifest| FeatureManifest::build_feature_manifest(manifest, locale))
+            .map(|manifest| FeatureManifest::build_feature_manifest(manifest, language_code))
     }
 
-    fn build_feature_manifest(full_manifest: FullFeatureManifest, locale: &str) -> FeatureManifest {
+    fn build_feature_manifest(full_manifest: FullFeatureManifest, language_code: &str) -> FeatureManifest {
         let translation = full_manifest
             .translations
             .as_ref()
-            .and_then(|unwrapped| unwrapped.get(locale));
+            .and_then(|unwrapped| unwrapped.get(language_code));
 
         match translation {
             Some(translation) => {
