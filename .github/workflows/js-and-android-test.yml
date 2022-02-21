@@ -37,6 +37,7 @@ jobs:
                       - '.eslintrc.cjs'
                       coreAndFeatures:
                       - 'core/**'
+                      - '!core/kernel/**'
                       - 'features/**'
                       - 'podjs/**'
                       - 'build/**'
