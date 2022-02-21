@@ -1,12 +1,5 @@
 import { Entity } from "./entity.js";
-
-const jurisdictions = {
-    OTHER: "Sonstige",
-    FIVE_EYES: "Five-Eyes",
-    CHINA: "China",
-    EU_GDPR: "EU-GDPR",
-    RUSSIA: "Russia",
-};
+import { jurisdictions } from "./jurisdictions.js";
 
 const dataProperties = ["industryCategory", "productsOwned"];
 
