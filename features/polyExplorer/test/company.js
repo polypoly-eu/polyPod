@@ -47,4 +47,8 @@ describe("Checks on companies", function () {
         const ppids = companiesJSON.map((c) => c.ppid);
         assert.strictEqual(ppids.length, [...new Set(ppids)].length);
     });
+    it("Should not repeat names", function () {
+        const names = companiesJSON.map((c) => c.name);
+        assert.strictEqual(names.length, [...new Set(names)].length);
+    });
 });
