@@ -1,4 +1,4 @@
-# Based on https://github.com/actions-rs/meta/blob/master/recipes/quickstart.md
+name: Lint and Test Rust code
 on:
   push:
     paths:
@@ -8,11 +8,9 @@ on:
     paths:
       - core/kernel/**
 
-name: Lint and Test Rust code
-
 jobs:
   test:
-    name: Test Suite
+    name: Rust test suite
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
