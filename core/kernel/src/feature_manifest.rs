@@ -33,7 +33,10 @@ impl FeatureManifest {
             .map(|manifest| FeatureManifest::build_feature_manifest(manifest, language_code))
     }
 
-    fn build_feature_manifest(full_manifest: FullFeatureManifest, language_code: &str) -> FeatureManifest {
+    fn build_feature_manifest(
+        full_manifest: FullFeatureManifest,
+        language_code: &str,
+    ) -> FeatureManifest {
         let translation = full_manifest
             .translations
             .as_ref()
@@ -46,26 +49,14 @@ impl FeatureManifest {
                     links.extend(translated_links.into_iter());
                 }
                 FeatureManifest {
-                    name: translation
-                        .name
-                        .clone()
-                        .or(full_manifest.name),
-                    author: translation
-                        .author
-                        .clone()
-                        .or(full_manifest.author),
-                    version: translation
-                        .version
-                        .clone()
-                        .or(full_manifest.version),
+                    name: translation.name.clone().or(full_manifest.name),
+                    author: translation.author.clone().or(full_manifest.author),
+                    version: translation.version.clone().or(full_manifest.version),
                     description: translation
                         .description
                         .clone()
                         .or(full_manifest.description),
-                    thumbnail: translation
-                        .thumbnail
-                        .clone()
-                        .or(full_manifest.thumbnail),
+                    thumbnail: translation.thumbnail.clone().or(full_manifest.thumbnail),
                     thumbnail_color: translation
                         .thumbnail_color
                         .clone()
@@ -123,7 +114,7 @@ impl TryFrom<&JSONStr> for FullFeatureManifest {
 
     fn try_from(value: &JSONStr) -> Result<Self, Self::Error> {
         serde_json::from_str(value).map_err(|err| FeatureManifestParsingError {
-            description: err.to_string(), 
+            description: err.to_string(),
         })
     }
 }
@@ -156,7 +147,7 @@ mod tests {
     #[test]
     fn test_partial_json() {
         let json = r#"
-        { 
+        {
             "name": "testManifest",
             "description": "testDescription",
             "author": "testAuthor",
