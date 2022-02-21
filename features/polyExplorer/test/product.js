@@ -9,8 +9,6 @@ const i18n = {
     language: "en",
 };
 
-const correctProductOwnerEnumeration = "Owner1, Owner2, Owner3";
-
 describe("Product", function () {
     const testProduct = new product.Product(
         testProductJSON,
