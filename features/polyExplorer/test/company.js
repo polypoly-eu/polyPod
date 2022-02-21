@@ -3,13 +3,13 @@
 import assert from "assert";
 import * as company from "../src/model/company.js";
 import testGlobalJSON from "./testGlobal.js";
-import oneCompany from "./testCompanyData.js";
+import oneCompany, { companiesJSON } from "./testCompanyData.js";
 
 const i18n = {
     language: "en",
 };
 
-describe("Company", function () {
+describe("Sample company", function () {
     const testCompany = new company.Company(oneCompany, testGlobalJSON, i18n);
 
     it("City is parsed correctly", function () {
@@ -39,5 +39,12 @@ describe("Company", function () {
             testCompany.industryCategory,
             oneCompany.industryCategory
         );
+    });
+});
+
+describe("Checks on companies", function () {
+    it("Should not repeat ppids", function () {
+        const ppids = companiesJSON.map((c) => c.ppid);
+        assert.strictEqual(ppids.length, [...new Set(ppids)].length);
     });
 });
