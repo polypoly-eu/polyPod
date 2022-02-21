@@ -10,7 +10,6 @@ const i18n = {
     language: "en",
 };
 
-console.log(Object.values(jurisdictions));
 describe("Sample company", function () {
     const testCompany = new company.Company(oneCompany, testGlobalJSON, i18n);
 
