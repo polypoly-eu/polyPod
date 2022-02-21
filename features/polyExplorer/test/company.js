@@ -4,11 +4,13 @@ import assert from "assert";
 import * as company from "../src/model/company.js";
 import testGlobalJSON from "./testGlobal.js";
 import oneCompany, { companiesJSON } from "./testCompanyData.js";
+import { jurisdictions } from "../src/model/jurisdictions.js";
 
 const i18n = {
     language: "en",
 };
 
+console.log(Object.values(jurisdictions));
 describe("Sample company", function () {
     const testCompany = new company.Company(oneCompany, testGlobalJSON, i18n);
 
@@ -50,5 +52,13 @@ describe("Checks on companies", function () {
     it("Should not repeat names", function () {
         const names = companiesJSON.map((c) => c.name);
         assert.strictEqual(names.length, [...new Set(names)].length);
+    });
+});
+
+describe("Checks attributes", function () {
+    it("Only known jurisdictions", () => {
+        companiesJSON.map((c) => {
+            assert.ok(Object.values(jurisdictions).includes(c.jurisdiction));
+        });
     });
 });
