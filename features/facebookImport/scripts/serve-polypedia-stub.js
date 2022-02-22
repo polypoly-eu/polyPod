@@ -25,7 +25,10 @@ function logRequest(request, body) {
     if (!body) return;
     console.log("----- Received request -----");
     console.log("Timestamp: ", new Date());
-    console.log("Authorization: ", request.headers?.authorization);
+    console.log(
+        "Authorization: ",
+        request.headers?.authorization.replace("\n", "-")
+    );
     console.log("[body start]");
     console.log(body.replace(/\s*\n\s*/, "→|←"));
     console.log("[body end]\n");
