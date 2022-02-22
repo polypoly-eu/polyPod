@@ -25,7 +25,7 @@ function logRequest(request, body) {
     if (!body) return;
     console.log("----- Received request -----");
     console.log("Timestamp: ", new Date());
-    console.log("Authorizaton: ", request.headers?.authorization);
+    console.log("Authorization: ", request.headers?.authorization);
     console.log("[body start]");
     console.log(body);
     console.log("[body end]\n");
