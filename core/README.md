@@ -9,3 +9,4 @@ This is the platform independent, shared code of the polyPod.
 - [communication](communication) - Communication layer between polyPod and
   features.
 - [utils](utils) - Utility packages we felt the need to write.
+- [kernel](kernel) - Kernel code to be shared between platforms.
