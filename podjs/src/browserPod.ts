@@ -1,9 +1,10 @@
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
     ExternalFile,
+    EndpointRequest,
+    Network,
     Info,
     Matcher,
-    Network,
     Pod,
     PolyIn,
     PolyOut,
@@ -334,6 +335,15 @@ class BrowserNetwork implements Network {
                 );
             request.send(body);
         });
+    }
+}
+
+class EndpointRequest implements EndpointRequest {
+    endpointId: String;
+    featureIdToken: String;
+    constructor(endpointId: String, featureIdToken: String) {
+        this.endpointId = endpointId;
+        this.featureIdToken = featureIdToken;
     }
 }
 

@@ -200,43 +200,43 @@ export interface PolyLifecycle {
 }
 
 /**
- * `NetworkManager` is an interface between httpPost and the platform. Keeps the app aware of the requests that are being done by the features.
+ * `EndpointRequest` is the API features communicate with in order to perform fetch requests
  */
-export interface EndpointManager {
-    endpoints : Endpoint [];
-    network: Network;
-    //to get all endpoints existing in polyPedia && storage
-    getAllEndpoints(): Promise<Endpoint[] | undefined>;
-    //to get a specific endpoint from polyPedia or storage
-    getEndpoint(endpointID:string): Promise<Endpoint | undefined>;
-    //to get Endpoint permissions
-    getEndpointPermissions(endpointID:string): Promise<Permission | undefined>;
-    //call is a substitute for network.httpPost in which the network manager can authorize, notify user and react depending on endpoints being reached.
-    callEndpoint(
-        endpoint: Endpoint, 
-        callback: Function,
-        body: string,
-        contentType?: string
-    ): Promise<string | undefined>;
+export interface EndpointRequest {
+    endpointId: string;
+    featureIdToken: string;
+
+    /**
+     * Perform a http post request via the endpoint in the pod
+     * @param body the necessary content of the call
+     * @returns a promise with the response
+     */
+    send(body: EndpointRequestBody): Promise<EndpointResponse>;
+
+    /**
+     * Perform a http get request via the endpoint in the pod
+     * @param body the necessary content of the call
+     * @returns a promise with the response
+     */
+    get(body: EndpointRequestBody): Promise<EndpointResponse>;
 }
 
-/**
- * `Endpoint` is an object that the Feature uses in order to perform an http request.
- */
-export interface Endpoint {
-    baseURL: string;
-    athenticationToken: string;
+export interface EndpointRequestBody {
+    headers: string;
+    payload: string;
+    contentType?: string;
+    authorization?: string;
 }
 
-/** 
-* `Permission` sets the permissions for the specific endpoint 
-*/
-export interface Permission{
-    endpointID:string;
+export interface EndpointResponse {
+    payload: string;
+    response: string;
+    metaData: MetaData;
 }
 
-
-
+export interface MetaData {
+    date: string;
+}
 /**
  * This interface represents the API that a Pod offers to a Feature. It comprises multiple sub-components that are
  * concerned with different aspects. Those sub-components are grouped according to data flow (see member documentation
@@ -312,10 +312,10 @@ export interface Pod {
     readonly info: Info;
 
     /**
-     * `network` is the interface to interact with other devices over the network. Refer to [[Network]] for its
+     * `endpointRequest` is the interface to interact with other devices over the network via the pod. Refer to [[EndpointRequest]] for its
      * definition.
      */
-    readonly network: Network;
+    readonly endpointRequest: EndpointRequest;
 
     /**
      * @hidden
