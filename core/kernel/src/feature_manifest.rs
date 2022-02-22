@@ -1,7 +1,7 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-#[derive(Deserialize, PartialEq, Debug)]
+#[derive(Deserialize, Serialize, PartialEq, Debug)]
 #[serde(rename_all = "camelCase")]
 #[allow(dead_code)] // Temporary until exposed through C API
 pub struct FeatureManifest {
@@ -17,7 +17,7 @@ pub struct FeatureManifest {
 
 #[derive(PartialEq, Debug)]
 pub struct FeatureManifestParsingError {
-    description: String,
+    pub description: String,
 }
 
 // Alias for str, probably will be moved to a centralized place to be reused
