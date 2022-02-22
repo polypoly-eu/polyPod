@@ -12,7 +12,21 @@ describe("Checks company names", function () {
             if (companyPPIDs.includes(hl)) {
                 assert.ok(companyPPIDs.includes(hl));
             } else {
-                console.warn(`${hl} is not a valid PPID`);
+                console.warn(`⚠️ ${hl} is not a valid PPID`);
+            }
+            const hlData = highlights[hl];
+            if ("dataRecipient" in hlData) {
+                if (companyPPIDs.includes(hlData.dataRecipient.name)) {
+                    assert.ok(companyPPIDs.includes(hlData.dataRecipient.name));
+                } else {
+                    console.warn(
+                        `⚠️ ${hlData.dataRecipient.name} for ${hl} is not a valid PPID`
+                    );
+                }
+            } else {
+                console.warn(
+                    `⚠️ ${hl} does not include a «dataRecipient» field`
+                );
             }
         });
     });
