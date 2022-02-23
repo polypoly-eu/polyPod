@@ -2,9 +2,9 @@ import { html, LitElement, css } from "lit-element";
 import { unsafeHTML } from "lit-html/directives/unsafe-html";
 import { globalTheme, polyPrefix } from "../globalTheme";
 import { polyInput } from "../constants";
-import { reduceListToString } from "../helpers";
-import clearSearchDark from "../static/images/icons/clear-search-dark.svg";
-import clearSearchLight from "../static/images/icons/clear-search-light.svg";
+import { reduceListToString } from "../../helpers";
+import clearSearchDark from "../../static/images/icons/clear-search-dark.svg";
+import clearSearchLight from "../../static/images/icons/clear-search-light.svg";
 
 const listOfValidTypes = Object.values(polyInput.types);
 

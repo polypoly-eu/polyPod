@@ -1,7 +1,7 @@
 import { html, LitElement, css } from "lit-element";
 import { globalTheme, polyPrefix } from "../globalTheme";
 import { polyTabs } from "../constants";
-import { listToStringReducer } from "../helpers";
+import { listToStringReducer } from "../../helpers";
 
 const validThemes = Object.values(polyTabs.themes);
 

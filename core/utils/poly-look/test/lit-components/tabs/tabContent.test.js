@@ -1,5 +1,5 @@
 import { html, fixture, expect } from "@open-wc/testing";
-import "../../src/tabs";
+import "../../../src/lit-components/tabs";
 
 describe("TabContent", () => {
   it(`should have the active attribute set to false by default`, async () => {

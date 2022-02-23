@@ -1,7 +1,7 @@
 import { html, LitElement, css } from "lit-element";
 import { globalTheme } from "../globalTheme";
 import { polyButton } from "../constants";
-import { reduceListToString } from "../helpers";
+import { reduceListToString } from "../../helpers";
 
 const listOfValidTypes = Object.values(polyButton.types);
 const listOfValidSizes = Object.values(polyButton.sizes);

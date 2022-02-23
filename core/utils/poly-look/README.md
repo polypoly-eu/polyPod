@@ -11,16 +11,16 @@ polyLook is the visual component library for all features and applications inclu
 
 ## State of polyLook
 
-polyLook aims to be a framework agnostic component library for polyPod features. At the moment, however, it mainly contains prototypes for a potential approach, based on LitElement.
+polyLook aims to be a framework agnostic component library for polyPod features. At the moment, however, it mainly contains prototypes for a potential approach, based on LitElement and React elements.
 
 Visualisations and charts are located in `./visualisations` and `./visualisations/charts` respectively. When using these from a
 specific framework eg. React, wrapper functions can be used (`./visualisations/wrappers`).
 
 ## Steps to code a new polyLook component
 
-1- Write the js file of the component inside the src folder. The name of the file must be written in lowerCamelCase.
+1- Write the js file for the component inside the `src/lit-components` folder. The name of the file must be written in lowerCamelCase.
 
-2- To test the component we'll use the storybook. To use the new component inside the storybook app we have to write a `*.stories.js` file inside the `stories` folder with the same name of the component. In order to learn how to write a `*.story.js` file you can read the next [tutorial](https://storybook.js.org/docs/web-components/writing-stories/introduction).
+2- To test the component we'll use the [storybook framework](https://storybook.js.org/). To use the new component inside the storybook app we have to write a `*.stories.js` file inside the `stories/lit-components` folder with the same name of the component. In order to learn how to write a `*.story.js` file you can read the next [tutorial](https://storybook.js.org/docs/web-components/writing-stories/introduction).
 
 3- Each component is required to have its own unit and integration tests. The test coverage for each component must be at least 70%.
 

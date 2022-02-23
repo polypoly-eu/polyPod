@@ -1,5 +1,5 @@
 import { html } from "lit-element";
-import "../src/tabs";
+import "../../src/lit-components/tabs";
 import { themeConfiguration } from "./themeConfiguration";
 
 export default {
