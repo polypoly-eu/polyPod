@@ -11,6 +11,9 @@ import {
     Network,
     Info,
     Entry,
+    Turtle,
+    TurtleRequest,
+    TurtleResponse,
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
@@ -83,6 +86,11 @@ type NetworkEndpoint = ObjectEndpointSpec<{
     ): ValueEndpointSpec<string | undefined>;
 }>;
 
+type TurtleEndpoint = ObjectEndpointSpec<{
+    send(turtleRequest: TurtleRequest): ValueEndpointSpec<TurtleResponse>;
+    get(turtleRequest: TurtleRequest): ValueEndpointSpec<TurtleResponse>;
+}>;
+
 type PodEndpoint = ObjectEndpointSpec<{
     polyIn(): PolyInEndpoint;
     polyOut(): PolyOutEndpoint;
@@ -90,6 +98,7 @@ type PodEndpoint = ObjectEndpointSpec<{
     polyNav(): PolyNavEndpoint;
     info(): InfoEndpoint;
     network(): NetworkEndpoint;
+    turtle(): TurtleEndpoint;
 }>;
 
 class FetchResponse implements Response {
@@ -297,6 +306,13 @@ export class RemoteClientPod implements Pod {
                 this.rpcClient.network().httpPost(url, body, contentType, authorization)(),
         };
     }
+
+    get turtle(): Turtle {
+        return {
+            send: (turtleRequest: TurtleRequest) => this.rpcClient.turtle().send(turtleRequest)(),
+            get: (turtleRequest: TurtleRequest) => this.rpcClient.turtle().send(turtleRequest)(),
+        };
+    }
 }
 
 // TODO move to pod-api?
@@ -378,5 +394,9 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
 
     network(): ServerOf<NetworkEndpoint> {
         return this.pod.network;
+    }
+
+    turtle(): ServerOf<TurtleEndpoint> {
+        return this.pod.turtle;
     }
 }

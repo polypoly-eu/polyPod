@@ -1,7 +1,9 @@
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
     ExternalFile,
-    EndpointRequest,
+    Turtle,
+    TurtleRequest,
+    TurtleResponse,
     Network,
     Info,
     Matcher,
@@ -338,12 +340,12 @@ class BrowserNetwork implements Network {
     }
 }
 
-class EndpointRequest implements EndpointRequest {
-    endpointId: String;
-    featureIdToken: String;
-    constructor(endpointId: String, featureIdToken: String) {
-        this.endpointId = endpointId;
-        this.featureIdToken = featureIdToken;
+class BrowserTurtle implements Turtle {
+    send(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
+        return {} as Promise<TurtleResponse>;
+    }
+    get(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
+        return {} as Promise<TurtleResponse>;
     }
 }
 
@@ -447,4 +449,5 @@ export class BrowserPod implements Pod {
     public readonly polyNav = new BrowserPolyNav();
     public readonly info = new PodJsInfo();
     public readonly network = new BrowserNetwork();
+    public readonly turtle = new BrowserTurtle();
 }

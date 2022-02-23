@@ -9,7 +9,17 @@
 
 import * as RDF from "rdf-js";
 import { dataFactory } from "@polypoly-eu/rdf";
-import { Pod, PolyIn, PolyOut, PolyNav, Info, Network } from "./api";
+import {
+    Pod,
+    PolyIn,
+    PolyOut,
+    PolyNav,
+    Info,
+    Network,
+    Turtle,
+    TurtleRequest,
+    TurtleResponse,
+} from "./api";
 import type { Fetch, Response, RequestInit } from "@polypoly-eu/fetch-spec";
 import { EncodingOptions, FS, Stats } from "./fs";
 import { Entry } from ".";
@@ -173,6 +183,17 @@ export class DefaultPod implements Pod {
     get network(): Network {
         return {
             httpPost(url: string, body: string, contentType?: string, authorization?: string) {
+                throw new Error("Not implemented");
+            },
+        };
+    }
+
+    get turtle(): Turtle {
+        return {
+            send(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
+                throw new Error("Not implemented");
+            },
+            get(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
                 throw new Error("Not implemented");
             },
         };

@@ -200,35 +200,38 @@ export interface PolyLifecycle {
 }
 
 /**
- * `EndpointRequest` is the API features communicate with in order to perform fetch requests
+ * `Endpoint` is the API features communicate with in order to perform fetch requests
  */
-export interface EndpointRequest {
-    endpointId: string;
-    featureIdToken: string;
-
+export interface Turtle {
     /**
      * Perform a http post request via the endpoint in the pod
      * @param body the necessary content of the call
      * @returns a promise with the response
      */
-    send(body: EndpointRequestBody): Promise<EndpointResponse>;
+    send(turtleRequest: TurtleRequest): Promise<TurtleResponse>;
 
     /**
      * Perform a http get request via the endpoint in the pod
      * @param body the necessary content of the call
      * @returns a promise with the response
      */
-    get(body: EndpointRequestBody): Promise<EndpointResponse>;
+    get(turtleRequest: TurtleRequest): Promise<TurtleResponse>;
 }
 
-export interface EndpointRequestBody {
+export interface TurtleRequest {
+    endpointId: string;
+    featureIfToken: string;
+    body: TurtleRequestBody;
+}
+
+export interface TurtleRequestBody {
     headers: string;
     payload: string;
     contentType?: string;
     authorization?: string;
 }
 
-export interface EndpointResponse {
+export interface TurtleResponse {
     payload: string;
     response: string;
     metaData: MetaData;
@@ -315,7 +318,12 @@ export interface Pod {
      * `endpointRequest` is the interface to interact with other devices over the network via the pod. Refer to [[EndpointRequest]] for its
      * definition.
      */
-    readonly endpointRequest: EndpointRequest;
+    readonly turtle: Turtle;
+    /**
+     * `network` is the interface to interact with other devices over the network. Refer to [[Network]] for its
+     * definition.
+     */
+    readonly network: Network;
 
     /**
      * @hidden
