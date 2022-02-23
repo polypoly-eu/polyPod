@@ -28,6 +28,10 @@ window.addEventListener("DOMContentLoaded", () => {
             });
         });
 
+    document.querySelector(".endpoint-post").addEventListener("click", () => {
+        console.log(window.pod.turtle.send);
+    });
+
     (function () {
         let wastedMemory = "";
 

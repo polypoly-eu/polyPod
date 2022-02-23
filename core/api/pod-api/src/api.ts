@@ -220,7 +220,7 @@ export interface Turtle {
 
 export interface TurtleRequest {
     endpointId: string;
-    featureIfToken: string;
+    featureIdToken: string;
     body: TurtleRequestBody;
 }
 

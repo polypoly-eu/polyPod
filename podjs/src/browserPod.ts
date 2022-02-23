@@ -16,6 +16,8 @@ import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
+//@ts-ignore
+import endpoints from "../../assets/config/endpoints.json";
 
 class LocalStoragePolyIn implements PolyIn {
     private static readonly storageKey = "polyInStore";
@@ -340,13 +342,34 @@ class BrowserNetwork implements Network {
     }
 }
 
+interface Endpoint {
+    endpointUrl: string;
+}
+
 class BrowserTurtle implements Turtle {
+    turtleNetwork: Network = new BrowserNetwork();
     send(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
+        const turtleEndpoint = getEndpoint(
+            turtleRequest.endpointId,
+            turtleRequest.featureIdToken
+        );
+
+        // this.turtleNetwork.httpPost(...Object.values(turtleRequest.body));
         return {} as Promise<TurtleResponse>;
     }
     get(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
         return {} as Promise<TurtleResponse>;
     }
+}
+
+function getEndpoint(
+    endpointId: string,
+    featureIdToken: string
+): Endpoint | null {
+    const endpointObject = endpoints[endpointId];
+    if (endpointObject.features.contains(featureIdToken)) {
+        return endpointObject;
+    } else return null;
 }
 
 function createUUID(): string {
