@@ -83,7 +83,7 @@ export default (commandLineArgs) => {
             // overwite the default warning function
             if (
                 warning.code === "CIRCULAR_DEPENDENCY" &&
-                warning.cycle[0].match(/d3-/)
+                warning.cycle[0].match(/(d3-|importer-context)/)
             ) {
                 return;
             } else {
