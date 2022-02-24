@@ -15,7 +15,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.14.2",
     "jsdoc": "^3.6.10"
   },
   "private": true,
