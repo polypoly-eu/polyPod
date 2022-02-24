@@ -27,8 +27,8 @@
     <!-- Delay after which the push notification is shown, in seconds -->
     <integer name="update_notification_push_delay">120</integer>
 
-    <string name="update_notification_title">Your polyPod just got better!</string>
+    <string name="update_notification_title">New data in polyExplorer</string>
     <string name="update_notification_text">
-        Your polyPod can now import and analyse your Facebook data. Learn what Facebook hides from you!
+        The polyExplorer now shows data stories around messenger services. Feel free to check them out right away!
     </string>
 </resources>

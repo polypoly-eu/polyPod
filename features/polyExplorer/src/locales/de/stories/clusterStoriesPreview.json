@@ -1,8 +1,10 @@
 {
-    "story.messenger.title": "Warum die meisten Messenger-Apps (nicht wirklich) kostenlos sind.",
+    "story.messenger.title": "Warum die meisten Messaging-Apps (nicht wirklich) kostenlos sind.",
+    "story.messenger.title.short": "Messaging Apps",
     "story.messenger.summarize": "Wenn ein digitaler Dienst kostenlos angeboten wird, sind die Nutzer und ihre Daten in der Regel das Produkt, mit dem Geld verdient wird.",
-    "story.messenger.alt": "Messenger-Geschichte",
-    "story.digitalGiants.title": "Digital Giants – Wie die Big Six mit Ihren Daten umgehen.",
+    "story.messenger.alt": "Messaging-Geschichte",
+    "story.digitalGiants.title": "Wie die digitalen Giganten mit Ihren Daten umgehen.",
+    "story.digitalGiants.title.short": "Digitale Giganten",
     "story.digitalGiants.summarize": "Einige sehr wenige, sehr große Technologieunternehmen kontrollieren große Teile Ihrer Daten. Hier ist, was wir über sie und ihren Umgang mit Ihren Daten herausgefunden haben.",
     "story.digitalGiants.alt": "Geschichte der digitalen Giganten",
     "story.button.discover": "Story entdecken"
