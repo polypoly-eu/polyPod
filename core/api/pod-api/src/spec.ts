@@ -18,7 +18,6 @@ import fc from "fast-check";
 import { DataFactorySpec, gens } from "@polypoly-eu/rdf-spec";
 import chai, { assert } from "chai";
 import chaiAsPromised from "chai-as-promised";
-import { fetchSpec } from "@polypoly-eu/fetch-spec";
 
 function encodeUtf8(string: string): Uint8Array {
     if (typeof TextEncoder !== "undefined") return new TextEncoder().encode(string);
@@ -181,8 +180,6 @@ export class PodSpec {
                     );
                 });
             });
-
-            fetchSpec(polyOut.fetch.bind(polyOut), this.httpbinUrl);
         });
     }
 
