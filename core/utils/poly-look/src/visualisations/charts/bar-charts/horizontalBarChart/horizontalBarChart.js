@@ -237,13 +237,16 @@ export class HorizontalBarChart extends Chart {
       .attr("fill", this._barValueColor);
   }
 
-  _updateExistingBarValues(barValues) {
-    barValues
+  _updateExistingBarValues(barGroups) {
+    barGroups
+      .selectAll("bar-value")
       .attr("y", (d) => this._setValueYAttribute(d))
       .attr("class", "bar-value")
       .attr("text-anchor", "end")
       .attr("x", (d) => this._xScale(d.value) - barValueMargin)
       .text((d) => d.value)
+      .attr("fill", "transparent")
+      .style("font-size", fontSizeInBar)
       .raise()
       .transition()
       .delay(1500)
@@ -295,9 +298,9 @@ export class HorizontalBarChart extends Chart {
   }
 
   _displayValues(barGroups, enteringBarGroups) {
-    this._updateExistingBarValues(barGroups);
     this._addEnteringBarValues(enteringBarGroups);
     this._addEnteringBarLabels(enteringBarGroups);
+    this._updateExistingBarValues(barGroups);
   }
 
   render() {
@@ -315,6 +318,7 @@ export class HorizontalBarChart extends Chart {
     if (this._barValueColor) this._displayValues(barGroups, enteringBarGroups);
     else this.chart.selectAll(".bar-value").remove();
     if (this._groups) {
+      this.chart.selectAll(".group-label").remove();
       const groupLabels = this.chart
         .selectAll(".bar-group")
         .data(this._groups, (g) => g.id);
