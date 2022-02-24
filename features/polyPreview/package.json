@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
-    "swiper": "^6.4.11"
+    "swiper": "^8.0.6"
   },
   "devDependencies": {
     "@polypoly-eu/podjs": "file:../../podjs",

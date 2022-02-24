@@ -35,7 +35,7 @@
     "@web/test-runner": "^0.13.22",
     "@web/test-runner-chrome": "^0.10.5",
     "identity-obj-proxy": "^3.0.0",
-    "jsdoc": "^3.6.7"
+    "jsdoc": "^3.6.10"
   },
   "jest": {
     "verbose": true,
