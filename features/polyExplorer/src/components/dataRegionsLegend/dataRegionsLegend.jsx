@@ -36,9 +36,6 @@ const DataRegionsLegend = () => {
                     </div>
                 </div>
             </div>
-            <div className="source">
-                <p>{i18nC.t("source")}: polyPedia</p>
-            </div>
         </div>
     );
 };

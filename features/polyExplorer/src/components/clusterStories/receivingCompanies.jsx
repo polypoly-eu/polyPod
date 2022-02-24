@@ -1,5 +1,6 @@
-import React, { useContext, useMemo } from "react";
+import React, { useState, useContext, useMemo } from "react";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
+import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
 
 import i18n from "../../i18n.js";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
@@ -36,9 +37,11 @@ class IndexedLegend {
 }
 
 function Companies({ entities }) {
-    const legend = new IndexedLegend(entities.map(({ name }) => name));
-    const data = entities.map(({ name, dataRecipients }) => ({
-        title: legend.labelOf(name),
+    const legend = new IndexedLegend(
+        entities.map(({ simpleName }) => simpleName)
+    );
+    const data = entities.map(({ simpleName, dataRecipients }) => ({
+        title: legend.labelOf(simpleName),
         value: dataRecipients.length,
     }));
     return (
@@ -84,10 +87,11 @@ function Industries({ entities }) {
         .slice(0, 3);
     const legend = new IndexedLegend(top3Industries);
     const data = Object.entries(recipientsPerIndustry).map(
-        ([industry, recipients]) => ({
+        ([industry, recipients], recipientIndex) => ({
             label: legend.labelOf(industry),
-            children: recipients.map((sharingCount) => ({
+            children: recipients.map((sharingCount, sharingIndex) => ({
                 value: sharingCount,
+                title: `${recipientIndex}-${sharingIndex}`,
             })),
         })
     );
@@ -115,9 +119,16 @@ function Industries({ entities }) {
 }
 
 export default function ReceivingCompanies({ entities }) {
+    const [selectedReceivingEntitiesTab, setSelectedReceivingEntitiesTab] =
+        useState("companies-bar-chart-info");
+    const switchCompany = (tabId) => {
+        if (tabId === "industries")
+            setSelectedReceivingEntitiesTab("industries-packed-circle-info");
+        else setSelectedReceivingEntitiesTab("companies-bar-chart-info");
+    };
     return (
         <div className="receiving-companies">
-            <Tabs>
+            <Tabs onTabChange={switchCompany}>
                 <Tab
                     id="companies"
                     label={i18n.t(
@@ -135,6 +146,10 @@ export default function ReceivingCompanies({ entities }) {
                     <Industries entities={entities} />
                 </Tab>
             </Tabs>
+            <SourceInfoButton
+                infoScreen={selectedReceivingEntitiesTab}
+                source={i18n.t("common:source.polyPedia")}
+            />
         </div>
     );
 }

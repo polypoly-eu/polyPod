@@ -14,6 +14,7 @@ export default {
         globals: {
             react: "React",
             "react-dom": "ReactDOM",
+            uuid: "uuid",
         },
     },
     plugins: [

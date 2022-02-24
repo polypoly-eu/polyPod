@@ -23,7 +23,6 @@
         "features/facebookImport",
         "features/lexicon",
         "features/polyExplorer",
-        "features/polyExplorer-v1",
         "features/polyPinion",
         "features/polyPreview",
         "features/test",

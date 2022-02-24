@@ -15,7 +15,7 @@ on:
 jobs:
     test:
         name: Testing polyPod iOS app
-        runs-on: macOS-10.15
+        runs-on: macOS-11
         steps:
             - name: Checkout repository
               uses: actions/checkout@v2
@@ -25,7 +25,7 @@ jobs:
                   cache: "npm"
                   cache-dependency-path: "**/package-lock.json"
             - name: Lock xcode version
-              run: sudo xcode-select -switch /Applications/Xcode_12.4.app
+              run: cd ios; make lockxcodeversion
             - name: Build core and features
               run: ./build.js
             - name: Build and test iOS

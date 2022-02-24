@@ -2,11 +2,11 @@
     "id": 80989465,
     "pushDelay": 120,
     "title": {
-        "en": "Your polyPod just got better!",
+        "en": "New data in polyExplorer",
         "de": "Ihr polyPod wurde gerade mächtiger!"
     },
     "text": {
-        "en": "Your polyPod can now import and analyse your Facebook data. Learn what Facebook hides from you!",
-        "de": "Ihr polyPod kann jetzt Facebook Daten importieren und analysieren. Lernen Sie, was Facebook nicht von selbst zeigt!"
+        "en": "The polyExplorer now shows data stories around messenger services. Feel free to check them out right away!",
+        "de": "Der polyExplorer hat neue Datengeschichten rund um Messenger-Dienste. Schauen Sie mal hinein!"
     }
 }
