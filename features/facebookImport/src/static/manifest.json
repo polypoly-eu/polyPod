@@ -12,6 +12,7 @@
     },
     "translations": {
         "de": {
+            "name": "Facebook-Daten Importer",
             "author": "polypoly - Die Genossenschaft",
             "description": "Facebook weiß viel über Sie. Mit dem Facebook-Daten Importer können Sie Ihre Daten in drei Schritten von Facebook in Ihren polyPod laden, damit auch Sie selbst endlich einen Überblick bekommen.",
             "links": {

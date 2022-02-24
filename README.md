@@ -27,6 +27,7 @@ Just execute:
     $ ./build.js
 
 In the occassion you are running a Windows platform, you will have to make a few fixes for your machine to be able to build this app:
+
     1. Open cmd with administrator privileges (Right click on cmd -> run as administrator).
     2. Set your current working directory to this folder ( "cd {path root of polypod}/windows") and run the convert-symlinks.js file with node. 
     3. You should receive an output saying "All set up!".

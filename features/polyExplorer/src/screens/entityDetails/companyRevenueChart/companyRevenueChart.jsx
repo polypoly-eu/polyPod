@@ -174,9 +174,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                         {i18n.t(`entityDetailsScreen:${unit}`)} (EUR)
                     </div>
                 </div>
-                <p className="source">
-                    {i18n.t("entityDetailsScreen:source")}: polyPedia
-                </p>
+
                 <div
                     className="bar"
                     style={{
