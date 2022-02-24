@@ -232,12 +232,12 @@ export interface TurtleRequestBody {
 }
 
 export interface TurtleResponse {
-    payload: string;
-    response: string;
-    metaData: MetaData;
+    payload?: string;
+    response: string | undefined;
+    metadata: Metadata;
 }
 
-export interface MetaData {
+export interface Metadata {
     date: string;
 }
 /**

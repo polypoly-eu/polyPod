@@ -4,6 +4,7 @@ import type {
     Turtle,
     TurtleRequest,
     TurtleResponse,
+    turtleRequestBody,
     Network,
     Info,
     Matcher,
@@ -11,6 +12,7 @@ import type {
     PolyIn,
     PolyOut,
     PolyNav,
+    MetaData,
 } from "@polypoly-eu/pod-api";
 import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
@@ -340,26 +342,44 @@ class BrowserNetwork implements Network {
             request.send(body);
         });
     }
+    async httpGet(
+        url: string,
+        body: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<string | undefined> {
+        return new Promise((resolve) => {
+            const request = new XMLHttpRequest();
+
+            request.onreadystatechange = function () {
+                if (request.readyState !== XMLHttpRequest.DONE) return;
+                const status = request.status;
+                if (status < 200 || status > 299) {
+                    resolve(`Unexpected response status: ${status}`);
+                    return;
+                }
+                resolve(undefined);
+            };
+
+            request.onerror = function () {
+                resolve("Network error");
+            };
+
+            request.open("GET", url);
+            if (contentType)
+                request.setRequestHeader("Content-Type", contentType);
+            if (authorization)
+                request.setRequestHeader(
+                    "Authorization",
+                    "Basic " + btoa(authorization)
+                );
+            request.send(body);
+        });
+    }
 }
 
 interface Endpoint {
     endpointUrl: string;
-}
-
-class BrowserTurtle implements Turtle {
-    turtleNetwork: Network = new BrowserNetwork();
-    send(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
-        const turtleEndpoint = getEndpoint(
-            turtleRequest.endpointId,
-            turtleRequest.featureIdToken
-        );
-
-        // this.turtleNetwork.httpPost(...Object.values(turtleRequest.body));
-        return {} as Promise<TurtleResponse>;
-    }
-    get(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
-        return {} as Promise<TurtleResponse>;
-    }
 }
 
 function getEndpoint(
@@ -370,6 +390,36 @@ function getEndpoint(
     if (endpointObject.features.contains(featureIdToken)) {
         return endpointObject;
     } else return null;
+}
+
+function getMetadata(): Metadata {
+    const dateTime = new Date();
+    return { date: dateTime.getUTCDate().toString() };
+}
+
+class BrowserTurtle implements Turtle {
+    turtleNetwork: Network = new BrowserNetwork();
+    async send(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
+        const turtleEndpoint = getEndpoint(
+            turtleRequest.endpointId,
+            turtleRequest.featureIdToken
+        );
+        const requestBody = turtleRequest.body;
+        if (!turtleEndpoint) return {} as TurtleResponse;
+        const turtleResponse = {} as TurtleResponse;
+        turtleResponse.response = "";
+        turtleResponse.payload = await this.turtleNetwork.httpPost(
+            turtleEndpoint?.endpointUrl,
+            requestBody.payload,
+            requestBody.contentType,
+            requestBody.authorization
+        );
+        turtleResponse.metadata = getMetadata();
+        return new Promise((response) => response(turtleResponse));
+    }
+    get(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
+        return {} as Promise<TurtleResponse>;
+    }
 }
 
 function createUUID(): string {
