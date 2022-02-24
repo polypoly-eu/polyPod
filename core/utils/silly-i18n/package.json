@@ -15,7 +15,7 @@
     ]
   },
   "devDependencies": {
-    "jsdoc": "^3.6.7"
+    "jsdoc": "^3.6.10"
   },
   "private": true,
   "type": "module"
