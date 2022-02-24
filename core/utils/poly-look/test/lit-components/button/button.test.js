@@ -1,6 +1,6 @@
 import { html, fixture, expect } from "@open-wc/testing";
-import "../../src/buttons";
-import { polyButton } from "../../src/constants";
+import "../../../src/lit-components/buttons";
+import { polyButton } from "../../../src/lit-components/constants";
 
 describe("Button", () => {
   it(`should throw an exception if the size value isn't valid`, (done) => {

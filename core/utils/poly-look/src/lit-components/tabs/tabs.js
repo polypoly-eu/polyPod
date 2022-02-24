@@ -2,7 +2,7 @@ import { html, LitElement, css } from "lit-element";
 import { unsafeHTML } from "lit-html/directives/unsafe-html";
 import { globalTheme, polyPrefix } from "../globalTheme";
 import { polyTabs } from "../constants";
-import { listToStringReducer } from "../helpers";
+import { listToStringReducer } from "../../helpers";
 
 const listOfTheme = Object.values(polyTabs.themes);
 

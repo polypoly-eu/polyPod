@@ -1,5 +1,5 @@
 import { html } from "lit-element";
-import "../src/inputs";
+import "../../src/lit-components/inputs";
 import { themeConfiguration } from "./themeConfiguration";
 
 export default {

@@ -1,5 +1,5 @@
 import { expect, oneEvent } from "@open-wc/testing";
-import "../../src/tabs";
+import "../../../src/lit-components/tabs";
 
 describe("Tab", () => {
   it(`should throw an exception if the content of the tab is different than a single tag of <poly-tab-content>`, (done) => {
