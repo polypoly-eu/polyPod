@@ -28,9 +28,11 @@ window.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-    document.querySelector(".endpoint-post").addEventListener("click", () => {
-        console.log(window.pod.turtle.send);
-    });
+    document
+        .querySelector(".endpoint-post")
+        .addEventListener("click", async () => {
+            console.log(await window.pod.turtle.get({}));
+        });
 
     (function () {
         let wastedMemory = "";

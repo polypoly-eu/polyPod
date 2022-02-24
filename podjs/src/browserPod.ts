@@ -4,7 +4,7 @@ import type {
     Turtle,
     TurtleRequest,
     TurtleResponse,
-    turtleRequestBody,
+    TurtleRequestBody,
     Network,
     Info,
     Matcher,
@@ -12,7 +12,7 @@ import type {
     PolyIn,
     PolyOut,
     PolyNav,
-    MetaData,
+    Metadata,
 } from "@polypoly-eu/pod-api";
 import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
@@ -324,7 +324,7 @@ class BrowserNetwork implements Network {
                     resolve(`Unexpected response status: ${status}`);
                     return;
                 }
-                resolve(undefined);
+                resolve(this.responseText);
             };
 
             request.onerror = function () {
@@ -358,7 +358,7 @@ class BrowserNetwork implements Network {
                     resolve(`Unexpected response status: ${status}`);
                     return;
                 }
-                resolve(undefined);
+                resolve(this.responseText);
             };
 
             request.onerror = function () {
@@ -398,7 +398,7 @@ function getMetadata(): Metadata {
 }
 
 class BrowserTurtle implements Turtle {
-    turtleNetwork: Network = new BrowserNetwork();
+    turtleNetwork = new BrowserNetwork();
     async send(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
         const turtleEndpoint = getEndpoint(
             turtleRequest.endpointId,
@@ -417,8 +417,23 @@ class BrowserTurtle implements Turtle {
         turtleResponse.metadata = getMetadata();
         return new Promise((response) => response(turtleResponse));
     }
-    get(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
-        return {} as Promise<TurtleResponse>;
+    async get(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
+        const turtleEndpoint = getEndpoint(
+            turtleRequest.endpointId,
+            turtleRequest.featureIdToken
+        );
+        const requestBody = turtleRequest.body;
+        if (!turtleEndpoint) return {} as TurtleResponse;
+        const turtleResponse = {} as TurtleResponse;
+        turtleResponse.response = "";
+        turtleResponse.payload = await this.turtleNetwork.httpGet(
+            turtleEndpoint?.endpointUrl,
+            requestBody.payload,
+            requestBody.contentType,
+            requestBody.authorization
+        );
+        turtleResponse.metadata = getMetadata();
+        return new Promise((response) => response(turtleResponse));
     }
 }
 
