@@ -28,10 +28,8 @@
     "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
     "@types/prop-types": "^15.7.3",
     "d3": "^7.3.0",
-    "lodash": "^4.17.21",
     "react-infinite-scroll-component": "^6.0.0",
     "react-router-dom": "^5.2.0",
-    "styled-components": "^5.3.0",
     "swiper": "^6.4.11"
   },
   "type": "module"
