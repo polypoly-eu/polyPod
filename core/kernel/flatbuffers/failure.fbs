@@ -1,0 +1,6 @@
+namespace failure;
+
+table Failure {
+    code:int;
+    message:string;
+}
