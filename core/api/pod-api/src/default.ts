@@ -16,9 +16,9 @@ import {
     PolyNav,
     Info,
     Network,
-    Turtle,
-    TurtleRequest,
-    TurtleResponse,
+    PolyEndpoint,
+    PolyEndpointRequest,
+    PolyEndpointResponse,
 } from "./api";
 import type { Fetch, Response, RequestInit } from "@polypoly-eu/fetch-spec";
 import { EncodingOptions, FS, Stats } from "./fs";
@@ -188,12 +188,12 @@ export class DefaultPod implements Pod {
         };
     }
 
-    get turtle(): Turtle {
+    get polyEndpoint(): PolyEndpoint {
         return {
-            send(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
+            send(polyEndpointRequest: PolyEndpointRequest): Promise<PolyEndpointResponse> {
                 throw new Error("Not implemented");
             },
-            get(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
+            get(polyEndpointRequest: PolyEndpointRequest): Promise<PolyEndpointResponse> {
                 throw new Error("Not implemented");
             },
         };

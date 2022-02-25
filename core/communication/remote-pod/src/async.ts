@@ -5,9 +5,9 @@ import {
     PolyIn,
     PolyNav,
     ExternalFile,
-    Turtle,
-    TurtleRequest,
-    TurtleResponse,
+    PolyEndpoint,
+    PolyEndpointRequest,
+    PolyEndpointResponse,
     EncodingOptions,
     Entry,
     Matcher,
@@ -120,15 +120,15 @@ class AsyncNetwork implements Network {
     }
 }
 
-class AsyncTurtle implements Turtle {
-    constructor(private readonly promise: Promise<Turtle>) {}
+class AsyncPolyEndpoint implements PolyEndpoint {
+    constructor(private readonly promise: Promise<PolyEndpoint>) {}
 
-    async send(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
-        return (await this.promise).send(turtleRequest);
+    async send(polyEndpointRequest: PolyEndpointRequest): Promise<PolyEndpointResponse> {
+        return (await this.promise).send(polyEndpointRequest);
     }
 
-    async get(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
-        return (await this.promise).get(turtleRequest);
+    async get(polyEndpointRequest: PolyEndpointRequest): Promise<PolyEndpointResponse> {
+        return (await this.promise).get(polyEndpointRequest);
     }
 }
 
@@ -157,7 +157,7 @@ export class AsyncPod implements Pod {
     readonly info: Info;
     readonly network: Network;
     readonly polyLifecycle: PolyLifecycle;
-    readonly turtle: Turtle;
+    readonly polyEndpoint: PolyEndpoint;
 
     constructor(private readonly promise: Promise<Pod>, public readonly dataFactory: DataFactory) {
         this.polyOut = new AsyncPolyOut(promise.then((pod) => pod.polyOut));
@@ -166,6 +166,6 @@ export class AsyncPod implements Pod {
         this.info = new AsyncInfo(promise.then((pod) => pod.info));
         this.network = new AsyncNetwork(promise.then((pod) => pod.network));
         this.polyLifecycle = new AsyncPolyLifecycle(promise.then((pod) => pod.polyLifecycle));
-        this.turtle = new AsyncTurtle(promise.then((pod) => pod.turtle));
+        this.polyEndpoint = new AsyncPolyEndpoint(promise.then((pod) => pod.polyEndpoint));
     }
 }

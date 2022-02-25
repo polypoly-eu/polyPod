@@ -11,9 +11,9 @@ import {
     Network,
     Info,
     Entry,
-    Turtle,
-    TurtleRequest,
-    TurtleResponse,
+    PolyEndpoint,
+    PolyEndpointRequest,
+    PolyEndpointResponse,
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
@@ -86,9 +86,9 @@ type NetworkEndpoint = ObjectEndpointSpec<{
     ): ValueEndpointSpec<string | undefined>;
 }>;
 
-type TurtleEndpoint = ObjectEndpointSpec<{
-    send(turtleRequest: TurtleRequest): ValueEndpointSpec<TurtleResponse>;
-    get(turtleRequest: TurtleRequest): ValueEndpointSpec<TurtleResponse>;
+type PolyEndpointEndpoint = ObjectEndpointSpec<{
+    send(polyEndpointRequest: PolyEndpointRequest): ValueEndpointSpec<PolyEndpointResponse>;
+    get(polyEndpointRequest: PolyEndpointRequest): ValueEndpointSpec<PolyEndpointResponse>;
 }>;
 
 type PodEndpoint = ObjectEndpointSpec<{
@@ -98,7 +98,7 @@ type PodEndpoint = ObjectEndpointSpec<{
     polyNav(): PolyNavEndpoint;
     info(): InfoEndpoint;
     network(): NetworkEndpoint;
-    turtle(): TurtleEndpoint;
+    polyEndpoint(): PolyEndpointEndpoint;
 }>;
 
 class FetchResponse implements Response {
@@ -307,10 +307,12 @@ export class RemoteClientPod implements Pod {
         };
     }
 
-    get turtle(): Turtle {
+    get polyEndpoint(): PolyEndpoint {
         return {
-            send: (turtleRequest: TurtleRequest) => this.rpcClient.turtle().send(turtleRequest)(),
-            get: (turtleRequest: TurtleRequest) => this.rpcClient.turtle().send(turtleRequest)(),
+            send: (polyEndpointRequest: PolyEndpointRequest) =>
+                this.rpcClient.polyEndpoint().send(polyEndpointRequest)(),
+            get: (polyEndpointRequest: PolyEndpointRequest) =>
+                this.rpcClient.polyEndpoint().send(polyEndpointRequest)(),
         };
     }
 }
@@ -396,7 +398,7 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
         return this.pod.network;
     }
 
-    turtle(): ServerOf<TurtleEndpoint> {
-        return this.pod.turtle;
+    polyEndpoint(): ServerOf<PolyEndpointEndpoint> {
+        return this.pod.polyEndpoint;
     }
 }

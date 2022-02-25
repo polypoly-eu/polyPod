@@ -1,10 +1,9 @@
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
     ExternalFile,
-    Turtle,
-    TurtleRequest,
-    TurtleResponse,
-    TurtleRequestBody,
+    PolyEndpoint,
+    PolyEndpointRequest,
+    PolyEndpointResponse,
     Network,
     Info,
     Matcher,
@@ -394,52 +393,52 @@ function getMetadata(): Metadata {
     return { date: dateTime.toString() };
 }
 
-function turtleMiddleware(turtleRequest: TurtleRequest) {
+function polyEndopointRequestMiddleware(polyEndopointRequest: PolyEndopointRequest) {
     //user notification that get/post is happening later
-    if (turtleRequest) console.log("middleware contacted");
+    if (polyEndopointRequest) console.log("middleware contacted");
 }
 
-class BrowserTurtle implements Turtle {
-    turtleNetwork = new BrowserNetwork();
-    async send(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
-        const turtleEndpointURL = getEndpoint(
-            turtleRequest.endpointId,
-            turtleRequest.featureIdToken
+class BrowserPolyEndpoint implements PolyEndpoint {
+    polyEndpointNetwork = new BrowserNetwork();
+    async send(
+        polyEndpointRequest: PolyEndpointRequest
+    ): Promise<PolyEndpointResponse> {
+        const polyEndpointEndpoint = getEndpoint(
+            polyEndpointRequest.endpointId,
+            polyEndpointRequest.featureIdToken
         );
-        if (!turtleEndpointURL) return {} as TurtleResponse;
-        turtleMiddleware(turtleRequest);
-
-        const requestBody = turtleRequest.body;
-        const turtleResponse = {} as TurtleResponse;
-        turtleResponse.response = "";
-        turtleResponse.payload = await this.turtleNetwork.httpPost(
-            turtleEndpointURL,
+        const requestBody = polyEndpointRequest.body;
+        if (!polyEndpointEndpoint) return {} as PolyEndpointResponse;
+        const polyEndpointResponse = {} as PolyEndpointResponse;
+        polyEndpointResponse.response = "";
+        polyEndpointResponse.payload = await this.polyEndpointNetwork.httpPost(
+            polyEndpointEndpoint,
             requestBody.payload,
             requestBody?.contentType,
             requestBody?.authorization
         );
-        turtleResponse.metadata = getMetadata();
-        return new Promise((response) => response(turtleResponse));
+        polyEndpointResponse.metadata = getMetadata();
+        return new Promise((response) => response(polyEndpointResponse));
     }
-    async get(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
-        const turtleEndpointURL = getEndpoint(
-            turtleRequest.endpointId,
-            turtleRequest.featureIdToken
+    async get(
+        polyEndpointRequest: PolyEndpointRequest
+    ): Promise<PolyEndpointResponse> {
+        const polyEndpointEndpoint = getEndpoint(
+            polyEndpointRequest.endpointId,
+            polyEndpointRequest.featureIdToken
         );
-        if (!turtleEndpointURL) return {} as TurtleResponse;
-        turtleMiddleware(turtleRequest);
-
-        const requestBody = turtleRequest.body;
-        const turtleResponse = {} as TurtleResponse;
-        turtleResponse.response = "";
-        turtleResponse.payload = await this.turtleNetwork.httpGet(
-            turtleEndpointURL,
+        const requestBody = polyEndpointRequest.body;
+        if (!polyEndpointEndpoint) return {} as PolyEndpointResponse;
+        const polyEndpointResponse = {} as PolyEndpointResponse;
+        polyEndpointResponse.response = "";
+        polyEndpointResponse.payload = await this.polyEndpointNetwork.httpGet(
+            polyEndpointEndpoint,
             requestBody.payload,
             requestBody?.contentType,
             requestBody?.authorization
         );
-        turtleResponse.metadata = getMetadata();
-        return new Promise((response) => response(turtleResponse));
+        polyEndpointResponse.metadata = getMetadata();
+        return new Promise((response) => response(polyEndpointResponse));
     }
 }
 
@@ -543,5 +542,5 @@ export class BrowserPod implements Pod {
     public readonly polyNav = new BrowserPolyNav();
     public readonly info = new PodJsInfo();
     public readonly network = new BrowserNetwork();
-    public readonly turtle = new BrowserTurtle();
+    public readonly polyEndpoint = new BrowserPolyEndpoint();
 }
