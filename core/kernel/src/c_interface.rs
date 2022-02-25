@@ -1,5 +1,5 @@
 use crate::{
-    feature_manifest::{FeatureManifest, FeatureManifestParsingError},
+    feature_manifest_parsing::{FeatureManifest, FeatureManifestParsingError},
     kernel::Kernel,
     kernel::KERNEL,
 };
