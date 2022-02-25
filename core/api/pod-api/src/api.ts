@@ -225,7 +225,6 @@ export interface TurtleRequest {
 }
 
 export interface TurtleRequestBody {
-    headers: string;
     payload: string;
     contentType?: string;
     authorization?: string;

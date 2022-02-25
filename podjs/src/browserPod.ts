@@ -339,6 +339,7 @@ class BrowserNetwork implements Network {
                     "Authorization",
                     "Basic " + btoa(authorization)
                 );
+            console.log(body);
             request.send(body);
         });
     }
@@ -378,59 +379,64 @@ class BrowserNetwork implements Network {
     }
 }
 
-interface Endpoint {
-    endpointUrl: string;
-}
-
 function getEndpoint(
     endpointId: string,
     featureIdToken: string
-): Endpoint | null {
+): string | null {
     const endpointObject = endpoints[endpointId];
-    if (endpointObject.features.contains(featureIdToken)) {
-        return endpointObject;
+    if (endpointObject.features.includes(featureIdToken)) {
+        return endpointObject.baseURL;
     } else return null;
 }
 
 function getMetadata(): Metadata {
     const dateTime = new Date();
-    return { date: dateTime.getUTCDate().toString() };
+    return { date: dateTime.getUTCSeconds().toString() };
+}
+
+function turtleMiddleware(turtleRequest: TurtleRequest) {
+    //user notification that get/post is happening later
+    if (turtleRequest) console.log("middleware contacted");
 }
 
 class BrowserTurtle implements Turtle {
     turtleNetwork = new BrowserNetwork();
     async send(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
-        const turtleEndpoint = getEndpoint(
+        const turtleEndpointURL = getEndpoint(
             turtleRequest.endpointId,
             turtleRequest.featureIdToken
         );
+        if (!turtleEndpointURL) return {} as TurtleResponse;
+        turtleMiddleware(turtleRequest);
+
         const requestBody = turtleRequest.body;
-        if (!turtleEndpoint) return {} as TurtleResponse;
         const turtleResponse = {} as TurtleResponse;
         turtleResponse.response = "";
         turtleResponse.payload = await this.turtleNetwork.httpPost(
-            turtleEndpoint?.endpointUrl,
+            turtleEndpointURL,
             requestBody.payload,
-            requestBody.contentType,
-            requestBody.authorization
+            requestBody?.contentType,
+            requestBody?.authorization
         );
         turtleResponse.metadata = getMetadata();
         return new Promise((response) => response(turtleResponse));
     }
     async get(turtleRequest: TurtleRequest): Promise<TurtleResponse> {
-        const turtleEndpoint = getEndpoint(
+        const turtleEndpointURL = getEndpoint(
             turtleRequest.endpointId,
             turtleRequest.featureIdToken
         );
+        if (!turtleEndpointURL) return {} as TurtleResponse;
+        turtleMiddleware(turtleRequest);
+
         const requestBody = turtleRequest.body;
-        if (!turtleEndpoint) return {} as TurtleResponse;
         const turtleResponse = {} as TurtleResponse;
         turtleResponse.response = "";
         turtleResponse.payload = await this.turtleNetwork.httpGet(
-            turtleEndpoint?.endpointUrl,
+            turtleEndpointURL,
             requestBody.payload,
-            requestBody.contentType,
-            requestBody.authorization
+            requestBody?.contentType,
+            requestBody?.authorization
         );
         turtleResponse.metadata = getMetadata();
         return new Promise((response) => response(turtleResponse));

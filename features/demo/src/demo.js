@@ -31,7 +31,18 @@ window.addEventListener("DOMContentLoaded", () => {
     document
         .querySelector(".endpoint-post")
         .addEventListener("click", async () => {
-            console.log(await window.pod.turtle.get({}));
+            const featureIdToken = "demo";
+            const endpointId = "demoTestEndpoint";
+            const requestBody = {
+                payload: "ABDC",
+            };
+            console.log(
+                await window.pod.turtle.send({
+                    featureIdToken,
+                    endpointId,
+                    body: requestBody,
+                })
+            );
         });
 
     (function () {
