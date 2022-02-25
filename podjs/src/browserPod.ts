@@ -391,7 +391,7 @@ function getEndpoint(
 
 function getMetadata(): Metadata {
     const dateTime = new Date();
-    return { date: dateTime.getUTCSeconds().toString() };
+    return { date: dateTime.toString() };
 }
 
 function turtleMiddleware(turtleRequest: TurtleRequest) {
