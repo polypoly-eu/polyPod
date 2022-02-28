@@ -255,21 +255,21 @@ open class PodApi(
     private suspend fun handleNetworkHttpPost(args: List<Value>): Value {
         logger.debug("dispatch() -> network.httpPost")
         val url = args[0].asStringValue().toString()
-        val contentType = args[1].asStringValue().toString()
-        val body = args[2].asStringValue().toString()
+        val body = args[1].asStringValue().toString()
+        val contentType = args[2].asStringValue().toString()
         val authorization: String? = args[3]?.asStringValue().toString()
-        val error = network.httpPost(url, contentType, body, authorization)
+        val error = network.httpPost(url, body, contentType, authorization)
         return if (error == null) ValueFactory.newNil()
         else ValueFactory.newString(error)
     }
-    
+
     private suspend fun handleEndpointSend(args: List<Value>): Value {
         logger.debug("dispatch() -> endpoint.send");
         val endpointId = args[0].asStringValue().toString()
         val featureIdToken = args[1].asStringValue().toString()
-        val contentType = args[2].asStringValue().toString()
-        val body = args[3].asStringValue().toString()
-        val authorization: String? = args[4]?.asStringValue().toString()
+        val body = args[2].asStringValue().toString()
+        val contentType: String? = args[3]?.asStringValue().toString()
+        val authorization = args[4].asStringValue().toString()
         val error = endpoint.send(endpointId, featureIdToken, body, contentType, authorization)
         return if (error == null) ValueFactory.newNil()
         else ValueFactory.newString(error)
