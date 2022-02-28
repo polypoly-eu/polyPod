@@ -14,9 +14,6 @@
       "text"
     ]
   },
-  "devDependencies": {
-    "jsdoc": "^3.6.10"
-  },
   "private": true,
   "type": "module"
 }
