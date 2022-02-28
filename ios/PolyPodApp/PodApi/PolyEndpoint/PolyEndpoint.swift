@@ -22,5 +22,8 @@ class Endpoint: EndpointProtocol {
     }
     
     func get(endpointRequest: EndpointRequest) {
+        let url: String = "https://e27a0801-f759-48dc-97fc-d78d1fb65a90.mock.pstmn.io/127.0.0.2:5000"
+        let response = network.httpGet(url: url, body: endpointRequest.payload, contentType: endpointRequest.contentType, authorization: endpointRequest.authorization)
+        print(response)
     }
 }
