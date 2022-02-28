@@ -12,7 +12,6 @@ import {
     Info,
     Entry,
     PolyEndpoint,
-    PolyEndpointRequest,
     PolyEndpointResponse,
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
@@ -87,8 +86,20 @@ type NetworkEndpoint = ObjectEndpointSpec<{
 }>;
 
 type PolyEndpointEndpoint = ObjectEndpointSpec<{
-    send(polyEndpointRequest: PolyEndpointRequest): ValueEndpointSpec<PolyEndpointResponse>;
-    get(polyEndpointRequest: PolyEndpointRequest): ValueEndpointSpec<PolyEndpointResponse>;
+    send(
+        endpointId: String,
+        featureIdToken: string,
+        payload: string,
+        contentType?: string,
+        authorization?: string
+    ): ValueEndpointSpec<PolyEndpointResponse>;
+    get(
+        endpointId: String,
+        featureIdToken: string,
+        payload: string,
+        contentType?: string,
+        authorization?: string
+    ): ValueEndpointSpec<PolyEndpointResponse>;
 }>;
 
 type PodEndpoint = ObjectEndpointSpec<{
@@ -309,10 +320,26 @@ export class RemoteClientPod implements Pod {
 
     get polyEndpoint(): PolyEndpoint {
         return {
-            send: (polyEndpointRequest: PolyEndpointRequest) =>
-                this.rpcClient.polyEndpoint().send(polyEndpointRequest)(),
-            get: (polyEndpointRequest: PolyEndpointRequest) =>
-                this.rpcClient.polyEndpoint().send(polyEndpointRequest)(),
+            send: (
+                endpointId: String,
+                featureIdToken: string,
+                payload: string,
+                contentType?: string,
+                authorization?: string
+            ) =>
+                this.rpcClient
+                    .polyEndpoint()
+                    .send(endpointId, featureIdToken, payload, contentType, authorization)(),
+            get: (
+                endpointId: String,
+                featureIdToken: string,
+                payload: string,
+                contentType?: string,
+                authorization?: string
+            ) =>
+                this.rpcClient
+                    .polyEndpoint()
+                    .send(endpointId, featureIdToken, payload, contentType, authorization)(),
         };
     }
 }

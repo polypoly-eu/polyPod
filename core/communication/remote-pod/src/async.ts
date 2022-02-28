@@ -6,7 +6,6 @@ import {
     PolyNav,
     ExternalFile,
     PolyEndpoint,
-    PolyEndpointRequest,
     PolyEndpointResponse,
     EncodingOptions,
     Entry,
@@ -123,12 +122,36 @@ class AsyncNetwork implements Network {
 class AsyncPolyEndpoint implements PolyEndpoint {
     constructor(private readonly promise: Promise<PolyEndpoint>) {}
 
-    async send(polyEndpointRequest: PolyEndpointRequest): Promise<PolyEndpointResponse> {
-        return (await this.promise).send(polyEndpointRequest);
+    async send(
+        endpointId: String,
+        featureIdToken: string,
+        payload: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<PolyEndpointResponse> {
+        return (await this.promise).send(
+            endpointId,
+            featureIdToken,
+            payload,
+            contentType,
+            authorization
+        );
     }
 
-    async get(polyEndpointRequest: PolyEndpointRequest): Promise<PolyEndpointResponse> {
-        return (await this.promise).get(polyEndpointRequest);
+    async get(
+        endpointId: String,
+        featureIdToken: string,
+        payload: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<PolyEndpointResponse> {
+        return (await this.promise).get(
+            endpointId,
+            featureIdToken,
+            payload,
+            contentType,
+            authorization
+        );
     }
 }
 

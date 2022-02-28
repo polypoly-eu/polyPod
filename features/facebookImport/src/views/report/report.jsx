@@ -15,8 +15,9 @@ const ReportView = () => {
     const handleSendReport = async () => {
         setLoading(true);
 
-        const error = await window.pod.network.httpPost(
+        const error = await window.pod.polyEndpoint.send(
             process.env.POLYPOD_POLYPEDIA_REPORT_URL,
+            "fbImport",
             JSON.stringify(unrecognizedData.jsonReport),
             "application/json",
             process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION

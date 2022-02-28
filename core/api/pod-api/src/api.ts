@@ -208,38 +208,34 @@ export interface PolyEndpoint {
      * @param body the necessary content of the call
      * @returns a promise with the response
      */
-    send(polyEndpointRequest: PolyEndpointRequest): Promise<PolyEndpointResponse>;
+    send(
+        endpointId: String,
+        featureIdToken: string,
+        payload: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<PolyEndpointResponse>;
 
     /**
      * Perform a http get request via the endpoint in the pod
      * @param body the necessary content of the call
      * @returns a promise with the response
      */
-    get(polyEndpointRequest: PolyEndpointRequest): Promise<PolyEndpointResponse>;
-}
-
-export interface PolyEndpointRequest {
-    endpointId: string;
-    featureIdToken: string;
-    body: PolyEndpointRequestBody;
-}
-
-export interface PolyEndpointRequestBody {
-    headers: string;
-    payload: string;
-    contentType?: string;
-    authorization?: string;
+    get(
+        endpointId: String,
+        featureIdToken: string,
+        payload: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<PolyEndpointResponse>;
 }
 
 export interface PolyEndpointResponse {
     payload?: string;
     response: string | undefined;
-    metadata: Metadata;
+    dateTime: string;
 }
 
-export interface Metadata {
-    date: string;
-}
 /**
  * This interface represents the API that a Pod offers to a Feature. It comprises multiple sub-components that are
  * concerned with different aspects. Those sub-components are grouped according to data flow (see member documentation
