@@ -4,7 +4,7 @@ import assert from "assert";
 import * as company from "../src/model/company.js";
 import testGlobalJSON from "./testGlobal.js";
 import oneCompany, { companiesJSON } from "./testCompanyData.js";
-import { jurisdictions } from "../src/model/jurisdictions.js";
+import jurisdictions from "../src/model/jurisdictions.js";
 
 const i18n = {
     language: "en",

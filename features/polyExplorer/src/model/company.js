@@ -1,5 +1,5 @@
 import { Entity } from "./entity.js";
-import { jurisdictions } from "./jurisdictions.js";
+import jurisdictions from "./jurisdictions.js";
 
 const dataProperties = ["industryCategory", "productsOwned"];
 

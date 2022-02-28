@@ -1,4 +1,4 @@
-export const jurisdictions = {
+export default {
     OTHER: "Other",
     SONSTIGE: "Sonstige",
     FIVE_EYES: "Five-Eyes",
