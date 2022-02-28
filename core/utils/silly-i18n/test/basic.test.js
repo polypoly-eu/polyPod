@@ -10,7 +10,7 @@ const LANGUAGE = "foo";
 const FALLBACK_LANGUAGE = "en";
 let i18n;
 
-const translationData = { quux: { bar: "baz" }, options: { opt: "{{opt}}" } };
+const translationData = { quux: { bar: "baz" }, template: { opt: "{{opt}}" } };
 
 beforeAll(() => {
     i18n = new I18n(LANGUAGE, {
@@ -65,7 +65,7 @@ describe("Test basic configuration", () => {
     });
 
     it("Uses options correctly", () => {
-        expect(i18n.t("options:opt", { opt: "baz" })).toBe("baz");
+        expect(i18n.t("template:opt", { opt: "baz" })).toBe("baz");
     });
 });
 
@@ -79,7 +79,7 @@ describe("Test locale numeric options correctly", () => {
         };
         for (const [locale, l8nString] of Object.entries(localePairs)) {
             i18n._locale = locale;
-            expect(i18n.t("options:opt", { opt: bigNumber })).toBe(l8nString);
+            expect(i18n.t("template:opt", { opt: bigNumber })).toBe(l8nString);
         }
     });
 });
