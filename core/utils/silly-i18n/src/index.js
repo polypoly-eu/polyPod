@@ -4,13 +4,7 @@ import {
     NonExistingSectionError,
 } from "./errors.js";
 
-/**
- * Determines the environment language
- *
- * @returns a two-character standard name for the language, such as 'en'
- */
-export const determineLanguage = () =>
-    Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0];
+import { determineLocale, determineLanguage } from "./locale.js";
 
 /**
  * Simple class for performing string translations, with simple templating capabilities
@@ -19,7 +13,8 @@ export const determineLanguage = () =>
  */
 export class I18n {
     /**
-     * Class constructor
+     * Class constructor. The locale used will be auto-detected (by default)
+     * and stored as a private, read-only attribute.
      *
      * @param {string} language - two-letter language code, which should be a key in the translation hash.
      *     If this key does not exist, `fallbackLanguage` will be used.
@@ -30,12 +25,15 @@ export class I18n {
      *     It's an optional parameter, that defaults to the first key
      *     in the `translations` hash, so you might want to use arrange it
      *     bearing this in mind.
+     * @param {string} [ locale = determineLocale() ] - locale string, in the usual format xx[_YY],
+     *     by default locale determined using that function
      * @throws LanguageError - if the `fallbackLanguage` key is not included in the translations hash
      */
     constructor(
         language,
         translations,
-        fallbackLanguage = Object.keys(translations)[0]
+        fallbackLanguage = Object.keys(translations)[0],
+        locale = determineLocale()
     ) {
         if (!(fallbackLanguage in translations)) {
             throw new LanguageError(
@@ -43,7 +41,7 @@ export class I18n {
                     " is not a key in the translations hash provided"
             );
         }
-
+        this._locale = locale;
         this.language = language in translations ? language : fallbackLanguage;
         this._translations = translations[this.language];
     }
@@ -57,10 +55,19 @@ export class I18n {
     }
 
     /**
+     * Returns the locale string.
+     *
+     * @returns locale string in the usual `xx-XX` format.
+     */
+    get locale() {
+        return this._locale;
+    }
+
+    /**
      * Obtains the (translated) string for a `namespace:key` defined in the translations hash.
      *
      * @param {string} key - the translation key in the `namespace:key` format
-     * @param {Object} options - simple templating capabilities; this will be a key-value hash, so that `{{{key}}}` will be substituted by the key value in this hash
+     * @param {Object} options - simple templating capabilities; this will be a key-value hash, so that `{{{key}}}` will be substituted by the key value in this hash. If the value is a number, it will be converted to a string in a format of the current locale
      * @throws TranslationKeyError - if the translation key does not have the correct format, or is missing the key part, or the key does not exist.
      * @throws NonExistingSectionError - if the section/namespace does not exist
      * @returns The translated string.
@@ -86,8 +93,15 @@ export class I18n {
             );
         }
 
-        for (let [name, value] of Object.entries(options))
-            translation = translation.replace(`{{${name}}}`, value);
+        for (let [key, value] of Object.entries(options)) {
+            let convertedValue = value;
+            if (!isNaN(parseFloat(value))) {
+                convertedValue = Intl.NumberFormat(this._locale).format(
+                    parseFloat(value)
+                );
+            }
+            translation = translation.replace(`{{${key}}}`, convertedValue);
+        }
         return translation;
     }
 }
@@ -130,3 +144,5 @@ export class I18nSection extends I18n {
         return super.t(`${this._section}:${key}`, options);
     }
 }
+
+export { determineLocale, determineLanguage };

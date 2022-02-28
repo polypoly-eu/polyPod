@@ -1,4 +1,4 @@
-import { determineLanguage, I18n } from "../src/index.js";
+import { I18n } from "../src/index.js";
 
 import {
     LanguageError,
@@ -10,7 +10,7 @@ const LANGUAGE = "foo";
 const FALLBACK_LANGUAGE = "en";
 let i18n;
 
-const translationData = { quux: { bar: "baz" }, options: { opt: "{{opt}}" } };
+const translationData = { quux: { bar: "baz" }, template: { opt: "{{opt}}" } };
 
 beforeAll(() => {
     i18n = new I18n(LANGUAGE, {
@@ -18,18 +18,13 @@ beforeAll(() => {
     });
 });
 
-describe("Test language determination", () => {
-    it("finds a reasonable two-letter language", () => {
-        expect(determineLanguage()).toEqual(expect.stringMatching(/\w{2,}/));
-    });
-});
-
 describe("Test basic configuration", () => {
     it("is created correctly", () => {
         expect(i18n).toBeInstanceOf(I18n);
     });
-    it("Includes all sections", () => {
+    it("Includes all attributes", () => {
         expect(i18n.sections).toStrictEqual(Object.keys(translationData));
+        expect(i18n.locale).toEqual(expect.stringMatching(/^\w+-\w+/));
     });
     it("Translates correctly", () => {
         expect(i18n.t("quux:bar")).toBe("baz");
@@ -70,7 +65,22 @@ describe("Test basic configuration", () => {
     });
 
     it("Uses options correctly", () => {
-        expect(i18n.t("options:opt", { opt: "baz" })).toBe("baz");
+        expect(i18n.t("template:opt", { opt: "baz" })).toBe("baz");
+    });
+});
+
+describe("Test locale numeric options correctly", () => {
+    it("Converts big numbers to locale format", () => {
+        const bigNumber = "1000000.33";
+        const localePairs = {
+            "de-DE": "1.000.000,33",
+            "es-ES": "1.000.000,33",
+            "en-GB": "1,000,000.33",
+        };
+        for (const [locale, l8nString] of Object.entries(localePairs)) {
+            i18n._locale = locale;
+            expect(i18n.t("template:opt", { opt: bigNumber })).toBe(l8nString);
+        }
     });
 });
 
