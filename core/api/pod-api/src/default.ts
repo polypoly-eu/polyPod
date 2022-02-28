@@ -16,9 +16,9 @@ import {
     PolyNav,
     Info,
     Network,
-    PolyEndpoint,
-    PolyEndpointRequest,
-    PolyEndpointResponse,
+    Endpoint,
+    EndpointRequest,
+    EndpointResponse,
 } from "./api";
 import type { Fetch, Response, RequestInit } from "@polypoly-eu/fetch-spec";
 import { EncodingOptions, FS, Stats } from "./fs";
@@ -188,12 +188,12 @@ export class DefaultPod implements Pod {
         };
     }
 
-    get polyEndpoint(): PolyEndpoint {
+    get endpoint(): Endpoint {
         return {
-            send(polyEndpointRequest: PolyEndpointRequest): Promise<PolyEndpointResponse> {
+            send(endpointRequest: EndpointRequest): Promise<EndpointResponse> {
                 throw new Error("Not implemented");
             },
-            get(polyEndpointRequest: PolyEndpointRequest): Promise<PolyEndpointResponse> {
+            get(endpointRequest: EndpointRequest): Promise<EndpointResponse> {
                 throw new Error("Not implemented");
             },
         };

@@ -202,36 +202,36 @@ export interface PolyLifecycle {
 /**
  * `Endpoint` is the API features communicate with in order to perform fetch requests
  */
-export interface PolyEndpoint {
+export interface Endpoint {
     /**
      * Perform a http post request via the endpoint in the pod
      * @param body the necessary content of the call
      * @returns a promise with the response
      */
-    send(polyEndpointRequest: PolyEndpointRequest): Promise<PolyEndpointResponse>;
+    send(endpointRequest: EndpointRequest): Promise<EndpointResponse>;
 
     /**
      * Perform a http get request via the endpoint in the pod
      * @param body the necessary content of the call
      * @returns a promise with the response
      */
-    get(polyEndpointRequest: PolyEndpointRequest): Promise<PolyEndpointResponse>;
+    get(endpointRequest: EndpointRequest): Promise<EndpointResponse>;
 }
 
-export interface PolyEndpointRequest {
+export interface EndpointRequest {
     endpointId: string;
     featureIdToken: string;
-    body: PolyEndpointRequestBody;
+    body: EndpointRequestBody;
 }
 
-export interface PolyEndpointRequestBody {
+export interface EndpointRequestBody {
     headers: string;
     payload: string;
     contentType?: string;
     authorization?: string;
 }
 
-export interface PolyEndpointResponse {
+export interface EndpointResponse {
     payload?: string;
     response: string | undefined;
     metadata: Metadata;
@@ -318,7 +318,7 @@ export interface Pod {
      * `endpointRequest` is the interface to interact with other devices over the network via the pod. Refer to [[EndpointRequest]] for its
      * definition.
      */
-    readonly polyEndpoint: PolyEndpoint;
+    readonly endpoint: Endpoint;
     /**
      * `network` is the interface to interact with other devices over the network. Refer to [[Network]] for its
      * definition.

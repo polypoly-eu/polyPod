@@ -11,10 +11,9 @@ import {
     Network,
     Info,
     Entry,
-    PolyEndpoint,
-    PolyEndpointRequest,
-    PolyEndpointResponse,
+    Endpoint,
 } from "@polypoly-eu/pod-api";
+import { EndpointRequest as ApiEndpointRequest } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
 import {
@@ -86,9 +85,9 @@ type NetworkEndpoint = ObjectEndpointSpec<{
     ): ValueEndpointSpec<string | undefined>;
 }>;
 
-type PolyEndpointEndpoint = ObjectEndpointSpec<{
-    send(polyEndpointRequest: PolyEndpointRequest): ValueEndpointSpec<PolyEndpointResponse>;
-    get(polyEndpointRequest: PolyEndpointRequest): ValueEndpointSpec<PolyEndpointResponse>;
+type EndpointEndpoint = ObjectEndpointSpec<{
+    send(endpointRequest: ApiEndpointRequest): ValueEndpointSpec<EndpointResponse>;
+    get(endpointRequest: ApiEndpointRequest): ValueEndpointSpec<EndpointResponse>;
 }>;
 
 type PodEndpoint = ObjectEndpointSpec<{
@@ -98,7 +97,7 @@ type PodEndpoint = ObjectEndpointSpec<{
     polyNav(): PolyNavEndpoint;
     info(): InfoEndpoint;
     network(): NetworkEndpoint;
-    polyEndpoint(): PolyEndpointEndpoint;
+    endpoint(): EndpointEndpoint;
 }>;
 
 class FetchResponse implements Response {
@@ -307,12 +306,12 @@ export class RemoteClientPod implements Pod {
         };
     }
 
-    get polyEndpoint(): PolyEndpoint {
+    get endpoint(): Endpoint {
         return {
-            send: (polyEndpointRequest: PolyEndpointRequest) =>
-                this.rpcClient.polyEndpoint().send(polyEndpointRequest)(),
-            get: (polyEndpointRequest: PolyEndpointRequest) =>
-                this.rpcClient.polyEndpoint().send(polyEndpointRequest)(),
+            send: (endpointRequest: ApiEndpointRequest) =>
+                this.rpcClient.endpoint().send(endpointRequest)(),
+            get: (endpointRequest: ApiEndpointRequest) =>
+                this.rpcClient.endpoint().send(endpointRequest)(),
         };
     }
 }
@@ -398,7 +397,7 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
         return this.pod.network;
     }
 
-    polyEndpoint(): ServerOf<PolyEndpointEndpoint> {
-        return this.pod.polyEndpoint;
+    endpoint(): ServerOf<EndpointEndpoint> {
+        return this.pod.endpoint;
     }
 }

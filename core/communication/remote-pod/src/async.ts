@@ -5,9 +5,9 @@ import {
     PolyIn,
     PolyNav,
     ExternalFile,
-    PolyEndpoint,
-    PolyEndpointRequest,
-    PolyEndpointResponse,
+    Endpoint,
+    EndpointRequest,
+    EndpointResponse,
     EncodingOptions,
     Entry,
     Matcher,
@@ -120,15 +120,15 @@ class AsyncNetwork implements Network {
     }
 }
 
-class AsyncPolyEndpoint implements PolyEndpoint {
-    constructor(private readonly promise: Promise<PolyEndpoint>) {}
+class AsyncEndpoint implements Endpoint {
+    constructor(private readonly promise: Promise<Endpoint>) {}
 
-    async send(polyEndpointRequest: PolyEndpointRequest): Promise<PolyEndpointResponse> {
-        return (await this.promise).send(polyEndpointRequest);
+    async send(endpointRequest: EndpointRequest): Promise<EndpointResponse> {
+        return (await this.promise).send(endpointRequest);
     }
 
-    async get(polyEndpointRequest: PolyEndpointRequest): Promise<PolyEndpointResponse> {
-        return (await this.promise).get(polyEndpointRequest);
+    async get(endpointRequest: EndpointRequest): Promise<EndpointResponse> {
+        return (await this.promise).get(endpointRequest);
     }
 }
 
@@ -157,7 +157,7 @@ export class AsyncPod implements Pod {
     readonly info: Info;
     readonly network: Network;
     readonly polyLifecycle: PolyLifecycle;
-    readonly polyEndpoint: PolyEndpoint;
+    readonly endpoint: Endpoint;
 
     constructor(private readonly promise: Promise<Pod>, public readonly dataFactory: DataFactory) {
         this.polyOut = new AsyncPolyOut(promise.then((pod) => pod.polyOut));
@@ -166,6 +166,6 @@ export class AsyncPod implements Pod {
         this.info = new AsyncInfo(promise.then((pod) => pod.info));
         this.network = new AsyncNetwork(promise.then((pod) => pod.network));
         this.polyLifecycle = new AsyncPolyLifecycle(promise.then((pod) => pod.polyLifecycle));
-        this.polyEndpoint = new AsyncPolyEndpoint(promise.then((pod) => pod.polyEndpoint));
+        this.endpoint = new AsyncEndpoint(promise.then((pod) => pod.endpoint));
     }
 }

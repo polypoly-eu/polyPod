@@ -1,9 +1,9 @@
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
     ExternalFile,
-    PolyEndpoint,
-    PolyEndpointRequest,
-    PolyEndpointResponse,
+    Endpoint,
+    EndpointRequest,
+    EndpointResponse,
     Network,
     Info,
     Matcher,
@@ -393,52 +393,49 @@ function getMetadata(): Metadata {
     return { date: dateTime.toString() };
 }
 
-function polyEndopointRequestMiddleware(polyEndopointRequest: PolyEndopointRequest) {
+function endpointRequestMiddleware(endpointRequest: EndpointRequest): null {
     //user notification that get/post is happening later
-    if (polyEndopointRequest) console.log("middleware contacted");
+    if (endpointRequest) console.log("middleware contacted");
+    return null;
 }
 
-class BrowserPolyEndpoint implements PolyEndpoint {
-    polyEndpointNetwork = new BrowserNetwork();
-    async send(
-        polyEndpointRequest: PolyEndpointRequest
-    ): Promise<PolyEndpointResponse> {
-        const polyEndpointEndpoint = getEndpoint(
-            polyEndpointRequest.endpointId,
-            polyEndpointRequest.featureIdToken
+class BrowserEndpoint implements Endpoint {
+    endpointNetwork = new BrowserNetwork();
+    async send(endpointRequest: EndpointRequest): Promise<EndpointResponse> {
+        const endpointEndpoint = getEndpoint(
+            endpointRequest.endpointId,
+            endpointRequest.featureIdToken
         );
-        const requestBody = polyEndpointRequest.body;
-        if (!polyEndpointEndpoint) return {} as PolyEndpointResponse;
-        const polyEndpointResponse = {} as PolyEndpointResponse;
-        polyEndpointResponse.response = "";
-        polyEndpointResponse.payload = await this.polyEndpointNetwork.httpPost(
-            polyEndpointEndpoint,
+        const requestBody = endpointRequest.body;
+        if (!endpointEndpoint) return {} as EndpointResponse;
+        const endpointResponse = {} as EndpointResponse;
+        endpointResponse.response = "";
+        endpointResponse.payload = await this.endpointNetwork.httpPost(
+            endpointEndpoint,
             requestBody.payload,
             requestBody?.contentType,
             requestBody?.authorization
         );
-        polyEndpointResponse.metadata = getMetadata();
-        return new Promise((response) => response(polyEndpointResponse));
+        endpointResponse.metadata = getMetadata();
+        return new Promise((response) => response(endpointResponse));
     }
-    async get(
-        polyEndpointRequest: PolyEndpointRequest
-    ): Promise<PolyEndpointResponse> {
-        const polyEndpointEndpoint = getEndpoint(
-            polyEndpointRequest.endpointId,
-            polyEndpointRequest.featureIdToken
+    async get(endpointRequest: EndpointRequest): Promise<EndpointResponse> {
+        const endpointEndpoint = getEndpoint(
+            endpointRequest.endpointId,
+            endpointRequest.featureIdToken
         );
-        const requestBody = polyEndpointRequest.body;
-        if (!polyEndpointEndpoint) return {} as PolyEndpointResponse;
-        const polyEndpointResponse = {} as PolyEndpointResponse;
-        polyEndpointResponse.response = "";
-        polyEndpointResponse.payload = await this.polyEndpointNetwork.httpGet(
-            polyEndpointEndpoint,
+        const requestBody = endpointRequest.body;
+        if (!endpointEndpoint) return {} as EndpointResponse;
+        const endpointResponse = {} as EndpointResponse;
+        endpointResponse.response = "";
+        endpointResponse.payload = await this.endpointNetwork.httpGet(
+            endpointEndpoint,
             requestBody.payload,
             requestBody?.contentType,
             requestBody?.authorization
         );
-        polyEndpointResponse.metadata = getMetadata();
-        return new Promise((response) => response(polyEndpointResponse));
+        endpointResponse.metadata = getMetadata();
+        return new Promise((response) => response(endpointResponse));
     }
 }
 
@@ -542,5 +539,5 @@ export class BrowserPod implements Pod {
     public readonly polyNav = new BrowserPolyNav();
     public readonly info = new PodJsInfo();
     public readonly network = new BrowserNetwork();
-    public readonly polyEndpoint = new BrowserPolyEndpoint();
+    public readonly endpoint = new BrowserEndpoint();
 }
