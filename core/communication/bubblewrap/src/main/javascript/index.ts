@@ -229,15 +229,15 @@ export class Bubblewrap {
 
     /**
      * Constructs a new, independent [[Bubblewrap]] instance with additional registered classes.
-     * There must be a reason for this creating an additional object; unclear to me right now
+     * TODO: Find out why this creates an additional object
      *
      * This method throws an exception if there is a duplicate class identifier.
      */
     addClasses(more: Classes): Bubblewrap {
-        const theseKeys = Object.keys(this.classes);
-        const thoseKeys = Object.keys(more);
-        for (const thatKey of thoseKeys)
-            if (theseKeys.includes(thatKey)) throw new Error(`Duplicate identifier ${thatKey}`);
+        const thisKeys = Object.keys(this.classes);
+        const thatsKeys = Object.keys(more);
+        for (const aKey of thatsKeys)
+            if (thisKeys.includes(aKey)) throw new Error(`Duplicate identifier ${aKey}`);
         return new Bubblewrap({ ...this.classes, ...more }, this.strict);
     }
 
