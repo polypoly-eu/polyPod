@@ -1,8 +1,11 @@
-use flatbuffers::{FlatBufferBuilder};
+use flatbuffers::{FlatBufferBuilder, WIPOffset, Vector, ForwardsUOffset};
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
+use std::{collections::HashMap, rc::Rc, borrow::BorrowMut};
 
 use crate::{feature_manifest_response_generated::feature_manifest_response::{FeatureManifestParsingResponse, FeatureManifestParsingResult, FeatureManifestParsingResponseArgs, FeatureManifestParsingResultUnionTableOffset, finish_size_prefixed_feature_manifest_parsing_response_buffer, finish_feature_manifest_parsing_response_buffer}, failure_generated::failure::{Failure, FailureBuilder, FailureArgs, FailureCode}, feature_manifest_generated::feature_manifest::{FeatureManifestArgs, FeatureManifest, LinkArgs, Link}};
+
+// Alias for str, probably will be moved to a centralized place to be reused
+pub type JSONStr = str;
 
 fn parse_feature_manifest(
     json: &JSONStr,
@@ -10,141 +13,119 @@ fn parse_feature_manifest(
 ) -> Vec<u8> {
     let mut fbb = FlatBufferBuilder::new();
     let full_manifest = FullFeatureManifest::try_from(json);
-    match full_manifest {
-        Ok(full_manifest) => {
-            let translation = full_manifest
-                .translations
-                .as_ref()
-                .and_then(|unwrapped| unwrapped.get(language_code));
-            match translation {
-                Some(translation) => {
-                    let mut links = full_manifest.links.unwrap_or_default();
-                    if let Some(translated_links) = translation.links.clone() {
-                        links.extend(translated_links.into_iter());
-                    }
 
-                    let links: Vec<_> = links.into_iter().map(|(name, url)| {
-                        let args = LinkArgs {
-                            name: Some(fbb.create_string(name.as_str())),
-                            url: Some(fbb.create_string(url.as_str())),
-                        };
-                        Link::create(&mut fbb, &args)
-                    }).collect();
-                    let links = fbb.create_vector(&links);
+    let response_args = match full_manifest {
+        Ok(full_manifest) => build_sucess_response_args(&mut fbb, full_manifest, language_code),
+        Err(error) => build_failure_response_args(&mut fbb, error)
+    };
 
+    let response = FeatureManifestParsingResponse::create(&mut fbb, &response_args);
+    finish_feature_manifest_parsing_response_buffer(&mut fbb, response);
+    fbb.finished_data().to_owned()
+}
 
-                    let manifest_args = FeatureManifestArgs {
-                        name: translation
-                            .name
-                            .clone()
-                            .or(full_manifest.name)
-                            .and_then(|name| Some(fbb.create_string(name.as_str()))),
-                        author: translation
-                            .author
-                            .clone()
-                            .or(full_manifest.author)
-                            .and_then(|author| Some(fbb.create_string(author.as_str()))),
-                        version: translation
-                            .version
-                            .clone()
-                            .or(full_manifest.version)
-                            .and_then(|version| Some(fbb.create_string(version.as_str()))),
-                        description: translation
-                            .description
-                            .clone()
-                            .or(full_manifest.description)
-                            .and_then(|description| Some(fbb.create_string(description.as_str()))),
-                        thumbnail: translation
-                            .thumbnail
-                            .clone()
-                            .or(full_manifest.thumbnail)
-                            .and_then(|thumbnail| Some(fbb.create_string(thumbnail.as_str()))),
-                        thumbnail_color: translation
-                            .thumbnail_color
-                            .clone()
-                            .or(full_manifest.thumbnail_color)
-                            .and_then(|thumbnail_color| Some(fbb.create_string(thumbnail_color.as_str()))),
-                        primary_color: translation
-                            .primary_color
-                            .clone()
-                            .or(full_manifest.primary_color)
-                            .and_then(|primary_color| Some(fbb.create_string(primary_color.as_str()))),
-                        links: Some(links),
-                    };
-                    let feature_manifest = FeatureManifest::create(&mut fbb, &manifest_args).as_union_value();
-                    let args = FeatureManifestParsingResponseArgs {
-                        result_type: FeatureManifestParsingResult::feature_manifest_FeatureManifest,
-                        result: Some(feature_manifest),
-                    };
-                    let response = FeatureManifestParsingResponse::create(&mut fbb, &args);
-                    finish_feature_manifest_parsing_response_buffer(&mut fbb, response);
-                    fbb.finished_data().to_owned()
-                },
-                None => {
-                    let mut links = full_manifest.links.unwrap_or_default();
+fn build_sucess_response_args(
+    fbb: &mut FlatBufferBuilder,
+    full_manifest: FullFeatureManifest,
+    language_code: &str
+) -> FeatureManifestParsingResponseArgs {
+    let translation = full_manifest
+        .translations
+        .as_ref()
+        .and_then(|unwrapped| unwrapped.get(language_code));
+            
+    let mut links = full_manifest.links.unwrap_or_default();
+    if let Some(translated_links) = translation.and_then(|manifest| manifest.links.clone()) {
+        links.extend(translated_links.into_iter());
+    }
+    
+    let manifest_args = FeatureManifestArgs {
+        name: build_translated_field(
+            fbb,
+            translation.and_then(|manifest| manifest.name.clone()),
+            full_manifest.name, 
+        ),
+        author: build_translated_field(
+            fbb,
+            translation.and_then(|manifest| manifest.author.clone()),
+            full_manifest.author, 
+        ),
+        version: build_translated_field(
+            fbb,
+            translation.and_then(|manifest| manifest.version.clone()),
+            full_manifest.version, 
+        ),
+        description: build_translated_field(
+            fbb,
+            translation.and_then(|manifest| manifest.description.clone()),
+            full_manifest.description, 
+        ),
+        thumbnail: build_translated_field(
+            fbb,
+            translation.and_then(|manifest| manifest.thumbnail.clone()),
+            full_manifest.thumbnail, 
+        ),
+        thumbnail_color: build_translated_field(
+            fbb,
+            translation.and_then(|manifest| manifest.thumbnail_color.clone()),
+            full_manifest.thumbnail_color, 
+        ),
+        primary_color: build_translated_field(
+            fbb,
+            translation.and_then(|manifest| manifest.primary_color.clone()),
+            full_manifest.primary_color, 
+        ),
+        links: build_links_buffer(fbb, links),
+    };
 
-                    let links: Vec<_> = links.into_iter().map(|(name, url)| {
-                        let args = LinkArgs {
-                            name: Some(fbb.create_string(name.as_str())),
-                            url: Some(fbb.create_string(url.as_str())),
-                        };
-                        Link::create(&mut fbb, &args)
-                    }).collect();
-                    let links = if !links.is_empty() { Some(fbb.create_vector(&links)) } else { None };
+    let feature_manifest = FeatureManifest::create(fbb, &manifest_args).as_union_value();
+    FeatureManifestParsingResponseArgs {
+        result_type: FeatureManifestParsingResult::feature_manifest_FeatureManifest,
+        result: Some(feature_manifest),
+    } 
+}
 
-                    let manifest_args = FeatureManifestArgs {
-                        name: full_manifest
-                            .name
-                            .and_then(|name| Some(fbb.create_string(name.as_str()))),
-                        author: full_manifest
-                            .author
-                            .and_then(|author| Some(fbb.create_string(author.as_str()))),
-                        version: full_manifest
-                            .version
-                            .and_then(|version| Some(fbb.create_string(version.as_str()))),
-                        description: full_manifest
-                            .description
-                            .and_then(|description| Some(fbb.create_string(description.as_str()))),
-                        thumbnail: full_manifest
-                            .thumbnail
-                            .and_then(|thumbnail| Some(fbb.create_string(thumbnail.as_str()))),
-                        thumbnail_color: full_manifest
-                            .thumbnail_color
-                            .and_then(|thumbnail_color| Some(fbb.create_string(thumbnail_color.as_str()))),
-                        primary_color: full_manifest
-                            .primary_color
-                            .and_then(|primary_color| Some(fbb.create_string(primary_color.as_str()))),
-                        links: links,
-                    };
-
-                    let feature_manifest = FeatureManifest::create(&mut fbb, &manifest_args).as_union_value();
-                    let args = FeatureManifestParsingResponseArgs {
-                        result_type: FeatureManifestParsingResult::feature_manifest_FeatureManifest,
-                        result: Some(feature_manifest),
-                    };
-                    let response = FeatureManifestParsingResponse::create(&mut fbb, &args);
-                    finish_feature_manifest_parsing_response_buffer(&mut fbb, response);
-                    fbb.finished_data().to_owned()
-                }
-            }
-        }
-        Err(error) => {
-            let failure_args = FailureArgs {
-                code: FailureCode::FailedToParseFeatureManifest,
-                message: Some(fbb.create_string("some failure")),
-            };
-            let failure = Failure::create(&mut fbb, &failure_args).as_union_value();
-            let args = FeatureManifestParsingResponseArgs {
-                result_type: FeatureManifestParsingResult::failure_Failure,
-                result: Some(failure),
-            };
-        
-            let response = FeatureManifestParsingResponse::create(&mut fbb, &args);
-            finish_feature_manifest_parsing_response_buffer(&mut fbb, response);
-            fbb.finished_data().to_owned()
-        }
+fn build_failure_response_args(
+    fbb: &mut FlatBufferBuilder,
+    error: String,
+) -> FeatureManifestParsingResponseArgs {
+    let failure_args = FailureArgs {
+        code: FailureCode::FailedToParseFeatureManifest,
+        message: Some(fbb.borrow_mut().create_string(error.as_str())),
+    };
+    let failure = Failure::create(fbb, &failure_args).as_union_value();
+    FeatureManifestParsingResponseArgs {
+        result_type: FeatureManifestParsingResult::failure_Failure,
+        result: Some(failure),
     }
 }
+
+fn build_translated_field<'a>(
+    fbb: &mut FlatBufferBuilder<'a>,
+    translation: Option<String>,
+    default: Option<String>,
+) -> Option<WIPOffset<&'a str>>{
+    translation
+        .clone()
+        .or(default)
+        .and_then(|field| Some(fbb.create_string(field.as_str())))
+}
+
+fn build_links_buffer<'a>(
+    fbb: &mut FlatBufferBuilder<'a>,
+    links: HashMap<String, String>,
+) -> Option<WIPOffset<Vector<'a, ForwardsUOffset<Link<'a>>>>> {
+    let links: Vec<_> = links.into_iter().map(|(name, url)| {
+        let args = LinkArgs {
+            name: Some(fbb.create_string(name.as_str())),
+            url: Some(fbb.create_string(url.as_str())),
+        };
+        Link::create(fbb, &args)
+    }).collect();
+    if !links.is_empty() { Some(fbb.create_vector(&links)) } else { None }
+}
+
+// ---------- JSON Parsing ---------- //
 
 #[derive(Deserialize, Serialize, PartialEq, Debug)]
 #[serde(rename_all = "camelCase")]
@@ -159,86 +140,6 @@ pub struct JSONFeatureManifest {
     primary_color: Option<String>,
     links: Option<HashMap<String, String>>,
 }
-
-#[derive(PartialEq, Debug)]
-pub struct FeatureManifestParsingError {
-    pub description: String,
-}
-
-// Alias for str, probably will be moved to a centralized place to be reused
-pub type JSONStr = str;
-
-// #[allow(dead_code)] // Temporary until exposed through C API
-// impl FeatureManifest {
-//     pub fn parse(
-//         json: &JSONStr,
-//         language_code: &str,
-//     ) -> Result<FeatureManifest, FeatureManifestParsingError> {
-//         FullFeatureManifest::try_from(json)
-//             .map(|manifest| FeatureManifest::build_feature_manifest(manifest, language_code))
-//     }
-
-//     fn build_feature_manifest(
-//         full_manifest: FullFeatureManifest,
-//         language_code: &str,
-//     ) -> FeatureManifest {
-//         let translation = full_manifest
-//             .translations
-//             .as_ref()
-//             .and_then(|unwrapped| unwrapped.get(language_code));
-
-//         match translation {
-//             Some(translation) => {
-//                 let mut links = full_manifest.links.unwrap_or_default();
-//                 if let Some(translated_links) = translation.links.clone() {
-//                     links.extend(translated_links.into_iter());
-//                 }
-//                 FeatureManifest {
-//                     name: translation.name.clone().or(full_manifest.name),
-//                     author: translation.author.clone().or(full_manifest.author),
-//                     version: translation.version.clone().or(full_manifest.version),
-//                     description: translation
-//                         .description
-//                         .clone()
-//                         .or(full_manifest.description),
-//                     thumbnail: translation.thumbnail.clone().or(full_manifest.thumbnail),
-//                     thumbnail_color: translation
-//                         .thumbnail_color
-//                         .clone()
-//                         .or(full_manifest.thumbnail_color),
-//                     primary_color: translation
-//                         .primary_color
-//                         .clone()
-//                         .or(full_manifest.primary_color),
-//                     links: Some(links),
-//                 }
-//             }
-//             None => FeatureManifest {
-//                 name: full_manifest.name,
-//                 author: full_manifest.author,
-//                 version: full_manifest.version,
-//                 description: full_manifest.description,
-//                 thumbnail: full_manifest.thumbnail,
-//                 thumbnail_color: full_manifest.thumbnail_color,
-//                 primary_color: full_manifest.primary_color,
-//                 links: full_manifest.links,
-//             },
-//         }
-//     }
-
-//     fn default() -> FeatureManifest {
-//         FeatureManifest {
-//             name: None,
-//             author: None,
-//             version: None,
-//             description: None,
-//             thumbnail: None,
-//             thumbnail_color: None,
-//             primary_color: None,
-//             links: None,
-//         }
-//     }
-// }
 
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -255,12 +156,10 @@ struct FullFeatureManifest {
 }
 
 impl TryFrom<&JSONStr> for FullFeatureManifest {
-    type Error = FeatureManifestParsingError;
+    type Error = String;
 
     fn try_from(value: &JSONStr) -> Result<Self, Self::Error> {
-        serde_json::from_str(value).map_err(|err| FeatureManifestParsingError {
-            description: err.to_string(),
-        })
+        serde_json::from_str(value).map_err(|err| err.to_string())
     }
 }
 

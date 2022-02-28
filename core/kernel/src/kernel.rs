@@ -1,4 +1,4 @@
-use crate::feature_manifest_parsing::{JSONFeatureManifest, FeatureManifestParsingError, JSONStr};
+use crate::feature_manifest_parsing::{JSONFeatureManifest, JSONStr};
 use once_cell::sync::OnceCell;
 
 /// Kernel is held as a singleton.
