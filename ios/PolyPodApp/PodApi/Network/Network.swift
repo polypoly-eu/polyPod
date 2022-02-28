@@ -62,13 +62,11 @@ class Network: NetworkProtocol {
     
     func httpGet(
         url: String,
-        body: String,
         contentType: String?,
         authorization: String?
     ) -> String? {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "GET"
-        request.httpBody = body.data(using: .utf8)
         
         if let contentType = contentType {
             request.setValue(contentType, forHTTPHeaderField: "Content-Type")
@@ -84,6 +82,7 @@ class Network: NetworkProtocol {
         
         let semaphore = DispatchSemaphore(value: 0)
         var errorMessage: String? = nil
+        var responseData: String? = nil
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
             guard let response = response as? HTTPURLResponse,
@@ -98,15 +97,19 @@ class Network: NetworkProtocol {
                 semaphore.signal()
                 return
             }
-            
+            guard let data = data else { return }
+            responseData = String(data: data, encoding: .utf8)!
             semaphore.signal()
         }
         task.resume()
         semaphore.wait()
         
+        
+        
         if let errorMessage = errorMessage {
             Log.error("network.httpGet failed: \(errorMessage)")
         }
-        return errorMessage
+        
+        return responseData
     }
 }

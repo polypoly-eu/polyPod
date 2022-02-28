@@ -464,7 +464,7 @@ extension PostOffice {
             handleEndpointSend(args: args, completionHandler: completionHandler)
         case "get":
             handleEndpointGet(args: args, completionHandler: completionHandler)
-        default: Log.error("Endpoint method unknown: \(method)")
+        default: Log.error("PolyEndpoint method unknown: \(method)")
         }
     }
         
@@ -474,18 +474,15 @@ extension PostOffice {
         let payload = args[2] as! String
         let contentType = args[3] as? String
         let authorization = args[4] as? String
-        let endpointRequest = EndpointRequest(endpointId: endpointId, featureIdToken: featureIdToken, payload: payload, contentType: contentType, authorization: authorization)
-        PodApi.shared.endpoint.send(endpointRequest: endpointRequest)
+        PodApi.shared.endpoint.send(endpointId: endpointId, featureIdToken: featureIdToken, payload: payload, contentType: contentType, authorization: authorization)
     }
         
     private func handleEndpointGet(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let endpointId = args[0] as! String
         let featureIdToken = args[1] as! String
-        let payload = args[2] as! String
-        let contentType = args[3] as? String
-        let authorization = args[2] as? String
-        let endpointRequest = EndpointRequest(endpointId: endpointId, featureIdToken: featureIdToken, payload: payload, contentType: contentType, authorization: authorization)
-        PodApi.shared.endpoint.send(endpointRequest: endpointRequest)
+        let contentType = args[2] as? String
+        let authorization = args[3] as? String
+        PodApi.shared.endpoint.get(endpointId: endpointId, featureIdToken: featureIdToken, contentType: contentType, authorization: authorization)
     }
     
 }

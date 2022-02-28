@@ -218,13 +218,11 @@ export interface Endpoint {
 
     /**
      * Perform a http get request via the endpoint in the pod
-     * @param body the necessary content of the call
      * @returns a promise with the response
      */
     get(
         endpointId: string,
         featureIdToken: string,
-        payload: string,
         contentType?: string,
         authorization?: string
     ): Promise<EndpointResponse>;

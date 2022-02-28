@@ -95,7 +95,6 @@ type EndpointEndpoint = ObjectEndpointSpec<{
     get(
         endpointId: string,
         featureIdToken: string,
-        payload: string,
         contentType?: string,
         authorization?: string
     ): ValueEndpointSpec<EndpointResponse>;
@@ -332,13 +331,12 @@ export class RemoteClientPod implements Pod {
             get: (
                 endpointId: string,
                 featureIdToken: string,
-                payload: string,
                 contentType?: string,
                 authorization?: string
             ) =>
                 this.rpcClient
                     .endpoint()
-                    .send(endpointId, featureIdToken, payload, contentType, authorization)(),
+                    .get(endpointId, featureIdToken, contentType, authorization)(),
         };
     }
 }

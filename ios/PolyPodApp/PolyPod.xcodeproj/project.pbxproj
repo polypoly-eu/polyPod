@@ -88,9 +88,8 @@
 		1AF468B2242A34D700E51B6D /* PolyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468B1242A34D700E51B6D /* PolyOut.swift */; };
 		1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DB24349E6B00E51B6D /* PodApi.swift */; };
 		1AF468DE24361D9D00E51B6D /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */; };
-		3B159E2227C8F9440043AD65 /* PolyEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B159E2127C8F9440043AD65 /* PolyEndpoint.swift */; };
-		3B159E2327C8F9440043AD65 /* PolyEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B159E2127C8F9440043AD65 /* PolyEndpoint.swift */; };
 		3B3CEDFA274FC37C000C3E6E /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989B350269CA6B7000EE977 /* FilePicker.swift */; };
+		3B5487E227CD0FF700480CB5 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5487E127CD0FF700480CB5 /* Endpoint.swift */; };
 		5B8653022643FC310014208C /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
 		901C0588278EE58700BC8364 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0587278EE58700BC8364 /* CoreDataStack.swift */; };
 		901C058A278F2AF800BC8364 /* CoreData+PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */; };
@@ -227,7 +226,7 @@
 		1AF468B1242A34D700E51B6D /* PolyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOut.swift; sourceTree = "<group>"; };
 		1AF468DB24349E6B00E51B6D /* PodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodApi.swift; sourceTree = "<group>"; };
 		1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
-		3B159E2127C8F9440043AD65 /* PolyEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyEndpoint.swift; sourceTree = "<group>"; };
+		3B5487E127CD0FF700480CB5 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		5B0F7B5F26A924DF00F4EFF4 /* PolyPod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PolyPod.entitlements; sourceTree = "<group>"; };
 		5B8653012643FC310014208C /* PolyNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyNav.swift; sourceTree = "<group>"; };
 		901C0587278EE58700BC8364 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -435,7 +434,7 @@
 		1AA6DE4624192079008DB1B2 /* PodApi */ = {
 			isa = PBXGroup;
 			children = (
-				3B159E2027C8F9250043AD65 /* PolyEndpoint */,
+				3B5487E027CD0FE600480CB5 /* Endpoint */,
 				E9040D4526F0A2FB00A88593 /* Info */,
 				E98BA80126D3CA400039E41E /* Network */,
 				5B8653002643FC1E0014208C /* PolyNav */,
@@ -495,12 +494,12 @@
 			path = FS;
 			sourceTree = "<group>";
 		};
-		3B159E2027C8F9250043AD65 /* PolyEndpoint */ = {
+		3B5487E027CD0FE600480CB5 /* Endpoint */ = {
 			isa = PBXGroup;
 			children = (
-				3B159E2127C8F9440043AD65 /* PolyEndpoint.swift */,
+				3B5487E127CD0FF700480CB5 /* Endpoint.swift */,
 			);
-			path = PolyEndpoint;
+			path = Endpoint;
 			sourceTree = "<group>";
 		};
 		5B8653002643FC1E0014208C /* PolyNav */ = {
@@ -827,7 +826,6 @@
 				1ABADBFC24EE710B00369791 /* Quad+CoreDataProperties.swift in Sources */,
 				E9545ECA27359C38001E8C7F /* UserDefaultsExtensions.swift in Sources */,
 				E9F68ED227580A0B009ED2C1 /* Log.swift in Sources */,
-				3B159E2327C8F9440043AD65 /* PolyEndpoint.swift in Sources */,
 				1ABADBF424EE70E700369791 /* LocationTracker.swift in Sources */,
 				1ABADBF724EE710B00369791 /* NamedNode+CoreDataClass.swift in Sources */,
 				1ABADC0724EE717000369791 /* Bubblewrap.swift in Sources */,
@@ -872,6 +870,7 @@
 				E97D325626307CE100A5A180 /* ColorExtensions.swift in Sources */,
 				E9E6A01C262DB9CC00B6416E /* PreviewUtils.swift in Sources */,
 				5B8653022643FC310014208C /* PolyNav.swift in Sources */,
+				3B5487E227CD0FF700480CB5 /* Endpoint.swift in Sources */,
 				E9F370E1262EEB2C006254C1 /* ParagraphView.swift in Sources */,
 				1A4C21F424A63E4C006CC1FD /* Variable+CoreDataClass.swift in Sources */,
 				1ABADC0924EFAA3600369791 /* CLLocation+Model.swift in Sources */,
@@ -911,7 +910,6 @@
 				E9040D4926F0B2B400A88593 /* RuntimeInfo.swift in Sources */,
 				1AF1179224C1A20E0063EE37 /* PolyOut+Fetch.swift in Sources */,
 				1A4C21ED24A63E4B006CC1FD /* DefaultGraph+CoreDataProperties.swift in Sources */,
-				3B159E2227C8F9440043AD65 /* PolyEndpoint.swift in Sources */,
 				1A4C21F524A63E4C006CC1FD /* Variable+CoreDataProperties.swift in Sources */,
 				E90F89EA2629822400AD7D96 /* OnboardingView.swift in Sources */,
 				1A4C21F724A63E4C006CC1FD /* Literal+CoreDataProperties.swift in Sources */,
