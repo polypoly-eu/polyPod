@@ -739,7 +739,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SOURCE_PATH=\"$PROJECT_DIR/../..\"\nTARGET_PATH=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nFEATURES_TARGET_PATH=\"$TARGET_PATH/features\"\n\ncp \"$SOURCE_PATH/core/communication/remote-pod/dist/bootstrap.js\" \"$TARGET_PATH/pod.js\"\nmkdir -p \"$FEATURES_TARGET_PATH\"\ncp \"$SOURCE_PATH\"/features/bundle/dist/* \"$FEATURES_TARGET_PATH\"\n";
+			shellScript = "SOURCE_PATH=\"$PROJECT_DIR/../../..\"\nTARGET_PATH=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nFEATURES_TARGET_PATH=\"$TARGET_PATH/features\"\n\ncp \"$SOURCE_PATH/platform/feature-api/communication/remote-pod/dist/bootstrap.js\" \"$TARGET_PATH/pod.js\"\nmkdir -p \"$FEATURES_TARGET_PATH\"\ncp \"$SOURCE_PATH\"/features/bundle/dist/* \"$FEATURES_TARGET_PATH\"\n";
 		};
 		E98F3756266F32AE00874FB9 /* Copy licenses and legal */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -757,7 +757,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "LICENSES_SOURCE=\"$PROJECT_DIR/../../3rd-party-licenses\"\nLICENSES_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/3rd-party-licenses\"\nLEGAL_SOURCE=\"$PROJECT_DIR/../../assets/legal\"\nLEGAL_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/legal\"\nrm -rf \"$LICENSES_TARGET\" \"$LEGAL_TARGET\"\ncp -r \"$LICENSES_SOURCE\" \"$LICENSES_TARGET\"\ncp -r \"$LEGAL_SOURCE\" \"$LEGAL_TARGET\"\n";
+			shellScript = "LICENSES_SOURCE=\"$PROJECT_DIR/../../../3rd-party-licenses\"\nLICENSES_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/3rd-party-licenses\"\nLEGAL_SOURCE=\"$PROJECT_DIR/../../../assets/legal\"\nLEGAL_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/legal\"\nrm -rf \"$LICENSES_TARGET\" \"$LEGAL_TARGET\"\ncp -r \"$LICENSES_SOURCE\" \"$LICENSES_TARGET\"\ncp -r \"$LEGAL_SOURCE\" \"$LEGAL_TARGET\"\n";
 		};
 		E9CF1B7D2627365600216B70 /* Update Bundle Version */ = {
 			isa = PBXShellScriptBuildPhase;

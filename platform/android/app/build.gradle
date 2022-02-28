@@ -171,25 +171,25 @@ dependencies {
 }
 
 task copyRemotePod(type: Copy) {
-    from "../../core/communication/remote-pod/dist/bootstrap.js"
+    from "../../feature-api/communication/remote-pod/dist/bootstrap.js"
     rename "bootstrap.js", "pod.js"
     into "build/generated-assets/container/"
 }
 
 task copyBundledFeatures(type: Copy) {
-    from "../../features/bundle/dist"
+    from "../../../features/bundle/dist"
     into "build/generated-assets/features"
 }
 
 task copyThirdPartyLicenses(type: Copy) {
-    from "../../3rd-party-licenses"
+    from "../../../3rd-party-licenses"
     into "build/generated-assets/3rd-party-licenses"
 }
 
 task packageTestFeature(type: Zip) {
     archiveFileName = "test.zip"
     destinationDirectory = file("$buildDir")
-    from "$projectDir/../../features/test/dist"
+    from "$projectDir/../../../features/test/dist"
 }
 
 task copyTestFeatureOntoDevice {
