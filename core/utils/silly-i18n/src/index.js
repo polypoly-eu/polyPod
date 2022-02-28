@@ -29,7 +29,8 @@ export class I18n {
     constructor(
         language,
         translations,
-        fallbackLanguage = Object.keys(translations)[0]
+        fallbackLanguage = Object.keys(translations)[0],
+        locale = determineLocale()
     ) {
         if (!(fallbackLanguage in translations)) {
             throw new LanguageError(
@@ -37,7 +38,7 @@ export class I18n {
                     " is not a key in the translations hash provided"
             );
         }
-        this._locale = determineLocale();
+        this._locale = locale;
         this.language = language in translations ? language : fallbackLanguage;
         this._translations = translations[this.language];
     }
