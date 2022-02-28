@@ -84,7 +84,7 @@ type NetworkEndpoint = ObjectEndpointSpec<{
     ): ValueEndpointSpec<string | undefined>;
 }>;
 
-type PolyEndpointEndpoint = ObjectEndpointSpec<{
+type EndpointEndpoint = ObjectEndpointSpec<{
     send(
         endpointId: string,
         featureIdToken: string,
