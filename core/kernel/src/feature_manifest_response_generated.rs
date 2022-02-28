@@ -266,5 +266,88 @@ impl std::fmt::Debug for FeatureManifestParsingResponse<'_> {
       ds.finish()
   }
 }
+#[inline]
+#[deprecated(since="2.0.0", note="Deprecated in favor of `root_as...` methods.")]
+pub fn get_root_as_feature_manifest_parsing_response<'a>(buf: &'a [u8]) -> FeatureManifestParsingResponse<'a> {
+  unsafe { flatbuffers::root_unchecked::<FeatureManifestParsingResponse<'a>>(buf) }
+}
+
+#[inline]
+#[deprecated(since="2.0.0", note="Deprecated in favor of `root_as...` methods.")]
+pub fn get_size_prefixed_root_as_feature_manifest_parsing_response<'a>(buf: &'a [u8]) -> FeatureManifestParsingResponse<'a> {
+  unsafe { flatbuffers::size_prefixed_root_unchecked::<FeatureManifestParsingResponse<'a>>(buf) }
+}
+
+#[inline]
+/// Verifies that a buffer of bytes contains a `FeatureManifestParsingResponse`
+/// and returns it.
+/// Note that verification is still experimental and may not
+/// catch every error, or be maximally performant. For the
+/// previous, unchecked, behavior use
+/// `root_as_feature_manifest_parsing_response_unchecked`.
+pub fn root_as_feature_manifest_parsing_response(buf: &[u8]) -> Result<FeatureManifestParsingResponse, flatbuffers::InvalidFlatbuffer> {
+  flatbuffers::root::<FeatureManifestParsingResponse>(buf)
+}
+#[inline]
+/// Verifies that a buffer of bytes contains a size prefixed
+/// `FeatureManifestParsingResponse` and returns it.
+/// Note that verification is still experimental and may not
+/// catch every error, or be maximally performant. For the
+/// previous, unchecked, behavior use
+/// `size_prefixed_root_as_feature_manifest_parsing_response_unchecked`.
+pub fn size_prefixed_root_as_feature_manifest_parsing_response(buf: &[u8]) -> Result<FeatureManifestParsingResponse, flatbuffers::InvalidFlatbuffer> {
+  flatbuffers::size_prefixed_root::<FeatureManifestParsingResponse>(buf)
+}
+#[inline]
+/// Verifies, with the given options, that a buffer of bytes
+/// contains a `FeatureManifestParsingResponse` and returns it.
+/// Note that verification is still experimental and may not
+/// catch every error, or be maximally performant. For the
+/// previous, unchecked, behavior use
+/// `root_as_feature_manifest_parsing_response_unchecked`.
+pub fn root_as_feature_manifest_parsing_response_with_opts<'b, 'o>(
+  opts: &'o flatbuffers::VerifierOptions,
+  buf: &'b [u8],
+) -> Result<FeatureManifestParsingResponse<'b>, flatbuffers::InvalidFlatbuffer> {
+  flatbuffers::root_with_opts::<FeatureManifestParsingResponse<'b>>(opts, buf)
+}
+#[inline]
+/// Verifies, with the given verifier options, that a buffer of
+/// bytes contains a size prefixed `FeatureManifestParsingResponse` and returns
+/// it. Note that verification is still experimental and may not
+/// catch every error, or be maximally performant. For the
+/// previous, unchecked, behavior use
+/// `root_as_feature_manifest_parsing_response_unchecked`.
+pub fn size_prefixed_root_as_feature_manifest_parsing_response_with_opts<'b, 'o>(
+  opts: &'o flatbuffers::VerifierOptions,
+  buf: &'b [u8],
+) -> Result<FeatureManifestParsingResponse<'b>, flatbuffers::InvalidFlatbuffer> {
+  flatbuffers::size_prefixed_root_with_opts::<FeatureManifestParsingResponse<'b>>(opts, buf)
+}
+#[inline]
+/// Assumes, without verification, that a buffer of bytes contains a FeatureManifestParsingResponse and returns it.
+/// # Safety
+/// Callers must trust the given bytes do indeed contain a valid `FeatureManifestParsingResponse`.
+pub unsafe fn root_as_feature_manifest_parsing_response_unchecked(buf: &[u8]) -> FeatureManifestParsingResponse {
+  flatbuffers::root_unchecked::<FeatureManifestParsingResponse>(buf)
+}
+#[inline]
+/// Assumes, without verification, that a buffer of bytes contains a size prefixed FeatureManifestParsingResponse and returns it.
+/// # Safety
+/// Callers must trust the given bytes do indeed contain a valid size prefixed `FeatureManifestParsingResponse`.
+pub unsafe fn size_prefixed_root_as_feature_manifest_parsing_response_unchecked(buf: &[u8]) -> FeatureManifestParsingResponse {
+  flatbuffers::size_prefixed_root_unchecked::<FeatureManifestParsingResponse>(buf)
+}
+#[inline]
+pub fn finish_feature_manifest_parsing_response_buffer<'a, 'b>(
+    fbb: &'b mut flatbuffers::FlatBufferBuilder<'a>,
+    root: flatbuffers::WIPOffset<FeatureManifestParsingResponse<'a>>) {
+  fbb.finish(root, None);
+}
+
+#[inline]
+pub fn finish_size_prefixed_feature_manifest_parsing_response_buffer<'a, 'b>(fbb: &'b mut flatbuffers::FlatBufferBuilder<'a>, root: flatbuffers::WIPOffset<FeatureManifestParsingResponse<'a>>) {
+  fbb.finish_size_prefixed(root, None);
+}
 }  // pub mod feature_manifest_response
 

@@ -1,5 +1,5 @@
 use crate::{
-    feature_manifest_parsing::{FeatureManifest, FeatureManifestParsingError},
+    feature_manifest_parsing::{JSONFeatureManifest, FeatureManifestParsingError},
     kernel::Kernel,
     kernel::KERNEL,
 };
@@ -41,16 +41,16 @@ pub unsafe extern "C" fn kernel_bootstrap(language_code: *const c_char) -> *cons
 /// This API would be an example of any further API that will be added. That is - the API would respond back with a JSON
 /// containing the result of the operation with any meaningfull payload or error code/message.
 #[no_mangle]
-pub unsafe extern "C" fn parse_feature_manifest(json: *const c_char) -> *const c_char {
-    unsafe fn parse_manifest(json: *const c_char) -> Result<FeatureManifest, KernelError> {
-        let kernel = get_kernel()?;
-        let json = cstring_to_str(&json)?;
-        kernel
-            .parse_feature_manifest(json)
-            .map_err(KernelError::FailedToParseFeatureManifest)
-    }
-    to_result_str(parse_manifest(json))
-}
+// pub unsafe extern "C" fn parse_feature_manifest(json: *const c_char) -> *const c_char {
+//     unsafe fn parse_manifest(json: *const c_char) -> Result<JSONFeatureManifest, KernelError> {
+//         let kernel = get_kernel()?;
+//         let json = cstring_to_str(&json)?;
+//         kernel
+//             .parse_feature_manifest(json)
+//             .map_err(KernelError::FailedToParseFeatureManifest)
+//     }
+//     to_result_str(parse_manifest(json))
+// }
 
 fn get_kernel() -> Result<&'static Kernel, KernelError> {
     match KERNEL.get() {

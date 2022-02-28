@@ -7,3 +7,5 @@ union FeatureManifestParsingResult { feature_manifest.FeatureManifest, failure.F
 table FeatureManifestParsingResponse {
     result:FeatureManifestParsingResult;
 }
+
+root_type FeatureManifestParsingResponse;

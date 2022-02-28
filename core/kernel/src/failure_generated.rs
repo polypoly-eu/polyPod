@@ -17,6 +17,97 @@ pub mod failure {
   extern crate flatbuffers;
   use self::flatbuffers::{EndianScalar, Follow};
 
+#[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
+pub const ENUM_MIN_FAILURE_CODE: i8 = 1;
+#[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
+pub const ENUM_MAX_FAILURE_CODE: i8 = 3;
+#[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
+#[allow(non_camel_case_types)]
+pub const ENUM_VALUES_FAILURE_CODE: [FailureCode; 3] = [
+  FailureCode::FailedToBootstrapKernel,
+  FailureCode::KernelNotBootstraped,
+  FailureCode::FailedToParseFeatureManifest,
+];
+
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+#[repr(transparent)]
+pub struct FailureCode(pub i8);
+#[allow(non_upper_case_globals)]
+impl FailureCode {
+  pub const FailedToBootstrapKernel: Self = Self(1);
+  pub const KernelNotBootstraped: Self = Self(2);
+  pub const FailedToParseFeatureManifest: Self = Self(3);
+
+  pub const ENUM_MIN: i8 = 1;
+  pub const ENUM_MAX: i8 = 3;
+  pub const ENUM_VALUES: &'static [Self] = &[
+    Self::FailedToBootstrapKernel,
+    Self::KernelNotBootstraped,
+    Self::FailedToParseFeatureManifest,
+  ];
+  /// Returns the variant's name or "" if unknown.
+  pub fn variant_name(self) -> Option<&'static str> {
+    match self {
+      Self::FailedToBootstrapKernel => Some("FailedToBootstrapKernel"),
+      Self::KernelNotBootstraped => Some("KernelNotBootstraped"),
+      Self::FailedToParseFeatureManifest => Some("FailedToParseFeatureManifest"),
+      _ => None,
+    }
+  }
+}
+impl std::fmt::Debug for FailureCode {
+  fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+    if let Some(name) = self.variant_name() {
+      f.write_str(name)
+    } else {
+      f.write_fmt(format_args!("<UNKNOWN {:?}>", self.0))
+    }
+  }
+}
+impl<'a> flatbuffers::Follow<'a> for FailureCode {
+  type Inner = Self;
+  #[inline]
+  fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
+    let b = unsafe {
+      flatbuffers::read_scalar_at::<i8>(buf, loc)
+    };
+    Self(b)
+  }
+}
+
+impl flatbuffers::Push for FailureCode {
+    type Output = FailureCode;
+    #[inline]
+    fn push(&self, dst: &mut [u8], _rest: &[u8]) {
+        unsafe { flatbuffers::emplace_scalar::<i8>(dst, self.0); }
+    }
+}
+
+impl flatbuffers::EndianScalar for FailureCode {
+  #[inline]
+  fn to_little_endian(self) -> Self {
+    let b = i8::to_le(self.0);
+    Self(b)
+  }
+  #[inline]
+  #[allow(clippy::wrong_self_convention)]
+  fn from_little_endian(self) -> Self {
+    let b = i8::from_le(self.0);
+    Self(b)
+  }
+}
+
+impl<'a> flatbuffers::Verifiable for FailureCode {
+  #[inline]
+  fn run_verifier(
+    v: &mut flatbuffers::Verifier, pos: usize
+  ) -> Result<(), flatbuffers::InvalidFlatbuffer> {
+    use self::flatbuffers::Verifiable;
+    i8::run_verifier(v, pos)
+  }
+}
+
+impl flatbuffers::SimpleToVerifyInSlice for FailureCode {}
 pub enum FailureOffset {}
 #[derive(Copy, Clone, PartialEq)]
 
@@ -53,8 +144,8 @@ impl<'a> Failure<'a> {
 
 
   #[inline]
-  pub fn code(&self) -> i32 {
-    self._tab.get::<i32>(Failure::VT_CODE, Some(0)).unwrap()
+  pub fn code(&self) -> FailureCode {
+    self._tab.get::<FailureCode>(Failure::VT_CODE, Some(FailureCode::FailedToBootstrapKernel)).unwrap()
   }
   #[inline]
   pub fn message(&self) -> Option<&'a str> {
@@ -69,21 +160,21 @@ impl flatbuffers::Verifiable for Failure<'_> {
   ) -> Result<(), flatbuffers::InvalidFlatbuffer> {
     use self::flatbuffers::Verifiable;
     v.visit_table(pos)?
-     .visit_field::<i32>("code", Self::VT_CODE, false)?
+     .visit_field::<FailureCode>("code", Self::VT_CODE, false)?
      .visit_field::<flatbuffers::ForwardsUOffset<&str>>("message", Self::VT_MESSAGE, false)?
      .finish();
     Ok(())
   }
 }
 pub struct FailureArgs<'a> {
-    pub code: i32,
+    pub code: FailureCode,
     pub message: Option<flatbuffers::WIPOffset<&'a str>>,
 }
 impl<'a> Default for FailureArgs<'a> {
   #[inline]
   fn default() -> Self {
     FailureArgs {
-      code: 0,
+      code: FailureCode::FailedToBootstrapKernel,
       message: None,
     }
   }
@@ -95,8 +186,8 @@ pub struct FailureBuilder<'a: 'b, 'b> {
 }
 impl<'a: 'b, 'b> FailureBuilder<'a, 'b> {
   #[inline]
-  pub fn add_code(&mut self, code: i32) {
-    self.fbb_.push_slot::<i32>(Failure::VT_CODE, code, 0);
+  pub fn add_code(&mut self, code: FailureCode) {
+    self.fbb_.push_slot::<FailureCode>(Failure::VT_CODE, code, FailureCode::FailedToBootstrapKernel);
   }
   #[inline]
   pub fn add_message(&mut self, message: flatbuffers::WIPOffset<&'b  str>) {

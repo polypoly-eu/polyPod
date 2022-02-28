@@ -1,4 +1,4 @@
-use crate::feature_manifest_parsing::{FeatureManifest, FeatureManifestParsingError, JSONStr};
+use crate::feature_manifest_parsing::{JSONFeatureManifest, FeatureManifestParsingError, JSONStr};
 use once_cell::sync::OnceCell;
 
 /// Kernel is held as a singleton.
@@ -23,10 +23,10 @@ impl Kernel {
             .map_err(|_| "Failed to initialize Kernel".to_string())
     }
 
-    pub fn parse_feature_manifest(
-        &self,
-        json: &JSONStr,
-    ) -> Result<FeatureManifest, FeatureManifestParsingError> {
-        FeatureManifest::parse(json, &self.language_code)
-    }
+    // pub fn parse_feature_manifest(
+    //     &self,
+    //     json: &JSONStr,
+    // ) -> Result<JSONFeatureManifest, FeatureManifestParsingError> {
+    //     JSONFeatureManifest::parse(json, &self.language_code)
+    // }
 }

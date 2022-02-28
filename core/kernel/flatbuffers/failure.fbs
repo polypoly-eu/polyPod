@@ -1,6 +1,13 @@
 namespace failure;
 
+enum FailureCode: byte {
+    FailedToBootstrapKernel = 1,
+    KernelNotBootstraped,
+    FailedToParseFeatureManifest,
+}
+
 table Failure {
-    code:int;
+    // Flatbuffers require to have a default value for enums
+    code:FailureCode = FailedToBootstrapKernel;
     message:string;
 }
