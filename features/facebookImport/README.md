@@ -19,3 +19,9 @@ To test the reporting backend, you will need to start two services:
 
 Then navigate to the URL shown by the latter command. The console output of the
 first command will show any reports that are being submitted.
+
+## Generating documentation
+
+> You need to make the repo-wide install from the root directory: `npm ci`
+
+Run `npm run doc` to generate documentation in the `docs` directory.
