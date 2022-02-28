@@ -13,7 +13,8 @@ import { determineLocale, determineLanguage } from "./locale.js";
  */
 export class I18n {
     /**
-     * Class constructor. The locale used will be auto-detected, and stored as a private-ish attribute.
+     * Class constructor. The locale used will be auto-detected (by default)
+     * and stored as a private, read-only attribute.
      *
      * @param {string} language - two-letter language code, which should be a key in the translation hash.
      *     If this key does not exist, `fallbackLanguage` will be used.
@@ -54,11 +55,10 @@ export class I18n {
     }
 
     /**
-     * Returns the automatically determined (in constructor) locale string.
+     * Returns the locale string.
      *
      * @returns locale string in the usual `xx-XX` format.
      */
-
     get locale() {
         return this._locale;
     }
