@@ -23,25 +23,25 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 8
-      - name: Build core and features
+      - name: Build API and features
         run: ./build.js
         env:
             POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
             POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
-      - name: Lint core and features
+      - name: Lint API and features
         run: ./build.js lint
-      - name: Test core and features
+      - name: Test API and features
         run: xvfb-run --auto-servernum ./build.js test
       - name: Test android
-        working-directory: android
+        working-directory: platform/android
         run: ./gradlew test
       - name: Write POLYPOD_ANDROID_UPLOAD_KEYSTORE_FILE
-        working-directory: android/app
+        working-directory: platform/android/app
         run: 'echo -n "$KEYSTORE" | base64 --decode > keystore.tmp'
         env:
           KEYSTORE: ${{ secrets.POLYPOD_ANDROID_UPLOAD_KEYSTORE_FILE }}
       - name: Build android
-        working-directory: android
+        working-directory: platform/android
         run: ./gradlew assemble -Psign=true
         env:
           POLYPOD_ANDROID_UPLOAD_KEYSTORE_FILE: keystore.tmp
@@ -49,10 +49,10 @@ jobs:
           POLYPOD_ANDROID_UPLOAD_KEY_ALIAS: ${{ secrets.POLYPOD_ANDROID_UPLOAD_KEY_ALIAS }}
       - name: Set VERSION_CODE environment variable.
         run: echo "VERSION_CODE=$( ./getPackageInfo.sh /usr/local/lib/android/sdk/build-tools/30.0.0/aapt ./app/build/outputs/apk/release/app-release.apk versionCode )" >> $GITHUB_ENV
-        working-directory: android
+        working-directory: platform/android
       - name: Set VERSION_NAME environment variable.
         run: echo "VERSION_NAME=$( ./getPackageInfo.sh /usr/local/lib/android/sdk/build-tools/30.0.0/aapt ./app/build/outputs/apk/release/app-release.apk versionName )" >> $GITHUB_ENV
-        working-directory: android
+        working-directory: platform/android
       - name: Declare some variables to help label APK Upload
         id: vars
         shell: bash
