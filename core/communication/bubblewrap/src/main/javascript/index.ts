@@ -13,11 +13,10 @@
  *
  * We leverage [MessagePack's](https://msgpack.org/) extension types for mapping JavaScript objects to byte arrays.
  * This library defines four extension types:
- * 1. [[msgPackEtypeStrict]] is reserved for implementation purposes and will never be emitted
- * 2. [[msgPackEtypeUndef]] tags a sentinel value of class [[Undefined]]; used to distinguish `undefined` from
+ * 1. [[msgPackEtypeUndef]] tags a sentinel value of class [[Undefined]]; used to distinguish `undefined` from
  *    `null` (see [[Class]] for details)
- * 3. [[msgPackEtypeClass]] tags an registered JavaScript class; there is one tag for all classes
- * 4. [[msgPackEtypeError]] tags an error of the built-in `Error` type; it is possible to specify custom logic
+ * 2. [[msgPackEtypeClass]] tags an registered JavaScript class; there is one tag for all classes
+ * 3. [[msgPackEtypeError]] tags an error of the built-in `Error` type; it is possible to specify custom logic
  *    for subclasses of `Error`
  *
  * @packageDocumentation
@@ -27,6 +26,7 @@ import { encode, decode, ExtensionCodec } from "@msgpack/msgpack";
 
 /**
  * Symbol for static class methods that provide custom deserialization logic. See [[Class]] for an example.
+ * Making them a symbol excludes from conversion, that's the whole point of it.
  */
 export const deserialize: unique symbol = Symbol();
 
@@ -43,6 +43,7 @@ export interface Serializable extends MaybeSerializable {
     [serialize]: () => any;
 }
 
+// Type guard for Serializable
 function isSerializable(t: MaybeSerializable): t is Serializable {
     return t[serialize] !== undefined;
 }
@@ -81,7 +82,7 @@ function isSerializable(t: MaybeSerializable): t is Serializable {
  * value `MyCoolClass`, which in JavaScript is a function that constructs objects of this class.
  *
  * In the simplest case, a class' author does not have to implement any additional methods. Encoding will still use
- * `Object.entries`, but additionally include the object's prototype.
+ * `Object.entries`, but will additionally include the object's prototype.
  *
  * Applied to the above example, the object will be encoded as follows:
  *
@@ -170,7 +171,6 @@ export type Class<T extends MaybeSerializable> = Function & {
  */
 export type Classes = Record<string, Class<any>>;
 
-export const msgPackEtypeStrict = 0x00;
 export const msgPackEtypeUndef = 0x01;
 export const msgPackEtypeClass = 0x02;
 export const msgPackEtypeError = 0x03;
@@ -190,24 +190,35 @@ export class Undefined {}
  * 1. the dictionary of registered classes
  * 2. a low-level MessagePack codec (implementation detail)
  *
- * The latter is initialized lazily for performance reasons. Otherwise, this class is immutable and may freely be
+ * The latter is initialized lazily for performance reasons.
+ * Otherwise, this class is immutable and may freely be
  * shared.
  *
- * New instances are created using the [[Bubblewrap.create]] static method. Additional classes can be registered with
- * [[Bubblewrap.addClasses]].
+ * New instances are created using the [[Bubblewrap.create]] static method.
+ * Additional classes can be registered with [[Bubblewrap.addClasses]].
  *
  * It is crucial that in any given application, class keys are not reused. They are required for identifying custom
  * (de)serialization logic. Keys of registered classes are stored
  */
 export class Bubblewrap {
-    codec?: ExtensionCodec;
+    codec: ExtensionCodec;
+    knownPrototypes: Array<unknown>;
 
-    private constructor(private readonly classes: Classes, private readonly strict: boolean) {}
+    private constructor(private readonly classes: Classes, private readonly strict: boolean) {
+        this.knownPrototypes = [
+            Object.prototype,
+            Error.prototype,
+            Undefined.prototype,
+            ...Object.values(this.classes).map((cls) => cls.prototype),
+        ];
+        this.codec = this.makeAndRegisterCodec();
+    }
 
     /**
      * Creates a new instance of [[Bubblewrap]] with the specified dictionary of registered classes.
      *
      * If no dictionary is specified, no classes are registered.
+     * Classes will need to be added later via [[addClasses]]
      *
      * @param strict if `true`, then `encode` will throw an exception when encountering any object with an unknown
      * prototype; this is only recommended for testing purposes
@@ -218,50 +229,20 @@ export class Bubblewrap {
 
     /**
      * Constructs a new, independent [[Bubblewrap]] instance with additional registered classes.
+     * TODO: Find out why this creates an additional object
      *
      * This method throws an exception if there is a duplicate class identifier.
      */
     addClasses(more: Classes): Bubblewrap {
         const thisKeys = Object.keys(this.classes);
-        const thatKeys = Object.keys(more);
-        for (const thisKey of thisKeys)
-            if (thatKeys.includes(thisKey)) throw new Error(`Duplicate identifier ${thisKey}`);
+        const thatsKeys = Object.keys(more);
+        for (const key of thatsKeys)
+            if (thisKeys.includes(key)) throw new Error(`Duplicate identifier ${key}`);
         return new Bubblewrap({ ...this.classes, ...more }, this.strict);
     }
 
-    private registerStrict(codec: ExtensionCodec): void {
-        if (!this.strict) return;
-
-        const knownPrototypes = [
-            Object.prototype,
-            Error.prototype,
-            Undefined.prototype,
-            ...Object.values(this.classes).map((cls) => cls.prototype),
-        ];
-
-        codec.register({
-            type: msgPackEtypeStrict,
-            encode: (value) => {
-                if (typeof value === "object" && !Array.isArray(value)) {
-                    if (knownPrototypes.includes(Object.getPrototypeOf(value)))
-                        // this value is probably fine, please go on
-                        return null;
-
-                    throw new Error("Attempted to encode an object with an unknown prototype");
-                }
-                return null;
-            },
-            decode: () => {
-                throw new Error("Attempted to decode a dummy type");
-            },
-        });
-    }
-
-    private makeCodec(): ExtensionCodec {
+    private makeAndRegisterCodec(): ExtensionCodec {
         const codec = new ExtensionCodec();
-
-        this.registerStrict(codec);
-
         codec.register({
             type: msgPackEtypeUndef,
             encode: (value) => (value instanceof Undefined ? encode(null) : null),
@@ -317,14 +298,19 @@ export class Bubblewrap {
     }
 
     encode(value: unknown): Uint8Array {
-        if (!this.codec) this.codec = this.makeCodec();
+        if (
+            this.strict &&
+            typeof value === "object" &&
+            !Array.isArray(value) &&
+            !this.knownPrototypes.includes(Object.getPrototypeOf(value))
+        ) {
+            throw new Error("Attempted to encode an object with an unknown prototype");
+        }
 
         return encode(value, { extensionCodec: this.codec });
     }
 
     decode(_buffer: ArrayLike<number> | ArrayBuffer): any {
-        if (!this.codec) this.codec = this.makeCodec();
-
         const buffer = new Uint8Array(_buffer);
         return decode(buffer, { extensionCodec: this.codec });
     }

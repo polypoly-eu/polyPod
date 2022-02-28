@@ -148,4 +148,27 @@ describe("Bubblewrap", () => {
             expect(() => bubblewrap.encode(err)).toThrowError(/unknown prototype/);
         });
     });
+
+    describe("Add class", () => {
+        it("Adds classes, throws if duplicated", () => {
+            const bubblewrap = Bubblewrap.create();
+            const someClasses: Classes = { TestA: TestA, TestB: TestB };
+            const bubblewrapPlus = bubblewrap.addClasses(someClasses);
+            expect(bubblewrapPlus).not.toBeNull();
+            const someOtherClasses: Classes = { TestB: TestB };
+            expect(() => bubblewrapPlus.addClasses(someOtherClasses)).toThrowError(/Duplicate/);
+        });
+    });
+
+    describe("Tests undefined", () => {
+        it("Tries to encode/decode undefined/null", () => {
+            const bw = Bubblewrap.create();
+            let encodedUndefined = bw.encode(undefined);
+            expect(encodedUndefined).not.toBeNull();
+            expect(bw.decode(encodedUndefined)).toBeNull();
+            encodedUndefined = bw.encode(null);
+            expect(encodedUndefined).not.toBeNull();
+            expect(bw.decode(encodedUndefined)).toBeNull();
+        });
+    });
 });
