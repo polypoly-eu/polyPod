@@ -23,7 +23,7 @@ class PodApi {
         return Network()
     }()
     
-    lazy var polyEndpoint: PolyEndpoint = {
-        return PolyEndpoint()
+    lazy var endpoint: Endpoint = {
+        return Endpoint()
     }()
 }

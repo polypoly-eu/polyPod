@@ -66,8 +66,8 @@ class PostOffice {
             handleNetwork(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
-        case "polyEndpoint":
-            handlePolyEndpoint(method: method, args: args, completionHandler: { response, error in
+        case "endpoint":
+            handleEndpoint(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
         default:
@@ -458,34 +458,34 @@ extension PostOffice {
 }
 
 extension PostOffice {
-    private func handlePolyEndpoint(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void){
+    private func handleEndpoint(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void){
         switch method {
         case "send":
-            handlePolyEndpointSend(args: args, completionHandler: completionHandler)
+            handleEndpointSend(args: args, completionHandler: completionHandler)
         case "get":
-            handlePolyEndpointGet(args: args, completionHandler: completionHandler)
-        default: Log.error("PolyEndpoint method unknown: \(method)")
+            handleEndpointGet(args: args, completionHandler: completionHandler)
+        default: Log.error("Endpoint method unknown: \(method)")
         }
     }
         
-    private func handlePolyEndpointSend(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+    private func handleEndpointSend(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let endpointId = args[0] as! String
         let featureIdToken = args[1] as! String
         let payload = args[2] as! String
         let contentType = args[3] as? String
         let authorization = args[4] as? String
-        let polyEndpointRequest = PolyEndpointRequest(endpointId: endpointId, featureIdToken: featureIdToken, payload: payload, contentType: contentType, authorization: authorization)
-        PodApi.shared.polyEndpoint.send(polyEndpointRequest: polyEndpointRequest)
+        let endpointRequest = EndpointRequest(endpointId: endpointId, featureIdToken: featureIdToken, payload: payload, contentType: contentType, authorization: authorization)
+        PodApi.shared.endpoint.send(endpointRequest: endpointRequest)
     }
         
-    private func handlePolyEndpointGet(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+    private func handleEndpointGet(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let endpointId = args[0] as! String
         let featureIdToken = args[1] as! String
         let payload = args[2] as! String
         let contentType = args[3] as? String
         let authorization = args[2] as? String
-        let polyEndpointRequest = PolyEndpointRequest(endpointId: endpointId, featureIdToken: featureIdToken, payload: payload, contentType: contentType, authorization: authorization)
-        PodApi.shared.polyEndpoint.send(polyEndpointRequest: polyEndpointRequest)
+        let endpointRequest = EndpointRequest(endpointId: endpointId, featureIdToken: featureIdToken, payload: payload, contentType: contentType, authorization: authorization)
+        PodApi.shared.endpoint.send(endpointRequest: endpointRequest)
     }
     
 }
