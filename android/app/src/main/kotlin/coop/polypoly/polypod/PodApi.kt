@@ -256,8 +256,12 @@ open class PodApi(
         logger.debug("dispatch() -> network.httpPost")
         val url = args[0].asStringValue().toString()
         val body = args[1].asStringValue().toString()
-        val contentType = args[2].asStringValue().toString()
-        val authorization: String? = args[3]?.asStringValue().toString()
+        val contentType = args[3].let {
+            if (it.isStringValue) it.asStringValue().toString() else null
+        }
+        val authorization = args[4].let {
+            if (it.isStringValue) it.asStringValue().toString() else null
+        }
         val error = network.httpPost(url, body, contentType, authorization)
         return if (error == null) ValueFactory.newNil()
         else ValueFactory.newString(error)
@@ -268,8 +272,12 @@ open class PodApi(
         val endpointId = args[0].asStringValue().toString()
         val featureIdToken = args[1].asStringValue().toString()
         val body = args[2].asStringValue().toString()
-        val contentType: String? = args[3]?.asStringValue().toString()
-        val authorization = args[4].asStringValue().toString()
+        val contentType = args[3].let {
+            if (it.isStringValue) it.asStringValue().toString() else null
+        }
+        val authorization = args[4].let {
+            if (it.isStringValue) it.asStringValue().toString() else null
+        }
         val error = endpoint.send(endpointId, featureIdToken, body, contentType, authorization)
         return if (error == null) ValueFactory.newNil()
         else ValueFactory.newString(error)
