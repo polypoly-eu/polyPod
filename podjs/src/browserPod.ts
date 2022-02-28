@@ -2,7 +2,6 @@ import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
     ExternalFile,
     Endpoint,
-    EndpointRequest,
     EndpointResponse,
     Network,
     Info,
@@ -11,7 +10,6 @@ import type {
     PolyIn,
     PolyOut,
     PolyNav,
-    Metadata,
 } from "@polypoly-eu/pod-api";
 import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
@@ -388,53 +386,57 @@ function getEndpoint(
     } else return null;
 }
 
-function getMetadata(): Metadata {
+function getMetadata(): string {
     const dateTime = new Date();
-    return { date: dateTime.toString() };
+    return dateTime.toString();
 }
 
-function endpointRequestMiddleware(endpointRequest: EndpointRequest): null {
+function endpointRequestMiddleware(endpointId: string, featureIdToken: string) {
     //user notification that get/post is happening later
-    if (endpointRequest) console.log("middleware contacted");
-    return null;
+    if (endpointId) console.log("middleware contacted");
 }
 
 class BrowserEndpoint implements Endpoint {
     endpointNetwork = new BrowserNetwork();
-    async send(endpointRequest: EndpointRequest): Promise<EndpointResponse> {
-        const endpointEndpoint = getEndpoint(
-            endpointRequest.endpointId,
-            endpointRequest.featureIdToken
-        );
-        const requestBody = endpointRequest.body;
-        if (!endpointEndpoint) return {} as EndpointResponse;
+    async send(
+        endpointId: string,
+        featureIdToken: string,
+        payload: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<EndpointResponse> {
+        // ????????
+        const endpointURL = getEndpoint(endpointId, featureIdToken);
+        if (!endpointURL) return {} as EndpointResponse;
         const endpointResponse = {} as EndpointResponse;
         endpointResponse.response = "";
         endpointResponse.payload = await this.endpointNetwork.httpPost(
-            endpointEndpoint,
-            requestBody.payload,
-            requestBody?.contentType,
-            requestBody?.authorization
+            endpointURL,
+            payload,
+            contentType,
+            authorization
         );
-        endpointResponse.metadata = getMetadata();
+        endpointResponse.dateTime = getMetadata();
         return new Promise((response) => response(endpointResponse));
     }
-    async get(endpointRequest: EndpointRequest): Promise<EndpointResponse> {
-        const endpointEndpoint = getEndpoint(
-            endpointRequest.endpointId,
-            endpointRequest.featureIdToken
-        );
-        const requestBody = endpointRequest.body;
-        if (!endpointEndpoint) return {} as EndpointResponse;
+    async get(
+        endpointId: string,
+        featureIdToken: string,
+        payload: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<EndpointResponse> {
+        const endpointURL = getEndpoint(endpointId, featureIdToken);
+        if (!endpointURL) return {} as EndpointResponse;
         const endpointResponse = {} as EndpointResponse;
         endpointResponse.response = "";
         endpointResponse.payload = await this.endpointNetwork.httpGet(
-            endpointEndpoint,
-            requestBody.payload,
-            requestBody?.contentType,
-            requestBody?.authorization
+            endpointURL,
+            payload,
+            contentType,
+            authorization
         );
-        endpointResponse.metadata = getMetadata();
+        endpointResponse.dateTime = getMetadata();
         return new Promise((response) => response(endpointResponse));
     }
 }

@@ -9,17 +9,7 @@
 
 import * as RDF from "rdf-js";
 import { dataFactory } from "@polypoly-eu/rdf";
-import {
-    Pod,
-    PolyIn,
-    PolyOut,
-    PolyNav,
-    Info,
-    Network,
-    Endpoint,
-    EndpointRequest,
-    EndpointResponse,
-} from "./api";
+import { Pod, PolyIn, PolyOut, PolyNav, Info, Network, Endpoint, EndpointResponse } from "./api";
 import type { Fetch, Response, RequestInit } from "@polypoly-eu/fetch-spec";
 import { EncodingOptions, FS, Stats } from "./fs";
 import { Entry } from ".";
@@ -190,10 +180,22 @@ export class DefaultPod implements Pod {
 
     get endpoint(): Endpoint {
         return {
-            send(endpointRequest: EndpointRequest): Promise<EndpointResponse> {
+            send(
+                endpointId: string,
+                featureIdToken: string,
+                payload: string,
+                contentType?: string,
+                authorization?: string
+            ): Promise<EndpointResponse> {
                 throw new Error("Not implemented");
             },
-            get(endpointRequest: EndpointRequest): Promise<EndpointResponse> {
+            get(
+                endpointId: string,
+                featureIdToken: string,
+                payload: string,
+                contentType?: string,
+                authorization?: string
+            ): Promise<EndpointResponse> {
                 throw new Error("Not implemented");
             },
         };

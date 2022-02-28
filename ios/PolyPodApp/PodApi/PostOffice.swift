@@ -66,6 +66,10 @@ class PostOffice {
             handleNetwork(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
+        case "endpoint":
+            handleEndpoint(method: method, args: args, completionHandler: { response, error in
+                self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
+            })
         default:
             Log.error("API unknown: \(api)")
         }
@@ -451,4 +455,37 @@ extension PostOffice {
         let error = PodApi.shared.network.httpPost(url: url, body: body, contentType: contentType, authorization: authorization)
         completionHandler(error != nil ? .string(error!) : .nil, nil)
     }
+}
+
+extension PostOffice {
+    private func handleEndpoint(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void){
+        switch method {
+        case "send":
+            handleEndpointSend(args: args, completionHandler: completionHandler)
+        case "get":
+            handleEndpointGet(args: args, completionHandler: completionHandler)
+        default: Log.error("Endpoint method unknown: \(method)")
+        }
+    }
+        
+    private func handleEndpointSend(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let endpointId = args[0] as! String
+        let featureIdToken = args[1] as! String
+        let payload = args[2] as! String
+        let contentType = args[3] as? String
+        let authorization = args[4] as? String
+        let endpointRequest = EndpointRequest(endpointId: endpointId, featureIdToken: featureIdToken, payload: payload, contentType: contentType, authorization: authorization)
+        PodApi.shared.endpoint.send(endpointRequest: endpointRequest)
+    }
+        
+    private func handleEndpointGet(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        let endpointId = args[0] as! String
+        let featureIdToken = args[1] as! String
+        let payload = args[2] as! String
+        let contentType = args[3] as? String
+        let authorization = args[2] as? String
+        let endpointRequest = EndpointRequest(endpointId: endpointId, featureIdToken: featureIdToken, payload: payload, contentType: contentType, authorization: authorization)
+        PodApi.shared.endpoint.send(endpointRequest: endpointRequest)
+    }
+    
 }

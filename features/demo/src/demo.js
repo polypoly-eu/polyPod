@@ -37,7 +37,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 payload: "ABDC",
             };
             console.log(
-                await window.pod.turtle.send({
+                await window.pod.endpoint.send({
                     featureIdToken,
                     endpointId,
                     body: requestBody,

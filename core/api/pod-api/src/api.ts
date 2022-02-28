@@ -208,38 +208,34 @@ export interface Endpoint {
      * @param body the necessary content of the call
      * @returns a promise with the response
      */
-    send(endpointRequest: EndpointRequest): Promise<EndpointResponse>;
+    send(
+        endpointId: string,
+        featureIdToken: string,
+        payload: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<EndpointResponse>;
 
     /**
      * Perform a http get request via the endpoint in the pod
      * @param body the necessary content of the call
      * @returns a promise with the response
      */
-    get(endpointRequest: EndpointRequest): Promise<EndpointResponse>;
-}
-
-export interface EndpointRequest {
-    endpointId: string;
-    featureIdToken: string;
-    body: EndpointRequestBody;
-}
-
-export interface EndpointRequestBody {
-    headers: string;
-    payload: string;
-    contentType?: string;
-    authorization?: string;
+    get(
+        endpointId: string,
+        featureIdToken: string,
+        payload: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<EndpointResponse>;
 }
 
 export interface EndpointResponse {
     payload?: string;
     response: string | undefined;
-    metadata: Metadata;
+    dateTime: string;
 }
 
-export interface Metadata {
-    date: string;
-}
 /**
  * This interface represents the API that a Pod offers to a Feature. It comprises multiple sub-components that are
  * concerned with different aspects. Those sub-components are grouped according to data flow (see member documentation
