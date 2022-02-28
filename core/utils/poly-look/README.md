@@ -8,6 +8,7 @@ polyLook is the visual component library for all features and applications inclu
 - **run test**: `npm test`
 - **run lint**: `npm run lint`
 - **build library**: `npm run build`
+- **build documentation**_ `npm run doc`
 
 ## State of polyLook
 
