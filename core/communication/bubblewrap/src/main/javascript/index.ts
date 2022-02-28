@@ -236,8 +236,8 @@ export class Bubblewrap {
     addClasses(more: Classes): Bubblewrap {
         const thisKeys = Object.keys(this.classes);
         const thatsKeys = Object.keys(more);
-        for (const aKey of thatsKeys)
-            if (thisKeys.includes(aKey)) throw new Error(`Duplicate identifier ${aKey}`);
+        for (const key of thatsKeys)
+            if (thisKeys.includes(key)) throw new Error(`Duplicate identifier ${key}`);
         return new Bubblewrap({ ...this.classes, ...more }, this.strict);
     }
 
