@@ -14,8 +14,8 @@ Run `npm ci` for installing, `npm run test` for carrying out tests.
 
 ## Usage
 
-It includes very basic language capabilities based on the browser language
-feature.
+It includes very basic translation and templating capabilities. Check out
+documentation (should be generated in the `docs` directory) for more info.
 
 ## Documentation
 
