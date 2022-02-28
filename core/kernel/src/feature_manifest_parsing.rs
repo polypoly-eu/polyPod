@@ -362,8 +362,7 @@ mod tests {
             (links.get(0).name().unwrap().to_owned(), links.get(0).url().unwrap().to_owned()),
             (links.get(1).name().unwrap().to_owned(), links.get(1).url().unwrap().to_owned()),
         ]);
-        assert_eq!(links.get(0).name(), Some("link1"));
-        assert_eq!(links.get(0).url(), Some("https://example.com/1"));
+
         assert_eq!(manifest.name(), Some("testManifest"));
         assert_eq!(manifest.author(), Some("testAuthor"));
         assert_eq!(manifest.version(), Some("0.1.2"));
@@ -374,56 +373,54 @@ mod tests {
         assert_eq!(parsedLinks, expected_links);
     }
 
-    // #[test]
-    // fn test_has_translations() {
-    //     let json = r##"
-    //     {
-    //         "name": "testManifest",
-    //         "author": "testAuthor",
-    //         "version": "0.1.2",
-    //         "description": "testDescription",
-    //         "thumbnail": "assets/thumbnail.png",
-    //         "thumbnailColor": "#FFFFFF",
-    //         "primaryColor": "#000000",
-    //         "links": {
-    //             "link1": "https://example.com/1",
-    //             "link2": "https://example.com/2"
-    //         },
-    //         "translations": {
-    //             "de": {
-    //                 "name": "testManifest_de",
-    //                 "description": "testDescription_de",
-    //                 "links": {
-    //                     "link1": "https://example.de/1"
-    //                 }
-    //             }
-    //         }
-    //     }"##;
+    #[test]
+    fn test_has_translations() {
+        let json = r##"
+        {
+            "name": "testManifest",
+            "author": "testAuthor",
+            "version": "0.1.2",
+            "description": "testDescription",
+            "thumbnail": "assets/thumbnail.png",
+            "thumbnailColor": "#FFFFFF",
+            "primaryColor": "#000000",
+            "links": {
+                "link1": "https://example.com/1",
+                "link2": "https://example.com/2"
+            },
+            "translations": {
+                "de": {
+                    "name": "testManifest_de",
+                    "description": "testDescription_de",
+                    "links": {
+                        "link1": "https://example.de/1"
+                    }
+                }
+            }
+        }"##;
 
-    //     let expected_links = HashMap::from([
-    //         ("link1".to_string(), "https://example.de/1".to_string()),
-    //         ("link2".to_string(), "https://example.com/2".to_string()),
-    //     ]);
-    //     let expected_manifest = FeatureManifest {
-    //         name: Some("testManifest_de".to_string()),
-    //         author: Some("testAuthor".to_string()),
-    //         version: Some("0.1.2".to_string()),
-    //         description: Some("testDescription_de".to_string()),
-    //         thumbnail: Some("assets/thumbnail.png".to_string()),
-    //         thumbnail_color: Some("#FFFFFF".to_string()),
-    //         primary_color: Some("#000000".to_string()),
-    //         links: Some(expected_links),
-    //     };
+        let parsed = parse_feature_manifest(json, "de");
+        let response = root_as_feature_manifest_parsing_response(&parsed[..]);
+        let manifest = response.unwrap().result_as_feature_manifest_feature_manifest().unwrap();
 
-    //     let parsed = FeatureManifest::parse(json, "de").unwrap();
+        let expected_links = HashMap::from([
+            ("link1".to_string(), "https://example.de/1".to_string()),
+            ("link2".to_string(), "https://example.com/2".to_string()),
+        ]);
 
-    //     assert_eq!(parsed.name, expected_manifest.name);
-    //     assert_eq!(parsed.author, expected_manifest.author);
-    //     assert_eq!(parsed.version, expected_manifest.version);
-    //     assert_eq!(parsed.description, expected_manifest.description);
-    //     assert_eq!(parsed.thumbnail, expected_manifest.thumbnail);
-    //     assert_eq!(parsed.thumbnail_color, expected_manifest.thumbnail_color);
-    //     assert_eq!(parsed.primary_color, expected_manifest.primary_color);
-    //     assert_eq!(parsed.links, expected_manifest.links);
-    // }
+        let links = manifest.links().unwrap();
+        let parsedLinks = HashMap::from([
+            (links.get(0).name().unwrap().to_owned(), links.get(0).url().unwrap().to_owned()),
+            (links.get(1).name().unwrap().to_owned(), links.get(1).url().unwrap().to_owned()),
+        ]);
+
+        assert_eq!(manifest.name(), Some("testManifest_de"));
+        assert_eq!(manifest.author(), Some("testAuthor"));
+        assert_eq!(manifest.version(), Some("0.1.2"));
+        assert_eq!(manifest.description(), Some("testDescription_de"));
+        assert_eq!(manifest.thumbnail(), Some("assets/thumbnail.png"));
+        assert_eq!(manifest.thumbnail_color(), Some("#FFFFFF"));
+        assert_eq!(manifest.primary_color(), Some("#000000"));
+        assert_eq!(parsedLinks, expected_links);
+    }
 }
