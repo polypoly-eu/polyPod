@@ -4,6 +4,7 @@ import coop.polypoly.polypod.bubblewrap.FetchResponseCodec
 import coop.polypoly.polypod.info.Info
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.network.Network
+import coop.polypoly.polypod.endpoint.Endpoint
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyIn.rdf.Matcher
 import coop.polypoly.polypod.polyIn.rdf.Quad
@@ -20,7 +21,8 @@ open class PodApi(
     open val polyIn: PolyIn,
     open val polyNav: PolyNav,
     open val info: Info,
-    open val network: Network
+    open val network: Network,
+    open val endpoint: Endpoint
 ) {
 
     companion object {
@@ -81,6 +83,11 @@ open class PodApi(
             "network" -> {
                 when (inner) {
                     "httpPost" -> return handleNetworkHttpPost(args)
+                }
+            }
+            "endpoint" -> {
+                when (inner) {
+                    "send" -> return handleEndpointSend(args)
                 }
             }
         }
@@ -252,6 +259,18 @@ open class PodApi(
         val body = args[2].asStringValue().toString()
         val authorization: String? = args[3]?.asStringValue().toString()
         val error = network.httpPost(url, contentType, body, authorization)
+        return if (error == null) ValueFactory.newNil()
+        else ValueFactory.newString(error)
+    }
+    
+    private suspend fun handleEndpointSend(args: List<Value>): Value {
+        logger.debug("dispatch() -> endpoint.send");
+        val endpointId = args[0].asStringValue().toString()
+        val featureIdToken = args[1].asStringValue().toString()
+        val contentType = args[2].asStringValue().toString()
+        val body = args[3].asStringValue().toString()
+        val authorization: String? = args[4]?.asStringValue().toString()
+        val error = endpoint.send(endpointId, featureIdToken, body, contentType, authorization)
         return if (error == null) ValueFactory.newNil()
         else ValueFactory.newString(error)
     }
