@@ -13,10 +13,10 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
-    "@polypoly-eu/pod-api": "file:../../core/api/pod-api",
-    "@polypoly-eu/podjs": "file:../../podjs",
-    "@polypoly-eu/poly-look": "file:../../core/utils/poly-look",
-    "@polypoly-eu/rollup-plugin-copy-watch": "file:../../core/utils/rollup-plugin-copy-watch",
+    "@polypoly-eu/pod-api": "file:../../platform/feature-api/api/pod-api",
+    "@polypoly-eu/podjs": "file:../../platform/podjs",
+    "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
+    "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
     "identity-obj-proxy": "^3.0.0",
     "jszip": "^3.6.0",
     "memfs": "^3.2.2",
@@ -25,7 +25,7 @@
   },
   "private": true,
   "dependencies": {
-    "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
+    "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
     "d3": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

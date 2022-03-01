@@ -6,13 +6,13 @@
     "watch": "rollup --watch -c"
   },
   "dependencies": {
-    "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
+    "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
     "swiper": "^8.0.6"
   },
   "devDependencies": {
-    "@polypoly-eu/podjs": "file:../../podjs",
-    "@polypoly-eu/poly-look": "file:../../core/utils/poly-look",
-    "@polypoly-eu/rollup-plugin-copy-watch": "file:../../core/utils/rollup-plugin-copy-watch"
+    "@polypoly-eu/podjs": "file:../../platform/podjs",
+    "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
+    "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch"
   },
   "private": true
 }

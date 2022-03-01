@@ -6,7 +6,7 @@
     "build": "shx cp -r src dist && shx cp node_modules/@polypoly-eu/podjs/dist/pod.js dist"
   },
   "devDependencies": {
-    "@polypoly-eu/podjs": "file:../../podjs"
+    "@polypoly-eu/podjs": "file:../../platform/podjs"
   },
   "private": true
 }

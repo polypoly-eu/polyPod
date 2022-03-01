@@ -2,11 +2,11 @@ name: Lint and Test Rust code
 on:
   push:
     paths:
-      - core/kernel/**
+      - platform/core/**
   pull_request:
     types: [assigned, opened, ready_for_review]
     paths:
-      - core/kernel/**
+      - platform/core/**
 
 jobs:
   test:
@@ -20,13 +20,13 @@ jobs:
         run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
       - name: Lint -- Run cargo fmt
-        working-directory: ./core/kernel
+        working-directory: ./platform/core
         run: cargo fmt --all -- --check
 
       - name: Lint -- Run cargo clippy
-        working-directory: ./core/kernel
+        working-directory: ./platform/core
         run: cargo clippy -- -D warnings
 
       - name: Run cargo test
-        working-directory: ./core/kernel
+        working-directory: ./platform/core
         run: cargo test
