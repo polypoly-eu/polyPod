@@ -22,7 +22,6 @@ class Network(val context: Context) {
         contentType: String?,
         authorization: String?
     ): String? = withContext(Dispatchers.IO) {
-        logger.info("Hello")
         val connection = URL(url).openConnection() as HttpURLConnection
         connection.requestMethod = "POST"
         connection.doOutput = true

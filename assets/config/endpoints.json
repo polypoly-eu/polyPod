@@ -1,10 +1,10 @@
 {
     "polyPedia": {
-        "baseURL": "process.env.POLYPOD_POLYPEDIA_REPORT_URL",
+        "url": "process.env.POLYPOD_POLYPEDIA_REPORT_URL",
         "auth": "process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION"
     },
     "demoTestEndpoint": {
-        "baseURL": "http://127.0.0.1:8000",
-        "auth": "authToken"
+        "url": "https://ccb13834-b3e4-4663-9e2e-d32a32b35a0e.mock.pstmn.io/test-server",
+        "auth": ""
     }
 }
