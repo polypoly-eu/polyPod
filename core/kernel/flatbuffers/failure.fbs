@@ -4,6 +4,8 @@ enum FailureCode: byte {
     FailedToBootstrapKernel = 1,
     KernelNotBootstraped,
     FailedToParseFeatureManifest,
+    NullCStringPointer,
+    FailedToCreateCString,
 }
 
 table Failure {

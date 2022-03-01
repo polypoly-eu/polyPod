@@ -20,13 +20,15 @@ pub mod failure {
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 pub const ENUM_MIN_FAILURE_CODE: i8 = 1;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
-pub const ENUM_MAX_FAILURE_CODE: i8 = 3;
+pub const ENUM_MAX_FAILURE_CODE: i8 = 5;
 #[deprecated(since = "2.0.0", note = "Use associated constants instead. This will no longer be generated in 2021.")]
 #[allow(non_camel_case_types)]
-pub const ENUM_VALUES_FAILURE_CODE: [FailureCode; 3] = [
+pub const ENUM_VALUES_FAILURE_CODE: [FailureCode; 5] = [
   FailureCode::FailedToBootstrapKernel,
   FailureCode::KernelNotBootstraped,
   FailureCode::FailedToParseFeatureManifest,
+  FailureCode::NullCStringPointer,
+  FailureCode::FailedToCreateCString,
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -37,13 +39,17 @@ impl FailureCode {
   pub const FailedToBootstrapKernel: Self = Self(1);
   pub const KernelNotBootstraped: Self = Self(2);
   pub const FailedToParseFeatureManifest: Self = Self(3);
+  pub const NullCStringPointer: Self = Self(4);
+  pub const FailedToCreateCString: Self = Self(5);
 
   pub const ENUM_MIN: i8 = 1;
-  pub const ENUM_MAX: i8 = 3;
+  pub const ENUM_MAX: i8 = 5;
   pub const ENUM_VALUES: &'static [Self] = &[
     Self::FailedToBootstrapKernel,
     Self::KernelNotBootstraped,
     Self::FailedToParseFeatureManifest,
+    Self::NullCStringPointer,
+    Self::FailedToCreateCString,
   ];
   /// Returns the variant's name or "" if unknown.
   pub fn variant_name(self) -> Option<&'static str> {
@@ -51,6 +57,8 @@ impl FailureCode {
       Self::FailedToBootstrapKernel => Some("FailedToBootstrapKernel"),
       Self::KernelNotBootstraped => Some("KernelNotBootstraped"),
       Self::FailedToParseFeatureManifest => Some("FailedToParseFeatureManifest"),
+      Self::NullCStringPointer => Some("NullCStringPointer"),
+      Self::FailedToCreateCString => Some("FailedToCreateCString"),
       _ => None,
     }
   }
