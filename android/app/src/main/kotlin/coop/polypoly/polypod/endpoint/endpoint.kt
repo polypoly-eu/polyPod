@@ -26,4 +26,17 @@ class Endpoint(val context: Context) {
                 print(response)
                 return@withContext response
             }
+    open suspend fun get(
+            endpointId: String,
+            featureIdToken: String,
+            contentType: String?,
+            authorization: String?
+    ): String? =
+            withContext(Dispatchers.IO) {
+                val url =
+                        "https://e27a0801-f759-48dc-97fc-d78d1fb65a90.mock.pstmn.io/127.0.0.2:5000"
+                val response = endpointNetwork.httpGet(url, contentType, authorization)
+                print(response)
+                return@withContext response
+            }
 }

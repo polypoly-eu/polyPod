@@ -67,4 +67,37 @@ class Network(val context: Context) {
 
         return@withContext null
     }
+    open suspend fun httpGet(
+        url: String,
+        contentType: String?,
+        authorization: String?
+    ): String? = withContext(Dispatchers.IO) {
+        val connection = URL(url).openConnection() as HttpURLConnection
+        connection.requestMethod = "GET"
+        connection.doOutput = true
+        connection.setRequestProperty("charset", "utf-8")
+
+        if (contentType != null)
+            connection.setRequestProperty("Content-Type", contentType)
+
+        if (authorization != null) {
+            val encodedAuthorization = Base64.encodeToString(
+                authorization.toByteArray(StandardCharsets.UTF_8),
+                Base64.DEFAULT
+            )
+            connection.setRequestProperty(
+                "Authorization",
+                "Basic $encodedAuthorization"
+            )
+        }
+        val response = connection.responseMessage
+        val responseCode = connection.responseCode
+        if (responseCode < 200 || responseCode > 299) {
+            val message = "Bad response code: $responseCode"
+            logger.error("network.httpPost failed: $message")
+            return@withContext message
+        }
+
+        return@withContext response
+    }
 }

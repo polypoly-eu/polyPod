@@ -88,6 +88,7 @@ open class PodApi(
             "endpoint" -> {
                 when (inner) {
                     "send" -> return handleEndpointSend(args)
+                    "get" -> return handleEndpointGet(args)
                 }
             }
         }
@@ -279,6 +280,20 @@ open class PodApi(
             if (it.isStringValue) it.asStringValue().toString() else null
         }
         val error = endpoint.send(endpointId, featureIdToken, body, contentType, authorization)
+        return if (error == null) ValueFactory.newNil()
+        else ValueFactory.newString(error)
+    }
+    private suspend fun handleEndpointGet(args: List<Value>): Value {
+        logger.debug("dispatch() -> endpoint.send");
+        val endpointId = args[0].asStringValue().toString()
+        val featureIdToken = args[1].asStringValue().toString()
+        val contentType = args[2].let {
+            if (it.isStringValue) it.asStringValue().toString() else null
+        }
+        val authorization = args[3].let {
+            if (it.isStringValue) it.asStringValue().toString() else null
+        }
+        val error = endpoint.get(endpointId, featureIdToken, contentType, authorization)
         return if (error == null) ValueFactory.newNil()
         else ValueFactory.newString(error)
     }
