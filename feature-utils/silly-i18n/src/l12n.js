@@ -1,0 +1,56 @@
+import { LanguageError } from "./errors.js";
+import { determineLocale } from "./locale.js";
+
+/**
+ * Simple class for performing string translations, with simple templating capabilities
+ *
+ * @class
+ */
+export class L12n {
+    /**
+     * Class constructor for the localization class. The locale used will be auto-detected (by default)
+     * and stored as a private, read-only attribute. This is going to essentially be an encapsulation of
+     * the existing localle, deferring all actual processing to the `Intl` standard library.
+     *
+     * @param {string} [ locale = determineLocale() ] - locale string, in the usual format xx[_YY],
+     *     by default locale determined using that function
+     * @throws LanguageError - if the provided language is incorrect in some way (inexistent, or incorrect string format)
+     */
+    constructor(locale = determineLocale()) {
+        const canonicalLocale = Intl.getCanonicalLocales(locale)[0];
+        if (!canonicalLocale.match(/^[a-z]{2}\b(_[A-Z]{2}\b)?/)) {
+            throw new LanguageError(
+                canonicalLocale + " does not follow the usual locale format"
+            );
+        }
+        this._locale = locale;
+    }
+
+    /**
+     * Returns the locale string.
+     *
+     * @returns locale string in the usual `xx-XX` format.
+     */
+    get locale() {
+        return this._locale;
+    }
+
+    /**
+     * Obtains the (translated) string for a `namespace:key` defined in the translations hash.
+     *
+     * @param object - What needs to be translated
+     * @returns The locale-formatted string.
+     */
+    t(object) {
+        for (let [key, value] of Object.entries(options)) {
+            let convertedValue = value;
+            if (!isNaN(parseFloat(value))) {
+                convertedValue = Intl.NumberFormat(this._locale).format(
+                    parseFloat(value)
+                );
+            }
+            translation = translation.replace(`{{${key}}}`, convertedValue);
+        }
+        return translation;
+    }
+}
