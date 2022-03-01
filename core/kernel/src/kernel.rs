@@ -18,7 +18,7 @@ impl Kernel {
 
         let kernel = Kernel { language_code };
 
-        KERNEL.set(kernel);
+        let _ = KERNEL.set(kernel);
         Ok(())
     }
 

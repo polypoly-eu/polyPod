@@ -2,8 +2,8 @@
 
 
 
-use crate::failure_generated::*;
-use crate::feature_manifest_generated::*;
+use crate::flatbuffers_generated::failure_generated::*;
+use crate::flatbuffers_generated::feature_manifest_generated::*;
 use std::mem;
 use std::cmp::Ordering;
 
@@ -13,8 +13,8 @@ use self::flatbuffers::{EndianScalar, Follow};
 #[allow(unused_imports, dead_code)]
 pub mod feature_manifest_response {
 
-  use crate::failure_generated::*;
-  use crate::feature_manifest_generated::*;
+  use crate::flatbuffers_generated::failure_generated::*;
+  use crate::flatbuffers_generated::feature_manifest_generated::*;
   use std::mem;
   use std::cmp::Ordering;
 

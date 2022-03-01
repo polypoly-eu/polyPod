@@ -1,4 +1,4 @@
-use crate::failure_generated::failure::FailureCode;
+use crate::flatbuffers_generated::failure_generated::failure::FailureCode;
 
 #[derive(Debug)]
 pub struct KernelFailure {

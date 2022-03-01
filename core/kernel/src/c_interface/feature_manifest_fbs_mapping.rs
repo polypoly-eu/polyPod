@@ -1,6 +1,10 @@
+use crate::flatbuffers_generated::{feature_manifest_generated::feature_manifest::{FeatureManifest, Link, LinkArgs}, feature_manifest_response_generated::feature_manifest_response::FeatureManifestParsingResult};
 use std::collections::HashMap;
 use flatbuffers::{FlatBufferBuilder, WIPOffset, ForwardsUOffset, Vector};
-use crate::{feature_manifest_parsing, kernel_failure::KernelFailure, feature_manifest_response_generated::feature_manifest_response::{FeatureManifestParsingResponse, finish_feature_manifest_parsing_response_buffer, FeatureManifestParsingResponseArgs, FeatureManifestParsingResult}, feature_manifest_generated::feature_manifest::{self, FeatureManifestArgs, Link, LinkArgs, FeatureManifest}};
+use crate::{
+    feature_manifest_parsing,
+     kernel_failure::KernelFailure, flatbuffers_generated::{feature_manifest_response_generated::feature_manifest_response::{FeatureManifestParsingResponse, finish_feature_manifest_parsing_response_buffer, FeatureManifestParsingResponseArgs}, feature_manifest_generated::feature_manifest::FeatureManifestArgs}, 
+    };
 
 use super::kernel_failure_fbs_mapping::build_failure_fbs;
 
@@ -48,13 +52,6 @@ fn build_failure_response_args(
         result_type: FeatureManifestParsingResult::failure_Failure,
         result: Some(failure),
     }
-}
-
-fn build_field<'a>(
-    fbb: &mut FlatBufferBuilder<'a>,
-    field: Option<String>
-) -> Option<WIPOffset<&'a str>>{
-    field.and_then(|field| Some(fbb.create_string(field.as_str())))
 }
 
 fn build_links_buffer<'a>(

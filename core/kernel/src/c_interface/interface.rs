@@ -1,15 +1,14 @@
 use crate::{
     feature_manifest_parsing::FeatureManifest,
     kernel::Kernel,
-    kernel::KERNEL, kernel_bootstrap_response_generated::kernel_bootstrap_response::{KernelBootstrapResponseArgs, KernelBootstrapResponse, finish_kernel_bootstrap_response_buffer}, kernel_failure::KernelFailure, c_interface::feature_manifest_fbs_mapping::build_feature_manifest_parsing_response,
+    kernel::KERNEL,
+    kernel_failure::KernelFailure, 
+    c_interface::{feature_manifest_fbs_mapping::build_feature_manifest_parsing_response, kernel_bootstrap_fbs_mapping::build_kernel_bootstrap_response},
 };
-use flatbuffers::{FlatBufferBuilder};
 use std::{
     ffi::{CStr},
     os::raw::c_char
 };
-
-use super::kernel_failure_fbs_mapping::build_failure_fbs;
 
 /// # Safety
 /// This function can be unsafe if the language_code pointer is null or the string is in wrong format.
@@ -70,20 +69,4 @@ unsafe fn cstring_to_str<'a>(cstring: &'a *const c_char) -> Result<&str, KernelF
     CStr::from_ptr(*cstring)
         .to_str()
         .map_err(|err| KernelFailure::failed_to_create_c_str(err.to_string()))
-}
-
-fn build_kernel_bootstrap_response(result: Result<(), KernelFailure>) -> Vec<u8> {
-    let mut fbb = FlatBufferBuilder::new();
-    let result = match result {
-        Ok(_) => None,
-        Err(failure) => Some(build_failure_fbs(&mut fbb, failure)),
-    };
-
-    let response_args = KernelBootstrapResponseArgs {
-        failure: result,
-    };
-
-    let response = KernelBootstrapResponse::create(&mut fbb, &response_args);
-    finish_kernel_bootstrap_response_buffer(&mut fbb, response);
-    fbb.finished_data().to_owned()
 }
