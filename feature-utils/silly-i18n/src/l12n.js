@@ -56,19 +56,13 @@ export class L12n {
     /**
      * Obtains the (translated) string for a `namespace:key` defined in the translations hash.
      *
-     * @param object - What needs to be translated
+     * @param object - What needs to be translated. For the time being, only translates numbers
      * @returns The locale-formatted string.
      */
     t(object) {
-        for (let [key, value] of Object.entries(options)) {
-            let convertedValue = value;
-            if (!isNaN(parseFloat(value))) {
-                convertedValue = Intl.NumberFormat(this._locale).format(
-                    parseFloat(value)
-                );
-            }
-            translation = translation.replace(`{{${key}}}`, convertedValue);
+        if (!isNaN(parseFloat(object))) {
+            return Intl.NumberFormat(this._locale).format(parseFloat(object));
         }
-        return translation;
+        return object;
     }
 }

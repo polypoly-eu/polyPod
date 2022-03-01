@@ -28,10 +28,18 @@ describe("Test correct and incorrect locales", () => {
         } catch (error) {
             thrownError = error;
         }
-        console.log(thrownError);
         expect(thrownError).toBeInstanceOf(LanguageError);
         expect(thrownError.message).toEqual(
             expect.stringMatching(/supported locale/)
         );
+    });
+});
+
+describe("It's able to translate numbers correctly", () => {
+    it("is able to convert number to a known format", () => {
+        const enLocale = "en";
+        const enL12n = new L12n(enLocale);
+        expect(enL12n.locale).toBe(enLocale);
+        expect(enL12n.t(33333)).toBe("33,333");
     });
 });
