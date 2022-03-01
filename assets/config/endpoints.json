@@ -1,12 +1,10 @@
 {
     "polyPedia": {
         "baseURL": "process.env.POLYPOD_POLYPEDIA_REPORT_URL",
-        "auth": "process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION",
-        "features": ["featureIdToken", "featureIdToken2"]
+        "auth": "process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION"
     },
     "demoTestEndpoint": {
         "baseURL": "http://127.0.0.1:8000",
-        "auth": "authToken",
-        "features": ["demo"]
+        "auth": "authToken"
     }
 }
