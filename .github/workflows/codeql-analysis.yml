@@ -19,7 +19,10 @@ on:
     branches: [ main ]
     paths-ignore:
       - '**/*.md'
-
+      - 'dev-utils/**'
+      - 'windows/**'
+      - 'assets/**'
+      - '.github/workflows/*'
   schedule:
     - cron: '8 8 * * *'
 
