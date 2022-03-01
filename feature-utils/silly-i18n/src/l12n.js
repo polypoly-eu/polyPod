@@ -17,13 +17,31 @@ export class L12n {
      * @throws LanguageError - if the provided language is incorrect in some way (inexistent, or incorrect string format)
      */
     constructor(locale = determineLocale()) {
-        const canonicalLocale = Intl.getCanonicalLocales(locale)[0];
+        let canonicalLocale;
+        try {
+            canonicalLocale = Intl.getCanonicalLocales(locale)[0];
+        } catch (error) {
+            if (error.name == "RangeError") {
+                throw new LanguageError(
+                    canonicalLocale + " is not a supported locale"
+                );
+            }
+        }
         if (!canonicalLocale.match(/^[a-z]{2}\b(_[A-Z]{2}\b)?/)) {
             throw new LanguageError(
                 canonicalLocale + " does not follow the usual locale format"
             );
         }
-        this._locale = locale;
+
+        if (
+            Intl.NumberFormat.supportedLocalesOf([canonicalLocale]).length == 0
+        ) {
+            throw new LanguageError(
+                canonicalLocale + " does not support numeric formats"
+            );
+        }
+
+        this._locale = canonicalLocale;
     }
 
     /**
