@@ -1,10 +1,10 @@
 package coop.polypoly.polypod
 
 import coop.polypoly.polypod.bubblewrap.FetchResponseCodec
+import coop.polypoly.polypod.endpoint.Endpoint
 import coop.polypoly.polypod.info.Info
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.network.Network
-import coop.polypoly.polypod.endpoint.Endpoint
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyIn.rdf.Matcher
 import coop.polypoly.polypod.polyIn.rdf.Quad
@@ -269,7 +269,7 @@ open class PodApi(
     }
 
     private suspend fun handleEndpointSend(args: List<Value>): Value {
-        logger.debug("dispatch() -> endpoint.send");
+        logger.debug("dispatch() -> endpoint.send")
         val endpointId = args[0].asStringValue().toString()
         val featureIdToken = args[1].asStringValue().toString()
         val body = args[2].asStringValue().toString()
@@ -279,13 +279,14 @@ open class PodApi(
         val authorization = args[4].let {
             if (it.isStringValue) it.asStringValue().toString() else null
         }
-        val error = endpoint.send(endpointId, featureIdToken, body, contentType, authorization)
+        val error = endpoint
+            .send(endpointId, featureIdToken, body, contentType, authorization)
         return if (error == null) ValueFactory.newNil()
         else ValueFactory.newString(error)
     }
 
     private suspend fun handleEndpointGet(args: List<Value>): Value {
-        logger.debug("dispatch() -> endpoint.get");
+        logger.debug("dispatch() -> endpoint.get")
         val endpointId = args[0].asStringValue().toString()
         val featureIdToken = args[1].asStringValue().toString()
         val contentType = args[2].let {
@@ -294,7 +295,8 @@ open class PodApi(
         val authorization = args[3].let {
             if (it.isStringValue) it.asStringValue().toString() else null
         }
-        val error = endpoint.get(endpointId, featureIdToken, contentType, authorization)
+        val error = endpoint
+            .get(endpointId, featureIdToken, contentType, authorization)
         return if (error == null) ValueFactory.newNil()
         else ValueFactory.newString(error)
     }

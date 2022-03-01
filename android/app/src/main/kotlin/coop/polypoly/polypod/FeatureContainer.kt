@@ -24,6 +24,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.lifecycleScope
 import androidx.webkit.WebViewAssetLoader
+import coop.polypoly.polypod.endpoint.Endpoint
 import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.info.Info
@@ -33,7 +34,6 @@ import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import coop.polypoly.polypod.polyOut.PolyOut
-import coop.polypoly.polypod.endpoint.Endpoint
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import java.io.ByteArrayInputStream
 import java.util.zip.ZipFile
