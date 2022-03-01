@@ -57,7 +57,7 @@ jobs:
       name: Build Android
       run: |
         cd platform/android
-        ./gradlew test
+        ./gradlew compileDebugJavaWithJavac
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
