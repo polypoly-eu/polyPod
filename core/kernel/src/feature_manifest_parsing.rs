@@ -1,13 +1,14 @@
 use flatbuffers::{FlatBufferBuilder, WIPOffset, Vector, ForwardsUOffset};
 use serde::{Deserialize, Serialize};
-use std::{collections::HashMap, rc::Rc, borrow::BorrowMut};
+use std::{collections::HashMap};
 
-use crate::{feature_manifest_response_generated::feature_manifest_response::{FeatureManifestParsingResponse, FeatureManifestParsingResult, FeatureManifestParsingResponseArgs, FeatureManifestParsingResultUnionTableOffset, finish_size_prefixed_feature_manifest_parsing_response_buffer, finish_feature_manifest_parsing_response_buffer}, failure_generated::failure::{Failure, FailureBuilder, FailureArgs, FailureCode}, feature_manifest_generated::feature_manifest::{FeatureManifestArgs, FeatureManifest, LinkArgs, Link}};
+use crate::{
+    feature_manifest_response_generated::feature_manifest_response::{FeatureManifestParsingResponse, FeatureManifestParsingResult, FeatureManifestParsingResponseArgs, FeatureManifestParsingResultUnionTableOffset, finish_feature_manifest_parsing_response_buffer}, failure_generated::failure::{Failure, FailureArgs, FailureCode}, feature_manifest_generated::feature_manifest::{FeatureManifestArgs, FeatureManifest, LinkArgs, Link}};
 
 // Alias for str, probably will be moved to a centralized place to be reused
 pub type JSONStr = str;
 
-fn parse_feature_manifest(
+pub fn parse_feature_manifest(
     json: &JSONStr,
     language_code: &str,
 ) -> Vec<u8> {
@@ -91,7 +92,7 @@ fn build_failure_response_args(
 ) -> FeatureManifestParsingResponseArgs {
     let failure_args = FailureArgs {
         code: FailureCode::FailedToParseFeatureManifest,
-        message: Some(fbb.borrow_mut().create_string(error.as_str())),
+        message: Some(fbb.create_string(error.as_str())),
     };
     let failure = Failure::create(fbb, &failure_args).as_union_value();
     FeatureManifestParsingResponseArgs {

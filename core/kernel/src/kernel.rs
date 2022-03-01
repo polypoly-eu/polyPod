@@ -1,5 +1,7 @@
-use crate::feature_manifest_parsing::{JSONFeatureManifest, JSONStr};
+use flatbuffers::FlatBufferBuilder;
 use once_cell::sync::OnceCell;
+
+use crate::{feature_manifest_parsing::{JSONStr}, failure_generated::failure::{FailureArgs, FailureCode, Failure}, kernel_bootstrap_response_generated::kernel_bootstrap_response::{KernelBootstrapResponse, KernelBootstrapResponseArgs, finish_kernel_bootstrap_response_buffer}};
 
 /// Kernel is held as a singleton.
 pub static KERNEL: OnceCell<Kernel> = OnceCell::new();
@@ -11,7 +13,7 @@ pub struct Kernel {
 }
 
 impl Kernel {
-    pub fn bootstrap(language_code: String) -> Result<(), String> {
+    pub fn bootstrap(language_code: String) -> Result<(), String>{
         if KERNEL.get().is_some() {
             return Err("Kernel was already initialized".to_string());
         }
@@ -23,10 +25,10 @@ impl Kernel {
             .map_err(|_| "Failed to initialize Kernel".to_string())
     }
 
-    // pub fn parse_feature_manifest(
-    //     &self,
-    //     json: &JSONStr,
-    // ) -> Result<JSONFeatureManifest, FeatureManifestParsingError> {
-    //     JSONFeatureManifest::parse(json, &self.language_code)
-    // }
+    pub fn parse_feature_manifest(
+        &self,
+        json: &JSONStr,
+    ) -> Vec<u8> {
+        crate::feature_manifest_parsing::parse_feature_manifest(json, &self.language_code)
+    }
 }

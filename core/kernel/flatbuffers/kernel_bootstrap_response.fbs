@@ -1,0 +1,10 @@
+include "failure.fbs";
+namespace kernel_bootstrap_response;
+
+/// Kernel bootstrap response represented by an optional failure.
+/// If failure is nil, the bootstrap was successfull, otherwise it failed.
+table KernelBootstrapResponse {
+    failure:failure.Failure;
+}
+
+root_type KernelBootstrapResponse;

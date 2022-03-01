@@ -7,3 +7,5 @@ mod feature_manifest_generated;
 mod feature_manifest_response_generated;
 #[allow(unused_imports)]
 mod failure_generated;
+#[allow(unused_imports)]
+mod kernel_bootstrap_response_generated;

@@ -4,27 +4,55 @@
 //     kernel::KERNEL,
 // };
 // use serde::Serialize;
-// use std::{
-//     ffi::{CStr, CString},
-//     os::raw::c_char,
-//     str::Utf8Error,
-// };
+use std::{
+    ffi::{CStr, CString},
+    os::raw::c_char,
+    str::Utf8Error,
+};
 
-// /// # Safety
-// /// This function can be unsafe if the language_code pointer is null or the string is in wrong format.
-// ///
-// /// Bootstrap the kernel with the given configuration:
-// /// - language_code: User's locale language code
-// /// Returns the result JSON of either success or failure to bootstrap the kernel
-// #[no_mangle]
-// pub unsafe extern "C" fn kernel_bootstrap(language_code: *const c_char) -> *const c_char {
-//     unsafe fn bootstrap(language_code: *const c_char) -> Result<(), KernelError> {
-//         let language_code = cstring_to_str(&language_code).map(String::from)?;
-//         Kernel::bootstrap(language_code).map_err(KernelError::FailedToBootstrapKernel)
-//     }
+use flatbuffers::FlatBufferBuilder;
 
-//     to_result_str(bootstrap(language_code))
-// }
+use crate::{kernel::Kernel, failure_generated::failure::{FailureArgs, FailureCode, Failure}, kernel_bootstrap_response_generated::kernel_bootstrap_response::{KernelBootstrapResponseArgs, KernelBootstrapResponse, finish_kernel_bootstrap_response_buffer}};
+
+/// # Safety
+/// This function can be unsafe if the language_code pointer is null or the string is in wrong format.
+///
+/// Bootstrap the kernel with the given configuration:
+/// - language_code: User's locale language code
+/// Returns the result JSON of either success or failure to bootstrap the kernel
+#[no_mangle]
+pub unsafe extern "C" fn kernel_bootstrap(language_code: *const c_char) -> *const u8 {
+    let mut fbb = FlatBufferBuilder::new();
+
+    let failure = match cstring_to_str(&language_code).map(String::from) {
+        Ok(language_code) => {
+            match Kernel::bootstrap(language_code) {
+                Ok(_) => None,
+                Err(message) => {
+                    let args = FailureArgs {
+                        code: FailureCode::FailedToBootstrapKernel,
+                        message: Some(fbb.create_string(message.as_str())),
+                    };
+                    Some(Failure::create(&mut fbb, &args))
+                }
+            }
+        },
+        Err(message) => {
+            let args = FailureArgs {
+                code: FailureCode::FailedToBootstrapKernel,
+                message: Some(fbb.create_string(message.as_str())),
+            };
+            Some(Failure::create(&mut fbb, &args))
+        }
+    };
+
+    let bootstrap_response_args = KernelBootstrapResponseArgs {
+        failure: failure,
+    };
+    let response = KernelBootstrapResponse::create(&mut fbb, &bootstrap_response_args);
+    finish_kernel_bootstrap_response_buffer(&mut fbb, response);
+    fbb.finished_data().to_owned().as_ptr()
+}
 
 // /// # Safety
 // /// This function can be unsafe if the json pointer is null or the string is in wrong format.
@@ -59,71 +87,14 @@
 //     }
 // }
 
-// // Disabled the clippy false positive, https://github.com/rust-lang/rust-clippy/issues/5787
-// #[allow(clippy::needless_lifetimes)]
-// unsafe fn cstring_to_str<'a>(cstring: &'a *const c_char) -> Result<&str, KernelError> {
-//     if cstring.is_null() {
-//         return Err(KernelError::NullCString);
-//     }
+// Disabled the clippy false positive, https://github.com/rust-lang/rust-clippy/issues/5787
+#[allow(clippy::needless_lifetimes)]
+unsafe fn cstring_to_str<'a>(cstring: &'a *const c_char) -> Result<&str, String> {
+    if cstring.is_null() {
+        return Err("Null c string pointer".to_owned());
+    }
 
-//     CStr::from_ptr(*cstring)
-//         .to_str()
-//         .map_err(KernelError::FailedToCreateCStr)
-// }
-
-// /// Kernel operations result, which is to be returned to clients.
-// #[derive(Serialize)]
-// enum KernelResult<T: Serialize> {
-//     Success(T),
-//     Failure(KernelFailure),
-// }
-
-// #[derive(Serialize)]
-// struct KernelFailure {
-//     code: u16,
-//     message: String,
-// }
-
-// enum KernelError {
-//     NullCString,
-//     FailedToParseFeatureManifest(FeatureManifestParsingError),
-//     FailedToCreateCStr(Utf8Error),
-//     FailedToBootstrapKernel(String),
-//     KernelNotBootstraped,
-// }
-
-// impl KernelError {
-//     fn code(&self) -> u16 {
-//         match self {
-//             Self::NullCString => 1,
-//             Self::FailedToParseFeatureManifest(_) => 2,
-//             Self::FailedToCreateCStr(_) => 3,
-//             Self::FailedToBootstrapKernel(_) => 4,
-//             Self::KernelNotBootstraped => 5,
-//         }
-//     }
-
-//     fn message(&self) -> String {
-//         match self {
-//             Self::NullCString => String::from("cstring is null."),
-//             Self::FailedToParseFeatureManifest(err) => err.description.clone(),
-//             Self::FailedToCreateCStr(err) => err.to_string(),
-//             Self::FailedToBootstrapKernel(error) => error.to_owned(),
-//             Self::KernelNotBootstraped => String::from("Kernel is not bootstraped."),
-//         }
-//     }
-// }
-
-// fn to_result_str<T: Serialize>(result: Result<T, KernelError>) -> *const c_char {
-//     let kernel_result = match result {
-//         Ok(success) => KernelResult::Success(success),
-//         Err(e) => KernelResult::Failure(KernelFailure {
-//             code: e.code(),
-//             message: e.message(),
-//         }),
-//     };
-
-//     let kernel_result_string = serde_json::to_string(&kernel_result).unwrap();
-
-//     CString::new(kernel_result_string).unwrap().into_raw()
-// }
+    CStr::from_ptr(*cstring)
+        .to_str()
+        .map_err(|_| "Failed to create CStr".to_owned())
+}
