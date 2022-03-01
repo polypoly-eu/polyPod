@@ -74,9 +74,8 @@ class Network(val context: Context) {
     ): String? = withContext(Dispatchers.IO) {
         val connection = URL(url).openConnection() as HttpURLConnection
         connection.requestMethod = "GET"
-        connection.doOutput = true
+        connection.doInput = true
         connection.setRequestProperty("charset", "utf-8")
-
         if (contentType != null)
             connection.setRequestProperty("Content-Type", contentType)
 
@@ -94,7 +93,7 @@ class Network(val context: Context) {
         val responseCode = connection.responseCode
         if (responseCode < 200 || responseCode > 299) {
             val message = "Bad response code: $responseCode"
-            logger.error("network.httpPost failed: $message")
+            logger.error("network.httpGet failed: $message")
             return@withContext message
         }
 

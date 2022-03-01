@@ -283,8 +283,9 @@ open class PodApi(
         return if (error == null) ValueFactory.newNil()
         else ValueFactory.newString(error)
     }
+
     private suspend fun handleEndpointGet(args: List<Value>): Value {
-        logger.debug("dispatch() -> endpoint.send");
+        logger.debug("dispatch() -> endpoint.get");
         val endpointId = args[0].asStringValue().toString()
         val featureIdToken = args[1].asStringValue().toString()
         val contentType = args[2].let {
