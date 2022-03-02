@@ -13,6 +13,13 @@ struct Kernel {
     language_code: String,
 }
 
+fn get_instance() -> Result<&'static Kernel, KernelFailure> {
+    match KERNEL.get() {
+        Some(kernel) => Ok(kernel),
+        None => Err(KernelFailure::kernel_not_bootstraped()),
+    }
+}
+
 pub fn bootstrap(language_code: String) -> Result<(), KernelFailure> {
     if KERNEL.get().is_some() {
         return Err(KernelFailure::kernel_bootstrap_failed());
@@ -27,11 +34,4 @@ pub fn bootstrap(language_code: String) -> Result<(), KernelFailure> {
 pub fn parse_feature_manifest(json: &JSONStr) -> Result<FeatureManifest, KernelFailure> {
     let kernel = get_instance()?;
     FeatureManifest::parse(json, &kernel.language_code)
-}
-
-fn get_instance() -> Result<&'static Kernel, KernelFailure> {
-    match KERNEL.get() {
-        Some(kernel) => Ok(kernel),
-        None => Err(KernelFailure::kernel_not_bootstraped()),
-    }
 }
