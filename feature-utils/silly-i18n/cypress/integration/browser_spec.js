@@ -2,14 +2,10 @@ import { determineLanguage, determineLocale } from "../../src/locale.js";
 import { I18n } from "../../src/index.js";
 import { L12n } from "../../src/l12n.js";
 
+import { bigNumber, localePairs } from "../../test/test-utils.js";
+
 const LANGUAGE = "foo";
 let i18n;
-const bigNumber = "1000000.33";
-const localePairs = {
-    "de-DE": "1.000.000,33",
-    "es-ES": "1.000.000,33",
-    "en-GB": "1,000,000.33",
-};
 
 beforeEach(() => {
     i18n = new I18n(LANGUAGE, {
