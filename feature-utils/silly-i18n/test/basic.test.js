@@ -6,7 +6,7 @@ import {
     TranslationKeyError,
 } from "../src/errors";
 
-import { bigNumber, localePairs } from "./test-utils.js";
+import { bigNumber, numberPairs } from "./test-utils.js";
 import { L12n } from "../src/l12n.js";
 
 const LANGUAGE = "foo";
@@ -75,7 +75,7 @@ describe("Test basic configuration", () => {
 
 describe("Test locale numeric options correctly", () => {
     it("Converts big numbers to locale format", () => {
-        for (const [locale, l8nString] of Object.entries(localePairs)) {
+        for (const [locale, l8nString] of Object.entries(numberPairs)) {
             i18n._l12n = new L12n(locale);
             expect(i18n.t("template:opt", { opt: bigNumber })).toBe(l8nString);
         }

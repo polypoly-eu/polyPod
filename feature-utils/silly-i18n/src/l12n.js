@@ -60,6 +60,9 @@ export class L12n {
      * @returns The locale-formatted string.
      */
     t(object) {
+        if (object instanceof Date) {
+            return Intl.DateTimeFormat(this._locale).format(object);
+        }
         if (!isNaN(parseFloat(object))) {
             return Intl.NumberFormat(this._locale).format(parseFloat(object));
         }

@@ -2,7 +2,7 @@ import { determineLanguage, determineLocale } from "../../src/locale.js";
 import { I18n } from "../../src/index.js";
 import { L12n } from "../../src/l12n.js";
 
-import { bigNumber, localePairs } from "../../test/test-utils.js";
+import { bigNumber, numberPairs } from "../../test/test-utils.js";
 
 const LANGUAGE = "foo";
 let i18n;
@@ -27,7 +27,7 @@ describe("Test language determination", () => {
 
 describe("Test locale numeric options correctly in its module", () => {
     it("Converts big numbers to locale format", () => {
-        for (const [locale, l8nString] of Object.entries(localePairs)) {
+        for (const [locale, l8nString] of Object.entries(numberPairs)) {
             const localeHere = new L12n(locale);
             expect(localeHere.locale).to.equal(locale);
             expect(localeHere.t(bigNumber)).to.equal(l8nString);
@@ -37,7 +37,7 @@ describe("Test locale numeric options correctly in its module", () => {
 
 describe("Test locale numeric options correctly", () => {
     it("Converts big numbers to locale format", () => {
-        for (const [locale, l8nString] of Object.entries(localePairs)) {
+        for (const [locale, l8nString] of Object.entries(numberPairs)) {
             i18n._l12n = new L12n(locale);
             expect(i18n.locale).to.equal(locale);
             expect(i18n.t("options:opt", { opt: bigNumber })).to.equal(

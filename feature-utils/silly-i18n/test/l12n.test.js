@@ -1,6 +1,6 @@
 import { LanguageError } from "../src/errors";
 import { L12n } from "../src/l12n";
-import { bigNumber, localePairs } from "./test-utils.js";
+import { bigNumber, numberPairs, date, datePairs } from "./test-utils.js";
 
 let l12n;
 
@@ -36,18 +36,21 @@ describe("Test correct and incorrect locales", () => {
     });
 });
 
-describe("It's able to translate numbers correctly", () => {
-    it("is able to convert number to a known format", () => {
-        for (const [locale, l12nString] of Object.entries(localePairs)) {
+describe("It's able to translate objects correctly", () => {
+    it("is able to convert numbers and dates to a known format", () => {
+        for (const locale in numberPairs) {
             const localeHere = new L12n(locale);
             expect(localeHere.locale).toEqual(locale);
+            const l12nString = numberPairs[locale];
             expect(localeHere.t(bigNumber)).toEqual(l12nString);
+            const l12nDate = datePairs[locale];
+            expect(localeHere.t(date)).toEqual(l12nDate);
         }
     });
 
     it("passes through non-number objects without a glitch", () => {
         const foobar = "foobar";
-        for (const locale in localePairs) {
+        for (const locale in numberPairs) {
             const localeHere = new L12n(locale);
             expect(localeHere.t(foobar)).toEqual(foobar);
         }
