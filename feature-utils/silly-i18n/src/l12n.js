@@ -27,7 +27,7 @@ export class L12n {
                 );
             }
         }
-        if (!canonicalLocale.match(/^[a-z]{2}\b(_[A-Z]{2}\b)?/)) {
+        if (!canonicalLocale.match(/^[a-z]{2,3}\b(_[A-Z]{2,4}\b)?/)) {
             throw new LanguageError(
                 canonicalLocale + " does not follow the usual locale format"
             );
@@ -55,7 +55,7 @@ export class L12n {
 
     /**
      * Obtains the (translated) string for a `namespace:key` defined in the translations hash.
-     *
+     *cd .
      * @param object - What needs to be translated. For the time being, only translates numbers
      * @returns The locale-formatted string.
      */
