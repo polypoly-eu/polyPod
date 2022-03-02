@@ -22,10 +22,7 @@ pub type JSONStr = str;
 
 #[allow(dead_code)] // Temporary until exposed through C API
 impl FeatureManifest {
-    pub fn parse(
-        json: &JSONStr,
-        language_code: &str,
-    ) -> Result<FeatureManifest, KernelFailure> {
+    pub fn parse(json: &JSONStr, language_code: &str) -> Result<FeatureManifest, KernelFailure> {
         FullFeatureManifest::try_from(json)
             .map(|manifest| FeatureManifest::build_feature_manifest(manifest, language_code))
             .map_err(KernelFailure::failed_to_parse_feature_manifest)

@@ -24,7 +24,7 @@ impl KernelFailure {
     pub fn failed_to_parse_feature_manifest(message: String) -> Self {
         KernelFailure {
             code: FailureCode::FailedToParseFeatureManifest,
-            message: message,
+            message,
         }
     }
 
@@ -38,7 +38,7 @@ impl KernelFailure {
     pub fn failed_to_create_c_str(message: String) -> Self {
         KernelFailure {
             code: FailureCode::FailedToCreateCString,
-            message: message,
+            message,
         }
     }
 }
