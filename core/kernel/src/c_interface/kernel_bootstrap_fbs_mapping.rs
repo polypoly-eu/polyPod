@@ -29,12 +29,27 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_build() {
+    fn test_build_success() {
         let byte_response = build_kernel_bootstrap_response(Ok(()));
         let parsed = root_as_kernel_bootstrap_response(&byte_response);
         assert!(parsed.is_ok(), "Expected response parsing to be successfull");
         let response = parsed.unwrap();
 
         assert!(response.failure().is_none(), "Expected response to not contain failure")
+    }
+
+    #[test]
+    fn test_build_failure() {
+        let expected_failure = KernelFailure::kernel_bootstrap_failed();
+        let byte_response = build_kernel_bootstrap_response(Err(KernelFailure::kernel_bootstrap_failed()));
+        let parsed = root_as_kernel_bootstrap_response(&byte_response);
+        assert!(parsed.is_ok(), "Expected response parsing to be successfull");
+        let response = parsed.unwrap();
+
+        assert!(response.failure().is_some(), "Expected response to contain failure");
+
+        let failure = response.failure().unwrap();
+        assert_eq!(failure.code(), expected_failure.code);
+        assert_eq!(failure.message(), Some(expected_failure.message.as_str()));
     }
 }
