@@ -2,7 +2,12 @@ import { determineLanguage, determineLocale } from "../../src/locale.js";
 import { I18n } from "../../src/index.js";
 import { L12n } from "../../src/l12n.js";
 
-import { bigNumber, numberPairs } from "../../test/test-utils.js";
+import {
+    bigNumber,
+    numberPairs,
+    date,
+    datePairs,
+} from "../../test/test-utils.js";
 
 const LANGUAGE = "foo";
 let i18n;
@@ -25,12 +30,19 @@ describe("Test language determination", () => {
     });
 });
 
-describe("Test locale numeric options correctly in its module", () => {
+describe("Test locale options correctly in its module", () => {
     it("Converts big numbers to locale format", () => {
-        for (const [locale, l8nString] of Object.entries(numberPairs)) {
+        for (const [locale, l12nString] of Object.entries(numberPairs)) {
             const localeHere = new L12n(locale);
             expect(localeHere.locale).to.equal(locale);
-            expect(localeHere.t(bigNumber)).to.equal(l8nString);
+            expect(localeHere.t(bigNumber)).to.equal(l12nString);
+        }
+    });
+
+    it("Converts dates to locale format", () => {
+        for (const [locale, l12nDate] of Object.entries(datePairs)) {
+            const localeHere = new L12n(locale);
+            expect(localeHere.t(date)).to.equal(l12nDate);
         }
     });
 });
