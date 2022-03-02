@@ -44,4 +44,12 @@ describe("It's able to translate numbers correctly", () => {
             expect(localeHere.t(bigNumber)).toEqual(l12nString);
         }
     });
+
+    it("passes through non-number objects without a glitch", () => {
+        const foobar = "foobar";
+        for (const locale in localePairs) {
+            const localeHere = new L12n(locale);
+            expect(localeHere.t(foobar)).toEqual(foobar);
+        }
+    });
 });
