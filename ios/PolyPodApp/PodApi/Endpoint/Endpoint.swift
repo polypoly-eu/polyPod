@@ -1,23 +1,45 @@
 import Foundation
 
 protocol EndpointProtocol {
-    func send(endpointId: String, featureIdToken: String, payload: String, contentType: String?, authorization: String?)
-    func get(endpointId: String, featureIdToken: String, contentType: String?, authorization: String?)
+    func send(endpointId: String, featureIdToken: String, payload: String, contentType: String?, authorization: String?) -> String?
+    func get(endpointId: String, featureIdToken: String, contentType: String?, authorization: String?) -> String?
 }
 
+protocol EndpointInfoProtocol: Decodable {
+    var url: String { get }
+    var auth: String { get }
+}
+
+struct EndpointInfo: EndpointInfoProtocol {
+    let url: String
+    let auth: String
+}
 
 class Endpoint: EndpointProtocol {
-    let network: Network = Network()
-    func send(endpointId: String, featureIdToken: String, payload: String, contentType: String?, authorization: String?) {
-        print("send")
-        let url: String = "https://e27a0801-f759-48dc-97fc-d78d1fb65a90.mock.pstmn.io/127.0.0.2:5000"
-        let response = network.httpPost(url: url, body: payload, contentType: contentType, authorization: authorization)
+    private func endpointInfoFromId(endpointId: String) -> EndpointInfo? {
+        let endpointsPath = Bundle.main.bundleURL
+            .appendingPathComponent("config/endpoints.json")
+        guard let endpointsJsonData = (try? Data(contentsOf: endpointsPath)) else { return nil }
+        guard let endpointsJson = (try? JSONDecoder().decode(Dictionary<String,EndpointInfo>.self, from: endpointsJsonData)) else { return nil }
+        return endpointsJson[endpointId]
     }
     
-    func get(endpointId: String, featureIdToken: String, contentType: String?, authorization: String?) {
-        print("get")
-        let url: String = "https://e27a0801-f759-48dc-97fc-d78d1fb65a90.mock.pstmn.io/127.0.0.2:5000"
-        let response = network.httpGet(url: url, contentType: contentType, authorization: authorization)
-        print(response)
+    let network: Network = Network()
+    func send(endpointId: String, featureIdToken: String, payload: String, contentType: String?, authorization: String?) -> String? {
+        guard let endpointInfo = endpointInfoFromId(endpointId: endpointId) else {
+            Log.error("endpoint.get failed: No endpoint found for: \(endpointId)")
+            return nil
+        }
+        let response = network.httpPost(url: endpointInfo.url,body: payload , contentType: contentType, authorization: endpointInfo.auth)
+        return response
+    }
+    
+    func get(endpointId: String, featureIdToken: String, contentType: String?, authorization: String?) -> String? {
+        guard let endpointInfo = endpointInfoFromId(endpointId: endpointId) else {
+            Log.error("endpoint.get failed: No endpoint found for: \(endpointId)")
+            return nil
+        }
+        let response = network.httpGet(url: endpointInfo.url, contentType: contentType, authorization: endpointInfo.auth)
+        return response
     }
 }
