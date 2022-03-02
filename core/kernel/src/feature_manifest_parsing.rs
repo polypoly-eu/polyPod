@@ -1,7 +1,6 @@
+use crate::kernel_failure::KernelFailure;
 use serde::Deserialize;
 use std::collections::HashMap;
-
-use crate::kernel_failure::KernelFailure;
 
 #[derive(Deserialize, PartialEq, Debug)]
 #[serde(rename_all = "camelCase")]
@@ -41,20 +40,30 @@ impl FeatureManifest {
         if let Some(translated_links) = translation.and_then(|manifest| manifest.links.clone()) {
             links.extend(translated_links.into_iter());
         }
-        let links = if !links.is_empty() {
-            Some(links)
-        } else {
-            None
-        };
+        let links = if !links.is_empty() { Some(links) } else { None };
         FeatureManifest {
-            name: translation.and_then(|manifest| manifest.name.clone()).or(full_manifest.name),
-            author: translation.and_then(|manifest| manifest.author.clone()).or(full_manifest.author),
-            version: translation.and_then(|manifest| manifest.version.clone()).or(full_manifest.version),
-            description: translation.and_then(|manifest| manifest.description.clone()).or(full_manifest.description),
-            thumbnail: translation.and_then(|manifest| manifest.thumbnail.clone()).or(full_manifest.thumbnail),
-            thumbnail_color: translation.and_then(|manifest| manifest.thumbnail_color.clone()).or(full_manifest.thumbnail_color),
-            primary_color: translation.and_then(|manifest| manifest.primary_color.clone()).or(full_manifest.primary_color),
-            links: links,
+            name: translation
+                .and_then(|manifest| manifest.name.clone())
+                .or(full_manifest.name),
+            author: translation
+                .and_then(|manifest| manifest.author.clone())
+                .or(full_manifest.author),
+            version: translation
+                .and_then(|manifest| manifest.version.clone())
+                .or(full_manifest.version),
+            description: translation
+                .and_then(|manifest| manifest.description.clone())
+                .or(full_manifest.description),
+            thumbnail: translation
+                .and_then(|manifest| manifest.thumbnail.clone())
+                .or(full_manifest.thumbnail),
+            thumbnail_color: translation
+                .and_then(|manifest| manifest.thumbnail_color.clone())
+                .or(full_manifest.thumbnail_color),
+            primary_color: translation
+                .and_then(|manifest| manifest.primary_color.clone())
+                .or(full_manifest.primary_color),
+            links,
         }
     }
 }
