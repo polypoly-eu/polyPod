@@ -388,7 +388,7 @@ function getMetadata(): string {
 function approveEndpointFetch(
     endpointId: string,
     featureIdToken: string
-): Boolean {
+): boolean {
     return confirm(
         `${featureIdToken} wants to contact the endpoint: ${endpointId}. \n Proceed?`
     );
