@@ -36,28 +36,14 @@ fn build_sucess_response_args(
     manifest: feature_manifest_parsing::FeatureManifest,
 ) -> FeatureManifestParsingResponseArgs {
     let manifest_args = FeatureManifestArgs {
-        name: manifest.name.map(|name| fbb.create_string(name.as_str())),
-        author: manifest
-            .author
-            .map(|author| fbb.create_string(author.as_str())),
-        version: manifest
-            .version
-            .map(|version| fbb.create_string(version.as_str())),
-        description: manifest
-            .description
-            .map(|description| fbb.create_string(description.as_str())),
-        thumbnail: manifest
-            .thumbnail
-            .map(|thumbnail| fbb.create_string(thumbnail.as_str())),
-        thumbnail_color: manifest
-            .thumbnail_color
-            .map(|thumbnail_color| fbb.create_string(thumbnail_color.as_str())),
-        primary_color: manifest
-            .primary_color
-            .map(|primary_color| fbb.create_string(primary_color.as_str())),
-        links: manifest
-            .links
-            .and_then(|links| build_links_buffer(fbb, links)),
+        name: build_field_buffer(fbb, manifest.name),
+        author: build_field_buffer(fbb, manifest.author),
+        version: build_field_buffer(fbb, manifest.version),
+        description: build_field_buffer(fbb, manifest.description),
+        thumbnail: build_field_buffer(fbb, manifest.thumbnail),
+        thumbnail_color: build_field_buffer(fbb, manifest.thumbnail_color),
+        primary_color: build_field_buffer(fbb, manifest.primary_color),
+        links: build_links_buffer(fbb, manifest.links),
     };
 
     let feature_manifest = FeatureManifest::create(fbb, &manifest_args).as_union_value();
@@ -78,10 +64,18 @@ fn build_failure_response_args(
     }
 }
 
+fn build_field_buffer<'a>(
+    fbb: &mut FlatBufferBuilder<'a>,
+    field: Option<String>,
+) -> Option<WIPOffset<&'a str>> {
+    field.map(|field| fbb.create_string(field.as_str()))
+}
+
 fn build_links_buffer<'a>(
     fbb: &mut FlatBufferBuilder<'a>,
-    links: HashMap<String, String>,
+    links: Option<HashMap<String, String>>,
 ) -> Option<WIPOffset<Vector<'a, ForwardsUOffset<Link<'a>>>>> {
+    let links = links?;
     let links: Vec<_> = links
         .into_iter()
         .map(|(name, url)| {
