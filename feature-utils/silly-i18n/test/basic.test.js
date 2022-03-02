@@ -24,6 +24,7 @@ beforeAll(() => {
 describe("Test basic configuration", () => {
     it("is created correctly", () => {
         expect(i18n).toBeInstanceOf(I18n);
+        expect(i18n.l12n).toBeDefined();
     });
     it("Includes all attributes", () => {
         expect(i18n.sections).toStrictEqual(Object.keys(translationData));
