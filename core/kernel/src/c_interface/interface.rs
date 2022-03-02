@@ -3,9 +3,7 @@ use crate::{
         feature_manifest_fbs_mapping::build_feature_manifest_parsing_response,
         kernel_bootstrap_fbs_mapping::build_kernel_bootstrap_response, utils::cstring_to_str,
     },
-    feature_manifest_parsing::FeatureManifest,
     kernel::{bootstrap, parse_feature_manifest},
-    kernel_failure::KernelFailure,
 };
 use std::os::raw::c_char;
 
@@ -20,12 +18,12 @@ use std::os::raw::c_char;
 /// Returns a flatbuffer byte array with kernel_bootstrap_response.
 #[no_mangle]
 pub unsafe extern "C" fn kernel_bootstrap(language_code: *const c_char) -> *const u8 {
-    unsafe fn kernel_bootstrap_result(language_code: *const c_char) -> Result<(), KernelFailure> {
-        let language_code = cstring_to_str(&language_code).map(String::from)?;
-        bootstrap(language_code)
-    }
-
-    build_kernel_bootstrap_response(kernel_bootstrap_result(language_code)).as_ptr()
+    build_kernel_bootstrap_response(
+        cstring_to_str(&language_code)
+            .map(String::from)
+            .and_then(bootstrap),
+    )
+    .as_ptr()
 }
 
 /// # Safety
@@ -36,9 +34,6 @@ pub unsafe extern "C" fn kernel_bootstrap(language_code: *const c_char) -> *cons
 /// Returns a flatbuffer byte array with feature_manifest_response.
 #[no_mangle]
 pub unsafe extern "C" fn parse_feature_manifest_from_json(json: *const c_char) -> *const u8 {
-    unsafe fn parse_manifest_result(json: *const c_char) -> Result<FeatureManifest, KernelFailure> {
-        let json = cstring_to_str(&json)?;
-        parse_feature_manifest(json)
-    }
-    build_feature_manifest_parsing_response(parse_manifest_result(json)).as_ptr()
+    build_feature_manifest_parsing_response(cstring_to_str(&json).and_then(parse_feature_manifest))
+        .as_ptr()
 }
