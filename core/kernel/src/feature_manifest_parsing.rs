@@ -2,7 +2,7 @@ use crate::kernel_failure::KernelFailure;
 use serde::Deserialize;
 use std::collections::HashMap;
 
-#[derive(Deserialize, PartialEq, Debug)]
+#[derive(Deserialize, PartialEq, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 #[allow(dead_code)] // Temporary until exposed through C API
 pub struct FeatureManifest {
