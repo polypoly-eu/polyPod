@@ -37,55 +37,24 @@ impl FeatureManifest {
             .as_ref()
             .and_then(|unwrapped| unwrapped.get(language_code));
 
-        match translation {
-            Some(translation) => {
-                let mut links = full_manifest.links.unwrap_or_default();
-                if let Some(translated_links) = translation.links.clone() {
-                    links.extend(translated_links.into_iter());
-                }
-                FeatureManifest {
-                    name: translation.name.clone().or(full_manifest.name),
-                    author: translation.author.clone().or(full_manifest.author),
-                    version: translation.version.clone().or(full_manifest.version),
-                    description: translation
-                        .description
-                        .clone()
-                        .or(full_manifest.description),
-                    thumbnail: translation.thumbnail.clone().or(full_manifest.thumbnail),
-                    thumbnail_color: translation
-                        .thumbnail_color
-                        .clone()
-                        .or(full_manifest.thumbnail_color),
-                    primary_color: translation
-                        .primary_color
-                        .clone()
-                        .or(full_manifest.primary_color),
-                    links: Some(links),
-                }
-            }
-            None => FeatureManifest {
-                name: full_manifest.name,
-                author: full_manifest.author,
-                version: full_manifest.version,
-                description: full_manifest.description,
-                thumbnail: full_manifest.thumbnail,
-                thumbnail_color: full_manifest.thumbnail_color,
-                primary_color: full_manifest.primary_color,
-                links: full_manifest.links,
-            },
+        let mut links = full_manifest.links.unwrap_or_default();
+        if let Some(translated_links) = translation.and_then(|manifest| manifest.links.clone()) {
+            links.extend(translated_links.into_iter());
         }
-    }
-
-    fn default() -> FeatureManifest {
+        let links = if !links.is_empty() {
+            Some(links)
+        } else {
+            None
+        };
         FeatureManifest {
-            name: None,
-            author: None,
-            version: None,
-            description: None,
-            thumbnail: None,
-            thumbnail_color: None,
-            primary_color: None,
-            links: None,
+            name: translation.and_then(|manifest| manifest.name.clone()).or(full_manifest.name),
+            author: translation.and_then(|manifest| manifest.author.clone()).or(full_manifest.author),
+            version: translation.and_then(|manifest| manifest.version.clone()).or(full_manifest.version),
+            description: translation.and_then(|manifest| manifest.description.clone()).or(full_manifest.description),
+            thumbnail: translation.and_then(|manifest| manifest.thumbnail.clone()).or(full_manifest.thumbnail),
+            thumbnail_color: translation.and_then(|manifest| manifest.thumbnail_color.clone()).or(full_manifest.thumbnail_color),
+            primary_color: translation.and_then(|manifest| manifest.primary_color.clone()).or(full_manifest.primary_color),
+            links: links,
         }
     }
 }
@@ -116,6 +85,19 @@ impl TryFrom<&JSONStr> for FullFeatureManifest {
 mod tests {
     use super::*;
 
+    fn default_manifest() -> FeatureManifest {
+        FeatureManifest {
+            name: None,
+            author: None,
+            version: None,
+            description: None,
+            thumbnail: None,
+            thumbnail_color: None,
+            primary_color: None,
+            links: None,
+        }
+    }
+
     #[test]
     fn test_empty_json() {
         let parsed = FeatureManifest::parse("", "");
@@ -127,14 +109,14 @@ mod tests {
     fn test_empty_json_object() {
         let parsed = FeatureManifest::parse("{}", "");
 
-        assert_eq!(parsed.unwrap(), FeatureManifest::default())
+        assert_eq!(parsed.unwrap(), default_manifest())
     }
 
     #[test]
     fn test_wrong_json() {
         let parsed = FeatureManifest::parse(r#"{ "somethingElse": true }"#, "");
 
-        assert_eq!(parsed.unwrap(), FeatureManifest::default())
+        assert_eq!(parsed.unwrap(), default_manifest())
     }
 
     #[test]
