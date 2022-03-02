@@ -376,14 +376,8 @@ class BrowserNetwork implements Network {
     }
 }
 
-function getEndpoint(
-    endpointId: string,
-    featureIdToken: string
-): string | null {
-    const endpointObject = endpoints[endpointId];
-    if (endpointObject.features.includes(featureIdToken)) {
-        return endpointObject.baseURL;
-    } else return null;
+function getEndpoint(endpointId: string): string | null {
+    return endpoints[endpointId]?.url || null;
 }
 
 function getMetadata(): string {
@@ -391,9 +385,13 @@ function getMetadata(): string {
     return dateTime.toString();
 }
 
-function endpointRequestMiddleware(endpointId: string, featureIdToken: string) {
-    //user notification that get/post is happening later
-    if (endpointId) console.log("middleware contacted");
+function approveEndpointFetch(
+    endpointId: string,
+    featureIdToken: string
+): Boolean {
+    return confirm(
+        `${featureIdToken} wants to contact the endpoint: ${endpointId}. \n Proceed?`
+    );
 }
 
 class BrowserEndpoint implements Endpoint {
@@ -405,9 +403,10 @@ class BrowserEndpoint implements Endpoint {
         contentType?: string,
         authorization?: string
     ): Promise<EndpointResponse> {
-        // ????????
-        const endpointURL = getEndpoint(endpointId, featureIdToken);
-        if (!endpointURL) return {} as EndpointResponse;
+        if (!approveEndpointFetch(endpointId, featureIdToken))
+            return new Promise(() => ({} as EndpointResponse));
+        const endpointURL = getEndpoint(endpointId);
+        if (!endpointURL) return new Promise(() => ({} as EndpointResponse));
         const endpointResponse = {} as EndpointResponse;
         endpointResponse.response = "";
         endpointResponse.payload = await this.endpointNetwork.httpPost(
@@ -426,7 +425,9 @@ class BrowserEndpoint implements Endpoint {
         contentType?: string,
         authorization?: string
     ): Promise<EndpointResponse> {
-        const endpointURL = getEndpoint(endpointId, featureIdToken);
+        if (!approveEndpointFetch(endpointId, featureIdToken))
+            return new Promise(() => ({} as EndpointResponse));
+        const endpointURL = getEndpoint(endpointId);
         if (!endpointURL) return {} as EndpointResponse;
         const endpointResponse = {} as EndpointResponse;
         endpointResponse.response = "";
