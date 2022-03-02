@@ -26,8 +26,8 @@ export class I18n {
      *     It's an optional parameter, that defaults to the first key
      *     in the `translations` hash, so you might want to use arrange it
      *     bearing this in mind.
-     * @param {string} [ locale = determineLocale() ] - locale string, in the usual format xx[_YY],
-     *     by default locale determined using that function
+     * @param {string} [ l12n = new L12n() ] - localization object, by default it will use the current locale string
+     *     as determined by the [[L12n]] function
      * @throws LanguageError - if the `fallbackLanguage` key is not included in the translations hash
      */
     constructor(
