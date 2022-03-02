@@ -1,13 +1,8 @@
 import { LanguageError } from "../src/errors";
 import { L12n } from "../src/l12n";
+import { bigNumber, localePairs } from "./test-utils.js";
 
 let l12n;
-const bigNumber = "1000000.33";
-const localePairs = {
-    "de-DE": "1.000.000,33",
-    "es-ES": "1.000.000,33",
-    "en-GB": "1,000,000.33",
-};
 
 beforeAll(() => {
     l12n = new L12n();
