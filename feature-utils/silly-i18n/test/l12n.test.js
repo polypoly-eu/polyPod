@@ -2,6 +2,12 @@ import { LanguageError } from "../src/errors";
 import { L12n } from "../src/l12n";
 
 let l12n;
+const bigNumber = "1000000.33";
+const localePairs = {
+    "de-DE": "1.000.000,33",
+    "es-ES": "1.000.000,33",
+    "en-GB": "1,000,000.33",
+};
 
 beforeAll(() => {
     l12n = new L12n();
@@ -37,9 +43,10 @@ describe("Test correct and incorrect locales", () => {
 
 describe("It's able to translate numbers correctly", () => {
     it("is able to convert number to a known format", () => {
-        const enLocale = "en";
-        const enL12n = new L12n(enLocale);
-        expect(enL12n.locale).toBe(enLocale);
-        expect(enL12n.t(33333)).toBe("33,333");
+        for (const [locale, l12nString] of Object.entries(localePairs)) {
+            const localeHere = new L12n(locale);
+            expect(localeHere.locale).toEqual(locale);
+            expect(localeHere.t(bigNumber)).toEqual(l12nString);
+        }
     });
 });
