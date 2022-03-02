@@ -98,3 +98,26 @@ fn build_links_buffer<'a>(
         None
     }
 }
+
+#[cfg(test)]
+mod tests { 
+    use crate::flatbuffers_generated::feature_manifest_response_generated::feature_manifest_response::root_as_feature_manifest_parsing_response;
+
+    use super::*;
+
+    #[test]
+    fn test_build_failure() {
+        let expected_failure = KernelFailure::failed_to_parse_feature_manifest("Some missing field".to_string());
+        let byte_response = build_feature_manifest_parsing_response(Err(expected_failure.clone()));
+        let parsed = root_as_feature_manifest_parsing_response(&byte_response);
+        assert!(parsed.is_ok(), "Expected response parsing to be successfull");
+        let response = parsed.unwrap();
+
+        let failure = response.result_as_failure_failure();
+        assert!(failure.is_some(), "Expected response to contain failure");
+
+        let failure = failure.unwrap();
+        assert_eq!(failure.code(), expected_failure.code);
+        assert_eq!(failure.message(), Some(expected_failure.message.as_str()));
+    }
+}

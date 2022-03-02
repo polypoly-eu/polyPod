@@ -1,6 +1,6 @@
 use crate::flatbuffers_generated::failure_generated::failure::FailureCode;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct KernelFailure {
     pub code: FailureCode,
     pub message: String,
