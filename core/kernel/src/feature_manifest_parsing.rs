@@ -4,7 +4,6 @@ use std::collections::HashMap;
 
 #[derive(Deserialize, PartialEq, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
-#[allow(dead_code)] // Temporary until exposed through C API
 pub struct FeatureManifest {
     pub name: Option<String>,
     pub author: Option<String>,
@@ -19,7 +18,6 @@ pub struct FeatureManifest {
 // Alias for str, probably will be moved to a centralized place to be reused
 pub type JSONStr = str;
 
-#[allow(dead_code)] // Temporary until exposed through C API
 impl FeatureManifest {
     pub fn parse(json: &JSONStr, language_code: &str) -> Result<FeatureManifest, KernelFailure> {
         FullFeatureManifest::try_from(json)
@@ -41,6 +39,7 @@ impl FeatureManifest {
             links.extend(translated_links.into_iter());
         }
         let links = if !links.is_empty() { Some(links) } else { None };
+
         FeatureManifest {
             name: translation
                 .and_then(|manifest| manifest.name.clone())

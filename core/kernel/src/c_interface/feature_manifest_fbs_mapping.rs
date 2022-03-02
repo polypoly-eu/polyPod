@@ -100,19 +100,23 @@ fn build_links_buffer<'a>(
 }
 
 #[cfg(test)]
-mod tests { 
+mod tests {
     use crate::flatbuffers_generated::feature_manifest_response_generated::feature_manifest_response::root_as_feature_manifest_parsing_response;
-
     use super::*;
 
     #[test]
     fn test_build_failure() {
-        let expected_failure = KernelFailure::failed_to_parse_feature_manifest("Some missing field".to_string());
+        let expected_failure =
+            KernelFailure::failed_to_parse_feature_manifest("Some missing field".to_string());
         let byte_response = build_feature_manifest_parsing_response(Err(expected_failure.clone()));
-        let parsed = root_as_feature_manifest_parsing_response(&byte_response);
-        assert!(parsed.is_ok(), "Expected response parsing to be successfull");
-        let response = parsed.unwrap();
 
+        let parsed = root_as_feature_manifest_parsing_response(&byte_response);
+        assert!(
+            parsed.is_ok(),
+            "Expected response parsing to be successfull"
+        );
+
+        let response = parsed.unwrap();
         let failure = response.result_as_failure_failure();
         assert!(failure.is_some(), "Expected response to contain failure");
 
@@ -131,29 +135,62 @@ mod tests {
             thumbnail: Some("thumbnail".to_string()),
             thumbnail_color: Some("thumbnail_color".to_string()),
             primary_color: Some("primary_color".to_string()),
-            links: Some(HashMap::from([("link1".to_string(), "https://any.link".to_string())])),
+            links: Some(HashMap::from([(
+                "link1".to_string(),
+                "https://any.link".to_string(),
+            )])),
         };
         let byte_response = build_feature_manifest_parsing_response(Ok(expected_manifest.clone()));
 
         let parsed = root_as_feature_manifest_parsing_response(&byte_response);
-        assert!(parsed.is_ok(), "Expected response parsing to be successfull");
+        assert!(
+            parsed.is_ok(),
+            "Expected response parsing to be successfull"
+        );
 
         let response = parsed.unwrap();
         let parsed_manifest = response.result_as_feature_manifest_feature_manifest();
-        assert!(parsed_manifest.is_some(), "Expected response to contain manifest");
+        assert!(
+            parsed_manifest.is_some(),
+            "Expected response to contain manifest"
+        );
 
         let parsed_manifest = parsed_manifest.unwrap();
-        assert_eq!(parsed_manifest.name().map(String::from), expected_manifest.name);
-        assert_eq!(parsed_manifest.author().map(String::from), expected_manifest.author);
-        assert_eq!(parsed_manifest.version().map(String::from), expected_manifest.version);
-        assert_eq!(parsed_manifest.description().map(String::from), expected_manifest.description);
-        assert_eq!(parsed_manifest.thumbnail().map(String::from), expected_manifest.thumbnail);
-        assert_eq!(parsed_manifest.thumbnail_color().map(String::from), expected_manifest.thumbnail_color);
-        assert_eq!(parsed_manifest.primary_color().map(String::from), expected_manifest.primary_color);
-        
+        assert_eq!(
+            parsed_manifest.name().map(String::from),
+            expected_manifest.name
+        );
+        assert_eq!(
+            parsed_manifest.author().map(String::from),
+            expected_manifest.author
+        );
+        assert_eq!(
+            parsed_manifest.version().map(String::from),
+            expected_manifest.version
+        );
+        assert_eq!(
+            parsed_manifest.description().map(String::from),
+            expected_manifest.description
+        );
+        assert_eq!(
+            parsed_manifest.thumbnail().map(String::from),
+            expected_manifest.thumbnail
+        );
+        assert_eq!(
+            parsed_manifest.thumbnail_color().map(String::from),
+            expected_manifest.thumbnail_color
+        );
+        assert_eq!(
+            parsed_manifest.primary_color().map(String::from),
+            expected_manifest.primary_color
+        );
+
         let mut parsed_links: HashMap<String, String> = HashMap::new();
         for link in parsed_manifest.links().unwrap() {
-            parsed_links.insert(link.name().unwrap().to_string(), link.url().unwrap().to_string());
+            parsed_links.insert(
+                link.name().unwrap().to_string(),
+                link.url().unwrap().to_string(),
+            );
         }
 
         assert_eq!(parsed_links, expected_manifest.links.unwrap());

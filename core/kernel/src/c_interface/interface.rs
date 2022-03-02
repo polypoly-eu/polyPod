@@ -1,21 +1,24 @@
 use crate::{
     c_interface::{
         feature_manifest_fbs_mapping::build_feature_manifest_parsing_response,
-        kernel_bootstrap_fbs_mapping::build_kernel_bootstrap_response,
+        kernel_bootstrap_fbs_mapping::build_kernel_bootstrap_response, utils::cstring_to_str,
     },
     feature_manifest_parsing::FeatureManifest,
     kernel::Kernel,
     kernel::KERNEL,
     kernel_failure::KernelFailure,
 };
-use std::{ffi::CStr, os::raw::c_char};
+use std::os::raw::c_char;
 
 /// # Safety
 /// This function can be unsafe if the language_code pointer is null or the string is in wrong format.
 ///
+/// Mention - It is needed to be tested in integration if `*const u8` is the appropriate return format.
+///           Also, most likely, it will be required to expose an API to deallocate the byte buffer after parsing.
+///
 /// Bootstrap the kernel with the given configuration:
 /// - language_code: User's locale language code
-/// Returns the result JSON of either success or failure to bootstrap the kernel
+/// Returns a flatbuffer byte array
 #[no_mangle]
 pub unsafe extern "C" fn kernel_bootstrap(language_code: *const c_char) -> *const u8 {
     unsafe fn bootstrap(language_code: *const c_char) -> Result<(), KernelFailure> {
@@ -43,16 +46,4 @@ fn get_kernel() -> Result<&'static Kernel, KernelFailure> {
         Some(kernel) => Ok(kernel),
         None => Err(KernelFailure::kernel_not_bootstraped()),
     }
-}
-
-// Disabled the clippy false positive, https://github.com/rust-lang/rust-clippy/issues/5787
-#[allow(clippy::needless_lifetimes)]
-unsafe fn cstring_to_str<'a>(cstring: &'a *const c_char) -> Result<&str, KernelFailure> {
-    if cstring.is_null() {
-        return Err(KernelFailure::null_c_string_pointer());
-    }
-
-    CStr::from_ptr(*cstring)
-        .to_str()
-        .map_err(|err| KernelFailure::failed_to_create_c_str(err.to_string()))
 }

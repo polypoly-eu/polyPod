@@ -31,22 +31,36 @@ mod tests {
     #[test]
     fn test_build_success() {
         let byte_response = build_kernel_bootstrap_response(Ok(()));
-        let parsed = root_as_kernel_bootstrap_response(&byte_response);
-        assert!(parsed.is_ok(), "Expected response parsing to be successfull");
-        let response = parsed.unwrap();
 
-        assert!(response.failure().is_none(), "Expected response to not contain failure")
+        let parsed = root_as_kernel_bootstrap_response(&byte_response);
+        assert!(
+            parsed.is_ok(),
+            "Expected response parsing to be successfull"
+        );
+
+        let response = parsed.unwrap();
+        assert!(
+            response.failure().is_none(),
+            "Expected response to not contain failure"
+        );
     }
 
     #[test]
     fn test_build_failure() {
         let expected_failure = KernelFailure::kernel_bootstrap_failed();
         let byte_response = build_kernel_bootstrap_response(Err(expected_failure.clone()));
-        let parsed = root_as_kernel_bootstrap_response(&byte_response);
-        assert!(parsed.is_ok(), "Expected response parsing to be successfull");
-        let response = parsed.unwrap();
 
-        assert!(response.failure().is_some(), "Expected response to contain failure");
+        let parsed = root_as_kernel_bootstrap_response(&byte_response);
+        assert!(
+            parsed.is_ok(),
+            "Expected response parsing to be successfull"
+        );
+
+        let response = parsed.unwrap();
+        assert!(
+            response.failure().is_some(),
+            "Expected response to contain failure"
+        );
 
         let failure = response.failure().unwrap();
         assert_eq!(failure.code(), expected_failure.code);
