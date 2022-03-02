@@ -5,6 +5,7 @@ import {
 } from "./errors.js";
 
 import { determineLocale, determineLanguage } from "./locale.js";
+import { L12n } from "./l12n.js";
 
 /**
  * Simple class for performing string translations, with simple templating capabilities
@@ -33,7 +34,7 @@ export class I18n {
         language,
         translations,
         fallbackLanguage = Object.keys(translations)[0],
-        locale = determineLocale()
+        l12n = new L12n()
     ) {
         if (!(fallbackLanguage in translations)) {
             throw new LanguageError(
@@ -41,7 +42,7 @@ export class I18n {
                     " is not a key in the translations hash provided"
             );
         }
-        this._locale = locale;
+        this._l12n = l12n;
         this.language = language in translations ? language : fallbackLanguage;
         this._translations = translations[this.language];
     }
@@ -55,12 +56,21 @@ export class I18n {
     }
 
     /**
-     * Returns the locale string.
+     * Returns the locale string
      *
-     * @returns locale string in the usual `xx-XX` format.
+     * @returns the locale string in the usual format
      */
     get locale() {
-        return this._locale;
+        return this._l12n.locale;
+    }
+
+    /**
+     * Returns the localization object
+     *
+     * @returns the localization object.
+     */
+    get l12n() {
+        return this._l12n;
     }
 
     /**
@@ -94,13 +104,10 @@ export class I18n {
         }
 
         for (let [key, value] of Object.entries(options)) {
-            let convertedValue = value;
-            if (!isNaN(parseFloat(value))) {
-                convertedValue = Intl.NumberFormat(this._locale).format(
-                    parseFloat(value)
-                );
-            }
-            translation = translation.replace(`{{${key}}}`, convertedValue);
+            translation = translation.replace(
+                `{{${key}}}`,
+                this._l12n.t(value)
+            );
         }
         return translation;
     }
