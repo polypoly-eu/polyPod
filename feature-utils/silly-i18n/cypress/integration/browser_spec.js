@@ -1,8 +1,15 @@
 import { determineLanguage, determineLocale } from "../../src/locale.js";
 import { I18n } from "../../src/index.js";
+import { L12n } from "../../src/l12n.js";
 
 const LANGUAGE = "foo";
 let i18n;
+const bigNumber = "1000000.33";
+const localePairs = {
+    "de-DE": "1.000.000,33",
+    "es-ES": "1.000.000,33",
+    "en-GB": "1,000,000.33",
+};
 
 beforeEach(() => {
     i18n = new I18n(LANGUAGE, {
@@ -22,14 +29,18 @@ describe("Test language determination", () => {
     });
 });
 
+describe("Test locale numeric options correctly in its module", () => {
+    it("Converts big numbers to locale format", () => {
+        for (const [locale, l8nString] of Object.entries(localePairs)) {
+            const localeHere = new L12n(locale);
+            expect(localeHere.locale).to.equal(locale);
+            expect(localeHere.t(bigNumber)).to.equal(l8nString);
+        }
+    });
+});
+
 describe("Test locale numeric options correctly", () => {
     it("Converts big numbers to locale format", () => {
-        const bigNumber = "1000000.33";
-        const localePairs = {
-            "de-DE": "1.000.000,33",
-            "es-ES": "1.000.000,33",
-            "en-GB": "1,000,000.33",
-        };
         for (const [locale, l8nString] of Object.entries(localePairs)) {
             i18n._locale = locale;
             expect(i18n.locale).to.equal(locale);
