@@ -14,7 +14,7 @@ node_modules/
 .data
 
 # VS Code local config
-.vscode
+#.vscode
 
 # Andoid specific local config
 android/app/local.properties
