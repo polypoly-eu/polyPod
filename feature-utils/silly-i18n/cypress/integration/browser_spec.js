@@ -20,7 +20,7 @@ describe("Test language determination", () => {
     });
 
     it("is able to create the object in a web environment", () => {
-        expect(i18n).to.have.keys(["_locale", "language", "_translations"]);
+        expect(i18n).to.have.keys(["_l12n", "language", "_translations"]);
         expect(i18n.language).to.equal(LANGUAGE);
     });
 });
@@ -38,7 +38,7 @@ describe("Test locale numeric options correctly in its module", () => {
 describe("Test locale numeric options correctly", () => {
     it("Converts big numbers to locale format", () => {
         for (const [locale, l8nString] of Object.entries(localePairs)) {
-            i18n._locale = locale;
+            i18n._l12n = new L12n(locale);
             expect(i18n.locale).to.equal(locale);
             expect(i18n.t("options:opt", { opt: bigNumber })).to.equal(
                 l8nString
