@@ -29,10 +29,11 @@
 "message_feature_error %@ %@" = "Leider gab es einen Fehler in '%@':\n\n%@\n\nIch beende es.";
 "message_url_open_prevented %@ %@" = "Ich habe %@ davon abgehalten, eine URL zu öffnen:\n%@";
 "message_url_open_requested %@ %@" = "%@s möchte eine URL in Ihrem Browser öffnen:\n\n%@s\n\nZulassen?";
+"message_approve_endpoint_fetch_request %@ %@" = "%@-feature möchte mit diesen Server Daten teilen über Ihren polyPod:\n\n%@\n\nErlauben?";
 "message_security_warning_title" = "Sicherheitswarnung";
 "message_security_warning_text" = "Um sicherzustellen, dass Ihre Daten sicher bleiben, empfehlen wir, Ihre Gerätesperre auch für den polyPod zu nutzen.";
-"button_url_open_confirm" = "Ja";
-"button_url_open_reject" = "Nein";
+"button_confirm" = "Ja";
+"button_reject" = "Nein";
 "button_update_notification_close" = "OK";
 "auth_prompt_set_up" = "Sperre einrichten";
 "auth_prompt_unlock" = "Einloggen in polyPod";

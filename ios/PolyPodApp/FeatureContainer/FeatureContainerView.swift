@@ -9,6 +9,7 @@ struct FeatureContainerView: UIViewRepresentable {
     let errorHandler: (String) -> Void
     let openUrlHandler: (String) -> Void
     let pickFileHandler: (String?, @escaping (ExternalFile?) -> Void) -> Void
+    let approveEndpointFetchHandler: (String, String) -> Bool
 
     func makeUIView(context: Context) -> FeatureWebView {
         let featureWebView = FeatureWebView(
@@ -17,7 +18,8 @@ struct FeatureContainerView: UIViewRepresentable {
             activeActions: $activeActions,
             errorHandler: errorHandler,
             openUrlHandler: openUrlHandler,
-            pickFileHandler: pickFileHandler
+            pickFileHandler: pickFileHandler,
+            approveEndpointFetchHandler: approveEndpointFetchHandler
         )
 
         if let featureColor = feature.primaryColor {
@@ -26,6 +28,7 @@ struct FeatureContainerView: UIViewRepresentable {
         }
 
         PodApi.shared.polyNav.delegate  = featureWebView
+        PodApi.shared.endpoint.delegate  = featureWebView
 
         return featureWebView
     }
@@ -132,6 +135,7 @@ class FeatureWebView: WKWebView {
     private let openUrlHandler: (String) -> Void
     private let pickFileHandler: (String?, @escaping (ExternalFile?) -> Void) -> Void
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
+    private let approveEndpointFetchHandler: (String, String) -> Bool
 
     init(
         feature: Feature,
@@ -139,7 +143,8 @@ class FeatureWebView: WKWebView {
         activeActions: Binding<[String]>,
         errorHandler: @escaping (String) -> Void,
         openUrlHandler: @escaping (String) -> Void,
-        pickFileHandler: @escaping (String?, @escaping (ExternalFile?) -> Void) -> Void
+        pickFileHandler: @escaping (String?, @escaping (ExternalFile?) -> Void) -> Void,
+        approveEndpointFetchHandler: @escaping (String, String) -> Bool
     ) {
         FeatureStorage.shared.activeFeature = feature
         
@@ -148,6 +153,7 @@ class FeatureWebView: WKWebView {
         self.errorHandler = errorHandler
         self.openUrlHandler = openUrlHandler
         self.pickFileHandler = pickFileHandler
+        self.approveEndpointFetchHandler = approveEndpointFetchHandler
 
         let contentController = WKUserContentController();
         installUserScript(
@@ -347,6 +353,12 @@ extension FeatureWebView: PolyNavDelegate {
     
     func doHandlePickFile(type: String?, completion: @escaping (ExternalFile?) -> Void) {
         pickFileHandler(type, completion)
+    }
+}
+
+extension FeatureWebView: EndpointDelegate {
+    func doHandleApproveEndpointFetch(endpointId: String, featureIdToken: String) -> Bool {
+        approveEndpointFetchHandler(endpointId, featureIdToken)
     }
 }
 

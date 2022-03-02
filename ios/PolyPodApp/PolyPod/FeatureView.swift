@@ -72,7 +72,8 @@ struct FeatureView: View {
                 queuedAction: queuedAction,
                 errorHandler: handleError,
                 openUrlHandler: openUrl,
-                pickFileHandler: pickFile
+                pickFileHandler: pickFile,
+                approveEndpointFetchHandler: approveEndpointFetch
             )
         }
     }
@@ -137,7 +138,7 @@ struct FeatureView: View {
             preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(
                             title: NSLocalizedString(
-                                "button_url_open_confirm",
+                                "button_confirm",
                                 comment: ""
                             ),
                             style: .default,
@@ -146,7 +147,7 @@ struct FeatureView: View {
                             }))
         alert.addAction(UIAlertAction(
                             title: NSLocalizedString(
-                                "button_url_open_reject",
+                                "button_reject",
                                 comment: ""
                             ),
                             style: .default))
@@ -159,6 +160,35 @@ struct FeatureView: View {
     
     private func triggerFeatureAction(_ action: String) {
         queuedAction = (action, DispatchTime.now())
+    }
+    
+    private func approveEndpointFetch(endpointId: String, featureIdToken: String) -> Bool {
+        let viewController =
+            UIApplication.shared.windows.first!.rootViewController!
+        let alert = UIAlertController(
+            title: "",
+            message: String.localizedStringWithFormat(
+                NSLocalizedString(
+                    "message_approve_endpoint_fetch_request %@ %@",
+                    comment: ""
+                ),
+                featureIdToken, endpointId
+            ),
+            preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(
+                            title: NSLocalizedString(
+                                "button_confirm",
+                                comment: ""
+                            ),
+                            style: .default))
+        alert.addAction(UIAlertAction(
+                            title: NSLocalizedString(
+                                "button_reject",
+                                comment: ""
+                            ),
+                            style: .default))
+        viewController.present(alert, animated: true, completion: nil)
+        return true
     }
 }
 
