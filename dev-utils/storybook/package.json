@@ -1,0 +1,14 @@
+{
+  "name": "@polypoly-eu/storybook",
+  "private": "true",
+  "scripts": {
+    "storybook:react": "start-storybook -p 6006 -c .storybook/react"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.4.19",
+    "@storybook/addon-essentials": "^6.4.19",
+    "@storybook/addon-interactions": "^6.4.19",
+    "@storybook/react": "^6.4.19",
+    "storybook-addon-designs": "^6.2.1"
+  }
+}
