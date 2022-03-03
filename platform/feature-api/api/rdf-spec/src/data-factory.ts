@@ -435,7 +435,7 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                     const quad1 = this.dataFactory.quad(subject, predicate, object, graph);
                     const quad2 = { subject, predicate, object, graph };
 
-                    // @ts-ignore
+                    // @ts-ignore just a test, ignore not assignable error
                     assert.equal(quad1.equals(quad2), true);
                 });
 
@@ -460,7 +460,7 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                     const quad1 = this.dataFactory.quad(subject1, predicate, object, graph);
                     const quad2 = { subject: subject2, predicate, object, graph };
 
-                    // @ts-ignore
+                    // @ts-ignore this is just a test, no need to complete types
                     assert.equal(quad1.equals(quad2), false);
                 });
 
