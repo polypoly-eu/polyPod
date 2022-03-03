@@ -44,6 +44,10 @@ To run the tests, just execute:
 
     $ ./build.js test
 
+## Linting
+
+Linting is done via configuration at the to
+
 To run the linter:
 
     $ ./build.js lint
@@ -54,6 +58,19 @@ example [android](android).
 If linting reveals some error, they can be fixed with
 
     $ ./build.js lintfix
+
+Although just doing the linting will reveal the rules, there are a couple of
+sources for this configuration:
+
+* [`.editorconfig`](.editorconfig) is a standard way of conveying to all kinds
+  of editors and IDEs general configuration values such as how many spaces using
+  in indenting, and max line length. This is going to be checked any way, but
+  it's a way of enforcing it at the editor level.
+* [`.eslintrc.cjs`](.eslintrc.cjs) describes other globals and settings that
+  will be enforced when running linting. In general, we will follow [standard
+  rules](https://eslint.org/docs/rules/), with this module just turning off some
+  of them. Please familiarize yourself with them, because the linter is
+  unforgiving.
 
 ## Branches
 
