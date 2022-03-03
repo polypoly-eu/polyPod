@@ -7,7 +7,7 @@
     "serve": "npm run build && node ./server.js"
   },
   "devDependencies": {
-    "@polypoly-eu/podjs": "file:../../podjs",
+    "@polypoly-eu/podjs": "file:../../platform/podjs",
     "express": "^4.17.3"
   },
   "private": true
