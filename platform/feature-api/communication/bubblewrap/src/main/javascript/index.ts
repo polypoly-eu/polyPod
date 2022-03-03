@@ -258,7 +258,7 @@ export class Bubblewrap {
                 for (const [name, Class] of entries) {
                     if (!(_value instanceof Class)) continue;
 
-                    // @ts-ignore
+                    // @ts-ignore _value is unknown. Bubblewrap needs to be more type-conscious on both ends: TO DO
                     const value: MaybeSerializable = _value;
 
                     if (isSerializable(value))
