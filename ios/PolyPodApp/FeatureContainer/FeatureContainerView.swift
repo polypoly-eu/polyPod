@@ -9,7 +9,7 @@ struct FeatureContainerView: UIViewRepresentable {
     let errorHandler: (String) -> Void
     let openUrlHandler: (String) -> Void
     let pickFileHandler: (String?, @escaping (ExternalFile?) -> Void) -> Void
-    let approveEndpointFetchHandler: (String, String) -> Bool
+    let approveEndpointFetchHandler: (String, String, @escaping (Bool) -> Void) -> Void
 
     func makeUIView(context: Context) -> FeatureWebView {
         let featureWebView = FeatureWebView(
@@ -135,7 +135,7 @@ class FeatureWebView: WKWebView {
     private let openUrlHandler: (String) -> Void
     private let pickFileHandler: (String?, @escaping (ExternalFile?) -> Void) -> Void
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
-    private let approveEndpointFetchHandler: (String, String) -> Bool
+    private let approveEndpointFetchHandler: (String, String, @escaping (Bool) -> Void) -> Void
 
     init(
         feature: Feature,
@@ -144,7 +144,7 @@ class FeatureWebView: WKWebView {
         errorHandler: @escaping (String) -> Void,
         openUrlHandler: @escaping (String) -> Void,
         pickFileHandler: @escaping (String?, @escaping (ExternalFile?) -> Void) -> Void,
-        approveEndpointFetchHandler: @escaping (String, String) -> Bool
+        approveEndpointFetchHandler: @escaping (String, String, @escaping (Bool) -> Void) -> Void
     ) {
         FeatureStorage.shared.activeFeature = feature
         
@@ -357,8 +357,8 @@ extension FeatureWebView: PolyNavDelegate {
 }
 
 extension FeatureWebView: EndpointDelegate {
-    func doHandleApproveEndpointFetch(endpointId: String, featureIdToken: String) -> Bool {
-        approveEndpointFetchHandler(endpointId, featureIdToken)
+    func doHandleApproveEndpointFetch(endpointId: String, featureIdToken: String, completion: @escaping (Bool) -> Void) -> Void {
+        approveEndpointFetchHandler(endpointId, featureIdToken, completion)
     }
 }
 

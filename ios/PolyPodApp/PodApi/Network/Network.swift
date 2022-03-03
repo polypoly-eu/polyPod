@@ -34,6 +34,7 @@ class Network: NetworkProtocol {
         
         let semaphore = DispatchSemaphore(value: 0)
         var errorMessage: String? = nil
+        var responseData: String? = nil
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
             guard let response = response as? HTTPURLResponse,
@@ -49,6 +50,9 @@ class Network: NetworkProtocol {
                 return
             }
             
+            guard let data = data else { return }
+            responseData = String(data: data, encoding: .utf8)!
+            
             semaphore.signal()
         }
         task.resume()
@@ -56,8 +60,9 @@ class Network: NetworkProtocol {
         
         if let errorMessage = errorMessage {
             Log.error("network.httpPost failed: \(errorMessage)")
+            return errorMessage
         }
-        return errorMessage
+        return responseData
     }
     
     func httpGet(
@@ -108,6 +113,7 @@ class Network: NetworkProtocol {
         
         if let errorMessage = errorMessage {
             Log.error("network.httpGet failed: \(errorMessage)")
+            return errorMessage
         }
         
         return responseData

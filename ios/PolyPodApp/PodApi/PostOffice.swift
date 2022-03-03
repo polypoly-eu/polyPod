@@ -474,7 +474,9 @@ extension PostOffice {
         let payload = args[2] as! String
         let contentType = args[3] as? String
         let authorization = args[4] as? String
-        PodApi.shared.endpoint.send(endpointId: endpointId, featureIdToken: featureIdToken, payload: payload, contentType: contentType, authorization: authorization)
+        PodApi.shared.endpoint.send(endpointId: endpointId, featureIdToken: featureIdToken, payload: payload, contentType: contentType, authorization: authorization) { response in
+            completionHandler(MessagePackValue.string(response), nil)
+        }
     }
         
     private func handleEndpointGet(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
@@ -482,7 +484,9 @@ extension PostOffice {
         let featureIdToken = args[1] as! String
         let contentType = args[2] as? String
         let authorization = args[3] as? String
-        PodApi.shared.endpoint.get(endpointId: endpointId, featureIdToken: featureIdToken, contentType: contentType, authorization: authorization)
+        PodApi.shared.endpoint.get(endpointId: endpointId, featureIdToken: featureIdToken, contentType: contentType, authorization: authorization) { response in
+            completionHandler(MessagePackValue.string(response), nil)
+        }
     }
     
 }

@@ -162,7 +162,7 @@ struct FeatureView: View {
         queuedAction = (action, DispatchTime.now())
     }
     
-    private func approveEndpointFetch(endpointId: String, featureIdToken: String) -> Bool {
+    private func approveEndpointFetch(endpointId: String, featureIdToken: String, completion: @escaping (Bool) -> Void) {
         let viewController =
             UIApplication.shared.windows.first!.rootViewController!
         let alert = UIAlertController(
@@ -180,15 +180,20 @@ struct FeatureView: View {
                                 "button_confirm",
                                 comment: ""
                             ),
-                            style: .default))
+                            style: .default,
+                            handler: { (action: UIAlertAction!) in
+                                completion(true)
+                            }))
         alert.addAction(UIAlertAction(
                             title: NSLocalizedString(
                                 "button_reject",
                                 comment: ""
                             ),
-                            style: .default))
+                            style: .default,
+                            handler: { (action: UIAlertAction!) in
+                                completion(false)
+                            }))
         viewController.present(alert, animated: true, completion: nil)
-        return true
     }
 }
 
