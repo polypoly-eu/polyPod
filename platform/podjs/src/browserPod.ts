@@ -70,7 +70,7 @@ class LocalStoragePolyIn implements PolyIn {
     }
 
     async has(...quads: RDF.Quad[]): Promise<boolean> {
-        throw "Not implemented: has";
+        throw `Called with ${quads}, not implemented: «has»`;
     }
 }
 
