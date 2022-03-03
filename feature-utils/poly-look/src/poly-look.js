@@ -11,7 +11,7 @@ import { PolyChart } from "./visualisations/wrappers/react/polyChart.jsx";
 import {
   Tab,
   Tabs,
-  ChipGroup,
+  FilterChips,
   BlockLegend,
   LineLegend,
 } from "./react-components";
@@ -22,7 +22,7 @@ export {
   SankeyDiagram,
   TreeMap,
   PolyChart,
-  ChipGroup,
+  FilterChips,
   Tab,
   Tabs,
   BlockLegend,
