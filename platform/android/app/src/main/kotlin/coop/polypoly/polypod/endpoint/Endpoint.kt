@@ -2,8 +2,10 @@ package coop.polypoly.polypod.endpoint
 
 import android.content.Context
 import android.content.res.AssetManager
+import android.webkit.WebView
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.network.Network
+import coop.polypoly.polypod.polyNav.PolyNavObserver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
@@ -16,7 +18,7 @@ private fun AssetManager.readFile(fileName: String) = open(fileName)
 @Serializable
 data class EndpointInfo(val url: String, val auth: String)
 
-class Endpoint(val context: Context) {
+class Endpoint(val context: Context, private var observer: EndpointObserver? = null, webView: WebView) {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
@@ -29,6 +31,9 @@ class Endpoint(val context: Context) {
             Json.decodeFromString(endpointsJsonString)
         return endpointsJson[endpointId]
     }
+    open fun setEndpointObserver(newObserver: EndpointObserver) {
+        observer = newObserver
+    }
 
     val endpointNetwork = Network(context)
     open suspend fun send(
@@ -39,6 +44,8 @@ class Endpoint(val context: Context) {
         authorization: String?
     ): String? =
         withContext(Dispatchers.IO) {
+            val endpointFetchAproval = observer?.approveEndpointFetch?.invoke(endpointId)
+            if ( endpointFetchAproval == false) { return@withContext null}
             val endpointInfo =
                 endpointInfofromId(endpointId) ?: return@withContext null
             val response = endpointNetwork

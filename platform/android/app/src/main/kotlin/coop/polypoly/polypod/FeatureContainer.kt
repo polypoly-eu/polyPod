@@ -25,6 +25,7 @@ import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.lifecycleScope
 import androidx.webkit.WebViewAssetLoader
 import coop.polypoly.polypod.endpoint.Endpoint
+import coop.polypoly.polypod.endpoint.EndpointObserver
 import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.info.Info
@@ -36,6 +37,7 @@ import coop.polypoly.polypod.polyNav.PolyNavObserver
 import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import java.io.ByteArrayInputStream
+import java.nio.channels.CompletionHandler
 import java.util.zip.ZipFile
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -56,7 +58,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         ),
         Info(),
         Network(context),
-        Endpoint(context)
+        Endpoint(context, webView = webView)
     )
 
     var feature: Feature? = null
