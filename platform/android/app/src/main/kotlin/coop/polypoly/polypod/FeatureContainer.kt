@@ -36,6 +36,7 @@ import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
+import kotlinx.coroutines.CompletableDeferred
 import java.io.ByteArrayInputStream
 import java.nio.channels.CompletionHandler
 import java.util.zip.ZipFile
@@ -50,6 +51,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private val webView = WebView(context)
     private val registry = LifecycleRegistry(this)
+    private var fetchApproval: CompletableDeferred<Boolean?>? = null
+
     val api = PodApi(
         PolyOut(context),
         PolyIn(context, context.filesDir),
@@ -126,6 +129,38 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             .show()
     }
 
+
+    private fun approveEndpointFetch(endpointId: String? , completion: (suspend (Boolean)->String?)): Unit {
+        if (fetchApproval?.isActive == true)
+            return
+        fetchApproval = CompletableDeferred()
+        val featureName = feature?.name ?: return
+        if (endpointId == null) {
+            return
+        }
+
+        val message = context?.getString(
+            R.string.message_url_open_requested, featureName, endpointId
+        )
+
+        val confirmLabel = context?.getString(R.string.button_url_open_confirm)
+        val rejectLabel = context?.getString(R.string.button_url_open_reject)
+        System.out.println("We out here")
+        AlertDialog.Builder(context)
+             .setMessage(message)
+             .setPositiveButton(confirmLabel) {  _, _ ->
+                 suspend{completion(true)}
+
+             }
+             .setNegativeButton(rejectLabel) { _, _ ->
+                 suspend{completion(false)}
+             }
+             .show()
+
+    }
+
+
+
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)
         FeatureStorage.activeFeature = feature
@@ -135,6 +170,11 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 null,
                 { url -> openUrl(url) },
                 null
+            )
+        )
+        api.endpoint.setEndpointObserver(
+            EndpointObserver(
+                ::approveEndpointFetch
             )
         )
 

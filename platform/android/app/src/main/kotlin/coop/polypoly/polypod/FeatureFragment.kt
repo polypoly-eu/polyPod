@@ -103,7 +103,6 @@ open class FeatureFragment : Fragment() {
     }
 
     private var pickFileResult: CompletableDeferred<Uri?>? = null
-    private var fetchApproval: CompletableDeferred<Boolean?>? = null
 
 
     override fun onCreateView(
@@ -195,11 +194,7 @@ open class FeatureFragment : Fragment() {
                 ::pickFile
             )
         )
-        featureContainer.api.endpoint.setEndpointObserver(
-            EndpointObserver(
-                ::approveEndpointFetch
-            )
-        )
+
     }
 
     private fun navigateBack() {
@@ -231,38 +226,6 @@ open class FeatureFragment : Fragment() {
 
     private fun updateAppBarTitle(view: View, title: String) {
         view.findViewById<TextView>(R.id.feature_title).text = title
-    }
-
-    private suspend fun approveEndpointFetch(endpointId: String?): Boolean? {
-        System.out.println("YAAAAAAAA")
-        if (fetchApproval?.isActive == true)
-            return null
-        fetchApproval = CompletableDeferred()
-        val featureName = feature?.name ?: return null
-        if (endpointId == null) {
-            return null
-        }
-
-        val message = context?.getString(
-            R.string.message_url_open_requested, featureName, endpointId
-        )
-        var result = false
-        (fetchApproval?.await())?.let{
-            it.let{
-                val confirmLabel = context?.getString(R.string.button_url_open_confirm)
-                val rejectLabel = context?.getString(R.string.button_url_open_reject)
-                AlertDialog.Builder(context)
-                    .setMessage(message)
-                    .setPositiveButton(confirmLabel) { _, _ ->
-                        result = true
-                    }
-                    .setNegativeButton(rejectLabel) { _, _ ->
-                        result = false
-                    }
-                    .show()
-            }
-        }
-        return result
     }
 
     private suspend fun pickFile(type: String?): ExternalFile? {

@@ -10,6 +10,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.*
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 private fun AssetManager.readFile(fileName: String) = open(fileName)
     .bufferedReader()
@@ -44,18 +46,22 @@ class Endpoint(val context: Context, private var observer: EndpointObserver? = n
         authorization: String?
     ): String? =
         withContext(Dispatchers.IO) {
-            val endpointFetchAproval = observer?.approveEndpointFetch?.invoke(endpointId)
-            if ( endpointFetchAproval == false) { return@withContext null}
-            val endpointInfo =
-                endpointInfofromId(endpointId) ?: return@withContext null
-            val response = endpointNetwork
-                .httpPost(
-                    endpointInfo.url,
-                    body,
-                    contentType,
-                    authorization ?: endpointInfo.auth
-                )
-            return@withContext response
+            observer?.approveEndpointFetch?.invoke(endpointId){
+                if ( it == false) { return@invoke null}
+                System.out.println("Sup")
+                val endpointInfo =endpointInfofromId(endpointId) ?: return@invoke null
+                val response = endpointNetwork
+                    .httpPost(
+                        endpointInfo.url,
+                        body,
+                        contentType,
+                        authorization ?: endpointInfo.auth
+                    )
+
+                return@invoke response
+            }
+            return@withContext "response"
+
         }
     open suspend fun get(
         endpointId: String,
