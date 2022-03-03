@@ -83,7 +83,6 @@ export default function AppNavigator() {
         async function getOnboardingShown() {
             let wasShown = await AsyncStorage.getItem("onboardingshown");
             if (wasShown == null) {
-                //@ts-ignore
                 wasShown = false;
             }
             setOnboardingShown(wasShown);
