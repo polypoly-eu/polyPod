@@ -66,7 +66,6 @@ module.exports = {
                         allowExpressions: true,
                     },
                 ],
-                "@typescript-eslint/no-this-alias": "off",
             },
         },
         {
