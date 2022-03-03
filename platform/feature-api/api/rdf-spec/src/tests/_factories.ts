@@ -5,6 +5,8 @@ import Graphy from "@graphy/core.data.factory";
 import { DataFactory as N3 } from "n3";
 import { DataFactory as Ruben } from "rdf-data-factory";
 
+/** This is a hack to make Graphy support with RDF*
+ * Just like the rest of the other data factories */
 Object.assign(Object.getPrototypeOf(Graphy.quad()), {
     termType: "Quad",
     value: "",
