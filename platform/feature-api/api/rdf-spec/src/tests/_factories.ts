@@ -5,7 +5,6 @@ import Graphy from "@graphy/core.data.factory";
 import { DataFactory as N3 } from "n3";
 import { DataFactory as Ruben } from "rdf-data-factory";
 
-// TODO <https://github.com/blake-regalia/graphy.js/pull/34>
 Object.assign(Object.getPrototypeOf(Graphy.quad()), {
     termType: "Quad",
     value: "",
