@@ -1,7 +1,7 @@
-use std::{process, path::PathBuf};
+use std::{path::PathBuf, process};
 
 // Based on https://doc.rust-lang.org/cargo/reference/build-scripts.html
-
+// build.js allows running any scripts/code before building the Kernel.
 fn main() {
     generate_flatbuffers();
 }
@@ -15,13 +15,12 @@ fn generate_flatbuffers() {
     // requires complexity wich may not be needed.
 
     let path = PathBuf::from("make");
-    
+
     let mut cmd = process::Command::new(&path);
     cmd.stdin(process::Stdio::null());
     cmd.args(vec!["generate_flatbuffers".to_string()]);
 
-    cmd
-        .spawn()
+    cmd.spawn()
         .expect("Failed to spawn flatc command")
         .wait()
         .expect("flatc command failed");
