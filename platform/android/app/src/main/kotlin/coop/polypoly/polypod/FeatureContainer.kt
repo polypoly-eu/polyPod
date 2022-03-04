@@ -140,7 +140,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         }
 
         val message = context?.getString(
-            R.string.message_url_open_requested, featureName, endpointId
+            R.string.message_approve_endpoint_fetch, featureName, endpointId
         )
 
         val confirmLabel = context?.getString(R.string.button_url_open_confirm)

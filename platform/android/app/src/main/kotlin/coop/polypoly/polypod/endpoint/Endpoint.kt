@@ -47,7 +47,6 @@ class Endpoint(
     val endpointNetwork = Network(context)
     open suspend fun send(
         endpointId: String,
-        featureIdToken: String,
         body: String,
         contentType: String?,
         authorization: String?,
@@ -73,7 +72,6 @@ class Endpoint(
 
     open suspend fun get(
         endpointId: String,
-        featureIdToken: String,
         contentType: String?,
         authorization: String?
     ): String? {
