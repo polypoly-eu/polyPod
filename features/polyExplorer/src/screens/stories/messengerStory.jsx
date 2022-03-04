@@ -80,10 +80,10 @@ const MessengerStory = () => {
             ),
         }),
         i18n.t(`${i18nHeader}:summary.bullet.3`, {
-            max_facebook_product_recipients: facebookMessengers.reduce((a, b) =>
+            max_meta_product_recipients: facebookMessengers.reduce((a, b) =>
                 Math.max(a.dataRecipients?.length || a, b.dataRecipients.length)
             ),
-            facebook_recipients:
+            meta_recipients:
                 entityObjectByPpid(mainFacebookCompany).dataRecipients.length,
         }),
     ];
