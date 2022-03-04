@@ -33,13 +33,7 @@ window.addEventListener("DOMContentLoaded", () => {
         .addEventListener("click", async () => {
             const featureIdToken = "demo";
             const endpointId = "demoTestEndpoint";
-            console.log(
-                await window.pod.endpoint.send(
-                    endpointId,
-                    featureIdToken,
-                    "abc"
-                )
-            );
+            console.log(await window.pod.endpoint.send(endpointId, "abc"));
         });
 
     (function () {

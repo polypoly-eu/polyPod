@@ -1,12 +1,12 @@
 import Foundation
 
 protocol EndpointProtocol {
-    func send(endpointId: String, featureIdToken: String, payload: String, contentType: String?, authorization: String?, completionHandler: @escaping (String) -> Void) -> Void
-    func get(endpointId: String, featureIdToken: String, contentType: String?, authorization: String?, completionHandler: @escaping (String) -> Void) -> Void
+    func send(endpointId: String, payload: String, contentType: String?, authorization: String?, completionHandler: @escaping (String) -> Void) -> Void
+    func get(endpointId: String, contentType: String?, authorization: String?, completionHandler: @escaping (String) -> Void) -> Void
 }
 
 protocol EndpointDelegate {
-    func doHandleApproveEndpointFetch(endpointId: String, featureIdToken: String, completion: @escaping (Bool) -> Void) -> Void
+    func doHandleApproveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) -> Void
 }
 
 protocol EndpointInfoProtocol: Decodable {
@@ -27,8 +27,8 @@ class Endpoint: EndpointProtocol {
     
     var delegate: EndpointDelegate?
     
-    func approveEndpointFetch(endpointId: String, featureIdToken: String, completion: @escaping (Bool) -> Void) -> Void {
-        delegate?.doHandleApproveEndpointFetch(endpointId: endpointId, featureIdToken: featureIdToken, completion: completion)
+    func approveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) -> Void {
+        delegate?.doHandleApproveEndpointFetch(endpointId: endpointId, completion: completion)
     }
     
     private func endpointInfoFromId(endpointId: String) -> EndpointInfo? {
@@ -40,8 +40,8 @@ class Endpoint: EndpointProtocol {
     }
     
     let network: Network = Network()
-    func send(endpointId: String, featureIdToken: String, payload: String, contentType: String?, authorization: String?, completionHandler: @escaping (String) -> Void) -> Void {
-        approveEndpointFetch(endpointId: endpointId, featureIdToken: featureIdToken) { approved in
+    func send(endpointId: String, payload: String, contentType: String?, authorization: String?, completionHandler: @escaping (String) -> Void) -> Void {
+        approveEndpointFetch(endpointId: endpointId) { approved in
             if (!approved) {
                 Log.error("endpoint.get failed: Permission for endpoint \(endpointId) denied")
                 completionHandler("403")
@@ -61,8 +61,8 @@ class Endpoint: EndpointProtocol {
         }
     }
     
-    func get(endpointId: String, featureIdToken: String, contentType: String?, authorization: String?, completionHandler: @escaping (String) -> Void) -> Void {
-        approveEndpointFetch(endpointId: endpointId, featureIdToken: featureIdToken) { approved in
+    func get(endpointId: String, contentType: String?, authorization: String?, completionHandler: @escaping (String) -> Void) -> Void {
+        approveEndpointFetch(endpointId: endpointId) { approved in
             if (!approved) {
                 Log.error("endpoint.get failed: Permission for endpoint \(endpointId) denied")
                 completionHandler("403")

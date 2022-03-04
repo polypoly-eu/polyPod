@@ -162,7 +162,7 @@ struct FeatureView: View {
         queuedAction = (action, DispatchTime.now())
     }
     
-    private func approveEndpointFetch(endpointId: String, featureIdToken: String, completion: @escaping (Bool) -> Void) {
+    private func approveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) {
         let viewController =
             UIApplication.shared.windows.first!.rootViewController!
         let alert = UIAlertController(
@@ -172,7 +172,7 @@ struct FeatureView: View {
                     "message_approve_endpoint_fetch_request %@ %@",
                     comment: ""
                 ),
-                featureIdToken, endpointId
+                feature.name, endpointId
             ),
             preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(
