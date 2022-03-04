@@ -1,7 +1,0 @@
-{
-  "version": "0.0.1",
-  "devDependencies": {
-    "@polypoly-eu/fetch-spec": "file:../../core/api/fetch-spec"
-  },
-  "private": true
-}

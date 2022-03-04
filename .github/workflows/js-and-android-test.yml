@@ -1,0 +1,59 @@
+name: Test pushes and PRs
+on:
+    push:
+    pull_request:
+        types: [assigned, opened, ready_for_review]
+
+jobs:
+    test:
+        name: Run tests.
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: 16
+                  cache: "npm"
+                  cache-dependency-path: "**/package-lock.json"
+            - name: Checks paths to rebuild Android
+              uses: dorny/paths-filter@b2feaf19c27470162a626bd6fa8438ae5b263721 #v2.10.2
+              id: changes
+              with:
+                  filters: |
+                      android:
+                      - 'feature-utils/**'
+                      - 'features/**'
+                      - 'platform/android/**'
+                      - 'platform/core/**'
+                      - 'platform/feature-api/**'
+                      js:
+                      - '**/*.js'
+                      - '**/*.jsx'
+                      - '**/*.ts'
+                      - '**/*.tsx'
+                      - '**/*.?js'
+                      - '.editorconfig'
+                      - '.eslintrc.cjs'
+                      apiAndFeatures:
+                      - 'build/**'
+                      - 'features/**'
+                      - 'feature-utils/**'
+                      - 'platform/feature-api/**'
+                      - 'platform/podjs/**'
+            - name: Lint core and features
+              if: steps.changes.outputs.js == 'true'
+              run: ./build.js lint
+            - name: Build core and features
+              if: steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.android == 'true'
+              run: ./build.js
+            - name: Test core and features
+              if: steps.changes.outputs.apiAndFeatures == 'true'
+              run: xvfb-run --auto-servernum ./build.js test
+            - uses: actions/setup-java@v1
+              if: steps.changes.outputs.android == 'true'
+              with:
+                  java-version: 11
+            - name: Test android
+              if: steps.changes.outputs.android == 'true'
+              working-directory: platform/android
+              run: ./gradlew test

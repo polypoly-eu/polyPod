@@ -19,15 +19,15 @@ jobs:
             POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
             POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
       - name: Lock xcode version
-        working-directory: ios
+        working-directory: platform/ios
         run: make lockxcodeversion
       - name: Run tests
-        working-directory: ios
+        working-directory: platform/ios
         run: |
           set -o pipefail
           make test | xcpretty
       - name: Install distribution prerequisites
-        working-directory: ios
+        working-directory: platform/ios
         run: make install_distribution_prerequisites
         env:
           POLYPOD_APPLE_IOS_APPSTORE_P12_FILE: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_FILE }}
@@ -36,7 +36,7 @@ jobs:
           POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY }}
           POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
       - name: Export and upload IPA
-        working-directory: ios
+        working-directory: platform/ios
         run: |
           set -o pipefail
           make upload_ipa | xcpretty
