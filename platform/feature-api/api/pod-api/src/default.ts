@@ -182,7 +182,6 @@ export class DefaultPod implements Pod {
         return {
             send(
                 endpointId: string,
-                featureIdToken: string,
                 payload: string,
                 contentType?: string,
                 authorization?: string
@@ -191,7 +190,6 @@ export class DefaultPod implements Pod {
             },
             get(
                 endpointId: string,
-                featureIdToken: string,
                 contentType?: string,
                 authorization?: string
             ): Promise<EndpointResponse> {

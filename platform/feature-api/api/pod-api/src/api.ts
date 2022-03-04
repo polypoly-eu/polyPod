@@ -210,7 +210,6 @@ export interface Endpoint {
      */
     send(
         endpointId: string,
-        featureIdToken: string,
         payload: string,
         contentType?: string,
         authorization?: string
@@ -222,7 +221,6 @@ export interface Endpoint {
      */
     get(
         endpointId: string,
-        featureIdToken: string,
         contentType?: string,
         authorization?: string
     ): Promise<EndpointResponse>;
