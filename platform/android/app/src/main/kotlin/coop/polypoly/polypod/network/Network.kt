@@ -56,7 +56,6 @@ class Network(val context: Context) {
             logger.error("network.httpPost failed: $exception")
             return@withContext exception.toString()
         }
-        val response = connection.responseMessage
         val responseCode = connection.responseCode
         if (responseCode < 200 || responseCode > 299) {
             val message = "Bad response code: $responseCode"
@@ -64,6 +63,13 @@ class Network(val context: Context) {
             return@withContext message
         }
 
+        var response: String? = null;
+        try {
+            response = connection.inputStream.bufferedReader().use { it.readText() }
+        } finally {
+            connection.disconnect()
+            return@withContext response
+        }
         return@withContext response
     }
     open suspend fun httpGet(
@@ -88,7 +94,6 @@ class Network(val context: Context) {
                 "Basic $encodedAuthorization"
             )
         }
-        val response = connection.responseMessage
         val responseCode = connection.responseCode
         if (responseCode < 200 || responseCode > 299) {
             val message = "Bad response code: $responseCode"
@@ -96,6 +101,14 @@ class Network(val context: Context) {
             return@withContext message
         }
 
+        var response: String? = null;
+        try {
+            response = connection.inputStream.bufferedReader().use { it.readText() }
+        } finally {
+            connection.disconnect()
+            return@withContext response
+        }
         return@withContext response
+
     }
 }

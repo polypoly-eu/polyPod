@@ -57,7 +57,6 @@ class Endpoint(
                 if (it == false) {
                     return@invoke null
                 }
-                System.out.println("Sup")
                 val endpointInfo =
                     endpointInfofromId(endpointId) ?: return@invoke null
                 val response = endpointNetwork
@@ -67,7 +66,6 @@ class Endpoint(
                         contentType,
                         authorization ?: endpointInfo.auth
                     )
-                System.out.println(response)
                 return@invoke response
             }
         return approvalResponse
@@ -78,16 +76,22 @@ class Endpoint(
         featureIdToken: String,
         contentType: String?,
         authorization: String?
-    ): String? =
-        withContext(Dispatchers.IO) {
-            val endpointInfo =
-                endpointInfofromId(endpointId) ?: return@withContext null
-            val response = endpointNetwork
-                .httpGet(
-                    endpointInfo.url,
-                    contentType,
-                    authorization ?: endpointInfo.auth
-                )
-            return@withContext response
-        }
+    ): String? {
+        val approvalResponse =
+            observer?.approveEndpointFetch?.invoke(endpointId) {
+                if (it == false) {
+                    return@invoke null
+                }
+                val endpointInfo =
+                    endpointInfofromId(endpointId) ?: return@invoke null
+                val response = endpointNetwork
+                    .httpGet(
+                        endpointInfo.url,
+                        contentType,
+                        authorization ?: endpointInfo.auth
+                    )
+                return@invoke response
+            }
+        return approvalResponse
+    }
 }
