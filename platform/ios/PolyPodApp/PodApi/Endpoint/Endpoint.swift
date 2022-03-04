@@ -29,7 +29,7 @@ class Endpoint: EndpointProtocol {
     
     func approveEndpointFetch(endpointId: String, featureIdToken: String, completion: @escaping (Bool) -> Void) -> Void {
         delegate?.doHandleApproveEndpointFetch(endpointId: endpointId, featureIdToken: featureIdToken, completion: completion)
-        }
+    }
     
     private func endpointInfoFromId(endpointId: String) -> EndpointInfo? {
         let endpointsPath = Bundle.main.bundleURL
@@ -69,9 +69,9 @@ class Endpoint: EndpointProtocol {
                 return
             }
             guard let endpointInfo = self.endpointInfoFromId(endpointId: endpointId) else {
-            Log.error("endpoint.get failed: No endpoint found for: \(endpointId)")
-            completionHandler("404")
-            return
+                Log.error("endpoint.get failed: No endpoint found for: \(endpointId)")
+                completionHandler("404")
+                return
             }
             guard let response = self.network.httpGet(url: endpointInfo.url, contentType: contentType, authorization: endpointInfo.auth) else {
                 Log.error("endpoint.get failed: Endpoint \(endpointId) could not be reached")
