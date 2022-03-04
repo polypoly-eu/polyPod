@@ -9,6 +9,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        Log.bootstrap()
+        Log.info("Application initialized")
+        
         let defaults = UserDefaults.standard
         if defaults.bool(forKey: UserDefaults.Keys.resetUserDefaults.rawValue) {
             Log.info("Resetting all user defaults")
@@ -41,6 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //self.registerUpdateNotificationCheck()
         
         return true
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        Log.info("Application terminated")
     }
     
     private func registerUpdateNotificationCheck() {
