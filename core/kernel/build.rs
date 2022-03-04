@@ -1,0 +1,28 @@
+use std::{process, path::PathBuf};
+
+// Based on https://doc.rust-lang.org/cargo/reference/build-scripts.html
+
+fn main() {
+    generate_flatbuffers();
+}
+
+fn generate_flatbuffers() {
+    // Rebuild flatbuffers everytime there are some changes in flabuffers directory
+    println!("cargo:rerun-if-changed=flatbuffers/");
+
+    // This could be refactored to allow running any command,
+    // but for now only flatbuffers are generated, and building a more generic solution
+    // requires complexity wich may not be needed.
+
+    let path = PathBuf::from("make");
+    
+    let mut cmd = process::Command::new(&path);
+    cmd.stdin(process::Stdio::null());
+    cmd.args(vec!["generate_flatbuffers".to_string()]);
+
+    cmd
+        .spawn()
+        .expect("Failed to spawn flatc command")
+        .wait()
+        .expect("flatc command failed");
+}
