@@ -56,7 +56,7 @@ class Network(val context: Context) {
             logger.error("network.httpPost failed: $exception")
             return@withContext exception.toString()
         }
-
+        val response = connection.responseMessage
         val responseCode = connection.responseCode
         if (responseCode < 200 || responseCode > 299) {
             val message = "Bad response code: $responseCode"
@@ -64,7 +64,7 @@ class Network(val context: Context) {
             return@withContext message
         }
 
-        return@withContext null
+        return@withContext response
     }
     open suspend fun httpGet(
         url: String,

@@ -279,10 +279,10 @@ open class PodApi(
         val authorization = args[4].let {
             if (it.isStringValue) it.asStringValue().toString() else null
         }
-        val error = endpoint
+        val response = endpoint
             .send(endpointId, featureIdToken, body, contentType, authorization)
-        return if (error == null) ValueFactory.newNil()
-        else ValueFactory.newString(error)
+        return if (response == null) ValueFactory.newNil()
+        else ValueFactory.newString(response)
     }
 
     private suspend fun handleEndpointGet(args: List<Value>): Value {

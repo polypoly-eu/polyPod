@@ -1,6 +1,8 @@
 package coop.polypoly.polypod.endpoint
 
 
-class EndpointObserver(val approveEndpointFetch:
-                       ( String?,  suspend (Boolean) -> String?) -> Unit)
+class EndpointObserver(
+    val approveEndpointFetch:
+    suspend (String?, suspend (Boolean) -> String?) -> String?
+)
 

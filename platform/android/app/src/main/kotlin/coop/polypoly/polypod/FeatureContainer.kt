@@ -51,7 +51,6 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private val webView = WebView(context)
     private val registry = LifecycleRegistry(this)
-    private var fetchApproval: CompletableDeferred<Boolean?>? = null
 
     val api = PodApi(
         PolyOut(context),
@@ -130,13 +129,14 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     }
 
 
-    private fun approveEndpointFetch(endpointId: String? , completion: (suspend (Boolean)->String?)): Unit {
-        if (fetchApproval?.isActive == true)
-            return
-        fetchApproval = CompletableDeferred()
-        val featureName = feature?.name ?: return
+    private suspend fun approveEndpointFetch(
+        endpointId: String?,
+        completion: suspend (Boolean) -> String?
+    ): String? {
+        var fetchApproval: CompletableDeferred<Boolean?>? = CompletableDeferred()
+        val featureName = feature?.name ?: return ""
         if (endpointId == null) {
-            return
+            return null
         }
 
         val message = context?.getString(
@@ -145,20 +145,20 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
         val confirmLabel = context?.getString(R.string.button_url_open_confirm)
         val rejectLabel = context?.getString(R.string.button_url_open_reject)
-        System.out.println("We out here")
         AlertDialog.Builder(context)
-             .setMessage(message)
-             .setPositiveButton(confirmLabel) {  _, _ ->
-                 suspend{completion(true)}
-
-             }
-             .setNegativeButton(rejectLabel) { _, _ ->
-                 suspend{completion(false)}
-             }
-             .show()
-
+            .setMessage(message)
+            .setPositiveButton(confirmLabel) { _, _ ->
+                fetchApproval?.complete(true)
+            }
+            .setNegativeButton(rejectLabel) { _, _ ->
+                fetchApproval?.complete(false)
+            }
+            .show()
+        (fetchApproval?.await())?.let {
+            return completion(it)
+        }
+        return "Too fast"
     }
-
 
 
     private fun loadFeature(feature: Feature) {

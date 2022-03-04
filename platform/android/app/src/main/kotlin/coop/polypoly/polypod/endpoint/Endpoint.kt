@@ -3,9 +3,11 @@ package coop.polypoly.polypod.endpoint
 import android.content.Context
 import android.content.res.AssetManager
 import android.webkit.WebView
+import coop.polypoly.polypod.PodApi
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.network.Network
 import coop.polypoly.polypod.polyNav.PolyNavObserver
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
@@ -20,7 +22,11 @@ private fun AssetManager.readFile(fileName: String) = open(fileName)
 @Serializable
 data class EndpointInfo(val url: String, val auth: String)
 
-class Endpoint(val context: Context, private var observer: EndpointObserver? = null, webView: WebView) {
+class Endpoint(
+    val context: Context,
+    private var observer: EndpointObserver? = null,
+    webView: WebView
+) {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
@@ -33,6 +39,7 @@ class Endpoint(val context: Context, private var observer: EndpointObserver? = n
             Json.decodeFromString(endpointsJsonString)
         return endpointsJson[endpointId]
     }
+
     open fun setEndpointObserver(newObserver: EndpointObserver) {
         observer = newObserver
     }
@@ -43,13 +50,16 @@ class Endpoint(val context: Context, private var observer: EndpointObserver? = n
         featureIdToken: String,
         body: String,
         contentType: String?,
-        authorization: String?
-    ): String? =
-        withContext(Dispatchers.IO) {
-            observer?.approveEndpointFetch?.invoke(endpointId){
-                if ( it == false) { return@invoke null}
+        authorization: String?,
+    ): String? {
+        val approvalResponse =
+            observer?.approveEndpointFetch?.invoke(endpointId) {
+                if (it == false) {
+                    return@invoke null
+                }
                 System.out.println("Sup")
-                val endpointInfo =endpointInfofromId(endpointId) ?: return@invoke null
+                val endpointInfo =
+                    endpointInfofromId(endpointId) ?: return@invoke null
                 val response = endpointNetwork
                     .httpPost(
                         endpointInfo.url,
@@ -57,12 +67,12 @@ class Endpoint(val context: Context, private var observer: EndpointObserver? = n
                         contentType,
                         authorization ?: endpointInfo.auth
                     )
-
+                System.out.println(response)
                 return@invoke response
             }
-            return@withContext "response"
+        return approvalResponse
+    }
 
-        }
     open suspend fun get(
         endpointId: String,
         featureIdToken: String,
