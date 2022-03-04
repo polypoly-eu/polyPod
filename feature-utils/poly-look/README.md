@@ -20,7 +20,7 @@ specific framework eg. React, wrapper functions can be used (`./visualisations/w
 
 1- Write the js file for the component inside the `src/lit-components` folder. The name of the file must be written in lowerCamelCase.
 
-2- To test the component we'll use the [storybook framework](https://storybook.js.org/). The necessary setup and stories are [here](/dev-utils/storybook/). To use the new component inside the storybook app we have to write a `*.stories.js` file inside the `stories/lit-components` folder with the same name of the component. In order to learn how to write a `*.story.js` file you can read the next [tutorial](https://storybook.js.org/docs/web-components/writing-stories/introduction).
+2- To test the component we'll use the [storybook framework](https://storybook.js.org/). The necessary setup and stories are [here](./storybook/). To use the new component inside the storybook app we have to write a `*.stories.js` file inside the `stories/lit-components` folder with the same name of the component. In order to learn how to write a `*.story.js` file you can read the next [tutorial](https://storybook.js.org/docs/web-components/writing-stories/introduction).
 
 3- Each component is required to have its own unit and integration tests. The test coverage for each component must be at least 70%.
 
