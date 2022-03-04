@@ -133,7 +133,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         endpointId: String?,
         completion: suspend (Boolean) -> String?
     ): String? {
-        var fetchApproval: CompletableDeferred<Boolean?>? = CompletableDeferred()
+        var fetchApproval: CompletableDeferred<Boolean?>? =
+            CompletableDeferred()
         val featureName = feature?.name ?: return ""
         if (endpointId == null) {
             return null

@@ -65,13 +65,15 @@ class Network(val context: Context) {
 
         var response: String? = null;
         try {
-            response = connection.inputStream.bufferedReader().use { it.readText() }
+            response =
+                connection.inputStream.bufferedReader().use { it.readText() }
         } finally {
             connection.disconnect()
             return@withContext response
         }
         return@withContext response
     }
+
     open suspend fun httpGet(
         url: String,
         contentType: String?,
@@ -103,7 +105,8 @@ class Network(val context: Context) {
 
         var response: String? = null;
         try {
-            response = connection.inputStream.bufferedReader().use { it.readText() }
+            response =
+                connection.inputStream.bufferedReader().use { it.readText() }
         } finally {
             connection.disconnect()
             return@withContext response
