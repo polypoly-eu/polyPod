@@ -1,11 +1,3 @@
-# questionnaire-feature
+# polyPinion
 
-qapp as a feature
-
-## Usage
-
-```
-$ npm install
-$ npm run build
-$ npm run serve
-```
+polyPinion is a feature for general questionnaires.

@@ -15,9 +15,10 @@ const MainScreen = () => {
 
     return (
         <Screen
+            noScroll
             className="main-screen"
             topShadow={false}
-            light={showClusters ? true : false}
+            theme={showClusters ? "poly-theme-light" : "poly-theme-dark"}
         >
             <div className="nav-button-container poly-nav-bar-separator-bottom">
                 <button

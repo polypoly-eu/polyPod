@@ -12,11 +12,6 @@ module.exports = {
         cy: true,
         Cypress: true,
     },
-    settings: {
-        react: {
-            version: "detect",
-        },
-    },
     rules: {
         "react/prop-types": 0,
     },

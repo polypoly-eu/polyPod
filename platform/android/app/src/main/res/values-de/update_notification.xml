@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_notification_title">Neue polyExplorer Daten!</string>
+    <string name="update_notification_text">
+        Der polyExplorer hat neue Datengeschichten rund um Messenger-Dienste. Schauen Sie mal hinein!
+    </string>
+</resources>
