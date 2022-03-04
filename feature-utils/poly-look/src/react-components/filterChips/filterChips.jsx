@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-
-import "./filterChips.css";
+import Chip from "../chip/chip.jsx";
 
 const chipId = (e) => e.id || e.title || e;
 
@@ -120,14 +119,22 @@ const FilterChips = ({
       {extendedChipsContent.map((e) => {
         const id = chipId(e);
         return (
-          <button
-            className={isChipActive(id) ? "chip selected" : "chip"}
-            onClick={() => handleChipClick(id)}
-            key={id}
-          >
-            {e.translation || id}
-          </button>
+          <Chip
+            id={id}
+            translation={e.translation}
+            handleChipClick={handleChipClick}
+            isChipActive={isChipActive}
+          />
         );
+        // return (
+        //   <button
+        //     className={isChipActive(id) ? "chip selected" : "chip"}
+        //     onClick={() => handleChipClick(id)}
+        //     key={id}
+        //   >
+        //     {e.translation || id}
+        //   </button>
+        // );
       })}
     </div>
   );
