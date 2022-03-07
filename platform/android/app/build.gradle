@@ -8,7 +8,7 @@ plugins {
 }
 
 static def polyEpoch() {
-    // Seconds since 2019-05-04 00:00 UTC - to avoid the year 2038 problem.
+    // Seconds since 2019-05-04 00:00 UTC -- to avoid the year 2038 problem.
     def now = new Date()
     def polypolyFounding = Date.parse("yyyy-MM-dd", "2019-05-04", TimeZone.getTimeZone("UTC"))
     return (int) Math.floor((now.getTime() - polypolyFounding.getTime()) / 1000)
