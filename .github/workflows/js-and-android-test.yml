@@ -53,6 +53,7 @@ jobs:
               if: steps.changes.outputs.android == 'true'
               with:
                   java-version: 11
+                  distribution: 'temurin'
                   cache: 'gradle'
             - name: Test android
               if: steps.changes.outputs.android == 'true'

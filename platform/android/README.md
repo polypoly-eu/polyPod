@@ -32,7 +32,7 @@ task.
 
 ### Linting
 
-We use [ktlint](https://github.com/pinterest/ktlint) for testing the source, and
+We use [ktlint](https://github.com/pinterest/ktlint) for linting sources, and
 that it conforms to the usual standards. It will be run automatically when
 you push or create a pull request, but you can download, put it somewhere in the
 path,  and then run it with
