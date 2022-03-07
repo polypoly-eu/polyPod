@@ -39,7 +39,7 @@ jobs:
               with:
                   java-version: 11
             - name: Test android instrumentation
-              uses: reactivecircus/android-emulator-runner@76c2bf6f95ed6458fd659a1bdb680a0f8df232dc
+              uses: ReactiveCircus/android-emulator-runner@76c2bf6f95ed6458fd659a1bdb680a0f8df232dc
               with:
                 working-directory: platform/android
                 api-level: 30
