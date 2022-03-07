@@ -1,18 +1,16 @@
-// Please remove this line and the empty one after it
-
 import Combine
 import UIKit
 
 final class DataProtection {
     static let instance = DataProtection()
-
+    
     typealias ProtectedDataAvailability = Bool
     var state: AnyPublisher<ProtectedDataAvailability, Never> {
         _state.eraseToAnyPublisher()
     }
-
+    
     private let _state: CurrentValueSubject<ProtectedDataAvailability, Never>
-
+    
     private init() {
         _state = .init(UIApplication.shared.isProtectedDataAvailable)
     }
