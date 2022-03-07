@@ -3,12 +3,10 @@ on:
     push:
         paths:
           - "dev-utils/dummy-server/**"
-          - ".github/workflows/dummy-server-test.yml"
     pull_request:
         types: [assigned, opened, ready_for_review]
         paths:
           - "dev-utils/dummy-server/**"
-          - ".github/workflows/dummy-server-test.yml"
 
 jobs:
     test:
