@@ -21,8 +21,8 @@ jobs:
                   node-version: 16
                   cache: "npm"
                   cache-dependency-path: "**/package-lock.json"
-            - name: Build core and features
-              run: ./build.js
+            - name: Install root
+              run: npm --no-audit --prefer-offline ci
             - name: Test core and features
               working-directory: dev-utils/dummy-server
-              run: npm run test
+              run: npm ci && npm run test
