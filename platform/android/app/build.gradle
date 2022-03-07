@@ -188,11 +188,14 @@ task copyThirdPartyLicenses(type: Copy) {
 }
 
 task installAppOnDevice {
-    dependsOn assembleAndroidTest
     doLast {
         exec {
             logger.info("Trying to install app")
             def adb = android.getAdbExecutable().absolutePath
+            commandline "ls", "$buildDir/"
+            commandline "ls", "$buildDir/outputs"
+            commandline "ls", "$buildDir/outputs/androidTest"
+            commandline "ls", "$buildDir/outputs/androidTest/debug"
             commandLine adb, 'install', "$buildDir/outputs/androidTest/debug/app-debug-androidTest.apk"
             logger.info("Application installed onto the device")
         }
