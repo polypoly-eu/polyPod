@@ -19,7 +19,7 @@ If you merely want to build the code, get:
 1. [OpenJDK 11]
 2. [Android SDK command line tools]
 
-Then set `sdk.dir` in `local.properties` and finally run:
+Then set `sdk.dir` in your local `local.properties` and finally run:
 
 ```
 ./gradlew assemble
