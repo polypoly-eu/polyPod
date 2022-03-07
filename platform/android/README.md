@@ -16,7 +16,7 @@ and open this directory as an existing project.
 
 If you merely want to build the code, get:
 
-1. [OpenJDK 8]
+1. [OpenJDK 11]
 2. [Android SDK command line tools]
 
 Then set `sdk.dir` in `local.properties` and finally run:
@@ -63,4 +63,4 @@ uninstalled.
 
 [Android Studio]: https://developer.android.com/studio
 [Android SDK command line tools]: https://developer.android.com/studio/index.html#command-tools
-[OpenJDK 8]: https://openjdk.java.net
+[OpenJDK 11]: https://openjdk.java.net
