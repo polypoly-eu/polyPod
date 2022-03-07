@@ -188,6 +188,7 @@ task copyThirdPartyLicenses(type: Copy) {
 }
 
 task installAppOnDevice {
+    dependsOn test
     doLast {
         exec {
             logger.info("Trying to install app")
