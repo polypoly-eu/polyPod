@@ -1,0 +1,13 @@
+.ministory-title {
+    font-family: "Jost Medium";
+    max-width: 320px;
+    font-size: 24px;
+    line-height: 28.8px;
+    margin: 0;
+}
+
+.analysis-card .highlighted-number {
+    font-size: clamp(1rem, 14vw, 5rem);
+    font-family: "Jost Bold";
+    margin: 32px 0;
+}

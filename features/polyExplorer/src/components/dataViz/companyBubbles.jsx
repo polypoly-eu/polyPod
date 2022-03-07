@@ -415,12 +415,6 @@ const CompanyBubbles = ({
             (d) => d.data.highlightedCompany
         );
 
-        appendBubbleLabel(
-            localDiagram[DIAGRAMS.COMPANY_HIGHLIGHT].svg,
-            localDiagram[DIAGRAMS.COMPANY_HIGHLIGHT].bubbles,
-            highlightTexts.company.explanation
-        );
-
         appendExplanation(
             localDiagram[DIAGRAMS.COMPANY_HIGHLIGHT].svg,
             localDiagram[DIAGRAMS.COMPANY_HIGHLIGHT].bubbles,

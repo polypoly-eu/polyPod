@@ -5,6 +5,16 @@ export const POST_REACTIONS_FILE_PATH =
 export const POST_REACTIONS_DATA_KEY = "reactions_v2";
 export const POST_REACTIONS_STORAGE_KEY = "postReactions";
 
+export const KNOWN_REACTION_TYPES = [
+    "LIKE",
+    "LOVE",
+    "HAHA",
+    "CARE",
+    "WOW",
+    "SAD",
+    "ANGER",
+];
+
 export default class PostReactionsImporter extends DirectKeyDataImporter {
     constructor() {
         super(

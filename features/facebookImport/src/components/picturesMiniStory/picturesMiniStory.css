@@ -1,5 +1,10 @@
 .pictures-mini-story {
     margin-bottom: 4px;
+    position: relative;
+}
+
+.pictures-mini-story .svg-container {
+    margin-bottom: 40px;
 }
 
 .pictures-mini-story .part-heading {
@@ -21,7 +26,37 @@
 }
 
 .pictures-mini-story .part-heading p {
+    font-family: "Jost Medium";
     flex: 1 1 auto;
-    font-weight: 600;
     margin: 0;
+}
+
+.pictures-mini-story .part {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.pictures-mini-story .source {
+    margin: 32px 0 0 0;
+}
+
+.pictures-mini-story .pictures-info-container .info-button {
+    bottom: 183px;
+    right: -16px;
+}
+
+.pictures-mini-story .background-pictures-info-container .info-button {
+    bottom: 202px;
+    right: -16px;
+}
+
+@media (max-width: 321px) {
+    .pictures-mini-story .pictures-info-container .info-button {
+        bottom: 205px;
+        right: -16px;
+    }
+
+    .pictures-mini-story .background-pictures-info-container .info-button {
+        bottom: 224px;
+        right: -16px;
+    }
 }

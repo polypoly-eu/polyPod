@@ -1,0 +1,35 @@
+{
+  "name": "@polypoly-eu/podjs",
+  "files": [
+    "dist/*.d.ts",
+    "dist/*.js"
+  ],
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
+  },
+  "scripts": {
+    "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
+    "build-downstream": "../../build.js --start @polypoly-eu/podjs",
+    "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {
+    "@polypoly-eu/fetch-spec": "file:../feature-api/api/fetch-spec",
+    "@polypoly-eu/pod-api": "file:../feature-api/api/pod-api",
+    "@polypoly-eu/rdf": "file:../feature-api/api/rdf",
+    "@zip.js/zip.js": "2.3.7",
+    "rdf-js": "^4.0.2"
+  },
+  "devDependencies": {
+    "@polypoly-eu/rdf-spec": "file:../feature-api/api/rdf-spec",
+    "@types/node": "^14.14.21",
+    "@types/node-fetch": "^2.5.8",
+    "body-parser": "^1.19.0",
+    "fast-check": "^2.11.0"
+  },
+  "peerDependencies": {
+    "body-parser": "^1.19.0"
+  },
+  "private": true
+}

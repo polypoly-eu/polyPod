@@ -1,0 +1,25 @@
+.ordered-list {
+    list-style: none;
+    counter-reset: bullet-point-counter;
+    padding-left: 60px;
+    margin-top: 24px;
+}
+
+.ordered-list li {
+    counter-increment: bullet-point-counter;
+    position: relative;
+}
+
+.ordered-list li p::before {
+    content: counter(bullet-point-counter);
+    position: absolute;
+    --size: 32px;
+    left: calc(-16px - var(--size));
+    line-height: var(--size);
+    width: var(--size);
+    height: var(--size);
+    top: -2px;
+    background: #3ba6ff;
+    border-radius: 50%;
+    text-align: center;
+}

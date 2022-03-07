@@ -1,0 +1,28 @@
+{
+  "name": "@polypoly-eu/manifest-parser",
+  "version": "0.1.2",
+  "description": "TypeScript reference implementation of the Feature manifest format",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
+  },
+  "scripts": {
+    "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
+    "dev": "tsc --watch --incremental",
+    "eslint": "eslint src --ext .ts",
+    "lint": "npm run eslint",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@pnpm/read-package-json": "^3.1.5",
+    "@types/semver": "^7.3.3",
+    "fp-ts": "^2.8.2",
+    "io-ts": "2.2.10"
+  },
+  "devDependencies": {
+    "@types/node": "^16.7.1"
+  },
+  "private": true
+}

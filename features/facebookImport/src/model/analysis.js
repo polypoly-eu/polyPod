@@ -36,7 +36,7 @@ import SesssionActivityLocationsAnalysis from "./analyses/ministories/activity-l
 import MessagesActivityAnalysis from "./analyses/ministories/messages-activity-analysis.js";
 import JSONFileNamesAnalysis from "./analyses/report/json-file-names-analysis.js";
 import OffFacebookEventTypesAnalysis from "./analyses/report/off-facebook-event-types-analysis.js";
-import UknownTopLevelFoldersAnalysis from "./analyses/report/unknown-top-level-folders-analysis.js";
+import UnknownTopLevelFoldersAnalysis from "./analyses/report/unknown-top-level-folders-analysis.js";
 import InactiveCardsSummary from "./analyses/report/inactive-cards-summary.js";
 import ActivitiesAnalysis from "./analyses/ministories/activities-analysis.js";
 import AdvertisingValueAnalysis from "./analyses/ministories/advertising-value-analysis.js";
@@ -50,18 +50,18 @@ import MinistoriesStatusAnalysis from "./analyses/report/ministories-status-anal
 const subAnalyses = [
     DataStructureBubblesAnalysis,
     ActivitiesAnalysis,
+    PostReactionsTypesAnalysis,
     MessagesAnalysis,
-    OnOffFacebookEventsAnalysis,
     AboutPicturesDataAnalysis,
     AdvertisingValueAnalysis,
+    OnOffFacebookEventsAnalysis,
+    ConnectedAdvertisersAnalysis,
 
-    PostReactionsTypesAnalysis,
     ExportTitleAnalysis,
     ExportSizeAnalysis,
     DataChartsAnalysis,
     DataGroupsAnalysis,
     JsonFilesBubblesAnalysis,
-    ConnectedAdvertisersAnalysis,
     InteractedWithAdvertisersAnalysis,
     AdInterestsAnalysis,
     OffFacebookEventsTypesChartAnalysis,
@@ -81,7 +81,7 @@ const subAnalyses = [
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,
-    UknownTopLevelFoldersAnalysis,
+    UnknownTopLevelFoldersAnalysis,
     MissingCommonJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
     OffFacebookEventTypesAnalysis,
@@ -95,6 +95,18 @@ const subAnalyses = [
     // them before too long - or show them behind some kind of flag, or
     // developer mode.
     return ![
+        DataChartsAnalysis,
+        InteractedWithAdvertisersAnalysis,
+        OffFacebookEventsTypesChartAnalysis,
+        MessagesDetailsAnalysis,
+        EmailAddressesAnalysis,
+        SearchesAnalysis,
+        FriendsAnalysis,
+        ReceivedFriendRequestsAnalysis,
+        PagesOverviewAnalysis,
+        SesssionActivityLocationsAnalysis,
+        AdViewsAnalysis,
+        OnOffFacebookAdvertisersAnalysis,
         ExportTitleAnalysis,
         ExportSizeAnalysis,
         DataGroupsAnalysis,
@@ -195,6 +207,7 @@ class AnalysisExecutionResult {
                 message: this.status.message,
             },
             executionTime: this.executionTime.toFixed(0),
+            customData: this.analysis.customReportData,
         };
     }
 }
@@ -241,6 +254,6 @@ export async function analyzeZip(zipData, zipFile, facebookAccount, pod) {
 }
 
 export async function analyzeFile(zipData, facebookAccount) {
-    const zipFile = new ZipFile(zipData, window.pod);
+    const zipFile = await ZipFile.createWithCache(zipData, window.pod);
     return await analyzeZip(zipData, zipFile, facebookAccount, window.pod);
 }

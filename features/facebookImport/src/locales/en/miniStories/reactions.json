@@ -1,12 +1,12 @@
 {
     "title": "Your reactions",
-    "text": "Liking something on Facebook might be one of the signature features of the service. The diagram below shows how the <strong>{{total_number_reactions}}</strong> reactions Facebook recorded from you are distributed across the different options.",
+    "text": "Liking something on Facebook is one of the signature features of the service. The diagram below shows how the <strong>{{total_number_reactions}}</strong> reactions Facebook recorded from you are distributed across the different options.",
     "LIKE": "Like",
     "LOVE": "Love",
     "CARE": "Care",
     "WOW": "Wow",
     "HAHA": "Haha",
     "SAD": "Sad",
-    "ANGRY": "Angry",
+    "ANGER": "Anger",
     "TOTAL": "Total"
 }

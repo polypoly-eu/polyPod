@@ -1,0 +1,18 @@
+{
+    "title": "Wie die digitalen Giganten mit Daten umgehen",
+    "intro.image.alt": "Nutzer:in der digitalen Riesen",
+    "intro.p.1": "Wenn Sie heutzutage ein digitales Leben führen, ist es fast unmöglich, nicht mit einigen der großen Technologieunternehmen und ihren Diensten in Kontakt zu kommen. Was diese Unternehmen gemeinsam haben, ist ihr enormer Appetit auf Daten und die Absicht, diese Daten - wahrscheinlich Ihre Daten - für Werbung oder anstehende Big-Data-Projekte zu nutzen und zu Geld zu machen.",
+    "intro.p.2": "Das polyPedia-Team hat sich alles angesehen, was die unten aufgeführten Unternehmen über ihre Datenschutzbestimmungen sagen.",
+    "data.types.p": "Einige Datentypen müssen für das, was wir von einem Service erwarten, gemeinsam genutzt werden. Aber nicht alle Firmen teilen die gleiche Menge an Datentypen. Die zusätzliche gemeinsame Nutzung zeigt, dass sie damit Geld verdienen.",
+    "data.types.tab.companies": "Nach Firmen",
+    "data.types.tab.shares": "Nach Anteil",
+    "data.types.tab.types": "Nach Typen",
+    "data.types.legend.types": "Datentypen: {{amount_of_data_types}} (geteilt {{amount_of_shares}} Mal)",
+    "companies.p.1": "Einige Unternehmen erhalten Daten von mehreren Services. In diesen Fällen macht die Verwendung eines anderen Services keinen Unterschied.",
+    "companies.p.2": "Die Branchen, in denen datenempfangende Unternehmen tätig sind, geben uns einen Hinweis darauf, warum unsere Daten gesammelt werden. Einige Branchen sind datenhungriger als andere.",
+    "data.regions.p.1": "Die Region, in der ein datenempfangendes Unternehmen tätig ist, ist entscheidend für die Rechtmäßigkeit des Datenschutzes. Einige speichern ihre Daten in der GDPR-Region.",
+    "data.regions.p.2": "Manche gehen auch in Regionen mit schwächerer Rechtslage und geringerem Datenschutz.",
+    "data.regions.group.1": "Digitale Giganten",
+    "data.regions.group.2": "Datenregionen",
+    "explore.further.p.1": "Wählen Sie unten ein Unternehmen aus, wenn Sie an detaillierten Informationen interessiert sind - oder entdecken Sie weitere Themen."
+}

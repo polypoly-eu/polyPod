@@ -19,6 +19,7 @@ export default {
                 {
                     src: [
                         "node_modules/@polypoly-eu/podjs/dist/pod.js",
+                        "node_modules/@polypoly-eu/poly-look/dist/css",
                     ],
                     dest: "dist",
                 },

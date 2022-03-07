@@ -7,41 +7,41 @@
     "lint:fix": "eslint --fix src test scripts --ext .js --ext .jsx",
     "build": "rollup -c",
     "watch": "rollup --watch -c",
-    "test": "mocha",
-    "polypedia:fetch": "node scripts/fetch-polypedia-data 162daa1",
+    "test": "jest && npm run cypress:run",
+    "polypedia:fetch": "node scripts/fetch-polypedia-data 980e920",
     "polypedia:convert": "node scripts/convert-polypedia-data",
     "update-polypedia-data": "npm run polypedia:fetch && npm run polypedia:convert",
     "cypress:run": "cypress run"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.13",
-    "@polypoly-eu/podjs": "file:../../podjs",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^11.2.1",
-    "@rollup/plugin-sucrase": "^3.1.0",
-    "cypress": "^8.7.0",
-    "cypress-promise": "^1.1.0",
-    "mocha": "^9.1.3",
+    "@polypoly-eu/podjs": "file:../../platform/podjs",
+    "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "rollup": "^2.26.11",
-    "rollup-plugin-copy": "^3.3.0",
-    "rollup-plugin-css-only": "^3.1.0",
-    "rollup-plugin-svg": "^2.0.0",
-    "shelljs": "^0.8.4"
+    "react-dom": "^16.13.1"
   },
   "private": true,
   "dependencies": {
-    "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
-    "@rollup/plugin-commonjs": "^19.0.0",
-    "@rollup/plugin-replace": "^2.4.2",
-    "@types/prop-types": "^15.7.3",
-    "d3": "^7.0.0",
-    "lodash": "^4.17.21",
+    "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
+    "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
+    "d3": "^7.3.0",
     "react-infinite-scroll-component": "^6.0.0",
     "react-router-dom": "^5.2.0",
-    "styled-components": "^5.3.0",
     "swiper": "^6.4.11"
   },
-  "type": "module"
+  "type": "module",
+  "jest": {
+    "verbose": true,
+    "testMatch": [
+      "**/test/*.js",
+      "!**/test/test*.js"
+    ],
+    "transform": {
+      "^.+\\.js$": [
+        "babel-jest",
+        {
+          "rootMode": "upward"
+        }
+      ]
+    }
+  }
 }

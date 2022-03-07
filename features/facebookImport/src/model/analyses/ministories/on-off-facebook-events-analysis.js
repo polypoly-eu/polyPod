@@ -3,7 +3,10 @@ import { linkRelatedAccountsWithOffFacebookCompanies } from "../utils/on-off-eve
 import {
     buildDisplayData,
     selectMeaningfulCompanies,
+    topOffFacebookCompanies,
 } from "../utils/on-off-facebook-data-restructuring.js";
+
+import { groupOffFacebookEventsByType } from "../utils/on-off-facebook-events-utils.js";
 
 import RootAnalysis from "./root-analysis.js";
 import i18n from "../../../i18n.js";
@@ -13,13 +16,22 @@ import {
     OnOffFacebookMiniStoryDetails,
 } from "../../../components/onOffFacebookMiniStory/onOffFacebookMiniStory.jsx";
 
+const detailDisplayTypes = {
+    onOff: "on-off",
+    off: "off",
+};
+
 export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
     get label() {
         return RootAnalysis.Labels.NONE;
     }
 
     get title() {
-        return i18n.t("offFacebookEventsMiniStory:title");
+        return i18n.t("offFacebookEventsMiniStory:off.events.title");
+    }
+
+    get customReportData() {
+        return { displayType: this._displayType };
     }
 
     async analyze({ facebookAccount }) {
@@ -46,12 +58,32 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
             this._commonAdvertisersData
         );
 
-        this._displayData = buildDisplayData(
-            selectedCompanies,
-            facebookAccount.offFacebookEventsLatestTimestamp
-        );
+        this._displayData = {};
 
-        this.active = this._companiesCount > 0;
+        if (facebookAccount._offFacebookCompanies.length > 0) {
+            this._displayData.offEvents = {
+                companies: topOffFacebookCompanies(facebookAccount),
+                activityTypes: groupOffFacebookEventsByType(
+                    facebookAccount
+                ).map((e) => {
+                    return {
+                        ...e,
+                        title: e.type,
+                    };
+                }),
+            };
+        }
+
+        if (selectedCompanies.length > 0) {
+            this._displayData.onOffEvents = buildDisplayData(
+                selectedCompanies,
+                facebookAccount.offFacebookEventsLatestTimestamp
+            );
+        }
+        this.active = Object.keys(this._displayData).length > 0;
+        this._displayType = this._displayData?.onOffEvents
+            ? detailDisplayTypes.onOff
+            : detailDisplayTypes.off;
     }
 
     renderSummary() {

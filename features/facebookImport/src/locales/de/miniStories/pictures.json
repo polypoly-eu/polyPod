@@ -1,13 +1,17 @@
 {
-    "title": "What your photos might tell about you",
-    "text.1": "Let's pretend you took a selfie, what could Facebook draw from that? Tap the circles to find out...",
-    "text.2": "As soon as your Facebook data includes photos they are analyzed with artificial intelligence.",
-    "person.title": "Me, my selfie and I",
-    "person.text": "At first, this is just a photo of a human, but from your profile image, Facebook knows this is most likely you. They can find you here and in other pictures. On top, they have a sense of your gender, age, race, whether you changed your haircut or color, ...",
-    "plant.title": "Caught in the act",
-    "plant.text": "Artificial intelligence is able to spot and identify objects, like a plant, sports equipment, or maybe a cigarette. Such information might be relevant or surprising to others, like your partner - or your health insurance.",
-    "lamp.title": "I shop therefore I am",
-    "lamp.text": "Facebook works on detecting objects, products, and brands in photos. They might spot clothing brands or furniture in the background. Those insights can be used to assume how much money you spend on lifestyle items.",
-    "background.title": "They know what you did last summer",
-    "background.text": "Detecting a skyline,  landmark,s or always the same window in the background Facebook can also make assumptions on your location. Additionally, if taken with your phone, your pictures probably contain metadata with the exact GPS locations - unless you alter your settings."
+    "title": "Was Ihre Fotos über Sie verraten können",
+    "text.1": "Sobald Ihre Facebook-Daten Fotos beinhalten, werden diese mit Hilfe von künstlicher Intelligenz analysiert.",
+    "text.2": "Nehmen wir an, Sie haben ein Selfie gemacht, was kann Facebook aus so einem Bild herauslesen? Tippen Sie auf die Kreise, um mehr herauszufinden...",
+    "person.title": "Mein Selfie und ich",
+    "person.text": "Auf den ersten Blick ist es nur ein Foto von einem Menschen. Aber anhand Ihres Profilfotos weiß Facebook vielleicht schon, dass Sie es sind und findet Sie dann auch in anderen Bildern. Darüber hinaus kann Facebook Annahmen über Ihr Geschlecht, Alter oder Ihre Herkunft treffen, oder darüber, dass Sie gerade Ihre Frisur geändert haben.",
+    "person.source": "Quelle: Facebook-Datenschutzerklärung",
+    "plant.title": "Auf frischer Tat ertappt?",
+    "plant.text": "Mit künstlicher Intelligenz lassen sich auch andere Dinge in Fotos finden und identifizieren, z.B. bestimmte Pflanzen, Sportausrüstungen oder vielleicht Zigaretten. Solche Informationen können auch für andere interessant oder überraschend sein, vielleicht für Partner:innen – oder die Krankenversicherung.",
+    "plant.source": "Quelle: Facebook-AI Website",
+    "lamp.title": "Ich shoppe, also bin ich",
+    "lamp.text": "Facebook arbeitet daran, Gegenstände, Produkte und Marken in Fotos zu erkennen. Vielleicht finden sie eine Mode- oder Möbelmarke im Hintergrund Ihrer Fotos. Solche Erkenntnisse lassen dann Rückschlüsse darüber zu, wie viel Sie für einen bestimmten Lifestyle ausgeben.",
+    "lamp.source": "Quelle: Facebook-AI Website",
+    "background.title": "Die wissen, wo Sie im letzten Sommer waren",
+    "background.text": "Die Skyline einer Stadt, eine Sehenswürdigkeit oder immer das gleiche Fenster im Hintergrund zu erkennen, erlaubt Facebook auch Annahmen über Ihren Aufenthaltsort zu treffen. Zusätzlich verfügt das Unternehmen, falls Sie die Fotos mit der Kamera Ihres Smartphones gemacht haben, vielleicht sogar über exakte GPS Informationen aus den sogenannten Metadaten der Bilder. Außer, wenn Sie dies durch die Einstellungen ausschließen.",
+    "background.source": "Quelle: Facebook-Datenschutzerklärung"
 }
