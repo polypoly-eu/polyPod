@@ -1,0 +1,28 @@
+name: Test dummy-server
+on:
+    push:
+        paths:
+          - "dev-utils/dummy-server/**"
+          - ".github/workflows/dummy-server-test.yml"
+    pull_request:
+        types: [assigned, opened, ready_for_review]
+        paths:
+          - "dev-utils/dummy-server/**"
+          - ".github/workflows/dummy-server-test.yml"
+
+jobs:
+    test:
+        name: Run tests.
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: 16
+                  cache: "npm"
+                  cache-dependency-path: "**/package-lock.json"
+            - name: Build core and features
+              run: ./build.js
+            - name: Test core and features
+              working-directory: dev-utils/dummy-server
+              run: npm run test
