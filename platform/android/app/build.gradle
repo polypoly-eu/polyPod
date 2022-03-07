@@ -190,6 +190,8 @@ task copyThirdPartyLicenses(type: Copy) {
 task installAppOnDevice {
     doLast {
         exec {
+            logger.info("Trying to install application onto the device")
+            commandLine adb, 'devices'
             commandLine adb, 'install', "-r", "$buildDir/outputs/androidTest/debug/app-debug-androidTest.apk"
             logger.info("Application installed onto the device")
         }
