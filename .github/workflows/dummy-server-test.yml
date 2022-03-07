@@ -3,6 +3,7 @@ on:
     push:
         paths:
           - "dev-utils/dummy-server/**"
+          - ".github/workflows/dummy-server-test.yml"
     pull_request:
         types: [assigned, opened, ready_for_review]
         paths:
@@ -19,6 +20,12 @@ jobs:
                   node-version: 16
                   cache: "npm"
                   cache-dependency-path: "**/package-lock.json"
+            - name: Cache multiple paths
+              uses: actions/cache@v2
+              id: cache
+              with:
+                  path: "**/node_modules"
+                  key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ hashFiles('dev-utils/dummy-server/package-lock.json') }}
             - name: Install root
               run: npm --no-audit --prefer-offline ci
             - name: Test core and features
