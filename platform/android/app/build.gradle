@@ -193,7 +193,7 @@ task installAppOnDevice {
             logger.info("Trying to install app")
             def adb = android.getAdbExecutable().absolutePath
             commandLine 'ls', '-alR', "$buildDir/.."
-            // commandLine adb, 'install', "$buildDir/outputs/apk/debug/app-debug.apk"
+            commandLine adb, 'install', "$buildDir/app-debug.apk"
             logger.info("Application installed onto the device")
         }
     }
