@@ -43,7 +43,7 @@ ktlint
 
 in this directory.
 
-Additionally, a gradle target for linting has been added; use
+Additionally, a `gradle` target for linting has been added; use
 
 ```shell
 ./gradlew ktlintCheck
