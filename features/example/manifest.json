@@ -8,12 +8,12 @@
         "link2": "https://example.com/2"
     },
     "translations": {
-      "de": {
-        "description": "Das ist eine Beispiel-Feature",
-        "links": {
-            "link1": "https://example.com/1",
-            "link2": "https://example.com/2"
+        "de": {
+            "description": "Das ist eine Beispiel-Feature",
+            "links": {
+                "link1": "https://example.com/1",
+                "link2": "https://example.com/2"
+            }
         }
-      }
     }
-  }
+}
