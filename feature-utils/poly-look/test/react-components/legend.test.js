@@ -24,3 +24,20 @@ describe("LegendEntries work", () => {
     expect(thrownError).toBeInstanceOf(IncorrectLegendEntry);
   });
 });
+
+describe("Legends also work", () => {
+  it("is able to create a Legend", () => {
+    const legendValues = [
+      ["No color", "#000000"],
+      ["Gray", "#888888"],
+      ["All colors", "#ffffff"],
+    ];
+    const legendEntries = legendValues.map((l) => {
+      return { description: l[0], color: l[1] };
+    });
+    const legends = new Legend(legendEntries);
+    expect(legends).toBeInstanceOf(Legend);
+    expect(legends.legends.length).toBe(legendValues.length);
+    expect(legends.legends[0]).toBeInstanceOf(LegendEntry);
+  });
+});
