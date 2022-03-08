@@ -390,7 +390,8 @@ class BrowserPolyNav implements PolyNav {
                 .map((pair) => `[${pair.join(" = ")}]`)
                 .join(", ");
             console.log(
-                `polyNav: Keyboard navigation available: ${actionUsage}`
+                `polyNav: Keyboard navigation available: ${actionUsage}. You
+can also navigate backwards using the browser's back functionality.`
             );
         }
         this.keyUpListener = ({ key }: any) => {
@@ -465,7 +466,7 @@ class BrowserPolyNav implements PolyNav {
 
 declare global {
     interface Window {
-        manifestData: string;
+        manifestData: Record<string, unknown>;
         manifest: Manifest;
         currentTitle: string;
     }
@@ -531,17 +532,15 @@ export class BrowserPod implements Pod {
 
     constructor() {
         window.addEventListener("load", async () => {
-            const manifestJson =
-                window.manifestData ||
-                (await await (await fetch("manifest.json")).json());
-            if (!manifestJson) {
-                console.log(
-                    `ERROR: Could not load the feature manifest. If you are
-loading the feature from a file:// URL please explose the
-manifest data in window.manifestData`
+            if (!window.manifestData) {
+                console.warn(
+                    `Unable to find feature manifest, navigation bar disabled.
+To get the navigation bar, expose the manifest's content as
+window.manifestData.`
                 );
+                return;
             }
-            window.manifest = await readManifest(manifestJson);
+            window.manifest = await readManifest(window.manifestData);
             window.parent.currentTitle =
                 window.parent.currentTitle || window.manifest.name;
             const frame = createNavBarFrame(window.parent.currentTitle);
