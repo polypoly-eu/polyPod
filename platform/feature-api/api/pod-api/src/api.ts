@@ -188,7 +188,7 @@ export interface Network {
         body: string,
         contentType?: string,
         authorization?: string
-    ): Promise<FetchResponse>;
+    ): Promise<NetworkResponse>;
 }
 
 /**
@@ -226,7 +226,7 @@ export interface Endpoint {
     ): Promise<EndpointResponse>;
 }
 
-export interface FetchResponse {
+export interface NetworkResponse {
     payload?: string;
     responseCode: number | undefined;
 }

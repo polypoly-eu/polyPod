@@ -9,7 +9,7 @@ import {
     Stats,
     Matcher,
     Network,
-    FetchResponse as NetworkResponse,
+    NetworkResponse,
     Info,
     Entry,
     Endpoint,

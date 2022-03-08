@@ -4,7 +4,7 @@ import type {
     Endpoint,
     EndpointResponse,
     Network,
-    FetchResponse,
+    NetworkResponse,
     Info,
     Matcher,
     Pod,
@@ -311,10 +311,10 @@ class BrowserNetwork implements Network {
         body: string,
         contentType?: string,
         authorization?: string
-    ): Promise<FetchResponse> {
+    ): Promise<NetworkResponse> {
         return new Promise((resolve) => {
             const request = new XMLHttpRequest();
-            const fetchResponse = {} as FetchResponse;
+            const fetchResponse = {} as NetworkResponse;
             request.onreadystatechange = function () {
                 if (request.readyState !== XMLHttpRequest.DONE) return;
                 const status = request.status;
@@ -350,10 +350,10 @@ class BrowserNetwork implements Network {
         body: string,
         contentType?: string,
         authorization?: string
-    ): Promise<FetchResponse> {
+    ): Promise<NetworkResponse> {
         return new Promise((resolve) => {
             const request = new XMLHttpRequest();
-            const fetchResponse = {} as FetchResponse;
+            const fetchResponse = {} as NetworkResponse;
             request.onreadystatechange = function () {
                 if (request.readyState !== XMLHttpRequest.DONE) return;
                 const status = request.status;
