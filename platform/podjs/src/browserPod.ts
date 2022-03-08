@@ -463,7 +463,7 @@ class BrowserPolyNav implements PolyNav {
 
 declare global {
     interface Window {
-        manifestData: String;
+        manifestData: string;
         manifest: Manifest;
         currentTitle: string;
     }
