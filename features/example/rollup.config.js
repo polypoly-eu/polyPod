@@ -24,8 +24,7 @@ export default {
                         "node_modules/react/umd/react.development.js",
                         "node_modules/react-dom/umd/react-dom.development.js",
                         "node_modules/@polypoly-eu/podjs/dist/pod.js",
-                        "src/index.html",
-                        "manifest.json"
+                        "src/index.html"
                     ],
                     dest: "dist",
                 },
