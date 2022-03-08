@@ -14,4 +14,13 @@ describe("LegendEntries work", () => {
     expect(legendEntry.color).toBe(noColor);
     expect(legendEntry.description).toBe(noColorStr);
   });
+  it("Throws when incorrect colors used", () => {
+    let thrownError;
+    try {
+      new LegendEntry("foo", "bar");
+    } catch (error) {
+      thrownError = error;
+    }
+    expect(thrownError).toBeInstanceOf(IncorrectLegendEntry);
+  });
 });
