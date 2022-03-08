@@ -16,8 +16,9 @@ import * as zip from "@zip.js/zip.js";
 import { Manifest, readManifest } from "@polypoly-eu/manifest-parser";
 
 const NAV_FRAME_ID = "polyNavFrame";
-const NAV_DEFAULT_BACKGROUND_COLOR = "white";
-const NAV_DEFAULT_FOREGROUND_COLOR = "khaki";
+const NAV_DEFAULT_BACKGROUND_COLOR = "#ffffff";
+const NAV_DARK_FOREGROUND_COLOR = "#000000";
+const NAV_LIGHT_FOREGROUND_COLOR = "#ffffff";
 
 class LocalStoragePolyIn implements PolyIn {
     private static readonly storageKey = "polyInStore";
@@ -470,6 +471,56 @@ declare global {
     }
 }
 
+/**
+ * Returns the relative luminance value of a feature color.
+ *
+ * @param featureColor - A six digit hex color string, e.g. #000000
+ */
+function luminance(featureColor: string) {
+    const red = parseInt(featureColor.substr(1, 2), 16);
+    const green = parseInt(featureColor.substr(3, 2), 16);
+    const blue = parseInt(featureColor.substr(5, 2), 16);
+    // See: https://en.wikipedia.org/wiki/Relative_luminance
+    return red * 0.2126 + green * 0.7152 + blue * 0.0722;
+}
+
+function determineNavBarColors(manifest: Manifest): { fg: string; bg: string } {
+    const bg = manifest.primaryColor || NAV_DEFAULT_BACKGROUND_COLOR;
+    const brightnessThreshold = 80;
+    const fg =
+        luminance(bg) > brightnessThreshold
+            ? NAV_DARK_FOREGROUND_COLOR
+            : NAV_LIGHT_FOREGROUND_COLOR;
+    return { fg, bg };
+}
+
+function createNavBarFrame(title: string) {
+    const frame = document.createElement("iframe");
+    frame.style.display = "block";
+    frame.style.width = "100%";
+    frame.style.height = "50px";
+    frame.frameBorder = "0";
+    frame.scrolling = "no";
+    frame.id = NAV_FRAME_ID;
+
+    const navBarColors = determineNavBarColors(window.manifest);
+    const source = `
+    <html>
+        <body style="background-color: ${navBarColors.bg}">
+            <script>
+                window.addEventListener("message", (event) => {
+                    document.getElementById("title").textContent = event.data;
+                });
+            </script>
+            <h1 id="title" style="color: ${navBarColors.fg}">${title}<h1>
+        </body>
+    </html>
+    `;
+    const blob = new Blob([source], { type: "text/html" });
+    frame.src = URL.createObjectURL(blob);
+    return frame;
+}
+
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
     public readonly polyIn = new LocalStoragePolyIn();
@@ -493,33 +544,8 @@ manifest data in window.manifestData`
             window.manifest = await readManifest(manifestJson);
             window.parent.currentTitle =
                 window.parent.currentTitle || window.manifest.name;
-            const injection = document.createElement("iframe");
-            injection.style.display = "block";
-            injection.style.width = "100%";
-            injection.style.height = "50px";
-            injection.frameBorder = "0";
-            injection.scrolling = "no";
-            injection.id = NAV_FRAME_ID;
-            const source = `
-            <html>
-                <body style="background-color: ${
-                    window.manifest.primaryColor || NAV_DEFAULT_BACKGROUND_COLOR
-                }">
-                    <script>
-                        window.addEventListener("message", (event) => {
-                            document.getElementById("title").textContent = event.data;
-                        });
-                    </script>
-                    <h1 id="title" style="color: ${NAV_DEFAULT_FOREGROUND_COLOR}">
-                        ${window.parent.currentTitle}
-                    <h1>
-                </body>
-            </html>
-            `;
-            const blob = new Blob([source], { type: "text/html" });
-            injection.src = URL.createObjectURL(blob);
-            document.body.prepend(injection);
-
+            const frame = createNavBarFrame(window.parent.currentTitle);
+            document.body.prepend(frame);
             document.title = window.manifest.name;
         });
     }
