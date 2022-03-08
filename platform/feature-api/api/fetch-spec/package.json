@@ -1,0 +1,26 @@
+{
+  "name": "@polypoly-eu/fetch-spec",
+  "version": "0.0.1",
+  "description": "Standalone executable spec for window.fetch",
+  "files": [
+    "dist/*.ts",
+    "dist/*.js"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
+  },
+  "scripts": {
+    "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
+    "dev": "tsc --watch --incremental",
+    "eslint": "eslint src --ext .ts",
+    "lint": "npm run eslint",
+    "docs": "typedoc"
+  },
+  "devDependencies": {
+    "ts-node": "^9.1.1"
+  },
+  "private": true
+}

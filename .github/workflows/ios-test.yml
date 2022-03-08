@@ -2,16 +2,16 @@ name: Testing polyPod in iOS
 on:
     push:
         paths:
-            - "ios/**"
-            - "core/**"
-            - "features/**"
             - "build/**"
+            - "features/**"
+            - "platform/feature-api/**"
+            - "platform/ios/**"
     pull_request:
         paths:
-            - "ios/**"
-            - "core/**"
-            - "features/**"
             - "build/**"
+            - "features/**"
+            - "platform/feature-api/**"
+            - "platform/ios/**"
 jobs:
     test:
         name: Testing polyPod iOS app
@@ -25,11 +25,11 @@ jobs:
                   cache: "npm"
                   cache-dependency-path: "**/package-lock.json"
             - name: Lock xcode version
-              run: cd ios; make lockxcodeversion
-            - name: Build core and features
+              run: cd platform/ios; make lockxcodeversion
+            - name: Build API and features
               run: ./build.js
             - name: Build and test iOS
               run: |
-                  cd ios
+                  cd platform/ios
                   set -o pipefail
                   make test | xcpretty
