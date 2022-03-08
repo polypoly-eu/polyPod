@@ -476,7 +476,7 @@ declare global {
  *
  * @param featureColor - A six digit hex color string, e.g. #000000
  */
-function luminance(featureColor: string) {
+function luminance(featureColor: string): number {
     const red = parseInt(featureColor.substr(1, 2), 16);
     const green = parseInt(featureColor.substr(3, 2), 16);
     const blue = parseInt(featureColor.substr(5, 2), 16);
@@ -494,7 +494,7 @@ function determineNavBarColors(manifest: Manifest): { fg: string; bg: string } {
     return { fg, bg };
 }
 
-function createNavBarFrame(title: string) {
+function createNavBarFrame(title: string): HTMLElement {
     const frame = document.createElement("iframe");
     frame.style.display = "block";
     frame.style.width = "100%";
