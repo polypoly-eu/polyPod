@@ -377,6 +377,7 @@ class BrowserPolyNav implements PolyNav {
         if (actions.includes("back"))
             window.history.pushState(document.title, document.title);
         const actionKeys: any = {
+            Escape: "back",
             s: "search",
             i: "info",
         };
