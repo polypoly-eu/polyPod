@@ -493,8 +493,11 @@ manifest data in window.manifestData`
             window.parent.currentTitle =
                 window.parent.currentTitle || window.manifest.name;
             const injection = document.createElement("iframe");
+            injection.style.display = "block";
             injection.style.width = "100%";
             injection.style.height = "50px";
+            injection.frameBorder = "0";
+            injection.scrolling = "no";
             injection.id = NAV_FRAME_ID;
             const source = `
             <html>
