@@ -65,7 +65,7 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.POLYPOD_ANDROID_STORE_SERVICE_ACCOUNT_JSON }}
           packageName: coop.polypoly.polypod
           releaseName: ${{ env.VERSION_CODE }} (${{ env.VERSION_NAME }}) - ${{ steps.vars.outputs.branch }}@${{ steps.vars.outputs.sha_short }}
-          releaseFiles: ./android/app/build/outputs/apk/release/app-release.apk
+          releaseFiles: ./platform/android/app/build/outputs/apk/release/app-release.apk
           track: internal
           # whatsNewDirectory: distribution/whatsnew
           # mappingFile:
