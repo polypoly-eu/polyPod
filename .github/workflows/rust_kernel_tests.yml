@@ -20,7 +20,7 @@ jobs:
         run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
       - name: Install flatc
-        run: brew install flatbuffers@2.1.1
+        run: brew install flatbuffers
 
       - name: Generate flatbuffers
         working-directory: ./platform/core
