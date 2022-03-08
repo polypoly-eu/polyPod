@@ -9,6 +9,7 @@ import {
     Stats,
     Matcher,
     Network,
+    FetchResponse as NetworkResponse,
     Info,
     Entry,
     Endpoint,
@@ -81,7 +82,7 @@ type NetworkEndpoint = ObjectEndpointSpec<{
         body: string,
         contentType?: string,
         authorization?: string
-    ): ValueEndpointSpec<string | undefined>;
+    ): ValueEndpointSpec<NetworkResponse>;
 }>;
 
 type EndpointEndpoint = ObjectEndpointSpec<{

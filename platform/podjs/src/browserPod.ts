@@ -330,7 +330,7 @@ class BrowserNetwork implements Network {
 
             request.onerror = function () {
                 fetchResponse.payload = "Network error";
-                fetchResponse.responseCode = "403";
+                fetchResponse.responseCode = 403;
                 resolve(fetchResponse);
             };
 
@@ -369,7 +369,7 @@ class BrowserNetwork implements Network {
 
             request.onerror = function () {
                 fetchResponse.payload = "Network API Client Error";
-                fetchResponse.responseCode = "400";
+                fetchResponse.responseCode = 400;
                 resolve(fetchResponse);
             };
 
@@ -412,13 +412,13 @@ class BrowserEndpoint implements Endpoint {
         if (!approveEndpointFetch(endpointId, featureIdToken))
             return new Promise(() => ({
                 payload: "User Denied Request",
-                responseCode: "600",
+                responseCode: 600,
             }));
         const endpointURL = getEndpoint(endpointId);
         if (!endpointURL)
             return new Promise(() => ({
                 payload: "Endpoint URL not found",
-                responseCode: "604",
+                responseCode: 604,
             }));
         const endpointResponse = {
             ...(await this.endpointNetwork.httpPost(
@@ -440,13 +440,13 @@ class BrowserEndpoint implements Endpoint {
         if (!approveEndpointFetch(endpointId, featureIdToken))
             return new Promise(() => ({
                 payload: "User Denied Request",
-                responseCode: "600",
+                responseCode: 600,
             }));
         const endpointURL = getEndpoint(endpointId);
         if (!endpointURL)
             return new Promise(() => ({
                 payload: "Endpoint URL not found",
-                responseCode: "604",
+                responseCode: 604,
             }));
         const endpointResponse = {
             ...(await this.endpointNetwork.httpPost(
