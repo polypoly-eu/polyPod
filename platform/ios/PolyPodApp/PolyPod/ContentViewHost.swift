@@ -5,7 +5,7 @@ class ContentViewHost: UIHostingController<ContentView> {
         didSet { setNeedsStatusBarAppearanceUpdate() }
     }
     init() {
-        super.init(rootView: ContentView())
+        super.init(rootView: ContentView(featureStorage: .init(dataProtection: DataProtection.instance)))
         self.rootView.setStatusBarStyle = { self.statusBarStyle = $0 }
     }
     
