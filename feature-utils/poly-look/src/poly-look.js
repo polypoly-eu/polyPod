@@ -11,6 +11,7 @@ import { PolyChart } from "./visualisations/wrappers/react/polyChart.jsx";
 import {
   Tab,
   Tabs,
+  Chip,
   FilterChips,
   BlockLegend,
   LineLegend,
@@ -22,6 +23,7 @@ export {
   SankeyDiagram,
   TreeMap,
   PolyChart,
+  Chip,
   FilterChips,
   Tab,
   Tabs,
