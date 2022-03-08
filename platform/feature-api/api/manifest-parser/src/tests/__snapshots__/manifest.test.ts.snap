@@ -3,8 +3,6 @@
 exports[`Parsing Failed parse fail-empty.json 1`] = `
 "Failed to parse main manifest
 required property \\"name\\"
-└─ cannot decode undefined, should be string
-required property \\"version\\"
 └─ cannot decode undefined, should be string"
 `;
 
@@ -41,6 +39,37 @@ Object {
     "prerelease": Array [],
     "raw": "0.0.1",
     "version": "0.0.1",
+  },
+}
+`;
+
+exports[`Parsing Successful parse no-version.json 1`] = `
+Object {
+  "description": "This is an example feature",
+  "links": Object {
+    "link1": "https://polypoly.coop",
+    "link2": "https://polypoly.coop",
+  },
+  "name": "The Test Feature",
+  "primaryColor": "#000000",
+  "thumbnail": "assets/thumbnail.png",
+  "translations": Object {
+    "de": Object {
+      "author": "Author_DE",
+      "description": "Description_DE",
+    },
+  },
+  "version": SemVer {
+    "build": Array [],
+    "includePrerelease": false,
+    "loose": false,
+    "major": 1,
+    "minor": 0,
+    "options": Object {},
+    "patch": 0,
+    "prerelease": Array [],
+    "raw": "1.0.0",
+    "version": "1.0.0",
   },
 }
 `;
