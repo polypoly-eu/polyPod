@@ -21,6 +21,7 @@ private fun AssetManager.readFile(fileName: String) = open(fileName)
 
 @Serializable
 data class EndpointInfo(val url: String, val auth: String)
+data class EndpointResponse(var payload: String?, var responseCode: Int)
 
 class Endpoint(
     val context: Context,
@@ -50,14 +51,14 @@ class Endpoint(
         body: String,
         contentType: String?,
         authorization: String?,
-    ): String? {
+    ): EndpointResponse? {
         val approvalResponse =
             observer?.approveEndpointFetch?.invoke(endpointId) {
                 if (it == false) {
-                    return@invoke null
+                    return@invoke EndpointResponse(payload = "User Denied Request", responseCode = 600)
                 }
                 val endpointInfo =
-                    endpointInfofromId(endpointId) ?: return@invoke null
+                    endpointInfofromId(endpointId) ?: return@invoke EndpointResponse(payload = "Endpoint ID Not Found", responseCode = 604)
                 val response = endpointNetwork
                     .httpPost(
                         endpointInfo.url,
@@ -65,7 +66,7 @@ class Endpoint(
                         contentType,
                         authorization ?: endpointInfo.auth
                     )
-                return@invoke response
+                return@invoke EndpointResponse(response.payload, response.responseCode)
             }
         return approvalResponse
     }
@@ -74,21 +75,21 @@ class Endpoint(
         endpointId: String,
         contentType: String?,
         authorization: String?
-    ): String? {
+    ): EndpointResponse? {
         val approvalResponse =
             observer?.approveEndpointFetch?.invoke(endpointId) {
                 if (it == false) {
-                    return@invoke null
+                    return@invoke EndpointResponse(payload = "User Denied Request", responseCode = 600)
                 }
                 val endpointInfo =
-                    endpointInfofromId(endpointId) ?: return@invoke null
+                    endpointInfofromId(endpointId) ?: return@invoke EndpointResponse(payload = "Endpoint ID Not Found", responseCode = 604)
                 val response = endpointNetwork
                     .httpGet(
                         endpointInfo.url,
                         contentType,
                         authorization ?: endpointInfo.auth
                     )
-                return@invoke response
+                return@invoke EndpointResponse(response.payload, response.responseCode)
             }
         return approvalResponse
     }

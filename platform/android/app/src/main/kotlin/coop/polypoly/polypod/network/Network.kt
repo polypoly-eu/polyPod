@@ -16,16 +16,20 @@ class Network(val context: Context) {
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
+    data class NetworkResponse(var payload: String?, var responseCode: Int)
+
+
     open suspend fun httpPost(
         url: String,
         body: String,
         contentType: String?,
         authorization: String?
-    ): String? = withContext(Dispatchers.IO) {
+    ): NetworkResponse = withContext(Dispatchers.IO) {
         val connection = URL(url).openConnection() as HttpURLConnection
         connection.requestMethod = "POST"
         connection.doOutput = true
         connection.setRequestProperty("charset", "utf-8")
+        var response = NetworkResponse(payload = null, responseCode = 0);
 
         if (contentType != null)
             connection.setRequestProperty("Content-Type", contentType)
@@ -54,18 +58,20 @@ class Network(val context: Context) {
             outputStream.flush()
         } catch (exception: Exception) {
             logger.error("network.httpPost failed: $exception")
-            return@withContext exception.toString()
+            response.payload = exception.toString()
+            response.responseCode = 600
+            return@withContext response
         }
         val responseCode = connection.responseCode
         if (responseCode < 200 || responseCode > 299) {
-            val message = "Bad response code: $responseCode"
-            logger.error("network.httpPost failed: $message")
-            return@withContext message
+            response.payload = "Bad response code: $responseCode"
+            response.responseCode = responseCode
+            logger.error("network.httpPost failed: ${response.payload}")
+            return@withContext response
         }
 
-        var response: String? = null;
         try {
-            response =
+            response.payload =
                 connection.inputStream.bufferedReader().use { it.readText() }
         } finally {
             connection.disconnect()
@@ -78,7 +84,7 @@ class Network(val context: Context) {
         url: String,
         contentType: String?,
         authorization: String?
-    ): String? = withContext(Dispatchers.IO) {
+    ): NetworkResponse = withContext(Dispatchers.IO) {
         val connection = URL(url).openConnection() as HttpURLConnection
         connection.requestMethod = "GET"
         connection.doInput = true

@@ -26,6 +26,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.webkit.WebViewAssetLoader
 import coop.polypoly.polypod.endpoint.Endpoint
 import coop.polypoly.polypod.endpoint.EndpointObserver
+import coop.polypoly.polypod.endpoint.EndpointResponse
 import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.info.Info
@@ -131,15 +132,11 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private suspend fun approveEndpointFetch(
         endpointId: String?,
-        completion: suspend (Boolean) -> String?
-    ): String? {
+        completion: suspend (Boolean) -> EndpointResponse
+    ): EndpointResponse {
         var fetchApproval: CompletableDeferred<Boolean?>? =
             CompletableDeferred()
-        val featureName = feature?.name ?: return ""
-        if (endpointId == null) {
-            return null
-        }
-
+        val featureName = feature?.name ?: return EndpointResponse(payload = "Not a Valid Feature", responseCode = 605)
         val message = context?.getString(
             R.string.message_approve_endpoint_fetch, featureName, endpointId
         )
@@ -158,7 +155,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         (fetchApproval?.await())?.let {
             return completion(it)
         }
-        return "Too fast"
+        return EndpointResponse(payload = "Request Approval Failed", responseCode = 606)
     }
 
 
