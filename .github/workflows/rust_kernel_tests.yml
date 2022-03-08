@@ -7,7 +7,6 @@ on:
     types: [assigned, opened, ready_for_review]
     paths:
       - platform/core/**
-      - .github/workflows/rust_kernel_tests.yml
 
 jobs:
   test:

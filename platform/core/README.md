@@ -1,8 +1,23 @@
-# Rust implementations of polyPod platform core logic
+# PolyPod platform Kernel
 
-The code is written against Rust 1.58.
+Logic shared across polyPod implementations 
 
-All you need is _cargo_, then run:
+## Requirements
+- [Rust toolchain](https://www.rust-lang.org/tools/install). Kernel is built with Rust 1.58.1.
+- [Flatbuffers](https://formulae.brew.sh/formula/flatbuffers)
 
-    cargo test
+## Building
 
+- When setting up the project for the first time or switching between branches, the flatbuffers models have to be generated:
+
+        make generate_flatbuffers
+
+- Build the project: 
+
+        cargo build
+
+## Testing
+
+Just run:
+
+        cargo test
