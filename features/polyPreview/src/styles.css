@@ -21,7 +21,7 @@
 
 @font-face {
     font-family: "polyDisplay";
-    src: url("../fonts/polydisplay_semi_1_0.otf");
+    src: url("../fonts/jost_medium.ttf");
 }
 
 * {
@@ -38,17 +38,6 @@ body,
     height: 100%;
     margin: 0;
     overflow: hidden;
-}
-
-.swiper-container {
-    box-shadow: inset 0 8px 4px -4px rgba(0, 0, 0, 0.25);
-}
-
-/** Safari */
-@media not all and (min-resolution: 0.001dpcm) {
-    .swiper-container {
-        box-shadow: inset 0px 1px #a9b6c6 !important;
-    }
 }
 
 h1,

@@ -1,0 +1,36 @@
+{
+    "name": "@polypoly-eu/dummy-server",
+    "version": "0.0.2",
+    "description": "Chivalrous and minimalistic mimicry of httpbin",
+    "files": [
+        "*.js"
+    ],
+    "main": "src/dummy-server.js",
+    "module": "src/dummy-server.js",
+    "type": "module",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/polypoly-eu/polyPod.git"
+    },
+    "scripts": {
+        "start": "node bin/server.start.js",
+        "build": "",
+        "test": "jest",
+        "stop": "node bin/server.stop.js",
+        "eslint": "eslint . --ext .js",
+        "lint": "npm run eslint"
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "socket.io": "^4.4.1",
+        "socket.io-client": "3.1.2"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.14.6",
+        "supertest": "^6.1.3"
+    },
+    "bin": {
+        "start-dummy-server": "bin/server.start.js",
+        "stop-dummy-server": "bin/server.stop.js"
+    }
+}

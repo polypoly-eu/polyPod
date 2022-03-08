@@ -1,0 +1,26 @@
+.infobox {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: var(--color-indigo-100);
+    border-radius: 10px;
+    padding: 16px;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+.infobox .icon {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 auto;
+    margin-right: 18px;
+    margin-left: 3px;
+}
+
+.infobox .text-content {
+    flex: 1 1 auto;
+    font-size: 20px;
+    line-height: var(--line-height);
+    letter-spacing: -0.01em;
+    margin: 0;
+}

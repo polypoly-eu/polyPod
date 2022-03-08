@@ -3,17 +3,17 @@
 At the moment, the polyPod is essentially a runtime for _features_; small,
 sandboxed JavaScript applications that can be launched from the polyPod app.
 
-But it will be much more than that, for more information read [the polyPod
-whitepaper].
+But it will be much more than that. For more information please read the
+[polyPod whitepaper][1].
 
-## Components
+## Structure
 
-- [android](android): The polyPod app for Android
-- [ios](ios): The polyPod app for iOS
-- [podjs](podjs): A module that lets features run in a web browser
+- [platform](platform): The polyPod platform
 - [features](features): polyPod features
-- [core](core): The polyPod core modules
+- [feature-utils](feature-utils): Utilities used by features
+- [assets](assets): Assets shared across the polyPod and features
 - [build](build): The build logic
+- [dev-utils](dev-utils): Utilities used at build time
 
 ## Requirements
 
@@ -21,18 +21,22 @@ Just [Node.js](https://nodejs.org/) version 16.x or newer.
 
 ## Building
 
-Just execute:
+If you're on Windows, please follow the steps in
+[dev-utils/windows](dev-utils/windows) first.
+
+In general, you just need to run:
 
     $ ./build.js
 
-This will build the cross platform code base - mainly the core code and bundled
-features.
-
-After this you can build [android](android), [ios](ios), or try one of the
-features, e.g. [features/example](features/example).
-
 > (Yes, we have a custom build script, you can read more about why [here](build)
 > if you're curious.)
+
+This will build the platform independent code, including all the bundled
+features, as well as [podjs](platform/podjs).
+
+After this you can build the [platform](platform)
+(e.g. [android](platform/android) or [ios](platform/ios)), or try one of the
+features (e.g. [features/example](features/example)).
 
 ## Testing
 
@@ -47,7 +51,7 @@ To run the linter:
 > Please note that this won't trigger tests or linting for non-JS code, for
 example [android](android).
 
-If linting reveals some error, they can be fixed with 
+If linting reveals some error, they can be fixed with
 
     $ ./build.js lintfix
 
@@ -66,22 +70,24 @@ Please read the [SECURITY](SECURITY.md) document on how to report potential
 security vulnerabilities in polyPod and where to find polypoly's Vulnerability
 Disclosure Policy.
 
-## Issues, contributions.
+## Issues and contributions
 
 Please see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-
-## Links
-
-[the polyPod whitepaper]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
-
-
 ## Licensing
 
-Copyright (c) 2021 pc polypoly coop SCE mbH
+Copyright © 2021 pc polypoly coop SCE mbH
 
-Licensed under the GNU General Public License, Version 3 with Additional Terms.
+Licensed under the GNU General Public License, Version 3.  Please see the
+[LICENSE](LICENSE) document for details and a copy of the license.
 
-Please see the [LICENSE](LICENSE) document for details and a copy of the
-license and additional terms.
+License information of 3rd party components is available in the
+[3rd-party-licenses/](3rd-party-licenses) directory.
 
+## Trademarks
+
+- polypoly® is a registered trademark of polypoly Enterprise GmbH
+- polyPod is a trademark in registration of pc polypoly coop SCE mbH
+- polyPedia is a trademark in registration of polypoly Foundation gGmbH
+
+[1]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf

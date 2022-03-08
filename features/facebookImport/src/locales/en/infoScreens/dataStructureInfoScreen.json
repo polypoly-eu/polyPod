@@ -1,0 +1,6 @@
+{
+    "text1": "This diagram shows the categories inside your Facebook data that we currently analyse and ranks them by how many data entries we found.",
+    "legend": "Representation of the number of entries per category",
+    "text2": "This diagram is called a <strong>bubble chart</strong>. Each bubble represents one data category. The number of bubbles shows how many data categories there are. The size of each bubble is dependent on the amount of data entries.",
+    "text3": "Please note, that we are only using parts of your Facebook data for this analysis so far. So the numbers on this screen show a tendency, but not the total number in your download."
+}

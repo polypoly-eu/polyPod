@@ -1,0 +1,42 @@
+.featured-entity-card {
+    position: relative;
+    flex: 1 1 auto;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 32px auto 0 auto;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: normal;
+}
+
+.featured-entity-card .short-info-margin {
+    margin-left: 12px;
+}
+
+.data-sharing-section-list {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    margin: 8px auto 0 auto;
+}
+
+.data-sharing-section {
+    width: 91.112%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.data-sharing-section {
+    background: transparent;
+    font-size: 20px;
+    text-align: left;
+}
+
+.data-sharing-section h1 {
+    margin: 0 0 -7px 0;
+    font-size: 16px;
+}

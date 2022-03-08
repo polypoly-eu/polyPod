@@ -1,0 +1,94 @@
+.revenue-chart-container {
+    width: 100%;
+    position: relative;
+}
+
+.revenue-chart-container .revenue-chart {
+    position: relative;
+    width: 100%;
+    height: 165px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.revenue-chart-container .gridline {
+    position: absolute;
+    box-sizing: border-box;
+    left: 11.5%;
+    width: 83%;
+    height: 1px;
+    background-color: var(--color-semi-dark);
+}
+
+.revenue-chart-container .x-axis {
+    position: absolute;
+    font-family: "Jost Medium";
+    font-size: 10px;
+    top: 88%;
+    color: var(--color-semi-dark);
+    transform: translateX(-4px);
+}
+
+.revenue-chart-container .y-axis {
+    position: absolute;
+    font-family: "Jost Medium";
+    font-size: 10px;
+    left: 5%;
+    transform: translateY(6px);
+}
+
+.revenue-chart-container .unit {
+    position: absolute;
+    font-family: "Jost Medium";
+    font-size: 12px;
+    transform: translate(16px, -22px);
+}
+
+.revenue-chart-container .bar {
+    position: absolute;
+    background-color: #3ba6ff;
+    width: 12%;
+    max-width: 80px;
+    bottom: 15.5%;
+    z-index: 20;
+    transform: translateX(4px);
+}
+
+.revenue-chart-container .source {
+    margin-left: 4.444%;
+    margin-top: 2px;
+    font-family: "Jost Medium";
+    font-size: 12px;
+    color: var(--color-semi-dark);
+}
+
+.revenue-chart-container .no-data-text {
+    position: absolute;
+    left: 50%;
+    top: 35%;
+    padding-left: 16px;
+    width: 180px;
+    transform: translateX(-50%);
+    font-size: 14px;
+}
+
+.revenue-chart-container .no-data-for-column-tag {
+    transform: translateY(-46px);
+    font-size: 12px;
+    color: var(--color-semi-dark);
+    text-align: center;
+}
+
+.revenue-chart-container .in-bar-number {
+    font-size: 10px;
+    font-weight: 500;
+    color: #002850;
+    text-align: center;
+}
+
+.revenue-chart-container .over-bar-number {
+    font-size: 10px;
+    font-weight: 500;
+    text-align: center;
+    transform: translateY(-32px);
+}

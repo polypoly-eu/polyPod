@@ -1,0 +1,102 @@
+.overview {
+    background-color: var(--background-dark);
+    color: var(--color-gray-50);
+    line-height: var(--line-height);
+    letter-spacing: -0.01em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 30px 16px 30px 16px;
+    border-top: 1px inset #a9b6c6;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.overview .overview-title {
+    font-family: "Jost Medium";
+    max-width: 320px;
+    font-size: 24px;
+    line-height: 28.8px;
+    margin: 0 0 16px 0;
+}
+
+.overview h3,
+h4 {
+    font-weight: 500;
+    margin: 0px 0px 10px;
+}
+
+.overview h3 {
+    font-size: 20px;
+}
+
+.overview h4 {
+    font-size: 16px;
+}
+
+.overview .bubble-cluster {
+    display: flex;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.overview .bubble-cluster svg {
+    flex-grow: 1;
+}
+
+.overview p {
+    margin: 0;
+}
+
+.overview .details {
+    color: var(--color-gray-400);
+    font-size: 12px;
+}
+
+.overview .details .inline-block p {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.overview .footer {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.overview .footer .btn-holder {
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    background-color: var(--background-dark);
+    box-sizing: border-box;
+}
+
+.overview .footer .btn-holder .btn {
+    font-family: "Jost Medium";
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+.overview .footer .btn-holder .btn.primary {
+    background-color: var(--color-gray-50);
+    color: var(--color-indigo-950);
+    margin-top: 16px;
+}
+
+.overview .footer .btn-holder .btn.secondary {
+    border: 1px solid var(--color-gray-50);
+    box-sizing: border-box;
+    color: var(--color-gray-50);
+    background-color: transparent;
+}

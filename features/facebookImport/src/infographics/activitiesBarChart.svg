@@ -1,0 +1,68 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="activitiesBarChart">
+<g id="Horizontal gridlines">
+<line id="Line 304" x1="20" y1="217.5" x2="256" y2="217.5" stroke="#CBD5E0"/>
+<line id="Line 295" x1="20" y1="195.5" x2="256" y2="195.5" stroke="#CBD5E0"/>
+<line id="Line 301" x1="20" y1="173.5" x2="256" y2="173.5" stroke="#CBD5E0"/>
+<line id="Line 296" x1="20" y1="151.5" x2="256" y2="151.5" stroke="#CBD5E0"/>
+<line id="Line 302" x1="20" y1="129.5" x2="256" y2="129.5" stroke="#CBD5E0"/>
+<line id="Line 297" x1="20" y1="107.5" x2="256" y2="107.5" stroke="#CBD5E0"/>
+<line id="Line 306" x1="20" y1="85.5" x2="256" y2="85.5" stroke="#CBD5E0"/>
+<line id="Line 307" x1="20" y1="63.5" x2="256" y2="63.5" stroke="#CBD5E0"/>
+</g>
+<g id="Bars (vertical)">
+<rect id="Rectangle 939" x="20" y="75" width="16.8571" height="143" fill="#3749A9"/>
+<rect id="Rectangle 940" x="39.9219" y="138" width="16.8571" height="80" fill="#3749A9"/>
+<rect id="Rectangle 941" x="59.8442" y="146" width="16.8571" height="72" fill="#3749A9"/>
+<rect id="Rectangle 942" x="79.7661" y="119" width="16.8571" height="99" fill="#3749A9"/>
+<rect id="Rectangle 943" x="99.6885" y="96" width="16.8571" height="122" fill="#3749A9"/>
+<rect id="Rectangle 944" x="119.61" y="163" width="16.8571" height="55" fill="#3749A9"/>
+<rect id="Rectangle 945" x="139.532" y="138" width="16.8571" height="80" fill="#3749A9"/>
+<rect id="Rectangle 946" x="159.455" y="185" width="16.8571" height="33" fill="#3749A9"/>
+<rect id="Rectangle 947" x="179.376" y="208" width="16.8571" height="10" fill="#3749A9"/>
+<rect id="Rectangle 948" x="199.299" y="146" width="16.8571" height="72" fill="#3749A9"/>
+<rect id="Rectangle 949" x="219.221" y="125" width="16.8571" height="93" fill="#3749A9"/>
+<rect id="Rectangle 950" x="239.143" y="89" width="16.8571" height="129" fill="#3749A9"/>
+</g>
+<g id="Horizontal gridlines (transparent)" opacity="0.5">
+<line id="Line 304_2" x1="20" y1="217.5" x2="256" y2="217.5" stroke="#CBD5E0"/>
+<line id="Line 295_2" x1="20" y1="195.5" x2="256" y2="195.5" stroke="#CBD5E0"/>
+<line id="Line 301_2" x1="20" y1="173.5" x2="256" y2="173.5" stroke="#CBD5E0"/>
+<line id="Line 296_2" x1="20" y1="151.5" x2="256" y2="151.5" stroke="#CBD5E0"/>
+<line id="Line 302_2" x1="20" y1="129.5" x2="256" y2="129.5" stroke="#CBD5E0"/>
+<line id="Line 297_2" x1="20" y1="107.5" x2="256" y2="107.5" stroke="#CBD5E0"/>
+<line id="Line 306_2" x1="20" y1="85.5" x2="256" y2="85.5" stroke="#CBD5E0"/>
+<line id="Line 307_2" x1="20" y1="63.5" x2="256" y2="63.5" stroke="#CBD5E0"/>
+</g>
+<g id="y axis: Entries">
+<text id="bold1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="40.17">Number of events</tspan></text>
+<text id="20" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="174.17">20</tspan></text>
+<text id="0" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="219.17">0</tspan></text>
+<text id="40" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="130.17">40</tspan></text>
+<text id="60" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="86.17">60</tspan></text>
+</g>
+<g id="x axis: Months">
+<text id="bold2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="19" y="254.67">Year</tspan></text>
+<text id="boldJan" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="26.7983" y="235.17">J</tspan></text>
+<text id="boldFeb" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="45.0288" y="235.17">F</tspan></text>
+<text id="boldMar" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="63.0581" y="235.17">M</tspan></text>
+<text id="boldApr" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="83.792" y="235.17">A</tspan></text>
+<text id="boldMay" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="102.71" y="235.17">M</tspan></text>
+<text id="boldJun" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="125.929" y="235.17">J</tspan></text>
+<text id="boldJul" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="145.755" y="235.17">J</tspan></text>
+<text id="boldAug" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="163.097" y="235.17">A</tspan></text>
+<text id="boldSep" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="183.597" y="235.17">S</tspan></text>
+<text id="boldOct" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="202.081" y="235.17">O</tspan></text>
+<text id="boldNov" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="222.024" y="235.17">N</tspan></text>
+<text id="boldDec" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="242.336" y="235.17">D</tspan></text>
+</g>
+<g id="Label">
+<g id="Label_2">
+<rect id="Rectangle 924" y="3.5" width="16.86" height="12" fill="#3749A9"/>
+<text id="bigbold1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="21.8599" y="14.365">Events      </tspan></text>
+</g>
+</g>
+<text id="text1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="165" y="14.17">Number of </tspan><tspan x="165" y="28.17">entries for this </tspan><tspan x="165" y="42.17">specific month</tspan></text>
+<path id="Line 165" d="M207 140L207 50" stroke="#0F1938"/>
+</g>
+</svg>

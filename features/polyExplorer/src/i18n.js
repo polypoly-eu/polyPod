@@ -1,15 +1,14 @@
 import { determineLanguage, I18n } from "@polypoly-eu/silly-i18n";
 
 import commonEn from "./locales/en/common.json";
-import companyFilterScreenEn from "./locales/en/companyFilterScreen.json";
-import companyDetailsScreenEn from "./locales/en/companyDetailsScreen.json";
-import companySearchScreenEn from "./locales/en/companySearchScreen.json";
+import entityFilterScreenEn from "./locales/en/entityFilterScreen.json";
+import entityDetailsScreenEn from "./locales/en/entityDetailsScreen.json";
+import entitySearchScreenEn from "./locales/en/entitySearchScreen.json";
 import mainScreenEn from "./locales/en/mainScreen.json";
 import onboardingPopupEn from "./locales/en/onboardingPopup.json";
-import featuredCompanyEn from "./locales/en/featuredCompany.json";
 import dataSharingGaugeEn from "./locales/en/dataSharingGauge.json";
 import dataExplorationScreenEn from "./locales/en/dataExplorationScreen.json";
-import featuredCompanyInfoScreenEn from "./locales/en/featuredCompanyInfoScreen.json";
+import featuredEntityInfoScreenEn from "./locales/en/featuredEntityInfoScreen.json";
 import infoScreenEn from "./locales/en/infoScreen.json";
 import dataRegionInfoScreenEn from "./locales/en/dataRegionInfoScreen.json";
 import explorationInfoEn from "./locales/en/explorationInfo.json";
@@ -20,17 +19,31 @@ import explorationPurposeInfoScreenEn from "./locales/en/explorationPurposeInfoS
 import explorationCompaniesInfoScreenEn from "./locales/en/explorationCompaniesInfoScreen.json";
 import explorationJurisdictionInfoScreenEn from "./locales/en/explorationJurisdictionInfoScreen.json";
 import infographicEn from "./locales/en/infographic.json";
+import clusterStoriesPreviewEn from "./locales/en/stories/clusterStoriesPreview.json";
+import clusterMessengerStoryEn from "./locales/en/stories/clusterMessengerStory.json";
+import clusterDigitalGiantsStoryEn from "./locales/en/stories/clusterDigitalGiants.json";
+import clusterStoryCommonEn from "./locales/en/stories/common.json";
+import barChartEn from "./locales/en/barChart.json";
+import commonInfoScreenEn from "./locales/en/infoScreens/commonInfoScreen.json";
+import detailsLineChartInfoScreenEn from "./locales/en/infoScreens/detailsLineChartInfoScreen.json";
+import dataTypesInfoScreensEn from "./locales/en/infoScreens/dataTypesInfoScreens.json";
+import industriesPackedCircleInfoScreenEn from "./locales/en/infoScreens/industriesPackedCircleInfoScreen.json";
+import purposesBarChartInfoScreenEn from "./locales/en/infoScreens/purposesBarChartInfoScreen.json";
+import dataRegionsDiagramInfoScreenEn from "./locales/en/infoScreens/dataRegionsDiagramInfoScreen.json";
+import detailsTreemapInfoScreenEn from "./locales/en/infoScreens/detailsTreemapInfoScreen.json";
+import companiesBarChartInfoScreenEn from "./locales/en/infoScreens/companiesBarChartInfoScreen.json";
+import companyRevenueBarChartInfoScreenEn from "./locales/en/infoScreens/companyRevenueBarChartInfoScreen.json";
+import overviewBarChartInfoScreenEn from "./locales/en/infoScreens/overviewBarChartInfoScreen.json";
 
 import commonDe from "./locales/de/common.json";
-import companyFilterScreenDe from "./locales/de/companyFilterScreen.json";
-import companyDetailsScreenDe from "./locales/de/companyDetailsScreen.json";
-import companySearchScreenDe from "./locales/de/companySearchScreen.json";
+import entityFilterScreenDe from "./locales/de/entityFilterScreen.json";
+import entityDetailsScreenDe from "./locales/de/entityDetailsScreen.json";
+import entitySearchScreenDe from "./locales/de/entitySearchScreen.json";
 import mainScreenDe from "./locales/de/mainScreen.json";
 import onboardingPopupDe from "./locales/de/onboardingPopup.json";
-import featuredCompanyDe from "./locales/de/featuredCompany.json";
 import dataSharingGaugeDe from "./locales/de/dataSharingGauge.json";
 import dataExplorationScreenDe from "./locales/de/dataExplorationScreen.json";
-import featuredCompanyInfoScreenDe from "./locales/de/featuredCompanyInfoScreen.json";
+import featuredEntityInfoScreenDe from "./locales/de/featuredEntityInfoScreen.json";
 import infoScreenDe from "./locales/de/infoScreen.json";
 import dataRegionInfoScreenDe from "./locales/de/dataRegionInfoScreen.json";
 import explorationInfoDe from "./locales/de/explorationInfo.json";
@@ -41,19 +54,33 @@ import explorationPurposeInfoScreenDe from "./locales/de/explorationPurposeInfoS
 import explorationCompaniesInfoScreenDe from "./locales/de/explorationCompaniesInfoScreen.json";
 import explorationJurisdictionInfoScreenDe from "./locales/de/explorationJurisdictionInfoScreen.json";
 import infographicDe from "./locales/de/infographic.json";
+import clusterStoriesPreviewDe from "./locales/de/stories/clusterStoriesPreview.json";
+import clusterMessengerStoryDe from "./locales/de/stories/clusterMessengerStory.json";
+import clusterDigitalGiantsStoryDe from "./locales/de/stories/clusterDigitalGiants.json";
+import clusterStoryCommonDe from "./locales/de/stories/common.json";
+import barChartDe from "./locales/de/barChart.json";
+import commonInfoScreenDe from "./locales/de/infoScreens/commonInfoScreen.json";
+import detailsLineChartInfoScreenDe from "./locales/de/infoScreens/detailsLineChartInfoScreen.json";
+import industriesPackedCircleInfoScreenDe from "./locales/de/infoScreens/industriesPackedCircleInfoScreen.json";
+import dataTypesInfoScreensDe from "./locales/de/infoScreens/dataTypesInfoScreens.json";
+import purposesBarChartInfoScreenDe from "./locales/de/infoScreens/purposesBarChartInfoScreen.json";
+import dataRegionsDiagramInfoScreenDe from "./locales/de/infoScreens/dataRegionsDiagramInfoScreen.json";
+import detailsTreemapInfoScreenDe from "./locales/de/infoScreens/detailsTreemapInfoScreen.json";
+import companiesBarChartInfoScreenDe from "./locales/de/infoScreens/companiesBarChartInfoScreen.json";
+import companyRevenueBarChartInfoScreenDe from "./locales/de/infoScreens/companyRevenueBarChartInfoScreen.json";
+import overviewBarChartInfoScreenDe from "./locales/de/infoScreens/overviewBarChartInfoScreen.json";
 
 export default new I18n(determineLanguage(), {
     en: {
         common: commonEn,
-        companyFilterScreen: companyFilterScreenEn,
-        companyDetailsScreen: companyDetailsScreenEn,
-        companySearchScreen: companySearchScreenEn,
+        entityFilterScreen: entityFilterScreenEn,
+        entityDetailsScreen: entityDetailsScreenEn,
+        entitySearchScreen: entitySearchScreenEn,
         mainScreen: mainScreenEn,
         onboardingPopup: onboardingPopupEn,
-        featuredCompany: featuredCompanyEn,
         dataSharingGauge: dataSharingGaugeEn,
         dataExplorationScreen: dataExplorationScreenEn,
-        featuredCompanyInfoScreen: featuredCompanyInfoScreenEn,
+        featuredEntityInfoScreen: featuredEntityInfoScreenEn,
         infoScreen: infoScreenEn,
         dataRegionInfoScreen: dataRegionInfoScreenEn,
         explorationInfo: explorationInfoEn,
@@ -64,18 +91,32 @@ export default new I18n(determineLanguage(), {
         explorationCompaniesInfoScreen: explorationCompaniesInfoScreenEn,
         explorationJurisdictionInfoScreen: explorationJurisdictionInfoScreenEn,
         infographic: infographicEn,
+        clusterStoriesPreview: clusterStoriesPreviewEn,
+        clusterMessengerStory: clusterMessengerStoryEn,
+        clusterDigitalGiantsStory: clusterDigitalGiantsStoryEn,
+        clusterStoryCommon: clusterStoryCommonEn,
+        barChart: barChartEn,
+        commonInfoScreen: commonInfoScreenEn,
+        detailsLineChartInfoScreen: detailsLineChartInfoScreenEn,
+        dataTypesInfoScreens: dataTypesInfoScreensEn,
+        industriesPackedCircleInfoScreen: industriesPackedCircleInfoScreenEn,
+        purposesBarChartInfoScreen: purposesBarChartInfoScreenEn,
+        dataRegionsDiagramInfoScreen: dataRegionsDiagramInfoScreenEn,
+        detailsTreemapInfoScreen: detailsTreemapInfoScreenEn,
+        companiesBarChartInfoScreen: companiesBarChartInfoScreenEn,
+        companyRevenueBarChartInfoScreen: companyRevenueBarChartInfoScreenEn,
+        overviewBarChartInfoScreen: overviewBarChartInfoScreenEn,
     },
     de: {
         common: commonDe,
-        companyFilterScreen: companyFilterScreenDe,
-        companyDetailsScreen: companyDetailsScreenDe,
-        companySearchScreen: companySearchScreenDe,
+        entityFilterScreen: entityFilterScreenDe,
+        entityDetailsScreen: entityDetailsScreenDe,
+        entitySearchScreen: entitySearchScreenDe,
         mainScreen: mainScreenDe,
         onboardingPopup: onboardingPopupDe,
-        featuredCompany: featuredCompanyDe,
         dataSharingGauge: dataSharingGaugeDe,
         dataExplorationScreen: dataExplorationScreenDe,
-        featuredCompanyInfoScreen: featuredCompanyInfoScreenDe,
+        featuredEntityInfoScreen: featuredEntityInfoScreenDe,
         infoScreen: infoScreenDe,
         dataRegionInfoScreen: dataRegionInfoScreenDe,
         explorationInfo: explorationInfoDe,
@@ -86,5 +127,20 @@ export default new I18n(determineLanguage(), {
         explorationCompaniesInfoScreen: explorationCompaniesInfoScreenDe,
         explorationJurisdictionInfoScreen: explorationJurisdictionInfoScreenDe,
         infographic: infographicDe,
+        clusterStoriesPreview: clusterStoriesPreviewDe,
+        clusterMessengerStory: clusterMessengerStoryDe,
+        clusterDigitalGiantsStory: clusterDigitalGiantsStoryDe,
+        clusterStoryCommon: clusterStoryCommonDe,
+        barChart: barChartDe,
+        commonInfoScreen: commonInfoScreenDe,
+        detailsLineChartInfoScreen: detailsLineChartInfoScreenDe,
+        industriesPackedCircleInfoScreen: industriesPackedCircleInfoScreenDe,
+        dataTypesInfoScreens: dataTypesInfoScreensDe,
+        purposesBarChartInfoScreen: purposesBarChartInfoScreenDe,
+        dataRegionsDiagramInfoScreen: dataRegionsDiagramInfoScreenDe,
+        detailsTreemapInfoScreen: detailsTreemapInfoScreenDe,
+        companiesBarChartInfoScreen: companiesBarChartInfoScreenDe,
+        companyRevenueBarChartInfoScreen: companyRevenueBarChartInfoScreenDe,
+        overviewBarChartInfoScreen: overviewBarChartInfoScreenDe,
     },
 });

@@ -6,7 +6,10 @@
     --color-semi-light: #edf2f7;
     --color-light: #f7fafc;
 
-    /* Background colors*/
+    /* Buttons colors */
+    --color-button-dark-grey: #3e495b;
+
+    /* Background colors */
     --color-background-dark: var(--color-dark);
     --color-background-light: var(--color-light);
     /* Text colors */
@@ -41,11 +44,9 @@
     src: url("../fonts/jost_medium.ttf");
 }
 
-* {
-    font-family: "Jost";
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    color: var(--color-text-light);
+@font-face {
+    font-family: "Jost Bold";
+    src: url("../fonts/jost_bold.ttf");
 }
 
 body {
@@ -58,4 +59,30 @@ button {
 
 button:focus {
     outline: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #6a798e;
+    border-radius: 6px;
+    z-index: 2;
+    height: 38px;
+}
+
+::-webkit-scrollbar-track {
+    margin-top: 64px;
+}
+
+strong {
+    font-family: "Jost Medium";
+    font-weight: 400;
+}
+
+.source {
+    font-family: "Jost Medium";
+    font-size: 12px;
 }

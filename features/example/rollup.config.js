@@ -1,4 +1,4 @@
-import copy from "rollup-plugin-copy";
+import copy from "@polypoly-eu/rollup-plugin-copy-watch";
 import sucrase from "@rollup/plugin-sucrase";
 
 export default {
@@ -7,15 +7,15 @@ export default {
         file: "dist/index.js",
         format: "iife",
         globals: {
-            "react": "React",
+            react: "React",
             "react-dom": "ReactDOM",
-            "pod": "pod"
-        }
+            pod: "pod",
+        },
     },
     plugins: [
         sucrase({
             transforms: ["jsx"],
-            production: true
+            production: true,
         }),
         copy({
             targets: [
@@ -27,11 +27,11 @@ export default {
                         "src/index.html",
                         "manifest.json"
                     ],
-                    dest: "dist"
-                }
+                    dest: "dist",
+                },
             ],
-            verbose: true
-        })
+            verbose: true,
+        }),
     ],
-    external: ["react", "react-dom", "pod"]
+    external: ["react", "react-dom", "pod"],
 };

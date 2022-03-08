@@ -1,0 +1,32 @@
+name: Lint and Test Rust code
+on:
+  push:
+    paths:
+      - platform/core/**
+  pull_request:
+    types: [assigned, opened, ready_for_review]
+    paths:
+      - platform/core/**
+
+jobs:
+  test:
+    name: Rust test suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
+      - name: Install stable toolchain
+        run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+      - name: Lint -- Run cargo fmt
+        working-directory: ./platform/core
+        run: cargo fmt --all -- --check
+
+      - name: Lint -- Run cargo clippy
+        working-directory: ./platform/core
+        run: cargo clippy -- -D warnings
+
+      - name: Run cargo test
+        working-directory: ./platform/core
+        run: cargo test

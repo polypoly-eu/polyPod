@@ -1,3 +1,0 @@
-rootProject.name = 'polyPod-Android'
-include ':polyOut', ':bubblewrap', ':java-fetch', ':app'
-project(':bubblewrap').projectDir = file('../core/communication/bubblewrap')

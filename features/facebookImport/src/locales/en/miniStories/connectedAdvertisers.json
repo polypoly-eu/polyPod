@@ -1,0 +1,6 @@
+{
+    "title": "When others provide data about you to Facebook",
+    "summary.text.1": "Your Facebook data contains {{number_companies}} companies that have either uploaded contact lists – which include your contact information – to Facebook or used such lists uploaded by others. Their aim: To target you with their advertising.",
+    "summary.text.2": "Facebook says on their website that advertisers can target their advertising audiences based on contacts or interactions you might have had with websites, apps, or stores of such companies. This means they can include or exclude you from certain campaigns e.g based on your location. For that to happen you gave them or one of their data partners permission. Where you aware of that?",
+    "details.text": "This is the full list of {{number_companies}} companies from your Facebook data that uploaded or used uploaded lists with your contact information."
+}

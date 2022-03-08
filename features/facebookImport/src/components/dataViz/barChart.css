@@ -1,0 +1,195 @@
+.bar-chart {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.bar-chart .scale-container {
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+.bar-chart .descriptions {
+    display: flex;
+    flex-direction: row;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: var(--line-height);
+}
+
+.bar-chart .descriptions div {
+    display: inline-block;
+}
+
+.bar-chart .descriptions img {
+    margin: 0 4px;
+}
+
+.bar-chart .descriptions .fill {
+    flex-grow: 1;
+}
+
+.bar-chart .scale {
+    display: flex;
+    flex-direction: row;
+}
+
+.bar-chart .scale p {
+    font-size: 8px;
+    line-height: 135%;
+    letter-spacing: -0.02em;
+}
+
+.bar-chart .scale .origin {
+    display: flex;
+    flex-direction: column;
+    width: 1px;
+}
+
+.bar-chart .scale p {
+    margin: 0;
+    transform: translateX(-2px);
+}
+
+.bar-chart .scale .origin div {
+    height: 10px;
+    width: 1px;
+    background-color: var(--color-gray-500);
+}
+
+.bar-chart .scale .origin p {
+    color: var(--color-gray-400);
+}
+
+.bar-chart .scale .tick-box {
+    flex: 1 1 auto;
+    position: relative;
+}
+
+.bar-chart .tick-box .tick {
+    position: absolute;
+    height: 10px;
+    width: 1px;
+    background-color: var(--color-gray-500);
+    right: 0;
+    bottom: 0;
+}
+
+.bar-chart .tick-box .half-tick {
+    position: absolute;
+    height: 4px;
+    width: 1px;
+    background-color: var(--color-gray-500);
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+}
+
+.bar-chart .tick-box p {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(4px);
+    color: var(--color-gray-400);
+}
+
+.bar-chart .scale .max-indicator {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-6px);
+}
+
+.bar-chart .scale .max-indicator p {
+    font-size: 12px;
+    transform: translateX(-38px);
+}
+
+.bar-chart .scale .max-indicator .marker {
+    background-color: var(--color-gray-50);
+    width: 1px;
+    height: 15px;
+    transform: translateX(-1px);
+}
+
+.bar-chart .scrollable-wrapper {
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex: 1 1 auto;
+}
+
+.bar-chart .bars {
+    flex: 1 1 auto;
+    width: 100%;
+}
+
+.bar-chart .bar-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.bar-chart .bar-box .above-bar {
+    display: flex;
+    flex-direction: row;
+}
+
+.bar-chart .bar-box .above-bar p {
+    font-size: 14px;
+    line-height: 150%;
+    margin: 12px 4px 0 0;
+}
+
+.bar-chart .bar-box .above-bar img {
+    transform: translateY(12px);
+    width: 15px;
+    height: 18px;
+}
+
+.bar-chart .bar-box .above-bar .group-icon {
+    margin-right: 8px;
+}
+
+.bar-chart .bar-box .bottom-bar p {
+    font-size: 12px;
+    line-height: 150%;
+    margin: 4px 4px 0 0;
+}
+
+.bar-chart .bar-box .bar {
+    height: 20px;
+    background-color: var(--color-gray-50);
+    position: relative;
+}
+
+.bar-chart .bar-box .bar p {
+    height: 20px;
+    position: absolute;
+    margin: 0;
+    color: var(--color-indigo-950);
+    top: 50%;
+    transform: translateY(-50%);
+    right: 6px;
+    font-size: 12px;
+}
+
+.bar-extra-info {
+    font-size: 12px;
+    line-height: 150%;
+}
+
+.bar-extra-info {
+    font-size: 12px;
+    line-height: 150%;
+}
+
+.bar-extra-info p {
+    display: inline;
+    margin: 0;
+    color: var(--color-gray-400);
+}

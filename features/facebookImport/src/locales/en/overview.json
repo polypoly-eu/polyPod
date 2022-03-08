@@ -1,0 +1,17 @@
+{
+    "import.data": "Import data",
+    "imported.data": "Imported data",
+    "imported.files": "Imported files:",
+    "file": "File:",
+    "imported.time": "Imported:",
+    "size": "Size:",
+    "above.chart.title": "Your Facebook data",
+    "above.chart.text": "From all Facebook data imported we currently analyse the following <strong>{{number_categories}}</strong> categories.",
+    "explore": "Explore data",
+    "new.import": "New import",
+    "loading.data": "Your data is being loaded",
+    "analyzing.data": "Your data is being analysed",
+    "new.import.dialog": "Do you really want to replace your current file with a new one?",
+    "new.import.dialog.back": "Back",
+    "new.import.dialog.continue": "Continue"
+}

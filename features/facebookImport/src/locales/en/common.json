@@ -1,0 +1,15 @@
+{
+    "title": "Importer",
+    "source.your.facebook.data": "Source: Your Facebook data",
+    "total.years": "Years since you joined Facebook",
+    "months.abbreviation": "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec",
+    "loading": "Loading",
+    "loading.closing": "Thank you for your patience!",
+    "button.ok": "OK",
+    "format.byte": "1 byte",
+    "format.bytes": "bytes",
+    "format.KB": "KB",
+    "format.MB": "MB",
+    "format.GB": "GB",
+    "time.format": "en-GB"
+}

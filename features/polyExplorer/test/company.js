@@ -2,119 +2,73 @@
 
 import assert from "assert";
 import * as company from "../src/model/company.js";
-import testCompanyJSON from "./testCompanyData.js";
 import testGlobalJSON from "./testGlobal.js";
+import oneCompany, { companiesJSON } from "./testCompanyData.js";
+import jurisdictions from "../src/model/jurisdictions.js";
 
-describe("company", function () {
-    const specialCharacters = /[!@#$%^&*()_+\-=[\]{};':"\\|<>?]+/;
+const i18n = {
+    language: "en",
+};
 
-    function createTestCompany(name) {
-        const aTestCompanyJSON = { ...testCompanyJSON };
-        aTestCompanyJSON.name = name;
-        return new company.Company(aTestCompanyJSON, testGlobalJSON);
-    }
-
-    const testCompany = new company.Company(testCompanyJSON, testGlobalJSON);
-
-    it("ppid is parsed correctly", function () {
-        assert.strictEqual(testCompany.ppid, testCompanyJSON.ppid);
-    });
-
-    it("Name is parsed correctly", function () {
-        assert.strictEqual(testCompany.name, testCompanyJSON.name);
-    });
-
-    it("Featured tag is parsed correctly", function () {
-        assert.strictEqual(testCompany.featured, testCompanyJSON.featured);
-    });
+describe("Sample company", function () {
+    const testCompany = new company.Company(oneCompany, testGlobalJSON, i18n);
 
     it("City is parsed correctly", function () {
-        assert.strictEqual(
-            testCompany.location.city,
-            testCompanyJSON.location.city
-        );
+        assert.strictEqual(testCompany.location.city, oneCompany.location.city);
     });
 
     it("CountryCode is parsed correctly", function () {
         assert.strictEqual(
             testCompany.location.countryCode,
-            testCompanyJSON.location.countryCode
+            oneCompany.location.countryCode
         );
     });
 
     it("Jurisdiction is parsed correctly", function () {
-        assert.strictEqual(
-            testCompany.jurisdiction,
-            testCompanyJSON.jurisdiction
-        );
+        assert.strictEqual(testCompany.jurisdiction, oneCompany.jurisdiction);
     });
 
     it("AnnualRevenue is parsed correctly", function () {
         assert.strictEqual(
             testCompany.annualRevenues,
-            testCompanyJSON.annualRevenues
-        );
-    });
-
-    it("DataRecipients is parsed correctly", function () {
-        assert.strictEqual(
-            testCompany.dataRecipients,
-            testCompanyJSON.dataRecipients
-        );
-    });
-
-    it("DatasharingPurposes is parsed correctly", function () {
-        assert.strictEqual(
-            testCompany.dataSharingPurposes,
-            testCompanyJSON.dataSharingPurposes
-        );
-    });
-
-    it("DataTypesShared is parsed correctly", function () {
-        assert.strictEqual(
-            testCompany.dataTypesShared,
-            testCompanyJSON.dataTypesShared
-        );
-    });
-
-    it("JurisdictionsShared is parsed correctly", function () {
-        assert.strictEqual(
-            testCompany.jurisdictionsShared,
-            testCompanyJSON.jurisdictionsShared
+            oneCompany.annualRevenues
         );
     });
 
     it("IndustryCategory is parsed correctly", function () {
         assert.strictEqual(
             testCompany.industryCategory,
-            testCompanyJSON.industryCategory
+            oneCompany.industryCategory
         );
     });
+});
 
-    it("Description is parsed correctly", function () {
-        assert.strictEqual(
-            testCompany.description,
-            testCompanyJSON.description
-        );
+describe("Checks on companies", function () {
+    it("Should not repeat ppids", function () {
+        const ppids = companiesJSON.map((c) => c.ppid);
+        assert.strictEqual(ppids.length, [...new Set(ppids)].length);
     });
-
-    it("NameIndexCharacter only gives one character", function () {
-        assert.strictEqual(testCompany.nameIndexCharacter.length, 1);
+    it("Should not repeat names", function () {
+        const names = companiesJSON.map((c) => c.name);
+        assert.strictEqual(names.length, [...new Set(names)].length);
     });
+});
 
-    it("NameIndexCharacter has no special characters", function () {
-        assert(!specialCharacters.test(testCompany.nameIndexCharacter));
-    });
-
-    const stringPatterns = ["%$%AAA", "!%$&ABC", "T", "()zz", "[]ZZZ"];
-
-    for (let i = 0; i < stringPatterns.length - 1; i++) {
-        it("CompareNames() works", function () {
-            assert(
-                createTestCompany(stringPatterns[i]).compareNames(
-                    createTestCompany(stringPatterns[i + 1])
-                ) < 0
-            );
+describe("Checks attributes", function () {
+    it("Only known jurisdictions", () => {
+        companiesJSON.map((c) => {
+            assert.ok(Object.values(jurisdictions).includes(c.jurisdiction));
         });
-    }
+    });
+    it("Includes only known countries", () => {
+        companiesJSON.map((c) => {
+            if (c.location.countryCode) {
+                assert.ok(
+                    Object.keys(testGlobalJSON.countries).includes(
+                        c.location.countryCode
+                    )
+                );
+            }
+        });
+    });
 });

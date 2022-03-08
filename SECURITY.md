@@ -19,4 +19,4 @@ Please use the [official channels] defined in the polypoly [Vulnerability Disclo
 
 
 [Vulnerability Disclosure Policy]: https://polypoly.coop/en-de/security/vdp/
-[official channels]: https://polypoly.coop/en-de/security/vdp#Offici
+[official channels]: https://polypoly.coop/en-de/security/vdp#Official%20Channels

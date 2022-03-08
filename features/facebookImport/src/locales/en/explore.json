@@ -1,0 +1,13 @@
+{
+    "messages.title": "Your Messages",
+    "messages.summary": "Your Facebook data contains {{messages}} messages from {{threads}} chats with {{people}} people.",
+    "report.success": "Your report was sent to us. Thank you!",
+    "report.error": "Your report could not be sent. Please try again!",
+    "loading": "Your data is being analysed",
+    "unrecognizedCard.headline": "We need your help!",
+    "unrecognizedCard.text": "If you send us an anonymised report about the structure of your Facebook data, it would help us improve the Facebook Data Importer so that it can show you even more insights.",
+    "unrecognizedCard.button": "Learn more",
+    "details.button": "View details",
+    "analysis.label.techDemo": "Tech demo",
+    "scroll": "Scroll to view more"
+}

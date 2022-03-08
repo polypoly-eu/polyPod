@@ -8,38 +8,33 @@
     "build": "rollup -c",
     "watch": "rollup -c -w",
     "start": "sirv public --no-clear",
-    "update-lexicon-data": "func(){ node ./scripts/update-lexicon-data.js \"$1\";}; func"
+    "update-lexicon-data": "func(){ node ./scripts/update-lexicon-data.js \"$1\";}; func",
+    "test": "jest",
+    "clean": "shx rm -rf node_modules public/{build,pod.js,poly-look.css}"
   },
   "devDependencies": {
-    "@polypoly-eu/podjs": "file:../../podjs",
+    "@polypoly-eu/podjs": "file:../../platform/podjs",
+    "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
+    "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
     "@prismicio/client": "^4.0.0",
-    "@rollup/plugin-commonjs": "^17.0.0",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^11.0.0",
-    "@rollup/plugin-sucrase": "^3.1.0",
-    "@typescript-eslint/eslint-plugin": "^4.22.1",
-    "eslint": "^7.25.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-standard": "^5.0.0",
-    "eslint-plugin-svelte3": "^3.2.0",
-    "prettier": "^2.2.1",
-    "prettier-plugin-svelte": "^2.2.0",
     "prismic-dom": "^2.2.5",
-    "rollup": "^2.3.4",
-    "rollup-plugin-copy": "^3.3.0",
-    "rollup-plugin-css-only": "^3.1.0",
-    "rollup-plugin-livereload": "^2.0.0",
-    "rollup-plugin-svelte": "^7.0.0",
-    "rollup-plugin-terser": "^7.0.0",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-svelte": "^7.1.0",
     "svelte": "^3.0.0"
   },
   "dependencies": {
-    "@polypoly-eu/silly-i18n": "file:../../core/utils/silly-i18n",
+    "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
     "js-levenshtein": "^1.1.6",
     "sirv-cli": "^1.0.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js$": [
+        "babel-jest",
+        {
+          "rootMode": "upward"
+        }
+      ]
+    }
   }
 }

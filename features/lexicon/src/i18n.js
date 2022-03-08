@@ -1,6 +1,8 @@
 import { determineLanguage, I18n } from "@polypoly-eu/silly-i18n";
 
-export default new I18n(determineLanguage(), {
+const localLanguage = determineLanguage();
+const FALLBACK_LANGUAGE = "en";
+const TRANSLATION_DATA = {
     en: {
         common: {
             back: "Back to list",
@@ -21,4 +23,6 @@ export default new I18n(determineLanguage(), {
         },
         title: { lexicon: "Lexikon", details: "Details zum Eintrag" },
     },
-});
+};
+
+export default new I18n(localLanguage, TRANSLATION_DATA, FALLBACK_LANGUAGE);

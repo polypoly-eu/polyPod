@@ -4,6 +4,8 @@
     "build": "node index.js"
   },
   "devDependencies": {
+    "bestzip": "^2.2.0",
+    "facebook-import-feature": "file:../facebookImport",
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
     "poly-preview-feature": "file:../polyPreview"
@@ -18,6 +20,11 @@
     {
       "archiveName": "polyExplorer",
       "moduleName": "poly-explorer-feature",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "facebookImport",
+      "moduleName": "facebook-import-feature",
       "artifactPath": "dist"
     },
     {

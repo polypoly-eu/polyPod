@@ -1,0 +1,83 @@
+.off-facebook-events-ministory-summary h2,
+.off-facebook-events-ministory-details h2 {
+    font-size: 60px;
+    font-weight: 800;
+    font-family: "Jost Medium";
+    letter-spacing: -0.01em;
+}
+
+.off-facebook-events-ministory-summary h2 {
+    margin-top: 50px;
+    margin-bottom: 28px;
+}
+
+.off-facebook-events-ministory-details h2 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.off-facebook-events-ministory-details h3 {
+    font-size: 24px;
+    font-family: "Jost Medium";
+}
+
+.off-facebook-events-ministory-details .legend {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.off-facebook-events-ministory-details .legend div {
+    display: flex;
+    flex-direction: row;
+    margin-right: 8px;
+}
+
+.off-facebook-events-ministory-details .legend div p {
+    font-family: "Jost Medium";
+    font-size: 14px;
+}
+
+.off-facebook-events-ministory-details .legend div img {
+    margin-right: 2px;
+}
+
+.off-facebook-events-ministory-details .legend .on-bars {
+    transform: translateY(12px);
+}
+
+.off-facebook-events-ministory-details .divide-y {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.off-facebook-events-ministory-details .divide-y p {
+    font-family: "Jost Medium";
+    flex: 1 1 auto;
+    font-size: 12px;
+}
+
+.off-facebook-events-ministory-details .divide-y .source {
+    font-family: "Jost Medium";
+    flex: 0 0 auto;
+    margin-top: 13px;
+    margin-bottom: 0px;
+}
+
+.off-facebook-events-ministory-details div .source {
+    font-family: "Jost Medium";
+    margin-top: 0px;
+    margin-bottom: 15px;
+}
+
+.off-facebook-info-button,
+.on-off-facebook-info-button {
+    position: relative;
+}
+
+.off-facebook-info-button .info-button,
+.on-off-facebook-info-button .info-button {
+    right: -16px;
+    bottom: -24px;
+}

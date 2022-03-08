@@ -1,18 +1,15 @@
 {
   "name": "test-feature",
   "scripts": {
-    "build": "faucet"
+    "build": "rollup -c"
   },
   "dependencies": {
-    "@polypoly-eu/pod-api": "file:../../core/api/pod-api",
+    "@polypoly-eu/pod-api": "file:../../platform/feature-api/api/pod-api",
     "@rdfjs/data-model": "^1.2.0"
   },
   "devDependencies": {
-    "@types/rdf-js": "^4.0.0",
-    "faucet-pipeline-core": "^1.5.0",
-    "faucet-pipeline-static": "^1.2.0",
-    "faucet-pipeline-typescript": "^2.1.6",
-    "tslib": "^2.0.1"
+    "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
+    "@types/rdf-js": "^4.0.0"
   },
   "private": true
 }

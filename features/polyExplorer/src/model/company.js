@@ -1,45 +1,21 @@
-const jurisdictions = {
-    OTHER: "Sonstige",
-    FIVE_EYES: "Five-Eyes",
-    CHINA: "China",
-    EU_GDPR: "EU-GDPR",
-    RUSSIA: "Russia",
-};
+import { Entity } from "./entity.js";
+import jurisdictions from "./jurisdictions.js";
 
-const dataProperties = [
-    "ppid",
-    "name",
-    "featured",
-    "location",
-    "annualRevenues",
-    "description",
-    "industryCategory",
-];
-const dataArrayProperties = [
-    "dataRecipients",
-    "dataSharingPurposes",
-    "dataTypesShared",
-];
+const dataProperties = ["industryCategory", "productsOwned"];
 
-export class Company {
-    constructor(companyJSONObject, globalData) {
-        this._data = companyJSONObject;
+export class Company extends Entity {
+    constructor(companyJSONObject, globalData, i18n) {
+        super(companyJSONObject, globalData, i18n);
         this._jurisdiction = determineJurisdictions(
             companyJSONObject.location,
             globalData
         );
+        this._type = "company";
         let self = this;
         dataProperties.forEach(function (item) {
             Object.defineProperty(self, item, {
                 get: function () {
                     return self._data[item];
-                },
-            });
-        });
-        dataArrayProperties.forEach(function (item) {
-            Object.defineProperty(self, item, {
-                get: function () {
-                    return self._data[item] || [];
                 },
             });
         });
@@ -49,24 +25,19 @@ export class Company {
         return this._jurisdiction;
     }
 
-    get jurisdictionsShared() {
-        return this._data.jurisdictionsShared || { children: [] };
-    }
-
-    get nameIndexCharacter() {
-        return withoutSpecialChars(this.name)[0];
-    }
-
-    //Methods
-    compareNames(withCompany) {
-        return withoutSpecialChars(this.name).localeCompare(
-            withoutSpecialChars(withCompany.name)
+    industryCategoryName() {
+        return (
+            this.globalData.industries?.[this.industryCategory]?.[
+                `Name_${this.language.toUpperCase()}`
+            ] || this.i18n.t("common:category.undisclosed")
         );
     }
-}
 
-function withoutSpecialChars(aString) {
-    return aString.replace(/[`!@#$%^&*„()_+\-=[\]{};':"\\|<>/?~]/g, "");
+    industryCategoryDefinition() {
+        return this.globalData.industries[this.industryCategory][
+            `Definition_${this.language.toUpperCase()}`
+        ];
+    }
 }
 
 function determineJurisdictions(location, globalData) {

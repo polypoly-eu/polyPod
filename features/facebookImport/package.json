@@ -1,0 +1,56 @@
+{
+  "name": "facebook-import-feature",
+  "scripts": {
+    "eslint": "eslint src --ext .js --ext .jsx",
+    "lint": "npm run eslint",
+    "build": "rollup -c",
+    "build-downstream": "../../build.js --start facebook-import-feature",
+    "watch": "rollup --watch -c",
+    "serve": "rollup --watch --configServe -c",
+    "serve-polypedia-stub": "node scripts/serve-polypedia-stub.js",
+    "test": "jest",
+    "doc": "jsdoc -r src/ -d ./docs"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.14.5",
+    "@polypoly-eu/pod-api": "file:../../platform/feature-api/api/pod-api",
+    "@polypoly-eu/podjs": "file:../../platform/podjs",
+    "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
+    "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
+    "identity-obj-proxy": "^3.0.0",
+    "jszip": "^3.6.0",
+    "memfs": "^3.2.2",
+    "node-fetch": "^3.1.1",
+    "rollup-plugin-serve": "^1.1.0"
+  },
+  "private": true,
+  "dependencies": {
+    "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
+    "d3": "^7.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0"
+  },
+  "type": "module",
+  "jest": {
+    "verbose": false,
+    "moduleNameMapper": {
+      "\\.(css|scss)$": "identity-obj-proxy",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy"
+    },
+    "transform": {
+      "^.+\\.(js|jsx)$": [
+        "babel-jest",
+        {
+          "rootMode": "upward"
+        }
+      ]
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(.*))"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/config/env-setup.js"
+    ]
+  }
+}

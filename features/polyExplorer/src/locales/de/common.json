@@ -1,100 +1,46 @@
 {
-    "screenTitle.main":
-        "polyExplorer",
-    "screenTitle.dataExploration":
-        "Daten erkunden",
-    "screenTitle.companyDetails":
-        "Firmenprofil",
-    "screenTitle.companyFilter":
-        "Filter",
-    "screenTitle.featuredCompanyInfo":
-        "Wie ist das zu verstehen?",
-    "screenTitle.dataRegionInfo":
-        "Wie ist das zu verstehen?",
-    "screenTitle.explorationDataTypesInfo":
-        "Wie ist das zu verstehen?",
-    "screenTitle.explorationCategoryInfo":
-        "Wie ist das zu verstehen?",
-    "screenTitle.explorationCorrelationInfo":
-        "Wie ist das zu verstehen?",
-    "screenTitle.explorationPurposeInfo":
-        "Wie ist das zu verstehen?",
-    "screenTitle.explorationCompaniesInfo":
-        "Wie ist das zu verstehen?",
-    "screenTitle.explorationJurisdictionsInfo":
-        "Wie ist das zu verstehen?",
-    "screenTitle.companySearch":
-        "Suche",
-    "screenTitle.info":
-        "Information",
-    "companyFilter.missing":
-        "Unbekannt",
-    "companyFilter.countryNameKey":
-        "Name_DE",
-    "companyFilter.revenueRange.0":
-        "€ 0 - 100tsnd",
-    "companyFilter.revenueRange.100":
-        "€ 100tsnd - 500tsnd",
-    "companyFilter.revenueRange.500":
-        "€ 500tsnd - 1mio",
-    "companyFilter.revenueRange.1000":
-        "€ 1mio - 5mio",
-    "companyFilter.revenueRange.5000":
-        "€ 5mio - 20mio",
-    "companyFilter.revenueRange.20000":
-        "€ 20mio - 50mio",
-    "companyFilter.revenueRange.50000":
-        "€ 50mio - 100mio",
-    "companyFilter.revenueRange.100000":
-        "€ 100mio - 1mrd",
-    "companyFilter.revenueRange.1000000":
-        "€ 1mrd ≥",
-    "jurisdiction.euGdpr":
-        "DSGVO",
-    "jurisdiction.russia":
-        "Russland",
-    "jurisdiction.fiveEyes":
-        "Five Eyes",
-    "jurisdiction.china":
-        "China",
-    "jurisdiction.undisclosed":
-        "Sonstige",
-    "category.undisclosed":
-        "Unbekannt",
-    "sharing.prefix.dataTypes":
-        "teilt",
-    "sharing.detailPrefix.dataTypes":
-        "teilt",
-    "sharing.dataTypes":
-        "Datentypen",
-    "sharing.prefix.purposes":
-        "für",
-    "sharing.detailPrefix.purposes":
-        "teilt Daten für",
-    "sharing.purposes":
-        "Zwecke",
-    "sharing.prefix.companies":
-        "mit",
-    "sharing.detailPrefix.companies":
-        "teilt Daten mit",
-    "sharing.companies":
-        "Firmen",
-    "sharing.prefix.jurisdictions":
-        "in",
-    "sharing.detailPrefix.jurisdictions":
-        "teilt Daten in",
-    "sharing.jurisdictions":
-        "Datenregionen",
-    "source":
-        "Quelle",
-    "how-to-read":
-        "Wie ist das zu verstehen?",
-    "purpose.name.i18nkey":
-        "Translation_DE",
-    "purpose.description.i18nkey":
-        "Explanation_DE",
-    "country.code":
-        "de",
-    "button.ok":
-        "OK"
+    "screenTitle.main": "polyExplorer",
+    "screenTitle.data-exploration": "Daten erkunden",
+    "screenTitle.entity-filters": "Filter",
+    "screenTitle.how.to.read.this": "Wie ist das zu verstehen?",
+    "screenTitle.search": "Suche",
+    "screenTitle.info": "Information",
+    "entityFilter.company": "Unternehmen",
+    "entityFilter.product": "Produkt",
+    "entityFilter.missing": "Unbekannt",
+    "entityFilter.countryNameKey": "Name_DE",
+    "entityFilter.revenueRange.0": "€ 0 - 100tsnd",
+    "entityFilter.revenueRange.100": "€ 100tsnd - 500tsnd",
+    "entityFilter.revenueRange.500": "€ 500tsnd - 1mio",
+    "entityFilter.revenueRange.1000": "€ 1mio - 5mio",
+    "entityFilter.revenueRange.5000": "€ 5mio - 20mio",
+    "entityFilter.revenueRange.20000": "€ 20mio - 50mio",
+    "entityFilter.revenueRange.50000": "€ 50mio - 100mio",
+    "entityFilter.revenueRange.100000": "€ 100mio - 1mrd",
+    "entityFilter.revenueRange.1000000": "€ 1mrd ≥",
+    "jurisdiction.euGdpr": "DSGVO",
+    "jurisdiction.russia": "Russland",
+    "jurisdiction.fiveEyes": "Five Eyes",
+    "jurisdiction.china": "China",
+    "jurisdiction.undisclosed": "Sonstige",
+    "category.undisclosed": "Unbekannt",
+    "sharing.prefix.dataTypes": "teilt",
+    "sharing.detailPrefix.dataTypes": "teilt",
+    "sharing.dataTypes": "Datentypen",
+    "sharing.prefix.purposes": "für",
+    "sharing.detailPrefix.purposes": "teilt Daten für",
+    "sharing.purposes": "Zwecke",
+    "sharing.prefix.companies": "mit",
+    "sharing.detailPrefix.companies": "teilt Daten mit",
+    "sharing.companies": "Firmen",
+    "sharing.prefix.jurisdictions": "in",
+    "sharing.detailPrefix.jurisdictions": "teilt Daten in",
+    "sharing.jurisdictions": "Datenregionen",
+    "source": "Quelle",
+    "source.polyPedia": "Quelle: polyPedia",
+    "purpose.name.i18nkey": "Translation_DE",
+    "purpose.description.i18nkey": "Explanation_DE",
+    "country.code": "de",
+    "button.ok": "OK",
+    "button.scroll": "Scrollen Sie für mehr"
 }

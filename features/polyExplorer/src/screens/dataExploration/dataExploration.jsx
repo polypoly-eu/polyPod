@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import i18n from "../../i18n.js";
@@ -11,52 +11,62 @@ import CompanyBubbles, {
     buildIndustrySets,
 } from "../../components/dataViz/companyBubbles.jsx";
 import JurisdictionTree from "../../components/dataViz/jurisdictionTree.jsx";
-import CompanyShortInfo from "../../components/companyShortInfo/companyShortInfo.jsx";
-import DataSharingLegend from "../../components/dataSharingLegend/dataSharingLegend.jsx";
-import PurposeInfoPopup from "../../components/purposeInfoPopup/purposeInfoPopup.jsx";
+import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
 import CompanyIndustryList from "../../components/companyIndustryList/companyIndustryList.jsx";
+import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 
 import global from "../../data/global.json";
 import highlights from "../../data/highlights.js";
+import ScrollButton from "../../components/buttons/scrollButton/scrollButton.jsx";
 
 import "swiper/swiper-bundle.min.css";
 import "./dataExploration.css";
-import JurisdictionLegend from "../../components/jurisdictionLegend/jurisdictionLegend.jsx";
+import DataRegionsLegend from "../../components/dataRegionsLegend/dataRegionsLegend.jsx";
+import { ExplorerContext } from "../../context/explorer-context.jsx";
+import { useHistory } from "react-router-dom";
 
-const DataExplorationScreen = ({
-    company,
-    startSection,
-    startIndex = null,
-    openMain,
-    openDataTypesInfo,
-    openCategoryInfo,
-    openCorrelationInfo,
-    openPurposeInfo,
-    openCompaniesInfo,
-    openJurisdictionInfo,
-    maxCompanies,
-    dataRecipients,
-    onOpenRegionInfo,
-    onOpenDetails,
-}) => {
+const DataExplorationScreen = () => {
+    const {
+        navigationState,
+        selectedEntityObject,
+        featuredEntityMaxValues,
+        dataRecipients,
+        createPopUp,
+    } = useContext(ExplorerContext);
+    const entity = selectedEntityObject;
+    const startSection = navigationState.explorationState.section;
+    const startIndex = navigationState.explorationState.index;
+    const maxCompanies = featuredEntityMaxValues.companies;
+    const history = useHistory();
+
+    if (entity.dataRecipients.length == 0) return <Screen></Screen>;
+
     //Methods
     const getCategories = () =>
-        Object.keys(highlights[company.ppid]?.dataTypeCategories || {});
+        Object.keys(highlights[entity.ppid]?.dataTypeCategories || {});
 
     const getTotalTypesShared = () => {
         let total = 0;
-        company.dataTypesShared.forEach((e) => {
+        entity.dataTypesShared.forEach((e) => {
             total += e.count;
         });
         return total;
     };
 
+    //This is horrible but we need to put the activeIndex in the old state that gets reloaded
+    // but the routing is faster than this so we need to edit the old state here
+    // the -1 is because in the moment of click the activeindex is increased by swiper
+    // these problems will solve themselves when switching to scrollytelling
+    const saveActiveIndex = () => {
+        history.entries[
+            history.entries.length - 2
+        ].state.explorationState.index = activeIndex;
+    };
+
     const companyIndustryMap = useMemo(() => {
         const map = {};
         for (let company of dataRecipients) {
-            const industry =
-                company.industryCategory?.name[i18n.language] ||
-                i18n.t("common:category.undisclosed");
+            const industry = company.industryCategoryName();
             if (!map[industry]) map[industry] = [];
             map[industry].push(company);
         }
@@ -141,7 +151,7 @@ const DataExplorationScreen = ({
 
     const getHighestValueObject = () => {
         let highest = { count: 0 };
-        company.dataTypesShared.forEach((e) =>
+        entity.dataTypesShared.forEach((e) =>
             e.count > highest.count ? (highest = e) : null
         );
         return highest;
@@ -159,7 +169,6 @@ const DataExplorationScreen = ({
     //State
     const [swiper, setSwiper] = useState(null);
     const [activeIndex, setActiveIndex] = useState(getStartIndex());
-    const [purposePopupContent, setPurposePopupContent] = useState(null);
 
     //Constants
     const activeScreen = screens[activeIndex];
@@ -246,12 +255,12 @@ const DataExplorationScreen = ({
                     <h1>
                         {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
                         <span className="highlight-data-type">
-                            {company.dataTypesShared.length}{" "}
+                            {entity.dataTypesShared.length}{" "}
                             {i18n.t("common:sharing.dataTypes")}
                         </span>
                     </h1>
                     <DataTypeBubbleAll
-                        data={company.dataTypesShared}
+                        data={entity.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="var(--color-text-dark)"
                         width={visualizationWidth}
@@ -261,13 +270,10 @@ const DataExplorationScreen = ({
                             highestValueObject
                         }
                     />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
-                    <DataSharingLegend
-                        onClick={() => {
-                            openDataTypesInfo(activeIndex);
-                        }}
+
+                    <SourceInfoButton
+                        source={i18n.t("common:source.polyPedia")}
+                        infoScreen="data-types-info"
                     />
                     {filler}
                 </div>
@@ -281,12 +287,12 @@ const DataExplorationScreen = ({
                     <h1>
                         {i18n.t("common:sharing.detailPrefix.dataTypes")}{" "}
                         <span className="highlight-data-type">
-                            {company.dataTypesShared.length}{" "}
+                            {entity.dataTypesShared.length}{" "}
                             {i18n.t("common:sharing.dataTypes")}
                         </span>
                     </h1>
                     <DataTypeBubbleAll
-                        data={company.dataTypesShared}
+                        data={entity.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="var(--color-text-dark)"
                         width={visualizationWidth}
@@ -296,8 +302,6 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <div className="data-sharing-legend-fill"></div>
-                    {filler}
                 </div>
             );
         else if (activeScreen.startsWith("dataTypesCategory"))
@@ -305,27 +309,26 @@ const DataExplorationScreen = ({
                 <div className="static-content">
                     <h1></h1>
                     <DataTypeBubbleCategory
-                        data={company.dataTypesShared}
+                        data={entity.dataTypesShared}
                         defaultColor="#FB8A89"
                         category={categories[activeIndex - 4]}
                         textColor="var(--color-text-dark)"
                         width={visualizationWidth}
                         height={visualizationHeight}
                         highlightedType={
-                            highlights[company.ppid].dataTypeCategories[
+                            highlights[entity.ppid].dataTypeCategories[
                                 activeScreen.split("_")[1]
                             ].category
                         }
                     />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
-                    <DataSharingLegend
-                        onClick={() => {
-                            openCategoryInfo(
-                                activeIndex,
-                                activeScreen.split("_")[1]
-                            );
+
+                    <SourceInfoButton
+                        source={i18n.t("common:source.polyPedia")}
+                        infoScreen="category-info"
+                        stateChange={{
+                            explorationState: {
+                                category: activeScreen.split("_")[1],
+                            },
                         }}
                     />
                     {filler}
@@ -340,7 +343,7 @@ const DataExplorationScreen = ({
                         )}
                     </h2>
                     <DataTypeBubbleAll
-                        data={company.dataTypesShared}
+                        data={entity.dataTypesShared}
                         bubbleColor="#FB8A89"
                         textColor="var(--color-text-dark)"
                         width={visualizationWidth}
@@ -351,7 +354,6 @@ const DataExplorationScreen = ({
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <div className="data-sharing-legend-fill"></div>
                 </div>
             );
         else if (activeScreen === "dataTypesCorrelation")
@@ -363,27 +365,24 @@ const DataExplorationScreen = ({
                         )}
                     </h2>
                     <DataTypeBubbleCorrelation
-                        data={company.dataTypesShared}
+                        data={entity.dataTypesShared}
                         correlationColor="#FB8A89"
                         typeBundle={
-                            highlights[company.ppid]?.dataTypeCorrelation
+                            highlights[entity.ppid]?.dataTypeCorrelation
                                 .types || []
                         }
                         width={visualizationWidth}
                         height={visualizationHeight}
                     />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
-                    <DataSharingLegend
-                        onClick={() => {
-                            openCorrelationInfo(activeIndex);
-                        }}
+
+                    <SourceInfoButton
+                        source={i18n.t("common:source.polyPedia")}
+                        infoScreen="correlation-info"
                     />
                 </div>
             );
         else if (activeScreen === "purposes")
-            return <div className="static-content">{filler}</div>;
+            return <div className="static-content">{filler} </div>;
         else if (activeScreen === "companies")
             return (
                 <div className="static-content">
@@ -400,16 +399,13 @@ const DataExplorationScreen = ({
                         width={visualizationWidth}
                         height={visualizationHeight}
                         bubbleColor="var(--data-exp-companies)"
-                        highlight={highlights[company.ppid]?.dataRecipient}
+                        highlight={highlights[entity.ppid]?.dataRecipient}
                         maxCompanies={maxCompanies}
                     />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
-                    <DataSharingLegend
-                        onClick={() => {
-                            openCompaniesInfo(activeIndex);
-                        }}
+
+                    <SourceInfoButton
+                        source={i18n.t("common:source.polyPedia")}
+                        infoScreen="companies-info"
                     />
                 </div>
             );
@@ -430,14 +426,12 @@ const DataExplorationScreen = ({
                         height={visualizationHeight}
                         opacity={0.1}
                         bubbleColor="var(--data-exp-companies)"
-                        highlight={highlights[company.ppid]?.dataRecipient}
+                        highlight={highlights[entity.ppid]?.dataRecipient}
                         maxCompanies={maxCompanies}
                     />
                     <p className="bubble-source">
                         {i18n.t("common:source")}: polyPedia
                     </p>
-                    <div className="data-sharing-legend-fill"></div>
-                    {filler}
                 </div>
             );
         else if (
@@ -471,15 +465,12 @@ const DataExplorationScreen = ({
                         height={visualizationHeight}
                         bubbleColor="var(--data-exp-companies)"
                         maxCompanies={maxCompanies}
-                        highlight={highlights[company.ppid]?.dataRecipient}
+                        highlight={highlights[entity.ppid]?.dataRecipient}
                     />
-                    <p className="bubble-source">
-                        {i18n.t("common:source")}: polyPedia
-                    </p>
-                    <DataSharingLegend
-                        onClick={() => {
-                            openCompaniesInfo(activeIndex);
-                        }}
+
+                    <SourceInfoButton
+                        source={i18n.t("common:source.polyPedia")}
+                        infoScreen="companies-info"
                     />
                 </div>
             );
@@ -497,13 +488,17 @@ const DataExplorationScreen = ({
                 </div>
             );
         else if (activeScreen === "jurisdictions")
-            return <div className="static-content"></div>;
+            return (
+                <div className="static-content static-content-jurisdictions">
+                    {" "}
+                </div>
+            );
     };
 
     function handleSwipableContentClick(event) {
         // Workaround for ensuring data sharing legend (which is covered by
         // swipable content) is clickable. There isprobably a more elegant way.
-        const sharingLegend = document.querySelector(".data-sharing-legend");
+        const sharingLegend = document.querySelector(".info-button");
         if (!sharingLegend) return;
         const bounds = sharingLegend.getBoundingClientRect();
         if (
@@ -518,7 +513,9 @@ const DataExplorationScreen = ({
     useEffect(() => {
         if (!swiper) return;
 
-        const scrollableElements = document.querySelectorAll(".scrolling-area");
+        const scrollableElements = document.querySelectorAll(
+            ".scrolling-area, .entity-list"
+        );
         for (let element of scrollableElements)
             makeSwiperContentScrollable(element);
 
@@ -536,12 +533,6 @@ const DataExplorationScreen = ({
 
     return (
         <Screen className="data-exploration">
-            <div className="company-short-info-container">
-                <CompanyShortInfo
-                    company={company}
-                    onOpenDetails={onOpenDetails}
-                />
-            </div>
             {progressBar}
             <div className="exploration-content">
                 {getStaticContent()}
@@ -564,7 +555,7 @@ const DataExplorationScreen = ({
                                 {i18n.t(
                                     "dataExplorationScreen:dataTypes.text.intro",
                                     {
-                                        name: company.name,
+                                        name: entity.name,
                                         sharingCount: getTotalTypesShared(),
                                         mostSharedType:
                                             highestValueObject[translationKey],
@@ -607,17 +598,31 @@ const DataExplorationScreen = ({
                                 <h1>
                                     {i18n.t("common:sharing.prefix.purposes")}{" "}
                                     <span className="highlight-purpose">
-                                        {company.dataSharingPurposes.length}{" "}
+                                        {entity.dataSharingPurposes.length}{" "}
                                         {i18n.t("common:sharing.purposes")}
                                     </span>
                                 </h1>
                                 <PurposeChart
-                                    purposes={company.dataSharingPurposes}
-                                    openPopup={setPurposePopupContent}
-                                    openPurposeInfo={() =>
-                                        openPurposeInfo(activeIndex)
+                                    purposes={entity.dataSharingPurposes}
+                                    openPopup={(purpose) =>
+                                        createPopUp({
+                                            type: "center-popup",
+                                            content: {
+                                                headline: purpose.translation,
+                                                body: purpose.explanation,
+                                            },
+                                        })
                                     }
+                                    saveActiveIndex={saveActiveIndex}
                                 />
+                                <div className="purpose-extra-margin">
+                                    <SourceInfoButton
+                                        source={i18n.t(
+                                            "common:source.polyPedia"
+                                        )}
+                                        infoScreen="purpose-info"
+                                    />
+                                </div>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide></SwiperSlide>
@@ -647,12 +652,13 @@ const DataExplorationScreen = ({
                                 <p>
                                     {i18n.t(
                                         "dataExplorationScreen:companies.text.list",
-                                        { name: company.name }
+                                        { name: entity.name }
                                     )}
                                 </p>
                                 <CompanyIndustryList
                                     companyIndustryMap={companyIndustryMap}
                                     ecoItems={dataRecipients.length > 100}
+                                    onClick={saveActiveIndex}
                                 />
                             </div>
                         </SwiperSlide>
@@ -669,44 +675,32 @@ const DataExplorationScreen = ({
                                 <JurisdictionTree
                                     data={getJurisdictionTreeFormat()}
                                 />
-                                <JurisdictionLegend
-                                    onOpenRegionInfo={() =>
-                                        onOpenRegionInfo(activeIndex)
-                                    }
+                                <DataRegionsLegend
+                                    saveActiveIndex={saveActiveIndex}
                                 />
-                                <DataSharingLegend
-                                    onClick={() =>
-                                        openJurisdictionInfo(activeIndex)
-                                    }
+                                <SourceInfoButton
+                                    source={i18n.t("common:source.polyPedia")}
+                                    infoScreen="jurisdiction-info"
                                 />
-                                <button
+                                <LinkButton
+                                    route="/main"
                                     className="explore-other"
-                                    onClick={openMain}
                                 >
                                     {i18n.t(
                                         "dataExplorationScreen:explore.other"
                                     )}
-                                </button>
+                                </LinkButton>
                             </div>
                         </SwiperSlide>
                     </Swiper>
                 </div>
             </div>
-            <button
-                className={
-                    "down-button" +
-                    (activeIndex === screens.length - 1
-                        ? " down-button-hidden"
-                        : "")
-                }
+            <ScrollButton
+                light={true}
+                activeIndex={activeIndex}
+                screens={screens}
                 onClick={() => swiper.slideNext()}
-            ></button>
-            {purposePopupContent ? (
-                <PurposeInfoPopup
-                    purpose={purposePopupContent}
-                    onClose={() => setPurposePopupContent(null)}
-                />
-            ) : null}
+            />
         </Screen>
     );
 };

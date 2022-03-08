@@ -1,8 +1,0 @@
-.idea
-tsconfig.*
-dist/tests
-src
-*.config.js
-*.tgz
-.eslintrc.js
-.github

@@ -4,16 +4,14 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "rollup -c",
-    "test": "npm run build && npx cypress run"
+    "pretest": "npm run build",
+    "test": "cypress run"
   },
   "devDependencies": {
-    "@polypoly-eu/podjs": "file:../../podjs",
-    "@rollup/plugin-sucrase": "^3.1.0",
-    "cypress": "^7.5.0",
+    "@polypoly-eu/podjs": "file:../../platform/podjs",
+    "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "rollup": "^2.51.2",
-    "rollup-plugin-copy": "^3.3.0"
+    "react-dom": "^16.13.1"
   },
   "engines": {
     "polypoly": "^0.6.0"

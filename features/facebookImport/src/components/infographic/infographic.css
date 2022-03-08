@@ -1,0 +1,40 @@
+.infographic {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: var(--max-width);
+}
+
+.infographic svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 12px auto;
+}
+
+.infographic .text-field {
+    color: var(--text-dark);
+    font-size: 10px;
+    line-height: var(--line-height);
+}
+
+.infographic .highlighted {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--color-indigo-700);
+    white-space: nowrap;
+}
+
+.infographic .bold {
+    font-weight: 600;
+    font-size: 10px;
+}
+
+.infographic .big-bold {
+    font-weight: 600;
+    font-size: 10px;
+}
+
+.infographic .grey {
+    color: var(--color-gray-500);
+}
