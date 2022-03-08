@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@polypoly-eu/fetch-spec": "file:../feature-api/api/fetch-spec",
+    "@polypoly-eu/manifest-parser": "file:../feature-api/api/manifest-parser",
     "@polypoly-eu/pod-api": "file:../feature-api/api/pod-api",
     "@polypoly-eu/rdf": "file:../feature-api/api/rdf",
     "@zip.js/zip.js": "2.3.7",
