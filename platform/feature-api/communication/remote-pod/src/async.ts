@@ -11,6 +11,7 @@ import {
     Entry,
     Matcher,
     Network,
+    FetchResponse,
     Stats,
     Info,
 } from "@polypoly-eu/pod-api";
@@ -114,7 +115,7 @@ class AsyncNetwork implements Network {
         body: string,
         contentType?: string,
         authorization?: string
-    ): Promise<string | undefined> {
+    ): Promise<FetchResponse> {
         return (await this.promise).httpPost(url, body, contentType, authorization);
     }
 }

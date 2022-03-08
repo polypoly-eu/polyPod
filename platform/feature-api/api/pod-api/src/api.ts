@@ -188,7 +188,7 @@ export interface Network {
         body: string,
         contentType?: string,
         authorization?: string
-    ): Promise<string | undefined>;
+    ): Promise<FetchResponse>;
 }
 
 /**
@@ -226,10 +226,15 @@ export interface Endpoint {
     ): Promise<EndpointResponse>;
 }
 
+export interface FetchResponse {
+    payload?: string;
+    responseCode: number | undefined;
+}
+
+// in case a separate Response is needed for Endpoint Response
 export interface EndpointResponse {
     payload?: string;
-    response: string | undefined;
-    dateTime: string;
+    responseCode: number | undefined;
 }
 
 /**
