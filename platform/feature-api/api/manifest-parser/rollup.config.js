@@ -19,7 +19,6 @@ export default {
         })
     ],
     external: [
-        "@pnpm/read-package-json",
         "fp-ts/lib/Either",
         "fp-ts/function",
         "io-ts/lib/Decoder",

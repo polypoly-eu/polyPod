@@ -31,6 +31,9 @@ import Loading from "./components/loading/loading.jsx";
 
 import "./styles.css";
 
+import manifestData from "./static/manifest.json";
+window.manifestData = manifestData;
+
 import i18n from "./i18n.js";
 
 const FacebookImporter = () => {
