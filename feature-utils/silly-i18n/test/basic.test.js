@@ -6,6 +6,9 @@ import {
     TranslationKeyError,
 } from "../src/errors";
 
+import { bigNumber, numberPairs } from "./test-utils.js";
+import { L12n } from "../src/l12n.js";
+
 const LANGUAGE = "foo";
 const FALLBACK_LANGUAGE = "en";
 let i18n;
@@ -21,6 +24,7 @@ beforeAll(() => {
 describe("Test basic configuration", () => {
     it("is created correctly", () => {
         expect(i18n).toBeInstanceOf(I18n);
+        expect(i18n.l12n).toBeDefined();
     });
     it("Includes all attributes", () => {
         expect(i18n.sections).toStrictEqual(Object.keys(translationData));
@@ -71,14 +75,8 @@ describe("Test basic configuration", () => {
 
 describe("Test locale numeric options correctly", () => {
     it("Converts big numbers to locale format", () => {
-        const bigNumber = "1000000.33";
-        const localePairs = {
-            "de-DE": "1.000.000,33",
-            "es-ES": "1.000.000,33",
-            "en-GB": "1,000,000.33",
-        };
-        for (const [locale, l8nString] of Object.entries(localePairs)) {
-            i18n._locale = locale;
+        for (const [locale, l8nString] of Object.entries(numberPairs)) {
+            i18n._l12n = new L12n(locale);
             expect(i18n.t("template:opt", { opt: bigNumber })).toBe(l8nString);
         }
     });
