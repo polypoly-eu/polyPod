@@ -39,11 +39,13 @@ jobs:
               with:
                   distribution: 'zulu'
                   java-version: 11
+            - name: Build apk for testing instrumentation
+              run: ./gradlew assembleDebug
             - name: Build and test android instrumentation
               uses: ReactiveCircus/android-emulator-runner@76c2bf6f95ed6458fd659a1bdb680a0f8df232dc
               with:
                 working-directory: platform/android
                 arch: 'x86_64'
                 api-level: 30
-                script: ./gradlew assembleDebug connectedAndroidTest
+                script: ./gradlew connectedAndroidTest
 
