@@ -51,11 +51,11 @@ class Endpoint(
         body: String,
         contentType: String?,
         authorization: String?,
-    ): EndpointResponse? {
+    ): EndpointResponse {
         val approvalResponse =
             observer?.approveEndpointFetch?.invoke(endpointId) {
                 if (it == false) {
-                    return@invoke EndpointResponse(payload = "User Denied Request", responseCode = 600)
+                    return@invoke EndpointResponse(payload = "User Denied Request", responseCode = 601)
                 }
                 val endpointInfo =
                     endpointInfofromId(endpointId) ?: return@invoke EndpointResponse(payload = "Endpoint ID Not Found", responseCode = 604)
@@ -67,7 +67,7 @@ class Endpoint(
                         authorization ?: endpointInfo.auth
                     )
                 return@invoke EndpointResponse(response.payload, response.responseCode)
-            }
+            } ?: return EndpointResponse(payload = null, responseCode= 600)
         return approvalResponse
     }
 
@@ -75,11 +75,11 @@ class Endpoint(
         endpointId: String,
         contentType: String?,
         authorization: String?
-    ): EndpointResponse? {
+    ): EndpointResponse {
         val approvalResponse =
             observer?.approveEndpointFetch?.invoke(endpointId) {
                 if (it == false) {
-                    return@invoke EndpointResponse(payload = "User Denied Request", responseCode = 600)
+                    return@invoke EndpointResponse(payload = "User Denied Request", responseCode = 601)
                 }
                 val endpointInfo =
                     endpointInfofromId(endpointId) ?: return@invoke EndpointResponse(payload = "Endpoint ID Not Found", responseCode = 604)
@@ -90,7 +90,7 @@ class Endpoint(
                         authorization ?: endpointInfo.auth
                     )
                 return@invoke EndpointResponse(response.payload, response.responseCode)
-            }
+            } ?: return EndpointResponse(payload = null, responseCode= 600)
         return approvalResponse
     }
 }

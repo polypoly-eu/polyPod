@@ -265,7 +265,7 @@ open class PodApi(
         }
         val error = network.httpPost(url, body, contentType, authorization)
         return if (error == null) ValueFactory.newNil()
-        else ValueFactory.newString(error)
+        else ValueFactory.newString("NetworkHttpPost does not go through Api anymore, use endpoint instead")
     }
 
     private suspend fun handleEndpointSend(args: List<Value>): Value {
@@ -281,7 +281,14 @@ open class PodApi(
         val response = endpoint
             .send(endpointId, body, contentType, authorization)
         return if (response == null) ValueFactory.newNil()
-        else ValueFactory.newString(response)
+        else    ValueFactory.newMap(mutableMapOf<Value, Value>(
+                ValueFactory.newString("payload") to
+                    if(response.payload == null)ValueFactory.newNil()
+                    else ValueFactory.newString(response.payload),
+                ValueFactory.newString("responseCode") to
+                    ValueFactory.newString(response.responseCode.toString())
+            )
+        )
     }
 
     private suspend fun handleEndpointGet(args: List<Value>): Value {
@@ -293,10 +300,17 @@ open class PodApi(
         val authorization = args[2].let {
             if (it.isStringValue) it.asStringValue().toString() else null
         }
-        val error = endpoint
+        val response = endpoint
             .get(endpointId, contentType, authorization)
-        return if (error == null) ValueFactory.newNil()
-        else ValueFactory.newString(error)
+        return if (response == null) ValueFactory.newNil()
+        else ValueFactory.newMap(mutableMapOf<Value, Value>(
+            ValueFactory.newString("payload") to
+                if(response.payload == null)ValueFactory.newNil()
+                else ValueFactory.newString(response.payload),
+            ValueFactory.newString("responseCode") to
+                ValueFactory.newInteger(response.responseCode)
+            )
+        )
     }
 
     private fun decodePolyOutFetchCallArgs(args: Value): FetchInit {

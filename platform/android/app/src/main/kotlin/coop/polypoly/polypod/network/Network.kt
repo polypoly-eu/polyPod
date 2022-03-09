@@ -18,7 +18,6 @@ class Network(val context: Context) {
 
     data class NetworkResponse(var payload: String?, var responseCode: Int)
 
-
     open suspend fun httpPost(
         url: String,
         body: String,
@@ -29,7 +28,7 @@ class Network(val context: Context) {
         connection.requestMethod = "POST"
         connection.doOutput = true
         connection.setRequestProperty("charset", "utf-8")
-        var response = NetworkResponse(payload = null, responseCode = 0);
+        var response = NetworkResponse(payload = null, responseCode = 400);
 
         if (contentType != null)
             connection.setRequestProperty("Content-Type", contentType)
@@ -59,13 +58,12 @@ class Network(val context: Context) {
         } catch (exception: Exception) {
             logger.error("network.httpPost failed: $exception")
             response.payload = exception.toString()
-            response.responseCode = 600
             return@withContext response
         }
         val responseCode = connection.responseCode
+        response.responseCode = responseCode
         if (responseCode < 200 || responseCode > 299) {
             response.payload = "Bad response code: $responseCode"
-            response.responseCode = responseCode
             logger.error("network.httpPost failed: ${response.payload}")
             return@withContext response
         }
@@ -89,6 +87,8 @@ class Network(val context: Context) {
         connection.requestMethod = "GET"
         connection.doInput = true
         connection.setRequestProperty("charset", "utf-8")
+        var response = NetworkResponse(payload = null, responseCode = 400);
+
         if (contentType != null)
             connection.setRequestProperty("Content-Type", contentType)
 
@@ -103,15 +103,15 @@ class Network(val context: Context) {
             )
         }
         val responseCode = connection.responseCode
+        response.responseCode = responseCode
         if (responseCode < 200 || responseCode > 299) {
-            val message = "Bad response code: $responseCode"
-            logger.error("network.httpGet failed: $message")
-            return@withContext message
+            response.payload = "Bad response code: $responseCode"
+            logger.error("network.httpPost failed: ${response.payload}")
+            return@withContext response
         }
 
-        var response: String? = null;
         try {
-            response =
+            response.payload =
                 connection.inputStream.bufferedReader().use { it.readText() }
         } finally {
             connection.disconnect()
