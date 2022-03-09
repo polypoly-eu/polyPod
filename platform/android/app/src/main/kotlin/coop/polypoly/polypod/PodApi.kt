@@ -95,7 +95,6 @@ open class PodApi(
     private suspend fun handlePolyOutFetch(): Value {
         logger.debug("dispatch() -> polyOut.fetch")
         throw Exception("Not implemented")
-        return ValueFactory.newNil()
     }
 
     private suspend fun handlePolyOutReadFile(args: List<Value>): Value {
