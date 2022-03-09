@@ -24,6 +24,7 @@ export interface ValueEndpointSpec<T> {
  * Interface denoting a method endpoint of type `T`. This interface is purely
  * virtual and no instances are generated.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface ObjectEndpointSpec<T extends Record<string, (...args: any[]) => EndpointSpec>> {
     endpointType: "object";
     methods: T;
@@ -56,11 +57,13 @@ export interface ObjectEndpointSpec<T extends Record<string, (...args: any[]) =>
  * type argument to [[ServerOf]] or [[ClientOf]]. These “meta types” compute a
  * server and client representation based on the above specification.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type EndpointSpec = ValueEndpointSpec<any> | ObjectEndpointSpec<any>;
 
 /**
  * Wraps a type `T` into `Promise`, unless `T` is already a `Promise`.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ForcePromise<T> = [T] extends [Promise<any>] ? T : Promise<T>;
 
 /**
