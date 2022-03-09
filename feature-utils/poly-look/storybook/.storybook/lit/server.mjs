@@ -1,8 +1,8 @@
 import { storybookPlugin } from "@web/dev-server-storybook";
 import baseConfig from "../../web-dev-server.config.mjs";
 import { fromRollup } from "@web/dev-server-rollup";
-import svg from "rollup-plugin-svg";
 import { nodeResolve } from "@web/dev-server-rollup";
+import svg from "rollup-plugin-svg";
 
 const svgForWebServer = fromRollup(svg);
 const resolveForWebServer = fromRollup(nodeResolve);
