@@ -12,9 +12,11 @@ type TypeInfos<T extends Record<string, unknown>> = {
 
 class BubblewrapSpec<T extends Record<string, unknown>> {
     readonly bubblewrap: Bubblewrap;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private readonly gen: Arbitrary<[Class<any>, unknown]>;
 
     constructor(private readonly infos: TypeInfos<T>) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const gens: Arbitrary<[Class<any>, unknown]>[] = [];
         const constructors: Classes = {};
 
@@ -64,6 +66,7 @@ class MyError extends Error {
         return new MyError(mymsg);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [serialize](): any {
         return this.mymsg;
     }
@@ -114,6 +117,7 @@ describe("Bubblewrap", () => {
                 fc.assert(
                     fc.property(g, (term) => {
                         const decoded = bubblewrap.decode(bubblewrap.encode(term));
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         expect((term as any).equals(decoded)).toBe(true);
                         expect(decoded.equals(term)).toBe(true);
                     })
