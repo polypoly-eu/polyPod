@@ -1,0 +1,331 @@
+{
+    "terminal.explorerKind": "external",
+    "terminal.integrated.shell.linux": "/bin/zsh",
+    "git.autofetch": true,
+    "editor.wordWrapColumn": 100,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "workbench.statusBar.feedback.visible": false,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "workbench.colorTheme": "Monokai Dimmed",
+    "redhat.telemetry.enabled": false,
+    "prettier.useTabs": true,
+    "better-comments.highlightPlainText": true,
+    "peacock.favoriteColors": [
+        {
+            "name": "Angular Red",
+            "value": "#b52e31"
+        },
+        {
+            "name": "Auth0 Orange",
+            "value": "#eb5424"
+        },
+        {
+            "name": "Azure Blue",
+            "value": "#007fff"
+        },
+        {
+            "name": "C# Purple",
+            "value": "#68217A"
+        },
+        {
+            "name": "Gatsby Purple",
+            "value": "#639"
+        },
+        {
+            "name": "Java Blue-Gray",
+            "value": "#557c9b"
+        },
+        {
+            "name": "JavaScript Yellow",
+            "value": "#f9e64f"
+        },
+        {
+            "name": "Mandalorian Blue",
+            "value": "#1857a4"
+        },
+        {
+            "name": "Node Green",
+            "value": "#215732"
+        },
+        {
+            "name": "React Blue",
+            "value": "#00b3e6"
+        },
+        {
+            "name": "Something Different",
+            "value": "#832561"
+        },
+        {
+            "name": "Vue Green",
+            "value": "#42b883"
+        }
+    ],
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.arrowParens": "always",
+    "prettier.printWidth": 100,
+    "prettier.singleQuote": true,
+    "prettier.tabWidth": 4,
+    "cSpell.userWords": [
+        "ARGB",
+        "ARTIFACTORY",
+        "Akis",
+        "Appender",
+        "Cardbox",
+        "Covid",
+        "Cupertino",
+        "DATETIME",
+        "DDTHH",
+        "Dont",
+        "EVERYONES",
+        "Encr",
+        "Encrypter",
+        "Evermind",
+        "Fontello",
+        "Guapeton",
+        "Hsts",
+        "Imagexxx",
+        "Innovación",
+        "JIRA",
+        "LTRB",
+        "MDEP",
+        "Malakasing",
+        "Manolas",
+        "Manolo",
+        "PEPITO",
+        "PRGM",
+        "PROGRAMID",
+        "Palooza",
+        "Papoutsakis",
+        "Postgres",
+        "Postgresql",
+        "QIDS",
+        "Queda",
+        "RGBO",
+        "Repo",
+        "SHOULDNT",
+        "Scrollable",
+        "Serializable",
+        "Serializers",
+        "Signin",
+        "Stepito",
+        "TESTCONTAINERS",
+        "Todos",
+        "Tsoa",
+        "Unencrypted",
+        "Unprocessable",
+        "Xsrf",
+        "allowfullscreen",
+        "appenders",
+        "arobas",
+        "autoserialize",
+        "backend",
+        "bulletlist",
+        "catastrophizing",
+        "cerialize",
+        "cognito",
+        "crashlytics",
+        "csrf",
+        "dartx",
+        "dashboardusers",
+        "daviddgl",
+        "delimeter",
+        "deserialize",
+        "deserialized",
+        "devtools",
+        "dsdialog",
+        "dssd",
+        "dysmorphic",
+        "esnext",
+        "favourite",
+        "favourited",
+        "favourites",
+        "figma",
+        "fluttericon",
+        "getstarted",
+        "healthcheck",
+        "healthkit",
+        "idpresponse",
+        "injectable",
+        "libphonenumber",
+        "ltrim",
+        "malakas",
+        "maxlength",
+        "middlewares",
+        "mockdate",
+        "mockito",
+        "mongod",
+        "mozallowfullscreen",
+        "novalid",
+        "onboarding",
+        "ormconfig",
+        "pepitaki",
+        "pepitoki",
+        "pgadmin",
+        "prefs",
+        "preload",
+        "protos",
+        "r'Evaluating",
+        "r'identify",
+        "r'pick",
+        "r'should",
+        "r'succeeding",
+        "r'thought",
+        "r'thoughts",
+        "rearview",
+        "referrerpolicy",
+        "repos",
+        "rrect",
+        "rtrim",
+        "rxdart",
+        "screenlock",
+        "semibold",
+        "sonarjs",
+        "sonarts",
+        "stylelint",
+        "textareas",
+        "trendyol",
+        "typeorm",
+        "unauth",
+        "unawaited",
+        "unmark",
+        "uuidv",
+        "varchar",
+        "vrplayer",
+        "webkitallowfullscreen",
+        "webkitendfullscreen",
+        "wifi"
+    ],
+    "liveshare.featureSet": "insiders",
+    "vsicons.projectDetection.autoReload": true,
+    "workbench.colorCustomizations": {
+        "activityBarBadge.background": "#7CB342",
+        "list.activeSelectionForeground": "#7CB342",
+        "list.inactiveSelectionForeground": "#7CB342",
+        "list.highlightForeground": "#7CB342",
+        "scrollbarSlider.activeBackground": "#7CB34250",
+        "editorSuggestWidget.highlightForeground": "#7CB342",
+        "textLink.foreground": "#7CB342",
+        "progressBar.background": "#7CB342",
+        "pickerGroup.foreground": "#7CB342",
+        "tab.activeBorder": "#7CB342",
+        "notificationLink.foreground": "#7CB342",
+        "editorWidget.resizeBorder": "#7CB342",
+        "editorWidget.border": "#7CB342",
+        "settings.modifiedItemIndicator": "#7CB342",
+        "settings.headerForeground": "#7CB342",
+        "panelTitle.activeBorder": "#7CB342",
+        "breadcrumb.activeSelectionForeground": "#7CB342",
+        "menu.selectionForeground": "#7CB342",
+        "menubar.selectionForeground": "#7CB342",
+        "editor.findMatchBorder": "#7CB342",
+        "selection.background": "#7CB34240"
+    },
+    "materialTheme.accent": "Lime",
+    "breadcrumbs.enabled": true,
+    "showMusicMetrics": false,
+    "showGitMetrics": false,
+    "showWeeklyRanking": false,
+    "vsicons.dontShowNewVersionMessage": true,
+    "atlascode.jira.workingSite": {
+        "baseUrlSuffix": "atlassian.net"
+    },
+    "yaml.schemas": {
+        "file:///Users/yc00056/.vscode/extensions/atlassian.atlascode-2.8.6/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "gitlens.hovers.currentLine.over": "line",
+    "sonarlint.rules": {
+        "typescript:S4144": {
+            "level": "off"
+        },
+        "Web:S4084": {
+            "level": "off"
+        },
+        "typescript:S4325": {
+            "level": "off"
+        },
+        "typescript:S905": {
+            "level": "off"
+        },
+        "typescript:S2068": {
+            "level": "off"
+        }
+    },
+    "java.configuration.checkProjectSettingsExclusions": false,
+    "terminal.integrated.inheritEnv": false,
+    "deepcode.api.cloudBackend": "https://www.deepcode.ai/",
+    "rust.mode": "legacy",
+    "zenMode.silentNotifications": false,
+    "git.showPushSuccessNotification": true,
+    "typescript.tsserver.log": "verbose",
+    "typescript.disableAutomaticTypeAcquisition": true,
+    "editor.acceptSuggestionOnEnter": "off",
+    "tabnine.experimentalAutoImports": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "explorer.confirmDragAndDrop": false,
+    "cSpell.enableFiletypes": [
+        "dart"
+    ],
+    "dart.flutterSdkPath": "/Users/yc00056/Documents/MyWORK/flutter",
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": false
+    },
+    "dart.openDevTools": "flutter",
+    "dart.showTodos": false,
+    "cmake.configureOnOpen": true,
+    "kite.showWelcomeNotificationOnStartup": false,
+    "testMate.cpp.log.userId": "af2efd3e84c52f143385a8bc3e3adef4515144a6",
+    "codetogether.userName": "https://go.codetogether.com/#/WlMb5EyWo1xRVLZu5qXy2V/J0jB3rYrcCINqpFUJWvl3I",
+    "dart.debugExternalLibraries": true,
+    "dart.debugSdkLibraries": true,
+    "sqltools.connectionExplorer.groupConnected": true,
+    "sqltools.defaultExportType": "json",
+    "sqltools.defaultOpenType": "json",
+    "[sql]": {
+        "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
+    },
+    "dart.showSkippedTests": false,
+    "java.project.importHint": false,
+    "cSpell.logLevel": "Warning",
+    "cSpell.diagnosticLevel": "Hint",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "terminal.integrated.tabs.enabled": true,
+    "terminal.integrated.defaultProfile.osx": "/bin/zsh (migrated)",
+    "terminal.integrated.profiles.osx": {
+        "/bin/zsh (migrated)": {
+            "path": "/bin/zsh",
+            "args": [
+                "-l"
+            ]
+        }
+    },
+    "explorer.confirmDelete": false,
+    "editor.inlineSuggest.enabled": true,
+    "workbench.startupEditor": "none",
+    "github.copilot.enable": {
+        "*": true,
+        "yaml": false,
+        "plaintext": false,
+        "markdown": true
+    },
+    "editor.formatOnSave": true,
+    "[dockerfile]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}

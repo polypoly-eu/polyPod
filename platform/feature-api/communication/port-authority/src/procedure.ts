@@ -41,6 +41,7 @@ import { Handler, Port, ReceivePort, SendPort } from "./port";
  */
 export interface PromiseResolvers<Res> {
     resolve(t: Res | Promise<Res>): void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     reject(err?: any): void;
 }
 
