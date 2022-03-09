@@ -45,7 +45,7 @@ open class PodApi(
         when (outer) {
             "polyOut" -> {
                 when (inner) {
-                    "fetch" -> return handlePolyOutFetch(args)
+                    "fetch" -> return handlePolyOutFetch()
                     "readFile" -> return handlePolyOutReadFile(args)
                     "writeFile" -> return handlePolyOutWriteFile(args)
                     "stat" -> return handlePolyOutStat(args)
@@ -92,7 +92,7 @@ open class PodApi(
         )
     }
 
-    private suspend fun handlePolyOutFetch(args: List<Value>): Value {
+    private suspend fun handlePolyOutFetch(): Value {
         logger.debug("dispatch() -> polyOut.fetch")
         throw Exception("Not implemented")
         return ValueFactory.newNil()
