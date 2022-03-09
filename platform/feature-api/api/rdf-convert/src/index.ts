@@ -48,6 +48,7 @@ export function convert(input: RDF.Term, dataFactory: RDF.DataFactory<any>): RDF
             if (dataFactory.variable) return dataFactory.variable(term.value);
             else throw new Error("Variables are not supported");
         case "Quad":
+        default:
             // backwards compatibility: term type should be "Quad", but some implementations don't
             // set it accordingly
             return dataFactory.quad(

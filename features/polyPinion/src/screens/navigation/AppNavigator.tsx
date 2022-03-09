@@ -84,7 +84,7 @@ export default function AppNavigator() {
         async function getOnboardingShown() {
             let wasShown = await AsyncStorage.getItem("onboardingshown");
             if (wasShown == null) {
-                // TO-FIX - bug - we assign a boolean to a string!
+                // TODO - bug - we assign a boolean to a string!
                 wasShown = false;
             }
             setOnboardingShown(wasShown);

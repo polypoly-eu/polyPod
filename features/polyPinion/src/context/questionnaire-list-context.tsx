@@ -94,19 +94,19 @@ export const QuestionnaireListProvider: React.FC = ({ children }) => {
 
     const getNewActiveQuestionnairesMetadata = async () => {
         const resultValue = await downloadActiveQuestionnairesMetadata();
-        // TO-FIX: define a proper type for this JSON string object
+        // TODO: define a proper type for this JSON string object
         // we should know format of questionnairesMetadata
         const allActiveQuestionnairesMetadataJSON = JSON.parse(resultValue);
         if (allActiveQuestionnairesMetadataJSON === null) {
             return [];
         }
 
-        const questionnairesIndexes = questionnaireList.map((questionnaire) => questionnaire.id);
+        const questionnairesIndex = questionnaireList.map((questionnaire) => questionnaire.id);
         const newMetadata = [];
         for (const questionaireMetadata of allActiveQuestionnairesMetadataJSON) {
             // TODO: questionaireMetadata is a string
             // this seems buggy as we cannot access 'questionnaireId' on a real json object string
-            if (!questionnairesIndexes.includes(questionaireMetadata.questionnaireId)) {
+            if (!questionnairesIndex.includes(questionaireMetadata.questionnaireId)) {
                 newMetadata.push(questionaireMetadata);
             }
         }
