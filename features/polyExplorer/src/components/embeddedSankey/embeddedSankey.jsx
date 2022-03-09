@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { Chips } from "@polypoly-eu/poly-look";
-import { PolyChart } from "@polypoly-eu/poly-look";
+import { ChipGroup, PolyChart } from "@polypoly-eu/poly-look";
 
 const jurisdictionColors = {
     "EU-GDPR": "#60E6DE",
     "Five-Eyes": "#EC453D",
-    Russia: "#FE8988",
-    China: "#C5271E",
-    Sonstige: "#A9B6C6",
+    Russia: "#EC453D",
+    China: "#EC453D",
+    Other: "#EC453D",
 };
 
 const transparent = "rbga(0, 0, 0, 0)";
@@ -34,42 +33,20 @@ function linksToGroups(links) {
 
 const EmbeddedSankey = ({ links, groups }) => {
     const { sources, targets } = linksToGroups(links);
-    const [activeSources, setActiveSources] = useState(
-        groups?.source?.all ? sources : [sources[0]]
-    );
-    const [activeTargets, setActiveTargets] = useState(
-        groups?.target?.all ? targets : [targets[0]]
-    );
+    const [activeSources, setActiveSources] = useState(sources);
+    const [activeTargets, setActiveTargets] = useState(targets);
 
-    const handleActiveSourceChange = (source) => {
-        if (source === "all") setActiveSources(sources);
-        else if (source === "others") setActiveSources(groups.source.others);
-        else setActiveSources([source]);
+    const handleActiveSourceChange = (_, activeChips) => {
+        setActiveSources(activeChips);
     };
 
-    const handleActiveTargetChange = (target) => {
-        if (target === "all") setActiveTargets(targets);
-        else if (target === "others")
-            return setActiveTargets(groups.target.others);
-        setActiveTargets([target]);
+    const handleActiveTargetChange = (_, activeChips) => {
+        setActiveTargets(activeChips);
     };
 
     const isPathActive = (d) =>
         activeSources.indexOf(d.source.id) !== -1 &&
         activeTargets.indexOf(d.target.id) !== -1;
-
-    function addGroupingChips(array, group) {
-        let newArray = [...array];
-        if (group?.all) newArray.push({ id: "all", translation: "All" });
-        if (group?.others) {
-            newArray.push({ id: "others", translation: "Other" });
-            return newArray.filter((e) => group.others.indexOf(e) === -1);
-        }
-        return newArray;
-    }
-
-    const displayedSourceChips = addGroupingChips(sources, groups?.source);
-    const displayedTargetChips = addGroupingChips(targets, groups?.target);
 
     const sankeyColors = {
         linkOpacity: "1",
@@ -104,18 +81,40 @@ const EmbeddedSankey = ({ links, groups }) => {
                 nodeLabel={nodeLabel}
             />
             <p>{groups.source.label}</p>
-            <Chips
-                chipsContent={displayedSourceChips}
-                activeChips={activeSources.length > 1 ? "all" : activeSources}
+            <ChipGroup
+                chipsContent={sources}
+                defaultActiveChips={
+                    activeSources.length > 1 ? ["allChip"] : activeSources
+                }
                 onChipClick={handleActiveSourceChange}
+                exclusive={false}
+                allChip={groups.source.all ? { translation: "All" } : null}
+                othersChip={
+                    groups.source.others
+                        ? {
+                              translation: "others",
+                              ids: groups.source.others,
+                              exclusive: false,
+                          }
+                        : null
+                }
             />
             <p>{groups.target.label}</p>
-            <Chips
-                chipsContent={displayedTargetChips}
-                activeChips={
-                    activeTargets.length > 1 ? "others" : activeTargets
-                }
+            <ChipGroup
+                chipsContent={targets}
+                defaultActiveChips={[...targets, "othersChip"]}
                 onChipClick={handleActiveTargetChange}
+                exclusive={false}
+                allChip={groups.target.all ? { translation: "All" } : null}
+                othersChip={
+                    groups.target.others
+                        ? {
+                              translation: "Others",
+                              ids: groups.target.others,
+                              exclusive: false,
+                          }
+                        : null
+                }
             />
         </div>
     );

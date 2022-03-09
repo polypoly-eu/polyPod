@@ -5,38 +5,40 @@ import GradientCircleList from "../../components/gradientCircleList/gradientCirc
 import { ExplorerContext } from "../../context/explorer-context.jsx";
 import i18n from "../../i18n.js";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
+import DataTypes from "../../components/clusterStories/dataTypes.jsx";
+import Purposes from "../../components/clusterStories/purposes.jsx";
 import ReceivingCompanies from "../../components/clusterStories/receivingCompanies.jsx";
-import { Tabs, Tab } from "@polypoly-eu/poly-look";
 import { createJurisdictionLinks } from "./story-utils";
 import EmbeddedSankey from "../../components/embeddedSankey/embeddedSankey.jsx";
 import EntityList from "../../components/entityList/entityList.jsx";
+import SourceInfoButton from "../../components/sourceInfoButton/sourceInfoButton.jsx";
+import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 
 const i18nHeader = "clusterDigitalGiantsStory";
 const i18nHeaderCommon = "clusterStoryCommon";
 const primaryColor = "#f95f5a";
 
-const bigSixNames = [
-    "Amazon",
-    "Apple",
-    "Google",
-    "Facebook",
-    "PayPal",
-    "TikTok",
-];
+const bigSixNames = ["Amazon", "Apple", "Google", "Meta", "PayPal", "TikTok"];
 
 const DigitalGiantsStory = () => {
-    const { featuredEntities, entityJurisdictionByPpid } =
+    const { featuredEntities, entityJurisdictionByPpid, createPopUp } =
         useContext(ExplorerContext);
 
-    const bigSix = bigSixNames.map((n) =>
-        featuredEntities.find((e) => e.ppid.indexOf(n) !== -1)
-    );
+    const bigSix = bigSixNames.map((n) => {
+        const entity = featuredEntities
+            .filter((e) => e.type == "company")
+            .find((e) => e.name.toLowerCase().indexOf(n.toLowerCase()) !== -1);
+        entity["simpleName"] = n;
+        return entity;
+    });
 
     const jurisdictionLinks = createJurisdictionLinks(
         bigSix,
         entityJurisdictionByPpid
     ).map(({ source, target, value }) => ({
-        source: bigSixNames.find((name) => source.indexOf(name) !== -1),
+        source: bigSixNames.find(
+            (name) => source.toLowerCase().indexOf(name.toLowerCase()) !== -1
+        ),
         target,
         value,
     }));
@@ -60,11 +62,13 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:intro.p.1`)}
             </p>
-            <img
-                className="cluster-story-img"
-                src="images/stories/digital-giants/intro.svg"
-                alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
-            />
+            <div className="cluster-story-img-container">
+                <img
+                    className="cluster-story-img"
+                    src="images/stories/digital-giants/intro.svg"
+                    alt={i18n.t(`${i18nHeader}:intro.image.alt`)}
+                />
+            </div>
             <GradientCircleList
                 introText={i18n.t(`${i18nHeader}:intro.p.2`)}
                 list={bigSixNames}
@@ -79,23 +83,14 @@ const DigitalGiantsStory = () => {
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeader}:data.types.p`)}
             </p>
-            <Tabs>
-                <Tab id="by-companies" label="By Companies">
-                    <div style={{ width: "100%", height: "200px" }}></div>
-                </Tab>
-                <Tab id="by-shares" label="By Shares">
-                    <div style={{ width: "100%", height: "200px" }}></div>
-                </Tab>
-                <Tab id="by-types" label="By Types">
-                    <div style={{ width: "100%", height: "200px" }}></div>
-                </Tab>
-            </Tabs>
+            <DataTypes entities={bigSix} i18nHeader={i18nHeader} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.purposes`)}
             />
             <p className="big-first-letter">
                 {i18n.t(`${i18nHeaderCommon}:purposes.p`)}
             </p>
+            <Purposes companies={bigSix} createPopUp={createPopUp} />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.companies`)}
             />
@@ -114,15 +109,19 @@ const DigitalGiantsStory = () => {
                 links={jurisdictionLinks}
                 groups={{
                     source: {
-                        label: "Messengers",
+                        label: i18n.t(`${i18nHeader}:data.regions.group.1`),
                         all: true,
                     },
                     target: {
-                        label: "Regions",
+                        label: i18n.t(`${i18nHeader}:data.regions.group.2`),
                         all: false,
                         others: otherJurisdictions,
                     },
                 }}
+            />
+            <SourceInfoButton
+                infoScreen="data-regions-diagram-info"
+                source={i18n.t("common:source.polyPedia")}
             />
             <SectionTitle
                 title={i18n.t(`${i18nHeaderCommon}:section.explore.further`)}
@@ -131,6 +130,9 @@ const DigitalGiantsStory = () => {
                 {i18n.t(`${i18nHeader}:explore.further.p.1`)}
             </p>
             <EntityList entities={bigSix} expand={true} />
+            <LinkButton route={"back"} className="poly-button margin-top">
+                {i18n.t(`${i18nHeaderCommon}:discover.other.topics`)}
+            </LinkButton>
         </ClusterStory>
     );
 };

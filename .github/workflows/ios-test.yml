@@ -1,33 +1,35 @@
 name: Testing polyPod in iOS
 on:
-  push:
-    paths:
-      - 'ios/**'
-      - 'core/**'
-      - 'features/**'
-      - 'build/**'
-  pull_request:
-    paths:
-      - 'ios/**'
-      - 'core/**'
-      - 'features/**'
-      - 'build/**'
+    push:
+        paths:
+            - "build/**"
+            - "features/**"
+            - "platform/feature-api/**"
+            - "platform/ios/**"
+    pull_request:
+        paths:
+            - "build/**"
+            - "features/**"
+            - "platform/feature-api/**"
+            - "platform/ios/**"
 jobs:
     test:
         name: Testing polyPod iOS app
-        runs-on: macOS-10.15
+        runs-on: macOS-11
         steps:
             - name: Checkout repository
               uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
+            - uses: actions/setup-node@v2
               with:
                   node-version: 16
+                  cache: "npm"
+                  cache-dependency-path: "**/package-lock.json"
             - name: Lock xcode version
-              run: sudo xcode-select -switch /Applications/Xcode_12.4.app
-            - name: Build core and features
+              run: cd platform/ios; make lockxcodeversion
+            - name: Build API and features
               run: ./build.js
-            - name: Build iOS
+            - name: Build and test iOS
               run: |
-                  cd ios
+                  cd platform/ios
                   set -o pipefail
                   make test | xcpretty

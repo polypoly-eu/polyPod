@@ -6,6 +6,10 @@
     overflow-y: visible;
 }
 
+.entity-list .scroll-container {
+    margin-top: 40px;
+}
+
 .entity-list .entity-group {
     display: flex;
     flex-direction: column;

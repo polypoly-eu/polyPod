@@ -9,7 +9,7 @@ const LinkButton = ({
     children,
     onClick = () => {},
 }) => {
-    const { navigationState, changeNavigationState } =
+    const { navigationState, changeNavigationState, handleBack } =
         useContext(ExplorerContext);
     const history = useHistory();
     let changedNavigationState = navigationState;
@@ -18,7 +18,7 @@ const LinkButton = ({
         onClick();
         if (stateChange)
             changedNavigationState = { ...navigationState, ...stateChange };
-        if (route == "back") history.goBack();
+        if (route == "back") return handleBack();
         else history.push(route, changedNavigationState);
         changeNavigationState(changedNavigationState);
     };

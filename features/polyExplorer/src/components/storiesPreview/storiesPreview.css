@@ -1,5 +1,8 @@
 .stories-preview {
-    padding: 0 16px 212px 16px;
+    padding: 0 16px 0 16px;
+    display: flex;
+    flex-flow: column;
+    overflow: hidden scroll;
 }
 
 .stories-preview .preview-scrollable {
@@ -11,8 +14,9 @@
     color: var(--color-text-dark);
     text-align: center;
     font-size: 20px;
-    font-weight: 500;
-    margin: 0;
+    font-family: "Jost Medium";
+    margin: 12px 28px 0;
+    line-height: 30px;
 }
 
 .stories-preview p {

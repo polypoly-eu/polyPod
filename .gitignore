@@ -18,3 +18,15 @@ node_modules/
 
 # Andoid specific local config
 android/app/local.properties
+
+# Cypress directories
+**/cypress/support
+
+# Generated docs
+docs/
+
+# Android stuff
+.dccache
+
+# Debug Logs
+debug.log

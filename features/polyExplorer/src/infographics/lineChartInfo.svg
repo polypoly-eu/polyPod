@@ -1,0 +1,115 @@
+<svg width="268" height="437" viewBox="0 0 268 437" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="lineChartInfo">
+<g id="Line Graph">
+<g id="Horizontal lines">
+<line id="Line 295" x1="2" y1="358.5" x2="258" y2="358.5" stroke="#CBD5E0"/>
+<line id="Line 301" x1="2" y1="330.5" x2="258" y2="330.5" stroke="#CBD5E0"/>
+<line id="Line 296" x1="2" y1="303.5" x2="258" y2="303.5" stroke="#CBD5E0"/>
+<line id="Line 302" x1="2" y1="275.5" x2="258" y2="275.5" stroke="#CBD5E0"/>
+<line id="Line 297" x1="2" y1="248.5" x2="258" y2="248.5" stroke="#CBD5E0"/>
+<line id="Line 303" x1="2" y1="220.5" x2="258" y2="220.5" stroke="#CBD5E0"/>
+<line id="Line 298" x1="2" y1="193.5" x2="258" y2="193.5" stroke="#CBD5E0"/>
+</g>
+<g id="Axis">
+<g id="Y axis MAU">
+<text id="boldYaxis" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="2" y="167.17">MAU</tspan></text>
+<text id="1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="2" y="356.17">1</tspan></text>
+<text id="10" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="2" y="301.17">10</tspan></text>
+<text id="100" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="2" y="246.17">100</tspan></text>
+<text id="1000" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="2" y="191.17">1000</tspan></text>
+</g>
+<g id="X axis scale">
+<line id="Line 101" y1="-0.5" x2="10" y2="-0.5" transform="matrix(0 -1 -1 0 1.87402 400)" stroke="#0F1938"/>
+<g id="Year">
+<path id="Line 125" d="M53.0986 400V390" stroke="#0F1938"/>
+<path id="Line 136" d="M6.63965 394L6.63965 390" stroke="#0F1938"/>
+<path id="Line 137" d="M10.8613 394V390" stroke="#0F1938"/>
+<path id="Line 138" d="M15.0869 394V390" stroke="#0F1938"/>
+<path id="Line 139" d="M19.3076 394V390" stroke="#0F1938"/>
+<path id="Line 140" d="M23.5332 394V390" stroke="#0F1938"/>
+<path id="Line 141" d="M27.7559 397L27.7559 390" stroke="#0F1938"/>
+<path id="Line 142" d="M31.9814 394V390" stroke="#0F1938"/>
+<path id="Line 143" d="M36.2041 394V390" stroke="#0F1938"/>
+<path id="Line 144" d="M40.4297 394V390" stroke="#0F1938"/>
+<path id="Line 145" d="M44.6523 394V390" stroke="#0F1938"/>
+<path id="Line 146" d="M48.876 394V390" stroke="#0F1938"/>
+</g>
+<g id="Year_2">
+<path id="Line 125_2" d="M104.323 400V390" stroke="#0F1938"/>
+<path id="Line 136_2" d="M57.8633 394V390" stroke="#0F1938"/>
+<path id="Line 137_2" d="M62.0859 394V390" stroke="#0F1938"/>
+<path id="Line 138_2" d="M66.3115 394V390" stroke="#0F1938"/>
+<path id="Line 139_2" d="M70.5322 394V390" stroke="#0F1938"/>
+<path id="Line 140_2" d="M74.7578 394V390" stroke="#0F1938"/>
+<path id="Line 141_2" d="M78.9805 397L78.9805 390" stroke="#0F1938"/>
+<path id="Line 142_2" d="M83.2061 394V390" stroke="#0F1938"/>
+<path id="Line 143_2" d="M87.4287 394V390" stroke="#0F1938"/>
+<path id="Line 144_2" d="M91.6543 394V390" stroke="#0F1938"/>
+<path id="Line 145_2" d="M95.877 394V390" stroke="#0F1938"/>
+<path id="Line 146_2" d="M100.101 394V390" stroke="#0F1938"/>
+</g>
+<g id="Year_3">
+<path id="Line 125_3" d="M155.552 400V390" stroke="#0F1938"/>
+<path id="Line 136_3" d="M109.093 394V390" stroke="#0F1938"/>
+<path id="Line 137_3" d="M113.314 394V390" stroke="#0F1938"/>
+<path id="Line 138_3" d="M117.54 394V390" stroke="#0F1938"/>
+<path id="Line 139_3" d="M121.761 394V390" stroke="#0F1938"/>
+<path id="Line 140_3" d="M125.986 394V390" stroke="#0F1938"/>
+<path id="Line 141_3" d="M130.209 397L130.209 390" stroke="#0F1938"/>
+<path id="Line 142_3" d="M134.435 394V390" stroke="#0F1938"/>
+<path id="Line 143_3" d="M138.657 394V390" stroke="#0F1938"/>
+<path id="Line 144_3" d="M142.883 394V390" stroke="#0F1938"/>
+<path id="Line 145_3" d="M147.105 394V390" stroke="#0F1938"/>
+<path id="Line 146_3" d="M151.329 394V390" stroke="#0F1938"/>
+</g>
+<g id="Year_4">
+<path id="Line 125_4" d="M206.778 400V390" stroke="#0F1938"/>
+<path id="Line 136_4" d="M160.318 394V390" stroke="#0F1938"/>
+<path id="Line 137_4" d="M164.541 394V390" stroke="#0F1938"/>
+<path id="Line 138_4" d="M168.767 394V390" stroke="#0F1938"/>
+<path id="Line 139_4" d="M172.987 394V390" stroke="#0F1938"/>
+<path id="Line 140_4" d="M177.213 394V390" stroke="#0F1938"/>
+<path id="Line 141_4" d="M181.436 397L181.436 390" stroke="#0F1938"/>
+<path id="Line 142_4" d="M185.661 394V390" stroke="#0F1938"/>
+<path id="Line 143_4" d="M189.884 394V390" stroke="#0F1938"/>
+<path id="Line 144_4" d="M194.109 394V390" stroke="#0F1938"/>
+<path id="Line 145_4" d="M198.332 394V390" stroke="#0F1938"/>
+<path id="Line 146_4" d="M202.556 394V390" stroke="#0F1938"/>
+</g>
+<g id="Year_5">
+<path id="Line 125_5" d="M258.003 400V390" stroke="#0F1938"/>
+<path id="Line 136_5" d="M211.542 394V390" stroke="#0F1938"/>
+<path id="Line 137_5" d="M215.766 394V390" stroke="#0F1938"/>
+<path id="Line 138_5" d="M219.991 394V390" stroke="#0F1938"/>
+<path id="Line 139_5" d="M224.212 394V390" stroke="#0F1938"/>
+<path id="Line 140_5" d="M228.438 394V390" stroke="#0F1938"/>
+<path id="Line 141_5" d="M232.66 397L232.66 390" stroke="#0F1938"/>
+<path id="Line 142_5" d="M236.886 394V390" stroke="#0F1938"/>
+<path id="Line 143_5" d="M241.108 394V390" stroke="#0F1938"/>
+<path id="Line 144_5" d="M245.334 394V390" stroke="#0F1938"/>
+<path id="Line 145_5" d="M249.557 394V390" stroke="#0F1938"/>
+<path id="Line 146_5" d="M253.78 394V390" stroke="#0F1938"/>
+</g>
+<text id="1_2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="412.67">1</tspan></text>
+<text id="2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="49.797" y="412.67">2</tspan></text>
+<text id="3" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="100.557" y="412.67">3</tspan></text>
+<text id="4" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="152.716" y="412.67">4</tspan></text>
+<text id="5" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="203.517" y="412.67">5</tspan></text>
+<text id="6" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="254.013" y="412.67">6</tspan></text>
+</g>
+</g>
+<g id="Lines">
+<path id="Vector 3" d="M245 221C221.992 330.161 214 382 90 382" stroke="#3749A9" stroke-width="2"/>
+<path id="Vector 4" opacity="0.3" d="M2 220.036C86.3638 123.565 128.748 337 245 337" stroke="#3749A9" stroke-width="2"/>
+</g>
+</g>
+<text id="textLegend1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="25" y="11.17">Messenger A</tspan></text>
+<text id="textLegend2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="25" y="28.17">Messenger B</tspan></text>
+<line id="Line 299" opacity="0.5" x1="2" y1="7" x2="17" y2="7" stroke="#3749A9" stroke-width="2"/>
+<line id="Line 300" x1="2" y1="24" x2="17" y2="24" stroke="#3749A9" stroke-width="2"/>
+<text id="textXaxis" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="212.132" y="434.17">timescale</tspan></text>
+<text id="textLabel2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="2" y="67.17">Nonlinear </tspan><tspan x="2" y="81.17">logarithmic scale </tspan><tspan x="2" y="95.17">displaying monthly </tspan><tspan x="2" y="109.17">active users</tspan></text>
+<text id="textLabel1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="161" y="11.17">Each line shows the </tspan><tspan x="161" y="25.17">development of </tspan><tspan x="161" y="39.17">values over time</tspan></text>
+<line id="Line 272" x1="14.5" y1="149" x2="14.5" y2="117" stroke="#0F1938"/>
+</g>
+</svg>

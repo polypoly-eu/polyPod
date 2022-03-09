@@ -31,6 +31,9 @@ import Loading from "./components/loading/loading.jsx";
 
 import "./styles.css";
 
+import manifestData from "./static/manifest.json";
+window.manifestData = manifestData;
+
 import i18n from "./i18n.js";
 
 const FacebookImporter = () => {
@@ -62,7 +65,7 @@ const FacebookImporter = () => {
     }
 
     return (
-        <div className="facebook-importer poly-theme-dark">
+        <div className="facebook-importer poly-theme poly-theme-dark">
             {pod ? (
                 <Switch>
                     <Route exact path="/">

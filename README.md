@@ -8,13 +8,12 @@ But it will be much more than that. For more information please read the
 
 ## Structure
 
-- [android](android): The polyPod app for Android
-- [ios](ios): The polyPod app for iOS
-- [podjs](podjs): A polyPod implementation that runs in a regular browser
+- [platform](platform): The polyPod platform
 - [features](features): polyPod features
-- [core](core): The polyPod core modules
+- [feature-utils](feature-utils): Utilities used by features
+- [assets](assets): Assets shared across the polyPod and features
 - [build](build): The build logic
-- [assets](assets): Assets shared across the polyPod and features.
+- [dev-utils](dev-utils): Utilities used at build time
 
 ## Requirements
 
@@ -22,18 +21,22 @@ Just [Node.js](https://nodejs.org/) version 16.x or newer.
 
 ## Building
 
-Just execute:
+If you're on Windows, please follow the steps in
+[dev-utils/windows](dev-utils/windows) first.
+
+In general, you just need to run:
 
     $ ./build.js
 
-This will build the cross platform code base - mainly the core code and bundled
-features.
-
-After this you can build [android](android), [ios](ios), or try one of the
-features, e.g. [features/example](features/example).
-
 > (Yes, we have a custom build script, you can read more about why [here](build)
 > if you're curious.)
+
+This will build the platform independent code, including all the bundled
+features, as well as [podjs](platform/podjs).
+
+After this you can build the [platform](platform)
+(e.g. [android](platform/android) or [ios](platform/ios)), or try one of the
+features (e.g. [features/example](features/example)).
 
 ## Testing
 
