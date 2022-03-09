@@ -69,6 +69,6 @@ install_distribution_prerequisites:
 	mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
 	@echo $(value DISTRIBUTION_PROVISIONING_PROFILE) | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/cooppolypolypolypod__iOS_App_Store_Distribution.mobileprovision
 
-	# 3. App Store Connect API Key. altool will automtically use the private key from the private_keys folder.
+	# 3. App Store Connect API Key. altool will automatically use the private key from the private_keys folder.
 	mkdir -p ~/private_keys
 	@echo $(value APPSTORE_CONNECT_API_KEY) | base64 --decode > ~/private_keys/AuthKey_$(value APPSTORE_API_KEY_ID).p8
