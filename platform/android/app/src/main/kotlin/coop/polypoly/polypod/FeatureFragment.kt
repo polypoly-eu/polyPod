@@ -89,6 +89,7 @@ open class FeatureFragment : Fragment() {
 
     private lateinit var feature: Feature
     private lateinit var foregroundResources: ForegroundResources
+    // Public for test purposes
     lateinit var featureContainer: FeatureContainer
 
     private val errorDialog: AlertDialog by lazy {
