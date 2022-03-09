@@ -123,17 +123,6 @@ class CommunicationThroughPodApiWorks {
         execute { canGetArrayWithMultipleQuadsFromPolyInSelect() }
     }
 
-    private fun canDoSimpleFetchGet() {
-        clickButton("comm.polyOut.fetch.simple")
-
-        waitUntil({
-            onFeature()
-                .withElement(findElement(Locator.ID, "status"))
-                .check(webMatches(getText(), `is`("All OK")))
-        })
-        assertThat(polyOut.fetchWasCalled).isTrue()
-    }
-
     private fun whenCalledWithNoMethodSpecified_methodIsEmpty() {
         clickButton("comm.polyOut.fetch.empty_method")
 
