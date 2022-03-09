@@ -1,0 +1,25 @@
+.block-legend div {
+  display: inline-block;
+}
+
+.block-legend .legend-entry div {
+  width: 12px;
+  height: 12px;
+  margin: 0 4px 0 12px;
+}
+
+.block-legend > :first-child div {
+  margin-left: 0;
+}
+
+.line-legend div {
+  display: flex;
+  align-items: center;
+}
+
+.line-legend .legend-entry div {
+  width: 15px;
+  height: 2px;
+  margin-right: 4px;
+  display: inline-block;
+}
