@@ -105,7 +105,7 @@ open class PodApi(
 
     private suspend fun handlePolyOutWriteFile(args: List<Value>): Value {
         logger.debug("dispatch() -> polyOut.readFile")
-        val result = polyOut.writeFile(
+        polyOut.writeFile(
             args[0].asStringValue().toString(),
             args[1].asBinaryValue().asByteBuffer()
         )
