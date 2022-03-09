@@ -1,4 +1,4 @@
-name: Testing polyPod in iOS + instrumentation
+name: polyPod iOS/Android integration test
 on:
     push:
         paths:
@@ -16,7 +16,7 @@ on:
             - "platform/android/**"
 jobs:
     test:
-        name: Testing polyPod iOS app
+        name: Test polyPod iOS and Android app
         runs-on: macOS-latest
         steps:
             - name: Checkout repository
