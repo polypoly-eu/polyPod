@@ -20,6 +20,9 @@ export default function QuestionScreen() {
         RangeQuestion: RangeQuestion,
     };
 
+    // TO-FIX: this can't work! screen() returns nothing, only throws an error!
+    // not sure what we want to do here.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const Card = components[currentQuestion.screen() as any];
 
     return (

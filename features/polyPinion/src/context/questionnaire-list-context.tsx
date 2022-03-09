@@ -26,11 +26,15 @@ import { storeAnswers, loadAnswers } from "./answers-storage";
 export const QuestionnaireListContext = createContext<{
     triggerUpdate: () => void;
     saveQuestionnaireAnswers: (questionnaire: Questionnaire) => void;
-    markQuestionaireSubmitted: (questionnaire: Questionnaire) => void;
+    markQuestionnaireSubmitted: (questionnaire: Questionnaire) => void;
     questionaireInitializationStatus: boolean;
+    // TODO: set a type for questionnaires as we should know their format
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     questionnaireList: any[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setQuestionnaireList: (newList: any[]) => void;
     updateStoredQuestionnaires: () => Promise<void>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }>({} as any);
 
 export const QuestionnaireListProvider: React.FC = ({ children }) => {
@@ -51,7 +55,7 @@ export const QuestionnaireListProvider: React.FC = ({ children }) => {
         storeAnswers(questionnaire);
     };
 
-    const markQuestionaireSubmitted = (questionnaire: Questionnaire) => {
+    const markQuestionnaireSubmitted = (questionnaire: Questionnaire) => {
         questionnaire.updateSubmittedTime();
         saveQuestionnaireAnswers(questionnaire);
         triggerUpdate();
@@ -73,6 +77,7 @@ export const QuestionnaireListProvider: React.FC = ({ children }) => {
         }
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const downloadAndStoreQuestionnaire = async function (questionaireMetadata: any) {
         const responseContent = await downloadQuestionnaireData(
             questionaireMetadata.questionnaireId
@@ -89,18 +94,19 @@ export const QuestionnaireListProvider: React.FC = ({ children }) => {
 
     const getNewActiveQuestionnairesMetadata = async () => {
         const resultValue = await downloadActiveQuestionnairesMetadata();
-        const allActiveQuestionnairesMetadata = JSON.parse(resultValue);
-        if (
-            allActiveQuestionnairesMetadata === null ||
-            allActiveQuestionnairesMetadata.length === 0
-        ) {
+        // TO-FIX: define a proper type for this JSON string object
+        // we should know format of questionnairesMetadata
+        const allActiveQuestionnairesMetadataJSON = JSON.parse(resultValue);
+        if (allActiveQuestionnairesMetadataJSON === null) {
             return [];
         }
 
-        const questionnairesIndex = questionnaireList.map((questionnaire) => questionnaire.id);
+        const questionnairesIndexes = questionnaireList.map((questionnaire) => questionnaire.id);
         const newMetadata = [];
-        for (const questionaireMetadata of allActiveQuestionnairesMetadata) {
-            if (!questionnairesIndex.includes(questionaireMetadata.questionnaireId)) {
+        for (const questionaireMetadata of allActiveQuestionnairesMetadataJSON) {
+            // TODO: questionaireMetadata is a string
+            // this seems buggy as we cannot access 'questionnaireId' on a real json object string
+            if (!questionnairesIndexes.includes(questionaireMetadata.questionnaireId)) {
                 newMetadata.push(questionaireMetadata);
             }
         }
@@ -186,7 +192,7 @@ export const QuestionnaireListProvider: React.FC = ({ children }) => {
             value={{
                 triggerUpdate,
                 saveQuestionnaireAnswers,
-                markQuestionaireSubmitted,
+                markQuestionnaireSubmitted: markQuestionnaireSubmitted,
                 questionaireInitializationStatus,
                 questionnaireList,
                 setQuestionnaireList,

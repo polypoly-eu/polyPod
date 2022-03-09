@@ -7,7 +7,8 @@ import submitAnswers from "../../server/answer-submission";
 import { useHistory } from "react-router-dom";
 
 export default function SubmitSurveyButton({ title, onStart = () => {}, onFinished = () => {} }) {
-    const { markQuestionaireSubmitted } = useContext(QuestionnaireListContext);
+    const { markQuestionnaireSubmitted: markQuestionnaireSubmitted } =
+        useContext(QuestionnaireListContext);
     const { getQuestionnaire } = useContext(QuestionnaireContext);
     const history = useHistory();
 
@@ -18,7 +19,7 @@ export default function SubmitSurveyButton({ title, onStart = () => {}, onFinish
                 onStart();
                 submitAnswers(getQuestionnaire())
                     .then(() => {
-                        markQuestionaireSubmitted(getQuestionnaire());
+                        markQuestionnaireSubmitted(getQuestionnaire());
                         onFinished();
                         history.push("/survey-submitted");
                     })
@@ -28,7 +29,7 @@ export default function SubmitSurveyButton({ title, onStart = () => {}, onFinish
                         } catch (_) {
                             /* do nothing */
                         }
-                        // Make sure this is called, as otherwise the Loading screen will not dissapear.
+                        // Make sure this is called, as otherwise the Loading screen will not disappear.
                         onFinished();
                         history.push("/survey-error");
                     });
