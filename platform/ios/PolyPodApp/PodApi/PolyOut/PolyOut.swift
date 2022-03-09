@@ -10,6 +10,7 @@ protocol PolyOutProtocol {
 
 class PolyOut: PolyOutProtocol {
     let session: NetworkSession
+    var activeFeature: Feature?
     
     init(session: NetworkSession = URLSession.shared) {
         self.session = session
