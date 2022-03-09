@@ -17,10 +17,11 @@ import * as RDF from "rdf-js";
 export abstract class Model {
     abstract termType: string;
 
-    equals(other: RDF.Term | null | undefined): boolean {
-        if (!other || other.termType !== this.termType) return false;
+    equals(other: RDF.Term | null): boolean {
+        if (other === null || other === undefined || other.termType !== this.termType) return false;
 
         for (const [key, value] of Object.entries(this)) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const otherValue = (other as any)[key];
             if (value instanceof Model) {
                 if (!value.equals(otherValue)) return false;

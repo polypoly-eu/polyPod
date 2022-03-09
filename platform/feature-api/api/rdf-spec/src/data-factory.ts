@@ -3,13 +3,11 @@
  *
  * @packageDocumentation
  */
-
 import fc from "fast-check";
 import { gens } from "./gen";
 import { BaseQuad, DataFactory, Quad, Variable } from "rdf-js";
 import { assert } from "chai";
 import { BlankNode, DefaultGraph, Literal, NamedNode } from "rdf-data-factory";
-import { Term } from "n3";
 
 /**
  * Class containing test cases for data factories. Use [[DataFactorySpec.run]] to execute all tests.
@@ -675,22 +673,27 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                         it(key, () => {
                             fc.assert(
                                 fc.property(g, (term) => {
+                                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                     assert((term as any).equals(term));
                                 })
                             );
                         });
             });
+
             describe("not equal (terms)", () => {
                 const keys = ["namedNode", "blankNode", "literal", "variable"];
                 for (const key1 of keys)
                     for (const key2 of keys)
                         if (key1 !== key2)
                             it(`${key1}/${key2}`, () => {
+                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                 const gen1 = (gen as any)[key1];
+                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                 const gen2 = (gen as any)[key2];
                                 if (gen1 === undefined || gen2 === undefined) return;
                                 fc.assert(
                                     fc.property(gen1, gen2, (term1, term2) => {
+                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                         assert.equal((term1 as any).equals(term2), false);
                                     })
                                 );
