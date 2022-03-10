@@ -352,14 +352,14 @@ let files = new Map<string, Stats>();
 class BrowserPolyNav implements PolyNav {
     static readonly filesKey = "files";
     actions?: { [key: string]: () => void };
-    private keyUpListener: any = null;
+    private keyUpListener: ((key: KeyboardEvent) => void) | undefined;
 
     async openUrl(url: string): Promise<void> {
         console.log(`polyNav: Attempt to open URL: ${url}`);
     }
 
     async setActiveActions(actions: string[]): Promise<void> {
-        const actionKeys: any = {
+        const actionKeys: { [key: string]: string } = {
             Escape: "back",
             s: "search",
             i: "info",
@@ -374,8 +374,8 @@ class BrowserPolyNav implements PolyNav {
                 `polyNav: Keyboard navigation available: ${actionUsage}`
             );
         }
-        this.keyUpListener = ({ key }: any) => {
-            const action = actionKeys[key];
+        this.keyUpListener = (key: KeyboardEvent) => {
+            const action = actionKeys[key.key];
             if (actions.includes(action)) this.actions?.[action]?.();
         };
         window.addEventListener("keyup", this.keyUpListener);

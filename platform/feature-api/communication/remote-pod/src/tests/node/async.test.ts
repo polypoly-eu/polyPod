@@ -1,4 +1,4 @@
-import { Pod, PolyLifecycle, DefaultPod } from "@polypoly-eu/pod-api";
+import { Pod, PolyLifecycle, DefaultPod, FS } from "@polypoly-eu/pod-api";
 import { Volume } from "memfs";
 import { dataset } from "@rdfjs/dataset";
 import fetch from "node-fetch";
@@ -12,10 +12,10 @@ import chaiAsPromised from "chai-as-promised";
 chai.use(chaiAsPromised);
 
 describe("Async pod", () => {
-    describe("Resolved promise", () => {
-        const fs = new Volume().promises as any;
-        const underlying = new DefaultPod(dataset(), fs, fetch);
+    const fs = new Volume().promises as unknown as FS;
+    const underlying = new DefaultPod(dataset(), fs, fetch);
 
+    describe("Resolved promise", () => {
         podSpec(
             new AsyncPod(Promise.resolve(underlying), new DataFactory(false)),
             "/",
@@ -24,9 +24,6 @@ describe("Async pod", () => {
     });
 
     describe("Delayed promise", () => {
-        const fs = new Volume().promises as any;
-        const underlying = new DefaultPod(dataset(), fs, fetch);
-
         const delayed = new Promise<Pod>((resolve) => {
             setTimeout(() => resolve(underlying), 500);
         });
@@ -36,11 +33,8 @@ describe("Async pod", () => {
 
     // TODO move to api, duplicated code
     describe("Lifecycle", () => {
-        const fs = new Volume().promises as any;
-        const underlying = new DefaultPod(dataset(), fs, fetch);
-
         let pod: Pod;
-        let log: any[] = [];
+        let log: Array<(string | boolean)[]>;
 
         beforeEach(() => {
             log = [];
@@ -64,6 +58,7 @@ describe("Async pod", () => {
         it("Starts feature", async () => {
             await pod.polyLifecycle!.startFeature("hi", false);
             await pod.polyLifecycle!.startFeature("yo", true);
+
             assert.deepEqual(log, [
                 ["hi", false],
                 ["yo", true],

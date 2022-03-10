@@ -27,7 +27,7 @@ export default function AppNavigator() {
     //TODO: RDF triple store
     const [onboardingShown, setOnboardingShown] = useState(null);
     const [languageInitialized, setLanguageInitialized] = useState(false);
-    const { t, i18n, ready } = useTranslation(null, { useSuspense: false });
+    const { i18n, ready } = useTranslation(null, { useSuspense: false });
     const { questionaireInitializationStatus, questionnaireList, updateStoredQuestionnaires } =
         useContext(QuestionnaireListContext);
 
@@ -52,15 +52,15 @@ export default function AppNavigator() {
                     // Only change the language in case it needed. This will only happen the first
                     // time when opening the app, as then savedLanguage will be null.
                     if (savedLanguage === null) {
-                        return storeLanguage(languageCode);
+                        // TODO: return stored languageCode
                     }
                 })
                 .finally(() => setLanguageInitialized(true));
         };
 
-        // Only proced if questionnaires where loaded and the translation module is initialized.
+        // Only proceed if questionnaires where loaded and the translation module is initialized.
         if (questionaireInitializationStatus && ready) {
-            const currentLanguageCode = getStoredOrPhoneLanguageCode(t);
+            const currentLanguageCode = getStoredOrPhoneLanguageCode();
             currentLanguageCode.then((value) => setLanguage(value));
         }
     }, [questionaireInitializationStatus, ready]);
@@ -83,6 +83,7 @@ export default function AppNavigator() {
         async function getOnboardingShown() {
             let wasShown = await AsyncStorage.getItem("onboardingshown");
             if (wasShown == null) {
+                // TODO - bug - we assign a boolean to a string!
                 wasShown = false;
             }
             setOnboardingShown(wasShown);

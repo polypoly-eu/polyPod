@@ -18,8 +18,10 @@ import { Handler, mapPort, Port, ReceivePort } from "./port";
  * Note that Browser `MessagePort`s use the structured clone algorithm; that is, an object sent on the port will be
  * received as a different object.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function fromBrowserMessagePort(port: MessagePort): Port<MessageEvent, any> {
     return {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         send(value: any): void {
             port.postMessage(value);
         },
@@ -69,6 +71,7 @@ export function fromBrowserMessagePort(port: MessagePort): Port<MessageEvent, an
  * </html>
  * ```
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function iframeInnerPort(secret: string): Promise<Port<any, any>> {
     return new Promise((resolve, reject) => {
         const handler: Handler<MessageEvent> = (event) => {
@@ -119,7 +122,9 @@ export function iframeInnerPort(secret: string): Promise<Port<any, any>> {
 export function iframeOuterPort(
     secret: string,
     iframe: HTMLIFrameElement,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     init?: (port: ReceivePort<any>) => void
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Port<any, any> {
     const { port1, port2 } = new MessageChannel();
     const rawPort = fromBrowserMessagePort(port1);
