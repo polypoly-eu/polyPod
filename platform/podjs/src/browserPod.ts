@@ -403,7 +403,7 @@ can also navigate backwards using the browser's back functionality.`
         if (this.popStateListener)
             window.removeEventListener("popstate", this.popStateListener);
 
-        this.popStateListener = (_event: any) => {
+        this.popStateListener = () => {
             // NOTE: This triggers "back" action for both Back and Forward
             // browser buttons
             if (actions.includes("back")) this.actions?.["back"]?.();
