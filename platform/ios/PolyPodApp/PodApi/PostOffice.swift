@@ -62,10 +62,6 @@ class PostOffice {
             handleInfo(method: method, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
-        case "network":
-            handleNetwork(method: method, args: args, completionHandler: { response, error in
-                self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
-            })
         case "endpoint":
             handleEndpoint(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
@@ -434,26 +430,6 @@ extension PostOffice {
     
     private func handleInfoGetVersion(completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         completionHandler(.string(PodApi.shared.info.getVersion()), nil)
-    }
-}
-
-extension PostOffice {
-    private func handleNetwork(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        switch method {
-        case "httpPost":
-            handleNetworkHttpPost(args: args, completionHandler: completionHandler)
-        default:
-            Log.error("PolyNav method unknown: \(method)")
-        }
-    }
-    
-    private func handleNetworkHttpPost(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        let url = args[0] as! String
-        let body = args[1] as! String
-        let contentType = args[2] as? String
-        let authorization = args[3] as? String
-        let networkResponse = PodApi.shared.network.httpPost(url: url, body: body, contentType: contentType, authorization: authorization)
-        completionHandler(networkResponse.payload != nil ? .string(networkResponse.payload!) : .nil, nil)
     }
 }
 
