@@ -51,10 +51,10 @@ class Network: NetworkProtocol {
             data, response, error in
             guard let response = response as? HTTPURLResponse,
                   error == nil else {
-                errorMessage = error?.localizedDescription ?? "Unknown error"
-                semaphore.signal()
-                return
-            }
+                      errorMessage = error?.localizedDescription ?? "Unknown error"
+                      semaphore.signal()
+                      return
+                  }
             
             guard (200 ... 299) ~= response.statusCode else {
                 errorMessage = "Bad response code: \(response.statusCode)"
@@ -105,10 +105,10 @@ class Network: NetworkProtocol {
             data, response, error in
             guard let response = response as? HTTPURLResponse,
                   error == nil else {
-                errorMessage = error?.localizedDescription ?? "Unknown error"
-                semaphore.signal()
-                return
-            }
+                      errorMessage = error?.localizedDescription ?? "Unknown error"
+                      semaphore.signal()
+                      return
+                  }
             
             guard (200 ... 299) ~= response.statusCode else {
                 errorMessage = "Bad response code: \(response.statusCode)"
@@ -122,8 +122,6 @@ class Network: NetworkProtocol {
         }
         task.resume()
         semaphore.wait()
-        
-        
         
         if let errorMessage = errorMessage {
             Log.error("network.httpGet failed: \(errorMessage)")
