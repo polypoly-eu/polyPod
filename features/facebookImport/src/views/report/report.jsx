@@ -23,7 +23,7 @@ const ReportView = () => {
         if (response.responseCode > 299)
             console.error(
                 "Failed to send report, response code:",
-                responseCode
+                response.responseCode
             );
         setReportResult(!response.responseCode > 299);
         handleBack();
