@@ -3,8 +3,6 @@ import type {
     ExternalFile,
     Endpoint,
     EndpointResponse,
-    Network,
-    NetworkResponse,
     Info,
     Matcher,
     Pod,
@@ -305,6 +303,24 @@ class PodJsInfo implements Info {
     }
 }
 
+interface NetworkResponse {
+    payload?: string;
+    responseCode: number | undefined;
+}
+interface Network {
+    httpPost(
+        url: string,
+        body: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<NetworkResponse>;
+    httpGet(
+        url: string,
+        contentType?: string,
+        authorization?: string
+    ): Promise<NetworkResponse>;
+}
+
 class BrowserNetwork implements Network {
     async httpPost(
         url: string,
@@ -559,6 +575,5 @@ export class BrowserPod implements Pod {
     public readonly polyOut = new LocalStoragePolyOut();
     public readonly polyNav = new BrowserPolyNav();
     public readonly info = new PodJsInfo();
-    public readonly network = new BrowserNetwork();
     public readonly endpoint = new BrowserEndpoint();
 }

@@ -10,8 +10,6 @@ import {
     EncodingOptions,
     Entry,
     Matcher,
-    Network,
-    NetworkResponse,
     Stats,
     Info,
 } from "@polypoly-eu/pod-api";
@@ -107,19 +105,6 @@ class AsyncInfo implements Info {
     }
 }
 
-class AsyncNetwork implements Network {
-    constructor(private readonly promise: Promise<Network>) {}
-
-    async httpPost(
-        url: string,
-        body: string,
-        contentType?: string,
-        authorization?: string
-    ): Promise<NetworkResponse> {
-        return (await this.promise).httpPost(url, body, contentType, authorization);
-    }
-}
-
 class AsyncEndpoint implements Endpoint {
     constructor(private readonly promise: Promise<Endpoint>) {}
 
@@ -164,7 +149,6 @@ export class AsyncPod implements Pod {
     readonly polyIn: PolyIn;
     readonly polyNav: PolyNav;
     readonly info: Info;
-    readonly network: Network;
     readonly polyLifecycle: PolyLifecycle;
     readonly endpoint: Endpoint;
 
@@ -173,7 +157,6 @@ export class AsyncPod implements Pod {
         this.polyIn = new AsyncPolyIn(promise.then((pod) => pod.polyIn));
         this.polyNav = new AsyncPolyNav(promise.then((pod) => pod.polyNav));
         this.info = new AsyncInfo(promise.then((pod) => pod.info));
-        this.network = new AsyncNetwork(promise.then((pod) => pod.network));
         this.polyLifecycle = new AsyncPolyLifecycle(promise.then((pod) => pod.polyLifecycle));
         this.endpoint = new AsyncEndpoint(promise.then((pod) => pod.endpoint));
     }

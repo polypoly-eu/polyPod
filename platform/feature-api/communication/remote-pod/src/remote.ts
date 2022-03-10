@@ -8,8 +8,6 @@ import {
     ExternalFile,
     Stats,
     Matcher,
-    Network,
-    NetworkResponse,
     Info,
     Entry,
     EndpointResponse as APIResponse,
@@ -77,15 +75,6 @@ type InfoEndpoint = ObjectEndpointSpec<{
     getVersion(): ValueEndpointSpec<string>;
 }>;
 
-type NetworkEndpoint = ObjectEndpointSpec<{
-    httpPost(
-        url: string,
-        body: string,
-        contentType?: string,
-        authorization?: string
-    ): ValueEndpointSpec<NetworkResponse>;
-}>;
-
 type EndpointEndpoint = ObjectEndpointSpec<{
     send(
         endpointId: string,
@@ -108,7 +97,6 @@ type PodEndpoint = ObjectEndpointSpec<{
     polyLifecycle(): PolyLifecycleEndpoint;
     polyNav(): PolyNavEndpoint;
     info(): InfoEndpoint;
-    network(): NetworkEndpoint;
     endpoint(): EndpointEndpoint;
 }>;
 
@@ -311,13 +299,6 @@ export class RemoteClientPod implements Pod {
         };
     }
 
-    get network(): Network {
-        return {
-            httpPost: (url: string, body: string, contentType?: string, authorization?: string) =>
-                this.rpcClient.network().httpPost(url, body, contentType, authorization)(),
-        };
-    }
-
     get endpoint(): Endpoint {
         return {
             send: (
@@ -418,10 +399,6 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
 
     info(): ServerOf<InfoEndpoint> {
         return this.pod.info;
-    }
-
-    network(): ServerOf<NetworkEndpoint> {
-        return this.pod.network;
     }
 
     endpoint(): ServerOf<EndpointEndpoint> {

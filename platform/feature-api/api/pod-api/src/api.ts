@@ -175,23 +175,6 @@ export interface Info {
 }
 
 /**
- * `Network` specifies how features can communicate with other devices or servers.
- */
-export interface Network {
-    /**
-     * A way for features to send HTTP POST requests
-     *
-     * @returns an error message if something went wrong, `undefined` upon success.
-     */
-    httpPost(
-        url: string,
-        body: string,
-        contentType?: string,
-        authorization?: string
-    ): Promise<NetworkResponse>;
-}
-
-/**
  * @hidden
  */
 export interface PolyLifecycle {
@@ -224,11 +207,6 @@ export interface Endpoint {
         contentType?: string,
         authorization?: string
     ): Promise<EndpointResponse>;
-}
-
-export interface NetworkResponse {
-    payload?: string;
-    responseCode: number | undefined;
 }
 
 // in case a separate Response is needed for Endpoint Response
@@ -316,12 +294,6 @@ export interface Pod {
      * definition.
      */
     readonly endpoint: Endpoint;
-    /**
-     * `network` is the interface to interact with other devices over the network. Refer to [[Network]] for its
-     * definition.
-     */
-    readonly network: Network;
-
     /**
      * @hidden
      */

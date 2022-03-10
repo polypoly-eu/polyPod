@@ -9,7 +9,7 @@
 
 import * as RDF from "rdf-js";
 import { dataFactory } from "@polypoly-eu/rdf";
-import { Pod, PolyIn, PolyOut, PolyNav, Info, Network, Endpoint, EndpointResponse } from "./api";
+import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint, EndpointResponse } from "./api";
 import type { Fetch, Response, RequestInit } from "@polypoly-eu/fetch-spec";
 import { EncodingOptions, FS, Stats } from "./fs";
 import { Entry } from ".";
@@ -162,17 +162,6 @@ export class DefaultPod implements Pod {
                 throw new Error("Not implemented");
             },
             getVersion() {
-                throw new Error("Not implemented");
-            },
-        };
-    }
-    /**
-     * The [[Network]] interface. See [[Network]] for the description.
-     */
-
-    get network(): Network {
-        return {
-            httpPost(url: string, body: string, contentType?: string, authorization?: string) {
                 throw new Error("Not implemented");
             },
         };
