@@ -15,15 +15,17 @@ const ReportView = () => {
     const handleSendReport = async () => {
         setLoading(true);
 
-        const error = await window.pod.endpoint.send(
-            process.env.POLYPOD_POLYPEDIA_REPORT_URL,
-            "fbImport",
+        const response = await window.pod.endpoint.send(
+            "polyPedia",
             JSON.stringify(unrecognizedData.jsonReport),
-            "application/json",
-            process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION
+            "application/json"
         );
-        if (error) console.error("Failed to send report:", error);
-        setReportResult(!error);
+        if (response.responseCode > 299)
+            console.error(
+                "Failed to send report, response code:",
+                responseCode
+            );
+        setReportResult(!response.responseCode > 299);
         handleBack();
     };
 
