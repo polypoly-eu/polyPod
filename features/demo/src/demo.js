@@ -31,7 +31,6 @@ window.addEventListener("DOMContentLoaded", () => {
     document
         .querySelector(".endpoint-post")
         .addEventListener("click", async () => {
-            const featureIdToken = "demo";
             const endpointId = "demoTestEndpoint";
             const response = await window.pod.endpoint.send(endpointId, "abc");
             console.log(
