@@ -31,7 +31,6 @@ import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.info.Info
 import coop.polypoly.polypod.logging.LoggerFactory
-import coop.polypoly.polypod.network.Network
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
@@ -39,7 +38,6 @@ import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import kotlinx.coroutines.CompletableDeferred
 import java.io.ByteArrayInputStream
-import java.nio.channels.CompletionHandler
 import java.util.zip.ZipFile
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -60,7 +58,6 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             webView = webView
         ),
         Info(),
-        Network(context),
         Endpoint(context, webView = webView)
     )
 
