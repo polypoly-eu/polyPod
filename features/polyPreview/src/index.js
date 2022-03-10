@@ -4,6 +4,9 @@ import i18n from "./i18n.js";
 import "swiper/css";
 import "./styles.css";
 
+import manifestData from "./static/manifest.json";
+window.manifestData = manifestData;
+
 function getStaticContent(progress) {
     const circle = document.getElementsByClassName("circle")[0];
 

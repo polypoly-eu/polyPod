@@ -1,5 +1,5 @@
 import { html } from "lit-element";
-import "../../src/lit-components/buttons";
+import "../../../src/lit-components/buttons";
 import { themeConfiguration } from "./themeConfiguration";
 
 export default {

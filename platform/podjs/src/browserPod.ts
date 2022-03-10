@@ -13,6 +13,12 @@ import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
+import { Manifest, readManifest } from "@polypoly-eu/manifest-parser";
+
+const NAV_FRAME_ID = "polyNavFrame";
+const NAV_DEFAULT_BACKGROUND_COLOR = "#ffffff";
+const NAV_DARK_FOREGROUND_COLOR = "#000000";
+const NAV_LIGHT_FOREGROUND_COLOR = "#ffffff";
 
 class LocalStoragePolyIn implements PolyIn {
     private static readonly storageKey = "polyInStore";
@@ -353,17 +359,30 @@ class BrowserPolyNav implements PolyNav {
     static readonly filesKey = "files";
     actions?: { [key: string]: () => void };
     private keyUpListener: ((key: KeyboardEvent) => void) | undefined;
+    private popStateListener: any = null;
 
     async openUrl(url: string): Promise<void> {
         console.log(`polyNav: Attempt to open URL: ${url}`);
+        const targetLink = (window.manifest?.links as Record<string, string>)[
+            url
+        ];
+        const permission = confirm(
+            `Feature ${window.manifest?.name} is trying to open URL ${targetLink}. Allow?`
+        );
+        if (permission) {
+            window.open(targetLink);
+        }
     }
 
     async setActiveActions(actions: string[]): Promise<void> {
+        if (actions.includes("back"))
+            window.history.pushState(document.title, document.title);
         const actionKeys: { [key: string]: string } = {
             Escape: "back",
             s: "search",
             i: "info",
         };
+
         if (this.keyUpListener)
             window.removeEventListener("keyup", this.keyUpListener);
         else {
@@ -371,7 +390,8 @@ class BrowserPolyNav implements PolyNav {
                 .map((pair) => `[${pair.join(" = ")}]`)
                 .join(", ");
             console.log(
-                `polyNav: Keyboard navigation available: ${actionUsage}`
+                `polyNav: Keyboard navigation available: ${actionUsage}. You
+can also navigate backwards using the browser's back functionality.`
             );
         }
         this.keyUpListener = (key: KeyboardEvent) => {
@@ -379,10 +399,24 @@ class BrowserPolyNav implements PolyNav {
             if (actions.includes(action)) this.actions?.[action]?.();
         };
         window.addEventListener("keyup", this.keyUpListener);
+
+        if (this.popStateListener)
+            window.removeEventListener("popstate", this.popStateListener);
+
+        this.popStateListener = (_event: any) => {
+            // NOTE: This triggers "back" action for both Back and Forward
+            // browser buttons
+            if (actions.includes("back")) this.actions?.["back"]?.();
+        };
+        window.addEventListener("popstate", this.popStateListener);
     }
 
     async setTitle(title: string): Promise<void> {
-        document.title = title;
+        window.currentTitle = title;
+        const injection = document.getElementById(
+            NAV_FRAME_ID
+        ) as HTMLIFrameElement;
+        injection?.contentWindow?.postMessage(title, "*");
     }
 
     async pickFile(type?: string): Promise<ExternalFile | null> {
@@ -430,6 +464,64 @@ class BrowserPolyNav implements PolyNav {
     }
 }
 
+declare global {
+    interface Window {
+        manifestData: Record<string, unknown>;
+        manifest: Manifest;
+        currentTitle: string;
+    }
+}
+
+/**
+ * Returns the relative luminance value of a feature color.
+ *
+ * @param featureColor - A six digit hex color string, e.g. #000000
+ */
+function luminance(featureColor: string): number {
+    const red = parseInt(featureColor.substr(1, 2), 16);
+    const green = parseInt(featureColor.substr(3, 2), 16);
+    const blue = parseInt(featureColor.substr(5, 2), 16);
+    // See: https://en.wikipedia.org/wiki/Relative_luminance
+    return red * 0.2126 + green * 0.7152 + blue * 0.0722;
+}
+
+function determineNavBarColors(manifest: Manifest): { fg: string; bg: string } {
+    const bg = manifest.primaryColor || NAV_DEFAULT_BACKGROUND_COLOR;
+    const brightnessThreshold = 80;
+    const fg =
+        luminance(bg) > brightnessThreshold
+            ? NAV_DARK_FOREGROUND_COLOR
+            : NAV_LIGHT_FOREGROUND_COLOR;
+    return { fg, bg };
+}
+
+function createNavBarFrame(title: string): HTMLElement {
+    const frame = document.createElement("iframe");
+    frame.style.display = "block";
+    frame.style.width = "100%";
+    frame.style.height = "50px";
+    frame.frameBorder = "0";
+    frame.scrolling = "no";
+    frame.id = NAV_FRAME_ID;
+
+    const navBarColors = determineNavBarColors(window.manifest);
+    const source = `
+    <html>
+        <body style="background-color: ${navBarColors.bg}">
+            <script>
+                window.addEventListener("message", (event) => {
+                    document.getElementById("title").textContent = event.data;
+                });
+            </script>
+            <h1 id="title" style="color: ${navBarColors.fg}">${title}<h1>
+        </body>
+    </html>
+    `;
+    const blob = new Blob([source], { type: "text/html" });
+    frame.src = URL.createObjectURL(blob);
+    return frame;
+}
+
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
     public readonly polyIn = new LocalStoragePolyIn();
@@ -437,4 +529,23 @@ export class BrowserPod implements Pod {
     public readonly polyNav = new BrowserPolyNav();
     public readonly info = new PodJsInfo();
     public readonly network = new BrowserNetwork();
+
+    constructor() {
+        window.addEventListener("load", async () => {
+            if (!window.manifestData) {
+                console.warn(
+                    `Unable to find feature manifest, navigation bar disabled.
+To get the navigation bar, expose the manifest's content as
+window.manifestData.`
+                );
+                return;
+            }
+            window.manifest = await readManifest(window.manifestData);
+            window.parent.currentTitle =
+                window.parent.currentTitle || window.manifest.name;
+            const frame = createNavBarFrame(window.parent.currentTitle);
+            document.body.prepend(frame);
+            document.title = window.manifest.name;
+        });
+    }
 }

@@ -37,6 +37,7 @@ jobs:
                       apiAndFeatures:
                       - 'build/**'
                       - 'features/**'
+                      - 'feature-utils/**'
                       - 'platform/feature-api/**'
                       - 'platform/podjs/**'
             - name: Lint core and features

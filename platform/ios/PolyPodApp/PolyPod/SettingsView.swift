@@ -71,6 +71,7 @@ struct SettingsView_Previews: PreviewProvider {
 private struct MainSection: View {
     @Binding var activeSection: Sections
     @State private var showVersion = false
+    @State private var shareLogs = false
     
     var body: some View {
         List() {
@@ -107,10 +108,18 @@ private struct MainSection: View {
                     label: "settings_licenses_title",
                     action: { activeSection = .licenses }
                 )
+                if !RuntimeInfo.isProduction {
+                    SettingsButton(label: "settings_export_logs",
+                                   action: {
+                        shareLogs = true
+                    })
+                }
             }
             .listRowInsets(
                 EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             )
+        }.sheet(isPresented: $shareLogs) {
+            ActivityViewController(activityItems: Log.logFiles)
         }
     }
 }
