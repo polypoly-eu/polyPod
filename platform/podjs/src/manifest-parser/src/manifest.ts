@@ -51,7 +51,8 @@ const mainDecoder = Decode.type({
         Decode.string,
         Decode.parse((string) => {
             const parsed = parseSemVer(string);
-            if (parsed === null) return Decode.failure(string, "version string");
+            if (parsed === null)
+                return Decode.failure(string, "version string");
 
             return Decode.success(parsed);
         })
@@ -67,13 +68,20 @@ const featureDecoder = Decode.type({
     translations: Decode.UnknownRecord,
 });
 
-export async function readManifest(packageManifest: Record<string, unknown>): Promise<Manifest> {
+export async function readManifest(
+    packageManifest: Record<string, unknown>
+): Promise<Manifest> {
     // There is no 'version' property in real feature manifests at this time, but to make this code
     // happy, we're simply adding one if it's missing.
     const manifestWithVersion = { ...packageManifest };
-    if (!("version" in manifestWithVersion)) manifestWithVersion.version = "1.0.0";
+    if (!("version" in manifestWithVersion))
+        manifestWithVersion.version = "1.0.0";
 
-    const rawMain = expect(manifestWithVersion, "Failed to parse main manifest", mainDecoder);
+    const rawMain = expect(
+        manifestWithVersion,
+        "Failed to parse main manifest",
+        mainDecoder
+    );
     const featureManifest = expect(
         manifestWithVersion,
         "Failed to parse Feature manifest",

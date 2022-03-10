@@ -13,7 +13,7 @@ import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
-import { Manifest, readManifest } from "@polypoly-eu/manifest-parser";
+import { Manifest, readManifest } from "./manifest-parser/src/manifest";
 
 const NAV_FRAME_ID = "polyNavFrame";
 const NAV_DEFAULT_BACKGROUND_COLOR = "#ffffff";

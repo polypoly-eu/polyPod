@@ -12,6 +12,10 @@ As for production use: A lot of features don't make sense in
 isolation, yet those that do can be easily deployed on a HTTP server
 by using `pod.js`.
 
+# manifest-parser
+
+Reference implementation of the Feature manifest format
+
 ## Limitations
 
 Currently, any feature including `pod.js` will become a fully
