@@ -52,8 +52,7 @@ export default function AppNavigator() {
                     // Only change the language in case it needed. This will only happen the first
                     // time when opening the app, as then savedLanguage will be null.
                     if (savedLanguage === null) {
-                        // TODO: following line actually does nothing! there's no storage
-                        return storeLanguage(languageCode);
+                        // TODO: return stored languageCode
                     }
                 })
                 .finally(() => setLanguageInitialized(true));

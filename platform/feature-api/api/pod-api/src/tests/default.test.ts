@@ -4,8 +4,12 @@ import { dataset } from "@rdfjs/dataset";
 import fetch from "node-fetch";
 import { Volume } from "memfs";
 import { getHttpbinUrl } from "@polypoly-eu/fetch-spec";
+import { FS } from "../fs";
 
 describe("Mock pod", () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    podSpec(new DefaultPod(dataset(), new Volume().promises as any, fetch), "/", getHttpbinUrl());
+    podSpec(
+        new DefaultPod(dataset(), new Volume().promises as unknown as FS, fetch),
+        "/",
+        getHttpbinUrl()
+    );
 });

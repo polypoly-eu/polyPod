@@ -7,8 +7,7 @@ import submitAnswers from "../../server/answer-submission";
 import { useHistory } from "react-router-dom";
 
 export default function SubmitSurveyButton({ title, onStart = () => {}, onFinished = () => {} }) {
-    const { markQuestionnaireSubmitted: markQuestionnaireSubmitted } =
-        useContext(QuestionnaireListContext);
+    const { markQuestionnaireSubmitted } = useContext(QuestionnaireListContext);
     const { getQuestionnaire } = useContext(QuestionnaireContext);
     const history = useHistory();
 

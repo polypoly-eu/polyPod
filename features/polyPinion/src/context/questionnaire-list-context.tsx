@@ -192,7 +192,7 @@ export const QuestionnaireListProvider: React.FC = ({ children }) => {
             value={{
                 triggerUpdate,
                 saveQuestionnaireAnswers,
-                markQuestionnaireSubmitted: markQuestionnaireSubmitted,
+                markQuestionnaireSubmitted,
                 questionaireInitializationStatus,
                 questionnaireList,
                 setQuestionnaireList,

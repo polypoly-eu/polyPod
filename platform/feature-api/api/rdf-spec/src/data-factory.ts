@@ -83,12 +83,12 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                     const id = "b1";
                     const term = this.dataFactory.blankNode(id);
 
-                    const mock: NamedNode = {
+                    const expectedMock: NamedNode = {
                         termType: "NamedNode",
                         value: id,
                         equals: () => true,
                     };
-                    assert.equal(term.equals(mock), false);
+                    assert.equal(term.equals(expectedMock), false);
                 });
 
                 it("should return false if value is not equal", () => {

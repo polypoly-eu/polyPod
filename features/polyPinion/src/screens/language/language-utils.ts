@@ -8,6 +8,6 @@ export const getStoredOrPhoneLanguageCode = async function () {
 };
 
 export const storeLanguage = async function (_languageCode: string) {
-    // TOFIX: do we really want to return here?
+    // TODO: do we really want to return here?
     return;
 };
