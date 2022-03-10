@@ -52,12 +52,8 @@ class Endpoint: EndpointProtocol {
                 completionHandler("404")
                 return
             }
-            guard let response = self.network.httpPost(url: endpointInfo.url, body: payload, contentType: contentType, authorization: endpointInfo.auth) else {
-                Log.error("endpoint.get failed: Endpoint \(endpointId) could not be reached")
-                completionHandler("404")
-                return
-            }
-            completionHandler(response)
+            let response = self.network.httpPost(url: endpointInfo.url, body: payload, contentType: contentType, authorization: endpointInfo.auth)
+            completionHandler(response.payload ?? "")
         }
     }
     
@@ -73,12 +69,8 @@ class Endpoint: EndpointProtocol {
                 completionHandler("404")
                 return
             }
-            guard let response = self.network.httpGet(url: endpointInfo.url, contentType: contentType, authorization: endpointInfo.auth) else {
-                Log.error("endpoint.get failed: Endpoint \(endpointId) could not be reached")
-                completionHandler("404")
-                return
-            }
-            completionHandler(response)
+            let response = self.network.httpGet(url: endpointInfo.url, contentType: contentType, authorization: endpointInfo.auth)
+            completionHandler(response.payload ?? "")
         }
     }
 }
