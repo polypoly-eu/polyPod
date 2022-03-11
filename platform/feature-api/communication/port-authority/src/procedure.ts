@@ -195,6 +195,7 @@ export function liftClient<Req, Res>(
     let id = 0;
     const pending = new Map<number, PromiseResolvers<Res>>();
     port.addHandler((response) => {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const { resolve, reject } = pending.get(response.id)!;
         if ("error" in response) reject(response.error);
         else resolve(response.response);

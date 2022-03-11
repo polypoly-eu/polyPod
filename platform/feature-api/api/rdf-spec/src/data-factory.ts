@@ -534,6 +534,7 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                     assert.equal(quad1.equals(quad2), false);
                 });
 
+                // TODO: recheck correctness of this test - what is a false value of a Term?
                 it("should return false if value is falsy", () => {
                     const subject = this.dataFactory.namedNode("http://example.org/subject");
                     const predicate = this.dataFactory.namedNode("http://example.org/predicate");
@@ -541,6 +542,7 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                     const graph = this.dataFactory.namedNode("http://example.org/graph");
                     const quad = this.dataFactory.quad(subject, predicate, object, graph);
 
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                     assert.equal(quad.equals(null!), false);
                 });
 

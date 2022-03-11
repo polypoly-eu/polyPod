@@ -139,13 +139,16 @@ class LocalStoragePolyOut implements PolyOut {
                     const zipEntry = entries.find(
                         (entry) => entry.filename == entryPath
                     );
-                    if (!zipEntry) {
-                        reject(new Error(`Zip entry not found: ${entryPath}`));
-                        return;
-                    }
-                    zipEntry.getData!(new zip.TextWriter()).then((data) => {
-                        resolve(new TextEncoder().encode(data));
-                    });
+
+                    zipEntry
+                        ? zipEntry
+                              .getData?.(new zip.TextWriter())
+                              .then((data: string | undefined) => {
+                                  resolve(new TextEncoder().encode(data));
+                              })
+                        : reject(
+                              new Error(`Zip entry not found: ${entryPath}`)
+                          );
                 });
                 return;
             }
