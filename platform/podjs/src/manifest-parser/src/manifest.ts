@@ -5,7 +5,6 @@ import { parse as parseSemVer, SemVer, Range } from "semver";
 
 export interface MainManifest {
     readonly name: string;
-    readonly version: SemVer;
 }
 
 export interface FeatureManifest {
@@ -47,16 +46,6 @@ const relativeDecoder = pipe(
 
 const mainDecoder = Decode.type({
     name: Decode.string,
-    version: pipe(
-        Decode.string,
-        Decode.parse((string) => {
-            const parsed = parseSemVer(string);
-            if (parsed === null)
-                return Decode.failure(string, "version string");
-
-            return Decode.success(parsed);
-        })
-    ),
 });
 
 const featureDecoder = Decode.type({
@@ -86,7 +75,6 @@ export async function readManifest(
 
     return {
         name: featureManifest.name,
-        version: rawMain.version,
         description: featureManifest.description,
         thumbnail: featureManifest.thumbnail,
         primaryColor: featureManifest.primaryColor,
