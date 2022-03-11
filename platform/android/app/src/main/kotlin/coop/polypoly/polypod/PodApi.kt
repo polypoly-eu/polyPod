@@ -256,17 +256,9 @@ open class PodApi(
         val authorization = args[3].let {
             if (it.isStringValue) it.asStringValue().toString() else null
         }
-        val response = endpoint
+        endpoint
             .send(endpointId, body, contentType, authorization)
-        return if (response == null) ValueFactory.newNil()
-        else    ValueFactory.newMap(mutableMapOf<Value, Value>(
-                ValueFactory.newString("payload") to
-                    if(response.payload == null)ValueFactory.newNil()
-                    else ValueFactory.newString(response.payload),
-                ValueFactory.newString("responseCode") to
-                    ValueFactory.newString(response.responseCode.toString())
-            )
-        )
+        return ValueFactory.newNil()
     }
 
     private suspend fun handleEndpointGet(args: List<Value>): Value {
@@ -278,17 +270,10 @@ open class PodApi(
         val authorization = args[2].let {
             if (it.isStringValue) it.asStringValue().toString() else null
         }
-        val response = endpoint
+        val data = endpoint
             .get(endpointId, contentType, authorization)
-        return if (response == null) ValueFactory.newNil()
-        else ValueFactory.newMap(mutableMapOf<Value, Value>(
-            ValueFactory.newString("payload") to
-                if(response.payload == null)ValueFactory.newNil()
-                else ValueFactory.newString(response.payload),
-            ValueFactory.newString("responseCode") to
-                ValueFactory.newInteger(response.responseCode)
-            )
-        )
+        return if (data == null) ValueFactory.newNil()
+        else ValueFactory.newString(data)
     }
 
     private fun decodePolyOutFetchCallArgs(args: Value): FetchInit {

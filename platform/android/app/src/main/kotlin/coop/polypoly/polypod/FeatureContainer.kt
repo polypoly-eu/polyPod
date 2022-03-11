@@ -26,7 +26,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.webkit.WebViewAssetLoader
 import coop.polypoly.polypod.endpoint.Endpoint
 import coop.polypoly.polypod.endpoint.EndpointObserver
-import coop.polypoly.polypod.endpoint.EndpointResponse
 import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.info.Info
@@ -38,6 +37,7 @@ import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import kotlinx.coroutines.CompletableDeferred
 import java.io.ByteArrayInputStream
+import java.lang.Exception
 import java.util.zip.ZipFile
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -126,14 +126,13 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             .show()
     }
 
-
     private suspend fun approveEndpointFetch(
         endpointId: String?,
-        completion: suspend (Boolean) -> EndpointResponse
-    ): EndpointResponse {
+        completion: suspend (Boolean) -> String?
+    ): String? {
         var fetchApproval: CompletableDeferred<Boolean?>? =
             CompletableDeferred()
-        val featureName = feature?.name ?: return EndpointResponse(payload = "Not a Valid Feature", responseCode = 605)
+        val featureName = feature?.name ?: throw Exception("endpoint failed")
         val message = context?.getString(
             R.string.message_approve_endpoint_fetch, featureName, endpointId
         )
@@ -152,9 +151,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         (fetchApproval?.await())?.let {
             return completion(it)
         }
-        return EndpointResponse(payload = "Request Approval Failed", responseCode = 606)
+        throw Exception("endpoint failed")
     }
-
 
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)

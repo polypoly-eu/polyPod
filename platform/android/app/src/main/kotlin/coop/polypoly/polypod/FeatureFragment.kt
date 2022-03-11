@@ -19,7 +19,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import coop.polypoly.polypod.endpoint.EndpointObserver
 import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
@@ -103,7 +102,6 @@ open class FeatureFragment : Fragment() {
     }
 
     private var pickFileResult: CompletableDeferred<Uri?>? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -194,7 +192,6 @@ open class FeatureFragment : Fragment() {
                 ::pickFile
             )
         )
-
     }
 
     private fun navigateBack() {

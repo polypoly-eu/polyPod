@@ -16,7 +16,7 @@ class Network(val context: Context) {
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    data class NetworkResponse(var payload: String?, var responseCode: Int)
+    data class NetworkResponse(var data: String?, var error: String?)
 
     open suspend fun httpPost(
         url: String,
@@ -28,7 +28,7 @@ class Network(val context: Context) {
         connection.requestMethod = "POST"
         connection.doOutput = true
         connection.setRequestProperty("charset", "utf-8")
-        var response = NetworkResponse(payload = null, responseCode = 400);
+        var response = NetworkResponse(data = null, error = null)
 
         if (contentType != null)
             connection.setRequestProperty("Content-Type", contentType)
@@ -57,24 +57,16 @@ class Network(val context: Context) {
             outputStream.flush()
         } catch (exception: Exception) {
             logger.error("network.httpPost failed: $exception")
-            response.payload = exception.toString()
+            response.error = exception.toString()
             return@withContext response
         }
         val responseCode = connection.responseCode
-        response.responseCode = responseCode
         if (responseCode < 200 || responseCode > 299) {
-            response.payload = "Bad response code: $responseCode"
-            logger.error("network.httpPost failed: ${response.payload}")
+            response.error = "Bad response code: $responseCode"
+            logger.error("network.httpPost failed: ${response.error}")
             return@withContext response
         }
 
-        try {
-            response.payload =
-                connection.inputStream.bufferedReader().use { it.readText() }
-        } finally {
-            connection.disconnect()
-            return@withContext response
-        }
         return@withContext response
     }
 
@@ -87,7 +79,7 @@ class Network(val context: Context) {
         connection.requestMethod = "GET"
         connection.doInput = true
         connection.setRequestProperty("charset", "utf-8")
-        var response = NetworkResponse(payload = null, responseCode = 400);
+        var response = NetworkResponse(data = null, error = null)
 
         if (contentType != null)
             connection.setRequestProperty("Content-Type", contentType)
@@ -103,21 +95,19 @@ class Network(val context: Context) {
             )
         }
         val responseCode = connection.responseCode
-        response.responseCode = responseCode
         if (responseCode < 200 || responseCode > 299) {
-            response.payload = "Bad response code: $responseCode"
-            logger.error("network.httpPost failed: ${response.payload}")
+            response.error = "Bad response code: $responseCode"
+            logger.error("network.httpPost failed: ${response.error}")
             return@withContext response
         }
 
         try {
-            response.payload =
+            response.data =
                 connection.inputStream.bufferedReader().use { it.readText() }
         } finally {
             connection.disconnect()
             return@withContext response
         }
         return@withContext response
-
     }
 }

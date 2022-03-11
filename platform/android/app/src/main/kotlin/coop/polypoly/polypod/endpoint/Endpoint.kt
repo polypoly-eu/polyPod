@@ -2,18 +2,11 @@ package coop.polypoly.polypod.endpoint
 
 import android.content.Context
 import android.content.res.AssetManager
-import android.webkit.WebView
-import coop.polypoly.polypod.PodApi
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.network.Network
-import coop.polypoly.polypod.polyNav.PolyNavObserver
-import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import java.lang.Exception
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.*
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
+import kotlinx.serialization.Serializable
 
 private fun AssetManager.readFile(fileName: String) = open(fileName)
     .bufferedReader()
@@ -21,17 +14,17 @@ private fun AssetManager.readFile(fileName: String) = open(fileName)
 
 @Serializable
 data class EndpointInfo(val url: String, val auth: String)
-data class EndpointResponse(var payload: String?, var responseCode: Int)
 
 class Endpoint(
     val context: Context,
-    private var observer: EndpointObserver? = null,
-    webView: WebView
+    private var observer: EndpointObserver? = null
 ) {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
+
+    val endpointNetwork = Network(context)
 
     private fun endpointInfofromId(endpointId: String): EndpointInfo? {
         val endpointsPath = "config-assets/endpoints.json"
@@ -41,56 +34,78 @@ class Endpoint(
         return endpointsJson[endpointId]
     }
 
+    private fun endpointErrorMessage(apiCall: String): String {
+        return "endpoint.$apiCall failed"
+    }
+
     open fun setEndpointObserver(newObserver: EndpointObserver) {
         observer = newObserver
     }
 
-    val endpointNetwork = Network(context)
     open suspend fun send(
         endpointId: String,
         body: String,
         contentType: String?,
         authorization: String?,
-    ): EndpointResponse {
-        val approvalResponse =
-            observer?.approveEndpointFetch?.invoke(endpointId) {
-                if (it == false) {
-                    return@invoke EndpointResponse(payload = "User Denied Request", responseCode = 601)
-                }
-                val endpointInfo =
-                    endpointInfofromId(endpointId) ?: return@invoke EndpointResponse(payload = "Endpoint ID Not Found", responseCode = 604)
-                val response = endpointNetwork
-                    .httpPost(
-                        endpointInfo.url,
-                        body,
-                        contentType,
-                        authorization ?: endpointInfo.auth
-                    )
-                return@invoke EndpointResponse(response.payload, response.responseCode)
-            } ?: return EndpointResponse(payload = null, responseCode= 600)
-        return approvalResponse
+    ) {
+        observer?.approveEndpointFetch?.invoke(endpointId) {
+            if (!it) {
+                logger.error("endpoint.send: User denied request")
+                throw Exception(endpointErrorMessage("send"))
+            }
+            val endpointInfo =
+                endpointInfofromId(endpointId)
+            if (endpointInfo == null) {
+                logger.error(
+                    "endpoint.send: No endpoint found under that endpointId"
+                )
+                throw Exception(endpointErrorMessage("send"))
+            }
+            val response = endpointNetwork
+                .httpPost(
+                    endpointInfo.url,
+                    body,
+                    contentType,
+                    authorization ?: endpointInfo.auth
+                )
+            if (response.error != null) {
+                throw Exception(endpointErrorMessage("send"))
+            }
+            return@invoke null
+        }
     }
 
     open suspend fun get(
         endpointId: String,
         contentType: String?,
         authorization: String?
-    ): EndpointResponse {
+    ): String? {
         val approvalResponse =
             observer?.approveEndpointFetch?.invoke(endpointId) {
-                if (it == false) {
-                    return@invoke EndpointResponse(payload = "User Denied Request", responseCode = 601)
+                if (!it) {
+                    logger.error("endpoint.get: User denied request")
+                    throw Exception(endpointErrorMessage("get"))
                 }
                 val endpointInfo =
-                    endpointInfofromId(endpointId) ?: return@invoke EndpointResponse(payload = "Endpoint ID Not Found", responseCode = 604)
+                    endpointInfofromId(endpointId)
+                if (endpointInfo == null) {
+                    logger.error(
+                        "endpoint.get: No endpoint found under that endpointId"
+                    )
+                    throw Exception(endpointErrorMessage("get"))
+                }
                 val response = endpointNetwork
                     .httpGet(
                         endpointInfo.url,
                         contentType,
                         authorization ?: endpointInfo.auth
                     )
-                return@invoke EndpointResponse(response.payload, response.responseCode)
-            } ?: return EndpointResponse(payload = null, responseCode= 600)
+                if (response.error != null) {
+                    logger.error("endpoint.get: No response")
+                    throw Exception(endpointErrorMessage("get"))
+                }
+                return@invoke response.data
+            }
         return approvalResponse
     }
 }
