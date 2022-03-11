@@ -32,13 +32,15 @@ window.addEventListener("DOMContentLoaded", () => {
         .querySelector(".endpoint-post")
         .addEventListener("click", async () => {
             const endpointId = "demoTestEndpoint";
-            const response = await window.pod.endpoint.send(endpointId, "abc");
-            console.log(
-                "Payload: ",
-                response.payload,
-                "Response Code: ",
-                response.responseCode
-            );
+            try {
+                const response = await window.pod.endpoint.get(
+                    endpointId,
+                    "abc"
+                );
+                console.log(response);
+            } catch (e) {
+                console.log(e);
+            }
         });
 
     (function () {

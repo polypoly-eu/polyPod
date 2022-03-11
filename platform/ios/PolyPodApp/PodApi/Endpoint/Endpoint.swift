@@ -2,8 +2,8 @@ import Foundation
 import MessagePack
 
 protocol EndpointProtocol {
-    func send(endpointId: String, payload: String, contentType: String?, authorization: String?, completionHandler: @escaping (EndpointResponse) -> Void) -> Void
-    func get(endpointId: String, contentType: String?, authorization: String?, completionHandler: @escaping (EndpointResponse) -> Void) -> Void
+    func send(endpointId: String, payload: String, contentType: String?, authorization: String?, completionHandler: @escaping (String?) -> Void) -> Void
+    func get(endpointId: String, contentType: String?, authorization: String?, completionHandler: @escaping (String?, String?) -> Void) -> Void
 }
 
 protocol EndpointDelegate {
@@ -20,15 +20,8 @@ struct EndpointInfo: EndpointInfoProtocol {
     let auth: String
 }
 
-struct EndpointResponse {
-    let payload: String?
-    let responseCode: Int
-    public var messagePackObject: MessagePackValue {
-        var messagePackMap: [MessagePackValue: MessagePackValue] = [:]
-        messagePackMap["payload"] = payload != nil ? .string(payload!) : .nil
-        messagePackMap["responseCode"] = .int(Int64(responseCode))
-        return MessagePackValue.map(messagePackMap)
-    }
+private func endpointErrorMessage(apiCall: String) -> String {
+    return "endpoint.\(apiCall) failed"
 }
 
 class Endpoint: EndpointProtocol {
@@ -52,37 +45,45 @@ class Endpoint: EndpointProtocol {
     }
     
     let network: Network = Network()
-    func send(endpointId: String, payload: String, contentType: String?, authorization: String?, completionHandler: @escaping (EndpointResponse) -> Void) -> Void {
+    func send(endpointId: String, payload: String, contentType: String?, authorization: String?, completionHandler: @escaping (String?) -> Void) -> Void {
         approveEndpointFetch(endpointId: endpointId) { approved in
             if (!approved) {
                 Log.error("endpoint.get failed: Permission for endpoint \(endpointId) denied")
-                completionHandler(EndpointResponse(payload: nil, responseCode: 601))
+                completionHandler( endpointErrorMessage(apiCall: "send"))
                 return
             }
             guard let endpointInfo = self.endpointInfoFromId(endpointId: endpointId) else {
                 Log.error("endpoint.get failed: No endpoint found for: \(endpointId)")
-                completionHandler(EndpointResponse(payload: nil, responseCode: 604))
+                completionHandler(endpointErrorMessage(apiCall: "send"))
                 return
             }
             let response = self.network.httpPost(url: endpointInfo.url, body: payload, contentType: contentType, authorization: endpointInfo.auth)
-            completionHandler(EndpointResponse(payload: response.payload, responseCode: response.responseCode))
+            if (response.error == nil) {
+                completionHandler(nil)
+            } else {
+                completionHandler(endpointErrorMessage(apiCall: "send"))
+            }
         }
     }
     
-    func get(endpointId: String, contentType: String?, authorization: String?, completionHandler: @escaping (EndpointResponse) -> Void) -> Void {
+    func get(endpointId: String, contentType: String?, authorization: String?, completionHandler: @escaping (String?, String?) -> Void) -> Void {
         approveEndpointFetch(endpointId: endpointId) { approved in
             if (!approved) {
                 Log.error("endpoint.get failed: Permission for endpoint \(endpointId) denied")
-                completionHandler(EndpointResponse(payload: nil, responseCode: 601))
+                completionHandler(nil, endpointErrorMessage(apiCall: "get"))
                 return
             }
             guard let endpointInfo = self.endpointInfoFromId(endpointId: endpointId) else {
                 Log.error("endpoint.get failed: No endpoint found for: \(endpointId)")
-                completionHandler(EndpointResponse(payload: nil, responseCode: 604))
+                completionHandler(nil, endpointErrorMessage(apiCall: "get"))
                 return
             }
             let response = self.network.httpGet(url: endpointInfo.url, contentType: contentType, authorization: endpointInfo.auth)
-            completionHandler(EndpointResponse(payload: response.payload, responseCode: response.responseCode))
+            if (response.error == nil && response.data != nil) {
+                completionHandler(response.data, nil)
+            } else {
+                completionHandler(nil, endpointErrorMessage(apiCall: "get"))
+            }
         }
     }
 }

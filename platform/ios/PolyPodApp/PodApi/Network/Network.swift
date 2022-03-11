@@ -16,8 +16,8 @@ protocol NetworkProtocol {
 }
 
 struct NetworkResponse {
-    let payload: String?
-    let responseCode: Int
+    let data: String?
+    let error: String?
 }
 
 class Network: NetworkProtocol {
@@ -45,8 +45,6 @@ class Network: NetworkProtocol {
         
         let semaphore = DispatchSemaphore(value: 0)
         var errorMessage: String? = nil
-        var responseData: String? = nil
-        var responseCode: Int = 400
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
             guard let response = response as? HTTPURLResponse,
@@ -62,10 +60,6 @@ class Network: NetworkProtocol {
                 return
             }
             
-            guard let data = data else { return }
-            responseData = String(data: data, encoding: .utf8)!
-            responseCode = response.statusCode
-            
             semaphore.signal()
         }
         task.resume()
@@ -74,14 +68,14 @@ class Network: NetworkProtocol {
         if let errorMessage = errorMessage {
             Log.error("network.httpPost failed: \(errorMessage)")
         }
-        return NetworkResponse(payload: responseData, responseCode: responseCode)
+        return NetworkResponse(data: nil, error: errorMessage)
     }
     
     func httpGet(
         url: String,
         contentType: String?,
         authorization: String?
-    ) -> NetworkResponse {
+    ) -> (NetworkResponse) {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "GET"
         
@@ -100,7 +94,6 @@ class Network: NetworkProtocol {
         let semaphore = DispatchSemaphore(value: 0)
         var errorMessage: String? = nil
         var responseData: String? = nil
-        var responseCode: Int = 400
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
             guard let response = response as? HTTPURLResponse,
@@ -117,7 +110,6 @@ class Network: NetworkProtocol {
             }
             guard let data = data else { return }
             responseData = String(data: data, encoding: .utf8)!
-            responseCode = response.statusCode
             semaphore.signal()
         }
         task.resume()
@@ -127,6 +119,6 @@ class Network: NetworkProtocol {
             Log.error("network.httpGet failed: \(errorMessage)")
         }
         
-        return NetworkResponse(payload: responseData, responseCode: responseCode)
+        return NetworkResponse(data: responseData, error: errorMessage)
     }
 }
