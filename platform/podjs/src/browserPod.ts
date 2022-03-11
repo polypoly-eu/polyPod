@@ -359,7 +359,8 @@ class BrowserPolyNav implements PolyNav {
     static readonly filesKey = "files";
     actions?: { [key: string]: () => void };
     private keyUpListener: ((key: KeyboardEvent) => void) | undefined;
-    private popStateListener: any = null;
+    private popStateListener: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ((this: Window, ev: PopStateEvent) => any) | undefined;
 
     async openUrl(url: string): Promise<void> {
         console.log(`polyNav: Attempt to open URL: ${url}`);
