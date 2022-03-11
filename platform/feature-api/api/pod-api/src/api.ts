@@ -202,7 +202,7 @@ export interface Endpoint {
      * Perform a http get request via the endpoint in the pod
      * @returns a promise with the response
      */
-    get(endpointId: string, contentType?: string, authorization?: string): Promise<string>;
+    get(endpointId: string, contentType?: string, authorization?: string): Promise<string | null>;
 }
 
 /**

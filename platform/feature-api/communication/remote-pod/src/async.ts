@@ -6,7 +6,6 @@ import {
     PolyNav,
     ExternalFile,
     Endpoint,
-    EndpointResponse,
     EncodingOptions,
     Entry,
     Matcher,
@@ -121,7 +120,7 @@ class AsyncEndpoint implements Endpoint {
         endpointId: string,
         contentType?: string,
         authorization?: string
-    ): Promise<string> {
+    ): Promise<string | null> {
         return (await this.promise).get(endpointId, contentType, authorization);
     }
 }

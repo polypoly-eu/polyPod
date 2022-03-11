@@ -87,7 +87,7 @@ type EndpointEndpoint = ObjectEndpointSpec<{
         featureIdToken: string,
         contentType?: string,
         authorization?: string
-    ): ValueEndpointSpec<string>;
+    ): ValueEndpointSpec<string | null>;
 }>;
 
 type PodEndpoint = ObjectEndpointSpec<{

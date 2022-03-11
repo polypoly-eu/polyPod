@@ -2,7 +2,6 @@ import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
     ExternalFile,
     Endpoint,
-    EndpointResponse,
     Info,
     Matcher,
     Pod,
