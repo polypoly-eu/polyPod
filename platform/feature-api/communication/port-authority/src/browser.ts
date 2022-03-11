@@ -135,6 +135,6 @@ export function iframeOuterPort(
     );
     if (init) init(port);
     port1.start();
-    iframe.contentWindow!.postMessage(secret, "*", [port2]);
+    iframe.contentWindow?.postMessage(secret, "*", [port2]);
     return port;
 }

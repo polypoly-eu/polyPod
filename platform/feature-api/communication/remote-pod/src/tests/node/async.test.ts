@@ -49,15 +49,15 @@ describe("Async pod", () => {
         });
 
         it("Lists features", async () => {
-            await assert.eventually.deepEqual(pod.polyLifecycle!.listFeatures(), {
+            await assert.eventually.deepEqual(pod.polyLifecycle?.listFeatures(), {
                 "test-on": true,
                 "test-off": false,
             });
         });
 
         it("Starts feature", async () => {
-            await pod.polyLifecycle!.startFeature("hi", false);
-            await pod.polyLifecycle!.startFeature("yo", true);
+            await pod.polyLifecycle?.startFeature("hi", false);
+            await pod.polyLifecycle?.startFeature("yo", true);
 
             assert.deepEqual(log, [
                 ["hi", false],

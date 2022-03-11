@@ -96,6 +96,7 @@ const infos: TypeInfos<Types> = {
     "@polypoly-eu/rdf.NamedNode": [RDF.NamedNode, gen.namedNode],
     "@polypoly-eu/rdf.BlankNode": [RDF.BlankNode, gen.blankNode],
     "@polypoly-eu/rdf.Literal": [RDF.Literal, gen.literal],
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     "@polypoly-eu/rdf.Variable": [RDF.Variable, gen.variable!],
     "@polypoly-eu/rdf.DefaultGraph": [
         RDF.DefaultGraph,
