@@ -57,7 +57,7 @@ module.exports = {
             rules: {
                 "@typescript-eslint/camelcase": "off",
                 "@typescript-eslint/no-explicit-any": "error",
-                "@typescript-eslint/no-non-null-assertion": "off",
+                "@typescript-eslint/no-non-null-assertion": "error",
                 "@typescript-eslint/ban-ts-comment": [
                     "error",
                     {
