@@ -2,17 +2,15 @@ package coop.polypoly.polypod.endpoint
 
 import android.content.Context
 import android.content.res.AssetManager
+import com.google.gson.Gson
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.network.Network
 import java.lang.Exception
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.Serializable
 
 private fun AssetManager.readFile(fileName: String) = open(fileName)
     .bufferedReader()
     .use { it.readText() }
 
-@Serializable
 data class EndpointInfo(val url: String, val auth: String)
 
 class Endpoint(
@@ -29,8 +27,8 @@ class Endpoint(
     private fun endpointInfofromId(endpointId: String): EndpointInfo? {
         val endpointsPath = "config-assets/endpoints.json"
         val endpointsJsonString = context.assets.readFile(endpointsPath)
-        val endpointsJson: HashMap<String, EndpointInfo> =
-            Json.decodeFromString(endpointsJsonString)
+        val endpointInfoJsonType = object : HashMap<String, EndpointInfo>(){}
+        val endpointsJson : HashMap<String, EndpointInfo> = Gson().fromJson(endpointsJsonString, endpointInfoJsonType::class.java)
         return endpointsJson[endpointId]
     }
 

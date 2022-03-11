@@ -58,7 +58,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             webView = webView
         ),
         Info(),
-        Endpoint(context, webView = webView)
+        Endpoint(context)
     )
 
     var feature: Feature? = null
