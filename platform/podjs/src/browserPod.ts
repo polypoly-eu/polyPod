@@ -305,29 +305,16 @@ class PodJsInfo implements Info {
 
 interface NetworkResponse {
     payload?: string;
-    responseCode: number | undefined;
-}
-interface Network {
-    httpPost(
-        url: string,
-        body: string,
-        contentType?: string,
-        authorization?: string
-    ): Promise<NetworkResponse>;
-    httpGet(
-        url: string,
-        contentType?: string,
-        authorization?: string
-    ): Promise<NetworkResponse>;
+    error?: string;
 }
 
-class BrowserNetwork implements Network {
+class BrowserNetwork {
     async httpPost(
         url: string,
         body: string,
         contentType?: string,
         authorization?: string
-    ): Promise<NetworkResponse> {
+    ): Promise<NetworkResponse | void> {
         return new Promise((resolve) => {
             const request = new XMLHttpRequest();
             const fetchResponse = {} as NetworkResponse;
@@ -335,18 +322,14 @@ class BrowserNetwork implements Network {
                 if (request.readyState !== XMLHttpRequest.DONE) return;
                 const status = request.status;
                 if (status < 200 || status > 299) {
-                    fetchResponse.payload = `Unexpected response: ${request.responseText}`;
-                    fetchResponse.responseCode = this.status;
+                    fetchResponse.error = `Unexpected response: ${request.responseText}`;
                     resolve(fetchResponse);
                 }
-                fetchResponse.payload = request.responseText;
-                fetchResponse.responseCode = this.status;
-                resolve(fetchResponse);
+                resolve();
             };
 
             request.onerror = function () {
-                fetchResponse.payload = "Network error";
-                fetchResponse.responseCode = 403;
+                fetchResponse.error = `Network error`;
                 resolve(fetchResponse);
             };
 
@@ -374,18 +357,15 @@ class BrowserNetwork implements Network {
                 if (request.readyState !== XMLHttpRequest.DONE) return;
                 const status = request.status;
                 if (status < 200 || status > 299) {
-                    fetchResponse.payload = `Unexpected response: ${request.responseText}`;
-                    fetchResponse.responseCode = this.status;
+                    fetchResponse.error = `Unexpected response: ${request.responseText}`;
                     resolve(fetchResponse);
                 }
                 fetchResponse.payload = request.responseText;
-                fetchResponse.responseCode = this.status;
                 resolve(fetchResponse);
             };
 
             request.onerror = function () {
-                fetchResponse.payload = "Network API Client Error";
-                fetchResponse.responseCode = 400;
+                fetchResponse.error = "Network API Client Error";
                 resolve(fetchResponse);
             };
 
@@ -415,6 +395,11 @@ function approveEndpointFetch(
     );
 }
 
+function EndpointError(requestType: string, errorlog: string): string {
+    console.error(errorlog);
+    return `Endpoint failed at : ${requestType}`;
+}
+
 class BrowserEndpoint implements Endpoint {
     endpointNetwork = new BrowserNetwork();
     async send(
@@ -423,28 +408,23 @@ class BrowserEndpoint implements Endpoint {
         payload: string,
         contentType?: string,
         authorization?: string
-    ): Promise<EndpointResponse> {
+    ): Promise<void> {
         //Poly Error Codes start from 600s or 1000s
-        if (!approveEndpointFetch(endpointId, featureIdToken))
-            return new Promise(() => ({
-                payload: "User Denied Request",
-                responseCode: 600,
-            }));
-        const endpointURL = getEndpoint(endpointId);
-        if (!endpointURL)
-            return new Promise(() => ({
-                payload: "Endpoint URL not found",
-                responseCode: 604,
-            }));
-        const endpointResponse = {
-            ...(await this.endpointNetwork.httpPost(
+        return new Promise((resolve) => {
+            if (!approveEndpointFetch(endpointId, featureIdToken))
+                throw EndpointError("send", "User denied request");
+            const endpointURL = getEndpoint(endpointId);
+            if (!endpointURL) {
+                throw EndpointError("send", "Endpoint URL not found");
+            }
+            this.endpointNetwork.httpPost(
                 endpointURL,
                 payload,
                 contentType,
                 authorization
-            )),
-        } as EndpointResponse;
-        return new Promise((response) => response(endpointResponse));
+            );
+            resolve();
+        });
     }
     async get(
         endpointId: string,
@@ -452,26 +432,20 @@ class BrowserEndpoint implements Endpoint {
         payload: string,
         contentType?: string,
         authorization?: string
-    ): Promise<EndpointResponse> {
+    ): Promise<string | null> {
         if (!approveEndpointFetch(endpointId, featureIdToken))
-            return new Promise(() => ({
-                payload: "User Denied Request",
-                responseCode: 600,
-            }));
+            throw EndpointError("send", "User denied request");
         const endpointURL = getEndpoint(endpointId);
-        if (!endpointURL)
-            return new Promise(() => ({
-                payload: "Endpoint URL not found",
-                responseCode: 604,
-            }));
-        const endpointResponse = {
-            ...(await this.endpointNetwork.httpPost(
-                endpointURL,
-                payload,
-                contentType,
-                authorization
-            )),
-        } as EndpointResponse;
+        if (!endpointURL) throw EndpointError("send", "Endpoint URL not found");
+        const NetworkResponse = await this.endpointNetwork.httpGet(
+            endpointURL,
+            payload,
+            contentType,
+            authorization
+        );
+        if (NetworkResponse.error)
+            throw EndpointError("send", NetworkResponse.error);
+        const endpointResponse = NetworkResponse.payload || null;
         return new Promise((response) => response(endpointResponse));
     }
 }

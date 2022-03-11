@@ -10,7 +10,6 @@ import {
     Matcher,
     Info,
     Entry,
-    EndpointResponse as APIResponse,
     Endpoint,
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
@@ -82,13 +81,13 @@ type EndpointEndpoint = ObjectEndpointSpec<{
         payload: string,
         contentType?: string,
         authorization?: string
-    ): ValueEndpointSpec<APIResponse>;
+    ): ValueEndpointSpec<void>;
     get(
         endpointId: string,
         featureIdToken: string,
         contentType?: string,
         authorization?: string
-    ): ValueEndpointSpec<APIResponse>;
+    ): ValueEndpointSpec<string>;
 }>;
 
 type PodEndpoint = ObjectEndpointSpec<{

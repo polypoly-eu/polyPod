@@ -174,14 +174,14 @@ export class DefaultPod implements Pod {
                 payload: string,
                 contentType?: string,
                 authorization?: string
-            ): Promise<EndpointResponse> {
+            ): Promise<void> {
                 throw new Error("Not implemented");
             },
             get(
                 endpointId: string,
                 contentType?: string,
                 authorization?: string
-            ): Promise<EndpointResponse> {
+            ): Promise<string> {
                 throw new Error("Not implemented");
             },
         };

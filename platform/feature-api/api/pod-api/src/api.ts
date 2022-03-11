@@ -196,23 +196,13 @@ export interface Endpoint {
         payload: string,
         contentType?: string,
         authorization?: string
-    ): Promise<EndpointResponse>;
+    ): Promise<void>;
 
     /**
      * Perform a http get request via the endpoint in the pod
      * @returns a promise with the response
      */
-    get(
-        endpointId: string,
-        contentType?: string,
-        authorization?: string
-    ): Promise<EndpointResponse>;
-}
-
-// in case a separate Response is needed for Endpoint Response
-export interface EndpointResponse {
-    payload?: string;
-    responseCode: number | undefined;
+    get(endpointId: string, contentType?: string, authorization?: string): Promise<string>;
 }
 
 /**

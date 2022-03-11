@@ -113,7 +113,7 @@ class AsyncEndpoint implements Endpoint {
         payload: string,
         contentType?: string,
         authorization?: string
-    ): Promise<EndpointResponse> {
+    ): Promise<void> {
         return (await this.promise).send(endpointId, payload, contentType, authorization);
     }
 
@@ -121,7 +121,7 @@ class AsyncEndpoint implements Endpoint {
         endpointId: string,
         contentType?: string,
         authorization?: string
-    ): Promise<EndpointResponse> {
+    ): Promise<string> {
         return (await this.promise).get(endpointId, contentType, authorization);
     }
 }
@@ -149,15 +149,15 @@ export class AsyncPod implements Pod {
     readonly polyIn: PolyIn;
     readonly polyNav: PolyNav;
     readonly info: Info;
-    readonly polyLifecycle: PolyLifecycle;
     readonly endpoint: Endpoint;
+    readonly polyLifecycle: PolyLifecycle;
 
     constructor(private readonly promise: Promise<Pod>, public readonly dataFactory: DataFactory) {
         this.polyOut = new AsyncPolyOut(promise.then((pod) => pod.polyOut));
         this.polyIn = new AsyncPolyIn(promise.then((pod) => pod.polyIn));
         this.polyNav = new AsyncPolyNav(promise.then((pod) => pod.polyNav));
         this.info = new AsyncInfo(promise.then((pod) => pod.info));
-        this.polyLifecycle = new AsyncPolyLifecycle(promise.then((pod) => pod.polyLifecycle));
         this.endpoint = new AsyncEndpoint(promise.then((pod) => pod.endpoint));
+        this.polyLifecycle = new AsyncPolyLifecycle(promise.then((pod) => pod.polyLifecycle));
     }
 }
