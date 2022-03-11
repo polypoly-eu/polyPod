@@ -2,6 +2,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import svg from "rollup-plugin-svg";
 import sucrase from "@rollup/plugin-sucrase";
 import css from "rollup-plugin-css-only";
+import copy from "@polypoly-eu/rollup-plugin-copy-watch";
 
 export default {
   input: "src/poly-look.js",
@@ -22,6 +23,14 @@ export default {
       production: true,
     }),
     resolve(),
+    copy({
+      targets: [
+        {
+          src: ["src/static/fonts/*"],
+          dest: "dist/fonts"
+        }
+      ]
+    })
   ],
   external: ["react", "react-dom"],
   onwarn: (warning) => {

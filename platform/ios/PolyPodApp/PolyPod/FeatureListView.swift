@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct FeatureListView: View {
-    var features: [Feature]
+    @Binding var featureList: [Feature]
     var openFeatureAction: (Feature) -> Void = { _ in }
     var openInfoAction: () -> Void = {}
     var openSettingsAction: () -> Void = {}
@@ -23,7 +23,7 @@ struct FeatureListView: View {
             
             ScrollView {
                 VStack(spacing: 20) {
-                    ForEach(features, id: \.name) { feature in
+                    ForEach(featureList, id: \.name) { feature in
                         FeatureCard(feature)
                             .onTapGesture {
                                 openFeatureAction(feature)
@@ -44,7 +44,7 @@ struct FeatureListView: View {
 
 struct FeatureListView_Previews: PreviewProvider {
     static var previews: some View {
-        FeatureListView(features: [
+        FeatureListView(featureList: .constant([
             createStubFeature(
                 name: "polyExplorer",
                 author: "polypoly Cooperative",
@@ -75,7 +75,7 @@ struct FeatureListView_Previews: PreviewProvider {
                 those answers.
                 """
             )
-        ])
+        ]))
     }
 }
 
