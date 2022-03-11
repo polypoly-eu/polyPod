@@ -12,7 +12,8 @@
   "scripts": {
     "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "build-downstream": "../../build.js --start @polypoly-eu/podjs",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint src --ext .ts",
+    "test": "jest"
   },
   "dependencies": {
     "@polypoly-eu/fetch-spec": "file:../feature-api/api/fetch-spec",
