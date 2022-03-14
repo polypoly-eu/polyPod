@@ -1,5 +1,5 @@
 import * as Decoder from "io-ts/Decoder";
-import * as E from "fp-ts/Either";
+import * as Either from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 
 export interface Manifest {
@@ -17,7 +17,7 @@ const decodeWith = <EncodeTo = any, DecodeFrom = unknown>(
 ): EncodeTo =>
     pipe(
         decoder.decode(input),
-        E.getOrElseW((errors) => {
+        Either.getOrElseW((errors) => {
             throw new Error("Failed to parse manifest" + errors);
         })
     );
