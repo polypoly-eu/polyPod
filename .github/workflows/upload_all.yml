@@ -1,9 +1,14 @@
 name: Upload to all stores
 on: [workflow_dispatch]
 jobs:
-  call_upload_google_play:
+  check_upload_branch:
+    name: Check upload branch
+    uses: ./.github/workflows/check_upload_branch.yml
+  upload_google_play:
     name: Upload to Google Play
+    needs: check_upload_branch
     uses: ./.github/workflows/upload_google_play_fake.yml
-  call_upload_app_store:
+  upload_app_store:
     name: Upload to the App Store
+    needs: check_upload_branch
     uses: ./.github/workflows/upload_app_store_fake.yml

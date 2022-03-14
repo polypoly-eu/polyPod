@@ -1,0 +1,11 @@
+name: Check upload branch
+on: [workflow_call]
+jobs:
+  check_upload_branch:
+    name: "Check upload branch"
+    runs-on: ubuntu-latest
+    steps:
+      - id: early_exit
+        if: ${{ github.ref != 'refs/heads/main' && startsWith(github.ref, 'refs/heads/release') != true && startsWith(github.ref, 'refs/heads/prod4pod-1426') != true }}
+        name: Early exit failure if not main, release or prod4pod-1426 branch.
+        run: exit 1

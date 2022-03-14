@@ -1,10 +1,13 @@
 name: Upload IPA to App Store
 on: [workflow_dispatch, workflow_call]
 jobs:
+  check_upload_branch:
+    name: Check upload branch
+    uses: ./.github/workflows/check_upload_branch.yml
   build_test_upload:
     name: Build, test, and upload to App Store
+    needs: check_upload_branch
     runs-on: macos-11
-    if: ${{ github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release') == true || startsWith(github.ref, 'refs/heads/prod4pod-1426') == true }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2

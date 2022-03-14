@@ -3,17 +3,12 @@ on:
   workflow_dispatch:
   workflow_call:
 jobs:
-  check_branch:
-    name: "Check branch ('release*' or 'main' or 'prod4pod-1426')."
-    runs-on: ubuntu-latest
-    steps:
-      - id: early_exit
-        if: ${{ github.ref != 'refs/heads/main' && startsWith(github.ref, 'refs/heads/release') != true && startsWith(github.ref, 'refs/heads/prod4pod-1426') != true }}
-        name: Early exit failure if not main or release branch.
-        run: exit 1
+  check_upload_branch:
+    name: Check upload branch
+    uses: ./.github/workflows/check_upload_branch.yml
   build_test_upload:
     name: Build, test, and upload to Google Play.
-    needs: check_branch
+    needs: check_upload_branch
     runs-on: ubuntu-latest
     steps:
       - run: echo "Building and Uploading APK from ${{ github.ref }}."
