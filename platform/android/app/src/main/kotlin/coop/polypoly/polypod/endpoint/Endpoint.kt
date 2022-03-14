@@ -45,7 +45,7 @@ class Endpoint(
         endpointId: String,
         body: String,
         contentType: String?,
-        authorization: String?,
+        authToken: String?,
     ) {
         observer?.approveEndpointFetch?.invoke(endpointId) {
             if (!it) {
@@ -65,7 +65,7 @@ class Endpoint(
                     endpointInfo.url,
                     body,
                     contentType,
-                    authorization ?: endpointInfo.auth
+                    authToken ?: endpointInfo.auth
                 )
             if (response.error != null) {
                 throw Exception(endpointErrorMessage("send"))
@@ -77,7 +77,7 @@ class Endpoint(
     open suspend fun get(
         endpointId: String,
         contentType: String?,
-        authorization: String?
+        authToken: String?
     ): String? {
         val approvalResponse =
             observer?.approveEndpointFetch?.invoke(endpointId) {
@@ -97,7 +97,7 @@ class Endpoint(
                     .httpGet(
                         endpointInfo.url,
                         contentType,
-                        authorization ?: endpointInfo.auth
+                        authToken ?: endpointInfo.auth
                     )
                 if (response.error != null) {
                     logger.error("endpoint.get: No response")
