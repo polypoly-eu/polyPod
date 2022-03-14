@@ -126,11 +126,11 @@ export class DefaultPod implements Pod {
             }
 
             importArchive(url: string): Promise<string> {
-                throw new Error("Not implemented");
+                throw new Error(`Called with ${url}, but not implemented`);
             }
 
             removeArchive(fileId: string): Promise<void> {
-                throw new Error("Not implemented");
+                throw new Error(`Called with ${fileId}, but not implemented`);
             }
         })();
     }
@@ -140,13 +140,13 @@ export class DefaultPod implements Pod {
     get polyNav(): PolyNav {
         return {
             openUrl: async (url: string) => {
-                throw new Error("Not implemented");
+                throw new Error(`Called with ${url}, but not implemented`);
             },
             setActiveActions: async (actions: string[]) => {
-                throw new Error("Not implemented");
+                throw new Error(`Called with ${actions}, but not implemented`);
             },
             setTitle: async (title: string) => {
-                throw new Error("Not implemented");
+                throw new Error(`Called with ${title}, but not implemented`);
             },
             pickFile: async () => {
                 throw new Error("Not implemented");
@@ -177,10 +177,14 @@ export class DefaultPod implements Pod {
                 contentType?: string,
                 authToken?: string
             ): Promise<void> {
-                throw new Error("Not implemented");
+                throw new Error(
+                    `Called with ${endpointId}, ${payload}, ${contentType}, ${authToken} but not implemented`
+                );
             },
             get(endpointId: string, contentType?: string, authToken?: string): Promise<string> {
-                throw new Error("Not implemented");
+                throw new Error(
+                    `Called with ${endpointId}, ${contentType}, ${authToken} but not implemented`
+                );
             },
         };
     }

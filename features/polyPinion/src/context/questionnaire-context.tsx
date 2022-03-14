@@ -17,6 +17,7 @@ export const QuestionnaireContext = createContext<{
     switchToPreviousQuestion: () => void;
     switchToFirstQuestion: () => void;
     setQuestionnaireAndSwitchToFirstUnansweredQuestion: (questionnaire: Questionnaire) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }>({} as any);
 
 class QuestionnaireHolder {

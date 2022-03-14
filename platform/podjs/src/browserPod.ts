@@ -78,7 +78,7 @@ class LocalStoragePolyIn implements PolyIn {
     }
 
     async has(...quads: RDF.Quad[]): Promise<boolean> {
-        throw "Not implemented: has";
+        throw `Called with ${quads}, not implemented: «has»`;
     }
 }
 
@@ -141,13 +141,16 @@ class LocalStoragePolyOut implements PolyOut {
                     const zipEntry = entries.find(
                         (entry) => entry.filename == entryPath
                     );
-                    if (!zipEntry) {
-                        reject(new Error(`Zip entry not found: ${entryPath}`));
-                        return;
-                    }
-                    zipEntry.getData!(new zip.TextWriter()).then((data) => {
-                        resolve(new TextEncoder().encode(data));
-                    });
+
+                    zipEntry
+                        ? zipEntry
+                              .getData?.(new zip.TextWriter())
+                              .then((data: string | undefined) => {
+                                  resolve(new TextEncoder().encode(data));
+                              })
+                        : reject(
+                              new Error(`Zip entry not found: ${entryPath}`)
+                          );
                 });
                 return;
             }
@@ -456,8 +459,9 @@ let files = new Map<string, Stats>();
 class BrowserPolyNav implements PolyNav {
     static readonly filesKey = "files";
     actions?: { [key: string]: () => void };
-    private keyUpListener: any = null;
-    private popStateListener: any = null;
+    private keyUpListener: ((key: KeyboardEvent) => void) | undefined;
+    private popStateListener: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ((this: Window, ev: PopStateEvent) => any) | undefined;
 
     async openUrl(url: string): Promise<void> {
         console.log(`polyNav: Attempt to open URL: ${url}`);
@@ -475,7 +479,7 @@ class BrowserPolyNav implements PolyNav {
     async setActiveActions(actions: string[]): Promise<void> {
         if (actions.includes("back"))
             window.history.pushState(document.title, document.title);
-        const actionKeys: any = {
+        const actionKeys: { [key: string]: string } = {
             Escape: "back",
             s: "search",
             i: "info",
@@ -492,8 +496,8 @@ class BrowserPolyNav implements PolyNav {
 can also navigate backwards using the browser's back functionality.`
             );
         }
-        this.keyUpListener = ({ key }: any) => {
-            const action = actionKeys[key];
+        this.keyUpListener = (key: KeyboardEvent) => {
+            const action = actionKeys[key.key];
             if (actions.includes(action)) this.actions?.[action]?.();
         };
         window.addEventListener("keyup", this.keyUpListener);
@@ -501,7 +505,7 @@ can also navigate backwards using the browser's back functionality.`
         if (this.popStateListener)
             window.removeEventListener("popstate", this.popStateListener);
 
-        this.popStateListener = (_event: any) => {
+        this.popStateListener = () => {
             // NOTE: This triggers "back" action for both Back and Forward
             // browser buttons
             if (actions.includes("back")) this.actions?.["back"]?.();

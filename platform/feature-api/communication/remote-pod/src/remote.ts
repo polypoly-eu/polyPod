@@ -120,6 +120,7 @@ class FetchResponse implements Response {
         this.url = response.url;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async json(): Promise<any> {
         // JSON parse error must be asynchronous (i.e. rejected promise)
         return JSON.parse(this.bufferedText);
@@ -190,7 +191,7 @@ export const podBubblewrapClasses: Classes = {
     "@polypoly-eu/rdf.Quad": RDF.Quad,
 };
 
-function bubblewrapPort(rawPort: Port<Uint8Array, Uint8Array>): Port<any, any> {
+function bubblewrapPort(rawPort: Port<Uint8Array, Uint8Array>): Port<Uint8Array, Uint8Array> {
     const podBubblewrap = Bubblewrap.create(podBubblewrapClasses);
     return mapPort(
         rawPort,
@@ -209,7 +210,9 @@ export class RemoteClientPod implements Pod {
     }
 
     static fromRawPort(rawPort: Port<Uint8Array, Uint8Array>): RemoteClientPod {
-        return new RemoteClientPod(liftClient(bubblewrapPort(rawPort)));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const wrappedPort = bubblewrapPort(rawPort) as Port<any, any>;
+        return new RemoteClientPod(liftClient(wrappedPort));
     }
 
     constructor(
@@ -343,7 +346,9 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
     }
 
     listenOnRaw(rawPort: Port<Uint8Array, Uint8Array>): void {
-        this.listen(liftServer<EndpointRequest, EndpointResponse>(bubblewrapPort(rawPort)));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const wrappedPort = bubblewrapPort(rawPort) as Port<any, any>;
+        this.listen(liftServer<EndpointRequest, EndpointResponse>(wrappedPort));
     }
 
     async listenOnMiddleware(): Promise<RequestListener> {

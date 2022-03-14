@@ -1,6 +1,6 @@
 import { DataFactory } from "rdf-js";
 import RDFJS from "@rdfjs/data-model";
-// @ts-ignore
+// @ts-ignore only used from JS
 import Graphy from "@graphy/core.data.factory";
 import { DataFactory as N3 } from "n3";
 import { DataFactory as Ruben } from "rdf-data-factory";
