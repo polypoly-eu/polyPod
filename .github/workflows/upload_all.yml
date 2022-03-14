@@ -2,6 +2,7 @@ name: Upload to Google Play and the App Store
 on:
   workflow_dispatch:
 jobs:
-  apologize:
-    steps:
-      - run: echo "Sorry, doesn't do anything just yet"
+  call_upload_google_play:
+    uses: ./.github/workflows/upload_google_play_fake.yml
+  call_upload_app_store:
+    uses: ./.github/workflows/upload_app_store_fake.yml
