@@ -4,11 +4,11 @@ on:
   workflow_call:
 jobs:
   check_branch:
-    name: "Check branch ('release*' or 'main')."
+    name: "Check branch ('release*' or 'main' or 'prod4pod-1426')."
     runs-on: ubuntu-latest
     steps:
       - id: early_exit
-        if: ${{ github.ref != 'refs/heads/main' && startsWith(github.ref, 'refs/heads/release') != true }}
+        if: ${{ github.ref != 'refs/heads/main' && startsWith(github.ref, 'refs/heads/release') != true && startsWith(github.ref, 'refs/heads/prod4pod-1426') != true }}
         name: Early exit failure if not main or release branch.
         run: exit 1
   build_test_upload:
