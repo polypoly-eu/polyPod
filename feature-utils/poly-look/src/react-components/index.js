@@ -1,6 +1,5 @@
 import ChipGroup from "./chipGroup/chipGroup.jsx";
 import { Tab, Tabs } from "./tabs.jsx";
-import BlockLegend from "./legends/blockLegend/blockLegend.jsx";
-import LineLegend from "./legends/lineLegend/lineLegend.jsx";
+import { BlockLegend, LineLegend } from "./legends/legends.jsx";
 
 export { Tab, Tabs, ChipGroup, BlockLegend, LineLegend };
