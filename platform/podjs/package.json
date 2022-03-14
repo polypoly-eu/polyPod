@@ -20,10 +20,9 @@
     "@polypoly-eu/pod-api": "file:../feature-api/api/pod-api",
     "@polypoly-eu/rdf": "file:../feature-api/api/rdf",
     "@zip.js/zip.js": "2.3.7",
-    "rdf-js": "^4.0.2",
-    "@types/semver": "^7.3.3",
     "fp-ts": "^2.8.2",
-    "io-ts": "2.2.10"
+    "io-ts": "^2.2.16",
+    "rdf-js": "^4.0.2"
   },
   "devDependencies": {
     "@polypoly-eu/rdf-spec": "file:../feature-api/api/rdf-spec",
