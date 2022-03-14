@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ChipGroup, LineLegend, PolyChart } from "@polypoly-eu/poly-look";
+import { FilterChips, LineLegend, PolyChart } from "@polypoly-eu/poly-look";
 import i18n from "../../i18n";
 
 import "./messengerMauChart.css";
@@ -92,7 +92,7 @@ const MessengerMauChart = ({ messengers, i18nHeader }) => {
                 areaColor={areaColor}
                 gradients={gradients}
             />
-            <ChipGroup
+            <FilterChips
                 chipsContent={messengerIds}
                 onChipClick={setSelectedMessenger}
             />

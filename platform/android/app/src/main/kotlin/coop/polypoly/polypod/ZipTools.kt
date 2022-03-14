@@ -10,7 +10,7 @@ import java.util.zip.ZipInputStream
 
 class ZipTools {
     companion object {
-        open fun unzipAndEncrypt(
+        fun unzipAndEncrypt(
             inputZipStream: InputStream,
             context: Context,
             folder: String
@@ -36,7 +36,7 @@ class ZipTools {
             }
         }
 
-        open fun getEncryptedFile(
+        fun getEncryptedFile(
             context: Context,
             path: String
         ): EncryptedFile {

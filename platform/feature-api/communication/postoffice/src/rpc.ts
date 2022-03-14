@@ -45,6 +45,7 @@ import { EndpointProcedure, EndpointRequestPart, EndpointRequest } from "./proto
  * Turns the implementation of an endpoint specification into a plain function.
  */
 export function endpointServer<Spec extends EndpointSpec>(impl: ServerOf<Spec>): EndpointProcedure {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async function process(impl: any, parts: ReadonlyArray<EndpointRequestPart>): Promise<any> {
         if (parts.length === 0) return impl;
 
@@ -63,6 +64,7 @@ export function endpointServer<Spec extends EndpointSpec>(impl: ServerOf<Spec>):
 /**
  * @hidden
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type RequestBuilder = Callable<any> & Record<string, (...args: any[]) => RequestBuilder>;
 
 /**
@@ -70,6 +72,7 @@ type RequestBuilder = Callable<any> & Record<string, (...args: any[]) => Request
  */
 function requestBuilder(client: EndpointProcedure, state: EndpointRequest): RequestBuilder {
     return new Proxy<RequestBuilder>(new Function() as RequestBuilder, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         apply(target, thisArg, argArray): Promise<any> {
             if (!Array.isArray(argArray) || argArray.length !== 0)
                 throw new Error("Argument list must be empty");
@@ -77,11 +80,13 @@ function requestBuilder(client: EndpointProcedure, state: EndpointRequest): Requ
             // end of line, make the call
             return client(state);
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         get(target, property): (...args: any[]) => any {
             if (typeof property !== "string")
                 throw new Error(`Property ${String(property)} is not a string`);
 
             // nested call: return a callable function
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             return (...args: any[]) =>
                 requestBuilder(client, [...state, { method: property, args: args }]);
         },

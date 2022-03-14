@@ -8,6 +8,7 @@ import * as RDF from "rdf-js";
 
 export function convert<T extends Exclude<RDF.Term, RDF.BaseQuad>>(
     t: T,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dataFactory: RDF.DataFactory<any>
 ): T;
 export function convert<InQuad extends RDF.BaseQuad, OutQuad extends RDF.BaseQuad>(
@@ -27,6 +28,7 @@ export function convert<InQuad extends RDF.BaseQuad, OutQuad extends RDF.BaseQua
  * assert.ok(output.equals(input));
  * ```
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function convert(input: RDF.Term, dataFactory: RDF.DataFactory<any>): RDF.Term {
     const term: RDF.Term = input;
 
@@ -45,6 +47,7 @@ export function convert(input: RDF.Term, dataFactory: RDF.DataFactory<any>): RDF
         case "Variable":
             if (dataFactory.variable) return dataFactory.variable(term.value);
             else throw new Error("Variables are not supported");
+        case "Quad":
         default:
             // backwards compatibility: term type should be "Quad", but some implementations don't
             // set it accordingly

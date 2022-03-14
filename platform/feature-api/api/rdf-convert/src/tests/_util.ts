@@ -4,7 +4,7 @@ import { convert } from "../index";
 import { gens } from "@polypoly-eu/rdf-spec";
 import fc from "fast-check";
 import RDFJS from "@rdfjs/data-model";
-// @ts-ignore
+// @ts-ignore types not needed since it's going to be used from JS anyway
 import Graphy from "@graphy/core.data.factory";
 import { DataFactory as N3 } from "n3";
 

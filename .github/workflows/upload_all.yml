@@ -1,0 +1,7 @@
+name: Upload to Google Play and the App Store
+on:
+  workflow_dispatch:
+jobs:
+  apologize:
+    steps:
+      - run: echo "Sorry, doesn't do anything just yet"

@@ -157,7 +157,7 @@ open class PolyOut(
                     )
             }
         }
-        val retVal = supervisorScope {
+        supervisorScope {
             this.async(Dispatchers.IO) {
                 contentResolver?.openInputStream(uri).use { inputStream ->
                     if (inputStream == null) {

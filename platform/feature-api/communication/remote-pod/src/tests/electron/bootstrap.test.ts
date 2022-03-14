@@ -1,4 +1,4 @@
-import { DefaultPod } from "@polypoly-eu/pod-api";
+import { DefaultPod, FS } from "@polypoly-eu/pod-api";
 import { IncomingMessage, ServerResponse, RequestListener, Server } from "http";
 import { once } from "events";
 import { dataset } from "@rdfjs/dataset";
@@ -69,7 +69,7 @@ describe("Bootstrap (Electron)", () => {
     let server: Server;
 
     beforeEach(async () => {
-        pod = new DefaultPod(dataset(), fs as any, fetch);
+        pod = new DefaultPod(dataset(), fs as unknown as FS, fetch);
         const app = assets();
 
         server = http.createServer(app);
@@ -84,6 +84,7 @@ describe("Bootstrap (Electron)", () => {
     it("iframe", async function () {
         this.timeout(10000);
 
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const body = document.querySelector("body")!;
         const iframe = document.createElement("iframe");
         iframe.setAttribute("sandbox", "allow-scripts");
