@@ -1,10 +1,12 @@
 import Foundation
 import Zip
+import Combine
 
-class FeatureStorage {
-    static let shared = FeatureStorage()
-    
-    var activeFeature: Feature? = nil
+final class FeatureStorage: ObservableObject {
+    private let dataProtection: DataProtection
+    private var dataProtectionCancellable: AnyCancellable?
+
+    @Published var featuresList: [Feature] = []
     
     lazy var featuresFileUrl: URL = {
         do {
@@ -20,7 +22,25 @@ class FeatureStorage {
     lazy private var featureDirUrl: URL =
         URL(string: featuresFileUrl.path) ?? URL(fileURLWithPath: "")
     
-    func cleanFeatures() {
+    
+    init(dataProtection: DataProtection) {
+        self.dataProtection = dataProtection
+        setup()
+    }
+    
+    private func setup() {
+        dataProtectionCancellable = dataProtection.state.sink { [weak self] protectedDataIsAvailable in
+            guard self?.featuresList.isEmpty == true, protectedDataIsAvailable == true else {
+                return
+            }
+            
+            self?.cleanFeatures()
+            self?.importFeatures()
+            self?.loadFeatures()
+        }
+    }
+    
+    private func cleanFeatures() {
         do {
             let documentsUrl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             let featuresUrl = documentsUrl.appendingPathComponent("Features")
@@ -30,7 +50,7 @@ class FeatureStorage {
         }
     }
     
-    func featuresList() -> [Feature] {
+    private func loadFeatures() {
         var featuresList: [Feature] = []
         
         do {
@@ -48,7 +68,7 @@ class FeatureStorage {
             Log.error("Failed to list features: \(error.localizedDescription)")
         }
         
-        return sortFeatures(featuresList)
+        self.featuresList = sortFeatures(featuresList)
     }
     
     private func sortFeatures(_ features: [Feature]) -> [Feature] {

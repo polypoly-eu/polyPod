@@ -4,17 +4,14 @@
   "thumbnail": "assets/thumbnail.png",
   "primaryColor": "#000000",
   "links": {
-      "link1": "https://example.com/1",
-      "link2": "https://example.com/2"
+    "link1": "https://polypoly.coop",
+    "link2": "https://polypoly.coop"
   },
-  "translations": [
-    {
-      "language": "de",
-      "description": "Das ist eine Beispiel-Feature",
-      "links": {
-          "link1": "https://example.com/1",
-          "link2": "https://example.com/2"
-      }
+  "translations": {
+    "de": {
+        "author": "Author_DE",
+        "description": "Description_DE"
     }
-  ]
+  },
+  "version": "0.0.1"
 }

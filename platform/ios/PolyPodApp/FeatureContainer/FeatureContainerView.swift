@@ -146,7 +146,7 @@ class FeatureWebView: WKWebView {
         pickFileHandler: @escaping (String?, @escaping (ExternalFile?) -> Void) -> Void,
         approveEndpointFetchHandler: @escaping (String, @escaping (Bool) -> Void) -> Void
     ) {
-        FeatureStorage.shared.activeFeature = feature
+        PodApi.shared.polyOut.activeFeature = feature
         
         self.featureTitle = title
         self.activeActions = activeActions
