@@ -10,6 +10,8 @@ enum PodApiError: Error {
     case badArgumentData(_ arg: Any)
     case failedToReadGraph(_ type: String)
     case badData(_ data: Any)
+    case networkError(_ fetchType: String, responseCode: String)
+    case endpointError(_ fetchType: String)
 }
 
 extension PodApiError: LocalizedError {
@@ -33,6 +35,10 @@ extension PodApiError: LocalizedError {
             return "Failed to read graph: \(type)"
         case .badData(let data):
             return "Bad data: \(data)"
+        case .networkError(let fetchType, let responseCode):
+            return "network.\(fetchType) failed, Response Code: \(responseCode)"
+        case .endpointError(let fetchType):
+            return "endpoint.\(fetchType) failed"
         }
     }
 }

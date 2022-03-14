@@ -440,7 +440,7 @@ extension PostOffice {
             handleEndpointSend(args: args, completionHandler: completionHandler)
         case "get":
             handleEndpointGet(args: args, completionHandler: completionHandler)
-        default: Log.error("PolyEndpoint method unknown: \(method)")
+        default: Log.error("Endpoint method unknown: \(method)")
         }
     }
     
@@ -450,7 +450,7 @@ extension PostOffice {
         let contentType = args[2] as? String
         let authorization = args[3] as? String
         PodApi.shared.endpoint.send(endpointId: endpointId, payload: payload, contentType: contentType, authorization: authorization) { error in
-            completionHandler(.nil, error == nil ? nil : .string(error!))
+            completionHandler(.nil, error == nil ? nil : createErrorResponse(#function, error!))
         }
     }
     
@@ -459,8 +459,11 @@ extension PostOffice {
         let contentType = args[1] as? String
         let authorization = args[2] as? String
         PodApi.shared.endpoint.get(endpointId: endpointId, contentType: contentType, authorization: authorization) { data, error in
-            completionHandler(data == nil ? .nil : .string(data!), error == nil ? nil : .string(error!))
+            if (error == nil) {
+                completionHandler(data.map(MessagePackValue.string), nil)
+                return
+            }
+            completionHandler(nil, createErrorResponse(#function, error!))
         }
     }
-    
 }

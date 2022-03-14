@@ -6,18 +6,13 @@ protocol NetworkProtocol {
         body: String,
         contentType: String?,
         authorization: String?
-    ) -> NetworkResponse
+    ) -> Error?
     
     func httpGet(
         url: String,
         contentType: String?,
         authorization: String?
-    ) -> NetworkResponse
-}
-
-struct NetworkResponse {
-    let data: String?
-    let error: String?
+    ) -> Result<String?, PodApiError>
 }
 
 class Network: NetworkProtocol {
@@ -26,7 +21,7 @@ class Network: NetworkProtocol {
         body: String,
         contentType: String?,
         authorization: String?
-    ) -> NetworkResponse {
+    ) -> Error? {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "POST"
         request.httpBody = body.data(using: .utf8)
@@ -44,18 +39,18 @@ class Network: NetworkProtocol {
         }
         
         let semaphore = DispatchSemaphore(value: 0)
-        var errorMessage: String? = nil
+        var fetchError: Error? = nil
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
             guard let response = response as? HTTPURLResponse,
                   error == nil else {
-                      errorMessage = error?.localizedDescription ?? "Unknown error"
+                      fetchError = PodApiError.networkError("httpPost", responseCode: "400")
                       semaphore.signal()
                       return
                   }
             
             guard (200 ... 299) ~= response.statusCode else {
-                errorMessage = "Bad response code: \(response.statusCode)"
+                fetchError = PodApiError.networkError("httpPost", responseCode: String(response.statusCode))
                 semaphore.signal()
                 return
             }
@@ -65,17 +60,17 @@ class Network: NetworkProtocol {
         task.resume()
         semaphore.wait()
         
-        if let errorMessage = errorMessage {
-            Log.error("network.httpPost failed: \(errorMessage)")
+        if let fetchError = fetchError {
+            Log.error(fetchError.localizedDescription)
         }
-        return NetworkResponse(data: nil, error: errorMessage)
+        return fetchError
     }
     
     func httpGet(
         url: String,
         contentType: String?,
         authorization: String?
-    ) -> (NetworkResponse) {
+    ) -> Result<String?, PodApiError> {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "GET"
         
@@ -92,19 +87,18 @@ class Network: NetworkProtocol {
         }
         
         let semaphore = DispatchSemaphore(value: 0)
-        var errorMessage: String? = nil
+        var fetchError: PodApiError? = nil
         var responseData: String? = nil
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
             guard let response = response as? HTTPURLResponse,
                   error == nil else {
-                      errorMessage = error?.localizedDescription ?? "Unknown error"
                       semaphore.signal()
                       return
                   }
             
             guard (200 ... 299) ~= response.statusCode else {
-                errorMessage = "Bad response code: \(response.statusCode)"
+                fetchError = PodApiError.networkError("httpGet", responseCode: String(response.statusCode))
                 semaphore.signal()
                 return
             }
@@ -115,10 +109,6 @@ class Network: NetworkProtocol {
         task.resume()
         semaphore.wait()
         
-        if let errorMessage = errorMessage {
-            Log.error("network.httpGet failed: \(errorMessage)")
-        }
-        
-        return NetworkResponse(data: responseData, error: errorMessage)
+        return fetchError == nil ? .success(responseData) : .failure(fetchError!)
     }
 }
