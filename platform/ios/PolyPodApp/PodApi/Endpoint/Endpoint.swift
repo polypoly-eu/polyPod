@@ -38,7 +38,7 @@ final class Endpoint: EndpointProtocol {
     
     func send(endpointId: String, payload: String, contentType: String?, authorization: String?, completionHandler: @escaping (Error?) -> Void) -> Void {
         approveEndpointFetch(endpointId: endpointId) { approved in
-            if (!approved) {
+            guard approved else {
                 Log.error("endpoint.send failed: Permission for endpoint \(endpointId) denied")
                 completionHandler(PodApiError.endpointError("send"))
                 return
@@ -59,7 +59,7 @@ final class Endpoint: EndpointProtocol {
     
     func get(endpointId: String, contentType: String?, authorization: String?, completionHandler: @escaping (String?, Error?) -> Void) -> Void {
         approveEndpointFetch(endpointId: endpointId) { approved in
-            if (!approved) {
+            guard approved else {
                 Log.error("endpoint.get failed: Permission for endpoint \(endpointId) denied")
                 completionHandler(nil, PodApiError.endpointError("get"))
                 return
