@@ -12,10 +12,10 @@ protocol NetworkProtocol {
         url: String,
         contentType: String?,
         authorization: String?
-    ) -> Result<String?, PodApiError>
+    ) -> Result<Data, PodApiError>
 }
 
-class Network: NetworkProtocol {
+final class Network: NetworkProtocol {
     func httpPost(
         url: String,
         body: String,
@@ -70,7 +70,7 @@ class Network: NetworkProtocol {
         url: String,
         contentType: String?,
         authorization: String?
-    ) -> Result<String?, PodApiError> {
+    ) -> Result<Data, PodApiError> {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "GET"
         
@@ -88,7 +88,7 @@ class Network: NetworkProtocol {
         
         let semaphore = DispatchSemaphore(value: 0)
         var fetchError: PodApiError? = nil
-        var responseData: String? = nil
+        var responseData: Data? = nil
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
             guard let response = response as? HTTPURLResponse,
@@ -102,13 +102,21 @@ class Network: NetworkProtocol {
                 semaphore.signal()
                 return
             }
-            guard let data = data else { return }
-            responseData = String(data: data, encoding: .utf8)!
+            
+            guard let data = data else {
+                fetchError = PodApiError.networkError("httpGet", responseCode: String(response.statusCode))
+                return
+            }
+            responseData = data
             semaphore.signal()
         }
         task.resume()
         semaphore.wait()
         
-        return fetchError == nil ? .success(responseData) : .failure(fetchError!)
+        guard responseData != nil && fetchError != nil else {
+            return .failure(fetchError!)
+        }
+        
+        return fetchError == nil ? .success(responseData!) : .failure(fetchError!)
     }
 }

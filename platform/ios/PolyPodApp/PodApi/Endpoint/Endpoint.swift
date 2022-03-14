@@ -15,11 +15,7 @@ struct EndpointInfo: Decodable {
     let auth: String
 }
 
-private func endpointErrorMessage(apiCall: String) -> String {
-    return "endpoint.\(apiCall) failed"
-}
-
-class Endpoint: EndpointProtocol {
+final class Endpoint: EndpointProtocol {
     
     init() {
         delegate = nil
@@ -43,7 +39,6 @@ class Endpoint: EndpointProtocol {
     func send(endpointId: String, payload: String, contentType: String?, authorization: String?, completionHandler: @escaping (Error?) -> Void) -> Void {
         approveEndpointFetch(endpointId: endpointId) { approved in
             if (!approved) {
-                
                 Log.error("endpoint.send failed: Permission for endpoint \(endpointId) denied")
                 completionHandler(PodApiError.endpointError("send"))
                 return
@@ -79,7 +74,7 @@ class Endpoint: EndpointProtocol {
             case .failure(_):
                 completionHandler(nil, PodApiError.endpointError("get"))
             case .success(let responseData):
-                completionHandler(responseData, nil)
+                completionHandler(String(data: responseData, encoding: .utf8)!, nil)
         }
         }
     }
