@@ -45,7 +45,7 @@ open class PodApi(
         when (outer) {
             "polyOut" -> {
                 when (inner) {
-                    "fetch" -> return handlePolyOutFetch()
+                    "fetch" -> return handlePolyOutFetch(args)
                     "readFile" -> return handlePolyOutReadFile(args)
                     "writeFile" -> return handlePolyOutWriteFile(args)
                     "stat" -> return handlePolyOutStat(args)
