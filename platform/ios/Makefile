@@ -16,23 +16,33 @@ APPSTORE_CONNECT_API_KEY = $POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64
 APPSTORE_API_KEY_ID = $POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID
 APPSTORE_API_ISSUER_ID = $POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID
 
+ifneq ($(shell which xcpretty),)
+XCPRETTY := | xcpretty
+endif
+
 build:
+	set -o pipefail
 	xcodebuild clean build \
 		-project $(project_path) \
-		-scheme $(scheme_name)
+		-scheme $(scheme_name) \
+		$(XCPRETTY)
 
 test:
+	set -o pipefail
 	xcodebuild clean test \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
-		-destination "platform=iOS Simulator,name=iPhone 11,OS=${destination}"
+		-destination "platform=iOS Simulator,name=iPhone 11,OS=${destination}" \
+		$(XCPRETTY)
 
 archive:
 	rm -rf $(archive_path)
+	set -o pipefail
 	xcodebuild clean archive \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
-		-archivePath $(archive_path)
+		-archivePath $(archive_path) \
+		$(XCPRETTY)
 
 export_ipa: archive
 	xcodebuild \
@@ -40,6 +50,7 @@ export_ipa: archive
 		-archivePath $(archive_path) \
 		-exportPath ./build \
 		-exportOptionsPlist exportOptions.plist \
+		$(XCPRETTY)
 
 upload_ipa: export_ipa
 	# Validate the app before uploading, to catch any possible issues.
