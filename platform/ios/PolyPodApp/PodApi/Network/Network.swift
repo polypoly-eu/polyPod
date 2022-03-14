@@ -42,6 +42,7 @@ final class Network: NetworkProtocol {
         var fetchError: Error? = nil
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
+            defer { semaphore.signal() }
             guard let response = response as? HTTPURLResponse,
                   error == nil else {
                       fetchError = PodApiError.networkError("httpPost", responseCode: "400")
@@ -91,6 +92,7 @@ final class Network: NetworkProtocol {
         var responseData: Data? = nil
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
+            defer { semaphore.signal() }
             guard let response = response as? HTTPURLResponse,
                   error == nil else {
                       semaphore.signal()
