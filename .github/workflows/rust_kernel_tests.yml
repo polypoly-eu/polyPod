@@ -19,9 +19,6 @@ jobs:
       - name: Install stable toolchain
         run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-      - name: Install flatc
-        run: brew install flatbuffers
-
       - name: Generate flatbuffers
         working-directory: ./platform/core
         run: make generate_flatbuffers
