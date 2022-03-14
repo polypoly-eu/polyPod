@@ -10,13 +10,13 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.StandardCharsets
 
-class Network(val context: Context) {
+open class Network(val context: Context) {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    open suspend fun httpPost(
+    suspend fun httpPost(
         url: String,
         body: String,
         contentType: String?,
