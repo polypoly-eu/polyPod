@@ -1,10 +1,9 @@
-# PolyPod platform Kernel
+# PolyPod platform core
 
 Logic shared across polyPod platforms - ios, android, wasm. 
 
 ## Requirements
-- [Rust toolchain](https://www.rust-lang.org/tools/install). Kernel is built with Rust 1.58.1.
-- [Flatbuffers](https://formulae.brew.sh/formula/flatbuffers). Kernel is built with Flatbuffers 2.1.1.
+- [Rust toolchain](https://www.rust-lang.org/tools/install). Core is built with Rust 1.58.1.
 
 ## Building
 

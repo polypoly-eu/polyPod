@@ -8,7 +8,7 @@ use once_cell::sync::OnceCell;
 static KERNEL: OnceCell<Kernel> = OnceCell::new();
 
 // The Kernel would act as a composition root, containing any global configuration
-// to be shared between components, as well managing components life time.
+// to be shared between components, as well managing components lifetime.
 struct Kernel {
     language_code: String,
 }

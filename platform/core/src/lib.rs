@@ -4,4 +4,5 @@ mod kernel;
 mod kernel_failure;
 #[rustfmt::skip]
 #[allow(clippy::all)]
+#[allow(unused_imports)]
 mod flatbuffers_generated;
