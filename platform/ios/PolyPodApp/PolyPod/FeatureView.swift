@@ -72,8 +72,7 @@ struct FeatureView: View {
                 queuedAction: queuedAction,
                 errorHandler: handleError,
                 openUrlHandler: openUrl,
-                pickFileHandler: pickFile,
-                approveEndpointFetchHandler: approveEndpointFetch
+                pickFileHandler: pickFile
             )
         }
     }
@@ -160,40 +159,6 @@ struct FeatureView: View {
     
     private func triggerFeatureAction(_ action: String) {
         queuedAction = (action, DispatchTime.now())
-    }
-    
-    private func approveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) {
-        let viewController =
-            UIApplication.shared.windows.first!.rootViewController!
-        let alert = UIAlertController(
-            title: "",
-            message: String.localizedStringWithFormat(
-                NSLocalizedString(
-                    "message_approve_endpoint_fetch_request %@ %@",
-                    comment: ""
-                ),
-                feature.name, endpointId
-            ),
-            preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(
-                            title: NSLocalizedString(
-                                "button_confirm",
-                                comment: ""
-                            ),
-                            style: .default,
-                            handler: { (action: UIAlertAction!) in
-                                completion(true)
-                            }))
-        alert.addAction(UIAlertAction(
-                            title: NSLocalizedString(
-                                "button_reject",
-                                comment: ""
-                            ),
-                            style: .default,
-                            handler: { (action: UIAlertAction!) in
-                                completion(false)
-                            }))
-        viewController.present(alert, animated: true, completion: nil)
     }
 }
 

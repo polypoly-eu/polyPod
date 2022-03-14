@@ -9,7 +9,6 @@ struct FeatureContainerView: UIViewRepresentable {
     let errorHandler: (String) -> Void
     let openUrlHandler: (String) -> Void
     let pickFileHandler: (String?, @escaping (ExternalFile?) -> Void) -> Void
-    let approveEndpointFetchHandler: (String, @escaping (Bool) -> Void) -> Void
 
     func makeUIView(context: Context) -> FeatureWebView {
         let featureWebView = FeatureWebView(
@@ -18,8 +17,7 @@ struct FeatureContainerView: UIViewRepresentable {
             activeActions: $activeActions,
             errorHandler: errorHandler,
             openUrlHandler: openUrlHandler,
-            pickFileHandler: pickFileHandler,
-            approveEndpointFetchHandler: approveEndpointFetchHandler
+            pickFileHandler: pickFileHandler
         )
 
         if let featureColor = feature.primaryColor {
@@ -135,7 +133,6 @@ class FeatureWebView: WKWebView {
     private let openUrlHandler: (String) -> Void
     private let pickFileHandler: (String?, @escaping (ExternalFile?) -> Void) -> Void
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
-    private let approveEndpointFetchHandler: (String, @escaping (Bool) -> Void) -> Void
 
     init(
         feature: Feature,
@@ -143,17 +140,14 @@ class FeatureWebView: WKWebView {
         activeActions: Binding<[String]>,
         errorHandler: @escaping (String) -> Void,
         openUrlHandler: @escaping (String) -> Void,
-        pickFileHandler: @escaping (String?, @escaping (ExternalFile?) -> Void) -> Void,
-        approveEndpointFetchHandler: @escaping (String, @escaping (Bool) -> Void) -> Void
+        pickFileHandler: @escaping (String?, @escaping (ExternalFile?) -> Void) -> Void
     ) {
         PodApi.shared.polyOut.activeFeature = feature
-        
         self.featureTitle = title
         self.activeActions = activeActions
         self.errorHandler = errorHandler
         self.openUrlHandler = openUrlHandler
         self.pickFileHandler = pickFileHandler
-        self.approveEndpointFetchHandler = approveEndpointFetchHandler
 
         let contentController = WKUserContentController();
         installUserScript(
@@ -358,7 +352,37 @@ extension FeatureWebView: PolyNavDelegate {
 
 extension FeatureWebView: EndpointDelegate {
     func doHandleApproveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) -> Void {
-        approveEndpointFetchHandler(endpointId, completion)
+        let viewController =
+            UIApplication.shared.windows.first!.rootViewController!
+        let alert = UIAlertController(
+            title: "",
+            message: String.localizedStringWithFormat(
+                NSLocalizedString(
+                    "message_approve_endpoint_fetch_request %@ %@",
+                    comment: ""
+                ),
+                PodApi.shared.polyOut.activeFeature?.name ?? "", endpointId
+            ),
+            preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(
+                            title: NSLocalizedString(
+                                "button_confirm",
+                                comment: ""
+                            ),
+                            style: .default,
+                            handler: { (action: UIAlertAction!) in
+                                completion(true)
+                            }))
+        alert.addAction(UIAlertAction(
+                            title: NSLocalizedString(
+                                "button_reject",
+                                comment: ""
+                            ),
+                            style: .default,
+                            handler: { (action: UIAlertAction!) in
+                                completion(false)
+                            }))
+        viewController.present(alert, animated: true, completion: nil)
     }
 }
 
