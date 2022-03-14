@@ -2,7 +2,7 @@ import * as Decoder from "io-ts/Decoder";
 import * as Either from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 
-interface Manifest {
+export interface Manifest {
     readonly name: string;
     readonly description: string;
     readonly thumbnail: string;
