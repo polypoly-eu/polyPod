@@ -1,7 +1,7 @@
 import * as Decode from "io-ts/lib/Decoder";
 import { fold } from "fp-ts/lib/Either";
 import { pipe } from "fp-ts/function";
-import { parse as parseSemVer, SemVer, Range } from "semver";
+import { parse as parseSemVer, SemVer } from "semver";
 
 export interface MainManifest {
     readonly name: string;

@@ -41,7 +41,7 @@ describe("RPC", () => {
     });
 
     it("Fails (non-existent method)", async () => {
-        // @ts-ignore
+        // @ts-ignore testing a non-existent method
         await expect(rpcClient.whodis("lol")()).rejects.toThrowError(/not a function/);
     });
 });

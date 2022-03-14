@@ -6,6 +6,7 @@ import { recoverPromise, Resource } from "../util";
 
 chai.use(chaiAsPromised);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const procs: Record<string, Procedure<any, any>> = {
     "number => number (success)": async (n: number) => n + 1,
     "number => number (fail-on-odd)": async (n: number) => {
@@ -64,6 +65,7 @@ export class ProcedureSpec<T, U> {
 
             let called = false;
 
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const mockP: Procedure<any, any> = async () => {
                 called = true;
             };
@@ -79,7 +81,7 @@ export class ProcedureSpec<T, U> {
 }
 
 export function procedureSpec(lifecycle: ProcedureSpecLifecycle): void {
-    const gen = fc.integer(100);
+    const gen = fc.integer(0, 100);
 
     for (const [label, proc] of Object.entries(procs))
         describe(label, () => {
