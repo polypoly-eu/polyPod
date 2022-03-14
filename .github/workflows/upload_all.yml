@@ -3,7 +3,7 @@ on: [workflow_dispatch]
 jobs:
   call_upload_google_play:
     name: Upload to Google Play
-    uses: ./.github/workflows/upload_google_play_fake.yml
+    uses: ./.github/workflows/upload_google_play.yml
     secrets:
       POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
       POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
@@ -14,7 +14,7 @@ jobs:
 
   call_upload_app_store:
     name: Upload to the App Store
-    uses: ./.github/workflows/upload_app_store_fake.yml
+    uses: ./.github/workflows/upload_app_store.yml
     secrets:
       POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
       POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
