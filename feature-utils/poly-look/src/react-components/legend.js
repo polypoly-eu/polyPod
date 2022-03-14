@@ -32,7 +32,8 @@ class Legend {
     for (const l of legends) {
       if ((typeof l).name === "LegendEntry") {
         thisLegends.push(l);
-      } else {
+        return;
+      }
         if (l.hasOwnProperty('description') && l.hasOwnProperty('color')) {
           thisLegends.push(new LegendEntry(l.description, l.color));
         } else {
