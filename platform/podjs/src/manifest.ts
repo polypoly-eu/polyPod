@@ -2,7 +2,7 @@ import * as Decoder from "io-ts/Decoder";
 import * as Either from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 
-export interface Manifest {
+interface Manifest {
     readonly name: string;
     readonly description: string;
     readonly thumbnail: string;
@@ -11,6 +11,7 @@ export interface Manifest {
     readonly translations: Record<string, Partial<Manifest>>;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const decodeWith = <EncodeTo = any, DecodeFrom = unknown>(
     input: DecodeFrom,
     decoder: Decoder.Decoder<DecodeFrom, EncodeTo>
@@ -44,6 +45,7 @@ const manifestDecoder = Decoder.type({
     thumbnail: relativeDecoder,
     primaryColor: Decoder.string,
     links: Decoder.record(Decoder.string),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     translations: Decoder.record(Decoder.partial<any>({})),
 });
 
