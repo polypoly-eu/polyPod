@@ -2,7 +2,7 @@ import {
   LegendEntry,
   Legend,
   IncorrectLegendEntry,
-} from "../../src/react-components/legends/legend.js";
+} from "../../src/react-components/legend.js";
 
 describe("LegendEntries work", () => {
   it("Creates a legendEntry", () => {

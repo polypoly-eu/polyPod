@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 import {
   BlockLegend,
   LineLegend,
-} from "../../src/react-components/legends/legends.jsx";
+} from "../../src/react-components/legends.jsx";
 
 /**
  * @jest-environment jsdom
