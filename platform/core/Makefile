@@ -1,6 +1,7 @@
-FLATBUFFERS := $(shell find -P flatbuffers -name "*.fbs" )
+FLATBUFFERS := $(shell find -P flatbuffer_models -name "*.fbs" )
 
 generate_flatbuffers:
+
 	# Check flatc is installed
 	if ! hash flatc &> /dev/null; then echo "flatbuffers not installed"; exit 1; fi
 
