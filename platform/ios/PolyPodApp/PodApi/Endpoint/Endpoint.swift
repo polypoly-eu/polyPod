@@ -48,11 +48,12 @@ final class Endpoint: EndpointProtocol {
                 completionHandler(PodApiError.endpointError("send"))
                 return
             }
-            let error = self.network.httpPost(url: endpointInfo.url, body: payload, contentType: contentType, authorization: endpointInfo.auth)
-            if (error == nil) {
-                completionHandler(nil)
-            } else {
+            let response = self.network.httpPost(url: endpointInfo.url, body: payload, contentType: contentType, authorization: endpointInfo.auth)
+            switch response {
+            case .failure(_):
                 completionHandler(PodApiError.endpointError("send"))
+            case .success(_):
+                completionHandler(nil)
             }
         }
     }
@@ -75,7 +76,7 @@ final class Endpoint: EndpointProtocol {
                 completionHandler(nil, PodApiError.endpointError("get"))
             case .success(let responseData):
                 completionHandler(String(data: responseData, encoding: .utf8)!, nil)
-        }
+            }
         }
     }
 }
