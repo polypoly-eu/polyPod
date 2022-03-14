@@ -33,7 +33,7 @@ class Legend {
       if ((typeof l).name === "LegendEntry") {
         thisLegends.push(l);
       } else {
-        if ("description" in l && "color" in l) {
+        if (l.hasOwnProperty('description') && l.hasOwnProperty('color')) {
           thisLegends.push(new LegendEntry(l.description, l.color));
         } else {
           throw new IncorrectLegendEntry(l);
