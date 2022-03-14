@@ -2,19 +2,6 @@ name: Upload APK to Google Play
 on:
   workflow_dispatch:
   workflow_call:
-    secrets:
-      POLYPOD_POLYPEDIA_REPORT_URL:
-        required: true
-      POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION:
-        required: true
-      POLYPOD_ANDROID_UPLOAD_KEYSTORE_FILE:
-        required: true
-      POLYPOD_ANDROID_UPLOAD_KEYSTORE_PASS:
-        required: true
-      POLYPOD_ANDROID_UPLOAD_KEY_ALIAS:
-        required: true
-      POLYPOD_ANDROID_STORE_SERVICE_ACCOUNT_JSON:
-        required: true
 jobs:
   check_branch:
     name: "Check branch ('release*' or 'main' or 'prod4pod-1426')."
