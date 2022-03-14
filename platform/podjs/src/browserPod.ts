@@ -318,8 +318,30 @@ class BrowserNetwork {
         url: string,
         body: string,
         contentType?: string,
-        authorization?: string
-    ): Promise<NetworkResponse | void> {
+        authToken?: string
+    ): Promise<NetworkResponse> {
+        return await this.httpFetchRequest(
+            "Post",
+            url,
+            body,
+            contentType,
+            authToken
+        );
+    }
+    async httpGet(
+        url: string,
+        contentType?: string,
+        authToken?: string
+    ): Promise<NetworkResponse> {
+        return await this.httpFetchRequest("GET", url, contentType, authToken);
+    }
+    private async httpFetchRequest(
+        type: string,
+        url: string,
+        body?: string,
+        contentType?: string,
+        authToken?: string
+    ): Promise<NetworkResponse> {
         return new Promise((resolve) => {
             const request = new XMLHttpRequest();
             const fetchResponse = {} as NetworkResponse;
@@ -339,51 +361,15 @@ class BrowserNetwork {
                 resolve(fetchResponse);
             };
 
-            request.open("POST", url);
+            request.open(type, url);
             if (contentType)
                 request.setRequestHeader("Content-Type", contentType);
-            if (authorization)
+            if (authToken)
                 request.setRequestHeader(
                     "Authorization",
-                    "Basic " + btoa(authorization)
+                    "Basic " + btoa(authToken)
                 );
-            request.send(body);
-        });
-    }
-    async httpGet(
-        url: string,
-        body: string,
-        contentType?: string,
-        authorization?: string
-    ): Promise<NetworkResponse> {
-        return new Promise((resolve) => {
-            const request = new XMLHttpRequest();
-            const fetchResponse = {} as NetworkResponse;
-            request.onreadystatechange = function () {
-                if (request.readyState !== XMLHttpRequest.DONE) return;
-                const status = request.status;
-                if (status < 200 || status > 299) {
-                    fetchResponse.error = `Unexpected response: ${request.responseText}`;
-                    resolve(fetchResponse);
-                }
-                fetchResponse.payload = request.responseText;
-                resolve(fetchResponse);
-            };
-
-            request.onerror = function () {
-                fetchResponse.error = "Network API Client Error";
-                resolve(fetchResponse);
-            };
-
-            request.open("GET", url);
-            if (contentType)
-                request.setRequestHeader("Content-Type", contentType);
-            if (authorization)
-                request.setRequestHeader(
-                    "Authorization",
-                    "Basic " + btoa(authorization)
-                );
-            request.send(body);
+            if (body) request.send(body);
         });
     }
 }
@@ -413,7 +399,7 @@ class BrowserEndpoint implements Endpoint {
         featureIdToken: string,
         payload: string,
         contentType?: string,
-        authorization?: string
+        authToken?: string
     ): Promise<void> {
         if (!approveEndpointFetch(endpointId, featureIdToken))
             throw EndpointError("send", "User denied request");
@@ -425,15 +411,14 @@ class BrowserEndpoint implements Endpoint {
             endpointURL,
             payload,
             contentType,
-            authorization
+            authToken
         );
     }
     async get(
         endpointId: string,
         featureIdToken: string,
-        payload: string,
         contentType?: string,
-        authorization?: string
+        authToken?: string
     ): Promise<string | null> {
         if (!approveEndpointFetch(endpointId, featureIdToken))
             throw EndpointError("send", "User denied request");
@@ -441,9 +426,8 @@ class BrowserEndpoint implements Endpoint {
         if (!endpointURL) throw EndpointError("send", "Endpoint URL not set");
         const NetworkResponse = await this.endpointNetwork.httpGet(
             endpointURL,
-            payload,
             contentType,
-            authorization
+            authToken
         );
         if (NetworkResponse.error)
             throw EndpointError("send", NetworkResponse.error);

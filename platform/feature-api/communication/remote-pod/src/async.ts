@@ -111,17 +111,17 @@ class AsyncEndpoint implements Endpoint {
         endpointId: string,
         payload: string,
         contentType?: string,
-        authorization?: string
+        authToken?: string
     ): Promise<void> {
-        return (await this.promise).send(endpointId, payload, contentType, authorization);
+        return (await this.promise).send(endpointId, payload, contentType, authToken);
     }
 
     async get(
         endpointId: string,
         contentType?: string,
-        authorization?: string
+        authToken?: string
     ): Promise<string | null> {
-        return (await this.promise).get(endpointId, contentType, authorization);
+        return (await this.promise).get(endpointId, contentType, authToken);
     }
 }
 

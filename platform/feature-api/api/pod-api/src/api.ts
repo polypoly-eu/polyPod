@@ -195,14 +195,14 @@ export interface Endpoint {
         endpointId: string,
         payload: string,
         contentType?: string,
-        authorization?: string
+        authToken?: string
     ): Promise<void>;
 
     /**
      * Perform a http get request via the endpoint in the pod
      * @returns a promise with the response
      */
-    get(endpointId: string, contentType?: string, authorization?: string): Promise<string | null>;
+    get(endpointId: string, contentType?: string, authToken?: string): Promise<string | null>;
 }
 
 /**
