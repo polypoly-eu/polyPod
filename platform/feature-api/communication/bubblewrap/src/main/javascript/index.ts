@@ -35,12 +35,12 @@ export const deserialize: unique symbol = Symbol();
  */
 export const serialize: unique symbol = Symbol();
 
-export interface MaybeSerializable {
-    [serialize]?: () => any;
+interface MaybeSerializable<TS = unknown> {
+    [serialize]?: () => TS;
 }
 
-export interface Serializable extends MaybeSerializable {
-    [serialize]: () => any;
+interface Serializable<TS = unknown> extends MaybeSerializable {
+    [serialize]: () => TS;
 }
 
 // Type guard for Serializable
@@ -145,6 +145,7 @@ function isSerializable(t: MaybeSerializable): t is Serializable {
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Class<T extends MaybeSerializable> = Function & {
     prototype: T;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [deserialize]?: (any: any) => T;
 };
 
@@ -169,6 +170,7 @@ export type Class<T extends MaybeSerializable> = Function & {
  *
  * See [[Bubblewrap]] for how to register classes.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Classes = Record<string, Class<any>>;
 
 export const msgPackEtypeUndef = 0x01;
@@ -258,7 +260,7 @@ export class Bubblewrap {
                 for (const [name, Class] of entries) {
                     if (!(_value instanceof Class)) continue;
 
-                    // @ts-ignore
+                    // @ts-ignore _value is unknown. Bubblewrap needs to be more type-conscious on both ends: TO DO
                     const value: MaybeSerializable = _value;
 
                     if (isSerializable(value))
@@ -276,6 +278,7 @@ export class Bubblewrap {
                 return null;
             },
             decode: (buffer) => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const [name, raw] = decode(buffer, { extensionCodec: codec }) as any;
                 const Class = this.classes[name];
 
@@ -283,6 +286,7 @@ export class Bubblewrap {
                 if (deserializer !== undefined) return deserializer(raw);
 
                 const object = Object.create(Class.prototype);
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 for (const [key, value] of raw as [string, any][]) object[key] = value;
                 return object;
             },
@@ -310,6 +314,7 @@ export class Bubblewrap {
         return encode(value, { extensionCodec: this.codec });
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     decode(_buffer: ArrayLike<number> | ArrayBuffer): any {
         const buffer = new Uint8Array(_buffer);
         return decode(buffer, { extensionCodec: this.codec });

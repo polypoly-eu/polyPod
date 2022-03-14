@@ -23,7 +23,10 @@ describe("Strict", () => {
         expect(() => dataFactory.literal("hi", dt)).toThrowError(/prototype/);
     });
 
+    // TODO: recheck correctness of this test
+    // what is an ill-typed invocation of a string value?
     it("Rejects ill-typed invocations", () => {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         expect(() => dataFactory.variable(null!)).toThrowError();
     });
 });

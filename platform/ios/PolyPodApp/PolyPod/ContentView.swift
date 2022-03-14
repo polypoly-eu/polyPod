@@ -31,6 +31,7 @@ struct ContentView: View {
     
     @State private var state: ViewState? = nil
     @State private var showUpdateNotification = false
+    @ObservedObject var featureStorage: FeatureStorage
     var setStatusBarStyle: ((UIStatusBarStyle) -> Void)? = nil
     
     var body: some View {
@@ -136,7 +137,7 @@ struct ContentView: View {
         return ViewState(
             AnyView(
                 FeatureListView(
-                    features: FeatureStorage.shared.featuresList(),
+                    featureList: $featureStorage.featuresList,
                     openFeatureAction: { feature in
                         state = featureState(feature)
                     },

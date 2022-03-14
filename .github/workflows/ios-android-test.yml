@@ -2,15 +2,18 @@ name: polyPod iOS/Android integration test
 on:
     push:
         paths:
-            - "build/**"
+            - "feature-utils/**"
             - "features/**"
             - "platform/feature-api/**"
+            - "platform/core/**"
             - "platform/ios/**"
             - "platform/android/**"
     pull_request:
+        types: [assigned, opened, ready_for_review]
         paths:
-            - "build/**"
+            - "feature-utils/**"
             - "features/**"
+            - "platform/core/**"
             - "platform/feature-api/**"
             - "platform/ios/**"
             - "platform/android/**"
