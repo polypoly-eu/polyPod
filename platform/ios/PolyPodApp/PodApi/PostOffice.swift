@@ -445,8 +445,14 @@ extension PostOffice {
     }
     
     private func handleEndpointSend(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        let endpointId = args[0] as! String
-        let payload = args[1] as! String
+        guard let endpointId = args[0] as? String else {
+            completionHandler(nil, createErrorResponse(#function, PodApiError.badArgumentType(args[0], type: "String")))
+            return
+        }
+        guard let payload = args[1] as? String else {
+            completionHandler(nil, createErrorResponse(#function, PodApiError.badArgumentType(args[1], type: "String")))
+            return
+        }
         let contentType = args[2] as? String
         let authorization = args[3] as? String
         PodApi.shared.endpoint.send(endpointId: endpointId, payload: payload, contentType: contentType, authorization: authorization) { error in
@@ -455,7 +461,10 @@ extension PostOffice {
     }
     
     private func handleEndpointGet(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        let endpointId = args[0] as! String
+        guard let endpointId = args[0] as? String else {
+            completionHandler(nil, createErrorResponse(#function, PodApiError.badArgumentType(args[0], type: "String")))
+            return
+        }
         let contentType = args[1] as? String
         let authorization = args[2] as? String
         PodApi.shared.endpoint.get(endpointId: endpointId, contentType: contentType, authorization: authorization) { data, error in

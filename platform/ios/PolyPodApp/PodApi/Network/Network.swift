@@ -115,8 +115,8 @@ final class Network: NetworkProtocol {
         task.resume()
         semaphore.wait()
         
-        guard responseData != nil && fetchError != nil else {
-            return .failure(fetchError!)
+        guard !(responseData == nil && fetchError == nil) else {
+            return .failure(PodApiError.networkError("httpGet", responseCode: "400"))
         }
         
         return fetchError == nil ? .success(responseData!) : .failure(fetchError!)
