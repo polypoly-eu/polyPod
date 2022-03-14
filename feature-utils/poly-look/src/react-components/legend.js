@@ -30,16 +30,13 @@ class Legend {
     let thisLegends = [];
     for (const legend of legends) {
       if (legend.constructor.name === "LegendEntry") {
-        thisLegends.push(l);
+        thisLegends.push(legend);
         return;
       }
-      if (
-        legend.hasOwnProperty("description") &&
-        legend.hasOwnProperty("color")
-      ) {
+      if ("description" in legend && "color" in legend) {
         thisLegends.push(new LegendEntry(legend.description, legend.color));
       } else {
-        throw new IncorrectLegendEntry(l);
+        throw new IncorrectLegendEntry(legend);
       }
     }
     this._legends = thisLegends;
