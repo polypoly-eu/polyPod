@@ -1,3 +1,4 @@
 /target
 /src/flatbuffers_generated
 !/src/flatbuffers_generated/mod.rs
+/flatbuffers
