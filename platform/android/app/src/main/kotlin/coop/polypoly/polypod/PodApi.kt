@@ -92,7 +92,9 @@ open class PodApi(
         )
     }
 
-    private suspend fun handlePolyOutFetch(@Suppress("UNUSED_PARAMETER") args: List<Value>): Value {
+    private suspend fun handlePolyOutFetch(
+        @Suppress("UNUSED_PARAMETER") args: List<Value>
+    ): Value {
         logger.debug("dispatch() -> polyOut.fetch")
         throw Exception("Not implemented")
     }
