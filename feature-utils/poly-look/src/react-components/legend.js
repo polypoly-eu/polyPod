@@ -7,14 +7,13 @@ class IncorrectLegendEntry extends Error {
 class LegendEntry {
   constructor(description, color) {
     this._description = description;
-    if (color.match(/^#[0-9a-fA-F]{6}$/)) {
-      this._color = color;
-    } else {
+    if (!color.match(/^#[0-9a-fA-F]{6}$/)) {
       throw new IncorrectLegendEntry({
         description: description,
         color: color,
       });
     }
+    this._color = color;
   }
 
   get description() {
