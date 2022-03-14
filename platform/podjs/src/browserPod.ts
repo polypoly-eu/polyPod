@@ -330,7 +330,8 @@ class BrowserNetwork {
                     fetchResponse.error = `Unexpected response: ${request.responseText}`;
                     resolve(fetchResponse);
                 }
-                resolve();
+                fetchResponse.payload = request.responseText;
+                resolve(fetchResponse);
             };
 
             request.onerror = function () {
@@ -418,7 +419,7 @@ class BrowserEndpoint implements Endpoint {
             throw EndpointError("send", "User denied request");
         const endpointURL = getEndpoint(endpointId);
         if (!endpointURL) {
-            throw EndpointError("send", "Endpoint URL not found");
+            throw EndpointError("send", "Endpoint URL not set");
         }
         await this.endpointNetwork.httpPost(
             endpointURL,
@@ -437,7 +438,7 @@ class BrowserEndpoint implements Endpoint {
         if (!approveEndpointFetch(endpointId, featureIdToken))
             throw EndpointError("send", "User denied request");
         const endpointURL = getEndpoint(endpointId);
-        if (!endpointURL) throw EndpointError("send", "Endpoint URL not found");
+        if (!endpointURL) throw EndpointError("send", "Endpoint URL not set");
         const NetworkResponse = await this.endpointNetwork.httpGet(
             endpointURL,
             payload,

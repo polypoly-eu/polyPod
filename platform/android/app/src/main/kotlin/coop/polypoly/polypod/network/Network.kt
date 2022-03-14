@@ -66,8 +66,15 @@ class Network(val context: Context) {
             logger.error("network.httpPost failed: ${response.error}")
             return@withContext response
         }
-
+        try {
+            response.data =
+                connection.inputStream.bufferedReader().use { it.readText() }
+        } finally {
+            connection.disconnect()
+            return@withContext response
+        }
         return@withContext response
+
     }
 
     open suspend fun httpGet(
