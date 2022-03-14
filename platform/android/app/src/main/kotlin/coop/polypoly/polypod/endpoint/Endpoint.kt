@@ -27,8 +27,9 @@ class Endpoint(
     private fun endpointInfofromId(endpointId: String): EndpointInfo? {
         val endpointsPath = "config-assets/endpoints.json"
         val endpointsJsonString = context.assets.readFile(endpointsPath)
-        val endpointInfoJsonType = object : HashMap<String, EndpointInfo>(){}
-        val endpointsJson : HashMap<String, EndpointInfo> = Gson().fromJson(endpointsJsonString, endpointInfoJsonType::class.java)
+        val endpointInfoJsonType = object : HashMap<String, EndpointInfo>() {}
+        val endpointsJson: HashMap<String, EndpointInfo> = Gson()
+            .fromJson(endpointsJsonString, endpointInfoJsonType::class.java)
         return endpointsJson[endpointId]
     }
 
