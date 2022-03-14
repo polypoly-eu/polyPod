@@ -45,6 +45,7 @@ archive:
 		$(XCPRETTY)
 
 export_ipa: archive
+	set -o pipefail
 	xcodebuild \
 		-exportArchive \
 		-archivePath $(archive_path) \
