@@ -1,7 +1,7 @@
 name: Upload to all stores
 on: [workflow_dispatch]
 jobs:
-  check_upload_branch:
+  call_check_upload_branch:
     name: Check upload branch
     uses: ./.github/workflows/check_upload_branch.yml
   upload_google_play:
