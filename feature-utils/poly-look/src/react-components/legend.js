@@ -30,7 +30,7 @@ class Legend {
   constructor(legends) {
     let thisLegends = [];
     for (const l of legends) {
-      if ((typeof l).name === "LegendEntry") {
+      if (l.constructor.name === "LegendEntry") {
         thisLegends.push(l);
         return;
       }
