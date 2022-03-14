@@ -414,22 +414,18 @@ class BrowserEndpoint implements Endpoint {
         contentType?: string,
         authorization?: string
     ): Promise<void> {
-        //Poly Error Codes start from 600s or 1000s
-        return new Promise((resolve) => {
-            if (!approveEndpointFetch(endpointId, featureIdToken))
-                throw EndpointError("send", "User denied request");
-            const endpointURL = getEndpoint(endpointId);
-            if (!endpointURL) {
-                throw EndpointError("send", "Endpoint URL not found");
-            }
-            this.endpointNetwork.httpPost(
-                endpointURL,
-                payload,
-                contentType,
-                authorization
-            );
-            resolve();
-        });
+        if (!approveEndpointFetch(endpointId, featureIdToken))
+            throw EndpointError("send", "User denied request");
+        const endpointURL = getEndpoint(endpointId);
+        if (!endpointURL) {
+            throw EndpointError("send", "Endpoint URL not found");
+        }
+        await this.endpointNetwork.httpPost(
+            endpointURL,
+            payload,
+            contentType,
+            authorization
+        );
     }
     async get(
         endpointId: string,
@@ -451,7 +447,7 @@ class BrowserEndpoint implements Endpoint {
         if (NetworkResponse.error)
             throw EndpointError("send", NetworkResponse.error);
         const endpointResponse = NetworkResponse.payload || null;
-        return new Promise((response) => response(endpointResponse));
+        return endpointResponse;
     }
 }
 
