@@ -21,7 +21,7 @@ export default [
                 transforms: ["typescript"],
             }),
         ],
-        external: ["@polypoly-eu/rdf","@polypoly-eu/manifest-parser", "@zip.js/zip.js"],
+        external: ["@polypoly-eu/rdf", "@zip.js/zip.js"],
     },
     {
         input: "src/pod.ts",
