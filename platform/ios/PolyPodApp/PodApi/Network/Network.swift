@@ -5,13 +5,13 @@ protocol NetworkProtocol {
         url: String,
         body: String,
         contentType: String?,
-        authorization: String?
+        authToken: String?
     ) -> Result<Data, PodApiError>
     
     func httpGet(
         url: String,
         contentType: String?,
-        authorization: String?
+        authToken: String?
     ) -> Result<Data, PodApiError>
 }
 
@@ -20,17 +20,17 @@ final class Network: NetworkProtocol {
         url: String,
         body: String,
         contentType: String?,
-        authorization: String?
+        authToken: String?
     ) -> Result<Data, PodApiError> {
-        return httpFetchCall(type: "POST", url: url, body: body, contentType: contentType, authorization: authorization)
+        return httpFetchCall(type: "POST", url: url, body: body, contentType: contentType, authToken: authToken)
     }
     
     func httpGet(
         url: String,
         contentType: String?,
-        authorization: String?
+        authToken: String?
     ) -> Result<Data, PodApiError> {
-        return httpFetchCall(type: "GET", url: url, body: nil, contentType: contentType, authorization: authorization)
+        return httpFetchCall(type: "GET", url: url, body: nil, contentType: contentType, authToken: authToken)
     }
     
     func httpFetchCall(
@@ -38,7 +38,7 @@ final class Network: NetworkProtocol {
         url: String,
         body: String?,
         contentType: String?,
-        authorization: String?) -> Result<Data, PodApiError>  {
+        authToken: String?) -> Result<Data, PodApiError>  {
             var request = URLRequest(url: URL(string: url)!)
             request.httpMethod = type
             if (body != nil) {
@@ -49,8 +49,8 @@ final class Network: NetworkProtocol {
                 request.setValue(contentType, forHTTPHeaderField: "Content-Type")
             }
             
-            if let authorization = authorization {
-                let encoded = Data(authorization.utf8).base64EncodedString()
+            if let authToken = authToken {
+                let encoded = Data(authToken.utf8).base64EncodedString()
                 request.setValue(
                     "Basic \(encoded)",
                     forHTTPHeaderField: "Authorization"

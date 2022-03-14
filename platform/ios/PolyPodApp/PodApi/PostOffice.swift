@@ -454,8 +454,8 @@ extension PostOffice {
             return
         }
         let contentType = args[2] as? String
-        let authorization = args[3] as? String
-        PodApi.shared.endpoint.send(endpointId: endpointId, payload: payload, contentType: contentType, authorization: authorization) { error in
+        let authToken = args[3] as? String
+        PodApi.shared.endpoint.send(endpointId: endpointId, payload: payload, contentType: contentType, authToken: authToken) { error in
             completionHandler(.nil, error == nil ? nil : createErrorResponse(#function, error!))
         }
     }
@@ -466,8 +466,8 @@ extension PostOffice {
             return
         }
         let contentType = args[1] as? String
-        let authorization = args[2] as? String
-        PodApi.shared.endpoint.get(endpointId: endpointId, contentType: contentType, authorization: authorization) { data, error in
+        let authToken = args[2] as? String
+        PodApi.shared.endpoint.get(endpointId: endpointId, contentType: contentType, authToken: authToken) { data, error in
             if (error == nil) {
                 completionHandler(data.map(MessagePackValue.string), nil)
                 return

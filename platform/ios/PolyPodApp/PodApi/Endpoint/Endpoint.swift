@@ -2,8 +2,8 @@ import Foundation
 import MessagePack
 
 protocol EndpointProtocol {
-    func send(endpointId: String, payload: String, contentType: String?, authorization: String?, completionHandler: @escaping (Error?) -> Void) -> Void
-    func get(endpointId: String, contentType: String?, authorization: String?, completionHandler: @escaping (String?, Error?) -> Void) -> Void
+    func send(endpointId: String, payload: String, contentType: String?, authToken: String?, completionHandler: @escaping (Error?) -> Void) -> Void
+    func get(endpointId: String, contentType: String?, authToken: String?, completionHandler: @escaping (String?, Error?) -> Void) -> Void
 }
 
 protocol EndpointDelegate {
@@ -36,7 +36,7 @@ final class Endpoint: EndpointProtocol {
         return endpointsJson[endpointId]
     }
     
-    func send(endpointId: String, payload: String, contentType: String?, authorization: String?, completionHandler: @escaping (Error?) -> Void) -> Void {
+    func send(endpointId: String, payload: String, contentType: String?, authToken: String?, completionHandler: @escaping (Error?) -> Void) -> Void {
         approveEndpointFetch(endpointId: endpointId) { approved in
             guard approved else {
                 Log.error("endpoint.send failed: Permission for endpoint \(endpointId) denied")
@@ -48,7 +48,7 @@ final class Endpoint: EndpointProtocol {
                 completionHandler(PodApiError.endpointError("send"))
                 return
             }
-            let response = self.network.httpPost(url: endpointInfo.url, body: payload, contentType: contentType, authorization: endpointInfo.auth)
+            let response = self.network.httpPost(url: endpointInfo.url, body: payload, contentType: contentType, authToken: endpointInfo.auth)
             switch response {
             case .failure(_):
                 completionHandler(PodApiError.endpointError("send"))
@@ -58,7 +58,7 @@ final class Endpoint: EndpointProtocol {
         }
     }
     
-    func get(endpointId: String, contentType: String?, authorization: String?, completionHandler: @escaping (String?, Error?) -> Void) -> Void {
+    func get(endpointId: String, contentType: String?, authToken: String?, completionHandler: @escaping (String?, Error?) -> Void) -> Void {
         approveEndpointFetch(endpointId: endpointId) { approved in
             guard approved else {
                 Log.error("endpoint.get failed: Permission for endpoint \(endpointId) denied")
@@ -70,7 +70,7 @@ final class Endpoint: EndpointProtocol {
                 completionHandler(nil, PodApiError.endpointError("get"))
                 return
             }
-            let response = self.network.httpGet(url: endpointInfo.url, contentType: contentType, authorization: endpointInfo.auth)
+            let response = self.network.httpGet(url: endpointInfo.url, contentType: contentType, authToken: endpointInfo.auth)
             switch response {
             case .failure(_):
                 completionHandler(nil, PodApiError.endpointError("get"))
