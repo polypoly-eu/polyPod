@@ -1,8 +1,9 @@
-name: Upload to Google Play and the App Store
-on:
-  workflow_dispatch:
+name: Upload to all stores
+on: [workflow_dispatch]
 jobs:
   call_upload_google_play:
+    name: Upload to Google Play
     uses: ./.github/workflows/upload_google_play_fake.yml
   call_upload_app_store:
+    name: Upload to the App Store
     uses: ./.github/workflows/upload_app_store_fake.yml
