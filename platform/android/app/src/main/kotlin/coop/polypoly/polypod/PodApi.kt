@@ -105,6 +105,7 @@ open class PodApi(
 
     private suspend fun handlePolyOutWriteFile(args: List<Value>): Value {
         logger.debug("dispatch() -> polyOut.readFile")
+        // TODO: assign to variable or run in a try environment to check for errors
         polyOut.writeFile(
             args[0].asStringValue().toString(),
             args[1].asBinaryValue().asByteBuffer()
