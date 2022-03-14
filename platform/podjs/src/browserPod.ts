@@ -353,6 +353,7 @@ class BrowserNetwork {
                     resolve(fetchResponse);
                 }
                 fetchResponse.payload = request.responseText;
+                console.log(fetchResponse);
                 resolve(fetchResponse);
             };
 
@@ -369,7 +370,8 @@ class BrowserNetwork {
                     "Authorization",
                     "Basic " + btoa(authToken)
                 );
-            if (body) request.send(body);
+            // Even if there is no body request.send must be executed, so this works even if body is null
+            request.send(body);
         });
     }
 }
