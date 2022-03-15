@@ -34,7 +34,7 @@ jobs:
             - name: Build API and features
               run: ./build.js
             - name: Build and test iOS
-              working-directory: platform/android
+              working-directory: platform/ios
               run: make test
             - uses: actions/setup-java@v2
               with:
