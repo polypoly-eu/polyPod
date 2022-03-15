@@ -3,7 +3,7 @@ import { procedureSpec } from "../../specs/procedure";
 import { procedureLiftedLifecycle } from "../_lifecycles";
 
 describe("Browser/Procedure", () => {
-  describe("lifted", () => {
-    procedureSpec(procedureLiftedLifecycle(browserLoopbackLifecycle));
-  });
+    describe("lifted", () => {
+        procedureSpec(procedureLiftedLifecycle(browserLoopbackLifecycle));
+    });
 });

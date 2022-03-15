@@ -16,8 +16,8 @@
  * virtual and no instances are generated.
  */
 export interface ValueEndpointSpec<T> {
-  endpointType: "value";
-  value: T;
+    endpointType: "value";
+    value: T;
 }
 
 /**
@@ -26,8 +26,8 @@ export interface ValueEndpointSpec<T> {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface ObjectEndpointSpec<T extends Record<string, (...args: any[]) => EndpointSpec>> {
-  endpointType: "object";
-  methods: T;
+    endpointType: "object";
+    methods: T;
 }
 
 /**
@@ -104,16 +104,16 @@ export type MaybePromise<T> = T | ForcePromise<T>;
  * `Promise<number>`.
  */
 export type ServerOf<Spec extends EndpointSpec> = Spec extends ValueEndpointSpec<infer T>
-  ? MaybePromise<T>
-  : Spec extends ObjectEndpointSpec<infer T>
-  ? {
-      [P in keyof T]: T[P] extends (...args: infer Args) => infer Return
-        ? Return extends EndpointSpec
-          ? (...args: Args) => MaybePromise<ServerOf<Return>>
-          : never
-        : never;
-    }
-  : never;
+    ? MaybePromise<T>
+    : Spec extends ObjectEndpointSpec<infer T>
+    ? {
+          [P in keyof T]: T[P] extends (...args: infer Args) => infer Return
+              ? Return extends EndpointSpec
+                  ? (...args: Args) => MaybePromise<ServerOf<Return>>
+                  : never
+              : never;
+      }
+    : never;
 
 /**
  * This alias denotes the “end” of a call chain. It is a function taking no
@@ -162,13 +162,13 @@ export type Callable<T> = () => ForcePromise<T>;
  * mirrors the shape of the proxy.
  */
 export type ClientOf<Spec extends EndpointSpec> = Spec extends ValueEndpointSpec<infer T>
-  ? Callable<T>
-  : Spec extends ObjectEndpointSpec<infer T>
-  ? {
-      [P in keyof T]: T[P] extends (...args: infer Args) => infer Return
-        ? Return extends EndpointSpec
-          ? (...args: Args) => ClientOf<Return>
-          : never
-        : never;
-    }
-  : never;
+    ? Callable<T>
+    : Spec extends ObjectEndpointSpec<infer T>
+    ? {
+          [P in keyof T]: T[P] extends (...args: infer Args) => infer Return
+              ? Return extends EndpointSpec
+                  ? (...args: Args) => ClientOf<Return>
+                  : never
+              : never;
+      }
+    : never;

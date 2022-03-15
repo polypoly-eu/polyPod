@@ -27,16 +27,16 @@ import createServer, { NextHandleFunction, HandleFunction } from "connect";
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function fromNodeMessagePort(port: MessagePort): Port<any, any> {
-  return {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    send(value: any): void {
-      port.postMessage(value);
-    },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    addHandler(handler: Handler<any>): void {
-      port.on("message", handler);
-    },
-  };
+    return {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        send(value: any): void {
+            port.postMessage(value);
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        addHandler(handler: Handler<any>): void {
+            port.on("message", handler);
+        },
+    };
 }
 
 /**
@@ -67,51 +67,51 @@ export function fromNodeMessagePort(port: MessagePort): Port<any, any> {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function middlewarePort<T, Body = any>(
-  contentType: string,
-  format: (result: Try<T>) => Body
+    contentType: string,
+    format: (result: Try<T>) => Body
 ): [HandleFunction, ResponsePort<Body, T>] {
-  let _handler: Handler<WithResolvers<Body, T>> | undefined = undefined;
+    let _handler: Handler<WithResolvers<Body, T>> | undefined = undefined;
 
-  const middleware: NextHandleFunction = async (_request, response, next) => {
-    if (_request.method === "GET") {
-      // this is to signal that the endpoint exists
-      response.writeHead(200);
-      response.end();
-      return;
-    }
+    const middleware: NextHandleFunction = async (_request, response, next) => {
+        if (_request.method === "GET") {
+            // this is to signal that the endpoint exists
+            response.writeHead(200);
+            response.end();
+            return;
+        }
 
-    if (_handler === undefined) return; // yolo
+        if (_handler === undefined) return; // yolo
 
-    const handler = _handler;
-    const request = _request as IncomingMessage & { body: Body };
+        const handler = _handler;
+        const request = _request as IncomingMessage & { body: Body };
 
-    if (request.method !== "POST") next();
+        if (request.method !== "POST") next();
 
-    const result = await recoverPromise(
-      new Promise<T>((resolve, reject) => {
-        handler({
-          request: request.body,
-          resolvers: { resolve, reject },
-        });
-      })
-    );
+        const result = await recoverPromise(
+            new Promise<T>((resolve, reject) => {
+                handler({
+                    request: request.body,
+                    resolvers: { resolve, reject },
+                });
+            })
+        );
 
-    const body = format(result);
+        const body = format(result);
 
-    response.setHeader("Content-Type", contentType);
-    response.writeHead(200);
-    response.write(body);
-    response.end();
-  };
+        response.setHeader("Content-Type", contentType);
+        response.writeHead(200);
+        response.write(body);
+        response.end();
+    };
 
-  return [
-    middleware,
-    {
-      addHandler: (handler) => {
-        if (_handler === undefined) _handler = handler;
-      },
-    },
-  ];
+    return [
+        middleware,
+        {
+            addHandler: (handler) => {
+                if (_handler === undefined) _handler = handler;
+            },
+        },
+    ];
 }
 
 /**
@@ -122,27 +122,27 @@ export function middlewarePort<T, Body = any>(
  * `JSON.parse`.
  */
 export function jsonMiddlewarePort(
-  options?: OptionsJson
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options?: OptionsJson
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): [RequestListener, ResponsePort<any, any>] {
-  const contentType = "application/json";
+    const contentType = "application/json";
 
-  const server = createServer();
+    const server = createServer();
 
-  server.use(
-    json({
-      ...options,
-      strict: false,
-      type: contentType,
-    })
-  );
+    server.use(
+        json({
+            ...options,
+            strict: false,
+            type: contentType,
+        })
+    );
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [handler, port] = middlewarePort<any, any>(contentType, JSON.stringify);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [handler, port] = middlewarePort<any, any>(contentType, JSON.stringify);
 
-  server.use(handler);
+    server.use(handler);
 
-  return [server, port];
+    return [server, port];
 }
 
 /**
@@ -154,32 +154,32 @@ export function jsonMiddlewarePort(
  * are decoded using standard Bubblewrap decoding.
  */
 export function bubblewrapMiddlewarePort(
-  bubblewrap: Bubblewrap,
-  options?: Options
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    bubblewrap: Bubblewrap,
+    options?: Options
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): [RequestListener, ResponsePort<any, any>] {
-  const contentType = "application/octet-stream";
+    const contentType = "application/octet-stream";
 
-  const server = createServer();
+    const server = createServer();
 
-  server.use(
-    raw({
-      ...options,
-      type: contentType,
-    })
-  );
+    server.use(
+        raw({
+            ...options,
+            type: contentType,
+        })
+    );
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [handler, rawPort] = middlewarePort<any, Buffer>(contentType, (value) =>
-    Buffer.from(bubblewrap.encode(value))
-  );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [handler, rawPort] = middlewarePort<any, Buffer>(contentType, (value) =>
+        Buffer.from(bubblewrap.encode(value))
+    );
 
-  server.use(handler);
+    server.use(handler);
 
-  const port = mapReceivePort(rawPort, (data) => ({
-    resolvers: data.resolvers,
-    request: bubblewrap.decode(data.request),
-  }));
+    const port = mapReceivePort(rawPort, (data) => ({
+        resolvers: data.resolvers,
+        request: bubblewrap.decode(data.request),
+    }));
 
-  return [server, port];
+    return [server, port];
 }
