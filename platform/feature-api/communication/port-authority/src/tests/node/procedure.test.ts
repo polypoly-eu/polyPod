@@ -11,81 +11,81 @@ import { Bubblewrap } from "@polypoly-eu/bubblewrap";
 import fetch from "node-fetch";
 
 async function startServer(app: RequestListener): Promise<[Server, number]> {
-    const server = createServer(app);
+  const server = createServer(app);
 
-    await new Promise((resolve) => {
-        server.listen();
-        server.once("listening", () => resolve(server));
-    });
+  await new Promise((resolve) => {
+    server.listen();
+    server.once("listening", () => resolve(server));
+  });
 
-    const port = (server.address() as AddressInfo).port;
+  const port = (server.address() as AddressInfo).port;
 
-    return [server, port];
+  return [server, port];
 }
 
 function stopServer(server: Server): Promise<void> {
-    return new Promise((resolve) => {
-        server.close(() => resolve());
-    });
+  return new Promise((resolve) => {
+    server.close(() => resolve());
+  });
 }
 
 const jsonHttpLifecycle: ProcedureSpecLifecycle = async () => {
-    const [app, receive] = jsonMiddlewarePort();
-    const [server, port] = await startServer(app);
+  const [app, receive] = jsonMiddlewarePort();
+  const [server, port] = await startServer(app);
 
-    const send = jsonFetchPort(`http://localhost:${port}/`, fetch);
+  const send = jsonFetchPort(`http://localhost:${port}/`, fetch);
 
-    return {
-        value: [send, receive],
-        cleanup: () => stopServer(server),
-    };
+  return {
+    value: [send, receive],
+    cleanup: () => stopServer(server),
+  };
 };
 
 const rawHttpLifecycle: ProcedureSpecLifecycle = async () => {
-    const bubblewrap = Bubblewrap.create();
+  const bubblewrap = Bubblewrap.create();
 
-    const [app, receive] = bubblewrapMiddlewarePort(bubblewrap);
-    const [server, port] = await startServer(app);
+  const [app, receive] = bubblewrapMiddlewarePort(bubblewrap);
+  const [server, port] = await startServer(app);
 
-    const send = bubblewrapFetchPort(`http://localhost:${port}/`, bubblewrap, fetch);
+  const send = bubblewrapFetchPort(`http://localhost:${port}/`, bubblewrap, fetch);
 
-    return {
-        value: [send, receive],
-        cleanup: () => stopServer(server),
-    };
+  return {
+    value: [send, receive],
+    cleanup: () => stopServer(server),
+  };
 };
 
 describe("Node/Procedure", () => {
-    describe("lifted", () => {
-        procedureSpec(procedureLiftedLifecycle(nodeLoopbackLifecycle));
+  describe("lifted", () => {
+    procedureSpec(procedureLiftedLifecycle(nodeLoopbackLifecycle));
+  });
+
+  describe("HTTP/fetch (JSON)", () => {
+    procedureSpec(jsonHttpLifecycle);
+  });
+
+  describe("HTTP/fetch (Uint8Array)", () => {
+    procedureSpec(rawHttpLifecycle);
+  });
+
+  describe("GET", () => {
+    let server: Server;
+    let port: number;
+
+    beforeEach(async () => {
+      const [app] = jsonMiddlewarePort();
+      const [_server, _port] = await startServer(app);
+      server = _server;
+      port = _port;
     });
 
-    describe("HTTP/fetch (JSON)", () => {
-        procedureSpec(jsonHttpLifecycle);
+    it("supports GET", async () => {
+      const response = await fetch(`http://localhost:${port}/`);
+      expect(response.ok).toBe(true);
     });
 
-    describe("HTTP/fetch (Uint8Array)", () => {
-        procedureSpec(rawHttpLifecycle);
+    afterEach(async () => {
+      await stopServer(server);
     });
-
-    describe("GET", () => {
-        let server: Server;
-        let port: number;
-
-        beforeEach(async () => {
-            const [app] = jsonMiddlewarePort();
-            const [_server, _port] = await startServer(app);
-            server = _server;
-            port = _port;
-        });
-
-        it("supports GET", async () => {
-            const response = await fetch(`http://localhost:${port}/`);
-            expect(response.ok).toBe(true);
-        });
-
-        afterEach(async () => {
-            await stopServer(server);
-        });
-    });
+  });
 });

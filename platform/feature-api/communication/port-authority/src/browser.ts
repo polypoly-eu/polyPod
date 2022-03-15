@@ -20,15 +20,15 @@ import { Handler, mapPort, Port, ReceivePort } from "./port";
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function fromBrowserMessagePort(port: MessagePort): Port<MessageEvent, any> {
-    return {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        send(value: any): void {
-            port.postMessage(value);
-        },
-        addHandler(handler: Handler<MessageEvent>): void {
-            port.addEventListener("message", (message) => handler(message));
-        },
-    };
+  return {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    send(value: any): void {
+      port.postMessage(value);
+    },
+    addHandler(handler: Handler<MessageEvent>): void {
+      port.addEventListener("message", (message) => handler(message));
+    },
+  };
 }
 
 /**
@@ -73,28 +73,28 @@ export function fromBrowserMessagePort(port: MessagePort): Port<MessageEvent, an
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function iframeInnerPort(secret: string): Promise<Port<any, any>> {
-    return new Promise((resolve, reject) => {
-        const handler: Handler<MessageEvent> = (event) => {
-            if (event.source !== window.parent || event.data !== secret) return;
+  return new Promise((resolve, reject) => {
+    const handler: Handler<MessageEvent> = (event) => {
+      if (event.source !== window.parent || event.data !== secret) return;
 
-            if (event.ports.length === 1) {
-                event.ports[0].start();
-                const rawPort = fromBrowserMessagePort(event.ports[0]);
-                resolve(
-                    mapPort(
-                        rawPort,
-                        (event) => event.data,
-                        (any) => any
-                    )
-                );
-            } else {
-                reject(`Malformed message`);
-            }
+      if (event.ports.length === 1) {
+        event.ports[0].start();
+        const rawPort = fromBrowserMessagePort(event.ports[0]);
+        resolve(
+          mapPort(
+            rawPort,
+            (event) => event.data,
+            (any) => any
+          )
+        );
+      } else {
+        reject(`Malformed message`);
+      }
 
-            window.removeEventListener("message", handler);
-        };
-        window.addEventListener("message", handler);
-    });
+      window.removeEventListener("message", handler);
+    };
+    window.addEventListener("message", handler);
+  });
 }
 
 /**
@@ -120,21 +120,21 @@ export function iframeInnerPort(secret: string): Promise<Port<any, any>> {
  * ```
  */
 export function iframeOuterPort(
-    secret: string,
-    iframe: HTMLIFrameElement,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    init?: (port: ReceivePort<any>) => void
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  secret: string,
+  iframe: HTMLIFrameElement,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  init?: (port: ReceivePort<any>) => void
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Port<any, any> {
-    const { port1, port2 } = new MessageChannel();
-    const rawPort = fromBrowserMessagePort(port1);
-    const port = mapPort(
-        rawPort,
-        (event) => event.data,
-        (any) => any
-    );
-    if (init) init(port);
-    port1.start();
-    iframe.contentWindow?.postMessage(secret, "*", [port2]);
-    return port;
+  const { port1, port2 } = new MessageChannel();
+  const rawPort = fromBrowserMessagePort(port1);
+  const port = mapPort(
+    rawPort,
+    (event) => event.data,
+    (any) => any
+  );
+  if (init) init(port);
+  port1.start();
+  iframe.contentWindow?.postMessage(secret, "*", [port2]);
+  return port;
 }
