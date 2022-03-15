@@ -16,29 +16,40 @@ jobs:
     name: Build, test, and upload to Google Play.
     runs-on: macos-11
     steps:
+      - run: echo "Uploading ${{ github.ref }} to ${{ github.event.inputs.targets }}"
+      - name: Set POLYPOD_UPLOAD_GOOGLE_PLAY
+        if: event.inputs.targets == "all" || event.inputs.targets == "google-play"
+        run: echo "POLYPOD_UPLOAD_GOOGLE_PLAY=true" >> $GITHUB_ENV
+      - name: Set POLYPOD_UPLOAD_APP_STORE
+        if: event.inputs.targets == "all" || event.inputs.targets == "app-store"
+        run: echo "POLYPOD_UPLOAD_APP_STORE=true" >> $GITHUB_ENV
       - id: early_exit
         if: ${{ github.ref != 'refs/heads/main' && startsWith(github.ref, 'refs/heads/release') != true && startsWith(github.ref, 'refs/heads/prod4pod-1426') != true }}
         name: Early exit failure if not main or release branch.
         run: exit 1
-      - run: echo "Uploading ${{ github.ref }} to ${{ github.event.inputs.targets }}"
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v2
-#         with:
-#           node-version: 16
-#           cache: "npm"
-#           cache-dependency-path: "**/package-lock.json"
-#       - uses: actions/setup-java@v1
-#         with:
-#           java-version: 11
-#       - name: Build API and features
-#         run: ./build.js
-#         env:
-#             POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
-#             POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
-#       - name: Lint API and features
-#         run: ./build.js lint
-#       - name: Test API and features
-#         run: xvfb-run --auto-servernum ./build.js test
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+      - name: Build API and features
+        run: ./build.js
+        env:
+          POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
+          POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
+      - name: Lint API and features
+        run: ./build.js lint
+      - name: Test API and features
+        run: xvfb-run --auto-servernum ./build.js test
+
+      # Android
+
+      - uses: actions/setup-java@v1
+        if: env.POLYPOD_UPLOAD_GOOGLE_PLAY == "true"
+        with:
+          java-version: 11
+
 #       - name: Test android
 #         working-directory: platform/android
 #         run: ./gradlew test
@@ -76,28 +87,28 @@ jobs:
 #           track: internal
 #           # whatsNewDirectory: distribution/whatsnew
 #           # mappingFile:
-#       - name: Lock xcode version
-#         working-directory: platform/ios
-#         run: make lockxcodeversion
-#       - name: Run tests
-#         working-directory: platform/ios
-#         run: |
-#           set -o pipefail
-#           make test | xcpretty
-#       - name: Install distribution prerequisites
-#         working-directory: platform/ios
-#         run: make install_distribution_prerequisites
-#         env:
-#           POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64 }}
-#           POLYPOD_APPLE_IOS_APPSTORE_P12_PASS: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_PASS }}
-#           POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64 }}
-#           POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64 }}
-#           POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
-#       - name: Export and upload IPA
-#         working-directory: platform/ios
-#         run: |
-#           set -o pipefail
-#           make upload_ipa | xcpretty
-#         env:
-#           POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID }}
-#           POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
+
+      # iOS
+
+      - name: Lock xcode version
+        if: env.POLYPOD_UPLOAD_APP_STORE == "true"
+        working-directory: platform/ios
+        run: make lockxcodeversion
+      # - name: Run tests
+      #   working-directory: platform/ios
+      #   run: make test
+      # - name: Install distribution prerequisites
+      #   working-directory: platform/ios
+      #   run: make install_distribution_prerequisites
+      #   env:
+      #     POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64 }}
+      #     POLYPOD_APPLE_IOS_APPSTORE_P12_PASS: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_PASS }}
+      #     POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64 }}
+      #     POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64 }}
+      #     POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
+      # - name: Export and upload IPA
+      #   working-directory: platform/ios
+      #   run: make upload_ipa
+      #   env:
+      #     POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID }}
+      #     POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
