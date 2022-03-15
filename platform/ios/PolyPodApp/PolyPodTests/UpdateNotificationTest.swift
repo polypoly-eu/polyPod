@@ -7,10 +7,6 @@ class UpdateNotificationTest: XCTestCase {
         )
     }
     
-    func testFailure() {
-        XCTAssert(false, "Expected failure")
-    }
-    
     func testNotificationWithId0Seen() {
         let notification = loadNotification(0)
         XCTAssertFalse(notification.showInApp)
