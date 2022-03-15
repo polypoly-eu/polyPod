@@ -1,0 +1,42 @@
+name: Test Rollup plugin
+on:
+    push:
+        paths:
+          - "dev-utils/rollup-plugin-copy-watch/**"
+          - ".github/workflows/rollup-copy-test.yml"
+    pull_request:
+        types: [assigned, opened, ready_for_review]
+        paths:
+          - "dev-utils/rollup-plugin-copy-watch/**"
+
+jobs:
+    test:
+        name: Run tests.
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: 16
+                  cache: "npm"
+                  cache-dependency-path: "package-lock.json"
+            - name: Cache root
+              uses: actions/cache@v2
+              id: root-cache
+              with:
+                  path: "**/node_modules"
+                  key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+            - name: Install root
+              if: steps.root-cache.outputs.cache-hit != 'true'
+              run: npm --no-audit --prefer-offline ci
+            - name: Cache this
+              uses: actions/cache@v2
+              id: this-cache
+              with:
+                  path: "dev-utils/rollup-plugin-copy-watch/node_modules"
+                  key: ${{ runner.os }}-${{ hashFiles('dev-utils/rollup-plugin-copy-watch/package-lock.json') }}
+
+            - name: Test core and features
+              if: steps.this-cache.outputs.cache-hit != 'true'
+              working-directory: dev-utils/rollup-plugin-copy-watch
+              run: npm ci && npm run test
