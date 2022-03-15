@@ -187,7 +187,7 @@ task copyThirdPartyLicenses(type: Copy) {
 }
 
 task copyEndpoints(type: Copy) {
-    from "../../../assets/config"
+    from "../../../../polyPod-config"
     into "build/generated-assets/config-assets"
 }
 

@@ -4,7 +4,7 @@ import fs from "fs";
 const fallbackURL = "http://localhost:8000";
 const fallbackAuth = null;
 
-const configPath = "../../../assets/config";
+const configPath = "../../../../polyPod-config";
 
 const endpointsWithFallback = Object.fromEntries(
     Object.entries(endpoints).map(([key, endpoint]) => [
