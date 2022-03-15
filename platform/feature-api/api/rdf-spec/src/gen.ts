@@ -38,7 +38,7 @@ export function gens<Q extends RDF.BaseQuad = RDF.Quad>(factory: RDF.DataFactory
         .map(([value, datatype]) => factory.literal(value, datatype));
 
     const variable = factory.variable
-        ? // @ts-ignore
+        ? // @ts-ignore factory.variable does exist if it's true
           fc.hexaString().map((id) => factory.variable(id))
         : undefined;
 

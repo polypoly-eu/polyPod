@@ -16,6 +16,7 @@
  */
 export interface EndpointRequestPart {
     readonly method: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     readonly args: ReadonlyArray<any>;
 }
 
@@ -27,6 +28,7 @@ export type EndpointRequest = EndpointRequestPart[];
 /**
  * A response representing the return value of a function call.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type EndpointResponse = any;
 
 /**

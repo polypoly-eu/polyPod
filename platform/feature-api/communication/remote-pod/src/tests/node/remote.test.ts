@@ -1,4 +1,4 @@
-import { PolyLifecycle, Pod, DefaultPod } from "@polypoly-eu/pod-api";
+import { PolyLifecycle, Pod, DefaultPod, FS } from "@polypoly-eu/pod-api";
 import { Volume } from "memfs";
 import { dataset } from "@rdfjs/dataset";
 import { RemoteClientPod, RemoteServerPod } from "../../remote";
@@ -18,10 +18,10 @@ chai.use(chaiAsPromised);
 describe("Remote pod", () => {
     describe("MessagePort (node)", () => {
         const ports: MessagePort[] = [];
-        const fs = new Volume().promises as any;
+        const fs = new Volume().promises;
         const { port1, port2 } = new MessageChannel();
         ports.push(port1, port2);
-        const underlying = new DefaultPod(dataset(), fs, fetch);
+        const underlying = new DefaultPod(dataset(), fs as unknown as FS, fetch);
         const server = new RemoteServerPod(underlying);
         server.listenOnRaw(fromNodeMessagePort(port2) as Port<Uint8Array, Uint8Array>);
 
@@ -37,14 +37,14 @@ describe("Remote pod", () => {
     });
 
     describe("HTTP/fetch", () => {
-        const fs = new Volume().promises as any;
+        const fs = new Volume().promises;
         const port = 12345;
         let underlying: Pod;
 
         let server: Server;
 
         before(async () => {
-            underlying = new DefaultPod(dataset(), fs, fetch);
+            underlying = new DefaultPod(dataset(), fs as unknown as FS, fetch);
             const serverPod = new RemoteServerPod(underlying);
 
             const app = await serverPod.listenOnMiddleware();
@@ -55,6 +55,7 @@ describe("Remote pod", () => {
         });
 
         podSpec(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any),
             "/",
             getHttpbinUrl()
@@ -62,7 +63,7 @@ describe("Remote pod", () => {
 
         // TODO move to api
         describe("Lifecycle", () => {
-            let log: any[];
+            let log: Array<(string | boolean)[]>;
 
             beforeEach(() => {
                 log = [];
@@ -76,6 +77,7 @@ describe("Remote pod", () => {
             });
 
             it("Lists features", async () => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const client = RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any);
                 await assert.eventually.deepEqual(client.polyLifecycle.listFeatures(), {
                     "test-on": true,
@@ -84,6 +86,7 @@ describe("Remote pod", () => {
             });
 
             it("Starts feature", async () => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const client = RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any);
                 await client.polyLifecycle.startFeature("hi", false);
                 await client.polyLifecycle.startFeature("yo", true);

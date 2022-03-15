@@ -72,7 +72,9 @@ export function fetchPort<T>(
  * This wrapper follows the same error protocol as [[jsonRouterPort]]. Outgoing requests are transformed into strings
  * using `JSON.stringify`. Conversely, incoming responses are parsed using `JSON.parse`.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function jsonFetchPort(url: string, fetch: typeof window.fetch): RequestPort<any, any> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const rawPort = fetchPort<any>(
         url,
         "application/json",
@@ -97,11 +99,14 @@ export function bubblewrapFetchPort(
     url: string,
     bubblewrap: Bubblewrap,
     fetch: typeof window.fetch
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): RequestPort<any, any> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const rawPort = fetchPort<any>(
         url,
         "application/octet-stream",
         async (body) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const decoded: Try<any> = bubblewrap.decode(new Uint8Array(await body.arrayBuffer()));
             if ("err" in decoded) throw decoded.err;
             else return decoded.value;

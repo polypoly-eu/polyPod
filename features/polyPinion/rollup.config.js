@@ -15,6 +15,7 @@ export default {
             react: "React",
             "react-dom": "ReactDOM",
             uuid: "uuid",
+            "@polypoly-eu/silly-i18n": "@polypoly-eu/silly-i18n",
         },
     },
     plugins: [
@@ -46,5 +47,5 @@ export default {
             preventAssignment: true,
         }),
     ],
-    external: ["react", "react-dom", "uuid"],
+    external: ["react", "react-dom", "uuid", "@polypoly-eu/silly-i18n"],
 };

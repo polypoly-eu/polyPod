@@ -28,7 +28,7 @@ export interface Response {
     readonly statusText: string;
     readonly type: ResponseType;
     readonly url: string;
-    json(): Promise<any>;
+    json(): Promise<{ [key: string]: string }>;
     text(): Promise<string>;
 }
 
