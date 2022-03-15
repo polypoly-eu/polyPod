@@ -37,7 +37,7 @@ jobs:
               run: |
                   cd platform/ios
                   set -o pipefail
-                  make test | xcpretty
+                  make test
             - uses: actions/setup-java@v2
               with:
                   distribution: 'zulu'
