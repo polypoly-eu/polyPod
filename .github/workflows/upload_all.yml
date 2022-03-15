@@ -13,7 +13,7 @@ on:
 
 jobs:
   build_test_upload:
-    name: Build, test, and upload to Google Play.
+    name: Build, test, and upload
     runs-on: macos-11
     steps:
       - run: echo "Uploading ${{ github.ref }} to ${{ github.event.inputs.targets }}"
