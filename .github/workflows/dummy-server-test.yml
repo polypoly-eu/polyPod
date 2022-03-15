@@ -38,7 +38,7 @@ jobs:
             - name: Install modules
               if: steps.this-cache.outputs.cache-hit != 'true'
               working-directory: dev-utils/dummy-server
-              run: npm ci
+              run: npm --no-audit --prefer-offline ci
             - name: Test dummy-server
               working-directory: dev-utils/dummy-server
               run: npm run test
