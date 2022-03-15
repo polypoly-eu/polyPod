@@ -33,15 +33,15 @@ jobs:
           node-version: 16
           cache: "npm"
           cache-dependency-path: "**/package-lock.json"
-      - name: Build API and features
-        run: ./build.js
-        env:
-          POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
-          POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
       - name: Lint API and features
         run: ./build.js lint
-      - name: Test API and features
-        run: xvfb-run --auto-servernum ./build.js test
+      #   - name: Build API and features
+      #   run: ./build.js
+      #   env:
+      #     POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
+      #     POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
+      # - name: Test API and features
+      #   run: xvfb-run --auto-servernum ./build.js test
 
       # Android
 
