@@ -13,7 +13,7 @@ import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
-//@ts-ignore
+//@ts-ignore json import via rollup -> not supported by ts
 import endpoints from "../../../assets/config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
 
