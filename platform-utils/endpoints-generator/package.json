@@ -5,8 +5,5 @@
     "build": "node index.js"
   },
   "private": true,
-  "type": "module",
-  "devDependencies": {
-    "fs": "^0.0.1-security"
-  }
+  "type": "module"
 }

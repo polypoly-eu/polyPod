@@ -4,6 +4,8 @@ import fs from "fs";
 const fallbackURL = "http://localhost:8000";
 const fallbackAuth = null;
 
+const configPath = "../../assets/config";
+
 const endpointsWithFallback = Object.fromEntries(
     Object.entries(endpoints).map(([key, endpoint]) => [
         key,
@@ -14,7 +16,13 @@ const endpointsWithFallback = Object.fromEntries(
     ])
 );
 
-fs.mkdirSync("../../assets/config");
+function dirExists(filePath) {
+    if (fs.existsSync(filePath)) {
+        return true;
+    }
+}
+
+if (!dirExists(configPath)) fs.mkdirSync(configPath);
 
 fs.writeFileSync(
     "../../assets/config/endpoints.json",
