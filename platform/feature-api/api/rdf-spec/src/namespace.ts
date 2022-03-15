@@ -26,13 +26,13 @@ import { BaseQuad, DataFactory, NamedNode } from "rdf-js";
  * @returns A record (backed by a `Proxy`) that can be accessed at any property
  */
 export function namespace<Q extends BaseQuad>(
-  baseIRI: string,
-  dataFactory: Pick<DataFactory<Q>, "namedNode">
+    baseIRI: string,
+    dataFactory: Pick<DataFactory<Q>, "namedNode">
 ): Record<string, NamedNode> {
-  return new Proxy(
-    {},
-    {
-      get: (target, property: string) => dataFactory.namedNode(`${baseIRI}${property}`),
-    }
-  );
+    return new Proxy(
+        {},
+        {
+            get: (target, property: string) => dataFactory.namedNode(`${baseIRI}${property}`),
+        }
+    );
 }

@@ -8,23 +8,23 @@ import chaiAsPromised from "chai-as-promised";
 chai.use(chaiAsPromised);
 
 describe("Universal/Port", () => {
-  describe("Loopback", () => {
-    portSpec(loopbackLifecycle);
-  });
+    describe("Loopback", () => {
+        portSpec(loopbackLifecycle);
+    });
 
-  describe("Bubblewrap", () => {
-    portSpec(bubblewrapLifecycle(loopbackLifecycle, Bubblewrap.create()));
-  });
+    describe("Bubblewrap", () => {
+        portSpec(bubblewrapLifecycle(loopbackLifecycle, Bubblewrap.create()));
+    });
 
-  describe("Forward", () => {
-    portSpec(forwardLifecycle(loopbackLifecycle, loopbackLifecycle));
-  });
+    describe("Forward", () => {
+        portSpec(forwardLifecycle(loopbackLifecycle, loopbackLifecycle));
+    });
 
-  it("receiveSingle", async () => {
-    const [send, receive] = (await loopbackLifecycle<number>()).value;
-    const promise = receiveSingle(receive);
-    send.send(1);
-    send.send(2);
-    await assert.eventually.equal(promise, 1);
-  });
+    it("receiveSingle", async () => {
+        const [send, receive] = (await loopbackLifecycle<number>()).value;
+        const promise = receiveSingle(receive);
+        send.send(1);
+        send.send(2);
+        await assert.eventually.equal(promise, 1);
+    });
 });

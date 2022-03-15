@@ -12,7 +12,7 @@ indent_size = 4
 [*.ts]
 # This is being picked up by prettier/eslint, so in order to leave the existing
 # code alone for now, we overwrite max_line_length for TypeScript code.
-max_line_length = 80
+max_line_length = 100
 
 [.github/**.y{,a}ml]
 indent_size = 2

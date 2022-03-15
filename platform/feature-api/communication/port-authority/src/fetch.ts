@@ -36,34 +36,34 @@ import { rethrowPromise, Try } from "./util";
  * @param fetch the Fetch implementation; `window.fetch` can be used in the browser and a polyfill on Node.js
  */
 export function fetchPort<T>(
-  url: string,
-  contentType: string,
-  parse: (body: Body) => Promise<T>,
-  fetch: typeof window.fetch
+    url: string,
+    contentType: string,
+    parse: (body: Body) => Promise<T>,
+    fetch: typeof window.fetch
 ): RequestPort<BodyInit, T> {
-  return {
-    send: async (request) => {
-      const response = await fetch(url, {
-        headers: {
-          "Content-Type": contentType,
+    return {
+        send: async (request) => {
+            const response = await fetch(url, {
+                headers: {
+                    "Content-Type": contentType,
+                },
+                method: "post",
+                body: request.request,
+            });
+
+            if (!response.ok) {
+                request.resolvers.reject(new Error("Invalid response code"));
+                return;
+            }
+
+            try {
+                const parsed = await parse(response);
+                request.resolvers.resolve(parsed);
+            } catch (err) {
+                request.resolvers.reject(err);
+            }
         },
-        method: "post",
-        body: request.request,
-      });
-
-      if (!response.ok) {
-        request.resolvers.reject(new Error("Invalid response code"));
-        return;
-      }
-
-      try {
-        const parsed = await parse(response);
-        request.resolvers.resolve(parsed);
-      } catch (err) {
-        request.resolvers.reject(err);
-      }
-    },
-  };
+    };
 }
 
 /**
@@ -74,18 +74,18 @@ export function fetchPort<T>(
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function jsonFetchPort(url: string, fetch: typeof window.fetch): RequestPort<any, any> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const rawPort = fetchPort<any>(
-    url,
-    "application/json",
-    async (body) => rethrowPromise(await body.json()),
-    fetch
-  );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const rawPort = fetchPort<any>(
+        url,
+        "application/json",
+        async (body) => rethrowPromise(await body.json()),
+        fetch
+    );
 
-  return mapSendPort(rawPort, (data) => ({
-    resolvers: data.resolvers,
-    request: JSON.stringify(data.request),
-  }));
+    return mapSendPort(rawPort, (data) => ({
+        resolvers: data.resolvers,
+        request: JSON.stringify(data.request),
+    }));
 }
 
 /**
@@ -96,26 +96,26 @@ export function jsonFetchPort(url: string, fetch: typeof window.fetch): RequestP
  * stream using Bubblewrap. Conversely, incoming responses are decoded using Bubblewrap.
  */
 export function bubblewrapFetchPort(
-  url: string,
-  bubblewrap: Bubblewrap,
-  fetch: typeof window.fetch
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    url: string,
+    bubblewrap: Bubblewrap,
+    fetch: typeof window.fetch
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): RequestPort<any, any> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const rawPort = fetchPort<any>(
-    url,
-    "application/octet-stream",
-    async (body) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const decoded: Try<any> = bubblewrap.decode(new Uint8Array(await body.arrayBuffer()));
-      if (decoded.tag === "failure") throw decoded.err;
-      else return decoded.value;
-    },
-    fetch
-  );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const rawPort = fetchPort<any>(
+        url,
+        "application/octet-stream",
+        async (body) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const decoded: Try<any> = bubblewrap.decode(new Uint8Array(await body.arrayBuffer()));
+            if (decoded.tag === "failure") throw decoded.err;
+            else return decoded.value;
+        },
+        fetch
+    );
 
-  return mapSendPort(rawPort, (data) => ({
-    resolvers: data.resolvers,
-    request: bubblewrap.encode(data.request),
-  }));
+    return mapSendPort(rawPort, (data) => ({
+        resolvers: data.resolvers,
+        request: bubblewrap.encode(data.request),
+    }));
 }

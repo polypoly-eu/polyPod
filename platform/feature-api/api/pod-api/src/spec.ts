@@ -20,8 +20,8 @@ import chai, { assert } from "chai";
 import chaiAsPromised from "chai-as-promised";
 
 function encodeUtf8(string: string): Uint8Array {
-  if (typeof TextEncoder !== "undefined") return new TextEncoder().encode(string);
-  else return Buffer.from(string, "utf-8");
+    if (typeof TextEncoder !== "undefined") return new TextEncoder().encode(string);
+    else return Buffer.from(string, "utf-8");
 }
 
 /**
@@ -34,157 +34,164 @@ function encodeUtf8(string: string): Uint8Array {
  * access or provide a URI to a local httpbin service.
  */
 export class PodSpec {
-  constructor(
-    private readonly pod: Pod,
-    private readonly path: string,
-    private readonly httpbinUrl: string
-  ) {
-    chai.use(chaiAsPromised);
-  }
+    constructor(
+        private readonly pod: Pod,
+        private readonly path: string,
+        private readonly httpbinUrl: string
+    ) {
+        chai.use(chaiAsPromised);
+    }
 
-  polyIn(): void {
-    const { dataFactory, polyIn } = this.pod;
+    polyIn(): void {
+        const { dataFactory, polyIn } = this.pod;
 
-    describe("polyIn", () => {
-      describe("factory", () => {
-        new DataFactorySpec(dataFactory).run();
-      });
+        describe("polyIn", () => {
+            describe("factory", () => {
+                new DataFactorySpec(dataFactory).run();
+            });
 
-      it("add only allows default graph", async () => {
-        const quad = dataFactory.quad(
-          dataFactory.namedNode("http://example.org/s"),
-          dataFactory.namedNode("http://example.org/p"),
-          dataFactory.namedNode("http://example.org/o"),
-          dataFactory.namedNode("http://example.org/g")
-        );
-        await assert.isRejected(polyIn.add(quad), /default/);
-        await assert.isRejected(polyIn.has(quad), /default/);
-        await assert.isRejected(polyIn.delete(quad), /default/);
-      });
+            it("add only allows default graph", async () => {
+                const quad = dataFactory.quad(
+                    dataFactory.namedNode("http://example.org/s"),
+                    dataFactory.namedNode("http://example.org/p"),
+                    dataFactory.namedNode("http://example.org/o"),
+                    dataFactory.namedNode("http://example.org/g")
+                );
+                await assert.isRejected(polyIn.add(quad), /default/);
+                await assert.isRejected(polyIn.has(quad), /default/);
+                await assert.isRejected(polyIn.delete(quad), /default/);
+            });
 
-      it("add/select", async () => {
-        const { triple } = gens(dataFactory);
-        await fc.assert(
-          fc.asyncProperty(fc.array(triple), async (quads) => {
-            await polyIn.add(...quads);
-            for (const quad of quads) {
-              const selected = await polyIn.match(quad);
-              assert.lengthOf(selected, 1);
-              assert.ok(quad.equals(selected[0]));
-              assert.ok(await polyIn.has(quad));
-            }
-          })
-        );
-      });
+            it("add/select", async () => {
+                const { triple } = gens(dataFactory);
+                await fc.assert(
+                    fc.asyncProperty(fc.array(triple), async (quads) => {
+                        await polyIn.add(...quads);
+                        for (const quad of quads) {
+                            const selected = await polyIn.match(quad);
+                            assert.lengthOf(selected, 1);
+                            assert.ok(quad.equals(selected[0]));
+                            assert.ok(await polyIn.has(quad));
+                        }
+                    })
+                );
+            });
 
-      it("add/delete", async () => {
-        const { triple } = gens(dataFactory);
-        await fc.assert(
-          fc.asyncProperty(fc.array(triple), async (quads) => {
-            await polyIn.add(...quads);
-            for (const quad of quads) {
-              await polyIn.delete(quad);
-              assert.notOk(await polyIn.has(quad));
-            }
-          })
-        );
-      });
-    });
-  }
-
-  polyOut(): void {
-    const { polyOut } = this.pod;
-
-    describe("polyOut", () => {
-      describe("Filesystem", () => {
-        const pathGen = fc
-          .hexaString({ minLength: 1, maxLength: 30 })
-          .map((path) => this.path + "/" + path);
-
-        async function skipIfExists(path: string): Promise<void> {
-          let cont = true;
-          try {
-            await polyOut.stat(path);
-            cont = false;
-          } catch {
-            // intentionally left blank
-          }
-          fc.pre(cont);
-        }
-
-        it("write/read", async () => {
-          await fc.assert(
-            fc.asyncProperty(pathGen, fc.fullUnicodeString(), async (path, content) => {
-              await skipIfExists(path);
-
-              await polyOut.writeFile(path, content, { encoding: "utf-8" });
-
-              await assert.eventually.equal(polyOut.readFile(path, { encoding: "utf-8" }), content);
-              await assert.eventually.deepEqual(polyOut.readFile(path), encodeUtf8(content));
-            })
-          );
+            it("add/delete", async () => {
+                const { triple } = gens(dataFactory);
+                await fc.assert(
+                    fc.asyncProperty(fc.array(triple), async (quads) => {
+                        await polyIn.add(...quads);
+                        for (const quad of quads) {
+                            await polyIn.delete(quad);
+                            assert.notOk(await polyIn.has(quad));
+                        }
+                    })
+                );
+            });
         });
+    }
 
-        it("readDir", async () => {
-          assert.isFulfilled(polyOut.readDir(this.path));
-          await fc.assert(
-            fc.asyncProperty(pathGen, fc.fullUnicodeString(), async (path, content) => {
-              await skipIfExists(path);
+    polyOut(): void {
+        const { polyOut } = this.pod;
 
-              await polyOut.writeFile(path, content, { encoding: "utf-8" });
-              const filesWithPath = (await polyOut.readDir(this.path)).map(
-                (path) => this.path + "/" + path["path"]
-              );
-              assert.include(filesWithPath, path);
-            })
-          );
+        describe("polyOut", () => {
+            describe("Filesystem", () => {
+                const pathGen = fc
+                    .hexaString({ minLength: 1, maxLength: 30 })
+                    .map((path) => this.path + "/" + path);
+
+                async function skipIfExists(path: string): Promise<void> {
+                    let cont = true;
+                    try {
+                        await polyOut.stat(path);
+                        cont = false;
+                    } catch {
+                        // intentionally left blank
+                    }
+                    fc.pre(cont);
+                }
+
+                it("write/read", async () => {
+                    await fc.assert(
+                        fc.asyncProperty(pathGen, fc.fullUnicodeString(), async (path, content) => {
+                            await skipIfExists(path);
+
+                            await polyOut.writeFile(path, content, { encoding: "utf-8" });
+
+                            await assert.eventually.equal(
+                                polyOut.readFile(path, { encoding: "utf-8" }),
+                                content
+                            );
+                            await assert.eventually.deepEqual(
+                                polyOut.readFile(path),
+                                encodeUtf8(content)
+                            );
+                        })
+                    );
+                });
+
+                it("readDir", async () => {
+                    assert.isFulfilled(polyOut.readDir(this.path));
+                    await fc.assert(
+                        fc.asyncProperty(pathGen, fc.fullUnicodeString(), async (path, content) => {
+                            await skipIfExists(path);
+
+                            await polyOut.writeFile(path, content, { encoding: "utf-8" });
+                            const filesWithPath = (await polyOut.readDir(this.path)).map(
+                                (path) => this.path + "/" + path["path"]
+                            );
+                            assert.include(filesWithPath, path);
+                        })
+                    );
+                });
+
+                it("stat/read", async () => {
+                    await fc.assert(
+                        fc.asyncProperty(pathGen, async (path) => {
+                            await skipIfExists(path);
+
+                            await assert.isRejected(polyOut.readFile(path, { encoding: "utf-8" }));
+                        })
+                    );
+                });
+
+                it("stat (root)", async () => {
+                    const stat = await polyOut.stat(this.path);
+                    assert.ok(stat.isDirectory());
+                    assert.notOk(stat.isFile());
+                });
+
+                it("stat (files)", async () => {
+                    await fc.assert(
+                        fc.asyncProperty(pathGen, async (path) => {
+                            let assertion: () => void;
+                            try {
+                                const stat = await polyOut.stat(path);
+                                assertion = () =>
+                                    assert.notEqual(stat.isFile(), stat.isDirectory());
+                            } catch {
+                                assertion = () => {
+                                    // intentionally left blank
+                                };
+                            }
+                            assertion();
+                        })
+                    );
+                });
+            });
         });
+    }
 
-        it("stat/read", async () => {
-          await fc.assert(
-            fc.asyncProperty(pathGen, async (path) => {
-              await skipIfExists(path);
-
-              await assert.isRejected(polyOut.readFile(path, { encoding: "utf-8" }));
-            })
-          );
-        });
-
-        it("stat (root)", async () => {
-          const stat = await polyOut.stat(this.path);
-          assert.ok(stat.isDirectory());
-          assert.notOk(stat.isFile());
-        });
-
-        it("stat (files)", async () => {
-          await fc.assert(
-            fc.asyncProperty(pathGen, async (path) => {
-              let assertion: () => void;
-              try {
-                const stat = await polyOut.stat(path);
-                assertion = () => assert.notEqual(stat.isFile(), stat.isDirectory());
-              } catch {
-                assertion = () => {
-                  // intentionally left blank
-                };
-              }
-              assertion();
-            })
-          );
-        });
-      });
-    });
-  }
-
-  run(): void {
-    this.polyIn();
-    this.polyOut();
-  }
+    run(): void {
+        this.polyIn();
+        this.polyOut();
+    }
 }
 
 /**
  * Convenience function to instantiate the [[PodSpec]] and run it immediately afterwards.
  */
 export function podSpec(pod: Pod, path = "/", httpbinUrl = "https://httpbin.org"): void {
-  return new PodSpec(pod, path, httpbinUrl).run();
+    return new PodSpec(pod, path, httpbinUrl).run();
 }
