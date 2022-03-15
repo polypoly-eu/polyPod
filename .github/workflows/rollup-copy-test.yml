@@ -24,7 +24,7 @@ jobs:
               uses: actions/cache@v2
               id: root-cache
               with:
-                  path: "**/node_modules"
+                  path: "./node_modules"
                   key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
             - name: Install root
               if: steps.root-cache.outputs.cache-hit != 'true'
