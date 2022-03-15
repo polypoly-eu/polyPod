@@ -70,13 +70,13 @@ final class Network: NetworkProtocol {
                       }
                 
                 guard (200 ... 299) ~= response.statusCode else {
-                    fetchError = PodApiError.networkError("httpGet", responseCode: String(response.statusCode))
+                    fetchError = PodApiError.networkError("http\(type)", responseCode: String(response.statusCode))
                     semaphore.signal()
                     return
                 }
                 
                 guard let data = data else {
-                    fetchError = PodApiError.networkError("httpGet", responseCode: String(response.statusCode))
+                    fetchError = PodApiError.networkError("http\(type)", responseCode: String(response.statusCode))
                     return
                 }
                 responseData = data
@@ -86,7 +86,7 @@ final class Network: NetworkProtocol {
             semaphore.wait()
             
             guard !(responseData == nil && fetchError == nil) else {
-                return .failure(PodApiError.networkError("httpGet", responseCode: "400"))
+                return .failure(PodApiError.networkError("http\(type)", responseCode: "400"))
             }
             
             return fetchError == nil ? .success(responseData!) : .failure(fetchError!)
