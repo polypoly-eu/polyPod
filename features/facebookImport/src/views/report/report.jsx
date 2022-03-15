@@ -14,18 +14,17 @@ const ReportView = () => {
 
     const handleSendReport = async () => {
         setLoading(true);
+        let response;
 
-        const response = await window.pod.endpoint.send(
-            "polyPedia",
-            JSON.stringify(unrecognizedData.jsonReport),
-            "application/json"
-        );
-        if (response.responseCode > 299)
-            console.error(
-                "Failed to send report, response code:",
-                response.responseCode
+        try {
+            response = await window.pod.endpoint.send(
+                "polyPediaReports",
+                JSON.stringify(unrecognizedData.jsonReport),
+                "application/json"
             );
-        setReportResult(!response.responseCode > 299);
+        } catch (e) {}
+
+        setReportResult(response ? true : false);
         handleBack();
     };
 
