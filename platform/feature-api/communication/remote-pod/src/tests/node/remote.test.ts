@@ -16,90 +16,90 @@ import chaiAsPromised from "chai-as-promised";
 chai.use(chaiAsPromised);
 
 describe("Remote pod", () => {
-    describe("MessagePort (node)", () => {
-        const ports: MessagePort[] = [];
-        const fs = new Volume().promises;
-        const { port1, port2 } = new MessageChannel();
-        ports.push(port1, port2);
-        const underlying = new DefaultPod(dataset(), fs as unknown as FS, fetch);
-        const server = new RemoteServerPod(underlying);
-        server.listenOnRaw(fromNodeMessagePort(port2) as Port<Uint8Array, Uint8Array>);
+  describe("MessagePort (node)", () => {
+    const ports: MessagePort[] = [];
+    const fs = new Volume().promises;
+    const { port1, port2 } = new MessageChannel();
+    ports.push(port1, port2);
+    const underlying = new DefaultPod(dataset(), fs as unknown as FS, fetch);
+    const server = new RemoteServerPod(underlying);
+    server.listenOnRaw(fromNodeMessagePort(port2) as Port<Uint8Array, Uint8Array>);
 
-        podSpec(
-            RemoteClientPod.fromRawPort(fromNodeMessagePort(port1) as Port<Uint8Array, Uint8Array>),
-            "/",
-            getHttpbinUrl()
-        );
+    podSpec(
+      RemoteClientPod.fromRawPort(fromNodeMessagePort(port1) as Port<Uint8Array, Uint8Array>),
+      "/",
+      getHttpbinUrl()
+    );
 
-        after(() => {
-            ports.forEach((port) => port.close());
-        });
+    after(() => {
+      ports.forEach((port) => port.close());
+    });
+  });
+
+  describe("HTTP/fetch", () => {
+    const fs = new Volume().promises;
+    const port = 12345;
+    let underlying: Pod;
+
+    let server: Server;
+
+    before(async () => {
+      underlying = new DefaultPod(dataset(), fs as unknown as FS, fetch);
+      const serverPod = new RemoteServerPod(underlying);
+
+      const app = await serverPod.listenOnMiddleware();
+
+      server = createServer(app);
+      server.listen(port);
+      await once(server, "listening");
     });
 
-    describe("HTTP/fetch", () => {
-        const fs = new Volume().promises;
-        const port = 12345;
-        let underlying: Pod;
+    podSpec(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any),
+      "/",
+      getHttpbinUrl()
+    );
 
-        let server: Server;
+    // TODO move to api
+    describe("Lifecycle", () => {
+      let log: Array<(string | boolean)[]>;
 
-        before(async () => {
-            underlying = new DefaultPod(dataset(), fs as unknown as FS, fetch);
-            const serverPod = new RemoteServerPod(underlying);
+      beforeEach(() => {
+        log = [];
+        const polyLifecycle: PolyLifecycle = {
+          startFeature: async (...args) => {
+            log.push(args);
+          },
+          listFeatures: async () => ({ "test-on": true, "test-off": false }),
+        };
+        Object.assign(underlying, { polyLifecycle });
+      });
 
-            const app = await serverPod.listenOnMiddleware();
-
-            server = createServer(app);
-            server.listen(port);
-            await once(server, "listening");
+      it("Lists features", async () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const client = RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any);
+        await assert.eventually.deepEqual(client.polyLifecycle.listFeatures(), {
+          "test-on": true,
+          "test-off": false,
         });
+      });
 
-        podSpec(
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any),
-            "/",
-            getHttpbinUrl()
-        );
-
-        // TODO move to api
-        describe("Lifecycle", () => {
-            let log: Array<(string | boolean)[]>;
-
-            beforeEach(() => {
-                log = [];
-                const polyLifecycle: PolyLifecycle = {
-                    startFeature: async (...args) => {
-                        log.push(args);
-                    },
-                    listFeatures: async () => ({ "test-on": true, "test-off": false }),
-                };
-                Object.assign(underlying, { polyLifecycle });
-            });
-
-            it("Lists features", async () => {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const client = RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any);
-                await assert.eventually.deepEqual(client.polyLifecycle.listFeatures(), {
-                    "test-on": true,
-                    "test-off": false,
-                });
-            });
-
-            it("Starts feature", async () => {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const client = RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any);
-                await client.polyLifecycle.startFeature("hi", false);
-                await client.polyLifecycle.startFeature("yo", true);
-                assert.deepEqual(log, [
-                    ["hi", false],
-                    ["yo", true],
-                ]);
-            });
-        });
-
-        after(async () => {
-            server.close();
-            await once(server, "close");
-        });
+      it("Starts feature", async () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const client = RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any);
+        await client.polyLifecycle.startFeature("hi", false);
+        await client.polyLifecycle.startFeature("yo", true);
+        assert.deepEqual(log, [
+          ["hi", false],
+          ["yo", true],
+        ]);
+      });
     });
+
+    after(async () => {
+      server.close();
+      await once(server, "close");
+    });
+  });
 });

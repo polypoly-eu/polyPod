@@ -32,151 +32,151 @@ import { Entry } from ".";
  * systems, unless the underlying implementations implement their own access control logic.
  */
 export class DefaultPod implements Pod {
-    public readonly dataFactory: RDF.DataFactory = dataFactory;
+  public readonly dataFactory: RDF.DataFactory = dataFactory;
 
-    constructor(
-        public readonly store: RDF.DatasetCore,
-        public readonly fs: FS,
-        public readonly fetch: Fetch
-    ) {}
+  constructor(
+    public readonly store: RDF.DatasetCore,
+    public readonly fs: FS,
+    public readonly fetch: Fetch
+  ) {}
 
-    private checkQuad(quad: RDF.Quad): void {
-        if (!quad.graph.equals(dataFactory.defaultGraph()))
-            throw new Error("Only default graph allowed");
-    }
-    /**
-     * The [[PolyIn]] interface. See [[PolyIn]] for the description.
-     */
-    get polyIn(): PolyIn {
-        return {
-            match: async (matcher) =>
-                Array.from(
-                    this.store.match(
-                        matcher.subject,
-                        matcher.predicate,
-                        matcher.object,
-                        dataFactory.defaultGraph()
-                    )
-                ),
-            select: async (matcher) =>
-                Array.from(
-                    this.store.match(
-                        matcher.subject,
-                        matcher.predicate,
-                        matcher.object,
-                        dataFactory.defaultGraph()
-                    )
-                ),
-            add: async (...quads) =>
-                quads.forEach((quad) => {
-                    this.checkQuad(quad);
-                    this.store.add(quad);
-                }),
-            delete: async (...quads) =>
-                quads.forEach((quad) => {
-                    this.checkQuad(quad);
-                    this.store.delete(quad);
-                }),
-            has: async (...quads) =>
-                quads.some((quad) => {
-                    this.checkQuad(quad);
-                    return this.store.has(quad);
-                }),
-        };
-    }
+  private checkQuad(quad: RDF.Quad): void {
+    if (!quad.graph.equals(dataFactory.defaultGraph()))
+      throw new Error("Only default graph allowed");
+  }
+  /**
+   * The [[PolyIn]] interface. See [[PolyIn]] for the description.
+   */
+  get polyIn(): PolyIn {
+    return {
+      match: async (matcher) =>
+        Array.from(
+          this.store.match(
+            matcher.subject,
+            matcher.predicate,
+            matcher.object,
+            dataFactory.defaultGraph()
+          )
+        ),
+      select: async (matcher) =>
+        Array.from(
+          this.store.match(
+            matcher.subject,
+            matcher.predicate,
+            matcher.object,
+            dataFactory.defaultGraph()
+          )
+        ),
+      add: async (...quads) =>
+        quads.forEach((quad) => {
+          this.checkQuad(quad);
+          this.store.add(quad);
+        }),
+      delete: async (...quads) =>
+        quads.forEach((quad) => {
+          this.checkQuad(quad);
+          this.store.delete(quad);
+        }),
+      has: async (...quads) =>
+        quads.some((quad) => {
+          this.checkQuad(quad);
+          return this.store.has(quad);
+        }),
+    };
+  }
 
-    /**
-     * The [[PolyOut]] interface. See [[PolyOut]] for the description.
-     */
-    get polyOut(): PolyOut {
-        const fs = this.fs;
-        const _fetch = this.fetch;
+  /**
+   * The [[PolyOut]] interface. See [[PolyOut]] for the description.
+   */
+  get polyOut(): PolyOut {
+    const fs = this.fs;
+    const _fetch = this.fetch;
 
-        return new (class implements PolyOut {
-            fetch(input: string, init?: RequestInit): Promise<Response> {
-                return _fetch(input, init);
-            }
+    return new (class implements PolyOut {
+      fetch(input: string, init?: RequestInit): Promise<Response> {
+        return _fetch(input, init);
+      }
 
-            readFile(path: string, options: EncodingOptions): Promise<string>;
-            readFile(path: string): Promise<Uint8Array>;
-            readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
-                if (options === undefined) return fs.readFile(path);
-                else return fs.readFile(path, options);
-            }
+      readFile(path: string, options: EncodingOptions): Promise<string>;
+      readFile(path: string): Promise<Uint8Array>;
+      readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
+        if (options === undefined) return fs.readFile(path);
+        else return fs.readFile(path, options);
+      }
 
-            readDir(path: string): Promise<Entry[]> {
-                const newFiles = fs.readdir(path).then((files) => {
-                    const objectFiles = files.map((file) => ({
-                        id: path + "/" + file,
-                        path: file,
-                    }));
-                    return new Promise<Entry[]>((resolve) => {
-                        resolve(objectFiles);
-                    });
-                });
-                return newFiles;
-            }
+      readDir(path: string): Promise<Entry[]> {
+        const newFiles = fs.readdir(path).then((files) => {
+          const objectFiles = files.map((file) => ({
+            id: path + "/" + file,
+            path: file,
+          }));
+          return new Promise<Entry[]>((resolve) => {
+            resolve(objectFiles);
+          });
+        });
+        return newFiles;
+      }
 
-            stat(path: string): Promise<Stats> {
-                return fs.stat(path);
-            }
+      stat(path: string): Promise<Stats> {
+        return fs.stat(path);
+      }
 
-            writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
-                return fs.writeFile(path, content, options);
-            }
+      writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
+        return fs.writeFile(path, content, options);
+      }
 
-            importArchive(url: string): Promise<string> {
-                throw new Error(`Called with ${url}, but not implemented`);
-            }
+      importArchive(url: string): Promise<string> {
+        throw new Error(`Called with ${url}, but not implemented`);
+      }
 
-            removeArchive(fileId: string): Promise<void> {
-                throw new Error(`Called with ${fileId}, but not implemented`);
-            }
-        })();
-    }
-    /**
-     * The [[PolyNav]] interface. See [[PolyNav]] for the description.
-     */
-    get polyNav(): PolyNav {
-        return {
-            openUrl: async (url: string) => {
-                throw new Error(`Called with ${url}, but not implemented`);
-            },
-            setActiveActions: async (actions: string[]) => {
-                throw new Error(`Called with ${actions}, but not implemented`);
-            },
-            setTitle: async (title: string) => {
-                throw new Error(`Called with ${title}, but not implemented`);
-            },
-            pickFile: async () => {
-                throw new Error("Not implemented");
-            },
-        };
-    }
-    /**
-     * The [[Info]] interface. See [[Info]] for the description.
-     */
-    get info(): Info {
-        return {
-            getRuntime() {
-                throw new Error("Not implemented");
-            },
-            getVersion() {
-                throw new Error("Not implemented");
-            },
-        };
-    }
-    /**
-     * The [[Network]] interface. See [[Network]] for the description.
-     */
+      removeArchive(fileId: string): Promise<void> {
+        throw new Error(`Called with ${fileId}, but not implemented`);
+      }
+    })();
+  }
+  /**
+   * The [[PolyNav]] interface. See [[PolyNav]] for the description.
+   */
+  get polyNav(): PolyNav {
+    return {
+      openUrl: async (url: string) => {
+        throw new Error(`Called with ${url}, but not implemented`);
+      },
+      setActiveActions: async (actions: string[]) => {
+        throw new Error(`Called with ${actions}, but not implemented`);
+      },
+      setTitle: async (title: string) => {
+        throw new Error(`Called with ${title}, but not implemented`);
+      },
+      pickFile: async () => {
+        throw new Error("Not implemented");
+      },
+    };
+  }
+  /**
+   * The [[Info]] interface. See [[Info]] for the description.
+   */
+  get info(): Info {
+    return {
+      getRuntime() {
+        throw new Error("Not implemented");
+      },
+      getVersion() {
+        throw new Error("Not implemented");
+      },
+    };
+  }
+  /**
+   * The [[Network]] interface. See [[Network]] for the description.
+   */
 
-    get network(): Network {
-        return {
-            httpPost(url: string, body: string, contentType?: string, authorization?: string) {
-                throw new Error(
-                    `Called with ${url}, ${body}, ${contentType}, ${authorization} but not implemented`
-                );
-            },
-        };
-    }
+  get network(): Network {
+    return {
+      httpPost(url: string, body: string, contentType?: string, authorization?: string) {
+        throw new Error(
+          `Called with ${url}, ${body}, ${contentType}, ${authorization} but not implemented`
+        );
+      },
+    };
+  }
 }

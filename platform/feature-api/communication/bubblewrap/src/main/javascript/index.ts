@@ -36,16 +36,16 @@ export const deserialize: unique symbol = Symbol();
 export const serialize: unique symbol = Symbol();
 
 interface MaybeSerializable<TS = unknown> {
-    [serialize]?: () => TS;
+  [serialize]?: () => TS;
 }
 
 interface Serializable<TS = unknown> extends MaybeSerializable {
-    [serialize]: () => TS;
+  [serialize]: () => TS;
 }
 
 // Type guard for Serializable
 function isSerializable(t: MaybeSerializable): t is Serializable {
-    return t[serialize] !== undefined;
+  return t[serialize] !== undefined;
 }
 
 /**
@@ -144,9 +144,9 @@ function isSerializable(t: MaybeSerializable): t is Serializable {
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Class<T extends MaybeSerializable> = Function & {
-    prototype: T;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [deserialize]?: (any: any) => T;
+  prototype: T;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [deserialize]?: (any: any) => T;
 };
 
 /**
@@ -203,120 +203,120 @@ export class Undefined {}
  * (de)serialization logic. Keys of registered classes are stored
  */
 export class Bubblewrap {
-    codec: ExtensionCodec;
-    knownPrototypes: Array<unknown>;
+  codec: ExtensionCodec;
+  knownPrototypes: Array<unknown>;
 
-    private constructor(private readonly classes: Classes, private readonly strict: boolean) {
-        this.knownPrototypes = [
-            Object.prototype,
-            Error.prototype,
-            Undefined.prototype,
-            ...Object.values(this.classes).map((cls) => cls.prototype),
-        ];
-        this.codec = this.makeAndRegisterCodec();
-    }
+  private constructor(private readonly classes: Classes, private readonly strict: boolean) {
+    this.knownPrototypes = [
+      Object.prototype,
+      Error.prototype,
+      Undefined.prototype,
+      ...Object.values(this.classes).map((cls) => cls.prototype),
+    ];
+    this.codec = this.makeAndRegisterCodec();
+  }
 
-    /**
-     * Creates a new instance of [[Bubblewrap]] with the specified dictionary of registered classes.
-     *
-     * If no dictionary is specified, no classes are registered.
-     * Classes will need to be added later via [[addClasses]]
-     *
-     * @param strict if `true`, then `encode` will throw an exception when encountering any object with an unknown
-     * prototype; this is only recommended for testing purposes
-     */
-    static create(classes?: Classes, strict = false): Bubblewrap {
-        return new Bubblewrap(classes || {}, strict);
-    }
+  /**
+   * Creates a new instance of [[Bubblewrap]] with the specified dictionary of registered classes.
+   *
+   * If no dictionary is specified, no classes are registered.
+   * Classes will need to be added later via [[addClasses]]
+   *
+   * @param strict if `true`, then `encode` will throw an exception when encountering any object with an unknown
+   * prototype; this is only recommended for testing purposes
+   */
+  static create(classes?: Classes, strict = false): Bubblewrap {
+    return new Bubblewrap(classes || {}, strict);
+  }
 
-    /**
-     * Constructs a new, independent [[Bubblewrap]] instance with additional registered classes.
-     * TODO: Find out why this creates an additional object
-     *
-     * This method throws an exception if there is a duplicate class identifier.
-     */
-    addClasses(more: Classes): Bubblewrap {
-        const thisKeys = Object.keys(this.classes);
-        const thatsKeys = Object.keys(more);
-        for (const key of thatsKeys)
-            if (thisKeys.includes(key)) throw new Error(`Duplicate identifier ${key}`);
-        return new Bubblewrap({ ...this.classes, ...more }, this.strict);
-    }
+  /**
+   * Constructs a new, independent [[Bubblewrap]] instance with additional registered classes.
+   * TODO: Find out why this creates an additional object
+   *
+   * This method throws an exception if there is a duplicate class identifier.
+   */
+  addClasses(more: Classes): Bubblewrap {
+    const thisKeys = Object.keys(this.classes);
+    const thatsKeys = Object.keys(more);
+    for (const key of thatsKeys)
+      if (thisKeys.includes(key)) throw new Error(`Duplicate identifier ${key}`);
+    return new Bubblewrap({ ...this.classes, ...more }, this.strict);
+  }
 
-    private makeAndRegisterCodec(): ExtensionCodec {
-        const codec = new ExtensionCodec();
-        codec.register({
-            type: msgPackEtypeUndef,
-            encode: (value) => (value instanceof Undefined ? encode(null) : null),
-            decode: () => undefined,
-        });
+  private makeAndRegisterCodec(): ExtensionCodec {
+    const codec = new ExtensionCodec();
+    codec.register({
+      type: msgPackEtypeUndef,
+      encode: (value) => (value instanceof Undefined ? encode(null) : null),
+      decode: () => undefined,
+    });
 
-        codec.register({
-            type: msgPackEtypeClass,
-            encode: (_value) => {
-                const entries = Object.entries(this.classes);
-                // assume that later entries take precedence over earlier ones
-                entries.reverse();
-                for (const [name, Class] of entries) {
-                    if (!(_value instanceof Class)) continue;
+    codec.register({
+      type: msgPackEtypeClass,
+      encode: (_value) => {
+        const entries = Object.entries(this.classes);
+        // assume that later entries take precedence over earlier ones
+        entries.reverse();
+        for (const [name, Class] of entries) {
+          if (!(_value instanceof Class)) continue;
 
-                    // @ts-ignore _value is unknown. Bubblewrap needs to be more type-conscious on both ends: TO DO
-                    const value: MaybeSerializable = _value;
+          // @ts-ignore _value is unknown. Bubblewrap needs to be more type-conscious on both ends: TO DO
+          const value: MaybeSerializable = _value;
 
-                    if (isSerializable(value))
-                        return encode([name, value[serialize]()], { extensionCodec: codec });
+          if (isSerializable(value))
+            return encode([name, value[serialize]()], { extensionCodec: codec });
 
-                    const raw = Object.entries(value);
-                    const entries = raw.map(([key, value]) => {
-                        if (value === undefined) return [key, new Undefined()];
-                        else return [key, value];
-                    });
+          const raw = Object.entries(value);
+          const entries = raw.map(([key, value]) => {
+            if (value === undefined) return [key, new Undefined()];
+            else return [key, value];
+          });
 
-                    return encode([name, entries], { extensionCodec: codec });
-                }
-
-                return null;
-            },
-            decode: (buffer) => {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const [name, raw] = decode(buffer, { extensionCodec: codec }) as any;
-                const Class = this.classes[name];
-
-                const deserializer = Class[deserialize];
-                if (deserializer !== undefined) return deserializer(raw);
-
-                const object = Object.create(Class.prototype);
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                for (const [key, value] of raw as [string, any][]) object[key] = value;
-                return object;
-            },
-        });
-
-        codec.register({
-            type: msgPackEtypeError,
-            encode: (value) => (value instanceof Error ? encode(value.message) : null),
-            decode: (buffer) => new Error(decode(buffer) as string),
-        });
-
-        return codec;
-    }
-
-    encode(value: unknown): Uint8Array {
-        if (
-            this.strict &&
-            typeof value === "object" &&
-            !Array.isArray(value) &&
-            !this.knownPrototypes.includes(Object.getPrototypeOf(value))
-        ) {
-            throw new Error("Attempted to encode an object with an unknown prototype");
+          return encode([name, entries], { extensionCodec: codec });
         }
 
-        return encode(value, { extensionCodec: this.codec });
+        return null;
+      },
+      decode: (buffer) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const [name, raw] = decode(buffer, { extensionCodec: codec }) as any;
+        const Class = this.classes[name];
+
+        const deserializer = Class[deserialize];
+        if (deserializer !== undefined) return deserializer(raw);
+
+        const object = Object.create(Class.prototype);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        for (const [key, value] of raw as [string, any][]) object[key] = value;
+        return object;
+      },
+    });
+
+    codec.register({
+      type: msgPackEtypeError,
+      encode: (value) => (value instanceof Error ? encode(value.message) : null),
+      decode: (buffer) => new Error(decode(buffer) as string),
+    });
+
+    return codec;
+  }
+
+  encode(value: unknown): Uint8Array {
+    if (
+      this.strict &&
+      typeof value === "object" &&
+      !Array.isArray(value) &&
+      !this.knownPrototypes.includes(Object.getPrototypeOf(value))
+    ) {
+      throw new Error("Attempted to encode an object with an unknown prototype");
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    decode(_buffer: ArrayLike<number> | ArrayBuffer): any {
-        const buffer = new Uint8Array(_buffer);
-        return decode(buffer, { extensionCodec: this.codec });
-    }
+    return encode(value, { extensionCodec: this.codec });
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  decode(_buffer: ArrayLike<number> | ArrayBuffer): any {
+    const buffer = new Uint8Array(_buffer);
+    return decode(buffer, { extensionCodec: this.codec });
+  }
 }

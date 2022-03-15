@@ -4,6 +4,6 @@ import { RemoteClientPod } from "./remote";
 import { AsyncPod } from "./async";
 
 window.pod = new AsyncPod(
-    iframeInnerPort("").then((pod) => RemoteClientPod.fromRawPort(pod)),
-    new DataFactory(false)
+  iframeInnerPort("").then((pod) => RemoteClientPod.fromRawPort(pod)),
+  new DataFactory(false)
 );

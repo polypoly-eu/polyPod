@@ -8,17 +8,17 @@ import GraphyDataset from "@graphy/memory.dataset.fast";
 import Graphy from "@graphy/core.data.factory";
 
 describe("@rdfjs/dataset", () => {
-    new DatasetSpec(RDFJSDatasetCoreFactory, RDFJSDataFactory).run();
+  new DatasetSpec(RDFJSDatasetCoreFactory, RDFJSDataFactory).run();
 });
 
 describe("@graphy/memory.dataset.fast", () => {
-    const graphyFactory: DatasetCoreFactory = {
-        dataset(quads?: Quad[]): DatasetCore {
-            const set = GraphyDataset();
-            set.addAll(quads || []);
-            return set;
-        },
-    };
+  const graphyFactory: DatasetCoreFactory = {
+    dataset(quads?: Quad[]): DatasetCore {
+      const set = GraphyDataset();
+      set.addAll(quads || []);
+      return set;
+    },
+  };
 
-    new DatasetSpec(graphyFactory, Graphy).run();
+  new DatasetSpec(graphyFactory, Graphy).run();
 });

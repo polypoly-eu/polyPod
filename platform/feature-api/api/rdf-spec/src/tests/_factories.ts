@@ -8,13 +8,13 @@ import { DataFactory as Ruben } from "rdf-data-factory";
 /** This is a fix to make Graphy support with RDF*
  * Just like the rest of the other data factories */
 Object.assign(Object.getPrototypeOf(Graphy.quad()), {
-    termType: "Quad",
-    value: "",
+  termType: "Quad",
+  value: "",
 });
 
 export const factories: Record<string, DataFactory> = {
-    "@rdfjs/data-model": RDFJS,
-    "@graphy/core.data.factory": Graphy,
-    "rdf-data-factory": new Ruben(),
-    n3: N3,
+  "@rdfjs/data-model": RDFJS,
+  "@graphy/core.data.factory": Graphy,
+  "rdf-data-factory": new Ruben(),
+  n3: N3,
 };

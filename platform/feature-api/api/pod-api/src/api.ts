@@ -13,9 +13,9 @@ import { ExternalFile, FS } from "./fs";
  * A _matcher_ specifies a filter for querying the Pod store.
  */
 export interface Matcher {
-    subject: RDF.Quad_Subject;
-    predicate: RDF.Quad_Predicate;
-    object: RDF.Quad_Object;
+  subject: RDF.Quad_Subject;
+  predicate: RDF.Quad_Predicate;
+  object: RDF.Quad_Object;
 }
 
 /**
@@ -40,66 +40,66 @@ export interface Matcher {
  * on, except for internal purposes of the Feature.
  */
 export interface PolyIn {
-    /**
-     * @deprecated use `match()` instead.
-     *
-     * Queries the Pod for triples matching the given filter. For each property ([[Matcher.subject]],
-     * [[Matcher.predicate]], [[Matcher.object]]) that is specified in the argument, the result set is narrowed to only
-     * contain triples that match the property exactly.
-     *
-     * For example, when querying the store as follows:
-     *
-     * ```
-     * const results = await polyIn.select({
-     *     subject: factory.namedNode("http://example.org")
-     * })
-     * ```
-     *
-     * ... the result is guaranteed to only contain triples with the subject IRI `http://example.org`.
-     *
-     * Features cannot rely on obtaining a complete view of the data using this method. The results may only reflect a
-     * filtered subset due to e.g. access restrictions or incomplete synchronization across multiple machines.
-     *
-     * @param matcher a [[Matcher]] where any property may be left unspecified
-     *
-     * @returns a set of triples that conform to the specified [[Matcher]]
-     */
-    select(matcher: Partial<Matcher>): Promise<RDF.Quad[]>;
+  /**
+   * @deprecated use `match()` instead.
+   *
+   * Queries the Pod for triples matching the given filter. For each property ([[Matcher.subject]],
+   * [[Matcher.predicate]], [[Matcher.object]]) that is specified in the argument, the result set is narrowed to only
+   * contain triples that match the property exactly.
+   *
+   * For example, when querying the store as follows:
+   *
+   * ```
+   * const results = await polyIn.select({
+   *     subject: factory.namedNode("http://example.org")
+   * })
+   * ```
+   *
+   * ... the result is guaranteed to only contain triples with the subject IRI `http://example.org`.
+   *
+   * Features cannot rely on obtaining a complete view of the data using this method. The results may only reflect a
+   * filtered subset due to e.g. access restrictions or incomplete synchronization across multiple machines.
+   *
+   * @param matcher a [[Matcher]] where any property may be left unspecified
+   *
+   * @returns a set of triples that conform to the specified [[Matcher]]
+   */
+  select(matcher: Partial<Matcher>): Promise<RDF.Quad[]>;
 
-    /**
-     * Queries the Pod for triples matching the given filter.
-     * @param matcher a [[Matcher]] where any property may be left unspecified
-     */
-    match(matcher: Partial<Matcher>): Promise<RDF.Quad[]>;
+  /**
+   * Queries the Pod for triples matching the given filter.
+   * @param matcher a [[Matcher]] where any property may be left unspecified
+   */
+  match(matcher: Partial<Matcher>): Promise<RDF.Quad[]>;
 
-    /**
-     * Instructs the Pod to add triples to the store. Successful storage is not guaranteed, as that may be contingent
-     * on other constraints, e.g. access restrictions or synchronization across multiple machines.
-     *
-     * In general, (synchronous) storage errors _should_ be propagated by the Pod to the Feature, resulting in this
-     * method throwing an exception or returning a failed promise. Causes for this include, but are not limited to:
-     *
-     * - any of the triples is malformed, e.g. not using the default graph
-     * - internal storage error, e.g. disk not writable
-     * - permission violation
-     *
-     * Failures that are handed to the Feature should be handled by the Feature, for example by providing a fallback
-     * option or some form of UI to inform the user of the failure. Other errors are handled by the Pod directly, for
-     * example failure of synchronization across multiple devices.
-     *
-     * @param quads the triples that should be stored in the Pod
-     */
-    add(...quads: RDF.Quad[]): Promise<void>;
+  /**
+   * Instructs the Pod to add triples to the store. Successful storage is not guaranteed, as that may be contingent
+   * on other constraints, e.g. access restrictions or synchronization across multiple machines.
+   *
+   * In general, (synchronous) storage errors _should_ be propagated by the Pod to the Feature, resulting in this
+   * method throwing an exception or returning a failed promise. Causes for this include, but are not limited to:
+   *
+   * - any of the triples is malformed, e.g. not using the default graph
+   * - internal storage error, e.g. disk not writable
+   * - permission violation
+   *
+   * Failures that are handed to the Feature should be handled by the Feature, for example by providing a fallback
+   * option or some form of UI to inform the user of the failure. Other errors are handled by the Pod directly, for
+   * example failure of synchronization across multiple devices.
+   *
+   * @param quads the triples that should be stored in the Pod
+   */
+  add(...quads: RDF.Quad[]): Promise<void>;
 
-    /**
-     * @param quads the triples that should be removed from the Pod
-     */
-    delete(...quads: RDF.Quad[]): Promise<void>;
+  /**
+   * @param quads the triples that should be removed from the Pod
+   */
+  delete(...quads: RDF.Quad[]): Promise<void>;
 
-    /**
-     * @param quads the triples that should be removed from the Pod
-     */
-    has(...quads: RDF.Quad[]): Promise<boolean>;
+  /**
+   * @param quads the triples that should be removed from the Pod
+   */
+  has(...quads: RDF.Quad[]): Promise<boolean>;
 }
 
 /**
@@ -107,8 +107,8 @@ export interface PolyIn {
  * platform independent way.
  */
 export interface Entry {
-    id: string;
-    path: string;
+  id: string;
+  path: string;
 }
 
 /**
@@ -120,17 +120,17 @@ export interface Entry {
  * - [[Fetch]] for DOM-style HTTP requests (deprecated)
  */
 export interface PolyOut extends Omit<FS, "readdir"> {
-    /**
-     * @deprecated Use [[Network]] and its facilities instead.
-     * A standard-compliant implementation of `Fetch`. This feature is deprecated in favor of the [[Network]] interface
-     */
-    readonly fetch: Fetch;
+  /**
+   * @deprecated Use [[Network]] and its facilities instead.
+   * A standard-compliant implementation of `Fetch`. This feature is deprecated in favor of the [[Network]] interface
+   */
+  readonly fetch: Fetch;
 
-    /**
-     * @param pathToDir system-dependent path to read.
-     * @returns a Promise with id-path pairs [[Entry]] as payload.
-     */
-    readDir(pathToDir: string): Promise<Entry[]>;
+  /**
+   * @param pathToDir system-dependent path to read.
+   * @returns a Promise with id-path pairs [[Entry]] as payload.
+   */
+  readDir(pathToDir: string): Promise<Entry[]>;
 }
 
 /**
@@ -138,65 +138,65 @@ export interface PolyOut extends Omit<FS, "readdir"> {
  * user interactions with the container.
  */
 export interface PolyNav {
-    /**
-     * A way for features to display a contents of a web page
-     */
-    openUrl(url: string): Promise<void>;
-    /**
-     * Describe what actions are possible within the pod when a feature is loaded
-     */
-    setActiveActions(actions: string[]): Promise<void>;
-    /**
-     * Set a title in of a Pod
-     */
-    setTitle(title: string): Promise<void>;
-    /**
-     * Ask the user to pick a file
-     * @param type the type of file the user is asked to select, as a valid MIME type string. If no type is passed, the user can chose any type of file.
-     * @throws if an unsupported MIME type was passed as the type argument.
-     * @return an ExternalFile Object or `null` if the user cancelled.
-     */
-    pickFile(type?: string): Promise<ExternalFile | null>;
+  /**
+   * A way for features to display a contents of a web page
+   */
+  openUrl(url: string): Promise<void>;
+  /**
+   * Describe what actions are possible within the pod when a feature is loaded
+   */
+  setActiveActions(actions: string[]): Promise<void>;
+  /**
+   * Set a title in of a Pod
+   */
+  setTitle(title: string): Promise<void>;
+  /**
+   * Ask the user to pick a file
+   * @param type the type of file the user is asked to select, as a valid MIME type string. If no type is passed, the user can chose any type of file.
+   * @throws if an unsupported MIME type was passed as the type argument.
+   * @return an ExternalFile Object or `null` if the user cancelled.
+   */
+  pickFile(type?: string): Promise<ExternalFile | null>;
 }
 
 /**
  * `Info` allows the Feature to read information about the polyPod instance it is being executed in.
  */
 export interface Info {
-    /**
-     * A way for features to read the polyPod runtime identification
-     */
-    getRuntime(): Promise<string>;
+  /**
+   * A way for features to read the polyPod runtime identification
+   */
+  getRuntime(): Promise<string>;
 
-    /**
-     * A way for features to read the user visible polyPod version
-     */
-    getVersion(): Promise<string>;
+  /**
+   * A way for features to read the user visible polyPod version
+   */
+  getVersion(): Promise<string>;
 }
 
 /**
  * `Network` specifies how features can communicate with other devices or servers.
  */
 export interface Network {
-    /**
-     * A way for features to send HTTP POST requests
-     *
-     * @returns an error message if something went wrong, `undefined` upon success.
-     */
-    httpPost(
-        url: string,
-        body: string,
-        contentType?: string,
-        authorization?: string
-    ): Promise<string | undefined>;
+  /**
+   * A way for features to send HTTP POST requests
+   *
+   * @returns an error message if something went wrong, `undefined` upon success.
+   */
+  httpPost(
+    url: string,
+    body: string,
+    contentType?: string,
+    authorization?: string
+  ): Promise<string | undefined>;
 }
 
 /**
  * @hidden
  */
 export interface PolyLifecycle {
-    listFeatures(): Promise<Record<string, boolean>>;
-    startFeature(id: string, background: boolean): Promise<void>;
+  listFeatures(): Promise<Record<string, boolean>>;
+  startFeature(id: string, background: boolean): Promise<void>;
 }
 
 /**
@@ -224,63 +224,63 @@ export interface PolyLifecycle {
  * the API concurrently.
  */
 export interface Pod {
-    /**
-     * A [spec-compliant](http://rdf.js.org/data-model-spec/) data factory that is _not_ guaranteed to support variables.
-     *
-     * Example:
-     * ```
-     * const quad = factory.quad(
-     *   factory.namedNode("http://example.org/s"),
-     *   factory.namedNode("http://example.org/p"),
-     *   factory.namedNode("http://example.org/o")
-     * );
-     * ```
-     *
-     * The factory is an exception in that it is synchronous as opposed to the general asynchronous [[Pod]] API. This is
-     * by design for these reasons:
-     *
-     * 1. Features may construct a large number of RDF terms. Eventually, those will likely be saved in the Pod using
-     *    the [[add]] call. Round-tripping the construction of those terms across an asynchronous boundary will lead
-     *    to an unacceptable runtime overhead.
-     * 2. There are many small, self-contained data factory implementations that can be shipped with Pods, for example
-     *    [@rdfjs/data-model](https://github.com/rdfjs-base/data-model). The Polypoly `rdf-spec` package can be used to
-     *    ensure correctness of the factory implementations.
-     * 3. There is no point in imposing access-control over manipulation of RDF terms before they are stored in the Pod.
-     * 4. Pod implementors may choose to provide a custom implementation for more efficient serialization of RDF terms
-     *    that are passed into the Pod. This is much easier to implement when the Pod controls the creation of terms.
-     *
-     * Pertaining to the last point, Features _must_ use the factory to create new RDF terms.
-     */
-    readonly dataFactory: RDF.DataFactory;
+  /**
+   * A [spec-compliant](http://rdf.js.org/data-model-spec/) data factory that is _not_ guaranteed to support variables.
+   *
+   * Example:
+   * ```
+   * const quad = factory.quad(
+   *   factory.namedNode("http://example.org/s"),
+   *   factory.namedNode("http://example.org/p"),
+   *   factory.namedNode("http://example.org/o")
+   * );
+   * ```
+   *
+   * The factory is an exception in that it is synchronous as opposed to the general asynchronous [[Pod]] API. This is
+   * by design for these reasons:
+   *
+   * 1. Features may construct a large number of RDF terms. Eventually, those will likely be saved in the Pod using
+   *    the [[add]] call. Round-tripping the construction of those terms across an asynchronous boundary will lead
+   *    to an unacceptable runtime overhead.
+   * 2. There are many small, self-contained data factory implementations that can be shipped with Pods, for example
+   *    [@rdfjs/data-model](https://github.com/rdfjs-base/data-model). The Polypoly `rdf-spec` package can be used to
+   *    ensure correctness of the factory implementations.
+   * 3. There is no point in imposing access-control over manipulation of RDF terms before they are stored in the Pod.
+   * 4. Pod implementors may choose to provide a custom implementation for more efficient serialization of RDF terms
+   *    that are passed into the Pod. This is much easier to implement when the Pod controls the creation of terms.
+   *
+   * Pertaining to the last point, Features _must_ use the factory to create new RDF terms.
+   */
+  readonly dataFactory: RDF.DataFactory;
 
-    /**
-     * `polyIn` is the interface to interact with the Pod store. Refer to [[PolyIn]] for its definition.
-     */
-    readonly polyIn: PolyIn;
+  /**
+   * `polyIn` is the interface to interact with the Pod store. Refer to [[PolyIn]] for its definition.
+   */
+  readonly polyIn: PolyIn;
 
-    /**
-     * `polyOut` is the interface to interact with the outside world. Refer to [[PolyOut]] for its definition.
-     */
-    readonly polyOut: PolyOut;
+  /**
+   * `polyOut` is the interface to interact with the outside world. Refer to [[PolyOut]] for its definition.
+   */
+  readonly polyOut: PolyOut;
 
-    /**
-     * `polyNav` is the interface to interact the container. Refer to [[PolyNav]] for its definition.
-     */
-    readonly polyNav: PolyNav;
+  /**
+   * `polyNav` is the interface to interact the container. Refer to [[PolyNav]] for its definition.
+   */
+  readonly polyNav: PolyNav;
 
-    /**
-     * `info` is the interface to read information about the polyPod instance.
-     */
-    readonly info: Info;
+  /**
+   * `info` is the interface to read information about the polyPod instance.
+   */
+  readonly info: Info;
 
-    /**
-     * `network` is the interface to interact with other devices over the network. Refer to [[Network]] for its
-     * definition.
-     */
-    readonly network: Network;
+  /**
+   * `network` is the interface to interact with other devices over the network. Refer to [[Network]] for its
+   * definition.
+   */
+  readonly network: Network;
 
-    /**
-     * @hidden
-     */
-    readonly polyLifecycle?: PolyLifecycle;
+  /**
+   * @hidden
+   */
+  readonly polyLifecycle?: PolyLifecycle;
 }

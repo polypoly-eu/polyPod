@@ -8,16 +8,16 @@
  */
 
 export interface EncodingOptions {
-    encoding: BufferEncoding;
+  encoding: BufferEncoding;
 }
 
 export interface Stats {
-    isFile(): boolean;
-    isDirectory(): boolean;
-    getTime(): string;
-    getSize(): number;
-    getName(): string;
-    getId(): string;
+  isFile(): boolean;
+  isDirectory(): boolean;
+  getTime(): string;
+  getSize(): number;
+  getName(): string;
+  getId(): string;
 }
 
 /**
@@ -26,17 +26,17 @@ export interface Stats {
  * The [Node.js documentation](https://nodejs.org/api/fs.html) applies to the methods in this interface.
  */
 export interface FS {
-    readFile(path: string, options: EncodingOptions): Promise<string>;
-    readFile(path: string): Promise<Uint8Array>;
-    writeFile(path: string, content: string, options: EncodingOptions): Promise<void>;
-    stat(path: string): Promise<Stats>;
-    readdir(path: string): Promise<string[]>;
-    importArchive(url: string): Promise<string>;
-    removeArchive(fileId: string): Promise<void>;
+  readFile(path: string, options: EncodingOptions): Promise<string>;
+  readFile(path: string): Promise<Uint8Array>;
+  writeFile(path: string, content: string, options: EncodingOptions): Promise<void>;
+  stat(path: string): Promise<Stats>;
+  readdir(path: string): Promise<string[]>;
+  importArchive(url: string): Promise<string>;
+  removeArchive(fileId: string): Promise<void>;
 }
 
 export interface ExternalFile {
-    name: string;
-    url: string;
-    size: number;
+  name: string;
+  url: string;
+  size: number;
 }
