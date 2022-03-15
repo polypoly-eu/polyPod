@@ -18,7 +18,7 @@ jobs:
     steps:
       - run: echo "Uploading ${{ github.ref }} to ${{ github.event.inputs.targets }}"
       - name: Set POLYPOD_UPLOAD_GOOGLE_PLAY
-        if: github.event.inputs.targets == "all" || github.event.inputs.targets == "google-play"
+        if: github.event.inputs.targets == 'all' || github.event.inputs.targets == 'google-play'
         run: echo "POLYPOD_UPLOAD_GOOGLE_PLAY=true" >> $GITHUB_ENV
       - name: Set POLYPOD_UPLOAD_APP_STORE
         if: github.event.inputs.targets == "all" || github.event.inputs.targets == "app-store"
