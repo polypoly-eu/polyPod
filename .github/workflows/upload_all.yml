@@ -1,7 +1,26 @@
-name: Upload to Google Play and the App Store
-on:
-  workflow_dispatch:
+name: Upload to all stores
+on: [workflow_dispatch]
 jobs:
-  apologize:
-    steps:
-      - run: echo "Sorry, doesn't do anything just yet"
+  call_upload_google_play:
+    name: Upload to Google Play
+    uses: ./.github/workflows/upload_google_play.yml
+    secrets:
+      POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
+      POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
+      POLYPOD_ANDROID_UPLOAD_KEYSTORE_FILE: ${{ secrets.POLYPOD_ANDROID_UPLOAD_KEYSTORE_FILE }}
+      POLYPOD_ANDROID_UPLOAD_KEYSTORE_PASS: ${{ secrets.POLYPOD_ANDROID_UPLOAD_KEYSTORE_PASS }}
+      POLYPOD_ANDROID_UPLOAD_KEY_ALIAS: ${{ secrets.POLYPOD_ANDROID_UPLOAD_KEY_ALIAS }}
+      POLYPOD_ANDROID_STORE_SERVICE_ACCOUNT_JSON: ${{ secrets.POLYPOD_ANDROID_STORE_SERVICE_ACCOUNT_JSON }}
+
+  call_upload_app_store:
+    name: Upload to the App Store
+    uses: ./.github/workflows/upload_app_store.yml
+    secrets:
+      POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
+      POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
+      POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64 }}
+      POLYPOD_APPLE_IOS_APPSTORE_P12_PASS: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_PASS }}
+      POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64 }}
+      POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64 }}
+      POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
+      POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID }}
