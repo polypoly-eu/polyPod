@@ -20,7 +20,7 @@ jobs:
         if: ${{ github.ref != 'refs/heads/main' && startsWith(github.ref, 'refs/heads/release') != true && startsWith(github.ref, 'refs/heads/prod4pod-1426') != true }}
         name: Early exit failure if not main or release branch.
         run: exit 1
-      - run: echo "Uploading ${{ github.ref }} to ${{ github.event.inputs.target }}"
+      - run: echo "Uploading ${{ github.ref }} to ${{ github.event.inputs.targets }}"
 #       - uses: actions/checkout@v2
 #       - uses: actions/setup-node@v2
 #         with:
