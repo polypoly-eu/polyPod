@@ -391,9 +391,9 @@ function approveEndpointFetch(
     );
 }
 
-function endpointErrorMessage(requestType: string, errorlog: string): string {
+function endpointErrorMessage(fetchType: string, errorlog: string): string {
     console.error(errorlog);
-    return `Endpoint failed at : ${requestType}`;
+    return `Endpoint failed at : ${fetchType}`;
 }
 
 class BrowserEndpoint implements Endpoint {
