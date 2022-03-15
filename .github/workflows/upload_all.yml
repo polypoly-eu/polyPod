@@ -34,7 +34,10 @@ jobs:
               echo "POLYPOD_UPLOAD_APP_STORE=true" >> $GITHUB_ENV
           fi
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+
+      # API and features
+      - name: API and features - Setup
+        uses: actions/setup-node@v2
         with:
           node-version: 16
           cache: "npm"
@@ -50,7 +53,8 @@ jobs:
         run: ./build.js test
 
       # Android
-      - uses: actions/setup-java@v1
+      - name: Android - Setup
+        uses: actions/setup-java@v1
         if: env.POLYPOD_UPLOAD_GOOGLE_PLAY == 'true'
         with:
           java-version: 11
@@ -87,8 +91,9 @@ jobs:
         run: |
           echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
           echo "##[set-output name=sha_short;]$(echo ${GITHUB_SHA::7})"
-#      - uses: r0adkll/upload-google-play@9745ef904e395471bca5696056a6ce8a60d18cf8
-      - uses: polypoly-eu/upload-google-play@master
+      - name: Android - Upload
+        # uses: r0adkll/upload-google-play@9745ef904e395471bca5696056a6ce8a60d18cf8
+        uses: polypoly-eu/upload-google-play@master
         if: env.POLYPOD_UPLOAD_GOOGLE_PLAY == 'true'
         with:
           serviceAccountJsonPlainText: ${{ secrets.POLYPOD_ANDROID_STORE_SERVICE_ACCOUNT_JSON }}
