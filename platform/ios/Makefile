@@ -17,19 +17,20 @@ APPSTORE_API_KEY_ID = $POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID
 APPSTORE_API_ISSUER_ID = $POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID
 
 ifneq ($(shell which xcpretty),)
+XCODEBUILD := set -o pipefail && xcodebuild
 XCPRETTY := | xcpretty
+else
+XCODEBUILD := xcodebuild
 endif
 
 build:
-	set -o pipefail
-	xcodebuild clean build \
+	$(XCODEBUILD) clean build \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
 		$(XCPRETTY)
 
 test:
-	set -o pipefail
-	xcodebuild clean test \
+	$(XCODEBUILD) clean test \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
 		-destination "platform=iOS Simulator,name=iPhone 11,OS=${destination}" \
@@ -37,16 +38,14 @@ test:
 
 archive:
 	rm -rf $(archive_path)
-	set -o pipefail
-	xcodebuild clean archive \
+	$(XCODEBUILD) clean archive \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
 		-archivePath $(archive_path) \
 		$(XCPRETTY)
 
 export_ipa: archive
-	set -o pipefail
-	xcodebuild \
+	$(XCODEBUILD) \
 		-exportArchive \
 		-archivePath $(archive_path) \
 		-exportPath ./build \
