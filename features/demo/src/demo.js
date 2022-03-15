@@ -31,7 +31,8 @@ window.addEventListener("DOMContentLoaded", () => {
     document
         .querySelector(".endpoint-post")
         .addEventListener("click", async () => {
-            const endpointId = "demoTestEndpoint";
+            //This endpoint is not registered by default! Add your personal test server URL to polyPod/platform/utils/endpoint-generator/endpoints.js
+            const endpointId = "demoTest";
             try {
                 const response = await window.pod.endpoint.get(
                     endpointId,
