@@ -9,7 +9,7 @@
 import { Pod } from "./api";
 
 declare global {
-  interface Window {
-    pod: Pod;
-  }
+    interface Window {
+        pod: Pod;
+    }
 }

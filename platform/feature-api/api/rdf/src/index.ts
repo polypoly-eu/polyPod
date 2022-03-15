@@ -15,137 +15,137 @@ import * as RDF from "rdf-js";
  * This class defines a generic [[equals]] function according to the RDFJS specification.
  */
 export abstract class Model {
-  abstract termType: string;
+    abstract termType: string;
 
-  equals(other: RDF.Term | null): boolean {
-    if (other === null || other === undefined || other.termType !== this.termType) return false;
+    equals(other: RDF.Term | null): boolean {
+        if (other === null || other === undefined || other.termType !== this.termType) return false;
 
-    for (const [key, value] of Object.entries(this)) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const otherValue = (other as any)[key];
-      if (value instanceof Model) {
-        if (!value.equals(otherValue)) return false;
-      } else if (otherValue !== value) return false;
+        for (const [key, value] of Object.entries(this)) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const otherValue = (other as any)[key];
+            if (value instanceof Model) {
+                if (!value.equals(otherValue)) return false;
+            } else if (otherValue !== value) return false;
+        }
+
+        return true;
     }
-
-    return true;
-  }
 }
 
 export class NamedNode<Iri extends string = string> extends Model implements RDF.NamedNode {
-  termType: "NamedNode" = "NamedNode";
+    termType: "NamedNode" = "NamedNode";
 
-  constructor(public value: Iri) {
-    super();
-    Object.freeze(this);
-  }
+    constructor(public value: Iri) {
+        super();
+        Object.freeze(this);
+    }
 }
 
 export class BlankNode extends Model implements RDF.BlankNode {
-  private static nextId = 0;
+    private static nextId = 0;
 
-  termType: "BlankNode" = "BlankNode";
+    termType: "BlankNode" = "BlankNode";
 
-  value: string;
+    value: string;
 
-  constructor(value?: string) {
-    super();
+    constructor(value?: string) {
+        super();
 
-    if (value) this.value = value;
-    else this.value = "b" + ++BlankNode.nextId;
+        if (value) this.value = value;
+        else this.value = "b" + ++BlankNode.nextId;
 
-    Object.freeze(this);
-  }
+        Object.freeze(this);
+    }
 }
 
 export class Literal extends Model implements RDF.Literal {
-  static readonly langStringDatatype = new NamedNode(
-    "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
-  );
-  static readonly stringDatatype = new NamedNode("http://www.w3.org/2001/XMLSchema#string");
+    static readonly langStringDatatype = new NamedNode(
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+    );
+    static readonly stringDatatype = new NamedNode("http://www.w3.org/2001/XMLSchema#string");
 
-  language: string;
-  datatype: RDF.NamedNode;
-  termType: "Literal" = "Literal";
+    language: string;
+    datatype: RDF.NamedNode;
+    termType: "Literal" = "Literal";
 
-  constructor(public value: string, languageOrDatatype?: string | RDF.NamedNode) {
-    super();
+    constructor(public value: string, languageOrDatatype?: string | RDF.NamedNode) {
+        super();
 
-    if (typeof languageOrDatatype === "string") {
-      if (languageOrDatatype.indexOf(":") === -1) {
-        this.language = languageOrDatatype;
-        this.datatype = Literal.langStringDatatype;
-      } else {
-        this.language = "";
-        this.datatype = new NamedNode(languageOrDatatype);
-      }
-    } else {
-      this.language = "";
-      this.datatype = languageOrDatatype || Literal.stringDatatype;
+        if (typeof languageOrDatatype === "string") {
+            if (languageOrDatatype.indexOf(":") === -1) {
+                this.language = languageOrDatatype;
+                this.datatype = Literal.langStringDatatype;
+            } else {
+                this.language = "";
+                this.datatype = new NamedNode(languageOrDatatype);
+            }
+        } else {
+            this.language = "";
+            this.datatype = languageOrDatatype || Literal.stringDatatype;
+        }
+
+        Object.freeze(this);
     }
-
-    Object.freeze(this);
-  }
 }
 
 export class Variable extends Model implements RDF.Variable {
-  termType: "Variable" = "Variable";
+    termType: "Variable" = "Variable";
 
-  constructor(public value: string) {
-    super();
-    Object.freeze(this);
-  }
+    constructor(public value: string) {
+        super();
+        Object.freeze(this);
+    }
 }
 
 export class DefaultGraph extends Model implements RDF.DefaultGraph {
-  static readonly instance: DefaultGraph = new DefaultGraph();
+    static readonly instance: DefaultGraph = new DefaultGraph();
 
-  private constructor() {
-    super();
-    Object.freeze(this);
-  }
+    private constructor() {
+        super();
+        Object.freeze(this);
+    }
 
-  termType: "DefaultGraph" = "DefaultGraph";
-  value: "" = "";
+    termType: "DefaultGraph" = "DefaultGraph";
+    value: "" = "";
 }
 
 export class Quad implements RDF.Quad {
-  constructor(
-    public subject: RDF.Quad_Subject,
-    public predicate: RDF.Quad_Predicate,
-    public object: RDF.Quad_Object,
-    public graph: RDF.Quad_Graph
-  ) {
-    Object.freeze(this);
-  }
+    constructor(
+        public subject: RDF.Quad_Subject,
+        public predicate: RDF.Quad_Predicate,
+        public object: RDF.Quad_Object,
+        public graph: RDF.Quad_Graph
+    ) {
+        Object.freeze(this);
+    }
 
-  termType: "Quad" = "Quad";
-  value: "" = "";
+    termType: "Quad" = "Quad";
+    value: "" = "";
 
-  equals(other: RDF.Term | null | undefined): boolean {
-    // `|| !other.termType` is for backwards-compatibility with old factories without RDF* support.
-    return (
-      !!other &&
-      (other.termType === "Quad" || !other.termType) &&
-      other.subject.equals(this.subject) &&
-      other.predicate.equals(this.predicate) &&
-      other.object.equals(this.object) &&
-      other.graph.equals(this.graph)
-    );
-  }
+    equals(other: RDF.Term | null | undefined): boolean {
+        // `|| !other.termType` is for backwards-compatibility with old factories without RDF* support.
+        return (
+            !!other &&
+            (other.termType === "Quad" || !other.termType) &&
+            other.subject.equals(this.subject) &&
+            other.predicate.equals(this.predicate) &&
+            other.object.equals(this.object) &&
+            other.graph.equals(this.graph)
+        );
+    }
 }
 
 const prototypes = {
-  subject: [NamedNode.prototype, BlankNode.prototype, Variable.prototype, Quad.prototype],
-  predicate: [NamedNode.prototype, Variable.prototype],
-  object: [
-    NamedNode.prototype,
-    Literal.prototype,
-    BlankNode.prototype,
-    Variable.prototype,
-    Quad.prototype,
-  ],
-  graph: [DefaultGraph.prototype, NamedNode.prototype, BlankNode.prototype, Variable.prototype],
+    subject: [NamedNode.prototype, BlankNode.prototype, Variable.prototype, Quad.prototype],
+    predicate: [NamedNode.prototype, Variable.prototype],
+    object: [
+        NamedNode.prototype,
+        Literal.prototype,
+        BlankNode.prototype,
+        Variable.prototype,
+        Quad.prototype,
+    ],
+    graph: [DefaultGraph.prototype, NamedNode.prototype, BlankNode.prototype, Variable.prototype],
 };
 
 /**
@@ -177,73 +177,75 @@ const prototypes = {
  * For the semantics of the methods, refer to [the spec](https://rdf.js.org/data-model-spec/).
  */
 export class DataFactory implements RDF.DataFactory<Quad, Quad> {
-  constructor(private readonly strict: boolean) {
-    Object.freeze(this);
-  }
-
-  blankNode(value?: string): BlankNode {
-    if (this.strict) {
-      if (value !== undefined && typeof value !== "string")
-        throw new Error("Expected string or undefined");
+    constructor(private readonly strict: boolean) {
+        Object.freeze(this);
     }
 
-    return new BlankNode(value);
-  }
+    blankNode(value?: string): BlankNode {
+        if (this.strict) {
+            if (value !== undefined && typeof value !== "string")
+                throw new Error("Expected string or undefined");
+        }
 
-  defaultGraph(): DefaultGraph {
-    return DefaultGraph.instance;
-  }
-
-  literal(value: string, languageOrDatatype?: string | NamedNode): Literal {
-    if (this.strict) {
-      if (typeof value !== "string") throw new Error("Expected string as value");
-
-      if (
-        languageOrDatatype !== undefined &&
-        typeof languageOrDatatype !== "string" &&
-        Object.getPrototypeOf(languageOrDatatype) !== NamedNode.prototype
-      )
-        throw new Error("Expected undefined, string or NamedNode prototype as language/datatype");
+        return new BlankNode(value);
     }
 
-    return new Literal(value, languageOrDatatype);
-  }
-
-  namedNode<Iri extends string = string>(value: Iri): NamedNode<Iri> {
-    if (this.strict) {
-      if (typeof value !== "string") throw new Error("Expected string");
+    defaultGraph(): DefaultGraph {
+        return DefaultGraph.instance;
     }
 
-    return new NamedNode(value);
-  }
+    literal(value: string, languageOrDatatype?: string | NamedNode): Literal {
+        if (this.strict) {
+            if (typeof value !== "string") throw new Error("Expected string as value");
 
-  quad(
-    subject: RDF.Quad_Subject,
-    predicate: RDF.Quad_Predicate,
-    object: RDF.Quad_Object,
-    graph?: RDF.Quad_Graph
-  ): Quad {
-    if (this.strict) {
-      if (!prototypes.subject.includes(Object.getPrototypeOf(subject)))
-        throw new Error("Invalid prototype of subject");
-      if (!prototypes.predicate.includes(Object.getPrototypeOf(predicate)))
-        throw new Error("Invalid prototype of predicate");
-      if (!prototypes.object.includes(Object.getPrototypeOf(object)))
-        throw new Error("Invalid prototype of object");
-      if (graph !== undefined && !prototypes.graph.includes(Object.getPrototypeOf(graph)))
-        throw new Error("Invalid prototype of graph");
+            if (
+                languageOrDatatype !== undefined &&
+                typeof languageOrDatatype !== "string" &&
+                Object.getPrototypeOf(languageOrDatatype) !== NamedNode.prototype
+            )
+                throw new Error(
+                    "Expected undefined, string or NamedNode prototype as language/datatype"
+                );
+        }
+
+        return new Literal(value, languageOrDatatype);
     }
 
-    return new Quad(subject, predicate, object, graph || this.defaultGraph());
-  }
+    namedNode<Iri extends string = string>(value: Iri): NamedNode<Iri> {
+        if (this.strict) {
+            if (typeof value !== "string") throw new Error("Expected string");
+        }
 
-  variable(value: string): Variable {
-    if (this.strict) {
-      if (typeof value !== "string") throw new Error("Expected string");
+        return new NamedNode(value);
     }
 
-    return new Variable(value);
-  }
+    quad(
+        subject: RDF.Quad_Subject,
+        predicate: RDF.Quad_Predicate,
+        object: RDF.Quad_Object,
+        graph?: RDF.Quad_Graph
+    ): Quad {
+        if (this.strict) {
+            if (!prototypes.subject.includes(Object.getPrototypeOf(subject)))
+                throw new Error("Invalid prototype of subject");
+            if (!prototypes.predicate.includes(Object.getPrototypeOf(predicate)))
+                throw new Error("Invalid prototype of predicate");
+            if (!prototypes.object.includes(Object.getPrototypeOf(object)))
+                throw new Error("Invalid prototype of object");
+            if (graph !== undefined && !prototypes.graph.includes(Object.getPrototypeOf(graph)))
+                throw new Error("Invalid prototype of graph");
+        }
+
+        return new Quad(subject, predicate, object, graph || this.defaultGraph());
+    }
+
+    variable(value: string): Variable {
+        if (this.strict) {
+            if (typeof value !== "string") throw new Error("Expected string");
+        }
+
+        return new Variable(value);
+    }
 }
 
 /**

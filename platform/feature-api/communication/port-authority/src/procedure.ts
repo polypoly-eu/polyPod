@@ -40,9 +40,9 @@ import { Handler, Port, ReceivePort, SendPort } from "./port";
  * [Promise specification](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
  */
 export interface PromiseResolvers<Res> {
-  resolve(t: Res | Promise<Res>): void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  reject(err?: any): void;
+    resolve(t: Res | Promise<Res>): void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    reject(err?: any): void;
 }
 
 /**
@@ -50,8 +50,8 @@ export interface PromiseResolvers<Res> {
  * semantics is that the object is a _request_ and that the response is set through the callbacks.
  */
 export interface WithResolvers<Req, Res> {
-  request: Req;
-  resolvers: PromiseResolvers<Res>;
+    request: Req;
+    resolvers: PromiseResolvers<Res>;
 }
 
 /**
@@ -91,13 +91,13 @@ export type Procedure<Req, Res> = (req: Req) => Promise<Res>;
  * @returns a function that can be used to transparently send messages over a [[RequestPort]] and await the response
  */
 export function client<Req, Res>(port: RequestPort<Req, Res>): Procedure<Req, Res> {
-  return (req) =>
-    new Promise<Res>((resolve, reject) => {
-      port.send({
-        request: req,
-        resolvers: { resolve, reject },
-      });
-    });
+    return (req) =>
+        new Promise<Res>((resolve, reject) => {
+            port.send({
+                request: req,
+                resolvers: { resolve, reject },
+            });
+        });
 }
 
 /**
@@ -123,25 +123,25 @@ export function client<Req, Res>(port: RequestPort<Req, Res>): Procedure<Req, Re
  * @param procedure the function that is called for each incoming message
  */
 export function server<Req, Res>(
-  port: ResponsePort<Req, Res>,
-  procedure: Procedure<Req, Res>
+    port: ResponsePort<Req, Res>,
+    procedure: Procedure<Req, Res>
 ): void {
-  port.addHandler(async (request) => {
-    try {
-      const response = await procedure(request.request);
-      request.resolvers.resolve(response);
-    } catch (err) {
-      request.resolvers.reject(err);
-    }
-  });
+    port.addHandler(async (request) => {
+        try {
+            const response = await procedure(request.request);
+            request.resolvers.resolve(response);
+        } catch (err) {
+            request.resolvers.reject(err);
+        }
+    });
 }
 
 /**
  * A simple wrapper around requests with an associated request identifier.
  */
 export interface ClientRequest<Req> {
-  request: Req;
-  id: number;
+    request: Req;
+    id: number;
 }
 
 /**
@@ -190,27 +190,27 @@ export type ServerResponse<Res> = { id: number; response: Res } | { id: number; 
  * ```
  */
 export function liftClient<Req, Res>(
-  port: Port<ServerResponse<Res>, ClientRequest<Req>>
+    port: Port<ServerResponse<Res>, ClientRequest<Req>>
 ): RequestPort<Req, Res> {
-  let id = 0;
-  const pending = new Map<number, PromiseResolvers<Res>>();
-  port.addHandler((response) => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { resolve, reject } = pending.get(response.id)!;
-    if ("error" in response) reject(response.error);
-    else resolve(response.response);
-  });
+    let id = 0;
+    const pending = new Map<number, PromiseResolvers<Res>>();
+    port.addHandler((response) => {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const { resolve, reject } = pending.get(response.id)!;
+        if ("error" in response) reject(response.error);
+        else resolve(response.response);
+    });
 
-  return {
-    send: (req) => {
-      const currentId = ++id;
-      pending.set(currentId, req.resolvers);
-      port.send({
-        request: req.request,
-        id: currentId,
-      });
-    },
-  };
+    return {
+        send: (req) => {
+            const currentId = ++id;
+            pending.set(currentId, req.resolvers);
+            port.send({
+                request: req.request,
+                id: currentId,
+            });
+        },
+    };
 }
 
 /**
@@ -245,36 +245,36 @@ export function liftClient<Req, Res>(
  * the same requests is generally ill-defined.
  */
 export function liftServer<Req, Res>(
-  port: Port<ClientRequest<Req>, ServerResponse<Res>>
+    port: Port<ClientRequest<Req>, ServerResponse<Res>>
 ): ResponsePort<Req, Res> {
-  let handler: Handler<WithResolvers<Req, Res>> | undefined = undefined;
+    let handler: Handler<WithResolvers<Req, Res>> | undefined = undefined;
 
-  port.addHandler(async (request) => {
-    const h = handler;
-    if (!h) return;
+    port.addHandler(async (request) => {
+        const h = handler;
+        if (!h) return;
 
-    try {
-      const response = await new Promise<Res>((resolve, reject) => {
-        h({
-          request: request.request,
-          resolvers: { resolve, reject },
-        });
-      });
-      port.send({
-        id: request.id,
-        response,
-      });
-    } catch (err) {
-      port.send({
-        id: request.id,
-        error: err,
-      });
-    }
-  });
+        try {
+            const response = await new Promise<Res>((resolve, reject) => {
+                h({
+                    request: request.request,
+                    resolvers: { resolve, reject },
+                });
+            });
+            port.send({
+                id: request.id,
+                response,
+            });
+        } catch (err) {
+            port.send({
+                id: request.id,
+                error: err,
+            });
+        }
+    });
 
-  return {
-    addHandler: (h) => {
-      if (!handler) handler = h;
-    },
-  };
+    return {
+        addHandler: (h) => {
+            if (!handler) handler = h;
+        },
+    };
 }
