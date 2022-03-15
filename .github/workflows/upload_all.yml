@@ -22,13 +22,17 @@ jobs:
           && startsWith(github.ref, 'refs/heads/release') != true
           && startsWith(github.ref, 'refs/heads/prod4pod-1426') != true
         run: exit 1
-      - run: echo "Uploading ${{ github.ref }} to ${{ github.event.inputs.targets }}"
+      - run: echo "Uploading ${{ github.ref }}"
       - name: Set upload targets
         run: |
-          [[ ${{ github.event.inputs.targets }} =~ all|google-play ]] && \
+          if [[ ${{ github.event.inputs.targets }} =~ all|google-play ]]; then
+              echo "Uploading to Google Play"
               echo "POLYPOD_UPLOAD_GOOGLE_PLAY=true" >> $GITHUB_ENV
-          [[ ${{ github.event.inputs.targets }} =~ all|app-store ]] && \
+          endif
+          if [[ ${{ github.event.inputs.targets }} =~ all|app-store ]]; then
+              echo "Uploading to the App Store"
               echo "POLYPOD_UPLOAD_APP_STORE=true" >> $GITHUB_ENV
+          endif
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
