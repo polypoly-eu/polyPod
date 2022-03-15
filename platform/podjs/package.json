@@ -12,13 +12,16 @@
   "scripts": {
     "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "build-downstream": "../../build.js --start @polypoly-eu/podjs",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint src --ext .ts",
+    "test": "jest"
   },
   "dependencies": {
     "@polypoly-eu/fetch-spec": "file:../feature-api/api/fetch-spec",
     "@polypoly-eu/pod-api": "file:../feature-api/api/pod-api",
     "@polypoly-eu/rdf": "file:../feature-api/api/rdf",
     "@zip.js/zip.js": "2.3.7",
+    "fp-ts": "^2.8.2",
+    "io-ts": "^2.2.16",
     "rdf-js": "^4.0.2"
   },
   "devDependencies": {

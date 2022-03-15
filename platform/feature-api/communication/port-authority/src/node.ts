@@ -25,11 +25,14 @@ import createServer, { NextHandleFunction, HandleFunction } from "connect";
  * Note that Node `MessagePort`s constructed from `MessageChannel` use a variant of the structured clone algorithm; that
  * is, an object sent on the port will be received as a different object.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function fromNodeMessagePort(port: MessagePort): Port<any, any> {
     return {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         send(value: any): void {
             port.postMessage(value);
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         addHandler(handler: Handler<any>): void {
             port.on("message", handler);
         },
@@ -62,6 +65,7 @@ export function fromNodeMessagePort(port: MessagePort): Port<any, any> {
  * @param contentType the HTTP content type of the response
  * @param format a function that converts a successful response or an error into a body; it should never throw
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function middlewarePort<T, Body = any>(
     contentType: string,
     format: (result: Try<T>) => Body
@@ -119,6 +123,7 @@ export function middlewarePort<T, Body = any>(
  */
 export function jsonMiddlewarePort(
     options?: OptionsJson
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): [RequestListener, ResponsePort<any, any>] {
     const contentType = "application/json";
 
@@ -132,6 +137,7 @@ export function jsonMiddlewarePort(
         })
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [handler, port] = middlewarePort<any, any>(contentType, JSON.stringify);
 
     server.use(handler);
@@ -150,6 +156,7 @@ export function jsonMiddlewarePort(
 export function bubblewrapMiddlewarePort(
     bubblewrap: Bubblewrap,
     options?: Options
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): [RequestListener, ResponsePort<any, any>] {
     const contentType = "application/octet-stream";
 
@@ -162,6 +169,7 @@ export function bubblewrapMiddlewarePort(
         })
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [handler, rawPort] = middlewarePort<any, Buffer>(contentType, (value) =>
         Buffer.from(bubblewrap.encode(value))
     );

@@ -8,6 +8,7 @@ import coop.polypoly.polypod.Preferences
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.polyNav.ZipTools
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.supervisorScope
 import java.io.File
@@ -156,8 +157,8 @@ open class PolyOut(
                     )
             }
         }
-        val retVal = supervisorScope {
-            this.async {
+        supervisorScope {
+            this.async(Dispatchers.IO) {
                 contentResolver?.openInputStream(uri).use { inputStream ->
                     if (inputStream == null) {
                         throw Error("File import error")

@@ -9,10 +9,10 @@ lockxcodeversion:
 	sudo xcode-select -switch /Applications/Xcode_13.2.1.app
 
 # Github secrets
-DISTRIBUTION_CERTIFICATE = $POLYPOD_APPLE_IOS_APPSTORE_P12_FILE
+DISTRIBUTION_CERTIFICATE = $POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64
 DISTRIBUTION_CERTIFICATE_PWD = $POLYPOD_APPLE_IOS_APPSTORE_P12_PASS
 DISTRIBUTION_PROVISIONING_PROFILE = $POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64
-APPSTORE_CONNECT_API_KEY = $POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY
+APPSTORE_CONNECT_API_KEY = $POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64
 APPSTORE_API_KEY_ID = $POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID
 APPSTORE_API_ISSUER_ID = $POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID
 
@@ -42,7 +42,7 @@ export_ipa: archive
 		-exportOptionsPlist exportOptions.plist \
 
 upload_ipa: export_ipa
-	# Validte the app before uploading, to catch any possible issues.
+	# Validate the app before uploading, to catch any possible issues.
 	xcrun altool --validate-app \
 		-f $(ipa_path) \
 		-t ios \
@@ -69,6 +69,6 @@ install_distribution_prerequisites:
 	mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
 	@echo $(value DISTRIBUTION_PROVISIONING_PROFILE) | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/cooppolypolypolypod__iOS_App_Store_Distribution.mobileprovision
 
-	# 3. App Store Connect API Key. altool will automtically use the private key from the private_keys folder. 
+	# 3. App Store Connect API Key. altool will automatically use the private key from the private_keys folder.
 	mkdir -p ~/private_keys
 	@echo $(value APPSTORE_CONNECT_API_KEY) | base64 --decode > ~/private_keys/AuthKey_$(value APPSTORE_API_KEY_ID).p8
