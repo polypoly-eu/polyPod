@@ -22,7 +22,7 @@ jobs:
       - run: echo "Uploading ${{ github.ref }} to ${{ github.event.inputs.targets }}"
       - name: Set upload targets
         run: |
-          [[ ${{ github.event.inputs.targets }} = 'all|google-play' ]] && \
+          [[ ${{ github.event.inputs.targets }} =~ 'all|google-play' ]] && \
               echo "POLYPOD_UPLOAD_GOOGLE_PLAY=true" >> $GITHUB_ENV
           [[ ${{ github.event.inputs.targets }} =~ 'all|app-store' ]] && \
               echo "POLYPOD_UPLOAD_APP_STORE=true" >> $GITHUB_ENV
