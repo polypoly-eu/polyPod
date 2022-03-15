@@ -28,15 +28,15 @@ class LegendEntry {
 class Legend {
   constructor(legends) {
     let thisLegends = [];
-    for (const legend of legends) {
-      if (legend.constructor.name === "LegendEntry") {
-        thisLegends.push(legend);
+    for (const entry of legends) {
+      if (entry.constructor.name === "LegendEntry") {
+        thisLegends.push(entry);
         return;
       }
-      if ("description" in legend && "color" in legend) {
-        thisLegends.push(new LegendEntry(legend.description, legend.color));
+      if ("description" in entry && "color" in entry) {
+        thisLegends.push(new LegendEntry(entry.description, entry.color));
       } else {
-        throw new IncorrectLegendEntry(legend);
+        throw new IncorrectLegendEntry(entry);
       }
     }
     this._legends = thisLegends;
