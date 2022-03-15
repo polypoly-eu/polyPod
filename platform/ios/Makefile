@@ -5,6 +5,13 @@ scheme_name = PolyPod
 export_options_plist = exportOptions.plist
 destination = 15.2
 
+ifneq ($(shell which xcpretty),)
+xcodebuild := set -o pipefail && xcodebuild
+xcpretty := | xcpretty
+else
+xcodebuild := xcodebuild
+endif
+
 lockxcodeversion:
 	sudo xcode-select -switch /Applications/Xcode_13.2.1.app
 
@@ -16,41 +23,34 @@ APPSTORE_CONNECT_API_KEY = $POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64
 APPSTORE_API_KEY_ID = $POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID
 APPSTORE_API_ISSUER_ID = $POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID
 
-ifneq ($(shell which xcpretty),)
-XCODEBUILD := set -o pipefail && xcodebuild
-XCPRETTY := | xcpretty
-else
-XCODEBUILD := xcodebuild
-endif
-
 build:
-	$(XCODEBUILD) clean build \
+	$(xcodebuild) clean build \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
-		$(XCPRETTY)
+		$(xcpretty)
 
 test:
-	$(XCODEBUILD) clean test \
+	$(xcodebuild) clean test \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
 		-destination "platform=iOS Simulator,name=iPhone 11,OS=${destination}" \
-		$(XCPRETTY)
+		$(xcpretty)
 
 archive:
 	rm -rf $(archive_path)
-	$(XCODEBUILD) clean archive \
+	$(xcodebuild) clean archive \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
 		-archivePath $(archive_path) \
-		$(XCPRETTY)
+		$(xcpretty)
 
 export_ipa: archive
-	$(XCODEBUILD) \
+	$(xcodebuild) \
 		-exportArchive \
 		-archivePath $(archive_path) \
 		-exportPath ./build \
 		-exportOptionsPlist exportOptions.plist \
-		$(XCPRETTY)
+		$(xcpretty)
 
 upload_ipa: export_ipa
 	# Validate the app before uploading, to catch any possible issues.
