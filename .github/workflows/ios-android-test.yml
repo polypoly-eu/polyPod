@@ -42,6 +42,7 @@ jobs:
               with:
                   distribution: 'zulu'
                   java-version: 11
+                  cache: 'gradle'
             - name: Test Android
               uses: ReactiveCircus/android-emulator-runner@76c2bf6f95ed6458fd659a1bdb680a0f8df232dc
               with:
