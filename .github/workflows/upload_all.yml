@@ -18,10 +18,10 @@ jobs:
     steps:
       - run: echo "Uploading ${{ github.ref }} to ${{ github.event.inputs.targets }}"
       - name: Set POLYPOD_UPLOAD_GOOGLE_PLAY
-        if: event.inputs.targets == "all" || event.inputs.targets == "google-play"
+        if: github.event.inputs.targets == "all" || github.event.inputs.targets == "google-play"
         run: echo "POLYPOD_UPLOAD_GOOGLE_PLAY=true" >> $GITHUB_ENV
       - name: Set POLYPOD_UPLOAD_APP_STORE
-        if: event.inputs.targets == "all" || event.inputs.targets == "app-store"
+        if: github.event.inputs.targets == "all" || github.event.inputs.targets == "app-store"
         run: echo "POLYPOD_UPLOAD_APP_STORE=true" >> $GITHUB_ENV
       - id: early_exit
         if: ${{ github.ref != 'refs/heads/main' && startsWith(github.ref, 'refs/heads/release') != true && startsWith(github.ref, 'refs/heads/prod4pod-1426') != true }}
