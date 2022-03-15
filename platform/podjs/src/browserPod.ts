@@ -424,7 +424,8 @@ class BrowserEndpoint implements Endpoint {
         if (!approveEndpointFetch(endpointId, featureIdToken))
             throw endpointErrorMessage("get", "User denied request");
         const endpointURL = getEndpoint(endpointId);
-        if (!endpointURL) throw endpointErrorMessage("get", "Endpoint URL not set");
+        if (!endpointURL)
+            throw endpointErrorMessage("get", "Endpoint URL not set");
         const NetworkResponse = await this.endpointNetwork.httpGet(
             endpointURL,
             contentType,
