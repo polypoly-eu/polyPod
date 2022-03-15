@@ -25,6 +25,6 @@ function dirExists(filePath) {
 if (!dirExists(configPath)) fs.mkdirSync(configPath);
 
 fs.writeFileSync(
-    configPath + "endpoints.json",
+    configPath + "/endpoints.json",
     JSON.stringify(endpointsWithFallback)
 );
