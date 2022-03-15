@@ -32,7 +32,6 @@ open class Network(val context: Context) {
         var response = NetworkResponse(data = null, error = null)
         val responseCode = connection.responseCode
 
-
         if (responseCode < 200 || responseCode > 299) {
             response.error = "Bad response code: $responseCode"
             logger.error("network.httpPost failed: ${response.error}")
@@ -46,7 +45,6 @@ open class Network(val context: Context) {
             return@withContext response
         }
         return@withContext response
-
     }
 
     open suspend fun httpGet(
@@ -88,7 +86,7 @@ open class Network(val context: Context) {
         try {
             connection = URL(url).openConnection() as HttpURLConnection
         } catch (exception: Exception) {
-            logger.error("network connection failed ${exception}")
+            logger.error("network connection failed $exception")
             return null
         }
         connection.requestMethod = type
