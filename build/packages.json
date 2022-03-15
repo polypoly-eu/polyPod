@@ -3,6 +3,7 @@
     "requiredNPMVersion": 7,
     "packages": [
         "build",
+        "platform-utils/endpoints-generator",
         "dev-utils/dummy-server",
         "dev-utils/rollup-plugin-copy-watch",
         "feature-utils/poly-look",

@@ -30,3 +30,6 @@ docs/
 
 # Debug Logs
 debug.log
+
+# Endpoints with secrets
+assets/config/endpoints.json
