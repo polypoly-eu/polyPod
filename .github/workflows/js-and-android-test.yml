@@ -40,6 +40,7 @@ jobs:
                       - 'feature-utils/**'
                       - 'platform/feature-api/**'
                       - 'platform/podjs/**'
+                      - 'dev-utils/dummy-server'
             - name: Lint core and features
               if: steps.changes.outputs.js == 'true'
               run: ./build.js lint
