@@ -41,4 +41,5 @@ jobs:
               working-directory: dev-utils/rollup-plugin-copy-watch
               run: npm ci
             - name: Actually run tests
+              working-directory: dev-utils/rollup-plugin-copy-watch
               run: npm run test
