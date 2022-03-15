@@ -7,9 +7,9 @@ on:
         type: choice
         description: Where to upload
         options:
-        - All
-        - Google Play
-        - App Store
+        - all
+        - google-play
+        - app-store
 
 jobs:
   build_test_upload:
