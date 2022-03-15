@@ -56,7 +56,7 @@ open class Network(val context: Context) {
     ): NetworkResponse = withContext(Dispatchers.IO) {
         var response = NetworkResponse(data = null, error = null)
         val connection = httpConnection(
-            "GET", url,null, contentType, authToken
+            "GET", url, null, contentType, authToken
         ) ?: return@withContext NetworkResponse(
             null, "network connection failed"
         )
@@ -84,52 +84,52 @@ open class Network(val context: Context) {
         contentType: String?,
         authToken: String?,
     ): HttpURLConnection? {
-            var connection:HttpURLConnection
+        var connection: HttpURLConnection
+        try {
+            connection = URL(url).openConnection() as HttpURLConnection
+        } catch (exception: Exception) {
+            logger.error("network connection failed ${exception}")
+            return null
+        }
+        connection.requestMethod = type
+        if (type == "GET") {
+            connection.doOutput = true
+        } else {
+            connection.doInput = true
+        }
+        connection.setRequestProperty("charset", "utf-8")
+
+        if (contentType != null)
+            connection.setRequestProperty("Content-Type", contentType)
+
+        if (authToken != null) {
+            val encodedAuthorization = Base64.encodeToString(
+                authToken.toByteArray(StandardCharsets.UTF_8),
+                Base64.DEFAULT
+            )
+            connection.setRequestProperty(
+                "Authorization",
+                "Basic $encodedAuthorization"
+            )
+        }
+        if (body != null) {
+            val encodedBody: ByteArray =
+                body.toByteArray(StandardCharsets.UTF_8)
+            connection.setRequestProperty(
+                "Content-Length",
+                encodedBody.size.toString()
+            )
             try {
-                connection = URL(url).openConnection() as HttpURLConnection
-            }catch(exception: Exception){
-                logger.error("network connection failed ${exception}")
+                val outputStream: DataOutputStream =
+                    DataOutputStream(connection.outputStream)
+                outputStream.write(encodedBody)
+                outputStream.flush()
+            } catch (exception: Exception) {
+                logger.error("network.httpPost failed: $exception")
                 return null
             }
-            connection.requestMethod = type
-            if (type == "GET") {
-                connection.doOutput = true
-            } else {
-                connection.doInput = true
-            }
-            connection.setRequestProperty("charset", "utf-8")
-
-            if (contentType != null)
-                connection.setRequestProperty("Content-Type", contentType)
-
-            if (authToken != null) {
-                val encodedAuthorization = Base64.encodeToString(
-                    authToken.toByteArray(StandardCharsets.UTF_8),
-                    Base64.DEFAULT
-                )
-                connection.setRequestProperty(
-                    "Authorization",
-                    "Basic $encodedAuthorization"
-                )
-            }
-            if (body != null) {
-                val encodedBody: ByteArray =
-                    body.toByteArray(StandardCharsets.UTF_8)
-                connection.setRequestProperty(
-                    "Content-Length",
-                    encodedBody.size.toString()
-                )
-                try {
-                    val outputStream: DataOutputStream =
-                        DataOutputStream(connection.outputStream)
-                    outputStream.write(encodedBody)
-                    outputStream.flush()
-                } catch (exception: Exception) {
-                    logger.error("network.httpPost failed: $exception")
-                    return null
-                }
-            }
-
-            return connection
         }
+
+        return connection
+    }
 }

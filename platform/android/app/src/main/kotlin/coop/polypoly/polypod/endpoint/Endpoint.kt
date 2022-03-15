@@ -105,7 +105,7 @@ class Endpoint(
                 }
                 return@invoke response.data
             }
-        if (approvalResponse == null){
+        if (approvalResponse == null) {
             logger.error("endpoint.get: No response")
             throw Exception(endpointErrorMessage("get"))
         }
