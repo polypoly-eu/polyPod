@@ -37,9 +37,7 @@ private class UpdateNotificationMockId {
     }
 }
 
-final class UpdateNotification {
-    static let instance = UpdateNotification()
-
+class UpdateNotification {
     private enum State: String, CaseIterable {
         case NOT_SEEN
         case PUSH_SEEN
@@ -135,30 +133,17 @@ final class UpdateNotification {
     let title = notificationData.localizedTitle
     let text = notificationData.localizedText
     
-    var isProtectedDataAvailable = true
-
     private var cachedState: State
     private var state: State {
         get { cachedState }
         set {
             cachedState = newValue
-            if isProtectedDataAvailable {
-                LastUpdateNotification.write(id: id, state: cachedState.rawValue)
-            }
+            LastUpdateNotification.write(id: id, state: cachedState.rawValue)
         }
     }
     
-    private init() {
+    init() {
         cachedState = UpdateNotification.loadLastState(id)
-    }
-    
-    func protectedDataDidBecomeAvailable() {
-        isProtectedDataAvailable = true
-        LastUpdateNotification.write(id: id, state: cachedState.rawValue)
-    }
-    
-    func protectedDataDidBecomeUnavailable() {
-        isProtectedDataAvailable = false
     }
     
     var showPush: Bool {

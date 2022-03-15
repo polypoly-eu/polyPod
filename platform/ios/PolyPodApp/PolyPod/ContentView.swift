@@ -61,7 +61,7 @@ struct ContentView: View {
     }
     
     private func firstRunState() -> ViewState {
-        let notification = UpdateNotification.instance
+        let notification = UpdateNotification()
         notification.handleStartup()
         if !FirstRun.read() {
             return securityReminderState()
@@ -107,7 +107,7 @@ struct ContentView: View {
                         // state change in featureListState's onAppear did not
                         // trigger a rerender, even though it should.
                         // Yet another SwiftUI bug it seems...
-                        showUpdateNotification = UpdateNotification.instance.showInApp
+                        showUpdateNotification = UpdateNotification().showInApp
                         
                         state = featureListState()
                     }
@@ -133,7 +133,7 @@ struct ContentView: View {
     }
     
     private func featureListState() -> ViewState {
-        let notification = UpdateNotification.instance
+        let notification = UpdateNotification()
         return ViewState(
             AnyView(
                 FeatureListView(
