@@ -85,10 +85,13 @@ final class Network: NetworkProtocol {
             task.resume()
             semaphore.wait()
             
-            guard !(responseData == nil && fetchError == nil) else {
-                return .failure(PodApiError.networkError("http\(type)", responseCode: "400"))
+            if (responseData == nil && fetchError == nil) {
+                fetchError = PodApiError.networkError("http\(type)", responseCode: "400")
             }
             
+            if (fetchError != nil) {
+                Log.error(fetchError!.localizedDescription)
+            }
             return fetchError == nil ? .success(responseData!) : .failure(fetchError!)
     }
 }
