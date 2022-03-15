@@ -1,9 +1,0 @@
-{
-  "name": "endpoints-generator",
-  "main": "index.js",
-  "scripts": {
-    "build": "node index.js"
-  },
-  "private": true,
-  "type": "module"
-}
