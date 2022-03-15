@@ -15,7 +15,7 @@ import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
 //@ts-ignore
 import endpoints from "../../../assets/config/endpoints.json";
-import { Manifest, readManifest } from "@polypoly-eu/manifest-parser";
+import { Manifest, readManifest } from "./manifest";
 
 const NAV_FRAME_ID = "polyNavFrame";
 const NAV_DEFAULT_BACKGROUND_COLOR = "#ffffff";
