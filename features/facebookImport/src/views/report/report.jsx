@@ -14,17 +14,17 @@ const ReportView = () => {
 
     const handleSendReport = async () => {
         setLoading(true);
-        let response;
-
         try {
-            response = await window.pod.endpoint.send(
+            await window.pod.endpoint.send(
                 "polyPediaReports",
                 JSON.stringify(unrecognizedData.jsonReport),
                 "application/json"
             );
-        } catch (e) {}
+            setReportResult(true);
+        } catch (_) {
+            setReportResult(false);
+        }
 
-        setReportResult(response ? true : false);
         handleBack();
     };
 
