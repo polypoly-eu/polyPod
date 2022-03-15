@@ -13,42 +13,42 @@ import createServer from "connect";
 import { join } from "path";
 
 function assertPod(pod: DefaultPod): void {
-    const expectedQuad = dataFactory.quad(
-        dataFactory.namedNode("http://example.org/s"),
-        dataFactory.namedNode("http://example.org/p"),
-        dataFactory.namedNode("http://example.org/o")
-    );
+  const expectedQuad = dataFactory.quad(
+    dataFactory.namedNode("http://example.org/s"),
+    dataFactory.namedNode("http://example.org/p"),
+    dataFactory.namedNode("http://example.org/o")
+  );
 
-    assert.equal(pod.store.size, 1);
-    assert.isTrue(pod.store.has(expectedQuad));
+  assert.equal(pod.store.size, 1);
+  assert.isTrue(pod.store.has(expectedQuad));
 }
 
 function completion(_window: Window): Promise<void> {
-    return new Promise((resolve) => {
-        _window.addEventListener("message", (event) => {
-            if (event.data === "completed") resolve();
-        });
+  return new Promise((resolve) => {
+    _window.addEventListener("message", (event) => {
+      if (event.data === "completed") resolve();
     });
+  });
 }
 
 function assets(): RequestListener {
-    const app = createServer();
-    app.use("/feature.js", async (request: IncomingMessage, response: ServerResponse) => {
-        response.setHeader("Content-Type", "text/javascript");
-        response.writeHead(200);
-        response.write(await fs.readFile(join(__dirname, "../data/feature.js")));
-        response.end();
-    });
-    app.use("/pod.js", async (request: IncomingMessage, response: ServerResponse) => {
-        response.setHeader("Content-Type", "text/javascript");
-        response.writeHead(200);
-        response.write(await fs.readFile(join(__dirname, "../../../dist/bootstrap.js")));
-        response.end();
-    });
-    app.use("/index.html", (request: IncomingMessage, response: ServerResponse) => {
-        response.setHeader("Content-Type", "text/html");
-        response.writeHead(200);
-        response.write(`
+  const app = createServer();
+  app.use("/feature.js", async (request: IncomingMessage, response: ServerResponse) => {
+    response.setHeader("Content-Type", "text/javascript");
+    response.writeHead(200);
+    response.write(await fs.readFile(join(__dirname, "../data/feature.js")));
+    response.end();
+  });
+  app.use("/pod.js", async (request: IncomingMessage, response: ServerResponse) => {
+    response.setHeader("Content-Type", "text/javascript");
+    response.writeHead(200);
+    response.write(await fs.readFile(join(__dirname, "../../../dist/bootstrap.js")));
+    response.end();
+  });
+  app.use("/index.html", (request: IncomingMessage, response: ServerResponse) => {
+    response.setHeader("Content-Type", "text/html");
+    response.writeHead(200);
+    response.write(`
             <!DOCTYPE HTML>
             <html>
                 <body>
@@ -57,48 +57,48 @@ function assets(): RequestListener {
                 </body>
             </html>
         `);
-        response.end();
-    });
-    return app;
+    response.end();
+  });
+  return app;
 }
 
 describe("Bootstrap (Electron)", () => {
-    const port = 12345;
+  const port = 12345;
 
-    let pod: DefaultPod;
-    let server: Server;
+  let pod: DefaultPod;
+  let server: Server;
 
-    beforeEach(async () => {
-        pod = new DefaultPod(dataset(), fs as unknown as FS, fetch);
-        const app = assets();
+  beforeEach(async () => {
+    pod = new DefaultPod(dataset(), fs as unknown as FS, fetch);
+    const app = assets();
 
-        server = http.createServer(app);
-        server.listen(port);
-        await once(server, "listening");
-    });
+    server = http.createServer(app);
+    server.listen(port);
+    await once(server, "listening");
+  });
 
-    afterEach(() => {
-        server.close();
-    });
+  afterEach(() => {
+    server.close();
+  });
 
-    it("iframe", async function () {
-        this.timeout(10000);
+  it("iframe", async function () {
+    this.timeout(10000);
 
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const body = document.querySelector("body")!;
-        const iframe = document.createElement("iframe");
-        iframe.setAttribute("sandbox", "allow-scripts");
-        iframe.setAttribute("src", `http://localhost:${port}/index.html`);
-        iframe.onload = () => {
-            new RemoteServerPod(pod).listenOnRaw(iframeOuterPort("", iframe));
-        };
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const body = document.querySelector("body")!;
+    const iframe = document.createElement("iframe");
+    iframe.setAttribute("sandbox", "allow-scripts");
+    iframe.setAttribute("src", `http://localhost:${port}/index.html`);
+    iframe.onload = () => {
+      new RemoteServerPod(pod).listenOnRaw(iframeOuterPort("", iframe));
+    };
 
-        const finished = completion(window);
+    const finished = completion(window);
 
-        body.appendChild(iframe);
+    body.appendChild(iframe);
 
-        await finished;
+    await finished;
 
-        assertPod(pod);
-    });
+    assertPod(pod);
+  });
 });

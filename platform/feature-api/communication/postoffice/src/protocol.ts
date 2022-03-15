@@ -15,9 +15,9 @@
  * A function call representing the name of a method (of type string) and an array of arguments (of any type).
  */
 export interface EndpointRequestPart {
-    readonly method: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    readonly args: ReadonlyArray<any>;
+  readonly method: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  readonly args: ReadonlyArray<any>;
 }
 
 /**
