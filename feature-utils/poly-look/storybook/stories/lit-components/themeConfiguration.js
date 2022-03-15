@@ -5,22 +5,22 @@ export function themeConfiguration() {
     <style>
       @font-face {
         font-family: "Jost Light";
-        src: url("public/fonts/jost_light.ttf");
+        src: url("src/static/fonts/jost_light.ttf");
       }
 
       @font-face {
         font-family: "Jost Medium";
-        src: url("public/fonts/jost_medium.ttf");
+        src: url("src/static/fonts/jost_medium.ttf");
       }
 
       @font-face {
         font-family: "polyDisplay";
-        src: url("public/fonts/jost_medium.ttf");
+        src: url("src/static/fonts/jost_medium.ttf");
       }
 
       @font-face {
         font-family: "Jost";
-        src: url("public/fonts/jost_regular.ttf");
+        src: url("src/static/fonts/jost_regular.ttf");
       }
 
       * {

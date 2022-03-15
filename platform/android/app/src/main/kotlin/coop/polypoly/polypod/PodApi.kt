@@ -92,10 +92,11 @@ open class PodApi(
         )
     }
 
-    private suspend fun handlePolyOutFetch(args: List<Value>): Value {
+    private suspend fun handlePolyOutFetch(
+        @Suppress("UNUSED_PARAMETER") args: List<Value>
+    ): Value {
         logger.debug("dispatch() -> polyOut.fetch")
         throw Exception("Not implemented")
-        return ValueFactory.newNil()
     }
 
     private suspend fun handlePolyOutReadFile(args: List<Value>): Value {
@@ -106,7 +107,8 @@ open class PodApi(
 
     private suspend fun handlePolyOutWriteFile(args: List<Value>): Value {
         logger.debug("dispatch() -> polyOut.readFile")
-        val result = polyOut.writeFile(
+        // TODO: assign to variable or run in a try environment to check for errors
+        polyOut.writeFile(
             args[0].asStringValue().toString(),
             args[1].asBinaryValue().asByteBuffer()
         )
