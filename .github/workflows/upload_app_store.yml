@@ -43,8 +43,7 @@ jobs:
       - name: Run tests
         working-directory: platform/ios
         run: |
-          set -o pipefail
-          make test | xcpretty
+          make test
       - name: Install distribution prerequisites
         working-directory: platform/ios
         run: make install_distribution_prerequisites
@@ -57,8 +56,7 @@ jobs:
       - name: Export and upload IPA
         working-directory: platform/ios
         run: |
-          set -o pipefail
-          make upload_ipa | xcpretty
+          make upload_ipa
         env:
           POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID }}
           POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
