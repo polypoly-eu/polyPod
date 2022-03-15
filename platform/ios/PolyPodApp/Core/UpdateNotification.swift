@@ -148,7 +148,7 @@ final class UpdateNotification {
         }
     }
     
-    init() {
+    private init() {
         cachedState = UpdateNotification.loadLastState(id)
     }
     

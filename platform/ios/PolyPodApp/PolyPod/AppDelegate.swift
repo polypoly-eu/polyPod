@@ -8,10 +8,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+
         Log.bootstrap()
         Log.info("Application initialized")
-        
+
+        // Currently we have project wide file protection enabled. So data protection is disabled for particular components.
+        // Removing project wide data protection, and then enable when needed is the best approach but it would be a bigger change.
+        UserDefaults.standard.disableDataProtection()
         let defaults = UserDefaults.standard
         if defaults.bool(forKey: UserDefaults.Keys.resetUserDefaults.rawValue) {
             Log.info("Resetting all user defaults")
