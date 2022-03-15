@@ -33,8 +33,8 @@ class Endpoint(
         return endpointsJson[endpointId]
     }
 
-    private fun endpointErrorMessage(apiCall: String): String {
-        return "endpoint.$apiCall failed"
+    private fun endpointErrorMessage(requestType: String): String {
+        return "endpoint.$requestType failed"
     }
 
     open fun setEndpointObserver(newObserver: EndpointObserver) {
@@ -78,7 +78,7 @@ class Endpoint(
         endpointId: String,
         contentType: String?,
         authToken: String?
-    ): String? {
+    ): String {
         val approvalResponse =
             observer?.approveEndpointFetch?.invoke(endpointId) {
                 if (!it) {
@@ -100,11 +100,15 @@ class Endpoint(
                         authToken ?: endpointInfo.auth
                     )
                 if (response.error != null) {
-                    logger.error("endpoint.get: No response")
+                    logger.error("endpoint.get: Has error ${response.error}")
                     throw Exception(endpointErrorMessage("get"))
                 }
                 return@invoke response.data
             }
+        if (approvalResponse == null){
+            logger.error("endpoint.get: No response")
+            throw Exception(endpointErrorMessage("get"))
+        }
         return approvalResponse
     }
 }

@@ -166,7 +166,9 @@ export class DefaultPod implements Pod {
             },
         };
     }
-
+    /**
+     * The [[Endpoint]] interface. See [[Endpoint]] for the description.
+     */
     get endpoint(): Endpoint {
         return {
             send(
@@ -177,11 +179,7 @@ export class DefaultPod implements Pod {
             ): Promise<void> {
                 throw new Error("Not implemented");
             },
-            get(
-                endpointId: string,
-                contentType?: string,
-                authToken?: string
-            ): Promise<string | null> {
+            get(endpointId: string, contentType?: string, authToken?: string): Promise<string> {
                 throw new Error("Not implemented");
             },
         };

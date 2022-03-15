@@ -388,7 +388,7 @@ function approveEndpointFetch(
     );
 }
 
-function EndpointError(requestType: string, errorlog: string): string {
+function endpointErrorMessage(requestType: string, errorlog: string): string {
     console.error(errorlog);
     return `Endpoint failed at : ${requestType}`;
 }
@@ -403,10 +403,10 @@ class BrowserEndpoint implements Endpoint {
         authToken?: string
     ): Promise<void> {
         if (!approveEndpointFetch(endpointId, featureIdToken))
-            throw EndpointError("send", "User denied request");
+            throw endpointErrorMessage("send", "User denied request");
         const endpointURL = getEndpoint(endpointId);
         if (!endpointURL) {
-            throw EndpointError("send", "Endpoint URL not set");
+            throw endpointErrorMessage("send", "Endpoint URL not set");
         }
         await this.endpointNetwork.httpPost(
             endpointURL,
@@ -420,20 +420,23 @@ class BrowserEndpoint implements Endpoint {
         featureIdToken: string,
         contentType?: string,
         authToken?: string
-    ): Promise<string | null> {
+    ): Promise<string> {
         if (!approveEndpointFetch(endpointId, featureIdToken))
-            throw EndpointError("send", "User denied request");
+            throw endpointErrorMessage("get", "User denied request");
         const endpointURL = getEndpoint(endpointId);
-        if (!endpointURL) throw EndpointError("send", "Endpoint URL not set");
+        if (!endpointURL) throw endpointErrorMessage("get", "Endpoint URL not set");
         const NetworkResponse = await this.endpointNetwork.httpGet(
             endpointURL,
             contentType,
             authToken
         );
         if (NetworkResponse.error)
-            throw EndpointError("send", NetworkResponse.error);
-        const endpointResponse = NetworkResponse.payload || null;
-        return endpointResponse;
+            throw endpointErrorMessage("get", NetworkResponse.error);
+        if (NetworkResponse.payload) {
+            return NetworkResponse.payload;
+        } else {
+            throw endpointErrorMessage("get", "Endpoint returned null");
+        }
     }
 }
 

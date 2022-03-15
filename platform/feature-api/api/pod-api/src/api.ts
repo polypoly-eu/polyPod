@@ -121,8 +121,8 @@ export interface Entry {
  */
 export interface PolyOut extends Omit<FS, "readdir"> {
     /**
-     * @deprecated Use [[Network]] and its facilities instead.
-     * A standard-compliant implementation of `Fetch`. This feature is deprecated in favor of the [[Network]] interface
+     * @deprecated Use [[Endpoint]] and its facilities instead.
+     * A standard-compliant implementation of `Fetch`. This feature is deprecated in favor of the [[Endpoint]] interface
      */
     readonly fetch: Fetch;
 
@@ -189,7 +189,8 @@ export interface Endpoint {
     /**
      * Perform a http post request via the endpoint in the pod
      * @param body the necessary content of the call
-     * @returns a promise with the response
+     * @returns an empty response or throws an error if something goes wrong
+     * @throws if an unsupported request goes through, if an endpoint is not reached or if a user denies a request
      */
     send(
         endpointId: string,
@@ -201,8 +202,9 @@ export interface Endpoint {
     /**
      * Perform a http get request via the endpoint in the pod
      * @returns a promise with the response
+     * @throws if an unsupported request goes through, if an endpoint is not reached, if a user denies a request or if response is null
      */
-    get(endpointId: string, contentType?: string, authToken?: string): Promise<string | null>;
+    get(endpointId: string, contentType?: string, authToken?: string): Promise<string>;
 }
 
 /**
