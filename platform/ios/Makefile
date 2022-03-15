@@ -5,6 +5,13 @@ scheme_name = PolyPod
 export_options_plist = exportOptions.plist
 destination = 15.2
 
+ifneq ($(shell which xcpretty),)
+xcodebuild := set -o pipefail && xcodebuild
+xcpretty := | xcpretty
+else
+xcodebuild := xcodebuild
+endif
+
 lockxcodeversion:
 	sudo xcode-select -switch /Applications/Xcode_13.2.1.app
 
@@ -12,34 +19,38 @@ lockxcodeversion:
 DISTRIBUTION_CERTIFICATE = $POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64
 DISTRIBUTION_CERTIFICATE_PWD = $POLYPOD_APPLE_IOS_APPSTORE_P12_PASS
 DISTRIBUTION_PROVISIONING_PROFILE = $POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64
-APPSTORE_CONNECT_API_KEY = $POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY
+APPSTORE_CONNECT_API_KEY = $POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64
 APPSTORE_API_KEY_ID = $POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID
 APPSTORE_API_ISSUER_ID = $POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID
 
 build:
-	xcodebuild clean build \
-		-project $(project_path) \
-		-scheme $(scheme_name)
-
-test:
-	xcodebuild clean test \
+	$(xcodebuild) clean build \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
-		-destination "platform=iOS Simulator,name=iPhone 11,OS=${destination}"
+		$(xcpretty)
+
+test:
+	$(xcodebuild) clean test \
+		-project $(project_path) \
+		-scheme $(scheme_name) \
+		-destination "platform=iOS Simulator,name=iPhone 11,OS=${destination}" \
+		$(xcpretty)
 
 archive:
 	rm -rf $(archive_path)
-	xcodebuild clean archive \
+	$(xcodebuild) clean archive \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
-		-archivePath $(archive_path)
+		-archivePath $(archive_path) \
+		$(xcpretty)
 
 export_ipa: archive
-	xcodebuild \
+	$(xcodebuild) \
 		-exportArchive \
 		-archivePath $(archive_path) \
 		-exportPath ./build \
 		-exportOptionsPlist exportOptions.plist \
+		$(xcpretty)
 
 upload_ipa: export_ipa
 	# Validate the app before uploading, to catch any possible issues.
@@ -71,4 +82,4 @@ install_distribution_prerequisites:
 
 	# 3. App Store Connect API Key. altool will automatically use the private key from the private_keys folder.
 	mkdir -p ~/private_keys
-	@echo $(value APPSTORE_CONNECT_API_KEY) > ~/private_keys/AuthKey_$(value APPSTORE_API_KEY_ID).p8
+	@echo $(value APPSTORE_CONNECT_API_KEY) | base64 --decode > ~/private_keys/AuthKey_$(value APPSTORE_API_KEY_ID).p8

@@ -126,11 +126,11 @@ export class DefaultPod implements Pod {
             }
 
             importArchive(url: string): Promise<string> {
-                throw new Error("Not implemented");
+                throw new Error(`Called with ${url}, but not implemented`);
             }
 
             removeArchive(fileId: string): Promise<void> {
-                throw new Error("Not implemented");
+                throw new Error(`Called with ${fileId}, but not implemented`);
             }
         })();
     }
@@ -140,13 +140,13 @@ export class DefaultPod implements Pod {
     get polyNav(): PolyNav {
         return {
             openUrl: async (url: string) => {
-                throw new Error("Not implemented");
+                throw new Error(`Called with ${url}, but not implemented`);
             },
             setActiveActions: async (actions: string[]) => {
-                throw new Error("Not implemented");
+                throw new Error(`Called with ${actions}, but not implemented`);
             },
             setTitle: async (title: string) => {
-                throw new Error("Not implemented");
+                throw new Error(`Called with ${title}, but not implemented`);
             },
             pickFile: async () => {
                 throw new Error("Not implemented");
@@ -173,7 +173,9 @@ export class DefaultPod implements Pod {
     get network(): Network {
         return {
             httpPost(url: string, body: string, contentType?: string, authorization?: string) {
-                throw new Error("Not implemented");
+                throw new Error(
+                    `Called with ${url}, ${body}, ${contentType}, ${authorization} but not implemented`
+                );
             },
         };
     }
