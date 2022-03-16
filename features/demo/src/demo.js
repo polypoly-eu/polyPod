@@ -40,7 +40,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 );
                 console.log(response);
             } catch (e) {
-                console.log(e);
+                console.error(e);
             }
         });
 
