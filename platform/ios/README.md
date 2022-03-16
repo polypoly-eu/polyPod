@@ -27,3 +27,7 @@ Just open the _PolyPodApp_ project in Xcode and build, test or archive it there.
 
 Creating an `xcarchive` is a prerequisite for creating the actual app package
 for upload to the App Store. This process is not fully automated yet.
+
+#### Linting
+
+Linting is performed via `swiftlint`.
