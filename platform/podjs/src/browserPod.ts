@@ -14,7 +14,7 @@ import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
 //@ts-ignore json import via rollup -> not supported by ts
-import endpoints from "../../../assets/config/endpoints.json";
+import endpoints from "../../../../polyPod-config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
 
 const NAV_FRAME_ID = "polyNavFrame";
