@@ -3,6 +3,7 @@ package coop.polypoly.polypod.endpoint
 import android.content.Context
 import android.content.res.AssetManager
 import com.google.gson.Gson
+import coop.polypoly.polypod.PodApiError
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.network.Network
 import java.lang.Exception
@@ -33,10 +34,6 @@ class Endpoint(
         return endpointsJson[endpointId]
     }
 
-    private fun endpointErrorMessage(requestType: String): String {
-        return "endpoint.$requestType failed"
-    }
-
     open fun setEndpointObserver(newObserver: EndpointObserver) {
         observer = newObserver
     }
@@ -50,7 +47,7 @@ class Endpoint(
         observer?.approveEndpointFetch?.invoke(endpointId) {
             if (!it) {
                 logger.error("endpoint.send: User denied request")
-                throw Exception(endpointErrorMessage("send"))
+                throw PodApiError.endpointError("send")
             }
             val endpointInfo =
                 endpointInfofromId(endpointId)
@@ -58,7 +55,7 @@ class Endpoint(
                 logger.error(
                     "endpoint.send: No endpoint found under that endpointId"
                 )
-                throw Exception(endpointErrorMessage("send"))
+                throw PodApiError.endpointError("send")
             }
             val response = endpointNetwork
                 .httpPost(
@@ -68,7 +65,7 @@ class Endpoint(
                     authToken ?: endpointInfo.auth
                 )
             if (response.error != null) {
-                throw Exception(endpointErrorMessage("send"))
+                throw PodApiError.endpointError("send")
             }
             return@invoke null
         }
@@ -83,7 +80,7 @@ class Endpoint(
             observer?.approveEndpointFetch?.invoke(endpointId) {
                 if (!it) {
                     logger.error("endpoint.get: User denied request")
-                    throw Exception(endpointErrorMessage("get"))
+                    throw PodApiError.endpointError("get")
                 }
                 val endpointInfo =
                     endpointInfofromId(endpointId)
@@ -91,7 +88,7 @@ class Endpoint(
                     logger.error(
                         "endpoint.get: No endpoint found under that endpointId"
                     )
-                    throw Exception(endpointErrorMessage("get"))
+                    throw PodApiError.endpointError("get")
                 }
                 val response = endpointNetwork
                     .httpGet(
@@ -101,13 +98,13 @@ class Endpoint(
                     )
                 if (response.error != null) {
                     logger.error("endpoint.get: Has error ${response.error}")
-                    throw Exception(endpointErrorMessage("get"))
+                    throw PodApiError.endpointError("get")
                 }
                 return@invoke response.data
             }
         if (approvalResponse == null) {
             logger.error("endpoint.get: No response")
-            throw Exception(endpointErrorMessage("get"))
+            throw PodApiError.endpointError("get")
         }
         return approvalResponse
     }
