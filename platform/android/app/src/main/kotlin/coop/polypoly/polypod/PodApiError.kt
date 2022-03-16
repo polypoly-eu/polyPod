@@ -1,13 +1,8 @@
 package coop.polypoly.polypod
 
 
-interface PodApiErrorInterface {
-    fun endpointError(fetchType:String): Exception
-}
-val PodApiError = object : PodApiErrorInterface {
-    override fun endpointError(fetchType:String): Exception {
-        return Exception("endpoint.$fetchType failed")
-    }
+class PodApiError(message:String = ""): Exception(message){
+    fun endpointError() =  PodApiError("unable to contact endpoint")
 }
 
 

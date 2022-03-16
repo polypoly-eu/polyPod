@@ -24,19 +24,15 @@ open class Network(val context: Context) {
         contentType: String?,
         authToken: String?
     ): NetworkResponse = withContext(Dispatchers.IO) {
+        var response = NetworkResponse(data = null, error = null)
         val connection = httpConnection(
             "POST", url, body, contentType, authToken
         ) ?: return@withContext NetworkResponse(
             null, "network connection failed"
         )
-        var response = NetworkResponse(data = null, error = null)
         val responseCode = connection.responseCode
+        response.error = validateResponseCode(responseCode)
 
-        if (responseCode < 200 || responseCode > 299) {
-            response.error = "Bad response code: $responseCode"
-            logger.error("network.httpPost failed: ${response.error}")
-            return@withContext response
-        }
         try {
             response.data =
                 connection.inputStream.bufferedReader().use { it.readText() }
@@ -59,11 +55,7 @@ open class Network(val context: Context) {
             null, "network connection failed"
         )
         val responseCode = connection.responseCode
-        if (responseCode < 200 || responseCode > 299) {
-            response.error = "Bad response code: $responseCode"
-            logger.error("network.httpPost failed: ${response.error}")
-            return@withContext response
-        }
+        response.error =validateResponseCode(responseCode)
 
         try {
             response.data =
@@ -73,6 +65,14 @@ open class Network(val context: Context) {
             return@withContext response
         }
         return@withContext response
+    }
+
+    fun validateResponseCode( responseCode: Int ) : String? {
+        if (responseCode < 200 || responseCode > 299) {
+            logger.error("network.httpPost failed: Bad response code: $responseCode")
+            return "Bad response code: $responseCode"
+        }
+        return null
     }
 
     fun httpConnection(

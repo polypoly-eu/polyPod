@@ -47,7 +47,7 @@ class Endpoint(
         observer?.approveEndpointFetch?.invoke(endpointId) {
             if (!it) {
                 logger.error("endpoint.send: User denied request")
-                throw PodApiError.endpointError("send")
+                throw PodApiError("")
             }
             val endpointInfo =
                 endpointInfofromId(endpointId)
@@ -55,7 +55,7 @@ class Endpoint(
                 logger.error(
                     "endpoint.send: No endpoint found under that endpointId"
                 )
-                throw PodApiError.endpointError("send")
+                throw PodApiError().endpointError()
             }
             val response = endpointNetwork
                 .httpPost(
@@ -65,7 +65,7 @@ class Endpoint(
                     authToken ?: endpointInfo.auth
                 )
             if (response.error != null) {
-                throw PodApiError.endpointError("send")
+                throw PodApiError().endpointError()
             }
             return@invoke null
         }
@@ -80,7 +80,7 @@ class Endpoint(
             observer?.approveEndpointFetch?.invoke(endpointId) {
                 if (!it) {
                     logger.error("endpoint.get: User denied request")
-                    throw PodApiError.endpointError("get")
+                    throw PodApiError().endpointError()
                 }
                 val endpointInfo =
                     endpointInfofromId(endpointId)
@@ -88,7 +88,7 @@ class Endpoint(
                     logger.error(
                         "endpoint.get: No endpoint found under that endpointId"
                     )
-                    throw PodApiError.endpointError("get")
+                    throw PodApiError().endpointError()
                 }
                 val response = endpointNetwork
                     .httpGet(
@@ -98,13 +98,13 @@ class Endpoint(
                     )
                 if (response.error != null) {
                     logger.error("endpoint.get: Has error ${response.error}")
-                    throw PodApiError.endpointError("get")
+                    throw PodApiError().endpointError()
                 }
                 return@invoke response.data
             }
         if (approvalResponse == null) {
             logger.error("endpoint.get: No response")
-            throw PodApiError.endpointError("get")
+            throw PodApiError().endpointError()
         }
         return approvalResponse
     }

@@ -132,7 +132,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     ): String? {
         var fetchApproval: CompletableDeferred<Boolean?>? =
             CompletableDeferred()
-        val featureName = feature?.name ?: throw Exception("endpoint failed")
+        val featureName = feature?.name ?: throw PodApiError().endpointError()
         val message = context?.getString(
             R.string.message_approve_endpoint_fetch, featureName, endpointId
         )
@@ -151,7 +151,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         (fetchApproval?.await())?.let {
             return completion(it)
         }
-        throw Exception("endpoint failed")
+        throw PodApiError().endpointError()
     }
 
     private fun loadFeature(feature: Feature) {
