@@ -282,7 +282,7 @@ export interface Pod {
     readonly info: Info;
 
     /**
-     * `endpointRequest` is the interface to interact with other devices over the network via the pod. Refer to [[EndpointRequest]] for its
+     * `endpoint` is the interface to interact with other devices over the network via the pod. Refer to [[Endpoint]] for its
      * definition.
      */
     readonly endpoint: Endpoint;
