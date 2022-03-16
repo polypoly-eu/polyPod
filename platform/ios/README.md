@@ -30,4 +30,5 @@ for upload to the App Store. This process is not fully automated yet.
 
 #### Linting
 
-Linting is performed via [`swiftlint`](https://github.com/realm/SwiftLint).
+Linting is performed via [`swiftlint`](https://github.com/realm/SwiftLint). Use
+any of the available ways to do it yourself.

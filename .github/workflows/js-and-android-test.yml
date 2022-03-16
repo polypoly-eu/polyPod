@@ -48,7 +48,7 @@ jobs:
             - name: Lint Swift
               if: steps.changes.outputs.swift == 'true'
               working-directory: platform/ios
-              run: docker run -it -v `pwd`:`pwd` -w `pwd` ghcr.io/realm/swiftlint:latest
+              run: docker run -t -v `pwd`:`pwd` -w `pwd` ghcr.io/realm/swiftlint:latest
             - name: Build core and features
               if: steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.android == 'true'
               run: ./build.js
