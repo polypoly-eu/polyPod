@@ -18,7 +18,7 @@ import { recoverPromise, Try } from "./util";
 /**
  * Converts a Node `MessagePort` into a raw [[Port]] with unknown types.
  *
- * The [[SendPort.send]] and [[ReceivePort.addHandler]] methods delegate directly to the underlying Node implementation.
+ * The [[SendPort.send]] and [[ReceiverPort.addHandler]] methods delegate directly to the underlying Node implementation.
  * For typed operation, it is recommended to use [[mapPort]] with type coercions.
  *
  * It is not possible to transfer objects with this [[Port]].

@@ -23,7 +23,7 @@ export function mapHandler<T, U>(handler: Handler<T>, f: (x: U) => T): Handler<U
  * A half port that only sends messages.
  *
  * This interface provides very little guarantees beside invoking the [[Handler]]s of a [[ReceivePort]] “somewhere
- * else”. In particular, sending a message provides no observable behaviour. There are no temporal guarantees when
+ * else”. In particular, sending a message provides no observable behaviour. There are no temporal sequence guarantees when
  * sending multiple messages.
  *
  * Futhermore, it is not guaranteed that values sent through a port arrive unmodified at the other end. For example,
@@ -64,7 +64,7 @@ export function mapSendPort<Out, In>(port: SendPort<Out>, f: (x: In) => Out): Se
  * Note that it is impossible to remove handlers once added to the port. This, and custom multiplexing logic is out of
  * scope for this abstraction, but can be implemented by users on top of raw ports.
  */
-export interface ReceivePort<In> {
+export interface ReceiverPort<In> {
     addHandler(handler: Handler<In>): void;
 }
 
@@ -74,9 +74,9 @@ export interface ReceivePort<In> {
  * @returns an instance of [[ReceivePort]] instantiated to the `Out` class.
  */
 export function mapReceivePort<In, Out>(
-    port: ReceivePort<In>,
+    port: ReceiverPort<In>,
     f: (x: In) => Out
-): ReceivePort<Out> {
+): ReceiverPort<Out> {
     return {
         addHandler: (handler) => port.addHandler(mapHandler(handler, f)),
     };
@@ -90,7 +90,7 @@ export function mapReceivePort<In, Out>(
  * @typeParam Out type of outgoing messages
  * @typeParam In type of incoming messages
  */
-export interface Port<In, Out> extends SendPort<Out>, ReceivePort<In> {}
+export interface Port<In, Out> extends SendPort<Out>, ReceiverPort<In> {}
 
 /**
  * Maps a [[Port]] on both the incoming (covariant) and outgoing (contravariant) messages.
@@ -114,7 +114,7 @@ export function mapPort<In1, Out1, In2, Out2>(
  * @param from port from which messages are forwarded
  * @param to port to which messages are forwarded
  */
-export function forward<InOut>(from: ReceivePort<InOut>, to: SendPort<InOut>): void {
+export function forward<InOut>(from: ReceiverPort<InOut>, to: SendPort<InOut>): void {
     from.addHandler((t) => to.send(t));
 }
 
@@ -136,7 +136,7 @@ export function connect<InOut>(port1: Port<InOut, InOut>, port2: Port<InOut, InO
  * Messages sent through the [[SendPort]] are immediately handled by the handlers registered with the [[ReceivePort]].
  * Communication is fully synchronous.
  */
-export function loopback<InOut>(): [SendPort<InOut>, ReceivePort<InOut>] {
+export function loopback<InOut>(): [SendPort<InOut>, ReceiverPort<InOut>] {
     const handlers: Handler<InOut>[] = [];
     return [
         {
@@ -153,7 +153,7 @@ export function loopback<InOut>(): [SendPort<InOut>, ReceivePort<InOut>] {
  *
  * The resulting port shares the implementation of the underlying half ports.
  */
-export function join<In, Out>(send: SendPort<Out>, receive: ReceivePort<In>): Port<In, Out> {
+export function join<In, Out>(send: SendPort<Out>, receive: ReceiverPort<In>): Port<In, Out> {
     return {
         send: (out: Out) => send.send(out),
         addHandler: (handler: Handler<In>) => receive.addHandler(handler),
@@ -166,7 +166,7 @@ export function join<In, Out>(send: SendPort<Out>, receive: ReceivePort<In>): Po
  *
  * This function is the dual to [[SendPort.send]] because it allows to observe exactly one message.
  */
-export function receiveSingle<In>(port: ReceivePort<In>): Promise<In> {
+export function receiveSingle<In>(port: ReceiverPort<In>): Promise<In> {
     return new Promise((resolve) => {
         let done = false;
         const handler: Handler<In> = (data) => {

@@ -11,7 +11,7 @@
  * @packageDocumentation
  */
 
-import { Handler, Port, ReceivePort, SendPort } from "./port";
+import { Handler, Port, ReceiverPort, SendPort } from "./port";
 
 /**
  * A pair of `resolve` and `reject` callbacks that resolve an underlying `Promise`.
@@ -55,10 +55,10 @@ export interface WithResolvers<Req, Res> {
 }
 
 /**
- * A _response port_ is a [[ReceivePort]] for receiving messages with attached [[PromiseResolvers]]. The intended
+ * A _response port_ is a [[ReceiverPort]] for receiving messages with attached [[PromiseResolvers]]. The intended
  * semantics is that this represents a _server_ that listens for requests and responds using the callbacks.
  */
-export type ResponsePort<Req, Res> = ReceivePort<WithResolvers<Req, Res>>;
+export type ResponsePort<Req, Res> = ReceiverPort<WithResolvers<Req, Res>>;
 
 /**
  * A _request port_ is a [[SendPort]] for sending messages with attached [[PromiseResolvers]]. The intended
@@ -103,7 +103,7 @@ export function client<Req, Res>(port: RequestPort<Req, Res>): Procedure<Req, Re
 /**
  * Add a [[Procedure]] as a handler to a [[ResponsePort]].
  *
- * This function uses [[ReceivePort.addHandler]] to add a new handler to the given [[ResponsePort]]. Upon receiving a
+ * This function uses [[ReceiverPort.addHandler]] to add a new handler to the given [[ResponsePort]]. Upon receiving a
  * message, the given procedure is executed. If the procedure succeeds, the [[PromiseResolvers.resolve]] callback is
  * invoked. If the procedure fails, the [[PromiseResolvers.reject]] callback is invoked.
  *

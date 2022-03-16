@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-import { Handler, mapPort, Port, ReceivePort } from "./port";
+import { Handler, mapPort, Port, ReceiverPort } from "./port";
 
 /**
  * Converts a browser `MessagePort` into a raw [[Port]].
@@ -12,7 +12,7 @@ import { Handler, mapPort, Port, ReceivePort } from "./port";
  * The type of outgoing messages is unconstrained. Incoming messages are `MessageEvent`s; the raw value can be accessed
  * using the `data` field. It is not possible to transfer objects with this [[Port]].
  *
- * The [[SendPort.send]] and [[ReceivePort.addHandler]] methods delegate directly to the underlying Node implementation.
+ * The [[SendPort.send]] and [[ReceiverPort.addHandler]] methods delegate directly to the underlying Node implementation.
  * For typed operation, it is recommended to use [[mapPort]] with type coercions.
  *
  * Note that Browser `MessagePort`s use the structured clone algorithm; that is, an object sent on the port will be
@@ -123,7 +123,7 @@ export function iframeOuterPort(
     secret: string,
     iframe: HTMLIFrameElement,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    init?: (port: ReceivePort<any>) => void
+    init?: (port: ReceiverPort<any>) => void
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Port<any, any> {
     const { port1, port2 } = new MessageChannel();
