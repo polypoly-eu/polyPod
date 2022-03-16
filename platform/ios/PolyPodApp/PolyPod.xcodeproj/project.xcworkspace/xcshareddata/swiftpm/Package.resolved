@@ -1,41 +1,43 @@
 {
-  "pins" : [
-    {
-      "identity" : "cocoalumberjack",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CocoaLumberjack/CocoaLumberjack.git",
-      "state" : {
-        "revision" : "80ada1f753b0d53d9b57c465936a7c4169375002",
-        "version" : "3.7.4"
+  "object": {
+    "pins": [
+      {
+        "package": "CocoaLumberjack",
+        "repositoryURL": "https://github.com/CocoaLumberjack/CocoaLumberjack.git",
+        "state": {
+          "branch": null,
+          "revision": "80ada1f753b0d53d9b57c465936a7c4169375002",
+          "version": "3.7.4"
+        }
+      },
+      {
+        "package": "MessagePack",
+        "repositoryURL": "https://github.com/polypoly-eu/MessagePack.swift",
+        "state": {
+          "branch": null,
+          "revision": "27b35fd49e92fcae395bf8ccb233499d89cc7890",
+          "version": "4.0.0"
+        }
+      },
+      {
+        "package": "swift-log",
+        "repositoryURL": "https://github.com/apple/swift-log.git",
+        "state": {
+          "branch": null,
+          "revision": "5d66f7ba25daf4f94100e7022febf3c75e37a6c7",
+          "version": "1.4.2"
+        }
+      },
+      {
+        "package": "Zip",
+        "repositoryURL": "https://github.com/polypoly-eu/Zip",
+        "state": {
+          "branch": null,
+          "revision": "bd19d974e8a38cc8d3a88c90c8a107386c3b8ccf",
+          "version": "2.1.1"
+        }
       }
-    },
-    {
-      "identity" : "messagepack.swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/polypoly-eu/MessagePack.swift",
-      "state" : {
-        "revision" : "27b35fd49e92fcae395bf8ccb233499d89cc7890",
-        "version" : "4.0.0"
-      }
-    },
-    {
-      "identity" : "swift-log",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-log.git",
-      "state" : {
-        "revision" : "5d66f7ba25daf4f94100e7022febf3c75e37a6c7",
-        "version" : "1.4.2"
-      }
-    },
-    {
-      "identity" : "zip",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/polypoly-eu/Zip",
-      "state" : {
-        "revision" : "bd19d974e8a38cc8d3a88c90c8a107386c3b8ccf",
-        "version" : "2.1.1"
-      }
-    }
-  ],
-  "version" : 2
+    ]
+  },
+  "version": 1
 }
