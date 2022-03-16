@@ -76,9 +76,7 @@ export default (commandLineArgs) => {
             commonjs({
                 include: /node_modules/,
             }),
-            commandLineArgs.configServe
-                ? serve({ contentBase: ["dist"], host: "localhost" })
-                : null,
+            commandLineArgs.configServe ? serve("dist") : null,
         ],
         external: Object.keys(externalPackages),
         onwarn: (warning) => {
