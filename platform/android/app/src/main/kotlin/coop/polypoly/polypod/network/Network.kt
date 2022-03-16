@@ -30,7 +30,7 @@ open class Network(val context: Context) {
         ) ?: return@withContext NetworkResponse(
             null, "network connection failed"
         )
-        
+
         try {
             val responseCode = connection.responseCode
             response.error = validateResponseCode(responseCode)
@@ -57,7 +57,7 @@ open class Network(val context: Context) {
 
         try {
             val responseCode = connection.responseCode
-            response.error =validateResponseCode(responseCode)
+            response.error = validateResponseCode(responseCode)
             response.data =
                 connection.inputStream.bufferedReader().use { it.readText() }
         } finally {
@@ -67,9 +67,11 @@ open class Network(val context: Context) {
         return@withContext response
     }
 
-    fun validateResponseCode( responseCode: Int ) : String? {
+    fun validateResponseCode(responseCode: Int): String? {
         if (responseCode < 200 || responseCode > 299) {
-            logger.error("network.httpPost failed: Bad response code: $responseCode")
+            logger.error(
+                "network.httpPost failed: Bad response code: $responseCode"
+            )
             return "Bad response code: $responseCode"
         }
         return null

@@ -37,7 +37,6 @@ import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import kotlinx.coroutines.CompletableDeferred
 import java.io.ByteArrayInputStream
-import java.lang.Exception
 import java.util.zip.ZipFile
 
 @SuppressLint("SetJavaScriptEnabled")

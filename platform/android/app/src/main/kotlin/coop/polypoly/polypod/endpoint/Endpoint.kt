@@ -6,7 +6,6 @@ import com.google.gson.Gson
 import coop.polypoly.polypod.PodApiError
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.network.Network
-import java.lang.Exception
 
 private fun AssetManager.readFile(fileName: String) = open(fileName)
     .bufferedReader()
