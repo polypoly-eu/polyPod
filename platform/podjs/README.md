@@ -29,12 +29,102 @@ soon.
 
 Simply run `build.js` in the repository root.
 
-## Usage
+## How to setup a feature to build with podjs
 
-You will need to use this module for creating a polyPod-compatible
-feature. Follow these instructions:
+To create a polyPod compatible feature, you will need to use this module.
+Follow these instructions to do so:
 
-1. Add _podjs_ as a development dependency to your feature.
-2. Copy or link `node_modules/@polypoly-eu/podjs/dist/pod.js`.
-3. Include `pod.js` from your feature's main document - before the
-   feature's own code.
+1.  In order to point to `podjs` from the polypoly-eu repository,
+    add as `development dependencies` on your `package.json` the following:
+
+      <code>
+
+         "devDependencies": {
+            "@polypoly-eu/podjs": "file:../../platform/podjs",
+         },
+
+      </code>
+
+2.  We use the `rollup` module bundler to build our features all together via the script
+
+    `$ rollup -c rollup.config.json`
+
+    which runs `rollup` and takes the `./src` directory as input and
+    puts the result in a `dist` folder. Those configurations need to be defined
+    in the `rollup.config.js` file.
+
+    We basically rely on our in-house `rollup-plugin-copy-watch` plugin
+    on top of the `Rollup` one which serves to copy files and folders with glob support
+    and also offers an additional watch to other sources than just Rollup's bundle content.
+    This is also needed to be installed as a dev dependency:
+
+    `$ npm i --save-dev ../../dev-utils/rollup-plugin-copy-watch`
+
+    So, we end up with a `package.json` file like this:
+
+         "devDependencies": {
+            "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
+         },
+
+    So the feature uses the `@polypoly-eu/rollup-plugin-copy-watch"` plugin to watch the copied files.
+
+3.  Next step, you need to define your `rollup.config.js` at the same level as your `package.json`.
+
+    There you need to have the `copy` (of our `"@polypoly-eu/rollup-plugin-copy-watch"`) under the `plugins` section with the `targets`
+    setup for `src`, which in this case it's the `"node_modules/@polypoly-eu/podjs/dist/pod.js"`, and `dest` where it will be ended to (e.g. `dist`).
+    So, it looks like:
+
+```
+   import copy from "@polypoly-eu/rollup-plugin-copy-watch";
+
+   export default {
+      input: "src/your-input-file.js",    // point to your source file
+      output: {
+         file: "dist/myfile.js", // point to your output file
+         format: "iife",     // the format of your output file, for now only iife is supported
+         globals: {
+               // where you define all the external packages you want to use
+               pod: "pod",
+            },
+         }
+      },
+      plugins: [
+         ...
+         copy({
+            targets: [
+            {
+               src: [
+                  "node_modules/@polypoly-eu/podjs/dist/pod.js",
+                  ...
+               ],
+               dest: "dist",
+            },
+         ]
+         }),
+      ]
+   }
+```
+
+This way you have copied successfully the `pod.js` file from the `@polypoly-eu/podjs` module, and you can use it in your feature.
+
+4.  So, to compile the input files and run the previous configurations,
+    you need to define a `build` script in the `package.json` file,
+    which will run the `rollup` command:
+
+```
+   {
+      ...
+      "scripts": {
+         "build": "shx rm -rf dist && tsc && rollup -c rollup.config.js",
+         ...
+      },
+   }
+```
+
+5.  You are ready to build your feature. Try:
+
+    `$ npm run build`
+
+    and you should have a `dist` folder with your feature included the `pod.js` file.
+
+6.  Don't forget to include the `pod.js` from your feature's main document - before the feature's own code.
