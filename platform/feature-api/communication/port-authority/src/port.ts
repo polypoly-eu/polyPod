@@ -22,7 +22,7 @@ export function mapHandler<T, U>(handler: Handler<T>, f: (x: U) => T): Handler<U
 /**
  * A half port that only sends messages.
  *
- * This interface provides very little guarantees beside invoking the [[Handler]]s of a [[ReceivePort]] “somewhere
+ * This interface provides very little guarantees beside invoking the [[Handler]]s of a [[ReceiverPort]] “somewhere
  * else”. In particular, sending a message provides no observable behaviour. There are no temporal sequence guarantees when
  * sending multiple messages.
  *
@@ -69,11 +69,11 @@ export interface ReceiverPort<In> {
 }
 
 /**
- * Map operation for [[ReceivePort]]s. The returned port behaves identically to the original port, but applies a
+ * Map operation for [[ReceiverPort]]s. The returned port behaves identically to the original port, but applies a
  * function to incoming messages _before_ they are sent to the handlers.
- * @returns an instance of [[ReceivePort]] instantiated to the `Out` class.
+ * @returns an instance of [[ReceiverPort]] instantiated to the `Out` class.
  */
-export function mapReceivePort<In, Out>(
+export function rxMappingPort<In, Out>(
     port: ReceiverPort<In>,
     f: (x: In) => Out
 ): ReceiverPort<Out> {
@@ -83,7 +83,7 @@ export function mapReceivePort<In, Out>(
 }
 
 /**
- * A raw port for types `In` and `Out` is a [[SendPort]] for type `Out` and a [[ReceivePort]] for type `In`.
+ * A raw port for types `In` and `Out` is a [[SendPort]] for type `Out` and a [[rxMappingPort]] for type `In`.
  *
  * A mapping operation for both type parameters is provided as [[mapPort]].
  *
@@ -95,7 +95,7 @@ export interface Port<In, Out> extends SendPort<Out>, ReceiverPort<In> {}
 /**
  * Maps a [[Port]] on both the incoming (covariant) and outgoing (contravariant) messages.
  *
- * See [[mapSendPort]] and [[mapReceivePort]] for the components.
+ * See [[mapSendPort]] and [[rxMappingPort]] for the components.
  */
 export function mapPort<In1, Out1, In2, Out2>(
     port: Port<In1, Out1>,
@@ -104,12 +104,12 @@ export function mapPort<In1, Out1, In2, Out2>(
 ): Port<In2, Out2> {
     return {
         ...mapSendPort(port, outf),
-        ...mapReceivePort(port, inf),
+        ...rxMappingPort(port, inf),
     };
 }
 
 /**
- * Adds a handler to a [[ReceivePort]] that forwards all incoming messages to a [[SendPort]].
+ * Adds a handler to a [[ReceiverPort]] that forwards all incoming messages to a [[SendPort]].
  *
  * @param from port from which messages are forwarded
  * @param to port to which messages are forwarded
@@ -130,10 +130,10 @@ export function connect<InOut>(port1: Port<InOut, InOut>, port2: Port<InOut, InO
 }
 
 /**
- * Constructs a pair of uni-directionally connected ports. The result is a [[SendPort]] and a [[ReceivePort]] with the
+ * Constructs a pair of uni-directionally connected ports. The result is a [[SendPort]] and a [[ReceiverPort]] with the
  * same type parameters.
  *
- * Messages sent through the [[SendPort]] are immediately handled by the handlers registered with the [[ReceivePort]].
+ * Messages sent through the [[SendPort]] are immediately handled by the handlers registered with the [[ReceiverPort]].
  * Communication is fully synchronous.
  */
 export function loopback<InOut>(): [SendPort<InOut>, ReceiverPort<InOut>] {
@@ -149,7 +149,7 @@ export function loopback<InOut>(): [SendPort<InOut>, ReceiverPort<InOut>] {
 }
 
 /**
- * Merges a [[SendPort]] and [[ReceivePort]] together to a full [[Port]].
+ * Merges a [[SendPort]] and [[ReceiverPort]] together to a full [[Port]].
  *
  * The resulting port shares the implementation of the underlying half ports.
  */
@@ -161,7 +161,7 @@ export function join<In, Out>(send: SendPort<Out>, receive: ReceiverPort<In>): P
 }
 
 /**
- * Registers a one-off handler to a [[ReceivePort]] that listens for the next incoming message, returning a promise
+ * Registers a one-off handler to a [[ReceiverPort]] that listens for the next incoming message, returning a promise
  * that is resolved upon receiving that message.
  *
  * This function is the dual to [[SendPort.send]] because it allows to observe exactly one message.
