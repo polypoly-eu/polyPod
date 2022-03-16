@@ -4,6 +4,7 @@ Logic shared across polyPod platforms - ios, android, wasm.
 
 ## Requirements
 - [Rust toolchain](https://www.rust-lang.org/tools/install). Core is built with Rust 1.58.1.
+- The build prerequisites for [FlatBuffers](https://github.com/google/flatbuffers), currently primarily [CMake](https://cmake.org) and a C++ toolchain.
 
 ## Building
 
