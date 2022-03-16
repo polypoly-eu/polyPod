@@ -62,8 +62,8 @@ class PostOffice {
             handleInfo(method: method, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
-        case "network":
-            handleNetwork(method: method, args: args, completionHandler: { response, error in
+        case "endpoint":
+            handleEndpoint(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
         default:
@@ -119,13 +119,13 @@ extension PostOffice {
                 """)
                 throw PodApiError.badArgumentData(arg)
             }
-    
+
             let graph = extendedData.properties["graph"] as? ExtendedData
             let graphType = graph?.classname
             if (graphType != "@polypoly-eu/rdf.DefaultGraph") {
                 throw PodApiError.failedToReadGraph(graphType ?? "<missing>")
             }
-    
+
             extendedDataSet.append(extendedData)
         }
         return extendedDataSet
@@ -159,12 +159,12 @@ extension PostOffice {
                 completionHandler(nil, createErrorResponse(#function, error))
                 return
             }
-    
+
             guard let quads = quads else {
                 completionHandler(nil, createErrorResponse(#function, PodApiError.unknown))
                 return
             }
-    
+
             var encodedQuads: [MessagePackValue] = []
             for quad in quads {
                 let encodedQuad = MessagePackValue.extended(2, pack(Bubblewrap.encode(extendedData: quad)))
@@ -265,11 +265,11 @@ extension PostOffice {
                 completionHandler(nil, createErrorResponse(#function, PodApiError.unknown))
                 return
             }
-    
+
             let object = fetchResponse.messagePackObject
-    
+
             let packedData = pack(object)
-    
+
             completionHandler(MessagePackValue(type: 2, data: packedData), nil)
         }
     }
@@ -287,9 +287,9 @@ extension PostOffice {
                 return
             }
             let object = fileStats.messagePackObject
-    
+
             let packedData = pack(object)
-    
+
             completionHandler(MessagePackValue(type: 2, data: packedData), nil)
         }
     }
@@ -434,21 +434,45 @@ extension PostOffice {
 }
 
 extension PostOffice {
-    private func handleNetwork(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+    private func handleEndpoint(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void){
         switch method {
-        case "httpPost":
-            handleNetworkHttpPost(args: args, completionHandler: completionHandler)
-        default:
-            Log.error("PolyNav method unknown: \(method)")
+        case "send":
+            handleEndpointSend(args: args, completionHandler: completionHandler)
+        case "get":
+            handleEndpointGet(args: args, completionHandler: completionHandler)
+        default: Log.error("Endpoint method unknown: \(method)")
         }
     }
 
-    private func handleNetworkHttpPost(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        let url = args[0] as! String
-        let body = args[1] as! String
+    private func handleEndpointSend(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        guard let endpointId = args[0] as? String else {
+            completionHandler(nil, createErrorResponse(#function, PodApiError.badArgumentType(args[0], type: "String")))
+            return
+        }
+        guard let payload = args[1] as? String else {
+            completionHandler(nil, createErrorResponse(#function, PodApiError.badArgumentType(args[1], type: "String")))
+            return
+        }
         let contentType = args[2] as? String
-        let authorization = args[3] as? String
-        let error = PodApi.shared.network.httpPost(url: url, body: body, contentType: contentType, authorization: authorization)
-        completionHandler(error != nil ? .string(error!) : .nil, nil)
+        let authToken = args[3] as? String
+        PodApi.shared.endpoint.send(endpointId: endpointId, payload: payload, contentType: contentType, authToken: authToken) { error in
+            completionHandler(.nil, error == nil ? nil : createErrorResponse(#function, error!))
+        }
+    }
+
+    private func handleEndpointGet(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        guard let endpointId = args[0] as? String else {
+            completionHandler(nil, createErrorResponse(#function, PodApiError.badArgumentType(args[0], type: "String")))
+            return
+        }
+        let contentType = args[1] as? String
+        let authToken = args[2] as? String
+        PodApi.shared.endpoint.get(endpointId: endpointId, contentType: contentType, authToken: authToken) { data, error in
+            if (error == nil) {
+                completionHandler(data.map(MessagePackValue.string), nil)
+                return
+            }
+            completionHandler(nil, createErrorResponse(#function, error!))
+        }
     }
 }

@@ -53,7 +53,7 @@ class PostOfficeMessageCallback(
                             "error",
                             Codec.string.encode(
                                 "Error dispatching request: " +
-                                    e.stackTraceToString()
+                                    e.message
                             )
                         ),
                         Pair("id", id)

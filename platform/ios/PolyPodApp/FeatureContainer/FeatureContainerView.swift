@@ -26,6 +26,7 @@ struct FeatureContainerView: UIViewRepresentable {
         }
 
         PodApi.shared.polyNav.delegate  = featureWebView
+        PodApi.shared.endpoint.delegate  = featureWebView
 
         return featureWebView
     }
@@ -82,7 +83,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
         let index = urlString.index(urlString.startIndex, offsetBy: PolyOut.fsPrefix.count)
         let file = String(urlString[index..<urlString.endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: "/"))
         let ext = (file as NSString).pathExtension
-                
+
         do {
             var fileData: Data? = nil
             if (file.starts(with: PolyOut.fsFilesRoot)) {
@@ -108,9 +109,9 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
                 "Content-Length": String(fileData?.count ?? 0),
                 "Content-Type": mimeTypeFromExt(ext: ext)
             ]
-    
+
             let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "HTTP 1.0", headerFields: headers)
-    
+
             // Fulfill the task.
             urlSchemeTask.didReceive(response!)
             urlSchemeTask.didReceive(fileData ?? Data())
@@ -142,7 +143,6 @@ class FeatureWebView: WKWebView {
         pickFileHandler: @escaping (String?, @escaping (ExternalFile?) -> Void) -> Void
     ) {
         PodApi.shared.polyOut.activeFeature = feature
-
         self.featureTitle = title
         self.activeActions = activeActions
         self.errorHandler = errorHandler
@@ -347,6 +347,42 @@ extension FeatureWebView: PolyNavDelegate {
 
     func doHandlePickFile(type: String?, completion: @escaping (ExternalFile?) -> Void) {
         pickFileHandler(type, completion)
+    }
+}
+
+extension FeatureWebView: EndpointDelegate {
+    func doHandleApproveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) -> Void {
+        let viewController =
+            UIApplication.shared.windows.first!.rootViewController!
+        let alert = UIAlertController(
+            title: "",
+            message: String.localizedStringWithFormat(
+                NSLocalizedString(
+                    "message_approve_endpoint_fetch_request %@ %@",
+                    comment: ""
+                ),
+                PodApi.shared.polyOut.activeFeature?.name ?? "", endpointId
+            ),
+            preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(
+                            title: NSLocalizedString(
+                                "button_confirm",
+                                comment: ""
+                            ),
+                            style: .default,
+                            handler: { (action: UIAlertAction!) in
+                                completion(true)
+                            }))
+        alert.addAction(UIAlertAction(
+                            title: NSLocalizedString(
+                                "button_reject",
+                                comment: ""
+                            ),
+                            style: .default,
+                            handler: { (action: UIAlertAction!) in
+                                completion(false)
+                            }))
+        viewController.present(alert, animated: true, completion: nil)
     }
 }
 

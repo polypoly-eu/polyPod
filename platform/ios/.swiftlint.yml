@@ -22,3 +22,6 @@ disabled_rules:
   - for_where
   - closure_parameter_position
   - class_delegate_protocol
+  - redundant_void_return
+  - empty_enum_arguments
+
