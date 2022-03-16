@@ -8,7 +8,8 @@
     "facebook-import-feature": "file:../facebookImport",
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
-    "poly-preview-feature": "file:../polyPreview"
+    "poly-preview-feature": "file:../polyPreview",
+    "demo-feature": "file:../demo"
   },
   "private": true,
   "polyPodFeatures": [
@@ -31,6 +32,11 @@
       "archiveName": "lexicon",
       "moduleName": "lexicon-feature",
       "artifactPath": "public"
+    },
+    {
+      "archiveName": "demo",
+      "moduleName": "demo-feature",
+      "artifactPath": "dist"
     }
   ]
 }

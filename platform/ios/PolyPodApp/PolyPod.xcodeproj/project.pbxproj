@@ -89,6 +89,7 @@
 		1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DB24349E6B00E51B6D /* PodApi.swift */; };
 		1AF468DE24361D9D00E51B6D /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */; };
 		3B3CEDFA274FC37C000C3E6E /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989B350269CA6B7000EE977 /* FilePicker.swift */; };
+		3B5487E227CD0FF700480CB5 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5487E127CD0FF700480CB5 /* Endpoint.swift */; };
 		5B8653022643FC310014208C /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
 		901C0588278EE58700BC8364 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0587278EE58700BC8364 /* CoreDataStack.swift */; };
 		901C058A278F2AF800BC8364 /* CoreData+PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */; };
@@ -229,6 +230,7 @@
 		1AF468B1242A34D700E51B6D /* PolyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOut.swift; sourceTree = "<group>"; };
 		1AF468DB24349E6B00E51B6D /* PodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodApi.swift; sourceTree = "<group>"; };
 		1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
+		3B5487E127CD0FF700480CB5 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		5B0F7B5F26A924DF00F4EFF4 /* PolyPod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PolyPod.entitlements; sourceTree = "<group>"; };
 		5B8653012643FC310014208C /* PolyNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyNav.swift; sourceTree = "<group>"; };
 		901C0587278EE58700BC8364 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 		1AA6DE4624192079008DB1B2 /* PodApi */ = {
 			isa = PBXGroup;
 			children = (
+				3B5487E027CD0FE600480CB5 /* Endpoint */,
 				E9040D4526F0A2FB00A88593 /* Info */,
 				E98BA80126D3CA400039E41E /* Network */,
 				5B8653002643FC1E0014208C /* PolyNav */,
@@ -498,6 +501,14 @@
 				1AF1178524BE22D50063EE37 /* FileStats.swift */,
 			);
 			path = FS;
+			sourceTree = "<group>";
+		};
+		3B5487E027CD0FE600480CB5 /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				3B5487E127CD0FF700480CB5 /* Endpoint.swift */,
+			);
+			path = Endpoint;
 			sourceTree = "<group>";
 		};
 		5B8653002643FC1E0014208C /* PolyNav */ = {
@@ -612,6 +623,7 @@
 				E9CF1B7D2627365600216B70 /* Update Bundle Version */,
 				E923739E2628228F00D2CFF3 /* Copy polyPod Features */,
 				E98F3756266F32AE00874FB9 /* Copy licenses and legal */,
+				3B5487E427CE881400480CB5 /* Copy Endpoints */,
 			);
 			buildRules = (
 			);
@@ -734,6 +746,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3B5487E427CE881400480CB5 /* Copy Endpoints */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Endpoints";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ENDPOINTS_SOURCE=\"$PROJECT_DIR/../../../../polyPod-config\"\nENDPOINTS_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/config\"\nrm -rf \"$ENDPOINTS_TARGET\"\ncp -r \"$ENDPOINTS_SOURCE\" \"$ENDPOINTS_TARGET\"\n";
+		};
 		E923739E2628228F00D2CFF3 /* Copy polyPod Features */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -871,6 +901,7 @@
 				E97D325626307CE100A5A180 /* ColorExtensions.swift in Sources */,
 				E9E6A01C262DB9CC00B6416E /* PreviewUtils.swift in Sources */,
 				5B8653022643FC310014208C /* PolyNav.swift in Sources */,
+				3B5487E227CD0FF700480CB5 /* Endpoint.swift in Sources */,
 				E9F370E1262EEB2C006254C1 /* ParagraphView.swift in Sources */,
 				1A4C21F424A63E4C006CC1FD /* Variable+CoreDataClass.swift in Sources */,
 				1ABADC0924EFAA3600369791 /* CLLocation+Model.swift in Sources */,
