@@ -30,10 +30,10 @@ open class Network(val context: Context) {
         ) ?: return@withContext NetworkResponse(
             null, "network connection failed"
         )
-        val responseCode = connection.responseCode
-        response.error = validateResponseCode(responseCode)
-
+        
         try {
+            val responseCode = connection.responseCode
+            response.error = validateResponseCode(responseCode)
             response.data =
                 connection.inputStream.bufferedReader().use { it.readText() }
         } finally {
@@ -54,10 +54,10 @@ open class Network(val context: Context) {
         ) ?: return@withContext NetworkResponse(
             null, "network connection failed"
         )
-        val responseCode = connection.responseCode
-        response.error =validateResponseCode(responseCode)
 
         try {
+            val responseCode = connection.responseCode
+            response.error =validateResponseCode(responseCode)
             response.data =
                 connection.inputStream.bufferedReader().use { it.readText() }
         } finally {
