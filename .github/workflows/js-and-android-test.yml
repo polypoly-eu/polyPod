@@ -41,7 +41,7 @@ jobs:
                       - 'platform/feature-api/**'
                       - 'platform/podjs/**'
                       swift:
-                      - 'platform/ios'
+                      - 'platform/ios/**'
             - name: Lint core and features
               if: steps.changes.outputs.js == 'true'
               run: ./build.js lint
