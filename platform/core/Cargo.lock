@@ -9,6 +9,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
 
 [[package]]
+name = "core"
+version = "0.1.0"
+dependencies = [
+ "flatbuffers",
+ "once_cell",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "flatbuffers"
 version = "2.0.0"
 dependencies = [
@@ -22,16 +32,6 @@ name = "itoa"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1aab8fc367588b89dcee83ab0fd66b72b50b72fa1904d7095045ace2b0c81c35"
-
-[[package]]
-name = "kernel"
-version = "0.1.0"
-dependencies = [
- "flatbuffers",
- "once_cell",
- "serde",
- "serde_json",
-]
 
 [[package]]
 name = "once_cell"

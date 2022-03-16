@@ -1,4 +1,4 @@
-use super::kernel_failure_fbs_mapping::build_failure_fbs;
+use super::core_failure_fbs_mapping::build_failure_fbs;
 use crate::flatbuffers_generated::{
     feature_manifest_generated::feature_manifest::{FeatureManifest, Link, LinkArgs},
     feature_manifest_response_generated::feature_manifest_response::FeatureManifestParsingResult,
@@ -12,13 +12,13 @@ use crate::{
             FeatureManifestParsingResponseArgs,
         },
     },
-    kernel_failure::KernelFailure,
+    core_failure::CoreFailure,
 };
 use flatbuffers::{FlatBufferBuilder, ForwardsUOffset, Vector, WIPOffset};
 use std::collections::HashMap;
 
 pub fn build_feature_manifest_parsing_response(
-    result: Result<feature_manifest_parsing::FeatureManifest, KernelFailure>,
+    result: Result<feature_manifest_parsing::FeatureManifest, CoreFailure>,
 ) -> Vec<u8> {
     let mut fbb = FlatBufferBuilder::new();
     let response_args = match result {
@@ -55,7 +55,7 @@ fn build_sucess_response_args(
 
 fn build_failure_response_args(
     fbb: &mut FlatBufferBuilder,
-    failure: KernelFailure,
+    failure: CoreFailure,
 ) -> FeatureManifestParsingResponseArgs {
     let failure = build_failure_fbs(fbb, failure).as_union_value();
     FeatureManifestParsingResponseArgs {
@@ -101,7 +101,7 @@ mod tests {
     #[test]
     fn test_build_failure() {
         let expected_failure =
-            KernelFailure::failed_to_parse_feature_manifest("Some missing field".to_string());
+            CoreFailure::failed_to_parse_feature_manifest("Some missing field".to_string());
         let byte_response = build_feature_manifest_parsing_response(Err(expected_failure.clone()));
 
         let parsed = root_as_feature_manifest_parsing_response(&byte_response);

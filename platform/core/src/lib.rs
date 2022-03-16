@@ -1,7 +1,7 @@
 mod c_interface;
 mod feature_manifest_parsing;
-mod kernel;
-mod kernel_failure;
+mod core;
+mod core_failure;
 #[rustfmt::skip]
 #[allow(clippy::all)]
 #[allow(unused_imports)]

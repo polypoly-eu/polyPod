@@ -1,12 +1,12 @@
 use crate::{
     flatbuffers_generated::failure_generated::failure::{Failure, FailureArgs},
-    kernel_failure::KernelFailure,
+    core_failure::CoreFailure,
 };
 use flatbuffers::{FlatBufferBuilder, WIPOffset};
 
 pub fn build_failure_fbs<'a>(
     fbb: &mut FlatBufferBuilder<'a>,
-    failure: KernelFailure,
+    failure: CoreFailure,
 ) -> WIPOffset<Failure<'a>> {
     let failure_args = FailureArgs {
         code: failure.code,

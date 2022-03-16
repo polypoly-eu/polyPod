@@ -1,4 +1,4 @@
-use crate::kernel_failure::KernelFailure;
+use crate::core_failure::CoreFailure;
 use serde::Deserialize;
 use std::collections::HashMap;
 
@@ -19,10 +19,10 @@ pub struct FeatureManifest {
 pub type JSONStr = str;
 
 impl FeatureManifest {
-    pub fn parse(json: &JSONStr, language_code: &str) -> Result<FeatureManifest, KernelFailure> {
+    pub fn parse(json: &JSONStr, language_code: &str) -> Result<FeatureManifest, CoreFailure> {
         FullFeatureManifest::try_from(json)
             .map(|manifest| FeatureManifest::build_feature_manifest(manifest, language_code))
-            .map_err(KernelFailure::failed_to_parse_feature_manifest)
+            .map_err(CoreFailure::failed_to_parse_feature_manifest)
     }
 
     fn build_feature_manifest(

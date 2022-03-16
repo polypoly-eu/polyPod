@@ -1,9 +1,9 @@
 use crate::{
     c_interface::{
         feature_manifest_fbs_mapping::build_feature_manifest_parsing_response,
-        kernel_bootstrap_fbs_mapping::build_kernel_bootstrap_response, utils::cstring_to_str,
+        core_bootstrap_fbs_mapping::build_core_bootstrap_response, utils::cstring_to_str,
     },
-    kernel::{bootstrap, parse_feature_manifest},
+    core::{bootstrap, parse_feature_manifest},
 };
 use std::os::raw::c_char;
 
@@ -13,12 +13,12 @@ use std::os::raw::c_char;
 /// Mention - It is needed to be tested in integration if `*const u8` is the appropriate return format.
 ///           Also, most likely, it will be required to expose an API to deallocate the byte buffer after parsing.
 ///
-/// Bootstrap the kernel with the given configuration:
+/// Bootstrap core with the given configuration:
 /// - language_code: User's locale language code.
-/// Returns a flatbuffer byte array with kernel_bootstrap_response.
+/// Returns a flatbuffer byte array with core_bootstrap_response.
 #[no_mangle]
-pub unsafe extern "C" fn kernel_bootstrap(language_code: *const c_char) -> *const u8 {
-    build_kernel_bootstrap_response(
+pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> *const u8 {
+    build_core_bootstrap_response(
         cstring_to_str(&language_code)
             .map(String::from)
             .and_then(bootstrap),
