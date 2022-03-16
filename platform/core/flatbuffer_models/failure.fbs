@@ -1,0 +1,15 @@
+namespace failure;
+
+enum FailureCode: byte {
+    FailedToBootstrapCore = 1,
+    CoreNotBootstraped,
+    FailedToParseFeatureManifest,
+    NullCStringPointer,
+    FailedToCreateCString,
+}
+
+table Failure {
+    // Flatbuffers require to have a default value for enums
+    code:FailureCode = FailedToBootstrapCore;
+    message:string;
+}
