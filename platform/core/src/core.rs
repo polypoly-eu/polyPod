@@ -1,6 +1,6 @@
 use crate::{
-    feature_manifest_parsing::{FeatureManifest, JSONStr},
     core_failure::CoreFailure,
+    feature_manifest_parsing::{FeatureManifest, JSONStr},
 };
 use once_cell::sync::OnceCell;
 

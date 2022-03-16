@@ -1,10 +1,9 @@
 use super::core_failure_fbs_mapping::build_failure_fbs;
 use crate::{
-    flatbuffers_generated::core_bootstrap_response_generated::core_bootstrap_response::{
-        finish_core_bootstrap_response_buffer, CoreBootstrapResponse,
-        CoreBootstrapResponseArgs,
-    },
     core_failure::CoreFailure,
+    flatbuffers_generated::core_bootstrap_response_generated::core_bootstrap_response::{
+        finish_core_bootstrap_response_buffer, CoreBootstrapResponse, CoreBootstrapResponseArgs,
+    },
 };
 use flatbuffers::FlatBufferBuilder;
 

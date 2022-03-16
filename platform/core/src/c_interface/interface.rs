@@ -1,7 +1,8 @@
 use crate::{
     c_interface::{
+        core_bootstrap_fbs_mapping::build_core_bootstrap_response,
         feature_manifest_fbs_mapping::build_feature_manifest_parsing_response,
-        core_bootstrap_fbs_mapping::build_core_bootstrap_response, utils::cstring_to_str,
+        utils::cstring_to_str,
     },
     core::{bootstrap, parse_feature_manifest},
 };

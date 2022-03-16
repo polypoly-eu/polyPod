@@ -4,6 +4,7 @@ use crate::flatbuffers_generated::{
     feature_manifest_response_generated::feature_manifest_response::FeatureManifestParsingResult,
 };
 use crate::{
+    core_failure::CoreFailure,
     feature_manifest_parsing,
     flatbuffers_generated::{
         feature_manifest_generated::feature_manifest::FeatureManifestArgs,
@@ -12,7 +13,6 @@ use crate::{
             FeatureManifestParsingResponseArgs,
         },
     },
-    core_failure::CoreFailure,
 };
 use flatbuffers::{FlatBufferBuilder, ForwardsUOffset, Vector, WIPOffset};
 use std::collections::HashMap;
