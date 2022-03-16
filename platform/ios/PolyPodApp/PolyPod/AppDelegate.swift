@@ -12,8 +12,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Log.bootstrap()
         Log.info("Application initialized")
 
-        // Currently we have project wide file protection enabled. So data protection is disabled for particular components.
-        // Removing project wide data protection, and then enable when needed is the best approach but it would be a bigger change.
         UserDefaults.standard.disableDataProtection()
         let defaults = UserDefaults.standard
         if defaults.bool(forKey: UserDefaults.Keys.resetUserDefaults.rawValue) {
@@ -41,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Disabled for now, need to investigate the issue with multiple notifications
         // while the device is locked
-        //self.registerUpdateNotificationCheck()
+        self.registerUpdateNotificationCheck()
         
         return true
     }
@@ -62,11 +60,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             task.setTaskCompleted(success: false)
         }
         
+        UserDefaults.standard.integer(forKey: "Other Key")
+        UserDefaults.standard.set(3, forKey: "Some key")
         let notification = UpdateNotification()
-        if notification.showPush {
+        //if notification.showPush {
             notification.handlePushSeen()
             showUpdateNotification()
-        }
+        //}
         task.setTaskCompleted(success: true)
         scheduleUpdateNotificationCheck()
     }
@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // We show the notification with a delay to make debugging easier:
         // It won't show up if the app has focus.
-        let delay = 10.0
+        let delay = 1.0
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: delay, repeats: false)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         

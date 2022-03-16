@@ -46,7 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Disabled for now, need to investigate the issue with multiple notifications
         // while the device is locked
-        //(UIApplication.shared.delegate as! AppDelegate).scheduleUpdateNotificationCheck()
+        (UIApplication.shared.delegate as! AppDelegate).scheduleUpdateNotificationCheck()
         Authentication.shared.clear()
     }
 }

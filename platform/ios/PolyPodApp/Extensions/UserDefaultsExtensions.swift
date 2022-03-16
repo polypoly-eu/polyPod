@@ -16,6 +16,8 @@ extension UserDefaults {
         Keys.allCases.forEach { removeObject(forKey: $0.rawValue) }
     }
     
+    // Currently we have project wide file protection enabled. So data protection is disabled for particular components.
+    // Removing project wide data protection, and then enable when needed is the best approach but it would be a bigger change.
     func disableDataProtection() {
         guard let bundleIdentifier = Bundle.main.bundleIdentifier else { return }
         
