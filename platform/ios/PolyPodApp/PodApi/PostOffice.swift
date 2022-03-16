@@ -11,40 +11,40 @@ private func createErrorResponse(_ origin: String, _ error: Error) -> MessagePac
 
 class PostOffice {
     static let shared = PostOffice()
-    
+
     func handleIncomingEvent(eventData: [String: Any], completionHandler: @escaping ([UInt8]) -> Void) {
         guard let bytes = eventData as? [String: NSNumber] else { return }
-        
+
         let sortedBytes = bytes.sorted(by: { $0.0.compare($1.0, options: .numeric) == .orderedAscending })
         let bytesArray = Array(sortedBytes.map({ $0.value.uint8Value }))
-        
+
         let data = Data(bytes: bytesArray, count: bytesArray.count)
-        
+
         let unpacked = try! unpackFirst(data)
         guard let decoded = Bubblewrap.decode(messagePackValue: unpacked) as? [String: Any] else {
             completionHandler([])
             return
         }
-        
+
         let messageId = decoded["id"] as! UInt64
         let requestValue = decoded["request"]!
         let request = requestValue as! [[String: Any]]
-        
+
         guard let api = request[0]["method"] as? String else {
             completionHandler([])
             return
         }
-        
+
         guard let method = request[1]["method"] as? String else {
             completionHandler([])
             return
         }
-        
+
         guard let args = request[1]["args"] as? [Any] else {
             completionHandler([])
             return
         }
-        
+
         switch api {
         case "polyIn":
             handlePolyIn(method: method, args: args, completionHandler: { response, error in
@@ -70,10 +70,10 @@ class PostOffice {
             Log.error("API unknown: \(api)")
         }
     }
-    
+
     private func completeEvent(messageId: UInt64, response: MessagePackValue?, error: MessagePackValue?, completionHandler: @escaping ([UInt8]) -> Void) {
         var dict: [MessagePackValue: MessagePackValue] = [:]
-        
+
         dict["id"] = .uint(messageId)
         if response != nil {
             dict["response"] = response
@@ -81,11 +81,11 @@ class PostOffice {
         if error != nil {
             dict["error"] = error
         }
-        
+
         let packedDict = pack(MessagePackValue.map(dict))
-        
+
         let byteArrayFromData: [UInt8] = [UInt8](packedDict)
-        
+
         completionHandler(byteArrayFromData)
     }
 }
@@ -110,7 +110,7 @@ extension PostOffice {
 
     private func convertArgs(args: [Any]) throws -> [ExtendedData] {
         var extendedDataSet: [ExtendedData] = []
-        
+
         for arg in args {
             guard let extendedData = arg as? ExtendedData else {
                 Log.error("""
@@ -119,18 +119,18 @@ extension PostOffice {
                 """)
                 throw PodApiError.badArgumentData(arg)
             }
-            
+    
             let graph = extendedData.properties["graph"] as? ExtendedData
             let graphType = graph?.classname
             if (graphType != "@polypoly-eu/rdf.DefaultGraph") {
                 throw PodApiError.failedToReadGraph(graphType ?? "<missing>")
             }
-            
+    
             extendedDataSet.append(extendedData)
         }
         return extendedDataSet
     }
-    
+
     private func handlePolyInAdd(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let extendedDataSet: [ExtendedData]
         do {
@@ -148,7 +148,7 @@ extension PostOffice {
             completionHandler(MessagePackValue(), nil)
         }
     }
-    
+
     private func handlePolyInSelect(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         guard let extendedData = extractMatcher(args[0]) else {
             completionHandler(nil, createErrorResponse(#function, PodApiError.badData(args[0])))
@@ -159,12 +159,12 @@ extension PostOffice {
                 completionHandler(nil, createErrorResponse(#function, error))
                 return
             }
-            
+    
             guard let quads = quads else {
                 completionHandler(nil, createErrorResponse(#function, PodApiError.unknown))
                 return
             }
-            
+    
             var encodedQuads: [MessagePackValue] = []
             for quad in quads {
                 let encodedQuad = MessagePackValue.extended(2, pack(Bubblewrap.encode(extendedData: quad)))
@@ -173,7 +173,7 @@ extension PostOffice {
             completionHandler(.array(encodedQuads), nil)
         }
     }
-    
+
     private func handlePolyInDelete(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let extendedDataSet: [ExtendedData]
         do {
@@ -182,7 +182,7 @@ extension PostOffice {
             completionHandler(nil, createErrorResponse(#function, error))
             return
         }
-        
+
         PodApi.shared.polyIn.deleteQuads(quads: extendedDataSet) { error in
             if let error = error {
                 completionHandler(nil, createErrorResponse(#function, error))
@@ -191,7 +191,7 @@ extension PostOffice {
             completionHandler(MessagePackValue(), nil)
         }
     }
-    
+
     private func handlePolyInHas(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let extendedDataSet: [ExtendedData]
         do {
@@ -200,7 +200,7 @@ extension PostOffice {
             completionHandler(nil, createErrorResponse(#function, error))
             return
         }
-        
+
         PodApi.shared.polyIn.hasQuads(quads: extendedDataSet) { doesHave in
             if doesHave {
                 completionHandler(MessagePackValue(), true)
@@ -249,13 +249,13 @@ extension PostOffice {
             Log.error("PolyOut method unknown: \(method)")
         }
     }
-    
+
     private func handlePolyOutFetch(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let url = args[0] as! String
         let requestInitData = args[1] as! [String: Any]
-        
+
         let fetchRequestInit = FetchRequestInit(with: requestInitData)
-        
+
         PodApi.shared.polyOut.fetch(urlString: url, requestInit: fetchRequestInit) { fetchResponse, error in
             if let error = error {
                 completionHandler(nil, createErrorResponse(#function, error))
@@ -265,18 +265,18 @@ extension PostOffice {
                 completionHandler(nil, createErrorResponse(#function, PodApiError.unknown))
                 return
             }
-            
+    
             let object = fetchResponse.messagePackObject
-            
+    
             let packedData = pack(object)
-            
+    
             completionHandler(MessagePackValue(type: 2, data: packedData), nil)
         }
     }
-    
+
     private func handlePolyOutStat(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let path = args[0] as! String
-        
+
         PodApi.shared.polyOut.stat(url: path) { fileStats, error in
             if let error = error {
                 completionHandler(nil, createErrorResponse(#function, error))
@@ -287,16 +287,16 @@ extension PostOffice {
                 return
             }
             let object = fileStats.messagePackObject
-            
+    
             let packedData = pack(object)
-            
+    
             completionHandler(MessagePackValue(type: 2, data: packedData), nil)
         }
     }
-    
+
     private func handlePolyOutReadFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let path = args[0] as? String ?? ""
-        
+
         var options: [String: Any] = [:]
         if args.count > 1 {
             options = args[1] as! [String: Any]
@@ -317,11 +317,11 @@ extension PostOffice {
             completionHandler(nil, createErrorResponse(#function, PodApiError.unknown))
         }
     }
-    
+
     private func handlePolyOutWriteFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let path = args[0] as! String
         let data = args[1] as! String
-        
+
         PodApi.shared.polyOut.fileWrite(url: path, data: data) { error in
             if let error = error {
                 completionHandler(nil, createErrorResponse(#function, error))
@@ -330,15 +330,15 @@ extension PostOffice {
             }
         }
     }
-    
+
     private func handlePolyOutReadDir(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let path = args[0] as! String
-        
+
         PodApi.shared.polyOut.readDir(url: path) { fileList, error in
             if let error = error {
                 completionHandler(nil, createErrorResponse(#function, error))
             } else {
-                var encodedList: [MessagePackValue] = [];
+                var encodedList: [MessagePackValue] = []
                 for file in fileList ?? [] {
                     var entry = [MessagePackValue: MessagePackValue]()
                     ["id", "path"].forEach { key in
@@ -350,7 +350,7 @@ extension PostOffice {
             }
         }
     }
-    
+
     private func handlePolyOutImportArchive(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let url = args[0] as! String
         PodApi.shared.polyOut.importArchive(url: url) { fileId in
@@ -361,7 +361,7 @@ extension PostOffice {
             completionHandler(MessagePackValue(), nil)
         }
     }
-    
+
     private func handlePolyOutRemoveArchive(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let fileId = args[0] as! String
         PodApi.shared.polyOut.removeArchive(fileId: fileId) { error in
@@ -385,7 +385,7 @@ extension PostOffice {
             Log.error("PolyNav method unknown: \(method)")
         }
     }
-    
+
     private func handlePolyNavSetTitle(args: [Any]) {
         let title = args[0] as! String
         PodApi.shared.polyNav.setTitle(title: title) { res, error in
@@ -403,7 +403,7 @@ extension PostOffice {
         PodApi.shared.polyNav.openUrl(target: target) { res, error in
         }
     }
-    
+
     private func handlePolyNavPickFile(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let type = args[0] as? String
         PodApi.shared.polyNav.pickFile(type: type) { externalFile in
@@ -423,11 +423,11 @@ extension PostOffice {
             Log.error("Info method unknown: \(method)")
         }
     }
-    
+
     private func handleInfoGetRuntime(completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         completionHandler(.string(PodApi.shared.info.getRuntime()), nil)
     }
-    
+
     private func handleInfoGetVersion(completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         completionHandler(.string(PodApi.shared.info.getVersion()), nil)
     }
@@ -442,7 +442,7 @@ extension PostOffice {
             Log.error("PolyNav method unknown: \(method)")
         }
     }
-    
+
     private func handleNetworkHttpPost(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let url = args[0] as! String
         let body = args[1] as! String

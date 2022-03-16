@@ -7,52 +7,51 @@ final class FeatureStorage: ObservableObject {
     private var dataProtectionCancellable: AnyCancellable?
 
     @Published var featuresList: [Feature] = []
-    
+
     lazy var featuresFileUrl: URL = {
         do {
             let documentsUrl = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             let featuresUrl = documentsUrl.appendingPathComponent("Features")
             return featuresUrl
         } catch {
-            Log.error("Failed to determine features path: \(error.localizedDescription)");
+            Log.error("Failed to determine features path: \(error.localizedDescription)")
         }
         return URL(fileURLWithPath: "")
     }()
-    
+
     lazy private var featureDirUrl: URL =
         URL(string: featuresFileUrl.path) ?? URL(fileURLWithPath: "")
-    
-    
+
     init(dataProtection: DataProtection) {
         self.dataProtection = dataProtection
         setup()
     }
-    
+
     private func setup() {
         dataProtectionCancellable = dataProtection.state.sink { [weak self] protectedDataIsAvailable in
             guard self?.featuresList.isEmpty == true, protectedDataIsAvailable == true else {
                 return
             }
-            
+
             self?.cleanFeatures()
             self?.importFeatures()
             self?.loadFeatures()
         }
     }
-    
+
     private func cleanFeatures() {
         do {
             let documentsUrl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             let featuresUrl = documentsUrl.appendingPathComponent("Features")
             try FileManager.default.removeItem(at: featuresUrl)
         } catch {
-            Log.error("Failed to clean features: \(error.localizedDescription)");
+            Log.error("Failed to clean features: \(error.localizedDescription)")
         }
     }
-    
+
     private func loadFeatures() {
         var featuresList: [Feature] = []
-        
+
         do {
             let directoryContents = try FileManager.default.contentsOfDirectory(at: featuresFileUrl, includingPropertiesForKeys: nil)
             let subDirs = directoryContents.filter{ $0.hasDirectoryPath }
@@ -67,10 +66,10 @@ final class FeatureStorage: ObservableObject {
         } catch {
             Log.error("Failed to list features: \(error.localizedDescription)")
         }
-        
+
         self.featuresList = sortFeatures(featuresList)
     }
-    
+
     private func sortFeatures(_ features: [Feature]) -> [Feature] {
         let order = readOrder()
         var sorted: [Feature] = []
@@ -86,7 +85,7 @@ final class FeatureStorage: ObservableObject {
         }
         return sorted
     }
-    
+
     private func readOrder() -> [String] {
         guard let url = Bundle.main.url(
             forResource: "order",
@@ -96,7 +95,7 @@ final class FeatureStorage: ObservableObject {
         guard let content = try? String(contentsOf: url) else { return [] }
         return content.components(separatedBy: .newlines)
     }
-    
+
     func importFeatures() {
         createFeaturesFolder()
         let order = readOrder()
@@ -104,15 +103,15 @@ final class FeatureStorage: ObservableObject {
             importFeature(id)
         }
     }
-    
+
     private func createFeaturesFolder() {
         do {
             try FileManager.default.createDirectory(atPath: featureDirUrl.absoluteString, withIntermediateDirectories: true, attributes: nil)
         } catch {
-            Log.error("Failed to create features folder: \(error.localizedDescription)");
+            Log.error("Failed to create features folder: \(error.localizedDescription)")
         }
     }
-    
+
     private func importFeature(_ featureName: String) {
         let featureUrl = featureDirUrl.appendingPathComponent(featureName)
         if !FileManager.default.fileExists(atPath: featureUrl.absoluteString) {
@@ -128,17 +127,17 @@ final class FeatureStorage: ObservableObject {
                     Log.error("Feature for import not found: \(featureName)")
                 }
             } catch {
-                Log.error("Failed to import feature \(featureName): \(error.localizedDescription)");
+                Log.error("Failed to import feature \(featureName): \(error.localizedDescription)")
             }
         }
     }
-    
+
     private func importPodJs(toFeature featureName: String, atUrl url: URL) throws {
         let fileManager = FileManager.default
         let resourceName = "pod"
         let resourceType = "js"
         let destinationUrl = featuresFileUrl.appendingPathComponent(featureName)
-        
+
         if fileManager.hasBundleFile(
             forResource: resourceName,
             ofType: resourceType,
@@ -154,7 +153,7 @@ final class FeatureStorage: ObservableObject {
                 atDestinationUrl: destinationUrl
             )
         }
-        
+
         try fileManager.copyBundleFile(
             forResource: resourceName,
             ofType: resourceType,

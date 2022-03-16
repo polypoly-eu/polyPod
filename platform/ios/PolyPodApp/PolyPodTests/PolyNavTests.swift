@@ -6,14 +6,14 @@ private class PolyNavDelegateStub: PolyNavDelegate {
     var pickFileResult: ExternalFile?
     func doHandleOpenUrl(url: String) {
     }
-    
+
     func doHandlePickFile(type: String?, completion: @escaping (ExternalFile?) -> Void) {
         completion(pickFileResult)
     }
-    
+
     func doHandleSetTitle(title: String) {
     }
-    
+
     func doHandleSetActiveActions(actions: [String]) {
     }
 }
@@ -25,7 +25,7 @@ private let testZipFileName = "testFile.zip"
 private let testZipFilePath = testFolderPath.appendingPathComponent("testFile.zip")
 private let zipMimeType = "application/zip"
 
-private let testExternalFile = ExternalFile(url: testZipFilePath.absoluteString, name: testZipFileName , size: 12324)
+private let testExternalFile = ExternalFile(url: testZipFilePath.absoluteString, name: testZipFileName, size: 12324)
 
 private func removeTestFile() {
     let fileManager = FileManager.default
@@ -42,35 +42,35 @@ private func createTestFile() {
         try FileManager.default.moveItem(at: zipFilePath, to: testZipFilePath)
     }
     catch (_) {
-    
+
     }
 }
 
 class PolyNavTests: XCTestCase {
     let polyNav = PolyNav()
-    
+
     override class func setUp() {
         createTestFile()
     }
-    
+
     override class func tearDown() {
         removeTestFile()
     }
-    
+
     func testPickFileReturnsFileSelectedByUser() {
         let delegateStub = PolyNavDelegateStub()
         delegateStub.pickFileResult = testExternalFile
         polyNav.delegate = delegateStub
         expectPickFileResult(testExternalFile)
     }
-    
+
     func testPickFileReturnsNullIfUserCancelled() {
         let delegateStub = PolyNavDelegateStub()
         delegateStub.pickFileResult = nil
         polyNav.delegate = delegateStub
         expectPickFileResult(nil)
     }
-    
+
     private func expectPickFileResult(_ expected: ExternalFile?) {
         let expectation = XCTestExpectation()
         polyNav.pickFile(type: zipMimeType) { actual in
