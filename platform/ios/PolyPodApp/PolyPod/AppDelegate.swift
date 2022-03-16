@@ -8,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-
+        
         Log.bootstrap()
         Log.info("Application initialized")
 
@@ -60,13 +60,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             task.setTaskCompleted(success: false)
         }
         
-        UserDefaults.standard.integer(forKey: "Other Key")
-        UserDefaults.standard.set(3, forKey: "Some key")
         let notification = UpdateNotification()
-        //if notification.showPush {
+        if notification.showPush {
             notification.handlePushSeen()
             showUpdateNotification()
-        //}
+        }
         task.setTaskCompleted(success: true)
         scheduleUpdateNotificationCheck()
     }
@@ -81,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // We show the notification with a delay to make debugging easier:
         // It won't show up if the app has focus.
-        let delay = 1.0
+        let delay = 10.0
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: delay, repeats: false)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
