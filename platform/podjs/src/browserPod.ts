@@ -323,20 +323,14 @@ class BrowserNetwork {
         contentType?: string,
         authToken?: string
     ): Promise<NetworkResponse> {
-        return await this.httpFetchRequest(
-            "Post",
-            url,
-            body,
-            contentType,
-            authToken
-        );
+        return this.httpFetchRequest("Post", url, body, contentType, authToken);
     }
     async httpGet(
         url: string,
         contentType?: string,
         authToken?: string
     ): Promise<NetworkResponse> {
-        return await this.httpFetchRequest("GET", url, contentType, authToken);
+        return this.httpFetchRequest("GET", url, contentType, authToken);
     }
     private async httpFetchRequest(
         type: string,
@@ -354,6 +348,7 @@ class BrowserNetwork {
                 if (status < 200 || status > 299) {
                     fetchResponse.error = `Unexpected response: ${request.responseText}`;
                     resolve(fetchResponse);
+                    return;
                 }
                 fetchResponse.payload = request.responseText;
                 resolve(fetchResponse);
@@ -362,17 +357,22 @@ class BrowserNetwork {
             request.onerror = function () {
                 fetchResponse.error = `Network error`;
                 resolve(fetchResponse);
+                return;
             };
-            let urlObject; 
-            try{
-                urlObject = new URL(url)
-            }catch(e){
-                fetchResponse.error = `Bad URL`
-                resolve(fetchResponse)
+            let urlObject;
+            try {
+                urlObject = new URL(url);
+            } catch (e) {
+                console.log("actually doing it");
+                fetchResponse.error = `Bad URL`;
+                resolve(fetchResponse);
+                return;
             }
-            if (urlObject?.protocol != "https"){
-                fetchResponse.error = `Not a secure protocol`
-                resolve(fetchResponse)
+            console.log("should not be doing it");
+            if (urlObject?.protocol != "https") {
+                fetchResponse.error = `Not a secure protocol`;
+                resolve(fetchResponse);
+                return;
             }
             request.open(type, url);
 
@@ -428,8 +428,8 @@ class BrowserEndpoint implements Endpoint {
             contentType,
             authToken
         );
-        if (NetworkResponse.error){
-            throw endpointErrorMessage("send", NetworkResponse.error)
+        if (NetworkResponse.error) {
+            throw endpointErrorMessage("send", NetworkResponse.error);
         }
     }
     async get(
