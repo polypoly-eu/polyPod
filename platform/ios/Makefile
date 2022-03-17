@@ -4,6 +4,8 @@ project_path = PolyPodApp/PolyPod.xcodeproj
 scheme_name = PolyPod
 export_options_plist = exportOptions.plist
 destination = 15.2
+appstore_api_key_id = $(POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID)
+appstore_api_issuer_id = $(POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID)
 
 ifneq ($(shell which xcpretty),)
 xcodebuild := set -o pipefail && xcodebuild
@@ -15,10 +17,6 @@ endif
 .PHONY := build
 lockxcodeversion:
 	sudo xcode-select -switch /Applications/Xcode_13.2.1.app
-
-# Github secrets
-APPSTORE_API_KEY_ID = $POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID
-APPSTORE_API_ISSUER_ID = $POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID
 
 .PHONY := build
 build:
@@ -59,14 +57,14 @@ upload_ipa: export_ipa
 	xcrun altool --validate-app \
 		-f $(ipa_path) \
 		-t ios \
-		--apiKey $(value APPSTORE_API_KEY_ID) \
-		--apiIssuer $(value APPSTORE_API_ISSUER_ID)
+		--apiKey $(appstore_api_key_id) \
+		--apiIssuer $(appstore_api_issuer_id)
 
 	xcrun altool --upload-app \
 		-f $(ipa_path) \
 		-t ios \
-		--apiKey $(value APPSTORE_API_KEY_ID) \
-		--apiIssuer $(value APPSTORE_API_ISSUER_ID)
+		--apiKey $(appstore_api_key_id) \
+		--apiIssuer $(appstore_api_issuer_id)
 
 .PHONY := install_distribution_prerequisites
 install_distribution_prerequisites:
@@ -91,4 +89,4 @@ install_distribution_prerequisites:
 	mkdir -p ~/private_keys
 	@echo $(POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64) \
 		| base64 --decode > \
-		~/private_keys/AuthKey_$(value APPSTORE_API_KEY_ID).p8
+		~/private_keys/AuthKey_$(appstore_api_key_id).p8
