@@ -40,6 +40,9 @@ final class Network: NetworkProtocol {
         contentType: String?,
         authToken: String?) -> Result<Data, PodApiError>  {
             let requestURL = URL(string: url)!
+            if (requestURL.scheme == nil) {
+                return .failure(PodApiError.networkError(type, message: "Bad URL: \(url)"))
+            }
             if (!(requestURL.scheme == "https")) {
                 return .failure(PodApiError.networkSecurityError(type))
             }
@@ -74,13 +77,13 @@ final class Network: NetworkProtocol {
                       }
                 
                 guard (200 ... 299) ~= response.statusCode else {
-                    fetchError = PodApiError.networkError("http\(type)", responseCode: String(response.statusCode))
+                    fetchError = PodApiError.networkError("http\(type)", message: "Bad response code: \(String(response.statusCode))")
                     semaphore.signal()
                     return
                 }
                 
                 guard let data = data else {
-                    fetchError = PodApiError.networkError("http\(type)", responseCode: String(response.statusCode))
+                    fetchError = PodApiError.networkError("http\(type)", message: "Bad response code: \(String(response.statusCode))")
                     return
                 }
                 responseData = data
@@ -90,7 +93,7 @@ final class Network: NetworkProtocol {
             semaphore.wait()
             
             if (responseData == nil && fetchError == nil) {
-                fetchError = PodApiError.networkError("http\(type)", responseCode: "400")
+                fetchError = PodApiError.networkError("http\(type)", message: "Bad response code: 400")
             }
         
             return fetchError == nil ? .success(responseData!) : .failure(fetchError!)
