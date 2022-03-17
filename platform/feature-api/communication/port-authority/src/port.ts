@@ -45,7 +45,7 @@ export interface TxPort<T> {
  * to outgoing messages _before_ they are sent on the original port.
  * @returns an instance of [[TxPort]] instantiated to the `In` class.
  */
-export function txMappingPort<Out, In>(port: TxPort<Out>, f: (x: In) => Out): TxPort<In> {
+export function txMappingPort<T, In>(port: TxPort<T>, f: (x: In) => T): TxPort<In> {
     return {
         send: (value) => port.send(f(value)),
     };
