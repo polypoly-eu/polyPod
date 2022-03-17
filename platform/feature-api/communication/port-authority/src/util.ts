@@ -29,7 +29,7 @@ export type Try<T> = Success<T> | Failure;
 /**
  * Transforms a [[Try]] into a promise that is resolved or rejected depending on [[Success]] or [[Failure]] state.
  *
- * See [[recoverPromise]] for the inverse operation.
+ * See [[triedPromise]] for the inverse operation.
  */
 export async function rethrowPromise<T>(t: Try<T>): Promise<T> {
     if ("value" in t) return t.value;
@@ -42,7 +42,7 @@ export async function rethrowPromise<T>(t: Try<T>): Promise<T> {
  *
  * See [[rethrowPromise]] for the inverse operation.
  */
-export async function recoverPromise<T>(p: Promise<T>): Promise<Try<T>> {
+export async function triedPromise<T>(p: Promise<T>): Promise<Try<T>> {
     try {
         return {
             value: await p,

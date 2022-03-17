@@ -12,7 +12,7 @@ import { Bubblewrap } from "@polypoly-eu/bubblewrap";
 
 import { Handler, rxMappingPort } from "./port";
 import { ResponsePort, WithResolvers } from "./procedure";
-import { recoverPromise, Try } from "./util";
+import { triedPromise, Try } from "./util";
 
 /**
  * Creates a [[ResponsePort]] and an accompanying middleware that reacts on any `POST` request and responds with an
@@ -62,7 +62,7 @@ export function middlewarePort<T, Body = any>(
 
         if (request.method !== "POST") next();
 
-        const result = await recoverPromise(
+        const result = await triedPromise(
             new Promise<T>((resolve, reject) => {
                 handler({
                     request: request.body,
