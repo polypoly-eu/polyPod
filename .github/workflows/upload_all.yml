@@ -116,17 +116,17 @@ jobs:
       - name: iOS - Install distribution prerequisites
         if: env.POLYPOD_UPLOAD_APP_STORE == 'true'
         working-directory: platform/ios
-        run: make install_distribution_prerequisites
         env:
           POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64 }}
           POLYPOD_APPLE_IOS_APPSTORE_P12_PASS: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_PASS }}
           POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64 }}
           POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64 }}
           POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
+        run: make install_distribution_prerequisites
       - name: iOS - Export and upload IPA
         if: env.POLYPOD_UPLOAD_APP_STORE == 'true'
         working-directory: platform/ios
-        run: make upload_ipa
         env:
           POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID }}
           POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
+        run: make upload_ipa
