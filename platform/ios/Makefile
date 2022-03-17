@@ -6,6 +6,8 @@ export_options_plist = exportOptions.plist
 destination = 15.2
 appstore_api_key_id = $(POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID)
 appstore_api_issuer_id = $(POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID)
+provisioning_profile_dir := ~/Library/MobileDevice/Provisioning\ Profiles
+provisioning_profile_file := cooppolypolypolypod__iOS_App_Store_Distribution.mobileprovision
 
 ifneq ($(shell which xcpretty),)
 xcodebuild := set -o pipefail && xcodebuild
@@ -68,8 +70,10 @@ upload_ipa: export_ipa
 
 .PHONY := install_distribution_prerequisites
 install_distribution_prerequisites:
-	# 1. Install Distribution certificate. xcodebuild will automatically extract the app certificate from the keychain.
-	@echo $(POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64) | base64 --decode > Certificate.p12
+	# 1. Install Distribution certificate. xcodebuild will automatically
+	#    extract the app certificate from the keychain.
+	@echo $(POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64) \
+		| base64 --decode > Certificate.p12
 	security create-keychain -p "" build.keychain
 	security import Certificate.p12 \
 		-t agg -k ~/Library/Keychains/build.keychain \
@@ -77,16 +81,19 @@ install_distribution_prerequisites:
 	security list-keychains -s ~/Library/Keychains/build.keychain
 	security default-keychain -s ~/Library/Keychains/build.keychain
 	security unlock-keychain -p "" ~/Library/Keychains/build.keychain
-	security set-key-partition-list -S apple-tool:,apple: -s -k "" ~/Library/Keychains/build.keychain
+	security set-key-partition-list -S apple-tool:,apple: -s -k "" \
+		~/Library/Keychains/build.keychain
 
-	# 2. Install Distribution provisioning profile. xcodebuild will automatically extract the profile from the Provisioning Profiles directory
-	mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+	# 2. Install Distribution provisioning profile. xcodebuild will
+	#    automatically extract the profile from the Provisioning Profiles
+	#    directory
+	mkdir -p $(provisioning_profile_dir)
 	@echo $(POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64) \
 		| base64 --decode > \
-		~/Library/MobileDevice/Provisioning\ Profiles/cooppolypolypolypod__iOS_App_Store_Distribution.mobileprovision
+		$(provisioning_profile_dir)/$(provisioning_profile_file)
 
-	# 3. App Store Connect API Key. altool will automatically use the private key from the private_keys folder.
+	# 3. App Store Connect API Key. altool will automatically use the private
+	#    key from the private_keys folder.
 	mkdir -p ~/private_keys
 	@echo $(POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64) \
-		| base64 --decode > \
-		~/private_keys/AuthKey_$(appstore_api_key_id).p8
+		| base64 --decode > ~/private_keys/AuthKey_$(appstore_api_key_id).p8
