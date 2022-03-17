@@ -14,7 +14,7 @@ on:
 jobs:
   build_test_upload:
     name: Build, test, and upload
-    runs-on: macos-11
+    runs-on: macos-latest
     steps:
       - name: Fail if uploading from non-release branch
         if: |
