@@ -36,8 +36,8 @@ export function mapHandler<T, U>(handler: Handler<T>, f: (x: U) => T): Handler<U
  *
  * Implementations of this may be synchronous, for example the port returned by [[loopback]].
  */
-export interface TxPort<Out> {
-    send(value: Out): void;
+export interface TxPort<T> {
+    send(value: T): void;
 }
 
 /**
