@@ -85,8 +85,13 @@ open class Network(val context: Context) {
         authToken: String?,
     ): HttpURLConnection? {
         var connection: HttpURLConnection
+        val requestURL = URL(url)
+        if (requestURL.protocol != "https") {
+            logger.error("network.$type failed, URL is not secure (https)")
+            return null
+        }
         try {
-            connection = URL(url).openConnection() as HttpURLConnection
+            connection = requestURL.openConnection() as HttpURLConnection
         } catch (exception: Exception) {
             logger.error("network connection failed $exception")
             return null
