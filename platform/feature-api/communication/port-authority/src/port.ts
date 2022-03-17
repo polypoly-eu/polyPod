@@ -47,7 +47,7 @@ export interface TxPort<T> {
  */
 export function txMappingPort<T, In>(port: TxPort<T>, f: (x: In) => T): TxPort<In> {
     return {
-        send: (value) => port.send(f(value)),
+        send: (value: In) => port.send(f(value)),
     };
 }
 
