@@ -83,7 +83,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
         let index = urlString.index(urlString.startIndex, offsetBy: PolyOut.fsPrefix.count)
         let file = String(urlString[index..<urlString.endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: "/"))
         let ext = (file as NSString).pathExtension
-                        
+        
         do {
             var fileData: Data? = nil
             if (file.starts(with: PolyOut.fsFilesRoot)) {
@@ -149,7 +149,7 @@ class FeatureWebView: WKWebView {
         self.openUrlHandler = openUrlHandler
         self.pickFileHandler = pickFileHandler
 
-        let contentController = WKUserContentController();
+        let contentController = WKUserContentController()
         installUserScript(
             contentController,
             "messagePort",
