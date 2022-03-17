@@ -10,7 +10,7 @@ import { IncomingMessage, RequestListener } from "http";
 
 import { Bubblewrap } from "@polypoly-eu/bubblewrap";
 
-import { Handler, rxMappingPort, Port } from "./port";
+import { Handler, rxMappingPort } from "./port";
 import { ResponsePort, WithResolvers } from "./procedure";
 import { recoverPromise, Try } from "./util";
 

@@ -31,8 +31,8 @@ Interoperability with [Bubblewrap](../bubblewrap) is provided so that arbitrary 
 ## Example
 
 ```javascript
-import {MessageChannel} from "worker_threads";
-import {fromNodeMessagePort} from "@polypoly-eu/port-authority/dist/node";
+import { MessageChannel } from "worker_threads";
+import { fromNodeMessagePort } from "@polypoly-eu/port-authority";
 
 const channel = new MessageChannel();
 
@@ -48,11 +48,11 @@ port1.send("Hello world");
 
 This module is structured as a TypeScript library with the following modules:
 
-* `port` contains the universal port abstraction
-* `procedure` contains the universal request-response abstractions
-* `browser` provides browser-specific code
-* `node` provides Node-specific code (code-split into a separate import)
-* `fetch` provides universal code based on the Fetch API (requires [a polyfill on Node.js](https://www.npmjs.com/package/node-fetch))
+-   `port` contains the universal port abstraction
+-   `procedure` contains the universal request-response abstractions
+-   `browser` provides browser-specific code
+-   `node` provides Node-specific code (code-split into a separate import)
+-   `fetch` provides universal code based on the Fetch API (requires [a polyfill on Node.js](https://www.npmjs.com/package/node-fetch))
 
 ## Limitations
 
