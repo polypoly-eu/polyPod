@@ -119,17 +119,6 @@ export function forward<InOut>(from: ReceiverPort<InOut>, to: SendPort<InOut>): 
 }
 
 /**
- * Bi-directionally forwards messages between two [[Port]]s.
- *
- * Both ports must have identical incoming and outcoming types. This function uses [[forward]] to forward messages from
- * the first port to the second, and again for the other direction.
- */
-export function connect<InOut>(port1: Port<InOut, InOut>, port2: Port<InOut, InOut>): void {
-    forward(port1, port2);
-    forward(port2, port1);
-}
-
-/**
  * Constructs a pair of uni-directionally connected ports. The result is a [[SendPort]] and a [[ReceiverPort]] with the
  * same type parameters.
  *
