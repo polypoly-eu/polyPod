@@ -9,7 +9,7 @@ struct FeatureContainerView: UIViewRepresentable {
     let errorHandler: (String) -> Void
     let openUrlHandler: (String) -> Void
     let pickFileHandler: (String?, @escaping (ExternalFile?) -> Void) -> Void
-
+    
     func makeUIView(context: Context) -> FeatureWebView {
         let featureWebView = FeatureWebView(
             feature: feature,
@@ -19,29 +19,29 @@ struct FeatureContainerView: UIViewRepresentable {
             openUrlHandler: openUrlHandler,
             pickFileHandler: pickFileHandler
         )
-
+        
         if let featureColor = feature.primaryColor {
             featureWebView.backgroundColor = UIColor.compatInit(featureColor)
             featureWebView.isOpaque = false
         }
-
+        
         PodApi.shared.polyNav.delegate  = featureWebView
         PodApi.shared.endpoint.delegate  = featureWebView
-
+        
         return featureWebView
     }
-
+    
     func updateUIView(_ uiView: FeatureWebView, context: Context) {
         guard let (action, dispatchTime) = queuedAction else {
             return
         }
-
+        
         // For some reason, activeActions is empty within the view, so we
         // need to check it here.
         if !activeActions.contains(action) {
             return
         }
-
+        
         uiView.triggerAction(action: action, dispatchTime: dispatchTime)
     }
 }
@@ -51,7 +51,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
     func setFeature(feature: Feature) {
         self.feature = feature
     }
-
+    
     func mimeTypeFromExt(ext: String) -> String {
         switch ext {
         case "html":
@@ -70,7 +70,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
             return "application/octet-stream"
         }
     }
-
+    
     func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
         guard let url = urlSchemeTask.request.url,
             let scheme = url.scheme,
@@ -78,12 +78,12 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
             urlSchemeTask.didFailWithError(PolyNavError.protocolError(""))
                 return
         }
-
+        
         let urlString = url.absoluteString
         let index = urlString.index(urlString.startIndex, offsetBy: PolyOut.fsPrefix.count)
         let file = String(urlString[index..<urlString.endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: "/"))
         let ext = (file as NSString).pathExtension
-
+        
         do {
             var fileData: Data? = nil
             if (file.starts(with: PolyOut.fsFilesRoot)) {
@@ -99,7 +99,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
             else {
                 var targetUrl = feature?.path
                 targetUrl = targetUrl?.appendingPathComponent(file)
-
+                
                 fileData = try Data(contentsOf: targetUrl!)
             }
             let headers: [String : String] = [
@@ -109,9 +109,9 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
                 "Content-Length": String(fileData?.count ?? 0),
                 "Content-Type": mimeTypeFromExt(ext: ext)
             ]
-
+            
             let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "HTTP 1.0", headerFields: headers)
-
+            
             // Fulfill the task.
             urlSchemeTask.didReceive(response!)
             urlSchemeTask.didReceive(fileData ?? Data())
@@ -120,9 +120,9 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
             urlSchemeTask.didFailWithError(error)
         }
     }
-
+    
     func webView(_ webView: WKWebView, stop urlSchemeTask: WKURLSchemeTask) {
-
+        
     }
 }
 
@@ -133,7 +133,7 @@ class FeatureWebView: WKWebView {
     private let openUrlHandler: (String) -> Void
     private let pickFileHandler: (String?, @escaping (ExternalFile?) -> Void) -> Void
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
-
+    
     init(
         feature: Feature,
         title: Binding<String>,
@@ -148,7 +148,7 @@ class FeatureWebView: WKWebView {
         self.errorHandler = errorHandler
         self.openUrlHandler = openUrlHandler
         self.pickFileHandler = pickFileHandler
-
+        
         let contentController = WKUserContentController()
         installUserScript(
             contentController,
@@ -160,49 +160,49 @@ class FeatureWebView: WKWebView {
             "domConsole",
             forMainFrameOnly: false
         )
-
+        
         installUserScript(contentController, "polyNav", forMainFrameOnly: false)
-
+        
         installUserScript(
             contentController,
             "disableUserSelect",
             forMainFrameOnly: false
         )
-
+        
         installUserScript(
             contentController,
             "handleErrors",
             forMainFrameOnly: false
         )
-
+        
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
-
+        
         let scheme = PolyOut.fsProtocol
         let fileHandler = FeatureFileHandler()
         fileHandler.setFeature(feature: feature)
         configuration.setURLSchemeHandler(fileHandler, forURLScheme: scheme)
-
+        
         super.init(frame: .zero, configuration: configuration)
-
+        
         scrollView.isScrollEnabled = false
         translatesAutoresizingMaskIntoConstraints = false
         MessageName.allCases.forEach {
             contentController.add(self, name: $0.rawValue)
         }
         removeInputAccessory()
-
+        
         var components = URLComponents()
         components.scheme = scheme
         components.path = "/pod.html"
         components.host = ""
         load(URLRequest(url: components.url!))
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     private func removeInputAccessory() {
         // WKWebView, as of April 2021, has an odd input accessory view for the
         // keyboard that contains up and down buttons, as well as a "done"
@@ -211,33 +211,33 @@ class FeatureWebView: WKWebView {
         // keyboard pops up, that seem to be caused by a bug in iOS.
         // Since we don't want the thing, nor the errors, we remove it.
         // This is the best approach we could find :/
-
+        
         guard let target = scrollView.subviews.first(where: {
             String(describing: type(of: $0)).starts(with: "WKContent")
         }) else { return }
-
+        
         guard let noInputAccessoryClass = createNoInputAccessoryClass(target)
         else { return }
-
+        
         class NoInputAccessoryHelper: NSObject {
             @objc var inputAccessoryView: AnyObject? { return nil }
         }
-
+        
         guard let original = class_getInstanceMethod(
             NoInputAccessoryHelper.self,
             #selector(getter: NoInputAccessoryHelper.inputAccessoryView)
         ) else { return }
-
+        
         class_addMethod(
             noInputAccessoryClass.self,
             #selector(getter: NoInputAccessoryHelper.inputAccessoryView),
             method_getImplementation(original),
             method_getTypeEncoding(original)
         )
-
+        
         object_setClass(target, noInputAccessoryClass)
     }
-
+    
     func triggerAction(action: String, dispatchTime: DispatchTime) {
         // Invoking behaviour in the WKWebView, which keeps its own state, is
         // surprisingly difficult in Swift UI. This odd workaround is the best
@@ -246,7 +246,7 @@ class FeatureWebView: WKWebView {
             return
         }
         lastActionDispatch = dispatchTime
-
+        
         // There is already a mechanism for sending messages to the feature's
         // iframe, we should use that here instead of opening up a new channel.
         let script = """
@@ -276,11 +276,11 @@ extension FeatureWebView: WKScriptMessageHandler {
         guard let messageName = MessageName(rawValue: message.name) else {
             return
         }
-
+        
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             guard let body = message.body as? [String: Any] else { return }
-
+            
             switch messageName {
             case .Log:
                 self.doLog(data: body)
@@ -291,7 +291,7 @@ extension FeatureWebView: WKScriptMessageHandler {
             }
         }
     }
-
+    
     private func doHandleEvent(messageBody: [String: Any]) {
         PostOffice.shared.handleIncomingEvent(
             eventData: messageBody,
@@ -315,16 +315,16 @@ extension FeatureWebView: WKScriptMessageHandler {
             }
         )
     }
-
+    
     private func doLog(data: [String: Any]) {
         guard let text = data["text"] as? String else {
             Log.error("WebView sent bad log message")
             return
         }
-
+        
         Log.info("Message from FeatureContainer: \(text)")
     }
-
+    
     private func doLogError(_ error: [String: Any]) {
         let message = error["message"] as? String ?? "Unknown"
         Log.error("Error from FeatureContainer: \(message)")
@@ -336,15 +336,15 @@ extension FeatureWebView: PolyNavDelegate {
     func doHandleSetTitle(title: String) {
         featureTitle.wrappedValue = title
     }
-
+    
     func doHandleSetActiveActions(actions: [String]) {
         activeActions.wrappedValue = actions
     }
-
+    
     func doHandleOpenUrl(url: String) {
         openUrlHandler(url)
     }
-
+    
     func doHandlePickFile(type: String?, completion: @escaping (ExternalFile?) -> Void) {
         pickFileHandler(type, completion)
     }
@@ -394,7 +394,7 @@ func installUserScript(
     guard let filePath =
             Bundle.main.path(forResource: filename, ofType: "js")
     else { return }
-
+    
     guard let contents = try? String(contentsOfFile: filePath) else { return }
     let userScript = WKUserScript(
         source: contents,
@@ -411,7 +411,7 @@ private func createNoInputAccessoryClass(_ target: UIView) -> AnyClass? {
     if existingClass != nil {
         return existingClass
     }
-
+    
     guard let targetClass = object_getClass(target) else { return nil }
     guard let classNameCString = className.cString(using: .ascii) else {
         return nil
