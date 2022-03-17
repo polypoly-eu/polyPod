@@ -78,7 +78,7 @@ export function rxMappingPort<In, Out>(
     f: (x: In) => Out
 ): ReceiverPort<Out> {
     return {
-        addHandler: (handler) => port.addHandler(mapHandler(handler, f)),
+        addHandler: (handler: Handler<Out>) => port.addHandler(mapHandler(handler, f)),
     };
 }
 
