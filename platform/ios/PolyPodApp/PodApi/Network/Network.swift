@@ -39,7 +39,11 @@ final class Network: NetworkProtocol {
         body: String?,
         contentType: String?,
         authToken: String?) -> Result<Data, PodApiError>  {
-            var request = URLRequest(url: URL(string: url)!)
+            let requestURL = URL(string: url)!
+            if (!(requestURL.scheme == "https")) {
+                return .failure(PodApiError.networkSecurityError(type))
+            }
+            var request = URLRequest(url: requestURL)
             request.httpMethod = type
             if (body != nil) {
                 request.httpBody = body!.data(using: .utf8)
@@ -88,10 +92,7 @@ final class Network: NetworkProtocol {
             if (responseData == nil && fetchError == nil) {
                 fetchError = PodApiError.networkError("http\(type)", responseCode: "400")
             }
-            
-            if (fetchError != nil) {
-                Log.error(fetchError!.localizedDescription)
-            }
+        
             return fetchError == nil ? .success(responseData!) : .failure(fetchError!)
     }
 }

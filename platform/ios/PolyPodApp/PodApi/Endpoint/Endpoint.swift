@@ -12,7 +12,7 @@ protocol EndpointDelegate {
 
 struct EndpointInfo: Decodable {
     let url: String
-    let auth: String
+    let auth: String?
 }
 
 final class Endpoint: EndpointProtocol {
@@ -50,7 +50,8 @@ final class Endpoint: EndpointProtocol {
             }
             let response = self.network.httpPost(url: endpointInfo.url, body: payload, contentType: contentType, authToken: endpointInfo.auth)
             switch response {
-            case .failure(_):
+            case .failure(let error):
+                Log.error(error.localizedDescription)
                 completionHandler(PodApiError.endpointError("send"))
             case .success(_):
                 completionHandler(nil)
@@ -72,7 +73,8 @@ final class Endpoint: EndpointProtocol {
             }
             let response = self.network.httpGet(url: endpointInfo.url, contentType: contentType, authToken: endpointInfo.auth)
             switch response {
-            case .failure(_):
+            case .failure(let error):
+                Log.error(error.localizedDescription)
                 completionHandler(nil, PodApiError.endpointError("get"))
             case .success(let responseData):
                 completionHandler(String(data: responseData, encoding: .utf8)!, nil)

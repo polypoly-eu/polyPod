@@ -12,6 +12,7 @@ enum PodApiError: Error {
     case failedToReadGraph(_ type: String)
     case badData(_ data: Any)
     case networkError(_ fetchType: String, responseCode: String)
+    case networkSecurityError(_ fetchType: String)
     case endpointError(_ fetchType: String)
 }
 
@@ -40,6 +41,8 @@ extension PodApiError: LocalizedError {
             return "Bad data: \(data)"
         case .networkError(let fetchType, let responseCode):
             return "network.\(fetchType) failed, Response Code: \(responseCode)"
+        case .networkSecurityError(let fetchType):
+            return "network.\(fetchType) failed, URL is not secure (https)"
         case .endpointError(let fetchType):
             return "endpoint.\(fetchType) failed"
         }
