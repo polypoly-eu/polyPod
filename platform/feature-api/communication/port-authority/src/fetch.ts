@@ -6,7 +6,7 @@
  */
 
 import { RequestPort } from "./procedure";
-import { mapSendPort } from "./port";
+import { txMappingPort } from "./port";
 import { Bubblewrap } from "@polypoly-eu/bubblewrap";
 import { rethrowPromise, Try } from "./util";
 
@@ -82,7 +82,7 @@ export function jsonFetchPort(url: string, fetch: typeof window.fetch): RequestP
         fetch
     );
 
-    return mapSendPort(rawPort, (data) => ({
+    return txMappingPort(rawPort, (data) => ({
         resolvers: data.resolvers,
         request: JSON.stringify(data.request),
     }));
@@ -114,7 +114,7 @@ export function bubblewrapFetchPort(
         fetch
     );
 
-    return mapSendPort(rawPort, (data) => ({
+    return txMappingPort(rawPort, (data) => ({
         resolvers: data.resolvers,
         request: bubblewrap.encode(data.request),
     }));

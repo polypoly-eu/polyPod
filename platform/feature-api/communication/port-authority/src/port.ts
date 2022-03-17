@@ -41,11 +41,11 @@ export interface TxPort<T> {
 }
 
 /**
- * Map operation for [[SendPort]]s. The returned port behaves identically to the original port, but applies a function
+ * Map operation for [[TxPort]]s. The returned port behaves identically to the original port, but applies a function
  * to outgoing messages _before_ they are sent on the original port.
- * @returns an instance of [[SendPort]] instantiated to the `In` class.
+ * @returns an instance of [[TxPort]] instantiated to the `In` class.
  */
-export function mapSendPort<Out, In>(port: TxPort<Out>, f: (x: In) => Out): TxPort<In> {
+export function txMappingPort<Out, In>(port: TxPort<Out>, f: (x: In) => Out): TxPort<In> {
     return {
         send: (value) => port.send(f(value)),
     };
@@ -95,7 +95,7 @@ export interface Port<In, Out> extends TxPort<Out>, ReceiverPort<In> {}
 /**
  * Maps a [[Port]] on both the incoming (covariant) and outgoing (contravariant) messages.
  *
- * See [[mapSendPort]] and [[rxMappingPort]] for the components.
+ * See [[txMappingPort]] and [[rxMappingPort]] for the components.
  */
 export function mapPort<In1, Out1, In2, Out2>(
     port: Port<In1, Out1>,
@@ -103,7 +103,7 @@ export function mapPort<In1, Out1, In2, Out2>(
     outf: (out2: Out2) => Out1
 ): Port<In2, Out2> {
     return {
-        ...mapSendPort(port, outf),
+        ...txMappingPort(port, outf),
         ...rxMappingPort(port, inf),
     };
 }

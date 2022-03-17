@@ -1,4 +1,4 @@
-import { forward, join, loopback, rxMappingPort, mapSendPort, Port } from "../port";
+import { forward, join, loopback, rxMappingPort, txMappingPort, Port } from "../port";
 import { PortSpecLifecycle } from "../specs/port";
 import { ClientRequest, liftClient, liftServer, ServerResponse } from "../procedure";
 import { ProcedureSpecLifecycle } from "../specs/procedure";
@@ -37,7 +37,7 @@ export function bubblewrapLifecycle(
         const ports = await l<Uint8Array>();
         return mapResource(ports, ([sent, recv]) => {
             return [
-                mapSendPort(sent, (data) => bubblewrap.encode(data)),
+                txMappingPort(sent, (data) => bubblewrap.encode(data)),
                 rxMappingPort(recv, (buf) => bubblewrap.decode(buf)),
             ];
         });
