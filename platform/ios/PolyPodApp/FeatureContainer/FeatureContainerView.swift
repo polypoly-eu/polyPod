@@ -41,7 +41,7 @@ struct FeatureContainerView: UIViewRepresentable {
         if !activeActions.contains(action) {
             return
         }
-
+        
         uiView.triggerAction(action: action, dispatchTime: dispatchTime)
     }
 }
@@ -51,7 +51,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
     func setFeature(feature: Feature) {
         self.feature = feature
     }
-
+    
     func mimeTypeFromExt(ext: String) -> String {
         switch ext {
         case "html":
@@ -70,7 +70,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
             return "application/octet-stream"
         }
     }
-
+    
     func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
         guard let url = urlSchemeTask.request.url,
             let scheme = url.scheme,
@@ -78,7 +78,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
             urlSchemeTask.didFailWithError(PolyNavError.protocolError(""))
                 return
         }
-
+        
         let urlString = url.absoluteString
         let index = urlString.index(urlString.startIndex, offsetBy: PolyOut.fsPrefix.count)
         let file = String(urlString[index..<urlString.endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: "/"))
@@ -109,7 +109,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
                 "Content-Length": String(fileData?.count ?? 0),
                 "Content-Type": mimeTypeFromExt(ext: ext)
             ]
-
+            
             let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "HTTP 1.0", headerFields: headers)
             
             // Fulfill the task.
@@ -120,9 +120,9 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
             urlSchemeTask.didFailWithError(error)
         }
     }
-
+    
     func webView(_ webView: WKWebView, stop urlSchemeTask: WKURLSchemeTask) {
-
+        
     }
 }
 
@@ -162,13 +162,13 @@ class FeatureWebView: WKWebView {
         )
 
         installUserScript(contentController, "polyNav", forMainFrameOnly: false)
-
+        
         installUserScript(
             contentController,
             "disableUserSelect",
             forMainFrameOnly: false
         )
-
+        
         installUserScript(
             contentController,
             "handleErrors",
@@ -324,7 +324,7 @@ extension FeatureWebView: WKScriptMessageHandler {
 
         Log.info("Message from FeatureContainer: \(text)")
     }
-
+    
     private func doLogError(_ error: [String: Any]) {
         let message = error["message"] as? String ?? "Unknown"
         Log.error("Error from FeatureContainer: \(message)")
@@ -340,11 +340,11 @@ extension FeatureWebView: PolyNavDelegate {
     func doHandleSetActiveActions(actions: [String]) {
         activeActions.wrappedValue = actions
     }
-
+    
     func doHandleOpenUrl(url: String) {
         openUrlHandler(url)
     }
-
+    
     func doHandlePickFile(type: String?, completion: @escaping (ExternalFile?) -> Void) {
         pickFileHandler(type, completion)
     }

@@ -42,7 +42,7 @@ private func createTestFile() {
         try FileManager.default.moveItem(at: zipFilePath, to: testZipFilePath)
     }
     catch (_) {
-
+    
     }
 }
 

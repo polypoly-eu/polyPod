@@ -5,7 +5,7 @@ import Combine
 final class FeatureStorage: ObservableObject {
     private let dataProtection: DataProtection
     private var dataProtectionCancellable: AnyCancellable?
-    
+
     @Published var featuresList: [Feature] = []
     
     lazy var featuresFileUrl: URL = {
