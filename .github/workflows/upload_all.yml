@@ -78,21 +78,16 @@ jobs:
           POLYPOD_ANDROID_UPLOAD_KEYSTORE_FILE: keystore.tmp
           POLYPOD_ANDROID_UPLOAD_KEYSTORE_PASS: ${{ secrets.POLYPOD_ANDROID_UPLOAD_KEYSTORE_PASS }}
           POLYPOD_ANDROID_UPLOAD_KEY_ALIAS: ${{ secrets.POLYPOD_ANDROID_UPLOAD_KEY_ALIAS }}
-      - name: Android - Set VERSION_CODE environment variable.
+
+      - name: Android - Determine release name
         if: env.POLYPOD_UPLOAD_GOOGLE_PLAY == 'true'
-        run: echo "VERSION_CODE=$( ./getPackageInfo.sh /usr/local/lib/android/sdk/build-tools/30.0.0/aapt ./app/build/outputs/apk/release/app-release.apk versionCode )" >> $GITHUB_ENV
-        working-directory: platform/android
-      - name: Android - Set VERSION_NAME environment variable.
-        if: env.POLYPOD_UPLOAD_GOOGLE_PLAY == 'true'
-        run: echo "VERSION_NAME=$( ./getPackageInfo.sh /usr/local/lib/android/sdk/build-tools/30.0.0/aapt ./app/build/outputs/apk/release/app-release.apk versionName )" >> $GITHUB_ENV
-        working-directory: platform/android
-      - name: Android - Declare some variables to help label APK Upload
-        if: env.POLYPOD_UPLOAD_GOOGLE_PLAY == 'true'
-        id: vars
-        shell: bash
         run: |
-          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-          echo "##[set-output name=sha_short;]$(echo ${GITHUB_SHA::7})"
+          version_code=$(./getPackageInfo.sh /usr/local/lib/android/sdk/build-tools/30.0.0/aapt ./app/build/outputs/apk/release/app-release.apk versionCode)
+          version_name=$(./getPackageInfo.sh /usr/local/lib/android/sdk/build-tools/30.0.0/aapt ./app/build/outputs/apk/release/app-release.apk versionName)
+          branch=${GITHUB_REF#refs/heads/}
+          sha_short=${GITHUB_SHA::7}
+          echo "##[set-output name=release_name;]$(echo $version_code ($version_name) - ${branch}@${sha_short})"
+
       - name: Android - Upload
         # uses: r0adkll/upload-google-play@9745ef904e395471bca5696056a6ce8a60d18cf8
         uses: polypoly-eu/upload-google-play@master
@@ -100,7 +95,7 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.POLYPOD_ANDROID_STORE_SERVICE_ACCOUNT_JSON }}
           packageName: coop.polypoly.polypod
-          releaseName: ${{ env.VERSION_CODE }} (${{ env.VERSION_NAME }}) - ${{ steps.vars.outputs.branch }}@${{ steps.vars.outputs.sha_short }}
+          releaseName: ${{ steps.vars.outputs.release_name }}
           releaseFiles: ./platform/android/app/build/outputs/apk/release/app-release.apk
           track: internal
           # whatsNewDirectory: distribution/whatsnew
