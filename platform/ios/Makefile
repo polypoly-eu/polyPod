@@ -54,7 +54,7 @@ export_ipa: archive
 		-exportArchive \
 		-archivePath $(archive_path) \
 		-exportPath ./build \
-		-exportOptionsPlist exportOptions.plist \
+		-exportOptionsPlist $(export_options_plist) \
 		$(xcpretty)
 
 .PHONY := upload_ipa
