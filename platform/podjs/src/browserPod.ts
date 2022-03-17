@@ -363,8 +363,19 @@ class BrowserNetwork {
                 fetchResponse.error = `Network error`;
                 resolve(fetchResponse);
             };
-
+            let urlObject; 
+            try{
+                urlObject = new URL(url)
+            }catch(e){
+                fetchResponse.error = `Bad URL`
+                resolve(fetchResponse)
+            }
+            if (urlObject?.protocol != "https"){
+                fetchResponse.error = `Not a secure protocol`
+                resolve(fetchResponse)
+            }
             request.open(type, url);
+
             if (contentType)
                 request.setRequestHeader("Content-Type", contentType);
             if (authToken)
@@ -411,12 +422,15 @@ class BrowserEndpoint implements Endpoint {
         if (!endpointURL) {
             throw endpointErrorMessage("send", "Endpoint URL not set");
         }
-        await this.endpointNetwork.httpPost(
+        const NetworkResponse = await this.endpointNetwork.httpPost(
             endpointURL,
             payload,
             contentType,
             authToken
         );
+        if (NetworkResponse.error){
+            throw endpointErrorMessage("send", NetworkResponse.error)
+        }
     }
     async get(
         endpointId: string,
