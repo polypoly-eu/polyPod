@@ -2,7 +2,7 @@ import { nodeLoopbackLifecycle } from "./_common";
 import { procedureSpec, ProcedureSpecLifecycle } from "../../specs/procedure";
 import { procedureLiftedLifecycle } from "../_lifecycles";
 import { bubblewrapFetchPort, jsonFetchPort } from "../../fetch";
-import { bubblewrapMiddlewarePort, jsonMiddlewarePort } from "../../node";
+import { bubblewrapMiddlewarePort, jsonMiddlewarePort } from "../../middleware";
 import { createServer, RequestListener, Server } from "http";
 import { AddressInfo } from "net";
 import { Bubblewrap } from "@polypoly-eu/bubblewrap";
