@@ -24,7 +24,6 @@ export default [
         external: [
             "@polypoly-eu/bubblewrap",
             "@polypoly-eu/port-authority",
-            "@polypoly-eu/port-authority/dist/node",
             "@polypoly-eu/port-authority/dist/middleware",
             "@polypoly-eu/postoffice",
             "@polypoly-eu/rdf"
@@ -48,7 +47,6 @@ export default [
             })
         ],
         external: [
-            "@polypoly-eu/port-authority/dist/node",
             "@polypoly-eu/port-authority/dist/middleware"
         ]
     }
