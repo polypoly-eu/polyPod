@@ -32,11 +32,11 @@ export function mapHandler<T, U>(handler: Handler<T>, f: (x: U) => T): Handler<U
  * may be applied to these values. This happens because – in general – ports may be used to communicate across (logical
  * or physical) process boundaries.
  *
- * The [[SendPort.send]] method is expected to always return successfully without throwing an error.
+ * The [[TxPort.send]] method is expected to always return successfully without throwing an error.
  *
  * Implementations of this may be synchronous, for example the port returned by [[loopback]].
  */
-export interface SendPort<Out> {
+export interface TxPort<Out> {
     send(value: Out): void;
 }
 
@@ -45,7 +45,7 @@ export interface SendPort<Out> {
  * to outgoing messages _before_ they are sent on the original port.
  * @returns an instance of [[SendPort]] instantiated to the `In` class.
  */
-export function mapSendPort<Out, In>(port: SendPort<Out>, f: (x: In) => Out): SendPort<In> {
+export function mapSendPort<Out, In>(port: TxPort<Out>, f: (x: In) => Out): TxPort<In> {
     return {
         send: (value) => port.send(f(value)),
     };
@@ -90,7 +90,7 @@ export function rxMappingPort<In, Out>(
  * @typeParam Out type of outgoing messages
  * @typeParam In type of incoming messages
  */
-export interface Port<In, Out> extends SendPort<Out>, ReceiverPort<In> {}
+export interface Port<In, Out> extends TxPort<Out>, ReceiverPort<In> {}
 
 /**
  * Maps a [[Port]] on both the incoming (covariant) and outgoing (contravariant) messages.
@@ -114,7 +114,7 @@ export function mapPort<In1, Out1, In2, Out2>(
  * @param from port from which messages are forwarded
  * @param to port to which messages are forwarded
  */
-export function forward<InOut>(from: ReceiverPort<InOut>, to: SendPort<InOut>): void {
+export function forward<InOut>(from: ReceiverPort<InOut>, to: TxPort<InOut>): void {
     from.addHandler((t) => to.send(t));
 }
 
@@ -125,7 +125,7 @@ export function forward<InOut>(from: ReceiverPort<InOut>, to: SendPort<InOut>): 
  * Messages sent through the [[SendPort]] are immediately handled by the handlers registered with the [[ReceiverPort]].
  * Communication is fully synchronous.
  */
-export function loopback<InOut>(): [SendPort<InOut>, ReceiverPort<InOut>] {
+export function loopback<InOut>(): [TxPort<InOut>, ReceiverPort<InOut>] {
     const handlers: Handler<InOut>[] = [];
     return [
         {
@@ -142,7 +142,7 @@ export function loopback<InOut>(): [SendPort<InOut>, ReceiverPort<InOut>] {
  *
  * The resulting port shares the implementation of the underlying half ports.
  */
-export function join<In, Out>(send: SendPort<Out>, receive: ReceiverPort<In>): Port<In, Out> {
+export function join<In, Out>(send: TxPort<Out>, receive: ReceiverPort<In>): Port<In, Out> {
     return {
         send: (out: Out) => send.send(out),
         addHandler: (handler: Handler<In>) => receive.addHandler(handler),
@@ -153,7 +153,7 @@ export function join<In, Out>(send: SendPort<Out>, receive: ReceiverPort<In>): P
  * Registers a one-off handler to a [[ReceiverPort]] that listens for the next incoming message, returning a promise
  * that is resolved upon receiving that message.
  *
- * This function is the dual to [[SendPort.send]] because it allows to observe exactly one message.
+ * This function is the dual to [[TxPort.send]] because it allows to observe exactly one message.
  */
 export function receiveSingle<In>(port: ReceiverPort<In>): Promise<In> {
     return new Promise((resolve) => {

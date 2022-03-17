@@ -12,8 +12,8 @@ import { Handler, mapPort, Port, ReceiverPort } from "./port";
  * The type of outgoing messages is unconstrained. Incoming messages are `MessageEvent`s; the raw value can be accessed
  * using the `data` field. It is not possible to transfer objects with this [[Port]].
  *
- * The [[SendPort.send]] and [[ReceiverPort.addHandler]] methods delegate directly to the underlying Node implementation.
- * For typed operation, it is recommended to use [[mapPort]] with type coercions.
+ * The [[TxPort.send]] and [[ReceiverPort.addHandler]] methods delegate directly to the underlying Node implementation.
+ * For typed operation, it is recommended to use [[mapPort]] with type coercions.q
  *
  * Note that Browser `MessagePort`s use the structured clone algorithm; that is, an object sent on the port will be
  * received as a different object.
