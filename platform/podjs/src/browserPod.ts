@@ -363,12 +363,10 @@ class BrowserNetwork {
             try {
                 urlObject = new URL(url);
             } catch (e) {
-                console.log("actually doing it");
                 fetchResponse.error = `Bad URL`;
                 resolve(fetchResponse);
                 return;
             }
-            console.log("should not be doing it");
             if (urlObject?.protocol != "https") {
                 fetchResponse.error = `Not a secure protocol`;
                 resolve(fetchResponse);
