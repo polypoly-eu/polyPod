@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.DataOutputStream
 import java.net.HttpURLConnection
+import java.net.MalformedURLException
 import java.net.URL
 import java.nio.charset.StandardCharsets
 
@@ -85,7 +86,13 @@ open class Network(val context: Context) {
         authToken: String?,
     ): HttpURLConnection? {
         var connection: HttpURLConnection
-        val requestURL = URL(url)
+        var requestURL: URL
+        try {
+            requestURL = URL(url)
+        } catch (e: MalformedURLException) {
+            logger.error(e.toString())
+            return null
+        }
         if (requestURL.protocol != "https") {
             logger.error("network.$type failed, URL is not secure (https)")
             return null
