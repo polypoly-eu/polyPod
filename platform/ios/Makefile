@@ -16,18 +16,18 @@ else
 xcodebuild := xcodebuild
 endif
 
-.PHONY := build
+.PHONY: build
 lockxcodeversion:
 	sudo xcode-select -switch /Applications/Xcode_13.2.1.app
 
-.PHONY := build
+.PHONY: build
 build:
 	$(xcodebuild) clean build \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
 		$(xcpretty)
 
-.PHONY := test
+.PHONY: test
 test:
 	$(xcodebuild) clean test \
 		-project $(project_path) \
@@ -35,7 +35,7 @@ test:
 		-destination "platform=iOS Simulator,name=iPhone 11,OS=${destination}" \
 		$(xcpretty)
 
-.PHONY := archive
+.PHONY: archive
 archive:
 	rm -rf $(archive_path)
 	$(xcodebuild) clean archive \
@@ -44,7 +44,7 @@ archive:
 		-archivePath $(archive_path) \
 		$(xcpretty)
 
-.PHONY := export_ipa
+.PHONY: export_ipa
 export_ipa: archive
 	$(xcodebuild) \
 		-exportArchive \
@@ -53,7 +53,7 @@ export_ipa: archive
 		-exportOptionsPlist $(export_options_plist) \
 		$(xcpretty)
 
-.PHONY := upload_ipa
+.PHONY: upload_ipa
 upload_ipa: export_ipa
 	# Validate the app before uploading, to catch any possible issues.
 	xcrun altool --validate-app \
@@ -68,7 +68,7 @@ upload_ipa: export_ipa
 		--apiKey $(appstore_api_key_id) \
 		--apiIssuer $(appstore_api_issuer_id)
 
-.PHONY := install_distribution_prerequisites
+.PHONY: install_distribution_prerequisites
 install_distribution_prerequisites:
 	# 1. Install Distribution certificate. xcodebuild will automatically
 	#    extract the app certificate from the keychain.
