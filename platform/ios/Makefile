@@ -72,7 +72,7 @@ upload_ipa: export_ipa
 install_distribution_prerequisites:
 	# 1. Install Distribution certificate. xcodebuild will automatically
 	#    extract the app certificate from the keychain.
-	@echo $(POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64) \
+	@printf "$$POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64" \
 		| base64 --decode > Certificate.p12
 	security create-keychain -p "" build.keychain
 	security import Certificate.p12 \
@@ -88,12 +88,12 @@ install_distribution_prerequisites:
 	#    automatically extract the profile from the Provisioning Profiles
 	#    directory
 	mkdir -p $(provisioning_profile_dir)
-	@echo $(POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64) \
+	@printf "$$POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64" \
 		| base64 --decode > \
 		$(provisioning_profile_dir)/$(provisioning_profile_file)
 
 	# 3. App Store Connect API Key. altool will automatically use the private
 	#    key from the private_keys folder.
 	mkdir -p ~/private_keys
-	@echo $(POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64) \
+	@printf "$$POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64" \
 		| base64 --decode > ~/private_keys/AuthKey_$(appstore_api_key_id).p8
