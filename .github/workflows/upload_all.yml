@@ -81,6 +81,7 @@ jobs:
 
       - name: Android - Determine release name
         if: env.POLYPOD_UPLOAD_GOOGLE_PLAY == 'true'
+        working-directory: platform/android
         run: |
           version_code=$(./getPackageInfo.sh /usr/local/lib/android/sdk/build-tools/30.0.0/aapt ./app/build/outputs/apk/release/app-release.apk versionCode)
           version_name=$(./getPackageInfo.sh /usr/local/lib/android/sdk/build-tools/30.0.0/aapt ./app/build/outputs/apk/release/app-release.apk versionName)
