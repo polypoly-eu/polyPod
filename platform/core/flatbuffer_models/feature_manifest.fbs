@@ -1,0 +1,18 @@
+// feature_manifest.fbs
+namespace feature_manifest;
+
+table Link {
+    name:string;
+    url:string;
+}
+
+table FeatureManifest {
+    name:string;
+    author:string;
+    version:string;
+    description:string;
+    thumbnail:string;
+    thumbnail_color:string;
+    primary_color:string;
+    links:[Link];
+}

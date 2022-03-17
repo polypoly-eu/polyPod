@@ -1,9 +1,9 @@
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
     ExternalFile,
+    Endpoint,
     Info,
     Matcher,
-    Network,
     Pod,
     PolyIn,
     PolyOut,
@@ -13,6 +13,8 @@ import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
+//@ts-ignore json import via rollup -> not supported by ts
+import endpoints from "../../../../polyPod-config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
 
 const NAV_FRAME_ID = "polyNavFrame";
@@ -309,40 +311,136 @@ class PodJsInfo implements Info {
     }
 }
 
-class BrowserNetwork implements Network {
+interface NetworkResponse {
+    payload?: string;
+    error?: string;
+}
+
+class BrowserNetwork {
     async httpPost(
         url: string,
         body: string,
         contentType?: string,
-        authorization?: string
-    ): Promise<string | undefined> {
+        authToken?: string
+    ): Promise<NetworkResponse> {
+        return await this.httpFetchRequest(
+            "Post",
+            url,
+            body,
+            contentType,
+            authToken
+        );
+    }
+    async httpGet(
+        url: string,
+        contentType?: string,
+        authToken?: string
+    ): Promise<NetworkResponse> {
+        return await this.httpFetchRequest("GET", url, contentType, authToken);
+    }
+    private async httpFetchRequest(
+        type: string,
+        url: string,
+        body?: string,
+        contentType?: string,
+        authToken?: string
+    ): Promise<NetworkResponse> {
         return new Promise((resolve) => {
             const request = new XMLHttpRequest();
-
+            const fetchResponse = {} as NetworkResponse;
             request.onreadystatechange = function () {
                 if (request.readyState !== XMLHttpRequest.DONE) return;
                 const status = request.status;
                 if (status < 200 || status > 299) {
-                    resolve(`Unexpected response status: ${status}`);
-                    return;
+                    fetchResponse.error = `Unexpected response: ${request.responseText}`;
+                    resolve(fetchResponse);
                 }
-                resolve(undefined);
+                fetchResponse.payload = request.responseText;
+                resolve(fetchResponse);
             };
 
             request.onerror = function () {
-                resolve("Network error");
+                fetchResponse.error = `Network error`;
+                resolve(fetchResponse);
             };
 
-            request.open("POST", url);
+            request.open(type, url);
             if (contentType)
                 request.setRequestHeader("Content-Type", contentType);
-            if (authorization)
+            if (authToken)
                 request.setRequestHeader(
                     "Authorization",
-                    "Basic " + btoa(authorization)
+                    "Basic " + btoa(authToken)
                 );
+            // Request.send must be executed, so this works even if body is null
             request.send(body);
         });
+    }
+}
+
+function getEndpoint(endpointId: string): string | null {
+    return endpoints[endpointId]?.url || null;
+}
+
+function approveEndpointFetch(
+    endpointId: string,
+    featureIdToken: string
+): boolean {
+    return confirm(
+        `${featureIdToken} wants to contact the endpoint: ${endpointId}. \n Proceed?`
+    );
+}
+
+function endpointErrorMessage(fetchType: string, errorlog: string): string {
+    console.error(errorlog);
+    return `Endpoint failed at : ${fetchType}`;
+}
+
+class BrowserEndpoint implements Endpoint {
+    endpointNetwork = new BrowserNetwork();
+    async send(
+        endpointId: string,
+        featureIdToken: string,
+        payload: string,
+        contentType?: string,
+        authToken?: string
+    ): Promise<void> {
+        if (!approveEndpointFetch(endpointId, featureIdToken))
+            throw endpointErrorMessage("send", "User denied request");
+        const endpointURL = getEndpoint(endpointId);
+        if (!endpointURL) {
+            throw endpointErrorMessage("send", "Endpoint URL not set");
+        }
+        await this.endpointNetwork.httpPost(
+            endpointURL,
+            payload,
+            contentType,
+            authToken
+        );
+    }
+    async get(
+        endpointId: string,
+        featureIdToken: string,
+        contentType?: string,
+        authToken?: string
+    ): Promise<string> {
+        if (!approveEndpointFetch(endpointId, featureIdToken))
+            throw endpointErrorMessage("get", "User denied request");
+        const endpointURL = getEndpoint(endpointId);
+        if (!endpointURL)
+            throw endpointErrorMessage("get", "Endpoint URL not set");
+        const NetworkResponse = await this.endpointNetwork.httpGet(
+            endpointURL,
+            contentType,
+            authToken
+        );
+        if (NetworkResponse.error)
+            throw endpointErrorMessage("get", NetworkResponse.error);
+        if (NetworkResponse.payload) {
+            return NetworkResponse.payload;
+        } else {
+            throw endpointErrorMessage("get", "Endpoint returned null");
+        }
     }
 }
 
@@ -532,7 +630,7 @@ export class BrowserPod implements Pod {
     public readonly polyOut = new LocalStoragePolyOut();
     public readonly polyNav = new BrowserPolyNav();
     public readonly info = new PodJsInfo();
-    public readonly network = new BrowserNetwork();
+    public readonly endpoint = new BrowserEndpoint();
 
     constructor() {
         window.addEventListener("load", async () => {

@@ -62,8 +62,8 @@ class PostOffice {
             handleInfo(method: method, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
-        case "network":
-            handleNetwork(method: method, args: args, completionHandler: { response, error in
+        case "endpoint":
+            handleEndpoint(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
             })
         default:
@@ -107,7 +107,7 @@ extension PostOffice {
             Log.error("PolyIn method unknown: \(method)")
         }
     }
-
+    
     private func convertArgs(args: [Any]) throws -> [ExtendedData] {
         var extendedDataSet: [ExtendedData] = []
         
@@ -139,7 +139,7 @@ extension PostOffice {
             completionHandler(nil, createErrorResponse(#function, error))
             return
         }
-
+        
         PodApi.shared.polyIn.addQuads(quads: extendedDataSet) { error in
             if let error = error {
                 completionHandler(nil, createErrorResponse(#function, error))
@@ -211,7 +211,7 @@ extension PostOffice {
             }
         }
     }
-
+    
     private func extractMatcher(_ matcher: Any) -> ExtendedData? {
         // TODO: Originally, the code expected the matcher to already be of type
         //       ExtendedData. However, with the use cases so far - an empty
@@ -391,13 +391,13 @@ extension PostOffice {
         PodApi.shared.polyNav.setTitle(title: title) { res, error in
         }
     }
-
+    
     private func handlePolyNavSetActiveAction(args: [Any]) {
         let actions = args[0] as! [String]
         PodApi.shared.polyNav.setActiveActions(actions: actions) { res, error in
         }
     }
-
+    
     private func handlePolyNavOpenUrl(args: [Any]) {
         let target = args[0] as! String
         PodApi.shared.polyNav.openUrl(target: target) { res, error in
@@ -434,21 +434,45 @@ extension PostOffice {
 }
 
 extension PostOffice {
-    private func handleNetwork(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+    private func handleEndpoint(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void){
         switch method {
-        case "httpPost":
-            handleNetworkHttpPost(args: args, completionHandler: completionHandler)
-        default:
-            Log.error("PolyNav method unknown: \(method)")
+        case "send":
+            handleEndpointSend(args: args, completionHandler: completionHandler)
+        case "get":
+            handleEndpointGet(args: args, completionHandler: completionHandler)
+        default: Log.error("Endpoint method unknown: \(method)")
         }
     }
     
-    private func handleNetworkHttpPost(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
-        let url = args[0] as! String
-        let body = args[1] as! String
+    private func handleEndpointSend(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        guard let endpointId = args[0] as? String else {
+            completionHandler(nil, createErrorResponse(#function, PodApiError.badArgumentType(args[0], type: "String")))
+            return
+        }
+        guard let payload = args[1] as? String else {
+            completionHandler(nil, createErrorResponse(#function, PodApiError.badArgumentType(args[1], type: "String")))
+            return
+        }
         let contentType = args[2] as? String
-        let authorization = args[3] as? String
-        let error = PodApi.shared.network.httpPost(url: url, body: body, contentType: contentType, authorization: authorization)
-        completionHandler(error != nil ? .string(error!) : .nil, nil)
+        let authToken = args[3] as? String
+        PodApi.shared.endpoint.send(endpointId: endpointId, payload: payload, contentType: contentType, authToken: authToken) { error in
+            completionHandler(.nil, error == nil ? nil : createErrorResponse(#function, error!))
+        }
+    }
+    
+    private func handleEndpointGet(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+        guard let endpointId = args[0] as? String else {
+            completionHandler(nil, createErrorResponse(#function, PodApiError.badArgumentType(args[0], type: "String")))
+            return
+        }
+        let contentType = args[1] as? String
+        let authToken = args[2] as? String
+        PodApi.shared.endpoint.get(endpointId: endpointId, contentType: contentType, authToken: authToken) { data, error in
+            if (error == nil) {
+                completionHandler(data.map(MessagePackValue.string), nil)
+                return
+            }
+            completionHandler(nil, createErrorResponse(#function, error!))
+        }
     }
 }

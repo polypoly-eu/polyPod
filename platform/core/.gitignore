@@ -1,1 +1,3 @@
 /target
+/src/flatbuffers_generated
+/flatbuffers
