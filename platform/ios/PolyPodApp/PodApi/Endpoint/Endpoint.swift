@@ -16,18 +16,18 @@ struct EndpointInfo: Decodable {
 }
 
 final class Endpoint: EndpointProtocol {
-
+    
     init() {
         delegate = nil
     }
-
+    
     var delegate: EndpointDelegate?
     let network: Network = Network()
-
+    
     func approveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) -> Void {
         delegate?.doHandleApproveEndpointFetch(endpointId: endpointId, completion: completion)
     }
-
+    
     private func endpointInfoFromId(endpointId: String) -> EndpointInfo? {
         let endpointsPath = Bundle.main.bundleURL
             .appendingPathComponent("config/endpoints.json")
@@ -35,7 +35,7 @@ final class Endpoint: EndpointProtocol {
         guard let endpointsJson = (try? JSONDecoder().decode(Dictionary<String, EndpointInfo>.self, from: endpointsJsonData)) else { return nil }
         return endpointsJson[endpointId]
     }
-
+    
     func send(endpointId: String, payload: String, contentType: String?, authToken: String?, completionHandler: @escaping (Error?) -> Void) -> Void {
         approveEndpointFetch(endpointId: endpointId) { approved in
             guard approved else {
@@ -57,7 +57,7 @@ final class Endpoint: EndpointProtocol {
             }
         }
     }
-
+    
     func get(endpointId: String, contentType: String?, authToken: String?, completionHandler: @escaping (String?, Error?) -> Void) -> Void {
         approveEndpointFetch(endpointId: endpointId) { approved in
             guard approved else {
