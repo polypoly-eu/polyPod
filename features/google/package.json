@@ -1,0 +1,29 @@
+{
+  "name": "google-feature",
+  "scripts": {
+    "eslint": "eslint src --ext .js --ext .jsx",
+    "lint": "npm run eslint",
+    "build": "rollup -c",
+    "build-downstream": "../../build.js --start google-feature",
+    "watch": "rollup --watch -c",
+    "serve": "rollup --watch --configServe -c",
+    "doc": "jsdoc -r src/ -d ./docs"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.14.5",
+    "@polypoly-eu/pod-api": "file:../../platform/feature-api/api/pod-api",
+    "@polypoly-eu/podjs": "file:../../platform/podjs",
+    "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
+    "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
+    "rollup-plugin-serve": "^1.1.0"
+  },
+  "private": true,
+  "dependencies": {
+    "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
+    "d3": "^7.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0"
+  },
+  "type": "module"
+}
