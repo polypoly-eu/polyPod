@@ -1,52 +1,54 @@
 /**
- * This module defines the types used for specifying endpoints.
+ * This module defines the types used for specifying backend endpoints.
  *
- * An _endpoint_ is an API that can be implemented by a server and called by a
- * client. Endpoints are structured as objects with methods; methods may return
+ * A _backend endpoint_ is an API that can be implemented by a server and called by a
+ * client. Backend endpoints are structured as objects with methods; methods may return
  * either values or a nested endpoint.
  *
  * An _endpoint specification_ is a mere type that is never used directly. See
- * [[EndpointSpec]] for details.
+ * [[BackendEndpointSpec]] for details.
  *
  * @packageDocumentation
  */
 
 /**
- * Interface denoting a value endpoint of type `T`. This interface is purely
+ * Interface denoting a value backend endpoint of type `T`. This interface is purely
  * virtual and no instances are generated.
  */
-export interface ValueEndpointSpec<T> {
+export interface ValueBackendEndpointSpec<T> {
     endpointType: "value";
     value: T;
 }
 
 /**
- * Interface denoting a method endpoint of type `T`. This interface is purely
+ * Interface denoting a method backend endpoint of type `T`. This interface is purely
  * virtual and no instances are generated.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface ObjectEndpointSpec<T extends Record<string, (...args: any[]) => EndpointSpec>> {
+export interface ObjectBackendEndpointSpec<
+    T extends Record<string, (...args: any[]) => BackendEndpointSpec>
+> {
     endpointType: "object";
     methods: T;
 }
 
 /**
- * An endpoint specification describes either a value ([[ValueEndpointSpec]]) or
- * an object ([[ObjectEndpointSpec]]). Values have no further structure and are
+ * A backend endpoint specification describes either a value ([[ValueBackendEndpointSpec]]) or
+ * an object ([[ObjectBackendEndpointSpec]]). Values have no further structure and are
  * considered to be a return value representing the final response to the
  * client. Objects have methods that can be called by a client.
  *
- * An endpoint call is structured as `endpoint.f(...).g(...)`; i.e. the endpoint
+ * A backend endpoint call is structured as `endpoint.f(...).g(...)`; i.e. the backend endpoint
  * object followed by a non-empty sequence of method calls with parameters. The
  * result of this chain is the _value_ that is returned to the client.
  *
  * Example:
  *
  * ```
- * type SimpleEndpoint = ObjectEndpointSpec<{
- *     test1(param1: string): ValueEndpointSpec<number>;
- *     test2(param1: string): ValueEndpointSpec<number>;
- *     test3(parama: boolean, ...paramb: number[]): ValueEndpointSpec<string>;
+ * type SimpleEndpoint = ObjectBackendEndpointSpec<{
+ *     test1(param1: string): ValueBackendEndpointSpec<number>;
+ *     test2(param1: string): ValueBackendEndpointSpec<number>;
+ *     test3(parama: boolean, ...paramb: number[]): ValueBackendEndpointSpec<string>;
  * }>;
  * ```
  *
@@ -58,7 +60,7 @@ export interface ObjectEndpointSpec<T extends Record<string, (...args: any[]) =>
  * server and client representation based on the above specification.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type EndpointSpec = ValueEndpointSpec<any> | ObjectEndpointSpec<any>;
+export type BackendEndpointSpec = ValueBackendEndpointSpec<any> | ObjectBackendEndpointSpec<any>;
 
 /**
  * Wraps a type `T` into `Promise`, unless `T` is already a `Promise`.
@@ -72,26 +74,26 @@ export type ForcePromise<T> = [T] extends [Promise<any>] ? T : Promise<T>;
 export type MaybePromise<T> = T | ForcePromise<T>;
 
 /**
- * Computes the type of the server-side implementation of an endpoint
+ * Computes the type of the server-side implementation of an backend endpoint
  * specification.
  *
  * This type alias recursively traverses the specification.
- * [[ObjectEndpointSpec]]s are preserved as objects with methods. The argument
+ * [[ObjectBackendEndpointSpec]]s are preserved as objects with methods. The argument
  * types of those methods are unchanged. The return types are changed to
- * [[MaybePromise]]. [[ValueEndpointSpec]]s are similarly changed to
+ * [[MaybePromise]]. [[ValueBackendEndpointSpec]]s are similarly changed to
  * [[MaybePromise]].
  *
  * Example:
  *
  * ```
- * type Endpoint = ObjectEndpointSpec<{
- *     test(param: string): ValueEndpointSpec<number>;
- *     nested(param: number): ObjectEndpointSpec<{
- *         foo(parama: boolean, ...paramb: number[]): ValueEndpointSpec<Promise<string>>;
+ * type BackendEndpoint = ObjectBackendEndpointSpec<{
+ *     test(param: string): ValueBackendEndpointSpec<number>;
+ *     nested(param: number): ObjectBackendEndpointSpec<{
+ *         foo(parama: boolean, ...paramb: number[]): ValueBackendEndpointSpec<Promise<string>>;
  *     }>;
  * }>;
  *
- * ServerOf<Endpoint> ≡ {
+ * ServerOf<BackendEndpoint> ≡ {
  *     test(param: string): MaybePromise<number>;
  *     nested(param: number): MaybePromise<{
  *         foo(parama: boolean, ...paramb: number[]): Promise<string>;
@@ -103,12 +105,14 @@ export type MaybePromise<T> = T | ForcePromise<T>;
  * `Promise<string>`, whereas the outer method `test` may return `number` or
  * `Promise<number>`.
  */
-export type ServerOf<Spec extends EndpointSpec> = Spec extends ValueEndpointSpec<infer T>
+export type ServerOf<Spec extends BackendEndpointSpec> = Spec extends ValueBackendEndpointSpec<
+    infer T
+>
     ? MaybePromise<T>
-    : Spec extends ObjectEndpointSpec<infer T>
+    : Spec extends ObjectBackendEndpointSpec<infer T>
     ? {
           [P in keyof T]: T[P] extends (...args: infer Args) => infer Return
-              ? Return extends EndpointSpec
+              ? Return extends BackendEndpointSpec
                   ? (...args: Args) => MaybePromise<ServerOf<Return>>
                   : never
               : never;
@@ -120,7 +124,7 @@ export type ServerOf<Spec extends EndpointSpec> = Spec extends ValueEndpointSpec
  * arguments and returning a `Promise` of `T` (unless `T` is already a
  * `Promise`).
  *
- * Given a client for an endpoint specification, a call chain can be expressed
+ * Given a client for an backend endpoint specification, a call chain can be expressed
  * as follows:
  *
  * ```
@@ -131,21 +135,21 @@ export type ServerOf<Spec extends EndpointSpec> = Spec extends ValueEndpointSpec
 export type Callable<T> = () => ForcePromise<T>;
 
 /**
- * Computes the type of the client-side proxy object for an endpoint
+ * Computes the type of the client-side proxy object for an backend endpoint
  * specification.
  *
  * This type alias recursively traverses the specification. The algorithm is
  * best illustrated with an example:
  *
  * ```
- * type Endpoint = ObjectEndpointSpec<{
- *     test(param: string): ValueEndpointSpec<number>;
- *     nested(param: number): ObjectEndpointSpec<{
- *         foo(parama: boolean, ...paramb: number[]): ValueEndpointSpec<Promise<string>>;
+ * type BackendEndpoint = ObjectBackendEndpointSpec<{
+ *     test(param: string): ValueBackendEndpointSpec<number>;
+ *     nested(param: number): ObjectBackendEndpointSpec<{
+ *         foo(parama: boolean, ...paramb: number[]): ValueBackendEndpointSpec<Promise<string>>;
  *     }>;
  * }>;
  *
- * ClientOf<Endpoint> ≡ {
+ * ClientOf<BackendEndpoint> ≡ {
  *     test(param: string): Callable<T>;
  *     nested(param: number): {
  *         foo(parama: boolean, ...paramb: number[]): Callable<string>;
@@ -161,12 +165,14 @@ export type Callable<T> = () => ForcePromise<T>;
  * transmitted through a protocol to a server implementation that closely
  * mirrors the shape of the proxy.
  */
-export type ClientOf<Spec extends EndpointSpec> = Spec extends ValueEndpointSpec<infer T>
+export type ClientOf<Spec extends BackendEndpointSpec> = Spec extends ValueBackendEndpointSpec<
+    infer T
+>
     ? Callable<T>
-    : Spec extends ObjectEndpointSpec<infer T>
+    : Spec extends ObjectBackendEndpointSpec<infer T>
     ? {
           [P in keyof T]: T[P] extends (...args: infer Args) => infer Return
-              ? Return extends EndpointSpec
+              ? Return extends BackendEndpointSpec
                   ? (...args: Args) => ClientOf<Return>
                   : never
               : never;

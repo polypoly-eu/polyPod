@@ -1,4 +1,4 @@
-import { ClientOf, ObjectEndpointSpec, ServerOf, ValueEndpointSpec } from "../types";
+import { ClientOf, ObjectBackendEndpointSpec, ServerOf, ValueBackendEndpointSpec } from "../types";
 
 // compilation tests
 
@@ -7,17 +7,17 @@ function check<T>(t: T): void {
     /* intentionally left blank */
 }
 
-declare const client1: ClientOf<ValueEndpointSpec<number>>;
-declare const client2: ClientOf<ValueEndpointSpec<Promise<number>>>;
+declare const client1: ClientOf<ValueBackendEndpointSpec<number>>;
+declare const client2: ClientOf<ValueBackendEndpointSpec<Promise<number>>>;
 declare const client3: ClientOf<
-    ObjectEndpointSpec<{
-        test(): ValueEndpointSpec<number>;
+    ObjectBackendEndpointSpec<{
+        test(): ValueBackendEndpointSpec<number>;
     }>
 >;
 declare const client4: ClientOf<
-    ObjectEndpointSpec<{
-        test(): ObjectEndpointSpec<{
-            test2(): ValueEndpointSpec<number>;
+    ObjectBackendEndpointSpec<{
+        test(): ObjectBackendEndpointSpec<{
+            test2(): ValueBackendEndpointSpec<number>;
         }>;
     }>
 >;
@@ -49,28 +49,28 @@ it("Should work with complicated objects", () => {
 
             check<Promise<number>>(client2());
 
-            check<ClientOf<ValueEndpointSpec<number>>>(client3.test());
+            check<ClientOf<ValueBackendEndpointSpec<number>>>(client3.test());
             check<Promise<number>>(client3.test()());
 
             check<Promise<number>>(client4.test().test2()());
 
-            check<ServerOf<ValueEndpointSpec<number>>>(server1);
+            check<ServerOf<ValueBackendEndpointSpec<number>>>(server1);
 
-            check<ServerOf<ValueEndpointSpec<number>>>(server2);
+            check<ServerOf<ValueBackendEndpointSpec<number>>>(server2);
 
             check<
                 ServerOf<
-                    ObjectEndpointSpec<{
-                        test(): ValueEndpointSpec<number>;
+                    ObjectBackendEndpointSpec<{
+                        test(): ValueBackendEndpointSpec<number>;
                     }>
                 >
             >(server3);
 
             check<
                 ServerOf<
-                    ObjectEndpointSpec<{
-                        test(): ObjectEndpointSpec<{
-                            test2(): ValueEndpointSpec<number>;
+                    ObjectBackendEndpointSpec<{
+                        test(): ObjectBackendEndpointSpec<{
+                            test2(): ValueBackendEndpointSpec<number>;
                         }>;
                     }>
                 >
@@ -78,9 +78,9 @@ it("Should work with complicated objects", () => {
 
             check<
                 ServerOf<
-                    ObjectEndpointSpec<{
-                        test(): ObjectEndpointSpec<{
-                            test2(): ValueEndpointSpec<number>;
+                    ObjectBackendEndpointSpec<{
+                        test(): ObjectBackendEndpointSpec<{
+                            test2(): ValueBackendEndpointSpec<number>;
                         }>;
                     }>
                 >
@@ -88,9 +88,9 @@ it("Should work with complicated objects", () => {
 
             check<
                 ServerOf<
-                    ObjectEndpointSpec<{
-                        test(): ObjectEndpointSpec<{
-                            test2(): ValueEndpointSpec<number>;
+                    ObjectBackendEndpointSpec<{
+                        test(): ObjectBackendEndpointSpec<{
+                            test2(): ValueBackendEndpointSpec<number>;
                         }>;
                     }>
                 >
