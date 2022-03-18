@@ -5,5 +5,6 @@ export default {
     },
     demoTest: {
         url: "",
+        allowInsecure: true,
     },
 };

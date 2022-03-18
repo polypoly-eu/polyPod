@@ -12,6 +12,7 @@ const endpointsWithFallback = Object.fromEntries(
         {
             url: endpoint.url || fallbackURL,
             auth: endpoint.auth || fallbackAuth,
+            allowInsecure: endpoint.allowInsecure,
         },
     ])
 );
