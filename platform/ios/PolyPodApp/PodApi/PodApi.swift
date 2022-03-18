@@ -19,7 +19,7 @@ class PodApi {
         return Info()
     }()
     
-    lazy var network: Network = {
-        return Network()
+    lazy var endpoint: Endpoint = {
+        return Endpoint()
     }()
 }

@@ -5,58 +5,93 @@ protocol NetworkProtocol {
         url: String,
         body: String,
         contentType: String?,
-        authorization: String?
-    ) -> String?
+        authToken: String?
+    ) -> Result<Data, PodApiError>
+    
+    func httpGet(
+        url: String,
+        contentType: String?,
+        authToken: String?
+    ) -> Result<Data, PodApiError>
 }
 
-class Network: NetworkProtocol {
+final class Network: NetworkProtocol {
     func httpPost(
         url: String,
         body: String,
         contentType: String?,
-        authorization: String?
-    ) -> String? {
-        var request = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "POST"
-        request.httpBody = body.data(using: .utf8)
-        
-        if let contentType = contentType {
-            request.setValue(contentType, forHTTPHeaderField: "Content-Type")
-        }
-        
-        if let authorization = authorization {
-            let encoded = Data(authorization.utf8).base64EncodedString()
-            request.setValue(
-                "Basic \(encoded)",
-                forHTTPHeaderField: "Authorization"
-            )
-        }
-        
-        let semaphore = DispatchSemaphore(value: 0)
-        var errorMessage: String? = nil
-        let task = URLSession.shared.dataTask(with: request) {
-            data, response, error in
-            guard let response = response as? HTTPURLResponse,
-                  error == nil else {
-                errorMessage = error?.localizedDescription ?? "Unknown error"
-                semaphore.signal()
-                return
+        authToken: String?
+    ) -> Result<Data, PodApiError> {
+        return httpFetchCall(type: "POST", url: url, body: body, contentType: contentType, authToken: authToken)
+    }
+    
+    func httpGet(
+        url: String,
+        contentType: String?,
+        authToken: String?
+    ) -> Result<Data, PodApiError> {
+        return httpFetchCall(type: "GET", url: url, body: nil, contentType: contentType, authToken: authToken)
+    }
+    
+    func httpFetchCall(
+        type: String,
+        url: String,
+        body: String?,
+        contentType: String?,
+        authToken: String?) -> Result<Data, PodApiError>  {
+            var request = URLRequest(url: URL(string: url)!)
+            request.httpMethod = type
+            if (body != nil) {
+                request.httpBody = body!.data(using: .utf8)
             }
             
-            guard (200 ... 299) ~= response.statusCode else {
-                errorMessage = "Bad response code: \(response.statusCode)"
-                semaphore.signal()
-                return
+            if let contentType = contentType {
+                request.setValue(contentType, forHTTPHeaderField: "Content-Type")
             }
             
-            semaphore.signal()
-        }
-        task.resume()
-        semaphore.wait()
-        
-        if let errorMessage = errorMessage {
-            Log.error("network.httpPost failed: \(errorMessage)")
-        }
-        return errorMessage
+            if let authToken = authToken {
+                let encoded = Data(authToken.utf8).base64EncodedString()
+                request.setValue(
+                    "Basic \(encoded)",
+                    forHTTPHeaderField: "Authorization"
+                )
+            }
+            
+            let semaphore = DispatchSemaphore(value: 0)
+            var fetchError: PodApiError? = nil
+            var responseData: Data? = nil
+            let task = URLSession.shared.dataTask(with: request) {
+                data, response, error in
+                defer { semaphore.signal() }
+                guard let response = response as? HTTPURLResponse,
+                      error == nil else {
+                          semaphore.signal()
+                          return
+                      }
+                
+                guard (200 ... 299) ~= response.statusCode else {
+                    fetchError = PodApiError.networkError("http\(type)", responseCode: String(response.statusCode))
+                    semaphore.signal()
+                    return
+                }
+                
+                guard let data = data else {
+                    fetchError = PodApiError.networkError("http\(type)", responseCode: String(response.statusCode))
+                    return
+                }
+                responseData = data
+                semaphore.signal()
+            }
+            task.resume()
+            semaphore.wait()
+            
+            if (responseData == nil && fetchError == nil) {
+                fetchError = PodApiError.networkError("http\(type)", responseCode: "400")
+            }
+            
+            if (fetchError != nil) {
+                Log.error(fetchError!.localizedDescription)
+            }
+            return fetchError == nil ? .success(responseData!) : .failure(fetchError!)
     }
 }

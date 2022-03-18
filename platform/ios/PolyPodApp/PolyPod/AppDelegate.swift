@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Location tracking is disabled for now - no feature needs it
-        //LocationTracker.shared.startLocationLogging()
+        // LocationTracker.shared.startLocationLogging()
         
         CoreDataStack.shared.isProtectedDataAvailable = { completion in
             dispatchToMainQueue {

@@ -5,5 +5,5 @@ protocol PolyIn {
     func matchQuads(matcher: ExtendedData, completionHandler: @escaping ([ExtendedData]?, Error?) -> Void)
     func selectQuads(matcher: ExtendedData, completionHandler: @escaping ([ExtendedData]?, Error?) -> Void)
     func deleteQuads(quads: [ExtendedData], completionHandler: @escaping (Error?) -> Void)
-    func hasQuads(quads: [ExtendedData], completionHandler: @escaping (Bool) -> Void) -> Void
+    func hasQuads(quads: [ExtendedData], completionHandler: @escaping (Bool) -> Void)
 }

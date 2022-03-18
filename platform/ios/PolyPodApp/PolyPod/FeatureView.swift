@@ -137,7 +137,7 @@ struct FeatureView: View {
             preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(
                             title: NSLocalizedString(
-                                "button_url_open_confirm",
+                                "button_confirm",
                                 comment: ""
                             ),
                             style: .default,
@@ -146,7 +146,7 @@ struct FeatureView: View {
                             }))
         alert.addAction(UIAlertAction(
                             title: NSLocalizedString(
-                                "button_url_open_reject",
+                                "button_reject",
                                 comment: ""
                             ),
                             style: .default))

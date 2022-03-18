@@ -1,6 +1,7 @@
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import sucrase from "@rollup/plugin-sucrase";
+import json from "@rollup/plugin-json";
 
 export default [
     {
@@ -16,6 +17,7 @@ export default [
             },
         ],
         plugins: [
+            json(),
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"],
@@ -32,6 +34,7 @@ export default [
             },
         ],
         plugins: [
+            json(),
             resolve(),
             commonjs(),
             sucrase({
