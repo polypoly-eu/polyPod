@@ -1,6 +1,7 @@
 import Foundation
 
 protocol NetworkProtocol {
+    var allowInsecure: Bool
     func httpPost(
         url: String,
         body: String,
@@ -16,6 +17,12 @@ protocol NetworkProtocol {
 }
 
 final class Network: NetworkProtocol {
+    
+    var allowInsecure: Bool
+    init(allowInsecure: Bool = false) {
+        self.allowInsecure = allowInsecure
+    }
+    
     func httpPost(
         url: String,
         body: String,
@@ -40,10 +47,10 @@ final class Network: NetworkProtocol {
         contentType: String?,
         authToken: String?) -> Result<Data, PodApiError>  {
             let requestURL = URL(string: url)!
-            if (requestURL.scheme == nil) {
+            guard requestURL.scheme else {
                 return .failure(PodApiError.networkError(type, message: "Bad URL: \(url)"))
             }
-            if (!(requestURL.scheme == "https")) {
+            if (!allowInsecure && !(requestURL.scheme == "https")) {
                 return .failure(PodApiError.networkSecurityError(type))
             }
             var request = URLRequest(url: requestURL)

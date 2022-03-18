@@ -2,6 +2,7 @@ import Foundation
 import MessagePack
 
 protocol EndpointProtocol {
+    var allowInsecure: Bool { get }
     func send(endpointId: String, payload: String, contentType: String?, authToken: String?, completionHandler: @escaping (Error?) -> Void) -> Void
     func get(endpointId: String, contentType: String?, authToken: String?, completionHandler: @escaping (String?, Error?) -> Void) -> Void
 }
@@ -17,12 +18,14 @@ struct EndpointInfo: Decodable {
 
 final class Endpoint: EndpointProtocol {
     
-    init() {
+    init(allowInsecure: Bool = false) {
+        self.allowInsecure = allowInsecure
         delegate = nil
     }
     
+    var allowInsecure: Bool
     var delegate: EndpointDelegate?
-    let network: Network = Network()
+    let network: Network = Network(allowInsecure)
     
     func approveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) -> Void {
         delegate?.doHandleApproveEndpointFetch(endpointId: endpointId, completion: completion)
