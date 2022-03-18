@@ -23,11 +23,12 @@ open class Network(val context: Context) {
         url: String,
         body: String,
         contentType: String?,
-        authToken: String?
+        authToken: String?,
+        allowInsecure: Boolean
     ): NetworkResponse = withContext(Dispatchers.IO) {
         var response = NetworkResponse(data = null, error = null)
         val connection = httpConnection(
-            "POST", url, body, contentType, authToken
+            "POST", url, body, contentType, authToken, allowInsecure
         ) ?: return@withContext NetworkResponse(
             null, "network connection failed"
         )
@@ -47,11 +48,12 @@ open class Network(val context: Context) {
     open suspend fun httpGet(
         url: String,
         contentType: String?,
-        authToken: String?
+        authToken: String?,
+        allowInsecure: Boolean
     ): NetworkResponse = withContext(Dispatchers.IO) {
         var response = NetworkResponse(data = null, error = null)
         val connection = httpConnection(
-            "GET", url, null, contentType, authToken
+            "GET", url, null, contentType, authToken, allowInsecure
         ) ?: return@withContext NetworkResponse(
             null, "network connection failed"
         )
@@ -84,6 +86,7 @@ open class Network(val context: Context) {
         body: String?,
         contentType: String?,
         authToken: String?,
+        allowInsecure: Boolean
     ): HttpURLConnection? {
         var connection: HttpURLConnection
         var requestURL: URL
@@ -93,7 +96,7 @@ open class Network(val context: Context) {
             logger.error(e.toString())
             return null
         }
-        if (requestURL.protocol != "https") {
+        if (requestURL.protocol != "https" && !allowInsecure) {
             logger.error("network.$type failed, URL is not secure (https)")
             return null
         }

@@ -365,12 +365,18 @@ class BrowserNetwork {
             } catch (e) {
                 fetchResponse.error = `Bad URL`;
                 resolve(fetchResponse);
+<<<<<<< HEAD
                 return;
+=======
+>>>>>>> 65ce917d8 (allowInsecure from endpoints.json in android & some lints in browserPod)
             }
             if (urlObject?.protocol != "https") {
                 fetchResponse.error = `Not a secure protocol`;
                 resolve(fetchResponse);
+<<<<<<< HEAD
                 return;
+=======
+>>>>>>> 65ce917d8 (allowInsecure from endpoints.json in android & some lints in browserPod)
             }
             request.open(type, url);
 
