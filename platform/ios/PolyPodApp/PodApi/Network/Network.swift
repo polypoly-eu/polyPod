@@ -1,7 +1,6 @@
 import Foundation
 
 protocol NetworkProtocol {
-    var allowInsecure: Bool
     func httpPost(
         url: String,
         body: String,
@@ -17,27 +16,23 @@ protocol NetworkProtocol {
 }
 
 final class Network: NetworkProtocol {
-    
-    var allowInsecure: Bool
-    init(allowInsecure: Bool = false) {
-        self.allowInsecure = allowInsecure
-    }
-    
     func httpPost(
         url: String,
         body: String,
         contentType: String?,
-        authToken: String?
+        authToken: String?,
+        allowInsecure: Bool
     ) -> Result<Data, PodApiError> {
-        return httpFetchCall(type: "POST", url: url, body: body, contentType: contentType, authToken: authToken)
+        return httpFetchCall(type: "POST", url: url, body: body, contentType: contentType, authToken: authToken, allowInsecure: allowInsecure)
     }
     
     func httpGet(
         url: String,
         contentType: String?,
-        authToken: String?
+        authToken: String?,
+        allowInsecure: Bool
     ) -> Result<Data, PodApiError> {
-        return httpFetchCall(type: "GET", url: url, body: nil, contentType: contentType, authToken: authToken)
+        return httpFetchCall(type: "GET", url: url, body: nil, contentType: contentType, authToken: authToken, allowInsecure: allowInsecure)
     }
     
     func httpFetchCall(
@@ -45,9 +40,11 @@ final class Network: NetworkProtocol {
         url: String,
         body: String?,
         contentType: String?,
-        authToken: String?) -> Result<Data, PodApiError>  {
+        authToken: String?,
+        allowInsecure: Bool
+    ) -> Result<Data, PodApiError>  {
             let requestURL = URL(string: url)!
-            guard requestURL.scheme else {
+            guard requestURL.scheme != nil else {
                 return .failure(PodApiError.networkError(type, message: "Bad URL: \(url)"))
             }
             if (!allowInsecure && !(requestURL.scheme == "https")) {

@@ -2,7 +2,6 @@ import Foundation
 import MessagePack
 
 protocol EndpointProtocol {
-    var allowInsecure: Bool { get }
     func send(endpointId: String, payload: String, contentType: String?, authToken: String?, completionHandler: @escaping (Error?) -> Void) -> Void
     func get(endpointId: String, contentType: String?, authToken: String?, completionHandler: @escaping (String?, Error?) -> Void) -> Void
 }
@@ -14,18 +13,17 @@ protocol EndpointDelegate {
 struct EndpointInfo: Decodable {
     let url: String
     let auth: String?
+    var allowInsecure: Bool = false
 }
 
 final class Endpoint: EndpointProtocol {
     
-    init(allowInsecure: Bool = false) {
-        self.allowInsecure = allowInsecure
+    init() {
         delegate = nil
     }
     
-    var allowInsecure: Bool
     var delegate: EndpointDelegate?
-    let network: Network = Network(allowInsecure)
+    let network: Network = Network()
     
     func approveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) -> Void {
         delegate?.doHandleApproveEndpointFetch(endpointId: endpointId, completion: completion)
@@ -51,7 +49,7 @@ final class Endpoint: EndpointProtocol {
                 completionHandler(PodApiError.endpointError("send"))
                 return
             }
-            let response = self.network.httpPost(url: endpointInfo.url, body: payload, contentType: contentType, authToken: endpointInfo.auth)
+            let response = self.network.httpPost(url: endpointInfo.url, body: payload, contentType: contentType, authToken: endpointInfo.auth, allowInsecure: endpointInfo.allowInsecure)
             switch response {
             case .failure(let error):
                 Log.error(error.localizedDescription)
@@ -74,7 +72,7 @@ final class Endpoint: EndpointProtocol {
                 completionHandler(nil, PodApiError.endpointError("get"))
                 return
             }
-            let response = self.network.httpGet(url: endpointInfo.url, contentType: contentType, authToken: endpointInfo.auth)
+            let response = self.network.httpGet(url: endpointInfo.url, contentType: contentType, authToken: endpointInfo.auth, allowInsecure: endpointInfo.allowInsecure)
             switch response {
             case .failure(let error):
                 Log.error(error.localizedDescription)
