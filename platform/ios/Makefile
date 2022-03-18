@@ -16,7 +16,7 @@ else
 xcodebuild := xcodebuild
 endif
 
-.PHONY: build
+.PHONY: lockxcodeversion
 lockxcodeversion:
 	sudo xcode-select -switch /Applications/Xcode_13.2.1.app
 
