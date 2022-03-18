@@ -28,6 +28,7 @@
     <string name="settings_licenses_title">Licenses</string>
     <string name="message_url_open_prevented">I have blocked %1$s from opening a URL:\n%2$s</string>
     <string name="message_url_open_requested">%1$s wants to open a URL in your browser:\n\n%2$s\n\nAllow?</string>
+    <string name="message_approve_endpoint_fetch">%1$s wants to share data with:\n\n%2$s\n\nAllow?</string>
     <string name="button_url_open_confirm">Yes</string>
     <string name="button_url_open_reject">No</string>
     <string name="button_update_notification_close">OK</string>

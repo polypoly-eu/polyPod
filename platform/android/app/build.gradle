@@ -198,6 +198,11 @@ task installAppOnDevice {
     }
 }
 
+task copyEndpoints(type: Copy) {
+    from "../../../../polyPod-config"
+    into "build/generated-assets/config-assets"
+}
+
 task packageTestFeature(type: Zip) {
     dependsOn installAppOnDevice
     archiveFileName = "test.zip"
@@ -232,6 +237,7 @@ tasks.whenTaskAdded { task ->
         task.dependsOn copyRemotePod
         task.dependsOn copyBundledFeatures
         task.dependsOn copyThirdPartyLicenses
+        task.dependsOn copyEndpoints
     }
     if (
         task.name == "connectedDebugAndroidTest" ||

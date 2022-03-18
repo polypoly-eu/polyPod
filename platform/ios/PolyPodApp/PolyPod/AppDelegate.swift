@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Location tracking is disabled for now - no feature needs it
-        //LocationTracker.shared.startLocationLogging()
+        // LocationTracker.shared.startLocationLogging()
         
         CoreDataStack.shared.isProtectedDataAvailable = { completion in
             dispatchToMainQueue {
@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Disabled for now, need to investigate the issue with multiple notifications
         // while the device is locked
-        //self.registerUpdateNotificationCheck()
+        // self.registerUpdateNotificationCheck()
         
         return true
     }

@@ -8,8 +8,11 @@ enum PodApiError: Error {
     case noSuchFile(_ path: String)
     case protectedDataUnavailable
     case badArgumentData(_ arg: Any)
+    case badArgumentType(_ arg: Any, type: String)
     case failedToReadGraph(_ type: String)
     case badData(_ data: Any)
+    case networkError(_ fetchType: String, responseCode: String)
+    case endpointError(_ fetchType: String)
 }
 
 extension PodApiError: LocalizedError {
@@ -29,10 +32,16 @@ extension PodApiError: LocalizedError {
             return "Protected data is unavailable to be accessed"
         case .badArgumentData(let arg):
             return "Bad argument data: \(arg)"
+        case .badArgumentType(let arg, let type):
+            return "Bad argument type: \(arg) must be \(type)"
         case .failedToReadGraph(let type):
             return "Failed to read graph: \(type)"
         case .badData(let data):
             return "Bad data: \(data)"
+        case .networkError(let fetchType, let responseCode):
+            return "network.\(fetchType) failed, Response Code: \(responseCode)"
+        case .endpointError(let fetchType):
+            return "endpoint.\(fetchType) failed"
         }
     }
 }
