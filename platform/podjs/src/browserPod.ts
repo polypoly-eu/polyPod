@@ -320,21 +320,37 @@ class BrowserNetwork {
     async httpPost(
         url: string,
         body: string,
+        allowInsecure: boolean,
         contentType?: string,
         authToken?: string
     ): Promise<NetworkResponse> {
-        return this.httpFetchRequest("Post", url, body, contentType, authToken);
+        return await this.httpFetchRequest(
+            "Post",
+            url,
+            allowInsecure,
+            body,
+            contentType,
+            authToken
+        );
     }
     async httpGet(
         url: string,
+        allowInsecure: boolean,
         contentType?: string,
         authToken?: string
     ): Promise<NetworkResponse> {
-        return this.httpFetchRequest("GET", url, contentType, authToken);
+        return await this.httpFetchRequest(
+            "GET",
+            url,
+            allowInsecure,
+            contentType,
+            authToken
+        );
     }
     private async httpFetchRequest(
         type: string,
         url: string,
+        allowInsecure: boolean,
         body?: string,
         contentType?: string,
         authToken?: string
@@ -357,7 +373,6 @@ class BrowserNetwork {
             request.onerror = function () {
                 fetchResponse.error = `Network error`;
                 resolve(fetchResponse);
-                return;
             };
             let urlObject;
             try {
@@ -365,18 +380,12 @@ class BrowserNetwork {
             } catch (e) {
                 fetchResponse.error = `Bad URL`;
                 resolve(fetchResponse);
-<<<<<<< HEAD
                 return;
-=======
->>>>>>> 65ce917d8 (allowInsecure from endpoints.json in android & some lints in browserPod)
             }
-            if (urlObject?.protocol != "https") {
+            if (!allowInsecure && urlObject?.protocol != "https") {
                 fetchResponse.error = `Not a secure protocol`;
                 resolve(fetchResponse);
-<<<<<<< HEAD
                 return;
-=======
->>>>>>> 65ce917d8 (allowInsecure from endpoints.json in android & some lints in browserPod)
             }
             request.open(type, url);
 
@@ -393,8 +402,14 @@ class BrowserNetwork {
     }
 }
 
-function getEndpoint(endpointId: string): string | null {
-    return endpoints[endpointId]?.url || null;
+interface EndpointInfo {
+    url: string;
+    auth: string;
+    allowInsecure: boolean;
+}
+
+function getEndpoint(endpointId: string): EndpointInfo | null {
+    return endpoints[endpointId] || null;
 }
 
 function approveEndpointFetch(
@@ -422,13 +437,14 @@ class BrowserEndpoint implements Endpoint {
     ): Promise<void> {
         if (!approveEndpointFetch(endpointId, featureIdToken))
             throw endpointErrorMessage("send", "User denied request");
-        const endpointURL = getEndpoint(endpointId);
-        if (!endpointURL) {
+        const endpoint = getEndpoint(endpointId);
+        if (!endpoint) {
             throw endpointErrorMessage("send", "Endpoint URL not set");
         }
         const NetworkResponse = await this.endpointNetwork.httpPost(
-            endpointURL,
+            endpoint.url,
             payload,
+            endpoint.allowInsecure,
             contentType,
             authToken
         );
@@ -444,11 +460,12 @@ class BrowserEndpoint implements Endpoint {
     ): Promise<string> {
         if (!approveEndpointFetch(endpointId, featureIdToken))
             throw endpointErrorMessage("get", "User denied request");
-        const endpointURL = getEndpoint(endpointId);
-        if (!endpointURL)
+        const endpoint = getEndpoint(endpointId);
+        if (!endpoint)
             throw endpointErrorMessage("get", "Endpoint URL not set");
         const NetworkResponse = await this.endpointNetwork.httpGet(
-            endpointURL,
+            endpoint.url,
+            endpoint.allowInsecure,
             contentType,
             authToken
         );
