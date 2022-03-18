@@ -5,13 +5,15 @@ protocol NetworkProtocol {
         url: String,
         body: String,
         contentType: String?,
-        authToken: String?
+        authToken: String?,
+        allowInsecure: Bool
     ) -> Result<Data, PodApiError>
     
     func httpGet(
         url: String,
         contentType: String?,
-        authToken: String?
+        authToken: String?,
+        allowInsecure: Bool
     ) -> Result<Data, PodApiError>
 }
 
