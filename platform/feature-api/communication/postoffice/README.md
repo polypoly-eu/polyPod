@@ -22,18 +22,12 @@ The type specification for a simple API can be expressed using standard
 TypeScript techniques:
 
 ```typescript
-import {
-    ObjectBackendEndpointSpec,
-    ValueBackendEndpointSpec,
-} from "@polypoly-eu/postoffice";
+import { ObjectBackendEndpointSpec, ValueBackendEndpointSpec } from "@polypoly-eu/postoffice";
 
 type SimpleEndpoint = ObjectBackendEndpointSpec<{
     test1(param1: string): ValueBackendEndpointSpec<number>;
     test2(param1: string): ValueBackendEndpointSpec<number>;
-    test3(
-        parama: boolean,
-        ...paramb: number[]
-    ): ValueBackendEndpointSpec<string>;
+    test3(parama: boolean, ...paramb: number[]): ValueBackendEndpointSpec<string>;
 }>;
 ```
 

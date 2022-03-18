@@ -74,7 +74,7 @@ export type ForcePromise<T> = [T] extends [Promise<any>] ? T : Promise<T>;
 export type MaybePromise<T> = T | ForcePromise<T>;
 
 /**
- * Computes the type of the server-side implementation of an backend endpoint
+ * Computes the type of the server-side implementation of a backend endpoint
  * specification.
  *
  * This type alias recursively traverses the specification.
@@ -124,7 +124,7 @@ export type ServerOf<Spec extends BackendEndpointSpec> = Spec extends ValueBacke
  * arguments and returning a `Promise` of `T` (unless `T` is already a
  * `Promise`).
  *
- * Given a client for an backend endpoint specification, a call chain can be expressed
+ * Given a client for a backend endpoint specification, a call chain can be expressed
  * as follows:
  *
  * ```
@@ -135,7 +135,7 @@ export type ServerOf<Spec extends BackendEndpointSpec> = Spec extends ValueBacke
 export type Callable<T> = () => ForcePromise<T>;
 
 /**
- * Computes the type of the client-side proxy object for an backend endpoint
+ * Computes the type of the client-side proxy object for a backend endpoint
  * specification.
  *
  * This type alias recursively traverses the specification. The algorithm is

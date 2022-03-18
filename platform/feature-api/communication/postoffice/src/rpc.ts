@@ -3,7 +3,7 @@
  * underlying protocol ([[BackendEndpointProcedure]]), and back to function calls on
  * the real object.
  *
- * Servers can use [[backendEndpointServer]] to turn the implementation of an backend endpoint
+ * Servers can use [[backendEndpointServer]] to turn the implementation of a backend endpoint
  * specification ([[ServerOf]]) into a plain function. Clients can use
  * [[backendEndpointClient]] to turn a plain function into a proxy object
  * ([[ClientOf]]).
@@ -46,7 +46,7 @@ import {
 } from "./protocol";
 
 /**
- * Turns the implementation of an backend endpoint specification into a plain function.
+ * Turns the implementation of a backend endpoint specification into a plain function.
  */
 export function backendEndpointServer<Spec extends BackendEndpointSpec>(
     impl: ServerOf<Spec>
