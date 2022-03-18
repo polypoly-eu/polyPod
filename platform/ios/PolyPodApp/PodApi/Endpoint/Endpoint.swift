@@ -18,12 +18,13 @@ struct EndpointInfo: Decodable {
 
 final class Endpoint: EndpointProtocol {
     
-    init() {
-        delegate = nil
-    }
+    init(network: NetworkProtocol) {
+             self.network = network
+             delegate = nil
+         }
+    let network: NetworkProtocol
     
     var delegate: EndpointDelegate?
-    let network: Network = Network()
     
     func approveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) -> Void {
         delegate?.doHandleApproveEndpointFetch(endpointId: endpointId, completion: completion)
