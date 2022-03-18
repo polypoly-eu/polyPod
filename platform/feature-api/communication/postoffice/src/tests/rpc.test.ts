@@ -1,10 +1,10 @@
-import { endpointClient, endpointServer } from "../rpc";
-import { ClientOf, ObjectEndpointSpec, ServerOf, ValueEndpointSpec } from "../types";
+import { backendEndpointClient, backendEndpointServer } from "../rpc";
+import { ClientOf, ObjectBackendEndpointSpec, ServerOf, ValueBackendEndpointSpec } from "../types";
 
-type SimpleEndpoint = ObjectEndpointSpec<{
-    test1(param1: string): ValueEndpointSpec<number>;
-    test2(param1: string): ValueEndpointSpec<number>;
-    test3(parama: boolean, ...paramb: number[]): ValueEndpointSpec<string>;
+type SimpleEndpoint = ObjectBackendEndpointSpec<{
+    test1(param1: string): ValueBackendEndpointSpec<number>;
+    test2(param1: string): ValueBackendEndpointSpec<number>;
+    test3(parama: boolean, ...paramb: number[]): ValueBackendEndpointSpec<string>;
 }>;
 
 const simpleEndpointImpl: ServerOf<SimpleEndpoint> = {
@@ -14,7 +14,7 @@ const simpleEndpointImpl: ServerOf<SimpleEndpoint> = {
         Promise.reject(new Error(`${parama}, ${paramb.join()}`)),
 };
 
-type ComplexEndpoint = ObjectEndpointSpec<{
+type ComplexEndpoint = ObjectBackendEndpointSpec<{
     simple(): SimpleEndpoint;
 }>;
 
@@ -26,8 +26,8 @@ describe("RPC", () => {
     let rpcClient: ClientOf<ComplexEndpoint>;
 
     beforeEach(async () => {
-        rpcClient = endpointClient<ComplexEndpoint>(
-            endpointServer<ComplexEndpoint>(complexEndpointImpl)
+        rpcClient = backendEndpointClient<ComplexEndpoint>(
+            backendEndpointServer<ComplexEndpoint>(complexEndpointImpl)
         );
     });
 

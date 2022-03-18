@@ -2,11 +2,11 @@
  * This module defines the protocol used for translating function calls into bare objects. Users rarely need to use this
  * module directly.
  *
- * The [[endpointClient]] and [[endpointServer]] functions speak a simple protocol:
+ * The [[backendEndpointClient]] and [[backendEndpointServer]] functions speak a simple protocol:
  *
- * - each call is represented as an [[EndpointRequestPart]]
- * - a chain of calls is represented as an [[EndpointRequest]]
- * - a response is any kind of value ([[EndpointResponse]])
+ * - each call is represented as an [[BackendEndpointRequestPart]]
+ * - a chain of calls is represented as an [[BackendEndpointRequest]]
+ * - a response is any kind of value ([[BackendEndpointResponse]])
  *
  * @packageDocumentation
  */
@@ -14,7 +14,7 @@
 /**
  * A function call representing the name of a method (of type string) and an array of arguments (of any type).
  */
-export interface EndpointRequestPart {
+export interface BackendEndpointRequestPart {
     readonly method: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     readonly args: ReadonlyArray<any>;
@@ -23,15 +23,17 @@ export interface EndpointRequestPart {
 /**
  * A request comprising a chain of function calls.
  */
-export type EndpointRequest = EndpointRequestPart[];
+export type BackendEndpointRequest = BackendEndpointRequestPart[];
 
 /**
  * A response representing the return value of a function call.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type EndpointResponse = any;
+export type BackendEndpointResponse = any;
 
 /**
- * Function type representing the protocol: [[EndpointRequest]] comes in, [[EndpointResponse]] goes out.
+ * Function type representing the protocol: [[BackendEndpointRequest]] comes in, [[BackendEndpointResponse]] goes out.
  */
-export type EndpointProcedure = (req: EndpointRequest) => Promise<EndpointResponse>;
+export type BackendEndpointProcedure = (
+    req: BackendEndpointRequest
+) => Promise<BackendEndpointResponse>;

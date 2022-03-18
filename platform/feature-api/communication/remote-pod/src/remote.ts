@@ -15,14 +15,14 @@ import {
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
 import {
-    endpointClient,
+    backendEndpointClient,
     ClientOf,
     ServerOf,
-    EndpointRequest,
-    EndpointResponse,
-    endpointServer,
-    ObjectEndpointSpec,
-    ValueEndpointSpec,
+    BackendEndpointRequest,
+    BackendEndpointResponse,
+    backendEndpointServer,
+    ObjectBackendEndpointSpec,
+    ValueBackendEndpointSpec,
 } from "@polypoly-eu/postoffice";
 import {
     ResponsePort,
@@ -39,64 +39,71 @@ import { RequestListener } from "http";
 import * as RDF from "@polypoly-eu/rdf";
 import { Bubblewrap, Classes } from "@polypoly-eu/bubblewrap";
 
-type PolyInEndpoint = ObjectEndpointSpec<{
-    select(matcher: Partial<Matcher>): ValueEndpointSpec<Quad[]>;
-    match(matcher: Partial<Matcher>): ValueEndpointSpec<Quad[]>;
-    add(...quads: Quad[]): ValueEndpointSpec<void>;
-    delete(...quads: Quad[]): ValueEndpointSpec<void>;
-    has(...quads: Quad[]): ValueEndpointSpec<boolean>;
+type PolyInBackend = ObjectBackendEndpointSpec<{
+    select(matcher: Partial<Matcher>): ValueBackendEndpointSpec<Quad[]>;
+    match(matcher: Partial<Matcher>): ValueBackendEndpointSpec<Quad[]>;
+    add(...quads: Quad[]): ValueBackendEndpointSpec<void>;
+    delete(...quads: Quad[]): ValueBackendEndpointSpec<void>;
+    has(...quads: Quad[]): ValueBackendEndpointSpec<boolean>;
 }>;
 
-type PolyOutEndpoint = ObjectEndpointSpec<{
-    readDir(path: string): ValueEndpointSpec<Entry[]>;
-    readFile(path: string, options?: EncodingOptions): ValueEndpointSpec<string | Uint8Array>;
-    writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
-    stat(path: string): ValueEndpointSpec<Stats>;
-    fetch(input: string, init: RequestInit): ValueEndpointSpec<Response>;
-    importArchive(url: string): ValueEndpointSpec<string>;
-    removeArchive(fileId: string): ValueEndpointSpec<void>;
+type PolyOutBackend = ObjectBackendEndpointSpec<{
+    readDir(path: string): ValueBackendEndpointSpec<Entry[]>;
+    readFile(
+        path: string,
+        options?: EncodingOptions
+    ): ValueBackendEndpointSpec<string | Uint8Array>;
+    writeFile(
+        path: string,
+        content: string,
+        options: EncodingOptions
+    ): ValueBackendEndpointSpec<void>;
+    stat(path: string): ValueBackendEndpointSpec<Stats>;
+    fetch(input: string, init: RequestInit): ValueBackendEndpointSpec<Response>;
+    importArchive(url: string): ValueBackendEndpointSpec<string>;
+    removeArchive(fileId: string): ValueBackendEndpointSpec<void>;
 }>;
 
-type PolyLifecycleEndpoint = ObjectEndpointSpec<{
-    listFeatures(): ValueEndpointSpec<Record<string, boolean>>;
-    startFeature(id: string, background: boolean): ValueEndpointSpec<void>;
+type PolyLifecycleBackend = ObjectBackendEndpointSpec<{
+    listFeatures(): ValueBackendEndpointSpec<Record<string, boolean>>;
+    startFeature(id: string, background: boolean): ValueBackendEndpointSpec<void>;
 }>;
 
-type PolyNavEndpoint = ObjectEndpointSpec<{
-    openUrl(url: string): ValueEndpointSpec<void>;
-    setActiveActions(actions: string[]): ValueEndpointSpec<void>;
-    setTitle(title: string): ValueEndpointSpec<void>;
-    pickFile(type?: string): ValueEndpointSpec<ExternalFile | null>;
+type PolyNavBackend = ObjectBackendEndpointSpec<{
+    openUrl(url: string): ValueBackendEndpointSpec<void>;
+    setActiveActions(actions: string[]): ValueBackendEndpointSpec<void>;
+    setTitle(title: string): ValueBackendEndpointSpec<void>;
+    pickFile(type?: string): ValueBackendEndpointSpec<ExternalFile | null>;
 }>;
 
-type InfoEndpoint = ObjectEndpointSpec<{
-    getRuntime(): ValueEndpointSpec<string>;
-    getVersion(): ValueEndpointSpec<string>;
+type InfoBackend = ObjectBackendEndpointSpec<{
+    getRuntime(): ValueBackendEndpointSpec<string>;
+    getVersion(): ValueBackendEndpointSpec<string>;
 }>;
 
-type EndpointEndpoint = ObjectEndpointSpec<{
+type EndpointBackend = ObjectBackendEndpointSpec<{
     send(
         endpointId: string,
         featureIdToken: string,
         payload: string,
         contentType?: string,
         authorization?: string
-    ): ValueEndpointSpec<void>;
+    ): ValueBackendEndpointSpec<void>;
     get(
         endpointId: string,
         featureIdToken: string,
         contentType?: string,
         authorization?: string
-    ): ValueEndpointSpec<string>;
+    ): ValueBackendEndpointSpec<string>;
 }>;
 
-type PodEndpoint = ObjectEndpointSpec<{
-    polyIn(): PolyInEndpoint;
-    polyOut(): PolyOutEndpoint;
-    polyLifecycle(): PolyLifecycleEndpoint;
-    polyNav(): PolyNavEndpoint;
-    info(): InfoEndpoint;
-    endpoint(): EndpointEndpoint;
+type PodBackend = ObjectBackendEndpointSpec<{
+    polyIn(): PolyInBackend;
+    polyOut(): PolyOutBackend;
+    polyLifecycle(): PolyLifecycleBackend;
+    polyNav(): PolyNavBackend;
+    info(): InfoBackend;
+    endpoint(): EndpointBackend;
 }>;
 
 class FetchResponse implements Response {
@@ -201,7 +208,7 @@ function bubblewrapPort(rawPort: Port<Uint8Array, Uint8Array>): Port<Uint8Array,
 }
 
 export class RemoteClientPod implements Pod {
-    private readonly rpcClient: ClientOf<PodEndpoint>;
+    private readonly rpcClient: ClientOf<PodBackend>;
 
     static fromFetch(url: string, fetch: typeof window.fetch = window.fetch): RemoteClientPod {
         const port = bubblewrapFetchPort(url, Bubblewrap.create(podBubblewrapClasses), fetch);
@@ -216,10 +223,10 @@ export class RemoteClientPod implements Pod {
     }
 
     constructor(
-        private clientPort: RequestPort<EndpointRequest, EndpointResponse>,
+        private clientPort: RequestPort<BackendEndpointRequest, BackendEndpointResponse>,
         public readonly dataFactory: DataFactory = RDF.dataFactory
     ) {
-        this.rpcClient = endpointClient<PodEndpoint>(client(clientPort));
+        this.rpcClient = backendEndpointClient<PodBackend>(client(clientPort));
     }
 
     get polyIn(): PolyIn {
@@ -338,17 +345,17 @@ class DummyPolyLifecycle implements PolyLifecycle {
     }
 }
 
-export class RemoteServerPod implements ServerOf<PodEndpoint> {
+export class RemoteServerPod implements ServerOf<PodBackend> {
     constructor(private readonly pod: Pod) {}
 
-    listen(port: ResponsePort<EndpointRequest, EndpointResponse>): void {
-        server(port, endpointServer<PodEndpoint>(this));
+    listen(port: ResponsePort<BackendEndpointRequest, BackendEndpointResponse>): void {
+        server(port, backendEndpointServer<PodBackend>(this));
     }
 
     listenOnRaw(rawPort: Port<Uint8Array, Uint8Array>): void {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const wrappedPort = bubblewrapPort(rawPort) as Port<any, any>;
-        this.listen(liftServer<EndpointRequest, EndpointResponse>(wrappedPort));
+        this.listen(liftServer<BackendEndpointRequest, BackendEndpointResponse>(wrappedPort));
     }
 
     async listenOnMiddleware(): Promise<RequestListener> {
@@ -361,7 +368,7 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
         return middleware;
     }
 
-    polyOut(): ServerOf<PolyOutEndpoint> {
+    polyOut(): ServerOf<PolyOutBackend> {
         const polyOut = this.pod.polyOut;
 
         // the following implementation delegates strictly to the pod that has been provided to the constructor
@@ -387,25 +394,25 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
         };
     }
 
-    polyIn(): ServerOf<PolyInEndpoint> {
+    polyIn(): ServerOf<PolyInBackend> {
         return this.pod.polyIn;
     }
 
-    polyLifecycle(): ServerOf<PolyLifecycleEndpoint> {
+    polyLifecycle(): ServerOf<PolyLifecycleBackend> {
         if (this.pod.polyLifecycle) return this.pod.polyLifecycle;
 
         return new DummyPolyLifecycle();
     }
 
-    polyNav(): ServerOf<PolyNavEndpoint> {
+    polyNav(): ServerOf<PolyNavBackend> {
         return this.pod.polyNav;
     }
 
-    info(): ServerOf<InfoEndpoint> {
+    info(): ServerOf<InfoBackend> {
         return this.pod.info;
     }
 
-    endpoint(): ServerOf<EndpointEndpoint> {
+    endpoint(): ServerOf<EndpointBackend> {
         return this.pod.endpoint;
     }
 }
