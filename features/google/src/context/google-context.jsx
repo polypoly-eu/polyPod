@@ -25,9 +25,6 @@ export const GoogleContextProvider = ({ children }) => {
     function handleBack() {
         if (history.length > 1) {
             history.goBack();
-            if (history.location.state) {
-                changeNavigationState(history.location.state);
-            }
         }
     }
 

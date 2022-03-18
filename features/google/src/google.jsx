@@ -8,7 +8,10 @@ import {
     useHistory,
 } from "react-router-dom";
 
-import { GoogleContextProvider } from "./context/google-context.jsx";
+import {
+    GoogleContext,
+    GoogleContextProvider,
+} from "./context/google-context.jsx";
 
 import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
@@ -16,6 +19,7 @@ import ImportView from "./views/import/import.jsx";
 import "./styles.css";
 
 const Google = () => {
+    const { pod } = useContext(GoogleContext);
     const renderSplash = () => "Loading";
 
     return (
