@@ -15,14 +15,14 @@ import {
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
 import {
-    backendEndpointClient,
+    backendClient,
     ClientOf,
     ServerOf,
-    BackendEndpointRequest,
-    BackendEndpointResponse,
-    backendEndpointServer,
-    ObjectBackendEndpointSpec,
-    ValueBackendEndpointSpec,
+    BackendRequest,
+    BackendResponse,
+    backendServer,
+    ObjectBackendSpec,
+    ValueBackendSpec,
 } from "@polypoly-eu/postoffice";
 import {
     ResponsePort,
@@ -39,65 +39,58 @@ import { RequestListener } from "http";
 import * as RDF from "@polypoly-eu/rdf";
 import { Bubblewrap, Classes } from "@polypoly-eu/bubblewrap";
 
-type PolyInBackend = ObjectBackendEndpointSpec<{
-    select(matcher: Partial<Matcher>): ValueBackendEndpointSpec<Quad[]>;
-    match(matcher: Partial<Matcher>): ValueBackendEndpointSpec<Quad[]>;
-    add(...quads: Quad[]): ValueBackendEndpointSpec<void>;
-    delete(...quads: Quad[]): ValueBackendEndpointSpec<void>;
-    has(...quads: Quad[]): ValueBackendEndpointSpec<boolean>;
+type PolyInBackend = ObjectBackendSpec<{
+    select(matcher: Partial<Matcher>): ValueBackendSpec<Quad[]>;
+    match(matcher: Partial<Matcher>): ValueBackendSpec<Quad[]>;
+    add(...quads: Quad[]): ValueBackendSpec<void>;
+    delete(...quads: Quad[]): ValueBackendSpec<void>;
+    has(...quads: Quad[]): ValueBackendSpec<boolean>;
 }>;
 
-type PolyOutBackend = ObjectBackendEndpointSpec<{
-    readDir(path: string): ValueBackendEndpointSpec<Entry[]>;
-    readFile(
-        path: string,
-        options?: EncodingOptions
-    ): ValueBackendEndpointSpec<string | Uint8Array>;
-    writeFile(
-        path: string,
-        content: string,
-        options: EncodingOptions
-    ): ValueBackendEndpointSpec<void>;
-    stat(path: string): ValueBackendEndpointSpec<Stats>;
-    fetch(input: string, init: RequestInit): ValueBackendEndpointSpec<Response>;
-    importArchive(url: string): ValueBackendEndpointSpec<string>;
-    removeArchive(fileId: string): ValueBackendEndpointSpec<void>;
+type PolyOutBackend = ObjectBackendSpec<{
+    readDir(path: string): ValueBackendSpec<Entry[]>;
+    readFile(path: string, options?: EncodingOptions): ValueBackendSpec<string | Uint8Array>;
+    writeFile(path: string, content: string, options: EncodingOptions): ValueBackendSpec<void>;
+    stat(path: string): ValueBackendSpec<Stats>;
+    fetch(input: string, init: RequestInit): ValueBackendSpec<Response>;
+    importArchive(url: string): ValueBackendSpec<string>;
+    removeArchive(fileId: string): ValueBackendSpec<void>;
 }>;
 
-type PolyLifecycleBackend = ObjectBackendEndpointSpec<{
-    listFeatures(): ValueBackendEndpointSpec<Record<string, boolean>>;
-    startFeature(id: string, background: boolean): ValueBackendEndpointSpec<void>;
+type PolyLifecycleBackend = ObjectBackendSpec<{
+    listFeatures(): ValueBackendSpec<Record<string, boolean>>;
+    startFeature(id: string, background: boolean): ValueBackendSpec<void>;
 }>;
 
-type PolyNavBackend = ObjectBackendEndpointSpec<{
-    openUrl(url: string): ValueBackendEndpointSpec<void>;
-    setActiveActions(actions: string[]): ValueBackendEndpointSpec<void>;
-    setTitle(title: string): ValueBackendEndpointSpec<void>;
-    pickFile(type?: string): ValueBackendEndpointSpec<ExternalFile | null>;
+type PolyNavBackend = ObjectBackendSpec<{
+    openUrl(url: string): ValueBackendSpec<void>;
+    setActiveActions(actions: string[]): ValueBackendSpec<void>;
+    setTitle(title: string): ValueBackendSpec<void>;
+    pickFile(type?: string): ValueBackendSpec<ExternalFile | null>;
 }>;
 
-type InfoBackend = ObjectBackendEndpointSpec<{
-    getRuntime(): ValueBackendEndpointSpec<string>;
-    getVersion(): ValueBackendEndpointSpec<string>;
+type InfoBackend = ObjectBackendSpec<{
+    getRuntime(): ValueBackendSpec<string>;
+    getVersion(): ValueBackendSpec<string>;
 }>;
 
-type EndpointBackend = ObjectBackendEndpointSpec<{
+type EndpointBackend = ObjectBackendSpec<{
     send(
         endpointId: string,
         featureIdToken: string,
         payload: string,
         contentType?: string,
         authorization?: string
-    ): ValueBackendEndpointSpec<void>;
+    ): ValueBackendSpec<void>;
     get(
         endpointId: string,
         featureIdToken: string,
         contentType?: string,
         authorization?: string
-    ): ValueBackendEndpointSpec<string>;
+    ): ValueBackendSpec<string>;
 }>;
 
-type PodBackend = ObjectBackendEndpointSpec<{
+type PodBackend = ObjectBackendSpec<{
     polyIn(): PolyInBackend;
     polyOut(): PolyOutBackend;
     polyLifecycle(): PolyLifecycleBackend;
@@ -223,10 +216,10 @@ export class RemoteClientPod implements Pod {
     }
 
     constructor(
-        private clientPort: RequestPort<BackendEndpointRequest, BackendEndpointResponse>,
+        private clientPort: RequestPort<BackendRequest, BackendResponse>,
         public readonly dataFactory: DataFactory = RDF.dataFactory
     ) {
-        this.rpcClient = backendEndpointClient<PodBackend>(client(clientPort));
+        this.rpcClient = backendClient<PodBackend>(client(clientPort));
     }
 
     get polyIn(): PolyIn {
@@ -348,14 +341,14 @@ class DummyPolyLifecycle implements PolyLifecycle {
 export class RemoteServerPod implements ServerOf<PodBackend> {
     constructor(private readonly pod: Pod) {}
 
-    listen(port: ResponsePort<BackendEndpointRequest, BackendEndpointResponse>): void {
-        server(port, backendEndpointServer<PodBackend>(this));
+    listen(port: ResponsePort<BackendRequest, BackendResponse>): void {
+        server(port, backendServer<PodBackend>(this));
     }
 
     listenOnRaw(rawPort: Port<Uint8Array, Uint8Array>): void {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const wrappedPort = bubblewrapPort(rawPort) as Port<any, any>;
-        this.listen(liftServer<BackendEndpointRequest, BackendEndpointResponse>(wrappedPort));
+        this.listen(liftServer<BackendRequest, BackendResponse>(wrappedPort));
     }
 
     async listenOnMiddleware(): Promise<RequestListener> {

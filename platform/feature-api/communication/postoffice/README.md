@@ -22,12 +22,12 @@ The type specification for a simple API can be expressed using standard
 TypeScript techniques:
 
 ```typescript
-import { ObjectBackendEndpointSpec, ValueBackendEndpointSpec } from "@polypoly-eu/postoffice";
+import { ObjectBackendSpec, ValueBackendSpec } from "@polypoly-eu/postoffice";
 
-type SimpleEndpoint = ObjectBackendEndpointSpec<{
-    test1(param1: string): ValueBackendEndpointSpec<number>;
-    test2(param1: string): ValueBackendEndpointSpec<number>;
-    test3(parama: boolean, ...paramb: number[]): ValueBackendEndpointSpec<string>;
+type SimpleBackend = ObjectBackendSpec<{
+    test1(param1: string): ValueBackendSpec<number>;
+    test2(param1: string): ValueBackendSpec<number>;
+    test3(parama: boolean, ...paramb: number[]): ValueBackendSpec<string>;
 }>;
 ```
 
@@ -37,10 +37,10 @@ Servers can implement this endpoint specification and may choose to use `async`
 methods at any point. We assume port-authority as a transport layer.
 
 ```typescript
-import {backendEndpointServer, ServerOf} from "@polypoly-eu/postoffice";
+import {backendServer, ServerOf} from "@polypoly-eu/postoffice";
 import {server} from "@polypoly-eu/port-authority";
 
-const simpleEndpointImpl: ServerOf<SimpleEndpoint> = {
+const simpleBackendImpl: ServerOf<SimpleBackend> = {
     test1: async (param1: string) =>
         param1.length * 2,
     test2: (param1: string) =>
@@ -49,7 +49,7 @@ const simpleEndpointImpl: ServerOf<SimpleEndpoint> = {
         throw new Error(`${parama}, ${paramb.join()}`)
 };
 
-server(serverPort, backendEndpointServer(simpleEndpointImpl));
+server(serverPort, backendServer(simpleBackendImpl));
 ```
 
 The implementation can be served on any port by leveraging the `port-authority`
@@ -58,10 +58,10 @@ module, including via HTTP or `MessagePort`s.
 On the other side, clients can obtain a callable object:
 
 ```typescript
-import { backendEndpointClient, ClientOf } from "@polypoly-eu/postoffice";
+import { backendClient, ClientOf } from "@polypoly-eu/postoffice";
 import { client } from "@polypoly-eu/port-authority";
 
-const rpcClient: ClientOf<SimpleEndpoint> = backendEndpointClient(client(clientPort));
+const rpcClient: ClientOf<SimpleBackend> = backendClient(client(clientPort));
 
 const numberResult: number = await rpcClient.test1("Hello")();
 
@@ -98,7 +98,7 @@ parameters with the expected types. Instead, we recommend relaxing all types to
 `unknown | undefined` and performing full manual validation:
 
 ```typescript
-const simpleEndpointImpl: ServerOf<SimpleEndpoint> = {
+const simpleBackendImpl: ServerOf<SimpleBackend> = {
     test1: async (param1?: unknown) => {
         // ...
         actualImpl.test1(/* ... */);

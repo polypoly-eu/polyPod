@@ -6,7 +6,7 @@
  * either values or a nested endpoint.
  *
  * An _endpoint specification_ is a mere type that is never used directly. See
- * [[BackendEndpointSpec]] for details.
+ * [[BackendSpec]] for details.
  *
  * @packageDocumentation
  */
@@ -15,7 +15,7 @@
  * Interface denoting a value backend endpoint of type `T`. This interface is purely
  * virtual and no instances are generated.
  */
-export interface ValueBackendEndpointSpec<T> {
+export interface ValueBackendSpec<T> {
     endpointType: "value";
     value: T;
 }
@@ -25,16 +25,14 @@ export interface ValueBackendEndpointSpec<T> {
  * virtual and no instances are generated.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface ObjectBackendEndpointSpec<
-    T extends Record<string, (...args: any[]) => BackendEndpointSpec>
-> {
+export interface ObjectBackendSpec<T extends Record<string, (...args: any[]) => BackendSpec>> {
     endpointType: "object";
     methods: T;
 }
 
 /**
- * A backend endpoint specification describes either a value ([[ValueBackendEndpointSpec]]) or
- * an object ([[ObjectBackendEndpointSpec]]). Values have no further structure and are
+ * A backend endpoint specification describes either a value ([[ValueBackendSpec]]) or
+ * an object ([[ObjectBackendSpec]]). Values have no further structure and are
  * considered to be a return value representing the final response to the
  * client. Objects have methods that can be called by a client.
  *
@@ -45,10 +43,10 @@ export interface ObjectBackendEndpointSpec<
  * Example:
  *
  * ```
- * type SimpleEndpoint = ObjectBackendEndpointSpec<{
- *     test1(param1: string): ValueBackendEndpointSpec<number>;
- *     test2(param1: string): ValueBackendEndpointSpec<number>;
- *     test3(parama: boolean, ...paramb: number[]): ValueBackendEndpointSpec<string>;
+ * type SimpleEndpoint = ObjectBackendSpec<{
+ *     test1(param1: string): ValueBackendSpec<number>;
+ *     test2(param1: string): ValueBackendSpec<number>;
+ *     test3(parama: boolean, ...paramb: number[]): ValueBackendSpec<string>;
  * }>;
  * ```
  *
@@ -60,7 +58,7 @@ export interface ObjectBackendEndpointSpec<
  * server and client representation based on the above specification.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type BackendEndpointSpec = ValueBackendEndpointSpec<any> | ObjectBackendEndpointSpec<any>;
+export type BackendSpec = ValueBackendSpec<any> | ObjectBackendSpec<any>;
 
 /**
  * Wraps a type `T` into `Promise`, unless `T` is already a `Promise`.
@@ -78,22 +76,22 @@ export type MaybePromise<T> = T | ForcePromise<T>;
  * specification.
  *
  * This type alias recursively traverses the specification.
- * [[ObjectBackendEndpointSpec]]s are preserved as objects with methods. The argument
+ * [[ObjectBackendSpec]]s are preserved as objects with methods. The argument
  * types of those methods are unchanged. The return types are changed to
- * [[MaybePromise]]. [[ValueBackendEndpointSpec]]s are similarly changed to
+ * [[MaybePromise]]. [[ValueBackendSpec]]s are similarly changed to
  * [[MaybePromise]].
  *
  * Example:
  *
  * ```
- * type BackendEndpoint = ObjectBackendEndpointSpec<{
- *     test(param: string): ValueBackendEndpointSpec<number>;
- *     nested(param: number): ObjectBackendEndpointSpec<{
- *         foo(parama: boolean, ...paramb: number[]): ValueBackendEndpointSpec<Promise<string>>;
+ * type Backend = ObjectBackendSpec<{
+ *     test(param: string): ValueBackendSpec<number>;
+ *     nested(param: number): ObjectBackendSpec<{
+ *         foo(parama: boolean, ...paramb: number[]): ValueBackendSpec<Promise<string>>;
  *     }>;
  * }>;
  *
- * ServerOf<BackendEndpoint> ≡ {
+ * ServerOf<Backend> ≡ {
  *     test(param: string): MaybePromise<number>;
  *     nested(param: number): MaybePromise<{
  *         foo(parama: boolean, ...paramb: number[]): Promise<string>;
@@ -105,14 +103,12 @@ export type MaybePromise<T> = T | ForcePromise<T>;
  * `Promise<string>`, whereas the outer method `test` may return `number` or
  * `Promise<number>`.
  */
-export type ServerOf<Spec extends BackendEndpointSpec> = Spec extends ValueBackendEndpointSpec<
-    infer T
->
+export type ServerOf<Spec extends BackendSpec> = Spec extends ValueBackendSpec<infer T>
     ? MaybePromise<T>
-    : Spec extends ObjectBackendEndpointSpec<infer T>
+    : Spec extends ObjectBackendSpec<infer T>
     ? {
           [P in keyof T]: T[P] extends (...args: infer Args) => infer Return
-              ? Return extends BackendEndpointSpec
+              ? Return extends BackendSpec
                   ? (...args: Args) => MaybePromise<ServerOf<Return>>
                   : never
               : never;
@@ -142,14 +138,14 @@ export type Callable<T> = () => ForcePromise<T>;
  * best illustrated with an example:
  *
  * ```
- * type BackendEndpoint = ObjectBackendEndpointSpec<{
- *     test(param: string): ValueBackendEndpointSpec<number>;
- *     nested(param: number): ObjectBackendEndpointSpec<{
- *         foo(parama: boolean, ...paramb: number[]): ValueBackendEndpointSpec<Promise<string>>;
+ * type Backend = ObjectBackendSpec<{
+ *     test(param: string): ValueBackendSpec<number>;
+ *     nested(param: number): ObjectBackendSpec<{
+ *         foo(parama: boolean, ...paramb: number[]): ValueBackendSpec<Promise<string>>;
  *     }>;
  * }>;
  *
- * ClientOf<BackendEndpoint> ≡ {
+ * ClientOf<Backend> ≡ {
  *     test(param: string): Callable<T>;
  *     nested(param: number): {
  *         foo(parama: boolean, ...paramb: number[]): Callable<string>;
@@ -165,14 +161,12 @@ export type Callable<T> = () => ForcePromise<T>;
  * transmitted through a protocol to a server implementation that closely
  * mirrors the shape of the proxy.
  */
-export type ClientOf<Spec extends BackendEndpointSpec> = Spec extends ValueBackendEndpointSpec<
-    infer T
->
+export type ClientOf<Spec extends BackendSpec> = Spec extends ValueBackendSpec<infer T>
     ? Callable<T>
-    : Spec extends ObjectBackendEndpointSpec<infer T>
+    : Spec extends ObjectBackendSpec<infer T>
     ? {
           [P in keyof T]: T[P] extends (...args: infer Args) => infer Return
-              ? Return extends BackendEndpointSpec
+              ? Return extends BackendSpec
                   ? (...args: Args) => ClientOf<Return>
                   : never
               : never;
