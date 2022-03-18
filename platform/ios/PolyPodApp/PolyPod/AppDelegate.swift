@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Log.info("Application initialized")
         
         let defaults = UserDefaults.standard
+        defaults.disableDataProtection()
         if defaults.bool(forKey: UserDefaults.Keys.resetUserDefaults.rawValue) {
             Log.info("Resetting all user defaults")
             UserDefaults.standard.reset()
@@ -36,9 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        // Disabled for now, need to investigate the issue with multiple notifications
-        // while the device is locked
-        // self.registerUpdateNotificationCheck()
+        self.registerUpdateNotificationCheck()
         
         return true
     }
