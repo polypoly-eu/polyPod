@@ -285,9 +285,9 @@ export class Bubblewrap {
                 return null;
             },
             decode: (buffer) => {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const [name, raw] = decode(buffer, {
                     extensionCodec: codec,
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 }) as any;
                 const Class = this.classes[name];
 
