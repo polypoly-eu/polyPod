@@ -1,4 +1,0 @@
-module Kernel {
-    header "polypod-core.h"
-    export *
-}
