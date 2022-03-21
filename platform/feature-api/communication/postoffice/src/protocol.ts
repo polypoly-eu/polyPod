@@ -4,8 +4,8 @@
  *
  * The [[backendClient]] and [[backendServer]] functions speak a simple protocol:
  *
- * - each call is represented as an [[BackendRequestPart]]
- * - a chain of calls is represented as an [[BackendRequest]]
+ * - each call is represented as a [[BackendRequestPart]]
+ * - a chain of calls is represented as a [[BackendRequest]]
  * - a response is any kind of value ([[BackendResponse]])
  *
  * @packageDocumentation
