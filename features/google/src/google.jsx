@@ -23,7 +23,7 @@ const Google = () => {
     const renderSplash = () => "Loading";
 
     return (
-        <div className="google poly-theme poly-theme-dark">
+        <div className="google poly-theme poly-theme-light">
             {pod ? (
                 <Switch>
                     <Route exact path="/">

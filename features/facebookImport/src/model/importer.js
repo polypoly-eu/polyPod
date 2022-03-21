@@ -1,4 +1,4 @@
-import { ZipFile } from "./storage.js";
+import { ZipFile } from "@polypoly-eu/feature-storage";
 
 import FacebookAccount from "./entities/facebook-account.js";
 import OffFacebookEventsImporter from "./importers/off-facebook-events-importer.js";
