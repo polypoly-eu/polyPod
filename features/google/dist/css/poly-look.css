@@ -86,25 +86,6 @@ so that we don't have to cover three different use cases explicitly anymore.
 
   --font-weight-regular: 400;
 }
-.poly-button {
-  font-family: var(--theme-font-medium);
-  font-size: 18px;
-  background-color: var(--theme-secondary-color);
-  padding: 4px 12px;
-  height: 48px;
-  max-width: var(--max-width);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--theme-primary-color);
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.poly-button.centered {
-  margin: 0 auto;
-  width: 100%;
-}
 :root,
 .poly-theme {
   --theme-font-base: var(--jost);
@@ -144,6 +125,25 @@ so that we don't have to cover three different use cases explicitly anymore.
 .poly-theme h4,
 .poly-theme h5 {
   font-weight: var(--font-weight-regular);
+}
+.poly-button {
+  font-family: var(--theme-font-medium);
+  font-size: 18px;
+  background-color: var(--theme-secondary-color);
+  padding: 4px 12px;
+  height: 48px;
+  max-width: var(--max-width);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--theme-primary-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.poly-button.centered {
+  margin: 0 auto;
+  width: 100%;
 }
 .tabs .tab-buttons {
   margin: 0 auto;
@@ -187,7 +187,18 @@ so that we don't have to cover three different use cases explicitly anymore.
 }
 .chip-container {
     display: inline-block;
-}.block-legend div {
+}.line-legend div {
+  display: flex;
+  align-items: center;
+}
+
+.line-legend .legend-entry div {
+  width: 15px;
+  height: 2px;
+  margin-right: 4px;
+  display: inline-block;
+}
+.block-legend div {
   display: inline-block;
 }
 
@@ -200,17 +211,6 @@ so that we don't have to cover three different use cases explicitly anymore.
 .block-legend > :first-child div {
   margin-left: 0;
 }
-.line-legend div {
-  display: flex;
-  align-items: center;
-}
-
-.line-legend .legend-entry div {
-  width: 15px;
-  height: 2px;
-  margin-right: 4px;
-  display: inline-block;
-}
 .horizontal-bar-chart .axis .tick text {
   fill: #a9b6c6;
   font-size: 12px;
@@ -222,19 +222,6 @@ so that we don't have to cover three different use cases explicitly anymore.
 }
 
 .horizontal-bar-chart .axis-grid line {
-  stroke: #8d9caf;
-}
-.vertical-bar-chart .axis .tick text {
-  fill: #a9b6c6;
-  font-size: 12px;
-}
-
-.vertical-bar-chart .domain,
-.vertical-bar-chart .axis .tick line {
-  visibility: hidden;
-}
-
-.vertical-bar-chart .axis-grid line {
   stroke: #8d9caf;
 }
 .mirrored-bar-chart .domain {
@@ -254,4 +241,17 @@ so that we don't have to cover three different use cases explicitly anymore.
 
 .mirrored-bar-chart .origin-gridline {
   fill: var(--color-gray-500);
+}
+.vertical-bar-chart .axis .tick text {
+  fill: #a9b6c6;
+  font-size: 12px;
+}
+
+.vertical-bar-chart .domain,
+.vertical-bar-chart .axis .tick line {
+  visibility: hidden;
+}
+
+.vertical-bar-chart .axis-grid line {
+  stroke: #8d9caf;
 }

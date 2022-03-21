@@ -1,4 +1,4 @@
-import { ZipFile } from "../model/storage.js";
+import { ZipFile } from "../../../../feature-utils/storage/src/feature-storage.js";
 import {
     createErrorStatus,
     createSuccessStatus,

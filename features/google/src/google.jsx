@@ -27,7 +27,7 @@ const Google = () => {
             {pod ? (
                 <Switch>
                     <Route exact path="/">
-                        <Redirect to={{ pathname: "/import" }} />
+                        <Redirect to={{ pathname: "/overview" }} />
                     </Route>
                     <Route exact path="/overview">
                         <Overview />

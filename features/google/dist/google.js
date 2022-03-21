@@ -2821,7 +2821,74 @@
     }
   }
 
+  class FeatureStorage {
+      constructor(pod) {
+          this.changeListener = () => {};
+          this._files = null;
+          this._pod = pod;
+      }
+
+      get files() {
+          return !this._files ? this._files : Object.values(this._files);
+      }
+
+      async refreshFiles() {
+          const { polyOut } = this._pod;
+          const files = await polyOut.readDir("");
+          const statResults = {};
+          for (let file of files) {
+              statResults[file] = await polyOut.stat(file.id);
+          }
+          this._files = statResults;
+          return files;
+      }
+
+      async readFile(path) {
+          const { polyOut } = this._pod;
+          return polyOut.readFile(path);
+      }
+
+      async removeFile(file) {
+          const { polyOut } = this._pod;
+          await polyOut.removeArchive(file);
+          await this.refreshFiles();
+          this.changeListener();
+      }
+  }
+
   const GoogleContext = React__default["default"].createContext();
+
+  //used until real storage is loaded
+  const fakeStorage = {
+      files: null,
+      refreshFiles: async () => null,
+      readFile: async () => null,
+      removeFile: async () => {},
+  };
+
+  class RefreshFilesError extends Error {
+      constructor(cause) {
+          super("Failed to refresh files");
+          this.name = "RefreshFilesError";
+          this.cause = cause;
+      }
+  }
+
+  class FileImportError extends Error {
+      constructor(cause) {
+          super("Failed to import file");
+          this.name = "FileImportError";
+          this.cause = cause;
+      }
+  }
+
+  class FileSelectionError extends Error {
+      constructor(cause) {
+          super("Failed to select file");
+          this.name = "FileSelectionError";
+          this.cause = cause;
+      }
+  }
 
   function updatePodNavigation(pod, history, handleBack, location) {
       pod.polyNav.actions = {
@@ -2836,21 +2903,84 @@
 
   const GoogleContextProvider = ({ children }) => {
       const [pod, setPod] = React.useState(null);
+      const [files, setFiles] = React.useState(null);
+      const [storage, setStorage] = React.useState(fakeStorage);
+      const [globalError, setGlobalError] = React.useState(null);
+      const [selectedFile, setSelectedFile] = React.useState(null);
 
       const location = useLocation();
-
+      const initPod = async () => await window.pod;
       const history = useHistory();
 
       function handleBack() {
           if (history.length > 1) {
               history.goBack();
-              if (history.location.state) {
-                  changeNavigationState(history.location.state);
-              }
           }
       }
 
-      const initPod = async () => await window.pod;
+      async function runWithLoadingScreen(task) {
+          setFiles(null);
+          await task();
+          refreshFiles();
+      }
+
+      const handleSelectFile = async () => {
+          const { polyNav } = pod;
+          runWithLoadingScreen(async function () {
+              try {
+                  setSelectedFile(await polyNav.pickFile("application/zip"));
+              } catch (error) {
+                  setGlobalError(new FileSelectionError(error));
+              }
+          });
+      };
+
+      const handleImportFile = async () => {
+          if (!selectedFile) return;
+          const { polyOut } = pod;
+          runWithLoadingScreen(async function () {
+              try {
+                  await polyOut.importArchive(selectedFile.url);
+                  setSelectedFile(null);
+              } catch (error) {
+                  setGlobalError(new FileImportError(error));
+              }
+          });
+      };
+
+      function refreshFiles() {
+          setFiles(null);
+          storage
+              .refreshFiles()
+              .then(async () => {
+                  const resolvedFiles = [];
+                  if (!storage.files) {
+                      setFiles(null);
+                      return;
+                  }
+                  for (const file of storage.files) {
+                      resolvedFiles.push(await file);
+                  }
+                  setFiles(resolvedFiles);
+              })
+              .catch((error) => setGlobalError(new RefreshFilesError(error)));
+      }
+
+      storage.changeListener = async () => {
+          const resolvedFiles = [];
+          for (const file of storage.files) {
+              resolvedFiles.push(await file);
+          }
+          setFiles(Object.values(resolvedFiles));
+      };
+
+      //on startup
+      React.useEffect(() => {
+          initPod().then((newPod) => {
+              setPod(newPod);
+              setStorage(new FeatureStorage(newPod));
+          });
+      }, []);
 
       //on startup
       React.useEffect(() => {
@@ -2869,6 +2999,11 @@
           React__default["default"].createElement(GoogleContext.Provider, {
               value: {
                   pod,
+                  files,
+                  handleSelectFile,
+                  handleImportFile,
+                  globalError,
+                  setGlobalError,
               },}
           
               , children
@@ -2877,7 +3012,18 @@
   };
 
   const Overview = () => {
-      return React__default["default"].createElement('div', { className: "overview",});
+      const { handleSelectFile, handleImportFile } = React.useContext(GoogleContext);
+      const importFile = () => {
+          handleSelectFile();
+          handleImportFile();
+      };
+      return (
+          React__default["default"].createElement('div', { className: "overview",}
+              , React__default["default"].createElement('button', { className: "btn secondary" , onClick: () => importFile(),}, "Import File"
+
+              )
+          )
+      );
   };
 
   const ImportView = () => {
@@ -2885,6 +3031,7 @@
   };
 
   const Google = () => {
+      const { pod } = React.useContext(GoogleContext);
       const renderSplash = () => "Loading";
 
       return (
@@ -2892,7 +3039,7 @@
               , pod ? (
                   React__default["default"].createElement(Switch, null
                       , React__default["default"].createElement(Route, { exact: true, path: "/",}
-                          , React__default["default"].createElement(Redirect, { to: { pathname: "/import" },} )
+                          , React__default["default"].createElement(Redirect, { to: { pathname: "/overview" },} )
                       )
                       , React__default["default"].createElement(Route, { exact: true, path: "/overview",}
                           , React__default["default"].createElement(Overview, null )

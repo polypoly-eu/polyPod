@@ -12,7 +12,6 @@
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
     "@polypoly-eu/pod-api": "file:../../platform/feature-api/api/pod-api",
-    "@polypoly-eu/podjs": "file:../../platform/podjs",
     "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
     "rollup-plugin-serve": "^1.1.0"
@@ -20,6 +19,8 @@
   "private": true,
   "dependencies": {
     "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
+    "@polypoly-eu/feature-storage": "file:../../feature-utils/feature-storage",
+    "@polypoly-eu/podjs": "file:../../platform/podjs",
     "d3": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
