@@ -118,4 +118,6 @@ bin/test
 
 .classpath
 .project
-.settings/
+.settings
+
+**/src/**/*.d.ts
