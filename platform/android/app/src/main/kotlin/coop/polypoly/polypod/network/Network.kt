@@ -97,7 +97,7 @@ open class Network(val context: Context) {
             return null
         }
         if (requestURL.protocol != "https" && !allowInsecure) {
-            logger.error("network.$type failed, URL is not secure (https)")
+            logger.error("network.$type failed, URL scheme ${requestURL.protocol} is not secure (https)")
             return null
         }
         try {
