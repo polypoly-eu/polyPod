@@ -112,6 +112,10 @@ class IDBPolyIn implements PolyIn {
         );
     }
 
+    /**
+     * It takes an array of quads and deletes them from the store
+     * @param {RDF.Quad[]} quads - RDF.Quad[]
+     */
     async delete(...quads: RDF.Quad[]): Promise<void> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
@@ -123,6 +127,10 @@ class IDBPolyIn implements PolyIn {
         });
     }
 
+    /**
+     * Returns true if the store contains the given quads.
+     * @param {RDF.Quad[]} quads - An array of quads to check for.
+     */
     async has(...quads: RDF.Quad[]): Promise<boolean> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
@@ -148,6 +156,17 @@ class IDBPolyIn implements PolyIn {
 class FileUrl {
     private static readonly separator = "/";
 
+    constructor(
+        readonly url: string,
+        readonly data: string,
+        readonly fileName: string
+    ) {}
+
+    /**
+     * It takes a URL and splits it into a path and a file name in a FileUrl format.
+     * @param {string} url - The full URL of the file.
+     * @returns A FileUrl object.
+     */
     static fromUrl(url: string): FileUrl {
         const [lastComponent, ...rest] = url.split(FileUrl.separator).reverse();
         return new FileUrl(
@@ -157,16 +176,16 @@ class FileUrl {
         );
     }
 
+    /**
+     * Creates a new FileUrl object from the given data and fileName
+     * @param {string} data - The base URL of the file.
+     * @param {string} fileName - The name of the file.
+     * @returns A FileUrl object.
+     */
     static fromParts(data: string, fileName: string): FileUrl {
         const url = data + FileUrl.separator + fileName;
         return new FileUrl(url, data, fileName);
     }
-
-    constructor(
-        readonly url: string,
-        readonly data: string,
-        readonly fileName: string
-    ) {}
 }
 
 interface FileInfo {
@@ -291,7 +310,16 @@ class IDBPolyOut implements PolyOut {
     }
 
     readFile(path: string, options: EncodingOptions): Promise<string>;
+
+    /* Reading a file from the file system and returning the contents as a Uint8Array. */
     readFile(path: string): Promise<Uint8Array>;
+
+    /**
+     * It reads a file from the local storage
+     * @param {string} id - The id of the file to read.
+     * @param {EncodingOptions} [options] - EncodingOptions
+     * @returns The promise returns a string or a Uint8Array.
+     */
     readFile(
         id: string,
         options?: EncodingOptions
@@ -330,6 +358,11 @@ class IDBPolyOut implements PolyOut {
         throw "Not implemented: writeFile";
     }
 
+    /**
+     * It takes a URL string, downloads the file, and stores it in the browser's local storage
+     * @param {string} url - The URL of the file to be downloaded.
+     * @returns The fileId of the file that was just added to the archive.
+     */
     async importArchive(url: string): Promise<string> {
         const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
         const blob = await (await fetch(dataUrl)).blob();
@@ -351,6 +384,11 @@ class IDBPolyOut implements PolyOut {
         });
     }
 
+    /**
+     * RemoveArchive() removes the file with the given fileId from the local storage
+     * @param {string} fileId - The id of the file to be removed.
+     * @returns Nothing.
+     */
     async removeArchive(fileId: string): Promise<void> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
@@ -363,10 +401,18 @@ class IDBPolyOut implements PolyOut {
 }
 
 class PodJsInfo implements Info {
+    /**
+     * It returns the runtime name.
+     * @returns The runtime name as a string.
+     */
     async getRuntime(): Promise<string> {
         return "podjs";
     }
 
+    /**
+     * It returns a version.
+     * @returns A string.
+     */
     async getVersion(): Promise<string> {
         return "¯\\_(ツ)_/¯";
     }
@@ -378,6 +424,15 @@ interface NetworkResponse {
 }
 
 class BrowserNetwork {
+    /**
+     * It makes a POST request to the specified URL, with a body, a content type, and an auth token.
+     * And returns the network response as a promise.
+     * @param {string} url - The URL to which the request is sent.
+     * @param {string} body - The body of the request.
+     * @param {string} [contentType] - The content type of the request.
+     * @param {string} [authToken] - The token to use for authentication.
+     * @returns A Promise of the Network Response of the call that was executed.
+     */
     async httpPost(
         url: string,
         body: string,
@@ -394,6 +449,14 @@ class BrowserNetwork {
             authToken
         );
     }
+
+    /**
+     * It makes a GET request to the specified URL, and returns the response
+     * @param {string} url - The URL to fetch.
+     * @param {string} [contentType] - The content type of the request.
+     * @param {string} [authToken] - The token to use for authentication.
+     * @returns A promise.
+     */
     async httpGet(
         url: string,
         allowInsecure: boolean,
@@ -408,6 +471,16 @@ class BrowserNetwork {
             authToken
         );
     }
+
+    /**
+     * It makes a network request of type @type and returns the response
+     * @param {string} type - The HTTP method to use.
+     * @param {string} url - The URL to fetch.
+     * @param {string} [body] - The body of the request.
+     * @param {string} [contentType] - The content type of the request.
+     * @param {string} [authToken] - The token to use for authentication.
+     * @returns The promise is resolved with a NetworkResponse object.
+     */
     private async httpFetchRequest(
         type: string,
         url: string,
@@ -480,6 +553,12 @@ function getEndpoint(endpointId: EndpointKeyId): EndpointInfo | null {
     return (endpointsJson as EndpointJSON)[endpointId] || null;
 }
 
+/**
+ * `approveEndpointFetch` is a function that takes in two parameters, `endpointId` and
+ * `featureIdToken` and prompts a confirm of this connection. It returns the answer as a boolean value.
+ * @param {string} endpointId - The ID of the endpoint that the feature wants to contact.
+ * @returns The return value is a boolean.
+ */
 function approveEndpointFetch(endpointId: string): boolean {
     const featureName = window.parent.currentTitle || window.manifest.name;
     return confirm(
@@ -487,6 +566,12 @@ function approveEndpointFetch(endpointId: string): boolean {
     );
 }
 
+/**
+ * It returns a string that contains the error message.
+ * @param {string} fetchType - The type of fetch that failed.
+ * @param {string} errorlog - The error message that was returned by the endpoint.
+ * @returns a promise.
+ */
 function endpointErrorMessage(fetchType: string, errorlog: string): string {
     console.error(errorlog);
     return `Endpoint failed at : ${fetchType}`;
@@ -494,6 +579,17 @@ function endpointErrorMessage(fetchType: string, errorlog: string): string {
 
 class BrowserEndpoint implements Endpoint {
     endpointNetwork = new BrowserNetwork();
+
+    /**
+     * Sends a message to a specific endpoint
+     * @param {string} endpointId - The ID of the endpoint to send the request to.
+     * @param {string} featureIdToken - The featureIdToken is the token that the user has approved for the
+     * feature.
+     * @param {string} payload - The payload to send to the endpoint.
+     * @param {string} [contentType] - The content type of the payload.
+     * @param {string} [authToken] - The token to use for authentication. If not provided, the default
+     * token will be used.
+     */
     async send(
         endpointId: EndpointKeyId,
         payload: string,
@@ -544,6 +640,10 @@ class BrowserEndpoint implements Endpoint {
     }
 }
 
+/**
+ * Create a random UUID
+ * @returns A string of length 36.
+ */
 function createUUID(): string {
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
         /[xy]/g,
@@ -556,8 +656,12 @@ function createUUID(): string {
 }
 
 class BrowserPolyNav implements PolyNav {
+    /* Creating a new object with a property called actions. The actions property is an
+    object with a string key and a value of a function that returns void. */
     actions?: { [key: string]: () => void };
+    /* Creating a function that will be called when the user releases a key on the keyboard. */
     private keyUpListener: ((key: KeyboardEvent) => void) | undefined;
+    /* Creating a function that will be called when the browser's history state changes. */
     private popStateListener: // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ((this: Window, ev: PopStateEvent) => any) | undefined;
 
@@ -673,9 +777,10 @@ declare global {
 }
 
 /**
- * Returns the relative luminance value of a feature color.
- *
- * @param featureColor - A six digit hex color string, e.g. #000000
+ * It takes a string representing a color in hexadecimal format and
+ * returns the relative luminance of that feature color.
+ * @param {string} featureColor - the color of the feature you want to change in a six digit hex color string, e.g. #000000
+ * @returns The luminance of the feature color.
  */
 function luminance(featureColor: string): number {
     const red = parseInt(featureColor.substr(1, 2), 16);
@@ -685,6 +790,12 @@ function luminance(featureColor: string): number {
     return red * 0.2126 + green * 0.7152 + blue * 0.0722;
 }
 
+/**
+ * It determines the foreground and background colors for the navbar based on the primary color of the
+ * app.
+ * @param {Manifest} manifest - Manifest
+ * @returns an object with two properties: `fg` and `bg`.
+ */
 function determineNavBarColors(manifest: Manifest): { fg: string; bg: string } {
     const bg = manifest.primaryColor || NAV_DEFAULT_BACKGROUND_COLOR;
     const brightnessThreshold = 80;
@@ -695,6 +806,11 @@ function determineNavBarColors(manifest: Manifest): { fg: string; bg: string } {
     return { fg, bg };
 }
 
+/**
+ * Create a new iframe with a title and a background color
+ * @param {string} title - The title of the page.
+ * @returns A promise that resolves to a DOM element.
+ */
 function createNavBarFrame(title: string): HTMLElement {
     const frame = document.createElement("iframe");
     frame.style.display = "block";
@@ -730,6 +846,7 @@ export class BrowserPod implements Pod {
     public readonly info = new PodJsInfo();
     public readonly endpoint = new BrowserEndpoint();
 
+    /* Creates a navigation bar for the app. */
     constructor() {
         window.addEventListener("load", async () => {
             if (!MANIFEST_DATA) {
