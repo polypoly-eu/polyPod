@@ -1,7 +1,7 @@
 {
-  "name": "@polypoly-eu/bubblewrap",
-  "version": "0.1.2",
-  "description": "Lossless encoding and decoding of objects into byte arrays",
+  "name": "@polypoly-eu/communication",
+  "version": "0.0.1",
+  "description": "Communication functionality for the polypod",
   "files": [
     "dist/*.js",
     "dist/*.d.ts"
@@ -26,9 +26,9 @@
     "@msgpack/msgpack": "^2.6.0"
   },
   "devDependencies": {
-    "@polypoly-eu/rdf": "file:../../api/rdf",
-    "@polypoly-eu/rdf-convert": "file:../../api/rdf-convert",
-    "@polypoly-eu/rdf-spec": "file:../../api/rdf-spec",
+    "@polypoly-eu/rdf": "file:../api/rdf",
+    "@polypoly-eu/rdf-convert": "file:../api/rdf-convert",
+    "@polypoly-eu/rdf-spec": "file:../api/rdf-spec",
     "@types/benchmark": "^2.1.0",
     "@types/n3": "^1.4.4",
     "benchmark": "^2.1.4",
