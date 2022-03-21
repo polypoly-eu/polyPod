@@ -1,9 +1,8 @@
 import { Pod, PolyLifecycle, DefaultPod, FS } from "@polypoly-eu/pod-api";
 import { Volume } from "memfs";
 import { dataset } from "@rdfjs/dataset";
-import fetch from "node-fetch";
 import { podSpec } from "@polypoly-eu/pod-api/dist/spec";
-import { getHttpbinUrl } from "@polypoly-eu/fetch-spec";
+import { getHttpbinUrl } from "@polypoly-eu/test-utils";
 import { AsyncPod } from "../../async";
 import { DataFactory } from "@polypoly-eu/rdf";
 import chai, { assert } from "chai";
@@ -13,7 +12,7 @@ chai.use(chaiAsPromised);
 
 describe("Async pod", () => {
     const fs = new Volume().promises as unknown as FS;
-    const underlying = new DefaultPod(dataset(), fs, fetch);
+    const underlying = new DefaultPod(dataset(), fs);
 
     describe("Resolved promise", () => {
         podSpec(

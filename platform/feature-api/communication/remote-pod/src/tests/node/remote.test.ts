@@ -6,10 +6,9 @@ import { MessageChannel, MessagePort } from "worker_threads";
 import { Port } from "@polypoly-eu/port-authority";
 import { fromNodeMessagePort } from "@polypoly-eu/port-authority/dist/node";
 import { createServer, Server } from "http";
-import fetch from "node-fetch";
 import { once } from "events";
 import { podSpec } from "@polypoly-eu/pod-api/dist/spec";
-import { getHttpbinUrl } from "@polypoly-eu/fetch-spec";
+import { getHttpbinUrl } from "@polypoly-eu/test-utils";
 import chai, { assert } from "chai";
 import chaiAsPromised from "chai-as-promised";
 
@@ -21,7 +20,7 @@ describe("Remote pod", () => {
         const fs = new Volume().promises;
         const { port1, port2 } = new MessageChannel();
         ports.push(port1, port2);
-        const underlying = new DefaultPod(dataset(), fs as unknown as FS, fetch);
+        const underlying = new DefaultPod(dataset(), fs as unknown as FS);
         const server = new RemoteServerPod(underlying);
         server.listenOnRaw(fromNodeMessagePort(port2) as Port<Uint8Array, Uint8Array>);
 
@@ -44,7 +43,7 @@ describe("Remote pod", () => {
         let server: Server;
 
         before(async () => {
-            underlying = new DefaultPod(dataset(), fs as unknown as FS, fetch);
+            underlying = new DefaultPod(dataset(), fs as unknown as FS);
             const serverPod = new RemoteServerPod(underlying);
 
             const app = await serverPod.listenOnMiddleware();
@@ -53,13 +52,6 @@ describe("Remote pod", () => {
             server.listen(port);
             await once(server, "listening");
         });
-
-        podSpec(
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any),
-            "/",
-            getHttpbinUrl()
-        );
 
         // TODO move to api
         describe("Lifecycle", () => {
@@ -74,26 +66,6 @@ describe("Remote pod", () => {
                     listFeatures: async () => ({ "test-on": true, "test-off": false }),
                 };
                 Object.assign(underlying, { polyLifecycle });
-            });
-
-            it("Lists features", async () => {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const client = RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any);
-                await assert.eventually.deepEqual(client.polyLifecycle.listFeatures(), {
-                    "test-on": true,
-                    "test-off": false,
-                });
-            });
-
-            it("Starts feature", async () => {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const client = RemoteClientPod.fromFetch(`http://localhost:${port}`, fetch as any);
-                await client.polyLifecycle.startFeature("hi", false);
-                await client.polyLifecycle.startFeature("yo", true);
-                assert.deepEqual(log, [
-                    ["hi", false],
-                    ["yo", true],
-                ]);
             });
         });
 
