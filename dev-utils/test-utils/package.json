@@ -1,7 +1,7 @@
 {
-  "name": "@polypoly-eu/fetch-spec",
+  "name": "@polypoly-eu/test-utils",
   "version": "0.0.1",
-  "description": "Standalone executable spec for window.fetch",
+  "description": "Functions that can be used within tests",
   "files": [
     "dist/*.ts",
     "dist/*.js"
@@ -18,9 +18,6 @@
     "eslint": "eslint src --ext .ts",
     "lint": "npm run eslint",
     "docs": "typedoc"
-  },
-  "devDependencies": {
-    "ts-node": "^9.1.1"
   },
   "private": true
 }
