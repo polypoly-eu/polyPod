@@ -1,8 +1,10 @@
-# bubblewrap
+# Polypoly communication API
+
+## bubblewrap
 
 Lossless encoding and decoding of objects into byte arrays
 
-## Overview
+### Overview
 
 When transferring JavaScript objects over channels, they usually need to be serialized into a transfer format.
 A widespread transfer format is JSON: with `JSON.stringify`, objects can be converted to strings by the sender.
@@ -29,7 +31,7 @@ We can declare a class with a constructor and some methods.
 By default, Bubblewrap doesn't know anything about classes, so when creating the encoder/decoder, we need to pass a dictionary of known classes.
 
 ```javascript
-import {Bubblewrap} from "@polypoly-eu/bubblewrap";
+import { Bubblewrap } from "@polypoly-eu/communication";
 
 class MyCoolClass {
     constructor(subject) {
@@ -42,7 +44,7 @@ class MyCoolClass {
 }
 
 const bubblewrap = Bubblewrap.create({
-    "MyCoolClass": MyCoolClass
+    MyCoolClass: MyCoolClass,
 });
 
 const encoded = bubblewrap.encode(new MyCoolClass("World"));
@@ -56,10 +58,10 @@ The decoded object is not the _same_ as the original object, but behaves equival
 
 ## Limitations
 
-* The handling of `undefined` in the underlying MessagePack implementation is erratic.
-  During encoding, `undefined` gets mapped to `null`, which – while rare – may be treated differently to `undefined` by library users.
-  See the documentation for details.
-* `Error`s lose their stack trace and name by default.
+-   The handling of `undefined` in the underlying MessagePack implementation is erratic.
+    During encoding, `undefined` gets mapped to `null`, which – while rare – may be treated differently to `undefined` by library users.
+    See the documentation for details.
+-   `Error`s lose their stack trace and name by default.
 
 ## Benchmarks
 
