@@ -1,45 +1,44 @@
 import sucrase from "@rollup/plugin-sucrase";
 import commonjs from "@rollup/plugin-commonjs";
-import {nodeResolve} from "@rollup/plugin-node-resolve";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 
-const mainFileName = "src/main/javascript/index.ts";
+const bubblewrapFileName = "src/bubblewrap/main/javascript/index.ts";
 export default [
     {
-        input: mainFileName,
+        input: bubblewrapFileName,
         output: [
             {
                 file: "dist/index.es.js",
-                format: "esm"
+                format: "esm",
             },
             {
                 file: "dist/index.js",
-                format: "cjs"
-            }
+                format: "cjs",
+            },
         ],
         plugins: [
             sucrase({
                 exclude: ["node_modules/**"],
-                transforms: ["typescript"]
-            })
+                transforms: ["typescript"],
+            }),
         ],
-        external: ["@msgpack/msgpack"]
+        external: ["@msgpack/msgpack"],
     },
     {
-        input: mainFileName,
+        input: bubblewrapFileName,
         output: {
             file: "build/js/bubblewrap.js",
             format: "iife",
-            name: "bubblewrap"
-
+            name: "bubblewrap",
         },
-        context: 'null',
+        context: "null",
         plugins: [
             commonjs(),
             nodeResolve(),
             sucrase({
                 exclude: ["node_modules/**"],
-                transforms: ["typescript"]
-            })
-        ]
-    }
+                transforms: ["typescript"],
+            }),
+        ],
+    },
 ];
