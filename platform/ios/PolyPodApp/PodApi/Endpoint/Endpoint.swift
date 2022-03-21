@@ -19,8 +19,8 @@ struct EndpointInfo: Decodable {
 final class Endpoint: EndpointProtocol {
     
     init() {
-            delegate = nil
-        }
+        delegate = nil
+    }
     
     let network: Network = Network()
     var delegate: EndpointDelegate?
