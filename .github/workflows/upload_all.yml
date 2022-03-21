@@ -83,7 +83,10 @@ jobs:
         if: env.POLYPOD_UPLOAD_GOOGLE_PLAY == 'true'
         working-directory: platform/android
         run: |
-          aapt_path=/Library/Android/sdk/build-tools/30.0.0/aapt
+          ls -l ~/Library/Android
+          ls -l /Library/Android
+          set | grep ANDROID
+          aapt_path=~/Library/Android/sdk/build-tools/30.0.0/aapt
           apk_path=./app/build/outputs/apk/release/app-release.apk
           version_code=$(./getPackageInfo.sh $aapt_path $apk_path versionCode)
           version_name=$(./getPackageInfo.sh $aapt_path $apk_path versionName)
