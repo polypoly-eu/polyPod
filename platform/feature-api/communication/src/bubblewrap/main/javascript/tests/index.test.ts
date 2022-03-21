@@ -90,7 +90,9 @@ const infos: TypeInfos<Types> = {
     A: [TestA, fc.fullUnicodeString().map((a) => new TestA(a))],
     B: [
         TestB,
-        fc.tuple(fc.fullUnicodeString(), fc.fullUnicodeString()).map(([a, b]) => new TestB(a, b)),
+        fc
+            .tuple(fc.fullUnicodeString(), fc.fullUnicodeString())
+            .map(([a, b]) => new TestB(a, b)),
     ],
     MyError: [MyError, fc.hexaString().map((m) => new MyError(m))],
     "@polypoly-eu/rdf.NamedNode": [RDF.NamedNode, gen.namedNode],
@@ -117,7 +119,9 @@ describe("Bubblewrap", () => {
             it(key, () => {
                 fc.assert(
                     fc.property(g, (term) => {
-                        const decoded = bubblewrap.decode(bubblewrap.encode(term));
+                        const decoded = bubblewrap.decode(
+                            bubblewrap.encode(term)
+                        );
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         expect((term as any).equals(decoded)).toBe(true);
                         expect(decoded.equals(term)).toBe(true);
@@ -150,7 +154,9 @@ describe("Bubblewrap", () => {
         it("Error (strict)", () => {
             const bubblewrap = Bubblewrap.create({}, true);
             const err = new MyError("test");
-            expect(() => bubblewrap.encode(err)).toThrowError(/unknown prototype/);
+            expect(() => bubblewrap.encode(err)).toThrowError(
+                /unknown prototype/
+            );
         });
     });
 
@@ -161,7 +167,9 @@ describe("Bubblewrap", () => {
             const bubblewrapPlus = bubblewrap.addClasses(someClasses);
             expect(bubblewrapPlus).not.toBeNull();
             const someOtherClasses: Classes = { TestB: TestB };
-            expect(() => bubblewrapPlus.addClasses(someOtherClasses)).toThrowError(/Duplicate/);
+            expect(() =>
+                bubblewrapPlus.addClasses(someOtherClasses)
+            ).toThrowError(/Duplicate/);
         });
     });
 

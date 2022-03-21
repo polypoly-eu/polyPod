@@ -206,7 +206,10 @@ export class Bubblewrap {
     codec: ExtensionCodec;
     knownPrototypes: Array<unknown>;
 
-    private constructor(private readonly classes: Classes, private readonly strict: boolean) {
+    private constructor(
+        private readonly classes: Classes,
+        private readonly strict: boolean
+    ) {
         this.knownPrototypes = [
             Object.prototype,
             Error.prototype,
@@ -239,7 +242,8 @@ export class Bubblewrap {
         const thisKeys = Object.keys(this.classes);
         const thatsKeys = Object.keys(more);
         for (const key of thatsKeys)
-            if (thisKeys.includes(key)) throw new Error(`Duplicate identifier ${key}`);
+            if (thisKeys.includes(key))
+                throw new Error(`Duplicate identifier ${key}`);
         return new Bubblewrap({ ...this.classes, ...more }, this.strict);
     }
 
@@ -247,7 +251,8 @@ export class Bubblewrap {
         const codec = new ExtensionCodec();
         codec.register({
             type: msgPackEtypeUndef,
-            encode: (value) => (value instanceof Undefined ? encode(null) : null),
+            encode: (value) =>
+                value instanceof Undefined ? encode(null) : null,
             decode: () => undefined,
         });
 
@@ -264,7 +269,9 @@ export class Bubblewrap {
                     const value: MaybeSerializable = _value;
 
                     if (isSerializable(value))
-                        return encode([name, value[serialize]()], { extensionCodec: codec });
+                        return encode([name, value[serialize]()], {
+                            extensionCodec: codec,
+                        });
 
                     const raw = Object.entries(value);
                     const entries = raw.map(([key, value]) => {
@@ -279,7 +286,9 @@ export class Bubblewrap {
             },
             decode: (buffer) => {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const [name, raw] = decode(buffer, { extensionCodec: codec }) as any;
+                const [name, raw] = decode(buffer, {
+                    extensionCodec: codec,
+                }) as any;
                 const Class = this.classes[name];
 
                 const deserializer = Class[deserialize];
@@ -287,14 +296,16 @@ export class Bubblewrap {
 
                 const object = Object.create(Class.prototype);
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                for (const [key, value] of raw as [string, any][]) object[key] = value;
+                for (const [key, value] of raw as [string, any][])
+                    object[key] = value;
                 return object;
             },
         });
 
         codec.register({
             type: msgPackEtypeError,
-            encode: (value) => (value instanceof Error ? encode(value.message) : null),
+            encode: (value) =>
+                value instanceof Error ? encode(value.message) : null,
             decode: (buffer) => new Error(decode(buffer) as string),
         });
 
@@ -308,7 +319,9 @@ export class Bubblewrap {
             !Array.isArray(value) &&
             !this.knownPrototypes.includes(Object.getPrototypeOf(value))
         ) {
-            throw new Error("Attempted to encode an object with an unknown prototype");
+            throw new Error(
+                "Attempted to encode an object with an unknown prototype"
+            );
         }
 
         return encode(value, { extensionCodec: this.codec });

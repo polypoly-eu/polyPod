@@ -42,7 +42,10 @@ async function runBench(): Promise<void> {
     const encodedRaw = bubblewrapRaw.encode(dataset);
     assert.notDeepStrictEqual(encoded, encodedRaw);
 
-    assert.deepStrictEqual(convertDataset(bubblewrapRaw.decode(encodedRaw)), dataset);
+    assert.deepStrictEqual(
+        convertDataset(bubblewrapRaw.decode(encodedRaw)),
+        dataset
+    );
 
     console.log(`Measuring ${dataset.length} quads`);
 
