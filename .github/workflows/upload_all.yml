@@ -58,10 +58,10 @@ jobs:
         if: env.POLYPOD_UPLOAD_GOOGLE_PLAY == 'true'
         with:
           java-version: 11
-      - name: Android - Test
-        if: env.POLYPOD_UPLOAD_GOOGLE_PLAY == 'true'
-        working-directory: platform/android
-        run: ./gradlew test
+      # - name: Android - Test
+      #   if: env.POLYPOD_UPLOAD_GOOGLE_PLAY == 'true'
+      #   working-directory: platform/android
+      #   run: ./gradlew test
 
       - name: Android - Write keystore file
         if: env.POLYPOD_UPLOAD_GOOGLE_PLAY == 'true'
