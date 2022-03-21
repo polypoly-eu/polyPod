@@ -1,3 +1,4 @@
 /target
 /src/flatbuffers_generated
 /flatbuffers
+/polypod-core.h

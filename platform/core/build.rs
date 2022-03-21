@@ -1,9 +1,12 @@
 use std::{path::PathBuf, process};
+use std::env;
+extern crate cbindgen;
 
 // Based on https://doc.rust-lang.org/cargo/reference/build-scripts.html
 // build.js allows running any scripts/code before building the Kernel.
 fn main() {
     generate_flatbuffers();
+    generate_c_header();
 }
 
 fn generate_flatbuffers() {
@@ -24,4 +27,17 @@ fn generate_flatbuffers() {
         .expect("Failed to spawn flatc command")
         .wait()
         .expect("flatc command failed");
+}
+
+fn generate_c_header() {
+    println!("cargo:rerun-if-changed=c_interface/interface.rs");
+
+    let crate_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
+
+    cbindgen::Builder::new()
+      .with_crate(crate_dir)
+      .with_language(cbindgen::Language::C)
+      .generate()
+      .expect("Unable to generate bindings")
+      .write_to_file("polypod-core.h");
 }
