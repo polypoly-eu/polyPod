@@ -8,7 +8,7 @@ fn main() {
 
 fn generate_flatbuffers() {
     // Rebuild flatbuffers everytime there are some changes in flabuffers directory
-    println!("cargo:rerun-if-changed=flatbuffers/");
+    println!("cargo:rerun-if-changed=flatbuffers_models/");
 
     // This could be refactored to allow running any command,
     // but for now only flatbuffers are generated, and building a more generic solution
