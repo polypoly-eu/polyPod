@@ -32,15 +32,3 @@ export interface Response {
     text(): Promise<string>;
 }
 
-/**
- * A stripped-down version of `window.fetch` that provides most features needed in real-world use cases.
- *
- * The type definition here is a subset of what browsers offer (see
- * [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for details).
- *
- * Possible implementations include:
- * - `window.fetch` (when running in a DOM context)
- * - [node-fetch](https://www.npmjs.com/package/node-fetch) for Node.js
- * - [unfetch](https://www.npmjs.com/package/unfetch) for Node.js
- */
-export type Fetch = (input: string, init?: RequestInit) => Promise<Response>;
