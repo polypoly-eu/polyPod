@@ -9,7 +9,7 @@
 
 import * as RDF from "rdf-js";
 import { dataFactory } from "@polypoly-eu/rdf";
-import { Pod, PolyIn, PolyOut, PolyNav, Info, Network } from "./api";
+import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint } from "./api";
 import type { Fetch, Response, RequestInit } from "@polypoly-eu/fetch-spec";
 import { EncodingOptions, FS, Stats } from "./fs";
 import { Entry } from ".";
@@ -167,14 +167,23 @@ export class DefaultPod implements Pod {
         };
     }
     /**
-     * The [[Network]] interface. See [[Network]] for the description.
+     * The [[Endpoint]] interface. See [[Endpoint]] for the description.
      */
-
-    get network(): Network {
+    get endpoint(): Endpoint {
         return {
-            httpPost(url: string, body: string, contentType?: string, authorization?: string) {
+            send(
+                endpointId: string,
+                payload: string,
+                contentType?: string,
+                authToken?: string
+            ): Promise<void> {
                 throw new Error(
-                    `Called with ${url}, ${body}, ${contentType}, ${authorization} but not implemented`
+                    `Called with ${endpointId}, ${payload}, ${contentType}, ${authToken} but not implemented`
+                );
+            },
+            get(endpointId: string, contentType?: string, authToken?: string): Promise<string> {
+                throw new Error(
+                    `Called with ${endpointId}, ${contentType}, ${authToken} but not implemented`
                 );
             },
         };

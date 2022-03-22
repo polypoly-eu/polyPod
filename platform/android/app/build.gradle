@@ -186,6 +186,11 @@ task copyThirdPartyLicenses(type: Copy) {
     into "build/generated-assets/3rd-party-licenses"
 }
 
+task copyEndpoints(type: Copy) {
+    from "../../../../polyPod-config"
+    into "build/generated-assets/config-assets"
+}
+
 task packageTestFeature(type: Zip) {
     archiveFileName = "test.zip"
     destinationDirectory = file("$buildDir")
@@ -219,6 +224,7 @@ tasks.whenTaskAdded { task ->
         task.dependsOn copyRemotePod
         task.dependsOn copyBundledFeatures
         task.dependsOn copyThirdPartyLicenses
+        task.dependsOn copyEndpoints
     }
     if (task.name == "connectedDebugAndroidTest" || task.name == "connectedReleaseAndroidTest")
         task.dependsOn copyTestFeatureOntoDevice

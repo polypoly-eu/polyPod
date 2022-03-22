@@ -1,9 +1,9 @@
 package coop.polypoly.polypod
 
 import coop.polypoly.polypod.bubblewrap.FetchResponseCodec
+import coop.polypoly.polypod.endpoint.Endpoint
 import coop.polypoly.polypod.info.Info
 import coop.polypoly.polypod.logging.LoggerFactory
-import coop.polypoly.polypod.network.Network
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyIn.rdf.Matcher
 import coop.polypoly.polypod.polyIn.rdf.Quad
@@ -20,7 +20,7 @@ open class PodApi(
     open val polyIn: PolyIn,
     open val polyNav: PolyNav,
     open val info: Info,
-    open val network: Network
+    open val endpoint: Endpoint
 ) {
 
     companion object {
@@ -78,9 +78,10 @@ open class PodApi(
                     "getVersion" -> return handleInfoGetVersion()
                 }
             }
-            "network" -> {
+            "endpoint" -> {
                 when (inner) {
-                    "httpPost" -> return handleNetworkHttpPost(args)
+                    "send" -> return handleEndpointSend(args)
+                    "get" -> return handleEndpointGet(args)
                 }
             }
         }
@@ -247,15 +248,34 @@ open class PodApi(
         return ValueFactory.newString(info.getVersion())
     }
 
-    private suspend fun handleNetworkHttpPost(args: List<Value>): Value {
-        logger.debug("dispatch() -> network.httpPost")
-        val url = args[0].asStringValue().toString()
-        val contentType = args[1].asStringValue().toString()
-        val body = args[2].asStringValue().toString()
-        val authorization: String? = args[3]?.asStringValue().toString()
-        val error = network.httpPost(url, contentType, body, authorization)
-        return if (error == null) ValueFactory.newNil()
-        else ValueFactory.newString(error)
+    private suspend fun handleEndpointSend(args: List<Value>): Value {
+        logger.debug("dispatch() -> endpoint.send")
+        val endpointId = args[0].asStringValue().toString()
+        val body = args[1].asStringValue().toString()
+        val contentType = args[2].let {
+            if (it.isStringValue) it.asStringValue().toString() else null
+        }
+        val authorization = args[3].let {
+            if (it.isStringValue) it.asStringValue().toString() else null
+        }
+        endpoint
+            .send(endpointId, body, contentType, authorization)
+        return ValueFactory.newNil()
+    }
+
+    private suspend fun handleEndpointGet(args: List<Value>): Value {
+        logger.debug("dispatch() -> endpoint.get")
+        val endpointId = args[0].asStringValue().toString()
+        val contentType = args[1].let {
+            if (it.isStringValue) it.asStringValue().toString() else null
+        }
+        val authorization = args[2].let {
+            if (it.isStringValue) it.asStringValue().toString() else null
+        }
+        val data = endpoint
+            .get(endpointId, contentType, authorization)
+        return if (data == null) ValueFactory.newNil()
+        else ValueFactory.newString(data)
     }
 
     private fun decodePolyOutFetchCallArgs(args: Value): FetchInit {

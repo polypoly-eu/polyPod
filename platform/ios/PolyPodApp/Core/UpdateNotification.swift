@@ -107,7 +107,7 @@ class UpdateNotification {
     }
     
     private static let notificationData = Data.load()
-        
+    
     private static func loadLastState(_ id: Int) -> State {
         if id == 0 {
             return .ALL_SEEN

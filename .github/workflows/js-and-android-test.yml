@@ -41,9 +41,15 @@ jobs:
                       - 'platform/feature-api/**'
                       - 'platform/podjs/**'
                       - 'dev-utils/dummy-server'
+                      swift:
+                      - 'platform/ios/**'
             - name: Lint core and features
               if: steps.changes.outputs.js == 'true'
               run: ./build.js lint
+            - name: Lint Swift
+              if: steps.changes.outputs.swift == 'true'
+              working-directory: platform/ios
+              run: docker run -t -v `pwd`:`pwd` -w `pwd` ghcr.io/realm/swiftlint:latest
             - name: Build core and features
               if: steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.android == 'true'
               run: ./build.js
