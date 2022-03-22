@@ -5,7 +5,7 @@ import { bubblewrapFetchPort, jsonFetchPort } from "../../fetch";
 import { bubblewrapMiddlewarePort, jsonMiddlewarePort } from "../../node";
 import { createServer, RequestListener, Server } from "http";
 import { AddressInfo } from "net";
-import { Bubblewrap } from "@polypoly-eu/bubblewrap";
+import { Bubblewrap } from "@polypoly-eu/communication";
 
 // @ts-ignore only used from JS
 import fetch from "node-fetch";

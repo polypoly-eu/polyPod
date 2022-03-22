@@ -7,7 +7,7 @@
 
 import { RequestPort } from "./procedure";
 import { mapSendPort } from "./port";
-import { Bubblewrap } from "@polypoly-eu/bubblewrap";
+import { Bubblewrap } from "@polypoly-eu/communication";
 import { rethrowPromise, Try } from "./util";
 
 /**
