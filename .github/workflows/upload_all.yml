@@ -30,6 +30,8 @@ jobs:
           cache-dependency-path: "**/package-lock.json"
       - name: API and features - Lint
         run: ./build.js lint
+      - name: API and features - Build
+        run: ./build.js
       - name: API and features - Test
         run: xvfb-run --auto-servernum ./build.js test
 
