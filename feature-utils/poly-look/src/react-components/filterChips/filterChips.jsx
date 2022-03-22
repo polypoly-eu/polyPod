@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import * as propTypes from "prop-types";
+console.log("propes", propTypes);
 import Chip from "../chip/chip.jsx";
 
 import "./filterChips.css";
@@ -133,6 +135,17 @@ const FilterChips = ({
       })}
     </div>
   );
+};
+
+FilterChips.propTypes = {
+  chipsContent: propTypes.oneOfType([propTypes.string, propTypes.object])
+    .isRequired,
+  defaultActiveChips: propTypes.array,
+  onChipClick: propTypes.func,
+  exclusive: propTypes.bool,
+  theme: propTypes.string,
+  allChip: propTypes.object,
+  othersChip: propTypes.object,
 };
 
 export default FilterChips;
