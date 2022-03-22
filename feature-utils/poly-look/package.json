@@ -20,6 +20,7 @@
     "d3-sankey": "^0.12.3",
     "lit-element": "^2.5.1",
     "lit-html": "^1.4.1",
+    "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "swiper": "^6.4.11"
   },
