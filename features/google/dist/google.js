@@ -2856,6 +2856,91 @@
       }
   }
 
+  class ZipFileEntry {
+      constructor(pod, zipFile, id, path) {
+          this._pod = pod;
+          this._zipFile = zipFile;
+          this._id = id;
+          this._path = path;
+      }
+
+      get id() {
+          return this._id;
+      }
+
+      get path() {
+          return this._path;
+      }
+
+      async stat() {
+          const { polyOut } = this._pod;
+          return polyOut.stat(this._id);
+      }
+
+      async getContent() {
+          const { polyOut } = this._pod;
+          return polyOut.readFile(this._id);
+      }
+  }
+
+  class ZipFile {
+      constructor(file, pod) {
+          this._pod = pod;
+          this._file = file;
+
+          this._entriesPathHash = null;
+      }
+
+      get id() {
+          return this._file.id;
+      }
+
+      async _readEntriesList() {
+          const { polyOut } = this._pod;
+          return polyOut.readDir(this.id);
+      }
+
+      async _ensureCachedEntries() {
+          if (this._entriesPathHash !== null) return;
+          const entriesList = await this._readEntriesList();
+          this._entriesPathHash = new Map();
+          entriesList.forEach((entry) =>
+              this._entriesPathHash.set(
+                  entry.path,
+                  new ZipFileEntry(this._pod, this, entry.id, entry.path)
+              )
+          );
+      }
+
+      async hasEntryPath(entryPath) {
+          await this._ensureCachedEntries();
+          return this._entriesPathHash.has(entryPath);
+      }
+
+      async findEntry(entryPath) {
+          await this._ensureCachedEntries();
+          return this._entriesPathHash.get(entryPath);
+      }
+
+      async getEntries() {
+          await this._ensureCachedEntries();
+          return [...this._entriesPathHash.values()];
+      }
+  }
+
+  ZipFile.createWithCache = async function (zipData, pod) {
+      let zipFile = new ZipFile(zipData, pod);
+      await zipFile._ensureCachedEntries();
+      return zipFile;
+  };
+
+  async function importData(zipData) {
+      const zipFile = await ZipFile.createWithCache(zipData, window.pod);
+      console.log(zipFile);
+      // return importZip(zipFile, window.pod);
+  }
+
+  function _optionalChain$1(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
   const GoogleContext = React__default["default"].createContext();
 
   //used until real storage is loaded
@@ -2935,9 +3020,14 @@
           });
       };
 
+      const handleRemoveFile = (fileID) => {
+          return storage.removeFile(fileID);
+      };
+
       const handleImportFile = async () => {
           if (!selectedFile) return;
           const { polyOut } = pod;
+          console.log("handleImportFile: ", selectedFile.url);
           runWithLoadingScreen(async function () {
               try {
                   await polyOut.importArchive(selectedFile.url);
@@ -2974,6 +3064,11 @@
           setFiles(Object.values(resolvedFiles));
       };
 
+      //on storage change
+      React.useEffect(() => {
+          refreshFiles();
+      }, [storage]);
+
       //on startup
       React.useEffect(() => {
           initPod().then((newPod) => {
@@ -2995,15 +3090,26 @@
           updatePodNavigation(pod, history, handleBack, location);
       });
 
+      React.useEffect(() => {
+          if (!selectedFile) return;
+          handleImportFile();
+      }, [selectedFile]);
+
+      React.useEffect(() => {
+          if (_optionalChain$1([files, 'optionalAccess', _ => _[0]])) importData(files[0]);
+      }, [files]);
+
       return (
           React__default["default"].createElement(GoogleContext.Provider, {
               value: {
                   pod,
                   files,
                   handleSelectFile,
+                  handleRemoveFile,
                   handleImportFile,
                   globalError,
                   setGlobalError,
+                  refreshFiles,
               },}
           
               , children
@@ -3013,18 +3119,21 @@
 
   function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
   const Overview = () => {
-      const { handleSelectFile, handleImportFile, files } =
+      const { handleSelectFile, files, handleRemoveFile } =
           React.useContext(GoogleContext);
+
       const importFile = async () => {
+          if (_optionalChain([files, 'optionalAccess', _ => _[0], 'optionalAccess', _2 => _2.id])) handleRemoveFile(files[0].id);
+          console.log(files);
           await handleSelectFile();
-          await handleImportFile();
       };
+
       return (
           React__default["default"].createElement('div', { className: "overview poly-theme-light" ,}
               , React__default["default"].createElement('button', { className: "btn secondary" , onClick: () => importFile(),}, "Import File"
 
               )
-              , React__default["default"].createElement('div', null, _optionalChain([files, 'optionalAccess', _ => _[0], 'access', _2 => _2.name]))
+              , React__default["default"].createElement('div', null, _optionalChain([files, 'optionalAccess', _3 => _3[0], 'optionalAccess', _4 => _4.name]))
           )
       );
   };

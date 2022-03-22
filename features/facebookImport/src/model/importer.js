@@ -142,7 +142,6 @@ export async function importZip(zipFile, pod) {
         facebookAccount,
         pod
     );
-
     facebookAccount.importingResults = importingResults;
 
     return facebookAccount;

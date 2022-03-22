@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FeatureStorage } from "@polypoly-eu/feature-storage";
 import { useHistory, useLocation } from "react-router-dom";
+import { importData } from "../model/importer";
 
 export const GoogleContext = React.createContext();
 
@@ -81,9 +82,14 @@ export const GoogleContextProvider = ({ children }) => {
         });
     };
 
+    const handleRemoveFile = (fileID) => {
+        return storage.removeFile(fileID);
+    };
+
     const handleImportFile = async () => {
         if (!selectedFile) return;
         const { polyOut } = pod;
+        console.log("handleImportFile: ", selectedFile.url);
         runWithLoadingScreen(async function () {
             try {
                 await polyOut.importArchive(selectedFile.url);
@@ -120,6 +126,11 @@ export const GoogleContextProvider = ({ children }) => {
         setFiles(Object.values(resolvedFiles));
     };
 
+    //on storage change
+    useEffect(() => {
+        refreshFiles();
+    }, [storage]);
+
     //on startup
     useEffect(() => {
         initPod().then((newPod) => {
@@ -141,15 +152,26 @@ export const GoogleContextProvider = ({ children }) => {
         updatePodNavigation(pod, history, handleBack, location);
     });
 
+    useEffect(() => {
+        if (!selectedFile) return;
+        handleImportFile(selectedFile);
+    }, [selectedFile]);
+
+    useEffect(() => {
+        if (files?.[0]) importData(files[0]);
+    }, [files]);
+
     return (
         <GoogleContext.Provider
             value={{
                 pod,
                 files,
                 handleSelectFile,
+                handleRemoveFile,
                 handleImportFile,
                 globalError,
                 setGlobalError,
+                refreshFiles,
             }}
         >
             {children}
