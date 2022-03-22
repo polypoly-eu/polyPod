@@ -14,15 +14,17 @@ const ReportView = () => {
 
     const handleSendReport = async () => {
         setLoading(true);
+        try {
+            await window.pod.endpoint.send(
+                "polyPediaReports",
+                JSON.stringify(unrecognizedData.jsonReport),
+                "application/json"
+            );
+            setReportResult(true);
+        } catch (_) {
+            setReportResult(false);
+        }
 
-        const error = await window.pod.network.httpPost(
-            process.env.POLYPOD_POLYPEDIA_REPORT_URL,
-            JSON.stringify(unrecognizedData.jsonReport),
-            "application/json",
-            process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION
-        );
-        if (error) console.error("Failed to send report:", error);
-        setReportResult(!error);
         handleBack();
     };
 

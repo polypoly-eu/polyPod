@@ -43,5 +43,4 @@ jobs:
             - name: Build and test iOS
               run: |
                   cd platform/ios
-                  set -o pipefail
-                  make test | xcpretty
+                  make test

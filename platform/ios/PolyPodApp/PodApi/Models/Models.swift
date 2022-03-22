@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-let typeIRI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
+let typeIRI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 
 struct ValueModel {
     var type: String

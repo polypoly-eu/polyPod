@@ -28,6 +28,22 @@ window.addEventListener("DOMContentLoaded", () => {
             });
         });
 
+    document
+        .querySelector(".endpoint-post")
+        .addEventListener("click", async () => {
+            //This endpoint is not registered by default! Add your personal test server URL to polyPod/platform/utils/endpoint-generator/endpoints.js
+            const endpointId = "demoTest";
+            try {
+                const response = await window.pod.endpoint.get(
+                    endpointId,
+                    "abc"
+                );
+                console.log(response);
+            } catch (e) {
+                console.error(e);
+            }
+        });
+
     (function () {
         let wastedMemory = "";
 

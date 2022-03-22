@@ -48,12 +48,18 @@ jobs:
                       - 'feature-utils/**'
                       - 'platform/feature-api/**'
                       - 'platform/podjs/**'
+                      swift:
+                      - 'platform/ios/**'
             - name: Install root packages
               if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.coreAndFeatures == 'true' || steps.changes.outputs.js == 'true')
               run: ./build.js root-install
             - name: Lint core and features
               if: steps.changes.outputs.js == 'true'
               run: ./build.js lint
+            - name: Lint Swift
+              if: steps.changes.outputs.swift == 'true'
+              working-directory: platform/ios
+              run: docker run -t -v `pwd`:`pwd` -w `pwd` ghcr.io/realm/swiftlint:latest
             - name: Install modules if needed
               if: steps.cache.outputs.cache-hit != 'true'
               run: ./build.js install
