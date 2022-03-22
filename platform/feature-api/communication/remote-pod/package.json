@@ -17,6 +17,7 @@
     "docs": "typedoc"
   },
   "dependencies": {
+    "@polypoly-eu/communication": "file:..",
     "@polypoly-eu/fetch-spec": "file:../../api/fetch-spec",
     "@polypoly-eu/pod-api": "file:../../api/pod-api",
     "@polypoly-eu/port-authority": "file:../port-authority",

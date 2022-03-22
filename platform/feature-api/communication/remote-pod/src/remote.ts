@@ -37,7 +37,7 @@ import {
 } from "@polypoly-eu/port-authority";
 import { RequestListener } from "http";
 import * as RDF from "@polypoly-eu/rdf";
-import { Bubblewrap, Classes } from "@polypoly-eu/bubblewrap";
+import { Bubblewrap, Classes } from "@polypoly-eu/communication";
 
 type PolyInEndpoint = ObjectEndpointSpec<{
     select(matcher: Partial<Matcher>): ValueEndpointSpec<Quad[]>;
