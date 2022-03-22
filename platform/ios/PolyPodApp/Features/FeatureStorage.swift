@@ -14,15 +14,14 @@ final class FeatureStorage: ObservableObject {
             let featuresUrl = documentsUrl.appendingPathComponent("Features")
             return featuresUrl
         } catch {
-            Log.error("Failed to determine features path: \(error.localizedDescription)");
+            Log.error("Failed to determine features path: \(error.localizedDescription)")
         }
         return URL(fileURLWithPath: "")
     }()
     
     lazy private var featureDirUrl: URL =
         URL(string: featuresFileUrl.path) ?? URL(fileURLWithPath: "")
-    
-    
+
     init(dataProtection: DataProtection) {
         self.dataProtection = dataProtection
         setup()
@@ -46,7 +45,7 @@ final class FeatureStorage: ObservableObject {
             let featuresUrl = documentsUrl.appendingPathComponent("Features")
             try FileManager.default.removeItem(at: featuresUrl)
         } catch {
-            Log.error("Failed to clean features: \(error.localizedDescription)");
+            Log.error("Failed to clean features: \(error.localizedDescription)")
         }
     }
     
@@ -109,7 +108,7 @@ final class FeatureStorage: ObservableObject {
         do {
             try FileManager.default.createDirectory(atPath: featureDirUrl.absoluteString, withIntermediateDirectories: true, attributes: nil)
         } catch {
-            Log.error("Failed to create features folder: \(error.localizedDescription)");
+            Log.error("Failed to create features folder: \(error.localizedDescription)")
         }
     }
     
@@ -128,7 +127,7 @@ final class FeatureStorage: ObservableObject {
                     Log.error("Feature for import not found: \(featureName)")
                 }
             } catch {
-                Log.error("Failed to import feature \(featureName): \(error.localizedDescription)");
+                Log.error("Failed to import feature \(featureName): \(error.localizedDescription)")
             }
         }
     }

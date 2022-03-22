@@ -355,7 +355,9 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
         const { bubblewrapMiddlewarePort } = await import("@polypoly-eu/port-authority/dist/node");
         const [middleware, port] = bubblewrapMiddlewarePort(
             Bubblewrap.create(podBubblewrapClasses),
-            { limit: "10mb" }
+            {
+                limit: "10mb",
+            }
         );
         this.listen(port);
         return middleware;

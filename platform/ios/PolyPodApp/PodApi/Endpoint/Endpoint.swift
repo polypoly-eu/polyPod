@@ -32,7 +32,7 @@ final class Endpoint: EndpointProtocol {
         let endpointsPath = Bundle.main.bundleURL
             .appendingPathComponent("config/endpoints.json")
         guard let endpointsJsonData = (try? Data(contentsOf: endpointsPath)) else { return nil }
-        guard let endpointsJson = (try? JSONDecoder().decode(Dictionary<String,EndpointInfo>.self, from: endpointsJsonData)) else { return nil }
+        guard let endpointsJson = (try? JSONDecoder().decode(Dictionary<String, EndpointInfo>.self, from: endpointsJsonData)) else { return nil }
         return endpointsJson[endpointId]
     }
     

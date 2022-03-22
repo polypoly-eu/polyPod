@@ -13,13 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Log.info("Application initialized")
         
         let defaults = UserDefaults.standard
+        defaults.disableDataProtection()
         if defaults.bool(forKey: UserDefaults.Keys.resetUserDefaults.rawValue) {
             Log.info("Resetting all user defaults")
             UserDefaults.standard.reset()
         }
         
         // Location tracking is disabled for now - no feature needs it
-        //LocationTracker.shared.startLocationLogging()
+        // LocationTracker.shared.startLocationLogging()
         
         CoreDataStack.shared.isProtectedDataAvailable = { completion in
             dispatchToMainQueue {
@@ -36,9 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        // Disabled for now, need to investigate the issue with multiple notifications
-        // while the device is locked
-        //self.registerUpdateNotificationCheck()
+        self.registerUpdateNotificationCheck()
         
         return true
     }
