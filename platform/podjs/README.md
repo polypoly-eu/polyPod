@@ -41,49 +41,59 @@ Follow these instructions to do so:
 1.  In order to point to `podjs` from the polypoly-eu repository,
     add as a `development dependency` on your `package.json` the following:
 
-      <code>
+    ```json
 
-         "devDependencies": {
-            "@polypoly-eu/podjs": "file: <path-that-points-to-platform/podjs>",
-         },
+       "devDependencies": {
+          "@polypoly-eu/podjs": "file: <path-that-points-to-platform/podjs>",
+       },
 
-      </code>
+    ```
 
 2.  We use the `rollup` module bundler to build our features all together via the script
 
-    `$ rollup -c`
+         $ rollup -c
 
     which runs `rollup` and takes the `./src` directory as input, putting the result in a `dist` folder. Also, those configurations need to be defined
     in the `rollup.config.js` file.
 
-    We basically rely on our in-house `[rollup-plugin-copy-watch](https://github.com/polypoly-eu/polyPod/blob/main/dev-utils/rollup-plugin-copy-watch/)` plugin
+    We basically rely on our in-house [rollup-plugin-copy-watch](https://github.com/polypoly-eu/polyPod/blob/main/dev-utils/rollup-plugin-copy-watch/) plugin
     on top of the `rollup` one which serves to copy files and folders with glob support
     and also offers an additional watch to other sources than just `rollup`'s bundle content.
     It needs to be installed as a dev dependency:
 
-    `$ npm i --save-dev ../../dev-utils/rollup-plugin-copy-watch`
+         $ npm i --save-dev ../../dev-utils/rollup-plugin-copy-watch
 
     Which odes to a `package.json` file that includes this dependency:
 
-         "devDependencies": {
-            "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
-         },
+    ```json
 
-    With the above, we make sure the feature uses our custom `@polypoly-eu/rollup-plugin-copy-watch"` plugin to watch the copied files. To be able to do so, add a `watch` script on your `package.json`:
+       "devDependencies": {
+          "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
+          ...
+       }
+    ```
 
-         "scripts": {
-            "watch": "rollup --watch -c",
-         },
+    With the above, we make sure the feature uses our custom [rollup-plugin-copy-watch](https://github.com/polypoly-eu/polyPod/blob/main/dev-utils/rollup-plugin-copy-watch/) plugin to watch the copied files. To be able to do so, add a `watch` script on your `package.json`:
 
-and run `$ npm run watch` when you desire to start watching the process.
+    ```json
+      "scripts": {
+         "watch": "rollup --watch -c",
+      },
+    ```
 
-3. Next step, you need to define your `rollup.config.js` at the same level as your `package.json`.
+    and run
+
+         $ npm run watch
+
+    when you desire to start watching the process.
+
+3.  Next step, you need to define your `rollup.config.js` at the same level as your `package.json`.
 
     There you need to have the `copy` (of our `"@polypoly-eu/rollup-plugin-copy-watch"`) under the `plugins` section with the `targets`
     setup for `src`, which in this case it's the `"node_modules/@polypoly-eu/podjs/dist/pod.js"`, and `dest` where it will be ended to (e.g. `dist`).
     So, it looks like:
 
-```
+```js
    import copy from "@polypoly-eu/rollup-plugin-copy-watch";
 
    export default {
@@ -118,9 +128,9 @@ This way you have copied successfully the `pod.js` file from the `@polypoly-eu/p
 
 4.  So, to compile the input files and run the previous configurations,
     you should define a `build` script in the `package.json` file,
-    which will run the `rollup` command. For example, for typescript directories, you can use:
+    which will run the `rollup` command. For example, for Typescript directories, you can use:
 
-```
+```json
    {
       ...
       "scripts": {
