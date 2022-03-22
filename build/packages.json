@@ -24,7 +24,6 @@
         "platform/feature-api/api/rdf-spec",
         "platform/feature-api/communication",
         "platform/feature-api/communication/port-authority",
-        "platform/feature-api/communication/postoffice",
         "platform/feature-api/communication/remote-pod",
         "platform/podjs"
     ]
