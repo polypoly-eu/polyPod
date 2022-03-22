@@ -2,12 +2,11 @@ import React, { useContext } from "react";
 import { GoogleContext } from "../../context/google-context.jsx";
 
 const Overview = () => {
-    const { handleSelectFile, files, handleRemoveFile } =
+    const { handleSelectFile, files, handleRemoveFile, googleAccount } =
         useContext(GoogleContext);
 
     const importFile = async () => {
         if (files?.[0]?.id) handleRemoveFile(files[0].id);
-        console.log(files);
         await handleSelectFile();
     };
 
@@ -16,7 +15,11 @@ const Overview = () => {
             <button className="btn secondary" onClick={() => importFile()}>
                 Import File
             </button>
-            <div>{files?.[0]?.name}</div>
+            <div>
+                {googleAccount?.pathNames.map((entry, i) => (
+                    <div key={i}>{entry.path}</div>
+                )) || null}
+            </div>
         </div>
     );
 };

@@ -54,6 +54,7 @@ export const GoogleContextProvider = ({ children }) => {
     const [storage, setStorage] = useState(fakeStorage);
     const [globalError, setGlobalError] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
+    const [googleAccount, setGoogleAccount] = useState(null);
 
     const location = useLocation();
     const initPod = async () => await window.pod;
@@ -126,6 +127,13 @@ export const GoogleContextProvider = ({ children }) => {
         setFiles(Object.values(resolvedFiles));
     };
 
+    useEffect(() => {
+        if (files?.[0])
+            importData(files[0]).then((newGoogleAccount) =>
+                setGoogleAccount(newGoogleAccount)
+            );
+    }, [files]);
+
     //on storage change
     useEffect(() => {
         refreshFiles();
@@ -171,7 +179,7 @@ export const GoogleContextProvider = ({ children }) => {
                 handleImportFile,
                 globalError,
                 setGlobalError,
-                refreshFiles,
+                googleAccount,
             }}
         >
             {children}

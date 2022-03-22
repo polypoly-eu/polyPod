@@ -2936,8 +2936,15 @@
 
   async function importData(zipData) {
       const zipFile = await ZipFile.createWithCache(zipData, window.pod);
-      console.log(zipFile);
-      // return importZip(zipFile, window.pod);
+      return await importZip(zipFile);
+  }
+
+  //googleAccount is not an equivalent to Facebook account yet
+  async function importZip(zipFile) {
+      const googleAccount = {};
+      googleAccount.pathNames = await zipFile.getEntries();
+      console.log(googleAccount.pathNames);
+      return googleAccount;
   }
 
   function _optionalChain$1(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
@@ -2992,6 +2999,7 @@
       const [storage, setStorage] = React.useState(fakeStorage);
       const [globalError, setGlobalError] = React.useState(null);
       const [selectedFile, setSelectedFile] = React.useState(null);
+      const [googleAccount, setGoogleAccount] = React.useState(null);
 
       const location = useLocation();
       const initPod = async () => await window.pod;
@@ -3064,6 +3072,13 @@
           setFiles(Object.values(resolvedFiles));
       };
 
+      React.useEffect(() => {
+          if (_optionalChain$1([files, 'optionalAccess', _ => _[0]]))
+              importData(files[0]).then((newGoogleAccount) =>
+                  setGoogleAccount(newGoogleAccount)
+              );
+      }, [files]);
+
       //on storage change
       React.useEffect(() => {
           refreshFiles();
@@ -3096,7 +3111,7 @@
       }, [selectedFile]);
 
       React.useEffect(() => {
-          if (_optionalChain$1([files, 'optionalAccess', _ => _[0]])) importData(files[0]);
+          if (_optionalChain$1([files, 'optionalAccess', _2 => _2[0]])) importData(files[0]);
       }, [files]);
 
       return (
@@ -3109,7 +3124,7 @@
                   handleImportFile,
                   globalError,
                   setGlobalError,
-                  refreshFiles,
+                  googleAccount,
               },}
           
               , children
@@ -3119,12 +3134,11 @@
 
   function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
   const Overview = () => {
-      const { handleSelectFile, files, handleRemoveFile } =
+      const { handleSelectFile, files, handleRemoveFile, googleAccount } =
           React.useContext(GoogleContext);
 
       const importFile = async () => {
           if (_optionalChain([files, 'optionalAccess', _ => _[0], 'optionalAccess', _2 => _2.id])) handleRemoveFile(files[0].id);
-          console.log(files);
           await handleSelectFile();
       };
 
@@ -3133,7 +3147,11 @@
               , React__default["default"].createElement('button', { className: "btn secondary" , onClick: () => importFile(),}, "Import File"
 
               )
-              , React__default["default"].createElement('div', null, _optionalChain([files, 'optionalAccess', _3 => _3[0], 'optionalAccess', _4 => _4.name]))
+              , React__default["default"].createElement('div', null
+                  , _optionalChain([googleAccount, 'optionalAccess', _3 => _3.pathNames, 'access', _4 => _4.map, 'call', _5 => _5((entry, i) => (
+                      React__default["default"].createElement('div', { key: i,}, entry.path)
+                  ))]) || null
+              )
           )
       );
   };
