@@ -11,7 +11,11 @@ private fun AssetManager.readFile(fileName: String) = open(fileName)
     .bufferedReader()
     .use { it.readText() }
 
-data class EndpointInfo(val url: String, val auth: String)
+data class EndpointInfo(
+    val url: String,
+    val auth: String,
+    val allowInsecure: Boolean
+)
 
 class Endpoint(
     val context: Context,
@@ -61,7 +65,8 @@ class Endpoint(
                     endpointInfo.url,
                     body,
                     contentType,
-                    authToken ?: endpointInfo.auth
+                    authToken ?: endpointInfo.auth,
+                    endpointInfo.allowInsecure
                 )
             if (response.error != null) {
                 throw PodApiError().endpointError()
@@ -93,7 +98,8 @@ class Endpoint(
                     .httpGet(
                         endpointInfo.url,
                         contentType,
-                        authToken ?: endpointInfo.auth
+                        authToken ?: endpointInfo.auth,
+                        endpointInfo.allowInsecure
                     )
                 if (response.error != null) {
                     logger.error("endpoint.get: Has error ${response.error}")
