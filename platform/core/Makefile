@@ -1,9 +1,7 @@
 export_dir_ios = export/ios
-# Supported architectures
 ios_archs := aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios
 ios_targets := iPhone simulator
-build_dir := Core/build
-rust_core_dir := ../core
+build_type := $(if $(filter $(MODE), release),release,debug)
 
 build_ios_xcframework:
 # Ensure correct OS is used
@@ -28,11 +26,11 @@ endif
 	# Build library for all architectures
 	$(foreach arch, $(ios_archs),  $(call build_for_architecture,$(arch));)
 	
-	cp target/aarch64-apple-ios/release/libpolypod_core.a $(export_dir_ios)/iPhone/libpolypod_core.a
-	# Combine libraries in one for the somulator
+	cp target/aarch64-apple-ios/$(build_type)/libpolypod_core.a $(export_dir_ios)/iPhone/libpolypod_core.a
+	# Combine libraries in one for the simulator
 	lipo -create \
-		target/x86_64-apple-ios/release/libpolypod_core.a \
-		target/aarch64-apple-ios-sim/release/libpolypod_core.a \
+		target/x86_64-apple-ios/$(build_type)/libpolypod_core.a \
+		target/aarch64-apple-ios-sim/$(build_type)/libpolypod_core.a \
 		-output $(export_dir_ios)/simulator/libpolypod_core.a
 
 
@@ -43,12 +41,14 @@ endif
 
 	# Release artefact to be integrated in iOS app
 	xcodebuild -create-xcframework \
-	    $(foreach target, $(ios_targets),  -library $(export_dir_ios)/$(target)/libpolypod_core.a -headers $(export_dir_ios)/headers) \
+	    $(foreach target, $(ios_targets), -library $(export_dir_ios)/$(target)/libpolypod_core.a -headers $(export_dir_ios)/headers) \
 		-output $(export_dir_ios)/PolyPodCore.xcframework
 
 define build_for_architecture
 	rustup target add $(1)
-	cargo build --release --target $(1)
+	cargo build \
+		$(if $(filter $(build_type), release), --release) \
+		--lib --target $(1)
 endef
 
 
