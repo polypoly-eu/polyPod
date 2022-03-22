@@ -26,20 +26,19 @@ endif
 	# Build library for all architectures
 	$(foreach arch, $(ios_archs),  $(call build_for_architecture,$(arch));)
 	
+	# Copy libaries to export
 	cp target/aarch64-apple-ios/$(build_type)/libpolypod_core.a $(export_dir_ios)/iPhone/libpolypod_core.a
-	# Combine libraries in one for the simulator
 	lipo -create \
 		target/x86_64-apple-ios/$(build_type)/libpolypod_core.a \
 		target/aarch64-apple-ios-sim/$(build_type)/libpolypod_core.a \
 		-output $(export_dir_ios)/simulator/libpolypod_core.a
 
-
-	# Generated module map and header
+	# Generated module map and C header
 	cargo install cbindgen
 	cbindgen --config cbindgen.toml -o $(export_dir_ios)/headers/polypod-core.h
 	@echo "module PolyPodCore { header "polypod-core.h" export * }" >> $(export_dir_ios)/headers/module.modulemap
 
-	# Release artefact to be integrated in iOS app
+	# Package xcframework
 	xcodebuild -create-xcframework \
 	    $(foreach target, $(ios_targets), -library $(export_dir_ios)/$(target)/libpolypod_core.a -headers $(export_dir_ios)/headers) \
 		-output $(export_dir_ios)/PolyPodCore.xcframework
