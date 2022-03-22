@@ -14,16 +14,7 @@ import {
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
-import {
-    endpointClient,
-    ClientOf,
-    ServerOf,
-    EndpointRequest,
-    EndpointResponse,
-    endpointServer,
-    ObjectEndpointSpec,
-    ValueEndpointSpec,
-} from "@polypoly-eu/postoffice";
+
 import {
     ResponsePort,
     liftServer,
@@ -37,7 +28,18 @@ import {
 } from "@polypoly-eu/port-authority";
 import { RequestListener } from "http";
 import * as RDF from "@polypoly-eu/rdf";
-import { Bubblewrap, Classes } from "@polypoly-eu/communication";
+import {
+    Bubblewrap,
+    Classes,
+    endpointClient,
+    ClientOf,
+    ServerOf,
+    EndpointRequest,
+    EndpointResponse,
+    endpointServer,
+    ObjectEndpointSpec,
+    ValueEndpointSpec,
+} from "@polypoly-eu/communication";
 
 type PolyInEndpoint = ObjectEndpointSpec<{
     select(matcher: Partial<Matcher>): ValueEndpointSpec<Quad[]>;

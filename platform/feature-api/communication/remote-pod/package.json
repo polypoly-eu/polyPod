@@ -21,7 +21,6 @@
     "@polypoly-eu/fetch-spec": "file:../../api/fetch-spec",
     "@polypoly-eu/pod-api": "file:../../api/pod-api",
     "@polypoly-eu/port-authority": "file:../port-authority",
-    "@polypoly-eu/postoffice": "file:../postoffice",
     "@polypoly-eu/rdf": "file:../../api/rdf",
     "@polypoly-eu/rdf-convert": "file:../../api/rdf-convert",
     "@rdfjs/dataset": "^1.0.1",
