@@ -31,9 +31,9 @@ const allId = "allChip";
  */
 const FilterChips = ({
   chipsContent,
-  defaultActiveChips = [],
+  defaultActiveChips,
   onChipClick,
-  exclusive = true,
+  exclusive,
   theme,
   allChip,
   othersChip,
@@ -146,6 +146,11 @@ FilterChips.propTypes = {
   theme: propTypes.string,
   allChip: propTypes.object,
   othersChip: propTypes.object,
+};
+
+FilterChips.defaultProps = {
+  defaultActiveChips: [],
+  exclusive: true,
 };
 
 export default FilterChips;
