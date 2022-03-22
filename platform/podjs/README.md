@@ -20,14 +20,18 @@ feature. While we could support the creation of a container and a
 mechanism for loading features in `pod.js` without too much trouble,
 it is currently not implemented.
 
-The `polyOut` and `polyNav` interfaces are not implemented at the
-moment. The former because we don't use it yet, the latter because it
-is currently not part of the `Pod` interface, which we aim to rectify
-soon.
+## Prerequisites
+
+Make sure you have already installed the following:
+
+-   `node` `v16` or higher
+-   `npm` `v7` or higher
+-   `rollup` `v2.60` or higher
+-   `shx` `v0.3.4` or higher
 
 ## Building
 
-Simply run `build.js` in the repository root.
+Simply run `./build.js` in the repository root.
 
 ## How to setup a feature to build with podjs
 
@@ -35,40 +39,45 @@ To create a polyPod compatible feature, you will need to use this module.
 Follow these instructions to do so:
 
 1.  In order to point to `podjs` from the polypoly-eu repository,
-    add as `development dependencies` on your `package.json` the following:
+    add as a `development dependency` on your `package.json` the following:
 
       <code>
 
          "devDependencies": {
-            "@polypoly-eu/podjs": "file:../../platform/podjs",
+            "@polypoly-eu/podjs": "file: <path-that-points-to-platform/podjs>",
          },
 
       </code>
 
 2.  We use the `rollup` module bundler to build our features all together via the script
 
-    `$ rollup -c rollup.config.json`
+    `$ rollup -c`
 
-    which runs `rollup` and takes the `./src` directory as input and
-    puts the result in a `dist` folder. Those configurations need to be defined
+    which runs `rollup` and takes the `./src` directory as input, putting the result in a `dist` folder. Also, those configurations need to be defined
     in the `rollup.config.js` file.
 
-    We basically rely on our in-house `rollup-plugin-copy-watch` plugin
-    on top of the `Rollup` one which serves to copy files and folders with glob support
-    and also offers an additional watch to other sources than just Rollup's bundle content.
-    This is also needed to be installed as a dev dependency:
+    We basically rely on our in-house `[rollup-plugin-copy-watch](https://github.com/polypoly-eu/polyPod/blob/main/dev-utils/rollup-plugin-copy-watch/)` plugin
+    on top of the `rollup` one which serves to copy files and folders with glob support
+    and also offers an additional watch to other sources than just `rollup`'s bundle content.
+    It needs to be installed as a dev dependency:
 
     `$ npm i --save-dev ../../dev-utils/rollup-plugin-copy-watch`
 
-    So, we end up with a `package.json` file like this:
+    Which odes to a `package.json` file that includes this dependency:
 
          "devDependencies": {
             "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
          },
 
-    So the feature uses the `@polypoly-eu/rollup-plugin-copy-watch"` plugin to watch the copied files.
+    With the above, we make sure the feature uses our custom `@polypoly-eu/rollup-plugin-copy-watch"` plugin to watch the copied files. To be able to do so, add a `watch` script on your `package.json`:
 
-3.  Next step, you need to define your `rollup.config.js` at the same level as your `package.json`.
+         "scripts": {
+            "watch": "rollup --watch -c",
+         },
+
+and run `$ npm run watch` when you desire to start watching the process.
+
+3. Next step, you need to define your `rollup.config.js` at the same level as your `package.json`.
 
     There you need to have the `copy` (of our `"@polypoly-eu/rollup-plugin-copy-watch"`) under the `plugins` section with the `targets`
     setup for `src`, which in this case it's the `"node_modules/@polypoly-eu/podjs/dist/pod.js"`, and `dest` where it will be ended to (e.g. `dist`).
@@ -108,8 +117,8 @@ Follow these instructions to do so:
 This way you have copied successfully the `pod.js` file from the `@polypoly-eu/podjs` module, and you can use it in your feature.
 
 4.  So, to compile the input files and run the previous configurations,
-    you need to define a `build` script in the `package.json` file,
-    which will run the `rollup` command:
+    you should define a `build` script in the `package.json` file,
+    which will run the `rollup` command. For example, for typescript directories, you can use:
 
 ```
    {
