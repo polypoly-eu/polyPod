@@ -73,7 +73,7 @@ jobs:
       - name: Determine release name
         working-directory: platform/android
         run: |
-          aapt_path=~/usr/local/lib/android/sdk/build-tools/30.0.0/aapt
+          aapt_path=/usr/local/lib/android/sdk/build-tools/30.0.0/aapt
           apk_path=./app/build/outputs/apk/release/app-release.apk
           version_code=$(./getPackageInfo.sh $aapt_path $apk_path versionCode)
           version_name=$(./getPackageInfo.sh $aapt_path $apk_path versionName)
