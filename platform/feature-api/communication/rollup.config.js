@@ -2,7 +2,7 @@ import sucrase from "@rollup/plugin-sucrase";
 import commonjs from "@rollup/plugin-commonjs";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 
-const bubblewrapFileName = "src/bubblewrap/main/javascript/index.ts";
+const bubblewrapFileName = "src/index.ts";
 export default [
     {
         input: bubblewrapFileName,
