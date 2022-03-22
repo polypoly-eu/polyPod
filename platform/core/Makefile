@@ -21,7 +21,7 @@ endif
 	mkdir -p $(export_dir_ios)/simulator
 
 	# Check rustup is installed
-	if ! hash rustup &> /dev/null; then echo "To add Rust in your local envirnonment execute: curl https://sh.rustup.rs -sSf | sh"; exit 1; fi
+	if ! hash rustup &> /dev/null; then echo "Rust not installed, check https://www.rust-lang.org/tools/install to install rust on your system"; exit 1; fi
 
 	# Build library for all architectures
 	$(foreach arch, $(ios_archs),  $(call build_for_architecture,$(arch));)
