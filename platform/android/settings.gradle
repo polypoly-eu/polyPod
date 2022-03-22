@@ -1,3 +1,3 @@
 rootProject.name = 'polyPod-Android'
 include ':polyOut', ':bubblewrap', ':java-fetch', ':app'
-project(':bubblewrap').projectDir = file('../feature-api/communication/bubblewrap')
+project(':bubblewrap').projectDir = file('../feature-api/communication')
