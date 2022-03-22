@@ -150,9 +150,12 @@ class IDBPolyIn implements PolyIn {
     }
 }
 
-// Since pickFile and importArchive work with local URLs that have the actual
-// archive file name as their last component, and since the current BrowserPod
-// implementation works with data URLs which don't, we employ a little workaround.
+/**
+ * @class FileUrl takes a URL and splits it into a path and a file name in a FileUrl format
+ * Since pickFile and importArchive work with local URLs that have the actual
+ * archive file name as their last component, and since the current BrowserPod
+ * implementation works with data URLs which don't, we employ a little workaround.
+ */
 class FileUrl {
     private static readonly separator = "/";
 
@@ -311,7 +314,10 @@ class IDBPolyOut implements PolyOut {
 
     readFile(path: string, options: EncodingOptions): Promise<string>;
 
-    /* Reading a file from the file system and returning the contents as a Uint8Array. */
+    /** Reads a file asynchronously and returns the contents as a Uint8Array.
+     * @param {string} path - The path of the file to read.
+     * @returns A promise that resolves to a Uint8Array.
+     */
     readFile(path: string): Promise<Uint8Array>;
 
     /**
@@ -385,7 +391,7 @@ class IDBPolyOut implements PolyOut {
     }
 
     /**
-     * RemoveArchive() removes the file with the given fileId from the local storage
+     * removeArchive() removes the file with the given fileId from the local storage
      * @param {string} fileId - The id of the file to be removed.
      * @returns Nothing.
      */
@@ -400,6 +406,10 @@ class IDBPolyOut implements PolyOut {
     }
 }
 
+/**
+ * PodJsInfo is used to return the runtime name and a version of PodJs
+ * @class PodJsInfo
+ */
 class PodJsInfo implements Info {
     /**
      * It returns the runtime name.
@@ -423,6 +433,10 @@ interface NetworkResponse {
     error?: string;
 }
 
+/**
+ * BrowserNetwork makes network requests using XMLHttpRequest
+ * @class BrowserNetwork
+ */
 class BrowserNetwork {
     /**
      * It makes a POST request to the specified URL, with a body, a content type, and an auth token.
@@ -577,6 +591,10 @@ function endpointErrorMessage(fetchType: string, errorlog: string): string {
     return `Endpoint failed at : ${fetchType}`;
 }
 
+/**
+ * The BrowserEndpoint class implements the Endpoint interface
+ * @class BrowserEndpoint
+ */
 class BrowserEndpoint implements Endpoint {
     endpointNetwork = new BrowserNetwork();
 
@@ -659,9 +677,10 @@ class BrowserPolyNav implements PolyNav {
     /* Creating a new object with a property called actions. The actions property is an
     object with a string key and a value of a function that returns void. */
     actions?: { [key: string]: () => void };
-    /* Creating a function that will be called when the user releases a key on the keyboard. */
+
+    /** Creating a function that will be called when the user releases a key on the keyboard. */
     private keyUpListener: ((key: KeyboardEvent) => void) | undefined;
-    /* Creating a function that will be called when the browser's history state changes. */
+    /** Creating a function that will be called when the browser's history state changes. */
     private popStateListener: // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ((this: Window, ev: PopStateEvent) => any) | undefined;
 
@@ -816,8 +835,8 @@ function createNavBarFrame(title: string): HTMLElement {
     frame.style.display = "block";
     frame.style.width = "100%";
     frame.style.height = "50px";
-    frame.frameBorder = "0";
-    frame.scrolling = "no";
+    frame.frameBorder = "0"; //TODO: @deprecated
+    frame.scrolling = "no"; //TODO: @deprecated
     frame.id = NAV_FRAME_ID;
 
     const navBarColors = determineNavBarColors(window.manifest);
@@ -838,6 +857,9 @@ function createNavBarFrame(title: string): HTMLElement {
     return frame;
 }
 
+/**
+ * The @class BrowserPod is a Pod that uses the browser's local storage to store poly-in and poly-out data
+ */
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
     public readonly polyIn = new IDBPolyIn();
