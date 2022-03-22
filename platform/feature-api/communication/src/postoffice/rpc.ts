@@ -39,14 +39,23 @@
  */
 
 import { EndpointSpec, ServerOf, ClientOf, Callable } from "./types";
-import { EndpointProcedure, EndpointRequestPart, EndpointRequest } from "./protocol";
+import {
+    EndpointProcedure,
+    EndpointRequestPart,
+    EndpointRequest,
+} from "./protocol";
 
 /**
  * Turns the implementation of an endpoint specification into a plain function.
  */
-export function endpointServer<Spec extends EndpointSpec>(impl: ServerOf<Spec>): EndpointProcedure {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async function process(impl: any, parts: ReadonlyArray<EndpointRequestPart>): Promise<any> {
+export function endpointServer<Spec extends EndpointSpec>(
+    impl: ServerOf<Spec>
+): EndpointProcedure {
+    async function process(
+        impl: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+        parts: ReadonlyArray<EndpointRequestPart>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ): Promise<any> {
         if (parts.length === 0) return impl;
 
         const [{ method, args }, ...rest] = parts;
@@ -65,12 +74,17 @@ export function endpointServer<Spec extends EndpointSpec>(impl: ServerOf<Spec>):
  * @hidden
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type RequestBuilder = Callable<any> & Record<string, (...args: any[]) => RequestBuilder>;
+type RequestBuilder = Callable<any> &
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Record<string, (...args: any[]) => RequestBuilder>;
 
 /**
  * @hidden
  */
-function requestBuilder(client: EndpointProcedure, state: EndpointRequest): RequestBuilder {
+function requestBuilder(
+    client: EndpointProcedure,
+    state: EndpointRequest
+): RequestBuilder {
     return new Proxy<RequestBuilder>(new Function() as RequestBuilder, {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         apply(target, thisArg, argArray): Promise<any> {
@@ -88,7 +102,10 @@ function requestBuilder(client: EndpointProcedure, state: EndpointRequest): Requ
             // nested call: return a callable function
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             return (...args: any[]) =>
-                requestBuilder(client, [...state, { method: property, args: args }]);
+                requestBuilder(client, [
+                    ...state,
+                    { method: property, args: args },
+                ]);
         },
     });
 }

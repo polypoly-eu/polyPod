@@ -24,8 +24,10 @@ export interface ValueEndpointSpec<T> {
  * Interface denoting a method endpoint of type `T`. This interface is purely
  * virtual and no instances are generated.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface ObjectEndpointSpec<T extends Record<string, (...args: any[]) => EndpointSpec>> {
+export interface ObjectEndpointSpec<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    T extends Record<string, (...args: any[]) => EndpointSpec>
+> {
     endpointType: "object";
     methods: T;
 }
@@ -103,17 +105,18 @@ export type MaybePromise<T> = T | ForcePromise<T>;
  * `Promise<string>`, whereas the outer method `test` may return `number` or
  * `Promise<number>`.
  */
-export type ServerOf<Spec extends EndpointSpec> = Spec extends ValueEndpointSpec<infer T>
-    ? MaybePromise<T>
-    : Spec extends ObjectEndpointSpec<infer T>
-    ? {
-          [P in keyof T]: T[P] extends (...args: infer Args) => infer Return
-              ? Return extends EndpointSpec
-                  ? (...args: Args) => MaybePromise<ServerOf<Return>>
-                  : never
-              : never;
-      }
-    : never;
+export type ServerOf<Spec extends EndpointSpec> =
+    Spec extends ValueEndpointSpec<infer T>
+        ? MaybePromise<T>
+        : Spec extends ObjectEndpointSpec<infer T>
+        ? {
+              [P in keyof T]: T[P] extends (...args: infer Args) => infer Return
+                  ? Return extends EndpointSpec
+                      ? (...args: Args) => MaybePromise<ServerOf<Return>>
+                      : never
+                  : never;
+          }
+        : never;
 
 /**
  * This alias denotes the “end” of a call chain. It is a function taking no
@@ -161,14 +164,15 @@ export type Callable<T> = () => ForcePromise<T>;
  * transmitted through a protocol to a server implementation that closely
  * mirrors the shape of the proxy.
  */
-export type ClientOf<Spec extends EndpointSpec> = Spec extends ValueEndpointSpec<infer T>
-    ? Callable<T>
-    : Spec extends ObjectEndpointSpec<infer T>
-    ? {
-          [P in keyof T]: T[P] extends (...args: infer Args) => infer Return
-              ? Return extends EndpointSpec
-                  ? (...args: Args) => ClientOf<Return>
-                  : never
-              : never;
-      }
-    : never;
+export type ClientOf<Spec extends EndpointSpec> =
+    Spec extends ValueEndpointSpec<infer T>
+        ? Callable<T>
+        : Spec extends ObjectEndpointSpec<infer T>
+        ? {
+              [P in keyof T]: T[P] extends (...args: infer Args) => infer Return
+                  ? Return extends EndpointSpec
+                      ? (...args: Args) => ClientOf<Return>
+                      : never
+                  : never;
+          }
+        : never;

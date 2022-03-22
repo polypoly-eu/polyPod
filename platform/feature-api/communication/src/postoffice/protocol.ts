@@ -34,4 +34,6 @@ export type EndpointResponse = any;
 /**
  * Function type representing the protocol: [[EndpointRequest]] comes in, [[EndpointResponse]] goes out.
  */
-export type EndpointProcedure = (req: EndpointRequest) => Promise<EndpointResponse>;
+export type EndpointProcedure = (
+    req: EndpointRequest
+) => Promise<EndpointResponse>;

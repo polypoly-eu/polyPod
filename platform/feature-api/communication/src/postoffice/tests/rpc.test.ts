@@ -1,5 +1,10 @@
 import { endpointClient, endpointServer } from "../rpc";
-import { ClientOf, ObjectEndpointSpec, ServerOf, ValueEndpointSpec } from "../types";
+import {
+    ClientOf,
+    ObjectEndpointSpec,
+    ServerOf,
+    ValueEndpointSpec,
+} from "../types";
 
 type SimpleEndpoint = ObjectEndpointSpec<{
     test1(param1: string): ValueEndpointSpec<number>;
@@ -37,11 +42,15 @@ describe("RPC", () => {
     });
 
     it("Succeeds (nested call)", async () => {
-        await expect(rpcClient.simple().test3(true, 0, 1)()).rejects.toThrowError("true, 0,1");
+        await expect(
+            rpcClient.simple().test3(true, 0, 1)()
+        ).rejects.toThrowError("true, 0,1");
     });
 
     it("Fails (non-existent method)", async () => {
         // @ts-ignore testing a non-existent method
-        await expect(rpcClient.whodis("lol")()).rejects.toThrowError(/not a function/);
+        await expect(rpcClient.whodis("lol")()).rejects.toThrowError(
+            /not a function/
+        );
     });
 });
