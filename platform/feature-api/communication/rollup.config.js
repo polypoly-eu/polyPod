@@ -27,9 +27,9 @@ export default [
     {
         input: communicationFileName,
         output: {
-            file: "build/js/communication.js",
+            file: "dist/communication.js",
             format: "iife",
-            name: "bubblewrap",
+            name: "communication",
         },
         context: "null",
         plugins: [
