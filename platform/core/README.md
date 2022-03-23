@@ -9,13 +9,13 @@ Logic shared across polyPod platforms - ios, android, wasm.
 
 ## Building
 
--   When setting up the project for the first time or switching between branches, the flatbuffers models have to be generated:
+- Setup flatbuffers:
+          ./flatbuffers_shared/setup_flatbuffers.sh
 
-          sh generate_flatbuffers
+- Generate flatbuffers:
+          ./flatbuffers_shared/generate_flatbuffers.sh
 
-    After models are generated, any changes to flatbuffers schema will trigger automatic update of the models when core is built.
-
--   Build the project:
+- Build the project:
 
           cargo build
 
