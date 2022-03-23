@@ -21,11 +21,11 @@ jobs:
 
       - name: Setup flatbuffers
         working-directory: ./platform/core
-        run: ./flatbuffers_shared/setup_flatbuffers.sh
+        run: sh ./flatbuffers_shared/setup_flatbuffers.sh
 
       - name: Generate flatbuffers
         working-directory: ./platform/core
-        run: ./flatbuffers_shared/generate_flatbuffers.sh
+        run: sh ./flatbuffers_shared/generate_flatbuffers.sh
 
       - name: Lint -- Run cargo fmt
         working-directory: ./platform/core
