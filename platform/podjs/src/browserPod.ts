@@ -868,7 +868,7 @@ export class BrowserPod implements Pod {
     public readonly info = new PodJsInfo();
     public readonly endpoint = new BrowserEndpoint();
 
-    /* Creates a navigation bar for the app. */
+    /** Creates a navigation bar for the app. */
     constructor() {
         window.addEventListener("load", async () => {
             if (!MANIFEST_DATA) {
