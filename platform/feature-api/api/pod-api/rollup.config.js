@@ -13,7 +13,6 @@ export default {
         })
     ],
     external: [
-        "@polypoly-eu/fetch-spec",
         "@polypoly-eu/rdf",
         "@polypoly-eu/rdf-spec",
         "chai",
