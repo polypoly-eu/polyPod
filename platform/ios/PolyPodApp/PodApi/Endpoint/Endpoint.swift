@@ -12,7 +12,8 @@ protocol EndpointDelegate {
 
 struct EndpointInfo: Decodable {
     let url: String
-    let auth: String
+    let auth: String?
+    var allowInsecure: Bool = false
 }
 
 final class Endpoint: EndpointProtocol {
@@ -21,8 +22,8 @@ final class Endpoint: EndpointProtocol {
         delegate = nil
     }
     
-    var delegate: EndpointDelegate?
     let network: Network = Network()
+    var delegate: EndpointDelegate?
     
     func approveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) -> Void {
         delegate?.doHandleApproveEndpointFetch(endpointId: endpointId, completion: completion)
@@ -48,9 +49,10 @@ final class Endpoint: EndpointProtocol {
                 completionHandler(PodApiError.endpointError("send"))
                 return
             }
-            let response = self.network.httpPost(url: endpointInfo.url, body: payload, contentType: contentType, authToken: endpointInfo.auth)
+            let response = self.network.httpPost(url: endpointInfo.url, body: payload, contentType: contentType, authToken: endpointInfo.auth, allowInsecure: endpointInfo.allowInsecure)
             switch response {
-            case .failure(_):
+            case .failure(let error):
+                Log.error(error.localizedDescription)
                 completionHandler(PodApiError.endpointError("send"))
             case .success(_):
                 completionHandler(nil)
@@ -70,9 +72,10 @@ final class Endpoint: EndpointProtocol {
                 completionHandler(nil, PodApiError.endpointError("get"))
                 return
             }
-            let response = self.network.httpGet(url: endpointInfo.url, contentType: contentType, authToken: endpointInfo.auth)
+            let response = self.network.httpGet(url: endpointInfo.url, contentType: contentType, authToken: endpointInfo.auth, allowInsecure: endpointInfo.allowInsecure)
             switch response {
-            case .failure(_):
+            case .failure(let error):
+                Log.error(error.localizedDescription)
                 completionHandler(nil, PodApiError.endpointError("get"))
             case .success(let responseData):
                 completionHandler(String(data: responseData, encoding: .utf8)!, nil)
