@@ -380,7 +380,7 @@
 		1AA6DE2624191C94008DB1B2 = {
 			isa = PBXGroup;
 			children = (
-				9015F60127EB0CF600DC6142 /* Local Dependencies */,
+				9015F60227EB0D3300DC6142 /* Local Dependencies */,
 				904D4A6E27905D4C00A75AED /* Utils */,
 				E9018EDF276370B500FDF34A /* Core */,
 				E97D3274263151BC00A5A180 /* Features */,
@@ -520,11 +520,11 @@
 			path = PolyNav;
 			sourceTree = "<group>";
 		};
-		9015F60127EB0CF600DC6142 /* Local Dependencies */ = {
+		9015F60227EB0D3300DC6142 /* Local Dependencies */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = "Local Dependencies";
+			name = "Local Dependencies";
 			sourceTree = "<group>";
 		};
 		904D4A6E27905D4C00A75AED /* Utils */ = {
