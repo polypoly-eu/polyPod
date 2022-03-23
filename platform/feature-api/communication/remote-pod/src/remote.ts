@@ -51,7 +51,6 @@ type PolyOutBackend = ObjectBackendSpec<{
     readFile(path: string, options?: EncodingOptions): ValueBackendSpec<string | Uint8Array>;
     writeFile(path: string, content: string, options: EncodingOptions): ValueBackendSpec<void>;
     stat(path: string): ValueBackendSpec<Stats>;
-    fetch(input: string, init: RequestInit): ValueBackendSpec<Response>;
     importArchive(url: string): ValueBackendSpec<string>;
     removeArchive(fileId: string): ValueBackendSpec<void>;
 }>;
