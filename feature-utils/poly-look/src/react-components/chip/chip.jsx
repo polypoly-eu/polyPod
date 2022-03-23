@@ -1,8 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
 import * as propTypes from "prop-types";
-=======
->>>>>>> main
 import "./chip.css";
 
 /**
@@ -24,7 +21,6 @@ const Chip = ({ id, translation, handleClick, active }) => {
   );
 };
 
-<<<<<<< HEAD
 Chip.propTypes = {
   id: propTypes.string.isRequired,
   translation: propTypes.string,
@@ -32,6 +28,4 @@ Chip.propTypes = {
   active: propTypes.bool,
 };
 
-=======
->>>>>>> main
 export default Chip;
