@@ -40,7 +40,7 @@ case "$OSTYPE" in
     ;;
     *)
         echo "unsupported OS: $OSTYPE"
-        exit
+        exit 1
     ;;
 esac
 
