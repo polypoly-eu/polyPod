@@ -44,9 +44,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
         
-        // Disabled for now, need to investigate the issue with multiple notifications
-        // while the device is locked
-        // (UIApplication.shared.delegate as! AppDelegate).scheduleUpdateNotificationCheck()
+        (UIApplication.shared.delegate as! AppDelegate).scheduleUpdateNotificationCheck()
         Authentication.shared.clear()
     }
 }
