@@ -20,44 +20,36 @@ feature. While we could support the creation of a container and a
 mechanism for loading features in `pod.js` without too much trouble,
 it is currently not implemented.
 
-## Prerequisites
-
-Make sure you have already installed the following:
-
--   `node` `v16` or higher
--   `npm` `v7` or higher
--   `rollup` `v2.60` or higher
--   `shx` `v0.3.4` or higher
-
 ## Building
 
 Simply run `./build.js` in the repository root.
 
-## How to setup a feature to build with podjs
+## How to set up a feature to build with podjs
 
-To create a polyPod compatible feature, you will need to use this module.
 Follow these instructions to do so:
 
-1.  In order to point to `podjs` from the polypoly-eu repository,
-    add as a `development dependency` by
+1.  You need to point to `podjs` from the `polypoly-eu` repository and
+    add it as a "development dependency" on your project by running:
 
     `$npm i <path-that-points-to-platform/podjs --D`
 
     So, you end up having on your `package.json` the following:
 
     ```json
-
        "devDependencies": {
           "@polypoly-eu/podjs": "file: <path-that-points-to-platform/podjs>",
+          ...
        },
 
     ```
 
-2.  We use the `rollup` module bundler to build our features all together via the script
+2.  The important step is to copy `podjs` in your project. Here, we will guide you to do it with `rollup` tooling, but feel free to use your preferences.
 
-         $ rollup -c
+    We use the `rollup` module bundler to build our features all together via the script
 
-    which runs `rollup` and takes the `./src` directory as input, putting the result in a `dist` folder. Also, those configurations need to be defined
+             $ rollup -c
+
+    which runs `rollup` and takes the `./src` directory as input, putting the result in a `dist` folder. These configurations need to be defined
     in the `rollup.config.js` file.
 
     We basically rely on our in-house [rollup-plugin-copy-watch](https://github.com/polypoly-eu/polyPod/blob/main/dev-utils/rollup-plugin-copy-watch/) plugin
@@ -65,12 +57,11 @@ Follow these instructions to do so:
     and also offers an additional watch to other sources than just `rollup`'s bundle content.
     It needs to be installed as a dev dependency:
 
-         $ npm i --save-dev ../../dev-utils/rollup-plugin-copy-watch
+             $ npm i --save-dev ../../dev-utils/rollup-plugin-copy-watch
 
     So, the `package.json` file includes it as a dev dependency, like this:
 
     ```json
-
        "devDependencies": {
           "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
           ...
@@ -80,14 +71,14 @@ Follow these instructions to do so:
     With the above, we make sure the feature uses our custom [rollup-plugin-copy-watch](https://github.com/polypoly-eu/polyPod/blob/main/dev-utils/rollup-plugin-copy-watch/) plugin to watch the copied files. To be able to do so, add a `watch` script on your `package.json`:
 
     ```json
-      "scripts": {
-         "watch": "rollup --watch -c",
-      },
+       "scripts": {
+          "watch": "rollup --watch -c",
+       },
     ```
 
     and run
 
-         $ npm run watch
+                  $ npm run watch
 
     when you desire to start watching the process.
 
@@ -164,4 +155,25 @@ Or for Typescript features, you will also need to compile with `tsc`:
 
     and you should have a `dist` folder with your feature included the `pod.js` file.
 
-6.  Don't forget to include the `pod.js` from your feature's main document - before the feature's own code.
+6.  Now, the second important step is to include the `pod.js` from your feature's main document, before the feature's own code.
+    So, in your feature's `HTML` file, you should along with the rest polyPod implementations make sure you include `pod.js` script, like this:
+
+```html
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <script src="pod.js"></script>
+        ...
+    </head>
+</html>
+```
+
+7.  To verify that everything is in place, you can test it by following these steps:
+
+    -   Open your feature's `HTML` file in your browser, check that `URL`s are supported without the need to run an `HTTP server`.
+    -   Make sure your manifest is exposed as window and that there's the correct navigation bar colour and the correct (localised) feature name.
+    -   Check there's the correct backwards navigation within the feature and that it works successfully via the native back button of the browser.
+
+8.  If everything works, you are ready to start enjoying your new polyPod feature! :) Congrats!
+
+    > As other `polyPod` platforms will simply ignore the local `pod.js` file and deliver their own version of it, you can leave the `pod.js` file in the feature distribution without any implication.
