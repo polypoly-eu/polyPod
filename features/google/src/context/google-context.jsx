@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FeatureStorage } from "@polypoly-eu/feature-storage";
+import { FeatureFileStorage } from "@polypoly-eu/feature-storage";
 import { useHistory, useLocation } from "react-router-dom";
 import { importData } from "../model/importer";
 
@@ -143,7 +143,7 @@ export const GoogleContextProvider = ({ children }) => {
     useEffect(() => {
         initPod().then((newPod) => {
             setPod(newPod);
-            setStorage(new FeatureStorage(newPod));
+            setStorage(new FeatureFileStorage(newPod));
         });
     }, []);
 

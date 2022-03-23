@@ -1,4 +1,4 @@
-export class FeatureStorage {
+export class FeatureFileStorage {
     constructor(pod) {
         this.changeListener = () => {};
         this._files = null;
