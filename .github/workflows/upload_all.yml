@@ -30,7 +30,7 @@ jobs:
           branch='${{ github.ref }}'
           targets='${{ github.event.inputs.targets }}'
           draft='${{ github.event.inputs.draft }}'
-          echo "notice::Branch: $branch\nTargets: $targets\nDraft: $draft"
+          echo "notice::Branch: $branch - Targets: $targets - Draft: $draft"
       # - uses: actions/checkout@v2
       # - uses: actions/setup-node@v2
       #   with:
