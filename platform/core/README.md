@@ -10,10 +10,10 @@ Logic shared across polyPod platforms - ios, android, wasm.
 ## Building
 
 - Setup flatbuffers:
-          sh flatbuffers_shared/setup_flatbuffers.sh
+          ./flatbuffers_shared/setup_flatbuffers.sh
 
 - Generate flatbuffers:
-          sh flatbuffers_shared/generate_flatbuffers.sh
+          ./flatbuffers_shared/generate_flatbuffers.sh
 
 - Build the project:
 
