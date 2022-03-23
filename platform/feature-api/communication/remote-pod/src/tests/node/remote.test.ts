@@ -9,7 +9,7 @@ import { createServer, Server } from "http";
 import { once } from "events";
 import { podSpec } from "@polypoly-eu/pod-api/dist/spec";
 import { getHttpbinUrl } from "@polypoly-eu/test-utils";
-import chai, { assert } from "chai";
+import chai from "chai";
 import chaiAsPromised from "chai-as-promised";
 
 chai.use(chaiAsPromised);
