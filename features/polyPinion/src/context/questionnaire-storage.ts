@@ -54,7 +54,10 @@ export async function loadStoredQuestionnaireResultsJson(questionnaireId: string
     return await AsyncStorage.getItem(questionnaireResultsStorageId(questionnaireId));
 }
 
-export async function storeQuestionnaireResults(questionnaireId: string, resultsData: any) {
+export async function storeQuestionnaireResults(
+    questionnaireId: string,
+    resultsData: { [key: string]: string } // jsonObject
+) {
     await AsyncStorage.setItem(
         questionnaireResultsStorageId(questionnaireId),
         JSON.stringify(resultsData)

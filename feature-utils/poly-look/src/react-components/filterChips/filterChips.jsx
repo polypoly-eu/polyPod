@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+<<<<<<< HEAD:feature-utils/poly-look/src/react-components/filterChips/filterChips.jsx
 import * as propTypes from "prop-types";
 console.log("propes", propTypes);
+=======
+>>>>>>> main:feature-utils/poly-look/src/react-components/chipGroup/chipGroup.jsx
 import Chip from "../chip/chip.jsx";
 
 import "./filterChips.css";
@@ -137,6 +140,7 @@ const FilterChips = ({
   );
 };
 
+<<<<<<< HEAD:feature-utils/poly-look/src/react-components/filterChips/filterChips.jsx
 FilterChips.propTypes = {
   chipsContent: propTypes.oneOfType([propTypes.string, propTypes.object])
     .isRequired,
@@ -153,4 +157,6 @@ FilterChips.defaultProps = {
   exclusive: true,
 };
 
+=======
+>>>>>>> main:feature-utils/poly-look/src/react-components/chipGroup/chipGroup.jsx
 export default FilterChips;

@@ -5,10 +5,10 @@ import {
     PolyIn,
     PolyNav,
     ExternalFile,
+    Endpoint,
     EncodingOptions,
     Entry,
     Matcher,
-    Network,
     Stats,
     Info,
 } from "@polypoly-eu/pod-api";
@@ -104,16 +104,20 @@ class AsyncInfo implements Info {
     }
 }
 
-class AsyncNetwork implements Network {
-    constructor(private readonly promise: Promise<Network>) {}
+class AsyncEndpoint implements Endpoint {
+    constructor(private readonly promise: Promise<Endpoint>) {}
 
-    async httpPost(
-        url: string,
-        body: string,
+    async send(
+        endpointId: string,
+        payload: string,
         contentType?: string,
-        authorization?: string
-    ): Promise<string | undefined> {
-        return (await this.promise).httpPost(url, body, contentType, authorization);
+        authToken?: string
+    ): Promise<void> {
+        return (await this.promise).send(endpointId, payload, contentType, authToken);
+    }
+
+    async get(endpointId: string, contentType?: string, authToken?: string): Promise<string> {
+        return (await this.promise).get(endpointId, contentType, authToken);
     }
 }
 
@@ -140,7 +144,7 @@ export class AsyncPod implements Pod {
     readonly polyIn: PolyIn;
     readonly polyNav: PolyNav;
     readonly info: Info;
-    readonly network: Network;
+    readonly endpoint: Endpoint;
     readonly polyLifecycle: PolyLifecycle;
 
     constructor(private readonly promise: Promise<Pod>, public readonly dataFactory: DataFactory) {
@@ -148,7 +152,7 @@ export class AsyncPod implements Pod {
         this.polyIn = new AsyncPolyIn(promise.then((pod) => pod.polyIn));
         this.polyNav = new AsyncPolyNav(promise.then((pod) => pod.polyNav));
         this.info = new AsyncInfo(promise.then((pod) => pod.info));
-        this.network = new AsyncNetwork(promise.then((pod) => pod.network));
+        this.endpoint = new AsyncEndpoint(promise.then((pod) => pod.endpoint));
         this.polyLifecycle = new AsyncPolyLifecycle(promise.then((pod) => pod.polyLifecycle));
     }
 }

@@ -3,6 +3,7 @@
     "requiredNPMVersion": 7,
     "packages": [
         "build",
+        "platform/utils/endpoints-generator",
         "dev-utils/dummy-server",
         "dev-utils/rollup-plugin-copy-watch",
         "feature-utils/poly-look",
@@ -17,7 +18,6 @@
         "features/polyPreview",
         "features/test",
         "platform/feature-api/api/fetch-spec",
-        "platform/feature-api/api/manifest-parser",
         "platform/feature-api/api/pod-api",
         "platform/feature-api/api/rdf",
         "platform/feature-api/api/rdf-convert",

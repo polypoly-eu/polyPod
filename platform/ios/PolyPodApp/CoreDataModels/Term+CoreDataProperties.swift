@@ -1,7 +1,6 @@
 import Foundation
 import CoreData
 
-
 extension Term {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Term> {
         return NSFetchRequest<Term>(entityName: "Term")

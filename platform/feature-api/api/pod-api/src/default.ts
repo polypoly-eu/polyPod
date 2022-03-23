@@ -9,7 +9,7 @@
 
 import * as RDF from "rdf-js";
 import { dataFactory } from "@polypoly-eu/rdf";
-import { Pod, PolyIn, PolyOut, PolyNav, Info, Network } from "./api";
+import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint } from "./api";
 import type { Fetch, Response, RequestInit } from "@polypoly-eu/fetch-spec";
 import { EncodingOptions, FS, Stats } from "./fs";
 import { Entry } from ".";
@@ -126,11 +126,11 @@ export class DefaultPod implements Pod {
             }
 
             importArchive(url: string): Promise<string> {
-                throw new Error("Not implemented");
+                throw new Error(`Called with ${url}, but not implemented`);
             }
 
             removeArchive(fileId: string): Promise<void> {
-                throw new Error("Not implemented");
+                throw new Error(`Called with ${fileId}, but not implemented`);
             }
         })();
     }
@@ -140,13 +140,13 @@ export class DefaultPod implements Pod {
     get polyNav(): PolyNav {
         return {
             openUrl: async (url: string) => {
-                throw new Error("Not implemented");
+                throw new Error(`Called with ${url}, but not implemented`);
             },
             setActiveActions: async (actions: string[]) => {
-                throw new Error("Not implemented");
+                throw new Error(`Called with ${actions}, but not implemented`);
             },
             setTitle: async (title: string) => {
-                throw new Error("Not implemented");
+                throw new Error(`Called with ${title}, but not implemented`);
             },
             pickFile: async () => {
                 throw new Error("Not implemented");
@@ -167,13 +167,24 @@ export class DefaultPod implements Pod {
         };
     }
     /**
-     * The [[Network]] interface. See [[Network]] for the description.
+     * The [[Endpoint]] interface. See [[Endpoint]] for the description.
      */
-
-    get network(): Network {
+    get endpoint(): Endpoint {
         return {
-            httpPost(url: string, body: string, contentType?: string, authorization?: string) {
-                throw new Error("Not implemented");
+            send(
+                endpointId: string,
+                payload: string,
+                contentType?: string,
+                authToken?: string
+            ): Promise<void> {
+                throw new Error(
+                    `Called with ${endpointId}, ${payload}, ${contentType}, ${authToken} but not implemented`
+                );
+            },
+            get(endpointId: string, contentType?: string, authToken?: string): Promise<string> {
+                throw new Error(
+                    `Called with ${endpointId}, ${contentType}, ${authToken} but not implemented`
+                );
             },
         };
     }

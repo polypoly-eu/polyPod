@@ -7,7 +7,7 @@ import { createServer, RequestListener, Server } from "http";
 import { AddressInfo } from "net";
 import { Bubblewrap } from "@polypoly-eu/bubblewrap";
 
-// @ts-ignore
+// @ts-ignore only used from JS
 import fetch from "node-fetch";
 
 async function startServer(app: RequestListener): Promise<[Server, number]> {

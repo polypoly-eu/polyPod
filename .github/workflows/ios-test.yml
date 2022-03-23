@@ -2,14 +2,17 @@ name: Testing polyPod in iOS
 on:
     push:
         paths:
-            - "build/**"
+            - "feature-utils/**"
             - "features/**"
             - "platform/feature-api/**"
+            - "platform/core/**"
             - "platform/ios/**"
     pull_request:
+        types: [assigned, opened, ready_for_review]
         paths:
-            - "build/**"
+            - "feature-utils/**"
             - "features/**"
+            - "platform/core/**"
             - "platform/feature-api/**"
             - "platform/ios/**"
 jobs:
@@ -31,5 +34,4 @@ jobs:
             - name: Build and test iOS
               run: |
                   cd platform/ios
-                  set -o pipefail
-                  make test | xcpretty
+                  make test

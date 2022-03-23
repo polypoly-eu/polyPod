@@ -1,11 +1,12 @@
 import { DataFactory } from "rdf-js";
 import RDFJS from "@rdfjs/data-model";
-// @ts-ignore
+// @ts-ignore only used from JS
 import Graphy from "@graphy/core.data.factory";
 import { DataFactory as N3 } from "n3";
 import { DataFactory as Ruben } from "rdf-data-factory";
 
-// TODO <https://github.com/blake-regalia/graphy.js/pull/34>
+/** This is a fix to make Graphy support with RDF*
+ * Just like the rest of the other data factories */
 Object.assign(Object.getPrototypeOf(Graphy.quad()), {
     termType: "Quad",
     value: "",

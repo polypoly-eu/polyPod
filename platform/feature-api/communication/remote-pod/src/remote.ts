@@ -8,9 +8,9 @@ import {
     ExternalFile,
     Stats,
     Matcher,
-    Network,
     Info,
     Entry,
+    Endpoint,
 } from "@polypoly-eu/pod-api";
 import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
@@ -74,13 +74,20 @@ type InfoEndpoint = ObjectEndpointSpec<{
     getVersion(): ValueEndpointSpec<string>;
 }>;
 
-type NetworkEndpoint = ObjectEndpointSpec<{
-    httpPost(
-        url: string,
-        body: string,
+type EndpointEndpoint = ObjectEndpointSpec<{
+    send(
+        endpointId: string,
+        featureIdToken: string,
+        payload: string,
         contentType?: string,
         authorization?: string
-    ): ValueEndpointSpec<string | undefined>;
+    ): ValueEndpointSpec<void>;
+    get(
+        endpointId: string,
+        featureIdToken: string,
+        contentType?: string,
+        authorization?: string
+    ): ValueEndpointSpec<string>;
 }>;
 
 type PodEndpoint = ObjectEndpointSpec<{
@@ -89,7 +96,7 @@ type PodEndpoint = ObjectEndpointSpec<{
     polyLifecycle(): PolyLifecycleEndpoint;
     polyNav(): PolyNavEndpoint;
     info(): InfoEndpoint;
-    network(): NetworkEndpoint;
+    endpoint(): EndpointEndpoint;
 }>;
 
 class FetchResponse implements Response {
@@ -113,6 +120,7 @@ class FetchResponse implements Response {
         this.url = response.url;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async json(): Promise<any> {
         // JSON parse error must be asynchronous (i.e. rejected promise)
         return JSON.parse(this.bufferedText);
@@ -183,7 +191,7 @@ export const podBubblewrapClasses: Classes = {
     "@polypoly-eu/rdf.Quad": RDF.Quad,
 };
 
-function bubblewrapPort(rawPort: Port<Uint8Array, Uint8Array>): Port<any, any> {
+function bubblewrapPort(rawPort: Port<Uint8Array, Uint8Array>): Port<Uint8Array, Uint8Array> {
     const podBubblewrap = Bubblewrap.create(podBubblewrapClasses);
     return mapPort(
         rawPort,
@@ -202,7 +210,9 @@ export class RemoteClientPod implements Pod {
     }
 
     static fromRawPort(rawPort: Port<Uint8Array, Uint8Array>): RemoteClientPod {
-        return new RemoteClientPod(liftClient(bubblewrapPort(rawPort)));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const wrappedPort = bubblewrapPort(rawPort) as Port<any, any>;
+        return new RemoteClientPod(liftClient(wrappedPort));
     }
 
     constructor(
@@ -291,10 +301,27 @@ export class RemoteClientPod implements Pod {
         };
     }
 
-    get network(): Network {
+    get endpoint(): Endpoint {
         return {
-            httpPost: (url: string, body: string, contentType?: string, authorization?: string) =>
-                this.rpcClient.network().httpPost(url, body, contentType, authorization)(),
+            send: (
+                endpointId: string,
+                featureIdToken: string,
+                payload: string,
+                contentType?: string,
+                authorization?: string
+            ) =>
+                this.rpcClient
+                    .endpoint()
+                    .send(endpointId, featureIdToken, payload, contentType, authorization)(),
+            get: (
+                endpointId: string,
+                featureIdToken: string,
+                contentType?: string,
+                authorization?: string
+            ) =>
+                this.rpcClient
+                    .endpoint()
+                    .get(endpointId, featureIdToken, contentType, authorization)(),
         };
     }
 }
@@ -319,14 +346,18 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
     }
 
     listenOnRaw(rawPort: Port<Uint8Array, Uint8Array>): void {
-        this.listen(liftServer<EndpointRequest, EndpointResponse>(bubblewrapPort(rawPort)));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const wrappedPort = bubblewrapPort(rawPort) as Port<any, any>;
+        this.listen(liftServer<EndpointRequest, EndpointResponse>(wrappedPort));
     }
 
     async listenOnMiddleware(): Promise<RequestListener> {
         const { bubblewrapMiddlewarePort } = await import("@polypoly-eu/port-authority/dist/node");
         const [middleware, port] = bubblewrapMiddlewarePort(
             Bubblewrap.create(podBubblewrapClasses),
-            { limit: "10mb" }
+            {
+                limit: "10mb",
+            }
         );
         this.listen(port);
         return middleware;
@@ -376,7 +407,7 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
         return this.pod.info;
     }
 
-    network(): ServerOf<NetworkEndpoint> {
-        return this.pod.network;
+    endpoint(): ServerOf<EndpointEndpoint> {
+        return this.pod.endpoint;
     }
 }
