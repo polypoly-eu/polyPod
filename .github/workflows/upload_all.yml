@@ -25,6 +25,8 @@ jobs:
           && startsWith(github.ref, 'refs/heads/release') != true
           && startsWith(github.ref, 'refs/heads/prod4pod-1473') != true
         run: exit 1
+      - name: Input
+        run: echo "notice::Branch: ${{ github.ref }}, Targets: ${{ github.event.inputs.targets }}, Draft: ${{ github.event.inputs.draft }}"
       # - uses: actions/checkout@v2
       # - uses: actions/setup-node@v2
       #   with:
