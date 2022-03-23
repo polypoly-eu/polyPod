@@ -36,7 +36,7 @@ endif
 	# Generated module map and C header
 	cargo install cbindgen
 	cbindgen --config cbindgen.toml -o $(export_dir_ios)/headers/polypod-core.h
-	@echo "module PolyPodCore { header "polypod-core.h" export * }" >> $(export_dir_ios)/headers/module.modulemap
+	@echo "module PolyPodCore { header \"polypod-core.h\" export * }" >> $(export_dir_ios)/headers/module.modulemap
 
 	# Package xcframework
 	xcodebuild -create-xcframework \
