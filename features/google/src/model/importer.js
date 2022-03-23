@@ -9,6 +9,5 @@ export async function importData(zipData) {
 export async function importZip(zipFile) {
     const googleAccount = {};
     googleAccount.pathNames = await zipFile.getEntries();
-    console.log(googleAccount.pathNames);
     return googleAccount;
 }
