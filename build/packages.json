@@ -6,7 +6,7 @@
         "platform/utils/endpoints-generator",
         "dev-utils/dummy-server",
         "dev-utils/rollup-plugin-copy-watch",
-        "dev-utils/test-utils",
+        "feature-utils/utils",
         "feature-utils/poly-look",
         "feature-utils/silly-i18n",
         "features/bundle",
