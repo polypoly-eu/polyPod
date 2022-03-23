@@ -81,14 +81,15 @@ jobs:
           release_name="$version_code ($version_name) - $branch@$sha_short"
           echo ::set-output name=release_name::$release_name
       - name: Upload
-        # uses: r0adkll/upload-google-play@9745ef904e395471bca5696056a6ce8a60d18cf8
-        uses: polypoly-eu/upload-google-play@master
+        # uses: r0adkll/upload-google-play@v1.0.16
+        uses: r0adkll/upload-google-play@8c2ebfdb6e1b439d3a31d35772b3f0f489d688c9
         with:
           serviceAccountJsonPlainText: ${{ secrets.POLYPOD_ANDROID_STORE_SERVICE_ACCOUNT_JSON }}
           packageName: coop.polypoly.polypod
           releaseName: ${{ steps.vars.outputs.release_name }}
           releaseFiles: ./platform/android/app/build/outputs/apk/release/app-release.apk
           track: internal
+          status: draft
           # whatsNewDirectory: distribution/whatsnew
           # mappingFile:
 
