@@ -8,7 +8,7 @@
         "dev-utils/rollup-plugin-copy-watch",
         "feature-utils/poly-look",
         "feature-utils/silly-i18n",
-        "feature-utils/storage",
+        "feature-utils/file-storage",
         "features/bundle",
         "features/demo",
         "features/example",
