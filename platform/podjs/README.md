@@ -39,7 +39,11 @@ To create a polyPod compatible feature, you will need to use this module.
 Follow these instructions to do so:
 
 1.  In order to point to `podjs` from the polypoly-eu repository,
-    add as a `development dependency` on your `package.json` the following:
+    add as a `development dependency` by
+
+    `$npm i <path-that-points-to-platform/podjs --D`
+
+    So, you end up having on your `package.json` the following:
 
     ```json
 
@@ -63,7 +67,7 @@ Follow these instructions to do so:
 
          $ npm i --save-dev ../../dev-utils/rollup-plugin-copy-watch
 
-    Which odes to a `package.json` file that includes this dependency:
+    So, the `package.json` file includes it as a dev dependency, like this:
 
     ```json
 
@@ -128,13 +132,27 @@ This way you have copied successfully the `pod.js` file from the `@polypoly-eu/p
 
 4.  So, to compile the input files and run the previous configurations,
     you should define a `build` script in the `package.json` file,
-    which will run the `rollup` command. For example, for Typescript directories, you can use:
+    which will run the `rollup` command.
+
+    For example, for Javascript features, you can use:
 
 ```json
    {
       ...
       "scripts": {
-         "build": "shx rm -rf dist && tsc && rollup -c rollup.config.js",
+         "build": "shx rm -rf dist && rollup -c",
+         ...
+      },
+   }
+```
+
+Or for Typescript features, you will also need to compile with `tsc`:
+
+```json
+   {
+      ...
+      "scripts": {
+         "build": "shx rm -rf dist && tsc && rollup -c",
          ...
       },
    }
