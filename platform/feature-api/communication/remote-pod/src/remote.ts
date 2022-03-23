@@ -12,7 +12,6 @@ import {
     Entry,
     Endpoint,
 } from "@polypoly-eu/pod-api";
-import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
 import {
     backendClient,
@@ -47,6 +46,7 @@ type PolyInBackend = ObjectBackendSpec<{
     has(...quads: Quad[]): ValueBackendSpec<boolean>;
 }>;
 
+<<<<<<< HEAD
 type PolyOutBackend = ObjectBackendSpec<{
     readDir(path: string): ValueBackendSpec<Entry[]>;
     readFile(path: string, options?: EncodingOptions): ValueBackendSpec<string | Uint8Array>;
@@ -55,6 +55,15 @@ type PolyOutBackend = ObjectBackendSpec<{
     fetch(input: string, init: RequestInit): ValueBackendSpec<Response>;
     importArchive(url: string): ValueBackendSpec<string>;
     removeArchive(fileId: string): ValueBackendSpec<void>;
+=======
+type PolyOutEndpoint = ObjectEndpointSpec<{
+    readDir(path: string): ValueEndpointSpec<Entry[]>;
+    readFile(path: string, options?: EncodingOptions): ValueEndpointSpec<string | Uint8Array>;
+    writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
+    stat(path: string): ValueEndpointSpec<Stats>;
+    importArchive(url: string): ValueEndpointSpec<string>;
+    removeArchive(fileId: string): ValueEndpointSpec<void>;
+>>>>>>> main
 }>;
 
 type PolyLifecycleBackend = ObjectBackendSpec<{
@@ -98,38 +107,6 @@ type PodBackend = ObjectBackendSpec<{
     info(): InfoBackend;
     endpoint(): EndpointBackend;
 }>;
-
-class FetchResponse implements Response {
-    readonly ok: boolean;
-    readonly redirected: boolean;
-    readonly status: number;
-    readonly statusText: string;
-    readonly type: ResponseType;
-    readonly url: string;
-
-    static async of(response: Response): Promise<FetchResponse> {
-        return new FetchResponse(response, await response.text());
-    }
-
-    constructor(response: Response, private readonly bufferedText: string) {
-        this.ok = response.ok;
-        this.redirected = response.redirected;
-        this.status = response.status;
-        this.statusText = response.statusText;
-        this.type = response.type;
-        this.url = response.url;
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async json(): Promise<any> {
-        // JSON parse error must be asynchronous (i.e. rejected promise)
-        return JSON.parse(this.bufferedText);
-    }
-
-    text(): Promise<string> {
-        return Promise.resolve(this.bufferedText);
-    }
-}
 
 class FileStats implements Stats {
     static of(stats: Stats): FileStats {
@@ -181,7 +158,6 @@ class FileStats implements Stats {
 }
 
 export const podBubblewrapClasses: Classes = {
-    "@polypoly-eu/remote-pod.FetchResponse": FetchResponse,
     "@polypoly-eu/remote-pod.FileStats": FileStats,
     "@polypoly-eu/rdf.NamedNode": RDF.NamedNode,
     "@polypoly-eu/rdf.BlankNode": RDF.BlankNode,
@@ -202,12 +178,6 @@ function bubblewrapPort(rawPort: Port<Uint8Array, Uint8Array>): Port<Uint8Array,
 
 export class RemoteClientPod implements Pod {
     private readonly rpcClient: ClientOf<PodBackend>;
-
-    static fromFetch(url: string, fetch: typeof window.fetch = window.fetch): RemoteClientPod {
-        const port = bubblewrapFetchPort(url, Bubblewrap.create(podBubblewrapClasses), fetch);
-
-        return new RemoteClientPod(port);
-    }
 
     static fromRawPort(rawPort: Port<Uint8Array, Uint8Array>): RemoteClientPod {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -236,10 +206,6 @@ export class RemoteClientPod implements Pod {
         const { rpcClient } = this;
 
         return new (class implements PolyOut {
-            fetch(input: string, init?: RequestInit): Promise<Response> {
-                return rpcClient.polyOut().fetch(input, init || {})();
-            }
-
             readFile(path: string, options: EncodingOptions): Promise<string>;
             readFile(path: string): Promise<Uint8Array>;
             readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
@@ -370,10 +336,6 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
         // the only difference is that `fetch` needs to return a slightly modified response
 
         return {
-            fetch: async (input, init) => {
-                const response = await polyOut.fetch(input, init);
-                return FetchResponse.of(response);
-            },
             readFile: (path, options?) => {
                 if (options === undefined) return polyOut.readFile(path);
                 else return polyOut.readFile(path, options);

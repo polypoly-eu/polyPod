@@ -17,7 +17,6 @@
         "features/polyPinion",
         "features/polyPreview",
         "features/test",
-        "platform/feature-api/api/fetch-spec",
         "platform/feature-api/api/pod-api",
         "platform/feature-api/api/rdf",
         "platform/feature-api/api/rdf-convert",
@@ -26,6 +25,7 @@
         "platform/feature-api/communication/port-authority",
         "platform/feature-api/communication/postoffice",
         "platform/feature-api/communication/remote-pod",
+        "platform/feature-api/utils",
         "platform/podjs"
     ]
 }

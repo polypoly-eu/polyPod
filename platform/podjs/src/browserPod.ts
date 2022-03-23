@@ -1,4 +1,3 @@
-import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
     ExternalFile,
     Endpoint,
@@ -111,10 +110,6 @@ class FileUrl {
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 class LocalStoragePolyOut implements PolyOut {
-    fetch(input: string, init?: RequestInit): Promise<Response> {
-        return window.fetch(input, init);
-    }
-
     readFile(path: string, options: EncodingOptions): Promise<string>;
     readFile(path: string): Promise<Uint8Array>;
     readFile(
@@ -320,12 +315,14 @@ class BrowserNetwork {
     async httpPost(
         url: string,
         body: string,
+        allowInsecure: boolean,
         contentType?: string,
         authToken?: string
     ): Promise<NetworkResponse> {
         return await this.httpFetchRequest(
             "Post",
             url,
+            allowInsecure,
             body,
             contentType,
             authToken
@@ -333,14 +330,22 @@ class BrowserNetwork {
     }
     async httpGet(
         url: string,
+        allowInsecure: boolean,
         contentType?: string,
         authToken?: string
     ): Promise<NetworkResponse> {
-        return await this.httpFetchRequest("GET", url, contentType, authToken);
+        return await this.httpFetchRequest(
+            "GET",
+            url,
+            allowInsecure,
+            contentType,
+            authToken
+        );
     }
     private async httpFetchRequest(
         type: string,
         url: string,
+        allowInsecure: boolean,
         body?: string,
         contentType?: string,
         authToken?: string
@@ -354,6 +359,7 @@ class BrowserNetwork {
                 if (status < 200 || status > 299) {
                     fetchResponse.error = `Unexpected response: ${request.responseText}`;
                     resolve(fetchResponse);
+                    return;
                 }
                 fetchResponse.payload = request.responseText;
                 resolve(fetchResponse);
@@ -363,8 +369,21 @@ class BrowserNetwork {
                 fetchResponse.error = `Network error`;
                 resolve(fetchResponse);
             };
-
+            let urlObject;
+            try {
+                urlObject = new URL(url);
+            } catch (e) {
+                fetchResponse.error = `Bad URL`;
+                resolve(fetchResponse);
+                return;
+            }
+            if (!allowInsecure && urlObject?.protocol != "https") {
+                fetchResponse.error = `Not a secure protocol`;
+                resolve(fetchResponse);
+                return;
+            }
             request.open(type, url);
+
             if (contentType)
                 request.setRequestHeader("Content-Type", contentType);
             if (authToken)
@@ -378,8 +397,14 @@ class BrowserNetwork {
     }
 }
 
-function getEndpoint(endpointId: string): string | null {
-    return endpoints[endpointId]?.url || null;
+interface EndpointInfo {
+    url: string;
+    auth: string;
+    allowInsecure: boolean;
+}
+
+function getEndpoint(endpointId: string): EndpointInfo | null {
+    return endpoints[endpointId] || null;
 }
 
 function approveEndpointFetch(
@@ -407,16 +432,20 @@ class BrowserEndpoint implements Endpoint {
     ): Promise<void> {
         if (!approveEndpointFetch(endpointId, featureIdToken))
             throw endpointErrorMessage("send", "User denied request");
-        const endpointURL = getEndpoint(endpointId);
-        if (!endpointURL) {
+        const endpoint = getEndpoint(endpointId);
+        if (!endpoint) {
             throw endpointErrorMessage("send", "Endpoint URL not set");
         }
-        await this.endpointNetwork.httpPost(
-            endpointURL,
+        const NetworkResponse = await this.endpointNetwork.httpPost(
+            endpoint.url,
             payload,
+            endpoint.allowInsecure,
             contentType,
             authToken
         );
+        if (NetworkResponse.error) {
+            throw endpointErrorMessage("send", NetworkResponse.error);
+        }
     }
     async get(
         endpointId: string,
@@ -426,11 +455,12 @@ class BrowserEndpoint implements Endpoint {
     ): Promise<string> {
         if (!approveEndpointFetch(endpointId, featureIdToken))
             throw endpointErrorMessage("get", "User denied request");
-        const endpointURL = getEndpoint(endpointId);
-        if (!endpointURL)
+        const endpoint = getEndpoint(endpointId);
+        if (!endpoint)
             throw endpointErrorMessage("get", "Endpoint URL not set");
         const NetworkResponse = await this.endpointNetwork.httpGet(
-            endpointURL,
+            endpoint.url,
+            endpoint.allowInsecure,
             contentType,
             authToken
         );
