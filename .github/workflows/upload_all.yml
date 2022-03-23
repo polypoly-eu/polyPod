@@ -92,8 +92,8 @@ jobs:
           echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
           echo "##[set-output name=sha_short;]$(echo ${GITHUB_SHA::7})"
       - name: Android - Upload
-        # uses: r0adkll/upload-google-play@9745ef904e395471bca5696056a6ce8a60d18cf8
-        uses: polypoly-eu/upload-google-play@master
+        # uses: r0adkll/upload-google-play@v1.0.16
+        uses: r0adkll/upload-google-play@8c2ebfdb6e1b439d3a31d35772b3f0f489d688c9
         if: env.POLYPOD_UPLOAD_GOOGLE_PLAY == 'true'
         with:
           serviceAccountJsonPlainText: ${{ secrets.POLYPOD_ANDROID_STORE_SERVICE_ACCOUNT_JSON }}
@@ -101,6 +101,7 @@ jobs:
           releaseName: ${{ env.VERSION_CODE }} (${{ env.VERSION_NAME }}) - ${{ steps.vars.outputs.branch }}@${{ steps.vars.outputs.sha_short }}
           releaseFiles: ./platform/android/app/build/outputs/apk/release/app-release.apk
           track: internal
+          status: draft
           # whatsNewDirectory: distribution/whatsnew
           # mappingFile:
 
