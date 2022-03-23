@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@polypoly-eu/dummy-server": "file:../../../../dev-utils/dummy-server",
-    "@polypoly-eu/test-utils": "file:../../../../dev-utils/test-utils",
+    "@polypoly-eu/test-utils": "file:../../utils",
     "@types/chai": "^4.2.14",
     "@types/chai-as-promised": "^7.1.3",
     "@types/connect": "^3.4.34",
