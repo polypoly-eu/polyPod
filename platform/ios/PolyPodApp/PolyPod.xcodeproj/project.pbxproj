@@ -91,6 +91,8 @@
 		3B3CEDFA274FC37C000C3E6E /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989B350269CA6B7000EE977 /* FilePicker.swift */; };
 		3B5487E227CD0FF700480CB5 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5487E127CD0FF700480CB5 /* Endpoint.swift */; };
 		5B8653022643FC310014208C /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
+		9015F60527EB0DA500DC6142 /* PolyPodCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9015F60427EB0DA500DC6142 /* PolyPodCore.xcframework */; };
+		9015F60627EB0DA500DC6142 /* PolyPodCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9015F60427EB0DA500DC6142 /* PolyPodCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		901C0588278EE58700BC8364 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0587278EE58700BC8364 /* CoreDataStack.swift */; };
 		901C058A278F2AF800BC8364 /* CoreData+PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */; };
 		901C058B278F2D4A00BC8364 /* CoreData+PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */; };
@@ -177,6 +179,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9015F60727EB0DA500DC6142 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9015F60627EB0DA500DC6142 /* PolyPodCore.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1A00DFF624569F3A0049F3F7 /* pod.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = pod.html; sourceTree = "<group>"; };
 		1A00DFF8245961FB0049F3F7 /* messagePort.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = messagePort.js; sourceTree = "<group>"; };
@@ -233,6 +249,7 @@
 		3B5487E127CD0FF700480CB5 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		5B0F7B5F26A924DF00F4EFF4 /* PolyPod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PolyPod.entitlements; sourceTree = "<group>"; };
 		5B8653012643FC310014208C /* PolyNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyNav.swift; sourceTree = "<group>"; };
+		9015F60427EB0DA500DC6142 /* PolyPodCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = PolyPodCore.xcframework; path = ../../core/export/ios/PolyPodCore.xcframework; sourceTree = "<group>"; };
 		901C0587278EE58700BC8364 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+PolyIn.swift"; sourceTree = "<group>"; };
 		904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchToMainQueue.swift; sourceTree = "<group>"; };
@@ -296,6 +313,7 @@
 			files = (
 				E9BE2909264BBD67003EC8AE /* Zip in Frameworks */,
 				E9BE2906264BBAA0003EC8AE /* MessagePack in Frameworks */,
+				9015F60527EB0DA500DC6142 /* PolyPodCore.xcframework in Frameworks */,
 				9049ECA427BCE8B70059605A /* CocoaLumberjackSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,7 +398,6 @@
 		1AA6DE2624191C94008DB1B2 = {
 			isa = PBXGroup;
 			children = (
-				9015F60227EB0D3300DC6142 /* Local Dependencies */,
 				904D4A6E27905D4C00A75AED /* Utils */,
 				E9018EDF276370B500FDF34A /* Core */,
 				E97D3274263151BC00A5A180 /* Features */,
@@ -393,6 +410,7 @@
 				1A66F7732493743D00ED4308 /* PolyPodTests */,
 				E9545EB7273542CC001E8C7F /* PolyPodUITests */,
 				1AA6DE3024191C94008DB1B2 /* Products */,
+				9015F60327EB0DA500DC6142 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -520,11 +538,12 @@
 			path = PolyNav;
 			sourceTree = "<group>";
 		};
-		9015F60227EB0D3300DC6142 /* Local Dependencies */ = {
+		9015F60327EB0DA500DC6142 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9015F60427EB0DA500DC6142 /* PolyPodCore.xcframework */,
 			);
-			name = "Local Dependencies";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		904D4A6E27905D4C00A75AED /* Utils */ = {
@@ -632,6 +651,7 @@
 				E923739E2628228F00D2CFF3 /* Copy polyPod Features */,
 				E98F3756266F32AE00874FB9 /* Copy licenses and legal */,
 				3B5487E427CE881400480CB5 /* Copy Endpoints */,
+				9015F60727EB0DA500DC6142 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
