@@ -5,13 +5,13 @@ RPC library for TypeScript
 ## Overview
 
 This library allows transparent function calls on objects that may reside in a
-different process. This works by capturing these calls, translating them into a
+different process.  This works by capturing these calls, translating them into a
 particular protocol, sending it over a wire, and finally executing it on the
-other side. The response is sent back similarly. Encoding and error handling
+other side.  The response is sent back similarly.  Encoding and error handling
 is assumed to be dealt with by the transport layer, for example
 [port-authority](../port-authority/).
 
-We leverage TypeScript's type system to enable type-safe remote calls. Client
+We leverage TypeScript's type system to enable type-safe remote calls.  Client
 and server share a _specification_ of an API that can be called remotely.
 Servers can implement this specification and have it listen on some port.
 Clients can automatically obtain a callable object from the same specification.
@@ -34,7 +34,7 @@ type SimpleBackend = ObjectBackendSpec<{
 By convention, these specifications are called “backend endpoints”.
 
 Servers can implement this endpoint specification and may choose to use `async`
-methods at any point. We assume port-authority as a transport layer.
+methods at any point.  We assume port-authority as a transport layer.
 
 ```typescript
 import {backendServer, ServerOf} from "@polypoly-eu/postoffice";
@@ -77,24 +77,24 @@ argument and result types are checked like in regular function calls.
 
 This repository is structured as a TypeScript library with the following modules:
 
--   `types` contains the meta-specification types for endpoints
--   `protocol` defines the underlying protocol that are used for representing
-    function calls and arguments
--   `rpc` converts specifications into clients and servers
+* `types` contains the meta-specification types for endpoints
+* `protocol` defines the underlying protocol that are used for representing
+  function calls and arguments
+* `rpc` converts specifications into clients and servers
 
 ## Security
 
 This library performs no run-time checking of method names, parameter types or
-method visibility. In particular, clients that use JavaScript or circumvent
+method visibility.  In particular, clients that use JavaScript or circumvent
 type checking by other means may call methods that are present in the
-implementation but not in the endpoint spec. General security best practices
+implementation but not in the endpoint spec.  General security best practices
 apply: assume that any invocation of your server implementation is potentially
 malevolent and treat client requests as untrusted.
 
 A reasonable protection mechanism is to wrap the actual logic into an object
 that performs validation using e.g. [io-ts](https://github.com/gcanti/io-ts).
 Unfortunately, TypeScript's type system will not help when annotating the
-parameters with the expected types. Instead, we recommend relaxing all types to
+parameters with the expected types.  Instead, we recommend relaxing all types to
 `unknown | undefined` and performing full manual validation:
 
 ```typescript
