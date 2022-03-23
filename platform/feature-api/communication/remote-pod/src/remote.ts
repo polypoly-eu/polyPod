@@ -46,7 +46,6 @@ type PolyInBackend = ObjectBackendSpec<{
     has(...quads: Quad[]): ValueBackendSpec<boolean>;
 }>;
 
-<<<<<<< HEAD
 type PolyOutBackend = ObjectBackendSpec<{
     readDir(path: string): ValueBackendSpec<Entry[]>;
     readFile(path: string, options?: EncodingOptions): ValueBackendSpec<string | Uint8Array>;
@@ -55,15 +54,6 @@ type PolyOutBackend = ObjectBackendSpec<{
     fetch(input: string, init: RequestInit): ValueBackendSpec<Response>;
     importArchive(url: string): ValueBackendSpec<string>;
     removeArchive(fileId: string): ValueBackendSpec<void>;
-=======
-type PolyOutEndpoint = ObjectEndpointSpec<{
-    readDir(path: string): ValueEndpointSpec<Entry[]>;
-    readFile(path: string, options?: EncodingOptions): ValueEndpointSpec<string | Uint8Array>;
-    writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
-    stat(path: string): ValueEndpointSpec<Stats>;
-    importArchive(url: string): ValueEndpointSpec<string>;
-    removeArchive(fileId: string): ValueEndpointSpec<void>;
->>>>>>> main
 }>;
 
 type PolyLifecycleBackend = ObjectBackendSpec<{
