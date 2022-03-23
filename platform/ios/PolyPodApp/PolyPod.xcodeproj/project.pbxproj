@@ -103,6 +103,7 @@
 		9049ECA427BCE8B70059605A /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9049ECA327BCE8B70059605A /* CocoaLumberjackSwift */; };
 		904D4A7027905D5B00A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
 		904D4A712790633000A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
+		9063A7B727EB6DE600955E49 /* FlatBuffers in Frameworks */ = {isa = PBXBuildFile; productRef = 9063A7B627EB6DE600955E49 /* FlatBuffers */; };
 		906E406C27A82C7F009015B7 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E406B27A82C7F009015B7 /* ActivityViewController.swift */; };
 		90E4088227D78E4E006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
 		90E4088327D79382006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
@@ -257,6 +258,7 @@
 		901C0587278EE58700BC8364 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+PolyIn.swift"; sourceTree = "<group>"; };
 		904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchToMainQueue.swift; sourceTree = "<group>"; };
+		9063A7B527EB6DDB00955E49 /* swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = swift; path = ../../core/flatbuffers_shared/flatbuffers/swift; sourceTree = "<group>"; };
 		906E406B27A82C7F009015B7 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		90E4088127D78E4E006AD362 /* DataProtection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtection.swift; sourceTree = "<group>"; };
 		E9040D4626F0A30E00A88593 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				E9BE2909264BBD67003EC8AE /* Zip in Frameworks */,
 				E9BE2906264BBAA0003EC8AE /* MessagePack in Frameworks */,
 				9015F60C27EB103C00DC6142 /* PolyPodCore.xcframework in Frameworks */,
+				9063A7B727EB6DE600955E49 /* FlatBuffers in Frameworks */,
 				9049ECA427BCE8B70059605A /* CocoaLumberjackSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,6 +405,7 @@
 		1AA6DE2624191C94008DB1B2 = {
 			isa = PBXGroup;
 			children = (
+				9063A7B427EB6DDB00955E49 /* Packages */,
 				904D4A6E27905D4C00A75AED /* Utils */,
 				E9018EDF276370B500FDF34A /* Core */,
 				E97D3274263151BC00A5A180 /* Features */,
@@ -558,6 +562,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		9063A7B427EB6DDB00955E49 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				9063A7B527EB6DDB00955E49 /* swift */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		E9018EDF276370B500FDF34A /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -667,6 +679,7 @@
 				E9BE2905264BBAA0003EC8AE /* MessagePack */,
 				E9BE2908264BBD67003EC8AE /* Zip */,
 				9049ECA327BCE8B70059605A /* CocoaLumberjackSwift */,
+				9063A7B627EB6DE600955E49 /* FlatBuffers */,
 			);
 			productName = PolyPod;
 			productReference = 1AA6DE2F24191C94008DB1B2 /* PolyPod.app */;
@@ -1394,6 +1407,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9049ECA227BCE8B70059605A /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
 			productName = CocoaLumberjackSwift;
+		};
+		9063A7B627EB6DE600955E49 /* FlatBuffers */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FlatBuffers;
 		};
 		E9BE2905264BBAA0003EC8AE /* MessagePack */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,5 +1,6 @@
 import PolyPodCore
 import Foundation
+import FlatBuffers
 
 class Core {
     static let instance = Core()
