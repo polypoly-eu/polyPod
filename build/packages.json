@@ -6,7 +6,6 @@
         "platform/utils/endpoints-generator",
         "dev-utils/dummy-server",
         "dev-utils/rollup-plugin-copy-watch",
-        "feature-utils/utils",
         "feature-utils/poly-look",
         "feature-utils/silly-i18n",
         "features/bundle",
@@ -26,6 +25,7 @@
         "platform/feature-api/communication/port-authority",
         "platform/feature-api/communication/postoffice",
         "platform/feature-api/communication/remote-pod",
+        "platform/feature-api/utils",
         "platform/podjs"
     ]
 }
