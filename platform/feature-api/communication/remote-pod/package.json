@@ -6,6 +6,10 @@
   ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
+  },
   "scripts": {
     "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "lint": "eslint src --ext .ts",
@@ -17,10 +21,10 @@
     "docs": "typedoc"
   },
   "dependencies": {
-    "@polypoly-eu/communication": "file:..",
-    "@polypoly-eu/fetch-spec": "file:../../api/fetch-spec",
+    "@polypoly-eu/bubblewrap": "file:../bubblewrap",
     "@polypoly-eu/pod-api": "file:../../api/pod-api",
     "@polypoly-eu/port-authority": "file:../port-authority",
+    "@polypoly-eu/postoffice": "file:../postoffice",
     "@polypoly-eu/rdf": "file:../../api/rdf",
     "@polypoly-eu/rdf-convert": "file:../../api/rdf-convert",
     "@rdfjs/dataset": "^1.0.1",
@@ -30,6 +34,7 @@
   },
   "devDependencies": {
     "@polypoly-eu/dummy-server": "file:../../../../dev-utils/dummy-server",
+    "@polypoly-eu/test-utils": "file:../../utils",
     "@types/chai": "^4.2.14",
     "@types/chai-as-promised": "^7.1.3",
     "@types/connect": "^3.4.34",

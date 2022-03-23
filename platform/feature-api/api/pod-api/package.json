@@ -23,12 +23,12 @@
     "docs": "typedoc"
   },
   "dependencies": {
-    "@polypoly-eu/fetch-spec": "file:../fetch-spec",
     "@polypoly-eu/rdf": "file:../rdf"
   },
   "devDependencies": {
     "@polypoly-eu/dummy-server": "file:../../../../dev-utils/dummy-server",
     "@polypoly-eu/rdf-spec": "file:../rdf-spec",
+    "@polypoly-eu/test-utils": "file:../../utils",
     "@rdfjs/dataset": "^1.0.1",
     "@types/chai": "^4.2.14",
     "@types/chai-as-promised": "^7.1.3",
