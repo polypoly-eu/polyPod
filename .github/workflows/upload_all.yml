@@ -103,7 +103,7 @@ jobs:
           # whatsNewDirectory: distribution/whatsnew
           # mappingFile:
       - name: Publish
-        if: github.event.inputs.draft != true
+        if: github.event.inputs.draft != 'true'
         run: echo ::notice::Publishing on Google Play not yet supported, please do it manually.
 
   upload_app_store:
@@ -145,5 +145,5 @@ jobs:
           POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
         run: make upload_ipa
       - name: Publish
-        if: github.event.inputs.draft != true
+        if: github.event.inputs.draft != 'true'
         run: echo ::notice::Publishing on the App Store not yet supported, please do it manually.
