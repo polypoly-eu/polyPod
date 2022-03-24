@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { FeatureFileStorage } from "@polypoly-eu/feature-storage";
+import { FeatureFileStorage } from "@polypoly-eu/feature-file-storage";
 import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";

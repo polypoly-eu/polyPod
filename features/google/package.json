@@ -19,7 +19,7 @@
   "private": true,
   "dependencies": {
     "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
-    "@polypoly-eu/feature-storage": "file:../../feature-utils/feature-storage",
+    "@polypoly-eu/feature-file-storage": "file:../../feature-utils/feature-file-storage",
     "@polypoly-eu/podjs": "file:../../platform/podjs",
     "d3": "^7.0.1",
     "react": "^17.0.2",

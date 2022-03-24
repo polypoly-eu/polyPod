@@ -1,4 +1,4 @@
-import { ZipFile } from "@polypoly-eu/feature-storage";
+import { ZipFile } from "@polypoly-eu/feature-file-storage";
 
 export async function importData(zipData) {
     const zipFile = await ZipFile.createWithCache(zipData, window.pod);
