@@ -13,7 +13,7 @@ import {
     ImporterContext,
 } from "./context/importer-context.jsx";
 
-import ErrorPopup from "@polypoly-eu/poly-look";
+import { ErrorPopup } from "@polypoly-eu/poly-look";
 import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
 import ExploreView from "./views/explore/explore.jsx";
@@ -63,7 +63,6 @@ const FacebookImporter = () => {
             return <Redirect to={{ pathname: "/overview" }} />;
         else return <Redirect to={{ pathname: "/import" }} />;
     }
-
     return (
         <div className="facebook-importer poly-theme poly-theme-dark">
             {pod ? (
