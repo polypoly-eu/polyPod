@@ -22,25 +22,25 @@ The type specification for a simple API can be expressed using standard
 TypeScript techniques:
 
 ```typescript
-import {ObjectEndpointSpec, ValueEndpointSpec} from "@polypoly-eu/postoffice";
+import { ObjectBackendSpec, ValueBackendSpec } from "@polypoly-eu/postoffice";
 
-type SimpleEndpoint = ObjectEndpointSpec<{
-    test1(param1: string): ValueEndpointSpec<number>;
-    test2(param1: string): ValueEndpointSpec<number>;
-    test3(parama: boolean, ...paramb: number[]): ValueEndpointSpec<string>;
-}>
+type SimpleBackend = ObjectBackendSpec<{
+    test1(param1: string): ValueBackendSpec<number>;
+    test2(param1: string): ValueBackendSpec<number>;
+    test3(parama: boolean, ...paramb: number[]): ValueBackendSpec<string>;
+}>;
 ```
 
-By convention, these specifications are called “endpoints”.
+By convention, these specifications are called “backend endpoints”.
 
 Servers can implement this endpoint specification and may choose to use `async`
 methods at any point.  We assume port-authority as a transport layer.
 
 ```typescript
-import {endpointServer, ServerOf} from "@polypoly-eu/postoffice";
+import {backendServer, ServerOf} from "@polypoly-eu/postoffice";
 import {server} from "@polypoly-eu/port-authority";
 
-const simpleEndpointImpl: ServerOf<SimpleEndpoint> = {
+const simpleBackendImpl: ServerOf<SimpleBackend> = {
     test1: async (param1: string) =>
         param1.length * 2,
     test2: (param1: string) =>
@@ -49,7 +49,7 @@ const simpleEndpointImpl: ServerOf<SimpleEndpoint> = {
         throw new Error(`${parama}, ${paramb.join()}`)
 };
 
-server(serverPort, endpointServer(simpleEndpointImpl));
+server(serverPort, backendServer(simpleBackendImpl));
 ```
 
 The implementation can be served on any port by leveraging the `port-authority`
@@ -58,10 +58,10 @@ module, including via HTTP or `MessagePort`s.
 On the other side, clients can obtain a callable object:
 
 ```typescript
-import {endpointClient, ClientOf} from "@polypoly-eu/postoffice";
-import {client} from "@polypoly-eu/port-authority";
+import { backendClient, ClientOf } from "@polypoly-eu/postoffice";
+import { client } from "@polypoly-eu/port-authority";
 
-const rpcClient: ClientOf<SimpleEndpoint> = endpointClient(client(clientPort));
+const rpcClient: ClientOf<SimpleBackend> = backendClient(client(clientPort));
 
 const numberResult: number = await rpcClient.test1("Hello")();
 
@@ -70,7 +70,7 @@ console.log(numberResult);
 
 The callable object does not have exactly the same shape as the API
 specification; function call chains need to be terminated by an empty function
-call to “force” evaluation.  Type inference and checking works as expected: the
+call to “force” evaluation. Type inference and checking works as expected: the
 argument and result types are checked like in regular function calls.
 
 ## Structure
@@ -98,7 +98,7 @@ parameters with the expected types.  Instead, we recommend relaxing all types to
 `unknown | undefined` and performing full manual validation:
 
 ```typescript
-const simpleEndpointImpl: ServerOf<SimpleEndpoint> = {
+const simpleBackendImpl: ServerOf<SimpleBackend> = {
     test1: async (param1?: unknown) => {
         // ...
         actualImpl.test1(/* ... */);
@@ -108,6 +108,6 @@ const simpleEndpointImpl: ServerOf<SimpleEndpoint> = {
     },
     test3: async (parama?: unknown, ...paramb: unknown[]) => {
         // ...
-    }
+    },
 };
 ```

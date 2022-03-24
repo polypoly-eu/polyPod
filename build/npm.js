@@ -1,3 +1,4 @@
+const fs = require("fs");
 const { spawn } = require("child_process");
 
 const { platformize, ANSIInvert } = require("./utils.js");
@@ -42,8 +43,10 @@ const npx = async (...args) => {
 };
 
 async function npmInstall(name) {
-    logDetail(`${name}: Installing dependencies ...`);
-    await npm("--no-audit", "--prefer-offline", "ci");
+    if (fs.existsSync("package-lock.json")) {
+        logDetail(`${name}: Installing dependencies ...`);
+        await npm("--no-audit", "--prefer-offline", "ci");
+    }
 }
 
 async function runCommand(command, emojis, callback) {
