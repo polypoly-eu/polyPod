@@ -31,6 +31,16 @@ jobs:
           targets='${{ github.event.inputs.targets }}'
           draft='${{ github.event.inputs.draft }}'
           echo ::notice::Branch=$branch, Targets=$targets, Draft=$draft
+      - name: Test status value
+        run: echo ${{ github.event.inputs.draft == 'true' && 'draft' || 'completed' }}
+      - name: Testing - Not draft
+        if: github.event.input.draft != 'true'
+        run: echo Not draft
+      - name: Testing - Draft
+        if: github.event.input.draft != 'true'
+        run: echo Draft
+      - name: Testing - abort early
+        run: exit 1
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
