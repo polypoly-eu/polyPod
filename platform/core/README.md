@@ -9,7 +9,7 @@ Logic shared across polyPod platforms - ios, android, wasm.
 
 ## Building
 
-- Setup flatbuffers:
+- Set up flatbuffers:
           ./flatbuffers_shared/setup_flatbuffers.sh
 
 - Generate flatbuffers:

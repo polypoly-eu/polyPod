@@ -3,7 +3,6 @@ import * as RDF from "rdf-js";
 
 let quads: Array<RDF.Quad> = [];
 let pod: Pod;
-let polyOut: PolyOut;
 let polyIn: PolyIn;
 
 export function simpleJavaScriptCall(): void {
@@ -13,79 +12,6 @@ export function simpleJavaScriptCall(): void {
 
 export function awaitPodObject(): void {
     console.log(`pod: ${pod}`);
-}
-
-export async function simpleFetch(): Promise<void> {
-    console.log("simpleFetch()");
-    await polyOut.fetch("https://httpbin.org/robots.txt");
-}
-
-export async function callFetchWithNoMethod(): Promise<void> {
-    console.log("callFetchWithNoMethod()");
-    await polyOut.fetch("https://httpbin.org/robots.txt");
-}
-
-export async function callFetchWithPostMethod(): Promise<void> {
-    console.log("callFetchWithPostMethod()");
-    await polyOut.fetch("http://httpbin.org/post", { method: "POST" });
-}
-
-export async function callFetchWithSingleHeaderInStringForm(): Promise<void> {
-    console.log("callFetchWithSingleHeaderInStringForm()");
-    const key = getInput(1);
-    const value = getInput(2);
-    const headers = {};
-    headers[key] = value;
-    await polyOut.fetch("http://httpbin.org/headers", { headers: headers });
-}
-
-export async function callFetchWithMultipleHeadersInStringForm(): Promise<void> {
-    console.log("callFetchWithMultipleHeadersInStringForm()");
-    const key1 = getInput(1);
-    const value1 = getInput(2);
-    const key2 = getInput(3);
-    const value2 = getInput(4);
-    const headers = {};
-    headers[key1] = value1;
-    headers[key2] = value2;
-    await polyOut.fetch("http://httpbin.org/headers", { headers: headers });
-}
-
-export async function verifyBodyOfFetchResponse(): Promise<void> {
-    console.log("verifyBodyOfFetchResponse()");
-    const response = await polyOut.fetch("http://httpbin.org/robots.txt");
-    // TODO - how to handle/reject streams?
-    const text = await response.text();
-    setResult(text);
-}
-
-export async function verifyResponseStatusOfFetchCall(): Promise<void> {
-    console.log("verifyResponseStatusOfFetchCall()");
-    const response = await polyOut.fetch("http://httpbin.org/robots.txt");
-    if (typeof response.status === "number") setResult(response.status);
-    else
-        throw new TypeError(
-            `response.ok is not a number, it is: '${typeof response.status}'`
-        );
-}
-
-export async function verifyResponseOkOfFetchCall(): Promise<void> {
-    console.log("verifyResponseOkOfFetchCall()");
-    const response = await polyOut.fetch("http://httpbin.org/robots.txt");
-    if (typeof response.ok === "boolean") setResult(response.ok);
-    else
-        throw new TypeError(
-            `response.ok is not a boolean, it is: '${typeof response.ok}'`
-        );
-}
-
-export async function callFetchWithPostMethodAndBody(): Promise<void> {
-    console.log("callFetchWithPostMethodAndBOdy()");
-    const body = getInput(1);
-    await polyOut.fetch("http://httpbin.org/post", {
-        method: "POST",
-        body: body,
-    });
 }
 
 export async function canCallPolyInAddWithNoQuads(): Promise<void> {
@@ -427,7 +353,6 @@ export async function execute(test: () => void): Promise<void> {
     setStatus("Running...");
     pod = await awaitPodApi();
     polyIn = pod.polyIn;
-    polyOut = pod.polyOut;
     try {
         await test();
         setStatus("All OK");
@@ -456,11 +381,6 @@ async function awaitPodApi(): Promise<Pod> {
 
 function getInput(i): string {
     return (document.getElementById(`input.${i}`) as HTMLInputElement).value;
-}
-
-function setResult(result): void {
-    console.debug(`Setting result: '${result}'`);
-    document.getElementById("result").innerText = result;
 }
 
 class QuadBuilder {
