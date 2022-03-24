@@ -1,6 +1,6 @@
 # Feature File Storage
 
-Module used to access the polypods file system API (poly.out). Has implementation for getting stored file
+Module used to access the polypods file system API (polyOut). Has implementation for getting stored file
 meta-data and Zip-File access.
 
 ## Install and build
