@@ -92,7 +92,7 @@ export function middlewarePort<T, Body = any>(
 /**
  * Wrapper around [[middlewarePort]] set up for JSON communication. The content type is set to `application/json`.
  *
- * This wrapper follows the same error protocol as [[jsonFetchPort]]. The formatting uses `JSON.stringify` to convert
+ * The formatting uses `JSON.stringify` to convert
  * the [[Try]] representing the outcome of the promise to a string. Conversely, incoming requests are parsed using
  * `JSON.parse`.
  */
@@ -124,7 +124,7 @@ export function jsonMiddlewarePort(
  * Wrapper around [[middlewarePort]] set up for raw byte stream communication. The content type is set to
  * `application/octet-stream`.
  *
- * This wrapper follows the same error protocol as [[bubblewrapFetchPort]]. The formatting uses standard Bubblewrap
+ * The formatting uses standard Bubblewrap
  * encoding to convert the [[Try]] representing the outcome of the promise to a string. Conversely, incoming requests
  * are decoded using standard Bubblewrap decoding.
  */

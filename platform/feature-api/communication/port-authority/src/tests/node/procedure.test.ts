@@ -1,7 +1,6 @@
 import { nodeLoopbackLifecycle } from "./_common";
 import { procedureSpec, ProcedureSpecLifecycle } from "../../specs/procedure";
 import { procedureLiftedLifecycle } from "../_lifecycles";
-import { bubblewrapFetchPort, jsonFetchPort } from "../../fetch";
 import { bubblewrapMiddlewarePort, jsonMiddlewarePort } from "../../middleware";
 import { createServer, RequestListener, Server } from "http";
 import { AddressInfo } from "net";
@@ -29,43 +28,9 @@ function stopServer(server: Server): Promise<void> {
     });
 }
 
-const jsonHttpLifecycle: ProcedureSpecLifecycle = async () => {
-    const [app, receive] = jsonMiddlewarePort();
-    const [server, port] = await startServer(app);
-
-    const send = jsonFetchPort(`http://localhost:${port}/`, fetch);
-
-    return {
-        value: [send, receive],
-        cleanup: () => stopServer(server),
-    };
-};
-
-const rawHttpLifecycle: ProcedureSpecLifecycle = async () => {
-    const bubblewrap = Bubblewrap.create();
-
-    const [app, receive] = bubblewrapMiddlewarePort(bubblewrap);
-    const [server, port] = await startServer(app);
-
-    const send = bubblewrapFetchPort(`http://localhost:${port}/`, bubblewrap, fetch);
-
-    return {
-        value: [send, receive],
-        cleanup: () => stopServer(server),
-    };
-};
-
 describe("Node/Procedure", () => {
     describe("lifted", () => {
         procedureSpec(procedureLiftedLifecycle(nodeLoopbackLifecycle));
-    });
-
-    describe("HTTP/fetch (JSON)", () => {
-        procedureSpec(jsonHttpLifecycle);
-    });
-
-    describe("HTTP/fetch (Uint8Array)", () => {
-        procedureSpec(rawHttpLifecycle);
     });
 
     describe("GET", () => {
