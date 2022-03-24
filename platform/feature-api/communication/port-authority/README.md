@@ -51,6 +51,7 @@ This module is structured as a TypeScript library with the following modules:
 -   `procedure` contains the universal request-response abstractions
 -   `browser` provides browser-specific code
 -   `node` provides Node-specific code (code-split into a separate import)
+-   `middleware` provides a few functions that bridge different ports
 
 
 ## Limitations
