@@ -34,10 +34,10 @@ jobs:
       - name: Test status value
         run: echo ${{ github.event.inputs.draft == 'true' && 'draft' || 'completed' }}
       - name: Testing - Not draft
-        if: github.event.input.draft != 'true'
+        if: github.event.inputs.draft != 'true'
         run: echo Not draft
       - name: Testing - Draft
-        if: github.event.input.draft != 'true'
+        if: github.event.inputs.draft == 'true'
         run: echo Draft
       - name: Testing - abort early
         run: exit 1
