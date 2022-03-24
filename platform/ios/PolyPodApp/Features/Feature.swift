@@ -11,35 +11,58 @@ class Feature {
     let thumbnail: URL?
     private let links: [String: String]
     
-    static func load(path: URL, languageCode: String?) -> Feature? {
-        let manifest = readManifest(path)
+    static func load(path: URL) -> Feature? {
+        guard let manifest = readManifest(path) else {
+            return nil
+        }
         return Feature(
             path: path,
-            manifest: manifest,
-            languageCode: languageCode
+            manifest: manifest
         )
     }
     
-    init(path: URL, manifest: FeatureManifest, languageCode: String?) {
+    init(
+        path: URL,
+        name: String?,
+        author: String?,
+        description: String?,
+        thumbnail: String?,
+        thumbnailColor: String?,
+        primaryColor: String?,
+        links: [String: String]?
+    ) {
         self.path = path
-        let userLanguage = languageCode ?? "en"
-        let translations = manifest.translations?[userLanguage]
         let id = path.lastPathComponent
         self.id = id
-        name = translations?.name ?? manifest.name ?? id
-        author = translations?.author ?? manifest.author
-        description = translations?.description ?? manifest.description
-        let primaryColor = parseColor(hexValue: translations?.primaryColor ?? manifest.primaryColor)
+        self.name = name ?? id
+        self.author = author
+        self.description = description
+        let primaryColor = parseColor(hexValue: primaryColor)
         self.primaryColor = primaryColor
-        thumbnailColor = parseColor(hexValue: translations?.thumbnailColor ?? manifest.thumbnailColor) ?? primaryColor
-        thumbnail = findThumbnail(
+        self.thumbnailColor = parseColor(hexValue: thumbnailColor) ?? primaryColor
+        self.thumbnail = findThumbnail(
             featurePath: path,
-            thumbnailPath: translations?.thumbnail ?? manifest.thumbnail
+            thumbnailPath: thumbnail
         )
-        links = mergeLinks(
-            original: manifest.links,
-            translated: translations?.links
-        )
+        self.links = links ?? [:]
+    }
+    
+    convenience init(path: URL, manifest: FeatureManifest) {
+        let links = stride(from: 0,
+                       to: manifest.linksCount,
+                       by: 1).reduce(into: [String: String](), { partialResult, idx in
+            if let link = manifest.links(at: idx) {
+                partialResult[link.name!] = link.url!
+            }
+        })
+        self.init(path: path,
+                  name: manifest.name,
+                  author: manifest.author,
+                  description: manifest.description,
+                  thumbnail: manifest.thumbnail,
+                  thumbnailColor: manifest.thumbnailColor,
+                  primaryColor: manifest.primaryColor,
+                  links: links)
     }
     
     func findUrl(target: String) -> String? {
@@ -53,22 +76,12 @@ class Feature {
     }
 }
 
-private func readManifest(_ basePath: URL) -> FeatureManifest {
+private func readManifest(_ basePath: URL) -> FeatureManifest? {
     let manifestPath = basePath.appendingPathComponent("manifest.json")
-    if let manifest = FeatureManifest.load(path: manifestPath) {
-        return manifest
+    guard let contents = try? String(contentsOf: manifestPath) else {
+        return nil
     }
-    Log.error("Failed to load feature manifest from: \(manifestPath)")
-    return FeatureManifest(
-        name: nil,
-        author: nil,
-        description: nil,
-        thumbnail: nil,
-        thumbnailColor: nil,
-        primaryColor: nil,
-        links: nil,
-        translations: nil
-    )
+    return Core.instance.parseFeatureManifest(json: contents)
 }
 
 private func parseColor(hexValue: String?) -> Color? {
@@ -91,15 +104,4 @@ private func findThumbnail(featurePath: URL, thumbnailPath: String?) -> URL? {
         return nil
     }
     return fullPath
-}
-
-private func mergeLinks(
-    original: [String: String]?,
-    translated: [String: String]?
-) -> [String: String] {
-    var links = original ?? [:]
-    if let translated = translated {
-        links = links.merging(translated) { (_, new) in new }
-    }
-    return links
 }

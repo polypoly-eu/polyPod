@@ -1,14 +1,14 @@
 use super::core_failure_fbs_mapping::build_failure_fbs;
 use crate::flatbuffers_generated::{
-    feature_manifest_generated::feature_manifest::{FeatureManifest, Link, LinkArgs},
-    feature_manifest_response_generated::feature_manifest_response::FeatureManifestParsingResult,
+    feature_manifest_generated::{FeatureManifest, Link, LinkArgs},
+    feature_manifest_response_generated::FeatureManifestParsingResult,
 };
 use crate::{
     core_failure::CoreFailure,
     feature_manifest_parsing,
     flatbuffers_generated::{
-        feature_manifest_generated::feature_manifest::FeatureManifestArgs,
-        feature_manifest_response_generated::feature_manifest_response::{
+        feature_manifest_generated::FeatureManifestArgs,
+        feature_manifest_response_generated::{
             finish_feature_manifest_parsing_response_buffer, FeatureManifestParsingResponse,
             FeatureManifestParsingResponseArgs,
         },
@@ -48,7 +48,7 @@ fn build_sucess_response_args(
 
     let feature_manifest = FeatureManifest::create(fbb, &manifest_args).as_union_value();
     FeatureManifestParsingResponseArgs {
-        result_type: FeatureManifestParsingResult::feature_manifest_FeatureManifest,
+        result_type: FeatureManifestParsingResult::FeatureManifest,
         result: Some(feature_manifest),
     }
 }
@@ -59,7 +59,7 @@ fn build_failure_response_args(
 ) -> FeatureManifestParsingResponseArgs {
     let failure = build_failure_fbs(fbb, failure).as_union_value();
     FeatureManifestParsingResponseArgs {
-        result_type: FeatureManifestParsingResult::failure_Failure,
+        result_type: FeatureManifestParsingResult::Failure,
         result: Some(failure),
     }
 }
@@ -95,7 +95,7 @@ fn build_links_buffer<'a>(
 
 #[cfg(test)]
 mod tests {
-    use crate::flatbuffers_generated::feature_manifest_response_generated::feature_manifest_response::root_as_feature_manifest_parsing_response;
+    use crate::flatbuffers_generated::feature_manifest_response_generated::root_as_feature_manifest_parsing_response;
     use super::*;
 
     #[test]
@@ -111,7 +111,7 @@ mod tests {
         );
 
         let response = parsed.unwrap();
-        let failure = response.result_as_failure_failure();
+        let failure = response.result_as_failure();
         assert!(failure.is_some(), "Expected response to contain failure");
 
         let failure = failure.unwrap();
@@ -143,7 +143,7 @@ mod tests {
         );
 
         let response = parsed.unwrap();
-        let parsed_manifest = response.result_as_feature_manifest_feature_manifest();
+        let parsed_manifest = response.result_as_feature_manifest();
         assert!(
             parsed_manifest.is_some(),
             "Expected response to contain manifest"
