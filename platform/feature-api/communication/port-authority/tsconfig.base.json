@@ -8,6 +8,9 @@
     "strict": true,
     "module": "es2020",
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "noUncheckedIndexAccess": true
+    "noImplicitOverride": true
   }
 }

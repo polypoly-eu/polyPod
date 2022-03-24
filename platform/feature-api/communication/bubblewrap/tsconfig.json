@@ -10,6 +10,9 @@
     "module": "commonjs",
     "declaration": true,
     "strict": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "strictNullChecks": true,
+    "noUncheckedIndexAccess": true
+    "noImplicitOverride": true
   }
 }

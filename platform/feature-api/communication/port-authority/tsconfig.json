@@ -4,6 +4,10 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "module": "commonjs",
-    "declaration": true
+    "declaration": true,
+    "strictNullChecks": true,
+    "noUncheckedIndexAccess": true
+    "noImplicitOverride": true
+
   }
 }
