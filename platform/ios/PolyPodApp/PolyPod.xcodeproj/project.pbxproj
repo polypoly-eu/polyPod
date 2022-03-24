@@ -411,7 +411,6 @@
 			isa = PBXGroup;
 			children = (
 				9063A7E027EC637000955E49 /* FlatbuffersGenerated */,
-				9063A7B427EB6DDB00955E49 /* Packages */,
 				904D4A6E27905D4C00A75AED /* Utils */,
 				E9018EDF276370B500FDF34A /* Core */,
 				E97D3274263151BC00A5A180 /* Features */,
@@ -423,6 +422,7 @@
 				1AA6DE3124191C94008DB1B2 /* PolyPod */,
 				1A66F7732493743D00ED4308 /* PolyPodTests */,
 				E9545EB7273542CC001E8C7F /* PolyPodUITests */,
+				9063A7B427EB6DDB00955E49 /* Packages */,
 				1AA6DE3024191C94008DB1B2 /* Products */,
 				9015F60327EB0DA500DC6142 /* Frameworks */,
 			);
