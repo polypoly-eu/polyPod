@@ -80,6 +80,7 @@ jobs:
           POLYPOD_ANDROID_UPLOAD_KEY_ALIAS: ${{ secrets.POLYPOD_ANDROID_UPLOAD_KEY_ALIAS }}
         run: ./gradlew assemble -Psign=true
       - name: Determine release name
+        id: determine-release-name
         working-directory: platform/android
         run: |
           aapt_path=/usr/local/lib/android/sdk/build-tools/30.0.0/aapt
@@ -89,8 +90,6 @@ jobs:
           branch=${GITHUB_REF#refs/heads/}
           sha_short=${GITHUB_SHA::7}
           release_name="$version_code ($version_name) - $branch@$sha_short"
-          echo $release_name
-          exit 1
           echo ::set-output name=release_name::$release_name
       - name: Upload
         # uses: r0adkll/upload-google-play@v1.0.16
@@ -98,7 +97,7 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.POLYPOD_ANDROID_STORE_SERVICE_ACCOUNT_JSON }}
           packageName: coop.polypoly.polypod
-          releaseName: ${{ steps.vars.outputs.release_name }}
+          releaseName: ${{ steps.determine-release-name.outputs.release_name }}
           releaseFiles: ./platform/android/app/build/outputs/apk/release/app-release.apk
           track: internal
           status: ${{ github.event.inputs.draft == 'true' && 'draft' || 'completed' }}
