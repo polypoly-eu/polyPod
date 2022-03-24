@@ -12,6 +12,13 @@ class Core {
     
     func bootstrap() {
         // TODO handle flatbuffer response
-        _ = core_bootstrap(language_code)
+        let bytes = core_bootstrap(language_code)
+        let byteBuffer = ByteBuffer(assumingMemoryBound: bytes.data, capacity: Int(bytes.length))
+        let root = core_bootstrap_response_CoreBootstrapResponse.getRootAsCoreBootstrapResponse(bb: byteBuffer)
+        if let failure = root.failure {
+            print("Core Bootstrap failed \(failure.code) \(failure.message)")
+        } else {
+            print("Core Boostraped!!!")
+        }
     }
 }
