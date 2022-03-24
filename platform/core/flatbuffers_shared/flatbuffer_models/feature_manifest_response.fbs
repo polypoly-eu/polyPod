@@ -4,7 +4,7 @@ include "feature_manifest.fbs";
 union FeatureManifestParsingResult { FeatureManifest, Failure }
 
 table FeatureManifestParsingResponse {
-    result:FeatureManifestParsingResult;
+    result:FeatureManifestParsingResult (required);
 }
 
 root_type FeatureManifestParsingResponse;

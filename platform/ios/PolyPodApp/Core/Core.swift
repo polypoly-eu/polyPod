@@ -36,14 +36,16 @@ final class Core {
         processCoreResponse(parse_feature_manifest_from_json(json)) { byteBuffer in
             let response = FeatureManifestParsingResponse.getRootAsFeatureManifestParsingResponse(bb: byteBuffer)
             switch response.resultType {
-            case .none_:
-                break
             case .featuremanifest:
                 return response.result(type: FeatureManifest.self)
             case .failure:
                 if let failure = response.result(type: Failure.self) {
-                    Log.error("Failed to load Feature Manifest \(failure.code) \(String(describing: failure.message))")
+                    Log.error("Failed to load Feature Manifest: \(failure.code) \(String(describing: failure.message))")
+                } else {
+                    Log.error("Failed to load Feature Manifest: recevied failure result type without failure content)")
                 }
+            default:
+                Log.error("Failed to load Feature Manifest, received invalid result type: \(response.resultType)")
             }
             return nil
         }

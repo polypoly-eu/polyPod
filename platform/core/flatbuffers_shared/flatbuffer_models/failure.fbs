@@ -9,7 +9,7 @@ enum FailureCode: byte {
 table Failure {
     // Flatbuffers require to have a default value for enums
     code:FailureCode = FailedToBootstrapCore;
-    message:string;
+    message:string (required);
 }
 
 root_type Failure;

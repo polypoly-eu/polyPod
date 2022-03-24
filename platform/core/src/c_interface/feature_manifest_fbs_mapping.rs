@@ -116,7 +116,7 @@ mod tests {
 
         let failure = failure.unwrap();
         assert_eq!(failure.code(), expected_failure.code);
-        assert_eq!(failure.message(), Some(expected_failure.message.as_str()));
+        assert_eq!(failure.message(), expected_failure.message.as_str());
     }
 
     #[test]
