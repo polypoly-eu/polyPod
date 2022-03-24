@@ -99,12 +99,9 @@ jobs:
           releaseName: ${{ steps.vars.outputs.release_name }}
           releaseFiles: ./platform/android/app/build/outputs/apk/release/app-release.apk
           track: internal
-          status: draft
+          status: ${{ github.event.inputs.draft == 'true' && 'draft' || 'completed' }}
           # whatsNewDirectory: distribution/whatsnew
           # mappingFile:
-      - name: Publish
-        if: github.event.inputs.draft != 'true'
-        run: echo ::notice::Publishing on Google Play not yet supported, please do it manually.
 
   upload_app_store:
     name: Upload to App Store
