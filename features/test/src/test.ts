@@ -3,7 +3,6 @@ import * as RDF from "rdf-js";
 
 let quads: Array<RDF.Quad> = [];
 let pod: Pod;
-let polyOut: PolyOut;
 let polyIn: PolyIn;
 
 export function simpleJavaScriptCall(): void {
