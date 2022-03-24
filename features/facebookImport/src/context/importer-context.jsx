@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { FeatureFileStorage } from "@polypoly-eu/feature-file-storage";
+import Storage from "../model/storage.js";
 import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";
@@ -222,7 +222,7 @@ export const ImporterProvider = ({ children }) => {
                 )
                     changeNavigationState({ importStatus: status });
             });
-            setStorage(new FeatureFileStorage(newPod));
+            setStorage(new Storage(newPod));
         });
     }, []);
 

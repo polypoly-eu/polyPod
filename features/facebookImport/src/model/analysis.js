@@ -1,4 +1,4 @@
-import { ZipFile } from "@polypoly-eu/feature-file-storage";
+import { ZipFile } from "../model/storage.js";
 import {
     createErrorStatus,
     createSuccessStatus,
