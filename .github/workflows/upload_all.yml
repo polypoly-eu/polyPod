@@ -25,7 +25,7 @@ jobs:
           && startsWith(github.ref, 'refs/heads/release') != true
           && startsWith(github.ref, 'refs/heads/prod4pod-1473') != true
         run: exit 1
-      - name: Input
+      - name: Show input parameters
         run: |
           branch='${{ github.ref }}'
           targets='${{ github.event.inputs.targets }}'
