@@ -13,7 +13,7 @@ import {
     ImporterContext,
 } from "./context/importer-context.jsx";
 
-import ErrorPopup from "./components/errorPopup/errorPopup.jsx";
+import ErrorPopup from "@polypoly-eu/poly-look";
 import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
 import ExploreView from "./views/explore/explore.jsx";
@@ -118,6 +118,18 @@ const FacebookImporter = () => {
                 <ErrorPopup
                     error={globalError}
                     onClose={() => setGlobalError(null)}
+                    strings={{
+                        title: i18n.t("errorPopup:title"),
+                        instructionsIntro: i18n.t(
+                            "errorPopup:instructions.intro"
+                        ),
+                        instructionsSteps: i18n.t(
+                            "errorPopup:instructions.steps"
+                        ),
+                        instructionsClosing: i18n.t(
+                            "errorPopup:instructions.closing"
+                        ),
+                    }}
                 />
             )}
         </div>
