@@ -95,8 +95,8 @@ fn build_links_buffer<'a>(
 
 #[cfg(test)]
 mod tests {
-    use crate::flatbuffers_generated::feature_manifest_response_generated::root_as_feature_manifest_parsing_response;
     use super::*;
+    use crate::flatbuffers_generated::feature_manifest_response_generated::root_as_feature_manifest_parsing_response;
 
     #[test]
     fn test_build_failure() {
