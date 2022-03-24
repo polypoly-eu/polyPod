@@ -14,14 +14,14 @@ import {
 } from "@polypoly-eu/pod-api";
 import { DataFactory, Quad } from "rdf-js";
 import {
-    endpointClient,
+    backendClient,
     ClientOf,
     ServerOf,
-    EndpointRequest,
-    EndpointResponse,
-    endpointServer,
-    ObjectEndpointSpec,
-    ValueEndpointSpec,
+    BackendRequest,
+    BackendResponse,
+    backendServer,
+    ObjectBackendSpec,
+    ValueBackendSpec,
 } from "@polypoly-eu/postoffice";
 import {
     ResponsePort,
@@ -38,63 +38,63 @@ import { RequestListener } from "http";
 import * as RDF from "@polypoly-eu/rdf";
 import { Bubblewrap, Classes } from "@polypoly-eu/bubblewrap";
 
-type PolyInEndpoint = ObjectEndpointSpec<{
-    select(matcher: Partial<Matcher>): ValueEndpointSpec<Quad[]>;
-    match(matcher: Partial<Matcher>): ValueEndpointSpec<Quad[]>;
-    add(...quads: Quad[]): ValueEndpointSpec<void>;
-    delete(...quads: Quad[]): ValueEndpointSpec<void>;
-    has(...quads: Quad[]): ValueEndpointSpec<boolean>;
+type PolyInBackend = ObjectBackendSpec<{
+    select(matcher: Partial<Matcher>): ValueBackendSpec<Quad[]>;
+    match(matcher: Partial<Matcher>): ValueBackendSpec<Quad[]>;
+    add(...quads: Quad[]): ValueBackendSpec<void>;
+    delete(...quads: Quad[]): ValueBackendSpec<void>;
+    has(...quads: Quad[]): ValueBackendSpec<boolean>;
 }>;
 
-type PolyOutEndpoint = ObjectEndpointSpec<{
-    readDir(path: string): ValueEndpointSpec<Entry[]>;
-    readFile(path: string, options?: EncodingOptions): ValueEndpointSpec<string | Uint8Array>;
-    writeFile(path: string, content: string, options: EncodingOptions): ValueEndpointSpec<void>;
-    stat(path: string): ValueEndpointSpec<Stats>;
-    importArchive(url: string): ValueEndpointSpec<string>;
-    removeArchive(fileId: string): ValueEndpointSpec<void>;
+type PolyOutBackend = ObjectBackendSpec<{
+    readDir(path: string): ValueBackendSpec<Entry[]>;
+    readFile(path: string, options?: EncodingOptions): ValueBackendSpec<string | Uint8Array>;
+    writeFile(path: string, content: string, options: EncodingOptions): ValueBackendSpec<void>;
+    stat(path: string): ValueBackendSpec<Stats>;
+    importArchive(url: string): ValueBackendSpec<string>;
+    removeArchive(fileId: string): ValueBackendSpec<void>;
 }>;
 
-type PolyLifecycleEndpoint = ObjectEndpointSpec<{
-    listFeatures(): ValueEndpointSpec<Record<string, boolean>>;
-    startFeature(id: string, background: boolean): ValueEndpointSpec<void>;
+type PolyLifecycleBackend = ObjectBackendSpec<{
+    listFeatures(): ValueBackendSpec<Record<string, boolean>>;
+    startFeature(id: string, background: boolean): ValueBackendSpec<void>;
 }>;
 
-type PolyNavEndpoint = ObjectEndpointSpec<{
-    openUrl(url: string): ValueEndpointSpec<void>;
-    setActiveActions(actions: string[]): ValueEndpointSpec<void>;
-    setTitle(title: string): ValueEndpointSpec<void>;
-    pickFile(type?: string): ValueEndpointSpec<ExternalFile | null>;
+type PolyNavBackend = ObjectBackendSpec<{
+    openUrl(url: string): ValueBackendSpec<void>;
+    setActiveActions(actions: string[]): ValueBackendSpec<void>;
+    setTitle(title: string): ValueBackendSpec<void>;
+    pickFile(type?: string): ValueBackendSpec<ExternalFile | null>;
 }>;
 
-type InfoEndpoint = ObjectEndpointSpec<{
-    getRuntime(): ValueEndpointSpec<string>;
-    getVersion(): ValueEndpointSpec<string>;
+type InfoBackend = ObjectBackendSpec<{
+    getRuntime(): ValueBackendSpec<string>;
+    getVersion(): ValueBackendSpec<string>;
 }>;
 
-type EndpointEndpoint = ObjectEndpointSpec<{
+type EndpointBackend = ObjectBackendSpec<{
     send(
         endpointId: string,
         featureIdToken: string,
         payload: string,
         contentType?: string,
         authorization?: string
-    ): ValueEndpointSpec<void>;
+    ): ValueBackendSpec<void>;
     get(
         endpointId: string,
         featureIdToken: string,
         contentType?: string,
         authorization?: string
-    ): ValueEndpointSpec<string>;
+    ): ValueBackendSpec<string>;
 }>;
 
-type PodEndpoint = ObjectEndpointSpec<{
-    polyIn(): PolyInEndpoint;
-    polyOut(): PolyOutEndpoint;
-    polyLifecycle(): PolyLifecycleEndpoint;
-    polyNav(): PolyNavEndpoint;
-    info(): InfoEndpoint;
-    endpoint(): EndpointEndpoint;
+type PodBackend = ObjectBackendSpec<{
+    polyIn(): PolyInBackend;
+    polyOut(): PolyOutBackend;
+    polyLifecycle(): PolyLifecycleBackend;
+    polyNav(): PolyNavBackend;
+    info(): InfoBackend;
+    endpoint(): EndpointBackend;
 }>;
 
 class FileStats implements Stats {
@@ -166,7 +166,7 @@ function bubblewrapPort(rawPort: Port<Uint8Array, Uint8Array>): Port<Uint8Array,
 }
 
 export class RemoteClientPod implements Pod {
-    private readonly rpcClient: ClientOf<PodEndpoint>;
+    private readonly rpcClient: ClientOf<PodBackend>;
 
     static fromRawPort(rawPort: Port<Uint8Array, Uint8Array>): RemoteClientPod {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -175,10 +175,10 @@ export class RemoteClientPod implements Pod {
     }
 
     constructor(
-        private clientPort: RequestPort<EndpointRequest, EndpointResponse>,
+        private clientPort: RequestPort<BackendRequest, BackendResponse>,
         public readonly dataFactory: DataFactory = RDF.dataFactory
     ) {
-        this.rpcClient = endpointClient<PodEndpoint>(client(clientPort));
+        this.rpcClient = backendClient<PodBackend>(client(clientPort));
     }
 
     get polyIn(): PolyIn {
@@ -293,17 +293,17 @@ class DummyPolyLifecycle implements PolyLifecycle {
     }
 }
 
-export class RemoteServerPod implements ServerOf<PodEndpoint> {
+export class RemoteServerPod implements ServerOf<PodBackend> {
     constructor(private readonly pod: Pod) {}
 
-    listen(port: ResponsePort<EndpointRequest, EndpointResponse>): void {
-        server(port, endpointServer<PodEndpoint>(this));
+    listen(port: ResponsePort<BackendRequest, BackendResponse>): void {
+        server(port, backendServer<PodBackend>(this));
     }
 
     listenOnRaw(rawPort: Port<Uint8Array, Uint8Array>): void {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const wrappedPort = bubblewrapPort(rawPort) as Port<any, any>;
-        this.listen(liftServer<EndpointRequest, EndpointResponse>(wrappedPort));
+        this.listen(liftServer<BackendRequest, BackendResponse>(wrappedPort));
     }
 
     async listenOnMiddleware(): Promise<RequestListener> {
@@ -318,7 +318,7 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
         return middleware;
     }
 
-    polyOut(): ServerOf<PolyOutEndpoint> {
+    polyOut(): ServerOf<PolyOutBackend> {
         const polyOut = this.pod.polyOut;
 
         // the following implementation delegates strictly to the pod that has been provided to the constructor
@@ -340,25 +340,25 @@ export class RemoteServerPod implements ServerOf<PodEndpoint> {
         };
     }
 
-    polyIn(): ServerOf<PolyInEndpoint> {
+    polyIn(): ServerOf<PolyInBackend> {
         return this.pod.polyIn;
     }
 
-    polyLifecycle(): ServerOf<PolyLifecycleEndpoint> {
+    polyLifecycle(): ServerOf<PolyLifecycleBackend> {
         if (this.pod.polyLifecycle) return this.pod.polyLifecycle;
 
         return new DummyPolyLifecycle();
     }
 
-    polyNav(): ServerOf<PolyNavEndpoint> {
+    polyNav(): ServerOf<PolyNavBackend> {
         return this.pod.polyNav;
     }
 
-    info(): ServerOf<InfoEndpoint> {
+    info(): ServerOf<InfoBackend> {
         return this.pod.info;
     }
 
-    endpoint(): ServerOf<EndpointEndpoint> {
+    endpoint(): ServerOf<EndpointBackend> {
         return this.pod.endpoint;
     }
 }
