@@ -21,8 +21,8 @@ const Chip = ({ id, translation, handleClick = () => {}, active }) => {
 Chip.propTypes = {
   id: propTypes.string.isRequired,
   translation: propTypes.string,
-  handleClick: propTypes.func,
-  active: propTypes.bool,
+  handleClick: propTypes.func.isRequired,
+  active: propTypes.bool.isRequired,
 };
 
 export default Chip;

@@ -142,15 +142,10 @@ FilterChips.propTypes = {
     .isRequired,
   defaultActiveChips: propTypes.array,
   onChipClick: propTypes.func,
-  exclusive: propTypes.bool,
+  exclusive: propTypes.bool.isRequired,
   theme: propTypes.string,
   allChip: propTypes.object,
   othersChip: propTypes.object,
-};
-
-FilterChips.defaultProps = {
-  defaultActiveChips: [],
-  exclusive: true,
 };
 
 export default FilterChips;
