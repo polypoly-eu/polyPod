@@ -101,8 +101,6 @@ jobs:
           releaseFiles: ./platform/android/app/build/outputs/apk/release/app-release.apk
           track: internal
           status: ${{ github.event.inputs.draft == 'true' && 'draft' || 'completed' }}
-          # whatsNewDirectory: distribution/whatsnew
-          # mappingFile:
 
   upload_app_store:
     name: Upload to App Store
