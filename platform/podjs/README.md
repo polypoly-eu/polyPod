@@ -68,7 +68,7 @@ Follow these instructions to do so:
        }
     ```
 
-    With the above, we make sure the feature uses our custom [rollup-plugin-copy-watch](https://github.com/polypoly-eu/polyPod/blob/main/dev-utils/rollup-plugin-copy-watch/) plugin to watch the copied files. To be able to do so, add a `watch` script on your `package.json`:
+    This way we make sure the feature uses our custom [rollup-plugin-copy-watch](https://github.com/polypoly-eu/polyPod/blob/main/dev-utils/rollup-plugin-copy-watch/) plugin to watch the copied files. To be able to do so, add a `watch` script on your `package.json`:
 
     ```json
        "scripts": {
@@ -84,7 +84,7 @@ Follow these instructions to do so:
 
 3.  Next step, you need to define your `rollup.config.js` at the same level as your `package.json`.
 
-    There you need to have the `copy` (of our `"@polypoly-eu/rollup-plugin-copy-watch"`) under the `plugins` section with the `targets`
+    In this `rollup.config`, following our current way, not obligatory though, you could have the `copy` (of our `"@polypoly-eu/rollup-plugin-copy-watch"`) under the `plugins` section with the `targets`
     setup for `src`, which in this case it's the `"node_modules/@polypoly-eu/podjs/dist/pod.js"`, and `dest` where it will be ended to (e.g. `dist`).
     So, it looks like:
 
