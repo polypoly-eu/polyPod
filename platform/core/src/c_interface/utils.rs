@@ -18,3 +18,8 @@ pub struct CByteBuffer {
     pub length: c_uint, 
     pub data: *mut u8,
 }
+
+pub unsafe fn create_byte_buffer(bytes: Vec<u8>) -> CByteBuffer {
+    let slice = bytes.into_boxed_slice();
+    CByteBuffer { length: slice.len() as c_uint, data: Box::into_raw(slice) as *mut u8 }
+}

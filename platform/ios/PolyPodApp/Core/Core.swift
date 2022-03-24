@@ -11,8 +11,11 @@ final class Core {
     }
     
     func bootstrap() {
-        let bytes = core_bootstrap(language_code)
-        let byteBuffer = ByteBuffer(assumingMemoryBound: bytes.data, capacity: Int(bytes.length))
+        let responseByteBuffer = core_bootstrap(language_code)
+        defer {
+            free_bytes(responseByteBuffer.data)
+        }
+        let byteBuffer = ByteBuffer(assumingMemoryBound: responseByteBuffer.data, capacity: Int(responseByteBuffer.length))
         let root = CoreBootstrapResponse.getRootAsCoreBootstrapResponse(bb: byteBuffer)
         if let failure = root.failure {
             // TODO: What to do if core_bootstrap failed.
@@ -20,11 +23,15 @@ final class Core {
         } else {
             Log.info("Core Boostraped!!!")
         }
+        
     }
     
     func parseFeatureManifest(json: String) -> FeatureManifest? {
-        let response_bytes = parse_feature_manifest_from_json(json)
-        let byteBuffer = ByteBuffer(assumingMemoryBound: response_bytes.data, capacity: Int(response_bytes.length))
+        let responseByteBuffer = parse_feature_manifest_from_json(json)
+        defer {
+            free_bytes(responseByteBuffer.data)
+        }
+        let byteBuffer = ByteBuffer(assumingMemoryBound: responseByteBuffer.data, capacity: Int(responseByteBuffer.length))
         let response = FeatureManifestParsingResponse.getRootAsFeatureManifestParsingResponse(bb: byteBuffer)
         switch response.resultType {
         case .none_:

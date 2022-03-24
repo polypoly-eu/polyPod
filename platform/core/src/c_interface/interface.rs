@@ -2,11 +2,11 @@ use crate::{
     c_interface::{
         core_bootstrap_fbs_mapping::build_core_bootstrap_response,
         feature_manifest_fbs_mapping::build_feature_manifest_parsing_response,
-        utils::{CByteBuffer, cstring_to_str},
+        utils::{CByteBuffer, cstring_to_str, create_byte_buffer},
     },
     core::{bootstrap, parse_feature_manifest},
 };
-use std::os::raw::{c_char, c_uint};
+use std::os::raw::{c_char};
 
 /// # Safety
 /// This function can be unsafe if the language_code pointer is null or the string is in wrong format.
@@ -41,7 +41,11 @@ pub unsafe extern "C" fn parse_feature_manifest_from_json(json: *const c_char) -
     )
 }
 
-unsafe fn create_byte_buffer(bytes: Vec<u8>) -> CByteBuffer {
-    let slice = bytes.into_boxed_slice();
-    CByteBuffer { length: slice.len() as c_uint, data: Box::into_raw(slice) as *mut u8 }
+/// # Safety
+/// This function can be unsafe if trying to deallocate invalid memory.
+///
+/// Drops the given bytes.
+#[no_mangle]
+pub unsafe extern "C" fn free_bytes(bytes: *mut u8) {
+    drop(Box::from_raw(bytes))
 }
