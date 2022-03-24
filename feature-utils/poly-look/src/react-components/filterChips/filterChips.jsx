@@ -31,9 +31,9 @@ const allId = "allChip";
  */
 const FilterChips = ({
   chipsContent,
-  defaultActiveChips,
+  defaultActiveChips = [],
   onChipClick,
-  exclusive,
+  exclusive = true,
   theme,
   allChip,
   othersChip,
@@ -127,7 +127,7 @@ const FilterChips = ({
             <Chip
               id={id}
               translation={e.translation}
-              handleClick={handleChipClick}
+              handleClick={handleChipClick(id)}
               active={isChipActive(id)}
             />
           </div>
