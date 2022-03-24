@@ -21,7 +21,6 @@ This library provides a total of three abstraction layers:
    Both Node.js and browser messaging APIs can be subsumed with this abstraction, although their types differ slightly.
 2. The intermediate layer includes potentially-failing asynchronous request-response ports, both for clients (`RequestPort`) and servers (`ResponsePort`).
    Raw ports can be lifted to this abstraction by adding a thin protocol identifying requests with an increasing counter.
-   The request-response ports can also be implemented using the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) on the client and [Express](https://expressjs.com/) on the server, without additional protocol overhead.
 3. The final, user-level layer is a mere function `Request => Promise<Response>` that hides away the underlying `Port` machinery.
    Developers that want to implement a server can define such a function and use it to uniformly listen on any supported port.
    On the other hand, developers that need a client can turn any supported port into a function that transparently handles the communication.
@@ -52,7 +51,7 @@ This module is structured as a TypeScript library with the following modules:
 -   `procedure` contains the universal request-response abstractions
 -   `browser` provides browser-specific code
 -   `node` provides Node-specific code (code-split into a separate import)
--   `fetch` provides universal code based on the Fetch API (requires [a polyfill on Node.js](https://www.npmjs.com/package/node-fetch))
+
 
 ## Limitations
 

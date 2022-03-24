@@ -1,0 +1,2 @@
+# ignore markdown files so we can format them as we want
+.md

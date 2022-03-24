@@ -15,70 +15,6 @@ export function awaitPodObject(): void {
     console.log(`pod: ${pod}`);
 }
 
-export async function simpleFetch(): Promise<void> {
-    console.log("simpleFetch()");
-    await polyOut.fetch("https://httpbin.org/robots.txt");
-}
-
-export async function callFetchWithNoMethod(): Promise<void> {
-    console.log("callFetchWithNoMethod()");
-    await polyOut.fetch("https://httpbin.org/robots.txt");
-}
-
-export async function callFetchWithPostMethod(): Promise<void> {
-    console.log("callFetchWithPostMethod()");
-    await polyOut.fetch("http://httpbin.org/post", { method: "POST" });
-}
-
-export async function callFetchWithSingleHeaderInStringForm(): Promise<void> {
-    console.log("callFetchWithSingleHeaderInStringForm()");
-    const key = getInput(1);
-    const value = getInput(2);
-    const headers = {};
-    headers[key] = value;
-    await polyOut.fetch("http://httpbin.org/headers", { headers: headers });
-}
-
-export async function callFetchWithMultipleHeadersInStringForm(): Promise<void> {
-    console.log("callFetchWithMultipleHeadersInStringForm()");
-    const key1 = getInput(1);
-    const value1 = getInput(2);
-    const key2 = getInput(3);
-    const value2 = getInput(4);
-    const headers = {};
-    headers[key1] = value1;
-    headers[key2] = value2;
-    await polyOut.fetch("http://httpbin.org/headers", { headers: headers });
-}
-
-export async function verifyBodyOfFetchResponse(): Promise<void> {
-    console.log("verifyBodyOfFetchResponse()");
-    const response = await polyOut.fetch("http://httpbin.org/robots.txt");
-    // TODO - how to handle/reject streams?
-    const text = await response.text();
-    setResult(text);
-}
-
-export async function verifyResponseStatusOfFetchCall(): Promise<void> {
-    console.log("verifyResponseStatusOfFetchCall()");
-    const response = await polyOut.fetch("http://httpbin.org/robots.txt");
-    if (typeof response.status === "number") setResult(response.status);
-    else throw new TypeError(`response.ok is not a number, it is: '${typeof response.status}'`);
-}
-
-export async function verifyResponseOkOfFetchCall(): Promise<void> {
-    console.log("verifyResponseOkOfFetchCall()");
-    const response = await polyOut.fetch("http://httpbin.org/robots.txt");
-    if (typeof response.ok === "boolean") setResult(response.ok);
-    else throw new TypeError(`response.ok is not a boolean, it is: '${typeof response.ok}'`);
-}
-
-export async function callFetchWithPostMethodAndBody(): Promise<void> {
-    console.log("callFetchWithPostMethodAndBOdy()");
-    const body = getInput(1);
-    await polyOut.fetch("http://httpbin.org/post", { method: "POST", body: body });
-}
-
 export async function canCallPolyInAddWithNoQuads(): Promise<void> {
     console.log("canCallPolyInAddWithNoQuads()");
     await polyIn.add();
@@ -157,7 +93,9 @@ export async function addSupportsQuadsWithBlankNodeGraph(): Promise<void> {
 
 export async function addSupportsQuadsWithDefaultGraph(): Promise<void> {
     console.log(`addSupportsQuadsWithDefaultGraph()`);
-    const quad = QuadBuilder.fromInputs().withGraph(window.pod.dataFactory.defaultGraph()).build();
+    const quad = QuadBuilder.fromInputs()
+        .withGraph(window.pod.dataFactory.defaultGraph())
+        .build();
     await polyIn.add(quad);
 }
 
@@ -213,76 +151,94 @@ export async function canGetArrayWithSingleQuadFromPolyInSelect(): Promise<void>
     const expectedResult = QuadBuilder.fromQuad(quads[0]).build();
     const result = await polyIn.select({});
     if (result.length !== 1)
-        throw Error(`Expected array with 1 element, got ${result.length} elements`);
+        throw Error(
+            `Expected array with 1 element, got ${result.length} elements`
+        );
     if (!result[0].equals(expectedResult))
         throw Error(
-            `Expected element equal to '${JSON.stringify(expectedResult)}', got '${JSON.stringify(
-                result[0]
-            )}'`
+            `Expected element equal to '${JSON.stringify(
+                expectedResult
+            )}', got '${JSON.stringify(result[0])}'`
         );
 }
 
 export async function canGetArrayWithSingleQuadWithNamedNodeSubjectFromPolyInSelect(): Promise<void> {
-    console.log("canGetArrayWithSingleQuadWithNamedNodeSubjectFromPolyInSelect()");
+    console.log(
+        "canGetArrayWithSingleQuadWithNamedNodeSubjectFromPolyInSelect()"
+    );
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withSubject(pod.dataFactory.namedNode(quads[0].subject.value))
         .build();
     const result = await polyIn.select({});
     if (result.length !== 1)
-        throw Error(`Expected array with 1 element, got ${result.length} elements`);
+        throw Error(
+            `Expected array with 1 element, got ${result.length} elements`
+        );
     if (!result[0].equals(expectedResult))
         throw Error(
-            `Expected element equal to '${JSON.stringify(expectedResult)}', got '${JSON.stringify(
-                result[0]
-            )}'`
+            `Expected element equal to '${JSON.stringify(
+                expectedResult
+            )}', got '${JSON.stringify(result[0])}'`
         );
 }
 
 export async function canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSelect(): Promise<void> {
-    console.log("canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSelect()");
+    console.log(
+        "canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSelect()"
+    );
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withSubject(pod.dataFactory.blankNode(quads[0].subject.value))
         .build();
     const result = await polyIn.select({});
     if (result.length !== 1)
-        throw Error(`Expected array with 1 element, got ${result.length} elements`);
+        throw Error(
+            `Expected array with 1 element, got ${result.length} elements`
+        );
     if (!result[0].equals(expectedResult))
         throw Error(
-            `Expected element equal to '${JSON.stringify(expectedResult)}', got '${JSON.stringify(
-                result[0]
-            )}'`
+            `Expected element equal to '${JSON.stringify(
+                expectedResult
+            )}', got '${JSON.stringify(result[0])}'`
         );
 }
 
 export async function canGetArrayWithSingleQuadWithNamedNodeObjectFromPolyInSelect(): Promise<void> {
-    console.log("canGetArrayWithSingleQuadWithNamedNodeObjectFromPolyInSelect()");
+    console.log(
+        "canGetArrayWithSingleQuadWithNamedNodeObjectFromPolyInSelect()"
+    );
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withObject(pod.dataFactory.namedNode(quads[0].object.value))
         .build();
     const result = await polyIn.select({});
     if (result.length !== 1)
-        throw Error(`Expected array with 1 element, got ${result.length} elements`);
+        throw Error(
+            `Expected array with 1 element, got ${result.length} elements`
+        );
     if (!result[0].equals(expectedResult))
         throw Error(
-            `Expected element equal to '${JSON.stringify(expectedResult)}', got '${JSON.stringify(
-                result[0]
-            )}'`
+            `Expected element equal to '${JSON.stringify(
+                expectedResult
+            )}', got '${JSON.stringify(result[0])}'`
         );
 }
 
 export async function canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSelect(): Promise<void> {
-    console.log("canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSelect()");
+    console.log(
+        "canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSelect()"
+    );
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withObject(pod.dataFactory.blankNode(quads[0].object.value))
         .build();
     const result = await polyIn.select({});
     if (result.length !== 1)
-        throw Error(`Expected array with 1 element, got ${result.length} elements`);
+        throw Error(
+            `Expected array with 1 element, got ${result.length} elements`
+        );
     if (!result[0].equals(expectedResult))
         throw Error(
-            `Expected element equal to '${JSON.stringify(expectedResult)}', got '${JSON.stringify(
-                result[0]
-            )}'`
+            `Expected element equal to '${JSON.stringify(
+                expectedResult
+            )}', got '${JSON.stringify(result[0])}'`
         );
 }
 
@@ -293,44 +249,54 @@ export async function canGetArrayWithSingleQuadWithLiteralObjectFromPolyInSelect
         .build();
     const result = await polyIn.select({});
     if (result.length !== 1)
-        throw Error(`Expected array with 1 element, got ${result.length} elements`);
+        throw Error(
+            `Expected array with 1 element, got ${result.length} elements`
+        );
     if (!result[0].equals(expectedResult))
         throw Error(
-            `Expected element equal to '${JSON.stringify(expectedResult)}', got '${JSON.stringify(
-                result[0]
-            )}'`
+            `Expected element equal to '${JSON.stringify(
+                expectedResult
+            )}', got '${JSON.stringify(result[0])}'`
         );
 }
 
 export async function canGetArrayWithSingleQuadWithNamedNodeGraphFromPolyInSelect(): Promise<void> {
-    console.log("canGetArrayWithSingleQuadWithNamedNodeGraphFromPolyInSelect()");
+    console.log(
+        "canGetArrayWithSingleQuadWithNamedNodeGraphFromPolyInSelect()"
+    );
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withGraph(pod.dataFactory.namedNode(quads[0].graph.value))
         .build();
     const result = await polyIn.select({});
     if (result.length !== 1)
-        throw Error(`Expected array with 1 element, got ${result.length} elements`);
+        throw Error(
+            `Expected array with 1 element, got ${result.length} elements`
+        );
     if (!result[0].equals(expectedResult))
         throw Error(
-            `Expected element equal to '${JSON.stringify(expectedResult)}', got '${JSON.stringify(
-                result[0]
-            )}'`
+            `Expected element equal to '${JSON.stringify(
+                expectedResult
+            )}', got '${JSON.stringify(result[0])}'`
         );
 }
 
 export async function canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelect(): Promise<void> {
-    console.log("canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelect()");
+    console.log(
+        "canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelect()"
+    );
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withGraph(pod.dataFactory.blankNode(quads[0].graph.value))
         .build();
     const result = await polyIn.select({});
     if (result.length !== 1)
-        throw Error(`Expected array with 1 element, got ${result.length} elements`);
+        throw Error(
+            `Expected array with 1 element, got ${result.length} elements`
+        );
     if (!result[0].equals(expectedResult))
         throw Error(
-            `Expected element equal to '${JSON.stringify(expectedResult)}', got '${JSON.stringify(
-                result[0]
-            )}'`
+            `Expected element equal to '${JSON.stringify(
+                expectedResult
+            )}', got '${JSON.stringify(result[0])}'`
         );
 }
 
@@ -341,12 +307,14 @@ export async function canGetArrayWithSingleQuadWithDefaultGraphFromPolyInSelect(
         .build();
     const result = await polyIn.select({});
     if (result.length !== 1)
-        throw Error(`Expected array with 1 element, got ${result.length} elements`);
+        throw Error(
+            `Expected array with 1 element, got ${result.length} elements`
+        );
     if (!result[0].equals(expectedResult))
         throw Error(
-            `Expected element equal to '${JSON.stringify(expectedResult)}', got '${JSON.stringify(
-                result[0]
-            )}'`
+            `Expected element equal to '${JSON.stringify(
+                expectedResult
+            )}', got '${JSON.stringify(result[0])}'`
         );
 }
 
@@ -354,7 +322,9 @@ export async function canGetArrayWithMultipleQuadsFromPolyInSelect(): Promise<vo
     console.log("canGetArrayWithMultipleQuadsFromPolyInSelect()");
     const result = await polyIn.select({});
     if (result.length !== 2)
-        throw Error(`Expected array with 2 elements, got ${result.length} elements`);
+        throw Error(
+            `Expected array with 2 elements, got ${result.length} elements`
+        );
     if (!result[0].equals(quads[0]) && !result[1].equals(quads[0]))
         throw Error(
             `Expected one element equal to '${JSON.stringify(
@@ -471,6 +441,11 @@ class QuadBuilder {
     }
 
     build(): RDF.Quad {
-        return window.pod.dataFactory.quad(this.subject, this.predicate, this.object, this.graph);
+        return window.pod.dataFactory.quad(
+            this.subject,
+            this.predicate,
+            this.object,
+            this.graph
+        );
     }
 }

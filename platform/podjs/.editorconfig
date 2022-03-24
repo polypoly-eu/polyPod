@@ -1,4 +1,0 @@
-[*.ts]
-# Set to 100 for TypeScript code in the repository root, to support linting the
-# legacy code.
-max_line_length = 80

@@ -338,7 +338,7 @@ extension PostOffice {
             if let error = error {
                 completionHandler(nil, createErrorResponse(#function, error))
             } else {
-                var encodedList: [MessagePackValue] = [];
+                var encodedList: [MessagePackValue] = []
                 for file in fileList ?? [] {
                     var entry = [MessagePackValue: MessagePackValue]()
                     ["id", "path"].forEach { key in

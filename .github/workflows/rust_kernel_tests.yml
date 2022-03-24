@@ -21,7 +21,7 @@ jobs:
 
       - name: Generate flatbuffers
         working-directory: ./platform/core
-        run: make generate_flatbuffers
+        run: ./generate_flatbuffers.sh
 
       - name: Lint -- Run cargo fmt
         working-directory: ./platform/core

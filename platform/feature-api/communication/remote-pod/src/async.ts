@@ -12,15 +12,10 @@ import {
     Stats,
     Info,
 } from "@polypoly-eu/pod-api";
-import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import { DataFactory, Quad } from "rdf-js";
 
 class AsyncPolyOut implements PolyOut {
     constructor(private readonly promise: Promise<PolyOut>) {}
-
-    async fetch(input: string, init?: RequestInit): Promise<Response> {
-        return (await this.promise).fetch(input, init);
-    }
 
     readFile(path: string, options: EncodingOptions): Promise<string>;
     readFile(path: string): Promise<Uint8Array>;
