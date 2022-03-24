@@ -43,7 +43,7 @@ Follow these instructions to do so:
 
     ```
 
-2.  The important step is to copy `podjs` in your project. Here, we will guide you to do it with `rollup` tooling, but feel free to use your preferences.
+2.  The important step is to copy `pod.js` in your project. Here, we will guide you to do it with `rollup` tooling, but feel free to use your preferences.
 
     We use the `rollup` module bundler to build our features all together via the script
 
@@ -168,12 +168,26 @@ Or for Typescript features, you will also need to compile with `tsc`:
 </html>
 ```
 
-7.  To verify that everything is in place, you can test it by following these steps:
+7.  Make sure your manifest data feature file is exposed as `window.manifestData`.
+    So, if your feature is written in `JavaScript` you should require the following in your main index file:
 
-    -   Open your feature's `HTML` file in your browser, check that `URL`s are supported without the need to run an `HTTP server`.
-    -   Make sure your manifest is exposed as window and that there's the correct navigation bar colour and the correct (localised) feature name.
-    -   Check there's the correct backwards navigation within the feature and that it works successfully via the native back button of the browser.
+```js
+import manifestData from "./static/manifest.json";
+window.manifestData = manifestData;
+```
 
-8.  If everything works, you are ready to start enjoying your new polyPod feature! :) Congrats!
+Accordingly in any other language.
+
+8.  To verify that everything is in place, you can confirm it with the following steps:
+
+    -   Open your feature's `HTML` file in your browser, `URL`s of your local file should be supported without the need to run an `HTTP server`.
+    -   If you haven't forgotten step 7, you should have the correct navigation bar colour and the (localized) feature name you have set.
+    -   You can successfully navigate backwards within the feature via the native back button functionality of the browser.
+
+9.  If everything works, you are ready to start enjoying your new polyPod feature! :) Congrats!
 
     > As other `polyPod` platforms will simply ignore the local `pod.js` file and deliver their own version of it, you can leave the `pod.js` file in the feature distribution without any implication.
+
+```
+
+```
