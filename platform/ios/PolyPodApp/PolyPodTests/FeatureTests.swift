@@ -12,8 +12,8 @@ private func removeFixturesDirectory() {
 }
 
 private func createFixture(
-    languageCode: String? = nil,
-    withThumbnail: Bool = false
+    withThumbnail: Bool = false,
+    color: String = "#0000ff"
 ) -> Feature {
     let featurePath = fixturesPath.appendingPathComponent(
         ProcessInfo.processInfo.globallyUniqueString
@@ -37,23 +37,16 @@ private func createFixture(
         "author": "author",
         "description": "description",
         "thumbnail": "\(withThumbnail ? thumbnailFileName : "")",
-        "primaryColor": "#0000ff",
+        "primaryColor": "\(color)",
         "links": {
             "example": "https://example.com",
             "uk-example": "https://example.co.uk"
-        },
-        "translations": {
-            "de": {
-                "description": "description_de",
-                "primaryColor": "grün!",
-                "links": { "example": "https://example.de" }
-            }
         }
     }
     """
     try! manifest.write(to: manifestPath, atomically: true, encoding: .utf8)
     
-    let feature = Feature.load(path: featurePath, languageCode: languageCode)
+    let feature = Feature.load(path: featurePath)
     XCTAssertNotNil(feature, "Feature failed to load - invalid JSON?")
     return feature!
 }
@@ -88,34 +81,13 @@ class FeatureTests: XCTestCase {
         )
     }
     
-    func testTranslatedPropertyAccessWorks() {
-        let feature = createFixture(languageCode: "de")
-        XCTAssertEqual("description_de", feature.description)
-    }
-
-    func testTranslatedLinkAccessWorks() {
-        let feature = createFixture(languageCode: "de")
-        XCTAssertEqual(
-            "https://example.de",
-            feature.findUrl(target: "example")
-        )
-    }
-    
-    func testNonTranslatedLinkAccessWorks() {
-        let feature = createFixture(languageCode: "de")
-        XCTAssertEqual(
-            "https://example.co.uk",
-            feature.findUrl(target: "uk-example")
-        )
-    }
-    
     func testColorParsedCorrectly() {
         let feature = createFixture()
         XCTAssertEqual(Color(red: 0, green: 0, blue: 1), feature.primaryColor)
     }
 
     func testInvalidColorIgnored() {
-        let feature = createFixture(languageCode: "de")
+        let feature = createFixture(color: "grun!")
         XCTAssertEqual(Color.clear, feature.primaryColor)
     }
     
