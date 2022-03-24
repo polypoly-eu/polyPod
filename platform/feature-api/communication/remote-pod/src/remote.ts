@@ -27,7 +27,6 @@ import {
     ResponsePort,
     liftServer,
     server,
-    bubblewrapFetchPort,
     RequestPort,
     client,
     Port,

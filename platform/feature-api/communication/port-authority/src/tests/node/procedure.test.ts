@@ -1,10 +1,9 @@
 import { nodeLoopbackLifecycle } from "./_common";
-import { procedureSpec, ProcedureSpecLifecycle } from "../../specs/procedure";
+import { procedureSpec } from "../../specs/procedure";
 import { procedureLiftedLifecycle } from "../_lifecycles";
-import { bubblewrapMiddlewarePort, jsonMiddlewarePort } from "../../middleware";
+import { jsonMiddlewarePort } from "../../middleware";
 import { createServer, RequestListener, Server } from "http";
 import { AddressInfo } from "net";
-import { Bubblewrap } from "@polypoly-eu/bubblewrap";
 
 // @ts-ignore only used from JS
 import fetch from "node-fetch";
