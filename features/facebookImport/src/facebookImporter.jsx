@@ -118,7 +118,7 @@ const FacebookImporter = () => {
                 <ErrorPopup
                     error={globalError}
                     onClose={() => setGlobalError(null)}
-                    strings={{
+                    text={{
                         title: i18n.t("errorPopup:title"),
                         instructionsIntro: i18n.t(
                             "errorPopup:instructions.intro"

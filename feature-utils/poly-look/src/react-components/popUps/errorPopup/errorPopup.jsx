@@ -7,22 +7,22 @@ const emailLink = `\
 polypod-feedback@polypoly.coop\
 </a>`;
 
-export default function ErrorPopup({ error, onClose, strings }) {
+export default function ErrorPopup({ error, onClose, text }) {
   return (
     <div className="error-popup">
-      <h1>{strings.title}</h1>
+      <h1>{text.title}</h1>
       <pre>{`${error.name}: ${error.message}\n\nCause:\n${error.cause}`}</pre>
-      <p>{strings.instructionsIntro}</p>
+      <p>{text.instructionsIntro}</p>
       <ol
         dangerouslySetInnerHTML={{
-          __html: strings.instructionsSteps
+          __html: text.instructionsSteps
             .replace("{{emailAdress}}", emailLink)
             .split("\n")
             .map((step) => `<li>${step}</li>`)
             .join("\n"),
         }}
       ></ol>
-      <p>{strings.instructionsClosing}</p>
+      <p>{text.instructionsClosing}</p>
       <button onClick={onClose}>Close</button>
     </div>
   );
