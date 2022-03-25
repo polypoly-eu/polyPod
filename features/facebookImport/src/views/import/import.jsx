@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ImporterContext } from "../../context/importer-context.jsx";
-import Loading from "../../components/loading/loading.jsx";
+import {
+    FileSelectionError,
+    FileImportError,
+} from "../../errors/polyIn-errors.js";
 
 import ProgressBarComponent from "../../components/progressBar/progressBar.jsx";
 import ImportExplanationExpandable from "../../components/importExplanationExpandable/importExplanationExpandable.jsx";
@@ -60,13 +63,13 @@ const Import = () => {
     const {
         pod,
         files,
-        selectedFile,
-        setSelectedFile,
         handleRemoveFile,
-        handleSelectFile,
-        handleImportFile,
+        setGlobalError,
+        runWithLoadingScreen,
+        refreshFiles,
     } = useContext(ImporterContext);
     const [importStatus, setImportStatus] = useState(importSteps.beginning);
+    const [selectedFile, setSelectedFile] = useState(null);
     const file = files?.[0];
 
     function updateImportStatus(status) {
@@ -79,6 +82,31 @@ const Import = () => {
 
     const onRemoveFile = () => {
         return handleRemoveFile(file.id);
+    };
+
+    const handleSelectFile = async () => {
+        const { polyNav } = pod;
+        runWithLoadingScreen(async function () {
+            try {
+                setSelectedFile(await polyNav.pickFile("application/zip"));
+            } catch (error) {
+                setGlobalError(new FileSelectionError(error));
+            }
+        });
+    };
+
+    const handleImportFile = async () => {
+        if (!selectedFile) return;
+        const { polyOut } = pod;
+        runWithLoadingScreen(async function () {
+            try {
+                await polyOut.importArchive(selectedFile.url);
+                refreshFiles();
+                setSelectedFile(null);
+            } catch (error) {
+                setGlobalError(new FileImportError(error));
+            }
+        });
     };
 
     useEffect(() => {

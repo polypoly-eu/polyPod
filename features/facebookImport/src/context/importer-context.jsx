@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import { RefreshFilesError } from "../errors/polyIn-errors.js";
 import Storage from "../model/storage.js";
 import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
@@ -18,30 +19,6 @@ const fakeStorage = {
     readFile: async () => null,
     removeFile: async () => {},
 };
-
-class FileImportError extends Error {
-    constructor(cause) {
-        super("Failed to import file");
-        this.name = "FileImportError";
-        this.cause = cause;
-    }
-}
-
-class FileSelectionError extends Error {
-    constructor(cause) {
-        super("Failed to select file");
-        this.name = "FileSelectionError";
-        this.cause = cause;
-    }
-}
-
-class RefreshFilesError extends Error {
-    constructor(cause) {
-        super("Failed to refresh files");
-        this.name = "RefreshFilesError";
-        this.cause = cause;
-    }
-}
 
 function updatePodNavigation(pod, history, handleBack, location) {
     pod.polyNav.actions = {
@@ -74,7 +51,6 @@ export const ImporterProvider = ({ children }) => {
     const [activeDetails, setActiveDetails] = useState(null);
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
-    const [selectedFile, setSelectedFile] = useState(null);
 
     //navigation
     const history = useHistory();
@@ -101,31 +77,6 @@ export const ImporterProvider = ({ children }) => {
     const handleRemoveFile = (fileID) => {
         setFacebookAccount(null);
         return storage.removeFile(fileID);
-    };
-
-    const handleSelectFile = async () => {
-        const { polyNav } = pod;
-        runWithLoadingScreen(async function () {
-            try {
-                setSelectedFile(await polyNav.pickFile("application/zip"));
-            } catch (error) {
-                setGlobalError(new FileSelectionError(error));
-            }
-        });
-    };
-
-    const handleImportFile = async () => {
-        if (!selectedFile) return;
-        const { polyOut } = pod;
-        runWithLoadingScreen(async function () {
-            try {
-                await polyOut.importArchive(selectedFile.url);
-                refreshFiles();
-                setSelectedFile(null);
-            } catch (error) {
-                setGlobalError(new FileImportError(error));
-            }
-        });
     };
 
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
@@ -219,10 +170,6 @@ export const ImporterProvider = ({ children }) => {
                 navigationState,
                 changeNavigationState,
                 handleBack,
-                selectedFile,
-                setSelectedFile,
-                handleSelectFile,
-                handleImportFile,
                 fileAnalysis,
                 refreshFiles,
                 activeDetails,
@@ -234,6 +181,7 @@ export const ImporterProvider = ({ children }) => {
                 setReportResult,
                 isLoading,
                 setIsLoading,
+                runWithLoadingScreen,
             }}
         >
             {children}
