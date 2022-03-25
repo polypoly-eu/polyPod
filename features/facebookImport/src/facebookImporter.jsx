@@ -41,7 +41,7 @@ const FacebookImporter = () => {
         useContext(ImporterContext);
 
     function determineRoute() {
-        if (files?.length > 0)
+        if (files.length > 0)
             return <Redirect to={{ pathname: "/overview" }} />;
         else return <Redirect to={{ pathname: "/import" }} />;
     }
