@@ -1,4 +1,4 @@
-export default class Storage {
+export class FeatureFileStorage {
     constructor(pod) {
         this.changeListener = () => {};
         this._files = null;
