@@ -36,11 +36,11 @@ jobs:
                       - '.eslintrc.cjs'
                       apiAndFeatures:
                       - 'build/**'
+                      - 'dev-utils/dummy-server'
                       - 'features/**'
                       - 'feature-utils/**'
                       - 'platform/feature-api/**'
                       - 'platform/podjs/**'
-                      - 'dev-utils/dummy-server'
                       swift:
                       - 'platform/ios/**'
             - name: Lint core and features
