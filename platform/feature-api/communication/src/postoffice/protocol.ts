@@ -34,4 +34,6 @@ export type BackendResponse = any;
 /**
  * Function type representing the protocol: [[BackendRequest]] comes in, [[BackendResponse]] goes out.
  */
-export type BackendProcedure = (req: BackendRequest) => Promise<BackendResponse>;
+export type BackendProcedure = (
+    req: BackendRequest
+) => Promise<BackendResponse>;

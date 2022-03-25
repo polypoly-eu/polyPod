@@ -1,4 +1,9 @@
-import { ClientOf, ObjectBackendSpec, ServerOf, ValueBackendSpec } from "../types";
+import {
+    ClientOf,
+    ObjectBackendSpec,
+    ServerOf,
+    ValueBackendSpec,
+} from "../types";
 
 // compilation tests
 

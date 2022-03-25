@@ -25,7 +25,9 @@ export interface ValueBackendSpec<T> {
  * virtual and no instances are generated.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface ObjectBackendSpec<T extends Record<string, (...args: any[]) => BackendSpec>> {
+export interface ObjectBackendSpec<
+    T extends Record<string, (...args: any[]) => BackendSpec>
+> {
     endpointType: "object";
     methods: T;
 }
@@ -103,7 +105,9 @@ export type MaybePromise<T> = T | ForcePromise<T>;
  * `Promise<string>`, whereas the outer method `test` may return `number` or
  * `Promise<number>`.
  */
-export type ServerOf<Spec extends BackendSpec> = Spec extends ValueBackendSpec<infer T>
+export type ServerOf<Spec extends BackendSpec> = Spec extends ValueBackendSpec<
+    infer T
+>
     ? MaybePromise<T>
     : Spec extends ObjectBackendSpec<infer T>
     ? {
@@ -161,7 +165,9 @@ export type Callable<T> = () => ForcePromise<T>;
  * transmitted through a protocol to a server implementation that closely
  * mirrors the shape of the proxy.
  */
-export type ClientOf<Spec extends BackendSpec> = Spec extends ValueBackendSpec<infer T>
+export type ClientOf<Spec extends BackendSpec> = Spec extends ValueBackendSpec<
+    infer T
+>
     ? Callable<T>
     : Spec extends ObjectBackendSpec<infer T>
     ? {

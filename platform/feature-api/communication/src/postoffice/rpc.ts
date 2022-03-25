@@ -39,14 +39,23 @@
  */
 
 import { BackendSpec, ServerOf, ClientOf, Callable } from "./types";
-import { BackendProcedure, BackendRequestPart, BackendRequest } from "./protocol";
+import {
+    BackendProcedure,
+    BackendRequestPart,
+    BackendRequest,
+} from "./protocol";
 
 /**
  * Turns the implementation of a backend endpoint specification into a plain function.
  */
-export function backendServer<Spec extends BackendSpec>(impl: ServerOf<Spec>): BackendProcedure {
+export function backendServer<Spec extends BackendSpec>(
+    impl: ServerOf<Spec>
+): BackendProcedure {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async function process(impl: any, parts: ReadonlyArray<BackendRequestPart>): Promise<any> {
+    async function process(
+        impl: any,
+        parts: ReadonlyArray<BackendRequestPart>
+    ): Promise<any> {
         if (parts.length === 0) return impl;
 
         const [{ method, args }, ...rest] = parts;
@@ -65,12 +74,16 @@ export function backendServer<Spec extends BackendSpec>(impl: ServerOf<Spec>): B
  * @hidden
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type RequestBuilder = Callable<any> & Record<string, (...args: any[]) => RequestBuilder>;
+type RequestBuilder = Callable<any> &
+    Record<string, (...args: any[]) => RequestBuilder>;
 
 /**
  * @hidden
  */
-function requestBuilder(client: BackendProcedure, state: BackendRequest): RequestBuilder {
+function requestBuilder(
+    client: BackendProcedure,
+    state: BackendRequest
+): RequestBuilder {
     return new Proxy<RequestBuilder>(new Function() as RequestBuilder, {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         apply(target, thisArg, argArray): Promise<any> {
@@ -88,7 +101,10 @@ function requestBuilder(client: BackendProcedure, state: BackendRequest): Reques
             // nested call: return a callable function
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             return (...args: any[]) =>
-                requestBuilder(client, [...state, { method: property, args: args }]);
+                requestBuilder(client, [
+                    ...state,
+                    { method: property, args: args },
+                ]);
         },
     });
 }
@@ -96,6 +112,8 @@ function requestBuilder(client: BackendProcedure, state: BackendRequest): Reques
 /**
  * Constructs a proxy object that turns a function call chain into a plain function call.
  */
-export function backendClient<Spec extends BackendSpec>(client: BackendProcedure): ClientOf<Spec> {
+export function backendClient<Spec extends BackendSpec>(
+    client: BackendProcedure
+): ClientOf<Spec> {
     return requestBuilder(client, []) as ClientOf<Spec>;
 }
