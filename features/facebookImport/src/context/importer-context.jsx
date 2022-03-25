@@ -9,16 +9,8 @@ import { importData } from "../model/importer.js";
 export const ImporterContext = React.createContext();
 
 //all nav-states for checking purposes
-const navigationStates = ["importStatus", "exploreScrollingProgress"];
-const importSteps = {
-    loading: "loading",
-    beginning: "beginning",
-    request: "request",
-    download: "download",
-    import: "import",
-    explore: "explore",
-};
-const namespace = "http://polypoly.coop/schema/fbImport/";
+const navigationStates = ["exploreScrollingProgress"];
+
 //used until real storage is loaded
 const fakeStorage = {
     files: null,
@@ -72,34 +64,6 @@ function updateTitle(pod, location) {
     );
 }
 
-//from storage
-async function readImportStatus(pod) {
-    const { dataFactory } = pod;
-    const statusQuads = await pod.polyIn.select({
-        subject: dataFactory.namedNode(`${namespace}facebookImporter`),
-        predicate: dataFactory.namedNode(`${namespace}importStatus`),
-    });
-    let status = statusQuads[0]?.object?.value?.split(namespace)[1];
-    return status || importSteps.beginning;
-}
-
-async function writeImportStatus(pod, status) {
-    const { dataFactory, polyIn } = pod;
-    const existingQuad = (
-        await pod.polyIn.select({
-            subject: dataFactory.namedNode(`${namespace}facebookImporter`),
-            predicate: dataFactory.namedNode(`${namespace}importStatus`),
-        })
-    )[0];
-    if (existingQuad) await polyIn.delete(existingQuad);
-    const quad = dataFactory.quad(
-        dataFactory.namedNode(`${namespace}facebookImporter`),
-        dataFactory.namedNode(`${namespace}importStatus`),
-        dataFactory.namedNode(`${namespace}${status}`)
-    );
-    await polyIn.add(quad);
-}
-
 export const ImporterProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
     const [storage, setStorage] = useState(fakeStorage);
@@ -112,8 +76,9 @@ export const ImporterProvider = ({ children }) => {
     const [startRequest, setStartRequest] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
 
+    //navigation
+    const history = useHistory();
     const [navigationState, setNavigationState] = useState({
-        importStatus: importSteps.loading,
         exploreScrollingProgress: 0,
     });
 
@@ -126,8 +91,6 @@ export const ImporterProvider = ({ children }) => {
         }
         setFiles(Object.values(resolvedFiles));
     };
-
-    const history = useHistory();
 
     async function runWithLoadingScreen(task) {
         setFiles(null);
@@ -166,15 +129,14 @@ export const ImporterProvider = ({ children }) => {
 
     //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
     function changeNavigationState(changedState) {
-        if (changedState) {
-            Object.keys(changedState)?.forEach((key) => {
-                if (!navigationStates.includes(key)) {
-                    console.error(`NavigationStateError with key: ${key}`);
-                    return;
-                }
-            });
-            setNavigationState({ ...navigationState, ...changedState });
-        }
+        if (!changedState) return;
+        Object.keys(changedState)?.forEach((key) => {
+            if (!navigationStates.includes(key)) {
+                console.error(`NavigationStateError with key: ${key}`);
+                return;
+            }
+        });
+        setNavigationState({ ...navigationState, ...changedState });
     }
 
     function handleBack() {
@@ -204,24 +166,12 @@ export const ImporterProvider = ({ children }) => {
             .catch((error) => setGlobalError(new RefreshFilesError(error)));
     }
 
-    function updateImportStatus(newStatus) {
-        changeNavigationState({ importStatus: newStatus });
-        writeImportStatus(pod, newStatus);
-    }
-
     const initPod = async () => await window.pod;
 
     //on startup
     useEffect(() => {
         initPod().then((newPod) => {
             setPod(newPod);
-            readImportStatus(newPod).then((status) => {
-                if (
-                    status &&
-                    !(navigationState.importStatus == importSteps.explore)
-                )
-                    changeNavigationState({ importStatus: status });
-            });
             setStorage(new Storage(newPod));
         });
     }, []);
@@ -252,6 +202,7 @@ export const ImporterProvider = ({ children }) => {
 
     //on history change
     useEffect(() => {
+        console.log(history);
         if (!pod) return;
         updatePodNavigation(pod, history, handleBack, location);
         updateTitle(pod, location);
@@ -270,8 +221,6 @@ export const ImporterProvider = ({ children }) => {
                 setSelectedFile,
                 handleSelectFile,
                 handleImportFile,
-                importSteps,
-                updateImportStatus,
                 fileAnalysis,
                 refreshFiles,
                 activeDetails,

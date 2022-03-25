@@ -37,15 +37,8 @@ window.manifestData = manifestData;
 import i18n from "./i18n.js";
 
 const FacebookImporter = () => {
-    const {
-        pod,
-        files,
-        navigationState,
-        importSteps,
-        globalError,
-        setGlobalError,
-    } = useContext(ImporterContext);
-    const importStatus = navigationState.importStatus;
+    const { pod, files, globalError, setGlobalError } =
+        useContext(ImporterContext);
 
     const renderSplash = () => {
         return (
@@ -57,8 +50,7 @@ const FacebookImporter = () => {
     };
 
     function determineRoute() {
-        if (importStatus == importSteps.loading || !files)
-            return renderSplash();
+        if (!files) return renderSplash();
         if (files.length > 0)
             return <Redirect to={{ pathname: "/overview" }} />;
         else return <Redirect to={{ pathname: "/import" }} />;

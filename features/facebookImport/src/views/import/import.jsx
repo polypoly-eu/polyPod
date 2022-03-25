@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import Loading from "../../components/loading/loading.jsx";
 
@@ -13,16 +13,52 @@ import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDial
 //importSteps are all steps like loading and finished that have logical relevance for the process
 const importSections = ["request", "download", "import", "explore"];
 
+const importSteps = {
+    loading: "loading",
+    beginning: "beginning",
+    request: "request",
+    download: "download",
+    import: "import",
+};
+
 const maxFileSizeSupported = {
     value: 2000000000,
     text: "2 GB",
 };
 
+const namespace = "http://polypoly.coop/schema/fbImport/";
+
+//from storage
+async function readImportStatus(pod) {
+    const { dataFactory } = pod;
+    const statusQuads = await pod.polyIn.select({
+        subject: dataFactory.namedNode(`${namespace}facebookImporter`),
+        predicate: dataFactory.namedNode(`${namespace}importStatus`),
+    });
+    let status = statusQuads[0]?.object?.value?.split(namespace)[1];
+    return status || importSteps.beginning;
+}
+
+async function writeImportStatus(pod, status) {
+    const { dataFactory, polyIn } = pod;
+    const existingQuad = (
+        await pod.polyIn.select({
+            subject: dataFactory.namedNode(`${namespace}facebookImporter`),
+            predicate: dataFactory.namedNode(`${namespace}importStatus`),
+        })
+    )[0];
+    if (existingQuad) await polyIn.delete(existingQuad);
+    const quad = dataFactory.quad(
+        dataFactory.namedNode(`${namespace}facebookImporter`),
+        dataFactory.namedNode(`${namespace}importStatus`),
+        dataFactory.namedNode(`${namespace}${status}`)
+    );
+    await polyIn.add(quad);
+}
+
 const Import = () => {
     const {
-        importSteps,
-        navigationState,
-        updateImportStatus,
+        pod,
         files,
         selectedFile,
         setSelectedFile,
@@ -30,12 +66,24 @@ const Import = () => {
         handleSelectFile,
         handleImportFile,
     } = useContext(ImporterContext);
-    const importStatus = navigationState.importStatus;
+    const [importStatus, setImportStatus] = useState(importSteps.loading);
     const file = files?.[0];
+
+    function updateImportStatus(status) {
+        setImportStatus(status);
+        writeImportStatus(pod, status);
+    }
 
     const onRemoveFile = () => {
         return handleRemoveFile(file.id);
     };
+
+    useEffect(() => {
+        if (!pod) return;
+        readImportStatus(pod).then((newImportStatus) => {
+            setImportStatus(newImportStatus);
+        });
+    }, [pod]);
 
     return (
         <div className="import-view">
@@ -58,7 +106,6 @@ const Import = () => {
             />
             {files === null && (
                 <div className="overlay">
-                    {" "}
                     <Loading
                         message={i18n.t("import:importing.data")}
                         loadingGif="./images/loading-black.gif"

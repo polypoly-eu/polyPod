@@ -11,13 +11,8 @@ import { formatTime } from "../../utils/formatTime.js";
 import "./overview.css";
 
 const Overview = () => {
-    const {
-        facebookAccount,
-        files,
-        handleRemoveFile,
-        updateImportStatus,
-        importSteps,
-    } = useContext(ImporterContext);
+    const { facebookAccount, files, handleRemoveFile, updateImportStatus } =
+        useContext(ImporterContext);
 
     const [showNewImportDialog, setShowNewImportDialog] = useState(false);
     const history = useHistory();
@@ -142,10 +137,8 @@ const Overview = () => {
                         text: i18n.t("overview:new.import.dialog.continue"),
                         onClick: async () => {
                             await handleRemoveFile(files[0].id);
-                            updateImportStatus(importSteps.import);
                         },
                         route: "/import",
-                        stateChange: { importStatus: importSteps.import },
                     }}
                 />
             ) : null}
