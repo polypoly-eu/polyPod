@@ -74,7 +74,6 @@ export const ImporterProvider = ({ children }) => {
     const [activeDetails, setActiveDetails] = useState(null);
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
-    const [startRequest, setStartRequest] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
 
     //navigation
@@ -233,8 +232,6 @@ export const ImporterProvider = ({ children }) => {
                 facebookAccount,
                 reportResult,
                 setReportResult,
-                startRequest,
-                setStartRequest,
                 isLoading,
                 setIsLoading,
             }}
