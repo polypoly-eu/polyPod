@@ -96,28 +96,28 @@ export async function addSupportsQuadsWithDefaultGraph(): Promise<void> {
 
 export async function canPassEmptyMatcherToPolyInSelect(): Promise<void> {
     console.log("canPassEmptyMatcherToPolyInSelect()");
-    await polyIn.select({});
+    await polyIn.match({});
 }
 
 export async function canPassMatcherWithSubjectToPolyInSelect(): Promise<void> {
     console.log("canPassMatcherWithSubjectToPolyInSelect()");
     const subject = getInput(1);
     const matcher = { subject: window.pod.dataFactory.namedNode(subject) };
-    await polyIn.select(matcher);
+    await polyIn.match(matcher);
 }
 
 export async function canPassMatcherWithPredicateToPolyInSelect(): Promise<void> {
     console.log("canPassMatcherWithPredicateToPolyInSelect()");
     const predicate = getInput(1);
     const matcher = { predicate: window.pod.dataFactory.namedNode(predicate) };
-    await polyIn.select(matcher);
+    await polyIn.match(matcher);
 }
 
 export async function canPassMatcherWithObjectToPolyInSelect(): Promise<void> {
     console.log("canPassMatcherWithObjectToPolyInSelect()");
     const object = getInput(1);
     const matcher = { object: window.pod.dataFactory.namedNode(object) };
-    await polyIn.select(matcher);
+    await polyIn.match(matcher);
 }
 
 export async function canPassMatcherWithAllThreeFieldsToPolyInSelect(): Promise<void> {
@@ -131,12 +131,12 @@ export async function canPassMatcherWithAllThreeFieldsToPolyInSelect(): Promise<
         predicate: dataFactory.namedNode(predicate),
         object: dataFactory.namedNode(object),
     };
-    await polyIn.select(matcher);
+    await polyIn.match(matcher);
 }
 
 export async function canGetEmptyArrayFromPolyInSelect(): Promise<void> {
     console.log("canGetEmptyArrayFromPolyInSelect()");
-    const result = await polyIn.select({});
+    const result = await polyIn.match({});
     if (!Array.isArray(result) || result.length !== 0)
         throw Error(`Expected empty array, got '${JSON.stringify(result)}'`);
 }
@@ -144,7 +144,7 @@ export async function canGetEmptyArrayFromPolyInSelect(): Promise<void> {
 export async function canGetArrayWithSingleQuadFromPolyInSelect(): Promise<void> {
     console.log("canGetArrayWithSingleQuadFromPolyInSelect()");
     const expectedResult = QuadBuilder.fromQuad(quads[0]).build();
-    const result = await polyIn.select({});
+    const result = await polyIn.match({});
     if (result.length !== 1)
         throw Error(
             `Expected array with 1 element, got ${result.length} elements`
@@ -164,7 +164,7 @@ export async function canGetArrayWithSingleQuadWithNamedNodeSubjectFromPolyInSel
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withSubject(pod.dataFactory.namedNode(quads[0].subject.value))
         .build();
-    const result = await polyIn.select({});
+    const result = await polyIn.match({});
     if (result.length !== 1)
         throw Error(
             `Expected array with 1 element, got ${result.length} elements`
@@ -184,7 +184,7 @@ export async function canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSel
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withSubject(pod.dataFactory.blankNode(quads[0].subject.value))
         .build();
-    const result = await polyIn.select({});
+    const result = await polyIn.match({});
     if (result.length !== 1)
         throw Error(
             `Expected array with 1 element, got ${result.length} elements`
@@ -204,7 +204,7 @@ export async function canGetArrayWithSingleQuadWithNamedNodeObjectFromPolyInSele
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withObject(pod.dataFactory.namedNode(quads[0].object.value))
         .build();
-    const result = await polyIn.select({});
+    const result = await polyIn.match({});
     if (result.length !== 1)
         throw Error(
             `Expected array with 1 element, got ${result.length} elements`
@@ -224,7 +224,7 @@ export async function canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSele
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withObject(pod.dataFactory.blankNode(quads[0].object.value))
         .build();
-    const result = await polyIn.select({});
+    const result = await polyIn.match({});
     if (result.length !== 1)
         throw Error(
             `Expected array with 1 element, got ${result.length} elements`
@@ -242,7 +242,7 @@ export async function canGetArrayWithSingleQuadWithLiteralObjectFromPolyInSelect
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withObject(pod.dataFactory.literal(quads[0].object.value))
         .build();
-    const result = await polyIn.select({});
+    const result = await polyIn.match({});
     if (result.length !== 1)
         throw Error(
             `Expected array with 1 element, got ${result.length} elements`
@@ -262,7 +262,7 @@ export async function canGetArrayWithSingleQuadWithNamedNodeGraphFromPolyInSelec
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withGraph(pod.dataFactory.namedNode(quads[0].graph.value))
         .build();
-    const result = await polyIn.select({});
+    const result = await polyIn.match({});
     if (result.length !== 1)
         throw Error(
             `Expected array with 1 element, got ${result.length} elements`
@@ -282,7 +282,7 @@ export async function canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelec
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withGraph(pod.dataFactory.blankNode(quads[0].graph.value))
         .build();
-    const result = await polyIn.select({});
+    const result = await polyIn.match({});
     if (result.length !== 1)
         throw Error(
             `Expected array with 1 element, got ${result.length} elements`
@@ -300,7 +300,7 @@ export async function canGetArrayWithSingleQuadWithDefaultGraphFromPolyInSelect(
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withGraph(pod.dataFactory.defaultGraph())
         .build();
-    const result = await polyIn.select({});
+    const result = await polyIn.match({});
     if (result.length !== 1)
         throw Error(
             `Expected array with 1 element, got ${result.length} elements`
@@ -315,7 +315,7 @@ export async function canGetArrayWithSingleQuadWithDefaultGraphFromPolyInSelect(
 
 export async function canGetArrayWithMultipleQuadsFromPolyInSelect(): Promise<void> {
     console.log("canGetArrayWithMultipleQuadsFromPolyInSelect()");
-    const result = await polyIn.select({});
+    const result = await polyIn.match({});
     if (result.length !== 2)
         throw Error(
             `Expected array with 2 elements, got ${result.length} elements`
