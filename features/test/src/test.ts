@@ -1,4 +1,4 @@
-import { Pod, PolyIn, PolyOut } from "@polypoly-eu/pod-api";
+import { Pod, PolyIn } from "@polypoly-eu/pod-api";
 import * as RDF from "rdf-js";
 
 let quads: Array<RDF.Quad> = [];
@@ -8,10 +8,6 @@ let polyIn: PolyIn;
 export function simpleJavaScriptCall(): void {
     console.log("simpleJavaScriptCall()");
     return;
-}
-
-export function awaitPodObject(): void {
-    console.log(`pod: ${pod}`);
 }
 
 export async function canCallPolyInAddWithNoQuads(): Promise<void> {
