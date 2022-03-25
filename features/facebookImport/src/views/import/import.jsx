@@ -107,14 +107,6 @@ const Import = () => {
                 file={file}
                 onRemoveFile={onRemoveFile}
             />
-            {files === null && (
-                <div className="overlay">
-                    <Loading
-                        message={i18n.t("import:importing.data")}
-                        loadingGif="./images/loading-black.gif"
-                    />
-                </div>
-            )}
             {selectedFile?.size > maxFileSizeSupported.value ? (
                 <PolypolyDialog
                     title={i18n.t("import:file.too.big.dialog.title")}

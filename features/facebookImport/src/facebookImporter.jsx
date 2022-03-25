@@ -37,27 +37,23 @@ window.manifestData = manifestData;
 import i18n from "./i18n.js";
 
 const FacebookImporter = () => {
-    const { pod, files, globalError, setGlobalError } =
+    const { pod, files, globalError, setGlobalError, isLoading } =
         useContext(ImporterContext);
 
-    const renderSplash = () => {
-        return (
-            <Loading
-                loadingGif="./images/loading.gif"
-                message={i18n.t("common:loading")}
-            ></Loading>
-        );
-    };
-
     function determineRoute() {
-        if (!files) return renderSplash();
-        if (files.length > 0)
+        if (files?.length > 0)
             return <Redirect to={{ pathname: "/overview" }} />;
         else return <Redirect to={{ pathname: "/import" }} />;
     }
     return (
         <div className="facebook-importer poly-theme poly-theme-dark">
-            {pod ? (
+            {isLoading && (
+                <Loading
+                    loadingGif="./images/loading.gif"
+                    message={i18n.t("common:loading")}
+                ></Loading>
+            )}
+            {pod && (
                 <Switch>
                     <Route exact path="/">
                         {determineRoute()}
@@ -102,8 +98,6 @@ const FacebookImporter = () => {
                         <OffFacebookInfoScreen />
                     </Route>
                 </Switch>
-            ) : (
-                renderSplash()
             )}
             {globalError && (
                 <ErrorPopup

@@ -66,6 +66,7 @@ function updateTitle(pod, location) {
 
 export const ImporterProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const [storage, setStorage] = useState(fakeStorage);
     const [files, setFiles] = useState(null);
     const [facebookAccount, setFacebookAccount] = useState(null);
@@ -93,9 +94,9 @@ export const ImporterProvider = ({ children }) => {
     };
 
     async function runWithLoadingScreen(task) {
-        setFiles(null);
+        setIsLoading(true);
         await task();
-        refreshFiles();
+        setIsLoading(false);
     }
 
     const handleRemoveFile = (fileID) => {
@@ -149,7 +150,7 @@ export const ImporterProvider = ({ children }) => {
     }
 
     function refreshFiles() {
-        setFiles(null);
+        setIsLoading(true);
         storage
             .refreshFiles()
             .then(async () => {
@@ -162,6 +163,7 @@ export const ImporterProvider = ({ children }) => {
                     resolvedFiles.push(await file);
                 }
                 setFiles(resolvedFiles);
+                setIsLoading(false);
             })
             .catch((error) => setGlobalError(new RefreshFilesError(error)));
     }
@@ -232,6 +234,8 @@ export const ImporterProvider = ({ children }) => {
                 setReportResult,
                 startRequest,
                 setStartRequest,
+                isLoading,
+                setIsLoading,
             }}
         >
             {children}
