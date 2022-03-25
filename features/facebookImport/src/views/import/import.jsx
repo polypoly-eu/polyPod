@@ -14,11 +14,11 @@ import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDial
 const importSections = ["request", "download", "import", "explore"];
 
 const importSteps = {
-    loading: "loading",
     beginning: "beginning",
     request: "request",
     download: "download",
     import: "import",
+    explore: "explore",
 };
 
 const maxFileSizeSupported = {
@@ -66,12 +66,15 @@ const Import = () => {
         handleSelectFile,
         handleImportFile,
     } = useContext(ImporterContext);
-    const [importStatus, setImportStatus] = useState(importSteps.loading);
+    const [importStatus, setImportStatus] = useState(importSteps.beginning);
     const file = files?.[0];
 
     function updateImportStatus(status) {
         setImportStatus(status);
-        writeImportStatus(pod, status);
+        writeImportStatus(
+            pod,
+            status == importSteps.explore ? importSteps.import : status
+        );
     }
 
     const onRemoveFile = () => {
