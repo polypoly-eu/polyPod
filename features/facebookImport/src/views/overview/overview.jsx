@@ -1,5 +1,6 @@
 import { PolyChart } from "@polypoly-eu/poly-look";
 import React, { useContext, useState } from "react";
+import { Redirect } from "react-router-dom";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
 import Loading from "../../components/loading/loading.jsx";
@@ -111,20 +112,7 @@ const Overview = () => {
                     </div>
                 </>
             ) : (
-                <div className="btn-holder">
-                    <RouteButton
-                        route="/import"
-                        className="btn primary"
-                        stateChange={{
-                            importStatus: importSteps.beginning,
-                        }}
-                        onClick={() =>
-                            updateImportStatus(importSteps.beginning)
-                        }
-                    >
-                        {i18n.t("overview:import.data")}
-                    </RouteButton>
-                </div>
+                <Redirect to={{ pathname: "/import" }} />
             )}
             {showNewImportDialog ? (
                 <PolypolyDialog
