@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
-import { ImporterContext } from "../../context/importer-context.jsx";
+import { INITIAL_HISTORY_STATE } from "../../../constants/constants";
 
 const RouteButton = ({
     route,
@@ -9,21 +9,16 @@ const RouteButton = ({
     children,
     onClick = () => {},
 }) => {
-    const { handleBack, changeNavigationState, navigationState } =
-        useContext(ImporterContext);
     const history = useHistory();
 
-    let changedNavigationState = navigationState;
+    const newHistoryState = { ...INITIAL_HISTORY_STATE, ...stateChange };
 
     const onClickButton = () => {
+        if (!route) return;
+
         onClick();
-        if (stateChange)
-            changedNavigationState = { ...navigationState, ...stateChange };
-        if (route) {
-            if (route == "back") handleBack();
-            else history.push(route, changedNavigationState);
-        }
-        changeNavigationState(changedNavigationState);
+        if (route == "back" && history.length > 1) history.goBack();
+        else history.push(route, newHistoryState);
     };
 
     return (

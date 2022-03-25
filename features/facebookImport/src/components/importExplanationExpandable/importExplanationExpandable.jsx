@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useRef } from "react";
 import i18n from "../../i18n.js";
 import RouteButton from "../buttons/routeButton.jsx";
 import InfoBox from "../infoBox/infoBox.jsx";
 import ScrollButton from "../buttons/scrollButton/scrollButton.jsx";
 import scrollSmoothly from "../../utils/smoothScroll.js";
-import { ImporterContext } from "../../context/importer-context.jsx";
-
 import "./importExplanationExpandable.css";
 
 const isSectionOpened = (section, importStatus, importSteps) => {

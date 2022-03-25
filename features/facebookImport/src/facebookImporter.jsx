@@ -35,6 +35,7 @@ import manifestData from "./static/manifest.json";
 window.manifestData = manifestData;
 
 import i18n from "./i18n.js";
+import { INITIAL_HISTORY_STATE } from "../constants/constants.js";
 
 const FacebookImporter = () => {
     const { pod, files, globalError, setGlobalError, isLoading } =
@@ -42,7 +43,14 @@ const FacebookImporter = () => {
 
     function determineRoute() {
         if (files.length > 0)
-            return <Redirect to={{ pathname: "/overview" }} />;
+            return (
+                <Redirect
+                    to={{
+                        pathname: "/overview",
+                        state: INITIAL_HISTORY_STATE,
+                    }}
+                />
+            );
         else return <Redirect to={{ pathname: "/import" }} />;
     }
     return (

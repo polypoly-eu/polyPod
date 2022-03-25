@@ -9,9 +9,6 @@ import { importData } from "../model/importer.js";
 
 export const ImporterContext = React.createContext();
 
-//all nav-states for checking purposes
-const navigationStates = ["exploreScrollingProgress"];
-
 //used until real storage is loaded
 const fakeStorage = {
     files: null,
@@ -52,12 +49,7 @@ export const ImporterProvider = ({ children }) => {
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
 
-    //navigation
     const history = useHistory();
-    const [navigationState, setNavigationState] = useState({
-        exploreScrollingProgress: 0,
-    });
-
     const location = useLocation();
 
     storage.changeListener = async () => {
@@ -79,24 +71,9 @@ export const ImporterProvider = ({ children }) => {
         return storage.removeFile(fileID);
     };
 
-    //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
-    function changeNavigationState(changedState) {
-        if (!changedState) return;
-        Object.keys(changedState)?.forEach((key) => {
-            if (!navigationStates.includes(key)) {
-                console.error(`NavigationStateError with key: ${key}`);
-                return;
-            }
-        });
-        setNavigationState({ ...navigationState, ...changedState });
-    }
-
     function handleBack() {
         if (history.length > 1) {
             history.goBack();
-            if (history.location.state) {
-                changeNavigationState(history.location.state);
-            }
         }
     }
 
@@ -155,7 +132,6 @@ export const ImporterProvider = ({ children }) => {
 
     //on history change
     useEffect(() => {
-        console.log(files);
         if (!pod) return;
         updatePodNavigation(pod, history, handleBack, location);
         updateTitle(pod, location);
@@ -167,8 +143,6 @@ export const ImporterProvider = ({ children }) => {
                 pod,
                 files,
                 handleRemoveFile,
-                navigationState,
-                changeNavigationState,
                 handleBack,
                 fileAnalysis,
                 refreshFiles,
