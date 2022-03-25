@@ -121,6 +121,7 @@ export const ImporterProvider = ({ children }) => {
         runWithLoadingScreen(async function () {
             try {
                 await polyOut.importArchive(selectedFile.url);
+                refreshFiles();
                 setSelectedFile(null);
             } catch (error) {
                 setGlobalError(new FileImportError(error));
