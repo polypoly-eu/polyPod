@@ -6,7 +6,6 @@
  */
 
 import * as RDF from "rdf-js";
-import type { Fetch } from "@polypoly-eu/fetch-spec";
 import { ExternalFile, FS } from "./fs";
 
 /**
@@ -117,15 +116,8 @@ export interface Entry {
  *
  * Both of these aspects are separated out into their own modules:
  * - [[FS]] for Node.js-style file-system access
- * - [[Fetch]] for DOM-style HTTP requests (deprecated)
  */
 export interface PolyOut extends Omit<FS, "readdir"> {
-    /**
-     * @deprecated Use [[Endpoint]] and its facilities instead.
-     * A standard-compliant implementation of `Fetch`. This feature is deprecated in favor of the [[Endpoint]] interface
-     */
-    readonly fetch: Fetch;
-
     /**
      * @param pathToDir system-dependent path to read.
      * @returns a Promise with id-path pairs [[Entry]] as payload.

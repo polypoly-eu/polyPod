@@ -1,4 +1,3 @@
-import type { RequestInit, Response } from "@polypoly-eu/fetch-spec";
 import type {
     ExternalFile,
     Endpoint,
@@ -111,10 +110,6 @@ class FileUrl {
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 class LocalStoragePolyOut implements PolyOut {
-    fetch(input: string, init?: RequestInit): Promise<Response> {
-        return window.fetch(input, init);
-    }
-
     readFile(path: string, options: EncodingOptions): Promise<string>;
     readFile(path: string): Promise<Uint8Array>;
     readFile(

@@ -1,18 +1,18 @@
 /**
  * This module implements the mapping of function calls on a proxy to the
- * underlying protocol ([[EndpointProcedure]]), and back to function calls on
+ * underlying protocol ([[BackendProcedure]]), and back to function calls on
  * the real object.
  *
- * Servers can use [[endpointServer]] to turn the implementation of an endpoint
+ * Servers can use [[backendServer]] to turn the implementation of a backend endpoint
  * specification ([[ServerOf]]) into a plain function. Clients can use
- * [[endpointClient]] to turn a plain function into a proxy object
+ * [[backendClient]] to turn a plain function into a proxy object
  * ([[ClientOf]]).
  *
- * In the simplest case, [[endpointServer]] and [[endpointClient]] can be
+ * In the simplest case, [[backendServer]] and [[backendClient]] can be
  * composed as follows:
  *
  * ```
- * const rpcClient: ClientOf<Spec> = endpointClient(endpointServer(specImpl));
+ * const rpcClient: ClientOf<Spec> = backendClient(backendServer(specImpl));
  * ```
  *
  * This is a “loopback” connection where both client and server reside in the
@@ -28,25 +28,25 @@
  *
  * declare serverPort: ResponsePort<EndpointRequest, EndpointResponse>;
  *
- * server(serverPort, endpointServer(specImpl));
+ * server(serverPort, backendServer(specImpl));
  *
- * declare clientPort: RequestPort<EndpointRequest, EndpointResponse>;
+ * declare clientPort: RequestPort<BackendRequest, BackendResponse>;
  *
- * const rpcClient: ClientOf<Spec> = endpointClient(client(clientPort));
+ * const rpcClient: ClientOf<Spec> = backendClient(client(clientPort));
  * ```
  *
  * @packageDocumentation
  */
 
-import { EndpointSpec, ServerOf, ClientOf, Callable } from "./types";
-import { EndpointProcedure, EndpointRequestPart, EndpointRequest } from "./protocol";
+import { BackendSpec, ServerOf, ClientOf, Callable } from "./types";
+import { BackendProcedure, BackendRequestPart, BackendRequest } from "./protocol";
 
 /**
- * Turns the implementation of an endpoint specification into a plain function.
+ * Turns the implementation of a backend endpoint specification into a plain function.
  */
-export function endpointServer<Spec extends EndpointSpec>(impl: ServerOf<Spec>): EndpointProcedure {
+export function backendServer<Spec extends BackendSpec>(impl: ServerOf<Spec>): BackendProcedure {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async function process(impl: any, parts: ReadonlyArray<EndpointRequestPart>): Promise<any> {
+    async function process(impl: any, parts: ReadonlyArray<BackendRequestPart>): Promise<any> {
         if (parts.length === 0) return impl;
 
         const [{ method, args }, ...rest] = parts;
@@ -70,7 +70,7 @@ type RequestBuilder = Callable<any> & Record<string, (...args: any[]) => Request
 /**
  * @hidden
  */
-function requestBuilder(client: EndpointProcedure, state: EndpointRequest): RequestBuilder {
+function requestBuilder(client: BackendProcedure, state: BackendRequest): RequestBuilder {
     return new Proxy<RequestBuilder>(new Function() as RequestBuilder, {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         apply(target, thisArg, argArray): Promise<any> {
@@ -96,8 +96,6 @@ function requestBuilder(client: EndpointProcedure, state: EndpointRequest): Requ
 /**
  * Constructs a proxy object that turns a function call chain into a plain function call.
  */
-export function endpointClient<Spec extends EndpointSpec>(
-    client: EndpointProcedure
-): ClientOf<Spec> {
+export function backendClient<Spec extends BackendSpec>(client: BackendProcedure): ClientOf<Spec> {
     return requestBuilder(client, []) as ClientOf<Spec>;
 }
