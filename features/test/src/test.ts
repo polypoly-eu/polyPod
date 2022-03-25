@@ -3,7 +3,6 @@ import * as RDF from "rdf-js";
 
 let quads: Array<RDF.Quad> = [];
 let pod: Pod;
-let polyOut: PolyOut;
 let polyIn: PolyIn;
 
 export function simpleJavaScriptCall(): void {
@@ -354,7 +353,6 @@ export async function execute(test: () => void): Promise<void> {
     setStatus("Running...");
     pod = await awaitPodApi();
     polyIn = pod.polyIn;
-    polyOut = pod.polyOut;
     try {
         await test();
         setStatus("All OK");
@@ -383,11 +381,6 @@ async function awaitPodApi(): Promise<Pod> {
 
 function getInput(i): string {
     return (document.getElementById(`input.${i}`) as HTMLInputElement).value;
-}
-
-function setResult(result): void {
-    console.debug(`Setting result: '${result}'`);
-    document.getElementById("result").innerText = result;
 }
 
 class QuadBuilder {

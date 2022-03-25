@@ -1,15 +1,10 @@
-import { endpointClient, endpointServer } from "../rpc";
-import {
-    ClientOf,
-    ObjectEndpointSpec,
-    ServerOf,
-    ValueEndpointSpec,
-} from "../types";
+import { backendClient, backendServer } from "../rpc";
+import { ClientOf, ObjectBackendSpec, ServerOf, ValueBackendSpec } from "../types";
 
-type SimpleEndpoint = ObjectEndpointSpec<{
-    test1(param1: string): ValueEndpointSpec<number>;
-    test2(param1: string): ValueEndpointSpec<number>;
-    test3(parama: boolean, ...paramb: number[]): ValueEndpointSpec<string>;
+type SimpleEndpoint = ObjectBackendSpec<{
+    test1(param1: string): ValueBackendSpec<number>;
+    test2(param1: string): ValueBackendSpec<number>;
+    test3(parama: boolean, ...paramb: number[]): ValueBackendSpec<string>;
 }>;
 
 const simpleEndpointImpl: ServerOf<SimpleEndpoint> = {
@@ -19,7 +14,7 @@ const simpleEndpointImpl: ServerOf<SimpleEndpoint> = {
         Promise.reject(new Error(`${parama}, ${paramb.join()}`)),
 };
 
-type ComplexEndpoint = ObjectEndpointSpec<{
+type ComplexEndpoint = ObjectBackendSpec<{
     simple(): SimpleEndpoint;
 }>;
 
@@ -31,8 +26,8 @@ describe("RPC", () => {
     let rpcClient: ClientOf<ComplexEndpoint>;
 
     beforeEach(async () => {
-        rpcClient = endpointClient<ComplexEndpoint>(
-            endpointServer<ComplexEndpoint>(complexEndpointImpl)
+        rpcClient = backendClient<ComplexEndpoint>(
+            backendServer<ComplexEndpoint>(complexEndpointImpl)
         );
     });
 
@@ -42,15 +37,11 @@ describe("RPC", () => {
     });
 
     it("Succeeds (nested call)", async () => {
-        await expect(
-            rpcClient.simple().test3(true, 0, 1)()
-        ).rejects.toThrowError("true, 0,1");
+        await expect(rpcClient.simple().test3(true, 0, 1)()).rejects.toThrowError("true, 0,1");
     });
 
     it("Fails (non-existent method)", async () => {
         // @ts-ignore testing a non-existent method
-        await expect(rpcClient.whodis("lol")()).rejects.toThrowError(
-            /not a function/
-        );
+        await expect(rpcClient.whodis("lol")()).rejects.toThrowError(/not a function/);
     });
 });
