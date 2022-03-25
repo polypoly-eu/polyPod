@@ -178,8 +178,10 @@ const npm = async (...args) => {
 };
 
 async function npmInstall(name) {
-    logDetail(`${name}: Installing dependencies ...`);
-    await npm("--no-audit", "--prefer-offline", "ci");
+    if (fs.existsSync("package-lock.json")) {
+        logDetail(`${name}: Installing dependencies ...`);
+        await npm("--no-audit", "--prefer-offline", "ci");
+    }
 }
 
 async function npmRun(script, pkg) {

@@ -6,6 +6,7 @@
         "platform/utils/endpoints-generator",
         "dev-utils/dummy-server",
         "dev-utils/rollup-plugin-copy-watch",
+        "feature-utils/file-storage",
         "feature-utils/poly-look",
         "feature-utils/silly-i18n",
         "features/bundle",
@@ -17,7 +18,6 @@
         "features/polyPinion",
         "features/polyPreview",
         "features/test",
-        "platform/feature-api/api/fetch-spec",
         "platform/feature-api/api/pod-api",
         "platform/feature-api/api/rdf",
         "platform/feature-api/api/rdf-convert",
@@ -26,6 +26,7 @@
         "platform/feature-api/communication/port-authority",
         "platform/feature-api/communication/postoffice",
         "platform/feature-api/communication/remote-pod",
+        "platform/feature-api/utils",
         "platform/podjs"
     ]
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import Storage from "../model/storage.js";
+import { FeatureFileStorage } from "@polypoly-eu/feature-file-storage";
 import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
 import { analyzeFile } from "../model/analysis.js";
@@ -19,8 +19,8 @@ const importSteps = {
     explore: "explore",
 };
 const namespace = "http://polypoly.coop/schema/fbImport/";
-//used until real storage is loaded
-const fakeStorage = {
+//used until real fileStorage is loaded
+const fakeFileStorage = {
     files: null,
     refreshFiles: async () => null,
     readFile: async () => null,
@@ -72,7 +72,7 @@ function updateTitle(pod, location) {
     );
 }
 
-//from storage
+//from fileStorage
 async function readImportStatus(pod) {
     const { dataFactory } = pod;
     const statusQuads = await pod.polyIn.select({
@@ -102,7 +102,7 @@ async function writeImportStatus(pod, status) {
 
 export const ImporterProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
-    const [storage, setStorage] = useState(fakeStorage);
+    const [fileStorage, setFileStorage] = useState(fakeFileStorage);
     const [files, setFiles] = useState(null);
     const [facebookAccount, setFacebookAccount] = useState(null);
     const [fileAnalysis, setFileAnalysis] = useState(null);
@@ -119,9 +119,9 @@ export const ImporterProvider = ({ children }) => {
 
     const location = useLocation();
 
-    storage.changeListener = async () => {
+    fileStorage.changeListener = async () => {
         const resolvedFiles = [];
-        for (const file of storage.files) {
+        for (const file of fileStorage.files) {
             resolvedFiles.push(await file);
         }
         setFiles(Object.values(resolvedFiles));
@@ -137,7 +137,7 @@ export const ImporterProvider = ({ children }) => {
 
     const handleRemoveFile = (fileID) => {
         setFacebookAccount(null);
-        return storage.removeFile(fileID);
+        return fileStorage.removeFile(fileID);
     };
 
     const handleSelectFile = async () => {
@@ -188,15 +188,15 @@ export const ImporterProvider = ({ children }) => {
 
     function refreshFiles() {
         setFiles(null);
-        storage
+        fileStorage
             .refreshFiles()
             .then(async () => {
                 const resolvedFiles = [];
-                if (!storage.files) {
+                if (!fileStorage.files) {
                     setFiles(null);
                     return;
                 }
-                for (const file of storage.files) {
+                for (const file of fileStorage.files) {
                     resolvedFiles.push(await file);
                 }
                 setFiles(resolvedFiles);
@@ -222,14 +222,14 @@ export const ImporterProvider = ({ children }) => {
                 )
                     changeNavigationState({ importStatus: status });
             });
-            setStorage(new Storage(newPod));
+            setFileStorage(new FeatureFileStorage(newPod));
         });
     }, []);
 
-    //on storage change
+    //on fileStorage change
     useEffect(() => {
         refreshFiles();
-    }, [storage]);
+    }, [fileStorage]);
 
     //on file change
     //when files changed run the importer first and create an account model first.
