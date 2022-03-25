@@ -53,7 +53,7 @@ const FacebookImporter = () => {
                     message={i18n.t("common:loading")}
                 ></Loading>
             )}
-            {pod && (
+            {pod && files && (
                 <Switch>
                     <Route exact path="/">
                         {determineRoute()}
