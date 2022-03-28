@@ -5,7 +5,11 @@ The polyPod app for iOS devices
 ## Building
 
 No matter how you intend to build the iOS app, the first step is to build the
-core code and features, see [../README.md](../README.md) for instructions.
+core code and features:
+
+- To build the features see [../../README.md](../README.md) for instructions.
+- To build core, just run:
+         make build_core
 
 ### Xcode
 
