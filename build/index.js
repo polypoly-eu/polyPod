@@ -50,7 +50,7 @@ async function processAll(packageTree, command) {
 }
 
 async function main() {
-    const { scriptPath, command, start } = parseCommandLine();
+    const { scriptPath, command, start, skipRootInstall } = parseCommandLine();
     if (!command) {
         showUsage(scriptPath);
         return 1;
@@ -65,7 +65,7 @@ async function main() {
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
 
-    if (command === "root-install") {
+    if (!skipRootInstall) {
         await runCommand("root-install", "👷👷‍♀️", async () => {
             await npmInstall("/");
         });

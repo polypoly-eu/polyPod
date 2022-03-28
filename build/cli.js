@@ -9,7 +9,6 @@ const validCommands = [
     "lintfix",
     "list",
     "list-deps",
-    "root-install",
     "syncdeps",
     "test",
 ];
@@ -27,10 +26,12 @@ function parseCommandLine() {
     if (parameters.length > 1) return { scriptPath, command: null };
 
     const command = parameters.length ? parameters[0] : "build";
+    const skipRootInstall = parameters.indexOf("--skip-root-install");
     return {
         scriptPath,
         command: validCommands.includes(command) ? command : null,
         start,
+        skipRootInstall,
     };
 }
 

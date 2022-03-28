@@ -49,10 +49,10 @@ async function npmInstall(name) {
     }
 }
 
-async function runCommand(command, emojis, callback) {
+async function runCommand(commandName, emojis, callback) {
     logDetail(`${emojis} ...`);
     await callback();
-    logSuccess(command);
+    logSuccess(commandName);
 }
 
 module.exports = { npm, npx, npmInstall, runCommand };

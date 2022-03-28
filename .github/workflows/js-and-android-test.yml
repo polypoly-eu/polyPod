@@ -53,23 +53,20 @@ jobs:
                       - 'platform/ios/**'
             - name: Install root packages
               if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.coreAndFeatures == 'true' || steps.changes.outputs.js == 'true')
-              run: ./build.js root-install
+              run: ./build.js install
             - name: Lint core and features
               if: steps.changes.outputs.js == 'true'
-              run: ./build.js lint
+              run: ./build.js --skip-root-install lint
             - name: Lint Swift
               if: steps.changes.outputs.swift == 'true'
               working-directory: platform/ios
               run: docker run -t -v `pwd`:`pwd` -w `pwd` ghcr.io/realm/swiftlint:latest
-            - name: Install modules if needed
-              if: steps.cache.outputs.cache-hit != 'true'
-              run: ./build.js install
             - name: Build core and features
               if: steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.android == 'true'
-              run: ./build.js
+              run: ./build.js --skip-root-install
             - name: Test core and features
               if: steps.changes.outputs.apiAndFeatures == 'true'
-              run: xvfb-run --auto-servernum ./build.js test
+              run: xvfb-run --auto-servernum ./build.js --skip-root-install test
             - uses: actions/setup-java@v2
               if: steps.changes.outputs.android == 'true'
               with:

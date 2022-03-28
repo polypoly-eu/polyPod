@@ -37,7 +37,7 @@ jobs:
               run: cd platform/ios; make lockxcodeversion
             - name: Install modules if needed
               if: steps.cache.outputs.cache-hit != 'true'
-              run: ./build.js root-install && ./build.js install
+              run: ./build.js install
             - name: Build API and features
               run: ./build.js
             - name: Build and test iOS
