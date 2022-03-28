@@ -1,4 +1,5 @@
 import SwiftUI
+import PolyPodCoreSwift
 
 class Feature {
     let path: URL
@@ -79,9 +80,9 @@ private func readManifest(_ basePath: URL) -> FeatureManifest? {
     let manifestPath = basePath.appendingPathComponent("manifest.json")
     do {
         let contents = try String(contentsOf: manifestPath)
-        return Core.instance.parseFeatureManifest(json: contents)
+        return try Core.instance.parseFeatureManifest(json: contents).get()
     } catch {
-        Log.error("Failed to read raw json from \(manifestPath)")
+        Log.error("Failed to read manifest for \(manifestPath) -> \(error.localizedDescription)")
         return nil
     }
 }

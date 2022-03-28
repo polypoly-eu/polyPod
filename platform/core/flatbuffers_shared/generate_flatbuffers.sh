@@ -5,7 +5,7 @@ echo '===> Compiling the Schema...'
 
 cd flatbuffers_shared
 RUST_FLATBUFFERS_OUT=../src/flatbuffers_generated
-IOS_FLATBUFFERS_OUT=../../ios/PolyPodApp/FlatbuffersGenerated
+IOS_FLATBUFFERS_OUT=../PolyPodCoreSwift/Sources/PolyPodCoreSwift/FlatbuffersGenerated
 # TODO: Add Android folders
 FLATBUFFER_MODELS=$( find -P flatbuffer_models -name "*.fbs" )
 
