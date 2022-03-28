@@ -262,6 +262,8 @@
 		9015F60827EB0F7900DC6142 /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
 		901C0587278EE58700BC8364 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+PolyIn.swift"; sourceTree = "<group>"; };
+		904CBEDB27F1D60200463085 /* CoreModule */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CoreModule; sourceTree = "<group>"; };
+		904CBEDC27F1D61E00463085 /* CoreModule */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CoreModule; sourceTree = "<group>"; };
 		904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchToMainQueue.swift; sourceTree = "<group>"; };
 		9063A7B527EB6DDB00955E49 /* swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = swift; path = ../../core/flatbuffers_shared/flatbuffers/swift; sourceTree = "<group>"; };
 		9063A7E127EC637000955E49 /* core_bootstrap_response_generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = core_bootstrap_response_generated.swift; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 		1AA6DE2624191C94008DB1B2 = {
 			isa = PBXGroup;
 			children = (
+				904CBEDB27F1D60200463085 /* CoreModule */,
 				9063A7E027EC637000955E49 /* FlatbuffersGenerated */,
 				904D4A6E27905D4C00A75AED /* Utils */,
 				E9018EDF276370B500FDF34A /* Core */,
@@ -575,6 +578,7 @@
 			isa = PBXGroup;
 			children = (
 				9063A7B527EB6DDB00955E49 /* swift */,
+				904CBEDC27F1D61E00463085 /* CoreModule */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
