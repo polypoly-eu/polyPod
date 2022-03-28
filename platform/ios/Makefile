@@ -49,7 +49,7 @@ archive:
 		$(xcpretty)
 
 .PHONY: export_ipa
-export_ipa:
+export_ipa: archive
 	$(xcodebuild) \
 		-exportArchive \
 		-archivePath $(archive_path) \
