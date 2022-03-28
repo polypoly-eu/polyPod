@@ -11,6 +11,7 @@ import ImportExplanationExpandable from "../../components/importExplanationExpan
 import "./import.css";
 import i18n from "../../i18n.js";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
+import { FileLoaderContext } from "../../context/file-loader-context.jsx";
 
 //These are just the sections that are shown as a visual part of the import
 //importSteps are all steps like loading and finished that have logical relevance for the process
@@ -60,14 +61,9 @@ async function writeImportStatus(pod, status) {
 }
 
 const Import = () => {
-    const {
-        pod,
-        files,
-        handleRemoveFile,
-        setGlobalError,
-        runWithLoadingScreen,
-        refreshFiles,
-    } = useContext(ImporterContext);
+    const { pod, setGlobalError, runWithLoadingScreen, refreshFiles } =
+        useContext(ImporterContext);
+    const { files, handleRemoveFile } = useContext(FileLoaderContext);
     const [importStatus, setImportStatus] = useState(importSteps.beginning);
     const [selectedFile, setSelectedFile] = useState(null);
     const file = files?.[0];
