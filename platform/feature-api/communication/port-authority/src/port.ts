@@ -45,9 +45,9 @@ export interface SendPort<Out> {
  * to outgoing messages _before_ they are sent on the original port.
  * @returns an instance of [[SendPort]] instantiated to the `In` class.
  */
-export function txMappingPort<T, In>(port: SendPort<T>, f: (x: In) => T): SendPort<In> {
+export function mapSendPort<Out, Out2>(port: SendPort<Out>, f: (x: Out2) => Out): SendPort<Out2> {
     return {
-        send: (value: In) => port.send(f(value)),
+        send: (value: Out2) => port.send(f(value)),
     };
 }
 
@@ -95,7 +95,7 @@ export interface Port<In, Out> extends SendPort<Out>, ReceivePort<In> {}
 /**
  * Maps a [[Port]] on both the incoming (covariant) and outgoing (contravariant) messages.
  *
- * See [[txMappingPort]] and [[mapReceivePort]] for the components.
+ * See [[mapSendPort]] and [[mapReceivePort]] for the components.
  */
 export function mapPort<In1, Out1, In2, Out2>(
     port: Port<In1, Out1>,
@@ -103,7 +103,7 @@ export function mapPort<In1, Out1, In2, Out2>(
     outf: (out2: Out2) => Out1
 ): Port<In2, Out2> {
     return {
-        ...txMappingPort(port, outf),
+        ...mapSendPort(port, outf),
         ...mapReceivePort(port, inf),
     };
 }
