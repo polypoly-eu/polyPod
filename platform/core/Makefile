@@ -3,7 +3,13 @@ ios_archs := aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios
 ios_targets := iPhone simulator
 build_type := $(if $(filter $(MODE), release),release,debug)
 
-build_ios_xcframework:
+setup_flatbuffers:
+	./flatbuffers_shared/setup_flatbuffers.sh
+
+generate_flatbuffers: setup_flatbuffers
+	./flatbuffers_shared/generate_flatbuffers.sh
+
+build_ios_xcframework: generate_flatbuffers
 # Ensure correct OS is used
 ifeq ($(OS),Windows_NT)
 	@echo "xcframework can be built only in macOS"
