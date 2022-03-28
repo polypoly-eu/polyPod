@@ -12,7 +12,7 @@ import { formatTime } from "../../utils/formatTime.js";
 import "./overview.css";
 
 const Overview = () => {
-    const { facebookAccount, files, handleRemoveFile, updateImportStatus } =
+    const { facebookAccount, files, handleRemoveFile } =
         useContext(ImporterContext);
 
     const [showNewImportDialog, setShowNewImportDialog] = useState(false);
