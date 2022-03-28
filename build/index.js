@@ -65,7 +65,7 @@ async function main() {
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
 
-    if (!skipRootInstall) {
+    if (!["list", "list-deps"].includes(command) && !skipRootInstall) {
         await runCommand("root-install", "👷👷‍♀️", async () => {
             await npmInstall("/");
         });
