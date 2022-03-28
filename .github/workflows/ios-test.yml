@@ -18,7 +18,7 @@ on:
 jobs:
     test:
         name: Testing polyPod iOS app
-        runs-on: macOS-11
+        runs-on: macOS-12
         steps:
             - name: Checkout repository
               uses: actions/checkout@v2
