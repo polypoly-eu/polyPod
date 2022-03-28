@@ -69,7 +69,6 @@ async function main() {
         await runCommand("root-install", "👷👷‍♀️", async () => {
             await npmInstall("/");
         });
-        return 0;
     }
 
     if (command === "lint") {
