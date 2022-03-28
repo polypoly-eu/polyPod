@@ -11,7 +11,7 @@ Logic shared across polyPod platforms - ios, android, wasm.
 
 ### With `make`:
 - Set up and generate flatbuffers:
-        make generate_flatbuffers
+          make generate_flatbuffers
 - Build the project:
           cargo build
 

@@ -87,7 +87,7 @@ class FeatureTests: XCTestCase {
     }
 
     func testInvalidColorIgnored() {
-        let feature = createFixture(color: "grun!")
+        let feature = createFixture(color: "grün!")
         XCTAssertEqual(Color.clear, feature.primaryColor)
     }
     

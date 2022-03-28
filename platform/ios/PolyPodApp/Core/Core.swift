@@ -19,12 +19,13 @@ final class Core {
     /// Should be called before invoking any other API
     func bootstrap() {
         processCoreResponse(core_bootstrap(language_code)) { byteBuffer in
-            let root = CoreBootstrapResponse.getRootAsCoreBootstrapResponse(bb: byteBuffer)
-            if let failure = root.failure {
-                // TODO: What to do if core_bootstrap failed.
-                Log.info("Failed to bootsrap core \(failure.code) \(String(describing: failure.message))")
+            let result = CoreBootstrapResponse.getRootAsCoreBootstrapResponse(bb: byteBuffer)
+            if let failure = result.failure {
+                let errorInfo = "Failed to bootstrap core \(failure.code) \(String(describing: failure.message))"
+                assertionFailure(errorInfo)
+                Log.error(errorInfo)
             } else {
-                Log.info("Core Boostraped!!!")
+                Log.info("Core Bootstraped!!!")
             }
         }
     }
@@ -42,7 +43,7 @@ final class Core {
                 if let failure = response.result(type: Failure.self) {
                     Log.error("Failed to load Feature Manifest: \(failure.code) \(String(describing: failure.message))")
                 } else {
-                    Log.error("Failed to load Feature Manifest: recevied failure result type without failure content)")
+                    Log.error("Failed to load Feature Manifest: recevied failure result type without failure content")
                 }
             default:
                 Log.error("Failed to load Feature Manifest, received invalid result type: \(response.resultType)")
@@ -52,6 +53,7 @@ final class Core {
     }
     
     // MARK: - Private utils
+    
     private func processCoreResponse<T>(_ responseByteBuffer: CByteBuffer, flatbufferMapping: (ByteBuffer) -> T) -> T {
         defer {
             free_bytes(responseByteBuffer.data)

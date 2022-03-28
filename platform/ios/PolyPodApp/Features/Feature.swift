@@ -48,13 +48,12 @@ class Feature {
     }
     
     convenience init(path: URL, manifest: FeatureManifest) {
-        let links = stride(from: 0,
-                       to: manifest.linksCount,
-                       by: 1).reduce(into: [String: String](), { partialResult, idx in
+        var links: [String: String] = [:]
+        for idx in 0..<manifest.linksCount {
             if let link = manifest.links(at: idx) {
-                partialResult[link.name!] = link.url!
+                links[link.name!] = link.url!
             }
-        })
+        }
         self.init(path: path,
                   name: manifest.name,
                   author: manifest.author,
@@ -78,10 +77,13 @@ class Feature {
 
 private func readManifest(_ basePath: URL) -> FeatureManifest? {
     let manifestPath = basePath.appendingPathComponent("manifest.json")
-    guard let contents = try? String(contentsOf: manifestPath) else {
+    do {
+        let contents = try String(contentsOf: manifestPath)
+        return Core.instance.parseFeatureManifest(json: contents)
+    } catch {
+        Log.error("Failed to read raw json from \(manifestPath)")
         return nil
     }
-    return Core.instance.parseFeatureManifest(json: contents)
 }
 
 private func parseColor(hexValue: String?) -> Color? {
