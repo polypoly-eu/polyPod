@@ -13,7 +13,7 @@ import { Handler, mapPort, Port, ReceivePort } from "./port";
  * using the `data` field. It is not possible to transfer objects with this [[Port]].
  *
  * The [[TxPort.send]] and [[ReceivePort.addHandler]] methods delegate directly to the underlying Node implementation.
- * For typed operation, it is recommended to use [[mapPort]] with type coercions.q
+ * For typed operation, it is recommended to use [[mapPort]] with type coercions.
  *
  * Note that Browser `MessagePort`s use the structured clone algorithm; that is, an object sent on the port will be
  * received as a different object.
