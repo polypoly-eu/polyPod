@@ -186,12 +186,25 @@ task copyThirdPartyLicenses(type: Copy) {
     into "build/generated-assets/3rd-party-licenses"
 }
 
+task installAppOnDevice {
+    dependsOn "assembleDebug"
+    doLast {
+        exec {
+            logger.info("Trying to install app")
+            def adb = android.getAdbExecutable().absolutePath
+            commandLine adb, 'install', "$buildDir/outputs/apk/debug/app-debug.apk"
+            logger.info("Application installed onto the device")
+        }
+    }
+}
+
 task copyEndpoints(type: Copy) {
     from "../../../../polyPod-config"
     into "build/generated-assets/config-assets"
 }
 
 task packageTestFeature(type: Zip) {
+    dependsOn installAppOnDevice
     archiveFileName = "test.zip"
     destinationDirectory = file("$buildDir")
     from "$projectDir/../../../features/test/dist"
