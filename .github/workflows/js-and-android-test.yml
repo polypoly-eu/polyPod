@@ -15,7 +15,7 @@ jobs:
                   node-version: 16
                   cache: "npm"
                   cache-dependency-path: "**/package-lock.json"
-            - name: Cache multiple paths
+            - name: Cache JS deps
               uses: actions/cache@v2
               id: cache
               with:
@@ -51,7 +51,7 @@ jobs:
                       - 'platform/podjs/**'
                       swift:
                       - 'platform/ios/**'
-            - name: Install root packages
+            - name: Install JS packages
               if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.coreAndFeatures == 'true' || steps.changes.outputs.js == 'true')
               run: ./build.js install
             - name: Lint core and features
