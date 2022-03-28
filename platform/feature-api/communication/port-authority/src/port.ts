@@ -95,7 +95,7 @@ export interface Port<In, Out> extends TxPort<Out>, ReceivePort<In> {}
 /**
  * Maps a [[Port]] on both the incoming (covariant) and outgoing (contravariant) messages.
  *
- * See [[txMappingPort]] and [[ReceivePort]] for the components.
+ * See [[txMappingPort]] and [[mapReceivePort]] for the components.
  */
 export function mapPort<In1, Out1, In2, Out2>(
     port: Port<In1, Out1>,
