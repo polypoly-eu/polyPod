@@ -1,12 +1,26 @@
-import React, { createContext, useContext, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { ImporterContext } from "./importer-context.jsx";
+import { analyzeFile } from "../model/analysis.js";
 
-const FileLoaderContext = createContext();
+export const FileLoaderContext = createContext();
 
-const FileLoaderProvider = ({ children }) => {
-    const { files } = useContext(ImporterContext);
+export const FileLoaderProvider = ({ children }) => {
+    const { files, facebookAccount } = useContext(ImporterContext);
 
-    return <FileLoaderContext.Provider>{children}</FileLoaderContext.Provider>;
+    const [fileAnalysis, setFileAnalysis] = useState(null);
+
+    // On account changed
+    // When the account changes run the analises
+    useEffect(() => {
+        if (facebookAccount && files)
+            analyzeFile(files[0], facebookAccount).then((fileAnalysis) =>
+                setFileAnalysis(fileAnalysis)
+            );
+    }, [facebookAccount, files]);
+
+    return (
+        <FileLoaderContext.Provider value={{ fileAnalysis }}>
+            {children}
+        </FileLoaderContext.Provider>
+    );
 };
-
-export default FileLoaderProvider;

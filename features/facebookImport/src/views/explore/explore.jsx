@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import Loading from "../../components/loading/loading.jsx";
+import { FileLoaderContext } from "../../context/file-loader-context.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
 import i18n from "../../i18n.js";
@@ -13,7 +14,7 @@ const PopUpMessage = ({ children, reportResultAnswer }) => {
     return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
 };
 
-const AnalysisCard = ({ analysis, setActiveDetails }) => {
+const AnalysisCard = ({ analysis }) => {
     return (
         <div className="analysis-card">
             <div className="card-container">
@@ -68,8 +69,10 @@ const UnrecognizedCard = () => {
 };
 
 const ExploreView = () => {
-    const { fileAnalysis, setActiveDetails, reportResult, setReportResult } =
+    const { setActiveDetails, reportResult, setReportResult } =
         useContext(ImporterContext);
+
+    const { fileAnalysis } = useContext(FileLoaderContext);
 
     const history = useHistory();
     const exploreRef = useRef();
