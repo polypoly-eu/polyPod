@@ -112,10 +112,6 @@ class IDBPolyIn implements PolyIn {
         );
     }
 
-    /**
-     * It takes an array of quads and deletes them from the store
-     * @param {RDF.Quad[]} quads - RDF.Quad[]
-     */
     async delete(...quads: RDF.Quad[]): Promise<void> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
@@ -127,10 +123,6 @@ class IDBPolyIn implements PolyIn {
         });
     }
 
-    /**
-     * Returns true if the store contains the given quads.
-     * @param {RDF.Quad[]} quads - An array of quads to check for.
-     */
     async has(...quads: RDF.Quad[]): Promise<boolean> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
