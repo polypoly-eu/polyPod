@@ -11,7 +11,7 @@
  * @packageDocumentation
  */
 
-import { Handler, Port, ReceiverPort, TxPort } from "./port";
+import { Handler, Port, ReceivePort, TxPort } from "./port";
 
 /**
  * A pair of `resolve` and `reject` callbacks that resolve an underlying `Promise`.
@@ -55,10 +55,10 @@ export interface WithResolvers<Req, Res> {
 }
 
 /**
- * A _response port_ is a [[ReceiverPort]] for receiving messages with attached [[PromiseResolvers]]. The intended
+ * A _response port_ is a [[ReceivePort]] for receiving messages with attached [[PromiseResolvers]]. The intended
  * semantics is that this represents a _server_ that listens for requests and responds using the callbacks.
  */
-export type ResponsePort<Req, Res> = ReceiverPort<WithResolvers<Req, Res>>;
+export type ResponsePort<Req, Res> = ReceivePort<WithResolvers<Req, Res>>;
 
 /**
  * A _request port_ is a [[SendPort]] for sending messages with attached [[PromiseResolvers]]. The intended

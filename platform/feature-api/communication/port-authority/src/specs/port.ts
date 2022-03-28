@@ -2,16 +2,16 @@ import chai, { assert } from "chai";
 import chaiAsPromised from "chai-as-promised";
 import fc, { Arbitrary } from "fast-check";
 
-import { ReceiverPort, TxPort } from "../port";
+import { ReceivePort, TxPort } from "../port";
 import { Resource } from "../util";
 
 chai.use(chaiAsPromised);
 
-export type PortSpecLifecycle = <T>() => Promise<Resource<[TxPort<T>, ReceiverPort<T>]>>;
+export type PortSpecLifecycle = <T>() => Promise<Resource<[TxPort<T>, ReceivePort<T>]>>;
 
 interface Fixture<T> {
     send: TxPort<T>;
-    receive: ReceiverPort<T>;
+    receive: ReceivePort<T>;
     cleanup(): Promise<void>;
 }
 

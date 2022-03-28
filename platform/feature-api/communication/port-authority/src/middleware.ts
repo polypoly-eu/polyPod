@@ -10,7 +10,7 @@ import { IncomingMessage, RequestListener } from "http";
 
 import { Bubblewrap } from "@polypoly-eu/bubblewrap";
 
-import { Handler, rxMappingPort } from "./port";
+import { Handler, mapReceivePort } from "./port";
 import { ResponsePort, WithResolvers } from "./procedure";
 import { triedPromise, Try } from "./util";
 
@@ -151,7 +151,7 @@ export function bubblewrapMiddlewarePort(
 
     server.use(handler);
 
-    const port = rxMappingPort(rawPort, (data) => ({
+    const port = mapReceivePort(rawPort, (data) => ({
         resolvers: data.resolvers,
         request: bubblewrap.decode(data.request),
     }));

@@ -22,7 +22,7 @@ export function mapHandler<T, U>(handler: Handler<T>, f: (x: U) => T): Handler<U
 /**
  * A half port that only sends messages.
  *
- * This interface provides very little guarantees beside invoking the [[Handler]]s of a [[ReceiverPort]] “somewhere
+ * This interface provides very little guarantees beside invoking the [[Handler]]s of a [[ReceivePort]] “somewhere
  * else”. In particular, sending a message provides no observable behaviour. There are no temporal sequence guarantees when
  * sending multiple messages.
  *
@@ -64,21 +64,21 @@ export function txMappingPort<T, In>(port: TxPort<T>, f: (x: In) => T): TxPort<I
  * Note that it is impossible to remove handlers once added to the port. This, and custom multiplexing logic is out of
  * scope for this abstraction, but can be implemented by users on top of raw ports.
  */
-export interface ReceiverPort<In> {
+export interface ReceivePort<In> {
     addHandler(handler: Handler<In>): void;
 }
 
 /**
- * Map operation for [[ReceiverPort]]s. The returned port behaves identically to the original port, but applies a
+ * Map operation for [[ReceivePort]]s. The returned port behaves identically to the original port, but applies a
  * function to incoming messages _before_ they are sent to the handlers.
- * @returns an instance of [[ReceiverPort]] instantiated to the `Out` class.
+ * @returns an instance of [[ReceivePort]] instantiated to the `Out` class.
  */
-export function rxMappingPort<In, Out>(
-    port: ReceiverPort<In>,
-    f: (x: In) => Out
-): ReceiverPort<Out> {
+export function mapReceivePort<In, In2>(
+    port: ReceivePort<In>,
+    f: (x: In) => In2
+): ReceivePort<In2> {
     return {
-        addHandler: (handler: Handler<Out>) => port.addHandler(mapHandler(handler, f)),
+        addHandler: (handler: Handler<In2>) => port.addHandler(mapHandler(handler, f)),
     };
 }
 
@@ -90,7 +90,7 @@ export function rxMappingPort<In, Out>(
  * @typeParam Out type of outgoing messages
  * @typeParam In type of incoming messages
  */
-export interface Port<In, Out> extends TxPort<Out>, ReceiverPort<In> {}
+export interface Port<In, Out> extends TxPort<Out>, ReceivePort<In> {}
 
 /**
  * Maps a [[Port]] on both the incoming (covariant) and outgoing (contravariant) messages.
@@ -104,28 +104,28 @@ export function mapPort<In1, Out1, In2, Out2>(
 ): Port<In2, Out2> {
     return {
         ...txMappingPort(port, outf),
-        ...rxMappingPort(port, inf),
+        ...mapReceivePort(port, inf),
     };
 }
 
 /**
- * Adds a handler to a [[ReceiverPort]] that forwards all incoming messages to a [[SendPort]].
+ * Adds a handler to a [[ReceivePort]] that forwards all incoming messages to a [[SendPort]].
  *
  * @param from port from which messages are forwarded
  * @param to port to which messages are forwarded
  */
-export function forward<InOut>(from: ReceiverPort<InOut>, to: TxPort<InOut>): void {
+export function forward<InOut>(from: ReceivePort<InOut>, to: TxPort<InOut>): void {
     from.addHandler((t) => to.send(t));
 }
 
 /**
- * Constructs a pair of uni-directionally connected ports. The result is a [[SendPort]] and a [[ReceiverPort]] with the
+ * Constructs a pair of uni-directionally connected ports. The result is a [[SendPort]] and a [[ReceivePort]] with the
  * same type parameters.
  *
- * Messages sent through the [[SendPort]] are immediately handled by the handlers registered with the [[ReceiverPort]].
+ * Messages sent through the [[SendPort]] are immediately handled by the handlers registered with the [[ReceivePort]].
  * Communication is fully synchronous.
  */
-export function loopback<InOut>(): [TxPort<InOut>, ReceiverPort<InOut>] {
+export function loopback<InOut>(): [TxPort<InOut>, ReceivePort<InOut>] {
     const handlers: Handler<InOut>[] = [];
     return [
         {
@@ -138,11 +138,11 @@ export function loopback<InOut>(): [TxPort<InOut>, ReceiverPort<InOut>] {
 }
 
 /**
- * Merges a [[SendPort]] and [[ReceiverPort]] together to a full [[Port]].
+ * Merges a [[SendPort]] and [[ReceivePort]] together to a full [[Port]].
  *
  * The resulting port shares the implementation of the underlying half ports.
  */
-export function join<In, Out>(send: TxPort<Out>, receive: ReceiverPort<In>): Port<In, Out> {
+export function join<In, Out>(send: TxPort<Out>, receive: ReceivePort<In>): Port<In, Out> {
     return {
         send: (out: Out) => send.send(out),
         addHandler: (handler: Handler<In>) => receive.addHandler(handler),
@@ -150,12 +150,12 @@ export function join<In, Out>(send: TxPort<Out>, receive: ReceiverPort<In>): Por
 }
 
 /**
- * Registers a one-off handler to a [[ReceiverPort]] that listens for the next incoming message, returning a promise
+ * Registers a one-off handler to a [[ReceivePort]] that listens for the next incoming message, returning a promise
  * that is resolved upon receiving that message.
  *
  * This function is the dual to [[TxPort.send]] because it allows to observe exactly one message.
  */
-export function receiveSingle<In>(port: ReceiverPort<In>): Promise<In> {
+export function receiveSingle<In>(port: ReceivePort<In>): Promise<In> {
     return new Promise((resolve) => {
         let done = false;
         const handler: Handler<In> = (data) => {
