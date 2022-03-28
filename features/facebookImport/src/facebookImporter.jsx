@@ -35,11 +35,8 @@ import manifestData from "./static/manifest.json";
 window.manifestData = manifestData;
 
 import i18n from "./i18n.js";
-<<<<<<< HEAD
 import { INITIAL_HISTORY_STATE } from "../constants/constants.js";
-=======
 import FileLoaderProvider from "./context/file-loader-context.jsx";
->>>>>>> 5485017e6 (Add basic context and wire up)
 
 const FacebookImporter = () => {
     const { pod, files, globalError, setGlobalError, isLoading } =
