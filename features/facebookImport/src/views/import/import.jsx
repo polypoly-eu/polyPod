@@ -61,9 +61,10 @@ async function writeImportStatus(pod, status) {
 }
 
 const Import = () => {
-    const { pod, setGlobalError, runWithLoadingScreen, refreshFiles } =
+    const { pod, setGlobalError, runWithLoadingScreen } =
         useContext(ImporterContext);
-    const { files, handleRemoveFile } = useContext(FileLoaderContext);
+    const { files, handleRemoveFile, refreshFiles } =
+        useContext(FileLoaderContext);
     const [importStatus, setImportStatus] = useState(importSteps.beginning);
     const [selectedFile, setSelectedFile] = useState(null);
     const file = files?.[0];

@@ -4,7 +4,6 @@ import { Redirect } from "react-router-dom";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
 import Loading from "../../components/loading/loading.jsx";
-import { ImporterContext } from "../../context/importer-context.jsx";
 import i18n from "../../i18n.js";
 import { useHistory } from "react-router";
 import { formatTime } from "../../utils/formatTime.js";
@@ -13,9 +12,7 @@ import "./overview.css";
 import { FileLoaderContext } from "../../context/file-loader-context.jsx";
 
 const Overview = () => {
-    const { handleRemoveFile } = useContext(ImporterContext);
-
-    const { files, account } = useContext(FileLoaderContext);
+    const { files, account, handleRemoveFile } = useContext(FileLoaderContext);
 
     const [showNewImportDialog, setShowNewImportDialog] = useState(false);
     const history = useHistory();

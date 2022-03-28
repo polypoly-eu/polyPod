@@ -80,7 +80,13 @@ export const FileLoaderProvider = ({ children, parentContext }) => {
 
     return (
         <FileLoaderContext.Provider
-            value={{ files, fileAnalysis, account, handleRemoveFile }}
+            value={{
+                files,
+                fileAnalysis,
+                account,
+                handleRemoveFile,
+                refreshFiles,
+            }}
         >
             {children}
         </FileLoaderContext.Provider>
