@@ -29,7 +29,6 @@ const AnalysisCard = ({ analysis, setActiveDetails }) => {
                 <RouteButton
                     route="/explore/details"
                     className="details-button"
-                    onClick={() => setActiveDetails(analysis)}
                     stateChange={{ activeAnalysis: analysis }}
                 >
                     {i18n.t("explore:details.button")}
