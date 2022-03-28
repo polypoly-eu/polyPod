@@ -45,7 +45,6 @@ export const ImporterProvider = ({ children }) => {
     const [files, setFiles] = useState(null);
     const [facebookAccount, setFacebookAccount] = useState(null);
     const [fileAnalysis, setFileAnalysis] = useState(null);
-    const [activeDetails, setActiveDetails] = useState(null);
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
 
@@ -146,8 +145,6 @@ export const ImporterProvider = ({ children }) => {
                 handleBack,
                 fileAnalysis,
                 refreshFiles,
-                activeDetails,
-                setActiveDetails,
                 globalError,
                 setGlobalError,
                 facebookAccount,
