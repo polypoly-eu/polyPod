@@ -26,7 +26,6 @@ public enum PolyPodCoreError: Error {
 /// Swift wrapper around the Rust Core. Encapsulates specific Pointer and Flabuffer operations.
 public final class Core {
     public static let instance = Core()
-    
     // MARK: - Private config
     private var languageCode: UnsafePointer<CChar>!
     
