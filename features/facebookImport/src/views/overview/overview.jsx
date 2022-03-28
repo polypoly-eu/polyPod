@@ -13,14 +13,14 @@ import "./overview.css";
 import { FileLoaderContext } from "../../context/file-loader-context.jsx";
 
 const Overview = () => {
-    const { files, handleRemoveFile } = useContext(ImporterContext);
+    const { handleRemoveFile } = useContext(ImporterContext);
 
-    const { facebookAccount } = useContext(FileLoaderContext);
+    const { files, account } = useContext(FileLoaderContext);
 
     const [showNewImportDialog, setShowNewImportDialog] = useState(false);
     const history = useHistory();
 
-    if (facebookAccount === null || files === null)
+    if (account === null || files === null)
         return (
             <Loading
                 message={i18n.t("overview:loading.data")}
@@ -32,9 +32,7 @@ const Overview = () => {
     const bubbleVizHeight = 400;
     const dataBubblesLightColor = "#f7fafc";
 
-    const bubbleData = facebookAccount.dataGroups.filter(
-        ({ count }) => count > 0
-    );
+    const bubbleData = account.dataGroups.filter(({ count }) => count > 0);
 
     bubbleData.forEach((d) => {
         d.value = d.count;

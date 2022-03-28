@@ -36,11 +36,16 @@ window.manifestData = manifestData;
 
 import i18n from "./i18n.js";
 import { INITIAL_HISTORY_STATE } from "../constants/constants.js";
-import { FileLoaderProvider } from "./context/file-loader-context.jsx";
+import {
+    FileLoaderContext,
+    FileLoaderProvider,
+} from "./context/file-loader-context.jsx";
 
 const FacebookImporter = () => {
-    const { pod, files, globalError, setGlobalError, isLoading } =
+    const { pod, globalError, setGlobalError, isLoading } =
         useContext(ImporterContext);
+
+    const { files } = useContext(FileLoaderContext);
 
     function determineRoute() {
         if (files.length > 0)
@@ -138,7 +143,7 @@ const FacebookImporterApp = () => {
     return (
         <Router history={history}>
             <ImporterProvider>
-                <FileLoaderProvider>
+                <FileLoaderProvider parentContext={ImporterContext}>
                     <div className="poly-nav-bar-separator-overlay" />
                     <FacebookImporter />
                 </FileLoaderProvider>
