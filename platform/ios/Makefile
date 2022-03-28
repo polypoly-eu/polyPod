@@ -25,14 +25,14 @@ lockxcodeversion:
 	sudo xcode-select -switch /Applications/Xcode_13.2.1.app
 
 .PHONY: build
-build: build_core
+build:
 	$(xcodebuild) clean build \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
 		$(xcpretty)
 
 .PHONY: test
-test: build_core
+test:
 	$(xcodebuild) clean test \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
@@ -40,7 +40,7 @@ test: build_core
 		$(xcpretty)
 
 .PHONY: archive
-archive: build_core
+archive:
 	rm -rf $(archive_path)
 	$(xcodebuild) clean archive \
 		-project $(project_path) \
@@ -49,7 +49,7 @@ archive: build_core
 		$(xcpretty)
 
 .PHONY: export_ipa
-export_ipa: archive
+export_ipa:
 	$(xcodebuild) \
 		-exportArchive \
 		-archivePath $(archive_path) \

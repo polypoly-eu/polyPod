@@ -113,6 +113,9 @@ jobs:
       - name: iOS - Lock Xcode version
         working-directory: platform/ios
         run: make lockxcodeversion
+      - name: iOS - Build core
+        working-directory: platform/ios
+        run: make build_core MODE=release
       - name: iOS - Tests
         working-directory: platform/ios
         run: make test
