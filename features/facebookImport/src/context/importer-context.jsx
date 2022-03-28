@@ -4,7 +4,6 @@ import { RefreshFilesError } from "../errors/polyIn-errors.js";
 import Storage from "../model/storage.js";
 import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
-import { importData } from "../model/importer.js";
 
 export const ImporterContext = React.createContext();
 
@@ -42,7 +41,6 @@ export const ImporterProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [storage, setStorage] = useState(fakeStorage);
     const [files, setFiles] = useState(null);
-    const [facebookAccount, setFacebookAccount] = useState(null);
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
 
@@ -108,16 +106,6 @@ export const ImporterProvider = ({ children }) => {
         refreshFiles();
     }, [storage]);
 
-    //on file change
-    //when files changed run the importer first and create an account model first.
-    //after there is an account the analyses are triggered.
-    useEffect(() => {
-        if (files?.[0])
-            importData(files[0]).then((newFacebookAccount) =>
-                setFacebookAccount(newFacebookAccount)
-            );
-    }, [files]);
-
     //on history change
     useEffect(() => {
         if (!pod) return;
@@ -135,7 +123,6 @@ export const ImporterProvider = ({ children }) => {
                 refreshFiles,
                 globalError,
                 setGlobalError,
-                facebookAccount,
                 reportResult,
                 setReportResult,
                 isLoading,

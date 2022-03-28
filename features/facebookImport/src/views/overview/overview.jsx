@@ -10,10 +10,12 @@ import { useHistory } from "react-router";
 import { formatTime } from "../../utils/formatTime.js";
 
 import "./overview.css";
+import { FileLoaderContext } from "../../context/file-loader-context.jsx";
 
 const Overview = () => {
-    const { facebookAccount, files, handleRemoveFile } =
-        useContext(ImporterContext);
+    const { files, handleRemoveFile } = useContext(ImporterContext);
+
+    const { facebookAccount } = useContext(FileLoaderContext);
 
     const [showNewImportDialog, setShowNewImportDialog] = useState(false);
     const history = useHistory();
