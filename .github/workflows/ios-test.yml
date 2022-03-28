@@ -35,7 +35,7 @@ jobs:
               run: |
                   cd platform/ios
                   make build_core
-            - name: Build and test iOS
+            - name: Test iOS app
               run: |
                   cd platform/ios
                   make test
