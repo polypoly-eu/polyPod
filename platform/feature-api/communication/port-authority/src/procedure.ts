@@ -103,7 +103,7 @@ export function client<Req, Res>(port: RequestPort<Req, Res>): Procedure<Req, Re
 /**
  * Add a [[Procedure]] as a handler to a [[ResponsePort]].
  *
- * This function uses [[ReceiverPort.addHandler]] to add a new handler to the given [[ResponsePort]]. Upon receiving a
+ * This function uses [[ReceivePort.addHandler]] to add a new handler to the given [[ResponsePort]]. Upon receiving a
  * message, the given procedure is executed. If the procedure succeeds, the [[PromiseResolvers.resolve]] callback is
  * invoked. If the procedure fails, the [[PromiseResolvers.reject]] callback is invoked.
  *
