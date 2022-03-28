@@ -23,10 +23,15 @@ function parseCommandLine() {
     const start =
         startIndex !== -1 ? parameters.splice(startIndex, 2)[1] : null;
 
+    const skipRootInstallIndex = parameters.indexOf("--skip-root-install");
+    const skipRootInstall = skipRootInstallIndex > -1;
+    if (skipRootInstall) {
+        parameters.splice(skipRootInstallIndex, 1);
+    }
+
     if (parameters.length > 1) return { scriptPath, command: null };
 
     const command = parameters.length ? parameters[0] : "build";
-    const skipRootInstall = parameters.indexOf("--skip-root-install");
     return {
         scriptPath,
         command: validCommands.includes(command) ? command : null,
@@ -39,7 +44,7 @@ function showUsage(scriptPath) {
     const baseName = path.basename(scriptPath);
     const validCommandString = validCommands.join(" | ");
     console.error(
-        `Usage: ${baseName} [ --start PACKAGE_NAME ] [ ${validCommandString} ]`
+        `Usage: ${baseName} [ --start PACKAGE_NAME ] [ --skip-root-install ] [ ${validCommandString} ]`
     );
     console.error(" Run without arguments to build all packages");
 }
