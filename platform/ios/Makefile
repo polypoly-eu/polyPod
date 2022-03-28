@@ -16,19 +16,23 @@ else
 xcodebuild := xcodebuild
 endif
 
+.PHONY: build_core
+build_core:
+	make -C ../core build_ios_xcframework
+
 .PHONY: lockxcodeversion
 lockxcodeversion:
 	sudo xcode-select -switch /Applications/Xcode_13.2.1.app
 
 .PHONY: build
-build:
+build: build_core
 	$(xcodebuild) clean build \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
 		$(xcpretty)
 
 .PHONY: test
-test:
+test: build_core
 	$(xcodebuild) clean test \
 		-project $(project_path) \
 		-scheme $(scheme_name) \
@@ -36,7 +40,7 @@ test:
 		$(xcpretty)
 
 .PHONY: archive
-archive:
+archive: build_core
 	rm -rf $(archive_path)
 	$(xcodebuild) clean archive \
 		-project $(project_path) \
