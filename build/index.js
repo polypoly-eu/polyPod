@@ -14,29 +14,29 @@ async function processPackage(name, packageTree, command) {
     if (!(name in packageTree)) throw `Unable to find package ${name}`;
 
     const pkg = packageTree[name];
-    if (pkg.isProcessed) return;
+    if (pkg.processed) return;
 
     for (let dep of pkg.localDependencies)
         await processPackage(dep, packageTree, command);
 
     if (command === "list") {
-        if (!Object.values(packageTree).some((pkg) => pkg.isProcessed))
+        if (!Object.values(packageTree).some((pkg) => pkg.processed))
             logMain("Listing all packages in build order");
         console.log(`${name} (${pkg.path})`);
-        pkg.setProcessed();
+        pkg.processed = true;
         return;
     }
 
     const entries = Object.entries(packageTree);
     const total = entries.length;
-    const current = entries.filter(([, pkg]) => pkg.isProcessed).length + 1;
+    const current = entries.filter(([, pkg]) => pkg.processed).length + 1;
     logMain(
         `Executing ${command} for ${ANSIBold(
             pkg.path
         )} [${current}/${total}] ...`
     );
     await pkg.executeCommand(command);
-    pkg.setProcessed();
+    pkg.processed = true;
 }
 
 async function processAll(packageTree, command) {

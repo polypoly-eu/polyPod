@@ -31,6 +31,7 @@ class Pkg {
         this.localDependencies = localDependencies;
         this.remoteDependencies = remoteDependencies;
         this.scripts = Object.keys(manifest.scripts || {});
+        this.processed = false;
     }
 
     async sync() {
@@ -72,10 +73,6 @@ class Pkg {
         await this.npmRun("test");
     }
 
-    async clean() {
-        await this.clean();
-    }
-
     async syncdeps() {
         await this.sync();
     }
@@ -93,14 +90,6 @@ class Pkg {
         } finally {
             process.chdir(oldPath);
         }
-    }
-
-    get isProcessed() {
-        return this._processed;
-    }
-
-    setProcessed() {
-        this._processed = true;
     }
 }
 
