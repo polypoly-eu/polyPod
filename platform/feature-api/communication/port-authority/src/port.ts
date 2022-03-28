@@ -83,7 +83,7 @@ export function mapReceivePort<In, In2>(
 }
 
 /**
- * A raw port for types `In` and `Out` is a [[SendPort]] for type `Out` and a [[rxMappingPort]] for type `In`.
+ * A raw port for types `In` and `Out` is a [[SendPort]] for type `Out` and a [[receivePort]] for type `In`.
  *
  * A mapping operation for both type parameters is provided as [[mapPort]].
  *
@@ -95,7 +95,7 @@ export interface Port<In, Out> extends TxPort<Out>, ReceivePort<In> {}
 /**
  * Maps a [[Port]] on both the incoming (covariant) and outgoing (contravariant) messages.
  *
- * See [[txMappingPort]] and [[rxMappingPort]] for the components.
+ * See [[txMappingPort]] and [[receivePort]] for the components.
  */
 export function mapPort<In1, Out1, In2, Out2>(
     port: Port<In1, Out1>,
