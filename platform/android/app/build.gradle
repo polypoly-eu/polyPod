@@ -226,5 +226,10 @@ tasks.whenTaskAdded { task ->
         task.dependsOn copyThirdPartyLicenses
         task.dependsOn copyEndpoints
     }
-    task.dependsOn copyTestFeatureOntoDevice
+    if (
+        task.name == "connectedDebugAndroidTest" ||
+        task.name == "connectedReleaseAndroidTest" ||
+        task.name == "generateDebugAndroidTestAssets"
+    )
+        task.dependsOn copyTestFeatureOntoDevice
 }
