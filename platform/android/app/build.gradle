@@ -186,7 +186,7 @@ task copyThirdPartyLicenses(type: Copy) {
     into "build/generated-assets/3rd-party-licenses"
 }
 
-task installAppOnDevice {
+/*task installAppOnDevice {
     dependsOn "assembleDebug"
     doLast {
         exec {
@@ -196,7 +196,7 @@ task installAppOnDevice {
             logger.info("Application installed onto the device")
         }
     }
-}
+}*/
 
 task copyEndpoints(type: Copy) {
     from "../../../../polyPod-config"
@@ -204,7 +204,7 @@ task copyEndpoints(type: Copy) {
 }
 
 task packageTestFeature(type: Zip) {
-    dependsOn installAppOnDevice
+    // dependsOn installAppOnDevice
     archiveFileName = "test.zip"
     destinationDirectory = file("$buildDir")
     from "$projectDir/../../../features/test/dist"
