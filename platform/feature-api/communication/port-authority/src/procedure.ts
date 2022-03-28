@@ -11,7 +11,7 @@
  * @packageDocumentation
  */
 
-import { Handler, Port, ReceivePort, TxPort } from "./port";
+import { Handler, Port, ReceivePort, SendPort } from "./port";
 
 /**
  * A pair of `resolve` and `reject` callbacks that resolve an underlying `Promise`.
@@ -65,7 +65,7 @@ export type ResponsePort<Req, Res> = ReceivePort<WithResolvers<Req, Res>>;
  * semantics is that this represents a _client_ that sends requests and additionally passes callbacks to the server
  * for the response.
  */
-export type RequestPort<Req, Res> = TxPort<WithResolvers<Req, Res>>;
+export type RequestPort<Req, Res> = SendPort<WithResolvers<Req, Res>>;
 
 /**
  * A _procedure_ is any function that asynchronously maps a request to a response.
