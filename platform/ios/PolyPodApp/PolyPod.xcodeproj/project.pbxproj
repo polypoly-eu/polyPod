@@ -98,7 +98,6 @@
 		901C058B278F2D4A00BC8364 /* CoreData+PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */; };
 		901C058C278F34A800BC8364 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0587278EE58700BC8364 /* CoreDataStack.swift */; };
 		9049ECA427BCE8B70059605A /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9049ECA327BCE8B70059605A /* CocoaLumberjackSwift */; };
-		904CBEDE27F1D77400463085 /* CoreModule in Frameworks */ = {isa = PBXBuildFile; productRef = 904CBEDD27F1D77400463085 /* CoreModule */; };
 		904D4A7027905D5B00A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
 		904D4A712790633000A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
 		9063A7B727EB6DE600955E49 /* FlatBuffers in Frameworks */ = {isa = PBXBuildFile; productRef = 9063A7B627EB6DE600955E49 /* FlatBuffers */; };
@@ -246,7 +245,6 @@
 		9015F60827EB0F7900DC6142 /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
 		901C0587278EE58700BC8364 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+PolyIn.swift"; sourceTree = "<group>"; };
-		904CBEDB27F1D60200463085 /* CoreModule */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CoreModule; sourceTree = "<group>"; };
 		904CBEDC27F1D61E00463085 /* CoreModule */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CoreModule; sourceTree = "<group>"; };
 		904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchToMainQueue.swift; sourceTree = "<group>"; };
 		9063A7B527EB6DDB00955E49 /* swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = swift; path = ../../core/flatbuffers_shared/flatbuffers/swift; sourceTree = "<group>"; };
@@ -312,7 +310,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9BE2909264BBD67003EC8AE /* Zip in Frameworks */,
-				904CBEDE27F1D77400463085 /* CoreModule in Frameworks */,
 				E9BE2906264BBAA0003EC8AE /* MessagePack in Frameworks */,
 				9063A7B727EB6DE600955E49 /* FlatBuffers in Frameworks */,
 				9049ECA427BCE8B70059605A /* CocoaLumberjackSwift in Frameworks */,
@@ -399,7 +396,6 @@
 		1AA6DE2624191C94008DB1B2 = {
 			isa = PBXGroup;
 			children = (
-				904CBEDB27F1D60200463085 /* CoreModule */,
 				9063A7E027EC637000955E49 /* FlatbuffersGenerated */,
 				904D4A6E27905D4C00A75AED /* Utils */,
 				E9018EDF276370B500FDF34A /* Core */,
@@ -677,7 +673,6 @@
 				E9BE2908264BBD67003EC8AE /* Zip */,
 				9049ECA327BCE8B70059605A /* CocoaLumberjackSwift */,
 				9063A7B627EB6DE600955E49 /* FlatBuffers */,
-				904CBEDD27F1D77400463085 /* CoreModule */,
 			);
 			productName = PolyPod;
 			productReference = 1AA6DE2F24191C94008DB1B2 /* PolyPod.app */;
@@ -1243,7 +1238,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/../../core/export/ios",
 				);
 				INFOPLIST_FILE = PolyPod/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1272,7 +1266,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/../../core/export/ios",
 				);
 				INFOPLIST_FILE = PolyPod/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1410,10 +1403,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9049ECA227BCE8B70059605A /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
 			productName = CocoaLumberjackSwift;
-		};
-		904CBEDD27F1D77400463085 /* CoreModule */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CoreModule;
 		};
 		9063A7B627EB6DE600955E49 /* FlatBuffers */ = {
 			isa = XCSwiftPackageProductDependency;

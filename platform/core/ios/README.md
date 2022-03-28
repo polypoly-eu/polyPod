@@ -1,3 +1,3 @@
-# CoreModule
+# ios
 
 A description of this package.
