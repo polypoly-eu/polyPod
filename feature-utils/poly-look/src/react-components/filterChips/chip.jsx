@@ -10,9 +10,12 @@ import "./chip.css";
  * @param {boolean} [active] - Indicates whether the chip is selected (active) or not.
  */
 
-const Chip = ({ id, translation, handleClick = () => {}, active }) => {
+const Chip = ({ id, translation, handleClick, active }) => {
   return (
-    <button className={active ? "chip selected" : "chip"} onClick={handleClick}>
+    <button
+      className={active ? "chip selected" : "chip"}
+      onClick={() => (handleClick ? handleClick(id) : {})}
+    >
       {translation || id}
     </button>
   );

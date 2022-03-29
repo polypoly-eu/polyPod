@@ -127,7 +127,7 @@ const FilterChips = ({
             <Chip
               id={id}
               translation={e.translation}
-              handleClick={handleChipClick(id)}
+              handleClick={handleChipClick}
               active={isChipActive(id)}
             />
           </div>
