@@ -4,14 +4,14 @@ import {
     FileSelectionError,
     FileImportError,
 } from "../../errors/polyIn-errors.js";
-
 import ProgressBarComponent from "../../components/progressBar/progressBar.jsx";
 import ImportExplanationExpandable from "../../components/importExplanationExpandable/importExplanationExpandable.jsx";
-
-import "./import.css";
 import i18n from "../../i18n.js";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
 import { FileLoaderContext } from "../../context/file-loader-context.jsx";
+import { FBIMPORT_NAMESPACE } from "../../constants.js";
+
+import "./import.css";
 
 //These are just the sections that are shown as a visual part of the import
 //importSteps are all steps like loading and finished that have logical relevance for the process
@@ -30,16 +30,14 @@ const maxFileSizeSupported = {
     text: "2 GB",
 };
 
-const namespace = "http://polypoly.coop/schema/fbImport/";
-
 //from storage
 async function readImportStatus(pod) {
     const { dataFactory } = pod;
     const statusQuads = await pod.polyIn.select({
-        subject: dataFactory.namedNode(`${namespace}facebookImporter`),
-        predicate: dataFactory.namedNode(`${namespace}importStatus`),
+        subject: dataFactory.namedNode(`${FBIMPORT_NAMESPACE}facebookImporter`),
+        predicate: dataFactory.namedNode(`${FBIMPORT_NAMESPACE}importStatus`),
     });
-    let status = statusQuads[0]?.object?.value?.split(namespace)[1];
+    let status = statusQuads[0]?.object?.value?.split(FBIMPORT_NAMESPACE)[1];
     return status || importSteps.beginning;
 }
 
@@ -47,15 +45,19 @@ async function writeImportStatus(pod, status) {
     const { dataFactory, polyIn } = pod;
     const existingQuad = (
         await pod.polyIn.select({
-            subject: dataFactory.namedNode(`${namespace}facebookImporter`),
-            predicate: dataFactory.namedNode(`${namespace}importStatus`),
+            subject: dataFactory.namedNode(
+                `${FBIMPORT_NAMESPACE}facebookImporter`
+            ),
+            predicate: dataFactory.namedNode(
+                `${FBIMPORT_NAMESPACE}importStatus`
+            ),
         })
     )[0];
     if (existingQuad) await polyIn.delete(existingQuad);
     const quad = dataFactory.quad(
-        dataFactory.namedNode(`${namespace}facebookImporter`),
-        dataFactory.namedNode(`${namespace}importStatus`),
-        dataFactory.namedNode(`${namespace}${status}`)
+        dataFactory.namedNode(`${FBIMPORT_NAMESPACE}facebookImporter`),
+        dataFactory.namedNode(`${FBIMPORT_NAMESPACE}importStatus`),
+        dataFactory.namedNode(`${FBIMPORT_NAMESPACE}${status}`)
     );
     await polyIn.add(quad);
 }

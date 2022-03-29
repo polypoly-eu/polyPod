@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { INITIAL_HISTORY_STATE } from "../../../constants/constants";
+import { INITIAL_HISTORY_STATE } from "../../constants";
 
 const RouteButton = ({
     route,
