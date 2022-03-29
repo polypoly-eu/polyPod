@@ -36,6 +36,7 @@ jobs:
                       - '.eslintrc.cjs'
                       apiAndFeatures:
                       - 'build/**'
+                      - 'dev-utils/dummy-server'
                       - 'features/**'
                       - 'feature-utils/**'
                       - 'platform/feature-api/**'

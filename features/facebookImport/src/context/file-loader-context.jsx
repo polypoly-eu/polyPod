@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import Storage from "../model/storage.js";
+import { FeatureFileStorage } from "@polypoly-eu/feature-file-storage";
 import { analyzeFile } from "../model/analysis.js";
 import { importData } from "../model/importer.js";
 
@@ -49,7 +49,7 @@ export const FileLoaderProvider = ({ children, parentContext }) => {
 
     useEffect(() => {
         if (!pod) return;
-        const storage = new Storage(pod);
+        const storage = new FeatureFileStorage(pod);
         storage.changeListener = async () => {
             const resolvedFiles = [];
             for (const file of storage.files) {

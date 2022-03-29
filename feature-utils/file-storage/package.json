@@ -1,0 +1,6 @@
+{
+  "name": "@polypoly-eu/feature-file-storage",
+  "main": "src/index.js",
+  "private": true,
+  "type": "module"
+}
