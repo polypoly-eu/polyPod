@@ -1,5 +1,5 @@
-export_dir_ios = export/ios
-swift_core = PolyPodCoreSwift
+export_dir_ios := export/ios
+swift_core := PolyPodCoreSwift
 ios_archs := aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios
 ios_targets := iPhone simulator
 build_type := $(if $(filter $(MODE), release),release,debug)
@@ -49,6 +49,7 @@ endif
 	@echo "module PolyPodCore { header \"polypod-core.h\" export * }" >> $(export_dir_ios)/headers/module.modulemap
 
 	# Package xcframework
+	rm -r $(swift_core)/PolyPodCore.xcframework
 	xcodebuild -create-xcframework \
 	    $(foreach target, $(ios_targets), -library $(export_dir_ios)/$(target)/libpolypod_core.a -headers $(export_dir_ios)/headers) \
 		-output $(swift_core)/PolyPodCore.xcframework

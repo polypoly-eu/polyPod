@@ -181,10 +181,7 @@ mod tests {
 
         let mut parsed_links: HashMap<String, String> = HashMap::new();
         for link in parsed_manifest.links().unwrap() {
-            parsed_links.insert(
-                link.name().to_string(),
-                link.url().to_string(),
-            );
+            parsed_links.insert(link.name().to_string(), link.url().to_string());
         }
 
         assert_eq!(parsed_links, expected_manifest.links.unwrap());
