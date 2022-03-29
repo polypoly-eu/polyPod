@@ -43,7 +43,7 @@ const relativeDecoder = pipe(
     })
 );
 
-/* It's a type alias for a decoder that would decode a manifest */
+/* It is a type alias for a decoder that would decode a manifest */
 const manifestDecoder = Decoder.type({
     name: Decoder.string,
     description: Decoder.string,
