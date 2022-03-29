@@ -306,18 +306,8 @@ class IDBPolyOut implements PolyOut {
 
     readFile(path: string, options: EncodingOptions): Promise<string>;
 
-    /** Reads a file asynchronously and returns the contents as a Uint8Array.
-     * @param {string} path - The path of the file to read.
-     * @returns A promise that resolves to a Uint8Array.
-     */
     readFile(path: string): Promise<Uint8Array>;
 
-    /**
-     * It reads a file from the local storage
-     * @param {string} id - The id of the file to read.
-     * @param {EncodingOptions} [options] - EncodingOptions
-     * @returns The promise returns a string or a Uint8Array.
-     */
     readFile(
         id: string,
         options?: EncodingOptions
@@ -356,11 +346,6 @@ class IDBPolyOut implements PolyOut {
         throw "Not implemented: writeFile";
     }
 
-    /**
-     * It takes a URL string, downloads the file, and stores it in the browser's local storage
-     * @param {string} url - The URL of the file to be downloaded.
-     * @returns The fileId of the file that was just added to the archive.
-     */
     async importArchive(url: string): Promise<string> {
         const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
         const blob = await (await fetch(dataUrl)).blob();
@@ -382,11 +367,6 @@ class IDBPolyOut implements PolyOut {
         });
     }
 
-    /**
-     * removeArchive() removes the file with the given fileId from the local storage
-     * @param {string} fileId - The id of the file to be removed.
-     * @returns Nothing.
-     */
     async removeArchive(fileId: string): Promise<void> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
@@ -403,18 +383,10 @@ class IDBPolyOut implements PolyOut {
  * @class PodJsInfo
  */
 class PodJsInfo implements Info {
-    /**
-     * It returns the runtime name.
-     * @returns The runtime name as a string.
-     */
     async getRuntime(): Promise<string> {
         return "podjs";
     }
 
-    /**
-     * It returns a version.
-     * @returns A string.
-     */
     async getVersion(): Promise<string> {
         return "¯\\_(ツ)_/¯";
     }
@@ -590,16 +562,6 @@ function endpointErrorMessage(fetchType: string, errorlog: string): string {
 class BrowserEndpoint implements Endpoint {
     endpointNetwork = new BrowserNetwork();
 
-    /**
-     * Sends a message to a specific endpoint
-     * @param {string} endpointId - The ID of the endpoint to send the request to.
-     * @param {string} featureIdToken - The featureIdToken is the token that the user has approved for the
-     * feature.
-     * @param {string} payload - The payload to send to the endpoint.
-     * @param {string} [contentType] - The content type of the payload.
-     * @param {string} [authToken] - The token to use for authentication. If not provided, the default
-     * token will be used.
-     */
     async send(
         endpointId: EndpointKeyId,
         payload: string,
@@ -827,8 +789,8 @@ function createNavBarFrame(title: string): HTMLElement {
     frame.style.display = "block";
     frame.style.width = "100%";
     frame.style.height = "50px";
-    frame.frameBorder = "0"; //TODO: @deprecated
-    frame.scrolling = "no"; //TODO: @deprecated
+    frame.frameBorder = "0";
+    frame.scrolling = "no";
     frame.id = NAV_FRAME_ID;
 
     const navBarColors = determineNavBarColors(window.manifest);
@@ -850,7 +812,7 @@ function createNavBarFrame(title: string): HTMLElement {
 }
 
 /**
- * The @class BrowserPod is a Pod that uses the browser's local storage to store poly-in and poly-out data
+ * The @class BrowserPod is a Pod that uses the browser's local storage to store polyIn and polyOut data
  */
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
