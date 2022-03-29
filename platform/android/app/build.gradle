@@ -187,6 +187,7 @@ task copyThirdPartyLicenses(type: Copy) {
 }
 
 task installAppOnDevice {
+    // This is needed to install the Java package into the device
     dependsOn "assembleDebug"
     doLast {
         exec {
@@ -204,6 +205,7 @@ task copyEndpoints(type: Copy) {
 }
 
 task packageTestFeature(type: Zip) {
+    // This needs the prior installation of the package, thus the dependency
     dependsOn installAppOnDevice
     archiveFileName = "test.zip"
     destinationDirectory = file("$buildDir")
@@ -239,6 +241,8 @@ tasks.whenTaskAdded { task ->
         task.dependsOn copyThirdPartyLicenses
         task.dependsOn copyEndpoints
     }
+
+    // This avoids circular dependencies in those cases
     if (
         task.name == "connectedDebugAndroidTest" ||
         task.name == "connectedReleaseAndroidTest" ||
