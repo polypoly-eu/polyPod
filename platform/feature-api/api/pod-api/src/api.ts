@@ -127,22 +127,25 @@ export interface PolyOut extends Omit<FS, "readdir"> {
  */
 export interface PolyNav {
     /**
-     * A way for features to display a contents of a web page
+     * A way for features to display a contents of a web page of the given URL.
+     * @param {string} url - The URL to open.
      */
     openUrl(url: string): Promise<void>;
     /**
-     * Describe what actions are possible within the pod when a feature is loaded
+     * Describe what keyboard navigation actions are possible within the pod when a feature is loaded
+     * @param {string[]} actions - A list of actions that the user can take.
      */
     setActiveActions(actions: string[]): Promise<void>;
     /**
      * Set a title in of a Pod
+     * @param {string} title - The title to set.s
      */
     setTitle(title: string): Promise<void>;
     /**
-     * Ask the user to pick a file
-     * @param type the type of file the user is asked to select, as a valid MIME type string. If no type is passed, the user can chose any type of file.
+     * Ask the user to pick a file via a dialog and returns the selected file.
+     * @param {string} [type] - The type of file the user is asked to select, as a valid MIME type string. If no type is passed, the user can chose any type of file.
      * @throws if an unsupported MIME type was passed as the type argument.
-     * @return an ExternalFile Object or `null` if the user cancelled.
+     * @return The promise resolves with an ExternalFile Object or `null` if the user cancelled.
      */
     pickFile(type?: string): Promise<ExternalFile | null>;
 }
@@ -153,11 +156,13 @@ export interface PolyNav {
 export interface Info {
     /**
      * A way for features to read the polyPod runtime identification
+     * @returns The runtime name as a string.
      */
     getRuntime(): Promise<string>;
 
     /**
      * A way for features to read the user visible polyPod version
+     * @returns A string of the version number.
      */
     getVersion(): Promise<string>;
 }
@@ -171,7 +176,7 @@ export interface PolyLifecycle {
 }
 
 /**
- * `Endpoint` is the API features communicate with in order to perform fetch requests
+ * @class Endpoint is the API features communicate with in order to perform fetch requests
  */
 export interface Endpoint {
     /**
@@ -185,6 +190,7 @@ export interface Endpoint {
      */
     send(
         endpointId: string,
+        featureIdToken: string,
         payload: string,
         contentType?: string,
         authToken?: string
@@ -198,7 +204,12 @@ export interface Endpoint {
      * @returns a promise with the payload of the response
      * @throws if an unsupported request goes through, if an endpoint is not reached, if a user denies a request or if response is null
      */
-    get(endpointId: string, contentType?: string, authToken?: string): Promise<string>;
+    get(
+        endpointId: string,
+        featureIdToken: string,
+        contentType?: string,
+        authToken?: string
+    ): Promise<string>;
 }
 
 /**
