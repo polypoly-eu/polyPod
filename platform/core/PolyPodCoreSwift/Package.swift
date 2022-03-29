@@ -25,7 +25,7 @@ let package = Package(
             ]
         ),
         .binaryTarget(name: "PolyPodCore",
-                      path: "../export/ios/PolyPodCore.xcframework"),
+                      path: "PolyPodCore.xcframework"),
         .testTarget(
             name: "PolyPodCoreSwiftTests",
             dependencies: ["PolyPodCoreSwift"]),

@@ -1,4 +1,5 @@
 export_dir_ios = export/ios
+swift_core = PolyPodCoreSwift
 ios_archs := aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios
 ios_targets := iPhone simulator
 build_type := $(if $(filter $(MODE), release),release,debug)
@@ -50,7 +51,7 @@ endif
 	# Package xcframework
 	xcodebuild -create-xcframework \
 	    $(foreach target, $(ios_targets), -library $(export_dir_ios)/$(target)/libpolypod_core.a -headers $(export_dir_ios)/headers) \
-		-output $(export_dir_ios)/PolyPodCore.xcframework
+		-output $(swift_core)/PolyPodCore.xcframework
 
 define build_for_architecture
 	rustup target add $(1)
