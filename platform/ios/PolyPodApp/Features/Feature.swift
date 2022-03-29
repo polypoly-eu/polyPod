@@ -52,7 +52,7 @@ class Feature {
         var links: [String: String] = [:]
         for idx in 0..<manifest.linksCount {
             if let link = manifest.links(at: idx) {
-                links[link.name!] = link.url!
+                links[link.name] = link.url
             }
         }
         self.init(path: path,

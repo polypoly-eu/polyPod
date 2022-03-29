@@ -1,6 +1,6 @@
 table Link {
-    name:string;
-    url:string;
+    name:string (required);
+    url:string (required);
 }
 
 table FeatureManifest {
