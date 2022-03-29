@@ -1,54 +1,255 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-    <title>Test Feature</title>
-    <script src="test.js"></script>
-    <script src="/pod.js" async></script>
-</head>
-<body>
-<span id="status">Starting</span>
-<span id="result"></span>
-<input id="input.1"/><input id="input.2"/><input id="input.3"/><input id="input.4"/>
-<button id="javascript.simple" onclick="testFeature.execute(() => testFeature.simpleJavaScriptCall())">javascript.simple</button>
-<button id="podApi.resolves" onclick="testFeature.execute(() => testFeature.awaitPodObject())">podApi.resolves</button>
-<button id="comm.polyOut.fetch.simple" onclick="testFeature.execute(() => testFeature.simpleFetch())">comm.polyOut.fetch.simple</button>
-<button id="comm.polyOut.fetch.empty_method" onclick="testFeature.execute(() => testFeature.callFetchWithNoMethod())">comm.polyOut.fetch.empty_method</button>
-<button id="comm.polyOut.fetch.post_method" onclick="testFeature.execute(() => testFeature.callFetchWithPostMethod())">comm.polyOut.fetch.post_method</button>
-<button id="comm.polyOut.fetch.single_string_header" onclick="testFeature.execute(() => testFeature.callFetchWithSingleHeaderInStringForm())">comm.polyOut.fetch.single_string_header</button>
-<button id="comm.polyOut.fetch.multiple_string_headers" onclick="testFeature.execute(() => testFeature.callFetchWithMultipleHeadersInStringForm())">comm.polyOut.fetch.multiple_string_headers</button>
-<button id="comm.polyOut.fetch.get_static_response" onclick="testFeature.execute(() => testFeature.verifyBodyOfFetchResponse())">comm.polyOut.fetch.get_static_response</button>
-<button id="comm.polyOut.fetch.get_response_status" onclick="testFeature.execute(() => testFeature.verifyResponseStatusOfFetchCall())">comm.polyOut.fetch.get_response_status</button>
-<button id="comm.polyOut.fetch.get_response_ok" onclick="testFeature.execute(() => testFeature.verifyResponseOkOfFetchCall())">comm.polyOut.fetch.get_response_ok</button>
-<button id="comm.polyOut.fetch.post_body" onclick="testFeature.execute(() => testFeature.callFetchWithPostMethodAndBody())">comm.polyOut.fetch.post_body</button>
-<button id="comm.polyIn.add.no_quads" onclick="testFeature.execute(() => testFeature.canCallPolyInAddWithNoQuads())">comm.polyIn.add.no_quads</button>
-<button id="comm.polyIn.add.single_quad" onclick="testFeature.execute(() => testFeature.canCallPolyInAddWithSingleQuad())">comm.polyIn.add.single_quad</button>
-<button id="comm.polyIn.add.multiple_quads" onclick="testFeature.execute(() => testFeature.canCallPolyInAddWithMultipleQuads())">comm.polyIn.add.multiple_quads</button>
-<button id="comm.polyIn.add.quad_with_named_node_subject" onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithNamedNodeSubject())">comm.polyIn.add.quad_with_named_node_subject</button>
-<button id="comm.polyIn.add.quad_with_blank_node_subject" onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithBlankNodeSubject())">comm.polyIn.add.quad_with_blank_node_subject</button>
-<button id="comm.polyIn.add.quad_with_named_node_object" onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithNamedNodeObject())">comm.polyIn.add.quad_with_named_node_object</button>
-<button id="comm.polyIn.add.quad_with_blank_node_object" onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithBlankNodeObject())">comm.polyIn.add.quad_with_blank_node_object</button>
-<button id="comm.polyIn.add.quad_with_literal_object" onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithLiteralObject())">comm.polyIn.add.quad_with_literal_object</button>
-<button id="comm.polyIn.add.quad_with_named_node_graph" onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithNamedNodeGraph())">comm.polyIn.add.quad_with_named_node_graph</button>
-<button id="comm.polyIn.add.quad_with_blank_node_graph" onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithBlankNodeGraph())">comm.polyIn.add.quad_with_blank_node_graph</button>
-<button id="comm.polyIn.select.pass_empty_matcher" onclick="testFeature.execute(() => testFeature.canPassEmptyMatcherToPolyInSelect())">comm.polyIn.select.pass_empty_matcher</button>
-<button id="comm.polyIn.add.quad_with_default_graph" onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithDefaultGraph())">comm.polyIn.add.quad_with_default_graph</button>
-<button id="comm.polyIn.select.pass_matcher_with_subject" onclick="testFeature.execute(() => testFeature.canPassMatcherWithSubjectToPolyInSelect())">comm.polyIn.select.pass_matcher_with_subject</button>
-<button id="comm.polyIn.select.pass_matcher_with_predicate" onclick="testFeature.execute(() => testFeature.canPassMatcherWithPredicateToPolyInSelect())">comm.polyIn.select.pass_matcher_with_predicate</button>
-<button id="comm.polyIn.select.pass_matcher_with_object" onclick="testFeature.execute(() => testFeature.canPassMatcherWithObjectToPolyInSelect())">comm.polyIn.select.pass_matcher_with_object</button>
-<button id="comm.polyIn.select.pass_matcher_with_all_three_fields" onclick="testFeature.execute(() => testFeature.canPassMatcherWithAllThreeFieldsToPolyInSelect())">comm.polyIn.select.pass_matcher_with_all_three_fields</button>
-<button id="comm.polyIn.select.get_empty_array" onclick="testFeature.execute(() => testFeature.canGetEmptyArrayFromPolyInSelect())">comm.polyIn.select.get_empty_array</button>
-<button id="comm.polyIn.select.get_array_with_single_quad" onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadFromPolyInSelect())">comm.polyIn.select.get_array_with_single_quad</button>
-<button id="comm.polyIn.select.get_array_with_single_quad_with_named_node_subject" onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithNamedNodeSubjectFromPolyInSelect())">comm.polyIn.select.get_array_with_single_quad_with_named_node_subject</button>
-<button id="comm.polyIn.select.get_array_with_single_quad_with_blank_node_subject" onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSelect())">comm.polyIn.select.get_array_with_single_quad_with_blank_node_subject</button>
-<button id="comm.polyIn.select.get_array_with_single_quad_with_named_node_object" onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithNamedNodeObjectFromPolyInSelect())">comm.polyIn.select.get_array_with_single_quad_with_named_node_object</button>
-<button id="comm.polyIn.select.get_array_with_single_quad_with_blank_node_object" onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSelect())">comm.polyIn.select.get_array_with_single_quad_with_blank_node_object</button>
-<button id="comm.polyIn.select.get_array_with_single_quad_with_literal_object" onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithLiteralObjectFromPolyInSelect())">comm.polyIn.select.get_array_with_single_quad_with_literal_object</button>
-<button id="comm.polyIn.select.get_array_with_single_quad_with_named_node_graph" onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithNamedNodeGraphFromPolyInSelect())">comm.polyIn.select.get_array_with_single_quad_with_named_node_graph</button>
-<button id="comm.polyIn.select.get_array_with_single_quad_with_blank_node_graph" onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelect())">comm.polyIn.select.get_array_with_single_quad_with_blank_node_graph</button>
-<button id="comm.polyIn.select.get_array_with_single_quad_with_default_graph" onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithDefaultGraphFromPolyInSelect())">comm.polyIn.select.get_array_with_single_quad_with_default_graph</button>
-<button id="comm.polyIn.select.get_array_with_multiple_quads" onclick="testFeature.execute(() => testFeature.canGetArrayWithMultipleQuadsFromPolyInSelect())">comm.polyIn.select.get_array_with_multiple_quads</button>
+    <head>
+        <title>Test Feature</title>
+        <script src="test.js"></script>
+    </head>
+    <body>
+        <span id="status">Starting</span>
+        <span id="result"></span>
+        <input id="input.1" /><input id="input.2" /><input id="input.3" /><input
+            id="input.4"
+        />
+        <button
+            id="javascript.simple"
+            onclick="testFeature.execute(() => testFeature.simpleJavaScriptCall())"
+        >
+            javascript.simple
+        </button>
+        <button
+            id="podApi.resolves"
+            onclick="testFeature.execute(() => testFeature.awaitPodObject())"
+        >
+            podApi.resolves
+        </button>
+        <button
+            id="comm.polyOut.fetch.simple"
+            onclick="testFeature.execute(() => testFeature.simpleFetch())"
+        >
+            comm.polyOut.fetch.simple
+        </button>
+        <button
+            id="comm.polyOut.fetch.empty_method"
+            onclick="testFeature.execute(() => testFeature.callFetchWithNoMethod())"
+        >
+            comm.polyOut.fetch.empty_method
+        </button>
+        <button
+            id="comm.polyOut.fetch.post_method"
+            onclick="testFeature.execute(() => testFeature.callFetchWithPostMethod())"
+        >
+            comm.polyOut.fetch.post_method
+        </button>
+        <button
+            id="comm.polyOut.fetch.single_string_header"
+            onclick="testFeature.execute(() => testFeature.callFetchWithSingleHeaderInStringForm())"
+        >
+            comm.polyOut.fetch.single_string_header
+        </button>
+        <button
+            id="comm.polyOut.fetch.multiple_string_headers"
+            onclick="testFeature.execute(() => testFeature.callFetchWithMultipleHeadersInStringForm())"
+        >
+            comm.polyOut.fetch.multiple_string_headers
+        </button>
+        <button
+            id="comm.polyOut.fetch.get_static_response"
+            onclick="testFeature.execute(() => testFeature.verifyBodyOfFetchResponse())"
+        >
+            comm.polyOut.fetch.get_static_response
+        </button>
+        <button
+            id="comm.polyOut.fetch.get_response_status"
+            onclick="testFeature.execute(() => testFeature.verifyResponseStatusOfFetchCall())"
+        >
+            comm.polyOut.fetch.get_response_status
+        </button>
+        <button
+            id="comm.polyOut.fetch.get_response_ok"
+            onclick="testFeature.execute(() => testFeature.verifyResponseOkOfFetchCall())"
+        >
+            comm.polyOut.fetch.get_response_ok
+        </button>
+        <button
+            id="comm.polyOut.fetch.post_body"
+            onclick="testFeature.execute(() => testFeature.callFetchWithPostMethodAndBody())"
+        >
+            comm.polyOut.fetch.post_body
+        </button>
+        <button
+            id="comm.polyIn.add.no_quads"
+            onclick="testFeature.execute(() => testFeature.canCallPolyInAddWithNoQuads())"
+        >
+            comm.polyIn.add.no_quads
+        </button>
+        <button
+            id="comm.polyIn.add.single_quad"
+            onclick="testFeature.execute(() => testFeature.canCallPolyInAddWithSingleQuad())"
+        >
+            comm.polyIn.add.single_quad
+        </button>
+        <button
+            id="comm.polyIn.add.multiple_quads"
+            onclick="testFeature.execute(() => testFeature.canCallPolyInAddWithMultipleQuads())"
+        >
+            comm.polyIn.add.multiple_quads
+        </button>
+        <button
+            id="comm.polyIn.add.quad_with_named_node_subject"
+            onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithNamedNodeSubject())"
+        >
+            comm.polyIn.add.quad_with_named_node_subject
+        </button>
+        <button
+            id="comm.polyIn.add.quad_with_blank_node_subject"
+            onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithBlankNodeSubject())"
+        >
+            comm.polyIn.add.quad_with_blank_node_subject
+        </button>
+        <button
+            id="comm.polyIn.add.quad_with_named_node_object"
+            onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithNamedNodeObject())"
+        >
+            comm.polyIn.add.quad_with_named_node_object
+        </button>
+        <button
+            id="comm.polyIn.add.quad_with_blank_node_object"
+            onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithBlankNodeObject())"
+        >
+            comm.polyIn.add.quad_with_blank_node_object
+        </button>
+        <button
+            id="comm.polyIn.add.quad_with_literal_object"
+            onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithLiteralObject())"
+        >
+            comm.polyIn.add.quad_with_literal_object
+        </button>
+        <button
+            id="comm.polyIn.add.quad_with_named_node_graph"
+            onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithNamedNodeGraph())"
+        >
+            comm.polyIn.add.quad_with_named_node_graph
+        </button>
+        <button
+            id="comm.polyIn.add.quad_with_blank_node_graph"
+            onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithBlankNodeGraph())"
+        >
+            comm.polyIn.add.quad_with_blank_node_graph
+        </button>
+        <button
+            id="comm.polyIn.select.pass_empty_matcher"
+            onclick="testFeature.execute(() => testFeature.canPassEmptyMatcherToPolyInSelect())"
+        >
+            comm.polyIn.select.pass_empty_matcher
+        </button>
+        <button
+            id="comm.polyIn.add.quad_with_default_graph"
+            onclick="testFeature.execute(() => testFeature.addSupportsQuadsWithDefaultGraph())"
+        >
+            comm.polyIn.add.quad_with_default_graph
+        </button>
+        <button
+            id="comm.polyIn.select.pass_matcher_with_subject"
+            onclick="testFeature.execute(() => testFeature.canPassMatcherWithSubjectToPolyInSelect())"
+        >
+            comm.polyIn.select.pass_matcher_with_subject
+        </button>
+        <button
+            id="comm.polyIn.select.pass_matcher_with_predicate"
+            onclick="testFeature.execute(() => testFeature.canPassMatcherWithPredicateToPolyInSelect())"
+        >
+            comm.polyIn.select.pass_matcher_with_predicate
+        </button>
+        <button
+            id="comm.polyIn.select.pass_matcher_with_object"
+            onclick="testFeature.execute(() => testFeature.canPassMatcherWithObjectToPolyInSelect())"
+        >
+            comm.polyIn.select.pass_matcher_with_object
+        </button>
+        <button
+            id="comm.polyIn.select.pass_matcher_with_all_three_fields"
+            onclick="testFeature.execute(() => testFeature.canPassMatcherWithAllThreeFieldsToPolyInSelect())"
+        >
+            comm.polyIn.select.pass_matcher_with_all_three_fields
+        </button>
+        <button
+            id="comm.polyIn.select.get_empty_array"
+            onclick="testFeature.execute(() => testFeature.canGetEmptyArrayFromPolyInSelect())"
+        >
+            comm.polyIn.select.get_empty_array
+        </button>
+        <button
+            id="comm.polyIn.select.get_array_with_single_quad"
+            onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadFromPolyInSelect())"
+        >
+            comm.polyIn.select.get_array_with_single_quad
+        </button>
+        <button
+            id="comm.polyIn.select.get_array_with_single_quad_with_named_node_subject"
+            onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithNamedNodeSubjectFromPolyInSelect())"
+        >
+            comm.polyIn.select.get_array_with_single_quad_with_named_node_subject
+        </button>
+        <button
+            id="comm.polyIn.select.get_array_with_single_quad_with_blank_node_subject"
+            onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSelect())"
+        >
+            comm.polyIn.select.get_array_with_single_quad_with_blank_node_subject
+        </button>
+        <button
+            id="comm.polyIn.select.get_array_with_single_quad_with_named_node_object"
+            onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithNamedNodeObjectFromPolyInSelect())"
+        >
+            comm.polyIn.select.get_array_with_single_quad_with_named_node_object
+        </button>
+        <button
+            id="comm.polyIn.select.get_array_with_single_quad_with_blank_node_object"
+            onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSelect())"
+        >
+            comm.polyIn.select.get_array_with_single_quad_with_blank_node_object
+        </button>
+        <button
+            id="comm.polyIn.select.get_array_with_single_quad_with_literal_object"
+            onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithLiteralObjectFromPolyInSelect())"
+        >
+            comm.polyIn.select.get_array_with_single_quad_with_literal_object
+        </button>
+        <button
+            id="comm.polyIn.select.get_array_with_single_quad_with_named_node_graph"
+            onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithNamedNodeGraphFromPolyInSelect())"
+        >
+            comm.polyIn.select.get_array_with_single_quad_with_named_node_graph
+        </button>
+        <button
+            id="comm.polyIn.select.get_array_with_single_quad_with_blank_node_graph"
+            onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelect())"
+        >
+            comm.polyIn.select.get_array_with_single_quad_with_blank_node_graph
+        </button>
+        <button
+            id="comm.polyIn.select.get_array_with_single_quad_with_default_graph"
+            onclick="testFeature.execute(() => testFeature.canGetArrayWithSingleQuadWithDefaultGraphFromPolyInSelect())"
+        >
+            comm.polyIn.select.get_array_with_single_quad_with_default_graph
+        </button>
+        <button
+            id="comm.polyIn.select.get_array_with_multiple_quads"
+            onclick="testFeature.execute(() => testFeature.canGetArrayWithMultipleQuadsFromPolyInSelect())"
+        >
+            comm.polyIn.select.get_array_with_multiple_quads
+        </button>
 
-<button id="comm.polyIn.clear_quad_collection" onclick="testFeature.clearQuadCollection()">comm.polyIn.clear_quad_collection</button>
-<button id="comm.polyIn.add_quad_to_collection" onclick="testFeature.addQuadToCollection()">comm.polyIn.add_quad_to_collection</button>
-</body>
+        <button
+            id="comm.polyIn.clear_quad_collection"
+            onclick="testFeature.clearQuadCollection()"
+        >
+            comm.polyIn.clear_quad_collection
+        </button>
+        <button
+            id="comm.polyIn.add_quad_to_collection"
+            onclick="testFeature.addQuadToCollection()"
+        >
+            comm.polyIn.add_quad_to_collection
+        </button>
+    </body>
 </html>

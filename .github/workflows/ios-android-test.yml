@@ -1,4 +1,4 @@
-name: Testing polyPod in iOS
+name: polyPod iOS/Android integration test
 on:
     push:
         paths:
@@ -7,6 +7,7 @@ on:
             - "platform/feature-api/**"
             - "platform/core/**"
             - "platform/ios/**"
+            - "platform/android/**"
     pull_request:
         types: [assigned, opened, ready_for_review]
         paths:
@@ -15,10 +16,11 @@ on:
             - "platform/core/**"
             - "platform/feature-api/**"
             - "platform/ios/**"
+            - "platform/android/**"
 jobs:
     test:
-        name: Testing polyPod iOS app
-        runs-on: macOS-11
+        name: Test polyPod iOS and Android app
+        runs-on: macOS-latest
         steps:
             - name: Checkout repository
               uses: actions/checkout@v2
@@ -32,10 +34,20 @@ jobs:
             - name: Build API and features
               run: ./build.js
             - name: Build core
-              run: |
-                  cd platform/ios
-                  make build_core
-            - name: Test iOS app
-              run: |
-                  cd platform/ios
-                  make test
+              working-directory: platform/ios
+              run: make build_core
+            - name: Build and test iOS
+              working-directory: platform/ios
+              run: make test
+            - uses: actions/setup-java@v2
+              with:
+                  distribution: 'zulu'
+                  java-version: 11
+                  cache: 'gradle'
+            - name: Test Android
+              uses: ReactiveCircus/android-emulator-runner@76c2bf6f95ed6458fd659a1bdb680a0f8df232dc
+              with:
+                working-directory: platform/android
+                arch: 'x86_64'
+                api-level: 30
+                script: ./gradlew connectedAndroidTest

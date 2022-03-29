@@ -10,6 +10,9 @@ on:
         - all
         - google-play
         - app-store
+      draft:
+        type: boolean
+        description: Upload, but don't publish
 
 jobs:
   check_preconditions:
@@ -21,6 +24,12 @@ jobs:
           github.ref != 'refs/heads/main'
           && startsWith(github.ref, 'refs/heads/release') != true
         run: exit 1
+      - name: Show input parameters
+        run: |
+          branch='${{ github.ref }}'
+          targets='${{ github.event.inputs.targets }}'
+          draft='${{ github.event.inputs.draft }}'
+          echo ::notice::Branch=$branch, Targets=$targets, Draft=$draft
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
@@ -70,6 +79,7 @@ jobs:
           POLYPOD_ANDROID_UPLOAD_KEY_ALIAS: ${{ secrets.POLYPOD_ANDROID_UPLOAD_KEY_ALIAS }}
         run: ./gradlew assemble -Psign=true
       - name: Determine release name
+        id: determine-release-name
         working-directory: platform/android
         run: |
           aapt_path=/usr/local/lib/android/sdk/build-tools/30.0.0/aapt
@@ -86,12 +96,10 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.POLYPOD_ANDROID_STORE_SERVICE_ACCOUNT_JSON }}
           packageName: coop.polypoly.polypod
-          releaseName: ${{ steps.vars.outputs.release_name }}
+          releaseName: ${{ steps.determine-release-name.outputs.release_name }}
           releaseFiles: ./platform/android/app/build/outputs/apk/release/app-release.apk
           track: internal
-          status: draft
-          # whatsNewDirectory: distribution/whatsnew
-          # mappingFile:
+          status: ${{ github.event.inputs.draft == 'true' && 'draft' || 'completed' }}
 
   upload_app_store:
     name: Upload to App Store
@@ -134,3 +142,6 @@ jobs:
           POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID }}
           POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
         run: make upload_ipa
+      - name: Publish
+        if: github.event.inputs.draft != 'true'
+        run: echo ::notice::Publishing on the App Store not yet supported, please do it manually.
