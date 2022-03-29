@@ -1,6 +1,7 @@
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import sucrase from "@rollup/plugin-sucrase";
+import inject from "@rollup/plugin-inject";
 import json from "@rollup/plugin-json";
 
 export default [
@@ -22,6 +23,9 @@ export default [
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"],
+            }),
+            inject({
+                manifestPath: path.resolve("static/manifest.json"),
             }),
         ],
         context: "window",
