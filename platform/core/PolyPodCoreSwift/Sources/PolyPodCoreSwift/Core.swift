@@ -32,7 +32,7 @@ public final class Core {
     
     private init() {}
     
-    // MARK: - Internal API
+    // MARK: - Public API
     
     /// Prepares the core to be used
     /// Should be called before invoking any other API

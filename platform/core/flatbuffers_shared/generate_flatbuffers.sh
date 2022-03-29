@@ -6,7 +6,6 @@ echo '===> Compiling the Schema...'
 cd flatbuffers_shared
 RUST_FLATBUFFERS_OUT=../src/flatbuffers_generated
 IOS_FLATBUFFERS_OUT=../PolyPodCoreSwift/Sources/PolyPodCoreSwift/FlatbuffersGenerated
-# TODO: Add Android folders
 FLATBUFFER_MODELS=$( find -P flatbuffer_models -name "*.fbs" )
 
 echo "*** Removing previously compiled models ***"
@@ -20,7 +19,6 @@ for flatbuffer in $FLATBUFFER_MODELS; do
     echo "pub mod $(basename "${flatbuffer%.fbs}")_generated;" >> ${RUST_FLATBUFFERS_OUT}/mod.rs
 
     ./flatc --swift -o ${IOS_FLATBUFFERS_OUT} "$flatbuffer"
-    # TODO: Generate for Kotlin
 done
 cd ..
 
