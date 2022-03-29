@@ -49,7 +49,7 @@ endif
 	@echo "module PolyPodCore { header \"polypod-core.h\" export * }" >> $(export_dir_ios)/headers/module.modulemap
 
 	# Package xcframework
-	rm -r $(swift_core)/PolyPodCore.xcframework
+	rm -rf $(swift_core)/PolyPodCore.xcframework
 	xcodebuild -create-xcframework \
 	    $(foreach target, $(ios_targets), -library $(export_dir_ios)/$(target)/libpolypod_core.a -headers $(export_dir_ios)/headers) \
 		-output $(swift_core)/PolyPodCore.xcframework
