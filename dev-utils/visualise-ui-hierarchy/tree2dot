@@ -1,0 +1,116 @@
+#!/usr/bin/env python3
+
+import sys
+import fileinput
+from enum import Enum
+
+
+class Node:
+    class Type(Enum):
+        SOURCE = "red"
+        POLY_LOOK = "green"
+        THIRD_PARTY = "blue"
+
+    def __init__(self, key, value, type):
+        self.key = key
+        self.value = value
+        self.type = type
+
+
+class Graph:
+    def __init__(self):
+        self.__nodes = {}
+        self.edges = set()
+
+    def register_node(self, value, type):
+        if value not in self.__nodes:
+            key = str(len(self.__nodes) + 1)
+            self.__nodes[value] = Node(key, value, type)
+        return self.__nodes[value]
+
+    def connect(self, from_value, to_value):
+        from_key = self.__nodes[from_value].key
+        to_key = self.__nodes[to_value].key
+        self.edges.add((from_key, to_key))
+
+    def nodes(self):
+        return self.__nodes.values()
+
+
+def parse_type(path):
+    if path.startswith("src/"):
+        return Node.Type.SOURCE
+    elif path.startswith("@polypoly-eu/poly-look/"):
+        return Node.Type.POLY_LOOK
+    return Node.Type.THIRD_PARTY
+
+
+class Hierarchy:
+    class Item:
+        def __init__(self, node, depth):
+            self.node = node
+            self.depth = depth
+
+    def __init__(self):
+        self.__stack = []
+
+    def add(self, node, depth):
+        self.__stack.append(self.Item(node, depth))
+
+    def current(self):
+        if self.__stack:
+            return self.__stack[-1]
+        return None
+
+    def parent(self):
+        if len(self.__stack) > 1:
+            return self.__stack[-2]
+        return None
+
+    def pop_to_depth(self, depth):
+        while self.__stack and self.current().depth > depth:
+            self.__stack.pop()
+
+
+def parse(input):
+    graph = Graph()
+    hierarchy = Hierarchy()
+    for line in input:
+        parts = line.rstrip().rsplit(" ", 1)
+        if len(parts) < 2:
+            continue
+
+        depth = len(parts[0])
+        value = parts[1]
+        type = parse_type(value)
+        node = graph.register_node(value, type)
+
+        hierarchy.pop_to_depth(depth)
+        current = hierarchy.current()
+        if current is None or depth > current.depth:
+            hierarchy.add(node, depth)
+        elif depth == current.depth:
+            current.node = node
+
+        parent = hierarchy.parent()
+        if parent is not None:
+            graph.connect(parent.node.value, value)
+    return graph
+
+
+def write_dot(graph):
+    print("digraph {")
+    indent = "    "
+    for node in graph.nodes():
+        print(indent + node.key
+              + ' [ label="' + node.value
+              + '" color="' + node.type.value
+              + '" ]')
+    for edge in graph.edges:
+        print(indent + edge[0] + " -> " + edge[1])
+    print("}")
+
+
+if __name__ == "__main__":
+    graph = parse(fileinput.input())
+    write_dot(graph)
