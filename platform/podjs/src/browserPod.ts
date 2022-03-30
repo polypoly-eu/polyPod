@@ -407,12 +407,10 @@ function getEndpoint(endpointId: string): EndpointInfo | null {
     return endpoints[endpointId] || null;
 }
 
-function approveEndpointFetch(
-    endpointId: string,
-    featureIdToken: string
-): boolean {
+function approveEndpointFetch(endpointId: string): boolean {
+    const featureName = window.parent.currentTitle || window.manifest.name;
     return confirm(
-        `${featureIdToken} wants to contact the endpoint: ${endpointId}. \n Proceed?`
+        `${featureName} wants to contact the endpoint: ${endpointId}. \n Proceed?`
     );
 }
 
