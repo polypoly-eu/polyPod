@@ -20,18 +20,12 @@ const legendEntries = legendValues.map((l) => {
 const blockLegend = <BlockLegend legend={legendEntries} />;
 const lineLegend = <LineLegend legend={legendEntries} />;
 
-describe("Basic tests BlockLegend", () => {
-  it("Creates a BlockLegend component", () => {
-    const renderedBlockLegend = render(blockLegend);
-    expect(renderedBlockLegend.container).toBeTruthy();
-    expect(renderedBlockLegend.getByText("No color")).toBeInTheDocument();
-  });
-});
-
-describe("Basic tests LineLegend", () => {
-  it("Creates a LineLegend component", () => {
-    const renderedLineLegend = render(lineLegend);
-    expect(renderedLineLegend.container).toBeTruthy();
-    expect(renderedLineLegend.getByText("No color")).toBeInTheDocument();
-  });
+describe("Basic functionality tests for * legend", () => {
+  for (const component of [blockLegend, lineLegend]) {
+    it(`is able to create a ${component.name} component`, () => {
+      const renderedComponent = render(component);
+      expect(renderedComponent.container).toBeTruthy();
+      expect(renderedComponent.getByText("No color")).toBeInTheDocument();
+    });
+  }
 });
