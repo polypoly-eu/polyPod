@@ -1,4 +1,4 @@
-import { ZipFile } from "@polypoly-eu/feature-file-storage";
+import { runImporters, ZipFile } from "@polypoly-eu/poly-import";
 
 import FacebookAccount from "./entities/facebook-account.js";
 import OffFacebookEventsImporter from "./importers/off-facebook-events-importer.js";
@@ -21,11 +21,6 @@ import LanguageAndLocaleImporter from "./importers/language-and-locale-importer.
 import RecentlyViewedAdsImporter from "./importers/recently-viewed-ads-importer.js";
 import CommentsImporter from "./importers/comments-importer.js";
 import PostReactionsImporter from "./importers/post-reactions-importer.js";
-import { Telemetry } from "./analyses/utils/performance-telemetry.js";
-import {
-    createErrorStatus,
-    createSuccessStatus,
-} from "./analyses/utils/analysis-status.js";
 import PostsImporter from "./importers/posts-importer.js";
 
 const dataImporters = [
@@ -53,86 +48,6 @@ const dataImporters = [
 ];
 
 export const NUMBER_OF_IMPORTERS = dataImporters.length;
-
-class ImporterExecutionResult {
-    constructor(importer, status, executionTime) {
-        this._importer = importer;
-        this._status = status || createSuccessStatus();
-        this._executionTime = executionTime;
-    }
-
-    get importer() {
-        return this._importer;
-    }
-
-    get status() {
-        return this._status;
-    }
-
-    get executionTime() {
-        return this._executionTime;
-    }
-
-    _extractDataFromStatus(status) {
-        return {
-            name: status.name,
-            message: status.message,
-        };
-    }
-
-    get reportJsonData() {
-        return {
-            formatVersion: "v2",
-            importerName: this.importer.constructor.name,
-            executionTime: this.executionTime.toFixed(0),
-            status: Array.isArray(this.status)
-                ? this.status.map((each) => this._extractDataFromStatus(each))
-                : this._extractDataFromStatus(this.status),
-        };
-    }
-}
-
-export async function runImporter(
-    importerClass,
-    zipFile,
-    facebookAccount,
-    pod
-) {
-    const importer = new importerClass();
-
-    const telemetry = new Telemetry();
-    try {
-        const status = await importer.import({
-            zipFile,
-            facebookAccount,
-            pod,
-        });
-        return new ImporterExecutionResult(
-            importer,
-            status,
-            telemetry.elapsedTime()
-        );
-    } catch (error) {
-        return new ImporterExecutionResult(
-            importer,
-            createErrorStatus(error),
-            telemetry.elapsedTime()
-        );
-    }
-}
-
-export async function runImporters(
-    importerClasses,
-    zipFile,
-    facebookAccount,
-    pod
-) {
-    return await Promise.all(
-        importerClasses.map(async (importerClass) => {
-            return runImporter(importerClass, zipFile, facebookAccount, pod);
-        })
-    );
-}
 
 export async function importZip(zipFile, pod) {
     const facebookAccount = new FacebookAccount();

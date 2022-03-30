@@ -1,5 +1,5 @@
 {
-  "name": "@polypoly-eu/feature-file-storage",
+  "name": "@polypoly-eu/poly-import",
   "main": "src/index.js",
   "private": true,
   "type": "module"
