@@ -48,7 +48,7 @@ type PolyInBackend = ObjectBackendSpec<{
 type PolyOutBackend = ObjectBackendSpec<{
     readDir(path: string): ValueBackendSpec<Entry[]>;
     readFile(path: string, options?: EncodingOptions): ValueBackendSpec<string | Uint8Array>;
-    writeFile(path: string, content: string, options: EncodingOptions): ValueBackendSpec<void>;
+    writeFile(path: string, content: string, options: EncodingOptions): ValueBackendSpec<string>;
     stat(path: string): ValueBackendSpec<Stats>;
     importArchive(url: string): ValueBackendSpec<string>;
     removeArchive(fileId: string): ValueBackendSpec<void>;
@@ -216,7 +216,7 @@ export class RemoteClientPod implements Pod {
                 return rpcClient.polyOut().stat(path)();
             }
 
-            writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
+            writeFile(path: string, content: string, options?: EncodingOptions): Promise<string> {
                 return rpcClient.polyOut().writeFile(path, content, options)();
             }
 
