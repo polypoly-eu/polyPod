@@ -9,8 +9,6 @@ describe("LegendEntries work", () => {
     const noColor = "#000000";
     const noColorStr = "No color";
     const legendEntry = new LegendEntry(noColorStr, noColor);
-    expect(legendEntry).toBeTruthy;
-    expect(legendEntry).toBeInstanceOf(LegendEntry);
     expect(legendEntry.color).toBe(noColor);
     expect(legendEntry.description).toBe(noColorStr);
   });
