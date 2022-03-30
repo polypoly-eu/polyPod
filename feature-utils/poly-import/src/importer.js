@@ -1,7 +1,4 @@
-import {
-    createErrorStatus,
-    createSuccessStatus,
-} from "../utils/analysis-status";
+import { createErrorStatus, createSuccessStatus } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
 
 class ImporterExecutionResult {
