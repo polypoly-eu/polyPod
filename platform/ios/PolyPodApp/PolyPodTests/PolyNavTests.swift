@@ -25,7 +25,7 @@ private let testZipFileName = "testFile.zip"
 private let testZipFilePath = testFolderPath.appendingPathComponent("testFile.zip")
 private let zipMimeType = "application/zip"
 
-private let testExternalFile = ExternalFile(url: testZipFilePath.absoluteString, name: testZipFileName , size: 12324)
+private let testExternalFile = ExternalFile(url: testZipFilePath.absoluteString, name: testZipFileName, size: 12324)
 
 private func removeTestFile() {
     let fileManager = FileManager.default

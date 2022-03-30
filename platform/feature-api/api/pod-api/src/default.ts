@@ -9,8 +9,7 @@
 
 import * as RDF from "rdf-js";
 import { dataFactory } from "@polypoly-eu/rdf";
-import { Pod, PolyIn, PolyOut, PolyNav, Info, Network } from "./api";
-import type { Fetch, Response, RequestInit } from "@polypoly-eu/fetch-spec";
+import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint } from "./api";
 import { EncodingOptions, FS, Stats } from "./fs";
 import { Entry } from ".";
 
@@ -23,7 +22,6 @@ import { Entry } from ".";
  *
  * 1. an [RDFJS dataset](https://rdf.js.org/dataset-spec/)
  * 2. a file system that adheres to the [async FS interface of Node.js](https://nodejs.org/api/fs.html)
- * 3. a [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) implementation. This feature is deprecated and will be eliminated in the near future.
  *
  * Depending on the platform (Node.js or browser), there are various implementations of these that may be used.
  * These are found in other core components, such as AsyncPod.
@@ -34,11 +32,7 @@ import { Entry } from ".";
 export class DefaultPod implements Pod {
     public readonly dataFactory: RDF.DataFactory = dataFactory;
 
-    constructor(
-        public readonly store: RDF.DatasetCore,
-        public readonly fs: FS,
-        public readonly fetch: Fetch
-    ) {}
+    constructor(public readonly store: RDF.DatasetCore, public readonly fs: FS) {}
 
     private checkQuad(quad: RDF.Quad): void {
         if (!quad.graph.equals(dataFactory.defaultGraph()))
@@ -90,13 +84,8 @@ export class DefaultPod implements Pod {
      */
     get polyOut(): PolyOut {
         const fs = this.fs;
-        const _fetch = this.fetch;
 
         return new (class implements PolyOut {
-            fetch(input: string, init?: RequestInit): Promise<Response> {
-                return _fetch(input, init);
-            }
-
             readFile(path: string, options: EncodingOptions): Promise<string>;
             readFile(path: string): Promise<Uint8Array>;
             readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
@@ -167,14 +156,23 @@ export class DefaultPod implements Pod {
         };
     }
     /**
-     * The [[Network]] interface. See [[Network]] for the description.
+     * The [[Endpoint]] interface. See [[Endpoint]] for the description.
      */
-
-    get network(): Network {
+    get endpoint(): Endpoint {
         return {
-            httpPost(url: string, body: string, contentType?: string, authorization?: string) {
+            send(
+                endpointId: string,
+                payload: string,
+                contentType?: string,
+                authToken?: string
+            ): Promise<void> {
                 throw new Error(
-                    `Called with ${url}, ${body}, ${contentType}, ${authorization} but not implemented`
+                    `Called with ${endpointId}, ${payload}, ${contentType}, ${authToken} but not implemented`
+                );
+            },
+            get(endpointId: string, contentType?: string, authToken?: string): Promise<string> {
+                throw new Error(
+                    `Called with ${endpointId}, ${contentType}, ${authToken} but not implemented`
                 );
             },
         };

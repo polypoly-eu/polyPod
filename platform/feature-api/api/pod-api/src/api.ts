@@ -6,7 +6,6 @@
  */
 
 import * as RDF from "rdf-js";
-import type { Fetch } from "@polypoly-eu/fetch-spec";
 import { ExternalFile, FS } from "./fs";
 
 /**
@@ -117,15 +116,8 @@ export interface Entry {
  *
  * Both of these aspects are separated out into their own modules:
  * - [[FS]] for Node.js-style file-system access
- * - [[Fetch]] for DOM-style HTTP requests (deprecated)
  */
 export interface PolyOut extends Omit<FS, "readdir"> {
-    /**
-     * @deprecated Use [[Network]] and its facilities instead.
-     * A standard-compliant implementation of `Fetch`. This feature is deprecated in favor of the [[Network]] interface
-     */
-    readonly fetch: Fetch;
-
     /**
      * @param pathToDir system-dependent path to read.
      * @returns a Promise with id-path pairs [[Entry]] as payload.
@@ -175,28 +167,36 @@ export interface Info {
 }
 
 /**
- * `Network` specifies how features can communicate with other devices or servers.
- */
-export interface Network {
-    /**
-     * A way for features to send HTTP POST requests
-     *
-     * @returns an error message if something went wrong, `undefined` upon success.
-     */
-    httpPost(
-        url: string,
-        body: string,
-        contentType?: string,
-        authorization?: string
-    ): Promise<string | undefined>;
-}
-
-/**
  * @hidden
  */
 export interface PolyLifecycle {
     listFeatures(): Promise<Record<string, boolean>>;
     startFeature(id: string, background: boolean): Promise<void>;
+}
+
+/**
+ * `Endpoint` is the API features communicate with in order to perform fetch requests
+ */
+export interface Endpoint {
+    /**
+     * Perform a http post request via the endpoint in the pod
+     * @param body the necessary content of the call
+     * @returns an empty response or throws an error if something goes wrong
+     * @throws if an unsupported request goes through, if an endpoint is not reached or if a user denies a request
+     */
+    send(
+        endpointId: string,
+        payload: string,
+        contentType?: string,
+        authToken?: string
+    ): Promise<void>;
+
+    /**
+     * Perform a http get request via the endpoint in the pod
+     * @returns a promise with the response
+     * @throws if an unsupported request goes through, if an endpoint is not reached, if a user denies a request or if response is null
+     */
+    get(endpointId: string, contentType?: string, authToken?: string): Promise<string>;
 }
 
 /**
@@ -274,11 +274,10 @@ export interface Pod {
     readonly info: Info;
 
     /**
-     * `network` is the interface to interact with other devices over the network. Refer to [[Network]] for its
+     * `endpoint` is the interface to interact with other devices over the network via the pod. Refer to [[Endpoint]] for its
      * definition.
      */
-    readonly network: Network;
-
+    readonly endpoint: Endpoint;
     /**
      * @hidden
      */

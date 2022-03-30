@@ -15,6 +15,7 @@ import {
   FilterChips,
   BlockLegend,
   LineLegend,
+  ErrorPopup,
 } from "./react-components";
 export {
   BubbleCluster,
@@ -29,4 +30,5 @@ export {
   Tabs,
   BlockLegend,
   LineLegend,
+  ErrorPopup,
 };

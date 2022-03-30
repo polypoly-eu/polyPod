@@ -24,16 +24,18 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.lifecycleScope
 import androidx.webkit.WebViewAssetLoader
+import coop.polypoly.polypod.endpoint.Endpoint
+import coop.polypoly.polypod.endpoint.EndpointObserver
 import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.info.Info
 import coop.polypoly.polypod.logging.LoggerFactory
-import coop.polypoly.polypod.network.Network
 import coop.polypoly.polypod.polyIn.PolyIn
 import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
+import kotlinx.coroutines.CompletableDeferred
 import java.io.ByteArrayInputStream
 import java.util.zip.ZipFile
 
@@ -45,16 +47,18 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    private val webView = WebView(context)
+    // Public for test purposes
+    val webView = WebView(context)
     private val registry = LifecycleRegistry(this)
-    val api = PodApi(
+    // Reassignable for test purposes
+    var api = PodApi(
         PolyOut(context),
         PolyIn(context, context.filesDir),
         PolyNav(
             webView = webView
         ),
         Info(),
-        Network(context)
+        Endpoint(context)
     )
 
     var feature: Feature? = null
@@ -122,6 +126,34 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             .show()
     }
 
+    private suspend fun approveEndpointFetch(
+        endpointId: String?,
+        completion: suspend (Boolean) -> String?
+    ): String? {
+        var fetchApproval: CompletableDeferred<Boolean?>? =
+            CompletableDeferred()
+        val featureName = feature?.name ?: throw PodApiError().endpointError()
+        val message = context?.getString(
+            R.string.message_approve_endpoint_fetch, featureName, endpointId
+        )
+
+        val confirmLabel = context?.getString(R.string.button_url_open_confirm)
+        val rejectLabel = context?.getString(R.string.button_url_open_reject)
+        AlertDialog.Builder(context)
+            .setMessage(message)
+            .setPositiveButton(confirmLabel) { _, _ ->
+                fetchApproval?.complete(true)
+            }
+            .setNegativeButton(rejectLabel) { _, _ ->
+                fetchApproval?.complete(false)
+            }
+            .show()
+        (fetchApproval?.await())?.let {
+            return completion(it)
+        }
+        throw PodApiError().endpointError()
+    }
+
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)
         FeatureStorage.activeFeature = feature
@@ -131,6 +163,11 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 null,
                 { url -> openUrl(url) },
                 null
+            )
+        )
+        api.endpoint.setEndpointObserver(
+            EndpointObserver(
+                ::approveEndpointFetch
             )
         )
 

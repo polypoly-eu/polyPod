@@ -1,0 +1,51 @@
+name: polyPod iOS/Android integration test
+on:
+    push:
+        paths:
+            - "feature-utils/**"
+            - "features/**"
+            - "platform/feature-api/**"
+            - "platform/core/**"
+            - "platform/ios/**"
+            - "platform/android/**"
+    pull_request:
+        types: [assigned, opened, ready_for_review]
+        paths:
+            - "feature-utils/**"
+            - "features/**"
+            - "platform/core/**"
+            - "platform/feature-api/**"
+            - "platform/ios/**"
+            - "platform/android/**"
+jobs:
+    test:
+        name: Test polyPod iOS and Android app
+        runs-on: macOS-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: 16
+                  cache: "npm"
+                  cache-dependency-path: "**/package-lock.json"
+            - name: Lock xcode version
+              run: cd platform/ios; make lockxcodeversion
+            - name: Build API and features
+              run: ./build.js
+            - name: Build and test iOS
+              working-directory: platform/ios
+              run: make test
+            - uses: actions/setup-java@v2
+              with:
+                  distribution: 'zulu'
+                  java-version: 11
+                  cache: 'gradle'
+            - name: Test Android
+              uses: ReactiveCircus/android-emulator-runner@76c2bf6f95ed6458fd659a1bdb680a0f8df232dc
+              with:
+                working-directory: platform/android
+                arch: 'x86_64'
+                api-level: 30
+                script: ./gradlew connectedAndroidTest
+

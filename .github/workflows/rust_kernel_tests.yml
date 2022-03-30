@@ -2,11 +2,11 @@ name: Lint and Test Rust code
 on:
   push:
     paths:
-      - platform/core/**
+      - 'platform/core/**'
   pull_request:
     types: [assigned, opened, ready_for_review]
     paths:
-      - platform/core/**
+      - 'platform/core/**'
 
 jobs:
   test:
@@ -18,6 +18,14 @@ jobs:
 
       - name: Install stable toolchain
         run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+      - name: Setup flatbuffers
+        working-directory: ./platform/core
+        run: ./flatbuffers_shared/setup_flatbuffers.sh
+
+      - name: Generate flatbuffers
+        working-directory: ./platform/core
+        run: ./flatbuffers_shared/generate_flatbuffers.sh
 
       - name: Lint -- Run cargo fmt
         working-directory: ./platform/core

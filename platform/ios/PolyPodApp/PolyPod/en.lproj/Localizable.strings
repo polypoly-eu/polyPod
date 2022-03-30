@@ -30,10 +30,11 @@
 "message_feature_error %@ %@" = "Unfortunately, '%@' had an error:\n\n%@\n\nI will close it for you.";
 "message_url_open_prevented %@ %@" = "I have blocked %1$s from opening a URL:\n%@";
 "message_url_open_requested %@ %@" = "%@ wants to open a URL in your browser:\n\n%@\n\nAllow?";
+"message_approve_endpoint_fetch_request %@ %@" = "%@-feature wants to share data with this endpoint from your polyPod:\n\n%@\n\nAllow?";
 "message_security_warning_title" = "Security warning";
 "message_security_warning_text" = "To ensure your data is secured, we recommend using your device screen lock.";
-"button_url_open_confirm" = "Yes";
-"button_url_open_reject" = "No";
+"button_confirm" = "Yes";
+"button_reject" = "No";
 "button_update_notification_close" = "OK";
 "auth_prompt_set_up" = "Set up authentification";
 "auth_prompt_unlock" = "Login to your polyPod";

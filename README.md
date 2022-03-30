@@ -44,6 +44,10 @@ To run the tests, just execute:
 
     $ ./build.js test
 
+## Linting
+
+Linting is done via tools configured at the top level (root) directory.
+
 To run the linter:
 
     $ ./build.js lint
@@ -54,6 +58,12 @@ example [android](android).
 If linting reveals some error, they can be fixed with
 
     $ ./build.js lintfix
+
+Although just doing the linting will reveal the rules, there are a couple of
+sources for this configuration:
+
+* [`.editorconfig`](.editorconfig) for general editor configuration.
+* [`.eslintrc.cjs`](.eslintrc.cjs) for specific JS/TS linting rules.
 
 ## Branches
 
