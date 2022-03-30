@@ -25,7 +25,9 @@ describe("Basic functionality tests for * legend", () => {
     it(`is able to create a ${component.name} component`, () => {
       const renderedComponent = render(component);
       expect(renderedComponent.container).toBeTruthy();
-      expect(renderedComponent.getByText("No color")).toBeInTheDocument();
+      for (const values of legendValues) {
+        expect(renderedComponent.getByText(values[0])).toBeInTheDocument();
+      }
     });
   }
 });
