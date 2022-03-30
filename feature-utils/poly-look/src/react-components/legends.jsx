@@ -19,5 +19,5 @@ const legendComponent = (type, legends) => {
 };
 
 const BlockLegend = ({ legend }) => legendComponent("block", legend);
-const LineLegend = ({ legend }) => legendComponent("type", legend);
+const LineLegend = ({ legend }) => legendComponent("line", legend);
 export { BlockLegend, LineLegend };

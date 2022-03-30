@@ -22,9 +22,14 @@ const lineLegend = <LineLegend legend={legendEntries} />;
 
 describe("Basic functionality tests for * legend", () => {
   for (const component of [blockLegend, lineLegend]) {
-    it(`is able to create a ${component.type.name} component`, () => {
+    const componentClass = component.type.name
+      .replace("Le", "-le")
+      .toLowerCase();
+    it(`is able to create a ${componentClass} component`, () => {
       const renderedComponent = render(component);
-      expect(renderedComponent.container).toBeTruthy();
+      expect(renderedComponent.container.firstChild).toHaveClass(
+        componentClass
+      );
       for (const values of legendValues) {
         expect(renderedComponent.getByText(values[0])).toBeInTheDocument();
       }
