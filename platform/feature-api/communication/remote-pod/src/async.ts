@@ -102,17 +102,21 @@ class AsyncInfo implements Info {
 class AsyncEndpoint implements Endpoint {
     constructor(private readonly promise: Promise<Endpoint>) {}
 
-    async send(
-        endpointId: string,
-        payload: string,
-        contentType?: string,
-        authToken?: string
-    ): Promise<void> {
-        return (await this.promise).send(endpointId, payload, contentType, authToken);
+    async send(request: {
+        endpointId: string;
+        payload: string;
+        contentType?: string;
+        authToken?: string;
+    }): Promise<void> {
+        return (await this.promise).send(request);
     }
 
-    async get(endpointId: string, contentType?: string, authToken?: string): Promise<string> {
-        return (await this.promise).get(endpointId, contentType, authToken);
+    async get(request: {
+        endpointId: string;
+        contentType?: string;
+        authToken?: string;
+    }): Promise<string> {
+        return (await this.promise).get(request);
     }
 }
 
