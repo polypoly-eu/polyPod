@@ -1,23 +1,27 @@
-export class FileImportError extends Error {
+class PolyImportError extends Error {
+    constructor(type, cause) {
+        super(`Failed to ${type} file`);
+        this.cause = cause;
+    }
+}
+
+export class FileImportError extends PolyImportError {
     constructor(cause) {
-        super("Failed to import file");
+        super("import", cause);
         this.name = "FileImportError";
-        this.cause = cause;
     }
 }
 
-export class FileSelectionError extends Error {
+export class FileSelectionError extends PolyImportError {
     constructor(cause) {
-        super("Failed to select file");
+        super("select", cause);
         this.name = "FileSelectionError";
-        this.cause = cause;
     }
 }
 
-export class RefreshFilesError extends Error {
+export class RefreshFilesError extends PolyImportError {
     constructor(cause) {
-        super("Failed to refresh files");
+        super("refresh", cause);
         this.name = "RefreshFilesError";
-        this.cause = cause;
     }
 }
