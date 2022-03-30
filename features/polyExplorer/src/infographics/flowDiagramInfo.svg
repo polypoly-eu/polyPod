@@ -1,0 +1,75 @@
+<svg width="263" height="313" viewBox="0 0 263 313" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="flowDiagramInfo">
+<g id="visualization">
+<g id="Curves">
+<path id="Instagram" opacity="0.3" d="M254 73C131 73 131 116.5 8 116.5V121.1C131.351 121.1 131 75 254 75V73Z" fill="#3749A9"/>
+<path id="WhatsApp" d="M254 158.5C131 158.5 131 208.094 8 208.094V246.5C131.351 246.5 131 198.5 254 198.5V158.5Z" fill="#3749A9"/>
+<path id="WhatsApp_2" opacity="0.3" d="M254 203.5C131 203.5 131 246.5 8 246.5V274.5C131.351 274.5 131 294.7 254 294.7V203.5Z" fill="#3749A9"/>
+<path id="WhatsApp_3" opacity="0.3" d="M254 299.7C131 299.7 131 274.5 8 274.5V288C131.351 288 131 308 254 308V299.7Z" fill="#3749A9"/>
+<path id="FB Messenger" opacity="0.3" d="M254 104C131 104 131 164.1 8.00006 164.1L8 203C131.351 203 131 132.6 254 132.6L254 104Z" fill="#3749A9"/>
+<path id="Instagram_2" opacity="0.3" d="M254 80.0996C131 80.0996 131 121.068 8 121.068V158.9C131.351 158.9 131 104 254 104V80.0996Z" fill="#3749A9"/>
+<path id="Telegram" opacity="0.3" d="M254 24C131 24 131 63.5811 8 63.5811V116.5C131.351 116.5 131 68 254 68V24Z" fill="#3749A9"/>
+<path id="Telegram_2" d="M254.5 137.7V137.2H254C225.45 137.2 204.684 131.361 187.382 122.613C171.893 114.783 159.171 104.619 146.093 94.1712C144.547 92.9364 142.997 91.6977 141.436 90.4584C126.679 78.7407 111.042 66.9923 90.2262 58.1802C69.4069 49.3665 43.4332 43.5 8 43.5H7.5V44V62.5V63H8C38.7681 63 61.4885 68.9228 80.2627 77.7958C98.7066 86.5127 113.359 98.0835 128.128 109.746C128.401 109.961 128.674 110.177 128.947 110.392C143.985 122.265 159.213 134.176 178.7 143.111C198.196 152.049 221.933 158 254 158H254.5V157.5V137.7Z" fill="#3749A9" stroke="#F7FAFC"/>
+</g>
+<g id="Nodes_Basis">
+<g id="right nodes">
+<path id="Vector" d="M259 24H254V68H259V24Z" fill="#0F1938"/>
+<path id="Vector_2" d="M259 73H254V75H259V73Z" fill="#0F1938"/>
+<path id="Vector_3" d="M259 80.1055H254V132.638H259V80.1055Z" fill="#0F1938"/>
+<path id="Vector_4" d="M259 137.639H254V198.466H259V137.639Z" fill="#0F1938"/>
+<path id="Vector_5" d="M259 203.465H254V294.705H259V203.465Z" fill="#0F1938"/>
+<path id="Vector_6" d="M259 299.705H254V308H259V299.705Z" fill="#0F1938"/>
+</g>
+<g id="left nodes">
+<path id="Vector_7" d="M8 44H3V159H8V44Z" fill="#0F1938"/>
+<path id="Vector_8" d="M8 164H3V203H8V164Z" fill="#0F1938"/>
+<path id="Vector_9" d="M8 208H3V288H8V208Z" fill="#0F1938"/>
+</g>
+</g>
+</g>
+<g id="Label">
+<rect x="14" y="97" width="48" height="19" rx="2" fill="#F7FAFC" fill-opacity="0.7"/>
+<text id="A: 115" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="18" y="111.365">A: 115</tspan></text>
+</g>
+<g id="Label_2">
+<rect width="45" height="19" rx="2" fill="#F7FAFC" fill-opacity="0.7"/>
+<text id="textYear1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="4" y="14.365">Year 1</tspan></text>
+</g>
+<g id="Label_3">
+<rect x="216" width="47" height="19" rx="2" fill="#F7FAFC" fill-opacity="0.7"/>
+<text id="textYear2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="220.298" y="14.365">Year 2</tspan></text>
+</g>
+<g id="Label_4">
+<rect x="14" y="174" width="42" height="19" rx="2" fill="#F7FAFC" fill-opacity="0.7"/>
+<text id="B: 40" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="18" y="188.365">B: 40</tspan></text>
+</g>
+<g id="Label_5">
+<rect x="14" y="236" width="43" height="19" rx="2" fill="#F7FAFC" fill-opacity="0.7"/>
+<text id="C: 80" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="18" y="250.365">C: 80</tspan></text>
+</g>
+<g id="Label_6">
+<rect x="216" y="65" width="33" height="19" rx="2" fill="#F7FAFC" fill-opacity="0.7"/>
+<text id="E: 2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="220.483" y="79.365">E: 2</tspan></text>
+</g>
+<g id="Label_7">
+<rect x="208" y="96" width="41" height="19" rx="2" fill="#F7FAFC" fill-opacity="0.7"/>
+<text id="F: 50" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="212.679" y="110.365">F: 50</tspan></text>
+</g>
+<g id="Label_8">
+<rect x="204" y="158" width="45" height="19" rx="2" fill="#F7FAFC" fill-opacity="0.7"/>
+<text id="G: 60" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="208.673" y="172.365">G: 60</tspan></text>
+</g>
+<g id="Label_9">
+<rect x="206" y="34" width="43" height="19" rx="2" fill="#F7FAFC" fill-opacity="0.7"/>
+<text id="D: 45" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="210.095" y="48.365">D: 45</tspan></text>
+</g>
+<g id="Label_10">
+<rect x="205" y="236" width="44" height="19" rx="2" fill="#F7FAFC" fill-opacity="0.7"/>
+<text id="H: 90" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="209.33" y="250.365">H: 90</tspan></text>
+</g>
+<g id="Label_11">
+<rect x="213" y="294" width="36" height="19" rx="2" fill="#F7FAFC" fill-opacity="0.7"/>
+<text id="I: 10" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="217.847" y="308.365">I: 10</tspan></text>
+</g>
+</g>
+</svg>

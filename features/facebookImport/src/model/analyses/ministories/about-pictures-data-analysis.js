@@ -1,8 +1,5 @@
 import React from "react";
-import {
-    relevantZipEntries,
-    removeEntryPrefix,
-} from "../../importers/utils/importer-util";
+import { relevantZipEntries } from "../../importers/utils/importer-util";
 import RootAnalysis from "./root-analysis";
 
 import PicturesMiniStory from "../../../components/picturesMiniStory/picturesMiniStory.jsx";
@@ -28,8 +25,12 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
      * Determine the pictures posted by the user.
      *
      * At the moment, since we do not import posts and albums,
-     * we count only the number of picture files in the folder
-     * "photos_and_videos" where posted pictures are exported.
+     * we count only the number of picture files posted by the
+     * user. For that we look in a list of folders where user
+     * pictures are saved. Depending on the export, posted pictures
+     * are exported in one of two folders:
+     *   - "photos_and_videos"
+     *   - "posts/media"
      *
      * Depending on the export that folder might contain also
      * other picture files like "emptyalbum.png" which was not
@@ -43,12 +44,13 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
      * simply include all pictures in that folder.
      */
     async _userPicturesFromExport(zipFile) {
-        const relevantEntries = await relevantZipEntries(zipFile);
-        return relevantEntries.filter((zipEntry) =>
-            /^photos_and_videos\/(.+)\.(jpg|jpeg)$/.test(
-                removeEntryPrefix(zipEntry)
-            )
-        );
+        const photoRegexes = [
+            /^photos_and_videos\/(.+)\.(jpg|jpeg)$/i,
+            /^posts\/media\/(.+)\.(jpg|jpeg)$/i,
+        ];
+        return (await relevantZipEntries(zipFile))
+            .map((entry) => entry.path)
+            .filter((path) => photoRegexes.some((regex) => regex.test(path)));
     }
 
     async analyze({ zipFile }) {

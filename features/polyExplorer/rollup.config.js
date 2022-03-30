@@ -1,4 +1,4 @@
-import copy from "rollup-plugin-copy";
+import copy from "@polypoly-eu/rollup-plugin-copy-watch";
 import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
 import css from "rollup-plugin-css-only";
@@ -37,9 +37,15 @@ export default {
                         "node_modules/react/umd/react.development.js",
                         "node_modules/react-dom/umd/react-dom.development.js",
                         "node_modules/@polypoly-eu/podjs/dist/pod.js",
-                        "node_modules/@polypoly-eu/poly-look/dist/css",
+                        "node_modules/@polypoly-eu/poly-look/dist/poly-look.js",
                     ],
                     dest: "dist",
+                },
+                {
+                    src: [
+                        "node_modules/@polypoly-eu/poly-look/dist/css/poly-look.css",
+                    ],
+                    dest: "dist/css",
                 },
                 {
                     src: ["src/static/*", "!src/static/fonts"],
@@ -48,7 +54,7 @@ export default {
                 {
                     src: ["src/static/fonts/*"],
                     dest: "dist/fonts",
-                }
+                },
             ],
             verbose: true,
         }),

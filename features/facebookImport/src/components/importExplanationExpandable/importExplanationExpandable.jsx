@@ -23,7 +23,7 @@ const ImportExplanationExpandable = ({
     importSections,
     importStatus,
     onUpdateImportStatus,
-    selectedFileUrl,
+    selectedFile,
     onSelectFile,
     onImportFile,
     file,
@@ -53,6 +53,12 @@ const ImportExplanationExpandable = ({
     const handleExampleDataRequest = () => {
         onUpdateImportStatus(importSteps.import);
         window.pod.polyNav.openUrl("example-data-download");
+        setStartRequest(true);
+    };
+
+    const handleDownloadDataLinkClick = () => {
+        onUpdateImportStatus(importSteps.import);
+        window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
         setStartRequest(true);
     };
 
@@ -97,7 +103,6 @@ const ImportExplanationExpandable = ({
                     className="full-screen"
                     alt="select-json"
                 />
-                <InfoBox textContent={i18n.t("import:request.info.2")} />
                 <button
                     className="btn-highlighted"
                     onClick={() => handleRequestStatus()}
@@ -110,6 +115,7 @@ const ImportExplanationExpandable = ({
                 >
                     {i18n.t("import:request.example.data")}
                 </button>
+                <InfoBox textContent={i18n.t("import:request.info.2")} />
             </>
         ),
         download: (
@@ -127,7 +133,10 @@ const ImportExplanationExpandable = ({
                 <p>{i18n.t("import:download.2")}</p>
                 <img src="./images/download.svg" alt="document" />
                 <p>{i18n.t("import:download.3")}</p>
-                <button className="btn-highlighted btn-1">
+                <button
+                    className="btn-highlighted btn-1"
+                    onClick={() => handleDownloadDataLinkClick()}
+                >
                     {i18n.t("import:download.button.1")}
                 </button>
                 <button
@@ -159,16 +168,19 @@ const ImportExplanationExpandable = ({
                                 {formatSize(file.size)}
                             </p>
                         </div>
-                    ) : selectedFileUrl ? (
+                    ) : selectedFile ? (
                         <div className="file-info">
                             <h5>{i18n.t("import:import.chosen")}</h5>
-                            <p>{selectedFileUrl?.split("/").pop()}</p>
+                            <p>{selectedFile?.name}</p>
+                            <p>
+                                {i18n.t("import:import.size")}{" "}
+                                {formatSize(selectedFile.size)}
+                            </p>
                         </div>
                     ) : (
                         <h5>{i18n.t("import:import.none.chosen")}</h5>
                     )}
                 </div>
-                <InfoBox textContent={i18n.t("import:import.info")} />
                 <button
                     className={"btn-secondary btn-2"}
                     onClick={async () => {
@@ -176,16 +188,16 @@ const ImportExplanationExpandable = ({
                         onSelectFile();
                     }}
                 >
-                    {file || selectedFileUrl
+                    {file || selectedFile
                         ? i18n.t("import:import.button.1.different")
                         : i18n.t("import:import.button.1")}
                 </button>
                 <button
                     className={`btn-highlighted ${
-                        selectedFileUrl ? "" : "deactivated"
+                        selectedFile ? "" : "deactivated"
                     }`}
                     onClick={
-                        selectedFileUrl
+                        selectedFile
                             ? async () => {
                                   await onImportFile();
                                   handleImportStatus();
@@ -195,6 +207,7 @@ const ImportExplanationExpandable = ({
                 >
                     {i18n.t("import:import.button.2")}
                 </button>
+                <InfoBox textContent={i18n.t("import:import.info")} />
             </>
         ),
         explore: (
@@ -226,7 +239,7 @@ const ImportExplanationExpandable = ({
         >
             <div className="intro">
                 <p>{i18n.t("import:intro.text.1")}</p>
-                <p className="bold">{i18n.t("import:intro.text.2")}</p>
+                <p>{i18n.t("import:intro.text.2")}</p>
                 <InfoBox textContent={i18n.t("import:intro.info")} />
             </div>
             <ScrollButton

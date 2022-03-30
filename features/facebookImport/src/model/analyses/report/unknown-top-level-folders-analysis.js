@@ -2,18 +2,14 @@ import React from "react";
 import BasicList from "../../../components/basicList/basicList.jsx";
 import ReportAnalysis from "./report-analysis.js";
 import topFolderNames from "../../../static/topFolders.js";
-import {
-    relevantZipEntries,
-    removeEntryPrefix,
-} from "../../importers/utils/importer-util.js";
+import { relevantZipEntries } from "../../importers/utils/importer-util.js";
 
 async function extractTopLevelFolderNamesFromZip(zipFile) {
     const relevantEntries = await relevantZipEntries(zipFile);
     const topLevelFolderNames = new Set();
 
-    relevantEntries.forEach((filename) => {
-        const noIdFileName = removeEntryPrefix(filename);
-        const folderNameMatch = noIdFileName.match(/^([^/]+)\/.*$/);
+    relevantEntries.forEach((entry) => {
+        const folderNameMatch = entry.path.match(/^([^/]+)\/.*$/);
         if (
             folderNameMatch &&
             folderNameMatch.length === 2 &&
@@ -25,13 +21,13 @@ async function extractTopLevelFolderNamesFromZip(zipFile) {
     return [...topLevelFolderNames];
 }
 
-export default class UknownTopLevelFoldersAnalysis extends ReportAnalysis {
+export default class UnknownTopLevelFoldersAnalysis extends ReportAnalysis {
     get title() {
         return "Unknown top-level folders";
     }
 
     get reportData() {
-        return this._uknownFolderNames;
+        return this._unknownFolderNames;
     }
 
     async analyze({ zipFile }) {
@@ -39,13 +35,13 @@ export default class UknownTopLevelFoldersAnalysis extends ReportAnalysis {
             zipFile
         );
 
-        this._uknownFolderNames = topLevelFolderNames.filter(
+        this._unknownFolderNames = topLevelFolderNames.filter(
             (each) => !topFolderNames.includes(each)
         );
-        this.active = this._uknownFolderNames.length > 0;
+        this.active = this._unknownFolderNames.length > 0;
     }
 
     render() {
-        return <BasicList items={this._uknownFolderNames} />;
+        return <BasicList items={this._unknownFolderNames} />;
     }
 }

@@ -5,7 +5,7 @@ import RootAnalysis from "./root-analysis";
 import {
     MessagesMiniStoryDetails,
     MessagesMiniStorySummary,
-} from "../../../components/messagesMiniStory/messagesMinistory.jsx";
+} from "../../../components/messagesMiniStory/messagesMiniStory.jsx";
 
 export default class MessagesAnalysis extends RootAnalysis {
     get label() {
@@ -75,8 +75,9 @@ export default class MessagesAnalysis extends RootAnalysis {
     renderDetails() {
         return (
             <MessagesMiniStoryDetails
-                totalUsernamesCount={this._totalUsernamesCount}
+                messagesCount={this._messagesCount}
                 messagesThreadsData={this._messagesThreadsData}
+                totalUsernamesCount={this._totalUsernamesCount}
             />
         );
     }

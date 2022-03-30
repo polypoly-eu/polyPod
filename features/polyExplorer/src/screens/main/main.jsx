@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import i18n from "../../i18n.js";
 import Screen from "../../components/screen/screen.jsx";
-import EntityList from "../../components/entityList/entityList.jsx";
+import FilteredEntityList from "../../components/filteredEntityList/filteredEntityList.jsx";
 import StoriesPreview from "../../components/storiesPreview/storiesPreview.jsx";
 
 import "./main.css";
@@ -15,9 +15,10 @@ const MainScreen = () => {
 
     return (
         <Screen
+            noScroll
             className="main-screen"
             topShadow={false}
-            light={showClusters ? true : false}
+            theme={showClusters ? "poly-theme-light" : "poly-theme-dark"}
         >
             <div className="nav-button-container poly-nav-bar-separator-bottom">
                 <button
@@ -42,7 +43,7 @@ const MainScreen = () => {
             {showClusters ? (
                 <StoriesPreview storiesMetadata={storiesMetadata} />
             ) : (
-                <EntityList />
+                <FilteredEntityList />
             )}
         </Screen>
     );

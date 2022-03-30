@@ -1,6 +1,6 @@
 {
-    "title": "Auch andere liefern Daten über Sie an Facebook",
-    "summary.text.1": "Ihre Facebook-Daten listen {{number_companies}} Firmen, also sogenannte \"connected advertisers\", auf. Dabei handelt es sich um Firmen, die Adresslisten an Facebook geliefert haben, auf denen auch Ihre Kontaktinformationen standen. Das Ziel dabei: Ihnen gezielt Werbung zu zeigen. Damit das möglich wird, müssen Sie selbst diesen Firmen oder deren Datenpartnern eine Erlaubnis erteilt haben. Waren Sie sich dessen bewusst?",
-    "summary.text.2": "Auf seiner Website schreibt Facebook, dass Firmen nicht nur ihre eigenen Adresslisten nutzen können, um Werbung gezielt zu schalten, sondern auch die Listen anderer Unternehmen. Auf Basis solcher Listen können Sie als Nutzer:in bei der Planung von Kampagnen ein- oder ausgeschlossen werden, z. B. auf Grund Ihres Wohnorts.",
-    "details.text": "Dies ist die gesamte Liste der {{number_companies}} sogenannten \"connected advertisers\" aus Ihren Facebook Daten."
+    "title": "Auch Andere liefern Daten über Sie an Facebook",
+    "summary.text.1": "Ihre Facebook-Daten enthalten {{number_companies}} Firmen, die entweder Adresslisten an Facebook geliefert haben, auf denen auch Ihre Kontaktinformationen standen oder, die solche Listen von anderen Firmen genutzt haben. Das Ziel dabei: Ihnen gezielt Werbung zu zeigen.",
+    "summary.text.2": "Auf seiner Website schreibt Facebook, dass Firmen die Zielgruppen für ihre Werbung auf Basis von Kontaktdaten oder von Informationen über die Nutzung von Webseiten, Apps oder Shops der Firmen festlegen können. Das bedeutet z. B. dass Sie als Nutzer:in bei der Planung von Kampagnen ein- oder ausgeschlossen werden, z. B. auf Grund Ihres Wohnorts. Damit das möglich wird, müssen Sie selbst diesen Firmen oder deren Datenpartnern eine Erlaubnis erteilt haben. Waren Sie sich dessen bewusst?",
+    "details.text": "Dies ist die gesamte Liste der {{number_companies}} Firmen aus Ihren Facebook-Daten, die Daten über Sie hochgeladen oder solche Daten von anderen Firmen über Sie genutzt haben."
 }

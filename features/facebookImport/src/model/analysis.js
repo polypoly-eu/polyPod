@@ -1,6 +1,5 @@
-import { ZipFile } from "../model/storage.js";
+import { ZipFile } from "@polypoly-eu/feature-file-storage";
 import { createErrorStatus } from "./analyses/utils/analysis-status.js";
-
 import DataStructureBubblesAnalysis from "./analyses/ministories/data-structure-bubbles-analysis.js";
 import DataGroupsAnalysis from "./analyses/ministories/data-groups-analysis.js";
 import ConnectedAdvertisersAnalysis from "./analyses/ministories/connected-advertisers-analysis.js";
@@ -33,7 +32,7 @@ import SesssionActivityLocationsAnalysis from "./analyses/ministories/activity-l
 import MessagesActivityAnalysis from "./analyses/ministories/messages-activity-analysis.js";
 import JSONFileNamesAnalysis from "./analyses/report/json-file-names-analysis.js";
 import OffFacebookEventTypesAnalysis from "./analyses/report/off-facebook-event-types-analysis.js";
-import UknownTopLevelFoldersAnalysis from "./analyses/report/unknown-top-level-folders-analysis.js";
+import UnknownTopLevelFoldersAnalysis from "./analyses/report/unknown-top-level-folders-analysis.js";
 import InactiveCardsSummary from "./analyses/report/inactive-cards-summary.js";
 import ActivitiesAnalysis from "./analyses/ministories/activities-analysis.js";
 import AdvertisingValueAnalysis from "./analyses/ministories/advertising-value-analysis.js";
@@ -48,11 +47,11 @@ import { ExecutionResult } from "./importers/utils/execution-result.js";
 const subAnalyses = [
     DataStructureBubblesAnalysis,
     ActivitiesAnalysis,
+    PostReactionsTypesAnalysis,
     MessagesAnalysis,
-    OnOffFacebookEventsAnalysis,
     AboutPicturesDataAnalysis,
     AdvertisingValueAnalysis,
-    PostReactionsTypesAnalysis,
+    OnOffFacebookEventsAnalysis,
     ConnectedAdvertisersAnalysis,
 
     ExportTitleAnalysis,
@@ -79,7 +78,7 @@ const subAnalyses = [
 
     ReportMetadataAnalysis,
     DataImportingStatusAnalysis,
-    UknownTopLevelFoldersAnalysis,
+    UnknownTopLevelFoldersAnalysis,
     MissingCommonJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
     OffFacebookEventTypesAnalysis,
@@ -243,6 +242,6 @@ export async function analyzeZip(zipData, zipFile, facebookAccount, pod) {
 }
 
 export async function analyzeFile(zipData, facebookAccount) {
-    const zipFile = new ZipFile(zipData, window.pod);
+    const zipFile = await ZipFile.createWithCache(zipData, window.pod);
     return await analyzeZip(zipData, zipFile, facebookAccount, window.pod);
 }

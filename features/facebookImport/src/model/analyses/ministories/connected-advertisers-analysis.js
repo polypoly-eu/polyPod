@@ -17,7 +17,10 @@ export default class ConnectedAdvertisersAnalysis extends RootAnalysis {
     async analyze({ facebookAccount }) {
         this._connectedAdvertisersCount =
             facebookAccount.connectedAdvertisers.length;
-        this._connectedAdvertisers = facebookAccount.connectedAdvertisers;
+        this._connectedAdvertiserNames =
+            facebookAccount.connectedAdvertisers.map(
+                (connectedAdvertiser) => connectedAdvertiser.name
+            );
         this.active = this._connectedAdvertisersCount > 0;
     }
 
@@ -27,8 +30,7 @@ export default class ConnectedAdvertisersAnalysis extends RootAnalysis {
                 <h2
                     style={{
                         fontSize: "60px",
-                        fontFamily: "Jost Medium",
-                        fontWeight: 600,
+                        fontFamily: "Jost Bold",
                     }}
                 >
                     {this._connectedAdvertisersCount}
@@ -39,6 +41,9 @@ export default class ConnectedAdvertisersAnalysis extends RootAnalysis {
                     })}
                 </p>
                 <p>{i18n.t("connectedAdvertisersMiniStory:summary.text.2")}</p>
+                <p className="source">
+                    {i18n.t("common:source.your.facebook.data")}
+                </p>
             </div>
         );
     }
@@ -58,7 +63,7 @@ export default class ConnectedAdvertisersAnalysis extends RootAnalysis {
                         number_companies: this._connectedAdvertisersCount,
                     })}
                 </p>
-                <ListOfDetails list={this._connectedAdvertisers} />
+                <ListOfDetails list={this._connectedAdvertiserNames} />
             </div>
         );
     }

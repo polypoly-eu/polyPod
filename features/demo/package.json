@@ -2,12 +2,13 @@
   "name": "demo-feature",
   "version": "1.0.0",
   "scripts": {
-    "clean": "rm -rf dist",
-    "prebuild": "npm run clean",
-    "build": "cp -r src dist && cp node_modules/@polypoly-eu/podjs/dist/pod.js dist"
+    "prebuild": "shx rm -rf dist",
+    "build": "shx cp -r src dist && shx cp node_modules/@polypoly-eu/podjs/dist/pod.js dist",
+    "serve": "npm run build && node ./serve.js"
   },
   "devDependencies": {
-    "@polypoly-eu/podjs": "file:../../podjs"
+    "@polypoly-eu/podjs": "file:../../platform/podjs",
+    "express": "^4.17.3"
   },
   "private": true
 }

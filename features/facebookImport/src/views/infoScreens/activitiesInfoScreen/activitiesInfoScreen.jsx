@@ -3,14 +3,14 @@ import React from "react";
 import i18n from "../../../i18n.js";
 import InfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
-
+import "../infoScreens.css";
 const ActivitiesInfoScreen = () => {
     const activitiesInfoText = [
         <>
             <p>{i18n.t("activitiesInfoScreen:text1")}</p>
-            <p className="legend">
-                <strong>{i18n.t("activitiesInfoScreen:legend")}</strong>
-            </p>
+            <div className="legend chart-description-title">
+                {i18n.t("activitiesInfoScreen:legend")}
+            </div>
             <Infographic
                 type="activitiesBarChart"
                 texts={{
@@ -46,12 +46,7 @@ const ActivitiesInfoScreen = () => {
         </>,
     ];
 
-    return (
-        <InfoScreen
-            child1={activitiesInfoText[0]}
-            child2={activitiesInfoText[1]}
-        />
-    );
+    return <InfoScreen infoChildren={activitiesInfoText} />;
 };
 
 export default ActivitiesInfoScreen;

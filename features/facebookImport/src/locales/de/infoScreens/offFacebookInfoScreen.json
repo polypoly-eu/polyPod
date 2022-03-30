@@ -1,0 +1,8 @@
+{
+    "text1": "Diese Diagramme zeigen die Anzahl der Firmen, welche Ihre Aktivitäten auf deren Websites oder in deren Apps zurück an Facebook melden und die verschiedene Arten an Aktivitäten, die dabei unterschieden werden.",
+    "text2": "Dieses Diagramm heißt <strong>Balkendiagramm</strong>. Die Länge jedes Balkens ist proportional zu dem Wert, den er darstellt.",
+    "text3": "Der Facebook-Daten Importer hat erkannt, dass Ihre Facebook-Daten mindestens einen sogenannten Off-Facebook Event beinhalten.",
+    "text4": "Off-Facebook Events sind Informationen über Ihr Verhalten (z. B. Logins oder Einkäufe) in Apps oder auf Webseiten außerhalb von Facebook, welche von den Firmen, die diese Websiten oder Apps betreiben, an Facebook zurück gemeldet werden. Die Firmen tun das in der Regel, um Ihre eigenen Werbeanzeigen, Verkäufe oder Analysen zu verbessern.",
+    "text5": "Für diese Analyse nutzen wir eine Datei aus Ihren Facebook-Daten, die genau diese Off-Facebook Events enthält. Sie enthält Angaben über Zeitpunkt, Art der Aktivität, sowie Firmennamen oder Webadressen.",
+    "text6": "On-Facebook Events ermitteln wir aus einer Daten in Ihren Facebook-Daten, welche Inhalte auflistet, die Sie angeschaut haben. Dafür importieren wir derzeit den Teil über gesehene Werbeanzeigen und ermitteln den Absender (Firmenname, Webadresse). So können wir Firmen finden, die in Ihren On- und Off-Facebook Events erscheinen."
+}

@@ -4,33 +4,28 @@
     "build": "node index.js"
   },
   "devDependencies": {
-    "demo-feature": "file:../demo",
+    "bestzip": "^2.2.0",
     "facebook-import-feature": "file:../facebookImport",
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
-    "poly-explorer-feature-v1": "file:../polyExplorer-v1",
-    "poly-preview-feature": "file:../polyPreview"
+    "poly-preview-feature": "file:../polyPreview",
+    "demo-feature": "file:../demo"
   },
   "private": true,
   "polyPodFeatures": [
-    {
-      "archiveName": "facebookImport",
-      "moduleName": "facebook-import-feature",
-      "artifactPath": "dist"
-    },
     {
       "archiveName": "polyPreview",
       "moduleName": "poly-preview-feature",
       "artifactPath": "dist"
     },
     {
-      "archiveName": "polyExplorer-v1",
-      "moduleName": "poly-explorer-feature-v1",
+      "archiveName": "polyExplorer",
+      "moduleName": "poly-explorer-feature",
       "artifactPath": "dist"
     },
     {
-      "archiveName": "polyExplorer",
-      "moduleName": "poly-explorer-feature",
+      "archiveName": "facebookImport",
+      "moduleName": "facebook-import-feature",
       "artifactPath": "dist"
     },
     {

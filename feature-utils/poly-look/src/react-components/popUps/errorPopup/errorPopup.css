@@ -1,0 +1,38 @@
+.error-popup {
+    display: block;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    padding: 20px;
+    background: #ffb2b3; /* TODO: use var */
+    color: #0f1938; /* TODO: use var */
+}
+
+.error-popup h1 {
+    text-align: center;
+    font-family: "Jost Medium";
+}
+
+.error-popup a {
+    text-decoration: underline;
+}
+
+.error-popup pre {
+    border: 1px solid #0f1938;
+    padding: 8px;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    font-family: monospace;
+}
+
+.error-popup button {
+    display: block;
+    width: 265px;
+    height: 40px;
+    margin: 12px auto 0 auto;
+    border-radius: 4px;
+    background: #0f1938;
+    color: white;
+    font-size: 16px;
+}

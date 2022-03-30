@@ -1,9 +1,10 @@
-import { ZipFile } from "./storage.js";
+import { ZipFile } from "@polypoly-eu/feature-file-storage";
 
 import FacebookAccount from "./entities/facebook-account.js";
 import OffFacebookEventsImporter from "./importers/off-facebook-events-importer.js";
 import AdInterestsImporter from "./importers/ad-interests-importer.js";
 import ConnectedAdvertisersImporter from "./importers/connected-advertisers-importer.js";
+import ConnectedAdvertisersAllTypesImporter from "./importers/connected-advertisers-all-types-importer.js";
 import InteractedWithAdvertisersImporter from "./importers/interacted-with-advertisers-importer.js";
 import FriendsImporter from "./importers/friends-importer.js";
 import FollowedPagesImporter from "./importers/pages-followed-importer.js";
@@ -28,6 +29,7 @@ import ImporterExecutionResult from "./importers/utils/importer-execution-result
 export const dataImporters = [
     AdInterestsImporter,
     ConnectedAdvertisersImporter,
+    ConnectedAdvertisersAllTypesImporter,
     OffFacebookEventsImporter,
     InteractedWithAdvertisersImporter,
     FriendsImporter,
@@ -110,6 +112,6 @@ export async function importZip(zipFile, pod) {
 }
 
 export async function importData(zipData) {
-    const zipFile = new ZipFile(zipData, window.pod);
+    const zipFile = await ZipFile.createWithCache(zipData, window.pod);
     return importZip(zipFile, window.pod);
 }

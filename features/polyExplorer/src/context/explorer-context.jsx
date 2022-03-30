@@ -8,6 +8,8 @@ import { Company } from "../model/company.js";
 import { Product } from "../model/product.js";
 import { EntityFilter } from "../model/entityFilter.js";
 
+import popUps from "../popUps";
+
 //local-data imports
 import polyPediaCompanies from "../data/companies.json";
 import globalData from "../data/global.json";
@@ -62,8 +64,19 @@ function loadProducts() {
 //Will be clearer when we know the content structure
 const loadStoriesMetadata = () => {
     return {
-        messenger: {
+        "digital-giants-story": {
+            title: "story.digitalGiants.title",
+            shortTitle: "story.digitalGiants.title.short",
+            previewText: "story.digitalGiants.summarize",
+            img: {
+                src: "images/stories/digital-giants/card-image.svg",
+                alt: "story.digitalGiants.alt",
+            },
+            route: "/story/digital-giants-story",
+        },
+        "messenger-story": {
             title: "story.messenger.title",
+            shortTitle: "story.messenger.title.short",
             previewText: "story.messenger.summarize",
             img: {
                 src: "images/stories/messenger/card-image.svg",
@@ -71,25 +84,10 @@ const loadStoriesMetadata = () => {
             },
             route: "/story/messenger-story",
         },
-        digitalGiants: {
-            title: "story.digitalGiants.title",
-            previewText: "story.digitalGiants.summarize",
-            img: {
-                src: "images/stories/digital-giants/card-image.svg",
-                alt: "story.digitalGiants.alt",
-            },
-            route: "/story/example-story",
-        },
-        trackers: {
-            title: "story.trackers.title",
-            previewText: "story.trackers.summarize",
-            img: {
-                src: "images/stories/trackers/card-image.svg",
-                alt: "story.trackers.alt",
-            },
-        },
     };
 };
+
+const routesToSkipOnBack = ["/search"];
 
 export const ExplorerProvider = ({ children }) => {
     //router hooks
@@ -114,6 +112,7 @@ export const ExplorerProvider = ({ children }) => {
         },
     });
     const [activeFilters, setActiveFilters] = useState(new EntityFilter());
+    const [popUp, setPopUp] = useState(null);
 
     //constants
     const companies = loadCompanies();
@@ -144,6 +143,19 @@ export const ExplorerProvider = ({ children }) => {
         }
     }
 
+    function createPopUp({ type, content, onClose = closePopUp, props }) {
+        // This is a temporary fix - when the HTRT is not full size anymore it should not change the title any longer
+        if (type.endsWith("-info"))
+            pod.polyNav.setTitle(i18n.t(`common:screenTitle.how.to.read.this`));
+        if (type == "info-main")
+            pod.polyNav.setTitle(i18n.t(`common:screenTitle.info`));
+        setPopUp({ component: popUps[type], content, onClose, props });
+    }
+
+    function closePopUp() {
+        setPopUp(null);
+    }
+
     function routeTo(path, changedState) {
         Object.keys(changedState).forEach((key) => {
             if (!navigationStates.includes(key)) {
@@ -157,11 +169,15 @@ export const ExplorerProvider = ({ children }) => {
     }
 
     function handleBack() {
+        if (popUp) return setPopUp(null);
         if (currentPath != "/") {
             history.goBack();
-            if (history.location.state) {
-                changeNavigationState(history.location.state);
+            const location = history.location;
+            if (location.state) {
+                changeNavigationState(location.state);
             }
+            if (routesToSkipOnBack.indexOf(location.pathname) > -1)
+                handleBack();
         }
     }
 
@@ -169,17 +185,35 @@ export const ExplorerProvider = ({ children }) => {
         return entities[ppid];
     }
 
+    function entityJurisdictionByPpid(ppid) {
+        return entityObjectByPpid(ppid)?.jurisdiction;
+    }
+
     function handleOnboardingPopupClose() {
-        changeNavigationState({ firstRun: false });
+        setPopUp(null);
         writeFirstRun(false);
     }
 
     function handleOnboardingPopupMoreInfo() {
-        handleOnboardingPopupClose();
-        history.push("/info");
+        createPopUp({ type: "info-main" });
+        writeFirstRun(false);
     }
 
-    function updatePodNavigation() {
+    function setPolyNavActions() {
+        pod.polyNav.actions = {
+            info: () => createPopUp({ type: "info-main" }),
+            search: () => history.push("/search"),
+            back: () => handleBack(),
+        };
+    }
+
+    function activatePolyNavActions() {
+        pod.polyNav.setActiveActions(
+            currentPath == "/main" && !popUp ? ["info", "search"] : ["back"]
+        );
+    }
+
+    function changePolyNavScreenTitle() {
         if (currentPath == "/")
             pod.polyNav.setTitle(i18n.t(`common:screenTitle.main`));
         else if (
@@ -188,25 +222,24 @@ export const ExplorerProvider = ({ children }) => {
         )
             pod.polyNav.setTitle(selectedEntityObject.name);
         else if (currentPath.startsWith("/story/"))
-            pod.polyNav.setTitle("data-story name goes here");
+            pod.polyNav.setTitle(
+                i18n.t(
+                    `clusterStoriesPreview:${
+                        storiesMetadata[currentPath.split("/story/")[1]]
+                            .shortTitle
+                    }`
+                )
+            );
         else
             pod.polyNav.setTitle(
                 i18n.t(`common:screenTitle.${currentPath.slice(1)}`)
             );
+    }
 
-        pod.polyNav.actions = navigationState.firstRun
-            ? {
-                  info: () => {},
-                  search: () => {},
-              }
-            : {
-                  info: () => history.push("/info"),
-                  search: () => history.push("/search"),
-                  back: handleBack,
-              };
-        pod.polyNav.setActiveActions(
-            currentPath == "/main" ? ["info", "search"] : ["back"]
-        );
+    function updatePodNavigation() {
+        if (!popUp) changePolyNavScreenTitle();
+        setPolyNavActions();
+        activatePolyNavActions();
     }
 
     const counts = {
@@ -252,19 +285,20 @@ export const ExplorerProvider = ({ children }) => {
 
     //on-startup
     useEffect(() => {
-        setTimeout(
-            () =>
-                readFirstRun().then((firstRun) =>
-                    changeNavigationState({
-                        firstRun: firstRun,
-                    })
-                ),
-            300
+        readFirstRun().then(
+            (firstRun) =>
+                firstRun &&
+                createPopUp({
+                    type: "onboarding-popup",
+                    onClose: handleOnboardingPopupClose,
+                    props: { onMoreInfo: handleOnboardingPopupMoreInfo },
+                })
         );
     }, []);
 
     //on-change
     useEffect(() => {
+        // This is a temporary fix - when the HTRT is not full size anymore it should not change the title any longer
         updatePodNavigation();
     });
 
@@ -283,6 +317,7 @@ export const ExplorerProvider = ({ children }) => {
                 featuredEntities,
                 selectedEntityObject,
                 entityObjectByPpid,
+                entityJurisdictionByPpid,
                 dataRecipients,
                 globalData,
                 featuredEntityMaxValues,
@@ -292,6 +327,9 @@ export const ExplorerProvider = ({ children }) => {
                 handleFilterApply,
                 storiesMetadata,
                 products,
+                popUp,
+                createPopUp,
+                closePopUp,
             }}
         >
             {children}

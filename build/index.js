@@ -3,16 +3,24 @@
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 const path = require("path");
-const { spawn } = require("child_process");
+const { spawn, execSync } = require("child_process");
+
+const { performance } = require("perf_hooks");
+
 const validCommands = [
     "build",
     "clean",
-    "test",
     "lint",
     "lintfix",
     "list",
     "list-deps",
+    "sync-deps",
+    "test",
 ];
+
+function platformize(executable) {
+    return process.platform === "win32" ? `${executable}.cmd` : executable;
+}
 
 function parseCommandLine() {
     const [, scriptPath, ...parameters] = process.argv;
@@ -139,7 +147,8 @@ function logDependencies(packageTree) {
 }
 
 function executeProcess(executable, args, env = process.env) {
-    const spawnedProcess = spawn(executable, args, { env: env });
+    const cmd = platformize(executable);
+    const spawnedProcess = spawn(cmd, args, { env: env });
     spawnedProcess.stdout.on("data", (data) => {
         console.log(data.toString());
     });
@@ -156,12 +165,23 @@ function executeProcess(executable, args, env = process.env) {
     });
 }
 
-const npm = (...args) =>
-    executeProcess("npm", args, { ...process.env, FORCE_COLOR: 1 });
+const npm = async (...args) => {
+    const start = new Date();
+    await executeProcess(
+        "npm",
+        ["--no-update-notifier", "--no-fund", ...args],
+        { ...process.env, FORCE_COLOR: 1 }
+    );
+    const elapsed = new Date() - start;
+    const realCommand = args[args.length - 1];
+    logDetail(` ${ANSIInvert("npm " + realCommand)} finished in ${elapsed} ms`);
+};
 
 async function npmInstall(name) {
-    logDetail(`${name}: Installing dependencies ...`);
-    await npm("ci", "--no-update-notifier", "--no-fund");
+    if (fs.existsSync("package-lock.json")) {
+        logDetail(`${name}: Installing dependencies ...`);
+        await npm("--no-audit", "--prefer-offline", "ci");
+    }
 }
 
 async function npmRun(script, pkg) {
@@ -183,10 +203,19 @@ async function cleanPackage(pkg) {
         await fsPromises.rm(path, { recursive: true, force: true });
 }
 
+async function syncPackage(pkg) {
+    logDetail(`🕑 ${pkg.name} ...`);
+    if (fs.existsSync("package-lock.json")) {
+        fs.rmSync("package-lock.json");
+    }
+    await npm("i");
+}
+
 const commands = {
     build: (pkg) => npmInstall(pkg.name).then(() => npmRun("build", pkg)),
     test: (pkg) => npmRun("test", pkg),
     clean: (pkg) => cleanPackage(pkg),
+    "sync-deps": (pkg) => syncPackage(pkg),
 };
 
 async function executeCommand(pkg, command) {
@@ -247,8 +276,47 @@ function ANSIBold(string) {
     return `\x1b[1m${string}\x1b[0m`;
 }
 
-function logSuccess(command) {
-    logMain(`✅ Command «${ANSIBold(command)}» succeeded!`);
+function ANSIInvert(string) {
+    return `\x1b[7m${string}\x1b[27m`;
+}
+
+function logSuccess(command, timeLapsed) {
+    let message = `✅ Command «${ANSIBold(command)}» succeeded`;
+    const secondsLapsed = (timeLapsed / 1000).toFixed(2);
+    if (timeLapsed) {
+        message += ` in ⏰ ${ANSIBold(secondsLapsed)}s!`;
+    }
+    logMain(message);
+}
+
+function checkVersions(metaManifest) {
+    const thisNPM = platformize("npm");
+    let exitCode = 0;
+    const nodeVersion = process.version.split(".")[0];
+    if (nodeVersion < metaManifest.requiredNodeVersion) {
+        console.error(
+            `⚠️ Node.js v${metaManifest.requiredNodeVersion} or later ` +
+                `required, you are on ${process.version}`
+        );
+        exitCode = 1;
+    }
+    let npmVersion;
+    try {
+        npmVersion = execSync(`${thisNPM} --version`, {
+            encoding: "utf-8",
+        }).split(".")[0];
+        if (npmVersion < metaManifest.requiredNPMVersion) {
+            console.error(
+                `⚠️ NPM ${metaManifest.requiredNPMVersion} or later ` +
+                    `required, you are on ${npmVersion}`
+            );
+            exitCode = 1;
+        }
+    } catch (error) {
+        console.error(`⚠️ Error ${error} when trying to find NPM version`);
+        exitCode = 1;
+    }
+    return exitCode;
 }
 
 async function main() {
@@ -259,12 +327,21 @@ async function main() {
     }
 
     process.chdir(path.dirname(scriptPath));
+    const metaManifest = parseManifest("build/packages.json");
+    const exitCode = checkVersions(metaManifest);
+    if (exitCode !== 0) {
+        return exitCode;
+    }
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
 
+    if (!["list", "list-deps"].includes(command)) {
+        logDetail(`👷👷‍♀️ ...`);
+        await npmInstall("/");
+    }
+
     if (command === "lint") {
         logDetail(`🧹 ...`);
-        await npm("ci", "--no-update-notifier", "--no-fund");
         await executeProcess("npx", ["eslint", ...eslintOptions]);
         logSuccess(command);
         return 0;
@@ -277,21 +354,13 @@ async function main() {
         return 0;
     }
 
-    const metaManifest = parseManifest("build/packages.json");
-    const nodeMajorVersion = parseInt(process.version.slice(1, 3), 10);
-    if (nodeMajorVersion < metaManifest.requiredNodeMajorVersion) {
-        console.error(
-            `Node.js v${metaManifest.requiredNodeMajorVersion} or later ` +
-                `required, you are on ${process.version}`
-        );
-        return 1;
-    }
-
     try {
+        const startTime = performance.now();
         const packageTree = createPackageTree(metaManifest);
         if (start) skipPackages(packageTree, start);
         await processAll(packageTree, command);
-        logSuccess(command);
+        logSuccess(command, performance.now() - startTime);
+        if (command === "clean") await npm("run", "clean");
         return 0;
     } catch (error) {
         logMain(`Command '${command}' failed: ${error}\n`);

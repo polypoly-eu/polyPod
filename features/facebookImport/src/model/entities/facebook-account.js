@@ -1,3 +1,4 @@
+import i18n from "../../i18n.js";
 import Entity from "./entity.js";
 import MessageThreadsGroup from "./message-threads-group.js";
 import RelatedAccountsGroup from "./related-accounts-group.js";
@@ -49,8 +50,6 @@ class FacebookAccount extends Entity {
         this._importingResults = importingResults;
     }
 
-    /////
-
     get offFacebookCompaniesCount() {
         return this._offFacebookCompanies.length;
     }
@@ -100,7 +99,7 @@ class FacebookAccount extends Entity {
 
     forEachOffFacebookEvent(callback) {
         for (const offFacebookCompany of this.offFacebookCompanies) {
-            for (const offFacebookEvent of offFacebookCompany?.events) {
+            for (const offFacebookEvent of offFacebookCompany?.events || []) {
                 callback(offFacebookEvent);
             }
         }
@@ -275,86 +274,86 @@ class FacebookAccount extends Entity {
     get dataGroups() {
         return [
             {
-                title: "Connected Advertisers",
+                title: i18n.t("facebookAccount:connected-advertisers"),
                 count: this.connectedAdvertisers.length,
             },
             {
-                title: "Interacted with Advertisers",
+                title: i18n.t("facebookAccount:interacted-with-advertisers"),
                 count: this.interactedAdvertisers.length,
             },
 
             {
-                title: "Ad Interests",
+                title: i18n.t("facebookAccount:ad-interests"),
                 count: this.adInterests.length,
             },
 
             {
-                title: "Off-Facebook Activity",
+                title: i18n.t("facebookAccount:off-facebook-activity"),
                 count: this.offFacebookEventsCount,
             },
 
             {
-                title: "Friends",
+                title: i18n.t("facebookAccount:friends"),
                 count: this.friends.length,
             },
 
             {
-                title: "Followed Pages",
+                title: i18n.t("facebookAccount:followed-pages"),
                 count: this.followedPages.length,
             },
 
             {
-                title: "Received Friend Requests",
+                title: i18n.t("facebookAccount:received-friend-requests"),
                 count: this.receivedFriendRequests.length,
             },
 
             {
-                title: "Liked Pages",
+                title: i18n.t("facebookAccount:liked-pages"),
                 count: this.likedPages.length,
             },
 
             {
-                title: "Recommended Pages",
+                title: i18n.t("facebookAccount:recommended-pages"),
                 count: this.recommendedPages.length,
             },
 
             {
-                title: "Unfollowed Pages",
+                title: i18n.t("facebookAccount:unfollowed-pages"),
                 count: this.unfollowedPages.length,
             },
 
             {
-                title: "Searches",
+                title: i18n.t("facebookAccount:searches"),
                 count: this.searches.length,
             },
 
             {
-                title: "Messages",
+                title: i18n.t("facebookAccount:messages"),
                 count: this.messagesCount,
             },
 
             {
-                title: "Admin Records",
+                title: i18n.t("facebookAccount:admin-records"),
                 count: this.adminRecords.length,
             },
 
             {
-                title: "Session activities",
+                title: i18n.t("facebookAccount:session-activities"),
                 count: this.accountSessionActivities.length,
             },
 
             {
-                title: "Comments",
+                title: i18n.t("facebookAccount:comments"),
                 count: this.comments.length,
             },
 
             {
-                title: "Reactions",
+                title: i18n.t("facebookAccount:reactions"),
                 count: this.postReactions.length,
             },
 
             {
-                title: "Posts",
+                title: i18n.t("facebookAccount:posts"),
                 count: this.posts.length,
             },
         ];

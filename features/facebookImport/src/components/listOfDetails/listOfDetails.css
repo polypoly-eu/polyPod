@@ -8,22 +8,22 @@
     overflow: hidden scroll;
 }
 
+.scrollable-list ul li {
+    margin-bottom: 18px;
+}
+
+.scrollable-list ul .items {
+    font-family: "Jost Medium";
+    font-size: 20px;
+}
+
 .list-gradient {
     position: absolute;
     width: 100%;
     height: 90px;
-
     bottom: 0;
     left: 0;
 }
 .list-gradient.gradient {
     background: linear-gradient(#0f193800 0%, #0f1938);
-}
-.list-gradient.reverse {
-    top: 0;
-    transform: rotate(180deg);
-}
-
-.hidden {
-    display: none;
 }
