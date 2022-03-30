@@ -72,19 +72,17 @@ type InfoBackend = ObjectBackendSpec<{
 }>;
 
 type EndpointBackend = ObjectBackendSpec<{
-    send(
-        endpointId: string,
-        featureIdToken: string,
-        payload: string,
-        contentType?: string,
-        authorization?: string
-    ): ValueBackendSpec<void>;
-    get(
-        endpointId: string,
-        featureIdToken: string,
-        contentType?: string,
-        authorization?: string
-    ): ValueBackendSpec<string>;
+    send(request: {
+        endpointId: string;
+        payload: string;
+        contentType?: string;
+        authToken?: string;
+    }): ValueBackendSpec<void>;
+    get(request: {
+        endpointId: string;
+        contentType?: string;
+        authToken?: string;
+    }): ValueBackendSpec<string>;
 }>;
 
 type PodBackend = ObjectBackendSpec<{
@@ -257,25 +255,14 @@ export class RemoteClientPod implements Pod {
 
     get endpoint(): Endpoint {
         return {
-            send: (
-                endpointId: string,
-                featureIdToken: string,
-                payload: string,
-                contentType?: string,
-                authorization?: string
-            ) =>
-                this.rpcClient
-                    .endpoint()
-                    .send(endpointId, featureIdToken, payload, contentType, authorization)(),
-            get: (
-                endpointId: string,
-                featureIdToken: string,
-                contentType?: string,
-                authorization?: string
-            ) =>
-                this.rpcClient
-                    .endpoint()
-                    .get(endpointId, featureIdToken, contentType, authorization)(),
+            send: (request: {
+                endpointId: string;
+                payload: string;
+                contentType?: string;
+                authToken?: string;
+            }) => this.rpcClient.endpoint().send(request)(),
+            get: (request: { endpointId: string; contentType?: string; authToken?: string }) =>
+                this.rpcClient.endpoint().get(request)(),
         };
     }
 }
