@@ -51,10 +51,11 @@ import {
 export function backendServer<Spec extends BackendSpec>(
     impl: ServerOf<Spec>
 ): BackendProcedure {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async function process(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         impl: any,
         parts: ReadonlyArray<BackendRequestPart>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ): Promise<any> {
         if (parts.length === 0) return impl;
 
@@ -75,6 +76,7 @@ export function backendServer<Spec extends BackendSpec>(
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type RequestBuilder = Callable<any> &
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Record<string, (...args: any[]) => RequestBuilder>;
 
 /**

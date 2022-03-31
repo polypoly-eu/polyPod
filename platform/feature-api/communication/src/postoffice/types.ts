@@ -24,8 +24,8 @@ export interface ValueBackendSpec<T> {
  * Interface denoting a method backend endpoint of type `T`. This interface is purely
  * virtual and no instances are generated.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface ObjectBackendSpec<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     T extends Record<string, (...args: any[]) => BackendSpec>
 > {
     endpointType: "object";
