@@ -23,7 +23,13 @@ export default [
                 transforms: ["typescript"],
             }),
         ],
-        external: ["@polypoly-eu/rdf", "@zip.js/zip.js"],
+        external: [
+            "@polypoly-eu/rdf",
+            "@zip.js/zip.js",
+            "io-ts/Decoder",
+            "fp-ts/Either",
+            "fp-ts/function",
+        ],
     },
     {
         input: "src/pod.ts",
@@ -42,5 +48,6 @@ export default [
                 transforms: ["typescript"],
             }),
         ],
+        context: "window",
     },
 ];
