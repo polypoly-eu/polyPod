@@ -1,4 +1,4 @@
-import MinistoriesStatusAnalysis from "../../src/model/analyses/report/ministories-status-analysis";
+import { MinistoriesStatusAnalysis } from "@polypoly-eu/poly-analysis";
 import { NUMBER_OF_ANALYSES } from "../../src/model/analysis";
 import { zipFileWithOffFacebookEvents } from "../datasets/off-facebook-events-data";
 import { runAnalysesForZip } from "../utils/analyses-execution";

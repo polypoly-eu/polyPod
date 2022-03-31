@@ -1,5 +1,5 @@
 import { FeatureFileStorage, ZipFile, ZipFileEntry } from "./storage";
-import { runImporters } from "./importer";
+import { importZip, runImporter, runImporters } from "./importer";
 import {
     FileImportError,
     FileSelectionError,
@@ -11,6 +11,8 @@ import {
 } from "./context/poly-import.jsx";
 
 export {
+    importZip,
+    runImporter,
     runImporters,
     FeatureFileStorage,
     ZipFile,

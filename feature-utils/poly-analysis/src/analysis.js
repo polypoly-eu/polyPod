@@ -1,9 +1,9 @@
 import { Telemetry } from "../utils/performance-telemetry.js";
 import { createErrorStatus, createSuccessStatus } from "../utils/status.js";
 
-import InactiveCardsSummary from "../analyses/report/inactive-cards-summary.js";
+import InactiveCardsSummary from "./analysis/report/inactive-cards-summary.js";
 
-import MinistoriesStatusAnalysis from "../analyses/report/ministories-status-analysis.js";
+import MinistoriesStatusAnalysis from "./analysis/report/ministories-status-analysis.js";
 
 export class UnrecognizedData {
     constructor(analysesResults) {

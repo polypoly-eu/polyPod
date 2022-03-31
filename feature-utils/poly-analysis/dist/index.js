@@ -302,6 +302,7 @@ var polyImport = (function (exports, React) {
         }
     }
 
+    exports.MinistoriesStatusAnalysis = MinistoriesStatusAnalysis;
     exports.UnrecognizedData = UnrecognizedData;
     exports.runAnalysis = runAnalysis;
 
