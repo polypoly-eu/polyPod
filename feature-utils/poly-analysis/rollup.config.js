@@ -6,7 +6,7 @@ export default {
     output: {
         file: "dist/index.js",
         format: "iife",
-        name: "polyImport",
+        name: "polyAnalysis",
         globals: {
             react: "React",
             "react-dom": "ReactDOM",
