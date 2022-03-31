@@ -12,6 +12,13 @@ import {
     ImporterProvider,
     ImporterContext,
 } from "./context/importer-context.jsx";
+import {
+    PolyImportContext,
+    PolyImportProvider,
+} from "@polypoly-eu/poly-import";
+import { analyzeFile } from "./model/analysis";
+import { dataImporters } from "./model/importer.js";
+import FacebookAccount from "./model/entities/facebook-account.js";
 
 import { ErrorPopup } from "@polypoly-eu/poly-look";
 import Overview from "./views/overview/overview.jsx";
@@ -36,16 +43,12 @@ window.manifestData = manifestData;
 
 import i18n from "./i18n.js";
 import { INITIAL_HISTORY_STATE } from "./constants.js";
-import {
-    FileLoaderContext,
-    FileLoaderProvider,
-} from "./context/file-loader-context.jsx";
 
 const FacebookImporter = () => {
     const { pod, globalError, setGlobalError, isLoading } =
         useContext(ImporterContext);
 
-    const { files } = useContext(FileLoaderContext);
+    const { files } = useContext(PolyImportContext);
 
     function determineRoute() {
         if (files.length > 0)
@@ -143,10 +146,15 @@ const FacebookImporterApp = () => {
     return (
         <Router history={history}>
             <ImporterProvider>
-                <FileLoaderProvider parentContext={ImporterContext}>
+                <PolyImportProvider
+                    parentContext={ImporterContext}
+                    analyzeFile={analyzeFile}
+                    dataImporters={dataImporters}
+                    DataAccount={FacebookAccount}
+                >
                     <div className="poly-nav-bar-separator-overlay" />
                     <FacebookImporter />
-                </FileLoaderProvider>
+                </PolyImportProvider>
             </ImporterProvider>
         </Router>
     );

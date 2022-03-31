@@ -2,5 +2,11 @@
   "name": "@polypoly-eu/poly-import",
   "main": "src/index.js",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c rollup.config.js"
+  },
+  "dependencies": {
+    "react": "^17.0.2"
+  }
 }

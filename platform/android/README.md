@@ -43,7 +43,7 @@ ktlint
 
 in this directory.
 
-Additionally, a gradle target for linting has been added; use
+Additionally, a `gradle` target for linting has been added; use
 
 ```shell
 ./gradlew ktlintCheck
@@ -53,7 +53,7 @@ to check the report.
 
 ## Installing features at runtime
 
-The polyPod already bundles the features it ships with, but it will also load
+The polyPod already bundles all the features it ships with, but it will also load
 additional feature packages from the `files/features/` directory on the device's
 internal storage. You can manually push a feature there by using `adb push` to
 get it on the device, and `adb shell run-as coop.polypoly.polypod` to copy it
