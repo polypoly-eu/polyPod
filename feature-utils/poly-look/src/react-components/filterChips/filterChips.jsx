@@ -138,11 +138,10 @@ const FilterChips = ({
 };
 
 FilterChips.propTypes = {
-  chipsContent: propTypes.oneOfType([propTypes.string, propTypes.object])
-    .isRequired,
+  chipsContent: propTypes.array.isRequired,
   defaultActiveChips: propTypes.array,
   onChipClick: propTypes.func,
-  exclusive: propTypes.bool.isRequired,
+  exclusive: propTypes.bool,
   theme: propTypes.string,
   allChip: propTypes.object,
   othersChip: propTypes.object,
