@@ -21,7 +21,7 @@
     "docs": "typedoc"
   },
   "dependencies": {
-    "@polypoly-eu/bubblewrap": "file:../bubblewrap",
+    "@polypoly-eu/communication": "file:..",
     "@polypoly-eu/pod-api": "file:../../api/pod-api",
     "@polypoly-eu/port-authority": "file:../port-authority",
     "@polypoly-eu/postoffice": "file:../postoffice",
