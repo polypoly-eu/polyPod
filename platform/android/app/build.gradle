@@ -106,7 +106,6 @@ repositories {
 }
 
 dependencies {
-    implementation project(":bubblewrap")
     implementation project(":polyOut")
     implementation 'org.msgpack:msgpack-core:0.8.20'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
