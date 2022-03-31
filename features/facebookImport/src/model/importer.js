@@ -1,6 +1,3 @@
-import { runImporters, ZipFile } from "@polypoly-eu/poly-import";
-
-import FacebookAccount from "./entities/facebook-account.js";
 import OffFacebookEventsImporter from "./importers/off-facebook-events-importer.js";
 import AdInterestsImporter from "./importers/ad-interests-importer.js";
 import ConnectedAdvertisersImporter from "./importers/connected-advertisers-importer.js";
@@ -23,7 +20,7 @@ import CommentsImporter from "./importers/comments-importer.js";
 import PostReactionsImporter from "./importers/post-reactions-importer.js";
 import PostsImporter from "./importers/posts-importer.js";
 
-const dataImporters = [
+export const dataImporters = [
     AdInterestsImporter,
     ConnectedAdvertisersImporter,
     ConnectedAdvertisersAllTypesImporter,
@@ -48,22 +45,3 @@ const dataImporters = [
 ];
 
 export const NUMBER_OF_IMPORTERS = dataImporters.length;
-
-export async function importZip(zipFile, pod) {
-    const facebookAccount = new FacebookAccount();
-    const importingResults = await runImporters(
-        dataImporters,
-        zipFile,
-        facebookAccount,
-        pod
-    );
-
-    facebookAccount.importingResults = importingResults;
-
-    return facebookAccount;
-}
-
-export async function importData(zipData) {
-    const zipFile = await ZipFile.createWithCache(zipData, window.pod);
-    return importZip(zipFile, window.pod);
-}

@@ -1,5 +1,6 @@
 import { createErrorStatus, createSuccessStatus } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
+import { ZipFile } from "./storage";
 
 class ImporterExecutionResult {
     constructor(importer, status, executionTime) {
@@ -69,15 +70,29 @@ export async function runImporter(
     }
 }
 
-export async function runImporters(
-    importerClasses,
-    zipFile,
-    facebookAccount,
-    pod
-) {
+export async function runImporters(importerClasses, zipFile, dataAccount, pod) {
     return await Promise.all(
         importerClasses.map(async (importerClass) => {
-            return runImporter(importerClass, zipFile, facebookAccount, pod);
+            return runImporter(importerClass, zipFile, dataAccount, pod);
         })
     );
+}
+
+export async function importZip({ dataImporters, zipFile, pod, DataAccount }) {
+    const dataAccount = new DataAccount();
+    const importingResults = await runImporters(
+        dataImporters,
+        zipFile,
+        dataAccount,
+        pod
+    );
+
+    dataAccount.importingResults = importingResults;
+
+    return dataAccount;
+}
+
+export async function importData({ dataImporters, zipData, DataAccount }) {
+    const zipFile = await ZipFile.createWithCache(zipData, window.pod);
+    return importZip({ dataImporters, zipFile, pod: window.pod, DataAccount });
 }
