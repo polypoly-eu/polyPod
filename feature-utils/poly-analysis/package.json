@@ -1,0 +1,7 @@
+{
+    "name": "@polypoly-eu/poly-analysis",
+    "main": "src/index.js",
+    "private": true,
+    "type": "module"
+  }
+  
