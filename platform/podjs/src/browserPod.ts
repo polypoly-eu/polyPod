@@ -421,45 +421,45 @@ function endpointErrorMessage(fetchType: string, errorlog: string): string {
 
 class BrowserEndpoint implements Endpoint {
     endpointNetwork = new BrowserNetwork();
-    async send(request: {
-        endpointId: string;
-        payload: string;
-        contentType?: string;
-        authToken?: string;
-    }): Promise<void> {
-        if (!approveEndpointFetch(request.endpointId))
+    async send(
+        endpointId: string,
+        payload: string,
+        contentType?: string,
+        authToken?: string
+    ): Promise<void> {
+        if (!approveEndpointFetch(endpointId))
             throw endpointErrorMessage("send", "User denied request");
-        const endpoint = getEndpoint(request.endpointId);
+        const endpoint = getEndpoint(endpointId);
         if (!endpoint) {
             throw endpointErrorMessage("send", "Endpoint URL not set");
         }
         const NetworkResponse = await this.endpointNetwork.httpPost(
             endpoint.url,
-            request.payload,
+            payload,
             endpoint.allowInsecure,
-            request.contentType,
-            request.authToken
+            contentType,
+            authToken
         );
         if (NetworkResponse.error) {
             throw endpointErrorMessage("send", NetworkResponse.error);
         }
     }
 
-    async get(request: {
-        endpointId: string;
-        contentType?: string;
-        authToken?: string;
-    }): Promise<string> {
-        if (!approveEndpointFetch(request.endpointId))
+    async get(
+        endpointId: string,
+        contentType?: string,
+        authToken?: string
+    ): Promise<string> {
+        if (!approveEndpointFetch(endpointId))
             throw endpointErrorMessage("get", "User denied request");
-        const endpoint = getEndpoint(request.endpointId);
+        const endpoint = getEndpoint(endpointId);
         if (!endpoint)
             throw endpointErrorMessage("get", "Endpoint URL not set");
         const NetworkResponse = await this.endpointNetwork.httpGet(
             endpoint.url,
             endpoint.allowInsecure,
-            request.contentType,
-            request.authToken
+            contentType,
+            authToken
         );
         if (NetworkResponse.error)
             throw endpointErrorMessage("get", NetworkResponse.error);

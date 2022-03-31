@@ -160,23 +160,19 @@ export class DefaultPod implements Pod {
      */
     get endpoint(): Endpoint {
         return {
-            send(request: {
-                endpointId: string;
-                payload: string;
-                contentType?: string;
-                authToken?: string;
-            }): Promise<void> {
+            send(
+                endpointId: string,
+                payload: string,
+                contentType?: string,
+                authToken?: string
+            ): Promise<void> {
                 throw new Error(
-                    `Called with ${request.endpointId}, ${request.payload}, ${request.contentType}, ${request.authToken} but not implemented`
+                    `Called with ${endpointId}, ${payload}, ${contentType}, ${authToken} but not implemented`
                 );
             },
-            get(request: {
-                endpointId: string;
-                contentType?: string;
-                authToken?: string;
-            }): Promise<string> {
+            get(endpointId: string, contentType?: string, authToken?: string): Promise<string> {
                 throw new Error(
-                    `Called with ${request.endpointId}, ${request.contentType}, ${request.authToken} but not implemented`
+                    `Called with ${endpointId}, ${contentType}, ${authToken} but not implemented`
                 );
             },
         };

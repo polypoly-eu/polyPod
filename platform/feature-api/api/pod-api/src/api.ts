@@ -187,12 +187,12 @@ export interface Endpoint {
      * token will be used.
      * @throws if an unsupported request goes through, if an endpoint is not reached or if a user denies a request
      */
-    send(request: {
-        endpointId: string;
-        payload: string;
-        contentType?: string;
-        authToken?: string;
-    }): Promise<void>;
+    send(
+        endpointId: string,
+        payload: string,
+        contentType?: string,
+        authToken?: string
+    ): Promise<void>;
 
     /**
      * Performs an http GET request to the endpoint of the given ID.
@@ -202,7 +202,7 @@ export interface Endpoint {
      * @returns a promise with the payload of the response
      * @throws if an unsupported request goes through, if an endpoint is not reached, if a user denies a request or if response is null
      */
-    get(request: { endpointId: string; contentType?: string; authToken?: string }): Promise<string>;
+    get(endpointId: string, contentType?: string, authToken?: string): Promise<string>;
 }
 
 /**

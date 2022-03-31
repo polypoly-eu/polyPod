@@ -72,17 +72,13 @@ type InfoBackend = ObjectBackendSpec<{
 }>;
 
 type EndpointBackend = ObjectBackendSpec<{
-    send(request: {
-        endpointId: string;
-        payload: string;
-        contentType?: string;
-        authToken?: string;
-    }): ValueBackendSpec<void>;
-    get(request: {
-        endpointId: string;
-        contentType?: string;
-        authToken?: string;
-    }): ValueBackendSpec<string>;
+    send(
+        endpointId: string,
+        payload: string,
+        contentType?: string,
+        authToken?: string
+    ): ValueBackendSpec<void>;
+    get(endpointId: string, contentType?: string, authToken?: string): ValueBackendSpec<string>;
 }>;
 
 type PodBackend = ObjectBackendSpec<{
@@ -255,14 +251,10 @@ export class RemoteClientPod implements Pod {
 
     get endpoint(): Endpoint {
         return {
-            send: (request: {
-                endpointId: string;
-                payload: string;
-                contentType?: string;
-                authToken?: string;
-            }) => this.rpcClient.endpoint().send(request)(),
-            get: (request: { endpointId: string; contentType?: string; authToken?: string }) =>
-                this.rpcClient.endpoint().get(request)(),
+            send: (endpointId: string, payload: string, contentType?: string, authToken?: string) =>
+                this.rpcClient.endpoint().send(endpointId, payload, contentType, authToken)(),
+            get: (endpointId: string, contentType?: string, authToken?: string) =>
+                this.rpcClient.endpoint().get(endpointId, contentType, authToken)(),
         };
     }
 }
