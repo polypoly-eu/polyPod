@@ -8,4 +8,4 @@ Run `npm ci` for installing and `npm run build`
 
 ## Usage
 
-Import analysis functions from package and use them on the specific data being processed from the data-acount.
+Import analysis functions from package and use them on the specific data being processed from the data-account.
