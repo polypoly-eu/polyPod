@@ -45,8 +45,7 @@ jobs:
               uses: ReactiveCircus/android-emulator-runner@76c2bf6f95ed6458fd659a1bdb680a0f8df232dc
               if: |
                 !github.head_ref
-                && ( startsWith(github.ref, 'refs/heads/release') == true
-                     || startsWith(github.ref, 'refs/heads/main') == true )
+                && ( github.ref == 'refs/heads/release' || github.ref == 'refs/heads/main' )
               with:
                 working-directory: platform/android
                 arch: 'x86_64'
