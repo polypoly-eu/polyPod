@@ -15,7 +15,11 @@ export async function runAnalysisForExport(
         zipFile,
         DataAccount: FacebookAccount,
     });
-    const enrichedData = { ...zipFile.enrichedData(), facebookAccount, pod };
+    const enrichedData = {
+        ...zipFile.enrichedData(),
+        dataAccount: facebookAccount,
+        pod,
+    };
     const analysisResult = await runAnalysis(analysisClass, enrichedData);
     return { analysisResult, facebookAccount };
 }
@@ -25,7 +29,7 @@ export async function runAnalysisForAccount(
     facebookAccount,
     pod = new MockerPod()
 ) {
-    const enrichedData = { facebookAccount, pod };
+    const enrichedData = { dataAccount: facebookAccount, pod };
     return runAnalysis(analysisClass, enrichedData);
 }
 
