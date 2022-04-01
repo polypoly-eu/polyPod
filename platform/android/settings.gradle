@@ -1,3 +1,2 @@
 rootProject.name = 'polyPod-Android'
-include ':polyOut', ':bubblewrap', ':app'
-project(':bubblewrap').projectDir = file('../feature-api/communication')
+include ':polyOut', ':app'
