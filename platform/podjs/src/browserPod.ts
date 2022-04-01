@@ -532,9 +532,9 @@ function getEndpoint(endpointId: EndpointKeyId): EndpointInfo | null {
 }
 
 /**
- * `approveEndpointFetch` is a function that takes in two parameters, `endpointId` and
- * `featureIdToken` and prompts a confirm of this connection. It returns the answer as a boolean value.
- * @param {string} endpointId - The ID of the endpoint that the feature wants to contact.
+ * It takes an endpoint ID and asks the user if they want to allow the feature to fetch data from that
+ * endpoint
+ * @param {string} endpointId - The endpoint ID that the feature wants to contact.
  * @returns The return value is a boolean.
  */
 function approveEndpointFetch(endpointId: string): boolean {
