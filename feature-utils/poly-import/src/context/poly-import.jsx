@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { FeatureFileStorage } from "../storage";
+import { FeatureFileStorage, ZipFile } from "../storage";
 import { importData } from "../importer";
 
 import { RefreshFilesError } from "../errors/polyIn-errors.js";
@@ -17,6 +17,7 @@ export const PolyImportContext = createContext();
 export const PolyImportProvider = ({
     children,
     parentContext,
+    subAnalyses,
     analyzeFile,
     dataImporters,
     DataAccount,
@@ -78,9 +79,12 @@ export const PolyImportProvider = ({
         importData({ dataImporters, zipData: files[0], DataAccount }).then(
             (newAccount) => {
                 setAccount(newAccount);
-                analyzeFile(files[0], newAccount).then((fileAnalysis) =>
-                    setFileAnalysis(fileAnalysis)
-                );
+                analyzeFile({
+                    zipData: files[0],
+                    dataAccount: newAccount,
+                    ZipFile: ZipFile,
+                    subAnalyses,
+                }).then((fileAnalysis) => setFileAnalysis(fileAnalysis));
             }
         );
     }, [files]);

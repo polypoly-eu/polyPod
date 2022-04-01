@@ -1,4 +1,15 @@
-import { UnrecognizedData, runAnalysis } from "./analysis";
+import {
+    UnrecognizedData,
+    runAnalysis,
+    analyzeFile,
+    analyzeZip,
+} from "./analysis";
 import MinistoriesStatusAnalysis from "./analysis/report/ministories-status-analysis";
 
-export { UnrecognizedData, runAnalysis, MinistoriesStatusAnalysis };
+export {
+    runAnalysis,
+    analyzeFile,
+    analyzeZip,
+    UnrecognizedData,
+    MinistoriesStatusAnalysis,
+};

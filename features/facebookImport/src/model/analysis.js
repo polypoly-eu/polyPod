@@ -1,6 +1,3 @@
-import { ZipFile } from "@polypoly-eu/poly-import";
-import { runAnalysis, UnrecognizedData } from "@polypoly-eu/poly-analysis";
-
 import DataStructureBubblesAnalysis from "./analyses/ministories/data-structure-bubbles-analysis.js";
 import DataGroupsAnalysis from "./analyses/ministories/data-groups-analysis.js";
 import ConnectedAdvertisersAnalysis from "./analyses/ministories/connected-advertisers-analysis.js";
@@ -41,7 +38,7 @@ import AdViewsAnalysis from "./analyses/ministories/ad-views-analysis.js";
 import OnOffFacebookAdvertisersAnalysis from "./analyses/ministories/on-off-facebook-advertisers-analysis.js";
 import PostReactionsTypesAnalysis from "./analyses/ministories/post-reactions-types-analysis.js";
 
-const subAnalyses = [
+export const subAnalyses = [
     DataStructureBubblesAnalysis,
     ActivitiesAnalysis,
     PostReactionsTypesAnalysis,
@@ -119,29 +116,3 @@ const subAnalyses = [
 });
 
 export const NUMBER_OF_ANALYSES = subAnalyses.length;
-
-export async function analyzeZip(zipData, zipFile, facebookAccount, pod) {
-    const enrichedData = { ...zipData, zipFile, facebookAccount, pod };
-    const analysesResults = await Promise.all(
-        subAnalyses.map(async (subAnalysisClass) => {
-            return runAnalysis(subAnalysisClass, enrichedData);
-        })
-    );
-
-    const successfullyExecutedAnalyses = analysesResults
-        .filter(({ status }) => status.isSuccess)
-        .map(({ analysis }) => analysis);
-    const activeGlobalAnalyses = successfullyExecutedAnalyses.filter(
-        (analysis) => !analysis.isForDataReport && analysis.active
-    );
-
-    return {
-        analyses: activeGlobalAnalyses,
-        unrecognizedData: new UnrecognizedData(analysesResults),
-    };
-}
-
-export async function analyzeFile(zipData, facebookAccount) {
-    const zipFile = await ZipFile.createWithCache(zipData, window.pod);
-    return await analyzeZip(zipData, zipFile, facebookAccount, window.pod);
-}

@@ -96,7 +96,10 @@ export async function runAnalysis(analysisClass, enrichedData) {
 
     const telemetry = new Telemetry();
     try {
-        const status = await subAnalysis.analyze(enrichedData);
+        const facebookEnrichedData = { ...enrichedData };
+        facebookEnrichedData.facebookAccount = facebookEnrichedData.dataAccount;
+
+        const status = await subAnalysis.analyze(facebookEnrichedData);
         return new AnalysisExecutionResult(
             subAnalysis,
             status,
@@ -109,4 +112,47 @@ export async function runAnalysis(analysisClass, enrichedData) {
             telemetry.elapsedTime()
         );
     }
+}
+
+export async function analyzeZip({
+    zipData,
+    zipFile,
+    subAnalyses,
+    dataAccount,
+    pod,
+}) {
+    const enrichedData = { ...zipData, zipFile, dataAccount, pod };
+    const analysesResults = await Promise.all(
+        subAnalyses.map(async (subAnalysisClass) => {
+            return runAnalysis(subAnalysisClass, enrichedData);
+        })
+    );
+
+    const successfullyExecutedAnalyses = analysesResults
+        .filter(({ status }) => status.isSuccess)
+        .map(({ analysis }) => analysis);
+    const activeGlobalAnalyses = successfullyExecutedAnalyses.filter(
+        (analysis) => !analysis.isForDataReport && analysis.active
+    );
+
+    return {
+        analyses: activeGlobalAnalyses,
+        unrecognizedData: new UnrecognizedData(analysesResults),
+    };
+}
+
+export async function analyzeFile({
+    zipData,
+    dataAccount,
+    ZipFile,
+    subAnalyses,
+}) {
+    const zipFile = await ZipFile.createWithCache(zipData, window.pod);
+    return await analyzeZip({
+        zipData,
+        zipFile,
+        subAnalyses,
+        dataAccount,
+        pod: window.pod,
+    });
 }
