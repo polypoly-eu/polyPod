@@ -37,6 +37,9 @@ jobs:
               working-directory: platform/ios
               run: make test
             - uses: actions/setup-java@v2
+              if: |
+                !github.head_ref
+                && ( github.ref == 'refs/heads/release' || github.ref == 'refs/heads/main' )
               with:
                   distribution: 'zulu'
                   java-version: 11
