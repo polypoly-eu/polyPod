@@ -16,7 +16,7 @@ it("Renders Chip", () => {
 
 it("Chip has been selected", () => {
   const { getByRole } = render(chip);
-  const chipClassName = getByRole("button").className;
+  const chipElement = getByRole("button");
   expect(chip.props.active).toBeTruthy();
-  expect(chipClassName).toMatch("chip selected");
+  expect(chipElement).toHaveClass("chip selected");
 });
