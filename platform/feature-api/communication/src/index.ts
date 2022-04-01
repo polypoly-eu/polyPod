@@ -6,5 +6,5 @@
  * @packageDocumentation
  */
 
-export * from "./bubblewrap/main/javascript";
+export * from "./bubblewrap";
 export * from "./postoffice";
