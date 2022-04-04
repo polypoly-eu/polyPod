@@ -23,7 +23,7 @@ export function mapHandler<T, U>(handler: Handler<T>, f: (x: U) => T): Handler<U
  * A half port that only sends messages.
  *
  * This interface provides very little guarantees beside invoking the [[Handler]]s of a [[ReceivePort]] “somewhere
- * else”. In particular, sending a message provides no observable behaviour. There are no temporal guarantees when
+ * else”. In particular, sending a message provides no observable behaviour. There are no temporal sequence guarantees when
  * sending multiple messages.
  *
  * Futhermore, it is not guaranteed that values sent through a port arrive unmodified at the other end. For example,
@@ -43,10 +43,11 @@ export interface SendPort<Out> {
 /**
  * Map operation for [[SendPort]]s. The returned port behaves identically to the original port, but applies a function
  * to outgoing messages _before_ they are sent on the original port.
+ * @returns an instance of [[SendPort]] instantiated to the `In` class.
  */
 export function mapSendPort<Out, Out2>(port: SendPort<Out>, f: (x: Out2) => Out): SendPort<Out2> {
     return {
-        send: (value) => port.send(f(value)),
+        send: (value: Out2) => port.send(f(value)),
     };
 }
 
@@ -70,13 +71,14 @@ export interface ReceivePort<In> {
 /**
  * Map operation for [[ReceivePort]]s. The returned port behaves identically to the original port, but applies a
  * function to incoming messages _before_ they are sent to the handlers.
+ * @returns an instance of [[ReceivePort]] instantiated to the `Out` class.
  */
 export function mapReceivePort<In, In2>(
     port: ReceivePort<In>,
     f: (x: In) => In2
 ): ReceivePort<In2> {
     return {
-        addHandler: (handler) => port.addHandler(mapHandler(handler, f)),
+        addHandler: (handler: Handler<In2>) => port.addHandler(mapHandler(handler, f)),
     };
 }
 
@@ -114,17 +116,6 @@ export function mapPort<In1, Out1, In2, Out2>(
  */
 export function forward<InOut>(from: ReceivePort<InOut>, to: SendPort<InOut>): void {
     from.addHandler((t) => to.send(t));
-}
-
-/**
- * Bi-directionally forwards messages between two [[Port]]s.
- *
- * Both ports must have identical incoming and outcoming types. This function uses [[forward]] to forward messages from
- * the first port to the second, and again for the other direction.
- */
-export function connect<InOut>(port1: Port<InOut, InOut>, port2: Port<InOut, InOut>): void {
-    forward(port1, port2);
-    forward(port2, port1);
 }
 
 /**

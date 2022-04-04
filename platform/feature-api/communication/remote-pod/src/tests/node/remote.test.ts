@@ -4,7 +4,7 @@ import { dataset } from "@rdfjs/dataset";
 import { RemoteClientPod, RemoteServerPod } from "../../remote";
 import { MessageChannel, MessagePort } from "worker_threads";
 import { Port } from "@polypoly-eu/port-authority";
-import { fromNodeMessagePort } from "@polypoly-eu/port-authority/dist/node";
+import { fromNodeMessagePort } from "@polypoly-eu/port-authority";
 import { createServer, Server } from "http";
 import { once } from "events";
 import { podSpec } from "@polypoly-eu/pod-api/dist/spec";
