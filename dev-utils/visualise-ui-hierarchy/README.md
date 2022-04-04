@@ -1,5 +1,8 @@
 # Visualise (the) UI hierarchy (of polyPod features)
 
+An experimental setup for analysing and visualising UI component hierarchy and
+reuse in polyPod features.
+
 ## Requirements
 
 Aside from the stuff you probably already have (Node, Make, Python and Git), you
