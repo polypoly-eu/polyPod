@@ -1,6 +1,6 @@
 import React from "react";
 import BasicList from "../../../components/basicList/basicList.jsx";
-import ReportAnalysis from "./report-analysis.js";
+import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class OffFacebookEventTypesAnalysis extends ReportAnalysis {
     get title() {

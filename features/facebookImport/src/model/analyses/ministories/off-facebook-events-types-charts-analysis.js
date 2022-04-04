@@ -1,6 +1,6 @@
 import React from "react";
 import BarChart from "../../../components/dataViz/barChart.jsx";
-import RootAnalysis from "./root-analysis.js";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 import { groupOffFacebookEventsByType } from "../utils/on-off-facebook-events-utils.js";
 
 export default class OffFacebookEventsTypesChartAnalysis extends RootAnalysis {

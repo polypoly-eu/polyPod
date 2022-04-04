@@ -1,6 +1,6 @@
 import React from "react";
 import BasicList from "../../../components/basicList/basicList.jsx";
-import RootAnalysis from "./root-analysis.js";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class EmailAddressesAnalysis extends RootAnalysis {
     get title() {

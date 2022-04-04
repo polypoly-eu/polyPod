@@ -1,6 +1,6 @@
 import React from "react";
 import DataStructureMiniStory from "../../../components/dataStructureMiniStory/dataStructureMiniStory.jsx";
-import RootAnalysis from "./root-analysis.js";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 import i18n from "../../../i18n.js";
 
 export default class DataStructureBubblesAnalysis extends RootAnalysis {

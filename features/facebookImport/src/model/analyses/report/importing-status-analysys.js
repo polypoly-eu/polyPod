@@ -1,5 +1,5 @@
 import React from "react";
-import ReportAnalysis from "./report-analysis.js";
+import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class DataImportingStatusAnalysis extends ReportAnalysis {
     get title() {

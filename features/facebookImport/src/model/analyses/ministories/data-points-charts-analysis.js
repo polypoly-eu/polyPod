@@ -1,6 +1,6 @@
 import React from "react";
 import BarChart from "../../../components/dataViz/barChart.jsx";
-import RootAnalysis from "./root-analysis.js";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class DataChartsAnalysis extends RootAnalysis {
     get title() {

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { groupPostReactionsByType } from "../utils/post-reactions-utils";
-import RootAnalysis from "./root-analysis";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 import PostReactionTypesMiniStory from "../../../components/postReactionTypesMiniStory/postReactionTypesMiniStory.jsx";
 import i18n from "../../../i18n";

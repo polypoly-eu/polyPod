@@ -1,6 +1,6 @@
 import React from "react";
 import i18n from "../../../i18n.js";
-import RootAnalysis from "./root-analysis.js";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 import {
     ActivitiesMiniStorySummary,

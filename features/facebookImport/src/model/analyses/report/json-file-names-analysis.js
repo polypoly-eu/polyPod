@@ -5,7 +5,7 @@ import {
     anonymizeJsonEntityPath,
     jsonDataEntities,
 } from "../../importers/utils/importer-util.js";
-import ReportAnalysis from "./report-analysis.js";
+import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class JSONFileNamesAnalysis extends ReportAnalysis {
     get title() {

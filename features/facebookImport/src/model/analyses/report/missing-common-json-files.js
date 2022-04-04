@@ -4,7 +4,7 @@ import BasicList from "../../../components/basicList/basicList.jsx";
 import { jsonDataEntities } from "../../importers/utils/importer-util.js";
 
 import commonStructure from "../../../static/commonStructure";
-import ReportAnalysis from "./report-analysis.js";
+import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class MissingCommonJSONFilesAnalysis extends ReportAnalysis {
     get title() {

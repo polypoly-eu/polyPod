@@ -1,5 +1,5 @@
 import React from "react";
-import RootAnalysis from "./root-analysis";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 import BarChart from "../../../components/dataViz/barChart.jsx";
 
 export default class MessagesActivityAnalysis extends RootAnalysis {

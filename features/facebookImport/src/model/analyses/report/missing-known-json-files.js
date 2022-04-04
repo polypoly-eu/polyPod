@@ -6,7 +6,7 @@ import {
     jsonDataEntities,
 } from "../../importers/utils/importer-util.js";
 import allStructure from "../../../static/allStructure";
-import ReportAnalysis from "./report-analysis.js";
+import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
     get title() {

@@ -1,6 +1,6 @@
 import React from "react";
 import BasicDataCountTable from "../../../components/basicDataCountTable/basicDataCountTable.jsx";
-import RootAnalysis from "./root-analysis.js";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class PagesOverviewAnalysis extends RootAnalysis {
     get title() {

@@ -1,6 +1,6 @@
 import React from "react";
 import { linkRelatedAccountsWithOffFacebookCompanies } from "../utils/on-off-events-matching.js";
-import RootAnalysis from "./root-analysis";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class OnOffFacebookAdvertisersAnalysis extends RootAnalysis {
     get title() {
