@@ -1,9 +1,9 @@
-CWD := $(shell pwd)
-POLYPOD_FEATURES_PATH := $(CWD)/../../features
-RCH := node $(CWD)/react-component-hierarchy/bin/rch.js -e
+working_directory := $(shell pwd)
+polypod_features_path := $(working_directory)/../../features
+rch := node $(working_directory)/react-component-hierarchy/bin/rch.js -e
 
 define run-rch
-cd $(POLYPOD_FEATURES_PATH)/$1; $(RCH) $2 > $@; mv $@ $(CWD)
+cd $(polypod_features_path)/$1; $(rch) $2 > $@; mv $@ $(working_directory)
 endef
 
 .PHONY: all
