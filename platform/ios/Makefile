@@ -77,7 +77,6 @@ upload_ipa: export_ipa
 .PHONY: distribute_to_beta_testers
 distribute_to_beta_testers:
 	cd $(app_store_connect_cmd); \
-	swift test; \
 	swift run AppStoreConnectCMD \
 	 distribute-to-beta-testers \
 	 $(appstore_app_id) \
