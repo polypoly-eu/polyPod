@@ -9,6 +9,12 @@ appstore_api_issuer_id = $(POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID)
 provisioning_profile_dir := ~/Library/MobileDevice/Provisioning\ Profiles
 provisioning_profile_file := cooppolypolypolypod__iOS_App_Store_Distribution.mobileprovision
 
+build_version := $(shell /usr/libexec/PlistBuddy -c "Print :ApplicationProperties:CFBundleShortVersionString" "${archive_path}/Info.plist")
+build_number := $(shell /usr/libexec/PlistBuddy -c "Print :ApplicationProperties:CFBundleVersion" "${archive_path}/Info.plist")
+appstore_app_id := 1562456558
+beta_testers_group_ids := e03b0ddc-305d-40d5-8186-4dcc32250054
+app_store_connect_cmd := ../AppStoreConnect
+
 ifneq ($(shell which xcpretty),)
 xcodebuild := set -o pipefail && xcodebuild
 xcpretty := | xcpretty
@@ -67,6 +73,17 @@ upload_ipa: export_ipa
 		-t ios \
 		--apiKey $(appstore_api_key_id) \
 		--apiIssuer $(appstore_api_issuer_id)
+
+.PHONY: distribute_to_beta_testers
+distribute_to_beta_testers:
+	cd $(app_store_connect_cmd); \
+	swift test; \
+	swift run AppStoreConnectCMD \
+	 distribute-to-beta-testers \
+	 $(appstore_app_id) \
+	 $(build_version) \
+	 $(build_number) \
+	 $(foreach group, $(GROUPS), $(group))
 
 .PHONY: install_distribution_prerequisites
 install_distribution_prerequisites:

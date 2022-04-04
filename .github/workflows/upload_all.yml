@@ -141,4 +141,5 @@ jobs:
         run: make upload_ipa
       - name: Publish
         if: github.event.inputs.draft != 'true'
-        run: echo ::notice::Publishing on the App Store not yet supported, please do it manually.
+        working-directory: platform/ios
+        run: make distribute_app_to_beta_testers
