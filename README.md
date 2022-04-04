@@ -86,7 +86,7 @@ Please see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Licensing
 
-Copyright © 2021 pc polypoly coop SCE mbH
+Copyright © 2021-2022 pc polypoly coop SCE mbH
 
 Licensed under the GNU General Public License, Version 3.  Please see the
 [LICENSE](LICENSE) document for details and a copy of the license.
