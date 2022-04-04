@@ -28,7 +28,9 @@ export interface Gens<Q extends RDF.BaseQuad = RDF.Quad> {
  * - literals are hexadecimal strings with the datatype being left undefined or a named node
  * - variables are hexadecimal strings and are only generated if the data factory supports them
  */
-export function gens<Q extends RDF.BaseQuad = RDF.Quad>(factory: RDF.DataFactory<Q>): Gens<Q> {
+export function gens<Q extends RDF.BaseQuad = RDF.Quad>(
+    factory: RDF.DataFactory<Q>
+): Gens<Q> {
     const namedNode = fc.webUrl().map((url) => factory.namedNode(url));
 
     const blankNode = fc.hexaString().map((id) => factory.blankNode(id));
@@ -55,9 +57,16 @@ export function gens<Q extends RDF.BaseQuad = RDF.Quad>(factory: RDF.DataFactory
     const subject = fc.oneof(namedNode, blankNode, ...variables);
     const predicate = fc.oneof(namedNode, ...variables);
     const object = fc.oneof(namedNode, literal, blankNode, ...variables);
-    const graph = fc.oneof(fc.constant(factory.defaultGraph()), namedNode, blankNode, ...variables);
+    const graph = fc.oneof(
+        fc.constant(factory.defaultGraph()),
+        namedNode,
+        blankNode,
+        ...variables
+    );
 
-    const triple = fc.tuple(subject, predicate, object).map(([s, p, o]) => factory.quad(s, p, o));
+    const triple = fc
+        .tuple(subject, predicate, object)
+        .map(([s, p, o]) => factory.quad(s, p, o));
     const quad = fc
         .tuple(subject, predicate, object, graph)
         .map(([s, p, o, g]) => factory.quad(s, p, o, g));

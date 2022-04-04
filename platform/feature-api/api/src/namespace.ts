@@ -32,7 +32,8 @@ export function namespace<Q extends BaseQuad>(
     return new Proxy(
         {},
         {
-            get: (target, property: string) => dataFactory.namedNode(`${baseIRI}${property}`),
+            get: (target, property: string) =>
+                dataFactory.namedNode(`${baseIRI}${property}`),
         }
     );
 }

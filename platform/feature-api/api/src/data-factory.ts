@@ -209,7 +209,10 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                 const term = this.dataFactory.literal(string);
 
                 assert.equal(term.datatype.termType, "NamedNode");
-                assert.equal(term.datatype.value, "http://www.w3.org/2001/XMLSchema#string");
+                assert.equal(
+                    term.datatype.value,
+                    "http://www.w3.org/2001/XMLSchema#string"
+                );
             });
 
             it('should create an object with a datatype property that contains a NamedNode with the value "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"', () => {
@@ -236,7 +239,8 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
 
             it("should create an object with a datatype property that contains the given NamedNode", () => {
                 const string = "example";
-                const datatype = this.dataFactory.namedNode("http://example.org");
+                const datatype =
+                    this.dataFactory.namedNode("http://example.org");
                 const term = this.dataFactory.literal(string, datatype);
 
                 assert.equal(term.datatype.termType, "NamedNode");
@@ -322,7 +326,8 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                         termType: "Literal",
                         value: string,
                         language: language,
-                        datatype: this.dataFactory.namedNode("http://example.org"),
+                        datatype:
+                            this.dataFactory.namedNode("http://example.org"),
                         equals: () => true,
                     };
 
@@ -421,11 +426,24 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
             });
 
             it("should create an object with .subject, .predicate, .object and .graph with the given values", () => {
-                const subject = this.dataFactory.namedNode("http://example.org/subject");
-                const predicate = this.dataFactory.namedNode("http://example.org/predicate");
-                const object = this.dataFactory.namedNode("http://example.org/object");
-                const graph = this.dataFactory.namedNode("http://example.org/graph");
-                const quad = this.dataFactory.quad(subject, predicate, object, graph);
+                const subject = this.dataFactory.namedNode(
+                    "http://example.org/subject"
+                );
+                const predicate = this.dataFactory.namedNode(
+                    "http://example.org/predicate"
+                );
+                const object = this.dataFactory.namedNode(
+                    "http://example.org/object"
+                );
+                const graph = this.dataFactory.namedNode(
+                    "http://example.org/graph"
+                );
+                const quad = this.dataFactory.quad(
+                    subject,
+                    predicate,
+                    object,
+                    graph
+                );
 
                 assert.equal(subject.equals(quad.subject), true);
                 assert.equal(predicate.equals(quad.predicate), true);
@@ -437,9 +455,15 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
             });
 
             it("should create an object .graph set to DefaultGraph if the argument isn't given", () => {
-                const subject = this.dataFactory.namedNode("http://example.org/subject");
-                const predicate = this.dataFactory.namedNode("http://example.org/predicate");
-                const object = this.dataFactory.namedNode("http://example.org/object");
+                const subject = this.dataFactory.namedNode(
+                    "http://example.org/subject"
+                );
+                const predicate = this.dataFactory.namedNode(
+                    "http://example.org/predicate"
+                );
+                const object = this.dataFactory.namedNode(
+                    "http://example.org/object"
+                );
                 const graph = this.dataFactory.defaultGraph();
                 const quad = this.dataFactory.quad(subject, predicate, object);
 
@@ -451,22 +475,53 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
 
             describe(".equals", () => {
                 it("should return true if the other quad contains the same subject, predicate, object and graph", () => {
-                    const subject = this.dataFactory.namedNode("http://example.org/subject");
-                    const predicate = this.dataFactory.namedNode("http://example.org/predicate");
-                    const object = this.dataFactory.namedNode("http://example.org/object");
-                    const graph = this.dataFactory.namedNode("http://example.org/graph");
-                    const quad1 = this.dataFactory.quad(subject, predicate, object, graph);
-                    const quad2 = this.dataFactory.quad(subject, predicate, object, graph);
+                    const subject = this.dataFactory.namedNode(
+                        "http://example.org/subject"
+                    );
+                    const predicate = this.dataFactory.namedNode(
+                        "http://example.org/predicate"
+                    );
+                    const object = this.dataFactory.namedNode(
+                        "http://example.org/object"
+                    );
+                    const graph = this.dataFactory.namedNode(
+                        "http://example.org/graph"
+                    );
+                    const quad1 = this.dataFactory.quad(
+                        subject,
+                        predicate,
+                        object,
+                        graph
+                    );
+                    const quad2 = this.dataFactory.quad(
+                        subject,
+                        predicate,
+                        object,
+                        graph
+                    );
 
                     assert.equal(quad1.equals(quad2), true);
                 });
 
                 it("should return true even if the other equal quad is from a non-RDF* factory", () => {
-                    const subject = this.dataFactory.namedNode("http://example.org/subject");
-                    const predicate = this.dataFactory.namedNode("http://example.org/predicate");
-                    const object = this.dataFactory.namedNode("http://example.org/object");
-                    const graph = this.dataFactory.namedNode("http://example.org/graph");
-                    const quad1 = this.dataFactory.quad(subject, predicate, object, graph);
+                    const subject = this.dataFactory.namedNode(
+                        "http://example.org/subject"
+                    );
+                    const predicate = this.dataFactory.namedNode(
+                        "http://example.org/predicate"
+                    );
+                    const object = this.dataFactory.namedNode(
+                        "http://example.org/object"
+                    );
+                    const graph = this.dataFactory.namedNode(
+                        "http://example.org/graph"
+                    );
+                    const quad1 = this.dataFactory.quad(
+                        subject,
+                        predicate,
+                        object,
+                        graph
+                    );
                     const quad2 = { subject, predicate, object, graph };
 
                     // @ts-ignore just a test, ignore not assignable error
@@ -474,112 +529,282 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                 });
 
                 it("should return false if the subject of the other quad is not the same", () => {
-                    const subject1 = this.dataFactory.namedNode("http://example.org/subject");
-                    const subject2 = this.dataFactory.namedNode("http://example.com/subject");
-                    const predicate = this.dataFactory.namedNode("http://example.org/predicate");
-                    const object = this.dataFactory.namedNode("http://example.org/object");
-                    const graph = this.dataFactory.namedNode("http://example.org/graph");
-                    const quad1 = this.dataFactory.quad(subject1, predicate, object, graph);
-                    const quad2 = this.dataFactory.quad(subject2, predicate, object, graph);
+                    const subject1 = this.dataFactory.namedNode(
+                        "http://example.org/subject"
+                    );
+                    const subject2 = this.dataFactory.namedNode(
+                        "http://example.com/subject"
+                    );
+                    const predicate = this.dataFactory.namedNode(
+                        "http://example.org/predicate"
+                    );
+                    const object = this.dataFactory.namedNode(
+                        "http://example.org/object"
+                    );
+                    const graph = this.dataFactory.namedNode(
+                        "http://example.org/graph"
+                    );
+                    const quad1 = this.dataFactory.quad(
+                        subject1,
+                        predicate,
+                        object,
+                        graph
+                    );
+                    const quad2 = this.dataFactory.quad(
+                        subject2,
+                        predicate,
+                        object,
+                        graph
+                    );
 
                     assert.equal(quad1.equals(quad2), false);
                 });
 
                 it("should return false even if the other non-equal quad is from a non-RDF* factory", () => {
-                    const subject1 = this.dataFactory.namedNode("http://example.org/subject");
-                    const subject2 = this.dataFactory.namedNode("http://example.com/subject");
-                    const predicate = this.dataFactory.namedNode("http://example.org/predicate");
-                    const object = this.dataFactory.namedNode("http://example.org/object");
-                    const graph = this.dataFactory.namedNode("http://example.org/graph");
-                    const quad1 = this.dataFactory.quad(subject1, predicate, object, graph);
-                    const quad2 = { subject: subject2, predicate, object, graph };
+                    const subject1 = this.dataFactory.namedNode(
+                        "http://example.org/subject"
+                    );
+                    const subject2 = this.dataFactory.namedNode(
+                        "http://example.com/subject"
+                    );
+                    const predicate = this.dataFactory.namedNode(
+                        "http://example.org/predicate"
+                    );
+                    const object = this.dataFactory.namedNode(
+                        "http://example.org/object"
+                    );
+                    const graph = this.dataFactory.namedNode(
+                        "http://example.org/graph"
+                    );
+                    const quad1 = this.dataFactory.quad(
+                        subject1,
+                        predicate,
+                        object,
+                        graph
+                    );
+                    const quad2 = {
+                        subject: subject2,
+                        predicate,
+                        object,
+                        graph,
+                    };
 
                     // @ts-ignore this is just a test, no need to complete types
                     assert.equal(quad1.equals(quad2), false);
                 });
 
                 it("should return false if the predicate of the other quad is not the same", () => {
-                    const subject = this.dataFactory.namedNode("http://example.org/subject");
-                    const predicate1 = this.dataFactory.namedNode("http://example.org/predicate");
-                    const predicate2 = this.dataFactory.namedNode("http://example.com/predicate");
-                    const object = this.dataFactory.namedNode("http://example.org/object");
-                    const graph = this.dataFactory.namedNode("http://example.org/graph");
-                    const quad1 = this.dataFactory.quad(subject, predicate1, object, graph);
-                    const quad2 = this.dataFactory.quad(subject, predicate2, object, graph);
+                    const subject = this.dataFactory.namedNode(
+                        "http://example.org/subject"
+                    );
+                    const predicate1 = this.dataFactory.namedNode(
+                        "http://example.org/predicate"
+                    );
+                    const predicate2 = this.dataFactory.namedNode(
+                        "http://example.com/predicate"
+                    );
+                    const object = this.dataFactory.namedNode(
+                        "http://example.org/object"
+                    );
+                    const graph = this.dataFactory.namedNode(
+                        "http://example.org/graph"
+                    );
+                    const quad1 = this.dataFactory.quad(
+                        subject,
+                        predicate1,
+                        object,
+                        graph
+                    );
+                    const quad2 = this.dataFactory.quad(
+                        subject,
+                        predicate2,
+                        object,
+                        graph
+                    );
 
                     assert.equal(quad1.equals(quad2), false);
                 });
 
                 it("should return false if the object of the other quad is not the same", () => {
-                    const subject = this.dataFactory.namedNode("http://example.org/subject");
-                    const predicate = this.dataFactory.namedNode("http://example.org/predicate");
-                    const object1 = this.dataFactory.namedNode("http://example.org/object");
-                    const object2 = this.dataFactory.namedNode("http://example.com/object");
-                    const graph = this.dataFactory.namedNode("http://example.org/graph");
-                    const quad1 = this.dataFactory.quad(subject, predicate, object1, graph);
-                    const quad2 = this.dataFactory.quad(subject, predicate, object2, graph);
+                    const subject = this.dataFactory.namedNode(
+                        "http://example.org/subject"
+                    );
+                    const predicate = this.dataFactory.namedNode(
+                        "http://example.org/predicate"
+                    );
+                    const object1 = this.dataFactory.namedNode(
+                        "http://example.org/object"
+                    );
+                    const object2 = this.dataFactory.namedNode(
+                        "http://example.com/object"
+                    );
+                    const graph = this.dataFactory.namedNode(
+                        "http://example.org/graph"
+                    );
+                    const quad1 = this.dataFactory.quad(
+                        subject,
+                        predicate,
+                        object1,
+                        graph
+                    );
+                    const quad2 = this.dataFactory.quad(
+                        subject,
+                        predicate,
+                        object2,
+                        graph
+                    );
 
                     assert.equal(quad1.equals(quad2), false);
                 });
 
                 it("should return false if the graph of the other quad is not the same", () => {
-                    const subject = this.dataFactory.namedNode("http://example.org/subject");
-                    const predicate = this.dataFactory.namedNode("http://example.org/predicate");
-                    const object = this.dataFactory.namedNode("http://example.org/object");
-                    const graph1 = this.dataFactory.namedNode("http://example.org/graph");
-                    const graph2 = this.dataFactory.namedNode("http://example.com/graph");
-                    const quad1 = this.dataFactory.quad(subject, predicate, object, graph1);
-                    const quad2 = this.dataFactory.quad(subject, predicate, object, graph2);
+                    const subject = this.dataFactory.namedNode(
+                        "http://example.org/subject"
+                    );
+                    const predicate = this.dataFactory.namedNode(
+                        "http://example.org/predicate"
+                    );
+                    const object = this.dataFactory.namedNode(
+                        "http://example.org/object"
+                    );
+                    const graph1 = this.dataFactory.namedNode(
+                        "http://example.org/graph"
+                    );
+                    const graph2 = this.dataFactory.namedNode(
+                        "http://example.com/graph"
+                    );
+                    const quad1 = this.dataFactory.quad(
+                        subject,
+                        predicate,
+                        object,
+                        graph1
+                    );
+                    const quad2 = this.dataFactory.quad(
+                        subject,
+                        predicate,
+                        object,
+                        graph2
+                    );
 
                     assert.equal(quad1.equals(quad2), false);
                 });
 
                 // TODO: recheck correctness of this test - what is a false value of a Term?
                 it("should return false if value is falsy", () => {
-                    const subject = this.dataFactory.namedNode("http://example.org/subject");
-                    const predicate = this.dataFactory.namedNode("http://example.org/predicate");
-                    const object = this.dataFactory.namedNode("http://example.org/object");
-                    const graph = this.dataFactory.namedNode("http://example.org/graph");
-                    const quad = this.dataFactory.quad(subject, predicate, object, graph);
+                    const subject = this.dataFactory.namedNode(
+                        "http://example.org/subject"
+                    );
+                    const predicate = this.dataFactory.namedNode(
+                        "http://example.org/predicate"
+                    );
+                    const object = this.dataFactory.namedNode(
+                        "http://example.org/object"
+                    );
+                    const graph = this.dataFactory.namedNode(
+                        "http://example.org/graph"
+                    );
+                    const quad = this.dataFactory.quad(
+                        subject,
+                        predicate,
+                        object,
+                        graph
+                    );
 
                     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                     assert.equal(quad.equals(null!), false);
                 });
 
                 it("should return false if value is another term", () => {
-                    const subject = this.dataFactory.namedNode("http://example.org/subject");
-                    const predicate = this.dataFactory.namedNode("http://example.org/predicate");
-                    const object = this.dataFactory.namedNode("http://example.org/object");
-                    const graph = this.dataFactory.namedNode("http://example.org/graph");
-                    const quad = this.dataFactory.quad(subject, predicate, object, graph);
+                    const subject = this.dataFactory.namedNode(
+                        "http://example.org/subject"
+                    );
+                    const predicate = this.dataFactory.namedNode(
+                        "http://example.org/predicate"
+                    );
+                    const object = this.dataFactory.namedNode(
+                        "http://example.org/object"
+                    );
+                    const graph = this.dataFactory.namedNode(
+                        "http://example.org/graph"
+                    );
+                    const quad = this.dataFactory.quad(
+                        subject,
+                        predicate,
+                        object,
+                        graph
+                    );
 
                     assert.equal(
-                        quad.equals(this.dataFactory.namedNode("http://example.org/subject")),
+                        quad.equals(
+                            this.dataFactory.namedNode(
+                                "http://example.org/subject"
+                            )
+                        ),
                         false
                     );
-                    assert.equal(quad.equals(this.dataFactory.literal("abc")), false);
+                    assert.equal(
+                        quad.equals(this.dataFactory.literal("abc")),
+                        false
+                    );
                     if (this.dataFactory.variable)
-                        assert.equal(quad.equals(this.dataFactory.variable("var")), false);
-                    assert.equal(quad.equals(this.dataFactory.blankNode("bnode")), false);
-                    assert.equal(quad.equals(this.dataFactory.defaultGraph()), false);
+                        assert.equal(
+                            quad.equals(this.dataFactory.variable("var")),
+                            false
+                        );
+                    assert.equal(
+                        quad.equals(this.dataFactory.blankNode("bnode")),
+                        false
+                    );
+                    assert.equal(
+                        quad.equals(this.dataFactory.defaultGraph()),
+                        false
+                    );
                 });
 
                 it("should return true for an equal nested quad", () => {
                     const subject = this.dataFactory.quad(
-                        this.dataFactory.namedNode("http://example.org/subjectInner1"),
-                        this.dataFactory.namedNode("http://example.org/predicateInner1"),
-                        this.dataFactory.namedNode("http://example.org/objectInner1")
+                        this.dataFactory.namedNode(
+                            "http://example.org/subjectInner1"
+                        ),
+                        this.dataFactory.namedNode(
+                            "http://example.org/predicateInner1"
+                        ),
+                        this.dataFactory.namedNode(
+                            "http://example.org/objectInner1"
+                        )
                     );
-                    const predicate = this.dataFactory.namedNode("http://example.org/predicate");
+                    const predicate = this.dataFactory.namedNode(
+                        "http://example.org/predicate"
+                    );
                     const object = this.dataFactory.quad(
-                        this.dataFactory.namedNode("http://example.org/subjectInner2"),
-                        this.dataFactory.namedNode("http://example.org/predicateInner2"),
-                        this.dataFactory.namedNode("http://example.org/objectInner2"),
-                        this.dataFactory.namedNode("http://example.org/graphInner2")
+                        this.dataFactory.namedNode(
+                            "http://example.org/subjectInner2"
+                        ),
+                        this.dataFactory.namedNode(
+                            "http://example.org/predicateInner2"
+                        ),
+                        this.dataFactory.namedNode(
+                            "http://example.org/objectInner2"
+                        ),
+                        this.dataFactory.namedNode(
+                            "http://example.org/graphInner2"
+                        )
                     );
-                    const graph = this.dataFactory.namedNode("http://example.org/graph");
-                    const quad1 = this.dataFactory.quad(subject, predicate, object, graph);
-                    const quad2 = this.dataFactory.quad(subject, predicate, object, graph);
+                    const graph = this.dataFactory.namedNode(
+                        "http://example.org/graph"
+                    );
+                    const quad1 = this.dataFactory.quad(
+                        subject,
+                        predicate,
+                        object,
+                        graph
+                    );
+                    const quad2 = this.dataFactory.quad(
+                        subject,
+                        predicate,
+                        object,
+                        graph
+                    );
 
                     assert.equal(quad1.equals(quad2), true);
                 });
@@ -591,7 +816,10 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
         let dataFactoryVariable: (name: string) => Variable;
 
         if (this.dataFactory.variable === undefined) return;
-        else dataFactoryVariable = this.dataFactory.variable.bind(this.dataFactory);
+        else
+            dataFactoryVariable = this.dataFactory.variable.bind(
+                this.dataFactory
+            );
 
         describe(".variable", () => {
             it("should be a static method", () => {
@@ -692,11 +920,15 @@ export class DataFactorySpec<OutQuad extends BaseQuad = Quad> {
                                 const gen1 = (gen as any)[key1];
                                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                 const gen2 = (gen as any)[key2];
-                                if (gen1 === undefined || gen2 === undefined) return;
+                                if (gen1 === undefined || gen2 === undefined)
+                                    return;
                                 fc.assert(
                                     fc.property(gen1, gen2, (term1, term2) => {
-                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                        assert.equal((term1 as any).equals(term2), false);
+                                        assert.equal(
+                                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                            (term1 as any).equals(term2),
+                                            false
+                                        );
                                     })
                                 );
                             });

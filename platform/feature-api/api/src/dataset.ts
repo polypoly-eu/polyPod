@@ -4,7 +4,13 @@
  * @packageDocumentation
  */
 
-import { BaseQuad, DataFactory, DatasetCore, DatasetCoreFactory, Quad } from "rdf-js";
+import {
+    BaseQuad,
+    DataFactory,
+    DatasetCore,
+    DatasetCoreFactory,
+    Quad,
+} from "rdf-js";
 import { assert } from "chai";
 import { namespace } from "./namespace";
 
@@ -21,7 +27,11 @@ export class DatasetSpec<
     D extends DatasetCore<OutQuad> = DatasetCore<OutQuad>
 > {
     constructor(
-        private readonly datasetFactory: DatasetCoreFactory<OutQuad, OutQuad, D>,
+        private readonly datasetFactory: DatasetCoreFactory<
+            OutQuad,
+            OutQuad,
+            D
+        >,
         private readonly dataFactory: DataFactory<OutQuad>
     ) {}
 
@@ -30,12 +40,23 @@ export class DatasetSpec<
 
         describe("factory", () => {
             it("should be a function", () => {
-                assert.strictEqual(typeof this.datasetFactory.dataset, "function");
+                assert.strictEqual(
+                    typeof this.datasetFactory.dataset,
+                    "function"
+                );
             });
 
             it("should add the given Quads", () => {
-                const quad1 = this.dataFactory.quad(ex.subject, ex.predicate, ex.object1);
-                const quad2 = this.dataFactory.quad(ex.subject, ex.predicate, ex.object2);
+                const quad1 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object1
+                );
+                const quad2 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object2
+                );
 
                 const dataset = this.datasetFactory.dataset([quad1, quad2]);
 
@@ -62,8 +83,16 @@ export class DatasetSpec<
             });
 
             it("should be equal to the number of Quads in the Dataset", () => {
-                const quad1 = this.dataFactory.quad(ex.subject, ex.predicate, ex.object1);
-                const quad2 = this.dataFactory.quad(ex.subject, ex.predicate, ex.object2);
+                const quad1 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object1
+                );
+                const quad2 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object2
+                );
                 const dataset = this.datasetFactory.dataset([quad1, quad2]);
 
                 assert.strictEqual(dataset.size, 2);
@@ -82,7 +111,11 @@ export class DatasetSpec<
             });
 
             it("should add the given Quad", () => {
-                const quad = this.dataFactory.quad(ex.subject, ex.predicate, ex.object);
+                const quad = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object
+                );
                 const dataset = this.datasetFactory.dataset();
 
                 dataset.add(quad);
@@ -91,8 +124,16 @@ export class DatasetSpec<
             });
 
             it("should not add duplicate Quads", () => {
-                const quadA = this.dataFactory.quad(ex.subject, ex.predicate, ex.object);
-                const quadB = this.dataFactory.quad(ex.subject, ex.predicate, ex.object);
+                const quadA = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object
+                );
+                const quadB = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object
+                );
                 const dataset = this.datasetFactory.dataset();
 
                 dataset.add(quadA);
@@ -114,7 +155,11 @@ export class DatasetSpec<
             });
 
             it("should remove the given Quad", () => {
-                const quad = this.dataFactory.quad(ex.subject, ex.predicate, ex.object);
+                const quad = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object
+                );
                 const dataset = this.datasetFactory.dataset([quad]);
 
                 dataset.delete(quad);
@@ -123,8 +168,16 @@ export class DatasetSpec<
             });
 
             it("should remove only the given Quad", () => {
-                const quad1 = this.dataFactory.quad(ex.subject, ex.predicate, ex.object1);
-                const quad2 = this.dataFactory.quad(ex.subject, ex.predicate, ex.object2);
+                const quad1 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object1
+                );
+                const quad2 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object2
+                );
                 const dataset = this.datasetFactory.dataset([quad1, quad2]);
 
                 dataset.delete(quad1);
@@ -134,7 +187,11 @@ export class DatasetSpec<
             });
 
             it("should remove the Quad with the same SPOG as the given Quad", () => {
-                const quad = this.dataFactory.quad(ex.subject, ex.predicate, ex.object);
+                const quad = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object
+                );
                 const quadCloned = this.dataFactory.quad(
                     quad.subject,
                     quad.predicate,
@@ -161,16 +218,32 @@ export class DatasetSpec<
             });
 
             it("should return false if the given Quad is not in the Dataset", () => {
-                const quad1 = this.dataFactory.quad(ex.subject, ex.predicate, ex.object1);
-                const quad2 = this.dataFactory.quad(ex.subject, ex.predicate, ex.object2);
+                const quad1 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object1
+                );
+                const quad2 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object2
+                );
                 const dataset = this.datasetFactory.dataset([quad1]);
 
                 assert(!dataset.has(quad2));
             });
 
             it("should return true if the given Quad is in the Dataset", () => {
-                const quad1 = this.dataFactory.quad(ex.subject, ex.predicate, ex.object1);
-                const quad2 = this.dataFactory.quad(ex.subject, ex.predicate, ex.object2);
+                const quad1 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object1
+                );
+                const quad2 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object2
+                );
                 const dataset = this.datasetFactory.dataset([quad1, quad2]);
 
                 assert(dataset.has(quad2));
@@ -189,8 +262,16 @@ export class DatasetSpec<
             });
 
             it("should use the given subject to select Quads", () => {
-                const quad1 = this.dataFactory.quad(ex.subject1, ex.predicate, ex.object);
-                const quad2 = this.dataFactory.quad(ex.subject2, ex.predicate, ex.object);
+                const quad1 = this.dataFactory.quad(
+                    ex.subject1,
+                    ex.predicate,
+                    ex.object
+                );
+                const quad2 = this.dataFactory.quad(
+                    ex.subject2,
+                    ex.predicate,
+                    ex.object
+                );
                 const dataset = this.datasetFactory.dataset([quad1, quad2]);
 
                 const matches = dataset.match(ex.subject2);
@@ -200,8 +281,16 @@ export class DatasetSpec<
             });
 
             it("should use the given predicate to select Quads", () => {
-                const quad1 = this.dataFactory.quad(ex.subject, ex.predicate1, ex.object);
-                const quad2 = this.dataFactory.quad(ex.subject, ex.predicate2, ex.object);
+                const quad1 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate1,
+                    ex.object
+                );
+                const quad2 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate2,
+                    ex.object
+                );
                 const dataset = this.datasetFactory.dataset([quad1, quad2]);
 
                 const matches = dataset.match(null, ex.predicate2);
@@ -211,8 +300,16 @@ export class DatasetSpec<
             });
 
             it("should use the given object to select Quads", () => {
-                const quad1 = this.dataFactory.quad(ex.subject, ex.predicate, ex.object1);
-                const quad2 = this.dataFactory.quad(ex.subject, ex.predicate, ex.object2);
+                const quad1 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object1
+                );
+                const quad2 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object2
+                );
                 const dataset = this.datasetFactory.dataset([quad1, quad2]);
 
                 const matches = dataset.match(null, null, ex.object2);
@@ -222,8 +319,18 @@ export class DatasetSpec<
             });
 
             it("should use the given graph to select Quads", () => {
-                const quad1 = this.dataFactory.quad(ex.subject, ex.predicate, ex.object, ex.graph1);
-                const quad2 = this.dataFactory.quad(ex.subject, ex.predicate, ex.object, ex.graph2);
+                const quad1 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object,
+                    ex.graph1
+                );
+                const quad2 = this.dataFactory.quad(
+                    ex.subject,
+                    ex.predicate,
+                    ex.object,
+                    ex.graph2
+                );
                 const dataset = this.datasetFactory.dataset([quad1, quad2]);
 
                 const matches = dataset.match(null, null, null, ex.graph2);
@@ -233,8 +340,16 @@ export class DatasetSpec<
             });
 
             it("should return an empty Dataset if there are no matches", () => {
-                const quad1 = this.dataFactory.quad(ex.subject1, ex.predicate, ex.object);
-                const quad2 = this.dataFactory.quad(ex.subject2, ex.predicate, ex.object);
+                const quad1 = this.dataFactory.quad(
+                    ex.subject1,
+                    ex.predicate,
+                    ex.object
+                );
+                const quad2 = this.dataFactory.quad(
+                    ex.subject2,
+                    ex.predicate,
+                    ex.object
+                );
                 const dataset = this.datasetFactory.dataset([quad1, quad2]);
 
                 const matches = dataset.match(null, null, ex.object3);
@@ -255,8 +370,16 @@ export class DatasetSpec<
             });
 
             it("should return an iterator", () => {
-                const quad1 = this.dataFactory.quad(ex.subject1, ex.predicate, ex.object);
-                const quad2 = this.dataFactory.quad(ex.subject2, ex.predicate, ex.object);
+                const quad1 = this.dataFactory.quad(
+                    ex.subject1,
+                    ex.predicate,
+                    ex.object
+                );
+                const quad2 = this.dataFactory.quad(
+                    ex.subject2,
+                    ex.predicate,
+                    ex.object
+                );
                 const dataset = this.datasetFactory.dataset([quad1, quad2]);
 
                 const iterator = dataset[Symbol.iterator]();
@@ -266,15 +389,27 @@ export class DatasetSpec<
             });
 
             it("should iterate over all Quads", () => {
-                const quad1 = this.dataFactory.quad(ex.subject1, ex.predicate, ex.object);
-                const quad2 = this.dataFactory.quad(ex.subject2, ex.predicate, ex.object);
+                const quad1 = this.dataFactory.quad(
+                    ex.subject1,
+                    ex.predicate,
+                    ex.object
+                );
+                const quad2 = this.dataFactory.quad(
+                    ex.subject2,
+                    ex.predicate,
+                    ex.object
+                );
                 const dataset = this.datasetFactory.dataset([quad1, quad2]);
 
                 const iterator = dataset[Symbol.iterator]();
 
                 const output = this.datasetFactory.dataset();
 
-                for (let item = iterator.next(); item.value; item = iterator.next()) {
+                for (
+                    let item = iterator.next();
+                    item.value;
+                    item = iterator.next()
+                ) {
                     output.add(item.value);
                 }
 
