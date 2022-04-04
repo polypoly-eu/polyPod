@@ -5,6 +5,19 @@ import fileinput
 from enum import Enum
 
 
+def check_python_version():
+    min_major = 3
+    min_minor = 8
+    major = sys.version_info.major
+    minor = sys.version_info.minor
+    if major > min_major or (major == min_major and minor >= min_minor):
+        return
+    print("Python %s.%s or later required"
+          % (min_version_major, min_version_minor),
+          file=sys.stderr)
+    sys.exit(1)
+
+
 class Node:
     class Type(Enum):
         SOURCE = "red"
@@ -112,5 +125,6 @@ def write_dot(graph):
 
 
 if __name__ == "__main__":
+    check_python_version()
     graph = parse(fileinput.input())
     write_dot(graph)
