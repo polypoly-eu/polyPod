@@ -35,8 +35,6 @@ module.exports = {
         ".eslintrc.*",
         "**/public/build/*",
         "**/bubblewrap/build/*",
-        "**/storybook-static/*",
-        "podApi/",
         "**/build/*",
         "PolyPodApp/",
     ],
