@@ -33,8 +33,6 @@ module.exports = {
         "**/node_modules/*",
         "data/",
         ".eslintrc.*",
-        "**/public/build/*",
-        "**/bubblewrap/build/*",
         "**/build/*",
         "PolyPodApp/",
     ],
