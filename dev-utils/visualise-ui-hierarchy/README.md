@@ -11,7 +11,7 @@ will need [Graphviz](https://graphviz.org) and [Yarn
 
 ## Usage
 
-fhd's fork of the react-component-hierarchy tool generates a, seemingly correct,
+fhd's fork of the react-component-hierarchy tool generates a (seemingly correct)
 tree view of the component hierarchy. The little `tree2dot` script then converts
 the UTF-8-art tree into a proper graph in dot notation. Finally, Graphviz is
 used to render that graph visually as an SVG.
