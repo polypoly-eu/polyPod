@@ -23,12 +23,12 @@ export default class JsonFilesBubblesAnalysis extends RootAnalysis {
         return { zipFile, zipEntry: jsonEntry, count: linesCount };
     }
 
-    async analyze({ zipFile, facebookAccount }) {
+    async analyze({ zipFile, dataAccount }) {
         this._advertisersCount = {};
         this.active = false;
         if (!zipFile) return;
 
-        this._importedFileNames = facebookAccount.importedFileNames;
+        this._importedFileNames = dataAccount.importedFileNames;
         const relevantEntries = await jsonDataEntities(zipFile);
         this._filesMessagesCount = await Promise.all(
             relevantEntries.map((jsonEntry) =>

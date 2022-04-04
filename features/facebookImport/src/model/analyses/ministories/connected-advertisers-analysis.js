@@ -14,11 +14,11 @@ export default class ConnectedAdvertisersAnalysis extends RootAnalysis {
         return RootAnalysis.Labels.NONE;
     }
 
-    async analyze({ facebookAccount }) {
+    async analyze({ dataAccount }) {
         this._connectedAdvertisersCount =
-            facebookAccount.connectedAdvertisers.length;
+            dataAccount.connectedAdvertisers.length;
         this._connectedAdvertiserNames =
-            facebookAccount.connectedAdvertisers.map(
+            dataAccount.connectedAdvertisers.map(
                 (connectedAdvertiser) => connectedAdvertiser.name
             );
         this.active = this._connectedAdvertisersCount > 0;

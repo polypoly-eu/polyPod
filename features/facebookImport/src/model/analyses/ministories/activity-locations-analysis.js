@@ -7,9 +7,9 @@ export default class SesssionActivityLocationsAnalysis extends RootAnalysis {
         return "Session Activity Locations";
     }
 
-    async analyze({ facebookAccount }) {
+    async analyze({ dataAccount }) {
         const locationByActivityCount = {};
-        facebookAccount.accountSessionActivities
+        dataAccount.accountSessionActivities
             .filter(
                 (activity) =>
                     activity.region && activity.city && activity.country

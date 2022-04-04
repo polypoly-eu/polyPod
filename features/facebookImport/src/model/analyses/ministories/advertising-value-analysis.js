@@ -16,8 +16,8 @@ export default class AdvertisingValueAnalysis extends RootAnalysis {
         return i18n.t("advertisingValueMiniStory:title");
     }
 
-    async analyze({ facebookAccount }) {
-        const adInterests = facebookAccount.adInterests;
+    async analyze({ dataAccount }) {
+        const adInterests = dataAccount.adInterests;
         const numberInterests = new Set(adInterests).size;
         const randomAdInterests = new Set();
         this.active = false;

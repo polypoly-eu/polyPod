@@ -7,9 +7,9 @@ export default class OnOffFacebookAdvertisersAnalysis extends RootAnalysis {
         return "On and Off-Facebook Advertisers";
     }
 
-    async analyze({ facebookAccount }) {
+    async analyze({ dataAccount }) {
         const advertiserMatches =
-            linkRelatedAccountsWithOffFacebookCompanies(facebookAccount);
+            linkRelatedAccountsWithOffFacebookCompanies(dataAccount);
         this._commonAdvertisersData = advertiserMatches
             .map((consolidatedAdvertiser) => consolidatedAdvertiser.fullSummary)
             .filter(

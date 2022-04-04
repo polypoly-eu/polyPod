@@ -6,8 +6,8 @@ export default class MessagesDetailsAnalysis extends RootAnalysis {
         return "Messages Details";
     }
 
-    async analyze({ facebookAccount }) {
-        this.active = facebookAccount.hasMessages;
+    async analyze({ dataAccount }) {
+        this.active = dataAccount.hasMessages;
         this._wordCount = 0;
         this._callsCount = 0;
         this._messageThreadsCount = 0;
@@ -18,11 +18,11 @@ export default class MessagesDetailsAnalysis extends RootAnalysis {
             return;
         }
 
-        this._messageThreadsCount = facebookAccount.messageThreadsCount;
-        this._messagesCount = facebookAccount.messagesCount;
+        this._messageThreadsCount = dataAccount.messageThreadsCount;
+        this._messagesCount = dataAccount.messagesCount;
 
         const usernames = new Set();
-        facebookAccount.forEachMessageThread((messageThread) => {
+        dataAccount.forEachMessageThread((messageThread) => {
             for (let participant of messageThread.participants) {
                 usernames.add(participant);
             }

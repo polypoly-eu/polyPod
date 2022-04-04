@@ -34,11 +34,11 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
         return { displayType: this._displayType };
     }
 
-    async analyze({ facebookAccount }) {
-        this._companiesCount = facebookAccount.offFacebookCompanies.length;
+    async analyze({ dataAccount }) {
+        this._companiesCount = dataAccount.offFacebookCompanies.length;
 
         const advertiserMatches =
-            linkRelatedAccountsWithOffFacebookCompanies(facebookAccount);
+            linkRelatedAccountsWithOffFacebookCompanies(dataAccount);
 
         this._companiesWithAdsCount = advertiserMatches.reduce(
             (total, consolidatedCompany) =>
@@ -46,8 +46,8 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
             0
         );
         const max = Math.max(
-            facebookAccount.offFacebookEventsLatestTimestamp,
-            facebookAccount.relatedAccountEventLatestTimestamp
+            dataAccount.offFacebookEventsLatestTimestamp,
+            dataAccount.relatedAccountEventLatestTimestamp
         );
         this._commonAdvertisersData = advertiserMatches.map(
             (consolidatedAdvertiser) =>
@@ -60,24 +60,24 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
 
         this._displayData = {};
 
-        if (facebookAccount._offFacebookCompanies.length > 0) {
+        if (dataAccount._offFacebookCompanies.length > 0) {
             this._displayData.offEvents = {
-                companies: topOffFacebookCompanies(facebookAccount),
-                activityTypes: groupOffFacebookEventsByType(
-                    facebookAccount
-                ).map((e) => {
-                    return {
-                        ...e,
-                        title: e.type,
-                    };
-                }),
+                companies: topOffFacebookCompanies(dataAccount),
+                activityTypes: groupOffFacebookEventsByType(dataAccount).map(
+                    (e) => {
+                        return {
+                            ...e,
+                            title: e.type,
+                        };
+                    }
+                ),
             };
         }
 
         if (selectedCompanies.length > 0) {
             this._displayData.onOffEvents = buildDisplayData(
                 selectedCompanies,
-                facebookAccount.offFacebookEventsLatestTimestamp
+                dataAccount.offFacebookEventsLatestTimestamp
             );
         }
         this.active = Object.keys(this._displayData).length > 0;

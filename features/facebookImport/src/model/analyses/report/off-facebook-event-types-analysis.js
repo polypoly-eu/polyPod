@@ -11,9 +11,9 @@ export default class OffFacebookEventTypesAnalysis extends ReportAnalysis {
         return this._offFacebookEventTypes;
     }
 
-    async analyze({ facebookAccount }) {
+    async analyze({ dataAccount }) {
         const offFacebookEventTypes = new Set();
-        facebookAccount.forEachOffFacebookEvent((event) => {
+        dataAccount.forEachOffFacebookEvent((event) => {
             if (event.type) {
                 offFacebookEventTypes.add(event.type);
             }

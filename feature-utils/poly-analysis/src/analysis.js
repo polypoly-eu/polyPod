@@ -96,10 +96,7 @@ export async function runAnalysis(analysisClass, enrichedData) {
 
     const telemetry = new Telemetry();
     try {
-        const facebookEnrichedData = { ...enrichedData };
-        facebookEnrichedData.facebookAccount = facebookEnrichedData.dataAccount;
-
-        const status = await subAnalysis.analyze(facebookEnrichedData);
+        const status = await subAnalysis.analyze(enrichedData);
         return new AnalysisExecutionResult(
             subAnalysis,
             status,

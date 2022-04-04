@@ -7,8 +7,8 @@ export default class ImportedJsonFilesAnalysis extends RootAnalysis {
         return "Imported files";
     }
 
-    async analyze({ facebookAccount }) {
-        this._importedFileNames = facebookAccount.importedFileNames;
+    async analyze({ dataAccount }) {
+        this._importedFileNames = dataAccount.importedFileNames;
         this.active = this._importedFileNames.length > 0;
     }
 

@@ -7,8 +7,8 @@ export default class AdViewsAnalysis extends RootAnalysis {
         return "Ad Views";
     }
 
-    async analyze({ facebookAccount }) {
-        const relatedAccounts = facebookAccount.relatedAccounts;
+    async analyze({ dataAccount }) {
+        const relatedAccounts = dataAccount.relatedAccounts;
         this._advertisersData = relatedAccounts
             .advertisers()
             .map((advertiser) => {

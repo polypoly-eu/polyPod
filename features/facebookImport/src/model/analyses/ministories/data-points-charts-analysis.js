@@ -7,8 +7,8 @@ export default class DataChartsAnalysis extends RootAnalysis {
         return "Data Charts";
     }
 
-    async analyze({ facebookAccount }) {
-        this._bubblesData = facebookAccount.dataGroups.filter(
+    async analyze({ dataAccount }) {
+        this._bubblesData = dataAccount.dataGroups.filter(
             ({ count }) => count > 0
         );
         this.active = this._bubblesData.length > 0;

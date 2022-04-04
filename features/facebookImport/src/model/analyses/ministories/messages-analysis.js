@@ -16,12 +16,12 @@ export default class MessagesAnalysis extends RootAnalysis {
         return i18n.t("explore:messages.title");
     }
 
-    async analyze({ facebookAccount }) {
-        this._messagesCount = facebookAccount.messagesCount;
+    async analyze({ dataAccount }) {
+        this._messagesCount = dataAccount.messagesCount;
         this._messagesThreadsData = [];
         const usernames = new Set();
 
-        facebookAccount.forEachMessageThread((messageThread) => {
+        dataAccount.forEachMessageThread((messageThread) => {
             var firstChatTimestamp = 0;
             var lastChatTimestamp = 0;
 

@@ -16,29 +16,29 @@ export default class ActivitiesAnalysis extends RootAnalysis {
         return i18n.t("activitiesMiniStory:title");
     }
 
-    async analyze({ facebookAccount }) {
+    async analyze({ dataAccount }) {
         const activityDates = [
-            ...facebookAccount.followedPages,
-            ...facebookAccount.friends,
-            ...facebookAccount.interactedAdvertisers,
-            ...facebookAccount.likedPages,
-            ...facebookAccount.receivedFriendRequests,
-            ...facebookAccount.recommendedPages,
-            ...facebookAccount.searches,
-            ...facebookAccount.unfollowedPages,
-            ...facebookAccount.comments,
-            ...facebookAccount.postReactions,
-            ...facebookAccount.posts,
+            ...dataAccount.followedPages,
+            ...dataAccount.friends,
+            ...dataAccount.interactedAdvertisers,
+            ...dataAccount.likedPages,
+            ...dataAccount.receivedFriendRequests,
+            ...dataAccount.recommendedPages,
+            ...dataAccount.searches,
+            ...dataAccount.unfollowedPages,
+            ...dataAccount.comments,
+            ...dataAccount.postReactions,
+            ...dataAccount.posts,
         ].map((each) => new Date(each.timestamp * 1000));
 
         //for nested structures
-        facebookAccount.offFacebookCompanies.forEach((company) =>
+        dataAccount.offFacebookCompanies.forEach((company) =>
             activityDates.push(
                 ...company.events.map((each) => new Date(each.timestamp * 1000))
             )
         );
 
-        facebookAccount.forEachMessageThread((thread) =>
+        dataAccount.forEachMessageThread((thread) =>
             activityDates.push(
                 ...thread.messageTimestamps.map(
                     (timestamp_ms) => new Date(timestamp_ms)

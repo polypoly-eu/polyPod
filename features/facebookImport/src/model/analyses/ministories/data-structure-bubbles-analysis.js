@@ -12,8 +12,8 @@ export default class DataStructureBubblesAnalysis extends RootAnalysis {
         return i18n.t("dataStructureMiniStory:title");
     }
 
-    async analyze({ facebookAccount }) {
-        this._bubblesData = facebookAccount.dataGroups.filter(
+    async analyze({ dataAccount }) {
+        this._bubblesData = dataAccount.dataGroups.filter(
             ({ count }) => count > 0
         );
 

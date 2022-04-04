@@ -8,15 +8,15 @@ export default class OffFacebookEventsTypesChartAnalysis extends RootAnalysis {
         return "Off-Facebook Events by By Type Chart";
     }
 
-    async analyze({ facebookAccount }) {
-        this.active = facebookAccount.offFacebookCompanies.length > 0;
+    async analyze({ dataAccount }) {
+        this.active = dataAccount.offFacebookCompanies.length > 0;
         this._eventsTypeCountPairs = [];
         if (!this.active) {
             return;
         }
 
         this._eventsTypeCountPairs =
-            groupOffFacebookEventsByType(facebookAccount);
+            groupOffFacebookEventsByType(dataAccount);
     }
 
     renderSummary() {

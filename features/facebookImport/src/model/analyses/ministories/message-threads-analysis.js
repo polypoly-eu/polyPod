@@ -7,17 +7,17 @@ export default class MessageThreadsAnalysis extends RootAnalysis {
         return "Message threads";
     }
 
-    async analyze({ facebookAccount }) {
+    async analyze({ dataAccount }) {
         this._messagesThreadsData = [];
         this._messagesCount = 0;
-        this.active = facebookAccount.messageThreadsCount > 0;
+        this.active = dataAccount.messageThreadsCount > 0;
         if (!this.active) {
             return;
         }
 
-        this._messagesCount = facebookAccount.messagesCount;
+        this._messagesCount = dataAccount.messagesCount;
         this._messagesThreadsData = [];
-        facebookAccount.forEachMessageThread((messageThread) => {
+        dataAccount.forEachMessageThread((messageThread) => {
             var wordCount = messageThread.totalWordCount;
             var firstChatTimestamp = 0;
             var lastChatTimestamp = 0;

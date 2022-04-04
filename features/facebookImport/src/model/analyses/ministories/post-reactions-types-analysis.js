@@ -16,8 +16,8 @@ export default class PostReactionsTypesAnalysis extends RootAnalysis {
         return RootAnalysis.Labels.NONE;
     }
 
-    async analyze({ facebookAccount }) {
-        const allReactionsByType = groupPostReactionsByType(facebookAccount);
+    async analyze({ dataAccount }) {
+        const allReactionsByType = groupPostReactionsByType(dataAccount);
         this._reactionsTypeCountPairs = allReactionsByType.filter((each) =>
             KNOWN_REACTION_TYPES.includes(each.type)
         );

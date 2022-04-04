@@ -7,25 +7,25 @@ export default class PagesOverviewAnalysis extends RootAnalysis {
         return "Pages Overview";
     }
 
-    async analyze({ facebookAccount }) {
+    async analyze({ dataAccount }) {
         this._pagesData = [
             {
                 title: "Liked Pages",
-                count: facebookAccount.likedPages.length,
+                count: dataAccount.likedPages.length,
             },
             {
                 title: "Followed Pages",
-                count: facebookAccount.followedPages.length,
+                count: dataAccount.followedPages.length,
             },
 
             {
                 title: "Recommended Pages",
-                count: facebookAccount.recommendedPages.length,
+                count: dataAccount.recommendedPages.length,
             },
 
             {
                 title: "Unfollowed Pages",
-                count: facebookAccount.unfollowedPages.length,
+                count: dataAccount.unfollowedPages.length,
             },
         ];
 

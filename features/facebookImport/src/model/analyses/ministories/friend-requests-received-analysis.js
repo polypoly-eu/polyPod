@@ -5,9 +5,9 @@ export default class ReceivedFriendRequestsAnalysis extends RootAnalysis {
         return "Received Friend Requests";
     }
 
-    async analyze({ facebookAccount }) {
+    async analyze({ dataAccount }) {
         this._receivedFriendRequestsCount =
-            facebookAccount.receivedFriendRequests.length;
+            dataAccount.receivedFriendRequests.length;
         this.active = this._receivedFriendRequestsCount > 0;
     }
 

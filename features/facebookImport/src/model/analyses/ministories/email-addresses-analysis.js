@@ -7,14 +7,14 @@ export default class EmailAddressesAnalysis extends RootAnalysis {
         return "Email addresses and phone numbers";
     }
 
-    async analyze({ facebookAccount }) {
-        this.active = facebookAccount.adminRecords.length > 0;
+    async analyze({ dataAccount }) {
+        this.active = dataAccount.adminRecords.length > 0;
         this._emailAddresses = new Set();
         if (!this.active) {
             return;
         }
 
-        facebookAccount.adminRecords.forEach((record) => {
+        dataAccount.adminRecords.forEach((record) => {
             if (!record.extra_info) {
                 return;
             }
