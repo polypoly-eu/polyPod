@@ -19,7 +19,7 @@ guard let issuerID = processInfo.environment["POLYPOD_APPLE_IOS_APPSTORE_API_ISS
 guard let privateKeyID = processInfo.environment["POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID"] else {
     throw EnvironmentError.missing_APPSTORE_API_KEY_ID
 }
-guard let privateKey = processInfo.environment["POLYPOD_APPLE_APP_STORE_CONNECT_API_KEY"] else {
+guard let privateKey = processInfo.environment["POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64"] else {
     throw EnvironmentError.missing_APP_STORE_CONNECT_API_KEY
 }
 
