@@ -2,6 +2,10 @@ CWD := $(shell pwd)
 POLYPOD_FEATURES_PATH := $(CWD)/../../features
 RCH := node $(CWD)/react-component-hierarchy/bin/rch.js -e
 
+define run-rch
+cd $(POLYPOD_FEATURES_PATH)/$1; $(RCH) $2 > $@; mv $@ $(CWD)
+endef
+
 .PHONY: all
 all: polyExplorer.svg facebookImport.svg
 
@@ -17,15 +21,11 @@ rebuild: clean-files all
 
 .INTERMEDIATE: polyExplorer.txt
 polyExplorer.txt: ensure-rch
-	cd $(POLYPOD_FEATURES_PATH)/polyExplorer; \
-		$(RCH) src/polyExplorer.jsx > $@; \
-		mv $@ $(CWD)
+	$(call run-rch,polyExplorer,src/polyExplorer.jsx)
 
 .INTERMEDIATE: facebookImport.txt
 facebookImport.txt: ensure-rch
-	cd $(POLYPOD_FEATURES_PATH)/facebookImport; \
-		$(RCH) src/facebookImporter.jsx > $@; \
-		mv $@ $(CWD)
+	$(call run-rch,facebookImport,src/facebookImporter.jsx)
 
 .PHONY: ensure-rch
 ensure-rch: react-component-hierarchy
