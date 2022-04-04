@@ -407,12 +407,10 @@ function getEndpoint(endpointId: string): EndpointInfo | null {
     return endpoints[endpointId] || null;
 }
 
-function approveEndpointFetch(
-    endpointId: string,
-    featureIdToken: string
-): boolean {
+function approveEndpointFetch(endpointId: string): boolean {
+    const featureName = window.parent.currentTitle || window.manifest.name;
     return confirm(
-        `${featureIdToken} wants to contact the endpoint: ${endpointId}. \n Proceed?`
+        `${featureName} wants to contact the endpoint: ${endpointId}. \n Proceed?`
     );
 }
 
@@ -425,12 +423,11 @@ class BrowserEndpoint implements Endpoint {
     endpointNetwork = new BrowserNetwork();
     async send(
         endpointId: string,
-        featureIdToken: string,
         payload: string,
         contentType?: string,
         authToken?: string
     ): Promise<void> {
-        if (!approveEndpointFetch(endpointId, featureIdToken))
+        if (!approveEndpointFetch(endpointId))
             throw endpointErrorMessage("send", "User denied request");
         const endpoint = getEndpoint(endpointId);
         if (!endpoint) {
@@ -447,13 +444,13 @@ class BrowserEndpoint implements Endpoint {
             throw endpointErrorMessage("send", NetworkResponse.error);
         }
     }
+
     async get(
         endpointId: string,
-        featureIdToken: string,
         contentType?: string,
         authToken?: string
     ): Promise<string> {
-        if (!approveEndpointFetch(endpointId, featureIdToken))
+        if (!approveEndpointFetch(endpointId))
             throw endpointErrorMessage("get", "User denied request");
         const endpoint = getEndpoint(endpointId);
         if (!endpoint)

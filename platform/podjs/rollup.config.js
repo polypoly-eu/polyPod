@@ -18,12 +18,13 @@ export default [
         ],
         plugins: [
             json(),
+            resolve(),
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"],
             }),
         ],
-        external: ["@polypoly-eu/rdf", "@zip.js/zip.js"],
+        context: "window",
     },
     {
         input: "src/pod.ts",
@@ -42,5 +43,6 @@ export default [
                 transforms: ["typescript"],
             }),
         ],
+        context: "window",
     },
 ];
