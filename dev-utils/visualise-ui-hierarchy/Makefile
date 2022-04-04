@@ -1,3 +1,4 @@
+.DEFAULT_GOAL := all
 working_directory := $(shell pwd)
 polypod_features_path := $(working_directory)/../../features
 rch := node $(working_directory)/react-component-hierarchy/bin/rch.js -e
