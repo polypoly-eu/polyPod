@@ -1,0 +1,14 @@
+.story-card-list {
+  padding: 16px;
+  display: flex;
+  flex-flow: column;
+  overflow: hidden scroll;
+}
+
+.story-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--color-gray-400);
+}

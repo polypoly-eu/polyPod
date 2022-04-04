@@ -16,6 +16,8 @@ import {
   BlockLegend,
   LineLegend,
   ErrorPopup,
+  StoryCardList,
+  StoryCard,
 } from "./react-components";
 export {
   BubbleCluster,
@@ -31,4 +33,6 @@ export {
   BlockLegend,
   LineLegend,
   ErrorPopup,
+  StoryCardList,
+  StoryCard,
 };

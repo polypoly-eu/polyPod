@@ -4,6 +4,7 @@ import RouteButton from "../../components/buttons/routeButton.jsx";
 import Loading from "../../components/loading/loading.jsx";
 import { FileLoaderContext } from "../../context/file-loader-context.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
+import { StoryCardList, StoryCard } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
 
@@ -17,15 +18,8 @@ const PopUpMessage = ({ children, reportResultAnswer }) => {
 const AnalysisCard = ({ analysis }) => {
     return (
         <div className="analysis-card">
-            <div className="card-container">
-                <h1 className="ministory-title">{analysis.title}</h1>
-                {analysis.label !== null && (
-                    <label>
-                        {i18n.t(`explore:analysis.label.${analysis.label}`)}
-                    </label>
-                )}
-            </div>
-            <div className="summary-text">{analysis.renderSummary()}</div>
+            <div className="card-container"></div>
+            <div className="summary-text"></div>
             {analysis.renderDetails ? (
                 <RouteButton
                     route="/explore/details"
@@ -119,16 +113,31 @@ const ExploreView = () => {
                 />
             );
         return (
-            <div>
+            <StoryCardList history={history}>
                 <UnrecognizedCard />
                 {fileAnalysis.analyses.map((analysis, index) => (
-                    <AnalysisCard
-                        analysis={analysis}
+                    <StoryCard
                         key={index}
-                        setActiveDetails={setActiveDetails}
-                    />
+                        navigation={
+                            analysis.renderDetails && {
+                                route: "/explore/details",
+                                stateChange: setActiveDetails,
+                                buttonText: i18n.t("explore:details.button"),
+                            }
+                        }
+                    >
+                        <h1>{analysis.title}</h1>
+                        {analysis.label !== null && (
+                            <label>
+                                {i18n.t(
+                                    `explore:analysis.label.${analysis.label}`
+                                )}
+                            </label>
+                        )}
+                        <p>{analysis.renderSummary()}</p>
+                    </StoryCard>
                 ))}
-            </div>
+            </StoryCardList>
         );
     };
 
