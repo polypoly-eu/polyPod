@@ -45,6 +45,6 @@ export default [
                 transforms: ["typescript"],
             }),
         ],
-        external: ["@polypoly-eu/port-authority/dist/node"],
+        external: ["@polypoly-eu/port-authority/dist/middleware"],
     },
 ];
