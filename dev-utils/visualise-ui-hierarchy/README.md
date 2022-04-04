@@ -39,8 +39,8 @@ Graphviz.
 ### Irrelevant files
 
 The react-component-hierarchy tool lists some things as UI components that
-really aren't any, like contexts. I suppose it's just tricky to tell the
-difference, but we could at least filter those.
+really aren't, like contexts. I suppose it's just tricky to tell the difference,
+but we could at least filter those.
 
 ### Incomplete hierarchy
 
