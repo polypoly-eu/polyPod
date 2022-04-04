@@ -13,6 +13,7 @@
         "features/demo",
         "features/example",
         "features/facebookImport",
+        "features/google",
         "features/lexicon",
         "features/polyExplorer",
         "features/polyPinion",
