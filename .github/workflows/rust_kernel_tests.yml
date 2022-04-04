@@ -2,11 +2,11 @@ name: Lint and Test Rust code
 on:
   push:
     paths:
-      - platform/core/**
+      - 'platform/core/**'
   pull_request:
     types: [assigned, opened, ready_for_review]
     paths:
-      - platform/core/**
+      - 'platform/core/**'
 
 jobs:
   test:

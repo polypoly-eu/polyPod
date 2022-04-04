@@ -1,6 +1,8 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import Loading from "../../components/loading/loading.jsx";
+import { FileLoaderContext } from "../../context/file-loader-context.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
 import i18n from "../../i18n.js";
@@ -12,11 +14,7 @@ const PopUpMessage = ({ children, reportResultAnswer }) => {
     return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
 };
 
-const AnalysisCard = ({
-    analysis,
-    setActiveDetails,
-    exploreScrollingProgress,
-}) => {
+const AnalysisCard = ({ analysis }) => {
     return (
         <div className="analysis-card">
             <div className="card-container">
@@ -32,8 +30,7 @@ const AnalysisCard = ({
                 <RouteButton
                     route="/explore/details"
                     className="details-button"
-                    onClick={() => setActiveDetails(analysis)}
-                    stateChange={{ exploreScrollingProgress }}
+                    stateChange={{ activeAnalysis: analysis }}
                 >
                     {i18n.t("explore:details.button")}
                 </RouteButton>
@@ -48,7 +45,7 @@ const AnalysisCard = ({
         //             route="/explore/details"
         //             className="details-button"
         //             onClick={() => setActiveDetails(analysis)}
-        //             stateChange={{ exploreScrollingProgress }}
+        //             stateChange={{ scrollingProgress }}
         //         >
         //             {i18n.t("explore:details.button")}
         //         </RouteButton>
@@ -72,17 +69,12 @@ const UnrecognizedCard = () => {
 };
 
 const ExploreView = () => {
-    const {
-        navigationState,
-        fileAnalysis,
-        setActiveDetails,
-        reportResult,
-        setReportResult,
-    } = useContext(ImporterContext);
+    const { setActiveDetails, reportResult, setReportResult } =
+        useContext(ImporterContext);
 
-    const [scrollingProgress, setScrollingProgress] = useState(
-        navigationState.exploreScrollingProgress
-    );
+    const { fileAnalysis } = useContext(FileLoaderContext);
+
+    const history = useHistory();
     const exploreRef = useRef();
 
     const handleCloseReportResult = () => {
@@ -134,7 +126,6 @@ const ExploreView = () => {
                         analysis={analysis}
                         key={index}
                         setActiveDetails={setActiveDetails}
-                        exploreScrollingProgress={scrollingProgress}
                     />
                 ))}
             </div>
@@ -142,11 +133,15 @@ const ExploreView = () => {
     };
 
     const saveScrollingProgress = (e) => {
-        setScrollingProgress(e.target.scrollTop);
+        history.location.state.scrollingProgress = e.target.scrollTop;
     };
 
+    //on start-up
     useEffect(() => {
-        exploreRef.current.scrollTo(0, scrollingProgress);
+        exploreRef.current.scrollTo(
+            0,
+            history.location?.state?.scrollingProgress || 0
+        );
     }, []);
 
     return (

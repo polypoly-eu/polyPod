@@ -28,7 +28,10 @@ Then set `sdk.dir` in your local `local.properties` and finally run:
 ## Testing
 
 With a device connected (real or emulated), execute the `connectedAndroidTest`
-task.
+task; the `test` task will run all the tests.
+
+> *Note*: testing includes the Java *and* Kotlin tests, although the former need
+> to be checked to see if they actually run.
 
 ### Linting
 
@@ -43,7 +46,7 @@ ktlint
 
 in this directory.
 
-Additionally, a gradle target for linting has been added; use
+Additionally, a `gradle` target for linting has been added; use
 
 ```shell
 ./gradlew ktlintCheck
@@ -53,7 +56,7 @@ to check the report.
 
 ## Installing features at runtime
 
-The polyPod already bundles the features it ships with, but it will also load
+The polyPod already bundles all the features it ships with, but it will also load
 additional feature packages from the `files/features/` directory on the device's
 internal storage. You can manually push a feature there by using `adb push` to
 get it on the device, and `adb shell run-as coop.polypoly.polypod` to copy it

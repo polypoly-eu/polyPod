@@ -1,55 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import { FeatureFileStorage } from "@polypoly-eu/feature-file-storage";
 import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
-import { analyzeFile } from "../model/analysis.js";
-import { importData } from "../model/importer.js";
 
 export const ImporterContext = React.createContext();
-
-//all nav-states for checking purposes
-const navigationStates = ["importStatus", "exploreScrollingProgress"];
-const importSteps = {
-    loading: "loading",
-    beginning: "beginning",
-    request: "request",
-    download: "download",
-    import: "import",
-    explore: "explore",
-};
-const namespace = "http://polypoly.coop/schema/fbImport/";
-//used until real fileStorage is loaded
-const fakeFileStorage = {
-    files: null,
-    refreshFiles: async () => null,
-    readFile: async () => null,
-    removeFile: async () => {},
-};
-
-class FileImportError extends Error {
-    constructor(cause) {
-        super("Failed to import file");
-        this.name = "FileImportError";
-        this.cause = cause;
-    }
-}
-
-class FileSelectionError extends Error {
-    constructor(cause) {
-        super("Failed to select file");
-        this.name = "FileSelectionError";
-        this.cause = cause;
-    }
-}
-
-class RefreshFilesError extends Error {
-    constructor(cause) {
-        super("Failed to refresh files");
-        this.name = "RefreshFilesError";
-        this.cause = cause;
-    }
-}
 
 function updatePodNavigation(pod, history, handleBack, location) {
     pod.polyNav.actions = {
@@ -72,183 +26,31 @@ function updateTitle(pod, location) {
     );
 }
 
-//from fileStorage
-async function readImportStatus(pod) {
-    const { dataFactory } = pod;
-    const statusQuads = await pod.polyIn.select({
-        subject: dataFactory.namedNode(`${namespace}facebookImporter`),
-        predicate: dataFactory.namedNode(`${namespace}importStatus`),
-    });
-    let status = statusQuads[0]?.object?.value?.split(namespace)[1];
-    return status || importSteps.beginning;
-}
-
-async function writeImportStatus(pod, status) {
-    const { dataFactory, polyIn } = pod;
-    const existingQuad = (
-        await pod.polyIn.select({
-            subject: dataFactory.namedNode(`${namespace}facebookImporter`),
-            predicate: dataFactory.namedNode(`${namespace}importStatus`),
-        })
-    )[0];
-    if (existingQuad) await polyIn.delete(existingQuad);
-    const quad = dataFactory.quad(
-        dataFactory.namedNode(`${namespace}facebookImporter`),
-        dataFactory.namedNode(`${namespace}importStatus`),
-        dataFactory.namedNode(`${namespace}${status}`)
-    );
-    await polyIn.add(quad);
-}
-
 export const ImporterProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
-    const [fileStorage, setFileStorage] = useState(fakeFileStorage);
-    const [files, setFiles] = useState(null);
-    const [facebookAccount, setFacebookAccount] = useState(null);
-    const [fileAnalysis, setFileAnalysis] = useState(null);
-    const [activeDetails, setActiveDetails] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
-    const [startRequest, setStartRequest] = useState(false);
-    const [selectedFile, setSelectedFile] = useState(null);
-
-    const [navigationState, setNavigationState] = useState({
-        importStatus: importSteps.loading,
-        exploreScrollingProgress: 0,
-    });
-
-    const location = useLocation();
-
-    fileStorage.changeListener = async () => {
-        const resolvedFiles = [];
-        for (const file of fileStorage.files) {
-            resolvedFiles.push(await file);
-        }
-        setFiles(Object.values(resolvedFiles));
-    };
 
     const history = useHistory();
+    const location = useLocation();
 
     async function runWithLoadingScreen(task) {
-        setFiles(null);
+        setIsLoading(true);
         await task();
-        refreshFiles();
-    }
-
-    const handleRemoveFile = (fileID) => {
-        setFacebookAccount(null);
-        return fileStorage.removeFile(fileID);
-    };
-
-    const handleSelectFile = async () => {
-        const { polyNav } = pod;
-        runWithLoadingScreen(async function () {
-            try {
-                setSelectedFile(await polyNav.pickFile("application/zip"));
-            } catch (error) {
-                setGlobalError(new FileSelectionError(error));
-            }
-        });
-    };
-
-    const handleImportFile = async () => {
-        if (!selectedFile) return;
-        const { polyOut } = pod;
-        runWithLoadingScreen(async function () {
-            try {
-                await polyOut.importArchive(selectedFile.url);
-                setSelectedFile(null);
-            } catch (error) {
-                setGlobalError(new FileImportError(error));
-            }
-        });
-    };
-
-    //change the navigationState like so: changeNavigationState({<changedState>:<changedState>})
-    function changeNavigationState(changedState) {
-        if (changedState) {
-            Object.keys(changedState)?.forEach((key) => {
-                if (!navigationStates.includes(key)) {
-                    console.error(`NavigationStateError with key: ${key}`);
-                    return;
-                }
-            });
-            setNavigationState({ ...navigationState, ...changedState });
-        }
+        setIsLoading(false);
     }
 
     function handleBack() {
-        if (history.length > 1) {
-            history.goBack();
-            if (history.location.state) {
-                changeNavigationState(history.location.state);
-            }
-        }
-    }
-
-    function refreshFiles() {
-        setFiles(null);
-        fileStorage
-            .refreshFiles()
-            .then(async () => {
-                const resolvedFiles = [];
-                if (!fileStorage.files) {
-                    setFiles(null);
-                    return;
-                }
-                for (const file of fileStorage.files) {
-                    resolvedFiles.push(await file);
-                }
-                setFiles(resolvedFiles);
-            })
-            .catch((error) => setGlobalError(new RefreshFilesError(error)));
-    }
-
-    function updateImportStatus(newStatus) {
-        changeNavigationState({ importStatus: newStatus });
-        writeImportStatus(pod, newStatus);
+        history.length > 1 && history.goBack();
     }
 
     const initPod = async () => await window.pod;
 
     //on startup
     useEffect(() => {
-        initPod().then((newPod) => {
-            setPod(newPod);
-            readImportStatus(newPod).then((status) => {
-                if (
-                    status &&
-                    !(navigationState.importStatus == importSteps.explore)
-                )
-                    changeNavigationState({ importStatus: status });
-            });
-            setFileStorage(new FeatureFileStorage(newPod));
-        });
+        initPod().then((newPod) => setPod(newPod));
     }, []);
-
-    //on fileStorage change
-    useEffect(() => {
-        refreshFiles();
-    }, [fileStorage]);
-
-    //on file change
-    //when files changed run the importer first and create an account model first.
-    //after there is an account the analyses are triggered.
-    useEffect(() => {
-        if (files?.[0])
-            importData(files[0]).then((newFacebookAccount) =>
-                setFacebookAccount(newFacebookAccount)
-            );
-    }, [files]);
-
-    // On account changed
-    // When the account changes run the analises
-    useEffect(() => {
-        if (facebookAccount && files)
-            analyzeFile(files[0], facebookAccount).then((fileAnalysis) =>
-                setFileAnalysis(fileAnalysis)
-            );
-    }, [facebookAccount, files]);
 
     //on history change
     useEffect(() => {
@@ -261,28 +63,14 @@ export const ImporterProvider = ({ children }) => {
         <ImporterContext.Provider
             value={{
                 pod,
-                files,
-                handleRemoveFile,
-                navigationState,
-                changeNavigationState,
                 handleBack,
-                selectedFile,
-                setSelectedFile,
-                handleSelectFile,
-                handleImportFile,
-                importSteps,
-                updateImportStatus,
-                fileAnalysis,
-                refreshFiles,
-                activeDetails,
-                setActiveDetails,
                 globalError,
                 setGlobalError,
-                facebookAccount,
                 reportResult,
                 setReportResult,
-                startRequest,
-                setStartRequest,
+                isLoading,
+                setIsLoading,
+                runWithLoadingScreen,
             }}
         >
             {children}
