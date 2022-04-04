@@ -27,7 +27,7 @@ export default class InactiveCardsSummary {
         this.active =
             this._inactiveAnalysesData.length ==
                 inactiveAnalysesResults.length &&
-            this._inactiveAnalysesData > 0;
+            this._inactiveAnalysesData.length > 0;
     }
 
     get title() {
