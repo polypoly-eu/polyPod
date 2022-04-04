@@ -24,9 +24,9 @@ class Node:
         POLY_LOOK = "green"
         THIRD_PARTY = "blue"
 
-    def __init__(self, key, value, type):
-        self.key = key
-        self.value = value
+    def __init__(self, id, label, type):
+        self.id = id
+        self.label = label
         self.type = type
 
 
@@ -35,25 +35,25 @@ class Graph:
         self.__nodes = {}
         self.edges = set()
 
-    def register_node(self, value, type):
-        if value not in self.__nodes:
-            key = str(len(self.__nodes) + 1)
-            self.__nodes[value] = Node(key, value, type)
-        return self.__nodes[value]
+    def register_node(self, label, type):
+        if label not in self.__nodes:
+            id = str(len(self.__nodes) + 1)
+            self.__nodes[label] = Node(id, label, type)
+        return self.__nodes[label]
 
-    def connect(self, from_value, to_value):
-        from_key = self.__nodes[from_value].key
-        to_key = self.__nodes[to_value].key
-        self.edges.add((from_key, to_key))
+    def connect(self, from_label, to_label):
+        from_id = self.__nodes[from_label].id
+        to_id = self.__nodes[to_label].id
+        self.edges.add((from_id, to_id))
 
     def nodes(self):
         return self.__nodes.values()
 
 
-def parse_type(path):
-    if path.startswith("src/"):
+def parse_type(label):
+    if label.startswith("src/"):
         return Node.Type.SOURCE
-    elif path.startswith("@polypoly-eu/poly-look/"):
+    elif label.startswith("@polypoly-eu/poly-look/"):
         return Node.Type.POLY_LOOK
     return Node.Type.THIRD_PARTY
 
@@ -94,9 +94,9 @@ def parse(input):
             continue
 
         depth = len(parts[0])
-        value = parts[1]
-        type = parse_type(value)
-        node = graph.register_node(value, type)
+        label = parts[1]
+        type = parse_type(label)
+        node = graph.register_node(label, type)
 
         hierarchy.pop_to_depth(depth)
         current = hierarchy.current()
@@ -107,7 +107,7 @@ def parse(input):
 
         parent = hierarchy.parent()
         if parent is not None:
-            graph.connect(parent.node.value, value)
+            graph.connect(parent.node.label, label)
     return graph
 
 
@@ -115,8 +115,8 @@ def write_dot(graph):
     print("digraph {")
     indent = "    "
     for node in graph.nodes():
-        print(indent + node.key
-              + ' [ label="' + node.value
+        print(indent + node.id
+              + ' [ label="' + node.label
               + '" color="' + node.type.value
               + '" ]')
     for edge in graph.edges:
