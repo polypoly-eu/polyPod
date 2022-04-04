@@ -6,18 +6,12 @@ define run-rch
 cd $(polypod_features_path)/$1; $(rch) $2 > $@; mv $@ $(working_directory)
 endef
 
-.PHONY: all
-all: polyExplorer.svg facebookImport.svg
+react-component-hierarchy:
+	git clone https://github.com/fhd/react-component-hierarchy
 
-.PHONY: rebuild
-rebuild: clean-files all
-
-%.svg: %.dot
-	fdp -T svg -o $@ $<
-
-.INTERMEDIATE: %.dot
-%.dot: %.txt
-	./tree2dot < $< > $@
+.PHONY: ensure-rch
+ensure-rch: react-component-hierarchy
+	cd react-component-hierarchy; git pull --rebase; yarn install
 
 .INTERMEDIATE: polyExplorer.txt
 polyExplorer.txt: ensure-rch
@@ -27,20 +21,26 @@ polyExplorer.txt: ensure-rch
 facebookImport.txt: ensure-rch
 	$(call run-rch,facebookImport,src/facebookImporter.jsx)
 
-.PHONY: ensure-rch
-ensure-rch: react-component-hierarchy
-	cd react-component-hierarchy; git pull --rebase; yarn install
+.INTERMEDIATE: %.dot
+%.dot: %.txt
+	./tree2dot < $< > $@
 
-react-component-hierarchy:
-	git clone https://github.com/fhd/react-component-hierarchy
+%.svg: %.dot
+	fdp -T svg -o $@ $<
 
-.PHONY: clean
-clean: clean-files clean-deps
+.PHONY: all
+all: polyExplorer.svg facebookImport.svg
 
 .PHONY: clean-files
 clean-files:
 	$(RM) *.txt *.dot *.svg
 
+.PHONY: rebuild
+rebuild: clean-files all
+
 .PHONY: clean-deps
 clean-deps:
 	$(RM) -r react-component-hierarchy
+
+.PHONY: clean
+clean: clean-files clean-deps
