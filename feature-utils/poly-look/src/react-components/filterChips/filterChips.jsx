@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import * as propTypes from "prop-types";
-console.log("propes", propTypes);
 import Chip from "./chip.jsx";
 
 import "./filterChips.css";
