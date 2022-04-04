@@ -45,3 +45,7 @@ clean-deps:
 
 .PHONY: clean
 clean: clean-files clean-deps
+
+.PHONY: lint
+lint:
+	pycodestyle tree2dot
