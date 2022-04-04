@@ -35,9 +35,9 @@ export function bubblewrapLifecycle(
 ): PortSpecLifecycle {
     return async () => {
         const ports = await l<Uint8Array>();
-        return mapResource(ports, ([sent, recv]) => {
+        return mapResource(ports, ([send, recv]) => {
             return [
-                mapSendPort(sent, (data) => bubblewrap.encode(data)),
+                mapSendPort(send, (data) => bubblewrap.encode(data)),
                 mapReceivePort(recv, (buf) => bubblewrap.decode(buf)),
             ];
         });
