@@ -61,12 +61,12 @@ extension AppStoreConnect {
         return try result.get()
     }
     
-    /// Finds the given build.
+    /// Finds the given build or the its attached status.
     /// - Parameters:
     ///   - version: The version of the build to look for
     ///   - buildNumber: The build number for the given version to look for
     ///   - appID: The id of the app for which to search the build for
-    /// - Returns: The processed build if found, or throws error if something failed
+    /// - Returns: The build status if found, or throws error if something failed
     func findBuild(forVersion version: String,
                    buildNumber: Int,
                    forApp appID: String) throws -> BuildStatus {
