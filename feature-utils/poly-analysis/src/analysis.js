@@ -1,6 +1,6 @@
 import { Telemetry } from "../utils/performance-telemetry.js";
 import { createErrorStatus, createSuccessStatus } from "../utils/status.js";
-
+import { ZipFile } from "@polypoly-eu/poly-import";
 import InactiveCardsSummary from "./analysis/report/inactive-cards-summary.js";
 
 import MinistoriesStatusAnalysis from "./analysis/report/ministories-status-analysis.js";
@@ -141,12 +141,7 @@ export async function analyzeZip({
     };
 }
 
-export async function analyzeFile({
-    zipData,
-    dataAccount,
-    ZipFile,
-    subAnalyses,
-}) {
+export async function analyzeFile({ zipData, dataAccount, subAnalyses }) {
     const zipFile = await ZipFile.createWithCache(zipData, window.pod);
     return await analyzeZip({
         zipData,

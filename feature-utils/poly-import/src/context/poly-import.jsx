@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { FeatureFileStorage, ZipFile } from "../storage";
+import { FeatureFileStorage } from "../storage";
 import { importData } from "../importer";
 
 import { RefreshFilesError } from "../errors/polyIn-errors.js";
@@ -82,7 +82,6 @@ export const PolyImportProvider = ({
                 analyzeFile({
                     zipData: files[0],
                     dataAccount: newAccount,
-                    ZipFile: ZipFile,
                     subAnalyses,
                 }).then((fileAnalysis) => setFileAnalysis(fileAnalysis));
             }
