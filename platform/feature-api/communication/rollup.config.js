@@ -17,12 +17,13 @@ export default [
             },
         ],
         plugins: [
+            nodeResolve(),
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"],
             }),
         ],
-        external: ["@msgpack/msgpack"],
+        context: "window",
     },
     {
         input: communicationFileName,
