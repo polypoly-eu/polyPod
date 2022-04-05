@@ -9,43 +9,9 @@ import { StoryCardList, StoryCard } from "@polypoly-eu/poly-look";
 import i18n from "../../i18n.js";
 
 import "./explore.css";
-import "./ministory-styles.css";
 
 const PopUpMessage = ({ children, reportResultAnswer }) => {
     return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
-};
-
-const AnalysisCard = ({ analysis }) => {
-    return (
-        <div className="analysis-card">
-            <div className="card-container"></div>
-            <div className="summary-text"></div>
-            {analysis.renderDetails ? (
-                <RouteButton
-                    route="/explore/details"
-                    className="details-button"
-                    stateChange={{ activeAnalysis: analysis }}
-                >
-                    {i18n.t("explore:details.button")}
-                </RouteButton>
-            ) : null}
-            <div className="card-separator"></div>
-        </div>
-        // <div className="analysis-card">
-        //     <h1>{analysis.title}</h1>
-        //     <div>{analysis.renderSummary()}</div>
-        //     {analysis.renderDetails ? (
-        //         <RouteButton
-        //             route="/explore/details"
-        //             className="details-button"
-        //             onClick={() => setActiveDetails(analysis)}
-        //             stateChange={{ scrollingProgress }}
-        //         >
-        //             {i18n.t("explore:details.button")}
-        //         </RouteButton>
-        //     ) : null}
-        // </div>
-    );
 };
 
 const UnrecognizedCard = () => {
@@ -113,15 +79,16 @@ const ExploreView = () => {
                 />
             );
         return (
-            <StoryCardList history={history}>
+            <StoryCardList>
                 <UnrecognizedCard />
                 {fileAnalysis.analyses.map((analysis, index) => (
                     <StoryCard
                         key={index}
                         navigation={
                             analysis.renderDetails && {
+                                history: history,
                                 route: "/explore/details",
-                                stateChange: setActiveDetails,
+                                stateChange: { activeAnalysis: analysis },
                                 buttonText: i18n.t("explore:details.button"),
                             }
                         }
@@ -134,7 +101,7 @@ const ExploreView = () => {
                                 )}
                             </label>
                         )}
-                        <p>{analysis.renderSummary()}</p>
+                        {analysis.renderSummary()}
                     </StoryCard>
                 ))}
             </StoryCardList>

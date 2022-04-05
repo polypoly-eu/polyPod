@@ -35,10 +35,6 @@ export const AdvertisingValueMiniStorySummary = ({
     numberInterests,
 }) => {
     const refWidth = useRef(0);
-    const fontSize = calculateFontSize(
-        randomAdInterests,
-        refWidth.current.clientWidth
-    );
 
     return (
         <div className="advertising-value-mini-story">
@@ -52,14 +48,8 @@ export const AdvertisingValueMiniStorySummary = ({
             <ul>
                 {randomAdInterests.map((interest, index) => {
                     return (
-                        <li key={index} ref={refWidth} className="summary">
-                            <p
-                                style={{
-                                    fontSize: fontSize,
-                                }}
-                            >
-                                {interest}
-                            </p>
+                        <li key={index} className="summary">
+                            <p>{interest}</p>
                         </li>
                     );
                 })}
