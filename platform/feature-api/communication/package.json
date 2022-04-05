@@ -41,7 +41,8 @@
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
     "fast-check": "^2.11.0",
-    "n3": "^1.7.0"
+    "n3": "^1.7.0",
+    "node-fetch": "^3.2.3"
   },
   "private": true
 }
