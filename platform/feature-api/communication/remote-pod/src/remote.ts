@@ -13,6 +13,8 @@ import {
     Endpoint,
 } from "@polypoly-eu/pod-api";
 import { DataFactory, Quad } from "rdf-js";
+import { RequestListener } from "http";
+import * as RDF from "@polypoly-eu/rdf";
 import {
     ResponsePort,
     liftServer,
@@ -22,10 +24,6 @@ import {
     Port,
     liftClient,
     mapPort,
-} from "@polypoly-eu/port-authority";
-import { RequestListener } from "http";
-import * as RDF from "@polypoly-eu/rdf";
-import {
     Bubblewrap,
     Classes,
     backendClient,
@@ -287,7 +285,7 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
 
     async listenOnMiddleware(): Promise<RequestListener> {
         const { bubblewrapMiddlewarePort } = await import(
-            "@polypoly-eu/port-authority/dist/middleware"
+            "@polypoly-eu/communication/dist/port-authority/middleware"
         );
         const [middleware, port] = bubblewrapMiddlewarePort(
             Bubblewrap.create(podBubblewrapClasses),

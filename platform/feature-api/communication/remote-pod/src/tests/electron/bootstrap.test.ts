@@ -5,7 +5,7 @@ import { dataset } from "@rdfjs/dataset";
 import { promises as fs } from "fs";
 import http from "http";
 import { RemoteServerPod } from "../../remote";
-import { iframeOuterPort } from "@polypoly-eu/port-authority";
+import { iframeOuterPort } from "@polypoly-eu/communication";
 import { dataFactory } from "@polypoly-eu/rdf";
 import { assert } from "chai";
 import createServer from "connect";

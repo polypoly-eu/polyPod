@@ -23,8 +23,7 @@ export default [
         ],
         external: [
             "@polypoly-eu/communication",
-            "@polypoly-eu/port-authority",
-            "@polypoly-eu/port-authority/dist/node",
+            "@polypoly-eu/communication/dist/port-authority/middleware",
             "@polypoly-eu/rdf",
         ],
     },
@@ -45,6 +44,6 @@ export default [
                 transforms: ["typescript"],
             }),
         ],
-        external: ["@polypoly-eu/port-authority/dist/middleware"],
+        external: ["@polypoly-eu/communication/dist/port-authority/middleware"],
     },
 ];
