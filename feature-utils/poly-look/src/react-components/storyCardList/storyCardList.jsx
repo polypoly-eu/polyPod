@@ -2,8 +2,8 @@ import React from "react";
 
 import "./storyCardList.css";
 
-export const StoryCardList = ({ children }) => {
-  return <div className="story-card-list">{children}</div>;
+export const StoryCardList = ({ children, className }) => {
+  return <div className={`story-card-list ${className}`}>{children}</div>;
 };
 
 const renderDetailsButton = (navigation) => {
