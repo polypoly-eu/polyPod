@@ -23,7 +23,6 @@ export default [
                 transforms: ["typescript"],
             }),
         ],
-        context: "window",
     },
     {
         input: communicationFileName,
