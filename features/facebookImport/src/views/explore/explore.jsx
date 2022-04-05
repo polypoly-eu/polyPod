@@ -29,8 +29,7 @@ const UnrecognizedCard = () => {
 };
 
 const ExploreView = () => {
-    const { setActiveDetails, reportResult, setReportResult } =
-        useContext(ImporterContext);
+    const { reportResult, setReportResult } = useContext(ImporterContext);
 
     const { fileAnalysis } = useContext(FileLoaderContext);
 
