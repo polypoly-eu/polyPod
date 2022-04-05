@@ -1,15 +1,30 @@
-import { forward, join, loopback, mapReceivePort, mapSendPort, Port } from "../port";
+import {
+    forward,
+    join,
+    loopback,
+    mapReceivePort,
+    mapSendPort,
+    Port,
+} from "../port";
 import { PortSpecLifecycle } from "../specs/port";
-import { ClientRequest, liftClient, liftServer, ServerResponse } from "../procedure";
+import {
+    ClientRequest,
+    liftClient,
+    liftServer,
+    ServerResponse,
+} from "../procedure";
 import { ProcedureSpecLifecycle } from "../specs/procedure";
-import { Bubblewrap } from "@polypoly-eu/communication";
+import { Bubblewrap } from "../../index";
 import { mapResource, Resource } from "../util";
 
 export const loopbackLifecycle: PortSpecLifecycle = async () => ({
     value: loopback(),
 });
 
-export function forwardLifecycle(l1: PortSpecLifecycle, l2: PortSpecLifecycle): PortSpecLifecycle {
+export function forwardLifecycle(
+    l1: PortSpecLifecycle,
+    l2: PortSpecLifecycle
+): PortSpecLifecycle {
     return async <T>() => {
         const ports1 = await l1<T>();
         const ports2 = await l2<T>();
@@ -60,7 +75,9 @@ export function flipLifecycle(
     };
 }
 
-export function procedureLiftedLifecycle(l: PortSpecLifecycle): ProcedureSpecLifecycle {
+export function procedureLiftedLifecycle(
+    l: PortSpecLifecycle
+): ProcedureSpecLifecycle {
     return async <T, U>() => {
         const clientL = await l<ClientRequest<T>>();
         const serverL = await l<ServerResponse<U>>();

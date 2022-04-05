@@ -23,15 +23,23 @@
     "docs": "typedoc"
   },
   "dependencies": {
-    "@msgpack/msgpack": "^2.6.0"
+    "@msgpack/msgpack": "^2.6.0",
+    "@types/body-parser": "^1.19.2",
+    "@types/connect": "^3.4.35",
+    "body-parser": "^1.20.0",
+    "connect": "^3.7.0"
   },
   "devDependencies": {
     "@polypoly-eu/rdf": "file:../api/rdf",
     "@polypoly-eu/rdf-convert": "file:../api/rdf-convert",
     "@polypoly-eu/rdf-spec": "file:../api/rdf-spec",
     "@types/benchmark": "^2.1.0",
+    "@types/chai": "^4.3.0",
+    "@types/chai-as-promised": "^7.1.5",
     "@types/n3": "^1.4.4",
     "benchmark": "^2.1.4",
+    "chai": "^4.3.6",
+    "chai-as-promised": "^7.1.1",
     "fast-check": "^2.11.0",
     "n3": "^1.7.0"
   },

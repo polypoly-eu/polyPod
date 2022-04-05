@@ -8,7 +8,7 @@ import { OptionsJson, Options, json, raw } from "body-parser";
 import createServer, { NextHandleFunction, HandleFunction } from "connect";
 import { IncomingMessage, RequestListener } from "http";
 
-import { Bubblewrap } from "@polypoly-eu/communication";
+import { Bubblewrap } from "../index";
 
 import { Handler, mapReceivePort } from "./port";
 import { ResponsePort, WithResolvers } from "./procedure";
@@ -113,7 +113,10 @@ export function jsonMiddlewarePort(
     );
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [handler, port] = middlewarePort<any, any>(contentType, JSON.stringify);
+    const [handler, port] = middlewarePort<any, any>(
+        contentType,
+        JSON.stringify
+    );
 
     server.use(handler);
 
@@ -145,8 +148,9 @@ export function bubblewrapMiddlewarePort(
     );
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [handler, rawPort] = middlewarePort<any, Buffer>(contentType, (value) =>
-        Buffer.from(bubblewrap.encode(value))
+    const [handler, rawPort] = middlewarePort<any, Buffer>(
+        contentType,
+        (value) => Buffer.from(bubblewrap.encode(value))
     );
 
     server.use(handler);

@@ -1,6 +1,10 @@
 import { portSpec } from "../../specs/port";
-import { bubblewrapLifecycle, forwardLifecycle, loopbackLifecycle } from "../_lifecycles";
-import { Bubblewrap } from "@polypoly-eu/communication";
+import {
+    bubblewrapLifecycle,
+    forwardLifecycle,
+    loopbackLifecycle,
+} from "../_lifecycles";
+import { Bubblewrap } from "../../../index";
 import { receiveSingle } from "../../port";
 import chai, { assert } from "chai";
 import chaiAsPromised from "chai-as-promised";
