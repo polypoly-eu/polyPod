@@ -53,22 +53,6 @@ describe("Remote pod", () => {
             await once(server, "listening");
         });
 
-        // TODO move to api
-        describe("Lifecycle", () => {
-            let log: Array<(string | boolean)[]>;
-
-            beforeEach(() => {
-                log = [];
-                const polyLifecycle: PolyLifecycle = {
-                    startFeature: async (...args) => {
-                        log.push(args);
-                    },
-                    listFeatures: async () => ({ "test-on": true, "test-off": false }),
-                };
-                Object.assign(underlying, { polyLifecycle });
-            });
-        });
-
         after(async () => {
             server.close();
             await once(server, "close");
