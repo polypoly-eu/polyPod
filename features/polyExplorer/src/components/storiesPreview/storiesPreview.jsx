@@ -24,7 +24,11 @@ const StoriesPreview = ({ storiesMetadata }) => {
                         ),
                     }}
                 >
-                    <img src={story.img.src} alt={i18nP.t(story.img.alt)} />
+                    <img
+                        className="title-img"
+                        src={story.img.src}
+                        alt={i18nP.t(story.img.alt)}
+                    />
                     <h1 className="centered">{i18nP.t(story.title)}</h1>
                     <p>{i18nP.t(story.previewText)}</p>
                 </StoryCard>

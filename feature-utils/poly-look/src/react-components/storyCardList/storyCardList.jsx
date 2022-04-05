@@ -2,41 +2,51 @@ import React from "react";
 
 import "./storyCardList.css";
 
+/**
+ * A list of StoryCards
+ *
+ * @param {jsx} children Jsx children (Storycards)
+ * @param {String} className CSS classes added to the main div
+ * @returns jsx
+ */
 export const StoryCardList = ({ children, className }) => {
   return <div className={`story-card-list ${className}`}>{children}</div>;
 };
 
-const renderDetailsButton = (navigation) => {
-  if (!navigation) return;
+/**
+ * Card component that makes up a StoryList
+ *
+ * @param {jsx} children HTML elements displayed inside the card
+ * @param {Object} navigation Navigation object, if passed will show a button and will trigger actions
+ * @param {History} navigation.history a useHistory generated history (also requires route)
+ * @param {String} navigation.route a router route (also requires history)
+ * @param {Callback} navigation.onClick onClick function
+ * @param {String} buttonText the buttons displayed text
+ * @returns jsx
+ */
+export const StoryCard = ({ children, navigation }) => {
+  if (!navigation) return <div className="story-card">{children}</div>;
   const { history, route, stateChange, onClick, buttonText } = navigation;
   if (!buttonText) {
     console.error("StoryCard: DetailsButton must have text");
-    return;
+    return null;
   }
-  if (!history) {
-    console.error("StoryCard: Missing history in navigation props");
-    return;
+  if (!(history && route) && !onClick) {
+    console.error(
+      "StoryCard: Navigation either needs history and route or onClick"
+    );
+    return null;
   }
-  if (!route && !onClick) {
-    console.error("StoryCard: DetailsButton must either have route or onClick");
-    return;
-  }
-  const handleClick = () => {
+
+  const handleDivClick = () => {
     onClick && onClick();
     route && history.push(route, stateChange);
   };
-  return (
-    <button className="poly-button centered" onClick={handleClick}>
-      {buttonText}
-    </button>
-  );
-};
 
-export const StoryCard = ({ children, navigation }) => {
   return (
-    <div className="story-card">
+    <div className="story-card" onClick={handleDivClick}>
       {children}
-      {renderDetailsButton(navigation)}
+      <button className="poly-button centered">{buttonText}</button>
     </div>
   );
 };

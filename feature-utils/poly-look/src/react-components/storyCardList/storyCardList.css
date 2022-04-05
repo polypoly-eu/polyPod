@@ -39,6 +39,11 @@
   margin-right: 20px;
 }
 
+.story-card .title-img {
+  margin-top: 24px;
+  width: 100%;
+}
+
 .story-card .highlighted-number {
   font-size: clamp(1rem, 14vw, 5rem);
   font-family: "Jost Bold";
