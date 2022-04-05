@@ -24,7 +24,7 @@
  * Endpoint clients and servers can be constructed from any port:
  *
  * ```
- * import {client, server} from "@polypoly-eu/port-authority";
+ * import {client, server} from "@polypoly-eu/communication";
  *
  * declare serverPort: ResponsePort<EndpointRequest, EndpointResponse>;
  *

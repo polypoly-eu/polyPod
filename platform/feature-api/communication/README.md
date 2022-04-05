@@ -122,7 +122,7 @@ methods at any point. We assume port-authority as a transport layer.
 
 ```typescript
 import {endpointServer, ServerOf} from "@polypoly-eu/postoffice";
-import {server} from "@polypoly-eu/port-authority";
+import {server} from "@polypoly-eu/communication";
 
 const simpleEndpointImpl: ServerOf<SimpleEndpoint> = {
     test1: async (param1: string) =>
@@ -143,7 +143,7 @@ On the other side, clients can obtain a callable object:
 
 ```typescript
 import { endpointClient, ClientOf } from "@polypoly-eu/postoffice";
-import { client } from "@polypoly-eu/port-authority";
+import { client } from "@polypoly-eu/communication";
 
 const rpcClient: ClientOf<SimpleEndpoint> = endpointClient(client(clientPort));
 
@@ -229,7 +229,7 @@ Interoperability with [Bubblewrap](#bubblewrap) is provided so that arbitrary ob
 
 ```javascript
 import { MessageChannel } from "worker_threads";
-import { fromNodeMessagePort } from "@polypoly-eu/port-authority";
+import { fromNodeMessagePort } from "@polypoly-eu/communication";
 
 const channel = new MessageChannel();
 
