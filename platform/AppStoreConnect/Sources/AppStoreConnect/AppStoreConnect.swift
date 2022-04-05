@@ -7,6 +7,7 @@ public enum AppStoreConnectError: Error {
     case unknownProcessingState(String)
     case missingProcessingState
     case buildNotFound
+    case appNotFound
 }
 
 // A facade for AppStoreConnect_Swift_SDK.APIProvider that manages multiple requests

@@ -19,14 +19,11 @@ class Base64p8KeyParsingTests: XCTestCase {
         -----END PRIVATE KEY-----
         """
         
-        // Base64 format for the above p8 key
-        let base64Format = Data(p8KeyDefinition.utf8).base64EncodedString()
-        
         // Expected key to be extracted after parsing the base64 format key.
         // It should not contain newlines, as pe AppStoreConnect-Swift-SDK specifications
         let expectedKey = key.components(separatedBy: .newlines).joined()
         
-        let decodedKey = try AppStoreConnect.decodeBase64Key(base64Format)
+        let decodedKey = try AppStoreConnect.cleanupPrivateKey(p8KeyDefinition)
         
         XCTAssertEqual(expectedKey, decodedKey)
     }

@@ -19,46 +19,31 @@ extension AppStoreConnect {
     /// - Returns: The processed build if found, or throws error if something failed
     func waitUntilBuildIsProcessed(forVersion version: String,
                                    buildNumber: Int,
-                                   forApp appID: String) throws -> Build {
-        let maxNumberOfRequests = 10
-        let processingBuildCheckInterval: TimeInterval = 20
+                                   forApp appID: String) async throws -> Build {
+        let maxNumberOfRequests = 5
+        // Check every minute. Some processing can go fast, other slower.
+        let processingBuildCheckInterval: UInt64 = 60*1_000_000_000 // 60 seconds/1 minute
         var requestsCount = 0
         
-        var result: Result<Build, Error> = .failure(AppStoreConnectError.buildNotFound)
-        let semaphore = DispatchSemaphore(value: 0)
-        func setResult(_ capturedResult: Result<Build, Error>, timer: Timer) {
-            result = capturedResult
-            timer.invalidate()
-            semaphore.signal()
+        while requestsCount <= maxNumberOfRequests {
+            requestsCount += 1
+            let result = try await self.findBuild(forVersion: version, buildNumber: buildNumber, forApp: appID)
+            switch result {
+            case .notYetUploaded:
+                NSLog("Build is not yet uploaded...")
+            case .processing:
+                NSLog("Build is still processing...")
+            case .invalid:
+                throw AppStoreConnectError.invalidBuild
+            case .failed:
+                throw AppStoreConnectError.buildProcessingFailed
+            case .valid(let build):
+                return build
+            }
+            try await Task.sleep(nanoseconds: processingBuildCheckInterval)
         }
         
-        Timer.scheduledTimer(withTimeInterval: processingBuildCheckInterval,
-                             repeats: true) { timer in
-            guard requestsCount <= maxNumberOfRequests else {
-                setResult(.failure(AppStoreConnectError.buildNotFound), timer: timer)
-                return
-            }
-            requestsCount += 1
-            do {
-                let result = try self.findBuild(forVersion: version, buildNumber: buildNumber, forApp: appID)
-                switch result {
-                case .notYetUploaded:
-                    NSLog("Build is not yet uploaded...")
-                case .processing:
-                    NSLog("Build is still processing...")
-                case .invalid:
-                    setResult(.failure(AppStoreConnectError.invalidBuild), timer: timer)
-                case .failed:
-                    setResult(.failure(AppStoreConnectError.buildProcessingFailed), timer: timer)
-                case .valid(let build):
-                    setResult(.success(build), timer: timer)
-                }
-            } catch {
-                setResult(.failure(error), timer: timer)
-            }
-        }.fire()
-        semaphore.wait()
-        return try result.get()
+        throw AppStoreConnectError.buildNotFound
     }
     
     /// Finds the given build or the its attached status.
@@ -69,7 +54,7 @@ extension AppStoreConnect {
     /// - Returns: The build status if found, or throws error if something failed
     func findBuild(forVersion version: String,
                    buildNumber: Int,
-                   forApp appID: String) throws -> BuildStatus {
+                   forApp appID: String) async throws -> BuildStatus {
         let buildEndpoint = APIEndpoint<BuildsResponse>.builds(
             fields: [
                 .builds([.processingState])
@@ -80,7 +65,7 @@ extension AppStoreConnect {
                 .version(["\(buildNumber)"])
             ]
         )
-        let buildsResponse = try apiProvider.request(buildEndpoint)
+        let buildsResponse = try await apiProvider.request(buildEndpoint)
         guard let build = buildsResponse.data.first else {
             return .notYetUploaded
         }

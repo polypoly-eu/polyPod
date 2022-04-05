@@ -11,12 +11,13 @@ extension AppStoreConnect {
     public func distributeBetaBuild(withVersion version: String,
                                     buildNumber: Int,
                                     toBetaGroups groups: [String],
-                                    forApp appID: String) throws {
-        let build = try waitUntilBuildIsProcessed(forVersion: version,
-                                                  buildNumber: buildNumber,
-                                                  forApp: appID)
+                                    forApp appBundleIdentifier: String) async throws {
+        let app = try await getApp(forBundleIdentifier: appBundleIdentifier)
+        let build = try await waitUntilBuildIsProcessed(forVersion: version,
+                                                        buildNumber: buildNumber,
+                                                        forApp: app.id)
         let addTesters = APIEndpoint.add(accessForBetaGroupsWithIds: groups,
                                          toBuildWithId: build.id)
-        try apiProvider.request(addTesters)
+        try await apiProvider.request(addTesters)
     }
 }
