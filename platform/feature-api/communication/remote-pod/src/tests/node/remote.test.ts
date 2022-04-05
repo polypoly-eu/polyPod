@@ -1,6 +1,6 @@
 import { PolyLifecycle, Pod, DefaultPod, FS } from "@polypoly-eu/pod-api";
 import { Volume } from "memfs";
-import { dataset } from "@rdfjs/dataset";
+import factory from "@rdfjs/dataset";
 import { RemoteClientPod, RemoteServerPod } from "../../remote";
 import { MessageChannel, MessagePort } from "worker_threads";
 import { Port } from "@polypoly-eu/port-authority";
@@ -20,7 +20,7 @@ describe("Remote pod", () => {
         const fs = new Volume().promises;
         const { port1, port2 } = new MessageChannel();
         ports.push(port1, port2);
-        const underlying = new DefaultPod(dataset(), fs as unknown as FS);
+        const underlying = new DefaultPod(factory.dataset(), fs as unknown as FS);
         const server = new RemoteServerPod(underlying);
         server.listenOnRaw(fromNodeMessagePort(port2) as Port<Uint8Array, Uint8Array>);
 
@@ -43,7 +43,7 @@ describe("Remote pod", () => {
         let server: Server;
 
         before(async () => {
-            underlying = new DefaultPod(dataset(), fs as unknown as FS);
+            underlying = new DefaultPod(factory.dataset(), fs as unknown as FS);
             const serverPod = new RemoteServerPod(underlying);
 
             const app = await serverPod.listenOnMiddleware();
