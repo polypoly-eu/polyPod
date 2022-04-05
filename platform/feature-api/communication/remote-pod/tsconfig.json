@@ -9,7 +9,6 @@
     "rootDir": "./src",
     "module": "commonjs",
     "declaration": true,
-    "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true
