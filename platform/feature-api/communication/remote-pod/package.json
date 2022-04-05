@@ -16,7 +16,7 @@
     "pretest": "start-dummy-server &",
     "test": "rollup -c && npm run test:electron && npm run test:node",
     "test:electron": "electron-mocha --renderer --require ts-node/register src/tests/electron/*.test.ts",
-    "test:node": "ts-mocha --timeout 10000 src/tests/node/*.test.ts",
+    "test:node": "jest src/tests/node/*.test.ts",
     "posttest": "stop-dummy-server",
     "docs": "typedoc"
   },
