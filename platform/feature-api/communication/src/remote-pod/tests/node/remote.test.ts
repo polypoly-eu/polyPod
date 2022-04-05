@@ -3,7 +3,7 @@ import { Volume } from "memfs";
 import { dataset } from "@rdfjs/dataset";
 import { RemoteClientPod, RemoteServerPod } from "../../remote";
 import { MessageChannel, MessagePort } from "worker_threads";
-import { Port, fromNodeMessagePort } from "@polypoly-eu/communication";
+import { Port, fromNodeMessagePort } from "../../../index";
 import { createServer, Server } from "http";
 import { once } from "events";
 import { podSpec } from "@polypoly-eu/pod-api/dist/spec";
@@ -21,10 +21,14 @@ describe("Remote pod", () => {
         ports.push(port1, port2);
         const underlying = new DefaultPod(dataset(), fs as unknown as FS);
         const server = new RemoteServerPod(underlying);
-        server.listenOnRaw(fromNodeMessagePort(port2) as Port<Uint8Array, Uint8Array>);
+        server.listenOnRaw(
+            fromNodeMessagePort(port2) as Port<Uint8Array, Uint8Array>
+        );
 
         podSpec(
-            RemoteClientPod.fromRawPort(fromNodeMessagePort(port1) as Port<Uint8Array, Uint8Array>),
+            RemoteClientPod.fromRawPort(
+                fromNodeMessagePort(port1) as Port<Uint8Array, Uint8Array>
+            ),
             "/",
             getHttpbinUrl()
         );
@@ -62,7 +66,10 @@ describe("Remote pod", () => {
                     startFeature: async (...args) => {
                         log.push(args);
                     },
-                    listFeatures: async () => ({ "test-on": true, "test-off": false }),
+                    listFeatures: async () => ({
+                        "test-on": true,
+                        "test-off": false,
+                    }),
                 };
                 Object.assign(underlying, { polyLifecycle });
             });

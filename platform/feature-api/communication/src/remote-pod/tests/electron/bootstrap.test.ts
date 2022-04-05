@@ -1,7 +1,7 @@
 import { DefaultPod, FS } from "@polypoly-eu/pod-api";
 import { IncomingMessage, ServerResponse, RequestListener, Server } from "http";
 import { once } from "events";
-import dataset from "@rdfjs/dataset";
+import { dataset } from "@rdfjs/dataset";
 import { promises as fs } from "fs";
 import http from "http";
 import { RemoteServerPod } from "../../remote";
@@ -94,7 +94,7 @@ describe("Bootstrap (Electron)", () => {
     });
 
     it("iframe", async function () {
-        this.timeout(10000);
+        new Promise((resolve) => setTimeout(resolve, 10000));
 
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const body = document.querySelector("body")!;
