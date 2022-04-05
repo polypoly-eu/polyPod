@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./story-card-list.css";
+import "./storyCardList.css";
 
 export const StoryCardList = ({ children }) => {
   return <div className="story-card-list">{children}</div>;

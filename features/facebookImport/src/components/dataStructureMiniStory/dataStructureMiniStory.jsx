@@ -90,7 +90,9 @@ const DataStructureMiniStory = ({ data }) => {
                 defaultActiveChips={[selectedFolder]}
                 onChipClick={handleFolderSelected}
             />
-            <InfoButton route="/report/data-structure-info" />
+            <div className="right-edge-aligned">
+                <InfoButton route="/report/data-structure-info" />
+            </div>
             <p className="source data-structure-source">
                 {i18n.t("common:source.your.facebook.data")}
             </p>

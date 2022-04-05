@@ -37,3 +37,10 @@
   font-family: "Jost Bold";
   margin: 32px 0;
 }
+
+.story-card .right-edge-aligned {
+  position: relative;
+  display: flex;
+  justify-content: end;
+  margin-right: -16px;
+}
