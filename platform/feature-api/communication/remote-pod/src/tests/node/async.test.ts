@@ -5,10 +5,6 @@ import { podSpec } from "@polypoly-eu/pod-api/dist/spec";
 import { getHttpbinUrl } from "@polypoly-eu/test-utils";
 import { AsyncPod } from "../../async";
 import { DataFactory } from "@polypoly-eu/rdf";
-import chai, { assert } from "chai";
-import chaiAsPromised from "chai-as-promised";
-
-chai.use(chaiAsPromised);
 
 describe("Async pod", () => {
     const fs = new Volume().promises as unknown as FS;
@@ -51,7 +47,7 @@ describe("Async pod", () => {
             await pod.polyLifecycle?.startFeature("hi", false);
             await pod.polyLifecycle?.startFeature("yo", true);
 
-            assert.deepEqual(log, [
+            expect(log).toEqual([
                 ["hi", false],
                 ["yo", true],
             ]);

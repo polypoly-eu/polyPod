@@ -42,7 +42,6 @@
     "@types/mocha": "^8.2.0",
     "@types/node-fetch": "^2.5.8",
     "@types/rdfjs__dataset": "^1.0.5",
-    "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "connect": "^3.7.0",
     "electron": "^15.3.1",
