@@ -15,7 +15,10 @@ export type Handler<T> = (t: T) => void;
  * Contravariant map operation for [[Handler]]s. Applies the specified function on the value _before_ it is passed to
  * the handler.
  */
-export function mapHandler<T, U>(handler: Handler<T>, f: (x: U) => T): Handler<U> {
+export function mapHandler<T, U>(
+    handler: Handler<T>,
+    f: (x: U) => T
+): Handler<U> {
     return (u) => handler(f(u));
 }
 
@@ -45,7 +48,10 @@ export interface SendPort<Out> {
  * to outgoing messages _before_ they are sent on the original port.
  * @returns an instance of [[SendPort]] instantiated to the `In` class.
  */
-export function mapSendPort<Out, Out2>(port: SendPort<Out>, f: (x: Out2) => Out): SendPort<Out2> {
+export function mapSendPort<Out, Out2>(
+    port: SendPort<Out>,
+    f: (x: Out2) => Out
+): SendPort<Out2> {
     return {
         send: (value: Out2) => port.send(f(value)),
     };
@@ -78,7 +84,8 @@ export function mapReceivePort<In, In2>(
     f: (x: In) => In2
 ): ReceivePort<In2> {
     return {
-        addHandler: (handler: Handler<In2>) => port.addHandler(mapHandler(handler, f)),
+        addHandler: (handler: Handler<In2>) =>
+            port.addHandler(mapHandler(handler, f)),
     };
 }
 
@@ -114,7 +121,10 @@ export function mapPort<In1, Out1, In2, Out2>(
  * @param from port from which messages are forwarded
  * @param to port to which messages are forwarded
  */
-export function forward<InOut>(from: ReceivePort<InOut>, to: SendPort<InOut>): void {
+export function forward<InOut>(
+    from: ReceivePort<InOut>,
+    to: SendPort<InOut>
+): void {
     from.addHandler((t) => to.send(t));
 }
 
@@ -142,7 +152,10 @@ export function loopback<InOut>(): [SendPort<InOut>, ReceivePort<InOut>] {
  *
  * The resulting port shares the implementation of the underlying half ports.
  */
-export function join<In, Out>(send: SendPort<Out>, receive: ReceivePort<In>): Port<In, Out> {
+export function join<In, Out>(
+    send: SendPort<Out>,
+    receive: ReceivePort<In>
+): Port<In, Out> {
     return {
         send: (out: Out) => send.send(out),
         addHandler: (handler: Handler<In>) => receive.addHandler(handler),

@@ -12,6 +12,8 @@ describe("Node/Port", () => {
     });
 
     describe("Forward", () => {
-        portSpec(forwardLifecycle(nodeLoopbackLifecycle, nodeLoopbackLifecycle));
+        portSpec(
+            forwardLifecycle(nodeLoopbackLifecycle, nodeLoopbackLifecycle)
+        );
     });
 });

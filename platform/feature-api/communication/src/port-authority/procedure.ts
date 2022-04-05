@@ -90,7 +90,9 @@ export type Procedure<Req, Res> = (req: Req) => Promise<Res>;
  * @param port the port used to send messages
  * @returns a function that can be used to transparently send messages over a [[RequestPort]] and await the response
  */
-export function client<Req, Res>(port: RequestPort<Req, Res>): Procedure<Req, Res> {
+export function client<Req, Res>(
+    port: RequestPort<Req, Res>
+): Procedure<Req, Res> {
     return (req) =>
         new Promise<Res>((resolve, reject) => {
             port.send({
@@ -147,7 +149,9 @@ export interface ClientRequest<Req> {
 /**
  * Responses that may be successful or failed with an associated request identifier.
  */
-export type ServerResponse<Res> = { id: number; response: Res } | { id: number; error: unknown };
+export type ServerResponse<Res> =
+    | { id: number; response: Res }
+    | { id: number; error: unknown };
 
 /**
  * Lifts a raw [[Port]] that supports sending identified requests and receiving identified responses to a

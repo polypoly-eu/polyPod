@@ -1,4 +1,10 @@
-import { client, Procedure, RequestPort, ResponsePort, server } from "../procedure";
+import {
+    client,
+    Procedure,
+    RequestPort,
+    ResponsePort,
+    server,
+} from "../procedure";
 import fc, { Arbitrary, IAsyncProperty } from "fast-check";
 import chai, { assert } from "chai";
 import chaiAsPromised from "chai-as-promised";
@@ -57,7 +63,9 @@ export class ProcedureSpec<T, U> {
         it("Emulates reference function", async () => {
             server(receive, this.proc);
 
-            await fc.assert(probeFunctionEquality<T, U>(client(send), this.proc, this.gen));
+            await fc.assert(
+                probeFunctionEquality<T, U>(client(send), this.proc, this.gen)
+            );
         });
 
         it("Ignores additional handlers", async () => {
@@ -73,7 +81,9 @@ export class ProcedureSpec<T, U> {
             server(receive, this.proc);
             server(receive, mockP);
 
-            await fc.assert(probeFunctionEquality<T, U>(client(send), this.proc, this.gen));
+            await fc.assert(
+                probeFunctionEquality<T, U>(client(send), this.proc, this.gen)
+            );
 
             assert.isFalse(called);
         });

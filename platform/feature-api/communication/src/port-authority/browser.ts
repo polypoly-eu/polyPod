@@ -18,8 +18,10 @@ import { Handler, mapPort, Port, ReceivePort } from "./port";
  * Note that Browser `MessagePort`s use the structured clone algorithm; that is, an object sent on the port will be
  * received as a different object.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function fromBrowserMessagePort(port: MessagePort): Port<MessageEvent, any> {
+export function fromBrowserMessagePort(
+    port: MessagePort
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): Port<MessageEvent, any> {
     return {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         send(value: any): void {

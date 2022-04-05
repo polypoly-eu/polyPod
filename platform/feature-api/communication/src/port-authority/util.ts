@@ -61,7 +61,10 @@ export interface Resource<T> {
 }
 
 /** @ignore */
-export function mapResource<T, U>(resource: Resource<T>, f: (t: T) => U): Resource<U> {
+export function mapResource<T, U>(
+    resource: Resource<T>,
+    f: (t: T) => U
+): Resource<U> {
     return {
         value: f(resource.value),
         cleanup: async () => {

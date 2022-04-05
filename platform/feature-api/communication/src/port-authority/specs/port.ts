@@ -7,7 +7,9 @@ import { Resource } from "../util";
 
 chai.use(chaiAsPromised);
 
-export type PortSpecLifecycle = <T>() => Promise<Resource<[SendPort<T>, ReceivePort<T>]>>;
+export type PortSpecLifecycle = <T>() => Promise<
+    Resource<[SendPort<T>, ReceivePort<T>]>
+>;
 
 interface Fixture<T> {
     send: SendPort<T>;
@@ -58,19 +60,24 @@ export class PortSpec<T> {
         it("Transmits messages to multiple handlers", async () => {
             let fixture: Fixture<T>;
 
-            const prop = fc.asyncProperty(this.gen, fc.integer(0, 10), async (t, count) => {
-                const promises: Promise<T>[] = [];
-                for (let i = 0; i < count; ++i)
-                    promises.push(
-                        new Promise<T>((resolve) => {
-                            fixture.receive.addHandler(resolve);
-                        })
-                    );
+            const prop = fc.asyncProperty(
+                this.gen,
+                fc.integer(0, 10),
+                async (t, count) => {
+                    const promises: Promise<T>[] = [];
+                    for (let i = 0; i < count; ++i)
+                        promises.push(
+                            new Promise<T>((resolve) => {
+                                fixture.receive.addHandler(resolve);
+                            })
+                        );
 
-                fixture.send.send(t);
+                    fixture.send.send(t);
 
-                for (const p of promises) await assert.eventually.deepEqual(p, t);
-            });
+                    for (const p of promises)
+                        await assert.eventually.deepEqual(p, t);
+                }
+            );
 
             await fc.assert(
                 prop
@@ -122,7 +129,10 @@ export function portSpec(lifecycle: PortSpecLifecycle): void {
     });
 
     describe("Array<number | string>", () => {
-        new PortSpec(lifecycle, fc.array(fc.oneof(fc.integer(), fc.string()))).run();
+        new PortSpec(
+            lifecycle,
+            fc.array(fc.oneof(fc.integer(), fc.string()))
+        ).run();
     });
 
     describe("Uint8Array", () => {
