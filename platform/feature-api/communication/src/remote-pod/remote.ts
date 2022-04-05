@@ -34,7 +34,7 @@ import {
     backendServer,
     ObjectBackendSpec,
     ValueBackendSpec,
-} from "@polypoly-eu/communication";
+} from "../index";
 
 type PolyInBackend = ObjectBackendSpec<{
     select(matcher: Partial<Matcher>): ValueBackendSpec<Quad[]>;
@@ -46,8 +46,15 @@ type PolyInBackend = ObjectBackendSpec<{
 
 type PolyOutBackend = ObjectBackendSpec<{
     readDir(path: string): ValueBackendSpec<Entry[]>;
-    readFile(path: string, options?: EncodingOptions): ValueBackendSpec<string | Uint8Array>;
-    writeFile(path: string, content: string, options: EncodingOptions): ValueBackendSpec<void>;
+    readFile(
+        path: string,
+        options?: EncodingOptions
+    ): ValueBackendSpec<string | Uint8Array>;
+    writeFile(
+        path: string,
+        content: string,
+        options: EncodingOptions
+    ): ValueBackendSpec<void>;
     stat(path: string): ValueBackendSpec<Stats>;
     importArchive(url: string): ValueBackendSpec<string>;
     removeArchive(fileId: string): ValueBackendSpec<void>;
@@ -77,7 +84,11 @@ type EndpointBackend = ObjectBackendSpec<{
         contentType?: string,
         authToken?: string
     ): ValueBackendSpec<void>;
-    get(endpointId: string, contentType?: string, authToken?: string): ValueBackendSpec<string>;
+    get(
+        endpointId: string,
+        contentType?: string,
+        authToken?: string
+    ): ValueBackendSpec<string>;
 }>;
 
 type PodBackend = ObjectBackendSpec<{
@@ -106,7 +117,14 @@ class FileStats implements Stats {
                 stats.getId()
             );
         } else {
-            return new FileStats(stats.isFile(), stats.isDirectory(), "", 0, "", "");
+            return new FileStats(
+                stats.isFile(),
+                stats.isDirectory(),
+                "",
+                0,
+                "",
+                ""
+            );
         }
     }
 
@@ -148,7 +166,9 @@ export const podBubblewrapClasses: Classes = {
     "@polypoly-eu/rdf.Quad": RDF.Quad,
 };
 
-function bubblewrapPort(rawPort: Port<Uint8Array, Uint8Array>): Port<Uint8Array, Uint8Array> {
+function bubblewrapPort(
+    rawPort: Port<Uint8Array, Uint8Array>
+): Port<Uint8Array, Uint8Array> {
     const podBubblewrap = Bubblewrap.create(podBubblewrapClasses);
     return mapPort(
         rawPort,
@@ -189,9 +209,14 @@ export class RemoteClientPod implements Pod {
         return new (class implements PolyOut {
             readFile(path: string, options: EncodingOptions): Promise<string>;
             readFile(path: string): Promise<Uint8Array>;
-            readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
-                if (options) return rpcClient.polyOut().readFile(path, options)();
-                else if (typeof fetch === "undefined") return rpcClient.polyOut().readFile(path)();
+            readFile(
+                path: string,
+                options?: EncodingOptions
+            ): Promise<string | Uint8Array> {
+                if (options)
+                    return rpcClient.polyOut().readFile(path, options)();
+                else if (typeof fetch === "undefined")
+                    return rpcClient.polyOut().readFile(path)();
                 else
                     return new Promise<Uint8Array>((resolve, reject) => {
                         fetch(path)
@@ -209,7 +234,11 @@ export class RemoteClientPod implements Pod {
                 return rpcClient.polyOut().stat(path)();
             }
 
-            writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
+            writeFile(
+                path: string,
+                content: string,
+                options: EncodingOptions
+            ): Promise<void> {
                 return rpcClient.polyOut().writeFile(path, content, options)();
             }
 
@@ -236,8 +265,10 @@ export class RemoteClientPod implements Pod {
             openUrl: (url: string) => this.rpcClient.polyNav().openUrl(url)(),
             setActiveActions: (actions: string[]) =>
                 this.rpcClient.polyNav().setActiveActions(actions)(),
-            setTitle: (title: string) => this.rpcClient.polyNav().setTitle(title)(),
-            pickFile: (type?: string) => this.rpcClient.polyNav().pickFile(type)(),
+            setTitle: (title: string) =>
+                this.rpcClient.polyNav().setTitle(title)(),
+            pickFile: (type?: string) =>
+                this.rpcClient.polyNav().pickFile(type)(),
         };
     }
 
@@ -250,10 +281,23 @@ export class RemoteClientPod implements Pod {
 
     get endpoint(): Endpoint {
         return {
-            send: (endpointId: string, payload: string, contentType?: string, authToken?: string) =>
-                this.rpcClient.endpoint().send(endpointId, payload, contentType, authToken)(),
-            get: (endpointId: string, contentType?: string, authToken?: string) =>
-                this.rpcClient.endpoint().get(endpointId, contentType, authToken)(),
+            send: (
+                endpointId: string,
+                payload: string,
+                contentType?: string,
+                authToken?: string
+            ) =>
+                this.rpcClient
+                    .endpoint()
+                    .send(endpointId, payload, contentType, authToken)(),
+            get: (
+                endpointId: string,
+                contentType?: string,
+                authToken?: string
+            ) =>
+                this.rpcClient
+                    .endpoint()
+                    .get(endpointId, contentType, authToken)(),
         };
     }
 }
@@ -285,7 +329,7 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
 
     async listenOnMiddleware(): Promise<RequestListener> {
         const { bubblewrapMiddlewarePort } = await import(
-            "@polypoly-eu/communication/dist/port-authority/middleware"
+            "../port-authority/middleware"
         );
         const [middleware, port] = bubblewrapMiddlewarePort(
             Bubblewrap.create(podBubblewrapClasses),
@@ -313,7 +357,8 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
                 const stats = await polyOut.stat(path);
                 return FileStats.of(stats);
             },
-            writeFile: (path, content, options) => polyOut.writeFile(path, content, options),
+            writeFile: (path, content, options) =>
+                polyOut.writeFile(path, content, options),
             importArchive: (url) => polyOut.importArchive(url),
             removeArchive: (fileId) => polyOut.removeArchive(fileId),
         };

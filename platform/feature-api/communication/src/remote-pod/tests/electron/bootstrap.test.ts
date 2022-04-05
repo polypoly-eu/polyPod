@@ -1,11 +1,11 @@
 import { DefaultPod, FS } from "@polypoly-eu/pod-api";
 import { IncomingMessage, ServerResponse, RequestListener, Server } from "http";
 import { once } from "events";
-import { dataset } from "@rdfjs/dataset";
+import dataset from "@rdfjs/dataset";
 import { promises as fs } from "fs";
 import http from "http";
 import { RemoteServerPod } from "../../remote";
-import { iframeOuterPort } from "@polypoly-eu/communication";
+import { iframeOuterPort } from "../../../index";
 import { dataFactory } from "@polypoly-eu/rdf";
 import { assert } from "chai";
 import createServer from "connect";
@@ -32,22 +32,34 @@ function completion(_window: Window): Promise<void> {
 
 function assets(): RequestListener {
     const app = createServer();
-    app.use("/feature.js", async (request: IncomingMessage, response: ServerResponse) => {
-        response.setHeader("Content-Type", "text/javascript");
-        response.writeHead(200);
-        response.write(await fs.readFile(join(__dirname, "../data/feature.js")));
-        response.end();
-    });
-    app.use("/pod.js", async (request: IncomingMessage, response: ServerResponse) => {
-        response.setHeader("Content-Type", "text/javascript");
-        response.writeHead(200);
-        response.write(await fs.readFile(join(__dirname, "../../../dist/bootstrap.js")));
-        response.end();
-    });
-    app.use("/index.html", (request: IncomingMessage, response: ServerResponse) => {
-        response.setHeader("Content-Type", "text/html");
-        response.writeHead(200);
-        response.write(`
+    app.use(
+        "/feature.js",
+        async (request: IncomingMessage, response: ServerResponse) => {
+            response.setHeader("Content-Type", "text/javascript");
+            response.writeHead(200);
+            response.write(
+                await fs.readFile(join(__dirname, "../data/feature.js"))
+            );
+            response.end();
+        }
+    );
+    app.use(
+        "/pod.js",
+        async (request: IncomingMessage, response: ServerResponse) => {
+            response.setHeader("Content-Type", "text/javascript");
+            response.writeHead(200);
+            response.write(
+                await fs.readFile(join(__dirname, "../../../dist/bootstrap.js"))
+            );
+            response.end();
+        }
+    );
+    app.use(
+        "/index.html",
+        (request: IncomingMessage, response: ServerResponse) => {
+            response.setHeader("Content-Type", "text/html");
+            response.writeHead(200);
+            response.write(`
             <!DOCTYPE HTML>
             <html>
                 <body>
@@ -56,8 +68,9 @@ function assets(): RequestListener {
                 </body>
             </html>
         `);
-        response.end();
-    });
+            response.end();
+        }
+    );
     return app;
 }
 
