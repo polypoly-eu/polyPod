@@ -1,7 +1,7 @@
 import {
     createErrorStatus,
     createSuccessStatus,
-} from "../analyses/utils/analysis-status";
+} from "@polypoly-eu/poly-import";
 import { MissingFilesException } from "./utils/failed-import-exception";
 import {
     readFullPathJSONFile,

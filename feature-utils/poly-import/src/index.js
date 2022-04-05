@@ -2,24 +2,34 @@ import { FeatureFileStorage, ZipFile, ZipFileEntry } from "./storage";
 import { importZip, runImporter, runImporters } from "./importer";
 import {
     FileImportError,
-    FileSelectionError,
     RefreshFilesError,
+    FileSelectionError,
 } from "./errors/polyIn-errors";
 import {
     PolyImportContext,
     PolyImportProvider,
 } from "./context/poly-import.jsx";
+import {
+    createErrorStatus,
+    createSuccessStatus,
+    createWarningStatus,
+} from "../utils/status";
+import { Telemetry } from "../utils/performance-telemetry";
 
 export {
     importZip,
     runImporter,
     runImporters,
-    FeatureFileStorage,
+    createErrorStatus,
+    PolyImportProvider,
+    createSuccessStatus,
+    createWarningStatus,
     ZipFile,
+    Telemetry,
     ZipFileEntry,
     FileImportError,
-    FileSelectionError,
     RefreshFilesError,
+    FileSelectionError,
+    FeatureFileStorage,
     PolyImportContext,
-    PolyImportProvider,
 };
