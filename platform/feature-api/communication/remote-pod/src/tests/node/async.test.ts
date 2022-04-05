@@ -47,13 +47,6 @@ describe("Async pod", () => {
             pod = new AsyncPod(Promise.resolve(underlying), new DataFactory(false));
         });
 
-        it("Lists features", async () => {
-            await assert.eventually.deepEqual(pod.polyLifecycle?.listFeatures(), {
-                "test-on": true,
-                "test-off": false,
-            });
-        });
-
         it("Starts feature", async () => {
             await pod.polyLifecycle?.startFeature("hi", false);
             await pod.polyLifecycle?.startFeature("yo", true);
