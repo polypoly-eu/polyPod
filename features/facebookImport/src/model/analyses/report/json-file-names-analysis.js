@@ -1,11 +1,8 @@
 import React from "react";
 import BasicList from "../../../components/basicList/basicList.jsx";
 
-import {
-    anonymizeJsonEntityPath,
-    jsonDataEntities,
-} from "../../importers/utils/importer-util.js";
-import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
+import { anonymizeJsonEntityPath } from "../../importers/utils/importer-util.js";
+import { ReportAnalysis, jsonDataEntities } from "@polypoly-eu/poly-analysis";
 
 export default class JSONFileNamesAnalysis extends ReportAnalysis {
     get title() {

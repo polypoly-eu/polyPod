@@ -1,8 +1,7 @@
 import React from "react";
 
 import { BubbleCluster } from "@polypoly-eu/poly-look";
-import { jsonDataEntities } from "../../importers/utils/importer-util.js";
-import { RootAnalysis } from "@polypoly-eu/poly-analysis";
+import { RootAnalysis, jsonDataEntities } from "@polypoly-eu/poly-analysis";
 
 export default class JsonFilesBubblesAnalysis extends RootAnalysis {
     get title() {

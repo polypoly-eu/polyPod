@@ -1,4 +1,3 @@
-//should move to analysis-util only as it is only used within analysis files
 export async function jsonDataEntities(zipFile) {
     const entries = await relevantZipEntries(zipFile);
     const relevantJsonEntries = entries.filter(
