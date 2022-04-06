@@ -6,13 +6,17 @@ import FilterChips from "../../src/react-components/filterChips/filterChips.jsx"
 const chipsContent = [...Array(3).keys()].map((i) => `chip${i}`);
 const mockedHandleClick = jest.fn();
 const allChipContent = "All";
-// const mockedActiveChips = [chipsContent[1], chipsContent[2]];
+const firstChipContent = chipsContent[0];
+let mockedActiveChips = [chipsContent[1], chipsContent[2]];
+const lightTheme = "light";
 
 const component = (
   <FilterChips
     chipsContent={chipsContent}
     onChipClick={mockedHandleClick}
     allChip={{ translation: allChipContent }}
+    defaultActiveChips={mockedActiveChips}
+    theme={lightTheme}
   />
 );
 
@@ -33,12 +37,13 @@ describe("Checks onChipClick event", () => {
       expect(mockedHandleClick).toHaveBeenCalledWith(chipId, [chipId]);
     }
   });
-  it("selected chips changes their color", () => {
+
+  it("clicking to select a chip changes its color", () => {
     const { getByText } = render(component);
-    mockedActiveChips.map((mockedActiveChip) => {
-      const activeChipElement = getByText(mockedActiveChip);
-      expect(activeChipElement).toHaveClass("chip selected");
-    });
+    const firstChipElement = getByText(firstChipContent);
+    expect(firstChipElement).not.toHaveClass("chip selected");
+    fireEvent.click(firstChipElement, mockedHandleClick);
+    expect(firstChipElement).toHaveClass("chip selected");
   });
 });
 
