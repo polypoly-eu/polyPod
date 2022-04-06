@@ -5,7 +5,7 @@ import FlatBuffers
 /// Possible errors that can be thrown by PolyPodCoreSwift
 public enum PolyPodCoreError: Error {
     /// Internal Rust Core failure with error code and message
-    case internalCoreFailure(Failure)
+    case internalCoreFailure(failure: Failure, context: String)
     /// Rust Core returned an invalid result type for a given operation
     case invalidResult(String)
     /// Rust Core returned an invalid failure content
@@ -13,12 +13,12 @@ public enum PolyPodCoreError: Error {
     
     var localizedDescription: String {
         switch self {
-        case let .internalCoreFailure(content):
-            return "Internal Core Failure: \(content.code) \(String(describing: content.message))"
+        case let .internalCoreFailure(failure, context):
+            return "\(context) -> Internal Core Failure: \(failure.code) \(String(describing: failure.message))"
         case let .invalidResult(content):
-            return "Core Failure: \(content)"
+            return "Invalid Core Result: \(content)"
         case let .invalidFailure(content):
-            return "Core Failure: \(content)"
+            return "Invalid Core Failure: \(content)"
         }
     }
 }
@@ -43,7 +43,7 @@ public final class Core {
         return processCoreResponse(core_bootstrap(languageCode)) { byteBuffer in
             let response = CoreBootstrapResponse.getRootAsCoreBootstrapResponse(bb: byteBuffer)
             if let failure = response.failure {
-                throw PolyPodCoreError.internalCoreFailure(failure)
+                throw PolyPodCoreError.internalCoreFailure(failure, "Failed to bootstrap core")
             }
         }
     }
@@ -59,7 +59,7 @@ public final class Core {
                 return response.result(type: FeatureManifest.self)
             case .failure:
                 if let failure = response.result(type: Failure.self) {
-                    throw PolyPodCoreError.internalCoreFailure(failure)
+                    throw PolyPodCoreError.internalCoreFailure(failure, "Failed to load Feature Manifest")
                 } else {
                     throw PolyPodCoreError.invalidFailure("Failed to load Feature Manifest: recevied failure result type without failure content")
                 }

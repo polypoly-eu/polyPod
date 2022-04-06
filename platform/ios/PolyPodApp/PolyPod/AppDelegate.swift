@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         switch Core.instance.bootstrap(languageCode: Language.current) {
         case .success:
-            Log.info("Core bootstraped!!!")
+            Log.info("Core bootstraped!")
         case let .failure(content):
             assertionFailure(content.localizedDescription)
             Log.error(content.localizedDescription)
