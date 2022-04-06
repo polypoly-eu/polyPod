@@ -12,7 +12,7 @@ provisioning_profile_file := cooppolypolypolypod__iOS_App_Store_Distribution.mob
 bundle_identifier := $(shell /usr/libexec/PlistBuddy -c "Print :ApplicationProperties:CFBundleIdentifier" "${archive_path}/Info.plist")
 build_version := $(shell /usr/libexec/PlistBuddy -c "Print :ApplicationProperties:CFBundleShortVersionString" "${archive_path}/Info.plist")
 build_number := $(shell /usr/libexec/PlistBuddy -c "Print :ApplicationProperties:CFBundleVersion" "${archive_path}/Info.plist")
-extnerla_tester_group_ids := e03b0ddc-305d-40d5-8186-4dcc32250054
+external_tester_group_ids := e03b0ddc-305d-40d5-8186-4dcc32250054
 app_store_connect_cmd := ../AppStoreConnect
 
 ifneq ($(shell which xcpretty),)
@@ -85,7 +85,7 @@ distribute_to_beta_testers:
 	 $(bundle_identifier) \
 	 $(build_version) \
 	 $(build_number) \
-	 $(foreach group, $(extnerla_tester_group_ids), $(group))
+	 $(foreach group, $(external_tester_group_ids), $(group))
 
 .PHONY: install_distribution_prerequisites
 install_distribution_prerequisites:
