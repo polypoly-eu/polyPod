@@ -7,7 +7,7 @@ const mockedHandleClick = jest.fn();
 
 const chip = <Chip id="chipId" handleClick={mockedHandleClick} active={true} />;
 
-it("Renders Chip", () => {
+it("Chip can be clicked", () => {
   const { container, getByRole } = render(chip);
   expect(container).toBeTruthy();
   fireEvent.click(getByRole("button"), mockedHandleClick);
