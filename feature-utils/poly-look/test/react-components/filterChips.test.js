@@ -24,13 +24,22 @@ it("Chips present in document", () => {
   }
 });
 
-it("Checks onChipClick is called", () => {
-  const { getByText } = render(component);
-  for (const chipId of chipsContent) {
-    const chipElement = getByText(chipId);
-    fireEvent.click(chipElement, mockedHandleClick);
-    expect(mockedHandleClick).toHaveBeenCalledWith(chipId, [chipId]);
-  }
+describe("Checks onChipClick event", () => {
+  it("is called", () => {
+    const { getByText } = render(component);
+    for (const chipId of chipsContent) {
+      const chipElement = getByText(chipId);
+      fireEvent.click(chipElement, mockedHandleClick);
+      expect(mockedHandleClick).toHaveBeenCalledWith(chipId, [chipId]);
+    }
+  });
+  it("selected chips changes their color", () => {
+    const { getByText } = render(component);
+    mockedActiveChips.map((mockedActiveChip) => {
+      const activeChipElement = getByText(mockedActiveChip);
+      expect(activeChipElement).toHaveClass("chip selected");
+    });
+  });
 });
 
 it("There is a Chip that selects all elements", () => {
