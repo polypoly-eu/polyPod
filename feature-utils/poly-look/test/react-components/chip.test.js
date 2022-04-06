@@ -4,8 +4,9 @@ import "@testing-library/jest-dom";
 import Chip from "../../src/react-components/filterChips/chip.jsx";
 
 const mockedHandleClick = jest.fn();
+const chipId = "chipId";
 
-const chip = <Chip id="chipId" handleClick={mockedHandleClick} active={true} />;
+const chip = <Chip id={chipId} handleClick={mockedHandleClick} active={true} />;
 
 it("Chip can be clicked", () => {
   const { container, getByRole } = render(chip);
@@ -15,8 +16,8 @@ it("Chip can be clicked", () => {
 });
 
 it("Chip has been selected", () => {
-  const { getByRole } = render(chip);
-  const chipElement = getByRole("button");
+  const { getByText } = render(chip);
+  const chipElement = getByText(chipId);
   expect(chip.props.active).toBeTruthy();
   expect(chipElement).toHaveClass("chip selected");
 });
