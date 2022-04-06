@@ -5,20 +5,20 @@ import FlatBuffers
 /// Possible errors that can be thrown by PolyPodCoreSwift
 public enum PolyPodCoreError: Error {
     /// Internal Rust Core failure with error code and message
-    case internalCoreFailure(failure: Failure, context: String)
+    case internalCoreFailure(context: String, failure: Failure)
     /// Rust Core returned an invalid result type for a given operation
-    case invalidResult(String)
+    case invalidResult(context: String, result:String)
     /// Rust Core returned an invalid failure content
-    case invalidFailure(String)
+    case invalidFailure(context: String)
     
     var localizedDescription: String {
         switch self {
-        case let .internalCoreFailure(failure, context):
-            return "\(context) -> Internal Core Failure: \(failure.code) \(String(describing: failure.message))"
-        case let .invalidResult(content):
-            return "Invalid Core Result: \(content)"
-        case let .invalidFailure(content):
-            return "Invalid Core Failure: \(content)"
+        case let .internalCoreFailure(context, failure):
+            return "\(context) -> internal Core Failure: \(failure.code) \(String(describing: failure.message))"
+        case let .invalidResult(context, result):
+            return "\(context) -> received invalid result type \(result)"
+        case let .invalidFailure(context):
+            return "\(context) -> recevied failure result type without failure content"
         }
     }
 }
@@ -43,7 +43,7 @@ public final class Core {
         return processCoreResponse(core_bootstrap(languageCode)) { byteBuffer in
             let response = CoreBootstrapResponse.getRootAsCoreBootstrapResponse(bb: byteBuffer)
             if let failure = response.failure {
-                throw PolyPodCoreError.internalCoreFailure(failure, "Failed to bootstrap core")
+                throw PolyPodCoreError.internalCoreFailure(context: "Failed to bootstrap core", failure: failure)
             }
         }
     }
@@ -59,12 +59,18 @@ public final class Core {
                 return response.result(type: FeatureManifest.self)
             case .failure:
                 if let failure = response.result(type: Failure.self) {
-                    throw PolyPodCoreError.internalCoreFailure(failure, "Failed to load Feature Manifest")
+                    throw PolyPodCoreError.internalCoreFailure(
+                        context: "Failed to load Feature Manifest",
+                        failure: failure
+                    )
                 } else {
-                    throw PolyPodCoreError.invalidFailure("Failed to load Feature Manifest: recevied failure result type without failure content")
+                    throw PolyPodCoreError.invalidFailure(context: "Failed to load Feature Manifest")
                 }
             default:
-                throw PolyPodCoreError.invalidResult("Failed to load Feature Manifest, received invalid result type: \(response.resultType)")
+                throw PolyPodCoreError.invalidResult(
+                    context: "Failed to load Feature Manifest",
+                    result: "\(response.resultType)"
+                )
             }
         }
     }
