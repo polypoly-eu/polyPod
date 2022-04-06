@@ -20,8 +20,9 @@ export const CardList = ({ children, className }) => {
  * @param {Object} navigation Navigation object, if passed will show a button and will trigger actions
  * @param {History} navigation.history a useHistory generated history (also requires route)
  * @param {String} navigation.route a router route (also requires history)
+ * @param {Object} navigation.stateChange a router history stateChange (also requires history)
  * @param {Callback} navigation.onClick onClick function
- * @param {String} buttonText the buttons displayed text
+ * @param {String} navigation.buttonText the buttons displayed text
  * @returns jsx
  */
 export const Card = ({ children, navigation }) => {
