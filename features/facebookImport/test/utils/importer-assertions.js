@@ -4,9 +4,8 @@ import {
 } from "../../src/model/importers/utils/failed-import-exception";
 
 export function expectErrorStatus(status, errorClass) {
-    expect(status.isError).toBe(true);
-    expect(status.message).toBe(errorClass.name);
-    expect(status.error.name).toBe(errorClass.name);
+    expect(status.isSuccess).toBe(false);
+    expect(status.message.name).toBe(errorClass.name);
 }
 
 export function expectError(result, errorClass, importerClass) {
@@ -36,7 +35,7 @@ export function expectAllResultsSuccess(results) {
 }
 
 export function expectImportWarning(result, warningMessage, importerClass) {
-    expect(result.status.isWarning).toBe(true);
+    expect(result.status.isSuccess).toBe(false);
     expect(result.status.message).toBe(warningMessage);
     expect(result.importer.constructor).toBe(importerClass);
 }
