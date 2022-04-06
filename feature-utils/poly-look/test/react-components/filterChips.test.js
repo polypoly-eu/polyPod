@@ -7,16 +7,12 @@ const chipsContent = [...Array(3).keys()].map((i) => `chip${i}`);
 const mockedHandleClick = jest.fn();
 const allChipContent = "All";
 const firstChipContent = chipsContent[0];
-let mockedActiveChips = [chipsContent[1], chipsContent[2]];
-const lightTheme = "light";
 
 const component = (
   <FilterChips
     chipsContent={chipsContent}
     onChipClick={mockedHandleClick}
     allChip={{ translation: allChipContent }}
-    defaultActiveChips={mockedActiveChips}
-    theme={lightTheme}
   />
 );
 
@@ -46,18 +42,3 @@ describe("Checks onChipClick event", () => {
     expect(firstChipElement).toHaveClass("chip selected");
   });
 });
-
-it("There is a Chip that selects all elements", () => {
-  const { getAllByText } = render(component);
-  const allChipElement = getAllByText(allChipContent);
-  const allChipElementLabel = Object.values(allChipElement[0])[1].children;
-  expect(component.props.allChip).toBeTruthy();
-  expect(allChipElementLabel).toMatch(allChipContent);
-});
-
-// it("checks which chips are active", () => {
-//   render(component);
-//   // const setActiveChips = chipElement.state.activeChips(mockedActiveChips);
-
-//   // const activeChips = setActiveChips(mockedActiveChips);
-// });
