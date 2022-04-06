@@ -13,7 +13,7 @@ extension AppStoreConnect {
                                               buildNumber: Int,
                                               groups: [String]) async throws {
         let app = try await getApp(forBundleIdentifier: appBundleIdentifier)
-        let build = try await waitUntilBuildIsProcessed(forAppID: app.id,
+        let build = try await buildIsProcessed(forAppID: app.id,
                                                         withVersion: version,
                                                         buildNumber: buildNumber)
         let addTesters = APIEndpoint.add(accessForBetaGroupsWithIds: groups,

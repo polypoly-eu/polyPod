@@ -17,21 +17,22 @@ extension AppStoreConnect {
     ///   - version: The version of the build to look for
     ///   - buildNumber: The build number for the given version to look for
     /// - Returns: The processed build if found, or throws error if something failed
-    func waitUntilBuildIsProcessed(forAppID appID: String,
-                                   withVersion version: String,
-                                   buildNumber: Int) async throws -> Build {
+    func buildIsProcessed(forAppID appID: String,
+                          withVersion version: String,
+                          buildNumber: Int) async throws -> Build {
         let maxNumberOfRequests = 5
         // Check every minute. Some processing can go fast, other slower.
         let processingBuildCheckInterval: UInt64 = 60*1_000_000_000 // 60 seconds/1 minute
         var requestsCount = 0
         
         while requestsCount <= maxNumberOfRequests {
-            requestsCount += 1
             let result = try await self.findBuild(
                 forAppID: appID,
                 withVersion: version,
                 buildNumber: buildNumber
             )
+            requestsCount += 1
+            
             switch result {
             case .notYetUploaded:
                 NSLog("Build is not yet uploaded...")
@@ -47,6 +48,7 @@ extension AppStoreConnect {
             try await Task.sleep(nanoseconds: processingBuildCheckInterval)
         }
         
+        NSLog("Exceeded max number of requests, build was not found.")
         throw AppStoreConnectError.buildNotFound
     }
     

@@ -146,4 +146,4 @@ jobs:
           POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64 }}
           POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64 }}
           POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
-        run: make distribute_app_to_beta_testers
+        run: make release_to_external_testers
