@@ -1,4 +1,5 @@
 import React from "react";
+import { INITIAL_HISTORY_STATE } from "../../poly-look";
 
 import "./cardList.css";
 
@@ -39,7 +40,7 @@ export const Card = ({ children, navigation }) => {
 
   const handleDivClick = () => {
     onClick && onClick();
-    route && history.push(route, stateChange);
+    route && history.push(route, { ...INITIAL_HISTORY_STATE, ...stateChange });
   };
 
   return (

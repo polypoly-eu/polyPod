@@ -19,6 +19,7 @@ import {
   CardList,
   Card,
 } from "./react-components";
+import { INITIAL_HISTORY_STATE } from "./constants/state";
 export {
   BubbleCluster,
   VerticalBarChart,
@@ -35,4 +36,5 @@ export {
   ErrorPopup,
   CardList,
   Card,
+  INITIAL_HISTORY_STATE,
 };
