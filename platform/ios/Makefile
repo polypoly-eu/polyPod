@@ -74,8 +74,8 @@ upload_ipa: export_ipa
 		--apiKey $(appstore_api_key_id) \
 		--apiIssuer $(appstore_api_issuer_id)
 
-.PHONY: distribute_to_beta_testers
-distribute_to_beta_testers:
+.PHONY: release_to_external_testers
+release_to_external_testers:
 	cd $(app_store_connect_cmd); \
 	swift run AppStoreConnectCMD \
 	 release-to-external-testers \
