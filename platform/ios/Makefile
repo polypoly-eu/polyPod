@@ -9,6 +9,12 @@ appstore_api_issuer_id = $(POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID)
 provisioning_profile_dir := ~/Library/MobileDevice/Provisioning\ Profiles
 provisioning_profile_file := cooppolypolypolypod__iOS_App_Store_Distribution.mobileprovision
 
+bundle_identifier := $(shell /usr/libexec/PlistBuddy -c "Print :ApplicationProperties:CFBundleIdentifier" "${archive_path}/Info.plist")
+build_version := $(shell /usr/libexec/PlistBuddy -c "Print :ApplicationProperties:CFBundleShortVersionString" "${archive_path}/Info.plist")
+build_number := $(shell /usr/libexec/PlistBuddy -c "Print :ApplicationProperties:CFBundleVersion" "${archive_path}/Info.plist")
+external_tester_group_ids := e03b0ddc-305d-40d5-8186-4dcc32250054
+app_store_connect_cmd := ../AppStoreConnect
+
 ifneq ($(shell which xcpretty),)
 xcodebuild := set -o pipefail && xcodebuild
 xcpretty := | xcpretty
@@ -71,6 +77,19 @@ upload_ipa: export_ipa
 		-t ios \
 		--apiKey $(appstore_api_key_id) \
 		--apiIssuer $(appstore_api_issuer_id)
+
+.PHONY: release_to_external_testers
+release_to_external_testers:
+	cd $(app_store_connect_cmd); \
+	swift run AppStoreConnectCMD \
+	 release-to-external-testers \
+	 $(appstore_api_issuer_id) \
+	 $(appstore_api_key_id) \
+	 ~/private_keys/AuthKey_$(appstore_api_key_id).p8 \
+	 $(bundle_identifier) \
+	 $(build_version) \
+	 $(build_number) \
+	 $(foreach group, $(external_tester_group_ids), $(group))
 
 .PHONY: install_distribution_prerequisites
 install_distribution_prerequisites:

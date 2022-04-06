@@ -144,4 +144,9 @@ jobs:
         run: make upload_ipa
       - name: Publish
         if: github.event.inputs.draft != 'true'
-        run: echo ::notice::Publishing on the App Store not yet supported, please do it manually.
+        working-directory: platform/ios
+        env:
+          POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64 }}
+          POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64 }}
+          POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
+        run: make release_to_external_testers

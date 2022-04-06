@@ -35,37 +35,39 @@ import manifestData from "./static/manifest.json";
 window.manifestData = manifestData;
 
 import i18n from "./i18n.js";
+import { INITIAL_HISTORY_STATE } from "./constants.js";
+import {
+    FileLoaderContext,
+    FileLoaderProvider,
+} from "./context/file-loader-context.jsx";
 
 const FacebookImporter = () => {
-    const {
-        pod,
-        files,
-        navigationState,
-        importSteps,
-        globalError,
-        setGlobalError,
-    } = useContext(ImporterContext);
-    const importStatus = navigationState.importStatus;
+    const { pod, globalError, setGlobalError, isLoading } =
+        useContext(ImporterContext);
 
-    const renderSplash = () => {
-        return (
-            <Loading
-                loadingGif="./images/loading.gif"
-                message={i18n.t("common:loading")}
-            ></Loading>
-        );
-    };
+    const { files } = useContext(FileLoaderContext);
 
     function determineRoute() {
-        if (importStatus == importSteps.loading || !files)
-            return renderSplash();
         if (files.length > 0)
-            return <Redirect to={{ pathname: "/overview" }} />;
+            return (
+                <Redirect
+                    to={{
+                        pathname: "/overview",
+                        state: INITIAL_HISTORY_STATE,
+                    }}
+                />
+            );
         else return <Redirect to={{ pathname: "/import" }} />;
     }
     return (
         <div className="facebook-importer poly-theme poly-theme-dark">
-            {pod ? (
+            {isLoading && (
+                <Loading
+                    loadingGif="./images/loading.gif"
+                    message={i18n.t("common:loading")}
+                ></Loading>
+            )}
+            {pod && files && (
                 <Switch>
                     <Route exact path="/">
                         {determineRoute()}
@@ -110,8 +112,6 @@ const FacebookImporter = () => {
                         <OffFacebookInfoScreen />
                     </Route>
                 </Switch>
-            ) : (
-                renderSplash()
             )}
             {globalError && (
                 <ErrorPopup
@@ -143,8 +143,10 @@ const FacebookImporterApp = () => {
     return (
         <Router history={history}>
             <ImporterProvider>
-                <div className="poly-nav-bar-separator-overlay" />
-                <FacebookImporter />
+                <FileLoaderProvider parentContext={ImporterContext}>
+                    <div className="poly-nav-bar-separator-overlay" />
+                    <FacebookImporter />
+                </FileLoaderProvider>
             </ImporterProvider>
         </Router>
     );
