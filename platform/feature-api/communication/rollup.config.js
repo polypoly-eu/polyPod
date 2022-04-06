@@ -33,8 +33,8 @@ export default [
         },
         context: "null",
         plugins: [
-            commonjs(),
             nodeResolve(),
+            commonjs(),
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"],
