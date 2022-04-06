@@ -7,17 +7,17 @@ import Foundation
 struct AppStoreConnectCMD: ParsableCommand {
     static var configuration: CommandConfiguration = CommandConfiguration(
         abstract: "A Swift command-line tool to execute commands against AppStoreConnect API",
-        subcommands: [DistributeToBetaTesters.self]
+        subcommands: [ReleaseToExternalTesters.self]
     )
     
     struct APIConfigArgs: ParsableArguments {
-        @Argument(help: "The target app's id. Will be used to lookup for the processed build on AppStoreConnect.")
+        @Argument(help: "Issuer ID for the app store key. Will be used to connect to AppStoreConnect.")
         var appStoreKeyIssuerID: String
         
-        @Argument(help: "The project's build version. Will be used to lookup for the processed build on AppStoreConnect.")
+        @Argument(help: "ID of the app store key. Will be used to connect to AppStoreConnect.")
         var appStoreKeyID: String
         
-        @Argument(help: "The project's build number. Will be used to lookup for the processed build on AppStoreConnect.")
-        var appStoreKey: String
+        @Argument(help: "The path to the .p8 file storing the app store key. Will be used to connect to AppStoreConnect.")
+        var appStoreKeyPath: String
     }
 }

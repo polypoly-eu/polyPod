@@ -10,7 +10,7 @@ let package = Package(
         .executable(name: "AppStoreConnectCMD", targets: ["AppStoreConnectCMD"])
     ],
     dependencies: [
-        .package(url: "https://github.com/AvdLee/appstoreconnect-swift-sdk.git", from: "1.7.0"),
+        .package(url: "https://github.com/polypoly-eu/appstoreconnect-swift-sdk", from: "1.7.0"),
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.1.1")
     ],
     targets: [

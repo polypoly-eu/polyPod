@@ -3,7 +3,7 @@ import Foundation
 import AppStoreConnect
 
 extension AppStoreConnectCMD {
-    struct DistributeToBetaTesters: AsyncParsableCommand {
+    struct ReleaseToExternalTesters: AsyncParsableCommand {
         static var configuration: CommandConfiguration = CommandConfiguration(abstract: "Distribute the given build to beta testers. Will wait until the build is processed by Apple, before distributing")
         
         @OptionGroup
@@ -18,36 +18,32 @@ extension AppStoreConnectCMD {
         @Argument(help: "The project's build number. Will be used to lookup for the processed build on AppStoreConnect.")
         private var buildNumber: Int
         
-        @Argument(help: "The beta groups to distribute the build to")
-        private var betaGroupIds: [String]
+        @Argument(help: "The external tester groups to distribute the build to.")
+        private var externalTesterGroupIds: [String]
         
         func run() async throws {
             NSLog("""
-            Distributing build:
+            Releasing build to external testers:
             - App bundle identifier: \(appBundleIdentifier)
             - Build version: \(buildVersion)
             - Build number: \(buildNumber)
-            - Beta groups: \(betaGroupIds)
+            - External tester groups: \(externalTesterGroupIds)
             """)
             
-            let appStoreConnect = AppStoreConnect(
-                configuration: .init(
-                    issuerID: apiConfig.appStoreKeyIssuerID,
-                    privateKeyID: apiConfig.appStoreKeyID,
-                    privateKey: try AppStoreConnect.cleanupPrivateKey(apiConfig.appStoreKey)
-                )
+            let appStoreConnect = try AppStoreConnect(withConfigArgs: apiConfig)
+            try await appStoreConnect.releaseBuildToExternalTesters(
+                forApp: appBundleIdentifier,
+                withVersion: buildVersion,
+                buildNumber: buildNumber,
+                groups: externalTesterGroupIds
             )
-            try await appStoreConnect.distributeBetaBuild(withVersion: buildVersion,
-                                                          buildNumber: buildNumber,
-                                                          toBetaGroups: betaGroupIds,
-                                                          forApp: appBundleIdentifier)
             
             NSLog("""
-            Succesfully distrubuted build:
+            Succesfully released build to external testers:
             - App bundle identifier: \(appBundleIdentifier)
             - Build version: \(buildVersion)
             - Build number: \(buildNumber)
-            - Beta groups: \(betaGroupIds)
+            - External tester groups: \(externalTesterGroupIds)
             """)
         }
     }

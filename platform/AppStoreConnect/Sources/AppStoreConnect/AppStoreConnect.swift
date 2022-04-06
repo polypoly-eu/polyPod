@@ -15,7 +15,7 @@ public final class AppStoreConnect {
     
     let apiProvider: APIProvider
     
-    /// Create a instance
+    /// Create an instance
     /// - Parameter configuration: The app specific configuration used to acess the AppStoreConnect
     public init(configuration: APIConfiguration) {
         self.apiProvider = APIProvider(configuration: configuration)

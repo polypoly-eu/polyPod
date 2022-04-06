@@ -8,14 +8,14 @@ extension AppStoreConnect {
     ///   - buildNumber: The build number for the given version to add groups to
     ///   - groups: The group ids to be added to the build
     ///   - appID: The target app id
-    public func distributeBetaBuild(withVersion version: String,
-                                    buildNumber: Int,
-                                    toBetaGroups groups: [String],
-                                    forApp appBundleIdentifier: String) async throws {
+    public func releaseBuildToExternalTesters(forApp appBundleIdentifier: String,
+                                              withVersion version: String,
+                                              buildNumber: Int,
+                                              groups: [String]) async throws {
         let app = try await getApp(forBundleIdentifier: appBundleIdentifier)
-        let build = try await waitUntilBuildIsProcessed(forVersion: version,
-                                                        buildNumber: buildNumber,
-                                                        forApp: app.id)
+        let build = try await waitUntilBuildIsProcessed(forAppID: app.id,
+                                                        withVersion: version,
+                                                        buildNumber: buildNumber)
         let addTesters = APIEndpoint.add(accessForBetaGroupsWithIds: groups,
                                          toBuildWithId: build.id)
         try await apiProvider.request(addTesters)

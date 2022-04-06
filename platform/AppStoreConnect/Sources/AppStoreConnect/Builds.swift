@@ -13,13 +13,13 @@ extension AppStoreConnect {
     
     /// Waits until a given build is processed and is ready to be used.
     /// - Parameters:
+    ///   - appID: The id of the app for which to search the build for
     ///   - version: The version of the build to look for
     ///   - buildNumber: The build number for the given version to look for
-    ///   - appID: The id of the app for which to search the build for
     /// - Returns: The processed build if found, or throws error if something failed
-    func waitUntilBuildIsProcessed(forVersion version: String,
-                                   buildNumber: Int,
-                                   forApp appID: String) async throws -> Build {
+    func waitUntilBuildIsProcessed(forAppID appID: String,
+                                   withVersion version: String,
+                                   buildNumber: Int) async throws -> Build {
         let maxNumberOfRequests = 5
         // Check every minute. Some processing can go fast, other slower.
         let processingBuildCheckInterval: UInt64 = 60*1_000_000_000 // 60 seconds/1 minute
@@ -27,7 +27,11 @@ extension AppStoreConnect {
         
         while requestsCount <= maxNumberOfRequests {
             requestsCount += 1
-            let result = try await self.findBuild(forVersion: version, buildNumber: buildNumber, forApp: appID)
+            let result = try await self.findBuild(
+                forAppID: appID,
+                withVersion: version,
+                buildNumber: buildNumber
+            )
             switch result {
             case .notYetUploaded:
                 NSLog("Build is not yet uploaded...")
@@ -48,13 +52,13 @@ extension AppStoreConnect {
     
     /// Finds the given build or the its attached status.
     /// - Parameters:
+    ///   - appID: The id of the app for which to search the build for
     ///   - version: The version of the build to look for
     ///   - buildNumber: The build number for the given version to look for
-    ///   - appID: The id of the app for which to search the build for
     /// - Returns: The build status if found, or throws error if something failed
-    func findBuild(forVersion version: String,
-                   buildNumber: Int,
-                   forApp appID: String) async throws -> BuildStatus {
+    func findBuild(forAppID appID: String,
+                   withVersion version: String,
+                   buildNumber: Int) async throws -> BuildStatus {
         let buildEndpoint = APIEndpoint<BuildsResponse>.builds(
             fields: [
                 .builds([.processingState])

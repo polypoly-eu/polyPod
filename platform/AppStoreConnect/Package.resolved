@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "AppStoreConnect-Swift-SDK",
-        "repositoryURL": "https://github.com/AvdLee/appstoreconnect-swift-sdk.git",
+        "repositoryURL": "https://github.com/polypoly-eu/appstoreconnect-swift-sdk",
         "state": {
           "branch": null,
           "revision": "6961347904eaad966f6eedc3b605f685dac429f8",
