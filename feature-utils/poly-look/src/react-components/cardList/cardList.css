@@ -1,11 +1,11 @@
-.story-card-list {
+.card-list {
   padding: 16px;
   display: flex;
   flex-flow: column;
   overflow: hidden scroll;
 }
 
-.story-card {
+.card-list .card {
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid var(--color-gray-400);
@@ -13,11 +13,11 @@
   color: var(--theme-secondary-color);
 }
 
-.story-card:last-of-type {
+.card-list .card:last-of-type {
   border-bottom: none;
 }
 
-.story-card h1 {
+.card-list .card h1 {
   text-align: center;
   font-family: var(--jost-medium);
   margin: 20px 0;
@@ -25,32 +25,32 @@
   line-height: 100%;
 }
 
-.story-card h1.centered {
+.card-list .card h1.centered {
   width: 80%;
   margin: 20px auto;
   text-align: center;
 }
 
-.story-card ul {
+.card-list .card ul {
   padding: 0 20px;
 }
 
-.story-card li {
+.card-list .card li {
   margin-right: 20px;
 }
 
-.story-card .title-img {
+.card-list .card .title-img {
   margin-top: 24px;
   width: 100%;
 }
 
-.story-card .highlighted-number {
+.card-list .card .highlighted-number {
   font-size: clamp(1rem, 14vw, 5rem);
   font-family: "Jost Bold";
   margin: 32px 0;
 }
 
-.story-card .right-edge-aligned {
+.card-list .card .right-edge-aligned {
   position: relative;
   display: flex;
   justify-content: end;

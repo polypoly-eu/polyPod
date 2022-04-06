@@ -1,20 +1,20 @@
 import React from "react";
 
-import "./storyCardList.css";
+import "./cardList.css";
 
 /**
- * A list of StoryCards
+ * A list of Cards
  *
- * @param {jsx} children Jsx children (Storycards)
+ * @param {jsx} children Jsx children (Cards)
  * @param {String} className CSS classes added to the main div
  * @returns jsx
  */
-export const StoryCardList = ({ children, className }) => {
-  return <div className={`story-card-list ${className}`}>{children}</div>;
+export const CardList = ({ children, className }) => {
+  return <div className={`card-list ${className}`}>{children}</div>;
 };
 
 /**
- * Card component that makes up a StoryList
+ * Card component that makes up a CardList
  *
  * @param {jsx} children HTML elements displayed inside the card
  * @param {Object} navigation Navigation object, if passed will show a button and will trigger actions
@@ -24,17 +24,15 @@ export const StoryCardList = ({ children, className }) => {
  * @param {String} buttonText the buttons displayed text
  * @returns jsx
  */
-export const StoryCard = ({ children, navigation }) => {
-  if (!navigation) return <div className="story-card">{children}</div>;
+export const Card = ({ children, navigation }) => {
+  if (!navigation) return <div className="card">{children}</div>;
   const { history, route, stateChange, onClick, buttonText } = navigation;
   if (!buttonText) {
-    console.error("StoryCard: DetailsButton must have text");
+    console.error("Card: DetailsButton must have text");
     return null;
   }
   if (!(history && route) && !onClick) {
-    console.error(
-      "StoryCard: Navigation either needs history and route or onClick"
-    );
+    console.error("Card: Navigation either needs history and route or onClick");
     return null;
   }
 
@@ -44,7 +42,7 @@ export const StoryCard = ({ children, navigation }) => {
   };
 
   return (
-    <div className="story-card" onClick={handleDivClick}>
+    <div className="card" onClick={handleDivClick}>
       {children}
       <button className="poly-button centered">{buttonText}</button>
     </div>

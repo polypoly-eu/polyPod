@@ -4,7 +4,7 @@ import RouteButton from "../../components/buttons/routeButton.jsx";
 import Loading from "../../components/loading/loading.jsx";
 import { FileLoaderContext } from "../../context/file-loader-context.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
-import { StoryCardList, StoryCard } from "@polypoly-eu/poly-look";
+import { CardList, Card } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
 
@@ -78,10 +78,10 @@ const ExploreView = () => {
                 />
             );
         return (
-            <StoryCardList>
+            <CardList>
                 <UnrecognizedCard />
                 {fileAnalysis.analyses.map((analysis, index) => (
-                    <StoryCard
+                    <Card
                         key={index}
                         navigation={
                             analysis.renderDetails && {
@@ -101,9 +101,9 @@ const ExploreView = () => {
                             </label>
                         )}
                         {analysis.renderSummary()}
-                    </StoryCard>
+                    </Card>
                 ))}
-            </StoryCardList>
+            </CardList>
         );
     };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { StoryCardList, StoryCard } from "@polypoly-eu/poly-look";
+import { CardList, Card } from "@polypoly-eu/poly-look";
 import i18n from "../../i18n";
 import { I18nSection } from "@polypoly-eu/silly-i18n";
 
@@ -12,9 +12,9 @@ const StoriesPreview = ({ storiesMetadata }) => {
     const history = useHistory();
 
     return (
-        <StoryCardList className="poly-theme-light">
+        <CardList className="poly-theme-light">
             {Object.values(storiesMetadata).map((story, index) => (
-                <StoryCard
+                <Card
                     key={index}
                     navigation={{
                         history,
@@ -31,9 +31,9 @@ const StoriesPreview = ({ storiesMetadata }) => {
                     />
                     <h1 className="centered">{i18nP.t(story.title)}</h1>
                     <p>{i18nP.t(story.previewText)}</p>
-                </StoryCard>
+                </Card>
             ))}
-        </StoryCardList>
+        </CardList>
     );
 };
 
