@@ -19,12 +19,19 @@ class AsyncPolyOut implements PolyOut {
 
     readFile(path: string, options: EncodingOptions): Promise<string>;
     readFile(path: string): Promise<Uint8Array>;
-    async readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
+    async readFile(
+        path: string,
+        options?: EncodingOptions
+    ): Promise<string | Uint8Array> {
         if (options) return (await this.promise).readFile(path, options);
         else return (await this.promise).readFile(path);
     }
 
-    async writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
+    async writeFile(
+        path: string,
+        content: string,
+        options: EncodingOptions
+    ): Promise<void> {
         return (await this.promise).writeFile(path, content, options);
     }
     async stat(path: string): Promise<Stats> {
@@ -108,10 +115,19 @@ class AsyncEndpoint implements Endpoint {
         contentType?: string,
         authToken?: string
     ): Promise<void> {
-        return (await this.promise).send(endpointId, payload, contentType, authToken);
+        return (await this.promise).send(
+            endpointId,
+            payload,
+            contentType,
+            authToken
+        );
     }
 
-    async get(endpointId: string, contentType?: string, authToken?: string): Promise<string> {
+    async get(
+        endpointId: string,
+        contentType?: string,
+        authToken?: string
+    ): Promise<string> {
         return (await this.promise).get(endpointId, contentType, authToken);
     }
 }
@@ -142,12 +158,17 @@ export class AsyncPod implements Pod {
     readonly endpoint: Endpoint;
     readonly polyLifecycle: PolyLifecycle;
 
-    constructor(private readonly promise: Promise<Pod>, public readonly dataFactory: DataFactory) {
+    constructor(
+        private readonly promise: Promise<Pod>,
+        public readonly dataFactory: DataFactory
+    ) {
         this.polyOut = new AsyncPolyOut(promise.then((pod) => pod.polyOut));
         this.polyIn = new AsyncPolyIn(promise.then((pod) => pod.polyIn));
         this.polyNav = new AsyncPolyNav(promise.then((pod) => pod.polyNav));
         this.info = new AsyncInfo(promise.then((pod) => pod.info));
         this.endpoint = new AsyncEndpoint(promise.then((pod) => pod.endpoint));
-        this.polyLifecycle = new AsyncPolyLifecycle(promise.then((pod) => pod.polyLifecycle));
+        this.polyLifecycle = new AsyncPolyLifecycle(
+            promise.then((pod) => pod.polyLifecycle)
+        );
     }
 }

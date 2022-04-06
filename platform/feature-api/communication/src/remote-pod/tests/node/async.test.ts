@@ -23,7 +23,11 @@ describe("Async pod", () => {
             setTimeout(() => resolve(underlying), 500);
         });
 
-        podSpec(new AsyncPod(delayed, new DataFactory(false)), "/", getHttpbinUrl());
+        podSpec(
+            new AsyncPod(delayed, new DataFactory(false)),
+            "/",
+            getHttpbinUrl()
+        );
     });
 
     // TODO move to api, duplicated code
@@ -37,10 +41,16 @@ describe("Async pod", () => {
                 startFeature: async (...args) => {
                     log.push(args);
                 },
-                listFeatures: async () => ({ "test-on": true, "test-off": false }),
+                listFeatures: async () => ({
+                    "test-on": true,
+                    "test-off": false,
+                }),
             };
             Object.assign(underlying, { polyLifecycle });
-            pod = new AsyncPod(Promise.resolve(underlying), new DataFactory(false));
+            pod = new AsyncPod(
+                Promise.resolve(underlying),
+                new DataFactory(false)
+            );
         });
 
         it("Starts feature", async () => {
