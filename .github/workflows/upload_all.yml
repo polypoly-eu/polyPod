@@ -123,7 +123,7 @@ jobs:
         run: make lockxcodeversion
       - name: iOS - Build core
         working-directory: platform/ios
-        run: make build_core MODE=release
+        run: make core MODE=release
       - name: iOS - Tests
         working-directory: platform/ios
         run: make test

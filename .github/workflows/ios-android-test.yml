@@ -35,7 +35,7 @@ jobs:
               run: ./build.js
             - name: Build core
               working-directory: platform/ios
-              run: make build_core
+              run: make core
             - name: Build and test iOS
               working-directory: platform/ios
               run: make test
