@@ -8,16 +8,15 @@ export function createSuccessStatus() {
 export function createWarningStatus(message) {
     return {
         name: "WARNING",
+        isSuccess: false,
         message,
-        isWarning: true,
     };
 }
 
 export function createErrorStatus(error) {
     return {
         name: "ERROR",
-        error,
-        message: error.name,
-        isError: true,
+        isSuccess: false,
+        message: error,
     };
 }
