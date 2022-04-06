@@ -13,7 +13,7 @@ const Chip = ({ id, translation, handleClick, active }) => {
   return (
     <button
       className={active ? "chip selected" : "chip"}
-      onClick={() => (handleClick ? handleClick(id) : {})}
+      onClick={handleClick ? () => handleClick(id) : () => {}}
     >
       {translation || id}
     </button>
