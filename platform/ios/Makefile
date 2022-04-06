@@ -79,8 +79,8 @@ release_to_external_testers:
 	cd $(app_store_connect_cmd); \
 	swift run AppStoreConnectCMD \
 	 release-to-external-testers \
-	 $(appstore_api_issuer_id)\
-     $(appstore_api_key_id) \
+	 $(appstore_api_issuer_id) \
+	 $(appstore_api_key_id) \
 	 ~/private_keys/AuthKey_$(appstore_api_key_id).p8 \
 	 $(bundle_identifier) \
 	 $(build_version) \
