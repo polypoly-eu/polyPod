@@ -35,7 +35,7 @@ import manifestData from "./static/manifest.json";
 window.manifestData = manifestData;
 
 import i18n from "./i18n.js";
-import { INITIAL_HISTORY_STATE } from "./constants.js";
+import { INITIAL_HISTORY_STATE } from "@polypoly-eu/poly-look";
 import {
     FileLoaderContext,
     FileLoaderProvider,
