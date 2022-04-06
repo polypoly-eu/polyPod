@@ -1,12 +1,12 @@
-import RootAnalysis from "./root-analysis.js";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class AdInterestsAnalysis extends RootAnalysis {
     get title() {
         return "Ads Interests";
     }
 
-    async analyze({ facebookAccount }) {
-        this._adInterestsCount = facebookAccount.adInterests.length;
+    async analyze({ dataAccount }) {
+        this._adInterestsCount = dataAccount.adInterests.length;
         this.active = this._adInterestsCount > 0;
     }
 

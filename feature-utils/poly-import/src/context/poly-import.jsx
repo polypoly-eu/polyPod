@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { FeatureFileStorage } from "@polypoly-eu/feature-file-storage";
-import { analyzeFile } from "../model/analysis.js";
-import { importData } from "../model/importer.js";
+import { FeatureFileStorage } from "../storage";
+import { importData } from "../importer";
 
 import { RefreshFilesError } from "../errors/polyIn-errors.js";
 
@@ -13,9 +12,16 @@ const fakeStorage = {
     removeFile: async () => {},
 };
 
-export const FileLoaderContext = createContext();
+export const PolyImportContext = createContext();
 
-export const FileLoaderProvider = ({ children, parentContext }) => {
+export const PolyImportProvider = ({
+    children,
+    parentContext,
+    subAnalyses,
+    analyzeFile,
+    dataImporters,
+    DataAccount,
+}) => {
     const { pod, setIsLoading, setGlobalError } = useContext(parentContext);
 
     const [storage, setStorage] = useState(fakeStorage);
@@ -70,16 +76,20 @@ export const FileLoaderProvider = ({ children, parentContext }) => {
     //after there is an account the analyses are triggered.
     useEffect(() => {
         if (!files?.[0]) return;
-        importData(files[0]).then((newAccount) => {
-            setAccount(newAccount);
-            analyzeFile(files[0], newAccount).then((fileAnalysis) =>
-                setFileAnalysis(fileAnalysis)
-            );
-        });
+        importData({ dataImporters, zipData: files[0], DataAccount }).then(
+            (newAccount) => {
+                setAccount(newAccount);
+                analyzeFile({
+                    zipData: files[0],
+                    dataAccount: newAccount,
+                    subAnalyses,
+                }).then((fileAnalysis) => setFileAnalysis(fileAnalysis));
+            }
+        );
     }, [files]);
 
     return (
-        <FileLoaderContext.Provider
+        <PolyImportContext.Provider
             value={{
                 files,
                 fileAnalysis,
@@ -89,6 +99,6 @@ export const FileLoaderProvider = ({ children, parentContext }) => {
             }}
         >
             {children}
-        </FileLoaderContext.Provider>
+        </PolyImportContext.Provider>
     );
 };
