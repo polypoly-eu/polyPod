@@ -11,7 +11,6 @@ export default [
             {
                 dir: "dist",
                 format: "esm",
-                name: "communication",
             },
             /*            {
                 inlineDymamicImports: true,
