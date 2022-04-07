@@ -8,7 +8,6 @@
  * An interface representing a successful computation.
  */
 export interface Success<T> {
-    tag: "success";
     value: T;
 }
 
@@ -16,7 +15,6 @@ export interface Success<T> {
  * An interface representing a failed computation.
  */
 export interface Failure {
-    tag: "failure";
     err: unknown;
 }
 
@@ -31,10 +29,10 @@ export type Try<T> = Success<T> | Failure;
 /**
  * Transforms a [[Try]] into a promise that is resolved or rejected depending on [[Success]] or [[Failure]] state.
  *
- * See [[recoverPromise]] for the inverse operation.
+ * See [[triedPromise]] for the inverse operation.
  */
 export async function rethrowPromise<T>(t: Try<T>): Promise<T> {
-    if (t.tag === "success") return t.value;
+    if ("value" in t) return t.value;
     else throw t.err;
 }
 
@@ -44,15 +42,13 @@ export async function rethrowPromise<T>(t: Try<T>): Promise<T> {
  *
  * See [[rethrowPromise]] for the inverse operation.
  */
-export async function recoverPromise<T>(p: Promise<T>): Promise<Try<T>> {
+export async function triedPromise<T>(p: Promise<T>): Promise<Try<T>> {
     try {
         return {
-            tag: "success",
             value: await p,
         };
     } catch (err) {
         return {
-            tag: "failure",
             err,
         };
     }

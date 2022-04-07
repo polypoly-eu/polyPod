@@ -12,6 +12,16 @@ import {
     ImporterProvider,
     ImporterContext,
 } from "./context/importer-context.jsx";
+import {
+    PolyImportContext,
+    PolyImportProvider,
+} from "@polypoly-eu/poly-import";
+import { INITIAL_HISTORY_STATE } from "@polypoly-eu/poly-look";
+import { analyzeFile } from "@polypoly-eu/poly-analysis";
+import { subAnalyses } from "./model/analysis";
+import { dataImporters } from "./model/importer.js";
+import FacebookAccount from "./model/entities/facebook-account.js";
+import i18n from "./i18n.js";
 
 import { ErrorPopup } from "@polypoly-eu/poly-look";
 import Overview from "./views/overview/overview.jsx";
@@ -34,18 +44,11 @@ import "./styles.css";
 import manifestData from "./static/manifest.json";
 window.manifestData = manifestData;
 
-import i18n from "./i18n.js";
-import { INITIAL_HISTORY_STATE } from "@polypoly-eu/poly-look";
-import {
-    FileLoaderContext,
-    FileLoaderProvider,
-} from "./context/file-loader-context.jsx";
-
 const FacebookImporter = () => {
     const { pod, globalError, setGlobalError, isLoading } =
         useContext(ImporterContext);
 
-    const { files } = useContext(FileLoaderContext);
+    const { files } = useContext(PolyImportContext);
 
     function determineRoute() {
         if (files.length > 0)
@@ -143,10 +146,16 @@ const FacebookImporterApp = () => {
     return (
         <Router history={history}>
             <ImporterProvider>
-                <FileLoaderProvider parentContext={ImporterContext}>
+                <PolyImportProvider
+                    parentContext={ImporterContext}
+                    analyzeFile={analyzeFile}
+                    dataImporters={dataImporters}
+                    subAnalyses={subAnalyses}
+                    DataAccount={FacebookAccount}
+                >
                     <div className="poly-nav-bar-separator-overlay" />
                     <FacebookImporter />
-                </FileLoaderProvider>
+                </PolyImportProvider>
             </ImporterProvider>
         </Router>
     );

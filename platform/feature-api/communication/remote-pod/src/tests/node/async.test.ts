@@ -1,18 +1,14 @@
 import { Pod, PolyLifecycle, DefaultPod, FS } from "@polypoly-eu/pod-api";
 import { Volume } from "memfs";
-import { dataset } from "@rdfjs/dataset";
+import factory from "@rdfjs/dataset";
 import { podSpec } from "@polypoly-eu/pod-api/dist/spec";
 import { getHttpbinUrl } from "@polypoly-eu/test-utils";
 import { AsyncPod } from "../../async";
 import { DataFactory } from "@polypoly-eu/rdf";
-import chai, { assert } from "chai";
-import chaiAsPromised from "chai-as-promised";
-
-chai.use(chaiAsPromised);
 
 describe("Async pod", () => {
     const fs = new Volume().promises as unknown as FS;
-    const underlying = new DefaultPod(dataset(), fs);
+    const underlying = new DefaultPod(factory.dataset(), fs);
 
     describe("Resolved promise", () => {
         podSpec(
@@ -47,18 +43,11 @@ describe("Async pod", () => {
             pod = new AsyncPod(Promise.resolve(underlying), new DataFactory(false));
         });
 
-        it("Lists features", async () => {
-            await assert.eventually.deepEqual(pod.polyLifecycle?.listFeatures(), {
-                "test-on": true,
-                "test-off": false,
-            });
-        });
-
         it("Starts feature", async () => {
             await pod.polyLifecycle?.startFeature("hi", false);
             await pod.polyLifecycle?.startFeature("yo", true);
 
-            assert.deepEqual(log, [
+            expect(log).toEqual([
                 ["hi", false],
                 ["yo", true],
             ]);

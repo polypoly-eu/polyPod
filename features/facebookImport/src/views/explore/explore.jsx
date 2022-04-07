@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import Loading from "../../components/loading/loading.jsx";
-import { FileLoaderContext } from "../../context/file-loader-context.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import { CardList, Card } from "@polypoly-eu/poly-look";
+import { PolyImportContext } from "@polypoly-eu/poly-import";
 
 import i18n from "../../i18n.js";
 
@@ -31,7 +31,7 @@ const UnrecognizedCard = () => {
 const ExploreView = () => {
     const { reportResult, setReportResult } = useContext(ImporterContext);
 
-    const { fileAnalysis } = useContext(FileLoaderContext);
+    const { fileAnalysis } = useContext(PolyImportContext);
 
     const history = useHistory();
     const exploreRef = useRef();

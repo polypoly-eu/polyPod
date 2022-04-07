@@ -1,4 +1,4 @@
-import { createWarningStatus } from "../analyses/utils/analysis-status";
+import { createWarningStatus } from "@polypoly-eu/poly-import";
 import RelatedAccount from "../entities/related-account";
 import RelatedPost from "../entities/related-post";
 import {

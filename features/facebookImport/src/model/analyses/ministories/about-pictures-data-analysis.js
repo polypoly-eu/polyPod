@@ -1,6 +1,6 @@
 import React from "react";
 import { relevantZipEntries } from "../../importers/utils/importer-util";
-import RootAnalysis from "./root-analysis";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 import PicturesMiniStory from "../../../components/picturesMiniStory/picturesMiniStory.jsx";
 
