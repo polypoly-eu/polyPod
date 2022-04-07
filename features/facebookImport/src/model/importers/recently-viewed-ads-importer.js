@@ -1,4 +1,4 @@
-import { Status } from "@polypoly-eu/poly-import";
+import { Status, statusTypes } from "@polypoly-eu/poly-import";
 import RelatedAccount from "../entities/related-account";
 import RelatedPost from "../entities/related-post";
 import {
@@ -121,8 +121,7 @@ export default class RecentlyViewedAdsImporter {
 
         if (!adsViewsData) {
             return new Status({
-                name: "Warning",
-                isSuccess: false,
+                name: statusTypes.warning,
                 message: "Could not locate ads category",
             });
         }

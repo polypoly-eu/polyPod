@@ -1,12 +1,11 @@
-import { Status } from "../utils/status";
+import { Status, statusTypes } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
 import { ZipFile } from "./storage";
 
 class ImporterExecutionResult {
     constructor(importer, status, executionTime) {
         this._importer = importer;
-        this._status =
-            status || new Status({ name: "Success", isSuccess: true });
+        this._status = status || new Status({ name: statusTypes.success });
         this._executionTime = executionTime;
     }
 
@@ -65,7 +64,7 @@ export async function runImporter(
     } catch (error) {
         return new ImporterExecutionResult(
             importer,
-            new Status({ name: "Error", isSuccess: false, message: error }),
+            new Status({ name: statusTypes.error, message: error }),
             telemetry.elapsedTime()
         );
     }

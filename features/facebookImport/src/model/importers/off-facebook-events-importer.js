@@ -1,5 +1,5 @@
 import DirectKeyDataImporter from "./direct-key-data-importer.js";
-import { Status } from "@polypoly-eu/poly-import";
+import { Status, statusTypes } from "@polypoly-eu/poly-import";
 
 export const OFF_FACEBOOK_EVENTS_FILE_PATH =
     "apps_and_websites_off_of_facebook/your_off-facebook_activity.json";
@@ -36,8 +36,7 @@ export default class OffFacebookEventsImporter extends DirectKeyDataImporter {
 
         if (uknonwnKeys.size > 0) {
             return new Status({
-                name: "Warning",
-                isSuccess: false,
+                name: statusTypes.warning,
                 message: `Unexpected keys: ${Array.from(uknonwnKeys).join(
                     " "
                 )}`,

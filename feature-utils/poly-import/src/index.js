@@ -9,7 +9,7 @@ import {
     PolyImportContext,
     PolyImportProvider,
 } from "./context/poly-import.jsx";
-import { Status } from "../utils/status";
+import { Status, statusTypes } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
 
 export {
@@ -25,5 +25,6 @@ export {
     RefreshFilesError,
     FileSelectionError,
     FeatureFileStorage,
+    statusTypes,
     PolyImportContext,
 };
