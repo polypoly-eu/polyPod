@@ -33,6 +33,9 @@ jobs:
               run: cd platform/ios; make lockxcodeversion
             - name: Build API and features
               run: ./build.js
+            - name: Build core
+              working-directory: platform/ios
+              run: make core
             - name: Build and test iOS
               working-directory: platform/ios
               run: make test
@@ -51,4 +54,3 @@ jobs:
                 arch: 'x86_64'
                 api-level: 30
                 script: ./gradlew connectedAndroidTest
-
