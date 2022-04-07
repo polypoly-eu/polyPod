@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import FilterChips from "../../src/react-components/filterChips/filterChips.jsx";
+import FilterChips from "../../src/react-components/filterChips.jsx";
 
 const chipsContent = [...Array(3).keys()].map((i) => `chip${i}`);
 const mockedHandleClick = jest.fn();
