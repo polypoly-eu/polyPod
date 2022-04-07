@@ -2,7 +2,8 @@ import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 import { Card, CardList } from "../../src/react-components";
 import "@testing-library/jest-dom";
-import { HistoryStub, INITIAL_HISTORY_STATE } from "../utils/history-stub";
+import { HistoryStub } from "../utils/history-stub";
+import { INITIAL_HISTORY_STATE } from "../../src/constants/state";
 
 const testH1 = "TestH1";
 
