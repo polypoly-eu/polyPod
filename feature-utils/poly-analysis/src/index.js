@@ -1,8 +1,8 @@
 import {
-    UnrecognizedData,
+    analyzeZip,
     runAnalysis,
     analyzeFile,
-    analyzeZip,
+    UnrecognizedData,
 } from "./analysis";
 import MinistoriesStatusAnalysis from "./analysis/report/ministories-status-analysis";
 import ReportAnalysis from "./analysis/report/report-analysis";
@@ -11,15 +11,21 @@ import {
     jsonDataEntities,
     relevantZipEntries,
 } from "./analysis/utils/analysis-util";
+import {
+    PolyAnalysisContext,
+    PolyAnalysisProvider,
+} from "./context/poly-analysis.jsx";
 
 export {
+    analyzeZip,
     runAnalysis,
     analyzeFile,
-    analyzeZip,
     jsonDataEntities,
     relevantZipEntries,
-    UnrecognizedData,
-    MinistoriesStatusAnalysis,
+    PolyAnalysisProvider,
     RootAnalysis,
     ReportAnalysis,
+    UnrecognizedData,
+    MinistoriesStatusAnalysis,
+    PolyAnalysisContext,
 };

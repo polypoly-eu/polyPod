@@ -44,7 +44,7 @@ window.manifestData = manifestData;
 
 import i18n from "./i18n.js";
 import { INITIAL_HISTORY_STATE } from "./constants.js";
-import { PolyAnalysisProvider } from "@polypoly-eu/poly-analysis/src/context/poly-analysis";
+import { PolyAnalysisProvider } from "@polypoly-eu/poly-analysis";
 
 const FacebookImporter = () => {
     const { pod, globalError, setGlobalError, isLoading } =

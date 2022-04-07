@@ -1,4 +1,4 @@
-import { PolyAnalysisContext } from "@polypoly-eu/poly-analysis/src/context/poly-analysis";
+import { PolyAnalysisContext } from "@polypoly-eu/poly-analysis";
 import React, { useContext } from "react";
 
 import "./details.css";

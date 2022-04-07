@@ -8,7 +8,7 @@ import i18n from "../../i18n.js";
 
 import "./explore.css";
 import "./ministory-styles.css";
-import { PolyAnalysisContext } from "@polypoly-eu/poly-analysis/src/context/poly-analysis";
+import { PolyAnalysisContext } from "@polypoly-eu/poly-analysis";
 
 const PopUpMessage = ({ children, reportResultAnswer }) => {
     return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
