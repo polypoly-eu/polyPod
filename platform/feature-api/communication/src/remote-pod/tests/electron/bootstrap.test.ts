@@ -94,8 +94,7 @@ describe("Bootstrap (Electron)", () => {
     });
 
     it("iframe", async function () {
-        new Promise((resolve) => setTimeout(resolve, 10000));
-
+        this.timeout(10000);
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const body = document.querySelector("body")!;
         const iframe = document.createElement("iframe");
