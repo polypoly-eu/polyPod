@@ -90,7 +90,7 @@ release_to_external_testers:
 	 $(build_version) \
 	 $(build_number) \
 	 $(foreach group, $(external_tester_group_ids), $(group))
-	 
+
 .PHONY: install_distribution_prerequisites
 install_distribution_prerequisites:
 	# 1. Install Distribution certificate. xcodebuild will automatically
