@@ -1,9 +1,19 @@
-export_dir_ios = export/ios
+export_dir_ios := export/ios
+swift_core := PolyPodCoreSwift
 ios_archs := aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios
 ios_targets := iPhone simulator
 build_type := $(if $(filter $(MODE), release),release,debug)
 
-build_ios_xcframework:
+.PHONY: setup_flatbuffers
+setup_flatbuffers:
+	./flatbuffers_shared/setup_flatbuffers.sh
+
+.PHONY: generate_flatbuffers
+generate_flatbuffers: setup_flatbuffers
+	./flatbuffers_shared/generate_flatbuffers.sh
+
+.PHONY: build_ios_xcframework
+build_ios_xcframework: generate_flatbuffers
 # Ensure correct OS is used
 ifeq ($(OS),Windows_NT)
 	@echo "xcframework can be built only in macOS"
@@ -36,12 +46,13 @@ endif
 	# Generated module map and C header
 	cargo install cbindgen
 	cbindgen --config cbindgen.toml -o $(export_dir_ios)/headers/polypod-core.h
-	@echo "module PolyPodCore { header "polypod-core.h" export * }" >> $(export_dir_ios)/headers/module.modulemap
+	@echo "module PolyPodCore { header \"polypod-core.h\" export * }" >> $(export_dir_ios)/headers/module.modulemap
 
 	# Package xcframework
+	rm -rf $(swift_core)/PolyPodCore.xcframework
 	xcodebuild -create-xcframework \
 	    $(foreach target, $(ios_targets), -library $(export_dir_ios)/$(target)/libpolypod_core.a -headers $(export_dir_ios)/headers) \
-		-output $(export_dir_ios)/PolyPodCore.xcframework
+		-output $(swift_core)/PolyPodCore.xcframework
 
 define build_for_architecture
 	rustup target add $(1)

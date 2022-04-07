@@ -22,6 +22,10 @@ else
 xcodebuild := xcodebuild
 endif
 
+.PHONY: core
+core:
+	make -C ../core build_ios_xcframework
+
 .PHONY: lockxcodeversion
 lockxcodeversion:
 	sudo xcode-select -switch /Applications/Xcode_13.2.1.app
