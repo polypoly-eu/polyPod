@@ -1,15 +1,15 @@
 import React from "react";
 import BasicDataCountTable from "../../../components/basicDataCountTable/basicDataCountTable.jsx";
-import RootAnalysis from "./root-analysis.js";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class SesssionActivityLocationsAnalysis extends RootAnalysis {
     get title() {
         return "Session Activity Locations";
     }
 
-    async analyze({ facebookAccount }) {
+    async analyze({ dataAccount }) {
         const locationByActivityCount = {};
-        facebookAccount.accountSessionActivities
+        dataAccount.accountSessionActivities
             .filter(
                 (activity) =>
                     activity.region && activity.city && activity.country

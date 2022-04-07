@@ -1,12 +1,12 @@
-import RootAnalysis from "./root-analysis.js";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class FriendsAnalysis extends RootAnalysis {
     get title() {
         return "Friends";
     }
 
-    async analyze({ facebookAccount }) {
-        this._friendsCount = facebookAccount.friends.length;
+    async analyze({ dataAccount }) {
+        this._friendsCount = dataAccount.friends.length;
         this.active = this._friendsCount > 0;
     }
 

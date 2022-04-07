@@ -1,6 +1,7 @@
 import { PolyChart } from "@polypoly-eu/poly-look";
 import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
+import { PolyImportContext } from "@polypoly-eu/poly-import";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
 import Loading from "../../components/loading/loading.jsx";
@@ -9,10 +10,9 @@ import { useHistory } from "react-router";
 import { formatTime } from "../../utils/formatTime.js";
 
 import "./overview.css";
-import { FileLoaderContext } from "../../context/file-loader-context.jsx";
 
 const Overview = () => {
-    const { files, account, handleRemoveFile } = useContext(FileLoaderContext);
+    const { files, account, handleRemoveFile } = useContext(PolyImportContext);
 
     const [showNewImportDialog, setShowNewImportDialog] = useState(false);
     const history = useHistory();
