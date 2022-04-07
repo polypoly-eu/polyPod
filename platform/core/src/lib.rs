@@ -2,6 +2,7 @@ mod c_interface;
 mod core;
 mod core_failure;
 mod feature_manifest_parsing;
+mod flatbuffers_mapping;
 // Disable any checks agains the generated code
 #[rustfmt::skip]
 #[allow(clippy::all)]
