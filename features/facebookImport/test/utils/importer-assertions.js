@@ -35,7 +35,7 @@ export function expectAllResultsSuccess(results) {
 }
 
 export function expectImportWarning(result, warningMessage, importerClass) {
-    expect(result.status.isSuccess).toBe(false);
+    expect(result.status.isSuccess).toBe(true);
     expect(result.status.message).toBe(warningMessage);
     expect(result.importer.constructor).toBe(importerClass);
 }
