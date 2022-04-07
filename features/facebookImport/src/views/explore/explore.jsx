@@ -3,12 +3,12 @@ import { useHistory } from "react-router-dom";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
-import { PolyImportContext } from "@polypoly-eu/poly-import";
 
 import i18n from "../../i18n.js";
 
 import "./explore.css";
 import "./ministory-styles.css";
+import { PolyAnalysisContext } from "@polypoly-eu/poly-analysis/src/context/poly-analysis";
 
 const PopUpMessage = ({ children, reportResultAnswer }) => {
     return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
@@ -72,7 +72,7 @@ const ExploreView = () => {
     const { setActiveDetails, reportResult, setReportResult } =
         useContext(ImporterContext);
 
-    const { fileAnalysis } = useContext(PolyImportContext);
+    const { fileAnalysis } = useContext(PolyAnalysisContext);
 
     const history = useHistory();
     const exploreRef = useRef();
