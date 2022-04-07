@@ -1,5 +1,5 @@
 import React from "react";
-import { INITIAL_HISTORY_STATE } from "../../constants/state";
+import { INITIAL_HISTORY_STATE } from "../../constants";
 
 import "./cardList.css";
 
