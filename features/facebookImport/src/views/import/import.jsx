@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import {
+    PolyImportContext,
     FileSelectionError,
     FileImportError,
-} from "../../errors/polyIn-errors.js";
+} from "@polypoly-eu/poly-import";
 import ProgressBarComponent from "../../components/progressBar/progressBar.jsx";
 import ImportExplanationExpandable from "../../components/importExplanationExpandable/importExplanationExpandable.jsx";
 import i18n from "../../i18n.js";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
-import { FileLoaderContext } from "../../context/file-loader-context.jsx";
 import { FBIMPORT_NAMESPACE } from "../../constants.js";
 
 import "./import.css";
@@ -66,7 +66,7 @@ const Import = () => {
     const { pod, setGlobalError, runWithLoadingScreen } =
         useContext(ImporterContext);
     const { files, handleRemoveFile, refreshFiles } =
-        useContext(FileLoaderContext);
+        useContext(PolyImportContext);
     const [importStatus, setImportStatus] = useState(importSteps.beginning);
     const [selectedFile, setSelectedFile] = useState(null);
     const file = files?.[0];

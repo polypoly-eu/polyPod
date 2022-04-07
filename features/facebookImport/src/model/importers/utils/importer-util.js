@@ -86,16 +86,6 @@ function anonymizeJsonEntityPath(entryPath) {
     return anonymizedParts.join("/");
 }
 
-async function jsonDataEntities(zipFile) {
-    const entries = await relevantZipEntries(zipFile);
-    const relevantJsonEntries = entries.filter(
-        (entry) =>
-            !entry.path.includes("/files/") && // Remove user files
-            entry.path.endsWith(".json")
-    );
-    return relevantJsonEntries;
-}
-
 function sliceIntoChunks(array, chunkSize) {
     const chunks = [];
     for (let i = 0; i < array.length; i += chunkSize) {
@@ -112,6 +102,5 @@ export {
     readJSONDataArray,
     anonymizeJsonEntityPath,
     relevantZipEntries,
-    jsonDataEntities,
     sliceIntoChunks,
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import ReportAnalysis from "./report-analysis";
+import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class ReportMetadataAnalysis extends ReportAnalysis {
     get title() {
@@ -16,7 +16,7 @@ export default class ReportMetadataAnalysis extends ReportAnalysis {
         };
     }
 
-    async analyze({ size, zipFile, facebookAccount, pod }) {
+    async analyze({ size, zipFile, dataAccount, pod }) {
         this.active = true;
 
         const info = await pod.info;
@@ -28,10 +28,10 @@ export default class ReportMetadataAnalysis extends ReportAnalysis {
         const entries = await zipFile.getEntries();
         this._filesCount = entries.length;
 
-        this._preferedLanguage = facebookAccount.preferredLanguage
+        this._preferedLanguage = dataAccount.preferredLanguage
             ? {
-                  name: facebookAccount.preferredLanguage.name,
-                  code: facebookAccount.preferredLanguage.code,
+                  name: dataAccount.preferredLanguage.name,
+                  code: dataAccount.preferredLanguage.code,
               }
             : null;
     }

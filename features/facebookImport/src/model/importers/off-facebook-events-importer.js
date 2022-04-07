@@ -1,5 +1,5 @@
 import DirectKeyDataImporter from "./direct-key-data-importer.js";
-import { createWarningStatus } from "../analyses/utils/analysis-status.js";
+import { createWarningStatus } from "@polypoly-eu/poly-import";
 
 export const OFF_FACEBOOK_EVENTS_FILE_PATH =
     "apps_and_websites_off_of_facebook/your_off-facebook_activity.json";

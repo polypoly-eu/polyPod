@@ -1,4 +1,4 @@
-import { createWarningStatus } from "../analyses/utils/analysis-status.js";
+import { createWarningStatus } from "@polypoly-eu/poly-import";
 import { readJSONDataArray } from "./utils/importer-util.js";
 
 export const LANGUAGE_AND_LOCALE_FILE_PATH =
