@@ -1,5 +1,5 @@
 import React from "react";
-import { INITIAL_HISTORY_STATE } from "../../poly-look";
+import { INITIAL_HISTORY_STATE } from "../../constants/state";
 
 import "./cardList.css";
 

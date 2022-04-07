@@ -1,7 +1,7 @@
-class HistoryStub {
+export class HistoryStub {
   constructor() {
     this._route = null;
-    this.state = null;
+    this._state = null;
   }
 
   get route() {
