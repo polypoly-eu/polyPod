@@ -18,7 +18,7 @@ export const CardList = ({ children, className }) => {
  * Card component that makes up a CardList
  *
  * @param {jsx} children HTML elements displayed inside the card
- * @param {Object} navigation Navigation object, if passed will show a button and will trigger actions
+ * @param {Object} navigation if passed will show a button and will trigger actions
  * @param {History} navigation.history a useHistory generated history (also requires route)
  * @param {String} navigation.route a router route (also requires history)
  * @param {Object} navigation.stateChange a router history stateChange (also requires history)
