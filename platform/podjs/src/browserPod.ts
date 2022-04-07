@@ -671,7 +671,11 @@ export class BrowserPod implements Pod {
 
     constructor() {
         window.addEventListener("load", async () => {
-            if (!window.manifestData) {
+            // window.manifestData points to the manifest.json file in the bundled dest
+            // as setup in rollup configuration
+            const manifestFile = window.manifestData;
+
+            if (!manifestFile) {
                 console.warn(
                     `Unable to find feature manifest, navigation bar disabled.
 To get the navigation bar, expose the manifest's content as
@@ -679,7 +683,7 @@ window.manifestData.`
                 );
                 return;
             }
-            window.manifest = await readManifest(window.manifestData);
+            window.manifest = await readManifest(manifestFile);
             window.parent.currentTitle =
                 window.parent.currentTitle || window.manifest.name;
             const frame = createNavBarFrame(window.parent.currentTitle);
