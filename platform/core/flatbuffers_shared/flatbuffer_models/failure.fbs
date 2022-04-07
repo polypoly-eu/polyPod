@@ -4,6 +4,8 @@ enum FailureCode: byte {
     FailedToParseFeatureManifest,
     NullCStringPointer,
     FailedToCreateCString,
+    FailedToExtractJavaString,
+    FailedToConvertJavaString,
 }
 
 table Failure {
