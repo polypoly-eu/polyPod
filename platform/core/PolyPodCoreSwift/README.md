@@ -1,6 +1,6 @@
 # PolyPodCoreSwift
 
-A Swift wrapper around PolyPodCore Rust library. Encapsulates specific Pointer and Flabuffer operations.
+A Swift wrapper around PolyPodCore Rust library. Encapsulates specific Pointer and Flatbuffer operations.
 
 ## Building
 
@@ -13,5 +13,5 @@ A Swift wrapper around PolyPodCore Rust library. Encapsulates specific Pointer a
 
              make build_ios_xcframework
 
-- Opene `Package.swift` and build/test the package.
+- Open `Package.swift` and build/test the package.
     

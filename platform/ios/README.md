@@ -9,7 +9,7 @@ core code and features:
 
 - To build the features see [../../README.md](../README.md) for instructions.
 - To build core, just run:
-         make build_core
+         make core
 
 ### Xcode
 
