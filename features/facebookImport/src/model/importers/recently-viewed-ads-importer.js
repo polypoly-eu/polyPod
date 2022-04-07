@@ -1,4 +1,4 @@
-import { createWarningStatus } from "@polypoly-eu/poly-import";
+import { Status } from "@polypoly-eu/poly-import";
 import RelatedAccount from "../entities/related-account";
 import RelatedPost from "../entities/related-post";
 import {
@@ -120,7 +120,11 @@ export default class RecentlyViewedAdsImporter {
         );
 
         if (!adsViewsData) {
-            return createWarningStatus("Could not locate ads category");
+            return new Status({
+                name: "Warning",
+                isSuccess: false,
+                message: "Could not locate ads category",
+            });
         }
 
         const currentLocale = localeForCategoyName(adsViewsData.name);
