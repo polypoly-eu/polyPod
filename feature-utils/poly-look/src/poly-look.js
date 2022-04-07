@@ -16,8 +16,10 @@ import {
   BlockLegend,
   LineLegend,
   ErrorPopup,
-  CardList,
   Card,
+  ClickableCard,
+  RoutingCard,
+  List,
 } from "./react-components";
 import { INITIAL_HISTORY_STATE } from "./constants";
 export {
@@ -34,7 +36,9 @@ export {
   BlockLegend,
   LineLegend,
   ErrorPopup,
-  CardList,
   Card,
+  ClickableCard,
+  RoutingCard,
+  List,
   INITIAL_HISTORY_STATE,
 };

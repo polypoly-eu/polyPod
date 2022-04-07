@@ -1,0 +1,6 @@
+.list {
+  padding: 16px;
+  display: flex;
+  flex-flow: column;
+  overflow: hidden scroll;
+}
