@@ -19,7 +19,7 @@ import {
   CardList,
   Card,
 } from "./react-components";
-import { INITIAL_HISTORY_STATE } from "./constants/state";
+import { INITIAL_HISTORY_STATE } from "./constants";
 export {
   BubbleCluster,
   VerticalBarChart,
