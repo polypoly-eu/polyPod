@@ -16,7 +16,6 @@ import {
     PolyImportContext,
     PolyImportProvider,
 } from "@polypoly-eu/poly-import";
-import { analyzeFile } from "@polypoly-eu/poly-analysis";
 import { subAnalyses } from "./model/analysis";
 import { dataImporters } from "./model/importer.js";
 import FacebookAccount from "./model/entities/facebook-account.js";
@@ -156,7 +155,6 @@ const FacebookImporterApp = () => {
                     <PolyAnalysisProvider
                         parentContext={PolyImportContext}
                         subAnalyses={subAnalyses}
-                        analyzeFile={analyzeFile}
                     >
                         <div className="poly-nav-bar-separator-overlay" />
                         <FacebookImporter />
