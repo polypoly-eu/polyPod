@@ -20,11 +20,16 @@ const ClickableCard = ({
   return (
     <div
       className="card"
-      onClick={buttonText && onlyButtonClickEvent ? onClick : () => {}}
+      onClick={buttonText && onlyButtonClickEvent ? () => {} : onClick}
     >
       {children}
       {buttonText && (
-        <button className="poly-button centered">{buttonText}</button>
+        <button
+          className="poly-button centered"
+          onClick={onlyButtonClickEvent ? onClick : () => {}}
+        >
+          {buttonText}
+        </button>
       )}
     </div>
   );

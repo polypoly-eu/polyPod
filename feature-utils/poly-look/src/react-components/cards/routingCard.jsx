@@ -12,12 +12,23 @@ import ClickableCard from "./clickableCard.jsx";
  * @param {String} [buttonText] makes button appear with this text
  * @returns jsx
  */
-const RoutingCard = ({ children, history, route, stateChange, buttonText }) => {
+const RoutingCard = ({
+  children,
+  history,
+  route,
+  stateChange,
+  buttonText,
+  onlyButtonClickEvent,
+}) => {
   const handleClick = () => {
     history.push(route, { ...INITIAL_HISTORY_STATE, ...stateChange });
   };
   return (
-    <ClickableCard onClick={handleClick} buttonText={buttonText}>
+    <ClickableCard
+      onClick={handleClick}
+      buttonText={buttonText}
+      onlyButtonClickEvent={onlyButtonClickEvent}
+    >
       {children}
     </ClickableCard>
   );
