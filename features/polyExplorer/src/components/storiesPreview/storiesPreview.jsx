@@ -16,13 +16,12 @@ const StoriesPreview = ({ storiesMetadata }) => {
             {Object.values(storiesMetadata).map((story, index) => (
                 <RoutingCard
                     key={index}
-                    navigation={{
-                        history,
-                        route: story.route,
-                        buttonText: i18n.t(
-                            "clusterStoriesPreview:story.button.discover"
-                        ),
-                    }}
+                    history={history}
+                    route={story.route}
+                    buttonText={i18n.t(
+                        "clusterStoriesPreview:story.button.discover"
+                    )}
+                    onlyButtonClickEvent={true}
                 >
                     <img
                         className="title-img"
