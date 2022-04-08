@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid var(--color-gray-400);
-  padding-bottom: 24px;
+  padding: 18px 16px 24px 16px;
   color: var(--theme-secondary-color);
 }
 
@@ -12,7 +12,7 @@
 
 .card h1 {
   font-family: var(--jost-medium);
-  margin: 20px 0;
+  margin: 0 0 20px 0;
   font-size: 24px;
   line-height: 100%;
 }
