@@ -1,23 +1,14 @@
-export function createSuccessStatus() {
-    return {
-        name: "SUCCESS",
-        isSuccess: true,
-    };
+export class Status {
+    constructor({ name, message = null }) {
+        this.name = name;
+        this.isSuccess =
+            name === statusTypes.success || name === statusTypes.warning;
+        this.message = message;
+    }
 }
 
-export function createWarningStatus(message) {
-    return {
-        name: "WARNING",
-        message,
-        isWarning: true,
-    };
-}
-
-export function createErrorStatus(error) {
-    return {
-        name: "ERROR",
-        error,
-        message: error.name,
-        isError: true,
-    };
-}
+export const statusTypes = {
+    success: "Success",
+    warning: "Warning",
+    error: "Error",
+};

@@ -1,8 +1,8 @@
 import {
     ZipFile,
     Telemetry,
-    createErrorStatus,
-    createSuccessStatus,
+    Status,
+    statusTypes,
 } from "@polypoly-eu/poly-import";
 import InactiveCardsSummary from "./analysis/report/inactive-cards-summary.js";
 
@@ -64,7 +64,7 @@ export class UnrecognizedData {
 class AnalysisExecutionResult {
     constructor(analysis, status, executionTime) {
         this._analysis = analysis;
-        this._status = status || createSuccessStatus();
+        this._status = status || new Status({ name: statusTypes.success });
         this._executionTime = executionTime;
     }
 
@@ -108,7 +108,7 @@ export async function runAnalysis(analysisClass, enrichedData) {
     } catch (error) {
         return new AnalysisExecutionResult(
             subAnalysis,
-            createErrorStatus(error),
+            new Status({ name: statusTypes.error, message: error }),
             telemetry.elapsedTime()
         );
     }
