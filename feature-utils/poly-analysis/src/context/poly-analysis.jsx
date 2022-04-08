@@ -1,6 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { analyzeFile } from "../analysis";
 
+/**
+ * Poly Analysis Context - This context is responsible for maintaining the fileAnalysis up to date with the latest analyses based on how dataAccount changes.
+ * @param {AnalysisClass[]} [subAnalysis] - Analysis class that extend RootAnalysis. Usually found in the anlysis.js file that is held in a specific feature
+ * @param {context} [parentContext] - Context that holds variables that this context and other modules should react to.
+ */
+
 export const PolyAnalysisContext = createContext();
 
 export const PolyAnalysisProvider = ({
