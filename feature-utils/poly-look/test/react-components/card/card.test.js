@@ -17,6 +17,6 @@ it("renders the card correctly", () => {
 });
 
 it("renders the children correctly", () => {
-  const { container, getByRole } = render(singleBasicCard);
+  const { getByRole } = render(singleBasicCard);
   expect(getByRole("heading").innerHTML).toBe(testH1);
 });
