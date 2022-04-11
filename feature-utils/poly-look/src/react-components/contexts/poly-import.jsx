@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { FeatureFileStorage } from "../storage";
-import { importData } from "../importer";
+import { importData, FeatureFileStorage } from "@polypoly-eu/poly-import";
 
 import { RefreshFilesError } from "../errors/polyIn-errors.js";
 

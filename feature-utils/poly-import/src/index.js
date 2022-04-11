@@ -5,10 +5,7 @@ import {
     RefreshFilesError,
     FileSelectionError,
 } from "./errors/polyIn-errors";
-import {
-    PolyImportContext,
-    PolyImportProvider,
-} from "./context/poly-import.jsx";
+
 import { Status, statusTypes } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
 
@@ -16,7 +13,6 @@ export {
     importZip,
     runImporter,
     runImporters,
-    PolyImportProvider,
     Status,
     ZipFile,
     Telemetry,
@@ -26,5 +22,4 @@ export {
     FileSelectionError,
     FeatureFileStorage,
     statusTypes,
-    PolyImportContext,
 };

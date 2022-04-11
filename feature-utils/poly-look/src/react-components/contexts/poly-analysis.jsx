@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { analyzeFile } from "../../../../poly-analysis/src/analysis";
+import { analyzeFile } from "@polypoly-eu/poly-analysis";
 
 /**
  * Poly Analysis Context - This context is responsible for maintaining the fileAnalysis up to date with the latest analyses based on how dataAccount changes.
