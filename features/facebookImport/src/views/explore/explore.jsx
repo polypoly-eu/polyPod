@@ -3,55 +3,15 @@ import { useHistory } from "react-router-dom";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
+import { List, RoutingCard, Card } from "@polypoly-eu/poly-look";
 import { PolyImportContext } from "@polypoly-eu/poly-import";
 
 import i18n from "../../i18n.js";
 
 import "./explore.css";
-import "./ministory-styles.css";
 
 const PopUpMessage = ({ children, reportResultAnswer }) => {
     return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
-};
-
-const AnalysisCard = ({ analysis }) => {
-    return (
-        <div className="analysis-card">
-            <div className="card-container">
-                <h1 className="ministory-title">{analysis.title}</h1>
-                {analysis.label !== null && (
-                    <label>
-                        {i18n.t(`explore:analysis.label.${analysis.label}`)}
-                    </label>
-                )}
-            </div>
-            <div className="summary-text">{analysis.renderSummary()}</div>
-            {analysis.renderDetails ? (
-                <RouteButton
-                    route="/explore/details"
-                    className="details-button"
-                    stateChange={{ activeAnalysis: analysis }}
-                >
-                    {i18n.t("explore:details.button")}
-                </RouteButton>
-            ) : null}
-            <div className="card-separator"></div>
-        </div>
-        // <div className="analysis-card">
-        //     <h1>{analysis.title}</h1>
-        //     <div>{analysis.renderSummary()}</div>
-        //     {analysis.renderDetails ? (
-        //         <RouteButton
-        //             route="/explore/details"
-        //             className="details-button"
-        //             onClick={() => setActiveDetails(analysis)}
-        //             stateChange={{ scrollingProgress }}
-        //         >
-        //             {i18n.t("explore:details.button")}
-        //         </RouteButton>
-        //     ) : null}
-        // </div>
-    );
 };
 
 const UnrecognizedCard = () => {
@@ -69,8 +29,7 @@ const UnrecognizedCard = () => {
 };
 
 const ExploreView = () => {
-    const { setActiveDetails, reportResult, setReportResult } =
-        useContext(ImporterContext);
+    const { reportResult, setReportResult } = useContext(ImporterContext);
 
     const { fileAnalysis } = useContext(PolyImportContext);
 
@@ -119,16 +78,37 @@ const ExploreView = () => {
                 />
             );
         return (
-            <div>
+            <List>
                 <UnrecognizedCard />
-                {fileAnalysis.analyses.map((analysis, index) => (
-                    <AnalysisCard
-                        analysis={analysis}
-                        key={index}
-                        setActiveDetails={setActiveDetails}
-                    />
-                ))}
-            </div>
+                {fileAnalysis.analyses.map((analysis, index) => {
+                    const content = (
+                        <>
+                            <h1>{analysis.title}</h1>
+                            {analysis.label !== null && (
+                                <label>
+                                    {i18n.t(
+                                        `explore:analysis.label.${analysis.label}`
+                                    )}
+                                </label>
+                            )}
+                            {analysis.renderSummary()}
+                        </>
+                    );
+                    return analysis.renderDetails ? (
+                        <RoutingCard
+                            key={index}
+                            history={history}
+                            route="/explore/details"
+                            stateChange={{ activeAnalysis: analysis }}
+                            buttonText={i18n.t("explore:details.button")}
+                        >
+                            {content}
+                        </RoutingCard>
+                    ) : (
+                        <Card key={index}>{content}</Card>
+                    );
+                })}
+            </List>
         );
     };
 
