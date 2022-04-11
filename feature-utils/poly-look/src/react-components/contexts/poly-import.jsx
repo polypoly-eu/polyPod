@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   importData,
-  FeatureFileStorage,
   RefreshFilesError,
+  FeatureFileStorage,
 } from "@polypoly-eu/poly-import";
 
 //used until real storage is loaded

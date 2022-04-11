@@ -12,6 +12,7 @@ export const MockParentContextProvider = ({ children }) => {
     await task();
     setIsLoading(false);
   }
+  window.pod = pod;
 
   //on startup
   useEffect(() => {

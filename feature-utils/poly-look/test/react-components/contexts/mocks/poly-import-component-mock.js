@@ -4,7 +4,13 @@ import { PolyImportContext } from "../../../../src/react-components";
 const MockPolyImportComponent = () => {
   const { files, account, handleRemoveFile, refreshFiles } =
     useContext(PolyImportContext);
-  // console.log(files, account, handleRemoveFile, refreshFiles);
-  return <div></div>;
+  console.log("Component print: ", files);
+  return (
+    <div>
+      {files?.map((fileName, id) => (
+        <p key={id}>{fileName}</p>
+      ))}
+    </div>
+  );
 };
 export default MockPolyImportComponent;
