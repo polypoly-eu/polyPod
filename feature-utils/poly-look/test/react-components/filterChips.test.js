@@ -60,7 +60,7 @@ describe("Checks onChipClick event", () => {
   });
 });
 
-it("default active chips", () => {
+it("The default active chips are selected", () => {
   const { getByText } = render(component);
   for (const chipId of chipsContent) {
     const defaultActiveChips = component.props.defaultActiveChips;
