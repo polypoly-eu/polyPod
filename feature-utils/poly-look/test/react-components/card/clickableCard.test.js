@@ -7,7 +7,6 @@ const testH1 = "TestH1";
 
 let isClicked = false;
 const onClick = () => {
-  console.log("wejhbf");
   isClicked = true;
 };
 
