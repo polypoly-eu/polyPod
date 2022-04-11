@@ -1,5 +1,5 @@
+import { PolyAnalysisContext } from "@polypoly-eu/poly-analysis";
 import React, { useContext } from "react";
-import { ImporterContext } from "../../context/importer-context.jsx";
 
 import "./details.css";
 
@@ -16,7 +16,7 @@ export const ReportCard = ({ analysis }) => {
 };
 
 const ReportDetails = () => {
-    const { fileAnalysis } = useContext(ImporterContext);
+    const { fileAnalysis } = useContext(PolyAnalysisContext);
     const unrecognizedData = fileAnalysis.unrecognizedData;
 
     function renderReportAnalyses() {

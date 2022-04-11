@@ -4,7 +4,7 @@ import RouteButton from "../../components/buttons/routeButton.jsx";
 import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import { List, RoutingCard, Card } from "@polypoly-eu/poly-look";
-import { PolyImportContext } from "@polypoly-eu/poly-import";
+import { PolyAnalysisContext } from "@polypoly-eu/poly-analysis";
 
 import i18n from "../../i18n.js";
 
@@ -31,7 +31,7 @@ const UnrecognizedCard = () => {
 const ExploreView = () => {
     const { reportResult, setReportResult } = useContext(ImporterContext);
 
-    const { fileAnalysis } = useContext(PolyImportContext);
+    const { fileAnalysis } = useContext(PolyAnalysisContext);
 
     const history = useHistory();
     const exploreRef = useRef();
