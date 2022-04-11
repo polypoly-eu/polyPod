@@ -67,9 +67,7 @@ it("shows button when text is added", () => {
 
 it("only enables buttonClick", () => {
   const { container } = render(onlyButtonClickCard);
-  console.log(isClicked);
   fireEvent.click(container.querySelector(".card"));
-  console.log(isClicked);
   expect(isClicked).toBeFalsy();
   fireEvent.click(container.querySelector(".poly-button"));
   expect(isClicked).toBeTruthy();
