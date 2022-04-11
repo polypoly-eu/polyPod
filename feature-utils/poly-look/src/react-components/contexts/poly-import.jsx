@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { importData, FeatureFileStorage } from "@polypoly-eu/poly-import";
-
-import { RefreshFilesError } from "../errors/polyIn-errors.js";
+import {
+  importData,
+  FeatureFileStorage,
+  RefreshFilesError,
+} from "@polypoly-eu/poly-import";
 
 //used until real storage is loaded
 const fakeStorage = {
