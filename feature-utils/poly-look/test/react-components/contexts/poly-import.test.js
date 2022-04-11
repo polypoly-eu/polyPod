@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { PolyImportProvider } from "../../../src/react-components";
 import {
@@ -13,7 +13,6 @@ import { mockDataImporters } from "./mocks/data-importers-mock";
 /**
  * @jest-environment jsdom
  */
-
 const mockComponent = (
   <MockParentContextProvider>
     <PolyImportProvider
@@ -26,7 +25,9 @@ const mockComponent = (
   </MockParentContextProvider>
 );
 
-it("Creates a MockContext", () => {
-  const renderedErrorPopup = render(mockComponent);
-  expect(renderedErrorPopup.container).toBeTruthy();
+it("Creates a MockContext", async () => {
+  const { container } = render(mockComponent);
+  await waitFor(() => {
+    expect(container).toBeTruthy();
+  });
 });
