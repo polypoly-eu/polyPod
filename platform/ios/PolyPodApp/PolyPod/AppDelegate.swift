@@ -1,6 +1,7 @@
 import BackgroundTasks
 import UIKit
 import CoreData
+import PolyPodCoreSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -8,9 +9,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
         Log.bootstrap()
         Log.info("Application initialized")
+        
+        switch Core.instance.bootstrap(languageCode: Language.current) {
+        case .success:
+            Log.info("Core bootstraped!")
+        case let .failure(content):
+            assertionFailure(content.localizedDescription)
+            Log.error(content.localizedDescription)
+        }
         
         let defaults = UserDefaults.standard
         defaults.disableDataProtection()

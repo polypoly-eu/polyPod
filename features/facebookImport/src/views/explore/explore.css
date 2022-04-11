@@ -12,13 +12,6 @@
     overflow-x: hidden;
 }
 
-.explore-view .explore-view-title {
-    text-align: center;
-    font-weight: 500;
-    margin: 8px 0 20px 0;
-    font-size: 24px;
-}
-
 .explore-view .report-button {
     font-family: "Jost Medium";
     font-size: 18px;
@@ -34,22 +27,6 @@
     align-items: center;
     color: var(--text-light);
     border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.explore-view .details-button {
-    font-family: "Jost Medium";
-    background-color: var(--background-light);
-    color: var(--text-dark);
-    margin: 24px auto 0 auto;
-    width: 100%;
-    height: 48px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-    font-size: 18px;
-    line-height: 21.6px;
     box-sizing: border-box;
 }
 
@@ -73,28 +50,6 @@
     color: var(--color-green-800);
 }
 
-.analysis-card {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 16px 16px 20px 16px;
-    color: var(--text-light);
-    overflow-x: scroll;
-}
-
-.analysis-card .card-separator {
-    margin-top: 30px;
-    border-bottom: solid 1px var(--color-gray-400);
-}
-
-.analysis-card:last-child .card-separator {
-    display: none;
-}
-.analysis-card .card-container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 16px;
-}
-
 .analysis-card .card-container > label {
     width: 90px;
     min-width: 82px;
@@ -115,15 +70,6 @@
     font-weight: 400;
     color: var(--text-light);
     margin: 0;
-    line-height: 19.2px;
-}
-
-.analysis-card ul {
-    padding: 0 20px;
-}
-
-.analysis-card li {
-    margin-right: 20px;
 }
 
 .unrecognized-analysis-card {

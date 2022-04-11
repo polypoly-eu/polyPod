@@ -1,7 +1,7 @@
 use super::core_failure_fbs_mapping::build_failure_fbs;
 use crate::{
     core_failure::CoreFailure,
-    flatbuffers_generated::core_bootstrap_response_generated::core_bootstrap_response::{
+    flatbuffers_generated::core_bootstrap_response_generated::{
         finish_core_bootstrap_response_buffer, CoreBootstrapResponse, CoreBootstrapResponseArgs,
     },
 };
@@ -23,7 +23,7 @@ pub fn build_core_bootstrap_response(result: Result<(), CoreFailure>) -> Vec<u8>
 
 #[cfg(test)]
 mod tests {
-    use crate::flatbuffers_generated::core_bootstrap_response_generated::core_bootstrap_response::root_as_core_bootstrap_response;
+    use crate::flatbuffers_generated::core_bootstrap_response_generated::root_as_core_bootstrap_response;
 
     use super::*;
 
@@ -63,6 +63,6 @@ mod tests {
 
         let failure = response.failure().unwrap();
         assert_eq!(failure.code(), expected_failure.code);
-        assert_eq!(failure.message(), Some(expected_failure.message.as_str()));
+        assert_eq!(failure.message(), expected_failure.message.as_str());
     }
 }

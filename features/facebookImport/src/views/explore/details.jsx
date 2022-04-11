@@ -8,7 +8,7 @@ const ExploreDetails = () => {
     const { activeAnalysis } = history.location.state;
     return (
         <div className="details-view">
-            <h1 className="ministory-title">{activeAnalysis.title}</h1>
+            <h1>{activeAnalysis.title}</h1>
             {activeAnalysis.renderDetails()}
         </div>
     );

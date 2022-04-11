@@ -2,7 +2,7 @@ use crate::{
     c_interface::{
         core_bootstrap_fbs_mapping::build_core_bootstrap_response,
         feature_manifest_fbs_mapping::build_feature_manifest_parsing_response,
-        utils::cstring_to_str,
+        utils::{create_byte_buffer, cstring_to_str, CByteBuffer},
     },
     core::{bootstrap, parse_feature_manifest},
 };
@@ -18,13 +18,12 @@ use std::os::raw::c_char;
 /// - language_code: User's locale language code.
 /// Returns a flatbuffer byte array with core_bootstrap_response.
 #[no_mangle]
-pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> *const u8 {
-    build_core_bootstrap_response(
+pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> CByteBuffer {
+    create_byte_buffer(build_core_bootstrap_response(
         cstring_to_str(&language_code)
             .map(String::from)
             .and_then(bootstrap),
-    )
-    .as_ptr()
+    ))
 }
 
 /// # Safety
@@ -34,7 +33,17 @@ pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> *const 
 /// - json: Feature manifest json string to be parsed.
 /// Returns a flatbuffer byte array with feature_manifest_response.
 #[no_mangle]
-pub unsafe extern "C" fn parse_feature_manifest_from_json(json: *const c_char) -> *const u8 {
-    build_feature_manifest_parsing_response(cstring_to_str(&json).and_then(parse_feature_manifest))
-        .as_ptr()
+pub unsafe extern "C" fn parse_feature_manifest_from_json(json: *const c_char) -> CByteBuffer {
+    create_byte_buffer(build_feature_manifest_parsing_response(
+        cstring_to_str(&json).and_then(parse_feature_manifest),
+    ))
+}
+
+/// # Safety
+/// This function can be unsafe if trying to deallocate invalid memory.
+///
+/// Drops the given bytes.
+#[no_mangle]
+pub unsafe extern "C" fn free_bytes(bytes: *mut u8) {
+    drop(Box::from_raw(bytes))
 }

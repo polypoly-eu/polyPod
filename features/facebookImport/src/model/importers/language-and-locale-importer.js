@@ -1,4 +1,4 @@
-import { createWarningStatus } from "@polypoly-eu/poly-import";
+import { Status, statusTypes } from "@polypoly-eu/poly-import";
 import { readJSONDataArray } from "./utils/importer-util.js";
 
 export const LANGUAGE_AND_LOCALE_FILE_PATH =
@@ -68,7 +68,10 @@ export default class LanguageAndLocaleImporter {
             this.extractPreferredLanguge(languageData);
 
         if (!facebookAccount.preferredLanguage) {
-            return createWarningStatus("Could not extract preferredLanguage");
+            return new Status({
+                name: statusTypes.warning,
+                message: "Could not extract preferredLanguage",
+            });
         }
     }
 }

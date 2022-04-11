@@ -1,9 +1,6 @@
-// feature_manifest.fbs
-namespace feature_manifest;
-
 table Link {
-    name:string;
-    url:string;
+    name:string (required);
+    url:string (required);
 }
 
 table FeatureManifest {
@@ -16,3 +13,5 @@ table FeatureManifest {
     primary_color:string;
     links:[Link];
 }
+
+root_type FeatureManifest;

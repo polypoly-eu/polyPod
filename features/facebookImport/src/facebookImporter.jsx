@@ -16,9 +16,12 @@ import {
     PolyImportContext,
     PolyImportProvider,
 } from "@polypoly-eu/poly-import";
+import { PolyAnalysisProvider } from "@polypoly-eu/poly-analysis";
+import { INITIAL_HISTORY_STATE } from "@polypoly-eu/poly-look";
 import { subAnalyses } from "./model/analysis";
 import { dataImporters } from "./model/importer.js";
 import FacebookAccount from "./model/entities/facebook-account.js";
+import i18n from "./i18n.js";
 
 import { ErrorPopup } from "@polypoly-eu/poly-look";
 import Overview from "./views/overview/overview.jsx";
@@ -40,10 +43,6 @@ import "./styles.css";
 
 import manifestData from "./static/manifest.json";
 window.manifestData = manifestData;
-
-import i18n from "./i18n.js";
-import { INITIAL_HISTORY_STATE } from "./constants.js";
-import { PolyAnalysisProvider } from "@polypoly-eu/poly-analysis";
 
 const FacebookImporter = () => {
     const { pod, globalError, setGlobalError, isLoading } =

@@ -9,21 +9,15 @@ import {
     PolyImportContext,
     PolyImportProvider,
 } from "./context/poly-import.jsx";
-import {
-    createErrorStatus,
-    createSuccessStatus,
-    createWarningStatus,
-} from "../utils/status";
+import { Status, statusTypes } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
 
 export {
     importZip,
     runImporter,
     runImporters,
-    createErrorStatus,
     PolyImportProvider,
-    createSuccessStatus,
-    createWarningStatus,
+    Status,
     ZipFile,
     Telemetry,
     ZipFileEntry,
@@ -31,5 +25,6 @@ export {
     RefreshFilesError,
     FileSelectionError,
     FeatureFileStorage,
+    statusTypes,
     PolyImportContext,
 };
