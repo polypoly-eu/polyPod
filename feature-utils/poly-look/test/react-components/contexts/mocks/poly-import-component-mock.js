@@ -1,10 +1,10 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { PolyImportContext } from "../../../../src/react-components";
 
-const mockPolyImportComponent = () => {
-  const { files, account, handleRemoveFile, refreshFilesf } =
+const MockPolyImportComponent = () => {
+  const { files, account, handleRemoveFile, refreshFiles } =
     useContext(PolyImportContext);
-
-  return "";
+  // console.log(files, account, handleRemoveFile, refreshFiles);
+  return <div></div>;
 };
-export default mockPolyImportComponent;
+export default MockPolyImportComponent;

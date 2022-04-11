@@ -24,6 +24,7 @@ export const MockParentContextProvider = ({ children }) => {
         pod,
         isLoading,
         globalError,
+        setIsLoading,
         setGlobalError,
         runWithLoadingScreen,
       }}
