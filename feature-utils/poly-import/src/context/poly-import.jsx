@@ -17,8 +17,6 @@ export const PolyImportContext = createContext();
 export const PolyImportProvider = ({
     children,
     parentContext,
-    subAnalyses,
-    analyzeFile,
     dataImporters,
     DataAccount,
 }) => {
@@ -27,7 +25,6 @@ export const PolyImportProvider = ({
     const [storage, setStorage] = useState(fakeStorage);
     const [files, setFiles] = useState(null);
     const [account, setAccount] = useState(null);
-    const [fileAnalysis, setFileAnalysis] = useState(null);
 
     function refreshFiles() {
         setIsLoading(true);
@@ -79,11 +76,6 @@ export const PolyImportProvider = ({
         importData({ dataImporters, zipData: files[0], DataAccount }).then(
             (newAccount) => {
                 setAccount(newAccount);
-                analyzeFile({
-                    zipData: files[0],
-                    dataAccount: newAccount,
-                    subAnalyses,
-                }).then((fileAnalysis) => setFileAnalysis(fileAnalysis));
             }
         );
     }, [files]);
@@ -92,7 +84,6 @@ export const PolyImportProvider = ({
         <PolyImportContext.Provider
             value={{
                 files,
-                fileAnalysis,
                 account,
                 handleRemoveFile,
                 refreshFiles,

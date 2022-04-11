@@ -12,3 +12,10 @@
 .details-view ul {
     padding: 0 20px;
 }
+
+.details-view h1 {
+    text-align: center;
+    font-family: var(--jost-medium);
+    margin: 20px 0;
+    font-size: 24px;
+}

@@ -11,7 +11,7 @@ import React from "react";
 export default class InactiveCardsSummary {
     constructor(analysesResults) {
         const inactiveAnalysesResults = analysesResults.filter(
-            ({ analysis, status }) => status.isError || !analysis.active
+            ({ analysis, status }) => !status.isSuccess || !analysis.active
         );
 
         this._inactiveAnalysesData = inactiveAnalysesResults.map(

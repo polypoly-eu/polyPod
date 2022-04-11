@@ -1,7 +1,4 @@
-import {
-    createErrorStatus,
-    createSuccessStatus,
-} from "@polypoly-eu/poly-import";
+import { Status, statusTypes } from "@polypoly-eu/poly-import";
 import { MissingFilesException } from "./utils/failed-import-exception";
 import {
     readFullPathJSONFile,
@@ -26,10 +23,21 @@ export default class MultipleFilesImporter {
     async _readJSONFileWithStatus(targetEntry, zipFile) {
         return readFullPathJSONFile(targetEntry, zipFile)
             .then((data) => {
-                return { status: createSuccessStatus(), targetEntry, data };
+                return {
+                    status: new Status({
+                        name: statusTypes.success,
+                    }),
+                    targetEntry,
+                    data,
+                };
             })
             .catch((error) => {
-                return { status: createErrorStatus(error) };
+                return {
+                    status: new Status({
+                        name: statusTypes.error,
+                        message: error,
+                    }),
+                };
             });
     }
 
