@@ -7,7 +7,7 @@
     "target": "es6",
     "outDir": "./dist",
     "rootDirs": ["./src",  "../../../polyPod-config/*.json"],
-    "module": "commonjs",
+    "module": "ESNext",
     "declaration": true,
     "strict": true,
     "moduleResolution": "node",
