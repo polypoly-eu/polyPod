@@ -1,6 +1,6 @@
 use crate::{
     core_failure::CoreFailure,
-    flatbuffers_generated::failure_generated::failure::{Failure, FailureArgs},
+    flatbuffers_generated::failure_generated::{Failure, FailureArgs},
 };
 use flatbuffers::{FlatBufferBuilder, WIPOffset};
 

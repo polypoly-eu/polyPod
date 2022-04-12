@@ -9,19 +9,14 @@ func createStubFeature(
     primaryColor: String? = nil,
     links: [String: String]? = nil
 ) -> Feature {
-    let manifest = FeatureManifest(
+    Feature(
+        path: URL(fileURLWithPath: ""),
         name: name,
         author: author,
         description: description,
         thumbnail: thumbnail,
         thumbnailColor: thumbnailColor,
         primaryColor: primaryColor,
-        links: links,
-        translations: nil
-    )
-    return Feature(
-        path: URL(fileURLWithPath: ""),
-        manifest: manifest,
-        languageCode: nil
+        links: links
     )
 }

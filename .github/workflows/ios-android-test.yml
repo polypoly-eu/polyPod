@@ -33,10 +33,16 @@ jobs:
               run: cd platform/ios; make lockxcodeversion
             - name: Build API and features
               run: ./build.js
+            - name: Build core
+              working-directory: platform/ios
+              run: make core
             - name: Build and test iOS
               working-directory: platform/ios
               run: make test
             - uses: actions/setup-java@v2
+              if: |
+                !github.head_ref
+                && ( startsWith(github.ref, 'refs/heads/release') == true || github.ref == 'refs/heads/main' )
               with:
                   distribution: 'zulu'
                   java-version: 11
@@ -45,10 +51,9 @@ jobs:
               uses: ReactiveCircus/android-emulator-runner@76c2bf6f95ed6458fd659a1bdb680a0f8df232dc
               if: |
                 !github.head_ref
-                && ( github.ref == 'refs/heads/release' || github.ref == 'refs/heads/main' )
+                && ( startsWith(github.ref, 'refs/heads/release') == true || github.ref == 'refs/heads/main' )
               with:
                 working-directory: platform/android
                 arch: 'x86_64'
                 api-level: 30
                 script: ./gradlew connectedAndroidTest
-

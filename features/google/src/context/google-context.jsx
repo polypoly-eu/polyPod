@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FeatureFileStorage } from "@polypoly-eu/feature-file-storage";
+import { FeatureFileStorage } from "@polypoly-eu/poly-import";
 import { useHistory, useLocation } from "react-router-dom";
 import { importData } from "../model/importer";
 

@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AppStoreConnect-Swift-SDK",
+        "repositoryURL": "https://github.com/polypoly-eu/appstoreconnect-swift-sdk",
+        "state": {
+          "branch": null,
+          "revision": "6961347904eaad966f6eedc3b605f685dac429f8",
+          "version": "1.7.0"
+        }
+      },
+      {
+        "package": "swift-argument-parser",
+        "repositoryURL": "https://github.com/apple/swift-argument-parser",
+        "state": {
+          "branch": null,
+          "revision": "82905286cc3f0fa8adc4674bf49437cab65a8373",
+          "version": "1.1.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

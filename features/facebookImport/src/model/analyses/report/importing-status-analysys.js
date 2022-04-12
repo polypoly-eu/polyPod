@@ -1,5 +1,5 @@
 import React from "react";
-import ReportAnalysis from "./report-analysis.js";
+import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class DataImportingStatusAnalysis extends ReportAnalysis {
     get title() {
@@ -10,8 +10,8 @@ export default class DataImportingStatusAnalysis extends ReportAnalysis {
         return this._importersData;
     }
 
-    async analyze({ facebookAccount }) {
-        this._importersData = facebookAccount.importingResults.map(
+    async analyze({ dataAccount }) {
+        this._importersData = dataAccount.importingResults.map(
             (importerResult) => importerResult.reportJsonData
         );
         this.active = this._importersData.length > 0;

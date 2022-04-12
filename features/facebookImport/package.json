@@ -25,7 +25,8 @@
   },
   "private": true,
   "dependencies": {
-    "@polypoly-eu/feature-file-storage": "file:../../feature-utils/file-storage",
+    "@polypoly-eu/poly-import": "file:../../feature-utils/poly-import",
+    "@polypoly-eu/poly-analysis": "file:../../feature-utils/poly-analysis",
     "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
     "d3": "^7.0.1",
     "react": "^17.0.2",
