@@ -118,13 +118,11 @@ install_distribution_prerequisites:
 	#    automatically extract the profile from the Provisioning Profiles
 	#    directory
 	mkdir -p $(provisioning_profile_dir)
-	@echo 
 	cd $(app_store_connect_cmd); \
 	swift run AppStoreConnectCMD \
 	 get-provisioning-profile-content \
 	 $(appstore_api_issuer_id) \
 	 $(appstore_api_key_id) \
 	 ~/private_keys/AuthKey_$(appstore_api_key_id).p8 \
-
-		| base64 --decode > \
-		$(provisioning_profile_dir)/$(provisioning_profile_file)
+	 | base64 --decode > \
+	 $(provisioning_profile_dir)/$(provisioning_profile_file)

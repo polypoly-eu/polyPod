@@ -5,7 +5,7 @@ extension AppStoreConnect {
     
     /// Retrieves the provisioning profile content for a given name
     /// - Parameter name: The name of the provisioning profile to get the content for
-    /// - Returns: The  content of the provisioning profile
+    /// - Returns: The content of the provisioning profile
     public func getProfileContent(forProvisioningProfile name: String) async throws -> String {
         let profile = try await getProvisioningProfile(withName: name)
         guard let encodedContent = profile.attributes?.profileContent else {
@@ -17,8 +17,7 @@ extension AppStoreConnect {
     
     func getProvisioningProfile(withName name: String) async throws -> Profile {
         NSLog("Retrieving provisioning profile with name \(name)")
-        let endpoint = APIEndpoint.listProfiles(filter: [.name([name])],
-                                                include: [.certificates])
+        let endpoint = APIEndpoint.listProfiles(filter: [.name([name])])
         let result = try await apiProvider.request(endpoint)
         if let profile = result.data.first {
             NSLog("Succesfully downloaded provisioning profile with name \(name)")
