@@ -661,6 +661,10 @@ function createNavBarFrame(title: string): HTMLElement {
     return frame;
 }
 
+// MANIFEST_FILE points to the manifest.json file in the bundled dest
+// as setup in rollup configuration
+export const MANIFEST_FILE = "";
+
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
     public readonly polyIn = new LocalStoragePolyIn();
@@ -671,19 +675,22 @@ export class BrowserPod implements Pod {
 
     constructor() {
         window.addEventListener("load", async () => {
-            // window.manifestData points to the manifest.json file in the bundled dest
-            // as setup in rollup configuration
-            const manifestFile = window.manifestData;
+            import(`"${MANIFEST_FILE}"`)
+                .then((data) => {
+                    window.manifestData = data;
+                    console.debug(window.manifestData);
+                })
+                .catch((error) => {
+                    console.error(
+                        `Unable to find feature manifest, navigation bar disabled.
+    To get the navigation bar, expose the manifest's content as
+    window.manifestData.`,
+                        error
+                    );
+                    return;
+                });
 
-            if (!manifestFile) {
-                console.warn(
-                    `Unable to find feature manifest, navigation bar disabled.
-To get the navigation bar, expose the manifest's content as
-window.manifestData.`
-                );
-                return;
-            }
-            window.manifest = await readManifest(manifestFile);
+            window.manifest = await readManifest(window.manifestData);
             window.parent.currentTitle =
                 window.parent.currentTitle || window.manifest.name;
             const frame = createNavBarFrame(window.parent.currentTitle);

@@ -2,61 +2,78 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
+import replace from "@rollup/plugin-replace";
+import { rollupAdapter } from "@web/dev-server-rollup";
 
-import inject from "@rollup/plugin-inject";
 import path from "path";
 
-const externalManifestFile = path.resolve(
-    __dirname,
-    "src/static/manifest.json"
-);
+const pathResolve = (loc) => path.resolve(__dirname, loc);
 
-const globals = {
-    [externalManifestFile]: "$inject_window_manifestData",
-};
+const externalManifestFile = path.resolve("./manifest.json");
+
+// const globals = {
+//     // ["$inject_window_manifestData"]: externalManifestFile,
+//     [externalManifestFile]: "$inject_window_manifestData",
+// };
 
 export default [
     {
-        input: "src/index.ts",
-        external: [externalManifestFile, "$inject_window_manifestData"],
+        input: pathResolve("src/index.ts"),
         output: [
             {
-                file: "dist/index.es.js",
+                file: pathResolve("dist/index.es.js"),
                 format: "esm",
-                globals,
+                // globals,
             },
             {
-                file: "dist/index.js",
+                file: pathResolve("dist/index.js"),
                 format: "cjs",
-                globals,
+                // globals,
             },
         ],
         plugins: [
+            rollupAdapter(json()),
+            // define({
+            //     replacements: {
+            //         "(typeof window).manifestData": "src/static/manifest.json",
+            //     },
+            // }),
             json(),
             resolve(),
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"],
             }),
-            inject({
-                "window.manifestData": externalManifestFile,
-                dest: "dist",
+            // inject({
+            //     "window.manifestData": "src/static/manifest.json",
+            //     dest: "dist",
+            //     preventAssignment: true,
+            // }),
+            replace({
+                MANIFEST_FILE: externalManifestFile,
                 preventAssignment: true,
+                include: ["src/browserPod.ts"],
             }),
         ],
         context: "window",
     },
     {
-        input: "src/pod.ts",
-        external: [externalManifestFile, "$inject_window_manifestData"],
+        input: pathResolve("src/pod.ts"),
         output: [
             {
-                file: "dist/pod.js",
+                file: pathResolve("dist/pod.js"),
                 format: "iife",
-                globals,
+                // globals,
             },
         ],
         plugins: [
+            rollupAdapter(json()),
+
+            // define({
+            //     replacements: {
+            //         MANIFESTDATA: "src/static/manifest.json",
+            //     },
+            // }),
             json(),
             resolve(),
             commonjs(),
@@ -64,10 +81,15 @@ export default [
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"],
             }),
-            inject({
-                "window.manifestData": externalManifestFile,
-                dest: "dist",
+            // inject({
+            //     "window.manifestData": "src/static/manifest.json",
+            //     dest: "dist",
+            //     preventAssignment: true,
+            // }),
+            replace({
+                MANIFEST_FILE: externalManifestFile,
                 preventAssignment: true,
+                include: ["src/browserPod.ts"],
             }),
         ],
         context: "window",
