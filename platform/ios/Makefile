@@ -124,5 +124,6 @@ install_distribution_prerequisites:
 	 $(appstore_api_issuer_id) \
 	 $(appstore_api_key_id) \
 	 ~/private_keys/AuthKey_$(appstore_api_key_id).p8 \
+     $(provisioning_profile_name) \
 	 | base64 --decode > \
 	 $(provisioning_profile_dir)/$(provisioning_profile_file)
