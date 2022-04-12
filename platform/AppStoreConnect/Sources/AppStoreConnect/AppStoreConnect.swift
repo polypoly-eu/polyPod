@@ -8,6 +8,8 @@ public enum AppStoreConnectError: Error {
     case missingProcessingState
     case buildNotFound
     case appNotFound
+    case provisioningProfileNotFound
+    case provisioningProfileContentIsMissing
 }
 
 // A facade for AppStoreConnect_Swift_SDK.APIProvider that manages multiple requests
