@@ -14,7 +14,7 @@ export class FeatureFileStorage {
         const files = await polyOut.readDir("");
         const statResults = {};
         for (let file of files) {
-            statResults[file] = await polyOut.stat(file.id);
+            statResults[file.id] = await polyOut.stat(file.id);
         }
         this._files = statResults;
         return files;
