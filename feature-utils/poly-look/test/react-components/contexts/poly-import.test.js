@@ -40,14 +40,6 @@ it("correctly processes the data", async () => {
   );
 });
 
-it("correctly processes the data", async () => {
-  const { container } = await waitFor(() => render(mockComponent));
-  const elements = container.getElementsByTagName("p");
-  mockFiles.forEach((file, i) =>
-    expect(elements.item(i).firstChild.textContent).toBe(file.id)
-  );
-});
-
 it("correctly removes file", async () => {
   const { container } = await waitFor(() => render(mockComponent));
   const elements = container.getElementsByTagName("p");
