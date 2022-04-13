@@ -19,7 +19,7 @@ export const PolyAnalysisProvider = ({
 
   //When the account model is created in the importer Context, the analyses are triggered.
   useEffect(() => {
-    if (!account || !files[0]?.[0]) return;
+    if (!account || !files?.[0]) return;
     analyzeFile({
       zipData: files[0],
       dataAccount: account,
