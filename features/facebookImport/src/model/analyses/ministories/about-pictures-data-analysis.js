@@ -2,10 +2,6 @@ import React from "react";
 import { relevantZipEntries } from "../../importers/utils/importer-util";
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
-import PicturesMiniStory from "../../../components/picturesMiniStory/picturesMiniStory.jsx";
-
-import i18n from "../../../i18n";
-
 /**
  * Minimum number of picutures that should be present in
  * the export in order for this analysis to be active.
@@ -13,14 +9,6 @@ import i18n from "../../../i18n";
 const PICTURES_THRESHOLD = 1;
 
 export default class AboutPicturesDataAnalysis extends RootAnalysis {
-    get label() {
-        return RootAnalysis.Labels.NONE;
-    }
-
-    get title() {
-        return i18n.t("picturesMiniStory:title");
-    }
-
     /**
      * Determine the pictures posted by the user.
      *
@@ -57,9 +45,5 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
         const pictureEntries = await this._userPicturesFromExport(zipFile);
         this._picturesCount = pictureEntries.length;
         this.active = this._picturesCount >= PICTURES_THRESHOLD;
-    }
-
-    renderSummary() {
-        return <PicturesMiniStory />;
     }
 }
