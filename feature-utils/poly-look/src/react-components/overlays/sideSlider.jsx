@@ -47,7 +47,7 @@ const directions = {
  * defaults to the value of --max-width.
  * @param {string} [props.animationDuration] - The duration of the animations.
  * Can be any value that is compatible with CSS transition-duration rule;
- * defaults to 6s.
+ * defaults to 0.6s.
  * @param {JSX.Element} [props.Component] - The component that will be animated.
  * If this component can trigger the SideSlider to close then it must have
  * an onClose callback as one of it's props.
