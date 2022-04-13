@@ -1,5 +1,5 @@
 import React from "react";
-import { render, waitFor } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { PolyImportProvider } from "../../../src/react-components";
 import {
@@ -25,17 +25,37 @@ const mockComponent = (
   </MockParentContextProvider>
 );
 
-it("Creates a MockContext", async () => {
+it("renders correctly with a component", async () => {
   const { container } = render(mockComponent);
   await waitFor(() => {
     expect(container).toBeTruthy();
   });
 });
 
-it("Reacts to changes in Pod file-storage", async () => {
+it("correctly processes the data", async () => {
   const { container } = await waitFor(() => render(mockComponent));
   const elements = container.getElementsByTagName("p");
   mockFiles.forEach((file, i) =>
     expect(elements.item(i).firstChild.textContent).toBe(file.id)
   );
+});
+
+it("correctly processes the data", async () => {
+  const { container } = await waitFor(() => render(mockComponent));
+  const elements = container.getElementsByTagName("p");
+  mockFiles.forEach((file, i) =>
+    expect(elements.item(i).firstChild.textContent).toBe(file.id)
+  );
+});
+
+it("correctly removes file", async () => {
+  const { container } = await waitFor(() => render(mockComponent));
+  const elements = container.getElementsByTagName("p");
+  mockFiles.forEach((file, i) =>
+    expect(elements.item(i).firstChild.textContent).toBe(file.id)
+  );
+  await waitFor(() => {
+    fireEvent.click(container.querySelector(".removeFiles"));
+  });
+  expect(container.getElementsByTagName("p").length).toBe(0);
 });
