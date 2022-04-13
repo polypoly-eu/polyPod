@@ -1,6 +1,6 @@
 class MockImporterClass {
   constructor() {
-    this.import = ({ zipFile, facebookAccount, pod }) => true;
+    this.import = () => true;
   }
 }
 export const mockDataImporters = [MockImporterClass];

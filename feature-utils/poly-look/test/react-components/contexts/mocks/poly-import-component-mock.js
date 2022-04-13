@@ -2,8 +2,7 @@ import React, { useContext } from "react";
 import { PolyImportContext } from "../../../../src/react-components";
 
 const MockPolyImportComponent = () => {
-  const { files, account, handleRemoveFile, refreshFiles } =
-    useContext(PolyImportContext);
+  const { files, handleRemoveFile } = useContext(PolyImportContext);
 
   const handleRemoveFiles = () => {
     for (let file of files) {
