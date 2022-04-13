@@ -1,18 +1,24 @@
-import commonjs from "@rollup/plugin-commonjs";
+// import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
-import sucrase from "@rollup/plugin-sucrase";
+// import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
 import replace from "@rollup/plugin-replace";
 import typescript from "rollup-plugin-typescript2";
 
+import merge from "deepmerge";
+
+import { createBasicConfig } from "@open-wc/building-rollup";
+
 import path from "path";
+
+const baseConfig = createBasicConfig();
 
 const pathResolve = (loc) => path.resolve(__dirname, loc);
 
-const externalManifestFile = path.resolve("./manifest.json");
-const nodeModules = "node_modules/**";
+const externalManifestFile = path.resolve("./static/manifest.json");
+// const nodeModules = "node_modules/**";
 
-export default [
+export default merge(baseConfig, [
     {
         input: pathResolve("src/index.ts"),
         output: [
@@ -26,19 +32,15 @@ export default [
             },
         ],
         plugins: [
+            typescript(),
             replace({
-                DYNAMIC_IMPORT_MANIFEST: `() => import(${externalManifestFile})`,
+                DYNAMIC_IMPORT_MANIFEST: `() => import("${externalManifestFile}")`,
                 preventAssignment: true,
             }),
-            typescript({
-                target: "esnext",
-                module: "esnext",
-                declaration: true,
-            }),
-            commonjs({
-                include: nodeModules,
-                extensions: [".js", ".ts", ".json"],
-            }),
+            // commonjs({
+            //     include: nodeModules,
+            //     extensions: [".js", ".ts", ".json"],
+            // }),
             // define({
             //     replacements: {
             //         "(typeof window).manifestData": "src/static/manifest.json",
@@ -46,10 +48,10 @@ export default [
             // }),
             json(),
             resolve(),
-            sucrase({
-                exclude: [nodeModules],
-                transforms: ["typescript"],
-            }),
+            // sucrase({
+            //     exclude: [nodeModules],
+            //     transforms: ["typescript"],
+            // }),
             // inject({
             //     "window.manifestData": "src/static/manifest.json",
             //     dest: "dist",
@@ -68,14 +70,10 @@ export default [
             },
         ],
         plugins: [
+            typescript(),
             replace({
-                DYNAMIC_IMPORT_MANIFEST: `() => import(${externalManifestFile})`,
+                DYNAMIC_IMPORT_MANIFEST: `() => import("${externalManifestFile}")`,
                 preventAssignment: true,
-            }),
-            typescript({
-                target: "esnext",
-                module: "esnext",
-                declaration: true,
             }),
             // define({
             //     replacements: {
@@ -84,16 +82,15 @@ export default [
             // }),
             json(),
             resolve(),
-            commonjs(),
-            commonjs({
-                transformMixedEsModules: true,
-                include: nodeModules,
-                extensions: [".js", ".ts", ".mjs", ".json"],
-            }),
-            sucrase({
-                exclude: [nodeModules],
-                transforms: ["typescript"],
-            }),
+            // commonjs({
+            //     transformMixedEsModules: true,
+            //     include: nodeModules,
+            //     extensions: [".js", ".ts", ".mjs", ".json"],
+            // }),
+            // sucrase({
+            //     exclude: [nodeModules],
+            //     transforms: ["typescript"],
+            // }),
             // inject({
             //     "window.manifestData": "src/static/manifest.json",
             //     dest: "dist",
@@ -102,4 +99,4 @@ export default [
         ],
         context: "window",
     },
-];
+]);

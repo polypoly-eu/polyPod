@@ -669,7 +669,15 @@ type DynamicImportManifestType = () => Promise<Module>;
 
 // DYNAMIC_IMPORT_MANIFEST points to the `manifest.json` file of the bundled dest
 // as it's setup in our rollup configuration
-export declare const DYNAMIC_IMPORT_MANIFEST: DynamicImportManifestType;
+export const DYNAMIC_IMPORT_MANIFEST: DynamicImportManifestType = () =>
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    new Promise((resolve, _reject) => {
+        resolve({
+            default: () => {
+                return {};
+            },
+        });
+    });
 
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
@@ -681,34 +689,36 @@ export class BrowserPod implements Pod {
 
     constructor() {
         window.addEventListener("load", async () => {
-            () => {
-                DYNAMIC_IMPORT_MANIFEST()
-                    .then((data) => {
-                        window.manifestData = data.default();
-                        console.debug(window.manifestData);
-                    })
-                    .catch((error) => {
-                        console.error(
-                            `Unable to find feature manifest, navigation bar disabled.
+            // () => {
+            console.log(DYNAMIC_IMPORT_MANIFEST);
+
+            DYNAMIC_IMPORT_MANIFEST()
+                .then((module) => {
+                    window.manifestData = module.default();
+                    console.debug(window.manifestData);
+                })
+                .catch((error) => {
+                    console.error(
+                        `Unable to find feature manifest, navigation bar disabled.
                 To get the navigation bar, expose the manifest's content as
                 window.manifestData.`,
-                            error
-                        );
-                        return;
-                    });
+                        error
+                    );
+                    return;
+                });
 
-                //         const manifestData = DYNAMIC_IMPORT_MANIFEST().default();
-                //         if (!manifestData) {
-                //             console.error(
-                //                 `Unable to find feature manifest, navigation bar disabled.
-                // To get the navigation bar, expose the manifest's content as
-                // window.manifestData.`
-                //             );
-                //             return;
-                //         }
-                //         window.manifestData = DYNAMIC_IMPORT_MANIFEST().default();
-                //         console.debug(window.manifestData);
-            };
+            // const manifestData = DYNAMIC_IMPORT_MANIFEST().default();
+            if (!window.manifestData) {
+                console.error(
+                    `Unable to find feature manifest, navigation bar disabled.
+            To get the navigation bar, expose the manifest's content as
+            window.manifestData.`
+                );
+                return;
+            }
+            // window.manifestData = DYNAMIC_IMPORT_MANIFEST().default();
+
+            console.debug(window.manifestData);
             window.manifest = await readManifest(window.manifestData);
             window.parent.currentTitle =
                 window.parent.currentTitle || window.manifest.name;

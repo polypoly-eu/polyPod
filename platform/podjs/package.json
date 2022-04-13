@@ -10,7 +10,7 @@
     "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
   "scripts": {
-    "tbuild": "tsc -d --emitDeclarationOnly --declarationDir build/types",
+    "dev": "tsc -d --emitDeclarationOnly --declarationDir build/types",
     "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "build-downstream": "../../build.js --start @polypoly-eu/podjs",
     "lint": "eslint src --ext .ts",
@@ -25,6 +25,7 @@
     "rdf-js": "^4.0.2"
   },
   "devDependencies": {
+    "@open-wc/building-rollup": "^2.0.1",
     "@polypoly-eu/rdf-spec": "file:../feature-api/api/rdf-spec",
     "@rollup/plugin-inject": "^4.0.4",
     "@rollup/plugin-replace": "^4.0.0",
@@ -32,6 +33,7 @@
     "@types/node-fetch": "^2.5.8",
     "@web/dev-server-rollup": "^0.3.15",
     "body-parser": "^1.19.0",
+    "deepmerge": "^4.2.2",
     "fast-check": "^2.11.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-define": "^1.0.1",
