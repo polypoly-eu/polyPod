@@ -1,3 +1,6 @@
+// #![cfg(target_os = "android")]
+#![allow(non_snake_case)]
+
 use jni::{
     objects::{JClass,JString},
     sys::{jbyteArray},
@@ -12,7 +15,7 @@ use crate::{
     }
 };
 
-pub unsafe extern "C" fn Java_org_coop_polypoly_core_JniApi_bootstrapCore(
+pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     env: JNIEnv,
     _: JClass,
     language_code: JString
@@ -26,7 +29,7 @@ pub unsafe extern "C" fn Java_org_coop_polypoly_core_JniApi_bootstrapCore(
     ).unwrap()
 }
 
-pub unsafe extern "C" fn Java_org_coop_polypoly_core_JniApi_parse_feature_manifest(
+pub extern "system" fn Java_coop_polypoly_core_JniApi_parseFeatureManifest(
     env: JNIEnv,
     _: JClass,
     json: JString
@@ -34,7 +37,7 @@ pub unsafe extern "C" fn Java_org_coop_polypoly_core_JniApi_parse_feature_manife
     env.byte_array_from_slice(
         &build_feature_manifest_parsing_response(
             read_jni_string(&env, json)
-                .and_then(parse_feature_manifest),
+            .and_then(|string| parse_feature_manifest(&string)),
         )
     ).unwrap()
 }

@@ -1,7 +1,3 @@
-export_dir_ios := export/ios
-swift_core := PolyPodCoreSwift
-ios_archs := aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios
-ios_targets := iPhone simulator
 build_type := $(if $(filter $(MODE), release),release,debug)
 
 .PHONY: setup_flatbuffers
@@ -11,6 +7,12 @@ setup_flatbuffers:
 .PHONY: generate_flatbuffers
 generate_flatbuffers: setup_flatbuffers
 	./flatbuffers_shared/generate_flatbuffers.sh
+
+# ========= XCFramework for iOS ========= #
+export_dir_ios := export/ios
+swift_core := PolyPodCoreSwift
+ios_archs := aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios
+ios_targets := iPhone simulator
 
 .PHONY: build_ios_xcframework
 build_ios_xcframework: generate_flatbuffers
@@ -61,4 +63,28 @@ define build_for_architecture
 		--lib --target $(1)
 endef
 
+# ========= Building for Android ========= #
+android_min_ver := 24
+jniLibs := ./PolyPodCoreAndroid/Core/src/main/jniLibs
+libName := libpolypod_core.so
+
+.PHONY: build_for_android
+build_for_android:
+	cargo ndk --target aarch64-linux-android --platform $(android_min_ver) -- build --release
+	cargo ndk --target armv7-linux-androideabi --platform $(android_min_ver) -- build --release
+	cargo ndk --target i686-linux-android --platform $(android_min_ver) -- build --release
+	cargo ndk --target x86_64-linux-android --platform $(android_min_ver) -- build --release
+
+	rm -rf $(jniLibs)
+
+	mkdir $(jniLibs)
+	mkdir $(jniLibs)/arm64-v8a
+	mkdir $(jniLibs)/armeabi-v7a
+	mkdir $(jniLibs)/x86
+	mkdir $(jniLibs)/x86_64
+
+	cp target/aarch64-linux-android/release/$(libName) $(jniLibs)/arm64-v8a/$(libName)
+	cp target/armv7-linux-androideabi/release/$(libName) $(jniLibs)/armeabi-v7a/$(libName)
+	cp target/i686-linux-android/release/$(libName) $(jniLibs)/x86/$(libName)
+	cp target/x86_64-linux-android/release/$(libName) $(jniLibs)/x86_64/$(libName)
 
