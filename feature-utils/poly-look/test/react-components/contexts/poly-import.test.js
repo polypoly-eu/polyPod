@@ -25,15 +25,6 @@ const mockComponent = (
   </MockParentContextProvider>
 );
 
-// let container;
-// beforeEach(async function () {
-// render(mockComponent);
-
-//   await waitFor(() => {
-//     container = render(mockComponent).container;
-//   });
-// });
-
 it("Creates a MockContext", async () => {
   const { container } = render(mockComponent);
   await waitFor(() => {
@@ -42,9 +33,7 @@ it("Creates a MockContext", async () => {
 });
 
 it("Reacts to changes in Pod file-storage", async () => {
-  const { container } = render(mockComponent);
-
-  setTimeout(await waitFor(() => {}), 100);
+  const { container } = await waitFor(() => render(mockComponent));
   const elements = container.getElementsByTagName("p");
   mockFiles.forEach((file, i) =>
     expect(elements.item(i).firstChild.textContent).toBe(file.id)
