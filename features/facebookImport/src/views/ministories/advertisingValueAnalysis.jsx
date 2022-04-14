@@ -2,6 +2,7 @@ import React from "react";
 import Story from "./story";
 
 import i18n from "../../i18n.js";
+import analysisKeys from "../../model/analysisKeys";
 import {
     AdvertisingValueMiniStorySummary,
     AdvertisingValueMiniStoryDetails,
@@ -10,8 +11,12 @@ import {
 class AdvertisingValueAnalysis extends Story {
     constructor(props) {
         super(props);
+        this._neededAnalyses = [
+            analysisKeys.randomAdInterests,
+            analysisKeys.numberInterests,
+            analysisKeys.displayData,
+        ];
     }
-    state = {};
 
     get title() {
         return i18n.t("advertisingValueMiniStory:title");
@@ -20,16 +25,16 @@ class AdvertisingValueAnalysis extends Story {
     renderSummary() {
         return (
             <AdvertisingValueMiniStorySummary
-                randomAdInterests={this.account.randomAdInterests}
-                numberInterests={this.account.numberInterests}
+                randomAdInterests={this.account[analysisKeys.randomAdInterests]}
+                numberInterests={this.account[analysisKeys.numberInterests]}
             />
         );
     }
     renderDetails() {
         return (
             <AdvertisingValueMiniStoryDetails
-                displayData={this.account.displayData}
-                numberInterests={this.account.numberInterests}
+                displayData={this.account[analysisKeys.displayData]}
+                numberInterests={this.account[analysisKeys.numberInterests]}
             />
         );
     }

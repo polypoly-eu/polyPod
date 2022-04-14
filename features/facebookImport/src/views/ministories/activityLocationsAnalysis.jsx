@@ -1,11 +1,13 @@
 import React from "react";
 
 import BasicDataCountTable from "../../components/basicDataCountTable/basicDataCountTable.jsx";
+import analysisKeys from "../../model/analysisKeys.js";
 import Story from "./story.jsx";
 
 class ActivityLocationsAnalysis extends Story {
     constructor(props) {
         super(props);
+        this._neededAnalyses = [analysisKeys.locationsData];
     }
     state = {};
     get title() {
@@ -17,7 +19,7 @@ class ActivityLocationsAnalysis extends Story {
                 title={
                     "Locations contained in session activities, like log-in or log-out."
                 }
-                items={this.account.locationsData}
+                items={this.account[analysisKeys.locationsData]}
             />
         );
     }

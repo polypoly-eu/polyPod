@@ -1,8 +1,8 @@
 import React from "react";
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
+import analysisKeys from "../../analysisKeys";
 
 export default class SesssionActivityLocationsAnalysis extends RootAnalysis {
-
     async analyze({ dataAccount }) {
         const locationByActivityCount = {};
         dataAccount.accountSessionActivities
@@ -22,13 +22,14 @@ export default class SesssionActivityLocationsAnalysis extends RootAnalysis {
                     : locationByActivityCount[location]++;
             });
 
-        this._locationsData = [];
+        const locationsData = [];
         for (const [location_index, count] of Object.entries(
             locationByActivityCount
         )) {
-            this._locationsData.push({ title: location_index, count });
+            locationsData.push({ title: location_index, count });
         }
 
-        this.active = this._locationsData.length > 0;
+        if (locationsData.length > 0)
+            dataAccount.analyses[analysisKeys.locationsData] = locationsData;
     }
 }
