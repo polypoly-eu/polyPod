@@ -1,9 +1,9 @@
-// import commonjs from "@rollup/plugin-commonjs";
-import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
 // import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
 import replace from "@rollup/plugin-replace";
 import typescript from "rollup-plugin-typescript2";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 
 import merge from "deepmerge";
 
@@ -16,7 +16,11 @@ const baseConfig = createBasicConfig();
 const pathResolve = (loc) => path.resolve(__dirname, loc);
 
 const externalManifestFile = path.resolve("./static/manifest.json");
-// const nodeModules = "node_modules/**";
+const nodeModules = "node_modules/**";
+
+// const endpointsJSONFile = pathResolve(
+//     "../../../../polyPod-config/endpoints.json"
+// );
 
 export default merge(baseConfig, [
     {
@@ -31,23 +35,25 @@ export default merge(baseConfig, [
                 format: "cjs",
             },
         ],
+        external: [externalManifestFile],
         plugins: [
-            typescript(),
+            nodeResolve([".ts"], { browser: true }),
+            typescript({ useTsconfigDeclarationDir: true }),
             replace({
-                DYNAMIC_IMPORT_MANIFEST: `() => import("${externalManifestFile}")`,
+                DYNAMIC_IMPORT_MANIFEST: `"${externalManifestFile}"`,
                 preventAssignment: true,
+                dest: "dist",
             }),
-            // commonjs({
-            //     include: nodeModules,
-            //     extensions: [".js", ".ts", ".json"],
-            // }),
+            commonjs({
+                include: nodeModules,
+                extensions: [".js", ".ts", ".mjs", ".json"],
+            }),
             // define({
             //     replacements: {
             //         "(typeof window).manifestData": "src/static/manifest.json",
             //     },
             // }),
             json(),
-            resolve(),
             // sucrase({
             //     exclude: [nodeModules],
             //     transforms: ["typescript"],
@@ -69,10 +75,12 @@ export default merge(baseConfig, [
                 // globals,
             },
         ],
+        external: [externalManifestFile],
         plugins: [
-            typescript(),
+            nodeResolve([".ts"], { browser: true }),
+            typescript({ useTsconfigDeclarationDir: true }),
             replace({
-                DYNAMIC_IMPORT_MANIFEST: `() => import("${externalManifestFile}")`,
+                DYNAMIC_IMPORT_MANIFEST: `"${externalManifestFile}"`,
                 preventAssignment: true,
             }),
             // define({
@@ -81,12 +89,11 @@ export default merge(baseConfig, [
             //     },
             // }),
             json(),
-            resolve(),
-            // commonjs({
-            //     transformMixedEsModules: true,
-            //     include: nodeModules,
-            //     extensions: [".js", ".ts", ".mjs", ".json"],
-            // }),
+            commonjs({
+                transformMixedEsModules: true,
+                include: nodeModules,
+                extensions: [".js", ".ts", ".mjs", ".json"],
+            }),
             // sucrase({
             //     exclude: [nodeModules],
             //     transforms: ["typescript"],

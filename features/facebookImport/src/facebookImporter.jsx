@@ -34,6 +34,9 @@ import Loading from "./components/loading/loading.jsx";
 
 import "./styles.css";
 
+console.debug("facebookImport");
+console.debug(window.manifestData);
+
 // import manifestData from "./static/manifest.json";
 // window.manifestData = manifestData;
 
