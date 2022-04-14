@@ -661,11 +661,11 @@ function createNavBarFrame(title: string): HTMLElement {
     return frame;
 }
 
-interface Module {
-    default: () => Record<string, unknown>;
-}
+// interface Module {
+//     default: () => Record<string, unknown>;
+// }
 
-type DynamicImportManifestType = () => Promise<Module>;
+// type DynamicImportManifestType = () => Promise<Module>;
 
 // DYNAMIC_IMPORT_MANIFEST points to the `manifest.json` file of the bundled dest
 // as it's setup in our rollup configuration
@@ -697,8 +697,11 @@ export class BrowserPod implements Pod {
             // );
 
             try {
-                const manifestData = await import(DYNAMIC_IMPORT_MANIFEST);
-                window.manifestData = manifestData;
+                const data = import("manifest.json").then(
+                    ({ default: myData }) => myData
+                );
+
+                window.manifestData = await data; //await import(DYNAMIC_IMPORT_MANIFEST);
                 console.debug(window.manifestData);
             } catch (error) {
                 console.warn(
@@ -720,14 +723,14 @@ export class BrowserPod implements Pod {
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    private moduleLoader(dynamicImport: DynamicImportManifestType) {
-        let _module: Module;
-        return async () => {
-            if (_module) return _module.default();
+    // private moduleLoader(dynamicImport: DynamicImportManifestType) {
+    //     let _module: Module;
+    //     return async () => {
+    //         if (_module) return _module.default();
 
-            const module = await dynamicImport();
-            _module = module;
-            return module.default();
-        };
-    }
+    //         const module = await dynamicImport();
+    //         _module = module;
+    //         return module.default();
+    //     };
+    // }
 }

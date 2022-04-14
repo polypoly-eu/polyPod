@@ -15,7 +15,7 @@ const baseConfig = createBasicConfig();
 
 const pathResolve = (loc) => path.resolve(__dirname, loc);
 
-const externalManifestFile = path.resolve("./static/manifest.json");
+const externalManifestFile = path.resolve("./manifest.json");
 const nodeModules = "node_modules/**";
 
 // const endpointsJSONFile = pathResolve(
@@ -38,7 +38,7 @@ export default merge(baseConfig, [
         external: [externalManifestFile],
         plugins: [
             nodeResolve([".ts"], { browser: true }),
-            typescript({ useTsconfigDeclarationDir: true }),
+            typescript(),
             replace({
                 DYNAMIC_IMPORT_MANIFEST: `"${externalManifestFile}"`,
                 preventAssignment: true,
@@ -78,7 +78,7 @@ export default merge(baseConfig, [
         external: [externalManifestFile],
         plugins: [
             nodeResolve([".ts"], { browser: true }),
-            typescript({ useTsconfigDeclarationDir: true }),
+            typescript(),
             replace({
                 DYNAMIC_IMPORT_MANIFEST: `"${externalManifestFile}"`,
                 preventAssignment: true,
