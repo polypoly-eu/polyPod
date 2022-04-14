@@ -2,10 +2,12 @@ import React from "react";
 
 import PostReactionTypesMiniStory from "../../components/postReactionTypesMiniStory/postReactionTypesMiniStory.jsx";
 import i18n from "../../i18n";
+import analysisKeys from "../../model/analysisKeys.js";
 
 class PostReactionTypesMinistory extends Story {
     constructor(props) {
         super(props);
+        this._neededAnalyses = [analysisKeys.reactionsTypeCountPairs];
     }
 
     get title() {
@@ -15,7 +17,9 @@ class PostReactionTypesMinistory extends Story {
     renderSummary() {
         return (
             <PostReactionTypesMiniStory
-                reactionData={this._reactionsTypeCountPairs}
+                reactionData={
+                    this.analyses[analysisKeys.reactionsTypeCountPairs]
+                }
             />
         );
     }
