@@ -7,7 +7,6 @@ class DataStructureMinistory extends Story {
     constructor(props) {
         super(props);
     }
-    state = {};
     get title() {
         return i18n.t("dataStructureMiniStory:title");
     }

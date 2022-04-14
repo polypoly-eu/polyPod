@@ -13,7 +13,6 @@ class ActivitiesMinistory extends Story {
         super(props);
         this._neededAnalyses = [analysisKeys.totalEvents];
     }
-    state = {};
 
     get title() {
         return i18n.t("activitiesMiniStory:title");

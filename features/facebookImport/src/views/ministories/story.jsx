@@ -1,9 +1,9 @@
 import { Component } from "react";
 
 class Story extends Component {
-    constructor(props) {
-        super(props);
-        this._analyses = props.analyses;
+    constructor({ analyses }) {
+        super();
+        this._analyses = analyses;
         this._neededAnalyses = [];
     }
 
@@ -17,6 +17,10 @@ class Story extends Component {
             if (!this.analyses[analysisKey]) return false;
         }
         return true;
+    }
+
+    set neededAnalyses(analyses) {
+        this._neededAnalyses = analyses;
     }
 
     get analyses() {

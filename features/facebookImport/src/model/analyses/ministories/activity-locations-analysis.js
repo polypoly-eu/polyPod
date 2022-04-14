@@ -1,4 +1,3 @@
-import React from "react";
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 import analysisKeys from "../../analysisKeys";
 

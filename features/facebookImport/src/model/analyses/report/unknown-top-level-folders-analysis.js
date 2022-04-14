@@ -1,7 +1,6 @@
-import React from "react";
-import BasicList from "../../../components/basicList/basicList.jsx";
 import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
 import topFolderNames from "../../../static/topFolders.js";
+import analysisKeys from "../../analysisKeys.js";
 import { relevantZipEntries } from "../../importers/utils/importer-util.js";
 
 async function extractTopLevelFolderNamesFromZip(zipFile) {
@@ -22,26 +21,14 @@ async function extractTopLevelFolderNamesFromZip(zipFile) {
 }
 
 export default class UnknownTopLevelFoldersAnalysis extends ReportAnalysis {
-    get title() {
-        return "Unknown top-level folders";
-    }
-
-    get reportData() {
-        return this._unknownFolderNames;
-    }
-
-    async analyze({ zipFile }) {
+    async analyze({ zipFile, dataAccount }) {
         const topLevelFolderNames = await extractTopLevelFolderNamesFromZip(
             zipFile
         );
 
-        this._unknownFolderNames = topLevelFolderNames.filter(
-            (each) => !topFolderNames.includes(each)
-        );
-        this.active = this._unknownFolderNames.length > 0;
-    }
-
-    render() {
-        return <BasicList items={this._unknownFolderNames} />;
+        dataAccount.analyses[analysisKeys.unknownFolderNames] =
+            topLevelFolderNames.filter(
+                (each) => !topFolderNames.includes(each)
+            );
     }
 }
