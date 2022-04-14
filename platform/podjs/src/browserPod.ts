@@ -439,7 +439,7 @@ class BrowserEndpoint implements Endpoint {
     ): Promise<void> {
         if (!approveEndpointFetch(endpointId))
             throw endpointErrorMessage("send", "User denied request");
-        const endpoint = getEndpoint(endpointId);
+        const endpoint = getEndpoint(endpointId as EndpointKeyId);
         if (!endpoint) {
             throw endpointErrorMessage("send", "Endpoint URL not set");
         }
@@ -462,7 +462,7 @@ class BrowserEndpoint implements Endpoint {
     ): Promise<string> {
         if (!approveEndpointFetch(endpointId))
             throw endpointErrorMessage("get", "User denied request");
-        const endpoint = getEndpoint(endpointId);
+        const endpoint = getEndpoint(endpointId as EndpointKeyId);
         if (!endpoint)
             throw endpointErrorMessage("get", "Endpoint URL not set");
         const NetworkResponse = await this.endpointNetwork.httpGet(
