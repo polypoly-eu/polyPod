@@ -12,8 +12,7 @@ import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
-//@ts-ignore json import via rollup -> not supported by ts
-import endpoints from "../../../../polyPod-config/endpoints.json";
+import endpointsJson from "../../../../polyPod-config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
 
 const NAV_FRAME_ID = "polyNavFrame";
@@ -399,12 +398,19 @@ class BrowserNetwork {
 
 interface EndpointInfo {
     url: string;
-    auth: string;
+    auth: null; // TODO: change this to an actual type when it's needed. It's null now on endpoints.json
     allowInsecure: boolean;
 }
 
-function getEndpoint(endpointId: string): EndpointInfo | null {
-    return endpoints[endpointId] || null;
+interface EndpointJSON {
+    polyPediaReport: EndpointInfo;
+    demoTest: EndpointInfo;
+}
+
+type EndpointKeyId = keyof EndpointJSON;
+
+function getEndpoint(endpointId: EndpointKeyId): EndpointInfo | null {
+    return (endpointsJson as EndpointJSON)[endpointId] || null;
 }
 
 function approveEndpointFetch(endpointId: string): boolean {
@@ -429,7 +435,7 @@ class BrowserEndpoint implements Endpoint {
     ): Promise<void> {
         if (!approveEndpointFetch(endpointId))
             throw endpointErrorMessage("send", "User denied request");
-        const endpoint = getEndpoint(endpointId);
+        const endpoint = getEndpoint(endpointId as EndpointKeyId);
         if (!endpoint) {
             throw endpointErrorMessage("send", "Endpoint URL not set");
         }
@@ -452,7 +458,7 @@ class BrowserEndpoint implements Endpoint {
     ): Promise<string> {
         if (!approveEndpointFetch(endpointId))
             throw endpointErrorMessage("get", "User denied request");
-        const endpoint = getEndpoint(endpointId);
+        const endpoint = getEndpoint(endpointId as EndpointKeyId);
         if (!endpoint)
             throw endpointErrorMessage("get", "Endpoint URL not set");
         const NetworkResponse = await this.endpointNetwork.httpGet(
