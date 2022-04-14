@@ -8,4 +8,8 @@ export default {
     reactionsTypeCountPair: "reactionsTypeCountPair",
     messagesThreadsData: "messagesThreadsData",
     messagesCount: "messagesCount",
+    onOffEvents: "onOffEvents",
+    companiesCount: "companiesCount",
+    companiesWithAdsCount: "companiesWithAdsCount",
+    commonAdvertisersData: "commonAdvertisersData",
 };
