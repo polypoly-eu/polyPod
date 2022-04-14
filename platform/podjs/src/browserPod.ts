@@ -428,14 +428,14 @@ function endpointErrorMessage(fetchType: string, errorlog: string): string {
 class BrowserEndpoint implements Endpoint {
     endpointNetwork = new BrowserNetwork();
     async send(
-        endpointId: string,
+        endpointId: EndpointKeyId,
         payload: string,
         contentType?: string,
         authToken?: string
     ): Promise<void> {
         if (!approveEndpointFetch(endpointId))
             throw endpointErrorMessage("send", "User denied request");
-        const endpoint = getEndpoint(endpointId as EndpointKeyId);
+        const endpoint = getEndpoint(endpointId);
         if (!endpoint) {
             throw endpointErrorMessage("send", "Endpoint URL not set");
         }
@@ -452,13 +452,13 @@ class BrowserEndpoint implements Endpoint {
     }
 
     async get(
-        endpointId: string,
+        endpointId: EndpointKeyId,
         contentType?: string,
         authToken?: string
     ): Promise<string> {
         if (!approveEndpointFetch(endpointId))
             throw endpointErrorMessage("get", "User denied request");
-        const endpoint = getEndpoint(endpointId as EndpointKeyId);
+        const endpoint = getEndpoint(endpointId);
         if (!endpoint)
             throw endpointErrorMessage("get", "Endpoint URL not set");
         const NetworkResponse = await this.endpointNetwork.httpGet(
