@@ -5,8 +5,12 @@ class Story extends Component {
         super(props);
     }
 
+    get label() {
+        return Story.LABELS.NONE;
+    }
+
     render() {
-        if (this.props.state === Story.state.DETAILS)
+        if (this.props.mode === Story.MODES.DETAILS)
             return this.renderDetails();
         return this.renderSummary();
     }

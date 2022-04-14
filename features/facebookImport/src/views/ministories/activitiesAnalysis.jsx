@@ -13,20 +13,24 @@ class ActivitiesAnalysis extends Story {
     }
     state = {};
 
-    get label() {
-        return RootAnalysis.Labels.NONE;
-    }
-
     get title() {
         return i18n.t("activitiesMiniStory:title");
     }
 
     renderSummary() {
-        return <ActivitiesMiniStorySummary totalEvents={this._totalEvents} />;
+        return (
+            <ActivitiesMiniStorySummary
+                totalEvents={this.account.totalEvents}
+            />
+        );
     }
 
     renderDetails() {
-        return <ActivitiesMiniStoryDetails totalEvents={this._totalEvents} />;
+        return (
+            <ActivitiesMiniStoryDetails
+                totalEvents={this.account.totalEvents}
+            />
+        );
     }
 }
 

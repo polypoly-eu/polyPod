@@ -17,7 +17,7 @@ class ActivityLocationsAnalysis extends Story {
                 title={
                     "Locations contained in session activities, like log-in or log-out."
                 }
-                items={this._locationsData}
+                items={this.account.locationsData}
             />
         );
     }
