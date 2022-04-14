@@ -1,10 +1,10 @@
 import React from "react";
 
-import i18n from "../../../i18n.js";
-import BaseInfoPopUp from "../../../components/baseInfoPopUp/baseInfoPopUp.jsx";
-import Infographic from "../../../components/infographic/infographic.jsx";
+import i18n from "../../i18n.js";
+import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
+import Infographic from "../../components/infographic/infographic.jsx";
 
-const MessagesScreen = () => {
+const MessagesInfoScreen = () => {
     const messagesInfoText = [
         <>
             <p>{i18n.t("messagesInfoScreen:text1")}</p>
@@ -32,4 +32,4 @@ const MessagesScreen = () => {
     return <BaseInfoPopUp infoChildren={messagesInfoText} />;
 };
 
-export default MessagesScreen;
+export default MessagesInfoScreen;
