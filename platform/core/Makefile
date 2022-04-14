@@ -66,10 +66,13 @@ endef
 # ========= Building for Android ========= #
 android_min_ver := 24
 jniLibs := ./PolyPodCoreAndroid/Core/src/main/jniLibs
+flatbuffers_lib := ./PolyPodCoreAndroid/Core/src/main
 libName := libpolypod_core.so
 
 .PHONY: build_for_android
-build_for_android:
+build_for_android: generate_flatbuffers
+	# Copy Flatbuffer classes
+	cp -a flatbuffers_shared/flatbuffers/java $(flatbuffers_lib)
 	cargo ndk --target aarch64-linux-android --platform $(android_min_ver) -- build --release
 	cargo ndk --target armv7-linux-androideabi --platform $(android_min_ver) -- build --release
 	cargo ndk --target i686-linux-android --platform $(android_min_ver) -- build --release
