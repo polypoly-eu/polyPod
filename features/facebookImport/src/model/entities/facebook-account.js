@@ -9,6 +9,7 @@ class FacebookAccount {
 
         this._name = "";
         this._preferredLanguage = [];
+        this._analyses = {};
 
         this._offFacebookCompanies = [];
         this._adInterests = [];
@@ -29,6 +30,10 @@ class FacebookAccount {
 
         this._messageThreadsGroup = new MessageThreadsGroup();
         this._relatedAccounts = new RelatedAccountsGroup();
+    }
+
+    get analyses() {
+        return this.analyses;
     }
 
     get importedFileNames() {

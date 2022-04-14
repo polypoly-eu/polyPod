@@ -25,4 +25,5 @@ export default {
     preferedLanguage: "preferedLanguage",
     polyPodRuntime: "polyPodRuntime",
     polyPodVersion: "polyPodVersion",
+    bubblesData: "bubblesData",
 };
