@@ -40,9 +40,9 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
             .filter((path) => photoRegexes.some((regex) => regex.test(path)));
     }
 
-    async analyze({ zipFile }) {
+    async analyze({ zipFile, dataAccount }) {
         const pictureEntries = await this._userPicturesFromExport(zipFile);
-        this._picturesCount = pictureEntries.length;
-        this.active = this._picturesCount >= PICTURES_THRESHOLD;
+        if (pictureEntries.length >= PICTURES_THRESHOLD)
+            dataAccount.analyses.picturesCount = pictureEntries.length;
     }
 }

@@ -6,10 +6,12 @@ import {
     ActivitiesMiniStorySummary,
     ActivitiesMiniStoryDetails,
 } from "../../components/activitiesMiniStory/activitiesMiniStory.jsx";
+import analysisKeys from "../../model/analysisKeys";
 
 class ActivitiesAnalysis extends Story {
     constructor(props) {
         super(props);
+        this._neededAnalyses = [analysisKeys.totalEvents];
     }
     state = {};
 
@@ -20,7 +22,7 @@ class ActivitiesAnalysis extends Story {
     renderSummary() {
         return (
             <ActivitiesMiniStorySummary
-                totalEvents={this.account.totalEvents}
+                totalEvents={this.analyses[analysisKeys.totalEvents]}
             />
         );
     }
@@ -28,7 +30,7 @@ class ActivitiesAnalysis extends Story {
     renderDetails() {
         return (
             <ActivitiesMiniStoryDetails
-                totalEvents={this.account.totalEvents}
+                totalEvents={this.analyses[analysisKeys.totalEvents]}
             />
         );
     }

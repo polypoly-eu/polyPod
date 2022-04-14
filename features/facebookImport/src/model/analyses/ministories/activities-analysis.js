@@ -1,8 +1,6 @@
-import React from "react";
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class ActivitiesAnalysis extends RootAnalysis {
-
     async analyze({ dataAccount }) {
         const activityDates = [
             ...dataAccount.followedPages,
@@ -59,7 +57,7 @@ export default class ActivitiesAnalysis extends RootAnalysis {
             groupedActivities.total++;
         });
 
-        this._totalEvents = groupedActivities;
-        this.active = groupedActivities.total > 0;
+        dataAccount.analyses.totalEvents =
+            groupedActivities.total > 0 && groupedActivities;
     }
 }

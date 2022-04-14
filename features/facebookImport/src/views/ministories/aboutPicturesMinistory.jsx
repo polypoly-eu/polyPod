@@ -10,10 +10,6 @@ class AboutPicturesMinistory extends Story {
     }
     state = {};
 
-    get label() {
-        return RootAnalysis.Labels.NONE;
-    }
-
     get title() {
         return i18n.t("picturesMiniStory:title");
     }

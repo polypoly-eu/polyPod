@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 
 class Story extends Component {
-    constructor(props) {
-        super(props);
+    constructor({ analyses }) {
+        this._analyses = analyses;
     }
 
     get label() {
         return Story.LABELS.NONE;
+    }
+
+    get active() {
+        return false;
+    }
+
+    get analyses() {
+        return this._analyses;
     }
 
     render() {
