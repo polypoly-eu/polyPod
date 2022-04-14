@@ -1,11 +1,7 @@
 import React from "react";
-import BasicDataCountTable from "../../../components/basicDataCountTable/basicDataCountTable.jsx";
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class SesssionActivityLocationsAnalysis extends RootAnalysis {
-    get title() {
-        return "Session Activity Locations";
-    }
 
     async analyze({ dataAccount }) {
         const locationByActivityCount = {};
@@ -34,16 +30,5 @@ export default class SesssionActivityLocationsAnalysis extends RootAnalysis {
         }
 
         this.active = this._locationsData.length > 0;
-    }
-
-    renderSummary() {
-        return (
-            <BasicDataCountTable
-                title={
-                    "Locations contained in session activities, like log-in or log-out."
-                }
-                items={this._locationsData}
-            />
-        );
     }
 }

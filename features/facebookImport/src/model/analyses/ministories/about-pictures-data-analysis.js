@@ -1,4 +1,3 @@
-import React from "react";
 import { relevantZipEntries } from "../../importers/utils/importer-util";
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
