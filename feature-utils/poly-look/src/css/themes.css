@@ -17,6 +17,10 @@
   color: var(--theme-secondary-color);
 }
 
+.poly-theme button {
+    border: none;
+}
+
 :root,
 .poly-theme-light {
   --theme-primary-color: var(--color-gray-50);

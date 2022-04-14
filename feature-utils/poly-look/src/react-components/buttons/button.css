@@ -1,0 +1,24 @@
+.poly-button {
+  font-family: var(--theme-font-medium);
+  font-size: 18px;
+  background-color: var(--theme-secondary-color);
+  padding: 4px 12px;
+  height: 48px;
+  max-width: 328px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--theme-primary-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.poly-button:active {
+  opacity: 0.88;
+}
+
+.poly-button-disabled {
+  opacity: 0.38;
+  pointer-events: none;
+}
