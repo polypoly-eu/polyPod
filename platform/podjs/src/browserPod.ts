@@ -398,7 +398,7 @@ class BrowserNetwork {
 
 interface EndpointInfo {
     url: string;
-    auth: null; // TODO: change this to an actual type when it's needed. It's null now on endpoints.json
+    auth: string;
     allowInsecure: boolean;
 }
 
