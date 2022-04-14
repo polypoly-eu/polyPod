@@ -3,7 +3,12 @@ import { useHistory } from "react-router-dom";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
-import { List, RoutingCard, Card } from "@polypoly-eu/poly-look";
+import {
+    List,
+    // RoutingCard,
+    // Card,
+    PolyImportContext,
+} from "@polypoly-eu/poly-look";
 import { PolyAnalysisContext } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
@@ -32,6 +37,8 @@ const ExploreView = () => {
     const { reportResult, setReportResult } = useContext(ImporterContext);
 
     const { fileAnalysis } = useContext(PolyAnalysisContext);
+    console.log(fileAnalysis);
+    const { account } = useContext(PolyImportContext);
 
     const history = useHistory();
     const exploreRef = useRef();
@@ -70,7 +77,7 @@ const ExploreView = () => {
         );
 
     const renderFileAnalyses = () => {
-        if (!fileAnalysis)
+        if (!account.analyses)
             return (
                 <Loading
                     loadingGif="./images/loading.gif"
@@ -80,33 +87,34 @@ const ExploreView = () => {
         return (
             <List>
                 <UnrecognizedCard />
-                {fileAnalysis.analyses.map((analysis, index) => {
-                    const content = (
-                        <>
-                            <h1>{analysis.title}</h1>
-                            {analysis.label !== null && (
-                                <label>
-                                    {i18n.t(
-                                        `explore:analysis.label.${analysis.label}`
-                                    )}
-                                </label>
-                            )}
-                            {analysis.renderSummary()}
-                        </>
-                    );
-                    return analysis.renderDetails ? (
-                        <RoutingCard
-                            key={index}
-                            history={history}
-                            route="/explore/details"
-                            stateChange={{ activeAnalysis: analysis }}
-                            buttonText={i18n.t("explore:details.button")}
-                        >
-                            {content}
-                        </RoutingCard>
-                    ) : (
-                        <Card key={index}>{content}</Card>
-                    );
+                {Object.entries(account.analyses).map(([key, value]) => {
+                    console.log(key, ": ", value);
+                    //             const content = (
+                    //                 <>
+                    //                     <h1>{analysis.title}</h1>
+                    //                     {analysis.label !== null && (
+                    //                         <label>
+                    //                             {i18n.t(
+                    //                                 `explore:analysis.label.${analysis.label}`
+                    //                             )}
+                    //                         </label>
+                    //                     )}
+                    //                     {analysis.renderSummary()}
+                    //                 </>
+                    //             );
+                    //             return analysis.renderDetails ? (
+                    //                 <RoutingCard
+                    //                     key={index}
+                    //                     history={history}
+                    //                     route="/explore/details"
+                    //                     stateChange={{ activeAnalysis: analysis }}
+                    //                     buttonText={i18n.t("explore:details.button")}
+                    //                 >
+                    //                     {content}
+                    //                 </RoutingCard>
+                    //             ) : (
+                    //                 <Card key={index}>{content}</Card>
+                    //             );
                 })}
             </List>
         );

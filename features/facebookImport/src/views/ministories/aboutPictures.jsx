@@ -10,7 +10,6 @@ class AboutPicturesMinistory extends Story {
         super(props);
         this._neededAnalyses = [analysisKeys.picturesCount];
     }
-    state = {};
 
     get title() {
         return i18n.t("picturesMiniStory:title");

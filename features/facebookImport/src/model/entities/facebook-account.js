@@ -33,7 +33,7 @@ class FacebookAccount {
     }
 
     get analyses() {
-        return this.analyses;
+        return this._analyses;
     }
 
     get importedFileNames() {
