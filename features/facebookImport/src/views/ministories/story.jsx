@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
 class Story extends Component {
-    constructor({ analyses }) {
-        this._analyses = analyses;
+    constructor(props) {
+        super(props);
+        this._analyses = props.analyses;
         this._neededAnalyses = [];
     }
 
