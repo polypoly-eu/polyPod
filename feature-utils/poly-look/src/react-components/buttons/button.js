@@ -1,12 +1,17 @@
 import React from "react";
 import "./button.css";
 
-const Button = ({ label, disabled = false, ...rest }) => {
+/**
+ * Basic button.
+ * In addition to `label` any valid button HTML attributes are allowed.
+ * The only exception are classes.
+ * @param {Object} props
+ * @param {string} [props.label] - Button text
+ */
+
+const Button = ({ label, ...otherProps }) => {
   return (
-    <button
-      className={`poly-button ${disabled ? "poly-button-disabled" : ""}`}
-      {...rest}
-    >
+    <button {...otherProps} className="poly-button">
       {label}
     </button>
   );

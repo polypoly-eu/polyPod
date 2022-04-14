@@ -17,8 +17,6 @@
 .poly-button:active {
   opacity: 0.88;
 }
-
-.poly-button-disabled {
+.poly-button:disabled {
   opacity: 0.38;
-  pointer-events: none;
 }
