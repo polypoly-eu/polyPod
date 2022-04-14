@@ -1,6 +1,6 @@
 import React from "react";
-import ListOfDetails from "../../components/listOfDetails/listOfDetails";
-import Story from "./story";
+import ListOfDetails from "../../components/listOfDetails/listOfDetails.jsx";
+import Story from "./story.jsx";
 import i18n from "../../i18n";
 import analysisKeys from "../../model/analysisKeys";
 

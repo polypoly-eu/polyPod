@@ -1,9 +1,9 @@
 import React from "react";
-import Story from "./story";
-import i18n from "../../../i18n";
+import Story from "./story.jsx";
+import i18n from "../../i18n";
 import analysisKeys from "../../model/analysisKeys";
 
-import PicturesMiniStory from "../../../components/picturesMiniStory/picturesMiniStory.jsx";
+import PicturesMiniStory from "../../components/picturesMiniStory/picturesMiniStory.jsx";
 
 class AboutPicturesMinistory extends Story {
     constructor(props) {

@@ -1,5 +1,5 @@
 import React from "react";
-import Story from "./story";
+import Story from "./story.jsx";
 import DataStructureMiniStory from "../../components/dataStructureMiniStory/dataStructureMiniStory.jsx";
 import i18n from "../../i18n.js";
 import analysisKeys from "../../model/analysisKeys";

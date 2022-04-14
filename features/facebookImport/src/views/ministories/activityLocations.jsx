@@ -9,7 +9,6 @@ class ActivityLocationsMinistory extends Story {
         super(props);
         this._neededAnalyses = [analysisKeys.locationsData];
     }
-    state = {};
     get title() {
         return "Session Activity Locations";
     }

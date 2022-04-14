@@ -1,8 +1,8 @@
 import React from "react";
 import analysisKeys from "../../model/analysisKeys";
-import Story from "./story";
+import Story from "./story.jsx";
 
-class dataImportingStatusMinistory extends Story {
+class DataImportingStatusMinistory extends Story {
     constructor(props) {
         super(props);
         this._neededAnalyses = [analysisKeys.importersData];
@@ -66,4 +66,4 @@ class dataImportingStatusMinistory extends Story {
     }
 }
 
-export default dataImportingStatusMinistory;
+export default DataImportingStatusMinistory;

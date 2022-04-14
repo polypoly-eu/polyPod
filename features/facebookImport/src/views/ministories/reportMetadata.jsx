@@ -1,8 +1,8 @@
-import Story from "./story";
+import Story from "./story.jsx";
 import React from "react";
 import analysisKeys from "../../model/analysisKeys";
 
-class ReportMetadatMinistory extends Story {
+class ReportMetadataMinistory extends Story {
     constructor(props) {
         super(props);
         this._neededAnalyses = [
@@ -72,4 +72,4 @@ class ReportMetadatMinistory extends Story {
     }
 }
 
-export default ReportMetadatMinistory;
+export default ReportMetadataMinistory;
