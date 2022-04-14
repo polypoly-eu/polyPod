@@ -3,7 +3,7 @@ import Story from "./story";
 import DataStructureMiniStory from "../../components/dataStructureMiniStory/dataStructureMiniStory.jsx";
 import i18n from "../../i18n.js";
 
-class DataStructureAnalysis extends Story {
+class DataStructureMinistory extends Story {
     constructor(props) {
         super(props);
     }
@@ -29,4 +29,4 @@ class DataStructureAnalysis extends Story {
     }
 }
 
-export default DataStructureAnalysis;
+export default DataStructureMinistory;

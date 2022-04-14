@@ -8,7 +8,7 @@ import {
 } from "../../components/activitiesMiniStory/activitiesMiniStory.jsx";
 import analysisKeys from "../../model/analysisKeys";
 
-class ActivitiesAnalysis extends Story {
+class ActivitiesMinistory extends Story {
     constructor(props) {
         super(props);
         this._neededAnalyses = [analysisKeys.totalEvents];
@@ -36,4 +36,4 @@ class ActivitiesAnalysis extends Story {
     }
 }
 
-export default ActivitiesAnalysis;
+export default ActivitiesMinistory;

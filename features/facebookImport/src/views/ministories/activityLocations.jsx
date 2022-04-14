@@ -4,7 +4,7 @@ import BasicDataCountTable from "../../components/basicDataCountTable/basicDataC
 import analysisKeys from "../../model/analysisKeys.js";
 import Story from "./story.jsx";
 
-class ActivityLocationsAnalysis extends Story {
+class ActivityLocationsMinistory extends Story {
     constructor(props) {
         super(props);
         this._neededAnalyses = [analysisKeys.locationsData];
@@ -25,4 +25,4 @@ class ActivityLocationsAnalysis extends Story {
     }
 }
 
-export default ActivityLocationsAnalysis;
+export default ActivityLocationsMinistory;

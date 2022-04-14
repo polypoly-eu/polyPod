@@ -8,7 +8,7 @@ import {
     AdvertisingValueMiniStoryDetails,
 } from "../../components/advertisingValueMiniStory/advertisingValueMiniStory.jsx";
 
-class AdvertisingValueAnalysis extends Story {
+class AdvertisingValueMinistory extends Story {
     constructor(props) {
         super(props);
         this._neededAnalyses = [
@@ -40,4 +40,4 @@ class AdvertisingValueAnalysis extends Story {
     }
 }
 
-export default AdvertisingValueAnalysis;
+export default AdvertisingValueMinistory;

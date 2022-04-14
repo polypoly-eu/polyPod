@@ -3,7 +3,7 @@ import ListOfDetails from "../../components/listOfDetails/listOfDetails";
 import Story from "./story";
 import i18n from "../../i18n";
 
-class ConnectedAdvertisersAnalysis extends Story {
+class ConnectedAdvertisersMinistory extends Story {
     constructor(props) {
         super(props);
     }
@@ -57,4 +57,4 @@ class ConnectedAdvertisersAnalysis extends Story {
     }
 }
 
-export default ConnectedAdvertisersAnalysis;
+export default ConnectedAdvertisersMinistory;
