@@ -6,4 +6,6 @@ export default {
     numberInterests: "numberInterests",
     displayData: "displayData",
     reactionsTypeCountPair: "reactionsTypeCountPair",
+    messagesThreadsData: "messagesThreadsData",
+    messagesCount: "messagesCount",
 };
