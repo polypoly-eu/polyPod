@@ -2,10 +2,12 @@ import React from "react";
 import ListOfDetails from "../../components/listOfDetails/listOfDetails";
 import Story from "./story";
 import i18n from "../../i18n";
+import analysisKeys from "../../model/analysisKeys";
 
 class ConnectedAdvertisersMinistory extends Story {
     constructor(props) {
         super(props);
+        this._neededAnalyses = [analysisKeys.connectedAdvertisersCount];
     }
     get title() {
         return i18n.t("connectedAdvertisersMiniStory:title");
@@ -20,11 +22,14 @@ class ConnectedAdvertisersMinistory extends Story {
                         fontFamily: "Jost Bold",
                     }}
                 >
-                    {this._connectedAdvertisersCount}
+                    {this.analyses[analysisKeys.connectedAdvertisersCount]}
                 </h2>
                 <p>
                     {i18n.t("connectedAdvertisersMiniStory:summary.text.1", {
-                        number_companies: this._connectedAdvertisersCount,
+                        number_companies:
+                            this.analyses[
+                                analysisKeys.connectedAdvertisersCount
+                            ],
                     })}
                 </p>
                 <p>{i18n.t("connectedAdvertisersMiniStory:summary.text.2")}</p>
@@ -47,10 +52,15 @@ class ConnectedAdvertisersMinistory extends Story {
             >
                 <p>
                     {i18n.t("connectedAdvertisersMiniStory:details.text", {
-                        number_companies: this._connectedAdvertisersCount,
+                        number_companies:
+                            this.analyses[
+                                analysisKeys.connectedAdvertisersCount
+                            ],
                     })}
                 </p>
-                <ListOfDetails list={this._connectedAdvertiserNames} />
+                <ListOfDetails
+                    list={this.analyses[analysisKeys.connectedAdvertisersCount]}
+                />
             </div>
         );
     }

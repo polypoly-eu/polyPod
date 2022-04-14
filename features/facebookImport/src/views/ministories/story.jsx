@@ -19,10 +19,6 @@ class Story extends Component {
         return true;
     }
 
-    set neededAnalyses(analyses) {
-        this._neededAnalyses = analyses;
-    }
-
     get analyses() {
         return this._analyses;
     }

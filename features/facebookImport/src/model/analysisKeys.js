@@ -12,6 +12,8 @@ export default {
     companiesCount: "companiesCount",
     companiesWithAdsCount: "companiesWithAdsCount",
     commonAdvertisersData: "commonAdvertisersData",
+    connectedAdvertisersCount: "connectedAdvertisersCount",
+    connectedAdvertiserNames: "connectedAdvertiserNames",
     postReactionsTypes: "postReactionsTypes",
     eventsTypeCountPairs: "eventsTypeCountPairs",
     missingKnownFileNames: "missingKnownFileNames",

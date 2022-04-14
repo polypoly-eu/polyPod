@@ -6,8 +6,9 @@ import {
     OnOffFacebookMiniStoryDetails,
 } from "../../components/onOffFacebookMiniStory/onOffFacebookMiniStory.jsx";
 import analysisKeys from "../../model/analysisKeys.js";
+import Story from "./story.jsx";
 
-class OnOffFacebookEventsMinistory extends Component {
+class OnOffFacebookEventsMinistory extends Story {
     constructor(props) {
         super(props);
         this._neededAnalyses = [
