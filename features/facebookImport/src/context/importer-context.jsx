@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
 
+import popUps from "../popUps";
+
 export const ImporterContext = React.createContext();
 
 function updatePodNavigation(pod, history, handleBack, location) {
@@ -31,6 +33,7 @@ export const ImporterProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
+    const [popUp, setPopUp] = useState(null);
 
     const history = useHistory();
     const location = useLocation();
@@ -41,7 +44,16 @@ export const ImporterProvider = ({ children }) => {
         setIsLoading(false);
     }
 
+    function createPopUp({ type, content }) {
+        setPopUp({ component: popUps[type], content });
+    }
+
+    function closePopUp() {
+        setPopUp(null);
+    }
+
     function handleBack() {
+        if (popUp) return setPopUp(null);
         history.length > 1 && history.goBack();
     }
 
@@ -71,6 +83,8 @@ export const ImporterProvider = ({ children }) => {
                 isLoading,
                 setIsLoading,
                 runWithLoadingScreen,
+                createPopUp,
+                closePopUp,
             }}
         >
             {children}
