@@ -6,24 +6,12 @@ import PostReactionInfoScreen from "./views/infoScreens/postReactionInfoScreen/p
 import OnOffFacebookInfoScreen from "./views/infoScreens/onOffFacebookInfoScreen/onOffFacebookInfoScreen.jsx";
 import OffFacebookInfoScreen from "./views/infoScreens/onOffFacebookInfoScreen/offFacebookInfoScreen.jsx";
 
-<Route exact path="/report/details/activities-info">
-                        <ActivitiesInfoScreen />
-                    </Route>
-                    <Route exact path="/report/details/messages-info">
-                        <MessagesInfoScreen />
-                    </Route>
-                    <Route exact path="/report/details/on-off-facebook-info">
-                        <OnOffFacebookInfoScreen />
-                    </Route>
-                    <Route exact path="/report/details/off-facebook-info">
-                        <OffFacebookInfoScreen />
-                    </Route>
-                     <Route exact path="/report/data-structure-info">
-                     <DataStructureInfoScreen />
-                 </Route>
-                 <Route exact path="/report/pictures-info">
-                     <PicturesInfoScreen />
-                 </Route>
-                 <Route exact path="/report/reaction-types-info">
-                     <PostReactionInfoScreen />
-                 </Route>
+export default {
+    "data-structure-info": DataStructureInfoScreen,
+    "activities-info": ActivitiesInfoScreen,
+    "messages-info": MessagesInfoScreen,
+    "pictures-info": PicturesInfoScreen,
+    "reaction-types-info": PostReactionInfoScreen,
+    "on-off-facebook-info": OnOffFacebookInfoScreen,
+    "off-facebook-info": OffFacebookInfoScreen,
+};
