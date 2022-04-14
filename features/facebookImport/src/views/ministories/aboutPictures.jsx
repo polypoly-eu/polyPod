@@ -8,7 +8,7 @@ import PicturesMiniStory from "../../../components/picturesMiniStory/picturesMin
 class AboutPicturesMinistory extends Story {
     constructor(props) {
         super(props);
-        this._neededAnalyses = [analysisKeys];
+        this._neededAnalyses = [analysisKeys.picturesCount];
     }
     state = {};
 
