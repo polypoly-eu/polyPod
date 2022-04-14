@@ -3,6 +3,7 @@ import React, { Component } from "react";
 class Story extends Component {
     constructor({ analyses }) {
         this._analyses = analyses;
+        this._neededAnalyses = [];
     }
 
     get label() {
@@ -10,7 +11,11 @@ class Story extends Component {
     }
 
     get active() {
-        return false;
+        if (!this._neededAnalyses) return true;
+        for (analysisKey of this._neededAnalyses) {
+            if (!this.analyses[analysisKey]) return false;
+        }
+        return true;
     }
 
     get analyses() {
