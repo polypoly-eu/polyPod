@@ -65,8 +65,8 @@ endef
 
 # ========= Building for Android ========= #
 android_min_ver := 24
-jniLibs := ./PolyPodCoreAndroid/Core/src/main/jniLibs
-flatbuffers_lib := ./PolyPodCoreAndroid/Core/src/main
+jniLibs := ./PolyPodCoreAndroid/src/main/jniLibs
+flatbuffers_lib := ./PolyPodCoreAndroid/src/main
 libName := libpolypod_core.so
 
 .PHONY: build_for_android

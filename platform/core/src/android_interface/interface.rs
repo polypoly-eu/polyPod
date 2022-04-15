@@ -1,4 +1,4 @@
-// #![cfg(target_os = "android")]
+#![cfg(target_os = "android")]
 #![allow(non_snake_case)]
 
 use jni::{
@@ -15,6 +15,7 @@ use crate::{
     }
 };
 
+#[no_mangle]
 pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     env: JNIEnv,
     _: JClass,
@@ -29,6 +30,7 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     ).unwrap()
 }
 
+#[no_mangle]
 pub extern "system" fn Java_coop_polypoly_core_JniApi_parseFeatureManifest(
     env: JNIEnv,
     _: JClass,
