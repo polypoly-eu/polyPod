@@ -15,7 +15,7 @@ const baseConfig = createBasicConfig();
 
 const pathResolve = (loc) => path.resolve(__dirname, loc);
 
-const externalManifestFile = path.resolve("./manifest.json");
+const externalManifestFile = path.resolve("dist/manifest.json");
 const nodeModules = "node_modules/**";
 
 // const endpointsJSONFile = pathResolve(
@@ -72,7 +72,10 @@ export default merge(baseConfig, [
             {
                 file: pathResolve("dist/pod.js"),
                 format: "iife",
-                // globals,
+            },
+            {
+                file: pathResolve("dist/pod.es.js"),
+                format: "esm",
             },
         ],
         external: [externalManifestFile],

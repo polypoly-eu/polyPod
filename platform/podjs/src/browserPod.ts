@@ -697,7 +697,7 @@ export class BrowserPod implements Pod {
             // );
 
             try {
-                const data = import("manifest.json").then(
+                const data = import(DYNAMIC_IMPORT_MANIFEST).then(
                     ({ default: myData }) => myData
                 );
 
