@@ -1,11 +1,10 @@
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
 }
 
 android {
     compileSdk 30
-    buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdk 24

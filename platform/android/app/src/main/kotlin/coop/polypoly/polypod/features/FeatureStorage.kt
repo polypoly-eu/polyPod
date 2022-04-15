@@ -1,6 +1,8 @@
 package coop.polypoly.polypod.features
 
+import FeatureManifest
 import android.content.Context
+import coop.polypoly.core.Core
 import coop.polypoly.polypod.Language
 import coop.polypoly.polypod.logging.LoggerFactory
 import java.io.File
@@ -53,20 +55,16 @@ class FeatureStorage {
     private fun readManifest(
         context: Context,
         content: ZipFile
-    ): FeatureManifest {
+    ): FeatureManifest? {
         val manifestEntry = content.getEntry("manifest.json")
         if (manifestEntry == null) {
             logger.warn("Missing manifest for '${content.name}'")
-            return FeatureManifest(
-                null, null, null, null, null, null, null, null
-            )
+            return null
         }
         val manifestString =
             content.getInputStream(manifestEntry).reader().readText()
-        return FeatureManifest.parse(
-            manifestString,
-            Language.determine(context)
-        )
+
+        return Core.parseFeatureManifest(manifestString).getOrNull()
     }
 
     private fun sortFeatures(

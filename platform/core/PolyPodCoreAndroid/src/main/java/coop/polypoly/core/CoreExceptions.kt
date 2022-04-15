@@ -17,10 +17,8 @@ class InvalidResultException(message: String) : Exception(message) {
     }
 }
 
-class InvalidFailureException(message: String) : Exception(message) {
-    companion object {
-        fun make(context: String): InvalidFailureException {
-            return InvalidFailureException("$context -> recevied failure result type without failure content")
-        }
-    }
-}
+class InvalidFailureContentException(context: String) :
+    Exception("$context -> received failure result type without content") {}
+
+class InvalidFeatureManifestContentException(context: String) :
+    Exception("$context -> received feature manifest result type without content") {}

@@ -20,6 +20,7 @@ class Core {
 
         @OptIn(ExperimentalUnsignedTypes::class)
         fun parseFeatureManifest(json: String): Result<FeatureManifest> {
+            val failureContext = "Feature Manifest Parsing"
             val bytes = JniApi().parseFeatureManifest(json)
             val response = FeatureManifestParsingResponse.getRootAsFeatureManifestParsingResponse(
                 ByteBuffer.wrap(bytes))
@@ -27,20 +28,18 @@ class Core {
             when (response.resultType) {
                 FeatureManifestParsingResult.FeatureManifest -> {
                     response.result(FeatureManifest())?.let {
-                        val manifest = it as FeatureManifest
-                        return Result.success(manifest)
+                        return Result.success(it as FeatureManifest)
                     }
-                    return Result.failure(InvalidFailureException("Feature Manifest Parsing"))
+                    return Result.failure(InvalidFeatureManifestContentException(failureContext))
                 }
                 FeatureManifestParsingResult.Failure -> {
                     response.result(Failure())?.let {
-                        val failure = it as Failure
-                        return Result.failure(InternalCoreException.make("Feature Manifest Parsing", failure))
+                        return Result.failure(InternalCoreException.make(failureContext, it as Failure))
                     }
-                    return Result.failure(InvalidFailureException.make("Feature Manifest Parsing"))
+                    return Result.failure(InvalidFailureContentException(failureContext))
                 }
                 else -> {
-                    return Result.failure(InvalidResultException.make("Feature Manifest Parsing", response.resultType.toString()))
+                    return Result.failure(InvalidResultException.make(failureContext, response.resultType.toString()))
                 }
             }
         }
