@@ -1,8 +1,7 @@
 package coop.polypoly.core
 
-import FeatureManifestParsingResult
-import FeatureManifest
 import Failure
+import FeatureManifest
 import java.nio.ByteBuffer
 
 class Core {
@@ -11,14 +10,13 @@ class Core {
             val bytes = JniApi().bootstrapCore(languageCode)
             val response = CoreBootstrapResponse.getRootAsCoreBootstrapResponse(
                 ByteBuffer.wrap(bytes))
-
             response.failure?.let {
                 return Result.failure(InternalCoreException.make("Core bootstrap", it))
             }
             return Result.success(Unit)
         }
 
-        @OptIn(ExperimentalUnsignedTypes::class)
+        @ExperimentalUnsignedTypes
         fun parseFeatureManifest(json: String): Result<FeatureManifest> {
             val failureContext = "Feature Manifest Parsing"
             val bytes = JniApi().parseFeatureManifest(json)

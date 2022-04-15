@@ -7,9 +7,9 @@ on:
         type: choice
         description: Where to upload
         options:
-        - all
-        - google-play
-        - app-store
+          - all
+          - google-play
+          - app-store
       draft:
         type: boolean
         description: Upload, but don't publish
@@ -61,7 +61,7 @@ jobs:
       - name: API and features - Build
         env:
           POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
-          POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
+          POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }} || ""
         run: ./build.js
       - name: Android - Test
         working-directory: platform/android
@@ -116,7 +116,7 @@ jobs:
       - name: API and features - Build
         env:
           POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
-          POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
+          POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }} || ""
         run: ./build.js
       - name: iOS - Lock Xcode version
         working-directory: platform/ios
@@ -132,7 +132,7 @@ jobs:
         env:
           POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64 }}
           POLYPOD_APPLE_IOS_APPSTORE_P12_PASS: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_PASS }}
-          POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64 }}
+          POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID }}
           POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64 }}
           POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
         run: make install_distribution_prerequisites
@@ -146,7 +146,6 @@ jobs:
         if: github.event.inputs.draft != 'true'
         working-directory: platform/ios
         env:
-          POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64 }}
-          POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64 }}
+          POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID }}
           POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
         run: make release_to_external_testers

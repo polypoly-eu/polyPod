@@ -1,4 +1,5 @@
 package coop.polypoly.core
+
 import Failure
 
 class InternalCoreException(message: String) : Exception(message) {

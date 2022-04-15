@@ -15,6 +15,7 @@
   font-size: 14px;
   font-family: "Jost Medium";
   line-height: 120%;
+  white-space: nowrap;
 }
 
 .tabs .tab-button.active {

@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { INITIAL_HISTORY_STATE } from "../../constants";
+import { INITIAL_HISTORY_STATE } from "@polypoly-eu/poly-look";
 
 const RouteButton = ({
     route,
