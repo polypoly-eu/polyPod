@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Core.bootstrapCore("en")
+        val result = Core.bootstrapCore("en")
         Authentication.authenticate(this) { success ->
             if (success) {
                 FeatureStorage().installBundledFeatures(this)
