@@ -1,2 +1,3 @@
 rootProject.name = 'polyPod-Android'
-include ':polyOut', ':app'
+include ':polyOut', ':app', ':PolyPodCoreAndroid'
+project(':PolyPodCoreAndroid').projectDir = new File("../core/PolyPodCoreAndroid")

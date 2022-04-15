@@ -1,13 +1,1 @@
-*.iml
-**/.gradle
-/local.properties
-.idea
-**/build
-/captures
-.externalNativeBuild
-.cxx
-
-# Generated files
-**/flatbuffers/*
-jniLibs
-FlatbuffersGenerated
+/build
