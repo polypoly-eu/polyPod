@@ -1,6 +1,6 @@
 import React from "react";
 import { withDesign } from "storybook-addon-designs";
-import IconButton from "../../../../src/react-components/buttons/iconButton";
+import { IconButton } from "../../../../src/react-components/buttons/";
 
 import "../../../../src/css/index.js";
 import "../fontFamily.css";
@@ -22,6 +22,12 @@ const Template = (args) => <IconButton {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   icon: "angleRight",
+};
+Default.parameters = {
+  design: {
+    type: "figma",
+    url: "https://www.figma.com/file/qIrr4QJrmYGqVQHQoCECux/polyPod-design-system?node-id=2891%3A2856",
+  },
 };
 
 export const Filled = Template.bind({});

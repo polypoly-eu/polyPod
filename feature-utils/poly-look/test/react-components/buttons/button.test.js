@@ -2,7 +2,7 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { Button } from "../../src/react-components";
+import { Button } from "../../../src/react-components";
 
 it("Creates a basic button", () => {
   const onClick = jest.fn();

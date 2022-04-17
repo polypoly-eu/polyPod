@@ -5,7 +5,7 @@ import { BlockLegend, LineLegend } from "./legends.jsx";
 import ErrorPopup from "./popUps/errorPopup/errorPopup.jsx";
 import { Card, ClickableCard, RoutingCard } from "./cards";
 import List from "./list.jsx";
-import Button from "./buttons/button.jsx";
+import { Button, IconButton } from "./buttons/";
 
 export {
   Chip,
@@ -20,4 +20,5 @@ export {
   RoutingCard,
   List,
   Button,
+  IconButton,
 };

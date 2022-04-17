@@ -1,6 +1,6 @@
 import React from "react";
 import { withDesign } from "storybook-addon-designs";
-import Button from "../../../../src/react-components/buttons/button";
+import { Button } from "../../../../src/react-components/buttons/";
 
 import "../../../../src/css/index.js";
 import "../fontFamily.css";

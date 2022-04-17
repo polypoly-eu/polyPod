@@ -21,6 +21,7 @@ import {
   RoutingCard,
   List,
   Button,
+  IconButton,
 } from "./react-components";
 import { INITIAL_HISTORY_STATE } from "./constants";
 export {
@@ -43,4 +44,5 @@ export {
   List,
   INITIAL_HISTORY_STATE,
   Button,
+  IconButton,
 };
