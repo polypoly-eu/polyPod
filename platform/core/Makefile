@@ -69,15 +69,17 @@ android_min_ver := 24
 jniLibs := ./PolyPodCoreAndroid/src/main/jniLibs
 flatbuffers_lib := ./PolyPodCoreAndroid/src/main
 libName := libpolypod_core.so
+android_targets := aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android
+android_archs := arm64-v8a armeabi-v7a x86_64 x86
 
 .PHONY: build_for_android
 build_for_android: generate_flatbuffers
 	# Copy Flatbuffer classes
 	cp -a flatbuffers_shared/flatbuffers/java $(flatbuffers_lib)
-	cargo ndk --target aarch64-linux-android --platform $(android_min_ver) -- build $(release_flag)
-	cargo ndk --target armv7-linux-androideabi --platform $(android_min_ver) -- build $(release_flag)
-	cargo ndk --target i686-linux-android --platform $(android_min_ver) -- build $(release_flag)
-	cargo ndk --target x86_64-linux-android --platform $(android_min_ver) -- build $(release_flag)
+
+	rustup target add $(android_targets)
+	# Build library for all targets
+	$(foreach target, $(android_targets),  $(call build_for_android_target,$(target));)
 
 	rm -rf $(jniLibs)
 
@@ -92,3 +94,6 @@ build_for_android: generate_flatbuffers
 	cp target/i686-linux-android/release/$(libName) $(jniLibs)/x86/$(libName)
 	cp target/x86_64-linux-android/release/$(libName) $(jniLibs)/x86_64/$(libName)
 
+define build_for_android_target
+	cargo ndk --target $(1) --platform $(android_min_ver) -- build $(release_flag)
+endef
