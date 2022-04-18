@@ -1,7 +1,7 @@
 import { DefaultPod, FS } from "@polypoly-eu/pod-api";
 import { IncomingMessage, ServerResponse, RequestListener, Server } from "http";
 import { once } from "events";
-import { dataset } from "@rdfjs/dataset";
+import factory from "@rdfjs/dataset";
 import { promises as fs } from "fs";
 import http from "http";
 import { RemoteServerPod } from "../../remote";
@@ -68,7 +68,7 @@ describe("Bootstrap (Electron)", () => {
     let server: Server;
 
     beforeEach(async () => {
-        pod = new DefaultPod(dataset(), fs as unknown as FS);
+        pod = new DefaultPod(factory.dataset(), fs as unknown as FS);
         const app = assets();
 
         server = http.createServer(app);

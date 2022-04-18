@@ -9,6 +9,13 @@ Logic shared across polyPod platforms - ios, android, wasm.
 
 ## Building
 
+### With `make`:
+- Set up and generate flatbuffers:
+          make generate_flatbuffers
+- Build the project:
+          cargo build
+
+### With `bash`:
 - Set up flatbuffers:
           ./flatbuffers_shared/setup_flatbuffers.sh
 

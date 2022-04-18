@@ -1,0 +1,13 @@
+{
+  "name": "@polypoly-eu/poly-analysis",
+  "main": "src/index.js",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c rollup.config.js"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "@polypoly-eu/poly-import": "file:../../feature-utils/poly-import"
+  }
+}

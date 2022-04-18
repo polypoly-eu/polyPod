@@ -1,6 +1,6 @@
 import React from "react";
 import DataStructureMiniStory from "../../../components/dataStructureMiniStory/dataStructureMiniStory.jsx";
-import RootAnalysis from "./root-analysis.js";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 import i18n from "../../../i18n.js";
 
 export default class DataStructureBubblesAnalysis extends RootAnalysis {
@@ -12,8 +12,8 @@ export default class DataStructureBubblesAnalysis extends RootAnalysis {
         return i18n.t("dataStructureMiniStory:title");
     }
 
-    async analyze({ facebookAccount }) {
-        this._bubblesData = facebookAccount.dataGroups.filter(
+    async analyze({ dataAccount }) {
+        this._bubblesData = dataAccount.dataGroups.filter(
             ({ count }) => count > 0
         );
 

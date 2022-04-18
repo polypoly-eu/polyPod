@@ -1,9 +1,10 @@
 import { PolyChart } from "@polypoly-eu/poly-look";
 import React, { useContext, useState } from "react";
+import { Redirect } from "react-router-dom";
+import { PolyImportContext } from "@polypoly-eu/poly-import";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
 import Loading from "../../components/loading/loading.jsx";
-import { ImporterContext } from "../../context/importer-context.jsx";
 import i18n from "../../i18n.js";
 import { useHistory } from "react-router";
 import { formatTime } from "../../utils/formatTime.js";
@@ -11,18 +12,12 @@ import { formatTime } from "../../utils/formatTime.js";
 import "./overview.css";
 
 const Overview = () => {
-    const {
-        facebookAccount,
-        files,
-        handleRemoveFile,
-        updateImportStatus,
-        importSteps,
-    } = useContext(ImporterContext);
+    const { files, account, handleRemoveFile } = useContext(PolyImportContext);
 
     const [showNewImportDialog, setShowNewImportDialog] = useState(false);
     const history = useHistory();
 
-    if (facebookAccount === null || files === null)
+    if (account === null || files === null)
         return (
             <Loading
                 message={i18n.t("overview:loading.data")}
@@ -34,9 +29,7 @@ const Overview = () => {
     const bubbleVizHeight = 400;
     const dataBubblesLightColor = "#f7fafc";
 
-    const bubbleData = facebookAccount.dataGroups.filter(
-        ({ count }) => count > 0
-    );
+    const bubbleData = account.dataGroups.filter(({ count }) => count > 0);
 
     bubbleData.forEach((d) => {
         d.value = d.count;
@@ -116,20 +109,7 @@ const Overview = () => {
                     </div>
                 </>
             ) : (
-                <div className="btn-holder">
-                    <RouteButton
-                        route="/import"
-                        className="btn primary"
-                        stateChange={{
-                            importStatus: importSteps.beginning,
-                        }}
-                        onClick={() =>
-                            updateImportStatus(importSteps.beginning)
-                        }
-                    >
-                        {i18n.t("overview:import.data")}
-                    </RouteButton>
-                </div>
+                <Redirect to={{ pathname: "/import" }} />
             )}
             {showNewImportDialog ? (
                 <PolypolyDialog
@@ -142,10 +122,8 @@ const Overview = () => {
                         text: i18n.t("overview:new.import.dialog.continue"),
                         onClick: async () => {
                             await handleRemoveFile(files[0].id);
-                            updateImportStatus(importSteps.import);
                         },
                         route: "/import",
-                        stateChange: { importStatus: importSteps.import },
                     }}
                 />
             ) : null}

@@ -2,7 +2,7 @@ import { client, Procedure, RequestPort, ResponsePort, server } from "../procedu
 import fc, { Arbitrary, IAsyncProperty } from "fast-check";
 import chai, { assert } from "chai";
 import chaiAsPromised from "chai-as-promised";
-import { recoverPromise, Resource } from "../util";
+import { triedPromise, Resource } from "../util";
 
 chai.use(chaiAsPromised);
 
@@ -21,7 +21,7 @@ function probeFunctionEquality<T, U>(
     gen: Arbitrary<T>
 ): IAsyncProperty<[T]> {
     return fc.asyncProperty(gen, async (t) => {
-        assert.deepEqual(await recoverPromise(f1(t)), await recoverPromise(f2(t)));
+        assert.deepEqual(await triedPromise(f1(t)), await triedPromise(f2(t)));
     });
 }
 

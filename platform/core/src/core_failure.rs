@@ -1,4 +1,4 @@
-use crate::flatbuffers_generated::failure_generated::failure::FailureCode;
+use crate::flatbuffers_generated::failure_generated::FailureCode;
 
 #[derive(Debug, Clone)]
 pub struct CoreFailure {

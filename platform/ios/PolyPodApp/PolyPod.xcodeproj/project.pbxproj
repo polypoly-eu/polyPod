@@ -98,6 +98,7 @@
 		9049ECA427BCE8B70059605A /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9049ECA327BCE8B70059605A /* CocoaLumberjackSwift */; };
 		904D4A7027905D5B00A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
 		904D4A712790633000A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
+		905C687F27F1EA26005A2819 /* PolyPodCoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 905C687E27F1EA26005A2819 /* PolyPodCoreSwift */; };
 		906E406C27A82C7F009015B7 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E406B27A82C7F009015B7 /* ActivityViewController.swift */; };
 		90E4088227D78E4E006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
 		90E4088327D79382006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
@@ -121,7 +122,6 @@
 		E96817F2274D592500206602 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96817F0274D032A00206602 /* Language.swift */; };
 		E97D325626307CE100A5A180 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325526307CE100A5A180 /* ColorExtensions.swift */; };
 		E97D3260263084C500A5A180 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325F263084C500A5A180 /* SettingsView.swift */; };
-		E97D3276263152CE00A5A180 /* FeatureManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D3275263152CE00A5A180 /* FeatureManifest.swift */; };
 		E97D327A263153C200A5A180 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D3279263153C200A5A180 /* NavigationBar.swift */; };
 		E97D32A82631BF7700A5A180 /* HTMLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D32A72631BF7700A5A180 /* HTMLView.swift */; };
 		E97D32B02631E68700A5A180 /* disableUserSelect.js in Resources */ = {isa = PBXBuildFile; fileRef = E97D32AF2631E68700A5A180 /* disableUserSelect.js */; };
@@ -134,7 +134,6 @@
 		E996EBD22756BBE900EAC9F7 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E996EBD12756BBE900EAC9F7 /* Log.swift */; };
 		E9B2203C263314AD005E8881 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B2F2625866800216B70 /* Feature.swift */; };
 		E9B2203D263314AD005E8881 /* FeatureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4689D2420D5F600E51B6D /* FeatureStorage.swift */; };
-		E9B2203E263314AD005E8881 /* FeatureManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D3275263152CE00A5A180 /* FeatureManifest.swift */; };
 		E9B22041263314DC005E8881 /* JSONSerializationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF46892241FBA7200E51B6D /* JSONSerializationExtensions.swift */; };
 		E9B22042263314DC005E8881 /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */; };
 		E9B22043263314DC005E8881 /* LocalizedStringKeyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370D4262EABFF006254C1 /* LocalizedStringKeyExtensions.swift */; };
@@ -236,6 +235,7 @@
 		901C0587278EE58700BC8364 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+PolyIn.swift"; sourceTree = "<group>"; };
 		904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchToMainQueue.swift; sourceTree = "<group>"; };
+		905C687C27F1E9C9005A2819 /* PolyPodCoreSwift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PolyPodCoreSwift; path = ../../core/PolyPodCoreSwift; sourceTree = "<group>"; };
 		906E406B27A82C7F009015B7 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		90E4088127D78E4E006AD362 /* DataProtection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtection.swift; sourceTree = "<group>"; };
 		E9040D4626F0A30E00A88593 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
@@ -256,7 +256,6 @@
 		E96817F0274D032A00206602 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		E97D325526307CE100A5A180 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		E97D325F263084C500A5A180 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		E97D3275263152CE00A5A180 /* FeatureManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureManifest.swift; sourceTree = "<group>"; };
 		E97D3279263153C200A5A180 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		E97D32A72631BF7700A5A180 /* HTMLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLView.swift; sourceTree = "<group>"; };
 		E97D32AF2631E68700A5A180 /* disableUserSelect.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = disableUserSelect.js; sourceTree = "<group>"; };
@@ -295,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9BE2909264BBD67003EC8AE /* Zip in Frameworks */,
+				905C687F27F1EA26005A2819 /* PolyPodCoreSwift in Frameworks */,
 				E9BE2906264BBAA0003EC8AE /* MessagePack in Frameworks */,
 				9049ECA427BCE8B70059605A /* CocoaLumberjackSwift in Frameworks */,
 			);
@@ -391,6 +391,7 @@
 				1AA6DE3124191C94008DB1B2 /* PolyPod */,
 				1A66F7732493743D00ED4308 /* PolyPodTests */,
 				E9545EB7273542CC001E8C7F /* PolyPodUITests */,
+				9063A7B427EB6DDB00955E49 /* Packages */,
 				1AA6DE3024191C94008DB1B2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -527,6 +528,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		9063A7B427EB6DDB00955E49 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				905C687C27F1E9C9005A2819 /* PolyPodCoreSwift */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		E9018EDF276370B500FDF34A /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -569,7 +578,6 @@
 			children = (
 				E9CF1B2F2625866800216B70 /* Feature.swift */,
 				1AF4689D2420D5F600E51B6D /* FeatureStorage.swift */,
-				E97D3275263152CE00A5A180 /* FeatureManifest.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -634,6 +642,7 @@
 				E9BE2905264BBAA0003EC8AE /* MessagePack */,
 				E9BE2908264BBD67003EC8AE /* Zip */,
 				9049ECA327BCE8B70059605A /* CocoaLumberjackSwift */,
+				905C687E27F1EA26005A2819 /* PolyPodCoreSwift */,
 			);
 			productName = PolyPod;
 			productReference = 1AA6DE2F24191C94008DB1B2 /* PolyPod.app */;
@@ -836,7 +845,6 @@
 				901C058C278F34A800BC8364 /* CoreDataStack.swift in Sources */,
 				E9B2203C263314AD005E8881 /* Feature.swift in Sources */,
 				E9B2203D263314AD005E8881 /* FeatureStorage.swift in Sources */,
-				E9B2203E263314AD005E8881 /* FeatureManifest.swift in Sources */,
 				1ABADBD224EBC5D500369791 /* FetchRequestInit.swift in Sources */,
 				E98BA80026D3CA2F0039E41E /* Network.swift in Sources */,
 				1ABADC0424EE710C00369791 /* Term+CoreDataProperties.swift in Sources */,
@@ -921,7 +929,6 @@
 				906E406C27A82C7F009015B7 /* ActivityViewController.swift in Sources */,
 				1A8F4875247E40C600089217 /* PostOffice.swift in Sources */,
 				1AF1178624BE22D50063EE37 /* FileStats.swift in Sources */,
-				E97D3276263152CE00A5A180 /* FeatureManifest.swift in Sources */,
 				1A00DFFB245AAC3F0049F3F7 /* MessageName.swift in Sources */,
 				E97D3260263084C500A5A180 /* SettingsView.swift in Sources */,
 				1A4C21F624A63E4C006CC1FD /* Literal+CoreDataClass.swift in Sources */,
@@ -1187,6 +1194,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4A6DFU3K82;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1214,6 +1222,7 @@
 				CODE_SIGN_IDENTITY = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4A6DFU3K82;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1354,6 +1363,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9049ECA227BCE8B70059605A /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
 			productName = CocoaLumberjackSwift;
+		};
+		905C687E27F1EA26005A2819 /* PolyPodCoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PolyPodCoreSwift;
 		};
 		E9BE2905264BBAA0003EC8AE /* MessagePack */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -28,7 +28,10 @@ Then set `sdk.dir` in your local `local.properties` and finally run:
 ## Testing
 
 With a device connected (real or emulated), execute the `connectedAndroidTest`
-task.
+task; the `test` task will run all the tests.
+
+> *Note*: testing includes the Java *and* Kotlin tests, although the former need
+> to be checked to see if they actually run.
 
 ### Linting
 

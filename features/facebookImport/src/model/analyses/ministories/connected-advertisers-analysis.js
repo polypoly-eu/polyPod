@@ -1,7 +1,7 @@
 import React from "react";
 
 import i18n from "../../../i18n.js";
-import RootAnalysis from "./root-analysis.js";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 import ListOfDetails from "../../../components/listOfDetails/listOfDetails.jsx";
 
@@ -14,13 +14,12 @@ export default class ConnectedAdvertisersAnalysis extends RootAnalysis {
         return RootAnalysis.Labels.NONE;
     }
 
-    async analyze({ facebookAccount }) {
+    async analyze({ dataAccount }) {
         this._connectedAdvertisersCount =
-            facebookAccount.connectedAdvertisers.length;
-        this._connectedAdvertiserNames =
-            facebookAccount.connectedAdvertisers.map(
-                (connectedAdvertiser) => connectedAdvertiser.name
-            );
+            dataAccount.connectedAdvertisers.length;
+        this._connectedAdvertiserNames = dataAccount.connectedAdvertisers.map(
+            (connectedAdvertiser) => connectedAdvertiser.name
+        );
         this.active = this._connectedAdvertisersCount > 0;
     }
 

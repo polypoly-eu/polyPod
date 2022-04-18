@@ -12,6 +12,16 @@ import {
     ImporterProvider,
     ImporterContext,
 } from "./context/importer-context.jsx";
+import {
+    PolyImportContext,
+    PolyImportProvider,
+} from "@polypoly-eu/poly-import";
+import { PolyAnalysisProvider } from "@polypoly-eu/poly-analysis";
+import { INITIAL_HISTORY_STATE } from "@polypoly-eu/poly-look";
+import { subAnalyses } from "./model/analysis";
+import { dataImporters } from "./model/importer.js";
+import FacebookAccount from "./model/entities/facebook-account.js";
+import i18n from "./i18n.js";
 
 import { ErrorPopup } from "@polypoly-eu/poly-look";
 import Overview from "./views/overview/overview.jsx";
@@ -34,38 +44,33 @@ import "./styles.css";
 import manifestData from "./static/manifest.json";
 window.manifestData = manifestData;
 
-import i18n from "./i18n.js";
-
 const FacebookImporter = () => {
-    const {
-        pod,
-        files,
-        navigationState,
-        importSteps,
-        globalError,
-        setGlobalError,
-    } = useContext(ImporterContext);
-    const importStatus = navigationState.importStatus;
+    const { pod, globalError, setGlobalError, isLoading } =
+        useContext(ImporterContext);
 
-    const renderSplash = () => {
-        return (
-            <Loading
-                loadingGif="./images/loading.gif"
-                message={i18n.t("common:loading")}
-            ></Loading>
-        );
-    };
+    const { files } = useContext(PolyImportContext);
 
     function determineRoute() {
-        if (importStatus == importSteps.loading || !files)
-            return renderSplash();
         if (files.length > 0)
-            return <Redirect to={{ pathname: "/overview" }} />;
+            return (
+                <Redirect
+                    to={{
+                        pathname: "/overview",
+                        state: INITIAL_HISTORY_STATE,
+                    }}
+                />
+            );
         else return <Redirect to={{ pathname: "/import" }} />;
     }
     return (
         <div className="facebook-importer poly-theme poly-theme-dark">
-            {pod ? (
+            {isLoading && (
+                <Loading
+                    loadingGif="./images/loading.gif"
+                    message={i18n.t("common:loading")}
+                ></Loading>
+            )}
+            {pod && files && (
                 <Switch>
                     <Route exact path="/">
                         {determineRoute()}
@@ -110,8 +115,6 @@ const FacebookImporter = () => {
                         <OffFacebookInfoScreen />
                     </Route>
                 </Switch>
-            ) : (
-                renderSplash()
             )}
             {globalError && (
                 <ErrorPopup
@@ -143,8 +146,19 @@ const FacebookImporterApp = () => {
     return (
         <Router history={history}>
             <ImporterProvider>
-                <div className="poly-nav-bar-separator-overlay" />
-                <FacebookImporter />
+                <PolyImportProvider
+                    parentContext={ImporterContext}
+                    dataImporters={dataImporters}
+                    DataAccount={FacebookAccount}
+                >
+                    <PolyAnalysisProvider
+                        parentContext={PolyImportContext}
+                        subAnalyses={subAnalyses}
+                    >
+                        <div className="poly-nav-bar-separator-overlay" />
+                        <FacebookImporter />
+                    </PolyAnalysisProvider>
+                </PolyImportProvider>
             </ImporterProvider>
         </Router>
     );

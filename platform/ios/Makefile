@@ -9,12 +9,23 @@ appstore_api_issuer_id = $(POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID)
 provisioning_profile_dir := ~/Library/MobileDevice/Provisioning\ Profiles
 provisioning_profile_file := cooppolypolypolypod__iOS_App_Store_Distribution.mobileprovision
 
+bundle_identifier := $(shell /usr/libexec/PlistBuddy -c "Print :ApplicationProperties:CFBundleIdentifier" "${archive_path}/Info.plist")
+build_version := $(shell /usr/libexec/PlistBuddy -c "Print :ApplicationProperties:CFBundleShortVersionString" "${archive_path}/Info.plist")
+build_number := $(shell /usr/libexec/PlistBuddy -c "Print :ApplicationProperties:CFBundleVersion" "${archive_path}/Info.plist")
+external_tester_group_ids := e03b0ddc-305d-40d5-8186-4dcc32250054
+app_store_connect_cmd := ../AppStoreConnect
+provisioning_profile_name := "coop.polypoly.polypod - iOS App Store Distribution"
+
 ifneq ($(shell which xcpretty),)
 xcodebuild := set -o pipefail && xcodebuild
 xcpretty := | xcpretty
 else
 xcodebuild := xcodebuild
 endif
+
+.PHONY: core
+core:
+	make -C ../core build_ios_xcframework
 
 .PHONY: lockxcodeversion
 lockxcodeversion:
@@ -68,8 +79,27 @@ upload_ipa: export_ipa
 		--apiKey $(appstore_api_key_id) \
 		--apiIssuer $(appstore_api_issuer_id)
 
+.PHONY: release_to_external_testers
+release_to_external_testers:
+	cd $(app_store_connect_cmd); \
+	swift run AppStoreConnectCMD \
+	 release-to-external-testers \
+	 $(appstore_api_issuer_id) \
+	 $(appstore_api_key_id) \
+	 ~/private_keys/AuthKey_$(appstore_api_key_id).p8 \
+	 $(bundle_identifier) \
+	 $(build_version) \
+	 $(build_number) \
+	 $(foreach group, $(external_tester_group_ids), $(group))
+
 .PHONY: install_distribution_prerequisites
 install_distribution_prerequisites:
+	# 1. Install App Store Connect API Key to be used along with `appstore_api_key_id` and `appstore_api_issuer_id`
+	#    to connect to App Store Connect
+	mkdir -p ~/private_keys
+	@printf "$$POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64" \
+		| base64 --decode > ~/private_keys/AuthKey_$(appstore_api_key_id).p8
+
 	# 1. Install Distribution certificate. xcodebuild will automatically
 	#    extract the app certificate from the keychain.
 	@printf "$$POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64" \
@@ -88,12 +118,12 @@ install_distribution_prerequisites:
 	#    automatically extract the profile from the Provisioning Profiles
 	#    directory
 	mkdir -p $(provisioning_profile_dir)
-	@printf "$$POLYPOD_APPLE_IOS_APPSTORE_PROVISION_PROFILE_BASE64" \
-		| base64 --decode > \
-		$(provisioning_profile_dir)/$(provisioning_profile_file)
-
-	# 3. App Store Connect API Key. altool will automatically use the private
-	#    key from the private_keys folder.
-	mkdir -p ~/private_keys
-	@printf "$$POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64" \
-		| base64 --decode > ~/private_keys/AuthKey_$(appstore_api_key_id).p8
+	cd $(app_store_connect_cmd); \
+	swift run AppStoreConnectCMD \
+	 get-provisioning-profile-content \
+	 $(appstore_api_issuer_id) \
+	 $(appstore_api_key_id) \
+	 ~/private_keys/AuthKey_$(appstore_api_key_id).p8 \
+     $(provisioning_profile_name) \
+	 | base64 --decode > \
+	 $(provisioning_profile_dir)/$(provisioning_profile_file)
