@@ -2,32 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 
 import "./sideSlider.css";
 
-let stPoz;
-let observer;
-let alphaInc = {
-  x: null,
-  y: null,
-};
-let width;
-
-const steps = {
-  in: "in",
-  interactive: "interactive",
-  out: "out",
-  outUp: "outUp",
-  outDone: "outDone",
-};
-const axes = {
-  x: "x",
-  y: "y",
-};
-const directions = {
-  right: "right",
-  left: "left",
-  up: "up",
-  down: "down",
-};
-
 /**
  *
  * Generic container for HTRT side sheets or any other component that
@@ -85,6 +59,23 @@ const SideSlider = ({
     contentsTransition: { transition: "transform" },
     noScroll: { overflowY: "hidden" },
   };
+  const steps = {
+    in: "in",
+    interactive: "interactive",
+    out: "out",
+    outUp: "outUp",
+    outDone: "outDone",
+  };
+  const axes = {
+    x: "x",
+    y: "y",
+  };
+  const directions = {
+    right: "right",
+    left: "left",
+    up: "up",
+    down: "down",
+  };
 
   const [step, updateStep] = useState(null);
   const [isPressing, updateMousePress] = useState(false);
@@ -102,39 +93,47 @@ const SideSlider = ({
     swipeY: null,
     direction: null,
   });
-  const [axis, setAxis] = useState("");
+  const [axis, updateAxis] = useState("");
   const [animationsDoneCount, updateAnimationsStatus] = useState(0);
+  const [stPoz, updateStPoz] = useState();
+  const [observer, updateObserver] = useState();
+  const [alphaInc, updateAlphaInc] = useState({
+    x: null,
+    y: null,
+  });
   let contentsRef = useRef();
 
   useEffect(() => {
     let lastChild = contentsRef.current.querySelector(lastChildSelector);
-    if (lastChild) observe(lastChild);
+    if (lastChild)
+      updateObserver(
+        new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              updateVerticalGesture("swipe");
+            } else {
+              updateVerticalGesture("scroll");
+            }
+          },
+          {
+            threshold: [1],
+          }
+        )
+      );
     else updateVerticalGesture("swipe");
 
-    width = window.innerWidth;
     updateContentsStyle({
       ...contentsStyle,
-      width: `calc(${width}px - ${leftDistance})`,
+      width: `calc(${window.innerWidth}px - ${leftDistance})`,
     });
 
     updateBackdropStyle(commonStyles.backdropOut);
   }, []);
 
-  function observe(elem) {
-    observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          updateVerticalGesture("swipe");
-        } else {
-          updateVerticalGesture("scroll");
-        }
-      },
-      {
-        threshold: [1],
-      }
-    );
-    observer.observe(elem);
-  }
+  useEffect(() => {
+    let lastChild = contentsRef.current.querySelector(lastChildSelector);
+    if (observer) observer.observe(lastChild);
+  }, [observer]);
 
   useEffect(() => {
     if (open) {
@@ -160,9 +159,12 @@ const SideSlider = ({
 
     if (step == steps.interactive) {
       if (!stPoz) {
-        stPoz = contentsRef.current.getBoundingClientRect();
-        alphaInc.x = stPoz.width / ((1 - alpha) * 100);
-        alphaInc.y = stPoz.height / ((1 - alpha) * 100);
+        let boundingRect = contentsRef.current.getBoundingClientRect();
+        updateStPoz(boundingRect);
+        updateAlphaInc({
+          x: boundingRect.width / ((1 - alpha) * 100),
+          y: boundingRect.height / ((1 - alpha) * 100),
+        });
       }
       updateAnimationsStatus(0);
       updateBackdropStyle({
@@ -327,7 +329,7 @@ const SideSlider = ({
     } else {
       axis = axes.y;
     }
-    setAxis(axis);
+    updateAxis(axis);
   }
 
   function determineDirection(x, y) {
@@ -380,7 +382,7 @@ const SideSlider = ({
       ...commonStyles.duration,
     });
     updateChildScroll({});
-    setAxis("");
+    updateAxis("");
     updateMovement({
       startX: null,
       startY: null,
