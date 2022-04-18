@@ -95,9 +95,9 @@ const SideSlider = ({
   });
   const [axis, updateAxis] = useState("");
   const [animationsDoneCount, updateAnimationsStatus] = useState(0);
-  const [stPoz, updateStPoz] = useState();
+  const [contentsDOMRect, updateContentsDOMRect] = useState();
   const [observer, updateObserver] = useState();
-  const [alphaInc, updateAlphaInc] = useState({
+  const [alphaIncDist, updateAlphaIncDist] = useState({
     x: null,
     y: null,
   });
@@ -158,10 +158,10 @@ const SideSlider = ({
     }
 
     if (step == steps.interactive) {
-      if (!stPoz) {
+      if (!contentsDOMRect) {
         let boundingRect = contentsRef.current.getBoundingClientRect();
-        updateStPoz(boundingRect);
-        updateAlphaInc({
+        updateContentsDOMRect(boundingRect);
+        updateAlphaIncDist({
           x: boundingRect.width / ((1 - alpha) * 100),
           y: boundingRect.height / ((1 - alpha) * 100),
         });
@@ -191,7 +191,9 @@ const SideSlider = ({
       updateContentsStyle({
         ...contentsStyle,
         ...commonStyles.duration,
-        transform: `translate(${leftDistance},${-1 * stPoz.height}px)`,
+        transform: `translate(${leftDistance},${
+          -1 * contentsDOMRect.height
+        }px)`,
       });
       updateBackdropStyle({
         ...commonStyles.backdropOut,
@@ -233,16 +235,20 @@ const SideSlider = ({
   }, [movement]);
 
   function applyStyle(distanceX, distanceY) {
-    let xValue = -1 * distanceX + stPoz.x;
+    let xValue = -1 * distanceX + contentsDOMRect.x;
     let yValue = -1 * distanceY;
 
     switch (axis) {
       case axes.x: {
         updateChildScroll(commonStyles.noScroll);
-        let alphaIncX = Math.floor(distanceX / alphaInc.x) * 0.1;
+        let alphaIncX = Math.floor(distanceX / alphaIncDist.x) * 0.1;
         updateContentsStyle({
           ...contentsStyle,
-          transform: `translateX(${clamp(xValue, stPoz.x, stPoz.right)}px)`,
+          transform: `translateX(${clamp(
+            xValue,
+            contentsDOMRect.x,
+            contentsDOMRect.right
+          )}px)`,
           transitionDuration: "0ms",
         });
         updateBackdropStyle({
@@ -260,13 +266,13 @@ const SideSlider = ({
         if (movement.direction == directions.up)
           updateChildScroll(commonStyles.noScroll);
 
-        let alphaIncY = Math.floor(distanceY / alphaInc.y) * -0.1;
+        let alphaIncY = Math.floor(distanceY / alphaIncDist.y) * -0.1;
 
         updateContentsStyle({
           ...contentsStyle,
           transform: `translate(${leftDistance},${clamp(
             yValue,
-            -1 * stPoz.height,
+            -1 * contentsDOMRect.height,
             0
           )}px)`,
           transitionDuration: "0ms",
@@ -349,7 +355,7 @@ const SideSlider = ({
       case axes.x: {
         if (
           movement.direction == directions.right &&
-          movement.currentX - movement.startX > stPoz.width / 2
+          movement.currentX - movement.startX > contentsDOMRect.width / 2
         ) {
           updateStep(steps.out);
         } else reset();
@@ -360,7 +366,7 @@ const SideSlider = ({
           verticalGesture == "swipe" &&
           movement.direction == directions.up &&
           Math.abs(movement.currentY - (movement.swipeY || movement.startY)) >
-            stPoz.height / 2
+            contentsDOMRect.height / 2
         ) {
           updateStep(steps.outUp);
         } else reset();
