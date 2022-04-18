@@ -71,6 +71,8 @@ flatbuffers_lib := ./PolyPodCoreAndroid/src/main
 libName := libpolypod_core.so
 android_targets := aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android
 android_archs := arm64-v8a armeabi-v7a x86_64 x86
+# This is lame, but didn't found any 
+pairs_count := $(shell for x in {1..$(words $(android_targets))}; do echo $$x; done)
 
 .PHONY: build_for_android
 build_for_android: generate_flatbuffers
@@ -85,11 +87,12 @@ build_for_android: generate_flatbuffers
 	mkdir ${jniLibs}
 	$(foreach arch, $(android_archs), mkdir $(jniLibs)/$(arch);)
 
-	cp target/aarch64-linux-android/release/$(libName) $(jniLibs)/arm64-v8a/$(libName)
-	cp target/armv7-linux-androideabi/release/$(libName) $(jniLibs)/armeabi-v7a/$(libName)
-	cp target/i686-linux-android/release/$(libName) $(jniLibs)/x86/$(libName)
-	cp target/x86_64-linux-android/release/$(libName) $(jniLibs)/x86_64/$(libName)
+	$(foreach index, $(pairs_count), $(call copy_android_lib,$(index));)
 
 define build_for_android_target
 	cargo ndk --target $(1) --platform $(android_min_ver) -- build $(release_flag)
+endef
+
+define copy_android_lib
+	cp target/$(word $(1),$(android_targets))/$(build_type)/$(libName) $(jniLibs)/$(word $(1),$(android_archs))/$(libName)
 endef
