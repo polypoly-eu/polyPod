@@ -79,15 +79,11 @@ build_for_android: generate_flatbuffers
 
 	rustup target add $(android_targets)
 	# Build library for all targets
-	$(foreach target, $(android_targets),  $(call build_for_android_target,$(target));)
+	$(foreach target, $(android_targets), $(call build_for_android_target,$(target));)
 
 	rm -rf $(jniLibs)
-
-	mkdir $(jniLibs)
-	mkdir $(jniLibs)/arm64-v8a
-	mkdir $(jniLibs)/armeabi-v7a
-	mkdir $(jniLibs)/x86
-	mkdir $(jniLibs)/x86_64
+	mkdir ${jniLibs}
+	$(foreach arch, $(android_archs), mkdir $(jniLibs)/$(arch);)
 
 	cp target/aarch64-linux-android/release/$(libName) $(jniLibs)/arm64-v8a/$(libName)
 	cp target/armv7-linux-androideabi/release/$(libName) $(jniLibs)/armeabi-v7a/$(libName)
