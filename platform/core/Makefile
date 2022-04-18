@@ -1,4 +1,5 @@
 build_type := $(if $(filter $(MODE), release),release,debug)
+release_flag := $(if $(filter $(MODE), release),--release)
 
 .PHONY: setup_flatbuffers
 setup_flatbuffers:
@@ -59,7 +60,7 @@ endif
 define build_for_architecture
 	rustup target add $(1)
 	cargo build \
-		$(if $(filter $(build_type), release), --release) \
+		$(release_flag) \
 		--lib --target $(1)
 endef
 
@@ -73,10 +74,10 @@ libName := libpolypod_core.so
 build_for_android: generate_flatbuffers
 	# Copy Flatbuffer classes
 	cp -a flatbuffers_shared/flatbuffers/java $(flatbuffers_lib)
-	cargo ndk --target aarch64-linux-android --platform $(android_min_ver) -- build --release
-	cargo ndk --target armv7-linux-androideabi --platform $(android_min_ver) -- build --release
-	cargo ndk --target i686-linux-android --platform $(android_min_ver) -- build --release
-	cargo ndk --target x86_64-linux-android --platform $(android_min_ver) -- build --release
+	cargo ndk --target aarch64-linux-android --platform $(android_min_ver) -- build $(release_flag)
+	cargo ndk --target armv7-linux-androideabi --platform $(android_min_ver) -- build $(release_flag)
+	cargo ndk --target i686-linux-android --platform $(android_min_ver) -- build $(release_flag)
+	cargo ndk --target x86_64-linux-android --platform $(android_min_ver) -- build $(release_flag)
 
 	rm -rf $(jniLibs)
 
