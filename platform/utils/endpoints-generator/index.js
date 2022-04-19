@@ -2,7 +2,7 @@ import endpoints from "./endpoints.js";
 import fs from "fs";
 
 const fallbackURL = "https://localhost:8000";
-const fallbackAuth = null;
+const fallbackAuth = "";
 
 const configPath = "../../../../polyPod-config";
 

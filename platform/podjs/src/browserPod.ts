@@ -12,8 +12,7 @@ import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
-//@ts-ignore json import via rollup -> not supported by ts
-import endpoints from "../../../../polyPod-config/endpoints.json";
+import endpointsJson from "../../../../polyPod-config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
 
 const NAV_FRAME_ID = "polyNavFrame";
@@ -403,8 +402,15 @@ interface EndpointInfo {
     allowInsecure: boolean;
 }
 
-function getEndpoint(endpointId: string): EndpointInfo | null {
-    return endpoints[endpointId] || null;
+interface EndpointJSON {
+    polyPediaReport: EndpointInfo;
+    demoTest: EndpointInfo;
+}
+
+type EndpointKeyId = keyof EndpointJSON;
+
+function getEndpoint(endpointId: EndpointKeyId): EndpointInfo | null {
+    return (endpointsJson as EndpointJSON)[endpointId] || null;
 }
 
 function approveEndpointFetch(endpointId: string): boolean {
@@ -422,7 +428,7 @@ function endpointErrorMessage(fetchType: string, errorlog: string): string {
 class BrowserEndpoint implements Endpoint {
     endpointNetwork = new BrowserNetwork();
     async send(
-        endpointId: string,
+        endpointId: EndpointKeyId,
         payload: string,
         contentType?: string,
         authToken?: string
@@ -446,7 +452,7 @@ class BrowserEndpoint implements Endpoint {
     }
 
     async get(
-        endpointId: string,
+        endpointId: EndpointKeyId,
         contentType?: string,
         authToken?: string
     ): Promise<string> {
