@@ -85,7 +85,7 @@ class LocalStoragePolyIn implements PolyIn {
 
     async has(...quads: RDF.Quad[]): Promise<boolean> {
         this.checkQuads(quads);
-        throw `Called with ${quads}, not implemented: «has»`;
+        return quads.some((quad) => this.store.includes(quad));
     }
 }
 

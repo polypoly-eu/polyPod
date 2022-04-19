@@ -62,7 +62,7 @@ export class PodSpec {
                 await assert.isRejected(polyIn.delete(quad), /default/);
             });
 
-            it("add/select", async () => {
+            it("add/match", async () => {
                 const { triple } = gens(dataFactory);
                 await fc.assert(
                     fc.asyncProperty(fc.array(triple), async (quads) => {
