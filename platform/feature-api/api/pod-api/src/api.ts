@@ -77,7 +77,6 @@ export interface PolyIn {
      * example failure of synchronization across multiple devices.
      *
      * @param quads the triples that should be stored in the Pod
-     * @returns a Promise that will be resolved to void.
      */
     add(...quads: RDF.Quad[]): Promise<void>;
 
@@ -85,7 +84,6 @@ export interface PolyIn {
      * Deletes the indicated triples
      *
      * @param quads the triples that should be removed from the Pod
-     * @returns a Promise that will be resolved to void.
      */
     delete(...quads: RDF.Quad[]): Promise<void>;
 
