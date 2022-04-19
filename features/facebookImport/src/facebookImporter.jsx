@@ -18,6 +18,7 @@ import {
     PolyImportContext,
     PolyImportProvider,
     ErrorPopup,
+    PolyAnalysisContext,
 } from "@polypoly-eu/poly-look";
 import { subAnalyses } from "./model/analysis";
 import { dataImporters } from "./model/importer.js";
@@ -49,6 +50,9 @@ const FacebookImporter = () => {
         useContext(ImporterContext);
 
     const { files } = useContext(PolyImportContext);
+    const { fileAnalysis } = useContext(PolyAnalysisContext);
+
+    console.log(fileAnalysis);
 
     function determineRoute() {
         if (files.length > 0)
