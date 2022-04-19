@@ -1,6 +1,4 @@
-#![cfg(target_os = "android")]
-#![allow(non_snake_case)]
-
+#[allow(non_snake_case)]
 use crate::{
     android_interface::utils::read_jni_string,
     core::{bootstrap, parse_feature_manifest},
@@ -9,7 +7,6 @@ use crate::{
         feature_manifest_fbs_mapping::build_feature_manifest_parsing_response,
     },
 };
-
 use jni::{
     objects::{JClass, JString},
     sys::jbyteArray,

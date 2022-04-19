@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalUnsignedTypes::class)
+
 package coop.polypoly.polypod.features
 
 import android.content.Context
@@ -47,12 +49,11 @@ class FeatureStorage {
 
     fun loadFeature(context: Context, fileName: String): Feature {
         val content = ZipFile(File(getFeaturesDir(context), fileName))
-        val manifest = readManifest(context, content)
+        val manifest = readManifest(content)
         return Feature(fileName, content, manifest)
     }
 
     private fun readManifest(
-        context: Context,
         content: ZipFile
     ): FeatureManifest? {
         val manifestEntry = content.getEntry("manifest.json")

@@ -42,17 +42,19 @@ impl CoreFailure {
         }
     }
 
+    #[cfg(target_os = "android")]
     pub fn failed_to_extract_java_string(message: String) -> Self {
         CoreFailure {
             code: FailureCode::FailedToExtractJavaString,
-            message: message,
+            message,
         }
     }
 
+    #[cfg(target_os = "android")]
     pub fn failed_to_convert_java_string(message: String) -> Self {
         CoreFailure {
             code: FailureCode::FailedToConvertJavaString,
-            message: message,
+            message,
         }
     }
 }

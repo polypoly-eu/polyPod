@@ -25,8 +25,10 @@ class MainActivity : AppCompatActivity() {
         if (bootstrapResult.isSuccess) {
             logger.info("Core is bootstraped!")
         } else {
-            logger.error("Failed to boostrap core",
-                         bootstrapResult.exceptionOrNull())
+            logger.error(
+                "Failed to boostrap core",
+                bootstrapResult.exceptionOrNull()
+            )
         }
         Authentication.authenticate(this) { success ->
             if (success) {
