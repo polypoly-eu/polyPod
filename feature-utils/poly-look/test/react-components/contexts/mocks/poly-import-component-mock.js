@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { PolyImportContext } from "../../../../src/react-components";
 
-const MockPolyImportComponent = () => {
+const PolyImportComponentFixture = () => {
   const { files, handleRemoveFile } = useContext(PolyImportContext);
 
   const handleRemoveFiles = () => {
@@ -21,4 +21,4 @@ const MockPolyImportComponent = () => {
     </div>
   );
 };
-export default MockPolyImportComponent;
+export default PolyImportComponentFixture;
