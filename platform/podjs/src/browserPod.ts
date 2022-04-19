@@ -58,7 +58,7 @@ class LocalStoragePolyIn implements PolyIn {
     }
 
     private checkQuads(quads: RDF.Quad[]): void {
-        for (let quad of quads)
+        for (const quad of quads)
             if (!quad.graph.equals(dataFactory.defaultGraph()))
                 throw new Error("Only default graph allowed");
     }
