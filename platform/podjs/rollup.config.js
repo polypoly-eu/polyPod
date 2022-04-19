@@ -15,7 +15,7 @@ const baseConfig = createBasicConfig();
 
 const pathResolve = (loc) => path.resolve(__dirname, loc);
 
-const externalManifestFile = path.resolve("dist/manifest.json");
+const externalManifestFile = "./manifest.json";
 const nodeModules = "node_modules/**";
 
 // const endpointsJSONFile = pathResolve(
