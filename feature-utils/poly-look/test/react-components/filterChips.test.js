@@ -19,6 +19,7 @@ const component = (
     onChipClick={mockedHandleClick}
     defaultActiveChips={[]}
     theme
+    exclusive
   />
 );
 
@@ -52,10 +53,15 @@ describe("Checks onChipClick event", () => {
   it("selecting a chip changes its state", () => {
     const { getByText } = render(component);
     for (const chipId of chipsContent) {
+      const exclusive = component.props.exclusive;
       const chipElement = getByText(chipId);
       expect(chipElement).not.toHaveClass("chip selected");
       fireEvent.click(chipElement, mockedHandleClick);
       expect(chipElement).toHaveClass("chip selected");
+      fireEvent.click(chipElement, mockedHandleClick);
+      exclusive
+        ? expect(chipElement).toHaveClass("chip selected")
+        : expect(chipElement).not.toHaveClass("chip selected");
     }
   });
 });
