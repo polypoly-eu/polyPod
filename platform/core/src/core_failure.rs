@@ -45,7 +45,7 @@ impl CoreFailure {
     pub fn failed_to_extract_java_string(message: String) -> Self {
         CoreFailure {
             code: FailureCode::FailedToExtractJavaString,
-            message: message
+            message: message,
         }
     }
 

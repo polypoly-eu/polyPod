@@ -4,7 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import coop.polypoly.core.*
+import coop.polypoly.core.Core
 import coop.polypoly.polypod.core.UpdateNotification
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
@@ -20,11 +20,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val bootstrapResult = Core.bootstrapCore(Language.determine(this@MainActivity))
+        val language = Language.determine(this@MainActivity)
+        val bootstrapResult = Core.bootstrapCore(language)
         if (bootstrapResult.isSuccess) {
             logger.info("Core is bootstraped!")
         } else {
-            logger.error("Failed to boostrap core", bootstrapResult.exceptionOrNull())
+            logger.error("Failed to boostrap core",
+                         bootstrapResult.exceptionOrNull())
         }
         Authentication.authenticate(this) { success ->
             if (success) {

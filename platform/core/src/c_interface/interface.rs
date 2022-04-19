@@ -1,12 +1,10 @@
 use crate::{
-    c_interface::{
-        utils::{create_byte_buffer, cstring_to_str, CByteBuffer},
-    },
+    c_interface::utils::{create_byte_buffer, cstring_to_str, CByteBuffer},
     core::{bootstrap, parse_feature_manifest},
     flatbuffers_mapping::{
         core_bootstrap_fbs_mapping::build_core_bootstrap_response,
         feature_manifest_fbs_mapping::build_feature_manifest_parsing_response,
-    }
+    },
 };
 use std::os::raw::c_char;
 
