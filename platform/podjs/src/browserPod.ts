@@ -206,6 +206,17 @@ class LocalStoragePolyOut implements PolyOut {
 
     stat(id: string): Promise<Stats> {
         return new Promise((resolve, reject) => {
+            if (id === "") {
+                resolve({
+                    getId: () => "",
+                    getSize: () => 0,
+                    getTime: () => "",
+                    getName: () => "",
+                    isFile: () => false,
+                    isDirectory: () => true,
+                });
+                return;
+            }
             const parts = id.split("/");
             if (parts.length > 3) {
                 const zipId = `${parts[0]}//${parts[2]}`;

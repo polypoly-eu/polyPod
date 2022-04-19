@@ -153,7 +153,7 @@ export class PodSpec {
                         fc.asyncProperty(pathGen, async (path) => {
                             await skipIfExists(path);
 
-                            await assert.isRejected(polyOut.readFile(path, { encoding: "utf-8" }));
+                            await assert.isRejected(polyOut.readFile(path));
                         })
                     );
                 });
