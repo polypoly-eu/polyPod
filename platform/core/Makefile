@@ -71,7 +71,7 @@ ndk_version := r22b
 
 .PHONY: android_libraries
 android_libraries: generate_flatbuffers
-	sh build_for_android.sh \
+	./build_for_android.sh \
 		--android_version $(android_version) \
 		--ndk_version $(ndk_version) \
 		--build_type $(build_type)
