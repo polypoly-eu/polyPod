@@ -1,7 +1,7 @@
 import commonjs from "@rollup/plugin-commonjs";
-// import sucrase from "@rollup/plugin-sucrase";
+import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
-import replace from "@rollup/plugin-replace";
+// import replace from "@rollup/plugin-replace";
 import typescript from "rollup-plugin-typescript2";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import merge from "deepmerge";
@@ -32,20 +32,20 @@ export default merge(baseConfig, [
         plugins: [
             nodeResolve([".ts"], { browser: true }),
             typescript(),
-            replace({
-                DYNAMIC_IMPORT_MANIFEST: `"${externalManifestFile}"`,
-                preventAssignment: true,
-                dest: "dist",
-            }),
+            // replace({
+            //     DYNAMIC_IMPORT_MANIFEST: `"${externalManifestFile}"`,
+            //     preventAssignment: true,
+            //     dest: "dist",
+            // }),
             commonjs({
                 include: nodeModules,
                 extensions: [".js", ".ts", ".mjs", ".json"],
             }),
             json(),
-            // sucrase({
-            //     exclude: [nodeModules],
-            //     transforms: ["typescript"],
-            // }),
+            sucrase({
+                exclude: [nodeModules],
+                transforms: ["typescript"],
+            }),
         ],
         context: "window",
     },
@@ -65,20 +65,20 @@ export default merge(baseConfig, [
         plugins: [
             nodeResolve([".ts"], { browser: true }),
             typescript(),
-            replace({
-                DYNAMIC_IMPORT_MANIFEST: `"${externalManifestFile}"`,
-                preventAssignment: true,
-            }),
+            // replace({
+            //     DYNAMIC_IMPORT_MANIFEST: `"${externalManifestFile}"`,
+            //     preventAssignment: true,
+            // }),
             json(),
             commonjs({
                 transformMixedEsModules: true,
                 include: nodeModules,
                 extensions: [".js", ".ts", ".mjs", ".json"],
             }),
-            // sucrase({
-            //     exclude: [nodeModules],
-            //     transforms: ["typescript"],
-            // }),
+            sucrase({
+                exclude: [nodeModules],
+                transforms: ["typescript"],
+            }),
         ],
         context: "window",
     },

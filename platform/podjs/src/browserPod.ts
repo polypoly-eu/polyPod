@@ -663,7 +663,7 @@ function createNavBarFrame(title: string): HTMLElement {
 
 // DYNAMIC_IMPORT_MANIFEST points to the `manifest.json` file of the bundled dest
 // as it's setup in our rollup configuration and will be replaced at build time.
-export const DYNAMIC_IMPORT_MANIFEST = "";
+// export const DYNAMIC_IMPORT_MANIFEST = "";
 
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
@@ -686,9 +686,21 @@ export class BrowserPod implements Pod {
     }
 
     private async fetchManifestJson(): Promise<void> {
+        const opts = {
+            method: "GET",
+            headers: {
+                mode: "no-cors",
+                "Content-Type": "application/json",
+                "Referrer-Policy": "strict-origin-when-cross-origin",
+                "Sec-Fetch-Mode": "cors",
+                "Sec-Fetch-Site": "same-origin",
+                "Sec-Fetch-Dest": "empty",
+            },
+        };
+
         const http = <T>(request: RequestInfo): Promise<T> => {
             return new Promise((resolve) => {
-                fetch(request)
+                fetch(request, opts)
                     .then((response) => response.json())
                     .then((body) => {
                         resolve(body);
@@ -699,7 +711,7 @@ export class BrowserPod implements Pod {
         try {
             // Fetch the manifest-data JSON
             const data = await http<Record<string, unknown>>(
-                `../src/static/${DYNAMIC_IMPORT_MANIFEST}`
+                "../src/static/manifest.json"
             );
             window.manifestData = data;
         } catch (error) {
