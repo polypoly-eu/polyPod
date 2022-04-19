@@ -5,7 +5,7 @@ import {
     MessagesMiniStorySummary,
 } from "../../components/messagesMiniStory/messagesMiniStory.jsx";
 import i18n from "../../i18n";
-import analysisKeys from "../../model/analysisKeys";
+import analysisKeys from "../../model/analyses/utils/analysisKeys";
 
 class MessagesMinistory extends Story {
     constructor(props) {

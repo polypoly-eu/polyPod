@@ -5,7 +5,7 @@ import {
     OnOffFacebookMiniStorySummary,
     OnOffFacebookMiniStoryDetails,
 } from "../../components/onOffFacebookMiniStory/onOffFacebookMiniStory.jsx";
-import analysisKeys from "../../model/analysisKeys.js";
+import analysisKeys from "../../model/analyses/utils/analysisKeys";
 import Story from "./story.jsx";
 
 class OnOffFacebookEventsMinistory extends Story {

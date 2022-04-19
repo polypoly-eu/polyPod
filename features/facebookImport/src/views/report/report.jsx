@@ -1,4 +1,4 @@
-import { PolyAnalysisContext } from "@polypoly-eu/poly-look";
+import { PolyImportContext } from "@polypoly-eu/poly-look";
 import React, { useContext, useState } from "react";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
@@ -9,8 +9,8 @@ import "./report.css";
 
 const ReportView = () => {
     const { setReportResult, handleBack } = useContext(ImporterContext);
-    const { report } = useContext(PolyAnalysisContext);
-    const unrecognizedData = report.unrecognizedData;
+    const { account } = useContext(PolyImportContext);
+    const unrecognizedData = account.reports.unrecognizedData;
     const [loading, setLoading] = useState(false);
 
     const handleSendReport = async () => {

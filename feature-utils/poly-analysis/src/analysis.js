@@ -128,18 +128,16 @@ export async function analyzeZip({
         })
     );
 
-    const successfullyExecutedAnalyses = analysesResults
-        .filter(({ status }) => status.isSuccess)
-        .map(({ analysis }) => analysis);
-    const activeGlobalAnalyses = successfullyExecutedAnalyses.filter(
-        (analysis) => !analysis.isForDataReport && analysis.active
+    // const successfullyExecutedAnalyses = analysesResults
+    //     .filter(({ status }) => status.isSuccess)
+    //     .map(({ analysis }) => analysis);
+    // const activeGlobalAnalyses = successfullyExecutedAnalyses.filter(
+    //     (analysis) => !analysis.isForDataReport && analysis.active
+    // );
+
+    dataAccount.reports.unrecognizedData = new UnrecognizedData(
+        analysesResults
     );
-
-    console.log(new UnrecognizedData(analysesResults));
-
-    return {
-        unrecognizedData: new UnrecognizedData(analysesResults),
-    };
 }
 
 export async function analyzeFile({ zipData, dataAccount, subAnalyses }) {

@@ -1,5 +1,5 @@
 import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
-import analysisKeys from "../../analysisKeys";
+import analysisKeys from "../utils/analysisKeys";
 
 export default class DataImportingStatusAnalysis extends ReportAnalysis {
     async analyze({ dataAccount }) {

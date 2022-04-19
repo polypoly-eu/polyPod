@@ -1,7 +1,7 @@
 import React from "react";
 
 import BasicDataCountTable from "../../components/basicDataCountTable/basicDataCountTable.jsx";
-import analysisKeys from "../../model/analysisKeys.js";
+import analysisKeys from "../../model/analyses/utils/analysisKeys";
 import Story from "./story.jsx";
 
 class ActivityLocationsMinistory extends Story {

@@ -9,7 +9,6 @@ import {
     Card,
     PolyImportContext,
 } from "@polypoly-eu/poly-look";
-import { PolyAnalysisContext } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
 

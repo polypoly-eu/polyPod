@@ -1,5 +1,5 @@
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
-import analysisKeys from "../../analysisKeys.js";
+import analysisKeys from "../utils/analysisKeys";
 import { groupOffFacebookEventsByType } from "../utils/on-off-facebook-events-utils.js";
 
 export default class OffFacebookEventsTypesAnalysis extends RootAnalysis {

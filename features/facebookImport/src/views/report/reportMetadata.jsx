@@ -1,6 +1,6 @@
-import Story from "./story.jsx";
+import Story from "../ministories/story.jsx";
 import React from "react";
-import analysisKeys from "../../model/analysisKeys";
+import analysisKeys from "../../model/analyses/utils/analysisKeys";
 
 class ReportMetadataMinistory extends Story {
     constructor(props) {

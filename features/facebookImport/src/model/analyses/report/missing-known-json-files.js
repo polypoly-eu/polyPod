@@ -1,7 +1,7 @@
 import { anonymizeJsonEntityPath } from "../../importers/utils/importer-util.js";
 import allStructure from "../../../static/allStructure";
 import { ReportAnalysis, jsonDataEntities } from "@polypoly-eu/poly-analysis";
-import analysisKeys from "../../analysisKeys.js";
+import analysisKeys from "../utils/analysisKeys";
 
 export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
     _knownJsonFiles() {

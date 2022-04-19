@@ -2,7 +2,7 @@ import React from "react";
 import Story from "./story.jsx";
 
 import i18n from "../../i18n.js";
-import analysisKeys from "../../model/analysisKeys";
+import analysisKeys from "../../model/analyses/utils/analysisKeys";
 import {
     AdvertisingValueMiniStorySummary,
     AdvertisingValueMiniStoryDetails,

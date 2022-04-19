@@ -2,7 +2,7 @@ import React from "react";
 import Story from "./story.jsx";
 
 import BasicDataCountTable from "../../components/postReactionTypesMiniStory/postReactionTypesMiniStory.jsx";
-import analysisKeys from "../../model/analysisKeys";
+import analysisKeys from "../../model/analyses/utils/analysisKeys";
 
 class OffFacebookEventsTypesMinistory extends Story {
     constructor(props) {

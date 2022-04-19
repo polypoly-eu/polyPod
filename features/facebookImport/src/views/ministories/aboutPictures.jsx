@@ -1,7 +1,7 @@
 import React from "react";
 import Story from "./story.jsx";
 import i18n from "../../i18n";
-import analysisKeys from "../../model/analysisKeys";
+import analysisKeys from "../../model/analyses/utils/analysisKeys";
 
 import PicturesMiniStory from "../../components/picturesMiniStory/picturesMiniStory.jsx";
 

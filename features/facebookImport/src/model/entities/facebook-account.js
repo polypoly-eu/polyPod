@@ -10,6 +10,7 @@ class FacebookAccount {
         this._name = "";
         this._preferredLanguage = [];
         this._analyses = {};
+        this._reports = {};
 
         this._offFacebookCompanies = [];
         this._adInterests = [];
@@ -34,6 +35,10 @@ class FacebookAccount {
 
     get analyses() {
         return this._analyses;
+    }
+
+    get reports() {
+        return this._reports;
     }
 
     get importedFileNames() {

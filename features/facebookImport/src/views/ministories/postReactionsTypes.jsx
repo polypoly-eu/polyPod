@@ -1,7 +1,7 @@
 import React from "react";
 import PostReactionTypesMiniStory from "../../components/postReactionTypesMiniStory/postReactionTypesMiniStory.jsx";
 import i18n from "../../i18n";
-import analysisKeys from "../../model/analysisKeys.js";
+import analysisKeys from "../../model/analyses/utils/analysisKeys";
 import Story from "./story.jsx";
 
 class PostReactionTypesMinistory extends Story {

@@ -1,6 +1,6 @@
 import commonStructure from "../../../static/commonStructure";
 import { ReportAnalysis, jsonDataEntities } from "@polypoly-eu/poly-analysis";
-import analysisKeys from "../../analysisKeys";
+import analysisKeys from "../utils/analysisKeys";
 
 export default class MissingCommonJSONFilesAnalysis extends ReportAnalysis {
     async analyze({ zipFile, dataAccount }) {

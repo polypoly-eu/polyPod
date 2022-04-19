@@ -6,7 +6,7 @@ import {
     ActivitiesMiniStorySummary,
     ActivitiesMiniStoryDetails,
 } from "../../components/activitiesMiniStory/activitiesMiniStory.jsx";
-import analysisKeys from "../../model/analysisKeys";
+import analysisKeys from "../../model/analyses/utils/analysisKeys";
 
 class ActivitiesMinistory extends Story {
     constructor(props) {

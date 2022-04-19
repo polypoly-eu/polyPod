@@ -1,6 +1,6 @@
 import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
 import topFolderNames from "../../../static/topFolders.js";
-import analysisKeys from "../../analysisKeys.js";
+import analysisKeys from "../utils/analysisKeys";
 import { relevantZipEntries } from "../../importers/utils/importer-util.js";
 
 async function extractTopLevelFolderNamesFromZip(zipFile) {

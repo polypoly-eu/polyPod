@@ -8,7 +8,7 @@ import {
 import { groupOffFacebookEventsByType } from "../utils/on-off-facebook-events-utils.js";
 
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
-import analysisKeys from "../../analysisKeys.js";
+import analysisKeys from "../utils/analysisKeys";
 
 const detailDisplayTypes = {
     onOff: "on-off",
