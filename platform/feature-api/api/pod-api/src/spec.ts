@@ -34,7 +34,11 @@ function encodeUtf8(string: string): Uint8Array {
  * access or provide a URI to a local httpbin service.
  */
 export class PodSpec {
-    constructor(private readonly pod: Pod, private readonly path: string) {
+    constructor(
+        private readonly pod: Pod,
+        private readonly path: string,
+        private readonly httpbinUrl: string
+    ) {
         chai.use(chaiAsPromised);
     }
 
