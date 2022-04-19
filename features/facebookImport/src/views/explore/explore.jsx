@@ -37,9 +37,7 @@ const UnrecognizedCard = () => {
 const ExploreView = () => {
     const { reportResult, setReportResult } = useContext(ImporterContext);
 
-    const { fileAnalysis } = useContext(PolyAnalysisContext);
     const { account } = useContext(PolyImportContext);
-    console.log(account);
     const history = useHistory();
     const exploreRef = useRef();
 
@@ -89,7 +87,6 @@ const ExploreView = () => {
                 <UnrecognizedCard />
                 {ministories.map((MinistoryClass, index) => {
                     const ministory = new MinistoryClass(account);
-                    console.log(ministory);
                     if (!ministory.active) return;
                     const content = (
                         <>
