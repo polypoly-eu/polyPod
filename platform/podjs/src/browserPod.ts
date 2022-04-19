@@ -675,32 +675,7 @@ export class BrowserPod implements Pod {
 
     constructor() {
         window.addEventListener("load", async () => {
-            console.debug(DYNAMIC_IMPORT_MANIFEST);
-            const http = <T>(request: RequestInfo): Promise<T> => {
-                return new Promise((resolve) => {
-                    fetch(request)
-                        .then((response) => response.json())
-                        .then((body) => {
-                            resolve(body);
-                        });
-                });
-            };
-            try {
-                // Fetch the manifest-data JSON
-                const data = await http<Record<string, unknown>>(
-                    DYNAMIC_IMPORT_MANIFEST
-                );
-                window.manifestData = data;
-            } catch (error) {
-                console.warn(
-                    `Unable to find feature manifest, navigation bar disabled.
-    To get the navigation bar, expose the manifest's content as
-    window.manifestData.`,
-                    error
-                );
-                return;
-            }
-
+            await this.fetchManifestJson();
             window.manifest = await readManifest(window.manifestData);
             window.parent.currentTitle =
                 window.parent.currentTitle || window.manifest.name;
@@ -708,5 +683,33 @@ export class BrowserPod implements Pod {
             document.body.prepend(frame);
             document.title = window.manifest.name;
         });
+    }
+
+    private async fetchManifestJson(): Promise<void> {
+        const http = <T>(request: RequestInfo): Promise<T> => {
+            return new Promise((resolve) => {
+                fetch(request)
+                    .then((response) => response.json())
+                    .then((body) => {
+                        resolve(body);
+                    });
+            });
+        };
+
+        try {
+            // Fetch the manifest-data JSON
+            const data = await http<Record<string, unknown>>(
+                `../src/static/${DYNAMIC_IMPORT_MANIFEST}`
+            );
+            window.manifestData = data;
+        } catch (error) {
+            console.warn(
+                `Unable to find feature manifest, navigation bar disabled.
+    To get the navigation bar, expose the manifest's content as
+    window.manifestData.`,
+                error
+            );
+            return;
+        }
     }
 }

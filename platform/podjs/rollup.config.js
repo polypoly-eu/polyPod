@@ -12,7 +12,7 @@ const baseConfig = createBasicConfig();
 
 const pathResolve = (loc) => path.resolve(__dirname, loc);
 
-const externalManifestFile = "../static/manifest.json";
+const externalManifestFile = "manifest.json";
 const nodeModules = "node_modules/**";
 
 export default merge(baseConfig, [
