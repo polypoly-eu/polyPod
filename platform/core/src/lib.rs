@@ -4,6 +4,7 @@ mod core_failure;
 mod feature_manifest_parsing;
 mod flatbuffers_mapping;
 #[cfg(target_os = "android")]
+/// cbindgen:ignore
 mod android_interface;
 // Disable any checks agains the generated code
 #[rustfmt::skip]

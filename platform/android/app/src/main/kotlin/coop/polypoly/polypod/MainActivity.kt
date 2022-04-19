@@ -7,15 +7,25 @@ import androidx.appcompat.app.AppCompatActivity
 import coop.polypoly.core.*
 import coop.polypoly.polypod.core.UpdateNotification
 import coop.polypoly.polypod.features.FeatureStorage
+import coop.polypoly.polypod.logging.LoggerFactory
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        @Suppress("JAVA_CLASS_ON_COMPANION")
+        private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
+    }
 
     private var onboardingShown = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val result = Core.bootstrapCore("en")
+        val bootstrapResult = Core.bootstrapCore(Language.determine(this@MainActivity))
+        if (bootstrapResult.isSuccess) {
+            logger.info("Core is bootstraped!")
+        } else {
+            logger.error("Failed to boostrap core", bootstrapResult.exceptionOrNull())
+        }
         Authentication.authenticate(this) { success ->
             if (success) {
                 FeatureStorage().installBundledFeatures(this)

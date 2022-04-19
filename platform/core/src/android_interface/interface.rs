@@ -15,6 +15,9 @@ use crate::{
     }
 };
 
+/// Bootstrap core with the given configuration:
+/// - language_code: User's locale language code.
+/// Returns a flatbuffer byte array with core_bootstrap_response.
 #[no_mangle]
 pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     env: JNIEnv,
@@ -30,6 +33,9 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     ).unwrap()
 }
 
+/// Parse the given feature maniest json.
+/// - json: Feature manifest json string to be parsed.
+/// Returns a flatbuffer byte array with feature_manifest_response.
 #[no_mangle]
 pub extern "system" fn Java_coop_polypoly_core_JniApi_parseFeatureManifest(
     env: JNIEnv,

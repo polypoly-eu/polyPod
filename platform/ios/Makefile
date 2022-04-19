@@ -79,6 +79,19 @@ upload_ipa: export_ipa
 		--apiKey $(appstore_api_key_id) \
 		--apiIssuer $(appstore_api_issuer_id)
 
+.PHONY: release_to_external_testers
+release_to_external_testers:
+	cd $(app_store_connect_cmd); \
+	swift run AppStoreConnectCMD \
+	 release-to-external-testers \
+	 $(appstore_api_issuer_id) \
+	 $(appstore_api_key_id) \
+	 ~/private_keys/AuthKey_$(appstore_api_key_id).p8 \
+	 $(bundle_identifier) \
+	 $(build_version) \
+	 $(build_number) \
+	 $(foreach group, $(external_tester_group_ids), $(group))
+
 .PHONY: install_distribution_prerequisites
 install_distribution_prerequisites:
 	# 1. Install App Store Connect API Key to be used along with `appstore_api_key_id` and `appstore_api_issuer_id`

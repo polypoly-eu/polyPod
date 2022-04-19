@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalUnsignedTypes::class)
+
 package coop.polypoly.polypod.features
 
 import FeatureManifest
@@ -37,9 +39,16 @@ class Feature(
             }
         }
 
-    fun findUrl(target: String): String? = when (target) {
-//        in manifest?.keys ?: listOf() -> manifest.links?.get(target)
-//        in manifest.links?.values ?: listOf() -> target
-        else -> null
+    fun findUrl(target: String): String? {
+        return manifest?.let {
+            for (index in 0..it.linksLength) {
+                it.links(index)?.let { link ->
+                    if (link.name == target || link.url == target) {
+                        return link.url
+                    }
+                }
+            }
+            return null
+        }
     }
 }
