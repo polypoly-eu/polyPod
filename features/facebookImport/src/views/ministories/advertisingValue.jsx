@@ -12,9 +12,8 @@ class AdvertisingValueMinistory extends Story {
     constructor(props) {
         super(props);
         this._neededAnalyses = [
-            analysisKeys.randomAdInterests,
             analysisKeys.numberInterests,
-            analysisKeys.displayData,
+            analysisKeys.sortedAdInterests,
         ];
     }
 
@@ -23,18 +22,28 @@ class AdvertisingValueMinistory extends Story {
     }
 
     renderSummary() {
+        const randomAdInterests = new Set();
+        const numberInterests = this.analyses[analysisKeys.numberInterests];
+        const adInterests = this.analyses[analysisKeys.sortedAdInterests];
+        if (numberInterests > 0) {
+            while (randomAdInterests.size < Math.min(3, numberInterests)) {
+                randomAdInterests.add(
+                    adInterests[Math.floor(Math.random() * adInterests.length)]
+                );
+            }
+        }
         return (
             <AdvertisingValueMiniStorySummary
-                randomAdInterests={this.account[analysisKeys.randomAdInterests]}
-                numberInterests={this.account[analysisKeys.numberInterests]}
+                randomAdInterests={[...randomAdInterests]}
+                numberInterests={this.analyses[analysisKeys.numberInterests]}
             />
         );
     }
     renderDetails() {
         return (
             <AdvertisingValueMiniStoryDetails
-                displayData={this.account[analysisKeys.displayData]}
-                numberInterests={this.account[analysisKeys.numberInterests]}
+                displayData={this.analyses[analysisKeys.sortedAdInterests]}
+                numberInterests={this.analyses[analysisKeys.numberInterests]}
             />
         );
     }

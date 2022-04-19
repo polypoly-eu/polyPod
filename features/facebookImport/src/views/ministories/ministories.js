@@ -15,15 +15,15 @@ import ReportMetadataMinistory from "./reportMetadata.jsx";
 import UnknownTopLevelFoldersMinistory from "./unknownTopLevelFolders.jsx";
 
 const ministories = [
-    AboutPicturesMinistory,
+    DataStructureMinistory,
     ActivitiesMinistory,
+    AdvertisingValueMinistory,
+    AboutPicturesMinistory,
     ActivityLocationsMinistory,
     PostReactionTypesMinistory,
     OnOffFacebookEventsMinistory,
     OffFacebookEventsTypesMinistory,
     MessagesMinistory,
-    DataStructureMinistory,
-    AdvertisingValueMinistory,
     ConnectedAdvertisersMinistory,
 ];
 export default ministories;

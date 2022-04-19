@@ -7,7 +7,7 @@ import analysisKeys from "../../model/analysisKeys";
 class ConnectedAdvertisersMinistory extends Story {
     constructor(props) {
         super(props);
-        this._neededAnalyses = [analysisKeys.connectedAdvertisersCount];
+        this._neededAnalyses = [analysisKeys.connectedAdvertiserNames];
     }
     get title() {
         return i18n.t("connectedAdvertisersMiniStory:title");
@@ -22,14 +22,16 @@ class ConnectedAdvertisersMinistory extends Story {
                         fontFamily: "Jost Bold",
                     }}
                 >
-                    {this.analyses[analysisKeys.connectedAdvertisersCount]}
+                    {
+                        this.analyses[analysisKeys.connectedAdvertiserNames]
+                            .length
+                    }
                 </h2>
                 <p>
                     {i18n.t("connectedAdvertisersMiniStory:summary.text.1", {
                         number_companies:
-                            this.analyses[
-                                analysisKeys.connectedAdvertisersCount
-                            ],
+                            this.analyses[analysisKeys.connectedAdvertiserNames]
+                                .length,
                     })}
                 </p>
                 <p>{i18n.t("connectedAdvertisersMiniStory:summary.text.2")}</p>
@@ -53,13 +55,12 @@ class ConnectedAdvertisersMinistory extends Story {
                 <p>
                     {i18n.t("connectedAdvertisersMiniStory:details.text", {
                         number_companies:
-                            this.analyses[
-                                analysisKeys.connectedAdvertisersCount
-                            ],
+                            this.analyses[analysisKeys.connectedAdvertiserNames]
+                                .length,
                     })}
                 </p>
                 <ListOfDetails
-                    list={this.analyses[analysisKeys.connectedAdvertisersCount]}
+                    list={this.analyses[analysisKeys.connectedAdvertiserNames]}
                 />
             </div>
         );

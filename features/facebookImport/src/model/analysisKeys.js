@@ -26,4 +26,5 @@ export default {
     polyPodRuntime: "polyPodRuntime",
     polyPodVersion: "polyPodVersion",
     bubblesData: "bubblesData",
+    sortedAdInterests: "sortedAdInterests",
 };

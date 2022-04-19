@@ -89,6 +89,7 @@ const ExploreView = () => {
                 <UnrecognizedCard />
                 {ministories.map((MinistoryClass, index) => {
                     const ministory = new MinistoryClass(account);
+                    console.log(ministory);
                     if (!ministory.active) return;
                     const content = (
                         <>
