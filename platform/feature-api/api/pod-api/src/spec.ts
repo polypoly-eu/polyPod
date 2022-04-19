@@ -34,11 +34,7 @@ function encodeUtf8(string: string): Uint8Array {
  * access or provide a URI to a local httpbin service.
  */
 export class PodSpec {
-    constructor(
-        private readonly pod: Pod,
-        private readonly path: string,
-        private readonly httpbinUrl: string
-    ) {
+    constructor(private readonly pod: Pod, private readonly path: string) {
         chai.use(chaiAsPromised);
     }
 
@@ -62,7 +58,7 @@ export class PodSpec {
                 await assert.isRejected(polyIn.delete(quad), /default/);
             });
 
-            it("add/select", async () => {
+            it("add/match", async () => {
                 const { triple } = gens(dataFactory);
                 await fc.assert(
                     fc.asyncProperty(fc.array(triple), async (quads) => {
