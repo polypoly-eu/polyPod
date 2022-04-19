@@ -71,9 +71,9 @@ echo "*** Done ***"
 target_triples=(aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android)
 architectures=(arm64-v8a armeabi-v7a x86_64 x86)
 echo "*** Building Core ***"
-rustup target add $target_triples
 cargo install cargo-ndk
 for target_triple in ${target_triples[@]}; do
+	rustup target add target_triple
     cargo ndk --platform $android_version --target $target_triple build $release_flag
 done
 echo "*** Done ***"
