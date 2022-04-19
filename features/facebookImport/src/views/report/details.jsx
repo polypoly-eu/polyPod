@@ -16,8 +16,8 @@ export const ReportCard = ({ analysis }) => {
 };
 
 const ReportDetails = () => {
-    const { fileAnalysis } = useContext(PolyAnalysisContext);
-    const unrecognizedData = fileAnalysis.unrecognizedData;
+    const { report } = useContext(PolyAnalysisContext);
+    const unrecognizedData = report.unrecognizedData;
 
     function renderReportAnalyses() {
         if (!unrecognizedData) {

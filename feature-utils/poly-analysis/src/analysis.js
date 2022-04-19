@@ -135,8 +135,9 @@ export async function analyzeZip({
         (analysis) => !analysis.isForDataReport && analysis.active
     );
 
+    console.log(new UnrecognizedData(analysesResults));
+
     return {
-        analyses: activeGlobalAnalyses,
         unrecognizedData: new UnrecognizedData(analysesResults),
     };
 }

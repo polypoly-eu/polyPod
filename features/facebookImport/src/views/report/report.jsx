@@ -9,8 +9,8 @@ import "./report.css";
 
 const ReportView = () => {
     const { setReportResult, handleBack } = useContext(ImporterContext);
-    const { fileAnalysis } = useContext(PolyAnalysisContext);
-    const unrecognizedData = fileAnalysis.unrecognizedData;
+    const { report } = useContext(PolyAnalysisContext);
+    const unrecognizedData = report.unrecognizedData;
     const [loading, setLoading] = useState(false);
 
     const handleSendReport = async () => {

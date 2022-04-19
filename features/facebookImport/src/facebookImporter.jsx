@@ -50,9 +50,6 @@ const FacebookImporter = () => {
         useContext(ImporterContext);
 
     const { files } = useContext(PolyImportContext);
-    const { fileAnalysis } = useContext(PolyAnalysisContext);
-
-    console.log(fileAnalysis);
 
     function determineRoute() {
         if (files.length > 0)

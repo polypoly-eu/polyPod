@@ -21,67 +21,63 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
     }
 
     async analyze({ dataAccount }) {
-        try {
-            dataAccount.analyses[analysisKeys.companiesCount] =
-                dataAccount.offFacebookCompaniesCount;
+        dataAccount.analyses[analysisKeys.companiesCount] =
+            dataAccount.offFacebookCompaniesCount;
 
-            const advertiserMatches =
-                linkRelatedAccountsWithOffFacebookCompanies(dataAccount);
+        const advertiserMatches =
+            linkRelatedAccountsWithOffFacebookCompanies(dataAccount);
 
-            dataAccount.analyses[analysisKeys.companiesWithAdsCount] =
-                advertiserMatches.reduce(
-                    (total, consolidatedCompany) =>
-                        total + consolidatedCompany.offFacebookCompaniesCount,
-                    0
-                );
-            const max = Math.max(
-                dataAccount.offFacebookEventsLatestTimestamp,
-                dataAccount.relatedAccountEventLatestTimestamp
+        dataAccount.analyses[analysisKeys.companiesWithAdsCount] =
+            advertiserMatches.reduce(
+                (total, consolidatedCompany) =>
+                    total + consolidatedCompany.offFacebookCompaniesCount,
+                0
             );
-            const commonAdvertisersData = advertiserMatches.map(
-                (consolidatedAdvertiser) =>
-                    consolidatedAdvertiser.last90DaysSummary(max)
-            );
+        const max = Math.max(
+            dataAccount.offFacebookEventsLatestTimestamp,
+            dataAccount.relatedAccountEventLatestTimestamp
+        );
+        const commonAdvertisersData = advertiserMatches.map(
+            (consolidatedAdvertiser) =>
+                consolidatedAdvertiser.last90DaysSummary(max)
+        );
 
-            dataAccount.analyses[analysisKeys.commonAdvertisersData] =
-                commonAdvertisersData;
+        dataAccount.analyses[analysisKeys.commonAdvertisersData] =
+            commonAdvertisersData;
 
-            const selectedCompanies = selectMeaningfulCompanies(
-                commonAdvertisersData
-            );
+        const selectedCompanies = selectMeaningfulCompanies(
+            commonAdvertisersData
+        );
 
-            const onOffEvents = {};
-            onOffEvents.displayData = {};
+        const onOffEvents = {};
+        onOffEvents.displayData = {};
 
-            if (dataAccount._offFacebookCompanies.length > 0) {
-                onOffEvents.displayData.offEvents = {
-                    companies: topOffFacebookCompanies(dataAccount),
-                    activityTypes: groupOffFacebookEventsByType(
-                        dataAccount
-                    ).map((e) => {
+        if (dataAccount._offFacebookCompanies.length > 0) {
+            onOffEvents.displayData.offEvents = {
+                companies: topOffFacebookCompanies(dataAccount),
+                activityTypes: groupOffFacebookEventsByType(dataAccount).map(
+                    (e) => {
                         return {
                             ...e,
                             title: e.type,
                         };
-                    }),
-                };
-            }
+                    }
+                ),
+            };
+        }
 
-            if (selectedCompanies.length > 0) {
-                onOffEvents.displayData.onOffEvents = buildDisplayData(
-                    selectedCompanies,
-                    dataAccount.offFacebookEventsLatestTimestamp
-                );
-            }
-            onOffEvents.displayType = onOffEvents.displayData?.onOffEvents
-                ? detailDisplayTypes.onOff
-                : detailDisplayTypes.off;
+        if (selectedCompanies.length > 0) {
+            onOffEvents.displayData.onOffEvents = buildDisplayData(
+                selectedCompanies,
+                dataAccount.offFacebookEventsLatestTimestamp
+            );
+        }
+        onOffEvents.displayType = onOffEvents.displayData?.onOffEvents
+            ? detailDisplayTypes.onOff
+            : detailDisplayTypes.off;
 
-            if (Object.keys(onOffEvents.displayData).length > 0) {
-                dataAccount.analyses[analysisKeys.onOffEvents] = onOffEvents;
-            }
-        } catch (e) {
-            console.log(e);
+        if (Object.keys(onOffEvents.displayData).length > 0) {
+            dataAccount.analyses[analysisKeys.onOffEvents] = onOffEvents;
         }
     }
 }
