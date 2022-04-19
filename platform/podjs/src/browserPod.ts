@@ -661,23 +661,8 @@ function createNavBarFrame(title: string): HTMLElement {
     return frame;
 }
 
-// interface Module {
-//     default: () => Record<string, unknown>;
-// }
-
-// type DynamicImportManifestType = () => Promise<Module>;
-
 // DYNAMIC_IMPORT_MANIFEST points to the `manifest.json` file of the bundled dest
-// as it's setup in our rollup configuration
-// export const DYNAMIC_IMPORT_MANIFEST: DynamicImportManifestType = () =>
-//     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-//     new Promise((resolve, _reject) => {
-//         resolve({
-//             default: () => {
-//                 return {};
-//             },
-//         });
-//     });
+// as it's setup in our rollup configuration and will be replaced at build time.
 export const DYNAMIC_IMPORT_MANIFEST = "";
 
 export class BrowserPod implements Pod {
@@ -691,23 +676,26 @@ export class BrowserPod implements Pod {
     constructor() {
         window.addEventListener("load", async () => {
             console.debug(DYNAMIC_IMPORT_MANIFEST);
-
-            // const manifestData = await this.moduleLoader(
-            //     DYNAMIC_IMPORT_MANIFEST
-            // );
-
+            const http = <T>(request: RequestInfo): Promise<T> => {
+                return new Promise((resolve) => {
+                    fetch(request)
+                        .then((response) => response.json())
+                        .then((body) => {
+                            resolve(body);
+                        });
+                });
+            };
             try {
-                const data = import(DYNAMIC_IMPORT_MANIFEST).then(
-                    ({ default: myData }) => myData
+                // Fetch the manifest-data JSON
+                const data = await http<Record<string, unknown>>(
+                    DYNAMIC_IMPORT_MANIFEST
                 );
-
-                window.manifestData = await data; //await import(DYNAMIC_IMPORT_MANIFEST);
-                console.debug(window.manifestData);
+                window.manifestData = data;
             } catch (error) {
                 console.warn(
                     `Unable to find feature manifest, navigation bar disabled.
-            To get the navigation bar, expose the manifest's content as
-            window.manifestData.`,
+    To get the navigation bar, expose the manifest's content as
+    window.manifestData.`,
                     error
                 );
                 return;
@@ -721,16 +709,4 @@ export class BrowserPod implements Pod {
             document.title = window.manifest.name;
         });
     }
-
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    // private moduleLoader(dynamicImport: DynamicImportManifestType) {
-    //     let _module: Module;
-    //     return async () => {
-    //         if (_module) return _module.default();
-
-    //         const module = await dynamicImport();
-    //         _module = module;
-    //         return module.default();
-    //     };
-    // }
 }
