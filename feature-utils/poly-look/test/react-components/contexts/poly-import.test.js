@@ -24,30 +24,29 @@ const mockComponent = (
     </PolyImportProvider>
   </MockParentContextProvider>
 );
+describe("Context Testing ", () => {
+  let container;
 
-it("renders correctly with a component", async () => {
-  const { container } = render(mockComponent);
-  await waitFor(() => {
+  beforeEach(async () => {
+    container = await waitFor(() => render(mockComponent).container);
+  });
+
+  it("renders correctly with a component", () => {
     expect(container).toBeTruthy();
+    const elements = container.getElementsByTagName("p");
+    mockFiles.forEach((file, i) =>
+      expect(elements.item(i).textContent).toBe(file.id)
+    );
   });
-});
 
-it("correctly processes the data", async () => {
-  const { container } = await waitFor(() => render(mockComponent));
-  const elements = container.getElementsByTagName("p");
-  mockFiles.forEach((file, i) =>
-    expect(elements.item(i).firstChild.textContent).toBe(file.id)
-  );
-});
-
-it("correctly removes file", async () => {
-  const { container } = await waitFor(() => render(mockComponent));
-  const elements = container.getElementsByTagName("p");
-  mockFiles.forEach((file, i) =>
-    expect(elements.item(i).firstChild.textContent).toBe(file.id)
-  );
-  await waitFor(() => {
-    fireEvent.click(container.querySelector(".removeFiles"));
+  it("correctly removes files", async () => {
+    const elements = container.getElementsByTagName("p");
+    mockFiles.forEach((file, i) =>
+      expect(elements.item(i).textContent).toBe(file.id)
+    );
+    await waitFor(() => {
+      fireEvent.click(container.querySelector(".removeFiles"));
+    });
+    expect(container.getElementsByTagName("p").length).toBe(0);
   });
-  expect(container.getElementsByTagName("p").length).toBe(0);
 });
