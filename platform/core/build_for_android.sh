@@ -69,18 +69,16 @@ echo "*** Done ***"
 
 # ----------------------- Build Core ----------------------- #
 target_triples=(aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android)
-architectures=(arm64-v8a armeabi-v7a x86_64 x86)
 echo "*** Building Core ***"
 cargo install cargo-ndk
 for target_triple in ${target_triples[@]}; do
-	rustup target add target_triple
+	rustup target add $target_triple
     cargo ndk --platform $android_version --target $target_triple build $release_flag
 done
 echo "*** Done ***"
 
 # ----------------------- Linking JNI libraries ----------------------- #
 echo "*** Linking JNI libraries with PolyPodCoreAndroid ***"
-target_triples=(aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android)
 architectures=(arm64-v8a armeabi-v7a x86_64 x86)
 jni_libs_copy_path=./PolyPodCoreAndroid/src/main/jniLibs
 libName=libpolypod_core.so
