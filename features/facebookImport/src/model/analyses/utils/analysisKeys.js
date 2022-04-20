@@ -5,7 +5,7 @@ export default {
     randomAdInterests: "randomAdInterests",
     numberInterests: "numberInterests",
     displayData: "displayData",
-    reactionsTypeCountPair: "reactionsTypeCountPair",
+    reactionsTypeCountPairs: "reactionsTypeCountPairs",
     messagesThreadsData: "messagesThreadsData",
     messagesCount: "messagesCount",
     onOffEvents: "onOffEvents",

@@ -18,7 +18,7 @@ export const ReportCard = ({ analysis }) => {
 const ReportDetails = () => {
     const { account } = useContext(PolyImportContext);
     const unrecognizedData = account.reports.unrecognizedData;
-    console.log("details unrecognized: ", unrecognizedData);
+    console.log("details unrecognized:", unrecognizedData);
 
     function renderReportAnalyses() {
         if (!unrecognizedData) {

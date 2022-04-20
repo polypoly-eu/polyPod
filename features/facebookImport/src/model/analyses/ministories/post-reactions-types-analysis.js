@@ -9,6 +9,7 @@ export default class PostReactionsTypesAnalysis extends RootAnalysis {
         let reactionsTypeCountPairs = allReactionsByType.filter((each) =>
             KNOWN_REACTION_TYPES.includes(each.type)
         );
+        console.log("REACTIONS ARRAY: ", reactionsTypeCountPairs);
         if (reactionsTypeCountPairs.length > 0)
             dataAccount.analyses[analysisKeys.reactionsTypeCountPair] =
                 reactionsTypeCountPairs;

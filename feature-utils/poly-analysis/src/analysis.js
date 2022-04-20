@@ -10,14 +10,15 @@ import MinistoriesStatusAnalysis from "./analysis/report/ministories-status-anal
 
 export class UnrecognizedData {
     constructor(analysesResults) {
-        this._activeReportAnalyses = analysesResults
-            .filter(
-                ({ analysis, status }) =>
-                    status.isSuccess &&
-                    analysis.isForDataReport &&
-                    analysis.active
-            )
-            .map(({ analysis }) => analysis);
+        this._activeReportAnalyses = [];
+        // this._activeReportAnalyses = analysesResults
+        //     .filter(
+        //         ({ analysis, status }) =>
+        //             status.isSuccess &&
+        //             analysis.isForDataReport &&
+        //             analysis.active
+        //     )
+        //     .map(({ analysis }) => analysis);
 
         const inactiveCardsSummary = new InactiveCardsSummary(analysesResults);
         if (inactiveCardsSummary.active) {
