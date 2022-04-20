@@ -63,6 +63,9 @@ jobs:
           POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
           POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }} || ""
         run: ./build.js
+      - name: Android - Build core
+        working-directory: platform/core
+        run: make android_libraries MODE=release
       - name: Android - Test
         working-directory: platform/android
         run: ./gradlew test
