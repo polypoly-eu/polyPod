@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 
-import "./sideSlider.css";
+import "./sideSwiper.css";
 
 /**
  *
@@ -23,7 +23,7 @@ import "./sideSlider.css";
  * Can be any value that is compatible with CSS transition-duration rule;
  * defaults to 0.6s.
  * @param {JSX.Element} [props.Component] - The component that will be animated.
- * If this component can trigger the SideSlider to close then it must have
+ * If this component can trigger the SideSwiper to close then it must have
  * an onClose callback as one of it's props.
  * If it has clickable elements, then Event.stopPropagation()
  * must be called in the event's handler function, otherwise the Slider will close.
@@ -34,7 +34,7 @@ import "./sideSlider.css";
  * @returns {JSX.Element}
  */
 
-const SideSlider = ({
+const SideSwiper = ({
   open = false,
   onClose,
   leftDistance = "124px",
@@ -427,4 +427,4 @@ const SideSlider = ({
   );
 };
 
-export default SideSlider;
+export default SideSwiper;

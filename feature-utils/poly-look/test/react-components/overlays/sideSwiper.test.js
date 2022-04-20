@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { SideSlider } from "../../../src/react-components";
+import { SideSwiper } from "../../../src/react-components";
 
 /**
  * @jest-environment jsdom
@@ -16,8 +16,8 @@ const SliderContent = (props) => {
 };
 
 describe("Basic props", () => {
-  it("Creates a SideSlider with contents", () => {
-    const rendered = render(<SideSlider Component={SliderContent} />);
+  it("Creates a SideSwiper with contents", () => {
+    const rendered = render(<SideSwiper Component={SliderContent} />);
     expect(rendered.container).toBeTruthy();
     expect(rendered.getByText("Contents")).toBeTruthy();
   });
@@ -27,7 +27,7 @@ describe("Basic props", () => {
     const backdropColor = [1, 2, 3, 0.7];
     const animDuration = "0.1s";
     const { container } = render(
-      <SideSlider
+      <SideSwiper
         open={true}
         Component={SliderContent}
         leftDistance={`${left}px`}

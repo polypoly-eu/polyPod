@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import SideSlider from "../../../src/react-components/overlays/sideSlider.jsx";
+import SideSwiper from "../../../src/react-components/overlays/sideSwiper.jsx";
 import "../../../src/css/index.js";
 import "./fontFamily.css";
 import "./demo.css";
 
 export default {
-  component: SideSlider,
-  title: "Visuals/Organisms/SideSlider",
+  component: SideSwiper,
+  title: "Visuals/Organisms/SideSwiper",
 };
 
 const Template = (args) => {
@@ -60,7 +60,7 @@ const Template = (args) => {
       </button>
 
       {open && (
-        <SideSlider
+        <SideSwiper
           {...args}
           open={open}
           onClose={() => setOpen(false)}

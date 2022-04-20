@@ -4,7 +4,7 @@ import { Tab, Tabs } from "./tabs.jsx";
 import { BlockLegend, LineLegend } from "./legends.jsx";
 import ErrorPopup from "./popUps/errorPopup/errorPopup.jsx";
 import { Card, ClickableCard, RoutingCard } from "./cards";
-import SideSlider from "./overlays/sideSlider.jsx";
+import SideSwiper from "./overlays/sideSwiper.jsx";
 
 import List from "./list.jsx";
 
@@ -20,5 +20,5 @@ export {
   ClickableCard,
   RoutingCard,
   List,
-  SideSlider,
+  SideSwiper,
 };
