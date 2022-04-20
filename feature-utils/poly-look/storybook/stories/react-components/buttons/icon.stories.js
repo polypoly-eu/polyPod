@@ -13,6 +13,11 @@ export default {
     onClick: { action: "clicked" },
     fillDirection: {
       options: ["left", "right", null],
+      control: { type: "radio" },
+    },
+    icon: {
+      options: ["angleRight", "question", "filter"],
+      control: { type: "radio" },
     },
   },
 };
@@ -20,7 +25,9 @@ export default {
 const Template = (args) => <IconButton {...args} />;
 
 export const Default = Template.bind({});
+
 Default.args = {
+  fillDirection: null,
   icon: "angleRight",
 };
 Default.parameters = {
