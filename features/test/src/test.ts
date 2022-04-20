@@ -94,34 +94,34 @@ export async function addSupportsQuadsWithDefaultGraph(): Promise<void> {
     await polyIn.add(quad);
 }
 
-export async function canPassEmptyMatcherToPolyInSelect(): Promise<void> {
-    console.log("canPassEmptyMatcherToPolyInSelect()");
+export async function canPassEmptyMatcherToPolyInMatch(): Promise<void> {
+    console.log("canPassEmptyMatcherToPolyInMatch()");
     await polyIn.match({});
 }
 
-export async function canPassMatcherWithSubjectToPolyInSelect(): Promise<void> {
-    console.log("canPassMatcherWithSubjectToPolyInSelect()");
+export async function canPassMatcherWithSubjectToPolyInMatch(): Promise<void> {
+    console.log("canPassMatcherWithSubjectToPolyInMatch()");
     const subject = getInput(1);
     const matcher = { subject: window.pod.dataFactory.namedNode(subject) };
     await polyIn.match(matcher);
 }
 
-export async function canPassMatcherWithPredicateToPolyInSelect(): Promise<void> {
-    console.log("canPassMatcherWithPredicateToPolyInSelect()");
+export async function canPassMatcherWithPredicateToPolyInMatch(): Promise<void> {
+    console.log("canPassMatcherWithPredicateToPolyInMatch()");
     const predicate = getInput(1);
     const matcher = { predicate: window.pod.dataFactory.namedNode(predicate) };
     await polyIn.match(matcher);
 }
 
-export async function canPassMatcherWithObjectToPolyInSelect(): Promise<void> {
-    console.log("canPassMatcherWithObjectToPolyInSelect()");
+export async function canPassMatcherWithObjectToPolyInMatch(): Promise<void> {
+    console.log("canPassMatcherWithObjectToPolyInMatch()");
     const object = getInput(1);
     const matcher = { object: window.pod.dataFactory.namedNode(object) };
     await polyIn.match(matcher);
 }
 
-export async function canPassMatcherWithAllThreeFieldsToPolyInSelect(): Promise<void> {
-    console.log("canPassMatcherWithAllThreeFieldsToPolyInSelect()");
+export async function canPassMatcherWithAllThreeFieldsToPolyInMatch(): Promise<void> {
+    console.log("canPassMatcherWithAllThreeFieldsToPolyInMatch()");
     const subject = getInput(1);
     const predicate = getInput(2);
     const object = getInput(3);
@@ -134,15 +134,15 @@ export async function canPassMatcherWithAllThreeFieldsToPolyInSelect(): Promise<
     await polyIn.match(matcher);
 }
 
-export async function canGetEmptyArrayFromPolyInSelect(): Promise<void> {
-    console.log("canGetEmptyArrayFromPolyInSelect()");
+export async function canGetEmptyArrayFromPolyInMatch(): Promise<void> {
+    console.log("canGetEmptyArrayFromPolyInMatch()");
     const result = await polyIn.match({});
     if (!Array.isArray(result) || result.length !== 0)
         throw Error(`Expected empty array, got '${JSON.stringify(result)}'`);
 }
 
-export async function canGetArrayWithSingleQuadFromPolyInSelect(): Promise<void> {
-    console.log("canGetArrayWithSingleQuadFromPolyInSelect()");
+export async function canGetArrayWithSingleQuadFromPolyInMatch(): Promise<void> {
+    console.log("canGetArrayWithSingleQuadFromPolyInMatch()");
     const expectedResult = QuadBuilder.fromQuad(quads[0]).build();
     const result = await polyIn.match({});
     if (result.length !== 1)
@@ -157,9 +157,9 @@ export async function canGetArrayWithSingleQuadFromPolyInSelect(): Promise<void>
         );
 }
 
-export async function canGetArrayWithSingleQuadWithNamedNodeSubjectFromPolyInSelect(): Promise<void> {
+export async function canGetArrayWithSingleQuadWithNamedNodeSubjectFromPolyInMatch(): Promise<void> {
     console.log(
-        "canGetArrayWithSingleQuadWithNamedNodeSubjectFromPolyInSelect()"
+        "canGetArrayWithSingleQuadWithNamedNodeSubjectFromPolyInMatch()"
     );
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withSubject(pod.dataFactory.namedNode(quads[0].subject.value))
@@ -177,9 +177,9 @@ export async function canGetArrayWithSingleQuadWithNamedNodeSubjectFromPolyInSel
         );
 }
 
-export async function canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSelect(): Promise<void> {
+export async function canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInMatch(): Promise<void> {
     console.log(
-        "canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSelect()"
+        "canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInMatch()"
     );
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withSubject(pod.dataFactory.blankNode(quads[0].subject.value))
@@ -197,9 +197,9 @@ export async function canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSel
         );
 }
 
-export async function canGetArrayWithSingleQuadWithNamedNodeObjectFromPolyInSelect(): Promise<void> {
+export async function canGetArrayWithSingleQuadWithNamedNodeObjectFromPolyInMatch(): Promise<void> {
     console.log(
-        "canGetArrayWithSingleQuadWithNamedNodeObjectFromPolyInSelect()"
+        "canGetArrayWithSingleQuadWithNamedNodeObjectFromPolyInMatch()"
     );
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withObject(pod.dataFactory.namedNode(quads[0].object.value))
@@ -217,9 +217,9 @@ export async function canGetArrayWithSingleQuadWithNamedNodeObjectFromPolyInSele
         );
 }
 
-export async function canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSelect(): Promise<void> {
+export async function canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInMatch(): Promise<void> {
     console.log(
-        "canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSelect()"
+        "canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInMatch()"
     );
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withObject(pod.dataFactory.blankNode(quads[0].object.value))
@@ -237,8 +237,8 @@ export async function canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSele
         );
 }
 
-export async function canGetArrayWithSingleQuadWithLiteralObjectFromPolyInSelect(): Promise<void> {
-    console.log("canGetArrayWithSingleQuadWithLiteralObjectFromPolyInSelect()");
+export async function canGetArrayWithSingleQuadWithLiteralObjectFromPolyInMatch(): Promise<void> {
+    console.log("canGetArrayWithSingleQuadWithLiteralObjectFromPolyInMatch()");
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withObject(pod.dataFactory.literal(quads[0].object.value))
         .build();
@@ -255,10 +255,8 @@ export async function canGetArrayWithSingleQuadWithLiteralObjectFromPolyInSelect
         );
 }
 
-export async function canGetArrayWithSingleQuadWithNamedNodeGraphFromPolyInSelect(): Promise<void> {
-    console.log(
-        "canGetArrayWithSingleQuadWithNamedNodeGraphFromPolyInSelect()"
-    );
+export async function canGetArrayWithSingleQuadWithNamedNodeGraphFromPolyInMatch(): Promise<void> {
+    console.log("canGetArrayWithSingleQuadWithNamedNodeGraphFromPolyInMatch()");
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withGraph(pod.dataFactory.namedNode(quads[0].graph.value))
         .build();
@@ -275,10 +273,8 @@ export async function canGetArrayWithSingleQuadWithNamedNodeGraphFromPolyInSelec
         );
 }
 
-export async function canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelect(): Promise<void> {
-    console.log(
-        "canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelect()"
-    );
+export async function canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInMatch(): Promise<void> {
+    console.log("canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInMatch()");
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withGraph(pod.dataFactory.blankNode(quads[0].graph.value))
         .build();
@@ -295,8 +291,8 @@ export async function canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelec
         );
 }
 
-export async function canGetArrayWithSingleQuadWithDefaultGraphFromPolyInSelect(): Promise<void> {
-    console.log("canGetArrayWithSingleQuadWithDefaultGraphFromPolyInSelect()");
+export async function canGetArrayWithSingleQuadWithDefaultGraphFromPolyInMatch(): Promise<void> {
+    console.log("canGetArrayWithSingleQuadWithDefaultGraphFromPolyInMatch()");
     const expectedResult = QuadBuilder.fromQuad(quads[0])
         .withGraph(pod.dataFactory.defaultGraph())
         .build();
@@ -313,8 +309,8 @@ export async function canGetArrayWithSingleQuadWithDefaultGraphFromPolyInSelect(
         );
 }
 
-export async function canGetArrayWithMultipleQuadsFromPolyInSelect(): Promise<void> {
-    console.log("canGetArrayWithMultipleQuadsFromPolyInSelect()");
+export async function canGetArrayWithMultipleQuadsFromPolyInMatch(): Promise<void> {
+    console.log("canGetArrayWithMultipleQuadsFromPolyInMatch()");
     const result = await polyIn.match({});
     if (result.length !== 2)
         throw Error(
