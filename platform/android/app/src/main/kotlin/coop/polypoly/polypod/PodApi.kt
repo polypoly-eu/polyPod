@@ -57,8 +57,7 @@ open class PodApi(
             "polyIn" -> {
                 when (inner) {
                     "add" -> return handlePolyInAdd(args)
-                    "select" -> return handlePolyInSelect(args)
-                    "match" -> return handlePolyInSelect(args)
+                    "match" -> return handlePolyInMatch(args)
                     "delete" -> return handlePolyInDelete(args)
                     "has" -> return handlePolyInHas(args)
                 }
@@ -177,9 +176,9 @@ open class PodApi(
         return ValueFactory.newNil() // add() doesn't return anything
     }
 
-    private suspend fun handlePolyInSelect(args: List<Value>): Value {
-        logger.debug("dispatch() -> polyIn.select")
-        val result = polyIn.select(Matcher.codec.decode(args[0]))
+    private suspend fun handlePolyInMatch(args: List<Value>): Value {
+        logger.debug("dispatch() -> polyIn.match")
+        val result = polyIn.match(Matcher.codec.decode(args[0]))
         return ValueFactory.newArray(result.map { Quad.codec.encode(it) })
     }
 
