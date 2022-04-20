@@ -40,8 +40,6 @@ export interface Matcher {
  */
 export interface PolyIn {
     /**
-     * @deprecated use `match()` instead.
-     *
      * Queries the Pod for triples matching the given filter. For each property ([[Matcher.subject]],
      * [[Matcher.predicate]], [[Matcher.object]]) that is specified in the argument, the result set is narrowed to only
      * contain triples that match the property exactly.
@@ -49,7 +47,7 @@ export interface PolyIn {
      * For example, when querying the store as follows:
      *
      * ```
-     * const results = await polyIn.select({
+     * const results = await polyIn.match({
      *     subject: factory.namedNode("http://example.org")
      * })
      * ```
@@ -58,16 +56,8 @@ export interface PolyIn {
      *
      * Features cannot rely on obtaining a complete view of the data using this method. The results may only reflect a
      * filtered subset due to e.g. access restrictions or incomplete synchronization across multiple machines.
-     *
      * @param matcher a [[Matcher]] where any property may be left unspecified
-     *
      * @returns a set of triples that conform to the specified [[Matcher]]
-     */
-    select(matcher: Partial<Matcher>): Promise<RDF.Quad[]>;
-
-    /**
-     * Queries the Pod for triples matching the given filter.
-     * @param matcher a [[Matcher]] where any property may be left unspecified
      */
     match(matcher: Partial<Matcher>): Promise<RDF.Quad[]>;
 
@@ -91,12 +81,18 @@ export interface PolyIn {
     add(...quads: RDF.Quad[]): Promise<void>;
 
     /**
+     * Deletes the indicated triples
+     *
      * @param quads the triples that should be removed from the Pod
      */
     delete(...quads: RDF.Quad[]): Promise<void>;
 
     /**
+     * Checks whether the set of triples (called quads because they include the graph or namespace)
+     * are included in the pod. Returns true if they do.
+     *
      * @param quads the triples that should be removed from the Pod
+     * @returns a Promise that will be resolved to a boolean.
      */
     has(...quads: RDF.Quad[]): Promise<boolean>;
 }
