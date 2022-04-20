@@ -46,10 +46,6 @@ export default class InactiveCardsSummary {
     }
 
     render() {
-        console.log(
-            "THIS IS WHAT I NEED FROM YOU RICHARD: ",
-            this._inactiveAnalysesData
-        );
         return (
             <>
                 <p>

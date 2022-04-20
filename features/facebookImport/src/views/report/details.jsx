@@ -1,14 +1,15 @@
 import { PolyImportContext } from "@polypoly-eu/poly-look";
 import React, { useContext } from "react";
+import reports from "../ministories/reports";
 
 import "./details.css";
 
-export const ReportCard = ({ analysis }) => {
+export const ReportCard = ({ report }) => {
     return (
         <>
             <div className="report-card">
-                <h1>{analysis.title}</h1>
-                <div className="list">{analysis.render()}</div>
+                <h1>{report.title}</h1>
+                <div className="list">{report.render()}</div>
             </div>
             <div className="report-card-scrolling"></div>
         </>
@@ -25,9 +26,11 @@ const ReportDetails = () => {
         }
         return (
             <div>
-                {unrecognizedData.reportAnalyses.map((analysis, index) => (
-                    <ReportCard analysis={analysis} key={index} />
-                ))}
+                {reports.forEach((reportClass, index) => {
+                    const report = new reportClass(unrecognizedData);
+                    if (report.active)
+                        return <ReportCard report={report} key={index} />;
+                })}
             </div>
         );
     }

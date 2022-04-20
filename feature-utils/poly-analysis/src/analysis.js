@@ -10,7 +10,6 @@ import MinistoriesStatusAnalysis from "./analysis/report/ministories-status-anal
 
 export class UnrecognizedData {
     constructor(analysesResults) {
-        console.log("Wqedfrqwedfeqdwe", analysesResults);
         this._activeReportAnalyses = analysesResults
             .filter(
                 ({ analysis, status }) =>
@@ -18,7 +17,6 @@ export class UnrecognizedData {
             )
             .map(({ analysis }) => analysis);
 
-        console.log("Wqedfrqwedfeqdwe", this._activeReportAnalyses);
         const inactiveCardsSummary = new InactiveCardsSummary(analysesResults);
         if (inactiveCardsSummary.active) {
             this._activeReportAnalyses.push(inactiveCardsSummary);
@@ -135,9 +133,7 @@ export async function analyzeZip({
     //     (analysis) => !analysis.isForDataReport && analysis.active
     // );
 
-    dataAccount.analyses.unrecognizedData = new UnrecognizedData(
-        analysesResults
-    );
+    dataAccount.unrecognizedData = new UnrecognizedData(analysesResults);
 }
 
 export async function analyzeFile({ zipData, dataAccount, subAnalyses }) {

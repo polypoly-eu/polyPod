@@ -3,7 +3,7 @@ import React from "react";
 import Story from "./story.jsx";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
 
-class MissingCommonJSONFilesMinistory extends Story {
+class MissingCommonJSONFilesReport extends Story {
     constructor(props) {
         super(props);
         this._neededAnalyses = [analysisKeys.missingCommonFileNames];
@@ -24,4 +24,4 @@ class MissingCommonJSONFilesMinistory extends Story {
     }
 }
 
-export default MissingCommonJSONFilesMinistory;
+export default MissingCommonJSONFilesReport;

@@ -2,7 +2,7 @@ import React from "react";
 import Story from "./story.jsx";
 import analysisKeys from "../../model/analyses/utils/analysisKeys.js";
 
-class OffFacebookEventsTypesMinistory extends Story {
+class OffFacebookEventsTypesReport extends Story {
     constructor(props) {
         super(props);
         this._neededAnalyses = [analysisKeys.offFacebookEventTypes];
@@ -22,4 +22,4 @@ class OffFacebookEventsTypesMinistory extends Story {
     }
 }
 
-export default OffFacebookEventsTypesMinistory;
+export default OffFacebookEventsTypesReport;
