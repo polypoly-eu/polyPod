@@ -11,10 +11,9 @@ class ActivityParser {
         const contentCells = contentDocument.querySelectorAll(
             ".mdl-grid>.mdl-cell>.mdl-grid>.content-cell:nth-child(2)"
         );
-        const timestamps = [...contentCells].map(
-            (node) => node.childNodes[node.childNodes.length - 1].textContent
+        return [...contentCells].map(
+            ({ childNodes }) => childNodes[childNodes.length - 1].textContent
         );
-        return timestamps;
     }
 
     async parse(entry) {
