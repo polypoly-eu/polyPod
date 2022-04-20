@@ -661,9 +661,9 @@ function createNavBarFrame(title: string): HTMLElement {
     return frame;
 }
 
-// DYNAMIC_IMPORT_MANIFEST points to the `manifest.json` file of the bundled dest
-// as it's setup in our rollup configuration and will be replaced at build time.
-// export const DYNAMIC_IMPORT_MANIFEST = "";
+// __DYNAMIC_IMPORT_MANIFEST__ points to the `manifest.json` file of the bundled dest
+// as it's setup in our rollup configuration and will be replaced at copy time.
+export const __DYNAMIC_IMPORT_MANIFEST__: Record<string, unknown> = {};
 
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
@@ -675,9 +675,7 @@ export class BrowserPod implements Pod {
 
     constructor() {
         window.addEventListener("load", async () => {
-            window.manifestData = await this.fetchManifestJson<
-                Record<string, unknown>
-            >();
+            window.manifestData = __DYNAMIC_IMPORT_MANIFEST__;
             window.manifest = await readManifest(window.manifestData);
             window.parent.currentTitle =
                 window.parent.currentTitle || window.manifest.name;
