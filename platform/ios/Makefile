@@ -100,7 +100,7 @@ install_distribution_prerequisites:
 	@printf "$$POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64" \
 		| base64 --decode > ~/private_keys/AuthKey_$(appstore_api_key_id).p8
 
-	# 2. Install Distribution certificate. xcodebuild will automatically
+	# 1. Install Distribution certificate. xcodebuild will automatically
 	#    extract the app certificate from the keychain.
 	@printf "$$POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64" \
 		| base64 --decode > Certificate.p12
@@ -114,7 +114,7 @@ install_distribution_prerequisites:
 	security set-key-partition-list -S apple-tool:,apple: -s -k "" \
 		~/Library/Keychains/build.keychain
 
-	# 3. Install Distribution provisioning profile. xcodebuild will
+	# 2. Install Distribution provisioning profile. xcodebuild will
 	#    automatically extract the profile from the Provisioning Profiles
 	#    directory
 	mkdir -p $(provisioning_profile_dir)
