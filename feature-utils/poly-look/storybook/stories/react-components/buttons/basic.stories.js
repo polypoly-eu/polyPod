@@ -15,6 +15,9 @@ export default {
       options: ["dark", "light"],
       control: { type: "radio" },
     },
+    className: {
+      type: "string",
+    },
   },
 };
 

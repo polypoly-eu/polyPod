@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Button } from "../buttons";
 import "./card.css";
 
 /**
@@ -24,12 +24,11 @@ const ClickableCard = ({
     >
       {children}
       {buttonText && (
-        <button
-          className="poly-button centered"
+        <Button
+          className="centered"
+          label={buttonText}
           onClick={onlyButtonClickEvent ? onClick : () => {}}
-        >
-          {buttonText}
-        </button>
+        />
       )}
     </div>
   );

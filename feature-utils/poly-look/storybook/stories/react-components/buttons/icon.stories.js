@@ -19,6 +19,9 @@ export default {
       options: ["angleRight", "question", "filter"],
       control: { type: "radio" },
     },
+    className: {
+      type: "string",
+    },
   },
 };
 

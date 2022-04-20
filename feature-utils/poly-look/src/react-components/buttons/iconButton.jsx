@@ -9,7 +9,6 @@ import "./iconButton.css";
 /**
  * Icon button. Has a filled variant.
  * Any valid button HTML attributes are allowed.
- * The only exception are classes.
  * @param {Object} props
  * @param {string} [props.icon] - Button icon
  * Currently implemented options are: angleRight, question, filter.
@@ -23,19 +22,21 @@ const IconButton = ({ icon, fillDirection = "", ...otherProps }) => {
     question,
     filter,
   };
+
   if (!icons[icon])
     console.warn(
       `IconButton: Invalid icon option. Available options: ${Object.keys(
         icons
       )}`
     );
+
+  let classes = otherProps.className || "";
+
+  if (fillDirection)
+    classes = classes.concat(` filled filled-${fillDirection}`);
+  else classes = classes.concat(" icon-button");
   return (
-    <button
-      {...otherProps}
-      className={
-        fillDirection ? `filled filled-${fillDirection}` : "icon-button"
-      }
-    >
+    <button {...otherProps} className={classes}>
       <img src={icons[icon]} />
     </button>
   );
