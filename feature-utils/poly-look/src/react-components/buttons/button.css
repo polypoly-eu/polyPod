@@ -4,7 +4,7 @@
   background-color: var(--theme-secondary-color);
   padding: 4px 12px;
   height: 48px;
-  max-width: 328px;
+  max-width: var(--max-width);
   width: 100%;
   display: flex;
   justify-content: center;
@@ -12,6 +12,7 @@
   color: var(--theme-primary-color);
   border-radius: 4px;
   box-sizing: border-box;
+  border: none;
 }
 
 .poly-button:active {
