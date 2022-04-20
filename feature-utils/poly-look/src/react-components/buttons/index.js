@@ -1,4 +1,4 @@
-import Button from "./button.jsx";
+import Button from "./button";
 import IconButton from "./iconButton";
 
 export { Button, IconButton };
