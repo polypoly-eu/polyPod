@@ -5,13 +5,7 @@ import analysisKeys from "../../model/analyses/utils/analysisKeys";
 class ReportMetadataMinistory extends Story {
     constructor(props) {
         super(props);
-        this._neededAnalyses = [
-            analysisKeys.fileSize,
-            analysisKeys.filesCount,
-            analysisKeys.preferedLanguage,
-            analysisKeys.polyPodRuntime,
-            analysisKeys.polyPodVersion,
-        ];
+        this._neededAnalyses = [analysisKeys.reportMetadata];
     }
     get title() {
         return "Report Metadata";
@@ -19,11 +13,14 @@ class ReportMetadataMinistory extends Story {
 
     get reportData() {
         return {
-            fileSize: this.analyses[analysisKeys.fileSize],
-            filesCount: this.analyses[analysisKeys.filesCount],
-            preferedLanguage: this.analyses[analysisKeys.preferedLanguage],
-            polyPodRuntime: this.analyses[analysisKeys.polyPodRuntime],
-            polyPodVersion: this.analyses[analysisKeys.polyPodVersion],
+            fileSize: this.analyses[analysisKeys.reportMetadata].fileSize,
+            filesCount: this.analyses[analysisKeys.reportMetadata].filesCount,
+            preferedLanguage:
+                this.analyses[analysisKeys.reportMetadata].preferedLanguage,
+            polyPodRuntime:
+                this.analyses[analysisKeys.reportMetadata].polyPodRuntime,
+            polyPodVersion:
+                this.analyses[analysisKeys.reportMetadata].polyPodVersion,
         };
     }
     render() {

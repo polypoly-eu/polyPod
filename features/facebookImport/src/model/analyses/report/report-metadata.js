@@ -4,6 +4,7 @@ import analysisKeys from "../utils/analysisKeys";
 export default class ReportMetadataAnalysis extends ReportAnalysis {
     async analyze({ size, zipFile, dataAccount, pod }) {
         const info = await pod.info;
+        dataAccount.analyses[analysisKeys.reportMetadata] = {};
         dataAccount.analyses[analysisKeys.reportMetadata].polyPodRuntime =
             await info.getRuntime();
         dataAccount.analyses[analysisKeys.reportMetadata].polyPodVersion =
