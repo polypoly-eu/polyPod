@@ -4,8 +4,13 @@ This directory contains the source for the polyPod app for Android devices.
 
 ## Building
 
-Before you do anything else, ensure you've built the core code and features: See
+- Before you do anything else, ensure you've built the core code and features: See
 the [`README` file](../../README.md) above.
+- Build core for android:
+
+```
+make -C ../core android_libraries
+```
 
 ### Android Studio
 

@@ -1,5 +1,4 @@
 build_type := $(if $(filter $(MODE), release),release,debug)
-release_flag := $(if $(filter $(MODE), release),--release)
 
 .PHONY: setup_flatbuffers
 setup_flatbuffers:
@@ -60,7 +59,7 @@ endif
 define build_for_architecture
 	rustup target add $(1)
 	cargo build \
-		$(release_flag) \
+		$(if $(filter $(build_type), release), --release) \
 		--lib --target $(1)
 endef
 
