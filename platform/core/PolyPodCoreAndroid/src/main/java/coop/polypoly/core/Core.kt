@@ -4,6 +4,7 @@ import Failure
 import FeatureManifest
 import java.nio.ByteBuffer
 
+@ExperimentalUnsignedTypes
 class Core {
     companion object {
         fun bootstrapCore(languageCode: String): Result<Unit> {
@@ -16,7 +17,6 @@ class Core {
             return Result.success(Unit)
         }
 
-        @ExperimentalUnsignedTypes
         fun parseFeatureManifest(json: String): Result<FeatureManifest> {
             val failureContext = "Feature Manifest Parsing"
             val bytes = JniApi().parseFeatureManifest(json)

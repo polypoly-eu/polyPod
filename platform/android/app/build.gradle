@@ -105,6 +105,17 @@ repositories {
     jcenter()
 }
 
+allprojects {
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            freeCompilerArgs += [
+                // Generated flatBuffers use experimental unsigned types
+                "-Xuse-experimental=kotlin.ExperimentalUnsignedTypes"
+            ]
+        }
+    }
+}
+
 dependencies {
     implementation project(":polyOut")
     implementation project(":PolyPodCoreAndroid")

@@ -2,6 +2,7 @@ package coop.polypoly.core
 
 import Failure
 
+@ExperimentalUnsignedTypes
 class InternalCoreException(message: String) : Exception(message) {
     companion object {
         fun make(context: String, failure: Failure): InternalCoreException {
