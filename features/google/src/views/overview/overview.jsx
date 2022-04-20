@@ -16,6 +16,13 @@ const Overview = () => {
                 Import File
             </button>
             <div>
+                <h1>Activities</h1>
+                {googleAccount?.activities.map((activity, i) => (
+                    <div key={i}>{activity}</div>
+                ))}
+            </div>
+            <div>
+                <h1>Path names</h1>
                 {googleAccount?.pathNames.map((entry, i) => (
                     <div key={i}>{entry.path}</div>
                 )) || null}
