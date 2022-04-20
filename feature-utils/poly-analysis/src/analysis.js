@@ -14,9 +14,7 @@ export class UnrecognizedData {
         this._activeReportAnalyses = analysesResults
             .filter(
                 ({ analysis, status }) =>
-                    status.isSuccess &&
-                    analysis.isForDataReport &&
-                    analysis.active
+                    status.isSuccess && analysis.isForDataReport
             )
             .map(({ analysis }) => analysis);
 

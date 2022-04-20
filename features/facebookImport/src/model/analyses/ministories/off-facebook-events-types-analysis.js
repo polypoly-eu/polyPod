@@ -1,6 +1,6 @@
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 import { groupOffFacebookEventsByType } from "../utils/on-off-facebook-events-utils.js";
-import BasicDataCountTable from "../../components/postReactionTypesMiniStory/postReactionTypesMiniStory.jsx";
+import BasicDataCountTable from "../../../components/basicDataCountTable/basicDataCountTable.jsx";
 
 export default class OffFacebookEventsTypesAnalysis extends RootAnalysis {
     get title() {
