@@ -13,7 +13,6 @@ export default class InactiveCardsSummary {
         const inactiveAnalysesResults = analysesResults.filter(
             ({ analysis, status }) => !status.isSuccess || !analysis.active
         );
-        console.log("THESE ARE THE ANALYSES RESULTS: ", analysesResults);
 
         this._inactiveAnalysesData = inactiveAnalysesResults.map(
             ({ analysis, status }) => {

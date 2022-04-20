@@ -1,15 +1,23 @@
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
-import analysisKeys from "../utils/analysisKeys";
 import { groupOffFacebookEventsByType } from "../utils/on-off-facebook-events-utils.js";
+import BasicDataCountTable from "../../components/postReactionTypesMiniStory/postReactionTypesMiniStory.jsx";
 
 export default class OffFacebookEventsTypesAnalysis extends RootAnalysis {
+    get title() {
+        return "Off-Facebook Events by Type";
+    }
+
     async analyze({ dataAccount }) {
+        this.active = dataAccount.offFacebookCompanies.length > 0;
         this._eventsTypeCountPairs = [];
-        if (!(dataAccount.offFacebookCompanies.length > 0)) {
+        if (!this.active) {
             return;
-        } else {
-            dataAccount.analyses[analysisKeys.eventsTypeCountPairs] =
-                groupOffFacebookEventsByType(dataAccount);
         }
+
+        this._eventsTypeCountPairs = groupOffFacebookEventsByType(dataAccount);
+    }
+
+    renderSummary() {
+        <BasicDataCountTable items={this._eventsTypeCountPairs} />;
     }
 }

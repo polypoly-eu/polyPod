@@ -1,6 +1,6 @@
 import BasicList from "../../components/basicList/basicList.jsx";
 import React from "react";
-import Story from "../ministories/story.jsx";
+import Story from "./story.jsx";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
 
 class MissingKnownJSONFilesMiniStory extends Story {

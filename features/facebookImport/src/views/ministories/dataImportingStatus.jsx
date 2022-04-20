@@ -1,6 +1,6 @@
 import React from "react";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
-import Story from "../ministories/story.jsx";
+import Story from "./story.jsx";
 
 class DataImportingStatusMinistory extends Story {
     constructor(props) {

@@ -10,16 +10,17 @@ import MinistoriesStatusAnalysis from "./analysis/report/ministories-status-anal
 
 export class UnrecognizedData {
     constructor(analysesResults) {
-        this._activeReportAnalyses = [];
-        // this._activeReportAnalyses = analysesResults
-        //     .filter(
-        //         ({ analysis, status }) =>
-        //             status.isSuccess &&
-        //             analysis.isForDataReport &&
-        //             analysis.active
-        //     )
-        //     .map(({ analysis }) => analysis);
+        console.log("Wqedfrqwedfeqdwe", analysesResults);
+        this._activeReportAnalyses = analysesResults
+            .filter(
+                ({ analysis, status }) =>
+                    status.isSuccess &&
+                    analysis.isForDataReport &&
+                    analysis.active
+            )
+            .map(({ analysis }) => analysis);
 
+        console.log("Wqedfrqwedfeqdwe", this._activeReportAnalyses);
         const inactiveCardsSummary = new InactiveCardsSummary(analysesResults);
         if (inactiveCardsSummary.active) {
             this._activeReportAnalyses.push(inactiveCardsSummary);
@@ -136,7 +137,7 @@ export async function analyzeZip({
     //     (analysis) => !analysis.isForDataReport && analysis.active
     // );
 
-    dataAccount.reports.unrecognizedData = new UnrecognizedData(
+    dataAccount.analyses.unrecognizedData = new UnrecognizedData(
         analysesResults
     );
 }
