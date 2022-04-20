@@ -1,15 +1,20 @@
-import React from "react";
-import RouteButton from "../routeButton.jsx";
+import React, { useContext } from "react";
+import { ImporterContext } from "../../../context/importer-context.jsx";
+
 import "./infoButton.css";
 
-const InfoButton = ({ route, stateChange = null }) => (
-    <RouteButton
-        className="info-button"
-        route={route}
-        stateChange={stateChange}
-    >
+const InfoButton = ({ infoScreen }) => {
+    const { createPopUp } = useContext(ImporterContext);
+
+    console.log({ createPopUp });
+
+    const handleClick = () => {
+        createPopUp({ type: infoScreen });
+    };
+
+    <button className="info-button" onClick={handleClick}>
         <img src="./images/question.svg"></img>
-    </RouteButton>
-);
+    </button>;
+};
 
 export default InfoButton;
