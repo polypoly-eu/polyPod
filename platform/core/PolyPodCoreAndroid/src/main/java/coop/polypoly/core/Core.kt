@@ -12,7 +12,9 @@ class Core {
             val response = CoreBootstrapResponse.getRootAsCoreBootstrapResponse(
                 ByteBuffer.wrap(bytes))
             response.failure?.let {
-                return Result.failure(InternalCoreException.make("Core bootstrap", it))
+                return Result.failure(
+                    InternalCoreException.make("Core bootstrap", it)
+                )
             }
             return Result.success(Unit)
         }
@@ -28,16 +30,24 @@ class Core {
                     response.result(FeatureManifest())?.let {
                         return Result.success(it as FeatureManifest)
                     }
-                    return Result.failure(InvalidFeatureManifestContentException(failureContext))
+                    return Result.failure(
+                        InvalidFeatureManifestContentException(failureContext)
+                    )
                 }
                 FeatureManifestParsingResult.Failure -> {
                     response.result(Failure())?.let {
-                        return Result.failure(InternalCoreException.make(failureContext, it as Failure))
+                        return Result.failure(
+                            InternalCoreException.make(failureContext, it as Failure)
+                        )
                     }
-                    return Result.failure(InvalidFailureContentException(failureContext))
+                    return Result.failure(
+                        InvalidFailureContentException(failureContext)
+                    )
                 }
                 else -> {
-                    return Result.failure(InvalidResultException.make(failureContext, response.resultType.toString()))
+                    return Result.failure(
+                        InvalidResultException.make(failureContext, response.resultType.toString())
+                    )
                 }
             }
         }

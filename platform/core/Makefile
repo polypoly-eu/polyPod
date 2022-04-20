@@ -65,8 +65,9 @@ define build_for_architecture
 endef
 
 # ========= Building for Android ========= #
-
 android_version := 24
+# Rust still uses old-ish r22 version of NDK.
+# For reference https://github.com/rust-lang/rust/pull/85806
 ndk_version := r22b
 
 .PHONY: android_libraries

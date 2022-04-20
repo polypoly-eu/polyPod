@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e    # Exit if any command fails
 
+# ----------------------- Command options ------------------------ #
 android_version=24
 ndk_version=r22b
 build_type=debug
@@ -23,9 +24,10 @@ fi
 # ----------------------- NDK setup ------------------------ #
 google_repo=https://dl.google.com/android/repository
 ndk_lib=android-ndk-${ndk_version}
-
 android_export=export/android
 ndk_dir=${android_export}/NDK
+# Override NDK_HOME to point to downloaded version.
+# Will be used by `cargo ndk` to generate the libraries
 export NDK_HOME=${ndk_dir}/${ndk_lib}
 
 if [ ! -d $NDK_HOME ]; then
@@ -52,6 +54,7 @@ if [ ! -d $NDK_HOME ]; then
 	        exit 1
 	    ;;
 	esac
+
 	ndk_download_link=$google_repo/$ndk_lib-$os_name-x86_64.zip 
 	curl -L $ndk_download_link -o ${ndk_dir}.zip
 	unzip -d $ndk_dir ${ndk_dir}.zip
@@ -69,6 +72,7 @@ echo "*** Done ***"
 
 # ----------------------- Build Core ----------------------- #
 target_triples=(aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android)
+
 echo "*** Building Core ***"
 cargo install cargo-ndk
 for target_triple in ${target_triples[@]}; do
@@ -78,11 +82,11 @@ done
 echo "*** Done ***"
 
 # ----------------------- Linking JNI libraries ----------------------- #
-echo "*** Linking JNI libraries with PolyPodCoreAndroid ***"
 architectures=(arm64-v8a armeabi-v7a x86_64 x86)
 jni_libs_copy_path=./PolyPodCoreAndroid/src/main/jniLibs
 libName=libpolypod_core.so
 
+echo "*** Linking JNI libraries with PolyPodCoreAndroid ***"
 rm -fr $jni_libs_copy_path
 mkdir $jni_libs_copy_path
 

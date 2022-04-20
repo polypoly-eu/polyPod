@@ -6,7 +6,9 @@ import Failure
 class InternalCoreException(message: String) : Exception(message) {
     companion object {
         fun make(context: String, failure: Failure): InternalCoreException {
-            return InternalCoreException("$context -> internal Core Failure: ${failure.code} ${failure.message}")
+            return InternalCoreException(
+                "$context -> internal Core Failure: ${failure.code} ${failure.message}"
+            )
         }
     }
 }
@@ -14,7 +16,9 @@ class InternalCoreException(message: String) : Exception(message) {
 class InvalidResultException(message: String) : Exception(message) {
     companion object {
         fun make(context: String, result: String): InvalidResultException {
-            return InvalidResultException("$context -> received invalid result type: $result")
+            return InvalidResultException(
+                "$context -> received invalid result type: $result"
+            )
         }
     }
 }
