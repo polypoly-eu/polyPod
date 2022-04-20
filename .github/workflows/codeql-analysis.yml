@@ -57,6 +57,7 @@ jobs:
       name: Build Android
       run: |
         cd platform/android
+        make -C ../core android_libraries
         ./gradlew compileDebugJavaWithJavac
 
     - name: Perform CodeQL Analysis
