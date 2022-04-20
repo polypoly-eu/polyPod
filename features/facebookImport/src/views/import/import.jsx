@@ -33,7 +33,7 @@ const maxFileSizeSupported = {
 //from storage
 async function readImportStatus(pod) {
     const { dataFactory } = pod;
-    const statusQuads = await pod.polyIn.select({
+    const statusQuads = await pod.polyIn.match({
         subject: dataFactory.namedNode(`${FBIMPORT_NAMESPACE}facebookImporter`),
         predicate: dataFactory.namedNode(`${FBIMPORT_NAMESPACE}importStatus`),
     });
@@ -44,7 +44,7 @@ async function readImportStatus(pod) {
 async function writeImportStatus(pod, status) {
     const { dataFactory, polyIn } = pod;
     const existingQuad = (
-        await pod.polyIn.select({
+        await pod.polyIn.match({
             subject: dataFactory.namedNode(
                 `${FBIMPORT_NAMESPACE}facebookImporter`
             ),

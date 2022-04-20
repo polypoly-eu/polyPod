@@ -6,7 +6,7 @@ const { dataFactory, polyIn } = window.pod;
 const AsyncStorage = {
     async getItem(key: string): Promise<string | null> {
         // use non empty matcher when implemented in pod.js
-        const quads = await polyIn.select({});
+        const quads = await polyIn.match({});
         return (
             quads.find(
                 ({ subject, predicate }) =>
@@ -28,7 +28,7 @@ const AsyncStorage = {
     //I really don't like this, needs some refactoring
     async getRecentAnswers(key: string): Promise<string | null> {
         // use non empty matcher when implemented in pod.js
-        const quads = (await polyIn.select({})).filter(
+        const quads = (await polyIn.match({})).filter(
             ({ subject, predicate }) =>
                 subject.value === `${namespace}${key}` &&
                 predicate.value === `${namespace}${questionnairePredicate}`
@@ -38,7 +38,7 @@ const AsyncStorage = {
 
     async getIndex(key: string): Promise<string | null> {
         // use non empty matcher when implemented in pod.js
-        const quads = await polyIn.select({});
+        const quads = await polyIn.match({});
         return (
             quads.find(
                 ({ subject, predicate }) =>

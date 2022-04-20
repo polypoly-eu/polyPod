@@ -1,1 +1,3 @@
 /dist
+/cypress/screenshots
+/cypress/fixtures

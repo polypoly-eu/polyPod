@@ -164,7 +164,7 @@ class PolyInTest {
             polyIn?.add(storageData)
         }
         val returnedData = runBlocking {
-            polyIn?.select(
+            polyIn?.match(
                 Matcher(null, null, null)
             )
         }
@@ -197,7 +197,7 @@ class PolyInTest {
             polyIn?.add(storageData)
         }
         val returnedData = runBlocking {
-            polyIn?.select(
+            polyIn?.match(
                 Matcher(
                     null,
                     IRI("https://polypoly.coop/justChecking"),
@@ -241,7 +241,7 @@ class PolyInTest {
             databaseName = TEST_DB_NAME
         ).let {
             runBlocking {
-                it.select(
+                it.match(
                     Matcher(null, null, null)
                 )
             }
@@ -305,7 +305,7 @@ class PolyInTest {
             polyIn?.delete(firstElement)
         }
         val returnedData = runBlocking {
-            polyIn?.select(
+            polyIn?.match(
                 Matcher(
                     null,
                     null,
