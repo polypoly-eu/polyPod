@@ -675,7 +675,9 @@ export class BrowserPod implements Pod {
 
     constructor() {
         window.addEventListener("load", async () => {
-            await this.fetchManifestJson();
+            window.manifestData = await this.fetchManifestJson<
+                Record<string, unknown>
+            >();
             window.manifest = await readManifest(window.manifestData);
             window.parent.currentTitle =
                 window.parent.currentTitle || window.manifest.name;
@@ -685,43 +687,32 @@ export class BrowserPod implements Pod {
         });
     }
 
-    private async fetchManifestJson(): Promise<void> {
+    private async fetchManifestJson<T>(): Promise<T> {
         const opts = {
             method: "GET",
             headers: {
                 mode: "no-cors",
                 "Content-Type": "application/json",
                 "Referrer-Policy": "strict-origin-when-cross-origin",
-                "Sec-Fetch-Mode": "cors",
-                "Sec-Fetch-Site": "same-origin",
-                "Sec-Fetch-Dest": "empty",
+                "X-Requested-With": "XMLHttpRequest",
+                "Access-Control-Allow-Origin": "*",
             },
         };
 
-        const http = <T>(request: RequestInfo): Promise<T> => {
-            return new Promise((resolve) => {
-                fetch(request, opts)
-                    .then((response) => response.json())
-                    .then((body) => {
-                        resolve(body);
-                    });
+        // Fetch the manifest-data JSON
+        return fetch("../src/static/manifest.json", opts)
+            .then((response) => response.json())
+            .then((body) => {
+                return body;
+            })
+            .catch((error) => {
+                console.warn(
+                    `Unable to find feature manifest, navigation bar disabled.
+            To get the navigation bar, expose the manifest's content as
+            window.manifestData.`,
+                    error
+                );
+                return error;
             });
-        };
-
-        try {
-            // Fetch the manifest-data JSON
-            const data = await http<Record<string, unknown>>(
-                "../src/static/manifest.json"
-            );
-            window.manifestData = data;
-        } catch (error) {
-            console.warn(
-                `Unable to find feature manifest, navigation bar disabled.
-    To get the navigation bar, expose the manifest's content as
-    window.manifestData.`,
-                error
-            );
-            return;
-        }
     }
 }
