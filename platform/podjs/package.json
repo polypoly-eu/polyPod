@@ -13,6 +13,7 @@
     "dev": "tsc -d --emitDeclarationOnly --declarationDir build/types",
     "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "build-downstream": "../../build.js --start @polypoly-eu/podjs",
+    "loadManifest": "rollup --watch --loadManifest -c --manifestJson=../../features/facebookImport/src/static/manifest.json",
     "lint": "eslint src --ext .ts",
     "test": "jest && cypress run"
   },
