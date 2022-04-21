@@ -10,13 +10,7 @@ import MinistoriesStatusAnalysis from "./analysis/report/ministories-status-anal
 
 export class UnrecognizedData {
     constructor(analysesResults) {
-        this._activeReportAnalyses = analysesResults
-            .filter(
-                ({ analysis, status }) =>
-                    status.isSuccess && analysis.isForDataReport
-            )
-            .map(({ analysis }) => analysis);
-
+        this._activeReportAnalyses = [];
         const inactiveCardsSummary = new InactiveCardsSummary(analysesResults);
         if (inactiveCardsSummary.active) {
             this._activeReportAnalyses.push(inactiveCardsSummary);
@@ -60,8 +54,9 @@ export class UnrecognizedData {
 }
 
 class AnalysisExecutionResult {
-    constructor(analysis, status, executionTime) {
+    constructor(analysis, active, status, executionTime) {
         this._analysis = analysis;
+        this._active = active;
         this._status = status || new Status({ name: statusTypes.success });
         this._executionTime = executionTime;
     }
@@ -72,6 +67,10 @@ class AnalysisExecutionResult {
 
     get status() {
         return this._status;
+    }
+
+    get active() {
+        return this._active;
     }
 
     get executionTime() {
@@ -97,15 +96,17 @@ export async function runAnalysis(analysisClass, enrichedData) {
 
     const telemetry = new Telemetry();
     try {
-        const status = await subAnalysis.analyze(enrichedData);
+        const { status, active } = await subAnalysis.analyze(enrichedData);
         return new AnalysisExecutionResult(
             subAnalysis,
+            active,
             status,
             telemetry.elapsedTime()
         );
     } catch (error) {
         return new AnalysisExecutionResult(
             subAnalysis,
+            false,
             new Status({ name: statusTypes.error, message: error }),
             telemetry.elapsedTime()
         );

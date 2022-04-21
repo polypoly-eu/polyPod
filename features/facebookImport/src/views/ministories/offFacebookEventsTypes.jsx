@@ -1,11 +1,12 @@
 import React from "react";
-import Story from "./story.jsx";
+import BasicList from "../../components/basicList/basicList.jsx";
 import analysisKeys from "../../model/analyses/utils/analysisKeys.js";
+import ReportStory from "./reportStory.jsx";
 
-class OffFacebookEventsTypesReport extends Story {
+class OffFacebookEventsTypesReport extends ReportStory {
     constructor(props) {
         super(props);
-        this._neededAnalyses = [analysisKeys.offFacebookEventTypes];
+        this._neededReports = [analysisKeys.offFacebookEventTypes];
     }
 
     get title() {
@@ -16,7 +17,7 @@ class OffFacebookEventsTypesReport extends Story {
         return (
             <BasicList
                 title="Types of activities done off-Facebook!"
-                items={this.account[analysisKeys.offFacebookEventTypes]}
+                items={this.reportAnalyses[analysisKeys.offFacebookEventTypes]}
             />
         );
     }

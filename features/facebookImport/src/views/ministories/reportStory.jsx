@@ -1,4 +1,4 @@
-import { Component } from "react";
+import Story from "./story";
 
 class ReportStory extends Story {
     constructor({ reportAnalyses }) {

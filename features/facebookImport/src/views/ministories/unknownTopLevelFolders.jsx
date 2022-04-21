@@ -1,9 +1,9 @@
 import BasicList from "../../components/basicList/basicList.jsx";
 import React from "react";
-import Story from "./story.jsx";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
+import ReportStory from "./reportStory.jsx";
 
-class UnknownTopLevelFoldersReport extends Story {
+class UnknownTopLevelFoldersReport extends ReportStory {
     constructor(props) {
         super(props);
         this._neededAnalyses = [analysisKeys.unknownFolderNames];

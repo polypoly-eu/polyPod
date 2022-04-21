@@ -46,5 +46,6 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
         if (pictureEntries.length >= PICTURES_THRESHOLD)
             dataAccount.analyses[analysisKeys.picturesCount] =
                 pictureEntries.length;
+        return { active: true };
     }
 }

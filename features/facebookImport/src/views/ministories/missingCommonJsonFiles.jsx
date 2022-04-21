@@ -1,24 +1,28 @@
 import BasicList from "../../components/basicList/basicList.jsx";
 import React from "react";
-import Story from "./story.jsx";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
+import ReportStory from "./reportStory.jsx";
 
-class MissingCommonJSONFilesReport extends Story {
+class MissingCommonJSONFilesReport extends ReportStory {
     constructor(props) {
         super(props);
-        this._neededAnalyses = [analysisKeys.missingCommonFileNames];
+        this._neededReports = [analysisKeys.missingCommonFileNames];
     }
     get title() {
         return "Missing common JSON files";
     }
 
     get reportData() {
-        return this.analyses[analysisKeys.missingCommonFileNames];
+        return this.reportAnalyses[analysisKeys.missingCommonFileNames];
     }
     render() {
         return (
             <BasicList
-                items={this.analyses[analysisKeys.missingCommonFileNames]}
+                items={
+                    this.dataAccount.analyses[
+                        analysisKeys.missingCommonFileNames
+                    ]
+                }
             />
         );
     }
