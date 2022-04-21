@@ -13,17 +13,17 @@ import {
     ImporterContext,
 } from "./context/importer-context.jsx";
 import {
+    INITIAL_HISTORY_STATE,
+    PolyAnalysisProvider,
     PolyImportContext,
     PolyImportProvider,
-} from "@polypoly-eu/poly-import";
-import { PolyAnalysisProvider } from "@polypoly-eu/poly-analysis";
-import { INITIAL_HISTORY_STATE } from "@polypoly-eu/poly-look";
+    ErrorPopup,
+} from "@polypoly-eu/poly-look";
 import { subAnalyses } from "./model/analysis";
 import { dataImporters } from "./model/importer.js";
 import FacebookAccount from "./model/entities/facebook-account.js";
 import i18n from "./i18n.js";
 
-import { ErrorPopup } from "@polypoly-eu/poly-look";
 import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
 import ExploreView from "./views/explore/explore.jsx";
