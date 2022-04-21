@@ -57,8 +57,7 @@ final class FeatureStorage: ObservableObject {
             let subDirs = directoryContents.filter{ $0.hasDirectoryPath }
             for featureDir in subDirs {
                 if let feature = Feature.load(
-                    path: featureDir,
-                    languageCode: Language.current
+                    path: featureDir
                 ) {
                     featuresList.append(feature)
                 }

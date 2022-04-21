@@ -57,10 +57,6 @@ class AsyncPolyIn implements PolyIn {
         return (await this.promise).match(matcher);
     }
 
-    async select(matcher: Partial<Matcher>): Promise<Quad[]> {
-        return (await this.promise).select(matcher);
-    }
-
     async add(...quads: Quad[]): Promise<void> {
         return (await this.promise).add(...quads);
     }

@@ -43,7 +43,7 @@ open class PolyIn(
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    open suspend fun select(matcher: Matcher): List<Quad> {
+    open suspend fun match(matcher: Matcher): List<Quad> {
         val retList: MutableList<Quad> = mutableListOf()
 
         val stmtsIterator = model.listStatements(

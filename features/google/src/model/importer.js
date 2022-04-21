@@ -1,4 +1,5 @@
 import { ZipFile } from "@polypoly-eu/poly-import";
+import ActivitiesImporter from "./importers/activities-importer";
 
 export async function importData(zipData) {
     const zipFile = await ZipFile.createWithCache(zipData, window.pod);
@@ -9,5 +10,6 @@ export async function importData(zipData) {
 export async function importZip(zipFile) {
     const googleAccount = {};
     googleAccount.pathNames = await zipFile.getEntries();
+    await new ActivitiesImporter().import({ zipFile, googleAccount });
     return googleAccount;
 }

@@ -1,11 +1,10 @@
 include "failure.fbs";
 include "feature_manifest.fbs";
-namespace feature_manifest_response;
 
-union FeatureManifestParsingResult { feature_manifest.FeatureManifest, failure.Failure }
+union FeatureManifestParsingResult { FeatureManifest, Failure }
 
 table FeatureManifestParsingResponse {
-    result:FeatureManifestParsingResult;
+    result:FeatureManifestParsingResult (required);
 }
 
 root_type FeatureManifestParsingResponse;
