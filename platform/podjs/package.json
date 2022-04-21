@@ -37,6 +37,7 @@
     "body-parser": "^1.19.0",
     "deepmerge": "^4.2.2",
     "fast-check": "^2.11.0",
+    "globby": "^13.1.1",
     "rollup-plugin-base-url": "^0.0.2",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-copy": "^3.4.0",

@@ -6,6 +6,7 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import merge from "deepmerge";
 import { createBasicConfig } from "@open-wc/building-rollup";
 import path from "path";
+import globby from "globby";
 
 const baseConfig = createBasicConfig();
 
@@ -27,15 +28,17 @@ export default merge(baseConfig, [
                 format: "cjs",
             },
         ],
-        external: [externalManifestFile],
+        // external: [externalManifestFile],
         plugins: [
-            nodeResolve([".ts"], { browser: true }),
-            typescript(),
-            commonjs({
-                include: nodeModules,
-                extensions: [".js", ".ts", ".mjs", ".json"],
-            }),
             json(),
+            nodeResolve(),
+            //new
+            typescript(),
+            // new
+            commonjs({
+                // include: nodeModules,
+                // extensions: [".js", ".ts", ".mjs", ".cjs"],
+            }),
             sucrase({
                 exclude: [nodeModules],
                 transforms: ["typescript"],
@@ -50,38 +53,28 @@ export default merge(baseConfig, [
                 file: pathResolve("dist/pod.js"),
                 format: "iife",
             },
-            {
-                file: pathResolve("dist/pod.es.js"),
-                format: "esm",
-            },
+            // {
+            //     file: pathResolve("dist/pod.es.js"),
+            //     format: "esm",
+            // },
         ],
-        external: [externalManifestFile],
+        // external: [externalManifestFile],
         plugins: [
-            nodeResolve([".ts"], { browser: true }),
+            json(),
+            nodeResolve(),
+            // new
             typescript(),
-            // copy({
-            //     targets: [
-            //         {
-            //             src: "src/static/manifest.json",
-            //             dest: "dist",
-            // transform: (contents, filename) =>
-            //     contents
-            //         .toString()
-            //         .replace(
-            //             "__DYNAMIC_IMPORT_MANIFEST__",
-            //             "manifest.json"
-            //         ),
-            //         },
-            //     ],
-            // }),
+            copyManifest({
+                targets: [{ src: externalManifestFile, dest: "dist" }],
+            }),
             replaceManifest({
                 __DYNAMIC_IMPORT_MANIFEST__: externalManifestFile,
             }),
-            json(),
             commonjs({
-                transformMixedEsModules: true,
-                include: nodeModules,
-                extensions: [".js", ".ts", ".mjs", ".json"],
+                // new
+                // transformMixedEsModules: true,
+                // include: nodeModules,
+                // extensions: [".js", ".ts", ".mjs", ".cjs"],
             }),
             sucrase({
                 exclude: [nodeModules],
@@ -92,35 +85,35 @@ export default merge(baseConfig, [
     },
 ]);
 
-import MagicString from "magic-string";
-import { createFilter } from "rollup-pluginutils";
+// import MagicString from "magic-string";
+// import { createFilter } from "rollup-pluginutils";
 
-function escape(str) {
-    return str.replace(/[-[\]/{}()*+?.\\^$|]/g, "\\$&");
-}
+// function escape(str) {
+//     return str.replace(/[-[\]/{}()*+?.\\^$|]/g, "\\$&");
+// }
 
 // function ensureFunction(functionOrValue) {
 //     if (typeof functionOrValue === "function") return functionOrValue;
 //     return () => functionOrValue;
 // }
 
-function longest(a, b) {
-    return b.length - a.length;
-}
+// function longest(a, b) {
+//     return b.length - a.length;
+// }
 
-function getReplacements(options) {
-    if (options.values) {
-        return Object.assign({}, options.values);
-    } else {
-        const values = Object.assign({}, options);
-        delete values.delimiters;
-        delete values.include;
-        delete values.exclude;
-        delete values.sourcemap;
-        delete values.sourceMap;
-        return values;
-    }
-}
+// function getReplacements(options) {
+//     if (options.values) {
+//         return Object.assign({}, options.values);
+//     } else {
+//         const values = Object.assign({}, options);
+//         delete values.delimiters;
+//         delete values.include;
+//         delete values.exclude;
+//         delete values.sourcemap;
+//         delete values.sourceMap;
+//         return values;
+//     }
+// }
 
 // function mapToFunctions(object) {
 //     return Object.keys(object).reduce((functions, key) => {
@@ -129,102 +122,172 @@ function getReplacements(options) {
 //     }, {});
 // }
 
-export function replaceManifest(options = {}) {
-    console.log(options);
+// function replaceManifest(options = {}) {
+//     console.log(options);
 
-    const filter = createFilter(options.include, options.exclude);
-    const { delimiters } = options;
-    console.log(delimiters);
-    // const functionValues = mapToFunctions(getReplacements(options));
-    // const keys = Object.keys(functionValues).sort(longest).map(escape);
+//     const filter = createFilter(options.include, options.exclude);
+//     const { delimiters } = options;
+//     console.log(delimiters);
+//     // const functionValues = mapToFunctions(getReplacements(options));
+//     // const keys = Object.keys(functionValues).sort(longest).map(escape);
 
-    const pattern = delimiters
-        ? new RegExp(
-              `${escape(delimiters[0])}(${keys.join("|")})${escape(
-                  delimiters[1]
-              )}`,
-              "g"
-          )
-        : new RegExp(`\\b(${keys.join("|")})\\b`, "g");
+//     const pattern = delimiters
+//         ? new RegExp(
+//               `${escape(delimiters[0])}(${keys.join("|")})${escape(
+//                   delimiters[1]
+//               )}`,
+//               "g"
+//           )
+//         : new RegExp(`\\b(${keys.join("|")})\\b`, "g");
+
+//     return {
+//         name: "replaceManifest",
+
+//         transform(code, id) {
+//             if (!filter(id)) return null;
+
+//             const magicString = new MagicString(code);
+
+//             let hasReplacements = false;
+//             let match;
+//             let start;
+//             let end;
+//             let replacement;
+
+//             while ((match = pattern.exec(code))) {
+//                 hasReplacements = true;
+
+//                 start = match.index;
+//                 end = start + match[0].length;
+//                 replacement = String(functionValues[match[1]](id));
+
+//                 console.log(start);
+//                 console.log(end);
+//                 console.log(replacement);
+//                 console.log(match[1]);
+
+//                 replacement = fetchManifestJson(match[1]);
+
+//                 magicString.overwrite(start, end, replacement);
+//                 console.log(magicString);
+//             }
+
+//             if (!hasReplacements) return null;
+
+//             const result = { code: magicString.toString() };
+//             if (options.sourceMap !== false && options.sourcemap !== false)
+//                 result.map = magicString.generateMap({ hires: true });
+
+//             console.log(result);
+
+//             return result;
+//         },
+//     };
+// }
+
+function generateCopyTarget(src, dest, { flatten }) {
+    const { base, dir } = path.parse(src);
+    const destinationFolder =
+        flatten || (!flatten && !dir)
+            ? dest
+            : dir.replace(dir.split("/")[0], dest);
 
     return {
-        name: "replaceManifest",
-
-        transform(code, id) {
-            if (!filter(id)) return null;
-
-            const magicString = new MagicString(code);
-
-            let hasReplacements = false;
-            let match;
-            let start;
-            let end;
-            let replacement;
-
-            while ((match = pattern.exec(code))) {
-                hasReplacements = true;
-
-                start = match.index;
-                end = start + match[0].length;
-                replacement = String(functionValues[match[1]](id));
-
-                console.log(start);
-                console.log(end);
-                console.log(replacement);
-                console.log(match[1]);
-
-                replacement = fetchManifestJson(match[1]);
-
-                magicString.overwrite(start, end, replacement);
-                console.log(magicString);
-            }
-
-            if (!hasReplacements) return null;
-
-            const result = { code: magicString.toString() };
-            if (options.sourceMap !== false && options.sourcemap !== false)
-                result.map = magicString.generateMap({ hires: true });
-
-            console.log(result);
-
-            return result;
-        },
+        src,
+        dest: path.join(
+            destinationFolder,
+            rename ? renameTarget(base, rename, src) : base
+        ),
     };
 }
 
-function fetchManifestJson(externalManifestFile) {
-    const opts = {
-        method: "GET",
-        headers: {
-            mode: "no-cors",
-            "Content-Type": "application/json",
-            "Referrer-Policy": "strict-origin-when-cross-origin",
-            "Sec-Fetch-Mode": "cors",
-            "Sec-Fetch-Site": "same-origin",
-            "Sec-Fetch-Dest": "empty",
+//   targets: [
+//     { src: 'src/static/manifest.json', dest: '/dist/' },
+//   ]
+function copyManifest(
+    options = { targets: [{ src: externalManifestFile, dest: "dist" }] }
+) {
+    const {
+        copyOnce = false,
+        flatten = true,
+        hook = "buildEnd",
+        targets = [],
+        ...restPluginOptions
+    } = options;
+
+    let copied = false;
+
+    return {
+        name: "copyManifest",
+        [hook]: async () => {
+            if (copyOnce && copied) {
+                return;
+            }
+
+            const copyTargets = [];
+
+            if (Array.isArray(targets) && targets.length) {
+                for (const target of targets) {
+                    if (!isObject(target)) {
+                        throw new Error(`${target} target must be an object`);
+                    }
+
+                    const { dest, src, ...restTargetOptions } = target;
+
+                    if (!src || !dest) {
+                        throw new Error(
+                            `${target} target must have "src" and "dest" properties`
+                        );
+                    }
+
+                    const matchedPaths = await globby(src, {
+                        expandDirectories: false,
+                        onlyFiles: true,
+                        ...restPluginOptions,
+                        ...restTargetOptions,
+                    });
+
+                    if (matchedPaths.length) {
+                        for (const matchedPath of matchedPaths) {
+                            const generatedCopyTargets = Array.isArray(dest)
+                                ? await Promise.all(
+                                      dest.map((destination) =>
+                                          generateCopyTarget(
+                                              matchedPath,
+                                              destination,
+                                              { flatten }
+                                          )
+                                      )
+                                  )
+                                : [
+                                      await generateCopyTarget(
+                                          matchedPath,
+                                          dest,
+                                          { flatten }
+                                      ),
+                                  ];
+
+                            copyTargets.push(...generatedCopyTargets);
+                        }
+                    }
+                }
+            }
+
+            if (copyTargets.length) {
+                console.log("copied!");
+
+                for (const copyTarget of copyTargets) {
+                    const { dest, src } = copyTarget;
+
+                    // if (transformed) {
+                    //     await fs.outputFile(dest, contents, restPluginOptions);
+                    // } else {
+                    await fs.copy(src, dest, restPluginOptions);
+                    // }
+                }
+            }
+
+            copied = true;
         },
     };
-
-    const http = (request) => {
-        return new Promise((resolve) => {
-            fetch(request, opts)
-                .then((response) => response.json())
-                .then((body) => {
-                    resolve(body);
-                });
-        });
-    };
-
-    try {
-        // Fetch the manifest-data JSON
-        return http(externalManifestFile);
-    } catch (error) {
-        console.warn(
-            `Unable to find feature manifest, navigation bar disabled.
-To get the navigation bar, expose the manifest's content as
-window.manifestData.`,
-            error
-        );
-        return;
-    }
 }
