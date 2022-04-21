@@ -23,4 +23,5 @@ export default {
     importersData: "importersData",
     bubblesData: "bubblesData",
     sortedAdInterests: "sortedAdInterests",
+    reportMetadata: "reportMetadata",
 };

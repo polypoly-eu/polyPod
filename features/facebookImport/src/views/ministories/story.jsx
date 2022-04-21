@@ -11,16 +11,16 @@ class Story extends Component {
         return Story.LABELS.NONE;
     }
 
+    get analyses() {
+        return this._analyses;
+    }
+
     get active() {
         if (!this._neededAnalyses) return true;
         for (const analysisKey of this._neededAnalyses) {
             if (!this.analyses?.[analysisKey]) return false;
         }
         return true;
-    }
-
-    get analyses() {
-        return this._analyses;
     }
 
     render() {

@@ -13,16 +13,12 @@ class MissingCommonJSONFilesReport extends ReportStory {
     }
 
     get reportData() {
-        return this.reportAnalyses[analysisKeys.missingCommonFileNames];
+        return this.reports[analysisKeys.missingCommonFileNames];
     }
     render() {
         return (
             <BasicList
-                items={
-                    this.dataAccount.analyses[
-                        analysisKeys.missingCommonFileNames
-                    ]
-                }
+                items={this.reports[analysisKeys.missingCommonFileNames]}
             />
         );
     }

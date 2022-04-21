@@ -16,6 +16,7 @@ export const PolyAnalysisProvider = ({
 }) => {
   const { account, files } = useContext(parentContext);
   const [report, setReport] = useState(null);
+  const [reportStories, setReportStories] = useState(null);
 
   //When the account model is created in the importer Context, the analyses are triggered.
   useEffect(() => {
@@ -31,6 +32,8 @@ export const PolyAnalysisProvider = ({
     <PolyAnalysisContext.Provider
       value={{
         report,
+        reportStories,
+        setReportStories,
       }}
     >
       {children}

@@ -1,24 +1,52 @@
-import { PolyImportContext } from "@polypoly-eu/poly-look";
-import React, { useContext, useState } from "react";
+import { MinistoriesStatusReport } from "@polypoly-eu/poly-analysis";
+import { PolyAnalysisContext, PolyImportContext } from "@polypoly-eu/poly-look";
+import React, { useContext, useEffect, useState } from "react";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
 import i18n from "../../i18n.js";
+import ministories from "../ministories/ministories.js";
+import reports from "../ministories/reports.js";
 
 import "./report.css";
 
 const ReportView = () => {
     const { setReportResult, handleBack } = useContext(ImporterContext);
+    const { reportStories, setReportStories } = useContext(PolyAnalysisContext);
     const { account } = useContext(PolyImportContext);
-    const unrecognizedData = account.reports.unrecognizedData;
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const computedReportStoriesList = reports.map(
+            (reportClass) => new reportClass(account)
+        );
+
+        const computedMinistories = ministories.map(
+            (MinistoryClass) => new MinistoryClass(account)
+        );
+
+        const activeReportStories = computedReportStoriesList.filter(
+            (reportStory) => reportStory.active
+        );
+        const statusReport = new MinistoriesStatusReport([
+            ...computedReportStoriesList,
+            ...computedMinistories,
+        ]);
+
+        const computedReportStories = new ReportStories([
+            ...activeReportStories,
+            statusReport,
+        ]);
+
+        setReportStories(computedReportStories);
+    }, [account]);
 
     const handleSendReport = async () => {
         setLoading(true);
         try {
             await window.pod.endpoint.send(
                 "polyPediaReports",
-                JSON.stringify(unrecognizedData.jsonReport),
+                JSON.stringify(reportStories.jsonReport),
                 "application/json"
             );
             setReportResult(true);
@@ -49,5 +77,23 @@ const ReportView = () => {
         </div>
     );
 };
+
+export class ReportStories {
+    constructor(activeReportStories) {
+        this._activeReportStories = activeReportStories;
+    }
+
+    get activeStories() {
+        return this._activeReportStories;
+    }
+
+    get jsonReport() {
+        const jsonStoriesReport = this.activeStories.map(
+            (story) => story.jsonReport
+        );
+
+        return { reportAnalyses_v1: jsonStoriesReport };
+    }
+}
 
 export default ReportView;

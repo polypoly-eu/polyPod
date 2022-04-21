@@ -20,7 +20,6 @@ export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
     }
 
     async analyze({ zipFile, dataAccount }) {
-        this._missingKnownFileNames = [];
         if (!zipFile) return;
 
         const relevantEntries = await jsonDataEntities(zipFile);
@@ -29,7 +28,7 @@ export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
         );
         const knownJsonFiles = this._knownJsonFiles();
 
-        dataAccount.analyses[analysisKeys.missingKnownFileNames] =
+        dataAccount.reports[analysisKeys.missingKnownFileNames] =
             knownJsonFiles.filter((each) => !anonymizedPaths.includes(each));
     }
 }

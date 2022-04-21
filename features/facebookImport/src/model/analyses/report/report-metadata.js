@@ -4,19 +4,19 @@ import analysisKeys from "../utils/analysisKeys";
 export default class ReportMetadataAnalysis extends ReportAnalysis {
     async analyze({ size, zipFile, dataAccount, pod }) {
         const info = await pod.info;
-        dataAccount.analyses[analysisKeys.reportMetadata] = {};
-        dataAccount.analyses[analysisKeys.reportMetadata].polyPodRuntime =
+        dataAccount.reports[analysisKeys.reportMetadata] = {};
+        dataAccount.reports[analysisKeys.reportMetadata].polyPodRuntime =
             await info.getRuntime();
-        dataAccount.analyses[analysisKeys.reportMetadata].polyPodVersion =
+        dataAccount.reports[analysisKeys.reportMetadata].polyPodVersion =
             await info.getVersion();
 
-        dataAccount.analyses[analysisKeys.reportMetadata].size = size;
+        dataAccount.reports[analysisKeys.reportMetadata].size = size;
 
         const entries = await zipFile.getEntries();
-        dataAccount.analyses[analysisKeys.reportMetadata].filesCount =
+        dataAccount.reports[analysisKeys.reportMetadata].filesCount =
             entries.length;
 
-        dataAccount.analyses[analysisKeys.reportMetadata].preferedLanguage =
+        dataAccount.reports[analysisKeys.reportMetadata].preferedLanguage =
             dataAccount.preferredLanguage
                 ? {
                       name: dataAccount.preferredLanguage.name,

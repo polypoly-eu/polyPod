@@ -1,8 +1,8 @@
 import React from "react";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
-import Story from "./story.jsx";
+import ReportStory from "./reportStory.jsx";
 
-class DataImportingStatusMinistory extends Story {
+class DataImportingStatusReport extends ReportStory {
     constructor(props) {
         super(props);
         this._neededAnalyses = [analysisKeys.importersData];
@@ -12,7 +12,7 @@ class DataImportingStatusMinistory extends Story {
     }
 
     get reportData() {
-        return this.analyses[analysisKeys.importersData];
+        return this.reports[analysisKeys.importersData];
     }
 
     _renderStatus(status) {
@@ -32,9 +32,8 @@ class DataImportingStatusMinistory extends Story {
             <>
                 <p>
                     Data was read using{" "}
-                    {this.analyses[analysisKeys.importersData].length}{" "}
-                    importers. This view shows the list of importers that read
-                    data.
+                    {this.reports[analysisKeys.importersData].length} importers.
+                    This view shows the list of importers that read data.
                 </p>
                 <table>
                     <thead>
@@ -45,7 +44,7 @@ class DataImportingStatusMinistory extends Story {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.analyses[analysisKeys.importersData].map(
+                        {this.reports[analysisKeys.importersData].map(
                             (
                                 { importerName, executionTime, status },
                                 index
@@ -66,4 +65,4 @@ class DataImportingStatusMinistory extends Story {
     }
 }
 
-export default DataImportingStatusMinistory;
+export default DataImportingStatusReport;

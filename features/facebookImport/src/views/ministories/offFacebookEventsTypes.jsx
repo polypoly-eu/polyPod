@@ -17,7 +17,7 @@ class OffFacebookEventsTypesReport extends ReportStory {
         return (
             <BasicList
                 title="Types of activities done off-Facebook!"
-                items={this.reportAnalyses[analysisKeys.offFacebookEventTypes]}
+                items={this.reports[analysisKeys.offFacebookEventTypes]}
             />
         );
     }

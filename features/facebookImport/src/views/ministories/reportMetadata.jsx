@@ -5,7 +5,7 @@ import ReportStory from "./reportStory.jsx";
 class ReportMetadataReport extends ReportStory {
     constructor(props) {
         super(props);
-        this._neededAnalyses = [analysisKeys.reportMetadata];
+        this._neededReports = [analysisKeys.reportMetadata];
     }
     get title() {
         return "Report Metadata";
@@ -13,14 +13,14 @@ class ReportMetadataReport extends ReportStory {
 
     get reportData() {
         return {
-            fileSize: this.analyses[analysisKeys.reportMetadata].fileSize,
-            filesCount: this.analyses[analysisKeys.reportMetadata].filesCount,
+            fileSize: this.reports[analysisKeys.reportMetadata].fileSize,
+            filesCount: this.reports[analysisKeys.reportMetadata].filesCount,
             preferedLanguage:
-                this.analyses[analysisKeys.reportMetadata].preferedLanguage,
+                this.reports[analysisKeys.reportMetadata].preferedLanguage,
             polyPodRuntime:
-                this.analyses[analysisKeys.reportMetadata].polyPodRuntime,
+                this.reports[analysisKeys.reportMetadata].polyPodRuntime,
             polyPodVersion:
-                this.analyses[analysisKeys.reportMetadata].polyPodVersion,
+                this.reports[analysisKeys.reportMetadata].polyPodVersion,
         };
     }
     render() {
@@ -28,34 +28,34 @@ class ReportMetadataReport extends ReportStory {
             <ul>
                 <li key={1}>
                     polyPod runtime:{" "}
-                    {this.analyses[analysisKeys.reportMetadata].polyPodRuntime}
+                    {this.reports[analysisKeys.reportMetadata].polyPodRuntime}
                 </li>
                 <li key={2}>
                     polyPod version:{" "}
-                    {this.analyses[analysisKeys.reportMetadata].polyPodVersion}
+                    {this.reports[analysisKeys.reportMetadata].polyPodVersion}
                 </li>
                 <li key={3}>
-                    File size: {this.analyses[analysisKeys.reportMetadata].size}
+                    File size: {this.reports[analysisKeys.reportMetadata].size}
                 </li>
                 <li key={4}>
                     Files count:{" "}
-                    {this.analyses[analysisKeys.reportMetadata].filesCount}
+                    {this.reports[analysisKeys.reportMetadata].filesCount}
                 </li>
-                {this.analyses[analysisKeys.reportMetadata].preferedLanguage ? (
+                {this.reports[analysisKeys.reportMetadata].preferedLanguage ? (
                     <>
                         <li key={5}>Language:</li>
                         <ul>
                             <li key={6}>
                                 Name:{" "}
                                 {
-                                    this.analyses[analysisKeys.reportMetadata]
+                                    this.reports[analysisKeys.reportMetadata]
                                         .preferedLanguage.name
                                 }
                             </li>
                             <li key={7}>
                                 Code:{" "}
                                 {
-                                    this.analyses[analysisKeys.reportMetadata]
+                                    this.reports[analysisKeys.reportMetadata]
                                         .preferedLanguage.code
                                 }
                             </li>

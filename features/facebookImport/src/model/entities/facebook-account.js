@@ -11,6 +11,7 @@ class FacebookAccount {
         this._preferredLanguage = [];
         this._analyses = {};
         this._reports = {};
+        this._analysesExecutionResults = [];
 
         this._offFacebookCompanies = [];
         this._adInterests = [];
@@ -55,6 +56,14 @@ class FacebookAccount {
 
     set importingResults(importingResults) {
         this._importingResults = importingResults;
+    }
+
+    get analysesExecutionResults() {
+        return this._analysesExecutionResults;
+    }
+
+    set analysesExecutionResults(analysesExecutionResults) {
+        this._analysesExecutionResults = analysesExecutionResults;
     }
 
     get offFacebookCompaniesCount() {

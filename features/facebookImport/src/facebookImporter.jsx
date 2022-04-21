@@ -18,7 +18,6 @@ import {
     PolyImportContext,
     PolyImportProvider,
     ErrorPopup,
-    PolyAnalysisContext,
 } from "@polypoly-eu/poly-look";
 import { subAnalyses } from "./model/analysis";
 import { dataImporters } from "./model/importer.js";

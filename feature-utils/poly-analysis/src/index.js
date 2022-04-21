@@ -1,10 +1,5 @@
-import {
-    analyzeZip,
-    runAnalysis,
-    analyzeFile,
-    UnrecognizedData,
-} from "./analysis";
-import MinistoriesStatusAnalysis from "./analysis/report/ministories-status-analysis";
+import { analyzeZip, runAnalysis, analyzeFile } from "./analysis";
+import MinistoriesStatusReport from "././analysis/report/ministories-status-report";
 import ReportAnalysis from "./analysis/report/report-analysis";
 import RootAnalysis from "./analysis/root-analysis";
 import {
@@ -20,6 +15,5 @@ export {
     relevantZipEntries,
     RootAnalysis,
     ReportAnalysis,
-    UnrecognizedData,
-    MinistoriesStatusAnalysis,
+    MinistoriesStatusReport,
 };

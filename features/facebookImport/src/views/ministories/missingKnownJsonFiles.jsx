@@ -13,12 +13,12 @@ class MissingKnownJSONFilesReport extends ReportStory {
     }
 
     get reportData() {
-        return this.reportAnalyses[analysisKeys.missingKnownFileNames];
+        return this.reports[analysisKeys.missingKnownFileNames];
     }
     render() {
         return (
             <BasicList
-                items={this.reportAnalyses[analysisKeys.missingKnownFileNames]}
+                items={this.reports[analysisKeys.missingKnownFileNames]}
             />
         );
     }
