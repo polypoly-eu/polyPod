@@ -14,10 +14,7 @@ const PolyImportComponentFixture = () => {
       {files?.map((fileName, id) => (
         <p key={id}>{fileName}</p>
       ))}
-      <button
-        className="removeFiles"
-        onClick={() => handleRemoveFiles()}
-      ></button>
+      <button className="removeFiles" onClick={handleRemoveFiles}></button>
     </div>
   );
 };

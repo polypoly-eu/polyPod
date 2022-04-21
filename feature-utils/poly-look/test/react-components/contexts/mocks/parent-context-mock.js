@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { MockerPod } from "./pod-mock";
+import { MockPod } from "./pod-mock";
 
 export const MockParentContext = createContext();
 
@@ -16,7 +16,7 @@ export const MockParentContextProvider = ({ children }) => {
 
   //on startup
   useEffect(() => {
-    const newPod = new MockerPod();
+    const newPod = new MockPod();
     setPod(newPod);
   }, []);
   return (
