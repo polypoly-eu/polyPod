@@ -1,11 +1,10 @@
-export default class PlaceVisit {
-    constructor({ timestamp, locationName }) {
-        this._timestamp = timestamp;
-        this._locationName = locationName;
-    }
+import TimelineEvent from "./timeline-event";
 
-    get timestamp() {
-        return this._timestamp;
+export default class PlaceVisit extends TimelineEvent {
+    constructor({ timestamp, locationName }) {
+        super({ timestamp });
+
+        this._locationName = locationName;
     }
 
     get locationName() {

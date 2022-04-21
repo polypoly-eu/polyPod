@@ -1,11 +1,10 @@
-export default class ActivitySegment {
-    constructor({ timestamp, activityType }) {
-        this._timestamp = timestamp;
-        this._activityType = activityType;
-    }
+import TimelineEvent from "./timeline-event";
 
-    get timestamp() {
-        return this._timestamp;
+export default class ActivitySegment extends TimelineEvent {
+    constructor({ timestamp, activityType }) {
+        super({ timestamp });
+
+        this._activityType = activityType;
     }
 
     get activityType() {
