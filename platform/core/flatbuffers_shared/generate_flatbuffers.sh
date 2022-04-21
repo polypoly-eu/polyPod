@@ -6,7 +6,7 @@ echo '===> Compiling the Schema...'
 cd flatbuffers_shared
 RUST_FLATBUFFERS_OUT=../src/flatbuffers_generated
 IOS_FLATBUFFERS_OUT=../PolyPodCoreSwift/Sources/PolyPodCoreSwift/FlatbuffersGenerated
-ANDROID_FLATBUFFERS_OUT=../PolyPodCoreAndroid/src/main/java/coop/polypoly/core/FlatbuffersGenerated
+ANDROID_FLATBUFFERS_OUT=../PolyPodCoreAndroid/core/src/main/java/coop/polypoly/core/FlatbuffersGenerated
 FLATBUFFER_MODELS=$( find -P flatbuffer_models -name "*.fbs" )
 
 echo "*** Removing previously compiled models ***"

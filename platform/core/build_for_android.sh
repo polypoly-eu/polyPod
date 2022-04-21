@@ -64,7 +64,7 @@ fi
 
 # ----------------------- Flatbuffer source files setup ----------------------- #
 flatbuffers_lib_source_path=flatbuffers_shared/flatbuffers/java
-flatbuffers_lib_copy_path=./PolyPodCoreAndroid/src/main
+flatbuffers_lib_copy_path=./PolyPodCoreAndroid/core/src/main
 
 echo "*** Copying flatbuffer source files from $flatbuffers_lib_source_path to $flatbuffers_lib_copy_path"
 cp -a $flatbuffers_lib_source_path $flatbuffers_lib_copy_path
@@ -83,7 +83,7 @@ echo "*** Done ***"
 
 # ----------------------- Linking JNI libraries ----------------------- #
 architectures=(arm64-v8a armeabi-v7a x86_64 x86)
-jni_libs_copy_path=./PolyPodCoreAndroid/src/main/jniLibs
+jni_libs_copy_path=./PolyPodCoreAndroid/core/src/main/jniLibs
 libName=libpolypod_core.so
 
 echo "*** Linking JNI libraries with PolyPodCoreAndroid ***"

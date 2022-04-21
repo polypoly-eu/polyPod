@@ -4,4 +4,8 @@ An Android library wrapper around PolyPodCore Rust library.
 
 ## Building
 
-- Cannot yet be built/tested on its own.
+- Build rust core with make target from core [`Makefile`](../Makefile):
+```
+make -C .. android_libraries
+```
+- Open Android studio and build the project.
