@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import FilterChips from "../../src/react-components/filterChips.jsx";
 
@@ -23,38 +23,39 @@ const component = (
   />
 );
 
-it("Chips present in document", () => {
-  const { getByText } = render(component);
+it("Chips content is an object array", () => {
+  const newComponent = <FilterChips chipsContent={chipsContentObject} />;
+  render(newComponent);
   for (const chipId of chipsContent) {
-    const chipElement = getByText(chipId);
+    const chipElement = screen.getByText(chipId);
     expect(chipElement).toBeInTheDocument();
   }
 });
 
-it("Chips content is an object array", () => {
-  const newComponent = <FilterChips chipsContent={chipsContentObject} />;
-  const { getByText } = render(newComponent);
+beforeEach(() => {
+  render(component);
+});
+
+it("Chips present in document", () => {
   for (const chipId of chipsContent) {
-    const chipElement = getByText(chipId);
+    const chipElement = screen.getByText(chipId);
     expect(chipElement).toBeInTheDocument();
   }
 });
 
 describe("Checks onChipClick event", () => {
   it("is called", () => {
-    const { getByText } = render(component);
     for (const chipId of chipsContent) {
-      const chipElement = getByText(chipId);
+      const chipElement = screen.getByText(chipId);
       fireEvent.click(chipElement, mockedHandleClick);
       expect(mockedHandleClick).toHaveBeenCalledWith(chipId, [chipId]);
     }
   });
 
   it("selecting a chip changes its state", () => {
-    const { getByText } = render(component);
     for (const chipId of chipsContent) {
       const exclusive = component.props.exclusive;
-      const chipElement = getByText(chipId);
+      const chipElement = screen.getByText(chipId);
       expect(chipElement).not.toHaveClass("chip selected");
       fireEvent.click(chipElement, mockedHandleClick);
       expect(chipElement).toHaveClass("chip selected");
@@ -67,10 +68,9 @@ describe("Checks onChipClick event", () => {
 });
 
 it("The default active chips are selected", () => {
-  const { getByText } = render(component);
   for (const chipId of chipsContent) {
     const defaultActiveChips = component.props.defaultActiveChips;
-    const chipElement = getByText(chipId);
+    const chipElement = screen.getByText(chipId);
     if (defaultActiveChips === [chipId]) {
       expect(chipElement).toHaveClass("chip selected");
     }
@@ -79,7 +79,6 @@ it("The default active chips are selected", () => {
 
 it("There is a class that changes the theme", () => {
   const theme = component.props.theme;
-  render(component);
   if (theme === lightTheme) {
     expect(component).toHaveClass("poly-theme-light");
   }
