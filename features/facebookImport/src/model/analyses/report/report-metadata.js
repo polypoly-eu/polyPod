@@ -10,7 +10,7 @@ export default class ReportMetadataAnalysis extends ReportAnalysis {
         dataAccount.reports[analysisKeys.reportMetadata].polyPodVersion =
             await info.getVersion();
 
-        dataAccount.reports[analysisKeys.reportMetadata].size = size;
+        dataAccount.reports[analysisKeys.reportMetadata].fileSize = size;
 
         const entries = await zipFile.getEntries();
         dataAccount.reports[analysisKeys.reportMetadata].filesCount =

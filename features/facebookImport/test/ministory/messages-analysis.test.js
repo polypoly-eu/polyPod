@@ -1,4 +1,6 @@
 import MessagesAnalysis from "../../src/model/analyses/ministories/messages-analysis";
+import analysisKeys from "../../src/model/analyses/utils/analysisKeys";
+import MessagesMinistory from "../../src/views/ministories/messages";
 import {
     DATASET_EXPECTED_VALUES,
     zipFileWithMessageThreads,
@@ -12,16 +14,17 @@ import {
 } from "../utils/analysis-assertions";
 
 describe("Messages analysis for empty export", () => {
-    let analysis = null;
+    let analysisStory = null;
     let status = null;
 
     beforeAll(async () => {
         let zipFile = new ZipFileMock();
-        const { analysisResult } = await runAnalysisForExport(
+        const { facebookAccount, analysisResult } = await runAnalysisForExport(
             MessagesAnalysis,
             zipFile
         );
-        ({ analysis, status } = analysisResult);
+        ({ status } = analysisResult);
+        analysisStory = new MessagesMinistory(facebookAccount);
     });
 
     it("has success status", async () => {
@@ -29,21 +32,24 @@ describe("Messages analysis for empty export", () => {
     });
 
     it("is not active", async () => {
-        expectInactiveAnalysis(analysis);
+        expectInactiveAnalysis(analysisStory);
     });
 });
 
 describe("Messages analysis for export with messages", () => {
-    let analysis = null;
+    let analysisStory = null;
     let status = null;
+    let analysisData = null;
 
     beforeAll(async () => {
         let zipFile = zipFileWithMessageThreads();
-        const { analysisResult } = await runAnalysisForExport(
+        const { facebookAccount, analysisResult } = await runAnalysisForExport(
             MessagesAnalysis,
             zipFile
         );
-        ({ analysis, status } = analysisResult);
+        ({ status } = analysisResult);
+        analysisStory = new MessagesMinistory(facebookAccount);
+        analysisData = getAnalysisData(facebookAccount);
     });
 
     it("has success status", async () => {
@@ -51,26 +57,26 @@ describe("Messages analysis for export with messages", () => {
     });
 
     it("is active", async () => {
-        expectActiveAnalysis(analysis);
+        expectActiveAnalysis(analysisStory);
     });
 
     it("has correct number of message threads", () =>
-        expect(analysis._messagesThreadsData.length).toBe(
+        expect(analysisData.messagesThreadsData.length).toBe(
             DATASET_EXPECTED_VALUES.numberOfMessageThreads
         ));
 
     it("has correct number of message", () =>
-        expect(analysis._messagesCount).toBe(
+        expect(analysisData.messagesCount).toBe(
             DATASET_EXPECTED_VALUES.numberOfMessages
         ));
 
     it("has correct number of usernames", () =>
-        expect(analysis._totalUsernamesCount).toBe(
+        expect(analysisData.totalUsernamesCount).toBe(
             DATASET_EXPECTED_VALUES.numberOfUsernames
         ));
 
     it("has correct data for thread one", () =>
-        expect(analysis._messagesThreadsData[0]).toStrictEqual({
+        expect(analysisData.messagesThreadsData[0]).toStrictEqual({
             title: "Duffy Duck",
             count: 4,
             extraData: {
@@ -80,7 +86,7 @@ describe("Messages analysis for export with messages", () => {
         }));
 
     it("has correct data for thread two", () =>
-        expect(analysis._messagesThreadsData[1]).toStrictEqual({
+        expect(analysisData.messagesThreadsData[1]).toStrictEqual({
             title: "Jane Doe",
             count: 3,
             extraData: {
@@ -89,3 +95,13 @@ describe("Messages analysis for export with messages", () => {
             },
         }));
 });
+
+function getAnalysisData(facebookAccount) {
+    return {
+        messagesThreadsData:
+            facebookAccount.analyses[analysisKeys.messagesThreadsData],
+        messagesCount: facebookAccount.analyses[analysisKeys.messagesCount],
+        totalUsernamesCount:
+            facebookAccount.analyses[analysisKeys.totalUsernamesCount],
+    };
+}

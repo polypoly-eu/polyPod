@@ -7,6 +7,7 @@ export default {
     displayData: "displayData",
     reactionsTypeCountPairs: "reactionsTypeCountPairs",
     messagesThreadsData: "messagesThreadsData",
+    totalUsernamesCount: "totalUsernamesCount",
     messagesCount: "messagesCount",
     offFacebookEventTypes: "offFacebookEventTypes",
     onOffEvents: "onOffEvents",

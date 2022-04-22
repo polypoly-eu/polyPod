@@ -13,7 +13,7 @@ import {
 import i18n from "../../i18n.js";
 
 import "./explore.css";
-import ministories from "../ministories/ministories.js";
+import { ministories } from "../ministories/ministories.js";
 
 const PopUpMessage = ({ children, reportResultAnswer }) => {
     return <div className={"pop-up" + reportResultAnswer}>{children}</div>;

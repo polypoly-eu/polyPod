@@ -1,5 +1,5 @@
 import React from "react";
-import reports from "../ministories/reports";
+import { reports } from "../ministories/reports";
 
 import "./details.css";
 

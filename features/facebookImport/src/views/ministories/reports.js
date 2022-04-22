@@ -5,7 +5,7 @@ import OffFacebookEventsTypesReport from "./offFacebookEventsTypes.jsx";
 import ReportMetadataReport from "./reportMetadata.jsx";
 import UnknownTopLevelFoldersReport from "./unknownTopLevelFolders.jsx";
 
-export default [
+export const reports = [
     DataImportingStatusReport,
     MissingKnownJSONFilesReport,
     MissingCommonJSONFilesReport,
@@ -13,3 +13,5 @@ export default [
     ReportMetadataReport,
     UnknownTopLevelFoldersReport,
 ];
+
+export const NUMBER_OF_REPORTS = reports.length;

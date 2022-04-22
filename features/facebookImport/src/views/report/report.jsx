@@ -8,8 +8,8 @@ import RouteButton from "../../components/buttons/routeButton.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
 import i18n from "../../i18n.js";
-import ministories from "../ministories/ministories.js";
-import reports from "../ministories/reports.js";
+import { ministories } from "../ministories/ministories.js";
+import { reports } from "../ministories/reports.js";
 
 import "./report.css";
 

@@ -1,11 +1,8 @@
-import {
-    MinistoriesStatusReport,
-    ReportStories,
-} from "@polypoly-eu/poly-analysis";
-import ministories from "../src/views/ministories/ministories";
-import reports from "../src/views/ministories/reports";
 import { zipFileWithOffFacebookEvents } from "./datasets/off-facebook-events-data";
-import { runAnalysesForZip } from "./utils/analyses-execution";
+import {
+    getReportStories,
+    runAnalysesForZip,
+} from "./utils/analyses-execution";
 import { expectActiveAnalysis } from "./utils/analysis-assertions";
 
 export const NUMBER_OF_REPORT_ANALYSES = 7;
@@ -19,26 +16,7 @@ describe("Report creation for export", () => {
         let zipFile = zipFileWithOffFacebookEvents();
         zipFile.addJsonEntry("unknow_folder/unknown_file.json", '""');
         facebookAccount = await runAnalysesForZip(zipFile);
-        const computedReportStoriesList = reports.map(
-            (reportClass) => new reportClass(facebookAccount)
-        );
-
-        const computedMinistories = ministories.map(
-            (MinistoryClass) => new MinistoryClass(facebookAccount)
-        );
-
-        const activeReportStories = computedReportStoriesList.filter(
-            (reportStory) => reportStory.active
-        );
-        const statusReport = new MinistoriesStatusReport([
-            ...computedReportStoriesList,
-            ...computedMinistories,
-        ]);
-
-        computedReportStories = new ReportStories([
-            ...activeReportStories,
-            statusReport,
-        ]);
+        computedReportStories = getReportStories(facebookAccount);
         jsonReport = computedReportStories.jsonReport;
     });
 

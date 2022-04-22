@@ -9,7 +9,7 @@ import OffFacebookEventsTypesMinistory from "./offFacebookEventsTypes.jsx";
 import OnOffFacebookEventsMinistory from "./onOffFacebookEvents.jsx";
 import PostReactionTypesMinistory from "./postReactionsTypes.jsx";
 
-const ministories = [
+export const ministories = [
     DataStructureMinistory,
     ActivitiesMinistory,
     AdvertisingValueMinistory,
@@ -21,4 +21,4 @@ const ministories = [
     MessagesMinistory,
     ConnectedAdvertisersMinistory,
 ];
-export default ministories;
+export const NUMBER_OF_MINISTORIES = ministories.length;

@@ -1,5 +1,6 @@
 import MissingCommonJSONFilesAnalysis from "../../src/model/analyses/report/missing-common-json-files";
 import commonStructure from "../../src/static/commonStructure";
+import MissingCommonJSONFilesReport from "../../src/views/ministories/missingCommonJsonFiles";
 import { ZipFileMock } from "../mocks/zipfile-mock";
 import { runAnalysisForExport } from "../utils/analyses-execution";
 import {
@@ -9,16 +10,17 @@ import {
 } from "../utils/analysis-assertions";
 
 describe("Missing common JSON files analysis for empty zip", () => {
-    let analysis = null;
+    let analysisReport = null;
     let status = null;
 
     beforeAll(async () => {
         let zipFile = new ZipFileMock();
-        const { analysisResult } = await runAnalysisForExport(
+        const { facebookAccount, analysisResult } = await runAnalysisForExport(
             MissingCommonJSONFilesAnalysis,
             zipFile
         );
-        ({ analysis, status } = analysisResult);
+        ({ status } = analysisResult);
+        analysisReport = new MissingCommonJSONFilesReport(facebookAccount);
     });
 
     it("has success status", async () => {
@@ -26,12 +28,12 @@ describe("Missing common JSON files analysis for empty zip", () => {
     });
 
     it("is active", async () => {
-        expectActiveAnalysis(analysis);
+        expectActiveAnalysis(analysisReport);
     });
 
     it("has id in JSON report", async () => {
-        expect(analysis.jsonReport.id).toBe(
-            MissingCommonJSONFilesAnalysis.name
+        expect(analysisReport.jsonReport.id).toBe(
+            getReportNameFromAnalaysis(MissingCommonJSONFilesAnalysis)
         );
     });
 
@@ -39,12 +41,14 @@ describe("Missing common JSON files analysis for empty zip", () => {
         const missingJsonFileNames = commonStructure.filter((each) =>
             each.endsWith(".json")
         );
-        expect(analysis.jsonReport.data).toStrictEqual(missingJsonFileNames);
+        expect(analysisReport.jsonReport.data).toStrictEqual(
+            missingJsonFileNames
+        );
     });
 });
 
 describe("Missing common JSON files analysis for zip with no missing common files", () => {
-    let analysis = null;
+    let analysisReport = null;
     let status = null;
 
     beforeAll(async () => {
@@ -52,11 +56,12 @@ describe("Missing common JSON files analysis for zip with no missing common file
         commonStructure
             .filter((each) => each.endsWith(".json"))
             .forEach((each) => zipFile.addJsonEntry(each.substring(1), {}));
-        const { analysisResult } = await runAnalysisForExport(
+        const { facebookAccount, analysisResult } = await runAnalysisForExport(
             MissingCommonJSONFilesAnalysis,
             zipFile
         );
-        ({ analysis, status } = analysisResult);
+        ({ status } = analysisResult);
+        analysisReport = new MissingCommonJSONFilesReport(facebookAccount);
     });
 
     it("has success status", async () => {
@@ -64,6 +69,10 @@ describe("Missing common JSON files analysis for zip with no missing common file
     });
 
     it("is not active", async () => {
-        expectInactiveAnalysis(analysis);
+        expectInactiveAnalysis(analysisReport);
     });
 });
+
+function getReportNameFromAnalaysis(analysis) {
+    return analysis.name.replace("Analysis", "Report");
+}
