@@ -676,6 +676,15 @@ export class BrowserPod implements Pod {
     constructor() {
         window.addEventListener("load", async () => {
             window.manifestData = __DYNAMIC_IMPORT_MANIFEST__;
+            if (window.manifestData === {}) {
+                console.warn(
+                    `Unable to find feature manifest, navigation bar disabled.
+To get the navigation bar, expose the manifest's content as
+window.manifestData.`
+                );
+                return;
+            }
+
             window.manifest = await readManifest(window.manifestData);
             window.parent.currentTitle =
                 window.parent.currentTitle || window.manifest.name;
