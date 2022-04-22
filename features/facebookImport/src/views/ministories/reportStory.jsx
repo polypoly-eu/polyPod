@@ -12,10 +12,9 @@ class ReportStory extends Story {
     }
 
     get jsonReport() {
-        //TODO make a better way to extract the report Data
         return {
             id: this.id,
-            data: this.reports[this._neededReports[0]],
+            data: this.reportData || null,
         };
     }
 

@@ -17,9 +17,7 @@ class UnknownTopLevelFoldersReport extends ReportStory {
     }
 
     render() {
-        return (
-            <BasicList items={this.reports[analysisKeys.unknownFolderNames]} />
-        );
+        return <BasicList items={this.reportData} />;
     }
 }
 

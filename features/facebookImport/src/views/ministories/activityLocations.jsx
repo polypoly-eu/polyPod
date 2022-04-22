@@ -2,12 +2,11 @@ import React from "react";
 
 import BasicDataCountTable from "../../components/basicDataCountTable/basicDataCountTable.jsx";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
-import Story from "./story.jsx";
+import { SingleDataStory } from "./singleDataStory.jsx";
 
-class ActivityLocationsMinistory extends Story {
+class ActivityLocationsMinistory extends SingleDataStory {
     constructor(props) {
-        super(props);
-        this._neededAnalyses = [analysisKeys.locationsData];
+        super(props, analysisKeys.locationsData);
     }
     get title() {
         return "Session Activity Locations";
@@ -18,7 +17,7 @@ class ActivityLocationsMinistory extends Story {
                 title={
                     "Locations contained in session activities, like log-in or log-out."
                 }
-                items={this.account[analysisKeys.locationsData]}
+                items={this.analysisData}
             />
         );
     }

@@ -1,17 +1,16 @@
 import React from "react";
 
 import i18n from "../../i18n.js";
-import Story from "./story.jsx";
 import {
     ActivitiesMiniStorySummary,
     ActivitiesMiniStoryDetails,
 } from "../../components/activitiesMiniStory/activitiesMiniStory.jsx";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
+import { SingleDataStory } from "./singleDataStory.jsx";
 
-class ActivitiesMinistory extends Story {
+class ActivitiesMinistory extends SingleDataStory {
     constructor(props) {
-        super(props);
-        this._neededAnalyses = [analysisKeys.totalEvents];
+        super(props, analysisKeys.totalEvents);
     }
 
     get title() {
@@ -19,19 +18,11 @@ class ActivitiesMinistory extends Story {
     }
 
     renderSummary() {
-        return (
-            <ActivitiesMiniStorySummary
-                totalEvents={this.analyses[analysisKeys.totalEvents]}
-            />
-        );
+        return <ActivitiesMiniStorySummary totalEvents={this.analysisData} />;
     }
 
     renderDetails() {
-        return (
-            <ActivitiesMiniStoryDetails
-                totalEvents={this.analyses[analysisKeys.totalEvents]}
-            />
-        );
+        return <ActivitiesMiniStoryDetails totalEvents={this.analysisData} />;
     }
 }
 

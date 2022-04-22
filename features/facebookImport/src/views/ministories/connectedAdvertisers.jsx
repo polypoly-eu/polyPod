@@ -1,13 +1,12 @@
 import React from "react";
 import ListOfDetails from "../../components/listOfDetails/listOfDetails.jsx";
-import Story from "./story.jsx";
 import i18n from "../../i18n";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
+import { SingleDataStory } from "./singleDataStory.jsx";
 
-class ConnectedAdvertisersMinistory extends Story {
+class ConnectedAdvertisersMinistory extends SingleDataStory {
     constructor(props) {
-        super(props);
-        this._neededAnalyses = [analysisKeys.connectedAdvertiserNames];
+        super(props, analysisKeys.connectedAdvertiserNames);
     }
     get title() {
         return i18n.t("connectedAdvertisersMiniStory:title");
@@ -22,16 +21,11 @@ class ConnectedAdvertisersMinistory extends Story {
                         fontFamily: "Jost Bold",
                     }}
                 >
-                    {
-                        this.analyses[analysisKeys.connectedAdvertiserNames]
-                            .length
-                    }
+                    {this.analysisData.length}
                 </h2>
                 <p>
                     {i18n.t("connectedAdvertisersMiniStory:summary.text.1", {
-                        number_companies:
-                            this.analyses[analysisKeys.connectedAdvertiserNames]
-                                .length,
+                        number_companies: this.analysisData.length,
                     })}
                 </p>
                 <p>{i18n.t("connectedAdvertisersMiniStory:summary.text.2")}</p>
@@ -54,14 +48,10 @@ class ConnectedAdvertisersMinistory extends Story {
             >
                 <p>
                     {i18n.t("connectedAdvertisersMiniStory:details.text", {
-                        number_companies:
-                            this.analyses[analysisKeys.connectedAdvertiserNames]
-                                .length,
+                        number_companies: this.analysisData.length,
                     })}
                 </p>
-                <ListOfDetails
-                    list={this.analyses[analysisKeys.connectedAdvertiserNames]}
-                />
+                <ListOfDetails list={this.analysisData} />
             </div>
         );
     }

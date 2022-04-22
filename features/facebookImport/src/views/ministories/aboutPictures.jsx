@@ -1,14 +1,13 @@
 import React from "react";
-import Story from "./story.jsx";
 import i18n from "../../i18n";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
 
 import PicturesMiniStory from "../../components/picturesMiniStory/picturesMiniStory.jsx";
+import { SingleDataStory } from "./singleDataStory.jsx";
 
-class AboutPicturesMinistory extends Story {
+class AboutPicturesMinistory extends SingleDataStory {
     constructor(props) {
-        super(props);
-        this._neededAnalyses = [analysisKeys.picturesCount];
+        super(props, analysisKeys.picturesCount);
     }
 
     get title() {

@@ -1,13 +1,12 @@
 import React from "react";
-import Story from "./story.jsx";
 import DataStructureMiniStory from "../../components/dataStructureMiniStory/dataStructureMiniStory.jsx";
 import i18n from "../../i18n.js";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
+import { SingleDataStory } from "./singleDataStory.jsx";
 
-class DataStructureMinistory extends Story {
+class DataStructureMinistory extends SingleDataStory {
     constructor(props) {
-        super(props);
-        this._neededAnalyses = [analysisKeys.bubblesData];
+        super(props, analysisKeys.bubblesData);
     }
     get title() {
         return i18n.t("dataStructureMiniStory:title");
@@ -15,21 +14,16 @@ class DataStructureMinistory extends Story {
 
     renderSummary() {
         let totalFiles = 0;
-        this.analyses[analysisKeys.bubblesData].forEach(
-            (a) => (totalFiles += a.count)
-        );
+        this.analysisData.forEach((a) => (totalFiles += a.count));
         return (
             <>
                 <p>
                     {i18n.t("dataStructureMiniStory:summary", {
-                        amount_of_folders:
-                            this.analyses[analysisKeys.bubblesData].length,
+                        amount_of_folders: this.analysisData.length,
                         amount_of_files: totalFiles,
                     })}
                 </p>
-                <DataStructureMiniStory
-                    data={this.analyses[analysisKeys.bubblesData]}
-                />
+                <DataStructureMiniStory data={this.analysisData} />
             </>
         );
     }

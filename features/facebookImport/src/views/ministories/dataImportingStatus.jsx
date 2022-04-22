@@ -31,9 +31,8 @@ class DataImportingStatusReport extends ReportStory {
         return (
             <>
                 <p>
-                    Data was read using{" "}
-                    {this.reports[analysisKeys.importersData].length} importers.
-                    This view shows the list of importers that read data.
+                    Data was read using {this.reportData.length} importers. This
+                    view shows the list of importers that read data.
                 </p>
                 <table>
                     <thead>
@@ -44,7 +43,7 @@ class DataImportingStatusReport extends ReportStory {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.reports[analysisKeys.importersData].map(
+                        {this.reportData.map(
                             (
                                 { importerName, executionTime, status },
                                 index
