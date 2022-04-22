@@ -1,5 +1,7 @@
 import AdvertisingValueAnalysis from "../../src/model/analyses/ministories/advertising-value-analysis";
+import analysisKeys from "../../src/model/analyses/utils/analysisKeys";
 import FacebookAccount from "../../src/model/entities/facebook-account";
+import AdvertisingValueMinistory from "../../src/views/ministories/advertisingValue";
 import { runAnalysisForAccount } from "../utils/analyses-execution";
 import {
     expectInactiveAnalysis,
@@ -8,15 +10,16 @@ import {
 } from "../utils/analysis-assertions";
 
 describe("Your advertising value analysis from account with no ad interests", () => {
-    let analysis = null;
     let status = null;
+    let analysisStory = null;
 
     beforeAll(async () => {
         const facebookAccount = new FacebookAccount();
-        ({ analysis, status } = await runAnalysisForAccount(
+        ({ status } = await runAnalysisForAccount(
             AdvertisingValueAnalysis,
             facebookAccount
         ));
+        analysisStory = new AdvertisingValueMinistory(facebookAccount);
     });
 
     it("has success status", async () => {
@@ -24,7 +27,7 @@ describe("Your advertising value analysis from account with no ad interests", ()
     });
 
     it("is not active", async () => {
-        expectInactiveAnalysis(analysis);
+        expectInactiveAnalysis(analysisStory);
     });
 });
 
@@ -54,16 +57,24 @@ const DATASETS = [
 ];
 for (const dataset of DATASETS) {
     describe("Your advertising value analysis from account with no ad interests", () => {
-        let analysis = null;
         let status = null;
+        let analysisStory = null;
+        let analysisData = null;
 
         beforeAll(async () => {
             let facebookAccount = new FacebookAccount();
             facebookAccount.adInterests = dataset.adInterests;
-            ({ analysis, status } = await runAnalysisForAccount(
+            ({ status } = await runAnalysisForAccount(
                 AdvertisingValueAnalysis,
                 facebookAccount
             ));
+            analysisStory = new AdvertisingValueMinistory(facebookAccount);
+            analysisData = {
+                numberInterests:
+                    facebookAccount.analyses[analysisKeys.numberInterests],
+                randomAdInterests:
+                    facebookAccount.analyses[analysisKeys.randomAdInterests],
+            };
         });
 
         it("has success status", async () => {
@@ -71,21 +82,23 @@ for (const dataset of DATASETS) {
         });
 
         it("is active", async () => {
-            expectActiveAnalysis(analysis);
+            expectActiveAnalysis(analysisStory);
         });
 
         it("has correct number of ad interests", async () => {
-            expect(analysis._numberInterests).toBe(dataset.adInterests.length);
+            expect(analysisData.numberInterests).toBe(
+                dataset.adInterests.length
+            );
         });
 
         it("has correct number of random interests", async () => {
-            expect(analysis._randomAdInterests.length).toBe(
+            expect(analysisData.randomAdInterests.length).toBe(
                 dataset.randomAdInterestsCount
             );
         });
 
         it("includes all random interests", async () => {
-            analysis._randomAdInterests.forEach((adInterest) =>
+            analysisData.randomAdInterests.forEach((adInterest) =>
                 expect(dataset.adInterests).toContain(adInterest)
             );
         });

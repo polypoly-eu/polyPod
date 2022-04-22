@@ -38,7 +38,6 @@ export function mapEmojiToReaction(reactions) {
 
 const PostReactionTypesMiniStory = ({ reactionData }) => {
     const [selectedReaction, setSelectedReaction] = useState("TOTAL");
-    console.log("THIS IS REACTION DATA: ", reactionData);
     const handleIconSelected = (_, d) => setSelectedReaction(d.data.title);
     const iconFilter = {
         filterElement: "feColorMatrix",

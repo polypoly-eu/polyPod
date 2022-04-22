@@ -40,11 +40,12 @@ export async function runAnalysesForZip(zipFile) {
         pod: new MockerPod(),
         DataAccount: FacebookAccount,
     });
-    return await analyzeZip({
+    await analyzeZip({
         zipData: zipFile.enrichedFileData(),
         zipFile,
         dataAccount: facebookAccount,
         subAnalyses,
         pod: new MockerPod(),
     });
+    return facebookAccount;
 }

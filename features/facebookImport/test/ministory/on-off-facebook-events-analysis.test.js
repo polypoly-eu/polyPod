@@ -7,6 +7,7 @@ import {
 import {
     expectActiveAnalysis,
     expectAnalysisSuccessStatus,
+    expectInactiveAnalysis,
 } from "../utils/analysis-assertions";
 import {
     buildDisplayData,
@@ -37,7 +38,7 @@ describe("Off-Facebook events analysis from empty account", () => {
     });
 
     it("is not active", async () => {
-        expect(analysisStory.active).toBe(false);
+        expectInactiveAnalysis(analysisStory);
     });
 });
 

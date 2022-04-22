@@ -7,6 +7,10 @@ export default class ReportStories {
         return this._activeReportStories;
     }
 
+    get active() {
+        return this.activeStories.length > 0;
+    }
+
     get jsonReport() {
         const jsonStoriesReport = this.activeStories.map(
             (story) => story.jsonReport

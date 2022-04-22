@@ -13,6 +13,7 @@ class AdvertisingValueMinistory extends Story {
         super(props);
         this._neededAnalyses = [
             analysisKeys.numberInterests,
+            analysisKeys.randomAdInterests,
             analysisKeys.sortedAdInterests,
         ];
     }
@@ -22,16 +23,7 @@ class AdvertisingValueMinistory extends Story {
     }
 
     renderSummary() {
-        const randomAdInterests = new Set();
-        const numberInterests = this.analyses[analysisKeys.numberInterests];
-        const adInterests = this.analyses[analysisKeys.sortedAdInterests];
-        if (numberInterests > 0) {
-            while (randomAdInterests.size < Math.min(3, numberInterests)) {
-                randomAdInterests.add(
-                    adInterests[Math.floor(Math.random() * adInterests.length)]
-                );
-            }
-        }
+        const randomAdInterests = this.analyses[analysisKeys.randomAdInterests];
         return (
             <AdvertisingValueMiniStorySummary
                 randomAdInterests={[...randomAdInterests]}
