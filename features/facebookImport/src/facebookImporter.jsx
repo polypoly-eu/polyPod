@@ -27,9 +27,7 @@ import i18n from "./i18n.js";
 import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
 import ExploreView from "./views/explore/explore.jsx";
-import ReportView from "./views/report/report.jsx";
 import ExploreDetails from "./views/explore/details.jsx";
-import ReportDetails from "./views/report/details.jsx";
 import DataStructureInfoScreen from "./views/infoScreens/dataStructureInfoScreen/dataStructureInfoScreen.jsx";
 import ActivitiesInfoScreen from "./views/infoScreens/activitiesInfoScreen/activitiesInfoScreen.jsx";
 import MessagesInfoScreen from "./views/infoScreens/messagesInfoScreen/messagesInfoScreen.jsx";
@@ -42,6 +40,7 @@ import Loading from "./components/loading/loading.jsx";
 import "./styles.css";
 
 import manifestData from "./static/manifest.json";
+import ReportWrapper from "./views/report/reportWrapper.jsx";
 window.manifestData = manifestData;
 
 const FacebookImporter = () => {
@@ -87,9 +86,7 @@ const FacebookImporter = () => {
                     <Route exact path="/explore/details">
                         <ExploreDetails />
                     </Route>
-                    <Route exact path="/report">
-                        <ReportView />
-                    </Route>
+                    <ReportWrapper />
                     <Route exact path="/report/data-structure-info">
                         <DataStructureInfoScreen />
                     </Route>
@@ -98,9 +95,6 @@ const FacebookImporter = () => {
                     </Route>
                     <Route exact path="/report/reaction-types-info">
                         <PostReactionInfoScreen />
-                    </Route>
-                    <Route exact path="/report/details">
-                        <ReportDetails />
                     </Route>
                     <Route exact path="/report/details/activities-info">
                         <ActivitiesInfoScreen />

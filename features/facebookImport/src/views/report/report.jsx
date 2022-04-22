@@ -1,5 +1,8 @@
-import { MinistoriesStatusReport } from "@polypoly-eu/poly-analysis";
-import { PolyAnalysisContext, PolyImportContext } from "@polypoly-eu/poly-look";
+import {
+    MinistoriesStatusReport,
+    ReportStories,
+} from "@polypoly-eu/poly-analysis";
+import { PolyImportContext } from "@polypoly-eu/poly-look";
 import React, { useContext, useEffect, useState } from "react";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
@@ -10,9 +13,8 @@ import reports from "../ministories/reports.js";
 
 import "./report.css";
 
-const ReportView = () => {
+const ReportView = ({ reportStories, setReportStories }) => {
     const { setReportResult, handleBack } = useContext(ImporterContext);
-    const { reportStories, setReportStories } = useContext(PolyAnalysisContext);
     const { account } = useContext(PolyImportContext);
     const [loading, setLoading] = useState(false);
 
@@ -77,23 +79,4 @@ const ReportView = () => {
         </div>
     );
 };
-
-export class ReportStories {
-    constructor(activeReportStories) {
-        this._activeReportStories = activeReportStories;
-    }
-
-    get activeStories() {
-        return this._activeReportStories;
-    }
-
-    get jsonReport() {
-        const jsonStoriesReport = this.activeStories.map(
-            (story) => story.jsonReport
-        );
-
-        return { reportAnalyses_v1: jsonStoriesReport };
-    }
-}
-
 export default ReportView;
