@@ -17,17 +17,19 @@ import {
 import { toUnixTimestamp } from "../../src/model/importers/utils/timestamps";
 import { createMappedOnOffEventsData } from "../datasets/on-off-facebook-events-data";
 import { zipFileWithOnOffFacebookCompanyMatches } from "../datasets/on-off-events-comparison-data";
+import OnOffFacebookEventsMinistory from "../../src/views/ministories/onOffFacebookEvents";
+import analysisKeys from "../../src/model/analyses/utils/analysisKeys";
 
 describe("Off-Facebook events analysis from empty account", () => {
-    let analysis = null;
     let status = null;
-
+    let analysisStory = null;
     beforeAll(async () => {
         const facebookAccount = new FacebookAccount();
-        ({ analysis, status } = await runAnalysisForAccount(
+        ({ status } = await runAnalysisForAccount(
             OnOffFacebookEventsAnalysis,
             facebookAccount
         ));
+        analysisStory = new OnOffFacebookEventsMinistory(facebookAccount);
     });
 
     it("has success status", async () => {
@@ -35,7 +37,7 @@ describe("Off-Facebook events analysis from empty account", () => {
     });
 
     it("is not active", async () => {
-        expect(analysis.active).toBe(false);
+        expect(analysisStory.active).toBe(false);
     });
 });
 
@@ -53,8 +55,10 @@ describe("Off-Facebook events analysis from account with no purchases", () => {
             ],
         },
     ];
-    let analysis = null;
     let status = null;
+    let analysisStory = null;
+    let analysesData = null;
+    let analysis = null;
 
     beforeAll(async () => {
         let facebookAccount = new FacebookAccount();
@@ -63,6 +67,8 @@ describe("Off-Facebook events analysis from account with no purchases", () => {
             OnOffFacebookEventsAnalysis,
             facebookAccount
         ));
+        analysisStory = new OnOffFacebookEventsMinistory(facebookAccount);
+        analysesData = getAnalysisData(facebookAccount, analysis);
     });
 
     it("has success status", async () => {
@@ -70,37 +76,43 @@ describe("Off-Facebook events analysis from account with no purchases", () => {
     });
 
     it("is active", async () => {
-        expectActiveAnalysis(analysis);
+        expectActiveAnalysis(analysisStory);
     });
 
     it("has correct companies count", async () => {
-        expect(analysis._companiesCount).toBe(expectedCompaniesCount);
+        expect(analysesData.companiesCount).toBe(expectedCompaniesCount);
     });
 
     it("has no companies with ads", async () => {
-        expect(analysis._companiesWithAdsCount).toBe(0);
+        expect(analysesData.companiesWithAdsCount).toBe(0);
     });
 
     it("has variation with no correlations", async () => {
-        expect(analysis._displayType).toBe("off");
+        expect(analysesData.displayType).toBe("off");
     });
 
     it("has correct report data", async () => {
-        expect(analysis.customReportData).toStrictEqual({ displayType: "off" });
+        expect(analysesData.customReportData).toStrictEqual({
+            displayType: "off",
+        });
     });
 });
 
 describe("Off-Facebook events analysis from export data", () => {
-    let analysis = null;
     let status = null;
+    let analysisStory = null;
+    let analysesData = null;
+    let analysis = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithOnOffFacebookCompanyMatches();
-        const { analysisResult } = await runAnalysisForExport(
+        const { analysisResult, facebookAccount } = await runAnalysisForExport(
             OnOffFacebookEventsAnalysis,
             zipFile
         );
         ({ analysis, status } = analysisResult);
+        analysisStory = new OnOffFacebookEventsMinistory(facebookAccount);
+        analysesData = getAnalysisData(facebookAccount, analysis);
     });
 
     it("has success status", async () => {
@@ -108,23 +120,23 @@ describe("Off-Facebook events analysis from export data", () => {
     });
 
     it("is active", async () => {
-        expectActiveAnalysis(analysis);
+        expectActiveAnalysis(analysisStory);
     });
 
     it("has correct companies count", async () => {
-        expect(analysis._companiesCount).toBe(7);
+        expect(analysesData.companiesCount).toBe(7);
     });
 
     it("has no companies with ads", async () => {
-        expect(analysis._companiesWithAdsCount).toBe(6);
+        expect(analysesData.companiesWithAdsCount).toBe(6);
     });
 
     it("has variation with on-off correlations", async () => {
-        expect(analysis._displayType).toBe("on-off");
+        expect(analysesData.displayType).toBe("on-off");
     });
 
     it("has correct report data", async () => {
-        expect(analysis.customReportData).toStrictEqual({
+        expect(analysesData.customReportData).toStrictEqual({
             displayType: "on-off",
         });
     });
@@ -175,3 +187,14 @@ describe("On-Off facebook data restructuring", () => {
         expect(displayData["Schaden LLC"][1].lower).toBe(7);
     });
 });
+
+function getAnalysisData(facebookAccount, analysis) {
+    return {
+        companiesCount: facebookAccount.analyses[analysisKeys.companiesCount],
+        companiesWithAdsCount:
+            facebookAccount.analyses[analysisKeys.companiesWithAdsCount],
+        displayType:
+            facebookAccount.analyses[analysisKeys.onOffEvents].displayType,
+        customReportData: analysis.customReportData,
+    };
+}

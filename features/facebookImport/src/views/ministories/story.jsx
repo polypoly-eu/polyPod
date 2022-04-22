@@ -18,7 +18,7 @@ class Story extends Component {
     get active() {
         if (!this._neededAnalyses) return true;
         for (const analysisKey of this._neededAnalyses) {
-            if (!this.analyses?.[analysisKey]) return false;
+            if (this.analyses?.[analysisKey] === undefined) return false;
         }
         return true;
     }

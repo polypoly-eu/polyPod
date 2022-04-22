@@ -76,6 +76,8 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
             ? detailDisplayTypes.onOff
             : detailDisplayTypes.off;
 
+        this._displayType = onOffEvents.displayType;
+
         if (Object.keys(onOffEvents.displayData).length > 0) {
             dataAccount.analyses[analysisKeys.onOffEvents] = onOffEvents;
         }
