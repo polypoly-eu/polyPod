@@ -10,7 +10,6 @@ it("Chip can be clicked", () => {
   const { getByText, container } = render(
     <Chip id={chipId} handleClick={mockedHandleClick} />
   );
-  console.log(render);
   expect(container).toBeTruthy();
   fireEvent.click(getByText(chipId), mockedHandleClick);
   expect(mockedHandleClick).toHaveBeenCalled();
