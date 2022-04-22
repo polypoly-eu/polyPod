@@ -3,7 +3,7 @@ const fs = require("fs");
 
 function replaceManifestData(code, manifestData) {
     const magicString = new MagicString(code);
-    const pattern = new RegExp("__DYNAMIC_IMPORT_MANIFEST__", "g");
+    const pattern = new RegExp("window.manifestData", "g");
 
     let hasReplacements = false;
     let match;
@@ -12,20 +12,23 @@ function replaceManifestData(code, manifestData) {
     let replacement;
 
     while ((match = pattern.exec(code))) {
-        console.log("\nMATCH!");
         hasReplacements = true;
 
         start = match.index;
         end = start + match[0].length;
 
-        replacement = manifestData;
+        replacement = String(manifestData);
 
         magicString.overwrite(start, end, replacement);
     }
 
-    if (!hasReplacements) return null;
+    if (!hasReplacements) {
+        return null;
+    }
 
-    const result = { code: magicString.toString() };
+    const result = {
+        code: magicString.toString(),
+    };
     return result;
 }
 
@@ -45,11 +48,12 @@ function executeReplacement(code, manifestJsonPath) {
 module.exports.loadManifest = (options = {}) => {
     return {
         name: "loadManifest",
-        async transform(code) {
+        async buildStart() {
             if (!options.manifestJsonPath) {
                 throw new Error(`Must have "manifestJsonPath" property`);
             }
-
+        },
+        async transform(code) {
             return executeReplacement(code, options.manifestJsonPath);
         },
     };

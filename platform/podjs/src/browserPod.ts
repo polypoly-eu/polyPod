@@ -661,10 +661,6 @@ function createNavBarFrame(title: string): HTMLElement {
     return frame;
 }
 
-// __DYNAMIC_IMPORT_MANIFEST__ points to the `manifest.json` file of the bundled dest
-// as it's setup in our rollup configuration and will be replaced at copy time.
-export const __DYNAMIC_IMPORT_MANIFEST__: Record<string, unknown> = {};
-
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
     public readonly polyIn = new LocalStoragePolyIn();
@@ -675,12 +671,9 @@ export class BrowserPod implements Pod {
 
     constructor() {
         window.addEventListener("load", async () => {
-            window.manifestData = __DYNAMIC_IMPORT_MANIFEST__;
             if (window.manifestData === {}) {
                 console.warn(
-                    `Unable to find feature manifest, navigation bar disabled.
-To get the navigation bar, expose the manifest's content as
-window.manifestData.`
+                    `Unable to find feature manifest, navigation bar disabled.`
                 );
                 return;
             }
@@ -692,34 +685,5 @@ window.manifestData.`
             document.body.prepend(frame);
             document.title = window.manifest.name;
         });
-    }
-
-    private async fetchManifestJson<T>(): Promise<T> {
-        const opts = {
-            method: "GET",
-            headers: {
-                mode: "no-cors",
-                "Content-Type": "application/json",
-                "Referrer-Policy": "strict-origin-when-cross-origin",
-                "X-Requested-With": "XMLHttpRequest",
-                "Access-Control-Allow-Origin": "*",
-            },
-        };
-
-        // Fetch the manifest-data JSON
-        return fetch("../src/static/manifest.json", opts)
-            .then((response) => response.json())
-            .then((body) => {
-                return body;
-            })
-            .catch((error) => {
-                console.warn(
-                    `Unable to find feature manifest, navigation bar disabled.
-            To get the navigation bar, expose the manifest's content as
-            window.manifestData.`,
-                    error
-                );
-                return error;
-            });
     }
 }
