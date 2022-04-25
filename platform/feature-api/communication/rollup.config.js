@@ -12,17 +12,6 @@ export default [
                 dir: "dist",
                 format: "esm",
             },
-            /*            {
-                inlineDymamicImports: true,
-                file: "dist/index.js",
-                format: "cjs",
-            },
-            {
-                file: "dist/communication.js",
-                format: "iife",
-                name: "communication",
-            },
- */
         ],
         plugins: [
             nodeResolve(),
