@@ -17,7 +17,6 @@ export const ministories = [
     ActivityLocationsMinistory,
     PostReactionTypesMinistory,
     OnOffFacebookEventsMinistory,
-    OffFacebookEventsTypesMinistory,
     MessagesMinistory,
     ConnectedAdvertisersMinistory,
 ];

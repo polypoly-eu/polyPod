@@ -17,8 +17,6 @@ class AboutPicturesMinistory extends SingleDataStory {
     renderSummary() {
         return <PicturesMiniStory />;
     }
-
-    renderDetails() {}
 }
 
 export default AboutPicturesMinistory;
