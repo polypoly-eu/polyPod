@@ -31,7 +31,7 @@ describe("Report creation for export", () => {
     });
 
     it("has correct number of analysis in JSON report", async () => {
-        expect(jsonReport.reportAnalyses_v1.length).toBe(
+        expect(jsonReport.reportAnalyses_v2.length).toBe(
             NUMBER_OF_REPORT_ANALYSES
         );
     });

@@ -16,6 +16,6 @@ export default class ReportStories {
             (story) => story.jsonReport
         );
 
-        return { reportAnalyses_v1: jsonStoriesReport };
+        return { reportAnalyses_v2: jsonStoriesReport };
     }
 }
