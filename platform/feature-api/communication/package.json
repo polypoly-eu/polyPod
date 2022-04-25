@@ -1,7 +1,7 @@
 {
   "name": "@polypoly-eu/communication",
   "version": "0.0.1",
-  "description": "Communication functionality for the polypod",
+  "description": "Communication functionality for polyPod implementations and features",
   "files": [
     "dist/*.js",
     "dist/*.d.ts"
