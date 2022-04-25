@@ -24,65 +24,66 @@ const component = (
 );
 
 it("Chips content is an object array", () => {
-  const newComponent = <FilterChips chipsContent={chipsContentObject} />;
-  render(newComponent);
+  render(<FilterChips chipsContent={chipsContentObject} />);
   for (const chipId of chipsContent) {
     const chipElement = screen.getByText(chipId);
     expect(chipElement).toBeInTheDocument();
   }
 });
 
-beforeEach(() => {
-  render(component);
-});
+describe("Chips content is an array", () => {
+  beforeEach(() => {
+    render(component);
+  });
 
-it("Chips present in document", () => {
-  for (const chipId of chipsContent) {
-    const chipElement = screen.getByText(chipId);
-    expect(chipElement).toBeInTheDocument();
-  }
-});
-
-describe("Checks onChipClick event", () => {
-  it("is called", () => {
+  it("Chips present in document", () => {
     for (const chipId of chipsContent) {
       const chipElement = screen.getByText(chipId);
-      fireEvent.click(chipElement, mockedHandleClick);
-      expect(mockedHandleClick).toHaveBeenCalledWith(chipId, [chipId]);
+      expect(chipElement).toBeInTheDocument();
     }
   });
 
-  it("selecting a chip changes its state", () => {
+  describe("Checks onChipClick event", () => {
+    it("is called", () => {
+      for (const chipId of chipsContent) {
+        const chipElement = screen.getByText(chipId);
+        fireEvent.click(chipElement, mockedHandleClick);
+        expect(mockedHandleClick).toHaveBeenCalledWith(chipId, [chipId]);
+      }
+    });
+
+    it("selecting a chip changes its state", () => {
+      for (const chipId of chipsContent) {
+        const exclusive = component.props.exclusive;
+        const chipElement = screen.getByText(chipId);
+        expect(chipElement).not.toHaveClass("chip selected");
+        fireEvent.click(chipElement, mockedHandleClick);
+        expect(chipElement).toHaveClass("chip selected");
+        fireEvent.click(chipElement, mockedHandleClick);
+        exclusive
+          ? expect(chipElement).toHaveClass("chip selected")
+          : expect(chipElement).not.toHaveClass("chip selected");
+      }
+    });
+  });
+
+  it("The default active chips are selected", () => {
     for (const chipId of chipsContent) {
-      const exclusive = component.props.exclusive;
+      const defaultActiveChips = component.props.defaultActiveChips;
       const chipElement = screen.getByText(chipId);
-      expect(chipElement).not.toHaveClass("chip selected");
-      fireEvent.click(chipElement, mockedHandleClick);
-      expect(chipElement).toHaveClass("chip selected");
-      fireEvent.click(chipElement, mockedHandleClick);
-      exclusive
-        ? expect(chipElement).toHaveClass("chip selected")
-        : expect(chipElement).not.toHaveClass("chip selected");
+      if (defaultActiveChips === [chipId]) {
+        expect(chipElement).toHaveClass("chip selected");
+      }
     }
   });
-});
 
-it("The default active chips are selected", () => {
-  for (const chipId of chipsContent) {
-    const defaultActiveChips = component.props.defaultActiveChips;
-    const chipElement = screen.getByText(chipId);
-    if (defaultActiveChips === [chipId]) {
-      expect(chipElement).toHaveClass("chip selected");
+  it("There is a class that changes the theme", () => {
+    const theme = component.props.theme;
+    if (theme === lightTheme) {
+      expect(component).toHaveClass("poly-theme-light");
     }
-  }
-});
-
-it("There is a class that changes the theme", () => {
-  const theme = component.props.theme;
-  if (theme === lightTheme) {
-    expect(component).toHaveClass("poly-theme-light");
-  }
-  if (theme === darkTheme) {
-    expect(component).toHaveClass("poly-theme-dark");
-  }
+    if (theme === darkTheme) {
+      expect(component).toHaveClass("poly-theme-dark");
+    }
+  });
 });
