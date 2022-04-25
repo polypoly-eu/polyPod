@@ -4,6 +4,7 @@ const fs = require("fs");
 const { parseManifest } = require("./cli.js");
 const { npm, npmInstall } = require("./npm.js");
 const { logDetail } = require("./log.js");
+const build = require("./index.js");
 
 function extractDependencies(manifest) {
     const allDependencies = {
@@ -67,6 +68,11 @@ class Pkg {
 
     async build() {
         await this.npmRun("build");
+    }
+
+    async installAndBuild() {
+        await this.install();
+        await this.build();
     }
 
     async test() {

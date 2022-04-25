@@ -5,6 +5,7 @@ const validCommands = [
     "build",
     "clean",
     "install",
+    "installAndBuild",
     "lint",
     "lintfix",
     "list",
