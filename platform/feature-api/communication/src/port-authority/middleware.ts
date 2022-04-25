@@ -8,7 +8,7 @@ import { OptionsJson, Options, json, raw } from "body-parser";
 import createServer, { NextHandleFunction, HandleFunction } from "connect";
 import { IncomingMessage, RequestListener } from "http";
 
-import { Bubblewrap } from "../index";
+import { Bubblewrap } from "..";
 
 import { Handler, mapReceivePort } from "./port";
 import { ResponsePort, WithResolvers } from "./procedure";
