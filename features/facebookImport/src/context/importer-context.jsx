@@ -44,8 +44,8 @@ export const ImporterProvider = ({ children }) => {
         setIsLoading(false);
     }
 
-    function createPopUp({ type, content }) {
-        setPopUp({ component: popUps[type], content });
+    function createPopUp({ type }) {
+        setPopUp({ component: popUps[type] });
     }
 
     function closePopUp() {
@@ -83,6 +83,7 @@ export const ImporterProvider = ({ children }) => {
                 isLoading,
                 setIsLoading,
                 runWithLoadingScreen,
+                popUp,
                 createPopUp,
                 closePopUp,
             }}
