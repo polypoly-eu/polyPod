@@ -38,7 +38,7 @@ import manifestData from "./static/manifest.json";
 window.manifestData = manifestData;
 
 const FacebookImporter = () => {
-    const { pod, globalError, setGlobalError, isLoading } =
+    const { pod, globalError, setGlobalError, isLoading, popUp, closePopUp } =
         useContext(ImporterContext);
 
     const { files } = useContext(PolyImportContext);
@@ -88,6 +88,10 @@ const FacebookImporter = () => {
                     </Route>
                 </Switch>
             )}
+            {popUp &&
+                popUp.component({
+                    onClose: closePopUp,
+                })}
             {globalError && (
                 <ErrorPopup
                     error={globalError}
