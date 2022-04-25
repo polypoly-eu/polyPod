@@ -38,7 +38,7 @@ function showUsage(scriptPath) {
     const baseName = path.basename(scriptPath);
     const validCommandString = validCommands.join(" | ");
     console.error(
-        `Usage: ${baseName} [ --start PACKAGE_NAME ] [ --skip-root-install ] [ ${validCommandString} ]`
+        `Usage: ${baseName} [ --start PACKAGE_NAME ] [ ${validCommandString} ]`
     );
     console.error(" Run without arguments to build all packages");
 }
