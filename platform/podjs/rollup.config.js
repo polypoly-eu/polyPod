@@ -54,11 +54,6 @@ export default (commandLineArgs) =>
                     exclude: [nodeModules],
                     transforms: ["typescript"],
                 }),
-                commandLineArgs.loadManifest
-                    ? genPodJsPlugin.loadManifest({
-                          manifestJsonPath: commandLineArgs.manifestJson,
-                      })
-                    : null,
             ],
             context: "window",
         },
