@@ -56,14 +56,14 @@ jobs:
               run: ./build.js install
             - name: Lint core and features
               if: steps.changes.outputs.js == 'true'
-              run: ./build.js --skip-root-install lint
+              run: ./build.js lint
             - name: Lint Swift
               if: steps.changes.outputs.swift == 'true'
               working-directory: platform/ios
               run: docker run -t -v `pwd`:`pwd` -w `pwd` ghcr.io/realm/swiftlint:latest
             - name: Build core and features
               if: steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.android == 'true'
-              run: ./build.js --skip-root-install
+              run: ./build.js build
             - name: Test core and features
               if: steps.changes.outputs.apiAndFeatures == 'true'
               run: xvfb-run --auto-servernum ./build.js --skip-root-install test

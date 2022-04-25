@@ -24,12 +24,6 @@ function parseCommandLine() {
     const start =
         startIndex !== -1 ? parameters.splice(startIndex, 2)[1] : null;
 
-    const skipRootInstallIndex = parameters.indexOf("--skip-root-install");
-    const skipRootInstall = skipRootInstallIndex > -1;
-    if (skipRootInstall) {
-        parameters.splice(skipRootInstallIndex, 1);
-    }
-
     if (parameters.length > 1) return { scriptPath, command: null };
 
     const command = parameters.length ? parameters[0] : "build";
@@ -37,7 +31,6 @@ function parseCommandLine() {
         scriptPath,
         command: validCommands.includes(command) ? command : null,
         start,
-        skipRootInstall,
     };
 }
 

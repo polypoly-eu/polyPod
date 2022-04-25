@@ -8,7 +8,7 @@ const { checkVersions, ANSIBold } = require("./utils.js");
 const { logMain, logDependencies, logSuccess } = require("./log.js");
 const { parseCommandLine, showUsage, parseManifest } = require("./cli.js");
 const { createPackageTree, skipPackages } = require("./deps.js");
-const { npm, npx, npmInstall, runCommand } = require("./npm.js");
+const { npm, npx, runCommand, npmInstall } = require("./npm.js");
 
 async function processPackage(name, packageTree, command) {
     if (!(name in packageTree)) throw `Unable to find package ${name}`;
@@ -50,7 +50,7 @@ async function processAll(packageTree, command) {
 }
 
 async function main() {
-    const { scriptPath, command, start, skipRootInstall } = parseCommandLine();
+    const { scriptPath, command, start } = parseCommandLine();
     if (!command) {
         showUsage(scriptPath);
         return 1;
@@ -64,12 +64,6 @@ async function main() {
     }
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
-
-    if (!["list", "list-deps"].includes(command) && !skipRootInstall) {
-        await runCommand("root-install", "👷👷‍♀️", async () => {
-            await npmInstall("/");
-        });
-    }
 
     if (command === "lint") {
         await runCommand("lint", "🧹", async () => {
@@ -87,6 +81,11 @@ async function main() {
 
     try {
         const startTime = performance.now();
+        if (command === "install") {
+            await runCommand("root-install", "👷👷‍♀️", async () => {
+                await npmInstall("/");
+            });
+        }
         const packageTree = createPackageTree(metaManifest);
         if (start) skipPackages(packageTree, start);
         await processAll(packageTree, command);
