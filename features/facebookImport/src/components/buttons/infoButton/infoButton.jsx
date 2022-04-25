@@ -6,15 +6,14 @@ import "./infoButton.css";
 const InfoButton = ({ infoScreen }) => {
     const { createPopUp } = useContext(ImporterContext);
 
-    console.log({ createPopUp });
-
     const handleClick = () => {
         createPopUp({ type: infoScreen });
     };
-
-    <button className="info-button" onClick={handleClick}>
-        <img src="./images/question.svg"></img>
-    </button>;
+    return (
+        <button className="info-button" onClick={handleClick}>
+            <img src="./images/question.svg"></img>
+        </button>
+    );
 };
 
 export default InfoButton;
