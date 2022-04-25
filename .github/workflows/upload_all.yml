@@ -7,9 +7,9 @@ on:
         type: choice
         description: Where to upload
         options:
-        - all
-        - google-play
-        - app-store
+          - all
+          - google-play
+          - app-store
       draft:
         type: boolean
         description: Upload, but don't publish
@@ -61,7 +61,7 @@ jobs:
       - name: API and features - Build
         env:
           POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
-          POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
+          POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }} || ""
         run: ./build.js
       - name: Android - Test
         working-directory: platform/android
@@ -116,7 +116,7 @@ jobs:
       - name: API and features - Build
         env:
           POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
-          POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }}
+          POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }} || ""
         run: ./build.js
       - name: iOS - Lock Xcode version
         working-directory: platform/ios

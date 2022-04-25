@@ -1,6 +1,6 @@
-class MockImporterClass {
-  constructor() {
-    this.import = () => true;
+class MockImporter {
+  import() {
+    return true;
   }
 }
-export const mockDataImporters = [MockImporterClass];
+export const mockDataImporters = [MockImporter];

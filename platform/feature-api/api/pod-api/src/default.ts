@@ -52,15 +52,6 @@ export class DefaultPod implements Pod {
                         dataFactory.defaultGraph()
                     )
                 ),
-            select: async (matcher) =>
-                Array.from(
-                    this.store.match(
-                        matcher.subject,
-                        matcher.predicate,
-                        matcher.object,
-                        dataFactory.defaultGraph()
-                    )
-                ),
             add: async (...quads) =>
                 quads.forEach((quad) => {
                     this.checkQuad(quad);

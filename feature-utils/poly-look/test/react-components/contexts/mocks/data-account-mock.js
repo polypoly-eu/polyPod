@@ -1,3 +1,1 @@
-export default class MockDataAccount {
-  constructor() {}
-}
+export default class MockDataAccount {}

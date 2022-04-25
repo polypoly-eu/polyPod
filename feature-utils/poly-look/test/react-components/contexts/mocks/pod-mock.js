@@ -7,7 +7,7 @@ const mockStorage = {
   mockFilename2: "mockFilename2",
 };
 
-class MockerPodInfo {
+class MockPodInfo {
   async getRuntime() {
     return MOCKED_POD_RUNTIME;
   }
@@ -17,7 +17,7 @@ class MockerPodInfo {
   }
 }
 
-export class MockerPod {
+export class MockPod {
   constructor() {
     this._mockStorage = mockStorage;
     this._polyOut = {
@@ -32,7 +32,7 @@ export class MockerPod {
     };
   }
   get info() {
-    return new MockerPodInfo();
+    return new MockPodInfo();
   }
   get polyOut() {
     return this._polyOut;

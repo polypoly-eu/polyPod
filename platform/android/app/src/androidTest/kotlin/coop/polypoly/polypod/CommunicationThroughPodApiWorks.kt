@@ -99,28 +99,28 @@ class CommunicationThroughPodApiWorks {
         execute { addSupportsQuadsWithIRIGraph() }
         execute { addSupportsQuadsWithBlankNodeGraph() }
         execute { addSupportsQuadsWithDefaultGraph() }
-        execute { canPassEmptyMatcherToPolyInSelect() }
-        execute { canPassMatcherWithSubjectToPolyInSelect() }
-        execute { canPassMatcherWithPredicateToPolyInSelect() }
-        execute { canPassMatcherWithObjectToPolyInSelect() }
-        execute { canPassMatcherWithAllThreeFieldsToPolyInSelect() }
-        execute { canGetEmptyArrayFromPolyInSelect() }
-        execute { canGetArrayWithSingleQuadFromPolyInSelect() }
-        execute { canGetArrayWithSingleQuadWithIRISubjectFromPolyInSelect() }
+        execute { canPassEmptyMatcherToPolyInMatch() }
+        execute { canPassMatcherWithSubjectToPolyInMatch() }
+        execute { canPassMatcherWithPredicateToPolyInMatch() }
+        execute { canPassMatcherWithObjectToPolyInMatch() }
+        execute { canPassMatcherWithAllThreeFieldsToPolyInMatch() }
+        execute { canGetEmptyArrayFromPolyInMatch() }
+        execute { canGetArrayWithSingleQuadFromPolyInMatch() }
+        execute { canGetArrayWithSingleQuadWithIRISubjectFromPolyInMatch() }
         execute {
-            canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSelect()
+            canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInMatch()
         }
-        execute { canGetArrayWithSingleQuadWithIRIObjectFromPolyInSelect() }
+        execute { canGetArrayWithSingleQuadWithIRIObjectFromPolyInMatch() }
         execute {
-            canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSelect()
+            canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInMatch()
         }
-        execute { canGetArrayWithSingleQuadWithLiteralObjectFromPolyInSelect() }
-        execute { canGetArrayWithSingleQuadWithIRIGraphFromPolyInSelect() }
+        execute { canGetArrayWithSingleQuadWithLiteralObjectFromPolyInMatch() }
+        execute { canGetArrayWithSingleQuadWithIRIGraphFromPolyInMatch() }
         execute {
-            canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelect()
+            canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInMatch()
         }
-        execute { canGetArrayWithSingleQuadWithDefaultGraphFromPolyInSelect() }
-        execute { canGetArrayWithMultipleQuadsFromPolyInSelect() }
+        execute { canGetArrayWithSingleQuadWithDefaultGraphFromPolyInMatch() }
+        execute { canGetArrayWithMultipleQuadsFromPolyInMatch() }
     }
 
     private fun whenCalledWithNoMethodSpecified_methodIsEmpty() {
@@ -458,122 +458,122 @@ class CommunicationThroughPodApiWorks {
         assertThat(polyIn.addParams!![0]).isEqualTo(quad)
     }
 
-    private fun canPassEmptyMatcherToPolyInSelect() {
-        clickButton("comm.polyIn.select.pass_empty_matcher")
+    private fun canPassEmptyMatcherToPolyInMatch() {
+        clickButton("comm.polyIn.match.pass_empty_matcher")
 
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
-        val matcher = polyIn.selectMatcher
+        assertThat(polyIn.matchWasCalled).isTrue()
+        val matcher = polyIn.matchMatcher
         assertThat(matcher).isNotNull()
         assertThat(matcher!!.subject).isNull()
         assertThat(matcher.predicate).isNull()
         assertThat(matcher.`object`).isNull()
     }
 
-    private fun canPassMatcherWithSubjectToPolyInSelect() {
+    private fun canPassMatcherWithSubjectToPolyInMatch() {
         val subject = IRI("http://example.org/s")
         setInput(1, subject.iri)
 
-        clickButton("comm.polyIn.select.pass_matcher_with_subject")
+        clickButton("comm.polyIn.match.pass_matcher_with_subject")
 
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
-        val matcher = polyIn.selectMatcher
+        assertThat(polyIn.matchWasCalled).isTrue()
+        val matcher = polyIn.matchMatcher
         assertThat(matcher).isNotNull()
         assertThat(matcher!!.subject).isEqualTo(subject)
         assertThat(matcher.predicate).isNull()
         assertThat(matcher.`object`).isNull()
     }
 
-    private fun canPassMatcherWithPredicateToPolyInSelect() {
+    private fun canPassMatcherWithPredicateToPolyInMatch() {
         val predicate = IRI("http://example.org/p")
         setInput(1, predicate.iri)
 
-        clickButton("comm.polyIn.select.pass_matcher_with_predicate")
+        clickButton("comm.polyIn.match.pass_matcher_with_predicate")
 
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
-        val matcher = polyIn.selectMatcher
+        assertThat(polyIn.matchWasCalled).isTrue()
+        val matcher = polyIn.matchMatcher
         assertThat(matcher).isNotNull()
         assertThat(matcher!!.subject).isNull()
         assertThat(matcher.predicate).isEqualTo(predicate)
         assertThat(matcher.`object`).isNull()
     }
 
-    private fun canPassMatcherWithObjectToPolyInSelect() {
+    private fun canPassMatcherWithObjectToPolyInMatch() {
         val `object` = IRI("http://example.org/o")
         setInput(1, `object`.iri)
 
-        clickButton("comm.polyIn.select.pass_matcher_with_object")
+        clickButton("comm.polyIn.match.pass_matcher_with_object")
 
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
-        val matcher = polyIn.selectMatcher
+        assertThat(polyIn.matchWasCalled).isTrue()
+        val matcher = polyIn.matchMatcher
         assertThat(matcher).isNotNull()
         assertThat(matcher!!.subject).isNull()
         assertThat(matcher.predicate).isNull()
         assertThat(matcher.`object`).isEqualTo(`object`)
     }
 
-    private fun canPassMatcherWithAllThreeFieldsToPolyInSelect() {
+    private fun canPassMatcherWithAllThreeFieldsToPolyInMatch() {
         val subject = IRI("http://example.org/s")
         val predicate = IRI("http://example.org/p")
         val `object` = IRI("http://example.org/o")
         setInputs(subject.iri, predicate.iri, `object`.iri)
 
-        clickButton("comm.polyIn.select.pass_matcher_with_all_three_fields")
+        clickButton("comm.polyIn.match.pass_matcher_with_all_three_fields")
 
         waitUntil({
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
         })
-        assertThat(polyIn.selectWasCalled).isTrue()
-        val matcher = polyIn.selectMatcher
+        assertThat(polyIn.matchWasCalled).isTrue()
+        val matcher = polyIn.matchMatcher
         assertThat(matcher).isNotNull()
         assertThat(matcher!!.subject).isEqualTo(subject)
         assertThat(matcher.predicate).isEqualTo(predicate)
         assertThat(matcher.`object`).isEqualTo(`object`)
     }
 
-    private fun canGetEmptyArrayFromPolyInSelect() {
-        polyIn.selectReturn = emptyList()
+    private fun canGetEmptyArrayFromPolyInMatch() {
+        polyIn.matchReturn = emptyList()
 
-        clickButton("comm.polyIn.select.get_empty_array")
+        clickButton("comm.polyIn.match.get_empty_array")
 
         waitUntil({
-            assertThat(polyIn.selectWasCalled).isTrue()
+            assertThat(polyIn.matchWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
         })
     }
 
-    private fun canGetArrayWithSingleQuadFromPolyInSelect() {
+    private fun canGetArrayWithSingleQuadFromPolyInMatch() {
         val quad = Quad.builder.newDefault().build()
-        polyIn.selectReturn = listOf(quad)
+        polyIn.matchReturn = listOf(quad)
         addQuadToCollection(quad)
 
-        clickButton("comm.polyIn.select.get_array_with_single_quad")
+        clickButton("comm.polyIn.match.get_array_with_single_quad")
 
         waitUntil({
-            assertThat(polyIn.selectWasCalled).isTrue()
+            assertThat(polyIn.matchWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
@@ -581,18 +581,18 @@ class CommunicationThroughPodApiWorks {
         })
     }
 
-    private fun canGetArrayWithSingleQuadWithIRISubjectFromPolyInSelect() {
+    private fun canGetArrayWithSingleQuadWithIRISubjectFromPolyInMatch() {
         val quad = Quad.builder.newDefault()
             .withSubject(IRI("http://example.com/s"))
             .build()
-        polyIn.selectReturn = listOf(quad)
+        polyIn.matchReturn = listOf(quad)
         addQuadToCollection(quad)
 
         /* ktlint-disable max-line-length */
-        clickButton("comm.polyIn.select.get_array_with_single_quad_with_named_node_subject")
+        clickButton("comm.polyIn.match.get_array_with_single_quad_with_named_node_subject")
 
         waitUntil({
-            assertThat(polyIn.selectWasCalled).isTrue()
+            assertThat(polyIn.matchWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
@@ -600,18 +600,18 @@ class CommunicationThroughPodApiWorks {
         })
     }
 
-    private fun canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInSelect() {
+    private fun canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInMatch() {
         val quad = Quad.builder.newDefault()
             .withSubject(BlankNode("subject"))
             .build()
-        polyIn.selectReturn = listOf(quad)
+        polyIn.matchReturn = listOf(quad)
         addQuadToCollection(quad)
 
         /* ktlint-disable max-line-length */
-        clickButton("comm.polyIn.select.get_array_with_single_quad_with_blank_node_subject")
+        clickButton("comm.polyIn.match.get_array_with_single_quad_with_blank_node_subject")
 
         waitUntil({
-            assertThat(polyIn.selectWasCalled).isTrue()
+            assertThat(polyIn.matchWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
@@ -619,17 +619,17 @@ class CommunicationThroughPodApiWorks {
         })
     }
 
-    private fun canGetArrayWithSingleQuadWithIRIObjectFromPolyInSelect() {
+    private fun canGetArrayWithSingleQuadWithIRIObjectFromPolyInMatch() {
         val quad = Quad.builder.newDefault()
             .withObject(IRI("http://example.com/o"))
             .build()
-        polyIn.selectReturn = listOf(quad)
+        polyIn.matchReturn = listOf(quad)
         addQuadToCollection(quad)
 
-        clickButton("comm.polyIn.select.get_array_with_single_quad_with_named_node_object")
+        clickButton("comm.polyIn.match.get_array_with_single_quad_with_named_node_object")
 
         waitUntil({
-            assertThat(polyIn.selectWasCalled).isTrue()
+            assertThat(polyIn.matchWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
@@ -637,17 +637,17 @@ class CommunicationThroughPodApiWorks {
         })
     }
 
-    private fun canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInSelect() {
+    private fun canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInMatch() {
         val quad = Quad.builder.newDefault()
             .withObject(BlankNode("object"))
             .build()
-        polyIn.selectReturn = listOf(quad)
+        polyIn.matchReturn = listOf(quad)
         addQuadToCollection(quad)
 
-        clickButton("comm.polyIn.select.get_array_with_single_quad_with_blank_node_object")
+        clickButton("comm.polyIn.match.get_array_with_single_quad_with_blank_node_object")
 
         waitUntil({
-            assertThat(polyIn.selectWasCalled).isTrue()
+            assertThat(polyIn.matchWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
@@ -655,17 +655,17 @@ class CommunicationThroughPodApiWorks {
         })
     }
 
-    private fun canGetArrayWithSingleQuadWithLiteralObjectFromPolyInSelect() {
+    private fun canGetArrayWithSingleQuadWithLiteralObjectFromPolyInMatch() {
         val quad = Quad.builder.newDefault()
             .withObject(Literal("string"))
             .build()
-        polyIn.selectReturn = listOf(quad)
+        polyIn.matchReturn = listOf(quad)
         addQuadToCollection(quad)
 
-        clickButton("comm.polyIn.select.get_array_with_single_quad_with_literal_object")
+        clickButton("comm.polyIn.match.get_array_with_single_quad_with_literal_object")
 
         waitUntil({
-            assertThat(polyIn.selectWasCalled).isTrue()
+            assertThat(polyIn.matchWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
@@ -673,17 +673,17 @@ class CommunicationThroughPodApiWorks {
         })
     }
 
-    private fun canGetArrayWithSingleQuadWithIRIGraphFromPolyInSelect() {
+    private fun canGetArrayWithSingleQuadWithIRIGraphFromPolyInMatch() {
         val quad = Quad.builder.newDefault()
             .withGraph(IRI("http://example.com/g"))
             .build()
-        polyIn.selectReturn = listOf(quad)
+        polyIn.matchReturn = listOf(quad)
         addQuadToCollection(quad)
 
-        clickButton("comm.polyIn.select.get_array_with_single_quad_with_named_node_graph")
+        clickButton("comm.polyIn.match.get_array_with_single_quad_with_named_node_graph")
 
         waitUntil({
-            assertThat(polyIn.selectWasCalled).isTrue()
+            assertThat(polyIn.matchWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
@@ -691,17 +691,17 @@ class CommunicationThroughPodApiWorks {
         })
     }
 
-    private fun canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInSelect() {
+    private fun canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInMatch() {
         val quad = Quad.builder.newDefault()
             .withGraph(BlankNode("graph"))
             .build()
-        polyIn.selectReturn = listOf(quad)
+        polyIn.matchReturn = listOf(quad)
         addQuadToCollection(quad)
 
-        clickButton("comm.polyIn.select.get_array_with_single_quad_with_blank_node_graph")
+        clickButton("comm.polyIn.match.get_array_with_single_quad_with_blank_node_graph")
 
         waitUntil({
-            assertThat(polyIn.selectWasCalled).isTrue()
+            assertThat(polyIn.matchWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
@@ -709,17 +709,17 @@ class CommunicationThroughPodApiWorks {
         })
     }
 
-    private fun canGetArrayWithSingleQuadWithDefaultGraphFromPolyInSelect() {
+    private fun canGetArrayWithSingleQuadWithDefaultGraphFromPolyInMatch() {
         val quad = Quad.builder.newDefault()
             .withDefaultGraph()
             .build()
-        polyIn.selectReturn = listOf(quad)
+        polyIn.matchReturn = listOf(quad)
         addQuadToCollection(quad)
 
-        clickButton("comm.polyIn.select.get_array_with_single_quad_with_default_graph")
+        clickButton("comm.polyIn.match.get_array_with_single_quad_with_default_graph")
 
         waitUntil({
-            assertThat(polyIn.selectWasCalled).isTrue()
+            assertThat(polyIn.matchWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))
@@ -727,7 +727,7 @@ class CommunicationThroughPodApiWorks {
         })
     }
 
-    private fun canGetArrayWithMultipleQuadsFromPolyInSelect() {
+    private fun canGetArrayWithMultipleQuadsFromPolyInMatch() {
         val quad1 = Quad.builder.new()
             .withSubject(IRI("subject1"))
             .withPredicate(IRI("predicate1"))
@@ -740,14 +740,14 @@ class CommunicationThroughPodApiWorks {
             .withObject(IRI("object2"))
             .withGraph(IRI("graph2"))
             .build()
-        polyIn.selectReturn = listOf(quad1, quad2)
+        polyIn.matchReturn = listOf(quad1, quad2)
         addQuadToCollection(quad1)
         addQuadToCollection(quad2)
 
-        clickButton("comm.polyIn.select.get_array_with_multiple_quads")
+        clickButton("comm.polyIn.match.get_array_with_multiple_quads")
 
         waitUntil({
-            assertThat(polyIn.selectWasCalled).isTrue()
+            assertThat(polyIn.matchWasCalled).isTrue()
             onFeature()
                 .withElement(findElement(Locator.ID, "status"))
                 .check(webMatches(getText(), `is`("All OK")))

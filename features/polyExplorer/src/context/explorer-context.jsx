@@ -21,7 +21,7 @@ export const ExplorerContext = React.createContext();
 const namespace = "http://polypoly.coop/schema/polyExplorer/#";
 
 async function readFirstRun() {
-    const quads = await pod.polyIn.select({});
+    const quads = await pod.polyIn.match({});
     return !quads.some(
         ({ subject, predicate, object }) =>
             subject.value === `${namespace}polyExplorer` &&

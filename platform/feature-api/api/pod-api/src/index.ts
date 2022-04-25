@@ -9,3 +9,4 @@ export * from "./api";
 export * from "./fs";
 export * from "./feature";
 export * from "./default";
+export * from "./spec";

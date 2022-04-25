@@ -71,7 +71,7 @@ export default (commandLineArgs) => {
                     JSON.stringify(
                         process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION ||
                             fallbackAuthorization
-                    ),
+                    ) || "",
             }),
             commonjs({
                 include: /node_modules/,
