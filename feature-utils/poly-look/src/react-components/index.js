@@ -9,10 +9,6 @@ import List from "./list.jsx";
 import { PolyButton, IconButton } from "./buttons";
 
 import {
-  PolyAnalysisContext,
-  PolyAnalysisProvider,
-} from "./contexts/poly-analysis.jsx";
-import {
   PolyImportContext,
   PolyImportProvider,
 } from "./contexts/poly-import.jsx";
@@ -32,7 +28,5 @@ export {
   IconButton,
   SideSwiper,
   PolyImportProvider,
-  PolyAnalysisProvider,
-  PolyAnalysisContext,
   PolyImportContext,
 };
