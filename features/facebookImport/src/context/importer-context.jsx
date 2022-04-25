@@ -18,11 +18,11 @@ function updatePodNavigation(pod, history, handleBack, location) {
         : pod.polyNav.setActiveActions([]);
 }
 
-function updateTitle(pod, location) {
+function updateTitle(pod, location, popUp) {
     pod.polyNav.setTitle(
         location.pathname === "/"
             ? ""
-            : location.pathname.endsWith("info")
+            : popUp
             ? i18n.t("navbarTitles:info")
             : i18n.t(`navbarTitles:${location.pathname.substring(1)}`)
     );
@@ -68,7 +68,7 @@ export const ImporterProvider = ({ children }) => {
     useEffect(() => {
         if (!pod) return;
         updatePodNavigation(pod, history, handleBack, location);
-        updateTitle(pod, location);
+        updateTitle(pod, location, popUp);
     });
 
     return (
