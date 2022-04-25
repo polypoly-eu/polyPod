@@ -6,7 +6,7 @@ import i18n from "../../i18n.js";
 import "./baseInfoPopUp.css";
 
 const BaseInfoPopUp = ({ infoChildren }) => {
-    const { handleBack } = useContext(ImporterContext);
+    const { closePopUp } = useContext(ImporterContext);
 
     return (
         <div className="base-info">
@@ -22,7 +22,7 @@ const BaseInfoPopUp = ({ infoChildren }) => {
                     {infoChild}
                 </div>
             ))}
-            <button onClick={() => handleBack()}>
+            <button onClick={() => closePopUp()}>
                 {i18n.t("common:button.ok")}
             </button>
         </div>
