@@ -7,6 +7,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import replace from "@rollup/plugin-replace";
 import serve from "rollup-plugin-serve";
 import svg from "rollup-plugin-svg";
+import execute from "rollup-plugin-execute";
 
 const fallbackURL = "http://localhost:8000";
 const fallbackAuthorization = "username:password";
@@ -26,6 +27,10 @@ export default (commandLineArgs) => {
             globals: externalPackages,
         },
         plugins: [
+            execute([
+                "cp node_modules/@polypoly-eu/podjs/dist/pod.js dist",
+                "node ../../platform/podjs/bin/genPodjs.js --podjs=dist/pod.js --manifestJsonPath=./src/static/manifest.json --dest=dist/pod.js",
+            ]),
             svg(),
             css({ output: "css/bundle.css" }),
             json(),
@@ -39,7 +44,7 @@ export default (commandLineArgs) => {
                         src: [
                             "node_modules/react/umd/react.development.js",
                             "node_modules/react-dom/umd/react-dom.development.js",
-                            "node_modules/@polypoly-eu/podjs/dist/pod.js",
+                            // "node_modules/@polypoly-eu/podjs/dist/pod.js",
                             "node_modules/@polypoly-eu/poly-look/dist/poly-look.js",
                         ],
                         dest: "dist",
