@@ -24,10 +24,7 @@
         "platform/feature-api/api/rdf",
         "platform/feature-api/api/rdf-convert",
         "platform/feature-api/api/rdf-spec",
-        "platform/feature-api/communication/bubblewrap",
-        "platform/feature-api/communication/port-authority",
-        "platform/feature-api/communication/postoffice",
-        "platform/feature-api/communication/remote-pod",
+        "platform/feature-api/communication",
         "platform/feature-api/utils",
         "platform/podjs"
     ]

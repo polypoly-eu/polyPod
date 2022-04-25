@@ -1,0 +1,54 @@
+{
+  "name": "@polypoly-eu/communication",
+  "version": "0.0.1",
+  "description": "Communication functionality for polyPod implementations and features",
+  "files": [
+    "dist/*.js",
+    "dist/*.d.ts"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polypoly-eu/polyPod.git"
+  },
+  "scripts": {
+    "benchmark": "./bin/run-benchmarks.sh",
+    "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && npm run rollup",
+    "rollup": "rollup -c",
+    "dev": "tsc --watch --incremental",
+    "eslint": "eslint src --ext .ts",
+    "lint": "npm run eslint",
+    "test": "jest",
+    "docs": "typedoc"
+  },
+  "dependencies": {
+    "@msgpack/msgpack": "^2.6.0",
+    "@polypoly-eu/pod-api": "file:../api/pod-api",
+    "@types/body-parser": "^1.19.2",
+    "@types/connect": "^3.4.35",
+    "body-parser": "^1.20.0",
+    "connect": "^3.7.0"
+  },
+  "devDependencies": {
+    "@polypoly-eu/rdf": "file:../api/rdf",
+    "@polypoly-eu/rdf-convert": "file:../api/rdf-convert",
+    "@polypoly-eu/rdf-spec": "file:../api/rdf-spec",
+    "@polypoly-eu/test-utils": "file:../utils",
+    "@rdfjs/dataset": "^1.1.1",
+    "@types/benchmark": "^2.1.0",
+    "@types/chai": "^4.3.0",
+    "@types/chai-as-promised": "^7.1.5",
+    "@types/n3": "^1.4.4",
+    "@types/rdfjs__dataset": "^1.0.5",
+    "benchmark": "^2.1.4",
+    "chai": "^4.3.6",
+    "chai-as-promised": "^7.1.1",
+    "fast-check": "^2.11.0",
+    "memfs": "^3.4.1",
+    "n3": "^1.7.0",
+    "node-fetch": "~2",
+    "ts-mocha": "^9.0.2"
+  },
+  "private": true
+}
