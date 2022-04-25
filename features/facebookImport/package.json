@@ -21,12 +21,13 @@
     "jszip": "^3.6.0",
     "memfs": "^3.2.2",
     "node-fetch": "^3.1.1",
+    "rollup-plugin-execute": "^1.1.1",
     "rollup-plugin-serve": "^1.1.0"
   },
   "private": true,
   "dependencies": {
-    "@polypoly-eu/poly-import": "file:../../feature-utils/poly-import",
     "@polypoly-eu/poly-analysis": "file:../../feature-utils/poly-analysis",
+    "@polypoly-eu/poly-import": "file:../../feature-utils/poly-import",
     "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
     "d3": "^7.0.1",
     "react": "^17.0.2",
