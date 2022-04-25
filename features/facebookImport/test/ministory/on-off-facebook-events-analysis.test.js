@@ -58,7 +58,7 @@ describe("Off-Facebook events analysis from account with no purchases", () => {
     ];
     let status = null;
     let analysisStory = null;
-    let analysesData = null;
+    let analysisData = null;
     let analysis = null;
 
     beforeAll(async () => {
@@ -69,7 +69,7 @@ describe("Off-Facebook events analysis from account with no purchases", () => {
             facebookAccount
         ));
         analysisStory = new OnOffFacebookEventsMinistory(facebookAccount);
-        analysesData = getAnalysisData(facebookAccount, analysis);
+        analysisData = getAnalysisData(facebookAccount, analysis);
     });
 
     it("has success status", async () => {
@@ -81,19 +81,19 @@ describe("Off-Facebook events analysis from account with no purchases", () => {
     });
 
     it("has correct companies count", async () => {
-        expect(analysesData.companiesCount).toBe(expectedCompaniesCount);
+        expect(analysisData.companiesCount).toBe(expectedCompaniesCount);
     });
 
     it("has no companies with ads", async () => {
-        expect(analysesData.companiesWithAdsCount).toBe(0);
+        expect(analysisData.companiesWithAdsCount).toBe(0);
     });
 
     it("has variation with no correlations", async () => {
-        expect(analysesData.displayType).toBe("off");
+        expect(analysisData.displayType).toBe("off");
     });
 
     it("has correct report data", async () => {
-        expect(analysesData.customReportData).toStrictEqual({
+        expect(analysisData.customReportData).toStrictEqual({
             displayType: "off",
         });
     });
@@ -102,7 +102,7 @@ describe("Off-Facebook events analysis from account with no purchases", () => {
 describe("Off-Facebook events analysis from export data", () => {
     let status = null;
     let analysisStory = null;
-    let analysesData = null;
+    let analysisData = null;
     let analysis = null;
 
     beforeAll(async () => {
@@ -113,7 +113,7 @@ describe("Off-Facebook events analysis from export data", () => {
         );
         ({ analysis, status } = analysisResult);
         analysisStory = new OnOffFacebookEventsMinistory(facebookAccount);
-        analysesData = getAnalysisData(facebookAccount, analysis);
+        analysisData = getAnalysisData(facebookAccount, analysis);
     });
 
     it("has success status", async () => {
@@ -125,19 +125,19 @@ describe("Off-Facebook events analysis from export data", () => {
     });
 
     it("has correct companies count", async () => {
-        expect(analysesData.companiesCount).toBe(7);
+        expect(analysisData.companiesCount).toBe(7);
     });
 
     it("has no companies with ads", async () => {
-        expect(analysesData.companiesWithAdsCount).toBe(6);
+        expect(analysisData.companiesWithAdsCount).toBe(6);
     });
 
     it("has variation with on-off correlations", async () => {
-        expect(analysesData.displayType).toBe("on-off");
+        expect(analysisData.displayType).toBe("on-off");
     });
 
     it("has correct report data", async () => {
-        expect(analysesData.customReportData).toStrictEqual({
+        expect(analysisData.customReportData).toStrictEqual({
             displayType: "on-off",
         });
     });
