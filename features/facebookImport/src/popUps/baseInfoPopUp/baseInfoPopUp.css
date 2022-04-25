@@ -1,5 +1,6 @@
 .base-info {
     position: absolute;
+    top: 0;
     background-color: var(--background-light);
     color: var(--text-dark);
     height: 100%;
