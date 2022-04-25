@@ -41,7 +41,7 @@ jobs:
               if: steps.cache.outputs.cache-hit != 'true'
               run: ./build.js install
             - name: Build API and features
-              run: ./build.js --skip-root-install
+              run: ./build.js build
             - name: Build core
               working-directory: platform/ios
               run: make core

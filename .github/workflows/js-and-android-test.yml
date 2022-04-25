@@ -66,7 +66,7 @@ jobs:
               run: ./build.js build
             - name: Test core and features
               if: steps.changes.outputs.apiAndFeatures == 'true'
-              run: xvfb-run --auto-servernum ./build.js --skip-root-install test
+              run: xvfb-run --auto-servernum ./build.js test
             - uses: actions/setup-java@v2
               if: steps.changes.outputs.android == 'true'
               with:
