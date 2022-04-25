@@ -1,6 +1,12 @@
 const MagicString = require("magic-string");
 const fs = require("fs");
 
+const yargs = require("yargs");
+
+const manifestJsonPath = yargs.argv("manifestJsonPath");
+const podjs = yargs.argv(podjs);
+const dest = yargs.argv(dest);
+
 function replaceManifestData(code, manifestData) {
     const magicString = new MagicString(code);
     const pattern = new RegExp("window.manifestData", "g");
@@ -32,10 +38,14 @@ function replaceManifestData(code, manifestData) {
     return result;
 }
 
-function executeReplacement(code, manifestJsonPath) {
+function executeReplacement(podJs, manifestJsonPath, dest) {
     try {
         const manifestData = fs.readFileSync(manifestJsonPath, "utf8");
-        return replaceManifestData(code, manifestData);
+        const podJsCode = fs.readFileSync(podJs, "utf8");
+
+        const replacedCode = replaceManifestData(podJsCode, manifestData);
+
+        fs.appendFileSync(dest, replacedCode);
     } catch (err) {
         console.error(err);
     }
@@ -45,16 +55,21 @@ function executeReplacement(code, manifestJsonPath) {
  * @param options
  * @param options.manifestJsonPath
  */
-module.exports.loadManifest = (options = {}) => {
-    return {
-        name: "loadManifest",
-        async buildStart() {
-            if (!options.manifestJsonPath) {
-                throw new Error(`Must have "manifestJsonPath" property`);
-            }
-        },
-        async transform(code) {
-            return executeReplacement(code, options.manifestJsonPath);
-        },
-    };
-};
+function loadManifest() {
+    console.log("Loading", manifestJsonPath);
+    console.log("Loading into...", podjs);
+    console.log("Generating into... ", dest);
+
+    return executeReplacement(podjs, manifestJsonPath, dest);
+    // name: "loadManifest",
+    // async buildStart() {
+    //     if (!options.manifestJsonPath) {
+    //         throw new Error(`Must have "manifestJsonPath" property`);
+    //     }
+    // },
+    // async transform(code) {
+    // return
+    // },
+}
+
+loadManifest();
