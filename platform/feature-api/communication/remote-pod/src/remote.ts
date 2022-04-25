@@ -38,7 +38,6 @@ import * as RDF from "@polypoly-eu/rdf";
 import { Bubblewrap, Classes } from "@polypoly-eu/bubblewrap";
 
 type PolyInBackend = ObjectBackendSpec<{
-    select(matcher: Partial<Matcher>): ValueBackendSpec<Quad[]>;
     match(matcher: Partial<Matcher>): ValueBackendSpec<Quad[]>;
     add(...quads: Quad[]): ValueBackendSpec<void>;
     delete(...quads: Quad[]): ValueBackendSpec<void>;
@@ -178,7 +177,6 @@ export class RemoteClientPod implements Pod {
         return {
             add: (...quads) => this.rpcClient.polyIn().add(...quads)(),
             match: (matcher) => this.rpcClient.polyIn().match(matcher)(),
-            select: (matcher) => this.rpcClient.polyIn().select(matcher)(),
             delete: (...quads) => this.rpcClient.polyIn().delete(...quads)(),
             has: (...quads) => this.rpcClient.polyIn().has(...quads)(),
         };

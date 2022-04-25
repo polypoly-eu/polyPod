@@ -21,10 +21,6 @@ extension CoreDataStack: PolyIn {
     }
     
     func matchQuads(matcher: ExtendedData, completionHandler: @escaping ([ExtendedData]?, Error?) -> Void) {
-        selectQuads(matcher: matcher, completionHandler: completionHandler)
-    }
-    
-    func selectQuads(matcher: ExtendedData, completionHandler: @escaping ([ExtendedData]?, Error?) -> Void) {
         let (predicate, filterOperation) = quadsPredicateAndFilter(matcher: matcher)
         perform { managedContext in
             do {

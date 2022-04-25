@@ -1,7 +1,6 @@
-import { PolyChart } from "@polypoly-eu/poly-look";
+import { PolyChart, PolyImportContext } from "@polypoly-eu/poly-look";
 import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
-import { PolyImportContext } from "@polypoly-eu/poly-import";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
 import Loading from "../../components/loading/loading.jsx";

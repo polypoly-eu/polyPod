@@ -4,7 +4,7 @@ import RouteButton from "../../components/buttons/routeButton.jsx";
 import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import { List, RoutingCard, Card } from "@polypoly-eu/poly-look";
-import { PolyAnalysisContext } from "@polypoly-eu/poly-analysis";
+import { PolyAnalysisContext } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
 

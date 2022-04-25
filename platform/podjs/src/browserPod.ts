@@ -41,23 +41,14 @@ class LocalStoragePolyIn implements PolyIn {
         });
     }
 
-    async select(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
-        return this.store.filter((quad: RDF.Quad) => {
-            if (!quad) return false;
-            if (matcher.subject && quad.subject.value != matcher.subject.value)
-                return false;
-            if (matcher.object && quad.object.value != matcher.object.value)
-                return false;
-            if (
-                matcher.predicate &&
-                quad.predicate.value != matcher.predicate.value
-            )
-                return false;
-            return true;
-        });
+    private checkQuads(quads: RDF.Quad[]): void {
+        for (const quad of quads)
+            if (!quad.graph.equals(dataFactory.defaultGraph()))
+                throw new Error("Only default graph allowed");
     }
 
     async add(...quads: RDF.Quad[]): Promise<void> {
+        this.checkQuads(quads);
         this.store.push(...quads);
         localStorage.setItem(
             LocalStoragePolyIn.storageKey,
@@ -66,6 +57,7 @@ class LocalStoragePolyIn implements PolyIn {
     }
 
     async delete(...quads: RDF.Quad[]): Promise<void> {
+        this.checkQuads(quads);
         quads.forEach((quad) => {
             delete this.store[this.store.indexOf(quad)];
         });
@@ -76,7 +68,8 @@ class LocalStoragePolyIn implements PolyIn {
     }
 
     async has(...quads: RDF.Quad[]): Promise<boolean> {
-        throw `Called with ${quads}, not implemented: «has»`;
+        this.checkQuads(quads);
+        return quads.some((quad) => this.store.includes(quad));
     }
 }
 
@@ -197,6 +190,17 @@ class LocalStoragePolyOut implements PolyOut {
 
     stat(id: string): Promise<Stats> {
         return new Promise((resolve, reject) => {
+            if (id === "") {
+                resolve({
+                    getId: () => "",
+                    getSize: () => 0,
+                    getTime: () => "",
+                    getName: () => "",
+                    isFile: () => false,
+                    isDirectory: () => true,
+                });
+                return;
+            }
             const parts = id.split("/");
             if (parts.length > 3) {
                 const zipId = `${parts[0]}//${parts[2]}`;
