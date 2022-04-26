@@ -2,11 +2,13 @@ import React, { useContext, useState } from "react";
 import { PolyImportContext } from "@polypoly-eu/poly-look";
 import { GoogleContext } from "../../context/google-context.jsx";
 import { useHistory } from "react-router-dom";
+import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
 
 const ImportView = () => {
+    const { pod, runWithLoadingScreen, setGlobalError } =
+        useContext(GoogleContext);
     const { files, refreshFiles, handleRemoveFile } =
         useContext(PolyImportContext);
-    const { runWithLoadingScreen } = useContext(GoogleContext);
     const [selectedFile, setSelectedFile] = useState(null);
 
     const history = useHistory();
