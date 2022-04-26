@@ -1,5 +1,4 @@
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
-import analysisKeys from "../utils/analysisKeys";
 
 export default class MessagesAnalysis extends RootAnalysis {
     get label() {
@@ -47,13 +46,10 @@ export default class MessagesAnalysis extends RootAnalysis {
         });
 
         messagesThreadsData.sort((a, b) => b.count - a.count);
-
         if (messagesThreadsData.length > 0) {
-            dataAccount.analyses[analysisKeys.messagesThreadsData] =
-                messagesThreadsData;
-            dataAccount.analyses[analysisKeys.messagesCount] = messagesCount;
-            dataAccount.analyses[analysisKeys.totalUsernamesCount] =
-                usernames.size;
+            dataAccount.processedData.messagesThreadsData = messagesThreadsData;
+            dataAccount.processedData.messagesCount = messagesCount;
+            dataAccount.processedData.totalUsernamesCount = usernames.size;
         }
     }
 }
