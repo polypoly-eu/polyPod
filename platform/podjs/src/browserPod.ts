@@ -25,6 +25,11 @@ const NAV_DEFAULT_BACKGROUND_COLOR = "#ffffff";
 const NAV_DARK_FOREGROUND_COLOR = "#000000";
 const NAV_LIGHT_FOREGROUND_COLOR = "#ffffff";
 
+// Previously, data were stored in localStorage. IndexedDB is more flexible and
+// efficient, and most importantly in our case can store larger amount of data,
+// while the 2MB limit of localStorage is no longer sufficient. This function
+// migrates any data in localStorage to not disrupt the developer expirience.
+// TODO: Please remove the migration code after Oct 2022
 async function migrateData(db: IDBDatabase): Promise<IDBDatabase> {
     const polyInData = localStorage.getItem("polyInStore");
     const polyOutData = localStorage.getItem("files");
