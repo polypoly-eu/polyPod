@@ -1,5 +1,5 @@
 import commonjs from "@rollup/plugin-commonjs";
-import { nodeResolve } from "@rollup/plugin-node-resolve";
+import resolve from "@rollup/plugin-node-resolve";
 import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
 import path from "path";
@@ -23,7 +23,7 @@ export default [
         ],
         plugins: [
             json(),
-            nodeResolve(),
+            resolve(),
             sucrase({
                 exclude: [nodeModules],
                 transforms: ["typescript"],
@@ -41,8 +41,8 @@ export default [
         ],
         plugins: [
             json(),
-            nodeResolve(),
-            commonjs({}),
+            resolve(),
+            commonjs(),
             sucrase({
                 exclude: [nodeModules],
                 transforms: ["typescript"],
