@@ -8,46 +8,42 @@ export default [
         output: [
             {
                 file: "dist/index.es.js",
-                format: "esm"
+                format: "esm",
             },
             {
                 file: "dist/index.js",
-                format: "cjs"
-            }
+                format: "cjs",
+            },
         ],
         plugins: [
             sucrase({
                 exclude: ["node_modules/**"],
-                transforms: ["typescript"]
-            })
+                transforms: ["typescript"],
+            }),
         ],
         external: [
-            "@polypoly-eu/bubblewrap",
-            "@polypoly-eu/port-authority",
-            "@polypoly-eu/port-authority/dist/middleware",
-            "@polypoly-eu/postoffice",
-            "@polypoly-eu/rdf"
-        ]
+            "@polypoly-eu/communication",
+            "@polypoly-eu/communication/dist/port-authority/middleware",
+            "@polypoly-eu/rdf",
+        ],
     },
     {
         input: "src/bootstrap.ts",
         output: [
             {
                 file: "dist/bootstrap.js",
-                format: "iife"
-            }
+                format: "iife",
+            },
         ],
-        context: 'null',
+        context: "null",
         plugins: [
             resolve(),
             commonjs(),
             sucrase({
                 exclude: ["node_modules/**"],
-                transforms: ["typescript"]
-            })
+                transforms: ["typescript"],
+            }),
         ],
-        external: [
-            "@polypoly-eu/port-authority/dist/middleware"
-        ]
-    }
+        external: ["@polypoly-eu/communication/dist/port-authority/middleware"],
+    },
 ];
