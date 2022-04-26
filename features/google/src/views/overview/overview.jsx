@@ -9,7 +9,7 @@ const Overview = () => {
             <div>
                 <h1>Activities</h1>
                 {account?.activities.map((activity, i) => (
-                    <div key={i}>{activity}</div>
+                    <div key={i}>{activity.timestamp.toUTCString()}</div>
                 ))}
             </div>
             <div>
