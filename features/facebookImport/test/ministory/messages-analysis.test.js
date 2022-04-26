@@ -49,7 +49,7 @@ describe("Messages analysis for export with messages", () => {
         );
         ({ status } = analysisResult);
         analysisStory = new MessagesMinistory(facebookAccount);
-        analysisData = getAnalysisData(facebookAccount);
+        analysisData = getAnalysisData(analysisStory);
     });
 
     it("has success status", async () => {

@@ -113,7 +113,7 @@ describe("Off-Facebook events analysis from export data", () => {
         );
         ({ analysis, status } = analysisResult);
         analysisStory = new OnOffFacebookEventsMinistory(facebookAccount);
-        analysisData = getAnalysisData(facebookAccount, analysis);
+        analysisData = getAnalysisData(analysisStory, analysis);
     });
 
     it("has success status", async () => {
