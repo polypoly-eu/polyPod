@@ -26,7 +26,7 @@ function parseCommandLine() {
 
     if (parameters.length > 1) return { scriptPath, command: null };
 
-    const command = parameters.length ? parameters[0] : "build";
+    const command = parameters.length ? parameters[0] : "installAndBuild";
     return {
         scriptPath,
         command: validCommands.includes(command) ? command : null,
