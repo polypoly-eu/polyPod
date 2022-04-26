@@ -3,6 +3,7 @@
 // Remember! Only core modules here. It's run before any package install.
 const path = require("path");
 const { performance } = require("perf_hooks");
+const { existsSync } = require("fs");
 
 const { checkVersions, ANSIBold } = require("./utils.js");
 const { logMain, logDependencies, logSuccess } = require("./log.js");
@@ -65,6 +66,18 @@ async function main() {
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
 
+    const rootInstallDone = existsSync("./node_modules");
+    if (
+        !rootInstallDone &&
+        ["lint", "lintfix", "clean", "install", "installAndBuild"].includes(
+            command
+        )
+    ) {
+        await runCommand("root-install", "👷👷‍♀️", async () => {
+            await npmInstall("/");
+        });
+    }
+
     if (command === "lint") {
         await runCommand("lint", "🧹", async () => {
             await npx(["eslint", ...eslintOptions]);
@@ -81,11 +94,6 @@ async function main() {
 
     try {
         const startTime = performance.now();
-        if (["install", "installAndBuild"].includes(command)) {
-            await runCommand("root-install", "👷👷‍♀️", async () => {
-                await npmInstall("/");
-            });
-        }
         const packageTree = createPackageTree(metaManifest);
         if (start) skipPackages(packageTree, start);
         await processAll(packageTree, command);
