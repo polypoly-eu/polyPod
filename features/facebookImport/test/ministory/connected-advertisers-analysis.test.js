@@ -1,5 +1,4 @@
 import ConnectedAdvertisersAnalysis from "../../src/model/analyses/ministories/connected-advertisers-analysis";
-import analysisKeys from "../../src/model/analyses/utils/analysisKeys";
 import FacebookAccount from "../../src/model/entities/facebook-account";
 import ConnectedAdvertisersMinistory from "../../src/views/ministories/connectedAdvertisers";
 import {
@@ -56,10 +55,7 @@ describe("Connected advertisers analysis from account with connected advertisers
         ({ status } = analysisResult);
         analysisStory = new ConnectedAdvertisersMinistory(facebookAccount);
         analysisData = {
-            connectedAdvertisersCount:
-                facebookAccount.analyses[
-                    analysisKeys.connectedAdvertisersCount
-                ],
+            connectedAdvertisersCount: analysisStory.analysisData.length,
         };
     });
 
@@ -92,10 +88,7 @@ describe("Connected advertisers analysis from account with connected advertisers
         ({ status } = analysisResult);
         analysisStory = new ConnectedAdvertisersMinistory(facebookAccount);
         analysisData = {
-            connectedAdvertisersCount:
-                facebookAccount.analyses[
-                    analysisKeys.connectedAdvertisersCount
-                ],
+            connectedAdvertisersCount: analysisStory.analysisData.length,
         };
     });
 

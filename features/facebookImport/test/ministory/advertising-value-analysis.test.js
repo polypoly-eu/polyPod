@@ -71,9 +71,9 @@ for (const dataset of DATASETS) {
             analysisStory = new AdvertisingValueMinistory(facebookAccount);
             analysisData = {
                 numberInterests:
-                    facebookAccount.analyses[analysisKeys.numberInterests],
+                    analysisStory.analyses[analysisKeys.numberInterests],
                 randomAdInterests:
-                    facebookAccount.analyses[analysisKeys.randomAdInterests],
+                    analysisStory.analyses[analysisKeys.randomAdInterests],
             };
         });
 

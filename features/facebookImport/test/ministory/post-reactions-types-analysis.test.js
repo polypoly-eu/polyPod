@@ -1,5 +1,4 @@
 import PostReactionsTypesAnalysis from "../../src/model/analyses/ministories/post-reactions-types-analysis";
-import analysisKeys from "../../src/model/analyses/utils/analysisKeys";
 import PostReactionTypesMinistory from "../../src/views/ministories/postReactionsTypes";
 import { zipFileWithPostReactions } from "../datasets/post-reactions-data";
 import { ZipFileMock } from "../mocks/zipfile-mock";
@@ -47,8 +46,7 @@ describe("Post reactions analysis from export data", () => {
         ({ status } = analysisResult);
         analysisStory = new PostReactionTypesMinistory(facebookAccount);
         analysisData = {
-            reactionsTypeCountPairs:
-                facebookAccount.analyses[analysisKeys.reactionsTypeCountPairs],
+            reactionsTypeCountPairs: analysisStory.analysisData,
         };
     });
 

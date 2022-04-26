@@ -96,12 +96,12 @@ describe("Messages analysis for export with messages", () => {
         }));
 });
 
-function getAnalysisData(facebookAccount) {
+function getAnalysisData(analysisStory) {
     return {
         messagesThreadsData:
-            facebookAccount.analyses[analysisKeys.messagesThreadsData],
-        messagesCount: facebookAccount.analyses[analysisKeys.messagesCount],
+            analysisStory.analyses[analysisKeys.messagesThreadsData],
+        messagesCount: analysisStory.analyses[analysisKeys.messagesCount],
         totalUsernamesCount:
-            facebookAccount.analyses[analysisKeys.totalUsernamesCount],
+            analysisStory.analyses[analysisKeys.totalUsernamesCount],
     };
 }
