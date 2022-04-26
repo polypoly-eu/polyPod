@@ -1,14 +1,6 @@
 const MagicString = require("magic-string");
 const fs = require("fs");
 
-const yargs = require("yargs");
-
-const argv = yargs.option("build_dir", {
-    alias: "build-dir",
-    description: "path where podjs and json file exist",
-    type: "string",
-}).argv;
-
 function replaceManifestData(code, manifestData) {
     const magicString = new MagicString(code);
     const pattern = new RegExp("window.manifestData", "g");
@@ -43,23 +35,41 @@ function executeReplacement(podJs, manifestJsonPath) {
         const podJsCode = fs.readFileSync(podJs, "utf8");
 
         const replacedCode = replaceManifestData(podJsCode, manifestData);
+        if (!replacedCode) {
+            console.log("Nothing to replace into ", podJs);
+            return;
+        }
 
         fs.writeFileSync(podJs, replacedCode);
     } catch (err) {
-        console.error(err);
+        console.error("Error during replacing code", err);
+    }
+}
+
+function copyPodJs(dest) {
+    if (!fs.existsSync(dest)) {
+        fs.mkdirSync(dest);
+
+        fs.copyFileSync(
+            "node_modules/@polypoly-eu/podjs/dist/pod.js",
+            `${dest}/pod.js`
+        );
+        console.log("Copied pod.js into", dest);
     }
 }
 
 /**
- * @param build_dir
+ * @param options
+ * @param options.build_dir - path to build_dir where json and pod.js exist
  */
-function loadManifest() {
-    const build_dir = argv.build_dir;
-    console.log("Loading into", build_dir);
+module.exports.loadManifest = (options = {}) => {
+    if (!options.build_dir || !options.manifestPath) {
+        throw new Error("manifestPath or build_dir not specified");
+    }
+    const podJsPath = `${options.build_dir}/pod.js`;
+    console.log("Loading", options.manifestPath, "into", podJsPath);
 
-    const podJs = `${build_dir}/pod.js`;
-    const manifestJson = `${build_dir}/manifest.json`;
-    return executeReplacement(podJs, manifestJson);
-}
+    copyPodJs(options.build_dir);
 
-loadManifest();
+    executeReplacement(podJsPath, options.manifestPath);
+};
