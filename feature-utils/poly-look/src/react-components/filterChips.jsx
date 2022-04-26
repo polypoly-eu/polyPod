@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Chip from "../chip/chip.jsx";
+import Chip from "./chip.jsx";
 
 import "./filterChips.css";
 

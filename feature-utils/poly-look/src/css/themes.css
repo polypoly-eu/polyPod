@@ -38,3 +38,8 @@
 .poly-theme h5 {
   font-weight: var(--font-weight-regular);
 }
+
+/* Size */
+:root {
+  --max-width: 412px;
+}

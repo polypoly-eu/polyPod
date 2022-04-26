@@ -22,6 +22,7 @@ import {
   List,
   PolyButton,
   IconButton,
+  SideSwiper,
   PolyImportProvider,
   PolyAnalysisProvider,
   PolyImportContext,
@@ -53,4 +54,5 @@ export {
   INITIAL_HISTORY_STATE,
   PolyButton,
   IconButton,
+  SideSwiper,
 };
