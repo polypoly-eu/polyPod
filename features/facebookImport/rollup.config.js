@@ -7,7 +7,8 @@ import commonjs from "@rollup/plugin-commonjs";
 import replace from "@rollup/plugin-replace";
 import serve from "rollup-plugin-serve";
 import svg from "rollup-plugin-svg";
-import execute from "rollup-plugin-execute";
+
+import genPodjs from "@polypoly-eu/podjs/bin/genPodjs.js";
 
 const fallbackURL = "http://localhost:8000";
 const fallbackAuthorization = "username:password";
@@ -27,10 +28,6 @@ export default (commandLineArgs) => {
             globals: externalPackages,
         },
         plugins: [
-            execute([
-                "cp node_modules/@polypoly-eu/podjs/dist/pod.js dist",
-                "node ../../platform/podjs/bin/genPodjs.js --build-dir=./dist/",
-            ]),
             svg(),
             css({ output: "css/bundle.css" }),
             json(),
@@ -64,6 +61,11 @@ export default (commandLineArgs) => {
                     },
                 ],
             }),
+            genPodjs.loadManifest({
+                build_dir: "./dist",
+                manifestPath: "./src/static/manifest.json",
+            }),
+
             resolve(),
             replace({
                 preventAssignment: true,
