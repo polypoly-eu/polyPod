@@ -69,7 +69,7 @@ describe("Off-Facebook events analysis from account with no purchases", () => {
             facebookAccount
         ));
         analysisStory = new OnOffFacebookEventsMinistory(facebookAccount);
-        analysisData = getAnalysisData(facebookAccount, analysis);
+        analysisData = getAnalysisData(analysisStory, analysis);
     });
 
     it("has success status", async () => {
