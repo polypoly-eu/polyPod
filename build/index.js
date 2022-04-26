@@ -81,7 +81,7 @@ async function main() {
 
     try {
         const startTime = performance.now();
-        if (command === "install") {
+        if (["install", "installAndBuild"].includes(command)) {
             await runCommand("root-install", "👷👷‍♀️", async () => {
                 await npmInstall("/");
             });
