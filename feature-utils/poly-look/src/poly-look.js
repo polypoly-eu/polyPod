@@ -20,6 +20,7 @@ import {
   ClickableCard,
   RoutingCard,
   List,
+  SideSwiper,
   PolyImportProvider,
   PolyAnalysisProvider,
   PolyImportContext,
@@ -49,4 +50,5 @@ export {
   PolyImportContext,
   PolyAnalysisContext,
   INITIAL_HISTORY_STATE,
+  SideSwiper,
 };
