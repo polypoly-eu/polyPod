@@ -91,7 +91,7 @@ const DataStructureMiniStory = ({ data }) => {
                 onChipClick={handleFolderSelected}
             />
             <div className="right-edge-aligned">
-                <InfoButton infoScreen={"data-structure-info"} />
+                <InfoButton infoScreen="data-structure-info" />
             </div>
             <p className="source data-structure-source">
                 {i18n.t("common:source.your.facebook.data")}
