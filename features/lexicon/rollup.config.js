@@ -44,6 +44,10 @@ export default {
         file: "public/build/bundle.js",
     },
     plugins: [
+        execute([
+            "cp node_modules/@polypoly-eu/podjs/dist/pod.js public",
+            "node ../../platform/podjs/bin/genPodjs.js --podjs=./public/pod.js --manifestJson=./public/manifest.json",
+        ]),
         svelte({
             compilerOptions: {
                 // enable run-time checks when not in production
@@ -66,10 +70,6 @@ export default {
         commonjs(),
         json(),
         sucrase({ transforms: [] }),
-        execute([
-            "cp node_modules/@polypoly-eu/podjs/dist/pod.js dist",
-            "node ../../platform/podjs/bin/genPodjs.js --podjs=./dist/pod.js --manifestJson=./public/manifest.json",
-        ]),
         copy({
             targets: [
                 {
