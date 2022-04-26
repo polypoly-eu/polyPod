@@ -17,7 +17,8 @@
     "@polypoly-eu/podjs": "file:../../platform/podjs",
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "rollup-plugin-execute": "^1.1.1"
   },
   "private": true,
   "dependencies": {
