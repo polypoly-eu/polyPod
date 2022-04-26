@@ -11,6 +11,7 @@ import type {
 import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
+import * as RDFString from "rdf-string";
 import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../../polyPod-config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
@@ -19,11 +20,14 @@ const DB_NAME = "polypod";
 const DB_VERSION = 1;
 const OBJECT_STORE_POLY_IN = "poly-in";
 const OBJECT_STORE_POLY_OUT = "poly-out";
+const QUAD_KEYS = ["subject", "predicate", "object"];
 
 const NAV_FRAME_ID = "polyNavFrame";
 const NAV_DEFAULT_BACKGROUND_COLOR = "#ffffff";
 const NAV_DARK_FOREGROUND_COLOR = "#000000";
 const NAV_LIGHT_FOREGROUND_COLOR = "#ffffff";
+
+const MANIFEST_DATA = window.manifestData;
 
 // Previously, data were stored in localStorage. IndexedDB is more flexible and
 // efficient, and most importantly in our case can store larger amount of data,
@@ -35,8 +39,10 @@ async function migrateData(db: IDBDatabase): Promise<IDBDatabase> {
     const polyOutData = localStorage.getItem("files");
 
     if (polyInData || polyOutData) {
-        const quads = polyInData ? JSON.parse(polyInData) : [];
         const files: FileInfo[] = [];
+        const quads = polyInData
+            ? JSON.parse(polyInData).map(RDFString.quadToStringQuad)
+            : [];
 
         if (polyOutData) {
             for (const [, file] of JSON.parse(polyOutData)) {
@@ -75,7 +81,13 @@ function openDatabase(): Promise<IDBDatabase> {
 
         request.onupgradeneeded = () => {
             const db = request.result;
-            db.createObjectStore(OBJECT_STORE_POLY_IN, { autoIncrement: true });
+            const polyInStore = db.createObjectStore(OBJECT_STORE_POLY_IN, {
+                keyPath: QUAD_KEYS,
+            });
+            for (let mask = 1; mask < (1 << QUAD_KEYS.length) - 1; mask++) {
+                const keyPath = QUAD_KEYS.filter((_, idx) => (mask >> idx) & 1);
+                polyInStore.createIndex(keyPath.join("-"), keyPath);
+            }
             db.createObjectStore(OBJECT_STORE_POLY_OUT, { keyPath: "id" });
         };
 
@@ -85,70 +97,93 @@ function openDatabase(): Promise<IDBDatabase> {
 }
 
 class IDBPolyIn implements PolyIn {
-    private async getStoredQuads(): Promise<RDF.Quad[]> {
+    async match(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
+            const index = [];
+            const query = [];
+            for (const key of QUAD_KEYS) {
+                const value = matcher[key as keyof Matcher];
+                if (value) {
+                    index.push(key);
+                    query.push(RDFString.termToString(value));
+                }
+            }
+
             const tx = db.transaction([OBJECT_STORE_POLY_IN], "readonly");
-            const request = tx.objectStore(OBJECT_STORE_POLY_IN).getAll();
-            request.onsuccess = () => resolve(request.result);
+            const store = tx.objectStore(OBJECT_STORE_POLY_IN);
+            const request =
+                index.length > 0
+                    ? (index.length < QUAD_KEYS.length
+                          ? store.index(index.join("-"))
+                          : store
+                      ).getAll(query)
+                    : store.getAll();
+
+            request.onsuccess = () =>
+                resolve(
+                    request.result.map((quad: RDFString.IStringQuad) =>
+                        RDFString.stringQuadToQuad(quad)
+                    )
+                );
+
             tx.onerror = tx.onabort = () => reject(tx.error);
         });
     }
 
-    async match(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
-        const storedQuads = await this.getStoredQuads();
-        return storedQuads.filter(
-            (quad) =>
-                (!matcher.subject || quad.subject.equals(matcher.subject)) &&
-                (!matcher.object || quad.object.equals(matcher.object)) &&
-                (!matcher.predicate || quad.predicate.equals(matcher.predicate))
-        );
-    }
-
-    private checkQuads(quads: RDF.Quad[]): void {
-        for (const quad of quads)
-            if (!quad.graph.equals(dataFactory.defaultGraph()))
-                throw new Error("Only default graph allowed");
+    private checkQuad(quad: RDF.Quad): void {
+        if (!quad.graph.equals(dataFactory.defaultGraph()))
+            throw new Error("Only default graph allowed");
     }
 
     async add(...quads: RDF.Quad[]): Promise<void> {
-        this.checkQuads(quads);
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_IN], "readwrite");
             const store = tx.objectStore(OBJECT_STORE_POLY_IN);
-            for (const quad of quads) store.add(quad);
+            for (const quad of quads) {
+                this.checkQuad(quad);
+                store.put(RDFString.quadToStringQuad(quad));
+            }
             tx.oncomplete = () => resolve();
             tx.onerror = tx.onabort = () => reject(tx.error);
         });
     }
 
+    private serializeKeys(quad: RDF.Quad): string[] {
+        this.checkQuad(quad);
+        return QUAD_KEYS.map((key) =>
+            RDFString.termToString(quad[key as keyof RDF.Quad] as RDF.Term)
+        );
+    }
+
     async delete(...quads: RDF.Quad[]): Promise<void> {
-        this.checkQuads(quads);
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_IN], "readwrite");
             const store = tx.objectStore(OBJECT_STORE_POLY_IN);
-            const request = store.openCursor();
-
-            request.onsuccess = () => {
-                const cursor = request.result;
-                if (cursor) {
-                    if (quads.some((quad) => quad.equals(cursor.value)))
-                        store.delete(cursor.key);
-                    cursor.continue();
-                }
-            };
-
+            for (const quad of quads) store.delete(this.serializeKeys(quad));
             tx.oncomplete = () => resolve();
             tx.onerror = tx.onabort = () => reject(tx.error);
         });
     }
 
     async has(...quads: RDF.Quad[]): Promise<boolean> {
-        this.checkQuads(quads);
-        const storedQuads = await this.getStoredQuads();
-        return quads.some((a) => storedQuads.some((b) => a.equals(b)));
+        const db = await openDatabase();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction([OBJECT_STORE_POLY_IN], "readonly");
+            const store = tx.objectStore(OBJECT_STORE_POLY_IN);
+            const lookupQuad = (i: number): void => {
+                if (i >= quads.length) resolve(false);
+                else {
+                    const request = store.count(this.serializeKeys(quads[i]));
+                    request.onsuccess = () =>
+                        request.result > 0 ? resolve(true) : lookupQuad(i + 1);
+                }
+            };
+            lookupQuad(0);
+            tx.onerror = tx.onabort = () => reject(tx.error);
+        });
     }
 }
 
