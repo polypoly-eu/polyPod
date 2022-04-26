@@ -6,7 +6,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import svg from "rollup-plugin-svg";
 import replace from "@rollup/plugin-replace";
 import commonjs from "@rollup/plugin-commonjs";
-import execute from "rollup-plugin-execute";
+import genPodjs from "@polypoly-eu/podjs/bin/genPodjs.js";
 
 export default {
     input: "src/index.jsx",
@@ -24,10 +24,10 @@ export default {
         warn(warning);
     },
     plugins: [
-        execute([
-            "cp node_modules/@polypoly-eu/podjs/dist/pod.js dist",
-            "node ../../platform/podjs/bin/genPodjs.js --build-dir=./dist/",
-        ]),
+        genPodjs.loadManifest({
+            build_dir: "./dist",
+            manifestPath: "./src/static/manifest.json",
+        }),
         svg(),
         css({ output: "css/bundle.css" }),
         json(),
