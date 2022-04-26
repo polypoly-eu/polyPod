@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, IconButton } from "../buttons";
+import { PolyButton, IconButton } from "../buttons";
 
 import "./sideSheet.css";
 
@@ -35,7 +35,7 @@ const SideSheet = ({ children, okLabel, onClose, title = "", style = {} }) => {
       {children}
 
       <div className="button-holder">
-        <Button label={okLabel} onClick={onClose} />
+        <PolyButton label={okLabel} onClick={onClose} />
       </div>
     </div>
   );
