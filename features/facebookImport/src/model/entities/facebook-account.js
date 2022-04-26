@@ -7,10 +7,7 @@ import RelatedAccountsGroup from "./related-accounts-group.js";
 class FacebookAccount extends DataAccount {
     constructor() {
         super();
-        this._processedData = {
-            ...super._processedData,
-            ...new FacebookProcessedData(),
-        };
+        this._processedData = new FacebookProcessedData();
 
         this.analyses = {};
         this._offFacebookCompanies = [];
