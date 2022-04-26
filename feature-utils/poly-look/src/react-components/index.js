@@ -6,6 +6,7 @@ import ErrorPopup from "./popUps/errorPopup/errorPopup.jsx";
 import { Card, ClickableCard, RoutingCard } from "./cards";
 import List from "./list.jsx";
 import { Button, IconButton } from "./buttons";
+import SideSheet from "./overlays/SideSheet.jsx";
 
 export {
   Chip,
@@ -21,4 +22,5 @@ export {
   List,
   Button,
   IconButton,
+  SideSheet,
 };

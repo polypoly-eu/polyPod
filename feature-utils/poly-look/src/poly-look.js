@@ -22,6 +22,7 @@ import {
   List,
   Button,
   IconButton,
+  SideSheet,
 } from "./react-components";
 import { INITIAL_HISTORY_STATE } from "./constants";
 export {
@@ -45,4 +46,5 @@ export {
   INITIAL_HISTORY_STATE,
   Button,
   IconButton,
+  SideSheet,
 };
