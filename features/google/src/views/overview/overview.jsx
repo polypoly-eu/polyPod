@@ -1,43 +1,28 @@
 import React, { useContext } from "react";
-import { GoogleContext } from "../../context/google-context.jsx";
+import { PolyImportContext } from "@polypoly-eu/poly-look";
 
 const Overview = () => {
-    const { handleSelectFile, files, handleRemoveFile, googleAccount } =
-        useContext(GoogleContext);
-
-    const importFile = async () => {
-        if (files?.[0]?.id) handleRemoveFile(files[0].id);
-        await handleSelectFile();
-    };
+    const { account } = useContext(PolyImportContext);
 
     return (
         <div className="overview poly-theme-light">
-            <button className="btn secondary" onClick={() => importFile()}>
-                Import File
-            </button>
             <div>
                 <h1>Activities</h1>
-                {googleAccount?.activities.map((activity, i) => (
+                {account?.activities.map((activity, i) => (
                     <div key={i}>{activity}</div>
                 ))}
             </div>
             <div>
                 <h1>Place Visits</h1>
-                {googleAccount?.placeVisits.map((placeVisit, i) => (
+                {account?.placeVisits.map((placeVisit, i) => (
                     <div key={i}>{placeVisit.timestamp.toUTCString()}</div>
                 ))}
             </div>
             <div>
                 <h1>Activity segments</h1>
-                {googleAccount?.activitySegments.map((activitySegment, i) => (
+                {account?.activitySegments.map((activitySegment, i) => (
                     <div key={i}>{activitySegment.timestamp.toUTCString()}</div>
                 ))}
-            </div>
-            <div>
-                <h1>Path names</h1>
-                {googleAccount?.pathNames.map((entry, i) => (
-                    <div key={i}>{entry.path}</div>
-                )) || null}
             </div>
         </div>
     );

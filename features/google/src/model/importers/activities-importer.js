@@ -32,14 +32,14 @@ class ActivityParser {
 }
 
 export default class ActivitiesImporter {
-    async import({ zipFile, googleAccount }) {
+    async import({ zipFile, facebookAccount }) {
         const entries = await zipFile.getEntries();
         const activityEntries = entries.filter(({ path }) =>
             activityRegex.test(path)
         );
 
         const parser = new ActivityParser();
-        googleAccount.activities = (
+        facebookAccount.activities = (
             await Promise.all(
                 activityEntries.map((entry) => parser.parse(entry))
             )
