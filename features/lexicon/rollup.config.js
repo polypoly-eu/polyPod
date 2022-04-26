@@ -6,7 +6,8 @@ import css from "rollup-plugin-css-only";
 import json from "@rollup/plugin-json";
 import sucrase from "@rollup/plugin-sucrase";
 import copy from "@polypoly-eu/rollup-plugin-copy-watch";
-import execute from "rollup-plugin-execute";
+
+import genPodjs from "@polypoly-eu/podjs/bin/genPodjs.js";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -44,10 +45,10 @@ export default {
         file: "public/build/bundle.js",
     },
     plugins: [
-        execute([
-            "cp node_modules/@polypoly-eu/podjs/dist/pod.js public",
-            "node ../../platform/podjs/bin/genPodjs.js --build-dir=./public/",
-        ]),
+        genPodjs.loadManifest({
+            build_dir: "./public",
+            manifestPath: "./public/manifest.json",
+        }),
         svelte({
             compilerOptions: {
                 // enable run-time checks when not in production
