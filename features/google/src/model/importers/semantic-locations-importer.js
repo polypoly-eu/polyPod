@@ -1,8 +1,7 @@
 import ActivitySegment from "../entities/activity-segment";
 import PlaceVisit from "../entities/place-visit";
 
-const semanticLocationsRegex =
-    /\/Location History\/Semantic Location History\/.*\.json$/;
+const semanticLocationsRegex = /\/[^/]+\/Semantic Location History\/.*\.json$/;
 
 async function readFullPathJSONFile(entry) {
     const rawContent = await entry.getContent();
