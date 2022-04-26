@@ -43,8 +43,8 @@ jobs:
             - name: Build API and features
               run: ./build.js build
             - name: Build core
-              working-directory: platform/ios
-              run: make core
+              working-directory: platform/core
+              run: make
             - name: Build and test iOS
               working-directory: platform/ios
               run: make test
