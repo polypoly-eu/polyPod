@@ -10,7 +10,7 @@ export default class PostReactionsTypesAnalysis extends RootAnalysis {
             KNOWN_REACTION_TYPES.includes(each.type)
         );
         if (reactionsTypeCountPairs.length > 0)
-            dataAccount.analyses[analysisKeys.reactionsTypeCountPairs] =
+            dataAccount.processedData[analysisKeys.reactionsTypeCountPairs] =
                 reactionsTypeCountPairs;
     }
 }

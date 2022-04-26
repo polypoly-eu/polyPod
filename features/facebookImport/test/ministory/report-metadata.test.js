@@ -55,7 +55,7 @@ describe("Report metadata analysis", () => {
         ({ status } = analysisResult);
         analysisReport = new ReportMetadataReport(facebookAccount);
         jsonReport = analysisReport.jsonReport;
-        reportData = getReportData(facebookAccount);
+        reportData = getReportData(analysisReport);
     });
 
     it("has success status", async () => {
@@ -119,8 +119,8 @@ function getReportNameFromAnalaysis(analysis) {
     return analysis.name.replace("Analysis", "Report");
 }
 
-function getReportData(facebookAccount) {
-    const analysisData = facebookAccount.reports[analysisKeys.reportMetadata];
+function getReportData(analysisReport) {
+    const analysisData = analysisReport.reports[analysisKeys.reportMetadata];
     return {
         fileSize: analysisData.fileSize,
         filesCount: analysisData.filesCount,

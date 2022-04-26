@@ -8,7 +8,7 @@ export default class DataStructureBubblesAnalysis extends RootAnalysis {
         );
 
         if (bubblesData.length > 0) {
-            dataAccount.analyses[analysisKeys.bubblesData] = bubblesData;
+            dataAccount.processedData[analysisKeys.bubblesData] = bubblesData;
         }
     }
 }

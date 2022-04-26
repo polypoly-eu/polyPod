@@ -1,5 +1,3 @@
-import ProcessedData from "./processed-data";
-
 export default class DataAccount {
     constructor() {
         this._importingResults = [];
@@ -7,7 +5,6 @@ export default class DataAccount {
 
         this._name = "";
         this._preferredLanguage = [];
-        this._processedData = new ProcessedData();
         this._analysesExecutionResults = [];
     }
 
