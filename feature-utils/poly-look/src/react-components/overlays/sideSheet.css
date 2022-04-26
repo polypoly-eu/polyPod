@@ -15,7 +15,7 @@
 .side-sheet .header {
   display: flex;
   align-items: center;
-  height: 48px;
+  min-height: 48px;
   margin-bottom: 23px;
 }
 .side-sheet .close-button-left {
