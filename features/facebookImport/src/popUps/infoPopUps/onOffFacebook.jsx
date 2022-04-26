@@ -1,10 +1,10 @@
 import React from "react";
 
-import i18n from "../../../i18n.js";
-import InfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
-import Infographic from "../../../components/infographic/infographic.jsx";
+import i18n from "../../i18n.js";
+import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
+import Infographic from "../../components/infographic/infographic.jsx";
 
-const OnOffFacebookInfoScreen = () => {
+const OnOffFacebookInfoPopUp = () => {
     const onOffFacebookInfoText = [
         <>
             <p>{i18n.t("onOffFacebookInfoScreen:text1")}</p>
@@ -43,7 +43,7 @@ const OnOffFacebookInfoScreen = () => {
         </>,
     ];
 
-    return <InfoScreen infoChildren={onOffFacebookInfoText} />;
+    return <BaseInfoPopUp infoChildren={onOffFacebookInfoText} />;
 };
 
-export default OnOffFacebookInfoScreen;
+export default OnOffFacebookInfoPopUp;

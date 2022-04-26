@@ -80,7 +80,7 @@ const PicturesMiniStory = () => {
                         : "pictures-info-container"
                 }
             >
-                <InfoButton route="/report/pictures-info" />
+                <InfoButton infoScreen="pictures-info" />
             </div>
             <p className="source">
                 {i18n.t(`picturesMiniStory:${activePart}.source`)}

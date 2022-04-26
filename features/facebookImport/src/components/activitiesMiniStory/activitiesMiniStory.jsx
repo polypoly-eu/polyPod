@@ -203,7 +203,7 @@ export const ActivitiesMiniStoryDetails = ({ totalEvents }) => {
                         : selectedYear}
                 </p>
             </div>
-            <InfoButton route="/report/details/activities-info" />
+            <InfoButton infoScreen="activities-info" />
             <p className="source">
                 {i18n.t("common:source.your.facebook.data")}
             </p>
