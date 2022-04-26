@@ -41,22 +41,17 @@ export async function runAnalysis(analysisClass, enrichedData) {
     const subAnalysis = new analysisClass();
 
     const telemetry = new Telemetry();
+    let status;
     try {
-        const status = await subAnalysis.analyze(enrichedData);
-        // const jsonReport = subAnalysis.jsonReport();
-        // dataAccount.addJsonReports(jsonReport);
-        return new AnalysisExecutionResult(
-            subAnalysis,
-            status,
-            telemetry.elapsedTime()
-        );
+        status = await subAnalysis.analyze(enrichedData);
     } catch (error) {
-        return new AnalysisExecutionResult(
-            subAnalysis,
-            new Status({ name: statusTypes.error, message: error }),
-            telemetry.elapsedTime()
-        );
+        status = new Status({ name: statusTypes.error, message: error });
     }
+    return new AnalysisExecutionResult(
+        subAnalysis,
+        status,
+        telemetry.elapsedTime()
+    );
 }
 
 export async function analyzeZip({
@@ -72,13 +67,6 @@ export async function analyzeZip({
             return runAnalysis(subAnalysisClass, enrichedData);
         })
     );
-
-    // const successfullyExecutedAnalyses = analysesResults
-    //     .filter(({ status }) => status.isSuccess)
-    //     .map(({ analysis }) => analysis);
-    // const activeGlobalAnalyses = successfullyExecutedAnalyses.filter(
-    //     (analysis) => !analysis.isForDataReport && analysis.active
-    // );
     dataAccount.analysesExecutionResults = analysesResults;
 }
 

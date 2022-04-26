@@ -1,7 +1,7 @@
 import React from "react";
 
 /**
- * I am a "fake" report-reportStory that shows the status of running analyses.
+ * I am a "fake" report-reportStory that shows the status of executed analyses.
  * I do not have an analyse method as I get the data directly in the constructor.
  *
  * I provide the same API as an analysis that should be included in a report.

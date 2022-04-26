@@ -18,7 +18,11 @@ export const ReportCard = ({ report }) => {
 const ReportDetails = ({ reportStories }) => {
     function renderReportAnalyses() {
         if (!reports) {
-            return "";
+            return (
+                <div className="report-card">
+                    <h1>No Reports Found</h1>
+                </div>
+            );
         }
         return (
             <div>
