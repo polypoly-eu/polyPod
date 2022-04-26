@@ -6,6 +6,7 @@ import css from "rollup-plugin-css-only";
 import json from "@rollup/plugin-json";
 import sucrase from "@rollup/plugin-sucrase";
 import copy from "@polypoly-eu/rollup-plugin-copy-watch";
+import execute from "rollup-plugin-execute";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -65,11 +66,14 @@ export default {
         commonjs(),
         json(),
         sucrase({ transforms: [] }),
+        execute([
+            "cp node_modules/@polypoly-eu/podjs/dist/pod.js dist",
+            "node ../../platform/podjs/bin/genPodjs.js --podjs=./dist/pod.js --manifestJson=./public/manifest.json",
+        ]),
         copy({
             targets: [
                 {
                     src: [
-                        "node_modules/@polypoly-eu/podjs/dist/pod.js",
                         "node_modules/@polypoly-eu/poly-look/dist/css/poly-look.css",
                     ],
                     dest: "public",

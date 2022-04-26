@@ -18,6 +18,7 @@
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
     "@prismicio/client": "^4.0.0",
     "prismic-dom": "^2.2.5",
+    "rollup-plugin-execute": "^1.1.1",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-svelte": "^7.1.0",
     "svelte": "^3.0.0"
