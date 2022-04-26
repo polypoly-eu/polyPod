@@ -12,7 +12,7 @@ const PolyButton = ({ label, ...otherProps }) => {
   return (
     <button
       {...otherProps}
-      className={`poly-button ${otherProps.className || ""}`}
+      className={`poly-button ${otherProps.className || ""}`.trim()}
     >
       {label}
     </button>
