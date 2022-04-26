@@ -3,20 +3,11 @@ const fs = require("fs");
 
 const yargs = require("yargs");
 
-const argv = yargs
-    .option("podjs", {
-        alias: "podjs",
-        description: "Tell the path of podjs file",
-        type: "string",
-    })
-    .option("manifestJson", {
-        alias: "manifestJson",
-        description: "Tell the path to manifest json file",
-        type: "string",
-    }).argv;
-
-const podjs = argv.podjs;
-const manifestJsonPath = argv.manifestJson;
+const argv = yargs.option("build_dir", {
+    alias: "build-dir",
+    description: "path where podjs and json file exist",
+    type: "string",
+}).argv;
 
 function replaceManifestData(code, manifestData) {
     const magicString = new MagicString(code);
@@ -60,16 +51,15 @@ function executeReplacement(podJs, manifestJsonPath) {
 }
 
 /**
- * @param options
- * @param options.manifestJsonPath
+ * @param build_dir
  */
 function loadManifest() {
-    if (!manifestJsonPath || !podjs) {
-        throw new Error(`Must have "manifestJsonPath" and "podjs" properties!`);
-    }
-    console.log("Loading", manifestJsonPath, "into", podjs);
+    const build_dir = argv.build_dir;
+    console.log("Loading into", build_dir);
 
-    return executeReplacement(podjs, manifestJsonPath);
+    const podJs = `${build_dir}/pod.js`;
+    const manifestJson = `${build_dir}/manifest.json`;
+    return executeReplacement(podJs, manifestJson);
 }
 
 loadManifest();

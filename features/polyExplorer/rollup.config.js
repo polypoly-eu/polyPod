@@ -26,7 +26,7 @@ export default {
     plugins: [
         execute([
             "cp node_modules/@polypoly-eu/podjs/dist/pod.js dist",
-            "node ../../platform/podjs/bin/genPodjs.js --podjs=./dist/pod.js --manifestJson=./src/static/manifest.json",
+            "node ../../platform/podjs/bin/genPodjs.js --build-dir=./dist/",
         ]),
         svg(),
         css({ output: "css/bundle.css" }),
