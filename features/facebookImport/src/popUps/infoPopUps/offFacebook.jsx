@@ -4,7 +4,7 @@ import i18n from "../../i18n.js";
 import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
 import Infographic from "../../components/infographic/infographic.jsx";
 
-const OffFacebookInfoScreen = () => {
+const OffFacebookInfoPopUp = () => {
     const offFacebookInfoText = [
         <>
             <p>{i18n.t("offFacebookInfoScreen:text1")}</p>
@@ -39,4 +39,4 @@ const OffFacebookInfoScreen = () => {
     return <BaseInfoPopUp infoChildren={offFacebookInfoText} />;
 };
 
-export default OffFacebookInfoScreen;
+export default OffFacebookInfoPopUp;

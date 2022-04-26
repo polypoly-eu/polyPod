@@ -6,7 +6,7 @@ import Infographic from "../../components/infographic/infographic.jsx";
 
 import "./infoPopUps.css";
 
-const ActivitiesInfoScreen = () => {
+const ActivitiesInfoPopUp = () => {
     const activitiesInfoText = [
         <>
             <p>{i18n.t("activitiesInfoScreen:text1")}</p>
@@ -51,4 +51,4 @@ const ActivitiesInfoScreen = () => {
     return <BaseInfoPopUp infoChildren={activitiesInfoText} />;
 };
 
-export default ActivitiesInfoScreen;
+export default ActivitiesInfoPopUp;

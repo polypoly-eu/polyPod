@@ -4,13 +4,12 @@ import i18n from "../../i18n.js";
 import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
 import Infographic from "../../components/infographic/infographic.jsx";
 
-import "./postReactionInfo.css";
 import "./infoPopUps.css";
 
-const PostReactionInfoScreen = () => {
-    const postReactionInfoText = [
+const DataStructureInfoPopUp = () => {
+    const dataStructureInfoText = [
         <>
-            <p>{i18n.t("postReactionInfoScreen:text1")}</p>
+            <p>{i18n.t("dataStructureInfoScreen:text1")}</p>
             <div className="legend chart-description-title">
                 {i18n.t("dataStructureInfoScreen:legend")}
             </div>
@@ -23,17 +22,14 @@ const PostReactionInfoScreen = () => {
             />
             <p
                 dangerouslySetInnerHTML={{
-                    __html: i18n.t(`postReactionInfoScreen:text2`),
+                    __html: i18n.t(`dataStructureInfoScreen:text2`),
                 }}
             />
         </>,
+        <p>{i18n.t("dataStructureInfoScreen:text3")}</p>,
     ];
 
-    return (
-        <div className="reaction-types-info">
-            <BaseInfoPopUp infoChildren={postReactionInfoText} />
-        </div>
-    );
+    return <BaseInfoPopUp infoChildren={dataStructureInfoText} />;
 };
 
-export default PostReactionInfoScreen;
+export default DataStructureInfoPopUp;
