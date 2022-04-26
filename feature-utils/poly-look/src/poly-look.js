@@ -20,7 +20,7 @@ import {
   ClickableCard,
   RoutingCard,
   List,
-  Button,
+  PolyButton,
   IconButton,
 } from "./react-components";
 import { INITIAL_HISTORY_STATE } from "./constants";
@@ -43,6 +43,6 @@ export {
   RoutingCard,
   List,
   INITIAL_HISTORY_STATE,
-  Button,
+  PolyButton,
   IconButton,
 };

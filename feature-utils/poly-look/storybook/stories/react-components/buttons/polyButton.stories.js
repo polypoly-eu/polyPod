@@ -1,13 +1,13 @@
 import React from "react";
 import { withDesign } from "storybook-addon-designs";
-import { Button } from "../../../../src/react-components/buttons/";
+import { PolyButton } from "../../../../src/react-components/buttons/";
 
 import "../../../../src/css/index.js";
 import "../fontFamily.css";
 
 export default {
-  title: "Visuals/Atoms/Button/Basic",
-  component: Button,
+  title: "Visuals/Atoms/Button/PolyButton",
+  component: PolyButton,
   decorators: [withDesign],
   argTypes: {
     onClick: { action: "clicked" },
@@ -23,7 +23,7 @@ export default {
 
 const Template = (args) => (
   <div className={`poly-theme poly-theme-${args.theme || "dark"}`}>
-    <Button {...args} />
+    <PolyButton {...args} />
   </div>
 );
 

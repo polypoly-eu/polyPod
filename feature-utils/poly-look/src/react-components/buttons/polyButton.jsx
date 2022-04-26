@@ -1,5 +1,5 @@
 import React from "react";
-import "./button.css";
+import "./polyButton.css";
 
 /**
  * Basic button.
@@ -8,7 +8,7 @@ import "./button.css";
  * @param {string} [props.label] - Button text
  */
 
-const Button = ({ label, ...otherProps }) => {
+const PolyButton = ({ label, ...otherProps }) => {
   return (
     <button
       {...otherProps}
@@ -19,4 +19,4 @@ const Button = ({ label, ...otherProps }) => {
   );
 };
 
-export default Button;
+export default PolyButton;
