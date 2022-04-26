@@ -189,13 +189,13 @@ describe("On-Off facebook data restructuring", () => {
     });
 });
 
-function getAnalysisData(facebookAccount, analysis) {
+function getAnalysisData(analysisStory, analysis) {
     return {
-        companiesCount: facebookAccount.analyses[analysisKeys.companiesCount],
+        companiesCount: analysisStory.analyses[analysisKeys.companiesCount],
         companiesWithAdsCount:
-            facebookAccount.analyses[analysisKeys.companiesWithAdsCount],
+            analysisStory.analyses[analysisKeys.companiesWithAdsCount],
         displayType:
-            facebookAccount.analyses[analysisKeys.onOffEvents].displayType,
+            analysisStory.analyses[analysisKeys.onOffEvents].displayType,
         customReportData: analysis.customReportData,
     };
 }
