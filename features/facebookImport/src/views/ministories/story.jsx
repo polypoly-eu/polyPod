@@ -1,9 +1,9 @@
 import { Component } from "react";
 
 class Story extends Component {
-    constructor({ analyses }) {
+    constructor({ processedData }) {
         super();
-        this._analyses = analyses;
+        this._analyses = processedData;
         this._neededAnalyses = [];
     }
 
@@ -18,7 +18,7 @@ class Story extends Component {
     get active() {
         if (!this._neededAnalyses) return true;
         for (const analysisKey of this._neededAnalyses) {
-            if (this.analyses?.[analysisKey] === undefined) return false;
+            if (this.analyses?.[analysisKey] === null) return false;
         }
         return true;
     }

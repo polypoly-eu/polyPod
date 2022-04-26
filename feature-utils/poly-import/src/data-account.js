@@ -1,3 +1,5 @@
+import ProcessedData from "./processed-data";
+
 export default class DataAccount {
     constructor() {
         this._importingResults = [];
@@ -5,17 +7,12 @@ export default class DataAccount {
 
         this._name = "";
         this._preferredLanguage = [];
-        this._analyses = {};
-        this._reports = {};
+        this._processedData = new ProcessedData();
         this._analysesExecutionResults = [];
     }
 
-    get analyses() {
-        return this._analyses;
-    }
-
-    get reports() {
-        return this._reports;
+    get processedData() {
+        return this._processedData;
     }
 
     get importedFileNames() {
