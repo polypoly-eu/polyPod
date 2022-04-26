@@ -19,7 +19,9 @@ function extractTimestampFromDuration(duration) {
     if ("startTimestamp" in duration) return new Date(duration.startTimestamp);
     if ("startTimestampMs" in duration)
         return new Date(duration.startTimestampMs);
-    throw new Error("Unknown start date");
+    throw new Error(
+        "No start timestamp found in keys: " + Object.keys(duration).toString()
+    );
 }
 
 function createPlaceVisit(jsonData) {
