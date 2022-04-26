@@ -6,15 +6,13 @@ import merge from "deepmerge";
 import { createBasicConfig } from "@open-wc/building-rollup";
 import path from "path";
 
-const genPodJsPlugin = require("./rollup.plugin.loadManifest.js");
-
 const baseConfig = createBasicConfig();
 
 const pathResolve = (loc) => path.resolve(__dirname, loc);
 
 const nodeModules = "node_modules/**";
 
-export default (commandLineArgs) =>
+export default () =>
     merge(baseConfig, [
         {
             input: pathResolve("src/index.ts"),

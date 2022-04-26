@@ -29,7 +29,7 @@ export default (commandLineArgs) => {
         plugins: [
             execute([
                 "cp node_modules/@polypoly-eu/podjs/dist/pod.js dist",
-                "node ../../platform/podjs/bin/genPodjs.js --podjs=dist/pod.js --manifestJsonPath=./src/static/manifest.json --dest=dist/pod.js",
+                "node ../../platform/podjs/bin/genPodjs.js --podjs=./dist/pod.js --manifestJson=./src/static/manifest.json",
             ]),
             svg(),
             css({ output: "css/bundle.css" }),
@@ -44,7 +44,6 @@ export default (commandLineArgs) => {
                         src: [
                             "node_modules/react/umd/react.development.js",
                             "node_modules/react-dom/umd/react-dom.development.js",
-                            // "node_modules/@polypoly-eu/podjs/dist/pod.js",
                             "node_modules/@polypoly-eu/poly-look/dist/poly-look.js",
                         ],
                         dest: "dist",
