@@ -11,10 +11,6 @@ import {
     jsonDataEntities,
     relevantZipEntries,
 } from "./analysis/utils/analysis-util";
-import {
-    PolyAnalysisContext,
-    PolyAnalysisProvider,
-} from "./context/poly-analysis.jsx";
 
 export {
     analyzeZip,
@@ -22,10 +18,8 @@ export {
     analyzeFile,
     jsonDataEntities,
     relevantZipEntries,
-    PolyAnalysisProvider,
     RootAnalysis,
     ReportAnalysis,
     UnrecognizedData,
     MinistoriesStatusAnalysis,
-    PolyAnalysisContext,
 };
