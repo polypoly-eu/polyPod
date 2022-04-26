@@ -1,4 +1,4 @@
-import Button from "./button.jsx";
+import PolyButton from "./polyButton.jsx";
 import IconButton from "./iconButton.jsx";
 
-export { Button, IconButton };
+export { PolyButton, IconButton };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../buttons";
+import { PolyButton } from "../buttons";
 import "./card.css";
 
 /**
@@ -24,7 +24,7 @@ const ClickableCard = ({
     >
       {children}
       {buttonText && (
-        <Button
+        <PolyButton
           className="centered"
           label={buttonText}
           onClick={onlyButtonClickEvent ? onClick : () => {}}
