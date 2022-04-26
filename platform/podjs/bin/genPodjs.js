@@ -3,9 +3,20 @@ const fs = require("fs");
 
 const yargs = require("yargs");
 
-const manifestJsonPath = yargs.argv("manifestJsonPath");
-const podjs = yargs.argv(podjs);
-const dest = yargs.argv(dest);
+const argv = yargs
+    .option("podjs", {
+        alias: "podjs",
+        description: "Tell the path of podjs file",
+        type: "string",
+    })
+    .option("manifestJson", {
+        alias: "manifestJson",
+        description: "Tell the path to manifest json file",
+        type: "string",
+    }).argv;
+
+const podjs = argv.podjs;
+const manifestJsonPath = argv.manifestJson;
 
 function replaceManifestData(code, manifestData) {
     const magicString = new MagicString(code);
@@ -32,20 +43,17 @@ function replaceManifestData(code, manifestData) {
         return null;
     }
 
-    const result = {
-        code: magicString.toString(),
-    };
-    return result;
+    return magicString.toString();
 }
 
-function executeReplacement(podJs, manifestJsonPath, dest) {
+function executeReplacement(podJs, manifestJsonPath) {
     try {
         const manifestData = fs.readFileSync(manifestJsonPath, "utf8");
         const podJsCode = fs.readFileSync(podJs, "utf8");
 
         const replacedCode = replaceManifestData(podJsCode, manifestData);
 
-        fs.appendFileSync(dest, replacedCode);
+        fs.writeFileSync(podJs, replacedCode);
     } catch (err) {
         console.error(err);
     }
@@ -56,20 +64,12 @@ function executeReplacement(podJs, manifestJsonPath, dest) {
  * @param options.manifestJsonPath
  */
 function loadManifest() {
-    console.log("Loading", manifestJsonPath);
-    console.log("Loading into...", podjs);
-    console.log("Generating into... ", dest);
+    if (!manifestJsonPath || !podjs) {
+        throw new Error(`Must have "manifestJsonPath" and "podjs" properties!`);
+    }
+    console.log("Loading", manifestJsonPath, "into", podjs);
 
-    return executeReplacement(podjs, manifestJsonPath, dest);
-    // name: "loadManifest",
-    // async buildStart() {
-    //     if (!options.manifestJsonPath) {
-    //         throw new Error(`Must have "manifestJsonPath" property`);
-    //     }
-    // },
-    // async transform(code) {
-    // return
-    // },
+    return executeReplacement(podjs, manifestJsonPath);
 }
 
 loadManifest();
