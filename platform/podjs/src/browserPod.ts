@@ -45,7 +45,7 @@ async function migrateData(db: IDBDatabase): Promise<IDBDatabase> {
                     files.push({
                         id: file.id,
                         name: file.name,
-                        time: file.time,
+                        time: new Date(file.time),
                         blob: await (await fetch(dataUrl)).blob(),
                     });
                 }
@@ -182,7 +182,7 @@ class FileUrl {
 interface FileInfo {
     id: string;
     name: string;
-    time: string;
+    time: Date;
     blob: Blob;
 }
 
@@ -250,7 +250,7 @@ class IDBPolyOut implements PolyOut {
                 return {
                     getId: () => id,
                     getSize: () => size,
-                    getTime: () => time,
+                    getTime: () => time.toISOString(),
                     getName: () => name,
                     isFile: () => true,
                     isDirectory: () => false,
@@ -318,7 +318,7 @@ class IDBPolyOut implements PolyOut {
             tx.objectStore(OBJECT_STORE_POLY_OUT).put({
                 id: fileId,
                 name: fileName,
-                time: new Date().toISOString(),
+                time: new Date(),
                 blob,
             });
 
