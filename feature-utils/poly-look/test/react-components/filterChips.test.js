@@ -36,35 +36,33 @@ describe("Chips content is an array", () => {
     render(component);
   });
 
-  it("Chips present in document", () => {
+  it("Chips are present in document", () => {
     for (const chipId of chipsContent) {
       const chipElement = screen.getByText(chipId);
       expect(chipElement).toBeInTheDocument();
     }
   });
 
-  describe("Checks onChipClick event", () => {
-    it("is called", () => {
-      for (const chipId of chipsContent) {
-        const chipElement = screen.getByText(chipId);
-        fireEvent.click(chipElement, mockedHandleClick);
-        expect(mockedHandleClick).toHaveBeenCalledWith(chipId, [chipId]);
-      }
-    });
+  it("Checks onChipClick event is called", () => {
+    for (const chipId of chipsContent) {
+      const chipElement = screen.getByText(chipId);
+      fireEvent.click(chipElement, mockedHandleClick);
+      expect(mockedHandleClick).toHaveBeenCalledWith(chipId, [chipId]);
+    }
+  });
 
-    it("selecting a chip changes its state", () => {
-      for (const chipId of chipsContent) {
-        const exclusive = component.props.exclusive;
-        const chipElement = screen.getByText(chipId);
-        expect(chipElement).not.toHaveClass("chip selected");
-        fireEvent.click(chipElement, mockedHandleClick);
-        expect(chipElement).toHaveClass("chip selected");
-        fireEvent.click(chipElement, mockedHandleClick);
-        exclusive
-          ? expect(chipElement).toHaveClass("chip selected")
-          : expect(chipElement).not.toHaveClass("chip selected");
-      }
-    });
+  it("Checks onChipClick event selects a chip and changes its state", () => {
+    for (const chipId of chipsContent) {
+      const exclusive = component.props.exclusive;
+      const chipElement = screen.getByText(chipId);
+      expect(chipElement).not.toHaveClass("chip selected");
+      fireEvent.click(chipElement, mockedHandleClick);
+      expect(chipElement).toHaveClass("chip selected");
+      fireEvent.click(chipElement, mockedHandleClick);
+      exclusive
+        ? expect(chipElement).toHaveClass("chip selected")
+        : expect(chipElement).not.toHaveClass("chip selected");
+    }
   });
 
   it("The default active chips are selected", () => {
