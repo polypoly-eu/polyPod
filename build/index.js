@@ -66,9 +66,8 @@ async function main() {
 
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
 
-    const rootInstallDone = existsSync("node_modules");
     if (
-        !rootInstallDone &&
+        !existsSync("node_modules") &&
         ["lint", "lintfix", "clean", "install", "installAndBuild"].includes(
             command
         )
