@@ -17,7 +17,7 @@ function updatePodNavigation(pod, history, handleBack, location) {
 export const GoogleContextProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
     const [globalError, setGlobalError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const location = useLocation();
     const history = useHistory();
