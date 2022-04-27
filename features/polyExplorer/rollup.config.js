@@ -6,6 +6,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import svg from "rollup-plugin-svg";
 import replace from "@rollup/plugin-replace";
 import commonjs from "@rollup/plugin-commonjs";
+import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
 
 export default {
     input: "src/index.jsx",
@@ -23,6 +24,10 @@ export default {
         warn(warning);
     },
     plugins: [
+        genPodjs({
+            build_dir: "./dist",
+            manifestPath: "./src/static/manifest.json",
+        }),
         svg(),
         css({ output: "css/bundle.css" }),
         json(),
@@ -36,7 +41,6 @@ export default {
                     src: [
                         "node_modules/react/umd/react.development.js",
                         "node_modules/react-dom/umd/react-dom.development.js",
-                        "node_modules/@polypoly-eu/podjs/dist/pod.js",
                         "node_modules/@polypoly-eu/poly-look/dist/poly-look.js",
                     ],
                     dest: "dist",
