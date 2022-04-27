@@ -14,7 +14,7 @@ export default [
             },
         ],
         plugins: [
-            nodeResolve(),
+            nodeResolve({ preferBuiltins: true }),
             json(),
             commonjs(),
             sucrase({
