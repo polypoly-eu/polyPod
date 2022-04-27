@@ -18,6 +18,7 @@ export default {
     className: {
       type: "string",
     },
+    centered: { type: "boolean" },
   },
 };
 

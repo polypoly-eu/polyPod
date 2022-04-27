@@ -1,12 +1,12 @@
 import React from "react";
 
-import i18n from "../../../i18n.js";
-import InfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
-import Infographic from "../../../components/infographic/infographic.jsx";
+import i18n from "../../i18n.js";
+import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
+import Infographic from "../../components/infographic/infographic.jsx";
 
-import "../infoScreens.css";
+import "./infoPopUps.css";
 
-const DataStructureInfoScreen = () => {
+const DataStructureInfoPopUp = () => {
     const dataStructureInfoText = [
         <>
             <p>{i18n.t("dataStructureInfoScreen:text1")}</p>
@@ -29,7 +29,7 @@ const DataStructureInfoScreen = () => {
         <p>{i18n.t("dataStructureInfoScreen:text3")}</p>,
     ];
 
-    return <InfoScreen infoChildren={dataStructureInfoText} />;
+    return <BaseInfoPopUp infoChildren={dataStructureInfoText} />;
 };
 
-export default DataStructureInfoScreen;
+export default DataStructureInfoPopUp;

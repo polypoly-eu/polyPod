@@ -23,6 +23,7 @@ import {
   PolyButton,
   IconButton,
   SideSheet,
+  SideSwiper,
   PolyImportProvider,
   PolyAnalysisProvider,
   PolyImportContext,
@@ -55,4 +56,5 @@ export {
   PolyButton,
   IconButton,
   SideSheet,
+  SideSwiper,
 };

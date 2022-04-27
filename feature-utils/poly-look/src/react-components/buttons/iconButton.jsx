@@ -33,8 +33,8 @@ const IconButton = ({ icon, fillDirection = "", ...otherProps }) => {
   let classes = otherProps.className || "";
 
   if (fillDirection)
-    classes = classes.concat(` filled filled-${fillDirection}`);
-  else classes = classes.concat(" icon-button");
+    classes = classes.concat(` poly-icon-filled filled-${fillDirection}`);
+  else classes = classes.concat(" poly-icon-button");
   return (
     <button {...otherProps} className={classes}>
       <img src={icons[icon]} />

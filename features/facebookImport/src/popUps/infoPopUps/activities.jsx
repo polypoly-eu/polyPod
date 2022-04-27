@@ -1,10 +1,12 @@
 import React from "react";
 
-import i18n from "../../../i18n.js";
-import InfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
-import Infographic from "../../../components/infographic/infographic.jsx";
-import "../infoScreens.css";
-const ActivitiesInfoScreen = () => {
+import i18n from "../../i18n.js";
+import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
+import Infographic from "../../components/infographic/infographic.jsx";
+
+import "./infoPopUps.css";
+
+const ActivitiesInfoPopUp = () => {
     const activitiesInfoText = [
         <>
             <p>{i18n.t("activitiesInfoScreen:text1")}</p>
@@ -46,7 +48,7 @@ const ActivitiesInfoScreen = () => {
         </>,
     ];
 
-    return <InfoScreen infoChildren={activitiesInfoText} />;
+    return <BaseInfoPopUp infoChildren={activitiesInfoText} />;
 };
 
-export default ActivitiesInfoScreen;
+export default ActivitiesInfoPopUp;
