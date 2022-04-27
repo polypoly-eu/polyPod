@@ -22,5 +22,6 @@ export default [
                 transforms: ["typescript"],
             }),
         ],
+        context: "window",
     },
 ];
