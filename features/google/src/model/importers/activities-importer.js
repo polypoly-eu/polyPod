@@ -37,7 +37,7 @@ class ActivityParser {
     }
 
     release() {
-        //document.body.removeChild(this._iframe);
+        document.body.removeChild(this._iframe);
         this._iframe = null;
     }
 }
