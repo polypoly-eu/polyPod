@@ -21,7 +21,7 @@ import "./sideSheet.css";
  */
 const SideSheet = ({ children, okLabel, onClose, title = "", style = {} }) => {
   return (
-    <div className="side-sheet" style={style}>
+    <div className="poly-side-sheet" style={style}>
       <div className="header">
         <IconButton
           icon="angleRight"
