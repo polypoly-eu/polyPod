@@ -20,6 +20,8 @@ const NAV_DEFAULT_BACKGROUND_COLOR = "#ffffff";
 const NAV_DARK_FOREGROUND_COLOR = "#000000";
 const NAV_LIGHT_FOREGROUND_COLOR = "#ffffff";
 
+const MANIFEST_DATA = window.manifestData;
+
 class LocalStoragePolyIn implements PolyIn {
     private static readonly storageKey = "polyInStore";
     private store = JSON.parse(
@@ -671,15 +673,16 @@ export class BrowserPod implements Pod {
 
     constructor() {
         window.addEventListener("load", async () => {
-            if (!window.manifestData) {
+            if (!MANIFEST_DATA) {
                 console.warn(
-                    `Unable to find feature manifest, navigation bar disabled.
-To get the navigation bar, expose the manifest's content as
-window.manifestData.`
+                    `Unable to find feature manifest, navigation bar disabled.`,
+                    `To get the navigation bar, expose the manifest's content through`,
+                    `the provided "genPodJs" plugin or manually.`
                 );
                 return;
             }
-            window.manifest = await readManifest(window.manifestData);
+
+            window.manifest = await readManifest(MANIFEST_DATA);
             window.parent.currentTitle =
                 window.parent.currentTitle || window.manifest.name;
             const frame = createNavBarFrame(window.parent.currentTitle);

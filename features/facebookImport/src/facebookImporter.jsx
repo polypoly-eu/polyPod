@@ -34,9 +34,6 @@ import Loading from "./components/loading/loading.jsx";
 
 import "./styles.css";
 
-import manifestData from "./static/manifest.json";
-window.manifestData = manifestData;
-
 const FacebookImporter = () => {
     const { pod, globalError, setGlobalError, isLoading, popUp, closePopUp } =
         useContext(ImporterContext);
