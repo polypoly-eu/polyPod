@@ -24,7 +24,7 @@ export default {
         warn(warning);
     },
     plugins: [
-        genPodjs.loadManifest({
+        genPodjs({
             build_dir: "./dist",
             manifestPath: "./src/static/manifest.json",
         }),

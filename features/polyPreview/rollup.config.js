@@ -12,7 +12,7 @@ export default {
         format: "iife",
     },
     plugins: [
-        genPodjs.loadManifest({
+        genPodjs({
             build_dir: "./dist",
             manifestPath: "./src/static/manifest.json",
         }),

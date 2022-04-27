@@ -61,11 +61,10 @@ export default (commandLineArgs) => {
                     },
                 ],
             }),
-            genPodjs.loadManifest({
+            genPodjs({
                 build_dir: "./dist",
                 manifestPath: "./src/static/manifest.json",
             }),
-
             resolve(),
             replace({
                 preventAssignment: true,

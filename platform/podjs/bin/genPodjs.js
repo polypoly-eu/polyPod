@@ -60,9 +60,10 @@ function copyPodJs(dest) {
 
 /**
  * @param options
- * @param options.build_dir - path to build_dir where json and pod.js exist
+ * @param options.build_dir - path to build_dir where pod.js exists
+ * @param options.manifestPath - path to json file
  */
-module.exports.loadManifest = (options = {}) => {
+function loadManifest(options = {}) {
     if (!options.build_dir || !options.manifestPath) {
         throw new Error("manifestPath or build_dir not specified");
     }
@@ -72,4 +73,6 @@ module.exports.loadManifest = (options = {}) => {
     copyPodJs(options.build_dir);
 
     executeReplacement(podJsPath, options.manifestPath);
-};
+}
+
+exports.default = loadManifest;

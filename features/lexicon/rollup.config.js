@@ -45,7 +45,7 @@ export default {
         file: "public/build/bundle.js",
     },
     plugins: [
-        genPodjs.loadManifest({
+        genPodjs({
             build_dir: "./public",
             manifestPath: "./public/manifest.json",
         }),
