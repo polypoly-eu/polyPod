@@ -18,7 +18,6 @@ const ImportView = () => {
         const { polyNav } = pod;
         runWithLoadingScreen(async function () {
             try {
-                console.log("selecty");
                 setSelectedFile(await polyNav.pickFile("application/zip"));
             } catch (error) {
                 setGlobalError(new FileSelectionError(error));

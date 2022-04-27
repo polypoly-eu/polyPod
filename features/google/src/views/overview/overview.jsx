@@ -1,11 +1,22 @@
 import React, { useContext } from "react";
 import { PolyImportContext } from "@polypoly-eu/poly-look";
+import { useHistory } from "react-router-dom";
 
 const Overview = () => {
-    const { account } = useContext(PolyImportContext);
+    const { account, handleRemoveFile, files, refreshFiles } =
+        useContext(PolyImportContext);
+    const history = useHistory();
+
+    function onRemoveFile() {
+        if (!files && files.length > 0) return;
+        handleRemoveFile(files[0]?.id);
+        refreshFiles();
+        history.push("/import");
+    }
 
     return (
-        <div className="overview poly-theme-light">
+        <div className="overview">
+            Explore
             <div>
                 <h1>Activities</h1>
                 {account?.activities.map((activity, i) => (
@@ -24,6 +35,7 @@ const Overview = () => {
                     <div key={i}>{activitySegment.timestamp.toUTCString()}</div>
                 ))}
             </div>
+            <button onClick={onRemoveFile}>Remove file</button>
         </div>
     );
 };
