@@ -6,7 +6,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import svg from "rollup-plugin-svg";
 import replace from "@rollup/plugin-replace";
 import commonjs from "@rollup/plugin-commonjs";
-import genPodjs from "@polypoly-eu/podjs/bin/genPodjs.js";
+import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
 
 export default {
     input: "src/index.jsx",

@@ -8,7 +8,7 @@ import replace from "@rollup/plugin-replace";
 import serve from "rollup-plugin-serve";
 import svg from "rollup-plugin-svg";
 
-import genPodjs from "@polypoly-eu/podjs/bin/genPodjs.js";
+import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
 
 const fallbackURL = "http://localhost:8000";
 const fallbackAuthorization = "username:password";

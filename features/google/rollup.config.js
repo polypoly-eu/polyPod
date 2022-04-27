@@ -8,7 +8,7 @@ import serve from "rollup-plugin-serve";
 import svg from "rollup-plugin-svg";
 import replace from "@rollup/plugin-replace";
 
-import genPodjs from "@polypoly-eu/podjs/bin/genPodjs.js";
+import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
 
 const externalPackages = {
     "@polypoly-eu/poly-look": "polyLook",

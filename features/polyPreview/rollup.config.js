@@ -3,7 +3,7 @@ import css from "rollup-plugin-css-only";
 import json from "@rollup/plugin-json";
 import resolve from "@rollup/plugin-node-resolve";
 import sucrase from "@rollup/plugin-sucrase";
-import genPodjs from "@polypoly-eu/podjs/bin/genPodjs.js";
+import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
 
 export default {
     input: "src/index.js",
