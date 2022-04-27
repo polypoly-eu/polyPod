@@ -5,14 +5,22 @@
   padding: 4px 12px;
   height: 48px;
   max-width: var(--max-width);
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   color: var(--theme-primary-color);
   border-radius: 4px;
   box-sizing: border-box;
+  border: none;
 }
 
+.poly-button:active {
+  opacity: 0.88;
+}
+.poly-button:disabled {
+  opacity: 0.38;
+}
 .poly-button.centered {
   margin: 0 auto;
   width: 100%;

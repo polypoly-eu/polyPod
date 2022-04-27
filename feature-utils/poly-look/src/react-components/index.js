@@ -5,8 +5,9 @@ import { BlockLegend, LineLegend } from "./legends.jsx";
 import ErrorPopup from "./popUps/errorPopup/errorPopup.jsx";
 import { Card, ClickableCard, RoutingCard } from "./cards";
 import SideSwiper from "./overlays/sideSwiper.jsx";
-
 import List from "./list.jsx";
+import { PolyButton, IconButton } from "./buttons";
+
 import {
   PolyAnalysisContext,
   PolyAnalysisProvider,
@@ -27,6 +28,8 @@ export {
   ClickableCard,
   RoutingCard,
   List,
+  PolyButton,
+  IconButton,
   SideSwiper,
   PolyImportProvider,
   PolyAnalysisProvider,

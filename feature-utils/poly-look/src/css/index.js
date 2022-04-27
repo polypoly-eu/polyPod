@@ -1,7 +1,6 @@
 import "./styles.css";
 import "./colors.css";
 import "./themes.css";
-import "./buttons.css";
 import "./font.css";
 
 /**
