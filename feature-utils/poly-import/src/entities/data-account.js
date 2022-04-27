@@ -3,6 +3,7 @@ export default class DataAccount {
         this._importingResults = [];
         this._importedFileNames = [];
 
+        this._processedData = [];
         this._name = "";
         this._preferredLanguage = [];
         this._analysesExecutionResults = [];
