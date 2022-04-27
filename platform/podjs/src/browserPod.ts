@@ -673,9 +673,11 @@ export class BrowserPod implements Pod {
 
     constructor() {
         window.addEventListener("load", async () => {
-            if (MANIFEST_DATA === {}) {
+            if (!MANIFEST_DATA) {
                 console.warn(
-                    `Unable to find feature manifest, navigation bar disabled.`
+                    `Unable to find feature manifest, navigation bar disabled. 
+                    To get the navigation bar, expose the manifest's content through
+                    the provided "genPodJs" plugin or manually.`
                 );
                 return;
             }
