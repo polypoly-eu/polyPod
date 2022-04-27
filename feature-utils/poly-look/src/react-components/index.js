@@ -4,10 +4,9 @@ import { Tab, Tabs } from "./tabs.jsx";
 import { BlockLegend, LineLegend } from "./legends.jsx";
 import ErrorPopup from "./popUps/errorPopup/errorPopup.jsx";
 import { Card, ClickableCard, RoutingCard } from "./cards";
-import SideSwiper from "./overlays/sideSwiper.jsx";
 import List from "./list.jsx";
-import SideSheet from "./overlays/SideSheet.jsx";
 import { PolyButton, IconButton } from "./buttons";
+import { SideSheet, SideSwiper } from "./overlays";
 
 import {
   PolyAnalysisContext,
