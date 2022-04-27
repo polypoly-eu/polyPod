@@ -2,22 +2,17 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
-import path from "path";
-
-const pathResolve = (loc) => path.resolve(__dirname, loc);
-
-const nodeModules = "node_modules/**";
 
 export default [
     {
-        input: pathResolve("src/index.ts"),
+        input: "src/index.ts",
         output: [
             {
-                file: pathResolve("dist/index.es.js"),
+                file: "dist/index.es.js",
                 format: "esm",
             },
             {
-                file: pathResolve("dist/index.js"),
+                file: "dist/index.js",
                 format: "cjs",
             },
         ],
@@ -25,17 +20,17 @@ export default [
             json(),
             resolve(),
             sucrase({
-                exclude: [nodeModules],
+                exclude: ["node_modules/**"],
                 transforms: ["typescript"],
             }),
         ],
         context: "window",
     },
     {
-        input: pathResolve("src/pod.ts"),
+        input: "src/pod.ts",
         output: [
             {
-                file: pathResolve("dist/pod.js"),
+                file: "dist/pod.js",
                 format: "iife",
             },
         ],
@@ -44,7 +39,7 @@ export default [
             resolve(),
             commonjs(),
             sucrase({
-                exclude: [nodeModules],
+                exclude: ["node_modules/**"],
                 transforms: ["typescript"],
             }),
         ],
