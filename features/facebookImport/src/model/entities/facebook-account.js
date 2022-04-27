@@ -9,7 +9,6 @@ class FacebookAccount extends DataAccount {
         super();
         this._processedData = new FacebookProcessedData();
 
-        this.analyses = {};
         this._offFacebookCompanies = [];
         this._adInterests = [];
         this._connectedAdvertisers = [];
