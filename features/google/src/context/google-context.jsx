@@ -28,9 +28,9 @@ export const GoogleContextProvider = ({ children }) => {
         }
     }
 
-    function runWithLoadingScreen(task) {
+    async function runWithLoadingScreen(task) {
         setIsLoading(true);
-        task();
+        await task();
         setIsLoading(false);
     }
 

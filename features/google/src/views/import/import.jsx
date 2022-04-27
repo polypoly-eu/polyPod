@@ -41,16 +41,10 @@ const ImportView = () => {
 
     return (
         <div className="import-view">
-            <button
-                className="btn secondary"
-                onClick={() => handleSelectFile()}
-            >
+            <button className="btn secondary" onClick={handleSelectFile}>
                 Select File
             </button>
-            <button
-                className="btn secondary"
-                onClick={() => handleImportFile()}
-            >
+            <button className="btn secondary" onClick={handleImportFile}>
                 Import File
             </button>
             <button

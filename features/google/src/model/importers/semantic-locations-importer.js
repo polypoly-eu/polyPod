@@ -67,7 +67,7 @@ async function parseTimelineObjectsByTypeFromEntry(fileEntry) {
 }
 
 export default class SemanticLocationsImporter {
-    async import({ zipFile, facebookAccount }) {
+    async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await zipFile.getEntries();
         const semanticLocationEntries = entries.filter(({ path }) =>
             semanticLocationsRegex.test(path)
@@ -85,7 +85,7 @@ export default class SemanticLocationsImporter {
             allPlaceVisits.push(...placeVisits);
             allActivitySegments.push(...activitySegments);
         });
-        facebookAccount.placeVisits = allPlaceVisits;
-        facebookAccount.activitySegments = allActivitySegments;
+        googleAccount.placeVisits = allPlaceVisits;
+        googleAccount.activitySegments = allActivitySegments;
     }
 }
