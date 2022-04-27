@@ -37,7 +37,7 @@ class ActivityParser {
     }
 
     release() {
-        document.body.removeChild(this._iframe);
+        //document.body.removeChild(this._iframe);
         this._iframe = null;
     }
 }
@@ -46,7 +46,7 @@ export default class ActivitiesImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await zipFile.getEntries();
         const activityEntries = entries.filter(({ path }) =>
-            activityRegex.test(path)
+            activityRegex.test(path.replace("%20", " "))
         );
 
         const parser = new ActivityParser();
@@ -55,7 +55,6 @@ export default class ActivitiesImporter {
                 activityEntries.map((entry) => parser.parse(entry))
             )
         ).flat();
-
         parser.release();
     }
 }
