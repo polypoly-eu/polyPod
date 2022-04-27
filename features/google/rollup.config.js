@@ -8,6 +8,8 @@ import serve from "rollup-plugin-serve";
 import svg from "rollup-plugin-svg";
 import replace from "@rollup/plugin-replace";
 
+import genPodjs from "@polypoly-eu/podjs/bin/genPodjs.js";
+
 const externalPackages = {
     "@polypoly-eu/poly-look": "polyLook",
     react: "React",
@@ -30,13 +32,16 @@ export default (commandLineArgs) => {
                 transforms: ["jsx"],
                 production: true,
             }),
+            genPodjs({
+                build_dir: "./dist",
+                manifestPath: "./src/static/manifest.json",
+            }),
             copy({
                 targets: [
                     {
                         src: [
                             "node_modules/react/umd/react.development.js",
                             "node_modules/react-dom/umd/react-dom.development.js",
-                            "node_modules/@polypoly-eu/podjs/dist/pod.js",
                             "node_modules/@polypoly-eu/poly-look/dist/poly-look.js",
                         ],
                         dest: "dist",
