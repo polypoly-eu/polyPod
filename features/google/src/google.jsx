@@ -45,7 +45,7 @@ const Google = () => {
 
     return (
         <div className="google poly-theme poly-theme-light">
-            {pod && files && !isLoading && (
+            {pod && files && (
                 <Switch>
                     <Route exact path="/">
                         {determineRoute()}

@@ -9,15 +9,16 @@ const ImportView = () => {
         useContext(GoogleContext);
     const { files, refreshFiles, handleRemoveFile } =
         useContext(PolyImportContext);
+
     const [selectedFile, setSelectedFile] = useState(null);
 
     const history = useHistory();
 
     const handleSelectFile = async () => {
         const { polyNav } = pod;
-        if (files?.[0]?.id) handleRemoveFile(files[0].id);
         runWithLoadingScreen(async function () {
             try {
+                console.log("selecty");
                 setSelectedFile(await polyNav.pickFile("application/zip"));
             } catch (error) {
                 setGlobalError(new FileSelectionError(error));
@@ -28,6 +29,7 @@ const ImportView = () => {
     const handleImportFile = async () => {
         if (!selectedFile) return;
         const { polyOut } = pod;
+        if (files?.[0]?.id) handleRemoveFile(files[0].id);
         runWithLoadingScreen(async function () {
             try {
                 await polyOut.importArchive(selectedFile.url);
