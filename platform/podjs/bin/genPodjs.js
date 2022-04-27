@@ -7,17 +7,14 @@ function replaceManifestData(code, manifestData) {
 
     let hasReplacements = false;
     let match;
-    let start;
-    let end;
-    let replacement;
 
     while ((match = pattern.exec(code))) {
         hasReplacements = true;
 
-        start = match.index;
-        end = start + match[0].length;
+        const start = match.index;
+        const end = start + match[0].length;
 
-        replacement = String(manifestData);
+        const replacement = String(manifestData);
 
         magicString.overwrite(start, end, replacement);
     }
@@ -54,7 +51,6 @@ function copyPodJs(dest) {
             "node_modules/@polypoly-eu/podjs/dist/pod.js",
             `${dest}/pod.js`
         );
-        console.log("Copied pod.js into", dest);
     }
 }
 
