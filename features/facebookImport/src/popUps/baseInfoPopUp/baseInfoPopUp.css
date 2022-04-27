@@ -1,10 +1,13 @@
 .base-info {
+    position: absolute;
+    top: 0;
     background-color: var(--background-light);
     color: var(--text-dark);
     height: 100%;
     margin: 0 auto;
     overflow: hidden scroll;
     padding: 16px;
+    z-index: 100;
 }
 
 .base-info .info-title {

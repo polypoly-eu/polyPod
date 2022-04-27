@@ -3,10 +3,10 @@ import { ImporterContext } from "../../context/importer-context.jsx";
 
 import i18n from "../../i18n.js";
 
-import "./baseInfoScreen.css";
+import "./baseInfoPopUp.css";
 
-const InfoScreen = ({ infoChildren }) => {
-    const { handleBack } = useContext(ImporterContext);
+const BaseInfoPopUp = ({ infoChildren }) => {
+    const { closePopUp } = useContext(ImporterContext);
 
     return (
         <div className="base-info">
@@ -22,11 +22,11 @@ const InfoScreen = ({ infoChildren }) => {
                     {infoChild}
                 </div>
             ))}
-            <button onClick={() => handleBack()}>
+            <button onClick={() => closePopUp()}>
                 {i18n.t("common:button.ok")}
             </button>
         </div>
     );
 };
 
-export default InfoScreen;
+export default BaseInfoPopUp;

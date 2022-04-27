@@ -1,9 +1,9 @@
 import React from "react";
 
-import i18n from "../../../i18n.js";
-import InfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
+import i18n from "../../i18n.js";
+import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
 
-const PicturesInfoScreen = () => {
+const PicturesInfoPopUp = () => {
     const picturesInfoText = [
         <>
             <p>{i18n.t("picturesInfoScreen:text1")}</p>
@@ -12,7 +12,7 @@ const PicturesInfoScreen = () => {
         <p>{i18n.t("picturesInfoScreen:text3")}</p>,
     ];
 
-    return <InfoScreen infoChildren={picturesInfoText} />;
+    return <BaseInfoPopUp infoChildren={picturesInfoText} />;
 };
 
-export default PicturesInfoScreen;
+export default PicturesInfoPopUp;

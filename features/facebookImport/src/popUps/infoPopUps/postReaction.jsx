@@ -1,12 +1,13 @@
 import React from "react";
 
-import i18n from "../../../i18n.js";
-import InfoScreen from "../../../components/baseInfoScreen/baseInfoScreen.jsx";
-import Infographic from "../../../components/infographic/infographic.jsx";
+import i18n from "../../i18n.js";
+import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
+import Infographic from "../../components/infographic/infographic.jsx";
 
-import "./postReactionInfoScreen.css";
-import "../infoScreens.css";
-const PostReactionInfoScreen = () => {
+import "./postReaction.css";
+import "./infoPopUps.css";
+
+const PostReactionInfoPopUp = () => {
     const postReactionInfoText = [
         <>
             <p>{i18n.t("postReactionInfoScreen:text1")}</p>
@@ -30,9 +31,9 @@ const PostReactionInfoScreen = () => {
 
     return (
         <div className="reaction-types-info">
-            <InfoScreen infoChildren={postReactionInfoText} />
+            <BaseInfoPopUp infoChildren={postReactionInfoText} />
         </div>
     );
 };
 
-export default PostReactionInfoScreen;
+export default PostReactionInfoPopUp;
