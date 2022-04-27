@@ -14,7 +14,7 @@ export default [
             },
         ],
         plugins: [
-            nodeResolve(),
+            nodeResolve({ preferBuiltins: true }),
             json(),
             commonjs(),
             sucrase({
@@ -22,5 +22,6 @@ export default [
                 transforms: ["typescript"],
             }),
         ],
+        context: "window",
     },
 ];

@@ -1,0 +1,3 @@
+{
+    "ignorePatterns": ["/flatbuffers_shared/flatbuffers"]
+}

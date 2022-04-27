@@ -9,25 +9,27 @@ Logic shared across polyPod platforms - ios, android, wasm.
 
 ## Building
 
-### With `make`:
-- Set up and generate flatbuffers:
-          make generate_flatbuffers
-- Build the project:
-          cargo build
+On most systems, you can simply run `make`, and that will handle everything.
 
-### With `bash`:
+### Building manually:
+
+If you can't use `make` for some reason, you can build the core (but not the
+Swift bindings), as follows:
+
 - Set up flatbuffers:
-          ./flatbuffers_shared/setup_flatbuffers.sh
+
+        ./flatbuffers_shared/setup_flatbuffers.sh
 
 - Generate flatbuffers:
-          ./flatbuffers_shared/generate_flatbuffers.sh
+
+        ./flatbuffers_shared/generate_flatbuffers.sh
 
 - Build the project:
 
-          cargo build
+        cargo build
 
 ## Testing
 
 Just run:
 
-        cargo test
+    cargo test
