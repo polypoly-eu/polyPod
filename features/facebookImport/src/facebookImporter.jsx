@@ -33,7 +33,6 @@ import ReportWrapper from "./views/report/reportWrapper.jsx";
 
 import "./styles.css";
 
-
 const FacebookImporter = () => {
     const { pod, globalError, setGlobalError, isLoading, popUp, closePopUp } =
         useContext(ImporterContext);

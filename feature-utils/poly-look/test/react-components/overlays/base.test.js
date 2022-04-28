@@ -26,6 +26,6 @@ it("renders correctly", () => {
 });
 
 it("adds centered class when specified", () => {
-  const { container, getByTestId } = render(centeredTestComponent);
+  const { getByTestId } = render(centeredTestComponent);
   expect(getByTestId("base-overlay-test").className).toContain("centered");
 });
