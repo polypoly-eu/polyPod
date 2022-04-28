@@ -1,10 +1,14 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import RouteButton from "../../components/buttons/routeButton.jsx";
-import { LoadingOverlay } from "@polypoly-eu/poly-look";
 import { ImporterContext } from "../../context/importer-context.jsx";
-import { List, RoutingCard, Card } from "@polypoly-eu/poly-look";
-import { PolyAnalysisContext } from "@polypoly-eu/poly-look";
+import {
+    List,
+    RoutingCard,
+    Card,
+    PolyAnalysisContext,
+    LoadingOverlay,
+} from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
 

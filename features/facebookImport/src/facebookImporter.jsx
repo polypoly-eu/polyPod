@@ -18,6 +18,7 @@ import {
     PolyImportContext,
     PolyImportProvider,
     ErrorPopup,
+    LoadingOverlay,
 } from "@polypoly-eu/poly-look";
 import { subAnalyses } from "./model/analysis";
 import { dataImporters } from "./model/importer.js";
@@ -30,7 +31,6 @@ import ExploreView from "./views/explore/explore.jsx";
 import ReportView from "./views/report/report.jsx";
 import ExploreDetails from "./views/explore/details.jsx";
 import ReportDetails from "./views/report/details.jsx";
-import { LoadingOverlay } from "@polypoly-eu/poly-look";
 
 import "./styles.css";
 
