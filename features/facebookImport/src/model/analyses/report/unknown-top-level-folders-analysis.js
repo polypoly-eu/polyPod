@@ -26,11 +26,7 @@ export default class UnknownTopLevelFoldersAnalysis extends ReportAnalysis {
             zipFile
         );
 
-<<<<<<< HEAD
         dataAccount.processedData[analysisKeys.unknownFolderNames] =
-=======
-        dataAccount.reports[analysisKeys.unknownFolderNames] =
->>>>>>> main
             topLevelFolderNames.filter(
                 (each) => !topFolderNames.includes(each)
             );

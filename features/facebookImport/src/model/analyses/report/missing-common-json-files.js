@@ -10,11 +10,7 @@ export default class MissingCommonJSONFilesAnalysis extends ReportAnalysis {
             .filter((each) => each.endsWith(".json"))
             .filter((each) => !formattedPaths.includes(each));
         if (missingCommonFileNames.length > 0)
-<<<<<<< HEAD
             dataAccount.processedData[analysisKeys.missingCommonFileNames] =
-=======
-            dataAccount.reports[analysisKeys.missingCommonFileNames] =
->>>>>>> main
                 missingCommonFileNames;
     }
 }

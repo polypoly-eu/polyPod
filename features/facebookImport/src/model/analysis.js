@@ -1,4 +1,4 @@
-import DataStructureBubblesAnalysis from "./analyses/ministories/data-structure-bubbles-analysis.js";
+import DataStructureBubblesAnalysis from "@polypoly-eu/poly-analysis/src/analysis/generic-analyses/data-structure-bubbles-analysis";
 import DataGroupsAnalysis from "./analyses/ministories/data-groups-analysis.js";
 import ConnectedAdvertisersAnalysis from "./analyses/ministories/connected-advertisers-analysis.js";
 import InteractedWithAdvertisersAnalysis from "./analyses/ministories/interacted-advertisers-analysis.js";

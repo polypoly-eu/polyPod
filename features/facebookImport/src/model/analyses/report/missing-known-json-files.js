@@ -28,11 +28,7 @@ export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
         );
         const knownJsonFiles = this._knownJsonFiles();
 
-<<<<<<< HEAD
         dataAccount.processedData[analysisKeys.missingKnownFileNames] =
-=======
-        dataAccount.reports[analysisKeys.missingKnownFileNames] =
->>>>>>> main
             knownJsonFiles.filter((each) => !anonymizedPaths.includes(each));
     }
 }
