@@ -20,10 +20,12 @@
 "onboarding_slide4_body_text" = "We would like to ensure any data you put into polyPod is as secure as possible. For this we would like to ask you to enable some way of authentication for future access.";
 "settings_title" = "Settings";
 "settings_about_section" = "Info";
+"settings_auth" = "Authentication";
 "settings_version" = "Version";
 "settings_legal_section" = "Legal";
 "settings_imprint_title" = "Imprint";
 "settings_privacy_policy_title" = "Privacy Policy";
+"settings_sec_section" = "Security";
 "settings_terms_of_use_title" = "Terms of Use";
 "settings_licenses_title" = "Licenses";
 "settings_export_logs" = "Export logs";
