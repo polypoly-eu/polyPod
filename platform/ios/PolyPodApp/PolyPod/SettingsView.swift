@@ -96,25 +96,27 @@ private struct MainSection: View {
             Section(header: SettingsHeader("settings_sec_section")) {
                 SettingsToggleButton(
                     label: "settings_auth",
-                    isToggle: isToggle,
+                    isToggle: $isToggle,
                     onChange: { status in
-                        print("status is \(status)")
 
                         if status {
                             Authentication.shared.setUp { success in
-                                print("success is \(success)")
-
                                 if !success {
                                     isToggle = false
                                     print("setup auth failed")
+                                    return
                                 }
-                                print("set up auth")
-                                isToggle = true; // ?
                             }
+                            print("Enabled auth")
                         } else {
-                            Authentication.shared.disable { _ in}
+                            Authentication.shared.disable { success in
+                                if !success {
+                                    isToggle = true
+                                    print("disable auth failed")
+                                    return
+                                }
+                            }
                             print("Disabled auth")
-                            isToggle = false;  // ?
                         }
                         
                     }
@@ -197,48 +199,28 @@ typealias OnChange = ((Bool) -> Void)?
 
 private struct SettingsToggleButton: View {
     let label: LocalizedStringKey
-    @State var isToggle : Bool;
-    
-    //let onChange: (Bool, Binding<Bool>) -> Void
-    
+    let isToggle : Binding<Bool>;
+        
     var onChange: OnChange
 
     var body: some View {
        VStack {
-           Toggle(isOn: $isToggle.onChange(toggleChange)) {
+           Toggle(isOn: isToggle.onChange(toggleChange)) {
                     Text(label)
                            .foregroundColor(Color.PolyPod.darkForeground)
-                           .font(.custom("Jost-Regular", size: 14))
+                           .font(.custom("Jost-Regular", size: 18))
                            .kerning(-0.18)
-
-                       if isToggle {
-                           Text("Granted")                       .foregroundColor(Color.PolyPod.darkForeground)
-                               .font(.custom("Jost-Regular", size: 14))
-                               .kerning(-0.18)
-                       }
-                       else {
-                           Text("Not Granted")                       .foregroundColor(Color.PolyPod.darkForeground)
-                               .font(.custom("Jost-Regular", size: 14))
-                               .kerning(-0.18)
-                       }
                    }
                    .padding(.trailing, 32)
         }.padding(.leading, 32)
     }
     
     func toggleChange(_ value: Bool) {
-        print("Toggle value: \(value)")
         if let action = self.onChange {
           action(value)
         }
     }
-    
-//    func onChanged(perform action: OnChange) -> Self {
-//      var copy = self
-//      copy.action = action
-//      return copy
-//    }
-        
+            
 }
 
 
