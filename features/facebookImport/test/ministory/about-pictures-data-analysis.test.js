@@ -1,4 +1,5 @@
 import AboutPicturesDataAnalysis from "../../src/model/analyses/ministories/about-pictures-data-analysis";
+import AboutPicturesMinistory from "../../src/views/ministories/aboutPictures";
 import { ZipFileMock } from "../mocks/zipfile-mock";
 import { runAnalysisForExport } from "../utils/analyses-execution";
 import {
@@ -8,7 +9,7 @@ import {
 } from "../utils/analysis-assertions";
 
 describe("Pictures ministory on export with no JPEG pictures in correct locations", () => {
-    let analysis = null;
+    let analysisStory = null;
     let status = null;
 
     beforeAll(async () => {
@@ -22,11 +23,12 @@ describe("Pictures ministory on export with no JPEG pictures in correct location
             "photos/data/inbox/user_2j57v4wtoa/photos/14567839_1208576379157271_232556476_n_21487783899157271.jpg",
             ""
         );
-        const { analysisResult } = await runAnalysisForExport(
+        const { facebookAccount, analysisResult } = await runAnalysisForExport(
             AboutPicturesDataAnalysis,
             zipFile
         );
-        ({ analysis, status } = analysisResult);
+        ({ status } = analysisResult);
+        analysisStory = new AboutPicturesMinistory(facebookAccount);
     });
 
     it("has success status", async () => {
@@ -34,12 +36,12 @@ describe("Pictures ministory on export with no JPEG pictures in correct location
     });
 
     it("is not active", async () => {
-        expectInactiveAnalysis(analysis);
+        expectInactiveAnalysis(analysisStory);
     });
 });
 
 describe("Pictures ministory on export with JPEG pictures in photos_and_videos location", () => {
-    let analysis = null;
+    let analysisStory = null;
     let status = null;
 
     beforeAll(async () => {
@@ -49,11 +51,12 @@ describe("Pictures ministory on export with JPEG pictures in photos_and_videos l
             ""
         );
 
-        const { analysisResult } = await runAnalysisForExport(
+        const { facebookAccount, analysisResult } = await runAnalysisForExport(
             AboutPicturesDataAnalysis,
             zipFile
         );
-        ({ analysis, status } = analysisResult);
+        ({ status } = analysisResult);
+        analysisStory = new AboutPicturesMinistory(facebookAccount);
     });
 
     it("has success status", async () => {
@@ -61,12 +64,12 @@ describe("Pictures ministory on export with JPEG pictures in photos_and_videos l
     });
 
     it("is active", async () => {
-        expectActiveAnalysis(analysis);
+        expectActiveAnalysis(analysisStory);
     });
 });
 
 describe("Pictures ministory on export with JPEG pictures in posts/media location", () => {
-    let analysis = null;
+    let analysisStory = null;
     let status = null;
 
     beforeAll(async () => {
@@ -76,11 +79,12 @@ describe("Pictures ministory on export with JPEG pictures in posts/media locatio
             ""
         );
 
-        const { analysisResult } = await runAnalysisForExport(
+        const { facebookAccount, analysisResult } = await runAnalysisForExport(
             AboutPicturesDataAnalysis,
             zipFile
         );
-        ({ analysis, status } = analysisResult);
+        ({ status } = analysisResult);
+        analysisStory = new AboutPicturesMinistory(facebookAccount);
     });
 
     it("has success status", async () => {
@@ -88,6 +92,6 @@ describe("Pictures ministory on export with JPEG pictures in posts/media locatio
     });
 
     it("is active", async () => {
-        expectActiveAnalysis(analysis);
+        expectActiveAnalysis(analysisStory);
     });
 });

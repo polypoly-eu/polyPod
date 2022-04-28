@@ -6,10 +6,8 @@ import i18n from "../../i18n.js";
 
 import "./report.css";
 
-const ReportView = () => {
-    const { fileAnalysis, setReportResult, handleBack } =
-        useContext(ImporterContext);
-    const unrecognizedData = fileAnalysis.unrecognizedData;
+const ReportView = ({ reportStories }) => {
+    const { setReportResult, handleBack } = useContext(ImporterContext);
     const [loading, setLoading] = useState(false);
 
     const handleSendReport = async () => {
@@ -17,7 +15,7 @@ const ReportView = () => {
         try {
             await window.pod.endpoint.send(
                 "polyPediaReports",
-                JSON.stringify(unrecognizedData.jsonReport),
+                JSON.stringify(reportStories.jsonReport),
                 "application/json"
             );
             setReportResult(true);
@@ -48,5 +46,4 @@ const ReportView = () => {
         </div>
     );
 };
-
 export default ReportView;

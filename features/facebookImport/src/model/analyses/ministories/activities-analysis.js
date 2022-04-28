@@ -1,21 +1,6 @@
-import React from "react";
-import i18n from "../../../i18n.js";
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
-import {
-    ActivitiesMiniStorySummary,
-    ActivitiesMiniStoryDetails,
-} from "../../../components/activitiesMiniStory/activitiesMiniStory.jsx";
-
 export default class ActivitiesAnalysis extends RootAnalysis {
-    get label() {
-        return RootAnalysis.Labels.NONE;
-    }
-
-    get title() {
-        return i18n.t("activitiesMiniStory:title");
-    }
-
     async analyze({ dataAccount }) {
         const activityDates = [
             ...dataAccount.followedPages,
@@ -72,15 +57,7 @@ export default class ActivitiesAnalysis extends RootAnalysis {
             groupedActivities.total++;
         });
 
-        this._totalEvents = groupedActivities;
-        this.active = groupedActivities.total > 0;
-    }
-
-    renderSummary() {
-        return <ActivitiesMiniStorySummary totalEvents={this._totalEvents} />;
-    }
-
-    renderDetails() {
-        return <ActivitiesMiniStoryDetails totalEvents={this._totalEvents} />;
+        dataAccount.analyses.totalEvents =
+            groupedActivities.total > 0 && groupedActivities;
     }
 }
