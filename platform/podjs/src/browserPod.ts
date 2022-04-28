@@ -11,9 +11,16 @@ import type {
 import { EncodingOptions, Stats, Entry } from "@polypoly-eu/pod-api";
 import { dataFactory } from "@polypoly-eu/rdf";
 import * as RDF from "rdf-js";
+import * as RDFString from "rdf-string";
 import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../../polyPod-config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
+
+const DB_NAME = "polypod";
+const DB_VERSION = 1;
+const OBJECT_STORE_POLY_IN = "poly-in";
+const OBJECT_STORE_POLY_OUT = "poly-out";
+const QUAD_KEYS = ["subject", "predicate", "object"];
 
 const NAV_FRAME_ID = "polyNavFrame";
 const NAV_DEFAULT_BACKGROUND_COLOR = "#ffffff";
@@ -22,56 +29,161 @@ const NAV_LIGHT_FOREGROUND_COLOR = "#ffffff";
 
 const MANIFEST_DATA = window.manifestData;
 
-class LocalStoragePolyIn implements PolyIn {
-    private static readonly storageKey = "polyInStore";
-    private store = JSON.parse(
-        localStorage.getItem(LocalStoragePolyIn.storageKey) || "[]"
-    );
+// Previously, data were stored in localStorage. IndexedDB is more flexible and
+// efficient, and most importantly in our case can store larger amount of data,
+// while the 2MB limit of localStorage is no longer sufficient. This function
+// migrates any data in localStorage to not disrupt the developer expirience.
+// TODO: Please remove the migration code after Oct 2022
+async function migrateData(db: IDBDatabase): Promise<IDBDatabase> {
+    const polyInData = localStorage.getItem("polyInStore");
+    const polyOutData = localStorage.getItem("files");
 
+    if (polyInData || polyOutData) {
+        const files: FileInfo[] = [];
+        const quads = polyInData
+            ? JSON.parse(polyInData).map(RDFString.quadToStringQuad)
+            : [];
+
+        if (polyOutData) {
+            for (const [, file] of JSON.parse(polyOutData)) {
+                const dataUrl = localStorage.getItem(file.id);
+                if (dataUrl) {
+                    files.push({
+                        id: file.id,
+                        name: file.name,
+                        time: new Date(file.time),
+                        blob: await (await fetch(dataUrl)).blob(),
+                    });
+                }
+            }
+        }
+
+        await new Promise((resolve, reject) => {
+            const storeNames = [OBJECT_STORE_POLY_IN, OBJECT_STORE_POLY_OUT];
+            const tx = db.transaction(storeNames, "readwrite");
+            const polyInStore = tx.objectStore(OBJECT_STORE_POLY_IN);
+            for (const quad of quads) polyInStore.add(quad);
+            const polyOutStore = tx.objectStore(OBJECT_STORE_POLY_OUT);
+            for (const file of files) polyOutStore.add(file);
+            tx.oncomplete = () => resolve(null);
+            tx.onerror = tx.onabort = () => reject(tx.error);
+        });
+
+        localStorage.clear();
+    }
+
+    return db;
+}
+
+function openDatabase(): Promise<IDBDatabase> {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+        request.onupgradeneeded = () => {
+            const db = request.result;
+            const polyInStore = db.createObjectStore(OBJECT_STORE_POLY_IN, {
+                keyPath: QUAD_KEYS,
+            });
+            for (let mask = 1; mask < (1 << QUAD_KEYS.length) - 1; mask++) {
+                const keyPath = QUAD_KEYS.filter((_, idx) => (mask >> idx) & 1);
+                polyInStore.createIndex(keyPath.join("-"), keyPath);
+            }
+            db.createObjectStore(OBJECT_STORE_POLY_OUT, { keyPath: "id" });
+        };
+
+        request.onsuccess = () => resolve(migrateData(request.result));
+        request.onerror = () => reject(request.error);
+    });
+}
+
+class IDBPolyIn implements PolyIn {
     async match(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
-        return this.store.filter((quad: RDF.Quad) => {
-            if (matcher.subject && quad.subject.value != matcher.subject.value)
-                return false;
-            if (matcher.object && quad.object.value != matcher.object.value)
-                return false;
-            if (
-                matcher.predicate &&
-                quad.predicate.value != matcher.predicate.value
-            )
-                return false;
-            return true;
+        const db = await openDatabase();
+        return new Promise((resolve, reject) => {
+            const index = [];
+            const query = [];
+            for (const key of QUAD_KEYS) {
+                const value = matcher[key as keyof Matcher];
+                if (value) {
+                    index.push(key);
+                    query.push(RDFString.termToString(value));
+                }
+            }
+
+            const tx = db.transaction([OBJECT_STORE_POLY_IN], "readonly");
+            const store = tx.objectStore(OBJECT_STORE_POLY_IN);
+            const request =
+                index.length > 0
+                    ? (index.length < QUAD_KEYS.length
+                          ? store.index(index.join("-"))
+                          : store
+                      ).getAll(query)
+                    : store.getAll();
+
+            request.onsuccess = () =>
+                resolve(
+                    request.result.map((quad: RDFString.IStringQuad) =>
+                        RDFString.stringQuadToQuad(quad)
+                    )
+                );
+
+            tx.onerror = tx.onabort = () => reject(tx.error);
         });
     }
 
-    private checkQuads(quads: RDF.Quad[]): void {
-        for (const quad of quads)
-            if (!quad.graph.equals(dataFactory.defaultGraph()))
-                throw new Error("Only default graph allowed");
+    private checkQuad(quad: RDF.Quad): void {
+        if (!quad.graph.equals(dataFactory.defaultGraph()))
+            throw new Error("Only default graph allowed");
     }
 
     async add(...quads: RDF.Quad[]): Promise<void> {
-        this.checkQuads(quads);
-        this.store.push(...quads);
-        localStorage.setItem(
-            LocalStoragePolyIn.storageKey,
-            JSON.stringify(this.store)
+        const db = await openDatabase();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction([OBJECT_STORE_POLY_IN], "readwrite");
+            const store = tx.objectStore(OBJECT_STORE_POLY_IN);
+            for (const quad of quads) {
+                this.checkQuad(quad);
+                store.put(RDFString.quadToStringQuad(quad));
+            }
+            tx.oncomplete = () => resolve();
+            tx.onerror = tx.onabort = () => reject(tx.error);
+        });
+    }
+
+    private serializeKeys(quad: RDF.Quad): string[] {
+        this.checkQuad(quad);
+        return QUAD_KEYS.map((key) =>
+            RDFString.termToString(quad[key as keyof RDF.Quad] as RDF.Term)
         );
     }
 
     async delete(...quads: RDF.Quad[]): Promise<void> {
-        this.checkQuads(quads);
-        quads.forEach((quad) => {
-            delete this.store[this.store.indexOf(quad)];
+        const db = await openDatabase();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction([OBJECT_STORE_POLY_IN], "readwrite");
+            const store = tx.objectStore(OBJECT_STORE_POLY_IN);
+            for (const quad of quads) store.delete(this.serializeKeys(quad));
+            tx.oncomplete = () => resolve();
+            tx.onerror = tx.onabort = () => reject(tx.error);
         });
-        localStorage.setItem(
-            LocalStoragePolyIn.storageKey,
-            JSON.stringify(this.store)
-        );
     }
 
     async has(...quads: RDF.Quad[]): Promise<boolean> {
-        this.checkQuads(quads);
-        return quads.some((quad) => this.store.includes(quad));
+        const db = await openDatabase();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction([OBJECT_STORE_POLY_IN], "readonly");
+            const store = tx.objectStore(OBJECT_STORE_POLY_IN);
+            const lookupQuad = (i: number): void => {
+                if (i >= quads.length) resolve(false);
+                else {
+                    const request = store.count(this.serializeKeys(quads[i]));
+                    request.onsuccess = () =>
+                        request.result > 0 ? resolve(true) : lookupQuad(i + 1);
+                }
+            };
+            lookupQuad(0);
+            tx.onerror = tx.onabort = () => reject(tx.error);
+        });
     }
 }
 
@@ -102,8 +214,86 @@ class FileUrl {
     ) {}
 }
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-class LocalStoragePolyOut implements PolyOut {
+interface FileInfo {
+    id: string;
+    name: string;
+    time: Date;
+    blob: Blob;
+}
+
+interface File {
+    read(): Promise<Uint8Array>;
+    stat(): Stats;
+}
+
+class IDBPolyOut implements PolyOut {
+    private async getFileInfo(id: string): Promise<FileInfo> {
+        const db = await openDatabase();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readonly");
+            const request = tx.objectStore(OBJECT_STORE_POLY_OUT).get(id);
+            request.onsuccess = () => {
+                if (request.result) resolve(request.result);
+                else reject(new Error(`File not found: ${id}`));
+            };
+            tx.onerror = tx.onabort = () => reject(request.error);
+        });
+    }
+
+    private async getZipEntries(id: string): Promise<zip.Entry[]> {
+        const file = await this.getFileInfo(id);
+        const reader = new zip.ZipReader(new zip.BlobReader(file.blob));
+        return reader.getEntries();
+    }
+
+    private async getFile(id: string): Promise<File> {
+        const match = /^(.*?:\/\/.*?)\/(.*)/.exec(id);
+        if (match) {
+            const [, zipId, filename] = match;
+            const entries = await this.getZipEntries(zipId);
+            const entry = entries.find((ent) => ent.filename == filename);
+            if (!entry) throw new Error(`Zip entry not found: ${filename}`);
+
+            return {
+                read() {
+                    if (!entry.getData)
+                        throw new Error(`Zip entry is not a file: ${filename}`);
+                    return entry.getData(new zip.Uint8ArrayWriter());
+                },
+                stat() {
+                    const { uncompressedSize, directory, lastModDate } = entry;
+                    return {
+                        getId: () => id,
+                        getSize: () => uncompressedSize,
+                        getTime: () => lastModDate.toISOString(),
+                        getName: () => filename,
+                        isFile: () => !directory,
+                        isDirectory: () => directory,
+                    };
+                },
+            };
+        }
+
+        const file = await this.getFileInfo(id);
+        return {
+            async read() {
+                return new Uint8Array(await file.blob.arrayBuffer());
+            },
+            stat() {
+                const { size } = file.blob;
+                const { time, name } = file;
+                return {
+                    getId: () => id,
+                    getSize: () => size,
+                    getTime: () => time.toISOString(),
+                    getName: () => name,
+                    isFile: () => true,
+                    isDirectory: () => false,
+                };
+            },
+        };
+    }
+
     readFile(path: string, options: EncodingOptions): Promise<string>;
     readFile(path: string): Promise<Uint8Array>;
     readFile(
@@ -113,193 +303,75 @@ class LocalStoragePolyOut implements PolyOut {
         if (options) {
             throw new Error("Not implemented: readFile with options");
         }
-        return new Promise((resolve, reject) => {
-            const parts = id.split("/");
-            if (parts.length > 3) {
-                const zipId = `${parts[0]}//${parts[2]}`;
-                const dataUrl = localStorage.getItem(zipId);
-                if (!dataUrl) {
-                    reject(new Error(`File not found: ${zipId}`));
-                    return;
-                }
-                const reader = new zip.ZipReader(
-                    new zip.Data64URIReader(dataUrl)
-                );
-                const entryPath = id.substring(zipId.length + 1);
-                reader.getEntries().then((entries) => {
-                    const zipEntry = entries.find(
-                        (entry) => entry.filename == entryPath
-                    );
+        return this.getFile(id).then((file) => file.read());
+    }
 
-                    zipEntry
-                        ? zipEntry
-                              .getData?.(new zip.TextWriter())
-                              .then((data: string | undefined) => {
-                                  resolve(new TextEncoder().encode(data));
-                              })
-                        : reject(
-                              new Error(`Zip entry not found: ${entryPath}`)
-                          );
-                });
-                return;
-            }
-            if (!files.has(id)) {
-                reject(new Error(`File not found: ${id}`));
-                return;
-            }
-            const dataUrl = localStorage.getItem(id);
-            if (!dataUrl) {
-                reject(new Error(`File not found: ${id}`));
-            }
-            fetch(dataUrl || "").then((response) => {
-                response.arrayBuffer().then((arrayBuf) => {
-                    resolve(new Uint8Array(arrayBuf));
-                });
-            });
+    async stat(id: string): Promise<Stats> {
+        if (id != "") return (await this.getFile(id)).stat();
+        return {
+            getId: () => "",
+            getSize: () => 0,
+            getTime: () => "",
+            getName: () => "",
+            isFile: () => false,
+            isDirectory: () => true,
+        };
+    }
+
+    async readDir(id: string): Promise<Entry[]> {
+        if (id != "") {
+            const entries = await this.getZipEntries(id);
+            return entries.map(({ filename }) => ({
+                id: `${id}/${filename}`,
+                path: filename,
+            }));
+        }
+
+        const db = await openDatabase();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readonly");
+            const request = tx.objectStore(OBJECT_STORE_POLY_OUT).getAll();
+            request.onsuccess = () =>
+                resolve(request.result.map(({ id }) => ({ id, path: id })));
+            tx.onerror = tx.onabort = () => reject(tx.error);
         });
     }
 
-    readDir(id: string): Promise<Entry[]> {
-        const files = new Map<string, Stats>(
-            JSON.parse(localStorage.getItem(BrowserPolyNav.filesKey) || "[]")
-        );
-        return new Promise((resolve, reject) => {
-            const filteredFiles = Array.from(files)
-                .filter((file) => file[0].startsWith(id))
-                .map((file) => file[0]);
-            if (id == "") {
-                resolve(
-                    filteredFiles.map((file) => ({ id: file, path: file }))
-                );
-                return;
-            }
-            const dataUrl = localStorage.getItem(id);
-            if (!dataUrl) {
-                reject(new Error(`File not found: ${id}`));
-                return;
-            }
-            const reader = new zip.ZipReader(new zip.Data64URIReader(dataUrl));
-            reader.getEntries().then((entries) => {
-                resolve(
-                    entries.map((entry) => ({
-                        id: `${id}/${entry.filename}`,
-                        path: entry.filename,
-                    }))
-                );
-            });
-        });
-    }
-
-    stat(id: string): Promise<Stats> {
-        return new Promise((resolve, reject) => {
-            if (id === "") {
-                resolve({
-                    getId: () => "",
-                    getSize: () => 0,
-                    getTime: () => "",
-                    getName: () => "",
-                    isFile: () => false,
-                    isDirectory: () => true,
-                });
-                return;
-            }
-            const parts = id.split("/");
-            if (parts.length > 3) {
-                const zipId = `${parts[0]}//${parts[2]}`;
-                const dataUrl = localStorage.getItem(zipId);
-                if (!dataUrl) {
-                    reject(new Error(`File not found: ${zipId}`));
-                    return;
-                }
-                const reader = new zip.ZipReader(
-                    new zip.Data64URIReader(dataUrl)
-                );
-                const entryPath = id.substring(zipId.length + 1);
-                reader.getEntries().then((entries) => {
-                    const zipEntry = entries.find(
-                        (entry) => entry.filename == entryPath
-                    );
-                    if (!zipEntry) {
-                        reject(new Error(`Zip entry not found: ${entryPath}`));
-                        return;
-                    }
-                    const modal: Stats = {
-                        getId: () => id,
-                        getSize: () => zipEntry.uncompressedSize,
-                        getTime: () => "",
-                        getName: () => zipEntry.filename,
-                        isFile: () => !zipEntry.directory,
-                        isDirectory: () => zipEntry.directory,
-                    };
-
-                    resolve(modal);
-                });
-                return;
-            }
-
-            files = new Map<string, Stats>(
-                JSON.parse(
-                    localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
-                )
-            );
-            if (!files.has(id)) {
-                throw new Error(`File not found: ${id}`);
-            }
-            resolve(files.get(id) || ({} as Stats));
-        });
-    }
-
-    writeFile(
-        path: string,
-        content: string,
-        options: EncodingOptions
-    ): Promise<void> {
+    writeFile(): Promise<void> {
         throw "Not implemented: writeFile";
     }
 
     async importArchive(url: string): Promise<string> {
-        return new Promise((resolve) => {
-            const filesInDir = new Map(
-                JSON.parse(
-                    localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
-                )
-            );
+        const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
+        const blob = await (await fetch(dataUrl)).blob();
+        const db = await openDatabase();
 
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
             const fileId = "polypod://" + createUUID();
-            const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
-            filesInDir.set(fileId, {
+
+            tx.objectStore(OBJECT_STORE_POLY_OUT).put({
                 id: fileId,
                 name: fileName,
-                time: new Date().toISOString(),
-                size: dataUrl.length,
+                time: new Date(),
+                blob,
             });
-            localStorage.setItem(
-                BrowserPolyNav.filesKey,
-                JSON.stringify(Array.from(filesInDir))
-            );
-            localStorage.setItem(fileId, dataUrl);
-            resolve(fileId);
+
+            tx.oncomplete = () => resolve(fileId);
+            tx.onerror = tx.onabort = () => reject(tx.error);
         });
     }
 
     async removeArchive(fileId: string): Promise<void> {
-        return new Promise((resolve) => {
-            const filesInDir = new Map(
-                JSON.parse(
-                    localStorage.getItem(BrowserPolyNav.filesKey) || "[]"
-                )
-            );
-            filesInDir.delete(fileId);
-            localStorage.setItem(
-                BrowserPolyNav.filesKey,
-                JSON.stringify(Array.from(filesInDir))
-            );
-            localStorage.removeItem(fileId);
-            resolve();
+        const db = await openDatabase();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
+            tx.objectStore(OBJECT_STORE_POLY_OUT).delete(fileId);
+            tx.oncomplete = () => resolve();
+            tx.onerror = tx.onabort = () => reject(tx.error);
         });
     }
 }
-/* eslint-enable @typescript-eslint/no-unused-vars */
 
 class PodJsInfo implements Info {
     async getRuntime(): Promise<string> {
@@ -494,9 +566,7 @@ function createUUID(): string {
     );
 }
 
-let files = new Map<string, Stats>();
 class BrowserPolyNav implements PolyNav {
-    static readonly filesKey = "files";
     actions?: { [key: string]: () => void };
     private keyUpListener: ((key: KeyboardEvent) => void) | undefined;
     private popStateListener: // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -665,8 +735,8 @@ function createNavBarFrame(title: string): HTMLElement {
 
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
-    public readonly polyIn = new LocalStoragePolyIn();
-    public readonly polyOut = new LocalStoragePolyOut();
+    public readonly polyIn = new IDBPolyIn();
+    public readonly polyOut = new IDBPolyOut();
     public readonly polyNav = new BrowserPolyNav();
     public readonly info = new PodJsInfo();
     public readonly endpoint = new BrowserEndpoint();

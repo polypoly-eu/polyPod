@@ -1,10 +1,6 @@
-import React from "react";
 import { relevantZipEntries } from "../../importers/utils/importer-util";
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
-
-import PicturesMiniStory from "../../../components/picturesMiniStory/picturesMiniStory.jsx";
-
-import i18n from "../../../i18n";
+import analysisKeys from "../utils/analysisKeys";
 
 /**
  * Minimum number of picutures that should be present in
@@ -13,14 +9,6 @@ import i18n from "../../../i18n";
 const PICTURES_THRESHOLD = 1;
 
 export default class AboutPicturesDataAnalysis extends RootAnalysis {
-    get label() {
-        return RootAnalysis.Labels.NONE;
-    }
-
-    get title() {
-        return i18n.t("picturesMiniStory:title");
-    }
-
     /**
      * Determine the pictures posted by the user.
      *
@@ -53,13 +41,10 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
             .filter((path) => photoRegexes.some((regex) => regex.test(path)));
     }
 
-    async analyze({ zipFile }) {
+    async analyze({ zipFile, dataAccount }) {
         const pictureEntries = await this._userPicturesFromExport(zipFile);
-        this._picturesCount = pictureEntries.length;
-        this.active = this._picturesCount >= PICTURES_THRESHOLD;
-    }
-
-    renderSummary() {
-        return <PicturesMiniStory />;
+        if (pictureEntries.length >= PICTURES_THRESHOLD)
+            dataAccount.analyses[analysisKeys.picturesCount] =
+                pictureEntries.length;
     }
 }
