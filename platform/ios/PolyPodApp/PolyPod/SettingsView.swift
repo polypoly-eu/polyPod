@@ -172,18 +172,45 @@ private struct SettingsButton: View {
 private struct SettingsToggleButton: View {
     let label: LocalizedStringKey
     @State private var isToggle : Bool = false
-       
+
+
     var body: some View {
        VStack {
-          Toggle(isOn: $isToggle){
-             Text(label)
-                .foregroundColor(Color.PolyPod.darkForeground)
-                .font(.custom("Jost-Regular", size: 18))
-                .kerning(-0.18)
-          }
-          .padding(.trailing, 32)
+           if #available(iOS 15.0, *) {
+                   Toggle(isOn: $isToggle){
+                       Text(label)
+                           .foregroundColor(Color.PolyPod.darkForeground)
+                           .font(.custom("Jost-Regular", size: 14))
+                       if isToggle {
+                           Text("Granted")                       .foregroundColor(Color.PolyPod.darkForeground)
+                               .font(.custom("Jost-Regular", size: 14))
+                           // .kerning(-0.18)
+                       }
+                       else {
+                           Text("Not Granted")                       .foregroundColor(Color.PolyPod.darkForeground)
+                               .font(.custom("Jost-Regular", size: 14))
+                           // .kerning(-0.18)
+                       }
+                   }
+                   .padding(.trailing, 32)
+                   .onChange(of: isToggle) { value in
+                       print("in onChange value: \(value)")
+                   }
+                   .confirmationDialog(
+                    "Do you want to grant device authentication with PIN/biometrics?",
+                    isPresented: $isToggle,
+                    titleVisibility: .visible
+                   ) {
+                       Button("Yes", action: { })
+                       Button("No", role: .destructive, action:{ })
+
+                   }
+               } else {
+                   // Fallback on earlier versions
+               }
         }.padding(.leading, 32)
     }
+    
 }
 
 
