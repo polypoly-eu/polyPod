@@ -91,6 +91,16 @@ private struct MainSection: View {
                 EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             )
             
+            Section(header: SettingsHeader("settings_sec_section")) {
+                SettingsToggleButton(
+                    label: "settings_auth",
+                    isOn: false
+                )
+            }
+            .listRowInsets(
+                EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+            )
+            
             Section(header: SettingsHeader("settings_legal_section")) {
                 SettingsButton(
                     label: "settings_imprint_title",
@@ -160,6 +170,18 @@ private struct SettingsButton: View {
     }
 }
 
+private struct SettingsToggleButton: View {
+    let label: LocalizedStringKey
+    @State var isOn: Bool
+    
+    var body: some View {
+        Toggle(label, isOn: $isOn)
+            .foregroundColor(Color.PolyPod.darkForeground)
+            .font(.custom("Jost-Regular", size: 18))
+            .padding(.leading, 32)
+            .padding(.trailing, 32)
+    }
+}
 private struct PrivacyPolicyView: View {
     var body: some View {
         HTMLView(content: loadPrivacyPolicyText())
