@@ -52,7 +52,7 @@ jobs:
                       swift:
                       - 'platform/ios/**'
             - name: Install JS packages
-              if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.coreAndFeatures == 'true' || steps.changes.outputs.js == 'true')
+              if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.js == 'true')
               run: ./build.js install
             - name: Lint core and features
               if: steps.changes.outputs.js == 'true'

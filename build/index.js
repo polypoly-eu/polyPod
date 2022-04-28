@@ -68,9 +68,14 @@ async function main() {
 
     if (
         !existsSync("node_modules") &&
-        ["lint", "lintfix", "clean", "install", "installAndBuild"].includes(
-            command
-        )
+        [
+            "lint",
+            "lintfix",
+            "clean",
+            "build",
+            "install",
+            "installAndBuild",
+        ].includes(command)
     ) {
         await runCommand("root-install", "👷👷‍♀️", async () => {
             await npmInstall("/");
