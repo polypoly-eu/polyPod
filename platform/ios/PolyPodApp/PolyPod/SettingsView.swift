@@ -93,8 +93,7 @@ private struct MainSection: View {
             
             Section(header: SettingsHeader("settings_sec_section")) {
                 SettingsToggleButton(
-                    label: "settings_auth",
-                    isOn: false
+                    label: "settings_auth"
                 )
             }
             .listRowInsets(
@@ -172,16 +171,22 @@ private struct SettingsButton: View {
 
 private struct SettingsToggleButton: View {
     let label: LocalizedStringKey
-    @State var isOn: Bool
-    
+    @State private var isToggle : Bool = false
+       
     var body: some View {
-        Toggle(label, isOn: $isOn)
-            .foregroundColor(Color.PolyPod.darkForeground)
-            .font(.custom("Jost-Regular", size: 18))
-            .padding(.leading, 32)
-            .padding(.trailing, 32)
+       VStack {
+          Toggle(isOn: $isToggle){
+             Text(label)
+                .foregroundColor(Color.PolyPod.darkForeground)
+                .font(.custom("Jost-Regular", size: 18))
+                .kerning(-0.18)
+          }
+          .padding(.trailing, 32)
+        }.padding(.leading, 32)
     }
 }
+
+
 private struct PrivacyPolicyView: View {
     var body: some View {
         HTMLView(content: loadPrivacyPolicyText())
