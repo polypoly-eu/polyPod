@@ -31,7 +31,11 @@ const ImportView = () => {
         if (files?.[0]?.id) handleRemoveFile(files[0].id);
         runWithLoadingScreen(async function () {
             try {
-                await polyOut.importArchive(selectedFile.url);
+                const cleanedSelectedFileUrl = selectedFile.url
+                    .replaceAll("%3A", ":")
+                    .replaceAll("%2F", "/");
+                console.log(cleanedSelectedFileUrl);
+                await polyOut.importArchive(cleanedSelectedFileUrl);
                 refreshFiles();
                 setSelectedFile(null);
             } catch (error) {
