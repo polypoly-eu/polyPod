@@ -39,6 +39,7 @@
 "button_reject" = "No";
 "button_update_notification_close" = "OK";
 "auth_prompt_set_up" = "Set up authentification";
+"auth_prompt_disable" = "Disable authentification";
 "auth_prompt_unlock" = "Login to your polyPod";
 
 "settings_imprint_text" = "

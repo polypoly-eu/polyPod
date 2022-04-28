@@ -37,6 +37,8 @@
 "button_reject" = "Nein";
 "button_update_notification_close" = "OK";
 "auth_prompt_set_up" = "Sperre einrichten";
+"auth_prompt_disable" = "xx einrichten";
+
 "auth_prompt_unlock" = "Einloggen in polyPod";
 
 "settings_imprint_text" = "
