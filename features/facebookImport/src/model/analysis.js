@@ -16,10 +16,10 @@ import MissingKnownJSONFilesAnalysis from "./analyses/report/missing-known-json-
 import UnknownJSONFilesAnalysis from "./analyses/report/unknown-json-files.js";
 import MessagesDetailsAnalysis from "./analyses/ministories/messages-details-analysis.js";
 import MessageThreadsAnalysis from "./analyses/ministories/message-threads-analysis.js";
-import OffFacebookEventsTypesAnalysis from "./analyses/ministories/off-facebook-events-types-analysys.js";
+import OffFacebookEventsTypesAnalysis from "./analyses/ministories/off-facebook-events-types-analysis.js";
 import DataChartsAnalysis from "./analyses/ministories/data-points-charts-analysis.js";
 import OffFacebookEventsTypesChartAnalysis from "./analyses/ministories/off-facebook-events-types-charts-analysis.js";
-import DataImportingStatusAnalysis from "./analyses/report/importing-status-analysys.js";
+import DataImportingStatusAnalysis from "./analyses/report/importing-status-analysis.js";
 import JsonFilesBubblesAnalysis from "./analyses/ministories/json-files-bubbles.js";
 import ImportedJsonFilesAnalysis from "./analyses/ministories/json-files-imported-analysis.js";
 import ExportTitleAnalysis from "./analyses/ministories/export-title-analysis.js";

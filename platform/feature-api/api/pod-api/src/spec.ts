@@ -62,7 +62,7 @@ export class PodSpec {
                 await assert.isRejected(polyIn.delete(quad), /default/);
             });
 
-            it("add/select", async () => {
+            it("add/match", async () => {
                 const { triple } = gens(dataFactory);
                 await fc.assert(
                     fc.asyncProperty(fc.array(triple), async (quads) => {
@@ -112,7 +112,8 @@ export class PodSpec {
                     fc.pre(cont);
                 }
 
-                it("write/read", async () => {
+                // Skipped - polyOut.writeFile is not yet used in production
+                it.skip("write/read", async () => {
                     await fc.assert(
                         fc.asyncProperty(pathGen, fc.fullUnicodeString(), async (path, content) => {
                             await skipIfExists(path);
@@ -131,7 +132,8 @@ export class PodSpec {
                     );
                 });
 
-                it("readDir", async () => {
+                // Skipped - polyOut.writeFile is not yet used in production
+                it.skip("write/readDir", async () => {
                     assert.isFulfilled(polyOut.readDir(this.path));
                     await fc.assert(
                         fc.asyncProperty(pathGen, fc.fullUnicodeString(), async (path, content) => {
@@ -151,7 +153,7 @@ export class PodSpec {
                         fc.asyncProperty(pathGen, async (path) => {
                             await skipIfExists(path);
 
-                            await assert.isRejected(polyOut.readFile(path, { encoding: "utf-8" }));
+                            await assert.isRejected(polyOut.readFile(path));
                         })
                     );
                 });

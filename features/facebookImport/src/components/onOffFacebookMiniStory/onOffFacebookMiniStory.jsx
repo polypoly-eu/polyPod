@@ -82,7 +82,7 @@ export const OnOffFacebookMiniStoryDetails = ({ displayData }) => {
             <p>{i18n.t("offFacebookEventsMiniStory:off.events.text.3")}</p>
             <BarChart data={displayData.offEvents.activityTypes.slice(0, 5)} />
             <div className="off-facebook-info-button">
-                <InfoButton route="/report/details/off-facebook-info" />
+                <InfoButton infoScreen="off-facebook-info" />
             </div>
             <p className="source">
                 {i18n.t("common:source.your.facebook.data")}
@@ -137,7 +137,7 @@ export const OnOffFacebookMiniStoryDetails = ({ displayData }) => {
                         )}
                     </p>
                     <div className="on-off-facebook-info-button">
-                        <InfoButton route="/report/details/on-off-facebook-info" />
+                        <InfoButton infoScreen="on-off-facebook-info" />
                     </div>
                     <p className="source">
                         {i18n.t("common:source.your.facebook.data")}

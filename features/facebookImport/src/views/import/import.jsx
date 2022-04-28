@@ -1,10 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ImporterContext } from "../../context/importer-context.jsx";
-import {
-    PolyImportContext,
-    FileSelectionError,
-    FileImportError,
-} from "@polypoly-eu/poly-import";
+import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
+import { PolyImportContext } from "@polypoly-eu/poly-look";
 import ProgressBarComponent from "../../components/progressBar/progressBar.jsx";
 import ImportExplanationExpandable from "../../components/importExplanationExpandable/importExplanationExpandable.jsx";
 import i18n from "../../i18n.js";
@@ -33,7 +30,7 @@ const maxFileSizeSupported = {
 //from storage
 async function readImportStatus(pod) {
     const { dataFactory } = pod;
-    const statusQuads = await pod.polyIn.select({
+    const statusQuads = await pod.polyIn.match({
         subject: dataFactory.namedNode(`${FBIMPORT_NAMESPACE}facebookImporter`),
         predicate: dataFactory.namedNode(`${FBIMPORT_NAMESPACE}importStatus`),
     });
@@ -44,7 +41,7 @@ async function readImportStatus(pod) {
 async function writeImportStatus(pod, status) {
     const { dataFactory, polyIn } = pod;
     const existingQuad = (
-        await pod.polyIn.select({
+        await pod.polyIn.match({
             subject: dataFactory.namedNode(
                 `${FBIMPORT_NAMESPACE}facebookImporter`
             ),

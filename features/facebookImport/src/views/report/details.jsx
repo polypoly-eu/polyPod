@@ -1,33 +1,36 @@
-import { PolyAnalysisContext } from "@polypoly-eu/poly-analysis";
-import React, { useContext } from "react";
+import React from "react";
+import { reports } from "../ministories/reports";
 
 import "./details.css";
 
-export const ReportCard = ({ analysis }) => {
+export const ReportCard = ({ report }) => {
     return (
         <>
             <div className="report-card">
-                <h1>{analysis.title}</h1>
-                <div className="list">{analysis.render()}</div>
+                <h1>{report.title}</h1>
+                <div className="list">{report.render()}</div>
             </div>
             <div className="report-card-scrolling"></div>
         </>
     );
 };
 
-const ReportDetails = () => {
-    const { fileAnalysis } = useContext(PolyAnalysisContext);
-    const unrecognizedData = fileAnalysis.unrecognizedData;
-
+const ReportDetails = ({ reportStories }) => {
     function renderReportAnalyses() {
-        if (!unrecognizedData) {
-            return "";
+        if (!reports || !reportStories?.active) {
+            return (
+                <div className="report-card">
+                    <h1>No Reports Found</h1>
+                </div>
+            );
         }
         return (
             <div>
-                {unrecognizedData.reportAnalyses.map((analysis, index) => (
-                    <ReportCard analysis={analysis} key={index} />
-                ))}
+                {reportStories?.active &&
+                    reportStories?.activeStories.map((report, index) => {
+                        if (report.active)
+                            return <ReportCard report={report} key={index} />;
+                    })}
             </div>
         );
     }

@@ -1,30 +1,35 @@
-build_type := $(if $(filter $(MODE), release),release,debug)
+.DEFAULT_GOAL := all
 
-.PHONY: setup_flatbuffers
-setup_flatbuffers:
-	./flatbuffers_shared/setup_flatbuffers.sh
-
-.PHONY: generate_flatbuffers
-generate_flatbuffers: setup_flatbuffers
-	./flatbuffers_shared/generate_flatbuffers.sh
-
-# ========= XCFramework for iOS ========= #
 export_dir_ios := export/ios
 swift_core := PolyPodCoreSwift
+swift_core_framework := $(swift_core)/PolyPodCore.xcframework
 ios_archs := aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios
 ios_targets := iPhone simulator
+android_version := 24
+# Rust still uses old-ish r22 version of NDK.
+# For reference https://github.com/rust-lang/rust/pull/85806
+ndk_version := r22b
+build_type := $(if $(filter $(MODE), release),release,debug)
 
-.PHONY: build_ios_xcframework
-build_ios_xcframework: generate_flatbuffers
-# Ensure correct OS is used
-ifeq ($(OS),Windows_NT)
-	@echo "xcframework can be built only in macOS"
-	exit 1
-else
-ifneq ($(shell uname -s),Darwin)
-	@echo "xcframework can be built only in macOS"
-	exit 1
+ifneq ($(OS),Windows_NT)
+	ifeq ($(shell uname -s),Darwin)
+		macos := true
+	endif
 endif
+
+.PHONY: flatbuffers
+flatbuffers:
+	./flatbuffers_shared/setup_flatbuffers.sh
+	./flatbuffers_shared/generate_flatbuffers.sh
+
+target: flatbuffers
+	cargo build
+
+$(swift_core_framework): target
+# Ensure correct OS is used
+ifeq ($(macos),)
+	@echo "xcframework can only be built on macOS"
+	exit 1
 endif
 
 	# Workspace setup
@@ -37,7 +42,7 @@ endif
 
 	# Build library for all architectures
 	$(foreach arch, $(ios_archs),  $(call build_for_architecture,$(arch));)
-	
+
 	# Copy libaries to export
 	cp target/aarch64-apple-ios/$(build_type)/libpolypod_core.a $(export_dir_ios)/iPhone/libpolypod_core.a
 	lipo -create \
@@ -51,10 +56,12 @@ endif
 	@echo "module PolyPodCore { header \"polypod-core.h\" export * }" >> $(export_dir_ios)/headers/module.modulemap
 
 	# Package xcframework
-	rm -rf $(swift_core)/PolyPodCore.xcframework
+	rm -rf $(swift_core_framework)
 	xcodebuild -create-xcframework \
-	    $(foreach target, $(ios_targets), -library $(export_dir_ios)/$(target)/libpolypod_core.a -headers $(export_dir_ios)/headers) \
-		-output $(swift_core)/PolyPodCore.xcframework
+	    $(foreach target, $(ios_targets), \
+			-library $(export_dir_ios)/$(target)/libpolypod_core.a \
+			-headers $(export_dir_ios)/headers) \
+		-output $(swift_core_framework)
 
 define build_for_architecture
 	rustup target add $(1)
@@ -63,15 +70,21 @@ define build_for_architecture
 		--lib --target $(1)
 endef
 
-# ========= Building for Android ========= #
-android_version := 24
-# Rust still uses old-ish r22 version of NDK.
-# For reference https://github.com/rust-lang/rust/pull/85806
-ndk_version := r22b
-
 .PHONY: android_libraries
-android_libraries: generate_flatbuffers
+android_libraries: flatbuffers
 	./build_for_android.sh \
 		--android_version $(android_version) \
 		--ndk_version $(ndk_version) \
 		--build_type $(build_type)
+
+.PHONY: all
+all: $(if $(macos),$(swift_core_framework),target)
+
+.PHONY: clean
+clean:
+	$(RM) -r flatbuffers_shared/flat{c,buffers}
+	$(RM) -r src/flatbuffers_generated
+	$(RM) -r target
+	$(RM) -r export
+	$(RM) -r $(swift_core_framework)
+	$(RM) -r $(swift_core)/{.swiftpm,FlatbuffersGenerated}
