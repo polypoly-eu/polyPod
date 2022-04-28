@@ -17,17 +17,38 @@ import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
 
 import "./styles.css";
+import {
+    PolyImportContext,
+    PolyImportProvider,
+    INITIAL_HISTORY_STATE,
+} from "@polypoly-eu/poly-look";
+import GoogleAccount from "./model/google-account.js";
+import { dataImporters } from "./model/importer.js";
 
 const Google = () => {
-    const { pod } = useContext(GoogleContext);
-    const renderSplash = () => "Loading";
+    const { pod, isLoading } = useContext(GoogleContext);
+
+    const { files } = useContext(PolyImportContext);
+
+    function determineRoute() {
+        if (files.length > 0)
+            return (
+                <Redirect
+                    to={{
+                        pathname: "/overview",
+                        state: INITIAL_HISTORY_STATE,
+                    }}
+                />
+            );
+        else return <Redirect to={{ pathname: "/import" }} />;
+    }
 
     return (
-        <div className="google poly-theme poly-theme-light">
-            {pod ? (
+        <div className="google poly-theme poly-theme-dark">
+            {pod && files && (
                 <Switch>
                     <Route exact path="/">
-                        <Redirect to={{ pathname: "/overview" }} />
+                        {determineRoute()}
                     </Route>
                     <Route exact path="/overview">
                         <Overview />
@@ -36,9 +57,8 @@ const Google = () => {
                         <ImportView />
                     </Route>
                 </Switch>
-            ) : (
-                renderSplash()
             )}
+            {isLoading && "Loading..."}
         </div>
     );
 };
@@ -51,8 +71,14 @@ const GoogleApp = () => {
     return (
         <Router history={history}>
             <GoogleContextProvider>
-                <div className="poly-nav-bar-separator-overlay" />
-                <Google />
+                <PolyImportProvider
+                    parentContext={GoogleContext}
+                    dataImporters={dataImporters}
+                    DataAccount={GoogleAccount}
+                >
+                    <div className="poly-nav-bar-separator-overlay" />
+                    <Google />
+                </PolyImportProvider>
             </GoogleContextProvider>
         </Router>
     );
