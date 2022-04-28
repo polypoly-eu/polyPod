@@ -11,8 +11,3 @@ export default class RootAnalysis {
         return null;
     }
 }
-
-RootAnalysis.Labels = Object.freeze({
-    NONE: null,
-    TECH_DEMO: "techDemo",
-});

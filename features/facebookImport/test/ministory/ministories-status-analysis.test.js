@@ -1,20 +1,25 @@
-import { MinistoriesStatusAnalysis } from "@polypoly-eu/poly-analysis";
-import { NUMBER_OF_ANALYSES } from "../../src/model/analysis";
+import { MinistoriesStatusReport } from "@polypoly-eu/poly-analysis";
+import { NUMBER_OF_MINISTORIES } from "../../src/views/ministories/ministories";
+import { NUMBER_OF_REPORTS } from "../../src/views/ministories/reports";
 import { zipFileWithOffFacebookEvents } from "../datasets/off-facebook-events-data";
-import { runAnalysesForZip } from "../utils/analyses-execution";
+import {
+    getReportStories,
+    runAnalysesForZip,
+} from "../utils/analyses-execution";
 import { expectActiveAnalysis } from "../utils/analysis-assertions";
 
 describe("Ministories status analysis", () => {
-    let unrecognizedData = null;
     let ministoriesAnalysis = null;
     let jsonReport = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithOffFacebookEvents();
-        ({ unrecognizedData } = await runAnalysesForZip(zipFile));
+        const facebookAccount = await runAnalysesForZip(zipFile);
 
-        ministoriesAnalysis = unrecognizedData.reportAnalyses.find(
-            (each) => each.constructor === MinistoriesStatusAnalysis
+        const reportStories = getReportStories(facebookAccount);
+
+        ministoriesAnalysis = reportStories.activeStories.find(
+            (each) => each.constructor === MinistoriesStatusReport
         );
         jsonReport = ministoriesAnalysis.jsonReport;
     });
@@ -24,6 +29,8 @@ describe("Ministories status analysis", () => {
     });
 
     it("has correct number of importers", async () => {
-        expect(jsonReport.data.length).toBe(NUMBER_OF_ANALYSES);
+        expect(jsonReport.data.length).toBe(
+            NUMBER_OF_MINISTORIES + NUMBER_OF_REPORTS
+        );
     });
 });

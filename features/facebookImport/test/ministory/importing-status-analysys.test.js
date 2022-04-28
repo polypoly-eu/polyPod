@@ -1,5 +1,6 @@
-import DataImportingStatusAnalysis from "../../src/model/analyses/report/importing-status-analysys";
+import DataImportingStatusAnalysis from "../../src/model/analyses/report/importing-status-analysis";
 import { NUMBER_OF_IMPORTERS } from "../../src/model/importer";
+import DataImportingStatusReport from "../../src/views/ministories/dataImportingStatus";
 import { runAnalysisForExport } from "../utils/analyses-execution";
 import {
     expectActiveAnalysis,
@@ -8,18 +9,19 @@ import {
 import { createMockedZip } from "../utils/data-creation";
 
 describe("Importing status analysis for empty zip", () => {
-    let analysis = null;
+    let analysisReport = null;
     let status = null;
     let jsonReport = null;
 
     beforeAll(async () => {
         const zipFile = createMockedZip([]);
-        const { analysisResult } = await runAnalysisForExport(
+        const { facebookAccount, analysisResult } = await runAnalysisForExport(
             DataImportingStatusAnalysis,
             zipFile
         );
-        ({ analysis, status } = analysisResult);
-        jsonReport = analysis.jsonReport;
+        ({ status } = analysisResult);
+        analysisReport = new DataImportingStatusReport(facebookAccount);
+        jsonReport = analysisReport.jsonReport;
     });
 
     it("has success status", async () => {
@@ -27,14 +29,20 @@ describe("Importing status analysis for empty zip", () => {
     });
 
     it("is active", async () => {
-        expectActiveAnalysis(analysis);
+        expectActiveAnalysis(analysisReport);
     });
 
     it("has id in JSON report", async () => {
-        expect(jsonReport.id).toBe(DataImportingStatusAnalysis.name);
+        expect(jsonReport.id).toBe(
+            getReportNameFromAnalaysis(DataImportingStatusAnalysis)
+        );
     });
 
     it("has correct number of importers", async () => {
         expect(jsonReport.data.length).toBe(NUMBER_OF_IMPORTERS);
     });
 });
+
+function getReportNameFromAnalaysis(analysis) {
+    return analysis.name.replace("Analysis", "Report");
+}

@@ -28,11 +28,11 @@ import i18n from "./i18n.js";
 import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
 import ExploreView from "./views/explore/explore.jsx";
-import ReportView from "./views/report/report.jsx";
 import ExploreDetails from "./views/explore/details.jsx";
-import ReportDetails from "./views/report/details.jsx";
+import ReportWrapper from "./views/report/reportWrapper.jsx";
 
 import "./styles.css";
+
 
 const FacebookImporter = () => {
     const { pod, globalError, setGlobalError, isLoading, popUp, closePopUp } =
@@ -77,12 +77,7 @@ const FacebookImporter = () => {
                     <Route exact path="/explore/details">
                         <ExploreDetails />
                     </Route>
-                    <Route exact path="/report">
-                        <ReportView />
-                    </Route>
-                    <Route exact path="/report/details">
-                        <ReportDetails />
-                    </Route>
+                    <ReportWrapper />
                 </Switch>
             )}
             {popUp &&

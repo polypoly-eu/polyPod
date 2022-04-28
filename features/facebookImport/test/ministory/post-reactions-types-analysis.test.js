@@ -1,4 +1,5 @@
 import PostReactionsTypesAnalysis from "../../src/model/analyses/ministories/post-reactions-types-analysis";
+import PostReactionTypesMinistory from "../../src/views/ministories/postReactionsTypes";
 import { zipFileWithPostReactions } from "../datasets/post-reactions-data";
 import { ZipFileMock } from "../mocks/zipfile-mock";
 import { runAnalysisForExport } from "../utils/analyses-execution";
@@ -9,16 +10,17 @@ import {
 } from "../utils/analysis-assertions";
 
 describe("Post reactions analysis for empty zip", () => {
-    let analysis = null;
+    let analysisStory = null;
     let status = null;
 
     beforeAll(async () => {
         let zipFile = new ZipFileMock();
-        const { analysisResult } = await runAnalysisForExport(
+        const { facebookAccount, analysisResult } = await runAnalysisForExport(
             PostReactionsTypesAnalysis,
             zipFile
         );
-        ({ analysis, status } = analysisResult);
+        ({ status } = analysisResult);
+        analysisStory = new PostReactionTypesMinistory(facebookAccount);
     });
 
     it("has success status", async () => {
@@ -26,21 +28,26 @@ describe("Post reactions analysis for empty zip", () => {
     });
 
     it("is not active", async () => {
-        expectInactiveAnalysis(analysis);
+        expectInactiveAnalysis(analysisStory);
     });
 });
 
 describe("Post reactions analysis from export data", () => {
-    let analysis = null;
+    let analysisStory = null;
+    let analysisData = null;
     let status = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithPostReactions();
-        const { analysisResult } = await runAnalysisForExport(
+        const { facebookAccount, analysisResult } = await runAnalysisForExport(
             PostReactionsTypesAnalysis,
             zipFile
         );
-        ({ analysis, status } = analysisResult);
+        ({ status } = analysisResult);
+        analysisStory = new PostReactionTypesMinistory(facebookAccount);
+        analysisData = {
+            reactionsTypeCountPairs: analysisStory.analysisData,
+        };
     });
 
     it("has success status", async () => {
@@ -48,11 +55,11 @@ describe("Post reactions analysis from export data", () => {
     });
 
     it("is active", async () => {
-        expectActiveAnalysis(analysis);
+        expectActiveAnalysis(analysisStory);
     });
 
     it("has correct reactions per type", async () => {
-        expect(analysis._reactionsTypeCountPairs).toStrictEqual([
+        expect(analysisData.reactionsTypeCountPairs).toStrictEqual([
             { type: "LIKE", count: 3 },
             { type: "WOW", count: 2 },
             { type: "SAD", count: 1 },

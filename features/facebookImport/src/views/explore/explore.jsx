@@ -6,13 +6,14 @@ import {
     List,
     RoutingCard,
     Card,
-    PolyAnalysisContext,
     LoadingOverlay,
+    PolyImportContext,
 } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
 
 import "./explore.css";
+import { ministories } from "../ministories/ministories.js";
 
 const PopUpMessage = ({ children, reportResultAnswer }) => {
     return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
@@ -35,8 +36,7 @@ const UnrecognizedCard = () => {
 const ExploreView = () => {
     const { reportResult, setReportResult } = useContext(ImporterContext);
 
-    const { fileAnalysis } = useContext(PolyAnalysisContext);
-
+    const { account } = useContext(PolyImportContext);
     const history = useHistory();
     const exploreRef = useRef();
 
@@ -74,7 +74,7 @@ const ExploreView = () => {
         );
 
     const renderFileAnalyses = () => {
-        if (!fileAnalysis)
+        if (!account.analyses)
             return (
                 <LoadingOverlay
                     loadingGif="./images/loading.gif"
@@ -84,26 +84,28 @@ const ExploreView = () => {
         return (
             <List>
                 <UnrecognizedCard />
-                {fileAnalysis.analyses.map((analysis, index) => {
+                {ministories.map((MinistoryClass, index) => {
+                    const ministory = new MinistoryClass(account);
+                    if (!ministory.active) return;
                     const content = (
                         <>
-                            <h1>{analysis.title}</h1>
-                            {analysis.label !== null && (
+                            <h1>{ministory.title}</h1>
+                            {ministory.label !== null && (
                                 <label>
                                     {i18n.t(
-                                        `explore:analysis.label.${analysis.label}`
+                                        `explore:analysis.label.${ministory.label}`
                                     )}
                                 </label>
                             )}
-                            {analysis.renderSummary()}
+                            {ministory.renderSummary()}
                         </>
                     );
-                    return analysis.renderDetails ? (
+                    return ministory.renderDetails ? (
                         <RoutingCard
                             key={index}
                             history={history}
                             route="/explore/details"
-                            stateChange={{ activeAnalysis: analysis }}
+                            stateChange={{ activeAnalysis: ministory }}
                             buttonText={i18n.t("explore:details.button")}
                         >
                             {content}

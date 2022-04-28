@@ -1,5 +1,6 @@
 import ConnectedAdvertisersAnalysis from "../../src/model/analyses/ministories/connected-advertisers-analysis";
 import FacebookAccount from "../../src/model/entities/facebook-account";
+import ConnectedAdvertisersMinistory from "../../src/views/ministories/connectedAdvertisers";
 import {
     DATASET_EXPECTED_VALUES as CONNECTED_ADVERTISERS_DATASET_V2_EXTENDED,
     zipFileWithConnectedAdvertisersAllTypes,
@@ -19,15 +20,16 @@ import {
 } from "../utils/analysis-assertions";
 
 describe("Connected advertisers analysis from account with no connected advertisers", () => {
-    let analysis = null;
+    let analysisStory = null;
     let status = null;
 
     beforeAll(async () => {
         const facebookAccount = new FacebookAccount();
-        ({ analysis, status } = await runAnalysisForAccount(
+        ({ status } = await runAnalysisForAccount(
             ConnectedAdvertisersAnalysis,
             facebookAccount
         ));
+        analysisStory = new ConnectedAdvertisersMinistory(facebookAccount);
     });
 
     it("has success status", async () => {
@@ -35,21 +37,26 @@ describe("Connected advertisers analysis from account with no connected advertis
     });
 
     it("is not active", async () => {
-        expectInactiveAnalysis(analysis);
+        expectInactiveAnalysis(analysisStory);
     });
 });
 
 describe("Connected advertisers analysis from account with connected advertisers - v2 simple format", () => {
-    let analysis = null;
+    let analysisStory = null;
+    let analysisData = null;
     let status = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithConnectedAdvertisers();
-        const { analysisResult } = await runAnalysisForExport(
+        const { facebookAccount, analysisResult } = await runAnalysisForExport(
             ConnectedAdvertisersAnalysis,
             zipFile
         );
-        ({ analysis, status } = analysisResult);
+        ({ status } = analysisResult);
+        analysisStory = new ConnectedAdvertisersMinistory(facebookAccount);
+        analysisData = {
+            connectedAdvertisersCount: analysisStory.analysisData.length,
+        };
     });
 
     it("has success status", async () => {
@@ -57,27 +64,32 @@ describe("Connected advertisers analysis from account with connected advertisers
     });
 
     it("is active", async () => {
-        expectActiveAnalysis(analysis);
+        expectActiveAnalysis(analysisStory);
     });
 
     it("has correct count", async () => {
-        expect(analysis._connectedAdvertisersCount).toBe(
+        expect(analysisData.connectedAdvertisersCount).toBe(
             CONNECTED_ADVERTISERS_DATASET_V2_BASIC.numberOfConnectedAdvertisers
         );
     });
 });
 
 describe("Connected advertisers analysis from account with connected advertisers - v2 extended format", () => {
-    let analysis = null;
+    let analysisStory = null;
+    let analysisData = null;
     let status = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithConnectedAdvertisersAllTypes();
-        const { analysisResult } = await runAnalysisForExport(
+        const { facebookAccount, analysisResult } = await runAnalysisForExport(
             ConnectedAdvertisersAnalysis,
             zipFile
         );
-        ({ analysis, status } = analysisResult);
+        ({ status } = analysisResult);
+        analysisStory = new ConnectedAdvertisersMinistory(facebookAccount);
+        analysisData = {
+            connectedAdvertisersCount: analysisStory.analysisData.length,
+        };
     });
 
     it("has success status", async () => {
@@ -85,11 +97,11 @@ describe("Connected advertisers analysis from account with connected advertisers
     });
 
     it("is active", async () => {
-        expectActiveAnalysis(analysis);
+        expectActiveAnalysis(analysisStory);
     });
 
     it("has correct count", async () => {
-        expect(analysis._connectedAdvertisersCount).toBe(
+        expect(analysisData.connectedAdvertisersCount).toBe(
             CONNECTED_ADVERTISERS_DATASET_V2_EXTENDED.numberOfConnectedAdvertisers
         );
     });

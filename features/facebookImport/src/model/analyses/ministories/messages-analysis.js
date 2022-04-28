@@ -1,24 +1,14 @@
-import React from "react";
-import i18n from "../../../i18n";
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
-
-import {
-    MessagesMiniStoryDetails,
-    MessagesMiniStorySummary,
-} from "../../../components/messagesMiniStory/messagesMiniStory.jsx";
+import analysisKeys from "../utils/analysisKeys";
 
 export default class MessagesAnalysis extends RootAnalysis {
     get label() {
         return RootAnalysis.Labels.NONE;
     }
 
-    get title() {
-        return i18n.t("explore:messages.title");
-    }
-
     async analyze({ dataAccount }) {
-        this._messagesCount = dataAccount.messagesCount;
-        this._messagesThreadsData = [];
+        let messagesCount = dataAccount.messagesCount;
+        let messagesThreadsData = [];
         const usernames = new Set();
 
         dataAccount.forEachMessageThread((messageThread) => {
@@ -46,7 +36,7 @@ export default class MessagesAnalysis extends RootAnalysis {
             const lastChatDate =
                 lastChatTimestamp !== 0 ? new Date(lastChatTimestamp) : null;
 
-            this._messagesThreadsData.push({
+            messagesThreadsData.push({
                 title: messageThread.title,
                 count: messageThread.messagesCount,
                 extraData: {
@@ -56,29 +46,14 @@ export default class MessagesAnalysis extends RootAnalysis {
             });
         });
 
-        this._messagesThreadsData.sort((a, b) => b.count - a.count);
-        this._totalUsernamesCount = usernames.size;
+        messagesThreadsData.sort((a, b) => b.count - a.count);
 
-        this.active = this._messagesThreadsData.length > 0;
-    }
-
-    renderSummary() {
-        return (
-            <MessagesMiniStorySummary
-                messagesCount={this._messagesCount}
-                messagesThreadsData={this._messagesThreadsData}
-                totalUsernamesCount={this._totalUsernamesCount}
-            />
-        );
-    }
-
-    renderDetails() {
-        return (
-            <MessagesMiniStoryDetails
-                messagesCount={this._messagesCount}
-                messagesThreadsData={this._messagesThreadsData}
-                totalUsernamesCount={this._totalUsernamesCount}
-            />
-        );
+        if (messagesThreadsData.length > 0) {
+            dataAccount.analyses[analysisKeys.messagesThreadsData] =
+                messagesThreadsData;
+            dataAccount.analyses[analysisKeys.messagesCount] = messagesCount;
+            dataAccount.analyses[analysisKeys.totalUsernamesCount] =
+                usernames.size;
+        }
     }
 }
