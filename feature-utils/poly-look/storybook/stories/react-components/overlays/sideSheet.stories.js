@@ -1,4 +1,5 @@
 import React from "react";
+import { withDesign } from "storybook-addon-designs";
 import { SideSheet } from "../../../../src/react-components";
 
 import "../../../../src/css/index.js";
@@ -21,6 +22,7 @@ eros. Donec luctus purus enim, sit amet sagittis leo vulputate at.`;
 export default {
   component: SideSheet,
   title: "Visuals/Molecules/SideSheet",
+  decorators: [withDesign],
   argTypes: {
     okLabel: { control: "text" },
     onOk: { action: "clicked" },
@@ -33,6 +35,12 @@ const Template = (args) => <SideSheet {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   okLabel: "button label",
+};
+Default.parameters = {
+  design: {
+    type: "figma",
+    url: "https://www.figma.com/file/qIrr4QJrmYGqVQHQoCECux/polyPod-design-system?node-id=3092%3A2882",
+  },
 };
 
 export const WithContent = Template.bind({});
