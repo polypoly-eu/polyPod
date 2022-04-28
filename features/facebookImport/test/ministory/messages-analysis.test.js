@@ -1,8 +1,4 @@
 import MessagesAnalysis from "../../src/model/analyses/ministories/messages-analysis";
-<<<<<<< HEAD
-import analysisKeys from "../../src/model/analyses/utils/analysisKeys";
-=======
->>>>>>> main
 import MessagesMinistory from "../../src/views/ministories/messages";
 import {
     DATASET_EXPECTED_VALUES,
