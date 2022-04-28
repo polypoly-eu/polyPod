@@ -1,3 +1,5 @@
+import UserActivity from "../entities/user-activity";
+
 const activityRegex = /\/My Activity\/.*\.html$/;
 
 class ActivityParser {
@@ -7,12 +9,18 @@ class ActivityParser {
         document.body.appendChild(this._iframe);
     }
 
-    _scrapeTimestamps(contentDocument) {
+    _scrapeTimestamps(contentDocument, productName) {
         const contentCells = contentDocument.querySelectorAll(
             ".mdl-grid>.mdl-cell>.mdl-grid>.content-cell:nth-child(2)"
         );
         return [...contentCells].map(
-            ({ childNodes }) => childNodes[childNodes.length - 1].textContent
+            ({ childNodes }) =>
+                new UserActivity({
+                    timestamp: new Date(
+                        childNodes[childNodes.length - 1].textContent
+                    ),
+                    productName: productName,
+                })
         );
     }
 
@@ -22,7 +30,10 @@ class ActivityParser {
         const { contentDocument } = this._iframe;
         contentDocument.write(text);
         contentDocument.close();
-        return this._scrapeTimestamps(contentDocument);
+
+        const pathParts = entry.path.split("/");
+        const productName = pathParts[pathParts.length - 2];
+        return this._scrapeTimestamps(contentDocument, productName);
     }
 
     release() {
@@ -32,10 +43,10 @@ class ActivityParser {
 }
 
 export default class ActivitiesImporter {
-    async import({ zipFile, googleAccount }) {
+    async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await zipFile.getEntries();
         const activityEntries = entries.filter(({ path }) =>
-            activityRegex.test(path)
+            activityRegex.test(path.replaceAll("%20", " "))
         );
 
         const parser = new ActivityParser();

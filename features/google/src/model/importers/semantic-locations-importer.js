@@ -2,7 +2,7 @@ import ActivitySegment from "../entities/activity-segment";
 import PlaceVisit from "../entities/place-visit";
 
 const semanticLocationsRegex =
-    /\/Location History\/Semantic Location History\/.*\.json$/;
+    /\/[^/]+\/Semantic Location History\/\d+\/[^.]+\.json$/;
 
 async function readFullPathJSONFile(entry) {
     const rawContent = await entry.getContent();
@@ -20,7 +20,9 @@ function extractTimestampFromDuration(duration) {
     if ("startTimestamp" in duration) return new Date(duration.startTimestamp);
     if ("startTimestampMs" in duration)
         return new Date(duration.startTimestampMs);
-    throw new Error("Unknown start date");
+    throw new Error(
+        "No start timestamp found in keys: " + Object.keys(duration).toString()
+    );
 }
 
 function createPlaceVisit(jsonData) {
@@ -65,7 +67,7 @@ async function parseTimelineObjectsByTypeFromEntry(fileEntry) {
 }
 
 export default class SemanticLocationsImporter {
-    async import({ zipFile, googleAccount }) {
+    async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await zipFile.getEntries();
         const semanticLocationEntries = entries.filter(({ path }) =>
             semanticLocationsRegex.test(path)

@@ -28,23 +28,13 @@ import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
 import ExploreView from "./views/explore/explore.jsx";
 import ExploreDetails from "./views/explore/details.jsx";
-import DataStructureInfoScreen from "./views/infoScreens/dataStructureInfoScreen/dataStructureInfoScreen.jsx";
-import ActivitiesInfoScreen from "./views/infoScreens/activitiesInfoScreen/activitiesInfoScreen.jsx";
-import MessagesInfoScreen from "./views/infoScreens/messagesInfoScreen/messagesInfoScreen.jsx";
-import PicturesInfoScreen from "./views/infoScreens/picturesInfoScreen/picturesInfoScreen.jsx";
-import PostReactionInfoScreen from "./views/infoScreens/postReactionInfoScreen/postReactionInfoScreen.jsx";
-import OnOffFacebookInfoScreen from "./views/infoScreens/onOffFacebookInfoScreen/onOffFacebookInfoScreen.jsx";
-import OffFacebookInfoScreen from "./views/infoScreens/onOffFacebookInfoScreen/offFacebookInfoScreen.jsx";
 import Loading from "./components/loading/loading.jsx";
 
 import "./styles.css";
-
-import manifestData from "./static/manifest.json";
 import ReportWrapper from "./views/report/reportWrapper.jsx";
-window.manifestData = manifestData;
 
 const FacebookImporter = () => {
-    const { pod, globalError, setGlobalError, isLoading } =
+    const { pod, globalError, setGlobalError, isLoading, popUp, closePopUp } =
         useContext(ImporterContext);
 
     const { files } = useContext(PolyImportContext);
@@ -87,29 +77,12 @@ const FacebookImporter = () => {
                         <ExploreDetails />
                     </Route>
                     <ReportWrapper />
-                    <Route exact path="/report/data-structure-info">
-                        <DataStructureInfoScreen />
-                    </Route>
-                    <Route exact path="/report/pictures-info">
-                        <PicturesInfoScreen />
-                    </Route>
-                    <Route exact path="/report/reaction-types-info">
-                        <PostReactionInfoScreen />
-                    </Route>
-                    <Route exact path="/report/details/activities-info">
-                        <ActivitiesInfoScreen />
-                    </Route>
-                    <Route exact path="/report/details/messages-info">
-                        <MessagesInfoScreen />
-                    </Route>
-                    <Route exact path="/report/details/on-off-facebook-info">
-                        <OnOffFacebookInfoScreen />
-                    </Route>
-                    <Route exact path="/report/details/off-facebook-info">
-                        <OffFacebookInfoScreen />
-                    </Route>
                 </Switch>
             )}
+            {popUp &&
+                popUp.component({
+                    onClose: closePopUp,
+                })}
             {globalError && (
                 <ErrorPopup
                     error={globalError}
