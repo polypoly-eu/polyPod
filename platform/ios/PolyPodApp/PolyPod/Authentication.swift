@@ -70,7 +70,7 @@ class Authentication {
         )
     }
     
-    private func isSetUp() -> Bool {
+    func isSetUp() -> Bool {
         return UserDefaults.standard.bool(forKey: Authentication.setUpKey)
     }
     
