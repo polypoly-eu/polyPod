@@ -1,7 +1,10 @@
 import { Telemetry } from "../../utils/performance-telemetry";
 import { Status, statusTypes } from "../../utils/status";
 import { ZipFile } from "../storage";
-import { AnalysisExecutionResult } from "@polypoly-eu/poly-analysis";
+import {
+    AnalysisExecutionResult,
+    genericAnalyses,
+} from "@polypoly-eu/poly-analysis";
 
 export default class DataAccount {
     constructor() {
@@ -29,8 +32,9 @@ export default class DataAccount {
 
     async analyzeZip({ zipData, zipFile, subAnalyses, pod }) {
         const enrichedData = { ...zipData, zipFile, dataAccount: this, pod };
+        const allAnalyses = [...genericAnalyses, ...subAnalyses];
         const analysesResults = await Promise.all(
-            subAnalyses.map(async (subAnalysisClass) => {
+            allAnalyses.map(async (subAnalysisClass) => {
                 return this.runAnalysis(subAnalysisClass, enrichedData);
             })
         );
@@ -39,7 +43,6 @@ export default class DataAccount {
 
     async runAnalysis(analysisClass, enrichedData) {
         const subAnalysis = new analysisClass();
-
         const telemetry = new Telemetry();
         let status;
         try {
