@@ -17,7 +17,7 @@ export const ReportCard = ({ report }) => {
 
 const ReportDetails = ({ reportStories }) => {
     function renderReportAnalyses() {
-        if (!reports) {
+        if (!reports || !reportStories?.active) {
             return (
                 <div className="report-card">
                     <h1>No Reports Found</h1>
@@ -26,10 +26,11 @@ const ReportDetails = ({ reportStories }) => {
         }
         return (
             <div>
-                {reportStories?.activeStories.map((report, index) => {
-                    if (report.active)
-                        return <ReportCard report={report} key={index} />;
-                })}
+                {reportStories?.active &&
+                    reportStories?.activeStories.map((report, index) => {
+                        if (report.active)
+                            return <ReportCard report={report} key={index} />;
+                    })}
             </div>
         );
     }

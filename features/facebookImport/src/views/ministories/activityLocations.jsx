@@ -11,6 +11,11 @@ class ActivityLocationsMinistory extends SingleDataStory {
     get title() {
         return "Session Activity Locations";
     }
+
+    get label() {
+        return SingleDataStory.LABELS.TECH_DEMO;
+    }
+
     renderSummary() {
         return (
             <BasicDataCountTable
