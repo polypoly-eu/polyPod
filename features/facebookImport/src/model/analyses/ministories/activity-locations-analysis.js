@@ -29,7 +29,6 @@ export default class SesssionActivityLocationsAnalysis extends RootAnalysis {
         }
 
         if (locationsData.length > 0)
-            dataAccount.processedData[analysisKeys.locationsData] =
-                locationsData;
+            dataAccount.analyses[analysisKeys.locationsData] = locationsData;
     }
 }

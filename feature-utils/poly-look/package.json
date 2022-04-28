@@ -12,7 +12,6 @@
     "test": "jest --coverage test/react-components/* && web-test-runner --coverage",
     "test:watch": "web-test-runner --watch",
     "build": "rollup -c rollup.config.js",
-    "watch": "rollup --watch -c",
     "build-downstream": "../../build.js --start @polypoly-eu/poly-look",
     "doc": "jsdoc -R README.md -r src -d ./docs"
   },

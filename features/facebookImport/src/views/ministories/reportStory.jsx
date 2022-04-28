@@ -3,7 +3,7 @@ import Story from "./story.jsx";
 class ReportStory extends Story {
     constructor(account) {
         super(account);
-        this._reports = account.processedData;
+        this._reports = account.reports;
         this._neededReports = [];
     }
 
@@ -25,7 +25,7 @@ class ReportStory extends Story {
     get active() {
         if (!this._neededReports) return true;
         for (const reportKey of this._neededReports) {
-            if (this.reports?.[reportKey] === null) return false;
+            if (this.reports?.[reportKey] === undefined) return false;
         }
         return true;
     }

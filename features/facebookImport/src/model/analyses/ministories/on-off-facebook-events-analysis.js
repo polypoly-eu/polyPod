@@ -21,13 +21,13 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
     }
 
     async analyze({ dataAccount }) {
-        dataAccount.processedData[analysisKeys.companiesCount] =
+        dataAccount.analyses[analysisKeys.companiesCount] =
             dataAccount.offFacebookCompaniesCount;
 
         const advertiserMatches =
             linkRelatedAccountsWithOffFacebookCompanies(dataAccount);
 
-        dataAccount.processedData[analysisKeys.companiesWithAdsCount] =
+        dataAccount.analyses[analysisKeys.companiesWithAdsCount] =
             advertiserMatches.reduce(
                 (total, consolidatedCompany) =>
                     total + consolidatedCompany.offFacebookCompaniesCount,
@@ -42,7 +42,7 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
                 consolidatedAdvertiser.last90DaysSummary(max)
         );
 
-        dataAccount.processedData[analysisKeys.commonAdvertisersData] =
+        dataAccount.analyses[analysisKeys.commonAdvertisersData] =
             commonAdvertisersData;
 
         const selectedCompanies = selectMeaningfulCompanies(
@@ -79,7 +79,7 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
         this._displayType = onOffEvents.displayType;
 
         if (Object.keys(onOffEvents.displayData).length > 0) {
-            dataAccount.processedData[analysisKeys.onOffEvents] = onOffEvents;
+            dataAccount.analyses[analysisKeys.onOffEvents] = onOffEvents;
         }
     }
 }

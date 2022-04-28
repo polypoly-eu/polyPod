@@ -1,13 +1,17 @@
-import { DataAccount } from "@polypoly-eu/poly-import";
 import i18n from "../../i18n.js";
-import FacebookProcessedData from "./facebook-processed-data.js";
 import MessageThreadsGroup from "./message-threads-group.js";
 import RelatedAccountsGroup from "./related-accounts-group.js";
 
-class FacebookAccount extends DataAccount {
+class FacebookAccount {
     constructor() {
-        super();
-        this._processedData = new FacebookProcessedData();
+        this._importingResults = [];
+        this._importedFileNames = [];
+
+        this._name = "";
+        this._preferredLanguage = [];
+        this._analyses = {};
+        this._reports = {};
+        this._analysesExecutionResults = [];
 
         this._offFacebookCompanies = [];
         this._adInterests = [];
@@ -28,6 +32,38 @@ class FacebookAccount extends DataAccount {
 
         this._messageThreadsGroup = new MessageThreadsGroup();
         this._relatedAccounts = new RelatedAccountsGroup();
+    }
+
+    get analyses() {
+        return this._analyses;
+    }
+
+    get reports() {
+        return this._reports;
+    }
+
+    get importedFileNames() {
+        return this._importedFileNames;
+    }
+
+    addImportedFileName(fileName) {
+        this._importedFileNames.push(fileName);
+    }
+
+    get importingResults() {
+        return this._importingResults;
+    }
+
+    set importingResults(importingResults) {
+        this._importingResults = importingResults;
+    }
+
+    get analysesExecutionResults() {
+        return this._analysesExecutionResults;
+    }
+
+    set analysesExecutionResults(analysesExecutionResults) {
+        this._analysesExecutionResults = analysesExecutionResults;
     }
 
     get offFacebookCompaniesCount() {
@@ -90,6 +126,22 @@ class FacebookAccount extends DataAccount {
     }
 
     // Basic accessors
+
+    get name() {
+        return this._name;
+    }
+
+    set name(name) {
+        this._name = name;
+    }
+
+    get preferredLanguage() {
+        return this._preferredLanguage;
+    }
+
+    set preferredLanguage(preferredLanguage) {
+        this._preferredLanguage = preferredLanguage;
+    }
 
     get offFacebookCompanies() {
         return this._offFacebookCompanies;
