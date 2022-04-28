@@ -72,7 +72,8 @@ private struct MainSection: View {
     @Binding var activeSection: Sections
     @State private var showVersion = false
     @State private var shareLogs = false
-    
+    @State private var isToggle = Authentication.shared.isSetUp()
+
     var body: some View {
         List() {
             Section(header: SettingsHeader("settings_about_section")) {
@@ -91,9 +92,32 @@ private struct MainSection: View {
                 EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             )
             
+
             Section(header: SettingsHeader("settings_sec_section")) {
                 SettingsToggleButton(
-                    label: "settings_auth"
+                    label: "settings_auth",
+                    isToggle: isToggle,
+                    onChange: { status in
+                        print("status is \(status)")
+
+                        if status {
+                            Authentication.shared.setUp { success in
+                                print("success is \(success)")
+
+                                if !success {
+                                    isToggle = false
+                                    print("setup auth failed")
+                                }
+                                print("set up auth")
+                                isToggle = true; // ?
+                            }
+                        } else {
+                            Authentication.shared.disable { _ in}
+                            print("Disabled auth")
+                            isToggle = false;  // ?
+                        }
+                        
+                    }
                 )
             }
             .listRowInsets(
@@ -169,48 +193,52 @@ private struct SettingsButton: View {
     }
 }
 
+typealias OnChange = ((Bool) -> Void)?
+
 private struct SettingsToggleButton: View {
     let label: LocalizedStringKey
-    @State private var isToggle : Bool = false
-
+    @State var isToggle : Bool;
+    
+    //let onChange: (Bool, Binding<Bool>) -> Void
+    
+    var onChange: OnChange
 
     var body: some View {
        VStack {
-           if #available(iOS 15.0, *) {
-                   Toggle(isOn: $isToggle){
-                       Text(label)
+           Toggle(isOn: $isToggle.onChange(toggleChange)) {
+                    Text(label)
                            .foregroundColor(Color.PolyPod.darkForeground)
                            .font(.custom("Jost-Regular", size: 14))
+                           .kerning(-0.18)
+
                        if isToggle {
                            Text("Granted")                       .foregroundColor(Color.PolyPod.darkForeground)
                                .font(.custom("Jost-Regular", size: 14))
-                           // .kerning(-0.18)
+                               .kerning(-0.18)
                        }
                        else {
                            Text("Not Granted")                       .foregroundColor(Color.PolyPod.darkForeground)
                                .font(.custom("Jost-Regular", size: 14))
-                           // .kerning(-0.18)
+                               .kerning(-0.18)
                        }
                    }
                    .padding(.trailing, 32)
-                   .onChange(of: isToggle) { value in
-                       print("in onChange value: \(value)")
-                   }
-                   .confirmationDialog(
-                    "Do you want to grant device authentication with PIN/biometrics?",
-                    isPresented: $isToggle,
-                    titleVisibility: .visible
-                   ) {
-                       Button("Yes", action: { })
-                       Button("No", role: .destructive, action:{ })
-
-                   }
-               } else {
-                   // Fallback on earlier versions
-               }
         }.padding(.leading, 32)
     }
     
+    func toggleChange(_ value: Bool) {
+        print("Toggle value: \(value)")
+        if let action = self.onChange {
+          action(value)
+        }
+    }
+    
+//    func onChanged(perform action: OnChange) -> Self {
+//      var copy = self
+//      copy.action = action
+//      return copy
+//    }
+        
 }
 
 
