@@ -8,6 +8,7 @@ import {
     relevantZipEntries,
 } from "./analysis/utils/analysis-util";
 import ReportStories from "./analysis/report/report-stories";
+import genericAnalyses from "./analysis/generic-analyses/generic-analyses";
 
 export {
     analyzeZip,
@@ -19,4 +20,5 @@ export {
     ReportStories,
     ReportAnalysis,
     MinistoriesStatusReport,
+    genericAnalyses,
 };
