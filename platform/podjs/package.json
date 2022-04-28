@@ -21,7 +21,8 @@
     "@zip.js/zip.js": "2.3.7",
     "fp-ts": "^2.8.2",
     "io-ts": "^2.2.16",
-    "rdf-js": "^4.0.2"
+    "rdf-js": "^4.0.2",
+    "rdf-string": "^1.6.0"
   },
   "devDependencies": {
     "@polypoly-eu/rdf-spec": "file:../feature-api/api/rdf-spec",

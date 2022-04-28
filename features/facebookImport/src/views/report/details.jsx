@@ -17,15 +17,20 @@ export const ReportCard = ({ report }) => {
 
 const ReportDetails = ({ reportStories }) => {
     function renderReportAnalyses() {
-        if (!reports) {
-            return "";
+        if (!reports || !reportStories?.active) {
+            return (
+                <div className="report-card">
+                    <h1>No Reports Found</h1>
+                </div>
+            );
         }
         return (
             <div>
-                {reportStories?.activeStories.map((report, index) => {
-                    if (report.active)
-                        return <ReportCard report={report} key={index} />;
-                })}
+                {reportStories?.active &&
+                    reportStories?.activeStories.map((report, index) => {
+                        if (report.active)
+                            return <ReportCard report={report} key={index} />;
+                    })}
             </div>
         );
     }

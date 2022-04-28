@@ -1,5 +1,8 @@
 import MessagesAnalysis from "../../src/model/analyses/ministories/messages-analysis";
+<<<<<<< HEAD
 import analysisKeys from "../../src/model/analyses/utils/analysisKeys";
+=======
+>>>>>>> main
 import MessagesMinistory from "../../src/views/ministories/messages";
 import {
     DATASET_EXPECTED_VALUES,
@@ -97,11 +100,10 @@ describe("Messages analysis for export with messages", () => {
 });
 
 function getAnalysisData(analysisStory) {
-    return {
-        messagesThreadsData:
-            analysisStory.analyses[analysisKeys.messagesThreadsData],
-        messagesCount: analysisStory.analyses[analysisKeys.messagesCount],
-        totalUsernamesCount:
-            analysisStory.analyses[analysisKeys.totalUsernamesCount],
-    };
+    const analysisData = {};
+    Object.entries(analysisStory.analyses).forEach(
+        ([key, value]) => (analysisData[key] = value)
+    );
+
+    return analysisData;
 }

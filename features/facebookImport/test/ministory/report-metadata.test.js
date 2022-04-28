@@ -121,11 +121,5 @@ function getReportNameFromAnalaysis(analysis) {
 
 function getReportData(analysisReport) {
     const analysisData = analysisReport.reports[analysisKeys.reportMetadata];
-    return {
-        fileSize: analysisData.fileSize,
-        filesCount: analysisData.filesCount,
-        preferedLanguage: analysisData.preferedLanguage,
-        polyPodRuntime: analysisData.polyPodRuntime,
-        polyPodVersion: analysisData.polyPodVersion,
-    };
+    return { ...analysisData };
 }

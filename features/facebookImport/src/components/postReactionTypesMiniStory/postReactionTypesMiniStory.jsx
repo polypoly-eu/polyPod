@@ -100,7 +100,7 @@ const PostReactionTypesMiniStory = ({ reactionData }) => {
                 }
             />
             <div className="reaction-types">
-                <InfoButton route="/report/reaction-types-info" />
+                <InfoButton infoScreen="reaction-types-info" />
                 <p className="source">
                     {i18n.t("common:source.your.facebook.data")}
                 </p>

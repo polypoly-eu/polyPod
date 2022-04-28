@@ -18,7 +18,7 @@ const ReportWrapper = () => {
     );
 
     const computedMinistories = ministories.map(
-        (MinistoryClass) => new MinistoryClass(account)
+        (ministoryClass) => new ministoryClass(account)
     );
 
     const activeReportStories = computedReportStoriesList.filter(

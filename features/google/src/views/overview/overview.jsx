@@ -1,44 +1,41 @@
 import React, { useContext } from "react";
-import { GoogleContext } from "../../context/google-context.jsx";
+import { PolyImportContext } from "@polypoly-eu/poly-look";
+import { useHistory } from "react-router-dom";
 
 const Overview = () => {
-    const { handleSelectFile, files, handleRemoveFile, googleAccount } =
-        useContext(GoogleContext);
+    const { account, handleRemoveFile, files, refreshFiles } =
+        useContext(PolyImportContext);
+    const history = useHistory();
 
-    const importFile = async () => {
-        if (files?.[0]?.id) handleRemoveFile(files[0].id);
-        await handleSelectFile();
-    };
+    function onRemoveFile() {
+        if (!files && files.length > 0) return;
+        handleRemoveFile(files[0]?.id);
+        refreshFiles();
+        history.push("/import");
+    }
 
     return (
-        <div className="overview poly-theme-light">
-            <button className="btn secondary" onClick={() => importFile()}>
-                Import File
-            </button>
+        <div className="overview">
+            Explore
             <div>
                 <h1>Activities</h1>
-                {googleAccount?.activities.map((activity, i) => (
-                    <div key={i}>{activity}</div>
+                {account?.activities.map((activity, i) => (
+                    <div key={i}>{activity.timestamp.toUTCString()}</div>
                 ))}
             </div>
             <div>
                 <h1>Place Visits</h1>
-                {googleAccount?.placeVisits.map((placeVisit, i) => (
+                {account?.placeVisits.map((placeVisit, i) => (
                     <div key={i}>{placeVisit.timestamp.toUTCString()}</div>
                 ))}
             </div>
             <div>
                 <h1>Activity segments</h1>
-                {googleAccount?.activitySegments.map((activitySegment, i) => (
+                {account?.activitySegments.map((activitySegment, i) => (
                     <div key={i}>{activitySegment.timestamp.toUTCString()}</div>
                 ))}
             </div>
-            <div>
-                <h1>Path names</h1>
-                {googleAccount?.pathNames.map((entry, i) => (
-                    <div key={i}>{entry.path}</div>
-                )) || null}
-            </div>
+            <button onClick={onRemoveFile}>Remove file</button>
         </div>
     );
 };

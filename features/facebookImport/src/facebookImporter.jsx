@@ -26,6 +26,7 @@ import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
 import ExploreView from "./views/explore/explore.jsx";
 import ExploreDetails from "./views/explore/details.jsx";
+<<<<<<< HEAD
 import DataStructureInfoScreen from "./views/infoScreens/dataStructureInfoScreen/dataStructureInfoScreen.jsx";
 import ActivitiesInfoScreen from "./views/infoScreens/activitiesInfoScreen/activitiesInfoScreen.jsx";
 import MessagesInfoScreen from "./views/infoScreens/messagesInfoScreen/messagesInfoScreen.jsx";
@@ -40,9 +41,15 @@ import "./styles.css";
 import manifestData from "./static/manifest.json";
 import ReportWrapper from "./views/report/reportWrapper.jsx";
 window.manifestData = manifestData;
+=======
+import Loading from "./components/loading/loading.jsx";
+
+import "./styles.css";
+import ReportWrapper from "./views/report/reportWrapper.jsx";
+>>>>>>> main
 
 const FacebookImporter = () => {
-    const { pod, globalError, setGlobalError, isLoading } =
+    const { pod, globalError, setGlobalError, isLoading, popUp, closePopUp } =
         useContext(ImporterContext);
 
     const { files } = useContext(PolyImportContext);
@@ -85,6 +92,7 @@ const FacebookImporter = () => {
                         <ExploreDetails />
                     </Route>
                     <ReportWrapper />
+<<<<<<< HEAD
                     <Route exact path="/report/data-structure-info">
                         <DataStructureInfoScreen />
                     </Route>
@@ -106,8 +114,14 @@ const FacebookImporter = () => {
                     <Route exact path="/report/details/off-facebook-info">
                         <OffFacebookInfoScreen />
                     </Route>
+=======
+>>>>>>> main
                 </Switch>
             )}
+            {popUp &&
+                popUp.component({
+                    onClose: closePopUp,
+                })}
             {globalError && (
                 <ErrorPopup
                     error={globalError}

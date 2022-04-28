@@ -35,8 +35,13 @@ const UnrecognizedCard = () => {
 
 const ExploreView = () => {
     const { reportResult, setReportResult } = useContext(ImporterContext);
+<<<<<<< HEAD
     const { account } = useContext(PolyImportContext);
 
+=======
+
+    const { account } = useContext(PolyImportContext);
+>>>>>>> main
     const history = useHistory();
     const exploreRef = useRef();
 
