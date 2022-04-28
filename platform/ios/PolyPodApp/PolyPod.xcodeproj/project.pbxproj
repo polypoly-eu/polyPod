@@ -90,6 +90,8 @@
 		1AF468DE24361D9D00E51B6D /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */; };
 		3B3CEDFA274FC37C000C3E6E /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989B350269CA6B7000EE977 /* FilePicker.swift */; };
 		3B5487E227CD0FF700480CB5 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5487E127CD0FF700480CB5 /* Endpoint.swift */; };
+		5105EA05281ACEEC0040AE0D /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */; };
+		5105EA07281AFDBB0040AE0D /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */; };
 		5B8653022643FC310014208C /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
 		901C0588278EE58700BC8364 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0587278EE58700BC8364 /* CoreDataStack.swift */; };
 		901C058A278F2AF800BC8364 /* CoreData+PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */; };
