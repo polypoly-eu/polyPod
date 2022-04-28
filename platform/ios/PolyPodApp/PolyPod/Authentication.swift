@@ -43,6 +43,15 @@ class Authentication {
         }
     }
     
+    func disable(_ completeAction: @escaping (Bool) -> Void) {
+        authenticateLocally(reason: "auth_prompt_disable") { success in
+            self.authenticated = false
+            UserDefaults.standard.set(false, forKey: Authentication.setUpKey)
+            completeAction(success)
+        }
+    }
+
+    
     func authenticate(_ completeAction: @escaping (Bool) -> Void) {
         if isCheckDisabled() || !isSetUp() || authenticated {
             completeAction(true)
