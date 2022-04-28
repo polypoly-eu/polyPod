@@ -23,7 +23,6 @@ export default class FacebookProcessedData extends ProcessedData {
         this._connectedAdvertiserNames = null;
         this._postReactionsTypes = null;
         this._eventsTypeCountPairs = null;
-        this._bubblesData = null;
         this._sortedAdInterests = null;
 
         const attributes = [

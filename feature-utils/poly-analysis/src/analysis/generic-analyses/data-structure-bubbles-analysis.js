@@ -1,5 +1,4 @@
-import { RootAnalysis } from "@polypoly-eu/poly-analysis";
-import analysisKeys from "../../analyses/utils/analysisKeys";
+import RootAnalysis from "../root-analysis";
 
 export default class DataStructureBubblesAnalysis extends RootAnalysis {
     async analyze({ dataAccount }) {
@@ -8,7 +7,7 @@ export default class DataStructureBubblesAnalysis extends RootAnalysis {
         );
 
         if (bubblesData.length > 0) {
-            dataAccount.processedData[analysisKeys.bubblesData] = bubblesData;
+            dataAccount.processedData.bubblesData = bubblesData;
         }
     }
 }
