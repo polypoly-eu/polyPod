@@ -11,7 +11,10 @@ import "./base.css";
  */
 const BaseOverlay = ({ children, className, centered }) => {
   return (
-    <div className={`base-overlay ${centered && "centered"} ${className}`}>
+    <div
+      className={`base-overlay ${centered ? "centered" : ""} ${className}`}
+      data-testid="base-overlay-test"
+    >
       {children}
     </div>
   );

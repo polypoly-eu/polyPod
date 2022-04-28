@@ -1,14 +1,14 @@
-.loading {
+.loading-overlay {
   background-color: var(--theme-primary-color);
 }
 
-.loading p {
+.loading-overlay p {
   font-family: "Jost Medium";
   margin-bottom: 0;
   margin-top: 0;
 }
 
-.loading img {
+.loading-overlay img {
   margin-bottom: 16px;
   width: 32px;
   height: 32px;

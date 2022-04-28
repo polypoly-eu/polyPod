@@ -10,9 +10,9 @@ import "./loading.css";
  * @returns jsx
  */
 const LoadingOverlay = ({ message, loadingGif }) => (
-  <BaseOverlay className="loading" centered={true}>
-    <img src={loadingGif} />
-    <p>{message}</p>
+  <BaseOverlay className="loading-overlay" centered={true}>
+    <img src={loadingGif} data-testid="img-test" />
+    <p data-testid="message-test">{message}</p>
   </BaseOverlay>
 );
 
