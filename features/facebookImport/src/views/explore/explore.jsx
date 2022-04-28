@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import RouteButton from "../../components/buttons/routeButton.jsx";
-import Loading from "../../components/loading/loading.jsx";
+import { LoadingOverlay } from "@polypoly-eu/poly-look";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import { List, RoutingCard, Card } from "@polypoly-eu/poly-look";
 import { PolyAnalysisContext } from "@polypoly-eu/poly-look";
@@ -72,7 +72,7 @@ const ExploreView = () => {
     const renderFileAnalyses = () => {
         if (!fileAnalysis)
             return (
-                <Loading
+                <LoadingOverlay
                     loadingGif="./images/loading.gif"
                     message={i18n.t("explore:loading")}
                 />
