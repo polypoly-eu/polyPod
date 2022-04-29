@@ -1,6 +1,7 @@
 import UnknownTopLevelFoldersAnalysis from "../../src/model/analyses/report/unknown-top-level-folders-analysis";
 import { INTERACTED_WITH_ADVERTISERS_FILE_PATH } from "../../src/model/importers/interacted-with-advertisers-importer";
 import { OFF_FACEBOOK_EVENTS_FILE_PATH } from "../../src/model/importers/off-facebook-events-importer";
+import UnknownTopLevelFoldersReport from "../../src/views/ministories/unknownTopLevelFolders";
 import { createInteractedWithAdvertisersDataset } from "../datasets/interacted-with-advertisers-data";
 import { createOffFacebookEventsSimpleData } from "../datasets/off-facebook-events-data";
 import { runAnalysisForExport } from "../utils/analyses-execution";
@@ -11,7 +12,7 @@ import {
 import { createMockedZip } from "../utils/data-creation";
 
 describe("Unknown top level folders analysis", () => {
-    let analysis = null;
+    let analysisReport = null;
     let status = null;
     let jsonReport = null;
 
@@ -29,12 +30,13 @@ describe("Unknown top level folders analysis", () => {
         zipFile.addJsonEntry("unknown_folder/unknown_file.json", '""');
         zipFile.addJsonEntry("another_unknown_folder/file.json", '""');
         zipFile.addTextEntry("unknown_folder_with_text/some_file.txt", '""');
-        const { analysisResult } = await runAnalysisForExport(
+        const { analysisResult, facebookAccount } = await runAnalysisForExport(
             UnknownTopLevelFoldersAnalysis,
             zipFile
         );
-        ({ analysis, status } = analysisResult);
-        jsonReport = analysis.jsonReport;
+        ({ status } = analysisResult);
+        analysisReport = new UnknownTopLevelFoldersReport(facebookAccount);
+        jsonReport = analysisReport.jsonReport;
     });
 
     it("has success status", async () => {
@@ -42,11 +44,13 @@ describe("Unknown top level folders analysis", () => {
     });
 
     it("is active", async () => {
-        expectActiveAnalysis(analysis);
+        expectActiveAnalysis(analysisReport);
     });
 
     it("has id in JSON report", async () => {
-        expect(jsonReport.id).toBe(UnknownTopLevelFoldersAnalysis.name);
+        expect(jsonReport.id).toBe(
+            getReportNameFromAnalaysis(UnknownTopLevelFoldersAnalysis)
+        );
     });
 
     it("has correct unknown folders in JSON report", async () => {
@@ -57,3 +61,7 @@ describe("Unknown top level folders analysis", () => {
         ]);
     });
 });
+
+function getReportNameFromAnalaysis(analysis) {
+    return analysis.name.replace("Analysis", "Report");
+}

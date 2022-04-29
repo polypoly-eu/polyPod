@@ -4,62 +4,6 @@ import {
     Status,
     statusTypes,
 } from "@polypoly-eu/poly-import";
-import InactiveCardsSummary from "./analysis/report/inactive-cards-summary.js";
-
-import MinistoriesStatusAnalysis from "./analysis/report/ministories-status-analysis.js";
-
-export class UnrecognizedData {
-    constructor(analysesResults) {
-        this._activeReportAnalyses = analysesResults
-            .filter(
-                ({ analysis, status }) =>
-                    status.isSuccess &&
-                    analysis.isForDataReport &&
-                    analysis.active
-            )
-            .map(({ analysis }) => analysis);
-
-        const inactiveCardsSummary = new InactiveCardsSummary(analysesResults);
-        if (inactiveCardsSummary.active) {
-            this._activeReportAnalyses.push(inactiveCardsSummary);
-        }
-
-        const statusAnalysis = new MinistoriesStatusAnalysis(analysesResults);
-        if (statusAnalysis.active) {
-            this._activeReportAnalyses.push(statusAnalysis);
-        }
-
-        this.active = this._activeReportAnalyses.length > 0;
-    }
-
-    get reportAnalyses() {
-        return this._activeReportAnalyses;
-    }
-
-    get report() {
-        if (!this.active) {
-            return "No data to report!";
-        }
-        return (
-            this.reportAnalyses.length +
-            " " +
-            (this.reportAnalyses.length > 0 ? "analyses" : "analysis") +
-            "  included in the report"
-        );
-    }
-
-    get jsonReport() {
-        if (!this.active) {
-            return {};
-        }
-
-        const reportAnalyses = this.reportAnalyses.map(
-            (analysis) => analysis.jsonReport
-        );
-
-        return { reportAnalyses_v1: reportAnalyses };
-    }
-}
 
 class AnalysisExecutionResult {
     constructor(analysis, status, executionTime) {
@@ -83,7 +27,6 @@ class AnalysisExecutionResult {
     get reportJsonData() {
         return {
             analysisName: this.analysis.id,
-            activationStatus: this.analysis.active ? "ACTIVE" : "INACTIVE",
             executionStatus: {
                 name: this.status.name,
                 message: this.status.message,
@@ -98,20 +41,17 @@ export async function runAnalysis(analysisClass, enrichedData) {
     const subAnalysis = new analysisClass();
 
     const telemetry = new Telemetry();
+    let status;
     try {
-        const status = await subAnalysis.analyze(enrichedData);
-        return new AnalysisExecutionResult(
-            subAnalysis,
-            status,
-            telemetry.elapsedTime()
-        );
+        status = await subAnalysis.analyze(enrichedData);
     } catch (error) {
-        return new AnalysisExecutionResult(
-            subAnalysis,
-            new Status({ name: statusTypes.error, message: error }),
-            telemetry.elapsedTime()
-        );
+        status = new Status({ name: statusTypes.error, message: error });
     }
+    return new AnalysisExecutionResult(
+        subAnalysis,
+        status,
+        telemetry.elapsedTime()
+    );
 }
 
 export async function analyzeZip({
@@ -127,18 +67,7 @@ export async function analyzeZip({
             return runAnalysis(subAnalysisClass, enrichedData);
         })
     );
-
-    const successfullyExecutedAnalyses = analysesResults
-        .filter(({ status }) => status.isSuccess)
-        .map(({ analysis }) => analysis);
-    const activeGlobalAnalyses = successfullyExecutedAnalyses.filter(
-        (analysis) => !analysis.isForDataReport && analysis.active
-    );
-
-    return {
-        analyses: activeGlobalAnalyses,
-        unrecognizedData: new UnrecognizedData(analysesResults),
-    };
+    dataAccount.analysesExecutionResults = analysesResults;
 }
 
 export async function analyzeFile({ zipData, dataAccount, subAnalyses }) {

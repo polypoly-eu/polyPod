@@ -1,20 +1,18 @@
 import React from "react";
-import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
+import analysisKeys from "../../model/analyses/utils/analysisKeys";
+import ReportStory from "./reportStory.jsx";
 
-export default class DataImportingStatusAnalysis extends ReportAnalysis {
+class DataImportingStatusReport extends ReportStory {
+    constructor(props) {
+        super(props);
+        this._neededAnalyses = [analysisKeys.importersData];
+    }
     get title() {
         return "Importing status";
     }
 
     get reportData() {
-        return this._importersData;
-    }
-
-    async analyze({ dataAccount }) {
-        this._importersData = dataAccount.importingResults.map(
-            (importerResult) => importerResult.reportJsonData
-        );
-        this.active = this._importersData.length > 0;
+        return this.reports[analysisKeys.importersData];
     }
 
     _renderStatus(status) {
@@ -33,8 +31,8 @@ export default class DataImportingStatusAnalysis extends ReportAnalysis {
         return (
             <>
                 <p>
-                    Data was read using {this._importersData.length} importers.
-                    This view shows the list of importers that read data.
+                    Data was read using {this.reportData.length} importers. This
+                    view shows the list of importers that read data.
                 </p>
                 <table>
                     <thead>
@@ -45,7 +43,7 @@ export default class DataImportingStatusAnalysis extends ReportAnalysis {
                         </tr>
                     </thead>
                     <tbody>
-                        {this._importersData.map(
+                        {this.reportData.map(
                             (
                                 { importerName, executionTime, status },
                                 index
@@ -65,3 +63,5 @@ export default class DataImportingStatusAnalysis extends ReportAnalysis {
         );
     }
 }
+
+export default DataImportingStatusReport;

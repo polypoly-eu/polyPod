@@ -67,7 +67,7 @@ async function parseTimelineObjectsByTypeFromEntry(fileEntry) {
 }
 
 export default class SemanticLocationsImporter {
-    async import({ zipFile, googleAccount }) {
+    async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await zipFile.getEntries();
         const semanticLocationEntries = entries.filter(({ path }) =>
             semanticLocationsRegex.test(path)
