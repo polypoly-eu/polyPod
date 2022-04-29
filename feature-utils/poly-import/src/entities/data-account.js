@@ -62,38 +62,38 @@ export default class DataAccount {
 
     async analyzeFile({ zipData, subAnalyses }) {
         const zipFile = await ZipFile.createWithCache(zipData, window.pod);
-        return await analyzeZip({
+        return await this.analyzeZip({
             zipData,
             zipFile,
             subAnalyses,
             pod: window.pod,
         });
     }
-}
 
-async function runAnalysis(analysisClass, enrichedData) {
-    const subAnalysis = new analysisClass();
-
-    const telemetry = new Telemetry();
-    let status;
-    try {
-        status = await subAnalysis.analyze(enrichedData);
-    } catch (error) {
-        status = new Status({ name: statusTypes.error, message: error });
+    async analyzeZip({ zipData, zipFile, subAnalyses, pod }) {
+        const enrichedData = { ...zipData, zipFile, dataAccount: this, pod };
+        const analysesResults = await Promise.all(
+            subAnalyses.map(async (subAnalysisClass) => {
+                return this.runAnalysis(subAnalysisClass, enrichedData);
+            })
+        );
+        this.analysesExecutionResults = analysesResults;
     }
-    return new AnalysisExecutionResult(
-        subAnalysis,
-        status,
-        telemetry.elapsedTime()
-    );
-}
 
-async function analyzeZip({ zipData, zipFile, subAnalyses, pod }) {
-    const enrichedData = { ...zipData, zipFile, dataAccount: this, pod };
-    const analysesResults = await Promise.all(
-        subAnalyses.map(async (subAnalysisClass) => {
-            return runAnalysis(subAnalysisClass, enrichedData);
-        })
-    );
-    this.analysesExecutionResults = analysesResults;
+    async runAnalysis(analysisClass, enrichedData) {
+        const subAnalysis = new analysisClass();
+
+        const telemetry = new Telemetry();
+        let status;
+        try {
+            status = await subAnalysis.analyze(enrichedData);
+        } catch (error) {
+            status = new Status({ name: statusTypes.error, message: error });
+        }
+        return new AnalysisExecutionResult(
+            subAnalysis,
+            status,
+            telemetry.elapsedTime()
+        );
+    }
 }
