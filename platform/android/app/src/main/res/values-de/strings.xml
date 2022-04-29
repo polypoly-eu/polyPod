@@ -20,6 +20,9 @@
     <string name="onboarding_slide4_body_text">Wir möchten gerne sicherstellen, dass Ihre Daten im polyPod vor fremden Zugriff sicher sind. Dafür bitten wir Sie jetzt, die Gerätesperre auch für den polyPod einzuschalten.</string>
     <string name="settings_title">Einstellungen</string>
     <string name="settings_about_section">Info</string>
+    <string name="settings_sec_section">SecurityXXX</string>
+    <string name="settings_auth">AuthenticationXXX</string>
+
     <string name="settings_version">Version</string>
     <string name="settings_legal_section">Rechtliches</string>
     <string name="settings_imprint_title">Impressum</string>

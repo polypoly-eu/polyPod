@@ -20,6 +20,8 @@
     <string name="onboarding_slide4_body_text">We would like to ensure any data you put into polyPod is as secure as possible. For this we would like to ask you to enable some way of authentication for future access.</string>
     <string name="settings_title">Settings</string>
     <string name="settings_about_section">Info</string>
+    <string name="settings_sec_section">Security</string>
+    <string name="settings_auth">Authentication</string>
     <string name="settings_version">Version</string>
     <string name="settings_legal_section">Legal</string>
     <string name="settings_imprint_title">Imprint</string>
