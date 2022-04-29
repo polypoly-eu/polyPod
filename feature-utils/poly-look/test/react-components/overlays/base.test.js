@@ -16,8 +16,7 @@ const centeredTestComponent = (
 );
 
 it("renders correctly", () => {
-  const { container, getByTestId } = render(testComponent);
-  expect(container).toBeTruthy();
+  const { getByTestId } = render(testComponent);
   const baseOverlay = getByTestId("base-overlay-test");
   expect(baseOverlay.className).toContain("base-overlay");
   expect(baseOverlay.className).toContain(testClassName);
