@@ -6,8 +6,7 @@ import ErrorPopup from "./popUps/errorPopup/errorPopup.jsx";
 import { Card, ClickableCard, RoutingCard } from "./cards";
 import List from "./list.jsx";
 import { PolyButton, IconButton } from "./buttons";
-import { SideSheet, SideSwiper } from "./overlays";
-import LoadingOverlay from "./overlays/loading.jsx";
+import { SideSheet, SideSwiper, LoadingOverlay } from "./overlays";
 import {
   PolyImportContext,
   PolyImportProvider,
