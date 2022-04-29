@@ -8,7 +8,11 @@ class ReportStory extends Story {
     }
 
     get reports() {
-        return this._reports;
+        const reportData = {};
+        this._neededReports.forEach((reportKey) => {
+            reportData[reportKey] = this._reports.getData(reportKey);
+        });
+        return reportData;
     }
 
     get jsonReport() {

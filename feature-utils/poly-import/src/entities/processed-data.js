@@ -1,6 +1,5 @@
 export default class ProcessedData {
     constructor() {
-        let self = this;
         this._importersData = null;
         this._unknownFolderNames = null;
 
@@ -8,24 +7,8 @@ export default class ProcessedData {
         this._missingCommonFileNames = null;
 
         this._reportMetadata = null;
-
-        const attributes = [
-            "importersData",
-            "unknownFolderNames",
-            "missingKnownFileNames",
-            "missingCommonFileNames",
-            "reportMetadata",
-        ];
-        //setters & getters
-        attributes.forEach(function (attribute) {
-            Object.defineProperty(self, attribute, {
-                get: function () {
-                    return self["_" + attribute];
-                },
-                set: function (value) {
-                    self["_" + attribute] = value;
-                },
-            });
-        });
+    }
+    getData(key) {
+        return this["_" + key];
     }
 }

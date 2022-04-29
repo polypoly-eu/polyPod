@@ -3,7 +3,6 @@ import { ProcessedData } from "@polypoly-eu/poly-import";
 export default class FacebookProcessedData extends ProcessedData {
     constructor() {
         super();
-        let self = this;
         this._picturesCount = null;
         this._totalEvents = null;
         this._locationsData = null;
@@ -25,41 +24,5 @@ export default class FacebookProcessedData extends ProcessedData {
         this._postReactionsTypes = null;
         this._eventsTypeCountPairs = null;
         this._bubblesData = null;
-
-        const attributes = [
-            "picturesCount",
-            "totalEvents",
-            "locationsData",
-            "randomAdInterests",
-            "numberInterests",
-            "displayData",
-            "reactionsTypeCountPairs",
-            "messagesThreadsData",
-            "totalUsernamesCount",
-            "messagesCount",
-            "offFacebookEventTypes",
-            "onOffEvents",
-            "companiesCount",
-            "companiesWithAdsCount",
-            "commonAdvertisersData",
-            "connectedAdvertisersCount",
-            "connectedAdvertiserNames",
-            "postReactionsTypes",
-            "eventsTypeCountPairs",
-            "bubblesData",
-            "sortedAdInterests",
-        ];
-
-        //setters & getters
-        attributes.forEach(function (attribute) {
-            Object.defineProperty(self, attribute, {
-                get: function () {
-                    return self["_" + attribute];
-                },
-                set: function (value) {
-                    self["_" + attribute] = value;
-                },
-            });
-        });
     }
 }

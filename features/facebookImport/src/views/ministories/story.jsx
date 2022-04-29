@@ -12,7 +12,11 @@ class Story extends Component {
     }
 
     get analyses() {
-        return this._analyses;
+        const analysisData = {};
+        this._neededAnalyses.forEach((reportKey) => {
+            analysisData[reportKey] = this._analyses.getData(reportKey);
+        });
+        return analysisData;
     }
 
     get active() {
