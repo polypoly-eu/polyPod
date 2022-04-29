@@ -65,7 +65,7 @@ jobs:
         run: ./build.js
       - name: Android - Build core
         working-directory: platform/core
-        run: make android_libraries MODE=release
+        run: make android_bindings MODE=release
       - name: Android - Test
         working-directory: platform/android
         run: ./gradlew test
