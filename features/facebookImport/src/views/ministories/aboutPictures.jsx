@@ -14,7 +14,7 @@ class AboutPicturesMinistory extends SingleDataStory {
         return i18n.t("picturesMiniStory:title");
     }
 
-    renderSummary() {
+    _renderSummary() {
         return <PicturesMiniStory />;
     }
 }

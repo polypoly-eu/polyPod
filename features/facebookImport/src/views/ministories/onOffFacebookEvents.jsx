@@ -20,7 +20,8 @@ class OnOffFacebookEventsMinistory extends Story {
     get title() {
         return i18n.t("offFacebookEventsMiniStory:off.events.title");
     }
-    renderSummary() {
+
+    _renderSummary() {
         return (
             <OnOffFacebookMiniStorySummary
                 companiesCount={this.analyses[analysisKeys.companiesCount]}
