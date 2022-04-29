@@ -1,5 +1,5 @@
 import { PolyChart, PolyImportContext } from "@polypoly-eu/poly-look";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
@@ -7,6 +7,8 @@ import { LoadingOverlay } from "@polypoly-eu/poly-look";
 import i18n from "../../i18n.js";
 import { useHistory } from "react-router";
 import { formatTime } from "../../utils/formatTime.js";
+import { analyzeFile } from "@polypoly-eu/poly-analysis";
+import { subAnalyses } from "../../model/analysis";
 
 import "./overview.css";
 
@@ -15,6 +17,15 @@ const Overview = () => {
 
     const [showNewImportDialog, setShowNewImportDialog] = useState(false);
     const history = useHistory();
+
+    useEffect(() => {
+        if (!account) return;
+        analyzeFile({
+            zipData: files[0],
+            dataAccount: account,
+            subAnalyses,
+        });
+    }, [account]);
 
     if (account === null || files === null)
         return (
@@ -50,6 +61,7 @@ const Overview = () => {
         const i = Math.floor(Math.log(size) / Math.log(k));
         return Math.round(size / Math.pow(k, i), decimals) + " " + units[i - 1];
     };
+
     return (
         <div className="overview">
             {Object.values(files).length ? (

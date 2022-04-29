@@ -14,13 +14,11 @@ import {
 } from "./context/importer-context.jsx";
 import {
     INITIAL_HISTORY_STATE,
-    PolyAnalysisProvider,
     PolyImportContext,
     PolyImportProvider,
     ErrorPopup,
     LoadingOverlay,
 } from "@polypoly-eu/poly-look";
-import { subAnalyses } from "./model/analysis";
 import { dataImporters } from "./model/importer.js";
 import FacebookAccount from "./model/entities/facebook-account.js";
 import i18n from "./i18n.js";
@@ -118,13 +116,8 @@ const FacebookImporterApp = () => {
                     dataImporters={dataImporters}
                     DataAccount={FacebookAccount}
                 >
-                    <PolyAnalysisProvider
-                        parentContext={PolyImportContext}
-                        subAnalyses={subAnalyses}
-                    >
-                        <div className="poly-nav-bar-separator-overlay" />
-                        <FacebookImporter />
-                    </PolyAnalysisProvider>
+                    <div className="poly-nav-bar-separator-overlay" />
+                    <FacebookImporter />
                 </PolyImportProvider>
             </ImporterProvider>
         </Router>
