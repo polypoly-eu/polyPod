@@ -47,9 +47,10 @@ export default class MessagesAnalysis extends RootAnalysis {
 
         messagesThreadsData.sort((a, b) => b.count - a.count);
         if (messagesThreadsData.length > 0) {
-            dataAccount.processedData.messagesThreadsData = messagesThreadsData;
-            dataAccount.processedData.messagesCount = messagesCount;
-            dataAccount.processedData.totalUsernamesCount = usernames.size;
+            dataAccount.processedData._messagesThreadsData =
+                messagesThreadsData;
+            dataAccount.processedData._messagesCount = messagesCount;
+            dataAccount.processedData._totalUsernamesCount = usernames.size;
         }
     }
 }

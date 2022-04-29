@@ -1,5 +1,4 @@
 import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
-import analysisKeys from "../utils/analysisKeys.js";
 
 export default class OffFacebookEventTypesAnalysis extends ReportAnalysis {
     get reportData() {
@@ -14,7 +13,7 @@ export default class OffFacebookEventTypesAnalysis extends ReportAnalysis {
             }
         });
         if (offFacebookEventTypes.length > 0)
-            dataAccount.processedData[analysisKeys.offFacebookEventTypes] = [
+            dataAccount.processedData._offFacebookEventTypes = [
                 ...offFacebookEventTypes,
             ];
     }

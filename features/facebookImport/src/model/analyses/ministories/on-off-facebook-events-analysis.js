@@ -8,7 +8,6 @@ import {
 import { groupOffFacebookEventsByType } from "../utils/on-off-facebook-events-utils.js";
 
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
-import analysisKeys from "../utils/analysisKeys";
 
 const detailDisplayTypes = {
     onOff: "on-off",
@@ -21,13 +20,13 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
     }
 
     async analyze({ dataAccount }) {
-        dataAccount.processedData[analysisKeys.companiesCount] =
+        dataAccount.processedData._companiesCount =
             dataAccount.offFacebookCompaniesCount;
 
         const advertiserMatches =
             linkRelatedAccountsWithOffFacebookCompanies(dataAccount);
 
-        dataAccount.processedData[analysisKeys.companiesWithAdsCount] =
+        dataAccount.processedData._companiesWithAdsCount =
             advertiserMatches.reduce(
                 (total, consolidatedCompany) =>
                     total + consolidatedCompany.offFacebookCompaniesCount,
@@ -42,7 +41,7 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
                 consolidatedAdvertiser.last90DaysSummary(max)
         );
 
-        dataAccount.processedData[analysisKeys.commonAdvertisersData] =
+        dataAccount.processedData._commonAdvertisersData =
             commonAdvertisersData;
 
         const selectedCompanies = selectMeaningfulCompanies(
@@ -79,7 +78,7 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
         this._displayType = onOffEvents.displayType;
 
         if (Object.keys(onOffEvents.displayData).length > 0) {
-            dataAccount.processedData[analysisKeys.onOffEvents] = onOffEvents;
+            dataAccount.processedData._onOffEvents = onOffEvents;
         }
     }
 }

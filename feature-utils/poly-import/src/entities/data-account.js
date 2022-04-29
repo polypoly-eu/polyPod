@@ -86,7 +86,10 @@ export default class DataAccount {
         const telemetry = new Telemetry();
         let status;
         try {
-            status = await subAnalysis.analyze(enrichedData);
+            status = await subAnalysis.analyze({
+                enrichedData,
+                dataAccount: this,
+            });
         } catch (error) {
             status = new Status({ name: statusTypes.error, message: error });
         }

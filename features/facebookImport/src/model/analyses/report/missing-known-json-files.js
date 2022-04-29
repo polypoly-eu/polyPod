@@ -1,7 +1,6 @@
 import { anonymizeJsonEntityPath } from "../../importers/utils/importer-util.js";
 import allStructure from "../../../static/allStructure";
 import { ReportAnalysis, jsonDataEntities } from "@polypoly-eu/poly-analysis";
-import analysisKeys from "../utils/analysisKeys";
 
 export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
     _knownJsonFiles() {
@@ -28,7 +27,7 @@ export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
         );
         const knownJsonFiles = this._knownJsonFiles();
 
-        dataAccount.processedData[analysisKeys.missingKnownFileNames] =
+        dataAccount.processedData._missingKnownFileNames =
             knownJsonFiles.filter((each) => !anonymizedPaths.includes(each));
     }
 }
