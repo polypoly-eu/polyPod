@@ -6,6 +6,7 @@ import org.json.JSONObject
 
 class Preferences {
     companion object {
+        private const val authenticationKey = "authenticationKey"
         private const val firstRunKey = "firstRun"
         private const val lastNotificationIdKey = "lastNotificationId"
         private const val lastNotificationStateKey = "lastNotificationState"
@@ -36,6 +37,12 @@ class Preferences {
             val edit = getPrefs(context).edit()
             edit.putInt(lastNotificationIdKey, id)
             edit.putString(lastNotificationStateKey, state)
+            edit.commit()
+        }
+
+        fun setAuthentication(context: String, shouldCheck: Boolean) {
+            val edit = getPrefs(context).edit()
+            edit.putBoolean(authenticationKey, shouldCheck)
             edit.commit()
         }
 
