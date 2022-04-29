@@ -30,6 +30,17 @@ class Authentication {
             }
         }
 
+        fun disable(
+            activity: FragmentActivity,
+            disableComplete: () -> Unit
+        ) {
+            authenticate(activity, false) { success ->
+                if (success)
+                    disableComplete()
+            }
+        }
+
+
         fun authenticate(
             activity: FragmentActivity,
             force: Boolean = false,
