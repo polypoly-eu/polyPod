@@ -13,6 +13,7 @@ ndk_version := r22b
 # build_for_android.sh, the latter should be merged into this Makefile.
 android_core_libraries := target/armv7-linux-androideabi
 build_type := $(if $(filter $(MODE), release),release,debug)
+core_binaries := target/$(build_type)
 
 ifneq ($(OS),Windows_NT)
 	ifeq ($(shell uname -s),Darwin)
@@ -25,10 +26,13 @@ flatbuffers:
 	./flatbuffers_shared/setup_flatbuffers.sh
 	./flatbuffers_shared/generate_flatbuffers.sh
 
-target: flatbuffers
+$(core_binaries): flatbuffers
 	cargo build
 
-$(swift_core_framework): target
+.PHONY: core
+core: $(core_binaries)
+
+$(swift_core_framework): $(core_binaries)
 # Ensure correct OS is used
 ifeq ($(macos),)
 	@echo "xcframework can only be built on macOS"
@@ -76,7 +80,7 @@ endef
 .PHONY: ios_bindings
 ios_bindings: $(swift_core_framework)
 
-$(android_core_libraries): flatbuffers
+$(android_core_libraries): $(core_binaries)
 	./build_for_android.sh \
 		--android_version $(android_version) \
 		--ndk_version $(ndk_version) \

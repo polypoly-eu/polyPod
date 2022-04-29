@@ -11,6 +11,11 @@ Logic shared across polyPod platforms - ios, android, wasm.
 
 On most systems, you can simply run `make`, and that will handle everything.
 
+If you wish to only build the core binaries for your current operating system,
+run `make core`. If you only wish to build the Android binaries and bindings,
+run `make android_bindings`. Similarly, to only build the iOS binaries and
+bindings, run `make ios_bindings`.
+
 ### Building manually:
 
 If you can't use `make` for some reason, you can build the core (but not the
