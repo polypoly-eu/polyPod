@@ -125,8 +125,8 @@ jobs:
         working-directory: platform/ios
         run: make lockxcodeversion
       - name: iOS - Build core
-        working-directory: platform/ios
-        run: make core MODE=release
+        working-directory: platform/core
+        run: make ios_bindings MODE=release
       - name: iOS - Tests
         working-directory: platform/ios
         run: make test
