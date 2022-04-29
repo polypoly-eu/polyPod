@@ -15,16 +15,18 @@ const centeredTestComponent = (
   <BaseOverlay className={testClassName} centered={true}></BaseOverlay>
 );
 
-it("renders correctly", () => {
-  const { getByTestId } = render(testComponent);
-  const baseOverlay = getByTestId("base-overlay-test");
-  expect(baseOverlay.className).toContain("base-overlay");
-  expect(baseOverlay.className).toContain(testClassName);
-  expect(baseOverlay.className).not.toContain("centered");
-  expect(getByTestId(testId)).toBeTruthy();
-});
+describe("baseOverlay", () => {
+  it("renders correctly", () => {
+    const { getByTestId } = render(testComponent);
+    const baseOverlay = getByTestId("base-overlay-test");
+    expect(baseOverlay.className).toContain("base-overlay");
+    expect(baseOverlay.className).toContain(testClassName);
+    expect(baseOverlay.className).not.toContain("centered");
+    expect(getByTestId(testId)).toBeTruthy();
+  });
 
-it("adds centered class when specified", () => {
-  const { getByTestId } = render(centeredTestComponent);
-  expect(getByTestId("base-overlay-test").className).toContain("centered");
+  it("adds centered class when specified", () => {
+    const { getByTestId } = render(centeredTestComponent);
+    expect(getByTestId("base-overlay-test").className).toContain("centered");
+  });
 });
