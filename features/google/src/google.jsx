@@ -21,9 +21,11 @@ import {
     PolyImportContext,
     PolyImportProvider,
     INITIAL_HISTORY_STATE,
+    LoadingOverlay,
 } from "@polypoly-eu/poly-look";
 import GoogleAccount from "./model/google-account.js";
 import { dataImporters } from "./model/importer.js";
+import i18n from "../../facebookImport/src/i18n.js";
 
 const Google = () => {
     const { pod, isLoading } = useContext(GoogleContext);
@@ -58,7 +60,12 @@ const Google = () => {
                     </Route>
                 </Switch>
             )}
-            {isLoading && "Loading..."}
+            {isLoading && (
+                <LoadingOverlay
+                    loadingGif="./images/loading.gif"
+                    message={i18n.t("common:loading")}
+                />
+            )}
         </div>
     );
 };

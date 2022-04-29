@@ -7,7 +7,7 @@ import { Card, ClickableCard, RoutingCard } from "./cards";
 import SideSwiper from "./overlays/sideSwiper.jsx";
 import List from "./list.jsx";
 import { PolyButton, IconButton } from "./buttons";
-
+import LoadingOverlay from "./overlays/loading.jsx";
 import {
   PolyAnalysisContext,
   PolyAnalysisProvider,
@@ -35,4 +35,5 @@ export {
   PolyAnalysisProvider,
   PolyAnalysisContext,
   PolyImportContext,
+  LoadingOverlay,
 };

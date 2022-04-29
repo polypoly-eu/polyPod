@@ -18,6 +18,7 @@ import {
     PolyImportContext,
     PolyImportProvider,
     ErrorPopup,
+    LoadingOverlay,
 } from "@polypoly-eu/poly-look";
 import { subAnalyses } from "./model/analysis";
 import { dataImporters } from "./model/importer.js";
@@ -28,10 +29,9 @@ import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
 import ExploreView from "./views/explore/explore.jsx";
 import ExploreDetails from "./views/explore/details.jsx";
-import Loading from "./components/loading/loading.jsx";
+import ReportWrapper from "./views/report/reportWrapper.jsx";
 
 import "./styles.css";
-import ReportWrapper from "./views/report/reportWrapper.jsx";
 
 const FacebookImporter = () => {
     const { pod, globalError, setGlobalError, isLoading, popUp, closePopUp } =
@@ -54,10 +54,10 @@ const FacebookImporter = () => {
     return (
         <div className="facebook-importer poly-theme poly-theme-dark">
             {isLoading && (
-                <Loading
+                <LoadingOverlay
                     loadingGif="./images/loading.gif"
                     message={i18n.t("common:loading")}
-                ></Loading>
+                ></LoadingOverlay>
             )}
             {pod && files && (
                 <Switch>

@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
-import Loading from "../../components/loading/loading.jsx";
+import { LoadingOverlay } from "@polypoly-eu/poly-look";
 import i18n from "../../i18n.js";
 import { useHistory } from "react-router";
 import { formatTime } from "../../utils/formatTime.js";
@@ -18,7 +18,7 @@ const Overview = () => {
 
     if (account === null || files === null)
         return (
-            <Loading
+            <LoadingOverlay
                 message={i18n.t("overview:loading.data")}
                 loadingGif="./images/loading.gif"
             />
