@@ -73,9 +73,9 @@ jobs:
                   java-version: 11
                   distribution: 'temurin'
                   cache: 'gradle'
-            - name: Build Android core
+            - name: Build core with Android bindings
               working-directory: platform/core
-              run: make android_libraries
+              run: make android_bindings
             - name: Test android
               if: steps.changes.outputs.android == 'true'
               working-directory: platform/android

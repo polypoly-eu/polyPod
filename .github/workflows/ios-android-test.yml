@@ -56,9 +56,6 @@ jobs:
                   distribution: 'zulu'
                   java-version: 11
                   cache: 'gradle'
-            - name: Build Android core
-              working-directory: platform/core
-              run: make android_libraries
             - name: Test Android
               uses: ReactiveCircus/android-emulator-runner@76c2bf6f95ed6458fd659a1bdb680a0f8df232dc
               if: |

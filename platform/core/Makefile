@@ -9,6 +9,9 @@ android_version := 24
 # Rust still uses old-ish r22 version of NDK.
 # For reference https://github.com/rust-lang/rust/pull/85806
 ndk_version := r22b
+# More libraries are being built, but instead of duplicating it with
+# build_for_android.sh, the latter should be merged into this Makefile.
+android_core_libraries := target/armv7-linux-androideabi
 build_type := $(if $(filter $(MODE), release),release,debug)
 
 ifneq ($(OS),Windows_NT)
@@ -70,15 +73,20 @@ define build_for_architecture
 		--lib --target $(1)
 endef
 
-.PHONY: android_libraries
-android_libraries: flatbuffers
+.PHONY: ios_bindings
+ios_bindings: $(swift_core_framework)
+
+$(android_core_libraries): flatbuffers
 	./build_for_android.sh \
 		--android_version $(android_version) \
 		--ndk_version $(ndk_version) \
 		--build_type $(build_type)
 
+.PHONY: android_bindings
+android_bindings: $(android_core_libraries)
+
 .PHONY: all
-all: $(if $(macos),$(swift_core_framework),target)
+all: $(android_core_libraries) $(if $(macos),$(swift_core_framework),)
 
 .PHONY: clean
 clean:

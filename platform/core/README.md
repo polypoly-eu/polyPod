@@ -28,6 +28,10 @@ Swift bindings), as follows:
 
         cargo build
 
+- Build the Android bindings:
+
+        ./build_for_android.sh
+
 ## Testing
 
 Just run:
