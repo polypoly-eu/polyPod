@@ -28,7 +28,9 @@ describe("Pictures ministory on export with no JPEG pictures in correct location
             zipFile
         );
         ({ status } = analysisResult);
-        analysisStory = new AboutPicturesMinistory(facebookAccount);
+        analysisStory = new AboutPicturesMinistory({
+            account: facebookAccount,
+        });
     });
 
     it("has success status", async () => {
@@ -56,7 +58,9 @@ describe("Pictures ministory on export with JPEG pictures in photos_and_videos l
             zipFile
         );
         ({ status } = analysisResult);
-        analysisStory = new AboutPicturesMinistory(facebookAccount);
+        analysisStory = new AboutPicturesMinistory({
+            account: facebookAccount,
+        });
     });
 
     it("has success status", async () => {
@@ -84,7 +88,9 @@ describe("Pictures ministory on export with JPEG pictures in posts/media locatio
             zipFile
         );
         ({ status } = analysisResult);
-        analysisStory = new AboutPicturesMinistory(facebookAccount);
+        analysisStory = new AboutPicturesMinistory({
+            account: facebookAccount,
+        });
     });
 
     it("has success status", async () => {

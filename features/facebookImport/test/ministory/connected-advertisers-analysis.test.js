@@ -29,7 +29,9 @@ describe("Connected advertisers analysis from account with no connected advertis
             ConnectedAdvertisersAnalysis,
             facebookAccount
         ));
-        analysisStory = new ConnectedAdvertisersMinistory(facebookAccount);
+        analysisStory = new ConnectedAdvertisersMinistory({
+            account: facebookAccount,
+        });
     });
 
     it("has success status", async () => {
@@ -53,7 +55,9 @@ describe("Connected advertisers analysis from account with connected advertisers
             zipFile
         );
         ({ status } = analysisResult);
-        analysisStory = new ConnectedAdvertisersMinistory(facebookAccount);
+        analysisStory = new ConnectedAdvertisersMinistory({
+            account: facebookAccount,
+        });
         analysisData = {
             connectedAdvertisersCount: analysisStory.analysisData.length,
         };
@@ -86,7 +90,9 @@ describe("Connected advertisers analysis from account with connected advertisers
             zipFile
         );
         ({ status } = analysisResult);
-        analysisStory = new ConnectedAdvertisersMinistory(facebookAccount);
+        analysisStory = new ConnectedAdvertisersMinistory({
+            account: facebookAccount,
+        });
         analysisData = {
             connectedAdvertisersCount: analysisStory.analysisData.length,
         };

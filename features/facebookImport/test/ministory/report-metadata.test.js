@@ -53,7 +53,7 @@ describe("Report metadata analysis", () => {
             zipFile
         );
         ({ status } = analysisResult);
-        analysisReport = new ReportMetadataReport(facebookAccount);
+        analysisReport = new ReportMetadataReport({ account: facebookAccount });
         jsonReport = analysisReport.jsonReport;
         reportData = getReportData(analysisReport);
     });
