@@ -20,8 +20,12 @@ class Story extends Component {
         return this._mode;
     }
 
-    set mode(mode) {
-        this._mode = Story.MODES[mode] || this.mode;
+    setDetailsMode() {
+        this._mode = Story.MODES.DETAILS;
+    }
+
+    setSummaryMode() {
+        this._mode = Story.MODES.SUMMARY;
     }
 
     get active() {

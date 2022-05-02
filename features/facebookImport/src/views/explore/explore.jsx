@@ -87,7 +87,6 @@ const ExploreView = () => {
                 {ministories.map((MinistoryClass, index) => {
                     const ministory = new MinistoryClass({
                         account,
-                        mode: "SUMMARY",
                     });
                     if (!ministory.active) return;
                     const content = (

@@ -6,7 +6,7 @@ import "./details.css";
 const ExploreDetails = () => {
     const history = useHistory();
     const { activeAnalysis } = history.location.state;
-    activeAnalysis.mode = "DETAILS";
+    activeAnalysis.setDetailsMode();
     return (
         <div className="details-view">
             <h1>{activeAnalysis.title}</h1>
