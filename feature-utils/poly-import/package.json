@@ -9,6 +9,5 @@
   "dependencies": {
     "react": "^17.0.2",
     "@polypoly-eu/poly-analysis": "file:../../feature-utils/poly-analysis"
-
   }
 }
