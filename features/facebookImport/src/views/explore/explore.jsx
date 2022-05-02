@@ -107,7 +107,7 @@ const ExploreView = () => {
                             key={index}
                             history={history}
                             route="/explore/details"
-                            stateChange={{ activeAnalysis: ministory }}
+                            stateChange={{ ActiveStoryClass: MinistoryClass }}
                             buttonText={i18n.t("explore:details.button")}
                         >
                             {content}

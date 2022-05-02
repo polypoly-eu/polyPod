@@ -5,7 +5,7 @@ class Story extends Component {
         super();
         this._analyses = account.analyses;
         this._neededAnalyses = [];
-        this._mode = Story.MODES[mode] || Story.MODES.SUMMARY;
+        this._mode = mode || Story.MODES.SUMMARY;
     }
 
     get label() {
