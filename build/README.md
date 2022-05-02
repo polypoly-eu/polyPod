@@ -3,6 +3,18 @@
 This package contains logic for building all the code written in JavaScript (or
 that compiles to JavaScript) in the right order.
 
+## Use
+
+If you are building this *for the first time ever*, run
+
+    ./build.js setup
+
+Consecutive builds will just need
+
+     ./build.js
+
+Run `./build.js --help` for available commands.
+
 ## Background
 
 The polyPod core code, as well as all the bundled features, are separated into
