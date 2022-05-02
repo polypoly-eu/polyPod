@@ -1,9 +1,7 @@
-import { Status, statusTypes } from "@polypoly-eu/poly-import";
-
 class AnalysisExecutionResult {
-    constructor(analysis, status, executionTime) {
+    constructor({ analysis, status, executionTime }) {
         this._analysis = analysis;
-        this._status = status || new Status({ name: statusTypes.success });
+        this._status = status;
         this._executionTime = executionTime;
     }
 

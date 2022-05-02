@@ -93,10 +93,10 @@ export default class DataAccount {
         } catch (error) {
             status = new Status({ name: statusTypes.error, message: error });
         }
-        return new AnalysisExecutionResult(
-            subAnalysis,
-            status,
-            telemetry.elapsedTime()
-        );
+        return new AnalysisExecutionResult({
+            analysis: subAnalysis,
+            executionTime: telemetry.elapsedTime(),
+            status: status || new Status({ name: statusTypes.success }),
+        });
     }
 }
