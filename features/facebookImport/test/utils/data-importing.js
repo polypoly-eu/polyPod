@@ -1,7 +1,7 @@
 import MessagesImporter from "../../src/model/importers/messages-importer.js";
 import NameImporter from "../../src/model/importers/name-importer.js";
 import FacebookAccount from "../../src/model/entities/facebook-account.js";
-import { runImporter, runImporters } from "../../src/model/importer.js";
+import { runImporter, runImporters } from "@polypoly-eu/poly-import";
 import RecentlyViewedAdsImporter, {
     RECENTLY_VIEWED_FILE_PATH,
 } from "../../src/model/importers/recently-viewed-ads-importer.js";

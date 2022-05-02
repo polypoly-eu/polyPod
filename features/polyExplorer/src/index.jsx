@@ -6,7 +6,4 @@ import PolyExplorer from "./polyExplorer.jsx";
 
 import "./styles.css";
 
-import manifestData from "./static/manifest.json";
-window.manifestData = manifestData;
-
 ReactDOM.render(<PolyExplorer />, document.getElementById("feature"));

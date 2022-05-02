@@ -1,22 +1,9 @@
-import React from "react";
-import BasicList from "../../../components/basicList/basicList.jsx";
-
-import {
-    anonymizeJsonEntityPath,
-    jsonDataEntities,
-} from "../../importers/utils/importer-util.js";
+import { anonymizeJsonEntityPath } from "../../importers/utils/importer-util.js";
 import allStructure from "../../../static/allStructure";
-import ReportAnalysis from "./report-analysis.js";
+import { ReportAnalysis, jsonDataEntities } from "@polypoly-eu/poly-analysis";
+import analysisKeys from "../utils/analysisKeys";
 
 export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
-    get title() {
-        return "Missing known JSON files";
-    }
-
-    get reportData() {
-        return this._missingKnownFileNames;
-    }
-
     _knownJsonFiles() {
         const knownJsonFileNames = allStructure.filter((each) =>
             each.endsWith(".json")
@@ -32,9 +19,7 @@ export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
         );
     }
 
-    async analyze({ zipFile }) {
-        this._missingKnownFileNames = [];
-        this.active = true;
+    async analyze({ zipFile, dataAccount }) {
         if (!zipFile) return;
 
         const relevantEntries = await jsonDataEntities(zipFile);
@@ -42,13 +27,8 @@ export default class MissingKnownJSONFilesAnalysis extends ReportAnalysis {
             anonymizeJsonEntityPath(entry.path)
         );
         const knownJsonFiles = this._knownJsonFiles();
-        this._missingKnownFileNames = knownJsonFiles.filter(
-            (each) => !anonymizedPaths.includes(each)
-        );
-        this.active = this._missingKnownFileNames.length > 0;
-    }
 
-    render() {
-        return <BasicList items={this._missingKnownFileNames} />;
+        dataAccount.reports[analysisKeys.missingKnownFileNames] =
+            knownJsonFiles.filter((each) => !anonymizedPaths.includes(each));
     }
 }

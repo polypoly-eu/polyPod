@@ -1,13 +1,4 @@
-import { ZipFile } from "@polypoly-eu/feature-file-storage";
+import ActivitiesImporter from "./importers/activities-importer";
+import SemanticLocationsImporter from "./importers/semantic-locations-importer";
 
-export async function importData(zipData) {
-    const zipFile = await ZipFile.createWithCache(zipData, window.pod);
-    return await importZip(zipFile);
-}
-
-//googleAccount is not an equivalent to Facebook account yet
-export async function importZip(zipFile) {
-    const googleAccount = {};
-    googleAccount.pathNames = await zipFile.getEntries();
-    return googleAccount;
-}
+export const dataImporters = [ActivitiesImporter, SemanticLocationsImporter];

@@ -1,6 +1,6 @@
 import React from "react";
 import BasicList from "../../../components/basicList/basicList.jsx";
-import ReportAnalysis from "./report-analysis";
+import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
 import { noDataFileName } from "../../../globals/index";
 import { relevantZipEntries } from "../../importers/utils/importer-util.js";
 

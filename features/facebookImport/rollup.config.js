@@ -8,6 +8,8 @@ import replace from "@rollup/plugin-replace";
 import serve from "rollup-plugin-serve";
 import svg from "rollup-plugin-svg";
 
+import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
+
 const fallbackURL = "http://localhost:8000";
 const fallbackAuthorization = "username:password";
 
@@ -39,7 +41,6 @@ export default (commandLineArgs) => {
                         src: [
                             "node_modules/react/umd/react.development.js",
                             "node_modules/react-dom/umd/react-dom.development.js",
-                            "node_modules/@polypoly-eu/podjs/dist/pod.js",
                             "node_modules/@polypoly-eu/poly-look/dist/poly-look.js",
                         ],
                         dest: "dist",
@@ -60,6 +61,10 @@ export default (commandLineArgs) => {
                     },
                 ],
             }),
+            genPodjs({
+                build_dir: "./dist",
+                manifestPath: "./src/static/manifest.json",
+            }),
             resolve(),
             replace({
                 preventAssignment: true,
@@ -71,7 +76,7 @@ export default (commandLineArgs) => {
                     JSON.stringify(
                         process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION ||
                             fallbackAuthorization
-                    ),
+                    ) || "",
             }),
             commonjs({
                 include: /node_modules/,

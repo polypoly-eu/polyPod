@@ -9,6 +9,9 @@ class FacebookAccount {
 
         this._name = "";
         this._preferredLanguage = [];
+        this._analyses = {};
+        this._reports = {};
+        this._analysesExecutionResults = [];
 
         this._offFacebookCompanies = [];
         this._adInterests = [];
@@ -31,6 +34,14 @@ class FacebookAccount {
         this._relatedAccounts = new RelatedAccountsGroup();
     }
 
+    get analyses() {
+        return this._analyses;
+    }
+
+    get reports() {
+        return this._reports;
+    }
+
     get importedFileNames() {
         return this._importedFileNames;
     }
@@ -45,6 +56,14 @@ class FacebookAccount {
 
     set importingResults(importingResults) {
         this._importingResults = importingResults;
+    }
+
+    get analysesExecutionResults() {
+        return this._analysesExecutionResults;
+    }
+
+    set analysesExecutionResults(analysesExecutionResults) {
+        this._analysesExecutionResults = analysesExecutionResults;
     }
 
     get offFacebookCompaniesCount() {

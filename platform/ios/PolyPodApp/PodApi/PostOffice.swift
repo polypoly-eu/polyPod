@@ -95,10 +95,8 @@ extension PostOffice {
         switch method {
         case "add":
             handlePolyInAdd(args: args, completionHandler: completionHandler)
-        case "select":
-            handlePolyInSelect(args: args, completionHandler: completionHandler)
         case "match":
-            handlePolyInSelect(args: args, completionHandler: completionHandler)
+            handlePolyInMatch(args: args, completionHandler: completionHandler)
         case "delete":
             handlePolyInDelete(args: args, completionHandler: completionHandler)
         case "has":
@@ -149,12 +147,12 @@ extension PostOffice {
         }
     }
     
-    private func handlePolyInSelect(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
+    private func handlePolyInMatch(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         guard let extendedData = extractMatcher(args[0]) else {
             completionHandler(nil, createErrorResponse(#function, PodApiError.badData(args[0])))
             return
         }
-        PodApi.shared.polyIn.selectQuads(matcher: extendedData) { quads, error in
+        PodApi.shared.polyIn.matchQuads(matcher: extendedData) { quads, error in
             if let error = error {
                 completionHandler(nil, createErrorResponse(#function, error))
                 return

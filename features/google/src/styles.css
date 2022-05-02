@@ -1,2 +1,6 @@
 :root {
 }
+
+.google {
+    background-color: var(--theme-primary-color);
+}

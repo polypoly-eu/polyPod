@@ -1,18 +1,31 @@
-export_dir_ios = export/ios
+.DEFAULT_GOAL := all
+
+export_dir_ios := export/ios
+swift_core := PolyPodCoreSwift
+swift_core_framework := $(swift_core)/PolyPodCore.xcframework
 ios_archs := aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios
 ios_targets := iPhone simulator
 build_type := $(if $(filter $(MODE), release),release,debug)
 
-build_ios_xcframework:
-# Ensure correct OS is used
-ifeq ($(OS),Windows_NT)
-	@echo "xcframework can be built only in macOS"
-	exit 1
-else
-ifneq ($(shell uname -s),Darwin)
-	@echo "xcframework can be built only in macOS"
-	exit 1
+ifneq ($(OS),Windows_NT)
+	ifeq ($(shell uname -s),Darwin)
+		macos := true
+	endif
 endif
+
+.PHONY: flatbuffers
+flatbuffers:
+	./flatbuffers_shared/setup_flatbuffers.sh
+	./flatbuffers_shared/generate_flatbuffers.sh
+
+target: flatbuffers
+	cargo build
+
+$(swift_core_framework): target
+# Ensure correct OS is used
+ifeq ($(macos),)
+	@echo "xcframework can only be built on macOS"
+	exit 1
 endif
 
 	# Workspace setup
@@ -25,7 +38,7 @@ endif
 
 	# Build library for all architectures
 	$(foreach arch, $(ios_archs),  $(call build_for_architecture,$(arch));)
-	
+
 	# Copy libaries to export
 	cp target/aarch64-apple-ios/$(build_type)/libpolypod_core.a $(export_dir_ios)/iPhone/libpolypod_core.a
 	lipo -create \
@@ -36,12 +49,15 @@ endif
 	# Generated module map and C header
 	cargo install cbindgen
 	cbindgen --config cbindgen.toml -o $(export_dir_ios)/headers/polypod-core.h
-	@echo "module PolyPodCore { header "polypod-core.h" export * }" >> $(export_dir_ios)/headers/module.modulemap
+	@echo "module PolyPodCore { header \"polypod-core.h\" export * }" >> $(export_dir_ios)/headers/module.modulemap
 
 	# Package xcframework
+	rm -rf $(swift_core_framework)
 	xcodebuild -create-xcframework \
-	    $(foreach target, $(ios_targets), -library $(export_dir_ios)/$(target)/libpolypod_core.a -headers $(export_dir_ios)/headers) \
-		-output $(export_dir_ios)/PolyPodCore.xcframework
+	    $(foreach target, $(ios_targets), \
+			-library $(export_dir_ios)/$(target)/libpolypod_core.a \
+			-headers $(export_dir_ios)/headers) \
+		-output $(swift_core_framework)
 
 define build_for_architecture
 	rustup target add $(1)
@@ -50,4 +66,14 @@ define build_for_architecture
 		--lib --target $(1)
 endef
 
+.PHONY: all
+all: $(if $(macos),$(swift_core_framework),target)
 
+.PHONY: clean
+clean:
+	$(RM) -r flatbuffers_shared/flat{c,buffers}
+	$(RM) -r src/flatbuffers_generated
+	$(RM) -r target
+	$(RM) -r export
+	$(RM) -r $(swift_core_framework)
+	$(RM) -r $(swift_core)/{.swiftpm,FlatbuffersGenerated}

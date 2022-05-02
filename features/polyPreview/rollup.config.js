@@ -3,6 +3,7 @@ import css from "rollup-plugin-css-only";
 import json from "@rollup/plugin-json";
 import resolve from "@rollup/plugin-node-resolve";
 import sucrase from "@rollup/plugin-sucrase";
+import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
 
 export default {
     input: "src/index.js",
@@ -11,16 +12,17 @@ export default {
         format: "iife",
     },
     plugins: [
+        genPodjs({
+            build_dir: "./dist",
+            manifestPath: "./src/static/manifest.json",
+        }),
         css({ output: "css/bundle.css" }),
         json(),
         sucrase({ transforms: [] }),
         copyWatch({
             targets: [
                 {
-                    src: [
-                        "node_modules/@polypoly-eu/podjs/dist/pod.js",
-                        "node_modules/@polypoly-eu/poly-look/dist/css",
-                    ],
+                    src: ["node_modules/@polypoly-eu/poly-look/dist/css"],
                     dest: "dist",
                 },
                 {

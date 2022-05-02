@@ -1,31 +1,31 @@
 import React from "react";
 import BasicDataCountTable from "../../../components/basicDataCountTable/basicDataCountTable.jsx";
-import RootAnalysis from "./root-analysis.js";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class PagesOverviewAnalysis extends RootAnalysis {
     get title() {
         return "Pages Overview";
     }
 
-    async analyze({ facebookAccount }) {
+    async analyze({ dataAccount }) {
         this._pagesData = [
             {
                 title: "Liked Pages",
-                count: facebookAccount.likedPages.length,
+                count: dataAccount.likedPages.length,
             },
             {
                 title: "Followed Pages",
-                count: facebookAccount.followedPages.length,
+                count: dataAccount.followedPages.length,
             },
 
             {
                 title: "Recommended Pages",
-                count: facebookAccount.recommendedPages.length,
+                count: dataAccount.recommendedPages.length,
             },
 
             {
                 title: "Unfollowed Pages",
-                count: facebookAccount.unfollowedPages.length,
+                count: dataAccount.unfollowedPages.length,
             },
         ];
 

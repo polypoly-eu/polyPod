@@ -18,9 +18,9 @@
   },
   "private": true,
   "dependencies": {
-    "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
-    "@polypoly-eu/feature-file-storage": "file:../../feature-utils/feature-file-storage",
     "@polypoly-eu/podjs": "file:../../platform/podjs",
+    "@polypoly-eu/poly-import": "file:../../feature-utils/poly-import",
+    "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
     "d3": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

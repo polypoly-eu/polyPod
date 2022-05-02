@@ -7,9 +7,9 @@ class PolyInTestDouble : PolyIn(
     context =
     androidx.test.core.app.ApplicationProvider.getApplicationContext()
 ) {
-    var selectWasCalled = false
-    var selectMatcher: Matcher? = null
-    var selectReturn: List<Quad>? = null
+    var matchWasCalled = false
+    var matchMatcher: Matcher? = null
+    var matchReturn: List<Quad>? = null
     var addWasCalled = false
     var addParams: List<Quad>? = null
 
@@ -18,10 +18,10 @@ class PolyInTestDouble : PolyIn(
         addParams = null
     }
 
-    override suspend fun select(matcher: Matcher): List<Quad> {
-        selectWasCalled = true
-        selectMatcher = matcher
-        return selectReturn ?: emptyList()
+    override suspend fun match(matcher: Matcher): List<Quad> {
+        matchWasCalled = true
+        matchMatcher = matcher
+        return matchReturn ?: emptyList()
     }
 
     override suspend fun add(quads: List<Quad>) {

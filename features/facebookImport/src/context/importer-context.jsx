@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
 
+import popUps from "../popUps";
+
 export const ImporterContext = React.createContext();
 
 function updatePodNavigation(pod, history, handleBack, location) {
@@ -16,11 +18,11 @@ function updatePodNavigation(pod, history, handleBack, location) {
         : pod.polyNav.setActiveActions([]);
 }
 
-function updateTitle(pod, location) {
+function updateTitle(pod, location, popUp) {
     pod.polyNav.setTitle(
         location.pathname === "/"
             ? ""
-            : location.pathname.endsWith("info")
+            : popUp
             ? i18n.t("navbarTitles:info")
             : i18n.t(`navbarTitles:${location.pathname.substring(1)}`)
     );
@@ -31,6 +33,7 @@ export const ImporterProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
+    const [popUp, setPopUp] = useState(null);
 
     const history = useHistory();
     const location = useLocation();
@@ -41,7 +44,16 @@ export const ImporterProvider = ({ children }) => {
         setIsLoading(false);
     }
 
+    function createPopUp({ type }) {
+        setPopUp({ component: popUps[type] });
+    }
+
+    function closePopUp() {
+        setPopUp(null);
+    }
+
     function handleBack() {
+        if (popUp) return setPopUp(null);
         history.length > 1 && history.goBack();
     }
 
@@ -56,7 +68,7 @@ export const ImporterProvider = ({ children }) => {
     useEffect(() => {
         if (!pod) return;
         updatePodNavigation(pod, history, handleBack, location);
-        updateTitle(pod, location);
+        updateTitle(pod, location, popUp);
     });
 
     return (
@@ -71,6 +83,9 @@ export const ImporterProvider = ({ children }) => {
                 isLoading,
                 setIsLoading,
                 runWithLoadingScreen,
+                popUp,
+                createPopUp,
+                closePopUp,
             }}
         >
             {children}
