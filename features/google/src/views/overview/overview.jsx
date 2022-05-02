@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { PolyImportContext } from "@polypoly-eu/poly-look";
 import { useHistory } from "react-router-dom";
+import ExploreView from "../explore/explore.jsx";
 
 const Overview = () => {
     const { account, handleRemoveFile, files, refreshFiles } =
@@ -36,6 +37,7 @@ const Overview = () => {
                 ))}
             </div>
             <button onClick={onRemoveFile}>Remove file</button>
+            <ExploreView />
         </div>
     );
 };
