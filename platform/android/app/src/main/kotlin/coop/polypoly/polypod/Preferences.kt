@@ -40,7 +40,7 @@ class Preferences {
             edit.commit()
         }
 
-        fun setAuthentication(context: String, shouldCheck: Boolean) {
+        fun setAuthentication(context: Context, shouldCheck: Boolean) {
             val edit = getPrefs(context).edit()
             edit.putBoolean(authenticationKey, shouldCheck)
             edit.commit()
@@ -73,15 +73,13 @@ class Preferences {
         fun getFileSystem(context: Context): Map<String, String> {
             val outputMap = HashMap<String, String>()
             val jsonString = getPrefs(context).getString(fsKey, "{}")
-            if (jsonString == null) {
-                throw Error("File system error")
-            }
+                ?: throw Error("File system error")
             val jsonObject = JSONObject(jsonString)
             val keysItr: Iterator<String> = jsonObject.keys()
             while (keysItr.hasNext()) {
                 val k = keysItr.next()
                 val v = jsonObject.get(k) as String
-                outputMap.put(k, v)
+                outputMap[k] = v
             }
             return outputMap
         }
