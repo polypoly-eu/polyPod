@@ -87,7 +87,7 @@ export default class DataAccount {
         let status;
         try {
             status = await subAnalysis.analyze({
-                enrichedData,
+                zipFile: enrichedData.zipFile,
                 dataAccount: this,
             });
         } catch (error) {
