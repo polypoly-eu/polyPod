@@ -16,7 +16,7 @@ import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../../polyPod-config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
 
-const DB_PREFIX = "polypod";
+const DB_PREFIX = "polypod:";
 const DB_VERSION = 1;
 const OBJECT_STORE_POLY_IN = "poly-in";
 const OBJECT_STORE_POLY_OUT = "poly-out";
@@ -31,7 +31,7 @@ const MANIFEST_DATA = window.manifestData;
 
 async function openDatabase(): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
-        const name = `${DB_PREFIX}:${document.location.pathname}`;
+        const name = `${DB_PREFIX}${document.location.pathname}`;
         const request = indexedDB.open(name, DB_VERSION);
 
         request.onupgradeneeded = () => {
