@@ -62,6 +62,10 @@ class Pkg {
             await fsPromises.rm(path, { recursive: true, force: true });
     }
 
+    async setup() {
+        await npmInstall(this.name, false);
+    }
+
     async install() {
         await npmInstall(this.name);
     }
