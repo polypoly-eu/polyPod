@@ -752,7 +752,16 @@ export class BrowserPod implements Pod {
                 return;
             }
 
-            window.manifest = await readManifest(MANIFEST_DATA);
+            try {
+                window.manifest = await readManifest(MANIFEST_DATA);
+            } catch (e) {
+                console.warn(
+                    `Unable to parse feature manifest, navigation bar disabled.`,
+                    e
+                );
+                return;
+            }
+
             window.parent.currentTitle =
                 window.parent.currentTitle || window.manifest.name;
             const frame = createNavBarFrame(window.parent.currentTitle);
