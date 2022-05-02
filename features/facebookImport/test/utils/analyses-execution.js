@@ -2,8 +2,6 @@ import { MockerPod } from "../mocks/pod-mock";
 import { importZip } from "@polypoly-eu/poly-import";
 import { dataImporters } from "../../src/model/importer";
 import {
-    runAnalysis,
-    analyzeZip,
     ReportStories,
     MinistoriesStatusReport,
 } from "@polypoly-eu/poly-analysis";
@@ -27,7 +25,10 @@ export async function runAnalysisForExport(
         dataAccount: facebookAccount,
         pod,
     };
-    const analysisResult = await runAnalysis(analysisClass, enrichedData);
+    const analysisResult = await facebookAccount.runAnalysis(
+        analysisClass,
+        enrichedData
+    );
     return { analysisResult, facebookAccount };
 }
 
@@ -37,7 +38,7 @@ export async function runAnalysisForAccount(
     pod = new MockerPod()
 ) {
     const enrichedData = { dataAccount: facebookAccount, pod };
-    return runAnalysis(analysisClass, enrichedData);
+    return facebookAccount.runAnalysis(analysisClass, enrichedData);
 }
 
 export async function runAnalysesForZip(zipFile) {
@@ -47,10 +48,9 @@ export async function runAnalysesForZip(zipFile) {
         pod: new MockerPod(),
         DataAccount: FacebookAccount,
     });
-    await analyzeZip({
+    await facebookAccount.analyzeZip({
         zipData: zipFile.enrichedFileData(),
         zipFile,
-        dataAccount: facebookAccount,
         subAnalyses,
         pod: new MockerPod(),
     });
