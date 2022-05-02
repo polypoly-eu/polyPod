@@ -1,5 +1,5 @@
-import DataStructureBubblesAnalysis from "./data-structure-bubbles-analysis";
+import DataStructureGroupsAnalysis from "./data-structure-groups-analysis";
 
-const genericAnalyses = [DataStructureBubblesAnalysis];
+const genericAnalyses = [DataStructureGroupsAnalysis];
 
 export default genericAnalyses;

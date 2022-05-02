@@ -22,7 +22,7 @@ export default {
     missingCommonFileNames: "missingCommonFileNames",
     unknownFolderNames: "unknownFolderNames",
     importersData: "importersData",
-    bubblesData: "bubblesData",
+    bubblesData: "dataStructure",
     sortedAdInterests: "sortedAdInterests",
     reportMetadata: "reportMetadata",
 };
