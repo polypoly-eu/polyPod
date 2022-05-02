@@ -23,7 +23,7 @@ describe("Messages analysis for empty export", () => {
             zipFile
         );
         ({ status } = analysisResult);
-        analysisStory = new MessagesMinistory(facebookAccount);
+        analysisStory = new MessagesMinistory({ account: facebookAccount });
     });
 
     it("has success status", async () => {
@@ -47,7 +47,7 @@ describe("Messages analysis for export with messages", () => {
             zipFile
         );
         ({ status } = analysisResult);
-        analysisStory = new MessagesMinistory(facebookAccount);
+        analysisStory = new MessagesMinistory({ account: facebookAccount });
         analysisData = getAnalysisData(analysisStory);
     });
 

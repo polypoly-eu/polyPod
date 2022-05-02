@@ -58,11 +58,11 @@ export async function runAnalysesForZip(zipFile) {
 }
 export function getReportStories(facebookAccount) {
     const computedReportStoriesList = reports.map(
-        (reportClass) => new reportClass(facebookAccount)
+        (reportClass) => new reportClass({ account: facebookAccount })
     );
 
     const computedMinistories = ministories.map(
-        (MinistoryClass) => new MinistoryClass(facebookAccount)
+        (MinistoryClass) => new MinistoryClass({ account: facebookAccount })
     );
 
     const activeReportStories = computedReportStoriesList.filter(

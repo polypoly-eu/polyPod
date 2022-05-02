@@ -22,7 +22,7 @@ class AdvertisingValueMinistory extends Story {
         return i18n.t("advertisingValueMiniStory:title");
     }
 
-    renderSummary() {
+    _renderSummary() {
         const randomAdInterests = this.analyses[analysisKeys.randomAdInterests];
         return (
             <AdvertisingValueMiniStorySummary
@@ -31,7 +31,7 @@ class AdvertisingValueMinistory extends Story {
             />
         );
     }
-    renderDetails() {
+    _renderDetails() {
         return (
             <AdvertisingValueMiniStoryDetails
                 displayData={this.analyses[analysisKeys.sortedAdInterests]}

@@ -19,7 +19,9 @@ describe("Your advertising value analysis from account with no ad interests", ()
             AdvertisingValueAnalysis,
             facebookAccount
         ));
-        analysisStory = new AdvertisingValueMinistory(facebookAccount);
+        analysisStory = new AdvertisingValueMinistory({
+            account: facebookAccount,
+        });
     });
 
     it("has success status", async () => {
@@ -68,7 +70,9 @@ for (const dataset of DATASETS) {
                 AdvertisingValueAnalysis,
                 facebookAccount
             ));
-            analysisStory = new AdvertisingValueMinistory(facebookAccount);
+            analysisStory = new AdvertisingValueMinistory({
+                account: facebookAccount,
+            });
             analysisData = {
                 numberInterests:
                     analysisStory.analyses[analysisKeys.numberInterests],

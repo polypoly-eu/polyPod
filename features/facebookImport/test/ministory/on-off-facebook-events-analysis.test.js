@@ -30,7 +30,9 @@ describe("Off-Facebook events analysis from empty account", () => {
             OnOffFacebookEventsAnalysis,
             facebookAccount
         ));
-        analysisStory = new OnOffFacebookEventsMinistory(facebookAccount);
+        analysisStory = new OnOffFacebookEventsMinistory({
+            account: facebookAccount,
+        });
     });
 
     it("has success status", async () => {
@@ -68,7 +70,9 @@ describe("Off-Facebook events analysis from account with no purchases", () => {
             OnOffFacebookEventsAnalysis,
             facebookAccount
         ));
-        analysisStory = new OnOffFacebookEventsMinistory(facebookAccount);
+        analysisStory = new OnOffFacebookEventsMinistory({
+            account: facebookAccount,
+        });
         analysisData = getAnalysisData(analysisStory, analysis);
     });
 
@@ -112,7 +116,9 @@ describe("Off-Facebook events analysis from export data", () => {
             zipFile
         );
         ({ analysis, status } = analysisResult);
-        analysisStory = new OnOffFacebookEventsMinistory(facebookAccount);
+        analysisStory = new OnOffFacebookEventsMinistory({
+            account: facebookAccount,
+        });
         analysisData = getAnalysisData(analysisStory, analysis);
     });
 

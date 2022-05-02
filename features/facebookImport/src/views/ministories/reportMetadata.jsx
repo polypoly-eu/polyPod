@@ -21,7 +21,8 @@ class ReportMetadataReport extends ReportStory {
             polyPodVersion: analysisData.polyPodVersion,
         };
     }
-    render() {
+
+    _renderSummary() {
         return (
             <ul>
                 <li key={1}>

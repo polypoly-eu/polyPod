@@ -20,7 +20,7 @@ class MessagesMinistory extends Story {
         return i18n.t("explore:messages.title");
     }
 
-    renderSummary() {
+    _renderSummary() {
         return (
             <MessagesMiniStorySummary
                 messagesCount={this.analyses[analysisKeys.messagesCount]}
@@ -34,7 +34,7 @@ class MessagesMinistory extends Story {
         );
     }
 
-    renderDetails() {
+    _renderDetails() {
         return (
             <MessagesMiniStoryDetails
                 messagesCount={this.analyses[analysisKeys.messagesCount]}
