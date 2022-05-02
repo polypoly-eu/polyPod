@@ -22,21 +22,27 @@ class Authentication {
 
         fun setUp(
             activity: FragmentActivity,
-            setupComplete: () -> Unit
+            setupComplete: (Boolean) -> Unit
         ) {
             authenticate(activity, true) { success ->
-                if (success)
-                    setupComplete()
+                if (success) {
+                    println("To Enable authenticate")
+                    setupComplete(true)
+                }
+                setupComplete(false)
             }
         }
 
         fun disable(
             activity: FragmentActivity,
-            disableComplete: () -> Unit
+            disableComplete: (Boolean) -> Unit
         ) {
             authenticate(activity, false) { success ->
-                if (success)
-                    disableComplete()
+                if (success) {
+                    println("Disabled authenticate")
+                    disableComplete(true)
+                }
+                disableComplete(false)
             }
         }
 
