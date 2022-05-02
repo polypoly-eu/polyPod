@@ -8,7 +8,7 @@ export default class ProcessedData {
 
         this._reportMetadata = null;
     }
-    getData(key) {
+    findData(key) {
         return this["_" + key];
     }
 }

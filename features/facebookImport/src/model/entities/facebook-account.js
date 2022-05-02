@@ -7,31 +7,31 @@ import RelatedAccountsGroup from "./related-accounts-group.js";
 class FacebookAccount extends DataAccount {
     constructor() {
         super();
-        this._processedData = new FacebookProcessedData();
+        this.processedData = new FacebookProcessedData();
 
-        this._offFacebookCompanies = [];
-        this._adInterests = [];
-        this._connectedAdvertisers = [];
-        this._interactedAdvertisers = [];
-        this._friends = [];
-        this._receivedFriendRequests = [];
-        this._followedPages = [];
-        this._likedPages = [];
-        this._recommendedPages = [];
-        this._unfollowedPages = [];
-        this._searches = [];
-        this._adminRecords = [];
-        this._accountSessionActivities = [];
-        this._comments = [];
-        this._postReactions = [];
-        this._posts = [];
+        this.offFacebookCompanies = [];
+        this.adInterests = [];
+        this.connectedAdvertisers = [];
+        this.interactedAdvertisers = [];
+        this.friends = [];
+        this.receivedFriendRequests = [];
+        this.followedPages = [];
+        this.likedPages = [];
+        this.recommendedPages = [];
+        this.unfollowedPages = [];
+        this.searches = [];
+        this.adminRecords = [];
+        this.accountSessionActivities = [];
+        this.comments = [];
+        this.postReactions = [];
+        this.posts = [];
 
-        this._messageThreadsGroup = new MessageThreadsGroup();
-        this._relatedAccounts = new RelatedAccountsGroup();
+        this.messageThreadsGroup = new MessageThreadsGroup();
+        this.relatedAccounts = new RelatedAccountsGroup();
     }
 
     get offFacebookCompaniesCount() {
-        return this._offFacebookCompanies.length;
+        return this.offFacebookCompanies.length;
     }
 
     get offFacebookEventsCount() {
@@ -53,28 +53,28 @@ class FacebookAccount extends DataAccount {
         return latestTimestamp;
     }
 
+    get relatedAccountsCount() {
+        return this.relatedAccounts.count;
+    }
+
     get relatedAccountEventLatestTimestamp() {
         return this.relatedAccounts.latestEventTimestamp;
     }
 
-    get messageThreadsGroup() {
-        return this._messageThreadsGroup;
-    }
-
     get messageThreadsCount() {
-        return this._messageThreadsGroup.messageThreadsCount;
+        return this.messageThreadsGroup.messageThreadsCount;
     }
 
     get messagesCount() {
-        return this._messageThreadsGroup.messagesCount;
+        return this.messageThreadsGroup.messagesCount;
     }
 
     get hasMessages() {
-        return this._messageThreadsGroup.hasMessages;
+        return this.messageThreadsGroup.hasMessages;
     }
 
     forEachMessageThread(callback) {
-        this._messageThreadsGroup.forEachMessageThread(callback);
+        this.messageThreadsGroup.forEachMessageThread(callback);
     }
 
     forEachOffFacebookEvent(callback) {
@@ -86,141 +86,7 @@ class FacebookAccount extends DataAccount {
     }
 
     addRelatedAccounts(relatedAccounts) {
-        this._relatedAccounts.addAll(relatedAccounts);
-    }
-
-    // Basic accessors
-
-    get offFacebookCompanies() {
-        return this._offFacebookCompanies;
-    }
-
-    set offFacebookCompanies(companies) {
-        this._offFacebookCompanies = companies;
-    }
-
-    get adInterests() {
-        return this._adInterests;
-    }
-
-    set adInterests(adInterests) {
-        this._adInterests = adInterests;
-    }
-
-    get connectedAdvertisers() {
-        return this._connectedAdvertisers;
-    }
-
-    set connectedAdvertisers(connectedAdvertisers) {
-        this._connectedAdvertisers = connectedAdvertisers;
-    }
-
-    get interactedAdvertisers() {
-        return this._interactedAdvertisers;
-    }
-
-    set interactedAdvertisers(interactedAdvertisers) {
-        this._interactedAdvertisers = interactedAdvertisers;
-    }
-
-    get friends() {
-        return this._friends;
-    }
-
-    set friends(friends) {
-        this._friends = friends;
-    }
-
-    get followedPages() {
-        return this._followedPages;
-    }
-
-    set followedPages(followedPages) {
-        this._followedPages = followedPages;
-    }
-
-    get likedPages() {
-        return this._likedPages;
-    }
-
-    set likedPages(likedPages) {
-        this._likedPages = likedPages;
-    }
-
-    get recommendedPages() {
-        return this._recommendedPages;
-    }
-
-    set recommendedPages(recommendedPages) {
-        this._recommendedPages = recommendedPages;
-    }
-
-    get unfollowedPages() {
-        return this._unfollowedPages;
-    }
-
-    set unfollowedPages(unfollowedPages) {
-        this._unfollowedPages = unfollowedPages;
-    }
-
-    get receivedFriendRequests() {
-        return this._receivedFriendRequests;
-    }
-
-    set receivedFriendRequests(receivedFriendRequests) {
-        this._receivedFriendRequests = receivedFriendRequests;
-    }
-
-    get searches() {
-        return this._searches;
-    }
-
-    set searches(searches) {
-        this._searches = searches;
-    }
-
-    get adminRecords() {
-        return this._adminRecords;
-    }
-
-    set adminRecords(adminRecords) {
-        this._adminRecords = adminRecords;
-    }
-
-    get accountSessionActivities() {
-        return this._accountSessionActivities;
-    }
-
-    set accountSessionActivities(accountSessionActivities) {
-        this._accountSessionActivities = accountSessionActivities;
-    }
-
-    get relatedAccounts() {
-        return this._relatedAccounts;
-    }
-
-    get relatedAccountsCount() {
-        return this._relatedAccounts.count;
-    }
-
-    get comments() {
-        return this._comments;
-    }
-
-    set comments(comments) {
-        this._comments = comments;
-    }
-
-    get postReactions() {
-        return this._postReactions;
-    }
-
-    set postReactions(postReactions) {
-        this._postReactions = postReactions;
-    }
-
-    get posts() {
-        return this._posts;
+        this.relatedAccounts.addAll(relatedAccounts);
     }
 
     addPosts(newPosts) {

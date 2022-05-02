@@ -14,7 +14,7 @@ class Story extends Component {
     get analyses() {
         const analysisData = {};
         this._neededAnalyses.forEach((reportKey) => {
-            analysisData[reportKey] = this._analyses.getData(reportKey);
+            analysisData[reportKey] = this._analyses.findData(reportKey);
         });
         return analysisData;
     }

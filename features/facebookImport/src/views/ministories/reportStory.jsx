@@ -10,7 +10,7 @@ class ReportStory extends Story {
     get reports() {
         const reportData = {};
         this._neededReports.forEach((reportKey) => {
-            reportData[reportKey] = this._reports.getData(reportKey);
+            reportData[reportKey] = this._reports.findData(reportKey);
         });
         return reportData;
     }

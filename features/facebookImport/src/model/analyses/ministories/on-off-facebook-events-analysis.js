@@ -51,7 +51,7 @@ export default class OnOffFacebookEventsAnalysis extends RootAnalysis {
         const onOffEvents = {};
         onOffEvents.displayData = {};
 
-        if (dataAccount._offFacebookCompanies.length > 0) {
+        if (dataAccount.offFacebookCompanies.length > 0) {
             onOffEvents.displayData.offEvents = {
                 companies: topOffFacebookCompanies(dataAccount),
                 activityTypes: groupOffFacebookEventsByType(dataAccount).map(
