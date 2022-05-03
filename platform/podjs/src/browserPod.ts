@@ -176,9 +176,55 @@ interface FileInfo {
     blob: Blob;
 }
 
+/**
+ * A variant of Stats that maintains compatibility with other polyPod
+ * implementations by exposing value properties.
+ *
+ * TODO: Eliminate the need for this, either by adding the value properties to
+ *       the Stats interface, or by eliminating them in all other polyPod
+ *       implementations, and their usages in all features.
+ */
+class CompatStats implements Stats {
+    readonly file: boolean;
+
+    constructor(
+        readonly id: string,
+        readonly size: number,
+        readonly time: string,
+        readonly name: string,
+        readonly directory: boolean
+    ) {
+        this.file = !directory;
+    }
+
+    getId(): string {
+        return this.id;
+    }
+
+    getSize(): number {
+        return this.size;
+    }
+
+    getTime(): string {
+        return this.time;
+    }
+
+    getName(): string {
+        return this.name;
+    }
+
+    isFile(): boolean {
+        return this.file;
+    }
+
+    isDirectory(): boolean {
+        return this.directory;
+    }
+}
+
 interface File {
     read(): Promise<Uint8Array>;
-    stat(): Stats;
+    stat(): CompatStats;
 }
 
 class IDBPolyOut implements PolyOut {
@@ -217,14 +263,13 @@ class IDBPolyOut implements PolyOut {
                 },
                 stat() {
                     const { uncompressedSize, directory, lastModDate } = entry;
-                    return {
-                        getId: () => id,
-                        getSize: () => uncompressedSize,
-                        getTime: () => lastModDate.toISOString(),
-                        getName: () => filename,
-                        isFile: () => !directory,
-                        isDirectory: () => directory,
-                    };
+                    return new CompatStats(
+                        id,
+                        uncompressedSize,
+                        lastModDate.toISOString(),
+                        filename,
+                        directory
+                    );
                 },
             };
         }
@@ -237,14 +282,13 @@ class IDBPolyOut implements PolyOut {
             stat() {
                 const { size } = file.blob;
                 const { time, name } = file;
-                return {
-                    getId: () => id,
-                    getSize: () => size,
-                    getTime: () => time.toISOString(),
-                    getName: () => name,
-                    isFile: () => true,
-                    isDirectory: () => false,
-                };
+                return new CompatStats(
+                    id,
+                    size,
+                    time.toISOString(),
+                    name,
+                    false
+                );
             },
         };
     }
@@ -261,33 +305,9 @@ class IDBPolyOut implements PolyOut {
         return this.getFile(id).then((file) => file.read());
     }
 
-    async stat(id: string): Promise<Stats> {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const stats: any =
-            id != ""
-                ? await (await this.getFile(id)).stat()
-                : {
-                      getId: () => "",
-                      getSize: () => 0,
-                      getTime: () => "",
-                      getName: () => "",
-                      isFile: () => false,
-                      isDirectory: () => true,
-                  };
-
-        // While these properties aren't part of the interface, they are
-        // incidentally present in other PolyPod implementations and features
-        // rely on them, so we return them in addition to the accessors defined
-        // in the interface. We should get rid of either the accessors or the
-        // value properties globally though.
-        stats.id = stats.getId();
-        stats.size = stats.getSize();
-        stats.time = stats.getTime();
-        stats.name = stats.getName();
-        stats.file = stats.isFile();
-        stats.directory = stats.isDirectory();
-
-        return stats;
+    async stat(id: string): Promise<CompatStats> {
+        if (id != "") return (await this.getFile(id)).stat();
+        return new CompatStats("", 0, "", "", true);
     }
 
     async readDir(id: string): Promise<Entry[]> {
