@@ -1,5 +1,5 @@
 import fc, { Arbitrary } from "fast-check";
-import { gens } from "@polypoly-eu/rdf-spec";
+import { gens } from "@polypoly-eu/api";
 import * as RDF from "@polypoly-eu/rdf";
 import { Bubblewrap, Class, Classes, deserialize, serialize } from "../index";
 
