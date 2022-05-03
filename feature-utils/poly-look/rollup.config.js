@@ -16,7 +16,7 @@ export default {
     },
   },
   plugins: [
-    svg(),
+    svg({ base64: true }),
     css({ output: "css/poly-look.css" }),
     sucrase({
       transforms: ["jsx"],
