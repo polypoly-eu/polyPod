@@ -5,15 +5,18 @@ that compiles to JavaScript) in the right order.
 
 ## Use
 
-If you are building this *for the first time ever*, run
-
-    ./build.js setup
-
-Consecutive builds will just need
+This command
 
      ./build.js
 
-Run `./build.js --help` for available commands.
+will
+
+1. Make a "root" install, that is, install all packages that are common to different
+   submodules as well as other dev tools like linting.
+2. Install packages in every one of the submodules, running a `npm ci`.
+3. Build those packages that need building, running `npm run build`
+
+Run `./build.js --help` for other available commands.
 
 ## Background
 
