@@ -26,7 +26,6 @@ import {
 import GoogleAccount from "./model/google-account.js";
 import { dataImporters } from "./model/importer.js";
 import i18n from "../../facebookImport/src/i18n.js";
-import ExploreView from "./views/explore.jsx";
 
 const Google = () => {
     const { pod, isLoading } = useContext(GoogleContext);
@@ -58,9 +57,6 @@ const Google = () => {
                     </Route>
                     <Route exact path="/import">
                         <ImportView />
-                    </Route>
-                    <Route exact path="/explore">
-                        <ExploreView />
                     </Route>
                 </Switch>
             )}
