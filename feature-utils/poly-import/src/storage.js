@@ -69,7 +69,7 @@ export class ZipFile {
     }
 
     get id() {
-        return this._file.getId();
+        return this._file.id;
     }
 
     async _readEntriesList() {
