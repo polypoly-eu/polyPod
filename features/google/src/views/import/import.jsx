@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { PolyImportContext } from "@polypoly-eu/poly-look";
+import { PolyButton, PolyImportContext, Screen } from "@polypoly-eu/poly-look";
 import { GoogleContext } from "../../context/google-context.jsx";
 import { useHistory } from "react-router-dom";
 import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
@@ -41,21 +41,28 @@ const ImportView = () => {
     };
 
     return (
-        <div className="import-view">
-            <button className="btn secondary" onClick={handleSelectFile}>
-                Select File
-            </button>
-            <button className="btn secondary" onClick={handleImportFile}>
+        <Screen className="import" layout="standard-layout">
+            <PolyButton
+                className="btn primary"
+                onClick={handleSelectFile}
+                label="Select File"
+            ></PolyButton>
+            {selectedFile && <p>Selected File: {selectedFile.name}</p>}
+            <PolyButton
+                className="btn secondary"
+                onClick={handleImportFile}
+                label="Import File"
+            >
                 Import File
-            </button>
-            <button
+            </PolyButton>
+            {files && files?.[0] && <p>Imported File: {files[0].name}</p>}
+            <PolyButton
                 onClick={() => {
                     files.length > 0 ? history.push("/") : null;
                 }}
-            >
-                Explore
-            </button>
-        </div>
+                label="Explore"
+            ></PolyButton>
+        </Screen>
     );
 };
 
