@@ -16,7 +16,7 @@ class ActivityLocationsMinistory extends SingleDataStory {
         return SingleDataStory.LABELS.TECH_DEMO;
     }
 
-    renderSummary() {
+    _renderSummary() {
         return (
             <BasicDataCountTable
                 title={

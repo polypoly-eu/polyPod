@@ -12,7 +12,7 @@ class DataStructureMinistory extends SingleDataStory {
         return i18n.t("dataStructureMiniStory:title");
     }
 
-    renderSummary() {
+    _renderSummary() {
         let totalFiles = 0;
         this.analysisData.forEach((a) => (totalFiles += a.count));
         return (

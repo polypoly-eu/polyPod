@@ -85,7 +85,9 @@ const ExploreView = () => {
             <List>
                 <UnrecognizedCard />
                 {ministories.map((MinistoryClass, index) => {
-                    const ministory = new MinistoryClass(account);
+                    const ministory = new MinistoryClass({
+                        account,
+                    });
                     if (!ministory.active) return;
                     const content = (
                         <>
@@ -97,15 +99,15 @@ const ExploreView = () => {
                                     )}
                                 </label>
                             )}
-                            {ministory.renderSummary()}
+                            {ministory.render()}
                         </>
                     );
-                    return ministory.renderDetails ? (
+                    return ministory.hasDetails() ? (
                         <RoutingCard
                             key={index}
                             history={history}
                             route="/explore/details"
-                            stateChange={{ activeAnalysis: ministory }}
+                            stateChange={{ ActiveStoryClass: MinistoryClass }}
                             buttonText={i18n.t("explore:details.button")}
                         >
                             {content}
