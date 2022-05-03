@@ -1,7 +1,7 @@
 {
-  "name": "@polypoly-eu/rdf-spec",
+  "name": "@polypoly-eu/api",
   "version": "0.3.1",
-  "description": "Standalone executable spec for RDFJS",
+  "description": "API for the POD",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "repository": {
@@ -12,7 +12,6 @@
     "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
-    "lint": "npm run eslint",
     "test": "jest",
     "docs": "typedoc"
   },
