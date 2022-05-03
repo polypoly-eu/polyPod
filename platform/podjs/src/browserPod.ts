@@ -262,15 +262,32 @@ class IDBPolyOut implements PolyOut {
     }
 
     async stat(id: string): Promise<Stats> {
-        if (id != "") return (await this.getFile(id)).stat();
-        return {
-            getId: () => "",
-            getSize: () => 0,
-            getTime: () => "",
-            getName: () => "",
-            isFile: () => false,
-            isDirectory: () => true,
-        };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const stats: any =
+            id != ""
+                ? await (await this.getFile(id)).stat()
+                : {
+                      getId: () => "",
+                      getSize: () => 0,
+                      getTime: () => "",
+                      getName: () => "",
+                      isFile: () => false,
+                      isDirectory: () => true,
+                  };
+
+        // While these properties aren't part of the interface, they are
+        // incidentally present in other PolyPod implementations and features
+        // rely on them, so we return them in addition to the accessors defined
+        // in the interface. We should get rid of either the accessors or the
+        // value properties globally though.
+        stats.id = stats.getId();
+        stats.size = stats.getSize();
+        stats.time = stats.getTime();
+        stats.name = stats.getName();
+        stats.file = stats.isFile();
+        stats.directory = stats.isDirectory();
+
+        return stats;
     }
 
     async readDir(id: string): Promise<Entry[]> {
