@@ -1,7 +1,7 @@
 import React from "react";
 import { INITIAL_HISTORY_STATE } from "../../constants";
 
-const RouteWrapper = ({ children, history, route, stateChange }) => {
+const RoutingWrapper = ({ children, history, route, stateChange }) => {
   const onRoute = () => {
     if (route == "back") history.goBack();
     else history.push(route, { ...INITIAL_HISTORY_STATE, ...stateChange });
@@ -24,4 +24,4 @@ const RouteWrapper = ({ children, history, route, stateChange }) => {
   );
 };
 
-export default RouteWrapper;
+export default RoutingWrapper;

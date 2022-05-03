@@ -1,5 +1,5 @@
 import PolyButton from "./polyButton.jsx";
 import IconButton from "./iconButton.jsx";
-import RouteWrapper from "./routeWrapper.jsx";
+import RoutingWrapper from "./routingWrapper.jsx";
 
-export { PolyButton, IconButton, RouteWrapper };
+export { PolyButton, IconButton, RoutingWrapper };

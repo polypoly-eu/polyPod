@@ -3,9 +3,9 @@ import FilterChips from "./filterChips.jsx";
 import { Tab, Tabs } from "./tabs.jsx";
 import { BlockLegend, LineLegend } from "./legends.jsx";
 import ErrorPopup from "./popUps/errorPopup/errorPopup.jsx";
-import { Card, ClickableCard, RoutingCard } from "./cards";
+import { Card, ClickableCard } from "./cards";
 import List from "./list.jsx";
-import { PolyButton, IconButton, RouteWrapper } from "./buttons";
+import { PolyButton, IconButton, RoutingWrapper } from "./buttons";
 import { SideSheet, SideSwiper, LoadingOverlay } from "./overlays";
 import {
   PolyImportContext,
@@ -21,7 +21,6 @@ export {
   ErrorPopup,
   Card,
   ClickableCard,
-  RoutingCard,
   List,
   PolyButton,
   IconButton,
@@ -30,5 +29,5 @@ export {
   PolyImportProvider,
   PolyImportContext,
   LoadingOverlay,
-  RouteWrapper,
+  RoutingWrapper,
 };
