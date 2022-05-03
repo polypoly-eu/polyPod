@@ -5,7 +5,7 @@ import { BlockLegend, LineLegend } from "./legends.jsx";
 import ErrorPopup from "./popUps/errorPopup/errorPopup.jsx";
 import { Card, ClickableCard, RoutingCard } from "./cards";
 import List from "./list.jsx";
-import { PolyButton, IconButton } from "./buttons";
+import { PolyButton, IconButton, RouteWrapper } from "./buttons";
 import { SideSheet, SideSwiper, LoadingOverlay } from "./overlays";
 import {
   PolyImportContext,
@@ -30,4 +30,5 @@ export {
   PolyImportProvider,
   PolyImportContext,
   LoadingOverlay,
+  RouteWrapper,
 };
