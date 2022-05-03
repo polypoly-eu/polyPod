@@ -8,7 +8,6 @@ import {
     relevantZipEntries,
 } from "./analysis/utils/analysis-util";
 import ReportStories from "./analysis/report/report-stories";
-import genericAnalyses from "./analysis/generic-analyses/generic-analyses";
 
 export {
     jsonDataEntities,
@@ -18,5 +17,4 @@ export {
     ReportStories,
     ReportAnalysis,
     MinistoriesStatusReport,
-    genericAnalyses,
 };
