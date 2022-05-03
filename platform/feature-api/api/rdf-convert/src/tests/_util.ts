@@ -1,7 +1,7 @@
 import * as RDF from "rdf-js";
 import { DataFactory } from "rdf-js";
 import { convert } from "../index";
-import { gens } from "@polypoly-eu/rdf-spec";
+import { gens } from "@polypoly-eu/api";
 import fc from "fast-check";
 import RDFJS from "@rdfjs/data-model";
 // @ts-ignore types not needed since it's going to be used from JS anyway
