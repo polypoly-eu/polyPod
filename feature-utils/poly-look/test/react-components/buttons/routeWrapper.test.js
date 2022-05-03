@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { RouteWrapper } from "../../../src/react-components";
+import { RoutingWrapper } from "../../../src/react-components";
 import { HistoryStub } from "../../utils/history-stub";
 import { INITIAL_HISTORY_STATE } from "../../../src/constants";
 
@@ -17,32 +17,32 @@ const testStateChange = {
 const history = new HistoryStub();
 const divTestId = "divTestId";
 const testRouteWrapper = (
-  <RouteWrapper
+  <RoutingWrapper
     history={history}
     route={testRoute}
     stateChange={testStateChange}
   >
     <div data-testid={divTestId}></div>
-  </RouteWrapper>
+  </RoutingWrapper>
 );
 
 const testonClickRouteWrapper = (
-  <RouteWrapper
+  <RoutingWrapper
     history={history}
     route={testRoute}
     stateChange={testStateChange}
   >
     <div data-testid={divTestId} onClick={divTestOnClick}></div>
-  </RouteWrapper>
+  </RoutingWrapper>
 );
 
 const testNoStateChangeRouteWrapper = (
-  <RouteWrapper history={history} route={testRoute}>
+  <RoutingWrapper history={history} route={testRoute}>
     <div data-testid={divTestId}></div>
-  </RouteWrapper>
+  </RoutingWrapper>
 );
 
-describe("RouteWrapper", () => {
+describe("RoutingWrapper", () => {
   beforeEach(() => {
     onClickTestVar = false;
   });
