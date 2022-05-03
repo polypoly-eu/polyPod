@@ -1,4 +1,4 @@
-import ReportAnalysis from "../report/report-analysis";
+import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class DataImportingStatusAnalysis extends ReportAnalysis {
     async analyze({ dataAccount }) {
