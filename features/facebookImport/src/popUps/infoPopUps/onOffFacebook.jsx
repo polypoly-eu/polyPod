@@ -1,11 +1,10 @@
 import React from "react";
 
 import i18n from "../../i18n.js";
-import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
 import Infographic from "../../components/infographic/infographic.jsx";
 
 const OnOffFacebookInfoPopUp = () => {
-    const onOffFacebookInfoText = [
+    return (
         <>
             <p>{i18n.t("onOffFacebookInfoScreen:text1")}</p>
             <Infographic
@@ -32,18 +31,18 @@ const OnOffFacebookInfoPopUp = () => {
                 }}
             />
             <p>{i18n.t("onOffFacebookInfoScreen:text3")}</p>
-        </>,
-        <>
+            <div className="separator separator-space"></div>
+            <h1 className="title title-space">
+                {i18n.t("baseInfoScreen:title2")}
+            </h1>
             <p>{i18n.t("onOffFacebookInfoScreen:text4")}</p>
             <p>{i18n.t("onOffFacebookInfoScreen:text5")}</p>
             <p>{i18n.t("onOffFacebookInfoScreen:text6")}</p>
             <p>{i18n.t("onOffFacebookInfoScreen:text7")}</p>
             <p>{i18n.t("onOffFacebookInfoScreen:text8")}</p>
             <p>{i18n.t("onOffFacebookInfoScreen:text9")}</p>
-        </>,
-    ];
-
-    return <BaseInfoPopUp infoChildren={onOffFacebookInfoText} />;
+        </>
+    );
 };
 
 export default OnOffFacebookInfoPopUp;

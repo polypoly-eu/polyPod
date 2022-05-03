@@ -34,7 +34,7 @@ const SideSheet = ({ children, okLabel, onClose, title = "", style = {} }) => {
 
       {children}
 
-      <div className="button-holder">
+      <div className="button-holder poly-theme-light">
         <PolyButton label={okLabel} onClick={onClose} />
       </div>
     </div>

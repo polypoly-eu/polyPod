@@ -1,15 +1,14 @@
 import React from "react";
 
 import i18n from "../../i18n.js";
-import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
 import Infographic from "../../components/infographic/infographic.jsx";
 
 import "./postReaction.css";
 import "./infoPopUps.css";
 
 const PostReactionInfoPopUp = () => {
-    const postReactionInfoText = [
-        <>
+    return (
+        <div className="reaction-types-info">
             <p>{i18n.t("postReactionInfoScreen:text1")}</p>
             <div className="legend chart-description-title">
                 {i18n.t("dataStructureInfoScreen:legend")}
@@ -26,12 +25,6 @@ const PostReactionInfoPopUp = () => {
                     __html: i18n.t(`postReactionInfoScreen:text2`),
                 }}
             />
-        </>,
-    ];
-
-    return (
-        <div className="reaction-types-info">
-            <BaseInfoPopUp infoChildren={postReactionInfoText} />
         </div>
     );
 };

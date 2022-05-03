@@ -1,11 +1,10 @@
 import React from "react";
 
 import i18n from "../../i18n.js";
-import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
 import Infographic from "../../components/infographic/infographic.jsx";
 
 const MessagesInfoPopUp = () => {
-    const messagesInfoText = [
+    return (
         <>
             <p>{i18n.t("messagesInfoScreen:text1")}</p>
             <Infographic
@@ -25,11 +24,13 @@ const MessagesInfoPopUp = () => {
                     __html: i18n.t(`messagesInfoScreen:text2`),
                 }}
             />
-        </>,
-        <p>{i18n.t("messagesInfoScreen:text3")}</p>,
-    ];
-
-    return <BaseInfoPopUp infoChildren={messagesInfoText} />;
+            <div className="separator separator-space"></div>
+            <h1 className="title title-space">
+                {i18n.t("baseInfoScreen:title2")}
+            </h1>
+            <p>{i18n.t("messagesInfoScreen:text3")}</p>
+        </>
+    );
 };
 
 export default MessagesInfoPopUp;

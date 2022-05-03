@@ -28,11 +28,11 @@ import ImportView from "./views/import/import.jsx";
 import ExploreView from "./views/explore/explore.jsx";
 import ExploreDetails from "./views/explore/details.jsx";
 import ReportWrapper from "./views/report/reportWrapper.jsx";
-
+import BaseInfoPopUp from "./popUps/baseInfoPopUp.jsx";
 import "./styles.css";
 
 const FacebookImporter = () => {
-    const { pod, globalError, setGlobalError, isLoading, popUp, closePopUp } =
+    const { pod, globalError, setGlobalError, isLoading, popUpOpened } =
         useContext(ImporterContext);
 
     const { files } = useContext(PolyImportContext);
@@ -77,10 +77,7 @@ const FacebookImporter = () => {
                     <ReportWrapper />
                 </Switch>
             )}
-            {popUp &&
-                popUp.component({
-                    onClose: closePopUp,
-                })}
+            {popUpOpened && <BaseInfoPopUp />}
             {globalError && (
                 <ErrorPopup
                     error={globalError}

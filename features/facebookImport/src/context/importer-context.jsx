@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
 
-import popUps from "../popUps";
+import popUps from "../popUps/infoPopUps";
 
 export const ImporterContext = React.createContext();
 
@@ -34,7 +34,7 @@ export const ImporterProvider = ({ children }) => {
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
     const [popUp, setPopUp] = useState(null);
-
+    const [popUpOpened, setPopUpOpen] = useState(false);
     const history = useHistory();
     const location = useLocation();
 
@@ -44,16 +44,23 @@ export const ImporterProvider = ({ children }) => {
         setIsLoading(false);
     }
 
-    function createPopUp({ type }) {
-        setPopUp({ component: popUps[type] });
+    function createPopUp(type) {
+        console.log(popUps[type]);
+        setPopUp(type);
     }
 
     function closePopUp() {
-        setPopUp(null);
+        setPopUpOpen(false);
     }
+    useEffect(() => {
+        document.body.style.overflowY = popUpOpened ? "hidden" : "unset";
+        if (!popUpOpened) setPopUp(null);
+    }, [popUpOpened]);
 
     function handleBack() {
-        if (popUp) return setPopUp(null);
+        if (popUpOpened) {
+            return setPopUpOpen(false);
+        }
         history.length > 1 && history.goBack();
     }
 
@@ -86,6 +93,8 @@ export const ImporterProvider = ({ children }) => {
                 popUp,
                 createPopUp,
                 closePopUp,
+                popUpOpened,
+                setPopUpOpen,
             }}
         >
             {children}

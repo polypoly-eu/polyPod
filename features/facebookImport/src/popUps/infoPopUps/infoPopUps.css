@@ -2,3 +2,10 @@ div .chart-description-title {
     font-family: "Jost Medium";
     font-size: 14px;
 }
+.separator.separator-space {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+.title.title-space {
+    margin-bottom: 12px;
+}

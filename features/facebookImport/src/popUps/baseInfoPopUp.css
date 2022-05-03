@@ -1,0 +1,20 @@
+.backdrop {
+    margin-top: 50px;
+}
+.base-info-contents {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+    margin-bottom: 34px;
+}
+
+.base-info-contents p {
+    font-size: 16px;
+    font-family: "Jost";
+    font-weight: 400;
+    margin-top: 0;
+}
+.base-info-contents .legend {
+    margin: auto;
+    max-width: var(--max-width);
+}

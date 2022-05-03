@@ -4,10 +4,11 @@ import { ImporterContext } from "../../../context/importer-context.jsx";
 import "./infoButton.css";
 
 const InfoButton = ({ infoScreen }) => {
-    const { createPopUp } = useContext(ImporterContext);
+    const { createPopUp, setPopUpOpen } = useContext(ImporterContext);
 
     const handleClick = () => {
-        createPopUp({ type: infoScreen });
+        createPopUp(infoScreen);
+        setPopUpOpen(true);
     };
     return (
         <button className="info-button" onClick={handleClick}>

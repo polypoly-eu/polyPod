@@ -1,13 +1,12 @@
 import React from "react";
 
 import i18n from "../../i18n.js";
-import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
 import Infographic from "../../components/infographic/infographic.jsx";
 
 import "./infoPopUps.css";
 
 const ActivitiesInfoPopUp = () => {
-    const activitiesInfoText = [
+    return (
         <>
             <p>{i18n.t("activitiesInfoScreen:text1")}</p>
             <div className="legend chart-description-title">
@@ -41,14 +40,14 @@ const ActivitiesInfoPopUp = () => {
                     __html: i18n.t(`activitiesInfoScreen:text2`),
                 }}
             />
-        </>,
-        <>
+            <div className="separator separator-space"></div>
+            <h1 className="title title-space">
+                {i18n.t("baseInfoScreen:title2")}
+            </h1>
             <p>{i18n.t("activitiesInfoScreen:text3")}</p>
             <p>{i18n.t("activitiesInfoScreen:text4")}</p>
-        </>,
-    ];
-
-    return <BaseInfoPopUp infoChildren={activitiesInfoText} />;
+        </>
+    );
 };
 
 export default ActivitiesInfoPopUp;
