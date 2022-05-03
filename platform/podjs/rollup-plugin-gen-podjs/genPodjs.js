@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 
 function executeReplacement(podJs, manifestJsonPath) {
     try {
@@ -15,14 +16,12 @@ function executeReplacement(podJs, manifestJsonPath) {
 }
 
 function copyPodJs(dest) {
-    if (!fs.existsSync(dest)) {
-        fs.mkdirSync(dest);
-
-        fs.copyFileSync(
-            "node_modules/@polypoly-eu/podjs/dist/pod.js",
-            `${dest}/pod.js`
-        );
+    const destDir = path.dirname(dest);
+    if (!fs.existsSync(destDir)) {
+        fs.mkdirSync(destDir);
     }
+
+    fs.copyFileSync("node_modules/@polypoly-eu/podjs/dist/pod.js", `${dest}`);
 }
 
 /**
@@ -37,7 +36,7 @@ function loadManifest(options = {}) {
     const podJsPath = `${options.build_dir}/pod.js`;
     console.log("Loading", options.manifestPath, "into", podJsPath);
 
-    copyPodJs(options.build_dir);
+    copyPodJs(podJsPath);
 
     executeReplacement(podJsPath, options.manifestPath);
 }

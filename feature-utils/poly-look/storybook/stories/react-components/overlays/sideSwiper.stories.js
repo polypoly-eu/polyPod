@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import SideSwiper from "../../../src/react-components/overlays/sideSwiper.jsx";
-import "../../../src/css/index.js";
-import "./fontFamily.css";
-import "./demo.css";
+import { SideSwiper } from "../../../../src/react-components/";
+import "../../../../src/css/index.js";
+import "../fontFamily.css";
+import "../demo.css";
 
 export default {
   component: SideSwiper,

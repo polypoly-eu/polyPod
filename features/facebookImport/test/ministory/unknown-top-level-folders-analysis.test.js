@@ -35,7 +35,9 @@ describe("Unknown top level folders analysis", () => {
             zipFile
         );
         ({ status } = analysisResult);
-        analysisReport = new UnknownTopLevelFoldersReport(facebookAccount);
+        analysisReport = new UnknownTopLevelFoldersReport({
+            account: facebookAccount,
+        });
         jsonReport = analysisReport.jsonReport;
     });
 

@@ -20,7 +20,9 @@ describe("Post reactions analysis for empty zip", () => {
             zipFile
         );
         ({ status } = analysisResult);
-        analysisStory = new PostReactionTypesMinistory(facebookAccount);
+        analysisStory = new PostReactionTypesMinistory({
+            account: facebookAccount,
+        });
     });
 
     it("has success status", async () => {
@@ -44,7 +46,9 @@ describe("Post reactions analysis from export data", () => {
             zipFile
         );
         ({ status } = analysisResult);
-        analysisStory = new PostReactionTypesMinistory(facebookAccount);
+        analysisStory = new PostReactionTypesMinistory({
+            account: facebookAccount,
+        });
         analysisData = {
             reactionsTypeCountPairs: analysisStory.analysisData,
         };

@@ -17,11 +17,11 @@ class ActivitiesMinistory extends SingleDataStory {
         return i18n.t("activitiesMiniStory:title");
     }
 
-    renderSummary() {
+    _renderSummary() {
         return <ActivitiesMiniStorySummary totalEvents={this.analysisData} />;
     }
 
-    renderDetails() {
+    _renderDetails() {
         return <ActivitiesMiniStoryDetails totalEvents={this.analysisData} />;
     }
 }

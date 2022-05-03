@@ -15,7 +15,8 @@ class MissingCommonJSONFilesReport extends ReportStory {
     get reportData() {
         return this.reports[analysisKeys.missingCommonFileNames];
     }
-    render() {
+
+    _renderSummary() {
         return <BasicList items={this.reportData} />;
     }
 }

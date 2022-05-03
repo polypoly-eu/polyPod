@@ -12,7 +12,7 @@ class ConnectedAdvertisersMinistory extends SingleDataStory {
         return i18n.t("connectedAdvertisersMiniStory:title");
     }
 
-    renderSummary() {
+    _renderSummary() {
         return (
             <div className="connected-advertisers-ministory-summary">
                 <h2
@@ -36,7 +36,7 @@ class ConnectedAdvertisersMinistory extends SingleDataStory {
         );
     }
 
-    renderDetails() {
+    _renderDetails() {
         return (
             <div
                 style={{

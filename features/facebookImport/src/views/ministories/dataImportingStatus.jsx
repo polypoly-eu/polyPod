@@ -27,7 +27,7 @@ class DataImportingStatusReport extends ReportStory {
         );
     }
 
-    render() {
+    _renderSummary() {
         return (
             <>
                 <p>

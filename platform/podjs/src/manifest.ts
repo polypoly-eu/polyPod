@@ -19,7 +19,7 @@ const decodeWith = <EncodeTo = any, DecodeFrom = unknown>(
     pipe(
         decoder.decode(input),
         Either.getOrElseW((errors) => {
-            throw new Error("Failed to parse manifest" + errors);
+            throw new Error("Failed to parse manifest: " + errors);
         })
     );
 
