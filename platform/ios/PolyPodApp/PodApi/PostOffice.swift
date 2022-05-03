@@ -201,11 +201,9 @@ extension PostOffice {
         
         PodApi.shared.polyIn.hasQuads(quads: extendedDataSet) { doesHave in
             if doesHave {
-                completionHandler(MessagePackValue(), true)
+                completionHandler(MessagePackValue(true), nil)
             } else {
-                // TODO: This needs a closer look - should we really fail if the
-                //       data we check for is not there?
-                completionHandler(false, createErrorResponse(#function, "Not there"))
+                completionHandler(MessagePackValue(false), nil)
             }
         }
     }
