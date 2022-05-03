@@ -8,7 +8,6 @@ const testLayout = "testLayout";
 const testChild = <div data-testid="testChild"></div>;
 const testScreen = (
   <Screen className={testClass} layout={testLayout}>
-    <div data-testid="testChild"></div>
     {testChild}
   </Screen>
 );
