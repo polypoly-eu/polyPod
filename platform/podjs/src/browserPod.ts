@@ -16,7 +16,7 @@ import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../../polyPod-config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
 
-const DB_NAME = "polypod";
+const DB_PREFIX = "polypod:";
 const DB_VERSION = 1;
 const OBJECT_STORE_POLY_IN = "poly-in";
 const OBJECT_STORE_POLY_OUT = "poly-out";
@@ -29,55 +29,10 @@ const NAV_LIGHT_FOREGROUND_COLOR = "#ffffff";
 
 const MANIFEST_DATA = window.manifestData;
 
-// Previously, data were stored in localStorage. IndexedDB is more flexible and
-// efficient, and most importantly in our case can store larger amount of data,
-// while the 2MB limit of localStorage is no longer sufficient. This function
-// migrates any data in localStorage to not disrupt the developer expirience.
-// TODO: Please remove the migration code after Oct 2022
-async function migrateData(db: IDBDatabase): Promise<IDBDatabase> {
-    const polyInData = localStorage.getItem("polyInStore");
-    const polyOutData = localStorage.getItem("files");
-
-    if (polyInData || polyOutData) {
-        const files: FileInfo[] = [];
-        const quads = polyInData
-            ? JSON.parse(polyInData).map(RDFString.quadToStringQuad)
-            : [];
-
-        if (polyOutData) {
-            for (const [, file] of JSON.parse(polyOutData)) {
-                const dataUrl = localStorage.getItem(file.id);
-                if (dataUrl) {
-                    files.push({
-                        id: file.id,
-                        name: file.name,
-                        time: new Date(file.time),
-                        blob: await (await fetch(dataUrl)).blob(),
-                    });
-                }
-            }
-        }
-
-        await new Promise((resolve, reject) => {
-            const storeNames = [OBJECT_STORE_POLY_IN, OBJECT_STORE_POLY_OUT];
-            const tx = db.transaction(storeNames, "readwrite");
-            const polyInStore = tx.objectStore(OBJECT_STORE_POLY_IN);
-            for (const quad of quads) polyInStore.add(quad);
-            const polyOutStore = tx.objectStore(OBJECT_STORE_POLY_OUT);
-            for (const file of files) polyOutStore.add(file);
-            tx.oncomplete = () => resolve(null);
-            tx.onerror = tx.onabort = () => reject(tx.error);
-        });
-
-        localStorage.clear();
-    }
-
-    return db;
-}
-
-function openDatabase(): Promise<IDBDatabase> {
+async function openDatabase(): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
-        const request = indexedDB.open(DB_NAME, DB_VERSION);
+        const name = `${DB_PREFIX}${document.location.pathname}`;
+        const request = indexedDB.open(name, DB_VERSION);
 
         request.onupgradeneeded = () => {
             const db = request.result;
@@ -91,7 +46,7 @@ function openDatabase(): Promise<IDBDatabase> {
             db.createObjectStore(OBJECT_STORE_POLY_OUT, { keyPath: "id" });
         };
 
-        request.onsuccess = () => resolve(migrateData(request.result));
+        request.onsuccess = () => resolve(request.result);
         request.onerror = () => reject(request.error);
     });
 }
