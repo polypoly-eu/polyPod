@@ -3,16 +3,8 @@ import Story from "./story.jsx";
 class ReportStory extends Story {
     constructor(account) {
         super(account);
-        this._reports = account.reports;
+        this.reports = account.reports;
         this._neededReports = [];
-    }
-
-    get reports() {
-        const reportData = {};
-        this._neededReports.forEach((reportKey) => {
-            reportData[reportKey] = this._reports.findData(reportKey);
-        });
-        return reportData;
     }
 
     get jsonReport() {

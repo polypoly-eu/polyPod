@@ -1,14 +1,11 @@
 import { DataAccount } from "@polypoly-eu/poly-import";
 import i18n from "../../i18n.js";
-import FacebookProcessedData from "./facebook-processed-data.js";
 import MessageThreadsGroup from "./message-threads-group.js";
 import RelatedAccountsGroup from "./related-accounts-group.js";
 
 class FacebookAccount extends DataAccount {
     constructor() {
         super();
-        this.processedData = new FacebookProcessedData();
-
         this.offFacebookCompanies = [];
         this.adInterests = [];
         this.connectedAdvertisers = [];

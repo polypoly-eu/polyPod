@@ -3,20 +3,12 @@ import { Component } from "react";
 class Story extends Component {
     constructor({ analyses }) {
         super();
-        this._analyses = analyses;
+        this.analyses = analyses;
         this._neededAnalyses = [];
     }
 
     get label() {
         return Story.LABELS.NONE;
-    }
-
-    get analyses() {
-        const analysisData = {};
-        this._neededAnalyses.forEach((reportKey) => {
-            analysisData[reportKey] = this._analyses.findData(reportKey);
-        });
-        return analysisData;
     }
 
     get active() {

@@ -39,7 +39,6 @@ class AnalysisExecutionResult {
 
 export async function runAnalysis(analysisClass, enrichedData) {
     const subAnalysis = new analysisClass();
-
     const telemetry = new Telemetry();
     let status;
     try {

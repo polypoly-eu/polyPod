@@ -5,7 +5,7 @@ import {
     RefreshFilesError,
     FileSelectionError,
 } from "./errors/polyIn-errors";
-import DataAccount from "./dataAccount";
+import DataAccount from "./entities/data-account";
 import { Status, statusTypes } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
 export {
