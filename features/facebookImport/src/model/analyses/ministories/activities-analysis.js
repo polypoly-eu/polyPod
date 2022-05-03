@@ -57,7 +57,7 @@ export default class ActivitiesAnalysis extends RootAnalysis {
             groupedActivities.total++;
         });
 
-        dataAccount.processedData._totalEvents =
+        dataAccount.processedData.totalEvents =
             groupedActivities.total > 0 && groupedActivities;
     }
 }

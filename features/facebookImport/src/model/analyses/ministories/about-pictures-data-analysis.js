@@ -1,5 +1,6 @@
 import { relevantZipEntries } from "../../importers/utils/importer-util";
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
+import analysisKeys from "../utils/analysisKeys";
 
 /**
  * Minimum number of picutures that should be present in
@@ -40,10 +41,10 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
             .filter((path) => photoRegexes.some((regex) => regex.test(path)));
     }
 
-    async analyze({ enrichedData, dataAccount }) {
-        const { zipFile } = enrichedData;
+    async analyze({ zipFile, dataAccount }) {
         const pictureEntries = await this._userPicturesFromExport(zipFile);
         if (pictureEntries.length >= PICTURES_THRESHOLD)
-            dataAccount.processedData._picturesCount = pictureEntries.length;
+            dataAccount.processedData[analysisKeys.picturesCount] =
+                pictureEntries.length;
     }
 }

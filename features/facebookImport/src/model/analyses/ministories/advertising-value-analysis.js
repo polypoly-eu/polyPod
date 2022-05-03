@@ -1,4 +1,5 @@
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
+import analysisKeys from "../utils/analysisKeys";
 
 export default class AdvertisingValueAnalysis extends RootAnalysis {
     async analyze({ dataAccount }) {
@@ -11,16 +12,16 @@ export default class AdvertisingValueAnalysis extends RootAnalysis {
                     adInterests[Math.floor(Math.random() * adInterests.length)]
                 );
             }
-            dataAccount.processedData._randomAdInterests = [
+            dataAccount.processedData[analysisKeys.randomAdInterests] = [
                 ...randomAdInterests,
             ];
         }
-        dataAccount.processedData._numberInterests = numberInterests;
+        dataAccount.processedData[analysisKeys.numberInterests] =
+            numberInterests;
 
-        dataAccount.processedData._sortedAdInterests = adInterests.sort(
-            (a, b) => {
+        dataAccount.processedData[analysisKeys.sortedAdInterests] =
+            adInterests.sort((a, b) => {
                 return a.toLowerCase().localeCompare(b.toLowerCase());
-            }
-        );
+            });
     }
 }

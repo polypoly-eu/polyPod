@@ -1,4 +1,5 @@
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
+import analysisKeys from "../utils/analysisKeys";
 
 export default class SesssionActivityLocationsAnalysis extends RootAnalysis {
     async analyze({ dataAccount }) {
@@ -28,6 +29,7 @@ export default class SesssionActivityLocationsAnalysis extends RootAnalysis {
         }
 
         if (locationsData.length > 0)
-            dataAccount.processedData._locationsData = locationsData;
+            dataAccount.processedData[analysisKeys.locationsData] =
+                locationsData;
     }
 }

@@ -74,7 +74,7 @@ const ExploreView = () => {
         );
 
     const renderFileAnalyses = () => {
-        if (!account.processedData)
+        if (!account.analyses)
             return (
                 <Loading
                     loadingGif="./images/loading.gif"

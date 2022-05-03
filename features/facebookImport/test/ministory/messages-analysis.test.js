@@ -98,7 +98,7 @@ describe("Messages analysis for export with messages", () => {
 function getAnalysisData(analysisStory) {
     const analysisData = {};
     Object.entries(analysisStory.analyses).forEach(
-        ([key, value]) => (analysisData[key.replace("_", "")] = value)
+        ([key, value]) => (analysisData[key] = value)
     );
 
     return analysisData;

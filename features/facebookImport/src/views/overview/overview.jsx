@@ -7,6 +7,7 @@ import Loading from "../../components/loading/loading.jsx";
 import i18n from "../../i18n.js";
 import { useHistory } from "react-router";
 import { formatTime } from "../../utils/formatTime.js";
+import { analyzeFile } from "@polypoly-eu/poly-analysis";
 import { subAnalyses } from "../../model/analysis";
 
 import "./overview.css";
@@ -17,10 +18,11 @@ const Overview = () => {
     const [showNewImportDialog, setShowNewImportDialog] = useState(false);
     const history = useHistory();
 
-    useEffect(async () => {
+    useEffect(() => {
         if (!account) return;
-        await account.analyzeFile({
+        analyzeFile({
             zipData: files[0],
+            dataAccount: account,
             subAnalyses,
         });
     }, [account]);

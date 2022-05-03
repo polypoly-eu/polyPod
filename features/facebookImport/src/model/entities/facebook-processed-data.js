@@ -8,7 +8,6 @@ export default class FacebookProcessedData extends ProcessedData {
         this._totalEvents = null;
         this._locationsData = null;
         this._randomAdInterests = null;
-        this._sortedAdInterests = null;
         this._numberInterests = null;
         this._displayData = null;
         this._reactionsTypeCountPairs = null;
@@ -25,6 +24,7 @@ export default class FacebookProcessedData extends ProcessedData {
         this._postReactionsTypes = null;
         this._eventsTypeCountPairs = null;
         this._bubblesData = null;
+        this._sortedAdInterests = null;
 
         const attributes = [
             "picturesCount",
