@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@polypoly-eu/dummy-server": "file:../../../../dev-utils/dummy-server",
-    "@polypoly-eu/rdf-spec": "file:../rdf-spec",
+    "@polypoly-eu/rdf-spec": "file:..",
     "@polypoly-eu/test-utils": "file:../../utils",
     "@rdfjs/dataset": "^1.0.1",
     "@types/chai": "^4.2.14",
@@ -42,7 +42,6 @@
     "node-fetch": "^2.6.7"
   },
   "peerDependencies": {
-    "@polypoly-eu/rdf-spec": "*",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "fast-check": "^2.11.0"

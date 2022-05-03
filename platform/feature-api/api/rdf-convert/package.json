@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@graphy/core.data.factory": "^4.3.3",
-    "@polypoly-eu/rdf-spec": "file:../rdf-spec",
+    "@polypoly-eu/rdf-spec": "file:..",
     "@rdfjs/data-model": "^1.2.0",
     "@types/n3": "^1.4.4",
     "fast-check": "^2.11.0",
