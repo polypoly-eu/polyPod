@@ -12,7 +12,7 @@ const DataStructureInfoPopUp = () => {
             <div className="legend chart-description-title">
                 {i18n.t("dataStructureInfoScreen:legend")}
             </div>
-            <div>
+            <div className="full-width">
                 <Infographic
                     type="bubblesChartInfoScreen"
                     texts={{

@@ -5,11 +5,13 @@
     margin-bottom: 34px;
 }
 
+.base-info-contents p:first-of-type {
+    margin-top: 0;
+}
 .base-info-contents p {
     font-size: 16px;
     font-family: "Jost";
     font-weight: 400;
-    margin-top: 0;
 }
 .base-info-contents .legend {
     margin: auto;

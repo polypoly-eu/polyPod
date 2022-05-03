@@ -7,24 +7,26 @@ const OnOffFacebookInfoPopUp = () => {
     return (
         <>
             <p>{i18n.t("onOffFacebookInfoScreen:text1")}</p>
-            <Infographic
-                type="onOffFacebookChart"
-                texts={{
-                    bigbold1: i18n.t(
-                        "infographics:onOffFacebookChart.bigbold1"
-                    ),
-                    bigbold2: i18n.t(
-                        "infographics:onOffFacebookChart.bigbold2"
-                    ),
-                    bold1: i18n.t("infographics:onOffFacebookChart.bold1"),
-                    greylegend1: i18n.t(
-                        "infographics:onOffFacebookChart.greylegend1"
-                    ),
-                    greylegend2: i18n.t(
-                        "infographics:onOffFacebookChart.greylegend2"
-                    ),
-                }}
-            />
+            <div className="full-width">
+                <Infographic
+                    type="onOffFacebookChart"
+                    texts={{
+                        bigbold1: i18n.t(
+                            "infographics:onOffFacebookChart.bigbold1"
+                        ),
+                        bigbold2: i18n.t(
+                            "infographics:onOffFacebookChart.bigbold2"
+                        ),
+                        bold1: i18n.t("infographics:onOffFacebookChart.bold1"),
+                        greylegend1: i18n.t(
+                            "infographics:onOffFacebookChart.greylegend1"
+                        ),
+                        greylegend2: i18n.t(
+                            "infographics:onOffFacebookChart.greylegend2"
+                        ),
+                    }}
+                />
+            </div>
             <p
                 dangerouslySetInnerHTML={{
                     __html: i18n.t(`onOffFacebookInfoScreen:text2`),

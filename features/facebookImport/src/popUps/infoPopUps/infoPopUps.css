@@ -9,3 +9,14 @@ div .chart-description-title {
 .title.title-space {
     margin-bottom: 12px;
 }
+
+.full-width {
+    position: relative;
+    margin-left: -16px;
+    margin-right: -16px;
+    background-color: var(--color-gray-50);
+    display: flex;
+}
+.full-width .infographic {
+    padding: 16px;
+}
