@@ -48,7 +48,7 @@ describe("RouteWrapper", () => {
   });
 
   it("manipulates history correctly without onClick of children", () => {
-    const { container, getByTestId } = render(testRouteWrapper);
+    const { getByTestId } = render(testRouteWrapper);
     fireEvent.click(getByTestId(divTestId));
     expect(history.route).toBe(testRoute);
     expect(history.state).toStrictEqual({
@@ -58,7 +58,7 @@ describe("RouteWrapper", () => {
   });
 
   it("manipulates history correctly and clicks onClick of children", () => {
-    const { container, getByTestId } = render(testonClickRouteWrapper);
+    const { getByTestId } = render(testonClickRouteWrapper);
     fireEvent.click(getByTestId(divTestId));
     expect(history.route).toBe(testRoute);
     expect(history.state).toStrictEqual({
@@ -69,7 +69,7 @@ describe("RouteWrapper", () => {
   });
 
   it("manipulates history correctly and clicks onClick of children", () => {
-    const { container, getByTestId } = render(testNoStateChangeRouteWrapper);
+    const { getByTestId } = render(testNoStateChangeRouteWrapper);
     fireEvent.click(getByTestId(divTestId));
     expect(history.route).toBe(testRoute);
     expect(history.state).toStrictEqual(INITIAL_HISTORY_STATE);
