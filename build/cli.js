@@ -11,7 +11,6 @@ const validCommands = [
     "list",
     "list-deps",
     "offlineInstall",
-    "setup",
     "syncdeps",
     "test",
 ];
