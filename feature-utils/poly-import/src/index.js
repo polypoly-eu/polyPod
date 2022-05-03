@@ -5,10 +5,9 @@ import {
     RefreshFilesError,
     FileSelectionError,
 } from "./errors/polyIn-errors";
-import DataAccount from "./data-account";
+import DataAccount from "./dataAccount";
 import { Status, statusTypes } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
-import ProcessedData from "./processed-data";
 export {
     importZip,
     importData,
@@ -18,7 +17,6 @@ export {
     ZipFile,
     Telemetry,
     ZipFileEntry,
-    ProcessedData,
     FileImportError,
     RefreshFilesError,
     FileSelectionError,

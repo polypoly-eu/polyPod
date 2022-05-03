@@ -1,5 +1,3 @@
-import ProcessedData from "./processed-data";
-
 export default class DataAccount {
     constructor() {
 <<<<<<< HEAD:feature-utils/poly-import/src/entities/data-account.js
@@ -15,12 +13,17 @@ export default class DataAccount {
 
         this._name = "";
         this._preferredLanguage = [];
-        this._processedData = new ProcessedData();
+        this._analyses = {};
+        this._reports = {};
         this._analysesExecutionResults = [];
     }
 
-    get processedData() {
-        return this._processedData;
+    get analyses() {
+        return this._analyses;
+    }
+
+    get reports() {
+        return this._reports;
     }
 
     get importedFileNames() {
