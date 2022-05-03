@@ -185,16 +185,16 @@ interface FileInfo {
  *       implementations, and their usages in all features.
  */
 class CompatStats implements Stats {
-    readonly file: boolean;
-
     constructor(
         readonly id: string,
         readonly size: number,
         readonly time: string,
         readonly name: string,
         readonly directory: boolean
-    ) {
-        this.file = !directory;
+    ) {}
+
+    get file(): boolean {
+        return !this.directory;
     }
 
     getId(): string {
@@ -262,13 +262,12 @@ class IDBPolyOut implements PolyOut {
                     return entry.getData(new zip.Uint8ArrayWriter());
                 },
                 stat() {
-                    const { uncompressedSize, directory, lastModDate } = entry;
                     return new CompatStats(
                         id,
-                        uncompressedSize,
-                        lastModDate.toISOString(),
+                        entry.uncompressedSize,
+                        entry.lastModDate.toISOString(),
                         filename,
-                        directory
+                        entry.directory
                     );
                 },
             };
@@ -280,13 +279,11 @@ class IDBPolyOut implements PolyOut {
                 return new Uint8Array(await file.blob.arrayBuffer());
             },
             stat() {
-                const { size } = file.blob;
-                const { time, name } = file;
                 return new CompatStats(
                     id,
-                    size,
-                    time.toISOString(),
-                    name,
+                    file.blob.size,
+                    file.time.toISOString(),
+                    file.name,
                     false
                 );
             },
