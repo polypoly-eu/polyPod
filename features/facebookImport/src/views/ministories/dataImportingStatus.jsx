@@ -5,7 +5,7 @@ import ReportStory from "./reportStory.jsx";
 class DataImportingStatusReport extends ReportStory {
     constructor(props) {
         super(props);
-        this._neededReports = [analysisKeys.importersData];
+        this._neededAnalyses = [analysisKeys.importersData];
     }
     get title() {
         return "Importing status";

@@ -45,16 +45,15 @@ export default class DataAccount {
         try {
             status = await subAnalysis.analyze({
                 enrichedData,
-                zipFile: enrichedData.zipFile,
                 dataAccount: this,
             });
         } catch (error) {
             status = new Status({ name: statusTypes.error, message: error });
         }
-        return new AnalysisExecutionResult({
-            analysis: subAnalysis,
-            executionTime: telemetry.elapsedTime(),
-            status: status || new Status({ name: statusTypes.success }),
-        });
+        return new AnalysisExecutionResult(
+            subAnalysis,
+            status,
+            telemetry.elapsedTime()
+        );
     }
 }

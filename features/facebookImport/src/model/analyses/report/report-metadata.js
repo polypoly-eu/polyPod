@@ -1,8 +1,7 @@
 import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class ReportMetadataAnalysis extends ReportAnalysis {
-    async analyze({ enrichedData, zipFile, dataAccount }) {
-        const { size, pod } = enrichedData;
+    async analyze({ size, zipFile, dataAccount, pod }) {
         const info = await pod.info;
         dataAccount.processedData._reportMetadata = {};
         dataAccount.processedData._reportMetadata.polyPodRuntime =
