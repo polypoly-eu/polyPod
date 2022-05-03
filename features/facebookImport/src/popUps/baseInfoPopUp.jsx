@@ -6,11 +6,11 @@ import popUps from "./infoPopUps";
 import "./baseInfoPopUp.css";
 
 const BaseInfoPopUp = () => {
-    const { closePopUp, popUp, popUpOpened } = useContext(ImporterContext);
+    const { popUp, setPopUp } = useContext(ImporterContext);
     return (
         <SideSwiper
-            onClose={closePopUp}
-            open={popUpOpened}
+            onClose={() => setPopUp(null)}
+            open={!!popUp}
             lastChildSelector=".poly-button"
             Component={(props) => (
                 <SideSheet

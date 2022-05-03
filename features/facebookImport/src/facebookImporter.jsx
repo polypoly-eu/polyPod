@@ -32,7 +32,7 @@ import BaseInfoPopUp from "./popUps/baseInfoPopUp.jsx";
 import "./styles.css";
 
 const FacebookImporter = () => {
-    const { pod, globalError, setGlobalError, isLoading, popUpOpened } =
+    const { pod, globalError, setGlobalError, isLoading, popUp } =
         useContext(ImporterContext);
 
     const { files } = useContext(PolyImportContext);
@@ -77,7 +77,7 @@ const FacebookImporter = () => {
                     <ReportWrapper />
                 </Switch>
             )}
-            {popUpOpened && <BaseInfoPopUp />}
+            {popUp && <BaseInfoPopUp />}
             {globalError && (
                 <ErrorPopup
                     error={globalError}

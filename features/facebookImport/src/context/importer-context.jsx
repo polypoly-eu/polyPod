@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import i18n from "../i18n.js";
 import { useHistory, useLocation } from "react-router-dom";
 
-import popUps from "../popUps/infoPopUps";
-
 export const ImporterContext = React.createContext();
 
 function updatePodNavigation(pod, history, handleBack, location) {
@@ -34,7 +32,6 @@ export const ImporterProvider = ({ children }) => {
     const [globalError, setGlobalError] = useState(null);
     const [reportResult, setReportResult] = useState(null);
     const [popUp, setPopUp] = useState(null);
-    const [popUpOpened, setPopUpOpen] = useState(false);
     const history = useHistory();
     const location = useLocation();
 
@@ -44,22 +41,9 @@ export const ImporterProvider = ({ children }) => {
         setIsLoading(false);
     }
 
-    function createPopUp(type) {
-        console.log(popUps[type]);
-        setPopUp(type);
-    }
-
-    function closePopUp() {
-        setPopUpOpen(false);
-    }
-    useEffect(() => {
-        document.body.style.overflowY = popUpOpened ? "hidden" : "unset";
-        if (!popUpOpened) setPopUp(null);
-    }, [popUpOpened]);
-
     function handleBack() {
-        if (popUpOpened) {
-            return setPopUpOpen(false);
+        if (popUp) {
+            return setPopUp(null);
         }
         history.length > 1 && history.goBack();
     }
@@ -78,6 +62,10 @@ export const ImporterProvider = ({ children }) => {
         updateTitle(pod, location, popUp);
     });
 
+    useEffect(() => {
+        document.body.style.overflowY = popUp ? "hidden" : "unset";
+    }, [popUp]);
+
     return (
         <ImporterContext.Provider
             value={{
@@ -91,10 +79,7 @@ export const ImporterProvider = ({ children }) => {
                 setIsLoading,
                 runWithLoadingScreen,
                 popUp,
-                createPopUp,
-                closePopUp,
-                popUpOpened,
-                setPopUpOpen,
+                setPopUp,
             }}
         >
             {children}
