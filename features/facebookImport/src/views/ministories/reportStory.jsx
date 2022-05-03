@@ -24,6 +24,7 @@ class ReportStory extends Story {
 
     get active() {
         if (!this._neededReports) return true;
+
         for (const reportKey of this._neededReports) {
             if (this.reports?.[reportKey] === undefined) return false;
         }
