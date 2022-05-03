@@ -1,9 +1,13 @@
-import { PolyChart, PolyImportContext } from "@polypoly-eu/poly-look";
 import React, { useContext, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
+import {
+    PolyChart,
+    PolyImportContext,
+    LoadingOverlay,
+    INITIAL_HISTORY_STATE,
+} from "@polypoly-eu/poly-look";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
-import { LoadingOverlay } from "@polypoly-eu/poly-look";
 import i18n from "../../i18n.js";
 import { useHistory } from "react-router";
 import { formatTime } from "../../utils/formatTime.js";
@@ -83,7 +87,9 @@ const Overview = () => {
                         width={bubbleVizWidth}
                         height={bubbleVizHeight}
                         bubbleColor={dataBubblesLightColor}
-                        onBubbleClick={() => history.push("/explore")}
+                        onBubbleClick={() =>
+                            history.push("/explore", INITIAL_HISTORY_STATE)
+                        }
                         text=""
                     />
                     <div className="details">
