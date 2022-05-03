@@ -14,7 +14,7 @@ export default class OffFacebookEventTypesAnalysis extends ReportAnalysis {
             }
         });
         if (offFacebookEventTypes.length > 0)
-            dataAccount.processedData[analysisKeys.offFacebookEventTypes] = [
+            dataAccount.reports[analysisKeys.offFacebookEventTypes] = [
                 ...offFacebookEventTypes,
             ];
     }

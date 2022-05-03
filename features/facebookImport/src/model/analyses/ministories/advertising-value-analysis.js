@@ -12,16 +12,16 @@ export default class AdvertisingValueAnalysis extends RootAnalysis {
                     adInterests[Math.floor(Math.random() * adInterests.length)]
                 );
             }
-            dataAccount.processedData[analysisKeys.randomAdInterests] = [
+            dataAccount.analyses[analysisKeys.randomAdInterests] = [
                 ...randomAdInterests,
             ];
         }
-        dataAccount.processedData[analysisKeys.numberInterests] =
-            numberInterests;
+        dataAccount.analyses[analysisKeys.numberInterests] = numberInterests;
 
-        dataAccount.processedData[analysisKeys.sortedAdInterests] =
-            adInterests.sort((a, b) => {
+        dataAccount.analyses[analysisKeys.sortedAdInterests] = adInterests.sort(
+            (a, b) => {
                 return a.toLowerCase().localeCompare(b.toLowerCase());
-            });
+            }
+        );
     }
 }

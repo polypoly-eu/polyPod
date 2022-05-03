@@ -44,7 +44,7 @@ export default class AboutPicturesDataAnalysis extends RootAnalysis {
     async analyze({ zipFile, dataAccount }) {
         const pictureEntries = await this._userPicturesFromExport(zipFile);
         if (pictureEntries.length >= PICTURES_THRESHOLD)
-            dataAccount.processedData[analysisKeys.picturesCount] =
+            dataAccount.analyses[analysisKeys.picturesCount] =
                 pictureEntries.length;
     }
 }
