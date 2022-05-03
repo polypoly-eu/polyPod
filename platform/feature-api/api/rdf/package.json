@@ -24,7 +24,7 @@
     "@types/rdf-js": "^4.0.0"
   },
   "devDependencies": {
-    "@polypoly-eu/rdf-spec": "file:..",
+    "@polypoly-eu/api": "file:..",
     "@rdfjs/data-model": "^1.2.0"
   },
   "private": true

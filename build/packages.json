@@ -20,6 +20,7 @@
         "features/polyPinion",
         "features/polyPreview",
         "features/test",
+        "platform/feature-api/api",
         "platform/feature-api/api/pod-api",
         "platform/feature-api/api/rdf",
         "platform/feature-api/api/rdf-convert",
