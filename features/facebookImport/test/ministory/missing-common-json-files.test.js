@@ -20,7 +20,9 @@ describe("Missing common JSON files analysis for empty zip", () => {
             zipFile
         );
         ({ status } = analysisResult);
-        analysisReport = new MissingCommonJSONFilesReport(facebookAccount);
+        analysisReport = new MissingCommonJSONFilesReport({
+            account: facebookAccount,
+        });
     });
 
     it("has success status", async () => {
@@ -61,7 +63,9 @@ describe("Missing common JSON files analysis for zip with no missing common file
             zipFile
         );
         ({ status } = analysisResult);
-        analysisReport = new MissingCommonJSONFilesReport(facebookAccount);
+        analysisReport = new MissingCommonJSONFilesReport({
+            account: facebookAccount,
+        });
     });
 
     it("has success status", async () => {

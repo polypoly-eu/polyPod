@@ -1,8 +1,8 @@
 import Story from "./story.jsx";
 
 class ReportStory extends Story {
-    constructor(account) {
-        super(account);
+    constructor({ account, mode }) {
+        super({ account, mode });
         this._reports = account.reports;
         this._neededReports = [];
     }
@@ -28,12 +28,6 @@ class ReportStory extends Story {
             if (this.reports?.[reportKey] === undefined) return false;
         }
         return true;
-    }
-
-    render() {
-        if (this.props.mode === Story.MODES.DETAILS)
-            return this.renderDetails();
-        return this.renderSummary();
     }
 }
 
