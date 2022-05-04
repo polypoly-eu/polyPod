@@ -4,10 +4,11 @@ import RouteButton from "../../components/buttons/routeButton.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import {
     List,
-    RoutingCard,
     Card,
     LoadingOverlay,
     PolyImportContext,
+    RoutingWrapper,
+    ClickableCard,
 } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
@@ -103,15 +104,18 @@ const ExploreView = () => {
                         </>
                     );
                     return ministory.hasDetails() ? (
-                        <RoutingCard
-                            key={index}
+                        <RoutingWrapper
                             history={history}
                             route="/explore/details"
                             stateChange={{ ActiveStoryClass: MinistoryClass }}
-                            buttonText={i18n.t("explore:details.button")}
                         >
-                            {content}
-                        </RoutingCard>
+                            <ClickableCard
+                                key={index}
+                                buttonText={i18n.t("explore:details.button")}
+                            >
+                                {content}
+                            </ClickableCard>
+                        </RoutingWrapper>
                     ) : (
                         <Card key={index}>{content}</Card>
                     );
