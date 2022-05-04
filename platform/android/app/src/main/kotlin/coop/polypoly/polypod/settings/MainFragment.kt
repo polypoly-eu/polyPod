@@ -21,7 +21,7 @@ class MainFragment : PreferenceFragmentCompat() {
         findPreference<Preference>("biometricEnabledKey")
             ?.onPreferenceChangeListener =
             Preference.OnPreferenceChangeListener { _, newValue ->
-                onAuthRequest(newValue as Boolean) { _ ->
+                onAuthRequest(newValue as Boolean) {
                     val pref =
                         findPreference<SwitchPreference>("biometricEnabledKey")
                     pref?.isChecked =
