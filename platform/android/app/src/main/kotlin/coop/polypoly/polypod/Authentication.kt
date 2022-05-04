@@ -76,12 +76,12 @@ class Authentication {
             }
 
             val title =
-                if (reAuth) activity.getString(R.string.auth_prompt_title)
-                else activity.getString(R.string.re_auth_prompt_title)
+                if (reAuth) activity.getString(R.string.re_auth_prompt_title)
+                else activity.getString(R.string.auth_prompt_title)
 
             val subtitle =
-                if (reAuth) activity.getString(R.string.auth_prompt_subtitle)
-                else activity.getString(R.string.re_auth_prompt_subtitle)
+                if (reAuth) activity.getString(R.string.re_auth_prompt_subtitle)
+                else activity.getString(R.string.auth_prompt_subtitle)
 
             val promptInfo = BiometricPrompt.PromptInfo.Builder()
                 .setTitle(title)
@@ -114,8 +114,8 @@ class Authentication {
             super.onAuthenticationSucceeded(result)
 
             val title =
-                if (reAuth) context.getString(R.string.auth_prompt_success)
-                else context.getString(R.string.re_auth_prompt_success)
+                if (reAuth) context.getString(R.string.re_auth_prompt_success)
+                else context.getString(R.string.auth_prompt_success)
 
             Toast.makeText(
                 context,
