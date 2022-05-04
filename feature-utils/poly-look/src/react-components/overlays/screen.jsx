@@ -1,7 +1,6 @@
 import React from "react";
 
 import "./screen.css";
-import "../../css/layout.css";
 
 const Screen = ({ children, className, layout }) => {
   return (
