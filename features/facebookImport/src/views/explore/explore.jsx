@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import RouteButton from "../../components/buttons/routeButton.jsx";
-import Loading from "../../components/loading/loading.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import {
     List,
-    RoutingCard,
     Card,
+    LoadingOverlay,
     PolyImportContext,
+    RoutingWrapper,
+    ClickableCard,
 } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
@@ -76,7 +77,7 @@ const ExploreView = () => {
     const renderFileAnalyses = () => {
         if (!account.analyses)
             return (
-                <Loading
+                <LoadingOverlay
                     loadingGif="./images/loading.gif"
                     message={i18n.t("explore:loading")}
                 />
@@ -85,7 +86,9 @@ const ExploreView = () => {
             <List>
                 <UnrecognizedCard />
                 {ministories.map((MinistoryClass, index) => {
-                    const ministory = new MinistoryClass(account);
+                    const ministory = new MinistoryClass({
+                        account,
+                    });
                     if (!ministory.active) return;
                     const content = (
                         <>
@@ -97,19 +100,22 @@ const ExploreView = () => {
                                     )}
                                 </label>
                             )}
-                            {ministory.renderSummary()}
+                            {ministory.render()}
                         </>
                     );
-                    return ministory.renderDetails ? (
-                        <RoutingCard
-                            key={index}
+                    return ministory.hasDetails() ? (
+                        <RoutingWrapper
                             history={history}
                             route="/explore/details"
-                            stateChange={{ activeAnalysis: ministory }}
-                            buttonText={i18n.t("explore:details.button")}
+                            stateChange={{ ActiveStoryClass: MinistoryClass }}
                         >
-                            {content}
-                        </RoutingCard>
+                            <ClickableCard
+                                key={index}
+                                buttonText={i18n.t("explore:details.button")}
+                            >
+                                {content}
+                            </ClickableCard>
+                        </RoutingWrapper>
                     ) : (
                         <Card key={index}>{content}</Card>
                     );

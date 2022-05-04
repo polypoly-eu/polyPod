@@ -20,7 +20,9 @@ describe("Importing status analysis for empty zip", () => {
             zipFile
         );
         ({ status } = analysisResult);
-        analysisReport = new DataImportingStatusReport(facebookAccount);
+        analysisReport = new DataImportingStatusReport({
+            account: facebookAccount,
+        });
         jsonReport = analysisReport.jsonReport;
     });
 

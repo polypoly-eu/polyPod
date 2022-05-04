@@ -10,6 +10,7 @@ const validCommands = [
     "lintfix",
     "list",
     "list-deps",
+    "offlineInstall",
     "syncdeps",
     "test",
 ];
