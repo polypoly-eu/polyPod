@@ -5,7 +5,7 @@ import {
 } from "./utils/analyses-execution";
 import { expectActiveAnalysis } from "./utils/analysis-assertions";
 
-export const NUMBER_OF_REPORT_ANALYSES = 6;
+export const NUMBER_OF_REPORT_ANALYSES = 7;
 
 describe("Report creation for export", () => {
     let computedReportStories = null;

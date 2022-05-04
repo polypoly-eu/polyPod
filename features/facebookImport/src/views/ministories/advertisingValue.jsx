@@ -11,7 +11,7 @@ import {
 class AdvertisingValueMinistory extends Story {
     constructor(props) {
         super(props);
-        this._neededAnalyses = [
+        this.neededAnalyses = [
             analysisKeys.numberInterests,
             analysisKeys.randomAdInterests,
             analysisKeys.sortedAdInterests,
