@@ -1,6 +1,11 @@
 import DataImportingStatusReport from "./dataImportingStatus.jsx";
-import DataStructureMinistory from "./dataStructureBubbles.jsx";
+import DataStructureMinistory from "./dataStructure.jsx";
+import GroupedActivityTypesStory from "./groupedActivityTypes.jsx";
 
-export const ministories = [DataImportingStatusReport, DataStructureMinistory];
+const ministories = [
+    DataImportingStatusReport,
+    DataStructureMinistory,
+    GroupedActivityTypesStory,
+];
 
 export default ministories;
