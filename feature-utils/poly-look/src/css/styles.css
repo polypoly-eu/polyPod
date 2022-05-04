@@ -32,8 +32,6 @@ so that we don't have to cover three different use cases explicitly anymore.
 .poly-nav-bar-separator-overlay {
   position: absolute;
   height: 100%;
-  top: 0;
-  left: 0;
 }
 
 .poly-nav-bar-separator-fixed {
