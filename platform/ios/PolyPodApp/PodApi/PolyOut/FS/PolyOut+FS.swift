@@ -4,6 +4,7 @@ import Zip
 enum PolyOutError: Error {
     case failedToParsePath(_ path: String)
     case platform(_ error: Error)
+    case wrongDestURLFormat(_ url: String)
 }
 
 extension PolyOutError: LocalizedError {
@@ -13,6 +14,8 @@ extension PolyOutError: LocalizedError {
             return "Failed to parse path '\(path)'"
         case .platform(let error):
             return "Platform error: \(error)"
+        case .wrongDestURLFormat(let url):
+            return "DestinationURL format is wrong. destUrl: \(url)"
         }
     }
 }
@@ -199,7 +202,7 @@ extension PolyOut {
                     return UUID().uuidString
                 }()
                 if id.isEmpty {
-                    // TODO
+                    throw PolyOutError.wrongDestURLFormat(destUrl ?? "")
                 }
                 let targetUrl = self.urlFromId(id: id)
                 let baseUrl = targetUrl.deletingLastPathComponent()
