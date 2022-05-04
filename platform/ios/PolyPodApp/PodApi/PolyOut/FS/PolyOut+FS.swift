@@ -183,7 +183,8 @@ extension PolyOut {
         completionHandler(entries, nil)
     }
     
-    func importArchive(url: String, completionHandler: @escaping (String?) -> Void) {
+    /// destURL has this form :: PolyOut.fsPrefix + PolyOut.fsFilesRoot + "/" + id
+    func importArchive(url: String, destUrl: String? = nil, completionHandler: @escaping (String?) -> Void) {
         guard let url = URL(string: url) else {
             completionHandler(nil)
             return
@@ -191,8 +192,16 @@ extension PolyOut {
         
         DispatchQueue.global(qos: .background).async {
             do {
-                let newId = UUID().uuidString
-                let targetUrl = self.urlFromId(id: newId)
+                let id = { () -> String in
+                    if let destUrl = destUrl, let destURL = URL(string: destUrl) {
+                        return destURL.lastPathComponent
+                    }
+                    return UUID().uuidString
+                }()
+                if id.isEmpty {
+                    // TODO
+                }
+                let targetUrl = self.urlFromId(id: id)
                 let baseUrl = targetUrl.deletingLastPathComponent()
                 if !FileManager.default.fileExists(atPath: baseUrl.path) {
                     try FileManager.default.createDirectory(
@@ -208,7 +217,7 @@ extension PolyOut {
                 )
                 try FileManager.default.removeItem(at: url)
                 
-                let newUrl = PolyOut.fsPrefix + PolyOut.fsFilesRoot + "/" + newId
+                let newUrl = PolyOut.fsPrefix + PolyOut.fsFilesRoot + "/" + id
                 var fileStore = UserDefaults.standard.value(
                     forKey: PolyOut.fsKey
                 ) as? [String:String?] ?? [:]
