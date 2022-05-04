@@ -6,3 +6,4 @@
  */
 
 export * from "./rdf-spec";
+export * from "./rdf-convert";
