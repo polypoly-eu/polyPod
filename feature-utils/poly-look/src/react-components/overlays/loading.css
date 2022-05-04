@@ -1,0 +1,15 @@
+.loading-overlay {
+  background-color: var(--theme-primary-color);
+}
+
+.loading-overlay p {
+  font-family: "Jost Medium";
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.loading-overlay img {
+  margin-bottom: 16px;
+  width: 32px;
+  height: 32px;
+}

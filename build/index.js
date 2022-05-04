@@ -67,15 +67,11 @@ async function main() {
     const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
 
     if (
-        !existsSync("node_modules") &&
-        [
-            "lint",
-            "lintfix",
-            "clean",
-            "build",
-            "install",
-            "installAndBuild",
-        ].includes(command)
+        (!existsSync("node_modules") &&
+            ["lint", "lintfix", "clean", "build", "offlineInstall"].includes(
+                command
+            )) ||
+        ["install", "installAndBuild"].includes(command)
     ) {
         await runCommand("root-install", "👷👷‍♀️", async () => {
             await npmInstall("/");

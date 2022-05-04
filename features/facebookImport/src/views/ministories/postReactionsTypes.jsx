@@ -13,7 +13,7 @@ class PostReactionTypesMinistory extends SingleDataStory {
         return i18n.t("reactionsMiniStory:title");
     }
 
-    renderSummary() {
+    _renderSummary() {
         return <PostReactionTypesMiniStory reactionData={this.analysisData} />;
     }
 }

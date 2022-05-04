@@ -1,28 +1,42 @@
 import { Component } from "react";
 
 class Story extends Component {
-    constructor({ analyses }) {
+    constructor({ account, mode }) {
         super();
-        this.analyses = analyses;
-        this._neededAnalyses = [];
+        this.analyses = account.analyses;
+        this.neededAnalyses = [];
+        this.mode = mode || Story.MODES.SUMMARY;
     }
 
     get label() {
         return Story.LABELS.NONE;
     }
 
+    setDetailsMode() {
+        this.mode = Story.MODES.DETAILS;
+    }
+
+    setSummaryMode() {
+        this.mode = Story.MODES.SUMMARY;
+    }
+
     get active() {
-        if (!this._neededAnalyses) return true;
-        for (const analysisKey of this._neededAnalyses) {
+        if (!this.neededAnalyses) return true;
+        for (const analysisKey of this.neededAnalyses) {
             if (this.analyses?.[analysisKey] === undefined) return false;
         }
         return true;
     }
 
+    hasDetails() {
+        if (this._renderDetails) return true;
+        return false;
+    }
+
     render() {
-        if (this.props.mode === Story.MODES.DETAILS)
-            return this.renderDetails();
-        return this.renderSummary();
+        if (this.mode === Story.MODES.DETAILS && this._renderDetails)
+            return this._renderDetails();
+        return this._renderSummary();
     }
 }
 

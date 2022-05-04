@@ -16,7 +16,7 @@ import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../../polyPod-config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
 
-const DB_NAME = "polypod";
+const DB_PREFIX = "polypod:";
 const DB_VERSION = 1;
 const OBJECT_STORE_POLY_IN = "poly-in";
 const OBJECT_STORE_POLY_OUT = "poly-out";
@@ -29,55 +29,10 @@ const NAV_LIGHT_FOREGROUND_COLOR = "#ffffff";
 
 const MANIFEST_DATA = window.manifestData;
 
-// Previously, data were stored in localStorage. IndexedDB is more flexible and
-// efficient, and most importantly in our case can store larger amount of data,
-// while the 2MB limit of localStorage is no longer sufficient. This function
-// migrates any data in localStorage to not disrupt the developer expirience.
-// TODO: Please remove the migration code after Oct 2022
-async function migrateData(db: IDBDatabase): Promise<IDBDatabase> {
-    const polyInData = localStorage.getItem("polyInStore");
-    const polyOutData = localStorage.getItem("files");
-
-    if (polyInData || polyOutData) {
-        const files: FileInfo[] = [];
-        const quads = polyInData
-            ? JSON.parse(polyInData).map(RDFString.quadToStringQuad)
-            : [];
-
-        if (polyOutData) {
-            for (const [, file] of JSON.parse(polyOutData)) {
-                const dataUrl = localStorage.getItem(file.id);
-                if (dataUrl) {
-                    files.push({
-                        id: file.id,
-                        name: file.name,
-                        time: new Date(file.time),
-                        blob: await (await fetch(dataUrl)).blob(),
-                    });
-                }
-            }
-        }
-
-        await new Promise((resolve, reject) => {
-            const storeNames = [OBJECT_STORE_POLY_IN, OBJECT_STORE_POLY_OUT];
-            const tx = db.transaction(storeNames, "readwrite");
-            const polyInStore = tx.objectStore(OBJECT_STORE_POLY_IN);
-            for (const quad of quads) polyInStore.add(quad);
-            const polyOutStore = tx.objectStore(OBJECT_STORE_POLY_OUT);
-            for (const file of files) polyOutStore.add(file);
-            tx.oncomplete = () => resolve(null);
-            tx.onerror = tx.onabort = () => reject(tx.error);
-        });
-
-        localStorage.clear();
-    }
-
-    return db;
-}
-
-function openDatabase(): Promise<IDBDatabase> {
+async function openDatabase(): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
-        const request = indexedDB.open(DB_NAME, DB_VERSION);
+        const name = `${DB_PREFIX}${document.location.pathname}`;
+        const request = indexedDB.open(name, DB_VERSION);
 
         request.onupgradeneeded = () => {
             const db = request.result;
@@ -91,7 +46,7 @@ function openDatabase(): Promise<IDBDatabase> {
             db.createObjectStore(OBJECT_STORE_POLY_OUT, { keyPath: "id" });
         };
 
-        request.onsuccess = () => resolve(migrateData(request.result));
+        request.onsuccess = () => resolve(request.result);
         request.onerror = () => reject(request.error);
     });
 }
@@ -221,9 +176,55 @@ interface FileInfo {
     blob: Blob;
 }
 
+/**
+ * A variant of Stats that maintains compatibility with other polyPod
+ * implementations by exposing value properties.
+ *
+ * TODO: Eliminate the need for this, either by adding the value properties to
+ *       the Stats interface, or by eliminating them in all other polyPod
+ *       implementations, and their usages in all features.
+ */
+class CompatStats implements Stats {
+    constructor(
+        readonly id: string,
+        readonly size: number,
+        readonly time: string,
+        readonly name: string,
+        readonly directory: boolean
+    ) {}
+
+    get file(): boolean {
+        return !this.directory;
+    }
+
+    getId(): string {
+        return this.id;
+    }
+
+    getSize(): number {
+        return this.size;
+    }
+
+    getTime(): string {
+        return this.time;
+    }
+
+    getName(): string {
+        return this.name;
+    }
+
+    isFile(): boolean {
+        return this.file;
+    }
+
+    isDirectory(): boolean {
+        return this.directory;
+    }
+}
+
 interface File {
     read(): Promise<Uint8Array>;
-    stat(): Stats;
+    stat(): CompatStats;
 }
 
 class IDBPolyOut implements PolyOut {
@@ -261,15 +262,13 @@ class IDBPolyOut implements PolyOut {
                     return entry.getData(new zip.Uint8ArrayWriter());
                 },
                 stat() {
-                    const { uncompressedSize, directory, lastModDate } = entry;
-                    return {
-                        getId: () => id,
-                        getSize: () => uncompressedSize,
-                        getTime: () => lastModDate.toISOString(),
-                        getName: () => filename,
-                        isFile: () => !directory,
-                        isDirectory: () => directory,
-                    };
+                    return new CompatStats(
+                        id,
+                        entry.uncompressedSize,
+                        entry.lastModDate.toISOString(),
+                        filename,
+                        entry.directory
+                    );
                 },
             };
         }
@@ -280,16 +279,13 @@ class IDBPolyOut implements PolyOut {
                 return new Uint8Array(await file.blob.arrayBuffer());
             },
             stat() {
-                const { size } = file.blob;
-                const { time, name } = file;
-                return {
-                    getId: () => id,
-                    getSize: () => size,
-                    getTime: () => time.toISOString(),
-                    getName: () => name,
-                    isFile: () => true,
-                    isDirectory: () => false,
-                };
+                return new CompatStats(
+                    id,
+                    file.blob.size,
+                    file.time.toISOString(),
+                    file.name,
+                    false
+                );
             },
         };
     }
@@ -306,16 +302,9 @@ class IDBPolyOut implements PolyOut {
         return this.getFile(id).then((file) => file.read());
     }
 
-    async stat(id: string): Promise<Stats> {
+    async stat(id: string): Promise<CompatStats> {
         if (id != "") return (await this.getFile(id)).stat();
-        return {
-            getId: () => "",
-            getSize: () => 0,
-            getTime: () => "",
-            getName: () => "",
-            isFile: () => false,
-            isDirectory: () => true,
-        };
+        return new CompatStats("", 0, "", "", true);
     }
 
     async readDir(id: string): Promise<Entry[]> {
@@ -752,7 +741,16 @@ export class BrowserPod implements Pod {
                 return;
             }
 
-            window.manifest = await readManifest(MANIFEST_DATA);
+            try {
+                window.manifest = await readManifest(MANIFEST_DATA);
+            } catch (e) {
+                console.warn(
+                    `Unable to parse feature manifest, navigation bar disabled.`,
+                    e
+                );
+                return;
+            }
+
             window.parent.currentTitle =
                 window.parent.currentTitle || window.manifest.name;
             const frame = createNavBarFrame(window.parent.currentTitle);
