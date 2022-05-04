@@ -7,17 +7,15 @@ import java.nio.ByteBuffer
 @ExperimentalUnsignedTypes
 class Core {
     companion object {
-        fun bootstrapCore(languageCode: String): Result<Unit> {
+        fun bootstrapCore(languageCode: String) {
+            throw InvalidResultException("Core bootstrap")
             val bytes = JniApi().bootstrapCore(languageCode)
             val response = CoreBootstrapResponse.getRootAsCoreBootstrapResponse(
                 ByteBuffer.wrap(bytes)
             )
             response.failure?.let {
-                return Result.failure(
-                    InternalCoreException.make("Core bootstrap", it)
-                )
+                throw InternalCoreException.make("Core bootstrap", it)
             }
-            return Result.success(Unit)
         }
 
         fun parseFeatureManifest(json: String): Result<FeatureManifest> {
