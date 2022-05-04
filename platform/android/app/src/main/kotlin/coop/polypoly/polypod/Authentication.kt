@@ -1,8 +1,6 @@
 package coop.polypoly.polypod
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
@@ -26,7 +24,7 @@ class Authentication {
             activity: FragmentActivity,
             setupComplete: () -> Unit
         ) {
-            authenticate(activity, true) { success ->
+            authenticate(activity, true, false) { success ->
                 if (success) {
                     setupComplete()
                 }
@@ -37,7 +35,7 @@ class Authentication {
             activity: FragmentActivity,
             setupComplete: (Boolean) -> Boolean
         ) {
-            reAuthenticate(activity, true) { success ->
+            authenticate(activity, true, true) { success ->
                 if (success) {
                     Preferences.setBiometricEnabled(
                         activity,
@@ -52,8 +50,7 @@ class Authentication {
             activity: FragmentActivity,
             disableComplete: (Boolean) -> Boolean
         ) {
-            reAuthenticate(activity, false) { success ->
-
+            authenticate(activity, false, true) { success ->
                 if (success) {
                     Preferences.setBiometricEnabled(
                         activity,
@@ -64,82 +61,36 @@ class Authentication {
             }
         }
 
-        private fun reAuthenticate(
-            activity: FragmentActivity,
-            status: Boolean = false,
-            authComplete: ((Boolean) -> Unit)
-        ) {
-            if (!biometricsAvailable(activity) ||
-                (!status && !Preferences.getBiometricEnabled(activity))
-            ) {
-                authComplete(true)
-                return
-            }
-
-            val alertDialog = AlertDialog.Builder(activity)
-            alertDialog.setTitle(
-                activity.getString(R.string.re_auth_prompt_title)
-            )
-            alertDialog.setMessage(
-                activity.getString(R.string.re_auth_prompt_subtitle)
-            )
-            alertDialog.setCancelable(false)
-
-            val positiveButtonClick =
-                { dialog: DialogInterface, _: Int ->
-                    Toast.makeText(
-                        activity,
-                        activity.getString(R.string.re_auth_prompt_success),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    authComplete(true)
-                    dialog.dismiss()
-                }
-            alertDialog.setPositiveButton(
-                activity.getString(R.string.re_auth_prompt_confirm),
-                positiveButtonClick
-            )
-
-            val negativeButtonClick =
-                { dialog: DialogInterface, _: Int ->
-                    Toast.makeText(
-                        activity,
-                        activity.getString(R.string.re_auth_prompt_failure),
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    authComplete(false)
-                    dialog.cancel()
-                }
-            alertDialog.setNegativeButton(
-                activity.getString(R.string.re_auth_prompt_cancel),
-                negativeButtonClick
-            )
-            alertDialog.create().show()
-        }
-
         fun authenticate(
             activity: FragmentActivity,
             force: Boolean = false,
+            reAuth: Boolean = false,
             authComplete: ((Boolean) -> Unit)
         ) {
-            if (!biometricsAvailable(activity) ||
+            if (
+                !biometricsAvailable(activity) ||
                 (!force && !Preferences.getBiometricEnabled(activity))
             ) {
                 authComplete(true)
                 return
             }
 
+            val title =
+                if (reAuth) activity.getString(R.string.auth_prompt_title)
+                else activity.getString(R.string.re_auth_prompt_title)
+
+            val subtitle =
+                if (reAuth) activity.getString(R.string.auth_prompt_subtitle)
+                else activity.getString(R.string.re_auth_prompt_subtitle)
+
             val promptInfo = BiometricPrompt.PromptInfo.Builder()
-                .setTitle(activity.getString(R.string.auth_prompt_title))
-                .setSubtitle(
-                    activity.getString(R.string.auth_prompt_subtitle)
-                )
+                .setTitle(title)
+                .setSubtitle(subtitle)
                 .setAllowedAuthenticators(desiredLockScreenType)
                 .build()
 
             val executor = ContextCompat.getMainExecutor(activity)
-            val callback = PolyAuthCallback(activity, authComplete)
+            val callback = PolyAuthCallback(activity, reAuth, authComplete)
 
             BiometricPrompt(activity, executor, callback)
                 .authenticate(promptInfo)
@@ -154,17 +105,24 @@ class Authentication {
 
     private class PolyAuthCallback(
         val context: Context,
+        val reAuth: Boolean = false,
         val authComplete: (Boolean) -> Unit
     ) : BiometricPrompt.AuthenticationCallback() {
         override fun onAuthenticationSucceeded(
             result: BiometricPrompt.AuthenticationResult
         ) {
             super.onAuthenticationSucceeded(result)
+
+            val title =
+                if (reAuth) context.getString(R.string.auth_prompt_success)
+                else context.getString(R.string.re_auth_prompt_success)
+
             Toast.makeText(
                 context,
-                context.getString(R.string.auth_prompt_success),
+                title,
                 Toast.LENGTH_SHORT
             ).show()
+
             authComplete(true)
         }
 
