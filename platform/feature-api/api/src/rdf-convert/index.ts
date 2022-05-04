@@ -11,10 +11,10 @@ export function convert<T extends Exclude<RDF.Term, RDF.BaseQuad>>(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dataFactory: RDF.DataFactory<any>
 ): T;
-export function convert<InQuad extends RDF.BaseQuad, OutQuad extends RDF.BaseQuad>(
-    quad: InQuad,
-    dataFactory: RDF.DataFactory<InQuad, OutQuad>
-): OutQuad;
+export function convert<
+    InQuad extends RDF.BaseQuad,
+    OutQuad extends RDF.BaseQuad
+>(quad: InQuad, dataFactory: RDF.DataFactory<InQuad, OutQuad>): OutQuad;
 
 /**
  * This function converts an RDF term or a quad into another representation, specified by the given data factory.
@@ -29,7 +29,10 @@ export function convert<InQuad extends RDF.BaseQuad, OutQuad extends RDF.BaseQua
  * ```
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function convert(input: RDF.Term, dataFactory: RDF.DataFactory<any>): RDF.Term {
+export function convert(
+    input: RDF.Term,
+    dataFactory: RDF.DataFactory<any>
+): RDF.Term {
     const term: RDF.Term = input;
 
     switch (term.termType) {
@@ -40,7 +43,9 @@ export function convert(input: RDF.Term, dataFactory: RDF.DataFactory<any>): RDF
         case "Literal":
             return dataFactory.literal(
                 term.value,
-                term.language === "" ? convert(term.datatype, dataFactory) : term.language
+                term.language === ""
+                    ? convert(term.datatype, dataFactory)
+                    : term.language
             );
         case "NamedNode":
             return dataFactory.namedNode(term.value);
