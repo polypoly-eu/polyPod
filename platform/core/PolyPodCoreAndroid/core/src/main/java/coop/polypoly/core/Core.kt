@@ -28,7 +28,7 @@ class Core {
                     val manifest = response.result(FeatureManifest())
                     if (manifest == null) {
                         throw MissingFeatureManifestContentException(
-                                failureContext
+                            failureContext
                         )
                     }
                     return manifest as FeatureManifest
@@ -39,15 +39,15 @@ class Core {
                         throw MissingFailureContentException(failureContext)
                     }
                     throw InternalCoreException.make(
-                            failureContext,
-                            failure as Failure
-                        )
+                        failureContext,
+                        failure as Failure
+                    )
                 }
                 else -> {
                     throw InvalidResultException.make(
-                            failureContext,
-                            response.resultType.toString()
-                        )
+                        failureContext,
+                        response.resultType.toString()
+                    )
                 }
             }
         }

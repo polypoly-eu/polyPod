@@ -5,6 +5,6 @@ class JniApi {
         System.loadLibrary("polypod_core")
     }
 
-    external  fun bootstrapCore(languageCode: String): ByteArray
-    external  fun parseFeatureManifest(json: String): ByteArray
+    external fun bootstrapCore(languageCode: String): ByteArray
+    external fun parseFeatureManifest(json: String): ByteArray
 }
