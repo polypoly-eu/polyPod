@@ -5,7 +5,7 @@ import "../../css/layout.css";
 
 const Screen = ({ children, className, layout }) => {
   return (
-    <div className={`screen ${className || ""} ${layout || ""}`}>
+    <div className={`poly-screen ${className || ""} ${layout || ""}`}>
       {children}
     </div>
   );
