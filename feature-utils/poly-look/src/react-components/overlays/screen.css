@@ -6,4 +6,5 @@
   left: 0;
   background-color: var(--theme-primary-color);
   padding: 0 12px;
+  overflow: hidden scroll;
 }
