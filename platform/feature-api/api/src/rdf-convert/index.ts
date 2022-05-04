@@ -28,9 +28,9 @@ export function convert<
  * assert.ok(output.equals(input));
  * ```
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function convert(
     input: RDF.Term,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dataFactory: RDF.DataFactory<any>
 ): RDF.Term {
     const term: RDF.Term = input;
