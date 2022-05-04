@@ -1,8 +1,8 @@
 import Story from "./story.jsx";
 
 export class SingleDataStory extends Story {
-    constructor(account, neededDataKey) {
-        super(account);
+    constructor(props, neededDataKey) {
+        super(props);
         this._neededAnalyses = [neededDataKey];
     }
 

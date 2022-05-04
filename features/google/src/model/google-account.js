@@ -6,21 +6,13 @@ export default class GoogleAccount {
 
         this._name = "";
         this._preferredLanguage = [];
-        this._analyses = {};
-        this._reports = {};
+        this.analyses = {};
+        this.reports = {};
         this._analysesExecutionResults = [];
         this._placeVisits = [];
         this._activitySegments = [];
         this._activities = [];
         this._pathNames = [];
-    }
-
-    get analyses() {
-        return this._analyses;
-    }
-
-    get reports() {
-        return this._reports;
     }
 
     get importedFileNames() {

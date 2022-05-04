@@ -5,7 +5,6 @@ export default class DataStructureBubblesAnalysis extends RootAnalysis {
         let bubblesData = dataAccount.dataGroups.filter(
             ({ count }) => count > 0
         );
-
         if (bubblesData.length > 0) {
             dataAccount.analyses.bubblesData = bubblesData;
         }
