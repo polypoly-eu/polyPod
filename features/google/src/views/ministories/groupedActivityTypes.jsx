@@ -16,7 +16,7 @@ class GroupedActivityTypesStory extends SingleDataStory {
     _renderSummary() {
         const data = Object.entries(this.analysisData).map(([key, value]) => ({
             title: key,
-            count: value,
+            value,
         }));
         return (
             <div>

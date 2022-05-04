@@ -9,12 +9,10 @@ import {
 } from "@polypoly-eu/poly-look";
 import ministories from "../ministories/ministories.js";
 import i18n from "../../i18n.js";
-
 import "./explore.css";
 
 const ExploreView = () => {
     const { account } = useContext(PolyImportContext);
-    console.log(ministories);
     const renderFileAnalyses = () => {
         if (!account) return null;
         return (
