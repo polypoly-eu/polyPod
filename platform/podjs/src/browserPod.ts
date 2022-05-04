@@ -176,9 +176,55 @@ interface FileInfo {
     blob: Blob;
 }
 
+/**
+ * A variant of Stats that maintains compatibility with other polyPod
+ * implementations by exposing value properties.
+ *
+ * TODO: Eliminate the need for this, either by adding the value properties to
+ *       the Stats interface, or by eliminating them in all other polyPod
+ *       implementations, and their usages in all features.
+ */
+class CompatStats implements Stats {
+    constructor(
+        readonly id: string,
+        readonly size: number,
+        readonly time: string,
+        readonly name: string,
+        readonly directory: boolean
+    ) {}
+
+    get file(): boolean {
+        return !this.directory;
+    }
+
+    getId(): string {
+        return this.id;
+    }
+
+    getSize(): number {
+        return this.size;
+    }
+
+    getTime(): string {
+        return this.time;
+    }
+
+    getName(): string {
+        return this.name;
+    }
+
+    isFile(): boolean {
+        return this.file;
+    }
+
+    isDirectory(): boolean {
+        return this.directory;
+    }
+}
+
 interface File {
     read(): Promise<Uint8Array>;
-    stat(): Stats;
+    stat(): CompatStats;
 }
 
 class IDBPolyOut implements PolyOut {
@@ -216,15 +262,13 @@ class IDBPolyOut implements PolyOut {
                     return entry.getData(new zip.Uint8ArrayWriter());
                 },
                 stat() {
-                    const { uncompressedSize, directory, lastModDate } = entry;
-                    return {
-                        getId: () => id,
-                        getSize: () => uncompressedSize,
-                        getTime: () => lastModDate.toISOString(),
-                        getName: () => filename,
-                        isFile: () => !directory,
-                        isDirectory: () => directory,
-                    };
+                    return new CompatStats(
+                        id,
+                        entry.uncompressedSize,
+                        entry.lastModDate.toISOString(),
+                        filename,
+                        entry.directory
+                    );
                 },
             };
         }
@@ -235,16 +279,13 @@ class IDBPolyOut implements PolyOut {
                 return new Uint8Array(await file.blob.arrayBuffer());
             },
             stat() {
-                const { size } = file.blob;
-                const { time, name } = file;
-                return {
-                    getId: () => id,
-                    getSize: () => size,
-                    getTime: () => time.toISOString(),
-                    getName: () => name,
-                    isFile: () => true,
-                    isDirectory: () => false,
-                };
+                return new CompatStats(
+                    id,
+                    file.blob.size,
+                    file.time.toISOString(),
+                    file.name,
+                    false
+                );
             },
         };
     }
@@ -261,16 +302,9 @@ class IDBPolyOut implements PolyOut {
         return this.getFile(id).then((file) => file.read());
     }
 
-    async stat(id: string): Promise<Stats> {
+    async stat(id: string): Promise<CompatStats> {
         if (id != "") return (await this.getFile(id)).stat();
-        return {
-            getId: () => "",
-            getSize: () => 0,
-            getTime: () => "",
-            getName: () => "",
-            isFile: () => false,
-            isDirectory: () => true,
-        };
+        return new CompatStats("", 0, "", "", true);
     }
 
     async readDir(id: string): Promise<Entry[]> {
