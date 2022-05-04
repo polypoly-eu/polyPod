@@ -8,7 +8,6 @@ import java.nio.ByteBuffer
 class Core {
     companion object {
         fun bootstrapCore(languageCode: String) {
-            throw InvalidResultException("Core bootstrap")
             val bytes = JniApi().bootstrapCore(languageCode)
             val response = CoreBootstrapResponse.getRootAsCoreBootstrapResponse(
                 ByteBuffer.wrap(bytes)
@@ -18,7 +17,7 @@ class Core {
             }
         }
 
-        fun parseFeatureManifest(json: String): Result<FeatureManifest> {
+        fun parseFeatureManifest(json: String): FeatureManifest {
             val failureContext = "Feature Manifest Parsing"
             val bytes = JniApi().parseFeatureManifest(json)
             val response = FeatureManifestParsingResponse
@@ -28,35 +27,27 @@ class Core {
                 FeatureManifestParsingResult.FeatureManifest -> {
                     val manifest = response.result(FeatureManifest())
                     if (manifest == null) {
-                        return Result.failure(
-                            MissingFeatureManifestContentException(
+                        throw MissingFeatureManifestContentException(
                                 failureContext
-                            )
                         )
                     }
-                    return Result.success(manifest as FeatureManifest)
+                    return manifest as FeatureManifest
                 }
                 FeatureManifestParsingResult.Failure -> {
                     val failure = response.result(Failure())
                     if (failure == null) {
-                        return Result.failure(
-                            MissingFailureContentException(failureContext)
-                        )
+                        throw MissingFailureContentException(failureContext)
                     }
-                    return Result.failure(
-                        InternalCoreException.make(
+                    throw InternalCoreException.make(
                             failureContext,
                             failure as Failure
                         )
-                    )
                 }
                 else -> {
-                    return Result.failure(
-                        InvalidResultException.make(
+                    throw InvalidResultException.make(
                             failureContext,
                             response.resultType.toString()
                         )
-                    )
                 }
             }
         }

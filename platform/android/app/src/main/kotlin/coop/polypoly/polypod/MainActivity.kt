@@ -21,14 +21,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val language = Language.determine(this@MainActivity)
-        val bootstrapResult = Core.bootstrapCore(language)
-        if (bootstrapResult.isSuccess) {
+        try {
+            Core.bootstrapCore(language)
             logger.info("Core is bootstraped!")
-        } else {
+        } catch (ex: Exception) {
             logger.error(
                 "Failed to boostrap core",
-                bootstrapResult.exceptionOrNull()
+                ex.message
             )
+            throw ex
         }
         Authentication.authenticate(this) { success ->
             if (success) {

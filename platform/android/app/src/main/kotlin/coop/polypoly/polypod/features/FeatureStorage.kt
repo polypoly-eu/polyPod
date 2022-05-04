@@ -62,7 +62,12 @@ class FeatureStorage {
         val manifestString =
             content.getInputStream(manifestEntry).reader().readText()
 
-        return Core.parseFeatureManifest(manifestString).getOrNull()
+        return try {
+            Core.parseFeatureManifest(manifestString)
+        } catch (ex: Exception) {
+            logger.error(ex.message)
+            null
+        }
     }
 
     private fun sortFeatures(
