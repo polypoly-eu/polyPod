@@ -23,8 +23,8 @@ class InvalidResultException(message: String) : Exception(message) {
     }
 }
 
-class InvalidFailureContentException(context: String) :
+class MissingFailureContentException(context: String) :
     Exception("$context -> received failure result type without content")
 
-class InvalidFeatureManifestContentException(context: String) :
+class MissingFeatureManifestContentException(context: String) :
     Exception("$context -> received feature manifest result type without content")
