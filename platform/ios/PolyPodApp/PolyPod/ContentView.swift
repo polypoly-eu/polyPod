@@ -123,7 +123,7 @@ struct ContentView: View {
         // authentication fails. Since we don't have a dedicated screen for the
         // locked state yet, we simply keep asking the user until they stop
         // cancelling or leave the app.
-        Authentication.shared.authenticate { success in
+        Authentication.shared.authenticate(false) { success in
             if success {
                 completeAction()
                 return

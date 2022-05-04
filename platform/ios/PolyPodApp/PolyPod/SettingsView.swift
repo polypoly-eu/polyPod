@@ -100,23 +100,17 @@ private struct MainSection: View {
                     onChange: { status in
 
                         if status {
-                            Authentication.shared.setUp { success in
+                            Authentication.shared.setUp(true) { success in
                                 if !success {
                                     isToggle = false
-                                    print("setup auth failed")
-                                    return
                                 }
                             }
-                            print("Enabled auth")
                         } else {
                             Authentication.shared.disable { success in
                                 if !success {
                                     isToggle = true
-                                    print("disable auth failed")
-                                    return
                                 }
                             }
-                            print("Disabled auth")
                         }
                         
                     }

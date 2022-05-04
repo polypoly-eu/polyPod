@@ -67,7 +67,7 @@ struct OnboardingView: View {
     }
     
     private func setUpAuth() {
-        Authentication.shared.setUp { success in
+        Authentication.shared.setUp(false) { success in
             if success {
                 closeAction()
             }

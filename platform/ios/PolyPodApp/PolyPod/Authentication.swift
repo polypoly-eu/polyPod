@@ -35,30 +35,48 @@ class Authentication {
         UserDefaults.standard.set(true, forKey: Authentication.disableCheckKey)
     }
     
-    func setUp(_ completeAction: @escaping (Bool) -> Void) {
-        authenticateLocally(reason: "auth_prompt_set_up") { success in
+    func setUp(_ reAuth: Bool, _ completeAction: @escaping (Bool) -> Void) {
+        
+        let reason = reAuth ?
+        "re_auth_prompt_set_up": "auth_prompt_set_up"
+        
+        authenticateLocally(reason) { success in
             self.authenticated = success
+
+            if (!success) {
+                completeAction(false)
+                return
+            }
+            
             UserDefaults.standard.set(true, forKey: Authentication.setUpKey)
             completeAction(success)
         }
     }
     
     func disable(_ completeAction: @escaping (Bool) -> Void) {
-        authenticateLocally(reason: "auth_prompt_disable") { success in
+        authenticateLocally("auth_prompt_disable") { success in
             self.authenticated = false
+            if (!success) {
+                completeAction(false)
+                return
+            }
+            
             UserDefaults.standard.set(false, forKey: Authentication.setUpKey)
             completeAction(success)
         }
     }
 
     
-    func authenticate(_ completeAction: @escaping (Bool) -> Void) {
+    func authenticate(_ reAuth: Bool, _ completeAction: @escaping (Bool) -> Void) {
         if isCheckDisabled() || !isSetUp() || authenticated {
             completeAction(true)
             return
         }
         
-        authenticateLocally(reason: "auth_prompt_unlock") { success in
+        let reason = reAuth ?
+        "re_auth_prompt_unlock": "auth_prompt_unlock"
+
+        authenticateLocally(reason) { success in
             self.authenticated = success
             completeAction(success)
         }
@@ -75,7 +93,7 @@ class Authentication {
     }
     
     private func authenticateLocally(
-        reason: String,
+        _ reason: String,
         _ completeAction: @escaping (Bool) -> Void
     ) {
         let context = LAContext()
