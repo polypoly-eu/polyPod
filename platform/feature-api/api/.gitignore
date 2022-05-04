@@ -103,3 +103,5 @@ dist
 .tern-port
 
 docs
+dist/
+**/*.d.ts
