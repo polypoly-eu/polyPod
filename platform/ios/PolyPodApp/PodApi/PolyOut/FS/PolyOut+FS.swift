@@ -4,7 +4,7 @@ import Zip
 enum PolyOutError: Error {
     case failedToParsePath(_ path: String)
     case platform(_ error: Error)
-    case wrongDestURLFormat(_ url: String)
+    case wrongFormat(_ description: String)
 }
 
 extension PolyOutError: LocalizedError {
@@ -14,8 +14,8 @@ extension PolyOutError: LocalizedError {
             return "Failed to parse path '\(path)'"
         case .platform(let error):
             return "Platform error: \(error)"
-        case .wrongDestURLFormat(let url):
-            return "DestinationURL format is wrong. destUrl: \(url)"
+        case .wrongFormat(let descr):
+            return "Wrong Format: \(descr)"
         }
     }
 }
@@ -195,15 +195,16 @@ extension PolyOut {
         
         DispatchQueue.global(qos: .background).async {
             do {
-                let id = { () -> String in
+                let id = try { () -> String in
                     if let destUrl = destUrl, let destURL = URL(string: destUrl) {
-                        return destURL.lastPathComponent
+                        let id = destURL.lastPathComponent
+                        if id.isEmpty {
+                            throw PolyOutError.wrongFormat("Could not extract id from destUrl in importArchive. This is the destUrl you passed: \(destUrl)")
+                        }
+                        return id
                     }
                     return UUID().uuidString
                 }()
-                if id.isEmpty {
-                    throw PolyOutError.wrongDestURLFormat(destUrl ?? "")
-                }
                 let targetUrl = self.urlFromId(id: id)
                 let baseUrl = targetUrl.deletingLastPathComponent()
                 if !FileManager.default.fileExists(atPath: baseUrl.path) {
