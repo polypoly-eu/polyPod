@@ -35,9 +35,17 @@
     <string name="button_url_open_confirm">Ja</string>
     <string name="button_url_open_reject">Nein</string>
     <string name="button_update_notification_close">OK</string>
+
     <string name="auth_prompt_title">Einloggen in Ihren polyPod</string>
     <string name="auth_prompt_subtitle">Den Sperrbildschirm vom Gerät verwenden</string>
     <string name="auth_prompt_success">Authentifizierung erfolgreich</string>
+    <string name="re_auth_prompt_title">xxxx your polyPod</string>
+    <string name="re_auth_prompt_subtitle">no parlo deutsch</string>
+    <string name="re_auth_prompt_success">Authentifizierung erfolgreich</string>
+    <string name="re_auth_prompt_confirm">OK</string>
+    <string name="re_auth_prompt_cancel">Cancel</string>
+    <string name="re_auth_prompt_failure">Cancelled re-Authentifizierung</string>
+
     <string name="message_feature_error">Leider gab es einen Fehler in \'%1$s\':\n\n%2$s\n\nIch beende es.</string>
     <string name="button_feature_error_close">OK</string>
 </resources>
