@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { PolyImportContext, Screen } from "@polypoly-eu/poly-look";
 
 const ExploreView = () => {
+    const { account } = useContext(PolyImportContext);
     return (
-        <div className="explore">
-            Explore
+        <Screen className="import" layout="poly-standard-layout">
             <div>
                 <h1>Activities</h1>
                 {account?.activities.map((activity, i) => (
@@ -22,7 +23,7 @@ const ExploreView = () => {
                     <div key={i}>{activitySegment.timestamp.toUTCString()}</div>
                 ))}
             </div>
-        </div>
+        </Screen>
     );
 };
 

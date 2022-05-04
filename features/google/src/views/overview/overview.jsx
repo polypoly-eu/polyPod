@@ -3,6 +3,7 @@ import {
     LoadingOverlay,
     PolyButton,
     PolyImportContext,
+    RoutingWrapper,
     Screen,
 } from "@polypoly-eu/poly-look";
 import { useHistory } from "react-router-dom";
@@ -30,18 +31,12 @@ const Overview = () => {
     }
 
     return (
-        <Screen className="overview" layout="standard-layout">
-            <div className="footer">
-                <div className="btn-holder">
-                    {files && files?.[0] && (
-                        <p>Imported File: {files[0].name}</p>
-                    )}
-                    <PolyButton
-                        label="Remove File"
-                        onClick={onRemoveFile}
-                    ></PolyButton>
-                </div>
-            </div>
+        <Screen className="overview" layout="poly-standard-layout">
+            {files && files?.[0] && <p>Imported File: {files[0].name}</p>}
+            <PolyButton label="Remove File" onClick={onRemoveFile}></PolyButton>
+            <RoutingWrapper history={history} route="/explore">
+                <PolyButton label="Explore"></PolyButton>
+            </RoutingWrapper>
         </Screen>
     );
 };
