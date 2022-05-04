@@ -29,7 +29,7 @@ const SideSheet = ({ children, okLabel, onClose, title = "", style = {} }) => {
           onClick={onClose}
           className="close-button-left"
         />
-        {title && <h1 className="title">{title}</h1>}
+        {title && <h1 className="title title-center">{title}</h1>}
       </div>
 
       {children}
