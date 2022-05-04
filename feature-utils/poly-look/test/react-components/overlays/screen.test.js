@@ -17,7 +17,7 @@ const noPropsTestScreen = <Screen></Screen>;
 describe("screen", () => {
   it("renders correctly", () => {
     const { getByTestId, container } = render(testScreen);
-    const screen = container.querySelector(".screen");
+    const screen = container.querySelector(".poly-screen");
     expect(screen.className).toContain(testClass);
     expect(screen.className).toContain(testLayout);
     expect(getByTestId("testChild")).toBeTruthy();
@@ -25,8 +25,8 @@ describe("screen", () => {
 
   it("also renders without props", () => {
     const { container } = render(noPropsTestScreen);
-    const screen = container.querySelector(".screen");
-    expect(screen.className.trim()).toBe("screen");
+    const screen = container.querySelector(".poly-screen");
+    expect(screen.className.trim()).toBe("poly-screen");
     expect(screen.children.length).toBe(0);
   });
 });
