@@ -3,6 +3,6 @@
     Right now they are only used with the screen component
 */
 
-.standard-layout > * {
+.poly-standard-layout > * {
   margin-bottom: 24px;
 }
