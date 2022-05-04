@@ -24,10 +24,9 @@ class Authentication {
             activity: FragmentActivity,
             setupComplete: () -> Unit
         ) {
-            authenticate(activity, true, false) { success ->
-                if (success) {
+            authenticate(activity, force = true, reAuth = false) { success ->
+                if (success)
                     setupComplete()
-                }
             }
         }
 
@@ -35,7 +34,7 @@ class Authentication {
             activity: FragmentActivity,
             setupComplete: (Boolean) -> Boolean
         ) {
-            authenticate(activity, true, true) { success ->
+            authenticate(activity, force = true, reAuth = true) { success ->
                 if (success) {
                     Preferences.setBiometricEnabled(
                         activity,
@@ -50,7 +49,7 @@ class Authentication {
             activity: FragmentActivity,
             disableComplete: (Boolean) -> Boolean
         ) {
-            authenticate(activity, false, true) { success ->
+            authenticate(activity, force = false, reAuth = true) { success ->
                 if (success) {
                     Preferences.setBiometricEnabled(
                         activity,
@@ -67,8 +66,7 @@ class Authentication {
             reAuth: Boolean = false,
             authComplete: ((Boolean) -> Unit)
         ) {
-            if (
-                !biometricsAvailable(activity) ||
+            if (!biometricsAvailable(activity) ||
                 (!force && !Preferences.getBiometricEnabled(activity))
             ) {
                 authComplete(true)

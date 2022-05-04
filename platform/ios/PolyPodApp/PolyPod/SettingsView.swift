@@ -98,7 +98,6 @@ private struct MainSection: View {
                     label: "settings_auth",
                     isToggle: $isToggle,
                     onChange: { status in
-
                         if status {
                             Authentication.shared.setUp(true) { success in
                                 if !success {
