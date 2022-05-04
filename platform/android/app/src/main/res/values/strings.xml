@@ -39,10 +39,10 @@
     <string name="auth_prompt_subtitle">Use device lock screen</string>
     <string name="auth_prompt_success">Authentication successful</string>
     <string name="re_auth_prompt_title">Re-authenticate your polyPod</string>
-    <string name="re_auth_prompt_subtitle">for security reasons, we ask you to re-authenticate before changing this setting</string>
+    <string name="re_auth_prompt_subtitle">For security reasons, we ask you to re-authenticate before changing this setting</string>
     <string name="re_auth_prompt_confirm">OK</string>
     <string name="re_auth_prompt_cancel">Cancel</string>
-    <string name="re_auth_prompt_success">Authorized re-authentication</string>
+    <string name="re_auth_prompt_success">Authorized authentication successfully</string>
     <string name="re_auth_prompt_failure">Cancelled re-authentication</string>
 
     <string name="message_feature_error">Unfortunately, \'%1$s\' had an error:\n\n%2$s\n\nI will close it for you.</string>
