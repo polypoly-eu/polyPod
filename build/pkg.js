@@ -63,11 +63,11 @@ class Pkg {
     }
 
     async install() {
-        await npmInstall(this.name, false);
+        await npmInstall(this.name);
     }
 
     async offlineInstall() {
-        await npmInstall(this.name);
+        await npmInstall(this.name, true);
     }
 
     async build() {
