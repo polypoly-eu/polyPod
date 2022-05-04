@@ -31,9 +31,8 @@
     "connect": "^3.7.0"
   },
   "devDependencies": {
-    "@polypoly-eu/rdf": "file:../api/rdf",
-    "@polypoly-eu/rdf-convert": "file:../api/rdf-convert",
     "@polypoly-eu/api": "file:../api",
+    "@polypoly-eu/rdf": "file:../api/rdf",
     "@polypoly-eu/test-utils": "file:../utils",
     "@rdfjs/dataset": "^1.1.1",
     "@types/benchmark": "^2.1.0",
