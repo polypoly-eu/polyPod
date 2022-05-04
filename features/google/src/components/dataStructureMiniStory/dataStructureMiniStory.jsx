@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { PolyChart, FilterChips } from "@polypoly-eu/poly-look";
 
-import i18n from "../../i18n.js";
-
 import "./dataStructureMiniStory.css";
 //This component needs to go to poly-look
 const DataStructureMiniStory = ({ data }) => {
@@ -24,7 +22,7 @@ const DataStructureMiniStory = ({ data }) => {
     const dataBubblesLightColor = "#f7fafc";
     const [selectedFolder, setSelectedFolder] = useState(data[0].title);
 
-    const totalTitle = i18n.t("dataStructureMiniStory:total.chip");
+    const totalTitle = "Total";
 
     const dataWithTotal = [
         ...data,
@@ -51,21 +49,17 @@ const DataStructureMiniStory = ({ data }) => {
         }
     };
 
-    const category =
-        selectedFolder === totalTitle
-            ? ""
-            : i18n.t("dataStructureMiniStory:category");
+    const category = selectedFolder === totalTitle ? "" : "category";
 
     return (
         <>
             <div>
                 <p
                     dangerouslySetInnerHTML={{
-                        __html: i18n.t("dataStructureMiniStory:folder.info", {
-                            category: category,
-                            selected_folder: selectedFolder,
-                            amount_of_files: amountOfFiles,
-                        }),
+                        __html: `dataStructureMiniStory:folder.info
+                            category ${category}
+                            selected_folder ${selectedFolder},
+                            amount_of_files ${amountOfFiles}`,
                     }}
                 />
                 <PolyChart
@@ -89,9 +83,7 @@ const DataStructureMiniStory = ({ data }) => {
                 defaultActiveChips={[selectedFolder]}
                 onChipClick={handleFolderSelected}
             />
-            <p className="source data-structure-source">
-                {i18n.t("common:source.your.facebook.data")}
-            </p>
+            <p className="source data-structure-source">{"your google data"}</p>
         </>
     );
 };

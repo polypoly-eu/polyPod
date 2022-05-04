@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
     LoadingOverlay,
     PolyButton,
@@ -8,6 +8,7 @@ import {
 } from "@polypoly-eu/poly-look";
 import { useHistory } from "react-router-dom";
 import i18n from "../../i18n";
+import { analyzeFile } from "@polypoly-eu/poly-analysis";
 
 const Overview = () => {
     const { account, handleRemoveFile, files, refreshFiles } =
@@ -19,6 +20,23 @@ const Overview = () => {
         handleRemoveFile(files[0]?.id);
         refreshFiles();
         history.push("/import");
+    }
+    useEffect(() => {
+        if (!account) return;
+        analyzeFile({
+            zipData: files[0],
+            dataAccount: account,
+            subAnalyses: [],
+        });
+    }, [account]);
+
+    if (!account || files === null) {
+        return (
+            <LoadingOverlay
+                loadingGif="./images/loading.gif"
+                message={i18n.t("common:loading")}
+            />
+        );
     }
 
     if (!account) {

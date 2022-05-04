@@ -26,7 +26,7 @@ import {
 import GoogleAccount from "./model/google-account.js";
 import { dataImporters } from "./model/importer.js";
 import i18n from "../../facebookImport/src/i18n.js";
-import ExploreView from "./views/explore.jsx";
+import ExploreView from "./views/explore/explore.jsx";
 
 const Google = () => {
     const { pod, isLoading } = useContext(GoogleContext);
