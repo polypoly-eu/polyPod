@@ -42,10 +42,15 @@ const npx = async (...args) => {
     await executeProcess("npx", ...args);
 };
 
-async function npmInstall(name) {
+async function npmInstall(name, offline = true) {
+    let args = ["--no-audit"];
+    if (offline) {
+        args.push("--prefer-offline");
+    }
+    args.push("ci");
     if (fs.existsSync("package-lock.json")) {
         logDetail(`${name}: Installing dependencies ...`);
-        await npm("--no-audit", "--prefer-offline", "ci");
+        await npm(...args);
     }
 }
 
