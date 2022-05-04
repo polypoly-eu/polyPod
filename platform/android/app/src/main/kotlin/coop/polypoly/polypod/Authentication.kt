@@ -1,6 +1,8 @@
 package coop.polypoly.polypod
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
@@ -22,30 +24,99 @@ class Authentication {
 
         fun setUp(
             activity: FragmentActivity,
-            setupComplete: (Boolean) -> Unit
+            setupComplete: () -> Unit
         ) {
             authenticate(activity, true) { success ->
                 if (success) {
-                    println("To Enable authenticate")
-                    setupComplete(true)
+                    setupComplete()
                 }
-                setupComplete(false)
+            }
+        }
+
+        fun reSetUp(
+            activity: FragmentActivity,
+            setupComplete: (Boolean) -> Boolean
+        ) {
+            reAuthenticate(activity, true) { success ->
+                if (success) {
+                    Preferences.setBiometricEnabled(
+                        activity,
+                        true
+                    )
+                    setupComplete(success)
+                }
             }
         }
 
         fun disable(
             activity: FragmentActivity,
-            disableComplete: (Boolean) -> Unit
+            disableComplete: (Boolean) -> Boolean
         ) {
-            authenticate(activity, false) { success ->
+            reAuthenticate(activity, false) { success ->
+
                 if (success) {
-                    println("Disabled authenticate")
-                    disableComplete(true)
+                    Preferences.setBiometricEnabled(
+                        activity,
+                        false
+                    )
+                    disableComplete(success)
                 }
-                disableComplete(false)
             }
         }
 
+        private fun reAuthenticate(
+            activity: FragmentActivity,
+            status: Boolean = false,
+            authComplete: ((Boolean) -> Unit)
+        ) {
+            if (!biometricsAvailable(activity) ||
+                (!status && !Preferences.getBiometricEnabled(activity))
+            ) {
+                authComplete(true)
+                return
+            }
+
+            val alertDialog = AlertDialog.Builder(activity)
+            alertDialog.setTitle(
+                activity.getString(R.string.re_auth_prompt_title)
+            )
+            alertDialog.setMessage(
+                activity.getString(R.string.re_auth_prompt_subtitle)
+            )
+            alertDialog.setCancelable(false)
+
+            val positiveButtonClick =
+                { dialog: DialogInterface, _: Int ->
+                    Toast.makeText(
+                        activity,
+                        activity.getString(R.string.re_auth_prompt_success),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    authComplete(true)
+                    dialog.dismiss()
+                }
+            alertDialog.setPositiveButton(
+                activity.getString(R.string.re_auth_prompt_confirm),
+                positiveButtonClick
+            )
+
+            val negativeButtonClick =
+                { dialog: DialogInterface, _: Int ->
+                    Toast.makeText(
+                        activity,
+                        activity.getString(R.string.re_auth_prompt_failure),
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    authComplete(false)
+                    dialog.cancel()
+                }
+            alertDialog.setNegativeButton(
+                activity.getString(R.string.re_auth_prompt_cancel),
+                negativeButtonClick
+            )
+            alertDialog.create().show()
+        }
 
         fun authenticate(
             activity: FragmentActivity,
@@ -61,7 +132,9 @@ class Authentication {
 
             val promptInfo = BiometricPrompt.PromptInfo.Builder()
                 .setTitle(activity.getString(R.string.auth_prompt_title))
-                .setSubtitle(activity.getString(R.string.auth_prompt_subtitle))
+                .setSubtitle(
+                    activity.getString(R.string.auth_prompt_subtitle)
+                )
                 .setAllowedAuthenticators(desiredLockScreenType)
                 .build()
 
