@@ -1,7 +1,7 @@
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 import analysisKeys from "../analysisKeys";
 
-export default class ActivitySegmentsAnalysis extends RootAnalysis {
+export default class PlaceVisitsAnalysis extends RootAnalysis {
     async analyze({ dataAccount: googleAccount }) {
         const placeVisits = googleAccount.placeVisits;
         const groupedPlaceVisits = {};
