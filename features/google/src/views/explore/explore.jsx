@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import {
     List,
-    RoutingCard,
     Card,
     PolyImportContext,
     Screen,
+    RoutingWrapper,
+    ClickableCard,
 } from "@polypoly-eu/poly-look";
 
 import i18n from "../../i18n.js";
@@ -14,13 +15,16 @@ import { ministories } from "../ministories/ministories.js";
 
 const ExploreView = () => {
     const { account } = useContext(PolyImportContext);
+    debugger;
     const renderFileAnalyses = () => {
         if (!account) return null;
         return (
             <Screen className="import" layout="poly-standard-layout">
                 <List>
                     {ministories.map((MinistoryClass, index) => {
-                        const ministory = new MinistoryClass(account);
+                        const ministory = new MinistoryClass({
+                            account,
+                        });
                         if (!ministory.active) return;
                         const content = (
                             <>
@@ -32,19 +36,26 @@ const ExploreView = () => {
                                         )}
                                     </label>
                                 )}
-                                {ministory.renderSummary()}
+                                {ministory.render()}
                             </>
                         );
-                        return ministory.renderDetails ? (
-                            <RoutingCard
-                                key={index}
+                        return ministory.hasDetails() ? (
+                            <RoutingWrapper
                                 history={history}
                                 route="/explore/details"
-                                stateChange={{ activeAnalysis: ministory }}
-                                buttonText={i18n.t("explore:details.button")}
+                                stateChange={{
+                                    ActiveStoryClass: MinistoryClass,
+                                }}
                             >
-                                {content}
-                            </RoutingCard>
+                                <ClickableCard
+                                    key={index}
+                                    buttonText={i18n.t(
+                                        "explore:details.button"
+                                    )}
+                                >
+                                    {content}
+                                </ClickableCard>
+                            </RoutingWrapper>
                         ) : (
                             <Card key={index}>{content}</Card>
                         );

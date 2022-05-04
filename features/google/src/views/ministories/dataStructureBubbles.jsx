@@ -1,27 +1,25 @@
 import React from "react";
 import DataStructureMiniStory from "../../components/dataStructureMiniStory/dataStructureMiniStory.jsx";
-import i18n from "../../i18n.js";
 import { SingleDataStory } from "./singleDataStory.jsx";
 
-//TODO need to be put in poly-analysis
+//TODO need to be put in poly-analysis & i18n translations
 class DataStructureMinistory extends SingleDataStory {
     constructor(props) {
         super(props, "bubblesData");
     }
     get title() {
-        return i18n.t("dataStructureMiniStory:title");
+        return "DataStructure Ministory";
     }
 
-    renderSummary() {
+    _renderSummary() {
         let totalFiles = 0;
         this.analysisData.forEach((a) => (totalFiles += a.count));
         return (
             <>
                 <p>
-                    {i18n.t("dataStructureMiniStory:summary", {
-                        amount_of_folders: this.analysisData.length,
-                        amount_of_files: totalFiles,
-                    })}
+                    {`Here is the data your account holds: 
+                    Datapoints: ${this.analysisData.length},
+                     Amount of files: ${totalFiles}`}
                 </p>
                 <DataStructureMiniStory data={this.analysisData} />
             </>
