@@ -14,6 +14,7 @@ ndk_version := r22b
 android_core_libraries := target/armv7-linux-androideabi
 build_type := $(if $(filter $(MODE), release),release,debug)
 core_binaries := target/$(build_type)
+release_flag := $(if $(filter $(build_type), release), --release)
 
 ifneq ($(OS),Windows_NT)
 	ifeq ($(shell uname -s),Darwin)
@@ -27,7 +28,7 @@ flatbuffers:
 	./flatbuffers_shared/generate_flatbuffers.sh
 
 $(core_binaries): flatbuffers
-	cargo build
+	cargo build $(release_flag)
 
 .PHONY: core
 core: $(core_binaries)
@@ -73,7 +74,7 @@ endif
 define build_for_architecture
 	rustup target add $(1)
 	cargo build \
-		$(if $(filter $(build_type), release), --release) \
+		$(release_flag) \
 		--lib --target $(1)
 endef
 
