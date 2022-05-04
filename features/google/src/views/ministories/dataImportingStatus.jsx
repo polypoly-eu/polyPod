@@ -1,18 +1,17 @@
 import React from "react";
-import analysisKeys from "../../model/analyses/utils/analysisKeys";
 import ReportStory from "./reportStory.jsx";
 
 class DataImportingStatusReport extends ReportStory {
     constructor(props) {
         super(props);
-        this._neededReports = [analysisKeys.importersData];
+        this._neededReports = ["importersData"];
     }
     get title() {
         return "Importing status";
     }
 
     get reportData() {
-        return this.reports[analysisKeys.importersData];
+        return this.reports.importersData;
     }
 
     _renderStatus(status) {
@@ -27,7 +26,7 @@ class DataImportingStatusReport extends ReportStory {
         );
     }
 
-    _renderSummary() {
+    render() {
         return (
             <>
                 <p>

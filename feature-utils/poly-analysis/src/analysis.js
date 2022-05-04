@@ -7,21 +7,9 @@ import {
 
 class AnalysisExecutionResult {
     constructor(analysis, status, executionTime) {
-        this._analysis = analysis;
-        this._status = status || new Status({ name: statusTypes.success });
-        this._executionTime = executionTime;
-    }
-
-    get analysis() {
-        return this._analysis;
-    }
-
-    get status() {
-        return this._status;
-    }
-
-    get executionTime() {
-        return this._executionTime;
+        this.analysis = analysis;
+        this.status = status || new Status({ name: statusTypes.success });
+        this.executionTime = executionTime;
     }
 
     get reportJsonData() {
@@ -39,7 +27,6 @@ class AnalysisExecutionResult {
 
 export async function runAnalysis(analysisClass, enrichedData) {
     const subAnalysis = new analysisClass();
-
     const telemetry = new Telemetry();
     let status;
     try {
