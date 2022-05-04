@@ -25,10 +25,10 @@ fi
 google_repo=https://dl.google.com/android/repository
 ndk_lib=android-ndk-${ndk_version}
 android_export=export/android
-ndk_dir=${android_export}/NDK
+ndk=${android_export}/NDK
 # Override NDK_HOME to point to downloaded version.
 # Will be used by `cargo ndk` to generate the libraries
-export NDK_HOME=${ndk_dir}/${ndk_lib}
+export NDK_HOME=${ndk}/${ndk_lib}
 
 if [ ! -d $NDK_HOME ]; then
 	mkdir -p ${android_export}
@@ -56,9 +56,9 @@ if [ ! -d $NDK_HOME ]; then
 	esac
 
 	ndk_download_link=$google_repo/$ndk_lib-$os_name-x86_64.zip 
-	curl -L $ndk_download_link -o ${ndk_dir}.zip
-	unzip -d $ndk_dir ${ndk_dir}.zip
-	rm ${ndk_dir}.zip;
+	curl -L $ndk_download_link -o ${ndk}.zip
+	unzip -d $ndk ${ndk}.zip
+	rm ${ndk}.zip;
 	echo "*** NDK installed at $NDK_HOME"
 fi
 
