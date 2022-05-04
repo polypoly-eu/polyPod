@@ -36,10 +36,14 @@
 "button_confirm" = "Ja";
 "button_reject" = "Nein";
 "button_update_notification_close" = "OK";
+
 "auth_prompt_set_up" = "Sperre einrichten";
-"auth_prompt_disable" = "xx einrichten";
+"re_auth_prompt_set_up" = "Re-Sperre einrichten XX";
+
+"auth_prompt_disable" = " ";
 
 "auth_prompt_unlock" = "Einloggen in polyPod";
+"re_auth_prompt_unlock" = " ";
 
 "settings_imprint_text" = "
 <p>Angaben gemäß § 5 TMG</p>
