@@ -5,12 +5,13 @@ import { BlockLegend, LineLegend } from "./legends.jsx";
 import ErrorPopup from "./popUps/errorPopup/errorPopup.jsx";
 import { Card, ClickableCard } from "./cards";
 import List from "./list.jsx";
-import { PolyButton, IconButton, RoutingWrapper } from "./buttons";
+import { PolyButton, IconButton } from "./buttons";
 import { SideSheet, SideSwiper, LoadingOverlay } from "./overlays";
 import {
   PolyImportContext,
   PolyImportProvider,
 } from "./contexts/poly-import.jsx";
+import { RoutingWrapper } from "./routing";
 export {
   Chip,
   Tab,
