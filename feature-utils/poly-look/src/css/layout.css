@@ -6,3 +6,7 @@
 .poly-standard-layout > * {
   margin-bottom: 24px;
 }
+
+.poly-standard-layout > :first-child {
+  margin-top: 24px;
+}
