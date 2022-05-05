@@ -556,7 +556,6 @@ function endpointErrorMessage(fetchType: string, errorlog: string): string {
 }
 
 /**
- * The BrowserEndpoint class implements the Endpoint interface
  * @class BrowserEndpoint
  */
 class BrowserEndpoint implements Endpoint {
@@ -627,9 +626,10 @@ function createUUID(): string {
     );
 }
 
+/**
+ * @class `BrowserPolyNavPolyNav`
+ */
 class BrowserPolyNav implements PolyNav {
-    /* Creating a new object with a property called actions. The actions property is an
-    object with a string key and a value of a function that returns void. */
     actions?: { [key: string]: () => void };
 
     /** Creating a function that will be called when the user releases a key on the keyboard. */
@@ -750,8 +750,8 @@ declare global {
 }
 
 /**
- * It takes a string representing a color in hexadecimal format and
- * returns the relative luminance of that feature color.
+ * It takes color and returns the relative luminance value of it.
+ *
  * @param {string} featureColor - the color of the feature you want to change in a six digit hex color string, e.g. #000000
  * @returns The luminance of the feature color.
  */
