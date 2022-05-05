@@ -4,7 +4,7 @@ import factory from "@rdfjs/dataset";
 import { podSpec } from "@polypoly-eu/pod-api/dist/spec";
 import { getHttpbinUrl } from "@polypoly-eu/test-utils";
 import { AsyncPod } from "../../async";
-import { DataFactory } from "@polypoly-eu/rdf";
+import { DataFactory } from "@polypoly-eu/api";
 
 describe("Async pod", () => {
     const fs = new Volume().promises as unknown as FS;

@@ -12,12 +12,5 @@ export default {
             transforms: ["typescript"],
         }),
     ],
-    external: [
-        "@polypoly-eu/rdf",
-        "@polypoly-eu/api",
-        "chai",
-        "chai-as-promised",
-        "fast-check",
-        "path",
-    ],
+    external: ["@polypoly-eu/api", "chai", "chai-as-promised", "fast-check", "path"],
 };

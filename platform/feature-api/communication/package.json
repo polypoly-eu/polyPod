@@ -25,6 +25,7 @@
   "dependencies": {
     "@msgpack/msgpack": "^2.6.0",
     "@polypoly-eu/pod-api": "file:../api/pod-api",
+    "@polypoly-eu/rdf": "file:../api/rdf",
     "@types/body-parser": "^1.19.2",
     "@types/connect": "^3.4.35",
     "body-parser": "^1.20.0",
@@ -32,7 +33,6 @@
   },
   "devDependencies": {
     "@polypoly-eu/api": "file:../api",
-    "@polypoly-eu/rdf": "file:../api/rdf",
     "@polypoly-eu/test-utils": "file:../utils",
     "@rdfjs/dataset": "^1.1.1",
     "@types/benchmark": "^2.1.0",

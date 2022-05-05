@@ -24,7 +24,7 @@ export default [
         external: [
             "@polypoly-eu/communication",
             "@polypoly-eu/communication/dist/port-authority/middleware",
-            "@polypoly-eu/rdf",
+            "@polypoly-eu/api",
         ],
     },
     {
