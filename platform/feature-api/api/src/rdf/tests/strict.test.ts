@@ -1,4 +1,4 @@
-import { DataFactorySpec } from "@polypoly-eu/api";
+import { DataFactorySpec } from "../../index";
 import { DataFactory } from "../index";
 import * as Foreign from "@rdfjs/data-model";
 
