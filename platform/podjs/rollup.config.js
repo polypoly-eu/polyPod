@@ -25,6 +25,7 @@ export default [
             }),
         ],
         context: "window",
+        external: ["chai"],
     },
     {
         input: "src/pod.ts",
