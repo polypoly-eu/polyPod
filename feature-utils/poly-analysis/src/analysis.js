@@ -4,24 +4,13 @@ import {
     Status,
     statusTypes,
 } from "@polypoly-eu/poly-import";
+import genericAnalyses from "./analysis/generic-analyses/generic-analyses";
 
 class AnalysisExecutionResult {
     constructor(analysis, status, executionTime) {
-        this._analysis = analysis;
-        this._status = status || new Status({ name: statusTypes.success });
-        this._executionTime = executionTime;
-    }
-
-    get analysis() {
-        return this._analysis;
-    }
-
-    get status() {
-        return this._status;
-    }
-
-    get executionTime() {
-        return this._executionTime;
+        this.analysis = analysis;
+        this.status = status || new Status({ name: statusTypes.success });
+        this.executionTime = executionTime;
     }
 
     get reportJsonData() {
@@ -39,7 +28,6 @@ class AnalysisExecutionResult {
 
 export async function runAnalysis(analysisClass, enrichedData) {
     const subAnalysis = new analysisClass();
-
     const telemetry = new Telemetry();
     let status;
     try {
@@ -62,8 +50,9 @@ export async function analyzeZip({
     pod,
 }) {
     const enrichedData = { ...zipData, zipFile, dataAccount, pod };
+    const allAnalyses = [...genericAnalyses, ...subAnalyses];
     const analysesResults = await Promise.all(
-        subAnalyses.map(async (subAnalysisClass) => {
+        allAnalyses.map(async (subAnalysisClass) => {
             return runAnalysis(subAnalysisClass, enrichedData);
         })
     );
