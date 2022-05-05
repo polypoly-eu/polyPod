@@ -14,7 +14,15 @@ import {
 } from "@polypoly-eu/pod-api";
 import { DataFactory, Quad } from "rdf-js";
 import { RequestListener } from "http";
-import * as RDF from "@polypoly-eu/rdf";
+import {
+    dataFactory,
+    NamedNode,
+    BlankNode,
+    Literal,
+    Variable,
+    DefaultGraph,
+    Quad as polyQuad,
+} from "@polypoly-eu/api";
 import {
     ResponsePort,
     liftServer,
@@ -157,12 +165,12 @@ class FileStats implements Stats {
 
 export const podBubblewrapClasses: Classes = {
     "@polypoly-eu/remote-pod.FileStats": FileStats,
-    "@polypoly-eu/rdf.NamedNode": RDF.NamedNode,
-    "@polypoly-eu/rdf.BlankNode": RDF.BlankNode,
-    "@polypoly-eu/rdf.Literal": RDF.Literal,
-    "@polypoly-eu/rdf.Variable": RDF.Variable,
-    "@polypoly-eu/rdf.DefaultGraph": RDF.DefaultGraph,
-    "@polypoly-eu/rdf.Quad": RDF.Quad,
+    "@polypoly-eu/rdf.NamedNode": NamedNode,
+    "@polypoly-eu/rdf.BlankNode": BlankNode,
+    "@polypoly-eu/rdf.Literal": Literal,
+    "@polypoly-eu/rdf.Variable": Variable,
+    "@polypoly-eu/rdf.DefaultGraph": DefaultGraph,
+    "@polypoly-eu/rdf.Quad": polyQuad,
 };
 
 function bubblewrapPort(
@@ -187,7 +195,7 @@ export class RemoteClientPod implements Pod {
 
     constructor(
         private clientPort: RequestPort<BackendRequest, BackendResponse>,
-        public readonly dataFactory: DataFactory = RDF.dataFactory
+        public readonly dataFactory: DataFactory = dataFactory
     ) {
         this.rpcClient = backendClient<PodBackend>(client(clientPort));
     }
