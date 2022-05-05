@@ -72,8 +72,8 @@ private struct MainSection: View {
     @Binding var activeSection: Sections
     @State private var showVersion = false
     @State private var shareLogs = false
-    @State private var isToggled = Authentication.shared.isSetUp()
-
+    @State private var isAuthenticationConfigured = Authentication.shared.isSetUp()
+    
     var body: some View {
         List() {
             Section(header: SettingsHeader("settings_about_section")) {
@@ -92,26 +92,17 @@ private struct MainSection: View {
                 EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             )
             
-
+            
             Section(header: SettingsHeader("settings_sec_section")) {
                 SettingsToggleButton(
                     label: "settings_auth",
-                    isToggled: $isToggled,
-                    onChange: { status in
-                        if status {
-                            Authentication.shared.setUp(reAuth: true) { success in
-                                if !success {
-                                    isToggled = false
-                                }
-                            }
-                        } else {
-                            Authentication.shared.disable { success in
-                                if !success {
-                                    isToggled = true
-                                }
+                    isToggled: $isAuthenticationConfigured,
+                    onChange: { isOn in
+                        Authentication.shared.setUp(newStatus: isOn) { success in
+                            if !success {
+                                isAuthenticationConfigured = !isOn
                             }
                         }
-                        
                     }
                 )
             }
@@ -188,32 +179,31 @@ private struct SettingsButton: View {
     }
 }
 
-typealias OnChange = ((Bool) -> Void)?
 
 private struct SettingsToggleButton: View {
     let label: LocalizedStringKey
     let isToggled : Binding<Bool>;
-        
-    var onChange: OnChange
-
+    
+    var onChange: ((Bool) -> Void)?
+    
     var body: some View {
-       VStack {
-           Toggle(isOn: isToggled.onChange(toggleChange)) {
-                    Text(label)
-                           .foregroundColor(Color.PolyPod.darkForeground)
-                           .font(.custom("Jost-Regular", size: 18))
-                           .kerning(-0.18)
-                   }
-                   .padding(.trailing, 32)
+        VStack {
+            Toggle(isOn: isToggled.onChange(toggleChange)) {
+                Text(label)
+                    .foregroundColor(Color.PolyPod.darkForeground)
+                    .font(.custom("Jost-Regular", size: 18))
+                    .kerning(-0.18)
+            }
+            .padding(.trailing, 32)
         }.padding(.leading, 32)
     }
     
     func toggleChange(_ value: Bool) {
         if let action = self.onChange {
-          action(value)
+            action(value)
         }
     }
-            
+    
 }
 
 

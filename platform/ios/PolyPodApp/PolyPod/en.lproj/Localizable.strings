@@ -42,8 +42,6 @@
 "auth_prompt_set_up" = "Set up authentication";
 "re_auth_prompt_set_up" = "Re-authorize authentication";
 
-"auth_prompt_disable" = "Disable authentification";
-
 "auth_prompt_unlock" = "Login to your polyPod";
 "re_auth_prompt_unlock" = "Please confirm your Login";
 

@@ -1,11 +1,11 @@
 import LocalAuthentication
 
 private func isSimulator() -> Bool {
-    #if targetEnvironment(simulator)
+#if targetEnvironment(simulator)
     return true
-    #else
+#else
     return false
-    #endif
+#endif
 }
 
 class Authentication {
@@ -35,48 +35,31 @@ class Authentication {
         UserDefaults.standard.set(true, forKey: Authentication.disableCheckKey)
     }
     
-    func setUp(reAuth: Bool, _ completeAction: @escaping (Bool) -> Void) {
-        
-        let reason = reAuth ?
+    
+    func setUp(newStatus: Bool, _ completeAction: @escaping (Bool) -> Void) {
+        let reason = isSetUp() ?
         "re_auth_prompt_set_up": "auth_prompt_set_up"
-        
-        authenticateLocally(reason) { success in
-            self.authenticated = success
 
-            if (!success) {
-                completeAction(false)
-                return
+        authenticateLocally(withReason: reason) { success in
+            if (success) {
+                self.authenticated = newStatus
+                UserDefaults.standard.set(newStatus, forKey: Authentication.setUpKey)
             }
-            
-            UserDefaults.standard.set(true, forKey: Authentication.setUpKey)
             completeAction(success)
         }
     }
-    
-    func disable(_ completeAction: @escaping (Bool) -> Void) {
-        authenticateLocally("auth_prompt_disable") { success in
-            self.authenticated = false
-            if (!success) {
-                completeAction(false)
-                return
-            }
             
-            UserDefaults.standard.set(false, forKey: Authentication.setUpKey)
-            completeAction(success)
-        }
-    }
-
     
-    func authenticate(_ reAuth: Bool, _ completeAction: @escaping (Bool) -> Void) {
+    func authenticate(_ completeAction: @escaping (Bool) -> Void) {
         if isCheckDisabled() || !isSetUp() || authenticated {
             completeAction(true)
             return
         }
         
-        let reason = reAuth ?
+        let reason = isSetUp() ?
         "re_auth_prompt_unlock": "auth_prompt_unlock"
 
-        authenticateLocally(reason) { success in
+        authenticateLocally(withReason: reason) { success in
             self.authenticated = success
             completeAction(success)
         }
@@ -93,7 +76,7 @@ class Authentication {
     }
     
     private func authenticateLocally(
-        _ reason: String,
+        withReason reason: String,
         _ completeAction: @escaping (Bool) -> Void
     ) {
         let context = LAContext()
