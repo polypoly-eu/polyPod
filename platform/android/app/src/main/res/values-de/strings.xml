@@ -37,11 +37,11 @@
     <string name="button_update_notification_close">OK</string>
 
     <string name="auth_prompt_title">Einloggen in Ihren polyPod</string>
-    <string name="auth_prompt_subtitle">Den Sperrbildschirm vom Gerät verwenden</string>
+    <string name="auth_prompt_subtitle">Bitte authentifizieren Sie sich mit dem Sperrbildschirm Ihres Gerätes</string>
     <string name="auth_prompt_success">Authentifizierung erfolgreich</string>
 
-    <string name="re_auth_prompt_title">Bitte authentifizieren Sie sich erneut</string>
-    <string name="re_auth_prompt_subtitle">Aus Sicherheitsgründen bitten wir Sie, sich noch einmal zu authentifizieren bevor wir diese Einstellung ändern.</string>
+    <string name="re_auth_prompt_title">Authentifizieren um fortzufahren</string>
+    <string name="re_auth_prompt_subtitle">Bitte authentifizieren Sie sich mit dem Sperrbildschirm Ihres Gerätes</string>
     <string name="re_auth_prompt_success">Authentifizierung erfolgreich</string>
 
     <string name="message_feature_error">Leider gab es einen Fehler in \'%1$s\':\n\n%2$s\n\nIch beende es.</string>
