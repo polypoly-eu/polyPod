@@ -29,6 +29,11 @@ const NAV_LIGHT_FOREGROUND_COLOR = "#ffffff";
 
 const MANIFEST_DATA = window.manifestData;
 
+/**
+ * It opens a database, creates two object stores for PolyIn and PolyOut keys
+ * and creates a bunch of indexes according to the quad keys.
+ * @returns An IDBDatabase object.
+ */
 async function openDatabase(): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
         const name = `${DB_PREFIX}${document.location.pathname}`;
@@ -51,6 +56,10 @@ async function openDatabase(): Promise<IDBDatabase> {
     });
 }
 
+/**
+ *  It implements the `PolyIn` interface by storing quads in an IndexedDB database
+ *  @class IDBPolyIn
+ */
 class IDBPolyIn implements PolyIn {
     async match(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
         const db = await openDatabase();
@@ -241,6 +250,10 @@ interface File {
     stat(): CompatStats;
 }
 
+/**
+ * It implements the PolyOut interface by storing files in IndexedDB
+ * @class IDBPolyOut
+ */
 class IDBPolyOut implements PolyOut {
     private async getFileInfo(id: string): Promise<FileInfo> {
         const db = await openDatabase();
