@@ -35,7 +35,7 @@ class Authentication {
         UserDefaults.standard.set(true, forKey: Authentication.disableCheckKey)
     }
     
-    func setUp(_ reAuth: Bool, _ completeAction: @escaping (Bool) -> Void) {
+    func setUp(reAuth: Bool, _ completeAction: @escaping (Bool) -> Void) {
         
         let reason = reAuth ?
         "re_auth_prompt_set_up": "auth_prompt_set_up"
