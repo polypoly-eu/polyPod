@@ -18,7 +18,12 @@ export abstract class Model {
     abstract termType: string;
 
     equals(other: RDF.Term | null): boolean {
-        if (other === null || other === undefined || other.termType !== this.termType) return false;
+        if (
+            other === null ||
+            other === undefined ||
+            other.termType !== this.termType
+        )
+            return false;
 
         for (const [key, value] of Object.entries(this)) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,7 +37,10 @@ export abstract class Model {
     }
 }
 
-export class NamedNode<Iri extends string = string> extends Model implements RDF.NamedNode {
+export class NamedNode<Iri extends string = string>
+    extends Model
+    implements RDF.NamedNode
+{
     termType: "NamedNode" = "NamedNode";
 
     constructor(public value: Iri) {
@@ -62,13 +70,18 @@ export class Literal extends Model implements RDF.Literal {
     static readonly langStringDatatype = new NamedNode(
         "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
     );
-    static readonly stringDatatype = new NamedNode("http://www.w3.org/2001/XMLSchema#string");
+    static readonly stringDatatype = new NamedNode(
+        "http://www.w3.org/2001/XMLSchema#string"
+    );
 
     language: string;
     datatype: RDF.NamedNode;
     termType: "Literal" = "Literal";
 
-    constructor(public value: string, languageOrDatatype?: string | RDF.NamedNode) {
+    constructor(
+        public value: string,
+        languageOrDatatype?: string | RDF.NamedNode
+    ) {
         super();
 
         if (typeof languageOrDatatype === "string") {
@@ -136,7 +149,12 @@ export class Quad implements RDF.Quad {
 }
 
 const prototypes = {
-    subject: [NamedNode.prototype, BlankNode.prototype, Variable.prototype, Quad.prototype],
+    subject: [
+        NamedNode.prototype,
+        BlankNode.prototype,
+        Variable.prototype,
+        Quad.prototype,
+    ],
     predicate: [NamedNode.prototype, Variable.prototype],
     object: [
         NamedNode.prototype,
@@ -145,7 +163,12 @@ const prototypes = {
         Variable.prototype,
         Quad.prototype,
     ],
-    graph: [DefaultGraph.prototype, NamedNode.prototype, BlankNode.prototype, Variable.prototype],
+    graph: [
+        DefaultGraph.prototype,
+        NamedNode.prototype,
+        BlankNode.prototype,
+        Variable.prototype,
+    ],
 };
 
 /**
@@ -196,12 +219,14 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
 
     literal(value: string, languageOrDatatype?: string | NamedNode): Literal {
         if (this.strict) {
-            if (typeof value !== "string") throw new Error("Expected string as value");
+            if (typeof value !== "string")
+                throw new Error("Expected string as value");
 
             if (
                 languageOrDatatype !== undefined &&
                 typeof languageOrDatatype !== "string" &&
-                Object.getPrototypeOf(languageOrDatatype) !== NamedNode.prototype
+                Object.getPrototypeOf(languageOrDatatype) !==
+                    NamedNode.prototype
             )
                 throw new Error(
                     "Expected undefined, string or NamedNode prototype as language/datatype"
@@ -228,15 +253,25 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
         if (this.strict) {
             if (!prototypes.subject.includes(Object.getPrototypeOf(subject)))
                 throw new Error("Invalid prototype of subject");
-            if (!prototypes.predicate.includes(Object.getPrototypeOf(predicate)))
+            if (
+                !prototypes.predicate.includes(Object.getPrototypeOf(predicate))
+            )
                 throw new Error("Invalid prototype of predicate");
             if (!prototypes.object.includes(Object.getPrototypeOf(object)))
                 throw new Error("Invalid prototype of object");
-            if (graph !== undefined && !prototypes.graph.includes(Object.getPrototypeOf(graph)))
+            if (
+                graph !== undefined &&
+                !prototypes.graph.includes(Object.getPrototypeOf(graph))
+            )
                 throw new Error("Invalid prototype of graph");
         }
 
-        return new Quad(subject, predicate, object, graph || this.defaultGraph());
+        return new Quad(
+            subject,
+            predicate,
+            object,
+            graph || this.defaultGraph()
+        );
     }
 
     variable(value: string): Variable {
