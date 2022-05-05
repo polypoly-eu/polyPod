@@ -12,6 +12,12 @@ export default class PlaceVisitsAnalysis extends RootAnalysis {
         });
         if (Object.keys(groupedPlaceVisits).length > 0)
             googleAccount.analyses[analysisKeys.groupedPlaceVisits] =
-                groupedPlaceVisits;
+                convertToChartData(groupedPlaceVisits);
     }
+}
+
+function convertToChartData(groupedPlaceVisits) {
+    return Object.entries(groupedPlaceVisits).map((key, value) => {
+        return { title: key, value };
+    });
 }

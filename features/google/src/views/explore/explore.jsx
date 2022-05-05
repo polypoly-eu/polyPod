@@ -24,6 +24,7 @@ const ExploreView = () => {
                         const ministory = new MinistoryClass({
                             account,
                         });
+                        debugger;
                         if (!ministory.active) return;
                         const content = (
                             <>
