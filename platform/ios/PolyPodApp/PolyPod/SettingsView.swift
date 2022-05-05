@@ -72,7 +72,7 @@ private struct MainSection: View {
     @Binding var activeSection: Sections
     @State private var showVersion = false
     @State private var shareLogs = false
-    @State private var isToggle = Authentication.shared.isSetUp()
+    @State private var isToggled = Authentication.shared.isSetUp()
 
     var body: some View {
         List() {
@@ -96,18 +96,18 @@ private struct MainSection: View {
             Section(header: SettingsHeader("settings_sec_section")) {
                 SettingsToggleButton(
                     label: "settings_auth",
-                    isToggle: $isToggle,
+                    isToggled: $isToggled,
                     onChange: { status in
                         if status {
-                            Authentication.shared.setUp(true) { success in
+                            Authentication.shared.setUp(reAuth: true) { success in
                                 if !success {
-                                    isToggle = false
+                                    isToggled = false
                                 }
                             }
                         } else {
                             Authentication.shared.disable { success in
                                 if !success {
-                                    isToggle = true
+                                    isToggled = true
                                 }
                             }
                         }
@@ -192,13 +192,13 @@ typealias OnChange = ((Bool) -> Void)?
 
 private struct SettingsToggleButton: View {
     let label: LocalizedStringKey
-    let isToggle : Binding<Bool>;
+    let isToggled : Binding<Bool>;
         
     var onChange: OnChange
 
     var body: some View {
        VStack {
-           Toggle(isOn: isToggle.onChange(toggleChange)) {
+           Toggle(isOn: isToggled.onChange(toggleChange)) {
                     Text(label)
                            .foregroundColor(Color.PolyPod.darkForeground)
                            .font(.custom("Jost-Regular", size: 18))
