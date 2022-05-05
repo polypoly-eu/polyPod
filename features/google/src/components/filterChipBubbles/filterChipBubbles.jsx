@@ -7,9 +7,7 @@ const dataBubblesDarkColor = "#0f1938";
 const dataBubblesLightColor = "#f7fafc";
 
 const FilterChipBubbles = ({ data }) => {
-    const [selectedActivityType, setSelectedActivityType] = useState(
-        data[0].title
-    );
+    const [activeTitle, setActiveTitle] = useState(data[0].title);
 
     const totalFiles = data.reduce(
         (previous, current) => previous + current.count,
@@ -20,11 +18,11 @@ const FilterChipBubbles = ({ data }) => {
     const dataWithTotal = [...data, { title: totalTitle, value: totalFiles }];
 
     const handleBubbleClick = (_, node) => {
-        setSelectedActivityType(node.data.title);
+        setActiveTitle(node.data.title);
     };
 
     const bubbleColor = (bubble) => {
-        if (bubble.data.title === selectedActivityType) {
+        if (bubble.data.title === activeTitle) {
             return dataBubblesLightColor;
         } else {
             return dataBubblesDarkColor;
@@ -39,7 +37,7 @@ const FilterChipBubbles = ({ data }) => {
                 width={bubbleVizWidth}
                 height={bubbleVizHeight}
                 bubbleColor={
-                    selectedActivityType === totalTitle
+                    activeTitle === totalTitle
                         ? dataBubblesLightColor
                         : bubbleColor
                 }
@@ -50,8 +48,8 @@ const FilterChipBubbles = ({ data }) => {
                 chipsContent={dataWithTotal.map((d) => {
                     return { id: d.title };
                 })}
-                defaultActiveChips={[selectedActivityType]}
-                onChipClick={(title) => setSelectedActivityType(title)}
+                defaultActiveChips={[activeTitle]}
+                onChipClick={(title) => setActiveTitle(title)}
             />
         </>
     );
