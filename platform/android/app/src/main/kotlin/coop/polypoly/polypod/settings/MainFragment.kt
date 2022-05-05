@@ -25,7 +25,7 @@ class MainFragment : PreferenceFragmentCompat() {
                     val pref =
                         findPreference<SwitchPreference>("biometricEnabledKey")
                     pref?.isChecked =
-                        Preferences.getBiometricEnabled(requireContext())
+                        Preferences.isBiometricEnabled(requireContext())
                 }
                 false
             }
@@ -54,16 +54,12 @@ class MainFragment : PreferenceFragmentCompat() {
     }
 
     private fun onAuthRequest(newStatus: Boolean, onReturn: (Boolean) -> Unit) {
-        if (newStatus) {
-            Authentication.reSetUp(requireActivity()) { success ->
-                onReturn(success)
-                true
-            }
-        } else {
-            Authentication.disable(requireActivity()) { success ->
-                onReturn(success)
-                true
-            }
+        Authentication.setUp(
+            requireActivity(),
+            newStatus
+        ) { success ->
+            onReturn(success)
+            true
         }
     }
 }

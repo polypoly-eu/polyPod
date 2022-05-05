@@ -73,9 +73,8 @@ class OnboardingActivity : AppCompatActivity() {
                 )
                 button.visibility = View.VISIBLE
                 button.setOnClickListener {
-                    Authentication.setUp(this) {
-                        Preferences.setBiometricEnabled(this, true)
-                        close()
+                    Authentication.setUp(this, newStatus = true) { _ ->
+                        true
                     }
                 }
                 val doNotAskButton = slide.findViewById<View>(

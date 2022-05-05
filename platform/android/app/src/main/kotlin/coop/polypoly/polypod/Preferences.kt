@@ -45,7 +45,7 @@ class Preferences {
             edit.commit()
         }
 
-        fun getBiometricCheck(context: Context): Boolean =
+        fun isBiometricCheck(context: Context): Boolean =
             getPrefs(context).getBoolean(biometricCheckKey, true)
 
         fun setBiometricEnabled(context: Context, shouldCheck: Boolean) {
@@ -54,7 +54,7 @@ class Preferences {
             edit.commit()
         }
 
-        fun getBiometricEnabled(context: Context): Boolean =
+        fun isBiometricEnabled(context: Context): Boolean =
             getPrefs(context).getBoolean(biometricEnabledKey, false)
 
         fun setFileSystem(context: Context, fs: Map<String, String>) {

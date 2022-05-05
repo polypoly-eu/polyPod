@@ -15,71 +15,51 @@ class Authentication {
 
         fun shouldShowBiometricsPrompt(context: Context): Boolean {
             return biometricsAvailable(context) &&
-                Preferences.getBiometricCheck(context) &&
-                !Preferences.getBiometricEnabled(context) &&
+                Preferences.isBiometricCheck(context) &&
+                !Preferences.isBiometricEnabled(context) &&
                 !Preferences.isFirstRun(context)
         }
 
         fun setUp(
             activity: FragmentActivity,
-            setupComplete: () -> Unit
-        ) {
-            authenticate(activity, force = true, reAuth = false) { success ->
-                if (success)
-                    setupComplete()
-            }
-        }
-
-        fun reSetUp(
-            activity: FragmentActivity,
+            newStatus: Boolean,
             setupComplete: (Boolean) -> Boolean
         ) {
-            authenticate(activity, force = true, reAuth = true) { success ->
+            authenticate(activity, newStatus) { success ->
                 if (success) {
                     Preferences.setBiometricEnabled(
                         activity,
-                        true
+                        newStatus
                     )
                     setupComplete(success)
                 }
             }
         }
 
-        fun disable(
-            activity: FragmentActivity,
-            disableComplete: (Boolean) -> Boolean
-        ) {
-            authenticate(activity, force = false, reAuth = true) { success ->
-                if (success) {
-                    Preferences.setBiometricEnabled(
-                        activity,
-                        false
-                    )
-                    disableComplete(success)
-                }
-            }
-        }
-
         fun authenticate(
             activity: FragmentActivity,
-            force: Boolean = false,
-            reAuth: Boolean = false,
+            newStatus: Boolean = false,
             authComplete: ((Boolean) -> Unit)
         ) {
+            val isBiometricEnabled = Preferences.isBiometricEnabled(activity)
             if (!biometricsAvailable(activity) ||
-                (!force && !Preferences.getBiometricEnabled(activity))
+                (!newStatus && !isBiometricEnabled)
             ) {
                 authComplete(true)
                 return
             }
 
             val title =
-                if (reAuth) activity.getString(R.string.re_auth_prompt_title)
-                else activity.getString(R.string.auth_prompt_title)
+                if (isBiometricEnabled)
+                    activity.getString(R.string.re_auth_prompt_title)
+                else
+                    activity.getString(R.string.auth_prompt_title)
 
             val subtitle =
-                if (reAuth) activity.getString(R.string.re_auth_prompt_subtitle)
-                else activity.getString(R.string.auth_prompt_subtitle)
+                if (isBiometricEnabled)
+                    activity.getString(R.string.re_auth_prompt_subtitle)
+                else
+                    activity.getString(R.string.auth_prompt_subtitle)
 
             val promptInfo = BiometricPrompt.PromptInfo.Builder()
                 .setTitle(title)
@@ -88,7 +68,7 @@ class Authentication {
                 .build()
 
             val executor = ContextCompat.getMainExecutor(activity)
-            val callback = PolyAuthCallback(activity, reAuth, authComplete)
+            val callback = PolyAuthCallback(activity, authComplete)
 
             BiometricPrompt(activity, executor, callback)
                 .authenticate(promptInfo)
@@ -103,7 +83,6 @@ class Authentication {
 
     private class PolyAuthCallback(
         val context: Context,
-        val reAuth: Boolean = false,
         val authComplete: (Boolean) -> Unit
     ) : BiometricPrompt.AuthenticationCallback() {
         override fun onAuthenticationSucceeded(
@@ -112,8 +91,10 @@ class Authentication {
             super.onAuthenticationSucceeded(result)
 
             val title =
-                if (reAuth) context.getString(R.string.re_auth_prompt_success)
-                else context.getString(R.string.auth_prompt_success)
+                if (Preferences.isBiometricEnabled(context))
+                    context.getString(R.string.re_auth_prompt_success)
+                else
+                    context.getString(R.string.auth_prompt_success)
 
             Toast.makeText(
                 context,
