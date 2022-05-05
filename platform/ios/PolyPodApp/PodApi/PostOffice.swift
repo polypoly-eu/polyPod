@@ -351,7 +351,13 @@ extension PostOffice {
     
     private func handlePolyOutImportArchive(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let url = args[0] as! String
-        PodApi.shared.polyOut.importArchive(url: url) { fileId in
+        let destUrl: String? = {
+            if args.count > 1, let destUrl = args[1] as? String {
+                return destUrl
+            }
+            return nil
+        }()
+        PodApi.shared.polyOut.importArchive(url: url, destUrl: destUrl) { fileId in
             if let fileId = fileId {
                 completionHandler(MessagePackValue(fileId), nil)
                 return
