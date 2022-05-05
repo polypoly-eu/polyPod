@@ -20,8 +20,8 @@
     <string name="onboarding_slide4_body_text">Wir möchten gerne sicherstellen, dass Ihre Daten im polyPod vor fremden Zugriff sicher sind. Dafür bitten wir Sie jetzt, die Gerätesperre auch für den polyPod einzuschalten.</string>
     <string name="settings_title">Einstellungen</string>
     <string name="settings_about_section">Info</string>
-    <string name="settings_sec_section">SecurityXXX</string>
-    <string name="settings_auth">AuthenticationXXX</string>
+    <string name="settings_sec_section">Sicherheit</string>
+    <string name="settings_auth">Authentifizierung</string>
 
     <string name="settings_version">Version</string>
     <string name="settings_legal_section">Rechtliches</string>
@@ -40,8 +40,8 @@
     <string name="auth_prompt_subtitle">Den Sperrbildschirm vom Gerät verwenden</string>
     <string name="auth_prompt_success">Authentifizierung erfolgreich</string>
 
-    <string name="re_auth_prompt_title">xxxx your polyPod</string>
-    <string name="re_auth_prompt_subtitle">no parlo deutsch</string>
+    <string name="re_auth_prompt_title">Bitte authentifizieren Sie sich erneut</string>
+    <string name="re_auth_prompt_subtitle">Aus Sicherheitsgründen bitten wir Sie, sich noch einmal zu authentifizieren bevor wir diese Einstellung ändern.</string>
     <string name="re_auth_prompt_success">Authentifizierung erfolgreich</string>
 
     <string name="message_feature_error">Leider gab es einen Fehler in \'%1$s\':\n\n%2$s\n\nIch beende es.</string>
