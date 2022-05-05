@@ -9,6 +9,8 @@ import {
 } from "./analysis/utils/analysis-util";
 import ReportStories from "./analysis/report/report-stories";
 import genericAnalyses from "./analysis/generic-analyses/generic-analyses";
+import DataImportingStatusAnalysis from "./analysis/generic-analyses/importing-status-analysis";
+import DataStructureBubblesAnalysis from "./analysis/generic-analyses/data-structure-bubbles-analysis";
 
 export {
     analyzeZip,
@@ -20,5 +22,7 @@ export {
     ReportStories,
     ReportAnalysis,
     MinistoriesStatusReport,
+    DataImportingStatusAnalysis,
+    DataStructureBubblesAnalysis,
     genericAnalyses,
 };
