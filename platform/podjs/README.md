@@ -46,22 +46,32 @@ Follow these instructions to do so:
 2.  The main step is to copy `pod.js` in your project. For this, please, check the `example` feature as guideline. You should be able to do it with `rollup` tooling (same way as in `example`) or any other script mechanism you desire.
 
 3.  Make sure your `manifest.json` is exposed as `window.manifestData`.
-    So, if your feature is written in JavaScript you should require the following in your main index file:
+    We provide a `genPodjs` script that you could use for your convenience, you just need to use it on your `rollup.config.js`, like :
 
-```js
-import manifestData from "<path-to-your-manifest>/manifest.json";
-window.manifestData = manifestData;
-```
+    ```js
+    import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
 
-Accordingly in any other language.
+    ...plugins: [
+        ...,
+        genPodjs({
+            build_dir: "./dist",
+            manifestPath: "./src/static/manifest.json",
+        }),
+        ...
+    ]
+    ```
+    As `build_dir` you set the path to the directory where the generated build lies and as `manifestPath` the path to your `manifest.json` file.
 
 4.  To verify that everything is in place, you can confirm it with the following steps:
 
     -   Open your feature's HTML file in your browser, URLs of your local file should be supported without the need to run an HTTP server.
-    -   If you haven't forgotten 'step 3', you should have the correct navigation bar color and the (localized) feature name you have set.
+    -   If you have set up 'step 3' correctly, you should have the correct navigation bar color and the (localized) feature name you have set.
     -   You can navigate backwards within the feature via the native back button functionality of the browser.
 
 5.  If everything works, you are ready to start enjoying your new polyPod feature! :)
+   
+
     Congrats!
 
-        > Remember that while other features ship with a `pod.js` file, the polyPod simply ignores any local `pod.js` file and delivers their own version of it instead. Therefore, you can leave the `pod.js` file in the feature distribution without any implication.
+
+    > Remember that while other features ship with a `pod.js` file, the polyPod simply ignores any local `pod.js` file and delivers their own version of it instead. Therefore, you can leave the `pod.js` file in the feature distribution without any implication.
