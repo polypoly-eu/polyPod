@@ -22,12 +22,8 @@
     "posttest": "stop-dummy-server",
     "docs": "typedoc"
   },
-  "dependencies": {
-    "@polypoly-eu/rdf": "file:../rdf"
-  },
   "devDependencies": {
     "@polypoly-eu/dummy-server": "file:../../../../dev-utils/dummy-server",
-    "@polypoly-eu/api": "file:..",
     "@polypoly-eu/test-utils": "file:../../utils",
     "@rdfjs/dataset": "^1.0.1",
     "@types/chai": "^4.2.14",
@@ -46,5 +42,8 @@
     "chai-as-promised": "^7.1.1",
     "fast-check": "^2.11.0"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@polypoly-eu/api": "file:.."
+  }
 }

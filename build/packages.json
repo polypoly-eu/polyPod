@@ -22,7 +22,6 @@
         "features/test",
         "platform/feature-api/api",
         "platform/feature-api/api/pod-api",
-        "platform/feature-api/api/rdf",
         "platform/feature-api/communication",
         "platform/feature-api/utils",
         "platform/podjs"
