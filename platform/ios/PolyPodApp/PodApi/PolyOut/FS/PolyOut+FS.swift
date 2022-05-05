@@ -48,9 +48,7 @@ extension PolyOut {
     }
     
     private func fsUriFromPodUrl(_ url: String) -> URL? {
-        let id = idFromPodUrl(url)
-
-        return id != nil ? featureFilesPath().appendingPathComponent(id!) : nil
+        idFromPodUrl(url).map(fsUriFromId)
     }
     
     private func idFromPodUrl(_ url: String) -> String? {
