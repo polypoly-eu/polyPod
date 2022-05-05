@@ -70,9 +70,7 @@ extension PolyOut {
         return id.removingPercentEncoding
     }
     
-    func urlFromId(id: String) -> URL {
-        return featureFilesPath().appendingPathComponent(id)
-    }
+    
     
     func stat(url: String, completionHandler: @escaping (FileStats?, Error?) -> Void) {
         let targetPath = pathFromUrl(url: url)
