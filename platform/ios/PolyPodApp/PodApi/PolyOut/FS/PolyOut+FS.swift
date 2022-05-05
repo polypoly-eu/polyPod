@@ -213,6 +213,8 @@ extension PolyOut {
                 var fileStore = UserDefaults.standard.value(
                     forKey: PolyOut.fsKey
                 ) as? [String:String?] ?? [:]
+                // TODO: With multiple archives support we can store more than one file in a single fileId.
+                // What should I do about the fileStore?
                 fileStore[newUrl] = url.lastPathComponent
                 UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
                 
