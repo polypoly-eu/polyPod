@@ -1,12 +1,7 @@
 import React from "react";
 import { SingleDataStory } from "./singleDataStory.jsx";
 import analysisKeys from "../../model/analyses/analysisKeys";
-import { PolyChart } from "@polypoly-eu/poly-look";
-
-const bubbleVizWidth = 400;
-const bubbleVizHeight = 400;
-const dataBubblesDarkColor = "#0f1938";
-const dataBubblesLightColor = "#f7fafc";
+import FilterChipBubbles from "../../components/filterChipBubbles/filterChipBubbles.jsx";
 
 class GroupedActivityTypesStory extends SingleDataStory {
     constructor(props) {
@@ -21,14 +16,7 @@ class GroupedActivityTypesStory extends SingleDataStory {
         return (
             <div>
                 <h1>Grouped Activity Types</h1>
-                <PolyChart
-                    type="bubble-cluster"
-                    data={data}
-                    width={bubbleVizWidth}
-                    height={bubbleVizHeight}
-                    bubbleColor={dataBubblesLightColor}
-                    textColor={dataBubblesDarkColor}
-                />
+                <FilterChipBubbles data={data} />
             </div>
         );
     }
