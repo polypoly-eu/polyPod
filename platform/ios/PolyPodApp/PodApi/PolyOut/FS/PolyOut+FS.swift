@@ -43,21 +43,17 @@ extension PolyOut {
         return documentDirectory.appendingPathComponent(PolyOut.fsFilesRoot).appendingPathComponent(activeFeature!.id)
     }
     
-    /// There are 2 types of urls that are used
-    /// 1. Filesystem url that starts with file:// and points to a physical location on the device
-    /// 2. Polypod url that starts with polypod:// and is how features access their resources in a platform independent way
-    
-    func filesystemUrlFromId(id: String) -> URL {
+    func fsUriFromId(_ id: String) -> URL {
         return featureFilesPath().appendingPathComponent(id)
     }
     
-    private func filesystemUrlFromPodUrl(url: String) -> URL? {
-        let id = idFromPodUrl(url: url)
+    private func fsUriFromPodUrl(_ url: String) -> URL? {
+        let id = idFromPodUrl(url)
 
         return id != nil ? featureFilesPath().appendingPathComponent(id!) : nil
     }
     
-    private func idFromPodUrl(url: String) -> String? {
+    private func idFromPodUrl(_ url: String) -> String? {
         if (!url.lowercased().starts(with: PolyOut.fsPrefix)) {
             return nil
         }
@@ -72,7 +68,7 @@ extension PolyOut {
     }
     
     func stat(url: String, completionHandler: @escaping (FileStats?, Error?) -> Void) {
-        let targetPath = filesystemUrlFromPodUrl(url: url)
+        let targetPath = fsUriFromPodUrl(url)
         guard let filePath = targetPath else {
             completionHandler(nil, PodApiError.noSuchFile(url))
             return
@@ -93,7 +89,7 @@ extension PolyOut {
                     size: try calculateFileSize(filePath.path),
                     time: "\(Int(floor(time.timeIntervalSince1970)))",
                     name: fileStore[url] as? String ?? URL(fileURLWithPath: filePath.path).lastPathComponent,
-                    id: idFromPodUrl(url: url) ?? ""
+                    id: idFromPodUrl(url) ?? ""
                 ), nil)
             }
             catch {
@@ -107,7 +103,7 @@ extension PolyOut {
     
     func fileRead(url: String, options: [String: Any], completionHandler: @escaping (Any?, Error?) -> Void) {
         do {
-            guard let filePath = filesystemUrlFromPodUrl(url: url) else {
+            guard let filePath = fsUriFromPodUrl(url) else {
                 throw PodApiError.noSuchFile(url)
             }
             
@@ -125,7 +121,7 @@ extension PolyOut {
     }
     
     func fileWrite(url: String, data: String, completionHandler: @escaping (Error?) -> Void) {
-        guard let filePath = filesystemUrlFromPodUrl(url: url) else {
+        guard let filePath = fsUriFromPodUrl(url) else {
             completionHandler(PodApiError.noSuchFile(url))
             return
         }
@@ -149,7 +145,10 @@ extension PolyOut {
                 completionHandler(cachedEntries, nil)
                 return
             }
-            let targetUrl = filesystemUrlFromId(id: url)
+            guard let targetUrl = fsUriFromPodUrl(url) else {
+                completionHandler(nil, PodApiError.noSuchFile(url))
+                return
+            }
             var entries = [[String: String]]()
             if let enumerator = FileManager.default.enumerator(at: targetUrl, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
                 for case let fileURL as URL in enumerator {
@@ -170,7 +169,7 @@ extension PolyOut {
         // actually exist - for now we just ignore them in readDir, but it
         // might be smarter to clean fileStore automatically at some point.
         let storedFiles = fileStore.keys.filter { key in
-            guard let path = filesystemUrlFromPodUrl(url: key)?.path else {
+            guard let path = fsUriFromPodUrl(key)?.path else {
                 return false
             }
             return FileManager.default.fileExists(atPath: path)
@@ -192,8 +191,8 @@ extension PolyOut {
         
         DispatchQueue.global(qos: .background).async {
             do {
-                let id = self.idFromPodUrl(url: destUrl ?? "") ?? UUID().uuidString
-                let targetUrl = self.filesystemUrlFromId(id: id)
+                let id = self.idFromPodUrl(destUrl ?? "") ?? UUID().uuidString
+                let targetUrl = self.fsUriFromId(id)
                 let baseUrl = targetUrl.deletingLastPathComponent()
                 if !FileManager.default.fileExists(atPath: baseUrl.path) {
                     try FileManager.default.createDirectory(
@@ -229,7 +228,7 @@ extension PolyOut {
     
     func removeArchive(fileId: String, completionHandler: (Error?) -> Void) {
         do {
-            let path = filesystemUrlFromId(id: fileId).path
+            let path = fsUriFromId(fileId).path
             if FileManager.default.fileExists(atPath: path) {
                 try FileManager.default.removeItem(atPath: path)
             }
@@ -238,7 +237,7 @@ extension PolyOut {
         var fileStore = UserDefaults.standard.value(
             forKey: PolyOut.fsKey
         ) as? [String:String?] ?? [:]
-        fileStore.removeValue(forKey: filesystemUrlFromId(id: fileId).path)
+        fileStore.removeValue(forKey: fsUriFromId(fileId).path)
         UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
         completionHandler(nil)
     }
