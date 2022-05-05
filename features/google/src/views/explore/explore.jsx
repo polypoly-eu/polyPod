@@ -15,7 +15,6 @@ import { ministories } from "../ministories/ministories.js";
 
 const ExploreView = () => {
     const { account } = useContext(PolyImportContext);
-    debugger;
     const renderFileAnalyses = () => {
         if (!account) return null;
         return (

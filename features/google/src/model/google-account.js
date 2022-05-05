@@ -1,26 +1,12 @@
-//TODO: Use DataAccount super class
-export default class GoogleAccount {
-    constructor() {
-        this.importingResults = [];
-        this._importedFileNames = [];
+import { DataAccount } from "@polypoly-eu/poly-import";
 
-        this.name = "";
-        this.preferredLanguage = [];
-        this.analyses = {};
-        this.reports = {};
-        this.analysesExecutionResults = [];
+export default class GoogleAccount extends DataAccount {
+    constructor() {
+        super();
         this.placeVisits = [];
         this.activitySegments = [];
         this.activities = [];
         this.pathNames = [];
-    }
-
-    get importedFileNames() {
-        return this._importedFileNames;
-    }
-
-    addImportedFileName(fileName) {
-        this._importedFileNames.push(fileName);
     }
 
     get dataGroups() {
