@@ -132,20 +132,20 @@ export interface PolyNav {
      */
     openUrl(url: string): Promise<void>;
     /**
-     * Describe what keyboard navigation actions are possible within the pod when a feature is loaded
+     * Describe what actions are possible within the pod when a feature is loaded
      * @param {string[]} actions - A list of actions that the user can take.
      */
     setActiveActions(actions: string[]): Promise<void>;
     /**
      * Set a title in of a Pod
-     * @param {string} title - The title to set.s
+     * @param {string} title - The title to set
      */
     setTitle(title: string): Promise<void>;
     /**
-     * Ask the user to pick a file via a dialog and returns the selected file.
-     * @param {string} [type] - The type of file the user is asked to select, as a valid MIME type string. If no type is passed, the user can chose any type of file.
+     * Ask the user to pick a file and returns it.
+     * @param {string} [type] - The type of file the user selects, as a valid MIME type string. If no type is passed, the user can chose any type of file.
      * @throws if an unsupported MIME type was passed as the type argument.
-     * @return The promise resolves with an ExternalFile Object or `null` if the user cancelled.
+     * @return an ExternalFile Object or `null` if the user cancelled.
      */
     pickFile(type?: string): Promise<ExternalFile | null>;
 }
