@@ -4,7 +4,6 @@ import Zip
 enum PolyOutError: Error {
     case failedToParsePath(_ path: String)
     case platform(_ error: Error)
-    case wrongFormat(_ description: String)
 }
 
 extension PolyOutError: LocalizedError {
@@ -14,8 +13,6 @@ extension PolyOutError: LocalizedError {
             return "Failed to parse path '\(path)'"
         case .platform(let error):
             return "Platform error: \(error)"
-        case .wrongFormat(let descr):
-            return "Wrong Format: \(descr)"
         }
     }
 }
@@ -46,17 +43,21 @@ extension PolyOut {
         return documentDirectory.appendingPathComponent(PolyOut.fsFilesRoot).appendingPathComponent(activeFeature!.id)
     }
     
-    private func pathFromUrl(url: String) -> URL? {
-        let id = idFromUrl(url: url)
+    /// There are 2 types of urls that are used
+    /// 1. Filesystem url that starts with file:// and points to a physical location on the device
+    /// 2. Polypod url that starts with polypod:// and is how features access their resources in a platform independent way
+    
+    func filesystemUrlFromId(id: String) -> URL {
+        return featureFilesPath().appendingPathComponent(id)
+    }
+    
+    private func filesystemUrlFromPodUrl(url: String) -> URL? {
+        let id = idFromPodUrl(url: url)
 
         return id != nil ? featureFilesPath().appendingPathComponent(id!) : nil
     }
     
-    func pathFromId(id: String) -> URL {
-        return featureFilesPath().appendingPathComponent(id)
-    }
-    
-    private func idFromUrl(url: String) -> String? {
+    private func idFromPodUrl(url: String) -> String? {
         if (!url.lowercased().starts(with: PolyOut.fsPrefix)) {
             return nil
         }
@@ -70,10 +71,8 @@ extension PolyOut {
         return id.removingPercentEncoding
     }
     
-    
-    
     func stat(url: String, completionHandler: @escaping (FileStats?, Error?) -> Void) {
-        let targetPath = pathFromUrl(url: url)
+        let targetPath = filesystemUrlFromPodUrl(url: url)
         guard let filePath = targetPath else {
             completionHandler(nil, PodApiError.noSuchFile(url))
             return
@@ -94,7 +93,7 @@ extension PolyOut {
                     size: try calculateFileSize(filePath.path),
                     time: "\(Int(floor(time.timeIntervalSince1970)))",
                     name: fileStore[url] as? String ?? URL(fileURLWithPath: filePath.path).lastPathComponent,
-                    id: idFromUrl(url: url) ?? ""
+                    id: idFromPodUrl(url: url) ?? ""
                 ), nil)
             }
             catch {
@@ -108,7 +107,7 @@ extension PolyOut {
     
     func fileRead(url: String, options: [String: Any], completionHandler: @escaping (Any?, Error?) -> Void) {
         do {
-            guard let filePath = pathFromUrl(url: url) else {
+            guard let filePath = filesystemUrlFromPodUrl(url: url) else {
                 throw PodApiError.noSuchFile(url)
             }
             
@@ -126,7 +125,7 @@ extension PolyOut {
     }
     
     func fileWrite(url: String, data: String, completionHandler: @escaping (Error?) -> Void) {
-        guard let filePath = pathFromUrl(url: url) else {
+        guard let filePath = filesystemUrlFromPodUrl(url: url) else {
             completionHandler(PodApiError.noSuchFile(url))
             return
         }
@@ -150,7 +149,7 @@ extension PolyOut {
                 completionHandler(cachedEntries, nil)
                 return
             }
-            let targetUrl = pathFromId(id: url)
+            let targetUrl = filesystemUrlFromId(id: url)
             var entries = [[String: String]]()
             if let enumerator = FileManager.default.enumerator(at: targetUrl, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
                 for case let fileURL as URL in enumerator {
@@ -171,7 +170,7 @@ extension PolyOut {
         // actually exist - for now we just ignore them in readDir, but it
         // might be smarter to clean fileStore automatically at some point.
         let storedFiles = fileStore.keys.filter { key in
-            guard let path = pathFromUrl(url: key)?.path else {
+            guard let path = filesystemUrlFromPodUrl(url: key)?.path else {
                 return false
             }
             return FileManager.default.fileExists(atPath: path)
@@ -184,7 +183,7 @@ extension PolyOut {
         completionHandler(entries, nil)
     }
     
-    /// destURL has this form :: PolyOut.fsPrefix + PolyOut.fsFilesRoot + "/" + id
+    /// destURL is a Polypod url
     func importArchive(url: String, destUrl: String? = nil, completionHandler: @escaping (String?) -> Void) {
         guard let url = URL(string: url) else {
             completionHandler(nil)
@@ -193,17 +192,8 @@ extension PolyOut {
         
         DispatchQueue.global(qos: .background).async {
             do {
-                let id = try { () -> String in
-                    if let destUrl = destUrl, let destURL = URL(string: destUrl) {
-                        let id = destURL.lastPathComponent
-                        if id.isEmpty {
-                            throw PolyOutError.wrongFormat("Could not extract id from destUrl in importArchive. This is the destUrl you passed: \(destUrl)")
-                        }
-                        return id
-                    }
-                    return UUID().uuidString
-                }()
-                let targetUrl = self.urlFromId(id: id)
+                let id = self.idFromPodUrl(url: destUrl ?? "") ?? UUID().uuidString
+                let targetUrl = self.filesystemUrlFromId(id: id)
                 let baseUrl = targetUrl.deletingLastPathComponent()
                 if !FileManager.default.fileExists(atPath: baseUrl.path) {
                     try FileManager.default.createDirectory(
@@ -237,17 +227,16 @@ extension PolyOut {
     
     func removeArchive(fileId: String, completionHandler: (Error?) -> Void) {
         do {
-            let path = pathFromId(id: fileId).path
+            let path = filesystemUrlFromId(id: fileId).path
             if FileManager.default.fileExists(atPath: path) {
                 try FileManager.default.removeItem(atPath: path)
             }
         }
-        catch {
-        }
+        catch {}
         var fileStore = UserDefaults.standard.value(
             forKey: PolyOut.fsKey
         ) as? [String:String?] ?? [:]
-        fileStore.removeValue(forKey: urlFromId(id: fileId).path)
+        fileStore.removeValue(forKey: filesystemUrlFromId(id: fileId).path)
         UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
         completionHandler(nil)
     }
