@@ -55,7 +55,7 @@ type PolyOutBackend = ObjectBackendSpec<{
         options: EncodingOptions
     ): ValueBackendSpec<void>;
     stat(path: string): ValueBackendSpec<Stats>;
-    importArchive(url: string): ValueBackendSpec<string>;
+    importArchive(url: string, destUrl?: string): ValueBackendSpec<string>;
     removeArchive(fileId: string): ValueBackendSpec<void>;
 }>;
 
@@ -240,8 +240,8 @@ export class RemoteClientPod implements Pod {
                 return rpcClient.polyOut().writeFile(path, content, options)();
             }
 
-            importArchive(url: string): Promise<string> {
-                return rpcClient.polyOut().importArchive(url)();
+            importArchive(url: string, destUrl?: string): Promise<string> {
+                return rpcClient.polyOut().importArchive(url, destUrl)();
             }
 
             removeArchive(fileId: string): Promise<void> {
@@ -357,7 +357,8 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
             },
             writeFile: (path, content, options) =>
                 polyOut.writeFile(path, content, options),
-            importArchive: (url) => polyOut.importArchive(url),
+            importArchive: (url, destUrl) =>
+                polyOut.importArchive(url, destUrl),
             removeArchive: (fileId) => polyOut.removeArchive(fileId),
         };
     }
