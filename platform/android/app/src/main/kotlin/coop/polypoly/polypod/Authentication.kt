@@ -31,8 +31,8 @@ class Authentication {
                         activity,
                         newStatus
                     )
-                    setupComplete(success)
                 }
+                setupComplete(success)
             }
         }
 

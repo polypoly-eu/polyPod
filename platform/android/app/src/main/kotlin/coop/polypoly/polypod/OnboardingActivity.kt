@@ -74,6 +74,7 @@ class OnboardingActivity : AppCompatActivity() {
                 button.visibility = View.VISIBLE
                 button.setOnClickListener {
                     Authentication.setUp(this, newStatus = true) { _ ->
+                        close()
                         true
                     }
                 }
