@@ -104,7 +104,6 @@ describe("check that props can update the active chips state from outside", () =
       let chipElement = screen.getByText(chipsContent[i]);
       expect(chipElement).not.toHaveClass("chip selected");
       await waitFor(() => rerender(componentsWithDifferentDefault[i]));
-      chipElement = screen.getByText(chipsContent[i]);
       expect(chipElement).toHaveClass("chip selected");
     }
   });
