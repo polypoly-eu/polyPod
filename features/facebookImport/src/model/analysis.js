@@ -18,7 +18,6 @@ import MessageThreadsAnalysis from "./analyses/ministories/message-threads-analy
 import OffFacebookEventsTypesAnalysis from "./analyses/ministories/off-facebook-events-types-analysis.js";
 import DataChartsAnalysis from "./analyses/ministories/data-points-charts-analysis.js";
 import OffFacebookEventsTypesChartAnalysis from "./analyses/ministories/off-facebook-events-types-charts-analysis.js";
-import DataImportingStatusAnalysis from "./analyses/report/importing-status-analysis.js";
 import JsonFilesBubblesAnalysis from "./analyses/ministories/json-files-bubbles.js";
 import ImportedJsonFilesAnalysis from "./analyses/ministories/json-files-imported-analysis.js";
 import ExportTitleAnalysis from "./analyses/ministories/export-title-analysis.js";
@@ -69,7 +68,6 @@ export const subAnalyses = [
     OnOffFacebookAdvertisersAnalysis,
 
     ReportMetadataAnalysis,
-    DataImportingStatusAnalysis,
     UnknownTopLevelFoldersAnalysis,
     MissingCommonJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
