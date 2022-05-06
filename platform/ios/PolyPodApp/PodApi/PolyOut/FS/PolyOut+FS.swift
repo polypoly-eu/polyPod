@@ -80,13 +80,18 @@ extension PolyOut {
                 let attributes = try FileManager.default.attributesOfItem(atPath: filePath.path)
                 let fileStore = UserDefaults.standard.value(
                     forKey: PolyOut.fsKey
-                ) as? [String:String?] ?? [:]
+                ) as? [String:[String]] ?? [:]
                 let time = attributes[.modificationDate] as! Date
+                let name = fileStore[url].map { arr in
+                    arr.reduce("") { acc, x in
+                        acc.isEmpty ? x : acc + "," + x
+                    }
+                }
                 completionHandler(FileStats(
                     isDirectory: isDir.boolValue,
                     size: try calculateFileSize(filePath.path),
                     time: "\(Int(floor(time.timeIntervalSince1970)))",
-                    name: fileStore[url] as? String ?? URL(fileURLWithPath: filePath.path).lastPathComponent,
+                    name: name ?? URL(fileURLWithPath: filePath.path).lastPathComponent,
                     id: idFromPodUrl(url) ?? ""
                 ), nil)
             }
@@ -135,7 +140,7 @@ extension PolyOut {
     func readDir(url: String, completionHandler: @escaping ([[String: String]]?, Error?) -> Void) {
         let fileStore = UserDefaults.standard.value(
             forKey: PolyOut.fsKey
-        ) as? [String:String?] ?? [:]
+        ) as? [String:[String]] ?? [:]
         // List entries of a zip file
         if (url != "") {
             let cachedEntries = readDirCache[url]
@@ -209,10 +214,12 @@ extension PolyOut {
                 let newUrl = PolyOut.fsPrefix + PolyOut.fsFilesRoot + "/" + id
                 var fileStore = UserDefaults.standard.value(
                     forKey: PolyOut.fsKey
-                ) as? [String:String?] ?? [:]
-                // TODO: With multiple archives support we can store more than one file in a single fileId.
-                // What should I do about the fileStore?
-                fileStore[newUrl] = url.lastPathComponent
+                ) as? [String:[String]] ?? [:]
+                if fileStore[newUrl] != nil {
+                    fileStore[newUrl]!.append(url.lastPathComponent)
+                } else {
+                    fileStore[newUrl] = [url.lastPathComponent]
+                }
                 UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
                 
                 completionHandler(newUrl)
@@ -234,7 +241,7 @@ extension PolyOut {
         catch {}
         var fileStore = UserDefaults.standard.value(
             forKey: PolyOut.fsKey
-        ) as? [String:String?] ?? [:]
+        ) as? [String:[String]] ?? [:]
         fileStore.removeValue(forKey: fsUriFromId(fileId).path)
         UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
         completionHandler(nil)
