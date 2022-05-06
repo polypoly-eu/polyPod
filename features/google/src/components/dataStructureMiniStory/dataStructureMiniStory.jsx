@@ -4,17 +4,14 @@ import { PolyChart, FilterChips } from "@polypoly-eu/poly-look";
 import "./dataStructureMiniStory.css";
 //This component needs to go to poly-look
 const DataStructureMiniStory = ({ data }) => {
+    let totalFiles = 0;
     data.forEach((d) => {
+        totalFiles += d.count;
         d.value = d.count;
     });
     data.sort(function (a, b) {
         return b.value - a.value;
     });
-
-    const totalFiles = data.reduce(
-        (previous, current) => previous + current.count,
-        0
-    );
 
     const bubbleVizWidth = 400;
     const bubbleVizHeight = 400;
@@ -24,10 +21,7 @@ const DataStructureMiniStory = ({ data }) => {
 
     const totalTitle = "Total";
 
-    const dataWithTotal = [
-        ...data,
-        { title: totalTitle, count: totalFiles, value: totalFiles },
-    ];
+    const dataWithTotal = [...data, { title: totalTitle, value: totalFiles }];
 
     const amountOfFiles = dataWithTotal.find(
         (bubble) => bubble.title === selectedFolder
