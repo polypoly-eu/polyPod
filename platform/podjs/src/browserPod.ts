@@ -297,6 +297,7 @@ class IDBPolyOut implements PolyOut {
     }
 
     async importArchive(url: string, destUrl?: string): Promise<string> {
+        console.log("Importing archive!");
         const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
         const blob = await (await fetch(dataUrl)).blob();
         const db = await openDatabase();
@@ -304,6 +305,9 @@ class IDBPolyOut implements PolyOut {
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
             const fileId = "polypod://" + createUUID();
+
+            //if a dest url is provided, I need to see if we have something in the object store already
+            //if yes, then we need to combine the two. and replace the entry in the object store.
 
             tx.objectStore(OBJECT_STORE_POLY_OUT).put({
                 id: fileId,
