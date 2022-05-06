@@ -1,6 +1,5 @@
-import DataImportingStatusReport from "./dataImportingStatus.jsx";
 import DataStructureMinistory from "./dataStructureBubbles.jsx";
 
-export const ministories = [DataImportingStatusReport, DataStructureMinistory];
+export const ministories = [DataStructureMinistory];
 
 export default ministories;

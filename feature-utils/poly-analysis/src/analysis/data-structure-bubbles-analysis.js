@@ -1,4 +1,4 @@
-import RootAnalysis from "../root-analysis";
+import RootAnalysis from "./root-analysis";
 
 export default class DataStructureBubblesAnalysis extends RootAnalysis {
     async analyze({ dataAccount }) {
