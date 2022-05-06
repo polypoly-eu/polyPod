@@ -2,7 +2,6 @@ import React from "react";
 import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import FilterChips from "../../src/react-components/filterChips.jsx";
-import { updatePropertySignature } from "typescript";
 
 const chipsContent = [...Array(3).keys()].map((i) => `chip${i}`);
 const chipsContentObject = [...Array(3).keys()].map((i) => {
