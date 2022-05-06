@@ -1,7 +1,8 @@
 import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import FilterChips from "../../src/react-components/filterChips.jsx";
+import { updatePropertySignature } from "typescript";
 
 const chipsContent = [...Array(3).keys()].map((i) => `chip${i}`);
 const chipsContentObject = [...Array(3).keys()].map((i) => {
@@ -22,6 +23,16 @@ const component = (
     exclusive
   />
 );
+
+const componentsWithDifferentDefault = chipsContent.map((chipId) => (
+  <FilterChips
+    chipsContent={chipsContent}
+    onChipClick={mockedHandleClick}
+    defaultActiveChips={[chipId]}
+    theme
+    exclusive
+  />
+));
 
 it("Chips content is an object array", () => {
   render(<FilterChips chipsContent={chipsContentObject} />);
@@ -82,6 +93,19 @@ describe("Chips content is an array", () => {
     }
     if (theme === darkTheme) {
       expect(component).toHaveClass("poly-theme-dark");
+    }
+  });
+});
+
+describe("check that props can update the active chips state from outside", () => {
+  it("changes selected chip after new default is introduced", async () => {
+    const { rerender } = render(component);
+    for (let i = 0; i < componentsWithDifferentDefault.length; i++) {
+      let chipElement = screen.getByText(chipsContent[i]);
+      expect(chipElement).not.toHaveClass("chip selected");
+      await waitFor(() => rerender(componentsWithDifferentDefault[i]));
+      chipElement = screen.getByText(chipsContent[i]);
+      expect(chipElement).toHaveClass("chip selected");
     }
   });
 });
