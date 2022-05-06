@@ -14,11 +14,11 @@ const ReportWrapper = () => {
     const { account } = useContext(PolyImportContext);
 
     const computedReportStoriesList = reports.map(
-        (reportClass) => new reportClass(account)
+        (reportClass) => new reportClass({ account })
     );
 
     const computedMinistories = ministories.map(
-        (ministoryClass) => new ministoryClass(account)
+        (ministoryClass) => new ministoryClass({ account })
     );
     const activeReportStories = computedReportStoriesList.filter(
         (reportStory) => reportStory.active

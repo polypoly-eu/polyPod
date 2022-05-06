@@ -51,7 +51,7 @@ export async function runAnalysesForZip(zipFile) {
         zipData: zipFile.enrichedFileData(),
         zipFile,
         dataAccount: facebookAccount,
-        subAnalyses,
+        specificAnalyses: subAnalyses,
         pod: new MockerPod(),
     });
     return facebookAccount;
