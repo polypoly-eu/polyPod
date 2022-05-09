@@ -43,7 +43,6 @@
 "re_auth_prompt_set_up" = "Re-authorize authentication";
 
 "auth_prompt_unlock" = "Login to your polyPod";
-"re_auth_prompt_unlock" = "Please confirm your Login";
 
 "settings_imprint_text" = "
 <p>Details according to § 5 TMG</p>

@@ -45,7 +45,6 @@
 "re_auth_prompt_set_up" = "Bitte authentifizieren Sie sich erneut";
 
 "auth_prompt_unlock" = "Einloggen in polyPod";
-"re_auth_prompt_unlock" = "Bitte bestätigen Sie ihren Login";
 
 "settings_imprint_text" = "
 <p>Angaben gemäß § 5 TMG</p>

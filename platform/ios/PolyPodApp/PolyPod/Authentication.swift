@@ -56,10 +56,7 @@ class Authentication {
             return
         }
         
-        let reason = isSetUp() ?
-        "re_auth_prompt_unlock": "auth_prompt_unlock"
-
-        authenticateLocally(withReason: reason) { success in
+        authenticateLocally(withReason: "auth_prompt_unlock") { success in
             self.authenticated = success
             completeAction(success)
         }
