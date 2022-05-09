@@ -50,7 +50,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     // Public for test purposes
     val webView = WebView(context)
     private val registry = LifecycleRegistry(this)
-    // Reassignable for test purposes
+    // Re-assignable for test purposes
     var api = PodApi(
         PolyOut(context),
         PolyIn(context, context.filesDir),
@@ -89,6 +89,10 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         webView.isLongClickable = false
         webView.setOnLongClickListener { true }
         webView.isHapticFeedbackEnabled = false
+
+        val userAgentString = webView.settings.userAgentString
+        // 'Android' + 'Chrome/[.0-9]* Mobile'
+        // 'Android' + 'Chrome/[.0-9]* (?!Mobile)'
 
         WebView.setWebContentsDebuggingEnabled(true)
         addView(webView)
