@@ -169,11 +169,15 @@ class FileUrl {
     ) {}
 }
 
-interface FileInfo {
-    id: string;
+interface Archive {
     name: string;
     time: Date;
     blob: Blob;
+}
+
+interface FileInfo {
+    id: string;
+    archives: Archive[];
 }
 
 interface File {
@@ -195,10 +199,17 @@ class IDBPolyOut implements PolyOut {
         });
     }
 
-    private async getZipEntries(id: string): Promise<zip.Entry[]> {
+    private async getZipEntries(id: string): Promise<[zip.Entry[]]> {
         const file = await this.getFileInfo(id);
         const reader = new zip.ZipReader(new zip.BlobReader(file.blob));
-        return reader.getEntries();
+        return Promise.all(
+            file.archives.map((archive) => {
+                return new zip.ZipReader(new zip.BlobReader(archive.blob));
+            })
+        );
+
+        //Promise.all([await reader.getEntries(), await reader.getEntries()])
+        //return reader.getEntries();
     }
 
     private async getFile(id: string): Promise<File> {
