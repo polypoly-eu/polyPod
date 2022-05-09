@@ -23,7 +23,7 @@ class Authentication {
         fun setUp(
             activity: FragmentActivity,
             newStatus: Boolean,
-            setupComplete: (Boolean) -> Boolean
+            setupComplete: () -> Unit
         ) {
             authenticate(activity, newStatus) { success ->
                 if (success) {
@@ -32,7 +32,7 @@ class Authentication {
                         newStatus
                     )
                 }
-                setupComplete(success)
+                setupComplete()
             }
         }
 
