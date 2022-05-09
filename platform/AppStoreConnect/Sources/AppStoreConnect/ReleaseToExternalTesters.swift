@@ -14,10 +14,18 @@ extension AppStoreConnect {
                                               groups: [String]) async throws {
         let app = try await getApp(forBundleIdentifier: appBundleIdentifier)
         let build = try await buildIsProcessed(forAppID: app.id,
-                                                        withVersion: version,
-                                                        buildNumber: buildNumber)
+                                               withVersion: version,
+                                               buildNumber: buildNumber)
+        try await addAccess(forBetaGroups: groups, toBuild: build.id)
+        try await create(betaBuildLocalizationForBuildWithId: build.id,
+                         locale: "en",
+                         whatsNew: "Build \(version)") // TODO: Create a proper change log
+        try await submitAppForBetaReview(buildWithId: build.id)
+    }
+    
+    func addAccess(forBetaGroups groups: [String], toBuild buildId: String) async throws {
         let addTesters = APIEndpoint.add(accessForBetaGroupsWithIds: groups,
-                                         toBuildWithId: build.id)
+                                         toBuildWithId: buildId)
         try await apiProvider.request(addTesters)
     }
 }
