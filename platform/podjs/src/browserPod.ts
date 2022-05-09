@@ -764,7 +764,7 @@ declare global {
 }
 
 /**
- * It takes color and returns the relative luminance value of it.
+ * It takes a feature color and returns the relative luminance value of it.
  *
  * @param {string} featureColor - the color of the feature you want to change in a six digit hex color string, e.g. #000000
  * @returns The luminance of the feature color.
@@ -780,8 +780,8 @@ function luminance(featureColor: string): number {
 /**
  * It determines the foreground and background colors for the navbar based on the primary color of the
  * app.
- * @param {Manifest} manifest - Manifest
- * @returns an object with two properties: `fg` and `bg`.
+ * @param {Manifest} file
+ * @returns { fg: string; bg: string } object
  */
 function determineNavBarColors(manifest: Manifest): { fg: string; bg: string } {
     const bg = manifest.primaryColor || NAV_DEFAULT_BACKGROUND_COLOR;
