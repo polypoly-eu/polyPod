@@ -296,25 +296,76 @@ class IDBPolyOut implements PolyOut {
         throw "Not implemented: writeFile";
     }
 
+    /// destUrl should be the same as fileId
     async importArchive(url: string, destUrl?: string): Promise<string> {
         console.log("Importing archive!");
         const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
         const blob = await (await fetch(dataUrl)).blob();
         const db = await openDatabase();
 
+        if (destUrl) {
+            const fileId = destUrl;
+
+            return new Promise((resolve, reject) => {
+                const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readonly");
+                const request = tx
+                    .objectStore(OBJECT_STORE_POLY_OUT)
+                    .get(fileId);
+
+                request.onsuccess = () => {
+                    let obj: any = {};
+                    if (request.result) {
+                        //request.result is readonly, so I make a shallow copy
+                        obj = { ...request.result };
+                        obj.archives.push({
+                            name: fileName,
+                            time: new Date(),
+                            blob: blob,
+                        });
+                    } else {
+                        obj = {
+                            id: fileId,
+                            archives: [
+                                {
+                                    name: fileName,
+                                    time: new Date(),
+                                    blob: blob,
+                                },
+                            ],
+                        };
+                    }
+
+                    const newTx = db.transaction(
+                        [OBJECT_STORE_POLY_OUT],
+                        "readwrite"
+                    );
+                    newTx.objectStore(OBJECT_STORE_POLY_OUT).put(obj, fileId);
+
+                    newTx.oncomplete = () => resolve(fileId);
+                    newTx.onerror = newTx.onabort = () => reject(newTx.error);
+                };
+
+                tx.onerror = tx.onabort = () => reject(tx.error);
+            });
+        }
+
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
             const fileId = "polypod://" + createUUID();
 
-            //if a dest url is provided, I need to see if we have something in the object store already
-            //if yes, then we need to combine the two. and replace the entry in the object store.
-
-            tx.objectStore(OBJECT_STORE_POLY_OUT).put({
-                id: fileId,
-                name: fileName,
-                time: new Date(),
-                blob,
-            });
+            tx.objectStore(OBJECT_STORE_POLY_OUT).put(
+                {
+                    id: fileId,
+                    archives: [
+                        {
+                            name: fileName,
+                            time: new Date(),
+                            blob: blob,
+                        },
+                    ],
+                },
+                fileId
+            );
 
             tx.oncomplete = () => resolve(fileId);
             tx.onerror = tx.onabort = () => reject(tx.error);
