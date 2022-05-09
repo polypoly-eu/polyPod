@@ -182,7 +182,6 @@ interface File {
 }
 
 class IDBPolyOut implements PolyOut {
-    // there can be multiple files for the same id
     private async getFilesInfo(zipId: string): Promise<FileInfo[]> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
