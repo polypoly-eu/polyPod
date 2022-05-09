@@ -540,6 +540,13 @@ interface EndpointJSON {
 
 type EndpointKeyId = keyof EndpointJSON;
 
+/**
+ * Given an endpointId, return the corresponding EndpointInfo object, or null if the endpointId is not
+ * found.
+ *
+ * @param {EndpointKeyId} endpointId - The endpoint ID that you want to get the endpoint info for.
+ * @returns EndpointInfo | null
+ */
 function getEndpoint(endpointId: EndpointKeyId): EndpointInfo | null {
     return (endpointsJson as EndpointJSON)[endpointId] || null;
 }
@@ -627,7 +634,7 @@ class BrowserEndpoint implements Endpoint {
 /**
  * Creates a random UUID string with a random hexadecimal value for each character in the string
  * 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx', and returns the result.
- * @returns A string of 32 characters (with length 36)
+ * @returns a string in UUID format
  */
 function createUUID(): string {
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
