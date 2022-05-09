@@ -51,7 +51,7 @@ class Authentication {
             
     
     func authenticate(_ completeAction: @escaping (Bool) -> Void) {
-        if isCheckDisabled() || !isSetUp() || authenticated {
+        if !isSetUp() || authenticated {
             completeAction(true)
             return
         }
