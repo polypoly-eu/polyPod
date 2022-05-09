@@ -3,12 +3,8 @@ import Story from "./story.jsx";
 class ReportStory extends Story {
     constructor({ account, mode }) {
         super({ account, mode });
-        this._reports = account.reports;
-        this._neededReports = [];
-    }
-
-    get reports() {
-        return this._reports;
+        this.reports = account.reports;
+        this.neededReports = [];
     }
 
     get jsonReport() {
@@ -23,8 +19,8 @@ class ReportStory extends Story {
     }
 
     get active() {
-        if (!this._neededReports) return true;
-        for (const reportKey of this._neededReports) {
+        if (!this.neededReports) return true;
+        for (const reportKey of this.neededReports) {
             if (this.reports?.[reportKey] === undefined) return false;
         }
         return true;

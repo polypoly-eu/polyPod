@@ -61,6 +61,14 @@ const FilterChips = ({
         )
   );
 
+  const [initialDefaultChips, setInitialDefaultChips] =
+    useState(defaultActiveChips);
+
+  if (defaultActiveChips !== initialDefaultChips) {
+    setActiveChips(defaultActiveChips);
+    setInitialDefaultChips(defaultActiveChips);
+  }
+
   const isChipActive = (id) => activeChips.indexOf(id) !== -1;
 
   const replaceOthers = (chipsIds) =>
