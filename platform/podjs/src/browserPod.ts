@@ -625,8 +625,9 @@ class BrowserEndpoint implements Endpoint {
 }
 
 /**
- * Create a random UUID
- * @returns A string of length 36.
+ * Creates a random UUID string with a random hexadecimal value for each character in the string
+ * 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx', and returns the result.
+ * @returns A string of 32 characters (with length 36)
  */
 function createUUID(): string {
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
