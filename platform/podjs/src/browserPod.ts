@@ -169,15 +169,11 @@ class FileUrl {
     ) {}
 }
 
-interface Archive {
+interface FileInfo {
+    id: string;
     name: string;
     time: Date;
     blob: Blob;
-}
-
-interface FileInfo {
-    id: string;
-    archives: Archive[];
 }
 
 interface File {
@@ -186,37 +182,38 @@ interface File {
 }
 
 class IDBPolyOut implements PolyOut {
-    private async getFileInfo(id: string): Promise<FileInfo> {
+    // there can be multiple files for the same id
+    private async getFilesInfo(zipId: string): Promise<FileInfo[]> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readonly");
-            const request = tx.objectStore(OBJECT_STORE_POLY_OUT).get(id);
+            const request = tx.objectStore(OBJECT_STORE_POLY_OUT).get(zipId);
             request.onsuccess = () => {
                 if (request.result) resolve(request.result);
-                else reject(new Error(`File not found: ${id}`));
+                else reject(new Error(`File not found: ${zipId}`));
             };
             tx.onerror = tx.onabort = () => reject(request.error);
         });
     }
 
-    private async getZipEntries(id: string): Promise<[zip.Entry[]]> {
-        const file = await this.getFileInfo(id);
-        const reader = new zip.ZipReader(new zip.BlobReader(file.blob));
+    private async getZipEntries(zipId: string): Promise<zip.Entry[][]> {
+        const files = await this.getFilesInfo(zipId);
         return Promise.all(
-            file.archives.map((archive) => {
-                return new zip.ZipReader(new zip.BlobReader(archive.blob));
+            files.map(async (file) => {
+                const reader = new zip.ZipReader(new zip.BlobReader(file.blob));
+                const entries = await reader.getEntries();
+                return entries;
             })
         );
-
-        //Promise.all([await reader.getEntries(), await reader.getEntries()])
-        //return reader.getEntries();
     }
 
     private async getFile(id: string): Promise<File> {
         const match = /^(.*?:\/\/.*?)\/(.*)/.exec(id);
         if (match) {
             const [, zipId, filename] = match;
-            const entries = await this.getZipEntries(zipId);
+            const entries = ([] as zip.Entry[]).concat(
+                ...(await this.getZipEntries(zipId))
+            );
             const entry = entries.find((ent) => ent.filename == filename);
             if (!entry) throw new Error(`Zip entry not found: ${filename}`);
 
@@ -238,26 +235,9 @@ class IDBPolyOut implements PolyOut {
                     };
                 },
             };
+        } else {
+            throw new Error(`Could not identify file for ${id}`);
         }
-
-        const file = await this.getFileInfo(id);
-        return {
-            async read() {
-                return new Uint8Array(await file.blob.arrayBuffer());
-            },
-            stat() {
-                const { size } = file.blob;
-                const { time, name } = file;
-                return {
-                    getId: () => id,
-                    getSize: () => size,
-                    getTime: () => time.toISOString(),
-                    getName: () => name,
-                    isFile: () => true,
-                    isDirectory: () => false,
-                };
-            },
-        };
     }
 
     readFile(path: string, options: EncodingOptions): Promise<string>;
@@ -286,7 +266,9 @@ class IDBPolyOut implements PolyOut {
 
     async readDir(id: string): Promise<Entry[]> {
         if (id != "") {
-            const entries = await this.getZipEntries(id);
+            const entries = ([] as zip.Entry[]).concat(
+                ...(await this.getZipEntries(id))
+            );
             return entries.map(({ filename }) => ({
                 id: `${id}/${filename}`,
                 path: filename,
@@ -307,7 +289,7 @@ class IDBPolyOut implements PolyOut {
         throw "Not implemented: writeFile";
     }
 
-    /// destUrl should be the same as fileId
+    /// destUrl should be the same as zipId
     async importArchive(url: string, destUrl?: string): Promise<string> {
         console.log("Importing archive!");
         const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
@@ -315,34 +297,31 @@ class IDBPolyOut implements PolyOut {
         const db = await openDatabase();
 
         if (destUrl) {
-            const fileId = destUrl;
+            const zipId = destUrl;
 
             return new Promise((resolve, reject) => {
                 const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readonly");
                 const request = tx
                     .objectStore(OBJECT_STORE_POLY_OUT)
-                    .get(fileId);
+                    .get(zipId);
 
                 request.onsuccess = () => {
                     let obj: any = {};
                     if (request.result) {
                         //request.result is readonly, so I make a shallow copy
                         obj = { ...request.result };
-                        obj.archives.push({
+                        obj.push({
+                            id: zipId,
                             name: fileName,
                             time: new Date(),
                             blob: blob,
                         });
                     } else {
                         obj = {
-                            id: fileId,
-                            archives: [
-                                {
-                                    name: fileName,
-                                    time: new Date(),
-                                    blob: blob,
-                                },
-                            ],
+                            id: zipId,
+                            name: fileName,
+                            time: new Date(),
+                            blob: blob,
                         };
                     }
 
@@ -350,9 +329,9 @@ class IDBPolyOut implements PolyOut {
                         [OBJECT_STORE_POLY_OUT],
                         "readwrite"
                     );
-                    newTx.objectStore(OBJECT_STORE_POLY_OUT).put(obj, fileId);
+                    newTx.objectStore(OBJECT_STORE_POLY_OUT).put(obj, zipId);
 
-                    newTx.oncomplete = () => resolve(fileId);
+                    newTx.oncomplete = () => resolve(zipId);
                     newTx.onerror = newTx.onabort = () => reject(newTx.error);
                 };
 
@@ -362,32 +341,28 @@ class IDBPolyOut implements PolyOut {
 
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            const fileId = "polypod://" + createUUID();
+            const zipId = "polypod://" + createUUID();
 
             tx.objectStore(OBJECT_STORE_POLY_OUT).put(
                 {
-                    id: fileId,
-                    archives: [
-                        {
-                            name: fileName,
-                            time: new Date(),
-                            blob: blob,
-                        },
-                    ],
+                    id: zipId,
+                    name: fileName,
+                    time: new Date(),
+                    blob: blob,
                 },
-                fileId
+                zipId
             );
 
-            tx.oncomplete = () => resolve(fileId);
+            tx.oncomplete = () => resolve(zipId);
             tx.onerror = tx.onabort = () => reject(tx.error);
         });
     }
 
-    async removeArchive(fileId: string): Promise<void> {
+    async removeArchive(zipId: string): Promise<void> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            tx.objectStore(OBJECT_STORE_POLY_OUT).delete(fileId);
+            tx.objectStore(OBJECT_STORE_POLY_OUT).delete(zipId);
             tx.oncomplete = () => resolve();
             tx.onerror = tx.onabort = () => reject(tx.error);
         });
