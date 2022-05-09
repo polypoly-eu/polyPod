@@ -264,13 +264,13 @@ class IDBPolyOut implements PolyOut {
         };
     }
 
-    async readDir(id: string): Promise<Entry[]> {
-        if (id != "") {
+    async readDir(zipId: string): Promise<Entry[]> {
+        if (zipId != "") {
             const entries = ([] as zip.Entry[]).concat(
-                ...(await this.getZipEntries(id))
+                ...(await this.getZipEntries(zipId))
             );
             return entries.map(({ filename }) => ({
-                id: `${id}/${filename}`,
+                id: `${zipId}/${filename}`,
                 path: filename,
             }));
         }
@@ -306,10 +306,10 @@ class IDBPolyOut implements PolyOut {
                     .get(zipId);
 
                 request.onsuccess = () => {
-                    let obj: any = {};
+                    let obj: FileInfo[] = [];
                     if (request.result) {
                         //request.result is readonly, so I make a shallow copy
-                        obj = { ...request.result };
+                        obj = [...request.result];
                         obj.push({
                             id: zipId,
                             name: fileName,
@@ -317,12 +317,14 @@ class IDBPolyOut implements PolyOut {
                             blob: blob,
                         });
                     } else {
-                        obj = {
-                            id: zipId,
-                            name: fileName,
-                            time: new Date(),
-                            blob: blob,
-                        };
+                        obj = [
+                            {
+                                id: zipId,
+                                name: fileName,
+                                time: new Date(),
+                                blob: blob,
+                            },
+                        ];
                     }
 
                     const newTx = db.transaction(
@@ -344,12 +346,14 @@ class IDBPolyOut implements PolyOut {
             const zipId = "polypod://" + createUUID();
 
             tx.objectStore(OBJECT_STORE_POLY_OUT).put(
-                {
-                    id: zipId,
-                    name: fileName,
-                    time: new Date(),
-                    blob: blob,
-                },
+                [
+                    {
+                        id: zipId,
+                        name: fileName,
+                        time: new Date(),
+                        blob: blob,
+                    },
+                ],
                 zipId
             );
 
