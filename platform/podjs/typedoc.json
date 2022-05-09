@@ -1,5 +1,9 @@
 {
   "entryPoints": ["./src"],
   "exclude": ["**/tests/*.ts"],
-  "out": "docs"
+  "out": "docs",
+  "validation": {
+    "notExported": false
+  }
+
 }
