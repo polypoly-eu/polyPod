@@ -32,7 +32,10 @@ import { Entry } from ".";
 export class DefaultPod implements Pod {
     public readonly dataFactory: RDF.DataFactory = dataFactory;
 
-    constructor(public readonly store: RDF.DatasetCore, public readonly fs: FS) {}
+    constructor(
+        public readonly store: RDF.DatasetCore,
+        public readonly fs: FS
+    ) {}
 
     private checkQuad(quad: RDF.Quad): void {
         if (!quad.graph.equals(dataFactory.defaultGraph()))
@@ -79,7 +82,10 @@ export class DefaultPod implements Pod {
         return new (class implements PolyOut {
             readFile(path: string, options: EncodingOptions): Promise<string>;
             readFile(path: string): Promise<Uint8Array>;
-            readFile(path: string, options?: EncodingOptions): Promise<string | Uint8Array> {
+            readFile(
+                path: string,
+                options?: EncodingOptions
+            ): Promise<string | Uint8Array> {
                 if (options === undefined) return fs.readFile(path);
                 else return fs.readFile(path, options);
             }
@@ -101,7 +107,11 @@ export class DefaultPod implements Pod {
                 return fs.stat(path);
             }
 
-            writeFile(path: string, content: string, options: EncodingOptions): Promise<void> {
+            writeFile(
+                path: string,
+                content: string,
+                options: EncodingOptions
+            ): Promise<void> {
                 return fs.writeFile(path, content, options);
             }
 
@@ -161,7 +171,11 @@ export class DefaultPod implements Pod {
                     `Called with ${endpointId}, ${payload}, ${contentType}, ${authToken} but not implemented`
                 );
             },
-            get(endpointId: string, contentType?: string, authToken?: string): Promise<string> {
+            get(
+                endpointId: string,
+                contentType?: string,
+                authToken?: string
+            ): Promise<string> {
                 throw new Error(
                     `Called with ${endpointId}, ${contentType}, ${authToken} but not implemented`
                 );

@@ -198,7 +198,11 @@ export interface Endpoint {
      * @returns a promise with the payload of the response
      * @throws if an unsupported request goes through, if an endpoint is not reached, if a user denies a request or if response is null
      */
-    get(endpointId: string, contentType?: string, authToken?: string): Promise<string>;
+    get(
+        endpointId: string,
+        contentType?: string,
+        authToken?: string
+    ): Promise<string>;
 }
 
 /**

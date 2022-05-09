@@ -20,7 +20,8 @@ import chai, { assert } from "chai";
 import chaiAsPromised from "chai-as-promised";
 
 function encodeUtf8(string: string): Uint8Array {
-    if (typeof TextEncoder !== "undefined") return new TextEncoder().encode(string);
+    if (typeof TextEncoder !== "undefined")
+        return new TextEncoder().encode(string);
     else return Buffer.from(string, "utf-8");
 }
 
@@ -115,20 +116,28 @@ export class PodSpec {
                 // Skipped - polyOut.writeFile is not yet used in production
                 it.skip("write/read", async () => {
                     await fc.assert(
-                        fc.asyncProperty(pathGen, fc.fullUnicodeString(), async (path, content) => {
-                            await skipIfExists(path);
+                        fc.asyncProperty(
+                            pathGen,
+                            fc.fullUnicodeString(),
+                            async (path, content) => {
+                                await skipIfExists(path);
 
-                            await polyOut.writeFile(path, content, { encoding: "utf-8" });
+                                await polyOut.writeFile(path, content, {
+                                    encoding: "utf-8",
+                                });
 
-                            await assert.eventually.equal(
-                                polyOut.readFile(path, { encoding: "utf-8" }),
-                                content
-                            );
-                            await assert.eventually.deepEqual(
-                                polyOut.readFile(path),
-                                encodeUtf8(content)
-                            );
-                        })
+                                await assert.eventually.equal(
+                                    polyOut.readFile(path, {
+                                        encoding: "utf-8",
+                                    }),
+                                    content
+                                );
+                                await assert.eventually.deepEqual(
+                                    polyOut.readFile(path),
+                                    encodeUtf8(content)
+                                );
+                            }
+                        )
                     );
                 });
 
@@ -136,15 +145,21 @@ export class PodSpec {
                 it.skip("write/readDir", async () => {
                     assert.isFulfilled(polyOut.readDir(this.path));
                     await fc.assert(
-                        fc.asyncProperty(pathGen, fc.fullUnicodeString(), async (path, content) => {
-                            await skipIfExists(path);
+                        fc.asyncProperty(
+                            pathGen,
+                            fc.fullUnicodeString(),
+                            async (path, content) => {
+                                await skipIfExists(path);
 
-                            await polyOut.writeFile(path, content, { encoding: "utf-8" });
-                            const filesWithPath = (await polyOut.readDir(this.path)).map(
-                                (path) => this.path + "/" + path["path"]
-                            );
-                            assert.include(filesWithPath, path);
-                        })
+                                await polyOut.writeFile(path, content, {
+                                    encoding: "utf-8",
+                                });
+                                const filesWithPath = (
+                                    await polyOut.readDir(this.path)
+                                ).map((path) => this.path + "/" + path["path"]);
+                                assert.include(filesWithPath, path);
+                            }
+                        )
                     );
                 });
 
@@ -171,7 +186,10 @@ export class PodSpec {
                             try {
                                 const stat = await polyOut.stat(path);
                                 assertion = () =>
-                                    assert.notEqual(stat.isFile(), stat.isDirectory());
+                                    assert.notEqual(
+                                        stat.isFile(),
+                                        stat.isDirectory()
+                                    );
                             } catch {
                                 assertion = () => {
                                     // intentionally left blank
@@ -194,6 +212,10 @@ export class PodSpec {
 /**
  * Convenience function to instantiate the [[PodSpec]] and run it immediately afterwards.
  */
-export function podSpec(pod: Pod, path = "/", httpbinUrl = "https://httpbin.org"): void {
+export function podSpec(
+    pod: Pod,
+    path = "/",
+    httpbinUrl = "https://httpbin.org"
+): void {
     return new PodSpec(pod, path, httpbinUrl).run();
 }

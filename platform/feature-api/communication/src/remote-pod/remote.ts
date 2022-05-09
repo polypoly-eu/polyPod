@@ -15,7 +15,6 @@ import {
 import { DataFactory, Quad } from "rdf-js";
 import { RequestListener } from "http";
 import {
-    dataFactory,
     NamedNode,
     BlankNode,
     Literal,
