@@ -40,6 +40,15 @@ const Overview = () => {
         );
     }
 
+    if (!account) {
+        return (
+            <LoadingOverlay
+                loadingGif="./images/loading.gif"
+                message={i18n.t("common:loading")}
+            />
+        );
+    }
+
     return (
         <Screen className="overview" layout="poly-standard-layout">
             {files && files?.[0] && <p>Imported File: {files[0].name}</p>}
