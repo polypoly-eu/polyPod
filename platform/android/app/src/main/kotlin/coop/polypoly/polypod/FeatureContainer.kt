@@ -90,23 +90,10 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         webView.setOnLongClickListener { true }
         webView.isHapticFeedbackEnabled = false
 
-        val userAgentString = webView.settings.userAgentString
-        // 'Android' + 'Chrome/[.0-9]* Mobile'
-        // 'Android' + 'Chrome/[.0-9]* (?!Mobile)'
-        val regex = """C(hrome|riOS)\/(?<major>\d+)[\d\.]""".toRegex()
-        val matchResult = regex.find(userAgentString)
-        val (_chrome, chromeVersion) = matchResult!!.destructured
-
-        if (chromeVersion.toInt() < 53) {
-            logger.warn(
-                """
-                            Feature ${feature?.name} cannot be loaded with this Chrome version:
-                            ${chromeVersion}. You are required to have a greater than 35.
-                        """
-            )
-        }
-
         WebView.setWebContentsDebuggingEnabled(true)
+
+        checkWebViewVersion()
+
         addView(webView)
     }
 
@@ -140,6 +127,29 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             }
             .setNegativeButton(rejectLabel) { _, _ -> }
             .show()
+    }
+
+    /**
+     * WebView uses Chrome under the hood
+     * An at least Chrome version 53 is required.
+     * Here, we check what Chrome version the user has installed,
+     * and show them a warning if it's lower or equals than 53 (android API 24).
+     */
+    private fun checkWebViewVersion() {
+        val userAgentString = webView.settings.userAgentString
+        // 'Android' + 'Chrome/[.0-9]* Mobile'
+        // 'Android' + 'Chrome/[.0-9]* (?!Mobile)'
+        val regex = """C(hrome|riOS)\/(?<major>\d+)[\d\.]""".toRegex()
+        val matchResult = regex.find(userAgentString)
+        val (_chrome, chromeVersion) = matchResult!!.destructured
+
+        println("ChromeVersion=$chromeVersion")
+        if (chromeVersion.toInt() <= 53) {
+            logger.warn(
+                "You are using Chrome version: $chromeVersion.",
+                "You are required to have a version greater than 53."
+            )
+        }
     }
 
     private suspend fun approveEndpointFetch(
