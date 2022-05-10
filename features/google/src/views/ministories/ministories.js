@@ -1,4 +1,4 @@
-import DataStructureMinistory from "./dataStructureBubbles.jsx";
+import DataStructureMinistory from "./dataStructure.jsx";
 import PlaceVisitsMinistory from "./placeVisits.jsx";
 import GroupedActivityTypesStory from "./groupedActivityTypes.jsx";
 
