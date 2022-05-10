@@ -34,11 +34,7 @@ function encodeUtf8(string: string): Uint8Array {
  * access or provide a URI to a local httpbin service.
  */
 export class PodSpec {
-    constructor(
-        private readonly pod: Pod,
-        private readonly path: string,
-        private readonly httpbinUrl: string
-    ) {
+    constructor(private readonly pod: Pod, private readonly path: string) {
         chai.use(chaiAsPromised);
     }
 
@@ -194,6 +190,6 @@ export class PodSpec {
 /**
  * Convenience function to instantiate the [[PodSpec]] and run it immediately afterwards.
  */
-export function podSpec(pod: Pod, path = "/", httpbinUrl = "https://httpbin.org"): void {
-    return new PodSpec(pod, path, httpbinUrl).run();
+export function podSpec(pod: Pod, path = "/"): void {
+    return new PodSpec(pod, path).run();
 }
