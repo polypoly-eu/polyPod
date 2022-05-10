@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">polyPod</string>
+
     <string name="app_bar_close_button_desc">Close</string>
     <string name="app_bar_search_button_desc">Search</string>
     <string name="app_bar_info_button_desc">Info</string>
+
     <string name="onboarding_button_end">OK</string>
     <string name="onboarding_button_auth">Set up now</string>
     <string name="onboarding_button_do_not_ask">Do not ask again</string>
@@ -18,6 +20,7 @@
     <string name="onboarding_slide4_headline">Security first.</string>
     <string name="onboarding_slide4_sub_headline">Enable security\nbefore we continue?</string>
     <string name="onboarding_slide4_body_text">We would like to ensure any data you put into polyPod is as secure as possible. For this we would like to ask you to enable some way of authentication for future access.</string>
+
     <string name="settings_title">Settings</string>
     <string name="settings_about_section">Info</string>
     <string name="settings_sec_section">Security</string>
@@ -28,6 +31,7 @@
     <string name="settings_privacy_policy_title">Privacy Policy</string>
     <string name="settings_terms_of_use_title">Terms of Use</string>
     <string name="settings_licenses_title">Licenses</string>
+
     <string name="message_url_open_prevented">I have blocked %1$s from opening a URL:\n%2$s</string>
     <string name="message_url_open_requested">%1$s wants to open a URL in your browser:\n\n%2$s\n\nAllow?</string>
     <string name="message_approve_endpoint_fetch">%1$s wants to share data with:\n\n%2$s\n\nAllow?</string>
@@ -45,4 +49,7 @@
 
     <string name="message_feature_error">Unfortunately, \'%1$s\' had an error:\n\n%2$s\n\nI will close it for you.</string>
     <string name="button_feature_error_close">OK</string>
+
+    <string name="webview_alert_title">Your Chrome version is old!</string>
+    <string name="webview_alert_message">You are required to have a Chrome version greater than 53, yours is %1$s. Please, update your Chrome to make use of this feature smoothly.</string>
 </resources>
