@@ -1,5 +1,5 @@
 import { analyzeZip, runAnalysis, analyzeFile } from "./analysis";
-import MinistoriesStatusReport from "././analysis/report/ministories-status-report";
+import MinistoriesStatusReport from "./analysis/report/ministories-status-report";
 
 import ReportAnalysis from "./analysis/report/report-analysis";
 import RootAnalysis from "./analysis/root-analysis";
