@@ -93,6 +93,18 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         val userAgentString = webView.settings.userAgentString
         // 'Android' + 'Chrome/[.0-9]* Mobile'
         // 'Android' + 'Chrome/[.0-9]* (?!Mobile)'
+        val regex = """C(hrome|riOS)\/(?<major>\d+)[\d\.]""".toRegex()
+        val matchResult = regex.find(userAgentString)
+        val (_chrome, chromeVersion) = matchResult!!.destructured
+
+        if (chromeVersion.toInt() < 53) {
+            logger.warn(
+                """
+                            Feature ${feature?.name} cannot be loaded with this Chrome version:
+                            ${chromeVersion}. You are required to have a greater than 35.
+                        """
+            )
+        }
 
         WebView.setWebContentsDebuggingEnabled(true)
         addView(webView)
