@@ -45,7 +45,6 @@ export class PodSpec {
 
     polyIn(): void {
         const { dataFactory, polyIn } = this.pod;
-
         describe("polyIn", () => {
             describe("factory", () => {
                 new DataFactorySpec(dataFactory).run();
