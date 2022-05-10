@@ -8,7 +8,7 @@
  */
 
 import * as RDF from "rdf-js";
-import { dataFactory } from "@polypoly-eu/api";
+import { dataFactory } from "../index";
 import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint } from "./api";
 import { EncodingOptions, FS, Stats } from "./fs";
 import { Entry } from ".";
