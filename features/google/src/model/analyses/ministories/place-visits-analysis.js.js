@@ -1,4 +1,5 @@
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
+import { mapToChartDataArray } from "@polypoly-eu/poly-look";
 import analysisKeys from "../analysisKeys";
 
 export default class PlaceVisitsAnalysis extends RootAnalysis {
@@ -12,12 +13,6 @@ export default class PlaceVisitsAnalysis extends RootAnalysis {
         });
         if (Object.keys(groupedPlaceVisits).length > 0)
             googleAccount.analyses[analysisKeys.groupedPlaceVisits] =
-                convertToChartData(groupedPlaceVisits);
+                mapToChartDataArray(groupedPlaceVisits);
     }
-}
-
-function convertToChartData(groupedPlaceVisits) {
-    return Object.entries(groupedPlaceVisits).map((key, value) => {
-        return { title: key, value };
-    });
 }
