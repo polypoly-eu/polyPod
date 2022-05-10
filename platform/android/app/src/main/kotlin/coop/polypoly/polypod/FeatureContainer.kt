@@ -136,19 +136,29 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
      * and show them a warning if it's lower or equals than 53 (android API 24).
      */
     private fun checkWebViewVersion() {
+        // userAgentString holds all the infor of User device, its format e.g.:
+        // """Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B)
+        // AppleWebKit/535.19 (KHTML, like Gecko)
+        // Chrome/18.0.1025.133 Mobile Safari/535.19"""
         val userAgentString = webView.settings.userAgentString
-        // 'Android' + 'Chrome/[.0-9]* Mobile'
-        // 'Android' + 'Chrome/[.0-9]* (?!Mobile)'
+
         val regex = """C(hrome|riOS)\/(?<major>\d+)[\d\.]""".toRegex()
         val matchResult = regex.find(userAgentString)
         val (_chrome, chromeVersion) = matchResult!!.destructured
 
         println("ChromeVersion=$chromeVersion")
         if (chromeVersion.toInt() <= 53) {
-            logger.warn(
-                "You are using Chrome version: $chromeVersion.",
-                "You are required to have a version greater than 53."
-            )
+            val message =
+                "You are required to have a Chrome version greater than 53" +
+                    ", yours is $chromeVersion. Please, update your Chrome " +
+                    "to make use of this feature smoothly."
+
+            logger.warn(message)
+
+            AlertDialog.Builder(context)
+                .setTitle("Your Chrome version is old!")
+                .setMessage(message)
+                .show()
         }
     }
 
