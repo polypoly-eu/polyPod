@@ -16,14 +16,7 @@
 import { Pod } from "./api";
 import fc from "fast-check";
 import { DataFactorySpec, gens } from "../index";
-import chai, { assert } from "chai";
-import chaiAsPromised from "chai-as-promised";
-
-function encodeUtf8(string: string): Uint8Array {
-    if (typeof TextEncoder !== "undefined")
-        return new TextEncoder().encode(string);
-    else return Buffer.from(string, "utf-8");
-}
+import { assert } from "chai";
 
 /**
  * The specification of the [[Pod]] API. All tests are executed by calling [[podSpec]].
@@ -35,9 +28,7 @@ function encodeUtf8(string: string): Uint8Array {
  * access or provide a URI to a local httpbin service.
  */
 export class PodSpec {
-    constructor(private readonly pod: Pod, private readonly path: string) {
-        chai.use(chaiAsPromised);
-    }
+    constructor(private readonly pod: Pod, private readonly path: string) {}
 
     polyIn(): void {
         const { dataFactory, polyIn } = this.pod;
