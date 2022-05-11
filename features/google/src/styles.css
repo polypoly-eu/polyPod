@@ -1,6 +1,38 @@
 :root {
+    --background-dark: var(--color-dark);
+    --background-light: var(--color-white);
+
+    --text-white: var(--color-white);
+    --text-light: var(--color-white);
+    --text-dark: var(--color-indigo-950);
+
+    /* Size */
+    --max-width: 412px;
+    --line-height: 120%;
 }
 
 .google {
-    background-color: var(--theme-primary-color);
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-dark);
+    color: var(--color-white);
+}
+
+* {
+    font-family: "Jost";
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--color-text-light);
+}
+
+body {
+    margin: 0;
+}
+
+button {
+    border: none;
+}
+
+button:focus {
+    outline: 0;
 }
