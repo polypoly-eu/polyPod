@@ -247,7 +247,7 @@ export class IDBPolyOut implements PolyOut {
         return Promise.all(
             files.map(async (file) => {
                 const reader = new zip.ZipReader(
-                    new zip.Uint8ArrayReader(new Uint8Array(file.buffer))
+                    new zip.BlobReader(new Blob([file.buffer]))
                 );
                 const entries = await reader.getEntries();
                 return entries;
