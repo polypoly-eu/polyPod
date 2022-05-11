@@ -108,56 +108,6 @@ export class PodSpec {
                     fc.pre(cont);
                 }
 
-                // Skipped - polyOut.writeFile is not yet used in production
-                it.skip("write/read", async () => {
-                    await fc.assert(
-                        fc.asyncProperty(
-                            pathGen,
-                            fc.fullUnicodeString(),
-                            async (path, content) => {
-                                await skipIfExists(path);
-
-                                await polyOut.writeFile(path, content, {
-                                    encoding: "utf-8",
-                                });
-
-                                await assert.eventually.equal(
-                                    polyOut.readFile(path, {
-                                        encoding: "utf-8",
-                                    }),
-                                    content
-                                );
-                                await assert.eventually.deepEqual(
-                                    polyOut.readFile(path),
-                                    encodeUtf8(content)
-                                );
-                            }
-                        )
-                    );
-                });
-
-                // Skipped - polyOut.writeFile is not yet used in production
-                it.skip("write/readDir", async () => {
-                    assert.isFulfilled(polyOut.readDir(this.path));
-                    await fc.assert(
-                        fc.asyncProperty(
-                            pathGen,
-                            fc.fullUnicodeString(),
-                            async (path, content) => {
-                                await skipIfExists(path);
-
-                                await polyOut.writeFile(path, content, {
-                                    encoding: "utf-8",
-                                });
-                                const filesWithPath = (
-                                    await polyOut.readDir(this.path)
-                                ).map((path) => this.path + "/" + path["path"]);
-                                assert.include(filesWithPath, path);
-                            }
-                        )
-                    );
-                });
-
                 it("stat/read", async () => {
                     await fc.assert(
                         fc.asyncProperty(pathGen, async (path) => {
