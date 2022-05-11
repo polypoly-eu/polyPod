@@ -1,73 +1,42 @@
-import React, { useContext, useState } from "react";
-import {
-    PolyButton,
-    PolyImportContext,
-    RoutingWrapper,
-    Screen,
-} from "@polypoly-eu/poly-look";
-import { GoogleContext } from "../../context/google-context.jsx";
-import { useHistory } from "react-router-dom";
-import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
+import React, { useState } from "react";
+import { Screen } from "@polypoly-eu/poly-look";
+import ImportExplanationExpandable from "../../components/importExplanationExpandable/importExplanationExpandable.jsx";
+// import { GoogleContext } from "../../context/google-context.jsx";
+// import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
+
+import "./import.css";
+
+const importSections = ["request", "download", "import", "explore"];
+
+const importSteps = {
+    beginning: "beginning",
+    request: "request",
+    download: "download",
+    import: "import",
+    explore: "explore",
+};
 
 const ImportView = () => {
-    const { pod, runWithLoadingScreen, setGlobalError } =
-        useContext(GoogleContext);
-    const { files, refreshFiles, handleRemoveFile } =
-        useContext(PolyImportContext);
+    // const { files } = useContext(PolyImportContext);
 
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [importStatus, setImportStatus] = useState(importSteps.beginning);
 
-    const history = useHistory();
-
-    const handleSelectFile = async () => {
-        const { polyNav } = pod;
-        runWithLoadingScreen(async function () {
-            try {
-                setSelectedFile(await polyNav.pickFile("application/zip"));
-            } catch (error) {
-                setGlobalError(new FileSelectionError(error));
-            }
-        });
-    };
-
-    const handleImportFile = async () => {
-        if (!selectedFile) return;
-        const { polyOut } = pod;
-        if (files?.[0]?.id) handleRemoveFile(files[0].id);
-        runWithLoadingScreen(async function () {
-            try {
-                await polyOut.importArchive(selectedFile.url);
-                refreshFiles();
-                setSelectedFile(null);
-            } catch (error) {
-                setGlobalError(new FileImportError(error));
-            }
-        });
-    };
+    function updateImportStatus(status) {
+        setImportStatus(status);
+        // writeImportStatus(
+        //     pod,
+        //     status == importSteps.explore ? importSteps.import : status
+        // );
+    }
 
     return (
         <Screen className="import" layout="poly-standard-layout">
-            <PolyButton
-                className="btn primary"
-                onClick={handleSelectFile}
-                label="Select File"
-            ></PolyButton>
-            {selectedFile && <p>Selected File: {selectedFile.name}</p>}
-            <PolyButton
-                className="btn secondary"
-                onClick={handleImportFile}
-                label="Import File"
-            >
-                Import File
-            </PolyButton>
-            {files && files?.[0] && (
-                <>
-                    <p>Imported File: {files[0].name}</p>
-                    <RoutingWrapper history={history} route="/overview">
-                        <PolyButton label="Explore"></PolyButton>
-                    </RoutingWrapper>
-                </>
-            )}
+            <ImportExplanationExpandable
+                importSteps={importSteps}
+                importSections={importSections}
+                importStatus={importStatus}
+                onUpdateImportStatus={updateImportStatus}
+            />
         </Screen>
     );
 };

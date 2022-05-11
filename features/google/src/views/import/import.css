@@ -1,0 +1,21 @@
+.import-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: var(--background-light);
+    border-radius: 12px 12px 0px 0px;
+    box-sizing: border-box;
+}
+
+.import-view .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.8;
+    background: #000000;
+    z-index: 2;
+}
