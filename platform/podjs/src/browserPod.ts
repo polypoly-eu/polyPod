@@ -10,8 +10,7 @@ import type {
     EncodingOptions,
     Stats,
     Entry,
-} from "@polypoly-eu/pod-api";
-import { dataFactory } from "@polypoly-eu/api";
+ dataFactory } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
 import * as RDFString from "rdf-string";
 import * as zip from "@zip.js/zip.js";
