@@ -16,7 +16,8 @@
 import { Pod } from "./api";
 import fc from "fast-check";
 import { DataFactorySpec, gens } from "../index";
-import { assert } from "chai";
+import chai, { assert } from "chai";
+import chaiAsPromised from "chai-as-promised";
 
 /**
  * The specification of the [[Pod]] API. All tests are executed by calling [[podSpec]].
@@ -28,7 +29,9 @@ import { assert } from "chai";
  * access or provide a URI to a local httpbin service.
  */
 export class PodSpec {
-    constructor(private readonly pod: Pod, private readonly path: string) {}
+    constructor(private readonly pod: Pod, private readonly path: string) {
+        chai.use(chaiAsPromised);
+    }
 
     polyIn(): void {
         const { dataFactory, polyIn } = this.pod;
