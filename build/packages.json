@@ -25,7 +25,6 @@
         "platform/feature-api/api/rdf-convert",
         "platform/feature-api/api/rdf-spec",
         "platform/feature-api/communication",
-        "platform/feature-api/utils",
         "platform/podjs"
     ]
 }

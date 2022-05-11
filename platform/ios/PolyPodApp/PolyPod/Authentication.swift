@@ -1,11 +1,11 @@
 import LocalAuthentication
 
 private func isSimulator() -> Bool {
-    #if targetEnvironment(simulator)
+#if targetEnvironment(simulator)
     return true
-    #else
+#else
     return false
-    #endif
+#endif
 }
 
 class Authentication {
@@ -35,21 +35,28 @@ class Authentication {
         UserDefaults.standard.set(true, forKey: Authentication.disableCheckKey)
     }
     
-    func setUp(_ completeAction: @escaping (Bool) -> Void) {
-        authenticateLocally(reason: "auth_prompt_set_up") { success in
-            self.authenticated = success
-            UserDefaults.standard.set(true, forKey: Authentication.setUpKey)
+    
+    func setUp(newStatus: Bool, _ completeAction: @escaping (Bool) -> Void) {
+        let reason = isSetUp() ?
+        "re_auth_prompt_set_up": "auth_prompt_set_up"
+
+        authenticateLocally(withReason: reason) { success in
+            if (success) {
+                self.authenticated = newStatus
+                UserDefaults.standard.set(newStatus, forKey: Authentication.setUpKey)
+            }
             completeAction(success)
         }
     }
+            
     
     func authenticate(_ completeAction: @escaping (Bool) -> Void) {
-        if isCheckDisabled() || !isSetUp() || authenticated {
+        if !isSetUp() || authenticated {
             completeAction(true)
             return
         }
         
-        authenticateLocally(reason: "auth_prompt_unlock") { success in
+        authenticateLocally(withReason: "auth_prompt_unlock") { success in
             self.authenticated = success
             completeAction(success)
         }
@@ -61,12 +68,12 @@ class Authentication {
         )
     }
     
-    private func isSetUp() -> Bool {
+    func isSetUp() -> Bool {
         return UserDefaults.standard.bool(forKey: Authentication.setUpKey)
     }
     
     private func authenticateLocally(
-        reason: String,
+        withReason reason: String,
         _ completeAction: @escaping (Bool) -> Void
     ) {
         let context = LAContext()

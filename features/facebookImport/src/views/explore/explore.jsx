@@ -105,6 +105,7 @@ const ExploreView = () => {
                     );
                     return ministory.hasDetails() ? (
                         <RoutingWrapper
+                            key={index}
                             history={history}
                             route="/explore/details"
                             stateChange={{ ActiveStoryClass: MinistoryClass }}

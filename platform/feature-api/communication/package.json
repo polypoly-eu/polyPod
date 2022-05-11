@@ -34,7 +34,6 @@
     "@polypoly-eu/rdf": "file:../api/rdf",
     "@polypoly-eu/rdf-convert": "file:../api/rdf-convert",
     "@polypoly-eu/rdf-spec": "file:../api/rdf-spec",
-    "@polypoly-eu/test-utils": "file:../utils",
     "@rdfjs/dataset": "^1.1.1",
     "@types/benchmark": "^2.1.0",
     "@types/chai": "^4.3.0",
