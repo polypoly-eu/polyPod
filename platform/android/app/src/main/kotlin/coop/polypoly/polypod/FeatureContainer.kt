@@ -50,7 +50,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     // Public for test purposes
     val webView = WebView(context)
     private val registry = LifecycleRegistry(this)
-    // Reassignable for test purposes
+    // Re-assignable for test purposes
     var api = PodApi(
         PolyOut(context),
         PolyIn(context, context.filesDir),
@@ -91,6 +91,9 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         webView.isHapticFeedbackEnabled = false
 
         WebView.setWebContentsDebuggingEnabled(true)
+
+        checkWebViewVersion()
+
         addView(webView)
     }
 
@@ -124,6 +127,36 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             }
             .setNegativeButton(rejectLabel) { _, _ -> }
             .show()
+    }
+
+    /**
+     * WebView uses Chrome under the hood
+     * An at least Chrome version 53 is required.
+     * Here, we check what Chrome version the user has installed,
+     * and show them a warning if it's lower or equals than 53 (android API 24).
+     */
+    private fun checkWebViewVersion() {
+        // userAgentString holds all the info of User device, its format e.g.:
+        // """Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B)
+        // AppleWebKit/535.19 (KHTML, like Gecko)
+        // Chrome/18.0.1025.133 Mobile Safari/535.19"""
+        val userAgentString = webView.settings.userAgentString
+
+        val regex = """(Chrome)\/(?<major>\d+)[\d\.]""".toRegex()
+        val matchResult = regex.find(userAgentString)
+        val (_chrome, chromeVersion) = matchResult!!.destructured
+
+        if (chromeVersion.toInt() <= 53) {
+            val message = context.getString(
+                R.string.webview_alert_message,
+                chromeVersion
+            )
+
+            AlertDialog.Builder(context)
+                .setTitle(context.getString(R.string.webview_alert_title))
+                .setMessage(message)
+                .show()
+        }
     }
 
     private suspend fun approveEndpointFetch(

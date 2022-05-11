@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">polyPod</string>
+
     <string name="app_bar_close_button_desc">Schließen</string>
     <string name="app_bar_search_button_desc">Suche</string>
     <string name="app_bar_info_button_desc">Info</string>
+
     <string name="onboarding_button_end">Los geht\'s</string>
     <string name="onboarding_button_auth">Jetzt einrichten</string>
     <string name="onboarding_button_do_not_ask">Nicht noch einmal fragen</string>
@@ -18,20 +20,22 @@
     <string name="onboarding_slide4_headline">Sicherheit zuerst.</string>
     <string name="onboarding_slide4_sub_headline">Zusätzliche polyPod Sicherheit einrichten\nbevor wir weitermachen?</string>
     <string name="onboarding_slide4_body_text">Wir möchten gerne sicherstellen, dass Ihre Daten im polyPod vor fremden Zugriff sicher sind. Dafür bitten wir Sie jetzt, die Gerätesperre auch für den polyPod einzuschalten.</string>
+
     <string name="settings_title">Einstellungen</string>
     <string name="settings_about_section">Info</string>
     <string name="settings_sec_section">Sicherheit</string>
     <string name="settings_auth">Authentifizierung</string>
-
     <string name="settings_version">Version</string>
     <string name="settings_legal_section">Rechtliches</string>
     <string name="settings_imprint_title">Impressum</string>
     <string name="settings_privacy_policy_title">Datenschutzerklärung</string>
     <string name="settings_terms_of_use_title">Nutzungsbedingungen</string>
     <string name="settings_licenses_title">Lizenzen</string>
+
     <string name="message_url_open_prevented">Ich habe %1$s davon abgehalten, eine URL zu öffnen:\n%2$s</string>
     <string name="message_url_open_requested">%1$s möchte eine URL in Ihrem Browser öffnen:\n\n%2$s\n\nZulassen?</string>
     <string name="message_approve_endpoint_fetch">%1$s möchte Ihre Daten teilen mit:\n\n%2$s\n\nZulassen?</string>
+
     <string name="button_url_open_confirm">Ja</string>
     <string name="button_url_open_reject">Nein</string>
     <string name="button_update_notification_close">OK</string>
@@ -45,5 +49,9 @@
     <string name="re_auth_prompt_success">Authentifizierung erfolgreich</string>
 
     <string name="message_feature_error">Leider gab es einen Fehler in \'%1$s\':\n\n%2$s\n\nIch beende es.</string>
+
     <string name="button_feature_error_close">OK</string>
+
+    <string name="webview_alert_title">TODO</string>
+    <string name="webview_alert_message">TODO %1$s</string>
 </resources>

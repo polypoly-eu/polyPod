@@ -1,0 +1,94 @@
+.explore-view {
+    background-color: var(--background-dark);
+    color: var(--color-gray-50);
+    line-height: var(--line-height);
+    letter-spacing: -0.01em;
+    width: 100%;
+    position: absolute;
+    border-top: 1px inset #a9b6c6;
+    box-sizing: border-box;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.explore-view .report-button {
+    font-family: "Jost Medium";
+    font-size: 18px;
+    background-color: var(--background-dark);
+    padding: 4px 12px;
+    margin: 0 auto;
+    width: 100%;
+    height: 48px;
+    max-width: var(--max-width);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-light);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.explore-view .pop-up {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.explore-view .unsuccessfully {
+    background-color: var(--color-red-200);
+    color: var(--color-red-900);
+}
+
+.explore-view .successfully {
+    background-color: var(--color-green-200);
+    color: var(--color-green-800);
+}
+
+.analysis-card .card-container > label {
+    width: 90px;
+    min-width: 82px;
+    height: 32px;
+    border-radius: 25px 0 0 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3e495b;
+    padding: 0px 12px;
+    margin-left: 12px;
+    margin-right: -20px;
+    font-size: 14px;
+}
+
+.analysis-card .summary-text {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.unrecognized-analysis-card {
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    padding: 20px;
+}
+
+.unrecognized-analysis-card .unrecognized-analysis-title {
+    display: flex;
+}
+
+.unrecognized-analysis-card .unrecognized-analysis-title h1 {
+    font-family: "Jost Medium";
+    font-size: 24px;
+    margin: 0;
+}
+
+.unrecognized-analysis-card p {
+    margin: 16px 0;
+    color: var(--text-dark);
+}
