@@ -33,6 +33,9 @@ export default [
             {
                 file: "dist/pod.js",
                 format: "iife",
+                globals: {
+                    "@polypoly-eu/api": "api",
+                },
             },
         ],
         plugins: [
@@ -45,5 +48,6 @@ export default [
             }),
         ],
         context: "window",
+        external: ["@polypoly-eu/api"],
     },
 ];
