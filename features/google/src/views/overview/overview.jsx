@@ -11,6 +11,7 @@ import i18n from "../../i18n";
 import { analyzeFile } from "@polypoly-eu/poly-analysis";
 import { subAnalyses } from "../../model/analyses/analyses";
 
+
 const Overview = () => {
     const { account, handleRemoveFile, files, refreshFiles } =
         useContext(PolyImportContext);
@@ -27,6 +28,7 @@ const Overview = () => {
         analyzeFile({
             zipData: files[0],
             dataAccount: account,
+<<<<<<< HEAD
             specificAnalyses: subAnalyses,
         });
     }, [account]);
@@ -39,8 +41,13 @@ const Overview = () => {
             />
         );
     }
+=======
+            specificAnalyses: [],
+        });
+    }, [account]);
+>>>>>>> main
 
-    if (!account) {
+    if (!account || files === null) {
         return (
             <LoadingOverlay
                 loadingGif="./images/loading.gif"

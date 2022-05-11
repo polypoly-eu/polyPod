@@ -2,7 +2,6 @@ import { Pod, PolyLifecycle, DefaultPod, FS } from "@polypoly-eu/pod-api";
 import { Volume } from "memfs";
 import factory from "@rdfjs/dataset";
 import { podSpec } from "@polypoly-eu/pod-api/dist/spec";
-import { getHttpbinUrl } from "@polypoly-eu/test-utils";
 import { AsyncPod } from "../../async";
 import { DataFactory } from "@polypoly-eu/rdf";
 
@@ -13,8 +12,7 @@ describe("Async pod", () => {
     describe("Resolved promise", () => {
         podSpec(
             new AsyncPod(Promise.resolve(underlying), new DataFactory(false)),
-            "/",
-            getHttpbinUrl()
+            "/"
         );
     });
 
@@ -23,11 +21,7 @@ describe("Async pod", () => {
             setTimeout(() => resolve(underlying), 500);
         });
 
-        podSpec(
-            new AsyncPod(delayed, new DataFactory(false)),
-            "/",
-            getHttpbinUrl()
-        );
+        podSpec(new AsyncPod(delayed, new DataFactory(false)), "/");
     });
 
     // TODO move to api, duplicated code

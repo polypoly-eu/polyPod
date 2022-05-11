@@ -20,10 +20,14 @@
 "onboarding_slide4_body_text" = "Wir möchten gerne sicherstellen, dass Ihre Daten im polyPod vor fremden Zugriff sicher sind. Dafür bitten wir Sie jetzt, die Gerätesperre auch für den polyPod einzuschalten.";
 "settings_title" = "Einstellungen";
 "settings_about_section" = "Info";
+"settings_auth" = "Authentifizierung";
+
 "settings_version" = "Version";
 "settings_legal_section" = "Rechtliches";
 "settings_imprint_title" = "Impressum";
 "settings_privacy_policy_title" = "Datenschutzerklärung";
+"settings_sec_section" = "Sicherheit";
+
 "settings_terms_of_use_title" = "Nutzungsbedingungen";
 "settings_licenses_title" = "Lizenzen";
 "settings_export_logs" = "Protokolle exportieren";
@@ -36,7 +40,10 @@
 "button_confirm" = "Ja";
 "button_reject" = "Nein";
 "button_update_notification_close" = "OK";
+
 "auth_prompt_set_up" = "Sperre einrichten";
+"re_auth_prompt_set_up" = "Bitte authentifizieren Sie sich erneut";
+
 "auth_prompt_unlock" = "Einloggen in polyPod";
 
 "settings_imprint_text" = "

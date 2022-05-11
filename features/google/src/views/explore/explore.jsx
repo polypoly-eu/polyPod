@@ -7,9 +7,11 @@ import {
     RoutingWrapper,
     ClickableCard,
 } from "@polypoly-eu/poly-look";
-import ministories from "../ministories/ministories.js";
+
 import i18n from "../../i18n.js";
+
 import "./explore.css";
+import { ministories } from "../ministories/ministories.js";
 
 const ExploreView = () => {
     const { account } = useContext(PolyImportContext);

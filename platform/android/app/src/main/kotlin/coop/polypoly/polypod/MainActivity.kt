@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         Authentication.authenticate(this) { success ->
             if (success) {
                 FeatureStorage().installBundledFeatures(this)
