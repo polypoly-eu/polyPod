@@ -4,7 +4,7 @@
     "build": "rollup -c"
   },
   "dependencies": {
-    "@polypoly-eu/pod-api": "file:../../platform/feature-api/api/pod-api",
+    "@polypoly-eu/api": "file:../../platform/feature-api/api",
     "@rdfjs/data-model": "^1.2.0"
   },
   "devDependencies": {

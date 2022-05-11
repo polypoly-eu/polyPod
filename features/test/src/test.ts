@@ -1,4 +1,4 @@
-import { Pod, PolyIn } from "@polypoly-eu/pod-api";
+import { Pod, PolyIn } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
 
 let quads: Array<RDF.Quad> = [];
