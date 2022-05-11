@@ -295,12 +295,14 @@ const ImportExplanationExpandable = ({
                         id={importIds[section]}
                     >
                         <div className={`number ${section}`}>{index + 1}</div>
-                        {/* <div
+                        <div
                             className="heading"
-                            dangerouslySetInnerHTML={{
-                                __html: i18n.t(`import:heading.${section}`),
-                            }}
-                        /> */}
+                            // dangerouslySetInnerHTML={{
+                            //     __html: i18n.t(`import:heading.${section}`),
+                            // }}
+                        >
+                            {section}
+                        </div>
                         <img
                             src="./images/angle-up.svg"
                             alt="arrow-up"
