@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Screen } from "@polypoly-eu/poly-look";
 import ImportExplanationExpandable from "../../components/importExplanationExpandable/importExplanationExpandable.jsx";
+import ProgressBarComponent from "../../components/progressBar/progressBar.jsx";
 // import { GoogleContext } from "../../context/google-context.jsx";
 // import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
 
@@ -17,20 +18,18 @@ const importSteps = {
 };
 
 const ImportView = () => {
-    // const { files } = useContext(PolyImportContext);
-
     const [importStatus, setImportStatus] = useState(importSteps.beginning);
 
     function updateImportStatus(status) {
         setImportStatus(status);
-        // writeImportStatus(
-        //     pod,
-        //     status == importSteps.explore ? importSteps.import : status
-        // );
     }
 
     return (
         <Screen className="import" layout="poly-standard-layout">
+            <ProgressBarComponent
+                onUpdateImportStatus={updateImportStatus}
+                importSections={importSections}
+            />
             <ImportExplanationExpandable
                 importSteps={importSteps}
                 importSections={importSections}
