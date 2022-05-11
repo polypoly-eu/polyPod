@@ -36,7 +36,7 @@ export default [
         ],
         plugins: [
             json(),
-            resolve(),
+            resolve({ browser: true }),
             commonjs(),
             sucrase({
                 exclude: ["node_modules/**"],
