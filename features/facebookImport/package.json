@@ -13,7 +13,6 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
-    "@polypoly-eu/pod-api": "file:../../platform/feature-api/api/pod-api",
     "@polypoly-eu/podjs": "file:../../platform/podjs",
     "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
@@ -25,8 +24,8 @@
   },
   "private": true,
   "dependencies": {
-    "@polypoly-eu/poly-import": "file:../../feature-utils/poly-import",
     "@polypoly-eu/poly-analysis": "file:../../feature-utils/poly-analysis",
+    "@polypoly-eu/poly-import": "file:../../feature-utils/poly-import",
     "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
     "d3": "^7.0.1",
     "react": "^17.0.2",
