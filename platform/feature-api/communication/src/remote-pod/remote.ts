@@ -11,10 +11,6 @@ import {
     Info,
     Entry,
     Endpoint,
-} from "@polypoly-eu/api";
-import { DataFactory, Quad } from "rdf-js";
-import { RequestListener } from "http";
-import {
     NamedNode,
     BlankNode,
     Literal,
@@ -22,6 +18,8 @@ import {
     DefaultGraph,
     Quad as polyQuad,
 } from "@polypoly-eu/api";
+import { DataFactory, Quad } from "rdf-js";
+import { RequestListener } from "http";
 import {
     ResponsePort,
     liftServer,

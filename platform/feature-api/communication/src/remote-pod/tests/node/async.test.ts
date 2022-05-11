@@ -1,6 +1,5 @@
 import { Volume } from "memfs";
 import factory from "@rdfjs/dataset";
-import { podSpec } from "@polypoly-eu/api/dist/spec";
 import { AsyncPod } from "../../async";
 import {
     Pod,
@@ -8,6 +7,7 @@ import {
     DefaultPod,
     FS,
     DataFactory,
+    podSpec,
 } from "@polypoly-eu/api";
 
 describe("Async pod", () => {
