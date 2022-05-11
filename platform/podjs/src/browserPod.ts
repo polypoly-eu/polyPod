@@ -44,7 +44,7 @@ async function openDatabase(): Promise<IDBDatabase> {
                 const keyPath = QUAD_KEYS.filter((_, idx) => (mask >> idx) & 1);
                 polyInStore.createIndex(keyPath.join("-"), keyPath);
             }
-            db.createObjectStore(OBJECT_STORE_POLY_OUT, { keyPath: "id" });
+            db.createObjectStore(OBJECT_STORE_POLY_OUT);
         };
 
         request.onsuccess = () => resolve(request.result);
