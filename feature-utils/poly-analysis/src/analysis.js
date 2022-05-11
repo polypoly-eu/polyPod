@@ -4,6 +4,7 @@ import {
     Status,
     statusTypes,
 } from "@polypoly-eu/poly-import";
+import genericAnalyses from "./generic-analyses";
 
 class AnalysisExecutionResult {
     constructor(analysis, status, executionTime) {
@@ -44,25 +45,26 @@ export async function runAnalysis(analysisClass, enrichedData) {
 export async function analyzeZip({
     zipData,
     zipFile,
-    subAnalyses,
+    specificAnalyses,
     dataAccount,
     pod,
 }) {
     const enrichedData = { ...zipData, zipFile, dataAccount, pod };
+    const allAnalyses = [...genericAnalyses, ...specificAnalyses];
     const analysesResults = await Promise.all(
-        subAnalyses.map(async (subAnalysisClass) => {
-            return runAnalysis(subAnalysisClass, enrichedData);
+        allAnalyses.map(async (AnalysisClass) => {
+            return runAnalysis(AnalysisClass, enrichedData);
         })
     );
     dataAccount.analysesExecutionResults = analysesResults;
 }
 
-export async function analyzeFile({ zipData, dataAccount, subAnalyses }) {
+export async function analyzeFile({ zipData, dataAccount, specificAnalyses }) {
     const zipFile = await ZipFile.createWithCache(zipData, window.pod);
     return await analyzeZip({
         zipData,
         zipFile,
-        subAnalyses,
+        specificAnalyses,
         dataAccount,
         pod: window.pod,
     });
