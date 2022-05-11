@@ -227,7 +227,7 @@ interface File {
     stat(): CompatStats;
 }
 
-class IDBPolyOut implements PolyOut {
+export class IDBPolyOut implements PolyOut {
     private async getFilesInfo(zipId: string): Promise<FileInfo[]> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
