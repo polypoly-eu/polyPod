@@ -1,27 +1,33 @@
 .DEFAULT_GOAL := all
 
+build_type := $(if $(filter $(MODE), release),release,debug)
+release_flag := $(if $(filter $(build_type), release), --release)
+target := target/$(build_type)
+
+# iOS export
 export_dir_ios := export/ios
 swift_core := PolyPodCoreSwift
 swift_core_framework := $(swift_core)/PolyPodCore.xcframework
 ios_archs := aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios
 ios_targets := iPhone simulator
-build_type := $(if $(filter $(MODE), release),release,debug)
-release_flag := $(if $(filter $(build_type), release), --release)
-target := target/$(build_type)
+
+# Flatbuffer tools
 flatbuffers_version := v2.0.0
 flatbuffers_repo := https://github.com/google/flatbuffers
 flatbuffers_releases := $(flatbuffers_repo)/releases/download/$(flatbuffers_version)
 flatbuffers := flatbuffers_shared/flatbuffers_$(flatbuffers_version)
 flatc_dir := flatbuffers_shared/flatc_$(flatbuffers_version)
 flatc := $(flatc_dir)/flatc
+
+# Flatbuffer models
 flatbuffer_models_dir := flatbuffers_shared/flatbuffer_models
 flatbuffer_models := $(shell find $(flatbuffer_models_dir) -name '*.fbs')
 rust_flatbuffers_dir := src/flatbuffers_generated
+rust_flatbuffer_models = $(patsubst $(flatbuffer_models_dir)/%, $(rust_flatbuffers_dir)/%, $(flatbuffer_models:.fbs=.rs))
 rust_flatbuffers_generated_lib := $(rust_flatbuffers_dir)/mod.rs
 swift_flatbuffers_dir := PolyPodCoreSwift/Sources/PolyPodCoreSwift/FlatbuffersGenerated
-
-rust_flatbuffer_models = $(patsubst $(flatbuffer_models_dir)/%, $(rust_flatbuffers_dir)/%, $(flatbuffer_models:.fbs=.rs))
 swift_flatbuffer_models = $(patsubst $(flatbuffer_models_dir)/%, $(swift_flatbuffers_dir)/%, $(flatbuffer_models:.fbs=.swift))
+
 ifeq ($(OS),Windows_NT)
 	flatc_download_url = $(flatbuffers_releases)/Windows.flatc.binary.zip
 else
@@ -54,8 +60,6 @@ $(rust_flatbuffers_generated_lib): $(rust_flatbuffer_models)
 
 $(target): $(flatc) $(flatbuffers) $(rust_flatbuffers_generated_lib)
 	cargo build $(release_flag)
-
-rust_build: $(flatc) $(flatbuffers) $(rust_flatbuffers_generated_lib)
 
 $(swift_core_framework): $(target) $(swift_flatbuffer_models)
 # Ensure correct OS is used
