@@ -174,7 +174,7 @@ interface FileInfo {
     id: string;
     name: string;
     time: Date;
-    blob: Blob;
+    buffer: ArrayBuffer;
 }
 
 /**
@@ -246,7 +246,9 @@ export class IDBPolyOut implements PolyOut {
         const files = await this.getFilesInfo(zipId);
         return Promise.all(
             files.map(async (file) => {
-                const reader = new zip.ZipReader(new zip.BlobReader(file.blob));
+                const reader = new zip.ZipReader(
+                    new zip.Uint8ArrayReader(new Uint8Array(file.buffer))
+                );
                 const entries = await reader.getEntries();
                 return entries;
             })
@@ -330,7 +332,7 @@ export class IDBPolyOut implements PolyOut {
     async importArchive(url: string, destUrl?: string): Promise<string> {
         console.log("Importing archive!");
         const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
-        const blob = await (await fetch(dataUrl)).blob();
+        const buffer = await (await fetch(dataUrl)).arrayBuffer();
         const db = await openDatabase();
 
         if (destUrl) {
@@ -351,7 +353,7 @@ export class IDBPolyOut implements PolyOut {
                             id: zipId,
                             name: fileName,
                             time: new Date(),
-                            blob: blob,
+                            buffer: buffer,
                         });
                     } else {
                         obj = [
@@ -359,7 +361,7 @@ export class IDBPolyOut implements PolyOut {
                                 id: zipId,
                                 name: fileName,
                                 time: new Date(),
-                                blob: blob,
+                                buffer: buffer,
                             },
                         ];
                     }
@@ -388,7 +390,7 @@ export class IDBPolyOut implements PolyOut {
                         id: zipId,
                         name: fileName,
                         time: new Date(),
-                        blob: blob,
+                        buffer: buffer,
                     },
                 ],
                 zipId
