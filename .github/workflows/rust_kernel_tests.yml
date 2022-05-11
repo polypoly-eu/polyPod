@@ -19,13 +19,8 @@ jobs:
       - name: Install stable toolchain
         run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-      - name: Setup flatbuffers
-        working-directory: ./platform/core
-        run: ./flatbuffers_shared/setup_flatbuffers.sh
-
-      - name: Generate flatbuffers
-        working-directory: ./platform/core
-        run: ./flatbuffers_shared/generate_flatbuffers.sh
+      - name: Build core
+        run: make target
 
       - name: Lint -- Run cargo fmt
         working-directory: ./platform/core
