@@ -17,7 +17,6 @@ const ExploreView = () => {
     const { account } = useContext(PolyImportContext);
     const renderFileAnalyses = () => {
         if (!account) return null;
-        console.log(account);
         return (
             <Screen className="explore" layout="poly-standard-layout">
                 <List>
