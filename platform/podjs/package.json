@@ -34,6 +34,7 @@
     "@types/node-fetch": "^2.5.8",
     "babel-plugin-transform-import-meta": "^2.1.1",
     "body-parser": "^1.19.0",
+    "fake-indexeddb": "^3.1.7",
     "fast-check": "^2.11.0"
   },
   "peerDependencies": {

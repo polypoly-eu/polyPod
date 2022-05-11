@@ -5,4 +5,5 @@ module.exports = {
     },
     transformIgnorePatterns: [],
     testEnvironment: "jsdom",
+    setupFiles: ["fake-indexeddb/auto"],
 };
