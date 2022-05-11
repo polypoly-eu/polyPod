@@ -27,7 +27,6 @@ const ImportExplanationExpandable = ({
     importSections,
     importStatus,
     onUpdateImportStatus,
-    // onImportFile,
 }) => {
     const { pod, runWithLoadingScreen, setGlobalError } =
         useContext(GoogleContext);
@@ -64,10 +63,6 @@ const ImportExplanationExpandable = ({
         onUpdateImportStatus(importSteps.import);
         window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
     };
-
-    // const handleImportStatus = () => {
-    //     onUpdateImportStatus(importSteps.explore);
-    // };
 
     const formatSize = (size) => {
         const k = 1024;
@@ -263,14 +258,6 @@ const ImportExplanationExpandable = ({
                     phone, you can safely delete the downloaded zip archive
                     now.,
                 </p>
-                {/* {files && files?.[0] && (
-                    <>
-                        <p>Imported File: {files[0].name}</p>
-                        <RoutingWrapper history={history} route="/overview">
-                            <PolyButton label="Explore"></PolyButton>
-                        </RoutingWrapper>
-                    </>
-                )} */}
                 {files ? (
                     <>
                         {/* <p>Imported File: {files[0].name}</p> */}
