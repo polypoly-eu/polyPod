@@ -1,0 +1,12 @@
+/*
+    Layouts are used for recurring behaviour of and between elements (eg. margins and spacing, styling of headlines)
+    Right now they are only used with the screen component
+*/
+
+.poly-standard-layout > * {
+  margin-bottom: 24px;
+}
+
+.poly-standard-layout > :first-child {
+  margin-top: 24px;
+}

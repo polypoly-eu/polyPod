@@ -15,36 +15,55 @@ class Authentication {
 
         fun shouldShowBiometricsPrompt(context: Context): Boolean {
             return biometricsAvailable(context) &&
-                Preferences.getBiometricCheck(context) &&
-                !Preferences.getBiometricEnabled(context) &&
+                Preferences.isBiometricCheck(context) &&
+                !Preferences.isBiometricEnabled(context) &&
                 !Preferences.isFirstRun(context)
         }
 
         fun setUp(
             activity: FragmentActivity,
+            newStatus: Boolean,
             setupComplete: () -> Unit
         ) {
-            authenticate(activity, true) { success ->
-                if (success)
-                    setupComplete()
+            authenticate(activity, newStatus) { success ->
+                if (success) {
+                    Preferences.setBiometricEnabled(
+                        activity,
+                        newStatus
+                    )
+                }
+                setupComplete()
             }
         }
 
         fun authenticate(
             activity: FragmentActivity,
-            force: Boolean = false,
+            newStatus: Boolean = false,
             authComplete: ((Boolean) -> Unit)
         ) {
+            val isBiometricEnabled = Preferences.isBiometricEnabled(activity)
             if (!biometricsAvailable(activity) ||
-                (!force && !Preferences.getBiometricEnabled(activity))
+                (!newStatus && !isBiometricEnabled)
             ) {
                 authComplete(true)
                 return
             }
 
+            val title =
+                if (isBiometricEnabled)
+                    activity.getString(R.string.re_auth_prompt_title)
+                else
+                    activity.getString(R.string.auth_prompt_title)
+
+            val subtitle =
+                if (isBiometricEnabled)
+                    activity.getString(R.string.re_auth_prompt_subtitle)
+                else
+                    activity.getString(R.string.auth_prompt_subtitle)
+
             val promptInfo = BiometricPrompt.PromptInfo.Builder()
-                .setTitle(activity.getString(R.string.auth_prompt_title))
-                .setSubtitle(activity.getString(R.string.auth_prompt_subtitle))
+                .setTitle(title)
+                .setSubtitle(subtitle)
                 .setAllowedAuthenticators(desiredLockScreenType)
                 .build()
 
@@ -70,11 +89,19 @@ class Authentication {
             result: BiometricPrompt.AuthenticationResult
         ) {
             super.onAuthenticationSucceeded(result)
+
+            val title =
+                if (Preferences.isBiometricEnabled(context))
+                    context.getString(R.string.re_auth_prompt_success)
+                else
+                    context.getString(R.string.auth_prompt_success)
+
             Toast.makeText(
                 context,
-                context.getString(R.string.auth_prompt_success),
+                title,
                 Toast.LENGTH_SHORT
             ).show()
+
             authComplete(true)
         }
 

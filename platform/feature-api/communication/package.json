@@ -32,7 +32,6 @@
   },
   "devDependencies": {
     "@polypoly-eu/api": "file:../api",
-    "@polypoly-eu/test-utils": "file:../utils",
     "@rdfjs/dataset": "^1.1.1",
     "@types/benchmark": "^2.1.0",
     "@types/chai": "^4.3.0",
