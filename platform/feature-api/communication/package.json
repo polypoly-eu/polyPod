@@ -13,7 +13,9 @@
     "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
   "scripts": {
+    "prebenchmark": "npm i n3",
     "benchmark": "./bin/run-benchmarks.sh",
+    "postbenchmark": "npm uninstall n3",
     "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && npm run rollup",
     "rollup": "rollup -c",
     "dev": "tsc --watch --incremental",
@@ -45,7 +47,6 @@
     "chai-as-promised": "^7.1.1",
     "fast-check": "^2.11.0",
     "memfs": "^3.4.1",
-    "n3": "^1.7.0",
     "node-fetch": "~2",
     "ts-mocha": "^9.0.2"
   },
