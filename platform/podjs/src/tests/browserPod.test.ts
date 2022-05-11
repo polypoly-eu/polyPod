@@ -1,16 +1,13 @@
 import { IDBPolyOut } from "../browserPod";
 
-test("Importing Archive", () => {
+test("Importing Archive", async () => {
     const polyOut = new IDBPolyOut();
-    expect("").toEqual("");
+    try {
+        const zipPath =
+            "https://github.com/timoteipalade/test-files/blob/main/testZip.zip";
+        const result = await polyOut.importArchive(zipPath);
+        expect(result).not.toEqual("");
+    } catch (err) {
+        expect(err).toBeUndefined();
+    }
 });
-
-// describe("Importing Archive", async () => {
-//     const polyOut = new IDBPolyOut();
-//     try {
-//         const result = await polyOut.importArchive("../data/testZip.zip");
-//         expect(result).not.toEqual("");
-//     } catch (err) {
-//         expect(err).toBeUndefined();
-//     }
-// });
