@@ -330,9 +330,8 @@ export class IDBPolyOut implements PolyOut {
 
     /// destUrl should be the same as zipId
     async importArchive(url: string, destUrl?: string): Promise<string> {
-        console.log("Importing archive!");
-        const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
-        const buffer = await (await fetch(dataUrl)).arrayBuffer();
+        const { fileName } = FileUrl.fromUrl(url);
+        const buffer = await (await fetch(url)).arrayBuffer();
         const db = await openDatabase();
 
         if (destUrl) {
