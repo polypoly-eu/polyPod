@@ -6,22 +6,58 @@ swift_core_framework := $(swift_core)/PolyPodCore.xcframework
 ios_archs := aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios
 ios_targets := iPhone simulator
 build_type := $(if $(filter $(MODE), release),release,debug)
+release_flag := $(if $(filter $(build_type), release), --release)
+target := target/$(build_type)
+flatbuffers_version := v2.0.0
+flatbuffers_repo := https://github.com/google/flatbuffers
+flatbuffers_releases := $(flatbuffers_repo)/releases/download/$(flatbuffers_version)
+flatbuffers := flatbuffers_shared/flatbuffers_$(flatbuffers_version)
+flatc_dir := flatbuffers_shared/flatc_$(flatbuffers_version)
+flatc := $(flatc_dir)/flatc
+flatbuffer_models_dir := flatbuffers_shared/flatbuffer_models
+flatbuffer_models := $(shell find $(flatbuffer_models_dir) -name '*.fbs')
+rust_flatbuffers_dir := src/flatbuffers_generated
+rust_flatbuffers_generated_lib := $(rust_flatbuffers_dir)/mod.rs
+swift_flatbuffers_dir := PolyPodCoreSwift/Sources/PolyPodCoreSwift/FlatbuffersGenerated
 
-ifneq ($(OS),Windows_NT)
+rust_flatbuffer_models = $(patsubst $(flatbuffer_models_dir)/%, $(rust_flatbuffers_dir)/%, $(flatbuffer_models:.fbs=.rs))
+swift_flatbuffer_models = $(patsubst $(flatbuffer_models_dir)/%, $(swift_flatbuffers_dir)/%, $(flatbuffer_models:.fbs=.swift))
+ifeq ($(OS),Windows_NT)
+	flatc_download_url = $(flatbuffers_releases)/Windows.flatc.binary.zip
+else
 	ifeq ($(shell uname -s),Darwin)
+		flatc_download_url = $(flatbuffers_releases)/Mac.flatc.binary.zip
 		macos := true
+	endif
+	ifeq ($(shell uname -s),Linux)
+		flatc_download_url = $(flatbuffers_releases)/Linux.flatc.binary.clang++-9.zip
 	endif
 endif
 
-.PHONY: flatbuffers
-flatbuffers:
-	./flatbuffers_shared/setup_flatbuffers.sh
-	./flatbuffers_shared/generate_flatbuffers.sh
+$(flatbuffers):
+	git clone --branch $(flatbuffers_version) $(flatbuffers_repo) $(flatbuffers)
 
-target: flatbuffers
-	cargo build
+$(flatc):
+	mkdir -p $(flatc_dir)
+	curl -L $(flatc_download_url) -o $(flatc_dir)/flatc.zip && unzip -d $(flatc_dir) $(flatc_dir)/flatc.zip && rm $(flatc_dir)/flatc.zip
+	chmod +x $(flatc)
 
-$(swift_core_framework): target
+$(rust_flatbuffers_dir)/%.rs: $(flatbuffer_models_dir)/%.fbs
+	./$(flatc) --rust -o $(rust_flatbuffers_dir) --filename-suffix "" --include-prefix flatbuffers_generated $^
+
+$(swift_flatbuffers_dir)/%.swift: $(flatbuffer_models_dir)/%.fbs
+	./$(flatc) --swift -o $(swift_flatbuffers_dir) --filename-suffix "" $^
+
+$(rust_flatbuffers_generated_lib): $(rust_flatbuffer_models)
+	$(shell echo $(foreach model, $^, \
+		"pub mod $(basename $(notdir $(model)));\n") > $(rust_flatbuffers_generated_lib)) 
+
+$(target): $(flatc) $(flatbuffers) $(rust_flatbuffers_generated_lib)
+	cargo build $(release_flag)
+
+rust_build: $(flatc) $(flatbuffers) $(rust_flatbuffers_generated_lib)
+
+$(swift_core_framework): $(target) $(swift_flatbuffer_models)
 # Ensure correct OS is used
 ifeq ($(macos),)
 	@echo "xcframework can only be built on macOS"
@@ -62,7 +98,7 @@ endif
 define build_for_architecture
 	rustup target add $(1)
 	cargo build \
-		$(if $(filter $(build_type), release), --release) \
+		$(release_flag) \
 		--lib --target $(1)
 endef
 
@@ -71,7 +107,7 @@ all: $(if $(macos),$(swift_core_framework),target)
 
 .PHONY: clean
 clean:
-	$(RM) -r flatbuffers_shared/flat{c,buffers}
+	$(RM) -r flatbuffers_shared/flat{c_$(flatbuffers_version),buffers_$(flatbuffers_version)}
 	$(RM) -r src/flatbuffers_generated
 	$(RM) -r target
 	$(RM) -r export

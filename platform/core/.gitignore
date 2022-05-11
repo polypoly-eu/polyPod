@@ -1,5 +1,5 @@
 /target
 /src/flatbuffers_generated
-/flatbuffers_shared/flatc
-/flatbuffers_shared/flatbuffers
+/flatbuffers_shared/flatc*
+/flatbuffers_shared/flatbuffers*
 /export
