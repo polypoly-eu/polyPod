@@ -1,10 +1,13 @@
 import PlaceVisitsAnalysis from "./ministories/place-visits-analysis.js";
 import ActivitySegmentsAnalysis from "./ministories/activity-type-analysis";
-import ActivityByProductAnalysis from "./ministories/activity-by-products.js";
 
+<<<<<<< HEAD
 export const specificAnalyses = [
     PlaceVisitsAnalysis,
     ActivitySegmentsAnalysis,
     ActivityByProductAnalysis,
 ];
 
+=======
+export const specificAnalyses = [PlaceVisitsAnalysis, ActivitySegmentsAnalysis];
+>>>>>>> 4fd1d47d4 (Revert "Add placevisits")
