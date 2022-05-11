@@ -100,11 +100,8 @@ const ImportExplanationExpandable = ({
                 setGlobalError(new FileImportError(error));
             }
         });
+        onUpdateImportStatus(importSteps.explore);
     };
-
-    //  const onRemoveFile = () => {
-    //     return handleRemoveFile(file.id);
-    // };
 
     const bodyContent = {
         request: (
