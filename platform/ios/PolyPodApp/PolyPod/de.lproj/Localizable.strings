@@ -37,6 +37,8 @@
 "message_approve_endpoint_fetch_request %@ %@" = "%@-feature möchte mit diesen Server Daten teilen über Ihren polyPod:\n\n%@\n\nErlauben?";
 "message_security_warning_title" = "Sicherheitswarnung";
 "message_security_warning_text" = "Um sicherzustellen, dass Ihre Daten sicher bleiben, empfehlen wir, Ihre Gerätesperre auch für den polyPod zu nutzen.";
+"button_error_report" = "TODO";
+
 "button_confirm" = "Ja";
 "button_reject" = "Nein";
 "button_update_notification_close" = "OK";
