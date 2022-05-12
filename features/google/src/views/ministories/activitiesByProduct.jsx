@@ -10,19 +10,25 @@ class ActivitiesByProductsStory extends SingleDataStory {
     constructor(props) {
         super(props, analysisKeys.activitiesByProducts);
     }
+
+    get title() {
+        return "Activities by products";
+    }
+
+    get label() {
+        return SingleDataStory.LABELS.TECH_DEMO;
+    }
+
     _renderSummary() {
         return (
-            <>
-                <h1>Activities by products</h1>
-                <PolyChart
-                    type="horizontal-bar-chart"
-                    data={mapToChartDataArray(this.analysisData)}
-                    barColor={barColor}
-                    barValueColor={barValueColor}
-                    barLabelColor={barColor}
-                    height={800}
-                />
-            </>
+            <PolyChart
+                type="horizontal-bar-chart"
+                data={mapToChartDataArray(this.analysisData)}
+                barColor={barColor}
+                barValueColor={barValueColor}
+                barLabelColor={barColor}
+                height={800}
+            />
         );
     }
 }
