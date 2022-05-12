@@ -148,6 +148,19 @@ export class PodSpec {
                     );
                 });
 
+                it("importArchive", async () => {
+                    try {
+                        const zipPath =
+                            "https://github.com/timoteipalade/test-files/raw/main/testZip.zip";
+                        const zipId = await polyOut.importArchive(zipPath);
+                        chai.assert.isNotEmpty(zipId);
+                        const contents = await polyOut.readDir(zipId);
+                        chai.assert.isAtLeast(contents.length, 1);
+                    } catch (err) {
+                        chai.assert.isUndefined(err);
+                    }
+                });
+
                 it("stat/read", async () => {
                     await fc.assert(
                         fc.asyncProperty(pathGen, async (path) => {
