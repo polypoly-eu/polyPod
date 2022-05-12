@@ -88,8 +88,8 @@ struct FeatureView: View {
         }.accessibilityElement()
         .accessibilityIdentifier("feature_view")
     }
-
-    private func handleError(_ error: String) {
+    
+    private func handleError(_ errorMsg: String) {
         let alert = UIAlertController(
             title: "",
             message: String.localizedStringWithFormat(
@@ -97,7 +97,7 @@ struct FeatureView: View {
                     "message_feature_error %@ %@",
                     comment: ""
                 ),
-                feature.name, error
+                feature.name, errorMsg
             ),
             preferredStyle: .alert
         )
@@ -109,6 +109,7 @@ struct FeatureView: View {
             style: .default,
             handler: { _ in
                 closeAction()
+                ErrorUploader.shared.uploadToServer(errorMsg)
             }
         ))
 
