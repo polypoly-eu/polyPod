@@ -27,7 +27,7 @@ const Overview = () => {
         analyzeFile({
             zipData: files[0],
             dataAccount: account,
-            specificAnalyses: specificAnalyses,
+            specificAnalyses,
         });
     }, [account]);
 
