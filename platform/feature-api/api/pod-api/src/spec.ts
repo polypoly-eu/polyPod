@@ -156,25 +156,17 @@ export class PodSpec {
 
                 it("stat (root)", async () => {
                     const stat = await polyOut.stat(this.path);
-                    assert.ok(stat.isDirectory());
-                    assert.notOk(stat.isFile());
+                    assert.ok(stat.directory);
                 });
 
                 it("stat (files)", async () => {
                     await fc.assert(
-                        fc.asyncProperty(pathGen, async (path) => {
-                            let assertion: () => void;
-                            try {
-                                const stat = await polyOut.stat(path);
-                                assertion = () =>
-                                    assert.notEqual(stat.isFile(), stat.isDirectory());
-                            } catch {
-                                assertion = () => {
-                                    // intentionally left blank
-                                };
-                            }
-                            assertion();
-                        })
+                        fc.asyncProperty(pathGen, (path) =>
+                            polyOut.stat(path).then(
+                                (stat) => assert.notOk(stat.directory),
+                                () => undefined
+                            )
+                        )
                     );
                 });
             });

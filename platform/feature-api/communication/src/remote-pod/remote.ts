@@ -99,64 +99,7 @@ type PodBackend = ObjectBackendSpec<{
     endpoint(): EndpointBackend;
 }>;
 
-class FileStats implements Stats {
-    static of(stats: Stats): FileStats {
-        if (
-            stats.getSize !== undefined &&
-            stats.getName !== undefined &&
-            stats.getTime !== undefined &&
-            stats.getId !== undefined
-        ) {
-            return new FileStats(
-                stats.isFile(),
-                stats.isDirectory(),
-                stats.getTime(),
-                stats.getSize(),
-                stats.getName(),
-                stats.getId()
-            );
-        } else {
-            return new FileStats(
-                stats.isFile(),
-                stats.isDirectory(),
-                "",
-                0,
-                "",
-                ""
-            );
-        }
-    }
-
-    constructor(
-        readonly file: boolean,
-        readonly directory: boolean,
-        readonly time: string,
-        readonly size: number,
-        readonly name: string,
-        readonly id: string
-    ) {}
-    isFile(): boolean {
-        return this.file;
-    }
-    isDirectory(): boolean {
-        return this.directory;
-    }
-    getTime(): string {
-        return this.time;
-    }
-    getSize(): number {
-        return this.size;
-    }
-    getName(): string {
-        return this.name;
-    }
-    getId(): string {
-        return this.id;
-    }
-}
-
 export const podBubblewrapClasses: Classes = {
-    "@polypoly-eu/remote-pod.FileStats": FileStats,
     "@polypoly-eu/rdf.NamedNode": RDF.NamedNode,
     "@polypoly-eu/rdf.BlankNode": RDF.BlankNode,
     "@polypoly-eu/rdf.Literal": RDF.Literal,
@@ -352,8 +295,14 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
             },
             readDir: (path) => polyOut.readDir(path),
             stat: async (path) => {
-                const stats = await polyOut.stat(path);
-                return FileStats.of(stats);
+                const stat = await polyOut.stat(path);
+                return {
+                    directory: stat.directory,
+                    time: stat.time || "",
+                    size: stat.size || 0,
+                    name: stat.name || "",
+                    id: stat.id || "",
+                };
             },
             writeFile: (path, content, options) =>
                 polyOut.writeFile(path, content, options),

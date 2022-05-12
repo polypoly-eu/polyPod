@@ -12,12 +12,11 @@ export interface EncodingOptions {
 }
 
 export interface Stats {
-    isFile(): boolean;
-    isDirectory(): boolean;
-    getTime(): string;
-    getSize(): number;
-    getName(): string;
-    getId(): string;
+    id: string;
+    size: number;
+    time: string;
+    name: string;
+    directory: boolean;
 }
 
 /**
