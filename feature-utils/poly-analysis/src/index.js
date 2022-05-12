@@ -5,7 +5,6 @@ import ReportAnalysis from "./report/report-analysis";
 import RootAnalysis from "./analysis/root-analysis";
 import { jsonDataEntities, relevantZipEntries } from "./utils/analysis-util";
 import ReportStories from "./report/report-stories";
-import genericAnalyses from "./generic-analyses";
 import DataImportingStatusAnalysis from "./report/data-importing-status-report";
 import DataStructureBubblesAnalysis from "./analysis/data-structure-bubbles-analysis";
 
@@ -21,5 +20,4 @@ export {
     MinistoriesStatusReport,
     DataImportingStatusAnalysis,
     DataStructureBubblesAnalysis,
-    genericAnalyses,
 };
