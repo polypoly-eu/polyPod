@@ -4,7 +4,7 @@ class Story extends Component {
     constructor({ account, mode }) {
         super();
         this.analyses = account.analyses;
-        this.neededAnalyses = [];
+        this._neededAnalyses = [];
         this.mode = mode || Story.MODES.SUMMARY;
     }
 
@@ -21,8 +21,8 @@ class Story extends Component {
     }
 
     get active() {
-        if (!this.neededAnalyses) return true;
-        for (const analysisKey of this.neededAnalyses) {
+        if (!this._neededAnalyses) return true;
+        for (const analysisKey of this._neededAnalyses) {
             if (this.analyses?.[analysisKey] === undefined) return false;
         }
         return true;
