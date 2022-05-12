@@ -9,14 +9,17 @@ class GroupedActivityTypesStory extends SingleDataStory {
         super(props, analysisKeys.groupedActivityTypes);
     }
 
+    get title() {
+        return "Grouped Activity Types";
+    }
+
+    get label() {
+        return SingleDataStory.LABELS.TECH_DEMO;
+    }
+
     _renderSummary() {
         return (
-            <>
-                <h1>Grouped Activity Types</h1>
-                <FilterChipBubbles
-                    data={mapToChartDataArray(this.analysisData)}
-                />
-            </>
+            <FilterChipBubbles data={mapToChartDataArray(this.analysisData)} />
         );
     }
 }

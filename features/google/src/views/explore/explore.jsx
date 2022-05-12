@@ -29,11 +29,7 @@ const ExploreView = () => {
                             <>
                                 <h1>{ministory.title}</h1>
                                 {ministory.label !== null && (
-                                    <label>
-                                        {i18n.t(
-                                            `explore:analysis.label.${ministory.label}`
-                                        )}
-                                    </label>
+                                    <label>{ministory.label}</label>
                                 )}
                                 {ministory.render()}
                             </>
