@@ -15,7 +15,6 @@ import * as RDFString from "rdf-string";
 import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../../polyPod-config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
-import "cross-fetch/polyfill";
 
 const DB_PREFIX = "polypod:";
 const DB_VERSION = 1;
