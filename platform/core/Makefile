@@ -32,10 +32,10 @@ ifeq ($(OS),Windows_NT)
 	flatc_download_url = $(flatbuffers_releases)/Windows.flatc.binary.zip
 	flatc := $(flatc_dir)/flatc.exe
 	# Need on Windows, to allow interpreting escaping characters
-	echo := echo -e
+	os_echo := echo -e
 else
 	flatc := $(flatc_dir)/flatc
-	echo := echo
+	os_echo := echo
 	ifeq ($(shell uname -s),Darwin)
 		flatc_download_url = $(flatbuffers_releases)/Mac.flatc.binary.zip
 		macos := true
@@ -60,16 +60,16 @@ $(swift_flatbuffers_dir)/%.swift: $(flatbuffer_models_dir)/%.fbs
 	./$(flatc) --swift -o $(swift_flatbuffers_dir) --filename-suffix "" $^
 
 $(rust_flatbuffers_generated_lib): $(rust_flatbuffer_models)
-	$(shell $(echo) $(foreach model, $^, \
+	$(shell $(os_echo) $(foreach model, $^, \
 		"pub mod $(basename $(notdir $(model))); \n") > $(rust_flatbuffers_generated_lib)) 
 
-target: $(flatc) $(flatbuffers) $(rust_flatbuffers_generated_lib)
+$(target): $(flatc) $(flatbuffers) $(rust_flatbuffers_generated_lib)
 	cargo build $(release_flag)
 
 $(swift_core_framework): $(target) $(swift_flatbuffer_models)
 # Ensure correct OS is used
 ifeq ($(macos),)
-	@$(echo) "xcframework can only be built on macOS"
+	@$(os_echo) "xcframework can only be built on macOS"
 	exit 1
 endif
 
@@ -94,7 +94,7 @@ endif
 	# Generated module map and C header
 	cargo install cbindgen
 	cbindgen --config cbindgen.toml -o $(export_dir_ios)/headers/polypod-core.h
-	@$(echo) "module PolyPodCore { header \"polypod-core.h\" export * }" >> $(export_dir_ios)/headers/module.modulemap
+	@$(os_echo) "module PolyPodCore { header \"polypod-core.h\" export * }" >> $(export_dir_ios)/headers/module.modulemap
 
 	# Package xcframework
 	rm -rf $(swift_core_framework)
@@ -111,8 +111,11 @@ define build_for_architecture
 		--lib --target $(1)
 endef
 
+.PHONY: rust
+rust: $(target)
+
 .PHONY: all
-all: $(if $(macos),$(swift_core_framework),target)
+all: $(if $(macos),$(swift_core_framework),$(target))
 
 .PHONY: clean
 clean:
