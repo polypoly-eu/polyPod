@@ -180,8 +180,14 @@ export class PodSpec {
                             filenames.filter((name) => {
                                 return name === "multipleZips2/file2.rtf";
                             }).length > 0;
-                        assert.isTrue(containsFile1, "Does not contain file1");
-                        assert.isTrue(containsFile2, "Does not contain file1");
+                        assert.isTrue(
+                            containsFile1,
+                            `Does not contain file1. Contents are: ${JSON.stringify(contents)}`
+                        );
+                        assert.isTrue(
+                            containsFile2,
+                            `Does not contain file2. Contents are: ${JSON.stringify(contents)}`
+                        );
                     });
                 });
 
