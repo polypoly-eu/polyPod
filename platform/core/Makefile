@@ -30,7 +30,9 @@ swift_flatbuffer_models = $(patsubst $(flatbuffer_models_dir)/%, $(swift_flatbuf
 
 ifeq ($(OS),Windows_NT)
 	flatc_download_url = $(flatbuffers_releases)/Windows.flatc.binary.zip
+	flatc := $(flatc_dir)/flatc.exe
 else
+	flatc := $(flatc_dir)/flatc
 	ifeq ($(shell uname -s),Darwin)
 		flatc_download_url = $(flatbuffers_releases)/Mac.flatc.binary.zip
 		macos := true
@@ -55,10 +57,10 @@ $(swift_flatbuffers_dir)/%.swift: $(flatbuffer_models_dir)/%.fbs
 	./$(flatc) --swift -o $(swift_flatbuffers_dir) --filename-suffix "" $^
 
 $(rust_flatbuffers_generated_lib): $(rust_flatbuffer_models)
-	$(shell echo $(foreach model, $^, \
+	$(shell echo -e $(foreach model, $^, \
 		"pub mod $(basename $(notdir $(model)));\n") > $(rust_flatbuffers_generated_lib)) 
 
-$(target): $(flatc) $(flatbuffers) $(rust_flatbuffers_generated_lib)
+target: $(flatc) $(flatbuffers) $(rust_flatbuffers_generated_lib)
 	cargo build $(release_flag)
 
 $(swift_core_framework): $(target) $(swift_flatbuffer_models)
