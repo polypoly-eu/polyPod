@@ -1,8 +1,9 @@
-export function groupAnalysisByKey(anlaysisEntries, keyGroup) {
+export function groupAnalysisByKey(analysisEntries, keyGroup) {
     const groupedAnalysisByKey = {};
-    anlaysisEntries.forEach((entry) => {
+    analysisEntries.forEach((entry) => {
         if (!groupedAnalysisByKey[entry[keyGroup]])
             groupedAnalysisByKey[entry[keyGroup]] = 1;
         else groupedAnalysisByKey[entry[keyGroup]] += 1;
     });
+    return groupedAnalysisByKey;
 }
