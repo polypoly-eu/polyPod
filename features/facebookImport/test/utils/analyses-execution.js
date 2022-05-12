@@ -8,7 +8,7 @@ import {
     MinistoriesStatusReport,
 } from "@polypoly-eu/poly-analysis";
 import FacebookAccount from "../../src/model/entities/facebook-account";
-import { subAnalyses } from "../../src/model/analysis";
+import { specificAnalyses } from "../../src/model/analysis";
 import { ministories } from "../../src/views/ministories/ministories";
 import { reports } from "../../src/views/ministories/reports";
 
@@ -51,7 +51,7 @@ export async function runAnalysesForZip(zipFile) {
         zipData: zipFile.enrichedFileData(),
         zipFile,
         dataAccount: facebookAccount,
-        specificAnalyses: subAnalyses,
+        specificAnalyses,
         pod: new MockerPod(),
     });
     return facebookAccount;
