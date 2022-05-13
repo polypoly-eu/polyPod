@@ -4,21 +4,6 @@ build_type := $(if $(filter $(MODE), release),release,debug)
 cargo_build_flag := $(if $(filter $(build_type), release), --release)
 target := target/$(build_type)
 
-# iOS export
-export_dir_ios := export/ios
-swift_core := PolyPodCoreSwift
-swift_core_framework := $(swift_core)/PolyPodCore.xcframework
-ios_archs := aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios
-ios_targets := iPhone simulator
-
-android_version := 24
-# Rust still uses old-ish r22 version of NDK.
-# For reference https://github.com/rust-lang/rust/pull/85806
-ndk_version := r22b
-# More libraries are being built, but instead of duplicating it with
-# build_for_android.sh, the latter should be merged into this Makefile.
-android_core_libraries := target/armv7-linux-androideabi
-
 # Flatbuffer tools
 flatbuffers_version := v2.0.0
 flatbuffers_repo := https://github.com/google/flatbuffers
@@ -32,14 +17,44 @@ flatc_archive := $(flatc_dir)/flatc.zip
 flatbuffer_models_dir := flatbuffers_shared/flatbuffer_models
 flatbuffer_models := $(shell find $(flatbuffer_models_dir) -name '*.fbs')
 rust_flatbuffers_dir := src/flatbuffers_generated
-rust_flatbuffer_models = $(patsubst $(flatbuffer_models_dir)/%, $(rust_flatbuffers_dir)/%, $(flatbuffer_models:.fbs=.rs))
+rust_flatbuffer_models := $(patsubst $(flatbuffer_models_dir)/%, $(rust_flatbuffers_dir)/%, $(flatbuffer_models:.fbs=.rs))
 rust_flatbuffers_generated_lib := $(rust_flatbuffers_dir)/mod.rs
 swift_flatbuffers_dir := PolyPodCoreSwift/Sources/PolyPodCoreSwift/FlatbuffersGenerated
-swift_flatbuffer_models = $(patsubst $(flatbuffer_models_dir)/%, $(swift_flatbuffers_dir)/%, $(flatbuffer_models:.fbs=.swift))
+swift_flatbuffer_models := $(patsubst $(flatbuffer_models_dir)/%, $(swift_flatbuffers_dir)/%, $(flatbuffer_models:.fbs=.swift))
+kotlin_flatbuffer_models_dir := PolyPodCoreAndroid/core/src/main/java/coop/polypoly/core/flatbuffersGenerated
+kotlin_flatbuffer_models := $(patsubst $(flatbuffer_models_dir)/%, $(kotlin_flatbuffer_models_dir)/%, $(flatbuffer_models:.fbs=.kt))
+
+# iOS export
+export_dir_ios := export/ios
+swift_core := PolyPodCoreSwift
+swift_core_framework := $(swift_core)/PolyPodCore.xcframework
+ios_archs := aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios
+ios_targets := iPhone simulator
+
+# Android export
+android_version := 24
+# Rust still uses old-ish r22 version of NDK.
+# For reference https://github.com/rust-lang/rust/pull/85806
+ndk_version := r22b
+google_repo := https://dl.google.com/android/repository
+ndk_lib := android-ndk-$(ndk_version)
+export_dir_android := export/android
+ndk=$(export_dir_android)/NDK_$(ndk_version)
+ndk_archive = $(export_dir_android)/NDK.zip
+java_flatbuffers_package := com/google/flatbuffers
+java_flatbuffers_lib_source_path := $(flatbuffers)/java/$(java_flatbuffers_package)
+android_flatbuffers_lib := PolyPodCoreAndroid/core/src/main/java/$(java_flatbuffers_package)
+android_triples := aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android
+android_binaries := $(patsubst %, target/%, $(android_triples))
+android_architectures := arm64-v8a armeabi-v7a x86_64 x86
+
+export NDK_HOME=$(ndk)/$(ndk_lib)
 
 ifeq ($(OS),Windows_NT)
 	flatc_download_url = $(flatbuffers_releases)/Windows.flatc.binary.zip
 	flatc := $(flatc_dir)/flatc.exe
+
+	ndk_download_url = $(google_repo)/$(ndk_lib)-windows-x86_64.zip
 	# Need on Windows, to allow interpreting escaping characters
 	os_echo := echo -e
 else
@@ -47,13 +62,37 @@ else
 	os_echo := echo
 	ifeq ($(shell uname -s),Darwin)
 		flatc_download_url = $(flatbuffers_releases)/Mac.flatc.binary.zip
+		ndk_download_url = $(google_repo)/$(ndk_lib)-darwin-x86_64.zip
 		macos := true
 	endif
 	ifeq ($(shell uname -s),Linux)
 		flatc_download_url = $(flatbuffers_releases)/Linux.flatc.binary.clang++-9.zip
+		ndk_download_url = $(google_repo)/$(ndk_lib)-linux-x86_64.zip
 	endif
 endif
 
+# Java libraries
+$(ndk):
+	mkdir -p $(ndk)
+	curl -L $(ndk_download_url) -o $(ndk_archive)
+	unzip -d $(ndk) $(ndk_archive)
+	rm $(ndk_archive)
+
+$(android_flatbuffers_lib): $(flatbuffers)
+	mkdir -p $(android_flatbuffers_lib)
+	cp -a $(java_flatbuffers_lib_source_path)/. $(android_flatbuffers_lib)
+
+$(android_binaries): $(target) $(ndk) $(kotlin_flatbuffer_models) $(android_flatbuffers_lib)
+	#cargo install cargo-ndk
+	#rustup target add $(android_triples)
+	
+	$(foreach tripple, $(android_triples), \
+		cargo ndk --platform $(android_version) --target $(tripple) build $(cargo_build_flag); \
+	)
+
+android: $(android_binaries)
+
+# Flatbuffers
 $(flatbuffers):
 	git clone --branch $(flatbuffers_version) $(flatbuffers_repo) $(flatbuffers)
 
@@ -70,14 +109,20 @@ $(rust_flatbuffers_dir)/%.rs: $(flatbuffer_models_dir)/%.fbs
 $(swift_flatbuffers_dir)/%.swift: $(flatbuffer_models_dir)/%.fbs
 	./$(flatc) --swift -o $(swift_flatbuffers_dir) --filename-suffix "" $^
 
+$(kotlin_flatbuffer_models_dir)/%.kt: $(flatbuffer_models_dir)/%.fbs
+	./$(flatc) --kotlin -o $(kotlin_flatbuffer_models_dir) --filename-suffix "" $^
+
 $(rust_flatbuffers_generated_lib): $(rust_flatbuffer_models)
 	$(os_echo) $(foreach model, $^, \
 		"pub mod $(basename $(notdir $(model))); \n") > $(rust_flatbuffers_generated_lib)
 
+# Rust core build
 $(target): $(flatc) $(flatbuffers) $(rust_flatbuffers_generated_lib)
 	# Check rustup is installed
 	if ! hash rustup &> /dev/null; then echo "Rust not installed, check https://www.rust-lang.org/tools/install to install rust on your system"; exit 1; fi
 	cargo build $(cargo_build_flag)
+
+# Swift framework
 
 $(swift_core_framework): $(target) $(swift_flatbuffer_models)
 # Ensure correct OS is used
@@ -135,3 +180,4 @@ clean:
 	$(RM) -r export
 	$(RM) -r $(swift_core_framework)
 	$(RM) -r $(swift_core)/{.swiftpm,FlatbuffersGenerated}
+	$(RM) -r $(android_flatbuffers_lib_copy_path)
