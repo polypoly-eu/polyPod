@@ -100,8 +100,10 @@ $(rust_flatbuffers_generated_lib): $(rust_flatbuffer_models)
 
 # Rust core build
 $(target): $(flatc) $(flatbuffers) $(rust_flatbuffers_generated_lib)
-	# Check rustup is installed
-	if ! hash rustup &> /dev/null; then echo "Rust not installed, check https://www.rust-lang.org/tools/install to install rust on your system"; exit 1; fi
+# Check rustup is installed
+ifeq (,$(shell which rustup))
+	$(error "Rust not installed, check https://www.rust-lang.org/tools/install to install rust on your system")
+endif
 	cargo build $(cargo_build_flag)
 
 # Swift framework

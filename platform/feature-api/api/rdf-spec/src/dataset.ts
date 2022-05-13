@@ -1,6 +1,9 @@
 /**
  * Executable specification for datasets. See [[DatasetSpec]] for details.
  *
+ * Portions based on https://github.com/rdfjs-base/dataset, licensed under the MIT license, author: Thomas Bergwinkl
+ *
+ *
  * @packageDocumentation
  */
 
