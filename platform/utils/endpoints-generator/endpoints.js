@@ -14,6 +14,10 @@ export default {
         url: polyPediaReportUrl || fallbackURL + "/google",
         auth: polyPediaReportAuth || fallbackAuth,
     },
+    polyApiErrorReport: {
+        url: process.env.POLYPOD_ERROR_REPORT_URL,
+        auth: process.env.POLYPOD_ERROR_REPORT_AUTHORIZATION || "",
+    },
     demoTest: {
         url: "",
         allowInsecure: true,
