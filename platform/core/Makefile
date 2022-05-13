@@ -3,7 +3,6 @@
 build_type := $(if $(filter $(MODE), release),release,debug)
 cargo_build_flag := $(if $(filter $(build_type), release), --release)
 target := target/$(build_type)
-
 # iOS export
 export_dir_ios := export/ios
 swift_core := PolyPodCoreSwift
@@ -67,8 +66,8 @@ $(rust_flatbuffers_generated_lib): $(rust_flatbuffer_models)
 		"pub mod $(basename $(notdir $(model))); \n") > $(rust_flatbuffers_generated_lib)
 
 $(target): $(flatc) $(flatbuffers) $(rust_flatbuffers_generated_lib)
-	# Check rustup is installed
-	if ! hash rustup &> /dev/null; then echo "Rust not installed, check https://www.rust-lang.org/tools/install to install rust on your system"; exit 1; fi
+        # Check rustup is installed
+	if [ -z "$(which rustup)"]; then echo "Rust not installed, check https://www.rust-lang.org/tools/install to install rust on your system"; exit 1; fi
 	cargo build $(cargo_build_flag)
 
 $(swift_core_framework): $(target) $(swift_flatbuffer_models)
