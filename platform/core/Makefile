@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := all
 
 build_type := $(if $(filter $(MODE), release),release,debug)
-release_flag := $(if $(filter $(build_type), release), --release)
+cargo_build_flag := $(if $(filter $(build_type), release), --release)
 target := target/$(build_type)
 
 # iOS export
@@ -18,6 +18,7 @@ flatbuffers_releases := $(flatbuffers_repo)/releases/download/$(flatbuffers_vers
 flatbuffers := flatbuffers_shared/flatbuffers_$(flatbuffers_version)
 flatc_dir := flatbuffers_shared/flatc_$(flatbuffers_version)
 flatc := $(flatc_dir)/flatc
+flatc_archive := $(flatc_dir)/flatc.zip
 
 # Flatbuffer models
 flatbuffer_models_dir := flatbuffers_shared/flatbuffer_models
@@ -50,7 +51,9 @@ $(flatbuffers):
 
 $(flatc):
 	mkdir -p $(flatc_dir)
-	curl -L $(flatc_download_url) -o $(flatc_dir)/flatc.zip && unzip -d $(flatc_dir) $(flatc_dir)/flatc.zip && rm $(flatc_dir)/flatc.zip
+	curl -L $(flatc_download_url) -o $(flatc_archive)
+	unzip -d $(flatc_dir) $(flatc_archive)
+	rm $(flatc_archive)
 	chmod +x $(flatc)
 
 $(rust_flatbuffers_dir)/%.rs: $(flatbuffer_models_dir)/%.fbs
@@ -60,11 +63,13 @@ $(swift_flatbuffers_dir)/%.swift: $(flatbuffer_models_dir)/%.fbs
 	./$(flatc) --swift -o $(swift_flatbuffers_dir) --filename-suffix "" $^
 
 $(rust_flatbuffers_generated_lib): $(rust_flatbuffer_models)
-	$(shell $(os_echo) $(foreach model, $^, \
-		"pub mod $(basename $(notdir $(model))); \n") > $(rust_flatbuffers_generated_lib)) 
+	$(os_echo) $(foreach model, $^, \
+		"pub mod $(basename $(notdir $(model))); \n") > $(rust_flatbuffers_generated_lib)
 
 $(target): $(flatc) $(flatbuffers) $(rust_flatbuffers_generated_lib)
-	cargo build $(release_flag)
+	# Check rustup is installed
+	if ! hash rustup &> /dev/null; then echo "Rust not installed, check https://www.rust-lang.org/tools/install to install rust on your system"; exit 1; fi
+	cargo build $(cargo_build_flag)
 
 $(swift_core_framework): $(target) $(swift_flatbuffer_models)
 # Ensure correct OS is used
@@ -77,9 +82,6 @@ endif
 	rm -rf $(export_dir_ios)
 	mkdir -p $(export_dir_ios)/iPhone
 	mkdir -p $(export_dir_ios)/simulator
-
-	# Check rustup is installed
-	if ! hash rustup &> /dev/null; then echo "Rust not installed, check https://www.rust-lang.org/tools/install to install rust on your system"; exit 1; fi
 
 	# Build library for all architectures
 	$(foreach arch, $(ios_archs),  $(call build_for_architecture,$(arch));)
@@ -107,12 +109,12 @@ endif
 define build_for_architecture
 	rustup target add $(1)
 	cargo build \
-		$(release_flag) \
+		$(cargo_build_flag) \
 		--lib --target $(1)
 endef
 
-.PHONY: rust
-rust: $(target)
+.PHONY: rust-core
+rust-core: $(target)
 
 .PHONY: all
 all: $(if $(macos),$(swift_core_framework),$(target))
