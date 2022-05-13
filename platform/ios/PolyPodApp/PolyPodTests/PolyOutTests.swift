@@ -165,7 +165,7 @@ class PolyOutTests: XCTestCase {
                 expectation.fulfill()
             }
         }
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 5.0)
     }
     
     func testImportMultipleArchives() {
@@ -194,6 +194,6 @@ class PolyOutTests: XCTestCase {
                 }
             }
         }
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 5.0)
     }
 }
