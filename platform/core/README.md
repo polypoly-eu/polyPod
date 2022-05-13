@@ -9,33 +9,13 @@ Logic shared across polyPod platforms - ios, android, wasm.
 
 ## Building
 
-On most systems, you can simply run `make`, and that will handle everything.
+It is required to run `make` in a bash terminal which contains the necessary dependencies - curl, make, unzip. MacOS and Linux systems terminal should already have everything needed. On Windows, a terminal like [GitBash](https://gitforwindows.org) is needed.
 
 If you wish to only build the core binaries for your current operating system,
 run `make core`. If you only wish to build the Android binaries and bindings,
 run `make android_bindings`. Similarly, to only build the iOS binaries and
 bindings, run `make ios_bindings`.
 
-### Building manually:
-
-If you can't use `make` for some reason, you can build the core (but not the
-Swift bindings), as follows:
-
-- Set up flatbuffers:
-
-        ./flatbuffers_shared/setup_flatbuffers.sh
-
-- Generate flatbuffers:
-
-        ./flatbuffers_shared/generate_flatbuffers.sh
-
-- Build the project:
-
-        cargo build
-
-- Build the Android bindings:
-
-        ./build_for_android.sh
 
 ## Testing
 

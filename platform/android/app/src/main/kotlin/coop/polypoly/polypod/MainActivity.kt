@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             )
             throw ex
         }
+
         Authentication.authenticate(this) { success ->
             if (success) {
                 FeatureStorage().installBundledFeatures(this)

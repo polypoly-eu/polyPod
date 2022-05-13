@@ -10,6 +10,8 @@ public enum AppStoreConnectError: Error {
     case appNotFound
     case provisioningProfileNotFound
     case provisioningProfileContentIsMissing
+    case betaAppReviewStateIsMissing
+    case betaAppReviewRejected
 }
 
 // A facade for AppStoreConnect_Swift_SDK.APIProvider that manages multiple requests

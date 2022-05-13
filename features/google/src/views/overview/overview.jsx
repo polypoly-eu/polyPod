@@ -1,6 +1,15 @@
-import React, { useContext } from "react";
-import { PolyImportContext } from "@polypoly-eu/poly-look";
+import React, { useContext, useEffect } from "react";
+import {
+    LoadingOverlay,
+    PolyButton,
+    PolyImportContext,
+    RoutingWrapper,
+    Screen,
+} from "@polypoly-eu/poly-look";
 import { useHistory } from "react-router-dom";
+import i18n from "../../i18n";
+import { analyzeFile } from "@polypoly-eu/poly-analysis";
+import { specificAnalyses } from "../../model/analyses/analyses";
 
 const Overview = () => {
     const { account, handleRemoveFile, files, refreshFiles } =
@@ -13,30 +22,41 @@ const Overview = () => {
         refreshFiles();
         history.push("/import");
     }
+    useEffect(() => {
+        if (!account) return;
+        analyzeFile({
+            zipData: files[0],
+            dataAccount: account,
+            specificAnalyses,
+        });
+    }, [account]);
+
+    if (!account || files === null) {
+        return (
+            <LoadingOverlay
+                loadingGif="./images/loading.gif"
+                message={i18n.t("common:loading")}
+            />
+        );
+    }
+
+    if (!account || files === null) {
+        return (
+            <LoadingOverlay
+                loadingGif="./images/loading.gif"
+                message={i18n.t("common:loading")}
+            />
+        );
+    }
 
     return (
-        <div className="overview">
-            Explore
-            <div>
-                <h1>Activities</h1>
-                {account?.activities.map((activity, i) => (
-                    <div key={i}>{activity.timestamp.toUTCString()}</div>
-                ))}
-            </div>
-            <div>
-                <h1>Place Visits</h1>
-                {account?.placeVisits.map((placeVisit, i) => (
-                    <div key={i}>{placeVisit.timestamp.toUTCString()}</div>
-                ))}
-            </div>
-            <div>
-                <h1>Activity segments</h1>
-                {account?.activitySegments.map((activitySegment, i) => (
-                    <div key={i}>{activitySegment.timestamp.toUTCString()}</div>
-                ))}
-            </div>
-            <button onClick={onRemoveFile}>Remove file</button>
-        </div>
+        <Screen className="overview" layout="poly-standard-layout">
+            {files && files?.[0] && <p>Imported File: {files[0].name}</p>}
+            <PolyButton label="Remove File" onClick={onRemoveFile}></PolyButton>
+            <RoutingWrapper history={history} route="/explore">
+                <PolyButton label="Explore"></PolyButton>
+            </RoutingWrapper>
+        </Screen>
     );
 };
 

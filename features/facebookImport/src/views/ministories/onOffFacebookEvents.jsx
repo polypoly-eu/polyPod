@@ -11,7 +11,7 @@ import Story from "./story.jsx";
 class OnOffFacebookEventsMinistory extends Story {
     constructor(props) {
         super(props);
-        this._neededAnalyses = [
+        this.neededAnalyses = [
             analysisKeys.companiesCount,
             analysisKeys.companiesWithAdsCount,
             analysisKeys.onOffEvents,

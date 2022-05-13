@@ -66,6 +66,10 @@ class Pkg {
         await npmInstall(this.name);
     }
 
+    async offlineInstall() {
+        await npmInstall(this.name, true);
+    }
+
     async build() {
         await this.npmRun("build");
     }

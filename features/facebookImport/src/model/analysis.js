@@ -1,4 +1,3 @@
-import DataStructureBubblesAnalysis from "./analyses/ministories/data-structure-bubbles-analysis.js";
 import DataGroupsAnalysis from "./analyses/ministories/data-groups-analysis.js";
 import ConnectedAdvertisersAnalysis from "./analyses/ministories/connected-advertisers-analysis.js";
 import InteractedWithAdvertisersAnalysis from "./analyses/ministories/interacted-advertisers-analysis.js";
@@ -19,7 +18,6 @@ import MessageThreadsAnalysis from "./analyses/ministories/message-threads-analy
 import OffFacebookEventsTypesAnalysis from "./analyses/ministories/off-facebook-events-types-analysis.js";
 import DataChartsAnalysis from "./analyses/ministories/data-points-charts-analysis.js";
 import OffFacebookEventsTypesChartAnalysis from "./analyses/ministories/off-facebook-events-types-charts-analysis.js";
-import DataImportingStatusAnalysis from "./analyses/report/importing-status-analysis.js";
 import JsonFilesBubblesAnalysis from "./analyses/ministories/json-files-bubbles.js";
 import ImportedJsonFilesAnalysis from "./analyses/ministories/json-files-imported-analysis.js";
 import ExportTitleAnalysis from "./analyses/ministories/export-title-analysis.js";
@@ -38,8 +36,7 @@ import AdViewsAnalysis from "./analyses/ministories/ad-views-analysis.js";
 import OnOffFacebookAdvertisersAnalysis from "./analyses/ministories/on-off-facebook-advertisers-analysis.js";
 import PostReactionsTypesAnalysis from "./analyses/ministories/post-reactions-types-analysis.js";
 
-export const subAnalyses = [
-    DataStructureBubblesAnalysis,
+export const specificAnalyses = [
     ActivitiesAnalysis,
     PostReactionsTypesAnalysis,
     MessagesAnalysis,
@@ -71,7 +68,6 @@ export const subAnalyses = [
     OnOffFacebookAdvertisersAnalysis,
 
     ReportMetadataAnalysis,
-    DataImportingStatusAnalysis,
     UnknownTopLevelFoldersAnalysis,
     MissingCommonJSONFilesAnalysis,
     MissingKnownJSONFilesAnalysis,
@@ -115,4 +111,4 @@ export const subAnalyses = [
     ].includes(analysis);
 });
 
-export const NUMBER_OF_ANALYSES = subAnalyses.length;
+export const NUMBER_OF_ANALYSES = specificAnalyses.length;
