@@ -46,7 +46,10 @@ java_flatbuffers_lib_source_path := $(flatbuffers)/java/$(java_flatbuffers_packa
 android_flatbuffers_lib := PolyPodCoreAndroid/core/src/main/java/$(java_flatbuffers_package)
 android_triples := aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android
 android_binaries := $(patsubst %, target/%, $(android_triples))
+android_triples_index := $(shell for x in {1..$(words $(android_triples))}; do echo $$x; done)
 android_architectures := arm64-v8a armeabi-v7a x86_64 x86
+jni_libs_copy_path := ./PolyPodCoreAndroid/core/src/main/jniLibs
+android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%, $(android_architectures))
 
 export NDK_HOME=$(ndk)/$(ndk_lib)
 
@@ -70,27 +73,6 @@ else
 		ndk_download_url = $(google_repo)/$(ndk_lib)-linux-x86_64.zip
 	endif
 endif
-
-# Java libraries
-$(ndk):
-	mkdir -p $(ndk)
-	curl -L $(ndk_download_url) -o $(ndk_archive)
-	unzip -d $(ndk) $(ndk_archive)
-	rm $(ndk_archive)
-
-$(android_flatbuffers_lib): $(flatbuffers)
-	mkdir -p $(android_flatbuffers_lib)
-	cp -a $(java_flatbuffers_lib_source_path)/. $(android_flatbuffers_lib)
-
-$(android_binaries): $(target) $(ndk) $(kotlin_flatbuffer_models) $(android_flatbuffers_lib)
-	#cargo install cargo-ndk
-	#rustup target add $(android_triples)
-	
-	$(foreach tripple, $(android_triples), \
-		cargo ndk --platform $(android_version) --target $(tripple) build $(cargo_build_flag); \
-	)
-
-android: $(android_binaries)
 
 # Flatbuffers
 $(flatbuffers):
@@ -123,7 +105,6 @@ $(target): $(flatc) $(flatbuffers) $(rust_flatbuffers_generated_lib)
 	cargo build $(cargo_build_flag)
 
 # Swift framework
-
 $(swift_core_framework): $(target) $(swift_flatbuffer_models)
 # Ensure correct OS is used
 ifeq ($(macos),)
@@ -166,11 +147,42 @@ define build_for_architecture
 		--lib --target $(1)
 endef
 
+# Java libraries
+
+$(ndk):
+	mkdir -p $(ndk)
+	curl -L $(ndk_download_url) -o $(ndk_archive)
+	unzip -d $(ndk) $(ndk_archive)
+	rm $(ndk_archive)
+
+$(android_flatbuffers_lib): $(flatbuffers)
+	mkdir -p $(android_flatbuffers_lib)
+	cp -a $(java_flatbuffers_lib_source_path)/. $(android_flatbuffers_lib)
+
+$(android_binaries): $(target) $(ndk) $(kotlin_flatbuffer_models) $(android_flatbuffers_lib)
+	cargo install cargo-ndk
+	rustup target add $(android_triples)
+	
+	$(foreach tripple, $(android_triples), \
+		cargo ndk --platform $(android_version) --target $(tripple) build $(cargo_build_flag); \
+	)
+
+$(android_core_libraries): $(android_binaries)
+	mkdir -p $(jni_libs_copy_path)
+	$(foreach index, $(android_triples_index), \
+		$(shell mkdir -p $(jni_libs_copy_path)/$(word $(index),$(android_architectures)); \
+		        cp target/$(word $(index),$(android_triples))/$(build_type)/libpolypod_core.so \
+	  			   $(jni_libs_copy_path)/$(word $(index),$(android_architectures))/libpolypod_core.so;) \
+	 )
+
 .PHONY: rust-core
 rust-core: $(target)
 
+.PHONY: android_bindings
+android_bindings: $(android_core_libraries)
+
 .PHONY: all
-all: $(if $(macos),$(swift_core_framework),$(target))
+all: $(android_core_libraries) $(if $(macos),$(swift_core_framework),$(target))
 
 .PHONY: clean
 clean:
@@ -181,3 +193,4 @@ clean:
 	$(RM) -r $(swift_core_framework)
 	$(RM) -r $(swift_core)/{.swiftpm,FlatbuffersGenerated}
 	$(RM) -r $(android_flatbuffers_lib_copy_path)
+	$(RM) -r $(android_core_libraries)
