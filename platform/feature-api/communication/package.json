@@ -46,7 +46,7 @@
     "fast-check": "^2.11.0",
     "memfs": "^3.4.1",
     "n3": "^1.7.0",
-    "node-fetch": "~2",
+    "node-fetch": "^2.6.7",
     "ts-mocha": "^9.0.2"
   },
   "private": true
