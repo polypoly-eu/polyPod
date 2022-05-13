@@ -21,7 +21,7 @@ jobs:
 
       - name: Build core
         working-directory: ./platform/core
-        run: make rust
+        run: make rust-core
 
       - name: Lint -- Run cargo fmt
         working-directory: ./platform/core
