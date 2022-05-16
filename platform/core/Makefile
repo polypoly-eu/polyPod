@@ -44,7 +44,7 @@ export NDK_HOME=$(ndk)/$(ndk_lib)
 java_flatbuffers_package := com/google/flatbuffers
 java_flatbuffers_lib_source := $(flatbuffers)/java/$(java_flatbuffers_package)
 android_flatbuffers_lib := $(android_core)/java/$(java_flatbuffers_package)
-kotlin_flatbuffer_models_dir := $(android_core)/java/coop/polypoly/core/flatbuffersGenerated
+kotlin_flatbuffer_models_dir := $(android_core)/java/coop/polypoly/core/FlatbuffersGenerated
 kotlin_flatbuffer_models := $(patsubst $(flatbuffer_models_dir)/%, $(kotlin_flatbuffer_models_dir)/%, $(flatbuffer_models:.fbs=.kt))
 android_triples := aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android
 android_binaries := $(patsubst %, target/%, $(android_triples))
@@ -181,8 +181,8 @@ endef
 
 # ============ Main targets ============ #
 
-.PHONY: rust-core
-rust-core: $(target)
+.PHONY: rust_core
+rust_core: $(target)
 
 .PHONY: android_bindings
 android_bindings: $(android_core_libraries)
