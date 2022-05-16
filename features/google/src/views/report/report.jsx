@@ -1,14 +1,14 @@
+import { PolyButton, RoutingWrapper } from "@polypoly-eu/poly-look";
 import React, { useContext, useState } from "react";
-import RouteButton from "../../components/buttons/routeButton.jsx";
+import { useHistory } from "react-router-dom";
 import { GoogleContext } from "../../context/google-context.jsx";
-
-import i18n from "../../i18n.js";
 
 import "./report.css";
 
 const ReportView = ({ reportStories }) => {
     const { setReportResult, handleBack } = useContext(GoogleContext);
     const [loading, setLoading] = useState(false);
+    const history = useHistory();
 
     const handleSendReport = async () => {
         setLoading(true);
@@ -29,18 +29,24 @@ const ReportView = ({ reportStories }) => {
     return (
         <div className="report-view">
             <h1 className="report-view-title">
-                {i18n.t("report:intro.headline")}
+                {"We are interested in how your data is structured!"}
             </h1>
-            <p>{i18n.t("report:intro.text")}</p>
+            <p>
+                {
+                    "Your data schema may contain data types that we don't know of yet. To shed more and more light on what Facebook knows about all of us, it would be awesome if you could share this schema with us. Doing so will help us make this feature better. The data is sent anonymously and in encrypted form to our servers, meaning none of your personal information is part of the data. You can click 'View data report details' below to see exactly what is being sent."
+                }
+            </p>
             <div className={"button-area" + (loading ? " disabled" : "")}>
-                <RouteButton className="view-details" route="/report/details">
-                    {i18n.t("report:viewDetails")}
-                </RouteButton>
+                <RoutingWrapper history={history} route="/report/details">
+                    <PolyButton className="view-details">
+                        {"View data report details"}
+                    </PolyButton>
+                </RoutingWrapper>
                 <button className="send-later" onClick={handleBack}>
-                    {i18n.t("report:sendLater")}
+                    {"Do not send"}
                 </button>
                 <button className="send" onClick={handleSendReport}>
-                    {i18n.t("report:send")}
+                    {"Send and help"}
                 </button>
             </div>
         </div>
