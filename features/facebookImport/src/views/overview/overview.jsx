@@ -12,7 +12,7 @@ import i18n from "../../i18n.js";
 import { useHistory } from "react-router";
 import { formatTime } from "../../utils/formatTime.js";
 import { analyzeFile } from "@polypoly-eu/poly-analysis";
-import { subAnalyses } from "../../model/analysis";
+import { specificAnalyses } from "../../model/analysis";
 
 import "./overview.css";
 
@@ -27,7 +27,7 @@ const Overview = () => {
         analyzeFile({
             zipData: files[0],
             dataAccount: account,
-            specificAnalyses: subAnalyses,
+            specificAnalyses,
         });
     }, [account]);
 

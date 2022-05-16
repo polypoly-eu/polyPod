@@ -7,6 +7,7 @@ class DataStructureMinistory extends SingleDataStory {
     constructor(props) {
         super(props, "bubblesData");
     }
+
     get title() {
         return "DataStructure Ministory";
     }

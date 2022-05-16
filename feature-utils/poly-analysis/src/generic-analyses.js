@@ -1,9 +1,9 @@
 import DataStructureBubblesAnalysis from "./analysis/data-structure-bubbles-analysis";
-import DataImportingStatusReport from "./report/data-importing-status-report";
+import DataImportingStatusAnalysis from "./report/data-importing-status-report";
 
 const genericAnalyses = [
     DataStructureBubblesAnalysis,
-    DataImportingStatusReport,
+    DataImportingStatusAnalysis,
 ];
 
 export default genericAnalyses;
