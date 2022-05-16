@@ -24,7 +24,14 @@ const bubblewrapStrict = Bubblewrap.create(classes, true);
 const bubblewrapRaw = Bubblewrap.create();
 
 async function loadDataset(): Promise<Quad[]> {
-    const path = join(__dirname, "..", "..", "resources", "dataset.nt");
+    const path = join(
+        __dirname,
+        "..",
+        "..",
+        "bubblewrap",
+        "resources",
+        "dataset.nt"
+    );
     const content = await fs.readFile(path, { encoding: "utf-8" });
     const parser = new Parser();
     return parser.parse(content);
