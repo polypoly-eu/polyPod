@@ -94,7 +94,7 @@
     margin-bottom: 26px;
 }
 
-.import-view .explanation-expandable .translucent-sides {
+.import-view .explanation-expandable .transparent-sides {
     mask-image: linear-gradient(
         to top,
         transparent,
