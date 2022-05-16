@@ -23,7 +23,7 @@ const UnrecognizedCard = () => {
             </div>
             <p>
                 {
-                    "If you send us an anonymised report about the structure of your Facebook data, it would help us improve the Google Data Importer so that it can show you even more insights."
+                    "If you send us an anonymised report about the structure of your Google data, it would help us improve the Google Data Importer so that it can show you even more insights."
                 }
             </p>
             <RoutingWrapper route="/report" history={history}>

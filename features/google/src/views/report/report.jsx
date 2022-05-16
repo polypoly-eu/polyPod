@@ -33,7 +33,7 @@ const ReportView = ({ reportStories }) => {
             </h1>
             <p>
                 {
-                    "Your data schema may contain data types that we don't know of yet. To shed more and more light on what Facebook knows about all of us, it would be awesome if you could share this schema with us. Doing so will help us make this feature better. The data is sent anonymously and in encrypted form to our servers, meaning none of your personal information is part of the data. You can click 'View data report details' below to see exactly what is being sent."
+                    "Your data schema may contain data types that we don't know of yet. To shed more and more light on what Google knows about all of us, it would be awesome if you could share this schema with us. Doing so will help us make this feature better. The data is sent anonymously and in encrypted form to our servers, meaning none of your personal information is part of the data. You can click 'View data report details' below to see exactly what is being sent."
                 }
             </p>
             <div className={"button-area" + (loading ? " disabled" : "")}>
