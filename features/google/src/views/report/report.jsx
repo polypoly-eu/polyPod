@@ -1,4 +1,4 @@
-import { PolyButton, RoutingWrapper } from "@polypoly-eu/poly-look";
+import { RoutingWrapper } from "@polypoly-eu/poly-look";
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { GoogleContext } from "../../context/google-context.jsx";
@@ -27,7 +27,7 @@ const ReportView = ({ reportStories }) => {
     };
 
     return (
-        <div className="report-view">
+        <div className="report-view poly-theme-light">
             <h1 className="report-view-title">
                 {"We are interested in how your data is structured!"}
             </h1>
@@ -38,9 +38,9 @@ const ReportView = ({ reportStories }) => {
             </p>
             <div className={"button-area" + (loading ? " disabled" : "")}>
                 <RoutingWrapper history={history} route="/report/details">
-                    <PolyButton className="view-details">
+                    <div className="view-details">
                         {"View data report details"}
-                    </PolyButton>
+                    </div>
                 </RoutingWrapper>
                 <button className="send-later" onClick={handleBack}>
                     {"Do not send"}

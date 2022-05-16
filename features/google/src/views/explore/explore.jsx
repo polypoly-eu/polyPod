@@ -17,7 +17,7 @@ const UnrecognizedCard = () => {
     const history = useHistory();
 
     return (
-        <div className="analysis-card unrecognized-analysis-card">
+        <div className="analysis-card unrecognized-analysis-card poly-theme-light">
             <div className="unrecognized-analysis-title">
                 <h1>{"We need your help!"}</h1>
             </div>
@@ -27,9 +27,7 @@ const UnrecognizedCard = () => {
                 }
             </p>
             <RoutingWrapper route="/report" history={history}>
-                <PolyButton className="report-button">
-                    {"Learn more"}
-                </PolyButton>
+                <PolyButton label="Learn more" className="report-button" />
             </RoutingWrapper>
         </div>
     );

@@ -7,8 +7,6 @@
     margin: 0 auto 12px auto;
     padding: 12px 20px 20px 20px;
     border-radius: 8px;
-    background-color: var(--background-light);
-    color: var(--text-dark);
 }
 
 .report-details .report-card table {

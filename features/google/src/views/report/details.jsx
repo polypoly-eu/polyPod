@@ -35,7 +35,11 @@ const ReportDetails = ({ reportStories }) => {
         );
     }
 
-    return <div className="report-details">{renderReportAnalyses()}</div>;
+    return (
+        <div className="report-details poly-theme-light">
+            {renderReportAnalyses()}
+        </div>
+    );
 };
 
 export default ReportDetails;

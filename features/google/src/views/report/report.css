@@ -1,7 +1,7 @@
 .report-view,
 .report-details {
-    background-color: var(--background-light);
-    color: var(--text-dark);
+    background-color: var(--theme-primary-color);
+    color: var(--theme-secondary-color);
     line-height: var(--line-height);
     letter-spacing: -0.01em;
     height: 100%;
@@ -47,7 +47,7 @@
 
 .report-view .button-area {
     display: block;
-    background-color: var(--background-light);
+    background-color: var(--theme-primary-color);
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 12px 28px 32px 28px;
@@ -67,7 +67,7 @@
 }
 
 .report-view .view-details {
-    color: var(--text-dark);
+    color: var(--theme-secondary-color);
     text-decoration: underline;
 }
 
@@ -83,12 +83,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--background-dark) !important;
+    border: 1px solid var(--theme-secondary-color) !important;
     background: transparent;
-    color: var(--text-dark) !important;
+    color: var(--theme-secondary-color) !important;
 }
 
 .report-view .send {
-    background-color: var(--background-dark);
-    color: var(--text-light);
+    background-color: var(--theme-secondary-color);
+    color: var(--theme-primary-color);
 }
