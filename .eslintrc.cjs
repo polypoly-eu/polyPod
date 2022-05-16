@@ -35,6 +35,7 @@ module.exports = {
         ".eslintrc.*",
         "**/build/*",
         "PolyPodApp/",
+        "flatbuffers_shared/",
     ],
     rules: {
         semi: 2,
