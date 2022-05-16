@@ -21,7 +21,7 @@ class Feature(
     val fileName: String,
     val content: ZipFile,
     private val manifest: FeatureManifest
-): FeatureInterface {
+) : FeatureInterface {
     override val id: String get() = fileName.replace(".zip", "")
     override val name: String get() = manifest.name ?: id
     override val author: String get() = manifest.author ?: ""
