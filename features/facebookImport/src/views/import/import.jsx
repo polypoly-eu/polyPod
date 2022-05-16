@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
-import { PolyImportContext } from "@polypoly-eu/poly-look";
-import ProgressBarComponent from "../../components/progressBar/progressBar.jsx";
+import { PolyImportContext, ProgressBar } from "@polypoly-eu/poly-look";
+// import ProgressBarComponent from "../../components/progressBar/progressBar.jsx";
 import ImportExplanationExpandable from "../../components/importExplanationExpandable/importExplanationExpandable.jsx";
 import i18n from "../../i18n.js";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
@@ -114,7 +114,7 @@ const Import = () => {
 
     return (
         <div className="import-view">
-            <ProgressBarComponent
+            <ProgressBar
                 onUpdateImportStatus={updateImportStatus}
                 importStatus={importStatus}
                 importSections={importSections}

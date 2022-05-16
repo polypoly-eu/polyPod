@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import { Screen } from "@polypoly-eu/poly-look";
+import { Screen, ProgressBar } from "@polypoly-eu/poly-look";
 import ImportExplanationExpandable from "../../components/importExplanationExpandable/importExplanationExpandable.jsx";
-import ProgressBarComponent from "../../components/progressBar/progressBar.jsx";
-// import { GoogleContext } from "../../context/google-context.jsx";
-// import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
 
 import "./import.css";
 
@@ -25,8 +22,11 @@ const ImportView = () => {
     }
 
     return (
-        <Screen className="import" layout="poly-standard-layout">
-            <ProgressBarComponent
+        <Screen
+            className="import-view poly-theme-light"
+            layout="poly-standard-layout"
+        >
+            <ProgressBar
                 onUpdateImportStatus={updateImportStatus}
                 importSections={importSections}
             />

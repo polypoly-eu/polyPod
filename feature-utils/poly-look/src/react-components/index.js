@@ -35,4 +35,5 @@ export {
   LoadingOverlay,
   Screen,
   RoutingWrapper,
+  ProgressBar,
 };
