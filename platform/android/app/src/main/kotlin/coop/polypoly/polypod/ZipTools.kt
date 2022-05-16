@@ -22,15 +22,23 @@ class ZipTools {
                     val filePath = PolyOut.filesPath(context).plus(
                         "/$folder/$fileName"
                     )
+
+                    var file = File(filePath)
+
                     if (entry.isDirectory) {
-                        val dir = File(filePath)
-                        dir.mkdirs()
+                        file.mkdirs()
                     } else {
+                        // create parent directories for files
+                        file.parentFile.mkdirs()
+                    }
+
+                    if (!entry.isDirectory) {
                         getEncryptedFile(context, filePath).openFileOutput()
                             .use {
                                 zis.copyTo(it)
                             }
                     }
+
                     entry = zis.nextEntry
                 }
             }
