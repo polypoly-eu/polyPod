@@ -16,6 +16,7 @@ import {
 import { RoutingWrapper } from "./routing";
 export {
   Chip,
+  InfoBox,
   Tab,
   Tabs,
   FilterChips,

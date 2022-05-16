@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import i18n from "../../i18n.js";
 import RouteButton from "../buttons/routeButton.jsx";
-import infoIcon from "../../static/images/info-circle.svg";
-// import InfoBox from "../infoBox/infoBox.jsx";
 import { ScrollButton, ScrollSmoothly, InfoBox } from "@polypoly-eu/poly-look";
 import "./importExplanationExpandable.css";
 
@@ -83,7 +81,10 @@ const ImportExplanationExpandable = ({
                     className="full-screen"
                 />
                 <p>{i18n.t("import:request.1")}</p>
-                <InfoBox textContent={i18n.t("import:request.info.1")} />
+                <InfoBox
+                    img="./images/info-circle.svg"
+                    textContent={i18n.t("import:request.info.1")}
+                />
                 <div className="separator"></div>
                 <h4>{i18n.t("import:how.it.works")}:</h4>
                 <img src="./images/facebook.svg" alt="facebook" />
