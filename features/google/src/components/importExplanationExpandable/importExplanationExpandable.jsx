@@ -106,19 +106,13 @@ const ImportExplanationExpandable = ({
     const bodyContent = {
         request: (
             <>
-                <img
-                    src="./images/request-illustration.svg"
-                    alt="request-illustration"
-                    className="full-screen"
-                />
                 <p>
                     To import your data to your polyPod you need to request it
-                    from Facebook first.
+                    from Google first.
                 </p>
                 {/* <InfoBox textContent={i18n.t("import:request.info.1")} /> */}
                 <div className="separator"></div>
                 <h4>How it works:</h4>
-                <img src="./images/facebook.svg" alt="facebook" />
                 <p>Go to facebook.com/dyi.</p>
                 <p>
                     The browser will then ask you whether you want to continue
@@ -130,7 +124,7 @@ const ImportExplanationExpandable = ({
                     On the Facebook page scroll down and change the file format
                     to JSON and the media quality to Low, then request the file.
                     Also make sure you select All Time to get all of your data.
-                    You will get an email confirmation of your request.,
+                    You will get an email confirmation of your request.
                 </p>
                 <img
                     src="./images/import-settings.png"
@@ -277,8 +271,8 @@ const ImportExplanationExpandable = ({
             className="explanation-expandable"
         >
             <div className="intro">
-                <p>Find out what Facebook knows about you!</p>
-                <p>How to add your Facebook data to your polyPod</p>
+                <h1>Find out what Google knows about you!</h1>
+                <h1>How to add your Google data to your polyPod</h1>
                 {/* <InfoBox textContent={i18n.t("import:intro.info")} /> */}
             </div>
             <ScrollButton

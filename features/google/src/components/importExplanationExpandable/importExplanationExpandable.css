@@ -14,7 +14,7 @@
     margin: 4px auto 72px auto;
 }
 
-.import-view .explanation-expandable .intro p {
+.import-view .explanation-expandable .intro h1 {
     font-family: "Jost Bold";
     font-size: 40px;
     line-height: var(--line-height);
