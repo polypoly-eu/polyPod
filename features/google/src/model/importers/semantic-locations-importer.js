@@ -70,7 +70,7 @@ export default class SemanticLocationsImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await zipFile.getEntries();
         const semanticLocationEntries = entries.filter(({ path }) =>
-            semanticLocationsRegex.test(path.replaceAll("%20", " "))
+            semanticLocationsRegex.test(path)
         );
 
         const timelineObjectsByType = await Promise.all(
