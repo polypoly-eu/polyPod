@@ -6,25 +6,36 @@ import android.graphics.Color
 import android.util.DisplayMetrics
 import java.util.zip.ZipFile
 
+interface FeatureInterface {
+    val id: String
+    val name: String
+    val author: String
+    val description: String
+    val primaryColor: Int
+    val thumbnailColor: Int
+    val thumbnail: Bitmap?
+    fun findUrl(target: String): String?
+}
+
 class Feature(
     val fileName: String,
     val content: ZipFile,
     private val manifest: FeatureManifest
-) {
-    val id: String get() = fileName.replace(".zip", "")
-    val name: String get() = manifest.name ?: id
-    val author: String get() = manifest.author ?: ""
-    val description: String get() = manifest.description ?: ""
+): FeatureInterface {
+    override val id: String get() = fileName.replace(".zip", "")
+    override val name: String get() = manifest.name ?: id
+    override val author: String get() = manifest.author ?: ""
+    override val description: String get() = manifest.description ?: ""
 
-    val primaryColor: Int
+    override val primaryColor: Int
         get() = runCatching { Color.parseColor(manifest.primaryColor) }
             .getOrDefault(0)
 
-    val thumbnailColor: Int
+    override val thumbnailColor: Int
         get() = runCatching { Color.parseColor(manifest.thumbnailColor) }
             .getOrDefault(primaryColor)
 
-    val thumbnail: Bitmap?
+    override val thumbnail: Bitmap?
         get() {
             if (manifest.thumbnail == null) return null
             val entry = content.getEntry(manifest.thumbnail) ?: return null
@@ -36,7 +47,7 @@ class Feature(
             }
         }
 
-    fun findUrl(target: String): String? = when (target) {
+    override fun findUrl(target: String): String? = when (target) {
         in manifest.links?.keys ?: listOf() -> manifest.links?.get(target)
         in manifest.links?.values ?: listOf() -> target
         else -> null
