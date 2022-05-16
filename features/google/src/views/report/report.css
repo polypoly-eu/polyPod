@@ -42,7 +42,7 @@
     top: -60px;
     right: 0;
     left: 0;
-    background: linear-gradient(#ffffff00 0%, #ffffff);
+    background: linear-gradient(#ffffff00 0%, --theme-primary-color);
 }
 
 .report-view .button-area {
