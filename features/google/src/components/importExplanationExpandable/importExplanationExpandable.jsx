@@ -1,15 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 // import InfoBox from "../infoBox/infoBox.jsx";
 import {
     PolyButton,
     PolyImportContext,
     RoutingWrapper,
+    ScrollButton,
+    ScrollSmoothly,
 } from "@polypoly-eu/poly-look";
 import { GoogleContext } from "../../context/google-context.jsx";
 import { useHistory } from "react-router-dom";
 import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
-// import ScrollButton from "../buttons/scrollButton/scrollButton.jsx";
-// import scrollSmoothly from "../../utils/smoothScroll.js";
 import "./importExplanationExpandable.css";
 
 const isSectionOpened = (section, importStatus, importSteps) => {
@@ -42,12 +42,12 @@ const ImportExplanationExpandable = ({
 
     const history = useHistory();
 
-    // const expandableRef = useRef();
+    const expandableRef = useRef();
     const expandableId = "expandable";
 
-    // useEffect(() => {
-    //     scrollSmoothly(importIds[importStatus], expandableId, ["progress-bar"]);
-    // }, [importStatus]);
+    useEffect(() => {
+        ScrollSmoothly(importIds[importStatus], expandableId, ["progress-bar"]);
+    }, [importStatus]);
 
     const handleRequestStatus = () => {
         onUpdateImportStatus(importSteps.download);
@@ -273,7 +273,7 @@ const ImportExplanationExpandable = ({
 
     return (
         <div
-            // ref={expandableRef}
+            ref={expandableRef}
             id={expandableId}
             className="explanation-expandable"
         >
@@ -282,11 +282,11 @@ const ImportExplanationExpandable = ({
                 <p>How to add your Facebook data to your polyPod</p>
                 {/* <InfoBox textContent={i18n.t("import:intro.info")} /> */}
             </div>
-            {/* <ScrollButton
+            <ScrollButton
                 scrollRef={expandableRef}
                 img="./images/scroll-down.svg"
-                scrollButtonText={i18n.t("import:scroll.down")}
-            /> */}
+                scrollButtonText="Scroll down"
+            />
             {Object.values(importSections).map((section, index) => (
                 <div key={index} className={`section ${section}`}>
                     <div

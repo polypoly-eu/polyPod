@@ -38,7 +38,7 @@ const ImportExplanationExpandable = ({
     const expandableId = "expandable";
 
     useEffect(() => {
-        scrollSmoothly(importIds[importStatus], expandableId, ["progress-bar"]);
+        ScrollSmoothly(importIds[importStatus], expandableId, ["progress-bar"]);
     }, [importStatus]);
 
     const handleRequestStatus = () => {
