@@ -10,7 +10,6 @@
 .import-view .explanation-expandable .intro {
     width: 100%;
     max-width: var(--max-width);
-    padding: 0 16px 16px 16px;
     box-sizing: border-box;
     margin: 4px auto 72px auto;
 }
@@ -60,7 +59,6 @@
 }
 
 .import-view .explanation-expandable .section-body {
-    padding: 16px 16px 16px 16px;
     width: 100%;
     max-width: var(--max-width);
     box-sizing: border-box;
