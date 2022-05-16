@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import i18n from "../../i18n.js";
 import RouteButton from "../buttons/routeButton.jsx";
-import InfoBox from "../infoBox/infoBox.jsx";
-import ScrollButton from "../buttons/scrollButton/scrollButton.jsx";
-import scrollSmoothly from "../../utils/smoothScroll.js";
+import infoIcon from "../../static/images/info-circle.svg";
+// import InfoBox from "../infoBox/infoBox.jsx";
+import { ScrollButton, ScrollSmoothly, InfoBox } from "@polypoly-eu/poly-look";
 import "./importExplanationExpandable.css";
 
 const isSectionOpened = (section, importStatus, importSteps) => {
