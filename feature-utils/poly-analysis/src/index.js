@@ -1,13 +1,12 @@
 import { analyzeZip, runAnalysis, analyzeFile } from "./analysis";
-import MinistoriesStatusReport from "././analysis/report/ministories-status-report";
+import MinistoriesStatusReport from "./report/ministories-status-report";
 
-import ReportAnalysis from "./analysis/report/report-analysis";
+import ReportAnalysis from "./report/report-analysis";
 import RootAnalysis from "./analysis/root-analysis";
-import {
-    jsonDataEntities,
-    relevantZipEntries,
-} from "./analysis/utils/analysis-util";
-import ReportStories from "./analysis/report/report-stories";
+import { jsonDataEntities, relevantZipEntries } from "./utils/analysis-util";
+import ReportStories from "./report/report-stories";
+import DataImportingStatusAnalysis from "./report/data-importing-status-report";
+import DataStructureBubblesAnalysis from "./analysis/data-structure-bubbles-analysis";
 
 export {
     analyzeZip,
@@ -19,4 +18,6 @@ export {
     ReportStories,
     ReportAnalysis,
     MinistoriesStatusReport,
+    DataImportingStatusAnalysis,
+    DataStructureBubblesAnalysis,
 };
