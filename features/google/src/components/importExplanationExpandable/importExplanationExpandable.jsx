@@ -205,11 +205,10 @@ const ImportExplanationExpandable = ({
                 <div className="x-divider">
                     {files ? (
                         <div className="file-info">
-                            <h5>Name:</h5>
-                            {/* <p>Name: {file.name}</p> */}
+                            <p>Name: {files[0]?.name}</p>
                             <p>
                                 Size:
-                                {/* {formatSize(file.size)} */}
+                                {formatSize(files[0]?.size)}
                             </p>
                         </div>
                     ) : selectedFile ? (
@@ -257,7 +256,7 @@ const ImportExplanationExpandable = ({
                 </p>
                 {files ? (
                     <>
-                        {/* <p>Imported File: {files[0].name}</p> */}
+                        <p>Imported File: {files[0]?.name}</p>
                         <RoutingWrapper history={history} route="/overview">
                             <PolyButton label="Start exploring"></PolyButton>
                         </RoutingWrapper>
