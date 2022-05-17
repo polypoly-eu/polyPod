@@ -3,13 +3,6 @@ name: Upload
 on:
   workflow_dispatch:
     inputs:
-      targets:
-        type: choice
-        description: Where to upload
-        options:
-          - all
-          - google-play
-          - app-store
       draft:
         type: boolean
         description: Upload, but don't publish
@@ -43,8 +36,8 @@ jobs:
       - name: API and features - Test
         run: xvfb-run --auto-servernum ./build.js test
 
-  upload_google_play:
-    name: Upload to Google Play
+  upload_build:
+    name: Upload build
     if: contains(fromJson('["all", "google-play"]'), github.event.inputs.targets)
     needs: check_preconditions
     runs-on: ubuntu-latest
@@ -103,52 +96,3 @@ jobs:
           releaseFiles: ./platform/android/app/build/outputs/apk/release/app-release.apk
           track: internal
           status: ${{ github.event.inputs.draft == 'true' && 'draft' || 'completed' }}
-
-  upload_app_store:
-    name: Upload to App Store
-    if: contains(fromJson('["all", "app-store"]'), github.event.inputs.targets)
-    needs: check_preconditions
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
-      - name: API and features - Build
-        env:
-          POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
-          POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }} || ""
-        run: ./build.js
-      - name: iOS - Lock Xcode version
-        working-directory: platform/ios
-        run: make lockxcodeversion
-      - name: iOS - Build core
-        working-directory: platform/core
-        run: make ios_bindings MODE=release
-      - name: iOS - Tests
-        working-directory: platform/ios
-        run: make test
-      - name: iOS - Install distribution prerequisites
-        working-directory: platform/ios
-        env:
-          POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_FILE_BASE64 }}
-          POLYPOD_APPLE_IOS_APPSTORE_P12_PASS: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_P12_PASS }}
-          POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID }}
-          POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_PRIVATE_KEY_BASE64 }}
-          POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
-        run: make install_distribution_prerequisites
-      - name: iOS - Export and upload IPA
-        working-directory: platform/ios
-        env:
-          POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID }}
-          POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
-        run: make upload_ipa
-      - name: Publish
-        if: github.event.inputs.draft != 'true'
-        working-directory: platform/ios
-        env:
-          POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID }}
-          POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID: ${{ secrets.POLYPOD_APPLE_IOS_APPSTORE_API_KEY_ID }}
-        run: make release_to_external_testers
