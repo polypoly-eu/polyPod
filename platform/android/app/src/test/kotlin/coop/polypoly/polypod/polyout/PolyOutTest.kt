@@ -240,4 +240,59 @@ class PolyOutTest {
         }
         Truth.assertThat(hasFile).isTrue()
     }
+
+    @Test
+    fun importMultipleArchivesWorks() {
+        val url1 = InstrumentationRegistry
+            .getInstrumentation()
+            .javaClass.classLoader!!
+            .getResource("multipleZips1.zip")
+            .toString()
+        val inputStream1 = InstrumentationRegistry
+            .getInstrumentation()
+            .javaClass.classLoader!!
+            .getResource("multipleZips1.zip")
+            .openStream()
+        val url2 = InstrumentationRegistry
+            .getInstrumentation()
+            .javaClass.classLoader!!
+            .getResource("multipleZips2.zip")
+            .toString()
+        val inputStream2 = InstrumentationRegistry
+            .getInstrumentation()
+            .javaClass.classLoader!!
+            .getResource("multipleZips2.zip")
+            .openStream()
+        resolver.registerInputStream(Uri.parse(url1), inputStream1)
+        resolver.registerInputStream(Uri.parse(url2), inputStream2)
+
+        val zipId1 = runBlocking {
+            polyOut.importArchive(url = url1)
+        }
+
+        Truth.assertThat(zipId1).isNotEmpty()
+
+        val zipId2 = runBlocking {
+            polyOut.importArchive(url = url2, zipId1)
+        }
+
+        Truth.assertThat(zipId2).isNotEmpty()
+        Truth.assertThat(zipId1).isEqualTo(zipId2)
+
+        val files = runBlocking {
+            polyOut.readDir(zipId1!!)
+        }
+
+        Truth.assertThat(files).isNotEmpty()
+
+        val hasFile1 = files.any {
+            it["path"] == "multipleZips1/file1.rtf"
+        }
+        val hasFile2 = files.any {
+            it["path"] == "multipleZips2/file2.rtf"
+        }
+
+        Truth.assertThat(hasFile1).isTrue()
+        Truth.assertThat(hasFile2).isTrue()
+    }
 }
