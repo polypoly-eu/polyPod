@@ -6,10 +6,10 @@ import ActivitiesOverTimeMinistory from "./activitiesOverTime.jsx";
 
 export const ministories = [
     DataStructureMinistory,
+    ActivitiesOverTimeMinistory,
     PlaceVisitsMinistory,
     GroupedActivityTypesStory,
     ActivitiesByProductsStory,
-    ActivitiesOverTimeMinistory,
 ];
 
 export default ministories;
