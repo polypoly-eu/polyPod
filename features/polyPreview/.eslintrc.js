@@ -8,7 +8,6 @@ module.exports = {
             files: ["*.js"],
             parserOptions: {
                 sourceType: "module",
-                ecmaVersion: 2020
             }
         }
     ]

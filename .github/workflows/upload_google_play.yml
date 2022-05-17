@@ -1,0 +1,95 @@
+name: Upload
+
+on:
+  workflow_dispatch:
+    inputs:
+      draft:
+        type: boolean
+        description: Upload, but don't publish
+
+jobs:
+  check_preconditions:
+    name: Check preconditions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail if uploading from non-release branch
+        if: |
+          github.ref != 'refs/heads/main'
+          && startsWith(github.ref, 'refs/heads/release') != true
+        run: exit 1
+      - name: Show input parameters
+        run: |
+          branch='${{ github.ref }}'
+          targets='${{ github.event.inputs.targets }}'
+          draft='${{ github.event.inputs.draft }}'
+          echo ::notice::Branch=$branch, Targets=$targets, Draft=$draft
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+      - name: API and features - Lint
+        run: ./build.js lint
+      - name: API and features - Build
+        run: ./build.js
+      - name: API and features - Test
+        run: xvfb-run --auto-servernum ./build.js test
+
+  upload_build:
+    name: Upload build
+    if: contains(fromJson('["all", "google-play"]'), github.event.inputs.targets)
+    needs: check_preconditions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: API and features - Build
+        env:
+          POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
+          POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }} || ""
+        run: ./build.js
+      - name: Android - Test
+        working-directory: platform/android
+        run: ./gradlew test
+      - name: Android - Write keystore file
+        working-directory: platform/android/app
+        env:
+          KEYSTORE: ${{ secrets.POLYPOD_ANDROID_UPLOAD_KEYSTORE_FILE }}
+        run: 'echo -n "$KEYSTORE" | base64 --decode > keystore.tmp'
+      - name: Android - Build
+        working-directory: platform/android
+        env:
+          POLYPOD_ANDROID_UPLOAD_KEYSTORE_FILE: keystore.tmp
+          POLYPOD_ANDROID_UPLOAD_KEYSTORE_PASS: ${{ secrets.POLYPOD_ANDROID_UPLOAD_KEYSTORE_PASS }}
+          POLYPOD_ANDROID_UPLOAD_KEY_ALIAS: ${{ secrets.POLYPOD_ANDROID_UPLOAD_KEY_ALIAS }}
+        run: ./gradlew assemble -Psign=true
+      - name: Determine release name
+        id: determine-release-name
+        working-directory: platform/android
+        run: |
+          aapt_path=/usr/local/lib/android/sdk/build-tools/30.0.0/aapt
+          apk_path=./app/build/outputs/apk/release/app-release.apk
+          version_code=$(./getPackageInfo.sh $aapt_path $apk_path versionCode)
+          version_name=$(./getPackageInfo.sh $aapt_path $apk_path versionName)
+          branch=${GITHUB_REF#refs/heads/}
+          sha_short=${GITHUB_SHA::7}
+          release_name="$version_code ($version_name) - $branch@$sha_short"
+          echo ::set-output name=release_name::$release_name
+      - name: Upload
+        # uses: r0adkll/upload-google-play@v1.0.16
+        uses: r0adkll/upload-google-play@8c2ebfdb6e1b439d3a31d35772b3f0f489d688c9
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.POLYPOD_ANDROID_STORE_SERVICE_ACCOUNT_JSON }}
+          packageName: coop.polypoly.polypod
+          releaseName: ${{ steps.determine-release-name.outputs.release_name }}
+          releaseFiles: ./platform/android/app/build/outputs/apk/release/app-release.apk
+          track: internal
+          status: ${{ github.event.inputs.draft == 'true' && 'draft' || 'completed' }}

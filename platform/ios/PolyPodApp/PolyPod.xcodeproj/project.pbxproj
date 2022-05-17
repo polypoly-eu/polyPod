@@ -90,6 +90,8 @@
 		1AF468DE24361D9D00E51B6D /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */; };
 		3B3CEDFA274FC37C000C3E6E /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989B350269CA6B7000EE977 /* FilePicker.swift */; };
 		3B5487E227CD0FF700480CB5 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5487E127CD0FF700480CB5 /* Endpoint.swift */; };
+		5105EA05281ACEEC0040AE0D /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */; };
+		5105EA07281AFDBB0040AE0D /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */; };
 		5B8653022643FC310014208C /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
 		901C0588278EE58700BC8364 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0587278EE58700BC8364 /* CoreDataStack.swift */; };
 		901C058A278F2AF800BC8364 /* CoreData+PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */; };
@@ -233,6 +235,7 @@
 		1AF468DB24349E6B00E51B6D /* PodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodApi.swift; sourceTree = "<group>"; };
 		1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
 		3B5487E127CD0FF700480CB5 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtensions.swift; sourceTree = "<group>"; };
 		5B0F7B5F26A924DF00F4EFF4 /* PolyPod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PolyPod.entitlements; sourceTree = "<group>"; };
 		5B8653012643FC310014208C /* PolyNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyNav.swift; sourceTree = "<group>"; };
 		901C0587278EE58700BC8364 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -583,6 +586,7 @@
 				1AF46892241FBA7200E51B6D /* JSONSerializationExtensions.swift */,
 				1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */,
 				E9F370D4262EABFF006254C1 /* LocalizedStringKeyExtensions.swift */,
+				5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */,
 				E9F370E6262EEF13006254C1 /* UIColorExtensions.swift */,
 				E97D325526307CE100A5A180 /* ColorExtensions.swift */,
 				E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */,
@@ -872,6 +876,7 @@
 				E9545EC4273543EB001E8C7F /* UpdateNotificationTest.swift in Sources */,
 				1ABADBFE24EE710B00369791 /* Variable+CoreDataClass.swift in Sources */,
 				1ABADBF924EE710B00369791 /* BlankNode+CoreDataClass.swift in Sources */,
+				5105EA07281AFDBB0040AE0D /* BindingExtensions.swift in Sources */,
 				E989B353269DDC9E000EE977 /* PolyNavTests.swift in Sources */,
 				1ABADBFF24EE710B00369791 /* Variable+CoreDataProperties.swift in Sources */,
 				904D4A712790633000A75AED /* DispatchToMainQueue.swift in Sources */,
@@ -990,6 +995,7 @@
 				E9545EC827359A34001E8C7F /* UserDefaultsExtensions.swift in Sources */,
 				E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */,
 				1AF468B0242A34CF00E51B6D /* PolyIn.swift in Sources */,
+				5105EA05281ACEEC0040AE0D /* BindingExtensions.swift in Sources */,
 				1A66F76B2490DFA000ED4308 /* FetchResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

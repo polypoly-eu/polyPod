@@ -9,6 +9,12 @@
             android:title="@string/settings_version" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/settings_sec_section">
+        <SwitchPreference
+            android:key="biometricEnabledKey"
+            android:title="Authentication"/>
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/settings_legal_section">
         <Preference
             app:key="imprint"

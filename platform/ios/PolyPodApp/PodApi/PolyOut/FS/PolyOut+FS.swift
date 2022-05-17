@@ -158,7 +158,8 @@ extension PolyOut {
                     let relativePath = fileURL.resolvingSymlinksInPath().absoluteString.replacingOccurrences(
                         of: targetUrl.absoluteString,
                         with: ""
-                    )
+                    ).replacingOccurrences(of: "%20", with: " ")
+                    
                     let fileId = PolyOut.fsFilesRoot + "/" + url + "/" + relativePath
                     entries.append(["id": fileId, "path": relativePath])
                 }

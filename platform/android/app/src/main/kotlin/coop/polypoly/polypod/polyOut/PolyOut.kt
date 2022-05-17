@@ -7,14 +7,12 @@ import android.provider.OpenableColumns
 import coop.polypoly.polypod.Preferences
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.polyNav.ZipTools
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.supervisorScope
 import java.io.File
 import java.nio.ByteBuffer
 import java.util.UUID
-import kotlin.coroutines.EmptyCoroutineContext
 
 open class PolyOut(
     val context: Context
@@ -22,7 +20,6 @@ open class PolyOut(
     private var readDirCache =
         mutableMapOf<String, Array<Map<String, String>>>()
     private var statCache = mutableMapOf<String, MutableMap<String, String>>()
-    private val coroutineScope = CoroutineScope(EmptyCoroutineContext)
 
     companion object {
         val fsDomain = "polypod-assets.local"
