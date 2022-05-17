@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import "swiper/swiper-bundle.css";
 import "./tabs.css";
 
 /**
