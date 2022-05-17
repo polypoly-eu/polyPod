@@ -13,7 +13,8 @@
     "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
     "build-downstream": "../../build.js --start @polypoly-eu/podjs",
     "lint": "eslint src --ext .ts",
-    "test": "jest && cypress run"
+    "test": "jest && cypress run",
+    "docs": "typedoc"
   },
   "dependencies": {
     "@polypoly-eu/pod-api": "file:../feature-api/api/pod-api",
