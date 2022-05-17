@@ -92,7 +92,6 @@ private struct MainSection: View {
                 EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             )
             
-            
             Section(header: SettingsHeader("settings_sec_section")) {
                 SettingsToggleButton(
                     label: "settings_auth",
@@ -179,10 +178,9 @@ private struct SettingsButton: View {
     }
 }
 
-
 private struct SettingsToggleButton: View {
     let label: LocalizedStringKey
-    let isToggled : Binding<Bool>;
+    let isToggled : Binding<Bool>
     
     var onChange: ((Bool) -> Void)?
     
@@ -205,7 +203,6 @@ private struct SettingsToggleButton: View {
     }
     
 }
-
 
 private struct PrivacyPolicyView: View {
     var body: some View {

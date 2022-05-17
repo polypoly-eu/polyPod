@@ -11,10 +11,10 @@ let package = Package(
     products: [
         .library(
             name: "PolyPodCoreSwift",
-            targets: ["PolyPodCoreSwift"]),
+            targets: ["PolyPodCoreSwift"])
     ],
     dependencies: [
-        .package(path: "../flatbuffers_shared/flatbuffers_v2.0.0/swift"),
+        .package(path: "../flatbuffers_shared/flatbuffers_v2.0.0/swift")
     ],
     targets: [
         .target(
@@ -28,6 +28,6 @@ let package = Package(
                       path: "PolyPodCore.xcframework"),
         .testTarget(
             name: "PolyPodCoreSwiftTests",
-            dependencies: ["PolyPodCoreSwift"]),
+            dependencies: ["PolyPodCoreSwift"])
     ]
 )
