@@ -177,13 +177,13 @@ class PolyOutTest {
         override fun engineGenerateKey(): SecretKey = wrapped.generateKey()
     }
 
-    private var polyOut: PolyOut? = null
-
-    init {
-        polyOut = PolyOut(
-            context = InstrumentationRegistry.getInstrumentation().targetContext
-        )
-    }
+    private var polyOut: PolyOut = PolyOut(
+        context = InstrumentationRegistry.getInstrumentation().targetContext
+    )
+    private var context = InstrumentationRegistry
+        .getInstrumentation()
+        .targetContext
+    private var resolver = Shadows.shadowOf(context.contentResolver)
 
     @Before
     fun setup() {
@@ -222,23 +222,20 @@ class PolyOutTest {
             .javaClass.classLoader!!
             .getResource("testZip.zip")
             .openStream()
-
-        val context = InstrumentationRegistry.getInstrumentation().targetContext
-        val resolver = Shadows.shadowOf(context.contentResolver)
         resolver.registerInputStream(Uri.parse(url), inputStream)
 
         val zipId = runBlocking {
-            polyOut?.importArchive(url = url)
+            polyOut.importArchive(url = url)
         }
 
         Truth.assertThat(zipId).isNotEmpty()
 
         val files = runBlocking {
-            polyOut?.readDir(zipId!!)
+            polyOut.readDir(zipId!!)
         }
 
         Truth.assertThat(files).isNotEmpty()
-        val hasFile = files?.any {
+        val hasFile = files.any {
             it["path"] == "testZip/testfile.rtf"
         }
         Truth.assertThat(hasFile).isTrue()
