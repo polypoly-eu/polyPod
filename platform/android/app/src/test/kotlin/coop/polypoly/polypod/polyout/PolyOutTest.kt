@@ -227,10 +227,20 @@ class PolyOutTest {
         val resolver = Shadows.shadowOf(context.contentResolver)
         resolver.registerInputStream(Uri.parse(url), inputStream)
 
-        val result = runBlocking {
+        val zipId = runBlocking {
             polyOut?.importArchive(url = url)
         }
 
-        Truth.assertThat(result).isNotEmpty()
+        Truth.assertThat(zipId).isNotEmpty()
+
+        val files = runBlocking {
+            polyOut?.readDir(zipId!!)
+        }
+
+        Truth.assertThat(files).isNotEmpty()
+        val hasFile = files?.any {
+            it["path"] == "testZip/testfile.rtf"
+        }
+        Truth.assertThat(hasFile).isTrue()
     }
 }
