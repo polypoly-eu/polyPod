@@ -111,7 +111,7 @@ export const ActivitiesOverTimeStoryDetails = ({ activitiesOverTime }) => {
                     onYearChange={setSelectedYear}
                 />
             ),
-            belowChart: i18n.t("common:total.years"),
+            belowChart: selectedYear,
         },
         {
             id: "yearly",
@@ -127,7 +127,7 @@ export const ActivitiesOverTimeStoryDetails = ({ activitiesOverTime }) => {
             ),
             barValueColor: "white",
             datePicker: <div className="datepicker-filler" />,
-            belowChart: selectedYear,
+            belowChart: i18n.t("common:total.years"),
         },
     ];
 

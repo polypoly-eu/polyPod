@@ -23,7 +23,7 @@
 .activities-ministory .legend .bar-piece {
     height: 12px;
     margin-right: 4px;
-    background-color: var(--theme-color-secondary);
+    background-color: var(--theme-secondary-color);
 }
 
 .activities-ministory .legend p {
