@@ -37,13 +37,6 @@ import javax.crypto.SecretKey
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Config.OLDEST_SDK])
 class PolyOutTest {
-    private var polyOut: PolyOut? = null
-
-    init {
-        polyOut = PolyOut(
-            context = InstrumentationRegistry.getInstrumentation().targetContext
-        )
-    }
 
     class MockFeature(
         override val id: String,
@@ -184,6 +177,14 @@ class PolyOutTest {
         override fun engineGenerateKey(): SecretKey = wrapped.generateKey()
     }
 
+    private var polyOut: PolyOut? = null
+
+    init {
+        polyOut = PolyOut(
+            context = InstrumentationRegistry.getInstrumentation().targetContext
+        )
+    }
+
     @Before
     fun setup() {
         Security.addProvider(object : Provider("AndroidKeyStore", 1.0, "") {
@@ -192,15 +193,7 @@ class PolyOutTest {
                 put("KeyGenerator.AES", FakeAesKeyGenerator::class.java.name)
             }
         })
-    }
 
-    @After
-    fun teardown() {
-        //
-    }
-
-    @Test
-    fun importOneArchiveWorks() {
         FeatureStorage.activeFeature = MockFeature(
             id = "testFeatureId",
             name = "testFeature",
@@ -210,7 +203,15 @@ class PolyOutTest {
             thumbnailColor = 0,
             thumbnail = null
         )
+    }
 
+    @After
+    fun teardown() {
+        //
+    }
+
+    @Test
+    fun importOneArchiveWorks() {
         val url = InstrumentationRegistry
             .getInstrumentation()
             .javaClass.classLoader!!
