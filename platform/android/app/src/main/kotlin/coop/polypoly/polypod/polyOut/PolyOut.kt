@@ -161,7 +161,8 @@ open class PolyOut(
             }
         }
 
-        val newId = UUID.randomUUID().toString()
+        val zipId = destUrl ?: UUID.randomUUID().toString()
+
         supervisorScope {
             this.async(Dispatchers.IO) {
                 contentResolver?.openInputStream(uri).use { inputStream ->
@@ -169,16 +170,16 @@ open class PolyOut(
                         throw Error("File import error")
                     }
                     val fs = Preferences.getFileSystem(context).toMutableMap()
-                    fs[fsPrefix + newId] = fileName
+                    fs[fsPrefix + zipId] = fileName
                     Preferences.setFileSystem(context, fs)
                     val featureId = FeatureStorage.activeFeature?.id
                         ?: throw Error("Cannot import for unknown feature")
-                    val targetPath = "$featureId/$newId"
+                    val targetPath = "$featureId/$zipId"
                     ZipTools.unzipAndEncrypt(inputStream, context, targetPath)
                 }
             }
         }.await()
-        return newId
+        return zipId
     }
 
     open suspend fun removeArchive(id: String) {
