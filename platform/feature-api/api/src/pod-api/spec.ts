@@ -15,7 +15,7 @@
 
 import { Pod } from "./api";
 import fc from "fast-check";
-import { DataFactorySpec, gens } from "../index";
+import { DataFactorySpec, gens } from "../rdf-spec";
 import chai, { assert } from "chai";
 import chaiAsPromised from "chai-as-promised";
 
