@@ -1,0 +1,54 @@
+.datepicker-filler {
+    width: 100%;
+    height: 50px;
+}
+.datepicker .space-right {
+    margin-right: 10px;
+}
+
+.datepicker .space-left {
+    margin-left: 10px;
+}
+
+.activities-ministory {
+    position: relative;
+}
+
+.activities-ministory .legend {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.activities-ministory .legend .bar-piece {
+    height: 12px;
+    margin-right: 4px;
+    background-color: var(--theme-color-secondary);
+}
+
+.activities-ministory .legend p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.activities-ministory .above-chart,
+.activities-ministory .below-chart {
+    font-size: 12px;
+    color: var(--color-gray-400);
+}
+
+.activities-ministory .below-chart {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 8px 0 8px 24px;
+}
+
+.activities-ministory .info-button {
+    right: -24px;
+    bottom: 0;
+}
+
+.activities-ministory .source {
+    margin-top: 40px;
+}

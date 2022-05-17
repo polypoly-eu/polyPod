@@ -1,3 +1,7 @@
 {
-    "loading": "Lädt..."
+    "loading": "Lädt...",
+    "source.your.google.data": "Quelle: Ihre Google-Daten",
+    "total.years": "Jahre, seit Sie bei Google sind",
+    "months.abbreviation": "Jan Feb Mär Apr Mai Jun Jul Aug Sep Okt Nov Dez",
+    "details": "Details"
 }
