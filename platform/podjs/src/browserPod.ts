@@ -30,8 +30,7 @@ const NAV_LIGHT_FOREGROUND_COLOR = "#ffffff";
 const MANIFEST_DATA = window.manifestData;
 
 /**
- * It opens a database, creates two object stores for PolyIn and PolyOut keys
- * and creates a bunch of indexes according to the quad keys.
+ * It opens a IndexedDB database, creates object stores and indexes for PolyIn and PolyOut storage.
  * @returns An IDBDatabase object.
  */
 async function openDatabase(): Promise<IDBDatabase> {

@@ -127,7 +127,7 @@ export interface PolyOut extends Omit<FS, "readdir"> {
  */
 export interface PolyNav {
     /**
-     * A way for features to display a contents of a web page of the given URL.
+     * A way for features to display the contents of a web page of the given URL.
      * @param {string} url - The URL to open.
      */
     openUrl(url: string): Promise<void>;
