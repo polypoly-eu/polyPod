@@ -16,7 +16,7 @@
     "prebenchmark": "npm i n3 benchmark @types/benchmark",
     "benchmark": "./bin/run-benchmarks.sh",
     "postbenchmark": "npm uninstall n3 benchmark @types/benchmark",
-    "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && npm run rollup",
+    "build": "npm run rollup",
     "rollup": "rollup -c",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",

@@ -12,7 +12,7 @@
     "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
   "scripts": {
-    "build": "shx rm -rf tsconfig.tsbuildinfo dist && tsc --emitDeclarationOnly && rollup -c",
+    "build": "rollup -c",
     "build-downstream": "../../../../build.js --start @polypoly-eu/pod-api",
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
