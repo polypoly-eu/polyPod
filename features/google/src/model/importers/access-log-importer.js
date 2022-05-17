@@ -5,37 +5,30 @@ const accessLogRegex = /\/Access Log Activity\/.*\.csv$/;
 class AccessLogParser {
     constructor() {}
 
-    _scrapeTimestamps(contentDocument, productName) {
-        const contentCells = contentDocument.querySelectorAll(
-            ".mdl-grid>.mdl-cell>.mdl-grid>.content-cell:nth-child(2)"
-        );
-        return [...contentCells].map(
-            ({ childNodes }) =>
-                new AccessLogEntry({
-                    timestamp: new Date(
-                        childNodes[childNodes.length - 1].textContent
-                    ),
-                    productName: productName,
-                })
-        );
+    _csvToJson(csvText) {
+        const rows = csvText.split("\n");
+        const headers = rows.shift().replaceAll('"', "").split(",");
+
+        const keysEnum = {};
+        headers.forEach((key, index) => (keysEnum[key] = index));
+
+        const data = rows.map((row) => {
+            const rowData = row.split(",");
+            const productName = rowData[keysEnum["Product Name"]];
+            const date = rowData[keysEnum["Activity Timestamp"]];
+            return new AccessLogEntry({
+                timestamp: new Date(date),
+                accessLog: productName,
+            });
+        });
+        return data;
     }
 
     async parse(entry) {
         const content = await entry.getContent();
-        debugger;
         const text = await new TextDecoder("utf-8").decode(content);
-        const { contentDocument } = this._iframe;
-        contentDocument.write(text);
-        contentDocument.close();
-
-        const pathParts = entry.path.split("/");
-        const productName = pathParts[pathParts.length - 2];
-        return this._scrapeTimestamps(contentDocument, productName);
-    }
-
-    release() {
-        document.body.removeChild(this._iframe);
-        this._iframe = null;
+        const jsonData = this._csvToJson(text);
+        return jsonData;
     }
 }
 
@@ -47,9 +40,6 @@ export default class AccessLogImporter {
         );
 
         const parser = new AccessLogParser();
-        googleAccount.activities = (
-            await Promise.all(accessLog.map((entry) => parser.parse(entry)))
-        ).flat();
-        parser.release();
+        googleAccount.accessLog = await parser.parse(accessLog[0]);
     }
 }
