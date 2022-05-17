@@ -157,7 +157,7 @@ open class PodApi(
         logger.debug("dispatch() -> polyOut.importArchive")
         val url = args[0].asStringValue().toString()
         polyOut.importArchive(url)?.let {
-            return ValueFactory.newString(it.path.toString())
+            return ValueFactory.newString(it)
         }
         return ValueFactory.newNil()
     }

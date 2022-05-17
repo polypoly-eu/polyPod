@@ -142,7 +142,7 @@ open class PolyOut(
         return retList.toTypedArray()
     }
 
-    open suspend fun importArchive(url: String): Uri? {
+    open suspend fun importArchive(url: String): String? {
         val uri = Uri.parse(url)
         val contentResolver = context.contentResolver
         val cursor: Cursor? = contentResolver.query(
@@ -157,13 +157,14 @@ open class PolyOut(
                     )
             }
         }
+
+        val newId = UUID.randomUUID().toString()
         supervisorScope {
             this.async(Dispatchers.IO) {
                 contentResolver?.openInputStream(uri).use { inputStream ->
                     if (inputStream == null) {
                         throw Error("File import error")
                     }
-                    val newId = UUID.randomUUID().toString()
                     val fs = Preferences.getFileSystem(context).toMutableMap()
                     fs[fsPrefix + newId] = fileName
                     Preferences.setFileSystem(context, fs)
@@ -174,7 +175,7 @@ open class PolyOut(
                 }
             }
         }.await()
-        return null // TODO: Return the expected value
+        return newId
     }
 
     open suspend fun removeArchive(id: String) {

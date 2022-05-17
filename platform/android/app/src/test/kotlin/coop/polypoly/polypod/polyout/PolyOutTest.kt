@@ -226,10 +226,10 @@ class PolyOutTest {
         val resolver = Shadows.shadowOf(context.contentResolver)
         resolver.registerInputStream(Uri.parse(url), inputStream)
 
-        var result = runBlocking {
+        val result = runBlocking {
             polyOut?.importArchive(url = url)
         }
 
-        Truth.assertThat("").isEqualTo("")
+        Truth.assertThat(result).isNotEmpty()
     }
 }
