@@ -7,7 +7,8 @@ class InternalCoreException(message: String) : Exception(message) {
     companion object {
         fun make(context: String, failure: Failure): InternalCoreException {
             return InternalCoreException(
-                "$context -> internal Core Failure: ${failure.code} ${failure.message}"
+                """ $context -> internal Core Failure:
+                    ${failure.code} ${failure.message} """
             )
         }
     }
@@ -27,4 +28,6 @@ class MissingFailureContentException(context: String) :
     Exception("$context -> received failure result type without content")
 
 class MissingFeatureManifestContentException(context: String) :
-    Exception("$context -> received feature manifest result type without content")
+    Exception(
+        "$context -> received feature manifest result type without content"
+    )
