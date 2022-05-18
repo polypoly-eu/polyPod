@@ -11,6 +11,7 @@ import { GoogleContext } from "../../context/google-context.jsx";
 import { useHistory } from "react-router-dom";
 import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
 import "./importExplanationExpandable.css";
+import i18n from "../../i18n.js";
 
 const isSectionOpened = (section, importStatus, importSteps) => {
     return {
@@ -288,14 +289,12 @@ const ImportExplanationExpandable = ({
                         id={importIds[section]}
                     >
                         <div className={`number ${section}`}>{index + 1}</div>
-                        <div
+                        <h2
                             className="heading"
-                            // dangerouslySetInnerHTML={{
-                            //     __html: i18n.t(`import:heading.${section}`),
-                            // }}
-                        >
-                            {section}
-                        </div>
+                            dangerouslySetInnerHTML={{
+                                __html: i18n.t(`import:heading.${section}`),
+                            }}
+                        ></h2>
                         <img
                             src="./images/angle-up.svg"
                             alt="arrow-up"
