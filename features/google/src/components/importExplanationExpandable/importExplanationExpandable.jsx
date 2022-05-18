@@ -3,7 +3,7 @@ import {
     PolyButton,
     PolyImportContext,
     RoutingWrapper,
-    ScrollButton,
+    ScrollLabel,
     SmoothScroll,
     InfoBox,
 } from "@polypoly-eu/poly-look";
@@ -256,10 +256,10 @@ const ImportExplanationExpandable = ({
                 <h1>How to add your Google data to your polyPod</h1>
                 <InfoBox textContent="Only a copy of your data is created, your Google account remains unchanged." />
             </div>
-            <ScrollButton
+            <ScrollLabel
                 scrollRef={expandableRef}
                 img="./images/scroll-down.svg"
-                scrollButtonText="Scroll down"
+                scrollLabelText="Scroll down"
             />
             {Object.values(importSections).map((section, index) => (
                 <div key={index} className={`section ${section}`}>

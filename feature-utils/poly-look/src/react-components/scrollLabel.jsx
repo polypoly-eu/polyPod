@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import "./scrollButton.css";
+import "./scrollLabel.css";
 
-const ScrollButton = ({ scrollRef, scrollButtonText, colors, img }) => {
+const ScrollLabel = ({ scrollRef, scrollLabelText, colors, img }) => {
   const [scrollingPosition, setScrollingPosition] = useState(0);
 
   const setUpScrollingListener = () => {
@@ -14,11 +14,11 @@ const ScrollButton = ({ scrollRef, scrollButtonText, colors, img }) => {
 
   return scrollingPosition < 100 ? (
     <div className={`scroll-button ${colors}`} onLoad={setUpScrollingListener}>
-      <img src={img} /> <p>{scrollButtonText}</p>
+      <img src={img} /> <p>{scrollLabelText}</p>
     </div>
   ) : (
     <div style={{ display: "none" }} className="scroll-button"></div>
   );
 };
 
-export default ScrollButton;
+export default ScrollLabel;

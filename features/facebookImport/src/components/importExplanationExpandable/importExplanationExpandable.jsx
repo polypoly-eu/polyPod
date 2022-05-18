@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import i18n from "../../i18n.js";
 import RouteButton from "../buttons/routeButton.jsx";
-import { ScrollButton, SmoothScroll, InfoBox } from "@polypoly-eu/poly-look";
+import { ScrollLabel, SmoothScroll, InfoBox } from "@polypoly-eu/poly-look";
 import "./importExplanationExpandable.css";
 
 const isSectionOpened = (section, importStatus, importSteps) => {
@@ -248,10 +248,10 @@ const ImportExplanationExpandable = ({
                     textContent={i18n.t("import:intro.info")}
                 />
             </div>
-            <ScrollButton
+            <ScrollLabel
                 scrollRef={expandableRef}
                 img="./images/scroll-down.svg"
-                scrollButtonText={i18n.t("import:scroll.down")}
+                scrollLabelText={i18n.t("import:scroll.down")}
             />
             {Object.values(importSections).map((section, index) => (
                 <div key={index} className={`section ${section}`}>
