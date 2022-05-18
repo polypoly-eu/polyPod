@@ -52,7 +52,7 @@ const ImportExplanationExpandable = ({
 
     const handleRequestStatus = () => {
         onUpdateImportStatus(importSteps.download);
-        window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
+        window.pod.polyNav.openUrl("data-download");
     };
 
     const handleExampleDataRequest = () => {
@@ -62,7 +62,7 @@ const ImportExplanationExpandable = ({
 
     const handleDownloadDataLinkClick = () => {
         onUpdateImportStatus(importSteps.import);
-        window.pod.polyNav.openUrl("https://www.facebook.com/dyi");
+        window.pod.polyNav.openUrl("data-download");
     };
 
     const formatSize = (size) => {
@@ -111,40 +111,25 @@ const ImportExplanationExpandable = ({
                     To import your data to your polyPod you need to request it
                     from Google first.
                 </p>
-                {/* <InfoBox textContent={i18n.t("import:request.info.1")} /> */}
+                <InfoBox textContent="You will need to have your login details to hand." />
                 <div className="separator"></div>
                 <h4>How it works:</h4>
-                <p>Go to facebook.com/dyi.</p>
+                <p>Go to https://takeout.google.com/</p>
                 <p>
                     The browser will then ask you whether you want to continue
                     with the browser version or to use your mobile app in case
                     you have it installed. Select to continue with the browser.
                 </p>
                 <img src="./images/document.svg" alt="document" />
-                <p>
-                    On the Facebook page scroll down and change the file format
-                    to JSON and the media quality to Low, then request the file.
-                    Also make sure you select All Time to get all of your data.
-                    You will get an email confirmation of your request.
-                </p>
-                <img
-                    src="./images/import-settings.png"
-                    className="full-screen"
-                    alt="select-json"
-                />
-                <button
-                    className="btn-highlighted"
+                <PolyButton
                     onClick={() => handleRequestStatus()}
-                >
-                    Make your request
-                </button>
-                <button
-                    className="btn-secondary"
+                    label="Make your request"
+                ></PolyButton>
+                <PolyButton
                     onClick={() => handleExampleDataRequest()}
-                >
-                    Use example data
-                </button>
-                {/* <InfoBox textContent={i18n.t("import:request.info.2")} /> */}
+                    label="Use example data"
+                ></PolyButton>
+                <InfoBox textContent="IMPORTANT: Now you need to wait for the email notification from Facebook that your data is available for download, which can take up to 24 hours." />
             </>
         ),
         download: (
@@ -155,34 +140,30 @@ const ImportExplanationExpandable = ({
                     className="full-screen"
                 />
                 <p>
-                    After you have requested your data, Facebook will notify you
+                    After you have requested your data, Google will notify you
                     when you can download it to your phone.
                 </p>
                 <InfoBox textContent="It can take up to 24 hours before your data is available!" />
                 <div className="separator"></div>
                 <h4>How it works:</h4>
-                <img src="./images/letter.svg" alt="facebook" />
+                <img src="./images/letter.svg" alt="letter" />
                 <p>
                     Once your data is available you will receive an email from
-                    Facebook. Click on the download link in the email.
+                    Google. Click on the download link in the email.
                 </p>
                 <img src="./images/download.svg" alt="document" />
                 <p>
-                    In the Available Copies section of the Facebook page you can
+                    In the Available Copies section of the Google page you can
                     download the file. The file will be saved to your phone.
                 </p>
-                <button
-                    className="btn-highlighted btn-1"
+                <PolyButton
                     onClick={() => handleDownloadDataLinkClick()}
-                >
-                    Download your data
-                </button>
-                <button
-                    className="btn-secondary"
+                    label="Download your data"
+                ></PolyButton>
+                <PolyButton
                     onClick={() => onUpdateImportStatus(importSteps.import)}
-                >
-                    Already downloaded your data?
-                </button>
+                    label="Already downloaded your data?"
+                ></PolyButton>
             </>
         ),
         import: (
@@ -198,8 +179,9 @@ const ImportExplanationExpandable = ({
                 </p>
                 <div className="separator"></div>
                 <div className="x-divider">
-                    {files ? (
+                    {files?.length ? (
                         <div className="file-info">
+                            <h5>Selected file:</h5>
                             <p>Name: {files[0]?.name}</p>
                             <p>
                                 Size:
@@ -209,7 +191,7 @@ const ImportExplanationExpandable = ({
                     ) : selectedFile ? (
                         <div className="file-info">
                             <h5>Selected file:</h5>
-                            <p>{selectedFile?.name}</p>
+                            <p>Name: {selectedFile?.name}</p>
                             <p>
                                 Size:
                                 {formatSize(selectedFile.size)}
@@ -224,7 +206,6 @@ const ImportExplanationExpandable = ({
                     onClick={handleSelectFile}
                     label="Select File"
                 ></PolyButton>
-                {selectedFile && <p>Selected File: {selectedFile.name}</p>}
                 <PolyButton
                     className="btn secondary"
                     onClick={handleImportFile}
@@ -243,11 +224,10 @@ const ImportExplanationExpandable = ({
                     className="full-screen"
                 />
                 <p>
-                    After you have imported your Facebook data to your polyPod
-                    you can explore it and see what Facebook really knows about
-                    you. If you want to be extra cautious with the data on your
-                    phone, you can safely delete the downloaded zip archive
-                    now.,
+                    After you have imported your Google data to your polyPod you
+                    can explore it and see what Google really knows about you.
+                    If you want to be extra cautious with the data on your
+                    phone, you can safely delete the downloaded zip archive now.
                 </p>
                 {files ? (
                     <>
