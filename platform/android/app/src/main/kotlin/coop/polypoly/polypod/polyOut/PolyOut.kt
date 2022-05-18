@@ -84,9 +84,15 @@ open class PolyOut(
         val file = File(idToPath(id, context))
         if (!file.exists())
             throw Exception("stat: No such file '$id'")
-
+        val name = fs[id]?.reduce { acc, s ->
+            if (acc.isEmpty()) {
+                s
+            } else {
+                "$acc,$s"
+            }
+        }
         result["size"] = determineSize(file).toString()
-        result["name"] = fs.get(id) ?: file.name
+        result["name"] = name ?: file.name
         result["time"] = (file.lastModified() / 1000).toString()
         result["id"] = id.removePrefix(fsPrefix).removePrefix(
             fsFilesRoot
@@ -167,7 +173,13 @@ open class PolyOut(
                         throw Error("File import error")
                     }
                     val fs = Preferences.getFileSystem(context).toMutableMap()
-                    fs[fsPrefix + zipId] = fileName
+                    if (fs[fsPrefix + zipId] != null) {
+                        val array = fs[fsPrefix + zipId]!!.toMutableList()
+                        array.add(fileName)
+                        fs[fsPrefix + zipId] = array.toTypedArray()
+                    } else {
+                        fs[fsPrefix + zipId] = arrayOf(fileName)
+                    }
                     Preferences.setFileSystem(context, fs)
                     val featureId = FeatureStorage.activeFeature?.id
                         ?: throw Error("Cannot import for unknown feature")
