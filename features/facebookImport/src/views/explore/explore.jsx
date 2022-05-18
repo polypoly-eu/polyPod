@@ -20,15 +20,15 @@ const PopUpMessage = ({ children, reportResultAnswer }) => {
     return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
 };
 
-const UnrecognizedCard = () => {
+const ReportCard = () => {
     return (
         <div className="analysis-card unrecognized-analysis-card">
             <div className="unrecognized-analysis-title">
-                <h1>{i18n.t("explore:unrecognizedCard.headline")}</h1>
+                <h1>{i18n.t("explore:reportCard.headline")}</h1>
             </div>
-            <p>{i18n.t("explore:unrecognizedCard.text")}</p>
+            <p>{i18n.t("explore:reportCard.text")}</p>
             <RouteButton route="/report" className="report-button">
-                {i18n.t("explore:unrecognizedCard.button")}
+                {i18n.t("explore:reportCard.button")}
             </RouteButton>
         </div>
     );
@@ -84,7 +84,7 @@ const ExploreView = () => {
             );
         return (
             <List>
-                <UnrecognizedCard />
+                <ReportCard />
                 {ministories.map((MinistoryClass, index) => {
                     const ministory = new MinistoryClass({
                         account,

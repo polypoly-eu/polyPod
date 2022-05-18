@@ -13,7 +13,7 @@ import "./explore.css";
 import { ministories } from "../ministories/ministories.js";
 import { useHistory } from "react-router-dom";
 
-const UnrecognizedCard = () => {
+const ReportCard = () => {
     const history = useHistory();
 
     return (
@@ -40,7 +40,7 @@ const ExploreView = () => {
         return (
             <Screen className="explore" layout="poly-standard-layout">
                 <List>
-                    <UnrecognizedCard />
+                    <ReportCard />
                     {ministories.map((MinistoryClass, index) => {
                         const ministory = new MinistoryClass({
                             account,
