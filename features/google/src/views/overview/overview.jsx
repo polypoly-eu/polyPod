@@ -15,7 +15,6 @@ import { specificAnalyses } from "../../model/analyses/analyses";
 import {
     BUBBLE_VIZ_WIDTH,
     BUBBLE_VIZ_HEIGHT,
-    BUBBLE_DARK_COLOR,
     BUBBLE_LIGHT_COLOR,
 } from "../../constants/bubbleViz";
 
