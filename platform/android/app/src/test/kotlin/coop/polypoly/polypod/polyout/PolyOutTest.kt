@@ -1,12 +1,12 @@
 package coop.polypoly.polypod.polyout
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.net.Uri
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth
-import coop.polypoly.polypod.features.FeatureInterface
+import coop.polypoly.polypod.features.Feature
+import coop.polypoly.polypod.features.FeatureManifest
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.polyOut.PolyOut
 import kotlinx.coroutines.runBlocking
@@ -17,6 +17,8 @@ import org.junit.runner.RunWith
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import java.io.File
+import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
 import java.security.Key
@@ -30,6 +32,9 @@ import java.security.spec.AlgorithmParameterSpec
 import java.util.Collections
 import java.util.Date
 import java.util.Enumeration
+import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
+import java.util.zip.ZipOutputStream
 import javax.crypto.KeyGenerator
 import javax.crypto.KeyGeneratorSpi
 import javax.crypto.SecretKey
@@ -38,20 +43,6 @@ import javax.crypto.SecretKey
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Config.OLDEST_SDK])
 class PolyOutTest {
-
-    class MockFeature(
-        override val id: String,
-        override val name: String,
-        override val author: String,
-        override val description: String,
-        override val primaryColor: Int,
-        override val thumbnailColor: Int,
-        override val thumbnail: Bitmap?
-    ) : FeatureInterface {
-        override fun findUrl(target: String): String? {
-            return null
-        }
-    }
 
     @Suppress("TooManyFunctions")
     class FakeKeyStore : KeyStoreSpi() {
@@ -188,6 +179,32 @@ class PolyOutTest {
     }
     private val resolver by lazy { Shadows.shadowOf(context.contentResolver) }
 
+    private lateinit var featuresDir: File
+
+    private val manifestString = """
+    {
+        "name": "testManifest",
+        "description": "testDescription",
+        "author": "testAuthor",
+        "thumbnail": "assets/thumbnail.png",
+        "primaryColor": "#000000",
+        "links": {
+            "link1": "https://example.com/1",
+            "link2": "https://example.com/2"
+        }
+    }
+    """
+
+    private fun createMockFeaturePackage(parent: File, child: String): File {
+        val featurePackage = File(parent, child)
+        ZipOutputStream(FileOutputStream(featurePackage)).use { zipOut ->
+            zipOut.putNextEntry(ZipEntry("manifest.json"))
+            zipOut.write(manifestString.toByteArray())
+            zipOut.closeEntry()
+        }
+        return featurePackage
+    }
+
     @Before
     fun setup() {
         Security.addProvider(object : Provider("AndroidKeyStore", 1.0, "") {
@@ -197,14 +214,28 @@ class PolyOutTest {
             }
         })
 
-        FeatureStorage.activeFeature = MockFeature(
-            id = "testFeatureId",
-            name = "testFeature",
-            author = "test",
-            description = "",
-            primaryColor = 0,
-            thumbnailColor = 0,
-            thumbnail = null
+        val mainDir = context.filesDir
+        featuresDir = File(mainDir, "features")
+        featuresDir.mkdirs()
+
+        val zip = createMockFeaturePackage(
+            featuresDir,
+            "test.zip"
+        )
+
+        FeatureStorage.activeFeature = Feature(
+            content = ZipFile(zip),
+            fileName = "",
+            manifest = FeatureManifest(
+                name = "",
+                author = "",
+                version = "",
+                description = "",
+                links = null,
+                primaryColor = "",
+                thumbnailColor = "",
+                thumbnail = ""
+            )
         )
     }
 
