@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext } from "react";
 
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import Screen from "../../components/screen/screen.jsx";
 import LinkButton from "../../components/buttons/linkButton/linkButton.jsx";
 

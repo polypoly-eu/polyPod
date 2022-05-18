@@ -3,7 +3,7 @@ import * as d3 from "d3";
 
 import picturesMinistorySvg from "../../static/images/pictures-ministory/pictures-ministory.svg";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
-import i18n from "../../i18n";
+import i18n from "!silly-i18n";
 
 import "./picturesMiniStory.css";
 

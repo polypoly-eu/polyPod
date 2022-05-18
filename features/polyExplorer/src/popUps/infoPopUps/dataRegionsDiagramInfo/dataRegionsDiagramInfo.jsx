@@ -1,6 +1,6 @@
 import React from "react";
 
-import i18n from "../../../i18n.js";
+import i18n from "!silly-i18n";
 import StoriesInfoScreen from "../../../components/clusterStories/storiesInfoScreen.jsx";
 import Infographic from "../../../components/infographic/infographic.jsx";
 import { DataRegionInfoContent } from "../dataRegionInfo/dataRegionInfo.jsx";

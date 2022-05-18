@@ -1,6 +1,6 @@
 import React from "react";
 import ListOfDetails from "../../components/listOfDetails/listOfDetails.jsx";
-import i18n from "../../i18n";
+import i18n from "!silly-i18n";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
 import { SingleDataStory } from "./singleDataStory.jsx";
 

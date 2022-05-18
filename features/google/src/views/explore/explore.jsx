@@ -9,7 +9,7 @@ import {
     PolyButton,
 } from "@polypoly-eu/poly-look";
 
-import i18n from "../../i18n";
+import i18n from "!silly-i18n";
 
 import "./explore.css";
 import { ministories } from "../ministories/ministories.js";

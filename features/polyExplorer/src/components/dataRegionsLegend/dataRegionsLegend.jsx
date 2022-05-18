@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./dataRegionsLegend.css";
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import { I18nSection } from "@polypoly-eu/silly-i18n";
 
 const i18nC = new I18nSection(i18n, "common");

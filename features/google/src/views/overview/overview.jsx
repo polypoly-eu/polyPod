@@ -9,7 +9,7 @@ import {
     INITIAL_HISTORY_STATE,
 } from "@polypoly-eu/poly-look";
 import { useHistory } from "react-router-dom";
-import i18n from "../../i18n";
+import i18n from "!silly-i18n";
 import { analyzeFile } from "@polypoly-eu/poly-analysis";
 import { specificAnalyses } from "../../model/analyses/analyses";
 import {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs, Tab, PolyChart } from "@polypoly-eu/poly-look";
 
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 
 import "./overviewBarChart.css";
 import { latestActiveUsersValue } from "../../screens/stories/story-utils.js";
