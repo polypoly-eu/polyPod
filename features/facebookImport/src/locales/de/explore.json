@@ -4,9 +4,9 @@
     "report.success": "Ihr Report wurde an uns gesendet. Vielen Dank!",
     "report.error": "Ihr Report wurde nicht gesendet. Bitte erneut versuchen!",
     "loading": "Ihre Daten werden analysiert",
-    "unrecognizedCard.headline": "Wir brauchen Ihre Hilfe!",
-    "unrecognizedCard.text": "Wenn Sie uns eine anonymisierte Zusammenfassung der Strukturen Ihres Facebook-Exportes senden, können wir den Facebook-Daten Importer für Sie und alle anderen verbessern, so dass Sie mehr Analysen und Berichte angezeigt bekommen.",
-    "unrecognizedCard.button": "Mehr erfahren",
+    "reportCard.headline": "Wir brauchen Ihre Hilfe!",
+    "reportCard.text": "Wenn Sie uns eine anonymisierte Zusammenfassung der Strukturen Ihres Facebook-Exportes senden, können wir den Facebook-Daten Importer für Sie und alle anderen verbessern, so dass Sie mehr Analysen und Berichte angezeigt bekommen.",
+    "reportCard.button": "Mehr erfahren",
     "details.button": "Details ansehen",
     "analysis.label.techDemo": "Tech Demo",
     "scroll": "Scrollen Sie weiter, um mehr zu sehen"

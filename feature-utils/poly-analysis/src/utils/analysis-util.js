@@ -16,3 +16,28 @@ export async function relevantZipEntries(zipFile) {
             !entry.path.includes("__MACOSX")
     );
 }
+
+export function groupActivitiesByTime(activityDates) {
+    let groupedActivities = { total: 0, values: {} };
+
+    activityDates.forEach((date) => {
+        const activityYear = date.getFullYear();
+        const activityMonth = date.getMonth();
+        if (
+            groupedActivities?.values?.[activityYear]?.values?.[activityMonth]
+        ) {
+            groupedActivities.values[activityYear].values[activityMonth]++;
+            groupedActivities.values[activityYear].total++;
+        } else {
+            if (!groupedActivities.values?.[activityYear]) {
+                groupedActivities.values[activityYear] = {
+                    total: 1,
+                    values: {},
+                };
+            } else groupedActivities.values[activityYear].total++;
+            groupedActivities.values[activityYear].values[activityMonth] = 1;
+        }
+        groupedActivities.total++;
+    });
+    return groupedActivities;
+}
