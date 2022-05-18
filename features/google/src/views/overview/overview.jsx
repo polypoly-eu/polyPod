@@ -66,7 +66,7 @@ const Overview = () => {
                 width={BUBBLE_VIZ_WIDTH}
                 height={BUBBLE_VIZ_HEIGHT}
                 bubbleColor={BUBBLE_LIGHT_COLOR}
-                textColor={BUBBLE_DARK_COLOR}
+                textColor={BUBBLE_LIGHT_COLOR}
                 onBubbleClick={() =>
                     history.push("/explore", INITIAL_HISTORY_STATE)
                 }
