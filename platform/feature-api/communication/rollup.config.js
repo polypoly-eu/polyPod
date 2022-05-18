@@ -24,4 +24,23 @@ export default [
         ],
         context: "window",
     },
+    {
+        input: "src/remote-pod/bootstrap.ts",
+        output: [
+            {
+                file: "dist/bootstrap.js",
+                format: "iife",
+            },
+        ],
+        context: "null",
+        plugins: [
+            resolve(),
+            commonjs(),
+            sucrase({
+                exclude: ["node_modules/**"],
+                transforms: ["typescript"],
+            }),
+        ],
+        external: ["dist/port-authority/middleware"],
+    },
 ];
