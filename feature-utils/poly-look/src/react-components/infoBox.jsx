@@ -2,10 +2,10 @@ import React from "react";
 
 import "./infoBox.css";
 
-const InfoBox = ({ textContent, img }) => {
+const InfoBox = ({ textContent }) => {
   return (
     <div className="infobox">
-      <img src={img} alt="" className="icon" />
+      <img src="./images/info-circle.svg" alt="" className="icon" />
       <div className="text-content">{textContent}</div>
     </div>
   );

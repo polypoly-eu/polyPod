@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-// import InfoBox from "../infoBox/infoBox.jsx";
 import {
     PolyButton,
     PolyImportContext,
     RoutingWrapper,
     ScrollButton,
     ScrollSmoothly,
+    InfoBox,
 } from "@polypoly-eu/poly-look";
 import { GoogleContext } from "../../context/google-context.jsx";
 import { useHistory } from "react-router-dom";
@@ -157,7 +157,7 @@ const ImportExplanationExpandable = ({
                     After you have requested your data, Facebook will notify you
                     when you can download it to your phone.
                 </p>
-                {/* <InfoBox textContent={i18n.t("import:download.info")} /> */}
+                <InfoBox textContent="It can take up to 24 hours before your data is available!" />
                 <div className="separator"></div>
                 <h4>How it works:</h4>
                 <img src="./images/letter.svg" alt="facebook" />
@@ -231,7 +231,7 @@ const ImportExplanationExpandable = ({
                 >
                     Import File
                 </PolyButton>
-                {/* <InfoBox textContent={i18n.t("import:import.info")} /> */}
+                <InfoBox textContent="The file you import includes all your Google data up to now. To update your data in the future, just request a new download." />
             </>
         ),
         explore: (
@@ -273,7 +273,7 @@ const ImportExplanationExpandable = ({
             <div className="intro">
                 <h1>Find out what Google knows about you!</h1>
                 <h1>How to add your Google data to your polyPod</h1>
-                {/* <InfoBox textContent={i18n.t("import:intro.info")} /> */}
+                <InfoBox textContent="Only a copy of your data is created, your Google account remains unchanged." />
             </div>
             <ScrollButton
                 scrollRef={expandableRef}
