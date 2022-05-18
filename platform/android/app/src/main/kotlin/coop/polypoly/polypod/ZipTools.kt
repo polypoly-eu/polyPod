@@ -23,13 +23,13 @@ class ZipTools {
                         "/$folder/$fileName"
                     )
 
-                    var file = File(filePath)
+                    val file = File(filePath)
 
                     if (entry.isDirectory) {
                         file.mkdirs()
                     } else {
                         // create parent directories for files
-                        file.parentFile.mkdirs()
+                        file.parentFile?.mkdirs()
                     }
 
                     if (!entry.isDirectory) {
