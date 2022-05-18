@@ -28,3 +28,8 @@
     font-family: "Jost Bold";
     src: url("../fonts/jost_bold.ttf");
 }
+
+.source {
+    font-family: "Jost Medium";
+    font-size: 12px;
+}

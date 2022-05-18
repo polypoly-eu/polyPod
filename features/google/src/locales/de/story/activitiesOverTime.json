@@ -1,0 +1,12 @@
+{
+    "title": "Daten von Ihnen und über Sie",
+    "summary": "Seit Sie Google beigetreten sind, wurden von Ihnen {{number_activities}} Dateneinträge mit Uhrzeit und Datum erfasst.",
+    "tab.year": "Jahr",
+    "tab.total": "Gesamt",
+    "tab.events.total": "Einträge ({{number_events}} gesamt)",
+    "tab.events.yearly": "Einträge ({{number_events}} für das angezeigte Jahr)",
+    "tab.arrow.left": "Vorheriges",
+    "tab.arrow.right": "Nächstes",
+    "number.events": "Anzahl der Einträge",
+    "number.events.thousands": "Anzahl der Einträge (in Tausend)"
+}
