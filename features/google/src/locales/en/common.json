@@ -1,3 +1,7 @@
 {
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "source.your.google.data": "Source: Your Google data",
+    "total.years": "Years since you joined Google",
+    "months.abbreviation": "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec",
+    "details": "Details"
 }

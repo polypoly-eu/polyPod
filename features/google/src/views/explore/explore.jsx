@@ -9,11 +9,13 @@ import {
     PolyButton,
 } from "@polypoly-eu/poly-look";
 
+import i18n from "../../i18n";
+
 import "./explore.css";
 import { ministories } from "../ministories/ministories.js";
 import { useHistory } from "react-router-dom";
 
-const UnrecognizedCard = () => {
+const ReportCard = () => {
     const history = useHistory();
 
     return (
@@ -35,12 +37,13 @@ const UnrecognizedCard = () => {
 
 const ExploreView = () => {
     const { account } = useContext(PolyImportContext);
+    const history = useHistory();
     const renderFileAnalyses = () => {
         if (!account) return null;
         return (
             <Screen className="explore" layout="poly-standard-layout">
                 <List>
-                    <UnrecognizedCard />
+                    <ReportCard />
                     {ministories.map((MinistoryClass, index) => {
                         const ministory = new MinistoryClass({
                             account,
@@ -57,6 +60,7 @@ const ExploreView = () => {
                         );
                         return ministory.hasDetails() ? (
                             <RoutingWrapper
+                                key={index}
                                 history={history}
                                 route="/explore/details"
                                 stateChange={{
@@ -65,7 +69,7 @@ const ExploreView = () => {
                             >
                                 <ClickableCard
                                     key={index}
-                                    buttonText={"Details"}
+                                    buttonText={i18n.t("common:details")}
                                 >
                                     {content}
                                 </ClickableCard>
