@@ -1,0 +1,37 @@
+.report-details .report-card:first-child {
+    margin-top: 20px;
+}
+
+.report-details .report-card {
+    max-width: var(--max-width);
+    margin: 0 auto 12px auto;
+    padding: 12px 20px 20px 20px;
+    border-radius: 8px;
+}
+
+.report-details .report-card table {
+    display: block;
+    overflow-x: scroll;
+}
+
+.report-details .report-card > h1 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.report-details .report-card .list ul {
+    padding: 0 20px;
+    margin: 0;
+}
+
+.report-details .report-card .list li {
+    word-break: break-all;
+    text-align: justify;
+    text-justify: distribute-all-lines;
+}
+
+.disabled > button,
+.disabled > div {
+    opacity: 0.5;
+    pointer-events: none;
+}
