@@ -29,17 +29,19 @@ open class PolyOut(
         fun filesPath(context: Context) =
             context.filesDir.absolutePath + "/featureFiles"
 
+        fun pureId(id: String) = id
+            // Previous polyPod builds used polypod:// URLs for files
+            .removePrefix("polypod://")
+            .removePrefix(fsPrefix)
+            .removePrefix("$fsFilesRoot/")
+            .removePrefix(FeatureStorage.activeFeature!!.id + "/")
+
         fun idToPath(id: String, context: Context): String {
             if (FeatureStorage.activeFeature == null) {
                 throw Exception("Cannot execute without a feature")
             }
             val activeFeatureId = FeatureStorage.activeFeature!!.id
-            val pureId = id
-                // Previous polyPod builds used polypod:// URLs for files
-                .removePrefix("polypod://")
-                .removePrefix(fsPrefix)
-                .removePrefix("$fsFilesRoot/")
-                .removePrefix("$activeFeatureId/")
+            val pureId = pureId(id)
 
             return filesPath(context) + "/" + activeFeatureId +
                 "/" + pureId
@@ -164,7 +166,11 @@ open class PolyOut(
             }
         }
 
-        val zipId = destUrl ?: UUID.randomUUID().toString()
+        val zipId = if (destUrl != null) {
+            pureId(destUrl)
+        } else {
+            UUID.randomUUID().toString()
+        }
 
         supervisorScope {
             this.async(Dispatchers.IO) {
@@ -188,7 +194,7 @@ open class PolyOut(
                 }
             }
         }.await()
-        return zipId
+        return "polypod://$fsFilesRoot/$zipId"
     }
 
     open suspend fun removeArchive(id: String) {
