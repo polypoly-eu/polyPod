@@ -20,6 +20,7 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.io.File
+import java.io.InputStream
 import java.security.Provider
 import java.security.Security
 import java.util.zip.ZipFile
@@ -38,6 +39,22 @@ class PolyOutTest {
         InstrumentationRegistry.getInstrumentation().targetContext
     }
     private val resolver by lazy { Shadows.shadowOf(context.contentResolver) }
+
+    private fun path(resource: String): String {
+        return InstrumentationRegistry
+            .getInstrumentation()
+            .javaClass.classLoader!!
+            .getResource(resource)
+            .toString()
+    }
+
+    private fun inputStream(resource: String): InputStream {
+        return InstrumentationRegistry
+            .getInstrumentation()
+            .javaClass.classLoader!!
+            .getResource(resource)
+            .openStream()
+    }
 
     @Before
     fun setup() {
@@ -90,16 +107,8 @@ class PolyOutTest {
 
     @Test
     fun importOneArchiveWorks() {
-        val url = InstrumentationRegistry
-            .getInstrumentation()
-            .javaClass.classLoader!!
-            .getResource("testZip.zip")
-            .toString()
-        val inputStream = InstrumentationRegistry
-            .getInstrumentation()
-            .javaClass.classLoader!!
-            .getResource("testZip.zip")
-            .openStream()
+        val url = path("testZip.zip")
+        val inputStream = inputStream("testZip.zip")
         resolver.registerInputStream(Uri.parse(url), inputStream)
 
         val zipId = runBlocking {
@@ -121,26 +130,10 @@ class PolyOutTest {
 
     @Test
     fun importMultipleArchivesWorks() {
-        val url1 = InstrumentationRegistry
-            .getInstrumentation()
-            .javaClass.classLoader!!
-            .getResource("multipleZips1.zip")
-            .toString()
-        val inputStream1 = InstrumentationRegistry
-            .getInstrumentation()
-            .javaClass.classLoader!!
-            .getResource("multipleZips1.zip")
-            .openStream()
-        val url2 = InstrumentationRegistry
-            .getInstrumentation()
-            .javaClass.classLoader!!
-            .getResource("multipleZips2.zip")
-            .toString()
-        val inputStream2 = InstrumentationRegistry
-            .getInstrumentation()
-            .javaClass.classLoader!!
-            .getResource("multipleZips2.zip")
-            .openStream()
+        val url1 = path("multipleZips1.zip")
+        val inputStream1 = inputStream("multipleZips1.zip")
+        val url2 = path("multipleZips2.zip")
+        val inputStream2 = inputStream("multipleZips2.zip")
         resolver.registerInputStream(Uri.parse(url1), inputStream1)
         resolver.registerInputStream(Uri.parse(url2), inputStream2)
 
