@@ -9,8 +9,10 @@ import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureManifest
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.polyOut.PolyOut
+import coop.polypoly.polypod.util.FakeAesKeyGenerator
+import coop.polypoly.polypod.util.FakeKeyStore
+import coop.polypoly.polypod.util.MockFeature
 import kotlinx.coroutines.runBlocking
-import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,156 +20,14 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.io.File
-import java.io.FileOutputStream
-import java.io.InputStream
-import java.io.OutputStream
-import java.security.Key
-import java.security.KeyStore
-import java.security.KeyStoreSpi
 import java.security.Provider
-import java.security.SecureRandom
 import java.security.Security
-import java.security.cert.Certificate
-import java.security.spec.AlgorithmParameterSpec
-import java.util.Collections
-import java.util.Date
-import java.util.Enumeration
-import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
-import java.util.zip.ZipOutputStream
-import javax.crypto.KeyGenerator
-import javax.crypto.KeyGeneratorSpi
-import javax.crypto.SecretKey
 
 @LooperMode(LooperMode.Mode.PAUSED)
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Config.OLDEST_SDK])
 class PolyOutTest {
-
-    @Suppress("TooManyFunctions")
-    class FakeKeyStore : KeyStoreSpi() {
-        override fun engineIsKeyEntry(
-            alias: String?
-        ): Boolean = wrapped.isKeyEntry(alias)
-
-        override fun engineIsCertificateEntry(
-            alias: String?
-        ): Boolean = wrapped.isCertificateEntry(alias)
-
-        override fun engineGetCertificate(
-            alias: String?
-        ): Certificate = wrapped.getCertificate(alias)
-
-        override fun engineGetCreationDate(
-            alias: String?
-        ): Date = wrapped.getCreationDate(alias)
-
-        override fun engineDeleteEntry(alias: String?) {
-            storedKeys.remove(alias)
-        }
-
-        override fun engineSetKeyEntry(
-            alias: String?,
-            key: Key?,
-            password: CharArray?,
-            chain: Array<out Certificate>?
-        ) =
-            wrapped.setKeyEntry(alias, key, password, chain)
-
-        override fun engineSetKeyEntry(
-            alias: String?,
-            key: ByteArray?,
-            chain: Array<out Certificate>?
-        ) = wrapped.setKeyEntry(alias, key, chain)
-
-        override fun engineStore(
-            stream: OutputStream?,
-            password: CharArray?
-        ) = wrapped.store(stream, password)
-
-        override fun engineSize(): Int = wrapped.size()
-
-        override fun engineAliases(): Enumeration<String> = Collections.enumeration(storedKeys.keys) // ktlint-disable max-line-length
-
-        override fun engineContainsAlias(
-            alias: String?
-        ): Boolean = storedKeys.containsKey(alias)
-
-        override fun engineLoad(
-            stream: InputStream?,
-            password: CharArray?
-        ) = wrapped.load(stream, password)
-
-        override fun engineGetCertificateChain(
-            alias: String?
-        ): Array<Certificate>? = wrapped.getCertificateChain(alias)
-
-        override fun engineSetCertificateEntry(
-            alias: String?,
-            cert: Certificate?
-        ) = wrapped.setCertificateEntry(alias, cert)
-
-        override fun engineGetCertificateAlias(
-            cert: Certificate?
-        ): String? = wrapped.getCertificateAlias(cert)
-
-        override fun engineGetKey(
-            alias: String?,
-            password: CharArray?
-        ): Key? = (storedKeys[alias] as? KeyStore.SecretKeyEntry)?.secretKey
-
-        override fun engineGetEntry(
-            p0: String,
-            p1: KeyStore.ProtectionParameter?
-        ): KeyStore.Entry? = storedKeys[p0]
-
-        override fun engineSetEntry(
-            p0: String,
-            p1: KeyStore.Entry,
-            p2: KeyStore.ProtectionParameter?
-        ) {
-            storedKeys[p0] = p1
-        }
-
-        override fun engineLoad(
-            p0: KeyStore.LoadStoreParameter?
-        ) = wrapped.load(p0)
-
-        override fun engineStore(
-            p0: KeyStore.LoadStoreParameter?
-        ) = wrapped.store(p0)
-
-        override fun engineEntryInstanceOf(
-            p0: String?,
-            p1: Class<out KeyStore.Entry>?
-        ) = wrapped.entryInstanceOf(p0, p1)
-
-        companion object {
-            private val wrapped = KeyStore.getInstance("BKS", "BC")
-            internal val storedKeys = mutableMapOf<String, KeyStore.Entry>()
-        }
-    }
-
-    class FakeAesKeyGenerator : KeyGeneratorSpi() {
-        private val wrapped = KeyGenerator.getInstance("AES", "BC")
-        private var lastSpec: AlgorithmParameterSpec? = null
-
-        override fun engineInit(random: SecureRandom?) = wrapped.init(random)
-
-        override fun engineInit(
-            params: AlgorithmParameterSpec?,
-            random: SecureRandom?
-        ) = wrapped.init(random).also {
-            lastSpec = params
-        }
-
-        override fun engineInit(
-            keysize: Int,
-            random: SecureRandom?
-        ) = wrapped.init(keysize, random)
-
-        override fun engineGenerateKey(): SecretKey = wrapped.generateKey()
-    }
 
     private val polyOut: PolyOut by lazy {
         PolyOut(
@@ -179,32 +39,6 @@ class PolyOutTest {
     }
     private val resolver by lazy { Shadows.shadowOf(context.contentResolver) }
 
-    private lateinit var featuresDir: File
-
-    private val manifestString = """
-    {
-        "name": "testManifest",
-        "description": "testDescription",
-        "author": "testAuthor",
-        "thumbnail": "assets/thumbnail.png",
-        "primaryColor": "#000000",
-        "links": {
-            "link1": "https://example.com/1",
-            "link2": "https://example.com/2"
-        }
-    }
-    """
-
-    private fun createMockFeaturePackage(parent: File, child: String): File {
-        val featurePackage = File(parent, child)
-        ZipOutputStream(FileOutputStream(featurePackage)).use { zipOut ->
-            zipOut.putNextEntry(ZipEntry("manifest.json"))
-            zipOut.write(manifestString.toByteArray())
-            zipOut.closeEntry()
-        }
-        return featurePackage
-    }
-
     @Before
     fun setup() {
         Security.addProvider(object : Provider("AndroidKeyStore", 1.0, "") {
@@ -215,12 +49,27 @@ class PolyOutTest {
         })
 
         val mainDir = context.filesDir
-        featuresDir = File(mainDir, "features")
+        val featuresDir = File(mainDir, "features")
         featuresDir.mkdirs()
 
-        val zip = createMockFeaturePackage(
+        val manifestString = """
+            {
+                "name": "testManifest",
+                "description": "testDescription",
+                "author": "testAuthor",
+                "thumbnail": "assets/thumbnail.png",
+                "primaryColor": "#000000",
+                "links": {
+                    "link1": "https://example.com/1",
+                    "link2": "https://example.com/2"
+                }
+            }
+        """
+
+        val zip = MockFeature.createMockFeaturePackage(
             featuresDir,
-            "test.zip"
+            "test.zip",
+            manifestString
         )
 
         FeatureStorage.activeFeature = Feature(
@@ -237,11 +86,6 @@ class PolyOutTest {
                 thumbnail = ""
             )
         )
-    }
-
-    @After
-    fun teardown() {
-        //
     }
 
     @Test
