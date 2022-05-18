@@ -109,7 +109,11 @@ struct FeatureView: View {
             style: .default,
             handler: { _ in
                 closeAction()
-                ErrorUploader.shared.uploadToServer(errorMsg)
+                ErrorUploader.shared.uploadToServer(errorMsg, completionHandler: { response, error in
+                            print("response=", response)
+                            print("error=", error)
+                            // self.completeEvent(messageId: messageId, response: response, error: error, completionHandler: completionHandler)
+                })
             }
         ))
 

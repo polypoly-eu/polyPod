@@ -88,6 +88,7 @@
 		3B5487E227CD0FF700480CB5 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5487E127CD0FF700480CB5 /* Endpoint.swift */; };
 		5105EA05281ACEEC0040AE0D /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */; };
 		5105EA07281AFDBB0040AE0D /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */; };
+		516C1929282D5730003EB551 /* ErrorUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516C1928282D5730003EB551 /* ErrorUploader.swift */; };
 		5B8653022643FC310014208C /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
 		9000F697285894B500241B27 /* UnlockPolyPod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9000F696285894B500241B27 /* UnlockPolyPod.swift */; };
 		9000F69A28589A7D00241B27 /* SharedUIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9000F69928589A7D00241B27 /* SharedUIComponents.swift */; };
@@ -242,6 +243,7 @@
 		1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
 		3B5487E127CD0FF700480CB5 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtensions.swift; sourceTree = "<group>"; };
+		516C1928282D5730003EB551 /* ErrorUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorUploader.swift; sourceTree = "<group>"; };
 		5B0F7B5F26A924DF00F4EFF4 /* PolyPod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PolyPod.entitlements; sourceTree = "<group>"; };
 		5B8653012643FC310014208C /* PolyNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyNav.swift; sourceTree = "<group>"; };
 		9000F696285894B500241B27 /* UnlockPolyPod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockPolyPod.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				1AA6DE4024191C96008DB1B2 /* Info.plist */,
 				1AB4F37D2508D64600E66BCC /* Settings.bundle */,
 				E9CF1B632625EA3200216B70 /* FeatureView.swift */,
+				516C1928282D5730003EB551 /* ErrorUploader.swift */,
 				E989B350269CA6B7000EE977 /* FilePicker.swift */,
 				E92373BE26289FA900D2CFF3 /* Localizable.strings */,
 				E90F89E92629822400AD7D96 /* OnboardingView.swift */,
@@ -661,6 +664,7 @@
 				1A66F76E2493743D00ED4308 /* Sources */,
 				1A66F76F2493743D00ED4308 /* Frameworks */,
 				1A66F7702493743D00ED4308 /* Resources */,
+				5123501B2823D04800A74A98 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1038,6 +1042,7 @@
 				E989B351269CA6B7000EE977 /* FilePicker.swift in Sources */,
 				1A4C21F224A63E4C006CC1FD /* Quad+CoreDataClass.swift in Sources */,
 				E9F370DD262EE9EE006254C1 /* WidthReader.swift in Sources */,
+				516C1929282D5730003EB551 /* ErrorUploader.swift in Sources */,
 				1AF4689E2420D5F600E51B6D /* FeatureStorage.swift in Sources */,
 				1AF468DE24361D9D00E51B6D /* FileManagerExtensions.swift in Sources */,
 				1AF1178C24C1740D0063EE37 /* Quad+Additions.swift in Sources */,
