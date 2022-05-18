@@ -1,13 +1,9 @@
 import TimelineEvent from "./timeline-event";
 
 export default class AccessLogEntry extends TimelineEvent {
-    constructor({ timestamp, accessLog }) {
+    constructor({ timestamp, productName }) {
         super({ timestamp });
 
-        this._accessLog = accessLog;
-    }
-
-    get activityType() {
-        return this._accessLog;
+        this.productName = productName;
     }
 }

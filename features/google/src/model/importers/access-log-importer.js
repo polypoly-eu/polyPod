@@ -18,7 +18,7 @@ class AccessLogParser {
             const date = rowData[keysEnum["Activity Timestamp"]];
             return new AccessLogEntry({
                 timestamp: new Date(date),
-                accessLog: productName,
+                productName,
             });
         });
         return data;
