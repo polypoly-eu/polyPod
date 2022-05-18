@@ -11,22 +11,7 @@ Logic shared across polyPod platforms - ios, android, wasm.
 
 On most systems, you can simply run `make`, and that will handle everything.
 
-### Building manually:
-
-If you can't use `make` for some reason, you can build the core (but not the
-Swift bindings), as follows:
-
-- Set up flatbuffers:
-
-        ./flatbuffers_shared/setup_flatbuffers.sh
-
-- Generate flatbuffers:
-
-        ./flatbuffers_shared/generate_flatbuffers.sh
-
-- Build the project:
-
-        cargo build
+It is required to run `make` in a bash terminal which contains the necessary dependencies - curl, make, unzip. MacOS and Linux systems terminal should already have everything needed. On Windows, a terminal like [GitBash](https://gitforwindows.org) is needed.
 
 ## Testing
 

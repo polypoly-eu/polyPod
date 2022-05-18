@@ -9,7 +9,6 @@ export default class ActivitySegmentsAnalysis extends RootAnalysis {
             activitySegments,
             "activityType"
         );
-
         if (Object.keys(groupedActivityTypes).length > 0)
             googleAccount.analyses[analysisKeys.groupedActivityTypes] =
                 groupedActivityTypes;

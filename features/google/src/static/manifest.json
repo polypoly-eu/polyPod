@@ -5,14 +5,13 @@
     "thumbnail": "images/thumbnail.png",
     "thumbnailColor": "#f0f1fe",
     "primaryColor": "#0f1938",
+    "links": {},
     "translations": {
         "de": {
             "name": "Google-Daten Importer",
             "author": "polypoly - Die Genossenschaft",
             "description": "Google weiß viel über Sie. Mit dem Google-Daten Importer können Sie Ihre Daten in drei Schritten von Google in Ihren polyPod laden, damit auch Sie selbst endlich einen Überblick bekommen.",
-            "links": {
-                "example-data-download": "https://polypoly.coop/de-de/polypod/example-facebook-data"
-            }
+            "links": {}
         }
     }
 }

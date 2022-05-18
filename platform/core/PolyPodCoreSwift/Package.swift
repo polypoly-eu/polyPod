@@ -14,7 +14,7 @@ let package = Package(
             targets: ["PolyPodCoreSwift"]),
     ],
     dependencies: [
-        .package(path: "../flatbuffers_shared/flatbuffers/swift"),
+        .package(path: "../flatbuffers_shared/flatbuffers_v2.0.0/swift"),
     ],
     targets: [
         .target(

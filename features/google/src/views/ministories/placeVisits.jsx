@@ -8,8 +8,13 @@ class PlaceVisitsMinistory extends SingleDataStory {
         super(props);
         this._neededAnalyses = [analysisKeys.groupedPlaceVisits];
     }
+
     get title() {
         return "Place Visits";
+    }
+
+    get label() {
+        return SingleDataStory.LABELS.TECH_DEMO;
     }
 
     _renderSummary() {

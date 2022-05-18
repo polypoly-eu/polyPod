@@ -36,7 +36,7 @@ import AdViewsAnalysis from "./analyses/ministories/ad-views-analysis.js";
 import OnOffFacebookAdvertisersAnalysis from "./analyses/ministories/on-off-facebook-advertisers-analysis.js";
 import PostReactionsTypesAnalysis from "./analyses/ministories/post-reactions-types-analysis.js";
 
-export const subAnalyses = [
+export const specificAnalyses = [
     ActivitiesAnalysis,
     PostReactionsTypesAnalysis,
     MessagesAnalysis,
@@ -111,4 +111,4 @@ export const subAnalyses = [
     ].includes(analysis);
 });
 
-export const NUMBER_OF_ANALYSES = subAnalyses.length;
+export const NUMBER_OF_ANALYSES = specificAnalyses.length;

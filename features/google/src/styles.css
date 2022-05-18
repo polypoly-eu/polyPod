@@ -11,6 +11,14 @@
     --line-height: 120%;
 }
 
+.google {
+    background-color: var(--theme-primary-color);
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+}
+
 @font-face {
     font-family: "Jost";
     src: url("../fonts/jost_regular.ttf");

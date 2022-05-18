@@ -1,14 +1,14 @@
 use super::core_failure_fbs_mapping::build_failure_fbs;
 use crate::flatbuffers_generated::{
-    feature_manifest_generated::{FeatureManifest, Link, LinkArgs},
-    feature_manifest_response_generated::FeatureManifestParsingResult,
+    feature_manifest::{FeatureManifest, Link, LinkArgs},
+    feature_manifest_response::FeatureManifestParsingResult,
 };
 use crate::{
     core_failure::CoreFailure,
     feature_manifest_parsing,
     flatbuffers_generated::{
-        feature_manifest_generated::FeatureManifestArgs,
-        feature_manifest_response_generated::{
+        feature_manifest::FeatureManifestArgs,
+        feature_manifest_response::{
             finish_feature_manifest_parsing_response_buffer, FeatureManifestParsingResponse,
             FeatureManifestParsingResponseArgs,
         },
@@ -96,7 +96,7 @@ fn build_links_buffer<'a>(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::flatbuffers_generated::feature_manifest_response_generated::root_as_feature_manifest_parsing_response;
+    use crate::flatbuffers_generated::feature_manifest_response::root_as_feature_manifest_parsing_response;
 
     #[test]
     fn test_build_failure() {

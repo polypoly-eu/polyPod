@@ -6,6 +6,7 @@ class DataImportingStatusReport extends ReportStory {
         super(props);
         this._neededReports = ["importersData"];
     }
+
     get title() {
         return "Importing status";
     }

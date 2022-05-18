@@ -46,7 +46,7 @@ export default class ActivitiesImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await zipFile.getEntries();
         const activityEntries = entries.filter(({ path }) =>
-            activityRegex.test(path.replaceAll("%20", " "))
+            activityRegex.test(path)
         );
 
         const parser = new ActivityParser();
