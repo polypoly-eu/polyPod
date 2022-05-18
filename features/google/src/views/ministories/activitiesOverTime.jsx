@@ -18,8 +18,6 @@ class ActivitiesOverTimeMinistory extends SingleDataStory {
     }
 
     _renderSummary() {
-        console.log(this.analyses);
-        console.log(this.analysisData);
         return (
             <ActivitiesOverTimeStorySummary
                 activitiesOverTime={this.analysisData}
