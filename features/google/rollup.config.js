@@ -2,13 +2,12 @@ import resolve from "@rollup/plugin-node-resolve";
 import copy from "@polypoly-eu/rollup-plugin-copy-watch";
 import sucrase from "@rollup/plugin-sucrase";
 import css from "rollup-plugin-css-only";
-import json from "@rollup/plugin-json";
 import commonjs from "@rollup/plugin-commonjs";
 import serve from "rollup-plugin-serve";
 import svg from "rollup-plugin-svg";
 import replace from "@rollup/plugin-replace";
-
 import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
+import sillyI18n from "@polypoly-eu/silly-i18n/rollup-plugin.cjs";
 
 const externalPackages = {
     "@polypoly-eu/poly-look": "polyLook",
@@ -25,9 +24,9 @@ export default (commandLineArgs) => {
             globals: externalPackages,
         },
         plugins: [
+            sillyI18n(),
             svg(),
             css({ output: "css/bundle.css" }),
-            json(),
             sucrase({
                 transforms: ["jsx"],
                 production: true,
