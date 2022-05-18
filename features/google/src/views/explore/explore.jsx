@@ -9,6 +9,8 @@ import {
     PolyButton,
 } from "@polypoly-eu/poly-look";
 
+import i18n from "../../i18n";
+
 import "./explore.css";
 import { ministories } from "../ministories/ministories.js";
 import { useHistory } from "react-router-dom";
