@@ -173,12 +173,12 @@ open class PolyOut(
                         throw Error("File import error")
                     }
                     val fs = Preferences.getFileSystem(context).toMutableMap()
-                    if (fs[fsPrefix + zipId] != null) {
-                        val array = fs[fsPrefix + zipId]!!.toMutableList()
+                    if (fs[zipId] != null) {
+                        val array = fs[zipId]!!.toMutableList()
                         array.add(fileName)
-                        fs[fsPrefix + zipId] = array.toTypedArray()
+                        fs[zipId] = array.toTypedArray()
                     } else {
-                        fs[fsPrefix + zipId] = arrayOf(fileName)
+                        fs[zipId] = arrayOf(fileName)
                     }
                     Preferences.setFileSystem(context, fs)
                     val featureId = FeatureStorage.activeFeature?.id
