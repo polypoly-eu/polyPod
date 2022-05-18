@@ -2,6 +2,7 @@ package coop.polypoly.polypod
 
 import android.content.Context
 import androidx.preference.PreferenceManager
+import org.json.JSONArray
 import org.json.JSONObject
 
 class Preferences {
@@ -71,8 +72,13 @@ class Preferences {
             val keysItr: Iterator<String> = jsonObject.keys()
             while (keysItr.hasNext()) {
                 val k = keysItr.next()
-                val v = jsonObject.get(k) as Array<String>
-                outputMap[k] = v
+                val v = jsonObject.get(k) as JSONArray
+                val list = mutableListOf<String>()
+                for (i in 0 until v.length()) {
+                    val s = v.get(i) as String
+                    list.add(s)
+                }
+                outputMap[k] = list.toTypedArray()
             }
             return outputMap
         }
