@@ -380,7 +380,7 @@ export class IDBPolyOut implements PolyOut {
 
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            const zipId = "polypod://" + createUUID();
+            const zipId = "polypod://" + "FeatureFiles/" + createUUID();
 
             tx.objectStore(OBJECT_STORE_POLY_OUT).put(
                 [
