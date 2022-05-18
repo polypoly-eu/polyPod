@@ -1,5 +1,6 @@
 package coop.polypoly.polypod.polyout
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -177,13 +178,15 @@ class PolyOutTest {
         override fun engineGenerateKey(): SecretKey = wrapped.generateKey()
     }
 
-    private var polyOut: PolyOut = PolyOut(
-        context = InstrumentationRegistry.getInstrumentation().targetContext
-    )
-    private var context = InstrumentationRegistry
-        .getInstrumentation()
-        .targetContext
-    private var resolver = Shadows.shadowOf(context.contentResolver)
+    private val polyOut: PolyOut by lazy {
+        PolyOut(
+            context = context
+        )
+    }
+    private val context: Context by lazy {
+        InstrumentationRegistry.getInstrumentation().targetContext
+    }
+    private val resolver by lazy { Shadows.shadowOf(context.contentResolver) }
 
     @Before
     fun setup() {
