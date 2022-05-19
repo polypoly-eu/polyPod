@@ -1,14 +1,5 @@
 :root {
-    --background-dark: var(--color-dark);
-    --background-light: var(--color-white);
-
-    --text-white: var(--color-white);
-    --text-light: var(--color-white);
-    --text-dark: var(--color-indigo-950);
-
-    /* Size */
-    --max-width: 412px;
-    --line-height: 120%;
+        --line-height: 120%;
 }
 
 .google {
