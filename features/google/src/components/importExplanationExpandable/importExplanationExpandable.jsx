@@ -129,7 +129,7 @@ const ImportExplanationExpandable = ({
                     onClick={() => handleExampleDataRequest()}
                     label="Use example data"
                 ></PolyButton>
-                <InfoBox textContent="IMPORTANT: Now you need to wait for the email notification from Facebook that your data is available for download, which can take up to 24 hours." />
+                <InfoBox textContent="IMPORTANT: Now you need to wait for the email notification from Google that your data is available for download, which can take up to 24 hours." />
             </>
         ),
         download: (
