@@ -47,10 +47,12 @@ exports.default = function (options) {
                     ? ["", JSON.stringify(language)]
                     : [", determineLanguage", "determineLanguage()"];
                 const translationsArg = JSON.stringify(translations);
+                const fallbackLanguage = options?.fallbackLanguage || "en";
+                const fallbackLanguageArg = JSON.stringify(fallbackLanguage);
 
                 return (
                     `import { I18n${importExtra} } from "@polypoly-eu/silly-i18n"\n` +
-                    `export default new I18n(${languageArg}, ${translationsArg});`
+                    `export default new I18n(${languageArg}, ${translationsArg}, ${fallbackLanguageArg});`
                 );
             }
         },

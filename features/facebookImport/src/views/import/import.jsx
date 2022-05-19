@@ -3,7 +3,7 @@ import { ImporterContext } from "../../context/importer-context.jsx";
 import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
 import { PolyImportContext, ProgressBar } from "@polypoly-eu/poly-look";
 import ImportExplanationExpandable from "../../components/importExplanationExpandable/importExplanationExpandable.jsx";
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
 import { FBIMPORT_NAMESPACE } from "../../constants.js";
 

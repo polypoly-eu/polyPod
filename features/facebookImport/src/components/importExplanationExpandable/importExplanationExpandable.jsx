@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import RouteButton from "../buttons/routeButton.jsx";
 import { ScrollLabel, scrollSmoothly, InfoBox } from "@polypoly-eu/poly-look";
 import "./importExplanationExpandable.css";

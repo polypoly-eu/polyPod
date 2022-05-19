@@ -11,7 +11,7 @@ import {
     ClickableCard,
 } from "@polypoly-eu/poly-look";
 
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 
 import "./explore.css";
 import { ministories } from "../ministories/ministories.js";

@@ -1,5 +1,5 @@
 import SwiperCore from "swiper/core";
-import i18n from "./i18n.js";
+import i18n from "!silly-i18n";
 
 import "swiper/css";
 import "./styles.css";
