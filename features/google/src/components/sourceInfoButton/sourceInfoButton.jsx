@@ -1,13 +1,13 @@
 import React from "react";
 
-import InfoButton from "../buttons/infoButton/infoButton.jsx";
+import { IconButton } from "@polypoly-eu/poly-look";
 
 import "./sourceInfoButton.css";
 
-const SourceInfoButton = ({ source, infoScreen, stateChange, className }) => (
+const SourceInfoButton = ({ source, className }) => (
     <div className={`source-info-container ${className || ""}`}>
-        <p className="source">{source}</p>
-        <InfoButton infoScreen={infoScreen} stateChange={stateChange} />
+        <p className="poly-small-print">Source: {source}</p>
+        <IconButton icon="question" fillDirection="left" />
     </div>
 );
 

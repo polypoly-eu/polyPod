@@ -28,7 +28,7 @@ export const GoogleContextProvider = ({ children }) => {
     };
 
     function handleBack() {
-        if (popUp) return closePopUp();
+        if (popUp?.name) return closePopUp();
         history.length > 1 && history.goBack();
     }
 
