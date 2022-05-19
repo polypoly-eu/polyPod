@@ -38,7 +38,6 @@ jobs:
 
   upload_build:
     name: Upload build
-    if: contains(fromJson('["all", "google-play"]'), github.event.inputs.targets)
     needs: check_preconditions
     runs-on: ubuntu-latest
     steps:
