@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import i18n from "../../i18n.js";
 import RouteButton from "../buttons/routeButton.jsx";
-import { ScrollLabel, SmoothScroll, InfoBox } from "@polypoly-eu/poly-look";
+import { ScrollLabel, scrollSmoothly, InfoBox } from "@polypoly-eu/poly-look";
 import "./importExplanationExpandable.css";
 
 const isSectionOpened = (section, importStatus, importSteps) => {
@@ -36,7 +36,7 @@ const ImportExplanationExpandable = ({
     const expandableId = "expandable";
 
     useEffect(() => {
-        SmoothScroll(importIds[importStatus], expandableId, ["progress-bar"]);
+        scrollSmoothly(importIds[importStatus], expandableId, ["progress-bar"]);
     }, [importStatus]);
 
     const handleRequestStatus = () => {

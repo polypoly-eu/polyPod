@@ -1,2 +1,2 @@
-import { SmoothScroll } from "./smoothScroll";
-export { SmoothScroll };
+import { scrollSmoothly } from "./scrollSmoothly";
+export { scrollSmoothly };

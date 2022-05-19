@@ -7,7 +7,7 @@
  * @param {string} [options.speed = 10] - Speed of the scrolling (in ms; smaller = faster)
  * @param {string} [options.step = 10] - Steps size of the scrolling (smaller = smoother but slower)
  */
-export function SmoothScroll(
+export function scrollSmoothly(
   childId,
   parentId,
   topNavigationElementIds,

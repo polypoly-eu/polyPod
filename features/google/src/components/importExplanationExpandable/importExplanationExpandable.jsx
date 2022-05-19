@@ -4,7 +4,7 @@ import {
     PolyImportContext,
     RoutingWrapper,
     ScrollLabel,
-    SmoothScroll,
+    scrollSmoothly,
     InfoBox,
 } from "@polypoly-eu/poly-look";
 import { GoogleContext } from "../../context/google-context.jsx";
@@ -47,7 +47,7 @@ const ImportExplanationExpandable = ({
     const expandableId = "expandable";
 
     useEffect(() => {
-        SmoothScroll(importIds[importStatus], expandableId, ["progress-bar"]);
+        scrollSmoothly(importIds[importStatus], expandableId, ["progress-bar"]);
     }, [importStatus]);
 
     const handleRequestStatus = () => {
