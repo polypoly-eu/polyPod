@@ -47,7 +47,7 @@ async function openDatabase(): Promise<IDBDatabase> {
                 const keyPath = QUAD_KEYS.filter((_, idx) => (mask >> idx) & 1);
                 polyInStore.createIndex(keyPath.join("-"), keyPath);
             }
-            db.createObjectStore(OBJECT_STORE_POLY_OUT, { keyPath: "id" });
+            db.createObjectStore(OBJECT_STORE_POLY_OUT);
         };
 
         request.onsuccess = () => resolve(request.result);
@@ -195,7 +195,7 @@ interface FileInfo {
     id: string;
     name: string;
     time: Date;
-    blob: Blob;
+    buffer: ArrayBuffer;
 }
 
 /**
@@ -253,31 +253,40 @@ interface File {
  * It implements the PolyOut interface by storing files in IndexedDB
  * @class IDBPolyOut
  */
-class IDBPolyOut implements PolyOut {
-    private async getFileInfo(id: string): Promise<FileInfo> {
+export class IDBPolyOut implements PolyOut {
+    private async getFilesInfo(zipId: string): Promise<FileInfo[]> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readonly");
-            const request = tx.objectStore(OBJECT_STORE_POLY_OUT).get(id);
+            const request = tx.objectStore(OBJECT_STORE_POLY_OUT).get(zipId);
             request.onsuccess = () => {
                 if (request.result) resolve(request.result);
-                else reject(new Error(`File not found: ${id}`));
+                else reject(new Error(`File not found: ${zipId}`));
             };
             tx.onerror = tx.onabort = () => reject(request.error);
         });
     }
 
-    private async getZipEntries(id: string): Promise<zip.Entry[]> {
-        const file = await this.getFileInfo(id);
-        const reader = new zip.ZipReader(new zip.BlobReader(file.blob));
-        return reader.getEntries();
+    private async getZipEntries(zipId: string): Promise<zip.Entry[][]> {
+        const files = await this.getFilesInfo(zipId);
+        return Promise.all(
+            files.map(async (file) => {
+                const reader = new zip.ZipReader(
+                    new zip.BlobReader(new Blob([file.buffer]))
+                );
+                const entries = await reader.getEntries();
+                return entries;
+            })
+        );
     }
 
     private async getFile(id: string): Promise<File> {
         const match = /^(.*?:\/\/.*?)\/(.*)/.exec(id);
         if (match) {
             const [, zipId, filename] = match;
-            const entries = await this.getZipEntries(zipId);
+            const entries = ([] as zip.Entry[]).concat(
+                ...(await this.getZipEntries(zipId))
+            );
             const entry = entries.find((ent) => ent.filename == filename);
             if (!entry) throw new Error(`Zip entry not found: ${filename}`);
 
@@ -297,23 +306,9 @@ class IDBPolyOut implements PolyOut {
                     );
                 },
             };
+        } else {
+            throw new Error(`Could not identify file for ${id}`);
         }
-
-        const file = await this.getFileInfo(id);
-        return {
-            async read() {
-                return new Uint8Array(await file.blob.arrayBuffer());
-            },
-            stat() {
-                return new CompatStats(
-                    id,
-                    file.blob.size,
-                    file.time.toISOString(),
-                    file.name,
-                    false
-                );
-            },
-        };
     }
 
     readFile(path: string, options: EncodingOptions): Promise<string>;
@@ -335,11 +330,13 @@ class IDBPolyOut implements PolyOut {
         return new CompatStats("", 0, "", "", true);
     }
 
-    async readDir(id: string): Promise<Entry[]> {
-        if (id != "") {
-            const entries = await this.getZipEntries(id);
+    async readDir(zipId: string): Promise<Entry[]> {
+        if (zipId != "") {
+            const entries = ([] as zip.Entry[]).concat(
+                ...(await this.getZipEntries(zipId))
+            );
             return entries.map(({ filename }) => ({
-                id: `${id}/${filename}`,
+                id: `${zipId}/${filename}`,
                 path: filename,
             }));
         }
@@ -358,32 +355,83 @@ class IDBPolyOut implements PolyOut {
         throw "Not implemented: writeFile";
     }
 
-    async importArchive(url: string): Promise<string> {
-        const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
-        const blob = await (await fetch(dataUrl)).blob();
+    /// destUrl should be the same as zipId
+    async importArchive(url: string, destUrl?: string): Promise<string> {
+        const { fileName } = FileUrl.fromUrl(url);
+        const buffer = await (await fetch(url)).arrayBuffer();
         const db = await openDatabase();
+
+        if (destUrl) {
+            const zipId = destUrl;
+
+            return new Promise((resolve, reject) => {
+                const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readonly");
+                const request = tx
+                    .objectStore(OBJECT_STORE_POLY_OUT)
+                    .get(zipId);
+
+                request.onsuccess = () => {
+                    let obj: FileInfo[] = [];
+                    if (request.result) {
+                        //request.result is readonly, so I make a shallow copy
+                        obj = [...request.result];
+                        obj.push({
+                            id: zipId,
+                            name: fileName,
+                            time: new Date(),
+                            buffer: buffer,
+                        });
+                    } else {
+                        obj = [
+                            {
+                                id: zipId,
+                                name: fileName,
+                                time: new Date(),
+                                buffer: buffer,
+                            },
+                        ];
+                    }
+
+                    const newTx = db.transaction(
+                        [OBJECT_STORE_POLY_OUT],
+                        "readwrite"
+                    );
+                    newTx.objectStore(OBJECT_STORE_POLY_OUT).put(obj, zipId);
+
+                    newTx.oncomplete = () => resolve(zipId);
+                    newTx.onerror = newTx.onabort = () => reject(newTx.error);
+                };
+
+                tx.onerror = tx.onabort = () => reject(tx.error);
+            });
+        }
 
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            const fileId = "polypod://" + createUUID();
+            const zipId = "polypod://" + "FeatureFiles/" + createUUID();
 
-            tx.objectStore(OBJECT_STORE_POLY_OUT).put({
-                id: fileId,
-                name: fileName,
-                time: new Date(),
-                blob,
-            });
+            tx.objectStore(OBJECT_STORE_POLY_OUT).put(
+                [
+                    {
+                        id: zipId,
+                        name: fileName,
+                        time: new Date(),
+                        buffer: buffer,
+                    },
+                ],
+                zipId
+            );
 
-            tx.oncomplete = () => resolve(fileId);
+            tx.oncomplete = () => resolve(zipId);
             tx.onerror = tx.onabort = () => reject(tx.error);
         });
     }
 
-    async removeArchive(fileId: string): Promise<void> {
+    async removeArchive(zipId: string): Promise<void> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            tx.objectStore(OBJECT_STORE_POLY_OUT).delete(fileId);
+            tx.objectStore(OBJECT_STORE_POLY_OUT).delete(zipId);
             tx.oncomplete = () => resolve();
             tx.onerror = tx.onabort = () => reject(tx.error);
         });
