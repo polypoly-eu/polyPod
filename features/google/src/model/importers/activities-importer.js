@@ -1,6 +1,5 @@
 import UserActivity from "../entities/user-activity";
-
-const activityRegex = /\/My Activity\/.*\.html$/;
+import { matchRegex } from "./utils/lang-constants";
 
 class ActivityParser {
     constructor() {
@@ -46,7 +45,7 @@ export default class ActivitiesImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await zipFile.getEntries();
         const activityEntries = entries.filter(({ path }) =>
-            activityRegex.test(path)
+            matchRegex(path, this.constructor)
         );
 
         const parser = new ActivityParser();
