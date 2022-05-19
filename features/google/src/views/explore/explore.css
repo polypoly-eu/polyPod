@@ -54,6 +54,7 @@
 .unrecognized-analysis-card {
     background-color: var(--theme-primary-color);
     padding: 20px;
+    margin: 0 -12px;
 }
 
 .unrecognized-analysis-card .unrecognized-analysis-title {
