@@ -80,7 +80,10 @@ const DataStructureMiniStory = ({ data }) => {
                 defaultActiveChips={[selectedFolder]}
                 onChipClick={handleFolderSelected}
             />
-            <SourceInfoButton source={"Your google data"} />
+            <SourceInfoButton
+                source={"Your google data"}
+                popUpProps={{ name: "info-bubble" }}
+            />
         </>
     );
 };
