@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
 function executeReplacement(podJs, manifestJsonPath) {
     try {
@@ -41,4 +41,4 @@ function loadManifest(options = {}) {
     executeReplacement(podJsPath, options.manifestPath);
 }
 
-module.exports = loadManifest;
+export default loadManifest;
