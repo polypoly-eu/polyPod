@@ -29,9 +29,10 @@ import i18n from "!silly-i18n";
 import ExploreView from "./views/explore/explore.jsx";
 import DetailsView from "./views/explore/details.jsx";
 import ReportWrapper from "./views/report/reportWrapper.jsx";
+import BasePopUp from "./popUps/base.jsx";
 
 const Google = () => {
-    const { pod, isLoading } = useContext(GoogleContext);
+    const { pod, isLoading, popUp } = useContext(GoogleContext);
 
     const { files } = useContext(PolyImportContext);
 
@@ -76,6 +77,7 @@ const Google = () => {
                     message={i18n.t("common:loading")}
                 />
             )}
+            {popUp?.name && <BasePopUp />}
         </div>
     );
 };

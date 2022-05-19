@@ -18,14 +18,18 @@ export const GoogleContextProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [globalError, setGlobalError] = useState(null);
+    const [popUp, setPopUp] = useState({});
 
     const location = useLocation();
     const history = useHistory();
 
+    const closePopUp = () => {
+        setPopUp({});
+    };
+
     function handleBack() {
-        if (history.length > 1) {
-            history.goBack();
-        }
+        if (popUp) return closePopUp();
+        history.length > 1 && history.goBack();
     }
 
     async function runWithLoadingScreen(task) {
@@ -53,6 +57,9 @@ export const GoogleContextProvider = ({ children }) => {
         <GoogleContext.Provider
             value={{
                 pod,
+                popUp,
+                setPopUp,
+                closePopUp,
                 globalError,
                 isLoading,
                 setIsLoading,

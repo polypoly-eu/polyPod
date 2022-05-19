@@ -17,18 +17,21 @@ import {
     BUBBLE_VIZ_HEIGHT,
     BUBBLE_LIGHT_COLOR,
 } from "../../constants/bubbleViz";
+import { GoogleContext } from "../../context/google-context.jsx";
 
 const Overview = () => {
     const { account, handleRemoveFile, files, refreshFiles } =
         useContext(PolyImportContext);
+    const { setPopUp, closePopUp } = useContext(GoogleContext);
     const history = useHistory();
 
-    function onRemoveFile() {
+    const onRemoveFile = () => {
         if (!files && files.length > 0) return;
         handleRemoveFile(files[0]?.id);
         refreshFiles();
         history.push("/import");
-    }
+        closePopUp();
+    };
     useEffect(() => {
         if (!account) return;
         analyzeFile({
@@ -70,7 +73,20 @@ const Overview = () => {
                     history.push("/explore", INITIAL_HISTORY_STATE)
                 }
             />
-            <PolyButton label="Remove File" onClick={onRemoveFile}></PolyButton>
+            <PolyButton
+                label="Remove File"
+                onClick={() =>
+                    setPopUp({
+                        name: "dialog",
+                        title: "Do you really want to delete the file?",
+                        backButton: { text: "Back", onClick: closePopUp },
+                        proceedButton: {
+                            text: "Proceed",
+                            onClick: onRemoveFile,
+                        },
+                    })
+                }
+            ></PolyButton>
             <RoutingWrapper history={history} route="/explore">
                 <PolyButton label="Explore"></PolyButton>
             </RoutingWrapper>
