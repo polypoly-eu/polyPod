@@ -195,7 +195,7 @@ interface FileInfo {
     id: string;
     name: string;
     time: Date;
-    buffer: ArrayBuffer;
+    blob: Blob;
 }
 
 /**
@@ -271,9 +271,7 @@ export class IDBPolyOut implements PolyOut {
         const files = await this.getFilesInfo(zipId);
         return Promise.all(
             files.map(async (file) => {
-                const reader = new zip.ZipReader(
-                    new zip.BlobReader(new Blob([file.buffer]))
-                );
+                const reader = new zip.ZipReader(new zip.BlobReader(file.blob));
                 const entries = await reader.getEntries();
                 return entries;
             })
@@ -358,7 +356,7 @@ export class IDBPolyOut implements PolyOut {
     /// destUrl should be the same as zipId
     async importArchive(url: string, destUrl?: string): Promise<string> {
         const { fileName } = FileUrl.fromUrl(url);
-        const buffer = await (await fetch(url)).arrayBuffer();
+        const blob = await (await fetch(url)).blob();
         const db = await openDatabase();
 
         if (destUrl) {
@@ -379,7 +377,7 @@ export class IDBPolyOut implements PolyOut {
                             id: zipId,
                             name: fileName,
                             time: new Date(),
-                            buffer: buffer,
+                            blob: blob,
                         });
                     } else {
                         obj = [
@@ -387,7 +385,7 @@ export class IDBPolyOut implements PolyOut {
                                 id: zipId,
                                 name: fileName,
                                 time: new Date(),
-                                buffer: buffer,
+                                blob: blob,
                             },
                         ];
                     }
@@ -416,7 +414,7 @@ export class IDBPolyOut implements PolyOut {
                         id: zipId,
                         name: fileName,
                         time: new Date(),
-                        buffer: buffer,
+                        blob: blob,
                     },
                 ],
                 zipId
