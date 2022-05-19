@@ -242,8 +242,8 @@ open class FeatureFragment : Fragment() {
             }
         }
         startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
-        var url: String = ""
-        var name: String = ""
+        var url = ""
+        var name = ""
         var size: Long = 0
         (pickFileResult?.await())?.let {
             it.let { returnUri ->
