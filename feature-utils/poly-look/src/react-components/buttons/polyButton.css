@@ -26,11 +26,6 @@
   color: var(--theme-primary-color);
 }
 
-.poly-button.centered {
-  margin: 0 auto;
-  width: 100%;
-}
-
 .poly-button.outline {
   border: 1px solid var(--theme-secondary-color);
   color: var(--theme-secondary-color);

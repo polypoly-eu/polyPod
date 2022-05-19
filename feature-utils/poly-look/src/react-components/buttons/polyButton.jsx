@@ -16,11 +16,11 @@ const types = {
   outline: "outline",
 };
 
-const PolyButton = ({ label, centered, type = "filled", ...otherProps }) => {
+const PolyButton = ({ label, type = "filled", ...otherProps }) => {
   return (
     <button
       {...otherProps}
-      className={`poly-button ${centered ? "centered" : ""} ${types[type]} ${
+      className={`poly-button ${types[type]} ${
         otherProps.className || ""
       }`.trim()}
     >
