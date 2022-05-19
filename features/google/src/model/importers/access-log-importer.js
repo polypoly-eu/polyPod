@@ -1,4 +1,5 @@
 import AccessLogEntry from "../entities/access-log-entry";
+import { readCsvFromText } from "./utils/importer-utils";
 
 const accessLogRegex = /\/Access Log Activity\/.*\.csv$/;
 
@@ -6,16 +7,11 @@ class AccessLogParser {
     constructor() {}
 
     _csvToJson(csvText) {
-        const rows = csvText.split("\n");
-        const headers = rows.shift().replaceAll('"', "").split(",");
-
-        const keysEnum = {};
-        headers.forEach((key, index) => (keysEnum[key] = index));
-
+        const { rows, headersEnum } = readCsvFromText(csvText);
         const data = rows.map((row) => {
             const rowData = row.split(",");
-            const productName = rowData[keysEnum["Product Name"]];
-            const date = rowData[keysEnum["Activity Timestamp"]];
+            const productName = rowData[headersEnum["Product Name"]];
+            const date = rowData[headersEnum["Activity Timestamp"]];
             return new AccessLogEntry({
                 timestamp: new Date(date),
                 productName,
