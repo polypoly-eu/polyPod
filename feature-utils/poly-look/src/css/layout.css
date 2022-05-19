@@ -4,9 +4,9 @@
 */
 
 .poly-standard-layout > * {
-  margin-bottom: calc(var(--gdu) * 8);
+  margin-bottom: calc(var(--gdu) * 6);
 }
 
 .poly-standard-layout > :first-child {
-  margin-top: calc(var(--gdu) * 8);
+  margin-top: calc(var(--gdu) * 6);
 }
