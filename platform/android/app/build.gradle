@@ -178,7 +178,8 @@ dependencies {
 }
 
 task copyRemotePod(type: Copy) {
-    from "../../feature-api/communication/remote-pod/dist/bootstrap.js"
+    assert file("../../feature-api/communication/dist/bootstrap.js").exists()
+    from "../../feature-api/communication/dist/bootstrap.js"
     rename "bootstrap.js", "pod.js"
     into "build/generated-assets/container/"
 }
