@@ -61,7 +61,6 @@ const Overview = () => {
 
     return (
         <Screen className="overview" layout="poly-standard-layout">
-            {files && files?.[0] && <p>Imported File: {files[0].name}</p>}
             <PolyChart
                 type="bubble-cluster"
                 data={bubbleData}
@@ -73,6 +72,11 @@ const Overview = () => {
                     history.push("/explore", INITIAL_HISTORY_STATE)
                 }
             />
+            {files && files?.[0] && (
+                <p className="poly-small-print">
+                    Imported File: {files[0].name}
+                </p>
+            )}
             <PolyButton
                 label="Remove File"
                 onClick={() =>

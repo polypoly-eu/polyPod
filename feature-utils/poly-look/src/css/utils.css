@@ -1,0 +1,5 @@
+.poly-small-print {
+  color: var(--theme-small-print-color);
+  font-family: var(--theme-font-medium);
+  font-size: var(--font-size-s);
+}
