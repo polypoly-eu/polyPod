@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import RouteButton from "../buttons/routeButton.jsx";
 import InfoBox from "../infoBox/infoBox.jsx";
 import ScrollButton from "../buttons/scrollButton/scrollButton.jsx";

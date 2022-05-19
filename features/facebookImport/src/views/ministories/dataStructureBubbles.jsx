@@ -1,6 +1,6 @@
 import React from "react";
 import DataStructureMiniStory from "../../components/dataStructureMiniStory/dataStructureMiniStory.jsx";
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
 import { SingleDataStory } from "./singleDataStory.jsx";
 

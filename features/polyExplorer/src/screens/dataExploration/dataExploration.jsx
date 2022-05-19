@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect, useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import Screen from "../../components/screen/screen.jsx";
 import DataTypeBubbleAll from "../../components/dataViz/dataTypeBubbleAll.jsx";
 import DataTypeBubbleCategory from "../../components/dataViz/dataTypeBubbleCategory.jsx";

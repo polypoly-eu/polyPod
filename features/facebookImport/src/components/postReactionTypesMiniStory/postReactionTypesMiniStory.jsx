@@ -3,7 +3,7 @@ import { PolyChart } from "@polypoly-eu/poly-look";
 
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
-import i18n from "../../i18n";
+import i18n from "!silly-i18n";
 
 import likeIcon from "../../static/images/reactions-ministory/like.svg";
 import loveIcon from "../../static/images/reactions-ministory/love.svg";

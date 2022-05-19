@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 
 import "./report.css";
 

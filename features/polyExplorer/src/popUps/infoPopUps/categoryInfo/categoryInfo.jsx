@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import i18n from "../../../i18n.js";
+import i18n from "!silly-i18n";
 import highlights from "../../../data/highlights.js";
 import globals from "../../../data/global.json";
 import BaseInfoPopUp from "../baseInfoPopUp/baseInfoPopUp.jsx";
