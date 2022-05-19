@@ -41,4 +41,4 @@ function loadManifest(options = {}) {
     executeReplacement(podJsPath, options.manifestPath);
 }
 
-exports.default = loadManifest;
+module.exports = loadManifest;

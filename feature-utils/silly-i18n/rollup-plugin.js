@@ -1,14 +1,14 @@
-const fs = require("fs");
-const path = require("path");
-const util = require("util");
-const glob = require("glob");
+import fs from "fs";
+import path from "path";
+import util from "util";
+import glob from "glob";
 
 const DIRNAME = "locales";
 const FILEEXT = ".json";
 const PLUGIN = "silly-i18n";
 const SUFFIX = `?${PLUGIN}`;
 
-exports.default = function (options) {
+export default function (options) {
     return {
         name: PLUGIN,
 
@@ -57,4 +57,4 @@ exports.default = function (options) {
             }
         },
     };
-};
+}
