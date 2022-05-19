@@ -5,7 +5,7 @@ import BaseInfoPopUp from "./info/base.jsx";
 
 const infoPrefix = "info-";
 
-const BasePopUp = ({}) => {
+const BasePopUp = () => {
     const {
         popUp: { name, ...props },
         closePopUp,
