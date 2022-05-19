@@ -18,7 +18,6 @@
     font-family: "Jost Bold";
     font-size: 40px;
     line-height: var(--line-height);
-    letter-spacing: -0.01em;
     margin: 0 0 16px 0;
 }
 
@@ -122,7 +121,6 @@
 
 .import-view .explanation-expandable .section-body {
     line-height: 120%;
-    letter-spacing: -0.01em;
     font-size: 20px;
 }
 
