@@ -1,4 +1,5 @@
 :root {
   /* grid distance unit*/
   --gdu: 4px;
+  --line-height: 120%;
 }
