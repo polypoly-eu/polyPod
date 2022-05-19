@@ -179,18 +179,24 @@ dependencies {
 }
 
 task copyRemotePod(type: Copy) {
-    from "../../feature-api/communication/remote-pod/dist/bootstrap.js"
+    def path = "../../feature-api/communication/dist/bootstrap.js"
+    assert file(path).exists()
+    from path
     rename "bootstrap.js", "pod.js"
     into "build/generated-assets/container/"
 }
 
 task copyBundledFeatures(type: Copy) {
-    from "../../../features/bundle/dist"
+    def path = "../../../features/bundle/dist"
+    assert file(path).exists()
+    from path
     into "build/generated-assets/features"
 }
 
 task copyThirdPartyLicenses(type: Copy) {
-    from "../../../3rd-party-licenses"
+    def path = "../../../3rd-party-licenses"
+    assert file(path).exists()
+    from path
     into "build/generated-assets/3rd-party-licenses"
 }
 
@@ -208,7 +214,9 @@ task installAppOnDevice {
 }
 
 task copyEndpoints(type: Copy) {
-    from "../../../../polyPod-config"
+    def path = "../../../../polyPod-config"
+    assert file(path).exists()
+    from path
     into "build/generated-assets/config-assets"
 }
 

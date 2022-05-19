@@ -6,20 +6,44 @@ import {
     Screen,
     RoutingWrapper,
     ClickableCard,
+    PolyButton,
 } from "@polypoly-eu/poly-look";
 
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 
 import "./explore.css";
 import { ministories } from "../ministories/ministories.js";
+import { useHistory } from "react-router-dom";
+
+const ReportCard = () => {
+    const history = useHistory();
+
+    return (
+        <div className="analysis-card unrecognized-analysis-card poly-theme-light">
+            <div className="unrecognized-analysis-title">
+                <h1>{"We need your help!"}</h1>
+            </div>
+            <p>
+                {
+                    "If you send us an anonymised report about the structure of your Google data, it would help us improve the Google Data Importer so that it can show you even more insights."
+                }
+            </p>
+            <RoutingWrapper route="/report" history={history}>
+                <PolyButton label="Learn more" className="report-button" />
+            </RoutingWrapper>
+        </div>
+    );
+};
 
 const ExploreView = () => {
     const { account } = useContext(PolyImportContext);
+    const history = useHistory();
     const renderFileAnalyses = () => {
         if (!account) return null;
         return (
             <Screen className="explore" layout="poly-standard-layout">
                 <List>
+                    <ReportCard />
                     {ministories.map((MinistoryClass, index) => {
                         const ministory = new MinistoryClass({
                             account,
@@ -36,6 +60,7 @@ const ExploreView = () => {
                         );
                         return ministory.hasDetails() ? (
                             <RoutingWrapper
+                                key={index}
                                 history={history}
                                 route="/explore/details"
                                 stateChange={{
@@ -44,9 +69,7 @@ const ExploreView = () => {
                             >
                                 <ClickableCard
                                     key={index}
-                                    buttonText={i18n.t(
-                                        "explore:details.button"
-                                    )}
+                                    buttonText={i18n.t("common:details")}
                                 >
                                     {content}
                                 </ClickableCard>

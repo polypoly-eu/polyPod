@@ -19,6 +19,7 @@ export default [
         plugins: [
             json(),
             resolve(),
+            commonjs(),
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"],

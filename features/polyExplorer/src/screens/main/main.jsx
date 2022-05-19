@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import Screen from "../../components/screen/screen.jsx";
 import FilteredEntityList from "../../components/filteredEntityList/filteredEntityList.jsx";
 import StoriesPreview from "../../components/storiesPreview/storiesPreview.jsx";

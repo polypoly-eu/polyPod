@@ -1,9 +1,9 @@
 import copyWatch from "@polypoly-eu/rollup-plugin-copy-watch";
 import css from "rollup-plugin-css-only";
-import json from "@rollup/plugin-json";
 import resolve from "@rollup/plugin-node-resolve";
 import sucrase from "@rollup/plugin-sucrase";
 import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
+import sillyI18n from "@polypoly-eu/silly-i18n/rollup-plugin.cjs";
 
 export default {
     input: "src/index.js",
@@ -12,12 +12,12 @@ export default {
         format: "iife",
     },
     plugins: [
+        sillyI18n(),
         genPodjs({
             build_dir: "./dist",
             manifestPath: "./src/static/manifest.json",
         }),
         css({ output: "css/bundle.css" }),
-        json(),
         sucrase({ transforms: [] }),
         copyWatch({
             targets: [
