@@ -9,10 +9,12 @@ import "./base.css";
  * @param {boolean} centered - adds CSS class that centers content
  * @returns
  */
-const BaseOverlay = ({ children, className, centered }) => {
+const BaseOverlay = ({ children, className, centered, opaque }) => {
   return (
     <div
-      className={`base-overlay ${centered ? "centered" : ""} ${className}`}
+      className={`base-overlay ${centered ? "centered" : ""} ${
+        className || ""
+      } ${opaque && "opaque"}`}
       data-testid="base-overlay-test"
     >
       {children}

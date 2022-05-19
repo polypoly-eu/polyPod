@@ -86,6 +86,7 @@ const Overview = () => {
                         },
                     })
                 }
+                type="outline"
             ></PolyButton>
             <RoutingWrapper history={history} route="/explore">
                 <PolyButton label="Explore"></PolyButton>

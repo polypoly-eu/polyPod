@@ -11,3 +11,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.base-overlay.opaque {
+  background-color: rgba(0, 0, 0, 0.5);
+}

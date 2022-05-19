@@ -1,23 +1,27 @@
+import { BaseOverlay, PolyButton } from "@polypoly-eu/poly-look";
 import React from "react";
 
 import "./dialog.css";
 
 const Dialog = ({ title, message, backButton, proceedButton }) => {
     return (
-        <div className="poly-dialog">
-            <div className="poly-dialog-window">
+        <BaseOverlay centered={true} opaque={true}>
+            <div className="poly-dialog-window poly-theme-light poly-standard-layout">
                 {title ? <h2>{title}</h2> : null}
                 {message ? <p>{message}</p> : null}
                 {backButton ? (
-                    <button className="btn back" onClick={backButton.onClick}>
-                        {backButton.text}
-                    </button>
+                    <PolyButton
+                        onClick={backButton.onClick}
+                        label={backButton.text}
+                        type="outline"
+                    />
                 ) : null}
-                <button className="btn proceed" onClick={proceedButton.onClick}>
-                    {proceedButton.text}
-                </button>
+                <PolyButton
+                    onClick={proceedButton.onClick}
+                    label={proceedButton.text}
+                />
             </div>
-        </div>
+        </BaseOverlay>
     );
 };
 
