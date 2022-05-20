@@ -30,7 +30,7 @@ private func calculateFileSize(_ path: String) throws -> Int64 {
     return totalSize
 }
 
-var readDirCache = Dictionary<String, [[String: String]]>()
+var readDirCache = [String: [[String: String]]]()
 
 extension PolyOut {
     static let fsKey = "fileStoreDict"

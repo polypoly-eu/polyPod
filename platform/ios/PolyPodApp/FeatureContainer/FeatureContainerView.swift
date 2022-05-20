@@ -351,7 +351,7 @@ extension FeatureWebView: PolyNavDelegate {
 }
 
 extension FeatureWebView: EndpointDelegate {
-    func doHandleApproveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) -> Void {
+    func doHandleApproveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) {
         let viewController =
             UIApplication.shared.windows.first!.rootViewController!
         let alert = UIAlertController(

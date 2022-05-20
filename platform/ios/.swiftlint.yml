@@ -3,7 +3,6 @@ disabled_rules:
     - cyclomatic_complexity
     - colon
     - control_statement
-    - syntactic_sugar
     - statement_position
     - force_cast
     - todo
@@ -28,3 +27,4 @@ opt_in_rules:
     - empty_count
     - redundant_optional_initialization
     - empty_enum_arguments
+    - syntactic_sugar
