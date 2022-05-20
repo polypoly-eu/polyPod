@@ -54,7 +54,7 @@ final class Endpoint: EndpointProtocol {
             case .failure(let error):
                 Log.error(error.localizedDescription)
                 completionHandler(PodApiError.endpointError("send"))
-            case .success(_):
+            case .success:
                 completionHandler(nil)
             }
         }

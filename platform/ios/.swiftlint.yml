@@ -20,7 +20,6 @@ disabled_rules:
     - closure_parameter_position
     - class_delegate_protocol
     - redundant_void_return
-    - empty_enum_arguments
     - function_parameter_count
 
 opt_in_rules:
