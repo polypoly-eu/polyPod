@@ -2,9 +2,13 @@ import React from "react";
 
 import "./screen.css";
 
-const Screen = ({ children, className, layout }) => {
+const Screen = ({ children, className, layout, onScroll, scrollingRef }) => {
   return (
-    <div className={`poly-screen ${className || ""} ${layout || ""}`}>
+    <div
+      onScroll={onScroll}
+      ref={scrollingRef}
+      className={`poly-screen ${className || ""} ${layout || ""}`}
+    >
       {children}
     </div>
   );

@@ -17,18 +17,21 @@ import {
     BUBBLE_VIZ_HEIGHT,
     BUBBLE_LIGHT_COLOR,
 } from "../../constants/bubbleViz";
+import { GoogleContext } from "../../context/google-context.jsx";
 
 const Overview = () => {
     const { account, handleRemoveFile, files, refreshFiles } =
         useContext(PolyImportContext);
+    const { setPopUp, closePopUp } = useContext(GoogleContext);
     const history = useHistory();
 
-    function onRemoveFile() {
+    const onRemoveFile = () => {
         if (!files && files.length > 0) return;
         handleRemoveFile(files[0]?.id);
         refreshFiles();
         history.push("/import");
-    }
+        closePopUp();
+    };
     useEffect(() => {
         if (!account) return;
         analyzeFile({
@@ -58,7 +61,6 @@ const Overview = () => {
 
     return (
         <Screen className="overview" layout="poly-standard-layout">
-            {files && files?.[0] && <p>Imported File: {files[0].name}</p>}
             <PolyChart
                 type="bubble-cluster"
                 data={bubbleData}
@@ -70,7 +72,26 @@ const Overview = () => {
                     history.push("/explore", INITIAL_HISTORY_STATE)
                 }
             />
-            <PolyButton label="Remove File" onClick={onRemoveFile}></PolyButton>
+            {files && files?.[0] && (
+                <p className="poly-small-print">
+                    Imported File: {files[0].name}
+                </p>
+            )}
+            <PolyButton
+                label="Remove File"
+                onClick={() =>
+                    setPopUp({
+                        name: "dialog",
+                        title: "Do you really want to delete the file?",
+                        backButton: { text: "Back", onClick: closePopUp },
+                        proceedButton: {
+                            text: "Proceed",
+                            onClick: onRemoveFile,
+                        },
+                    })
+                }
+                type="outline"
+            ></PolyButton>
             <RoutingWrapper history={history} route="/explore">
                 <PolyButton label="Explore"></PolyButton>
             </RoutingWrapper>
