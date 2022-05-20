@@ -185,7 +185,7 @@ class PolyOutTests: XCTestCase {
         let (stuff, error) = readDir(url: newUrl!, polyOut: polyOut)
         XCTAssertNil(error, "error is not nil")
         XCTAssertTrue(stuff != nil && !stuff!.isEmpty, "no files were found")
-        XCTAssertTrue(stuff!.filter{ $0["path"] == "testZip/testfile.rtf" }.count > 0, "file not found")
+        XCTAssertTrue(stuff!.filter{ $0["path"] == "testZip/testfile.rtf" }.isNotEmpty, "file not found")
     }
 
     func testImportMultipleArchives() {
@@ -207,7 +207,7 @@ class PolyOutTests: XCTestCase {
         let (stuff, error) = readDir(url: newUrl1!, polyOut: polyOut)
         XCTAssertNil(error, "error is not nil")
         XCTAssertTrue(stuff != nil && !stuff!.isEmpty, "no files were found")
-        XCTAssertTrue(stuff!.filter{ $0["path"] == "multipleZips1/file1.rtf" }.count > 0, "file1  not found")
-        XCTAssertTrue(stuff!.filter{ $0["path"] == "multipleZips2/file2.rtf" }.count > 0, "file2  not found")
+        XCTAssertTrue(stuff!.filter{ $0["path"] == "multipleZips1/file1.rtf" }.isNotEmpty, "file1  not found")
+        XCTAssertTrue(stuff!.filter{ $0["path"] == "multipleZips2/file2.rtf" }.isNotEmpty, "file2  not found")
     }
 }

@@ -18,7 +18,7 @@ extension PolyOut {
             }
         }
         
-        if let body = requestInit.body, body.count > 0 {
+        if let body = requestInit.body, !body.isEmpty {
             let postString = body
             request.httpBody = postString.data(using: .utf8)
         }
