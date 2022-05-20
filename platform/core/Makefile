@@ -30,7 +30,7 @@ swift_flatbuffers_dir := PolyPodCoreSwift/Sources/PolyPodCoreSwift/FlatbuffersGe
 swift_flatbuffer_models := $(patsubst $(flatbuffer_models_dir)/%, $(swift_flatbuffers_dir)/%, $(flatbuffer_models:.fbs=.swift))
 
 # Android export
-export_dir_android := export/android
+tools_dir := tools
 android_core := PolyPodCoreAndroid/core/src/main/
 android_version := 24
 # Rust still uses old-ish r22 version of NDK.
@@ -38,8 +38,8 @@ android_version := 24
 ndk_version := r22b
 google_repo := https://dl.google.com/android/repository
 ndk_lib := android-ndk-$(ndk_version)
-ndk=$(export_dir_android)/NDK_$(ndk_version)
-ndk_archive = $(export_dir_android)/NDK.zip
+ndk=$(tools_dir)/NDK_$(ndk_version)
+ndk_archive = $(tools_dir)/NDK.zip
 export NDK_HOME=$(ndk)/$(ndk_lib)
 java_flatbuffers_package := com/google/flatbuffers
 java_flatbuffers_lib_source := $(flatbuffers)/java/$(java_flatbuffers_package)
