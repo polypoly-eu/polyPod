@@ -61,6 +61,11 @@ const Overview = () => {
 
     return (
         <Screen className="overview" layout="poly-standard-layout">
+            <h1>Your Google data</h1>
+            <p>
+                From all your google data we currently analysed these{" "}
+                {bubbleData.length} categories:
+            </p>
             <PolyChart
                 type="bubble-cluster"
                 data={bubbleData}
