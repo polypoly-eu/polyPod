@@ -53,6 +53,11 @@ export const GoogleContextProvider = ({ children }) => {
         updatePodNavigation(pod, history, handleBack, location);
     });
 
+    //for popUp sideSheet
+    useEffect(() => {
+        document.body.style.overflowY = popUp?.name ? "hidden" : "unset";
+    }, [popUp]);
+
     return (
         <GoogleContext.Provider
             value={{
