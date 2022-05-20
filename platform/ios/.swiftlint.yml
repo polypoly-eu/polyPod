@@ -24,3 +24,6 @@ disabled_rules:
     - redundant_void_return
     - empty_enum_arguments
     - function_parameter_count
+
+opt_in_rules:
+    - redundant_optional_initialization

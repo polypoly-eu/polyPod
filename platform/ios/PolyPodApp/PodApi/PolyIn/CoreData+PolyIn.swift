@@ -107,7 +107,7 @@ fileprivate func quadsPredicateAndFilter(matcher: ExtendedData) -> (NSPredicate,
         arguments.append(predicatesMatcher.properties["termType"] as! String)
         arguments.append(predicatesMatcher.properties["value"] as! String)
     }
-    var filterOperation: ((Quad) -> Bool)? = nil
+    var filterOperation: ((Quad) -> Bool)?
     if let objectsMatcher = matcher.properties["object"] as? ExtendedData {
         let termType = objectsMatcher.properties["termType"] as! String
         if termType == "Literal" {

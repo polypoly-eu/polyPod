@@ -47,7 +47,7 @@ struct FeatureContainerView: UIViewRepresentable {
 }
 
 class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
-    private var feature: Feature? = nil
+    private var feature: Feature?
     func setFeature(feature: Feature) {
         self.feature = feature
     }
@@ -85,7 +85,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
         let ext = (file as NSString).pathExtension
         
         do {
-            var fileData: Data? = nil
+            var fileData: Data?
             if (file.starts(with: PolyOut.fsFilesRoot)) {
                 let options: [String: Any] = [:]
                 PodApi.shared.polyOut.fileRead(
