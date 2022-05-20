@@ -138,7 +138,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func scheduleUpdateNotificationCheck() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) {_, _ in }
-        
         let task = BGProcessingTaskRequest(identifier: AppDelegate.updateNotificationCheckIdentifier)
         task.earliestBeginDate = Date(timeIntervalSinceNow: TimeInterval(UpdateNotification().pushDelay))
         task.requiresExternalPower = false

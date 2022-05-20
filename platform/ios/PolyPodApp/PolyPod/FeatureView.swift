@@ -9,7 +9,7 @@ struct FeatureView: View {
 
     @State var title: String = ""
     @State var activeActions: [String] = []
-    @State var queuedAction: (String, DispatchTime)? = nil
+    @State var queuedAction: (String, DispatchTime)?
     @State var filePicker = FilePicker()
 
     var body: some View {
@@ -34,8 +34,8 @@ struct FeatureView: View {
         let titleLabel = Text(title != "" ? title : feature.name)
             .foregroundColor(
                 lightForeground
-                    ? Color.PolyPod.lightForeground
-                    : Color.PolyPod.darkForeground
+                ? Color.PolyPod.lightForeground
+                : Color.PolyPod.darkForeground
             )
             .font(.custom("Jost-Medium", size: 16))
             .kerning(-0.16)
@@ -92,7 +92,7 @@ struct FeatureView: View {
         alert.addAction(UIAlertAction(
             title: "OK",
             style: .default,
-            handler: { (action: UIAlertAction!) in
+            handler: { _ in
                 closeAction()
             }
         ))
@@ -105,7 +105,7 @@ struct FeatureView: View {
 
     private func openUrl(target: String) {
         let viewController =
-            UIApplication.shared.windows.first!.rootViewController!
+        UIApplication.shared.windows.first!.rootViewController!
         guard let urlString = feature.findUrl(target: target) else {
             let alert = UIAlertController(
                 title: "",
@@ -136,20 +136,20 @@ struct FeatureView: View {
             ),
             preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(
-                            title: NSLocalizedString(
-                                "button_confirm",
-                                comment: ""
-                            ),
-                            style: .default,
-                            handler: { (action: UIAlertAction!) in
-                                UIApplication.shared.open(url)
-                            }))
+            title: NSLocalizedString(
+                "button_confirm",
+                comment: ""
+            ),
+            style: .default,
+            handler: { _ in
+                UIApplication.shared.open(url)
+            }))
         alert.addAction(UIAlertAction(
-                            title: NSLocalizedString(
-                                "button_reject",
-                                comment: ""
-                            ),
-                            style: .default))
+            title: NSLocalizedString(
+                "button_reject",
+                comment: ""
+            ),
+            style: .default))
         viewController.present(alert, animated: true, completion: nil)
     }
 

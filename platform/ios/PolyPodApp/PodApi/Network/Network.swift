@@ -25,7 +25,14 @@ final class Network: NetworkProtocol {
         authToken: String?,
         allowInsecure: Bool
     ) -> Result<Data, PodApiError> {
-        return httpFetchCall(type: "POST", url: url, body: body, contentType: contentType, authToken: authToken, allowInsecure: allowInsecure)
+        return httpFetchCall(
+            type: "POST",
+            url: url,
+            body: body,
+            contentType: contentType,
+            authToken: authToken,
+            allowInsecure: allowInsecure
+        )
     }
     
     func httpGet(
@@ -34,7 +41,14 @@ final class Network: NetworkProtocol {
         authToken: String?,
         allowInsecure: Bool
     ) -> Result<Data, PodApiError> {
-        return httpFetchCall(type: "GET", url: url, body: nil, contentType: contentType, authToken: authToken, allowInsecure: allowInsecure)
+        return httpFetchCall(
+            type: "GET",
+            url: url,
+            body: nil,
+            contentType: contentType,
+            authToken: authToken,
+            allowInsecure: allowInsecure
+        )
     }
     
     func httpFetchCall(
@@ -44,7 +58,7 @@ final class Network: NetworkProtocol {
         contentType: String?,
         authToken: String?,
         allowInsecure: Bool
-    ) -> Result<Data, PodApiError>  {
+    ) -> Result<Data, PodApiError> {
         let requestURL = URL(string: url)!
         guard requestURL.scheme != nil else {
             return .failure(PodApiError.networkError(type, message: "Bad URL: \(url)"))
@@ -71,11 +85,12 @@ final class Network: NetworkProtocol {
         }
         
         let semaphore = DispatchSemaphore(value: 0)
-        var fetchError: PodApiError? = nil
-        var responseData: Data? = nil
+        var fetchError: PodApiError?
+        var responseData: Data?
         let task = URLSession.shared.dataTask(with: request) {
-            data, response, error in
-            defer { semaphore.signal() }
+            data, response, error in defer {
+                semaphore.signal()
+            }
             guard let response = response as? HTTPURLResponse,
                   error == nil else {
                 semaphore.signal()
@@ -83,13 +98,19 @@ final class Network: NetworkProtocol {
             }
             
             guard (200 ... 299) ~= response.statusCode else {
-                fetchError = PodApiError.networkError("http\(type)", message: "Bad response code: \(String(response.statusCode))")
+                fetchError = PodApiError.networkError(
+                    "http\(type)",
+                    message: "Bad response code: \(String(response.statusCode))"
+                )
                 semaphore.signal()
                 return
             }
             
             guard let data = data else {
-                fetchError = PodApiError.networkError("http\(type)", message: "Bad response code: \(String(response.statusCode))")
+                fetchError = PodApiError.networkError(
+                    "http\(type)",
+                    message: "Bad response code: \(String(response.statusCode))"
+                )
                 return
             }
             responseData = data
