@@ -27,3 +27,4 @@ disabled_rules:
 opt_in_rules:
     - empty_count
     - redundant_optional_initialization
+    - empty_enum_arguments

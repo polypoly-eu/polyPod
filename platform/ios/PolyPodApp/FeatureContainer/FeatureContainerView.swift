@@ -91,7 +91,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
                 PodApi.shared.polyOut.fileRead(
                     url: urlString,
                     options: options,
-                    completionHandler: { data, error in
+                    completionHandler: { data, _ in
                         fileData = data as? Data
                     }
                 )
@@ -300,7 +300,7 @@ extension FeatureWebView: WKScriptMessageHandler {
                     let jsExpression = "port1.postMessage(\(responseData));"
                     self?.evaluateJavaScript(
                         jsExpression,
-                        completionHandler: { result, error in
+                        completionHandler: { _, error in
                             if error != nil {
                                 Log.error(
                                     """
@@ -370,7 +370,7 @@ extension FeatureWebView: EndpointDelegate {
                                 comment: ""
                             ),
                             style: .default,
-                            handler: { (action: UIAlertAction!) in
+                            handler: { (_: UIAlertAction!) in
                                 completion(true)
                             }))
         alert.addAction(UIAlertAction(
@@ -379,7 +379,7 @@ extension FeatureWebView: EndpointDelegate {
                                 comment: ""
                             ),
                             style: .default,
-                            handler: { (action: UIAlertAction!) in
+                            handler: { (_: UIAlertAction!) in
                                 completion(false)
                             }))
         viewController.present(alert, animated: true, completion: nil)
