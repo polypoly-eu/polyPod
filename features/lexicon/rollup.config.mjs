@@ -7,7 +7,7 @@ import json from "@rollup/plugin-json";
 import sucrase from "@rollup/plugin-sucrase";
 import copy from "@polypoly-eu/rollup-plugin-copy-watch";
 import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
-import sillyI18n from "@polypoly-eu/silly-i18n/rollup-plugin.cjs";
+import sillyI18n from "@polypoly-eu/silly-i18n/rollup-plugin.js";
 
 const production = !process.env.ROLLUP_WATCH;
 

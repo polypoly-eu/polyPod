@@ -16,7 +16,7 @@ export default {
     },
   },
   plugins: [
-    svg(),
+    svg({ base64: true }),
     css({ output: "css/poly-look.css" }),
     sucrase({
       transforms: ["jsx"],
@@ -27,10 +27,10 @@ export default {
       targets: [
         {
           src: ["src/static/fonts/*"],
-          dest: "dist/fonts"
-        }
-      ]
-    })
+          dest: "dist/fonts",
+        },
+      ],
+    }),
   ],
   external: ["react", "react-dom"],
   onwarn: (warning) => {

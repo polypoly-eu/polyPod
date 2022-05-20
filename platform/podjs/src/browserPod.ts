@@ -47,7 +47,10 @@ async function openDatabase(): Promise<IDBDatabase> {
                 const keyPath = QUAD_KEYS.filter((_, idx) => (mask >> idx) & 1);
                 polyInStore.createIndex(keyPath.join("-"), keyPath);
             }
-            db.createObjectStore(OBJECT_STORE_POLY_OUT);
+            const polyOutStore = db.createObjectStore(OBJECT_STORE_POLY_OUT, {
+                autoIncrement: true,
+            });
+            polyOutStore.createIndex("id", "id");
         };
 
         request.onsuccess = () => resolve(request.result);
@@ -195,7 +198,7 @@ interface FileInfo {
     id: string;
     name: string;
     time: Date;
-    buffer: ArrayBuffer;
+    blob: Blob;
 }
 
 /**
@@ -253,40 +256,35 @@ interface File {
  * It implements the PolyOut interface by storing files in IndexedDB
  * @class IDBPolyOut
  */
-export class IDBPolyOut implements PolyOut {
-    private async getFilesInfo(zipId: string): Promise<FileInfo[]> {
+class IDBPolyOut implements PolyOut {
+    private async getFileInfos(id: string): Promise<FileInfo[]> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readonly");
-            const request = tx.objectStore(OBJECT_STORE_POLY_OUT).get(zipId);
+            const store = tx.objectStore(OBJECT_STORE_POLY_OUT);
+            const request = store.index("id").getAll(id);
             request.onsuccess = () => {
-                if (request.result) resolve(request.result);
-                else reject(new Error(`File not found: ${zipId}`));
+                if (request.result.length > 0) resolve(request.result);
+                else reject(new Error(`File not found: ${id}`));
             };
             tx.onerror = tx.onabort = () => reject(request.error);
         });
     }
 
-    private async getZipEntries(zipId: string): Promise<zip.Entry[][]> {
-        const files = await this.getFilesInfo(zipId);
-        return Promise.all(
-            files.map(async (file) => {
-                const reader = new zip.ZipReader(
-                    new zip.BlobReader(new Blob([file.buffer]))
-                );
-                const entries = await reader.getEntries();
-                return entries;
-            })
-        );
+    private async getZipEntries(id: string): Promise<zip.Entry[]> {
+        const entries = [];
+        for (const file of await this.getFileInfos(id)) {
+            const reader = new zip.ZipReader(new zip.BlobReader(file.blob));
+            entries.push(...(await reader.getEntries()));
+        }
+        return entries;
     }
 
     private async getFile(id: string): Promise<File> {
         const match = /^(.*?:\/\/.*?)\/(.*)/.exec(id);
         if (match) {
             const [, zipId, filename] = match;
-            const entries = ([] as zip.Entry[]).concat(
-                ...(await this.getZipEntries(zipId))
-            );
+            const entries = await this.getZipEntries(zipId);
             const entry = entries.find((ent) => ent.filename == filename);
             if (!entry) throw new Error(`Zip entry not found: ${filename}`);
 
@@ -306,9 +304,23 @@ export class IDBPolyOut implements PolyOut {
                     );
                 },
             };
-        } else {
-            throw new Error(`Could not identify file for ${id}`);
         }
+
+        const file = (await this.getFileInfos(id))[0];
+        return {
+            async read() {
+                return new Uint8Array(await file.blob.arrayBuffer());
+            },
+            stat() {
+                return new CompatStats(
+                    id,
+                    file.blob.size,
+                    file.time.toISOString(),
+                    file.name,
+                    false
+                );
+            },
+        };
     }
 
     readFile(path: string, options: EncodingOptions): Promise<string>;
@@ -330,13 +342,11 @@ export class IDBPolyOut implements PolyOut {
         return new CompatStats("", 0, "", "", true);
     }
 
-    async readDir(zipId: string): Promise<Entry[]> {
-        if (zipId != "") {
-            const entries = ([] as zip.Entry[]).concat(
-                ...(await this.getZipEntries(zipId))
-            );
+    async readDir(id: string): Promise<Entry[]> {
+        if (id != "") {
+            const entries = await this.getZipEntries(id);
             return entries.map(({ filename }) => ({
-                id: `${zipId}/${filename}`,
+                id: `${id}/${filename}`,
                 path: filename,
             }));
         }
@@ -355,83 +365,42 @@ export class IDBPolyOut implements PolyOut {
         throw "Not implemented: writeFile";
     }
 
-    /// destUrl should be the same as zipId
     async importArchive(url: string, destUrl?: string): Promise<string> {
-        const { fileName } = FileUrl.fromUrl(url);
-        const buffer = await (await fetch(url)).arrayBuffer();
+        const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
+        const blob = await (await fetch(dataUrl)).blob();
         const db = await openDatabase();
-
-        if (destUrl) {
-            const zipId = destUrl;
-
-            return new Promise((resolve, reject) => {
-                const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readonly");
-                const request = tx
-                    .objectStore(OBJECT_STORE_POLY_OUT)
-                    .get(zipId);
-
-                request.onsuccess = () => {
-                    let obj: FileInfo[] = [];
-                    if (request.result) {
-                        //request.result is readonly, so I make a shallow copy
-                        obj = [...request.result];
-                        obj.push({
-                            id: zipId,
-                            name: fileName,
-                            time: new Date(),
-                            buffer: buffer,
-                        });
-                    } else {
-                        obj = [
-                            {
-                                id: zipId,
-                                name: fileName,
-                                time: new Date(),
-                                buffer: buffer,
-                            },
-                        ];
-                    }
-
-                    const newTx = db.transaction(
-                        [OBJECT_STORE_POLY_OUT],
-                        "readwrite"
-                    );
-                    newTx.objectStore(OBJECT_STORE_POLY_OUT).put(obj, zipId);
-
-                    newTx.oncomplete = () => resolve(zipId);
-                    newTx.onerror = newTx.onabort = () => reject(newTx.error);
-                };
-
-                tx.onerror = tx.onabort = () => reject(tx.error);
-            });
-        }
 
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            const zipId = "polypod://" + "FeatureFiles/" + createUUID();
+            const id = destUrl || `polypod://${createUUID()}`;
 
-            tx.objectStore(OBJECT_STORE_POLY_OUT).put(
-                [
-                    {
-                        id: zipId,
-                        name: fileName,
-                        time: new Date(),
-                        buffer: buffer,
-                    },
-                ],
-                zipId
-            );
+            tx.objectStore(OBJECT_STORE_POLY_OUT).add({
+                id,
+                name: fileName,
+                time: new Date(),
+                blob,
+            });
 
-            tx.oncomplete = () => resolve(zipId);
+            tx.oncomplete = () => resolve(id);
             tx.onerror = tx.onabort = () => reject(tx.error);
         });
     }
 
-    async removeArchive(zipId: string): Promise<void> {
+    async removeArchive(id: string): Promise<void> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            tx.objectStore(OBJECT_STORE_POLY_OUT).delete(zipId);
+            const store = tx.objectStore(OBJECT_STORE_POLY_OUT);
+            const request = store.index("id").openCursor(id);
+
+            request.onsuccess = () => {
+                const cursor = request.result;
+                if (cursor) {
+                    cursor.delete();
+                    cursor.continue();
+                }
+            };
+
             tx.oncomplete = () => resolve();
             tx.onerror = tx.onabort = () => reject(tx.error);
         });

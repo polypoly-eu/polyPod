@@ -4,7 +4,7 @@
 }
 .poly-icon-filled {
   border: none;
-  background-color: var(--color-gray-300);
+  background-color: var(--theme-info-button-color);
   width: 48px;
   height: 48px;
 }

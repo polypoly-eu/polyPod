@@ -18,14 +18,18 @@ export const GoogleContextProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [globalError, setGlobalError] = useState(null);
+    const [popUp, setPopUp] = useState({});
 
     const location = useLocation();
     const history = useHistory();
 
+    const closePopUp = () => {
+        setPopUp({});
+    };
+
     function handleBack() {
-        if (history.length > 1) {
-            history.goBack();
-        }
+        if (popUp?.name) return closePopUp();
+        history.length > 1 && history.goBack();
     }
 
     async function runWithLoadingScreen(task) {
@@ -49,10 +53,18 @@ export const GoogleContextProvider = ({ children }) => {
         updatePodNavigation(pod, history, handleBack, location);
     });
 
+    //for popUp sideSheet
+    useEffect(() => {
+        document.body.style.overflowY = popUp?.name ? "hidden" : "unset";
+    }, [popUp]);
+
     return (
         <GoogleContext.Provider
             value={{
                 pod,
+                popUp,
+                setPopUp,
+                closePopUp,
                 globalError,
                 isLoading,
                 setIsLoading,

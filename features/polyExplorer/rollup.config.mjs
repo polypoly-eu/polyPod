@@ -7,7 +7,7 @@ import svg from "rollup-plugin-svg";
 import replace from "@rollup/plugin-replace";
 import commonjs from "@rollup/plugin-commonjs";
 import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
-import sillyI18n from "@polypoly-eu/silly-i18n/rollup-plugin.cjs";
+import sillyI18n from "@polypoly-eu/silly-i18n/rollup-plugin.js";
 
 export default {
     input: "src/index.jsx",

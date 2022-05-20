@@ -8,6 +8,7 @@ import {
     BUBBLE_VIZ_HEIGHT,
     BUBBLE_VIZ_WIDTH,
 } from "../../constants/bubbleViz";
+import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
 //This component needs to go to poly-look
 const DataStructureMiniStory = ({ data }) => {
     let totalFiles = 0;
@@ -79,7 +80,10 @@ const DataStructureMiniStory = ({ data }) => {
                 defaultActiveChips={[selectedFolder]}
                 onChipClick={handleFolderSelected}
             />
-            <p className="source data-structure-source">{"your google data"}</p>
+            <SourceInfoButton
+                source={"Your google data"}
+                popUpProps={{ name: "info-bubble" }}
+            />
         </>
     );
 };
