@@ -51,8 +51,17 @@ function errorToString(error) {
 
 function initErrorHandling(window) {
     window.addEventListener("error", ({ error }) => {
+            console.log("before report done");
+
         window.podInternal.reportError(
             "Unhandled error:\n\n" + errorToString(error)
+        );
+        console.log("report done", process.env["POLYPOD_ERROR_REPORT_AUTHORIZATION"]);
+        window.pod.endpoint.send(
+            "polyApiErrorReport",
+             errorToString(error),
+             "application/json",
+             process.env["POLYPOD_ERROR_REPORT_AUTHORIZATION"]
         );
         return true;
     });
