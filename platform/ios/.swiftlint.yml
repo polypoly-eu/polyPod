@@ -9,7 +9,6 @@ disabled_rules:
     - todo
     - unused_closure_parameter
     - line_length
-    - redundant_optional_initialization
     - file_length
     - implicit_getter
     - identifier_name
