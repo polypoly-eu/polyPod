@@ -122,10 +122,12 @@ const ImportExplanationExpandable = ({
                 </p>
                 <img src="./images/document.svg" alt="document" />
                 <PolyButton
+                    className="bg-red"
                     onClick={() => handleRequestStatus()}
                     label="Make your request"
                 ></PolyButton>
                 <PolyButton
+                    type="outline"
                     onClick={() => handleExampleDataRequest()}
                     label="Use example data"
                 ></PolyButton>
@@ -157,10 +159,12 @@ const ImportExplanationExpandable = ({
                     download the file. The file will be saved to your phone.
                 </p>
                 <PolyButton
+                    className="bg-red"
                     onClick={() => handleDownloadDataLinkClick()}
                     label="Download your data"
                 ></PolyButton>
                 <PolyButton
+                    type="outline"
                     onClick={() => onUpdateImportStatus(importSteps.import)}
                     label="Already downloaded your data?"
                 ></PolyButton>
@@ -202,14 +206,17 @@ const ImportExplanationExpandable = ({
                     )}
                 </div>
                 <PolyButton
-                    className="btn primary"
+                    type="outline"
                     onClick={handleSelectFile}
-                    label="Select File"
+                    label={
+                        selectedFile ? "Select different File" : "Select File"
+                    }
                 ></PolyButton>
                 <PolyButton
-                    className="btn secondary"
+                    className="bg-red"
                     onClick={handleImportFile}
                     label="Import File"
+                    disabled={selectedFile ? "" : "disabled"}
                 >
                     Import File
                 </PolyButton>
@@ -229,17 +236,22 @@ const ImportExplanationExpandable = ({
                     If you want to be extra cautious with the data on your
                     phone, you can safely delete the downloaded zip archive now.
                 </p>
-                {files ? (
+                {files?.length > 0 ? (
                     <>
                         <p>Imported File: {files[0]?.name}</p>
                         <RoutingWrapper history={history} route="/overview">
-                            <PolyButton label="Start exploring"></PolyButton>
+                            <PolyButton
+                                className="bg-red"
+                                label="Start exploring"
+                            ></PolyButton>
                         </RoutingWrapper>
                     </>
                 ) : (
-                    <button className="btn-highlighted deactivated">
-                        Start exploring
-                    </button>
+                    <PolyButton
+                        className="bg-red"
+                        label="Start exploring"
+                        disabled="disabled"
+                    ></PolyButton>
                 )}
             </>
         ),

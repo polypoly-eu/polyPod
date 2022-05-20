@@ -151,3 +151,8 @@ h5 {
 .import-view .explanation-expandable .section-body .btn-2 {
     margin-top: 30px;
 }
+
+.import-view .explanation-expandable button.bg-red {
+    background-color: var(--color-red-300);
+    color: var(--theme-secondary-color);
+}
