@@ -43,4 +43,5 @@
 /* Size */
 :root {
   --max-width: 412px;
+  --line-height: 120%;
 }

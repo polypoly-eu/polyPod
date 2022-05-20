@@ -2,7 +2,7 @@
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    color: var(--text-dark);
+    color: var(--theme-secondary-color);
     overflow: hidden scroll;
     margin: 0 auto;
 }
@@ -10,16 +10,14 @@
 .import-view .explanation-expandable .intro {
     width: 100%;
     max-width: var(--max-width);
-    padding: 0 16px 16px 16px;
     box-sizing: border-box;
     margin: 4px auto 72px auto;
 }
 
-.import-view .explanation-expandable .intro p {
+.import-view .explanation-expandable .intro h1 {
     font-family: "Jost Bold";
     font-size: 40px;
     line-height: var(--line-height);
-    letter-spacing: -0.01em;
     margin: 0 0 16px 0;
 }
 
@@ -44,8 +42,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-indigo-950);
-    color: var(--text-light);
+    background-color: var(--theme-secondary-color);
+    color: var(--theme-primary-color);
 }
 
 .import-view .explanation-expandable .head .heading {
@@ -60,7 +58,6 @@
 }
 
 .import-view .explanation-expandable .section-body {
-    padding: 16px 16px 16px 16px;
     width: 100%;
     max-width: var(--max-width);
     box-sizing: border-box;
@@ -75,7 +72,7 @@
 
 .import-view .explanation-expandable .section-body .file-info p {
     font-size: 16px;
-    color: var(--color-indigo-950);
+    color: var(--theme-secondary-color);
     margin: 0 0 2px 0;
     line-height: 120%;
 }
@@ -124,13 +121,12 @@
 
 .import-view .explanation-expandable .section-body {
     line-height: 120%;
-    letter-spacing: -0.01em;
     font-size: 20px;
 }
 
 .import-view .explanation-expandable .section-body h4,
 h5 {
-    color: var(--color-indigo-950);
+    color: var(--theme-secondary-color);
     margin-top: 0;
 }
 

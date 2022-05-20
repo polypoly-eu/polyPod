@@ -1,9 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import i18n from "!silly-i18n";
 import RouteButton from "../buttons/routeButton.jsx";
-import InfoBox from "../infoBox/infoBox.jsx";
-import ScrollButton from "../buttons/scrollButton/scrollButton.jsx";
-import scrollSmoothly from "../../utils/smoothScroll.js";
+import { ScrollLabel, scrollSmoothly, InfoBox } from "@polypoly-eu/poly-look";
 import "./importExplanationExpandable.css";
 
 const isSectionOpened = (section, importStatus, importSteps) => {
@@ -83,7 +81,10 @@ const ImportExplanationExpandable = ({
                     className="full-screen"
                 />
                 <p>{i18n.t("import:request.1")}</p>
-                <InfoBox textContent={i18n.t("import:request.info.1")} />
+                <InfoBox
+                    img="./images/info-circle.svg"
+                    textContent={i18n.t("import:request.info.1")}
+                />
                 <div className="separator"></div>
                 <h4>{i18n.t("import:how.it.works")}:</h4>
                 <img src="./images/facebook.svg" alt="facebook" />
@@ -108,7 +109,10 @@ const ImportExplanationExpandable = ({
                 >
                     {i18n.t("import:request.example.data")}
                 </button>
-                <InfoBox textContent={i18n.t("import:request.info.2")} />
+                <InfoBox
+                    img="./images/info-circle.svg"
+                    textContent={i18n.t("import:request.info.2")}
+                />
             </>
         ),
         download: (
@@ -119,7 +123,10 @@ const ImportExplanationExpandable = ({
                     className="full-screen"
                 />
                 <p>{i18n.t("import:download.1")}</p>
-                <InfoBox textContent={i18n.t("import:download.info")} />
+                <InfoBox
+                    img="./images/info-circle.svg"
+                    textContent={i18n.t("import:download.info")}
+                />
                 <div className="separator"></div>
                 <h4>{i18n.t("import:how.it.works")}:</h4>
                 <img src="./images/letter.svg" alt="facebook" />
@@ -200,7 +207,10 @@ const ImportExplanationExpandable = ({
                 >
                     {i18n.t("import:import.button.2")}
                 </button>
-                <InfoBox textContent={i18n.t("import:import.info")} />
+                <InfoBox
+                    img="./images/info-circle.svg"
+                    textContent={i18n.t("import:import.info")}
+                />
             </>
         ),
         explore: (
@@ -233,12 +243,15 @@ const ImportExplanationExpandable = ({
             <div className="intro">
                 <p>{i18n.t("import:intro.text.1")}</p>
                 <p>{i18n.t("import:intro.text.2")}</p>
-                <InfoBox textContent={i18n.t("import:intro.info")} />
+                <InfoBox
+                    img="./images/info-circle.svg"
+                    textContent={i18n.t("import:intro.info")}
+                />
             </div>
-            <ScrollButton
+            <ScrollLabel
                 scrollRef={expandableRef}
                 img="./images/scroll-down.svg"
-                scrollButtonText={i18n.t("import:scroll.down")}
+                scrollLabelText={i18n.t("import:scroll.down")}
             />
             {Object.values(importSections).map((section, index) => (
                 <div key={index} className={`section ${section}`}>
