@@ -1,8 +1,8 @@
 name: Test pushes and PRs
 on:
-    push:
-    pull_request:
-        types: [assigned, opened, ready_for_review]
+  push:
+  pull_request:
+    types: [assigned, opened, ready_for_review]
 
 jobs:
     test:
@@ -57,10 +57,6 @@ jobs:
             - name: Install JS packages
               if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.js == 'true')
               run: ./build.js offlineInstall
-            - name: Lint Swift
-              if: steps.changes.outputs.swift == 'true'
-              working-directory: platform/ios
-              run: docker run -t -v `pwd`:`pwd` -w `pwd` ghcr.io/realm/swiftlint:latest
             - name: Build core and features
               if: steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.android == 'true'
               run: ./build.js build
