@@ -229,7 +229,7 @@ const ImportExplanationExpandable = ({
                     If you want to be extra cautious with the data on your
                     phone, you can safely delete the downloaded zip archive now.
                 </p>
-                {files ? (
+                {files?.length > 0 ? (
                     <>
                         <p>Imported File: {files[0]?.name}</p>
                         <RoutingWrapper history={history} route="/overview">
@@ -237,9 +237,10 @@ const ImportExplanationExpandable = ({
                         </RoutingWrapper>
                     </>
                 ) : (
-                    <button className="btn-highlighted deactivated">
-                        Start exploring
-                    </button>
+                    <PolyButton
+                        label="Start exploring"
+                        disabled="disabled"
+                    ></PolyButton>
                 )}
             </>
         ),
