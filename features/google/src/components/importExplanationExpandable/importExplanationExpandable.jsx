@@ -112,7 +112,7 @@ const ImportExplanationExpandable = ({
                     from Google first.
                 </p>
                 <InfoBox textContent="You will need to have your login details to hand." />
-                <div className="separator"></div>
+                <div className="poly-separator"></div>
                 <h4>How it works:</h4>
                 <p>Go to https://takeout.google.com/</p>
                 <p>
@@ -146,7 +146,7 @@ const ImportExplanationExpandable = ({
                     when you can download it to your phone.
                 </p>
                 <InfoBox textContent="It can take up to 24 hours before your data is available!" />
-                <div className="separator"></div>
+                <div className="poly-separator"></div>
                 <h4>How it works:</h4>
                 <img src="./images/letter.svg" alt="letter" />
                 <p>
@@ -181,7 +181,7 @@ const ImportExplanationExpandable = ({
                     After you have downloaded your data file onto your phone you
                     can import it into your polyPod.
                 </p>
-                <div className="separator"></div>
+                <div className="poly-separator"></div>
                 <div className="x-divider">
                     {files?.length ? (
                         <div className="file-info">

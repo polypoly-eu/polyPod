@@ -85,7 +85,7 @@ const ImportExplanationExpandable = ({
                     img="./images/info-circle.svg"
                     textContent={i18n.t("import:request.info.1")}
                 />
-                <div className="separator"></div>
+                <div className="poly-separator"></div>
                 <h4>{i18n.t("import:how.it.works")}:</h4>
                 <img src="./images/facebook.svg" alt="facebook" />
                 <p>{i18n.t("import:request.2")}</p>
@@ -127,7 +127,7 @@ const ImportExplanationExpandable = ({
                     img="./images/info-circle.svg"
                     textContent={i18n.t("import:download.info")}
                 />
-                <div className="separator"></div>
+                <div className="poly-separator"></div>
                 <h4>{i18n.t("import:how.it.works")}:</h4>
                 <img src="./images/letter.svg" alt="facebook" />
                 <p>{i18n.t("import:download.2")}</p>
@@ -155,7 +155,7 @@ const ImportExplanationExpandable = ({
                     className="full-screen"
                 />
                 <p>{i18n.t("import:import")}</p>
-                <div className="separator"></div>
+                <div className="poly-separator"></div>
                 <div className="x-divider">
                     {file ? (
                         <div className="file-info">
