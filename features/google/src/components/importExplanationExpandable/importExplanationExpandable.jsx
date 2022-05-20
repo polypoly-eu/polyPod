@@ -206,7 +206,7 @@ const ImportExplanationExpandable = ({
                     )}
                 </div>
                 <PolyButton
-                    className="bg-red"
+                    type="outline"
                     onClick={handleSelectFile}
                     label={
                         selectedFile ? "Select different File" : "Select File"
