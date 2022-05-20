@@ -9,7 +9,12 @@ const BaseInfoPopUp = ({ onClose, name }) => {
             open={true}
             lastChildSelector=".poly-button"
             Component={(props) => (
-                <SideSheet title={"How to read this"} okLabel={"ok"} {...props}>
+                <SideSheet
+                    title={"How to read this"}
+                    okLabel={"ok"}
+                    {...props}
+                    className="poly-theme-light"
+                >
                     <div className="base-info-contents">
                         {infoPopUps[name]()}
                     </div>
