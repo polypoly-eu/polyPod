@@ -50,7 +50,7 @@ final class Network: NetworkProtocol {
             allowInsecure: allowInsecure
         )
     }
-    
+
     func httpFetchCall(
         type: String,
         url: String,
@@ -59,13 +59,9 @@ final class Network: NetworkProtocol {
         authToken: String?,
         allowInsecure: Bool
     ) -> Result<Data, PodApiError> {
-        let requestURL = URL(string: url)!
-        guard requestURL.scheme != nil else {
-            return .failure(PodApiError.networkError(type, message: "Bad URL: \(url)"))
-        }
-        if (!allowInsecure && !(requestURL.scheme == "https")) {
-            return .failure(PodApiError.networkSecurityError(type, scheme: requestURL.scheme ?? ""))
-        }
+        
+        validateURL(url)
+
         var request = URLRequest(url: requestURL)
         request.httpMethod = type
         if (body != nil) {
@@ -125,4 +121,16 @@ final class Network: NetworkProtocol {
         
         return fetchError == nil ? .success(responseData!) : .failure(fetchError!)
     }
+
+    private func validateURL(url: String) {
+        let requestURL = URL(string: url)!
+        
+        guard requestURL.scheme != nil else {
+            return .failure(PodApiError.networkError(type, message: "Bad URL: \(url)"))
+        }
+        if (!allowInsecure && !(requestURL.scheme == "https")) {
+            return .failure(PodApiError.networkSecurityError(type, scheme: requestURL.scheme ?? ""))
+        }
+    }
+
 }
