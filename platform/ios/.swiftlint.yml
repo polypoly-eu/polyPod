@@ -1,6 +1,5 @@
 disabled_rules:
     - trailing_whitespace
-    - cyclomatic_complexity
     - colon
     - control_statement
     - statement_position
@@ -27,3 +26,4 @@ opt_in_rules:
     - redundant_optional_initialization
     - empty_enum_arguments
     - syntactic_sugar
+    - cyclomatic_complexity

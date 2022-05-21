@@ -12,7 +12,10 @@ private func createErrorResponse(_ origin: String, _ error: Error) -> MessagePac
 class PostOffice {
     static let shared = PostOffice()
     
+    // swiftlint:disable cyclomatic_complexity
     func handleIncomingEvent(eventData: [String: Any], completionHandler: @escaping ([UInt8]) -> Void) {
+    // swiftlint:enable cyclomatic_complexity
+
         guard let bytes = eventData as? [String: NSNumber] else { return }
         
         let sortedBytes = bytes.sorted(by: { $0.0.compare($1.0, options: .numeric) == .orderedAscending })
