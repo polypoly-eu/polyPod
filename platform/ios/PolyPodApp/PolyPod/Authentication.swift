@@ -40,7 +40,7 @@ class Authentication {
         "re_auth_prompt_set_up": "auth_prompt_set_up"
         
         authenticateLocally(withReason: reason) { success in
-            if (success) {
+            if success {
                 self.authenticated = newStatus
                 UserDefaults.standard.set(newStatus, forKey: Authentication.setUpKey)
             }

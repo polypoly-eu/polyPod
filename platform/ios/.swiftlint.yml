@@ -1,6 +1,5 @@
 disabled_rules:
     - trailing_whitespace
-    - control_statement
     - statement_position
     - force_cast
     - todo

@@ -64,7 +64,7 @@ final class Network: NetworkProtocol {
 
         var request = URLRequest(url: requestURL)
         request.httpMethod = type
-        if (body != nil) {
+        if body != nil {
             request.httpBody = body!.data(using: .utf8)
         }
         
@@ -115,7 +115,7 @@ final class Network: NetworkProtocol {
         task.resume()
         semaphore.wait()
         
-        if (responseData == nil && fetchError == nil) {
+        if responseData == nil && fetchError == nil {
             fetchError = PodApiError.networkError("http\(type)", message: "Bad response code: 400")
         }
         
@@ -128,7 +128,7 @@ final class Network: NetworkProtocol {
         guard requestURL.scheme != nil else {
             return .failure(PodApiError.networkError(type, message: "Bad URL: \(url)"))
         }
-        if (!allowInsecure && !(requestURL.scheme == "https")) {
+        if !allowInsecure && !(requestURL.scheme == "https") {
             return .failure(PodApiError.networkSecurityError(type, scheme: requestURL.scheme ?? ""))
         }
     }

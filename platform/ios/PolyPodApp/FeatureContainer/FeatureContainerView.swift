@@ -86,7 +86,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
         
         do {
             var fileData: Data?
-            if (file.starts(with: PolyOut.fsFilesRoot)) {
+            if file.starts(with: PolyOut.fsFilesRoot) {
                 let options: [String: Any] = [:]
                 PodApi.shared.polyOut.fileRead(
                     url: urlString,

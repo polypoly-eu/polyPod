@@ -41,7 +41,7 @@ private func createTestFile() {
     do {
         try FileManager.default.moveItem(at: zipFilePath, to: testZipFilePath)
     }
-    catch (_) {
+    catch _ {
     
     }
 }

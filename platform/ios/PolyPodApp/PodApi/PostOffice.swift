@@ -123,7 +123,7 @@ extension PostOffice {
             
             let graph = extendedData.properties["graph"] as? ExtendedData
             let graphType = graph?.classname
-            if (graphType != "@polypoly-eu/rdf.DefaultGraph") {
+            if graphType != "@polypoly-eu/rdf.DefaultGraph" {
                 throw PodApiError.failedToReadGraph(graphType ?? "<missing>")
             }
             
@@ -469,7 +469,7 @@ extension PostOffice {
         let contentType = args[1] as? String
         let authToken = args[2] as? String
         PodApi.shared.endpoint.get(endpointId: endpointId, contentType: contentType, authToken: authToken) { data, error in
-            if (error == nil) {
+            if error == nil {
                 completionHandler(data.map(MessagePackValue.string), nil)
                 return
             }
