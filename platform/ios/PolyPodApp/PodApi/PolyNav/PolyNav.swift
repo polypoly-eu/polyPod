@@ -22,7 +22,7 @@ protocol PolyNavProtocol {
     func pickFile(type: String?, completionHandler: @escaping (ExternalFile?) -> Void)
 }
 
-protocol PolyNavDelegate {
+protocol PolyNavDelegate: class {
     func doHandleSetTitle(title: String)
     func doHandleSetActiveActions(actions: [String])
     func doHandleOpenUrl(url: String)

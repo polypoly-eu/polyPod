@@ -1,12 +1,12 @@
 import Foundation
 import MessagePack
 
-protocol EndpointProtocol {
+protocol EndpointProtocol: class {
     func send(endpointId: String, payload: String, contentType: String?, authToken: String?, completionHandler: @escaping (Error?) -> Void) -> Void
     func get(endpointId: String, contentType: String?, authToken: String?, completionHandler: @escaping (String?, Error?) -> Void) -> Void
 }
 
-protocol EndpointDelegate {
+protocol EndpointDelegate: class {
     func doHandleApproveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) -> Void
 }
 
