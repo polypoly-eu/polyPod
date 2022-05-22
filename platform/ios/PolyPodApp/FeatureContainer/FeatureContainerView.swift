@@ -102,7 +102,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
 
                 fileData = try Data(contentsOf: targetUrl!)
             }
-            let headers: [String : String] = [
+            let headers: [String: String] = [
                 "Access-Control-Allow-Origin": PolyOut.fsPrefix,
                 "Access-Control-Allow-Methods": "GET",
                 "Access-Control-Allow-Headers": "*",

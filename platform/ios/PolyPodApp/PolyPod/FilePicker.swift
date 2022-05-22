@@ -32,7 +32,7 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
     func loadExternalFileData(url: URL) -> ExternalFile {
         var fileSize: Int64 = 0
         do {
-            let fileAttribute: [FileAttributeKey : Any] =
+            let fileAttribute: [FileAttributeKey: Any] =
                 try FileManager.default.attributesOfItem(atPath: url.path)
             if let fileNumberSize: NSNumber = fileAttribute[FileAttributeKey.size] as? NSNumber {
                 fileSize = Int64(truncating: fileNumberSize)

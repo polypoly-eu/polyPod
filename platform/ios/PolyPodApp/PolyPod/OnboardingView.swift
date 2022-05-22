@@ -175,8 +175,7 @@ private struct Pagination: View {
     }
 }
 
-private struct PageViewController<Content: View>
-: UIViewControllerRepresentable {
+private struct PageViewController<Content: View>: UIViewControllerRepresentable {
     private let activeIndex: Binding<Int>?
     private let viewControllers: [UIViewController]
     

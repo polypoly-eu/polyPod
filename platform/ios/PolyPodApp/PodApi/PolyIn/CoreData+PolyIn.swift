@@ -129,7 +129,7 @@ fileprivate func quadsPredicateAndFilter(matcher: ExtendedData) -> (NSPredicate,
         arguments.append(objectsMatcher.properties["value"] as! String)
     }
     
-    var format:String = ""
+    var format: String = ""
     for (i, formatItem) in formatItems.enumerated() {
         if i != 0 {
             format += " && "

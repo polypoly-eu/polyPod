@@ -180,7 +180,7 @@ private struct SettingsButton: View {
 
 private struct SettingsToggleButton: View {
     let label: LocalizedStringKey
-    let isToggled : Binding<Bool>
+    let isToggled: Binding<Bool>
     
     var onChange: ((Bool) -> Void)?
     
