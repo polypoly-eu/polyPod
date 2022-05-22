@@ -51,6 +51,7 @@ final class Network: NetworkProtocol {
         )
     }
 
+    // swiftlint:disable function_parameter_count
     func httpFetchCall(
         type: String,
         url: String,
@@ -59,6 +60,7 @@ final class Network: NetworkProtocol {
         authToken: String?,
         allowInsecure: Bool
     ) -> Result<Data, PodApiError> {
+    // swiftlint:enable function_parameter_count
         
         validateURL(url)
 
