@@ -75,7 +75,7 @@ private struct MainSection: View {
     @State private var isAuthenticationConfigured = Authentication.shared.isSetUp()
     
     var body: some View {
-        List() {
+        List {
             Section(header: SettingsHeader("settings_about_section")) {
                 SettingsButton(
                     label: "settings_version",
