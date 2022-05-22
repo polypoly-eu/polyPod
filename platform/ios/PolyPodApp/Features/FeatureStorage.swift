@@ -36,7 +36,12 @@ final class FeatureStorage {
     
     lazy var featuresFileUrl: URL = {
         do {
-            let documentsUrl = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            let documentsUrl = try FileManager.default.url(
+                for: .documentDirectory, 
+                in: .userDomainMask, 
+                appropriateFor: nil, 
+                create: false
+            )
             let featuresUrl = documentsUrl.appendingPathComponent("Features")
             return featuresUrl
         } catch {
@@ -113,7 +118,11 @@ final class FeatureStorage {
             try FileManager.default.removeItem(atPath: featuresFileUrl.path)
         }
         
-        try FileManager.default.createDirectory(atPath: featuresFileUrl.path, withIntermediateDirectories: true, attributes: nil)
+    try FileManager.default.createDirectory(
+        atPath: featuresFileUrl.path,
+        withIntermediateDirectories: true,
+        attributes: nil
+    )
     }
     
     private func readCategories() throws -> [DecodedFeaturesCategory] {
@@ -128,7 +137,11 @@ final class FeatureStorage {
     private func importFeature(_ featureName: String) throws -> URL {
         let featureUrl = featuresFileUrl.appendingPathComponent(featureName)
         
-        guard let filePath = Bundle.main.url(forResource: featureName, withExtension: "zip", subdirectory: "features") else {
+    guard let filePath = Bundle.main.url(
+        forResource: featureName,
+        withExtension: "zip",
+        subdirectory: "features"
+    ) else {
             throw FeatureStorageFailure.featureForImportNotFound(featureName: featureName)
         }
         

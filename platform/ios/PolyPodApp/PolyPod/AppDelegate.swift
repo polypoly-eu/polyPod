@@ -7,7 +7,10 @@ import PolyPodCoreSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private static let updateNotificationCheckIdentifier = "coop.polypoly.polypod.updateNotificationCheck"
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication, 
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         // Override point for customization after application launch.
         Log.bootstrap()
         Log.info("Application initialized")
@@ -60,7 +63,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func registerUpdateNotificationCheck() {
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: AppDelegate.updateNotificationCheckIdentifier, using: nil) { task in
+        BGTaskScheduler.shared.register(
+            forTaskWithIdentifier: AppDelegate.updateNotificationCheckIdentifier, 
+            using: nil
+        ) { task in
             self.handleUpdateNotificationCheck(task)
         }
     }
@@ -104,7 +110,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - UISceneSession Lifecycle
     
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+    func application(
+        _ application: UIApplication, 
+        configurationForConnecting connectingSceneSession: UISceneSession, 
+        options: UIScene.ConnectionOptions
+    ) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
@@ -112,9 +122,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Data protection availability
     
-    /*
-     On a device that uses content protection, protected files are stored in an encrypted form and made available only at certain times, usually when the device is unlocked.
-     This notification lets your app know that the device is now unlocked and that you may access certain types of protected files again.
+    /* 
+     On a device that uses content protection, protected files are stored in an encrypted form
+     and made available only at certain times, usually when the device is unlocked.
+     This notification lets your app know that the device is now unlocked and 
+     that you may access certain types of protected files again.
      */
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
         DataProtection.instance.protectedDataDidBecomeAvailable()
@@ -123,12 +135,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     /*
-     On a device that uses content protection, protected files are stored in an encrypted form and made available only at certain times, usually when the device is unlocked.
-     This notification lets your app know that the device is about to be locked and that any protected files it is currently accessing might become unavailable shortly.
+     On a device that uses content protection, protected files are stored in an encrypted form
+     and made available only at certain times, usually when the device is unlocked.
+     This notification lets your app know that the device is about to be locked and 
+     that any protected files it is currently accessing might become unavailable shortly.
      
-     If your app is currently accessing a protected file, you can use this method to release any references to that file.
-     Although it is not an error to access the file while the device is locked, any attempts to do so will fail.
-     Therefore, if your app depends on the file, you might want to take steps to avoid using that file while the device is locked.
+     If your app is currently accessing a protected file, you can use this method 
+     to release any references to that file. Although it is not an error to access the file 
+     while the device is locked, any attempts to do so will fail. Therefore, if your app 
+     depends on the file, you might want to take steps to avoid using that file while the device is locked.
      */
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
         DataProtection.instance.protectedDataWillBecomeUnavailable()
@@ -145,7 +160,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             try BGTaskScheduler.shared.submit(task)
         } catch {
-            Log.error("Failed to schedule task \(AppDelegate.updateNotificationCheckIdentifier): \(error.localizedDescription)")
+            Log.error(
+                "Failed to schedule task",
+                "\(AppDelegate.updateNotificationCheckIdentifier): \(error.localizedDescription)"
+            )
         }
     }
 }

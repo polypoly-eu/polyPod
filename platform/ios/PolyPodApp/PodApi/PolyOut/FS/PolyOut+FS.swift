@@ -39,8 +39,15 @@ extension PolyOut {
     static let fsFilesRoot = "FeatureFiles"
     
     func featureFilesPath() -> URL {
-        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.resolvingSymlinksInPath()
-        return documentDirectory.appendingPathComponent(PolyOut.fsFilesRoot).appendingPathComponent(activeFeature!.id)
+        let documentDirectory = 
+        FileManager.default.urls(
+            for: .documentDirectory, 
+            in: .userDomainMask
+            ).first!.resolvingSymlinksInPath()
+        return 
+            documentDirectory
+                .appendingPathComponent(PolyOut.fsFilesRoot)
+                .appendingPathComponent(activeFeature!.id)
     }
     
     func fsUriFromId(_ id: String) -> URL {
@@ -152,7 +159,11 @@ extension PolyOut {
                 return
             }
             var entries = [[String: String]]()
-            if let enumerator = FileManager.default.enumerator(at: targetUrl, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
+            if let enumerator = FileManager.default.enumerator(
+                at: targetUrl, 
+                includingPropertiesForKeys: [.isRegularFileKey], 
+                options: [.skipsHiddenFiles, .skipsPackageDescendants]
+            ) {
                 for case let fileURL as URL in enumerator {
                     let relativePath = fileURL.resolvingSymlinksInPath().absoluteString.replacingOccurrences(
                         of: targetUrl.absoluteString,

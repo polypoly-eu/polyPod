@@ -1,7 +1,11 @@
 import Foundation
 
 extension PolyOut {
-    func fetch(urlString: String, requestInit: FetchRequestInit, completionHandler: @escaping (FetchResponse?, Error?) -> Void) {
+    func fetch(
+        urlString: String, 
+        requestInit: FetchRequestInit, 
+        completionHandler: @escaping (FetchResponse?, Error?) -> Void
+    ) {
         guard let url = URL(string: urlString) else {
             completionHandler(nil, PodApiError.parameterMissing)
             return

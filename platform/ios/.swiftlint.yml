@@ -1,15 +1,7 @@
 disabled_rules:
     - trailing_whitespace
-    - force_cast
+    - force_cast #FIX!
     - todo
-    - line_length
     - implicit_getter
     - identifier_name
     - force_try #FIX!
-
-opt_in_rules:
-    - empty_count
-    - redundant_optional_initialization
-    - empty_enum_arguments
-    - syntactic_sugar
-    - cyclomatic_complexity

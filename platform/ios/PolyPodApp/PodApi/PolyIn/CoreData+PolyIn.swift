@@ -117,7 +117,10 @@ private func quadsPredicateAndFilter(matcher: ExtendedData) -> (NSPredicate, ((Q
             let value = datatype.properties["value"] as! String
             filterOperation = { (quad: Quad) -> Bool in
                 let literal = quad.object as! Literal
-                if literal.language == language && literal.datatype.termType == termType && literal.datatype.value == value {
+                if 
+                    literal.language == language && 
+                    literal.datatype.termType == termType && 
+                    literal.datatype.value == value {
                     return true
                 }
                 return false
