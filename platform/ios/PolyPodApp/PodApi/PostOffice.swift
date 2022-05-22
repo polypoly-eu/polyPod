@@ -436,7 +436,7 @@ extension PostOffice {
 }
 
 extension PostOffice {
-    private func handleEndpoint(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void){
+    private func handleEndpoint(method: String, args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         switch method {
         case "send":
             handleEndpointSend(args: args, completionHandler: completionHandler)
