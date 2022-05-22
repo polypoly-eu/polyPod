@@ -24,13 +24,12 @@ struct FeatureView: View {
                     return
                 }
                 closeAction()
-            }
-        ) {
+            }, {
             let qualifier = activeActions.contains("back") ? "Back" : "Close"
             Image("NavIcon\(qualifier)\(iconVariantQualifier)")
                 .renderingMode(.original)
-        }
-
+        })
+        
         let titleLabel = Text(title != "" ? title : feature.name)
             .foregroundColor(
                 lightForeground
@@ -43,17 +42,17 @@ struct FeatureView: View {
 
         let actionButtons = HStack(spacing: 12) {
             if activeActions.contains("search") {
-                Button(action: { triggerFeatureAction("search") }) {
+                Button(action: { triggerFeatureAction("search") }, {
                     Image("NavIconSearch\(iconVariantQualifier)")
                         .renderingMode(.original)
-                }
+                })
             }
 
             if activeActions.contains("info") {
-                Button(action: { triggerFeatureAction("info") }) {
+                Button(action: { triggerFeatureAction("info") }, {
                     Image("NavIconInfo\(iconVariantQualifier)")
                         .renderingMode(.original)
-                }
+                })
             }
         }
 

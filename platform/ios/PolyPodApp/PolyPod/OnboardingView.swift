@@ -136,9 +136,9 @@ private struct Slide: View {
             }
             
             if let denyLabel = denyLabel {
-                Button(action: denyAction ?? {}) {
+                Button(action: denyAction ?? {},
                     Text(denyLabel)
-                }
+                )
                 .padding(.top, 20)
                 .frame(maxWidth: .infinity, alignment: .center)
             }
