@@ -3,7 +3,6 @@ disabled_rules:
     - force_cast
     - todo
     - line_length
-    - file_length
     - implicit_getter
     - identifier_name
     - multiple_closures_with_trailing_closure
