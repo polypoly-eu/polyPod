@@ -83,8 +83,7 @@ final class Network: NetworkProtocol {
         let semaphore = DispatchSemaphore(value: 0)
         var fetchError: PodApiError?
         var responseData: Data?
-        let task = URLSession.shared.dataTask(with: request) {
-            data, response, error in defer {
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in defer {
                 semaphore.signal()
             }
             guard let response = response as? HTTPURLResponse,
