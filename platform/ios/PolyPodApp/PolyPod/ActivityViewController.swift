@@ -8,7 +8,7 @@ struct ActivityViewController: UIViewControllerRepresentable {
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
         let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
-        controller.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
+        controller.completionWithItemsHandler = { (_, _, _, _) in
             self.presentationMode.wrappedValue.dismiss()
         }
         return controller

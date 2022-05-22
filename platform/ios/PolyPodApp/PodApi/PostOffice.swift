@@ -365,7 +365,7 @@ extension PostOffice {
     
     private func handlePolyOutRemoveArchive(args: [Any], completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void) {
         let fileId = args[0] as! String
-        PodApi.shared.polyOut.removeArchive(fileId: fileId) { error in
+        PodApi.shared.polyOut.removeArchive(fileId: fileId) { _ in
             completionHandler(MessagePackValue(), nil)
         }
     }
@@ -389,19 +389,19 @@ extension PostOffice {
     
     private func handlePolyNavSetTitle(args: [Any]) {
         let title = args[0] as! String
-        PodApi.shared.polyNav.setTitle(title: title) { res, error in
+        PodApi.shared.polyNav.setTitle(title: title) { _, _ in
         }
     }
     
     private func handlePolyNavSetActiveAction(args: [Any]) {
         let actions = args[0] as! [String]
-        PodApi.shared.polyNav.setActiveActions(actions: actions) { res, error in
+        PodApi.shared.polyNav.setActiveActions(actions: actions) { _, _ in
         }
     }
     
     private func handlePolyNavOpenUrl(args: [Any]) {
         let target = args[0] as! String
-        PodApi.shared.polyNav.openUrl(target: target) { res, error in
+        PodApi.shared.polyNav.openUrl(target: target) { _, _ in
         }
     }
     
