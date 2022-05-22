@@ -93,7 +93,7 @@ extension CoreDataStack: PolyIn {
     }
 }
 
-fileprivate func quadsPredicateAndFilter(matcher: ExtendedData) -> (NSPredicate, ((Quad) -> Bool)?) {
+private func quadsPredicateAndFilter(matcher: ExtendedData) -> (NSPredicate, ((Quad) -> Bool)?) {
     var formatItems: [String] = []
     var arguments: [Any] = []
     
@@ -173,7 +173,7 @@ private func createNode(for extendedData: ExtendedData, in managedContext: NSMan
     return node
 }
 
-fileprivate func extendedData(from quads: [Quad]) -> [ExtendedData] {
+private func extendedData(from quads: [Quad]) -> [ExtendedData] {
     var result: [ExtendedData] = []
     
     for (index, quad) in quads.enumerated() {
@@ -194,7 +194,7 @@ fileprivate func extendedData(from quads: [Quad]) -> [ExtendedData] {
     return result
 }
 
-fileprivate func createExtendedData(
+private func createExtendedData(
     for managedObject: NSManagedObject,
     from sourceRelationship: NSManagedObject? = nil
 ) -> ExtendedData {
