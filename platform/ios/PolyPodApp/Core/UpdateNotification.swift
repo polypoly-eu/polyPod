@@ -45,10 +45,8 @@ class UpdateNotification {
         
         static func parse(_ s: String?) -> State? {
             guard let s = s else { return nil }
-            for value in allCases {
-                if value.rawValue == s {
-                    return value
-                }
+            for value in allCases where value.rawValue == s {
+                return value
             }
             return nil
         }
