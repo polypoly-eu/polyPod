@@ -94,8 +94,7 @@ extension PolyOut {
                     name: name ?? URL(fileURLWithPath: filePath.path).lastPathComponent,
                     id: url
                 ), nil)
-            }
-            catch {
+            } catch {
                 completionHandler(nil, PodApiError.unknown)
             }
         } else {
@@ -224,8 +223,7 @@ extension PolyOut {
                 UserDefaults.standard.set(fileStore, forKey: PolyOut.fsKey)
                 
                 completionHandler(newUrl)
-            }
-            catch {
+            } catch {
                 Log.error("importArchive for '\(url)' failed: \(error)")
                 completionHandler(nil)
             }

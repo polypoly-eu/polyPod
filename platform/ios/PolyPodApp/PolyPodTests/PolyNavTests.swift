@@ -40,8 +40,7 @@ private func createTestFile() {
     let zipFilePath = try! Zip.quickZipFiles([testFilePath], fileName: "testFile")
     do {
         try FileManager.default.moveItem(at: zipFilePath, to: testZipFilePath)
-    }
-    catch _ {
+    } catch _ {
     
     }
 }

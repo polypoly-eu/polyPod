@@ -95,8 +95,7 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
                         fileData = data as? Data
                     }
                 )
-            }
-            else {
+            } else {
                 var targetUrl = feature?.path
                 targetUrl = targetUrl?.appendingPathComponent(file)
 
