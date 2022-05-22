@@ -2,12 +2,12 @@ import Foundation
 import MessagePack
 
 protocol EndpointProtocol: class {
-    func send(endpointId: String, payload: String, contentType: String?, authToken: String?, completionHandler: @escaping (Error?) -> Void) -> Void
-    func get(endpointId: String, contentType: String?, authToken: String?, completionHandler: @escaping (String?, Error?) -> Void) -> Void
+    func send(endpointId: String, payload: String, contentType: String?, authToken: String?, completionHandler: @escaping (Error?) -> Void)
+    func get(endpointId: String, contentType: String?, authToken: String?, completionHandler: @escaping (String?, Error?) -> Void)
 }
 
 protocol EndpointDelegate: class {
-    func doHandleApproveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) -> Void
+    func doHandleApproveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void)
 }
 
 struct EndpointInfo: Decodable {
@@ -25,7 +25,7 @@ final class Endpoint: EndpointProtocol {
     let network: Network = Network()
     var delegate: EndpointDelegate?
     
-    func approveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) -> Void {
+    func approveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) {
         delegate?.doHandleApproveEndpointFetch(endpointId: endpointId, completion: completion)
     }
     
@@ -37,7 +37,7 @@ final class Endpoint: EndpointProtocol {
         return endpointsJson[endpointId]
     }
     
-    func send(endpointId: String, payload: String, contentType: String?, authToken: String?, completionHandler: @escaping (Error?) -> Void) -> Void {
+    func send(endpointId: String, payload: String, contentType: String?, authToken: String?, completionHandler: @escaping (Error?) -> Void) {
         approveEndpointFetch(endpointId: endpointId) { approved in
             guard approved else {
                 Log.error("endpoint.send failed: Permission for endpoint \(endpointId) denied")
@@ -60,7 +60,7 @@ final class Endpoint: EndpointProtocol {
         }
     }
     
-    func get(endpointId: String, contentType: String?, authToken: String?, completionHandler: @escaping (String?, Error?) -> Void) -> Void {
+    func get(endpointId: String, contentType: String?, authToken: String?, completionHandler: @escaping (String?, Error?) -> Void) {
         approveEndpointFetch(endpointId: endpointId) { approved in
             guard approved else {
                 Log.error("endpoint.get failed: Permission for endpoint \(endpointId) denied")
