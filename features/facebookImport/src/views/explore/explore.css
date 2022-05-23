@@ -76,6 +76,7 @@
     background-color: var(--background-light);
     color: var(--text-dark);
     padding: 20px;
+    margin: -24px -12px 0 -12px;
 }
 
 .unrecognized-analysis-card .unrecognized-analysis-title {
