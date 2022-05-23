@@ -53,11 +53,12 @@ jobs:
         queries: security-extended
         languages: ${{ matrix.language }}
 
-    - if: matrix.language == 'java' 
+    - if: matrix.language == 'java'
       name: Build Android
       run: |
         ./build.js
         cd platform/android
+        make -C ../core android_bindings
         ./gradlew compileDebugJavaWithJavac
 
     - name: Perform CodeQL Analysis

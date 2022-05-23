@@ -107,6 +107,7 @@ repositories {
 
 dependencies {
     implementation project(":polyOut")
+    implementation project(":core")
     implementation 'org.msgpack:msgpack-core:0.8.20'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -264,4 +265,11 @@ tasks.whenTaskAdded { task ->
         task.name == "generateDebugAndroidTestAssets"
     )
         task.dependsOn copyTestFeatureOntoDevice
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        // Generated FlatBuffer models use ExperimentalUnsignedTypes
+        freeCompilerArgs += "-opt-in=kotlin.ExperimentalUnsignedTypes"
+    }
 }

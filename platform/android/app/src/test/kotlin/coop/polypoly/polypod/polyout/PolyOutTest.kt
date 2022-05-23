@@ -5,13 +5,10 @@ import android.net.Uri
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth
-import coop.polypoly.polypod.features.Feature
-import coop.polypoly.polypod.features.FeatureManifest
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.util.FakeAesKeyGenerator
 import coop.polypoly.polypod.util.FakeKeyStore
-import coop.polypoly.polypod.util.MockFeature
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -23,7 +20,6 @@ import java.io.File
 import java.io.InputStream
 import java.security.Provider
 import java.security.Security
-import java.util.zip.ZipFile
 
 @LooperMode(LooperMode.Mode.PAUSED)
 @RunWith(AndroidJUnit4::class)
@@ -69,40 +65,7 @@ class PolyOutTest {
         val featuresDir = File(mainDir, "features")
         featuresDir.mkdirs()
 
-        val manifestString = """
-            {
-                "name": "testManifest",
-                "description": "testDescription",
-                "author": "testAuthor",
-                "thumbnail": "assets/thumbnail.png",
-                "primaryColor": "#000000",
-                "links": {
-                    "link1": "https://example.com/1",
-                    "link2": "https://example.com/2"
-                }
-            }
-        """
-
-        val zip = MockFeature.createMockFeaturePackage(
-            featuresDir,
-            "test.zip",
-            manifestString
-        )
-
-        FeatureStorage.activeFeature = Feature(
-            content = ZipFile(zip),
-            fileName = "",
-            manifest = FeatureManifest(
-                name = "",
-                author = "",
-                version = "",
-                description = "",
-                links = null,
-                primaryColor = "",
-                thumbnailColor = "",
-                thumbnail = ""
-            )
-        )
+        FeatureStorage.activeFeatureId = "Id"
     }
 
     @Test
