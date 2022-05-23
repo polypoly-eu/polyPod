@@ -15,7 +15,7 @@ class InternalCoreException(message: String) : Exception(message) {
 }
 
 class CoreAlreadyBootstrappedException() :
-    Exception("Core is already bootstrapped.")
+    Exception("Core is already bootstrapped")
 
 class InvalidResultException(message: String) : Exception(message) {
     companion object {
