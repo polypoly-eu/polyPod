@@ -1,12 +1,21 @@
 import Chip from "./chip.jsx";
 import FilterChips from "./filterChips.jsx";
+import InfoBox from "./infoBox.jsx";
+import ProgressBar from "./progressBar.jsx";
+import ScrollLabel from "./scrollLabel.jsx";
 import { Tab, Tabs } from "./tabs.jsx";
 import { BlockLegend, LineLegend } from "./legends.jsx";
 import ErrorPopup from "./popUps/errorPopup/errorPopup.jsx";
 import { Card, ClickableCard } from "./cards";
 import List from "./list.jsx";
 import { PolyButton, IconButton } from "./buttons";
-import { SideSheet, SideSwiper, LoadingOverlay, Screen } from "./overlays";
+import {
+  SideSheet,
+  SideSwiper,
+  LoadingOverlay,
+  Screen,
+  BaseOverlay,
+} from "./overlays";
 import {
   PolyImportContext,
   PolyImportProvider,
@@ -14,6 +23,7 @@ import {
 import { RoutingWrapper } from "./routing";
 export {
   Chip,
+  InfoBox,
   Tab,
   Tabs,
   FilterChips,
@@ -25,6 +35,7 @@ export {
   List,
   PolyButton,
   IconButton,
+  ScrollLabel,
   SideSheet,
   SideSwiper,
   PolyImportProvider,
@@ -32,4 +43,6 @@ export {
   LoadingOverlay,
   Screen,
   RoutingWrapper,
+  ProgressBar,
+  BaseOverlay,
 };

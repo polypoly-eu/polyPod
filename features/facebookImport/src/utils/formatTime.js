@@ -1,4 +1,4 @@
-import i18n from "../i18n";
+import i18n from "!silly-i18n";
 
 const defaultFormat = i18n.t("common:time.format");
 

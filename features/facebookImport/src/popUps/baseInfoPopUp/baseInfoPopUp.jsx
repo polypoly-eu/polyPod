@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 
 import "./baseInfoPopUp.css";
 

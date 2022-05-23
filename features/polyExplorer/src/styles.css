@@ -49,22 +49,6 @@
     src: url("../fonts/jost_bold.ttf");
 }
 
-body {
-    margin: 0;
-}
-
-button {
-    border: none;
-}
-
-button:focus {
-    outline: 0;
-}
-
-a {
-    text-decoration: none;
-}
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #6a798e;

@@ -5,7 +5,7 @@ import { matchRegex } from "./utils/lang-constants";
 class AccessLogParser {
     constructor() {}
 
-    _csvToJson(csvText) {
+    _dataFromCsv(csvText) {
         const { rows, headersEnum } = readCsvFromText(csvText);
         const data = rows.map((row) => {
             const rowData = row.split(",");
@@ -22,8 +22,8 @@ class AccessLogParser {
     async parse(entry) {
         const content = await entry.getContent();
         const text = await new TextDecoder("utf-8").decode(content);
-        const jsonData = this._csvToJson(text);
-        return jsonData;
+        const data = this._dataFromCsv(text);
+        return data;
     }
 }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import i18n from "../i18n.js";
+import i18n from "!silly-i18n";
 import { useHistory, useLocation } from "react-router-dom";
 
 import popUps from "../popUps";

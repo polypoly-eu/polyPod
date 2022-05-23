@@ -1,5 +1,5 @@
 import levenshtein from "js-levenshtein";
-import i18n from "./i18n.js";
+import i18n from "!silly-i18n";
 
 export default class Lexicon {
     constructor(data) {

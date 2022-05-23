@@ -19,9 +19,16 @@ import "./sideSheet.css";
  * Defaults to empty object;
  * @returns {JSX.Element}
  */
-const SideSheet = ({ children, okLabel, onClose, title = "", style = {} }) => {
+const SideSheet = ({
+  children,
+  okLabel,
+  onClose,
+  title = "",
+  style = {},
+  className,
+}) => {
   return (
-    <div className="poly-side-sheet" style={style}>
+    <div className={`poly-side-sheet ${className || ""}`} style={style}>
       <div className="header">
         <IconButton
           icon="angleRight"

@@ -1,5 +1,5 @@
 import React from "react";
-import i18n from "../../i18n";
+import i18n from "!silly-i18n";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
 
 import PicturesMiniStory from "../../components/picturesMiniStory/picturesMiniStory.jsx";

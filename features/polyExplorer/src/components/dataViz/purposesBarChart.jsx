@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import * as d3 from "d3";
 
 const PurposesBarChart = ({ data, animation, onClick }) => {

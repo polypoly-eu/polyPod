@@ -4,4 +4,10 @@
   --jost-bold: "Jost Bold";
 
   --font-weight-regular: 400;
+
+  --font-size-s: 12px;
+  --font-size-m: 14px;
+  --font-size-ml: 16px;
+  --font-size-l: 20px;
+  --font-size-xl: 24px;
 }

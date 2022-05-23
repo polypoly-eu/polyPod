@@ -21,7 +21,7 @@ import {
 } from "@polypoly-eu/poly-look";
 import { dataImporters } from "./model/importer.js";
 import FacebookAccount from "./model/entities/facebook-account.js";
-import i18n from "./i18n.js";
+import i18n from "!silly-i18n";
 
 import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";

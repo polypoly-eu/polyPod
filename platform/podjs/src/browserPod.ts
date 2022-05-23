@@ -29,6 +29,10 @@ const NAV_LIGHT_FOREGROUND_COLOR = "#ffffff";
 
 const MANIFEST_DATA = window.manifestData;
 
+/**
+ * It opens a IndexedDB database, creates object stores and indexes for PolyIn and PolyOut storage.
+ * @returns An IDBDatabase object.
+ */
 async function openDatabase(): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
         const name = `${DB_PREFIX}${document.location.pathname}`;
@@ -43,7 +47,10 @@ async function openDatabase(): Promise<IDBDatabase> {
                 const keyPath = QUAD_KEYS.filter((_, idx) => (mask >> idx) & 1);
                 polyInStore.createIndex(keyPath.join("-"), keyPath);
             }
-            db.createObjectStore(OBJECT_STORE_POLY_OUT, { keyPath: "id" });
+            const polyOutStore = db.createObjectStore(OBJECT_STORE_POLY_OUT, {
+                autoIncrement: true,
+            });
+            polyOutStore.createIndex("id", "id");
         };
 
         request.onsuccess = () => resolve(request.result);
@@ -51,6 +58,10 @@ async function openDatabase(): Promise<IDBDatabase> {
     });
 }
 
+/**
+ *  It implements the `PolyIn` interface by storing quads in an IndexedDB database
+ *  @class IDBPolyIn
+ */
 class IDBPolyIn implements PolyIn {
     async match(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
         const db = await openDatabase();
@@ -142,12 +153,26 @@ class IDBPolyIn implements PolyIn {
     }
 }
 
-// Since pickFile and importArchive work with local URLs that have the actual
-// archive file name as their last component, and since the current BrowserPod
-// implementation works with data URLs which don't, we employ a little workaround.
+/**
+ * @class FileUrl takes a URL and splits it into a path and a file name in a FileUrl format
+ * Since pickFile and importArchive work with local URLs that have the actual
+ * archive file name as their last component, and since the current BrowserPod
+ * implementation works with data URLs which don't, we employ a little workaround.
+ */
 class FileUrl {
     private static readonly separator = "/";
 
+    constructor(
+        readonly url: string,
+        readonly data: string,
+        readonly fileName: string
+    ) {}
+
+    /**
+     * It takes a URL and splits it into a path and a file name in a FileUrl format.
+     * @param {string} url - The full URL of the file.
+     * @returns A FileUrl object.
+     */
     static fromUrl(url: string): FileUrl {
         const [lastComponent, ...rest] = url.split(FileUrl.separator).reverse();
         return new FileUrl(
@@ -157,16 +182,16 @@ class FileUrl {
         );
     }
 
+    /**
+     * Creates a new FileUrl object from the given data and fileName
+     * @param {string} data - The base URL of the file.
+     * @param {string} fileName - The name of the file.
+     * @returns A FileUrl object.
+     */
     static fromParts(data: string, fileName: string): FileUrl {
         const url = data + FileUrl.separator + fileName;
         return new FileUrl(url, data, fileName);
     }
-
-    constructor(
-        readonly url: string,
-        readonly data: string,
-        readonly fileName: string
-    ) {}
 }
 
 interface FileInfo {
@@ -227,14 +252,19 @@ interface File {
     stat(): CompatStats;
 }
 
+/**
+ * It implements the PolyOut interface by storing files in IndexedDB
+ * @class IDBPolyOut
+ */
 class IDBPolyOut implements PolyOut {
-    private async getFileInfo(id: string): Promise<FileInfo> {
+    private async getFileInfos(id: string): Promise<FileInfo[]> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readonly");
-            const request = tx.objectStore(OBJECT_STORE_POLY_OUT).get(id);
+            const store = tx.objectStore(OBJECT_STORE_POLY_OUT);
+            const request = store.index("id").getAll(id);
             request.onsuccess = () => {
-                if (request.result) resolve(request.result);
+                if (request.result.length > 0) resolve(request.result);
                 else reject(new Error(`File not found: ${id}`));
             };
             tx.onerror = tx.onabort = () => reject(request.error);
@@ -242,9 +272,12 @@ class IDBPolyOut implements PolyOut {
     }
 
     private async getZipEntries(id: string): Promise<zip.Entry[]> {
-        const file = await this.getFileInfo(id);
-        const reader = new zip.ZipReader(new zip.BlobReader(file.blob));
-        return reader.getEntries();
+        const entries = [];
+        for (const file of await this.getFileInfos(id)) {
+            const reader = new zip.ZipReader(new zip.BlobReader(file.blob));
+            entries.push(...(await reader.getEntries()));
+        }
+        return entries;
     }
 
     private async getFile(id: string): Promise<File> {
@@ -273,7 +306,7 @@ class IDBPolyOut implements PolyOut {
             };
         }
 
-        const file = await this.getFileInfo(id);
+        const file = (await this.getFileInfos(id))[0];
         return {
             async read() {
                 return new Uint8Array(await file.blob.arrayBuffer());
@@ -291,7 +324,9 @@ class IDBPolyOut implements PolyOut {
     }
 
     readFile(path: string, options: EncodingOptions): Promise<string>;
+
     readFile(path: string): Promise<Uint8Array>;
+
     readFile(
         id: string,
         options?: EncodingOptions
@@ -330,38 +365,52 @@ class IDBPolyOut implements PolyOut {
         throw "Not implemented: writeFile";
     }
 
-    async importArchive(url: string): Promise<string> {
+    async importArchive(url: string, destUrl?: string): Promise<string> {
         const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
         const blob = await (await fetch(dataUrl)).blob();
         const db = await openDatabase();
 
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            const fileId = "polypod://" + createUUID();
+            const id = destUrl || `polypod://${createUUID()}`;
 
-            tx.objectStore(OBJECT_STORE_POLY_OUT).put({
-                id: fileId,
+            tx.objectStore(OBJECT_STORE_POLY_OUT).add({
+                id,
                 name: fileName,
                 time: new Date(),
                 blob,
             });
 
-            tx.oncomplete = () => resolve(fileId);
+            tx.oncomplete = () => resolve(id);
             tx.onerror = tx.onabort = () => reject(tx.error);
         });
     }
 
-    async removeArchive(fileId: string): Promise<void> {
+    async removeArchive(id: string): Promise<void> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            tx.objectStore(OBJECT_STORE_POLY_OUT).delete(fileId);
+            const store = tx.objectStore(OBJECT_STORE_POLY_OUT);
+            const request = store.index("id").openCursor(id);
+
+            request.onsuccess = () => {
+                const cursor = request.result;
+                if (cursor) {
+                    cursor.delete();
+                    cursor.continue();
+                }
+            };
+
             tx.oncomplete = () => resolve();
             tx.onerror = tx.onabort = () => reject(tx.error);
         });
     }
 }
 
+/**
+ * PodJsInfo is used to return the runtime name and a version of PodJs
+ * @class PodJsInfo
+ */
 class PodJsInfo implements Info {
     async getRuntime(): Promise<string> {
         return "podjs";
@@ -377,7 +426,20 @@ interface NetworkResponse {
     error?: string;
 }
 
+/**
+ * BrowserNetwork makes network requests using XMLHttpRequest
+ * @class BrowserNetwork
+ */
 class BrowserNetwork {
+    /**
+     * It makes a POST request to the specified URL, with a body, a content type, and an auth token.
+     * And returns the network response as a promise.
+     * @param {string} url - The URL to which the request is sent.
+     * @param {string} body - The body of the request.
+     * @param {string} [contentType] - The content type of the request.
+     * @param {string} [authToken] - The token to use for authentication.
+     * @returns A Promise of the Network Response of the call that was executed.
+     */
     async httpPost(
         url: string,
         body: string,
@@ -394,6 +456,14 @@ class BrowserNetwork {
             authToken
         );
     }
+
+    /**
+     * It makes a GET request to the specified URL, and returns the response
+     * @param {string} url - The URL to fetch.
+     * @param {string} [contentType] - The content type of the request.
+     * @param {string} [authToken] - The token to use for authentication.
+     * @returns A promise.
+     */
     async httpGet(
         url: string,
         allowInsecure: boolean,
@@ -408,6 +478,16 @@ class BrowserNetwork {
             authToken
         );
     }
+
+    /**
+     * It makes a network request of type @type and returns the response
+     * @param {string} type - The HTTP method to use.
+     * @param {string} url - The URL to fetch.
+     * @param {string} [body] - The body of the request.
+     * @param {string} [contentType] - The content type of the request.
+     * @param {string} [authToken] - The token to use for authentication.
+     * @returns The promise is resolved with a NetworkResponse object.
+     */
     private async httpFetchRequest(
         type: string,
         url: string,
@@ -476,10 +556,23 @@ interface EndpointJSON {
 
 type EndpointKeyId = keyof EndpointJSON;
 
+/**
+ * Given an endpointId, return the corresponding EndpointInfo object, or null if the endpointId is not
+ * found.
+ *
+ * @param {EndpointKeyId} endpointId - The endpoint ID that you want to get the endpoint info for.
+ * @returns EndpointInfo | null
+ */
 function getEndpoint(endpointId: EndpointKeyId): EndpointInfo | null {
     return (endpointsJson as EndpointJSON)[endpointId] || null;
 }
 
+/**
+ * It takes an endpoint ID and asks the user if they want to allow the feature to fetch data from that
+ * endpoint
+ * @param {string} endpointId - The endpoint ID that the feature wants to contact.
+ * @returns The return value is a boolean.
+ */
 function approveEndpointFetch(endpointId: string): boolean {
     const featureName = window.parent.currentTitle || window.manifest.name;
     return confirm(
@@ -487,13 +580,23 @@ function approveEndpointFetch(endpointId: string): boolean {
     );
 }
 
+/**
+ * It returns a string that contains the error message.
+ * @param {string} fetchType - The type of fetch that failed.
+ * @param {string} errorlog - The error message that was returned by the endpoint.
+ * @returns a promise.
+ */
 function endpointErrorMessage(fetchType: string, errorlog: string): string {
     console.error(errorlog);
     return `Endpoint failed at : ${fetchType}`;
 }
 
+/**
+ * @class BrowserEndpoint
+ */
 class BrowserEndpoint implements Endpoint {
     endpointNetwork = new BrowserNetwork();
+
     async send(
         endpointId: EndpointKeyId,
         payload: string,
@@ -544,6 +647,11 @@ class BrowserEndpoint implements Endpoint {
     }
 }
 
+/**
+ * Creates a random UUID string with a random hexadecimal value for each character in the string
+ * 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx', and returns the result.
+ * @returns a string in UUID format
+ */
 function createUUID(): string {
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
         /[xy]/g,
@@ -555,9 +663,15 @@ function createUUID(): string {
     );
 }
 
+/**
+ * @class `BrowserPolyNavPolyNav`
+ */
 class BrowserPolyNav implements PolyNav {
     actions?: { [key: string]: () => void };
+
+    /** Creating a function that will be called when the user releases a key on the keyboard. */
     private keyUpListener: ((key: KeyboardEvent) => void) | undefined;
+    /** Creating a function that will be called when the browser's history state changes. */
     private popStateListener: // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ((this: Window, ev: PopStateEvent) => any) | undefined;
 
@@ -673,9 +787,10 @@ declare global {
 }
 
 /**
- * Returns the relative luminance value of a feature color.
+ * It takes a feature color and returns the relative luminance value of it.
  *
- * @param featureColor - A six digit hex color string, e.g. #000000
+ * @param {string} featureColor - the color of the feature you want to change in a six digit hex color string, e.g. #000000
+ * @returns The luminance of the feature color.
  */
 function luminance(featureColor: string): number {
     const red = parseInt(featureColor.substr(1, 2), 16);
@@ -685,6 +800,12 @@ function luminance(featureColor: string): number {
     return red * 0.2126 + green * 0.7152 + blue * 0.0722;
 }
 
+/**
+ * It determines the foreground and background colors for the navbar based on the primary color of the
+ * app.
+ * @param {Manifest} file
+ * @returns { fg: string; bg: string } object
+ */
 function determineNavBarColors(manifest: Manifest): { fg: string; bg: string } {
     const bg = manifest.primaryColor || NAV_DEFAULT_BACKGROUND_COLOR;
     const brightnessThreshold = 80;
@@ -695,6 +816,11 @@ function determineNavBarColors(manifest: Manifest): { fg: string; bg: string } {
     return { fg, bg };
 }
 
+/**
+ * Create a new iframe with a title and a background color
+ * @param {string} title - The title of the page.
+ * @returns A promise that resolves to a DOM element.
+ */
 function createNavBarFrame(title: string): HTMLElement {
     const frame = document.createElement("iframe");
     frame.style.display = "block";
@@ -722,6 +848,9 @@ function createNavBarFrame(title: string): HTMLElement {
     return frame;
 }
 
+/**
+ * The @class BrowserPod is a Pod that uses the browser's local storage to store polyIn and polyOut data
+ */
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
     public readonly polyIn = new IDBPolyIn();
@@ -730,6 +859,7 @@ export class BrowserPod implements Pod {
     public readonly info = new PodJsInfo();
     public readonly endpoint = new BrowserEndpoint();
 
+    /** Creates a navigation bar for the app. */
     constructor() {
         window.addEventListener("load", async () => {
             if (!MANIFEST_DATA) {

@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import { PolyChart, FilterChips } from "@polypoly-eu/poly-look";
 
 import "./dataStructureMiniStory.css";
+import {
+    BUBBLE_DARK_COLOR,
+    BUBBLE_LIGHT_COLOR,
+    BUBBLE_VIZ_HEIGHT,
+    BUBBLE_VIZ_WIDTH,
+} from "../../constants/bubbleViz";
+import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
 //This component needs to go to poly-look
 const DataStructureMiniStory = ({ data }) => {
     let totalFiles = 0;
@@ -13,10 +20,6 @@ const DataStructureMiniStory = ({ data }) => {
         return b.value - a.value;
     });
 
-    const bubbleVizWidth = 400;
-    const bubbleVizHeight = 400;
-    const dataBubblesDarkColor = "#0f1938";
-    const dataBubblesLightColor = "#f7fafc";
     const [selectedFolder, setSelectedFolder] = useState(data[0].title);
 
     const totalTitle = "Total";
@@ -37,9 +40,9 @@ const DataStructureMiniStory = ({ data }) => {
 
     const bubbleColor = (bubble) => {
         if (bubble.data.title === selectedFolder) {
-            return dataBubblesLightColor;
+            return BUBBLE_LIGHT_COLOR;
         } else {
-            return dataBubblesDarkColor;
+            return BUBBLE_DARK_COLOR;
         }
     };
 
@@ -59,14 +62,14 @@ const DataStructureMiniStory = ({ data }) => {
                 <PolyChart
                     type="bubble-cluster"
                     data={data}
-                    width={bubbleVizWidth}
-                    height={bubbleVizHeight}
+                    width={BUBBLE_VIZ_WIDTH}
+                    height={BUBBLE_VIZ_HEIGHT}
                     bubbleColor={
                         selectedFolder === totalTitle
-                            ? dataBubblesLightColor
+                            ? BUBBLE_LIGHT_COLOR
                             : bubbleColor
                     }
-                    textColor={dataBubblesDarkColor}
+                    textColor={BUBBLE_DARK_COLOR}
                     onBubbleClick={handleBubbleClick}
                 />
             </div>
@@ -77,7 +80,10 @@ const DataStructureMiniStory = ({ data }) => {
                 defaultActiveChips={[selectedFolder]}
                 onChipClick={handleFolderSelected}
             />
-            <p className="source data-structure-source">{"your google data"}</p>
+            <SourceInfoButton
+                source={"Your google data"}
+                popUpProps={{ name: "info-bubble" }}
+            />
         </>
     );
 };

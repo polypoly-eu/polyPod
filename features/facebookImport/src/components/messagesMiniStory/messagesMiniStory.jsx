@@ -1,6 +1,6 @@
 import React from "react";
 
-import i18n from "../../i18n";
+import i18n from "!silly-i18n";
 
 import BarChart from "../dataViz/barChart.jsx";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";

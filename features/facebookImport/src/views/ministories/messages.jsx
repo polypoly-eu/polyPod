@@ -4,7 +4,7 @@ import {
     MessagesMiniStoryDetails,
     MessagesMiniStorySummary,
 } from "../../components/messagesMiniStory/messagesMiniStory.jsx";
-import i18n from "../../i18n";
+import i18n from "!silly-i18n";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
 
 class MessagesMinistory extends Story {
