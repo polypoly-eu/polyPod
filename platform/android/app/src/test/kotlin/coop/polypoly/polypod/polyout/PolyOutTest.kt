@@ -6,7 +6,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth
 import coop.polypoly.polypod.features.Feature
-import coop.polypoly.polypod.features.FeatureManifest
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.util.FakeAesKeyGenerator
@@ -89,20 +88,7 @@ class PolyOutTest {
             manifestString
         )
 
-        FeatureStorage.activeFeature = Feature(
-            content = ZipFile(zip),
-            fileName = "",
-            manifest = FeatureManifest(
-                name = "",
-                author = "",
-                version = "",
-                description = "",
-                links = null,
-                primaryColor = "",
-                thumbnailColor = "",
-                thumbnail = ""
-            )
-        )
+        FeatureStorage.activeFeatureId = "Id"
     }
 
     @Test
