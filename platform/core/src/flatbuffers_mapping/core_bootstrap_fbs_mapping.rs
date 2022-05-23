@@ -46,7 +46,7 @@ mod tests {
 
     #[test]
     fn test_build_failure() {
-        let expected_failure = CoreFailure::core_bootstrap_failed();
+        let expected_failure = CoreFailure::core_already_bootstrapped();
         let byte_response = build_core_bootstrap_response(Err(expected_failure.clone()));
 
         let parsed = root_as_core_bootstrap_response(&byte_response);
