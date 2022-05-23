@@ -102,6 +102,7 @@
 		904D4A712790633000A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
 		905C687F27F1EA26005A2819 /* PolyPodCoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 905C687E27F1EA26005A2819 /* PolyPodCoreSwift */; };
 		906E406C27A82C7F009015B7 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E406B27A82C7F009015B7 /* ActivityViewController.swift */; };
+		9075BABA283B69FD00909E06 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075BAB9283B69FD00909E06 /* HomeScreenView.swift */; };
 		90E4088227D78E4E006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
 		90E4088327D79382006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
 		9C856C20282E5126004DF92F /* multipleZips1.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C856C1D282E5126004DF92F /* multipleZips1.zip */; };
@@ -243,6 +244,7 @@
 		904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchToMainQueue.swift; sourceTree = "<group>"; };
 		905C687C27F1E9C9005A2819 /* PolyPodCoreSwift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PolyPodCoreSwift; path = ../../core/PolyPodCoreSwift; sourceTree = "<group>"; };
 		906E406B27A82C7F009015B7 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		9075BAB9283B69FD00909E06 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		90E4088127D78E4E006AD362 /* DataProtection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtection.swift; sourceTree = "<group>"; };
 		9C856C1D282E5126004DF92F /* multipleZips1.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = multipleZips1.zip; sourceTree = "<group>"; };
 		9C856C1E282E5126004DF92F /* multipleZips2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = multipleZips2.zip; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 				E996EBD12756BBE900EAC9F7 /* Log.swift */,
 				906E406B27A82C7F009015B7 /* ActivityViewController.swift */,
 				90E4088127D78E4E006AD362 /* DataProtection.swift */,
+				9075BAB9283B69FD00909E06 /* HomeScreenView.swift */,
 			);
 			path = PolyPod;
 			sourceTree = "<group>";
@@ -949,6 +952,7 @@
 				1AF1178E24C174A00063EE37 /* Term+Additions.swift in Sources */,
 				1A183E9224AF1E860025F6BB /* PodApiError.swift in Sources */,
 				1A4C21F124A63E4C006CC1FD /* BlankNode+CoreDataProperties.swift in Sources */,
+				9075BABA283B69FD00909E06 /* HomeScreenView.swift in Sources */,
 				1A4C21F324A63E4C006CC1FD /* Quad+CoreDataProperties.swift in Sources */,
 				1AF1179024C178990063EE37 /* Literal+Additions.swift in Sources */,
 				906E406C27A82C7F009015B7 /* ActivityViewController.swift in Sources */,
