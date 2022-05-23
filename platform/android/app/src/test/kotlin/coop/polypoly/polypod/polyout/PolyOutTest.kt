@@ -9,7 +9,6 @@ import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.util.FakeAesKeyGenerator
 import coop.polypoly.polypod.util.FakeKeyStore
-import coop.polypoly.polypod.util.MockFeature
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
