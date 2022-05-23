@@ -29,7 +29,66 @@ struct HomeScreenSectionModel {
 }
 
 struct HomeScreenView: View {
+    var cards: [Card] = [       .init(title: "polyExplorer",
+                                      description: "nada",
+                                      imageName: "heart.fill",
+                                      backgroundColorHex: "#0c1a3c"),
+                                .init(title: "polyExplorer",
+                                      description: "nada",
+                                      imageName: "heart.fill",
+                                      backgroundColorHex: "#0c1a3c"),
+                                .init(title: "polyExplorer",
+                                      description: "nada",
+                                      imageName: "heart.fill",
+                                      backgroundColorHex: "#0c1a3c"),
+                                .init(title: "polyExplorer",
+                                      description: "nada",
+                                      imageName: "heart.fill",
+                                      backgroundColorHex: "#0c1a3c"),
+                                .init(title: "polyExplorer",
+                                      description: "nada",
+                                      imageName: "heart.fill",
+                                      backgroundColorHex: "#0c1a3c"),
+                                .init(title: "polyExplorer",
+                                      description: "nada",
+                                      imageName: "heart.fill",
+                                      backgroundColorHex: "#0c1a3c"),
+                                .init(title: "polyExplorer",
+                                      description: "nada",
+                                      imageName: "heart.fill",
+                                      backgroundColorHex: "#0c1a3c"),
+                                .init(title: "polyExplorer",
+                                      description: "nada",
+                                      imageName: "heart.fill",
+                                      backgroundColorHex: "#0c1a3c"),
+                                .init(title: "polyExplorer",
+                                      description: "nada",
+                                      imageName: "heart.fill",
+                                      backgroundColorHex: "#0c1a3c")
+    ]
+    
     var sections: [HomeScreenSectionModel] = [
+        .init(title: "Data KnowHow",
+              cards: [
+                .init(title: "polyExplorer",
+                      description: "nada",
+                      imageName: "heart.fill",
+                      backgroundColorHex: "#0c1a3c"),
+                .init(title: "polyExplorer",
+                                                  description: "nada",
+                                                  imageName: "heart.fill",
+                                                  backgroundColorHex: "#0c1a3c"),
+                                            .init(title: "polyExplorer",
+                                                  description: "nada",
+                                                  imageName: "heart.fill",
+                                                  backgroundColorHex: "#0c1a3c"),
+                                            .init(title: "polyExplorer",
+                                                  description: "nada",
+                                                  imageName: "heart.fill",
+                                                  backgroundColorHex: "#0c1a3c")
+              ],
+              type: .yourData),
+        
             .init(title: "Data KnowHow",
                   cards: [
                     .init(title: "polyExplorer",
@@ -53,15 +112,7 @@ struct HomeScreenView: View {
                           imageName: "heart.fill",
                           backgroundColorHex: "#0c1a3c")
                   ],
-                  type: .dataKnowHow),
-            .init(title: "Data KnowHow",
-                  cards: [
-                    .init(title: "polyExplorer",
-                          description: "nada",
-                          imageName: "heart.fill",
-                          backgroundColorHex: "#0c1a3c")
-                  ],
-                  type: .tools)
+                  type: .dataKnowHow)
     ]
     
     var body: some View {
@@ -70,6 +121,8 @@ struct HomeScreenView: View {
             ScrollView(showsIndicators: false) {
                 ForEach(sections, id: \.type) { sectionModel in
                     switch sectionModel.type {
+                    case .yourData:
+                        MyDataSectionView(cards: sectionModel.cards, geo: geo)
                     case .dataKnowHow:
                         DataKnowHowSectionView(sectionModel: sectionModel, geometry: geo)
                     default:
@@ -79,6 +132,84 @@ struct HomeScreenView: View {
                 }
             }
             .padding([.leading, .trailing], HomeScreenUIConstants.homeScreenHorizontalPadding)
+        }
+    }
+}
+
+struct MyDataSectionView: View {
+    var cards: [Card]
+    let geo: GeometryProxy
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            ForEach(Array(cards.chunked(into: 3).enumerated()), id: \.offset) { index, chunk in
+                switch index % 3 {
+                case 0:
+                    LargeLeftContainerView(baseSize: CGSize(width: geo.size.width / 3, height: geo.size.width / 3), cards: chunk)
+                case 1:
+                    RowContainerView(baseSize: CGSize(width: geo.size.width / 3, height: geo.size.width / 3), cards: chunk)
+                case 2:
+                    LargeRightContainerView(baseSize: CGSize(width: geo.size.width / 3, height: geo.size.width / 3), cards: chunk)
+                default:
+                    Color.clear
+                }
+            }
+        }.padding(8)
+    }
+}
+
+struct LargeLeftContainerView: View {
+    let baseSize: CGSize
+    let cards: [Card]
+
+    var body: some View {
+        HStack(alignment: .top) {
+            Rectangle().frame(width: 2 * baseSize.width, height: 2 * baseSize.height)
+            VStack {
+                ForEach(Array(cards.dropFirst())) { card in
+                    Rectangle().frame(width: baseSize.width, height: baseSize.height)
+                }
+                if (cards.count < 2) {
+                    Spacer()
+                }
+            }
+        }
+    }
+}
+
+struct LargeRightContainerView: View {
+    let baseSize: CGSize
+    let cards: [Card]
+    var body: some View {
+        HStack {
+            if cards.count <= 2 {
+                ForEach(cards) { card in
+                    Rectangle().frame(width: baseSize.width, height: baseSize.height)
+                }
+            } else {
+                VStack {
+                    ForEach(Array(cards.prefix(2))) { card in
+                        Rectangle().frame(width: baseSize.width, height: baseSize.height)
+                    }
+                }
+                Rectangle().frame(width: 2 * baseSize.width, height: 2 * baseSize.height)
+            }
+        }
+    }
+}
+
+struct RowContainerView: View {
+    let baseSize: CGSize
+    let cards: [Card]
+    var body: some View {
+        HStack {
+            ForEach(cards) { card in
+                Rectangle().frame(width: baseSize.width, height: baseSize.height)
+            }
+            
+            if cards.count < 3 {
+                Spacer()
+            }
         }
     }
 }
@@ -142,5 +273,13 @@ struct SmallCardView: View {
 struct HomeScreenView_Previews: PreviewProvider {
     static var previews: some View {
         HomeScreenView()
+    }
+}
+
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+        }
     }
 }
