@@ -13,6 +13,9 @@ class Core {
                 ByteBuffer.wrap(bytes)
             )
             response.failure?.let {
+                if (it.code == FailureCode.CoreAlreadyBootstrapped) {
+                    throw CoreAlreadyBootstrappedException()
+                }
                 throw InternalCoreException.make("Core bootstrap", it)
             }
         }

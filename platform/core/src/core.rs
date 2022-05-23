@@ -16,13 +16,13 @@ struct Core {
 fn get_instance() -> Result<&'static Core, CoreFailure> {
     match CORE.get() {
         Some(core) => Ok(core),
-        None => Err(CoreFailure::core_not_bootstraped()),
+        None => Err(CoreFailure::core_not_bootstrapped()),
     }
 }
 
 pub fn bootstrap(language_code: String) -> Result<(), CoreFailure> {
     if CORE.get().is_some() {
-        return Err(CoreFailure::core_bootstrap_failed());
+        return Err(CoreFailure::core_already_bootstrapped());
     }
 
     let core = Core { language_code };
