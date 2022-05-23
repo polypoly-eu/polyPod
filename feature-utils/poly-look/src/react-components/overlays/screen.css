@@ -5,6 +5,6 @@
   bottom: 0;
   left: 0;
   background-color: var(--theme-primary-color);
-  padding: 0 calc(var(--gdu) * 3);
+  padding: 0 calc(var(--gdu) * 4);
   overflow: hidden scroll;
 }
