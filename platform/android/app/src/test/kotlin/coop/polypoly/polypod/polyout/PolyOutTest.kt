@@ -5,7 +5,6 @@ import android.net.Uri
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth
-import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.util.FakeAesKeyGenerator
@@ -22,7 +21,6 @@ import java.io.File
 import java.io.InputStream
 import java.security.Provider
 import java.security.Security
-import java.util.zip.ZipFile
 
 @LooperMode(LooperMode.Mode.PAUSED)
 @RunWith(AndroidJUnit4::class)
@@ -67,26 +65,6 @@ class PolyOutTest {
         val mainDir = context.filesDir
         val featuresDir = File(mainDir, "features")
         featuresDir.mkdirs()
-
-        val manifestString = """
-            {
-                "name": "testManifest",
-                "description": "testDescription",
-                "author": "testAuthor",
-                "thumbnail": "assets/thumbnail.png",
-                "primaryColor": "#000000",
-                "links": {
-                    "link1": "https://example.com/1",
-                    "link2": "https://example.com/2"
-                }
-            }
-        """
-
-        val zip = MockFeature.createMockFeaturePackage(
-            featuresDir,
-            "test.zip",
-            manifestString
-        )
 
         FeatureStorage.activeFeatureId = "Id"
     }
