@@ -17,7 +17,7 @@
     display: flex;
     flex-direction: row;
     font-weight: 500;
-    font-size: 12px;
+    font-size: var(--font-size-s);
     line-height: var(--line-height);
 }
 
@@ -106,7 +106,7 @@
 }
 
 .bar-chart .scale .max-indicator p {
-    font-size: 12px;
+    font-size: var(--font-size-s);
     transform: translateX(-38px);
 }
 
@@ -140,7 +140,7 @@
 }
 
 .bar-chart .bar-box .above-bar p {
-    font-size: 14px;
+    font-size: var(--font-size-m);
     line-height: 150%;
     margin: 12px 4px 0 0;
 }
@@ -156,7 +156,7 @@
 }
 
 .bar-chart .bar-box .bottom-bar p {
-    font-size: 12px;
+    font-size: var(--font-size-s);
     line-height: 150%;
     margin: 4px 4px 0 0;
 }
@@ -175,16 +175,16 @@
     top: 50%;
     transform: translateY(-50%);
     right: 6px;
-    font-size: 12px;
+    font-size: var(--font-size-s);
 }
 
 .bar-extra-info {
-    font-size: 12px;
+    font-size: var(--font-size-s);
     line-height: 150%;
 }
 
 .bar-extra-info {
-    font-size: 12px;
+    font-size: var(--font-size-s);
     line-height: 150%;
 }
 

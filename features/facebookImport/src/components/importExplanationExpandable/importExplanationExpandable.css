@@ -51,7 +51,7 @@
 .import-view .explanation-expandable .head .heading {
     font-family: "Jost Medium";
     margin-left: 18px;
-    font-size: 24px;
+    font-size: var(--font-size-xl);
     flex: 1 1 auto;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .import-view .explanation-expandable .section-body .file-info p {
-    font-size: 16px;
+    font-size: var(--font-size-ml);
     color: var(--color-indigo-950);
     margin: 0 0 2px 0;
     line-height: 120%;
@@ -125,7 +125,7 @@
 .import-view .explanation-expandable .section-body {
     line-height: 120%;
     letter-spacing: -0.01em;
-    font-size: 20px;
+    font-size: var(--font-size-l);
 }
 
 .import-view .explanation-expandable .section-body h4,
@@ -136,14 +136,14 @@ h5 {
 
 .import-view .explanation-expandable .section-body h4 {
     font-family: "Jost Medium";
-    font-size: 24px;
+    font-size: var(--font-size-xl);
     margin-bottom: 36px;
     margin-top: 20px;
 }
 
 .import-view .explanation-expandable .section-body h5 {
     font-weight: 500;
-    font-size: 20px;
+    font-size: var(--font-size-xl);
     margin-top: 10px;
     margin-bottom: 10px;
 }
