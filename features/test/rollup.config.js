@@ -1,5 +1,5 @@
-import typescript from "@rollup/plugin-typescript";
 import copy from "@polypoly-eu/rollup-plugin-copy-watch";
+import sucrase from "@rollup/plugin-sucrase";
 
 export default {
     input: "src/test.ts",
@@ -10,6 +10,9 @@ export default {
     },
     plugins: [
         copy({ targets: [{ src: "src/index.html", dest: "dist" }] }),
-        typescript(),
+        sucrase({
+            exclude: ["node_modules/**"],
+            transforms: ["typescript"],
+        }),
     ],
 };

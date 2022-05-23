@@ -1,6 +1,6 @@
 import React from "react";
 import { PolyChart } from "@polypoly-eu/poly-look";
-import i18n from "../../i18n";
+import i18n from "!silly-i18n";
 
 import "./onOffFacebookMiniStory.css";
 import BarChart from "../dataViz/barChart.jsx";

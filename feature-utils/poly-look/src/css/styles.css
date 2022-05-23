@@ -48,3 +48,15 @@ so that we don't have to cover three different use cases explicitly anymore.
 body {
   margin: 0;
 }
+
+button {
+  border: none;
+}
+
+button:focus {
+  outline: 0;
+}
+
+a {
+  text-decoration: none;
+}

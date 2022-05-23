@@ -104,6 +104,9 @@
 		906E406C27A82C7F009015B7 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E406B27A82C7F009015B7 /* ActivityViewController.swift */; };
 		90E4088227D78E4E006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
 		90E4088327D79382006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
+		9C856C20282E5126004DF92F /* multipleZips1.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C856C1D282E5126004DF92F /* multipleZips1.zip */; };
+		9C856C21282E5126004DF92F /* multipleZips2.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C856C1E282E5126004DF92F /* multipleZips2.zip */; };
+		9C856C22282E5126004DF92F /* testZip.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C856C1F282E5126004DF92F /* testZip.zip */; };
 		E9040D4726F0A30E00A88593 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4626F0A30E00A88593 /* Info.swift */; };
 		E9040D4926F0B2B400A88593 /* RuntimeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */; };
 		E90F89EA2629822400AD7D96 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89E92629822400AD7D96 /* OnboardingView.swift */; };
@@ -241,6 +244,9 @@
 		905C687C27F1E9C9005A2819 /* PolyPodCoreSwift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PolyPodCoreSwift; path = ../../core/PolyPodCoreSwift; sourceTree = "<group>"; };
 		906E406B27A82C7F009015B7 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		90E4088127D78E4E006AD362 /* DataProtection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtection.swift; sourceTree = "<group>"; };
+		9C856C1D282E5126004DF92F /* multipleZips1.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = multipleZips1.zip; sourceTree = "<group>"; };
+		9C856C1E282E5126004DF92F /* multipleZips2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = multipleZips2.zip; sourceTree = "<group>"; };
+		9C856C1F282E5126004DF92F /* testZip.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = testZip.zip; sourceTree = "<group>"; };
 		E9040D4626F0A30E00A88593 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeInfo.swift; sourceTree = "<group>"; };
 		E90F89E92629822400AD7D96 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -344,6 +350,7 @@
 		1A66F7732493743D00ED4308 /* PolyPodTests */ = {
 			isa = PBXGroup;
 			children = (
+				9C856C1C282E5104004DF92F /* TestFiles */,
 				E9545EC3273543EB001E8C7F /* UpdateNotificationTest.swift */,
 				E9CFFA4E26A1983700F7BE65 /* UIColorExtensionsTest.swift */,
 				1A66F77E249378E400ED4308 /* PolyOutTests.swift */,
@@ -539,6 +546,16 @@
 			name = Packages;
 			sourceTree = "<group>";
 		};
+		9C856C1C282E5104004DF92F /* TestFiles */ = {
+			isa = PBXGroup;
+			children = (
+				9C856C1D282E5126004DF92F /* multipleZips1.zip */,
+				9C856C1E282E5126004DF92F /* multipleZips2.zip */,
+				9C856C1F282E5126004DF92F /* testZip.zip */,
+			);
+			path = TestFiles;
+			sourceTree = "<group>";
+		};
 		E9018EDF276370B500FDF34A /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -725,6 +742,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E923AAF8261E155500E0A2A8 /* polyNav.js in Resources */,
+				9C856C20282E5126004DF92F /* multipleZips1.zip in Resources */,
+				9C856C21282E5126004DF92F /* multipleZips2.zip in Resources */,
+				9C856C22282E5126004DF92F /* testZip.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -775,7 +795,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ENDPOINTS_SOURCE=\"$PROJECT_DIR/../../../../polyPod-config\"\nENDPOINTS_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/config\"\nrm -rf \"$ENDPOINTS_TARGET\"\ncp -r \"$ENDPOINTS_SOURCE\" \"$ENDPOINTS_TARGET\"\n";
+			shellScript = "set -e\nENDPOINTS_SOURCE=\"$PROJECT_DIR/../../../../polyPod-config\"\nENDPOINTS_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/config\"\nrm -rf \"$ENDPOINTS_TARGET\"\ncp -r \"$ENDPOINTS_SOURCE\" \"$ENDPOINTS_TARGET\"\n";
 		};
 		E923739E2628228F00D2CFF3 /* Copy polyPod Features */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -793,7 +813,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SOURCE_PATH=\"$PROJECT_DIR/../../..\"\nTARGET_PATH=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nFEATURES_TARGET_PATH=\"$TARGET_PATH/features\"\n\ncp \"$SOURCE_PATH/platform/feature-api/communication/remote-pod/dist/bootstrap.js\" \"$TARGET_PATH/pod.js\"\nmkdir -p \"$FEATURES_TARGET_PATH\"\ncp \"$SOURCE_PATH\"/features/bundle/dist/* \"$FEATURES_TARGET_PATH\"\n";
+			shellScript = "set -e\nSOURCE_PATH=\"$PROJECT_DIR/../../..\"\nTARGET_PATH=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nFEATURES_TARGET_PATH=\"$TARGET_PATH/features\"\n\ncp \"$SOURCE_PATH/platform/feature-api/communication/dist/bootstrap.js\" \"$TARGET_PATH/pod.js\"\nmkdir -p \"$FEATURES_TARGET_PATH\"\ncp \"$SOURCE_PATH\"/features/bundle/dist/* \"$FEATURES_TARGET_PATH\"\n";
 		};
 		E98F3756266F32AE00874FB9 /* Copy licenses and legal */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -811,7 +831,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "LICENSES_SOURCE=\"$PROJECT_DIR/../../../3rd-party-licenses\"\nLICENSES_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/3rd-party-licenses\"\nLEGAL_SOURCE=\"$PROJECT_DIR/../../../assets/legal\"\nLEGAL_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/legal\"\nrm -rf \"$LICENSES_TARGET\" \"$LEGAL_TARGET\"\ncp -r \"$LICENSES_SOURCE\" \"$LICENSES_TARGET\"\ncp -r \"$LEGAL_SOURCE\" \"$LEGAL_TARGET\"\n";
+			shellScript = "set -e\nLICENSES_SOURCE=\"$PROJECT_DIR/../../../3rd-party-licenses\"\nLICENSES_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/3rd-party-licenses\"\nLEGAL_SOURCE=\"$PROJECT_DIR/../../../assets/legal\"\nLEGAL_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/legal\"\nrm -rf \"$LICENSES_TARGET\" \"$LEGAL_TARGET\"\ncp -r \"$LICENSES_SOURCE\" \"$LICENSES_TARGET\"\ncp -r \"$LEGAL_SOURCE\" \"$LEGAL_TARGET\"\n";
 		};
 		E9CF1B7D2627365600216B70 /* Update Bundle Version */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1126,7 +1146,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1182,7 +1202,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1206,6 +1226,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = PolyPod/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1234,6 +1255,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = PolyPod/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

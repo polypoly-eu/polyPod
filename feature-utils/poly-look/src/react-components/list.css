@@ -1,5 +1,4 @@
 .list {
   display: flex;
   flex-flow: column;
-  overflow: hidden scroll;
 }

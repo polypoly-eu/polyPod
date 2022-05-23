@@ -28,6 +28,9 @@
     "sirv-cli": "^1.0.0"
   },
   "jest": {
+    "moduleNameMapper": {
+      "^!silly-i18n$": "<rootDir>/test/mocks/i18n-mock.js"
+    },
     "transform": {
       "^.+\\.js$": [
         "babel-jest",

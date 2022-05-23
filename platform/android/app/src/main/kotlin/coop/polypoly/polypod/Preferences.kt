@@ -2,6 +2,7 @@ package coop.polypoly.polypod
 
 import android.content.Context
 import androidx.preference.PreferenceManager
+import org.json.JSONArray
 import org.json.JSONObject
 
 class Preferences {
@@ -57,22 +58,27 @@ class Preferences {
         fun isBiometricEnabled(context: Context): Boolean =
             getPrefs(context).getBoolean(biometricEnabledKey, false)
 
-        fun setFileSystem(context: Context, fs: Map<String, String>) {
+        fun setFileSystem(context: Context, fs: Map<String, Array<String>>) {
             val edit = getPrefs(context).edit()
             edit.putString(fsKey, JSONObject(fs).toString())
             edit.commit()
         }
 
-        fun getFileSystem(context: Context): Map<String, String> {
-            val outputMap = HashMap<String, String>()
+        fun getFileSystem(context: Context): Map<String, Array<String>> {
+            val outputMap = HashMap<String, Array<String>>()
             val jsonString = getPrefs(context).getString(fsKey, "{}")
                 ?: throw Error("File system error")
             val jsonObject = JSONObject(jsonString)
             val keysItr: Iterator<String> = jsonObject.keys()
             while (keysItr.hasNext()) {
                 val k = keysItr.next()
-                val v = jsonObject.get(k) as String
-                outputMap[k] = v
+                val v = jsonObject.get(k) as JSONArray
+                val list = mutableListOf<String>()
+                for (i in 0 until v.length()) {
+                    val s = v.get(i) as String
+                    list.add(s)
+                }
+                outputMap[k] = list.toTypedArray()
             }
             return outputMap
         }

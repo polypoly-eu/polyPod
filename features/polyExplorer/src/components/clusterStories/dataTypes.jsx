@@ -7,7 +7,7 @@ import {
     createDataTypesTabs,
     createDataTypesSharedCombined,
 } from "../../screens/stories/story-utils.js";
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 
 const DataTypes = ({ entities, i18nHeader }) => {
     const bubbleColor = "#FB8A89";

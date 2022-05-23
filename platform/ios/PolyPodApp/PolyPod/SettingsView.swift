@@ -11,7 +11,7 @@ struct SettingsView: View {
                     Image("NavIconBackDark").renderingMode(.original)
                 }),
                 center: AnyView(
-                    Text({
+                    Text({ () -> String in
                         switch activeSection {
                         case .main:
                             return "settings_title"

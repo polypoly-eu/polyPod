@@ -9,9 +9,27 @@ Logic shared across polyPod platforms - ios, android, wasm.
 
 ## Building
 
-On most systems, you can simply run `make`, and that will handle everything.
-
 It is required to run `make` in a bash terminal which contains the necessary dependencies - curl, make, unzip. MacOS and Linux systems terminal should already have everything needed. On Windows, a terminal like [GitBash](https://gitforwindows.org) is needed.
+
+- Building rust core:
+```
+make rust_core
+```
+
+- Building swift core:
+```
+make ios_bindings
+```
+
+- Building android core:
+```
+make android_bindings
+```
+
+- Building for all platforms:
+```
+make
+```
 
 ## Testing
 

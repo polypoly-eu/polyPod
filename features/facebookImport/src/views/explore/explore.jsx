@@ -9,9 +9,10 @@ import {
     PolyImportContext,
     RoutingWrapper,
     ClickableCard,
+    Screen,
 } from "@polypoly-eu/poly-look";
 
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 
 import "./explore.css";
 import { ministories } from "../ministories/ministories.js";
@@ -20,15 +21,15 @@ const PopUpMessage = ({ children, reportResultAnswer }) => {
     return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
 };
 
-const UnrecognizedCard = () => {
+const ReportCard = () => {
     return (
         <div className="analysis-card unrecognized-analysis-card">
             <div className="unrecognized-analysis-title">
-                <h1>{i18n.t("explore:unrecognizedCard.headline")}</h1>
+                <h1>{i18n.t("explore:reportCard.headline")}</h1>
             </div>
-            <p>{i18n.t("explore:unrecognizedCard.text")}</p>
+            <p>{i18n.t("explore:reportCard.text")}</p>
             <RouteButton route="/report" className="report-button">
-                {i18n.t("explore:unrecognizedCard.button")}
+                {i18n.t("explore:reportCard.button")}
             </RouteButton>
         </div>
     );
@@ -84,7 +85,7 @@ const ExploreView = () => {
             );
         return (
             <List>
-                <UnrecognizedCard />
+                <ReportCard />
                 {ministories.map((MinistoryClass, index) => {
                     const ministory = new MinistoryClass({
                         account,
@@ -138,14 +139,15 @@ const ExploreView = () => {
     }, []);
 
     return (
-        <div
-            ref={exploreRef}
+        <Screen
             className="explore-view"
+            layout="poly-standard-layout"
             onScroll={saveScrollingProgress}
+            scrollingRef={exploreRef}
         >
             {renderReportResult()}
             {renderFileAnalyses()}
-        </div>
+        </Screen>
     );
 };
 
