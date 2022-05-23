@@ -34,13 +34,13 @@ open class PolyOut(
             .removePrefix("polypod://")
             .removePrefix(fsPrefix)
             .removePrefix("$fsFilesRoot/")
-            .removePrefix(FeatureStorage.activeFeature!!.id + "/")
+            .removePrefix(FeatureStorage.activeFeatureId!! + "/")
 
         fun idToPath(id: String, context: Context): String {
-            if (FeatureStorage.activeFeature == null) {
+            if (FeatureStorage.activeFeatureId == null) {
                 throw Exception("Cannot execute without a feature")
             }
-            val activeFeatureId = FeatureStorage.activeFeature!!.id
+            val activeFeatureId = FeatureStorage.activeFeatureId
             val pureId = pureId(id)
 
             return filesPath(context) + "/" + activeFeatureId +
@@ -50,7 +50,7 @@ open class PolyOut(
 
     private fun pathToId(path: File, context: Context): String {
         return fsPrefix + path.relativeTo(
-            File(filesPath(context) + "/" + FeatureStorage.activeFeature?.id)
+            File(filesPath(context) + "/" + FeatureStorage.activeFeatureId)
         ).path
     }
 
@@ -187,7 +187,7 @@ open class PolyOut(
                         fs[zipId] = arrayOf(fileName)
                     }
                     Preferences.setFileSystem(context, fs)
-                    val featureId = FeatureStorage.activeFeature?.id
+                    val featureId = FeatureStorage.activeFeatureId
                         ?: throw Error("Cannot import for unknown feature")
                     val targetPath = "$featureId/$zipId"
                     ZipTools.unzipAndEncrypt(inputStream, context, targetPath)

@@ -42,7 +42,7 @@
     background-color: var(--theme-info-button-color);
     padding: 0px 12px;
     margin-left: auto;
-    margin-right: -12px;
+    margin-right: -16px;
     font-size: 14px;
 }
 
@@ -55,7 +55,7 @@
 .unrecognized-analysis-card {
     background-color: var(--theme-primary-color);
     padding: 20px;
-    margin: -24px -12px 0 -12px;
+    margin: -24px -16px 0 -16px;
 }
 
 .unrecognized-analysis-card .unrecognized-analysis-title {
