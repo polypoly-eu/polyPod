@@ -68,7 +68,7 @@ export default class SemanticLocationsImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await zipFile.getEntries();
         const semanticLocationEntries = entries.filter(({ path }) =>
-            matchRegex(path, this.constructor)
+            matchRegex(path, this)
         );
 
         const timelineObjectsByType = await Promise.all(

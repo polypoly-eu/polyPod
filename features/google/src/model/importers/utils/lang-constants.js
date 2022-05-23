@@ -22,7 +22,8 @@ export const langConstants = {
     },
 };
 export function matchRegex(path, importer) {
-    const importerRegex = langConstants[importer];
+    const importerName = importer.constructor;
+    const importerRegex = langConstants[importerName];
     const language = Object.keys(importerRegex).find((key) =>
         importerRegex[key].regex.test(path)
     );
