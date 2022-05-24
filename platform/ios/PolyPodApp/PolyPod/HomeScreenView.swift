@@ -28,42 +28,35 @@ struct HomeScreenSectionModel {
     let type: HomeScreenSection
 }
 
-private struct BaseSizeKey: EnvironmentKey {
-    static let defaultValue = CGSize(width: 0.0, height: 0.0)
+struct Sizes {
+    let screenSize: CGSize
+    let containerWidth: CGFloat
+    let smallTileWidth: CGFloat
+    let mediumTileWidth: CGFloat
+    let bigTileWidth: CGFloat
+}
+
+struct HomeScreenSizesKey: EnvironmentKey {
+    typealias Value = Sizes
+    static let defaultValue: Sizes = Sizes(screenSize: .zero, containerWidth: .zero, smallTileWidth: .zero, mediumTileWidth: .zero, bigTileWidth: .zero)
 }
 
 extension EnvironmentValues {
-  var baseSize: CGSize {
-    get { self[BaseSizeKey.self] }
-    set { self[BaseSizeKey.self] = newValue }
+  var homeScreenTileSizes: Sizes {
+    get { self[HomeScreenSizesKey.self] }
+    set { self[HomeScreenSizesKey.self] = newValue }
   }
 }
 
 struct HomeScreenView: View {
     
     var sections: [HomeScreenSectionModel] = [
-        .init(title: "Toolz",
-              cards: [
-                .init(title: "Sed ut perspiciatis, unde omnis iste",
-                      description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem",
-                      imageName: "heart.fill",
-                      backgroundColorHex: "#0c1a3c"),
-                .init(title: "Sed ut perspiciatis, unde omnis iste",
-                      description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.",
-                      imageName: "heart.fill",
-                      backgroundColorHex: "#0c1a3c"),
-                .init(title: "polyExplorer",
-                      description: "nada",
-                      imageName: "heart.fill",
-                      backgroundColorHex: "#0c1a3c"),
-              ],
-              type: .tools),
         .init(title: "Your Data",
               cards: [
                 .init(title: "polyExplorer",
                       description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.",
                       imageName: "heart.fill",
-                      backgroundColorHex: "#0c1a3c"),
+                      backgroundColorHex: "#475abb"),
                 .init(title: "Big big many big hello there",
                       description: "nada",
                       imageName: "heart.fill",
@@ -122,15 +115,39 @@ struct HomeScreenView: View {
                           imageName: "heart.fill",
                           backgroundColorHex: "#0c1a3c")
                   ],
-                  type: .dataKnowHow)
+                  type: .dataKnowHow),
+        .init(title: "Toolz",
+              cards: [
+                .init(title: "Sed ut perspiciatis, unde omnis iste",
+                      description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem",
+                      imageName: "heart.fill",
+                      backgroundColorHex: "#0c1a3c"),
+                .init(title: "Sed ut perspiciatis, unde omnis iste",
+                      description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.",
+                      imageName: "heart.fill",
+                      backgroundColorHex: "#0c1a3c"),
+                .init(title: "polyExplorer",
+                      description: "nada",
+                      imageName: "heart.fill",
+                      backgroundColorHex: "#0c1a3c"),
+              ],
+              type: .tools),
     ]
+    
+    let footerModel = FooterViewModel(title: "Like what you have seen?",
+                                      description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.",
+                                      imageName: "FacebookImport",
+                                      backgoundHex: "#fed7d6",
+                                      buttonTitle: "Learn more",
+                                      buttonBackgroundHex: "#0f1938")
     
     var body: some View {
         // Why GeometryReader needs to be on top?
         GeometryReader { geo in
             let screenWidth = geo.size.width
             let containerWidth = screenWidth - 2 * HomeScreenUIConstants.homeScreenHorizontalPadding
-            let cardSize = (containerWidth - 2 * HomeScreenUIConstants.cardsSpacing) / 3
+            let smallTileWidth = (containerWidth - 2 * HomeScreenUIConstants.cardsSpacing) / 3
+            let bigTileWidth = containerWidth - smallTileWidth - HomeScreenUIConstants.cardsSpacing
             
             ScrollView(showsIndicators: false) {
                 ForEach(sections, id: \.type) { sectionModel in
@@ -144,9 +161,10 @@ struct HomeScreenView: View {
                     }
                     Spacer(minLength: HomeScreenUIConstants.sectionSpacing)
                 }
+                FooterView(model: footerModel)
             }
             .padding([.leading, .trailing], HomeScreenUIConstants.homeScreenHorizontalPadding)
-            .environment(\.baseSize, CGSize(width: cardSize, height: cardSize))
+            .environment(\.homeScreenTileSizes, Sizes.init(screenSize: geo.size, containerWidth: containerWidth, smallTileWidth: smallTileWidth, mediumTileWidth: containerWidth, bigTileWidth: bigTileWidth))
         }
     }
 }
@@ -205,9 +223,49 @@ struct ToolsSectionView: View {
     }
 }
 
+struct FooterViewModel {
+    let title: String
+    let description: String
+    let imageName: String
+    let backgoundHex: String
+    let buttonTitle: String
+    let buttonBackgroundHex: String
+}
+
+struct FooterView: View {
+    let model: FooterViewModel
+    
+    enum Constants {
+        static let verticalSpacing = 16.0
+        static let padding = 32.0
+        static let cornerRadius = 8.0
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: Constants.verticalSpacing) {
+            Text(model.title).fontWeight(.bold)
+            Text(model.description)
+            Image(model.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(alignment: .center)
+            Button(model.buttonTitle) {
+                //TODO
+            }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .center)
+            .foregroundColor(Color(fromHex: model.buttonBackgroundHex).isLight ? .black : .white)
+            .background(Color(fromHex: model.buttonBackgroundHex))
+            .cornerRadius(Constants.cornerRadius)
+                
+        }
+        .padding(Constants.padding)
+        .background(Color(fromHex: model.backgoundHex))
+        .cornerRadius(Constants.cornerRadius)
+    }
+}
 
 struct LargeLeftContainerView: View {
-    @Environment(\.baseSize) var baseSize
     let cards: [Card]
     
     var body: some View {
@@ -223,7 +281,6 @@ struct LargeLeftContainerView: View {
 }
 
 struct LargeRightContainerView: View {
-    @Environment(\.baseSize) var baseSize
     let cards: [Card]
     var body: some View {
         HStack(spacing: HomeScreenUIConstants.cardsSpacing) {
@@ -244,7 +301,6 @@ struct LargeRightContainerView: View {
 }
 
 struct RowContainerView: View {
-    @Environment(\.baseSize) var baseSize
     let cards: [Card]
     var body: some View {
         HStack(alignment: .top, spacing: HomeScreenUIConstants.cardsSpacing) {
@@ -264,7 +320,7 @@ struct BigCardView: View {
 
     private let card: Card
     private let backgroundColor: Color
-    @Environment(\.baseSize) var baseSize
+    @Environment(\.homeScreenTileSizes) var sizes
     
     init(card: Card) {
         self.card = card
@@ -277,7 +333,7 @@ struct BigCardView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(backgroundColor.isLight ? .black : .white)
-                .frame(width: 2 * baseSize.width + HomeScreenUIConstants.cardsSpacing - 2 * Constants.padding, alignment: .center)
+                .frame(width: sizes.bigTileWidth - 2 * Constants.padding, alignment: .center)
             
             VStack(alignment: .leading, spacing: Constants.verticalSpacing) {
                 Text(card.title)
@@ -288,8 +344,8 @@ struct BigCardView: View {
             }
         }
         .padding(Constants.padding)
-        .frame(width: 2 * baseSize.width + HomeScreenUIConstants.cardsSpacing,
-               height: 2 * baseSize.width + HomeScreenUIConstants.cardsSpacing)
+        .frame(width: sizes.bigTileWidth,
+               height: sizes.bigTileWidth)
         .background(backgroundColor)
         .cornerRadius(Constants.cornerRadius)
     }
@@ -305,7 +361,7 @@ struct MediumCardView: View {
 
     private let card: Card
     private let backgroundColor: Color
-    @Environment(\.baseSize) var baseSize
+    @Environment(\.homeScreenTileSizes) var sizes
     
     init(card: Card) {
         self.card = card
@@ -318,7 +374,7 @@ struct MediumCardView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(backgroundColor.isLight ? .black : .white)
-                .frame(width: baseSize.width, height: baseSize.width, alignment: .center)
+                .frame(width: sizes.smallTileWidth, height: sizes.smallTileWidth, alignment: .center)
             
             VStack(alignment: .leading, spacing: Constants.verticalSpacing) {
                 Text(card.title)
@@ -330,7 +386,7 @@ struct MediumCardView: View {
             Spacer()
         }
         .padding(Constants.padding)
-        .frame(width: 3 * baseSize.width + 2 * HomeScreenUIConstants.cardsSpacing, height: baseSize.width)
+        .frame(width: sizes.mediumTileWidth, height: sizes.smallTileWidth)
         .background(backgroundColor)
         .cornerRadius(Constants.cornerRadius)
     }
@@ -345,7 +401,7 @@ struct SmallCardView: View {
 
     private let card: Card
     private let backgroundColor: Color
-    @Environment(\.baseSize) var baseSize
+    @Environment(\.homeScreenTileSizes) var sizes
     
     init(card: Card) {
         self.card = card
@@ -364,7 +420,7 @@ struct SmallCardView: View {
                 .multilineTextAlignment(.center)
         }
         .padding(Constants.padding)
-        .frame(width: baseSize.width, height: baseSize.height)
+        .frame(width: sizes.smallTileWidth, height: sizes.smallTileWidth)
         .background(backgroundColor)
         .cornerRadius(Constants.cornerRadius)
     }
