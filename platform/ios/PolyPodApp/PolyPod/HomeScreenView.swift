@@ -232,6 +232,45 @@ struct DataKnowHowSectionView: View {
     }
 }
 
+struct BigCardView: View {
+    enum Constants {
+        static let verticalSpacing = 8.0
+        static let padding = 8.0
+        static let cornerRadius = 8.0
+    }
+
+    private let card: Card
+    private let backgroundColor: Color
+    @Environment(\.baseSize) var baseSize
+    
+    init(card: Card) {
+        self.card = card
+        self.backgroundColor = Color(fromHex: card.backgroundColorHex)
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: Constants.verticalSpacing) {
+            Image(systemName: card.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .foregroundColor(backgroundColor.isLight ? .black : .white)
+                .frame(width: 2 * baseSize.width + HomeScreenUIConstants.cardsSpacing - 2 * Constants.padding, alignment: .center)
+            
+            VStack(alignment: .leading, spacing: Constants.verticalSpacing) {
+                Text(card.title)
+                    .foregroundColor(backgroundColor.isLight ? .black : .white)
+                    .fontWeight(.bold)
+                Text(card.description)
+                    .foregroundColor(backgroundColor.isLight ? .black : .white)
+            }
+        }
+        .padding(Constants.padding)
+        .frame(width: 2 * baseSize.width + HomeScreenUIConstants.cardsSpacing,
+               height: 2 * baseSize.width + HomeScreenUIConstants.cardsSpacing)
+        .background(backgroundColor)
+        .cornerRadius(Constants.cornerRadius)
+    }
+}
 struct SmallCardView: View {
     enum Constants {
         static let verticalSpacing = 8.0
