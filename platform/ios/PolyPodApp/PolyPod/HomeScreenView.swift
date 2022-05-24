@@ -140,7 +140,7 @@ struct MyDataSectionView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: HomeScreenUIConstants.cardsSpacing) {
-            Text(sectionModel.title)
+            Text(sectionModel.title).fontWeight(.bold)
             ForEach(Array(sectionModel.cards.chunked(into: 3).enumerated()), id: \.offset) { index, chunk in
                 switch index % 4 {
                 case 0:
