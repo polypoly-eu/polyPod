@@ -34,9 +34,7 @@ export default function (options) {
                 const pattern = path.join(dir, "*", "**", `*${FILEEXT}`);
 
                 for (const file of await util.promisify(glob)(pattern)) {
-                    const lang = file
-                        .substring(dir.length)
-                        .split(path.posix.sep)[1];
+                    const lang = file.substring(dir.length).split(path.sep)[1];
                     const section = path.basename(file, FILEEXT);
 
                     (translations[lang] ||= {})[section] = JSON.parse(
