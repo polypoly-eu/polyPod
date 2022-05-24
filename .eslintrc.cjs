@@ -35,6 +35,7 @@ module.exports = {
         ".eslintrc.*",
         "**/build/*",
         "PolyPodApp/",
+        "platform/core/tools",
     ],
     rules: {
         semi: 2,

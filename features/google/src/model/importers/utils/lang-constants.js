@@ -1,32 +1,18 @@
 export const langConstants = {
     AccessLogImporter: {
-        english: { regex: /\/Access Log Activity\/.*\.csv$/ },
-        german: { regex: /\/Zugriffsprotokollaktivitäten\/.*\.csv$/ },
-        danish: { regex: /\/Aktiviteter i adgangsloggen\/.*\.csv$/ },
+        regex: /\/Access Log Activity|Zugriffsprotokollaktivitäten|Aktiviteter i adgangsloggen\/.*\.csv$/,
     },
-    ActivitiesImporter: {
-        english: { regex: /\/My Activity\/.*\.html$/ },
-        german: { regex: /\/Meine Aktivitäten\/.*\.html$/ },
-        danish: { regex: /\/Mine aktiviteter\/.*\.html$/ },
+    ActivitiesHtmlImporter: {
+        regex: /\/(My Activity|Meine Aktivitäten|Mine aktiviteter)\/.*\.html$/,
+    },
+    ActivitiesJsonImporter: {
+        regex: /\/(My Activity|Meine Aktivitäten|Mine aktiviteter)\/.*\.json$/,
     },
     SemanticLocationsImporter: {
-        english: {
-            regex: /\/[^/]+\/Semantic Location History\/\d+\/[^.]+\.json$/,
-        },
-        german: {
-            regex: /\/[^/]+\/Semantic Location History\/\d+\/[^.]+\.json$/,
-        },
-        danish: {
-            regex: /\/[^/]+\/Semantic Location History\/\d+\/[^.]+\.json$/,
-        },
+        regex: /\/[^/]+\/Semantic Location History\/\d+\/[^.]+\.json$/,
     },
 };
 export function matchRegex(path, importer) {
     const importerName = importer.constructor;
-    const importerRegex = langConstants[importerName];
-    const language = Object.keys(importerRegex).find((key) =>
-        importerRegex[key].regex.test(path)
-    );
-    if (language) return true;
-    return false;
+    return langConstants[importerName].regex.test(path);
 }
