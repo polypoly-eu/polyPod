@@ -32,7 +32,7 @@ export default [
             }),
         ],
         context: "window",
-        external: ["chai", "@polypoly-eu/api/"],
+        external: ["chai", "@polypoly-eu/api"],
     },
     {
         input: "src/pod.ts",
@@ -55,6 +55,6 @@ export default [
             }),
         ],
         context: "window",
-        external: ["@polypoly-eu/api/", "@polypoly-eu/api/dist/pod-api/spec"],
+        external: ["@polypoly-eu/api", "@polypoly-eu/api/dist/pod-api/spec"],
     },
 ];
