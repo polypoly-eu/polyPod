@@ -116,7 +116,9 @@ open class PolyOut(
     open suspend fun readDir(
         id: String
     ): Array<Map<String, String>> {
+        System.out.println("hello")
         val fs = Preferences.getFileSystem(context)
+        System.out.println("Why would you think it broke here")
         if (id == "") {
             val newFs = fs.filter {
                 File(idToPath(it.key, context)).exists()

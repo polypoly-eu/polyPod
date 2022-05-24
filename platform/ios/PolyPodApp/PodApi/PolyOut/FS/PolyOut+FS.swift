@@ -92,7 +92,7 @@ extension PolyOut {
                     size: try calculateFileSize(filePath.path),
                     time: "\(Int(floor(time.timeIntervalSince1970)))",
                     name: name ?? URL(fileURLWithPath: filePath.path).lastPathComponent,
-                    id: idFromPodUrl(url) ?? ""
+                    id: url
                 ), nil)
             }
             catch {
@@ -178,6 +178,7 @@ extension PolyOut {
             }
             return FileManager.default.fileExists(atPath: path)
         }
+        print(storedFiles)
         let idPrefix = "\(PolyOut.fsPrefix)\(PolyOut.fsFilesRoot)/"
         let entries = storedFiles.map {[
             "id": $0,
