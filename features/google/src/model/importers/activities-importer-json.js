@@ -1,7 +1,7 @@
 import UserActivity from "../entities/user-activity";
 import { matchRegex } from "./utils/lang-constants";
 
-class ActivityParser {
+class ActivityJsonParser {
     constructor() {
         this._iframe = document.createElement("iframe");
         this._iframe.style.display = "none";
@@ -18,7 +18,7 @@ class ActivityParser {
                     timestamp: new Date(
                         childNodes[childNodes.length - 1].textContent
                     ),
-                    productName: productName,
+                    productName,
                 })
         );
     }
@@ -26,13 +26,16 @@ class ActivityParser {
     async parse(entry) {
         const content = await entry.getContent();
         const text = await new TextDecoder("utf-8").decode(content);
-        const { contentDocument } = this._iframe;
-        contentDocument.write(text);
-        contentDocument.close();
-
+        const jsonObj = JSON.parse(text);
         const pathParts = entry.path.split("/");
         const productName = pathParts[pathParts.length - 2];
-        return this._scrapeTimestamps(contentDocument, productName);
+        return jsonObj.map(
+            (entry) =>
+                new UserActivity({
+                    timestamp: new Date(entry.time),
+                    productName,
+                })
+        );
     }
 
     release() {
@@ -41,19 +44,20 @@ class ActivityParser {
     }
 }
 
-export default class ActivitiesImporter {
+export default class ActivitiesJsonImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await zipFile.getEntries();
         const activityEntries = entries.filter(({ path }) =>
             matchRegex(path, this)
         );
-
-        const parser = new ActivityParser();
-        googleAccount.activities = (
-            await Promise.all(
-                activityEntries.map((entry) => parser.parse(entry))
+        const parser = new ActivityJsonParser();
+        googleAccount.activities
+            .push(
+                await Promise.all(
+                    activityEntries.map((entry) => parser.parse(entry))
+                )
             )
-        ).flat();
+            .flat();
         parser.release();
     }
 }
