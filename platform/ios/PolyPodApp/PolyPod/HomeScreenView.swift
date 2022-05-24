@@ -142,13 +142,15 @@ struct MyDataSectionView: View {
         VStack(alignment: .leading, spacing: HomeScreenUIConstants.cardsSpacing) {
             Text(sectionModel.title)
             ForEach(Array(sectionModel.cards.chunked(into: 3).enumerated()), id: \.offset) { index, chunk in
-                switch index % 3 {
+                switch index % 4 {
                 case 0:
                     LargeLeftContainerView(cards: chunk)
                 case 1:
                     RowContainerView(cards: chunk)
                 case 2:
                     LargeRightContainerView(cards: chunk)
+                case 3:
+                    RowContainerView(cards: chunk)
                 default:
                     Color.clear
                 }
