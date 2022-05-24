@@ -7,16 +7,16 @@ pub struct CoreFailure {
 }
 
 impl CoreFailure {
-    pub fn core_bootstrap_failed() -> Self {
+    pub fn core_already_bootstrapped() -> Self {
         CoreFailure {
-            code: FailureCode::FailedToBootstrapCore,
+            code: FailureCode::CoreAlreadyBootstrapped,
             message: "Core was already initialized".to_string(),
         }
     }
 
-    pub fn core_not_bootstraped() -> Self {
+    pub fn core_not_bootstrapped() -> Self {
         CoreFailure {
-            code: FailureCode::CoreNotBootstraped,
+            code: FailureCode::CoreNotBootstrapped,
             message: "Core was not initialized".to_string(),
         }
     }
@@ -38,6 +38,22 @@ impl CoreFailure {
     pub fn failed_to_create_c_str(message: String) -> Self {
         CoreFailure {
             code: FailureCode::FailedToCreateCString,
+            message,
+        }
+    }
+
+    #[cfg(target_os = "android")]
+    pub fn failed_to_extract_java_string(message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToExtractJavaString,
+            message,
+        }
+    }
+
+    #[cfg(target_os = "android")]
+    pub fn failed_to_convert_java_string(message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToConvertJavaString,
             message,
         }
     }

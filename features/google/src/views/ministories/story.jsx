@@ -44,7 +44,7 @@ export default Story;
 
 Story.LABELS = Object.freeze({
     NONE: null,
-    TECH_DEMO: "techDemo",
+    TECH_DEMO: "Tech Demo",
 });
 
 Story.MODES = Object.freeze({

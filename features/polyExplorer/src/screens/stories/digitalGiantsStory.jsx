@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import ClusterStory from "../../components/clusterStory/clusterStory.jsx";
 import GradientCircleList from "../../components/gradientCircleList/gradientCircleList.jsx";
 import { ExplorerContext } from "../../context/explorer-context.jsx";
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import SectionTitle from "../../components/clusterStories/sectionTitle.jsx";
 import DataTypes from "../../components/clusterStories/dataTypes.jsx";
 import Purposes from "../../components/clusterStories/purposes.jsx";

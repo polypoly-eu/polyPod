@@ -9,9 +9,10 @@ import {
     PolyImportContext,
     RoutingWrapper,
     ClickableCard,
+    Screen,
 } from "@polypoly-eu/poly-look";
 
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 
 import "./explore.css";
 import { ministories } from "../ministories/ministories.js";
@@ -138,14 +139,15 @@ const ExploreView = () => {
     }, []);
 
     return (
-        <div
-            ref={exploreRef}
+        <Screen
             className="explore-view"
+            layout="poly-standard-layout"
             onScroll={saveScrollingProgress}
+            scrollingRef={exploreRef}
         >
             {renderReportResult()}
             {renderFileAnalyses()}
-        </div>
+        </Screen>
     );
 };
 

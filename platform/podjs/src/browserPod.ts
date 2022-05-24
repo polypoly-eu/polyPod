@@ -49,7 +49,10 @@ async function openDatabase(): Promise<IDBDatabase> {
                 const keyPath = QUAD_KEYS.filter((_, idx) => (mask >> idx) & 1);
                 polyInStore.createIndex(keyPath.join("-"), keyPath);
             }
-            db.createObjectStore(OBJECT_STORE_POLY_OUT, { keyPath: "id" });
+            const polyOutStore = db.createObjectStore(OBJECT_STORE_POLY_OUT, {
+                autoIncrement: true,
+            });
+            polyOutStore.createIndex("id", "id");
         };
 
         request.onsuccess = () => resolve(request.result);
@@ -256,13 +259,14 @@ interface File {
  * @class IDBPolyOut
  */
 class IDBPolyOut implements PolyOut {
-    private async getFileInfo(id: string): Promise<FileInfo> {
+    private async getFileInfos(id: string): Promise<FileInfo[]> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readonly");
-            const request = tx.objectStore(OBJECT_STORE_POLY_OUT).get(id);
+            const store = tx.objectStore(OBJECT_STORE_POLY_OUT);
+            const request = store.index("id").getAll(id);
             request.onsuccess = () => {
-                if (request.result) resolve(request.result);
+                if (request.result.length > 0) resolve(request.result);
                 else reject(new Error(`File not found: ${id}`));
             };
             tx.onerror = tx.onabort = () => reject(request.error);
@@ -270,9 +274,12 @@ class IDBPolyOut implements PolyOut {
     }
 
     private async getZipEntries(id: string): Promise<zip.Entry[]> {
-        const file = await this.getFileInfo(id);
-        const reader = new zip.ZipReader(new zip.BlobReader(file.blob));
-        return reader.getEntries();
+        const entries = [];
+        for (const file of await this.getFileInfos(id)) {
+            const reader = new zip.ZipReader(new zip.BlobReader(file.blob));
+            entries.push(...(await reader.getEntries()));
+        }
+        return entries;
     }
 
     private async getFile(id: string): Promise<File> {
@@ -301,7 +308,7 @@ class IDBPolyOut implements PolyOut {
             };
         }
 
-        const file = await this.getFileInfo(id);
+        const file = (await this.getFileInfos(id))[0];
         return {
             async read() {
                 return new Uint8Array(await file.blob.arrayBuffer());
@@ -360,32 +367,42 @@ class IDBPolyOut implements PolyOut {
         throw "Not implemented: writeFile";
     }
 
-    async importArchive(url: string): Promise<string> {
+    async importArchive(url: string, destUrl?: string): Promise<string> {
         const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
         const blob = await (await fetch(dataUrl)).blob();
         const db = await openDatabase();
 
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            const fileId = "polypod://" + createUUID();
+            const id = destUrl || `polypod://${createUUID()}`;
 
-            tx.objectStore(OBJECT_STORE_POLY_OUT).put({
-                id: fileId,
+            tx.objectStore(OBJECT_STORE_POLY_OUT).add({
+                id,
                 name: fileName,
                 time: new Date(),
                 blob,
             });
 
-            tx.oncomplete = () => resolve(fileId);
+            tx.oncomplete = () => resolve(id);
             tx.onerror = tx.onabort = () => reject(tx.error);
         });
     }
 
-    async removeArchive(fileId: string): Promise<void> {
+    async removeArchive(id: string): Promise<void> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            tx.objectStore(OBJECT_STORE_POLY_OUT).delete(fileId);
+            const store = tx.objectStore(OBJECT_STORE_POLY_OUT);
+            const request = store.index("id").openCursor(id);
+
+            request.onsuccess = () => {
+                const cursor = request.result;
+                if (cursor) {
+                    cursor.delete();
+                    cursor.continue();
+                }
+            };
+
             tx.oncomplete = () => resolve();
             tx.onerror = tx.onabort = () => reject(tx.error);
         });

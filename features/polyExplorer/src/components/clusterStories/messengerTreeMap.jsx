@@ -3,7 +3,7 @@ import { createFacebookandOtherTreeMapData } from "../../screens/stories/story-u
 import { BlockLegend, PolyChart } from "@polypoly-eu/poly-look";
 
 import "./messengerTreeMap.css";
-import i18n from "../../i18n";
+import i18n from "!silly-i18n";
 
 const MessengerTreeMap = ({ messengers, i18nHeader }) => {
     const facebookGroupName = "Facebook (US)";

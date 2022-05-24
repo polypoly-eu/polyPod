@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import i18n from "../../i18n";
+import i18n from "!silly-i18n";
 
 import "./activitiesOverTimeStory.css";
 import "./datePicker.css";
@@ -63,7 +63,9 @@ export const ActivitiesOverTimeStorySummary = ({ activitiesOverTime }) => {
             {i18n.t("activitiesOverTimeStory:summary", {
                 number_activities: activitiesOverTime.total,
             })}
-            <p className="source">{i18n.t("common:source.your.google.data")}</p>
+            <p className="poly-small-print">
+                {i18n.t("common:source.your.google.data")}
+            </p>
         </div>
     );
 };

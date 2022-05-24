@@ -115,8 +115,8 @@ export class DefaultPod implements Pod {
                 return fs.writeFile(path, content, options);
             }
 
-            importArchive(url: string): Promise<string> {
-                throw new Error(`Called with ${url}, but not implemented`);
+            importArchive(url: string, destUrl?: string): Promise<string> {
+                throw new Error(`Called with ${url} and ${destUrl}, but not implemented`);
             }
 
             removeArchive(fileId: string): Promise<void> {

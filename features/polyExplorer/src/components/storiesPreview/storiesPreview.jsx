@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { ClickableCard, List, RoutingWrapper } from "@polypoly-eu/poly-look";
-import i18n from "../../i18n";
+import i18n from "!silly-i18n";
 import { I18nSection } from "@polypoly-eu/silly-i18n";
 
 import "./storiesPreview.css";

@@ -189,7 +189,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private fun loadFeature(feature: Feature) {
         webView.setBackgroundColor(feature.primaryColor)
-        FeatureStorage.activeFeature = feature
+        FeatureStorage.activeFeatureId = feature.id
         api.polyNav.setNavObserver(
             PolyNavObserver(
                 null,
@@ -280,12 +280,12 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                 if (consoleMessage == null) {
                     logger.warn(
                         "Unknown message from " +
-                            FeatureStorage.activeFeature?.id
+                            FeatureStorage.activeFeatureId
                     )
                     return true
                 }
                 val message = "Message from " +
-                    FeatureStorage.activeFeature?.id + ": " +
+                    FeatureStorage.activeFeatureId + ": " +
                     consoleMessage.messageLevel() + ": " +
                     consoleMessage.message()
                 when (consoleMessage?.messageLevel()) {
@@ -407,7 +407,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         fun reportError(error: String) {
             logger.warn(
                 "Uncaught error from " +
-                    FeatureStorage.activeFeature?.id + ": " + error
+                    FeatureStorage.activeFeatureId + ": " + error
             )
             errorHandler(error)
         }

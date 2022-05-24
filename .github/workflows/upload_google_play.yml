@@ -38,7 +38,6 @@ jobs:
 
   upload_build:
     name: Upload build
-    if: contains(fromJson('["all", "google-play"]'), github.event.inputs.targets)
     needs: check_preconditions
     runs-on: ubuntu-latest
     steps:
@@ -56,6 +55,9 @@ jobs:
           POLYPOD_POLYPEDIA_REPORT_URL: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_URL }}
           POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION: ${{ secrets.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION }} || ""
         run: ./build.js
+      - name: Android - Build core
+        working-directory: platform/core
+        run: make android_bindings MODE=release
       - name: Android - Test
         working-directory: platform/android
         run: ./gradlew test

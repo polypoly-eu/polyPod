@@ -25,7 +25,7 @@ const ClickableCard = ({
       {children}
       {buttonText && (
         <PolyButton
-          centered={true}
+          className="poly-self-centered"
           label={buttonText}
           onClick={onlyButtonClickEvent ? onClick : () => {}}
         />

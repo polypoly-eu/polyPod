@@ -35,7 +35,7 @@ export interface FS {
     ): Promise<void>;
     stat(path: string): Promise<Stats>;
     readdir(path: string): Promise<string[]>;
-    importArchive(url: string): Promise<string>;
+    importArchive(url: string, destUrl?: string): Promise<string>;
     removeArchive(fileId: string): Promise<void>;
 }
 

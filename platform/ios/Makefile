@@ -1,3 +1,5 @@
+.DEFAULT_GOAL := build
+
 archive_path = ./build/PolyPod.xcarchive
 ipa_path = ./build/PolyPod.ipa
 project_path = PolyPodApp/PolyPod.xcodeproj

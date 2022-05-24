@@ -1,14 +1,16 @@
 enum FailureCode: byte {
-    FailedToBootstrapCore = 1,
-    CoreNotBootstraped,
+    CoreNotBootstrapped = 1,
+    CoreAlreadyBootstrapped,
     FailedToParseFeatureManifest,
     NullCStringPointer,
     FailedToCreateCString,
+    FailedToExtractJavaString,
+    FailedToConvertJavaString,
 }
 
 table Failure {
     // Flatbuffers require to have a default value for enums
-    code:FailureCode = FailedToBootstrapCore;
+    code:FailureCode = CoreNotBootstrapped;
     message:string (required);
 }
 

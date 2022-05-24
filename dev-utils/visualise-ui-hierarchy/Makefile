@@ -22,6 +22,10 @@ polyExplorer.txt: ensure-rch
 facebookImport.txt: ensure-rch
 	$(call run-rch,facebookImport,src/facebookImporter.jsx)
 
+.INTERMEDIATE: google.txt
+google.txt: ensure-rch
+	$(call run-rch,google,src/google.jsx)
+
 .INTERMEDIATE: %.dot
 %.dot: %.txt
 	./tree2dot < $< > $@
@@ -30,7 +34,7 @@ facebookImport.txt: ensure-rch
 	fdp -T svg -o $@ $<
 
 .PHONY: all
-all: polyExplorer.svg facebookImport.svg
+all: polyExplorer.svg facebookImport.svg google.svg
 
 .PHONY: clean-files
 clean-files:
