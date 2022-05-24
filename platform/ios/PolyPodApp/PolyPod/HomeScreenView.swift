@@ -28,6 +28,17 @@ struct HomeScreenSectionModel {
     let type: HomeScreenSection
 }
 
+private struct BaseSizeKey: EnvironmentKey {
+    static let defaultValue = CGSize(width: 0.0, height: 0.0)
+}
+
+extension EnvironmentValues {
+  var baseSize: CGSize {
+    get { self[BaseSizeKey.self] }
+    set { self[BaseSizeKey.self] = newValue }
+  }
+}
+
 struct HomeScreenView: View {
     var cards: [Card] = [       .init(title: "polyExplorer",
                                       description: "nada",
@@ -122,9 +133,9 @@ struct HomeScreenView: View {
                 ForEach(sections, id: \.type) { sectionModel in
                     switch sectionModel.type {
                     case .yourData:
-                        MyDataSectionView(cards: sectionModel.cards, geo: geo)
+                        MyDataSectionView(cards: sectionModel.cards)
                     case .dataKnowHow:
-                        DataKnowHowSectionView(sectionModel: sectionModel, geometry: geo)
+                        DataKnowHowSectionView(sectionModel: sectionModel)
                     default:
                         Text("Not yet!! Come next time...")
                     }
@@ -132,24 +143,24 @@ struct HomeScreenView: View {
                 }
             }
             .padding([.leading, .trailing], HomeScreenUIConstants.homeScreenHorizontalPadding)
+            .environment(\.baseSize, CGSize(width: geo.size.width / 3, height: geo.size.width / 3))
         }
     }
 }
 
 struct MyDataSectionView: View {
     var cards: [Card]
-    let geo: GeometryProxy
     
     var body: some View {
         VStack(alignment: .leading) {
             ForEach(Array(cards.chunked(into: 3).enumerated()), id: \.offset) { index, chunk in
                 switch index % 3 {
                 case 0:
-                    LargeLeftContainerView(baseSize: CGSize(width: geo.size.width / 3, height: geo.size.width / 3), cards: chunk)
+                    LargeLeftContainerView(cards: chunk)
                 case 1:
-                    RowContainerView(baseSize: CGSize(width: geo.size.width / 3, height: geo.size.width / 3), cards: chunk)
+                    RowContainerView(cards: chunk)
                 case 2:
-                    LargeRightContainerView(baseSize: CGSize(width: geo.size.width / 3, height: geo.size.width / 3), cards: chunk)
+                    LargeRightContainerView(cards: chunk)
                 default:
                     Color.clear
                 }
@@ -159,9 +170,9 @@ struct MyDataSectionView: View {
 }
 
 struct LargeLeftContainerView: View {
-    let baseSize: CGSize
+    @Environment(\.baseSize) var baseSize
     let cards: [Card]
-
+    
     var body: some View {
         HStack(alignment: .top) {
             Rectangle().frame(width: 2 * baseSize.width, height: 2 * baseSize.height)
@@ -178,7 +189,7 @@ struct LargeLeftContainerView: View {
 }
 
 struct LargeRightContainerView: View {
-    let baseSize: CGSize
+    @Environment(\.baseSize) var baseSize
     let cards: [Card]
     var body: some View {
         HStack {
@@ -199,7 +210,7 @@ struct LargeRightContainerView: View {
 }
 
 struct RowContainerView: View {
-    let baseSize: CGSize
+    @Environment(\.baseSize) var baseSize
     let cards: [Card]
     var body: some View {
         HStack {
@@ -215,9 +226,9 @@ struct RowContainerView: View {
 }
 
 struct DataKnowHowSectionView: View {
-
     let sectionModel: HomeScreenSectionModel
-    let geometry: GeometryProxy
+    @Environment(\.baseSize) var baseSize
+    
     
     private let columns: [GridItem] = [GridItem(.flexible(), spacing: HomeScreenUIConstants.cardsSpacing),
                                        GridItem(.flexible(), spacing: HomeScreenUIConstants.cardsSpacing),
@@ -230,8 +241,8 @@ struct DataKnowHowSectionView: View {
                 
                 ForEach(sectionModel.cards) { card in
                     SmallCardView(card: card)
-                        .frame(width: (geometry.size.width - 2*HomeScreenUIConstants.cardsSpacing) / 3,
-                               height: (geometry.size.width - 2*HomeScreenUIConstants.cardsSpacing) / 3)
+                        .frame(width: baseSize.width - 2*HomeScreenUIConstants.cardsSpacing,
+                               height: baseSize.width - 2*HomeScreenUIConstants.cardsSpacing)
                 }
             }
         }
