@@ -14,5 +14,5 @@ export default {
             transforms: ["typescript"],
         }),
     ],
-    external: ["chai", "fast-check"],
+    external: ["chai", "fast-check", "chai-as-promised"],
 };
