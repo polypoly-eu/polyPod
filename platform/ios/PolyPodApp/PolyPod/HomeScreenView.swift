@@ -374,7 +374,7 @@ struct MediumCardView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(backgroundColor.isLight ? .black : .white)
-                .frame(width: sizes.smallTileWidth, height: sizes.smallTileWidth, alignment: .center)
+                .frame(width: sizes.smallTileWidth - 2 * Constants.padding, height: sizes.smallTileWidth - 2 * Constants.padding, alignment: .center)
             
             VStack(alignment: .leading, spacing: Constants.verticalSpacing) {
                 Text(card.title)
