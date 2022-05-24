@@ -1,5 +1,5 @@
 import fs from "fs";
-import path, { sep } from "path";
+import path from "path";
 import util from "util";
 import glob from "glob";
 
@@ -17,7 +17,6 @@ export default function (options) {
 
             for (let dir = importer; dir != (dir = path.dirname(dir)); ) {
                 const subdir = path.join(dir, DIRNAME);
-                console.log("sbdir", subdir);
                 const exists = await fs.promises.stat(subdir).then(
                     (stat) => stat.isDirectory(),
                     () => false
