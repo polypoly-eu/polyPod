@@ -2,10 +2,26 @@
 
 import SwiftUI
 
-enum HomeScreenUIConstants {
-    static let sectionSpacing = 32.0
-    static let homeScreenHorizontalPadding = 8.0
-    static let cardsSpacing = 16.0
+struct HomeScreenUIConstants {
+    struct Section {
+        static let verticalSpacing = 32.0
+    }
+    
+    struct View {
+        static let verticalPadding = 8.0
+    }
+    
+    struct TileContainer {
+        static let verticalSpacing = 16.0
+        static let horizontalSpacing = 16.0
+    }
+    
+    struct Tile {
+        static let verticalSpacing = 16.0
+        static let horizontalSpacing = 8.0
+        static let padding = 8.0
+        static let cornerRadius = 8.0
+    }
 }
 
 enum HomeScreenSection {
@@ -145,9 +161,9 @@ struct HomeScreenView: View {
         // Why GeometryReader needs to be on top?
         GeometryReader { geo in
             let screenWidth = geo.size.width
-            let containerWidth = screenWidth - 2 * HomeScreenUIConstants.homeScreenHorizontalPadding
-            let smallTileWidth = (containerWidth - 2 * HomeScreenUIConstants.cardsSpacing) / 3
-            let bigTileWidth = containerWidth - smallTileWidth - HomeScreenUIConstants.cardsSpacing
+            let containerWidth = screenWidth - 2 * HomeScreenUIConstants.View.verticalPadding
+            let smallTileWidth = (containerWidth - 2 * HomeScreenUIConstants.TileContainer.verticalSpacing) / 3
+            let bigTileWidth = containerWidth - smallTileWidth - HomeScreenUIConstants.TileContainer.verticalSpacing
             
             ScrollView(showsIndicators: false) {
                 ForEach(sections, id: \.type) { sectionModel in
@@ -159,11 +175,11 @@ struct HomeScreenView: View {
                     case .tools:
                         ToolsSectionView(sectionModel: sectionModel)
                     }
-                    Spacer(minLength: HomeScreenUIConstants.sectionSpacing)
+                    Spacer(minLength: HomeScreenUIConstants.Section.verticalSpacing)
                 }
                 FooterView(model: footerModel)
             }
-            .padding([.leading, .trailing], HomeScreenUIConstants.homeScreenHorizontalPadding)
+            .padding([.leading, .trailing], HomeScreenUIConstants.View.verticalPadding)
             .environment(\.homeScreenTileSizes, Sizes.init(screenSize: geo.size, containerWidth: containerWidth, smallTileWidth: smallTileWidth, mediumTileWidth: containerWidth, bigTileWidth: bigTileWidth))
         }
     }
@@ -173,7 +189,7 @@ struct MyDataSectionView: View {
     var sectionModel: HomeScreenSectionModel
     
     var body: some View {
-        VStack(alignment: .leading, spacing: HomeScreenUIConstants.cardsSpacing) {
+        VStack(alignment: .leading, spacing: HomeScreenUIConstants.TileContainer.verticalSpacing) {
             Text(sectionModel.title).fontWeight(.bold)
             ForEach(Array(sectionModel.cards.chunked(into: 3).enumerated()), id: \.offset) { index, chunk in
                 switch index % 4 {
@@ -199,7 +215,7 @@ struct DataKnowHowSectionView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
-            VStack(alignment: .leading, spacing: HomeScreenUIConstants.cardsSpacing) {
+            VStack(alignment: .leading, spacing: HomeScreenUIConstants.TileContainer.verticalSpacing) {
                 ForEach(Array(sectionModel.cards.chunked(into: 3).enumerated()), id: \.offset) { _, chunk in
                     RowContainerView(cards: chunk)
                 }
@@ -214,7 +230,7 @@ struct ToolsSectionView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
-            VStack(alignment: .leading, spacing: HomeScreenUIConstants.cardsSpacing) {
+            VStack(alignment: .leading, spacing: HomeScreenUIConstants.TileContainer.verticalSpacing) {
                 ForEach(sectionModel.cards) { card in
                     MediumCardView(card: card)
                 }
@@ -235,14 +251,8 @@ struct FooterViewModel {
 struct FooterView: View {
     let model: FooterViewModel
     
-    enum Constants {
-        static let verticalSpacing = 16.0
-        static let padding = 32.0
-        static let cornerRadius = 8.0
-    }
-    
     var body: some View {
-        VStack(alignment: .leading, spacing: Constants.verticalSpacing) {
+        VStack(alignment: .leading, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
             Text(model.title).fontWeight(.bold)
             Text(model.description)
             Image(model.imageName)
@@ -256,12 +266,12 @@ struct FooterView: View {
             .frame(maxWidth: .infinity, alignment: .center)
             .foregroundColor(Color(fromHex: model.buttonBackgroundHex).isLight ? .black : .white)
             .background(Color(fromHex: model.buttonBackgroundHex))
-            .cornerRadius(Constants.cornerRadius)
+            .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
                 
         }
-        .padding(Constants.padding)
+        .padding(HomeScreenUIConstants.Tile.padding)
         .background(Color(fromHex: model.backgoundHex))
-        .cornerRadius(Constants.cornerRadius)
+        .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
     }
 }
 
@@ -269,9 +279,9 @@ struct LargeLeftContainerView: View {
     let cards: [Card]
     
     var body: some View {
-        HStack(alignment: .top, spacing: HomeScreenUIConstants.cardsSpacing) {
+        HStack(alignment: .top, spacing: HomeScreenUIConstants.TileContainer.horizontalSpacing) {
             BigCardView(card: cards.first!)
-            VStack(spacing: HomeScreenUIConstants.cardsSpacing) {
+            VStack(spacing: HomeScreenUIConstants.TileContainer.verticalSpacing) {
                 ForEach(Array(cards.dropFirst())) { card in
                     SmallCardView(card: card)
                 }
@@ -283,13 +293,13 @@ struct LargeLeftContainerView: View {
 struct LargeRightContainerView: View {
     let cards: [Card]
     var body: some View {
-        HStack(spacing: HomeScreenUIConstants.cardsSpacing) {
+        HStack(spacing: HomeScreenUIConstants.TileContainer.horizontalSpacing) {
             if cards.count <= 2 {
                 ForEach(cards) { card in
                     SmallCardView(card: card)
                 }
             } else {
-                VStack(spacing: HomeScreenUIConstants.cardsSpacing) {
+                VStack(spacing: HomeScreenUIConstants.TileContainer.verticalSpacing) {
                     ForEach(Array(cards.prefix(2))) { card in
                         SmallCardView(card: card)
                     }
@@ -303,7 +313,7 @@ struct LargeRightContainerView: View {
 struct RowContainerView: View {
     let cards: [Card]
     var body: some View {
-        HStack(alignment: .top, spacing: HomeScreenUIConstants.cardsSpacing) {
+        HStack(alignment: .top, spacing: HomeScreenUIConstants.TileContainer.horizontalSpacing) {
             ForEach(cards) { card in
                 SmallCardView(card: card)
             }
@@ -312,11 +322,6 @@ struct RowContainerView: View {
 }
 
 struct BigCardView: View {
-    enum Constants {
-        static let verticalSpacing = 8.0
-        static let padding = 8.0
-        static let cornerRadius = 8.0
-    }
 
     private let card: Card
     private let backgroundColor: Color
@@ -328,14 +333,14 @@ struct BigCardView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: Constants.verticalSpacing) {
+        VStack(alignment: .leading, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
             Image("FacebookImport")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(backgroundColor.isLight ? .black : .white)
-                .frame(width: sizes.bigTileWidth - 2 * Constants.padding, alignment: .center)
+                .frame(width: sizes.bigTileWidth - 2 * HomeScreenUIConstants.Tile.padding, alignment: .center)
             
-            VStack(alignment: .leading, spacing: Constants.verticalSpacing) {
+            VStack(alignment: .leading, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
                 Text(card.title)
                     .foregroundColor(backgroundColor.isLight ? .black : .white)
                     .fontWeight(.bold)
@@ -343,22 +348,15 @@ struct BigCardView: View {
                     .foregroundColor(backgroundColor.isLight ? .black : .white)
             }
         }
-        .padding(Constants.padding)
+        .padding(HomeScreenUIConstants.Tile.padding)
         .frame(width: sizes.bigTileWidth,
                height: sizes.bigTileWidth)
         .background(backgroundColor)
-        .cornerRadius(Constants.cornerRadius)
+        .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
     }
 }
 
 struct MediumCardView: View {
-    enum Constants {
-        static let verticalSpacing = 16.0
-        static let horizontalSpacing = 8.0
-        static let padding = 8.0
-        static let cornerRadius = 8.0
-    }
-
     private let card: Card
     private let backgroundColor: Color
     @Environment(\.homeScreenTileSizes) var sizes
@@ -369,14 +367,14 @@ struct MediumCardView: View {
     }
 
     var body: some View {
-        HStack(spacing: Constants.horizontalSpacing) {
+        HStack(spacing: HomeScreenUIConstants.Tile.horizontalSpacing) {
             Image("FacebookImport")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(backgroundColor.isLight ? .black : .white)
-                .frame(width: sizes.smallTileWidth - 2 * Constants.padding, height: sizes.smallTileWidth - 2 * Constants.padding, alignment: .center)
+                .frame(width: sizes.smallTileWidth - 2 * HomeScreenUIConstants.Tile.padding, height: sizes.smallTileWidth - 2 * HomeScreenUIConstants.Tile.padding, alignment: .center)
             
-            VStack(alignment: .leading, spacing: Constants.verticalSpacing) {
+            VStack(alignment: .leading, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
                 Text(card.title)
                     .foregroundColor(backgroundColor.isLight ? .black : .white)
                     .fontWeight(.bold)
@@ -385,20 +383,14 @@ struct MediumCardView: View {
             }
             Spacer()
         }
-        .padding(Constants.padding)
+        .padding(HomeScreenUIConstants.Tile.padding)
         .frame(width: sizes.mediumTileWidth, height: sizes.smallTileWidth)
         .background(backgroundColor)
-        .cornerRadius(Constants.cornerRadius)
+        .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
     }
 }
 
 struct SmallCardView: View {
-    enum Constants {
-        static let verticalSpacing = 8.0
-        static let padding = 8.0
-        static let cornerRadius = 8.0
-    }
-
     private let card: Card
     private let backgroundColor: Color
     @Environment(\.homeScreenTileSizes) var sizes
@@ -409,7 +401,7 @@ struct SmallCardView: View {
     }
 
     var body: some View {
-        VStack(alignment: .center, spacing: Constants.verticalSpacing) {
+        VStack(alignment: .center, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
             Image("FacebookImport")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -419,10 +411,10 @@ struct SmallCardView: View {
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
         }
-        .padding(Constants.padding)
+        .padding(HomeScreenUIConstants.Tile.padding)
         .frame(width: sizes.smallTileWidth, height: sizes.smallTileWidth)
         .background(backgroundColor)
-        .cornerRadius(Constants.cornerRadius)
+        .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
     }
 }
 
