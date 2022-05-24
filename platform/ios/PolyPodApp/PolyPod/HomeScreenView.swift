@@ -159,6 +159,21 @@ struct MyDataSectionView: View {
     }
 }
 
+struct DataKnowHowSectionView: View {
+    let sectionModel: HomeScreenSectionModel
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(sectionModel.title).fontWeight(.bold)
+            VStack(alignment: .leading, spacing: HomeScreenUIConstants.cardsSpacing) {
+                ForEach(Array(sectionModel.cards.chunked(into: 3).enumerated()), id: \.offset) { _, chunk in
+                    RowContainerView(cards: chunk)
+                }
+            }
+        }
+    }
+}
+
 struct LargeLeftContainerView: View {
     @Environment(\.baseSize) var baseSize
     let cards: [Card]
@@ -203,21 +218,6 @@ struct RowContainerView: View {
         HStack(alignment: .top, spacing: HomeScreenUIConstants.cardsSpacing) {
             ForEach(cards) { card in
                 SmallCardView(card: card)
-            }
-        }
-    }
-}
-
-struct DataKnowHowSectionView: View {
-    let sectionModel: HomeScreenSectionModel
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(sectionModel.title).fontWeight(.bold)
-            VStack(alignment: .leading, spacing: HomeScreenUIConstants.cardsSpacing) {
-                ForEach(Array(sectionModel.cards.chunked(into: 3).enumerated()), id: \.offset) { _, chunk in
-                    RowContainerView(cards: chunk)
-                }
             }
         }
     }
