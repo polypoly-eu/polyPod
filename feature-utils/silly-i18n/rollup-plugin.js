@@ -1,5 +1,5 @@
 import fs from "fs";
-import path from "path";
+import path, { sep } from "path";
 import util from "util";
 import glob from "glob";
 
@@ -17,6 +17,7 @@ export default function (options) {
 
             for (let dir = importer; dir != (dir = path.dirname(dir)); ) {
                 const subdir = path.join(dir, DIRNAME);
+                console.log("sbdir", subdir);
                 const exists = await fs.promises.stat(subdir).then(
                     (stat) => stat.isDirectory(),
                     () => false
@@ -34,7 +35,9 @@ export default function (options) {
                 const pattern = path.join(dir, "*", "**", `*${FILEEXT}`);
 
                 for (const file of await util.promisify(glob)(pattern)) {
-                    const lang = file.substring(dir.length).split(path.sep)[1];
+                    const lang = file
+                        .substring(dir.length)
+                        .split(path.posix.sep)[1];
                     const section = path.basename(file, FILEEXT);
 
                     (translations[lang] ||= {})[section] = JSON.parse(
