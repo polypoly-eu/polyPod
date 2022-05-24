@@ -42,9 +42,13 @@ extension EnvironmentValues {
 struct HomeScreenView: View {
     
     var sections: [HomeScreenSectionModel] = [
-        .init(title: "Your Data",
+        .init(title: "Toolz",
               cards: [
-                .init(title: "polyExplorer",
+                .init(title: "Sed ut perspiciatis, unde omnis iste",
+                      description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem",
+                      imageName: "heart.fill",
+                      backgroundColorHex: "#0c1a3c"),
+                .init(title: "Sed ut perspiciatis, unde omnis iste",
                       description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.",
                       imageName: "heart.fill",
                       backgroundColorHex: "#0c1a3c"),
@@ -52,7 +56,19 @@ struct HomeScreenView: View {
                       description: "nada",
                       imageName: "heart.fill",
                       backgroundColorHex: "#0c1a3c"),
+              ],
+              type: .tools),
+        .init(title: "Your Data",
+              cards: [
                 .init(title: "polyExplorer",
+                      description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.",
+                      imageName: "heart.fill",
+                      backgroundColorHex: "#0c1a3c"),
+                .init(title: "Big big many big hello there",
+                      description: "nada",
+                      imageName: "heart.fill",
+                      backgroundColorHex: "#0c1a3c"),
+                .init(title: "Amazon Importer",
                       description: "nada",
                       imageName: "heart.fill",
                       backgroundColorHex: "#0c1a3c"),
@@ -123,8 +139,8 @@ struct HomeScreenView: View {
                         MyDataSectionView(sectionModel: sectionModel)
                     case .dataKnowHow:
                         DataKnowHowSectionView(sectionModel: sectionModel)
-                    default:
-                        Text("Not yet!! Come next time...")
+                    case .tools:
+                        ToolsSectionView(sectionModel: sectionModel)
                     }
                     Spacer(minLength: HomeScreenUIConstants.sectionSpacing)
                 }
@@ -173,6 +189,22 @@ struct DataKnowHowSectionView: View {
         }
     }
 }
+
+struct ToolsSectionView: View {
+    let sectionModel: HomeScreenSectionModel
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(sectionModel.title).fontWeight(.bold)
+            VStack(alignment: .leading, spacing: HomeScreenUIConstants.cardsSpacing) {
+                ForEach(sectionModel.cards) { card in
+                    MediumCardView(card: card)
+                }
+            }
+        }
+    }
+}
+
 
 struct LargeLeftContainerView: View {
     @Environment(\.baseSize) var baseSize
@@ -241,7 +273,7 @@ struct BigCardView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Constants.verticalSpacing) {
-            Image(systemName: card.imageName)
+            Image("FacebookImport")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(backgroundColor.isLight ? .black : .white)
@@ -258,6 +290,47 @@ struct BigCardView: View {
         .padding(Constants.padding)
         .frame(width: 2 * baseSize.width + HomeScreenUIConstants.cardsSpacing,
                height: 2 * baseSize.width + HomeScreenUIConstants.cardsSpacing)
+        .background(backgroundColor)
+        .cornerRadius(Constants.cornerRadius)
+    }
+}
+
+struct MediumCardView: View {
+    enum Constants {
+        static let verticalSpacing = 16.0
+        static let horizontalSpacing = 8.0
+        static let padding = 8.0
+        static let cornerRadius = 8.0
+    }
+
+    private let card: Card
+    private let backgroundColor: Color
+    @Environment(\.baseSize) var baseSize
+    
+    init(card: Card) {
+        self.card = card
+        self.backgroundColor = Color(fromHex: card.backgroundColorHex)
+    }
+
+    var body: some View {
+        HStack(spacing: Constants.horizontalSpacing) {
+            Image("FacebookImport")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .foregroundColor(backgroundColor.isLight ? .black : .white)
+                .frame(width: baseSize.width, height: baseSize.width, alignment: .center)
+            
+            VStack(alignment: .leading, spacing: Constants.verticalSpacing) {
+                Text(card.title)
+                    .foregroundColor(backgroundColor.isLight ? .black : .white)
+                    .fontWeight(.bold)
+                Text(card.description)
+                    .foregroundColor(backgroundColor.isLight ? .black : .white)
+            }
+            Spacer()
+        }
+        .padding(Constants.padding)
+        .frame(width: 3 * baseSize.width + 2 * HomeScreenUIConstants.cardsSpacing, height: baseSize.width)
         .background(backgroundColor)
         .cornerRadius(Constants.cornerRadius)
     }
@@ -281,13 +354,14 @@ struct SmallCardView: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: Constants.verticalSpacing) {
-            Image(systemName: card.imageName)
+            Image("FacebookImport")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(backgroundColor.isLight ? .black : .white)
             Text(card.title)
                 .foregroundColor(backgroundColor.isLight ? .black : .white)
                 .fontWeight(.bold)
+                .multilineTextAlignment(.center)
         }
         .padding(Constants.padding)
         .frame(width: baseSize.width, height: baseSize.height)
