@@ -73,7 +73,6 @@ class Preferences {
             while (keysItr.hasNext()) {
                 val k = keysItr.next()
                 val list = mutableListOf<String>()
-                System.out.println(jsonObject.get(k))
                 val v = jsonObject.get(k)
                 (v as? JSONArray)?.let {
                     for (i in 0 until it.length()) {
