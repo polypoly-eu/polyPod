@@ -178,7 +178,6 @@ extension PolyOut {
             }
             return FileManager.default.fileExists(atPath: path)
         }
-        print(storedFiles)
         let idPrefix = "\(PolyOut.fsPrefix)\(PolyOut.fsFilesRoot)/"
         let entries = storedFiles.map {[
             "id": $0,
