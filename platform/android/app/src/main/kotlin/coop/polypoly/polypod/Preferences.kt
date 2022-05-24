@@ -80,6 +80,7 @@ class Preferences {
                         list.add(s)
                     }
                 } ?: run {
+                    // Migrate old data - we used to store only a single file
                     list.add(v as String)
                 }
                 outputMap[k] = list.toTypedArray()
