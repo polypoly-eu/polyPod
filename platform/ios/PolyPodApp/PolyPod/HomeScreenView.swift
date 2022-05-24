@@ -112,11 +112,15 @@ struct HomeScreenView: View {
     var body: some View {
         // Why GeometryReader needs to be on top?
         GeometryReader { geo in
+            let screenWidth = geo.size.width
+            let containerWidth = screenWidth - 2 * HomeScreenUIConstants.homeScreenHorizontalPadding
+            let cardSize = (containerWidth - 2 * HomeScreenUIConstants.cardsSpacing) / 3
+            
             ScrollView(showsIndicators: false) {
                 ForEach(sections, id: \.type) { sectionModel in
                     switch sectionModel.type {
                     case .yourData:
-                        MyDataSectionView(cards: sectionModel.cards)
+                        MyDataSectionView(sectionModel: sectionModel)
                     case .dataKnowHow:
                         DataKnowHowSectionView(sectionModel: sectionModel)
                     default:
@@ -126,17 +130,18 @@ struct HomeScreenView: View {
                 }
             }
             .padding([.leading, .trailing], HomeScreenUIConstants.homeScreenHorizontalPadding)
-            .environment(\.baseSize, CGSize(width: geo.size.width / 3, height: geo.size.width / 3))
+            .environment(\.baseSize, CGSize(width: cardSize, height: cardSize))
         }
     }
 }
 
 struct MyDataSectionView: View {
-    var cards: [Card]
+    var sectionModel: HomeScreenSectionModel
     
     var body: some View {
-        VStack(alignment: .leading) {
-            ForEach(Array(cards.chunked(into: 3).enumerated()), id: \.offset) { index, chunk in
+        VStack(alignment: .leading, spacing: HomeScreenUIConstants.cardsSpacing) {
+            Text(sectionModel.title)
+            ForEach(Array(sectionModel.cards.chunked(into: 3).enumerated()), id: \.offset) { index, chunk in
                 switch index % 3 {
                 case 0:
                     LargeLeftContainerView(cards: chunk)
@@ -148,7 +153,7 @@ struct MyDataSectionView: View {
                     Color.clear
                 }
             }
-        }.padding(8)
+        }
     }
 }
 
@@ -157,14 +162,11 @@ struct LargeLeftContainerView: View {
     let cards: [Card]
     
     var body: some View {
-        HStack(alignment: .top) {
-            Rectangle().frame(width: 2 * baseSize.width, height: 2 * baseSize.height)
-            VStack {
+        HStack(alignment: .top, spacing: HomeScreenUIConstants.cardsSpacing) {
+            BigCardView(card: cards.first!)
+            VStack(spacing: HomeScreenUIConstants.cardsSpacing) {
                 ForEach(Array(cards.dropFirst())) { card in
-                    Rectangle().frame(width: baseSize.width, height: baseSize.height)
-                }
-                if (cards.count < 2) {
-                    Spacer()
+                    SmallCardView(card: card)
                 }
             }
         }
@@ -175,18 +177,18 @@ struct LargeRightContainerView: View {
     @Environment(\.baseSize) var baseSize
     let cards: [Card]
     var body: some View {
-        HStack {
+        HStack(spacing: HomeScreenUIConstants.cardsSpacing) {
             if cards.count <= 2 {
                 ForEach(cards) { card in
-                    Rectangle().frame(width: baseSize.width, height: baseSize.height)
+                    SmallCardView(card: card)
                 }
             } else {
-                VStack {
+                VStack(spacing: HomeScreenUIConstants.cardsSpacing) {
                     ForEach(Array(cards.prefix(2))) { card in
-                        Rectangle().frame(width: baseSize.width, height: baseSize.height)
+                        SmallCardView(card: card)
                     }
                 }
-                Rectangle().frame(width: 2 * baseSize.width, height: 2 * baseSize.height)
+                BigCardView(card: cards.last!)
             }
         }
     }
@@ -196,13 +198,9 @@ struct RowContainerView: View {
     @Environment(\.baseSize) var baseSize
     let cards: [Card]
     var body: some View {
-        HStack {
+        HStack(alignment: .top, spacing: HomeScreenUIConstants.cardsSpacing) {
             ForEach(cards) { card in
-                Rectangle().frame(width: baseSize.width, height: baseSize.height)
-            }
-            
-            if cards.count < 3 {
-                Spacer()
+                SmallCardView(card: card)
             }
         }
     }
@@ -210,22 +208,13 @@ struct RowContainerView: View {
 
 struct DataKnowHowSectionView: View {
     let sectionModel: HomeScreenSectionModel
-    @Environment(\.baseSize) var baseSize
-    
-    
-    private let columns: [GridItem] = [GridItem(.flexible(), spacing: HomeScreenUIConstants.cardsSpacing),
-                                       GridItem(.flexible(), spacing: HomeScreenUIConstants.cardsSpacing),
-                                       GridItem(.flexible(), spacing: HomeScreenUIConstants.cardsSpacing)]
 
     var body: some View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
-            LazyVGrid(columns: columns, spacing: HomeScreenUIConstants.cardsSpacing) {
-                
-                ForEach(sectionModel.cards) { card in
-                    SmallCardView(card: card)
-                        .frame(width: baseSize.width - 2*HomeScreenUIConstants.cardsSpacing,
-                               height: baseSize.width - 2*HomeScreenUIConstants.cardsSpacing)
+            VStack(alignment: .leading, spacing: HomeScreenUIConstants.cardsSpacing) {
+                ForEach(Array(sectionModel.cards.chunked(into: 3).enumerated()), id: \.offset) { _, chunk in
+                    RowContainerView(cards: chunk)
                 }
             }
         }
@@ -271,6 +260,7 @@ struct BigCardView: View {
         .cornerRadius(Constants.cornerRadius)
     }
 }
+
 struct SmallCardView: View {
     enum Constants {
         static let verticalSpacing = 8.0
@@ -280,6 +270,7 @@ struct SmallCardView: View {
 
     private let card: Card
     private let backgroundColor: Color
+    @Environment(\.baseSize) var baseSize
     
     init(card: Card) {
         self.card = card
@@ -294,9 +285,10 @@ struct SmallCardView: View {
                 .foregroundColor(backgroundColor.isLight ? .black : .white)
             Text(card.title)
                 .foregroundColor(backgroundColor.isLight ? .black : .white)
+                .fontWeight(.bold)
         }
-        
         .padding(Constants.padding)
+        .frame(width: baseSize.width, height: baseSize.height)
         .background(backgroundColor)
         .cornerRadius(Constants.cornerRadius)
     }
