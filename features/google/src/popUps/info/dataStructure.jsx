@@ -1,6 +1,6 @@
 import React from "react";
 
-const BubbleInfoScreen = () => {
+const DataStructure = () => {
     return (
         <div>
             InfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfoInfo
@@ -8,4 +8,4 @@ const BubbleInfoScreen = () => {
     );
 };
 
-export default BubbleInfoScreen;
+export default DataStructure;

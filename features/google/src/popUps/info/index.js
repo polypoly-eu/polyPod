@@ -1,3 +1,3 @@
-import BubbleInfoScreen from "./bubbleInfoScreen.jsx";
+import DataStructure from "./dataStructure.jsx";
 
-export default { "info-bubble": BubbleInfoScreen };
+export default { "info-bubble": DataStructure };
