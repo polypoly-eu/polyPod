@@ -2,11 +2,24 @@ import Foundation
 import Zip
 import Combine
 
+
 struct Category: Decodable {
+    let id: String
     let name: String
     let features: [String]
 }
 
+enum CategoryId: String {
+    case yourData
+    case dataKnowHow
+    case tools
+}
+
+struct CategoryModel {
+    let id: CategoryId
+    let name: String
+    let features: [Feature]
+}
 
 final class FeatureStorage: ObservableObject {
     private let dataProtection: DataProtection
@@ -75,6 +88,27 @@ final class FeatureStorage: ObservableObject {
         self.featuresList = sortFeatures(featuresList)
     }
     
+    private func mapFeatures(features: [String]) {
+        
+        featureName
+        
+    }
+    
+    private func mapCategories(_ categories: [Category]) -> [CategoryModel] {
+
+        var models: [CategoryModel] = []
+        
+        categories.map({category in
+            let id = CategoryId(rawValue: category.id)
+            
+            
+            
+        })
+
+        return models
+    }
+
+    
     private func sortFeatures(_ features: [Feature]) -> [Feature] {
         let order = readOrder()
 
@@ -89,6 +123,8 @@ final class FeatureStorage: ObservableObject {
                 sorted.append(feature)
             }
         }
+        
+        
         return sorted
     }
     

@@ -47,6 +47,7 @@
   ],
   "polyPodCategories": [
     {
+      "id": "yourData",
       "name": "Your Data",
       "features": [
         "facebookImport",
@@ -55,6 +56,7 @@
       ]
     },
     {
+      "id": "knowHow",
       "name": "Know how",
       "features": [
         "polyPreview",
@@ -62,6 +64,7 @@
       ]
     },
     {
+      "id": "tools",
       "name": "Tools",
       "features": [
         "lexicon"
