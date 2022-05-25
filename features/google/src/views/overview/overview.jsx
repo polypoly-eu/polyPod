@@ -61,10 +61,11 @@ const Overview = () => {
 
     return (
         <Screen className="overview" layout="poly-standard-layout">
-            <h1>Your Google data</h1>
+            <h1>{i18n.t("overview:your.google.data")}</h1>
             <p>
-                From all your google data we currently analysed these{" "}
-                {bubbleData.length} categories:
+                {i18n.t("overview:analysed.categories", {
+                    analysed_categories: bubbleData.length,
+                })}
             </p>
             <PolyChart
                 type="bubble-cluster"
@@ -79,18 +80,21 @@ const Overview = () => {
             />
             {files && files?.[0] && (
                 <p className="poly-small-print">
-                    Imported File: {files[0].name}
+                    {i18n.t("overview:imported.file")} {files[0].name}
                 </p>
             )}
             <PolyButton
-                label="Remove File"
+                label={i18n.t("overview:import.new.file")}
                 onClick={() =>
                     setPopUp({
                         name: "dialog",
-                        title: "Do you really want to delete the file?",
-                        backButton: { text: "Back", onClick: closePopUp },
+                        title: i18n.t("overview:delete.file.confirmation"),
+                        backButton: {
+                            text: i18n.t("common:back"),
+                            onClick: closePopUp,
+                        },
                         proceedButton: {
-                            text: "Proceed",
+                            text: i18n.t("common:proceed"),
                             onClick: onRemoveFile,
                         },
                     })
@@ -98,7 +102,7 @@ const Overview = () => {
                 type="outline"
             ></PolyButton>
             <RoutingWrapper history={history} route="/explore">
-                <PolyButton label="Explore"></PolyButton>
+                <PolyButton label={i18n.t("common:explore")}></PolyButton>
             </RoutingWrapper>
         </Screen>
     );

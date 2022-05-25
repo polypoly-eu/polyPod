@@ -6,7 +6,7 @@
 }
 
 .startScroll h1 {
-    font-size: 20px;
+    font-size: var(--font-size-l);
     margin: 4px 0px !important;
     white-space: nowrap;
     overflow: scroll hidden;

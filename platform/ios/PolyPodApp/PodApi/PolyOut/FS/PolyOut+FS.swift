@@ -92,7 +92,7 @@ extension PolyOut {
                     size: try calculateFileSize(filePath.path),
                     time: "\(Int(floor(time.timeIntervalSince1970)))",
                     name: name ?? URL(fileURLWithPath: filePath.path).lastPathComponent,
-                    id: idFromPodUrl(url) ?? ""
+                    id: url
                 ), nil)
             }
             catch {

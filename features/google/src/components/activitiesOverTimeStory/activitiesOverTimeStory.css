@@ -29,12 +29,12 @@
 
 .activities-ministory .legend p {
     margin: 0;
-    font-size: 14px;
+    font-size: var(--font-size-m);
 }
 
 .activities-ministory .above-chart,
 .activities-ministory .below-chart {
-    font-size: 12px;
+    font-size: var(--font-size-s);
     color: var(--color-gray-400);
 }
 

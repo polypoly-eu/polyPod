@@ -14,6 +14,7 @@ import i18n from "!silly-i18n";
 import "./explore.css";
 import { ministories } from "../ministories/ministories.js";
 import { useHistory } from "react-router-dom";
+import { GoogleContext } from "../../context/google-context.jsx";
 
 const ReportCard = () => {
     const history = useHistory();
@@ -37,6 +38,7 @@ const ReportCard = () => {
 
 const ExploreView = () => {
     const { account } = useContext(PolyImportContext);
+    const { reportIsSent } = useContext(GoogleContext);
 
     const history = useHistory();
     const exploreRef = useRef();
@@ -45,7 +47,7 @@ const ExploreView = () => {
         if (!account) return null;
         return (
             <List>
-                <ReportCard />
+                {!reportIsSent && <ReportCard />}
                 {ministories.map((MinistoryClass, index) => {
                     const ministory = new MinistoryClass({
                         account,
