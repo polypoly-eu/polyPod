@@ -12,7 +12,7 @@ class ActivitiesByProductsStory extends SingleDataStory {
     }
 
     get title() {
-        return "Activities by products";
+        return "Which Google products captured your data the most";
     }
 
     get label() {
