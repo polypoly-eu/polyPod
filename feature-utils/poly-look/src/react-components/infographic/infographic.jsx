@@ -23,7 +23,7 @@ const Infographic = ({ imageSrc, legend }) => {
               data-testid="infographic-entry-test"
             >
               <div className="number">
-                <span>{idx}</span>
+                <span>{idx + 1}</span>
               </div>
               <div className="text">{entry}</div>
             </div>
