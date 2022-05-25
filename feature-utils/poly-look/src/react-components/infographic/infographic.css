@@ -1,0 +1,44 @@
+.poly-infographic {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--max-width);
+}
+
+.poly-infographic .image-container {
+  position: relative;
+  margin-left: calc(var(--gdu) * -4);
+  margin-right: calc(var(--gdu) * -4);
+  margin-bottom: calc(var(--gdu) * 5);
+  background-color: var(--color-gray-50);
+  display: flex;
+  justify-content: center;
+  padding: calc(var(--gdu) * 4);
+}
+
+.poly-infographic img {
+  flex-grow: 1;
+}
+
+.poly-infographic .entry {
+  display: flex;
+  margin-bottom: calc(var(--gdu) * 4);
+}
+
+.poly-infographic .number {
+  flex-shrink: 0;
+  width: calc(var(--gdu) * 4);
+  height: calc(var(--gdu) * 4);
+  background-color: var(--color-blue);
+  border-radius: 2px;
+  font-size: var(--font-size-s);
+  color: var(--color-gray-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.poly-infographic .text {
+  margin-left: calc(var(--gdu) * 3);
+}
