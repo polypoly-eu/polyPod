@@ -1,5 +1,5 @@
 import UserActivity from "../entities/user-activity";
-import { removeTimestamp } from "./utils/importer-utils";
+import { removeTimezone } from "./utils/importer-utils";
 
 const activityJsonRegex = /\/My Activity\/.*\.json$/;
 

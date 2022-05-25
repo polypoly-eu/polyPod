@@ -1,4 +1,5 @@
 import UserActivity from "../entities/user-activity";
+import { removeTimezone } from "./utils/importer-utils";
 
 const activityHtmlRegex = /\/My Activity\/.*\.html$/;
 
