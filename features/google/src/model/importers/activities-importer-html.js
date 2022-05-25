@@ -49,13 +49,13 @@ export default class ActivitiesHtmlImporter {
             activityHtmlRegex.test(path)
         );
         const parser = new ActivityHtmlParser();
-        googleAccount.activities
-            .push(
+        googleAccount.activities.push(
+            ...(
                 await Promise.all(
                     activityEntries.map((entry) => parser.parse(entry))
                 )
-            )
-            .flat();
+            ).flat()
+        );
         parser.release();
     }
 }

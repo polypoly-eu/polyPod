@@ -3,26 +3,7 @@ import UserActivity from "../entities/user-activity";
 const activityJsonRegex = /\/My Activity\/.*\.json$/;
 
 class ActivityJsonParser {
-    constructor() {
-        this._iframe = document.createElement("iframe");
-        this._iframe.style.display = "none";
-        document.body.appendChild(this._iframe);
-    }
-
-    _scrapeTimestamps(contentDocument, productName) {
-        const contentCells = contentDocument.querySelectorAll(
-            ".mdl-grid>.mdl-cell>.mdl-grid>.content-cell:nth-child(2)"
-        );
-        return [...contentCells].map(
-            ({ childNodes }) =>
-                new UserActivity({
-                    timestamp: new Date(
-                        childNodes[childNodes.length - 1].textContent
-                    ),
-                    productName,
-                })
-        );
-    }
+    constructor() {}
 
     async parse(entry) {
         const content = await entry.getContent();
@@ -38,11 +19,6 @@ class ActivityJsonParser {
                 })
         );
     }
-
-    release() {
-        document.body.removeChild(this._iframe);
-        this._iframe = null;
-    }
 }
 
 export default class ActivitiesJsonImporter {
@@ -52,13 +28,12 @@ export default class ActivitiesJsonImporter {
             activityJsonRegex.test(path)
         );
         const parser = new ActivityJsonParser();
-        googleAccount.activities
-            .push(
+        googleAccount.activities.push(
+            ...(
                 await Promise.all(
                     activityEntries.map((entry) => parser.parse(entry))
                 )
-            )
-            .flat();
-        parser.release();
+            ).flat()
+        );
     }
 }
