@@ -1,6 +1,34 @@
 // Please remove this line and the empty one after it
 
 import SwiftUI
+import Combine
+
+protocol Storage {
+    var featuresList: AnyPublisher<[Feature], Error> { get set }
+    var categoriesList: AnyPublisher<[CategoryModel], Error> { get set }
+}
+
+class HomeScreenViewModel: ObservableObject {
+    var storage: Storage
+
+    @Published var sections: [HomeScreenSectionModel] = []
+    
+    private var storageCancellable: AnyCancellable?
+    
+    init(storage: Storage) {
+        self.storage = storage
+    }
+    
+    func setup() {
+        storageCancellable = storage.categoriesList.map(mapCategoryModel).replaceError(with: []).sink { sections in
+            self.sections = sections
+        }
+    }
+    
+    func mapCategoryModel(_ categoryModels: [CategoryModel]) -> [HomeScreenSectionModel] {
+        return []
+    }
+}
 
 struct HomeScreenUIConstants {
     struct Section {
