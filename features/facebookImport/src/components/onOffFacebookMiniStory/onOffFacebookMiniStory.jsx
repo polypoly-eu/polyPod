@@ -89,7 +89,7 @@ export const OnOffFacebookMiniStoryDetails = ({ displayData }) => {
             </p>
             {displayData.onOffEvents ? (
                 <>
-                    <div className="poly-separator"></div>
+                    <div className="separator"></div>
                     <h3>
                         {i18n.t(
                             "offFacebookEventsMiniStory:on.off.events.title"
