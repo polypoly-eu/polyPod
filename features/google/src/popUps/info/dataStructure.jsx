@@ -12,15 +12,18 @@ const DataStructure = () => {
             </p>
             <Infographic
                 imageSrc="./images/infographic/sankeyChart.svg"
-                legend={["One", "Two"]}
+                legend={[i18n.t("commonInfoScreens:baseInfo.title2"), "Two"]}
             />
-            <p>
-                Second paragraph Lorem ipsum dolor sit amet, consectetur
-                adipiscingelit. Morbi volutpat, lectus vitae facilisis mattis,
-                leo sem fringilla tortor, quis pharetra elit augue et orci
-            </p>
+
+            <p
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("commonInfoScreens:bubble.chart"),
+                }}
+            />
             <div className="poly-separator separator-space"></div>
-            <h1 className="about-title"> about the data</h1>
+            <h1 className="about-title">
+                {i18n.t("commonInfoScreens:baseInfo.title2")}
+            </h1>
             <p>
                 last paragraph Lorem ipsum dolor sit amet, consectetur
                 adipiscingelit. Morbi volutpat, lectus vitae facilisis mattis,

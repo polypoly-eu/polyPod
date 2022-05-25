@@ -1,6 +1,7 @@
 import React from "react";
 import infoPopUps from "./";
 import { SideSheet, SideSwiper } from "@polypoly-eu/poly-look";
+import i18n from "!silly-i18n";
 
 import "./base.css";
 
@@ -13,7 +14,7 @@ const BaseInfoPopUp = ({ onClose, name }) => {
             leftDistance="25vw"
             Component={(props) => (
                 <SideSheet
-                    title={"How to read this"}
+                    title={i18n.t("commonInfoScreens:baseInfo.title1")}
                     okLabel={"ok"}
                     {...props}
                     className="poly-theme-light"
