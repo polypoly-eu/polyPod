@@ -44,5 +44,28 @@
       "moduleName": "demo-feature",
       "artifactPath": "dist"
     }
+  ],
+  "polyPodCategories": [
+    {
+      "name": "Your Data",
+      "features": [
+        "facebookImport",
+        "google",
+        "demo"
+      ]
+    },
+    {
+      "name": "Know how",
+      "features": [
+        "polyPreview",
+        "polyExplorer"
+      ]
+    },
+    {
+      "name": "Tools",
+      "features": [
+        "lexicon"
+      ]
+    }
   ]
 }

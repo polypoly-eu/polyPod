@@ -1,8 +1,8 @@
 import UserActivity from "../entities/user-activity";
 
-const activityRegex = /\/My Activity\/.*\.html$/;
+const activityHtmlRegex = /\/My Activity\/.*\.html$/;
 
-class ActivityParser {
+class ActivityHtmlParser {
     constructor() {
         this._iframe = document.createElement("iframe");
         this._iframe.style.display = "none";
@@ -19,7 +19,7 @@ class ActivityParser {
                     timestamp: new Date(
                         childNodes[childNodes.length - 1].textContent
                     ),
-                    productName: productName,
+                    productName,
                 })
         );
     }
@@ -42,19 +42,20 @@ class ActivityParser {
     }
 }
 
-export default class ActivitiesImporter {
+export default class ActivitiesHtmlImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await zipFile.getEntries();
         const activityEntries = entries.filter(({ path }) =>
-            activityRegex.test(path)
+            activityHtmlRegex.test(path)
         );
-
-        const parser = new ActivityParser();
-        googleAccount.activities = (
-            await Promise.all(
-                activityEntries.map((entry) => parser.parse(entry))
+        const parser = new ActivityHtmlParser();
+        googleAccount.activities
+            .push(
+                await Promise.all(
+                    activityEntries.map((entry) => parser.parse(entry))
+                )
             )
-        ).flat();
+            .flat();
         parser.release();
     }
 }

@@ -7,16 +7,16 @@ pub struct CoreFailure {
 }
 
 impl CoreFailure {
-    pub fn core_bootstrap_failed() -> Self {
+    pub fn core_already_bootstrapped() -> Self {
         CoreFailure {
-            code: FailureCode::FailedToBootstrapCore,
+            code: FailureCode::CoreAlreadyBootstrapped,
             message: "Core was already initialized".to_string(),
         }
     }
 
-    pub fn core_not_bootstraped() -> Self {
+    pub fn core_not_bootstrapped() -> Self {
         CoreFailure {
-            code: FailureCode::CoreNotBootstraped,
+            code: FailureCode::CoreNotBootstrapped,
             message: "Core was not initialized".to_string(),
         }
     }

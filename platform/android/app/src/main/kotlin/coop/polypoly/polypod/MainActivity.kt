@@ -5,9 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import coop.polypoly.core.Core
+import coop.polypoly.core.CoreAlreadyBootstrappedException
 import coop.polypoly.polypod.core.UpdateNotification
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -23,8 +25,13 @@ class MainActivity : AppCompatActivity() {
         val language = Language.determine(this@MainActivity)
         try {
             Core.bootstrapCore(language)
-            logger.info("Core is bootstraped!")
+            logger.info("Core is bootstrapped!")
         } catch (ex: Exception) {
+            if (ex is CoreAlreadyBootstrappedException) {
+                logger.info(ex.message)
+                return
+            }
+
             logger.error(
                 "Failed to boostrap core",
                 ex.message

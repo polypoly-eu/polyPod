@@ -16,8 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case .success:
             Log.info("Core bootstraped!")
         case let .failure(content):
-            assertionFailure(content.localizedDescription)
             Log.error(content.localizedDescription)
+            switch content as? PolyPodCoreError {
+            case .internalCoreFailure(_, let failure)
+                where failure.code == .corealreadybootstrapped:
+                // Ignore already bootstrapped error, this code path might be
+                // called multiple times during testing
+                break
+            default:
+                fatalError(content.localizedDescription)
+            }
         }
         
         let defaults = UserDefaults.standard

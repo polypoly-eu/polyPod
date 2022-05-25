@@ -1,4 +1,11 @@
-import ActivitiesImporter from "./importers/activities-importer";
+import AccessLogImporter from "./importers/access-log-importer";
+import ActivitiesHtmlImporter from "./importers/activities-importer-html";
+import ActivitiesJsonImporter from "./importers/activities-importer-json";
 import SemanticLocationsImporter from "./importers/semantic-locations-importer";
 
-export const dataImporters = [ActivitiesImporter, SemanticLocationsImporter];
+export const dataImporters = [
+    ActivitiesHtmlImporter,
+    SemanticLocationsImporter,
+    ActivitiesJsonImporter,
+    AccessLogImporter,
+];
