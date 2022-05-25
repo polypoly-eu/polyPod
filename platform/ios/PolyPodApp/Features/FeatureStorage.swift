@@ -13,6 +13,7 @@ enum CategoryId: String {
     case yourData
     case knowHow
     case tools
+    case other
 }
 
 struct CategoryModel {
@@ -106,7 +107,7 @@ final class FeatureStorage: ObservableObject {
     
     private func mapCategories(_ categories: [Category]) -> [CategoryModel] {
         return categories.map({ category -> CategoryModel in
-            let id = CategoryId(rawValue: category.id) ?? .tools
+            let id = CategoryId(rawValue: category.id) ?? .other
             let features = mapFeatures(features: category.features)
             
             return CategoryModel(id: id, name: category.name, features: features)
