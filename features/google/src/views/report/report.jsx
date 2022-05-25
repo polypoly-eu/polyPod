@@ -7,7 +7,7 @@ import i18n from "!silly-i18n";
 import "./report.css";
 
 const ReportView = ({ reportStories }) => {
-    const { handleBack } = useContext(GoogleContext);
+    const { handleBack, handleReportSent } = useContext(GoogleContext);
     const [loading, setLoading] = useState(false);
     const history = useHistory();
 
@@ -19,7 +19,10 @@ const ReportView = ({ reportStories }) => {
                 JSON.stringify(reportStories.jsonReport),
                 "application/json"
             );
-        } catch (_) {}
+            handleReportSent(true);
+        } catch (_) {
+            handleReportSent(false);
+        }
         handleBack();
     };
 
