@@ -2,6 +2,12 @@ import Foundation
 import Zip
 import Combine
 
+struct Category: Decodable {
+    let name: String
+    let features: [String]
+}
+
+
 final class FeatureStorage: ObservableObject {
     private let dataProtection: DataProtection
     private var dataProtectionCancellable: AnyCancellable?
@@ -71,6 +77,7 @@ final class FeatureStorage: ObservableObject {
     
     private func sortFeatures(_ features: [Feature]) -> [Feature] {
         let order = readOrder()
+
         var sorted: [Feature] = []
         for id in order {
             if let match = features.first(where: { $0.id == id }) {
@@ -95,9 +102,20 @@ final class FeatureStorage: ObservableObject {
         return content.components(separatedBy: .newlines)
     }
     
+    private func readCategories() -> [Category] {
+        guard let url = Bundle.main.url(
+            forResource: "categories",
+            withExtension: "json",
+            subdirectory: "features"
+        ) else { return [] }
+        guard let content = try? JSONDecoder().decode([Category].self, from: Data.init(contentsOf: url)) else { return [] }
+        return content
+    }
+
     func importFeatures() {
         createFeaturesFolder()
         let order = readOrder()
+
         for id in order {
             importFeature(id)
         }
