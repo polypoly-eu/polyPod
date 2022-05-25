@@ -70,6 +70,7 @@ export const GoogleContextProvider = ({ children }) => {
                 setIsLoading,
                 runWithLoadingScreen,
                 setGlobalError,
+                handleBack,
             }}
         >
             {children}
