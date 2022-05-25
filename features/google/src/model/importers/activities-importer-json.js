@@ -14,7 +14,9 @@ class ActivityJsonParser {
         return jsonObj.map(
             (entry) =>
                 new UserActivity({
-                    timestamp: new Date(entry.time),
+                    timestamp: new Date(
+                        entry.time.split(" ").slice(0, -1).join(" ")
+                    ),
                     productName,
                 })
         );
