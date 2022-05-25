@@ -10,7 +10,7 @@ class PlaceVisitsMinistory extends SingleDataStory {
     }
 
     get title() {
-        return "Place Visits";
+        return "The places Google knows you visited";
     }
 
     get label() {
@@ -20,7 +20,6 @@ class PlaceVisitsMinistory extends SingleDataStory {
     _renderSummary() {
         return (
             <>
-                <p> The Places you visited</p>
                 <FilterChipBubbles data={this.analysisData} />
             </>
         );
