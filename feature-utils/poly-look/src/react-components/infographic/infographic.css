@@ -14,11 +14,12 @@
   background-color: var(--color-gray-50);
   display: flex;
   justify-content: center;
-  padding: calc(var(--gdu) * 4);
 }
 
 .poly-infographic img {
-  flex-grow: 1;
+  padding: calc(var(--gdu) * 4);
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .poly-infographic .entry {
