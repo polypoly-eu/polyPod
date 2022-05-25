@@ -17,10 +17,9 @@ class ActivityHtmlParser {
             ({ childNodes }) =>
                 new UserActivity({
                     timestamp: new Date(
-                        childNodes[childNodes.length - 1].textContent
-                            .split(" ")
-                            .slice(0, -1)
-                            .join(" ")
+                        removeTimezone(
+                            childNodes[childNodes.length - 1].textContent
+                        )
                     ),
                     productName,
                 })

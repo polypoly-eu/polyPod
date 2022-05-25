@@ -1,4 +1,5 @@
 import UserActivity from "../entities/user-activity";
+import { removeTimestamp } from "./utils/importer-utils";
 
 const activityJsonRegex = /\/My Activity\/.*\.json$/;
 
@@ -14,9 +15,7 @@ class ActivityJsonParser {
         return jsonObj.map(
             (entry) =>
                 new UserActivity({
-                    timestamp: new Date(
-                        entry.time.split(" ").slice(0, -1).join(" ")
-                    ),
+                    timestamp: new Date(removeTimezone(entry.time)),
                     productName,
                 })
         );

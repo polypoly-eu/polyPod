@@ -9,3 +9,7 @@ export function readCsvFromText(csvText) {
         headersEnum,
     };
 }
+
+export function removeTimezone(dateString) {
+    return dateString.split(" ").slice(0, -1).join(" ");
+}

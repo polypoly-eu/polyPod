@@ -13,7 +13,7 @@ class AccessLogParser {
             const productName = rowData[headersEnum["Product Name"]];
             const date = rowData[headersEnum["Activity Timestamp"]];
             return new AccessLogEntry({
-                timestamp: new Date(date.split(" ").slice(0, -1).join(" ")),
+                timestamp: new Date(removeTimezone(date)),
                 productName,
             });
         });
