@@ -1,9 +1,11 @@
 import SwiftUI
 import PolyPodCoreSwift
 
+typealias FeatureId = String
+
 class Feature {
     let path: URL
-    let id: String
+    let id: FeatureId
     let name: String
     let author: String?
     let description: String?

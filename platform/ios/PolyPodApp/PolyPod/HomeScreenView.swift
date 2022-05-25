@@ -4,8 +4,8 @@ import SwiftUI
 import Combine
 
 protocol Storage {
-    var featuresList: AnyPublisher<[Feature], Error> { get set }
-    var categoriesList: AnyPublisher<[CategoryModel], Error> { get set }
+//    var featuresList: AnyPublisher<[Feature], Never> { get set }
+    var categoriesList: AnyPublisher<[HomeScreenSectionModel], Never> { get set }
 }
 
 class HomeScreenViewModel: ObservableObject {
@@ -20,14 +20,28 @@ class HomeScreenViewModel: ObservableObject {
     }
     
     func setup() {
-        storageCancellable = storage.categoriesList.map(mapCategoryModel).replaceError(with: []).sink { sections in
+        storageCancellable = storage.categoriesList.sink { sections in
             self.sections = sections
         }
     }
     
-    func mapCategoryModel(_ categoryModels: [CategoryModel]) -> [HomeScreenSectionModel] {
-        return []
-    }
+//    func mapCategoryModel(_ categoryModels: [CategoryModel]) -> [HomeScreenSectionModel] {
+//        categoryModels.map { model in
+//            HomeScreenSectionModel(title: model.name,
+//                                   cards: mapToCards(model.features),
+//                                   type: model.id)
+//        }
+//    }
+//
+//    private func mapToCards(_ features: [Feature]) -> [Card] {
+//        features.map { feature in
+//            Card(id: feature.id,
+//                 title: feature.name,
+//                 description: feature.description ?? "",
+//                 imagePath: feature.thumbnail?.path ?? "",
+//                 backgroundColor: feature.thumbnailColor ?? .white)
+//        }
+//    }
 }
 
 struct HomeScreenUIConstants {
@@ -52,24 +66,18 @@ struct HomeScreenUIConstants {
     }
 }
 
-enum HomeScreenSection {
-    case yourData
-    case dataKnowHow
-    case tools
-}
-
 struct Card: Identifiable {
-    let id = UUID()
+    let id: FeatureId
     let title: String
     let description: String
-    let imageName: String
-    let backgroundColorHex: String
+    let imagePath: String
+    let backgroundColor: Color
 }
 
 struct HomeScreenSectionModel {
     let title: String
     let cards: [Card]
-    let type: HomeScreenSection
+    let type: CategoryId
 }
 
 struct Sizes {
@@ -94,96 +102,14 @@ extension EnvironmentValues {
 
 struct HomeScreenView: View {
     
-    var sections: [HomeScreenSectionModel] = [
-        .init(title: "Your Data",
-              cards: [
-                .init(title: "polyExplorer",
-                      description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.",
-                      imageName: "heart.fill",
-                      backgroundColorHex: "#475abb"),
-                .init(title: "Big big many big hello there",
-                      description: "nada",
-                      imageName: "heart.fill",
-                      backgroundColorHex: "#0c1a3c"),
-                .init(title: "Amazon Importer",
-                      description: "nada",
-                      imageName: "heart.fill",
-                      backgroundColorHex: "#0c1a3c"),
-                .init(title: "polyExplorer",
-                      description: "nada",
-                      imageName: "heart.fill",
-                      backgroundColorHex: "#0c1a3c"),
-                .init(title: "polyExplorer",
-                      description: "nada",
-                      imageName: "heart.fill",
-                      backgroundColorHex: "#0c1a3c"),
-                .init(title: "polyExplorer",
-                      description: "nada",
-                      imageName: "heart.fill",
-                      backgroundColorHex: "#0c1a3c"),
-                .init(title: "polyExplorer",
-                      description: "nada",
-                      imageName: "heart.fill",
-                      backgroundColorHex: "#0c1a3c"),
-                .init(title: "polyExplorer",
-                      description: "nada",
-                      imageName: "heart.fill",
-                      backgroundColorHex: "#0c1a3c"),
-                .init(title: "polyExplorer",
-                      description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem",
-                      imageName: "heart.fill",
-                      backgroundColorHex: "#0c1a3c")
-              ],
-              type: .yourData),
-        
-            .init(title: "Data KnowHow",
-                  cards: [
-                    .init(title: "polyExplorer",
-                          description: "nada",
-                          imageName: "heart.fill",
-                          backgroundColorHex: "#0c1a3c"),
-                    .init(title: "polyExplorer",
-                          description: "nada",
-                          imageName: "heart.fill",
-                          backgroundColorHex: "#0c1a3c"),
-                    .init(title: "polyExplorer",
-                          description: "nada",
-                          imageName: "heart.fill",
-                          backgroundColorHex: "#0c1a3c"),
-                    .init(title: "polyExplorer",
-                          description: "nada",
-                          imageName: "heart.fill",
-                          backgroundColorHex: "#0c1a3c"),
-                    .init(title: "polyExplorer",
-                          description: "nada",
-                          imageName: "heart.fill",
-                          backgroundColorHex: "#0c1a3c")
-                  ],
-                  type: .dataKnowHow),
-        .init(title: "Toolz",
-              cards: [
-                .init(title: "Sed ut perspiciatis, unde omnis iste",
-                      description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem",
-                      imageName: "heart.fill",
-                      backgroundColorHex: "#0c1a3c"),
-                .init(title: "Sed ut perspiciatis, unde omnis iste",
-                      description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.",
-                      imageName: "heart.fill",
-                      backgroundColorHex: "#0c1a3c"),
-                .init(title: "polyExplorer",
-                      description: "nada",
-                      imageName: "heart.fill",
-                      backgroundColorHex: "#0c1a3c"),
-              ],
-              type: .tools),
-    ]
-    
     let footerModel = FooterViewModel(title: "Like what you have seen?",
                                       description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.",
                                       imageName: "FacebookImport",
                                       backgoundHex: "#fed7d6",
                                       buttonTitle: "Learn more",
                                       buttonBackgroundHex: "#0f1938")
+    
+    @ObservedObject var viewModel: HomeScreenViewModel
     
     var body: some View {
         // Why GeometryReader needs to be on top?
@@ -194,14 +120,16 @@ struct HomeScreenView: View {
             let bigTileWidth = containerWidth - smallTileWidth - HomeScreenUIConstants.TileContainer.verticalSpacing
             
             ScrollView(showsIndicators: false) {
-                ForEach(sections, id: \.type) { sectionModel in
+                ForEach(viewModel.sections, id: \.type) { sectionModel in
                     switch sectionModel.type {
                     case .yourData:
                         MyDataSectionView(sectionModel: sectionModel)
-                    case .dataKnowHow:
+                    case .knowHow:
                         DataKnowHowSectionView(sectionModel: sectionModel)
                     case .tools:
                         ToolsSectionView(sectionModel: sectionModel)
+                    case .other:
+                        Color.clear
                     }
                     Spacer(minLength: HomeScreenUIConstants.Section.verticalSpacing)
                 }
@@ -209,6 +137,8 @@ struct HomeScreenView: View {
             }
             .padding([.leading, .trailing], HomeScreenUIConstants.View.verticalPadding)
             .environment(\.homeScreenTileSizes, Sizes.init(screenSize: geo.size, containerWidth: containerWidth, smallTileWidth: smallTileWidth, mediumTileWidth: containerWidth, bigTileWidth: bigTileWidth))
+        }.onAppear {
+            viewModel.setup()
         }
     }
 }
@@ -351,105 +281,113 @@ struct RowContainerView: View {
 
 struct BigCardView: View {
 
-    private let card: Card
-    private let backgroundColor: Color
+    let card: Card
     @Environment(\.homeScreenTileSizes) var sizes
-    
-    init(card: Card) {
-        self.card = card
-        self.backgroundColor = Color(fromHex: card.backgroundColorHex)
-    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
-            Image("FacebookImport")
+            Image.path(card.imagePath)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .foregroundColor(backgroundColor.isLight ? .black : .white)
+                .foregroundColor(card.backgroundColor.isLight ? .black : .white)
                 .frame(width: sizes.bigTileWidth - 2 * HomeScreenUIConstants.Tile.padding, alignment: .center)
             
             VStack(alignment: .leading, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
                 Text(card.title)
-                    .foregroundColor(backgroundColor.isLight ? .black : .white)
+                    .foregroundColor(card.backgroundColor.isLight ? .black : .white)
                     .fontWeight(.bold)
                 Text(card.description)
-                    .foregroundColor(backgroundColor.isLight ? .black : .white)
+                    .foregroundColor(card.backgroundColor.isLight ? .black : .white)
             }
         }
         .padding(HomeScreenUIConstants.Tile.padding)
         .frame(width: sizes.bigTileWidth,
                height: sizes.bigTileWidth)
-        .background(backgroundColor)
+        .background(card.backgroundColor)
         .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
     }
 }
 
 struct MediumCardView: View {
-    private let card: Card
-    private let backgroundColor: Color
+    let card: Card
     @Environment(\.homeScreenTileSizes) var sizes
-    
-    init(card: Card) {
-        self.card = card
-        self.backgroundColor = Color(fromHex: card.backgroundColorHex)
-    }
 
     var body: some View {
         HStack(spacing: HomeScreenUIConstants.Tile.horizontalSpacing) {
-            Image("FacebookImport")
+            Image.path(card.imagePath)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .foregroundColor(backgroundColor.isLight ? .black : .white)
+                .foregroundColor(card.backgroundColor.isLight ? .black : .white)
                 .frame(width: sizes.smallTileWidth - 2 * HomeScreenUIConstants.Tile.padding, height: sizes.smallTileWidth - 2 * HomeScreenUIConstants.Tile.padding, alignment: .center)
             
             VStack(alignment: .leading, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
                 Text(card.title)
-                    .foregroundColor(backgroundColor.isLight ? .black : .white)
+                    .foregroundColor(card.backgroundColor.isLight ? .black : .white)
                     .fontWeight(.bold)
                 Text(card.description)
-                    .foregroundColor(backgroundColor.isLight ? .black : .white)
+                    .foregroundColor(card.backgroundColor.isLight ? .black : .white)
             }
             Spacer()
         }
         .padding(HomeScreenUIConstants.Tile.padding)
         .frame(width: sizes.mediumTileWidth, height: sizes.smallTileWidth)
-        .background(backgroundColor)
+        .background(card.backgroundColor)
         .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
     }
 }
 
 struct SmallCardView: View {
-    private let card: Card
-    private let backgroundColor: Color
+    let card: Card
     @Environment(\.homeScreenTileSizes) var sizes
-    
-    init(card: Card) {
-        self.card = card
-        self.backgroundColor = Color(fromHex: card.backgroundColorHex)
-    }
 
     var body: some View {
         VStack(alignment: .center, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
-            Image("FacebookImport")
+            Image.path(card.imagePath)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .foregroundColor(backgroundColor.isLight ? .black : .white)
+                .foregroundColor(card.backgroundColor.isLight ? .black : .white)
             Text(card.title)
-                .foregroundColor(backgroundColor.isLight ? .black : .white)
+                .foregroundColor(card.backgroundColor.isLight ? .black : .white)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
         }
         .padding(HomeScreenUIConstants.Tile.padding)
         .frame(width: sizes.smallTileWidth, height: sizes.smallTileWidth)
-        .background(backgroundColor)
+        .background(card.backgroundColor)
         .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
     }
 }
 
 
 struct HomeScreenView_Previews: PreviewProvider {
+    static let categories: [HomeScreenSectionModel] = [
+        .init(title: "Your Data",
+              cards: [
+                .init(id: UUID().uuidString,
+                      title: "polyExplorer",
+                      description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.",
+                      imagePath: "heart.fill",
+                      backgroundColor: .blue),
+                .init(id: UUID().uuidString,
+                      title: "Big big many big hello there",
+                      description: "nada",
+                      imagePath: "heart.fill",
+                      backgroundColor: .blue),
+                .init(id: UUID().uuidString, title: "Amazon Importer",
+                      description: "nada",
+                      imagePath: "heart.fill",
+                      backgroundColor: .blue),
+              ],
+              type: .yourData)
+    ]
+
+    class MockStorage: Storage {
+        var categoriesList: AnyPublisher<[HomeScreenSectionModel], Never> = Just(categories).eraseToAnyPublisher()
+    }
+    
     static var previews: some View {
-        HomeScreenView()
+        let storage = MockStorage()
+        HomeScreenView(viewModel: .init(storage: storage))
     }
 }
 
@@ -458,5 +396,12 @@ extension Array {
         return stride(from: 0, to: count, by: size).map {
             Array(self[$0 ..< Swift.min($0 + size, count)])
         }
+    }
+}
+
+extension Image {
+    static func path(_ path: String) -> Image {
+        // TODO: Add placeholder image
+        .init(uiImage: UIImage(contentsOfFile: path) ?? UIImage())
     }
 }
