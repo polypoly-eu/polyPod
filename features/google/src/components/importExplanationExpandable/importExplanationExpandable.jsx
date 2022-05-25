@@ -192,7 +192,7 @@ const ImportExplanationExpandable = ({
                     can import it into your polyPod.
                 </p>
                 <InfoBox textContent="Please be sure to import all the packages you originally downloaded" />
-                <div className="poly-separato"></div>
+                <div className="poly-separator"></div>
                 <div className="x-divider">
                     {files?.length ? (
                         <div className="file-info">
