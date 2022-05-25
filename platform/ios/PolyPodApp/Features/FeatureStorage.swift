@@ -11,7 +11,7 @@ struct Category: Decodable {
 
 enum CategoryId: String {
     case yourData
-    case dataKnowHow
+    case knowHow
     case tools
 }
 
@@ -26,6 +26,7 @@ final class FeatureStorage: ObservableObject {
     private var dataProtectionCancellable: AnyCancellable?
 
     @Published var featuresList: [Feature] = []
+    @Published var categoriesList: [CategoryModel] = []
     
     lazy var featuresFileUrl: URL = {
         do {
@@ -55,6 +56,7 @@ final class FeatureStorage: ObservableObject {
             self?.cleanFeatures()
             self?.importFeatures()
             self?.loadFeatures()
+            self?.loadCategories()
         }
     }
     
@@ -66,6 +68,12 @@ final class FeatureStorage: ObservableObject {
         } catch {
             Log.error("Failed to clean features: \(error.localizedDescription)")
         }
+    }
+    
+    private func loadCategories() {
+        let categories = readCategories()
+        let models = mapCategories(categories)
+        self.categoriesList = models
     }
     
     private func loadFeatures() {
@@ -88,26 +96,22 @@ final class FeatureStorage: ObservableObject {
         self.featuresList = sortFeatures(featuresList)
     }
     
-    private func mapFeatures(features: [String]) {
-        
-        featureName
-        
+    private func mapFeatures(features: [String]) -> [Feature] {
+        return features.compactMap { id in
+            self.featuresList.first { feature in
+                return feature.id == id
+            }
+        }
     }
     
     private func mapCategories(_ categories: [Category]) -> [CategoryModel] {
-
-        var models: [CategoryModel] = []
-        
-        categories.map({category in
-            let id = CategoryId(rawValue: category.id)
+        return categories.map({ category -> CategoryModel in
+            let id = CategoryId(rawValue: category.id) ?? .tools
+            let features = mapFeatures(features: category.features)
             
-            
-            
+            return CategoryModel(id: id, name: category.name, features: features)
         })
-
-        return models
     }
-
     
     private func sortFeatures(_ features: [Feature]) -> [Feature] {
         let order = readOrder()
