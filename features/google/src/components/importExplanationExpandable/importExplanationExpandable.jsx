@@ -116,11 +116,20 @@ const ImportExplanationExpandable = ({
                 <h4>How it works:</h4>
                 <p>Go to https://takeout.google.com/</p>
                 <p>
-                    The browser will then ask you whether you want to continue
-                    with the browser version or to use your mobile app in case
-                    you have it installed. Select to continue with the browser.
+                    In order to analyse your data correctly you need to modify
+                    the default option by tapping in the deselect all button.
+                    Now we need you to select a maximum of 3 services where you
+                    created data for, such as PROFILE, ACCESS LOG ACTIVITY, MY
+                    ACTIVITY or LOCATION HISTORY.
                 </p>
                 <img src="./images/document.svg" alt="document" />
+                <p>
+                    For MY ACTIVITY or PROFILE is important that you change the
+                    format from HTML (default) to JSON by tapping in the format
+                    button and accessing the drop down options. Then request the
+                    file. You will get an email confirmation of your request.
+                </p>
+                <InfoBox textContent="IMPORTANT: by making the request in a different format as described could result in your pod not being able to read your data and provide meaningful information. Your request will be available for downloading for up to 7 days." />
                 <PolyButton
                     className="bg-red"
                     onClick={() => handleRequestStatus()}
@@ -131,7 +140,6 @@ const ImportExplanationExpandable = ({
                     onClick={() => handleExampleDataRequest()}
                     label="Use example data"
                 ></PolyButton>
-                <InfoBox textContent="IMPORTANT: Now you need to wait for the email notification from Google that your data is available for download, which can take up to 24 hours." />
             </>
         ),
         download: (
@@ -150,13 +158,15 @@ const ImportExplanationExpandable = ({
                 <h4>How it works:</h4>
                 <img src="./images/letter.svg" alt="letter" />
                 <p>
-                    Once your data is available you will receive an email from
-                    Google. Click on the download link in the email.
+                    Once your data is available you will receive an email by
+                    Google. Since the export might be too big for a single file,
+                    you probably will have to download multiple packages.
                 </p>
                 <img src="./images/download.svg" alt="document" />
                 <p>
-                    In the Available Copies section of the Google page you can
-                    download the file. The file will be saved to your phone.
+                    In the &apos;Manage your exports&apos; section of the
+                    takeout page you can download the files. All of them will be
+                    saved to your phone in .zip format
                 </p>
                 <PolyButton
                     className="bg-red"
@@ -181,6 +191,7 @@ const ImportExplanationExpandable = ({
                     After you have downloaded your data file onto your phone you
                     can import it into your polyPod.
                 </p>
+                <InfoBox textContent="Please be sure to import all the packages you originally downloaded" />
                 <div className="poly-separato"></div>
                 <div className="x-divider">
                     {files?.length ? (
@@ -220,7 +231,6 @@ const ImportExplanationExpandable = ({
                 >
                     Import File
                 </PolyButton>
-                <InfoBox textContent="The file you import includes all your Google data up to now. To update your data in the future, just request a new download." />
             </>
         ),
         explore: (
