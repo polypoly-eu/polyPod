@@ -4,7 +4,7 @@
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
-    background-color: var(--background-light);
+    background-color: var(--theme-primary-color);
     border-radius: 12px 12px 0px 0px;
     box-sizing: border-box;
 }
