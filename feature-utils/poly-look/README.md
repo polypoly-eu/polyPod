@@ -1,6 +1,16 @@
 # polyLook
 
-polyLook is the visual component library for all features and applications included in polyPod. The library used to encode each of the different components is litElement. The reason for that choice is because litElement creates packages with standard code in js that does not need any other library or framework to work in the browser. It also makes the litElement component compatible with all kinds of front end applications no matter what framework it is encoded with. You can learn how to use litElement in the following [tutorials](https://lit.dev/docs/)
+polyLook is the visual component library for all features included in the
+polyPod applications.
+
+We use several component and visualization libraries; one of them is
+litElement. The reason for that choice is because litElement creates packages
+with standard code in js that does not need any other library or framework to
+work in the browser. It also makes the litElement component compatible with all
+kinds of front end applications no matter what framework it is encoded with. You
+can learn how to use litElement in the following
+[tutorials](https://lit.dev/docs/). Additionally, we use React as component
+library.
 
 ## Quick guide:
 
@@ -11,22 +21,41 @@ polyLook is the visual component library for all features and applications inclu
 
 ## State of polyLook
 
-polyLook aims to be a framework agnostic component library for polyPod features. At the moment, however, it mainly contains prototypes for a potential approach, based on LitElement and React elements.
+polyLook aims to be a framework agnostic component library for polyPod
+features. At the moment, however, it mainly contains prototypes for a potential
+approach, based on Lit and React elements.
 
-Visualisations and charts are located in `./visualisations` and `./visualisations/charts` respectively. When using these from a
-specific framework eg. React, wrapper functions can be used (`./visualisations/wrappers`).
+Visualisations and charts are located in `./src/visualisations` and
+`./src/visualisations/charts` respectively. When using these from a specific
+framework eg. React, wrapper functions can be used
+(`./src/visualisations/wrappers`).
 
-## Steps to code a new polyLook component
+## Steps to code a new polyLook component based on Lit
 
-1- Write the js file for the component inside the `src/lit-components` folder. The name of the file must be written in lowerCamelCase.
+1- Write the JS file for the component inside the `src/lit-components`
+folder. The name of the file must be written in lowerCamelCase.
 
-2- To test the component we'll use the [storybook framework](https://storybook.js.org/). The necessary setup and stories are [here](./storybook/). To use the new component inside the storybook app we have to write a `*.stories.js` file inside the `stories/lit-components` folder with the same name of the component. In order to learn how to write a `*.story.js` file you can read the next [tutorial](https://storybook.js.org/docs/web-components/writing-stories/introduction).
+2- To test-drive and document the component we'll use the [storybook
+framework](https://storybook.js.org/). The necessary setup and stories are
+[here](./storybook/). To use the new component inside the storybook app we have
+to write a `*.stories.js` file inside the `storybook/stories/lit-components` folder with
+the same name of the component. In order to learn how to write a `*.story.js`
+file you can read the next
+[tutorial](https://storybook.js.org/docs/web-components/writing-stories/introduction). Please
+note that StoryBook is not built by default; you'll need to change to that
+specific directory and run `npm ci`.
 
-3- Each component is required to have its own unit and integration tests. The test coverage for each component must be at least 70%.
+3- Each component is required to have its own unit and integration tests. You
+should try and get the coverage for this new component up to 70%. This test will
+use a copy of Chrome or Chromium available on the path, so you need to make sure
+that it's usable and available in the path.
 
-4- To make the component public through the bundle file, the component must be imported into the polyLook.js file and create a custom label with the name of the component in kebab-case.
+4- To make the component public through the bundle file, the component must be
+imported into the polyLook.js file and create a custom label with the name of
+the component in kebab-case.
 
 Example:
+
 If we have a component called PolyButton.js inside the polyLook.js we must add the next lines:
 
 ```javascript
