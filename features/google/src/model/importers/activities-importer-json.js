@@ -1,10 +1,8 @@
 import UserActivity from "../entities/user-activity";
-
-const activityJsonRegex = /\/My Activity\/.*\.json$/;
+import { matchRegex } from "./utils/lang-constants";
 
 class ActivityJsonParser {
     constructor() {}
-
     async parse(entry) {
         const content = await entry.getContent();
         const text = await new TextDecoder("utf-8").decode(content);
@@ -25,7 +23,7 @@ export default class ActivitiesJsonImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await zipFile.getEntries();
         const activityEntries = entries.filter(({ path }) =>
-            activityJsonRegex.test(path)
+            matchRegex(path, this)
         );
         const parser = new ActivityJsonParser();
         googleAccount.activities.push(
