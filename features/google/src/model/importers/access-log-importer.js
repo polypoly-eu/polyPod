@@ -31,11 +31,13 @@ class AccessLogParser {
 export default class AccessLogImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await zipFile.getEntries();
-        const accessLog = entries.filter(({ path }) =>
+        const accessLogEntries = entries.filter(({ path }) =>
             accessLogRegex.test(path)
         );
 
         const parser = new AccessLogParser();
-        googleAccount.accessLog = await parser.parse(accessLog[0]);
+        googleAccount.accessLog = await Promise.all(
+            accessLogEntries.map((entry) => parser.parse(entry))
+        );
     }
 }
