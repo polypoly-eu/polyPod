@@ -24,14 +24,14 @@ jobs:
                     ~/.cache
                   key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('package-lock.json') }}
             - name: Cache core dependencies
-              working-directory: ./platform/core
               uses: actions/cache@v2
+              working-directory: ./platform/core
               with:
-                path: |
-                  tools/NDK_r22b
-                  flatbuffers_shared/flatbuffers_v2.0.0
-                  flatbuffers_shared/flatc_v2.0.0
-              key: ${{ runner.os }}-core_dependencies
+                  path: |
+                    tools/NDK_r22b
+                    flatbuffers_shared/flatbuffers_v2.0.0
+                    flatbuffers_shared/flatc_v2.0.0
+                  key: ${{ runner.os }}-core_dependencies
             - name: Checks paths to rebuild Android
               uses: dorny/paths-filter@b2feaf19c27470162a626bd6fa8438ae5b263721 #v2.10.2
               id: changes
