@@ -16,7 +16,7 @@ struct Card: Identifiable {
 struct HomeScreenSectionModel {
     let title: String
     let cards: [Card]
-    let type: CategoryId
+    let type: FeaturesCategoryId
 }
 
 struct FooterViewModel {
@@ -41,7 +41,7 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
         self.categoriesList = featureStorage.categoriesList.map(HomeScreenStorageAdapter.mapCategoryModel(_:)).eraseToAnyPublisher()
     }
     
-    static func mapCategoryModel(_ categoryModels: [CategoryModel]) -> [HomeScreenSectionModel] {
+    static func mapCategoryModel(_ categoryModels: [FeaturesCategoryModel]) -> [HomeScreenSectionModel] {
         categoryModels.map { model in
             HomeScreenSectionModel(title: model.name,
                                    cards: mapToCards(model.features),
@@ -360,7 +360,9 @@ struct MediumCardView: View {
             Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: sizes.smallTileWidth - 2 * Constants.Tile.padding, height: sizes.smallTileWidth - 2 * Constants.Tile.padding, alignment: .center)
+                .frame(width: sizes.smallTileWidth - 2 * Constants.Tile.padding,
+                       height: sizes.smallTileWidth - 2 * Constants.Tile.padding,
+                       alignment: .center)
             
             VStack(alignment: .leading, spacing: Constants.Tile.verticalSpacing) {
                 Text(card.title)

@@ -2,22 +2,21 @@ import Foundation
 import Zip
 import Combine
 
-
-struct Category: Decodable {
+fileprivate struct DecodedFeaturesCategory: Decodable {
     let id: String
     let name: String
     let features: [String]
 }
 
-enum CategoryId: String {
+enum FeaturesCategoryId: String {
     case yourData
     case knowHow
     case tools
     case other
 }
 
-struct CategoryModel {
-    let id: CategoryId
+struct FeaturesCategoryModel {
+    let id: FeaturesCategoryId
     var name: String
     var features: [Feature]
 }
@@ -25,13 +24,13 @@ struct CategoryModel {
 final class FeatureStorage: ObservableObject {
     private let dataProtection: DataProtection
     private var dataProtectionCancellable: AnyCancellable?
+    private let categoriesListSubject: CurrentValueSubject<[FeaturesCategoryModel], Never> = CurrentValueSubject([])
+    
 
     var featuresList: [Feature] = []
-    var categoriesList: AnyPublisher<[CategoryModel], Never> {
+    var categoriesList: AnyPublisher<[FeaturesCategoryModel], Never> {
         categoriesListSubject.eraseToAnyPublisher()
     }
-    
-    private let categoriesListSubject: CurrentValueSubject<[CategoryModel], Never> = CurrentValueSubject([])
     
     lazy var featuresFileUrl: URL = {
         do {
@@ -89,7 +88,7 @@ final class FeatureStorage: ObservableObject {
         }
         
         if !remainingFeatures.isEmpty {
-            models.append(CategoryModel(id: .other, name: "Other", features: remainingFeatures))
+            models.append(FeaturesCategoryModel(id: .other, name: "Other", features: remainingFeatures))
         }
         
         self.categoriesListSubject.value = models
@@ -112,7 +111,7 @@ final class FeatureStorage: ObservableObject {
             Log.error("Failed to list features: \(error.localizedDescription)")
         }
         
-        self.featuresList = sortFeatures(featuresList)
+        self.featuresList = featuresList
     }
     
     private func mapFeatures(features: [String]) -> [Feature] {
@@ -123,31 +122,13 @@ final class FeatureStorage: ObservableObject {
         }
     }
     
-    private func mapCategories(_ categories: [Category]) -> [CategoryModel] {
-        return categories.compactMap({ category -> CategoryModel? in
-            guard let id = CategoryId(rawValue: category.id) else { return nil }
+    private func mapCategories(_ categories: [DecodedFeaturesCategory]) -> [FeaturesCategoryModel] {
+        return categories.compactMap({ category -> FeaturesCategoryModel? in
+            guard let id = FeaturesCategoryId(rawValue: category.id) else { return nil }
             let features = mapFeatures(features: category.features)
             
-            return CategoryModel(id: id, name: category.name, features: features)
+            return FeaturesCategoryModel(id: id, name: category.name, features: features)
         })
-    }
-    
-    private func sortFeatures(_ features: [Feature]) -> [Feature] {
-        let order = readOrder()
-
-        var sorted: [Feature] = []
-        for id in order {
-            if let match = features.first(where: { $0.id == id }) {
-                sorted.append(match)
-            }
-        }
-        for feature in features {
-            if !order.contains(feature.id) {
-                sorted.append(feature)
-            }
-        }
-        
-        return sorted
     }
     
     private func readOrder() -> [String] {
@@ -160,13 +141,13 @@ final class FeatureStorage: ObservableObject {
         return content.components(separatedBy: .newlines)
     }
     
-    private func readCategories() -> [Category] {
+    private func readCategories() -> [DecodedFeaturesCategory] {
         guard let url = Bundle.main.url(
             forResource: "categories",
             withExtension: "json",
             subdirectory: "features"
         ) else { return [] }
-        guard let content = try? JSONDecoder().decode([Category].self, from: Data.init(contentsOf: url)) else { return [] }
+        guard let content = try? JSONDecoder().decode([DecodedFeaturesCategory].self, from: Data.init(contentsOf: url)) else { return [] }
         return content
     }
 
