@@ -3,13 +3,42 @@
 import SwiftUI
 import Combine
 
-final class HomeScreenStorage: Storage {
+// MARK: - Model
+
+struct Card: Identifiable {
+    let id: FeatureId
+    let title: String
+    let description: String
+    let image: UIImage
+    let backgroundColor: Color
+}
+
+struct HomeScreenSectionModel {
+    let title: String
+    let cards: [Card]
+    let type: CategoryId
+}
+
+struct FooterViewModel {
+    let title: String
+    let description: String
+    let imageName: String
+    let backgoundHex: String
+    let buttonTitle: String
+    let buttonBackgroundHex: String
+}
+
+protocol HomeScreenStorage {
+    var categoriesList: AnyPublisher<[HomeScreenSectionModel], Never> { get }
+}
+
+final class HomeScreenStorageAdapter: HomeScreenStorage {
     let categoriesList: AnyPublisher<[HomeScreenSectionModel], Never>
     let featureStorage: FeatureStorage
     
     init(featureStorage: FeatureStorage) {
         self.featureStorage = featureStorage
-        self.categoriesList = featureStorage.categoriesList.map(HomeScreenStorage.mapCategoryModel(_:)).eraseToAnyPublisher()
+        self.categoriesList = featureStorage.categoriesList.map(HomeScreenStorageAdapter.mapCategoryModel(_:)).eraseToAnyPublisher()
     }
     
     static func mapCategoryModel(_ categoryModels: [CategoryModel]) -> [HomeScreenSectionModel] {
@@ -31,18 +60,12 @@ final class HomeScreenStorage: Storage {
     }
 }
 
-protocol Storage {
-    var categoriesList: AnyPublisher<[HomeScreenSectionModel], Never> { get }
-}
-
-class HomeScreenViewModel: ObservableObject {
-    private var storage: Storage
-
+final class HomeScreenViewModel: ObservableObject {
+    private var storage: HomeScreenStorage
+    private var storageCancellable: AnyCancellable?
     @Published var sections: [HomeScreenSectionModel] = []
     
-    private var storageCancellable: AnyCancellable?
-    
-    init(storage: Storage) {
+    init(storage: HomeScreenStorage) {
         self.storage = storage
     }
     
@@ -52,6 +75,8 @@ class HomeScreenViewModel: ObservableObject {
         }
     }
 }
+
+// MARK: - UI sizes
 
 struct HomeScreenUIConstants {
     struct Section {
@@ -75,20 +100,6 @@ struct HomeScreenUIConstants {
     }
 }
 
-struct Card: Identifiable {
-    let id: FeatureId
-    let title: String
-    let description: String
-    let image: UIImage
-    let backgroundColor: Color
-}
-
-struct HomeScreenSectionModel {
-    let title: String
-    let cards: [Card]
-    let type: CategoryId
-}
-
 struct Sizes {
     let screenSize: CGSize
     let containerWidth: CGFloat
@@ -108,6 +119,8 @@ extension EnvironmentValues {
     set { self[HomeScreenSizesKey.self] = newValue }
   }
 }
+
+// MARK: - Root View
 
 struct HomeScreenView: View {
     
@@ -151,6 +164,8 @@ struct HomeScreenView: View {
         }
     }
 }
+
+// MARK: - Sections
 
 struct MyDataSectionView: View {
     var sectionModel: HomeScreenSectionModel
@@ -206,41 +221,7 @@ struct ToolsSectionView: View {
     }
 }
 
-struct FooterViewModel {
-    let title: String
-    let description: String
-    let imageName: String
-    let backgoundHex: String
-    let buttonTitle: String
-    let buttonBackgroundHex: String
-}
-
-struct FooterView: View {
-    let model: FooterViewModel
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
-            Text(model.title).fontWeight(.bold)
-            Text(model.description)
-            Image(model.imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(alignment: .center)
-            Button(model.buttonTitle) {
-                //TODO
-            }
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .center)
-            .foregroundColor(Color(fromHex: model.buttonBackgroundHex).isLight ? .black : .white)
-            .background(Color(fromHex: model.buttonBackgroundHex))
-            .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
-                
-        }
-        .padding(HomeScreenUIConstants.Tile.padding)
-        .background(Color(fromHex: model.backgoundHex))
-        .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
-    }
-}
+// MARK: - Containers
 
 struct LargeLeftContainerView: View {
     let cards: [Card]
@@ -290,6 +271,8 @@ struct RowContainerView: View {
         }
     }
 }
+
+// MARK: - Cards
 
 struct BigCardView: View {
 
@@ -370,6 +353,34 @@ struct SmallCardView: View {
     }
 }
 
+struct FooterView: View {
+    let model: FooterViewModel
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
+            Text(model.title).fontWeight(.bold)
+            Text(model.description)
+            Image(model.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(alignment: .center)
+            Button(model.buttonTitle) {
+                //TODO
+            }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .center)
+            .foregroundColor(Color(fromHex: model.buttonBackgroundHex).isLight ? .black : .white)
+            .background(Color(fromHex: model.buttonBackgroundHex))
+            .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
+                
+        }
+        .padding(HomeScreenUIConstants.Tile.padding)
+        .background(Color(fromHex: model.backgoundHex))
+        .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
+    }
+}
+
+// MARK: - Preview
 
 struct HomeScreenView_Previews: PreviewProvider {
     static let categories: [HomeScreenSectionModel] = [
@@ -393,7 +404,7 @@ struct HomeScreenView_Previews: PreviewProvider {
               type: .knowHow)
     ]
 
-    class MockStorage: Storage {
+    class MockStorage: HomeScreenStorage {
         var categoriesList: AnyPublisher<[HomeScreenSectionModel], Never> = Just(categories).eraseToAnyPublisher()
     }
     
@@ -401,13 +412,5 @@ struct HomeScreenView_Previews: PreviewProvider {
         
         HomeScreenView(viewModel:
                 .init(storage: MockStorage()))
-    }
-}
-
-extension Array {
-    func chunked(into size: Int) -> [[Element]] {
-        return stride(from: 0, to: count, by: size).map {
-            Array(self[$0 ..< Swift.min($0 + size, count)])
-        }
     }
 }
