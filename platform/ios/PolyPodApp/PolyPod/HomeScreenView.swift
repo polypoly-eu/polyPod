@@ -109,20 +109,31 @@ struct Sizes {
     let bigTileWidth: CGFloat
 }
 
+struct HomeScreenFeatureSelectedKey: EnvironmentKey {
+    typealias Value = OnFeatureSelected
+    static let defaultValue: OnFeatureSelected = { _ in }
+}
+
 struct HomeScreenSizesKey: EnvironmentKey {
     typealias Value = Sizes
     static let defaultValue: Sizes = Sizes(screenSize: .zero, containerWidth: .zero, smallTileWidth: .zero, mediumTileWidth: .zero, bigTileWidth: .zero)
 }
 
 extension EnvironmentValues {
-  var homeScreenTileSizes: Sizes {
-    get { self[HomeScreenSizesKey.self] }
-    set { self[HomeScreenSizesKey.self] = newValue }
-  }
+    var homeScreenTileSizes: Sizes {
+        get { self[HomeScreenSizesKey.self] }
+        set { self[HomeScreenSizesKey.self] = newValue }
+    }
+    
+    var homeScreenFeatureSelected: OnFeatureSelected {
+        get { self[HomeScreenFeatureSelectedKey.self] }
+        set { self[HomeScreenFeatureSelectedKey.self] = newValue }
+    }
 }
 
 // MARK: - Root View
 
+typealias OnFeatureSelected = (FeatureId) -> Void
 struct HomeScreenView: View {
     
     let footerModel = FooterViewModel(title: "Like what you have seen?",
@@ -133,28 +144,56 @@ struct HomeScreenView: View {
                                       buttonBackgroundColor: Color(fromHex: "#0f1938"))
     
     @ObservedObject var viewModel: HomeScreenViewModel
+    var openFeatureAction: OnFeatureSelected = { _ in }
+    var openInfoAction: () -> Void = {}
+    var openSettingsAction: () -> Void = {}
+    var openLearnMoreAction: () -> Void = { }
     
     var body: some View {
         // Why GeometryReader needs to be on top?
         GeometryReader { geo in
-            ScrollView(showsIndicators: false) {
-                ForEach(viewModel.sections, id: \.type) { sectionModel in
-                    switch sectionModel.type {
-                    case .yourData:
-                        MyDataSectionView(sectionModel: sectionModel)
-                    case .knowHow:
-                        DataKnowHowSectionView(sectionModel: sectionModel)
-                    case .tools:
-                        ToolsSectionView(sectionModel: sectionModel)
-                    case .other:
-                        OtherSectionView(sectionModel: sectionModel)
+            NavigationView {
+                VStack(spacing: 0) {
+                    Divider()
+                    ScrollView(showsIndicators: false) {
+                        ForEach(viewModel.sections, id: \.type) { sectionModel in
+                            switch sectionModel.type {
+                            case .yourData:
+                                MyDataSectionView(sectionModel: sectionModel)
+                            case .knowHow:
+                                DataKnowHowSectionView(sectionModel: sectionModel)
+                            case .tools:
+                                ToolsSectionView(sectionModel: sectionModel)
+                            case .other:
+                                OtherSectionView(sectionModel: sectionModel)
+                            }
+                            Spacer(minLength: Constants.Section.verticalSpacing)
+                        }
+                        FooterView(model: footerModel, openLearnMoreAction: openLearnMoreAction)
                     }
-                    Spacer(minLength: Constants.Section.verticalSpacing)
+                    .padding([.leading, .trailing], Constants.View.horizontalPadding)
+                    .environment(\.homeScreenTileSizes, calculateSize(geo))
+                    .environment(\.homeScreenFeatureSelected, openFeatureAction)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Image("NavIconInfoDark")
+                                .renderingMode(.original)
+                                .onTapGesture(perform: openInfoAction)
+                        }
+                        
+                        ToolbarItem(placement: .principal) {
+                            Image("NavIconPolyPodLogo").renderingMode(.original)
+                        }
+                        
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Image("NavIconSettingsDark")
+                                .renderingMode(.original)
+                                .onTapGesture(perform: openSettingsAction)
+                        }
+                    }
                 }
-                FooterView(model: footerModel)
             }
-            .padding([.leading, .trailing], Constants.View.horizontalPadding)
-            .environment(\.homeScreenTileSizes, calculateSize(geo))
         }.onAppear {
             viewModel.setup()
         }
@@ -213,7 +252,7 @@ struct MyDataSectionView: View {
 
 struct DataKnowHowSectionView: View {
     let sectionModel: HomeScreenSectionModel
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
@@ -228,7 +267,7 @@ struct DataKnowHowSectionView: View {
 
 struct OtherSectionView: View {
     let sectionModel: HomeScreenSectionModel
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
@@ -243,7 +282,7 @@ struct OtherSectionView: View {
 
 struct ToolsSectionView: View {
     let sectionModel: HomeScreenSectionModel
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
@@ -310,9 +349,10 @@ struct RowContainerView: View {
 // MARK: - Cards
 
 struct BigCardView: View {
-
+    
     @Environment(\.homeScreenTileSizes) var sizes
-
+    @Environment(\.homeScreenFeatureSelected) var onFeatureSelected
+    
     let card: Card
     private let foregroundColor: Color
     
@@ -320,7 +360,7 @@ struct BigCardView: View {
         self.card = card
         self.foregroundColor = card.backgroundColor.isLight ? .black : .white
     }
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: Constants.Tile.verticalSpacing) {
             Image(uiImage: card.image)
@@ -341,12 +381,16 @@ struct BigCardView: View {
                height: sizes.bigTileWidth)
         .background(card.backgroundColor)
         .cornerRadius(Constants.Tile.cornerRadius)
+        .onTapGesture {
+            onFeatureSelected(card.id)
+        }
     }
 }
 
 struct MediumCardView: View {
     @Environment(\.homeScreenTileSizes) var sizes
-
+    @Environment(\.homeScreenFeatureSelected) var onFeatureSelected
+    
     let card: Card
     private let foregroundColor: Color
     
@@ -377,12 +421,16 @@ struct MediumCardView: View {
         .frame(width: sizes.mediumTileWidth, height: sizes.smallTileWidth)
         .background(card.backgroundColor)
         .cornerRadius(Constants.Tile.cornerRadius)
+        .onTapGesture {
+            onFeatureSelected(card.id)
+        }
     }
 }
 
 struct SmallCardView: View {
     @Environment(\.homeScreenTileSizes) var sizes
-
+    @Environment(\.homeScreenFeatureSelected) var onFeatureSelected
+    
     let card: Card
     private let foregroundColor: Color
     
@@ -390,7 +438,7 @@ struct SmallCardView: View {
         self.card = card
         self.foregroundColor = card.backgroundColor.isLight ? .black : .white
     }
-
+    
     var body: some View {
         VStack(alignment: .center, spacing: Constants.Tile.verticalSpacing) {
             Image(uiImage: card.image)
@@ -405,11 +453,15 @@ struct SmallCardView: View {
         .frame(width: sizes.smallTileWidth, height: sizes.smallTileWidth)
         .background(card.backgroundColor)
         .cornerRadius(Constants.Tile.cornerRadius)
+        .onTapGesture {
+            onFeatureSelected(card.id)
+        }
     }
 }
 
 struct FooterView: View {
     let model: FooterViewModel
+    var openLearnMoreAction: () -> Void = { }
     
     var body: some View {
         VStack(alignment: .leading, spacing: Constants.Tile.verticalSpacing) {
@@ -420,14 +472,14 @@ struct FooterView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(alignment: .center)
             Button(model.buttonTitle) {
-                //TODO
+                openLearnMoreAction()
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .center)
             .foregroundColor(model.buttonBackgroundColor.isLight ? .black : .white)
             .background(model.buttonBackgroundColor)
             .cornerRadius(Constants.Tile.cornerRadius)
-                
+            
         }
         .padding(Constants.Tile.padding)
         .background(model.backgroundColor)
@@ -500,7 +552,7 @@ struct HomeScreenView_Previews: PreviewProvider {
               ],
               type: .yourData)
     ]
-
+    
     class MockStorage: HomeScreenStorage {
         var categoriesList: AnyPublisher<[HomeScreenSectionModel], Never> = Just(categories).eraseToAnyPublisher()
     }

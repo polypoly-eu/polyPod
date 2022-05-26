@@ -35,24 +35,21 @@ struct ContentView: View {
     var setStatusBarStyle: ((UIStatusBarStyle) -> Void)? = nil
     
     var body: some View {
-        HomeScreenView(viewModel:
-                .init(storage: HomeScreenStorageAdapter(featureStorage:
-                                                    featureStorage)))
-//        VStack(spacing: 0) {
-//            let state = initState()
-//            let safeAreaInsets = UIApplication.shared.windows[0].safeAreaInsets
-//
-//            Rectangle()
-//                .fill(state.backgroundColor)
-//                .frame(maxWidth: .infinity, maxHeight: safeAreaInsets.top)
-//
-//            state.view
-//
-//            Rectangle()
-//                .fill(state.backgroundColor)
-//                .frame(maxWidth: .infinity, maxHeight: safeAreaInsets.bottom)
-//        }
-//        .edgesIgnoringSafeArea([.top, .bottom])
+        VStack(spacing: 0) {
+            let state = initState()
+            let safeAreaInsets = UIApplication.shared.windows[0].safeAreaInsets
+
+            Rectangle()
+                .fill(state.backgroundColor)
+                .frame(maxWidth: .infinity, maxHeight: safeAreaInsets.top)
+
+            state.view
+
+            Rectangle()
+                .fill(state.backgroundColor)
+                .frame(maxWidth: .infinity, maxHeight: safeAreaInsets.bottom)
+        }
+        .edgesIgnoringSafeArea([.top, .bottom])
     }
     
     private func initState() -> ViewState {
@@ -139,9 +136,13 @@ struct ContentView: View {
         let notification = UpdateNotification()
         return ViewState(
             AnyView(
-                FeatureListView(
-                    featureList: $featureStorage.featuresList,
-                    openFeatureAction: { feature in
+                HomeScreenView(
+                    viewModel: .init(
+                        storage: HomeScreenStorageAdapter(featureStorage: featureStorage)),
+                    openFeatureAction: { featureId in
+                        guard let feature = featureStorage.featuresList.first(where: { $0.id == featureId }) else {
+                            return
+                        }
                         state = featureState(feature)
                     },
                     openInfoAction: {
@@ -149,6 +150,9 @@ struct ContentView: View {
                     },
                     openSettingsAction: {
                         state = settingsState()
+                    },
+                    openLearnMoreAction: {
+                        // TODO
                     }
                 ).alert(isPresented: $showUpdateNotification) {
                     Alert(
