@@ -90,7 +90,7 @@ $(rust_flatbuffers_dir)/%.rs: $(flatbuffer_models_dir)/%.fbs
 	./$(flatc) --rust -o $(rust_flatbuffers_dir) --filename-suffix "" --include-prefix flatbuffers_generated $^
 
 $(rust_flatbuffers_generated_lib): $(rust_flatbuffer_models)
-	$(os_echo) $(foreach model, $^, \
+	@$(os_echo) $(foreach model, $^, \
 		"pub mod $(basename $(notdir $(model))); \n") > $(rust_flatbuffers_generated_lib)
 
 $(target): $(flatc) $(flatbuffers) $(rust_flatbuffers_generated_lib)
