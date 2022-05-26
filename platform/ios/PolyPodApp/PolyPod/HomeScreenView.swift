@@ -184,21 +184,27 @@ struct HomeScreenView: View {
 struct MyDataSectionView: View {
     var sectionModel: HomeScreenSectionModel
     
+    enum ContainerType {
+        case largeLeft
+        case row
+        case largeRight
+    }
+    
+    let containersConfig: [ContainerType] = [.largeLeft, .row, .largeRight, .row]
+    
     var body: some View {
         VStack(alignment: .leading, spacing: Constants.TileContainer.verticalSpacing) {
             Text(sectionModel.title).fontWeight(.bold)
-            ForEach(Array(sectionModel.cards.chunked(into: 3).enumerated()), id: \.offset) { index, chunk in
-                switch index % 4 {
-                case 0:
+            ForEach(Array(sectionModel.cards.chunked(into: Int(Constants.TileContainer.numberOfColumns)).enumerated()),
+                    id: \.offset) { index, chunk in
+                let type = containersConfig[index % containersConfig.count]
+                switch type {
+                case .largeLeft:
                     LargeLeftContainerView(cards: chunk)
-                case 1:
+                case .row:
                     RowContainerView(cards: chunk)
-                case 2:
+                case .largeRight:
                     LargeRightContainerView(cards: chunk)
-                case 3:
-                    RowContainerView(cards: chunk)
-                default:
-                    Color.clear
                 }
             }
         }
@@ -428,9 +434,51 @@ struct HomeScreenView_Previews: PreviewProvider {
                 .init(id: UUID().uuidString, title: "Amazon Importer",
                       description: "nada",
                       image: UIImage(named: "FacebookImport")!,
+                      backgroundColor: .blue),
+                .init(id: UUID().uuidString,
+                      title: "polyExplorer",
+                      description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
+                      image: UIImage(named: "FacebookImport")!,
+                      backgroundColor: .blue),
+                .init(id: UUID().uuidString,
+                      title: "Big big many big hello there",
+                      description: "nada",
+                      image: UIImage(named: "FacebookImport")!,
+                      backgroundColor: .blue),
+                .init(id: UUID().uuidString, title: "Amazon Importer",
+                      description: "nada",
+                      image: UIImage(named: "FacebookImport")!,
+                      backgroundColor: .blue),
+                .init(id: UUID().uuidString,
+                      title: "polyExplorer",
+                      description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
+                      image: UIImage(named: "FacebookImport")!,
+                      backgroundColor: .blue),
+                .init(id: UUID().uuidString,
+                      title: "Big big many big hello there",
+                      description: "nada",
+                      image: UIImage(named: "FacebookImport")!,
+                      backgroundColor: .blue),
+                .init(id: UUID().uuidString, title: "Amazon Importer",
+                      description: "nada",
+                      image: UIImage(named: "FacebookImport")!,
+                      backgroundColor: .blue),
+                .init(id: UUID().uuidString,
+                      title: "polyExplorer",
+                      description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
+                      image: UIImage(named: "FacebookImport")!,
+                      backgroundColor: .blue),
+                .init(id: UUID().uuidString,
+                      title: "Big big many big hello there",
+                      description: "nada",
+                      image: UIImage(named: "FacebookImport")!,
+                      backgroundColor: .blue),
+                .init(id: UUID().uuidString, title: "Amazon Importer",
+                      description: "nada",
+                      image: UIImage(named: "FacebookImport")!,
                       backgroundColor: .blue)
               ],
-              type: .knowHow)
+              type: .yourData)
     ]
 
     class MockStorage: HomeScreenStorage {
