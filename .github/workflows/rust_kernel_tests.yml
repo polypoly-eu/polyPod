@@ -19,6 +19,16 @@ jobs:
       - name: Install stable toolchain
         run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
+      - name: Cache multiple paths
+        working-directory: ./platform/core
+        uses: actions/cache@v3
+        with:
+        path: |
+          tools/NDK_r22b
+          flatbuffers_shared/flatbuffers_v2.0.0
+          flatbuffers_shared/flatc_v2.0.0
+        key: core_dependencies
+
       - name: Build core
         working-directory: ./platform/core
         run: make rust_core
