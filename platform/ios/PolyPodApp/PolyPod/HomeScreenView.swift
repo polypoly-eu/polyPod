@@ -23,9 +23,9 @@ struct FooterViewModel {
     let title: String
     let description: String
     let imageName: String
-    let backgoundHex: String
+    let backgroundColor: Color
     let buttonTitle: String
-    let buttonBackgroundHex: String
+    let buttonBackgroundColor: Color
 }
 
 protocol HomeScreenStorage {
@@ -90,7 +90,7 @@ struct Constants {
     struct TileContainer {
         static let verticalSpacing = 16.0
         static let horizontalSpacing = 16.0
-        static let numberOfColumns = 3.0
+        static let numberOfColumns = 3
     }
     
     struct Tile {
@@ -128,9 +128,9 @@ struct HomeScreenView: View {
     let footerModel = FooterViewModel(title: "Like what you have seen?",
                                       description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.",
                                       imageName: "FacebookImport",
-                                      backgoundHex: "#fed7d6",
+                                      backgroundColor: Color(fromHex: "#fed7d6"),
                                       buttonTitle: "Learn more",
-                                      buttonBackgroundHex: "#0f1938")
+                                      buttonBackgroundColor: Color(fromHex: "#0f1938"))
     
     @ObservedObject var viewModel: HomeScreenViewModel
     
@@ -166,8 +166,8 @@ struct HomeScreenView: View {
         let totalScreenPadding = 2 * Constants.View.horizontalPadding
         let containerWidth: CGFloat = screenWidth - totalScreenPadding
         
-        let interItemSpacing = (Constants.TileContainer.numberOfColumns - 1.0) * Constants.TileContainer.horizontalSpacing
-        let smallTileWidth: CGFloat = (containerWidth - interItemSpacing) / Constants.TileContainer.numberOfColumns
+        let interItemSpacing = (Double(Constants.TileContainer.numberOfColumns) - 1.0) * Constants.TileContainer.horizontalSpacing
+        let smallTileWidth: CGFloat = (containerWidth - interItemSpacing) / Double(Constants.TileContainer.numberOfColumns)
         
         let bigTileWidth = containerWidth - smallTileWidth - Constants.TileContainer.horizontalSpacing
         
@@ -195,7 +195,7 @@ struct MyDataSectionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: Constants.TileContainer.verticalSpacing) {
             Text(sectionModel.title).fontWeight(.bold)
-            ForEach(Array(sectionModel.cards.chunked(into: Int(Constants.TileContainer.numberOfColumns)).enumerated()),
+            ForEach(Array(sectionModel.cards.chunked(into: Constants.TileContainer.numberOfColumns).enumerated()),
                     id: \.offset) { index, chunk in
                 let type = containersConfig[index % containersConfig.count]
                 switch type {
@@ -218,7 +218,7 @@ struct DataKnowHowSectionView: View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
             VStack(alignment: .leading, spacing: Constants.TileContainer.verticalSpacing) {
-                ForEach(Array(sectionModel.cards.chunked(into: 3).enumerated()), id: \.offset) { _, chunk in
+                ForEach(Array(sectionModel.cards.chunked(into: Constants.TileContainer.numberOfColumns).enumerated()), id: \.offset) { _, chunk in
                     RowContainerView(cards: chunk)
                 }
             }
@@ -233,7 +233,7 @@ struct OtherSectionView: View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
             VStack(alignment: .leading, spacing: Constants.TileContainer.verticalSpacing) {
-                ForEach(Array(sectionModel.cards.chunked(into: 3).enumerated()), id: \.offset) { _, chunk in
+                ForEach(Array(sectionModel.cards.chunked(into: Constants.TileContainer.numberOfColumns).enumerated()), id: \.offset) { _, chunk in
                     RowContainerView(cards: chunk)
                 }
             }
@@ -277,13 +277,13 @@ struct LargeRightContainerView: View {
     let cards: [Card]
     var body: some View {
         HStack(spacing: Constants.TileContainer.horizontalSpacing) {
-            if cards.count <= 2 {
+            if cards.count < Constants.TileContainer.numberOfColumns {
                 ForEach(cards) { card in
                     SmallCardView(card: card)
                 }
             } else {
                 VStack(spacing: Constants.TileContainer.verticalSpacing) {
-                    ForEach(Array(cards.prefix(2))) { card in
+                    ForEach(Array(cards.prefix(Constants.TileContainer.numberOfColumns - 1))) { card in
                         SmallCardView(card: card)
                     }
                 }
@@ -300,7 +300,7 @@ struct RowContainerView: View {
             ForEach(cards) { card in
                 SmallCardView(card: card)
             }
-            if (cards.count < 3) {
+            if (cards.count < Constants.TileContainer.numberOfColumns) {
                 Spacer()
             }
         }
@@ -311,23 +311,29 @@ struct RowContainerView: View {
 
 struct BigCardView: View {
 
-    let card: Card
     @Environment(\.homeScreenTileSizes) var sizes
+
+    let card: Card
+    private let foregroundColor: Color
+    
+    init(card: Card) {
+        self.card = card
+        self.foregroundColor = card.backgroundColor.isLight ? .black : .white
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: Constants.Tile.verticalSpacing) {
             Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .foregroundColor(card.backgroundColor.isLight ? .black : .white)
                 .frame(width: sizes.bigTileWidth - 2 * Constants.Tile.padding, alignment: .center)
             
             VStack(alignment: .leading, spacing: Constants.Tile.verticalSpacing) {
                 Text(card.title)
-                    .foregroundColor(card.backgroundColor.isLight ? .black : .white)
+                    .foregroundColor(foregroundColor)
                     .fontWeight(.bold)
                 Text(card.description)
-                    .foregroundColor(card.backgroundColor.isLight ? .black : .white)
+                    .foregroundColor(foregroundColor)
             }
         }
         .padding(Constants.Tile.padding)
@@ -339,23 +345,29 @@ struct BigCardView: View {
 }
 
 struct MediumCardView: View {
-    let card: Card
     @Environment(\.homeScreenTileSizes) var sizes
 
+    let card: Card
+    private let foregroundColor: Color
+    
+    init(card: Card) {
+        self.card = card
+        self.foregroundColor = card.backgroundColor.isLight ? .black : .white
+    }
+    
     var body: some View {
         HStack(spacing: Constants.Tile.horizontalSpacing) {
             Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .foregroundColor(card.backgroundColor.isLight ? .black : .white)
                 .frame(width: sizes.smallTileWidth - 2 * Constants.Tile.padding, height: sizes.smallTileWidth - 2 * Constants.Tile.padding, alignment: .center)
             
             VStack(alignment: .leading, spacing: Constants.Tile.verticalSpacing) {
                 Text(card.title)
-                    .foregroundColor(card.backgroundColor.isLight ? .black : .white)
+                    .foregroundColor(foregroundColor)
                     .fontWeight(.bold)
                 Text(card.description)
-                    .foregroundColor(card.backgroundColor.isLight ? .black : .white)
+                    .foregroundColor(foregroundColor)
             }
             Spacer()
         }
@@ -367,17 +379,23 @@ struct MediumCardView: View {
 }
 
 struct SmallCardView: View {
-    let card: Card
     @Environment(\.homeScreenTileSizes) var sizes
+
+    let card: Card
+    private let foregroundColor: Color
+    
+    init(card: Card) {
+        self.card = card
+        self.foregroundColor = card.backgroundColor.isLight ? .black : .white
+    }
 
     var body: some View {
         VStack(alignment: .center, spacing: Constants.Tile.verticalSpacing) {
             Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .foregroundColor(card.backgroundColor.isLight ? .black : .white)
             Text(card.title)
-                .foregroundColor(card.backgroundColor.isLight ? .black : .white)
+                .foregroundColor(foregroundColor)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
         }
@@ -404,13 +422,13 @@ struct FooterView: View {
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .center)
-            .foregroundColor(Color(fromHex: model.buttonBackgroundHex).isLight ? .black : .white)
-            .background(Color(fromHex: model.buttonBackgroundHex))
+            .foregroundColor(model.buttonBackgroundColor.isLight ? .black : .white)
+            .background(model.buttonBackgroundColor)
             .cornerRadius(Constants.Tile.cornerRadius)
                 
         }
         .padding(Constants.Tile.padding)
-        .background(Color(fromHex: model.backgoundHex))
+        .background(model.backgroundColor)
         .cornerRadius(Constants.Tile.cornerRadius)
     }
 }
