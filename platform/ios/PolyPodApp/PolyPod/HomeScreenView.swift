@@ -3,13 +3,40 @@
 import SwiftUI
 import Combine
 
+final class HomeScreenStorage: Storage {
+    let categoriesList: AnyPublisher<[HomeScreenSectionModel], Never>
+    let featureStorage: FeatureStorage
+    
+    init(featureStorage: FeatureStorage) {
+        self.featureStorage = featureStorage
+        self.categoriesList = featureStorage.categoriesList.map(HomeScreenStorage.mapCategoryModel(_:)).eraseToAnyPublisher()
+    }
+    
+    static func mapCategoryModel(_ categoryModels: [CategoryModel]) -> [HomeScreenSectionModel] {
+        categoryModels.map { model in
+            HomeScreenSectionModel(title: model.name,
+                                   cards: mapToCards(model.features),
+                                   type: model.id)
+        }
+    }
+    
+    private static func mapToCards(_ features: [Feature]) -> [Card] {
+        features.map { feature in
+            Card(id: feature.id,
+                 title: feature.name,
+                 description: feature.description ?? "",
+                 image: UIImage(contentsOfFile: feature.thumbnail?.path ?? "") ?? UIImage(),
+                 backgroundColor: feature.thumbnailColor ?? .white)
+        }
+    }
+}
+
 protocol Storage {
-//    var featuresList: AnyPublisher<[Feature], Never> { get set }
-    var categoriesList: AnyPublisher<[HomeScreenSectionModel], Never> { get set }
+    var categoriesList: AnyPublisher<[HomeScreenSectionModel], Never> { get }
 }
 
 class HomeScreenViewModel: ObservableObject {
-    var storage: Storage
+    private var storage: Storage
 
     @Published var sections: [HomeScreenSectionModel] = []
     
@@ -24,24 +51,6 @@ class HomeScreenViewModel: ObservableObject {
             self.sections = sections
         }
     }
-    
-//    func mapCategoryModel(_ categoryModels: [CategoryModel]) -> [HomeScreenSectionModel] {
-//        categoryModels.map { model in
-//            HomeScreenSectionModel(title: model.name,
-//                                   cards: mapToCards(model.features),
-//                                   type: model.id)
-//        }
-//    }
-//
-//    private func mapToCards(_ features: [Feature]) -> [Card] {
-//        features.map { feature in
-//            Card(id: feature.id,
-//                 title: feature.name,
-//                 description: feature.description ?? "",
-//                 imagePath: feature.thumbnail?.path ?? "",
-//                 backgroundColor: feature.thumbnailColor ?? .white)
-//        }
-//    }
 }
 
 struct HomeScreenUIConstants {
@@ -59,7 +68,7 @@ struct HomeScreenUIConstants {
     }
     
     struct Tile {
-        static let verticalSpacing = 16.0
+        static let verticalSpacing = 8.0
         static let horizontalSpacing = 8.0
         static let padding = 8.0
         static let cornerRadius = 8.0
@@ -275,6 +284,9 @@ struct RowContainerView: View {
             ForEach(cards) { card in
                 SmallCardView(card: card)
             }
+            if (cards.count < 3) {
+                Spacer()
+            }
         }
     }
 }
@@ -376,9 +388,9 @@ struct HomeScreenView_Previews: PreviewProvider {
                 .init(id: UUID().uuidString, title: "Amazon Importer",
                       description: "nada",
                       image: UIImage(named: "FacebookImport")!,
-                      backgroundColor: .blue),
+                      backgroundColor: .blue)
               ],
-              type: .yourData)
+              type: .knowHow)
     ]
 
     class MockStorage: Storage {
@@ -387,7 +399,8 @@ struct HomeScreenView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        HomeScreenView(viewModel: .init(storage: MockStorage()))
+        HomeScreenView(viewModel:
+                .init(storage: MockStorage()))
     }
 }
 

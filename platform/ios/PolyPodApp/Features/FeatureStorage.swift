@@ -27,7 +27,12 @@ final class FeatureStorage: ObservableObject {
     private var dataProtectionCancellable: AnyCancellable?
 
     @Published var featuresList: [Feature] = []
-    @Published var categoriesList: [CategoryModel] = []
+    var categoriesList: AnyPublisher<[CategoryModel], Never> {
+        categoriesListSubject.eraseToAnyPublisher()
+    }
+    
+    private let categoriesListSubject: CurrentValueSubject<[CategoryModel], Never> = CurrentValueSubject([])
+    
     
     lazy var featuresFileUrl: URL = {
         do {
@@ -74,7 +79,7 @@ final class FeatureStorage: ObservableObject {
     private func loadCategories() {
         let categories = readCategories()
         let models = mapCategories(categories)
-        self.categoriesList = models
+        self.categoriesListSubject.value = models
     }
     
     private func loadFeatures() {
