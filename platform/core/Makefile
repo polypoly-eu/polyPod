@@ -152,7 +152,7 @@ endef
 $(ndk):
 	mkdir -p $(ndk)
 	curl -L $(ndk_download_url) -o $(ndk_archive)
-	unzip -d $(ndk) $(ndk_archive)
+	unzip -q -d $(ndk) $(ndk_archive)
 	rm $(ndk_archive)
 
 $(android_flatbuffers_lib): $(flatbuffers)
