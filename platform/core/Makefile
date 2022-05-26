@@ -165,9 +165,9 @@ $(kotlin_flatbuffer_models_dir)/%.kt: $(flatbuffer_models_dir)/%.fbs
 $(android_binaries): $(target) $(ndk) $(kotlin_flatbuffer_models) $(android_flatbuffers_lib)
 	cargo install cargo-ndk
 	rustup target add $(android_triples)
-	
-	$(foreach tripple, $(android_triples), \
-		cargo ndk --platform $(android_version) --target $(tripple) build $(cargo_build_flag); \
+
+	$(foreach triple, $(android_triples), \
+		cargo ndk --platform $(android_version) --target $(triple) build $(cargo_build_flag); \
 	)
 
 $(android_core_libraries): $(android_binaries)
