@@ -70,7 +70,7 @@ struct Card: Identifiable {
     let id: FeatureId
     let title: String
     let description: String
-    let imagePath: String
+    let image: UIImage
     let backgroundColor: Color
 }
 
@@ -286,7 +286,7 @@ struct BigCardView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
-            Image.path(card.imagePath)
+            Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(card.backgroundColor.isLight ? .black : .white)
@@ -314,7 +314,7 @@ struct MediumCardView: View {
 
     var body: some View {
         HStack(spacing: HomeScreenUIConstants.Tile.horizontalSpacing) {
-            Image.path(card.imagePath)
+            Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(card.backgroundColor.isLight ? .black : .white)
@@ -342,7 +342,7 @@ struct SmallCardView: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
-            Image.path(card.imagePath)
+            Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(card.backgroundColor.isLight ? .black : .white)
@@ -365,17 +365,17 @@ struct HomeScreenView_Previews: PreviewProvider {
               cards: [
                 .init(id: UUID().uuidString,
                       title: "polyExplorer",
-                      description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.",
-                      imagePath: "heart.fill",
+                      description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
+                      image: UIImage(named: "FacebookImport")!,
                       backgroundColor: .blue),
                 .init(id: UUID().uuidString,
                       title: "Big big many big hello there",
                       description: "nada",
-                      imagePath: "heart.fill",
+                      image: UIImage(named: "FacebookImport")!,
                       backgroundColor: .blue),
                 .init(id: UUID().uuidString, title: "Amazon Importer",
                       description: "nada",
-                      imagePath: "heart.fill",
+                      image: UIImage(named: "FacebookImport")!,
                       backgroundColor: .blue),
               ],
               type: .yourData)
@@ -386,8 +386,8 @@ struct HomeScreenView_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        let storage = MockStorage()
-        HomeScreenView(viewModel: .init(storage: storage))
+        
+        HomeScreenView(viewModel: .init(storage: MockStorage()))
     }
 }
 
@@ -396,12 +396,5 @@ extension Array {
         return stride(from: 0, to: count, by: size).map {
             Array(self[$0 ..< Swift.min($0 + size, count)])
         }
-    }
-}
-
-extension Image {
-    static func path(_ path: String) -> Image {
-        // TODO: Add placeholder image
-        .init(uiImage: UIImage(contentsOfFile: path) ?? UIImage())
     }
 }
