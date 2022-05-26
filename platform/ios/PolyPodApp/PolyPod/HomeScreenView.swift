@@ -147,7 +147,7 @@ struct HomeScreenView: View {
                     case .tools:
                         ToolsSectionView(sectionModel: sectionModel)
                     case .other:
-                        Color.clear
+                        OtherSectionView(sectionModel: sectionModel)
                     }
                     Spacer(minLength: Constants.Section.verticalSpacing)
                 }
@@ -206,6 +206,21 @@ struct MyDataSectionView: View {
 }
 
 struct DataKnowHowSectionView: View {
+    let sectionModel: HomeScreenSectionModel
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(sectionModel.title).fontWeight(.bold)
+            VStack(alignment: .leading, spacing: Constants.TileContainer.verticalSpacing) {
+                ForEach(Array(sectionModel.cards.chunked(into: 3).enumerated()), id: \.offset) { _, chunk in
+                    RowContainerView(cards: chunk)
+                }
+            }
+        }
+    }
+}
+
+struct OtherSectionView: View {
     let sectionModel: HomeScreenSectionModel
 
     var body: some View {

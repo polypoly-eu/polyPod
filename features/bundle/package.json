@@ -51,8 +51,7 @@
       "name": "Your Data",
       "features": [
         "facebookImport",
-        "google",
-        "demo"
+        "google"
       ]
     },
     {
@@ -64,7 +63,7 @@
       ]
     },
     {
-      "id": "tools",
+      "id": "toolz",
       "name": "Tools",
       "features": [
         "lexicon"

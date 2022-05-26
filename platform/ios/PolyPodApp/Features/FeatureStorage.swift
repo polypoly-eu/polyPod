@@ -18,21 +18,20 @@ enum CategoryId: String {
 
 struct CategoryModel {
     let id: CategoryId
-    let name: String
-    let features: [Feature]
+    var name: String
+    var features: [Feature]
 }
 
 final class FeatureStorage: ObservableObject {
     private let dataProtection: DataProtection
     private var dataProtectionCancellable: AnyCancellable?
 
-    @Published var featuresList: [Feature] = []
+    var featuresList: [Feature] = []
     var categoriesList: AnyPublisher<[CategoryModel], Never> {
         categoriesListSubject.eraseToAnyPublisher()
     }
     
     private let categoriesListSubject: CurrentValueSubject<[CategoryModel], Never> = CurrentValueSubject([])
-    
     
     lazy var featuresFileUrl: URL = {
         do {
@@ -78,7 +77,21 @@ final class FeatureStorage: ObservableObject {
     
     private func loadCategories() {
         let categories = readCategories()
-        let models = mapCategories(categories)
+        var models = mapCategories(categories)
+        let mappedFeatures = models.reduce(into: []) { partialResult, model in
+            partialResult.append(contentsOf: model.features)
+        }
+        
+        let remainingFeatures = featuresList.filter { feature in
+            !mappedFeatures.contains { mappedFeature in
+                feature.id == mappedFeature.id
+            }
+        }
+        
+        if !remainingFeatures.isEmpty {
+            models.append(CategoryModel(id: .other, name: "Other", features: remainingFeatures))
+        }
+        
         self.categoriesListSubject.value = models
     }
     
@@ -111,8 +124,8 @@ final class FeatureStorage: ObservableObject {
     }
     
     private func mapCategories(_ categories: [Category]) -> [CategoryModel] {
-        return categories.map({ category -> CategoryModel in
-            let id = CategoryId(rawValue: category.id) ?? .other
+        return categories.compactMap({ category -> CategoryModel? in
+            guard let id = CategoryId(rawValue: category.id) else { return nil }
             let features = mapFeatures(features: category.features)
             
             return CategoryModel(id: id, name: category.name, features: features)
@@ -133,7 +146,6 @@ final class FeatureStorage: ObservableObject {
                 sorted.append(feature)
             }
         }
-        
         
         return sorted
     }
