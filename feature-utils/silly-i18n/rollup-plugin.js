@@ -44,7 +44,7 @@ export default function (options) {
                 const translations = {};
                 const dir = id.slice(0, -SUFFIX.length);
                 const pattern = path.join(dir, "*", "**", `*${FILEEXT}`);
-                const langRegex = new RegExp(`${DIRNAME}\/(\\w+)\/`);
+                const langRegex = new RegExp(`${DIRNAME}/(\\w+)/`);
                 for (const file of await util.promisify(glob)(pattern)) {
                     const lang = langRegex.exec(file)[1];
                     const section = path.basename(file, FILEEXT);
