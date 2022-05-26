@@ -78,18 +78,19 @@ final class HomeScreenViewModel: ObservableObject {
 
 // MARK: - UI sizes
 
-struct HomeScreenUIConstants {
+struct Constants {
     struct Section {
         static let verticalSpacing = 32.0
     }
     
     struct View {
-        static let verticalPadding = 8.0
+        static let horizontalPadding = 8.0
     }
     
     struct TileContainer {
         static let verticalSpacing = 16.0
         static let horizontalSpacing = 16.0
+        static let numberOfColumns = 3.0
     }
     
     struct Tile {
@@ -136,11 +137,6 @@ struct HomeScreenView: View {
     var body: some View {
         // Why GeometryReader needs to be on top?
         GeometryReader { geo in
-            let screenWidth = geo.size.width
-            let containerWidth = screenWidth - 2 * HomeScreenUIConstants.View.verticalPadding
-            let smallTileWidth = (containerWidth - 2 * HomeScreenUIConstants.TileContainer.verticalSpacing) / 3
-            let bigTileWidth = containerWidth - smallTileWidth - HomeScreenUIConstants.TileContainer.verticalSpacing
-            
             ScrollView(showsIndicators: false) {
                 ForEach(viewModel.sections, id: \.type) { sectionModel in
                     switch sectionModel.type {
@@ -153,15 +149,33 @@ struct HomeScreenView: View {
                     case .other:
                         Color.clear
                     }
-                    Spacer(minLength: HomeScreenUIConstants.Section.verticalSpacing)
+                    Spacer(minLength: Constants.Section.verticalSpacing)
                 }
                 FooterView(model: footerModel)
             }
-            .padding([.leading, .trailing], HomeScreenUIConstants.View.verticalPadding)
-            .environment(\.homeScreenTileSizes, Sizes.init(screenSize: geo.size, containerWidth: containerWidth, smallTileWidth: smallTileWidth, mediumTileWidth: containerWidth, bigTileWidth: bigTileWidth))
+            .padding([.leading, .trailing], Constants.View.horizontalPadding)
+            .environment(\.homeScreenTileSizes, calculateSize(geo))
         }.onAppear {
             viewModel.setup()
         }
+    }
+    
+    func calculateSize(_ geo: GeometryProxy) -> Sizes {
+        let screenWidth = geo.size.width
+        
+        let totalScreenPadding = 2 * Constants.View.horizontalPadding
+        let containerWidth: CGFloat = screenWidth - totalScreenPadding
+        
+        let interItemSpacing = (Constants.TileContainer.numberOfColumns - 1.0) * Constants.TileContainer.horizontalSpacing
+        let smallTileWidth: CGFloat = (containerWidth - interItemSpacing) / Constants.TileContainer.numberOfColumns
+        
+        let bigTileWidth = containerWidth - smallTileWidth - Constants.TileContainer.horizontalSpacing
+        
+        return Sizes(screenSize: geo.size,
+                     containerWidth: containerWidth,
+                     smallTileWidth: smallTileWidth,
+                     mediumTileWidth: containerWidth,
+                     bigTileWidth: bigTileWidth)
     }
 }
 
@@ -171,7 +185,7 @@ struct MyDataSectionView: View {
     var sectionModel: HomeScreenSectionModel
     
     var body: some View {
-        VStack(alignment: .leading, spacing: HomeScreenUIConstants.TileContainer.verticalSpacing) {
+        VStack(alignment: .leading, spacing: Constants.TileContainer.verticalSpacing) {
             Text(sectionModel.title).fontWeight(.bold)
             ForEach(Array(sectionModel.cards.chunked(into: 3).enumerated()), id: \.offset) { index, chunk in
                 switch index % 4 {
@@ -197,7 +211,7 @@ struct DataKnowHowSectionView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
-            VStack(alignment: .leading, spacing: HomeScreenUIConstants.TileContainer.verticalSpacing) {
+            VStack(alignment: .leading, spacing: Constants.TileContainer.verticalSpacing) {
                 ForEach(Array(sectionModel.cards.chunked(into: 3).enumerated()), id: \.offset) { _, chunk in
                     RowContainerView(cards: chunk)
                 }
@@ -212,7 +226,7 @@ struct ToolsSectionView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
-            VStack(alignment: .leading, spacing: HomeScreenUIConstants.TileContainer.verticalSpacing) {
+            VStack(alignment: .leading, spacing: Constants.TileContainer.verticalSpacing) {
                 ForEach(sectionModel.cards) { card in
                     MediumCardView(card: card)
                 }
@@ -227,9 +241,9 @@ struct LargeLeftContainerView: View {
     let cards: [Card]
     
     var body: some View {
-        HStack(alignment: .top, spacing: HomeScreenUIConstants.TileContainer.horizontalSpacing) {
+        HStack(alignment: .top, spacing: Constants.TileContainer.horizontalSpacing) {
             BigCardView(card: cards.first!)
-            VStack(spacing: HomeScreenUIConstants.TileContainer.verticalSpacing) {
+            VStack(spacing: Constants.TileContainer.verticalSpacing) {
                 ForEach(Array(cards.dropFirst())) { card in
                     SmallCardView(card: card)
                 }
@@ -241,13 +255,13 @@ struct LargeLeftContainerView: View {
 struct LargeRightContainerView: View {
     let cards: [Card]
     var body: some View {
-        HStack(spacing: HomeScreenUIConstants.TileContainer.horizontalSpacing) {
+        HStack(spacing: Constants.TileContainer.horizontalSpacing) {
             if cards.count <= 2 {
                 ForEach(cards) { card in
                     SmallCardView(card: card)
                 }
             } else {
-                VStack(spacing: HomeScreenUIConstants.TileContainer.verticalSpacing) {
+                VStack(spacing: Constants.TileContainer.verticalSpacing) {
                     ForEach(Array(cards.prefix(2))) { card in
                         SmallCardView(card: card)
                     }
@@ -261,7 +275,7 @@ struct LargeRightContainerView: View {
 struct RowContainerView: View {
     let cards: [Card]
     var body: some View {
-        HStack(alignment: .top, spacing: HomeScreenUIConstants.TileContainer.horizontalSpacing) {
+        HStack(alignment: .top, spacing: Constants.TileContainer.horizontalSpacing) {
             ForEach(cards) { card in
                 SmallCardView(card: card)
             }
@@ -280,14 +294,14 @@ struct BigCardView: View {
     @Environment(\.homeScreenTileSizes) var sizes
 
     var body: some View {
-        VStack(alignment: .leading, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
+        VStack(alignment: .leading, spacing: Constants.Tile.verticalSpacing) {
             Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(card.backgroundColor.isLight ? .black : .white)
-                .frame(width: sizes.bigTileWidth - 2 * HomeScreenUIConstants.Tile.padding, alignment: .center)
+                .frame(width: sizes.bigTileWidth - 2 * Constants.Tile.padding, alignment: .center)
             
-            VStack(alignment: .leading, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
+            VStack(alignment: .leading, spacing: Constants.Tile.verticalSpacing) {
                 Text(card.title)
                     .foregroundColor(card.backgroundColor.isLight ? .black : .white)
                     .fontWeight(.bold)
@@ -295,11 +309,11 @@ struct BigCardView: View {
                     .foregroundColor(card.backgroundColor.isLight ? .black : .white)
             }
         }
-        .padding(HomeScreenUIConstants.Tile.padding)
+        .padding(Constants.Tile.padding)
         .frame(width: sizes.bigTileWidth,
                height: sizes.bigTileWidth)
         .background(card.backgroundColor)
-        .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
+        .cornerRadius(Constants.Tile.cornerRadius)
     }
 }
 
@@ -308,14 +322,14 @@ struct MediumCardView: View {
     @Environment(\.homeScreenTileSizes) var sizes
 
     var body: some View {
-        HStack(spacing: HomeScreenUIConstants.Tile.horizontalSpacing) {
+        HStack(spacing: Constants.Tile.horizontalSpacing) {
             Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(card.backgroundColor.isLight ? .black : .white)
-                .frame(width: sizes.smallTileWidth - 2 * HomeScreenUIConstants.Tile.padding, height: sizes.smallTileWidth - 2 * HomeScreenUIConstants.Tile.padding, alignment: .center)
+                .frame(width: sizes.smallTileWidth - 2 * Constants.Tile.padding, height: sizes.smallTileWidth - 2 * Constants.Tile.padding, alignment: .center)
             
-            VStack(alignment: .leading, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
+            VStack(alignment: .leading, spacing: Constants.Tile.verticalSpacing) {
                 Text(card.title)
                     .foregroundColor(card.backgroundColor.isLight ? .black : .white)
                     .fontWeight(.bold)
@@ -324,10 +338,10 @@ struct MediumCardView: View {
             }
             Spacer()
         }
-        .padding(HomeScreenUIConstants.Tile.padding)
+        .padding(Constants.Tile.padding)
         .frame(width: sizes.mediumTileWidth, height: sizes.smallTileWidth)
         .background(card.backgroundColor)
-        .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
+        .cornerRadius(Constants.Tile.cornerRadius)
     }
 }
 
@@ -336,7 +350,7 @@ struct SmallCardView: View {
     @Environment(\.homeScreenTileSizes) var sizes
 
     var body: some View {
-        VStack(alignment: .center, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
+        VStack(alignment: .center, spacing: Constants.Tile.verticalSpacing) {
             Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -346,10 +360,10 @@ struct SmallCardView: View {
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
         }
-        .padding(HomeScreenUIConstants.Tile.padding)
+        .padding(Constants.Tile.padding)
         .frame(width: sizes.smallTileWidth, height: sizes.smallTileWidth)
         .background(card.backgroundColor)
-        .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
+        .cornerRadius(Constants.Tile.cornerRadius)
     }
 }
 
@@ -357,7 +371,7 @@ struct FooterView: View {
     let model: FooterViewModel
     
     var body: some View {
-        VStack(alignment: .leading, spacing: HomeScreenUIConstants.Tile.verticalSpacing) {
+        VStack(alignment: .leading, spacing: Constants.Tile.verticalSpacing) {
             Text(model.title).fontWeight(.bold)
             Text(model.description)
             Image(model.imageName)
@@ -371,12 +385,12 @@ struct FooterView: View {
             .frame(maxWidth: .infinity, alignment: .center)
             .foregroundColor(Color(fromHex: model.buttonBackgroundHex).isLight ? .black : .white)
             .background(Color(fromHex: model.buttonBackgroundHex))
-            .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
+            .cornerRadius(Constants.Tile.cornerRadius)
                 
         }
-        .padding(HomeScreenUIConstants.Tile.padding)
+        .padding(Constants.Tile.padding)
         .background(Color(fromHex: model.backgoundHex))
-        .cornerRadius(HomeScreenUIConstants.Tile.cornerRadius)
+        .cornerRadius(Constants.Tile.cornerRadius)
     }
 }
 
