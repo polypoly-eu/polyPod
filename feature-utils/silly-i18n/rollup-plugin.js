@@ -74,11 +74,11 @@ export default function (options) {
                     if (difference) {
                         difference.forEach((section) => {
                             if (sectionSets[pair[0]].has(section)) {
-                                console.warn(
+                                this.warn(
                                     `⚠️ ${section} is included in ${pair[0]}, but not in ${pair[1]}`
                                 );
                             } else {
-                                console.warn(
+                                this.warn(
                                     `⚠️ ${section} is included in ${pair[0]}, but not in ${pair[1]}`
                                 );
                             }
