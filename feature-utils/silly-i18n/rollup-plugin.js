@@ -79,7 +79,7 @@ export default function (options) {
                                 );
                             } else {
                                 this.warn(
-                                    `⚠️ ${section} is included in ${pair[0]}, but not in ${pair[1]}`
+                                    `⚠️ ${section} is included in ${pair[1]}, but not in ${pair[0]}`
                                 );
                             }
                         });
