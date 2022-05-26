@@ -7,7 +7,9 @@ const ActivitiesOverTime = () => {
         <>
             <p>{i18n.t("activitiesOverTimeInfoScreen:text1")}</p>
             <Infographic
-                imageSrc="./images/infographic/sankeyChart.svg"
+                imageSrc={`./images/infographic/sankeyChart-${
+                    i18n.language || "en"
+                }.svg`}
                 legend={[
                     i18n.t("activitiesOverTimeInfoScreen:legend-item1"),
                     i18n.t("activitiesOverTimeInfoScreen:legend-item2"),
