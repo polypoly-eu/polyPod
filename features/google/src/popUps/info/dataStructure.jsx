@@ -5,30 +5,26 @@ import i18n from "!silly-i18n";
 const DataStructure = () => {
     return (
         <>
-            <p>
-                First paragraph Lorem ipsum dolor sit amet, consectetur
-                adipiscingelit. Morbi volutpat, lectus vitae facilisis mattis,
-                leo sem fringilla tortor, quis pharetra elit augue et orci
-            </p>
+            <p>{i18n.t("dataStructureInfoScreen:text1")}</p>
             <Infographic
                 imageSrc="./images/infographic/sankeyChart.svg"
-                legend={[i18n.t("commonInfoScreens:baseInfo.title2"), "Two"]}
+                legend={[
+                    i18n.t("dataStructureInfoScreen:legend-item1"),
+                    i18n.t("dataStructureInfoScreen:legend-item2"),
+                    i18n.t("dataStructureInfoScreen:legend-item3"),
+                ]}
             />
 
             <p
                 dangerouslySetInnerHTML={{
-                    __html: i18n.t("commonInfoScreens:bubble.chart"),
+                    __html: i18n.t("commonInfoScreen:bubble.chart"),
                 }}
             />
             <div className="poly-separator separator-space"></div>
             <h1 className="about-title">
-                {i18n.t("commonInfoScreens:baseInfo.title2")}
+                {i18n.t("commonInfoScreen:baseInfo.title2")}
             </h1>
-            <p>
-                last paragraph Lorem ipsum dolor sit amet, consectetur
-                adipiscingelit. Morbi volutpat, lectus vitae facilisis mattis,
-                leo sem fringilla tortor, quis pharetra elit augue et orci
-            </p>
+            <p>{i18n.t("dataStructureInfoScreen:text2")}</p>
         </>
     );
 };
