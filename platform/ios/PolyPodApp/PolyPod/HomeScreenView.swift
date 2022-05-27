@@ -156,7 +156,7 @@ struct Constants {
     }
     
     struct Tile {
-        static let cornerRadius = 8.0
+        static let cornerRadius = PolyStyle.Spacing.plSpace2x
     }
     
     struct SmallTile {
