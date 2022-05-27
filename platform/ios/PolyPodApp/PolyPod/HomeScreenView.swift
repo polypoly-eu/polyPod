@@ -161,6 +161,11 @@ struct Constants {
         static let padding = 8.0
         static let cornerRadius = 8.0
     }
+    
+    struct SmallTile {
+        static let topPadding = PolyStyle.Spacing.plSpace6x
+        static let otherPadding = PolyStyle.Spacing.plSpace2x
+    }
 }
 
 struct Sizes {
@@ -218,6 +223,7 @@ struct HomeScreenView: View {
                 VStack(spacing: 0) {
                     Divider()
                     ScrollView(showsIndicators: false) {
+                        Spacer(minLength: Constants.Section.verticalSpacing)
                         ForEach(viewModel.sections, id: \.type) { sectionModel in
                             switch sectionModel.type {
                             case .yourData:
@@ -295,7 +301,8 @@ struct MyDataSectionView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: Constants.TileContainer.verticalSpacing) {
-            Text(sectionModel.title).fontWeight(.bold)
+            Text(sectionModel.title)
+                .fontWeight(.bold)
             ForEach(Array(sectionModel.cards.chunked(into: Constants.TileContainer.numberOfColumns).enumerated()),
                     id: \.offset) { index, chunk in
                 let type = containersConfig[index % containersConfig.count]
@@ -506,12 +513,14 @@ struct SmallCardView: View {
             Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
+            Spacer()
             Text(card.title)
                 .foregroundColor(foregroundColor)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
         }
-        .padding(Constants.Tile.padding)
+        .padding([.leading, .trailing, .bottom], Constants.SmallTile.otherPadding)
+        .padding([.top], Constants.SmallTile.topPadding)
         .frame(width: sizes.smallTileWidth, height: sizes.smallTileWidth)
         .background(card.backgroundColor)
         .cornerRadius(Constants.Tile.cornerRadius)
