@@ -78,13 +78,6 @@ final class HomeScreenViewModel: ObservableObject {
 
 // MARK: - UI sizes
 
-struct PolyFont {
-    let weight: Font.Weight
-    let size: CGFloat
-    let lineHeight: CGFloat
-    static let name = "Jost"
-}
-
 struct PolyStyle {
     struct Spacing {
         static let plSpace1x = 4.0
@@ -130,19 +123,47 @@ struct PolyStyle {
         }()
     }
     
-    struct Typography {
-        static let memTextHeading1 = PolyFont(weight: .bold, size: 56, lineHeight: 64)
-        static let memTextHeading2 = PolyFont(weight: .bold, size: 48, lineHeight: 56)
-        static let memTextHeading3 = PolyFont(weight: .bold, size: 40, lineHeight: 48)
-        static let memTextHeading4 = PolyFont(weight: .bold, size: 32, lineHeight: 40)
-        static let memTextHeading5 = PolyFont(weight: .bold, size: 24, lineHeight: 32)
-        static let memTextHeading6 = PolyFont(weight: .bold, size: 16, lineHeight: 24)
+    struct Font {
+        struct Family {
+            static let jostRegular = "Jost-Regular"
+            static let jostMedium = "Jost-Medium"
+        }
+        
+        struct Weight {
+            static let regular = SwiftUI.Font.Weight.regular
+            static let medium = SwiftUI.Font.Weight.medium
+        }
+        
+        struct Size {
+            static let xs = 12.0
+            static let sm = 14.0
+            static let base = 16.0
+            static let lg = 18.0
+            static let xl = 20.0
+            static let _2xl = 22.0
+        }
+        
+        struct Alignment {
+            static let center: TextAlignment = .center
+            static let left: TextAlignment = .leading
+            static let right: TextAlignment = .trailing
+        }
     }
 }
 
 struct Constants {
+    
+    struct Typography {
+        let font: Font
+        let alignment: TextAlignment
+    }
+    
     struct Section {
         static let verticalSpacing = PolyStyle.Spacing.plSpace8x
+        static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
+                                                          size: PolyStyle.Font.Size.lg)
+                                        .weight(PolyStyle.Font.Weight.medium),
+                                      alignment: PolyStyle.Font.Alignment.left)
     }
     
     struct View {
@@ -162,6 +183,10 @@ struct Constants {
     struct SmallTile {
         static let topPadding = PolyStyle.Spacing.plSpace6x
         static let otherPadding = PolyStyle.Spacing.plSpace2x
+        static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
+                                                    size: PolyStyle.Font.Size.xs)
+                                        .weight(PolyStyle.Font.Weight.medium),
+                                      alignment: PolyStyle.Font.Alignment.center)
     }
     
     struct MediumTile {
@@ -169,17 +194,51 @@ struct Constants {
         static let textVerticalSpacing = PolyStyle.Spacing.plSpace2x
         static let textTopBottomPadding = PolyStyle.Spacing.plSpace2x
         static let textTrailingPadding = PolyStyle.Spacing.plSpace4x
+        
+        static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
+                                                    size: PolyStyle.Font.Size.base)
+                                        .weight(PolyStyle.Font.Weight.medium),
+                                      alignment: PolyStyle.Font.Alignment.left)
+        static let description = Typography(font: .custom(PolyStyle.Font.Family.jostRegular,
+                                                          size: PolyStyle.Font.Size.xs)
+                                                .weight(PolyStyle.Font.Weight.regular),
+                                            alignment: PolyStyle.Font.Alignment.left)
     }
     
     struct BigTile {
         static let padding = PolyStyle.Spacing.plSpace3x
         static let verticalSpacing = PolyStyle.Spacing.plSpace2x
         static let textVerticalSpacing = PolyStyle.Spacing.plSpace2x
+        
+        static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
+                                                    size: PolyStyle.Font.Size.base)
+                                        .weight(PolyStyle.Font.Weight.medium),
+                                      alignment: PolyStyle.Font.Alignment.left)
+        static let description = Typography(font: .custom(PolyStyle.Font.Family.jostRegular,
+                                                          size: PolyStyle.Font.Size.xs)
+                                                .weight(PolyStyle.Font.Weight.regular),
+                                            alignment: PolyStyle.Font.Alignment.left)
     }
     
     struct Footer {
         static let verticalSpacing = PolyStyle.Spacing.plSpace4x
         static let padding = PolyStyle.Spacing.plSpace6x
+        
+        static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
+                                                    size: PolyStyle.Font.Size._2xl)
+                                        .weight(PolyStyle.Font.Weight.medium),
+                                      alignment: PolyStyle.Font.Alignment.left)
+        static let description = Typography(font: .custom(PolyStyle.Font.Family.jostRegular,
+                                                          size: PolyStyle.Font.Size.base)
+                                                .weight(PolyStyle.Font.Weight.regular),
+                                            alignment: PolyStyle.Font.Alignment.left)
+        
+        struct Button {
+            static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
+                                                        size: PolyStyle.Font.Size.lg)
+                                            .weight(PolyStyle.Font.Weight.medium),
+                                          alignment: PolyStyle.Font.Alignment.center)
+        }
     }
 }
 
@@ -317,7 +376,8 @@ struct MyDataSectionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: Constants.TileContainer.verticalSpacing) {
             Text(sectionModel.title)
-                .fontWeight(.bold)
+                .font(Constants.Section.title.font)
+                .multilineTextAlignment(Constants.Section.title.alignment)
             ForEach(Array(sectionModel.cards.chunked(into: Constants.TileContainer.numberOfColumns).enumerated()),
                     id: \.offset) { index, chunk in
                 let type = containersConfig[index % containersConfig.count]
@@ -455,9 +515,12 @@ struct BigCardView: View {
             VStack(alignment: .leading, spacing: Constants.BigTile.textVerticalSpacing) {
                 Text(card.title)
                     .foregroundColor(foregroundColor)
-                    .fontWeight(.bold)
+                    .font(Constants.BigTile.title.font)
+                    .multilineTextAlignment(Constants.BigTile.title.alignment)
                 Text(card.description)
                     .foregroundColor(foregroundColor)
+                    .font(Constants.BigTile.description.font)
+                    .multilineTextAlignment(Constants.BigTile.description.alignment)
             }
         }
         .padding(Constants.BigTile.padding)
@@ -494,9 +557,12 @@ struct MediumCardView: View {
             VStack(alignment: .leading, spacing: Constants.MediumTile.textVerticalSpacing) {
                 Text(card.title)
                     .foregroundColor(foregroundColor)
-                    .fontWeight(.bold)
+                    .font(Constants.MediumTile.title.font)
+                    .multilineTextAlignment(Constants.MediumTile.title.alignment)
                 Text(card.description)
                     .foregroundColor(foregroundColor)
+                    .font(Constants.MediumTile.description.font)
+                    .multilineTextAlignment(Constants.MediumTile.description.alignment)
             }
             .padding([.top, .bottom], Constants.MediumTile.textTopBottomPadding)
             .padding([.trailing], Constants.MediumTile.textTrailingPadding)
@@ -531,8 +597,8 @@ struct SmallCardView: View {
             Spacer()
             Text(card.title)
                 .foregroundColor(foregroundColor)
-                .fontWeight(.bold)
-                .multilineTextAlignment(.center)
+                .font(Constants.SmallTile.title.font)
+                .multilineTextAlignment(Constants.SmallTile.title.alignment)
         }
         .padding([.leading, .trailing, .bottom], Constants.SmallTile.otherPadding)
         .padding([.top], Constants.SmallTile.topPadding)
@@ -551,8 +617,12 @@ struct FooterView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: Constants.Footer.verticalSpacing) {
-            Text(model.title).fontWeight(.bold)
+            Text(model.title)
+                .font(Constants.Footer.title.font)
+                .multilineTextAlignment(Constants.Footer.title.alignment)
             Text(model.description)
+                .font(Constants.Footer.description.font)
+                .multilineTextAlignment(Constants.Footer.description.alignment)
             Image(model.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -560,6 +630,8 @@ struct FooterView: View {
             Button(model.buttonTitle) {
                 openLearnMoreAction()
             }
+            .font(Constants.Footer.Button.title.font)
+            .multilineTextAlignment(Constants.Footer.Button.title.alignment)
             .padding()
             .frame(maxWidth: .infinity, alignment: .center)
             .foregroundColor(model.buttonBackgroundColor.isLight ? .black : .white)
