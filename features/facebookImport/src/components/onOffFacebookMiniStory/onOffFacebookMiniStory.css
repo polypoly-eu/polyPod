@@ -17,7 +17,7 @@
 }
 
 .off-facebook-events-ministory-details h3 {
-    font-size: 24px;
+    font-size: var(--font-size-xl);
     font-family: "Jost Medium";
 }
 
@@ -35,7 +35,7 @@
 
 .off-facebook-events-ministory-details .legend div p {
     font-family: "Jost Medium";
-    font-size: 14px;
+    font-size: var(--font-size-m);
 }
 
 .off-facebook-events-ministory-details .legend div img {
@@ -55,7 +55,7 @@
 .off-facebook-events-ministory-details .divide-y p {
     font-family: "Jost Medium";
     flex: 1 1 auto;
-    font-size: 12px;
+    font-size: var(--font-size-s);
 }
 
 .off-facebook-events-ministory-details .divide-y .source {

@@ -14,7 +14,7 @@
 
 .scrollable-list ul .items {
     font-family: "Jost Medium";
-    font-size: 20px;
+    font-size: var(--font-size-l);
 }
 
 .list-gradient {

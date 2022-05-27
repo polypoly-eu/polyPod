@@ -11,7 +11,7 @@ import { GoogleContext } from "../../context/google-context.jsx";
 import { useHistory } from "react-router-dom";
 import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
 import "./importExplanationExpandable.css";
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 
 const isSectionOpened = (section, importStatus, importSteps) => {
     return {

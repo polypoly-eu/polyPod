@@ -9,6 +9,8 @@ import {
     BUBBLE_VIZ_WIDTH,
 } from "../../constants/bubbleViz";
 import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
+import i18n from "!silly-i18n";
+
 //This component needs to go to poly-look
 const DataStructureMiniStory = ({ data }) => {
     let totalFiles = 0;
@@ -53,10 +55,11 @@ const DataStructureMiniStory = ({ data }) => {
             <div>
                 <p
                     dangerouslySetInnerHTML={{
-                        __html: `dataStructureMiniStory:folder.info
-                            category ${category}
-                            selected_folder ${selectedFolder},
-                            amount_of_files ${amountOfFiles}`,
+                        __html: i18n.t("dataStructure:folder.info", {
+                            category: category,
+                            selected_folder: selectedFolder,
+                            amount_of_files: amountOfFiles,
+                        }),
                     }}
                 />
                 <PolyChart

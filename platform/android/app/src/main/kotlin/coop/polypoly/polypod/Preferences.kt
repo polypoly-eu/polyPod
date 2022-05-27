@@ -72,11 +72,16 @@ class Preferences {
             val keysItr: Iterator<String> = jsonObject.keys()
             while (keysItr.hasNext()) {
                 val k = keysItr.next()
-                val v = jsonObject.get(k) as JSONArray
                 val list = mutableListOf<String>()
-                for (i in 0 until v.length()) {
-                    val s = v.get(i) as String
-                    list.add(s)
+                val v = jsonObject.get(k)
+                (v as? JSONArray)?.let {
+                    for (i in 0 until it.length()) {
+                        val s = it.get(i) as String
+                        list.add(s)
+                    }
+                } ?: run {
+                    // Migrate old data - we used to store only a single file
+                    list.add(v as String)
                 }
                 outputMap[k] = list.toTypedArray()
             }

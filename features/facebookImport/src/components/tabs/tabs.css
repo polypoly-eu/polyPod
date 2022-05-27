@@ -15,7 +15,7 @@
     align-items: center;
     height: 100%;
     padding-bottom: 12px;
-    font-size: 14px;
+    font-size: var(--font-size-m);
     line-height: 16px;
     border-color: transparent;
     background-color: transparent;

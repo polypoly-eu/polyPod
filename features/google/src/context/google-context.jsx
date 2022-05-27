@@ -19,6 +19,7 @@ export const GoogleContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [globalError, setGlobalError] = useState(null);
     const [popUp, setPopUp] = useState({});
+    const [reportIsSent, setReportIsSent] = useState(false);
 
     const location = useLocation();
     const history = useHistory();
@@ -36,6 +37,10 @@ export const GoogleContextProvider = ({ children }) => {
         setIsLoading(true);
         await task();
         setIsLoading(false);
+    }
+
+    function handleReportSent(sentSuccessfully) {
+        setReportIsSent(sentSuccessfully);
     }
 
     const initPod = async () => await window.pod;
@@ -70,6 +75,9 @@ export const GoogleContextProvider = ({ children }) => {
                 setIsLoading,
                 runWithLoadingScreen,
                 setGlobalError,
+                handleBack,
+                handleReportSent,
+                reportIsSent,
             }}
         >
             {children}
