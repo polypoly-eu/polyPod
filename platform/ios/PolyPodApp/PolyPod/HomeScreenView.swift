@@ -178,8 +178,8 @@ struct Constants {
     }
     
     struct Footer {
-        static let verticalSpacing = 8.0
-        static let padding = 8.0
+        static let verticalSpacing = PolyStyle.Spacing.plSpace4x
+        static let padding = PolyStyle.Spacing.plSpace6x
     }
 }
 
