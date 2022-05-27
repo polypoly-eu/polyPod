@@ -8,16 +8,20 @@ const FILEEXT = ".json";
 const PLUGIN = "silly-i18n";
 const SUFFIX = `?${PLUGIN}`;
 
-function symmetricDifference(setA, setB) {
-    let _difference = new Set(setA);
-    for (let elem of setB) {
+function symmetricDifference(setPair) {
+    let _difference = new Set(setPair[0]);
+    let diffs = [];
+    for (let elem of setPair[1]) {
         if (_difference.has(elem)) {
             _difference.delete(elem);
         } else {
-            _difference.add(elem);
+            (diffs[1] ||= []).push(elem);
         }
     }
-    return _difference;
+    if (_difference) {
+        diffs[0] = _difference;
+    }
+    return diffs;
 }
 
 export default function (options) {
@@ -67,20 +71,21 @@ export default function (options) {
                     }
                 }
                 languageCombos.forEach((pair) => {
-                    const difference = symmetricDifference(
+                    const difference = symmetricDifference([
                         sectionSets[pair[0]],
-                        sectionSets[pair[1]]
-                    );
-                    if (difference) {
-                        difference.forEach((section) => {
-                            if (sectionSets[pair[0]].has(section)) {
-                                this.warn(
-                                    `⚠️ ${section} is included in ${pair[0]}, but not in ${pair[1]}`
-                                );
-                            } else {
-                                this.warn(
-                                    `⚠️ ${section} is included in ${pair[1]}, but not in ${pair[0]}`
-                                );
+                        sectionSets[pair[1]],
+                    ]);
+                    if (difference.length > 0) {
+                        [0, 1].forEach((element) => {
+                            if (
+                                element in difference &&
+                                difference[element].length > 0
+                            ) {
+                                difference[element].forEach((section) => {
+                                    this.warn(
+                                        `⚠️  ${section} is included only in language ${pair[element]}`
+                                    );
+                                });
                             }
                         });
                     }
