@@ -1,7 +1,7 @@
 import UserActivity from "../entities/user-activity";
 import { removeTimezone } from "./utils/importer-utils";
-
 const activityHtmlRegex = /\/My Activity\/.*\.html$/;
+import { matchRegex } from "./utils/lang-constants";
 
 class ActivityHtmlParser {
     constructor() {
@@ -49,7 +49,7 @@ export default class ActivitiesHtmlImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await zipFile.getEntries();
         const activityEntries = entries.filter(({ path }) =>
-            activityHtmlRegex.test(path)
+            matchRegex(path, this)
         );
         const parser = new ActivityHtmlParser();
         googleAccount.activities.push(

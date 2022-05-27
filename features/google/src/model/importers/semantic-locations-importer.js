@@ -1,8 +1,6 @@
 import ActivitySegment from "../entities/activity-segment";
 import PlaceVisit from "../entities/place-visit";
-
-const semanticLocationsRegex =
-    /\/[^/]+\/Semantic Location History\/\d+\/[^.]+\.json$/;
+import { matchRegex } from "./utils/lang-constants";
 
 async function readFullPathJSONFile(entry) {
     const rawContent = await entry.getContent();
@@ -70,7 +68,7 @@ export default class SemanticLocationsImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await zipFile.getEntries();
         const semanticLocationEntries = entries.filter(({ path }) =>
-            semanticLocationsRegex.test(path)
+            matchRegex(path, this)
         );
 
         const timelineObjectsByType = await Promise.all(
