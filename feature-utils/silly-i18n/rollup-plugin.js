@@ -83,7 +83,7 @@ export default function (options) {
                             ) {
                                 difference[element].forEach((section) => {
                                     this.warn(
-                                        `⚠️  ${section} is included only in language ${pair[element]}`
+                                        `⚠️  ${section} is included only in language «${pair[element]}»`
                                     );
                                 });
                             }
