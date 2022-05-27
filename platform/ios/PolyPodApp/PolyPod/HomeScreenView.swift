@@ -78,18 +78,80 @@ final class HomeScreenViewModel: ObservableObject {
 
 // MARK: - UI sizes
 
+struct PolyFont {
+    let weight: Font.Weight
+    let size: CGFloat
+    let lineHeight: CGFloat
+    static let name = "Jost"
+}
+
+struct PolyStyle {
+    struct Spacing {
+        static let plSpace1x = 4.0
+        static let plSpace2x = {
+            2 * Self.plSpace1x
+        }()
+        static let plSpace3x = {
+            3 * Self.plSpace1x
+        }()
+        static let plSpace4x = {
+            4 * Self.plSpace1x
+        }()
+        static let plSpace5x = {
+            5 * Self.plSpace1x
+        }()
+        static let plSpace6x = {
+            6 * Self.plSpace1x
+        }()
+        static let plSpace7x = {
+            7 * Self.plSpace1x
+        }()
+        static let plSpace8x = {
+            8 * Self.plSpace1x
+        }()
+    }
+    
+    struct Radius {
+        static let plRadiusBase1x = 4.0
+        static let plRadiusBase2x = {
+            2 * Self.plRadiusBase1x
+        }()
+        static let plRadiusBase3x = {
+            3 * Self.plRadiusBase1x
+        }()
+        static let plRadiusBase4x = {
+            4 * Self.plRadiusBase1x
+        }()
+        static let plRadiusBase5x = {
+            5 * Self.plRadiusBase1x
+        }()
+        static let plRadiusBase6x = {
+            6 * Self.plRadiusBase1x
+        }()
+    }
+    
+    struct Typography {
+        static let memTextHeading1 = PolyFont(weight: .bold, size: 56, lineHeight: 64)
+        static let memTextHeading2 = PolyFont(weight: .bold, size: 48, lineHeight: 56)
+        static let memTextHeading3 = PolyFont(weight: .bold, size: 40, lineHeight: 48)
+        static let memTextHeading4 = PolyFont(weight: .bold, size: 32, lineHeight: 40)
+        static let memTextHeading5 = PolyFont(weight: .bold, size: 24, lineHeight: 32)
+        static let memTextHeading6 = PolyFont(weight: .bold, size: 16, lineHeight: 24)
+    }
+}
+
 struct Constants {
     struct Section {
-        static let verticalSpacing = 32.0
+        static let verticalSpacing = PolyStyle.Spacing.plSpace8x
     }
     
     struct View {
-        static let horizontalPadding = 8.0
+        static let horizontalPadding = PolyStyle.Spacing.plSpace4x
     }
     
     struct TileContainer {
-        static let verticalSpacing = 16.0
-        static let horizontalSpacing = 16.0
+        static let verticalSpacing = PolyStyle.Spacing.plSpace3x
+        static let horizontalSpacing = PolyStyle.Spacing.plSpace3x
         static let numberOfColumns = 3
     }
     
