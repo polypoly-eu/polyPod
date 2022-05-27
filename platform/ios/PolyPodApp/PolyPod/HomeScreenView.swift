@@ -156,9 +156,6 @@ struct Constants {
     }
     
     struct Tile {
-        static let verticalSpacing = 8.0
-        static let horizontalSpacing = 8.0
-        static let padding = 8.0
         static let cornerRadius = 8.0
     }
     
@@ -172,6 +169,17 @@ struct Constants {
         static let textVerticalSpacing = PolyStyle.Spacing.plSpace2x
         static let textTopBottomPadding = PolyStyle.Spacing.plSpace2x
         static let textTrailingPadding = PolyStyle.Spacing.plSpace4x
+    }
+    
+    struct BigTile {
+        static let padding = PolyStyle.Spacing.plSpace3x
+        static let verticalSpacing = PolyStyle.Spacing.plSpace2x
+        static let textVerticalSpacing = PolyStyle.Spacing.plSpace2x
+    }
+    
+    struct Footer {
+        static let verticalSpacing = 8.0
+        static let padding = 8.0
     }
 }
 
@@ -438,13 +446,13 @@ struct BigCardView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: Constants.Tile.verticalSpacing) {
+        VStack(alignment: .leading, spacing: Constants.BigTile.verticalSpacing) {
             Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: sizes.bigTileWidth - 2 * Constants.Tile.padding, alignment: .center)
+                .frame(width: sizes.bigTileWidth - 2 * Constants.BigTile.padding, alignment: .center)
             
-            VStack(alignment: .leading, spacing: Constants.Tile.verticalSpacing) {
+            VStack(alignment: .leading, spacing: Constants.BigTile.textVerticalSpacing) {
                 Text(card.title)
                     .foregroundColor(foregroundColor)
                     .fontWeight(.bold)
@@ -452,7 +460,7 @@ struct BigCardView: View {
                     .foregroundColor(foregroundColor)
             }
         }
-        .padding(Constants.Tile.padding)
+        .padding(Constants.BigTile.padding)
         .frame(width: sizes.bigTileWidth,
                height: sizes.bigTileWidth)
         .background(card.backgroundColor)
@@ -480,8 +488,8 @@ struct MediumCardView: View {
             Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: sizes.smallTileWidth - 2 * Constants.Tile.padding,
-                       height: sizes.smallTileWidth - 2 * Constants.Tile.padding,
+                .frame(width: sizes.smallTileWidth,
+                       height: sizes.smallTileWidth,
                        alignment: .center)
             
             VStack(alignment: .leading, spacing: Constants.MediumTile.textVerticalSpacing) {
@@ -517,7 +525,7 @@ struct SmallCardView: View {
     }
     
     var body: some View {
-        VStack(alignment: .center, spacing: Constants.Tile.verticalSpacing) {
+        VStack(alignment: .center) {
             Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -543,7 +551,7 @@ struct FooterView: View {
     var openLearnMoreAction: () -> Void = { }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: Constants.Tile.verticalSpacing) {
+        VStack(alignment: .leading, spacing: Constants.Footer.verticalSpacing) {
             Text(model.title).fontWeight(.bold)
             Text(model.description)
             Image(model.imageName)
@@ -560,7 +568,7 @@ struct FooterView: View {
             .cornerRadius(Constants.Tile.cornerRadius)
             
         }
-        .padding(Constants.Tile.padding)
+        .padding(Constants.Footer.padding)
         .background(model.backgroundColor)
         .cornerRadius(Constants.Tile.cornerRadius)
     }
