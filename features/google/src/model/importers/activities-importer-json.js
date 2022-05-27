@@ -2,9 +2,6 @@ import UserActivity from "../entities/user-activity";
 import { removeTimezone } from "./utils/importer-utils";
 import { matchRegex } from "./utils/lang-constants";
 
-const activityJsonRegex = /\/My Activity\/.*\.json$/;
-
-
 class ActivityJsonParser {
     constructor() {}
     async parse(entry) {

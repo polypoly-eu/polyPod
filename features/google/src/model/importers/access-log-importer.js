@@ -1,7 +1,6 @@
 import AccessLogEntry from "../entities/access-log-entry";
 import { readCsvFromText } from "./utils/importer-utils";
 import { removeTimezone } from "./utils/importer-utils";
-const accessLogRegex = /\/Access Log Activity\/.*\.csv$/;
 import { matchRegex } from "./utils/lang-constants";
 
 class AccessLogParser {
