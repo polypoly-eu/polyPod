@@ -25,15 +25,15 @@ export default (commandLineArgs) => {
         },
         plugins: [
             sillyI18n(),
+            genPodjs({
+                build_dir: "./dist",
+                manifestPath: "./src/static/manifest.json",
+            }),
             svg(),
             css({ output: "css/bundle.css" }),
             sucrase({
                 transforms: ["jsx"],
                 production: true,
-            }),
-            genPodjs({
-                build_dir: "./dist",
-                manifestPath: "./src/static/manifest.json",
             }),
             copy({
                 targets: [
