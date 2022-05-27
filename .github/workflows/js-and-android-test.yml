@@ -30,6 +30,7 @@ jobs:
                     platform/core/tools/NDK_r22b
                     platform/coreflatbuffers_shared/flatbuffers_v2.0.0
                     platform/coreflatbuffers_shared/flatc_v2.0.0
+                    ~/.cargo/bin/cargo-ndk
                   key: ${{ runner.os }}-core_dependencies
             - name: Checks paths to rebuild Android
               uses: dorny/paths-filter@b2feaf19c27470162a626bd6fa8438ae5b263721 #v2.10.2
