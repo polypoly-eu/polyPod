@@ -491,7 +491,6 @@ struct MediumCardView: View {
                 .frame(width: sizes.smallTileWidth,
                        height: sizes.smallTileWidth,
                        alignment: .center)
-            
             VStack(alignment: .leading, spacing: Constants.MediumTile.textVerticalSpacing) {
                 Text(card.title)
                     .foregroundColor(foregroundColor)
@@ -501,7 +500,7 @@ struct MediumCardView: View {
             }
             .padding([.top, .bottom], Constants.MediumTile.textTopBottomPadding)
             .padding([.trailing], Constants.MediumTile.textTrailingPadding)
-            Spacer()
+            Spacer(minLength: 0.0)
         }
         .frame(width: sizes.mediumTileWidth, height: sizes.smallTileWidth)
         .background(card.backgroundColor)
