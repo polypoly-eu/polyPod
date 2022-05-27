@@ -166,6 +166,13 @@ struct Constants {
         static let topPadding = PolyStyle.Spacing.plSpace6x
         static let otherPadding = PolyStyle.Spacing.plSpace2x
     }
+    
+    struct MediumTile {
+        static let horizontalSpacing = PolyStyle.Spacing.plSpace3x
+        static let textVerticalSpacing = PolyStyle.Spacing.plSpace2x
+        static let textTopBottomPadding = PolyStyle.Spacing.plSpace2x
+        static let textTrailingPadding = PolyStyle.Spacing.plSpace4x
+    }
 }
 
 struct Sizes {
@@ -469,7 +476,7 @@ struct MediumCardView: View {
     }
     
     var body: some View {
-        HStack(spacing: Constants.Tile.horizontalSpacing) {
+        HStack(spacing: Constants.MediumTile.horizontalSpacing) {
             Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -477,16 +484,17 @@ struct MediumCardView: View {
                        height: sizes.smallTileWidth - 2 * Constants.Tile.padding,
                        alignment: .center)
             
-            VStack(alignment: .leading, spacing: Constants.Tile.verticalSpacing) {
+            VStack(alignment: .leading, spacing: Constants.MediumTile.textVerticalSpacing) {
                 Text(card.title)
                     .foregroundColor(foregroundColor)
                     .fontWeight(.bold)
                 Text(card.description)
                     .foregroundColor(foregroundColor)
             }
+            .padding([.top, .bottom], Constants.MediumTile.textTopBottomPadding)
+            .padding([.trailing], Constants.MediumTile.textTrailingPadding)
             Spacer()
         }
-        .padding(Constants.Tile.padding)
         .frame(width: sizes.mediumTileWidth, height: sizes.smallTileWidth)
         .background(card.backgroundColor)
         .cornerRadius(Constants.Tile.cornerRadius)
@@ -621,7 +629,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                       image: UIImage(named: "FacebookImport")!,
                       backgroundColor: .blue)
               ],
-              type: .yourData)
+              type: .tools)
     ]
     
     class MockStorage: HomeScreenStorage {
