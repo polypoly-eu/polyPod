@@ -107,38 +107,29 @@ const ImportExplanationExpandable = ({
     const bodyContent = {
         request: (
             <>
-                <p>
-                    To import your data to your polyPod you need to request it
-                    from Google first.
-                </p>
-                <InfoBox textContent="You will need to have your login details to hand." />
+                <img
+                    src="./images/request-illustration.svg"
+                    alt="request-illustration"
+                    className="full-screen"
+                />
+                <p>{i18n.t("import:request.1")}</p>
+                <InfoBox textContent={i18n.t("import:request.info.1")} />
                 <div className="poly-separator"></div>
-                <h4>How it works:</h4>
-                <p>Go to https://takeout.google.com/</p>
-                <p>
-                    In order to analyse your data correctly you need to modify
-                    the default option by tapping in the deselect all button.
-                    Now we need you to select a maximum of 3 services where you
-                    created data for, such as PROFILE, ACCESS LOG ACTIVITY, MY
-                    ACTIVITY or LOCATION HISTORY.
-                </p>
+                <h4>{i18n.t("import:how.it.works")}</h4>
+                <p>{i18n.t("import:request.2")}</p>
+                <p>{i18n.t("import:request.3")}</p>
                 <img src="./images/document.svg" alt="document" />
-                <p>
-                    For MY ACTIVITY or PROFILE is important that you change the
-                    format from HTML (default) to JSON by tapping in the format
-                    button and accessing the drop down options. Then request the
-                    file. You will get an email confirmation of your request.
-                </p>
-                <InfoBox textContent="IMPORTANT: by making the request in a different format as described could result in your pod not being able to read your data and provide meaningful information. Your request will be available for downloading for up to 7 days." />
+                <p>{i18n.t("import:request.4")}</p>
+                <InfoBox textContent={i18n.t("import:request.info.2")} />
                 <PolyButton
                     className="bg-red"
                     onClick={() => handleRequestStatus()}
-                    label="Make your request"
+                    label={i18n.t("import:request.button")}
                 ></PolyButton>
                 <PolyButton
                     type="outline"
                     onClick={() => handleExampleDataRequest()}
-                    label="Use example data"
+                    label={i18n.t("import:request.example.data")}
                 ></PolyButton>
             </>
         ),
@@ -149,34 +140,23 @@ const ImportExplanationExpandable = ({
                     alt="download-illustration"
                     className="full-screen"
                 />
-                <p>
-                    After you have requested your data, Google will notify you
-                    when you can download it to your phone.
-                </p>
-                <InfoBox textContent="It can take up to 24 hours before your data is available!" />
+                <p>{i18n.t("import:download.1")}</p>
+                <InfoBox textContent={i18n.t("import:download.info")} />
                 <div className="poly-separator"></div>
-                <h4>How it works:</h4>
+                <h4>{i18n.t("import:how.it.works")}</h4>
                 <img src="./images/letter.svg" alt="letter" />
-                <p>
-                    Once your data is available you will receive an email by
-                    Google. Since the export might be too big for a single file,
-                    you probably will have to download multiple packages.
-                </p>
+                <p>{i18n.t("import:download.2")}</p>
                 <img src="./images/download.svg" alt="document" />
-                <p>
-                    In the &apos;Manage your exports&apos; section of the
-                    takeout page you can download the files. All of them will be
-                    saved to your phone in .zip format
-                </p>
+                <p>{i18n.t("import:download.3")}</p>
                 <PolyButton
                     className="bg-red"
                     onClick={() => handleDownloadDataLinkClick()}
-                    label="Download your data"
+                    label={i18n.t("import:download.button.1")}
                 ></PolyButton>
                 <PolyButton
                     type="outline"
                     onClick={() => onUpdateImportStatus(importSteps.import)}
-                    label="Already downloaded your data?"
+                    label={i18n.t("import:download.button.2")}
                 ></PolyButton>
             </>
         ),
@@ -187,40 +167,44 @@ const ImportExplanationExpandable = ({
                     alt="import-illustration"
                     className="full-screen"
                 />
-                <p>
-                    After you have downloaded your data file onto your phone you
-                    can import it into your polyPod.
-                </p>
-                <InfoBox textContent="Please be sure to import all the packages you originally downloaded" />
+                <p>{i18n.t("import:import.1")}</p>
+                <InfoBox textContent={i18n.t("import:import.info")} />
                 <div className="poly-separator"></div>
                 <div className="x-divider">
                     {files?.length ? (
                         <div className="file-info">
-                            <h5>Selected file:</h5>
-                            <p>Name: {files[0]?.name}</p>
+                            <h5>{i18n.t("import:import.chosen")}</h5>
                             <p>
-                                Size:
+                                {i18n.t("import:import.name")} {files[0]?.name}
+                            </p>
+                            <p>
+                                {i18n.t("import:import.size")}
                                 {formatSize(files[0]?.size)}
                             </p>
                         </div>
                     ) : selectedFile ? (
                         <div className="file-info">
-                            <h5>Selected file:</h5>
-                            <p>Name: {selectedFile?.name}</p>
+                            <h5>{i18n.t("import:import.chosen")}</h5>
                             <p>
-                                Size:
+                                {i18n.t("import:import.name")}{" "}
+                                {selectedFile?.name}
+                            </p>
+                            <p>
+                                {i18n.t("import:import.size")}
                                 {formatSize(selectedFile.size)}
                             </p>
                         </div>
                     ) : (
-                        <h5>No file selected</h5>
+                        <h5>{i18n.t("import:import.none.chosen")}</h5>
                     )}
                 </div>
                 <PolyButton
                     type="outline"
                     onClick={handleSelectFile}
                     label={
-                        selectedFile ? "Select different File" : "Select File"
+                        selectedFile
+                            ? i18n.t("import:import.button.1.different")
+                            : i18n.t("import:import.button.1")
                     }
                 ></PolyButton>
                 <PolyButton
@@ -229,7 +213,7 @@ const ImportExplanationExpandable = ({
                     label="Import File"
                     disabled={selectedFile ? "" : "disabled"}
                 >
-                    Import File
+                    {i18n.t("import:import.button.2")}
                 </PolyButton>
             </>
         ),
@@ -240,26 +224,23 @@ const ImportExplanationExpandable = ({
                     alt="explore-illustration"
                     className="full-screen"
                 />
-                <p>
-                    After you have imported your Google data to your polyPod you
-                    can explore it and see what Google really knows about you.
-                    If you want to be extra cautious with the data on your
-                    phone, you can safely delete the downloaded zip archive now.
-                </p>
+                <p>{i18n.t("import:explore.1")}</p>
                 {files?.length > 0 ? (
                     <>
-                        <p>Imported File: {files[0]?.name}</p>
+                        <p>
+                            {i18n.t("import:imported.file")} {files[0]?.name}
+                        </p>
                         <RoutingWrapper history={history} route="/overview">
                             <PolyButton
                                 className="bg-red"
-                                label="Start exploring"
+                                label={i18n.t("import:explore.button")}
                             ></PolyButton>
                         </RoutingWrapper>
                     </>
                 ) : (
                     <PolyButton
                         className="bg-red"
-                        label="Start exploring"
+                        label={i18n.t("import:explore.button")}
                         disabled="disabled"
                     ></PolyButton>
                 )}
@@ -274,14 +255,14 @@ const ImportExplanationExpandable = ({
             className="explanation-expandable"
         >
             <div className="intro">
-                <h1>Find out what Google knows about you!</h1>
-                <h1>How to add your Google data to your polyPod</h1>
-                <InfoBox textContent="Only a copy of your data is created, your Google account remains unchanged." />
+                <h1>{i18n.t("import:intro.text.1")}</h1>
+                <h1>{i18n.t("import:intro.text.2")}</h1>
+                <InfoBox textContent={i18n.t("import:intro.info")} />
             </div>
             <ScrollLabel
                 scrollRef={expandableRef}
                 img="./images/scroll-down.svg"
-                scrollLabelText="Scroll down"
+                scrollLabelText={i18n.t("import:scroll.down")}
             />
             {Object.values(importSections).map((section, index) => (
                 <div key={index} className={`section ${section}`}>
