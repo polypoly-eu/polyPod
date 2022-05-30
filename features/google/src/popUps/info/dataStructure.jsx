@@ -1,19 +1,40 @@
 import React from "react";
 import { Infographic } from "@polypoly-eu/poly-look";
 import i18n from "!silly-i18n";
-
+import svg from "../../static/images/infographic/packedCircleChart.svg";
 const DataStructure = () => {
     return (
         <>
             <p>{i18n.t("dataStructureInfoScreen:text1")}</p>
             <Infographic
-                imageSrc={`./images/infographic/sankeyChart-${
-                    i18n.language || "en"
-                }.svg`}
-                legend={[
+                image={{
+                    svg: svg,
+                    texts: {
+                        text1: i18n.t(
+                            "commonInfoScreen:infographic.value.category"
+                        ),
+                    },
+                }}
+                explanation={[
                     i18n.t("dataStructureInfoScreen:legend-item1"),
                     i18n.t("dataStructureInfoScreen:legend-item2"),
                     i18n.t("dataStructureInfoScreen:legend-item3"),
+                ]}
+                legend={[
+                    {
+                        type: "circle",
+                        items: [
+                            { color: "#3749A9", description: "Legend A" },
+                            {
+                                color: "#3BA6FF",
+                                description: "Legend B",
+                            },
+                        ],
+                        tooltip: {
+                            label: "1",
+                            pointerDirection: "down",
+                        },
+                    },
                 ]}
             />
 

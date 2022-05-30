@@ -1,16 +1,36 @@
 import React from "react";
 import { Infographic } from "@polypoly-eu/poly-look";
 import i18n from "!silly-i18n";
-
+import svg from "../../static/images/infographic/barChart.svg";
 const ActivitiesOverTime = () => {
     return (
         <>
             <p>{i18n.t("activitiesOverTimeInfoScreen:text1")}</p>
             <Infographic
-                imageSrc={`./images/infographic/sankeyChart-${
-                    i18n.language || "en"
-                }.svg`}
+                image={{
+                    svg: svg,
+                    texts: {
+                        text1: i18n.t("commonInfoScreen:infographic.y.axis"),
+                        text2: i18n.t("commonInfoScreen:infographic.x.axis"),
+                    },
+                }}
                 legend={[
+                    {
+                        type: "block",
+                        items: [
+                            { color: "#3749A9", description: "Legend A" },
+                            {
+                                color: "#3BA6FF",
+                                description: "Legend B",
+                            },
+                        ],
+                        tooltip: {
+                            label: "1",
+                            pointerDirection: "down",
+                        },
+                    },
+                ]}
+                explanation={[
                     i18n.t("activitiesOverTimeInfoScreen:legend-item1"),
                     i18n.t("activitiesOverTimeInfoScreen:legend-item2"),
                     i18n.t("activitiesOverTimeInfoScreen:legend-item3"),
