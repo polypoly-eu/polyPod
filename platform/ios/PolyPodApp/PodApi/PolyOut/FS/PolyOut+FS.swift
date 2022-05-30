@@ -234,12 +234,13 @@ extension PolyOut {
     
     func removeArchive(fileId: String, completionHandler: (Error?) -> Void) {
         do {
-            let path = fsUriFromId(fileId).path
+            let path = fsUriFromId(idFromPodUrl(fileId)!).path
             if FileManager.default.fileExists(atPath: path) {
                 try FileManager.default.removeItem(atPath: path)
             }
+            throw PolyOutError.failedToParsePath(fileId)
         }
-        catch {}
+        catch {completionHandler(PolyOutError.failedToParsePath(fileId))}
         var fileStore = UserDefaults.standard.value(
             forKey: PolyOut.fsKey
         ) as? [String:[String]] ?? [:]
