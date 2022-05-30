@@ -68,14 +68,6 @@ export default (commandLineArgs) => {
             replace({
                 preventAssignment: true,
                 "process.env.NODE_ENV": JSON.stringify("development"),
-                "process.env.POLYPOD_POLYPEDIA_REPORT_URL": JSON.stringify(
-                    process.env.POLYPOD_POLYPEDIA_REPORT_URL || fallbackURL
-                ),
-                "process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION":
-                    JSON.stringify(
-                        process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION ||
-                            fallbackAuthorization
-                    ) || "",
             }),
             commonjs({
                 include: /node_modules/,
