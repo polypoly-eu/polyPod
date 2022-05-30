@@ -17,10 +17,15 @@
   flex-direction: column;
 }
 
-.poly-infographic img {
+.poly-infographic svg {
   padding: calc(var(--gdu) * 4);
   box-sizing: border-box;
   width: 100%;
+}
+.poly-infographic .svg-field {
+  color: var(--color-indigo-950);
+  font-size:  var(--font-size-s);
+  font-family: var(--jost-medium);
 }
 
 .poly-infographic .entry {

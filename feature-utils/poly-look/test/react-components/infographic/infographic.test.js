@@ -7,7 +7,10 @@ import { Infographic } from "../../../src/react-components";
 describe("Infographic", () => {
   it("renders correctly", () => {
     const props = {
-      imageSrc: "./none.svg",
+      image: {
+        svg: "<svg></svg>",
+        texts: {},
+      },
       explanation: ["one", "two"],
       legend: [
         {
@@ -16,9 +19,9 @@ describe("Infographic", () => {
         },
       ],
     };
-    const { getByRole, queryAllByTestId } = render(<Infographic {...props} />);
+    const { queryAllByTestId, container } = render(<Infographic {...props} />);
 
-    expect(getByRole("img")).toBeTruthy();
+    expect(container.querySelector("svg")).toBeTruthy();
 
     const explanationEntries = queryAllByTestId("infographic-entry-test");
     expect(explanationEntries.length).toBe(props.explanation.length);

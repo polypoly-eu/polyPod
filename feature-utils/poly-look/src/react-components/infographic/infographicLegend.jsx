@@ -1,5 +1,5 @@
 import React from "react";
-import { Tooltip } from "./";
+import Tooltip from "./tooltip.jsx";
 import { LineLegend, BlockLegend, CircleLegend } from "../legends.jsx";
 
 import "./infographicLegend.css";

@@ -3,6 +3,7 @@ import { Infographic } from "../../../src/react-components";
 
 import "../../../src/css/index.js";
 import "./fontFamily.css";
+import svg from "!!raw-loader!../../assets/images/nodes.svg";
 
 export default {
   title: "Visuals/Organisms/Infographic",
@@ -14,7 +15,10 @@ const Template = (args) => <Infographic {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-  imageSrc: "./images/nodes.svg",
+  image: {
+    svg: svg,
+    texts: { text1: "One text" },
+  },
   explanation: [
     "A legend with multiple elements and one tooltip positioned above",
     "Technically not really a legend, but we need to be able to add text somehow. Use type `text` to render a single line of text",
