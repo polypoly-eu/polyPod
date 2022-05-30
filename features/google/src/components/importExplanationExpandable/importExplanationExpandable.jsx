@@ -75,13 +75,16 @@ const ImportExplanationExpandable = ({
         return Math.round(size / Math.pow(k, i), decimals) + " " + units[i - 1];
     };
 
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFiles, setSelectedFiles] = useState([]);
 
     const handleSelectFile = async () => {
         const { polyNav } = pod;
         runWithLoadingScreen(async function () {
             try {
-                setSelectedFile(await polyNav.pickFile("application/zip"));
+                setSelectedFiles([
+                    ...selectedFiles,
+                    await polyNav.pickFile("application/zip"),
+                ]);
             } catch (error) {
                 setGlobalError(new FileSelectionError(error));
             }
@@ -89,14 +92,16 @@ const ImportExplanationExpandable = ({
     };
 
     const handleImportFile = async () => {
-        if (!selectedFile) return;
+        if (!selectedFiles.length) return;
         const { polyOut } = pod;
         if (files?.[0]?.id) handleRemoveFile(files[0].id);
         runWithLoadingScreen(async function () {
             try {
-                await polyOut.importArchive(selectedFile.url);
+                let destUrl;
+                for (let { url } of selectedFiles)
+                    destUrl = await polyOut.importArchive(url, destUrl);
                 refreshFiles();
-                setSelectedFile(null);
+                setSelectedFiles([]);
             } catch (error) {
                 setGlobalError(new FileImportError(error));
             }
@@ -184,22 +189,19 @@ const ImportExplanationExpandable = ({
                 <div className="separator"></div>
                 <div className="x-divider">
                     {files?.length ? (
+                        <h5>File imported successfully</h5>
+                    ) : selectedFiles ? (
                         <div className="file-info">
-                            <h5>Selected file:</h5>
-                            <p>Name: {files[0]?.name}</p>
-                            <p>
-                                Size:
-                                {formatSize(files[0]?.size)}
-                            </p>
-                        </div>
-                    ) : selectedFile ? (
-                        <div className="file-info">
-                            <h5>Selected file:</h5>
-                            <p>Name: {selectedFile?.name}</p>
-                            <p>
-                                Size:
-                                {formatSize(selectedFile.size)}
-                            </p>
+                            <h5>Selected files:</h5>
+                            {selectedFiles.map((selectedFile, i) => (
+                                <div key={i}>
+                                    <p>Name: {selectedFile.name}</p>
+                                    <p>
+                                        Size:
+                                        {formatSize(selectedFile.size)}
+                                    </p>
+                                </div>
+                            ))}
                         </div>
                     ) : (
                         <h5>No file selected</h5>
@@ -209,14 +211,20 @@ const ImportExplanationExpandable = ({
                     type="outline"
                     onClick={handleSelectFile}
                     label={
-                        selectedFile ? "Select different File" : "Select File"
+                        selectedFiles.length > 0
+                            ? "Select another File"
+                            : "Select File"
                     }
                 ></PolyButton>
                 <PolyButton
                     className="bg-red"
                     onClick={handleImportFile}
-                    label="Import File"
-                    disabled={selectedFile ? "" : "disabled"}
+                    label={
+                        selectedFiles.length > 1
+                            ? "Import Files"
+                            : "Import File"
+                    }
+                    disabled={selectedFiles ? "" : "disabled"}
                 >
                     Import File
                 </PolyButton>
