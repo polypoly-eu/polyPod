@@ -21,7 +21,7 @@ import {
   PolyImportProvider,
 } from "./contexts/poly-import.jsx";
 import { RoutingWrapper } from "./routing";
-import { Infographic, Tooltip } from "./infographic";
+import { Infographic, Tooltip, InfographicLegend } from "./infographic";
 export {
   Chip,
   InfoBox,
@@ -49,4 +49,5 @@ export {
   BaseOverlay,
   Infographic,
   Tooltip,
+  InfographicLegend,
 };

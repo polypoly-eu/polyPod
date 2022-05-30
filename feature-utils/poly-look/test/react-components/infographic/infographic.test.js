@@ -8,17 +8,26 @@ describe("Infographic", () => {
   it("renders correctly", () => {
     const props = {
       imageSrc: "./none.svg",
-      legend: ["one", "two"],
+      explanation: ["one", "two"],
+      legend: [
+        {
+          type: "text",
+          items: "Test text",
+        },
+      ],
     };
     const { getByRole, queryAllByTestId } = render(<Infographic {...props} />);
 
     expect(getByRole("img")).toBeTruthy();
 
-    const legendEntries = queryAllByTestId("infographic-entry-test");
-
-    expect(legendEntries.length).toBe(props.legend.length);
-    legendEntries.forEach((entry, idx) => {
-      expect(entry.querySelector(".text")).toHaveTextContent(props.legend[idx]);
+    const explanationEntries = queryAllByTestId("infographic-entry-test");
+    expect(explanationEntries.length).toBe(props.explanation.length);
+    explanationEntries.forEach((entry, idx) => {
+      expect(entry.querySelector(".text")).toHaveTextContent(
+        props.explanation[idx]
+      );
     });
+    const legendEntries = queryAllByTestId("infographic-legend-entry-test");
+    expect(legendEntries.length).toBe(props.legend.length);
   });
 });

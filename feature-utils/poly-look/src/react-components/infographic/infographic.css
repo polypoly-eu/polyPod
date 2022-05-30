@@ -14,6 +14,7 @@
   background-color: var(--color-gray-50);
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 .poly-infographic img {
@@ -27,7 +28,7 @@
   margin-bottom: calc(var(--gdu) * 4);
 }
 
-.poly-infographic .number {
+.poly-infographic .explanation-container .number {
   flex-shrink: 0;
   width: calc(var(--gdu) * 4);
   height: calc(var(--gdu) * 4);
@@ -40,6 +41,6 @@
   justify-content: center;
 }
 
-.poly-infographic .text {
+.poly-infographic .explanation-container .text {
   margin-left: calc(var(--gdu) * 3);
 }
