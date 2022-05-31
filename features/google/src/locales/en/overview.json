@@ -3,5 +3,6 @@
     "analysed.categories": "From all your google data we currently analysed these {{analysed_categories}} categories:",
     "import.new.file": "Import new file",
     "imported.file": "Imported file:",
+    "size": "Size:",
     "delete.file.confirmation": "Do you really want to delete the current file?"
 }

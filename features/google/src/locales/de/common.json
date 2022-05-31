@@ -6,5 +6,10 @@
     "details": "Details",
     "explore": "Erkunden",
     "proceed": "Weiter",
-    "back": "Zurück"
+    "back": "Zurück",
+    "format.byte": "1 Byte",
+    "format.bytes": "Bytes",
+    "format.KB": "KB",
+    "format.MB": "MB",
+    "format.GB": "GB"
 }
