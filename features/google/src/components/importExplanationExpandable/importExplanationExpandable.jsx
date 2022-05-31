@@ -97,9 +97,11 @@ const ImportExplanationExpandable = ({
         if (files?.[0]?.id) handleRemoveFile(files[0].id);
         runWithLoadingScreen(async function () {
             try {
-                let destUrl;
-                for (let { url } of selectedFiles)
-                    destUrl = await polyOut.importArchive(url, destUrl);
+                const destUrl = await polyOut.importArchive(
+                    selectedFiles[0].url
+                );
+                for (const { url } of selectedFiles.slice(1))
+                    await polyOut.importArchive(url, destUrl);
                 refreshFiles();
                 setSelectedFiles([]);
             } catch (error) {
