@@ -3,5 +3,6 @@
     "analysed.categories": "Von Deinen Google-Daten haben wir {{analysed_categories}} Kategorien analysiert:",
     "import.new.file": "Neue Datei importieren",
     "imported.file": "Importierte Datei:",
+    "size": "Größe:",
     "delete.file.confirmation": "Möchtest du wirklich die aktuelle Datei löschen?"
 }

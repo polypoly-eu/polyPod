@@ -59,6 +59,20 @@ const Overview = () => {
         return b.value - a.value;
     });
 
+    const formatSize = (size) => {
+        const k = 1024;
+        const decimals = 2;
+        if (size === 1) return i18n.t("common:format.byte");
+        if (size < k) return `${size} ${i18n.t("common:format.bytes")}`;
+        const units = [
+            i18n.t("common:format.KB"),
+            i18n.t("common:format.MB"),
+            i18n.t("common:format.GB"),
+        ];
+        const i = Math.floor(Math.log(size) / Math.log(k));
+        return Math.round(size / Math.pow(k, i), decimals) + " " + units[i - 1];
+    };
+
     return (
         <Screen className="overview" layout="poly-standard-layout">
             <h1>{i18n.t("overview:your.google.data")}</h1>
@@ -79,9 +93,13 @@ const Overview = () => {
                 }
             />
             {files && files?.[0] && (
-                <p className="poly-small-print">
-                    {i18n.t("overview:imported.file")} {files[0].name}
-                </p>
+                <>
+                    <p className="poly-small-print">
+                        {i18n.t("overview:imported.file")} {files[0].name}
+                        <br />
+                        {i18n.t("overview:size")} {formatSize(files[0].size)}
+                    </p>
+                </>
             )}
             <PolyButton
                 label={i18n.t("overview:import.new.file")}
