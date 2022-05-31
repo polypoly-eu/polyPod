@@ -39,12 +39,13 @@ public final class Core {
     public func bootstrap(languageCode: String) -> Result<Void, Error> {
         // Force unwrap should be safe
         self.languageCode = NSString(string: languageCode).utf8String!
-        
-        return processCoreResponse(core_bootstrap(languageCode)) { byteBuffer in
+        return Result {
+            let responseBytes = core_bootstrap(languageCode)
+            let byteBuffer = ByteBuffer(cByteBuffer: responseBytes)
             let response = CoreBootstrapResponse.getRootAsCoreBootstrapResponse(bb: byteBuffer)
             if let failure = response.failure {
                 throw PolyPodCoreError.internalCoreFailure(context: "Failed to bootstrap core",
-                                                           failure: FBObject(byteBuffer, failure))
+                                                           failure: FBObject(responseBytes.data, failure))
             }
         }
     }
@@ -53,16 +54,18 @@ public final class Core {
     /// - Parameter json: Raw JSON to parse the FeatureManifest from
     /// - Returns: A FeatureManifest if parsing succeded, nil otherwise
     public func parseFeatureManifest(json: String) -> Result<FBObject<FeatureManifest>, Error> {
-        processCoreResponse(parse_feature_manifest_from_json(json)) { byteBuffer in
+        Result {
+            let responseBytes = parse_feature_manifest_from_json(json)
+            let byteBuffer = ByteBuffer(cByteBuffer: responseBytes)
             let response = FeatureManifestParsingResponse.getRootAsFeatureManifestParsingResponse(bb: byteBuffer)
             switch response.resultType {
             case .featuremanifest:
-                return FBObject(byteBuffer, response.result(type: FeatureManifest.self))
+                return FBObject(responseBytes.data, response.result(type: FeatureManifest.self))
             case .failure:
                 if let failure = response.result(type: Failure.self) {
                     throw PolyPodCoreError.internalCoreFailure(
                         context: "Failed to load Feature Manifest",
-                        failure: FBObject(byteBuffer, failure)
+                        failure: FBObject(responseBytes.data, failure)
                     )
                 } else {
                     throw PolyPodCoreError.invalidFailure(context: "Failed to load Feature Manifest")
@@ -75,16 +78,10 @@ public final class Core {
             }
         }
     }
-    
-    // MARK: - Private utils
-    
-    private func processCoreResponse<T>(_ responseByteBuffer: CByteBuffer,
-                                        flatbufferMapping: (ByteBuffer) throws -> T) -> Result<T, Error> {
-        return Result {
-            try flatbufferMapping(
-                ByteBuffer(assumingMemoryBound: responseByteBuffer.data,
-                           capacity: Int(responseByteBuffer.length))
-            )
-        }
+}
+
+extension ByteBuffer {
+    init(cByteBuffer: CByteBuffer) {
+        self.init(assumingMemoryBound: cByteBuffer.data, capacity: Int(cByteBuffer.length))
     }
 }

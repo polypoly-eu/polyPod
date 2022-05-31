@@ -7,17 +7,13 @@ import FlatBuffers
 /// It will make sure to deallocate the memory once the model is no more used.
 public final class FBObject<FBModel> {
     /// The bytes storage for the fbModel
-    private let rawPointer: UnsafeMutableRawPointer
+    private let rawPointer: UnsafeMutablePointer<UInt8>
     /// The underlying flatbuffer model.
     private let fbModel: FBModel
     
-    init(rawPointer: UnsafeMutableRawPointer, fbModel: FBModel) {
+    init(_ rawPointer: UnsafeMutablePointer<UInt8>, _ fbModel: FBModel) {
         self.rawPointer = rawPointer
         self.fbModel = fbModel
-    }
-    
-    convenience init(_ byteByffer: ByteBuffer, _ fbModel: FBModel) {
-        self.init(rawPointer: byteByffer.memory, fbModel: fbModel)
     }
     
     deinit {
