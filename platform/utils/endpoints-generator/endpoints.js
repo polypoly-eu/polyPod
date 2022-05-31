@@ -5,8 +5,8 @@ const fallbackURL = "https://localhost:8000";
 const fallbackAuth = "";
 
 export default {
-    "polyPediaReport/facebookImporter": {
-        url: polyPediaReportUrl || fallbackURL + "/facebookImporter",
+    "polyPediaReport/facebook": {
+        url: polyPediaReportUrl || fallbackURL + "/facebook",
         auth: polyPediaReportAuth || fallbackAuth,
     },
     "polyPediaReport/google": {
