@@ -83,14 +83,6 @@
     margin: 0;
 }
 
-.import-view .explanation-expandable .separator {
-    height: 1px;
-    width: 100%;
-    max-width: var(--max-width);
-    background-color: var(--color-gray-400);
-    margin-bottom: 26px;
-}
-
 .import-view .explanation-expandable .transparent-sides {
     mask-image: linear-gradient(
         to top,
