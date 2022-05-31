@@ -15,7 +15,7 @@ const BaseInfoPopUp = ({ onClose, name }) => {
             Component={(props) => (
                 <SideSheet
                     title={i18n.t("commonInfoScreen:baseInfo.title1")}
-                    okLabel={"ok"}
+                    okLabel={i18n.t("common:button.ok")}
                     {...props}
                     className="poly-theme-light"
                 >

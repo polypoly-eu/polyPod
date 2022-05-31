@@ -5,5 +5,6 @@
     "bar.chart": "Dieses Diagramm heißt <strong>Balkendiagramm</strong>. Die Länge jedes Balkens ist proportional zu dem Wert, den er darstellt.",
     "infographic.value.category": "(Anzahl) Kategorie",
     "infographic.x.axis": "Titel X-Achse (Einheit)",   
-    "infographic.y.axis": "Titel Y-Achse (Einheit)"  
+    "infographic.y.axis": "Titel Y-Achse (Einheit)"  ,
+    "infographic.legend": "Legende"   
 }

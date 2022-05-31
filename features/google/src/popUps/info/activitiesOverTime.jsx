@@ -18,10 +18,11 @@ const ActivitiesOverTime = () => {
                     {
                         type: "block",
                         items: [
-                            { color: "#3749A9", description: "Legend A" },
                             {
-                                color: "#3BA6FF",
-                                description: "Legend B",
+                                color: "#3749A9",
+                                description: i18n.t(
+                                    "commonInfoScreen:infographic.legend"
+                                ),
                             },
                         ],
                         tooltip: {
@@ -31,9 +32,9 @@ const ActivitiesOverTime = () => {
                     },
                 ]}
                 explanation={[
-                    i18n.t("activitiesOverTimeInfoScreen:legend-item1"),
-                    i18n.t("activitiesOverTimeInfoScreen:legend-item2"),
-                    i18n.t("activitiesOverTimeInfoScreen:legend-item3"),
+                    i18n.t("activitiesOverTimeInfoScreen:explanation-item1"),
+                    i18n.t("activitiesOverTimeInfoScreen:explanation-item2"),
+                    i18n.t("activitiesOverTimeInfoScreen:explanation-item3"),
                 ]}
             />
             <p
@@ -46,6 +47,7 @@ const ActivitiesOverTime = () => {
                 {i18n.t("commonInfoScreen:baseInfo.title2")}
             </h1>
             <p>{i18n.t("activitiesOverTimeInfoScreen:text2")}</p>
+            <p>{i18n.t("activitiesOverTimeInfoScreen:text3")}</p>
         </>
     );
 };

@@ -5,5 +5,6 @@
     "bar.chart": "This diagram is called a <strong>bar chart</strong>. The length of each bar is proportional to the values that it represents.",
     "infographic.value.category": "(Value) Category",   
     "infographic.x.axis": "X-Axis Title (Units)",   
-    "infographic.y.axis": "Y-Axis Title (Units)"   
+    "infographic.y.axis": "Y-Axis Title (Units)",
+    "infographic.legend": "Legend"   
 }

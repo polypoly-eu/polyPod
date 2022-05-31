@@ -16,18 +16,19 @@ const DataStructure = () => {
                     },
                 }}
                 explanation={[
-                    i18n.t("dataStructureInfoScreen:legend-item1"),
-                    i18n.t("dataStructureInfoScreen:legend-item2"),
-                    i18n.t("dataStructureInfoScreen:legend-item3"),
+                    i18n.t("dataStructureInfoScreen:explanation-item1"),
+                    i18n.t("dataStructureInfoScreen:explanation-item2"),
+                    i18n.t("dataStructureInfoScreen:explanation-item3"),
                 ]}
                 legend={[
                     {
                         type: "circle",
                         items: [
-                            { color: "#3749A9", description: "Legend A" },
                             {
-                                color: "#3BA6FF",
-                                description: "Legend B",
+                                color: "#3749A9",
+                                description: i18n.t(
+                                    "commonInfoScreen:infographic.legend"
+                                ),
                             },
                         ],
                         tooltip: {
