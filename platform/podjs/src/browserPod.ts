@@ -369,13 +369,9 @@ class IDBPolyOut implements PolyOut {
         const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
         const blob = await (await fetch(dataUrl)).blob();
         const db = await openDatabase();
-        debugger;
-        const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-        const request = destUrl
-            ? tx.objectStore(OBJECT_STORE_POLY_OUT).get(destUrl)
-            : null;
 
         return new Promise((resolve, reject) => {
+            const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
             const id = destUrl || `polypod://${createUUID()}`;
 
             tx.objectStore(OBJECT_STORE_POLY_OUT).add({
