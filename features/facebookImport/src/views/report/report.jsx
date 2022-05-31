@@ -14,7 +14,7 @@ const ReportView = ({ reportStories }) => {
         setLoading(true);
         try {
             await window.pod.endpoint.send(
-                "polyPediaReport",
+                "polyPediaReport/facebook",
                 JSON.stringify(reportStories.jsonReport),
                 "application/json"
             );
