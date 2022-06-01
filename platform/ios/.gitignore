@@ -16,3 +16,4 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 *.xcarchive
+Pods/

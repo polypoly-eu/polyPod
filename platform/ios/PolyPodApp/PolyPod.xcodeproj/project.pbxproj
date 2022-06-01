@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		065F441EC4248ED0FF95E8E9 /* Pods_PolyPod_PolyPodUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9F164229943554EDC9673D /* Pods_PolyPod_PolyPodUITests.framework */; };
 		1A00DFF724569F3A0049F3F7 /* pod.html in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFF624569F3A0049F3F7 /* pod.html */; };
 		1A00DFF9245961FB0049F3F7 /* messagePort.js in Resources */ = {isa = PBXBuildFile; fileRef = 1A00DFF8245961FB0049F3F7 /* messagePort.js */; };
 		1A00DFFB245AAC3F0049F3F7 /* MessageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */; };
@@ -97,6 +98,7 @@
 		901C058A278F2AF800BC8364 /* CoreData+PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */; };
 		901C058B278F2D4A00BC8364 /* CoreData+PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */; };
 		901C058C278F34A800BC8364 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0587278EE58700BC8364 /* CoreDataStack.swift */; };
+		902A0C202847B6E50026E07E /* MatrixClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902A0C1F2847B6E50026E07E /* MatrixClient.swift */; };
 		9049ECA427BCE8B70059605A /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9049ECA327BCE8B70059605A /* CocoaLumberjackSwift */; };
 		904D4A7027905D5B00A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
 		904D4A712790633000A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
@@ -107,6 +109,8 @@
 		9C856C20282E5126004DF92F /* multipleZips1.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C856C1D282E5126004DF92F /* multipleZips1.zip */; };
 		9C856C21282E5126004DF92F /* multipleZips2.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C856C1E282E5126004DF92F /* multipleZips2.zip */; };
 		9C856C22282E5126004DF92F /* testZip.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C856C1F282E5126004DF92F /* testZip.zip */; };
+		B313F37E137429341187B8C0 /* Pods_PolyPodTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C769E49BBB44C87BD7CDF3FD /* Pods_PolyPodTests.framework */; };
+		DBB9E667B65B22BF24B1567C /* Pods_PolyPod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F36720A3A71D7BA46E5307 /* Pods_PolyPod.framework */; };
 		E9040D4726F0A30E00A88593 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4626F0A30E00A88593 /* Info.swift */; };
 		E9040D4926F0B2B400A88593 /* RuntimeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */; };
 		E90F89EA2629822400AD7D96 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89E92629822400AD7D96 /* OnboardingView.swift */; };
@@ -234,12 +238,18 @@
 		1AF468B1242A34D700E51B6D /* PolyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOut.swift; sourceTree = "<group>"; };
 		1AF468DB24349E6B00E51B6D /* PodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodApi.swift; sourceTree = "<group>"; };
 		1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
+		28EE7F8DA55210EEE6E53968 /* Pods-PolyPod-PolyPodUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PolyPod-PolyPodUITests.debug.xcconfig"; path = "Target Support Files/Pods-PolyPod-PolyPodUITests/Pods-PolyPod-PolyPodUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		31F36720A3A71D7BA46E5307 /* Pods_PolyPod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PolyPod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5487E127CD0FF700480CB5 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		4E2204F4F4610119B6EA1186 /* Pods-PolyPod-PolyPodUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PolyPod-PolyPodUITests.release.xcconfig"; path = "Target Support Files/Pods-PolyPod-PolyPodUITests/Pods-PolyPod-PolyPodUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4F9F164229943554EDC9673D /* Pods_PolyPod_PolyPodUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PolyPod_PolyPodUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtensions.swift; sourceTree = "<group>"; };
 		5B0F7B5F26A924DF00F4EFF4 /* PolyPod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PolyPod.entitlements; sourceTree = "<group>"; };
 		5B8653012643FC310014208C /* PolyNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyNav.swift; sourceTree = "<group>"; };
+		6FF77B83504AFD079ABDCF47 /* Pods-PolyPodTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PolyPodTests.debug.xcconfig"; path = "Target Support Files/Pods-PolyPodTests/Pods-PolyPodTests.debug.xcconfig"; sourceTree = "<group>"; };
 		901C0587278EE58700BC8364 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+PolyIn.swift"; sourceTree = "<group>"; };
+		902A0C1F2847B6E50026E07E /* MatrixClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixClient.swift; sourceTree = "<group>"; };
 		904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchToMainQueue.swift; sourceTree = "<group>"; };
 		905C687C27F1E9C9005A2819 /* PolyPodCoreSwift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PolyPodCoreSwift; path = ../../core/PolyPodCoreSwift; sourceTree = "<group>"; };
 		906E406B27A82C7F009015B7 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
@@ -247,6 +257,9 @@
 		9C856C1D282E5126004DF92F /* multipleZips1.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = multipleZips1.zip; sourceTree = "<group>"; };
 		9C856C1E282E5126004DF92F /* multipleZips2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = multipleZips2.zip; sourceTree = "<group>"; };
 		9C856C1F282E5126004DF92F /* testZip.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = testZip.zip; sourceTree = "<group>"; };
+		C769E49BBB44C87BD7CDF3FD /* Pods_PolyPodTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PolyPodTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6AC8A64F21D8F2EC6A690F7 /* Pods-PolyPod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PolyPod.release.xcconfig"; path = "Target Support Files/Pods-PolyPod/Pods-PolyPod.release.xcconfig"; sourceTree = "<group>"; };
+		E1B3D198C63614071641310E /* Pods-PolyPodTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PolyPodTests.release.xcconfig"; path = "Target Support Files/Pods-PolyPodTests/Pods-PolyPodTests.release.xcconfig"; sourceTree = "<group>"; };
 		E9040D4626F0A30E00A88593 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeInfo.swift; sourceTree = "<group>"; };
 		E90F89E92629822400AD7D96 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -288,6 +301,7 @@
 		E9F370DC262EE9EE006254C1 /* WidthReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthReader.swift; sourceTree = "<group>"; };
 		E9F370E0262EEB2C006254C1 /* ParagraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParagraphView.swift; sourceTree = "<group>"; };
 		E9F370E6262EEF13006254C1 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		EE3F6060642E8359DC388D27 /* Pods-PolyPod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PolyPod.debug.xcconfig"; path = "Target Support Files/Pods-PolyPod/Pods-PolyPod.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +309,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B313F37E137429341187B8C0 /* Pods_PolyPodTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +321,7 @@
 				905C687F27F1EA26005A2819 /* PolyPodCoreSwift in Frameworks */,
 				E9BE2906264BBAA0003EC8AE /* MessagePack in Frameworks */,
 				9049ECA427BCE8B70059605A /* CocoaLumberjackSwift in Frameworks */,
+				DBB9E667B65B22BF24B1567C /* Pods_PolyPod.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,12 +329,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				065F441EC4248ED0FF95E8E9 /* Pods_PolyPod_PolyPodUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		074223898786BDAE083FE8C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				31F36720A3A71D7BA46E5307 /* Pods_PolyPod.framework */,
+				4F9F164229943554EDC9673D /* Pods_PolyPod_PolyPodUITests.framework */,
+				C769E49BBB44C87BD7CDF3FD /* Pods_PolyPodTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1A57E65424A4C3FB0043E3AD /* Bubblewrap */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +417,7 @@
 		1AA6DE2624191C94008DB1B2 = {
 			isa = PBXGroup;
 			children = (
+				902A0C1E2847B6C30026E07E /* Matrix */,
 				904D4A6E27905D4C00A75AED /* Utils */,
 				E9018EDF276370B500FDF34A /* Core */,
 				E97D3274263151BC00A5A180 /* Features */,
@@ -403,6 +431,8 @@
 				E9545EB7273542CC001E8C7F /* PolyPodUITests */,
 				9063A7B427EB6DDB00955E49 /* Packages */,
 				1AA6DE3024191C94008DB1B2 /* Products */,
+				E71372451A4922C6E5B1ED33 /* Pods */,
+				074223898786BDAE083FE8C4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -530,6 +560,14 @@
 			path = PolyNav;
 			sourceTree = "<group>";
 		};
+		902A0C1E2847B6C30026E07E /* Matrix */ = {
+			isa = PBXGroup;
+			children = (
+				902A0C1F2847B6E50026E07E /* MatrixClient.swift */,
+			);
+			path = Matrix;
+			sourceTree = "<group>";
+		};
 		904D4A6E27905D4C00A75AED /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,6 +592,19 @@
 				9C856C1F282E5126004DF92F /* testZip.zip */,
 			);
 			path = TestFiles;
+			sourceTree = "<group>";
+		};
+		E71372451A4922C6E5B1ED33 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EE3F6060642E8359DC388D27 /* Pods-PolyPod.debug.xcconfig */,
+				D6AC8A64F21D8F2EC6A690F7 /* Pods-PolyPod.release.xcconfig */,
+				28EE7F8DA55210EEE6E53968 /* Pods-PolyPod-PolyPodUITests.debug.xcconfig */,
+				4E2204F4F4610119B6EA1186 /* Pods-PolyPod-PolyPodUITests.release.xcconfig */,
+				6FF77B83504AFD079ABDCF47 /* Pods-PolyPodTests.debug.xcconfig */,
+				E1B3D198C63614071641310E /* Pods-PolyPodTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		E9018EDF276370B500FDF34A /* Core */ = {
@@ -628,6 +679,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A66F7792493743D00ED4308 /* Build configuration list for PBXNativeTarget "PolyPodTests" */;
 			buildPhases = (
+				E397F3E6CCAA2774DB3F7DF9 /* [CP] Check Pods Manifest.lock */,
 				1A66F76E2493743D00ED4308 /* Sources */,
 				1A66F76F2493743D00ED4308 /* Frameworks */,
 				1A66F7702493743D00ED4308 /* Resources */,
@@ -646,6 +698,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1AA6DE4324191C96008DB1B2 /* Build configuration list for PBXNativeTarget "PolyPod" */;
 			buildPhases = (
+				B42687289D3E1995BBEE0770 /* [CP] Check Pods Manifest.lock */,
 				1AA6DE2B24191C94008DB1B2 /* Sources */,
 				1AA6DE2C24191C94008DB1B2 /* Frameworks */,
 				1AA6DE2D24191C94008DB1B2 /* Resources */,
@@ -653,6 +706,7 @@
 				E923739E2628228F00D2CFF3 /* Copy polyPod Features */,
 				E98F3756266F32AE00874FB9 /* Copy licenses and legal */,
 				3B5487E427CE881400480CB5 /* Copy Endpoints */,
+				9E40E5F04984DEDD4F2BE0A2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -673,9 +727,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E9545EBE273542CC001E8C7F /* Build configuration list for PBXNativeTarget "PolyPodUITests" */;
 			buildPhases = (
+				9890BF64795904E8E84B4194 /* [CP] Check Pods Manifest.lock */,
 				E9545EB2273542CC001E8C7F /* Sources */,
 				E9545EB3273542CC001E8C7F /* Frameworks */,
 				E9545EB4273542CC001E8C7F /* Resources */,
+				516115018EFD89A701C3CB7B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -796,6 +852,106 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "set -e\nENDPOINTS_SOURCE=\"$PROJECT_DIR/../../../../polyPod-config\"\nENDPOINTS_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/config\"\nrm -rf \"$ENDPOINTS_TARGET\"\ncp -r \"$ENDPOINTS_SOURCE\" \"$ENDPOINTS_TARGET\"\n";
+		};
+		516115018EFD89A701C3CB7B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PolyPod-PolyPodUITests/Pods-PolyPod-PolyPodUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PolyPod-PolyPodUITests/Pods-PolyPod-PolyPodUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PolyPod-PolyPodUITests/Pods-PolyPod-PolyPodUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9890BF64795904E8E84B4194 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PolyPod-PolyPodUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9E40E5F04984DEDD4F2BE0A2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PolyPod/Pods-PolyPod-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PolyPod/Pods-PolyPod-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PolyPod/Pods-PolyPod-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B42687289D3E1995BBEE0770 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PolyPod-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E397F3E6CCAA2774DB3F7DF9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PolyPodTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 		E923739E2628228F00D2CFF3 /* Copy polyPod Features */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -991,6 +1147,7 @@
 				E924F5C4263BF5F60014834B /* ContentViewHost.swift in Sources */,
 				E93EC98C273D65D400E20512 /* Authentication.swift in Sources */,
 				1AF1179624C1A4A80063EE37 /* PolyOut+FS.swift in Sources */,
+				902A0C202847B6E50026E07E /* MatrixClient.swift in Sources */,
 				1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */,
 				E9545EC827359A34001E8C7F /* UserDefaultsExtensions.swift in Sources */,
 				E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */,
@@ -1048,6 +1205,7 @@
 /* Begin XCBuildConfiguration section */
 		1A66F77A2493743D00ED4308 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FF77B83504AFD079ABDCF47 /* Pods-PolyPodTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1072,6 +1230,7 @@
 		};
 		1A66F77B2493743D00ED4308 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1B3D198C63614071641310E /* Pods-PolyPodTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1214,6 +1373,7 @@
 		};
 		1AA6DE4424191C96008DB1B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE3F6060642E8359DC388D27 /* Pods-PolyPod.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PolyPod/PolyPod.entitlements;
@@ -1243,6 +1403,7 @@
 		};
 		1AA6DE4524191C96008DB1B2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6AC8A64F21D8F2EC6A690F7 /* Pods-PolyPod.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PolyPod/PolyPod.entitlements;
@@ -1272,6 +1433,7 @@
 		};
 		E9545EBF273542CC001E8C7F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28EE7F8DA55210EEE6E53968 /* Pods-PolyPod-PolyPodUITests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
@@ -1296,6 +1458,7 @@
 		};
 		E9545EC0273542CC001E8C7F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E2204F4F4610119B6EA1186 /* Pods-PolyPod-PolyPodUITests.release.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
