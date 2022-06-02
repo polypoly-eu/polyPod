@@ -6,7 +6,7 @@ export class MessageClass {
         this.direction = sender === "self" ? "outgoing" : "incomming";
     }
 
-    timeElapsed() {
+    get timeElapsed() {
         return new Date() - this.date;
     }
 }
