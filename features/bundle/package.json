@@ -10,10 +10,16 @@
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
     "poly-preview-feature": "file:../polyPreview",
+    "poly-talk-feature": "file:../polyTalk",
     "demo-feature": "file:../demo"
   },
   "private": true,
   "polyPodFeatures": [
+    {
+      "archiveName": "polyTalk",
+      "moduleName": "poly-talk-feature",
+      "artifactPath": "dist"
+    },
     {
       "archiveName": "polyPreview",
       "moduleName": "poly-preview-feature",

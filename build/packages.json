@@ -19,6 +19,7 @@
         "features/polyExplorer",
         "features/polyPinion",
         "features/polyPreview",
+        "features/polyTalk",
         "features/test",
         "platform/feature-api/api/pod-api",
         "platform/feature-api/api/rdf",
