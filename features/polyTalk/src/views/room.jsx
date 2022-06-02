@@ -19,7 +19,7 @@ const Room = () => {
     return (
         <Screen className="poly-theme-light room">
             <ConversationHeader>
-                {activeRoom.name}
+                <p>{activeRoom.name}</p>
                 <ConversationHeader.Content
                     userName={activeRoom.name}
                     info="Active 10 mins ago"
