@@ -42,7 +42,7 @@ const npx = async (...args) => {
     await executeProcess("npx", ...args);
 };
 
-async function npmInstall(name, offline = true) {
+async function npmInstall(name, offline = false) {
     let args = ["--no-audit"];
     if (offline) {
         args.push("--prefer-offline");
