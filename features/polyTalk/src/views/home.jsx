@@ -10,10 +10,10 @@ const Home = () => {
     return (
         <Screen className="poly-theme-light">
             <ConversationList>
-                {rooms.map((room, i) => (
+                {Object.entries(rooms).map(([ name, room ], i) => (
                     <Conversation
                         key={i}
-                        name={room.participants[0]}
+                        name={name}
                         lastSenderName={room.lastMessage.sender}
                         info={room.lastMessage.message}
                         onClick={() => handleSelectRoom(room)}

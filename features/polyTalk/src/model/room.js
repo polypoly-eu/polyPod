@@ -1,7 +1,7 @@
-export class MessageRoom {
-    constructor(messages, participants) {
-        this.messages = messages;
-        this.participants = participants;
+export class Room {
+    constructor(name) {
+        this.messages = [];
+        this.name = name;
     }
 
     addMessage(message) {

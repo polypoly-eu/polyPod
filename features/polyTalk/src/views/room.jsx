@@ -19,9 +19,9 @@ const Room = () => {
     return (
         <Screen className="poly-theme-light room">
             <ConversationHeader>
-                <Avatar name={activeRoom.participants[0]} />
+                <Avatar name={activeRoom.name} />
                 <ConversationHeader.Content
-                    userName={activeRoom.participants[0]}
+                    userName={activeRoom.name}
                     info="Active 10 mins ago"
                 />
             </ConversationHeader>
@@ -30,6 +30,7 @@ const Room = () => {
                     <MessageList>
                         {activeRoom.messages.map((message, i) => (
                             <MessageGroup
+                                key={i}
                                 direction={message.direction}
                                 sender={message.sender}
                                 sentTime="just now"
