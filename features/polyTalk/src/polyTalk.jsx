@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Home from "./views/home.jsx";
 import "./styles.css";
+import MessagesContextProvider from "./context/messages.jsx";
 
 const PolyTalk = () => {
     return (
@@ -32,7 +33,9 @@ const PolyTalkApp = () => {
 
     return (
         <Router history={history}>
-            <div className="poly-nav-bar-separator-overlay" />
+            <MessagesContextProvider>
+                <div className="poly-nav-bar-separator-overlay" />
+            </MessagesContextProvider>
             <PolyTalk />
         </Router>
     );
