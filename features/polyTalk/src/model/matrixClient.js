@@ -18,37 +18,37 @@ class MatrixStub {
                         {
                             sender: "self",
                             content: "Hi Alfred, what's up?",
-                            time: "Thu Jun 02 2022 14:59:30 GMT+0200 (Central European Summer Time)",
+                            date: "Thu Jun 02 2022 14:59:30 GMT+0200 (Central European Summer Time)",
                         },
                         {
                             sender: "Alfred",
                             content: "Hello who is this please?",
-                            time: "Thu Jun 02 2022 15:01:30 GMT+0200 (Central European Summer Time)",
+                            date: "Thu Jun 02 2022 15:01:30 GMT+0200 (Central European Summer Time)",
                         },
                         {
                             sender: "Alfred",
                             content: "Hello???",
-                            time: "Thu Jun 02 2022 15:15:30 GMT+0200 (Central European Summer Time)",
+                            date: "Thu Jun 02 2022 15:15:30 GMT+0200 (Central European Summer Time)",
                         },
                         {
                             sender: "self",
                             content: "Hello",
-                            time: "Thu Jun 02 2022 15:18:30 GMT+0200 (Central European Summer Time)",
+                            date: "Thu Jun 02 2022 15:18:30 GMT+0200 (Central European Summer Time)",
                         },
                         {
                             sender: "Alfred",
                             content: "Hello...",
-                            time: "Thu Jun 02 2022 15:20:30 GMT+0200 (Central European Summer Time)",
+                            date: "Thu Jun 02 2022 15:20:30 GMT+0200 (Central European Summer Time)",
                         },
                     ],
                 }).forEach(function ([room, messages]) {
-                    messages.forEach(function ({ sender, content, time }) {
+                    messages.forEach(function ({ sender, content, date }) {
                         handlers["Room.timeline"]?.(
                             {
                                 getType: () => "m.room.message",
                                 getSender: () => sender,
                                 getContent: () => ({ body: content }),
-                                getTime: () => time,
+                                getDate: () => new Date(date),
                             },
                             { name: room },
                             false
@@ -75,8 +75,9 @@ export async function initializeClient(rooms, setRooms) {
         }
         findOrCreateRoom(rooms, room.name).addMessage(
             new Message({
-                message: event.getContent().body,
                 sender: event.getSender(),
+                message: event.getContent().body,
+                date: event.getDate(),
             })
         );
         setRooms({ ...rooms });
@@ -85,4 +86,4 @@ export async function initializeClient(rooms, setRooms) {
     const { state, prevState, res } = await client.once("sync");
     if (state !== "PREPARED")
         throw `Failed to initialise Matrix client, state is ${state}`;
-};
+}
