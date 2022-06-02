@@ -3,7 +3,7 @@ export class MessageClass {
         this.message = message;
         this.date = new Date(date) || new Date();
         this.sender = sender || "self";
-        this.direction = sender === "self" ? "outgoing" : "incomming";
+        this.direction = this.sender === "self" ? "outgoing" : "incomming";
     }
 
     get timeElapsed() {

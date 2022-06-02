@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import {
     MainContainer,
     ChatContainer,
-    MessageList,
+    MessageGroup,
     Message,
+    MessageList,
     MessageInput,
     ConversationHeader,
     Avatar,
@@ -11,10 +12,12 @@ import {
 import { Screen } from "@polypoly-eu/poly-look";
 import { MessagesContext } from "../context/messages.jsx";
 
+import "./room.css";
+
 const Room = () => {
     const { activeRoom } = useContext(MessagesContext);
     return (
-        <Screen className="poly-theme-light">
+        <Screen className="poly-theme-light room">
             <ConversationHeader>
                 <Avatar name={activeRoom.participants[0]} />
                 <ConversationHeader.Content
@@ -26,14 +29,20 @@ const Room = () => {
                 <ChatContainer>
                     <MessageList>
                         {activeRoom.messages.map((message, i) => (
-                            <Message
-                                key={i}
-                                model={{
-                                    message: message.message,
-                                    sentTime: message.timeElapsed + "werid ms",
-                                    sender: message.sender,
-                                }}
-                            />
+                            <MessageGroup
+                                direction={message.direction}
+                                sender={message.sender}
+                                sentTime="just now"
+                            >
+                                <MessageGroup.Messages>
+                                    <Message
+                                        key={i}
+                                        model={{
+                                            message: message.message,
+                                        }}
+                                    ></Message>
+                                </MessageGroup.Messages>
+                            </MessageGroup>
                         ))}
                     </MessageList>
                     <MessageInput placeholder="Type message here" />
