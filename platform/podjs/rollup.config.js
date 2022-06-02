@@ -2,6 +2,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
+import nodePolyfills from 'rollup-plugin-polyfill-node';
 
 export default [
     {
@@ -18,8 +19,9 @@ export default [
         ],
         plugins: [
             json(),
-            resolve(),
             commonjs(),
+            resolve({browser: true, preferBuiltins: false}),
+            nodePolyfills(),
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"],
@@ -37,8 +39,9 @@ export default [
         ],
         plugins: [
             json(),
-            resolve(),
             commonjs(),
+            resolve({browser: true, preferBuiltins: false}),
+            nodePolyfills(),
             sucrase({
                 exclude: ["node_modules/**"],
                 transforms: ["typescript"],
