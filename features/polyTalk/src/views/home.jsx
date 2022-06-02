@@ -8,34 +8,25 @@ import {
     Message,
     MessageInput,
 } from "@chatscope/chat-ui-kit-react";
+import { MessageThread } from "../model/messageThread";
+import { Message } from "../model/message";
 
 const Home = () => {
     const { threads } = useContext(MessagesContext);
 
-    const [activeThread, setActiveThreads] = useState(null);
+    const [activeThreads, setActiveThreads] = useState(null);
 
     return (
         <Screen>
-            {activeThread ? (
+            {activeThreads ? (
                 <ConversationList>
-                    <Conversation
-                        name="Lilly"
-                        lastSenderName="Lilly"
-                        info="Yes i can do it for you"
-                    >
-                        <Avatar
-                            src={lillyIco}
-                            name="Lilly"
-                            status="available"
-                        />
-                    </Conversation>
-                    <Conversation
-                        name="Joe"
-                        lastSenderName="Joe"
-                        info="Yes i can do it for you"
-                    >
-                        <Avatar src={joeIco} name="Joe" status="dnd" />
-                    </Conversation>
+                    {activeThreads.map((thread) => (
+                        <Consersation
+                            name={thread.participants[0]}
+                            lastSenderName={threads.lastMessage.sender}
+                            info={threads.lastMessage.message}
+                        ></Consersation>
+                    ))}
                 </ConversationList>
             ) : null}
             <MainContainer>
