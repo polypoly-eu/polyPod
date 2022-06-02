@@ -1,5 +1,3 @@
-import { thresholdFreedmanDiaconis } from "d3";
-
 export class MessageThread {
     constructor(messages, participants) {
         this.messages = messages;

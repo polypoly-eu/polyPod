@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Screen } from "@polypoly-eu/poly-look";
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import {
@@ -8,10 +8,10 @@ import {
     Message,
     MessageInput,
 } from "@chatscope/chat-ui-kit-react";
-import { MessageThread } from "../model/messageThread";
-import { MessageClass } from "../model/message";
+import { MessagesContext } from "../context/messages.jsx";
 
 const Home = () => {
+    console.log(MessagesContext, useContext);
     const { threads } = useContext(MessagesContext);
 
     const [activeThreads, setActiveThreads] = useState(null);
