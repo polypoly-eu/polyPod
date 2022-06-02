@@ -1,4 +1,4 @@
-export class MessageThread {
+export class MessageRoom {
     constructor(messages, participants) {
         this.messages = messages;
         this.participants = participants;
@@ -8,7 +8,7 @@ export class MessageThread {
         this.messages.push(message);
     }
 
-    lastMessage() {
+    get lastMessage() {
         return this.messages[this.messages.length - 1];
     }
 }
