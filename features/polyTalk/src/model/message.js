@@ -1,4 +1,4 @@
-export class Message {
+export class MessageClass {
     constructor({ message, date, sender }) {
         this.message = message;
         this.date = new Date(date) || new Date();

@@ -9,7 +9,7 @@ import {
     MessageInput,
 } from "@chatscope/chat-ui-kit-react";
 import { MessageThread } from "../model/messageThread";
-import { Message } from "../model/message";
+import { MessageClass } from "../model/message";
 
 const Home = () => {
     const { threads } = useContext(MessagesContext);
