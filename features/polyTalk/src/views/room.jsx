@@ -16,6 +16,44 @@ import "./room.css";
 
 const Room = () => {
     const { activeRoom } = useContext(MessagesContext);
+
+    function groupMessages() {
+        const messages = activeRoom.messages;
+        const messageGroups = [];
+        for (let i = 0; i < messages.length; i++) {
+            const currentMessage = messages[i];
+            const currentSender = currentMessage.sender;
+            const messagesToGroup = [];
+            while (currentSender == messages[i]?.sender) {
+                messagesToGroup.push(messages[i]);
+                i++;
+            }
+            i--;
+            messageGroups.push(
+                <MessageGroup
+                    key={i}
+                    direction={currentMessage.direction}
+                    sender={currentSender}
+                    sentTime="just now"
+                >
+                    <MessageGroup.Messages>
+                        {messagesToGroup.map((message, index) => (
+                            <Message
+                                key={index}
+                                model={{
+                                    message: message.message,
+                                }}
+                            ></Message>
+                        ))}
+                    </MessageGroup.Messages>
+                    <MessageGroup.Footer>{currentSender}</MessageGroup.Footer>
+                </MessageGroup>
+            );
+        }
+        console.log(messageGroups);
+        return messageGroups;
+    }
+
     return (
         <Screen className="poly-theme-light room">
             <ConversationHeader>
@@ -28,23 +66,7 @@ const Room = () => {
             <MainContainer>
                 <ChatContainer>
                     <MessageList>
-                        {activeRoom.messages.map((message, i) => (
-                            <MessageGroup
-                                key={i}
-                                direction={message.direction}
-                                sender={message.sender}
-                                sentTime="just now"
-                            >
-                                <MessageGroup.Messages>
-                                    <Message
-                                        key={i}
-                                        model={{
-                                            message: message.message,
-                                        }}
-                                    ></Message>
-                                </MessageGroup.Messages>
-                            </MessageGroup>
-                        ))}
+                        {groupMessages().map((message) => message)}
                     </MessageList>
                     <MessageInput placeholder="Type message here" />
                 </ChatContainer>
