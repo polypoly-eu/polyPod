@@ -17,6 +17,10 @@ import "./room.css";
 const Room = () => {
     const { activeRoom } = useContext(MessagesContext);
 
+    const otherPersonsName = activeRoom.messages.filter(
+        (message) => message.sender !== "self"
+    )[0].sender;
+
     function groupMessages() {
         const messages = activeRoom.messages;
         const messageGroups = [];
@@ -58,7 +62,7 @@ const Room = () => {
             <ConversationHeader>
                 <Avatar src={"images/thorsten.png"} name="Thorsten" />
                 <ConversationHeader.Content
-                    userName={activeRoom.name}
+                    userName={otherPersonsName}
                     info="Active 10 mins ago"
                 />
             </ConversationHeader>
