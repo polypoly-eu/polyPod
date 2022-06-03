@@ -16,29 +16,8 @@ import { ministories } from "../ministories/ministories.js";
 import { useHistory } from "react-router-dom";
 import { WhatsAppContext } from "../../context/whats-app-context.jsx";
 
-const ReportCard = () => {
-    const history = useHistory();
-
-    return (
-        <div className="analysis-card unrecognized-analysis-card poly-theme-light">
-            <div className="unrecognized-analysis-title">
-                <h1>{"We need your help!"}</h1>
-            </div>
-            <p>
-                {
-                    "If you send us an anonymised report about the structure of your WhatsApp data, it would help us improve the WhatsApp Data Importer so that it can show you even more insights."
-                }
-            </p>
-            <RoutingWrapper route="/report" history={history}>
-                <PolyButton label="Learn more" className="report-button" />
-            </RoutingWrapper>
-        </div>
-    );
-};
-
 const ExploreView = () => {
     const { account } = useContext(PolyImportContext);
-    const { reportIsSent } = useContext(WhatsAppContext);
 
     const history = useHistory();
     const exploreRef = useRef();
@@ -47,7 +26,6 @@ const ExploreView = () => {
         if (!account) return null;
         return (
             <List>
-                {!reportIsSent && <ReportCard />}
                 {ministories.map((MinistoryClass, index) => {
                     const ministory = new MinistoryClass({
                         account,
