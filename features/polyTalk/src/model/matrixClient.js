@@ -14,7 +14,7 @@ class MatrixStub {
             },
             startClient() {
                 return Object.entries({
-                    "pm-with-alfred": [
+                    "Alfred": [
                         {
                             sender: "self",
                             content: "Hi Alfred, what's up?",
