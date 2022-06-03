@@ -3,3 +3,45 @@
     display: flex;
     flex-direction: column;
 }
+
+.cs-message__html-content {
+}
+
+.cs-conversation-header {
+    background-color: var(--color-gray-200) !important;
+}
+
+.cs-conversation-header * {
+    background-color: var(--transparent) !important;
+    color: var(--color-indigo-950) !important;
+}
+
+.cs-message__content {
+    background-color: white !important;
+}
+
+.cs-message-group--outgoing .cs-message__content {
+    background-color: var(--color-indigo-950) !important;
+    color: white !important;
+}
+
+.scrollbar-container.cs-message-list__scroll-wrapper {
+    background-color: var(--color-gray-200);
+}
+
+.cs-message-input {
+    background-color: var(--color-gray-200) !important;
+    border: none !important;
+}
+
+.cs-message-input svg {
+    color: var(--color-indigo-950) !important;
+}
+
+.cs-message-input__content-editor {
+    background-color: white !important;
+}
+
+.cs-message-input__content-editor-wrapper {
+    background-color: white !important;
+}
