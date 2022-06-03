@@ -21,7 +21,9 @@ const Home = () => {
                         lastSenderName={room.lastMessage.sender}
                         info={room.lastMessage.message}
                         onClick={() => handleSelectRoom(room)}
-                    ></Conversation>
+                    >
+                        <Avatar src={"images/thorsten.png"} name="Thorsten" />
+                    </Conversation>
                 ))}
             </ConversationList>
         </Screen>

@@ -50,14 +50,13 @@ const Room = () => {
                 </MessageGroup>
             );
         }
-        console.log(messageGroups);
         return messageGroups;
     }
 
     return (
         <Screen className="poly-theme-light room">
             <ConversationHeader>
-                <p>{activeRoom.name}</p>
+                <Avatar src={"images/thorsten.png"} name="Thorsten" />
                 <ConversationHeader.Content
                     userName={activeRoom.name}
                     info="Active 10 mins ago"
