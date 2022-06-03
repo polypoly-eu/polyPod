@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { initializeClient } from "../model/matrixClient";
+import { Message } from "../model/message";
 import { useHistory } from "react-router-dom";
 
 export const MessagesContext = React.createContext();
@@ -29,6 +30,14 @@ export const MessagesContextProvider = ({ children }) => {
         history.goBack();
     };
 
+    const handleSendMessage = (message) => {
+        // TODO: Don't fake this
+        activeRoom.addMessage(
+            new Message({ message: message, date: new Date(), sender: "self" })
+        );
+        setActiveRoom({ ...activeRoom });
+    };
+
     const initPod = async () => await window.pod;
 
     //on startup
@@ -46,7 +55,13 @@ export const MessagesContextProvider = ({ children }) => {
 
     return (
         <MessagesContext.Provider
-            value={{ rooms, handleSelectRoom, handleBack, activeRoom }}
+            value={{
+                rooms,
+                handleSelectRoom,
+                handleBack,
+                activeRoom,
+                handleSendMessage,
+            }}
         >
             {children}
         </MessagesContext.Provider>

@@ -15,7 +15,7 @@ import { MessagesContext } from "../context/messages.jsx";
 import "./room.css";
 
 const Room = () => {
-    const { activeRoom } = useContext(MessagesContext);
+    const { activeRoom, handleSendMessage } = useContext(MessagesContext);
 
     const otherPersonsName = activeRoom.messages.filter(
         (message) => message.sender !== "self"
@@ -71,7 +71,11 @@ const Room = () => {
                     <MessageList>
                         {groupMessages().map((message) => message)}
                     </MessageList>
-                    <MessageInput placeholder="Type message here" />
+                    <MessageInput
+                        placeholder="Type message here"
+                        attachButton={false}
+                        onSend={handleSendMessage}
+                    />
                 </ChatContainer>
             </MainContainer>
         </Screen>
