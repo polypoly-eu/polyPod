@@ -16,6 +16,7 @@
         "features/facebookImport",
         "features/google",
         "features/lexicon",
+        "features/whatsApp",
         "features/polyExplorer",
         "features/polyPinion",
         "features/polyPreview",

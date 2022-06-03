@@ -1,0 +1,15 @@
+{
+    "name": "WhatsApp Data Importer",
+    "author": "polypoly Cooperative",
+    "description": "WhatsApp knows a lot about you. With the WhatsApp Data Importer you can load your data in three steps from WhatsApp into your polyPod and finally get an overview yourself.",
+    "thumbnail": "images/thumbnail.png",
+    "thumbnailColor": "#f0f1fe",
+    "primaryColor": "#0f1938",
+    "translations": {
+        "de": {
+            "name": "WhatsApp-Daten Importer",
+            "author": "polypoly - Die Genossenschaft",
+            "description": "WhatsApp weiß viel über Sie. Mit dem WhatsApp-Daten Importer können Sie Ihre Daten in drei Schritten von WhatsApp in Ihren polyPod laden, damit auch Sie selbst endlich einen Überblick bekommen."
+        }
+    }
+}
