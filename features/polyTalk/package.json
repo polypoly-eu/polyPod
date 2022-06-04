@@ -21,8 +21,6 @@
   "dependencies": {
     "@chatscope/chat-ui-kit-react": "^1.8.3",
     "@polypoly-eu/podjs": "file:../../platform/podjs",
-    "@polypoly-eu/poly-analysis": "file:../../feature-utils/poly-analysis",
-    "@polypoly-eu/poly-import": "file:../../feature-utils/poly-import",
     "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
     "d3": "^7.0.1",
     "react": "^17.0.2",
