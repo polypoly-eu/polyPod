@@ -15,6 +15,7 @@
         <meta-data android:name="android.webkit.WebView.MetricsOptOut" android:value="true" />
 
         <activity
+            android:exported="true"
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -23,16 +24,18 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" android:exported="true"/>
             </intent-filter>
         </activity>
 
         <activity
+            android:exported="false"
             android:name=".OnboardingActivity"
             android:label=""
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
+            android:exported="false"
             android:name=".settings.SettingsActivity"
             android:label="@string/settings_title"
             android:theme="@style/Theme.AppCompat.Light" />

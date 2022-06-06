@@ -23,7 +23,8 @@ class SettingsActivity : AppCompatActivity() {
         navHostFragment?.findNavController()?.let {
             appBarConfig = AppBarConfiguration(it.graph)
             // This shows the back button on the main fragment as well
-            appBarConfig.topLevelDestinations.clear()
+            // TODO: topLevelDestinations is not mutable
+            // appBarConfig.topLevelDestinations.clear()
             setupActionBarWithNavController(it, appBarConfig)
         }
     }
