@@ -14,7 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Log.bootstrap()
         Log.info("Application initialized")
         
-        matrixClient.listPublicRooms()
+        let client1 = ("my_test_matrix_account", "fimcug-kynnir-zYkby8")
+        let client2 = ("hello_kitty_2022", "z4gaMmqM7Ccz7S9")
+        MatrixClient.instance.login(client1.0, client1.1)
         
         switch Core.instance.bootstrap(languageCode: Language.current) {
         case .success:

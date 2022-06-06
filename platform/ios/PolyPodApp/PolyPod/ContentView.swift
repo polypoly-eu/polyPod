@@ -190,9 +190,7 @@ struct ContentView: View {
     private func settingsState() -> ViewState {
         ViewState(
             AnyView(
-                SettingsView(closeAction: {
-                    state = featureListState()
-                })
+                ChatView()
             )
         )
     }

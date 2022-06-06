@@ -104,6 +104,9 @@
 		904D4A712790633000A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
 		905C687F27F1EA26005A2819 /* PolyPodCoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 905C687E27F1EA26005A2819 /* PolyPodCoreSwift */; };
 		906E406C27A82C7F009015B7 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E406B27A82C7F009015B7 /* ActivityViewController.swift */; };
+		9075426C284A301700EE562F /* MatrixProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075426B284A301700EE562F /* MatrixProtocol.swift */; };
+		9075426D284A301700EE562F /* MatrixProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075426B284A301700EE562F /* MatrixProtocol.swift */; };
+		90A915B8284A18B500286F11 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A915B7284A18B500286F11 /* ChatView.swift */; };
 		90E4088227D78E4E006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
 		90E4088327D79382006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
 		9C856C20282E5126004DF92F /* multipleZips1.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C856C1D282E5126004DF92F /* multipleZips1.zip */; };
@@ -253,6 +256,8 @@
 		904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchToMainQueue.swift; sourceTree = "<group>"; };
 		905C687C27F1E9C9005A2819 /* PolyPodCoreSwift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PolyPodCoreSwift; path = ../../core/PolyPodCoreSwift; sourceTree = "<group>"; };
 		906E406B27A82C7F009015B7 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		9075426B284A301700EE562F /* MatrixProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixProtocol.swift; sourceTree = "<group>"; };
+		90A915B7284A18B500286F11 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		90E4088127D78E4E006AD362 /* DataProtection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtection.swift; sourceTree = "<group>"; };
 		9C856C1D282E5126004DF92F /* multipleZips1.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = multipleZips1.zip; sourceTree = "<group>"; };
 		9C856C1E282E5126004DF92F /* multipleZips2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = multipleZips2.zip; sourceTree = "<group>"; };
@@ -477,6 +482,7 @@
 				E996EBD12756BBE900EAC9F7 /* Log.swift */,
 				906E406B27A82C7F009015B7 /* ActivityViewController.swift */,
 				90E4088127D78E4E006AD362 /* DataProtection.swift */,
+				90A915B7284A18B500286F11 /* ChatView.swift */,
 			);
 			path = PolyPod;
 			sourceTree = "<group>";
@@ -499,6 +505,7 @@
 				1A183E9124AF1E860025F6BB /* PodApiError.swift */,
 				1ABADBEB24EBD02C00369791 /* LocationTracker.swift */,
 				E923AAF6261E155500E0A2A8 /* polyNav.js */,
+				9075426B284A301700EE562F /* MatrixProtocol.swift */,
 			);
 			path = PodApi;
 			sourceTree = "<group>";
@@ -1056,6 +1063,7 @@
 				1ABADBF624EE710B00369791 /* DefaultGraph+CoreDataProperties.swift in Sources */,
 				1ABADC0024EE710B00369791 /* Literal+CoreDataClass.swift in Sources */,
 				1ABADBFB24EE710B00369791 /* Quad+CoreDataClass.swift in Sources */,
+				9075426D284A301700EE562F /* MatrixProtocol.swift in Sources */,
 				1ABADBFD24EE710B00369791 /* Quad+Additions.swift in Sources */,
 				1ABADBD424EBC5EF00369791 /* PolyIn.swift in Sources */,
 				1A66F7812493794000ED4308 /* NetworkSession.swift in Sources */,
@@ -1097,6 +1105,7 @@
 				E9CF1B5D2625CDBB00216B70 /* FeatureListView.swift in Sources */,
 				E9CF1B302625866800216B70 /* Feature.swift in Sources */,
 				1A4C21F024A63E4C006CC1FD /* BlankNode+CoreDataClass.swift in Sources */,
+				9075426C284A301700EE562F /* MatrixProtocol.swift in Sources */,
 				90E4088227D78E4E006AD362 /* DataProtection.swift in Sources */,
 				E97D32A82631BF7700A5A180 /* HTMLView.swift in Sources */,
 				1A57E65624A4C4110043E3AD /* Bubblewrap.swift in Sources */,
@@ -1147,6 +1156,7 @@
 				E924F5C4263BF5F60014834B /* ContentViewHost.swift in Sources */,
 				E93EC98C273D65D400E20512 /* Authentication.swift in Sources */,
 				1AF1179624C1A4A80063EE37 /* PolyOut+FS.swift in Sources */,
+				90A915B8284A18B500286F11 /* ChatView.swift in Sources */,
 				902A0C202847B6E50026E07E /* MatrixClient.swift in Sources */,
 				1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */,
 				E9545EC827359A34001E8C7F /* UserDefaultsExtensions.swift in Sources */,
