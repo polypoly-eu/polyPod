@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as ReactDOM from "react-dom";
 import {
     MemoryRouter as Router,
@@ -9,8 +9,14 @@ import {
 } from "react-router-dom";
 import Home from "./views/home.jsx";
 import "./styles.css";
+import {
+    MessagesContext,
+    MessagesContextProvider,
+} from "./context/messages.jsx";
+import Room from "./views/room.jsx";
 
 const PolyTalk = () => {
+    const { activeRoom } = useContext(MessagesContext);
     return (
         <div className="poly-talk poly-theme poly-theme-dark">
             <Switch>
@@ -19,6 +25,9 @@ const PolyTalk = () => {
                 </Route>
                 <Route exact path="/home">
                     <Home />
+                </Route>
+                <Route exact path="/room">
+                    <Room />
                 </Route>
             </Switch>
         </div>
@@ -32,8 +41,10 @@ const PolyTalkApp = () => {
 
     return (
         <Router history={history}>
-            <div className="poly-nav-bar-separator-overlay" />
-            <PolyTalk />
+            <MessagesContextProvider>
+                <div className="poly-nav-bar-separator-overlay" />
+                <PolyTalk />
+            </MessagesContextProvider>
         </Router>
     );
 };

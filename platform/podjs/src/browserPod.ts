@@ -14,6 +14,7 @@ import * as RDF from "rdf-js";
 import * as RDFString from "rdf-string";
 import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../../polyPod-config/endpoints.json";
+import * as matrix from "matrix-js-sdk";
 import { Manifest, readManifest } from "./manifest";
 
 const DB_PREFIX = "polypod:";
@@ -858,6 +859,7 @@ export class BrowserPod implements Pod {
     public readonly polyNav = new BrowserPolyNav();
     public readonly info = new PodJsInfo();
     public readonly endpoint = new BrowserEndpoint();
+    public readonly matrix = matrix;
 
     /** Creates a navigation bar for the app. */
     constructor() {

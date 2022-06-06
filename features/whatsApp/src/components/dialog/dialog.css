@@ -1,0 +1,22 @@
+.poly-dialog-window {
+    width: 318px;
+    max-height: 60%;
+    background-color: var(--theme-primary-color);
+    color: var(--theme-secondary-color);
+    box-shadow: 0px 15px 12px rgba(0, 0, 0, 0.22),
+        0px 19px 38px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 26px;
+    box-sizing: border-box;
+}
+
+.poly-dialog-window h2 {
+    font-size: 24px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    line-height: 120%;
+    flex: 1 1 auto;
+}
