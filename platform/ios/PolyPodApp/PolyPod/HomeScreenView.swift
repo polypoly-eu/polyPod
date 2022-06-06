@@ -20,11 +20,11 @@ struct HomeScreenSectionModel {
 }
 
 struct FooterViewModel {
-    let title: String
-    let description: String
+    let title: LocalizedStringKey
+    let description: LocalizedStringKey
     let imageName: String
     let backgroundColor: Color
-    let buttonTitle: String
+    let buttonTitle: LocalizedStringKey
     let buttonBackgroundColor: Color
 }
 
@@ -204,11 +204,11 @@ extension EnvironmentValues {
 typealias OnFeatureSelected = (FeatureId) -> Void
 struct HomeScreenView: View {
     
-    let footerModel = FooterViewModel(title: "Like what you have seen?",
-                                      description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.",
+    let footerModel = FooterViewModel(title: "homescreen_footer_title",
+                                      description: "homescreen_footer_description",
                                       imageName: "AppIcon", // TODO: Needs the actual image
                                       backgroundColor: Color(fromHex: "#fed7d6"),
-                                      buttonTitle: "Learn more",
+                                      buttonTitle: "homescreen_footer_button_title",
                                       buttonBackgroundColor: Color(fromHex: "#0f1938"))
     
     @ObservedObject var viewModel: HomeScreenViewModel
