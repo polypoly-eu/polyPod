@@ -78,80 +78,7 @@ final class HomeScreenViewModel: ObservableObject {
 
 // MARK: - UI sizes
 
-struct PolyStyle {
-    struct Spacing {
-        static let plSpace1x = 4.0
-        static let plSpace2x = {
-            2 * Self.plSpace1x
-        }()
-        static let plSpace3x = {
-            3 * Self.plSpace1x
-        }()
-        static let plSpace4x = {
-            4 * Self.plSpace1x
-        }()
-        static let plSpace5x = {
-            5 * Self.plSpace1x
-        }()
-        static let plSpace6x = {
-            6 * Self.plSpace1x
-        }()
-        static let plSpace7x = {
-            7 * Self.plSpace1x
-        }()
-        static let plSpace8x = {
-            8 * Self.plSpace1x
-        }()
-    }
-    
-    struct Radius {
-        static let plRadiusBase1x = 4.0
-        static let plRadiusBase2x = {
-            2 * Self.plRadiusBase1x
-        }()
-        static let plRadiusBase3x = {
-            3 * Self.plRadiusBase1x
-        }()
-        static let plRadiusBase4x = {
-            4 * Self.plRadiusBase1x
-        }()
-        static let plRadiusBase5x = {
-            5 * Self.plRadiusBase1x
-        }()
-        static let plRadiusBase6x = {
-            6 * Self.plRadiusBase1x
-        }()
-    }
-    
-    struct Font {
-        struct Family {
-            static let jostRegular = "Jost-Regular"
-            static let jostMedium = "Jost-Medium"
-        }
-        
-        struct Weight {
-            static let regular = SwiftUI.Font.Weight.regular
-            static let medium = SwiftUI.Font.Weight.medium
-        }
-        
-        struct Size {
-            static let xs = 12.0
-            static let sm = 14.0
-            static let base = 16.0
-            static let lg = 18.0
-            static let xl = 20.0
-            static let _2xl = 22.0
-        }
-        
-        struct Alignment {
-            static let center: TextAlignment = .center
-            static let left: TextAlignment = .leading
-            static let right: TextAlignment = .trailing
-        }
-    }
-}
-
-struct Constants {
+struct HomeScreenConstants {
     
     struct Typography {
         let font: Font
@@ -297,7 +224,7 @@ struct HomeScreenView: View {
                 VStack(spacing: 0) {
                     Divider()
                     ScrollView(showsIndicators: false) {
-                        Spacer(minLength: Constants.Section.verticalSpacing)
+                        Spacer(minLength: HomeScreenConstants.Section.verticalSpacing)
                         ForEach(viewModel.sections, id: \.type) { sectionModel in
                             switch sectionModel.type {
                             case .yourData:
@@ -309,11 +236,11 @@ struct HomeScreenView: View {
                             case .other:
                                 OtherSectionView(sectionModel: sectionModel)
                             }
-                            Spacer(minLength: Constants.Section.verticalSpacing)
+                            Spacer(minLength: HomeScreenConstants.Section.verticalSpacing)
                         }
                         FooterView(model: footerModel, openLearnMoreAction: openLearnMoreAction)
                     }
-                    .padding([.leading, .trailing], Constants.View.horizontalPadding)
+                    .padding([.leading, .trailing], HomeScreenConstants.View.horizontalPadding)
                     .environment(\.homeScreenTileSizes, calculateSize(geo))
                     .environment(\.homeScreenFeatureSelected, openFeatureAction)
                     .navigationBarTitleDisplayMode(.inline)
@@ -344,13 +271,13 @@ struct HomeScreenView: View {
     func calculateSize(_ geo: GeometryProxy) -> Sizes {
         let screenWidth = geo.size.width
         
-        let totalScreenPadding = 2 * Constants.View.horizontalPadding
+        let totalScreenPadding = 2 * HomeScreenConstants.View.horizontalPadding
         let containerWidth: CGFloat = screenWidth - totalScreenPadding
         
-        let interItemSpacing = (Double(Constants.TileContainer.numberOfColumns) - 1.0) * Constants.TileContainer.horizontalSpacing
-        let smallTileWidth: CGFloat = (containerWidth - interItemSpacing) / Double(Constants.TileContainer.numberOfColumns)
+        let interItemSpacing = (Double(HomeScreenConstants.TileContainer.numberOfColumns) - 1.0) * HomeScreenConstants.TileContainer.horizontalSpacing
+        let smallTileWidth: CGFloat = (containerWidth - interItemSpacing) / Double(HomeScreenConstants.TileContainer.numberOfColumns)
         
-        let bigTileWidth = containerWidth - smallTileWidth - Constants.TileContainer.horizontalSpacing
+        let bigTileWidth = containerWidth - smallTileWidth - HomeScreenConstants.TileContainer.horizontalSpacing
         
         return Sizes(screenSize: geo.size,
                      containerWidth: containerWidth,
@@ -374,11 +301,11 @@ struct MyDataSectionView: View {
     let containersConfig: [ContainerType] = [.largeLeft, .row, .largeRight, .row]
     
     var body: some View {
-        VStack(alignment: .leading, spacing: Constants.TileContainer.verticalSpacing) {
+        VStack(alignment: .leading, spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
             Text(sectionModel.title)
-                .font(Constants.Section.title.font)
-                .multilineTextAlignment(Constants.Section.title.alignment)
-            ForEach(Array(sectionModel.cards.chunked(into: Constants.TileContainer.numberOfColumns).enumerated()),
+                .font(HomeScreenConstants.Section.title.font)
+                .multilineTextAlignment(HomeScreenConstants.Section.title.alignment)
+            ForEach(Array(sectionModel.cards.chunked(into: HomeScreenConstants.TileContainer.numberOfColumns).enumerated()),
                     id: \.offset) { index, chunk in
                 let type = containersConfig[index % containersConfig.count]
                 switch type {
@@ -400,8 +327,8 @@ struct DataKnowHowSectionView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
-            VStack(alignment: .leading, spacing: Constants.TileContainer.verticalSpacing) {
-                ForEach(Array(sectionModel.cards.chunked(into: Constants.TileContainer.numberOfColumns).enumerated()), id: \.offset) { _, chunk in
+            VStack(alignment: .leading, spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
+                ForEach(Array(sectionModel.cards.chunked(into: HomeScreenConstants.TileContainer.numberOfColumns).enumerated()), id: \.offset) { _, chunk in
                     RowContainerView(cards: chunk)
                 }
             }
@@ -415,8 +342,8 @@ struct OtherSectionView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
-            VStack(alignment: .leading, spacing: Constants.TileContainer.verticalSpacing) {
-                ForEach(Array(sectionModel.cards.chunked(into: Constants.TileContainer.numberOfColumns).enumerated()), id: \.offset) { _, chunk in
+            VStack(alignment: .leading, spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
+                ForEach(Array(sectionModel.cards.chunked(into: HomeScreenConstants.TileContainer.numberOfColumns).enumerated()), id: \.offset) { _, chunk in
                     RowContainerView(cards: chunk)
                 }
             }
@@ -430,7 +357,7 @@ struct ToolsSectionView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
-            VStack(alignment: .leading, spacing: Constants.TileContainer.verticalSpacing) {
+            VStack(alignment: .leading, spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
                 ForEach(sectionModel.cards) { card in
                     MediumCardView(card: card)
                 }
@@ -445,9 +372,9 @@ struct LargeLeftContainerView: View {
     let cards: [Card]
     
     var body: some View {
-        HStack(alignment: .top, spacing: Constants.TileContainer.horizontalSpacing) {
+        HStack(alignment: .top, spacing: HomeScreenConstants.TileContainer.horizontalSpacing) {
             BigCardView(card: cards.first!)
-            VStack(spacing: Constants.TileContainer.verticalSpacing) {
+            VStack(spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
                 ForEach(Array(cards.dropFirst())) { card in
                     SmallCardView(card: card)
                 }
@@ -459,14 +386,14 @@ struct LargeLeftContainerView: View {
 struct LargeRightContainerView: View {
     let cards: [Card]
     var body: some View {
-        HStack(spacing: Constants.TileContainer.horizontalSpacing) {
-            if cards.count < Constants.TileContainer.numberOfColumns {
+        HStack(spacing: HomeScreenConstants.TileContainer.horizontalSpacing) {
+            if cards.count < HomeScreenConstants.TileContainer.numberOfColumns {
                 ForEach(cards) { card in
                     SmallCardView(card: card)
                 }
             } else {
-                VStack(spacing: Constants.TileContainer.verticalSpacing) {
-                    ForEach(Array(cards.prefix(Constants.TileContainer.numberOfColumns - 1))) { card in
+                VStack(spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
+                    ForEach(Array(cards.prefix(HomeScreenConstants.TileContainer.numberOfColumns - 1))) { card in
                         SmallCardView(card: card)
                     }
                 }
@@ -479,11 +406,11 @@ struct LargeRightContainerView: View {
 struct RowContainerView: View {
     let cards: [Card]
     var body: some View {
-        HStack(alignment: .top, spacing: Constants.TileContainer.horizontalSpacing) {
+        HStack(alignment: .top, spacing: HomeScreenConstants.TileContainer.horizontalSpacing) {
             ForEach(cards) { card in
                 SmallCardView(card: card)
             }
-            if (cards.count < Constants.TileContainer.numberOfColumns) {
+            if (cards.count < HomeScreenConstants.TileContainer.numberOfColumns) {
                 Spacer()
             }
         }
@@ -506,28 +433,28 @@ struct BigCardView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: Constants.BigTile.verticalSpacing) {
+        VStack(alignment: .leading, spacing: HomeScreenConstants.BigTile.verticalSpacing) {
             Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: sizes.bigTileWidth - 2 * Constants.BigTile.padding, alignment: .center)
+                .frame(width: sizes.bigTileWidth - 2 * HomeScreenConstants.BigTile.padding, alignment: .center)
             
-            VStack(alignment: .leading, spacing: Constants.BigTile.textVerticalSpacing) {
+            VStack(alignment: .leading, spacing: HomeScreenConstants.BigTile.textVerticalSpacing) {
                 Text(card.title)
                     .foregroundColor(foregroundColor)
-                    .font(Constants.BigTile.title.font)
-                    .multilineTextAlignment(Constants.BigTile.title.alignment)
+                    .font(HomeScreenConstants.BigTile.title.font)
+                    .multilineTextAlignment(HomeScreenConstants.BigTile.title.alignment)
                 Text(card.description)
                     .foregroundColor(foregroundColor)
-                    .font(Constants.BigTile.description.font)
-                    .multilineTextAlignment(Constants.BigTile.description.alignment)
+                    .font(HomeScreenConstants.BigTile.description.font)
+                    .multilineTextAlignment(HomeScreenConstants.BigTile.description.alignment)
             }
         }
-        .padding(Constants.BigTile.padding)
+        .padding(HomeScreenConstants.BigTile.padding)
         .frame(width: sizes.bigTileWidth,
                height: sizes.bigTileWidth)
         .background(card.backgroundColor)
-        .cornerRadius(Constants.Tile.cornerRadius)
+        .cornerRadius(HomeScreenConstants.Tile.cornerRadius)
         .onTapGesture {
             onFeatureSelected(card.id)
         }
@@ -547,30 +474,30 @@ struct MediumCardView: View {
     }
     
     var body: some View {
-        HStack(spacing: Constants.MediumTile.horizontalSpacing) {
+        HStack(spacing: HomeScreenConstants.MediumTile.horizontalSpacing) {
             Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: sizes.smallTileWidth,
                        height: sizes.smallTileWidth,
                        alignment: .center)
-            VStack(alignment: .leading, spacing: Constants.MediumTile.textVerticalSpacing) {
+            VStack(alignment: .leading, spacing: HomeScreenConstants.MediumTile.textVerticalSpacing) {
                 Text(card.title)
                     .foregroundColor(foregroundColor)
-                    .font(Constants.MediumTile.title.font)
-                    .multilineTextAlignment(Constants.MediumTile.title.alignment)
+                    .font(HomeScreenConstants.MediumTile.title.font)
+                    .multilineTextAlignment(HomeScreenConstants.MediumTile.title.alignment)
                 Text(card.description)
                     .foregroundColor(foregroundColor)
-                    .font(Constants.MediumTile.description.font)
-                    .multilineTextAlignment(Constants.MediumTile.description.alignment)
+                    .font(HomeScreenConstants.MediumTile.description.font)
+                    .multilineTextAlignment(HomeScreenConstants.MediumTile.description.alignment)
             }
-            .padding([.top, .bottom], Constants.MediumTile.textTopBottomPadding)
-            .padding([.trailing], Constants.MediumTile.textTrailingPadding)
+            .padding([.top, .bottom], HomeScreenConstants.MediumTile.textTopBottomPadding)
+            .padding([.trailing], HomeScreenConstants.MediumTile.textTrailingPadding)
             Spacer(minLength: 0.0)
         }
         .frame(width: sizes.mediumTileWidth, height: sizes.smallTileWidth)
         .background(card.backgroundColor)
-        .cornerRadius(Constants.Tile.cornerRadius)
+        .cornerRadius(HomeScreenConstants.Tile.cornerRadius)
         .onTapGesture {
             onFeatureSelected(card.id)
         }
@@ -597,14 +524,14 @@ struct SmallCardView: View {
             Spacer()
             Text(card.title)
                 .foregroundColor(foregroundColor)
-                .font(Constants.SmallTile.title.font)
-                .multilineTextAlignment(Constants.SmallTile.title.alignment)
+                .font(HomeScreenConstants.SmallTile.title.font)
+                .multilineTextAlignment(HomeScreenConstants.SmallTile.title.alignment)
         }
-        .padding([.leading, .trailing, .bottom], Constants.SmallTile.otherPadding)
-        .padding([.top], Constants.SmallTile.topPadding)
+        .padding([.leading, .trailing, .bottom], HomeScreenConstants.SmallTile.otherPadding)
+        .padding([.top], HomeScreenConstants.SmallTile.topPadding)
         .frame(width: sizes.smallTileWidth, height: sizes.smallTileWidth)
         .background(card.backgroundColor)
-        .cornerRadius(Constants.Tile.cornerRadius)
+        .cornerRadius(HomeScreenConstants.Tile.cornerRadius)
         .onTapGesture {
             onFeatureSelected(card.id)
         }
@@ -616,13 +543,13 @@ struct FooterView: View {
     var openLearnMoreAction: () -> Void = { }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: Constants.Footer.verticalSpacing) {
+        VStack(alignment: .leading, spacing: HomeScreenConstants.Footer.verticalSpacing) {
             Text(model.title)
-                .font(Constants.Footer.title.font)
-                .multilineTextAlignment(Constants.Footer.title.alignment)
+                .font(HomeScreenConstants.Footer.title.font)
+                .multilineTextAlignment(HomeScreenConstants.Footer.title.alignment)
             Text(model.description)
-                .font(Constants.Footer.description.font)
-                .multilineTextAlignment(Constants.Footer.description.alignment)
+                .font(HomeScreenConstants.Footer.description.font)
+                .multilineTextAlignment(HomeScreenConstants.Footer.description.alignment)
             Image(model.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -630,18 +557,18 @@ struct FooterView: View {
             Button(model.buttonTitle) {
                 openLearnMoreAction()
             }
-            .font(Constants.Footer.Button.title.font)
-            .multilineTextAlignment(Constants.Footer.Button.title.alignment)
+            .font(HomeScreenConstants.Footer.Button.title.font)
+            .multilineTextAlignment(HomeScreenConstants.Footer.Button.title.alignment)
             .padding()
             .frame(maxWidth: .infinity, alignment: .center)
             .foregroundColor(model.buttonBackgroundColor.isLight ? .black : .white)
             .background(model.buttonBackgroundColor)
-            .cornerRadius(Constants.Tile.cornerRadius)
+            .cornerRadius(HomeScreenConstants.Tile.cornerRadius)
             
         }
-        .padding(Constants.Footer.padding)
+        .padding(HomeScreenConstants.Footer.padding)
         .background(model.backgroundColor)
-        .cornerRadius(Constants.Tile.cornerRadius)
+        .cornerRadius(HomeScreenConstants.Tile.cornerRadius)
     }
 }
 
@@ -716,8 +643,6 @@ struct HomeScreenView_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        
-        HomeScreenView(viewModel:
-                .init(storage: MockStorage()))
+        HomeScreenView(viewModel: .init(storage: MockStorage()))
     }
 }
