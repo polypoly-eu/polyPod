@@ -131,16 +131,6 @@ final class FeatureStorage: ObservableObject {
         })
     }
     
-    private func readOrder() -> [String] {
-        guard let url = Bundle.main.url(
-            forResource: "order",
-            withExtension: nil,
-            subdirectory: "features"
-        ) else { return [] }
-        guard let content = try? String(contentsOf: url) else { return [] }
-        return content.components(separatedBy: .newlines)
-    }
-    
     private func readCategories() -> [DecodedFeaturesCategory] {
         guard let url = Bundle.main.url(
             forResource: "categories",
@@ -153,10 +143,12 @@ final class FeatureStorage: ObservableObject {
 
     func importFeatures() {
         createFeaturesFolder()
-        let order = readOrder()
+        let categories = readCategories()
 
-        for id in order {
-            importFeature(id)
+        for category in categories {
+            for featureId in category.features {
+                importFeature(featureId)
+            }
         }
     }
     
