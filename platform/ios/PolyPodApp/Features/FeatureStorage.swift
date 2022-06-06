@@ -59,7 +59,6 @@ final class FeatureStorage: ObservableObject {
             
             self?.cleanFeatures()
             self?.importFeatures()
-            self?.loadFeatures()
             self?.loadCategories()
         }
     }
@@ -92,26 +91,6 @@ final class FeatureStorage: ObservableObject {
         }
         
         self.categoriesListSubject.value = models
-    }
-    
-    private func loadFeatures() {
-        var featuresList: [Feature] = []
-        
-        do {
-            let directoryContents = try FileManager.default.contentsOfDirectory(at: featuresFileUrl, includingPropertiesForKeys: nil)
-            let subDirs = directoryContents.filter{ $0.hasDirectoryPath }
-            for featureDir in subDirs {
-                if let feature = Feature.load(
-                    path: featureDir
-                ) {
-                    featuresList.append(feature)
-                }
-            }
-        } catch {
-            Log.error("Failed to list features: \(error.localizedDescription)")
-        }
-        
-        self.featuresList = featuresList
     }
     
     private func mapFeatures(features: [String]) -> [Feature] {
@@ -147,7 +126,13 @@ final class FeatureStorage: ObservableObject {
 
         for category in categories {
             for featureId in category.features {
-                importFeature(featureId)
+                if let importPath = importFeature(featureId) {
+                    if let feature = Feature.load(
+                        path: importPath
+                    ) {
+                        featuresList.append(feature)
+                    }
+                }
             }
         }
     }
@@ -160,24 +145,30 @@ final class FeatureStorage: ObservableObject {
         }
     }
     
-    private func importFeature(_ featureName: String) {
+    private func importFeature(_ featureName: String) -> URL? {
         let featureUrl = featureDirUrl.appendingPathComponent(featureName)
+        let featureCopyPath = featuresFileUrl.appendingPathComponent(featureName)
         if !FileManager.default.fileExists(atPath: featureUrl.absoluteString) {
             do {
                 if let filePath = Bundle.main.url(forResource: featureName, withExtension: "zip", subdirectory: "features") {
                     let unzipDirectory = try Zip.quickUnzipFile(filePath)
-                    try FileManager.default.moveItem(at: unzipDirectory, to: featuresFileUrl.appendingPathComponent(featureName))
-                    try FileManager.default.copyBundleFile(forResource: "pod", ofType: "html", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
-                    try FileManager.default.copyBundleFile(forResource: "initIframe", ofType: "js", toDestinationUrl: featuresFileUrl.appendingPathComponent(featureName))
+                    try FileManager.default.moveItem(at: unzipDirectory, to: featureCopyPath)
+                    try FileManager.default.copyBundleFile(forResource: "pod", ofType: "html", toDestinationUrl: featureCopyPath)
+                    try FileManager.default.copyBundleFile(forResource: "initIframe", ofType: "js", toDestinationUrl: featureCopyPath)
                     try importPodJs(toFeature: featureName, atUrl: featuresFileUrl)
                     Log.info("Imported feature: \(featureName)")
+                    return featureCopyPath
                 } else {
                     Log.error("Feature for import not found: \(featureName)")
                 }
             } catch {
                 Log.error("Failed to import feature \(featureName): \(error.localizedDescription)")
             }
+        } else {
+            return featureCopyPath
         }
+        
+        return nil
     }
     
     private func importPodJs(toFeature featureName: String, atUrl url: URL) throws {
