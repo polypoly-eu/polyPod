@@ -26,8 +26,6 @@ final class FeatureStorage: ObservableObject {
     private var dataProtectionCancellable: AnyCancellable?
     private let categoriesListSubject: CurrentValueSubject<[FeaturesCategoryModel], Never> = CurrentValueSubject([])
     
-
-    var featuresList: [Feature] = []
     var categoriesList: AnyPublisher<[FeaturesCategoryModel], Never> {
         categoriesListSubject.eraseToAnyPublisher()
     }
@@ -42,18 +40,26 @@ final class FeatureStorage: ObservableObject {
         }
         return URL(fileURLWithPath: "")
     }()
-    
-    lazy private var featureDirUrl: URL =
-        URL(string: featuresFileUrl.path) ?? URL(fileURLWithPath: "")
 
     init(dataProtection: DataProtection) {
         self.dataProtection = dataProtection
         setup()
     }
     
+    func featureForId(_ id: FeatureId) -> Feature? {
+        for category in categoriesListSubject.value {
+            for feature in category.features {
+                if feature.id == id {
+                    return feature
+                }
+            }
+        }
+        return nil
+    }
+    
     private func setup() {
         dataProtectionCancellable = dataProtection.state.sink { [weak self] protectedDataIsAvailable in
-            guard self?.featuresList.isEmpty == true, protectedDataIsAvailable == true else {
+            guard self?.categoriesListSubject.value.isEmpty == true, protectedDataIsAvailable == true else {
                 return
             }
             
@@ -64,9 +70,7 @@ final class FeatureStorage: ObservableObject {
     
     private func cleanFeatures() {
         do {
-            let documentsUrl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            let featuresUrl = documentsUrl.appendingPathComponent("Features")
-            try FileManager.default.removeItem(at: featuresUrl)
+            try FileManager.default.removeItem(at: featuresFileUrl)
         } catch {
             Log.error("Failed to clean features: \(error.localizedDescription)")
         }
@@ -82,7 +86,7 @@ final class FeatureStorage: ObservableObject {
         return content
     }
 
-    func importFeatures() {
+    private func importFeatures() {
         createFeaturesFolder()
         let metaCategories = readCategories()
 
@@ -106,25 +110,24 @@ final class FeatureStorage: ObservableObject {
     
     private func createFeaturesFolder() {
         do {
-            try FileManager.default.createDirectory(atPath: featureDirUrl.absoluteString, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(atPath: featuresFileUrl.path, withIntermediateDirectories: true, attributes: nil)
         } catch {
             Log.error("Failed to create features folder: \(error.localizedDescription)")
         }
     }
     
     private func importFeature(_ featureName: String) -> URL? {
-        let featureUrl = featureDirUrl.appendingPathComponent(featureName)
-        let featureCopyPath = featuresFileUrl.appendingPathComponent(featureName)
-        if !FileManager.default.fileExists(atPath: featureUrl.absoluteString) {
+        let featureUrl = featuresFileUrl.appendingPathComponent(featureName)
+        if !FileManager.default.fileExists(atPath: featureUrl.path) {
             do {
                 if let filePath = Bundle.main.url(forResource: featureName, withExtension: "zip", subdirectory: "features") {
                     let unzipDirectory = try Zip.quickUnzipFile(filePath)
-                    try FileManager.default.moveItem(at: unzipDirectory, to: featureCopyPath)
-                    try FileManager.default.copyBundleFile(forResource: "pod", ofType: "html", toDestinationUrl: featureCopyPath)
-                    try FileManager.default.copyBundleFile(forResource: "initIframe", ofType: "js", toDestinationUrl: featureCopyPath)
+                    try FileManager.default.moveItem(at: unzipDirectory, to: featureUrl)
+                    try FileManager.default.copyBundleFile(forResource: "pod", ofType: "html", toDestinationUrl: featureUrl)
+                    try FileManager.default.copyBundleFile(forResource: "initIframe", ofType: "js", toDestinationUrl: featureUrl)
                     try importPodJs(toFeature: featureName, atUrl: featuresFileUrl)
                     Log.info("Imported feature: \(featureName)")
-                    return featureCopyPath
+                    return featureUrl
                 } else {
                     Log.error("Feature for import not found: \(featureName)")
                 }
@@ -132,7 +135,7 @@ final class FeatureStorage: ObservableObject {
                 Log.error("Failed to import feature \(featureName): \(error.localizedDescription)")
             }
         } else {
-            return featureCopyPath
+            return featureUrl
         }
         
         return nil

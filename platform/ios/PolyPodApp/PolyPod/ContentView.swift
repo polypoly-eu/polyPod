@@ -140,7 +140,7 @@ struct ContentView: View {
                     viewModel: .init(
                         storage: HomeScreenStorageAdapter(featureStorage: featureStorage)),
                     openFeatureAction: { featureId in
-                        guard let feature = featureStorage.featuresList.first(where: { $0.id == featureId }) else {
+                        guard let feature = featureStorage.featureForId(featureId) else {
                             return
                         }
                         state = featureState(feature)
