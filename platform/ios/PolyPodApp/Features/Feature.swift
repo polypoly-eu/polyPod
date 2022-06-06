@@ -50,7 +50,7 @@ class Feature {
         self.links = links ?? [:]
     }
     
-    convenience init(path: URL, manifest: FeatureManifest) {
+    convenience init(path: URL, manifest: FlatbObject<FeatureManifest>) {
         var links: [String: String] = [:]
         for idx in 0..<manifest.linksCount {
             if let link = manifest.links(at: idx) {
@@ -78,7 +78,7 @@ class Feature {
     }
 }
 
-private func readManifest(_ basePath: URL) -> FeatureManifest? {
+private func readManifest(_ basePath: URL) -> FlatbObject<FeatureManifest>? {
     let manifestPath = basePath.appendingPathComponent("manifest.json")
     do {
         let contents = try String(contentsOf: manifestPath)

@@ -6,7 +6,6 @@ import Story from "../ministories/story.jsx";
 const DetailsView = () => {
     const history = useHistory();
     const { account } = useContext(PolyImportContext);
-    console.log(history);
     const story = new history.location.state.ActiveStoryClass({
         account,
         mode: Story.MODES.DETAILS,

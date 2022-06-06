@@ -29,7 +29,7 @@ const DatePicker = ({ year, yearRange, onYearChange }) => {
                         alt="arrow-left"
                         className="space-right"
                     />
-                    <p>{i18n.t("activitiesOverTimeStory:tab.arrow.left")}</p>
+                    <p>{i18n.t("activitiesOverTime:tab.arrow.left")}</p>
                 </button>
             ) : (
                 <div className="arrow filler"></div>
@@ -40,7 +40,7 @@ const DatePicker = ({ year, yearRange, onYearChange }) => {
                     className="arrow right"
                     onClick={() => onYearChange(yearRange[rangeIndex + 1])}
                 >
-                    <p>{i18n.t("activitiesOverTimeStory:tab.arrow.right")}</p>
+                    <p>{i18n.t("activitiesOverTime:tab.arrow.right")}</p>
                     <img
                         src="./images/angle-right.svg"
                         alt="arrow-right"
@@ -60,7 +60,7 @@ export const ActivitiesOverTimeStorySummary = ({ activitiesOverTime }) => {
             <p className="highlighted-number">
                 {activitiesOverTime.total.toLocaleString("de-DE")}
             </p>
-            {i18n.t("activitiesOverTimeStory:summary", {
+            {i18n.t("activitiesOverTime:summary", {
                 number_activities: activitiesOverTime.total,
             })}
             <p className="poly-small-print">
@@ -96,31 +96,25 @@ export const ActivitiesOverTimeStoryDetails = ({ activitiesOverTime }) => {
     const tabData = [
         {
             id: "total",
-            translation: i18n.t("activitiesOverTimeStory:tab.total"),
+            translation: i18n.t("activitiesOverTime:tab.total"),
             barData: yearlyTotals,
             barWidth: 6,
-            barChartLegendText: i18n.t(
-                "activitiesOverTimeStory:tab.events.total",
-                {
-                    number_events: activitiesOverTime.total,
-                }
-            ),
+            barChartLegendText: i18n.t("activitiesOverTime:tab.events.total", {
+                number_events: activitiesOverTime.total,
+            }),
             barValueColor: null,
             datePicker: <div className="datepicker-filler" />,
-            belowChart: selectedYear,
+            belowChart: i18n.t("common:total.years"),
         },
         {
             id: "yearly",
-            translation: i18n.t("activitiesOverTimeStory:tab.year"),
+            translation: i18n.t("activitiesOverTime:tab.year"),
             barData: monthlyTotals,
             barWidth: 22,
-            barChartLegendText: i18n.t(
-                "activitiesOverTimeStory:tab.events.yearly",
-                {
-                    number_events:
-                        activitiesOverTime.values[selectedYear]?.total || 0,
-                }
-            ),
+            barChartLegendText: i18n.t("activitiesOverTime:tab.events.yearly", {
+                number_events:
+                    activitiesOverTime.values[selectedYear]?.total || 0,
+            }),
             barValueColor: "white",
             datePicker: (
                 <DatePicker
@@ -129,7 +123,7 @@ export const ActivitiesOverTimeStoryDetails = ({ activitiesOverTime }) => {
                     onYearChange={setSelectedYear}
                 />
             ),
-            belowChart: i18n.t("common:total.years"),
+            belowChart: selectedYear,
         },
     ];
 
@@ -147,7 +141,7 @@ export const ActivitiesOverTimeStoryDetails = ({ activitiesOverTime }) => {
 
     const numberOfEventsString = (data) =>
         i18n.t(
-            `activitiesOverTimeStory:number.events${
+            `activitiesOverTime:number.events${
                 orderOfMagnitude(data) > 1 ? ".thousands" : ""
             }`
         );
@@ -155,7 +149,7 @@ export const ActivitiesOverTimeStoryDetails = ({ activitiesOverTime }) => {
     return (
         <div className="activities-ministory">
             <p>
-                {i18n.t("activitiesOverTimeStory:summary", {
+                {i18n.t("activitiesOverTime:summary", {
                     number_activities: activitiesOverTime.total,
                 })}
             </p>
