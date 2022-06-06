@@ -38,7 +38,10 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
     
     init(featureStorage: FeatureStorage) {
         self.featureStorage = featureStorage
-        self.categoriesList = featureStorage.categoriesList.map(HomeScreenStorageAdapter.mapCategoryModel(_:)).eraseToAnyPublisher()
+        self.categoriesList = featureStorage
+            .categoriesList
+            .map(HomeScreenStorageAdapter.mapCategoryModel)
+            .eraseToAnyPublisher()
     }
     
     static func mapCategoryModel(_ categoryModels: [FeaturesCategoryModel]) -> [HomeScreenSectionModel] {
@@ -233,8 +236,6 @@ struct HomeScreenView: View {
                                 DataKnowHowSectionView(sectionModel: sectionModel)
                             case .tools:
                                 ToolsSectionView(sectionModel: sectionModel)
-                            case .other:
-                                OtherSectionView(sectionModel: sectionModel)
                             }
                             Spacer(minLength: HomeScreenConstants.Section.verticalSpacing)
                         }
@@ -322,21 +323,6 @@ struct MyDataSectionView: View {
 }
 
 struct DataKnowHowSectionView: View {
-    let sectionModel: HomeScreenSectionModel
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(sectionModel.title).fontWeight(.bold)
-            VStack(alignment: .leading, spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
-                ForEach(Array(sectionModel.cards.chunked(into: HomeScreenConstants.TileContainer.numberOfColumns).enumerated()), id: \.offset) { _, chunk in
-                    RowContainerView(cards: chunk)
-                }
-            }
-        }
-    }
-}
-
-struct OtherSectionView: View {
     let sectionModel: HomeScreenSectionModel
     
     var body: some View {

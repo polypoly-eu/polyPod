@@ -12,7 +12,6 @@ enum FeaturesCategoryId: String {
     case yourData
     case knowHow
     case tools
-    case other
 }
 
 struct FeaturesCategoryModel {
