@@ -59,7 +59,6 @@ final class FeatureStorage: ObservableObject {
             
             self?.cleanFeatures()
             self?.importFeatures()
-            self?.loadCategories()
         }
     }
     
@@ -71,43 +70,6 @@ final class FeatureStorage: ObservableObject {
         } catch {
             Log.error("Failed to clean features: \(error.localizedDescription)")
         }
-    }
-    
-    private func loadCategories() {
-        let categories = readCategories()
-        var models = mapCategories(categories)
-        let mappedFeatures = models.reduce(into: []) { partialResult, model in
-            partialResult.append(contentsOf: model.features)
-        }
-        
-        let remainingFeatures = featuresList.filter { feature in
-            !mappedFeatures.contains { mappedFeature in
-                feature.id == mappedFeature.id
-            }
-        }
-        
-        if !remainingFeatures.isEmpty {
-            models.append(FeaturesCategoryModel(id: .other, name: "Other", features: remainingFeatures))
-        }
-        
-        self.categoriesListSubject.value = models
-    }
-    
-    private func mapFeatures(features: [String]) -> [Feature] {
-        return features.compactMap { id in
-            self.featuresList.first { feature in
-                return feature.id == id
-            }
-        }
-    }
-    
-    private func mapCategories(_ categories: [DecodedFeaturesCategory]) -> [FeaturesCategoryModel] {
-        return categories.compactMap({ category -> FeaturesCategoryModel? in
-            guard let id = FeaturesCategoryId(rawValue: category.id) else { return nil }
-            let features = mapFeatures(features: category.features)
-            
-            return FeaturesCategoryModel(id: id, name: category.name, features: features)
-        })
     }
     
     private func readCategories() -> [DecodedFeaturesCategory] {
@@ -122,19 +84,24 @@ final class FeatureStorage: ObservableObject {
 
     func importFeatures() {
         createFeaturesFolder()
-        let categories = readCategories()
+        let metaCategories = readCategories()
 
-        for category in categories {
-            for featureId in category.features {
+        var categories: [FeaturesCategoryModel] = []
+        for metaCategory in metaCategories {
+            guard let categoryId = FeaturesCategoryId(rawValue: metaCategory.id) else { continue }
+            var features: [Feature] = []
+            for featureId in metaCategory.features {
                 if let importPath = importFeature(featureId) {
                     if let feature = Feature.load(
                         path: importPath
                     ) {
-                        featuresList.append(feature)
+                        features.append(feature)
                     }
                 }
             }
+            categories.append(FeaturesCategoryModel(id: categoryId, name: metaCategory.name, features: features))
         }
+        self.categoriesListSubject.value = categories
     }
     
     private func createFeaturesFolder() {
