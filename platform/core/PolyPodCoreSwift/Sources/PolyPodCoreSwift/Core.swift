@@ -5,7 +5,7 @@ import FlatBuffers
 /// Possible errors that can be thrown by PolyPodCoreSwift
 public enum PolyPodCoreError: Error {
     /// Internal Rust Core failure with error code and message
-    case internalCoreFailure(context: String, failure: FBObject<Failure>)
+    case internalCoreFailure(context: String, failure: FlatbObject<Failure>)
     /// Rust Core returned an invalid result type for a given operation
     case invalidResult(context: String, result:String)
     /// Rust Core returned an invalid failure content
@@ -45,7 +45,7 @@ public final class Core {
             let response = CoreBootstrapResponse.getRootAsCoreBootstrapResponse(bb: byteBuffer)
             if let failure = response.failure {
                 throw PolyPodCoreError.internalCoreFailure(context: "Failed to bootstrap core",
-                                                           failure: FBObject(responseBytes.data, failure))
+                                                           failure: FlatbObject(responseBytes.data, failure))
             }
         }
     }
@@ -53,19 +53,19 @@ public final class Core {
     /// Parse the FeatureManifest from the given json
     /// - Parameter json: Raw JSON to parse the FeatureManifest from
     /// - Returns: A FeatureManifest if parsing succeded, nil otherwise
-    public func parseFeatureManifest(json: String) -> Result<FBObject<FeatureManifest>, Error> {
+    public func parseFeatureManifest(json: String) -> Result<FlatbObject<FeatureManifest>, Error> {
         Result {
             let responseBytes = parse_feature_manifest_from_json(json)
             let byteBuffer = ByteBuffer(cByteBuffer: responseBytes)
             let response = FeatureManifestParsingResponse.getRootAsFeatureManifestParsingResponse(bb: byteBuffer)
             switch response.resultType {
             case .featuremanifest:
-                return FBObject(responseBytes.data, response.result(type: FeatureManifest.self))
+                return FlatbObject(responseBytes.data, response.result(type: FeatureManifest.self))
             case .failure:
                 if let failure = response.result(type: Failure.self) {
                     throw PolyPodCoreError.internalCoreFailure(
                         context: "Failed to load Feature Manifest",
-                        failure: FBObject(responseBytes.data, failure)
+                        failure: FlatbObject(responseBytes.data, failure)
                     )
                 } else {
                     throw PolyPodCoreError.invalidFailure(context: "Failed to load Feature Manifest")
