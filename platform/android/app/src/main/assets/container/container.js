@@ -15,7 +15,7 @@ const queuedMessages = [];
 
 function initMessaging() {
     window.onmessage = (event) => {
-        if (!event.origin.includes("localhost")) {
+        if (window.location.href.indexOf(event.origin) === 0) {
             return;
         }
         // Action notifications have no port
