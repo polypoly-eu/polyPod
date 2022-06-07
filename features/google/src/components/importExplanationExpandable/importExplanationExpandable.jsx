@@ -75,13 +75,16 @@ const ImportExplanationExpandable = ({
         return Math.round(size / Math.pow(k, i), decimals) + " " + units[i - 1];
     };
 
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFiles, setSelectedFiles] = useState([]);
 
     const handleSelectFile = async () => {
         const { polyNav } = pod;
         runWithLoadingScreen(async function () {
             try {
-                setSelectedFile(await polyNav.pickFile("application/zip"));
+                setSelectedFiles([
+                    ...selectedFiles,
+                    await polyNav.pickFile("application/zip"),
+                ]);
             } catch (error) {
                 setGlobalError(new FileSelectionError(error));
             }
@@ -89,14 +92,18 @@ const ImportExplanationExpandable = ({
     };
 
     const handleImportFile = async () => {
-        if (!selectedFile) return;
+        if (!selectedFiles.length) return;
         const { polyOut } = pod;
         if (files?.[0]?.id) handleRemoveFile(files[0].id);
         runWithLoadingScreen(async function () {
             try {
-                await polyOut.importArchive(selectedFile.url);
+                const destUrl = await polyOut.importArchive(
+                    selectedFiles[0].url
+                );
+                for (const { url } of selectedFiles.slice(1))
+                    await polyOut.importArchive(url, destUrl);
                 refreshFiles();
-                setSelectedFile(null);
+                setSelectedFiles([]);
             } catch (error) {
                 setGlobalError(new FileImportError(error));
             }
@@ -172,27 +179,22 @@ const ImportExplanationExpandable = ({
                 <div className="poly-separator"></div>
                 <div className="x-divider">
                     {files?.length ? (
+                        <h5>{i18n.t("import:file.imported.successfully")}</h5>
+                    ) : selectedFiles.length ? (
                         <div className="file-info">
                             <h5>{i18n.t("import:import.chosen")}</h5>
-                            <p>
-                                {i18n.t("import:import.name")} {files[0]?.name}
-                            </p>
-                            <p>
-                                {i18n.t("import:import.size")}
-                                {formatSize(files[0]?.size)}
-                            </p>
-                        </div>
-                    ) : selectedFile ? (
-                        <div className="file-info">
-                            <h5>{i18n.t("import:import.chosen")}</h5>
-                            <p>
-                                {i18n.t("import:import.name")}{" "}
-                                {selectedFile?.name}
-                            </p>
-                            <p>
-                                {i18n.t("import:import.size")}
-                                {formatSize(selectedFile.size)}
-                            </p>
+                            {selectedFiles.map((selectedFile, i) => (
+                                <div key={i}>
+                                    <p>
+                                        {i18n.t("import:import.name")}{" "}
+                                        {selectedFile.name}
+                                    </p>
+                                    <p>
+                                        {i18n.t("import:import.size")}
+                                        {formatSize(selectedFile.size)}
+                                    </p>
+                                </div>
+                            ))}
                         </div>
                     ) : (
                         <h5>{i18n.t("import:import.none.chosen")}</h5>
@@ -202,7 +204,7 @@ const ImportExplanationExpandable = ({
                     type="outline"
                     onClick={handleSelectFile}
                     label={
-                        selectedFile
+                        selectedFiles.length
                             ? i18n.t("import:import.button.1.different")
                             : i18n.t("import:import.button.1")
                     }
@@ -210,8 +212,12 @@ const ImportExplanationExpandable = ({
                 <PolyButton
                     className="bg-red"
                     onClick={handleImportFile}
-                    label="Import File"
-                    disabled={selectedFile ? "" : "disabled"}
+                    label={
+                        selectedFiles.length > 1
+                            ? "Import Files"
+                            : "Import File"
+                    }
+                    disabled={selectedFiles ? "" : "disabled"}
                 >
                     {i18n.t("import:import.button.2")}
                 </PolyButton>
