@@ -15,7 +15,6 @@ const queuedMessages = [];
 
 function initMessaging() {
     window.onmessage = (event) => {
-
         if (!event.origin.includes("localhost")) {
             return;
         }
