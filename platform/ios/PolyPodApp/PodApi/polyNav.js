@@ -1,7 +1,7 @@
 window.addEventListener(
     "message",
     ({ data: { command, action, origin } }) => {
-        if (!origin.includes("localhost")) {
+        if (window.location.href.indexOf(origin) === 0) {
             return;
         }
         if (command === "triggerPolyNavAction") pod.polyNav.actions[action]();

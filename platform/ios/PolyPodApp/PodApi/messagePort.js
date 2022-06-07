@@ -1,7 +1,7 @@
 window.addEventListener("message", receiveMessage, false);
 
 function receiveMessage({ data, origin }) {
-    if (!origin.includes("localhost")) {
+    if (window.location.href.indexOf(origin) === 0) {
         return;
     }
     if (data.command === "log") {
