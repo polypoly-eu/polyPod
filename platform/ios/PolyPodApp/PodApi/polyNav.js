@@ -1,6 +1,6 @@
 window.addEventListener(
     "message",
-    ({ data: { command, action, origin } }) => {
+    ({ data: { command, action }, origin }) => {
         if (window.location.href.indexOf(origin) === 0) {
             return;
         }
