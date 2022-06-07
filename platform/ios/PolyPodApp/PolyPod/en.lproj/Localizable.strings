@@ -42,7 +42,7 @@
 "auth_prompt_set_up" = "Set up authentication";
 "re_auth_prompt_set_up" = "Re-authorize authentication";
 
-"auth_prompt_unlock" = "Login to your polyPod";
+"auth_prompt_unlock" = "Log in to your polyPod";
 
 "settings_imprint_text" = "
 <p>Details according to § 5 TMG</p>
