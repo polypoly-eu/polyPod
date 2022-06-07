@@ -5,6 +5,7 @@ import i18n from "!silly-i18n";
 import "./activitiesOverTimeStory.css";
 import "./datePicker.css";
 import { PolyChart, Tab, Tabs } from "@polypoly-eu/poly-look";
+import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
 
 const monthsAbbreviation = i18n.t("common:months.abbreviation").split(" ");
 
@@ -180,7 +181,10 @@ export const ActivitiesOverTimeStoryDetails = ({ activitiesOverTime }) => {
                     </Tab>
                 ))}
             </Tabs>
-            <p className="source">{i18n.t("common:source.your.google.data")}</p>
+            <SourceInfoButton
+                source={i18n.t("common:source.your.google.data")}
+                popUpProps={{ name: "info-activities-over-time" }}
+            />
         </div>
     );
 };

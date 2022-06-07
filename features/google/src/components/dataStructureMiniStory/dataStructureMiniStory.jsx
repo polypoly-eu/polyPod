@@ -85,7 +85,7 @@ const DataStructureMiniStory = ({ data }) => {
             />
             <SourceInfoButton
                 source={"Your google data"}
-                popUpProps={{ name: "info-bubble" }}
+                popUpProps={{ name: "info-data-structure" }}
             />
         </>
     );
