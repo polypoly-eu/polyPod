@@ -1,0 +1,8 @@
+{
+    "text1": "This diagram is called a bar chart. The length of each bar is proportional to the values that it represents.",  
+    "explanation-item1": "The legend shows what a certain color represents.",
+    "explanation-item2": "The axis titles and units say what each axis represents and how the values are measured.",
+    "explanation-item3": "Each bar represents a value according to the y-axis for one category on the x-axis.",
+    "text2": "Please note, that we are only processing parts of your Facebook data for this analysis so far. So the numbers on this screen show a tendency, but not the total number in your download.",
+    "text3": "The data with timestamps is not very consistent. In some cases, we do not have a timestamp where we would expect one. In another case, we saw a larger number of timestamps for watching a single advertising video. It seems that Facebook creates a timestamp every few seconds to check how long you watched."
+}

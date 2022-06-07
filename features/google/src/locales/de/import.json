@@ -26,16 +26,17 @@
     "import.1": "Nachdem Sie die Datei mit Ihren Daten auf Ihr Telefon heruntergeladen haben, können Sie diese in Ihren polyPod importieren.",
     "import.info": "Please be sure to import all the packages you originally downloaded",
     "import.none.chosen": "Keine Datei ausgewählt",
-    "import.chosen": "Ausgewählte Datei",
+    "import.chosen": "Ausgewählte Dateien:",
     "import.delete": "Entfernen",
     "import.button.1": "Datei auswählen",
-    "import.button.1.different": "Andere Datei auswählen",
+    "import.button.1.different": "Weitere Datei auswählen",
     "import.button.2": "Importieren",
     "import.name": "Name:",
     "import.size": "Dateigröße:",
-    "imported.file": "Imported file:",
+    "imported.file": "Importierte Datei:",
     "explore.1": "Nachdem Sie Ihre Google-Daten in Ihren polyPod importiert haben, können Sie diese erkunden und sehen, was Google wirklich über Sie weiß. Das heruntergeladene zip-Archiv kann nun auch sicher wieder von Ihrem Smartphone gelöscht werden.",
     "explore.button": "Erkunden Sie Ihre Daten",
     "file.too.big.dialog.title": "Die ausgewählte Datei ist zu groß.",
-    "file.too.big.dialog.message": "Bitte wählen Sie eine Datei aus, die kleiner als {{max_file_size}} ist. Sie können die Dateiengröße verringern, indem Sie eine Datei mit kürzerer Zeitspanne bei Facebook beantragen oder unsere Beispieldatensätze benutzen."
+    "file.too.big.dialog.message": "Bitte wählen Sie eine Datei aus, die kleiner als {{max_file_size}} ist. Sie können die Dateiengröße verringern, indem Sie eine Datei mit kürzerer Zeitspanne bei Facebook beantragen oder unsere Beispieldatensätze benutzen.",
+    "file.imported.successfully": "Datei erfolgreich importiert"
 }
