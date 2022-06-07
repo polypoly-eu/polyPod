@@ -1,30 +1,25 @@
 package coop.polypoly.polypod
 
 import android.os.Bundle
-import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 
 class HomeScreenActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-                Greeting("Android")
+            Greeting("Android")
         }
     }
 }
@@ -36,20 +31,32 @@ fun Greeting(name: String) {
 
 @Composable
 fun SmallCardView() {
-    Column(modifier = Modifier
-        .padding(8.dp)
-        .requiredSize(width = 130.dp, height = 130.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween) {
-
+    ConstraintLayout(
+        modifier = Modifier
+            .height(100.dp)
+            .width(100.dp)
+    ) {
+        val (image, text) = createRefs()
         Image(
             painter = painterResource(id = R.drawable.ic_launcher),
             contentDescription = null,
-            modifier = Modifier.fillMaxSize(0.7f),
             contentScale = ContentScale.Fit,
-            alignment = Alignment.Center
+            alignment = Alignment.Center,
+            modifier = Modifier.constrainAs(image) {
+                top.linkTo(parent.top)
+                absoluteLeft.linkTo(parent.absoluteLeft)
+                absoluteRight.linkTo(parent.absoluteRight)
+            }
         )
-        Text(text = "Some text")
+        Text(
+            text = "Some text",
+            modifier = Modifier.constrainAs(text) {
+                top.linkTo(image.bottom, margin = 10.dp)
+                bottom.linkTo(parent.bottom)
+                absoluteLeft.linkTo(parent.absoluteLeft)
+                absoluteRight.linkTo(parent.absoluteRight)
+            }
+        )
     }
 }
 
