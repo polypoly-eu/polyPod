@@ -1,6 +1,6 @@
 {
     "title": "Die Struktur Ihrer Daten",
-    "summary": "Von Ihren gesamten Facebook-Daten analysieren wir derzeit die folgenden {{amount_of_folders}} Kategorien und {{amount_of_files}} zugehörige Dateneinträge.",
+    "summary": "Von Ihren gesamten Google-Daten analysieren wir derzeit die folgenden {{amount_of_folders}} Kategorien und {{amount_of_files}} zugehörige Dateneinträge.",
     "folder.info": "{{selected_folder}} {{category}}: {{amount_of_files}} Dateneinträge.",
     "category": " Kategorie",
     "total.chip": "Gesamt"
