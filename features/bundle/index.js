@@ -35,10 +35,11 @@ function writeCategoriesOrder(categories, targetDir) {
     );
 }
 
-const features = require("./package.json").polyPodFeatures;
-const categories = require("./package.json").polyPodCategories;
-
+const config = require("./package.json");
+const features = config.polyPodFeatures;
+const categories = config.polyPodCategories;
 const targetDir = path.join(__dirname, "dist");
+
 if (fs.existsSync(targetDir)) fs.rmSync(targetDir, { recursive: true });
 fs.mkdirSync(targetDir);
 

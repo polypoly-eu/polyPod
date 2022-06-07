@@ -38,7 +38,7 @@ struct ContentView: View {
         VStack(spacing: 0) {
             let state = initState()
             let safeAreaInsets = UIApplication.shared.windows[0].safeAreaInsets
-
+            
             Rectangle()
                 .fill(state.backgroundColor)
                 .frame(maxWidth: .infinity, maxHeight: safeAreaInsets.top)
