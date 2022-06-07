@@ -132,8 +132,8 @@ h5 {
 .import-view .explanation-expandable .section-body h5 {
     font-weight: 500;
     font-size: var(--font-size-l);
-    margin-top: calc(var(--gdu) * 3);;
-    margin-bottom: calc(var(--gdu) * 3);;
+    margin-top: calc(var(--gdu) * 3);
+    margin-bottom: calc(var(--gdu) * 3);
 }
 
 .import-view .explanation-expandable button.bg-red {
