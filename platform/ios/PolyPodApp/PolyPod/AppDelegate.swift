@@ -35,9 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.reset()
         }
         
-        // Location tracking is disabled for now - no feature needs it
-        // LocationTracker.shared.startLocationLogging()
-        
         CoreDataStack.shared.isProtectedDataAvailable = { completion in
             dispatchToMainQueue {
                 completion(UIApplication.shared.isProtectedDataAvailable)
