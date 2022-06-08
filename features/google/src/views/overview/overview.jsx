@@ -75,7 +75,7 @@ const Overview = () => {
 
     return (
         <Screen className="overview" layout="poly-standard-layout">
-            <h1>{i18n.t("overview:your.google.data")}</h1>
+            <h1>{i18n.t("common:your.google.data")}</h1>
             <p>
                 {i18n.t("overview:analysed.categories", {
                     analysed_categories: bubbleData.length,

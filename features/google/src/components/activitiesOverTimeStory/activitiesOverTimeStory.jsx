@@ -182,7 +182,7 @@ export const ActivitiesOverTimeStoryDetails = ({ activitiesOverTime }) => {
                 ))}
             </Tabs>
             <SourceInfoButton
-                source={i18n.t("common:source.your.google.data")}
+                source={i18n.t("common:your.google.data")}
                 popUpProps={{ name: "info-activities-over-time" }}
             />
         </div>
