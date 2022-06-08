@@ -34,7 +34,7 @@ fun Greeting(name: String) {
 }
 
 @Composable
-fun SmallCardView(
+fun SmallTileView(
     size: Dp,
     topPadding: Dp,
     otherPadding: Dp,
@@ -98,21 +98,21 @@ fun DefaultPreview() {
         modifier = Modifier.padding(horizontalPadding.dp),
         horizontalArrangement = Arrangement.spacedBy(interItemSpacing.dp)
     ) {
-        SmallCardView(
+        SmallTileView(
             size = size,
             topPadding = smallCardTopPadding,
             otherPadding = smallCardOtherPadding,
             verticalSpacing = smallCardVerticalSpacing,
             cornerRadius = smallCardCornerRadius
         )
-        SmallCardView(
+        SmallTileView(
             size = size,
             topPadding = smallCardTopPadding,
             otherPadding = smallCardOtherPadding,
             verticalSpacing = smallCardVerticalSpacing,
             cornerRadius = smallCardCornerRadius
         )
-        SmallCardView(
+        SmallTileView(
             size = size,
             topPadding = smallCardTopPadding,
             otherPadding = smallCardOtherPadding,
