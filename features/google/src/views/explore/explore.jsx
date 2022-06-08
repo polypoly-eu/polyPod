@@ -26,7 +26,10 @@ const ReportCard = () => {
             </div>
             <p>{i18n.t("explore:reportCard.text")}</p>
             <RoutingWrapper route="/report" history={history}>
-                <PolyButton label={i18n.t("explore:reportCard.button")} className="report-button" />
+                <PolyButton
+                    label={i18n.t("explore:reportCard.button")}
+                    className="report-button"
+                />
             </RoutingWrapper>
         </div>
     );
