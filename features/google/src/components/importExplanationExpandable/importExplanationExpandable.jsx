@@ -91,6 +91,10 @@ const ImportExplanationExpandable = ({
         });
     };
 
+    const handleRemoveSelection = (fileName) => {
+        setSelectedFiles(selectedFiles.filter((file) => file.name != fileName));
+    };
+
     const handleImportFile = async () => {
         if (!selectedFiles.length) return;
         const { polyOut } = pod;
@@ -192,7 +196,12 @@ const ImportExplanationExpandable = ({
                         <div className="file-info">
                             <h5>{i18n.t("import:import.chosen")}</h5>
                             {selectedFiles.map((selectedFile, i) => (
-                                <div key={i}>
+                                <div
+                                    key={i}
+                                    onClick={() =>
+                                        handleRemoveSelection(selectedFile.name)
+                                    }
+                                >
                                     <p>{selectedFile.name}</p>
                                     <p>
                                         {i18n.t("import:import.size")}{" "}
