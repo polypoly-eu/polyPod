@@ -4,7 +4,7 @@
     "bubble.chart": "Dieses Diagramm heißt <strong>Blasendiagramm</strong>. Jede Blase steht für einen Datentyp. Die Anazahl der Blasen zeigt, wieviele Datentypen es gibt. Die Größe jeder Blase hängt davon ab, wie viele Daten sich in der Blase befinden.",
     "bar.chart": "Dieses Diagramm heißt <strong>Balkendiagramm</strong>. Die Länge jedes Balkens ist proportional zu dem Wert, den er darstellt.",
     "infographic.value.category": "(Wert) Kategorie",
-    "infographic.x.axis": "Titel X-Achse (Einheit)",   
-    "infographic.y.axis": "Titel Y-Achse (Einheit)",
+    "infographic.x.axis": "X-Achse (Einheit)",   
+    "infographic.y.axis": "Y-Achse (Einheit)",
     "infographic.legend": "Legende"   
 }
