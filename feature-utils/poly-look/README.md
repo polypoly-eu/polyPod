@@ -3,27 +3,27 @@
 polyLook is the visual component library for all features included in the
 polyPod applications.
 
-We use several component and visualization libraries; one of them is
-litElement. The reason for that choice is because litElement creates packages
-with standard code in js that does not need any other library or framework to
-work in the browser. It also makes the litElement component compatible with all
-kinds of front end applications no matter what framework it is encoded with. You
-can learn how to use litElement in the following
-[tutorials](https://lit.dev/docs/). Additionally, we use React as component
-library.
+The components are mainly based on React, although there are some LitElement
+components created and documented. The reason for that choice is because
+litElement creates packages with standard code in js that does not need any
+other library or framework to work in the browser. It also makes the litElement
+component compatible with all kinds of front end applications no matter what
+framework it is encoded with. You can learn how to use litElement in the
+following [tutorials](https://lit.dev/docs/).
 
 ## Quick guide:
 
-- **run test**: `npm test`
-- **run lint**: `npm run lint`
-- **build library**: `npm run build`
-- **build documentation**_ `npm run doc`
+- **Run test**: `npm test`
+- **Run lint**: `npm run lint`
+- **Build library**: `npm run build`
+- **Build documentation**_ `npm run doc`
 
 ## State of polyLook
 
 polyLook aims to be a framework agnostic component library for polyPod
-features. At the moment, however, it mainly contains prototypes for a potential
-approach, based on Lit and React elements.
+features. At the moment, however, it mainly contains React components in actual
+use throughout several features, and prototypes for a potential
+approach based on Lit elements.
 
 Visualisations and charts are located in `./src/visualisations` and
 `./src/visualisations/charts` respectively. When using these from a specific
@@ -38,9 +38,9 @@ folder. The name of the file must be written in lowerCamelCase.
 2- To test-drive and document the component we'll use the [storybook
 framework](https://storybook.js.org/). The necessary setup and stories are
 [here](./storybook/). To use the new component inside the storybook app we have
-to write a `*.stories.js` file inside the `storybook/stories/lit-components` folder with
-the same name of the component. In order to learn how to write a `*.story.js`
-file you can read the next
+to write a `*.stories.js` file inside the `storybook/stories/lit-components`
+folder with the same name of the component. In order to learn how to write a
+`*.story.js` file you can read the next
 [tutorial](https://storybook.js.org/docs/web-components/writing-stories/introduction). Please
 note that StoryBook is not built by default; you'll need to change to that
 specific directory and run `npm ci`.
