@@ -26,7 +26,10 @@ const DataStructureMiniStory = ({ data }) => {
 
     const totalTitle = i18n.t("dataStructure:total.chip");
 
-    const dataWithTotal = [...data, { title: totalTitle, value: totalFiles }];
+    const dataWithTotal = [
+        ...data,
+        { title: totalTitle, value: totalFiles, count: totalFiles },
+    ];
 
     const amountOfFiles = dataWithTotal.find(
         (bubble) => bubble.title === selectedFolder
