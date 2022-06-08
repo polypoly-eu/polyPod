@@ -24,7 +24,7 @@ const DataStructureMiniStory = ({ data }) => {
 
     const [selectedFolder, setSelectedFolder] = useState(data[0].title);
 
-    const totalTitle = "Total";
+    const totalTitle = i18n.t("dataStructure:total.chip");
 
     const dataWithTotal = [...data, { title: totalTitle, value: totalFiles }];
 
@@ -48,7 +48,10 @@ const DataStructureMiniStory = ({ data }) => {
         }
     };
 
-    const category = selectedFolder === totalTitle ? "" : "category";
+    const categorySuffix =
+        selectedFolder === totalTitle
+            ? ""
+            : " " + i18n.t("dataStructure:category");
 
     return (
         <>
@@ -56,8 +59,7 @@ const DataStructureMiniStory = ({ data }) => {
                 <p
                     dangerouslySetInnerHTML={{
                         __html: i18n.t("dataStructure:folder.info", {
-                            category: category,
-                            selected_folder: selectedFolder,
+                            selected_folder: selectedFolder + categorySuffix,
                             amount_of_files: amountOfFiles,
                         }),
                     }}
