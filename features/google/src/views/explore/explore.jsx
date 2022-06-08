@@ -22,15 +22,11 @@ const ReportCard = () => {
     return (
         <div className="analysis-card unrecognized-analysis-card poly-theme-light">
             <div className="unrecognized-analysis-title">
-                <h1>{"We need your help!"}</h1>
+                <h1>{i18n.t("explore:reportCard.headline")}</h1>
             </div>
-            <p>
-                {
-                    "If you send us an anonymised report about the structure of your Google data, it would help us improve the Google Data Importer so that it can show you even more insights."
-                }
-            </p>
+            <p>{i18n.t("explore:reportCard.text")}</p>
             <RoutingWrapper route="/report" history={history}>
-                <PolyButton label="Learn more" className="report-button" />
+                <PolyButton label={i18n.t("explore:reportCard.button")} className="report-button" />
             </RoutingWrapper>
         </div>
     );
