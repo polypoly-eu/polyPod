@@ -21,7 +21,7 @@ const Infographic = ({ image, explanation, legend = {} }) => {
     return Math.min(svg.width / viewBox.width, svg.height / viewBox.height);
   }
   useEffect(() => {
-    const container = d3.select("svg");
+    const container = d3.select(".infographic-svg svg");
 
     Object.keys(image.texts).forEach((key) => {
       const textField = container.select(`#${key}`);
