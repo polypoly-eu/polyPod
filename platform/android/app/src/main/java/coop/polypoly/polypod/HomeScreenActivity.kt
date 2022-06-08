@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.flowlayout.FlowRow
 
 class HomeScreenActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +63,10 @@ data class ContainerConfig(
     val horizontalInterItemSpacing: Dp
 )
 
+data class SectionConfig(
+    val verticalSpacing: Dp,
+)
+
 data class HomeScreenConfig(
     val numColumns: Int,
     val horizontalPadding: Dp
@@ -74,6 +79,67 @@ fun isLight(color: Color): Boolean {
 @Composable
 fun Greeting(name: String) {
     Text(text = "Hello $name!", modifier = Modifier.height(50.dp))
+}
+
+enum class ContainerType {
+    LARGELEFT,
+    ROW,
+    LARGERIGHT
+}
+
+@Composable
+fun MyDataSectionView(
+    tiles: List<Tile>,
+    bigTileConfig: TileConfig,
+    smallTileConfig: TileConfig,
+    containerConfig: ContainerConfig,
+    sectionConfig: SectionConfig,
+    homeScreenConfig: HomeScreenConfig
+) {
+
+    val containersConfig: List<ContainerType> = listOf(
+        ContainerType.LARGELEFT,
+        ContainerType.ROW,
+        ContainerType.LARGERIGHT,
+        ContainerType.ROW
+    )
+
+    val chunked = tiles.chunked(homeScreenConfig.numColumns)
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(
+            sectionConfig.verticalSpacing
+        )
+    ) {
+        Text(text = "Your Data")
+        FlowRow(
+            crossAxisSpacing = sectionConfig.verticalSpacing
+        ) {
+            chunked.forEachIndexed { index, tiles ->
+                val type = containersConfig[index % containersConfig.count()]
+                when (type) {
+                    ContainerType.LARGELEFT -> LargeLeftContainerView(
+                        tiles = tiles,
+                        bigTileConfig = bigTileConfig,
+                        smallTileConfig = smallTileConfig,
+                        containerConfig = containerConfig
+                    )
+                    ContainerType.ROW -> RowContainerView(
+                        tiles = tiles,
+                        tileConfig = smallTileConfig,
+                        containerConfig = containerConfig
+                    )
+                    ContainerType.LARGERIGHT -> LargeRightContainerView(
+                        tiles = tiles,
+                        bigTileConfig = bigTileConfig,
+                        smallTileConfig = smallTileConfig,
+                        containerConfig = containerConfig,
+                        homeScreenConfig = homeScreenConfig
+                    )
+                }
+            }
+        }
+    }
 }
 
 @Composable
@@ -255,6 +321,7 @@ fun DefaultPreview() {
     val configuration = LocalConfiguration.current
 
     val homeScreenConfig = HomeScreenConfig(numColumns = 3, horizontalPadding = 8.dp) // ktlint-disable max-line-length
+    val sectionConfig = SectionConfig(verticalSpacing = 8.dp)
     val containerConfig = ContainerConfig(horizontalInterItemSpacing = 8.dp, verticalInterItemSpacing = 8.dp) // ktlint-disable max-line-length
 
     val screenWidth = configuration.screenWidthDp
@@ -296,7 +363,7 @@ fun DefaultPreview() {
         backgroundColor = Color.Black
     )
 
-    val tiles = listOf<Tile>(tile, tile, tile)
+    val tiles = listOf<Tile>(tile, tile, tile, tile, tile, tile, tile, tile, tile, tile, tile, tile)
 //
 //    RowContainerView(tiles, smallTileConfig, containerConfig)
 
@@ -309,11 +376,20 @@ fun DefaultPreview() {
 //        containerConfig = containerConfig
 //    )
 
-    LargeRightContainerView(
+//    LargeRightContainerView(
+//        tiles = tiles,
+//        bigTileConfig = bigTileConfig,
+//        smallTileConfig = smallTileConfig,
+//        containerConfig = containerConfig,
+//        homeScreenConfig = homeScreenConfig
+//    )
+
+    MyDataSectionView(
         tiles = tiles,
         bigTileConfig = bigTileConfig,
         smallTileConfig = smallTileConfig,
         containerConfig = containerConfig,
+        sectionConfig = sectionConfig,
         homeScreenConfig = homeScreenConfig
     )
 }
