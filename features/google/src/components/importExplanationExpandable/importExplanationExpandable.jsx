@@ -91,8 +91,10 @@ const ImportExplanationExpandable = ({
         });
     };
 
-    const handleRemoveSelection = (fileName) => {
-        setSelectedFiles(selectedFiles.filter((file) => file.name != fileName));
+    const handleRemoveSelection = (fileIndex) => {
+        setSelectedFiles(
+            selectedFiles.filter((file, index) => index != fileIndex)
+        );
     };
 
     const handleImportFile = async () => {
@@ -198,9 +200,7 @@ const ImportExplanationExpandable = ({
                             {selectedFiles.map((selectedFile, i) => (
                                 <div
                                     key={i}
-                                    onClick={() =>
-                                        handleRemoveSelection(selectedFile.name)
-                                    }
+                                    onClick={() => handleRemoveSelection(i)}
                                 >
                                     <p>{selectedFile.name}</p>
                                     <p>
