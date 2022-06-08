@@ -1,8 +1,7 @@
 {
-    "text1": "Dieses Diagramm heißt Balkendiagramm. Die Länge jedes Balkens ist proportional zum dem Wert, den er darstellt.",
+    "text1": "Dieses Diagramm zeigt die Anzahl der Daten in Ihrem heruntergeladenen Datensatz, die mit Uhrzeit und Datum gespeichert wurden, sowie die Entwicklung dieser Anzahl über die Zeit.",
     "explanation-item1": "Die Legende zeigt, wofür eine bestimmte Farbe steht.",
     "explanation-item2": "Titel und Einheit der Achse geben an, was eine Achse darstellt und wie ihre Werte gemessen werden.",
-    "explanation-item3": "Jeder Balken stellt einen Wert auf der X-Achse für eine Kategorie auf der Y-Achse dar.",
-    "text2": "Please note, that we are only processing parts of your Facebook data for this analysis so far. So the numbers on this screen show a tendency, but not the total number in your download.",
-    "text3": "The data with timestamps is not very consistent. In some cases, we do not have a timestamp where we would expect one. In another case, we saw a larger number of timestamps for watching a single advertising video. It seems that Facebook creates a timestamp every few seconds to check how long you watched."
+    "explanation-item3": "Jeder Balken stellt einen Wert auf der Y-Achse für eine Kategorie auf der X-Achse dar.",
+    "text2": "Bitte beachten Sie, daß wir bisher nur einen Teil der Google-Daten analysieren. Daher zeigen die Werte hier eine Tendenz, aber nicht die kompletten Daten in Ihrem Datensatz."
 }

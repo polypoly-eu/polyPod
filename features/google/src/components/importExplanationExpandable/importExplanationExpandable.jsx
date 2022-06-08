@@ -185,12 +185,9 @@ const ImportExplanationExpandable = ({
                             <h5>{i18n.t("import:import.chosen")}</h5>
                             {selectedFiles.map((selectedFile, i) => (
                                 <div key={i}>
+                                    <p>{selectedFile.name}</p>
                                     <p>
-                                        {i18n.t("import:import.name")}{" "}
-                                        {selectedFile.name}
-                                    </p>
-                                    <p>
-                                        {i18n.t("import:import.size")}
+                                        {i18n.t("import:import.size")}{" "}
                                         {formatSize(selectedFile.size)}
                                     </p>
                                 </div>
@@ -233,9 +230,6 @@ const ImportExplanationExpandable = ({
                 <p>{i18n.t("import:explore.1")}</p>
                 {files?.length > 0 ? (
                     <>
-                        <p>
-                            {i18n.t("import:imported.file")} {files[0]?.name}
-                        </p>
                         <RoutingWrapper history={history} route="/overview">
                             <PolyButton
                                 className="bg-red"
