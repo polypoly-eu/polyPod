@@ -124,9 +124,17 @@ const ImportExplanationExpandable = ({
                 <div className="poly-separator"></div>
                 <h4>{i18n.t("import:how.it.works")}</h4>
                 <p>{i18n.t("import:request.2")}</p>
-                <p>{i18n.t("import:request.3")}</p>
+                <p
+                    dangerouslySetInnerHTML={{
+                        __html: i18n.t(`import:request.3`),
+                    }}
+                ></p>
                 <img src="./images/document.svg" alt="document" />
-                <p>{i18n.t("import:request.4")}</p>
+                <p
+                    dangerouslySetInnerHTML={{
+                        __html: i18n.t(`import:request.4`),
+                    }}
+                ></p>
                 <InfoBox textContent={i18n.t("import:request.info.2")} />
                 <PolyButton
                     className="bg-red"
