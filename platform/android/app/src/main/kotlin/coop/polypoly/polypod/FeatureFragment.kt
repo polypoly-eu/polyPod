@@ -27,7 +27,7 @@ import kotlinx.coroutines.CompletableDeferred
 
 private const val PICK_FILE_REQUEST_CODE = 1
 
-private fun luminance(color: Int): Double =
+fun luminance(color: Int): Double =
     Color.red(color) * 0.2126 +
         Color.green(color) * 0.7152 +
         Color.blue(color) * 0.0722
@@ -64,7 +64,7 @@ private enum class ForegroundResources(
 
     companion object {
         fun fromBackgroundColor(color: Int): ForegroundResources =
-            if (luminance(color) > 80) DARK else LIGHT
+            if (luminance(color) > 100) DARK else LIGHT
     }
 }
 

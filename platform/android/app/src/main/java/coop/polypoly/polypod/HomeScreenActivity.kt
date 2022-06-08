@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -12,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
@@ -57,6 +59,10 @@ data class HomeScreenConfig(
     val horizontalPadding: Dp
 )
 
+fun isLight(color: Color): Boolean {
+    return luminance(color.toArgb()) > 100
+}
+
 @Composable
 fun Greeting(name: String) {
     Text(text = "Hello $name!", modifier = Modifier.height(50.dp))
@@ -81,6 +87,7 @@ fun RowContainerView(
 
 @Composable
 fun BigTileView(tile: Tile, config: TileConfig) {
+    val foregroundColor = if (isLight(tile.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
     Card(
         modifier = Modifier
             .width(config.width)
@@ -90,12 +97,13 @@ fun BigTileView(tile: Tile, config: TileConfig) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
+                .background(tile.backgroundColor)
                 .padding(
                     top = config.topPadding,
                     start = config.startPadding,
                     end = config.endPadding,
                     bottom = config.bottomPadding
-                ),
+                )
         ) {
             Image(
                 painter = painterResource(id = tile.imageId),
@@ -112,9 +120,10 @@ fun BigTileView(tile: Tile, config: TileConfig) {
                 )
             )
             Column() {
-               Text(
+                Text(
                     text = tile.title,
-                    textAlign = TextAlign.Start
+                    textAlign = TextAlign.Start,
+                    color = foregroundColor
                 )
                 Spacer(
                     modifier = Modifier.defaultMinSize(
@@ -124,7 +133,8 @@ fun BigTileView(tile: Tile, config: TileConfig) {
                 )
                 Text(
                     text = tile.description,
-                    textAlign = TextAlign.Start
+                    textAlign = TextAlign.Start,
+                    color = foregroundColor
                 )
             }
         }
@@ -133,7 +143,7 @@ fun BigTileView(tile: Tile, config: TileConfig) {
 
 @Composable
 fun SmallTileView(tile: Tile, config: TileConfig) {
-    // TODO: background color
+    val foregroundColor = if (isLight(tile.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
     Card(
         modifier = Modifier
             .width(config.width)
@@ -142,6 +152,7 @@ fun SmallTileView(tile: Tile, config: TileConfig) {
     ) {
         Column(
             modifier = Modifier
+                .background(tile.backgroundColor)
                 .padding(
                     top = config.topPadding,
                     start = config.startPadding,
@@ -166,7 +177,8 @@ fun SmallTileView(tile: Tile, config: TileConfig) {
             )
             Text(
                 text = tile.title,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = foregroundColor
             )
         }
     }
@@ -177,16 +189,16 @@ fun SmallTileView(tile: Tile, config: TileConfig) {
 fun DefaultPreview() {
     val configuration = LocalConfiguration.current
 
-    val homeScreenConfig = HomeScreenConfig(numColumns = 3, horizontalPadding = 8.dp)
+    val homeScreenConfig = HomeScreenConfig(numColumns = 3, horizontalPadding = 8.dp) // ktlint-disable max-line-length
     val containerConfig = ContainerConfig(horizontalInterItemSpacing = 8.dp)
 
     val screenWidth = configuration.screenWidthDp
     val totalScreenPadding = 2 * homeScreenConfig.horizontalPadding.value
     val containerWidth = screenWidth - totalScreenPadding
 
-    val interItemSpacing = (homeScreenConfig.numColumns - 1) * containerConfig.horizontalInterItemSpacing.value
-    val smallTileWidth = (containerWidth - interItemSpacing) / homeScreenConfig.numColumns
-    val bigTileWidth = containerWidth - smallTileWidth - containerConfig.horizontalInterItemSpacing.value
+    val interItemSpacing = (homeScreenConfig.numColumns - 1) * containerConfig.horizontalInterItemSpacing.value // ktlint-disable max-line-length
+    val smallTileWidth = (containerWidth - interItemSpacing) / homeScreenConfig.numColumns // ktlint-disable max-line-length
+    val bigTileWidth = containerWidth - smallTileWidth - containerConfig.horizontalInterItemSpacing.value // ktlint-disable max-line-length
 
     val smallTileConfig = TileConfig(
         height = smallTileWidth.dp,
@@ -214,9 +226,9 @@ fun DefaultPreview() {
 
     val tile = Tile(
         title = "Facebook Import",
-        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
         imageId = R.drawable.ic_launcher,
-        backgroundColor = Color.White
+        backgroundColor = Color.Black
     )
 
 //    val tiles = listOf<Tile>(tile, tile, tile)
