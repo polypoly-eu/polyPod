@@ -36,8 +36,10 @@ export default class AccessLogImporter {
 
         const parser = new AccessLogParser();
 
-        googleAccount.accessLog = await Promise.all(
-            accessLogEntries.map((entry) => parser.parse(entry))
-        );
+        googleAccount.accessLog = (
+            await Promise.all(
+                accessLogEntries.map((entry) => parser.parse(entry))
+            )
+        ).flat();
     }
 }
