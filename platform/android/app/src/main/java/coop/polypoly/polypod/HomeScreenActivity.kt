@@ -29,42 +29,37 @@ class HomeScreenActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!", modifier = Modifier.height(50.dp))
-}
-
-/*
-struct RowContainerView: View {
-    let cards: [Card]
-    var body: some View {
-        HStack(alignment: .top, spacing: HomeScreenConstants.TileContainer.horizontalSpacing) {
-            ForEach(cards) { card in
-                SmallCardView(card: card)
-            }
-            if (cards.count < HomeScreenConstants.TileContainer.numberOfColumns) {
-                Spacer()
-            }
-        }
-    }
-}
-
-
-struct Card: Identifiable {
-    let id: FeatureId
-    let title: String
-    let description: String
-    let image: UIImage
-    let backgroundColor: Color
-}
- */
-
 data class Tile(
     val title: String,
     val description: String,
     val imageId: Int,
     val backgroundColor: Color
 )
+
+data class TileConfig(
+    val height: Dp,
+    val width: Dp,
+    val verticalSpacing: Dp,
+    val topPadding: Dp,
+    val startPadding: Dp,
+    val endPadding: Dp,
+    val bottomPadding: Dp,
+    val cornerRadius: Dp
+)
+
+data class ContainerConfig(
+    val horizontalInterItemSpacing: Dp
+)
+
+data class HomeScreenConfig(
+    val numColumns: Int,
+    val horizontalPadding: Dp
+)
+
+@Composable
+fun Greeting(name: String) {
+    Text(text = "Hello $name!", modifier = Modifier.height(50.dp))
+}
 
 @Composable
 fun RowContainerView(
@@ -79,6 +74,39 @@ fun RowContainerView(
     ) {
         tiles.forEach {
             SmallTileView(it, tileConfig)
+        }
+    }
+}
+
+@Composable
+fun BigTileView(tile: Tile, config: TileConfig) {
+    Card(
+        modifier = Modifier
+            .width(config.width)
+            .height(config.height),
+        shape = RoundedCornerShape(config.cornerRadius)
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Image(
+                painter = painterResource(id = tile.imageId),
+                contentDescription = null,
+                // Takes all the height left after the text is placed
+                modifier = Modifier.weight(1.0f),
+                contentScale = ContentScale.Fit,
+                alignment = Alignment.Center
+            )
+            Column() {
+                Text(
+                    text = tile.title,
+                    textAlign = TextAlign.Start
+                )
+                Text(
+                    text = tile.description,
+                    textAlign = TextAlign.Start
+                )
+            }
         }
     }
 }
@@ -124,33 +152,25 @@ fun SmallTileView(tile: Tile, config: TileConfig) {
     }
 }
 
-data class TileConfig(
-    val height: Dp,
-    val width: Dp,
-    val verticalSpacing: Dp,
-    val topPadding: Dp,
-    val startPadding: Dp,
-    val endPadding: Dp,
-    val bottomPadding: Dp,
-    val cornerRadius: Dp
-)
-
-data class ContainerConfig(
-    val horizontalInterItemSpacing: Dp
-)
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     val configuration = LocalConfiguration.current
-    val interItemSpacing = 8
-    val horizontalPadding = 8
 
-    val size: Dp = (configuration.screenWidthDp / 3 - 2 * interItemSpacing - 2 * horizontalPadding).dp // ktlint-disable max-line-length
+    val homeScreenConfig = HomeScreenConfig(numColumns = 3, horizontalPadding = 8.dp)
+    val containerConfig = ContainerConfig(horizontalInterItemSpacing = 8.dp)
 
-    val smallCardConfig = TileConfig(
-        height = size,
-        width = size,
+    val screenWidth = configuration.screenWidthDp
+    val totalScreenPadding = 2 * homeScreenConfig.horizontalPadding.value
+    val containerWidth = screenWidth - totalScreenPadding
+    
+    val interItemSpacing = (homeScreenConfig.numColumns - 1) * containerConfig.horizontalInterItemSpacing.value
+    val smallTileWidth = (containerWidth - interItemSpacing) / homeScreenConfig.numColumns
+    val bigTileWidth = containerWidth - smallTileWidth - containerConfig.horizontalInterItemSpacing.value
+
+    val smallTileConfig = TileConfig(
+        height = smallTileWidth.dp,
+        width = smallTileWidth.dp,
         verticalSpacing = 8.dp,
         topPadding = 8.dp,
         startPadding = 8.dp,
@@ -159,16 +179,27 @@ fun DefaultPreview() {
         cornerRadius = 8.dp,
     )
 
-    val containerConfig = ContainerConfig(horizontalInterItemSpacing = 8.dp)
+    val bigTileConfig = TileConfig(
+        height = bigTileWidth.dp,
+        width = bigTileWidth.dp,
+        verticalSpacing = 8.dp,
+        topPadding = 8.dp,
+        startPadding = 8.dp,
+        endPadding = 8.dp,
+        bottomPadding = 8.dp,
+        cornerRadius = 8.dp,
+    )
 
     val tile = Tile(
         title = "Facebook Import",
-        description = "",
+        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
         imageId = R.drawable.ic_launcher,
         backgroundColor = Color.White
     )
 
-    val tiles = listOf<Tile>(tile, tile, tile)
+//    val tiles = listOf<Tile>(tile, tile, tile)
+//
+//    RowContainerView(tiles, smallTileConfig, containerConfig)
 
-    RowContainerView(tiles, smallCardConfig, containerConfig)
+    BigTileView(tile = tile, config = bigTileConfig)
 }
