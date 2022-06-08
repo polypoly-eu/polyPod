@@ -261,7 +261,7 @@ open class FeatureFragment : Fragment() {
                 }
             }
         }
-        return ExternalFile(url = url, name = name, size = size)
+        return if(size>0) ExternalFile(url = url, name = name, size = size) else null
     }
 
     override fun onActivityResult(

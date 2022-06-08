@@ -81,10 +81,11 @@ const ImportExplanationExpandable = ({
         const { polyNav } = pod;
         runWithLoadingScreen(async function () {
             try {
-                setSelectedFiles([
-                    ...selectedFiles,
-                    await polyNav.pickFile("application/zip"),
-                ]);
+                polyNav.pickFile("application/zip").then((pickedFile) => {
+                    if (pickedFile) {
+                        setSelectedFiles([...selectedFiles, pickedFile]);
+                    }
+                });
             } catch (error) {
                 setGlobalError(new FileSelectionError(error));
             }
