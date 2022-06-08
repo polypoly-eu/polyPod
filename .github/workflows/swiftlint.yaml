@@ -6,6 +6,7 @@ on:
       - .github/workflows/swiftlint.yaml
       - "platform/ios/**/*.swift"
       - "platform/ios/.swiftlint.yml"
+      - "platform/core/**/*.swift"
 
   pull_request:
     types: [assigned, opened, synchronize, ready_for_review, reopened]
@@ -13,6 +14,7 @@ on:
       - .github/workflows/swiftlint.yaml
       - "platform/ios/**/*.swift"
       - "platform/ios/.swiftlint.yml"
+      - "platform/core/**/*.swift"
 
 jobs:
   swiftlint:
