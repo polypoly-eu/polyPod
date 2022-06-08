@@ -44,7 +44,8 @@ data class TileConfig(
     val startPadding: Dp,
     val endPadding: Dp,
     val bottomPadding: Dp,
-    val cornerRadius: Dp
+    val cornerRadius: Dp,
+    val textVerticalSpacing: Dp
 )
 
 data class ContainerConfig(
@@ -88,6 +89,13 @@ fun BigTileView(tile: Tile, config: TileConfig) {
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .padding(
+                    top = config.topPadding,
+                    start = config.startPadding,
+                    end = config.endPadding,
+                    bottom = config.bottomPadding
+                ),
         ) {
             Image(
                 painter = painterResource(id = tile.imageId),
@@ -97,10 +105,22 @@ fun BigTileView(tile: Tile, config: TileConfig) {
                 contentScale = ContentScale.Fit,
                 alignment = Alignment.Center
             )
+            Spacer(
+                modifier = Modifier.defaultMinSize(
+                    minHeight = config.verticalSpacing,
+                    minWidth = config.width
+                )
+            )
             Column() {
-                Text(
+               Text(
                     text = tile.title,
                     textAlign = TextAlign.Start
+                )
+                Spacer(
+                    modifier = Modifier.defaultMinSize(
+                        minHeight = config.textVerticalSpacing,
+                        minWidth = config.width
+                    )
                 )
                 Text(
                     text = tile.description,
@@ -163,7 +183,7 @@ fun DefaultPreview() {
     val screenWidth = configuration.screenWidthDp
     val totalScreenPadding = 2 * homeScreenConfig.horizontalPadding.value
     val containerWidth = screenWidth - totalScreenPadding
-    
+
     val interItemSpacing = (homeScreenConfig.numColumns - 1) * containerConfig.horizontalInterItemSpacing.value
     val smallTileWidth = (containerWidth - interItemSpacing) / homeScreenConfig.numColumns
     val bigTileWidth = containerWidth - smallTileWidth - containerConfig.horizontalInterItemSpacing.value
@@ -177,6 +197,7 @@ fun DefaultPreview() {
         endPadding = 8.dp,
         bottomPadding = 8.dp,
         cornerRadius = 8.dp,
+        textVerticalSpacing = 0.dp
     )
 
     val bigTileConfig = TileConfig(
@@ -188,6 +209,7 @@ fun DefaultPreview() {
         endPadding = 8.dp,
         bottomPadding = 8.dp,
         cornerRadius = 8.dp,
+        textVerticalSpacing = 8.dp,
     )
 
     val tile = Tile(
