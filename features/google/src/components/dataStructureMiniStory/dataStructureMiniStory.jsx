@@ -84,7 +84,7 @@ const DataStructureMiniStory = ({ data }) => {
                 onChipClick={handleFolderSelected}
             />
             <SourceInfoButton
-                source={"Your google data"}
+                source={i18n.t("common:source.your.google.data")}
                 popUpProps={{ name: "info-data-structure" }}
             />
         </>
