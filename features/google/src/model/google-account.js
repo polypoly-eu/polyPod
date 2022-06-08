@@ -25,7 +25,7 @@ export default class GoogleAccount extends DataAccount {
                 count: this.activitySegments.length,
             },
             {
-                title: "Acitivities",
+                title: "Activities",
                 count: this.activities.length,
             },
         ];
