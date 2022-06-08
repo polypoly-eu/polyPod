@@ -58,6 +58,7 @@ data class TileConfig(
 )
 
 data class ContainerConfig(
+    val verticalInterItemSpacing: Dp,
     val horizontalInterItemSpacing: Dp
 )
 
@@ -73,6 +74,31 @@ fun isLight(color: Color): Boolean {
 @Composable
 fun Greeting(name: String) {
     Text(text = "Hello $name!", modifier = Modifier.height(50.dp))
+}
+
+@Composable
+fun LargeLeftContainerView(
+    tiles: List<Tile>,
+    bigTileConfig: TileConfig,
+    smallTileConfig: TileConfig,
+    containerConfig: ContainerConfig
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(
+            containerConfig.horizontalInterItemSpacing
+        )
+    ) {
+        BigTileView(tile = tiles.first(), config = bigTileConfig)
+        Column(
+            verticalArrangement = Arrangement.spacedBy(
+                containerConfig.verticalInterItemSpacing
+            )
+        ) {
+            tiles.drop(1).forEach {
+                SmallTileView(tile = it, config = smallTileConfig)
+            }
+        }
+    }
 }
 
 @Composable
@@ -197,7 +223,7 @@ fun DefaultPreview() {
     val configuration = LocalConfiguration.current
 
     val homeScreenConfig = HomeScreenConfig(numColumns = 3, horizontalPadding = 8.dp) // ktlint-disable max-line-length
-    val containerConfig = ContainerConfig(horizontalInterItemSpacing = 8.dp)
+    val containerConfig = ContainerConfig(horizontalInterItemSpacing = 8.dp, verticalInterItemSpacing = 8.dp) // ktlint-disable max-line-length
 
     val screenWidth = configuration.screenWidthDp
     val totalScreenPadding = 2 * homeScreenConfig.horizontalPadding.value
@@ -238,9 +264,16 @@ fun DefaultPreview() {
         backgroundColor = Color.Black
     )
 
-//    val tiles = listOf<Tile>(tile, tile, tile)
+    val tiles = listOf<Tile>(tile, tile, tile)
 //
 //    RowContainerView(tiles, smallTileConfig, containerConfig)
 
-    BigTileView(tile = tile, config = bigTileConfig)
+//    BigTileView(tile = tile, config = bigTileConfig)
+
+    LargeLeftContainerView(
+        tiles = tiles,
+        bigTileConfig = bigTileConfig,
+        smallTileConfig = smallTileConfig,
+        containerConfig = containerConfig
+    )
 }
