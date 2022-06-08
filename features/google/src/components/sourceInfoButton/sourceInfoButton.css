@@ -4,5 +4,5 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-right: -16px;
+    margin-right: calc(var(--gdu) * -4);
 }
