@@ -102,6 +102,38 @@ fun LargeLeftContainerView(
 }
 
 @Composable
+fun LargeRightContainerView(
+    tiles: List<Tile>,
+    bigTileConfig: TileConfig,
+    smallTileConfig: TileConfig,
+    containerConfig: ContainerConfig,
+    homeScreenConfig: HomeScreenConfig
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(
+            containerConfig.horizontalInterItemSpacing
+        )
+    ) {
+        if (tiles.count() < homeScreenConfig.numColumns) {
+            tiles.forEach {
+                SmallTileView(tile = it, config = smallTileConfig)
+            }
+        } else {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(
+                    containerConfig.verticalInterItemSpacing
+                )
+            ) {
+                tiles.dropLast(1).forEach {
+                    SmallTileView(tile = it, config = smallTileConfig)
+                }
+            }
+            BigTileView(tile = tiles.last(), config = bigTileConfig)
+        }
+    }
+}
+
+@Composable
 fun RowContainerView(
     tiles: List<Tile>,
     tileConfig: TileConfig,
@@ -270,10 +302,18 @@ fun DefaultPreview() {
 
 //    BigTileView(tile = tile, config = bigTileConfig)
 
-    LargeLeftContainerView(
+//    LargeLeftContainerView(
+//        tiles = tiles,
+//        bigTileConfig = bigTileConfig,
+//        smallTileConfig = smallTileConfig,
+//        containerConfig = containerConfig
+//    )
+
+    LargeRightContainerView(
         tiles = tiles,
         bigTileConfig = bigTileConfig,
         smallTileConfig = smallTileConfig,
-        containerConfig = containerConfig
+        containerConfig = containerConfig,
+        homeScreenConfig = homeScreenConfig
     )
 }
