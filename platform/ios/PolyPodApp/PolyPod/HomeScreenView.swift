@@ -111,7 +111,7 @@ struct HomeScreenConstants {
     }
     
     struct SmallTile {
-        static let topPadding = PolyStyle.Spacing.plSpace6x
+        static let topPadding = 0.0
         static let otherPadding = PolyStyle.Spacing.plSpace2x
         static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
                                                     size: PolyStyle.Font.Size.xs)
