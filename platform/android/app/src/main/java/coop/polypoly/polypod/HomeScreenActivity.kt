@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
@@ -33,33 +34,68 @@ fun Greeting(name: String) {
     Text(text = "Hello $name!", modifier = Modifier.height(50.dp))
 }
 
+/*
+struct RowContainerView: View {
+    let cards: [Card]
+    var body: some View {
+        HStack(alignment: .top, spacing: HomeScreenConstants.TileContainer.horizontalSpacing) {
+            ForEach(cards) { card in
+                SmallCardView(card: card)
+            }
+            if (cards.count < HomeScreenConstants.TileContainer.numberOfColumns) {
+                Spacer()
+            }
+        }
+    }
+}
+
+
+struct Card: Identifiable {
+    let id: FeatureId
+    let title: String
+    let description: String
+    let image: UIImage
+    let backgroundColor: Color
+}
+ */
+
+data class Tile(
+    val title: String,
+    val description: String,
+    val imageId: Int,
+    val backgroundColor: Color
+)
+
 @Composable
-fun SmallTileView(
-    size: Dp,
-    topPadding: Dp,
-    otherPadding: Dp,
-    verticalSpacing: Dp,
-    cornerRadius: Dp
-) {
+fun RowContainerView(tiles: List<Tile>, tileConfig: TileConfig) {
+    Row() {
+        tiles.forEach {
+            SmallTileView(it, tileConfig)
+        }
+    }
+}
+
+@Composable
+fun SmallTileView(tile: Tile, config: TileConfig) {
     Card(
         modifier = Modifier
-            .width(size)
-            .height(size),
-        shape = RoundedCornerShape(cornerRadius)
+            .width(config.width)
+            .height(config.height),
+        shape = RoundedCornerShape(config.cornerRadius)
     ) {
         Column(
             modifier = Modifier
                 .padding(
-                    top = topPadding,
-                    start = otherPadding,
-                    end = otherPadding,
-                    bottom = otherPadding
+                    top = config.topPadding,
+                    start = config.startPadding,
+                    end = config.endPadding,
+                    bottom = config.bottomPadding
                 ),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher),
+                painter = painterResource(id = tile.imageId),
                 contentDescription = null,
                 // Takes all the height left after the text is placed
                 modifier = Modifier.weight(1.0f),
@@ -68,16 +104,27 @@ fun SmallTileView(
             )
             Spacer(
                 modifier = Modifier.defaultMinSize(
-                    minWidth = size, minHeight = verticalSpacing
+                    minWidth = config.width, minHeight = config.verticalSpacing
                 )
             )
             Text(
-                text = "Facebook Import",
+                text = tile.title,
                 textAlign = TextAlign.Center
             )
         }
     }
 }
+
+data class TileConfig(
+    val height: Dp,
+    val width: Dp,
+    val verticalSpacing: Dp,
+    val topPadding: Dp,
+    val startPadding: Dp,
+    val endPadding: Dp,
+    val bottomPadding: Dp,
+    val cornerRadius: Dp
+)
 
 @Preview(showBackground = true)
 @Composable
@@ -86,38 +133,32 @@ fun DefaultPreview() {
     val interItemSpacing = 8
     val horizontalPadding = 8
 
-    // small card
-    val smallCardVerticalSpacing = 8.dp
-    val smallCardTopPadding = 8.dp
-    val smallCardOtherPadding = 8.dp
-    val smallCardCornerRadius = 8.dp
-
     val size: Dp = (configuration.screenWidthDp / 3 - 2 * interItemSpacing - 2 * horizontalPadding).dp // ktlint-disable max-line-length
+
+    val smallCardConfig = TileConfig(
+        height = size,
+        width = size,
+        verticalSpacing = 8.dp,
+        topPadding = 8.dp,
+        startPadding = 8.dp,
+        endPadding = 8.dp,
+        bottomPadding = 8.dp,
+        cornerRadius = 8.dp,
+    )
+
+    val tile = Tile(
+        title = "Facebook Import",
+        description = "",
+        imageId = R.drawable.ic_launcher,
+        backgroundColor = Color.White
+    )
 
     Row(
         modifier = Modifier.padding(horizontalPadding.dp),
         horizontalArrangement = Arrangement.spacedBy(interItemSpacing.dp)
     ) {
-        SmallTileView(
-            size = size,
-            topPadding = smallCardTopPadding,
-            otherPadding = smallCardOtherPadding,
-            verticalSpacing = smallCardVerticalSpacing,
-            cornerRadius = smallCardCornerRadius
-        )
-        SmallTileView(
-            size = size,
-            topPadding = smallCardTopPadding,
-            otherPadding = smallCardOtherPadding,
-            verticalSpacing = smallCardVerticalSpacing,
-            cornerRadius = smallCardCornerRadius
-        )
-        SmallTileView(
-            size = size,
-            topPadding = smallCardTopPadding,
-            otherPadding = smallCardOtherPadding,
-            verticalSpacing = smallCardVerticalSpacing,
-            cornerRadius = smallCardCornerRadius
-        )
+        SmallTileView(tile, smallCardConfig)
+        SmallTileView(tile, smallCardConfig)
+        SmallTileView(tile, smallCardConfig)
     }
 }
