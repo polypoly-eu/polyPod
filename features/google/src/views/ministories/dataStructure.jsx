@@ -1,6 +1,7 @@
 import React from "react";
 import DataStructureMiniStory from "../../components/dataStructureMiniStory/dataStructureMiniStory.jsx";
 import { SingleDataStory } from "./singleDataStory.jsx";
+import i18n from "!silly-i18n";
 
 //TODO need to be put in poly-analysis & i18n translations
 class DataStructureMinistory extends SingleDataStory {
@@ -9,7 +10,7 @@ class DataStructureMinistory extends SingleDataStory {
     }
 
     get title() {
-        return "DataStructure Ministory";
+        return i18n.t("dataStructure:title");
     }
 
     _renderSummary() {
@@ -18,9 +19,10 @@ class DataStructureMinistory extends SingleDataStory {
         return (
             <>
                 <p>
-                    {`Here is the data your account holds: 
-                    Datapoints: ${this.analysisData.length},
-                     Amount of files: ${totalFiles}`}
+                    {i18n.t("dataStructure:summary", {
+                        amount_of_folders: this.analysisData.length,
+                        amount_of_files: totalFiles,
+                    })}
                 </p>
                 <DataStructureMiniStory data={this.analysisData} />
             </>

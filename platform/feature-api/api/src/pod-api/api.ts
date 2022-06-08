@@ -127,22 +127,22 @@ export interface PolyOut extends Omit<FS, "readdir"> {
  */
 export interface PolyNav {
     /**
-     * A way for features to display the contents of a web page of the given URL.
+     * A way for features to display the contents of a web page for the given URL.
      * @param {string} url - The URL to open.
      */
     openUrl(url: string): Promise<void>;
     /**
-     * Describe what actions are possible within the pod when a feature is loaded
+     * Describe which actions are possible within the pod when a feature is loaded
      * @param {string[]} actions - A list of actions that the user can take.
      */
     setActiveActions(actions: string[]): Promise<void>;
     /**
-     * Set a title in of a Pod
+     * Set a title in a Pod
      * @param {string} title - The title to set
      */
     setTitle(title: string): Promise<void>;
     /**
-     * Ask the user to pick a file and returns it.
+     * Asks the user to pick a file and returns it.
      * @param {string} [type] - The type of file the user selects, as a valid MIME type string. If no type is passed, the user can chose any type of file.
      * @throws if an unsupported MIME type was passed as the type argument.
      * @return an ExternalFile Object or `null` if the user cancelled.

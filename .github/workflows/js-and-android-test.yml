@@ -74,6 +74,7 @@ jobs:
                   distribution: 'temurin'
                   cache: 'gradle'
             - name: Build core with Android bindings
+              if: steps.changes.outputs.android == 'true'
               working-directory: platform/core
               run: make android_bindings
             - name: Test android

@@ -62,11 +62,11 @@
     padding: 0px 12px;
     margin-left: 12px;
     margin-right: -20px;
-    font-size: 14px;
+    font-size: var(--font-size-m);
 }
 
 .analysis-card .summary-text {
-    font-size: 16px;
+    font-size: var(--font-size-ml);
     font-weight: 400;
     color: var(--text-light);
     margin: 0;
@@ -85,7 +85,7 @@
 
 .unrecognized-analysis-card .unrecognized-analysis-title h1 {
     font-family: "Jost Medium";
-    font-size: 24px;
+    font-size: var(--font-size-xl);
     margin: 0;
 }
 

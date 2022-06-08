@@ -25,7 +25,8 @@ If, for whatever reason, you only want the dot file, you can use:
 
     make polyExplorer.dot
 
-And so on and so forth.
+And so on and so forth; use `make` for all available targets (including
+`google.svg` and `facebookImport.svg` right now).
 
 ## Known issues
 

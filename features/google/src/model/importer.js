@@ -5,7 +5,7 @@ import SemanticLocationsImporter from "./importers/semantic-locations-importer";
 
 export const dataImporters = [
     ActivitiesHtmlImporter,
-    SemanticLocationsImporter,
     ActivitiesJsonImporter,
     AccessLogImporter,
+    SemanticLocationsImporter,
 ];
