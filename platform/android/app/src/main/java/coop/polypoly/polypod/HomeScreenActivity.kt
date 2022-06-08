@@ -67,8 +67,16 @@ data class Tile(
 )
 
 @Composable
-fun RowContainerView(tiles: List<Tile>, tileConfig: TileConfig) {
-    Row() {
+fun RowContainerView(
+    tiles: List<Tile>,
+    tileConfig: TileConfig,
+    containerConfig: ContainerConfig
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(
+            containerConfig.horizontalInterItemSpacing
+        )
+    ) {
         tiles.forEach {
             SmallTileView(it, tileConfig)
         }
@@ -77,6 +85,7 @@ fun RowContainerView(tiles: List<Tile>, tileConfig: TileConfig) {
 
 @Composable
 fun SmallTileView(tile: Tile, config: TileConfig) {
+    // TODO: background color
     Card(
         modifier = Modifier
             .width(config.width)
@@ -126,6 +135,10 @@ data class TileConfig(
     val cornerRadius: Dp
 )
 
+data class ContainerConfig(
+    val horizontalInterItemSpacing: Dp
+)
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
@@ -146,6 +159,8 @@ fun DefaultPreview() {
         cornerRadius = 8.dp,
     )
 
+    val containerConfig = ContainerConfig(horizontalInterItemSpacing = 8.dp)
+
     val tile = Tile(
         title = "Facebook Import",
         description = "",
@@ -153,12 +168,7 @@ fun DefaultPreview() {
         backgroundColor = Color.White
     )
 
-    Row(
-        modifier = Modifier.padding(horizontalPadding.dp),
-        horizontalArrangement = Arrangement.spacedBy(interItemSpacing.dp)
-    ) {
-        SmallTileView(tile, smallCardConfig)
-        SmallTileView(tile, smallCardConfig)
-        SmallTileView(tile, smallCardConfig)
-    }
+    val tiles = listOf<Tile>(tile, tile, tile)
+
+    RowContainerView(tiles, smallCardConfig, containerConfig)
 }
