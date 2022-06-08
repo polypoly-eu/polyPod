@@ -217,15 +217,13 @@ const ImportExplanationExpandable = ({
                 <PolyButton
                     className="bg-red"
                     onClick={handleImportFile}
-                    label={
+                    label={i18n.t(
                         selectedFiles.length > 1
-                            ? "Import Files"
-                            : "Import File"
-                    }
+                            ? "import:import.button.2.plural"
+                            : "import:import.button.2.singular"
+                    )}
                     disabled={selectedFiles ? "" : "disabled"}
-                >
-                    {i18n.t("import:import.button.2")}
-                </PolyButton>
+                ></PolyButton>
             </>
         ),
         explore: (
