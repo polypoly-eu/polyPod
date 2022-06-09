@@ -18,6 +18,7 @@ function updatePodNavigation(pod, history, handleBack, location) {
 
 function updateTitle(pod, location, popUp) {
     console.log(location.pathname.substring(1));
+    console.log(popUp);
     pod.polyNav.setTitle(
         location.pathname === "/"
             ? ""
@@ -31,14 +32,14 @@ export const GoogleContextProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [globalError, setGlobalError] = useState(null);
-    const [popUp, setPopUp] = useState({});
+    const [popUp, setPopUp] = useState(null);
     const [reportIsSent, setReportIsSent] = useState(false);
 
     const location = useLocation();
     const history = useHistory();
 
     const closePopUp = () => {
-        setPopUp({});
+        setPopUp(null);
     };
 
     function handleBack() {
