@@ -1,3 +1,4 @@
+import { relevantZipEntries } from "@polypoly-eu/poly-analysis";
 import UserActivity from "../entities/user-activity";
 import { matchRegex } from "./utils/lang-constants";
 
@@ -21,7 +22,7 @@ class ActivityJsonParser {
 
 export default class ActivitiesJsonImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
-        const entries = await zipFile.getEntries();
+        const entries = await relevantZipEntries(zipFile);
         const activityEntries = entries.filter(({ path }) =>
             matchRegex(path, this)
         );
