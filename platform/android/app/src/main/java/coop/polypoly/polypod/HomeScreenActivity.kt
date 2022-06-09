@@ -94,11 +94,6 @@ fun isLight(color: Color): Boolean {
     return luminance(color.toArgb()) > 100
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!", modifier = Modifier.height(50.dp))
-}
-
 enum class ContainerType {
     LARGELEFT,
     ROW,
@@ -297,6 +292,11 @@ fun BigTileView(tile: Tile, layout: TileLayout) {
             }
         }
     }
+}
+
+@Composable
+fun MediumTileView(tile: Tile, layout: TileLayout) {
+
 }
 
 @Composable
