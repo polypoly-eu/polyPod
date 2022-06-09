@@ -1,4 +1,3 @@
-import { relevantZipEntries } from "../../../../facebookImport/src/model/importers/utils/importer-util";
 import ActivitySegment from "../entities/activity-segment";
 import PlaceVisit from "../entities/place-visit";
 import { matchRegex } from "./utils/lang-constants";

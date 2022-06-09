@@ -1,4 +1,4 @@
-import { relevantZipEntries } from "../../../../facebookImport/src/model/importers/utils/importer-util";
+import { relevantZipEntries } from "@polypoly-eu/poly-analysis";
 import AccessLogEntry from "../entities/access-log-entry";
 import { readCsvFromText } from "./utils/importer-utils";
 import { matchRegex } from "./utils/lang-constants";
