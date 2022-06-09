@@ -1,3 +1,4 @@
+import { relevantZipEntries } from "@polypoly-eu/poly-analysis";
 import ActivitySegment from "../entities/activity-segment";
 import PlaceVisit from "../entities/place-visit";
 import { matchRegex } from "./utils/lang-constants";
