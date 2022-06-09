@@ -1,8 +1,8 @@
 {
-    "overview": "Google Data Importer",
+    "info": "Google Data Importer",
     "import": "Google Data Importer",
     "explore": "Data Exploration",
     "explore/details": "Story Details",
     "report": "Unrecognised/Missing Data",
-    "report/details": "Data Report Details",
+    "report/details": "Data Report Details"
 }

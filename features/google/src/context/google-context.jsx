@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import i18n from "!silly-i18n";
+
 import { useHistory, useLocation } from "react-router-dom";
 
 export const GoogleContext = React.createContext();
