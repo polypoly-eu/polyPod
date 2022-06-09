@@ -46,6 +46,11 @@ data class Tile(
     val backgroundColor: Color
 )
 
+data class Section(
+    val title: String,
+    val tiles: List<Tile>
+)
+
 data class TileConfig(
     val height: Dp,
     val width: Dp,
@@ -89,7 +94,7 @@ enum class ContainerType {
 
 @Composable
 fun MyDataSectionView(
-    tiles: List<Tile>,
+    section: Section,
     bigTileConfig: TileConfig,
     smallTileConfig: TileConfig,
     containerConfig: ContainerConfig,
@@ -104,14 +109,14 @@ fun MyDataSectionView(
         ContainerType.ROW
     )
 
-    val chunked = tiles.chunked(homeScreenConfig.numColumns)
+    val chunked = section.tiles.chunked(homeScreenConfig.numColumns)
 
     Column(
         verticalArrangement = Arrangement.spacedBy(
             sectionConfig.verticalSpacing
         )
     ) {
-        Text(text = "Your Data")
+        Text(text = section.title)
         FlowRow(
             crossAxisSpacing = sectionConfig.verticalSpacing
         ) {
@@ -144,20 +149,20 @@ fun MyDataSectionView(
 
 @Composable
 fun DataKnowHowSectionView(
-    tiles: List<Tile>,
+    section: Section,
     bigTileConfig: TileConfig,
     smallTileConfig: TileConfig,
     containerConfig: ContainerConfig,
     sectionConfig: SectionConfig,
     homeScreenConfig: HomeScreenConfig
 ) {
-    val chunked = tiles.chunked(homeScreenConfig.numColumns)
+    val chunked = section.tiles.chunked(homeScreenConfig.numColumns)
     Column(
         verticalArrangement = Arrangement.spacedBy(
             sectionConfig.verticalSpacing
         )
     ) {
-        Text(text = "Data Know How")
+        Text(text = section.title)
         FlowRow(
             crossAxisSpacing = sectionConfig.verticalSpacing
         ) {
@@ -394,6 +399,8 @@ fun DefaultPreview() {
     )
 
     val tiles = listOf<Tile>(tile, tile, tile, tile, tile, tile, tile, tile, tile, tile, tile, tile)
+
+    val section = Section(title = "Data Know How", tiles = tiles)
 //
 //    RowContainerView(tiles, smallTileConfig, containerConfig)
 
@@ -424,7 +431,7 @@ fun DefaultPreview() {
 //    )
 
     DataKnowHowSectionView(
-        tiles = tiles,
+        section = section,
         bigTileConfig = bigTileConfig,
         smallTileConfig = smallTileConfig,
         containerConfig = containerConfig,
