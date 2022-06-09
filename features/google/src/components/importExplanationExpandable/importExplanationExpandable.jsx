@@ -129,7 +129,7 @@ const ImportExplanationExpandable = ({
                 <InfoBox textContent={i18n.t("import:request.info.1")} />
                 <div className="poly-separator"></div>
                 <h4>{i18n.t("import:how.it.works")}</h4>
-                <img src="./images/icon-screen.svg" alt="facebook" />
+                <img src="./images/icon-screen.svg" alt="screen" />
                 <p>{i18n.t("import:request.2")}</p>
                 <p
                     dangerouslySetInnerHTML={{
