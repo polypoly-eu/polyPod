@@ -18,7 +18,7 @@
     text-align: center;
     font-weight: 500;
     margin: calc(var(--gdu) * 2) auto calc(var(--gdu) * 5) auto;
-    font-size: 24px;
+    font-size: var(--font-size-xl);
     line-height: 120%;
     font-family: "Jost Medium";
 }

@@ -13,7 +13,7 @@
 }
 
 .poly-dialog-window h2 {
-    font-size: 24px;
+    font-size: var(--font-size-xl);
     text-align: center;
     display: flex;
     align-items: center;
