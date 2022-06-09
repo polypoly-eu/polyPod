@@ -2,6 +2,7 @@
     "analysed.categories": "Von allen importierten Google-Daten analysieren wir derzeit die folgenden {{analysed_categories}} Kategorien.",
     "import.new.file": "Neuer Import",
     "imported.file": "Datei:",
+    "imported.time": "Importiert:",
     "size": "Größe:",
     "delete.file.confirmation": "Möchtest du wirklich die aktuelle Datei löschen?"
 }
