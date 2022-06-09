@@ -17,7 +17,7 @@ function updatePodNavigation(pod, history, handleBack, location) {
 }
 
 function updateTitle(pod, location, popUp) {
-    console.log(location.pathname.substring(1))
+    console.log(location.pathname.substring(1));
     pod.polyNav.setTitle(
         location.pathname === "/"
             ? ""
