@@ -118,12 +118,12 @@
 
 .import-view .explanation-expandable .section-body h4,
 h5 {
+    font-family: var(--jost-medium);
     color: var(--theme-secondary-color);
     margin-top: 0;
 }
 
 .import-view .explanation-expandable .section-body h4 {
-    font-family: "Jost Medium";
     font-size: var(--font-size-xl);
     margin-bottom: calc(var(--gdu) * 9);
     margin-top: calc(var(--gdu) * 5);
