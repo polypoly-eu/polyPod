@@ -14,6 +14,16 @@ function updatePodNavigation(pod, history, handleBack, location) {
         : pod.polyNav.setActiveActions([]);
 }
 
+function updateTitle(pod, location, popUp) {
+    pod.polyNav.setTitle(
+        location.pathname === "/"
+            ? ""
+            : popUp
+            ? i18n.t("navbarTitles:info")
+            : i18n.t(`navbarTitles:${location.pathname.substring(1)}`)
+    );
+}
+
 export const GoogleContextProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -56,6 +66,7 @@ export const GoogleContextProvider = ({ children }) => {
     useEffect(() => {
         if (!pod) return;
         updatePodNavigation(pod, history, handleBack, location);
+        updateTitle(pod, location, popUp);
     });
 
     //for popUp sideSheet
