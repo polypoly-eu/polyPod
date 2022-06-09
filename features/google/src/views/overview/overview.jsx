@@ -8,6 +8,8 @@ import {
     PolyChart,
     INITIAL_HISTORY_STATE,
 } from "@polypoly-eu/poly-look";
+import { L12n } from "@polypoly-eu/silly-i18n/src/l12n";
+
 import { useHistory } from "react-router-dom";
 import i18n from "!silly-i18n";
 import { analyzeFile } from "@polypoly-eu/poly-analysis";
@@ -18,6 +20,8 @@ import {
     BUBBLE_LIGHT_COLOR,
 } from "../../constants/bubbleViz";
 import { GoogleContext } from "../../context/google-context.jsx";
+
+const l12n = new L12n();
 
 const Overview = () => {
     const { account, handleRemoveFile, files, refreshFiles } =
@@ -75,7 +79,7 @@ const Overview = () => {
 
     return (
         <Screen className="overview" layout="poly-standard-layout">
-            <h1>{i18n.t("overview:your.google.data")}</h1>
+            <h1>{i18n.t("common:your.google.data")}</h1>
             <p>
                 {i18n.t("overview:analysed.categories", {
                     analysed_categories: bubbleData.length,
@@ -98,6 +102,9 @@ const Overview = () => {
                         {i18n.t("overview:imported.file")} {files[0].name}
                         <br />
                         {i18n.t("overview:size")} {formatSize(files[0].size)}
+                        <br />
+                        {i18n.t("overview:imported.time")}{" "}
+                        {l12n.t(new Date(files[0].time))}
                     </p>
                 </>
             )}

@@ -26,15 +26,21 @@ const ReportView = ({ reportStories }) => {
         handleBack();
     };
 
+    const viewDetailsLabel = i18n.t("report:viewDetails");
+
     return (
         <div className="report-view">
             <h1 className="report-view-title">
                 {i18n.t("report:intro.headline")}
             </h1>
-            <p>{i18n.t("report:intro.text")}</p>
+            <p>
+                {i18n.t("report:intro.text", {
+                    view_details: viewDetailsLabel,
+                })}
+            </p>
             <div className={"button-area" + (loading ? " disabled" : "")}>
                 <RouteButton className="view-details" route="/report/details">
-                    {i18n.t("report:viewDetails")}
+                    {viewDetailsLabel}
                 </RouteButton>
                 <button className="send-later" onClick={handleBack}>
                     {i18n.t("report:sendLater")}

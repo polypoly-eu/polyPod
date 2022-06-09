@@ -1,0 +1,83 @@
+<svg width="261" height="236" viewBox="0 0 261 236" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="barChart">
+<g id="Horizontal gridlines">
+<line id="Line 304" x1="20" y1="194.5" x2="256" y2="194.5" stroke="#CBD5E0"/>
+<line id="Line 295" x1="20" y1="172.5" x2="256" y2="172.5" stroke="#CBD5E0"/>
+<line id="Line 301" x1="20" y1="150.5" x2="256" y2="150.5" stroke="#CBD5E0"/>
+<line id="Line 296" x1="20" y1="128.5" x2="256" y2="128.5" stroke="#CBD5E0"/>
+<line id="Line 302" x1="20" y1="106.5" x2="256" y2="106.5" stroke="#CBD5E0"/>
+<line id="Line 297" x1="20" y1="84.5" x2="256" y2="84.5" stroke="#CBD5E0"/>
+<line id="Line 306" x1="20" y1="62.5" x2="256" y2="62.5" stroke="#CBD5E0"/>
+<line id="Line 307" x1="20" y1="40.5" x2="256" y2="40.5" stroke="#CBD5E0"/>
+</g>
+<g id="Tool-Tip Dark (left-side)">
+<g id="Union">
+<mask id="path-9-outside-1_171_7095" maskUnits="userSpaceOnUse" x="182" y="26" width="26" height="36" fill="black">
+<rect fill="white" x="182" y="26" width="26" height="36"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M205 27H185C183.895 27 183 27.8954 183 29L183 49C183 50.1046 183.895 51 185 51H191L195 59L199 51H205C206.105 51 207 50.1046 207 49V29C207 27.8954 206.105 27 205 27Z"/>
+</mask>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M205 27H185C183.895 27 183 27.8954 183 29L183 49C183 50.1046 183.895 51 185 51H191L195 59L199 51H205C206.105 51 207 50.1046 207 49V29C207 27.8954 206.105 27 205 27Z" fill="#3BA6FF"/>
+<path d="M183 29H182H183ZM183 49H184H183ZM191 51L191.894 50.5528L191.618 50H191V51ZM195 59L194.106 59.4472L195 61.2361L195.894 59.4472L195 59ZM199 51V50H198.382L198.106 50.5528L199 51ZM185 28H205V26H185V28ZM184 29C184 28.4477 184.448 28 185 28V26C183.343 26 182 27.3431 182 29H184ZM184 49L184 29H182L182 49H184ZM185 50C184.448 50 184 49.5523 184 49H182C182 50.6569 183.343 52 185 52V50ZM191 50H185V52H191V50ZM195.894 58.5528L191.894 50.5528L190.106 51.4472L194.106 59.4472L195.894 58.5528ZM198.106 50.5528L194.106 58.5528L195.894 59.4472L199.894 51.4472L198.106 50.5528ZM205 50H199V52H205V50ZM206 49C206 49.5523 205.552 50 205 50V52C206.657 52 208 50.6569 208 49H206ZM206 29V49H208V29H206ZM205 28C205.552 28 206 28.4477 206 29H208C208 27.3431 206.657 26 205 26V28Z" fill="#F7FAFC" mask="url(#path-9-outside-1_171_7095)"/>
+</g>
+<text id="3" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="191.043" y="43.17">3</tspan></text>
+</g>
+<g id="Bars (vertical)">
+<rect id="Rectangle 939" x="20" y="166" width="6" height="29" fill="#3749A9"/>
+<rect id="Rectangle 940" x="38.6831" y="160" width="6" height="35" fill="#3749A9"/>
+<rect id="Rectangle 941" x="58.3501" y="154" width="6" height="41" fill="#3749A9"/>
+<rect id="Rectangle 942" x="77.0332" y="146" width="6" height="49" fill="#3749A9"/>
+<rect id="Rectangle 943" x="96.7002" y="135" width="6" height="60" fill="#3749A9"/>
+<rect id="Rectangle 944" x="116.367" y="124" width="6" height="71" fill="#3749A9"/>
+<rect id="Rectangle 945" x="135.05" y="110" width="6" height="85" fill="#3749A9"/>
+<rect id="Rectangle 946" x="153.733" y="93" width="6" height="102" fill="#3749A9"/>
+<rect id="Rectangle 947" x="173" y="77" width="6" height="118" fill="#3749A9"/>
+<rect id="Rectangle 948" x="192.083" y="60" width="6" height="135" fill="#3749A9"/>
+<rect id="Rectangle 949" x="210.767" y="52" width="6" height="143" fill="#3749A9"/>
+<rect id="Rectangle 950" x="230.433" y="44" width="6" height="151" fill="#3749A9"/>
+<rect id="Rectangle 951" x="250.1" y="66" width="6" height="129" fill="#3749A9"/>
+</g>
+<g id="Horizontal gridlines (transparent)" opacity="0.5">
+<line id="Line 304_2" x1="20" y1="194.5" x2="256" y2="194.5" stroke="#CBD5E0"/>
+<line id="Line 295_2" x1="20" y1="172.5" x2="256" y2="172.5" stroke="#CBD5E0"/>
+<line id="Line 301_2" x1="20" y1="150.5" x2="256" y2="150.5" stroke="#CBD5E0"/>
+<line id="Line 296_2" x1="20" y1="128.5" x2="256" y2="128.5" stroke="#CBD5E0"/>
+<line id="Line 302_2" x1="20" y1="106.5" x2="256" y2="106.5" stroke="#CBD5E0"/>
+<line id="Line 297_2" x1="20" y1="84.5" x2="256" y2="84.5" stroke="#CBD5E0"/>
+<line id="Line 306_2" x1="20" y1="62.5" x2="256" y2="62.5" stroke="#CBD5E0"/>
+</g>
+<g id="y axis: Entries">
+<text id="text1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="17.17">Y-Axis Title (Units)</tspan></text>
+<text id="20" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="151.17">20</tspan></text>
+<text id="0" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="196.17">0</tspan></text>
+<text id="40" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="107.17">40</tspan></text>
+<text id="60" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="63.17">60</tspan></text>
+</g>
+<g id="X axis: Timescale (years)">
+<text id="01" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="16.3343" y="212.67">01</tspan></text>
+<text id="02" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="34.7394" y="212.67">02</tspan></text>
+<text id="03" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="54.0823" y="212.67">03</tspan></text>
+<text id="04" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="72.9503" y="212.67">04</tspan></text>
+<text id="05" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="92.3338" y="212.67">05</tspan></text>
+<text id="06" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="110.921" y="212.67">06</tspan></text>
+<text id="07" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="130.451" y="212.67">07</tspan></text>
+<text id="08" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="149.501" y="212.67">08</tspan></text>
+<text id="09" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="168.474" y="212.67">09</tspan></text>
+<text id="10" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="188.503" y="212.67">10</tspan></text>
+<text id="11" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="208.595" y="212.67">11</tspan></text>
+<text id="12" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="227" y="212.67">12</tspan></text>
+<text id="13" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="246.343" y="212.67">13</tspan></text>
+<text id="text2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="20" y="232.67">X-Axis Title (Units)</tspan></text>
+</g>
+<g id="Tool-Tip Dark (left-side)_2">
+<g id="Union_2">
+<mask id="path-51-outside-2_171_7095" maskUnits="userSpaceOnUse" x="92" y="-1.19249e-08" width="36" height="26" fill="black">
+<rect fill="white" x="92" y="-1.19249e-08" width="36" height="26"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M127 23L127 3C127 1.89543 126.105 1 125 1L105 1C103.895 1 103 1.89543 103 3L103 9L95 13L103 17L103 23C103 24.1046 103.895 25 105 25L125 25C126.105 25 127 24.1046 127 23Z"/>
+</mask>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M127 23L127 3C127 1.89543 126.105 1 125 1L105 1C103.895 1 103 1.89543 103 3L103 9L95 13L103 17L103 23C103 24.1046 103.895 25 105 25L125 25C126.105 25 127 24.1046 127 23Z" fill="#3BA6FF"/>
+<path d="M125 1L125 2.38498e-08L125 1ZM105 1L105 2L105 1ZM103 9L103.447 9.89443L104 9.61803L104 9L103 9ZM95 13L94.5528 12.1056L92.7639 13L94.5528 13.8944L95 13ZM103 17L104 17L104 16.382L103.447 16.1056L103 17ZM103 23L102 23L103 23ZM105 25L105 24L105 25ZM125 25L125 26L125 25ZM126 3L126 23L128 23L128 3L126 3ZM125 2C125.552 2 126 2.44771 126 3L128 3C128 1.34314 126.657 4.09198e-09 125 2.38498e-08L125 2ZM105 2L125 2L125 2.38498e-08L105 5.00766e-07L105 2ZM104 3C104 2.44772 104.448 2 105 2L105 5.00766e-07C103.343 5.20524e-07 102 1.34315 102 3L104 3ZM104 9L104 3L102 3L102 9L104 9ZM95.4472 13.8944L103.447 9.89443L102.553 8.10557L94.5528 12.1056L95.4472 13.8944ZM103.447 16.1056L95.4472 12.1056L94.5528 13.8944L102.553 17.8944L103.447 16.1056ZM104 23L104 17L102 17L102 23L104 23ZM105 24C104.448 24 104 23.5523 104 23L102 23C102 24.6569 103.343 26 105 26L105 24ZM125 24L105 24L105 26L125 26L125 24ZM126 23C126 23.5523 125.552 24 125 24L125 26C126.657 26 128 24.6569 128 23L126 23Z" fill="#F7FAFC" mask="url(#path-51-outside-2_171_7095)"/>
+</g>
+<text id="2" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="111.385" y="17.17">2</tspan></text>
+</g>
+</g>
+</svg>

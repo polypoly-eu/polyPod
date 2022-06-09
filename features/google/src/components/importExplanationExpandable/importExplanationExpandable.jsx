@@ -75,28 +75,41 @@ const ImportExplanationExpandable = ({
         return Math.round(size / Math.pow(k, i), decimals) + " " + units[i - 1];
     };
 
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFiles, setSelectedFiles] = useState([]);
 
     const handleSelectFile = async () => {
         const { polyNav } = pod;
         runWithLoadingScreen(async function () {
             try {
-                setSelectedFile(await polyNav.pickFile("application/zip"));
+                setSelectedFiles([
+                    ...selectedFiles,
+                    await polyNav.pickFile("application/zip"),
+                ]);
             } catch (error) {
                 setGlobalError(new FileSelectionError(error));
             }
         });
     };
 
+    const handleRemoveSelection = (fileIndex) => {
+        setSelectedFiles(
+            selectedFiles.filter((file, index) => index != fileIndex)
+        );
+    };
+
     const handleImportFile = async () => {
-        if (!selectedFile) return;
+        if (!selectedFiles.length) return;
         const { polyOut } = pod;
         if (files?.[0]?.id) handleRemoveFile(files[0].id);
         runWithLoadingScreen(async function () {
             try {
-                await polyOut.importArchive(selectedFile.url);
+                const destUrl = await polyOut.importArchive(
+                    selectedFiles[0].url
+                );
+                for (const { url } of selectedFiles.slice(1))
+                    await polyOut.importArchive(url, destUrl);
                 refreshFiles();
-                setSelectedFile(null);
+                setSelectedFiles([]);
             } catch (error) {
                 setGlobalError(new FileImportError(error));
             }
@@ -117,9 +130,17 @@ const ImportExplanationExpandable = ({
                 <div className="poly-separator"></div>
                 <h4>{i18n.t("import:how.it.works")}</h4>
                 <p>{i18n.t("import:request.2")}</p>
-                <p>{i18n.t("import:request.3")}</p>
+                <p
+                    dangerouslySetInnerHTML={{
+                        __html: i18n.t(`import:request.3`),
+                    }}
+                ></p>
                 <img src="./images/document.svg" alt="document" />
-                <p>{i18n.t("import:request.4")}</p>
+                <p
+                    dangerouslySetInnerHTML={{
+                        __html: i18n.t(`import:request.4`),
+                    }}
+                ></p>
                 <InfoBox textContent={i18n.t("import:request.info.2")} />
                 <PolyButton
                     className="bg-red"
@@ -172,27 +193,22 @@ const ImportExplanationExpandable = ({
                 <div className="poly-separator"></div>
                 <div className="x-divider">
                     {files?.length ? (
+                        <h5>{i18n.t("import:file.imported.successfully")}</h5>
+                    ) : selectedFiles.length ? (
                         <div className="file-info">
                             <h5>{i18n.t("import:import.chosen")}</h5>
-                            <p>
-                                {i18n.t("import:import.name")} {files[0]?.name}
-                            </p>
-                            <p>
-                                {i18n.t("import:import.size")}
-                                {formatSize(files[0]?.size)}
-                            </p>
-                        </div>
-                    ) : selectedFile ? (
-                        <div className="file-info">
-                            <h5>{i18n.t("import:import.chosen")}</h5>
-                            <p>
-                                {i18n.t("import:import.name")}{" "}
-                                {selectedFile?.name}
-                            </p>
-                            <p>
-                                {i18n.t("import:import.size")}
-                                {formatSize(selectedFile.size)}
-                            </p>
+                            {selectedFiles.map((selectedFile, i) => (
+                                <div
+                                    key={i}
+                                    onClick={() => handleRemoveSelection(i)}
+                                >
+                                    <p>{selectedFile.name}</p>
+                                    <p>
+                                        {i18n.t("import:import.size")}{" "}
+                                        {formatSize(selectedFile.size)}
+                                    </p>
+                                </div>
+                            ))}
                         </div>
                     ) : (
                         <h5>{i18n.t("import:import.none.chosen")}</h5>
@@ -202,7 +218,7 @@ const ImportExplanationExpandable = ({
                     type="outline"
                     onClick={handleSelectFile}
                     label={
-                        selectedFile
+                        selectedFiles.length
                             ? i18n.t("import:import.button.1.different")
                             : i18n.t("import:import.button.1")
                     }
@@ -210,11 +226,13 @@ const ImportExplanationExpandable = ({
                 <PolyButton
                     className="bg-red"
                     onClick={handleImportFile}
-                    label="Import File"
-                    disabled={selectedFile ? "" : "disabled"}
-                >
-                    {i18n.t("import:import.button.2")}
-                </PolyButton>
+                    label={i18n.t(
+                        selectedFiles.length > 1
+                            ? "import:import.button.2.plural"
+                            : "import:import.button.2.singular"
+                    )}
+                    disabled={selectedFiles ? "" : "disabled"}
+                ></PolyButton>
             </>
         ),
         explore: (
@@ -227,9 +245,6 @@ const ImportExplanationExpandable = ({
                 <p>{i18n.t("import:explore.1")}</p>
                 {files?.length > 0 ? (
                     <>
-                        <p>
-                            {i18n.t("import:imported.file")} {files[0]?.name}
-                        </p>
                         <RoutingWrapper history={history} route="/overview">
                             <PolyButton
                                 className="bg-red"
