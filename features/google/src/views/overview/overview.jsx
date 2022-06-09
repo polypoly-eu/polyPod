@@ -103,8 +103,7 @@ const Overview = () => {
                         <br />
                         {i18n.t("overview:size")} {formatSize(files[0].size)}
                         <br />
-                        {i18n.t("overview:imported.time")}{" "}{l12n.t(files[0].time)}
-
+                        {i18n.t("overview:imported.time")}{" "}{l12n.t(new Date(files[0].time))}
                     </p>
                 </>
             )}
