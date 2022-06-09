@@ -24,6 +24,5 @@
   font-weight: 500;
   font-size: var(--font-size-ml);
   margin-bottom: calc(var(--gdu) * 3);
-  text-transform: capitalize;
   text-align: center;
 }

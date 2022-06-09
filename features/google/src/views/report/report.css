@@ -7,7 +7,7 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    padding: 24px;
+    padding: calc(var(--gdu) * 4);
     border-top: 1px inset #a9b6c6;
     box-sizing: border-box;
     overflow: hidden scroll;
@@ -17,7 +17,7 @@
 .report-details h1 {
     text-align: center;
     font-weight: 500;
-    margin: 8px auto 20px auto;
+    margin: calc(var(--gdu) * 2) auto calc(var(--gdu) * 5) auto;
     font-size: 24px;
     line-height: 120%;
     font-family: "Jost Medium";
@@ -25,7 +25,7 @@
 
 .report-view .report-view-title {
     max-width: var(--max-width);
-    margin: 16px auto 32px auto;
+    margin: calc(var(--gdu) * 4) auto calc(var(--gdu) * 8) auto;
     line-height: 28.8px;
 }
 
@@ -50,7 +50,7 @@
     background-color: var(--theme-primary-color);
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 12px 28px 32px 28px;
+    padding: calc(var(--gdu) * 3) calc(var(--gdu) * 7) calc(var(--gdu) * 8) calc(var(--gdu) * 7);
     position: fixed;
     bottom: 0;
     right: 0;
@@ -62,7 +62,7 @@
 .report-view .send {
     font-family: "Jost Medium";
     font-size: 18px;
-    margin-top: 12px;
+    margin-top: calc(var(--gdu) * 3);
     text-align: center;
 }
 

@@ -11,14 +11,14 @@
     width: 100%;
     max-width: var(--max-width);
     box-sizing: border-box;
-    margin: 4px auto 72px auto;
+    margin: var(--gdu) auto calc(var(--gdu) * 18) auto;
 }
 
 .import-view .explanation-expandable .intro h1 {
     font-family: "Jost Bold";
     font-size: 40px;
     line-height: var(--line-height);
-    margin: 0 0 16px 0;
+    margin: 0 0 calc(var(--gdu) * 4) 0;
 }
 
 .import-view .explanation-expandable .head {
@@ -29,7 +29,7 @@
     overflow: hidden;
     display: flex;
     align-items: center;
-    padding: 24px;
+    padding: calc(var(--gdu) * 6);
     box-sizing: border-box;
 }
 
@@ -67,13 +67,13 @@
 .import-view .explanation-expandable .section-body .full-screen {
     width: 100%;
     max-width: var(--max-width);
-    margin-bottom: 25px;
+    margin: calc(var(--gdu) * 4) auto;
 }
 
 .import-view .explanation-expandable .section-body .file-info p {
     font-size: var(--font-size-ml);
     color: var(--theme-secondary-color);
-    margin: 0 0 2px 0;
+    margin: 0 0 var(--gdu) 0;
     line-height: 120%;
 }
 
@@ -103,12 +103,12 @@
 }
 
 .import-view .explanation-expandable .section-body * {
-    margin-bottom: 16px;
+    margin-bottom: calc(var(--gdu) * 4);
 }
 
 .import-view .explanation-expandable .section-body p {
     margin-top: 0;
-    margin-bottom: 36px;
+    margin-bottom: calc(var(--gdu) * 9);
 }
 
 .import-view .explanation-expandable .section-body {
@@ -125,23 +125,15 @@ h5 {
 .import-view .explanation-expandable .section-body h4 {
     font-family: "Jost Medium";
     font-size: var(--font-size-xl);
-    margin-bottom: 36px;
-    margin-top: 20px;
+    margin-bottom: calc(var(--gdu) * 9);
+    margin-top: calc(var(--gdu) * 5);
 }
 
 .import-view .explanation-expandable .section-body h5 {
     font-weight: 500;
     font-size: var(--font-size-l);
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.import-view .explanation-expandable .section-body .btn-1 {
-    margin-top: 45px;
-}
-
-.import-view .explanation-expandable .section-body .btn-2 {
-    margin-top: 30px;
+    margin-top: calc(var(--gdu) * 3);
+    margin-bottom: calc(var(--gdu) * 3);
 }
 
 .import-view .explanation-expandable button.bg-red {

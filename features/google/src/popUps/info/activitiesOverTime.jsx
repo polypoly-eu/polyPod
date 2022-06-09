@@ -47,7 +47,6 @@ const ActivitiesOverTime = () => {
                 {i18n.t("commonInfoScreen:baseInfo.title2")}
             </h1>
             <p>{i18n.t("activitiesOverTimeInfoScreen:text2")}</p>
-            <p>{i18n.t("activitiesOverTimeInfoScreen:text3")}</p>
         </>
     );
 };

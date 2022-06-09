@@ -152,4 +152,4 @@ export class I18nSection extends I18n {
     }
 }
 
-export { determineLocale, determineLanguage };
+export { L12n, determineLocale, determineLanguage };
