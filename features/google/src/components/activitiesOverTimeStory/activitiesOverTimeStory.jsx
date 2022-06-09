@@ -5,11 +5,11 @@ import i18n from "!silly-i18n";
 import "./activitiesOverTimeStory.css";
 import "./datePicker.css";
 import { PolyChart, Tab, Tabs } from "@polypoly-eu/poly-look";
-import {L12n} from "@polypoly-eu/silly-i18n";
+import { L12n } from "@polypoly-eu/silly-i18n";
 
 import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
 
-const l12n = new L12n;
+const l12n = new L12n();
 const monthsAbbreviation = i18n.t("common:months.abbreviation").split(" ");
 
 const fillMissingArrayValues = (arr) => {
