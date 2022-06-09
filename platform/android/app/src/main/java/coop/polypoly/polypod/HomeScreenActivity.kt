@@ -143,6 +143,36 @@ fun MyDataSectionView(
 }
 
 @Composable
+fun DataKnowHowSectionView(
+    tiles: List<Tile>,
+    bigTileConfig: TileConfig,
+    smallTileConfig: TileConfig,
+    containerConfig: ContainerConfig,
+    sectionConfig: SectionConfig,
+    homeScreenConfig: HomeScreenConfig
+) {
+    val chunked = tiles.chunked(homeScreenConfig.numColumns)
+    Column(
+        verticalArrangement = Arrangement.spacedBy(
+            sectionConfig.verticalSpacing
+        )
+    ) {
+        Text(text = "Data Know How")
+        FlowRow(
+            crossAxisSpacing = sectionConfig.verticalSpacing
+        ) {
+            chunked.forEach {
+                RowContainerView(
+                    tiles = it,
+                    tileConfig = smallTileConfig,
+                    containerConfig = containerConfig
+                )
+            }
+        }
+    }
+}
+
+@Composable
 fun LargeLeftContainerView(
     tiles: List<Tile>,
     bigTileConfig: TileConfig,
@@ -384,7 +414,16 @@ fun DefaultPreview() {
 //        homeScreenConfig = homeScreenConfig
 //    )
 
-    MyDataSectionView(
+//    MyDataSectionView(
+//        tiles = tiles,
+//        bigTileConfig = bigTileConfig,
+//        smallTileConfig = smallTileConfig,
+//        containerConfig = containerConfig,
+//        sectionConfig = sectionConfig,
+//        homeScreenConfig = homeScreenConfig
+//    )
+
+    DataKnowHowSectionView(
         tiles = tiles,
         bigTileConfig = bigTileConfig,
         smallTileConfig = smallTileConfig,
