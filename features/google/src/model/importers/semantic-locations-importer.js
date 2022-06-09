@@ -1,3 +1,4 @@
+import { relevantZipEntries } from "../../../../facebookImport/src/model/importers/utils/importer-util";
 import ActivitySegment from "../entities/activity-segment";
 import PlaceVisit from "../entities/place-visit";
 import { matchRegex } from "./utils/lang-constants";
@@ -66,7 +67,7 @@ async function parseTimelineObjectsByTypeFromEntry(fileEntry) {
 
 export default class SemanticLocationsImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
-        const entries = await zipFile.getEntries();
+        const entries = await relevantZipEntries(zipFile);
         const semanticLocationEntries = entries.filter(({ path }) =>
             matchRegex(path, this)
         );
