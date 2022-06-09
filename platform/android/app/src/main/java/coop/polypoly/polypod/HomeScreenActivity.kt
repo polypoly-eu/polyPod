@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -34,26 +35,74 @@ class HomeScreenActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Greeting("Android")
+            // TODO
         }
     }
 }
 
-data class Tile(
+data class TileModel(
     val title: String,
     val description: String,
-    val imageId: Int,
-    val backgroundColor: Color
+    val imageId: Int
+)
+
+data class Tile(
+    val model: TileModel,
+    val style: Style,
+    // val fonts: Fonts,
+)
+
+enum class ContainerType {
+    LARGELEFT,
+    ROW,
+    LARGERIGHT
+}
+
+data class ContainerModel(
+    val type: ContainerType
+)
+
+data class Container(
+    val model: ContainerModel,
+    val tiles: List<Tile>,
+    val tileLayout: List<TileLayout>,
+    val layout: ContainerLayout
+)
+
+enum class SectionType {
+    YOUR_DATA,
+    DATA_KNOW_HOW,
+    TOOLS
+}
+
+data class SectionModel(
+    val title: String,
+    val type: SectionType
 )
 
 data class Section(
-    val title: String,
-    val tiles: List<Tile>
+    val model: SectionModel,
+    val containers: List<Container>,
+    val layout: SectionLayout
+)
+
+data class Screen(
+    val sections: List<Section>,
+    val layout: ScreenLayout
+)
+
+data class Fonts(
+    val titleFont: Font,
+    val descriptionFont: Font
+)
+
+data class Style(
+    val backgroundColor: Color,
 )
 
 data class TileLayout(
-    val height: Dp,
     val width: Dp,
+    val height: Dp,
     val verticalSpacing: Dp,
     val topPadding: Dp,
     val startPadding: Dp,
@@ -76,69 +125,29 @@ data class ScreenLayout(
     val horizontalPadding: Dp
 )
 
-data class Layout(
-    val smallTile: TileLayout,
-    val mediumTile: TileLayout,
-    val bigTile: TileLayout,
-    val container: ContainerLayout,
-    val section: SectionLayout,
-    val screen: ScreenLayout
-)
-
-data class Config(
-    val numColumns: Int,
-    val layout: Layout
-)
-
 fun isLight(color: Color): Boolean {
     return luminance(color.toArgb()) > 100
 }
 
-enum class ContainerType {
-    LARGELEFT,
-    ROW,
-    LARGERIGHT
-}
-
 @Composable
-fun MyDataSectionView(
-    section: Section,
-    config: Config
-) {
-
-    val containersConfig: List<ContainerType> = listOf(
-        ContainerType.LARGELEFT,
-        ContainerType.ROW,
-        ContainerType.LARGERIGHT,
-        ContainerType.ROW
-    )
-
-    val chunked = section.tiles.chunked(config.numColumns)
-
+fun Section(section: Section) {
     Column(
         verticalArrangement = Arrangement.spacedBy(
-            config.layout.section.verticalSpacing
+            section.layout.verticalSpacing
         )
     ) {
-        Text(text = section.title)
+        Text(text = section.model.title)
         FlowRow(
-            crossAxisSpacing = config.layout.section.verticalSpacing
+            crossAxisSpacing = section.layout.verticalSpacing
         ) {
-            chunked.forEachIndexed { index, tiles ->
-                val type = containersConfig[index % containersConfig.count()]
-                when (type) {
-                    ContainerType.LARGELEFT -> LargeLeftContainerView(
-                        tiles = tiles,
-                        config = config
-                    )
-                    ContainerType.ROW -> RowContainerView(
-                        tiles = tiles,
-                        config = config
-                    )
-                    ContainerType.LARGERIGHT -> LargeRightContainerView(
-                        tiles = tiles,
-                        config = config
-                    )
+            section.containers.forEach {
+                when (it.model.type) {
+                    ContainerType.LARGELEFT ->
+                        LargeLeftContainerView(container = it)
+                    ContainerType.ROW ->
+                        RowContainerView(container = it)
+                    ContainerType.LARGERIGHT ->
+                        LargeRightContainerView(container = it)
                 }
             }
         }
@@ -146,24 +155,25 @@ fun MyDataSectionView(
 }
 
 @Composable
-fun DataKnowHowSectionView(
-    section: Section,
-    config: Config
-) {
-    val chunked = section.tiles.chunked(config.numColumns)
-    Column(
-        verticalArrangement = Arrangement.spacedBy(
-            config.layout.section.verticalSpacing
+fun LargeLeftContainerView(container: Container) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(
+            container.layout.horizontalInterItemSpacing
         )
     ) {
-        Text(text = section.title)
-        FlowRow(
-            crossAxisSpacing = config.layout.section.verticalSpacing
+        BigTileView(
+            tile = container.tiles.first(),
+            layout = container.tileLayout.first()
+        )
+        Column(
+            verticalArrangement = Arrangement.spacedBy(
+                container.layout.verticalInterItemSpacing
+            )
         ) {
-            chunked.forEach {
-                RowContainerView(
-                    tiles = it,
-                    config = config
+            container.tiles.drop(1).forEachIndexed { index, tile ->
+                SmallTileView(
+                    tile = tile,
+                    layout = container.tileLayout.drop(1)[index]
                 )
             }
         }
@@ -171,76 +181,54 @@ fun DataKnowHowSectionView(
 }
 
 @Composable
-fun LargeLeftContainerView(
-    tiles: List<Tile>,
-    config: Config
-) {
+fun LargeRightContainerView(container: Container) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(
-            config.layout.container.horizontalInterItemSpacing
+            container.layout.horizontalInterItemSpacing
         )
     ) {
-        BigTileView(tile = tiles.first(), layout = config.layout.bigTile)
-        Column(
-            verticalArrangement = Arrangement.spacedBy(
-                config.layout.container.verticalInterItemSpacing
-            )
-        ) {
-            tiles.drop(1).forEach {
-                SmallTileView(tile = it, layout = config.layout.smallTile)
-            }
-        }
-    }
-}
-
-@Composable
-fun LargeRightContainerView(
-    tiles: List<Tile>,
-    config: Config
-) {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(
-            config.layout.container.horizontalInterItemSpacing
-        )
-    ) {
-        if (tiles.count() < config.numColumns) {
-            tiles.forEach {
-                SmallTileView(tile = it, layout = config.layout.smallTile)
+        val layoutNumTilesThreshold = 3
+        if (container.tiles.count() < layoutNumTilesThreshold) {
+            container.tiles.forEachIndexed { index, tile ->
+                SmallTileView(tile = tile, layout = container.tileLayout[index])
             }
         } else {
             Column(
                 verticalArrangement = Arrangement.spacedBy(
-                    config.layout.container.verticalInterItemSpacing
+                    container.layout.verticalInterItemSpacing
                 )
             ) {
-                tiles.dropLast(1).forEach {
-                    SmallTileView(tile = it, layout = config.layout.smallTile)
+                container.tiles.dropLast(1).forEachIndexed { index, tile ->
+                    SmallTileView(
+                        tile = tile,
+                        layout = container.tileLayout[index]
+                    )
                 }
             }
-            BigTileView(tile = tiles.last(), layout = config.layout.bigTile)
+            BigTileView(
+                tile = container.tiles.last(),
+                layout = container.tileLayout.last()
+            )
         }
     }
 }
 
 @Composable
-fun RowContainerView(
-    tiles: List<Tile>,
-    config: Config
-) {
+fun RowContainerView(container: Container) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(
-            config.layout.container.horizontalInterItemSpacing
+            container.layout.horizontalInterItemSpacing
         )
     ) {
-        tiles.forEach {
-            SmallTileView(it, config.layout.smallTile)
+        container.tiles.forEachIndexed { index, tile ->
+            SmallTileView(tile = tile, layout = container.tileLayout[index])
         }
     }
 }
 
 @Composable
 fun BigTileView(tile: Tile, layout: TileLayout) {
-    val foregroundColor = if (isLight(tile.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
+    val foregroundColor = if (isLight(tile.style.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
     Card(
         modifier = Modifier
             .width(layout.width)
@@ -250,7 +238,7 @@ fun BigTileView(tile: Tile, layout: TileLayout) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .background(tile.backgroundColor)
+                .background(tile.style.backgroundColor)
                 .padding(
                     top = layout.topPadding,
                     start = layout.startPadding,
@@ -259,7 +247,7 @@ fun BigTileView(tile: Tile, layout: TileLayout) {
                 )
         ) {
             Image(
-                painter = painterResource(id = tile.imageId),
+                painter = painterResource(id = tile.model.imageId),
                 contentDescription = null,
                 // Takes all the height left after the text is placed
                 modifier = Modifier.weight(1.0f),
@@ -274,7 +262,7 @@ fun BigTileView(tile: Tile, layout: TileLayout) {
             )
             Column() {
                 Text(
-                    text = tile.title,
+                    text = tile.model.title,
                     textAlign = TextAlign.Start,
                     color = foregroundColor
                 )
@@ -285,7 +273,7 @@ fun BigTileView(tile: Tile, layout: TileLayout) {
                     )
                 )
                 Text(
-                    text = tile.description,
+                    text = tile.model.description,
                     textAlign = TextAlign.Start,
                     color = foregroundColor
                 )
@@ -295,13 +283,12 @@ fun BigTileView(tile: Tile, layout: TileLayout) {
 }
 
 @Composable
-fun MediumTileView(tile: Tile, layout: TileLayout) {
-
+fun MediumTileView(tile: Tile) {
 }
 
 @Composable
 fun SmallTileView(tile: Tile, layout: TileLayout) {
-    val foregroundColor = if (isLight(tile.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
+    val foregroundColor = if (isLight(tile.style.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
     Card(
         modifier = Modifier
             .width(layout.width)
@@ -310,7 +297,7 @@ fun SmallTileView(tile: Tile, layout: TileLayout) {
     ) {
         Column(
             modifier = Modifier
-                .background(tile.backgroundColor)
+                .background(tile.style.backgroundColor)
                 .padding(
                     top = layout.topPadding,
                     start = layout.startPadding,
@@ -321,7 +308,7 @@ fun SmallTileView(tile: Tile, layout: TileLayout) {
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Image(
-                painter = painterResource(id = tile.imageId),
+                painter = painterResource(id = tile.model.imageId),
                 contentDescription = null,
                 // Takes all the height left after the text is placed
                 modifier = Modifier.weight(1.0f),
@@ -334,7 +321,7 @@ fun SmallTileView(tile: Tile, layout: TileLayout) {
                 )
             )
             Text(
-                text = tile.title,
+                text = tile.model.title,
                 textAlign = TextAlign.Center,
                 color = foregroundColor
             )
@@ -347,7 +334,7 @@ fun SmallTileView(tile: Tile, layout: TileLayout) {
 fun DefaultPreview() {
     val configuration = LocalConfiguration.current
 
-    val numColumns = 3
+    val tilesPerContainer = 3
 
     val screenLayout = ScreenLayout(horizontalPadding = 8.dp)
     val sectionLayout = SectionLayout(verticalSpacing = 8.dp)
@@ -357,13 +344,13 @@ fun DefaultPreview() {
     val totalScreenPadding = 2 * screenLayout.horizontalPadding.value
     val containerWidth = screenWidth - totalScreenPadding
 
-    val interItemSpacing = (numColumns - 1) * containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
-    val smallTileWidth = (containerWidth - interItemSpacing) / numColumns // ktlint-disable max-line-length
+    val interItemSpacing = (tilesPerContainer - 1) * containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
+    val smallTileWidth = (containerWidth - interItemSpacing) / tilesPerContainer // ktlint-disable max-line-length
     val bigTileWidth = containerWidth - smallTileWidth - containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
 
     val smallTileLayout = TileLayout(
-        height = smallTileWidth.dp,
         width = smallTileWidth.dp,
+        height = smallTileWidth.dp,
         verticalSpacing = 8.dp,
         topPadding = 8.dp,
         startPadding = 8.dp,
@@ -374,8 +361,8 @@ fun DefaultPreview() {
     )
 
     val mediumTileLayout = TileLayout(
-        height = bigTileWidth.dp,
-        width = bigTileWidth.dp,
+        width = containerWidth.dp,
+        height = smallTileWidth.dp,
         verticalSpacing = 8.dp,
         topPadding = 8.dp,
         startPadding = 8.dp,
@@ -386,8 +373,8 @@ fun DefaultPreview() {
     )
 
     val bigTileLayout = TileLayout(
-        height = bigTileWidth.dp,
         width = bigTileWidth.dp,
+        height = bigTileWidth.dp,
         verticalSpacing = 8.dp,
         topPadding = 8.dp,
         startPadding = 8.dp,
@@ -397,50 +384,154 @@ fun DefaultPreview() {
         textVerticalSpacing = 8.dp,
     )
 
-    val config = Config(
-        numColumns = numColumns,
-        layout = Layout(
-            smallTile = smallTileLayout,
-            mediumTile = mediumTileLayout,
-            bigTile = bigTileLayout,
-            container = containerLayout,
-            section = sectionLayout,
-            screen = screenLayout
-        )
-    )
-
-    val tile = Tile(
-        title = "Facebook Import",
-        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
-        imageId = R.drawable.ic_launcher,
+    val style = Style(
         backgroundColor = Color.Black
     )
 
-    val tiles = listOf<Tile>(tile, tile, tile, tile, tile, tile, tile, tile, tile, tile, tile, tile)
-
-    val section = Section(title = "Data Know How", tiles = tiles)
-
-//    RowContainerView(tiles, config)
-//
-//    BigTileView(tile, bigTileLayout)
-//
-//    LargeLeftContainerView(
-//        tiles = tiles,
-//        config = config
-//    )
-//
-//    LargeRightContainerView(
-//        tiles = tiles,
-//        config = config
-//    )
-
-    MyDataSectionView(
-        section = section,
-        config = config
+    val tileModel = TileModel(
+        title = "Facebook Import",
+        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
+        imageId = R.drawable.ic_launcher,
     )
 
-//    DataKnowHowSectionView(
-//        section = section,
-//        config = config
-//    )
+    val tileModels: List<TileModel> = listOf(
+        tileModel, tileModel, tileModel,
+        tileModel, tileModel, tileModel,
+        tileModel, tileModel, tileModel,
+        tileModel, tileModel, tileModel,
+    )
+
+    val tiles = tileModels.map {
+        Tile(
+            model = it,
+            style = style
+        )
+    }
+
+    fun yourDataContainers(
+        tiles: List<Tile>,
+        layout: ContainerLayout,
+        bigTileLayout: TileLayout,
+        smallTileLayout: TileLayout
+    ): List<Container> {
+        val tilesPerContainer = 3
+        val chunked = tiles.chunked(tilesPerContainer)
+
+        val containersConfig: List<ContainerType> = listOf(
+            ContainerType.LARGELEFT,
+            ContainerType.ROW,
+            ContainerType.LARGERIGHT,
+            ContainerType.ROW
+        )
+
+        return chunked.mapIndexed { index, tiles ->
+            val type = containersConfig[index % containersConfig.count()]
+            when (type) {
+                ContainerType.LARGELEFT -> Container(
+                    model = ContainerModel(type),
+                    tiles = tiles,
+                    tileLayout = listOf(
+                        bigTileLayout,
+                        smallTileLayout,
+                        smallTileLayout
+                    ),
+                    layout = layout
+                )
+                ContainerType.ROW -> Container(
+                    model = ContainerModel(type),
+                    tiles = tiles,
+                    tileLayout = generateSequence { smallTileLayout }
+                        .take(tilesPerContainer).toList(),
+                    layout = layout
+                )
+                ContainerType.LARGERIGHT -> Container(
+                    model = ContainerModel(type),
+                    tiles = tiles,
+                    tileLayout = listOf(
+                        smallTileLayout,
+                        smallTileLayout,
+                        bigTileLayout
+                    ),
+                    layout = layout
+                )
+            }
+        }
+    }
+
+    fun rowContainers(
+        tiles: List<Tile>,
+        tilesPerContainer: Int,
+        layout: ContainerLayout,
+        tileLayout: TileLayout
+    ): List<Container> {
+        val chunked = tiles.chunked(tilesPerContainer)
+
+        return chunked.map {
+            Container(
+                model = ContainerModel(ContainerType.ROW),
+                layout = layout,
+                tiles = it,
+                tileLayout = generateSequence { tileLayout }
+                    .take(tilesPerContainer).toList()
+            )
+        }
+    }
+
+    fun section(
+        model: SectionModel,
+        tiles: List<Tile>,
+        layout: SectionLayout,
+        containerLayout: ContainerLayout,
+        smallTileLayout: TileLayout,
+        mediumTileLayout: TileLayout,
+        bigTileLayout: TileLayout
+    ): Section {
+        when (model.type) {
+            SectionType.YOUR_DATA -> return Section(
+                model = model,
+                containers = yourDataContainers(
+                    tiles,
+                    containerLayout,
+                    bigTileLayout,
+                    smallTileLayout
+                ),
+                layout = layout
+            )
+            SectionType.DATA_KNOW_HOW -> return Section(
+                model = model,
+                containers = rowContainers(
+                    tiles,
+                    tilesPerContainer = 3,
+                    containerLayout,
+                    smallTileLayout
+                ),
+                layout = layout
+            )
+            SectionType.TOOLS -> return Section(
+                model = model,
+                containers = rowContainers(
+                    tiles,
+                    tilesPerContainer = 1,
+                    containerLayout,
+                    mediumTileLayout
+                ),
+                layout = layout
+            )
+        }
+    }
+
+    val yourDataSection = section(
+        model = SectionModel(
+            title = "Your Data",
+            type = SectionType.YOUR_DATA
+        ),
+        tiles = tiles,
+        layout = sectionLayout,
+        containerLayout = containerLayout,
+        smallTileLayout = smallTileLayout,
+        mediumTileLayout = mediumTileLayout,
+        bigTileLayout = bigTileLayout
+    )
+
+    Section(section = yourDataSection)
 }
