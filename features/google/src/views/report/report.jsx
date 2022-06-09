@@ -26,17 +26,21 @@ const ReportView = ({ reportStories }) => {
         handleBack();
     };
 
+    const viewDetailsLabel = i18n.t("report:view.details");
+
     return (
         <div className="report-view poly-theme-light">
             <h1 className="report-view-title">
                 {i18n.t("report:intro.headline")}
             </h1>
-            <p>{i18n.t("report:intro.text")}</p>
+            <p>
+                {i18n.t("report:intro.text", {
+                    view_details: viewDetailsLabel,
+                })}
+            </p>
             <div className={"button-area" + (loading ? " disabled" : "")}>
                 <RoutingWrapper history={history} route="/report/details">
-                    <div className="view-details">
-                        {i18n.t("report:view.details")}
-                    </div>
+                    <div className="view-details">{viewDetailsLabel}</div>
                 </RoutingWrapper>
                 <button className="send-later" onClick={handleBack}>
                     {i18n.t("report:send.later")}
