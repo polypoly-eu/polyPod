@@ -16,7 +16,6 @@ class ReportMetadataReport extends ReportStory {
         return {
             fileSize: analysisData.fileSize,
             filesCount: analysisData.filesCount,
-            preferedLanguage: analysisData.preferedLanguage,
             polyPodRuntime: analysisData.polyPodRuntime,
             polyPodVersion: analysisData.polyPodVersion,
         };
