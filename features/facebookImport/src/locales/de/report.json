@@ -12,7 +12,7 @@
     "status": 
         "Import Status",
     "status.details": 
-        "Diese {{number_importers}} Importer haben Ihre Daten eingelesen. Diese Ansicht zeigt die Liste der Importeure, die Daten lesen.",
+        "Diese {{number_importers}} Importer haben Ihre Daten eingelesen.",
     "mini.story.status": 
         "Mini-Story Status",
     "mini.story.status.details":  
