@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
 import "./importExplanationExpandable.css";
 import i18n from "!silly-i18n";
+import RemoveSelectionButton from "../removeSelectionButton/removeSelectionButton.jsx";
 
 const isSectionOpened = (section, importStatus, importSteps) => {
     return {
@@ -199,15 +200,17 @@ const ImportExplanationExpandable = ({
                         <div className="file-info">
                             <h5>{i18n.t("import:import.chosen")}</h5>
                             {selectedFiles.map((selectedFile, i) => (
-                                <div
-                                    key={i}
-                                    onClick={() => handleRemoveSelection(i)}
-                                >
-                                    <p>{selectedFile.name}</p>
-                                    <p>
-                                        {i18n.t("import:import.size")}{" "}
-                                        {formatSize(selectedFile.size)}
-                                    </p>
+                                <div className="selected-file-entry" key={i}>
+                                    <div>
+                                        <p>{selectedFile.name}</p>
+                                        <p>
+                                            {i18n.t("import:import.size")}{" "}
+                                            {formatSize(selectedFile.size)}
+                                        </p>
+                                    </div>
+                                    <RemoveSelectionButton
+                                        onClick={() => handleRemoveSelection(i)}
+                                    />
                                 </div>
                             ))}
                         </div>
