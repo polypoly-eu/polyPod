@@ -10,6 +10,8 @@ import { reports } from "../ministories/reports.js";
 import ReportDetails from "./details.jsx";
 import ReportView from "./report.jsx";
 
+import i18n from "!silly-i18n";
+
 const ReportWrapper = () => {
     const { account } = useContext(PolyImportContext);
 
@@ -27,6 +29,9 @@ const ReportWrapper = () => {
         ...computedReportStoriesList,
         ...computedMinistories,
     ]);
+
+    statusReport.title = i18n.t("report:mini.story.status");
+    statusReport.description = i18n.t("report:mini.story.status.details");
 
     const computedReportStories = new ReportStories([
         ...activeReportStories,

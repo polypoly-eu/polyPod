@@ -17,10 +17,8 @@ export default class MinistoriesStatusReport {
             };
         });
         this.active = this._ministoriesData.length > 0;
-    }
-
-    get title() {
-        return "Mini-stories status";
+        this.title = this._title;
+        this.description = this._description;
     }
 
     get id() {
@@ -37,10 +35,7 @@ export default class MinistoriesStatusReport {
     render() {
         return (
             <>
-                <p>
-                    Status of all current ministories. This is a technical view
-                    giving details about the execution of ministories.
-                </p>
+                <p>{this.description}</p>
                 <table>
                     <thead>
                         <tr>
