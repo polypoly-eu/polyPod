@@ -31,14 +31,14 @@
     align-items: center;
     padding: calc(var(--gdu) * 6);
     box-sizing: border-box;
+    font-family: var(--jost-medium);
+    font-size: var(--font-size-xl);
 }
 
 .import-view .explanation-expandable .head .number {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    font-size: 28px;
-    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,9 +47,7 @@
 }
 
 .import-view .explanation-expandable .head .heading {
-    font-family: "Jost Medium";
     margin-left: 18px;
-    font-size: var(--font-size-xl);
     flex: 1 1 auto;
 }
 
@@ -129,12 +127,12 @@
 
 .import-view .explanation-expandable .section-body h4,
 h5 {
+    font-family: var(--jost-medium);
     color: var(--theme-secondary-color);
     margin-top: 0;
 }
 
 .import-view .explanation-expandable .section-body h4 {
-    font-family: "Jost Medium";
     font-size: var(--font-size-xl);
     margin-bottom: calc(var(--gdu) * 9);
     margin-top: calc(var(--gdu) * 5);
