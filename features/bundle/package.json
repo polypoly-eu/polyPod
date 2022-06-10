@@ -51,23 +51,22 @@
       "name": "Your Data",
       "features": [
         "facebookImport",
-        "google",
-        "demo"
+        "google"
       ]
     },
     {
       "id": "knowHow",
       "name": "Know how",
       "features": [
-        "polyPreview",
-        "polyExplorer"
+        "polyExplorer",
+        "lexicon"
       ]
     },
     {
       "id": "tools",
       "name": "Tools",
       "features": [
-        "lexicon"
+        "demo"
       ]
     }
   ]
