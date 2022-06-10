@@ -3,7 +3,6 @@ import PlaceVisitsMinistory from "./placeVisits.jsx";
 import GroupedActivityTypesStory from "./groupedActivityTypes.jsx";
 import ActivitiesByProductsStory from "./activitiesByProduct.jsx";
 import ActivitiesOverTimeMinistory from "./activitiesOverTime.jsx";
-import ReportMetadataReport from "./reportMetadata.jsx";
 
 export const ministories = [
     DataStructureMinistory,
@@ -11,7 +10,6 @@ export const ministories = [
     PlaceVisitsMinistory,
     GroupedActivityTypesStory,
     ActivitiesByProductsStory,
-    ReportMetadataReport,
 ];
 
 export default ministories;
