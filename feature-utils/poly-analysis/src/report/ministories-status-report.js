@@ -9,7 +9,7 @@ import React from "react";
  * @class
  */
 export default class MinistoriesStatusReport {
-    constructor(ministories) {
+    constructor({ ministories, title, description }) {
         this._ministoriesData = ministories.map((ministory) => {
             return {
                 id: ministory.constructor.name,
@@ -17,8 +17,8 @@ export default class MinistoriesStatusReport {
             };
         });
         this.active = this._ministoriesData.length > 0;
-        this.title = this._title;
-        this.description = this._description;
+        this.title = title;
+        this.description = description;
     }
 
     get id() {

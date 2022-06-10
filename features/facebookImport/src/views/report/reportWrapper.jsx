@@ -25,10 +25,11 @@ const ReportWrapper = () => {
     const activeReportStories = computedReportStoriesList.filter(
         (reportStory) => reportStory.active
     );
-    const statusReport = new MinistoriesStatusReport([
-        ...computedReportStoriesList,
-        ...computedMinistories,
-    ]);
+    const statusReport = new MinistoriesStatusReport({
+        ministories: [...computedReportStoriesList, ...computedMinistories],
+        title: i18n.t("report:mini.story.status"),
+        description: i18n.t("report:mini.story.status.details"),
+    });
 
     statusReport.title = i18n.t("report:mini.story.status");
     statusReport.description = i18n.t("report:mini.story.status.details");
