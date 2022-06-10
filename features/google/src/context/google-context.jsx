@@ -17,10 +17,16 @@ function updatePodNavigation(pod, history, handleBack, location) {
 }
 
 function updateTitle(pod, location, popUp) {
+    let screenTitle;
+    try {
+        screenTitle = i18n.t(`navbarTitles:${location.pathname.substring(1)}`);
+    } catch {
+        screenTitle = i18n.t('navbarTitles:overview')
+    };
     pod.polyNav.setTitle(
         location.pathname === "/"
             ? ""
-            : i18n.t(`navbarTitles:${location.pathname.substring(1)}`)
+            : screenTitle
     );
 }
 
