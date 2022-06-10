@@ -20,8 +20,6 @@ function updateTitle(pod, location, popUp) {
     pod.polyNav.setTitle(
         location.pathname === "/"
             ? ""
-            : popUp
-            ? i18n.t("navbarTitles:info")
             : i18n.t(`navbarTitles:${location.pathname.substring(1)}`)
     );
 }
