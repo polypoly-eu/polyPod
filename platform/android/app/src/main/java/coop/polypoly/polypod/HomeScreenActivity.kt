@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -448,6 +449,36 @@ fun SmallTileView(tile: Tile, layout: TileLayout) {
     }
 }
 
+@Composable
+fun Footer(footer: Footer) {
+    val foregroundColor = if (isLight(footer.style.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
+    Card() {
+        Column() {
+            Text(
+                text = footer.model.title,
+                textAlign = TextAlign.Start,
+                color = foregroundColor,
+                overflow = TextOverflow.Ellipsis
+            )
+            Text(
+                text = footer.model.description,
+                textAlign = TextAlign.Start,
+                color = foregroundColor,
+                overflow = TextOverflow.Ellipsis
+            )
+            Image(
+                painter = painterResource(id = footer.model.imageId),
+                contentDescription = null,
+                contentScale = ContentScale.Fit,
+                alignment = Alignment.Center
+            )
+            Button(onClick = { /*TODO*/ }) {
+                Text(text = footer.model.buttonTitle)
+            }
+        }
+    }
+}
+
 // DATA
 
 fun yourDataContainers(
@@ -740,5 +771,6 @@ fun DefaultPreview() {
         layout = screenLayout
     )
 
-    Screen(screen = screen)
+    // Screen(screen = screen)
+    Footer(footer = footer)
 }
