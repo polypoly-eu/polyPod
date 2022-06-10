@@ -16,7 +16,7 @@ function updatePodNavigation(pod, history, handleBack, location) {
         : pod.polyNav.setActiveActions([]);
 }
 
-function updateTitle(pod, location, popUp) {
+function updateTitle(pod, location) {
     let screenTitle;
     try {
         screenTitle = i18n.t(`navbarTitles:${location.pathname.substring(1)}`);
@@ -68,7 +68,7 @@ export const GoogleContextProvider = ({ children }) => {
     useEffect(() => {
         if (!pod) return;
         updatePodNavigation(pod, history, handleBack, location);
-        updateTitle(pod, location, popUp);
+        updateTitle(pod, location);
     });
 
     //for popUp sideSheet
