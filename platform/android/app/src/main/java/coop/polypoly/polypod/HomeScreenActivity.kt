@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +32,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.flowlayout.FlowColumn
 import com.google.accompanist.flowlayout.FlowRow
 
 class HomeScreenActivity : ComponentActivity() {
@@ -130,11 +133,34 @@ data class SectionLayout(
 )
 
 data class ScreenLayout(
-    val horizontalPadding: Dp
+    val width: Dp,
+    val horizontalPadding: Dp,
+    val verticalSpacing: Dp
 )
 
 fun isLight(color: Color): Boolean {
     return luminance(color.toArgb()) > 100
+}
+
+@Composable
+fun Screen(screen: Screen) {
+    val scrollState = rememberScrollState()
+    Column(
+        verticalArrangement = Arrangement.spacedBy(
+            screen.layout.verticalSpacing
+        ),
+        modifier = Modifier
+            .width(screen.layout.width)
+            .padding(
+                start = screen.layout.horizontalPadding,
+                end = screen.layout.horizontalPadding
+            )
+            .verticalScroll(scrollState)
+    ) {
+        screen.sections.forEach {
+            Section(it)
+        }
+    }
 }
 
 @Composable
@@ -406,7 +432,11 @@ fun DefaultPreview() {
 
     val tilesPerContainer = 3
 
-    val screenLayout = ScreenLayout(horizontalPadding = 8.dp)
+    val screenLayout = ScreenLayout(
+        horizontalPadding = 8.dp,
+        verticalSpacing = 16.dp,
+        width = configuration.screenWidthDp.dp
+    )
     val sectionLayout = SectionLayout(verticalSpacing = 8.dp)
     val containerLayout = ContainerLayout(horizontalInterItemSpacing = 8.dp, verticalInterItemSpacing = 8.dp) // ktlint-disable max-line-length
 
@@ -662,7 +692,12 @@ fun DefaultPreview() {
         bigTileLayout = bigTileLayout
     )
 
-    Section(section = tools)
+    val screen = Screen(
+        sections = listOf(yourDataSection, dataKnowHow, tools),
+        layout = screenLayout
+    )
+
+    Screen(screen = screen)
 
     // MediumTileView(tile = tiles.first(), layout = mediumTileLayout)
 }
