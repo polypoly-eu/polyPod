@@ -21,13 +21,9 @@ function updateTitle(pod, location, popUp) {
     try {
         screenTitle = i18n.t(`navbarTitles:${location.pathname.substring(1)}`);
     } catch {
-        screenTitle = i18n.t('navbarTitles:overview')
-    };
-    pod.polyNav.setTitle(
-        location.pathname === "/"
-            ? ""
-            : screenTitle
-    );
+        screenTitle = i18n.t("navbarTitles:overview");
+    }
+    pod.polyNav.setTitle(location.pathname === "/" ? "" : screenTitle);
 }
 
 export const GoogleContextProvider = ({ children }) => {
