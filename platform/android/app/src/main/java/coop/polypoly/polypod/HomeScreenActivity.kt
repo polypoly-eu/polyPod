@@ -41,6 +41,12 @@ class HomeScreenActivity : ComponentActivity() {
     }
 }
 
+enum class TileType {
+    SMALL,
+    MEDIUM,
+    BIG
+}
+
 data class TileModel(
     val title: String,
     val description: String,
@@ -59,14 +65,11 @@ enum class ContainerType {
     LARGERIGHT
 }
 
-data class ContainerModel(
-    val type: ContainerType
-)
-
 data class Container(
-    val model: ContainerModel,
+    val type: ContainerType,
     val tiles: List<Tile>,
     val tileLayout: List<TileLayout>,
+    val tileType: List<TileType>,
     val layout: ContainerLayout
 )
 
@@ -78,10 +81,10 @@ enum class SectionType {
 
 data class SectionModel(
     val title: String,
-    val type: SectionType
 )
 
 data class Section(
+    val type: SectionType,
     val model: SectionModel,
     val containers: List<Container>,
     val layout: SectionLayout
@@ -146,7 +149,7 @@ fun Section(section: Section) {
             crossAxisSpacing = section.layout.verticalSpacing
         ) {
             section.containers.forEach {
-                when (it.model.type) {
+                when (it.type) {
                     ContainerType.LARGELEFT ->
                         LargeLeftContainerView(container = it)
                     ContainerType.ROW ->
@@ -220,13 +223,25 @@ fun LargeRightContainerView(container: Container) {
 
 @Composable
 fun RowContainerView(container: Container) {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(
-            container.layout.horizontalInterItemSpacing
-        )
+    FlowRow(
+        crossAxisSpacing = container.layout.horizontalInterItemSpacing,
+        mainAxisSpacing = container.layout.verticalInterItemSpacing
     ) {
         container.tiles.forEachIndexed { index, tile ->
-            SmallTileView(tile = tile, layout = container.tileLayout[index])
+            when (container.tileType[index]) {
+                TileType.BIG -> BigTileView(
+                    tile = tile,
+                    layout = container.tileLayout[index]
+                )
+                TileType.MEDIUM -> MediumTileView(
+                    tile = tile,
+                    layout = container.tileLayout[index]
+                )
+                TileType.SMALL -> SmallTileView(
+                    tile = tile,
+                    layout = container.tileLayout[index]
+                )
+            }
         }
     }
 }
@@ -495,29 +510,41 @@ fun DefaultPreview() {
             val type = containersConfig[index % containersConfig.count()]
             when (type) {
                 ContainerType.LARGELEFT -> Container(
-                    model = ContainerModel(type),
+                    type = type,
                     tiles = tiles,
                     tileLayout = listOf(
                         bigTileLayout,
                         smallTileLayout,
                         smallTileLayout
                     ),
+                    tileType = listOf(
+                        TileType.BIG,
+                        TileType.SMALL,
+                        TileType.SMALL
+                    ),
                     layout = layout
                 )
                 ContainerType.ROW -> Container(
-                    model = ContainerModel(type),
+                    type = type,
                     tiles = tiles,
                     tileLayout = generateSequence { smallTileLayout }
+                        .take(tilesPerContainer).toList(),
+                    tileType = generateSequence { TileType.SMALL }
                         .take(tilesPerContainer).toList(),
                     layout = layout
                 )
                 ContainerType.LARGERIGHT -> Container(
-                    model = ContainerModel(type),
+                    type = type,
                     tiles = tiles,
                     tileLayout = listOf(
                         smallTileLayout,
                         smallTileLayout,
                         bigTileLayout
+                    ),
+                    tileType = listOf(
+                        TileType.SMALL,
+                        TileType.SMALL,
+                        TileType.BIG
                     ),
                     layout = layout
                 )
@@ -529,16 +556,19 @@ fun DefaultPreview() {
         tiles: List<Tile>,
         tilesPerContainer: Int,
         layout: ContainerLayout,
-        tileLayout: TileLayout
+        tileLayout: TileLayout,
+        tileType: TileType
     ): List<Container> {
         val chunked = tiles.chunked(tilesPerContainer)
 
         return chunked.map {
             Container(
-                model = ContainerModel(ContainerType.ROW),
+                type = ContainerType.ROW,
                 layout = layout,
                 tiles = it,
                 tileLayout = generateSequence { tileLayout }
+                    .take(tilesPerContainer).toList(),
+                tileType = generateSequence { tileType }
                     .take(tilesPerContainer).toList()
             )
         }
@@ -546,6 +576,7 @@ fun DefaultPreview() {
 
     fun section(
         model: SectionModel,
+        type: SectionType,
         tiles: List<Tile>,
         layout: SectionLayout,
         containerLayout: ContainerLayout,
@@ -553,9 +584,10 @@ fun DefaultPreview() {
         mediumTileLayout: TileLayout,
         bigTileLayout: TileLayout
     ): Section {
-        when (model.type) {
+        when (type) {
             SectionType.YOUR_DATA -> return Section(
                 model = model,
+                type = type,
                 containers = yourDataContainers(
                     tiles,
                     containerLayout,
@@ -566,21 +598,25 @@ fun DefaultPreview() {
             )
             SectionType.DATA_KNOW_HOW -> return Section(
                 model = model,
+                type = type,
                 containers = rowContainers(
                     tiles,
                     tilesPerContainer = 3,
                     containerLayout,
-                    smallTileLayout
+                    smallTileLayout,
+                    TileType.SMALL
                 ),
                 layout = layout
             )
             SectionType.TOOLS -> return Section(
                 model = model,
+                type = type,
                 containers = rowContainers(
                     tiles,
                     tilesPerContainer = 1,
                     containerLayout,
-                    mediumTileLayout
+                    mediumTileLayout,
+                    TileType.MEDIUM
                 ),
                 layout = layout
             )
@@ -590,8 +626,8 @@ fun DefaultPreview() {
     val yourDataSection = section(
         model = SectionModel(
             title = "Your Data",
-            type = SectionType.YOUR_DATA
         ),
+        type = SectionType.YOUR_DATA,
         tiles = tiles,
         layout = sectionLayout,
         containerLayout = containerLayout,
@@ -600,7 +636,33 @@ fun DefaultPreview() {
         bigTileLayout = bigTileLayout
     )
 
-    // Section(section = yourDataSection)
+    val dataKnowHow = section(
+        model = SectionModel(
+            title = "Data Know How",
+        ),
+        type = SectionType.DATA_KNOW_HOW,
+        tiles = tiles,
+        layout = sectionLayout,
+        containerLayout = containerLayout,
+        smallTileLayout = smallTileLayout,
+        mediumTileLayout = mediumTileLayout,
+        bigTileLayout = bigTileLayout
+    )
 
-    MediumTileView(tile = tiles.first(), layout = mediumTileLayout)
+    val tools = section(
+        model = SectionModel(
+            title = "Tools",
+        ),
+        type = SectionType.TOOLS,
+        tiles = tiles,
+        layout = sectionLayout,
+        containerLayout = containerLayout,
+        smallTileLayout = smallTileLayout,
+        mediumTileLayout = mediumTileLayout,
+        bigTileLayout = bigTileLayout
+    )
+
+    Section(section = tools)
+
+    // MediumTileView(tile = tiles.first(), layout = mediumTileLayout)
 }
