@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -109,7 +110,11 @@ data class TileLayout(
     val endPadding: Dp,
     val bottomPadding: Dp,
     val cornerRadius: Dp,
-    val textVerticalSpacing: Dp
+    val textVerticalSpacing: Dp,
+    val textTopPadding: Dp,
+    val textBottomPadding: Dp,
+    val textStartPadding: Dp,
+    val textEndPadding: Dp,
 )
 
 data class ContainerLayout(
@@ -264,7 +269,8 @@ fun BigTileView(tile: Tile, layout: TileLayout) {
                 Text(
                     text = tile.model.title,
                     textAlign = TextAlign.Start,
-                    color = foregroundColor
+                    color = foregroundColor,
+                    overflow = TextOverflow.Ellipsis
                 )
                 Spacer(
                     modifier = Modifier.defaultMinSize(
@@ -275,7 +281,8 @@ fun BigTileView(tile: Tile, layout: TileLayout) {
                 Text(
                     text = tile.model.description,
                     textAlign = TextAlign.Start,
-                    color = foregroundColor
+                    color = foregroundColor,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }
@@ -283,7 +290,54 @@ fun BigTileView(tile: Tile, layout: TileLayout) {
 }
 
 @Composable
-fun MediumTileView(tile: Tile) {
+fun MediumTileView(tile: Tile, layout: TileLayout) {
+    val foregroundColor = if (isLight(tile.style.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
+    Card(
+        modifier = Modifier
+            .width(layout.width)
+            .height(layout.height),
+        shape = RoundedCornerShape(layout.cornerRadius)
+    ) {
+        Row(
+            modifier = Modifier
+                .background(tile.style.backgroundColor)
+        ) {
+            Image(
+                painter = painterResource(id = tile.model.imageId),
+                contentDescription = null,
+                contentScale = ContentScale.Fit,
+                alignment = Alignment.Center,
+                modifier = Modifier.width(layout.height)
+            )
+            Column(
+                modifier = Modifier.padding(
+                    top = layout.textTopPadding,
+                    bottom = layout.textBottomPadding,
+                    start = layout.textStartPadding,
+                    end = layout.textEndPadding
+                )
+            ) {
+                Text(
+                    text = tile.model.title,
+                    textAlign = TextAlign.Start,
+                    color = foregroundColor,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Spacer(
+                    modifier = Modifier.defaultMinSize(
+                        minHeight = layout.textVerticalSpacing,
+                        minWidth = layout.width
+                    )
+                )
+                Text(
+                    text = tile.model.description,
+                    textAlign = TextAlign.Start,
+                    color = foregroundColor,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+        }
+    }
 }
 
 @Composable
@@ -323,7 +377,8 @@ fun SmallTileView(tile: Tile, layout: TileLayout) {
             Text(
                 text = tile.model.title,
                 textAlign = TextAlign.Center,
-                color = foregroundColor
+                color = foregroundColor,
+                overflow = TextOverflow.Ellipsis
             )
         }
     }
@@ -357,7 +412,11 @@ fun DefaultPreview() {
         endPadding = 8.dp,
         bottomPadding = 8.dp,
         cornerRadius = 8.dp,
-        textVerticalSpacing = 0.dp
+        textVerticalSpacing = 0.dp,
+        textTopPadding = 0.dp,
+        textBottomPadding = 0.dp,
+        textStartPadding = 0.dp,
+        textEndPadding = 0.dp
     )
 
     val mediumTileLayout = TileLayout(
@@ -370,6 +429,10 @@ fun DefaultPreview() {
         bottomPadding = 8.dp,
         cornerRadius = 8.dp,
         textVerticalSpacing = 8.dp,
+        textTopPadding = 8.dp,
+        textBottomPadding = 8.dp,
+        textStartPadding = 8.dp,
+        textEndPadding = 8.dp
     )
 
     val bigTileLayout = TileLayout(
@@ -382,6 +445,10 @@ fun DefaultPreview() {
         bottomPadding = 8.dp,
         cornerRadius = 8.dp,
         textVerticalSpacing = 8.dp,
+        textTopPadding = 0.dp,
+        textBottomPadding = 0.dp,
+        textStartPadding = 0.dp,
+        textEndPadding = 0.dp
     )
 
     val style = Style(
@@ -533,5 +600,7 @@ fun DefaultPreview() {
         bigTileLayout = bigTileLayout
     )
 
-    Section(section = yourDataSection)
+    // Section(section = yourDataSection)
+
+    MediumTileView(tile = tiles.first(), layout = mediumTileLayout)
 }
