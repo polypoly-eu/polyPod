@@ -425,6 +425,141 @@ fun SmallTileView(tile: Tile, layout: TileLayout) {
     }
 }
 
+// DATA
+
+fun yourDataContainers(
+    tiles: List<Tile>,
+    layout: ContainerLayout,
+    bigTileLayout: TileLayout,
+    smallTileLayout: TileLayout
+): List<Container> {
+    val tilesPerContainer = 3
+    val chunked = tiles.chunked(tilesPerContainer)
+
+    val containersConfig: List<ContainerType> = listOf(
+        ContainerType.LARGELEFT,
+        ContainerType.ROW,
+        ContainerType.LARGERIGHT,
+        ContainerType.ROW
+    )
+
+    return chunked.mapIndexed { index, tiles ->
+        val type = containersConfig[index % containersConfig.count()]
+        when (type) {
+            ContainerType.LARGELEFT -> Container(
+                type = type,
+                tiles = tiles,
+                tileLayout = listOf(
+                    bigTileLayout,
+                    smallTileLayout,
+                    smallTileLayout
+                ),
+                tileType = listOf(
+                    TileType.BIG,
+                    TileType.SMALL,
+                    TileType.SMALL
+                ),
+                layout = layout
+            )
+            ContainerType.ROW -> Container(
+                type = type,
+                tiles = tiles,
+                tileLayout = generateSequence { smallTileLayout }
+                    .take(tilesPerContainer).toList(),
+                tileType = generateSequence { TileType.SMALL }
+                    .take(tilesPerContainer).toList(),
+                layout = layout
+            )
+            ContainerType.LARGERIGHT -> Container(
+                type = type,
+                tiles = tiles,
+                tileLayout = listOf(
+                    smallTileLayout,
+                    smallTileLayout,
+                    bigTileLayout
+                ),
+                tileType = listOf(
+                    TileType.SMALL,
+                    TileType.SMALL,
+                    TileType.BIG
+                ),
+                layout = layout
+            )
+        }
+    }
+}
+
+fun rowContainers(
+    tiles: List<Tile>,
+    tilesPerContainer: Int,
+    layout: ContainerLayout,
+    tileLayout: TileLayout,
+    tileType: TileType
+): List<Container> {
+    val chunked = tiles.chunked(tilesPerContainer)
+
+    return chunked.map {
+        Container(
+            type = ContainerType.ROW,
+            layout = layout,
+            tiles = it,
+            tileLayout = generateSequence { tileLayout }
+                .take(tilesPerContainer).toList(),
+            tileType = generateSequence { tileType }
+                .take(tilesPerContainer).toList()
+        )
+    }
+}
+
+fun section(
+    model: SectionModel,
+    type: SectionType,
+    tiles: List<Tile>,
+    layout: SectionLayout,
+    containerLayout: ContainerLayout,
+    smallTileLayout: TileLayout,
+    mediumTileLayout: TileLayout,
+    bigTileLayout: TileLayout
+): Section {
+    when (type) {
+        SectionType.YOUR_DATA -> return Section(
+            model = model,
+            type = type,
+            containers = yourDataContainers(
+                tiles,
+                containerLayout,
+                bigTileLayout,
+                smallTileLayout
+            ),
+            layout = layout
+        )
+        SectionType.DATA_KNOW_HOW -> return Section(
+            model = model,
+            type = type,
+            containers = rowContainers(
+                tiles,
+                tilesPerContainer = 3,
+                containerLayout,
+                smallTileLayout,
+                TileType.SMALL
+            ),
+            layout = layout
+        )
+        SectionType.TOOLS -> return Section(
+            model = model,
+            type = type,
+            containers = rowContainers(
+                tiles,
+                tilesPerContainer = 1,
+                containerLayout,
+                mediumTileLayout,
+                TileType.MEDIUM
+            ),
+            layout = layout
+        )
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
@@ -520,139 +655,6 @@ fun DefaultPreview() {
         )
     }
 
-    fun yourDataContainers(
-        tiles: List<Tile>,
-        layout: ContainerLayout,
-        bigTileLayout: TileLayout,
-        smallTileLayout: TileLayout
-    ): List<Container> {
-        val tilesPerContainer = 3
-        val chunked = tiles.chunked(tilesPerContainer)
-
-        val containersConfig: List<ContainerType> = listOf(
-            ContainerType.LARGELEFT,
-            ContainerType.ROW,
-            ContainerType.LARGERIGHT,
-            ContainerType.ROW
-        )
-
-        return chunked.mapIndexed { index, tiles ->
-            val type = containersConfig[index % containersConfig.count()]
-            when (type) {
-                ContainerType.LARGELEFT -> Container(
-                    type = type,
-                    tiles = tiles,
-                    tileLayout = listOf(
-                        bigTileLayout,
-                        smallTileLayout,
-                        smallTileLayout
-                    ),
-                    tileType = listOf(
-                        TileType.BIG,
-                        TileType.SMALL,
-                        TileType.SMALL
-                    ),
-                    layout = layout
-                )
-                ContainerType.ROW -> Container(
-                    type = type,
-                    tiles = tiles,
-                    tileLayout = generateSequence { smallTileLayout }
-                        .take(tilesPerContainer).toList(),
-                    tileType = generateSequence { TileType.SMALL }
-                        .take(tilesPerContainer).toList(),
-                    layout = layout
-                )
-                ContainerType.LARGERIGHT -> Container(
-                    type = type,
-                    tiles = tiles,
-                    tileLayout = listOf(
-                        smallTileLayout,
-                        smallTileLayout,
-                        bigTileLayout
-                    ),
-                    tileType = listOf(
-                        TileType.SMALL,
-                        TileType.SMALL,
-                        TileType.BIG
-                    ),
-                    layout = layout
-                )
-            }
-        }
-    }
-
-    fun rowContainers(
-        tiles: List<Tile>,
-        tilesPerContainer: Int,
-        layout: ContainerLayout,
-        tileLayout: TileLayout,
-        tileType: TileType
-    ): List<Container> {
-        val chunked = tiles.chunked(tilesPerContainer)
-
-        return chunked.map {
-            Container(
-                type = ContainerType.ROW,
-                layout = layout,
-                tiles = it,
-                tileLayout = generateSequence { tileLayout }
-                    .take(tilesPerContainer).toList(),
-                tileType = generateSequence { tileType }
-                    .take(tilesPerContainer).toList()
-            )
-        }
-    }
-
-    fun section(
-        model: SectionModel,
-        type: SectionType,
-        tiles: List<Tile>,
-        layout: SectionLayout,
-        containerLayout: ContainerLayout,
-        smallTileLayout: TileLayout,
-        mediumTileLayout: TileLayout,
-        bigTileLayout: TileLayout
-    ): Section {
-        when (type) {
-            SectionType.YOUR_DATA -> return Section(
-                model = model,
-                type = type,
-                containers = yourDataContainers(
-                    tiles,
-                    containerLayout,
-                    bigTileLayout,
-                    smallTileLayout
-                ),
-                layout = layout
-            )
-            SectionType.DATA_KNOW_HOW -> return Section(
-                model = model,
-                type = type,
-                containers = rowContainers(
-                    tiles,
-                    tilesPerContainer = 3,
-                    containerLayout,
-                    smallTileLayout,
-                    TileType.SMALL
-                ),
-                layout = layout
-            )
-            SectionType.TOOLS -> return Section(
-                model = model,
-                type = type,
-                containers = rowContainers(
-                    tiles,
-                    tilesPerContainer = 1,
-                    containerLayout,
-                    mediumTileLayout,
-                    TileType.MEDIUM
-                ),
-                layout = layout
-            )
-        }
-    }
-
     val yourDataSection = section(
         model = SectionModel(
             title = "Your Data",
@@ -698,6 +700,4 @@ fun DefaultPreview() {
     )
 
     Screen(screen = screen)
-
-    // MediumTileView(tile = tiles.first(), layout = mediumTileLayout)
 }
