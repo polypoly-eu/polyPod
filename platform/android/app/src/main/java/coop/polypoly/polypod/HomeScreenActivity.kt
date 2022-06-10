@@ -32,7 +32,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.flowlayout.FlowColumn
 import com.google.accompanist.flowlayout.FlowRow
 
 class HomeScreenActivity : ComponentActivity() {
@@ -93,8 +92,22 @@ data class Section(
     val layout: SectionLayout
 )
 
+data class FooterModel(
+    val title: String,
+    val description: String,
+    val imageId: Int,
+    val buttonTitle: String,
+)
+
+data class Footer(
+    val model: FooterModel,
+    val style: FooterStyle,
+    val layout: FooterLayout
+)
+
 data class Screen(
     val sections: List<Section>,
+    val footer: Footer,
     val layout: ScreenLayout
 )
 
@@ -105,6 +118,11 @@ data class Fonts(
 
 data class Style(
     val backgroundColor: Color,
+)
+
+data class FooterStyle(
+    val backgroundColor: Color,
+    val buttonBackgroundColor: Color,
 )
 
 data class TileLayout(
@@ -135,6 +153,11 @@ data class SectionLayout(
 data class ScreenLayout(
     val width: Dp,
     val horizontalPadding: Dp,
+    val verticalSpacing: Dp
+)
+
+data class FooterLayout(
+    val padding: Dp,
     val verticalSpacing: Dp
 )
 
@@ -694,8 +717,26 @@ fun DefaultPreview() {
         bigTileLayout = bigTileLayout
     )
 
+    val footer = Footer(
+        model = FooterModel(
+            title = "Like What You Have Seen?",
+            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
+            buttonTitle = "Learn More",
+            imageId = R.drawable.ic_launcher
+        ),
+        style = FooterStyle(
+            backgroundColor = Color(0xFFFED7D6),
+            buttonBackgroundColor = Color(0xFF0F1938)
+        ),
+        layout = FooterLayout(
+            padding = 8.dp,
+            verticalSpacing = 8.dp
+        )
+    )
+
     val screen = Screen(
         sections = listOf(yourDataSection, dataKnowHow, tools),
+        footer = footer,
         layout = screenLayout
     )
 
