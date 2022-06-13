@@ -12,8 +12,8 @@ export default class ReportMetadataAnalysis extends ReportAnalysis {
             await info.getVersion();
 
         dataAccount.reports[analysisKeys.reportMetadata].fileSize = size;
-        dataAccount.reports[analysisKeys.reportMetadata].zipFileName = zipFile._file.name;
-
+        dataAccount.reports[analysisKeys.reportMetadata].zipFileName =
+            zipFile._file.name;
 
         const entries = await zipFile.getEntries();
         dataAccount.reports[analysisKeys.reportMetadata].filesCount =
