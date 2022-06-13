@@ -30,14 +30,14 @@ export const GoogleContextProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [globalError, setGlobalError] = useState(null);
-    const [popUp, setPopUp] = useState(null);
+    const [popUp, setPopUp] = useState({});
     const [reportIsSent, setReportIsSent] = useState(false);
 
     const location = useLocation();
     const history = useHistory();
 
     const closePopUp = () => {
-        setPopUp(null);
+        setPopUp({});
     };
 
     function handleBack() {
