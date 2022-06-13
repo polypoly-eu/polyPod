@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-
+import { L12n } from "@polypoly-eu/silly-i18n";
 import { Chart } from "../../chart";
 
 const edgePadding = 5;
@@ -14,8 +14,10 @@ const defaultBubbleColor = "blue";
 const defaultStrokeColor = "#f7fafc";
 const defaultTextColor = "white";
 const defaultOpacity = 1;
+
+const l12n = new L12n();
 const defaultText = (d) =>
-  d.r > smallBubblesRadius ? Math.round(d.value) : "";
+  d.r > smallBubblesRadius ? l12n.t(Math.round(d.value)) : "";
 const defaultOnClickFunction = () => {};
 
 const nodeLabelBoxPaddingX = 4,
