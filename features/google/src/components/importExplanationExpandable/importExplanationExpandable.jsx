@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
 import "./importExplanationExpandable.css";
 import i18n from "!silly-i18n";
+import RemoveSelectionButton from "../removeSelectionButton/removeSelectionButton.jsx";
 
 const isSectionOpened = (section, importStatus, importSteps) => {
     return {
@@ -81,10 +82,10 @@ const ImportExplanationExpandable = ({
         const { polyNav } = pod;
         runWithLoadingScreen(async function () {
             try {
-                setSelectedFiles([
-                    ...selectedFiles,
-                    await polyNav.pickFile("application/zip"),
-                ]);
+                const pickedFile = await polyNav.pickFile("application/zip");
+                if (pickedFile) {
+                    setSelectedFiles([...selectedFiles, pickedFile]);
+                }
             } catch (error) {
                 setGlobalError(new FileSelectionError(error));
             }
@@ -129,6 +130,7 @@ const ImportExplanationExpandable = ({
                 <InfoBox textContent={i18n.t("import:request.info.1")} />
                 <div className="poly-separator"></div>
                 <h4>{i18n.t("import:how.it.works")}</h4>
+                <img src="./images/icon-screen.svg" alt="screen" />
                 <p>{i18n.t("import:request.2")}</p>
                 <p
                     dangerouslySetInnerHTML={{
@@ -198,15 +200,17 @@ const ImportExplanationExpandable = ({
                         <div className="file-info">
                             <h5>{i18n.t("import:import.chosen")}</h5>
                             {selectedFiles.map((selectedFile, i) => (
-                                <div
-                                    key={i}
-                                    onClick={() => handleRemoveSelection(i)}
-                                >
-                                    <p>{selectedFile.name}</p>
-                                    <p>
-                                        {i18n.t("import:import.size")}{" "}
-                                        {formatSize(selectedFile.size)}
-                                    </p>
+                                <div className="selected-file-entry" key={i}>
+                                    <div>
+                                        <p>{selectedFile.name}</p>
+                                        <p>
+                                            {i18n.t("import:import.size")}{" "}
+                                            {formatSize(selectedFile.size)}
+                                        </p>
+                                    </div>
+                                    <RemoveSelectionButton
+                                        onClick={() => handleRemoveSelection(i)}
+                                    />
                                 </div>
                             ))}
                         </div>

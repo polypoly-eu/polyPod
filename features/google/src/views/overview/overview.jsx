@@ -76,7 +76,12 @@ const Overview = () => {
         const i = Math.floor(Math.log(size) / Math.log(k));
         return Math.round(size / Math.pow(k, i), decimals) + " " + units[i - 1];
     };
-
+    let fileTime;
+    try {
+        fileTime = l12n.t(new Date(files[0].time));
+    } catch {
+        fileTime = files[0].time;
+    }
     return (
         <Screen className="overview" layout="poly-standard-layout">
             <h1>{i18n.t("common:your.google.data")}</h1>
@@ -103,8 +108,7 @@ const Overview = () => {
                         <br />
                         {i18n.t("overview:size")} {formatSize(files[0].size)}
                         <br />
-                        {i18n.t("overview:imported.time")}{" "}
-                        {l12n.t(new Date(files[0].time))}
+                        {i18n.t("overview:imported.time")} {fileTime}
                     </p>
                 </>
             )}
