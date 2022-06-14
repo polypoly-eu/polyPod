@@ -9,19 +9,28 @@ class ActivityHtmlParser {
         document.body.appendChild(this._iframe);
     }
 
+    _extractDate(text) {
+        // Ignoring the timestamp for now - we don't need hourly accuracy at the
+        // time of writing this.
+        const datePattern =
+            /[0-9]{1,2} [A-Z][a-z][a-z] [0-9]{4,4}, [0-9:]{8,8}/;
+        const dateString = text.match(datePattern)?.[0];
+        return dateString ? new Date(dateString) : null;
+    }
+
     _scrapeTimestamps(contentDocument, productName) {
         const contentCells = contentDocument.querySelectorAll(
             ".mdl-grid>.mdl-cell>.mdl-grid>.content-cell:nth-child(2)"
         );
-        return [...contentCells].map(
-            ({ childNodes }) =>
-                new UserActivity({
-                    timestamp: new Date(
-                        childNodes[childNodes.length - 1].textContent
-                    ),
-                    productName,
-                })
-        );
+        return [...contentCells]
+            .map(({ childNodes }) => {
+                const timestamp = this._extractDate(
+                    childNodes[childNodes.length - 1].textContent
+                );
+                if (!timestamp) return null;
+                return new UserActivity({ timestamp, productName });
+            })
+            .filter((activity) => activity !== null);
     }
 
     async parse(entry) {

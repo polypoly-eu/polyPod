@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import i18n from "!silly-i18n";
+
 import { useHistory, useLocation } from "react-router-dom";
 
 export const GoogleContext = React.createContext();
@@ -12,6 +14,16 @@ function updatePodNavigation(pod, history, handleBack, location) {
     location.pathname !== "/import"
         ? pod.polyNav.setActiveActions(["back"])
         : pod.polyNav.setActiveActions([]);
+}
+
+function updateTitle(pod, location) {
+    let screenTitle;
+    try {
+        screenTitle = i18n.t(`navbarTitles:${location.pathname.substring(1)}`);
+    } catch {
+        screenTitle = i18n.t("navbarTitles:overview");
+    }
+    pod.polyNav.setTitle(location.pathname === "/" ? "" : screenTitle);
 }
 
 export const GoogleContextProvider = ({ children }) => {
@@ -56,6 +68,7 @@ export const GoogleContextProvider = ({ children }) => {
     useEffect(() => {
         if (!pod) return;
         updatePodNavigation(pod, history, handleBack, location);
+        updateTitle(pod, location);
     });
 
     //for popUp sideSheet
