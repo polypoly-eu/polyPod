@@ -1,7 +1,7 @@
 import { DataAccount } from "../src";
 
 describe("DataAccount has the correct attributes", () => {
-    const dataAccount = new DataAccount();
+    let dataAccount = new DataAccount();
     it("Attributes have the correct type", () => {
         [
             "importingResults",
@@ -14,5 +14,9 @@ describe("DataAccount has the correct attributes", () => {
             expect(dataAccount[attribute]).toBeInstanceOf(Object);
         });
         expect(dataAccount.name).toStrictEqual("");
+    });
+    it("Adds imported filenames successfully", () => {
+        dataAccount.addImportedFileName("Foo");
+        expect(dataAccount.importedFileNames.length).toBeGreaterThanOrEqual(1);
     });
 });
