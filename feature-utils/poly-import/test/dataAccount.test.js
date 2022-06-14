@@ -10,5 +10,9 @@ describe("DataAccount has the correct attributes", () => {
         ].forEach((attribute) => {
             expect(dataAccount[attribute]).toBeInstanceOf(Array);
         });
+        ["analyses", "reports"].forEach((attribute) => {
+            expect(dataAccount[attribute]).toBeInstanceOf(Object);
+        });
+        expect(dataAccount.name).toStrictEqual("");
     });
 });
