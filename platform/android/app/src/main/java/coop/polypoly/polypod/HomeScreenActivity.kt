@@ -29,12 +29,16 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.google.accompanist.flowlayout.FlowRow
 
 class HomeScreenActivity : ComponentActivity() {
@@ -70,21 +74,21 @@ data class PolyFontFamily(
 )
 
 data class PolyFontSize(
-    val xs: Dp = 12.dp,
-    val sm: Dp = 14.dp,
-    val base: Dp = 16.dp,
-    val lg: Dp = 18.dp,
-    val xl: Dp = 20.dp,
-    val _2xl: Dp = 22.dp
+    val xs: TextUnit = 12.sp,
+    val sm: TextUnit = 14.sp,
+    val base: TextUnit = 16.sp,
+    val lg: TextUnit = 18.sp,
+    val xl: TextUnit = 20.sp,
+    val _2xl: TextUnit = 22.sp
 )
 
 data class PolyFontLineHeight(
-    val xs: Dp = (1.2 * PolyFontSize().xs.value).dp,
-    val sm: Dp = (1.2 * PolyFontSize().sm.value).dp,
-    val base: Dp = (1.2 * PolyFontSize().base.value).dp,
-    val lg: Dp = (1.2 * PolyFontSize().lg.value).dp,
-    val xl: Dp = (1.2 * PolyFontSize().xl.value).dp,
-    val _2xl: Dp = (1.2 * PolyFontSize()._2xl.value).dp
+    val xs: TextUnit = (1.2 * PolyFontSize().xs.value).sp,
+    val sm: TextUnit = (1.2 * PolyFontSize().sm.value).sp,
+    val base: TextUnit = (1.2 * PolyFontSize().base.value).sp,
+    val lg: TextUnit = (1.2 * PolyFontSize().lg.value).sp,
+    val xl: TextUnit = (1.2 * PolyFontSize().xl.value).sp,
+    val _2xl: TextUnit = (1.2 * PolyFontSize()._2xl.value).sp
 )
 
 data class PolyFontAlignment(
@@ -199,8 +203,8 @@ data class Screen(
 data class FontDescription(
     val family: Int,
     val weight: FontWeight,
-    val size: Dp,
-    val lineHeight: Dp,
+    val size: TextUnit,
+    val lineHeight: TextUnit,
     val alignment: TextAlign,
 )
 
@@ -216,8 +220,9 @@ data class TileStyle(
 data class FooterStyle(
     val backgroundColor: Color,
     val buttonBackgroundColor: Color,
-//    val titleFont: FontDescription,
-//    val descriptionFont: FontDescription,
+    val titleFont: FontDescription,
+    val descriptionFont: FontDescription,
+    val buttonTitleFont: FontDescription
 )
 
 data class TileLayout(
@@ -290,7 +295,16 @@ fun Section(section: Section) {
             section.layout.verticalSpacing
         )
     ) {
-        Text(text = section.model.title)
+        Text(
+            text = section.model.title,
+            fontWeight = section.style.titleFont.weight,
+            fontFamily = FontFamily(
+                Font(section.style.titleFont.family)
+            ),
+            fontSize = section.style.titleFont.size,
+            lineHeight = section.style.titleFont.lineHeight,
+            textAlign = section.style.titleFont.alignment,
+        )
         FlowRow(
             crossAxisSpacing = section.layout.verticalSpacing
         ) {
@@ -422,9 +436,15 @@ fun BigTileView(tile: Tile) {
             Column() {
                 Text(
                     text = tile.model.title,
-                    textAlign = TextAlign.Start,
                     color = foregroundColor,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    fontWeight = tile.style.titleFont.weight,
+                    fontFamily = FontFamily(
+                        Font(tile.style.titleFont.family)
+                    ),
+                    fontSize = tile.style.titleFont.size,
+                    lineHeight = tile.style.titleFont.lineHeight,
+                    textAlign = tile.style.titleFont.alignment,
                 )
                 Spacer(
                     modifier = Modifier.defaultMinSize(
@@ -434,9 +454,15 @@ fun BigTileView(tile: Tile) {
                 )
                 Text(
                     text = tile.model.description,
-                    textAlign = TextAlign.Start,
                     color = foregroundColor,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    fontWeight = tile.style.descriptionFont!!.weight,
+                    fontFamily = FontFamily(
+                        Font(tile.style.descriptionFont.family)
+                    ),
+                    fontSize = tile.style.descriptionFont.size,
+                    lineHeight = tile.style.descriptionFont.lineHeight,
+                    textAlign = tile.style.descriptionFont.alignment,
                 )
             }
         }
@@ -473,9 +499,15 @@ fun MediumTileView(tile: Tile) {
             ) {
                 Text(
                     text = tile.model.title,
-                    textAlign = TextAlign.Start,
                     color = foregroundColor,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    fontWeight = tile.style.titleFont.weight,
+                    fontFamily = FontFamily(
+                        Font(tile.style.titleFont.family)
+                    ),
+                    fontSize = tile.style.titleFont.size,
+                    lineHeight = tile.style.titleFont.lineHeight,
+                    textAlign = tile.style.titleFont.alignment,
                 )
                 Spacer(
                     modifier = Modifier.defaultMinSize(
@@ -485,9 +517,15 @@ fun MediumTileView(tile: Tile) {
                 )
                 Text(
                     text = tile.model.description,
-                    textAlign = TextAlign.Start,
                     color = foregroundColor,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    fontWeight = tile.style.descriptionFont!!.weight,
+                    fontFamily = FontFamily(
+                        Font(tile.style.descriptionFont.family)
+                    ),
+                    fontSize = tile.style.descriptionFont.size,
+                    lineHeight = tile.style.descriptionFont.lineHeight,
+                    textAlign = tile.style.descriptionFont.alignment,
                 )
             }
         }
@@ -531,9 +569,15 @@ fun SmallTileView(tile: Tile) {
             )
             Text(
                 text = tile.model.title,
-                textAlign = TextAlign.Center,
                 color = foregroundColor,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                fontWeight = tile.style.titleFont.weight,
+                fontFamily = FontFamily(
+                    Font(tile.style.titleFont.family)
+                ),
+                fontSize = tile.style.titleFont.size,
+                lineHeight = tile.style.titleFont.lineHeight,
+                textAlign = tile.style.titleFont.alignment,
             )
         }
     }
@@ -561,15 +605,27 @@ fun Footer(footer: Footer) {
         ) {
             Text(
                 text = footer.model.title,
-                textAlign = TextAlign.Start,
                 color = foregroundColor,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                fontWeight = footer.style.titleFont.weight,
+                fontFamily = FontFamily(
+                    Font(footer.style.titleFont.family)
+                ),
+                fontSize = footer.style.titleFont.size,
+                lineHeight = footer.style.titleFont.lineHeight,
+                textAlign = footer.style.titleFont.alignment,
             )
             Text(
                 text = footer.model.description,
-                textAlign = TextAlign.Start,
                 color = foregroundColor,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                fontWeight = footer.style.descriptionFont.weight,
+                fontFamily = FontFamily(
+                    Font(footer.style.descriptionFont.family)
+                ),
+                fontSize = footer.style.descriptionFont.size,
+                lineHeight = footer.style.descriptionFont.lineHeight,
+                textAlign = footer.style.descriptionFont.alignment,
             )
             Column(
                 verticalArrangement = Arrangement.spacedBy(
@@ -593,7 +649,14 @@ fun Footer(footer: Footer) {
                 ) {
                     Text(
                         text = footer.model.buttonTitle,
-                        color = buttonForegroundColor
+                        color = buttonForegroundColor,
+                        fontWeight = footer.style.buttonTitleFont.weight,
+                        fontFamily = FontFamily(
+                            Font(footer.style.buttonTitleFont.family)
+                        ),
+                        fontSize = footer.style.buttonTitleFont.size,
+                        lineHeight = footer.style.buttonTitleFont.lineHeight,
+                        textAlign = footer.style.buttonTitleFont.alignment,
                     )
                 }
             }
@@ -969,6 +1032,27 @@ fun DefaultPreview() {
         style = FooterStyle(
             backgroundColor = Color(0xFFFED7D6),
             buttonBackgroundColor = Color(0xFF0F1938),
+            titleFont = FontDescription(
+                family = PolyStyle().font.family.jostMedium,
+                weight = PolyStyle().font.weight.medium,
+                size = PolyStyle().font.size._2xl,
+                lineHeight = PolyStyle().font.lineHeight._2xl,
+                alignment = PolyStyle().font.alignment.left
+            ),
+            descriptionFont = FontDescription(
+                family = PolyStyle().font.family.jostRegular,
+                weight = PolyStyle().font.weight.regular,
+                size = PolyStyle().font.size.base,
+                lineHeight = PolyStyle().font.lineHeight.base,
+                alignment = PolyStyle().font.alignment.left
+            ),
+            buttonTitleFont = FontDescription(
+                family = PolyStyle().font.family.jostMedium,
+                weight = PolyStyle().font.weight.medium,
+                size = PolyStyle().font.size.lg,
+                lineHeight = PolyStyle().font.lineHeight.lg,
+                alignment = PolyStyle().font.alignment.center
+            )
         ),
         layout = FooterLayout(
             padding = PolyStyle().spacing._6x,
