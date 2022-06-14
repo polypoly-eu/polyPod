@@ -32,8 +32,8 @@ class ReportMetadataReport extends ReportStory {
                     polyPod version: {this.reportData.polyPodVersion}
                 </li>
                 <li key={3}>File size: {this.reportData.fileSize}</li>
-                <li key={4}>Files count: {this.reportData.filesCount}</li>
-                <li key={5}>Is the file an example?: {this.reportData.isExampleFile?"Yes":"No"}</li>
+                <li key={4}>File count: {this.reportData.filesCount}</li>
+                <li key={5}>Is the imported file an example?: {this.reportData.isExampleFile?"Yes":"No"}</li>
             </ul>
         );
     }
