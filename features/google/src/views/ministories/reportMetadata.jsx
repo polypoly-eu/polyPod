@@ -18,7 +18,7 @@ class ReportMetadataReport extends ReportStory {
             filesCount: analysisData.filesCount,
             polyPodRuntime: analysisData.polyPodRuntime,
             polyPodVersion: analysisData.polyPodVersion,
-            zipFileName: analysisData.zipFileName,
+            isExampleFile: analysisData.isExampleFile,
         };
     }
 
@@ -33,7 +33,7 @@ class ReportMetadataReport extends ReportStory {
                 </li>
                 <li key={3}>File size: {this.reportData.fileSize}</li>
                 <li key={4}>Files count: {this.reportData.filesCount}</li>
-                <li key={5}>Zip file name: {this.reportData.zipFileName}</li>
+                <li key={5}>Is the file an example?: {this.reportData.isExampleFile?"Yes":"No"}</li>
             </ul>
         );
     }
