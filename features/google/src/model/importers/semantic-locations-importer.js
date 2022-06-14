@@ -27,6 +27,7 @@ function extractTimestampFromDuration(duration) {
 function createPlaceVisit(jsonData) {
     return new PlaceVisit({
         timestamp: new Date(extractTimestampFromDuration(jsonData.duration)),
+        duration: jsonData.duration,
         locationName: jsonData.location.name,
     });
 }
@@ -77,7 +78,6 @@ export default class SemanticLocationsImporter {
                 parseTimelineObjectsByTypeFromEntry(entry)
             )
         );
-
         let allPlaceVisits = [];
         let allActivitySegments = [];
         timelineObjectsByType.forEach(({ placeVisits, activitySegments }) => {
