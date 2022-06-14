@@ -5,11 +5,22 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -525,7 +536,9 @@ fun Footer(footer: Footer) {
         shape = RoundedCornerShape(footer.layout.cornerRadius)
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(footer.layout.verticalSpacing),
+            verticalArrangement = Arrangement.spacedBy(
+                footer.layout.verticalSpacing
+            ),
             modifier = Modifier
                 .background(footer.style.backgroundColor)
                 .padding(
@@ -548,7 +561,9 @@ fun Footer(footer: Footer) {
                 overflow = TextOverflow.Ellipsis
             )
             Column(
-                verticalArrangement = Arrangement.spacedBy(footer.layout.verticalSpacing),
+                verticalArrangement = Arrangement.spacedBy(
+                    footer.layout.verticalSpacing
+                ),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -561,7 +576,9 @@ fun Footer(footer: Footer) {
                 Button(
                     onClick = { /*TODO*/ },
                     modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = footer.style.buttonBackgroundColor)
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = footer.style.buttonBackgroundColor
+                    )
                 ) {
                     Text(
                         text = footer.model.buttonTitle,
