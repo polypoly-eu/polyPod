@@ -57,6 +57,8 @@ data class PolySpacing(
     val _4x: Dp = (4 * _1x.value).dp,
     val _5x: Dp = (5 * _1x.value).dp,
     val _6x: Dp = (6 * _1x.value).dp,
+    val _7x: Dp = (7 * _1x.value).dp,
+    val _8x: Dp = (8 * _1x.value).dp,
 )
 
 data class PolyRadius(
@@ -838,12 +840,12 @@ fun DefaultPreview() {
     val tilesPerContainer = 3
 
     val screenLayout = ScreenLayout(
-        horizontalPadding = 8.dp,
-        verticalSpacing = 16.dp,
+        horizontalPadding = PolyStyle().spacing._4x,
+        verticalSpacing = PolyStyle().spacing._8x,
         width = configuration.screenWidthDp.dp
     )
-    val sectionLayout = SectionLayout(verticalSpacing = 8.dp)
-    val containerLayout = ContainerLayout(horizontalInterItemSpacing = 8.dp, verticalInterItemSpacing = 8.dp) // ktlint-disable max-line-length
+    val sectionLayout = SectionLayout(verticalSpacing = PolyStyle().spacing._3x)
+    val containerLayout = ContainerLayout(horizontalInterItemSpacing = PolyStyle().spacing._3x, verticalInterItemSpacing = PolyStyle().spacing._3x) // ktlint-disable max-line-length
 
     val screenWidth = configuration.screenWidthDp
     val totalScreenPadding = 2 * screenLayout.horizontalPadding.value
