@@ -10,7 +10,7 @@ struct UnlockPolyPod: View {
             Spacer()
             Image("NavIconPolyPodLogo")
             Spacer()
-            PrimaryButton(title: "Unlock", onAction: authenticate)
+            PrimaryButton(title: "auth_prompt_unlock", onAction: authenticate)
         }
         .padding(.vertical, 32)
         .onAppear(perform: authenticate)

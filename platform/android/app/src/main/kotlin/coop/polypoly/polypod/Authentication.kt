@@ -20,6 +20,11 @@ class Authentication {
                 !Preferences.isFirstRun(context)
         }
 
+        fun should_authenticate(context: Context): Boolean {
+            return biometricsAvailable(context) &&
+                Preferences.isBiometricEnabled(context)
+        }
+
         fun setUp(
             activity: FragmentActivity,
             newStatus: Boolean,

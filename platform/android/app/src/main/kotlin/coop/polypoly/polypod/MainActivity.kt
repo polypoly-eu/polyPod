@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var onboardingShown = false
+    private var podUnlockShown = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,18 +40,9 @@ class MainActivity : AppCompatActivity() {
             throw ex
         }
 
-        Authentication.authenticate(this) { success ->
-            if (success) {
-                FeatureStorage().installBundledFeatures(this)
-                setContentView(R.layout.activity_main)
-                setSupportActionBar(findViewById(R.id.toolbar))
-            } else {
-                // Since we do not have a dedicated unlocking activity yet,
-                // we simply keep restarting the activity until unlocking
-                // succeeds.
-                recreate()
-            }
-        }
+        FeatureStorage().installBundledFeatures(this)
+        setContentView(R.layout.activity_main)
+        setSupportActionBar(findViewById(R.id.toolbar))
     }
 
     override fun onResume() {
@@ -72,6 +64,14 @@ class MainActivity : AppCompatActivity() {
                 Intent(
                     this,
                     OnboardingActivity::class.java
+                )
+            )
+        } else if (!podUnlockShown && Authentication.should_authenticate(this)) {
+            podUnlockShown = true
+            startActivity(
+                Intent(
+                    this,
+                    PodUnlockActivity::class.java
                 )
             )
         }
