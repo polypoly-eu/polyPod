@@ -6,7 +6,6 @@ describe("DataAccount has the correct attributes", () => {
         [
             "importingResults",
             "importedFileNames",
-            "preferredLanguage",
             "analysesExecutionResults",
         ].forEach((attribute) => {
             expect(dataAccount[attribute]).toBeInstanceOf(Array);
