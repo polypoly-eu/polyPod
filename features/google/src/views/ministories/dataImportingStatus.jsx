@@ -1,10 +1,10 @@
 import React from "react";
 import ReportStory from "./reportStory.jsx";
-
+import analysisKeys from "../../model/analyses/analysisKeys.js";
 class DataImportingStatusReport extends ReportStory {
     constructor(props) {
         super(props);
-        this._neededReports = ["importersData"];
+        this._neededReports = [analysisKeys.importersData];
     }
 
     get title() {
@@ -12,7 +12,7 @@ class DataImportingStatusReport extends ReportStory {
     }
 
     get reportData() {
-        return this.reports.importersData;
+        return this.reports[analysisKeys.importersData];
     }
 
     _renderStatus(status) {
