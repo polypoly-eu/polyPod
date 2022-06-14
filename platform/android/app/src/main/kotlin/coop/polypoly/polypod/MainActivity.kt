@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var onboardingShown = false
-    private var podUnlockShown = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,10 +65,7 @@ class MainActivity : AppCompatActivity() {
                     OnboardingActivity::class.java
                 )
             )
-        } else if (
-            !podUnlockShown && Authentication.should_authenticate(this)
-        ) {
-            podUnlockShown = true
+        } else if (Authentication.should_authenticate(this)) {
             startActivity(
                 Intent(
                     this,

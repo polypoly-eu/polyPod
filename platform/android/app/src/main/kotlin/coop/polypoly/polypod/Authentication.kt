@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentActivity
 
 class Authentication {
     companion object {
+        var isAuthenticated = false
+
         private const val desiredLockScreenType =
             BiometricManager.Authenticators.BIOMETRIC_WEAK or
                 BiometricManager.Authenticators.DEVICE_CREDENTIAL
@@ -22,7 +24,8 @@ class Authentication {
 
         fun should_authenticate(context: Context): Boolean {
             return biometricsAvailable(context) &&
-                Preferences.isBiometricEnabled(context)
+                Preferences.isBiometricEnabled(context) &&
+                !isAuthenticated
         }
 
         fun setUp(
@@ -106,6 +109,7 @@ class Authentication {
                 title,
                 Toast.LENGTH_SHORT
             ).show()
+            isAuthenticated = true
 
             authComplete(true)
         }
