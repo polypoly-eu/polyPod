@@ -24,7 +24,7 @@ jobs:
                     ~/.cache
                   key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('package-lock.json') }}
             - name: Checks paths to rebuild Android
-              uses: dorny/paths-filter@b2feaf19c27470162a626bd6fa8438ae5b263721 #v2.10.2
+              uses: dorny/paths-filter@8c7f485a57f7cad3483dcc0fdf36122a0542f200 # After merge
               id: changes
               with:
                   filters: |
@@ -74,6 +74,7 @@ jobs:
                   distribution: 'temurin'
                   cache: 'gradle'
             - name: Build core with Android bindings
+              if: steps.changes.outputs.android == 'true'
               working-directory: platform/core
               run: make android_bindings
             - name: Test android
