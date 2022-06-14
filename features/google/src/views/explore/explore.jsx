@@ -17,7 +17,11 @@ import { useHistory } from "react-router-dom";
 import { GoogleContext } from "../../context/google-context.jsx";
 
 const PopUpMessage = ({ children, reportResultAnswer }) => {
-    return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
+    return (
+        <div className="pop-up-container">
+            <div className={"pop-up" + reportResultAnswer}>{children}</div>
+        </div>
+    );
 };
 
 const ReportCard = () => {
