@@ -35,6 +35,81 @@ class HomeScreenActivity : ComponentActivity() {
     }
 }
 
+data class PolySpacing(
+    val _1x: Dp = 4.dp,
+    val _2x: Dp = (2 * _1x.value).dp,
+    val _3x: Dp = (3 * _1x.value).dp,
+    val _4x: Dp = (4 * _1x.value).dp,
+    val _5x: Dp = (5 * _1x.value).dp,
+    val _6x: Dp = (6 * _1x.value).dp,
+)
+
+data class PolyRadius(
+    val _1x: Dp = 4.dp,
+    val _2x: Dp = (2 * _1x.value).dp,
+    val _3x: Dp = (3 * _1x.value).dp,
+    val _4x: Dp = (4 * _1x.value).dp,
+    val _5x: Dp = (5 * _1x.value).dp,
+    val _6x: Dp = (6 * _1x.value).dp,
+)
+
+data class PolyFontFamily(
+    val jostRegular: Int = R.font.jost_regular,
+    val jostMedium: Int = R.font.jost_medium,
+)
+
+data class PolyFontSize(
+    val xs: Dp = 12.dp,
+    val sm: Dp = 14.dp,
+    val base: Dp = 16.dp,
+    val lg: Dp = 18.dp,
+    val xl: Dp = 20.dp,
+    val _2xl: Dp = 22.dp
+)
+
+data class PolyFontLineHeight(
+    val xs: Dp = (1.2 * PolyFontSize().xs.value).dp,
+    val sm: Dp = (1.2 * PolyFontSize().sm.value).dp,
+    val base: Dp = (1.2 * PolyFontSize().base.value).dp,
+    val lg: Dp = (1.2 * PolyFontSize().lg.value).dp,
+    val xl: Dp = (1.2 * PolyFontSize().xl.value).dp,
+    val _2xl: Dp = (1.2 * PolyFontSize()._2xl.value).dp
+)
+
+data class PolyFontAlignment(
+    val left: TextAlign = TextAlign.Start,
+    val center: TextAlign = TextAlign.Center,
+    val right: TextAlign = TextAlign.End,
+    val justify: TextAlign = TextAlign.Justify
+)
+
+data class PolyFont(
+    val family: PolyFontFamily = PolyFontFamily(),
+    val size: PolyFontSize = PolyFontSize(),
+    val lineHeight: PolyFontLineHeight = PolyFontLineHeight(),
+    val alignment: PolyFontAlignment = PolyFontAlignment()
+)
+
+data class PolyBorderSize(
+    val _1x: Dp = 1.dp,
+    val _2x: Dp = (2 * _1x.value).dp,
+    val _3x: Dp = (3 * _1x.value).dp,
+    val _4x: Dp = (4 * _1x.value).dp,
+    val _5x: Dp = (5 * _1x.value).dp,
+    val _6x: Dp = (6 * _1x.value).dp,
+)
+
+data class PolyBorder(
+    val size: PolyBorderSize = PolyBorderSize(),
+)
+
+data class PolyStyle(
+    val spacing: PolySpacing = PolySpacing(),
+    val radius: PolyRadius = PolyRadius(),
+    val font: PolyFont = PolyFont(),
+    val border: PolyBorder = PolyBorder()
+)
+
 enum class TileType {
     SMALL,
     MEDIUM,
@@ -792,5 +867,5 @@ fun DefaultPreview() {
     )
 
     Screen(screen = screen)
-    //Footer(footer = footer)
+    // Footer(footer = footer)
 }
