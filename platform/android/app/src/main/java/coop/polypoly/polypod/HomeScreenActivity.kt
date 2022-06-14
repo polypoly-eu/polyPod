@@ -25,11 +25,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -94,8 +96,14 @@ data class PolyFontAlignment(
     val justify: TextAlign = TextAlign.Justify
 )
 
+data class PolyFontWeight(
+    val regular: FontWeight = FontWeight.Normal,
+    val medium: FontWeight = FontWeight.Medium
+)
+
 data class PolyFont(
     val family: PolyFontFamily = PolyFontFamily(),
+    val weight: PolyFontWeight = PolyFontWeight(),
     val size: PolyFontSize = PolyFontSize(),
     val lineHeight: PolyFontLineHeight = PolyFontLineHeight(),
     val alignment: PolyFontAlignment = PolyFontAlignment()
@@ -130,13 +138,15 @@ enum class TileType {
 data class TileModel(
     val title: String,
     val description: String,
-    val imageId: Int
+    val imageId: Int,
+    val backgroundColor: Color
 )
 
 data class Tile(
     val model: TileModel,
-    val style: Style,
-    // val fonts: Fonts,
+    val style: TileStyle,
+    val layout: TileLayout,
+    val type: TileType
 )
 
 enum class ContainerType {
@@ -148,8 +158,6 @@ enum class ContainerType {
 data class Container(
     val type: ContainerType,
     val tiles: List<Tile>,
-    val tileLayout: List<TileLayout>,
-    val tileType: List<TileType>,
     val layout: ContainerLayout
 )
 
@@ -167,7 +175,8 @@ data class Section(
     val type: SectionType,
     val model: SectionModel,
     val containers: List<Container>,
-    val layout: SectionLayout
+    val layout: SectionLayout,
+    val style: SectionStyle
 )
 
 data class FooterModel(
@@ -189,18 +198,28 @@ data class Screen(
     val layout: ScreenLayout
 )
 
-data class Fonts(
-    val titleFont: Font,
-    val descriptionFont: Font
+data class FontDescription(
+    val family: Int,
+    val weight: FontWeight,
+    val size: Dp,
+    val lineHeight: Dp,
+    val alignment: TextAlign,
 )
 
-data class Style(
-    val backgroundColor: Color,
+data class SectionStyle(
+    val titleFont: FontDescription,
+)
+
+data class TileStyle(
+    val titleFont: FontDescription,
+    val descriptionFont: FontDescription?
 )
 
 data class FooterStyle(
     val backgroundColor: Color,
     val buttonBackgroundColor: Color,
+//    val titleFont: FontDescription,
+//    val descriptionFont: FontDescription,
 )
 
 data class TileLayout(
@@ -299,18 +318,16 @@ fun LargeLeftContainerView(container: Container) {
         )
     ) {
         BigTileView(
-            tile = container.tiles.first(),
-            layout = container.tileLayout.first()
+            tile = container.tiles.first()
         )
         Column(
             verticalArrangement = Arrangement.spacedBy(
                 container.layout.verticalInterItemSpacing
             )
         ) {
-            container.tiles.drop(1).forEachIndexed { index, tile ->
+            container.tiles.drop(1).forEach { tile ->
                 SmallTileView(
-                    tile = tile,
-                    layout = container.tileLayout.drop(1)[index]
+                    tile = tile
                 )
             }
         }
@@ -326,8 +343,8 @@ fun LargeRightContainerView(container: Container) {
     ) {
         val layoutNumTilesThreshold = 3
         if (container.tiles.count() < layoutNumTilesThreshold) {
-            container.tiles.forEachIndexed { index, tile ->
-                SmallTileView(tile = tile, layout = container.tileLayout[index])
+            container.tiles.forEach { tile ->
+                SmallTileView(tile = tile)
             }
         } else {
             Column(
@@ -335,16 +352,14 @@ fun LargeRightContainerView(container: Container) {
                     container.layout.verticalInterItemSpacing
                 )
             ) {
-                container.tiles.dropLast(1).forEachIndexed { index, tile ->
+                container.tiles.dropLast(1).forEach { tile ->
                     SmallTileView(
-                        tile = tile,
-                        layout = container.tileLayout[index]
+                        tile = tile
                     )
                 }
             }
             BigTileView(
-                tile = container.tiles.last(),
-                layout = container.tileLayout.last()
+                tile = container.tiles.last()
             )
         }
     }
@@ -356,19 +371,16 @@ fun RowContainerView(container: Container) {
         crossAxisSpacing = container.layout.horizontalInterItemSpacing,
         mainAxisSpacing = container.layout.verticalInterItemSpacing
     ) {
-        container.tiles.forEachIndexed { index, tile ->
-            when (container.tileType[index]) {
+        container.tiles.forEach { tile ->
+            when (tile.type) {
                 TileType.BIG -> BigTileView(
-                    tile = tile,
-                    layout = container.tileLayout[index]
+                    tile = tile
                 )
                 TileType.MEDIUM -> MediumTileView(
-                    tile = tile,
-                    layout = container.tileLayout[index]
+                    tile = tile
                 )
                 TileType.SMALL -> SmallTileView(
-                    tile = tile,
-                    layout = container.tileLayout[index]
+                    tile = tile
                 )
             }
         }
@@ -376,23 +388,23 @@ fun RowContainerView(container: Container) {
 }
 
 @Composable
-fun BigTileView(tile: Tile, layout: TileLayout) {
-    val foregroundColor = if (isLight(tile.style.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
+fun BigTileView(tile: Tile) {
+    val foregroundColor = if (isLight(tile.model.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
     Card(
         modifier = Modifier
-            .width(layout.width)
-            .height(layout.height),
-        shape = RoundedCornerShape(layout.cornerRadius)
+            .width(tile.layout.width)
+            .height(tile.layout.height),
+        shape = RoundedCornerShape(tile.layout.cornerRadius)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .background(tile.style.backgroundColor)
+                .background(tile.model.backgroundColor)
                 .padding(
-                    top = layout.topPadding,
-                    start = layout.startPadding,
-                    end = layout.endPadding,
-                    bottom = layout.bottomPadding
+                    top = tile.layout.topPadding,
+                    start = tile.layout.startPadding,
+                    end = tile.layout.endPadding,
+                    bottom = tile.layout.bottomPadding
                 )
         ) {
             Image(
@@ -405,8 +417,8 @@ fun BigTileView(tile: Tile, layout: TileLayout) {
             )
             Spacer(
                 modifier = Modifier.defaultMinSize(
-                    minHeight = layout.verticalSpacing,
-                    minWidth = layout.width
+                    minHeight = tile.layout.verticalSpacing,
+                    minWidth = tile.layout.width
                 )
             )
             Column() {
@@ -418,8 +430,8 @@ fun BigTileView(tile: Tile, layout: TileLayout) {
                 )
                 Spacer(
                     modifier = Modifier.defaultMinSize(
-                        minHeight = layout.textVerticalSpacing,
-                        minWidth = layout.width
+                        minHeight = tile.layout.textVerticalSpacing,
+                        minWidth = tile.layout.width
                     )
                 )
                 Text(
@@ -434,31 +446,31 @@ fun BigTileView(tile: Tile, layout: TileLayout) {
 }
 
 @Composable
-fun MediumTileView(tile: Tile, layout: TileLayout) {
-    val foregroundColor = if (isLight(tile.style.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
+fun MediumTileView(tile: Tile) {
+    val foregroundColor = if (isLight(tile.model.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
     Card(
         modifier = Modifier
-            .width(layout.width)
-            .height(layout.height),
-        shape = RoundedCornerShape(layout.cornerRadius)
+            .width(tile.layout.width)
+            .height(tile.layout.height),
+        shape = RoundedCornerShape(tile.layout.cornerRadius)
     ) {
         Row(
             modifier = Modifier
-                .background(tile.style.backgroundColor)
+                .background(tile.model.backgroundColor)
         ) {
             Image(
                 painter = painterResource(id = tile.model.imageId),
                 contentDescription = null,
                 contentScale = ContentScale.Fit,
                 alignment = Alignment.Center,
-                modifier = Modifier.width(layout.height)
+                modifier = Modifier.width(tile.layout.height)
             )
             Column(
                 modifier = Modifier.padding(
-                    top = layout.textTopPadding,
-                    bottom = layout.textBottomPadding,
-                    start = layout.textStartPadding,
-                    end = layout.textEndPadding
+                    top = tile.layout.textTopPadding,
+                    bottom = tile.layout.textBottomPadding,
+                    start = tile.layout.textStartPadding,
+                    end = tile.layout.textEndPadding
                 )
             ) {
                 Text(
@@ -469,8 +481,8 @@ fun MediumTileView(tile: Tile, layout: TileLayout) {
                 )
                 Spacer(
                     modifier = Modifier.defaultMinSize(
-                        minHeight = layout.textVerticalSpacing,
-                        minWidth = layout.width
+                        minHeight = tile.layout.textVerticalSpacing,
+                        minWidth = tile.layout.width
                     )
                 )
                 Text(
@@ -485,22 +497,22 @@ fun MediumTileView(tile: Tile, layout: TileLayout) {
 }
 
 @Composable
-fun SmallTileView(tile: Tile, layout: TileLayout) {
-    val foregroundColor = if (isLight(tile.style.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
+fun SmallTileView(tile: Tile) {
+    val foregroundColor = if (isLight(tile.model.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
     Card(
         modifier = Modifier
-            .width(layout.width)
-            .height(layout.height),
-        shape = RoundedCornerShape(layout.cornerRadius)
+            .width(tile.layout.width)
+            .height(tile.layout.height),
+        shape = RoundedCornerShape(tile.layout.cornerRadius)
     ) {
         Column(
             modifier = Modifier
-                .background(tile.style.backgroundColor)
+                .background(tile.model.backgroundColor)
                 .padding(
-                    top = layout.topPadding,
-                    start = layout.startPadding,
-                    end = layout.endPadding,
-                    bottom = layout.bottomPadding
+                    top = tile.layout.topPadding,
+                    start = tile.layout.startPadding,
+                    end = tile.layout.endPadding,
+                    bottom = tile.layout.bottomPadding
                 ),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
@@ -515,7 +527,7 @@ fun SmallTileView(tile: Tile, layout: TileLayout) {
             )
             Spacer(
                 modifier = Modifier.defaultMinSize(
-                    minWidth = layout.width, minHeight = layout.verticalSpacing
+                    minWidth = tile.layout.width, minHeight = tile.layout.verticalSpacing
                 )
             )
             Text(
@@ -593,10 +605,12 @@ fun Footer(footer: Footer) {
 // DATA
 
 fun yourDataContainers(
-    tiles: List<Tile>,
+    tiles: List<TileModel>,
     layout: ContainerLayout,
     bigTileLayout: TileLayout,
-    smallTileLayout: TileLayout
+    bigTileStyle: TileStyle,
+    smallTileLayout: TileLayout,
+    smallTileStyle: TileStyle
 ): List<Container> {
     val tilesPerContainer = 3
     val chunked = tiles.chunked(tilesPerContainer)
@@ -613,41 +627,56 @@ fun yourDataContainers(
         when (type) {
             ContainerType.LARGELEFT -> Container(
                 type = type,
-                tiles = tiles,
-                tileLayout = listOf(
-                    bigTileLayout,
-                    smallTileLayout,
-                    smallTileLayout
-                ),
-                tileType = listOf(
-                    TileType.BIG,
-                    TileType.SMALL,
-                    TileType.SMALL
-                ),
+                tiles = tiles.mapIndexed { index, tileModel ->
+                    if (index == 0) {
+                        Tile(
+                            tileModel,
+                            bigTileStyle,
+                            bigTileLayout,
+                            TileType.BIG
+                        )
+                    } else {
+                        Tile(
+                            tileModel,
+                            smallTileStyle,
+                            smallTileLayout,
+                            TileType.SMALL
+                        )
+                    }
+                },
                 layout = layout
             )
             ContainerType.ROW -> Container(
                 type = type,
-                tiles = tiles,
-                tileLayout = generateSequence { smallTileLayout }
-                    .take(tilesPerContainer).toList(),
-                tileType = generateSequence { TileType.SMALL }
-                    .take(tilesPerContainer).toList(),
+                tiles = tiles.map { tileModel ->
+                    Tile(
+                        tileModel,
+                        smallTileStyle,
+                        smallTileLayout,
+                        TileType.SMALL
+                    )
+                },
                 layout = layout
             )
             ContainerType.LARGERIGHT -> Container(
                 type = type,
-                tiles = tiles,
-                tileLayout = listOf(
-                    smallTileLayout,
-                    smallTileLayout,
-                    bigTileLayout
-                ),
-                tileType = listOf(
-                    TileType.SMALL,
-                    TileType.SMALL,
-                    TileType.BIG
-                ),
+                tiles = tiles.mapIndexed { index, tileModel ->
+                    if (index == tiles.count() - 1) {
+                        Tile(
+                            tileModel,
+                            bigTileStyle,
+                            bigTileLayout,
+                            TileType.BIG
+                        )
+                    } else {
+                        Tile(
+                            tileModel,
+                            smallTileStyle,
+                            smallTileLayout,
+                            TileType.SMALL
+                        )
+                    }
+                },
                 layout = layout
             )
         }
@@ -655,10 +684,11 @@ fun yourDataContainers(
 }
 
 fun rowContainers(
-    tiles: List<Tile>,
+    tiles: List<TileModel>,
     tilesPerContainer: Int,
     layout: ContainerLayout,
     tileLayout: TileLayout,
+    tileStyle: TileStyle,
     tileType: TileType
 ): List<Container> {
     val chunked = tiles.chunked(tilesPerContainer)
@@ -667,11 +697,14 @@ fun rowContainers(
         Container(
             type = ContainerType.ROW,
             layout = layout,
-            tiles = it,
-            tileLayout = generateSequence { tileLayout }
-                .take(tilesPerContainer).toList(),
-            tileType = generateSequence { tileType }
-                .take(tilesPerContainer).toList()
+            tiles = tiles.map { tileModel ->
+                Tile(
+                    tileModel,
+                    tileStyle,
+                    tileLayout,
+                    tileType
+                )
+            },
         )
     }
 }
@@ -679,12 +712,16 @@ fun rowContainers(
 fun section(
     model: SectionModel,
     type: SectionType,
-    tiles: List<Tile>,
+    style: SectionStyle,
+    tiles: List<TileModel>,
     layout: SectionLayout,
     containerLayout: ContainerLayout,
     smallTileLayout: TileLayout,
     mediumTileLayout: TileLayout,
-    bigTileLayout: TileLayout
+    bigTileLayout: TileLayout,
+    smallTileStyle: TileStyle,
+    mediumTileStyle: TileStyle,
+    bigTileStyle: TileStyle
 ): Section {
     when (type) {
         SectionType.YOUR_DATA -> return Section(
@@ -694,9 +731,12 @@ fun section(
                 tiles,
                 containerLayout,
                 bigTileLayout,
-                smallTileLayout
+                bigTileStyle,
+                smallTileLayout,
+                smallTileStyle
             ),
-            layout = layout
+            layout = layout,
+            style = style
         )
         SectionType.DATA_KNOW_HOW -> return Section(
             model = model,
@@ -706,9 +746,11 @@ fun section(
                 tilesPerContainer = 3,
                 containerLayout,
                 smallTileLayout,
+                smallTileStyle,
                 TileType.SMALL
             ),
-            layout = layout
+            layout = layout,
+            style = style
         )
         SectionType.TOOLS -> return Section(
             model = model,
@@ -718,9 +760,11 @@ fun section(
                 tilesPerContainer = 1,
                 containerLayout,
                 mediumTileLayout,
+                mediumTileStyle,
                 TileType.MEDIUM
             ),
-            layout = layout
+            layout = layout,
+            style = style
         )
     }
 }
@@ -796,14 +840,66 @@ fun DefaultPreview() {
         textEndPadding = 0.dp
     )
 
-    val style = Style(
-        backgroundColor = Color.Black
+    val sectionStyle = SectionStyle(
+        titleFont = FontDescription(
+            family = PolyStyle().font.family.jostMedium,
+            weight = PolyStyle().font.weight.medium,
+            size = PolyStyle().font.size.lg,
+            lineHeight = PolyStyle().font.lineHeight.lg,
+            alignment = PolyStyle().font.alignment.left
+        )
+    )
+
+    val smallTileStyle = TileStyle(
+        titleFont = FontDescription(
+            family = PolyStyle().font.family.jostMedium,
+            weight = PolyStyle().font.weight.medium,
+            size = PolyStyle().font.size.xs,
+            lineHeight = PolyStyle().font.lineHeight.xs,
+            alignment = PolyStyle().font.alignment.center
+        ),
+        descriptionFont = null
+    )
+
+    val mediumTileStyle = TileStyle(
+        titleFont = FontDescription(
+            family = PolyStyle().font.family.jostMedium,
+            weight = PolyStyle().font.weight.medium,
+            size = PolyStyle().font.size.base,
+            lineHeight = PolyStyle().font.lineHeight.base,
+            alignment = PolyStyle().font.alignment.left
+        ),
+        descriptionFont = FontDescription(
+            family = PolyStyle().font.family.jostRegular,
+            weight = PolyStyle().font.weight.regular,
+            size = PolyStyle().font.size.xs,
+            lineHeight = PolyStyle().font.lineHeight.xs,
+            alignment = PolyStyle().font.alignment.left
+        ),
+    )
+
+    val bigTileStyle = TileStyle(
+        titleFont = FontDescription(
+            family = PolyStyle().font.family.jostMedium,
+            weight = PolyStyle().font.weight.medium,
+            size = PolyStyle().font.size.base,
+            lineHeight = PolyStyle().font.lineHeight.base,
+            alignment = PolyStyle().font.alignment.left
+        ),
+        descriptionFont = FontDescription(
+            family = PolyStyle().font.family.jostRegular,
+            weight = PolyStyle().font.weight.regular,
+            size = PolyStyle().font.size.xs,
+            lineHeight = PolyStyle().font.lineHeight.xs,
+            alignment = PolyStyle().font.alignment.left
+        ),
     )
 
     val tileModel = TileModel(
         title = "Facebook Import",
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
         imageId = R.drawable.ic_launcher,
+        backgroundColor = Color.Black
     )
 
     val tileModels: List<TileModel> = listOf(
@@ -813,24 +909,21 @@ fun DefaultPreview() {
         tileModel, tileModel, tileModel,
     )
 
-    val tiles = tileModels.map {
-        Tile(
-            model = it,
-            style = style
-        )
-    }
-
     val yourDataSection = section(
         model = SectionModel(
             title = "Your Data",
         ),
         type = SectionType.YOUR_DATA,
-        tiles = tiles,
+        tiles = tileModels,
         layout = sectionLayout,
         containerLayout = containerLayout,
         smallTileLayout = smallTileLayout,
         mediumTileLayout = mediumTileLayout,
-        bigTileLayout = bigTileLayout
+        bigTileLayout = bigTileLayout,
+        smallTileStyle = smallTileStyle,
+        mediumTileStyle = mediumTileStyle,
+        bigTileStyle = bigTileStyle,
+        style = sectionStyle
     )
 
     val dataKnowHow = section(
@@ -838,12 +931,16 @@ fun DefaultPreview() {
             title = "Data Know How",
         ),
         type = SectionType.DATA_KNOW_HOW,
-        tiles = tiles,
+        tiles = tileModels,
         layout = sectionLayout,
         containerLayout = containerLayout,
         smallTileLayout = smallTileLayout,
         mediumTileLayout = mediumTileLayout,
-        bigTileLayout = bigTileLayout
+        bigTileLayout = bigTileLayout,
+        smallTileStyle = smallTileStyle,
+        mediumTileStyle = mediumTileStyle,
+        bigTileStyle = bigTileStyle,
+        style = sectionStyle
     )
 
     val tools = section(
@@ -851,12 +948,16 @@ fun DefaultPreview() {
             title = "Tools",
         ),
         type = SectionType.TOOLS,
-        tiles = tiles,
+        tiles = tileModels,
         layout = sectionLayout,
         containerLayout = containerLayout,
         smallTileLayout = smallTileLayout,
         mediumTileLayout = mediumTileLayout,
-        bigTileLayout = bigTileLayout
+        bigTileLayout = bigTileLayout,
+        smallTileStyle = smallTileStyle,
+        mediumTileStyle = mediumTileStyle,
+        bigTileStyle = bigTileStyle,
+        style = sectionStyle
     )
 
     val footer = Footer(
@@ -868,7 +969,7 @@ fun DefaultPreview() {
         ),
         style = FooterStyle(
             backgroundColor = Color(0xFFFED7D6),
-            buttonBackgroundColor = Color(0xFF0F1938)
+            buttonBackgroundColor = Color(0xFF0F1938),
         ),
         layout = FooterLayout(
             padding = 8.dp,
