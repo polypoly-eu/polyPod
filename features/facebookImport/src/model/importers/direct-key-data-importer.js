@@ -8,19 +8,16 @@ export default class DirectKeyDataImporter {
     }
 
     async import({ zipFile, facebookAccount }) {
-        facebookAccount[this._dataStorageKey] = this.extractData(
-            await readJSONDataArray(this._dataFileName, this._dataKey, zipFile)
+        const extractedData = await readJSONDataArray(
+            this._dataFileName,
+            this._dataKey,
+            zipFile
         );
-        facebookAccount.addImportedFileName(this._dataFileName);
-    }
 
-    /**
-     * Hook method to allow importers to change the data
-     * that gets placed into the Facebook Account. Looks like a no-op,
-     * but it's actually needed to call the method with the same name
-     * in the derived classes.
-     */
-    extractData(rawData) {
-        return rawData;
+        facebookAccount[this._dataStorageKey] =
+            "extractData" in this
+                ? this.extractData(extractedData)
+                : extractedData;
+        facebookAccount.addImportedFileName(this._dataFileName);
     }
 }
