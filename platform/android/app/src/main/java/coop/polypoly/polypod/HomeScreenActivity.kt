@@ -696,7 +696,7 @@ fun rowContainers(
         Container(
             type = ContainerType.ROW,
             layout = layout,
-            tiles = tiles.map { tileModel ->
+            tiles = it.map { tileModel ->
                 Tile(
                     tileModel,
                     tileStyle,
