@@ -5,20 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -159,7 +150,8 @@ data class ScreenLayout(
 
 data class FooterLayout(
     val padding: Dp,
-    val verticalSpacing: Dp
+    val verticalSpacing: Dp,
+    val cornerRadius: Dp
 )
 
 fun isLight(color: Color): Boolean {
@@ -184,6 +176,7 @@ fun Screen(screen: Screen) {
         screen.sections.forEach {
             Section(it)
         }
+        Footer(footer = screen.footer)
     }
 }
 
@@ -452,8 +445,21 @@ fun SmallTileView(tile: Tile, layout: TileLayout) {
 @Composable
 fun Footer(footer: Footer) {
     val foregroundColor = if (isLight(footer.style.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
-    Card() {
-        Column() {
+    val buttonForegroundColor = if (isLight(footer.style.buttonBackgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
+    Card(
+        shape = RoundedCornerShape(footer.layout.cornerRadius)
+    ) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(footer.layout.verticalSpacing),
+            modifier = Modifier
+                .background(footer.style.backgroundColor)
+                .padding(
+                    top = footer.layout.padding,
+                    start = footer.layout.padding,
+                    end = footer.layout.padding,
+                    bottom = footer.layout.padding
+                ),
+        ) {
             Text(
                 text = footer.model.title,
                 textAlign = TextAlign.Start,
@@ -466,14 +472,27 @@ fun Footer(footer: Footer) {
                 color = foregroundColor,
                 overflow = TextOverflow.Ellipsis
             )
-            Image(
-                painter = painterResource(id = footer.model.imageId),
-                contentDescription = null,
-                contentScale = ContentScale.Fit,
-                alignment = Alignment.Center
-            )
-            Button(onClick = { /*TODO*/ }) {
-                Text(text = footer.model.buttonTitle)
+            Column(
+                verticalArrangement = Arrangement.spacedBy(footer.layout.verticalSpacing),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Image(
+                    painter = painterResource(id = footer.model.imageId),
+                    contentDescription = null,
+                    contentScale = ContentScale.Fit,
+                    alignment = Alignment.Center
+                )
+                Button(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = footer.style.buttonBackgroundColor)
+                ) {
+                    Text(
+                        text = footer.model.buttonTitle,
+                        color = buttonForegroundColor
+                    )
+                }
             }
         }
     }
@@ -761,7 +780,8 @@ fun DefaultPreview() {
         ),
         layout = FooterLayout(
             padding = 8.dp,
-            verticalSpacing = 8.dp
+            verticalSpacing = 8.dp,
+            cornerRadius = 8.dp
         )
     )
 
@@ -771,6 +791,6 @@ fun DefaultPreview() {
         layout = screenLayout
     )
 
-    // Screen(screen = screen)
-    Footer(footer = footer)
+    Screen(screen = screen)
+    //Footer(footer = footer)
 }
