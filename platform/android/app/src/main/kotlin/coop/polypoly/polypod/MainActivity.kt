@@ -66,7 +66,9 @@ class MainActivity : AppCompatActivity() {
                     OnboardingActivity::class.java
                 )
             )
-        } else if (!podUnlockShown && Authentication.should_authenticate(this)) {
+        } else if (
+            !podUnlockShown && Authentication.should_authenticate(this)
+        ) {
             podUnlockShown = true
             startActivity(
                 Intent(

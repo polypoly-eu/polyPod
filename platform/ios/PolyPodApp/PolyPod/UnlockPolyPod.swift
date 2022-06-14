@@ -6,7 +6,7 @@ struct UnlockPolyPod: View {
     var onCompleted: () -> Void = {}
 
     var body: some View {
-        VStack(alignment: .center, spacing: 32) {
+        VStack(alignment: .center) {
             Spacer()
             Image("NavIconPolyPodLogo")
             Spacer()
