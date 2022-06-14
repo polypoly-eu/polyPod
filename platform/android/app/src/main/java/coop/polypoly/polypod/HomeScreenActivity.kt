@@ -433,7 +433,7 @@ fun BigTileView(tile: Tile) {
                     minWidth = tile.layout.width
                 )
             )
-            Column() {
+            Column {
                 Text(
                     text = tile.model.title,
                     color = foregroundColor,
@@ -685,8 +685,7 @@ fun yourDataContainers(
     )
 
     return chunked.mapIndexed { index, tiles ->
-        val type = containersConfig[index % containersConfig.count()]
-        when (type) {
+        when (val type = containersConfig[index % containersConfig.count()]) {
             ContainerType.LARGELEFT -> Container(
                 type = type,
                 tiles = tiles.mapIndexed { index, tileModel ->
