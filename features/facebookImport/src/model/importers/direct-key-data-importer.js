@@ -16,7 +16,7 @@ export default class DirectKeyDataImporter {
 
     /**
      * Hook method to allow importers to change the data
-     * that gets places into the Facebook Account
+     * that gets placed into the Facebook Account
      */
     extractData(rawData) {
         return rawData;
