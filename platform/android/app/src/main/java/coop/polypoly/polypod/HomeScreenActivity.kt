@@ -794,12 +794,12 @@ fun DefaultPreview() {
     val smallTileLayout = TileLayout(
         width = smallTileWidth.dp,
         height = smallTileWidth.dp,
-        verticalSpacing = 8.dp,
-        topPadding = 8.dp,
-        startPadding = 8.dp,
-        endPadding = 8.dp,
-        bottomPadding = 8.dp,
-        cornerRadius = 8.dp,
+        verticalSpacing = 0.dp,
+        topPadding = 0.dp,
+        startPadding = PolyStyle().spacing._1x,
+        endPadding = PolyStyle().spacing._1x,
+        bottomPadding = PolyStyle().spacing._1x,
+        cornerRadius = PolyStyle().radius._2x,
         textVerticalSpacing = 0.dp,
         textTopPadding = 0.dp,
         textBottomPadding = 0.dp,
@@ -810,29 +810,29 @@ fun DefaultPreview() {
     val mediumTileLayout = TileLayout(
         width = containerWidth.dp,
         height = smallTileWidth.dp,
-        verticalSpacing = 8.dp,
-        topPadding = 8.dp,
-        startPadding = 8.dp,
-        endPadding = 8.dp,
-        bottomPadding = 8.dp,
-        cornerRadius = 8.dp,
-        textVerticalSpacing = 8.dp,
-        textTopPadding = 8.dp,
-        textBottomPadding = 8.dp,
-        textStartPadding = 8.dp,
-        textEndPadding = 8.dp
+        verticalSpacing = 0.dp,
+        topPadding = 0.dp,
+        startPadding = 0.dp,
+        endPadding = 0.dp,
+        bottomPadding = 0.dp,
+        cornerRadius = PolyStyle().radius._2x,
+        textVerticalSpacing = PolyStyle().spacing._2x,
+        textTopPadding = PolyStyle().spacing._2x,
+        textBottomPadding = PolyStyle().spacing._2x,
+        textStartPadding = PolyStyle().spacing._3x,
+        textEndPadding = PolyStyle().spacing._4x
     )
 
     val bigTileLayout = TileLayout(
         width = bigTileWidth.dp,
         height = bigTileWidth.dp,
-        verticalSpacing = 8.dp,
-        topPadding = 8.dp,
-        startPadding = 8.dp,
-        endPadding = 8.dp,
-        bottomPadding = 8.dp,
-        cornerRadius = 8.dp,
-        textVerticalSpacing = 8.dp,
+        verticalSpacing = PolyStyle().spacing._2x,
+        topPadding = PolyStyle().spacing._4x,
+        startPadding = PolyStyle().spacing._4x,
+        endPadding = PolyStyle().spacing._4x,
+        bottomPadding = PolyStyle().spacing._4x,
+        cornerRadius = PolyStyle().radius._2x,
+        textVerticalSpacing = 0.dp,
         textTopPadding = 0.dp,
         textBottomPadding = 0.dp,
         textStartPadding = 0.dp,
@@ -971,9 +971,9 @@ fun DefaultPreview() {
             buttonBackgroundColor = Color(0xFF0F1938),
         ),
         layout = FooterLayout(
-            padding = 8.dp,
-            verticalSpacing = 8.dp,
-            cornerRadius = 8.dp
+            padding = PolyStyle().spacing._6x,
+            verticalSpacing = PolyStyle().spacing._4x,
+            cornerRadius = PolyStyle().radius._2x
         )
     )
 
