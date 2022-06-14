@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "react": "^17.0.2"
