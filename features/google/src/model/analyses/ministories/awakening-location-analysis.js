@@ -19,6 +19,8 @@ export default class AwakeningLocationAnalysis extends RootAnalysis {
     containsWakingHours(startDate, endDate, daysDiff) {
         const startHour = startDate.getHours();
         const endHour = endDate.getHours();
+        //TODO currently, the placeVisits that span more than 1 day automatically
+        //become the awaking place of both days even if the last time-stamp is at 2:00
         if (daysDiff > 1) return true;
         if (endHour <= MIN_MORNING) {
             return false;
@@ -28,24 +30,6 @@ export default class AwakeningLocationAnalysis extends RootAnalysis {
                 return false;
             if (startHour >= MIN_MORNING) return false;
         }
-
-        // //slept in the early hours
-        // if (startHour <= MIN_MORNING) {
-        //     if (endHour >= MIN_MORNING) return true;
-        //     return false;
-        // }
-        // //if they got to the location in that morning we don't consider that they went there to sleep
-        // if (startHour <= MAX_MORNING && daysDiff == 0) {
-        //     return false;
-        // }
-        // //in the case the start hour is larger than MAX_MORNING they must've slept in the previous day
-        // if (endHour >= MAX_MORNING && daysDiff > 0) {
-        //     const tempDate = new Date(startDate);
-        //     tempDate.setDate(startDate.getDate() + daysDiff);
-        //     if (tempDate.getDate() === endDate.getDate()) {
-        //         return true;
-        //     }
-        // }
 
         return true;
     }
