@@ -1,8 +1,8 @@
 {
-    "your.google.data": "Deine Google-Daten",
-    "analysed.categories": "Von Deinen Google-Daten haben wir {{analysed_categories}} Kategorien analysiert:",
-    "import.new.file": "Neue Datei importieren",
-    "imported.file": "Importierte Datei:",
+    "analysed.categories": "Von allen importierten Google-Daten analysieren wir derzeit die folgenden {{analysed_categories}} Kategorien.",
+    "import.new.file": "Neuer Import",
+    "imported.file": "Datei:",
+    "imported.time": "Importiert:",
     "size": "Größe:",
     "delete.file.confirmation": "Möchtest du wirklich die aktuelle Datei löschen?"
 }

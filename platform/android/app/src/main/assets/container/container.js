@@ -15,6 +15,9 @@ const queuedMessages = [];
 
 function initMessaging() {
     window.onmessage = (event) => {
+        if (window.location.href.indexOf(event.origin) === 0) {
+            return;
+        }
         // Action notifications have no port
         if (event.ports.length == 0) {
             let iFrame = document.getElementsByTagName("iframe")[0];

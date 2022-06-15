@@ -4,11 +4,11 @@
 }
 
 .datepicker .space-right {
-    margin-right: 10px;
+    margin-right: calc(var(--gdu) * 2);
 }
 
 .datepicker .space-left {
-    margin-left: 10px;
+    margin-left: calc(var(--gdu) * 2);
 }
 
 .activities-ministory {
@@ -23,7 +23,7 @@
 
 .activities-ministory .legend .bar-piece {
     height: 12px;
-    margin-right: 4px;
+    margin-right: var(--gdu);
     background-color: var(--theme-secondary-color);
 }
 
@@ -42,14 +42,5 @@
     width: 100%;
     max-width: 350px;
     margin: 0 auto;
-    padding: 8px 0 8px 24px;
-}
-
-.activities-ministory .info-button {
-    right: -24px;
-    bottom: 0;
-}
-
-.activities-ministory .source {
-    margin-top: 40px;
+    padding: calc(var(--gdu) * 2) 0 calc(var(--gdu) * 2) calc(var(--gdu) * 6);
 }

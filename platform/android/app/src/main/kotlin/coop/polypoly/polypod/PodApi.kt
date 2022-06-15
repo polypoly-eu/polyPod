@@ -156,7 +156,10 @@ open class PodApi(
     private suspend fun handlePolyOutImportArchive(args: List<Value>): Value {
         logger.debug("dispatch() -> polyOut.importArchive")
         val url = args[0].asStringValue().toString()
-        polyOut.importArchive(url)?.let {
+        val destUrl = args[1].let {
+            if (it.isStringValue) it.asStringValue().toString() else null
+        }
+        polyOut.importArchive(url, destUrl)?.let {
             return ValueFactory.newString(it)
         }
         return ValueFactory.newNil()

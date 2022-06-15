@@ -1,6 +1,9 @@
 window.addEventListener("message", receiveMessage, false);
 
-function receiveMessage({ data }) {
+function receiveMessage({ data, origin }) {
+    if (window.location.href.indexOf(origin) === 0) {
+        return;
+    }
     if (data.command === "log") {
         webkit.messageHandlers[data.command].postMessage(data);
     }

@@ -1,11 +1,11 @@
 .report-details .report-card:first-child {
-    margin-top: 20px;
+    margin-top: calc(var(--gdu) * 5);
 }
 
 .report-details .report-card {
     max-width: var(--max-width);
-    margin: 0 auto 12px auto;
-    padding: 12px 20px 20px 20px;
+    margin: 0 auto calc(var(--gdu) * 3) auto;
+    padding: calc(var(--gdu) * 3) calc(var(--gdu) * 5) calc(var(--gdu) * 5) calc(var(--gdu) * 5);
     border-radius: 8px;
 }
 
@@ -15,12 +15,12 @@
 }
 
 .report-details .report-card > h1 {
-    font-size: 20px;
+    font-size: var(--font-size-l);
     font-weight: 500;
 }
 
 .report-details .report-card .list ul {
-    padding: 0 20px;
+    padding: 0 calc(var(--gdu) * 5);
     margin: 0;
 }
 

@@ -3,4 +3,5 @@ export default {
     groupedPlaceVisits: "groupedPlaceVisits",
     activitiesByProducts: "activitiesByProducts",
     activitiesOverTime: "activitiesOverTime",
+    reportMetadataAnalysis: "reportMetadataAnalysis",
 };

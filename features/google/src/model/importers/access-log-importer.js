@@ -1,3 +1,4 @@
+import { relevantZipEntries } from "@polypoly-eu/poly-analysis";
 import AccessLogEntry from "../entities/access-log-entry";
 import { readCsvFromText } from "./utils/importer-utils";
 import { matchRegex } from "./utils/lang-constants";
@@ -29,15 +30,17 @@ class AccessLogParser {
 
 export default class AccessLogImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
-        const entries = await zipFile.getEntries();
+        const entries = await relevantZipEntries(zipFile);
         const accessLogEntries = entries.filter(({ path }) =>
             matchRegex(path, this)
         );
 
         const parser = new AccessLogParser();
 
-        googleAccount.accessLog = await Promise.all(
-            accessLogEntries.map((entry) => parser.parse(entry))
-        );
+        googleAccount.accessLog = (
+            await Promise.all(
+                accessLogEntries.map((entry) => parser.parse(entry))
+            )
+        ).flat();
     }
 }

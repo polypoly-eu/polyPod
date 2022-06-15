@@ -59,7 +59,6 @@ class MainFragment : PreferenceFragmentCompat() {
             newStatus
         ) {
             onReturn()
-            true
         }
     }
 }
