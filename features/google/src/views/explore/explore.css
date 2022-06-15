@@ -11,12 +11,12 @@
 }
 
 .explore-view .pop-up {
-    width: 100%;
     height: 56px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: calc(var(--gdu) * 5);
+    margin: calc(var(--gdu) * -6) calc(var(--gdu) * -4) 0 calc(var(--gdu) * -4);
     box-sizing: border-box;
 }
 
