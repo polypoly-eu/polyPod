@@ -81,6 +81,7 @@ export default class AwakeningLocationAnalysis extends RootAnalysis {
         const locationTimeline = googleAccount.placeVisits;
         const activityTimeline = googleAccount.activities;
         locationTimeline.forEach((location) => {
+            if (!location.locationName) return;
             const newDateData = this.isMorningLocation(location);
             if (newDateData)
                 dateDataObject = { ...dateDataObject, ...newDateData };
