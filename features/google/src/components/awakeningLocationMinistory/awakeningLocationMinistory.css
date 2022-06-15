@@ -1,7 +1,8 @@
 .awakening-location-ministory-summary h2,
-
-
 .awakening-location-ministory-summary h2 {
     margin-top: 50px;
     margin-bottom: 28px;
+}
+.date-browser{
+    justify-content: center;
 }

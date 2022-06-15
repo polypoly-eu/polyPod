@@ -1,5 +1,8 @@
 import React from "react";
-import { AwakeningLocationSummary } from "../../components/awakeningLocationMinistory/awakeningLocationMinistory.jsx";
+import {
+    AwakeningLocationDetails,
+    AwakeningLocationSummary,
+} from "../../components/awakeningLocationMinistory/awakeningLocationMinistory.jsx";
 import analysisKeys from "../../model/analyses/analysisKeys.js";
 
 import { SingleDataStory } from "./singleDataStory.jsx";
@@ -15,6 +18,10 @@ class AwakeningLocationMinistory extends SingleDataStory {
 
     _renderSummary() {
         return <AwakeningLocationSummary dateData={this.analysisData} />;
+    }
+
+    _renderDetails() {
+        return <AwakeningLocationDetails dateData={this.analysisData} />;
     }
 }
 
