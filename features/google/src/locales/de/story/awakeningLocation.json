@@ -7,7 +7,7 @@
     "in": "in",
     "summary3": "aufgewacht.",
     "notFound":"Seems like google did not track you on this morning!",
-    "detail": "Ihre Google Daten enthalten (TOTAL NUMBER OF MATCHES) Übereinstimmungen bei Aktivitäten und Orten. Diese lassen Schlüsse darüber zu, wo sie den jeweiligen Tag begonnen haben.",
+    "detail": "Ihre Google Daten enthalten {{number_dates}} Übereinstimmungen bei Aktivitäten und Orten. Diese lassen Schlüsse darüber zu, wo sie den jeweiligen Tag begonnen haben.",
     "detail2": "Im Durchschnitt ist das Nutzen eines digitalen Geräts eine der ersten Tätigkeiten, die wir jeden Tag machen. Daher ist es relativ naheliegend, dass Ihre erste Aktivität an dem Ort stattfinded an dem Sie aufgewacht sind. Vielleicht war das zuhause, oder in einem Hotel oder bei einer Person, die sie gerade erst kennengelernt haben.",
     "detail3": "Da Google diese Orte kennt und auch weiß, welche Personen oder Unternehmen noch an diesem Ort zu finden sind, kann das Unternehmen daraus weitere Schlüsse ziehen.",
     "detail4": "Hier ist die Liste all Ihrer Übereinstimmungen: "
