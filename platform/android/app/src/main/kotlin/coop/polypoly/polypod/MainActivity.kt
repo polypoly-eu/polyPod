@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                     OnboardingActivity::class.java
                 )
             )
-        } else if (Authentication.should_authenticate(this)) {
+        } else if (Authentication.shouldAuthenticate(this)) {
             startActivity(
                 Intent(
                     this,

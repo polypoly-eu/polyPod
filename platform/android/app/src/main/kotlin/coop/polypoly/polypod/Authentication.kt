@@ -22,7 +22,7 @@ class Authentication {
                 !Preferences.isFirstRun(context)
         }
 
-        fun should_authenticate(context: Context): Boolean {
+        fun shouldAuthenticate(context: Context): Boolean {
             return biometricsAvailable(context) &&
                 Preferences.isBiometricEnabled(context) &&
                 !isAuthenticated
