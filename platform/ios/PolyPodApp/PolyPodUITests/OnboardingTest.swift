@@ -11,7 +11,12 @@ class OnboardingTest: XCTestCase {
         launchApp(firstRun: true)
         assertOnboardingIsShown()
     }
-
+    
+    func testOnboardingNotShownOnSubsequentRun() {
+        launchApp()
+        assertOnboardingIsNotShown()
+    }
+    
     private func launchApp(firstRun: Bool = false, resetDefaults: Bool = true) {
         typealias Keys = UserDefaults.Keys
         app.launchArguments = [
@@ -26,11 +31,18 @@ class OnboardingTest: XCTestCase {
         }
         app.launch()
     }
-
+    
     private func assertOnboardingIsShown() {
         XCTAssertTrue(
             onboardingView().exists,
             "Onboarding was supposed to be shown"
+        )
+    }
+    
+    private func assertOnboardingIsNotShown() {
+        XCTAssertFalse(
+            onboardingView().exists,
+            "Onboarding was not supposed to be shown"
         )
     }
     
