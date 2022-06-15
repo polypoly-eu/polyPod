@@ -7,10 +7,9 @@ class OnboardingTest: XCTestCase {
         continueAfterFailure = false
     }
     
-    func testOnboardingShowsUp() {
+    func testOnboardingShowsUpOnFirstRun() {
         launchApp(firstRun: true)
-        // TODO: Assert onboarding screen is shown
-        XCTAssertTrue(true)
+        assertOnboardingCloseButtonShown()
     }
 
     private func launchApp(firstRun: Bool = false, resetDefaults: Bool = true) {
@@ -19,7 +18,6 @@ class OnboardingTest: XCTestCase {
             "-\(Keys.firstRun.rawValue)",
             "\(firstRun)",
         ]
-        print(firstRun)
         if resetDefaults {
             app.launchArguments += [
                 "-\(Keys.resetUserDefaults.rawValue)",
@@ -28,23 +26,15 @@ class OnboardingTest: XCTestCase {
         }
         app.launch()
     }
-/*
-    private func assertInAppNotificationShown() {
+
+    private func assertOnboardingCloseButtonShown() {
         XCTAssertTrue(
-            findInAppNotificationCloseButton().exists,
-            "In app notification was supposed to be shown"
+            findOnboardingCloseButton().exists,
+            "Onboarding was supposed to be shown"
         )
     }
     
-    private func assertInAppNotificationNotShown() {
-        XCTAssertTrue(
-            !findInAppNotificationCloseButton().exists,
-            "In app notification was not supposed to be shown"
-        )
+    private func findOnboardingCloseButton() -> XCUIElement {
+        return app.buttons["app_bar_button_close_desc"]
     }
-    
-    private func findInAppNotificationCloseButton() -> XCUIElement {
-        return app.buttons["OK"]
-    }
- */
 }
