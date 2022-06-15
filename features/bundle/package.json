@@ -9,8 +9,7 @@
     "google-feature": "file:../google",
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
-    "poly-preview-feature": "file:../polyPreview",
-    "demo-feature": "file:../demo"
+    "poly-preview-feature": "file:../polyPreview"
   },
   "private": true,
   "polyPodFeatures": [
@@ -38,11 +37,6 @@
       "archiveName": "lexicon",
       "moduleName": "lexicon-feature",
       "artifactPath": "public"
-    },
-    {
-      "archiveName": "demo",
-      "moduleName": "demo-feature",
-      "artifactPath": "dist"
     }
   ]
 }
