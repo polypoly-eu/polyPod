@@ -4,7 +4,7 @@ import {
     AwakeningLocationSummary,
 } from "../../components/awakeningLocationMinistory/awakeningLocationMinistory.jsx";
 import analysisKeys from "../../model/analyses/analysisKeys.js";
-
+import i18n from "!silly-i18n";
 import { SingleDataStory } from "./singleDataStory.jsx";
 
 class AwakeningLocationMinistory extends SingleDataStory {
@@ -13,7 +13,7 @@ class AwakeningLocationMinistory extends SingleDataStory {
         this._neededAnalyses = [analysisKeys.awakeningAnalysis];
     }
     get title() {
-        return "Google Knows Where You Woke Up";
+        return i18n.t("awakeningLocation:title");
     }
 
     _renderSummary() {

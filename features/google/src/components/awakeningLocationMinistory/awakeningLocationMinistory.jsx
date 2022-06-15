@@ -1,5 +1,7 @@
 import "./awakeningLocationMinistory.css";
 import React, { useState } from "react";
+import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
+import i18n from "!silly-i18n";
 
 export const AwakeningLocationSummary = ({ dateData }) => {
     const defaultDate = Object.entries(dateData).find(
@@ -17,17 +19,16 @@ export const AwakeningLocationSummary = ({ dateData }) => {
         setSelectedDate(formattedDate);
         console.log(formattedDate);
     };
-
-    const week = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-    ];
-
+    //could be used to make the text more human later on
+    // const week = [
+    //     "Sunday",
+    //     "Monday",
+    //     "Tuesday",
+    //     "Wednesday",
+    //     "Thursday",
+    //     "Friday",
+    //     "Saturday",
+    // ];
     return (
         <div className="awakening-location-ministory-summary ">
             {dateSelection ? (
@@ -50,33 +51,19 @@ export const AwakeningLocationSummary = ({ dateData }) => {
 
             <p
                 dangerouslySetInnerHTML={{
-                    __html: `Your Google dataset contains ${
-                        Object.keys(dateData).length
-                    } matches of activities and locations that indicate where you started your day.`,
+                    __html: i18n.t("awakeningLocation:summary", {
+                        number_dates: Object.keys(dateData).length,
+                    }),
                 }}
             />
             {data ? (
                 <>
-                    <p
-                        dangerouslySetInnerHTML={{
-                            __html: `For example, it indicates that you woke up`,
-                        }}
-                    />
-                    <p
-                        dangerouslySetInnerHTML={{
-                            __html: `On ${
-                                week[data.location.endDate.getDay()]
-                            }`,
-                        }}
-                    />
+                    <p> {i18n.t("awakeningLocation:summary2")}</p>
+                    <p>{i18n.t("awakeningLocation:on")}</p>
                     <p className="highlighted-number">{selectedDate}</p>
                     {data.firstActivity ? (
                         <>
-                            <p
-                                dangerouslySetInnerHTML={{
-                                    __html: `At `,
-                                }}
-                            />
+                            <p>{i18n.t("awakeningLocation:at")}</p>
                             <p className="highlighted-number">
                                 {data.firstActivity.timestamp.getHours() +
                                     ":" +
@@ -84,16 +71,23 @@ export const AwakeningLocationSummary = ({ dateData }) => {
                             </p>
                         </>
                     ) : null}
-                    <p>In</p>
+                    <p>{i18n.t("awakeningLocation:in")}</p>
                     <p className="highlighted-number" style={{ fontSize: 24 }}>
                         {data?.location.locationName}.
                     </p>
+                    {i18n.t("awakeningLocation:summary3") === " " ? null : (
+                        <p>{i18n.t("awakeningLocation:summary3")}</p>
+                    )}
                 </>
             ) : (
                 <>
-                    <p>Seems like google did not track you on this morning!</p>
+                    <p>{i18n.t("awakeningLocation:notFound")}</p>
                 </>
             )}
+            <SourceInfoButton
+                source={i18n.t("common:your.google.data")}
+                popUpProps={{ name: "info-awakening-location" }}
+            />
         </div>
     );
 };
@@ -119,14 +113,14 @@ export const AwakeningLocationDetails = ({ dateData }) => {
         <div className="awakening-location-ministory-details ">
             <p
                 dangerouslySetInnerHTML={{
-                    __html: `Your Google dataset contains ${
-                        Object.keys(dateData).length
-                    } matches of activities and locations that indicate where you started your day. 
-                    <br> Average users pick up their devices pretty much first thing in the morning. So it is pretty likely your first activity took place where you woke up. Maybe at home, in a hotel, or with someone you just met. 
-                    <br> Knowing the location, the related residents or businesses,  and how often you are there, Google might make further assumptions. 
-                    <br> Here is a full list of those matches:`,
+                    __html: i18n.t("awakeningLocation:detail", {
+                        number_dates: Object.keys(dateData).length,
+                    }),
                 }}
             />
+            <p>{i18n.t("awakeningLocation:detail2")}</p>
+            <p>{i18n.t("awakeningLocation:detail3")}</p>
+            <p>{i18n.t("awakeningLocation:detail4")}</p>
             {allDataEntries.map((dataEntry, i) => {
                 return (
                     <div key={i}>

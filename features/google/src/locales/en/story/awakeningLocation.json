@@ -1,0 +1,14 @@
+{
+    "title": "Google knows where you woke up",
+    "summary": "Your Google dataset contains {{number_dates}} matches of activities and locations that indicate where you started your day.",
+    "summary2": "It indicates for example that you woke up",
+    "on": "on",
+    "at": "at",
+    "in": "in",
+    "summary3": " ",
+    "notFound": "Seems like google did not track you on this morning!",
+    "detail": "Your Google dataset contains (TOTAL NUMBER OF MATCHES) matches of activities and locations that indicate where you started your day.",
+    "detail2": "Average users pick up their devices pretty much first thing in the morning. So it is pretty likely your first activity took place where you woke up. Maybe at home, in a hotel, or with someone you just met.",
+    "detail3": "Knowing the location, the related residents or businesses,  and how often you are there, Google might make further assumptions.",
+    "detail4": "Here is a full list of those matches: "
+}
