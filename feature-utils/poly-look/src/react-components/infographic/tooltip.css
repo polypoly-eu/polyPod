@@ -1,0 +1,46 @@
+.poly-tooltip {
+  color: var(--color-gray-50);
+  font-size: var(--font-size-s);
+  max-width: 32px;
+  max-height: 32px;
+}
+
+.poly-tooltip .square {
+  background-color: var(--color-blue);
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* triangle position */
+.poly-tooltip .down {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.poly-tooltip .left {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+/* triangle shapes */
+.poly-tooltip .triangle-down {
+  width: 0;
+  height: 0;
+  border-left: 4px solid var(--transparent);
+  border-right: 4px solid var(--transparent);
+  border-top: 8px solid var(--color-blue);
+}
+
+.poly-tooltip .triangle-left {
+  width: 0;
+  height: 0;
+  border-top: 4px solid var(--transparent);
+  border-right: 8px solid var(--color-blue);
+  border-bottom: 4px solid var(--transparent);
+}

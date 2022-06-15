@@ -1,0 +1,27 @@
+<svg width="328" height="260" viewBox="0 0 328 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="horizontalBarChartInfo">
+<g id="Bar Chart">
+<path id="Rectangle 693" d="M0 150H100V166H0V150Z" fill="#3749A9"/>
+<path id="Rectangle 694" d="M0 197H25V213H0V197Z" fill="#3749A9"/>
+<path id="Rectangle 695" d="M0 244H5V260H0V244Z" fill="#3749A9"/>
+<path id="Rectangle 692" d="M0 56H250V72H0V56Z" fill="#3749A9"/>
+<path id="Rectangle 692_2" d="M0 103H175V119H0V103Z" fill="#3749A9"/>
+<text id="175" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="151.752" y="114.67">175</tspan></text>
+<text id="100" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="75.5916" y="161.67">100</tspan></text>
+<text id="25" fill="#3749A9" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="32" y="208.67">25</tspan></text>
+<text id="5" fill="#3749A9" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="10" y="256.67">5</tspan></text>
+<text id="textVariableA" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="0" y="49.365">Variable A</tspan></text>
+<text id="textVariableB" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="0" y="96.365">Variable B</tspan></text>
+<text id="textVariableC" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="0" y="143.365">Variable C</tspan></text>
+<text id="textVariableD" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="0" y="190.365">Variable D</tspan></text>
+<text id="textVariableE" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="0" y="237.365">Variable E</tspan></text>
+</g>
+<g id="textLegend">
+<g id="textLabel">
+<text id="Legend" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="2" y="14.365">Legend</tspan></text>
+</g>
+</g>
+<text id="textValue" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="219.865" y="14.17">Value</tspan></text>
+<path id="Line 164" d="M235 42L235 19" stroke="#0F1938"/>
+</g>
+</svg>

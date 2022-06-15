@@ -2,6 +2,37 @@ import { jsonStringifyWithUtfEscape } from "../../src/model/importers/utils/json
 
 //The minimum size of a .ZIP file is 22 bytes
 export const MINIMUM_FILE_SIZE = 22;
+export class ZipFileEntryMock {
+    constructor(zipFile, id, path, content) {
+        this.zipFile = zipFile;
+        this._id = id;
+        this._path = path;
+        this.content = content;
+    }
+
+    get path() {
+        return this._path;
+    }
+    get id() {
+        return this._id;
+    }
+
+    async stat() {
+        const entryContent = this.zipFile.entries[this._id];
+        return {
+            getId: () => this._id,
+            getTime: () => "",
+            getName: () => this._id.substr(this.zipFile.id.length),
+            getSize: () => entryContent.length,
+            isFile: () => true,
+            isDirectory: () => false,
+        };
+    }
+
+    async getContent() {
+        return this.content;
+    }
+}
 
 export class ZipFileMock {
     constructor() {
@@ -9,31 +40,19 @@ export class ZipFileMock {
         this.time = new Date("2021-09-20T16:37:36.243Z");
         this.name = "facebook-facebookuser.zip";
         this.size = MINIMUM_FILE_SIZE;
-        this._entries = {};
-    }
-
-    async hasEntry(entryId) {
-        return entryId in this._entries;
+        this._entriesPathHash = new Map();
     }
 
     async getEntries() {
-        return Object.keys(this._entries);
+        return [...this._entriesPathHash.values()];
     }
 
-    async getContent(entry) {
-        return this._entries[entry];
+    async hasEntryPath(entryPath) {
+        return this._entriesPathHash.has(entryPath);
     }
 
-    async stat(entry) {
-        const entryContent = this._entries[entry];
-        return {
-            getId: () => entry,
-            getTime: () => "",
-            getName: () => entry.substr(this.id.length),
-            getSize: () => entryContent.length,
-            isFile: () => true,
-            isDirectory: () => false,
-        };
+    async findEntry(entryPath) {
+        return this._entriesPathHash.get(entryPath);
     }
 
     enrichedData() {
@@ -50,7 +69,14 @@ export class ZipFileMock {
     }
 
     addNamedEntry(fileName, stringContent) {
-        this._entries[this.id + "/" + fileName] = stringContent;
+        const entryId = this.id + "/" + fileName;
+        const entry = new ZipFileEntryMock(
+            this,
+            entryId,
+            fileName,
+            stringContent
+        );
+        this._entriesPathHash.set(fileName, entry);
     }
 
     addEncodingEntry(fileName, escapedString) {

@@ -1,15 +1,11 @@
-.company-industry-list {
-    height: 100%;
-}
-
-.company-industry-list-group > hr {
+.eco-company-industry-list-group > hr {
     border: none;
     border-top: 1px solid #525e72;
     margin-left: 34px;
     margin-right: 34px;
 }
 
-.company-industry-list-group > h1 {
+.eco-company-industry-list-group > h1 {
     margin-bottom: 0;
     color: var(--color-medium);
     font-size: 16px;
@@ -17,7 +13,7 @@
     font-weight: 500;
 }
 
-.company-industry-list-eco-item {
+.eco-company-industry-list-item {
     padding: 0 34px;
     font-size: 16px;
 }

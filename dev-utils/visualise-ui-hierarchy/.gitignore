@@ -1,0 +1,5 @@
+*.dot
+*.txt
+*.svg
+.DS_Store
+react-component-hierarchy

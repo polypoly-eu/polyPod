@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "es6"
+    ],
+    "target": "es6",
+    "outDir": "./dist",
+    "rootDirs": ["./src",  "../../../polyPod-config/*.json"],
+    "module": "commonjs",
+    "declaration": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

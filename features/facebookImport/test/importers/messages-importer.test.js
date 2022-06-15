@@ -69,7 +69,7 @@ describe("Import inbox messages", () => {
         result = importingResult.result;
         facebookAccount = importingResult.facebookAccount;
         [firstMessageThread, secondMessageThread] =
-            facebookAccount?.messageThreadsGroup?.messagesThreads;
+            facebookAccount.messageThreadsGroup.messagesThreads;
     });
 
     it("returns success status", () => expectImportSuccess(result));

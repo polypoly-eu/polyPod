@@ -1,0 +1,13 @@
+.horizontal-bar-chart .axis .tick text {
+  fill: #a9b6c6;
+  font-size: 12px;
+}
+
+.horizontal-bar-chart .domain,
+.horizontal-bar-chart .axis .tick line {
+  visibility: hidden;
+}
+
+.horizontal-bar-chart .axis-grid line {
+  stroke: #8d9caf;
+}

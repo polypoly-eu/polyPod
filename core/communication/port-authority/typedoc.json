@@ -1,6 +1,0 @@
-{
-  "inputFiles": ["./src"],
-  "exclude": ["*/tests/**/*.ts"],
-  "mode": "modules",
-  "out": "docs"
-}

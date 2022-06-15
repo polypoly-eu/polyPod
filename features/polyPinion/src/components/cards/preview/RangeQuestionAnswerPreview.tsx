@@ -10,7 +10,6 @@ export default function RangeQuestionAnswerPreview({ question = new PpTextQuesti
             question={question.description()}
             AnswerComponent={() =>
                 question.isAnswered() && (
-                    // @ts-ignore
                     <PolyRangeButton label={question.value()} checked={true} disabled={true} />
                 )
             }

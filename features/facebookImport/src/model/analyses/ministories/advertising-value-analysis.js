@@ -1,55 +1,27 @@
-import React from "react";
-import RootAnalysis from "./root-analysis.js";
-import i18n from "../../../i18n.js";
-
-import {
-    AdvertisingValueMiniStorySummary,
-    AdvertisingValueMiniStoryDetails,
-} from "../../../components/advertisingValueMiniStory/advertisingValueMiniStory.jsx";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
+import analysisKeys from "../utils/analysisKeys";
 
 export default class AdvertisingValueAnalysis extends RootAnalysis {
-    get label() {
-        return RootAnalysis.Labels.NONE;
-    }
-
-    get title() {
-        return i18n.t("advertisingValueMiniStory:title");
-    }
-
-    async analyze({ facebookAccount }) {
-        const adInterests = facebookAccount.adInterests;
+    async analyze({ dataAccount }) {
+        const adInterests = dataAccount.adInterests;
         const numberInterests = new Set(adInterests).size;
         const randomAdInterests = new Set();
-        this.active = false;
         if (numberInterests > 0) {
             while (randomAdInterests.size < Math.min(3, numberInterests)) {
                 randomAdInterests.add(
                     adInterests[Math.floor(Math.random() * adInterests.length)]
                 );
             }
-            this.active = true;
+            dataAccount.analyses[analysisKeys.randomAdInterests] = [
+                ...randomAdInterests,
+            ];
         }
-        this._randomAdInterests = [...randomAdInterests];
-        this._numberInterests = numberInterests;
-        this._displayData = adInterests.sort((a, b) => {
-            return a.toLowerCase().localeCompare(b.toLowerCase());
-        });
-    }
+        dataAccount.analyses[analysisKeys.numberInterests] = numberInterests;
 
-    renderSummary() {
-        return (
-            <AdvertisingValueMiniStorySummary
-                randomAdInterests={this._randomAdInterests}
-                numberInterests={this._numberInterests}
-            />
-        );
-    }
-    renderDetails() {
-        return (
-            <AdvertisingValueMiniStoryDetails
-                displayData={this._displayData}
-                numberInterests={this._numberInterests}
-            />
+        dataAccount.analyses[analysisKeys.sortedAdInterests] = adInterests.sort(
+            (a, b) => {
+                return a.toLowerCase().localeCompare(b.toLowerCase());
+            }
         );
     }
 }

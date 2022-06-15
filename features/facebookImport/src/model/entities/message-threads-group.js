@@ -2,19 +2,19 @@ import MessageThread from "./message-thread.js";
 
 export default class MessageThreadsGroup {
     constructor() {
-        this._messagesThreads = [];
+        this._messagesThreads = {};
     }
 
     get messagesThreads() {
-        return this._messagesThreads;
+        return Object.values(this._messagesThreads);
     }
 
     get messageThreadsCount() {
-        return this._messagesThreads.length;
+        return this.messagesThreads.length;
     }
 
     get messagesCount() {
-        return this._messagesThreads.reduce(
+        return this.messagesThreads.reduce(
             (total, messageThread) => total + messageThread.messagesCount,
             0
         );
@@ -25,7 +25,7 @@ export default class MessageThreadsGroup {
     }
 
     forEachMessageThread(callback) {
-        for (const messageThread of this._messagesThreads) {
+        for (const messageThread of this.messagesThreads) {
             callback(messageThread);
         }
     }
@@ -33,12 +33,20 @@ export default class MessageThreadsGroup {
     addMessageThreadFromData(messageThreadData) {
         const messageThread = new MessageThread();
         messageThread.initializeFromData(messageThreadData);
-        this._messagesThreads.push(messageThread);
+        const threadPath = messageThread.threadPath;
+        if (this._messagesThreads[threadPath]) {
+            this.addToExistingThread(threadPath, messageThread);
+        } else this._messagesThreads[threadPath] = messageThread;
     }
 
     addMessageThreadsFromData(messageThreadsData) {
         messageThreadsData.forEach((messageThreadData) =>
             this.addMessageThreadFromData(messageThreadData)
         );
+    }
+
+    addToExistingThread(threadPath, messageThread) {
+        const existingThread = this._messagesThreads[threadPath];
+        existingThread.mergeThread(messageThread);
     }
 }

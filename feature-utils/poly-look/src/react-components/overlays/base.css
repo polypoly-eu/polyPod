@@ -1,0 +1,10 @@
+.base-overlay {
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  position: absolute;
+}
+
+.base-overlay.opaque {
+  background-color: rgba(0, 0, 0, 0.5);
+}

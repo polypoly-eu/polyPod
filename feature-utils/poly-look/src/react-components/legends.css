@@ -1,0 +1,41 @@
+.poly-legend {
+  display: flex;
+  flex-direction: column;
+}
+
+/* common CSS */
+
+.poly-legend .legend-entry {
+  display: flex;
+  align-items: flex-start;
+}
+.poly-legend .symbol-container {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 1.2em;
+  margin-right: 4px;
+}
+
+.poly-legend .legend-entry .text {
+  font-size: var(--font-size-m);
+  font-family: var(--jost-medium);
+}
+
+/* legend type specific CSS */
+
+.poly-legend.block-legend .symbol-container > span {
+  width: 12px;
+  height: 12px;
+}
+
+.poly-legend.line-legend .symbol-container > span {
+  width: 15px;
+  height: 2px;
+}
+.poly-legend.circle-legend .symbol-container > span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}

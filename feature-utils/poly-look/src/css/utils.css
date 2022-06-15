@@ -1,0 +1,23 @@
+.poly-small-print {
+  color: var(--theme-small-print-color);
+  font-family: var(--theme-font-medium);
+  font-size: var(--font-size-s);
+}
+
+.poly-self-centered {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.poly-content-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.poly-separator {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-gray-400);
+}

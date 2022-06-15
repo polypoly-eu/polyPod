@@ -1,5 +1,4 @@
 import * as POD_ENV from "../env";
-import type {} from "@polypoly-eu/pod-api";
 
 const { polyOut } = window.pod;
 

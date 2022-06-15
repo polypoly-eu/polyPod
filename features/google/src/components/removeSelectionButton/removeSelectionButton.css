@@ -1,0 +1,4 @@
+.remove-selection-button {
+    background-color: var(--transparent);
+    margin-right: calc(var(--gdu)*2);
+}

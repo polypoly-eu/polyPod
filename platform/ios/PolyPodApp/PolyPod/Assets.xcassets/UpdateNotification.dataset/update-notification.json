@@ -1,0 +1,12 @@
+{
+    "id": 80989465,
+    "pushDelay": 120,
+    "title": {
+        "en": "New data in polyExplorer",
+        "de": "Ihr polyPod wurde gerade mächtiger!"
+    },
+    "text": {
+        "en": "The polyExplorer now shows data stories around messenger services. Feel free to check them out right away!",
+        "de": "Der polyExplorer hat neue Datengeschichten rund um Messenger-Dienste. Schauen Sie mal hinein!"
+    }
+}

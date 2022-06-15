@@ -1,5 +1,5 @@
 import React from "react";
-import RootAnalysis from "./root-analysis";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 import BarChart from "../../../components/dataViz/barChart.jsx";
 
 export default class MessagesActivityAnalysis extends RootAnalysis {
@@ -7,8 +7,8 @@ export default class MessagesActivityAnalysis extends RootAnalysis {
         return "Messages Activity";
     }
 
-    async analyze({ facebookAccount }) {
-        this.active = facebookAccount.messagesCount > 0;
+    async analyze({ dataAccount }) {
+        this.active = dataAccount.messagesCount > 0;
 
         if (!this.active) {
             return;
@@ -19,7 +19,7 @@ export default class MessagesActivityAnalysis extends RootAnalysis {
         for (let index = 0; index <= 23; index++) {
             messagesCountByHour[index] = 0;
         }
-        facebookAccount.forEachMessageThread((messageThread) => {
+        dataAccount.forEachMessageThread((messageThread) => {
             messageThread.forEachMessageTimestamp((messageTimestamp_ms) => {
                 const creationDate = new Date(messageTimestamp_ms);
                 const hour = creationDate.getHours();

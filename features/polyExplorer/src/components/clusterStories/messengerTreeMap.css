@@ -1,0 +1,13 @@
+.messenger-tree-map {
+    font-size: 14px;
+}
+
+.messenger-tree-map .legend {
+    margin: 28px 0;
+    font-size: 14px;
+    font-family: var(--jost-medium);
+}
+
+.messenger-tree-map .block-legend > :first-child div {
+    margin-left: 6px;
+}

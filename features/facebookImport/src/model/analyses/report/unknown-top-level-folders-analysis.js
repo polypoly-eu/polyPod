@@ -1,19 +1,14 @@
-import React from "react";
-import BasicList from "../../../components/basicList/basicList.jsx";
-import ReportAnalysis from "./report-analysis.js";
+import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
 import topFolderNames from "../../../static/topFolders.js";
-import {
-    relevantZipEntries,
-    removeEntryPrefix,
-} from "../../importers/utils/importer-util.js";
+import analysisKeys from "../utils/analysisKeys";
+import { relevantZipEntries } from "../../importers/utils/importer-util.js";
 
 async function extractTopLevelFolderNamesFromZip(zipFile) {
     const relevantEntries = await relevantZipEntries(zipFile);
     const topLevelFolderNames = new Set();
 
-    relevantEntries.forEach((filename) => {
-        const noIdFileName = removeEntryPrefix(filename);
-        const folderNameMatch = noIdFileName.match(/^([^/]+)\/.*$/);
+    relevantEntries.forEach((entry) => {
+        const folderNameMatch = entry.path.match(/^([^/]+)\/.*$/);
         if (
             folderNameMatch &&
             folderNameMatch.length === 2 &&
@@ -25,27 +20,15 @@ async function extractTopLevelFolderNamesFromZip(zipFile) {
     return [...topLevelFolderNames];
 }
 
-export default class UknownTopLevelFoldersAnalysis extends ReportAnalysis {
-    get title() {
-        return "Unknown top-level folders";
-    }
-
-    get reportData() {
-        return this._uknownFolderNames;
-    }
-
-    async analyze({ zipFile }) {
+export default class UnknownTopLevelFoldersAnalysis extends ReportAnalysis {
+    async analyze({ zipFile, dataAccount }) {
         const topLevelFolderNames = await extractTopLevelFolderNamesFromZip(
             zipFile
         );
 
-        this._uknownFolderNames = topLevelFolderNames.filter(
-            (each) => !topFolderNames.includes(each)
-        );
-        this.active = this._uknownFolderNames.length > 0;
-    }
-
-    render() {
-        return <BasicList items={this._uknownFolderNames} />;
+        dataAccount.reports[analysisKeys.unknownFolderNames] =
+            topLevelFolderNames.filter(
+                (each) => !topFolderNames.includes(each)
+            );
     }
 }

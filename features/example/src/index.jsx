@@ -43,15 +43,15 @@ const quad = dataFactory.quad(
 
 (async () => {
     await polyIn.add(quad);
-    const selected = await polyIn.select({});
+    const matching = await polyIn.match({});
 
     ReactDOM.render(
-        <Quads quads={selected} />,
+        <Quads quads={matching} />,
         document.getElementById("feature")
     );
 
     if (window.testCompleted)
         window.testCompleted({
-            failures: selected.length === 1 ? 0 : 1,
+            failures: matching.length === 1 ? 0 : 1,
         });
 })();

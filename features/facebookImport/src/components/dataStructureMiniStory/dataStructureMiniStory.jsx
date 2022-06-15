@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
-import { PolyChart } from "@polypoly-eu/poly-look";
+import { PolyChart, FilterChips } from "@polypoly-eu/poly-look";
 
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 
 import "./dataStructureMiniStory.css";
-import ChartButtons from "../chartButtons/chartButtons.jsx";
 
 const DataStructureMiniStory = ({ data }) => {
     data.forEach((d) => {
@@ -84,14 +83,16 @@ const DataStructureMiniStory = ({ data }) => {
                     onBubbleClick={handleBubbleClick}
                 />
             </div>
-            <ChartButtons
-                buttonsContent={dataWithTotal.map((d) => {
+            <FilterChips
+                chipsContent={dataWithTotal.map((d) => {
                     return { id: d.title };
                 })}
-                activeButton={selectedFolder}
-                onButtonsClick={handleFolderSelected}
+                defaultActiveChips={[selectedFolder]}
+                onChipClick={handleFolderSelected}
             />
-            <InfoButton route="/report/data-structure-info" />
+            <div className="right-edge-aligned">
+                <InfoButton infoScreen="data-structure-info" />
+            </div>
             <p className="source data-structure-source">
                 {i18n.t("common:source.your.facebook.data")}
             </p>

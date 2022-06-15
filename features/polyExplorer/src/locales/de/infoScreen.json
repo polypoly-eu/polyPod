@@ -1,10 +1,10 @@
 {
     "text.intro":
-        "<p>Neutralität und Transparenz sind uns wichtig.</p><p>Wir arbeiten daran, dass Daten sichtbar, klarer, verständlicher und vergleichbar werden. Zu diesem Zwecke führen wir Daten aus verschiedenen Quellen und eigener Recherche zusammen und machen diese, sowie unsere redaktionelle Arbeit so nachvollziehbar wie möglich.</p>",
+        "<p>Neutralität und Transparenz sind uns wichtig.</p><p>Wir arbeiten daran, dass Daten sichtbar, klarer, verständlicher und vergleichbar werden. Zu diesem Zwecke führen wir Daten aus verschiedenen Quellen und eigener Recherche zusammen und machen diese, sowie unsere redaktionelle Arbeit, so nachvollziehbar wie möglich.</p>",
     "headline.sources":
         "Quellen",
     "text.sources":
-        "<p>Die allgemeinen Firmeninformationen (Name, Rechtsform, Adresse, Struktur, Umsatz...) haben wir aus Datensätzen von Northdata, Brex und OpenCorporates zusammengestellt.<p>Die Informationen zur Datensicherheit bei ausgewählten Firmen sind das Ergebnis der Recherchen von polypoly – Die Genossenschaft. Diese basiert unter anderem auf den Datenschutzerklärungen der Unternehmen auf deren deutschen Webseiten. Es handelt sich also nicht um alle Daten, die ein Unternehmen erhebt und teilt, sondern solche, die wir derzeit nachvollziehen können.</p>",
+        "<p>Die allgemeinen Firmeninformationen (Name, Rechtsform, Adresse, Struktur, Umsatz...) haben wir aus Datensätzen von North Data, Brex und Open Corporates zusammengestellt.<p>Die Informationen zur Datensicherheit bei ausgewählten Firmen sind das Ergebnis der Recherchen der polypoly Genossenschaft. Diese basiert unter anderem auf den Datenschutzerklärungen der Unternehmen auf deren deutschen Webseiten. Es handelt sich also nicht um alle Daten, die ein Unternehmen erhebt und teilt, sondern solche, die wir derzeit nachvollziehen können.</p>",
     "headline.research":
         "Recherche",
     "text.research.first":

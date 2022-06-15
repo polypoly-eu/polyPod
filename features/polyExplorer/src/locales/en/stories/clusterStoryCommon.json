@@ -1,0 +1,21 @@
+{
+    "what.we.found": "Here is what we found",
+    "section.dataTypes": "Data Types",
+    "section.purposes": "Purposes",
+    "purposes.p": "The purposes mentioned for sharing data often reveal what the true business of the service providers and their apps really is.",
+    "purposes.barChart.legendTitle": "Number of mentions",
+    "purposes.barChart.max": "Maximum",
+    "purposes.barChart.average": "Average",
+    "data.types.legend": "data type",
+    "section.companies": "Companies",
+    "section.dataRegions": "Data Regions",
+    "section.explore.further": "Further Details",
+    "label.purposes.mostMentioned": "Most Mentioned",
+    "label.purposes.multipleMentions": "Multiple Mentions",
+    "label.receivingCompanies": "Receiving companies",
+    "label.receivingIndustries": "Receiving industries",
+    "label.installs": "Installs",
+    "label.users": "Users",
+    "label.partOf": "Part of",
+    "discover.other.topics": "Discover other topics"
+}

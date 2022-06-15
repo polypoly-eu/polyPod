@@ -1,0 +1,12 @@
+/*
+    Layouts are used for recurring behaviour of and between elements (eg. margins and spacing, styling of headlines)
+    Right now they are only used with the screen component
+*/
+
+.poly-standard-layout > * {
+  margin-bottom: calc(var(--gdu) * 6);
+}
+
+.poly-standard-layout > :first-child {
+  margin-top: calc(var(--gdu) * 6);
+}

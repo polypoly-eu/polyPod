@@ -1,0 +1,102 @@
+.filtered-entity-list {
+    display: flex;
+    overflow-y: hidden;
+}
+
+.filtered-entity-list::-webkit-scrollbar-track {
+    margin-top: 0;
+}
+
+.active-filters {
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    overflow-x: scroll;
+    background: var(--color-background-dark);
+    white-space: nowrap;
+}
+
+.active-filters::-webkit-scrollbar {
+    display: none;
+}
+
+.active-filters button {
+    margin-left: 4px;
+    margin-top: 28px;
+    margin-bottom: 28px;
+    height: 32px;
+    padding: 0 9px 0 9px;
+    border-radius: 16px;
+    line-height: 32px;
+    background: var(--color-medium);
+    color: var(--color-text-dark);
+    font-size: 14px;
+}
+
+.active-filters button:first-child {
+    margin-left: 12px;
+}
+
+.active-filters button:last-child {
+    margin-right: 12px;
+}
+
+.active-filters button::before,
+button::after {
+    position: relative;
+    top: 4px;
+}
+
+.active-filters button::before {
+    margin-right: 4px;
+}
+
+.active-filters button.industryCategory::before {
+    content: url("../images/filter-icons/industry-categories-blue.svg");
+}
+
+.active-filters button.jurisdiction::before {
+    content: url("../images/filter-icons/jurisdictions-blue.svg");
+}
+
+.active-filters button.location::before {
+    content: url("../images/filter-icons/locations-blue.svg");
+}
+
+.active-filters button.revenueRange::before {
+    content: url("../images/filter-icons/revenue-blue.svg");
+}
+
+.active-filters button::after {
+    content: url("../images/close-chip.svg");
+    margin-left: 4px;
+}
+
+.entity-list-wrapper {
+    display: flex;
+    margin: 0 auto 0 auto;
+}
+
+.entity-list-wrapper.filters-visible {
+    margin-top: 100px;
+}
+
+.filter-button {
+    background-color: var(--transparent);
+    padding: 0 0;
+    position: fixed;
+    right: 0;
+    margin-top: 24px;
+    z-index: 2;
+    width: 60px;
+    height: 48px;
+    border: none;
+}
+
+.filter-button:focus {
+    outline: 0;
+}
+
+.filter-button-active {
+    margin-top: -28px;
+}

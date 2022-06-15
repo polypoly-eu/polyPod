@@ -1,0 +1,67 @@
+<svg width="260" height="280" viewBox="0 0 260 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="verticalBarChartInfo">
+<g id="Horizontal gridlines">
+<line id="Line 304" x1="20" y1="240.102" x2="254" y2="240.102" stroke="#CBD5E0"/>
+<line id="Line 295" x1="20" y1="218.102" x2="254" y2="218.102" stroke="#CBD5E0"/>
+<line id="Line 301" x1="20" y1="196.102" x2="254" y2="196.102" stroke="#CBD5E0"/>
+<line id="Line 296" x1="20" y1="174.102" x2="254" y2="174.102" stroke="#CBD5E0"/>
+<line id="Line 302" x1="20" y1="152.102" x2="254" y2="152.102" stroke="#CBD5E0"/>
+<line id="Line 297" x1="20" y1="130.102" x2="254" y2="130.102" stroke="#CBD5E0"/>
+<line id="Line 306" x1="20" y1="108.102" x2="254" y2="108.102" stroke="#CBD5E0"/>
+<line id="Line 307" x1="20" y1="86.1016" x2="254" y2="86.1016" stroke="#CBD5E0"/>
+</g>
+<g id="Bars (vertical)" opacity="0.3">
+<rect id="Rectangle 939" x="20" y="191.602" width="30" height="49" fill="#3749A9"/>
+<rect id="Rectangle 940" x="54" y="138.602" width="30" height="102" fill="#3749A9"/>
+<rect id="Rectangle 941" x="88" y="165.602" width="30" height="75" fill="#3749A9"/>
+<rect id="Rectangle 942" x="122" y="116.602" width="30" height="124" fill="#3749A9"/>
+<rect id="Rectangle 943" x="156" y="76.6016" width="30" height="164" fill="#3749A9"/>
+<rect id="Rectangle 944" x="190" y="98.6016" width="30" height="142" fill="#3749A9"/>
+<rect id="Rectangle 945" x="224" y="147.602" width="30" height="93" fill="#3749A9"/>
+</g>
+<g id="Values">
+<text id="11" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="10" letter-spacing="-0.01em"><tspan x="28.3234" y="183.899">11</tspan></text>
+<text id="23" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="10" letter-spacing="-0.01em"><tspan x="63.1564" y="130.925">23</tspan></text>
+<text id="17" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="10" letter-spacing="-0.01em"><tspan x="96.9084" y="157.912">17</tspan></text>
+<text id="28" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="10" letter-spacing="-0.01em"><tspan x="131.147" y="108.94">28</tspan></text>
+<text id="37" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="10" letter-spacing="-0.01em"><tspan x="165.464" y="68.9613">37</tspan></text>
+<text id="32" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="10" letter-spacing="-0.01em"><tspan x="199.156" y="90.9496">32</tspan></text>
+<text id="21" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="10" letter-spacing="-0.01em"><tspan x="233.674" y="139.922">21</tspan></text>
+</g>
+<g id="Horizontal gridlines (transparent)" style="mix-blend-mode:multiply" opacity="0.3">
+<line id="Line 304_2" x1="20" y1="240.102" x2="254" y2="240.102" stroke="#CBD5E0"/>
+<line id="Line 295_2" x1="20" y1="218.102" x2="254" y2="218.102" stroke="#CBD5E0"/>
+<line id="Line 301_2" x1="20" y1="196.102" x2="254" y2="196.102" stroke="#CBD5E0"/>
+<line id="Line 296_2" x1="20" y1="174.102" x2="254" y2="174.102" stroke="#CBD5E0"/>
+<line id="Line 302_2" x1="20" y1="152.102" x2="254" y2="152.102" stroke="#CBD5E0"/>
+<line id="Line 297_2" x1="20" y1="130.102" x2="254" y2="130.102" stroke="#CBD5E0"/>
+<line id="Line 306_2" x1="20" y1="108.102" x2="254" y2="108.102" stroke="#CBD5E0"/>
+<line id="Line 307_2" x1="20" y1="86.1016" x2="254" y2="86.1016" stroke="#CBD5E0"/>
+</g>
+<g id="y axis: Entries">
+<text id="textYaxis" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="49.17">Y-Axis Title (units)</tspan></text>
+<text id="10" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="193.09">10</tspan></text>
+<text id="0" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="238.065">0</tspan></text>
+<text id="20" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="149.115">20</tspan></text>
+<text id="30" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="105.139">30</tspan></text>
+</g>
+<g id="x axis: Months">
+<text id="A" transform="translate(21 246)" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="10.8574" y="10.17">A</tspan></text>
+<text id="textXaxis" transform="translate(15 267)" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="0" y="270.17">X-Axis Title (units)</tspan></text>
+<text id="B" transform="translate(54 246)" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="11.4023" y="10.17">B</tspan></text>
+<text id="C" transform="translate(88 246)" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="10.8516" y="10.17">C</tspan></text>
+<text id="D" transform="translate(122 246)" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="10.793" y="10.17">D</tspan></text>
+<text id="E" transform="translate(156 246)" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="11.5723" y="10.17">E</tspan></text>
+<text id="F" transform="translate(190 246)" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="11.8711" y="10.17">F</tspan></text>
+<text id="G" transform="translate(224 246)" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="10.2598" y="10.17">G</tspan></text>
+</g>
+<g id="Legend">
+<g id="Label">
+<rect id="Rectangle 924" opacity="0.3" y="1" width="22" height="13" fill="#3749A9"/>
+<text id="boldLegend" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="27" y="14.365">Legend</tspan></text>
+</g>
+</g>
+<text id="text1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="190.865" y="49.17">Value</tspan></text>
+<path id="Line 164" d="M206 77L206 54" stroke="#0F1938"/>
+</g>
+</svg>

@@ -1,0 +1,35 @@
+.gradient-circle-list {
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    max-width: var(--max-width);
+}
+
+.gradient-circle-list .gradient-circle {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.gradient-circle-list p {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    margin: 0;
+}
+
+.gradient-circle-list ul {
+    position: absolute;
+    z-index: 2;
+    top: 80px;
+    left: 20px;
+}
+
+.gradient-circle-list .ratio {
+    padding-top: 100%;
+}

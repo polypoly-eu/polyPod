@@ -1,15 +1,15 @@
 import React from "react";
 import { linkRelatedAccountsWithOffFacebookCompanies } from "../utils/on-off-events-matching.js";
-import RootAnalysis from "./root-analysis";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class OnOffFacebookAdvertisersAnalysis extends RootAnalysis {
     get title() {
         return "On and Off-Facebook Advertisers";
     }
 
-    async analyze({ facebookAccount }) {
+    async analyze({ dataAccount }) {
         const advertiserMatches =
-            linkRelatedAccountsWithOffFacebookCompanies(facebookAccount);
+            linkRelatedAccountsWithOffFacebookCompanies(dataAccount);
         this._commonAdvertisersData = advertiserMatches
             .map((consolidatedAdvertiser) => consolidatedAdvertiser.fullSummary)
             .filter(

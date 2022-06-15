@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import i18n from "../../i18n";
+import i18n from "!silly-i18n";
 
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
@@ -203,7 +203,7 @@ export const ActivitiesMiniStoryDetails = ({ totalEvents }) => {
                         : selectedYear}
                 </p>
             </div>
-            <InfoButton route="/report/details/activities-info" />
+            <InfoButton infoScreen="activities-info" />
             <p className="source">
                 {i18n.t("common:source.your.facebook.data")}
             </p>

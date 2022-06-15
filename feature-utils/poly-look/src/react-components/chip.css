@@ -1,0 +1,15 @@
+.chip {
+  height: 32px;
+  margin: 4px;
+  padding: 0 12px;
+  border: solid 1px var(--theme-secondary-color);
+  border-radius: 16px;
+  background-color: var(--theme-primary-color);
+  color: var(--theme-secondary-color);
+  font-size: 14px;
+}
+
+.chip.selected {
+  background-color: var(--theme-secondary-color);
+  color: var(--theme-primary-color);
+}

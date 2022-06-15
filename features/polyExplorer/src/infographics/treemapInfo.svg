@@ -1,0 +1,32 @@
+<svg width="256" height="257" viewBox="0 0 256 257" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="treemapInfo">
+<g id="Group 3011">
+<rect id="Rectangle 1000" y="30" width="160" height="177" fill="#3749A9"/>
+<rect id="Rectangle 1003" opacity="0.3" y="211" width="145" height="46" fill="#3749A9"/>
+<rect id="Rectangle 1004" opacity="0.3" x="146" y="211" width="59" height="46" fill="#3749A9"/>
+<rect id="Rectangle 1005" opacity="0.3" x="206" y="211" width="50" height="29" fill="#3749A9"/>
+<rect id="Rectangle 1007" opacity="0.3" x="206" y="241" width="50" height="16" fill="#3749A9"/>
+<rect id="Rectangle 1001" x="161" y="30" width="95" height="106" fill="#3749A9"/>
+<rect id="Rectangle 1002" x="161" y="137" width="95" height="70" fill="#3749A9"/>
+<text id="A" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="3" y="43.17">A</tspan></text>
+<text id="B" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="164" y="43.17">B</tspan></text>
+<text id="C" fill="#F7FAFC" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="164" y="150.17">C</tspan></text>
+<text id="D" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="7" y="224.17">D</tspan></text>
+<text id="E" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="153" y="224.17">E</tspan></text>
+<text id="F" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="209" y="224.17">F</tspan></text>
+<text id="G" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="12" letter-spacing="-0.01em"><tspan x="209" y="253.17">G</tspan></text>
+</g>
+<g id="Legend">
+<g id="Label">
+<rect id="Rectangle 924" y="3.5" width="12" height="12" fill="#3749A9"/>
+<text id="textLabel1" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="17" y="14.365">Category 1</tspan></text>
+</g>
+</g>
+<g id="Legend_2">
+<g id="Label_2">
+<rect id="Rectangle 924_2" opacity="0.3" x="98" y="3.5" width="12" height="12" fill="#0956A2"/>
+<text id="textLabel2" fill="#0F1938" xml:space="preserve" style="white-space: pre" font-family="Jost*" font-size="14" letter-spacing="-0.01em"><tspan x="115" y="14.365">Category 2</tspan></text>
+</g>
+</g>
+</g>
+</svg>

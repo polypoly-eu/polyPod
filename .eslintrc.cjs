@@ -2,29 +2,27 @@ module.exports = {
     extends: [
         "eslint:recommended",
         "plugin:prettier/recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
     ],
-    "plugins": [
-        "cypress"
-    ],
+    plugins: ["cypress"],
     parserOptions: {
-        ecmaVersion: 2020,
+        ecmaVersion: 2021,
         sourceType: "module",
     },
     env: {
-        browser : true,
+        browser: true,
         es6: true,
         mocha: true,
         jest: true,
         node: true,
-        "cypress/globals": true
+        "cypress/globals": true,
     },
     settings: {
         react: {
             version: "latest",
         },
     },
-    "ignorePatterns": [
+    ignorePatterns: [
         "*.conf.*",
         "*.config.*",
         "*.bundled.*",
@@ -35,12 +33,9 @@ module.exports = {
         "**/node_modules/*",
         "data/",
         ".eslintrc.*",
-        "**/public/build/*",
-        "**/bubblewrap/build/*",
-        "**/storybook-static/*",
-        "podApi/",
         "**/build/*",
-        "PolyPodApp/"],
+        "PolyPodApp/",
+    ],
     rules: {
         semi: 2,
         "react/prop-types": "off",
@@ -57,25 +52,28 @@ module.exports = {
             plugins: ["@typescript-eslint"],
             rules: {
                 "@typescript-eslint/camelcase": "off",
-                "@typescript-eslint/no-explicit-any": "off",
-                "@typescript-eslint/no-unused-vars": "off",
-                "@typescript-eslint/no-non-null-assertion": "off",
-                "@typescript-eslint/ban-ts-comment": "off",
+                "@typescript-eslint/no-explicit-any": "error",
+                "@typescript-eslint/no-non-null-assertion": "error",
+                "@typescript-eslint/ban-ts-comment": [
+                    "error",
+                    {
+                        "ts-ignore": "allow-with-description",
+                    },
+                ],
                 "@typescript-eslint/explicit-function-return-type": [
                     "error",
                     {
                         allowExpressions: true,
                     },
                 ],
-                "@typescript-eslint/no-this-alias": "off",
             },
         },
         {
             files: ["*.jsx"],
             parserOptions: {
                 ecmaFeatures: {
-                    jsx: true
-                }
+                    jsx: true,
+                },
             },
         },
     ],

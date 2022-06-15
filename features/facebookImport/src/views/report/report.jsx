@@ -2,39 +2,45 @@ import React, { useContext, useState } from "react";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 
 import "./report.css";
 
-const ReportView = () => {
-    const { fileAnalysis, setReportResult, handleBack } =
-        useContext(ImporterContext);
-    const unrecognizedData = fileAnalysis.unrecognizedData;
+const ReportView = ({ reportStories }) => {
+    const { setReportResult, handleBack } = useContext(ImporterContext);
     const [loading, setLoading] = useState(false);
 
     const handleSendReport = async () => {
         setLoading(true);
+        try {
+            await window.pod.endpoint.send(
+                "polyPediaReport/facebook",
+                JSON.stringify(reportStories.jsonReport),
+                "application/json"
+            );
+            setReportResult(true);
+        } catch (_) {
+            setReportResult(false);
+        }
 
-        const error = await window.pod.network.httpPost(
-            process.env.POLYPOD_POLYPEDIA_REPORT_URL,
-            JSON.stringify(unrecognizedData.jsonReport),
-            "application/json",
-            process.env.POLYPOD_POLYPEDIA_REPORT_AUTHORIZATION
-        );
-        if (error) console.error("Failed to send report:", error);
-        setReportResult(!error);
         handleBack();
     };
+
+    const viewDetailsLabel = i18n.t("report:viewDetails");
 
     return (
         <div className="report-view">
             <h1 className="report-view-title">
                 {i18n.t("report:intro.headline")}
             </h1>
-            <p>{i18n.t("report:intro.text")}</p>
+            <p>
+                {i18n.t("report:intro.text", {
+                    view_details: viewDetailsLabel,
+                })}
+            </p>
             <div className={"button-area" + (loading ? " disabled" : "")}>
                 <RouteButton className="view-details" route="/report/details">
-                    {i18n.t("report:viewDetails")}
+                    {viewDetailsLabel}
                 </RouteButton>
                 <button className="send-later" onClick={handleBack}>
                     {i18n.t("report:sendLater")}
@@ -46,5 +52,4 @@ const ReportView = () => {
         </div>
     );
 };
-
 export default ReportView;

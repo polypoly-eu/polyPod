@@ -1,6 +1,0 @@
-{
-    "headline":
-        "Data correlations",
-    "text.1":
-        "Data types are often shared in packages. When correlated that way even unproblematic data types can contribute to revealing a more precise and often unwanted user profile. Or, they might be used for different purposes than obvious, expected and declared."
-}

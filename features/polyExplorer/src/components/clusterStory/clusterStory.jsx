@@ -14,6 +14,7 @@ const fadingTopBackgroundDefaultDistance = "600px";
       - "cluster-story-title" to the rest of headers. 
       - "cluster-story-img" to the image in the introduction part. 
       - "big-first-letter" to all the paragraphs with a first big letter in it.
+      - "source"
     
     You can check the CSS properties for these classes in clusterStory.css.
  */
@@ -42,7 +43,10 @@ const ClusterStory = ({
     };
 
     return (
-        <Screen className={`cluster-story ${className}`} light={true}>
+        <Screen
+            className={`cluster-story ${className}`}
+            theme={"poly-theme-light"}
+        >
             <div
                 className="progress-bar"
                 style={{ backgroundColor: progressBarColor }}

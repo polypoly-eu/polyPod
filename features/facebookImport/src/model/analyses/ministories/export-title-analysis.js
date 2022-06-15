@@ -1,4 +1,4 @@
-import RootAnalysis from "./root-analysis";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class ExportTitleAnalysis extends RootAnalysis {
     get title() {

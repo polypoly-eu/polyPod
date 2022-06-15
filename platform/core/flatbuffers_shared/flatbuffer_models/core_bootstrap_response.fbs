@@ -1,0 +1,9 @@
+include "failure.fbs";
+
+/// Core bootstrap response represented by an optional failure.
+/// If failure is nil, the bootstrap was successfull, otherwise it failed.
+table CoreBootstrapResponse {
+    failure:Failure;
+}
+
+root_type CoreBootstrapResponse;

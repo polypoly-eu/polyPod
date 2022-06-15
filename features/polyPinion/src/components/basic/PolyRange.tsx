@@ -3,6 +3,7 @@ import { useState } from "react";
 import React from "react";
 import PolyRangeButton from "./PolyRangeButton";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function PolyRange(props: any = {}) {
     const {
         options = [],

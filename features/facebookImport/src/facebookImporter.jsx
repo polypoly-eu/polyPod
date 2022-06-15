@@ -12,58 +12,52 @@ import {
     ImporterProvider,
     ImporterContext,
 } from "./context/importer-context.jsx";
+import {
+    INITIAL_HISTORY_STATE,
+    PolyImportContext,
+    PolyImportProvider,
+    ErrorPopup,
+    LoadingOverlay,
+} from "@polypoly-eu/poly-look";
+import { dataImporters } from "./model/importer.js";
+import FacebookAccount from "./model/entities/facebook-account.js";
+import i18n from "!silly-i18n";
 
-import ErrorPopup from "./components/errorPopup/errorPopup.jsx";
 import Overview from "./views/overview/overview.jsx";
 import ImportView from "./views/import/import.jsx";
 import ExploreView from "./views/explore/explore.jsx";
-import ReportView from "./views/report/report.jsx";
 import ExploreDetails from "./views/explore/details.jsx";
-import ReportDetails from "./views/report/details.jsx";
-import DataStructureInfoScreen from "./views/infoScreens/dataStructureInfoScreen/dataStructureInfoScreen.jsx";
-import ActivitiesInfoScreen from "./views/infoScreens/activitiesInfoScreen/activitiesInfoScreen.jsx";
-import MessagesInfoScreen from "./views/infoScreens/messagesInfoScreen/messagesInfoScreen.jsx";
-import PicturesInfoScreen from "./views/infoScreens/picturesInfoScreen/picturesInfoScreen.jsx";
-import PostReactionInfoScreen from "./views/infoScreens/postReactionInfoScreen/postReactionInfoScreen.jsx";
-import OnOffFacebookInfoScreen from "./views/infoScreens/onOffFacebookInfoScreen/onOffFacebookInfoScreen.jsx";
-import OffFacebookInfoScreen from "./views/infoScreens/onOffFacebookInfoScreen/offFacebookInfoScreen.jsx";
-import Loading from "./components/loading/loading.jsx";
+import ReportWrapper from "./views/report/reportWrapper.jsx";
 
 import "./styles.css";
 
-import i18n from "./i18n.js";
-
 const FacebookImporter = () => {
-    const {
-        pod,
-        files,
-        navigationState,
-        importSteps,
-        globalError,
-        setGlobalError,
-    } = useContext(ImporterContext);
-    const importStatus = navigationState.importStatus;
+    const { pod, globalError, setGlobalError, isLoading, popUp, closePopUp } =
+        useContext(ImporterContext);
 
-    const renderSplash = () => {
-        return (
-            <Loading
-                loadingGif="./images/loading.gif"
-                message={i18n.t("common:loading")}
-            ></Loading>
-        );
-    };
+    const { files } = useContext(PolyImportContext);
 
     function determineRoute() {
-        if (importStatus == importSteps.loading || !files)
-            return renderSplash();
         if (files.length > 0)
-            return <Redirect to={{ pathname: "/overview" }} />;
+            return (
+                <Redirect
+                    to={{
+                        pathname: "/overview",
+                        state: INITIAL_HISTORY_STATE,
+                    }}
+                />
+            );
         else return <Redirect to={{ pathname: "/import" }} />;
     }
-
     return (
-        <div className="facebook-importer">
-            {pod ? (
+        <div className="facebook-importer poly-theme poly-theme-dark">
+            {isLoading && (
+                <LoadingOverlay
+                    loadingGif="./images/loading.gif"
+                    message={i18n.t("common:loading")}
+                ></LoadingOverlay>
+            )}
+            {pod && files && (
                 <Switch>
                     <Route exact path="/">
                         {determineRoute()}
@@ -80,41 +74,29 @@ const FacebookImporter = () => {
                     <Route exact path="/explore/details">
                         <ExploreDetails />
                     </Route>
-                    <Route exact path="/report">
-                        <ReportView />
-                    </Route>
-                    <Route exact path="/report/data-structure-info">
-                        <DataStructureInfoScreen />
-                    </Route>
-                    <Route exact path="/report/pictures-info">
-                        <PicturesInfoScreen />
-                    </Route>
-                    <Route exact path="/report/reaction-types-info">
-                        <PostReactionInfoScreen />
-                    </Route>
-                    <Route exact path="/report/details">
-                        <ReportDetails />
-                    </Route>
-                    <Route exact path="/report/details/activities-info">
-                        <ActivitiesInfoScreen />
-                    </Route>
-                    <Route exact path="/report/details/messages-info">
-                        <MessagesInfoScreen />
-                    </Route>
-                    <Route exact path="/report/details/on-off-facebook-info">
-                        <OnOffFacebookInfoScreen />
-                    </Route>
-                    <Route exact path="/report/details/off-facebook-info">
-                        <OffFacebookInfoScreen />
-                    </Route>
+                    <ReportWrapper />
                 </Switch>
-            ) : (
-                renderSplash()
             )}
+            {popUp &&
+                popUp.component({
+                    onClose: closePopUp,
+                })}
             {globalError && (
                 <ErrorPopup
                     error={globalError}
                     onClose={() => setGlobalError(null)}
+                    text={{
+                        title: i18n.t("errorPopup:title"),
+                        instructionsIntro: i18n.t(
+                            "errorPopup:instructions.intro"
+                        ),
+                        instructionsSteps: i18n.t(
+                            "errorPopup:instructions.steps"
+                        ),
+                        instructionsClosing: i18n.t(
+                            "errorPopup:instructions.closing"
+                        ),
+                    }}
                 />
             )}
         </div>
@@ -129,8 +111,14 @@ const FacebookImporterApp = () => {
     return (
         <Router history={history}>
             <ImporterProvider>
-                <div className="poly-nav-bar-separator-overlay" />
-                <FacebookImporter />
+                <PolyImportProvider
+                    parentContext={ImporterContext}
+                    dataImporters={dataImporters}
+                    DataAccount={FacebookAccount}
+                >
+                    <div className="poly-nav-bar-separator-overlay" />
+                    <FacebookImporter />
+                </PolyImportProvider>
             </ImporterProvider>
         </Router>
     );

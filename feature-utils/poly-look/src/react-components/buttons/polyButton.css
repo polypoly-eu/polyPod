@@ -1,0 +1,33 @@
+.poly-button {
+  font-family: var(--theme-font-medium);
+  font-size: 18px;
+  padding: 4px 12px;
+  height: 48px;
+  max-width: var(--max-width);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: none;
+}
+
+.poly-button:active {
+  opacity: 0.88;
+}
+
+.poly-button:disabled {
+  opacity: 0.38;
+}
+
+.poly-button.filled {
+  background-color: var(--theme-secondary-color);
+  color: var(--theme-primary-color);
+}
+
+.poly-button.outline {
+  border: 1px solid var(--theme-secondary-color);
+  color: var(--theme-secondary-color);
+  background-color: var(--transparent);
+}

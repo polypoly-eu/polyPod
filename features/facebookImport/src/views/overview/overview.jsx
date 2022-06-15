@@ -1,30 +1,39 @@
-import { PolyChart } from "@polypoly-eu/poly-look";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
+import {
+    PolyChart,
+    PolyImportContext,
+    LoadingOverlay,
+    INITIAL_HISTORY_STATE,
+} from "@polypoly-eu/poly-look";
 import RouteButton from "../../components/buttons/routeButton.jsx";
 import PolypolyDialog from "../../components/dialogs/polypolyDialog/polypolyDialog.jsx";
-import Loading from "../../components/loading/loading.jsx";
-import { ImporterContext } from "../../context/importer-context.jsx";
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import { useHistory } from "react-router";
 import { formatTime } from "../../utils/formatTime.js";
+import { analyzeFile } from "@polypoly-eu/poly-analysis";
+import { specificAnalyses } from "../../model/analysis";
 
 import "./overview.css";
 
 const Overview = () => {
-    const {
-        facebookAccount,
-        files,
-        handleRemoveFile,
-        updateImportStatus,
-        importSteps,
-    } = useContext(ImporterContext);
+    const { files, account, handleRemoveFile } = useContext(PolyImportContext);
 
     const [showNewImportDialog, setShowNewImportDialog] = useState(false);
     const history = useHistory();
 
-    if (facebookAccount === null || files === null)
+    useEffect(() => {
+        if (!account) return;
+        analyzeFile({
+            zipData: files[0],
+            dataAccount: account,
+            specificAnalyses,
+        });
+    }, [account]);
+
+    if (account === null || files === null)
         return (
-            <Loading
+            <LoadingOverlay
                 message={i18n.t("overview:loading.data")}
                 loadingGif="./images/loading.gif"
             />
@@ -34,9 +43,7 @@ const Overview = () => {
     const bubbleVizHeight = 400;
     const dataBubblesLightColor = "#f7fafc";
 
-    const bubbleData = facebookAccount.dataGroups.filter(
-        ({ count }) => count > 0
-    );
+    const bubbleData = account.dataGroups.filter(({ count }) => count > 0);
 
     bubbleData.forEach((d) => {
         d.value = d.count;
@@ -58,6 +65,7 @@ const Overview = () => {
         const i = Math.floor(Math.log(size) / Math.log(k));
         return Math.round(size / Math.pow(k, i), decimals) + " " + units[i - 1];
     };
+
     return (
         <div className="overview">
             {Object.values(files).length ? (
@@ -79,8 +87,10 @@ const Overview = () => {
                         width={bubbleVizWidth}
                         height={bubbleVizHeight}
                         bubbleColor={dataBubblesLightColor}
-                        onBubbleClick={() => history.push("/explore")}
-                        showValues={false}
+                        onBubbleClick={() =>
+                            history.push("/explore", INITIAL_HISTORY_STATE)
+                        }
+                        text=""
                     />
                     <div className="details">
                         <p>
@@ -116,20 +126,7 @@ const Overview = () => {
                     </div>
                 </>
             ) : (
-                <div className="btn-holder">
-                    <RouteButton
-                        route="/import"
-                        className="btn primary"
-                        stateChange={{
-                            importStatus: importSteps.beginning,
-                        }}
-                        onClick={() =>
-                            updateImportStatus(importSteps.beginning)
-                        }
-                    >
-                        {i18n.t("overview:import.data")}
-                    </RouteButton>
-                </div>
+                <Redirect to={{ pathname: "/import" }} />
             )}
             {showNewImportDialog ? (
                 <PolypolyDialog
@@ -142,10 +139,8 @@ const Overview = () => {
                         text: i18n.t("overview:new.import.dialog.continue"),
                         onClick: async () => {
                             await handleRemoveFile(files[0].id);
-                            updateImportStatus(importSteps.import);
                         },
                         route: "/import",
-                        stateChange: { importStatus: importSteps.import },
                     }}
                 />
             ) : null}

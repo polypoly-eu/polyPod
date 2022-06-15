@@ -1,44 +1,29 @@
-import React from "react";
-import i18n from "../../../i18n.js";
-import RootAnalysis from "./root-analysis.js";
-
-import {
-    ActivitiesMiniStorySummary,
-    ActivitiesMiniStoryDetails,
-} from "../../../components/activitiesMiniStory/activitiesMiniStory.jsx";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class ActivitiesAnalysis extends RootAnalysis {
-    get label() {
-        return RootAnalysis.Labels.NONE;
-    }
-
-    get title() {
-        return i18n.t("activitiesMiniStory:title");
-    }
-
-    async analyze({ facebookAccount }) {
+    async analyze({ dataAccount }) {
         const activityDates = [
-            ...facebookAccount.followedPages,
-            ...facebookAccount.friends,
-            ...facebookAccount.interactedAdvertisers,
-            ...facebookAccount.likedPages,
-            ...facebookAccount.receivedFriendRequests,
-            ...facebookAccount.recommendedPages,
-            ...facebookAccount.searches,
-            ...facebookAccount.unfollowedPages,
-            ...facebookAccount.comments,
-            ...facebookAccount.postReactions,
-            ...facebookAccount.posts,
+            ...dataAccount.followedPages,
+            ...dataAccount.friends,
+            ...dataAccount.interactedAdvertisers,
+            ...dataAccount.likedPages,
+            ...dataAccount.receivedFriendRequests,
+            ...dataAccount.recommendedPages,
+            ...dataAccount.searches,
+            ...dataAccount.unfollowedPages,
+            ...dataAccount.comments,
+            ...dataAccount.postReactions,
+            ...dataAccount.posts,
         ].map((each) => new Date(each.timestamp * 1000));
 
         //for nested structures
-        facebookAccount.offFacebookCompanies.forEach((company) =>
+        dataAccount.offFacebookCompanies.forEach((company) =>
             activityDates.push(
                 ...company.events.map((each) => new Date(each.timestamp * 1000))
             )
         );
 
-        facebookAccount.forEachMessageThread((thread) =>
+        dataAccount.forEachMessageThread((thread) =>
             activityDates.push(
                 ...thread.messageTimestamps.map(
                     (timestamp_ms) => new Date(timestamp_ms)
@@ -72,15 +57,7 @@ export default class ActivitiesAnalysis extends RootAnalysis {
             groupedActivities.total++;
         });
 
-        this._totalEvents = groupedActivities;
-        this.active = groupedActivities.total > 0;
-    }
-
-    renderSummary() {
-        return <ActivitiesMiniStorySummary totalEvents={this._totalEvents} />;
-    }
-
-    renderDetails() {
-        return <ActivitiesMiniStoryDetails totalEvents={this._totalEvents} />;
+        dataAccount.analyses.totalEvents =
+            groupedActivities.total > 0 && groupedActivities;
     }
 }

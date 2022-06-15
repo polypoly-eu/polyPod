@@ -1,0 +1,47 @@
+.matrix-bubble-chart {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 110px);
+    grid-gap: 8px;
+}
+
+.matrix-bubble-chart .bubble-cluster-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.matrix-bubble-chart .bubble-cluster-container .bubble-cluster {
+    height: 60px;
+}
+
+.matrix-bubble-chart .bubble-cluster-container h4 {
+    margin: 0;
+    font-family: "Jost Medium";
+    font-size: 14px;
+    text-align: center;
+}
+
+.data-types-legend {
+    display: flex;
+    margin: 24px 0;
+}
+
+.data-types-legend .bubble-legend {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin: auto 0;
+}
+
+.data-types-legend p {
+    margin: 0 0 0 8px;
+    font-family: "Jost Medium";
+}
+
+.by-types-bubble-chart h4 {
+    margin: 0;
+    text-align: center;
+    font-family: "Jost Medium";
+}

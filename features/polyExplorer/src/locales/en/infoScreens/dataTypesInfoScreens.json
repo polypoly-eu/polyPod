@@ -1,0 +1,6 @@
+{
+    "company.p1": "This diagram shows the different data types companies collect and share. Each circle represents one data type.",
+    "shares.p1": "This diagram shows the different data types companies collect and share. Each circle represents one data type. The size of each circle represents the number of times this datatype is shared with other companies.",
+    "types.p1": "This diagram shows the different data types companies collect and share. Each circle represents one data type.",
+    "p2": "This information is based on research of the companies' privacy policies."
+}

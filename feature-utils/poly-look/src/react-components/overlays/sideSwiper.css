@@ -1,0 +1,13 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow-x: hidden;
+  z-index: 100;
+}
+
+.contents {
+  height: 100%;
+}

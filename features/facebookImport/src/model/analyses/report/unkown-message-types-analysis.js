@@ -1,6 +1,6 @@
 import React from "react";
 import BasicList from "../../../components/basicList/basicList.jsx";
-import ReportAnalysis from "./report-analysis";
+import { ReportAnalysis } from "@polypoly-eu/poly-analysis";
 
 const knownMessageTypes = [
     "generic",
@@ -19,9 +19,9 @@ export default class UnknownMessageTypesAnalysis extends ReportAnalysis {
         return this._unknownMessageTypes;
     }
 
-    async analyze({ facebookAccount }) {
+    async analyze({ dataAccount }) {
         const unknownMessageTypes = new Set();
-        facebookAccount.forEachMessageThread((messageThread) => {
+        dataAccount.forEachMessageThread((messageThread) => {
             for (let messageType of messageThread.messageTypes) {
                 if (!knownMessageTypes.includes(messageType.toLowerCase())) {
                     unknownMessageTypes.add(messageType);

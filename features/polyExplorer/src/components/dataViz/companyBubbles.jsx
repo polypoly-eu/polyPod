@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
-import i18n from "../../i18n.js";
+import i18n from "!silly-i18n";
 import utils from "./utils.js";
 import { ANIMATION_TIME, DIAGRAMS, OPACITY_RANGE } from "../../constants";
 import "./dataViz.css";
@@ -413,12 +413,6 @@ const CompanyBubbles = ({
         localDiagram[DIAGRAMS.COMPANY_HIGHLIGHT].bubbles = utils.findNode(
             localDiagram[DIAGRAMS.COMPANY_HIGHLIGHT].root,
             (d) => d.data.highlightedCompany
-        );
-
-        appendBubbleLabel(
-            localDiagram[DIAGRAMS.COMPANY_HIGHLIGHT].svg,
-            localDiagram[DIAGRAMS.COMPANY_HIGHLIGHT].bubbles,
-            highlightTexts.company.explanation
         );
 
         appendExplanation(

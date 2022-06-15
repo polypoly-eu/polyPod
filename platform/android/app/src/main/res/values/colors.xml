@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#0F1938</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="featureListBackground">#e2e8f0</color>
+    <color name="feature_foreground_light">#edf2f7</color>
+    <color name="feature_foreground_dark">@color/colorPrimaryDark</color>
+    <color name="onboarding_button_bg">#fb8a89</color>
+    <color name="onboarding_bg">#fff5f5</color>
+    <color name="app_bar_separator">#a9b6c6</color>
+    <color name="feature_card_border">#a9b6c6</color>
+</resources>

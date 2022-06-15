@@ -5,6 +5,7 @@ import { compareMaps } from "../../util/compare-maps";
 
 const indices = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function PolyCheckboxGroup(props: any = {}) {
     const {
         options = [],

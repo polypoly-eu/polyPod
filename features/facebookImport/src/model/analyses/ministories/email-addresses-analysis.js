@@ -1,20 +1,20 @@
 import React from "react";
 import BasicList from "../../../components/basicList/basicList.jsx";
-import RootAnalysis from "./root-analysis.js";
+import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
 export default class EmailAddressesAnalysis extends RootAnalysis {
     get title() {
         return "Email addresses and phone numbers";
     }
 
-    async analyze({ facebookAccount }) {
-        this.active = facebookAccount.adminRecords.length > 0;
+    async analyze({ dataAccount }) {
+        this.active = dataAccount.adminRecords.length > 0;
         this._emailAddresses = new Set();
         if (!this.active) {
             return;
         }
 
-        facebookAccount.adminRecords.forEach((record) => {
+        dataAccount.adminRecords.forEach((record) => {
             if (!record.extra_info) {
                 return;
             }

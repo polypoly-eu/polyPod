@@ -14,7 +14,7 @@ function packageFeature({ archiveName, moduleName, artifactPath }, targetDir) {
         artifactPath
     );
     return zip({
-        source: ".",
+        source: process.platform === "win32" ? "" : ".",
         destination: targetArchive,
         cwd: sourceDir,
     }).catch((error) => {

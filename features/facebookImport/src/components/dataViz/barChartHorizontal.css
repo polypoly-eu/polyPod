@@ -36,7 +36,7 @@
 
 .bar-chart-horizontal-container .unit {
     position: absolute;
-    font-size: 12px;
+    font-size: var(--font-size-s);
     transform: translate(33px, -17px);
 }
 

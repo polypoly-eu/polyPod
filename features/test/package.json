@@ -4,14 +4,12 @@
     "build": "rollup -c"
   },
   "dependencies": {
-    "@polypoly-eu/pod-api": "file:../../core/api/pod-api",
+    "@polypoly-eu/pod-api": "file:../../platform/feature-api/api/pod-api",
     "@rdfjs/data-model": "^1.2.0"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "^6.1.0",
-    "@types/rdf-js": "^4.0.0",
-    "rollup": "^2.59.0",
-    "rollup-plugin-copy": "^3.4.0"
+    "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
+    "@types/rdf-js": "^4.0.0"
   },
   "private": true
 }

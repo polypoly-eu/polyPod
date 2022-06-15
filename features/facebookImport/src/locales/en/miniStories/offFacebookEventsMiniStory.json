@@ -1,0 +1,17 @@
+{
+    "on.off.events.title": "Are these companies advertising as well?",
+    "general": "Your Facebook data contains information about things you did outside of its service, e.g. on other apps and websites.",
+    "companies": "companies provide these so-called off Facebook events and are listed in your data.",
+    "companiesWithAds": "of those companies also present advertising to you. Coincidence?",
+    "total": "A total of <strong>{{number_companies}}</strong> apps and websites you use outside Facebook send information about that back to Facebook. <strong>{{number_companiesWithAds}}</strong> of those send information about your purchases.",
+    "on.off.events.text.1": "We analyse data about advertising you saw on Facebook and call the related entries on Facebook events. Looking at on and off Facebook events over time different patterns might emerge. Off events seem to be followed by on events or vice versa. The data does not prove causality, but this is an interesting starting point for further exploration.",
+    "on.off.events.text.2": "We are showing the last 90 days because Facebook only stores on Facebook events that long. Maybe you remember some of your activities in the last 3 months? Or you will be more conscious from now on.",
+    "on.fb.events": "On Facebook events",
+    "off.fb.events": "Off Facebook events",
+    "last.90.days": "Last 90 days",
+    "on.off.events.number.events": "Number of events",
+    "off.events.title": "Facebook knows what you did elsewhere",
+    "off.events.text.1": "Here are the companies (websites, apps) which reported the most to Facebook, sorted by the number of activities they reported.",
+    "off.events.text.2": "Companies sorted by number of activities they share with Facebook",
+    "off.events.text.3": "types of activities have been forwarded to Facebook by those companies. The types that triggered most off Facebook events are:"
+}

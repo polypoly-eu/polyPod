@@ -2,6 +2,7 @@ export default class MessageThread {
     constructor() {
         this._title = "";
         this._participants = [];
+        this._threadPath = "";
         this._messagesCount = 0;
         this._totalWordCount = 0;
         this._callsCount = 0;
@@ -30,7 +31,7 @@ export default class MessageThread {
         this._participants = (messageThreadData.participants || []).map(
             (each) => each.name
         );
-
+        this._threadPath = messageThreadData.thread_path;
         const messagesData = messageThreadData.messages;
         if (!messagesData) {
             return;
@@ -47,6 +48,10 @@ export default class MessageThread {
 
     get participants() {
         return this._participants;
+    }
+
+    get threadPath() {
+        return this._threadPath;
     }
 
     get messagesCount() {
@@ -77,5 +82,17 @@ export default class MessageThread {
         for (const messageTimestamp of this._messageTimestamps) {
             callback(messageTimestamp);
         }
+    }
+
+    mergeThread(messageThread) {
+        this._messagesCount += messageThread.messagesCount;
+        this._totalWordCount += messageThread.totalWordCount;
+        this._callsCount += messageThread.callsCount;
+        this._callsDuration += messageThread.callsDuration;
+        for (let type of messageThread.messageTypes) {
+            if (this._messageTypes.includes(type)) continue;
+            this._messageTypes.push(messageThread.type);
+        }
+        this._messageTimestamps.push(...messageThread.messageTimestamps);
     }
 }

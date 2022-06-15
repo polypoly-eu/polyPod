@@ -1,0 +1,29 @@
+.receiving-companies .indexed-legend>*,
+.receiving-companies .bubble-legend-companies,
+.receiving-companies .bubble-legend-industries {
+    font-family: "Jost Medium";
+    font-size: 14px;
+}
+
+.receiving-companies .bubble-legend-companies,
+.receiving-companies .bubble-legend-industries {
+    margin-right: 12px;
+}
+
+.receiving-companies .bubble-legend-companies::before,
+.receiving-companies .bubble-legend-industries::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 4px;
+    margin-bottom: -4px;
+    background: #7ee8a2;
+    border: 1px solid transparent;
+    border-radius: 50%;
+}
+
+.receiving-companies .bubble-legend-industries::before {
+    background: transparent;
+    border-color: #0f1938;
+}

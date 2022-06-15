@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="onboarding_headline_size">32dp</dimen>
-    <dimen name="onboarding_headline_extra_spacing">-5dp</dimen>
-    <dimen name="onboarding_text_size">16dp</dimen>
-    <dimen name="onboarding_text_extra_spacing">-3dp</dimen>
-</resources>
-

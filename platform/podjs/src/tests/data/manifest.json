@@ -1,0 +1,16 @@
+{
+  "name": "The Test Feature",
+  "description": "This is an example feature",
+  "thumbnail": "assets/thumbnail.png",
+  "primaryColor": "#000000",
+  "links": {
+    "link1": "https://polypoly.coop",
+    "link2": "https://polypoly.coop"
+  },
+  "translations": {
+    "de": {
+        "author": "Author_DE",
+        "description": "Description_DE"
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import i18n from "../../../i18n.js";
+import i18n from "!silly-i18n";
 import "./companyRevenueChart.css";
 
 const CompanyRevenueChart = ({ annualRevenues }) => {
@@ -174,9 +174,7 @@ const CompanyRevenueChart = ({ annualRevenues }) => {
                         {i18n.t(`entityDetailsScreen:${unit}`)} (EUR)
                     </div>
                 </div>
-                <p className="source">
-                    {i18n.t("entityDetailsScreen:source")}: polyPedia
-                </p>
+
                 <div
                     className="bar"
                     style={{

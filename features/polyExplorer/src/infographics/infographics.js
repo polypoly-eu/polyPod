@@ -6,6 +6,16 @@ import purpose from "./purpose.svg";
 import featuredEntity from "./featuredEntity.svg";
 import jurisdiction from "./jurisdiction.svg";
 import jurisdiction2 from "./jurisdiction2.svg";
+import lineChartInfo from "./lineChartInfo.svg";
+import companyDataTypes from "./companyDataTypes.svg";
+import sharesDataTypes from "./sharesDataTypes.svg";
+import typesDataTypes from "./typesDataTypes.svg";
+import packedCircleInfo from "./packedCircleInfo.svg";
+import purposesBarChart from "./purposesBarChart.svg";
+import horizontalBarChartInfo from "./horizontalBarChartInfo.svg";
+import flowDiagramInfo from "./flowDiagramInfo.svg";
+import treemapInfo from "./treemapInfo.svg";
+import verticalBarChartInfo from "./verticalBarChartInfo.svg";
 
 export default {
     dataTypes: dataTypes,
@@ -16,4 +26,14 @@ export default {
     featuredEntity: featuredEntity,
     jurisdiction: jurisdiction,
     jurisdiction2: jurisdiction2,
+    lineChartInfo: lineChartInfo,
+    companyDataTypes: companyDataTypes,
+    sharesDataTypes: sharesDataTypes,
+    typesDataTypes: typesDataTypes,
+    packedCircleInfo: packedCircleInfo,
+    purposesBarChart: purposesBarChart,
+    horizontalBarChartInfo: horizontalBarChartInfo,
+    flowDiagramInfo: flowDiagramInfo,
+    treemapInfo: treemapInfo,
+    verticalBarChartInfo: verticalBarChartInfo,
 };

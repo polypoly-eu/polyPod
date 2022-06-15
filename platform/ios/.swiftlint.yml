@@ -1,0 +1,27 @@
+disabled_rules:
+  - trailing_whitespace
+  - cyclomatic_complexity
+  - colon
+  - control_statement
+  - syntactic_sugar
+  - statement_position
+  - force_cast
+  - unused_closure_parameter
+  - todo
+  - unused_closure_parameter
+  - line_length
+  - redundant_optional_initialization
+  - file_length
+  - implicit_getter
+  - identifier_name
+  - multiple_closures_with_trailing_closure
+  - empty_parentheses_with_trailing_closure
+  - force_try
+  - opening_brace
+  - private_over_fileprivate
+  - for_where
+  - closure_parameter_position
+  - class_delegate_protocol
+  - redundant_void_return
+  - empty_enum_arguments
+

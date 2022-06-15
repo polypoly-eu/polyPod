@@ -1,0 +1,19 @@
+{
+  "name": "@polypoly-eu/storybook",
+  "private": "true",
+  "scripts": {
+    "storybook:lit": "web-dev-server -c .storybook/lit/server.mjs",
+    "storybook:react": "start-storybook -p 6006 -c .storybook/react"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.4.19",
+    "@storybook/addon-essentials": "^6.4.19",
+    "@storybook/addon-interactions": "^6.4.19",
+    "@storybook/react": "^6.4.19",
+    "@web/dev-server": "^0.1.30",
+    "@web/dev-server-rollup": "^0.3.15",
+    "@web/dev-server-storybook": "^0.4.3",
+    "rollup-plugin-svg": "^2.0.0",
+    "storybook-addon-designs": "^6.2.1"
+  }
+}

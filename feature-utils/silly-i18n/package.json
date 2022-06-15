@@ -1,0 +1,19 @@
+{
+  "name": "@polypoly-eu/silly-i18n",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint src test",
+    "test": "jest && cypress run",
+    "doc": "jsdoc src/*.js -d ./docs"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "html",
+      "text"
+    ]
+  },
+  "private": true,
+  "type": "module"
+}

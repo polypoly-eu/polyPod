@@ -3,7 +3,7 @@ import { PolyChart } from "@polypoly-eu/poly-look";
 
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
-import i18n from "../../i18n";
+import i18n from "!silly-i18n";
 
 import likeIcon from "../../static/images/reactions-ministory/like.svg";
 import loveIcon from "../../static/images/reactions-ministory/love.svg";
@@ -38,7 +38,6 @@ export function mapEmojiToReaction(reactions) {
 
 const PostReactionTypesMiniStory = ({ reactionData }) => {
     const [selectedReaction, setSelectedReaction] = useState("TOTAL");
-
     const handleIconSelected = (_, d) => setSelectedReaction(d.data.title);
     const iconFilter = {
         filterElement: "feColorMatrix",
@@ -85,7 +84,7 @@ const PostReactionTypesMiniStory = ({ reactionData }) => {
                 type="bubble-cluster"
                 data={mapEmojiToReaction(reactionData)}
                 onBubbleClick={handleIconSelected}
-                showValues={false}
+                text=""
                 filter={iconFilter}
             />
             <ChartButtons
@@ -101,7 +100,7 @@ const PostReactionTypesMiniStory = ({ reactionData }) => {
                 }
             />
             <div className="reaction-types">
-                <InfoButton route="/report/reaction-types-info" />
+                <InfoButton infoScreen="reaction-types-info" />
                 <p className="source">
                     {i18n.t("common:source.your.facebook.data")}
                 </p>

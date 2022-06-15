@@ -6,11 +6,6 @@ module.exports = {
         "@typescript-eslint/no-empty-function": "off",
     },
     ignorePatterns: ["**/src/i18n/*.js", "**/src/questionnaire/*"],
-    settings: {
-        react: {
-            version: "detect",
-        },
-    },
     env: {
         browser: true,
     },

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="@string/settings_about_section">
+        <Preference
+            android:key="version"
+            android:title="@string/settings_version" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_sec_section">
+        <SwitchPreference
+            android:key="biometricEnabledKey"
+            android:title="Authentication"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_legal_section">
+        <Preference
+            app:key="imprint"
+            android:title="@string/settings_imprint_title" />
+        <Preference
+            android:key="privacy_policy"
+            android:title="@string/settings_privacy_policy_title" />
+        <Preference
+            android:key="terms_of_use"
+            android:title="@string/settings_terms_of_use_title" />
+        <Preference
+            android:key="licenses"
+            android:title="@string/settings_licenses_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

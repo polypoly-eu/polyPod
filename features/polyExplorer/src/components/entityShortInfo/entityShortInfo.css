@@ -4,7 +4,6 @@
     width: 100%;
     padding: 8px;
     border: none;
-    background-color: var(--color-background-dark);
     outline: none;
     margin: 0;
 }
@@ -23,7 +22,6 @@
 .entity-short-info .info-box {
     display: inline-block;
     width: 100%;
-    color: var(--color-text-light);
     text-align: left;
     margin-left: 6px;
 }

@@ -16,15 +16,17 @@
     flex: 1 1 auto;
 }
 
+.tab-data-story {
+    height: 100%;
+    overflow: hidden scroll;
+}
+
 .tab-data-story p {
     max-width: var(--max-width);
     margin: auto;
-    padding: 32px;
-    font-size: 10px;
-}
-
-.tab-data-story .info-button {
-    bottom: 100px;
+    padding: 32px 16px 72px;
+    font-family: "Jost Medium";
+    font-size: 12px;
 }
 
 .details .swiper-container {
@@ -36,17 +38,22 @@
     background-color: var(--color-background-dark);
     flex: 1 1 0px;
     height: 100%;
-    padding-bottom: 12px;
-    font-size: 16px;
+    padding-bottom: 8px;
+    font-family: "Jost Medium";
+    font-size: 14px;
     line-height: 16px;
     color: var(--color-medium);
     border-color: transparent;
     outline: none;
+    border: 4px solid var(--transparent);
+    box-shadow: 0px 1px var(--color-gray-400);
 }
 
 .tab-button-container .tab-button.active {
-    border-bottom: 4px solid var(--color-semi-light);
+    border: 4px solid var(--transparent);
+    border-bottom: 4px solid var(--color-light);
     color: var(--color-text-light);
+    box-shadow: 0px 1px var(--color-light);
 }
 
 .scroll-container {
@@ -102,6 +109,10 @@
 
 .location-map .Sonstige {
     background-color: var(--jurisdiction-others);
+}
+
+.location-map .source-info-container .info-button {
+    margin-right: 0;
 }
 
 .location-block .pin {
@@ -201,19 +212,16 @@
 
 .entity-details-text {
     box-sizing: border-box;
-    width: 100%;
-    max-width: var(--max-width);
     margin: 0 auto;
 }
 
 .entity-details-source {
-    transform: translateY(-20px);
     color: var(--color-medium);
     flex: 0 0 auto;
+    margin-left: 16px;
+    font-family: "Jost Medium";
     font-size: 12px;
-    margin: 0px auto;
     width: 100%;
-    padding: 0 30px 12px 30px;
     max-width: var(--max-width);
 }
 
@@ -229,13 +237,13 @@
     left: 0;
     flex: 0 0 auto;
     box-sizing: border-box;
-    width: 296px;
+    width: 91.112%;
     max-width: var(--max-width);
     height: 48px;
     background-color: var(--color-background-light);
     color: var(--color-text-dark);
+    font-family: "Jost Medium";
     font-size: 18px;
-    font-weight: 600;
     margin: auto auto 24px auto;
     border-radius: 4px;
     border: transparent;
@@ -254,11 +262,49 @@
     margin: 38px 16px 0 16px;
 }
 
+.featured-map-container {
+    margin-bottom: 20px;
+}
+
+.featured-map-container .separator-unit h2,
+.location-map .separator-unit h2 {
+    margin: 32px 0;
+    font-family: "Jost Medium";
+    font-size: 20px;
+    text-align: center;
+}
+
+.revenue .separator-unit h2 {
+    text-align: center;
+    margin: 8px 0;
+    font-family: "Jost Medium";
+    font-size: 20px;
+}
+.featured-map-container .separator-unit,
+.location-map .separator-unit,
+.revenue .separator-unit {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-gap: 16px;
+    align-items: center;
+    margin: 0 16px;
+}
+.featured-map-container .separator-unit .partial-separator,
+.location-map .separator-unit .partial-separator,
+.revenue .separator-unit .partial-separator {
+    background-color: #a9b6c6;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+}
+
 .featured-map-container h2,
-.location-map h2,
-.revenue h2 {
+.location-map h2 {
     text-align: center;
     margin: 0 0 12px 0;
+    font-family: "Jost Medium";
+    font-size: 20px;
 }
 
 .about {
@@ -266,17 +312,14 @@
     overflow: hidden scroll;
 }
 
-.about .scroll-box {
-    overflow: hidden scroll;
-    max-height: 300px;
-    padding-bottom: 40px;
-    margin: 32px 30px 0 30px;
+.about .entity-details-text {
+    margin: 32px 16px 16px;
 }
 
 .about .gradient {
-    height: 40px;
+    height: 32px;
     background: linear-gradient(#0f193800 0%, #0f1938);
-    transform: translateY(-40px);
+    transform: translateY(-32px);
 }
 
 .about .scroll-box::-webkit-scrollbar {
@@ -284,5 +327,5 @@
 }
 
 .tab-content-container .owned-products-tab {
-    padding: 28px 20px;
+    padding: 28px 16px;
 }
