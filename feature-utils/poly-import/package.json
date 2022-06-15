@@ -6,8 +6,5 @@
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "test": "jest --coverage"
-  },
-  "dependencies": {
-    "react": "^17.0.2"
   }
 }
