@@ -2,6 +2,14 @@ import { Status, statusTypes } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
 import { ZipFile } from "./storage";
 
+export class Importer {
+    async import({ zipFile, dataAccount, pod }) {
+        throw new Error(
+            `Calling abstract base class with ${zipFile}, ${dataAccount}, ${pod}`
+        );
+    }
+}
+
 class ImporterExecutionResult {
     constructor(importer, status, executionTime) {
         this._importer = importer;
