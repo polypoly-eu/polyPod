@@ -9,7 +9,7 @@ class OnboardingTest: XCTestCase {
     
     func testOnboardingShowsUpOnFirstRun() {
         launchApp(firstRun: true)
-        assertOnboardingCloseButtonShown()
+        assertOnboardingIsShown()
     }
 
     private func launchApp(firstRun: Bool = false, resetDefaults: Bool = true) {
@@ -27,14 +27,14 @@ class OnboardingTest: XCTestCase {
         app.launch()
     }
 
-    private func assertOnboardingCloseButtonShown() {
+    private func assertOnboardingIsShown() {
         XCTAssertTrue(
-            findOnboardingCloseButton().exists,
+            onboardingView().exists,
             "Onboarding was supposed to be shown"
         )
     }
     
-    private func findOnboardingCloseButton() -> XCUIElement {
-        return app.buttons["app_bar_button_close_desc"]
+    private func onboardingView() -> XCUIElement {
+        return app.otherElements["onboarding_view"]
     }
 }

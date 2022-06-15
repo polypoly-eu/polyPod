@@ -13,7 +13,7 @@ struct OnboardingView: View {
             NavigationBar(
                 leading: Button(action: closeAction) {
                     Image("NavIconCloseDark").renderingMode(.original)
-                }.accessibilityIdentifier("app_bar_close_button_desc")
+                }
             )
             
             PageViewController(activeIndex: $activeSlide, views: slides)
@@ -26,6 +26,7 @@ struct OnboardingView: View {
             }
         }
         .background(Color.PolyPod.lightBackground)
+        .accessibilityIdentifier("onboarding_view")
     }
     
     private func createSlides() -> [Slide] {
