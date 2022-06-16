@@ -3,6 +3,7 @@
 //import ActivityByProductAnalysis from "./ministories/activity-by-products.js";
 import ActivitiesOverTimeAnalysis from "./ministories/activities-over-time.js";
 import ReportMetadataAnalysis from "./ministories/report-metadata.js";
+import ReportActivities from "./ministories/report-activities.js";
 
 export const specificAnalyses = [
     //PlaceVisitsAnalysis,
@@ -10,4 +11,5 @@ export const specificAnalyses = [
     //ActivityByProductAnalysis,
     ActivitiesOverTimeAnalysis,
     ReportMetadataAnalysis,
+    ReportActivities,
 ];
