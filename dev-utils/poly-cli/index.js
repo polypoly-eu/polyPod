@@ -5,7 +5,7 @@ import { hideBin } from "yargs/helpers";
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
     .command(
-        "create <what>",
+        "create <what> [type]",
         "Creates features for now. Use create feature to start creating one.",
         (yargs) => {
             yargs.positional("what", {
@@ -14,6 +14,12 @@ yargs(hideBin(process.argv))
                 describe:
                     "-> the kind of thing you want poly-cli to create for you. Options: feature",
             });
+
+            yargs.positional("type", {
+                type: "string",
+                default: "empty",
+                describe: "-> the type of feature: empty, preview, or importer",
+            });
         },
         handleCreate
     )
@@ -21,11 +27,13 @@ yargs(hideBin(process.argv))
 
 function handleCreate(arg) {
     if (arg.what === "feature") {
-        handleCreateFeature();
+        handleCreateFeature(arg.type);
     }
 }
 
-function handleCreateFeature() {
+function handleCreateFeature(type) {
     console.log(chalk.bold.blue("🚧 Creating Feature 🚧"));
-    console.log("🏗");
+    console.log(
+        chalk.white("🏗  Feature Type:", chalk.red.italic.underline(type), "🏗")
+    );
 }
