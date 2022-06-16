@@ -1,6 +1,8 @@
 import chalk from "chalk";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
+import fs, { existsSync, mkdir, mkdirSync, writeFileSync } from "fs";
+import path from "path";
 
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
@@ -52,8 +54,57 @@ function handleCreateFeature(type) {
     }
 }
 
-function handleCreateEmptyFeature() {}
+function handleCreateEmptyFeature() {
+    // TODO
+    // Create project structure: src, test
+    // Create files: index.js, package.json, rollup, manifest.json.
+
+    let dependencies = ["rollup"];
+
+    let feature_name = "test_feature";
+
+    // folders are keys, strings are files.
+    var structure = {};
+
+    structure[feature_name] = [
+        { src: ["index.js"] },
+        { test: [] },
+        "package.json",
+        "manifest.json",
+        "rollup.config.mjs",
+        "README.md",
+    ];
+
+    if (existsSync(`./${feature_name}`)) {
+        console.log(
+            chalk.red.bold.underline(
+                "🛑 Feature already exists in this folder. Aborting! 🛑"
+            )
+        );
+        return;
+    }
+
+    createDirectoryStructure(structure, ".");
+}
 
 function handleCreatePreviewFeature() {}
 
 function handleCreateImporterFeature() {}
+
+function createDirectoryStructure(structure, parent) {
+    for (let key of Object.keys(structure)) {
+        let dir = parent + "/" + key;
+
+        if (!existsSync(dir)) {
+            mkdirSync(dir);
+        }
+
+        for (let child of structure[key]) {
+            if (typeof child === "object") {
+                createDirectoryStructure(child, dir);
+            } else if (typeof child === "string") {
+                writeFileSync(dir + "/" + child, "");
+            }
+        }
+    }
+}
