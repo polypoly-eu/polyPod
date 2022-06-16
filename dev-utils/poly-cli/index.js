@@ -1,7 +1,7 @@
 const yargs = require("yargs");
 const { hideBin } = require("yargs/helpers");
 
-const argv = yargs(hideBin(process.argv))
+yargs(hideBin(process.argv))
     .scriptName("poly-cli")
     .command(
         "create <what>",
