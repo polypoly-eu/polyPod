@@ -36,4 +36,24 @@ function handleCreateFeature(type) {
     console.log(
         chalk.white("🏗  Feature Type:", chalk.red.italic.underline(type), "🏗")
     );
+
+    if (type === "empty") {
+        handleCreateEmptyFeature();
+    } else if (type === "preview") {
+        handleCreatePreviewFeature();
+    } else if (type === "importer") {
+        handleCreateImporterFeature();
+    } else {
+        console.log(
+            chalk.red.bold.underline(
+                "🛑 Feature type not recognized. Aborting! 🛑"
+            )
+        );
+    }
 }
+
+function handleCreateEmptyFeature() {}
+
+function handleCreatePreviewFeature() {}
+
+function handleCreateImporterFeature() {}
