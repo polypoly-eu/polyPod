@@ -2,6 +2,7 @@ import chalk from "chalk";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { execSync } from "child_process";
 
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
@@ -58,9 +59,11 @@ function handleCreateEmptyFeature() {
     // Create project structure: src, test
     // Create files: index.js, package.json, rollup, manifest.json.
 
-    // add dependencies in package.json and then run npm install
-    // or just run npm install with the list of deps after you have created the structure?
-    // let dependencies = ["rollup"];
+    // TEMPLATES
+    // package.json needs to use rollup -c for the build script.
+    // author will be passed as input, as well as the license.
+
+    let dependencies = ["rollup"];
 
     let feature_name = "test_feature";
 
@@ -70,7 +73,7 @@ function handleCreateEmptyFeature() {
     structure[feature_name] = [
         { src: ["index.js"] },
         { test: [] },
-        "package.json",
+        //"package.json",
         "manifest.json",
         "rollup.config.mjs",
         "README.md",
@@ -86,6 +89,12 @@ function handleCreateEmptyFeature() {
     }
 
     createDirectoryStructure(structure, ".");
+    execSync(
+        `cd ${feature_name} && npm init -y && npm install ${dependencies.reduce(
+            (a, b) => a + " " + b,
+            ""
+        )}`
+    );
 }
 
 function handleCreatePreviewFeature() {}
