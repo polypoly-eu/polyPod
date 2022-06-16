@@ -1,5 +1,6 @@
-const yargs = require("yargs");
-const { hideBin } = require("yargs/helpers");
+import chalk from "chalk";
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
 
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
@@ -11,7 +12,7 @@ yargs(hideBin(process.argv))
                 type: "string",
                 default: "feature",
                 describe:
-                    "the kind of thing you want poly-cli to create for you.",
+                    "-> the kind of thing you want poly-cli to create for you. Options: feature",
             });
         },
         handleCreate
@@ -19,5 +20,12 @@ yargs(hideBin(process.argv))
     .help().argv;
 
 function handleCreate(arg) {
-    console.log("Creating", arg.what);
+    if (arg.what === "feature") {
+        handleCreateFeature();
+    }
+}
+
+function handleCreateFeature() {
+    console.log(chalk.bold.blue("🚧 Creating Feature 🚧"));
+    console.log("🏗");
 }
