@@ -1,4 +1,13 @@
-use crate::flatbuffers_generated::failure::FailureCode;
+#[derive(Debug, Clone)]
+pub enum FailureCode {
+    CoreNotBootstrapped = 1,
+    CoreAlreadyBootstrapped,
+    FailedToParseFeatureManifest,
+    NullCStringPointer,
+    FailedToCreateCString,
+    FailedToExtractJavaString,
+    FailedToConvertJavaString,
+}
 
 #[derive(Debug, Clone)]
 pub struct CoreFailure {
