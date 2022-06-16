@@ -4,7 +4,6 @@ import analysisKeys from "../../model/analyses/analysisKeys.js";
 
 import i18n from "!silly-i18n";
 
-
 class DataImportingStatusReport extends ReportStory {
     constructor(props) {
         super(props);
