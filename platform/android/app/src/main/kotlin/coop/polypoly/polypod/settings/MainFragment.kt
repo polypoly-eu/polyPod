@@ -53,10 +53,10 @@ class MainFragment : PreferenceFragmentCompat() {
             }
     }
 
-    private fun onAuthRequest(newStatus: Boolean, onReturn: () -> Unit) {
+    private fun onAuthRequest(showAuthTexts: Boolean, onReturn: () -> Unit) {
         Authentication.setUp(
             requireActivity(),
-            newStatus
+            showAuthTexts
         ) {
             onReturn()
             true

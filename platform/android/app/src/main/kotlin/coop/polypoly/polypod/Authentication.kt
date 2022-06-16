@@ -30,14 +30,14 @@ class Authentication {
 
         fun setUp(
             activity: FragmentActivity,
-            newStatus: Boolean,
+            showAuthTexts: Boolean,
             setupComplete: () -> Unit
         ) {
-            authenticate(activity, newStatus) { success ->
+            authenticate(activity, showAuthTexts) { success ->
                 if (success) {
                     Preferences.setBiometricEnabled(
                         activity,
-                        newStatus
+                        showAuthTexts
                     )
                 }
                 setupComplete()
@@ -46,29 +46,28 @@ class Authentication {
 
         fun authenticate(
             activity: FragmentActivity,
-            newStatus: Boolean = false,
+            showAuthTexts: Boolean = false,
             authComplete: ((Boolean) -> Unit)
         ) {
             val isBiometricEnabled = Preferences.isBiometricEnabled(activity)
             if (!biometricsAvailable(activity) ||
-                (!newStatus && !isBiometricEnabled)
+                (!showAuthTexts && !isBiometricEnabled)
             ) {
                 authComplete(true)
                 return
             }
 
             val title =
-                // auth is enabled and the user is trying to disable the setting
-                if (isBiometricEnabled && !newStatus)
-                    activity.getString(R.string.re_auth_prompt_title)
-                else
+                if (showAuthTexts)
                     activity.getString(R.string.auth_prompt_title)
+                else
+                    activity.getString(R.string.re_auth_prompt_title)
 
             val subtitle =
-                if (isBiometricEnabled)
-                    activity.getString(R.string.re_auth_prompt_subtitle)
-                else
+                if (showAuthTexts)
                     activity.getString(R.string.auth_prompt_subtitle)
+                else
+                    activity.getString(R.string.re_auth_prompt_subtitle)
 
             val promptInfo = BiometricPrompt.PromptInfo.Builder()
                 .setTitle(title)

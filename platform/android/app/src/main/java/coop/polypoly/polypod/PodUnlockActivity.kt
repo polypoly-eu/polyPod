@@ -21,7 +21,7 @@ class PodUnlockActivity : AppCompatActivity() {
     }
 
     private fun authenticate() {
-        Authentication.authenticate(this, newStatus = false) {
+        Authentication.authenticate(this, showAuthTexts = true) {
             if (it) {
                 finish()
             }
