@@ -1,8 +1,7 @@
 import chalk from "chalk";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import fs, { existsSync, mkdir, mkdirSync, writeFileSync } from "fs";
-import path from "path";
+import { existsSync, mkdirSync, writeFileSync } from "fs";
 
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
@@ -59,7 +58,9 @@ function handleCreateEmptyFeature() {
     // Create project structure: src, test
     // Create files: index.js, package.json, rollup, manifest.json.
 
-    let dependencies = ["rollup"];
+    // add dependencies in package.json and then run npm install
+    // or just run npm install with the list of deps after you have created the structure?
+    // let dependencies = ["rollup"];
 
     let feature_name = "test_feature";
 
