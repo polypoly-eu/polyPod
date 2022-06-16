@@ -2,6 +2,7 @@ import "./awakeningLocationMinistory.css";
 import React, { useState } from "react";
 import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
 import i18n from "!silly-i18n";
+import ListOfDetails from "../listOfDetails/listOfDetails.jsx";
 
 export const AwakeningLocationSummary = ({ dateData }) => {
     const defaultDate = Object.entries(dateData).find(
@@ -17,7 +18,6 @@ export const AwakeningLocationSummary = ({ dateData }) => {
             .map((e) => parseInt(e))
             .join("-");
         setSelectedDate(formattedDate);
-        console.log(formattedDate);
     };
     //could be used to make the text more human later on
     // const week = [
@@ -84,10 +84,6 @@ export const AwakeningLocationSummary = ({ dateData }) => {
                     <p>{i18n.t("awakeningLocation:notFound")}</p>
                 </>
             )}
-            <SourceInfoButton
-                source={i18n.t("common:your.google.data")}
-                popUpProps={{ name: "info-awakening-location" }}
-            />
         </div>
     );
 };
@@ -102,15 +98,27 @@ export const AwakeningLocationDetails = ({ dateData }) => {
     };
 
     const allDataEntries = Object.entries(dateData).map((entry) => {
-        return {
+        const dataObj = {
             date: entry[0],
             location: entry[1].location.locationName,
             time: entry[1].firstActivity ? formatTime(entry[1]) : null,
         };
+        return {
+            primary: dataObj.date,
+            secondary: [dataObj.time, dataObj.location],
+        };
     });
 
     return (
-        <div className="awakening-location-ministory-details ">
+        <div
+            style={{
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                height: "100%",
+            }}
+            className="awakening-location-ministory-details "
+        >
             <p
                 dangerouslySetInnerHTML={{
                     __html: i18n.t("awakeningLocation:detail", {
@@ -121,15 +129,11 @@ export const AwakeningLocationDetails = ({ dateData }) => {
             <p>{i18n.t("awakeningLocation:detail2")}</p>
             <p>{i18n.t("awakeningLocation:detail3")}</p>
             <p>{i18n.t("awakeningLocation:detail4")}</p>
-            {allDataEntries.map((dataEntry, i) => {
-                return (
-                    <div key={i}>
-                        <p>{dataEntry.date}</p>
-                        {dataEntry.time ? <p>{dataEntry.time}</p> : null}
-                        <p>{dataEntry.location}</p>
-                    </div>
-                );
-            })}
+            <ListOfDetails list={allDataEntries} />
+            <SourceInfoButton
+                source={i18n.t("common:your.google.data")}
+                popUpProps={{ name: "info-awakening-location" }}
+            />
         </div>
     );
 };
