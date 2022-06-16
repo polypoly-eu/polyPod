@@ -54,10 +54,21 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
     
     private static func mapToCards(_ features: [Feature]) -> [Card] {
         features.map { feature in
-            Card(id: feature.id,
+            
+            let image: UIImage
+            
+            if feature.thumbnail?.isPDF() == true {
+                image = UIImage.fromPDF(url: feature.thumbnail) ?? UIImage()
+            } else if feature.thumbnail?.isPNG() == true {
+                image = UIImage(contentsOfFile: feature.thumbnail?.path ?? "") ?? UIImage()
+            } else {
+                image = UIImage()
+            }
+            
+            return Card(id: feature.id,
                  title: feature.name,
                  description: feature.description ?? "",
-                 image: UIImage(contentsOfFile: feature.thumbnail?.path ?? "") ?? UIImage(),
+                 image: image,
                  backgroundColor: feature.thumbnailColor ?? .white)
         }
     }
