@@ -1,6 +1,7 @@
 import React from "react";
 import ReportStory from "./reportStory.jsx";
 import analysisKeys from "../../model/analyses/analysisKeys.js";
+import i18n from "!silly-i18n";
 
 class ActivitiesReport extends ReportStory {
     constructor(props) {
@@ -9,7 +10,7 @@ class ActivitiesReport extends ReportStory {
     }
 
     get title() {
-        return "Importing status";
+        return i18n.t("report:status");
     }
 
     get reportData() {
@@ -20,14 +21,15 @@ class ActivitiesReport extends ReportStory {
         return (
             <>
                 <p>
-                    Google has recorded {this.reportData.length} types of
-                    activities.
+                    {i18n.t("activitiesReport:number.activities", {
+                        number_activities: this.reportData.length,
+                    })}
                 </p>
                 <table>
                     <thead>
                         <tr>
-                            <th>Activity Name</th>
-                            <th>File Size</th>
+                            <th>{i18n.t("activitiesReport:activity.name")}</th>
+                            <th>{i18n.t("activitiesReport:file.size")}</th>
                         </tr>
                     </thead>
                     <tbody>
