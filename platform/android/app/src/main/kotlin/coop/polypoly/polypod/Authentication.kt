@@ -58,7 +58,8 @@ class Authentication {
             }
 
             val title =
-                if (isBiometricEnabled)
+                // auth is enabled and the user is trying to disable the setting
+                if (isBiometricEnabled && !newStatus)
                     activity.getString(R.string.re_auth_prompt_title)
                 else
                     activity.getString(R.string.auth_prompt_title)
