@@ -42,9 +42,9 @@ open class PolyOut(
             }
             val activeFeatureId = FeatureStorage.activeFeatureId
             val pureId = pureId(id)
-            val filePath = filesPath(context) + "/" + activeFeatureId +
+
+            return filesPath(context) + "/" + activeFeatureId +
                 "/" + pureId
-            return filePath
         }
     }
 
@@ -117,16 +117,11 @@ open class PolyOut(
         id: String
     ): Array<Map<String, String>> {
         val fs = Preferences.getFileSystem(context)
-        System.out.println("ENTERING READDIR")
         if (id == "") {
             val newFs = fs.filter {
-                val filePath = idToPath(it.key, context);
-                val file = File(filePath);
-                file.exists();
+                File(idToPath(it.key, context)).exists()
             }
-            val oldFileSystem = Preferences.getFileSystem(context);
             Preferences.setFileSystem(context, newFs)
-            val currentFileSystem = Preferences.getFileSystem(context)
             return newFs.keys.map {
                 mutableMapOf<String, String>(
                     "id" to it,
