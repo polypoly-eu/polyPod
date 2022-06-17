@@ -56,6 +56,8 @@ export const PolyImportProvider = ({
     const storage = new FeatureFileStorage(pod);
     storage.changeListener = async () => {
       const resolvedFiles = [];
+      console.log("FILES");
+      console.log(storage.files);
       for (const file of storage.files) {
         resolvedFiles.push(await file);
       }

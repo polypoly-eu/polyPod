@@ -21,6 +21,7 @@ export class FeatureFileStorage {
     }
 
     async readFile(path) {
+        console.log("READ FILE");
         const { polyOut } = this._pod;
         return polyOut.readFile(path);
     }
