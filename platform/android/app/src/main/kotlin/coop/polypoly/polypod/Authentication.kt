@@ -31,9 +31,14 @@ class Authentication {
         fun setUp(
             activity: FragmentActivity,
             showAuthTexts: Boolean,
+            newBiometricState: Boolean = false,
             setupComplete: () -> Unit
         ) {
-            authenticate(activity, showAuthTexts) { success ->
+            authenticate(
+                activity,
+                showAuthTexts,
+                newBiometricState
+            ) { success ->
                 if (success) {
                     Preferences.setBiometricEnabled(
                         activity,
@@ -47,11 +52,12 @@ class Authentication {
         fun authenticate(
             activity: FragmentActivity,
             showAuthTexts: Boolean = false,
+            newBiometricState: Boolean = false,
             authComplete: ((Boolean) -> Unit)
         ) {
             val isBiometricEnabled = Preferences.isBiometricEnabled(activity)
             if (!biometricsAvailable(activity) ||
-                (!showAuthTexts && !isBiometricEnabled)
+                (!newBiometricState && !isBiometricEnabled)
             ) {
                 authComplete(true)
                 return

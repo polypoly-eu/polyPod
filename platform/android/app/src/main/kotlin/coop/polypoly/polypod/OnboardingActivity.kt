@@ -73,7 +73,11 @@ class OnboardingActivity : AppCompatActivity() {
                 )
                 button.visibility = View.VISIBLE
                 button.setOnClickListener {
-                    Authentication.setUp(this, showAuthTexts = true) {
+                    Authentication.setUp(
+                        this,
+                        showAuthTexts = true,
+                        newBiometricState = true
+                    ) {
                         close()
                     }
                 }
