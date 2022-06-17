@@ -160,11 +160,11 @@ function handleCreateEmptyFeature() {
 }
 
 function handleCreatePreviewFeature() {
-    console.log(chalk.red.bold(`🚧 UNDER CONSTRUCTION 🚧`));
+    console.log(chalk.yellow.bold(`🚧 UNDER CONSTRUCTION 🚧`));
 }
 
 function handleCreateImporterFeature() {
-    console.log(chalk.red.bold(`🚧 UNDER CONSTRUCTION 🚧`));
+    console.log(chalk.yellow.bold(`🚧 UNDER CONSTRUCTION 🚧`));
 }
 
 function createDirectoryStructure(structure, parent, templates) {
