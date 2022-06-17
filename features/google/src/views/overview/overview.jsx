@@ -8,7 +8,7 @@ import {
     PolyChart,
     INITIAL_HISTORY_STATE,
 } from "@polypoly-eu/poly-look";
-import { L12n } from "@polypoly-eu/silly-i18n/src/l12n";
+import { L12n } from "@polypoly-eu/silly-i18n";
 
 import { useHistory } from "react-router-dom";
 import i18n from "!silly-i18n";

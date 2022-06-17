@@ -9,6 +9,7 @@ export default class GoogleAccount extends DataAccount {
         this.pathNames = [];
         this.accessLog = [];
         this.accessLogSummary = [];
+        this.activityFileInfo = [];
     }
 
     get dataGroups() {
