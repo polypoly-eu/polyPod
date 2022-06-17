@@ -5,4 +5,6 @@ export default {
     activitiesOverTime: "activitiesOverTime",
     reportMetadataAnalysis: "reportMetadataAnalysis",
     awakeningAnalysis: "awakeningAnalysis",
+    reportActivities: "reportActivities",
+    importersData: "importersData",
 };

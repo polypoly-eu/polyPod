@@ -11,7 +11,7 @@ export default class ActivitiesOverTimeAnalysis extends RootAnalysis {
             activities.map(({ timestamp }) => timestamp)
         );
 
-        if (Object.keys(activities).length > 0)
+        if (Object.keys(groupedActivities).length > 0)
             googleAccount.analyses[analysisKeys.activitiesOverTime] =
                 groupedActivities;
     }
