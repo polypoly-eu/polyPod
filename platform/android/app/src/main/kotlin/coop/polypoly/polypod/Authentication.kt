@@ -30,7 +30,7 @@ class Authentication {
 
         fun setUp(
             activity: FragmentActivity,
-            showAuthTexts: Boolean,
+            showAuthTexts: Boolean = false,
             newBiometricState: Boolean = false,
             setupComplete: () -> Unit
         ) {
@@ -42,7 +42,7 @@ class Authentication {
                 if (success) {
                     Preferences.setBiometricEnabled(
                         activity,
-                        showAuthTexts
+                        newBiometricState
                     )
                 }
                 setupComplete()
