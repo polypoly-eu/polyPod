@@ -14,7 +14,6 @@
     "@polypoly-eu/pod-api": "file:../../platform/feature-api/api/pod-api",
     "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
-    "moment": "^2.29.3",
     "rollup-plugin-serve": "^1.1.0"
   },
   "private": true,

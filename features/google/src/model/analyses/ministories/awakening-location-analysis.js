@@ -1,6 +1,5 @@
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 import analysisKeys from "../analysisKeys";
-import moment from "moment";
 
 const MIN_MORNING = 5;
 const MAX_MORNING = 10;
@@ -35,9 +34,10 @@ export default class AwakeningLocationAnalysis extends RootAnalysis {
     }
 
     getDateDiff(startDate, endDate) {
-        const momentStart = moment(startDate).startOf("day");
-        const momentEnd = moment(endDate).startOf("day");
-        return momentEnd.diff(momentStart, "days");
+        const dateStart = new Date(startDate).setHours(0, 0, 0, 0);
+        const dateEnd = new Date(endDate).setHours(0, 0, 0, 0);
+        const unixTimeDiff = dateEnd - dateStart;
+        return unixTimeDiff / (24 * 60 * 60 * 1000);
     }
 
     isMorningLocation(location) {
