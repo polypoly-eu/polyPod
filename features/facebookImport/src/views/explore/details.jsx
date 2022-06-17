@@ -16,7 +16,7 @@ const ExploreDetails = () => {
     });
     return (
         <Screen className="details-view" layout="poly-standard-layout">
-            <h2>{activeStory.title}</h2>
+            <h1>{activeStory.title}</h1>
             {activeStory.render()}
         </Screen>
     );

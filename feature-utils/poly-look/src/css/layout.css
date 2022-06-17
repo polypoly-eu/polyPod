@@ -11,7 +11,7 @@
   margin-top: calc(var(--gdu) * 6);
 }
 
-.poly-standard-layout h2 {
+.poly-standard-layout h1 {
   font-family: var(--jost-medium);
   font-size: var(--font-size-xl);
 }

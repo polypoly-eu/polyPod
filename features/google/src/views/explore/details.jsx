@@ -12,7 +12,7 @@ const DetailsView = () => {
     });
     return (
         <Screen className="details" layout="poly-standard-layout">
-            <h2>{story.title}</h2>
+            <h1>{story.title}</h1>
             {story && story.render()}
         </Screen>
     );
