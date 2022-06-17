@@ -3,6 +3,8 @@ import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { execSync } from "child_process";
+import inquirer from "inquirer";
+import { template as packageTemplate } from "./templates/package.js";
 
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
@@ -63,45 +65,89 @@ function handleCreateEmptyFeature() {
     // package.json needs to use rollup -c for the build script.
     // author will be passed as input, as well as the license.
 
-    let dependencies = ["rollup"];
+    const setup = (feature_name) => {
+        let dependencies = ["rollup"];
+        // folders are keys, files are strings.
+        var structure = {};
 
-    let feature_name = "test_feature";
+        structure[feature_name] = [
+            { src: ["index.js"] },
+            { test: [] },
+            "package.json",
+            "manifest.json",
+            "rollup.config.mjs",
+            "README.md",
+        ];
 
-    // folders are keys, strings are files.
-    var structure = {};
+        let templates = {
+            "package.json": packageTemplate(
+                feature_name,
+                "1.0.0",
+                "empty feature",
+                "src/index.js",
+                "polypoly",
+                "MIT"
+            ),
+        };
 
-    structure[feature_name] = [
-        { src: ["index.js"] },
-        { test: [] },
-        //"package.json",
-        "manifest.json",
-        "rollup.config.mjs",
-        "README.md",
+        if (existsSync(`./${feature_name}`)) {
+            console.log(
+                chalk.red.bold.underline(
+                    "🛑 Feature already exists in this folder. Aborting! 🛑"
+                )
+            );
+            return;
+        }
+
+        createDirectoryStructure(structure, ".", templates);
+
+        // execSync(
+        //     `cd ${feature_name} && npm init -y && npm install ${dependencies.reduce(
+        //         (a, b) => a + " " + b,
+        //         ""
+        //     )}`
+        // );
+    };
+
+    const setup_questions = [
+        {
+            type: "input",
+            name: "feature_name",
+            message: "Feature Name:",
+            default: "example",
+        },
     ];
 
-    if (existsSync(`./${feature_name}`)) {
-        console.log(
-            chalk.red.bold.underline(
-                "🛑 Feature already exists in this folder. Aborting! 🛑"
-            )
-        );
-        return;
-    }
+    inquirer
+        .prompt(setup_questions)
+        .then((answers) => {
+            if (!"feature_name" in answers) {
+                console.log(
+                    chalk.red.bold.underline(
+                        "🛑 Developer error: You need to get feature_name from the inquirer answers. 🛑"
+                    )
+                );
+                return;
+            }
 
-    createDirectoryStructure(structure, ".");
-    execSync(
-        `cd ${feature_name} && npm init -y && npm install ${dependencies.reduce(
-            (a, b) => a + " " + b,
-            ""
-        )}`
-    );
+            let feature_name = answers.feature_name;
+
+            setup(feature_name);
+        })
+        .catch((error) => {
+            if (error.isTtyError) {
+                // Prompt couldn't be rendered in the current environment
+            } else {
+                // Something else went wrong
+            }
+        });
 }
 
 function handleCreatePreviewFeature() {}
 
 function handleCreateImporterFeature() {}
 
-function createDirectoryStructure(structure, parent) {
+function createDirectoryStructure(structure, parent, templates) {
     for (let key of Object.keys(structure)) {
         let dir = parent + "/" + key;
 
@@ -111,9 +157,13 @@ function createDirectoryStructure(structure, parent) {
 
         for (let child of structure[key]) {
             if (typeof child === "object") {
-                createDirectoryStructure(child, dir);
+                createDirectoryStructure(child, dir, templates);
             } else if (typeof child === "string") {
-                writeFileSync(dir + "/" + child, "");
+                var content = "";
+                if (templates.hasOwnProperty(child)) {
+                    content = templates[child];
+                }
+                writeFileSync(dir + "/" + child, content);
             }
         }
     }
