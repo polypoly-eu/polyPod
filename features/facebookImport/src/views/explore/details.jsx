@@ -15,7 +15,7 @@ const ExploreDetails = () => {
         mode: Story.MODES.DETAILS,
     });
     return (
-        <Screen className="details" layout="poly-standard-layout">
+        <Screen className="details-view" layout="poly-standard-layout">
             <h2>{activeStory.title}</h2>
             {activeStory.render()}
         </Screen>
