@@ -159,9 +159,13 @@ function handleCreateEmptyFeature() {
         });
 }
 
-function handleCreatePreviewFeature() {}
+function handleCreatePreviewFeature() {
+    console.log(chalk.red.bold(`🚧 UNDER CONSTRUCTION 🚧`));
+}
 
-function handleCreateImporterFeature() {}
+function handleCreateImporterFeature() {
+    console.log(chalk.red.bold(`🚧 UNDER CONSTRUCTION 🚧`));
+}
 
 function createDirectoryStructure(structure, parent, templates) {
     for (let key of Object.keys(structure)) {
