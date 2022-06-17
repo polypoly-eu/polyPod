@@ -10,8 +10,3 @@
 .poly-standard-layout > :first-child {
   margin-top: calc(var(--gdu) * 6);
 }
-
-.poly-standard-layout h2 {
-  font-family: var(--jost-medium);
-  font-size: var(--font-size-xl);
-}
