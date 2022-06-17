@@ -1,6 +1,7 @@
+import babel from "@rollup/plugin-babel";
+import refresh from "rollup-plugin-react-refresh";
 import resolve from "@rollup/plugin-node-resolve";
 import copy from "@polypoly-eu/rollup-plugin-copy-watch";
-import sucrase from "@rollup/plugin-sucrase";
 import css from "rollup-plugin-css-only";
 import commonjs from "@rollup/plugin-commonjs";
 import serve from "rollup-plugin-serve";
@@ -27,10 +28,7 @@ export default (commandLineArgs) => {
             sillyI18n(),
             svg(),
             css({ output: "css/bundle.css" }),
-            sucrase({
-                transforms: ["jsx"],
-                production: true,
-            }),
+            babel.babel({ babelHelpers: "bundled" }),
             genPodjs({
                 build_dir: "./dist",
                 manifestPath: "./src/static/manifest.json",
@@ -69,7 +67,9 @@ export default (commandLineArgs) => {
                 preventAssignment: true,
                 "process.env.NODE_ENV": JSON.stringify("development"),
             }),
-            commandLineArgs.configServe ? serve("dist") : null,
+            // nollup doesn't support command line arguments
+            commandLineArgs?.configServe ? serve("dist") : null,
+            refresh(),
         ],
         external: Object.keys(externalPackages),
         onwarn: (warning) => {
