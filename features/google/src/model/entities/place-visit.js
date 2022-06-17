@@ -20,11 +20,11 @@ export default class PlaceVisit extends TimelineEvent {
     }
 
     get unixStartTimestamp() {
-        return this.timestamp;
+        return this.timestamp.getTime() || this.timestamp;
     }
 
     get unixEndTimestamp() {
-        return this._endTimestamp;
+        return this._endTimestamp.getTime() || this._timestamp;
     }
 
     get unixDuration() {

@@ -5,9 +5,10 @@ import i18n from "!silly-i18n";
 import ListOfDetails from "../listOfDetails/listOfDetails.jsx";
 
 export const AwakeningLocationSummary = ({ dateData }) => {
-    const defaultDate = Object.entries(dateData).find(
-        (entry) => !!entry[1].firstActivity
-    )[0];
+    const defaultDate =
+        Object.entries(dateData).find(
+            (entry) => !!entry[1].firstActivity
+        )?.[0] || Object.keys(dateData)[0];
     const [selectedDate, setSelectedDate] = useState(defaultDate);
     const data = dateData[selectedDate];
     const dateSelection = false;

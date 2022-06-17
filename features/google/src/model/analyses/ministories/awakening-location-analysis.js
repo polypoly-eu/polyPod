@@ -80,20 +80,21 @@ export default class AwakeningLocationAnalysis extends RootAnalysis {
         let dateDataObject = {};
         const locationTimeline = googleAccount.placeVisits;
         const activityTimeline = googleAccount.activities;
-        locationTimeline.forEach((location) => {
+        locationTimeline?.forEach((location) => {
             if (!location.locationName) return;
             const newDateData = this.isMorningLocation(location);
             if (newDateData)
                 dateDataObject = { ...dateDataObject, ...newDateData };
         });
         // Narrow down activities that happened in the morning
-        const morningActivities = activityTimeline.filter(
+
+        const morningActivities = activityTimeline?.filter(
             (activity) =>
                 activity.timestamp.getHours() > MIN_MORNING &&
                 activity.timestamp.getHours() < MAX_MORNING
         );
 
-        morningActivities.forEach((activity) => {
+        morningActivities?.forEach((activity) => {
             const activityDateString = this.convertToDateString(
                 activity.timestamp
             );
@@ -111,6 +112,7 @@ export default class AwakeningLocationAnalysis extends RootAnalysis {
                 ),
             };
         });
+
         if (Object.keys(dateDataObject).length > 0)
             googleAccount.analyses[analysisKeys.awakeningAnalysis] =
                 dateDataObject;
