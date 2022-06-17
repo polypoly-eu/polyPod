@@ -35,6 +35,12 @@ yargs(hideBin(process.argv))
 function handleCreate(arg) {
     if (arg.what === "feature") {
         handleCreateFeature(arg.type);
+    } else {
+        console.log(
+            chalk.bold.yellow(
+                `🚧 Sorry, I can't create this for you. Try: create feature instead. 🚧`
+            )
+        );
     }
 }
 
@@ -200,7 +206,7 @@ function checkIfValueExists(value, obj) {
     if (!(value in obj)) {
         console.log(
             chalk.red.bold.underline(
-                "🛑 Developer error: You need to get feature_name from the inquirer answers. 🛑"
+                `🛑 Developer error: ${value} does not exist! 🛑`
             )
         );
         throw Error("Dev error");
