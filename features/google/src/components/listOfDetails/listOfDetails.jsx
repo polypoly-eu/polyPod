@@ -24,7 +24,7 @@ const ListOfDetails = ({ list }) => {
                         <li key={index}>
                             <span className="items">{item.primary}</span>
                             {item.secondary.map((secondary, i) => (
-                                <p key={i}>{secondary}</p>
+                                <div key={i}>{secondary}</div>
                             ))}
                         </li>
                     );
