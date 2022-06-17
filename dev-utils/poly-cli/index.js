@@ -57,14 +57,6 @@ function handleCreateFeature(type) {
 }
 
 function handleCreateEmptyFeature() {
-    // TODO
-    // Create project structure: src, test
-    // Create files: index.js, package.json, rollup, manifest.json.
-
-    // TEMPLATES
-    // package.json needs to use rollup -c for the build script.
-    // author will be passed as input, as well as the license.
-
     const setup = (feature_name, author, version, description, license) => {
         let dependencies = ["rollup"];
         // folders are keys, files are strings.
@@ -159,11 +151,11 @@ function handleCreateEmptyFeature() {
             );
         })
         .catch((error) => {
-            if (error.isTtyError) {
-                // Prompt couldn't be rendered in the current environment
-            } else {
-                // Something else went wrong
-            }
+            console.log(
+                chalk.red.bold.underline(
+                    `🛑 Error: ${JSON.stringify(error, null, 4)} 🛑`
+                )
+            );
         });
 }
 
