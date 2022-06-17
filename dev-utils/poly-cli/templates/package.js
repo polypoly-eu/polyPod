@@ -9,6 +9,10 @@ export function template(name, version, description, main, author, license) {
             build: "rollup -c",
             test: 'echo "Error: no test specified" && exit 1',
         },
+        devDependencies: {
+            "@polypoly-eu/rollup-plugin-copy-watch":
+                "file:../../dev-utils/rollup-plugin-copy-watch",
+        },
         author: author,
         license: license,
     };

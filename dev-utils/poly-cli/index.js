@@ -7,6 +7,7 @@ import inquirer from "inquirer";
 import { template as packageTemplate } from "./templates/package.js";
 import { template as manifestTemplate } from "./templates/manifest.js";
 import { template as readmeTemplate } from "./templates/readme.js";
+import { template as rollupTemplate } from "./templates/rollup.js";
 
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
@@ -61,6 +62,7 @@ function handleCreateFeature(type) {
 function handleCreateEmptyFeature() {
     const setup = (feature_name, author, version, description, license) => {
         let dependencies = ["rollup"];
+
         // folders are keys, files are strings.
         var structure = {};
 
@@ -69,7 +71,7 @@ function handleCreateEmptyFeature() {
             { test: [] },
             "package.json",
             "manifest.json",
-            "rollup.config.mjs",
+            "rollup.config.js",
             "README.md",
         ];
 
@@ -84,6 +86,7 @@ function handleCreateEmptyFeature() {
             ),
             "manifest.json": manifestTemplate(feature_name, author),
             "README.md": readmeTemplate(feature_name, description),
+            "rollup.config.js": rollupTemplate(),
         };
 
         if (existsSync(`./${feature_name}`)) {
