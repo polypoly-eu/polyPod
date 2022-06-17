@@ -6,6 +6,7 @@ import { execSync } from "child_process";
 import inquirer from "inquirer";
 import { template as packageTemplate } from "./templates/package.js";
 import { template as manifestTemplate } from "./templates/manifest.js";
+import { template as readmeTemplate } from "./templates/readme.js";
 
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
@@ -82,6 +83,7 @@ function handleCreateEmptyFeature() {
                 license
             ),
             "manifest.json": manifestTemplate(feature_name, author),
+            "README.md": readmeTemplate(feature_name, description),
         };
 
         if (existsSync(`./${feature_name}`)) {
