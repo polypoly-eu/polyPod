@@ -5,6 +5,7 @@ import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
 import { template as packageTemplate } from "./templates/package.js";
+import { template as manifestTemplate } from "./templates/manifest.js";
 
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
@@ -80,6 +81,7 @@ function handleCreateEmptyFeature() {
                 author,
                 license
             ),
+            "manifest.json": manifestTemplate(feature_name, author),
         };
 
         if (existsSync(`./${feature_name}`)) {
