@@ -4,5 +4,4 @@ export default {
     activitiesByProducts: "activitiesByProducts",
     activitiesOverTime: "activitiesOverTime",
     reportMetadataAnalysis: "reportMetadataAnalysis",
-    accessLogSummary: "accessLogSummary",
 };
