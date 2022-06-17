@@ -101,12 +101,12 @@ function handleCreateEmptyFeature() {
 
         createDirectoryStructure(structure, ".", templates);
 
-        // execSync(
-        //     `cd ${feature_name} && npm init -y && npm install ${dependencies.reduce(
-        //         (a, b) => a + " " + b,
-        //         ""
-        //     )}`
-        // );
+        execSync(
+            `cd ${feature_name} && npm install ${dependencies.reduce(
+                (a, b) => a + " " + b,
+                ""
+            )}`
+        );
     };
 
     const setup_questions = [
