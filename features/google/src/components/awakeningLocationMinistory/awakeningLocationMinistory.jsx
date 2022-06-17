@@ -16,7 +16,7 @@ export const AwakeningLocationSummary = ({ dateData }) => {
             .split("-")
             .reverse()
             .map((e) => parseInt(e))
-            .join("-");
+            .join("/");
         setSelectedDate(formattedDate);
     };
     //could be used to make the text more human later on
@@ -110,14 +110,7 @@ export const AwakeningLocationDetails = ({ dateData }) => {
     });
 
     return (
-        <div
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                height: "100%",
-            }}
-            className="awakening-location-ministory-details "
-        >
+        <div className="awakening-location-ministory-details ">
             <p
                 dangerouslySetInnerHTML={{
                     __html: i18n.t("awakeningLocation:detail", {

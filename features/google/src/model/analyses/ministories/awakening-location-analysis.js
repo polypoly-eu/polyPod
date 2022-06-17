@@ -10,9 +10,9 @@ export default class AwakeningLocationAnalysis extends RootAnalysis {
     convertToDateString(date) {
         return (
             date.getDate() +
-            "-" +
+            "/" +
             (date.getUTCMonth() + 1) +
-            "-" +
+            "/" +
             date.getFullYear()
         );
     }

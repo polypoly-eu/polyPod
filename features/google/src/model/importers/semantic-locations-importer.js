@@ -27,7 +27,7 @@ function extractTimestampFromDuration(duration) {
 function createPlaceVisit(jsonData) {
     return new PlaceVisit({
         timestamp: new Date(extractTimestampFromDuration(jsonData.duration)),
-        duration: jsonData.duration,
+        endTimestamp: jsonData.duration.endTimestampMs,
         locationName: jsonData.location.name,
     });
 }

@@ -1,9 +1,9 @@
 import TimelineEvent from "./timeline-event";
 
 export default class PlaceVisit extends TimelineEvent {
-    constructor({ timestamp, locationName, duration }) {
+    constructor({ timestamp, locationName, endTimestamp }) {
         super({ timestamp });
-        this._duration = duration;
+        this._endTimestamp = endTimestamp;
         this._locationName = locationName;
     }
 
@@ -20,14 +20,14 @@ export default class PlaceVisit extends TimelineEvent {
     }
 
     get unixStartTimestamp() {
-        return this._duration.startTimestampMs;
+        return this.timestamp;
     }
 
     get unixEndTimestamp() {
-        return this._duration.endTimestampMs;
+        return this._endTimestamp;
     }
 
     get unixDuration() {
-        return this._duration.endTimestampMs - this._duration.startTimestampMs;
+        return this.unixEndTimestamp - this.unixStartTimestamp;
     }
 }

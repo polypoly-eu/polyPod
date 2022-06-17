@@ -6,3 +6,9 @@
 .date-browser {
     justify-content: center;
 }
+
+.awakening-location-ministory-details {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
