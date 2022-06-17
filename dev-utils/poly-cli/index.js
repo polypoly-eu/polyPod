@@ -65,7 +65,7 @@ function handleCreateEmptyFeature() {
     // package.json needs to use rollup -c for the build script.
     // author will be passed as input, as well as the license.
 
-    const setup = (feature_name) => {
+    const setup = (feature_name, author, version, description, license) => {
         let dependencies = ["rollup"];
         // folders are keys, files are strings.
         var structure = {};
@@ -82,11 +82,11 @@ function handleCreateEmptyFeature() {
         let templates = {
             "package.json": packageTemplate(
                 feature_name,
-                "1.0.0",
-                "empty feature",
+                version,
+                description,
                 "src/index.js",
-                "polypoly",
-                "MIT"
+                author,
+                license
             ),
         };
 
@@ -116,23 +116,47 @@ function handleCreateEmptyFeature() {
             message: "Feature Name:",
             default: "example",
         },
+        {
+            type: "input",
+            name: "version",
+            message: "Version:",
+            default: "1.0.0",
+        },
+        {
+            type: "input",
+            name: "description",
+            message: "Description:",
+            default: "Feature",
+        },
+        {
+            type: "input",
+            name: "author",
+            message: "Author:",
+            default: "polypoly",
+        },
+        {
+            type: "input",
+            name: "license",
+            message: "License:",
+            default: "MIT",
+        },
     ];
 
     inquirer
         .prompt(setup_questions)
         .then((answers) => {
-            if (!"feature_name" in answers) {
-                console.log(
-                    chalk.red.bold.underline(
-                        "🛑 Developer error: You need to get feature_name from the inquirer answers. 🛑"
-                    )
-                );
-                return;
-            }
-
-            let feature_name = answers.feature_name;
-
-            setup(feature_name);
+            checkIfValueExists("feature_name", answers);
+            checkIfValueExists("author", answers);
+            checkIfValueExists("version", answers);
+            checkIfValueExists("description", answers);
+            checkIfValueExists("license", answers);
+            setup(
+                answers.feature_name,
+                answers.author,
+                answers.version,
+                answers.description,
+                answers.license
+            );
         })
         .catch((error) => {
             if (error.isTtyError) {
@@ -166,5 +190,16 @@ function createDirectoryStructure(structure, parent, templates) {
                 writeFileSync(dir + "/" + child, content);
             }
         }
+    }
+}
+
+function checkIfValueExists(value, obj) {
+    if (!value in obj) {
+        console.log(
+            chalk.red.bold.underline(
+                "🛑 Developer error: You need to get feature_name from the inquirer answers. 🛑"
+            )
+        );
+        throw Error("Dev error");
     }
 }
