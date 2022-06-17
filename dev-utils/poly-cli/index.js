@@ -187,7 +187,7 @@ function createDirectoryStructure(structure, parent, templates) {
                 createDirectoryStructure(child, dir, templates);
             } else if (typeof child === "string") {
                 var content = "";
-                if (templates.hasOwnProperty(child)) {
+                if (child in templates) {
                     content = templates[child];
                 }
                 writeFileSync(dir + "/" + child, content);
@@ -197,7 +197,7 @@ function createDirectoryStructure(structure, parent, templates) {
 }
 
 function checkIfValueExists(value, obj) {
-    if (!value in obj) {
+    if (!(value in obj)) {
         console.log(
             chalk.red.bold.underline(
                 "🛑 Developer error: You need to get feature_name from the inquirer answers. 🛑"
