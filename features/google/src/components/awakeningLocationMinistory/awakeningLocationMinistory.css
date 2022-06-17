@@ -10,5 +10,5 @@
 .awakening-location-ministory-details {
     display: flex;
     flex-direction: column;
-    height: calc(100% - 100px);
+    height: 100% ;
 }
