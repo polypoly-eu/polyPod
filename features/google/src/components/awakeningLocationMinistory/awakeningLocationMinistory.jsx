@@ -4,6 +4,10 @@ import SourceInfoButton from "../sourceInfoButton/sourceInfoButton.jsx";
 import i18n from "!silly-i18n";
 import ListOfDetails from "../listOfDetails/listOfDetails.jsx";
 
+const textFormatDate = (date) => {
+    return date.split("/").reverse().join("/");
+};
+
 export const AwakeningLocationSummary = ({ dateData }) => {
     const defaultDate =
         Object.entries(dateData).find(
@@ -12,12 +16,9 @@ export const AwakeningLocationSummary = ({ dateData }) => {
     const [selectedDate, setSelectedDate] = useState(defaultDate);
     const data = dateData[selectedDate];
     const dateSelection = false;
+
     const handleChangeDate = ({ target }) => {
-        const formattedDate = target.value
-            .split("-")
-            .reverse()
-            .map((e) => parseInt(e))
-            .join("/");
+        const formattedDate = target.value.replace("-", "/");
         setSelectedDate(formattedDate);
     };
     //could be used to make the text more human later on
@@ -61,7 +62,9 @@ export const AwakeningLocationSummary = ({ dateData }) => {
                 <>
                     <p> {i18n.t("awakeningLocation:summary2")}</p>
                     <p>{i18n.t("awakeningLocation:on")}</p>
-                    <p className="highlighted-number">{selectedDate}</p>
+                    <p className="highlighted-number">
+                        {textFormatDate(selectedDate)}
+                    </p>
                     {data.firstActivity ? (
                         <>
                             <p>{i18n.t("awakeningLocation:at")}</p>
@@ -89,26 +92,29 @@ export const AwakeningLocationSummary = ({ dateData }) => {
     );
 };
 export const AwakeningLocationDetails = ({ dateData }) => {
-    const formatTime = (entry) => {
-        let hours = entry.firstActivity?.timestamp.getHours();
-        let minutes = entry.firstActivity?.timestamp.getMinutes();
+    const formatTime = (firstActivity) => {
+        let hours = firstActivity.timestamp.getHours();
+        let minutes = firstActivity.timestamp.getMinutes();
         hours = hours < 10 ? "0" + hours : hours;
         minutes = minutes < 10 ? "0" + minutes : minutes;
 
         return hours + ":" + minutes;
     };
-
-    const allDataEntries = Object.entries(dateData).map((entry) => {
-        const dataObj = {
-            date: entry[0],
-            location: entry[1].location.locationName,
-            time: entry[1].firstActivity ? formatTime(entry[1]) : null,
-        };
-        return {
-            primary: dataObj.date,
-            secondary: [dataObj.time, dataObj.location],
-        };
-    });
+    const allDataEntries = Object.keys(dateData)
+        .sort()
+        .map((key) => {
+            const dataObj = {
+                date: textFormatDate(key),
+                location: dateData[key].location.locationName,
+                time: dateData.firstActivity
+                    ? formatTime(dateData[key].firstActivity)
+                    : null,
+            };
+            return {
+                primary: dataObj.date,
+                secondary: [dataObj.time, dataObj.location],
+            };
+        });
 
     return (
         <div className="awakening-location-ministory-details ">

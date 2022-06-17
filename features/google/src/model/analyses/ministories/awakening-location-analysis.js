@@ -7,13 +7,11 @@ const SLEEP_DURATION = 5;
 
 export default class AwakeningLocationAnalysis extends RootAnalysis {
     convertToDateString(date) {
-        return `${
-            date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
-        }/${
+        return `${date.getFullYear()}/${
             date.getUTCMonth() + 1 < 10
                 ? `0${date.getUTCMonth() + 1}`
                 : date.getUTCMonth() + 1
-        }/${date.getFullYear()}`;
+        }/${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`;
     }
     containsWakingHours(startDate, endDate, daysDiff) {
         const startHour = startDate.getHours();
