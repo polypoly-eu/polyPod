@@ -28,7 +28,7 @@ pub fn bootstrap(language_code: String) -> Result<(), CoreFailure> {
     let core = Core { language_code };
 
     let _ = CORE.set(core);
-    Ok(())
+    Err(CoreFailure::core_already_bootstrapped())
 }
 
 pub fn parse_feature_manifest(json: &JSONStr) -> Result<FeatureManifest, CoreFailure> {

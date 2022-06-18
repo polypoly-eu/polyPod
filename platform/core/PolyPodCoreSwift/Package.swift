@@ -14,13 +14,13 @@ let package = Package(
             targets: ["PolyPodCoreSwift"]),
     ],
     dependencies: [
-        .package(path: "../flatbuffers_shared/flatbuffers_v2.0.0/swift"),
+        .package(url: "https://github.com/polypoly-eu/MessagePack.swift", from: "4.0.0")
     ],
     targets: [
         .target(
             name: "PolyPodCoreSwift",
             dependencies: [
-                .product(name: "FlatBuffers", package: "swift"),
+                .product(name: "MessagePack", package: "MessagePack.swift"),
                 "PolyPodCore"
             ]
         ),

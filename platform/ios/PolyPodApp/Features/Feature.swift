@@ -16,10 +16,7 @@ class Feature {
         guard let manifest = readManifest(path) else {
             return nil
         }
-        return Feature(
-            path: path,
-            manifest: manifest
-        )
+        return Feature(path: path, manifest: manifest)
     }
     
     init(
@@ -48,13 +45,7 @@ class Feature {
         self.links = links ?? [:]
     }
     
-    convenience init(path: URL, manifest: FlatbObject<FeatureManifest>) {
-        var links: [String: String] = [:]
-        for idx in 0..<manifest.linksCount {
-            if let link = manifest.links(at: idx) {
-                links[link.name] = link.url
-            }
-        }
+    convenience init(path: URL, manifest: FeatureManifest) {
         self.init(path: path,
                   name: manifest.name,
                   author: manifest.author,
@@ -62,7 +53,7 @@ class Feature {
                   thumbnail: manifest.thumbnail,
                   thumbnailColor: manifest.thumbnailColor,
                   primaryColor: manifest.primaryColor,
-                  links: links)
+                  links: manifest.links)
     }
     
     func findUrl(target: String) -> String? {
@@ -76,7 +67,7 @@ class Feature {
     }
 }
 
-private func readManifest(_ basePath: URL) -> FlatbObject<FeatureManifest>? {
+private func readManifest(_ basePath: URL) -> FeatureManifest? {
     let manifestPath = basePath.appendingPathComponent("manifest.json")
     do {
         let contents = try String(contentsOf: manifestPath)

@@ -1,4 +1,6 @@
-#[derive(Debug, Clone)]
+use serde::Serialize;
+
+#[derive(Debug, Clone, Serialize)]
 pub enum FailureCode {
     CoreNotBootstrapped = 1,
     CoreAlreadyBootstrapped,
@@ -9,44 +11,50 @@ pub enum FailureCode {
     FailedToConvertJavaString,
 }
 
-#[derive(Debug, Clone)]
+impl FailureCode {
+    fn value(&self) -> i32 {
+        (*self).clone() as i32
+    }
+}
+
+#[derive(Debug, Clone, Serialize)]
 pub struct CoreFailure {
-    pub code: FailureCode,
+    pub code: i32,
     pub message: String,
 }
 
 impl CoreFailure {
     pub fn core_already_bootstrapped() -> Self {
         CoreFailure {
-            code: FailureCode::CoreAlreadyBootstrapped,
+            code: FailureCode::CoreAlreadyBootstrapped.value(),
             message: "Core was already initialized".to_string(),
         }
     }
 
     pub fn core_not_bootstrapped() -> Self {
         CoreFailure {
-            code: FailureCode::CoreNotBootstrapped,
+            code: FailureCode::CoreNotBootstrapped.value(),
             message: "Core was not initialized".to_string(),
         }
     }
 
     pub fn failed_to_parse_feature_manifest(message: String) -> Self {
         CoreFailure {
-            code: FailureCode::FailedToParseFeatureManifest,
+            code: FailureCode::FailedToParseFeatureManifest.value(),
             message,
         }
     }
 
     pub fn null_c_string_pointer() -> Self {
         CoreFailure {
-            code: FailureCode::NullCStringPointer,
+            code: FailureCode::NullCStringPointer.value(),
             message: "cstring pointer is null.".to_string(),
         }
     }
 
     pub fn failed_to_create_c_str(message: String) -> Self {
         CoreFailure {
-            code: FailureCode::FailedToCreateCString,
+            code: FailureCode::FailedToCreateCString.value(),
             message,
         }
     }
@@ -54,7 +62,7 @@ impl CoreFailure {
     #[cfg(target_os = "android")]
     pub fn failed_to_extract_java_string(message: String) -> Self {
         CoreFailure {
-            code: FailureCode::FailedToExtractJavaString,
+            code: FailureCode::FailedToExtractJavaString.value(),
             message,
         }
     }
@@ -62,7 +70,7 @@ impl CoreFailure {
     #[cfg(target_os = "android")]
     pub fn failed_to_convert_java_string(message: String) -> Self {
         CoreFailure {
-            code: FailureCode::FailedToConvertJavaString,
+            code: FailureCode::FailedToConvertJavaString.value(),
             message,
         }
     }
