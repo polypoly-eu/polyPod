@@ -27,6 +27,7 @@ export function packageTemplate(
                 "@polypoly-eu/silly-i18n":
                     "file:../../feature-utils/silly-i18n",
                 "@polypoly-eu/podjs": "file:../../platform/podjs",
+                "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
             },
             author: author,
             license: license,
