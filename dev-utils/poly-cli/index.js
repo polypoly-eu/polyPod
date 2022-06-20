@@ -184,16 +184,6 @@ function handleCreate(arg) {
     }
 }
 
-function handleCreateEmptyFeature(arg) {
-    setup(
-        arg.name,
-        arg.author,
-        arg.featureVersion,
-        arg.description,
-        arg.license
-    );
-}
-
 function handleCreateFeature(arg) {
     console.log(chalk.bold.blue("🚧 Creating Feature 🚧"));
     console.log(
@@ -217,6 +207,16 @@ function handleCreateFeature(arg) {
             )
         );
     }
+}
+
+function handleCreateEmptyFeature(arg) {
+    setup(
+        arg.name,
+        arg.author,
+        arg.featureVersion,
+        arg.description,
+        arg.license
+    );
 }
 
 function handleCreatePreviewFeature() {
