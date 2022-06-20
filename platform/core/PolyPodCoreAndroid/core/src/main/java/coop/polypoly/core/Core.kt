@@ -1,58 +1,36 @@
 package coop.polypoly.core
 
-import Failure
-import FeatureManifest
-import java.nio.ByteBuffer
+import org.msgpack.core.MessagePack
+import org.msgpack.value.ValueFactory
+import org.msgpack.core.MessageUnpacker
+import org.msgpack.value.Value
 
-@ExperimentalUnsignedTypes
 class Core {
     companion object {
         fun bootstrapCore(languageCode: String) {
-            val bytes = JniApi().bootstrapCore(languageCode)
-            val response = CoreBootstrapResponse.getRootAsCoreBootstrapResponse(
-                ByteBuffer.wrap(bytes)
-            )
-            response.failure?.let {
-                if (it.code == FailureCode.CoreAlreadyBootstrapped) {
-                    throw CoreAlreadyBootstrappedException()
-                }
-                throw InternalCoreException.make("Core bootstrap", it)
-            }
+            return handleCoreResponse(JniApi().bootstrapCore(languageCode)) {}
         }
 
         fun parseFeatureManifest(json: String): FeatureManifest {
-            val failureContext = "Feature Manifest Parsing"
-            val bytes = JniApi().parseFeatureManifest(json)
-            val response = FeatureManifestParsingResponse
-                .getRootAsFeatureManifestParsingResponse(ByteBuffer.wrap(bytes))
+            return handleCoreResponse(JniApi().parseFeatureManifest(json))  { mapFeatureManifest(it) }
+        }
 
-            when (response.resultType) {
-                FeatureManifestParsingResult.FeatureManifest -> {
-                    val manifest = response.result(FeatureManifest())
-                    if (manifest == null) {
-                        throw MissingFeatureManifestContentException(
-                            failureContext
-                        )
-                    }
-                    return manifest as FeatureManifest
-                }
-                FeatureManifestParsingResult.Failure -> {
-                    val failure = response.result(Failure())
-                    if (failure == null) {
-                        throw MissingFailureContentException(failureContext)
-                    }
-                    throw InternalCoreException.make(
-                        failureContext,
-                        failure as Failure
-                    )
-                }
-                else -> {
-                    throw InvalidResultException.make(
-                        failureContext,
-                        response.resultType.toString()
-                    )
-                }
+        private fun <T> handleCoreResponse(
+            byteResponse: ByteArray,
+            map: (Value) -> T): T {
+            val unpacker: MessageUnpacker =
+                MessagePack.newDefaultUnpacker(byteResponse)
+            val responseObject = unpacker.unpackValue().asMapValue().map()
+
+            responseObject[ValueFactory.newString("Ok")]?.also {
+                return map(it)
             }
+
+            responseObject[ValueFactory.newString("Err")]?.also {
+                throw mapError(it.asMapValue().map())
+            }
+
+            throw InvalidCoreResponseFormat()
         }
     }
 }

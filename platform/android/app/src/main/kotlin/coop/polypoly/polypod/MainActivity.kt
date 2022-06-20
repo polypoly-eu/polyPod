@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import coop.polypoly.core.Core
-import coop.polypoly.core.CoreAlreadyBootstrappedException
+import coop.polypoly.core.CoreFailure
 import coop.polypoly.polypod.core.UpdateNotification
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
@@ -27,15 +27,13 @@ class MainActivity : AppCompatActivity() {
             Core.bootstrapCore(language)
             logger.info("Core is bootstrapped!")
         } catch (ex: Exception) {
-            if (ex is CoreAlreadyBootstrappedException) {
-                logger.info(ex.message)
-                return
+            logger.info(ex.message)
+            (ex as? CoreFailure)?.also {
+                // Ignore CoreAlreadyBootstrapped error, as it is not breaking.
+                if (it.code == 2) {
+                    return
+                }
             }
-
-            logger.error(
-                "Failed to boostrap core",
-                ex.message
-            )
             throw ex
         }
 

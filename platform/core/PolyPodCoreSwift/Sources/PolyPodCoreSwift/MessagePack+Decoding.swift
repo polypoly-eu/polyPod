@@ -9,7 +9,7 @@ extension MessagePackValue {
         if let dictionary = self.dictionaryValue {
             return dictionary
         } else {
-            throw MessagePackDecodingError.invalidValue(info: "Expected dictionary")
+            throw DecodingError.invalidValue(info: "Expected dictionary")
         }
     }
     
@@ -20,7 +20,7 @@ extension MessagePackValue {
         if let string = self.stringValue {
             return string
         } else {
-            throw MessagePackDecodingError.invalidValue(info: "Expected string")
+            throw DecodingError.invalidValue(info: "Expected string")
         }
     }
 }
@@ -28,13 +28,16 @@ extension MessagePackValue {
 func mapError(_ dict: [MessagePackValue: MessagePackValue]) throws -> CoreFailure {
     guard let code = dict["code"]?.intValue.flatMap(CoreFailureCode.init),
           let message = dict["message"]?.stringValue else {
-        throw MessagePackDecodingError.invalidCoreFailure(info: "Received \(dict)")
+        throw DecodingError.invalidCoreFailure(info: "Received \(dict)")
     }
     
     return CoreFailure(code: code, message: message)
 }
 
-func mapFeatureManifest(_ dictionary: [MessagePackValue: MessagePackValue]) throws -> FeatureManifest {
+func mapFeatureManifest(_ value: MessagePackValue) throws -> FeatureManifest {
+    guard let dictionary = try value.getDictionary() else {
+        throw DecodingError.emptyFeatureManifest
+    }
     return FeatureManifest(name: try dictionary["name"]?.getString(),
                            author: try dictionary["author"]?.getString(),
                            version: try dictionary["version"]?.getString(),

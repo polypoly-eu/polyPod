@@ -1,9 +1,11 @@
-public enum MessagePackDecodingError: Error {
+public enum DecodingError: Error {
     case invalidValue(info: String)
     case invalidCoreFailure(info: String)
     case invalidCoreResult(info: String)
     case missingDictionaryKey(info: String)
     case invalidValueType(info: String)
+    case invalidResponse(info: String?)
+    case emptyFeatureManifest
     
     var localizedDescription: String {
         switch self {
@@ -17,26 +19,23 @@ public enum MessagePackDecodingError: Error {
             return "Missing key in dictionary object: \(info)"
         case .invalidValueType(info: let info):
             return "Invalid value type: \(info)"
+        case let .invalidResponse(info):
+            return "Recevied invalid core response: \(String(describing: info))"
+        case .emptyFeatureManifest:
+            return "Recevied empty feature manifest"
         }
     }
 }
 
 public enum CoreFailureCode: Int {
-    case CoreNotBootstrapped = 1
-    case CoreAlreadyBootstrapped
-    case FailedToParseFeatureManifest
-    case NullCStringPointer
-    case FailedToCreateCString
-    case EmptyResponse
+    case coreNotBootstrapped = 1
+    case coreAlreadyBootstrapped
+    case failedToParseFeatureManifest
+    case nullCStringPointer
+    case failedToCreateCString
 }
 
 public struct CoreFailure: Error {
     public let code: CoreFailureCode
     public let message: String
-}
-
-extension CoreFailure {
-    static var emptyResponse: Self {
-        CoreFailure(code: .EmptyResponse, message: "Recevied empty response from core")
-    }
 }

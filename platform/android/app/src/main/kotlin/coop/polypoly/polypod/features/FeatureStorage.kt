@@ -1,8 +1,8 @@
 package coop.polypoly.polypod.features
 
-import FeatureManifest
 import android.content.Context
 import coop.polypoly.core.Core
+import coop.polypoly.core.FeatureManifest
 import coop.polypoly.polypod.logging.LoggerFactory
 import java.io.File
 import java.io.FileOutputStream

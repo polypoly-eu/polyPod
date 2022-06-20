@@ -1,36 +1,25 @@
 package coop.polypoly.core
 
-import Failure
+enum class CoreExceptionCode(val value: Int) {
+    CoreNotBootstrapped(1),
+    CoreAlreadyBootstrapped(2),
+    FailedToParseFeatureManifest(3),
+    NullCStringPointer(4),
+    FailedToCreateCString(5),
+    FailedToExtractJavaString(6),
+    FailedToConvertJavaString(7),
 
-@ExperimentalUnsignedTypes
-class InternalCoreException(message: String) : Exception(message) {
     companion object {
-        fun make(context: String, failure: Failure): InternalCoreException {
-            return InternalCoreException(
-                """ $context -> internal Core Failure:
-                    ${failure.code} ${failure.message} """
-            )
-        }
+        fun getByValue(value: Int) = values().firstOrNull { it.value == value }
     }
 }
 
-class CoreAlreadyBootstrappedException() :
-    Exception("Core is already bootstrapped")
+data class CoreFailure(
+    val code: CoreExceptionCode,
+    override val message: String
+    ) : Exception("$code -> $message")
 
-class InvalidResultException(message: String) : Exception(message) {
-    companion object {
-        fun make(context: String, result: String): InvalidResultException {
-            return InvalidResultException(
-                "$context -> received invalid result type: $result"
-            )
-        }
-    }
-}
-
-class MissingFailureContentException(context: String) :
-    Exception("$context -> received failure result type without content")
-
-class MissingFeatureManifestContentException(context: String) :
-    Exception(
-        "$context -> received feature manifest result type without content"
-    )
+class InvalidCoreResponseFormat : Exception("Received invalid core response format")
+class EmptyFeatureManifest : Exception("Received empty feature manifest response")
+data class InvalidCoreErrorFormat(val info: String) : Exception("Received invalid core failure format: $info")
+data class InvalidCoreErrorFormat(val info: String) : Exception("Received invalid core failure format: $info")

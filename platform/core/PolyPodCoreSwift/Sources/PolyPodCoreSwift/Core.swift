@@ -21,50 +21,34 @@ public final class Core {
         // Force unwrap should be safe
         self.languageCode = NSString(string: languageCode).utf8String!
        
-        return handleCoreResponse(core_bootstrap(self.languageCode)) { responseObject in
-            if responseObject["Ok"] != nil {
-                return ()
-            } else if let failure = try responseObject["Err"]?.getDictionary() {
-                throw try mapError(failure)
-            } else {
-                throw MessagePackDecodingError.invalidCoreResult(info: "Received \(responseObject)")
-            }
-        }
+        return handleCoreResponse(core_bootstrap(self.languageCode), { _ in })
     }
     
     /// Parse the FeatureManifest from the given json
     /// - Parameter json: Raw JSON to parse the FeatureManifest from
     /// - Returns: A FeatureManifest if parsing succeded, nil otherwise
     public func parseFeatureManifest(json: String) -> Result<FeatureManifest, Error> {
-        handleCoreResponse(parse_feature_manifest_from_json(json)) { responseObject in
-            if let manifestObject = try responseObject["Ok"]?.getDictionary() {
-                return try mapFeatureManifest(manifestObject)
-            } else if let failure = try responseObject["Err"]?.getDictionary() {
-                throw try mapError(failure)
-            } else {
-                throw MessagePackDecodingError.invalidCoreResult(info: "Received \(responseObject)")
-            }
-        }
+        handleCoreResponse(parse_feature_manifest_from_json(json), mapFeatureManifest)
     }
     
-    func handleCoreResponse<T>(_ byte_response: CByteBuffer, _ map: (CoreResponseObject) throws -> T) -> Result<T, Error> {
+    func handleCoreResponse<T>(_ byte_response: CByteBuffer, _ map: (MessagePackValue) throws -> T) -> Result<T, Error> {
         Result {
             defer {
                 free_bytes(byte_response.data)
             }
-            return try map(getResponseObject(byte_response))
+            
+            let buffer = UnsafeBufferPointer(start: byte_response.data, count: Int(byte_response.length))
+            let data = Data(buffer: buffer)
+            
+            let responseObject = try MessagePack.unpackFirst(data).getDictionary()
+            
+            if let responseObject = responseObject?["Ok"] {
+                return try map(responseObject)
+            } else if let failure = try responseObject?["Err"]?.getDictionary() {
+                throw try mapError(failure)
+            }
+            
+            throw DecodingError.invalidResponse(info: "\(String(describing: responseObject))")
         }
-    }
-    
-    func getResponseObject(_ cByteBuffer: CByteBuffer) throws -> [MessagePackValue: MessagePackValue] {
-        let buffer = UnsafeBufferPointer(start: cByteBuffer.data, count: Int(cByteBuffer.length))
-        let data = Data(buffer: buffer)
-        
-        let unpack = try MessagePack.unpackFirst(data)
-        if let object = try unpack.getDictionary() {
-            return object
-        }
-        
-        throw CoreFailure.emptyResponse
     }
 }
