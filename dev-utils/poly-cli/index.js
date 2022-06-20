@@ -54,6 +54,9 @@ function setup(feature_name, author, version, description, license) {
         "index.html": readFileSync(
             path.resolve(__dirname, "./src/static/templates/index.html")
         ),
+        "index.js": readFileSync(
+            path.resolve(__dirname, "./src/static/templates/index.js")
+        ),
         "styles.css": readFileSync(
             path.resolve(__dirname, "./src/static/templates/styles.css")
         ),
