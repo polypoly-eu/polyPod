@@ -47,6 +47,9 @@ function setup(feature_name, author, version, description, license) {
         "rollup.config.mjs": readFileSync(
             path.resolve(__dirname, "./src/static/templates/rollup.config.mjs")
         ),
+        "index.html": readFileSync(
+            path.resolve(__dirname, "./src/static/templates/index.html")
+        ),
     };
 
     if (existsSync(`./${feature_name}`)) {
