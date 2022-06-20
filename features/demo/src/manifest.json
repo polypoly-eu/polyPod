@@ -4,6 +4,8 @@
     "description": "Demonstrates some polyPod capabilities for testing purposes - please ignore",
     "primaryColor": "#000000",
     "thumbnail": "images/thumbnail.pdf",
+    "borderSize": "10px",
+    "borderColor": "#000000",
     "translations": {
         "de": {
             "author": "polypoly - Die Genossenschaft",
