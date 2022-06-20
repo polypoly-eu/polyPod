@@ -3,7 +3,7 @@
 import chalk from "chalk";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { existsSync, mkdirSync, writeFileSync, copyFileSync } from "fs";
+import { existsSync, mkdirSync, writeFileSync, readFileSync } from "fs";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
 import {
@@ -77,15 +77,16 @@ function handleCreateEmptyFeature() {
         let dependencies = ["rollup"];
 
         // folders are keys, files are strings.
-        var structure = {
-            [feature_name]: [
-                { src: ["index.js"] },
-                { test: [] },
-                "package.json",
-                "manifest.json",
-                "README.md",
-            ],
-        };
+        var structure = {};
+
+        structure[feature_name] = [
+            { src: ["index.js"] },
+            { test: [] },
+            "package.json",
+            "manifest.json",
+            "README.md",
+            "rollup.config.js",
+        ];
 
         let templates = {
             "package.json": packageTemplate(
@@ -98,6 +99,9 @@ function handleCreateEmptyFeature() {
             ),
             "manifest.json": manifestTemplate(feature_name, author),
             "README.md": readmeTemplate(feature_name, description),
+            "rollup.config.js": readFileSync(
+                "src/static/templates/rollup.config.js"
+            ),
         };
 
         if (existsSync(`./${feature_name}`)) {
