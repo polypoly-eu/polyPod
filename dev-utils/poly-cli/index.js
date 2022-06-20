@@ -114,6 +114,10 @@ function handleCreateEmptyFeature() {
         }
 
         createDirectoryStructure(structure, ".", templates);
+        for (const f of ["rollup.config.js"]) {
+            console.log();
+            copyFileSync(`src/static/templates/${f}`, `${feature_name}/${f}`);
+        }
 
         execSync(
             `cd ${feature_name} && npm install ${dependencies.reduce(
