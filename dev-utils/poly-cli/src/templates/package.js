@@ -26,6 +26,7 @@ export function packageTemplate(
             dependencies: {
                 "@polypoly-eu/silly-i18n":
                     "file:../../feature-utils/silly-i18n",
+                "@polypoly-eu/podjs": "file:../../platform/podjs",
             },
             author: author,
             license: license,
