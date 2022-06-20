@@ -124,12 +124,7 @@ function interactiveSetup() {
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
     .command(
-        `create <what> <name>
-    [--type=empty]
-    [--version=0.0.1]
-    [--author="polypoly poly-cli"]
-    [--license=MIT]
-    [--description="Generated from poly-cli"]`,
+        'create <what> <name> [--type=empty] [--version=0.0.1] [--author="polypoly poly-cli"] [--license=MIT] [--description="Generated from poly-cli"]',
         "Creates features for now.",
         (yargs) => {
             yargs.positional("what", {
@@ -149,7 +144,7 @@ yargs(hideBin(process.argv))
                 describe: "→ the type of feature: empty, preview, or importer",
             });
 
-            yargs.option("version", {
+            yargs.option("feature-version", {
                 type: "string",
                 default: "0.0.1",
                 describe: "→ Version string for the package.json",
@@ -179,7 +174,6 @@ yargs(hideBin(process.argv))
     .help().argv;
 
 function handleCreate(arg) {
-    console.log(arg);
     if (arg.what === "feature") {
         handleCreateFeature(arg);
     } else {
@@ -191,10 +185,24 @@ function handleCreate(arg) {
     }
 }
 
+function handleCreateEmptyFeature(arg) {
+    setup(
+        arg.name,
+        arg.author,
+        arg.featureVersion,
+        arg.description,
+        arg.license
+    );
+}
+
 function handleCreateFeature(arg) {
     console.log(chalk.bold.blue("🚧 Creating Feature 🚧"));
     console.log(
-        chalk.white("🏗  Feature Type:", chalk.red.italic.underline(type), "🏗")
+        chalk.white(
+            "🏗  Feature Type:",
+            chalk.red.italic.underline(arg.type),
+            "🏗"
+        )
     );
 
     if (arg.type === "empty") {
