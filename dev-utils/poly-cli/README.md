@@ -4,6 +4,12 @@ Generates stuff for us. Currently only generates the structure for a feature.
 
 ## Use
 
-`node index.js create feature --type empty`
+First install with `npm ci`
 
-There are 3 types: empty, preview, and importer.
+Run with:
+
+```shell
+node index.js create feature --type empty
+```
+
+There are 3 types: `empty`, `preview`, and `importer`.
