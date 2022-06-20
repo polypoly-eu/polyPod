@@ -12,6 +12,8 @@ table FeatureManifest {
     thumbnail_color:string;
     primary_color:string;
     links:[Link];
+    border_size: string;
+    border_color:string;
 }
 
 root_type FeatureManifest;

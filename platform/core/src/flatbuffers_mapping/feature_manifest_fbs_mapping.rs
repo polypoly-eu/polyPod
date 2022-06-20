@@ -44,6 +44,8 @@ fn build_sucess_response_args(
         thumbnail_color: build_field_buffer(fbb, manifest.thumbnail_color),
         primary_color: build_field_buffer(fbb, manifest.primary_color),
         links: build_links_buffer(fbb, manifest.links),
+        border_size: build_field_buffer(fbb, manifest.border_size),
+        border_color: build_field_buffer(fbb, manifest.border_color),
     };
 
     let feature_manifest = FeatureManifest::create(fbb, &manifest_args).as_union_value();
@@ -129,6 +131,8 @@ mod tests {
             thumbnail: Some("thumbnail".to_string()),
             thumbnail_color: Some("thumbnail_color".to_string()),
             primary_color: Some("primary_color".to_string()),
+            border_color: Some("border_color".to_string()),
+            border_size: Some("border_size".to_string()),
             links: Some(HashMap::from([(
                 "link1".to_string(),
                 "https://any.link".to_string(),
@@ -178,6 +182,15 @@ mod tests {
             parsed_manifest.primary_color().map(String::from),
             expected_manifest.primary_color
         );
+        assert_eq!(
+            parsed_manifest.border_color().map(String::from),
+            expected_manifest.border_color
+        );
+        assert_eq!(
+            parsed_manifest.border_size().map(String::from),
+            expected_manifest.border_size
+        );
+
 
         let mut parsed_links: HashMap<String, String> = HashMap::new();
         for link in parsed_manifest.links().unwrap() {
