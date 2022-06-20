@@ -11,6 +11,7 @@ import {
     manifestTemplate,
     readmeTemplate,
 } from "./src/templates/index.js";
+import { argv } from "process";
 
 function setup(feature_name, author, version, description, license) {
     let dependencies = ["rollup"];
@@ -178,8 +179,9 @@ yargs(hideBin(process.argv))
     .help().argv;
 
 function handleCreate(arg) {
+    console.log(arg);
     if (arg.what === "feature") {
-        handleCreateFeature(arg.type);
+        handleCreateFeature(arg);
     } else {
         console.log(
             chalk.bold.yellow(
@@ -189,17 +191,17 @@ function handleCreate(arg) {
     }
 }
 
-function handleCreateFeature(type) {
+function handleCreateFeature(arg) {
     console.log(chalk.bold.blue("🚧 Creating Feature 🚧"));
     console.log(
         chalk.white("🏗  Feature Type:", chalk.red.italic.underline(type), "🏗")
     );
 
-    if (type === "empty") {
-        handleCreateEmptyFeature();
-    } else if (type === "preview") {
+    if (arg.type === "empty") {
+        handleCreateEmptyFeature(arg);
+    } else if (arg.type === "preview") {
         handleCreatePreviewFeature();
-    } else if (type === "importer") {
+    } else if (arg.type === "importer") {
         handleCreateImporterFeature();
     } else {
         console.log(
