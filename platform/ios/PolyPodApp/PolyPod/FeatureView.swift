@@ -16,7 +16,9 @@ struct FeatureView: View {
         let featureColor = feature.primaryColor ?? Color.PolyPod.lightBackground
         let lightForeground = !featureColor.isLight
         let iconVariantQualifier = lightForeground ? "Light" : "Dark"
-        
+        let _ = feature.borderColor ?? Color.PolyPod.grey300Foreground
+        let _ = feature.borderSize ?? "1"
+
         let closeButton = Button(
             action: {
                 if activeActions.contains("back") {

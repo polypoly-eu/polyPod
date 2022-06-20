@@ -1,5 +1,3 @@
-// Please remove this line and the empty one after it
-
 import SwiftUI
 import Combine
 
@@ -35,7 +33,7 @@ protocol HomeScreenStorage {
 final class HomeScreenStorageAdapter: HomeScreenStorage {
     let categoriesList: AnyPublisher<[HomeScreenSectionModel], Never>
     let featureStorage: FeatureStorage
-    
+
     init(featureStorage: FeatureStorage) {
         self.featureStorage = featureStorage
         self.categoriesList = featureStorage
@@ -43,7 +41,7 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
             .map(HomeScreenStorageAdapter.mapCategoryModel)
             .eraseToAnyPublisher()
     }
-    
+
     static func mapCategoryModel(_ categoryModels: [FeaturesCategoryModel]) -> [HomeScreenSectionModel] {
         categoryModels.map { model in
             HomeScreenSectionModel(title: model.name,
@@ -51,12 +49,12 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
                                    type: model.id)
         }
     }
-    
+
     private static func mapToCards(_ features: [Feature]) -> [Card] {
         features.map { feature in
-            
+
             let image: UIImage
-            
+
             if feature.thumbnail?.isPDF() == true {
                 image = UIImage.fromPDF(url: feature.thumbnail) ?? UIImage()
             } else if feature.thumbnail?.isPNG() == true {
@@ -64,12 +62,12 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
             } else {
                 image = UIImage()
             }
-            
+
             return Card(id: feature.id,
-                 title: feature.name,
-                 description: feature.description ?? "",
-                 image: image,
-                 backgroundColor: feature.thumbnailColor ?? .white)
+                        title: feature.name,
+                        description: feature.description ?? "",
+                        image: image,
+                        backgroundColor: feature.thumbnailColor ?? .white)
         }
     }
 }
@@ -78,11 +76,11 @@ final class HomeScreenViewModel: ObservableObject {
     private var storage: HomeScreenStorage
     private var storageCancellable: AnyCancellable?
     @Published var sections: [HomeScreenSectionModel] = []
-    
+
     init(storage: HomeScreenStorage) {
         self.storage = storage
     }
-    
+
     func setup() {
         storageCancellable = storage.categoriesList.sink { sections in
             self.sections = sections
@@ -93,34 +91,34 @@ final class HomeScreenViewModel: ObservableObject {
 // MARK: - UI sizes
 
 struct HomeScreenConstants {
-    
+
     struct Typography {
         let font: Font
         let alignment: TextAlignment
     }
-    
+
     struct Section {
         static let verticalSpacing = PolyStyle.Spacing.plSpace8x
         static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
-                                                          size: PolyStyle.Font.Size.lg)
+                                                    size: PolyStyle.Font.Size.lg)
                                         .weight(PolyStyle.Font.Weight.medium),
                                       alignment: PolyStyle.Font.Alignment.left)
     }
-    
+
     struct View {
         static let horizontalPadding = PolyStyle.Spacing.plSpace4x
     }
-    
+
     struct TileContainer {
         static let verticalSpacing = PolyStyle.Spacing.plSpace3x
         static let horizontalSpacing = PolyStyle.Spacing.plSpace3x
         static let numberOfColumns = 3
     }
-    
+
     struct Tile {
         static let cornerRadius = PolyStyle.Spacing.plSpace2x
     }
-    
+
     struct SmallTile {
         static let topPadding = 0.0
         static let otherPadding = PolyStyle.Spacing.plSpace2x
@@ -129,13 +127,13 @@ struct HomeScreenConstants {
                                         .weight(PolyStyle.Font.Weight.medium),
                                       alignment: PolyStyle.Font.Alignment.center)
     }
-    
+
     struct MediumTile {
         static let horizontalSpacing = PolyStyle.Spacing.plSpace3x
         static let textVerticalSpacing = PolyStyle.Spacing.plSpace2x
         static let textTopBottomPadding = PolyStyle.Spacing.plSpace2x
         static let textTrailingPadding = PolyStyle.Spacing.plSpace4x
-        
+
         static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
                                                     size: PolyStyle.Font.Size.base)
                                         .weight(PolyStyle.Font.Weight.medium),
@@ -145,12 +143,12 @@ struct HomeScreenConstants {
                                                 .weight(PolyStyle.Font.Weight.regular),
                                             alignment: PolyStyle.Font.Alignment.left)
     }
-    
+
     struct BigTile {
         static let padding = PolyStyle.Spacing.plSpace3x
         static let verticalSpacing = PolyStyle.Spacing.plSpace2x
         static let textVerticalSpacing = PolyStyle.Spacing.plSpace2x
-        
+
         static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
                                                     size: PolyStyle.Font.Size.base)
                                         .weight(PolyStyle.Font.Weight.medium),
@@ -160,11 +158,11 @@ struct HomeScreenConstants {
                                                 .weight(PolyStyle.Font.Weight.regular),
                                             alignment: PolyStyle.Font.Alignment.left)
     }
-    
+
     struct Footer {
         static let verticalSpacing = PolyStyle.Spacing.plSpace4x
         static let padding = PolyStyle.Spacing.plSpace6x
-        
+
         static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
                                                     size: PolyStyle.Font.Size._2xl)
                                         .weight(PolyStyle.Font.Weight.medium),
@@ -173,7 +171,7 @@ struct HomeScreenConstants {
                                                           size: PolyStyle.Font.Size.base)
                                                 .weight(PolyStyle.Font.Weight.regular),
                                             alignment: PolyStyle.Font.Alignment.left)
-        
+
         struct Button {
             static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
                                                         size: PolyStyle.Font.Size.lg)
@@ -206,7 +204,7 @@ extension EnvironmentValues {
         get { self[HomeScreenSizesKey.self] }
         set { self[HomeScreenSizesKey.self] = newValue }
     }
-    
+
     var homeScreenFeatureSelected: OnFeatureSelected {
         get { self[HomeScreenFeatureSelectedKey.self] }
         set { self[HomeScreenFeatureSelectedKey.self] = newValue }
@@ -217,20 +215,20 @@ extension EnvironmentValues {
 
 typealias OnFeatureSelected = (FeatureId) -> Void
 struct HomeScreenView: View {
-    
+
     let footerModel = FooterViewModel(title: "homescreen_footer_title",
                                       description: "homescreen_footer_description",
                                       imageName: "AppIcon", // TODO: Needs the actual image
                                       backgroundColor: Color(fromHex: "#fed7d6"),
                                       buttonTitle: "homescreen_footer_button_title",
                                       buttonBackgroundColor: Color(fromHex: "#0f1938"))
-    
+
     @ObservedObject var viewModel: HomeScreenViewModel
     var openFeatureAction: OnFeatureSelected = { _ in }
     var openInfoAction: () -> Void = {}
     var openSettingsAction: () -> Void = {}
     var openLearnMoreAction: () -> Void = { }
-    
+
     var body: some View {
         // Why GeometryReader needs to be on top?
         GeometryReader { geo in
@@ -262,11 +260,11 @@ struct HomeScreenView: View {
                                 .renderingMode(.original)
                                 .onTapGesture(perform: openInfoAction)
                         }
-                        
+
                         ToolbarItem(placement: .principal) {
                             Image("NavIconPolyPodLogo").renderingMode(.original)
                         }
-                        
+
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Image("NavIconSettingsDark")
                                 .renderingMode(.original)
@@ -279,18 +277,18 @@ struct HomeScreenView: View {
             viewModel.setup()
         }
     }
-    
+
     func calculateSize(_ geo: GeometryProxy) -> Sizes {
         let screenWidth = geo.size.width
-        
+
         let totalScreenPadding = 2 * HomeScreenConstants.View.horizontalPadding
         let containerWidth: CGFloat = screenWidth - totalScreenPadding
-        
+
         let interItemSpacing = (Double(HomeScreenConstants.TileContainer.numberOfColumns) - 1.0) * HomeScreenConstants.TileContainer.horizontalSpacing
         let smallTileWidth: CGFloat = (containerWidth - interItemSpacing) / Double(HomeScreenConstants.TileContainer.numberOfColumns)
-        
+
         let bigTileWidth = containerWidth - smallTileWidth - HomeScreenConstants.TileContainer.horizontalSpacing
-        
+
         return Sizes(screenSize: geo.size,
                      containerWidth: containerWidth,
                      smallTileWidth: smallTileWidth,
@@ -303,15 +301,15 @@ struct HomeScreenView: View {
 
 struct MyDataSectionView: View {
     var sectionModel: HomeScreenSectionModel
-    
+
     enum ContainerType {
         case largeLeft
         case row
         case largeRight
     }
-    
+
     let containersConfig: [ContainerType] = [.largeLeft, .row, .largeRight, .row]
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
             Text(sectionModel.title)
@@ -335,7 +333,7 @@ struct MyDataSectionView: View {
 
 struct DataKnowHowSectionView: View {
     let sectionModel: HomeScreenSectionModel
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
@@ -350,7 +348,7 @@ struct DataKnowHowSectionView: View {
 
 struct ToolsSectionView: View {
     let sectionModel: HomeScreenSectionModel
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
@@ -367,7 +365,7 @@ struct ToolsSectionView: View {
 
 struct LargeLeftContainerView: View {
     let cards: [Card]
-    
+
     var body: some View {
         HStack(alignment: .top, spacing: HomeScreenConstants.TileContainer.horizontalSpacing) {
             BigCardView(card: cards.first!)
@@ -417,25 +415,25 @@ struct RowContainerView: View {
 // MARK: - Cards
 
 struct BigCardView: View {
-    
+
     @Environment(\.homeScreenTileSizes) var sizes
     @Environment(\.homeScreenFeatureSelected) var onFeatureSelected
-    
+
     let card: Card
     private let foregroundColor: Color
-    
+
     init(card: Card) {
         self.card = card
         self.foregroundColor = card.backgroundColor.isLight ? .black : .white
     }
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: HomeScreenConstants.BigTile.verticalSpacing) {
             Image(uiImage: card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: sizes.bigTileWidth - 2 * HomeScreenConstants.BigTile.padding, alignment: .center)
-            
+
             VStack(alignment: .leading, spacing: HomeScreenConstants.BigTile.textVerticalSpacing) {
                 Text(card.title)
                     .foregroundColor(foregroundColor)
@@ -461,15 +459,15 @@ struct BigCardView: View {
 struct MediumCardView: View {
     @Environment(\.homeScreenTileSizes) var sizes
     @Environment(\.homeScreenFeatureSelected) var onFeatureSelected
-    
+
     let card: Card
     private let foregroundColor: Color
-    
+
     init(card: Card) {
         self.card = card
         self.foregroundColor = card.backgroundColor.isLight ? .black : .white
     }
-    
+
     var body: some View {
         HStack(spacing: HomeScreenConstants.MediumTile.horizontalSpacing) {
             Image(uiImage: card.image)
@@ -504,15 +502,15 @@ struct MediumCardView: View {
 struct SmallCardView: View {
     @Environment(\.homeScreenTileSizes) var sizes
     @Environment(\.homeScreenFeatureSelected) var onFeatureSelected
-    
+
     let card: Card
     private let foregroundColor: Color
-    
+
     init(card: Card) {
         self.card = card
         self.foregroundColor = card.backgroundColor.isLight ? .black : .white
     }
-    
+
     var body: some View {
         VStack(alignment: .center) {
             Image(uiImage: card.image)
@@ -538,7 +536,7 @@ struct SmallCardView: View {
 struct FooterView: View {
     let model: FooterViewModel
     var openLearnMoreAction: () -> Void = { }
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: HomeScreenConstants.Footer.verticalSpacing) {
             Text(model.title)
@@ -561,7 +559,7 @@ struct FooterView: View {
             .foregroundColor(model.buttonBackgroundColor.isLight ? .black : .white)
             .background(model.buttonBackgroundColor)
             .cornerRadius(HomeScreenConstants.Tile.cornerRadius)
-            
+
         }
         .padding(HomeScreenConstants.Footer.padding)
         .background(model.backgroundColor)
@@ -651,13 +649,13 @@ struct HomeScreenView_Previews: PreviewProvider {
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue)],
-              type: .tools),
+              type: .tools)
     ]
-    
+
     class MockStorage: HomeScreenStorage {
         var categoriesList: AnyPublisher<[HomeScreenSectionModel], Never> = Just(categories).eraseToAnyPublisher()
     }
-    
+
     static var previews: some View {
         HomeScreenView(viewModel: .init(storage: MockStorage()))
     }
