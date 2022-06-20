@@ -12,6 +12,114 @@ import {
     readmeTemplate,
 } from "./src/templates/index.js";
 
+function setup(feature_name, author, version, description, license) {
+    let dependencies = ["rollup"];
+
+    // folders are keys, files are strings.
+    var structure = {};
+
+    structure[feature_name] = [
+        { src: ["index.js"] },
+        { test: [] },
+        "package.json",
+        "manifest.json",
+        "README.md",
+        "rollup.config.js",
+    ];
+
+    let templates = {
+        "package.json": packageTemplate(
+            feature_name,
+            version,
+            description,
+            "src/index.js",
+            author,
+            license
+        ),
+        "manifest.json": manifestTemplate(feature_name, author),
+        "README.md": readmeTemplate(feature_name, description),
+        "rollup.config.js": readFileSync(
+            "src/static/templates/rollup.config.js"
+        ),
+    };
+
+    if (existsSync(`./${feature_name}`)) {
+        console.log(
+            chalk.red.bold.underline(
+                "🛑 Feature already exists in this folder. Aborting! 🛑"
+            )
+        );
+        return;
+    }
+
+    createDirectoryStructure(structure, ".", templates);
+
+    execSync(
+        `cd ${feature_name} && npm install ${dependencies.reduce(
+            (a, b) => a + " " + b,
+            ""
+        )}`
+    );
+}
+
+function interactiveSetup() {
+    const setup_questions = [
+        {
+            type: "input",
+            name: "feature_name",
+            message: "Feature Name:",
+            default: "example",
+        },
+        {
+            type: "input",
+            name: "version",
+            message: "Version:",
+            default: "0.0.1",
+        },
+        {
+            type: "input",
+            name: "description",
+            message: "Description:",
+            default: (answers) => `Generated ${answers.feature_name} feature`,
+        },
+        {
+            type: "input",
+            name: "author",
+            message: "Author:",
+            default: "polypoly interactive",
+        },
+        {
+            type: "input",
+            name: "license",
+            message: "License:",
+            default: "MIT",
+        },
+    ];
+
+    inquirer
+        .prompt(setup_questions)
+        .then((answers) => {
+            checkIfValueExists("feature_name", answers);
+            checkIfValueExists("author", answers);
+            checkIfValueExists("version", answers);
+            checkIfValueExists("description", answers);
+            checkIfValueExists("license", answers);
+            setup(
+                answers.feature_name,
+                answers.author,
+                answers.version,
+                answers.description,
+                answers.license
+            );
+        })
+        .catch((error) => {
+            console.log(
+                chalk.red.bold.underline(
+                    `🛑 Error: ${JSON.stringify(error, null, 4)} 🛑`
+                )
+            );
+        });
+}
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
     .command(
@@ -66,16 +174,7 @@ yargs(hideBin(process.argv))
         },
         handleCreate
     )
-    .command(
-        "*",
-        "Print with empty args",
-        () => {},
-        () => {
-            console.log(
-                `∅ No args! Use \n\t${process.argv[1]} --help\nfor details ∅`
-            );
-        }
-    )
+    .command("*", "Print with empty args", () => {}, interactiveSetup)
     .help().argv;
 
 function handleCreate(arg) {
@@ -109,115 +208,6 @@ function handleCreateFeature(type) {
             )
         );
     }
-}
-
-function handleCreateEmptyFeature() {
-    const setup = (feature_name, author, version, description, license) => {
-        let dependencies = ["rollup"];
-
-        // folders are keys, files are strings.
-        var structure = {};
-
-        structure[feature_name] = [
-            { src: ["index.js"] },
-            { test: [] },
-            "package.json",
-            "manifest.json",
-            "README.md",
-            "rollup.config.js",
-        ];
-
-        let templates = {
-            "package.json": packageTemplate(
-                feature_name,
-                version,
-                description,
-                "src/index.js",
-                author,
-                license
-            ),
-            "manifest.json": manifestTemplate(feature_name, author),
-            "README.md": readmeTemplate(feature_name, description),
-            "rollup.config.js": readFileSync(
-                "src/static/templates/rollup.config.js"
-            ),
-        };
-
-        if (existsSync(`./${feature_name}`)) {
-            console.log(
-                chalk.red.bold.underline(
-                    "🛑 Feature already exists in this folder. Aborting! 🛑"
-                )
-            );
-            return;
-        }
-
-        createDirectoryStructure(structure, ".", templates);
-
-        execSync(
-            `cd ${feature_name} && npm install ${dependencies.reduce(
-                (a, b) => a + " " + b,
-                ""
-            )}`
-        );
-    };
-
-    const setup_questions = [
-        {
-            type: "input",
-            name: "feature_name",
-            message: "Feature Name:",
-            default: "example",
-        },
-        {
-            type: "input",
-            name: "version",
-            message: "Version:",
-            default: "0.0.1",
-        },
-        {
-            type: "input",
-            name: "description",
-            message: "Description:",
-            default: (answers) => `Generated ${answers.feature_name} feature`,
-        },
-        {
-            type: "input",
-            name: "author",
-            message: "Author:",
-            default: "polypoly",
-        },
-        {
-            type: "input",
-            name: "license",
-            message: "License:",
-            default: "MIT",
-        },
-    ];
-
-    inquirer
-        .prompt(setup_questions)
-        .then((answers) => {
-            checkIfValueExists("feature_name", answers);
-            checkIfValueExists("author", answers);
-            checkIfValueExists("version", answers);
-            checkIfValueExists("description", answers);
-            checkIfValueExists("license", answers);
-            setup(
-                answers.feature_name,
-                answers.author,
-                answers.version,
-                answers.description,
-                answers.license
-            );
-        })
-        .catch((error) => {
-            console.log(
-                chalk.red.bold.underline(
-                    `🛑 Error: ${JSON.stringify(error, null, 4)} 🛑`
-                )
-            );
-        });
 }
 
 function handleCreatePreviewFeature() {
