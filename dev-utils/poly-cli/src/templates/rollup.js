@@ -1,5 +1,5 @@
-export function template() {
-    let t = `
+export function rollupTemplate() {
+    return `
 import copy from "@polypoly-eu/rollup-plugin-copy-watch";
 export default {
   input: "src/index.js",
@@ -23,6 +23,4 @@ export default {
   ],
 };
   `;
-
-    return t;
 }

@@ -1,7 +1,14 @@
 const INDENTING_SPACES = 4;
 
 // template returns a string that can be written to a file
-export function template(name, version, description, main, author, license) {
+export function packageTemplate(
+    name,
+    version,
+    description,
+    main,
+    author,
+    license
+) {
     return JSON.stringify(
         {
             name: name,

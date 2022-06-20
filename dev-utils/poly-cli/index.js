@@ -6,10 +6,12 @@ import { hideBin } from "yargs/helpers";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
-import { template as packageTemplate } from "./src/templates/package.js";
-import { template as manifestTemplate } from "./src/templates/manifest.js";
-import { template as readmeTemplate } from "./src/templates/readme.js";
-import { template as rollupTemplate } from "./src/templates/rollup.js";
+import {
+    packageTemplate,
+    manifestTemplate,
+    readmeTemplate,
+    rollupTemplate,
+} from "./src/templates/index.js";
 
 const gotArgs = yargs(hideBin(process.argv))
     .scriptName("poly-cli")

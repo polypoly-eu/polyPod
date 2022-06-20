@@ -1,4 +1,4 @@
-export function template(feature_name, description) {
+export function readmeTemplate(feature_name, description) {
     return `
 # ${feature_name}
 

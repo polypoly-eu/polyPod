@@ -1,4 +1,4 @@
-export function template(feature_name, author) {
+export function manifestTemplate(feature_name, author) {
     let t = {
         name: feature_name,
         author: author,
