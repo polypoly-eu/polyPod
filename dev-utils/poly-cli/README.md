@@ -6,10 +6,10 @@ Generates stuff for us. Currently only generates the structure for a feature.
 
 First install with `npm ci`
 
-Run with:
+Run inside `features/` folder:
 
 ```shell
-node index.js create feature --type preview
+node ../dev-utils/poly-cli/index.js create feature --type preview
 ```
 
 There are 3 types: `empty`, `preview`, and `importer`. `empty` is the default
