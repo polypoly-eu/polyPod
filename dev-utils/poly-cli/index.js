@@ -11,7 +11,7 @@ import { template as manifestTemplate } from "./templates/manifest.js";
 import { template as readmeTemplate } from "./templates/readme.js";
 import { template as rollupTemplate } from "./templates/rollup.js";
 
-yargs(hideBin(process.argv))
+const gotArgs = yargs(hideBin(process.argv))
     .scriptName("poly-cli")
     .command(
         "create <what> [type]",
@@ -33,6 +33,10 @@ yargs(hideBin(process.argv))
         handleCreate
     )
     .help().argv;
+
+if (gotArgs._.length == 0) {
+    console.log(`∅ No args! Use \n\t${process.argv[1]} --help\nfor details ∅`);
+}
 
 function handleCreate(arg) {
     if (arg.what === "feature") {
