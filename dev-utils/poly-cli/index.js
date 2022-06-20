@@ -137,7 +137,7 @@ function handleCreateEmptyFeature() {
             type: "input",
             name: "description",
             message: "Description:",
-            default: "Feature",
+            default: (answers) => `Generated ${answers.feature_name} feature`,
         },
         {
             type: "input",
