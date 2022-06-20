@@ -21,12 +21,12 @@ export default {
         css({ output: "css/bundle.css" }),
         genPodjs({
             build_dir: "./dist",
-            manifestPath: "./manifest.json",
+            manifestPath: "./src/static/manifest.json",
         }),
         copy({
             targets: [
                 {
-                    src: ["manifest.json"],
+                    src: ["./src/static/*"],
                     dest: "dist",
                 },
                 {

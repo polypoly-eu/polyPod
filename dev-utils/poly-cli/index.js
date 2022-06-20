@@ -24,10 +24,11 @@ function setup(feature_name, author, version, description, license) {
     var structure = {};
 
     structure[feature_name] = [
-        { src: ["index.js"] },
+        {
+            src: ["index.js", { static: ["manifest.json", "index.html"] }],
+        },
         { test: [] },
         "package.json",
-        "manifest.json",
         "README.md",
         "rollup.config.mjs",
     ];
