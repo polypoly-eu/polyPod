@@ -3,14 +3,13 @@
 import chalk from "chalk";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { existsSync, fstat, mkdirSync, writeFileSync, copyFileSync } from "fs";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
 import {
     packageTemplate,
     manifestTemplate,
     readmeTemplate,
-    rollupTemplate,
 } from "./src/templates/index.js";
 
 const gotArgs = yargs(hideBin(process.argv))
@@ -100,7 +99,6 @@ function handleCreateEmptyFeature() {
             ),
             "manifest.json": manifestTemplate(feature_name, author),
             "README.md": readmeTemplate(feature_name, description),
-            "rollup.config.js": rollupTemplate(),
         };
 
         if (existsSync(`./${feature_name}`)) {
@@ -207,6 +205,10 @@ function createDirectoryStructure(structure, parent, templates) {
                 writeFileSync(dir + "/" + child, content);
             }
         }
+    }
+
+    for (const f of ["rollup.config.js"]) {
+        copyFileSync(`src/static/templates/${f}`, `${parent}/${f}`);
     }
 }
 
