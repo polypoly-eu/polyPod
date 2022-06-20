@@ -121,7 +121,6 @@ open class PolyOut(
             val newFs = fs.filter {
                 File(idToPath(it.key, context)).exists()
             }
-            Preferences.setFileSystem(context, newFs)
             return newFs.keys.map {
                 mutableMapOf<String, String>(
                     "id" to it,
