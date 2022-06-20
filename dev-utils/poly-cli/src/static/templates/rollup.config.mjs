@@ -1,4 +1,6 @@
 import copy from "@polypoly-eu/rollup-plugin-copy-watch";
+import sillyI18n from "@polypoly-eu/silly-i18n/rollup-plugin.js";
+
 export default {
     input: "src/index.js",
     output: {
@@ -7,6 +9,7 @@ export default {
         globals: {},
     },
     plugins: [
+        sillyI18n(),
         copy({
             targets: [
                 {

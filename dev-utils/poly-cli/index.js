@@ -29,7 +29,7 @@ function setup(feature_name, author, version, description, license) {
         "package.json",
         "manifest.json",
         "README.md",
-        "rollup.config.js",
+        "rollup.config.mjs",
     ];
 
     let templates = {
@@ -43,8 +43,8 @@ function setup(feature_name, author, version, description, license) {
         ),
         "manifest.json": manifestTemplate(feature_name, author),
         "README.md": readmeTemplate(feature_name, description),
-        "rollup.config.js": readFileSync(
-            path.resolve(__dirname, "./src/static/templates/rollup.config.js")
+        "rollup.config.mjs": readFileSync(
+            path.resolve(__dirname, "./src/static/templates/rollup.config.mjs")
         ),
     };
 

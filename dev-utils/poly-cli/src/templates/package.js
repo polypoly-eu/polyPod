@@ -23,6 +23,10 @@ export function packageTemplate(
                 "@polypoly-eu/rollup-plugin-copy-watch":
                     "file:../../dev-utils/rollup-plugin-copy-watch",
             },
+            dependencies: {
+                "@polypoly-eu/silly-i18n":
+                    "file:../../feature-utils/silly-i18n",
+            },
             author: author,
             license: license,
         },
