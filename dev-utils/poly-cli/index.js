@@ -84,7 +84,6 @@ function handleCreateEmptyFeature() {
             { test: [] },
             "package.json",
             "manifest.json",
-            "rollup.config.js",
             "README.md",
         ];
 
