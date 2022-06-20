@@ -25,7 +25,11 @@ function setup(feature_name, author, version, description, license) {
 
     structure[feature_name] = [
         {
-            src: ["index.js", { static: ["manifest.json", "index.html"] }],
+            src: [
+                { static: ["manifest.json", "index.html"] },
+                "index.js",
+                "styles.css",
+            ],
         },
         { test: [] },
         "package.json",
@@ -49,6 +53,9 @@ function setup(feature_name, author, version, description, license) {
         ),
         "index.html": readFileSync(
             path.resolve(__dirname, "./src/static/templates/index.html")
+        ),
+        "styles.css": readFileSync(
+            path.resolve(__dirname, "./src/static/templates/styles.css")
         ),
     };
 
