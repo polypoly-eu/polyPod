@@ -22,6 +22,8 @@ private const val manifestString = """
         "author": "testAuthor",
         "thumbnail": "assets/thumbnail.png",
         "primaryColor": "#000000",
+        "borderColor": "#000000",
+        "borderSize": "1",
         "links": {
             "link1": "https://example.com/1",
             "link2": "https://example.com/2"
