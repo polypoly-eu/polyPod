@@ -85,8 +85,6 @@ open class FeatureFragment : Fragment() {
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    private val args: FeatureFragmentArgs by navArgs()
-
     private lateinit var feature: Feature
     private lateinit var foregroundResources: ForegroundResources
     // Public for test purposes
@@ -113,13 +111,14 @@ open class FeatureFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (view.findViewById(R.id.feature_title) as TextView).text =
-            args.featureName
+            arguments?.getString("featureName")
         logger.debug(
             "Inside FeatureFragment, feature to load: '{}'",
-            args.featureName
+            arguments?.getString("featureName")
         )
         feature =
-            FeatureStorage().loadFeature(requireContext(), args.featureFile)
+            arguments?.getString("featureFile")
+                ?.let { FeatureStorage().loadFeature(requireContext(), it) }!!
 
         setupFeature(view)
     }

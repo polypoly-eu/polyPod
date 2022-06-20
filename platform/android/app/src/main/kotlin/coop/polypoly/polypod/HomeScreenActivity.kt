@@ -1,6 +1,9 @@
 package coop.polypoly.polypod
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -17,16 +20,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
@@ -39,15 +40,132 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.fragment.app.Fragment
 import com.google.accompanist.flowlayout.FlowRow
 
-class HomeScreenActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            // TODO
+class HomeScreenActivity : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return ComposeView(requireContext()).apply {
+            setContent {
+                screen(sectionModels = listOf(SectionModel("yourData", SectionType.YOUR_DATA, listOf(
+                    TileModel("feature", "myFeature", R.drawable.ic_launcher, Color.Cyan)
+                ))))
+            }
         }
     }
+}
+
+@Composable
+fun screen(sectionModels: List<SectionModel>) {
+    val configuration = LocalConfiguration.current
+
+    val tilesPerContainer = 3
+
+    val screenLayout = ScreenLayout(
+        horizontalPadding = PolyStyle().spacing._4x,
+        verticalSpacing = PolyStyle().spacing._8x,
+        width = configuration.screenWidthDp.dp
+    )
+    val sectionLayout =
+        SectionLayout(verticalSpacing = PolyStyle().spacing._3x)
+    val containerLayout = ContainerLayout(
+        horizontalInterItemSpacing = PolyStyle().spacing._3x,
+        verticalInterItemSpacing = PolyStyle().spacing._3x
+    ) // ktlint-disable max-line-length
+
+    val screenWidth = configuration.screenWidthDp
+    val totalScreenPadding = 2 * screenLayout.horizontalPadding.value
+    val containerWidth = screenWidth - totalScreenPadding
+
+    val interItemSpacing =
+        (tilesPerContainer - 1) * containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
+    val smallTileWidth =
+        (containerWidth - interItemSpacing) / tilesPerContainer // ktlint-disable max-line-length
+    val bigTileWidth =
+        containerWidth - smallTileWidth - containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
+
+    val smallTileLayout = TileLayout.smallCard(smallTileWidth, smallTileWidth)
+    val mediumTileLayout = TileLayout.mediumCard(containerWidth, smallTileWidth)
+    val bigTileLayout = TileLayout.bigCard(bigTileWidth, bigTileWidth)
+
+    val sectionStyle = SectionStyle(
+        titleFont = FontDescription(
+            family = PolyStyle().font.family.jostMedium,
+            weight = PolyStyle().font.weight.medium,
+            size = PolyStyle().font.size.lg,
+            lineHeight = PolyStyle().font.lineHeight.lg,
+            alignment = PolyStyle().font.alignment.left
+        )
+    )
+
+    val smallTileStyle = TileStyle.smallTileStyle()
+    val mediumTileStyle = TileStyle.mediumTileStyle()
+    val bigTileStyle = TileStyle.bigTileStyle()
+
+    val sections = sectionModels.map {
+        section(
+            model = it,
+            layout = sectionLayout,
+            containerLayout = containerLayout,
+            smallTileLayout = smallTileLayout,
+            mediumTileLayout = mediumTileLayout,
+            bigTileLayout = bigTileLayout,
+            smallTileStyle = smallTileStyle,
+            mediumTileStyle = mediumTileStyle,
+            bigTileStyle = bigTileStyle,
+            style = sectionStyle
+        )
+    }
+
+    val footer = Footer(
+        model = FooterModel(
+            title = "Like What You Have Seen?",
+            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
+            buttonTitle = "Learn More",
+            imageId = R.drawable.ic_launcher
+        ),
+        style = FooterStyle(
+            backgroundColor = Color(0xFFFED7D6),
+            buttonBackgroundColor = Color(0xFF0F1938),
+            titleFont = FontDescription(
+                family = PolyStyle().font.family.jostMedium,
+                weight = PolyStyle().font.weight.medium,
+                size = PolyStyle().font.size._2xl,
+                lineHeight = PolyStyle().font.lineHeight._2xl,
+                alignment = PolyStyle().font.alignment.left
+            ),
+            descriptionFont = FontDescription(
+                family = PolyStyle().font.family.jostRegular,
+                weight = PolyStyle().font.weight.regular,
+                size = PolyStyle().font.size.base,
+                lineHeight = PolyStyle().font.lineHeight.base,
+                alignment = PolyStyle().font.alignment.left
+            ),
+            buttonTitleFont = FontDescription(
+                family = PolyStyle().font.family.jostMedium,
+                weight = PolyStyle().font.weight.medium,
+                size = PolyStyle().font.size.lg,
+                lineHeight = PolyStyle().font.lineHeight.lg,
+                alignment = PolyStyle().font.alignment.center
+            )
+        ),
+        layout = FooterLayout(
+            padding = PolyStyle().spacing._6x,
+            verticalSpacing = PolyStyle().spacing._4x,
+            cornerRadius = PolyStyle().radius._2x
+        )
+    )
+
+    val screen = Screen(
+        sections = sections,
+        footer = footer,
+        layout = screenLayout
+    )
+    return Screen(screen = screen)
 }
 
 data class PolySpacing(
@@ -173,6 +291,8 @@ enum class SectionType {
 
 data class SectionModel(
     val title: String,
+    val type: SectionType,
+    val tiles: List<TileModel>,
 )
 
 data class Section(
@@ -181,7 +301,9 @@ data class Section(
     val containers: List<Container>,
     val layout: SectionLayout,
     val style: SectionStyle
-)
+) {
+    companion object {}
+}
 
 data class FooterModel(
     val title: String,
@@ -202,6 +324,8 @@ data class Screen(
     val layout: ScreenLayout
 )
 
+
+
 data class FontDescription(
     val family: Int,
     val weight: FontWeight,
@@ -217,7 +341,60 @@ data class SectionStyle(
 data class TileStyle(
     val titleFont: FontDescription,
     val descriptionFont: FontDescription?
-)
+) {
+    companion object {}
+}
+
+fun TileStyle.Companion.smallTileStyle(): TileStyle {
+    return TileStyle(
+        titleFont = FontDescription(
+            family = PolyStyle().font.family.jostMedium,
+            weight = PolyStyle().font.weight.medium,
+            size = PolyStyle().font.size.xs,
+            lineHeight = PolyStyle().font.lineHeight.xs,
+            alignment = PolyStyle().font.alignment.center
+        ),
+        descriptionFont = null
+    )
+}
+
+fun TileStyle.Companion.mediumTileStyle(): TileStyle {
+    return TileStyle(
+        titleFont = FontDescription(
+            family = PolyStyle().font.family.jostMedium,
+            weight = PolyStyle().font.weight.medium,
+            size = PolyStyle().font.size.base,
+            lineHeight = PolyStyle().font.lineHeight.base,
+            alignment = PolyStyle().font.alignment.left
+        ),
+        descriptionFont = FontDescription(
+            family = PolyStyle().font.family.jostRegular,
+            weight = PolyStyle().font.weight.regular,
+            size = PolyStyle().font.size.xs,
+            lineHeight = PolyStyle().font.lineHeight.xs,
+            alignment = PolyStyle().font.alignment.left
+        ),
+    )
+}
+
+fun TileStyle.Companion.bigTileStyle(): TileStyle {
+    return TileStyle(
+        titleFont = FontDescription(
+            family = PolyStyle().font.family.jostMedium,
+            weight = PolyStyle().font.weight.medium,
+            size = PolyStyle().font.size.base,
+            lineHeight = PolyStyle().font.lineHeight.base,
+            alignment = PolyStyle().font.alignment.left
+        ),
+        descriptionFont = FontDescription(
+            family = PolyStyle().font.family.jostRegular,
+            weight = PolyStyle().font.weight.regular,
+            size = PolyStyle().font.size.xs,
+            lineHeight = PolyStyle().font.lineHeight.xs,
+            alignment = PolyStyle().font.alignment.left
+        ),
+    )
+}
 
 data class FooterStyle(
     val backgroundColor: Color,
@@ -241,7 +418,63 @@ data class TileLayout(
     val textBottomPadding: Dp,
     val textStartPadding: Dp,
     val textEndPadding: Dp,
-)
+) {
+    companion object {}
+}
+
+fun TileLayout.Companion.smallCard(width: Float, height: Float): TileLayout {
+    return TileLayout(
+        width = width.dp,
+        height = height.dp,
+        verticalSpacing = 0.dp,
+        topPadding = 0.dp,
+        startPadding = PolyStyle().spacing._1x,
+        endPadding = PolyStyle().spacing._1x,
+        bottomPadding = PolyStyle().spacing._1x,
+        cornerRadius = PolyStyle().radius._2x,
+        textVerticalSpacing = 0.dp,
+        textTopPadding = 0.dp,
+        textBottomPadding = 0.dp,
+        textStartPadding = 0.dp,
+        textEndPadding = 0.dp
+    )
+}
+
+fun TileLayout.Companion.mediumCard(width: Float, height: Float): TileLayout {
+    return TileLayout(
+        width = width.dp,
+        height = height.dp,
+        verticalSpacing = 0.dp,
+        topPadding = 0.dp,
+        startPadding = 0.dp,
+        endPadding = 0.dp,
+        bottomPadding = 0.dp,
+        cornerRadius = PolyStyle().radius._2x,
+        textVerticalSpacing = PolyStyle().spacing._2x,
+        textTopPadding = PolyStyle().spacing._2x,
+        textBottomPadding = PolyStyle().spacing._2x,
+        textStartPadding = PolyStyle().spacing._3x,
+        textEndPadding = PolyStyle().spacing._4x
+    )
+}
+
+fun TileLayout.Companion.bigCard(width: Float, height: Float): TileLayout {
+    return TileLayout(
+        width = width.dp,
+        height = height.dp,
+        verticalSpacing = PolyStyle().spacing._2x,
+        topPadding = PolyStyle().spacing._4x,
+        startPadding = PolyStyle().spacing._4x,
+        endPadding = PolyStyle().spacing._4x,
+        bottomPadding = PolyStyle().spacing._4x,
+        cornerRadius = PolyStyle().radius._2x,
+        textVerticalSpacing = 0.dp,
+        textTopPadding = 0.dp,
+        textBottomPadding = 0.dp,
+        textStartPadding = 0.dp,
+        textEndPadding = 0.dp
+    )
+}
 
 data class ContainerLayout(
     val verticalInterItemSpacing: Dp,
@@ -267,6 +500,7 @@ data class FooterLayout(
 fun isLight(color: Color): Boolean {
     return luminance(color.toArgb()) > 100
 }
+
 
 @Composable
 fun Screen(screen: Screen) {
@@ -774,9 +1008,7 @@ fun rowContainers(
 
 fun section(
     model: SectionModel,
-    type: SectionType,
     style: SectionStyle,
-    tiles: List<TileModel>,
     layout: SectionLayout,
     containerLayout: ContainerLayout,
     smallTileLayout: TileLayout,
@@ -786,12 +1018,12 @@ fun section(
     mediumTileStyle: TileStyle,
     bigTileStyle: TileStyle
 ): Section {
-    when (type) {
+    when (model.type) {
         SectionType.YOUR_DATA -> return Section(
             model = model,
-            type = type,
+            type = model.type,
             containers = yourDataContainers(
-                tiles,
+                model.tiles,
                 containerLayout,
                 bigTileLayout,
                 bigTileStyle,
@@ -803,9 +1035,9 @@ fun section(
         )
         SectionType.DATA_KNOW_HOW -> return Section(
             model = model,
-            type = type,
+            type =  model.type,
             containers = rowContainers(
-                tiles,
+                model.tiles,
                 tilesPerContainer = 3,
                 containerLayout,
                 smallTileLayout,
@@ -817,9 +1049,9 @@ fun section(
         )
         SectionType.TOOLS -> return Section(
             model = model,
-            type = type,
+            type =  model.type,
             containers = rowContainers(
-                tiles,
+                model.tiles,
                 tilesPerContainer = 1,
                 containerLayout,
                 mediumTileLayout,
@@ -832,242 +1064,242 @@ fun section(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    val configuration = LocalConfiguration.current
-
-    val tilesPerContainer = 3
-
-    val screenLayout = ScreenLayout(
-        horizontalPadding = PolyStyle().spacing._4x,
-        verticalSpacing = PolyStyle().spacing._8x,
-        width = configuration.screenWidthDp.dp
-    )
-    val sectionLayout = SectionLayout(verticalSpacing = PolyStyle().spacing._3x)
-    val containerLayout = ContainerLayout(horizontalInterItemSpacing = PolyStyle().spacing._3x, verticalInterItemSpacing = PolyStyle().spacing._3x) // ktlint-disable max-line-length
-
-    val screenWidth = configuration.screenWidthDp
-    val totalScreenPadding = 2 * screenLayout.horizontalPadding.value
-    val containerWidth = screenWidth - totalScreenPadding
-
-    val interItemSpacing = (tilesPerContainer - 1) * containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
-    val smallTileWidth = (containerWidth - interItemSpacing) / tilesPerContainer // ktlint-disable max-line-length
-    val bigTileWidth = containerWidth - smallTileWidth - containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
-
-    val smallTileLayout = TileLayout(
-        width = smallTileWidth.dp,
-        height = smallTileWidth.dp,
-        verticalSpacing = 0.dp,
-        topPadding = 0.dp,
-        startPadding = PolyStyle().spacing._1x,
-        endPadding = PolyStyle().spacing._1x,
-        bottomPadding = PolyStyle().spacing._1x,
-        cornerRadius = PolyStyle().radius._2x,
-        textVerticalSpacing = 0.dp,
-        textTopPadding = 0.dp,
-        textBottomPadding = 0.dp,
-        textStartPadding = 0.dp,
-        textEndPadding = 0.dp
-    )
-
-    val mediumTileLayout = TileLayout(
-        width = containerWidth.dp,
-        height = smallTileWidth.dp,
-        verticalSpacing = 0.dp,
-        topPadding = 0.dp,
-        startPadding = 0.dp,
-        endPadding = 0.dp,
-        bottomPadding = 0.dp,
-        cornerRadius = PolyStyle().radius._2x,
-        textVerticalSpacing = PolyStyle().spacing._2x,
-        textTopPadding = PolyStyle().spacing._2x,
-        textBottomPadding = PolyStyle().spacing._2x,
-        textStartPadding = PolyStyle().spacing._3x,
-        textEndPadding = PolyStyle().spacing._4x
-    )
-
-    val bigTileLayout = TileLayout(
-        width = bigTileWidth.dp,
-        height = bigTileWidth.dp,
-        verticalSpacing = PolyStyle().spacing._2x,
-        topPadding = PolyStyle().spacing._4x,
-        startPadding = PolyStyle().spacing._4x,
-        endPadding = PolyStyle().spacing._4x,
-        bottomPadding = PolyStyle().spacing._4x,
-        cornerRadius = PolyStyle().radius._2x,
-        textVerticalSpacing = 0.dp,
-        textTopPadding = 0.dp,
-        textBottomPadding = 0.dp,
-        textStartPadding = 0.dp,
-        textEndPadding = 0.dp
-    )
-
-    val sectionStyle = SectionStyle(
-        titleFont = FontDescription(
-            family = PolyStyle().font.family.jostMedium,
-            weight = PolyStyle().font.weight.medium,
-            size = PolyStyle().font.size.lg,
-            lineHeight = PolyStyle().font.lineHeight.lg,
-            alignment = PolyStyle().font.alignment.left
-        )
-    )
-
-    val smallTileStyle = TileStyle(
-        titleFont = FontDescription(
-            family = PolyStyle().font.family.jostMedium,
-            weight = PolyStyle().font.weight.medium,
-            size = PolyStyle().font.size.xs,
-            lineHeight = PolyStyle().font.lineHeight.xs,
-            alignment = PolyStyle().font.alignment.center
-        ),
-        descriptionFont = null
-    )
-
-    val mediumTileStyle = TileStyle(
-        titleFont = FontDescription(
-            family = PolyStyle().font.family.jostMedium,
-            weight = PolyStyle().font.weight.medium,
-            size = PolyStyle().font.size.base,
-            lineHeight = PolyStyle().font.lineHeight.base,
-            alignment = PolyStyle().font.alignment.left
-        ),
-        descriptionFont = FontDescription(
-            family = PolyStyle().font.family.jostRegular,
-            weight = PolyStyle().font.weight.regular,
-            size = PolyStyle().font.size.xs,
-            lineHeight = PolyStyle().font.lineHeight.xs,
-            alignment = PolyStyle().font.alignment.left
-        ),
-    )
-
-    val bigTileStyle = TileStyle(
-        titleFont = FontDescription(
-            family = PolyStyle().font.family.jostMedium,
-            weight = PolyStyle().font.weight.medium,
-            size = PolyStyle().font.size.base,
-            lineHeight = PolyStyle().font.lineHeight.base,
-            alignment = PolyStyle().font.alignment.left
-        ),
-        descriptionFont = FontDescription(
-            family = PolyStyle().font.family.jostRegular,
-            weight = PolyStyle().font.weight.regular,
-            size = PolyStyle().font.size.xs,
-            lineHeight = PolyStyle().font.lineHeight.xs,
-            alignment = PolyStyle().font.alignment.left
-        ),
-    )
-
-    val tileModel = TileModel(
-        title = "Facebook Import",
-        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
-        imageId = R.drawable.ic_launcher,
-        backgroundColor = Color.Black
-    )
-
-    val tileModels: List<TileModel> = listOf(
-        tileModel, tileModel, tileModel,
-        tileModel, tileModel, tileModel,
-        tileModel, tileModel, tileModel,
-        tileModel, tileModel, tileModel,
-    )
-
-    val yourDataSection = section(
-        model = SectionModel(
-            title = "Your Data",
-        ),
-        type = SectionType.YOUR_DATA,
-        tiles = tileModels,
-        layout = sectionLayout,
-        containerLayout = containerLayout,
-        smallTileLayout = smallTileLayout,
-        mediumTileLayout = mediumTileLayout,
-        bigTileLayout = bigTileLayout,
-        smallTileStyle = smallTileStyle,
-        mediumTileStyle = mediumTileStyle,
-        bigTileStyle = bigTileStyle,
-        style = sectionStyle
-    )
-
-    val dataKnowHow = section(
-        model = SectionModel(
-            title = "Data Know How",
-        ),
-        type = SectionType.DATA_KNOW_HOW,
-        tiles = tileModels,
-        layout = sectionLayout,
-        containerLayout = containerLayout,
-        smallTileLayout = smallTileLayout,
-        mediumTileLayout = mediumTileLayout,
-        bigTileLayout = bigTileLayout,
-        smallTileStyle = smallTileStyle,
-        mediumTileStyle = mediumTileStyle,
-        bigTileStyle = bigTileStyle,
-        style = sectionStyle
-    )
-
-    val tools = section(
-        model = SectionModel(
-            title = "Tools",
-        ),
-        type = SectionType.TOOLS,
-        tiles = tileModels,
-        layout = sectionLayout,
-        containerLayout = containerLayout,
-        smallTileLayout = smallTileLayout,
-        mediumTileLayout = mediumTileLayout,
-        bigTileLayout = bigTileLayout,
-        smallTileStyle = smallTileStyle,
-        mediumTileStyle = mediumTileStyle,
-        bigTileStyle = bigTileStyle,
-        style = sectionStyle
-    )
-
-    val footer = Footer(
-        model = FooterModel(
-            title = "Like What You Have Seen?",
-            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
-            buttonTitle = "Learn More",
-            imageId = R.drawable.ic_launcher
-        ),
-        style = FooterStyle(
-            backgroundColor = Color(0xFFFED7D6),
-            buttonBackgroundColor = Color(0xFF0F1938),
-            titleFont = FontDescription(
-                family = PolyStyle().font.family.jostMedium,
-                weight = PolyStyle().font.weight.medium,
-                size = PolyStyle().font.size._2xl,
-                lineHeight = PolyStyle().font.lineHeight._2xl,
-                alignment = PolyStyle().font.alignment.left
-            ),
-            descriptionFont = FontDescription(
-                family = PolyStyle().font.family.jostRegular,
-                weight = PolyStyle().font.weight.regular,
-                size = PolyStyle().font.size.base,
-                lineHeight = PolyStyle().font.lineHeight.base,
-                alignment = PolyStyle().font.alignment.left
-            ),
-            buttonTitleFont = FontDescription(
-                family = PolyStyle().font.family.jostMedium,
-                weight = PolyStyle().font.weight.medium,
-                size = PolyStyle().font.size.lg,
-                lineHeight = PolyStyle().font.lineHeight.lg,
-                alignment = PolyStyle().font.alignment.center
-            )
-        ),
-        layout = FooterLayout(
-            padding = PolyStyle().spacing._6x,
-            verticalSpacing = PolyStyle().spacing._4x,
-            cornerRadius = PolyStyle().radius._2x
-        )
-    )
-
-    val screen = Screen(
-        sections = listOf(yourDataSection, dataKnowHow, tools),
-        footer = footer,
-        layout = screenLayout
-    )
-
-    Screen(screen = screen)
-    // Footer(footer = footer)
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview() {
+//    val configuration = LocalConfiguration.current
+//
+//    val tilesPerContainer = 3
+//
+//    val screenLayout = ScreenLayout(
+//        horizontalPadding = PolyStyle().spacing._4x,
+//        verticalSpacing = PolyStyle().spacing._8x,
+//        width = configuration.screenWidthDp.dp
+//    )
+//    val sectionLayout = SectionLayout(verticalSpacing = PolyStyle().spacing._3x)
+//    val containerLayout = ContainerLayout(horizontalInterItemSpacing = PolyStyle().spacing._3x, verticalInterItemSpacing = PolyStyle().spacing._3x) // ktlint-disable max-line-length
+//
+//    val screenWidth = configuration.screenWidthDp
+//    val totalScreenPadding = 2 * screenLayout.horizontalPadding.value
+//    val containerWidth = screenWidth - totalScreenPadding
+//
+//    val interItemSpacing = (tilesPerContainer - 1) * containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
+//    val smallTileWidth = (containerWidth - interItemSpacing) / tilesPerContainer // ktlint-disable max-line-length
+//    val bigTileWidth = containerWidth - smallTileWidth - containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
+//
+//    val smallTileLayout = TileLayout(
+//        width = smallTileWidth.dp,
+//        height = smallTileWidth.dp,
+//        verticalSpacing = 0.dp,
+//        topPadding = 0.dp,
+//        startPadding = PolyStyle().spacing._1x,
+//        endPadding = PolyStyle().spacing._1x,
+//        bottomPadding = PolyStyle().spacing._1x,
+//        cornerRadius = PolyStyle().radius._2x,
+//        textVerticalSpacing = 0.dp,
+//        textTopPadding = 0.dp,
+//        textBottomPadding = 0.dp,
+//        textStartPadding = 0.dp,
+//        textEndPadding = 0.dp
+//    )
+//
+//    val mediumTileLayout = TileLayout(
+//        width = containerWidth.dp,
+//        height = smallTileWidth.dp,
+//        verticalSpacing = 0.dp,
+//        topPadding = 0.dp,
+//        startPadding = 0.dp,
+//        endPadding = 0.dp,
+//        bottomPadding = 0.dp,
+//        cornerRadius = PolyStyle().radius._2x,
+//        textVerticalSpacing = PolyStyle().spacing._2x,
+//        textTopPadding = PolyStyle().spacing._2x,
+//        textBottomPadding = PolyStyle().spacing._2x,
+//        textStartPadding = PolyStyle().spacing._3x,
+//        textEndPadding = PolyStyle().spacing._4x
+//    )
+//
+//    val bigTileLayout = TileLayout(
+//        width = bigTileWidth.dp,
+//        height = bigTileWidth.dp,
+//        verticalSpacing = PolyStyle().spacing._2x,
+//        topPadding = PolyStyle().spacing._4x,
+//        startPadding = PolyStyle().spacing._4x,
+//        endPadding = PolyStyle().spacing._4x,
+//        bottomPadding = PolyStyle().spacing._4x,
+//        cornerRadius = PolyStyle().radius._2x,
+//        textVerticalSpacing = 0.dp,
+//        textTopPadding = 0.dp,
+//        textBottomPadding = 0.dp,
+//        textStartPadding = 0.dp,
+//        textEndPadding = 0.dp
+//    )
+//
+//    val sectionStyle = SectionStyle(
+//        titleFont = FontDescription(
+//            family = PolyStyle().font.family.jostMedium,
+//            weight = PolyStyle().font.weight.medium,
+//            size = PolyStyle().font.size.lg,
+//            lineHeight = PolyStyle().font.lineHeight.lg,
+//            alignment = PolyStyle().font.alignment.left
+//        )
+//    )
+//
+//    val smallTileStyle = TileStyle(
+//        titleFont = FontDescription(
+//            family = PolyStyle().font.family.jostMedium,
+//            weight = PolyStyle().font.weight.medium,
+//            size = PolyStyle().font.size.xs,
+//            lineHeight = PolyStyle().font.lineHeight.xs,
+//            alignment = PolyStyle().font.alignment.center
+//        ),
+//        descriptionFont = null
+//    )
+//
+//    val mediumTileStyle = TileStyle(
+//        titleFont = FontDescription(
+//            family = PolyStyle().font.family.jostMedium,
+//            weight = PolyStyle().font.weight.medium,
+//            size = PolyStyle().font.size.base,
+//            lineHeight = PolyStyle().font.lineHeight.base,
+//            alignment = PolyStyle().font.alignment.left
+//        ),
+//        descriptionFont = FontDescription(
+//            family = PolyStyle().font.family.jostRegular,
+//            weight = PolyStyle().font.weight.regular,
+//            size = PolyStyle().font.size.xs,
+//            lineHeight = PolyStyle().font.lineHeight.xs,
+//            alignment = PolyStyle().font.alignment.left
+//        ),
+//    )
+//
+//    val bigTileStyle = TileStyle(
+//        titleFont = FontDescription(
+//            family = PolyStyle().font.family.jostMedium,
+//            weight = PolyStyle().font.weight.medium,
+//            size = PolyStyle().font.size.base,
+//            lineHeight = PolyStyle().font.lineHeight.base,
+//            alignment = PolyStyle().font.alignment.left
+//        ),
+//        descriptionFont = FontDescription(
+//            family = PolyStyle().font.family.jostRegular,
+//            weight = PolyStyle().font.weight.regular,
+//            size = PolyStyle().font.size.xs,
+//            lineHeight = PolyStyle().font.lineHeight.xs,
+//            alignment = PolyStyle().font.alignment.left
+//        ),
+//    )
+//
+//    val tileModel = TileModel(
+//        title = "Facebook Import",
+//        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
+//        imageId = R.drawable.ic_launcher,
+//        backgroundColor = Color.Black
+//    )
+//
+//    val tileModels: List<TileModel> = listOf(
+//        tileModel, tileModel, tileModel,
+//        tileModel, tileModel, tileModel,
+//        tileModel, tileModel, tileModel,
+//        tileModel, tileModel, tileModel,
+//    )
+//
+//    val yourDataSection = section(
+//        model = SectionModel(
+//            title = "Your Data",
+//        ),
+//        type = SectionType.YOUR_DATA,
+//        tiles = tileModels,
+//        layout = sectionLayout,
+//        containerLayout = containerLayout,
+//        smallTileLayout = smallTileLayout,
+//        mediumTileLayout = mediumTileLayout,
+//        bigTileLayout = bigTileLayout,
+//        smallTileStyle = smallTileStyle,
+//        mediumTileStyle = mediumTileStyle,
+//        bigTileStyle = bigTileStyle,
+//        style = sectionStyle
+//    )
+//
+//    val dataKnowHow = section(
+//        model = SectionModel(
+//            title = "Data Know How",
+//        ),
+//        type = SectionType.DATA_KNOW_HOW,
+//        tiles = tileModels,
+//        layout = sectionLayout,
+//        containerLayout = containerLayout,
+//        smallTileLayout = smallTileLayout,
+//        mediumTileLayout = mediumTileLayout,
+//        bigTileLayout = bigTileLayout,
+//        smallTileStyle = smallTileStyle,
+//        mediumTileStyle = mediumTileStyle,
+//        bigTileStyle = bigTileStyle,
+//        style = sectionStyle
+//    )
+//
+//    val tools = section(
+//        model = SectionModel(
+//            title = "Tools",
+//        ),
+//        type = SectionType.TOOLS,
+//        tiles = tileModels,
+//        layout = sectionLayout,
+//        containerLayout = containerLayout,
+//        smallTileLayout = smallTileLayout,
+//        mediumTileLayout = mediumTileLayout,
+//        bigTileLayout = bigTileLayout,
+//        smallTileStyle = smallTileStyle,
+//        mediumTileStyle = mediumTileStyle,
+//        bigTileStyle = bigTileStyle,
+//        style = sectionStyle
+//    )
+//
+//    val footer = Footer(
+//        model = FooterModel(
+//            title = "Like What You Have Seen?",
+//            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
+//            buttonTitle = "Learn More",
+//            imageId = R.drawable.ic_launcher
+//        ),
+//        style = FooterStyle(
+//            backgroundColor = Color(0xFFFED7D6),
+//            buttonBackgroundColor = Color(0xFF0F1938),
+//            titleFont = FontDescription(
+//                family = PolyStyle().font.family.jostMedium,
+//                weight = PolyStyle().font.weight.medium,
+//                size = PolyStyle().font.size._2xl,
+//                lineHeight = PolyStyle().font.lineHeight._2xl,
+//                alignment = PolyStyle().font.alignment.left
+//            ),
+//            descriptionFont = FontDescription(
+//                family = PolyStyle().font.family.jostRegular,
+//                weight = PolyStyle().font.weight.regular,
+//                size = PolyStyle().font.size.base,
+//                lineHeight = PolyStyle().font.lineHeight.base,
+//                alignment = PolyStyle().font.alignment.left
+//            ),
+//            buttonTitleFont = FontDescription(
+//                family = PolyStyle().font.family.jostMedium,
+//                weight = PolyStyle().font.weight.medium,
+//                size = PolyStyle().font.size.lg,
+//                lineHeight = PolyStyle().font.lineHeight.lg,
+//                alignment = PolyStyle().font.alignment.center
+//            )
+//        ),
+//        layout = FooterLayout(
+//            padding = PolyStyle().spacing._6x,
+//            verticalSpacing = PolyStyle().spacing._4x,
+//            cornerRadius = PolyStyle().radius._2x
+//        )
+//    )
+//
+//    val screen = Screen(
+//        sections = listOf(yourDataSection, dataKnowHow, tools),
+//        footer = footer,
+//        layout = screenLayout
+//    )
+//
+//    Screen(screen = screen)
+//    // Footer(footer = footer)
+//}

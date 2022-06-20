@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var onboardingShown = false
+    private val featureStorage = FeatureStorage()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         Authentication.authenticate(this) { success ->
             if (success) {
-                FeatureStorage().installBundledFeatures(this)
+                featureStorage.importFeatures(this)
                 setContentView(R.layout.activity_main)
                 setSupportActionBar(findViewById(R.id.toolbar))
             } else {
