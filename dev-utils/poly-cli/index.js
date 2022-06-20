@@ -6,10 +6,10 @@ import { hideBin } from "yargs/helpers";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
-import { template as packageTemplate } from "./templates/package.js";
-import { template as manifestTemplate } from "./templates/manifest.js";
-import { template as readmeTemplate } from "./templates/readme.js";
-import { template as rollupTemplate } from "./templates/rollup.js";
+import { template as packageTemplate } from "./src/templates/package.js";
+import { template as manifestTemplate } from "./src/templates/manifest.js";
+import { template as readmeTemplate } from "./src/templates/readme.js";
+import { template as rollupTemplate } from "./src/templates/rollup.js";
 
 const gotArgs = yargs(hideBin(process.argv))
     .scriptName("poly-cli")
@@ -65,7 +65,7 @@ function handleCreateFeature(type) {
     } else {
         console.log(
             chalk.red.bold.underline(
-                "🛑 Feature type not recognized. Aborting! 🛑"
+                `🛑 Feature type ${type} not recognized. Aborting! 🛑`
             )
         );
     }
