@@ -16,10 +16,6 @@ extension UIImage {
 
         let renderer = UIGraphicsImageRenderer(size: pageRect.size)
         let img = renderer.image { ctx in
-            // Set and fill the background color.
-            UIColor.white.set()
-            ctx.fill(CGRect(x: 0, y: 0, width: pageRect.width, height: pageRect.height))
-
             // Translate the context so that we only draw the `cropRect`.
             ctx.cgContext.translateBy(x: -pageRect.origin.x, y: pageRect.size.height - pageRect.origin.y)
 
