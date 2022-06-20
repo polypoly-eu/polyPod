@@ -77,15 +77,15 @@ function handleCreateEmptyFeature() {
         let dependencies = ["rollup"];
 
         // folders are keys, files are strings.
-        var structure = {};
-
-        structure[feature_name] = [
-            { src: ["index.js"] },
-            { test: [] },
-            "package.json",
-            "manifest.json",
-            "README.md",
-        ];
+        var structure = {
+            [feature_name]: [
+                { src: ["index.js"] },
+                { test: [] },
+                "package.json",
+                "manifest.json",
+                "README.md",
+            ],
+        };
 
         let templates = {
             "package.json": packageTemplate(
@@ -110,6 +110,10 @@ function handleCreateEmptyFeature() {
         }
 
         createDirectoryStructure(structure, ".", templates);
+        for (const f of ["rollup.config.js"]) {
+            console.log();
+            copyFileSync(`src/static/templates/${f}`, `${feature_name}/${f}`);
+        }
 
         execSync(
             `cd ${feature_name} && npm install ${dependencies.reduce(
@@ -204,10 +208,6 @@ function createDirectoryStructure(structure, parent, templates) {
                 writeFileSync(dir + "/" + child, content);
             }
         }
-    }
-
-    for (const f of ["rollup.config.js"]) {
-        copyFileSync(`src/static/templates/${f}`, `${parent}/${f}`);
     }
 }
 
