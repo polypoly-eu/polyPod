@@ -15,12 +15,11 @@ import {
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
     .command(
-        "create <what> <name> [type]",
+        "create <what> <name> [--type=empty]",
         "Creates features for now. Use create feature to start creating one.",
         (yargs) => {
             yargs.positional("what", {
                 type: "string",
-                default: "feature",
                 describe:
                     "→ the kind of thing you want poly-cli to create for you. Options: feature",
             });
@@ -30,7 +29,7 @@ yargs(hideBin(process.argv))
                 describe: "→ The feature name. No reasonable default for this",
             });
 
-            yargs.positional("type", {
+            yargs.option("type", {
                 type: "string",
                 default: "empty",
                 describe: "→ the type of feature: empty, preview, or importer",
