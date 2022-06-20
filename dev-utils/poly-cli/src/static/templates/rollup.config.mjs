@@ -35,6 +35,14 @@ export default {
                     ],
                     dest: "dist/css",
                 },
+                {
+                    src: [
+                        "node_modules/react/umd/react.development.js",
+                        "node_modules/react-dom/umd/react-dom.development.js",
+                        "node_modules/@polypoly-eu/poly-look/dist/poly-look.js",
+                    ],
+                    dest: "dist",
+                },
             ],
             verbose: true,
         }),

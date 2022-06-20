@@ -18,7 +18,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 function setup(feature_name, author, version, description, license) {
-    let dependencies = ["rollup"];
+    let dependencies = ["rollup", "react", "react-dom"];
 
     // folders are keys, files are strings.
     var structure = {};
