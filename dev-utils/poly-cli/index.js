@@ -6,11 +6,16 @@ import { hideBin } from "yargs/helpers";
 import { existsSync, mkdirSync, writeFileSync, readFileSync } from "fs";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
+import path from "path";
+import { fileURLToPath } from "url";
 import {
     packageTemplate,
     manifestTemplate,
     readmeTemplate,
 } from "./src/templates/index.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 function setup(feature_name, author, version, description, license) {
     let dependencies = ["rollup"];
@@ -39,7 +44,7 @@ function setup(feature_name, author, version, description, license) {
         "manifest.json": manifestTemplate(feature_name, author),
         "README.md": readmeTemplate(feature_name, description),
         "rollup.config.js": readFileSync(
-            "src/static/templates/rollup.config.js"
+            path.resolve(__dirname, "./src/static/templates/rollup.config.js")
         ),
     };
 
@@ -58,7 +63,7 @@ function setup(feature_name, author, version, description, license) {
         `cd ${feature_name} && npm install ${dependencies.reduce(
             (a, b) => a + " " + b,
             ""
-        )}`
+        )} && npm run build`
     );
 }
 
