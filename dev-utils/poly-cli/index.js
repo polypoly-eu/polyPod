@@ -33,11 +33,17 @@ const gotArgs = yargs(hideBin(process.argv))
         },
         handleCreate
     )
+    .command(
+        "*",
+        "Print with empty args",
+        () => {},
+        (_) => {
+            console.log(
+                `∅ No args! Use \n\t${process.argv[1]} --help\nfor details ∅`
+            );
+        }
+    )
     .help().argv;
-
-if (gotArgs._.length == 0) {
-    console.log(`∅ No args! Use \n\t${process.argv[1]} --help\nfor details ∅`);
-}
 
 function handleCreate(arg) {
     if (arg.what === "feature") {
