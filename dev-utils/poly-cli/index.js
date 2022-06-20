@@ -21,13 +21,13 @@ yargs(hideBin(process.argv))
                 type: "string",
                 default: "feature",
                 describe:
-                    "-> the kind of thing you want poly-cli to create for you. Options: feature",
+                    "→ the kind of thing you want poly-cli to create for you. Options: feature",
             });
 
             yargs.positional("type", {
                 type: "string",
                 default: "empty",
-                describe: "-> the type of feature: empty, preview, or importer",
+                describe: "→ the type of feature: empty, preview, or importer",
             });
         },
         handleCreate

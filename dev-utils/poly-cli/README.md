@@ -9,7 +9,7 @@ First install with `npm ci`
 Run with:
 
 ```shell
-node index.js create feature --type empty
+node index.js create feature --type preview
 ```
 
-There are 3 types: `empty`, `preview`, and `importer`.
+There are 3 types: `empty`, `preview`, and `importer`. `empty` is the default
