@@ -3,7 +3,7 @@
 import chalk from "chalk";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { existsSync, fstat, mkdirSync, writeFileSync, copyFileSync } from "fs";
+import { existsSync, mkdirSync, writeFileSync, copyFileSync } from "fs";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
 import {
