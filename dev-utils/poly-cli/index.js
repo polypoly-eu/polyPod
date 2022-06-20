@@ -12,7 +12,7 @@ import {
     readmeTemplate,
 } from "./src/templates/index.js";
 
-const gotArgs = yargs(hideBin(process.argv))
+yargs(hideBin(process.argv))
     .scriptName("poly-cli")
     .command(
         "create <what> <name> [type]",
@@ -42,7 +42,7 @@ const gotArgs = yargs(hideBin(process.argv))
         "*",
         "Print with empty args",
         () => {},
-        (_) => {
+        () => {
             console.log(
                 `∅ No args! Use \n\t${process.argv[1]} --help\nfor details ∅`
             );
