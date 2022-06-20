@@ -15,7 +15,7 @@ import {
 const gotArgs = yargs(hideBin(process.argv))
     .scriptName("poly-cli")
     .command(
-        "create <what> [type]",
+        "create <what> <name> [type]",
         "Creates features for now. Use create feature to start creating one.",
         (yargs) => {
             yargs.positional("what", {
@@ -23,6 +23,11 @@ const gotArgs = yargs(hideBin(process.argv))
                 default: "feature",
                 describe:
                     "→ the kind of thing you want poly-cli to create for you. Options: feature",
+            });
+
+            yargs.positional("name", {
+                type: "string",
+                describe: "→ The feature name. No reasonable default for this",
             });
 
             yargs.positional("type", {
