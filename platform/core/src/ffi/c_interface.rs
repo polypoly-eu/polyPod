@@ -1,13 +1,9 @@
 use crate::core_failure::CoreFailure;
-use rmp_serde::config::StructMapConfig;
-use rmp_serde::Deserializer;
-use rmp_serde::Serializer;
+use crate::ffi::serialize;
+use std::ffi::CStr;
+use std::os::raw::c_uint;
 extern crate rmp_serde;
-use crate::{
-    c_interface::utils::{create_byte_buffer, cstring_to_str, CByteBuffer},
-    core::{bootstrap, parse_feature_manifest},
-};
-use serde::{Deserialize, Serialize};
+use crate::core::{bootstrap, parse_feature_manifest};
 use std::os::raw::c_char;
 
 /// # Safety
@@ -26,12 +22,6 @@ pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> CByteBu
             .map(String::from)
             .and_then(bootstrap),
     ))
-}
-
-fn serialize<T: Serialize>(input: T) -> Vec<u8> {
-    let mut buf = Vec::new();
-    let result = input.serialize(&mut Serializer::new(&mut buf).with_struct_map());
-    buf
 }
 
 /// # Safety
@@ -54,4 +44,30 @@ pub unsafe extern "C" fn parse_feature_manifest_from_json(json: *const c_char) -
 #[no_mangle]
 pub unsafe extern "C" fn free_bytes(bytes: *mut u8) {
     drop(Box::from_raw(bytes))
+}
+
+// Disabled the clippy false positive, https://github.com/rust-lang/rust-clippy/issues/5787
+#[allow(clippy::needless_lifetimes)]
+unsafe fn cstring_to_str<'a>(cstring: &'a *const c_char) -> Result<&str, CoreFailure> {
+    if cstring.is_null() {
+        return Err(CoreFailure::null_c_string_pointer());
+    }
+
+    CStr::from_ptr(*cstring)
+        .to_str()
+        .map_err(|err| CoreFailure::failed_to_create_c_str(err.to_string()))
+}
+
+#[repr(C)]
+pub struct CByteBuffer {
+    pub length: c_uint,
+    pub data: *mut u8,
+}
+
+unsafe fn create_byte_buffer(bytes: Vec<u8>) -> CByteBuffer {
+    let slice = bytes.into_boxed_slice();
+    CByteBuffer {
+        length: slice.len() as c_uint,
+        data: Box::into_raw(slice) as *mut u8,
+    }
 }
