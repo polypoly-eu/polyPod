@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rm -rf example"
+    "clean": "rm -rf example",
+    "start": "./index.js create feature"
   },
   "author": "polypoly",
   "license": "ISC",
