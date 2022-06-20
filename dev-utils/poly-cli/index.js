@@ -131,7 +131,7 @@ function handleCreateEmptyFeature() {
             type: "input",
             name: "version",
             message: "Version:",
-            default: "1.0.0",
+            default: "0.0.1",
         },
         {
             type: "input",
