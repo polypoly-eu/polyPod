@@ -15,8 +15,13 @@ import {
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
     .command(
-        "create <what> <name> [--type=empty]",
-        "Creates features for now. Use create feature to start creating one.",
+        `create <what> <name>
+    [--type=empty]
+    [--version=0.0.1]
+    [--author="polypoly poly-cli"]
+    [--license=MIT]
+    [--description="Generated from poly-cli"]`,
+        "Creates features for now.",
         (yargs) => {
             yargs.positional("what", {
                 type: "string",
@@ -33,6 +38,30 @@ yargs(hideBin(process.argv))
                 type: "string",
                 default: "empty",
                 describe: "→ the type of feature: empty, preview, or importer",
+            });
+
+            yargs.option("version", {
+                type: "string",
+                default: "0.0.1",
+                describe: "→ Version string for the package.json",
+            });
+
+            yargs.option("author", {
+                type: "string",
+                default: "polypoly poly-cli",
+                describe: "→ Author for package.json",
+            });
+
+            yargs.option("license", {
+                type: "string",
+                default: "MIT",
+                describe: "→ License for package.json",
+            });
+
+            yargs.option("description", {
+                type: "string",
+                default: "Generated from poly-cli; use your own here",
+                describe: "→ Version string for the package.json",
             });
         },
         handleCreate
