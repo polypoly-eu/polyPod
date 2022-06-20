@@ -1,5 +1,5 @@
 export function template(feature_name, description) {
-    let t = `
+    return `
 # ${feature_name}
 
 ${description}
@@ -9,5 +9,4 @@ ${description}
 \`npm run build\`
 
     `;
-    return t;
 }
