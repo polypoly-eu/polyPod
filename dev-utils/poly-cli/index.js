@@ -11,7 +11,6 @@ import {
     manifestTemplate,
     readmeTemplate,
 } from "./src/templates/index.js";
-import { argv } from "process";
 
 function setup(feature_name, author, version, description, license) {
     let dependencies = ["rollup"];
@@ -214,7 +213,7 @@ function handleCreateFeature(arg) {
     } else {
         console.log(
             chalk.red.bold.underline(
-                `🛑 Feature type ${type} not recognized. Aborting! 🛑`
+                `🛑 Feature type ${arg.type} not recognized. Aborting! 🛑`
             )
         );
     }
