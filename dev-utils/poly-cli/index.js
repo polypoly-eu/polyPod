@@ -34,8 +34,6 @@ Please change to «features»`);
 }
 
 function setup(feature_name, author, version, description, license) {
-    let dependencies = ["rollup", "react", "react-dom"];
-
     // folders are objects, files are strings.
     var structure = {};
 
