@@ -34,6 +34,11 @@ Please change to «features»`);
 }
 
 function setup(feature_name, author, version, description, license) {
+    let dependencies = ["rollup", "react", "react-dom"].reduce(
+        (a, b) => a + " " + b,
+        ""
+    );
+
     // folders are objects, files are strings.
     var structure = {};
 
@@ -95,7 +100,7 @@ function setup(feature_name, author, version, description, license) {
 
     createDirectoryStructure(structure, ".", templates);
 
-    execSync(`cd ${feature_name} && npm i && npm run build`);
+    execSync(`cd ${feature_name} && npm i ${dependencies} && npm run build`);
 }
 
 function interactiveSetup() {
