@@ -1,12 +1,13 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import "!silly-i18n";
 
 import "./styles.css";
 
 const App = () => {
     return (
         <div>
-            <h1>What do you want to do next?</h1>
+            <h1>{i18n.t("common:welcome", { feature: "This feature" })}</h1>
         </div>
     );
 };
