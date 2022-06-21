@@ -4,10 +4,10 @@
   "description": "Badass CLI",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd ../../features; ../dev-utils/poly-cli/index.js create feature eksample; if [ -f eksample/package-lock.json ]; then rm -rf eksample && cd -; else exit 1; fi ",
     "clean": "rm -rf example",
     "prestart": "npm run clean",
-    "start": "./index.js create feature example"
+    "start": "./index.js create feature eksample"
   },
   "author": "polypoly",
   "license": "ISC",
