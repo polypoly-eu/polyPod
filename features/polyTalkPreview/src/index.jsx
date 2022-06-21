@@ -1,14 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import "./styles.css";
 
-const PreviewApp = () => {
+const App = () => {
     return (
         <div>
-            <text>"Who is your daddy?"</text>
+            <h1>What's next?</h1>
         </div>
     );
 };
 
-ReactDOM.render(<PreviewApp />, document.getElementById("feature"));
+const root = createRoot(document.getElementById("feature"));
+root.render(<App />);

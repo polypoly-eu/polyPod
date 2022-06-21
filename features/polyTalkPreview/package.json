@@ -2,7 +2,7 @@
     "name": "polyTalkPreview",
     "version": "0.0.1",
     "description": "Generated from poly-cli; use your own here",
-    "main": "src/index.js",
+    "main": "src/index.jsx",
     "scripts": {
         "build": "rollup -c",
         "test": "echo \"Error: no test specified\" && exit 1"

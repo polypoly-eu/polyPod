@@ -8,6 +8,7 @@ const externalPackages = {
     "@polypoly-eu/poly-look": "polyLook",
     react: "React",
     "react-dom": "ReactDOM",
+    "react-dom/client": "ReactDOM",
 };
 
 export default {
