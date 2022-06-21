@@ -236,6 +236,7 @@ mod tests {
             description: Some("testDescription_de".to_string()),
             thumbnail: Some("assets/thumbnail.png".to_string()),
             thumbnail_color: Some("#FFFFFF".to_string()),
+            primary_color: Some("#000000".to_string()),
             border_color: Some("#000000".to_string()),
             links: Some(expected_links),
         };
