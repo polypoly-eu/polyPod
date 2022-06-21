@@ -30,6 +30,9 @@ export function packageTemplate(
                 "@polypoly-eu/pod-api":
                     "file:../../platform/feature-api/api/pod-api",
                 "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
+                react: "*",
+                "react-dom": "*",
+                rollup: "*",
             },
             author: author,
             license: license,
