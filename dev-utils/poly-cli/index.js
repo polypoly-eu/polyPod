@@ -18,7 +18,7 @@ import {
     printUnderConstruction,
     printHeadlineMsg,
     printFeatureInfoMsg,
-} from "./src/msg";
+} from "./src/msg.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -75,12 +75,7 @@ function setup(feature_name, author, version, description, license) {
 
     createDirectoryStructure(structure, ".", templates);
 
-    execSync(
-        `cd ${feature_name} && npm install ${dependencies.reduce(
-            (a, b) => a + " " + b,
-            ""
-        )} && npm run build`
-    );
+    execSync(`cd ${feature_name} && npm i && npm run build`);
 }
 
 function interactiveSetup() {
