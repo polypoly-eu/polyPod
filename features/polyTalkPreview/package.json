@@ -1,0 +1,24 @@
+{
+    "name": "polyTalkPreview",
+    "version": "0.0.1",
+    "description": "Generated from poly-cli; use your own here",
+    "main": "src/index.js",
+    "scripts": {
+        "build": "rollup -c",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "devDependencies": {
+        "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch"
+    },
+    "dependencies": {
+        "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
+        "@polypoly-eu/podjs": "file:../../platform/podjs",
+        "@polypoly-eu/pod-api": "file:../../platform/feature-api/api/pod-api",
+        "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
+        "react": "*",
+        "react-dom": "*",
+        "rollup": "*"
+    },
+    "author": "polypoly poly-cli",
+    "license": "MIT"
+}
