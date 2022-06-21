@@ -57,6 +57,26 @@ function setup(feature_name, author, version, description, license) {
                             "./src/static/templates/rollup.config.mjs"
                         )
                     ),
+                locales: {
+                    en: {
+                        "common.json": () =>
+                            readFileSync(
+                                path.resolve(
+                                    __dirname,
+                                    "./src/static/templates/locales/en/common.json"
+                                )
+                            ),
+                    },
+                    de: {
+                        "common.json": () =>
+                            readFileSync(
+                                path.resolve(
+                                    __dirname,
+                                    "./src/static/templates/locales/de/common.json"
+                                )
+                            ),
+                    },
+                },
             },
         },
         test: [],
