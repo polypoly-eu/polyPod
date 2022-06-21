@@ -74,7 +74,7 @@ function setup(feature_name, author, version, description, license) {
                     readFileSync(
                         path.resolve(
                             __dirname,
-                            "./src/static/templates/rollup.config.mjs"
+                            "./src/static/templates/index.html"
                         )
                     ),
             },
