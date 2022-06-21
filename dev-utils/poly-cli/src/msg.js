@@ -16,12 +16,10 @@ export function printHeadlineMsg(msg) {
     console.log(chalk.bold.blue(`🚧 ${msg} 🚧`));
 }
 
+export function printInfoMsg(msg) {
+    console.log(chalk.white("🏗 ${msg} 🏗"));
+}
+
 export function printFeatureInfoMsg(featureType) {
-    console.log(
-        chalk.white(
-            "🏗  Feature Type:",
-            chalk.red.italic.underline(featureType),
-            "🏗"
-        )
-    );
+    printInfoMsg(` Feature Type: ${chalk.red.italic.underline(featureType)}`);
 }

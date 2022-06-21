@@ -18,10 +18,20 @@ import {
     printUnderConstruction,
     printHeadlineMsg,
     printFeatureInfoMsg,
+    printInfoMsg,
 } from "./src/msg.js";
+import { exit } from "process";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+if (existsSync("../dev-utils/rollup-plugin-copy-watch")) {
+    printInfoMsg("✓ Running from the right path!");
+} else {
+    printErrorMsg(`This directory ${__dirname} will make the script fail
+Please change to «features»`);
+    exit(1);
+}
 
 function setup(feature_name, author, version, description, license) {
     let dependencies = ["rollup", "react", "react-dom"];

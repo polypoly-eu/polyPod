@@ -6,7 +6,7 @@ Generates stuff for us. Currently only generates the structure for a feature.
 
 First install with `npm ci`
 
-Run inside `features/` folder:
+Run inside `features/` folder, which is needed since the paths to the polyPod modules are hard-coded:
 
 ```shell
 node ../dev-utils/poly-cli/index.js create feature feture-name --type preview
