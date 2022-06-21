@@ -41,7 +41,7 @@ function setup(feature_name, author, version, description, license) {
         {
             src: [
                 { static: ["manifest.json", "index.html"] },
-                "index.js",
+                "index.jsx",
                 "styles.css",
             ],
         },
@@ -56,7 +56,7 @@ function setup(feature_name, author, version, description, license) {
             feature_name,
             version,
             description,
-            "src/index.js",
+            "src/index.jsx",
             author,
             license
         ),
@@ -68,8 +68,8 @@ function setup(feature_name, author, version, description, license) {
         "index.html": readFileSync(
             path.resolve(__dirname, "./src/static/templates/index.html")
         ),
-        "index.js": readFileSync(
-            path.resolve(__dirname, "./src/static/templates/index.js")
+        "index.jsx": readFileSync(
+            path.resolve(__dirname, "./src/static/templates/index.jsx")
         ),
         "styles.css": readFileSync(
             path.resolve(__dirname, "./src/static/templates/styles.css")
