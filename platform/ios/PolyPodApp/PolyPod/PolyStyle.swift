@@ -25,7 +25,7 @@ struct PolyStyle {
             8 * Self.plSpace1x
         }()
     }
-    
+
     struct Radius {
         static let plRadiusBase1x = 4.0
         static let plRadiusBase2x = {
@@ -44,18 +44,18 @@ struct PolyStyle {
             6 * Self.plRadiusBase1x
         }()
     }
-    
+
     struct Font {
         struct Family {
             static let jostRegular = "Jost-Regular"
             static let jostMedium = "Jost-Medium"
         }
-        
+
         struct Weight {
             static let regular = SwiftUI.Font.Weight.regular
             static let medium = SwiftUI.Font.Weight.medium
         }
-        
+
         struct Size {
             static let xs = 12.0
             static let sm = 14.0
@@ -64,11 +64,15 @@ struct PolyStyle {
             static let xl = 20.0
             static let _2xl = 22.0
         }
-        
+
         struct Alignment {
             static let center: TextAlignment = .center
             static let left: TextAlignment = .leading
             static let right: TextAlignment = .trailing
         }
+    }
+
+    struct Border {
+        static let plBorder1x = 1.0
     }
 }

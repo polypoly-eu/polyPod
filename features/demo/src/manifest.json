@@ -4,7 +4,6 @@
     "description": "Demonstrates some polyPod capabilities for testing purposes - please ignore",
     "primaryColor": "#000000",
     "thumbnail": "images/thumbnail.pdf",
-    "borderSize": "1",
     "borderColor": "#cbd5e0",
     "translations": {
         "de": {

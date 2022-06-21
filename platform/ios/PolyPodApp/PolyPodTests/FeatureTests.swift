@@ -39,7 +39,6 @@ private func createFixture(
         "thumbnail": "\(withThumbnail ? thumbnailFileName : "")",
         "primaryColor": "\(color)",
         "borderColor": "\(color)",
-        "borderSize": "1",
         "links": {
             "example": "https://example.com",
             "uk-example": "https://example.co.uk"

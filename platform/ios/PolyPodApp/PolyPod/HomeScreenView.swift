@@ -10,7 +10,6 @@ struct Card: Identifiable {
     let image: UIImage
     let backgroundColor: Color
     let borderColor: Color
-    let borderSize: String
 }
 
 struct HomeScreenSectionModel {
@@ -71,9 +70,8 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
                 description: feature.description ?? "",
                 image: image,
                 backgroundColor: feature.thumbnailColor ?? .white,
-                borderColor: feature.borderColor ?? .white,
-                borderSize: feature.borderSize ?? "1"
-            )
+                borderColor: feature.borderColor ?? .white
+                )
         }
     }
 }
@@ -125,6 +123,7 @@ struct HomeScreenConstants {
 
     struct Tile {
         static let cornerRadius = PolyStyle.Spacing.plSpace2x
+        static let borderSize = PolyStyle.Border.plBorder1x
     }
 
     struct SmallTile {
@@ -488,7 +487,7 @@ struct BigCardView: View {
             RoundedRectangle(cornerRadius: HomeScreenConstants.Tile.cornerRadius)
                 .stroke(
                     card.borderColor,
-                    lineWidth: CGFloat((card.borderSize as NSString).doubleValue)
+                    lineWidth: HomeScreenConstants.Tile.borderSize
                 )
         )
         .onTapGesture {
@@ -538,7 +537,7 @@ struct MediumCardView: View {
             RoundedRectangle(cornerRadius: HomeScreenConstants.Tile.cornerRadius)
                 .stroke(
                     card.borderColor,
-                    lineWidth: CGFloat((card.borderSize as NSString).doubleValue)
+                    lineWidth: HomeScreenConstants.Tile.borderSize
                 )
         )
         .onTapGesture {
@@ -579,7 +578,7 @@ struct SmallCardView: View {
             RoundedRectangle(cornerRadius: HomeScreenConstants.Tile.cornerRadius)
                 .stroke(
                     card.borderColor,
-                    lineWidth: CGFloat((card.borderSize as NSString).doubleValue)
+                    lineWidth: HomeScreenConstants.Tile.borderSize
                 )
         )
         .onTapGesture {
@@ -633,8 +632,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                       description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red,
-                      borderSize: "1"
+                      borderColor: .red
                 ),
                 .init(
                     id: UUID().uuidString,
@@ -642,16 +640,14 @@ struct HomeScreenView_Previews: PreviewProvider {
                     description: "nada",
                     image: UIImage(named: "AppIcon")!,
                     backgroundColor: .blue,
-                    borderColor: .red,
-                    borderSize: "1"
+                    borderColor: .red
                 ),
                 .init(
                     id: UUID().uuidString, title: "Amazon Importer",
                     description: "nada",
                     image: UIImage(named: "AppIcon")!,
                     backgroundColor: .blue,
-                    borderColor: .red,
-                    borderSize: "1"
+                    borderColor: .red
                 ),
                 .init(
                     id: UUID().uuidString,
@@ -659,46 +655,40 @@ struct HomeScreenView_Previews: PreviewProvider {
                     description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                     image: UIImage(named: "AppIcon")!,
                     backgroundColor: .blue,
-                    borderColor: .red,
-                    borderSize: "1"
+                    borderColor: .red
                 ),
                 .init(id: UUID().uuidString,
                       title: "Big big many big hello there",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red,
-                      borderSize: "1"
+                      borderColor: .red
                 ),
                 .init(id: UUID().uuidString, title: "Amazon Importer",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red,
-                      borderSize: "1"
+                      borderColor: .red
                 ),
                 .init(id: UUID().uuidString,
                       title: "polyExplorer",
                       description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red,
-                      borderSize: "1"
+                      borderColor: .red
                 ),
                 .init(id: UUID().uuidString,
                       title: "Big big many big hello there",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red,
-                      borderSize: "1"
+                      borderColor: .red
                 ),
                 .init(id: UUID().uuidString, title: "Amazon Importer",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red,
-                      borderSize: "1"
+                      borderColor: .red
                 )],
               type: .yourData),
         .init(title: "Know how",
@@ -708,23 +698,20 @@ struct HomeScreenView_Previews: PreviewProvider {
                       description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red,
-                      borderSize: "1"
+                      borderColor: .red
                 ),
                 .init(id: UUID().uuidString,
                       title: "Big big many big hello there",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red,
-                      borderSize: "1"
+                      borderColor: .red
                 ),
                 .init(id: UUID().uuidString, title: "Amazon Importer",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red,
-                      borderSize: "1"
+                      borderColor: .red
                 )
               ],
               type: .knowHow),
@@ -735,23 +722,20 @@ struct HomeScreenView_Previews: PreviewProvider {
                       description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red,
-                      borderSize: "1"
+                      borderColor: .red
                 ),
                 .init(id: UUID().uuidString,
                       title: "Big big many big hello there",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red,
-                      borderSize: "1"
+                      borderColor: .red
                 ),
                 .init(id: UUID().uuidString, title: "Amazon Importer",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red,
-                      borderSize: "1"
+                      borderColor: .red
                 )],
               type: .tools)
     ]
