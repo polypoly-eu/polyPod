@@ -37,21 +37,38 @@ function setup(feature_name, author, version, description, license) {
     // folders are objects, files are strings.
     var structure = {};
 
-    structure[feature_name] = [
-        {
-            src: [
-                { static: ["manifest.json", "index.html"] },
-                "index.jsx",
+    structure[feature_name] = {
+        src: {
+            static: {
+                "manifest.json": () => {
+                    return manifestTemplate(feature_name, author);
+                },
+                "index.html": () =>
+                    readFileSync(
+                        path.resolve(
+                            __dirname,
+                            "./src/static/templates/rollup.config.mjs"
+                        )
+                    ),
+            },
+        },
+        /**        "index.jsx": ,
                 "styles.css",
+                {
+                    locales: {
+                        en: ["common.json"],
+                        de: ["common.json"],
+                    },
+                },
             ],
         },
         { test: [] },
         "package.json",
-        "README.md",
-        "rollup.config.mjs",
-    ];
+        "README.md": () => readmeTemplate(feature_name, description),
+        "rollup.config.mjs", */
+    };
 
-    let templates = {
+    /**    let templates = {
         "package.json": packageTemplate(
             feature_name,
             version,
@@ -87,13 +104,14 @@ function setup(feature_name, author, version, description, license) {
             )
         ),
     };
+*/
 
     if (existsSync(`./${feature_name}`)) {
         printErrorMsg("Feature already exists in this folder. Aborting!");
         return;
     }
 
-    createDirectoryStructure(structure, ".", templates);
+    createDirectoryStructure(structure, ".");
 
     execSync(`cd ${feature_name} && npm i && npm run build`);
 }
@@ -247,23 +265,20 @@ function handleCreateImporterFeature() {
     printUnderConstruction();
 }
 
-function createDirectoryStructure(structure, parent, templates) {
+function createDirectoryStructure(structure, parent) {
     for (let key of Object.keys(structure)) {
         let dir = parent + "/" + key;
-
+        console.log("Directory ", dir);
         if (!existsSync(dir)) {
             mkdirSync(dir);
         }
 
-        for (let child of structure[key]) {
-            if (typeof child === "object") {
-                createDirectoryStructure(child, dir, templates);
-            } else if (typeof child === "string") {
-                var content = "";
-                if (child in templates) {
-                    content = templates[child];
-                }
-                writeFileSync(dir + "/" + child, content);
+        for (let child in structure[key]) {
+            if (typeof structure[key][child] === "object") {
+                console.log(structure[key][child]);
+                createDirectoryStructure(structure[key][child], dir);
+            } else if (structure[key][child] instanceof Function) {
+                writeFileSync(dir + "/" + child, structure[key][child]());
             }
         }
     }
