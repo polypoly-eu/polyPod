@@ -9,6 +9,8 @@ struct Card: Identifiable {
     let description: String
     let image: UIImage
     let backgroundColor: Color
+    let borderColor: Color
+    let borderSize: String
 }
 
 struct HomeScreenSectionModel {
@@ -63,11 +65,15 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
                 image = UIImage()
             }
 
-            return Card(id: feature.id,
-                        title: feature.name,
-                        description: feature.description ?? "",
-                        image: image,
-                        backgroundColor: feature.thumbnailColor ?? .white)
+            return Card(
+                id: feature.id,
+                title: feature.name,
+                description: feature.description ?? "",
+                image: image,
+                backgroundColor: feature.thumbnailColor ?? .white,
+                borderColor: feature.borderColor ?? .white,
+                borderSize: feature.borderSize ?? "1"
+            )
         }
     }
 }
@@ -216,12 +222,14 @@ extension EnvironmentValues {
 typealias OnFeatureSelected = (FeatureId) -> Void
 struct HomeScreenView: View {
 
-    let footerModel = FooterViewModel(title: "homescreen_footer_title",
-                                      description: "homescreen_footer_description",
-                                      imageName: "AppIcon", // TODO: Needs the actual image
-                                      backgroundColor: Color(fromHex: "#fed7d6"),
-                                      buttonTitle: "homescreen_footer_button_title",
-                                      buttonBackgroundColor: Color(fromHex: "#0f1938"))
+    let footerModel = FooterViewModel(
+        title: "homescreen_footer_title",
+        description: "homescreen_footer_description",
+        imageName: "AppIcon", // TODO: Needs the actual image
+        backgroundColor: Color(fromHex: "#fed7d6"),
+        buttonTitle: "homescreen_footer_button_title",
+        buttonBackgroundColor: Color(fromHex: "#0f1938")
+    )
 
     @ObservedObject var viewModel: HomeScreenViewModel
     var openFeatureAction: OnFeatureSelected = { _ in }
@@ -450,6 +458,13 @@ struct BigCardView: View {
                height: sizes.bigTileWidth)
         .background(card.backgroundColor)
         .cornerRadius(HomeScreenConstants.Tile.cornerRadius)
+        .overlay(
+            RoundedRectangle(cornerRadius: HomeScreenConstants.Tile.cornerRadius)
+                .stroke(
+                    card.borderColor,
+                    lineWidth: CGFloat((card.borderSize as NSString).doubleValue)
+                )
+        )
         .onTapGesture {
             onFeatureSelected(card.id)
         }
@@ -493,6 +508,13 @@ struct MediumCardView: View {
         .frame(width: sizes.mediumTileWidth, height: sizes.smallTileWidth)
         .background(card.backgroundColor)
         .cornerRadius(HomeScreenConstants.Tile.cornerRadius)
+        .overlay(
+            RoundedRectangle(cornerRadius: HomeScreenConstants.Tile.cornerRadius)
+                .stroke(
+                    card.borderColor,
+                    lineWidth: CGFloat((card.borderSize as NSString).doubleValue)
+                )
+        )
         .onTapGesture {
             onFeatureSelected(card.id)
         }
@@ -527,6 +549,13 @@ struct SmallCardView: View {
         .frame(width: sizes.smallTileWidth, height: sizes.smallTileWidth)
         .background(card.backgroundColor)
         .cornerRadius(HomeScreenConstants.Tile.cornerRadius)
+        .overlay(
+            RoundedRectangle(cornerRadius: HomeScreenConstants.Tile.cornerRadius)
+                .stroke(
+                    card.borderColor,
+                    lineWidth: CGFloat((card.borderSize as NSString).doubleValue)
+                )
+        )
         .onTapGesture {
             onFeatureSelected(card.id)
         }
@@ -577,44 +606,74 @@ struct HomeScreenView_Previews: PreviewProvider {
                       title: "polyExplorer",
                       description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                       image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue),
+                      backgroundColor: .blue,
+                      borderColor: .red,
+                      borderSize: "1"
+                ),
+                .init(
+                    id: UUID().uuidString,
+                    title: "Big big many big hello there",
+                    description: "nada",
+                    image: UIImage(named: "AppIcon")!,
+                    backgroundColor: .blue,
+                    borderColor: .red,
+                    borderSize: "1"
+                ),
+                .init(
+                    id: UUID().uuidString, title: "Amazon Importer",
+                    description: "nada",
+                    image: UIImage(named: "AppIcon")!,
+                    backgroundColor: .blue,
+                    borderColor: .red,
+                    borderSize: "1"
+                ),
+                .init(
+                    id: UUID().uuidString,
+                    title: "polyExplorer",
+                    description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
+                    image: UIImage(named: "AppIcon")!,
+                    backgroundColor: .blue,
+                    borderColor: .red,
+                    borderSize: "1"
+                ),
                 .init(id: UUID().uuidString,
                       title: "Big big many big hello there",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue),
+                      backgroundColor: .blue,
+                      borderColor: .red,
+                      borderSize: "1"
+                ),
                 .init(id: UUID().uuidString, title: "Amazon Importer",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue),
+                      backgroundColor: .blue,
+                      borderColor: .red,
+                      borderSize: "1"
+                ),
                 .init(id: UUID().uuidString,
                       title: "polyExplorer",
                       description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                       image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue),
+                      backgroundColor: .blue,
+                      borderColor: .red,
+                      borderSize: "1"
+                ),
                 .init(id: UUID().uuidString,
                       title: "Big big many big hello there",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue),
+                      backgroundColor: .blue,
+                      borderColor: .red,
+                      borderSize: "1"
+                ),
                 .init(id: UUID().uuidString, title: "Amazon Importer",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue),
-                .init(id: UUID().uuidString,
-                      title: "polyExplorer",
-                      description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
-                      image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue),
-                .init(id: UUID().uuidString,
-                      title: "Big big many big hello there",
-                      description: "nada",
-                      image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue),
-                .init(id: UUID().uuidString, title: "Amazon Importer",
-                      description: "nada",
-                      image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue)],
+                      backgroundColor: .blue,
+                      borderColor: .red,
+                      borderSize: "1"
+                )],
               type: .yourData),
         .init(title: "Know how",
               cards: [
@@ -622,16 +681,26 @@ struct HomeScreenView_Previews: PreviewProvider {
                       title: "polyExplorer",
                       description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                       image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue),
+                      backgroundColor: .blue,
+                      borderColor: .red,
+                      borderSize: "1"
+                ),
                 .init(id: UUID().uuidString,
                       title: "Big big many big hello there",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue),
+                      backgroundColor: .blue,
+                      borderColor: .red,
+                      borderSize: "1"
+                ),
                 .init(id: UUID().uuidString, title: "Amazon Importer",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue)],
+                      backgroundColor: .blue,
+                      borderColor: .red,
+                      borderSize: "1"
+                )
+              ],
               type: .knowHow),
         .init(title: "Tools",
               cards: [
@@ -639,16 +708,25 @@ struct HomeScreenView_Previews: PreviewProvider {
                       title: "polyExplorer",
                       description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                       image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue),
+                      backgroundColor: .blue,
+                      borderColor: .red,
+                      borderSize: "1"
+                ),
                 .init(id: UUID().uuidString,
                       title: "Big big many big hello there",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue),
+                      backgroundColor: .blue,
+                      borderColor: .red,
+                      borderSize: "1"
+                ),
                 .init(id: UUID().uuidString, title: "Amazon Importer",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue)],
+                      backgroundColor: .blue,
+                      borderColor: .red,
+                      borderSize: "1"
+                )],
               type: .tools)
     ]
 
