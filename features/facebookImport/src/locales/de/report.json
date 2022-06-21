@@ -8,5 +8,13 @@
     "sendLater":
         "Nicht senden",
     "send":
-        "Helfen und senden"
+        "Helfen und senden",
+    "status": 
+        "Import Status",
+    "status.details": 
+        "Diese {{number_importers}} Importer haben Ihre Daten eingelesen.",
+    "mini.story.status": 
+        "Mini-Story Status",
+    "mini.story.status.details":  
+        "Diese technische Ansicht informiert über den Ausführungsstatus aller Mini-Stories."
 }

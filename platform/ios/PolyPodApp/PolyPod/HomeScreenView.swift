@@ -257,7 +257,7 @@ struct HomeScreenView: View {
     var openFeatureAction: OnFeatureSelected = { _ in }
     var openInfoAction: () -> Void = {}
     var openSettingsAction: () -> Void = {}
-    var openLearnMoreAction: () -> Void = { }
+    var openLearnMoreAction: () -> Void = {}
 
     var body: some View {
         // Why GeometryReader needs to be on top?
