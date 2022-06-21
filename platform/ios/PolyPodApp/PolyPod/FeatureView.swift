@@ -3,21 +3,19 @@ import SwiftUI
 struct FeatureView: View {
     @Environment(\.presentationMode)
     var presentationMode: Binding<PresentationMode>
-    
+
     let feature: Feature
     var closeAction: () -> Void = {}
-    
+
     @State var title: String = ""
     @State var activeActions: [String] = []
     @State var queuedAction: (String, DispatchTime)? = nil
     @State var filePicker = FilePicker()
-    
+
     var body: some View {
         let featureColor = feature.primaryColor ?? Color.PolyPod.lightBackground
         let lightForeground = !featureColor.isLight
         let iconVariantQualifier = lightForeground ? "Light" : "Dark"
-        let _ = feature.borderColor ?? Color.PolyPod.grey300Foreground
-        let _ = feature.borderSize ?? "1"
 
         let closeButton = Button(
             action: {
@@ -32,7 +30,7 @@ struct FeatureView: View {
             Image("NavIcon\(qualifier)\(iconVariantQualifier)")
                 .renderingMode(.original)
         }
-        
+
         let titleLabel = Text(title != "" ? title : feature.name)
             .foregroundColor(
                 lightForeground
@@ -42,7 +40,7 @@ struct FeatureView: View {
             .font(.custom("Jost-Medium", size: 16))
             .kerning(-0.16)
             .frame(maxWidth: .infinity, alignment: .center)
-        
+
         let actionButtons = HStack(spacing: 12) {
             if activeActions.contains("search") {
                 Button(action: { triggerFeatureAction("search") }) {
@@ -50,7 +48,7 @@ struct FeatureView: View {
                         .renderingMode(.original)
                 }
             }
-            
+
             if activeActions.contains("info") {
                 Button(action: { triggerFeatureAction("info") }) {
                     Image("NavIconInfo\(iconVariantQualifier)")
@@ -58,7 +56,7 @@ struct FeatureView: View {
                 }
             }
         }
-        
+
         VStack(spacing: 0) {
             NavigationBar(
                 leading: AnyView(closeButton),
@@ -66,7 +64,7 @@ struct FeatureView: View {
                 trailing: AnyView(actionButtons)
             )
             .background(featureColor)
-            
+
             FeatureContainerView(
                 feature: feature,
                 title: $title,
@@ -78,7 +76,7 @@ struct FeatureView: View {
             )
         }
     }
-    
+
     private func handleError(_ error: String) {
         let alert = UIAlertController(
             title: "",
@@ -104,7 +102,7 @@ struct FeatureView: View {
             completion: nil
         )
     }
-    
+
     private func openUrl(target: String) {
         let viewController =
             UIApplication.shared.windows.first!.rootViewController!
@@ -154,11 +152,11 @@ struct FeatureView: View {
                             style: .default))
         viewController.present(alert, animated: true, completion: nil)
     }
-    
+
     private func pickFile(type: String?, completion: @escaping (ExternalFile?) -> Void) {
         filePicker.pick(type: type, completion: completion)
     }
-    
+
     private func triggerFeatureAction(_ action: String) {
         queuedAction = (action, DispatchTime.now())
     }
