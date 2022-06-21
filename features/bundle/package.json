@@ -38,5 +38,30 @@
       "moduleName": "lexicon-feature",
       "artifactPath": "public"
     }
+  ],
+  "polyPodCategories": [
+    {
+      "id": "yourData",
+      "name": "Your Data",
+      "features": [
+        "facebookImport",
+        "google"
+      ]
+    },
+    {
+      "id": "knowHow",
+      "name": "Know how",
+      "features": [
+        "polyExplorer",
+        "lexicon"
+      ]
+    },
+    {
+      "id": "tools",
+      "name": "Tools",
+      "features": [
+        "demo"
+      ]
+    }
   ]
 }
