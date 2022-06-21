@@ -6,7 +6,7 @@ import "./styles.css";
 const App = () => {
     return (
         <div>
-            <h1>What's next?</h1>
+            <h1>What do you want to do next?</h1>
         </div>
     );
 };
