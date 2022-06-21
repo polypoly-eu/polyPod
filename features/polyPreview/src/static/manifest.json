@@ -16,5 +16,7 @@
                 "membership": "https://polypoly.coop/de-de/membership"
             }
         }
-    }
+    },
+    "borderSize": "1",
+    "borderColor": "#cbd5e0"
 }

@@ -12,5 +12,7 @@
         "author": "Author_DE",
         "description": "Description_DE"
     }
-  }
+  },
+  "borderColor": "#000000",
+  "borderSize": "3"
 }

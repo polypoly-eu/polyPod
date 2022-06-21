@@ -18,5 +18,7 @@
                 "example-data-download": "https://polypoly.coop/de-de/polypod/example-google-data"
             }
         }
-    }
+    },
+    "borderSize": "1",
+    "borderColor": "#cbd5e0"
 }
