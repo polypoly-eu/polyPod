@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import chalk from "chalk";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { existsSync, mkdirSync, writeFileSync, readFileSync } from "fs";
@@ -13,6 +12,13 @@ import {
     manifestTemplate,
     readmeTemplate,
 } from "./src/templates/index.js";
+import {
+    printErrorMsg,
+    printWarningMsg,
+    printUnderConstruction,
+    printHeadlineMsg,
+    printFeatureInfoMsg,
+} from "./src/msg";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -63,11 +69,7 @@ function setup(feature_name, author, version, description, license) {
     };
 
     if (existsSync(`./${feature_name}`)) {
-        console.log(
-            chalk.red.bold.underline(
-                "🛑 Feature already exists in this folder. Aborting! 🛑"
-            )
-        );
+        printErrorMsg("Feature already exists in this folder. Aborting!");
         return;
     }
 
@@ -132,11 +134,7 @@ function interactiveSetup() {
             );
         })
         .catch((error) => {
-            console.log(
-                chalk.red.bold.underline(
-                    `🛑 Error: ${JSON.stringify(error, null, 4)} 🛑`
-                )
-            );
+            printErrorMsg(`Error: ${JSON.stringify(error, null, 4)}`);
         });
 }
 yargs(hideBin(process.argv))
@@ -195,23 +193,15 @@ function handleCreate(arg) {
     if (arg.what === "feature") {
         handleCreateFeature(arg);
     } else {
-        console.log(
-            chalk.bold.yellow(
-                `🚧 Sorry, I can't create this for you. Try: create feature instead. 🚧`
-            )
+        printWarningMsg(
+            "Sorry, I can't create this for you. Try: create feature instead"
         );
     }
 }
 
 function handleCreateFeature(arg) {
-    console.log(chalk.bold.blue("🚧 Creating Feature 🚧"));
-    console.log(
-        chalk.white(
-            "🏗  Feature Type:",
-            chalk.red.italic.underline(arg.type),
-            "🏗"
-        )
-    );
+    printHeadlineMsg("Creating Feature");
+    printFeatureInfoMsg(arg.type);
 
     if (arg.type === "empty") {
         handleCreateEmptyFeature(arg);
@@ -220,11 +210,7 @@ function handleCreateFeature(arg) {
     } else if (arg.type === "importer") {
         handleCreateImporterFeature();
     } else {
-        console.log(
-            chalk.red.bold.underline(
-                `🛑 Feature type ${arg.type} not recognized. Aborting! 🛑`
-            )
-        );
+        printErrorMsg(`Feature type ${arg.type} not recognized. Aborting!`);
     }
 }
 
@@ -239,11 +225,11 @@ function handleCreateEmptyFeature(arg) {
 }
 
 function handleCreatePreviewFeature() {
-    console.log(chalk.yellow.bold(`🚧 UNDER CONSTRUCTION 🚧`));
+    printUnderConstruction();
 }
 
 function handleCreateImporterFeature() {
-    console.log(chalk.yellow.bold(`🚧 UNDER CONSTRUCTION 🚧`));
+    printUnderConstruction();
 }
 
 function createDirectoryStructure(structure, parent, templates) {
@@ -270,11 +256,7 @@ function createDirectoryStructure(structure, parent, templates) {
 
 function checkIfValueExists(value, obj) {
     if (!(value in obj)) {
-        console.log(
-            chalk.red.bold.underline(
-                `🛑 Developer error: ${value} does not exist! 🛑`
-            )
-        );
+        printErrorMsg(`Developer error: ${value} does not exist!`);
         throw Error("Dev error");
     }
 }
