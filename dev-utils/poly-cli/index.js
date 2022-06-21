@@ -59,6 +59,24 @@ function setup(feature_name, author, version, description, license) {
                     ),
             },
         },
+        test: [],
+        "package.json": () =>
+            packageTemplate(
+                feature_name,
+                version,
+                description,
+                "src/index.jsx",
+                author,
+                license
+            ),
+        "README.md": () => readmeTemplate(feature_name, description),
+        "rollup.config.mjs": () =>
+            readFileSync(
+                path.resolve(
+                    __dirname,
+                    "./src/static/templates/rollup.config.mjs"
+                )
+            ),
         /**                 {
                     locales: {
                         en: ["common.json"],
@@ -67,10 +85,8 @@ function setup(feature_name, author, version, description, license) {
                 },
             ],
         },
-        { test: [] },
-        "package.json",
-        "README.md": () => readmeTemplate(feature_name, description),
-        "rollup.config.mjs", */
+
+, */
     };
 
     /**    let templates = {
