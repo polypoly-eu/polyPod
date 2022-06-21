@@ -175,7 +175,7 @@ class PolyOutTests: XCTestCase {
         let polyOut = PolyOut(session: NetworkSessionMock())
 
         let bundle = Bundle(for: type(of: self))
-        polyOut.activeFeature = Feature(path: URL(string: bundle.bundlePath)!, name: "Test", author: nil, description: nil, thumbnail: nil, thumbnailColor: nil, primaryColor: nil, links: nil, borderSize: nil, borderColor: nil)
+        polyOut.activeFeature = Feature(path: URL(string: bundle.bundlePath)!, name: "Test", author: nil, description: nil, thumbnail: nil, thumbnailColor: nil, primaryColor: nil, links: nil, borderColor: nil)
 
         let url = bundle.url(forResource: "testZip", withExtension: "zip")!
 
@@ -192,7 +192,7 @@ class PolyOutTests: XCTestCase {
         let polyOut = PolyOut(session: NetworkSessionMock())
 
         let bundle = Bundle(for: type(of: self))
-        polyOut.activeFeature = Feature(path: URL(string: bundle.bundlePath)!, name: "Test", author: nil, description: nil, thumbnail: nil, thumbnailColor: nil, primaryColor: nil, links: nil, borderSize: nil, borderColor: nil)
+        polyOut.activeFeature = Feature(path: URL(string: bundle.bundlePath)!, name: "Test", author: nil, description: nil, thumbnail: nil, thumbnailColor: nil, primaryColor: nil, links: nil, borderColor: nil)
 
         let url1 = bundle.url(forResource: "multipleZips1", withExtension: "zip")!
         let url2 = bundle.url(forResource: "multipleZips2", withExtension: "zip")!

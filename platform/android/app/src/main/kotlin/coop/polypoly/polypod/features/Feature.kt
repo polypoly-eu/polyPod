@@ -29,8 +29,6 @@ class Feature(
         get() = runCatching { Color.parseColor(manifest?.borderColor) }
             .getOrDefault(borderColor)
 
-    val borderSize: String get() = manifest?.borderSize ?: "1"
-
     val thumbnail: Bitmap?
         get() {
             if (manifest?.thumbnail == null) return null

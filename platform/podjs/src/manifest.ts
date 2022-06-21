@@ -8,7 +8,6 @@ export interface Manifest {
     readonly thumbnail: string;
     readonly primaryColor: string;
     readonly borderColor: string;
-    readonly borderSize: string;
     readonly links: Record<string, string>;
     readonly translations: Record<string, Partial<Manifest>>;
 }
@@ -52,7 +51,6 @@ const manifestDecoder = Decoder.type({
     thumbnail: relativeDecoder,
     primaryColor: Decoder.string,
     borderColor: Decoder.string,
-    borderSize: Decoder.string,
     links: Decoder.record(Decoder.string),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     translations: Decoder.record(Decoder.partial<any>({})),
@@ -76,6 +74,5 @@ export async function readManifest(
         links: manifest.links,
         translations: manifest.translations,
         borderColor: manifest.borderColor,
-        borderSize: manifest.borderSize,
     };
 }

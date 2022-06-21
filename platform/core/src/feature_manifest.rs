@@ -13,7 +13,6 @@ pub struct FeatureManifest {
     pub thumbnail_color: Option<String>,
     pub primary_color: Option<String>,
     pub links: Option<HashMap<String, String>>,
-    pub border_size: Option<String>,
     pub border_color: Option<String>,
 }
 
@@ -65,9 +64,6 @@ impl FeatureManifest {
                 .and_then(|manifest| manifest.primary_color.clone())
                 .or(full_manifest.primary_color),
             links,
-            pub border_size: translation
-            .and_then(|manifest| manifest.border_size.clone())
-            .or(full_manifest.border_size),
             pub border_color: translation
             .and_then(|manifest| manifest.border_color.clone())
             .or(full_manifest.border_color),        
@@ -88,7 +84,6 @@ struct FullFeatureManifest {
     links: Option<HashMap<String, String>>,
     translations: Option<HashMap<String, FeatureManifest>>,
     border_color: Option<String>,
-    border_size: Option<String>,
 }
 
 impl TryFrom<&JSONStr> for FullFeatureManifest {
@@ -113,8 +108,7 @@ mod tests {
             thumbnail_color: None,
             primary_color: None,
             links: None,
-            border_color: None,
-            border_size: None,
+            border_color: None
         }
     }
 
@@ -169,7 +163,6 @@ mod tests {
             "thumbnailColor": "#FFFFFF",
             "primaryColor": "#000000",
             "borderColor": "#000000",
-            "borderSize": "1",
             "links": {
                 "link1": "https://example.com/1",
                 "link2": "https://example.com/2"
@@ -189,7 +182,6 @@ mod tests {
             thumbnail_color: Some("#FFFFFF".to_string()),
             primary_color: Some("#000000".to_string()),
             border_color: Some("#000000".to_string()),
-            border_size: Some("1".to_string()),
             links: Some(expected_links),
         };
 
@@ -203,7 +195,6 @@ mod tests {
         assert_eq!(parsed.thumbnail_color, expected_manifest.thumbnail_color);
         assert_eq!(parsed.primary_color, expected_manifest.primary_color);
         assert_eq!(parsed.border_color, expected_manifest.border_color);
-        assert_eq!(parsed.border_size, expected_manifest.border_size);
         assert_eq!(parsed.links, expected_manifest.links);
     }
 
@@ -219,7 +210,6 @@ mod tests {
             "thumbnailColor": "#FFFFFF",
             "primaryColor": "#000000",
             "borderColor": "#000000",
-            "borderSize": "1",
             "links": {
                 "link1": "https://example.com/1",
                 "link2": "https://example.com/2"
@@ -248,7 +238,6 @@ mod tests {
             thumbnail_color: Some("#FFFFFF".to_string()),
             primary_color: Some("#000000".to_string()),
             border_color: Some("#000000".to_string()),
-            border_size: Some("1".to_string()),
             links: Some(expected_links),
         };
 
@@ -262,7 +251,6 @@ mod tests {
         assert_eq!(parsed.thumbnail_color, expected_manifest.thumbnail_color);
         assert_eq!(parsed.primary_color, expected_manifest.primary_color);
         assert_eq!(parsed.border_color, expected_manifest.border_color);
-        assert_eq!(parsed.border_size, expected_manifest.border_size);
         assert_eq!(parsed.links, expected_manifest.links);
     }
 }

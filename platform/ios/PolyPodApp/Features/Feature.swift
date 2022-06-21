@@ -12,7 +12,6 @@ class Feature {
     let primaryColor: Color?
     let thumbnailColor: Color?
     let thumbnail: URL?
-    let borderSize: String?
     let borderColor: Color?
     private let links: [String: String]
 
@@ -35,7 +34,6 @@ class Feature {
         thumbnailColor: String?,
         primaryColor: String?,
         links: [String: String]?,
-        borderSize: String?,
         borderColor: String?
     ) {
         self.path = path
@@ -52,7 +50,6 @@ class Feature {
             thumbnailPath: thumbnail
         )
         self.links = links ?? [:]
-        self.borderSize = borderSize
         self.borderColor = parseColor(hexValue: borderColor)
     }
 
@@ -71,7 +68,6 @@ class Feature {
                   thumbnailColor: manifest.thumbnailColor,
                   primaryColor: manifest.primaryColor,
                   links: links,
-                  borderSize: manifest.borderSize,
                   borderColor: manifest.borderColor
         )
     }
