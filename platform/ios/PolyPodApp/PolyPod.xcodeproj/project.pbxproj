@@ -547,9 +547,6 @@
 			isa = PBXGroup;
 			children = (
 				904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */,
-				90716ACB283F7AFA00F7445A /* Array+Utils.swift */,
-				9C8F6D26285B49D000D44B4E /* URL+Utils.swift */,
-				9C8F6D29285B49DD00D44B4E /* UIImage+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -599,6 +596,9 @@
 		E97D326726308BC700A5A180 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				90716ACB283F7AFA00F7445A /* Array+Utils.swift */,
+				9C8F6D26285B49D000D44B4E /* URL+Utils.swift */,
+				9C8F6D29285B49DD00D44B4E /* UIImage+Utils.swift */,
 				1AF46892241FBA7200E51B6D /* JSONSerializationExtensions.swift */,
 				1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */,
 				E9F370D4262EABFF006254C1 /* LocalizedStringKeyExtensions.swift */,
