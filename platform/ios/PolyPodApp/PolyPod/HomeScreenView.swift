@@ -105,10 +105,12 @@ struct HomeScreenConstants {
 
     struct Section {
         static let verticalSpacing = PolyStyle.Spacing.plSpace8x
-        static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
-                                                    size: PolyStyle.Font.Size.lg)
-                                        .weight(PolyStyle.Font.Weight.medium),
-                                      alignment: PolyStyle.Font.Alignment.left)
+        static let title = Typography(
+            font:
+                .custom(PolyStyle.Font.Family.jostMedium, size: PolyStyle.Font.Size.lg)
+                .weight(PolyStyle.Font.Weight.medium),
+            alignment: PolyStyle.Font.Alignment.left
+        )
     }
 
     struct View {
@@ -128,10 +130,12 @@ struct HomeScreenConstants {
     struct SmallTile {
         static let topPadding = 0.0
         static let otherPadding = PolyStyle.Spacing.plSpace2x
-        static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
-                                                    size: PolyStyle.Font.Size.xs)
-                                        .weight(PolyStyle.Font.Weight.medium),
-                                      alignment: PolyStyle.Font.Alignment.center)
+        static let title = Typography(
+            font:
+                .custom(PolyStyle.Font.Family.jostMedium, size: PolyStyle.Font.Size.xs)
+                .weight(PolyStyle.Font.Weight.medium),
+            alignment: PolyStyle.Font.Alignment.center
+        )
     }
 
     struct MediumTile {
@@ -140,14 +144,18 @@ struct HomeScreenConstants {
         static let textTopBottomPadding = PolyStyle.Spacing.plSpace2x
         static let textTrailingPadding = PolyStyle.Spacing.plSpace4x
 
-        static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
-                                                    size: PolyStyle.Font.Size.base)
-                                        .weight(PolyStyle.Font.Weight.medium),
-                                      alignment: PolyStyle.Font.Alignment.left)
-        static let description = Typography(font: .custom(PolyStyle.Font.Family.jostRegular,
-                                                          size: PolyStyle.Font.Size.xs)
-                                                .weight(PolyStyle.Font.Weight.regular),
-                                            alignment: PolyStyle.Font.Alignment.left)
+        static let title = Typography(
+            font:
+                .custom(PolyStyle.Font.Family.jostMedium, size: PolyStyle.Font.Size.base)
+                .weight(PolyStyle.Font.Weight.medium),
+            alignment: PolyStyle.Font.Alignment.left
+        )
+        static let description = Typography(
+            font:
+                .custom(PolyStyle.Font.Family.jostRegular, size: PolyStyle.Font.Size.xs)
+                .weight(PolyStyle.Font.Weight.regular),
+            alignment: PolyStyle.Font.Alignment.left
+        )
     }
 
     struct BigTile {
@@ -155,34 +163,43 @@ struct HomeScreenConstants {
         static let verticalSpacing = PolyStyle.Spacing.plSpace2x
         static let textVerticalSpacing = PolyStyle.Spacing.plSpace2x
 
-        static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
-                                                    size: PolyStyle.Font.Size.base)
-                                        .weight(PolyStyle.Font.Weight.medium),
-                                      alignment: PolyStyle.Font.Alignment.left)
-        static let description = Typography(font: .custom(PolyStyle.Font.Family.jostRegular,
-                                                          size: PolyStyle.Font.Size.xs)
-                                                .weight(PolyStyle.Font.Weight.regular),
-                                            alignment: PolyStyle.Font.Alignment.left)
+        static let title = Typography(
+            font:
+                .custom(PolyStyle.Font.Family.jostMedium, size: PolyStyle.Font.Size.base)
+                .weight(PolyStyle.Font.Weight.medium),
+            alignment: PolyStyle.Font.Alignment.left
+        )
+        static let description = Typography(
+            font:
+                .custom(PolyStyle.Font.Family.jostRegular, size: PolyStyle.Font.Size.xs)
+                .weight(PolyStyle.Font.Weight.regular),
+            alignment: PolyStyle.Font.Alignment.left
+        )
     }
 
     struct Footer {
         static let verticalSpacing = PolyStyle.Spacing.plSpace4x
         static let padding = PolyStyle.Spacing.plSpace6x
 
-        static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
-                                                    size: PolyStyle.Font.Size._2xl)
-                                        .weight(PolyStyle.Font.Weight.medium),
-                                      alignment: PolyStyle.Font.Alignment.left)
-        static let description = Typography(font: .custom(PolyStyle.Font.Family.jostRegular,
-                                                          size: PolyStyle.Font.Size.base)
-                                                .weight(PolyStyle.Font.Weight.regular),
-                                            alignment: PolyStyle.Font.Alignment.left)
+        static let title = Typography(
+            font:
+                .custom( PolyStyle.Font.Family.jostMedium, size: PolyStyle.Font.Size._2xl)
+                .weight(PolyStyle.Font.Weight.medium),
+            alignment: PolyStyle.Font.Alignment.left
+        )
+        static let description = Typography(
+            font:
+                .custom(PolyStyle.Font.Family.jostRegular, size: PolyStyle.Font.Size.base)
+                .weight(PolyStyle.Font.Weight.regular),
+            alignment: PolyStyle.Font.Alignment.left
+        )
 
         struct Button {
-            static let title = Typography(font: .custom(PolyStyle.Font.Family.jostMedium,
-                                                        size: PolyStyle.Font.Size.lg)
-                                            .weight(PolyStyle.Font.Weight.medium),
-                                          alignment: PolyStyle.Font.Alignment.center)
+            static let title = Typography(
+                font:
+                    .custom(PolyStyle.Font.Family.jostMedium, size: PolyStyle.Font.Size.lg)
+                    .weight(PolyStyle.Font.Weight.medium),
+                alignment: PolyStyle.Font.Alignment.center)
         }
     }
 }
@@ -202,7 +219,12 @@ struct HomeScreenFeatureSelectedKey: EnvironmentKey {
 
 struct HomeScreenSizesKey: EnvironmentKey {
     typealias Value = Sizes
-    static let defaultValue: Sizes = Sizes(screenSize: .zero, containerWidth: .zero, smallTileWidth: .zero, mediumTileWidth: .zero, bigTileWidth: .zero)
+    static let defaultValue: Sizes = Sizes(screenSize: .zero,
+                                           containerWidth: .zero,
+                                           smallTileWidth: .zero,
+                                           mediumTileWidth: .zero,
+                                           bigTileWidth: .zero
+    )
 }
 
 extension EnvironmentValues {
@@ -292,8 +314,11 @@ struct HomeScreenView: View {
         let totalScreenPadding = 2 * HomeScreenConstants.View.horizontalPadding
         let containerWidth: CGFloat = screenWidth - totalScreenPadding
 
-        let interItemSpacing = (Double(HomeScreenConstants.TileContainer.numberOfColumns) - 1.0) * HomeScreenConstants.TileContainer.horizontalSpacing
-        let smallTileWidth: CGFloat = (containerWidth - interItemSpacing) / Double(HomeScreenConstants.TileContainer.numberOfColumns)
+        let interItemSpacing =
+            (Double(HomeScreenConstants.TileContainer.numberOfColumns) - 1.0) *
+            HomeScreenConstants.TileContainer.horizontalSpacing
+        let smallTileWidth: CGFloat =
+            (containerWidth - interItemSpacing) / Double(HomeScreenConstants.TileContainer.numberOfColumns)
 
         let bigTileWidth = containerWidth - smallTileWidth - HomeScreenConstants.TileContainer.horizontalSpacing
 
@@ -301,7 +326,8 @@ struct HomeScreenView: View {
                      containerWidth: containerWidth,
                      smallTileWidth: smallTileWidth,
                      mediumTileWidth: containerWidth,
-                     bigTileWidth: bigTileWidth)
+                     bigTileWidth: bigTileWidth
+        )
     }
 }
 
