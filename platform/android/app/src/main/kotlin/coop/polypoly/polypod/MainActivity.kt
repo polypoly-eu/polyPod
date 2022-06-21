@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         Authentication.authenticate(this) { success ->
             if (success) {
+                FeatureStorage.importFeatures(this)
                 setContentView(R.layout.activity_main)
                 setSupportActionBar(findViewById(R.id.toolbar))
             } else {

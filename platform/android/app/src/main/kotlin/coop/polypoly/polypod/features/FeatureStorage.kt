@@ -19,6 +19,7 @@ enum class FeatureCategory {
     knowHow,
     tools
 }
+
 data class FeatureCategoryModel(
     val category: FeatureCategory,
     val name: String,
