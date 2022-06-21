@@ -17,7 +17,7 @@ export function printHeadlineMsg(msg) {
 }
 
 export function printInfoMsg(msg) {
-    console.log(chalk.white("🏗 ${msg} 🏗"));
+    console.log(chalk.white(`🏗 ${msg} 🏗`));
 }
 
 export function printFeatureInfoMsg(featureType) {
