@@ -2,13 +2,15 @@ import React from "react";
 import analysisKeys from "../../model/analyses/utils/analysisKeys";
 import ReportStory from "./reportStory.jsx";
 
+import i18n from "!silly-i18n";
+
 class DataImportingStatusReport extends ReportStory {
     constructor(props) {
         super(props);
         this._neededReports = [analysisKeys.importersData];
     }
     get title() {
-        return "Importing status";
+        return i18n.t("report:status");
     }
 
     get reportData() {
@@ -31,8 +33,9 @@ class DataImportingStatusReport extends ReportStory {
         return (
             <>
                 <p>
-                    Data was read using {this.reportData.length} importers. This
-                    view shows the list of importers that read data.
+                    {i18n.t("report:status.details", {
+                        number_importers: this.reportData.length,
+                    })}
                 </p>
                 <table>
                     <thead>

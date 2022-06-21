@@ -89,6 +89,8 @@
 		5105EA05281ACEEC0040AE0D /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */; };
 		5105EA07281AFDBB0040AE0D /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */; };
 		5B8653022643FC310014208C /* PolyNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8653012643FC310014208C /* PolyNav.swift */; };
+		9000F697285894B500241B27 /* UnlockPolyPod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9000F696285894B500241B27 /* UnlockPolyPod.swift */; };
+		9000F69A28589A7D00241B27 /* SharedUIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9000F69928589A7D00241B27 /* SharedUIComponents.swift */; };
 		901C0588278EE58700BC8364 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0587278EE58700BC8364 /* CoreDataStack.swift */; };
 		901C058A278F2AF800BC8364 /* CoreData+PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */; };
 		901C058B278F2D4A00BC8364 /* CoreData+PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */; };
@@ -232,6 +234,8 @@
 		5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtensions.swift; sourceTree = "<group>"; };
 		5B0F7B5F26A924DF00F4EFF4 /* PolyPod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PolyPod.entitlements; sourceTree = "<group>"; };
 		5B8653012643FC310014208C /* PolyNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyNav.swift; sourceTree = "<group>"; };
+		9000F696285894B500241B27 /* UnlockPolyPod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockPolyPod.swift; sourceTree = "<group>"; };
+		9000F69928589A7D00241B27 /* SharedUIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedUIComponents.swift; sourceTree = "<group>"; };
 		901C0587278EE58700BC8364 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+PolyIn.swift"; sourceTree = "<group>"; };
 		904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchToMainQueue.swift; sourceTree = "<group>"; };
@@ -441,6 +445,8 @@
 				E996EBD12756BBE900EAC9F7 /* Log.swift */,
 				906E406B27A82C7F009015B7 /* ActivityViewController.swift */,
 				90E4088127D78E4E006AD362 /* DataProtection.swift */,
+				9000F696285894B500241B27 /* UnlockPolyPod.swift */,
+				9000F69928589A7D00241B27 /* SharedUIComponents.swift */,
 			);
 			path = PolyPod;
 			sourceTree = "<group>";
@@ -948,6 +954,7 @@
 				1A4C21F624A63E4C006CC1FD /* Literal+CoreDataClass.swift in Sources */,
 				E96817F1274D032A00206602 /* Language.swift in Sources */,
 				1A4C21DE24A63DD4006CC1FD /* Term+CoreDataClass.swift in Sources */,
+				9000F697285894B500241B27 /* UnlockPolyPod.swift in Sources */,
 				1A4C21EE24A63E4B006CC1FD /* NamedNode+CoreDataClass.swift in Sources */,
 				E9CF1B722627304800216B70 /* FeatureContainerView.swift in Sources */,
 				1A4C21DF24A63DD4006CC1FD /* Term+CoreDataProperties.swift in Sources */,
@@ -965,6 +972,7 @@
 				1A4C21ED24A63E4B006CC1FD /* DefaultGraph+CoreDataProperties.swift in Sources */,
 				1A4C21F524A63E4C006CC1FD /* Variable+CoreDataProperties.swift in Sources */,
 				E90F89EA2629822400AD7D96 /* OnboardingView.swift in Sources */,
+				9000F69A28589A7D00241B27 /* SharedUIComponents.swift in Sources */,
 				1A4C21F724A63E4C006CC1FD /* Literal+CoreDataProperties.swift in Sources */,
 				1A4C21EF24A63E4B006CC1FD /* NamedNode+CoreDataProperties.swift in Sources */,
 				1ABADC0E24EFB9F300369791 /* Models.swift in Sources */,
@@ -1219,7 +1227,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.6.0;
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.polypod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1248,7 +1256,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.6.0;
 				OTHER_SWIFT_FLAGS = "-DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.polypod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
