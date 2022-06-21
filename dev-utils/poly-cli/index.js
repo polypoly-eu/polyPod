@@ -74,6 +74,18 @@ function setup(feature_name, author, version, description, license) {
         "styles.css": readFileSync(
             path.resolve(__dirname, "./src/static/templates/styles.css")
         ),
+        "locales/en/common.js": readFileSync(
+            path.resolve(
+                __dirname,
+                "./src/static/templates/locales/en/common.json"
+            )
+        ),
+        "locales/de/common.js": readFileSync(
+            path.resolve(
+                __dirname,
+                "./src/static/templates/locales/de/common.json"
+            )
+        ),
     };
 
     if (existsSync(`./${feature_name}`)) {
