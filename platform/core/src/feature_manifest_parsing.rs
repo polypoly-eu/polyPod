@@ -162,7 +162,7 @@ mod tests {
             "thumbnail": "assets/thumbnail.png",
             "thumbnailColor": "#FFFFFF",
             "primaryColor": "#000000",
-            "border_color": "#000000",
+            "borderColor": "#000000",
             "links": {
                 "link1": "https://example.com/1",
                 "link2": "https://example.com/2"
