@@ -97,55 +97,7 @@ function setup(feature_name, author, version, description, license) {
                     "./src/static/templates/rollup.config.mjs"
                 )
             ),
-        /**                 {
-                    locales: {
-                        en: ["common.json"],
-                        de: ["common.json"],
-                    },
-                },
-            ],
-        },
-
-, */
     };
-
-    /**    let templates = {
-        "package.json": packageTemplate(
-            feature_name,
-            version,
-            description,
-            "src/index.jsx",
-            author,
-            license
-        ),
-        "manifest.json": manifestTemplate(feature_name, author),
-        "README.md": readmeTemplate(feature_name, description),
-        "rollup.config.mjs": readFileSync(
-            path.resolve(__dirname, "./src/static/templates/rollup.config.mjs")
-        ),
-        "index.html": readFileSync(
-            path.resolve(__dirname, "./src/static/templates/index.html")
-        ),
-        "index.jsx": readFileSync(
-            path.resolve(__dirname, "./src/static/templates/index.jsx")
-        ),
-        "styles.css": readFileSync(
-            path.resolve(__dirname, "./src/static/templates/styles.css")
-        ),
-        "locales/en/common.js": readFileSync(
-            path.resolve(
-                __dirname,
-                "./src/static/templates/locales/en/common.json"
-            )
-        ),
-        "locales/de/common.js": readFileSync(
-            path.resolve(
-                __dirname,
-                "./src/static/templates/locales/de/common.json"
-            )
-        ),
-    };
-*/
 
     if (existsSync(`./${feature_name}`)) {
         printErrorMsg("Feature already exists in this folder. Aborting!");
@@ -307,12 +259,9 @@ function handleCreateImporterFeature() {
 }
 
 function createDirectoryStructure(structure, parent = ".") {
-    console.log("Working on ", parent);
     for (const key in structure) {
-        console.log("Key ", key);
         if (typeof structure[key] === "object") {
             let dir = parent + "/" + key;
-            console.log("Directory ", dir);
             if (!existsSync(dir)) {
                 mkdirSync(dir);
             }
