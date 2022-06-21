@@ -5,9 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "cd ../../features; ../dev-utils/poly-cli/index.js create feature eksample; if [ -f eksample/package-lock.json ]; then rm -rf eksample && cd -; else exit 1; fi ",
-    "clean": "rm -rf eksample",
-    "prestart": "npm run clean",
-    "start": "./index.js create feature eksample"
   },
   "author": "polypoly",
   "license": "ISC",
