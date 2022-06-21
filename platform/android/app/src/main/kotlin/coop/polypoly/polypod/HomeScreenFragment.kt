@@ -1,22 +1,13 @@
 package coop.polypoly.polypod
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -25,6 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
@@ -35,28 +28,76 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import com.google.accompanist.flowlayout.FlowRow
+import coop.polypoly.polypod.features.FeatureCategory
+import coop.polypoly.polypod.features.FeatureStorage
 
-class HomeScreenActivity : Fragment() {
+class HomeScreenFragment : Fragment() {
+    private val featureStorage = FeatureStorage()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        featureStorage.importFeatures(requireContext())
+        val sectionModels = featureStorage.categories.map { category ->
+            SectionModel(
+                category.name,
+                SectionType.fromCategoryType(category.category),
+                category.features.map { feature ->
+                    TileModel(
+                        feature.name,
+                        feature.description,
+                        feature.thumbnail,
+                        Color(feature.thumbnailColor)
+                    )
+                }
+            )
+        }
         return ComposeView(requireContext()).apply {
             setContent {
-                screen(sectionModels = listOf(SectionModel("yourData", SectionType.YOUR_DATA, listOf(
-                    TileModel("feature", "myFeature", R.drawable.ic_launcher, Color.Cyan)
-                ))))
+                Scaffold(
+                    topBar = {
+                        topBar(onInfoClick = {}, onSettingsClick = {})
+                    }
+                ) {
+                    screen(sectionModels)
+                }
             }
         }
     }
+}
+
+@Composable
+fun topBar(onInfoClick: () -> Unit, onSettingsClick: () -> Unit) {
+    TopAppBar(backgroundColor = Color.White) {
+        Row(modifier = Modifier
+            .fillMaxSize(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically) {
+            Button(onClick = onInfoClick,
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                elevation = null) {
+                Image(painterResource(R.drawable.ic_info_dark),
+                    contentDescription = "info")
+            }
+            Image(painterResource(R.drawable.ic_logo),
+                contentDescription = "logo")
+            Button(onClick = onSettingsClick,
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                elevation = null) {
+                Image(painterResource(R.drawable.ic_settings),
+                    contentDescription = "settings")
+            }
+        }
+    }
+},
 }
 
 @Composable
@@ -168,89 +209,6 @@ fun screen(sectionModels: List<SectionModel>) {
     return Screen(screen = screen)
 }
 
-data class PolySpacing(
-    val _1x: Dp = 4.dp,
-    val _2x: Dp = (2 * _1x.value).dp,
-    val _3x: Dp = (3 * _1x.value).dp,
-    val _4x: Dp = (4 * _1x.value).dp,
-    val _5x: Dp = (5 * _1x.value).dp,
-    val _6x: Dp = (6 * _1x.value).dp,
-    val _7x: Dp = (7 * _1x.value).dp,
-    val _8x: Dp = (8 * _1x.value).dp,
-)
-
-data class PolyRadius(
-    val _1x: Dp = 4.dp,
-    val _2x: Dp = (2 * _1x.value).dp,
-    val _3x: Dp = (3 * _1x.value).dp,
-    val _4x: Dp = (4 * _1x.value).dp,
-    val _5x: Dp = (5 * _1x.value).dp,
-    val _6x: Dp = (6 * _1x.value).dp,
-)
-
-data class PolyFontFamily(
-    val jostRegular: Int = R.font.jost_regular,
-    val jostMedium: Int = R.font.jost_medium,
-)
-
-data class PolyFontSize(
-    val xs: TextUnit = 12.sp,
-    val sm: TextUnit = 14.sp,
-    val base: TextUnit = 16.sp,
-    val lg: TextUnit = 18.sp,
-    val xl: TextUnit = 20.sp,
-    val _2xl: TextUnit = 22.sp
-)
-
-data class PolyFontLineHeight(
-    val xs: TextUnit = (1.2 * PolyFontSize().xs.value).sp,
-    val sm: TextUnit = (1.2 * PolyFontSize().sm.value).sp,
-    val base: TextUnit = (1.2 * PolyFontSize().base.value).sp,
-    val lg: TextUnit = (1.2 * PolyFontSize().lg.value).sp,
-    val xl: TextUnit = (1.2 * PolyFontSize().xl.value).sp,
-    val _2xl: TextUnit = (1.2 * PolyFontSize()._2xl.value).sp
-)
-
-data class PolyFontAlignment(
-    val left: TextAlign = TextAlign.Start,
-    val center: TextAlign = TextAlign.Center,
-    val right: TextAlign = TextAlign.End,
-    val justify: TextAlign = TextAlign.Justify
-)
-
-data class PolyFontWeight(
-    val regular: FontWeight = FontWeight.Normal,
-    val medium: FontWeight = FontWeight.Medium
-)
-
-data class PolyFont(
-    val family: PolyFontFamily = PolyFontFamily(),
-    val weight: PolyFontWeight = PolyFontWeight(),
-    val size: PolyFontSize = PolyFontSize(),
-    val lineHeight: PolyFontLineHeight = PolyFontLineHeight(),
-    val alignment: PolyFontAlignment = PolyFontAlignment()
-)
-
-data class PolyBorderSize(
-    val _1x: Dp = 1.dp,
-    val _2x: Dp = (2 * _1x.value).dp,
-    val _3x: Dp = (3 * _1x.value).dp,
-    val _4x: Dp = (4 * _1x.value).dp,
-    val _5x: Dp = (5 * _1x.value).dp,
-    val _6x: Dp = (6 * _1x.value).dp,
-)
-
-data class PolyBorder(
-    val size: PolyBorderSize = PolyBorderSize(),
-)
-
-data class PolyStyle(
-    val spacing: PolySpacing = PolySpacing(),
-    val radius: PolyRadius = PolyRadius(),
-    val font: PolyFont = PolyFont(),
-    val border: PolyBorder = PolyBorder()
-)
-
 enum class TileType {
     SMALL,
     MEDIUM,
@@ -260,7 +218,7 @@ enum class TileType {
 data class TileModel(
     val title: String,
     val description: String,
-    val imageId: Int,
+    val image: Bitmap?,
     val backgroundColor: Color
 )
 
@@ -286,7 +244,17 @@ data class Container(
 enum class SectionType {
     YOUR_DATA,
     DATA_KNOW_HOW,
-    TOOLS
+    TOOLS;
+
+    companion object {
+        fun fromCategoryType(type: FeatureCategory): SectionType {
+            return when (type) {
+                FeatureCategory.yourData -> YOUR_DATA
+                FeatureCategory.knowHow -> DATA_KNOW_HOW
+                FeatureCategory.tools -> TOOLS
+            }
+        }
+    }
 }
 
 data class SectionModel(
@@ -655,14 +623,16 @@ fun BigTileView(tile: Tile) {
                     bottom = tile.layout.bottomPadding
                 )
         ) {
-            Image(
-                painter = painterResource(id = tile.model.imageId),
-                contentDescription = null,
-                // Takes all the height left after the text is placed
-                modifier = Modifier.weight(1.0f),
-                contentScale = ContentScale.Fit,
-                alignment = Alignment.Center
-            )
+            tile.model.image?.also {
+                Image(
+                    bitmap = it.asImageBitmap(),
+                    contentDescription = null,
+                    // Takes all the height left after the text is placed
+                    modifier = Modifier.weight(1.0f),
+                    contentScale = ContentScale.Fit,
+                    alignment = Alignment.Center
+                )
+            }
             Spacer(
                 modifier = Modifier.defaultMinSize(
                     minHeight = tile.layout.verticalSpacing,
@@ -718,13 +688,16 @@ fun MediumTileView(tile: Tile) {
             modifier = Modifier
                 .background(tile.model.backgroundColor)
         ) {
-            Image(
-                painter = painterResource(id = tile.model.imageId),
-                contentDescription = null,
-                contentScale = ContentScale.Fit,
-                alignment = Alignment.Center,
-                modifier = Modifier.width(tile.layout.height)
-            )
+            tile.model.image?.also {
+                Image(
+                    bitmap = it.asImageBitmap(),
+                    contentDescription = null,
+                    contentScale = ContentScale.Fit,
+                    alignment = Alignment.Center,
+                    modifier = Modifier.width(tile.layout.height)
+                )
+            }
+
             Column(
                 modifier = Modifier.padding(
                     top = tile.layout.textTopPadding,
@@ -789,14 +762,16 @@ fun SmallTileView(tile: Tile) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Image(
-                painter = painterResource(id = tile.model.imageId),
-                contentDescription = null,
-                // Takes all the height left after the text is placed
-                modifier = Modifier.weight(1.0f),
-                contentScale = ContentScale.Fit,
-                alignment = Alignment.Center
-            )
+            tile.model.image?.also {
+                Image(
+                    bitmap = it.asImageBitmap(),
+                    contentDescription = null,
+                    // Takes all the height left after the text is placed
+                    modifier = Modifier.weight(1.0f),
+                    contentScale = ContentScale.Fit,
+                    alignment = Alignment.Center
+                )
+            }
             Spacer(
                 modifier = Modifier.defaultMinSize(
                     minWidth = tile.layout.width,
