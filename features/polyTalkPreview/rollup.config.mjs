@@ -2,6 +2,7 @@ import copy from "@polypoly-eu/rollup-plugin-copy-watch";
 import css from "rollup-plugin-css-only";
 import sillyI18n from "@polypoly-eu/silly-i18n/rollup-plugin.js";
 import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
+import sucrase from "@rollup/plugin-sucrase";
 
 const externalPackages = {
     "@polypoly-eu/poly-look": "polyLook",
@@ -10,18 +11,23 @@ const externalPackages = {
 };
 
 export default {
-    input: "src/index.js",
+    input: "src/index.jsx",
     output: {
         file: "dist/index.js",
         format: "iife",
         globals: externalPackages,
     },
+    external: Object.keys(externalPackages),
     plugins: [
         sillyI18n(),
         css({ output: "css/bundle.css" }),
         genPodjs({
             build_dir: "./dist",
             manifestPath: "./src/static/manifest.json",
+        }),
+        sucrase({
+            transforms: ["jsx"],
+            production: true,
         }),
         copy({
             targets: [
