@@ -3,10 +3,10 @@ import css from "rollup-plugin-css-only";
 import sillyI18n from "@polypoly-eu/silly-i18n/rollup-plugin.js";
 import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
 import sucrase from "@rollup/plugin-sucrase";
+import resolve from "@rollup/plugin-node-resolve";
 
 const externalPackages = {
     "@polypoly-eu/poly-look": "polyLook",
-    "@polypoly-eu/silly-i18n": "silly-i18n",
     react: "React",
     "react-dom": "ReactDOM",
     "react-dom/client": "ReactDOM",
@@ -31,6 +31,7 @@ export default {
             transforms: ["jsx"],
             production: true,
         }),
+        resolve(),
         copy({
             targets: [
                 {
