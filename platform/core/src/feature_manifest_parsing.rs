@@ -65,8 +65,8 @@ impl FeatureManifest {
                 .or(full_manifest.primary_color),
             links,
             border_color: translation
-            .and_then(|manifest| manifest.border_color.clone())
-            .or(full_manifest.border_color)
+                .and_then(|manifest| manifest.border_color.clone())
+                .or(full_manifest.border_color),
         }
     }
 }

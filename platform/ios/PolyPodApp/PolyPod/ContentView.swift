@@ -87,22 +87,7 @@ struct ContentView: View {
 
     private func securityReminderState() -> ViewState {
         if !Authentication.shared.shouldShowPrompt() {
-            return ViewState(
-                AnyView(
-                    UnlockPolyPod(onCompleted: {
-                        // Checking whether a notification needs to be shown
-                        // used to be in featureListState, where it makes more
-                        // sense, but ever since we added a dedicated
-                        // lockedState, they wouldn't show up anymore, the
-                        // state change in featureListState's onAppear did not
-                        // trigger a rerender, even though it should.
-                        // Yet another SwiftUI bug it seems...
-                        showUpdateNotification = UpdateNotification().showInApp
-                        
-                        state = featureListState()
-                    })
-                )
-            )
+            return lockedState()
         }
 
         return ViewState(
@@ -115,6 +100,43 @@ struct ContentView: View {
                 )
             )
         )
+    }
+
+    private func lockedState() -> ViewState {
+        return ViewState(
+            AnyView(
+                Text("").onAppear {
+                    authenticateRelentlessly {
+                        // Checking whether a notification needs to be shown
+                        // used to be in featureListState, where it makes more
+                        // sense, but ever since we added a dedicated
+                        // lockedState, they wouldn't show up anymore, the
+                        // state change in featureListState's onAppear did not
+                        // trigger a rerender, even though it should.
+                        // Yet another SwiftUI bug it seems...
+                        showUpdateNotification = UpdateNotification().showInApp
+
+                        state = featureListState()
+                    }
+                }
+            )
+        )
+    }
+
+    private func authenticateRelentlessly(
+        _ completeAction: @escaping () -> Void
+    ) {
+        // Apple doesn't want us to close the app programmatically, e.g. in case
+        // authentication fails. Since we don't have a dedicated screen for the
+        // locked state yet, we simply keep asking the user until they stop
+        // cancelling or leave the app.
+        Authentication.shared.authenticate { success in
+            if success {
+                completeAction()
+                return
+            }
+            authenticateRelentlessly(completeAction)
+        }
     }
 
     private func featureListState() -> ViewState {
