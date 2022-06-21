@@ -37,12 +37,19 @@ function setup(feature_name, author, version, description, license) {
     // folders are objects, files are strings.
     var structure = {};
 
+    // Remember "leaves" before subdirectories, or mkdir will fail
     structure[feature_name] = {
         src: {
+            "index.jsx": () =>
+                readFileSync(
+                    path.resolve(__dirname, "./src/static/templates/index.jsx")
+                ),
+            "styles.css": () =>
+                readFileSync(
+                    path.resolve(__dirname, "./src/static/templates/styles.css")
+                ),
             static: {
-                "manifest.json": () => {
-                    return manifestTemplate(feature_name, author);
-                },
+                "manifest.json": () => manifestTemplate(feature_name, author),
                 "index.html": () =>
                     readFileSync(
                         path.resolve(
@@ -52,9 +59,7 @@ function setup(feature_name, author, version, description, license) {
                     ),
             },
         },
-        /**        "index.jsx": ,
-                "styles.css",
-                {
+        /**                 {
                     locales: {
                         en: ["common.json"],
                         de: ["common.json"],
@@ -111,7 +116,7 @@ function setup(feature_name, author, version, description, license) {
         return;
     }
 
-    createDirectoryStructure(structure, ".");
+    createDirectoryStructure(structure);
 
     execSync(`cd ${feature_name} && npm i && npm run build`);
 }
@@ -265,21 +270,19 @@ function handleCreateImporterFeature() {
     printUnderConstruction();
 }
 
-function createDirectoryStructure(structure, parent) {
-    for (let key of Object.keys(structure)) {
-        let dir = parent + "/" + key;
-        console.log("Directory ", dir);
-        if (!existsSync(dir)) {
-            mkdirSync(dir);
-        }
-
-        for (let child in structure[key]) {
-            if (typeof structure[key][child] === "object") {
-                console.log(structure[key][child]);
-                createDirectoryStructure(structure[key][child], dir);
-            } else if (structure[key][child] instanceof Function) {
-                writeFileSync(dir + "/" + child, structure[key][child]());
+function createDirectoryStructure(structure, parent = ".") {
+    console.log("Working on ", parent);
+    for (const key in structure) {
+        console.log("Key ", key);
+        if (typeof structure[key] === "object") {
+            let dir = parent + "/" + key;
+            console.log("Directory ", dir);
+            if (!existsSync(dir)) {
+                mkdirSync(dir);
             }
+            createDirectoryStructure(structure[key], dir);
+        } else if (structure[key] instanceof Function) {
+            writeFileSync(parent + "/" + key, structure[key]());
         }
     }
 }
