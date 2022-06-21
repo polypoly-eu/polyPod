@@ -5,14 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.internal.composableLambda
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,20 +33,20 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.accompanist.flowlayout.FlowRow
 import coop.polypoly.polypod.features.FeatureCategory
 import coop.polypoly.polypod.features.FeatureStorage
 
 class HomeScreenFragment : Fragment() {
-    private val featureStorage = FeatureStorage()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        featureStorage.importFeatures(requireContext())
-        val sectionModels = featureStorage.categories.map { category ->
+        FeatureStorage.importFeatures(requireContext())
+        val sectionModels = FeatureStorage.categories.map { category ->
             SectionModel(
                 category.name,
                 SectionType.fromCategoryType(category.category),
@@ -56,7 +56,13 @@ class HomeScreenFragment : Fragment() {
                         feature.description,
                         feature.thumbnail,
                         Color(feature.thumbnailColor)
-                    )
+                    ) {
+                        findNavController().navigate(
+                            HomeScreenFragmentDirections
+                                .actionHomeScreenFragmentToFeatureFragment(
+                            feature.id)
+                        )
+                    }
                 }
             )
         }
@@ -64,10 +70,21 @@ class HomeScreenFragment : Fragment() {
             setContent {
                 Scaffold(
                     topBar = {
-                        topBar(onInfoClick = {}, onSettingsClick = {})
+                        topBar(onInfoClick = {
+                            findNavController().navigate(
+                                HomeScreenFragmentDirections
+                                    .actionHomeScreenFragmentToOnboardingActivity()
+                            )
+                        }, onSettingsClick = {
+                            findNavController().navigate(
+                                HomeScreenFragmentDirections
+                                    .actionHomeScreenFragmentToSettingsActivity()
+                            )
+                        })
                     }
                 ) {
                     screen(sectionModels)
+
                 }
             }
         }
@@ -97,13 +114,11 @@ fun topBar(onInfoClick: () -> Unit, onSettingsClick: () -> Unit) {
             }
         }
     }
-},
 }
 
 @Composable
 fun screen(sectionModels: List<SectionModel>) {
     val configuration = LocalConfiguration.current
-
     val tilesPerContainer = 3
 
     val screenLayout = ScreenLayout(
@@ -219,7 +234,8 @@ data class TileModel(
     val title: String,
     val description: String,
     val image: Bitmap?,
-    val backgroundColor: Color
+    val backgroundColor: Color,
+    val onSelection: () -> Unit,
 )
 
 data class Tile(
@@ -609,7 +625,10 @@ fun BigTileView(tile: Tile) {
     Card(
         modifier = Modifier
             .width(tile.layout.width)
-            .height(tile.layout.height),
+            .height(tile.layout.height)
+            .clickable {
+                tile.model.onSelection()
+            },
         shape = RoundedCornerShape(tile.layout.cornerRadius)
     ) {
         Column(
@@ -681,7 +700,10 @@ fun MediumTileView(tile: Tile) {
     Card(
         modifier = Modifier
             .width(tile.layout.width)
-            .height(tile.layout.height),
+            .height(tile.layout.height)
+            .clickable {
+                tile.model.onSelection()
+            },
         shape = RoundedCornerShape(tile.layout.cornerRadius)
     ) {
         Row(
@@ -747,7 +769,10 @@ fun SmallTileView(tile: Tile) {
     Card(
         modifier = Modifier
             .width(tile.layout.width)
-            .height(tile.layout.height),
+            .height(tile.layout.height)
+            .clickable {
+                tile.model.onSelection()
+            },
         shape = RoundedCornerShape(tile.layout.cornerRadius)
     ) {
         Column(

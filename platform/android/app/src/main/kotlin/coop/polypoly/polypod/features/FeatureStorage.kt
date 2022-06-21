@@ -25,15 +25,23 @@ data class FeatureCategoryModel(
     val features: List<Feature>
 )
 
-class FeatureStorage {
-    companion object {
-        @Suppress("JAVA_CLASS_ON_COMPANION")
-        private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
-
-        var activeFeatureId: String? = null
-    }
+object FeatureStorage {
+    @Suppress("JAVA_CLASS_ON_COMPANION")
+    private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
+    var activeFeatureId: String? = null
 
     val categories: MutableList<FeatureCategoryModel> = ArrayList()
+
+    fun featureForId(id: String): Feature? {
+        for (category in categories) {
+            for (feature in category.features) {
+                if (feature.id == id) {
+                    return feature
+                }
+            }
+        }
+        return null
+    }
 
     fun importFeatures(context: Context) {
         val featuresDir = getFeaturesDir(context)

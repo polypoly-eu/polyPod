@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeScreenFragment">
+
+    <fragment
+        android:id="@+id/FeatureFragment"
+        android:name="coop.polypoly.polypod.FeatureFragment"
+        tools:layout="@layout/fragment_feature">
+
+        <argument
+            android:name="featureId"
+            app:argType="string" />
+    </fragment>
+
+    <activity
+        android:id="@+id/OnboardingActivity"
+        android:name="coop.polypoly.polypod.OnboardingActivity"
+        app:data="info" >
+        <argument
+            android:name="info"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </activity>
+
+    <activity
+        android:id="@+id/SettingsActivity"
+        android:name="coop.polypoly.polypod.settings.SettingsActivity" />
+    <fragment
+        android:id="@+id/homeScreenFragment"
+        android:name="coop.polypoly.polypod.HomeScreenFragment"
+        android:label="HomeScreenFragment" >
+        <action
+            android:id="@+id/action_homeScreenFragment_to_SettingsActivity"
+            app:destination="@id/SettingsActivity" />
+        <action
+            android:id="@+id/action_homeScreenFragment_to_FeatureFragment"
+            app:destination="@id/FeatureFragment" />
+        <action
+            android:id="@+id/action_homeScreenFragment_to_OnboardingActivity"
+            app:destination="@id/OnboardingActivity" />
+    </fragment>
+
+</navigation>

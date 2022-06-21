@@ -89,6 +89,7 @@ open class FeatureFragment : Fragment() {
     private lateinit var foregroundResources: ForegroundResources
     // Public for test purposes
     lateinit var featureContainer: FeatureContainer
+    private val args: FeatureFragmentArgs by navArgs()
 
     private val errorDialog: AlertDialog by lazy {
         AlertDialog.Builder(context)
@@ -110,16 +111,13 @@ open class FeatureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        feature = FeatureStorage.featureForId(args.featureId)!!
         (view.findViewById(R.id.feature_title) as TextView).text =
-            arguments?.getString("featureName")
+            feature.name
         logger.debug(
             "Inside FeatureFragment, feature to load: '{}'",
-            arguments?.getString("featureName")
+            feature.name
         )
-        feature =
-            arguments?.getString("featureFile")
-                ?.let { FeatureStorage().loadFeature(requireContext(), it) }!!
-
         setupFeature(view)
     }
 
