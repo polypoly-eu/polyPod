@@ -6,6 +6,7 @@ import sucrase from "@rollup/plugin-sucrase";
 
 const externalPackages = {
     "@polypoly-eu/poly-look": "polyLook",
+    "@polypoly-eu/silly-i18n": "silly-i18n",
     react: "React",
     "react-dom": "ReactDOM",
     "react-dom/client": "ReactDOM",
