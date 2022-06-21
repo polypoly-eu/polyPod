@@ -7,6 +7,7 @@ func createStubFeature(
     thumbnail: String? = nil,
     thumbnailColor: String? = nil,
     primaryColor: String? = nil,
+    borderColor: String? = nil,
     links: [String: String]? = nil
 ) -> Feature {
     Feature(
@@ -17,6 +18,7 @@ func createStubFeature(
         thumbnail: thumbnail,
         thumbnailColor: thumbnailColor,
         primaryColor: primaryColor,
-        links: links
+        links: links,
+        borderColor: borderColor
     )
 }

@@ -4,14 +4,14 @@ import LocalAuthentication
 // TODO: This, and other user defaults we use, should move to a central place.
 struct FirstRun {
     static private let key = UserDefaults.Keys.firstRun.rawValue
-    
+
     static func read() -> Bool {
         if UserDefaults.standard.object(forKey: key) == nil {
             return true
         }
         return UserDefaults.standard.bool(forKey: key)
     }
-    
+
     static func write(_ firstRun: Bool) {
         UserDefaults.standard.set(false, forKey: key)
     }
@@ -20,25 +20,32 @@ struct FirstRun {
 struct ContentView: View {
     private struct ViewState {
         let backgroundColor: Color
+        let borderColor: Color
+
         let view: AnyView
-        
-        init(backgroundColor: Color? = nil, _ view: AnyView) {
+
+        init(
+            backgroundColor: Color? = nil,
+            borderColor: Color? = nil,
+            _ view: AnyView
+        ) {
             self.backgroundColor =
                 backgroundColor ?? Color.PolyPod.lightBackground
+            self.borderColor = borderColor ?? Color.PolyPod.grey300Foreground
             self.view = view
         }
     }
-    
+
     @State private var state: ViewState? = nil
     @State private var showUpdateNotification = false
     var featureStorage: FeatureStorage
     var setStatusBarStyle: ((UIStatusBarStyle) -> Void)? = nil
-    
+
     var body: some View {
         VStack(spacing: 0) {
             let state = initState()
             let safeAreaInsets = UIApplication.shared.windows[0].safeAreaInsets
-            
+
             Rectangle()
                 .fill(state.backgroundColor)
                 .frame(maxWidth: .infinity, maxHeight: safeAreaInsets.top)
@@ -51,7 +58,7 @@ struct ContentView: View {
         }
         .edgesIgnoringSafeArea([.top, .bottom])
     }
-    
+
     private func initState() -> ViewState {
         let state = self.state ?? firstRunState()
         setStatusBarStyle?(
@@ -59,14 +66,14 @@ struct ContentView: View {
         )
         return state
     }
-    
+
     private func firstRunState() -> ViewState {
         let notification = UpdateNotification()
         notification.handleStartup()
         if !FirstRun.read() {
             return securityReminderState()
         }
-        
+
         notification.handleFirstRun()
         return ViewState(
             AnyView(
@@ -77,7 +84,7 @@ struct ContentView: View {
             )
         )
     }
-    
+
     private func securityReminderState() -> ViewState {
         if !Authentication.shared.shouldShowPrompt() {
             return ViewState(
@@ -97,7 +104,7 @@ struct ContentView: View {
                 )
             )
         }
-        
+
         return ViewState(
             AnyView(
                 OnboardingView(
@@ -109,7 +116,7 @@ struct ContentView: View {
             )
         )
     }
-    
+
     private func featureListState() -> ViewState {
         let notification = UpdateNotification()
         return ViewState(
@@ -147,10 +154,11 @@ struct ContentView: View {
             )
         )
     }
-    
+
     private func featureState(_ feature: Feature) -> ViewState {
         ViewState(
             backgroundColor: feature.primaryColor,
+            borderColor: feature.borderColor,
             AnyView(
                 FeatureView(
                     feature: feature,
@@ -161,7 +169,7 @@ struct ContentView: View {
             )
         )
     }
-    
+
     private func infoState() -> ViewState {
         ViewState(
             AnyView(
@@ -171,7 +179,7 @@ struct ContentView: View {
             )
         )
     }
-    
+
     private func settingsState() -> ViewState {
         ViewState(
             AnyView(

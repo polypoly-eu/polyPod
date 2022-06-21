@@ -8,6 +8,7 @@ extension Color {
         static var darkForeground = Color(fromHex: "#0F1938")
         static var lightBackground = Color(fromHex: "#FFFFFF")
         static var semiLightBackground = Color(fromHex: "#EDF2F7")
+        static var grey300Foreground = Color(fromHex: "#cbd5e0")
     }
     
     var compatCgColor: CGColor? {
