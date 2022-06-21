@@ -4,7 +4,7 @@
   "description": "Badass CLI",
   "main": "index.js",
   "scripts": {
-    "test": "cd ../../features; ../dev-utils/poly-cli/index.js create feature eksample; if [ -f eksample/package-lock.json ]; then rm -rf eksample && cd -; else exit 1; fi ",
+    "test": "cd ../../features; ../dev-utils/poly-cli/index.js create feature eksample; if [ -f eksample/package-lock.json ]; then rm -rf eksample && cd -; else exit 1; fi "
   },
   "author": "polypoly",
   "license": "ISC",
