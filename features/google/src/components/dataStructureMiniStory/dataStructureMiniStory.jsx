@@ -24,9 +24,12 @@ const DataStructureMiniStory = ({ data }) => {
 
     const [selectedFolder, setSelectedFolder] = useState(data[0].title);
 
-    const totalTitle = "Total";
+    const totalTitle = i18n.t("dataStructure:total.chip");
 
-    const dataWithTotal = [...data, { title: totalTitle, value: totalFiles }];
+    const dataWithTotal = [
+        ...data,
+        { title: totalTitle, value: totalFiles, count: totalFiles },
+    ];
 
     const amountOfFiles = dataWithTotal.find(
         (bubble) => bubble.title === selectedFolder
@@ -48,7 +51,10 @@ const DataStructureMiniStory = ({ data }) => {
         }
     };
 
-    const category = selectedFolder === totalTitle ? "" : "category";
+    const categorySuffix =
+        selectedFolder === totalTitle
+            ? ""
+            : " " + i18n.t("dataStructure:category");
 
     return (
         <>
@@ -56,8 +62,7 @@ const DataStructureMiniStory = ({ data }) => {
                 <p
                     dangerouslySetInnerHTML={{
                         __html: i18n.t("dataStructure:folder.info", {
-                            category: category,
-                            selected_folder: selectedFolder,
+                            selected_folder: selectedFolder + categorySuffix,
                             amount_of_files: amountOfFiles,
                         }),
                     }}
@@ -84,8 +89,8 @@ const DataStructureMiniStory = ({ data }) => {
                 onChipClick={handleFolderSelected}
             />
             <SourceInfoButton
-                source={"Your google data"}
-                popUpProps={{ name: "info-bubble" }}
+                source={i18n.t("common:your.google.data")}
+                popUpProps={{ name: "info-data-structure" }}
             />
         </>
     );

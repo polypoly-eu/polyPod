@@ -42,6 +42,13 @@
             android:label=""
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
+            android:exported="false"
+            android:name=".PodUnlockActivity"
+            android:label=""
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            
             android:name=".settings.SettingsActivity"
             android:exported="false"
             android:label="@string/settings_title"

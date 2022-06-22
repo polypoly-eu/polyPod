@@ -4,7 +4,7 @@ import InfoBox from "./infoBox.jsx";
 import ProgressBar from "./progressBar.jsx";
 import ScrollLabel from "./scrollLabel.jsx";
 import { Tab, Tabs } from "./tabs.jsx";
-import { BlockLegend, LineLegend } from "./legends.jsx";
+import { BlockLegend, LineLegend, CircleLegend } from "./legends.jsx";
 import ErrorPopup from "./popUps/errorPopup/errorPopup.jsx";
 import { Card, ClickableCard } from "./cards";
 import List from "./list.jsx";
@@ -21,6 +21,7 @@ import {
   PolyImportProvider,
 } from "./contexts/poly-import.jsx";
 import { RoutingWrapper } from "./routing";
+import { Infographic, Tooltip, InfographicLegend } from "./infographic";
 export {
   Chip,
   InfoBox,
@@ -29,6 +30,7 @@ export {
   FilterChips,
   BlockLegend,
   LineLegend,
+  CircleLegend,
   ErrorPopup,
   Card,
   ClickableCard,
@@ -45,4 +47,7 @@ export {
   RoutingWrapper,
   ProgressBar,
   BaseOverlay,
+  Infographic,
+  Tooltip,
+  InfographicLegend,
 };

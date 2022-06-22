@@ -1,8 +1,8 @@
 {
-    "your.google.data": "Your Google Data",
-    "analysed.categories": "From all your google data we currently analysed these {{analysed_categories}} categories:",
+    "analysed.categories": "From all Google data imported we currently analyse the following {{analysed_categories}} categories.",
     "import.new.file": "Import new file",
-    "imported.file": "Imported file:",
+    "imported.file": "File:",
+    "imported.time": "Imported:",
     "size": "Size:",
     "delete.file.confirmation": "Do you really want to delete the current file?"
 }
