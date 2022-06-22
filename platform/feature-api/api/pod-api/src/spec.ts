@@ -128,8 +128,7 @@ export class PodSpec {
                     );
                 });
 
-                // Skipped - polyOut.writeFile is not yet used in production
-                it.skip("write/readDir", async () => {
+                it("write/readDir", async () => {
                     assert.isFulfilled(polyOut.readDir(this.path));
                     await fc.assert(
                         fc.asyncProperty(pathGen, fc.fullUnicodeString(), async (path, content) => {
