@@ -1,15 +1,18 @@
 package coop.polypoly.polypod.features
 
 import FeatureManifest
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.util.DisplayMetrics
+import coop.polypoly.polypod.PDFBitmap
 import java.util.zip.ZipFile
 
 class Feature(
     val fileName: String,
     val content: ZipFile,
+    val context: Context,
     private val manifest: FeatureManifest?
 ) {
     val id: String get() = fileName.replace(".zip", "")
@@ -33,11 +36,15 @@ class Feature(
         get() {
             if (manifest?.thumbnail == null) return null
             val entry = content.getEntry(manifest.thumbnail) ?: return null
-            val options = BitmapFactory.Options()
-            // For now, we assume all thumbnails are xhdpi, i.e. 2x scale factor
-            options.inDensity = DisplayMetrics.DENSITY_XHIGH
-            content.getInputStream(entry).use {
-                return BitmapFactory.decodeStream(it, null, options)
+            if (entry.name.endsWith(".pdf")) {
+                return PDFBitmap.bitmapFromPDF(content.getInputStream(entry), context.resources.displayMetrics.densityDpi)
+            } else {
+                val options = BitmapFactory.Options()
+                // For now, we assume all thumbnails are xhdpi, i.e. 2x scale factor
+                options.inDensity = DisplayMetrics.DENSITY_XHIGH
+                content.getInputStream(entry).use {
+                    return BitmapFactory.decodeStream(it, null, options)
+                }
             }
         }
 

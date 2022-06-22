@@ -59,9 +59,7 @@
     {
       "id": "tools",
       "name": "Tools",
-      "features": [
-        "demo"
-      ]
+      "features": []
     }
   ]
 }

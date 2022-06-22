@@ -89,8 +89,6 @@ object FeatureStorage {
         featuresDir.mkdirs()
         val destination = FileOutputStream(File(featuresDir, "$id.zip"))
         source.copyTo(destination)
-        val filesList =
-            featuresDir.listFiles { _, name -> name.endsWith(".zip") }
     }
 
     private fun readCategories(context: Context): List<RawCatagory> {
@@ -99,11 +97,9 @@ object FeatureStorage {
     }
 
     fun loadFeature(context: Context, fileName: String): Feature {
-        val filesList =
-            getFeaturesDir(context).listFiles { _, name -> name.endsWith(".zip") }
         val content = ZipFile(File(getFeaturesDir(context), "$fileName.zip"))
         val manifest = readManifest(content)
-        return Feature(fileName, content, manifest)
+        return Feature(fileName, content, context, manifest)
     }
 
     private fun readManifest(
