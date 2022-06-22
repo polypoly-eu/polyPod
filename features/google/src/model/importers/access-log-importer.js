@@ -24,7 +24,13 @@ class AccessLogParser {
         const content = await entry.getContent();
         const text = await new TextDecoder("utf-8").decode(content);
         const data = this._dataFromCsv(text);
-        return data;
+        const pathParts = entry.path.split("/");
+        const fileName = pathParts[pathParts.length - 2];
+
+        return {
+            csvData: data,
+            fileSummary: { size: content.byteLength, fileName },
+        };
     }
 }
 
@@ -34,13 +40,19 @@ export default class AccessLogImporter {
         const accessLogEntries = entries.filter(({ path }) =>
             matchRegex(path, this)
         );
-
         const parser = new AccessLogParser();
-
-        googleAccount.accessLog = (
+        const parserOutput = (
             await Promise.all(
                 accessLogEntries.map((entry) => parser.parse(entry))
             )
         ).flat();
+
+        googleAccount.accessLog = parserOutput
+            .map((output) => output.csvData)
+            .flat();
+
+        googleAccount.accessLogSummary = parserOutput.map(
+            (output) => output.fileSummary
+        );
     }
 }

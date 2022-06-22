@@ -68,10 +68,9 @@ export function getReportStories(facebookAccount) {
     const activeReportStories = computedReportStoriesList.filter(
         (reportStory) => reportStory.active
     );
-    const statusReport = new MinistoriesStatusReport([
-        ...computedReportStoriesList,
-        ...computedMinistories,
-    ]);
+    const statusReport = new MinistoriesStatusReport({
+        ministories: [...computedReportStoriesList, ...computedMinistories],
+    });
 
     return new ReportStories([...activeReportStories, statusReport]);
 }
