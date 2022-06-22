@@ -4,20 +4,22 @@ export default {
     input: ["src/index.ts", "src/spec.ts"],
     output: {
         dir: "dist",
-        format: "cjs"
+        format: "cjs",
     },
     plugins: [
         sucrase({
             exclude: ["node_modules/**"],
-            transforms: ["typescript"]
-        })
+            transforms: ["typescript"],
+        }),
     ],
     external: [
         "@polypoly-eu/rdf",
         "@polypoly-eu/rdf-spec",
+        "memfs",
+        "@rdfjs/dataset",
         "chai",
         "chai-as-promised",
         "fast-check",
-        "path"
-    ]
+        "path",
+    ],
 };

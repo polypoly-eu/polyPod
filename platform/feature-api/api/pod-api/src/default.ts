@@ -141,10 +141,10 @@ export class DefaultPod implements Pod {
      */
     get info(): Info {
         return {
-            getRuntime() {
+            async getRuntime() {
                 return DEFAULT_POD_RUNTIME;
             },
-            getVersion() {
+            async getVersion() {
                 return DEFAULT_POD_RUNTIME_VERSION;
             },
         };
