@@ -6483,7 +6483,7 @@ var polyLook = (function (exports, React) {
     }
   }
 
-  function _optionalChain$2(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
+  function _optionalChain$4(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
   const margin$1 = {
     top: 10,
     right: 40,
@@ -6532,10 +6532,10 @@ var polyLook = (function (exports, React) {
         height,
         margin: margin$1,
       });
-      this._upperBarColor = _optionalChain$2([colors, 'optionalAccess', _ => _.upperBar]) || "red";
-      this._lowerBarColor = _optionalChain$2([colors, 'optionalAccess', _2 => _2.lowerBar]) || "blue";
-      this._numberTicksY = _optionalChain$2([numberTicks, 'optionalAccess', _3 => _3.y]) || 4;
-      this._numberTicksX = _optionalChain$2([numberTicks, 'optionalAccess', _4 => _4.x]) || 5;
+      this._upperBarColor = _optionalChain$4([colors, 'optionalAccess', _ => _.upperBar]) || "red";
+      this._lowerBarColor = _optionalChain$4([colors, 'optionalAccess', _2 => _2.lowerBar]) || "blue";
+      this._numberTicksY = _optionalChain$4([numberTicks, 'optionalAccess', _3 => _3.y]) || 4;
+      this._numberTicksX = _optionalChain$4([numberTicks, 'optionalAccess', _4 => _4.x]) || 5;
       this._barSpace = this.chartWidth - yGridMarginLeft - yGridMarginRight;
       this._totalBarPadding = this.data.length * barPadding;
 
@@ -7797,7 +7797,7 @@ var polyLook = (function (exports, React) {
         .target(horizontalTarget);
   }
 
-  function _nullishCoalesce(lhs, rhsFn) { if (lhs != null) { return lhs; } else { return rhsFn(); } } function _optionalChain$1(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
+  function _nullishCoalesce(lhs, rhsFn) { if (lhs != null) { return lhs; } else { return rhsFn(); } } function _optionalChain$3(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
   //default values
   const linkSource = ({ source }) => source,
     linkTarget = ({ target }) => target,
@@ -7875,20 +7875,20 @@ var polyLook = (function (exports, React) {
           left: left,
           right: right,
           center: center,
-        }[_optionalChain$1([options, 'optionalAccess', _2 => _2.align])], () => ( justify));
-      this._labelsShowing = _optionalChain$1([options, 'optionalAccess', _3 => _3.labels]) !== false;
+        }[_optionalChain$3([options, 'optionalAccess', _2 => _2.align])], () => ( justify));
+      this._labelsShowing = _optionalChain$3([options, 'optionalAccess', _3 => _3.labels]) !== false;
       this._margin = margin || defaultMargin;
-      this._nodeColor = _optionalChain$1([color, 'optionalAccess', _4 => _4.node]) || defaultNodeColor;
+      this._nodeColor = _optionalChain$3([color, 'optionalAccess', _4 => _4.node]) || defaultNodeColor;
       this._nodeLabel = nodeLabel;
-      this._nodeLabelTextColor = _optionalChain$1([color, 'optionalAccess', _5 => _5.text]) || defaultTextColor;
+      this._nodeLabelTextColor = _optionalChain$3([color, 'optionalAccess', _5 => _5.text]) || defaultTextColor;
       this._nodeLabelTextOpacity =
-        _optionalChain$1([color, 'optionalAccess', _6 => _6.textOpacity]) || defaultNodeLabelTextOpacity;
+        _optionalChain$3([color, 'optionalAccess', _6 => _6.textOpacity]) || defaultNodeLabelTextOpacity;
       this._nodeLabelBoxColor =
-        _optionalChain$1([color, 'optionalAccess', _7 => _7.nodeLabelBoxColor]) || defaultNodeLabelBoxColor;
+        _optionalChain$3([color, 'optionalAccess', _7 => _7.nodeLabelBoxColor]) || defaultNodeLabelBoxColor;
       this._nodeLabelBoxOpacity =
-        _optionalChain$1([color, 'optionalAccess', _8 => _8.nodeLabelBoxOpacity]) || defaultNodeLabelBoxOpacity;
-      this._linkColor = _optionalChain$1([color, 'optionalAccess', _9 => _9.link]) || defaultLinkColor;
-      this._linkOpacity = _optionalChain$1([color, 'optionalAccess', _10 => _10.linkOpacity]) || defaultLinkOpacity;
+        _optionalChain$3([color, 'optionalAccess', _8 => _8.nodeLabelBoxOpacity]) || defaultNodeLabelBoxOpacity;
+      this._linkColor = _optionalChain$3([color, 'optionalAccess', _9 => _9.link]) || defaultLinkColor;
+      this._linkOpacity = _optionalChain$3([color, 'optionalAccess', _10 => _10.linkOpacity]) || defaultLinkOpacity;
     }
 
     _createSVG() {
@@ -8913,6 +8913,52 @@ var polyLook = (function (exports, React) {
           );
         })
       )
+    );
+  };
+
+  const InfoBox = ({ textContent }) => {
+    return (
+      React__default["default"].createElement('div', { className: "infobox",}
+        , React__default["default"].createElement('img', { src: "./images/info-circle.svg", alt: "", className: "icon",} )
+        , React__default["default"].createElement('div', { className: "text-content",}, textContent)
+      )
+    );
+  };
+
+  const ProgressBar = ({ onUpdateImportStatus, importSections }) => {
+    return (
+      React__default["default"].createElement('div', { className: "progress-bar", id: "progress-bar",}
+        , importSections.map((section, index) => (
+          React__default["default"].createElement('div', {
+            onClick: () => onUpdateImportStatus(section),
+            key: index,
+            className: `section`,}
+          
+            , React__default["default"].createElement('div', { className: `line ${section}-progress`,}
+              , React__default["default"].createElement('div', { className: `number ${section}-number`,}, index + 1)
+            )
+          )
+        ))
+      )
+    );
+  };
+
+  const ScrollLabel = ({ scrollRef, scrollLabelText, colors, img }) => {
+    const [scrollingPosition, setScrollingPosition] = React.useState(0);
+
+    const setUpScrollingListener = () => {
+      if (scrollRef.current)
+        scrollRef.current.addEventListener("scroll", (e) =>
+          setScrollingPosition(e.target.scrollTop)
+        );
+    };
+
+    return scrollingPosition < 100 ? (
+      React__default["default"].createElement('div', { className: `scroll-button ${colors}`, onLoad: setUpScrollingListener,}
+        , React__default["default"].createElement('img', { src: img,} ), " " , React__default["default"].createElement('p', null, scrollLabelText)
+      )
+    ) : (
+      React__default["default"].createElement('div', { style: { display: "none" }, className: "scroll-button",})
     );
   };
 
@@ -10208,6 +10254,32 @@ var polyLook = (function (exports, React) {
     });
   }
 
+  function classesToSelector(classes) {
+    if (classes === void 0) {
+      classes = '';
+    }
+
+    return "." + classes.trim().replace(/([\.:!\/])/g, '\\$1') // eslint-disable-line
+    .replace(/ /g, '.');
+  }
+
+  function createElementIfNotDefined($container, params, createElements, checkProps) {
+    var document = getDocument();
+
+    if (createElements) {
+      Object.keys(checkProps).forEach(function (key) {
+        if (!params[key] && params.auto === true) {
+          var element = document.createElement('div');
+          element.className = checkProps[key];
+          $container.append(element);
+          params[key] = element;
+        }
+      });
+    }
+
+    return params;
+  }
+
   var support;
 
   function calcSupport() {
@@ -10408,7 +10480,7 @@ var polyLook = (function (exports, React) {
     }
   };
 
-  function _extends$2() { _extends$2 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$2.apply(this, arguments); }
+  function _extends$3() { _extends$3 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$3.apply(this, arguments); }
   var Observer = {
     attach: function attach(target, options) {
       if (options === void 0) {
@@ -10483,7 +10555,7 @@ var polyLook = (function (exports, React) {
     create: function create() {
       var swiper = this;
       bindModuleMethods(swiper, {
-        observer: _extends$2({}, Observer, {
+        observer: _extends$3({}, Observer, {
           observers: []
         })
       });
@@ -14264,7 +14336,385 @@ var polyLook = (function (exports, React) {
     });
   });
   Swiper$1.use([Resize, Observer$1]);
-  var Swiper$2 = Swiper$1;
+  var SwiperCore = Swiper$1;
+
+  function _extends$2() { _extends$2 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$2.apply(this, arguments); }
+  var Pagination = {
+    update: function update() {
+      // Render || Update Pagination bullets/items
+      var swiper = this;
+      var rtl = swiper.rtl;
+      var params = swiper.params.pagination;
+      if (!params.el || !swiper.pagination.el || !swiper.pagination.$el || swiper.pagination.$el.length === 0) return;
+      var slidesLength = swiper.virtual && swiper.params.virtual.enabled ? swiper.virtual.slides.length : swiper.slides.length;
+      var $el = swiper.pagination.$el; // Current/Total
+
+      var current;
+      var total = swiper.params.loop ? Math.ceil((slidesLength - swiper.loopedSlides * 2) / swiper.params.slidesPerGroup) : swiper.snapGrid.length;
+
+      if (swiper.params.loop) {
+        current = Math.ceil((swiper.activeIndex - swiper.loopedSlides) / swiper.params.slidesPerGroup);
+
+        if (current > slidesLength - 1 - swiper.loopedSlides * 2) {
+          current -= slidesLength - swiper.loopedSlides * 2;
+        }
+
+        if (current > total - 1) current -= total;
+        if (current < 0 && swiper.params.paginationType !== 'bullets') current = total + current;
+      } else if (typeof swiper.snapIndex !== 'undefined') {
+        current = swiper.snapIndex;
+      } else {
+        current = swiper.activeIndex || 0;
+      } // Types
+
+
+      if (params.type === 'bullets' && swiper.pagination.bullets && swiper.pagination.bullets.length > 0) {
+        var bullets = swiper.pagination.bullets;
+        var firstIndex;
+        var lastIndex;
+        var midIndex;
+
+        if (params.dynamicBullets) {
+          swiper.pagination.bulletSize = bullets.eq(0)[swiper.isHorizontal() ? 'outerWidth' : 'outerHeight'](true);
+          $el.css(swiper.isHorizontal() ? 'width' : 'height', swiper.pagination.bulletSize * (params.dynamicMainBullets + 4) + "px");
+
+          if (params.dynamicMainBullets > 1 && swiper.previousIndex !== undefined) {
+            swiper.pagination.dynamicBulletIndex += current - swiper.previousIndex;
+
+            if (swiper.pagination.dynamicBulletIndex > params.dynamicMainBullets - 1) {
+              swiper.pagination.dynamicBulletIndex = params.dynamicMainBullets - 1;
+            } else if (swiper.pagination.dynamicBulletIndex < 0) {
+              swiper.pagination.dynamicBulletIndex = 0;
+            }
+          }
+
+          firstIndex = current - swiper.pagination.dynamicBulletIndex;
+          lastIndex = firstIndex + (Math.min(bullets.length, params.dynamicMainBullets) - 1);
+          midIndex = (lastIndex + firstIndex) / 2;
+        }
+
+        bullets.removeClass(params.bulletActiveClass + " " + params.bulletActiveClass + "-next " + params.bulletActiveClass + "-next-next " + params.bulletActiveClass + "-prev " + params.bulletActiveClass + "-prev-prev " + params.bulletActiveClass + "-main");
+
+        if ($el.length > 1) {
+          bullets.each(function (bullet) {
+            var $bullet = $(bullet);
+            var bulletIndex = $bullet.index();
+
+            if (bulletIndex === current) {
+              $bullet.addClass(params.bulletActiveClass);
+            }
+
+            if (params.dynamicBullets) {
+              if (bulletIndex >= firstIndex && bulletIndex <= lastIndex) {
+                $bullet.addClass(params.bulletActiveClass + "-main");
+              }
+
+              if (bulletIndex === firstIndex) {
+                $bullet.prev().addClass(params.bulletActiveClass + "-prev").prev().addClass(params.bulletActiveClass + "-prev-prev");
+              }
+
+              if (bulletIndex === lastIndex) {
+                $bullet.next().addClass(params.bulletActiveClass + "-next").next().addClass(params.bulletActiveClass + "-next-next");
+              }
+            }
+          });
+        } else {
+          var $bullet = bullets.eq(current);
+          var bulletIndex = $bullet.index();
+          $bullet.addClass(params.bulletActiveClass);
+
+          if (params.dynamicBullets) {
+            var $firstDisplayedBullet = bullets.eq(firstIndex);
+            var $lastDisplayedBullet = bullets.eq(lastIndex);
+
+            for (var i = firstIndex; i <= lastIndex; i += 1) {
+              bullets.eq(i).addClass(params.bulletActiveClass + "-main");
+            }
+
+            if (swiper.params.loop) {
+              if (bulletIndex >= bullets.length - params.dynamicMainBullets) {
+                for (var _i = params.dynamicMainBullets; _i >= 0; _i -= 1) {
+                  bullets.eq(bullets.length - _i).addClass(params.bulletActiveClass + "-main");
+                }
+
+                bullets.eq(bullets.length - params.dynamicMainBullets - 1).addClass(params.bulletActiveClass + "-prev");
+              } else {
+                $firstDisplayedBullet.prev().addClass(params.bulletActiveClass + "-prev").prev().addClass(params.bulletActiveClass + "-prev-prev");
+                $lastDisplayedBullet.next().addClass(params.bulletActiveClass + "-next").next().addClass(params.bulletActiveClass + "-next-next");
+              }
+            } else {
+              $firstDisplayedBullet.prev().addClass(params.bulletActiveClass + "-prev").prev().addClass(params.bulletActiveClass + "-prev-prev");
+              $lastDisplayedBullet.next().addClass(params.bulletActiveClass + "-next").next().addClass(params.bulletActiveClass + "-next-next");
+            }
+          }
+        }
+
+        if (params.dynamicBullets) {
+          var dynamicBulletsLength = Math.min(bullets.length, params.dynamicMainBullets + 4);
+          var bulletsOffset = (swiper.pagination.bulletSize * dynamicBulletsLength - swiper.pagination.bulletSize) / 2 - midIndex * swiper.pagination.bulletSize;
+          var offsetProp = rtl ? 'right' : 'left';
+          bullets.css(swiper.isHorizontal() ? offsetProp : 'top', bulletsOffset + "px");
+        }
+      }
+
+      if (params.type === 'fraction') {
+        $el.find(classesToSelector(params.currentClass)).text(params.formatFractionCurrent(current + 1));
+        $el.find(classesToSelector(params.totalClass)).text(params.formatFractionTotal(total));
+      }
+
+      if (params.type === 'progressbar') {
+        var progressbarDirection;
+
+        if (params.progressbarOpposite) {
+          progressbarDirection = swiper.isHorizontal() ? 'vertical' : 'horizontal';
+        } else {
+          progressbarDirection = swiper.isHorizontal() ? 'horizontal' : 'vertical';
+        }
+
+        var scale = (current + 1) / total;
+        var scaleX = 1;
+        var scaleY = 1;
+
+        if (progressbarDirection === 'horizontal') {
+          scaleX = scale;
+        } else {
+          scaleY = scale;
+        }
+
+        $el.find(classesToSelector(params.progressbarFillClass)).transform("translate3d(0,0,0) scaleX(" + scaleX + ") scaleY(" + scaleY + ")").transition(swiper.params.speed);
+      }
+
+      if (params.type === 'custom' && params.renderCustom) {
+        $el.html(params.renderCustom(swiper, current + 1, total));
+        swiper.emit('paginationRender', $el[0]);
+      } else {
+        swiper.emit('paginationUpdate', $el[0]);
+      }
+
+      if (swiper.params.watchOverflow && swiper.enabled) {
+        $el[swiper.isLocked ? 'addClass' : 'removeClass'](params.lockClass);
+      }
+    },
+    render: function render() {
+      // Render Container
+      var swiper = this;
+      var params = swiper.params.pagination;
+      if (!params.el || !swiper.pagination.el || !swiper.pagination.$el || swiper.pagination.$el.length === 0) return;
+      var slidesLength = swiper.virtual && swiper.params.virtual.enabled ? swiper.virtual.slides.length : swiper.slides.length;
+      var $el = swiper.pagination.$el;
+      var paginationHTML = '';
+
+      if (params.type === 'bullets') {
+        var numberOfBullets = swiper.params.loop ? Math.ceil((slidesLength - swiper.loopedSlides * 2) / swiper.params.slidesPerGroup) : swiper.snapGrid.length;
+
+        if (swiper.params.freeMode && !swiper.params.loop && numberOfBullets > slidesLength) {
+          numberOfBullets = slidesLength;
+        }
+
+        for (var i = 0; i < numberOfBullets; i += 1) {
+          if (params.renderBullet) {
+            paginationHTML += params.renderBullet.call(swiper, i, params.bulletClass);
+          } else {
+            paginationHTML += "<" + params.bulletElement + " class=\"" + params.bulletClass + "\"></" + params.bulletElement + ">";
+          }
+        }
+
+        $el.html(paginationHTML);
+        swiper.pagination.bullets = $el.find(classesToSelector(params.bulletClass));
+      }
+
+      if (params.type === 'fraction') {
+        if (params.renderFraction) {
+          paginationHTML = params.renderFraction.call(swiper, params.currentClass, params.totalClass);
+        } else {
+          paginationHTML = "<span class=\"" + params.currentClass + "\"></span>" + ' / ' + ("<span class=\"" + params.totalClass + "\"></span>");
+        }
+
+        $el.html(paginationHTML);
+      }
+
+      if (params.type === 'progressbar') {
+        if (params.renderProgressbar) {
+          paginationHTML = params.renderProgressbar.call(swiper, params.progressbarFillClass);
+        } else {
+          paginationHTML = "<span class=\"" + params.progressbarFillClass + "\"></span>";
+        }
+
+        $el.html(paginationHTML);
+      }
+
+      if (params.type !== 'custom') {
+        swiper.emit('paginationRender', swiper.pagination.$el[0]);
+      }
+    },
+    init: function init() {
+      var swiper = this;
+      swiper.params.pagination = createElementIfNotDefined(swiper.$el, swiper.params.pagination, swiper.params.createElements, {
+        el: 'swiper-pagination'
+      });
+      var params = swiper.params.pagination;
+      if (!params.el) return;
+      var $el = $(params.el);
+      if ($el.length === 0) return;
+
+      if (swiper.params.uniqueNavElements && typeof params.el === 'string' && $el.length > 1) {
+        $el = swiper.$el.find(params.el);
+      }
+
+      if (params.type === 'bullets' && params.clickable) {
+        $el.addClass(params.clickableClass);
+      }
+
+      $el.addClass(params.modifierClass + params.type);
+
+      if (params.type === 'bullets' && params.dynamicBullets) {
+        $el.addClass("" + params.modifierClass + params.type + "-dynamic");
+        swiper.pagination.dynamicBulletIndex = 0;
+
+        if (params.dynamicMainBullets < 1) {
+          params.dynamicMainBullets = 1;
+        }
+      }
+
+      if (params.type === 'progressbar' && params.progressbarOpposite) {
+        $el.addClass(params.progressbarOppositeClass);
+      }
+
+      if (params.clickable) {
+        $el.on('click', classesToSelector(params.bulletClass), function onClick(e) {
+          e.preventDefault();
+          var index = $(this).index() * swiper.params.slidesPerGroup;
+          if (swiper.params.loop) index += swiper.loopedSlides;
+          swiper.slideTo(index);
+        });
+      }
+
+      extend$1(swiper.pagination, {
+        $el: $el,
+        el: $el[0]
+      });
+
+      if (!swiper.enabled) {
+        $el.addClass(params.lockClass);
+      }
+    },
+    destroy: function destroy() {
+      var swiper = this;
+      var params = swiper.params.pagination;
+      if (!params.el || !swiper.pagination.el || !swiper.pagination.$el || swiper.pagination.$el.length === 0) return;
+      var $el = swiper.pagination.$el;
+      $el.removeClass(params.hiddenClass);
+      $el.removeClass(params.modifierClass + params.type);
+      if (swiper.pagination.bullets) swiper.pagination.bullets.removeClass(params.bulletActiveClass);
+
+      if (params.clickable) {
+        $el.off('click', classesToSelector(params.bulletClass));
+      }
+    }
+  };
+  var Pagination$1 = {
+    name: 'pagination',
+    params: {
+      pagination: {
+        el: null,
+        bulletElement: 'span',
+        clickable: false,
+        hideOnClick: false,
+        renderBullet: null,
+        renderProgressbar: null,
+        renderFraction: null,
+        renderCustom: null,
+        progressbarOpposite: false,
+        type: 'bullets',
+        // 'bullets' or 'progressbar' or 'fraction' or 'custom'
+        dynamicBullets: false,
+        dynamicMainBullets: 1,
+        formatFractionCurrent: function formatFractionCurrent(number) {
+          return number;
+        },
+        formatFractionTotal: function formatFractionTotal(number) {
+          return number;
+        },
+        bulletClass: 'swiper-pagination-bullet',
+        bulletActiveClass: 'swiper-pagination-bullet-active',
+        modifierClass: 'swiper-pagination-',
+        // NEW
+        currentClass: 'swiper-pagination-current',
+        totalClass: 'swiper-pagination-total',
+        hiddenClass: 'swiper-pagination-hidden',
+        progressbarFillClass: 'swiper-pagination-progressbar-fill',
+        progressbarOppositeClass: 'swiper-pagination-progressbar-opposite',
+        clickableClass: 'swiper-pagination-clickable',
+        // NEW
+        lockClass: 'swiper-pagination-lock'
+      }
+    },
+    create: function create() {
+      var swiper = this;
+      bindModuleMethods(swiper, {
+        pagination: _extends$2({
+          dynamicBulletIndex: 0
+        }, Pagination)
+      });
+    },
+    on: {
+      init: function init(swiper) {
+        swiper.pagination.init();
+        swiper.pagination.render();
+        swiper.pagination.update();
+      },
+      activeIndexChange: function activeIndexChange(swiper) {
+        if (swiper.params.loop) {
+          swiper.pagination.update();
+        } else if (typeof swiper.snapIndex === 'undefined') {
+          swiper.pagination.update();
+        }
+      },
+      snapIndexChange: function snapIndexChange(swiper) {
+        if (!swiper.params.loop) {
+          swiper.pagination.update();
+        }
+      },
+      slidesLengthChange: function slidesLengthChange(swiper) {
+        if (swiper.params.loop) {
+          swiper.pagination.render();
+          swiper.pagination.update();
+        }
+      },
+      snapGridLengthChange: function snapGridLengthChange(swiper) {
+        if (!swiper.params.loop) {
+          swiper.pagination.render();
+          swiper.pagination.update();
+        }
+      },
+      destroy: function destroy(swiper) {
+        swiper.pagination.destroy();
+      },
+      'enable disable': function enableDisable(swiper) {
+        var $el = swiper.pagination.$el;
+
+        if ($el) {
+          $el[swiper.enabled ? 'removeClass' : 'addClass'](swiper.params.pagination.lockClass);
+        }
+      },
+      click: function click(swiper, e) {
+        var targetEl = e.target;
+
+        if (swiper.params.pagination.el && swiper.params.pagination.hideOnClick && swiper.pagination.$el.length > 0 && !$(targetEl).hasClass(swiper.params.pagination.bulletClass)) {
+          if (swiper.navigation && (swiper.navigation.nextEl && targetEl === swiper.navigation.nextEl || swiper.navigation.prevEl && targetEl === swiper.navigation.prevEl)) return;
+          var isHidden = swiper.pagination.$el.hasClass(swiper.params.pagination.hiddenClass);
+
+          if (isHidden === true) {
+            swiper.emit('paginationShow');
+          } else {
+            swiper.emit('paginationHide');
+          }
+
+          swiper.pagination.$el.toggleClass(swiper.params.pagination.hiddenClass);
+        }
+      }
+    }
+  };
 
   function isObject(o) {
     return typeof o === 'object' && o !== null && o.constructor && Object.prototype.toString.call(o).slice(8, -1) === 'Object';
@@ -14340,8 +14790,8 @@ var polyLook = (function (exports, React) {
     };
     var events = {};
     var passedParams = {};
-    extend(params, Swiper$2.defaults);
-    extend(params, Swiper$2.extendedDefaults);
+    extend(params, SwiperCore.defaults);
+    extend(params, SwiperCore.extendedDefaults);
     params._emitClasses = true;
     params.init = false;
     var rest = {};
@@ -14380,7 +14830,7 @@ var polyLook = (function (exports, React) {
   // eslint-disable-next-line
 
   function initSwiper(swiperParams) {
-    return new Swiper$2(swiperParams);
+    return new SwiperCore(swiperParams);
   }
 
   function mountSwiper(_ref, swiperParams) {
@@ -14415,7 +14865,7 @@ var polyLook = (function (exports, React) {
     var slidesPerViewParams = swiperParams.slidesPerView;
 
     if (swiperParams.breakpoints) {
-      var breakpoint = Swiper$2.prototype.getBreakpoint(swiperParams.breakpoints);
+      var breakpoint = SwiperCore.prototype.getBreakpoint(swiperParams.breakpoints);
       var breakpointOnlyParams = breakpoint in swiperParams.breakpoints ? swiperParams.breakpoints[breakpoint] : undefined;
 
       if (breakpointOnlyParams && breakpointOnlyParams.slidesPerView) {
@@ -15150,12 +15600,14 @@ var polyLook = (function (exports, React) {
   const legendComponent = (type, legends) => {
     const canonicalLegend = new Legend(legends);
     return (
-      React__default["default"].createElement('div', { className: `${type}-legend`,}
+      React__default["default"].createElement('div', { className: `poly-legend ${type}-legend`,}
         , canonicalLegend.legends.map((content, index) => (
           React__default["default"].createElement('div', { key: index, className: "legend-entry",}
-            , React__default["default"].createElement('div', { style: { backgroundColor: content.color },}
-              , content.description
+            , React__default["default"].createElement('span', { className: "symbol-container",}
+              , React__default["default"].createElement('span', { style: { backgroundColor: content.color },})
             )
+
+            , React__default["default"].createElement('span', { className: "text",}, content.description)
           )
         ))
       )
@@ -15164,6 +15616,7 @@ var polyLook = (function (exports, React) {
 
   const BlockLegend = ({ legend }) => legendComponent("block", legend);
   const LineLegend = ({ legend }) => legendComponent("line", legend);
+  const CircleLegend = ({ legend }) => legendComponent("circle", legend);
 
   const emailLink = `\
 <a onclick="window.pod.polyNav.openUrl('support-email')">\
@@ -15208,13 +15661,19 @@ polypod-feedback@polypoly.coop\
    * @param {Object} props
    * @param {string} [props.label] - Button text
    * @param {boolean} [props.centered] - If the button should center itself.
+   * @param {string} [props.type = "filled"] - Type of the button
    */
 
-  const PolyButton = ({ label, centered, ...otherProps }) => {
+  const types = {
+    filled: "filled",
+    outline: "outline",
+  };
+
+  const PolyButton = ({ label, type = "filled", ...otherProps }) => {
     return (
       React__default["default"].createElement('button', {
         ...otherProps,
-        className: `poly-button ${centered ? "centered" : ""} ${
+        className: `poly-button ${types[type]} ${
         otherProps.className || ""
       }`.trim(),}
       
@@ -15223,11 +15682,11 @@ polypod-feedback@polypoly.coop\
     );
   };
 
-  var angleRight = "<svg width=\"10\" height=\"15\" viewBox=\"0 0 10 15\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M8.91016 7.46997C9.125 7.25513 9.125 6.95435 8.91016 6.7395L2.63672 0.380127C2.42188 0.165283 2.07812 0.165283 1.90625 0.380127L1.04688 1.2395C0.832031 1.41138 0.832031 1.75513 1.04688 1.96997L6.11719 7.08325L1.04688 12.2395C0.832031 12.4543 0.832031 12.7551 1.04688 12.97L1.90625 13.8293C2.07812 14.0442 2.42188 14.0442 2.63672 13.8293L8.91016 7.46997Z\" fill=\"#0F1938\"/>\n</svg>";
+  var angleRight = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAxMCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTguOTEwMTYgNy40Njk5N0M5LjEyNSA3LjI1NTEzIDkuMTI1IDYuOTU0MzUgOC45MTAxNiA2LjczOTVMMi42MzY3MiAwLjM4MDEyN0MyLjQyMTg4IDAuMTY1MjgzIDIuMDc4MTIgMC4xNjUyODMgMS45MDYyNSAwLjM4MDEyN0wxLjA0Njg4IDEuMjM5NUMwLjgzMjAzMSAxLjQxMTM4IDAuODMyMDMxIDEuNzU1MTMgMS4wNDY4OCAxLjk2OTk3TDYuMTE3MTkgNy4wODMyNUwxLjA0Njg4IDEyLjIzOTVDMC44MzIwMzEgMTIuNDU0MyAwLjgzMjAzMSAxMi43NTUxIDEuMDQ2ODggMTIuOTdMMS45MDYyNSAxMy44MjkzQzIuMDc4MTIgMTQuMDQ0MiAyLjQyMTg4IDE0LjA0NDIgMi42MzY3MiAxMy44MjkzTDguOTEwMTYgNy40Njk5N1oiIGZpbGw9IiMwRjE5MzgiLz4KPC9zdmc+';
 
-  var question = "<svg width=\"11\" height=\"16\" viewBox=\"0 0 11 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M5.42529 12.8C4.50575 12.8 3.81609 13.5429 3.81609 14.4C3.81609 15.3143 4.50575 16 5.42529 16C6.28736 16 7.03448 15.3143 7.03448 14.4C7.03448 13.5429 6.28736 12.8 5.42529 12.8ZM5.82759 11.4286C6.22989 11.4286 6.51724 11.1429 6.51724 10.7429C6.51724 8.28571 11 8.45714 11 4.62857C11 1.71429 8.35632 0 5.36782 0C2.78161 0 1.34483 1.02857 0.137931 2.57143C-0.091954 2.91429 -0.0344828 3.31429 0.310345 3.54286L1.05747 4.11429C1.34483 4.28571 1.74713 4.22857 1.97701 3.94286C2.83908 2.85714 3.70115 2.28571 5.36782 2.28571C7.66667 2.28571 8.70115 3.48571 8.70115 4.62857C8.70115 7.08571 4.21839 6.74286 4.21839 10.7429C4.21839 11.1429 4.56322 11.4286 4.90805 11.4286H5.82759Z\" fill=\"#0F1938\"/>\n</svg>";
+  var question = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTEiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxMSAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTUuNDI1MjkgMTIuOEM0LjUwNTc1IDEyLjggMy44MTYwOSAxMy41NDI5IDMuODE2MDkgMTQuNEMzLjgxNjA5IDE1LjMxNDMgNC41MDU3NSAxNiA1LjQyNTI5IDE2QzYuMjg3MzYgMTYgNy4wMzQ0OCAxNS4zMTQzIDcuMDM0NDggMTQuNEM3LjAzNDQ4IDEzLjU0MjkgNi4yODczNiAxMi44IDUuNDI1MjkgMTIuOFpNNS44Mjc1OSAxMS40Mjg2QzYuMjI5ODkgMTEuNDI4NiA2LjUxNzI0IDExLjE0MjkgNi41MTcyNCAxMC43NDI5QzYuNTE3MjQgOC4yODU3MSAxMSA4LjQ1NzE0IDExIDQuNjI4NTdDMTEgMS43MTQyOSA4LjM1NjMyIDAgNS4zNjc4MiAwQzIuNzgxNjEgMCAxLjM0NDgzIDEuMDI4NTcgMC4xMzc5MzEgMi41NzE0M0MtMC4wOTE5NTQgMi45MTQyOSAtMC4wMzQ0ODI4IDMuMzE0MjkgMC4zMTAzNDUgMy41NDI4NkwxLjA1NzQ3IDQuMTE0MjlDMS4zNDQ4MyA0LjI4NTcxIDEuNzQ3MTMgNC4yMjg1NyAxLjk3NzAxIDMuOTQyODZDMi44MzkwOCAyLjg1NzE0IDMuNzAxMTUgMi4yODU3MSA1LjM2NzgyIDIuMjg1NzFDNy42NjY2NyAyLjI4NTcxIDguNzAxMTUgMy40ODU3MSA4LjcwMTE1IDQuNjI4NTdDOC43MDExNSA3LjA4NTcxIDQuMjE4MzkgNi43NDI4NiA0LjIxODM5IDEwLjc0MjlDNC4yMTgzOSAxMS4xNDI5IDQuNTYzMjIgMTEuNDI4NiA0LjkwODA1IDExLjQyODZINS44Mjc1OVoiIGZpbGw9IiMwRjE5MzgiLz4KPC9zdmc+';
 
-  var filter = "<svg width=\"18\" height=\"21\" viewBox=\"0 0 18 21\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M11.0155 14.25H10.078V1.125C10.078 0.8125 9.7655 0.5 9.453 0.5H8.828C8.47643 0.5 8.203 0.8125 8.203 1.125V14.25H7.2655C6.91393 14.25 6.6405 14.5625 6.6405 14.875V16.125C6.6405 16.4766 6.91393 16.75 7.2655 16.75H8.203V19.875C8.203 20.2266 8.47643 20.5 8.828 20.5H9.453C9.7655 20.5 10.078 20.2266 10.078 19.875V16.75H11.0155C11.328 16.75 11.6405 16.4766 11.6405 16.125V14.875C11.6405 14.5625 11.328 14.25 11.0155 14.25ZM4.7655 4.25H3.828V1.125C3.828 0.8125 3.5155 0.5 3.203 0.5H2.578C2.22643 0.5 1.953 0.8125 1.953 1.125V4.25H1.0155C0.663933 4.25 0.390495 4.5625 0.390495 4.875V6.125C0.390495 6.47656 0.663933 6.75 1.0155 6.75H1.953V19.875C1.953 20.2266 2.22643 20.5 2.578 20.5H3.203C3.5155 20.5 3.828 20.2266 3.828 19.875V6.75H4.7655C5.078 6.75 5.3905 6.47656 5.3905 6.125V4.875C5.3905 4.5625 5.078 4.25 4.7655 4.25ZM17.2655 9.25H16.328V1.125C16.328 0.8125 16.0155 0.5 15.703 0.5H15.078C14.7264 0.5 14.453 0.8125 14.453 1.125V9.25H13.5155C13.1639 9.25 12.8905 9.5625 12.8905 9.875V11.125C12.8905 11.4766 13.1639 11.75 13.5155 11.75H14.453V19.875C14.453 20.2266 14.7264 20.5 15.078 20.5H15.703C16.0155 20.5 16.328 20.2266 16.328 19.875V11.75H17.2655C17.578 11.75 17.8905 11.4766 17.8905 11.125V9.875C17.8905 9.5625 17.578 9.25 17.2655 9.25Z\" fill=\"#0F1938\"/>\n</svg>";
+  var filter = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAxOCAyMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjAxNTUgMTQuMjVIMTAuMDc4VjEuMTI1QzEwLjA3OCAwLjgxMjUgOS43NjU1IDAuNSA5LjQ1MyAwLjVIOC44MjhDOC40NzY0MyAwLjUgOC4yMDMgMC44MTI1IDguMjAzIDEuMTI1VjE0LjI1SDcuMjY1NUM2LjkxMzkzIDE0LjI1IDYuNjQwNSAxNC41NjI1IDYuNjQwNSAxNC44NzVWMTYuMTI1QzYuNjQwNSAxNi40NzY2IDYuOTEzOTMgMTYuNzUgNy4yNjU1IDE2Ljc1SDguMjAzVjE5Ljg3NUM4LjIwMyAyMC4yMjY2IDguNDc2NDMgMjAuNSA4LjgyOCAyMC41SDkuNDUzQzkuNzY1NSAyMC41IDEwLjA3OCAyMC4yMjY2IDEwLjA3OCAxOS44NzVWMTYuNzVIMTEuMDE1NUMxMS4zMjggMTYuNzUgMTEuNjQwNSAxNi40NzY2IDExLjY0MDUgMTYuMTI1VjE0Ljg3NUMxMS42NDA1IDE0LjU2MjUgMTEuMzI4IDE0LjI1IDExLjAxNTUgMTQuMjVaTTQuNzY1NSA0LjI1SDMuODI4VjEuMTI1QzMuODI4IDAuODEyNSAzLjUxNTUgMC41IDMuMjAzIDAuNUgyLjU3OEMyLjIyNjQzIDAuNSAxLjk1MyAwLjgxMjUgMS45NTMgMS4xMjVWNC4yNUgxLjAxNTVDMC42NjM5MzMgNC4yNSAwLjM5MDQ5NSA0LjU2MjUgMC4zOTA0OTUgNC44NzVWNi4xMjVDMC4zOTA0OTUgNi40NzY1NiAwLjY2MzkzMyA2Ljc1IDEuMDE1NSA2Ljc1SDEuOTUzVjE5Ljg3NUMxLjk1MyAyMC4yMjY2IDIuMjI2NDMgMjAuNSAyLjU3OCAyMC41SDMuMjAzQzMuNTE1NSAyMC41IDMuODI4IDIwLjIyNjYgMy44MjggMTkuODc1VjYuNzVINC43NjU1QzUuMDc4IDYuNzUgNS4zOTA1IDYuNDc2NTYgNS4zOTA1IDYuMTI1VjQuODc1QzUuMzkwNSA0LjU2MjUgNS4wNzggNC4yNSA0Ljc2NTUgNC4yNVpNMTcuMjY1NSA5LjI1SDE2LjMyOFYxLjEyNUMxNi4zMjggMC44MTI1IDE2LjAxNTUgMC41IDE1LjcwMyAwLjVIMTUuMDc4QzE0LjcyNjQgMC41IDE0LjQ1MyAwLjgxMjUgMTQuNDUzIDEuMTI1VjkuMjVIMTMuNTE1NUMxMy4xNjM5IDkuMjUgMTIuODkwNSA5LjU2MjUgMTIuODkwNSA5Ljg3NVYxMS4xMjVDMTIuODkwNSAxMS40NzY2IDEzLjE2MzkgMTEuNzUgMTMuNTE1NSAxMS43NUgxNC40NTNWMTkuODc1QzE0LjQ1MyAyMC4yMjY2IDE0LjcyNjQgMjAuNSAxNS4wNzggMjAuNUgxNS43MDNDMTYuMDE1NSAyMC41IDE2LjMyOCAyMC4yMjY2IDE2LjMyOCAxOS44NzVWMTEuNzVIMTcuMjY1NUMxNy41NzggMTEuNzUgMTcuODkwNSAxMS40NzY2IDE3Ljg5MDUgMTEuMTI1VjkuODc1QzE3Ljg5MDUgOS41NjI1IDE3LjU3OCA5LjI1IDE3LjI2NTUgOS4yNVoiIGZpbGw9IiMwRjE5MzgiLz4KPC9zdmc+';
 
   /**
    * Icon button. Has a filled variant.
@@ -15288,7 +15747,7 @@ polypod-feedback@polypoly.coop\
         , children
         , buttonText && (
           React__default["default"].createElement(PolyButton, {
-            centered: true,
+            className: "poly-self-centered",
             label: buttonText,
             onClick: onlyButtonClickEvent ? onClick : () => {},}
           )
@@ -15324,9 +15783,16 @@ polypod-feedback@polypoly.coop\
    * Defaults to empty object;
    * @returns {JSX.Element}
    */
-  const SideSheet = ({ children, okLabel, onClose, title = "", style = {} }) => {
+  const SideSheet = ({
+    children,
+    okLabel,
+    onClose,
+    title = "",
+    style = {},
+    className,
+  }) => {
     return (
-      React__default["default"].createElement('div', { className: "poly-side-sheet", style: style,}
+      React__default["default"].createElement('div', { className: `poly-side-sheet ${className || ""}`, style: style,}
         , React__default["default"].createElement('div', { className: "header",}
           , React__default["default"].createElement(IconButton, {
             icon: "angleRight",
@@ -15334,7 +15800,7 @@ polypod-feedback@polypoly.coop\
             onClick: onClose,
             className: "close-button-left",}
           )
-          , title && React__default["default"].createElement('h1', { className: "title",}, title)
+          , title && React__default["default"].createElement('h1', { className: "title title-center" ,}, title)
         )
 
         , children
@@ -15778,10 +16244,10 @@ polypod-feedback@polypoly.coop\
    * @param {boolean} centered - adds CSS class that centers content
    * @returns
    */
-  const BaseOverlay = ({ children, className, centered }) => {
+  const BaseOverlay = ({ children, className, opaque }) => {
     return (
       React__default["default"].createElement('div', {
-        className: `base-overlay ${centered ? "centered" : ""} ${className}`,
+        className: `base-overlay ${className || ""} ${opaque && "opaque"}`,
         'data-testid': "base-overlay-test",}
       
         , children
@@ -15796,15 +16262,19 @@ polypod-feedback@polypoly.coop\
    * @returns jsx
    */
   const LoadingOverlay = ({ message, loadingGif }) => (
-    React__default["default"].createElement(BaseOverlay, { className: "loading-overlay", centered: true,}
+    React__default["default"].createElement(BaseOverlay, { className: "loading-overlay poly-content-centered" ,}
       , React__default["default"].createElement('img', { src: loadingGif, 'data-testid': "img-test",} )
       , React__default["default"].createElement('p', { 'data-testid': "message-test",}, message)
     )
   );
 
-  const Screen = ({ children, className, layout }) => {
+  const Screen = ({ children, className, layout, onScroll, scrollingRef }) => {
     return (
-      React__default["default"].createElement('div', { className: `poly-screen ${className || ""} ${layout || ""}`,}
+      React__default["default"].createElement('div', {
+        onScroll: onScroll,
+        ref: scrollingRef,
+        className: `poly-screen ${className || ""} ${layout || ""}`,}
+      
         , children
       )
     );
@@ -16062,7 +16532,7 @@ polypod-feedback@polypoly.coop\
       }
   }
 
-  function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
+  function _optionalChain$2(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
   //used until real storage is loaded
   const fakeStorage = {
     files: null,
@@ -16131,7 +16601,7 @@ polypod-feedback@polypoly.coop\
     //when files changed run the importer first and create an account model first.
     //after there is an account the analyses are triggered.
     React.useEffect(() => {
-      if (!_optionalChain([files, 'optionalAccess', _ => _[0]])) return;
+      if (!_optionalChain$2([files, 'optionalAccess', _ => _[0]])) return;
       importData({ dataImporters, zipData: files[0], DataAccount }).then(
         (newAccount) => {
           setAccount(newAccount);
@@ -16192,15 +16662,254 @@ polypod-feedback@polypoly.coop\
     );
   };
 
+  /** Small tooltip with pointer.
+   * @param {Object} props
+   * @param {string} [props.label] - tooltip label; preferably single letter/digit
+   * as the tooltip is not designed for large texts.
+   * @param {string} [props.pointerDirection] - where to position the pointer;
+   * Currently only `down` and `left` options are implemented.
+   * @returns {JSX.Element}
+   */
+  const Tooltip = ({ label, pointerDirection = "down" }) => {
+    return (
+      React__default["default"].createElement('div', { className: "poly-tooltip",}
+        , React__default["default"].createElement('div', { className: pointerDirection,}
+          , React__default["default"].createElement('div', { className: "square",}, label)
+          , React__default["default"].createElement('div', { className: `triangle-${pointerDirection}`,})
+        )
+      )
+    );
+  };
+
+  function _optionalChain$1(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
+  /** Augments the different legend components with tooltips.
+   * @param {Object} props
+   * @param {Array[Object]} [props.legend] - an array of objects that combines the different
+   * props for the legend components and the Tooltip component.
+   * @returns {JSX.Element}
+   */
+  const InfographicLegend = ({ legend }) => {
+    function getLegendComponent(type) {
+      const TextLegend = ({ legend }) => {
+        return React__default["default"].createElement('div', { className: "text-legend",}, legend);
+      };
+
+      const types = {
+        line: LineLegend,
+        block: BlockLegend,
+        circle: CircleLegend,
+        text: TextLegend,
+      };
+
+      return types[type];
+    }
+
+    function renderLegend({ type, tooltip, items }) {
+      return (
+        React__default["default"].createElement(React__default["default"].Fragment, null
+          , getLegendComponent(type)({ legend: items })
+          , tooltip && (
+            React__default["default"].createElement(Tooltip, {
+              label: tooltip.label,
+              pointerDirection: tooltip.pointerDirection,}
+            )
+          )
+        )
+      );
+    }
+    return (
+      React__default["default"].createElement('div', { className: "poly-infographic-legend",}
+        , legend.map((entry, index) => (
+          React__default["default"].createElement('div', {
+            key: index,
+            'data-testid': "infographic-legend-entry-test",
+            className: `legend-container tooltip-${_optionalChain$1([entry, 'access', _ => _.tooltip, 'optionalAccess', _2 => _2.pointerDirection])}`,}
+          
+            , renderLegend(entry)
+          )
+        ))
+      )
+    );
+  };
+
+  /** Renders an image and a numbered legend that contains descriptions
+   *  for different elements in the image.
+   * @param {Object} props
+   * @param {Object} [props.image] - Object containing the svg we want to use and translations
+   * @param {Object} [props.image.svg] - the svg that we want to render
+   * @param {Object} [props.image.texts] - an object where the key corresponds to a
+   * <text ../> id found in the svg while the value is a string that will replace the text.
+   * @param {Array[string]} [props.explanation] - a simple array with descriptions
+   * @param {Array[Object]} [props.legend] - an array of objects that will render an
+   * InfographicLegend component. Check storybook for an example that showcases different
+   * combinations.
+   * @returns {JSX.Element}
+   */
+  const Infographic = ({ image, explanation, legend = {} }) => {
+    function scaleFactor(viewBox, svg) {
+      return Math.min(svg.width / viewBox.width, svg.height / viewBox.height);
+    }
+    React.useEffect(() => {
+      const container = select(".infographic-svg svg");
+
+      Object.keys(image.texts).forEach((key) => {
+        const textField = container.select(`#${key}`);
+
+        if (!textField.node()) return;
+        const box = textField.node().getBBox();
+        textField.remove();
+        const svg = container.node();
+        const viewbox = svg.viewBox.baseVal;
+        const foreignObject = container
+          .append("foreignObject")
+          .attr("x", box.x)
+          .attr("width", box.width);
+        const div = foreignObject
+          .append("xhtml:div")
+          .html(image.texts[key])
+          .attr("class", "svg-field");
+        const divHeight =
+          div.node().getBoundingClientRect().height /
+          scaleFactor(viewbox, svg.getBoundingClientRect());
+        foreignObject
+          .attr("y", box.y + box.height / 2 - divHeight / 2)
+          .attr("height", divHeight);
+      });
+    });
+
+    return (
+      React__default["default"].createElement('div', { className: "poly-infographic",}
+        , React__default["default"].createElement('div', { className: "image-container",}
+          , React__default["default"].createElement(InfographicLegend, { legend: legend,} )
+          , React__default["default"].createElement('div', {
+            className: "infographic-svg",
+            dangerouslySetInnerHTML: { __html: image.svg },}
+          )
+        )
+        , React__default["default"].createElement('div', { className: "explanation-container",}
+          , explanation.map((entry, index) => {
+            return (
+              React__default["default"].createElement('div', {
+                className: "entry",
+                key: index,
+                'data-testid': "infographic-entry-test",}
+              
+                , React__default["default"].createElement('div', { className: "number",}
+                  , React__default["default"].createElement('span', null, index + 1)
+                )
+                , React__default["default"].createElement('div', { className: "text",}, entry)
+              )
+            );
+          })
+        )
+      )
+    );
+  };
+
+  /** Slideshow used to display images.
+   * @param {Object} props
+   * @param {Array[string]} [props.images] - Array that contains the urls of the
+   * images that will be displayed.
+   * @returns {JSX.Element}
+   */
+  const Slideshow = ({ images }) => {
+    SwiperCore.use([Pagination$1]);
+    return (
+      React__default["default"].createElement('div', { className: "poly-slideshow",}
+        , React__default["default"].createElement(Swiper, { pagination: true, spaceBetween: 100, slidesPerView: 1,}
+          , images.map((image, index) => (
+            React__default["default"].createElement(SwiperSlide, { key: index,}
+              , React__default["default"].createElement('img', { src: image,} )
+            )
+          ))
+        )
+      )
+    );
+  };
+
+  function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }/**
+   * A function to get smooth scrolling behaviour on all browsers (scroll-behaviour:smooth doesn't work in safari)
+   * @param {string} childId - Dom element with ID that is being scrolled to
+   * @param {string} [parentId] - Dom element with ID that is scrollable and parent of child element
+   * @param {string[]} [topNavigationElementIds] - Array of Dom ID's that sit on top of the parent element (usually navigation elements)
+   * @param {Object} [options] - Options regarding the scrolling behaviour
+   * @param {string} [options.speed = 10] - Speed of the scrolling (in ms; smaller = faster)
+   * @param {string} [options.step = 10] - Steps size of the scrolling (smaller = smoother but slower)
+   */
+  function scrollSmoothly(
+    childId,
+    parentId,
+    topNavigationElementIds,
+    options
+  ) {
+    // scrolling constants
+    const speed = _optionalChain([options, 'optionalAccess', _ => _.speed]) || 10;
+    const step = _optionalChain([options, 'optionalAccess', _2 => _2.step]) || 10;
+
+    const parent = document.getElementById(parentId) || document.body;
+    const target = document.getElementById(childId);
+
+    if (!(childId || target)) return;
+
+    let totalTopNavElOffset = 0;
+    if (topNavigationElementIds) {
+      for (let topNavEl of topNavigationElementIds) {
+        totalTopNavElOffset += document.getElementById(topNavEl).offsetHeight;
+      }
+    }
+
+    // get positions
+    const parentPosition = parent.scrollTop;
+    const targetPosition = target.offsetTop - totalTopNavElOffset;
+
+    let timeoutQueuer = 0;
+    // scroll down
+    if (parentPosition < targetPosition) {
+      for (let i = parentPosition; i <= targetPosition; i += step) {
+        if (i + step > targetPosition) {
+          setTimeout(function () {
+            parent.scrollTo(0, targetPosition);
+          }, timeoutQueuer * speed);
+        } else {
+          setTimeout(function () {
+            parent.scrollTo(0, i);
+          }, timeoutQueuer * speed);
+        }
+        timeoutQueuer++;
+      }
+    }
+
+    // scroll up
+    else {
+      for (let i = parentPosition; i >= targetPosition; i -= step) {
+        if (i - step < targetPosition) {
+          setTimeout(function () {
+            parent.scrollTo(0, targetPosition);
+          }, timeoutQueuer * speed);
+        } else {
+          setTimeout(function () {
+            parent.scrollTo(0, i);
+          }, timeoutQueuer * speed);
+        }
+        timeoutQueuer++;
+      }
+    }
+  }
+
+  exports.BaseOverlay = BaseOverlay;
   exports.BlockLegend = BlockLegend;
   exports.BubbleCluster = BubbleCluster;
   exports.Card = Card;
   exports.Chip = Chip;
+  exports.CircleLegend = CircleLegend;
   exports.ClickableCard = ClickableCard;
   exports.ErrorPopup = ErrorPopup;
   exports.FilterChips = FilterChips;
   exports.INITIAL_HISTORY_STATE = INITIAL_HISTORY_STATE;
   exports.IconButton = IconButton;
+  exports.InfoBox = InfoBox;
+  exports.Infographic = Infographic;
+  exports.InfographicLegend = InfographicLegend;
   exports.LineLegend = LineLegend;
   exports.List = List;
   exports.LoadingOverlay = LoadingOverlay;
@@ -16209,15 +16918,20 @@ polypod-feedback@polypoly.coop\
   exports.PolyChart = PolyChart;
   exports.PolyImportContext = PolyImportContext;
   exports.PolyImportProvider = PolyImportProvider;
+  exports.ProgressBar = ProgressBar;
   exports.RoutingWrapper = RoutingWrapper;
   exports.SankeyDiagram = SankeyDiagram;
   exports.Screen = Screen;
+  exports.ScrollLabel = ScrollLabel;
   exports.SideSheet = SideSheet;
   exports.SideSwiper = SideSwiper;
+  exports.Slideshow = Slideshow;
   exports.Tab = Tab;
   exports.Tabs = Tabs;
+  exports.Tooltip = Tooltip;
   exports.VerticalBarChart = VerticalBarChart;
   exports.mapToChartDataArray = mapToChartDataArray;
+  exports.scrollSmoothly = scrollSmoothly;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
