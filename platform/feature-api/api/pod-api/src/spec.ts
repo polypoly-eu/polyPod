@@ -181,9 +181,20 @@ export class PodSpec {
         });
     }
 
+    info(): void {
+        const { info } = this.pod;
+        describe("info", () => {
+            it("includes runtime and version info", async () => {
+                await assert.isOk(await info.getRuntime());
+                await assert.isOk(await info.getVersion());
+            });
+        });
+    }
+
     run(): void {
         this.polyIn();
         this.polyOut();
+        this.info();
     }
 }
 
