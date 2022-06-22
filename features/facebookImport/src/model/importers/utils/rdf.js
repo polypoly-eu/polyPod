@@ -6,7 +6,6 @@ export async function readAttrFromRdf(accountId, attr) {
         subject: dataFactory.namedNode(namespace + accountId),
         predicate: dataFactory.namedNode(namespace + attr),
     });
-    console.log(result);
     return result
         .find(({ object }) => object.value)
         ?.object?.value?.replace(namespace, "");
