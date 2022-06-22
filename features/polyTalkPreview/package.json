@@ -10,7 +10,8 @@
   "devDependencies": {
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
     "rollup": "*",
-    "@rollup/plugin-json": "*"
+    "@rollup/plugin-json": "*",
+    "@rollup/plugin-node-resolve": "*"
   },
   "dependencies": {
     "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
