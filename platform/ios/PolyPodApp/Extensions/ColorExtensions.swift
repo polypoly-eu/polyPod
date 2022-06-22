@@ -12,10 +12,7 @@ extension Color {
     }
     
     var compatCgColor: CGColor? {
-        if #available(iOS 14, *) {
-            return cgColor
-        }
-        return UIColor.compatInit(self).cgColor
+        return cgColor
     }
     
     var luminance: Double {

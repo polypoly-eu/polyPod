@@ -6,21 +6,21 @@ struct ExternalFile {
     let url: String
     let name: String
     let size: Int64
-    
+
     public var messagePackObject: MessagePackValue {
         var messagePackMap: [MessagePackValue: MessagePackValue] = [:]
-        
+
         messagePackMap["url"] = .string(url)
         messagePackMap["name"] = .string(name)
         messagePackMap["size"] = .int(size)
-        
+
         return MessagePackValue.map(messagePackMap)
     }
 }
 
 class FilePicker: NSObject, UIDocumentPickerDelegate {
     private var currentCompletion: ((ExternalFile?) -> Void)?
-    
+
     func mimeToUti(_ mime: String?) -> String {
         guard let mime = mime else { return "public.item" }
         if mime == "application/zip" { return "com.pkware.zip-archive" }
@@ -28,12 +28,12 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         Log.error("Unsupported MIME type: \(mime)")
         return mimeToUti(nil)
     }
-    
+
     func loadExternalFileData(url: URL) -> ExternalFile {
         var fileSize: Int64 = 0
         do {
             let fileAttribute: [FileAttributeKey : Any] =
-            try FileManager.default.attributesOfItem(atPath: url.path)
+                try FileManager.default.attributesOfItem(atPath: url.path)
             if let fileNumberSize: NSNumber = fileAttribute[FileAttributeKey.size] as? NSNumber {
                 fileSize = Int64(truncating: fileNumberSize)
             }
@@ -42,25 +42,17 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         }
         return ExternalFile(url: url.absoluteString, name: url.lastPathComponent, size: fileSize)
     }
-    
+
     func pick(type: String?, completion: @escaping (ExternalFile?) -> Void) {
         if currentCompletion != nil {
             completion(nil)
             return
         }
         currentCompletion = completion
+
+        let supportedTypes: [UTType] = [UTType(type ?? "")!]
+        let documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes)
         
-        
-        var documentPickerController: UIDocumentPickerViewController!
-        if #available(iOS 14, *) {
-            // iOS 14 & later
-            let supportedTypes: [UTType] = [UTType(type ?? "")!]
-            documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes)
-        } else {
-            // iOS 13 or older code
-            let supportedTypes: [String] = [type!]
-            documentPickerController = UIDocumentPickerViewController(documentTypes: supportedTypes, in: .import)
-        }
         documentPickerController.delegate = self
 
         // This is a workaround for a fairly nasty issue: On iOS 14.4 and 15.0,
@@ -78,29 +70,29 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         // - https://developer.apple.com/forums/thread/131404
         // - https://stackoverflow.com/q/60026248/368405
         documentPickerController.modalPresentationStyle = .fullScreen
-        
+
         let viewController =
-        UIApplication.shared.windows.first!.rootViewController!
+            UIApplication.shared.windows.first!.rootViewController!
         viewController.present(
             documentPickerController,
             animated: true,
             completion: nil
         )
     }
-    
+
     func documentPicker(
         _ controller: UIDocumentPickerViewController,
         didPickDocumentsAt urls: [URL]
     ) {
         complete(externalFile: loadExternalFileData(url: urls.first!))
     }
-    
+
     func documentPickerWasCancelled(
         _ controller: UIDocumentPickerViewController
     ) {
         complete(externalFile: nil)
     }
-    
+
     private func complete(externalFile: ExternalFile?) {
         currentCompletion?(externalFile)
         currentCompletion = nil
