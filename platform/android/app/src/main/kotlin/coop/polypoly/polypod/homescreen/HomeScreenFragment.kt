@@ -54,7 +54,7 @@ class HomeScreenFragment : Fragment() {
                         })
                     }
                 ) {
-                    screen(sectionModels)
+                    createScreen(sectionModels)
                 }
             }
         }
@@ -296,5 +296,5 @@ fun DefaultPreview() {
         SectionModel("Data know how", SectionType.DATA_KNOW_HOW, tileModels),
         SectionModel("Toools", SectionType.TOOLS, tileModels)
     )
-    screen(sectionModels = sections)
+    createScreen(sectionModels = sections)
 }
