@@ -54,6 +54,10 @@ export default {
                     ],
                     dest: "dist",
                 },
+                {
+                    src: ["src/static/fonts/*"],
+                    dest: "dist/fonts/",
+                },
             ],
             verbose: true,
         }),
