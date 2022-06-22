@@ -28,8 +28,7 @@ data class FeatureCategoryModel(
 )
 
 object FeatureStorage {
-    @Suppress("JAVA_CLASS_ON_COMPANION")
-    private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
+    private val logger = LoggerFactory.getLogger(FeatureStorage::class.java)
     var activeFeatureId: String? = null
 
     val categories: MutableList<FeatureCategoryModel> = ArrayList()
