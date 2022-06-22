@@ -1,6 +1,5 @@
 package coop.polypoly.polypod.homescreen
 
-import android.content.Context
 import android.graphics.Bitmap
 import androidx.compose.ui.graphics.Color
 import coop.polypoly.polypod.features.FeatureCategory
@@ -91,7 +90,9 @@ data class Footer(
 )
 
 class HomeScreenViewModel {
-    fun getSectionModels(context: Context, onFeatureSelected: (String) -> Unit): List<SectionModel> {
+    fun getSectionModels(
+        onFeatureSelected: (String) -> Unit
+    ): List<SectionModel> {
         return FeatureStorage.categories.map { category ->
             SectionModel(
                 category.name,
@@ -110,5 +111,3 @@ class HomeScreenViewModel {
         }
     }
 }
-
-

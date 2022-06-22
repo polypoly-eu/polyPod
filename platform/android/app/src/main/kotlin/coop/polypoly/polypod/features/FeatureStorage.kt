@@ -12,7 +12,8 @@ import java.util.zip.ZipFile
 data class RawCatagory(
     val id: String,
     val name: String,
-    val features: List<String>)
+    val features: List<String>
+)
 
 enum class FeatureCategory {
     yourData,
@@ -92,8 +93,13 @@ object FeatureStorage {
     }
 
     private fun readCategories(context: Context): List<RawCatagory> {
-        val categoriesJson = context.assets.open("features/categories.json").reader().readText()
-        return Gson().fromJson(categoriesJson, Array<RawCatagory>::class.java).toList()
+        val categoriesJson = context.assets
+            .open("features/categories.json")
+            .reader()
+            .readText()
+        return Gson()
+            .fromJson(categoriesJson, Array<RawCatagory>::class.java)
+            .toList()
     }
 
     fun loadFeature(context: Context, fileName: String): Feature {

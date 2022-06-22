@@ -1,14 +1,13 @@
-package coop.polypoly.polypod
-
+package coop.polypoly.polypod.homescreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.* // ktlint-disable no-wildcard-imports
+import androidx.compose.foundation.layout.* // ktlint-disable no-wildcard-imports
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.* // ktlint-disable no-wildcard-imports
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,7 +27,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.accompanist.flowlayout.FlowRow
-import coop.polypoly.polypod.homescreen.*
+import coop.polypoly.polypod.HomeScreenFragmentDirections
+import coop.polypoly.polypod.R
+import coop.polypoly.polypod.luminance
 
 class HomeScreenFragment : Fragment() {
     private val viewModel = HomeScreenViewModel()
@@ -38,7 +39,7 @@ class HomeScreenFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val sectionModels = viewModel.getSectionModels(requireContext()) {
+        val sectionModels = viewModel.getSectionModels {
             findNavController().navigate(
                 HomeScreenFragmentDirections
                     .actionHomeScreenFragmentToFeatureFragment(it)
@@ -50,15 +51,13 @@ class HomeScreenFragment : Fragment() {
                     modifier = Modifier.padding(bottom = 10.dp),
                     topBar = {
                         topBar(onInfoClick = {
-                            findNavController().navigate(
-                                HomeScreenFragmentDirections
-                                    .actionHomeScreenFragmentToOnboardingActivity()
-                            )
+                            val direction = HomeScreenFragmentDirections
+                                .actionHomeScreenFragmentToOnboardingActivity()
+                            findNavController().navigate(direction)
                         }, onSettingsClick = {
-                            findNavController().navigate(
-                                HomeScreenFragmentDirections
-                                    .actionHomeScreenFragmentToSettingsActivity()
-                            )
+                            val direction = HomeScreenFragmentDirections
+                                .actionHomeScreenFragmentToSettingsActivity()
+                            findNavController().navigate(direction)
                         })
                     }
                 ) {
@@ -72,23 +71,37 @@ class HomeScreenFragment : Fragment() {
 @Composable
 fun topBar(onInfoClick: () -> Unit, onSettingsClick: () -> Unit) {
     TopAppBar(backgroundColor = Color.White) {
-        Row(modifier = Modifier
-            .fillMaxSize(),
+        Row(
+            modifier = Modifier
+                .fillMaxSize(),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically) {
-            Button(onClick = onInfoClick,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-                elevation = null) {
-                Image(painterResource(R.drawable.ic_info_dark),
-                    contentDescription = "info")
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Button(
+                onClick = onInfoClick,
+                colors = ButtonDefaults
+                    .buttonColors(backgroundColor = Color.White),
+                elevation = null
+            ) {
+                Image(
+                    painterResource(R.drawable.ic_info_dark),
+                    contentDescription = "info"
+                )
             }
-            Image(painterResource(R.drawable.ic_logo),
-                contentDescription = "logo")
-            Button(onClick = onSettingsClick,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-                elevation = null) {
-                Image(painterResource(R.drawable.ic_settings),
-                    contentDescription = "settings")
+            Image(
+                painterResource(R.drawable.ic_logo),
+                contentDescription = "logo"
+            )
+            Button(
+                onClick = onSettingsClick,
+                colors = ButtonDefaults
+                    .buttonColors(backgroundColor = Color.White),
+                elevation = null
+            ) {
+                Image(
+                    painterResource(R.drawable.ic_settings),
+                    contentDescription = "settings"
+                )
             }
         }
     }
@@ -118,8 +131,14 @@ fun screen(sectionModels: List<SectionModel>) {
             model = it,
             layout = SectionLayout.default(),
             containerLayout = ContainerLayout.default(),
-            smallTileLayout = TileLayout.smallCard(smallTileWidth, smallTileWidth),
-            mediumTileLayout = TileLayout.mediumCard(containerWidth, smallTileWidth),
+            smallTileLayout = TileLayout.smallCard(
+                smallTileWidth,
+                smallTileWidth
+            ),
+            mediumTileLayout = TileLayout.mediumCard(
+                containerWidth,
+                smallTileWidth
+            ),
             bigTileLayout = TileLayout.bigCard(bigTileWidth, bigTileWidth),
             smallTileStyle = TileStyle.smallTileStyle(),
             mediumTileStyle = TileStyle.mediumTileStyle(),
@@ -700,7 +719,7 @@ fun section(
         )
         SectionType.DATA_KNOW_HOW -> return Section(
             model = model,
-            type =  model.type,
+            type = model.type,
             containers = rowContainers(
                 model.tiles,
                 tilesPerContainer = 3,
@@ -714,7 +733,7 @@ fun section(
         )
         SectionType.TOOLS -> return Section(
             model = model,
-            type =  model.type,
+            type = model.type,
             containers = rowContainers(
                 model.tiles,
                 tilesPerContainer = 1,

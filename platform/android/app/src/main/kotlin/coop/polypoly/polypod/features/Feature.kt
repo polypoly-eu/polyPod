@@ -37,7 +37,11 @@ class Feature(
             if (manifest?.thumbnail == null) return null
             val entry = content.getEntry(manifest.thumbnail) ?: return null
             if (entry.name.endsWith(".pdf")) {
-                return PDFBitmap.bitmapFromPDF(content.getInputStream(entry), context.resources.displayMetrics.densityDpi)
+                return PDFBitmap
+                    .bitmapFromPDF(
+                        content.getInputStream(entry),
+                        context.resources.displayMetrics.densityDpi
+                    )
             } else {
                 val options = BitmapFactory.Options()
                 // For now, we assume all thumbnails are xhdpi, i.e. 2x scale factor

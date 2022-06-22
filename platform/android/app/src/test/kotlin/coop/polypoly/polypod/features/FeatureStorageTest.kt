@@ -45,7 +45,6 @@ private fun createMockFeaturePackage(parent: File, child: String): File {
 @Config(sdk = [Config.OLDEST_SDK])
 class FeatureStorageTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
-    private val featureStorage = FeatureStorage()
 
     private lateinit var featuresDir: File
 
@@ -58,8 +57,8 @@ class FeatureStorageTest {
 
     @Test
     fun whenNoFeaturesAreInstalled_featuresListIsEmpty() {
-        val result = featureStorage.listFeatures(context)
-        assertThat(result).isEmpty()
+        FeatureStorage.importFeatures(context)
+        assertThat(FeatureStorage.categories[0].features).isEmpty()
     }
 
     @Test
@@ -71,8 +70,9 @@ class FeatureStorageTest {
     )
     fun whenOneFeatureIsInstalled_featuresListContainsItsName() {
         createMockFeaturePackage(featuresDir, "feature1.zip")
-        val result = featureStorage.listFeatures(context)
-        assertThat(result).hasSize(1)
-        assertThat(result.first().name).isEqualTo("testManifest")
+        FeatureStorage.importFeatures(context)
+        val features = FeatureStorage.categories[0].features
+        assertThat(features).hasSize(1)
+        assertThat(features.first().name).isEqualTo("testManifest")
     }
 }

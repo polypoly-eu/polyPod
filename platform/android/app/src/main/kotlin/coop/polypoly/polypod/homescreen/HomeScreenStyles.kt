@@ -19,7 +19,7 @@ data class SectionStyle(
 ) {
     companion object {
         fun default(): SectionStyle {
-           return SectionStyle(
+            return SectionStyle(
                 titleFont = FontDescription(
                     family = PolyStyle().font.family.jostMedium,
                     weight = PolyStyle().font.weight.medium,
@@ -125,6 +125,5 @@ data class FooterStyle(
                 )
             )
         }
-
     }
 }

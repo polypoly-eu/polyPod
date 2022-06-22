@@ -8,7 +8,10 @@ import java.io.InputStream
 
 class PDFBitmap {
     companion object {
-        fun bitmapFromPDF(pdfInputStream: InputStream, densityDpi: Int): Bitmap {
+        fun bitmapFromPDF(
+            pdfInputStream: InputStream,
+            densityDpi: Int
+        ): Bitmap {
             val tempPdf = File(kotlin.io.path.createTempFile().toString())
             pdfInputStream.use { input ->
                 tempPdf.outputStream().use { output ->
@@ -31,8 +34,14 @@ class PDFBitmap {
             val bitmap = Bitmap.createBitmap(
                 densityDpi * page.width / 72,
                 densityDpi * page.height / 72,
-                Bitmap.Config.ARGB_8888)
-            page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
+                Bitmap.Config.ARGB_8888
+            )
+            page.render(
+                bitmap,
+                null,
+                null,
+                PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY
+            )
 
             page.close()
             pdfRenderer.close()
