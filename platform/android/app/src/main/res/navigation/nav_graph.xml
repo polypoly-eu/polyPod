@@ -30,7 +30,7 @@
         android:name="coop.polypoly.polypod.settings.SettingsActivity" />
     <fragment
         android:id="@+id/homeScreenFragment"
-        android:name="coop.polypoly.polypod.HomeScreenFragment"
+        android:name="coop.polypoly.polypod.homescreen.HomeScreenFragment"
         android:label="HomeScreenFragment" >
         <action
             android:id="@+id/action_homeScreenFragment_to_SettingsActivity"
