@@ -1,5 +1,6 @@
 import UIKit
 import MessagePack
+import UniformTypeIdentifiers
 
 struct ExternalFile {
     let url: String
@@ -49,12 +50,19 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         }
         currentCompletion = completion
         
-        let documentPickerController = UIDocumentPickerViewController(
-            documentTypes: [mimeToUti(type)],
-            in: .import
-        )
-        documentPickerController.delegate = self
         
+        var documentPickerController: UIDocumentPickerViewController!
+        if #available(iOS 14, *) {
+            // iOS 14 & later
+            let supportedTypes: [UTType] = [UTType(type ?? "")!]
+            documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes)
+        } else {
+            // iOS 13 or older code
+            let supportedTypes: [String] = [type!]
+            documentPickerController = UIDocumentPickerViewController(documentTypes: supportedTypes, in: .import)
+        }
+        documentPickerController.delegate = self
+
         // This is a workaround for a fairly nasty issue: On iOS 14.4 and 15.0,
         // potentially other versions as well, on _some_ devices, a presentation
         // style of e.g. .pageSheet (same as .automatic on those versions),
