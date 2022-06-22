@@ -1,5 +1,5 @@
 export default class DataAccount {
-    constructor() {
+    constructor(fileId) {
         this.importingResults = [];
         this.importedFileNames = [];
         this.name = "";
@@ -7,6 +7,7 @@ export default class DataAccount {
         this.analyses = {};
         this.reports = {};
         this.analysesExecutionResults = [];
+        this.id = fileId;
     }
 
     addImportedFileName(fileName) {

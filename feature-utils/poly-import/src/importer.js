@@ -79,7 +79,7 @@ export async function runImporters(importerClasses, zipFile, dataAccount, pod) {
 }
 
 export async function importZip({ dataImporters, zipFile, pod, DataAccount }) {
-    const dataAccount = new DataAccount();
+    const dataAccount = new DataAccount(zipFile.id);
     const importingResults = await runImporters(
         dataImporters,
         zipFile,
