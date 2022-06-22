@@ -13,6 +13,9 @@ import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint } from "./api";
 import { EncodingOptions, FS, Stats } from "./fs";
 import { Entry } from ".";
 
+export const DEFAULT_POD_RUNTIME = "podjs-default";
+export const DEFAULT_POD_RUNTIME_VERSION = "podjs-default-version";
+
 /**
  * The _default Pod_ provides the bare minimum implementation to satisfy the [[Pod]] API. It should only be used in
  * testing or development contexts.
@@ -139,10 +142,10 @@ export class DefaultPod implements Pod {
     get info(): Info {
         return {
             getRuntime() {
-                throw new Error("Not implemented");
+                return DEFAULT_POD_RUNTIME;
             },
             getVersion() {
-                throw new Error("Not implemented");
+                return DEFAULT_POD_RUNTIME_VERSION;
             },
         };
     }
