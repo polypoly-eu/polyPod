@@ -5,7 +5,8 @@
   "main": "src/index.jsx",
   "scripts": {
     "build": "rollup -c",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "rollup --watch -c"
   },
   "devDependencies": {
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
