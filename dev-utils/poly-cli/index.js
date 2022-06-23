@@ -315,7 +315,8 @@ function handleCreatePreviewFeature(arg) {
             },
             static: {
                 fonts: path.resolve(__dirname, "./src/static/fonts"),
-                "manifest.json": () => manifestTemplate(feature_name, author),
+                "manifest.json": () =>
+                    manifestTemplate(feature_name, author, "preview"),
                 "index.html": () =>
                     fs.readFileSync(
                         path.resolve(
