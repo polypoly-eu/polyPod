@@ -2,6 +2,5 @@ disabled_rules:
     - trailing_whitespace
     - force_cast #FIX!
     - todo
-    - implicit_getter
     - identifier_name
     - force_try #FIX!

@@ -5,7 +5,7 @@ private class LastUpdateNotification {
         .lastUpdateNotificationId.rawValue
     private static let stateKey = UserDefaults.Keys
         .lastUpdateNotificationState.rawValue
-    
+
     static func read() -> (Int, String)? {
         let defaults = UserDefaults.standard
         if defaults.object(forKey: idKey) == nil {
@@ -17,7 +17,7 @@ private class LastUpdateNotification {
         }
         return (id, state)
     }
-    
+
     static func write(id: Int, state: String) {
         let defaults = UserDefaults.standard
         defaults.set(id, forKey: idKey)
@@ -27,7 +27,7 @@ private class LastUpdateNotification {
 
 private class UpdateNotificationMockId {
     private static let key = UserDefaults.Keys.updateNotificationMockId.rawValue
-    
+
     static func read() -> Int? {
         let defaults = UserDefaults.standard
         if defaults.object(forKey: key) == nil {
@@ -42,7 +42,7 @@ class UpdateNotification {
         case NOT_SEEN
         case PUSH_SEEN
         case ALL_SEEN
-        
+
         static func parse(_ s: String?) -> State? {
             guard let s = s else { return nil }
             for value in allCases where value.rawValue == s {
@@ -51,7 +51,7 @@ class UpdateNotification {
             return nil
         }
     }
-    
+
     private struct Data {
         private static let invalid = Data(
             id: 0,
@@ -59,7 +59,7 @@ class UpdateNotification {
             title: [String: String](),
             text: [String: String]()
         )
-        
+
         static func load() -> Data {
             guard let asset = NSDataAsset(
                 name: "UpdateNotification",
@@ -67,13 +67,13 @@ class UpdateNotification {
             ) else {
                 return invalid
             }
-            
+
             guard let json = try? JSONSerialization.jsonObject(
                 with: asset.data
             ) as? [String: Any] else {
                 return invalid
             }
-            
+
             guard let id = json["id"] as? Int,
                   let pushDelay = json["pushDelay"] as? Int,
                   let title = json["title"] as? [String: String],
@@ -83,54 +83,54 @@ class UpdateNotification {
             }
             return Data(id: id, pushDelay: pushDelay, title: title, text: text)
         }
-        
+
         private static func readLocalizedValue(
             _ values: [String: String]
         ) -> String {
             return values[Language.current] ?? values[Language.fallback]!
         }
-        
+
         let id: Int
         let pushDelay: Int
         let title: [String: String]
         let text: [String: String]
-        
+
         var localizedTitle: String {
             return Data.readLocalizedValue(self.title)
         }
-        
+
         var localizedText: String {
             return Data.readLocalizedValue(self.text)
         }
     }
-    
+
     private static let notificationData = Data.load()
-    
+
     private static func loadLastState(_ id: Int) -> State {
         if id == 0 {
             return .ALL_SEEN
         }
-        
+
         guard let (lastId, lastState) = LastUpdateNotification.read() else {
             return .NOT_SEEN
         }
-        
+
         if id < lastId {
             return .ALL_SEEN
         }
-        
+
         if id != lastId {
             return .NOT_SEEN
         }
-        
+
         return State.parse(lastState) ?? .ALL_SEEN
     }
-    
+
     let id = UpdateNotificationMockId.read() ?? notificationData.id
     let pushDelay = notificationData.pushDelay
     let title = notificationData.localizedTitle
     let text = notificationData.localizedText
-    
+
     private var cachedState: State
     private var state: State {
         get { cachedState }
@@ -139,39 +139,45 @@ class UpdateNotification {
             LastUpdateNotification.write(id: id, state: cachedState.rawValue)
         }
     }
-    
+
     init() {
         cachedState = UpdateNotification.loadLastState(id)
     }
-    
+
     var showPush: Bool {
+        // swiftlint:disable implicit_getter
         get {
             return state == .NOT_SEEN
         }
+        // swiftlint:enable implicit_getter
+
     }
-    
+
     var showInApp: Bool {
+        // swiftlint:disable implicit_getter
         get {
             return state != .ALL_SEEN
         }
+        // swiftlint:enable implicit_getter
+
     }
-    
+
     func handleStartup() {
         if state == .NOT_SEEN {
             state = .PUSH_SEEN
         }
     }
-    
+
     func handleFirstRun() {
         state = .ALL_SEEN
     }
-    
+
     func handlePushSeen() {
         if state == .NOT_SEEN {
             state = .PUSH_SEEN
         }
     }
-    
+
     func handleInAppSeen() {
         state = .ALL_SEEN
     }
