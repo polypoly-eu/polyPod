@@ -27,6 +27,6 @@
         "description": "preview:footer_description",
         "image": "./images/test.jpeg",
         "buttonTitle": "preview:footer_button_title",
-        "buttonLink": "https://polypoly.org/en-gb/"
+        "buttonLink": "learn-more"
     }
 }

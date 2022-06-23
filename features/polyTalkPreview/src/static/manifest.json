@@ -1,15 +1,17 @@
 {
-  "name": "polyTalkPreview",
-  "author": "polypoly poly-cli",
-  "description": "",
-  "thumbnail": "",
-  "primaryColor": "#ffffff",
-  "links": {},
-  "translations": {
-    "de": {
-      "author": "",
-      "description": "",
-      "links": {}
+    "name": "polyTalkPreview",
+    "author": "polypoly poly-cli",
+    "description": "",
+    "thumbnail": "",
+    "primaryColor": "#ffffff",
+    "links": {
+        "learn-more": "https://polypoly.org"
+    },
+    "translations": {
+        "de": {
+            "author": "",
+            "description": "",
+            "links": {}
+        }
     }
-  }
 }

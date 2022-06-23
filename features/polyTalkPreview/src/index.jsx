@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { Slideshow, Screen, ClickableCard } from "@polypoly-eu/poly-look";
 import content from "./static/content.json";
@@ -25,7 +25,7 @@ const Footer = (props) => {
                 buttonText={i18n.t(props.model.buttonTitle)}
                 onlyButtonClickEvent={true}
                 onClick={() => {
-                    // TODO: Open link
+                    props.pod.polyNav.openUrl(props.model.buttonLink);
                 }}
             >
                 <h3>{i18n.t(props.model.title)}</h3>
@@ -38,6 +38,17 @@ const Footer = (props) => {
 };
 
 const App = () => {
+    const [pod, setPod] = useState(null);
+
+    const initPod = async () => await window.pod;
+
+    //on startup
+    useEffect(() => {
+        initPod().then((newPod) => {
+            setPod(newPod);
+        });
+    }, []);
+
     return (
         <Screen className="poly-theme-light" layout="poly-standard-layout">
             <div className="preview">
@@ -48,7 +59,7 @@ const App = () => {
                     ))}
                 </div>
                 <div>
-                    <Footer model={content.footer} />
+                    <Footer model={content.footer} pod={pod} />
                 </div>
             </div>
         </Screen>
