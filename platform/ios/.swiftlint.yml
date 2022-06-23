@@ -20,3 +20,6 @@ opt_in_rules:
     - joined_default_parameter
     - fallthrough
     - modifier_order
+    - unused_declaration
+    - toggle_bool
+    - yoda_condition
