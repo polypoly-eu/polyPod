@@ -96,11 +96,11 @@ class UpdateNotification {
         let text: [String: String]
 
         var localizedTitle: String {
-            return Data.readLocalizedValue(self.title)
+            return Self.readLocalizedValue(self.title)
         }
 
         var localizedText: String {
-            return Data.readLocalizedValue(self.text)
+            return Self.readLocalizedValue(self.text)
         }
     }
 
@@ -141,7 +141,7 @@ class UpdateNotification {
     }
 
     init() {
-        cachedState = UpdateNotification.loadLastState(id)
+        cachedState = Self.loadLastState(id)
     }
 
     var showPush: Bool {

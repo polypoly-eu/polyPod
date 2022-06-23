@@ -41,7 +41,7 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
         self.featureStorage = featureStorage
         self.categoriesList = featureStorage
             .categoriesList
-            .map(HomeScreenStorageAdapter.mapCategoryModel)
+            .map(Self.mapCategoryModel)
             .eraseToAnyPublisher()
     }
 
