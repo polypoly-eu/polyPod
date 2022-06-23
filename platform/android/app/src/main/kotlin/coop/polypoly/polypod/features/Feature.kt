@@ -10,14 +10,13 @@ import coop.polypoly.polypod.PDFBitmap
 import java.util.zip.ZipFile
 
 class Feature(
-    val fileName: String,
+    private val fileName: String,
     val content: ZipFile,
     val context: Context,
     private val manifest: FeatureManifest?
 ) {
     val id: String get() = fileName.replace(".zip", "")
     val name: String get() = manifest?.name ?: id
-    val author: String get() = manifest?.author ?: ""
     val description: String get() = manifest?.description ?: ""
 
     val primaryColor: Int

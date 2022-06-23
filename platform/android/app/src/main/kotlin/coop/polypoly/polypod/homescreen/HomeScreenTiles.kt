@@ -104,7 +104,6 @@ fun BigTileView(tile: Tile) {
                 )
             }
         }
-
     }
 }
 
