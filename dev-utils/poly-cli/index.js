@@ -356,7 +356,7 @@ function handleCreatePreviewFeature(arg) {
             fs.readFileSync(
                 path.resolve(
                     __dirname,
-                    "./src/static/templates/rollup.config.mjs"
+                    "./src/static/templates/preview/rollup.config.mjs"
                 )
             ),
     };
