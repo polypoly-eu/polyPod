@@ -249,7 +249,7 @@ function handleCreateEmptyFeature(arg) {
             ),
     };
 
-    setup(structure, feature_name);
+    setup(structure);
 }
 
 function handleCreatePreviewFeature(arg) {
@@ -324,7 +324,7 @@ function handleCreatePreviewFeature(arg) {
             ),
     };
 
-    setup(structure, feature_name);
+    setup(structure);
 }
 
 function handleCreateImporterFeature(arg) {
