@@ -58,7 +58,7 @@ class FeatureStorageTest {
     @Test
     fun whenNoFeaturesAreInstalled_featuresListIsEmpty() {
         FeatureStorage.importFeatures(context)
-        assertThat(FeatureStorage.categories[0].features).isEmpty()
+        assertThat(FeatureStorage.categories).isEmpty()
     }
 
     @Test

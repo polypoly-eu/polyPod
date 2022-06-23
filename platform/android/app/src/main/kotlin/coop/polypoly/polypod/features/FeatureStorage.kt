@@ -9,7 +9,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.zip.ZipFile
 
-data class RawCatagory(
+data class RawCategory(
     val id: String,
     val name: String,
     val features: List<String>
@@ -54,22 +54,25 @@ object FeatureStorage {
             logger.debug("Directory for Features already exists")
         }
 
+        val filesList =
+            featuresDir.listFiles { _, name -> name.endsWith(".zip") }
+        // Stop early if no features where found
+        if (filesList.isEmpty()) {
+            logger.debug("No Features found")
+            return
+        }
+
         val rawCategories = readCategories(context)
 
         categories.clear()
 
         for (rawCategory in rawCategories) {
             val categoryId = FeatureCategory.valueOf(rawCategory.id)
-            if (categoryId == null) {
-                continue
-            }
-
-            var features: MutableList<Feature> = ArrayList()
+            val features: MutableList<Feature> = ArrayList()
 
             for (featureId in rawCategory.features) {
                 importFeature(context, featureId)
-                val feature = loadFeature(context, featureId)
-                features.add(feature)
+                features.add(loadFeature(context, featureId))
             }
 
             val categoryModel = FeatureCategoryModel(
@@ -82,7 +85,7 @@ object FeatureStorage {
         }
     }
 
-    fun importFeature(context: Context, id: String) {
+    private fun importFeature(context: Context, id: String) {
         logger.debug("Installing $id from assets")
         val source = context.assets.open("features/$id.zip")
         val featuresDir = getFeaturesDir(context)
@@ -91,17 +94,17 @@ object FeatureStorage {
         source.copyTo(destination)
     }
 
-    private fun readCategories(context: Context): List<RawCatagory> {
+    private fun readCategories(context: Context): List<RawCategory> {
         val categoriesJson = context.assets
             .open("features/categories.json")
             .reader()
             .readText()
         return Gson()
-            .fromJson(categoriesJson, Array<RawCatagory>::class.java)
+            .fromJson(categoriesJson, Array<RawCategory>::class.java)
             .toList()
     }
 
-    fun loadFeature(context: Context, fileName: String): Feature {
+    private fun loadFeature(context: Context, fileName: String): Feature {
         val content = ZipFile(File(getFeaturesDir(context), "$fileName.zip"))
         val manifest = readManifest(content)
         return Feature(fileName, content, context, manifest)
