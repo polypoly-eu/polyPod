@@ -321,6 +321,13 @@ function handleCreatePreviewFeature(arg) {
                             "./src/static/templates/index.html"
                         )
                     ),
+                "content.json": () =>
+                    readFileSync(
+                        path.resolve(
+                            __dirname,
+                            "./src/static/templates/preview/content.json"
+                        )
+                    ),
             },
         },
         test: [],
