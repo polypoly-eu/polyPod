@@ -253,6 +253,11 @@ function handleCreateEmptyFeature(arg) {
 }
 
 function handleCreatePreviewFeature(arg) {
+    // TODO:
+    // 1. New translations - preview.json
+    // 2. Add content file - content.json
+    // 3. New index file with the logic.
+
     let feature_name = arg.name;
     let author = arg.author;
     let version = arg.featureVersion;
@@ -282,6 +287,13 @@ function handleCreatePreviewFeature(arg) {
                                 "./src/static/templates/locales/en/common.json"
                             )
                         ),
+                    "preview.json": () =>
+                        readFileSync(
+                            path.resolve(
+                                __dirname,
+                                "./src/static/templates/locales/en/preview.json"
+                            )
+                        ),
                 },
                 de: {
                     "common.json": () =>
@@ -289,6 +301,13 @@ function handleCreatePreviewFeature(arg) {
                             path.resolve(
                                 __dirname,
                                 "./src/static/templates/locales/de/common.json"
+                            )
+                        ),
+                    "preview.json": () =>
+                        readFileSync(
+                            path.resolve(
+                                __dirname,
+                                "./src/static/templates/locales/de/preview.json"
                             )
                         ),
                 },
