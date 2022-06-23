@@ -669,6 +669,7 @@
 				E923739E2628228F00D2CFF3 /* Copy polyPod Features */,
 				E98F3756266F32AE00874FB9 /* Copy licenses and legal */,
 				3B5487E427CE881400480CB5 /* Copy Endpoints */,
+				519ACE372835887C00D56462 /* SwiftLint Script */,
 			);
 			buildRules = (
 			);
@@ -812,6 +813,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "set -e\nENDPOINTS_SOURCE=\"$PROJECT_DIR/../../../../polyPod-config\"\nENDPOINTS_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/config\"\nrm -rf \"$ENDPOINTS_TARGET\"\ncp -r \"$ENDPOINTS_SOURCE\" \"$ENDPOINTS_TARGET\"\n";
+		};
+		519ACE372835887C00D56462 /* SwiftLint script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		E923739E2628228F00D2CFF3 /* Copy polyPod Features */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1253,7 +1272,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.6.1;
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.polypod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1282,7 +1301,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.6.1;
 				OTHER_SWIFT_FLAGS = "-DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = coop.polypoly.polypod;
 				PRODUCT_NAME = "$(TARGET_NAME)";

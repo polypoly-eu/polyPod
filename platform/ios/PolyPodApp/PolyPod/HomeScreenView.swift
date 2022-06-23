@@ -71,7 +71,7 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
                 image: image,
                 backgroundColor: feature.thumbnailColor ?? .white,
                 borderColor: feature.borderColor ?? .white
-                )
+            )
         }
     }
 }
@@ -186,6 +186,7 @@ struct HomeScreenConstants {
                 .weight(PolyStyle.Font.Weight.medium),
             alignment: PolyStyle.Font.Alignment.left
         )
+
         static let description = Typography(
             font:
                 .custom(PolyStyle.Font.Family.jostRegular, size: PolyStyle.Font.Size.base)
@@ -193,7 +194,10 @@ struct HomeScreenConstants {
             alignment: PolyStyle.Font.Alignment.left
         )
 
+        // swiftlint:disable nesting
         struct Button {
+            // swiftlint:enable nesting
+
             static let title = Typography(
                 font:
                     .custom(PolyStyle.Font.Family.jostMedium, size: PolyStyle.Font.Size.lg)

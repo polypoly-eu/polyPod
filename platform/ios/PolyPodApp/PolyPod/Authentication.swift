@@ -35,11 +35,10 @@ class Authentication {
         UserDefaults.standard.set(true, forKey: Authentication.disableCheckKey)
     }
     
-    
     func setUp(newStatus: Bool, _ completeAction: @escaping (Bool) -> Void) {
         let reason = isSetUp() ?
         "re_auth_prompt_set_up": "auth_prompt_set_up"
-
+        
         authenticateLocally(withReason: reason) { success in
             if (success) {
                 self.authenticated = newStatus
@@ -48,7 +47,6 @@ class Authentication {
             completeAction(success)
         }
     }
-            
     
     func authenticate(_ completeAction: @escaping (Bool) -> Void) {
         if !isSetUp() || authenticated {
