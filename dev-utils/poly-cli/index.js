@@ -272,7 +272,10 @@ function handleCreatePreviewFeature(arg) {
         src: {
             "index.jsx": () =>
                 readFileSync(
-                    path.resolve(__dirname, "./src/static/templates/index.jsx")
+                    path.resolve(
+                        __dirname,
+                        "./src/static/templates/preview/index.jsx"
+                    )
                 ),
             "styles.css": () =>
                 readFileSync(
