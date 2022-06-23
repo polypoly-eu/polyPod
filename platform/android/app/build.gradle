@@ -39,9 +39,6 @@ android {
         versionName "1.6.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary true
-        }
     }
 
     signingConfigs {
@@ -144,9 +141,6 @@ dependencies {
     implementation 'androidx.work:work-runtime:2.7.1'
     implementation 'androidx.biometric:biometric:1.1.0'
     implementation 'androidx.biometric:biometric-ktx:1.2.0-alpha04'
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
 
     // this unfortunately is needed to test the app
     debugImplementation 'androidx.test:core:1.4.0'
@@ -198,21 +192,10 @@ dependencies {
     androidTestImplementation("androidx.security:security-app-authenticator:1.0.0-alpha02")
 
     // Compose
-
-    // Integration with activities
-    implementation 'androidx.activity:activity-compose:1.4.0'
-    // Compose Material Design
     implementation 'androidx.compose.material:material:1.1.1'
-    // Animations
-    implementation 'androidx.compose.animation:animation:1.1.1'
-    // Tooling support (Previews, etc.)
-    implementation 'androidx.compose.ui:ui-tooling:1.1.1'
-    // Integration with ViewModels
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1'
-    // Flow
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation 'com.google.accompanist:accompanist-flowlayout:0.24.10-beta'
-    //
-    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02"
 }
 
 task copyRemotePod(type: Copy) {

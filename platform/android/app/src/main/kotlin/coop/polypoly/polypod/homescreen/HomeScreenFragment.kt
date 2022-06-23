@@ -245,13 +245,13 @@ fun section(
         SectionType.DATA_KNOW_HOW -> return Section(
             model = model,
             type = model.type,
-            containers = yourDataContainers(
+            containers = rowContainers(
                 model.tiles,
+                tilesPerContainer = 3,
                 containerLayout,
-                bigTileLayout,
-                bigTileStyle,
                 smallTileLayout,
-                smallTileStyle
+                smallTileStyle,
+                TileType.SMALL
             ),
             layout = layout,
             style = style

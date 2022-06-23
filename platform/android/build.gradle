@@ -3,8 +3,8 @@
 buildscript {
     ext {
         compose_version = '1.0.1'
+        kotlin_version = '1.6.10'
     }
-    ext.kotlin_version = '1.6.10'
     repositories {
         google()
         mavenCentral()
