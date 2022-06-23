@@ -171,7 +171,7 @@ function handleCreateFeature(arg) {
     } else if (arg.type === "preview") {
         handleCreatePreviewFeature(arg);
     } else if (arg.type === "importer") {
-        handleCreateImporterFeature(arg);
+        handleCreateImporterFeature();
     } else {
         printErrorMsg(`Feature type ${arg.type} not recognized. Aborting!`);
     }
@@ -355,7 +355,7 @@ function handleCreatePreviewFeature(arg) {
     setup(structure);
 }
 
-function handleCreateImporterFeature(arg) {
+function handleCreateImporterFeature() {
     printUnderConstruction();
 }
 
