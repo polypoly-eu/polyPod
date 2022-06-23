@@ -40,6 +40,15 @@ private fun createMockFeaturePackage(parent: File, child: String): File {
     return featurePackage
 }
 
+@Ignore(
+    """
+
+            Currently there are some issues with loading the core JNI
+            into JUnit to run tests below. Since the whole logic of reading the
+            categories will move to core thus tested there, just ignore this
+            test suite.
+        """
+)
 @LooperMode(LooperMode.Mode.PAUSED)
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Config.OLDEST_SDK])

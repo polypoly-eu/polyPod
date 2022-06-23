@@ -54,14 +54,6 @@ object FeatureStorage {
             logger.debug("Directory for Features already exists")
         }
 
-        val filesList =
-            featuresDir.listFiles { _, name -> name.endsWith(".zip") }
-        // Stop early if no features where found
-        if (filesList.isEmpty()) {
-            logger.debug("No Features found")
-            return
-        }
-
         val rawCategories = readCategories(context)
 
         categories.clear()
