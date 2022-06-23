@@ -3,7 +3,7 @@ import LocalAuthentication
 
 // TODO: This, and other user defaults we use, should move to a central place.
 struct FirstRun {
-    static private let key = UserDefaults.Keys.firstRun.rawValue
+    private static let key = UserDefaults.Keys.firstRun.rawValue
 
     static func read() -> Bool {
         if UserDefaults.standard.object(forKey: key) == nil {

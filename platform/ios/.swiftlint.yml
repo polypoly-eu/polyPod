@@ -19,3 +19,4 @@ opt_in_rules:
     - identical_operands
     - joined_default_parameter
     - fallthrough
+    - modifier_order
