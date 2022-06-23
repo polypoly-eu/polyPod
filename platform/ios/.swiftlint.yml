@@ -9,3 +9,8 @@ opt_in_rules:
     - empty_string
     - empty_count
     - empty_xctest_method
+    - unused_private_declaration
+    - fatal_error_message
+    - last_where
+    - private_action
+    - prohibited_interface_builder
