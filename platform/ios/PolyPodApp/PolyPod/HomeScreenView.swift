@@ -1,7 +1,7 @@
 // swiftlint:disable file_length
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 // MARK: - Model
 

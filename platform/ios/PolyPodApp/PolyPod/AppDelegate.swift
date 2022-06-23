@@ -1,7 +1,7 @@
 import BackgroundTasks
-import UIKit
 import CoreData
 import PolyPodCoreSwift
+import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

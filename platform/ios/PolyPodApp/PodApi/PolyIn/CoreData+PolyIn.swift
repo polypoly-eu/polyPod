@@ -1,7 +1,7 @@
 // Please remove this line and the empty one after it
 
-import Foundation
 import CoreData
+import Foundation
 
 extension CoreDataStack: PolyIn {
     func addQuads(quads: [ExtendedData], completionHandler: @escaping (Error?) -> Void) {

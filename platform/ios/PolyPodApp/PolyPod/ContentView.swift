@@ -1,5 +1,5 @@
-import SwiftUI
 import LocalAuthentication
+import SwiftUI
 
 // TODO: This, and other user defaults we use, should move to a central place.
 struct FirstRun {

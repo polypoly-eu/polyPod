@@ -1,6 +1,6 @@
 // swiftlint:disable file_length
-import UIKit
 import MessagePack
+import UIKit
 
 private func createErrorResponse(_ origin: String, _ message: String) -> MessagePackValue {
     return MessagePackValue("\(origin): \(message)")

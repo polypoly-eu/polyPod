@@ -1,6 +1,6 @@
+@testable import PolyPod
 import XCTest
 import Zip
-@testable import PolyPod
 
 private class PolyNavDelegateStub: PolyNavDelegate {
     var pickFileResult: ExternalFile?

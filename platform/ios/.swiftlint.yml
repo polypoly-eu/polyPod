@@ -30,3 +30,4 @@ opt_in_rules:
     - quick_discouraged_call
     - quick_discouraged_focused_test
     - quick_discouraged_pending_test
+    - sorted_imports

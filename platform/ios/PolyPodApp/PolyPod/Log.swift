@@ -1,5 +1,5 @@
-import Foundation
 import CocoaLumberjackSwift
+import Foundation
 
 enum Log {
     static func bootstrap() {

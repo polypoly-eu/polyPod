@@ -1,6 +1,6 @@
+import Combine
 import Foundation
 import Zip
-import Combine
 
 private struct DecodedFeaturesCategory: Decodable {
     let id: String
