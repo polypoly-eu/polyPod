@@ -4,6 +4,7 @@ import sillyI18n from "@polypoly-eu/silly-i18n/rollup-plugin.js";
 import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
 import sucrase from "@rollup/plugin-sucrase";
 import resolve from "@rollup/plugin-node-resolve";
+import json from "@rollup/plugin-json";
 
 const externalPackages = {
     "@polypoly-eu/poly-look": "polyLook",
@@ -27,6 +28,7 @@ export default {
             build_dir: "./dist",
             manifestPath: "./src/static/manifest.json",
         }),
+        json(),
         sucrase({
             transforms: ["jsx"],
             production: true,

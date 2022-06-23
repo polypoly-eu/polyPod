@@ -22,6 +22,9 @@ export function packageTemplate(
             devDependencies: {
                 "@polypoly-eu/rollup-plugin-copy-watch":
                     "file:../../dev-utils/rollup-plugin-copy-watch",
+                rollup: "*",
+                "@rollup/plugin-json": "*",
+                "@rollup/plugin-node-resolve": "*",
             },
             dependencies: {
                 "@polypoly-eu/silly-i18n":
@@ -30,10 +33,8 @@ export function packageTemplate(
                 "@polypoly-eu/pod-api":
                     "file:../../platform/feature-api/api/pod-api",
                 "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
-                "@rollup/plugin-node-resolve": "*",
                 react: "*",
                 "react-dom": "*",
-                rollup: "*",
             },
             author: author,
             license: license,
