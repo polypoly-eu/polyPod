@@ -28,6 +28,7 @@ class NetworkSessionMock: NetworkSession {
 }
 
 class PolyOutTests: XCTestCase {
+    // swiftlint:disable empty_xctest_method
     override func setUp() {
         sessionGetData = nil
         sessionPostData = nil
@@ -42,6 +43,7 @@ class PolyOutTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+    // swiftlint:enable empty_xctest_method
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
