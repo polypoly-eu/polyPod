@@ -24,3 +24,9 @@ opt_in_rules:
     - toggle_bool
     - yoda_condition
     - prefer_self_in_static_references
+    - prefer_self_type_over_type_of_self
+    - private_action
+    - private_outlet
+    - quick_discouraged_call
+    - quick_discouraged_focused_test
+    - quick_discouraged_pending_test
