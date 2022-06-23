@@ -4,3 +4,6 @@ disabled_rules:
     - todo
     - identifier_name
     - force_try #FIX!
+
+opt_in_rules:
+    - empty_string
