@@ -1,5 +1,5 @@
 import { readJSONDataObject } from "./utils/importer-util.js";
-import { readAttrFromRdf, writeAttributeToRdf } from "./utils/rdf.js";
+import { readAttrFromRdf, writeAttrToRdf } from "./utils/rdf.js";
 
 export const PROFILE_INFORMATION_FILE_PATH =
     "profile_information/profile_information.json";
@@ -18,14 +18,14 @@ export default class NameImporter {
         const rdfResult = await readAttrFromRdf(facebookAccount.id, "name");
 
         if (rdfResult) {
-            console.log("used rdf");
+            console.log("used rdf - name");
             facebookAccount.name = rdfResult;
             return;
         }
 
         const profileData = await this._readLanguageData(zipFile);
 
-        await writeAttributeToRdf(
+        await writeAttrToRdf(
             facebookAccount.id,
             "name",
             profileData.name.full_name
