@@ -2,6 +2,7 @@ package coop.polypoly.polypod.homescreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.* // ktlint-disable no-wildcard-imports
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -42,12 +43,17 @@ fun BigTileView(tile: Tile) {
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .background(tile.model.backgroundColor)
+                .border(
+                    width = tile.layout.borderWidth,
+                    color = tile.model.borderColor,
+                    shape = RoundedCornerShape(tile.layout.cornerRadius)
+                )
                 .padding(
                     top = tile.layout.topPadding,
                     start = tile.layout.startPadding,
                     end = tile.layout.endPadding,
-                    bottom = tile.layout.bottomPadding
-                )
+                    bottom = tile.layout.bottomPadding,
+                ),
         ) {
             tile.model.image?.also {
                 Image(
@@ -116,6 +122,11 @@ fun MediumTileView(tile: Tile) {
         Row(
             modifier = Modifier
                 .background(tile.model.backgroundColor)
+                .border(
+                    width = tile.layout.borderWidth,
+                    color = tile.model.borderColor,
+                    shape = RoundedCornerShape(tile.layout.cornerRadius)
+                )
         ) {
             tile.model.image?.also {
                 Image(
@@ -185,6 +196,11 @@ fun SmallTileView(tile: Tile) {
         Column(
             modifier = Modifier
                 .background(tile.model.backgroundColor)
+                .border(
+                    width = tile.layout.borderWidth,
+                    color = tile.model.borderColor,
+                    shape = RoundedCornerShape(tile.layout.cornerRadius)
+                )
                 .padding(
                     top = tile.layout.topPadding,
                     start = tile.layout.startPadding,

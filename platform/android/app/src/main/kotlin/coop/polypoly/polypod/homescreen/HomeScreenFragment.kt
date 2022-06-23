@@ -31,7 +31,7 @@ class HomeScreenFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val sectionModels = viewModel.getSectionModels {
             findNavController().navigate(
                 HomeScreenFragmentDirections
@@ -43,15 +43,18 @@ class HomeScreenFragment : Fragment() {
                 Scaffold(
                     modifier = Modifier.padding(bottom = 10.dp),
                     topBar = {
-                        topBar(onInfoClick = {
-                            val direction = HomeScreenFragmentDirections
-                                .actionHomeScreenFragmentToOnboardingActivity()
-                            findNavController().navigate(direction)
-                        }, onSettingsClick = {
-                            val direction = HomeScreenFragmentDirections
-                                .actionHomeScreenFragmentToSettingsActivity()
-                            findNavController().navigate(direction)
-                        })
+                        topBar(
+                            onInfoClick = {
+                                val direction = HomeScreenFragmentDirections
+                                    .actionHomeScreenFragmentToOnboardingActivity() // ktlint-disable max-line-length
+                                findNavController().navigate(direction)
+                            },
+                            onSettingsClick = {
+                                val direction = HomeScreenFragmentDirections
+                                    .actionHomeScreenFragmentToSettingsActivity() // ktlint-disable max-line-length
+                                findNavController().navigate(direction)
+                            }
+                        )
                     }
                 ) {
                     createScreen(sectionModels)
@@ -281,7 +284,8 @@ fun DefaultPreview() {
         title = "Facebook Import",
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
         image = null,
-        backgroundColor = Color.Black
+        backgroundColor = Color.Black,
+        borderColor = Color.Red
     ) {}
 
     val tileModels: List<TileModel> = listOf(
@@ -294,7 +298,7 @@ fun DefaultPreview() {
     val sections: List<SectionModel> = listOf(
         SectionModel("Your Data", SectionType.YOUR_DATA, tileModels),
         SectionModel("Data know how", SectionType.DATA_KNOW_HOW, tileModels),
-        SectionModel("Toools", SectionType.TOOLS, tileModels)
+        SectionModel("Tools", SectionType.TOOLS, tileModels)
     )
     createScreen(sectionModels = sections)
 }

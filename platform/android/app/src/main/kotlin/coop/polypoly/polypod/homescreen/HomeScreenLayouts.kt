@@ -18,6 +18,7 @@ data class TileLayout(
     val textBottomPadding: Dp,
     val textStartPadding: Dp,
     val textEndPadding: Dp,
+    val borderWidth: Dp,
 ) {
     companion object {
         fun smallCard(width: Float, height: Float): TileLayout {
@@ -34,7 +35,8 @@ data class TileLayout(
                 textTopPadding = 0.dp,
                 textBottomPadding = 0.dp,
                 textStartPadding = 0.dp,
-                textEndPadding = 0.dp
+                textEndPadding = 0.dp,
+                borderWidth = PolyStyle().border.size._1x
             )
         }
 
@@ -52,7 +54,8 @@ data class TileLayout(
                 textTopPadding = PolyStyle().spacing._2x,
                 textBottomPadding = PolyStyle().spacing._2x,
                 textStartPadding = PolyStyle().spacing._3x,
-                textEndPadding = PolyStyle().spacing._4x
+                textEndPadding = PolyStyle().spacing._4x,
+                borderWidth = PolyStyle().border.size._1x
             )
         }
 
@@ -70,7 +73,8 @@ data class TileLayout(
                 textTopPadding = 0.dp,
                 textBottomPadding = 0.dp,
                 textStartPadding = 0.dp,
-                textEndPadding = 0.dp
+                textEndPadding = 0.dp,
+                borderWidth = PolyStyle().border.size._1x
             )
         }
     }
