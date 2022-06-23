@@ -67,6 +67,9 @@ object FeatureStorage {
         categories.clear()
 
         for (rawCategory in rawCategories) {
+            if (rawCategory.features.isEmpty()) {
+                continue
+            }
             val categoryId = FeatureCategory.valueOf(rawCategory.id)
             val features: MutableList<Feature> = ArrayList()
 
