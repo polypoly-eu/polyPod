@@ -170,7 +170,7 @@ class PolyOutTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
     }
 
-    func importArchive(url: String, destUrl: String? = nil, polyOut: PolyOut) -> String? {
+    private func importArchive(url: String, destUrl: String? = nil, polyOut: PolyOut) -> String? {
         let expectation = expectation(description: "Exp")
         var newURL: String?
         polyOut.importArchive(url: url, destUrl: destUrl) { newUrl in
@@ -181,7 +181,7 @@ class PolyOutTests: XCTestCase {
         return newURL
     }
 
-    func readDir(url: String, polyOut: PolyOut) -> ([[String: String]]?, Error?) {
+    private func readDir(url: String, polyOut: PolyOut) -> ([[String: String]]?, Error?) {
         let expectation = expectation(description: "Exp")
         var _stuff: [[String: String]]?
         var _error: Error?

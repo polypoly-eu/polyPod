@@ -33,3 +33,4 @@ opt_in_rules:
     - sorted_imports
     - static_operator
     - strong_iboutlet
+    - test_case_accessibility

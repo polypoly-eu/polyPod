@@ -1,7 +1,7 @@
 import XCTest
 
 class UpdateNotificationTest: XCTestCase {
-    let app = XCUIApplication()
+    private let app = XCUIApplication()
 
     // swiftlint:disable empty_xctest_method
     override func setUp() {
