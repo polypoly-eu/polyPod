@@ -1,5 +1,5 @@
 {
-  "name": "polyTalkPreview",
+  "name": "poly-talk-preview",
   "version": "0.0.1",
   "description": "Generated from poly-cli; use your own here",
   "main": "src/index.jsx",
