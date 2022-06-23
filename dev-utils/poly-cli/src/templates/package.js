@@ -17,6 +17,7 @@ export function packageTemplate(
             main: main,
             scripts: {
                 build: "rollup -c",
+                watch: "rollup --watch -c",
                 test: 'echo "Error: no test specified" && exit 1',
             },
             devDependencies: {
