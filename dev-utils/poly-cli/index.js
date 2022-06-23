@@ -33,71 +33,8 @@ Please change to «features»`);
     exit(1);
 }
 
-function setup(feature_name, author, version, description, license) {
-    // folders are objects, files are strings.
-    var structure = {};
-
-    // Remember "leaves" before subdirectories, or mkdir will fail
-    structure[feature_name] = {
-        src: {
-            "index.jsx": () =>
-                readFileSync(
-                    path.resolve(__dirname, "./src/static/templates/index.jsx")
-                ),
-            "styles.css": () =>
-                readFileSync(
-                    path.resolve(__dirname, "./src/static/templates/styles.css")
-                ),
-            locales: {
-                en: {
-                    "common.json": () =>
-                        readFileSync(
-                            path.resolve(
-                                __dirname,
-                                "./src/static/templates/locales/en/common.json"
-                            )
-                        ),
-                },
-                de: {
-                    "common.json": () =>
-                        readFileSync(
-                            path.resolve(
-                                __dirname,
-                                "./src/static/templates/locales/de/common.json"
-                            )
-                        ),
-                },
-            },
-            static: {
-                "manifest.json": () => manifestTemplate(feature_name, author),
-                "index.html": () =>
-                    readFileSync(
-                        path.resolve(
-                            __dirname,
-                            "./src/static/templates/index.html"
-                        )
-                    ),
-            },
-        },
-        test: [],
-        "package.json": () =>
-            packageTemplate(
-                feature_name,
-                version,
-                description,
-                "src/index.jsx",
-                author,
-                license
-            ),
-        "README.md": () => readmeTemplate(feature_name, description),
-        "rollup.config.mjs": () =>
-            readFileSync(
-                path.resolve(
-                    __dirname,
-                    "./src/static/templates/rollup.config.mjs"
-                )
-            ),
-    };
+function setup(structure) {
+    let feature_name = Object.keys(structure)[0];
 
     if (existsSync(`./${feature_name}`)) {
         printErrorMsg("Feature already exists in this folder. Aborting!");
@@ -232,29 +169,165 @@ function handleCreateFeature(arg) {
     if (arg.type === "empty") {
         handleCreateEmptyFeature(arg);
     } else if (arg.type === "preview") {
-        handleCreatePreviewFeature();
+        handleCreatePreviewFeature(arg);
     } else if (arg.type === "importer") {
-        handleCreateImporterFeature();
+        handleCreateImporterFeature(arg);
     } else {
         printErrorMsg(`Feature type ${arg.type} not recognized. Aborting!`);
     }
 }
 
 function handleCreateEmptyFeature(arg) {
-    setup(
-        arg.name,
-        arg.author,
-        arg.featureVersion,
-        arg.description,
-        arg.license
-    );
+    let feature_name = arg.name;
+    let author = arg.author;
+    let version = arg.featureVersion;
+    let description = arg.description;
+    let license = arg.license;
+
+    // folders are objects, files are strings.
+    var structure = {};
+
+    // Remember "leaves" before subdirectories, or mkdir will fail
+    structure[feature_name] = {
+        src: {
+            "index.jsx": () =>
+                readFileSync(
+                    path.resolve(__dirname, "./src/static/templates/index.jsx")
+                ),
+            "styles.css": () =>
+                readFileSync(
+                    path.resolve(__dirname, "./src/static/templates/styles.css")
+                ),
+            locales: {
+                en: {
+                    "common.json": () =>
+                        readFileSync(
+                            path.resolve(
+                                __dirname,
+                                "./src/static/templates/locales/en/common.json"
+                            )
+                        ),
+                },
+                de: {
+                    "common.json": () =>
+                        readFileSync(
+                            path.resolve(
+                                __dirname,
+                                "./src/static/templates/locales/de/common.json"
+                            )
+                        ),
+                },
+            },
+            static: {
+                "manifest.json": () => manifestTemplate(feature_name, author),
+                "index.html": () =>
+                    readFileSync(
+                        path.resolve(
+                            __dirname,
+                            "./src/static/templates/index.html"
+                        )
+                    ),
+            },
+        },
+        test: [],
+        "package.json": () =>
+            packageTemplate(
+                feature_name,
+                version,
+                description,
+                "src/index.jsx",
+                author,
+                license
+            ),
+        "README.md": () => readmeTemplate(feature_name, description),
+        "rollup.config.mjs": () =>
+            readFileSync(
+                path.resolve(
+                    __dirname,
+                    "./src/static/templates/rollup.config.mjs"
+                )
+            ),
+    };
+
+    setup(structure, feature_name);
 }
 
-function handleCreatePreviewFeature() {
-    printUnderConstruction();
+function handleCreatePreviewFeature(arg) {
+    let feature_name = arg.name;
+    let author = arg.author;
+    let version = arg.featureVersion;
+    let description = arg.description;
+    let license = arg.license;
+
+    // folders are objects, files are strings.
+    var structure = {};
+
+    // Remember "leaves" before subdirectories, or mkdir will fail
+    structure[feature_name] = {
+        src: {
+            "index.jsx": () =>
+                readFileSync(
+                    path.resolve(__dirname, "./src/static/templates/index.jsx")
+                ),
+            "styles.css": () =>
+                readFileSync(
+                    path.resolve(__dirname, "./src/static/templates/styles.css")
+                ),
+            locales: {
+                en: {
+                    "common.json": () =>
+                        readFileSync(
+                            path.resolve(
+                                __dirname,
+                                "./src/static/templates/locales/en/common.json"
+                            )
+                        ),
+                },
+                de: {
+                    "common.json": () =>
+                        readFileSync(
+                            path.resolve(
+                                __dirname,
+                                "./src/static/templates/locales/de/common.json"
+                            )
+                        ),
+                },
+            },
+            static: {
+                "manifest.json": () => manifestTemplate(feature_name, author),
+                "index.html": () =>
+                    readFileSync(
+                        path.resolve(
+                            __dirname,
+                            "./src/static/templates/index.html"
+                        )
+                    ),
+            },
+        },
+        test: [],
+        "package.json": () =>
+            packageTemplate(
+                feature_name,
+                version,
+                description,
+                "src/index.jsx",
+                author,
+                license
+            ),
+        "README.md": () => readmeTemplate(feature_name, description),
+        "rollup.config.mjs": () =>
+            readFileSync(
+                path.resolve(
+                    __dirname,
+                    "./src/static/templates/rollup.config.mjs"
+                )
+            ),
+    };
+
+    setup(structure, feature_name);
 }
 
-function handleCreateImporterFeature() {
+function handleCreateImporterFeature(arg) {
     printUnderConstruction();
 }
 
