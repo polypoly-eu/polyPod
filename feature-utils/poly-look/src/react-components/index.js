@@ -23,6 +23,8 @@ import {
 import { RoutingWrapper } from "./routing";
 import { Infographic, Tooltip, InfographicLegend } from "./infographic";
 import Slideshow from "./slideshow/slideshow.jsx";
+import { ProgressIcon, ProgressBanner } from "./banners";
+
 export {
   Chip,
   InfoBox,
@@ -52,4 +54,6 @@ export {
   Tooltip,
   InfographicLegend,
   Slideshow,
+  ProgressIcon,
+  ProgressBanner,
 };
