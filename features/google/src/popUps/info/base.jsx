@@ -11,7 +11,6 @@ const BaseInfoPopUp = ({ onClose, name }) => {
             onClose={onClose}
             open={true}
             lastChildSelector=".poly-button"
-            leftDistance="25vw"
             Component={(props) => (
                 <SideSheet
                     title={i18n.t("commonInfoScreen:baseInfo.title1")}
