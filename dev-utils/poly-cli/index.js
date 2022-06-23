@@ -2,7 +2,14 @@
 
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { existsSync, mkdirSync, writeFileSync, readFileSync } from "fs";
+// import {
+//     existsSync,
+//     mkdirSync,
+//     writeFileSync,
+//     readFileSync,
+//     copySync,
+// } from "fs-extra";
+import fs from "fs-extra";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
 import path from "path";
@@ -25,7 +32,7 @@ import { exit } from "process";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-if (existsSync("../dev-utils/rollup-plugin-copy-watch")) {
+if (fs.existsSync("../dev-utils/rollup-plugin-copy-watch")) {
     printInfoMsg("✓ Running from the right path!");
 } else {
     printErrorMsg(`This directory ${__dirname} will make the script fail
@@ -36,7 +43,7 @@ Please change to «features»`);
 function setup(structure) {
     let feature_name = Object.keys(structure)[0];
 
-    if (existsSync(`./${feature_name}`)) {
+    if (fs.existsSync(`./${feature_name}`)) {
         printErrorMsg("Feature already exists in this folder. Aborting!");
         return;
     }
@@ -191,17 +198,17 @@ function handleCreateEmptyFeature(arg) {
     structure[feature_name] = {
         src: {
             "index.jsx": () =>
-                readFileSync(
+                fs.readFileSync(
                     path.resolve(__dirname, "./src/static/templates/index.jsx")
                 ),
             "styles.css": () =>
-                readFileSync(
+                fs.readFileSync(
                     path.resolve(__dirname, "./src/static/templates/styles.css")
                 ),
             locales: {
                 en: {
                     "common.json": () =>
-                        readFileSync(
+                        fs.readFileSync(
                             path.resolve(
                                 __dirname,
                                 "./src/static/templates/locales/en/common.json"
@@ -210,7 +217,7 @@ function handleCreateEmptyFeature(arg) {
                 },
                 de: {
                     "common.json": () =>
-                        readFileSync(
+                        fs.readFileSync(
                             path.resolve(
                                 __dirname,
                                 "./src/static/templates/locales/de/common.json"
@@ -221,7 +228,7 @@ function handleCreateEmptyFeature(arg) {
             static: {
                 "manifest.json": () => manifestTemplate(feature_name, author),
                 "index.html": () =>
-                    readFileSync(
+                    fs.readFileSync(
                         path.resolve(
                             __dirname,
                             "./src/static/templates/index.html"
@@ -241,7 +248,7 @@ function handleCreateEmptyFeature(arg) {
             ),
         "README.md": () => readmeTemplate(feature_name, description),
         "rollup.config.mjs": () =>
-            readFileSync(
+            fs.readFileSync(
                 path.resolve(
                     __dirname,
                     "./src/static/templates/rollup.config.mjs"
@@ -271,27 +278,27 @@ function handleCreatePreviewFeature(arg) {
     structure[feature_name] = {
         src: {
             "index.jsx": () =>
-                readFileSync(
+                fs.readFileSync(
                     path.resolve(
                         __dirname,
                         "./src/static/templates/preview/index.jsx"
                     )
                 ),
             "styles.css": () =>
-                readFileSync(
+                fs.readFileSync(
                     path.resolve(__dirname, "./src/static/templates/styles.css")
                 ),
             locales: {
                 en: {
                     "common.json": () =>
-                        readFileSync(
+                        fs.readFileSync(
                             path.resolve(
                                 __dirname,
                                 "./src/static/templates/locales/en/common.json"
                             )
                         ),
                     "preview.json": () =>
-                        readFileSync(
+                        fs.readFileSync(
                             path.resolve(
                                 __dirname,
                                 "./src/static/templates/locales/en/preview.json"
@@ -300,14 +307,14 @@ function handleCreatePreviewFeature(arg) {
                 },
                 de: {
                     "common.json": () =>
-                        readFileSync(
+                        fs.readFileSync(
                             path.resolve(
                                 __dirname,
                                 "./src/static/templates/locales/de/common.json"
                             )
                         ),
                     "preview.json": () =>
-                        readFileSync(
+                        fs.readFileSync(
                             path.resolve(
                                 __dirname,
                                 "./src/static/templates/locales/de/preview.json"
@@ -316,16 +323,17 @@ function handleCreatePreviewFeature(arg) {
                 },
             },
             static: {
+                fonts: path.resolve(__dirname, "./src/static/fonts"),
                 "manifest.json": () => manifestTemplate(feature_name, author),
                 "index.html": () =>
-                    readFileSync(
+                    fs.readFileSync(
                         path.resolve(
                             __dirname,
                             "./src/static/templates/index.html"
                         )
                     ),
                 "content.json": () =>
-                    readFileSync(
+                    fs.readFileSync(
                         path.resolve(
                             __dirname,
                             "./src/static/templates/preview/content.json"
@@ -345,7 +353,7 @@ function handleCreatePreviewFeature(arg) {
             ),
         "README.md": () => readmeTemplate(feature_name, description),
         "rollup.config.mjs": () =>
-            readFileSync(
+            fs.readFileSync(
                 path.resolve(
                     __dirname,
                     "./src/static/templates/rollup.config.mjs"
@@ -364,12 +372,14 @@ function createDirectoryStructure(structure, parent = ".") {
     for (const key in structure) {
         if (typeof structure[key] === "object") {
             let dir = parent + "/" + key;
-            if (!existsSync(dir)) {
-                mkdirSync(dir);
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir);
             }
             createDirectoryStructure(structure[key], dir);
         } else if (structure[key] instanceof Function) {
-            writeFileSync(parent + "/" + key, structure[key]());
+            fs.writeFileSync(parent + "/" + key, structure[key]());
+        } else if (typeof structure[key] === "string") {
+            fs.copySync(structure[key], parent + "/" + key);
         }
     }
 }
