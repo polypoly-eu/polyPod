@@ -2,13 +2,6 @@
 
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-// import {
-//     existsSync,
-//     mkdirSync,
-//     writeFileSync,
-//     readFileSync,
-//     copySync,
-// } from "fs-extra";
 import fs from "fs-extra";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
@@ -260,11 +253,6 @@ function handleCreateEmptyFeature(arg) {
 }
 
 function handleCreatePreviewFeature(arg) {
-    // TODO:
-    // 1. New translations - preview.json
-    // 2. Add content file - content.json
-    // 3. New index file with the logic.
-
     let feature_name = arg.name;
     let author = arg.author;
     let version = arg.featureVersion;
@@ -286,7 +274,10 @@ function handleCreatePreviewFeature(arg) {
                 ),
             "styles.css": () =>
                 fs.readFileSync(
-                    path.resolve(__dirname, "./src/static/templates/styles.css")
+                    path.resolve(
+                        __dirname,
+                        "./src/static/templates/preview/styles.css"
+                    )
                 ),
             locales: {
                 en: {
