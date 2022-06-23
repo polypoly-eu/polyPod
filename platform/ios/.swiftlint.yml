@@ -14,3 +14,4 @@ opt_in_rules:
     - last_where
     - private_action
     - prohibited_interface_builder
+    - return_value_from_void_function

@@ -8,7 +8,7 @@ protocol NetworkProtocol {
         authToken: String?,
         allowInsecure: Bool
     ) -> Result<Data, PodApiError>
-    
+
     func httpGet(
         url: String,
         contentType: String?,
@@ -34,7 +34,7 @@ final class Network: NetworkProtocol {
             allowInsecure: allowInsecure
         )
     }
-    
+
     func httpGet(
         url: String,
         contentType: String?,
@@ -60,8 +60,8 @@ final class Network: NetworkProtocol {
         authToken: String?,
         allowInsecure: Bool
     ) -> Result<Data, PodApiError> {
-    // swiftlint:enable function_parameter_count
-        
+        // swiftlint:enable function_parameter_count
+
         validateURL(url)
 
         var request = URLRequest(url: requestURL)
@@ -69,11 +69,11 @@ final class Network: NetworkProtocol {
         if body != nil {
             request.httpBody = body!.data(using: .utf8)
         }
-        
+
         if let contentType = contentType {
             request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         }
-        
+
         if let authToken = authToken {
             let encoded = Data(authToken.utf8).base64EncodedString()
             request.setValue(
@@ -81,51 +81,51 @@ final class Network: NetworkProtocol {
                 forHTTPHeaderField: "Authorization"
             )
         }
-        
+
         let semaphore = DispatchSemaphore(value: 0)
         var fetchError: PodApiError?
         var responseData: Data?
         let task = URLSession.shared.dataTask(with: request) { data, response, error in defer {
-                semaphore.signal()
-            }
-            guard let response = response as? HTTPURLResponse,
-                  error == nil else {
-                semaphore.signal()
-                return
-            }
-            
-            guard (200 ... 299) ~= response.statusCode else {
-                fetchError = PodApiError.networkError(
-                    "http\(type)",
-                    message: "Bad response code: \(String(response.statusCode))"
-                )
-                semaphore.signal()
-                return
-            }
-            
-            guard let data = data else {
-                fetchError = PodApiError.networkError(
-                    "http\(type)",
-                    message: "Bad response code: \(String(response.statusCode))"
-                )
-                return
-            }
-            responseData = data
             semaphore.signal()
+        }
+        guard let response = response as? HTTPURLResponse,
+              error == nil else {
+            semaphore.signal()
+            return
+        }
+
+        guard (200 ... 299) ~= response.statusCode else {
+            fetchError = PodApiError.networkError(
+                "http\(type)",
+                message: "Bad response code: \(String(response.statusCode))"
+            )
+            semaphore.signal()
+            return
+        }
+
+        guard let data = data else {
+            fetchError = PodApiError.networkError(
+                "http\(type)",
+                message: "Bad response code: \(String(response.statusCode))"
+            )
+            return
+        }
+        responseData = data
+        semaphore.signal()
         }
         task.resume()
         semaphore.wait()
-        
+
         if responseData == nil && fetchError == nil {
             fetchError = PodApiError.networkError("http\(type)", message: "Bad response code: 400")
         }
-        
+
         return fetchError == nil ? .success(responseData!) : .failure(fetchError!)
     }
 
-    private func validateURL(url: String) {
+    private func validateURL(url: String) -> Result<String, JSONError> {
         let requestURL = URL(string: url)!
-        
+
         guard requestURL.scheme != nil else {
             return .failure(PodApiError.networkError(type, message: "Bad URL: \(url)"))
         }
