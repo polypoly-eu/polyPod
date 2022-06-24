@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import { Slideshow, Screen, ClickableCard } from "@polypoly-eu/poly-look";
+import {
+    Slideshow,
+    Screen,
+    ClickableCard,
+    ProgressBanner,
+} from "@polypoly-eu/poly-look";
 import content from "./static/content.json";
 import i18n from "!silly-i18n";
 
@@ -52,6 +57,11 @@ const App = () => {
     return (
         <Screen className="poly-theme-light" layout="poly-standard-layout">
             <div className="preview">
+                <ProgressBanner
+                    stage={content.progress_banner.stage}
+                    title={i18n.t(content.progress_banner.title)}
+                    description={i18n.t(content.progress_banner.description)}
+                />
                 <h1>{i18n.t(content.title)}</h1>
                 <div>
                     {content.sections.map((s, i) => (

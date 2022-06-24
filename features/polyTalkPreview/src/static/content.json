@@ -1,4 +1,9 @@
 {
+    "progress_banner": {
+        "stage": 1,
+        "title": "preview:progress_banner_title",
+        "description": "preview:progress_banner_description"
+    },
     "title": "preview:title",
     "sections": [
         {
