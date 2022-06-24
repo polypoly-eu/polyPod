@@ -1,9 +1,11 @@
 import { Status, statusTypes } from "@polypoly-eu/poly-import";
 import { readJSONDataArray } from "./utils/importer-util.js";
+import { readRdfObject, writeRdfObject } from "./utils/rdf.js";
 
 export const LANGUAGE_AND_LOCALE_FILE_PATH =
     "preferences/language_and_locale.json";
 export const LANGUAGE_AND_LOCALE_DATA_KEY = "language_and_locale_v2";
+const LANGUAGE_AND_LOCALE_STORED_DATA_KEY = "preferredLanguage";
 
 /**
  * Attempt to extract the language set by the user in the profile.
@@ -63,15 +65,28 @@ export default class LanguageAndLocaleImporter {
     }
 
     async import({ zipFile, facebookAccount }) {
-        const languageData = await this.readLanguageData(zipFile);
-        facebookAccount.preferredLanguage =
-            this.extractPreferredLanguge(languageData);
+        const storedLanguage = await readRdfObject(
+            LANGUAGE_AND_LOCALE_STORED_DATA_KEY
+        );
 
-        if (!facebookAccount.preferredLanguage) {
+        if (storedLanguage) {
+            facebookAccount[LANGUAGE_AND_LOCALE_STORED_DATA_KEY] =
+                storedLanguage;
+            console.log("used rdf - preferredLanguage");
+            return;
+        }
+
+        const languageData = await this.readLanguageData(zipFile);
+        const preferredLanguage = this.extractPreferredLanguge(languageData);
+        facebookAccount[LANGUAGE_AND_LOCALE_STORED_DATA_KEY] =
+            preferredLanguage;
+
+        if (!facebookAccount[LANGUAGE_AND_LOCALE_STORED_DATA_KEY]) {
             return new Status({
                 name: statusTypes.warning,
                 message: "Could not extract preferredLanguage",
             });
         }
+        writeRdfObject(LANGUAGE_AND_LOCALE_STORED_DATA_KEY, preferredLanguage);
     }
 }

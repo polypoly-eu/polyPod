@@ -1,4 +1,5 @@
 const facebookNs = "http://polypoly.coop/schema/facebook#";
+const fbNsProperty = `${facebookNs}property:`;
 const rdf = "https://www.w3.org/1999/02/22-rdf-syntax-ns#";
 
 export async function readAttrFromRdf(archiveUri, attr) {
@@ -24,11 +25,7 @@ export function writeRdfSeq(id, list) {
     const { dataFactory: df, polyIn: ds } = window.pod;
     const subject = df.blankNode(facebookNs + id);
     ds.add(
-        df.quad(
-            subject,
-            df.namedNode(`${rdf}:type`),
-            df.namedNode(`${rdf}:Seq`)
-        )
+        df.quad(subject, df.namedNode(`${rdf}type`), df.namedNode(`${rdf}Seq`))
     );
     list.forEach((value, index) =>
         ds.add(
@@ -47,8 +44,8 @@ export async function readRdfSeq(id) {
     if (
         !quads.some(
             (quad) =>
-                quad.predicate.value === `${rdf}:type` &&
-                quad.object.value === `${rdf}:Seq`
+                quad.predicate.value === `${rdf}type` &&
+                quad.object.value === `${rdf}Seq`
         )
     )
         return null;
@@ -64,4 +61,50 @@ export async function readRdfSeq(id) {
         .filter((quad) => !!quad)
         .sort((a, b) => a.index - b.index)
         .map(({ value }) => value);
+}
+
+export async function writeRdfObject(id, obj) {
+    //only strings supported
+    const { dataFactory: df, polyIn: ds } = window.pod;
+    const subject = df.blankNode(facebookNs + id);
+
+    ds.add(
+        df.quad(
+            subject,
+            df.namedNode(`${rdf}type`),
+            df.namedNode(`${facebookNs}Obj`)
+        )
+    );
+
+    Object.entries(obj).forEach(([key, value]) =>
+        ds.add(
+            df.quad(
+                subject,
+                df.namedNode(`${fbNsProperty}${key}`),
+                df.literal(value)
+            )
+        )
+    );
+}
+
+export async function readRdfObject(id) {
+    //only strings supported
+    const { dataFactory: df, polyIn: ds } = window.pod;
+    const quads = await ds.match({ subject: df.blankNode(facebookNs + id) });
+    if (
+        !quads.some(
+            (quad) =>
+                quad.predicate.value === `${rdf}type` &&
+                quad.object.value === `${facebookNs}Obj`
+        )
+    )
+        return null;
+
+    const obj = {};
+    quads.forEach((quad) => {
+        const property = quad.predicate.value;
+        if (!property.match(new RegExp(fbNsProperty))) return null;
+        obj[property.replace(fbNsProperty, "")] = quad.object.value;
+    });
+    return obj;
 }
