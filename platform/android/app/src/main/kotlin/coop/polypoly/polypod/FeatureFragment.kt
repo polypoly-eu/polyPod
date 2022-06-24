@@ -111,14 +111,15 @@ open class FeatureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        feature = FeatureStorage.featureForId(args.featureId)!!
-        (view.findViewById(R.id.feature_title) as TextView).text =
-            feature.name
-        logger.debug(
-            "Inside FeatureFragment, feature to load: '{}'",
-            feature.name
-        )
-        setupFeature(view)
+
+        FeatureStorage.featureForId(args.featureId)?.let {
+            (view.findViewById(R.id.feature_title) as TextView).text = it.name
+            logger.debug(
+                "Inside FeatureFragment, feature to load: '{}'",
+                it.name
+            )
+	    }
+	    setupFeature(view)
     }
 
     private fun setupFeature(view: View) {

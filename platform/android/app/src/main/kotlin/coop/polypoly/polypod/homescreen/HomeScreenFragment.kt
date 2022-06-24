@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.accompanist.flowlayout.FlowRow
+import coop.polypoly.polypod.PolySpacing
 import coop.polypoly.polypod.R
 
 class HomeScreenFragment : Fragment() {
@@ -41,7 +42,6 @@ class HomeScreenFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 Scaffold(
-                    modifier = Modifier.padding(bottom = 10.dp),
                     topBar = {
                         topBar(
                             onInfoClick = {
@@ -171,11 +171,12 @@ fun Screen(screen: Screen) {
         ),
         modifier = Modifier
             .width(screen.layout.width)
+            .verticalScroll(scrollState)
             .padding(
                 start = screen.layout.horizontalPadding,
-                end = screen.layout.horizontalPadding
+                end = screen.layout.horizontalPadding,
+                bottom = screen.layout.verticalSpacing
             )
-            .verticalScroll(scrollState)
     ) {
         screen.sections.forEach {
             Section(it)

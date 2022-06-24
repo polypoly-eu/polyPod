@@ -12,7 +12,7 @@ import java.util.zip.ZipFile
 class Feature(
     private val fileName: String,
     val content: ZipFile,
-    val context: Context,
+    private val context: Context,
     private val manifest: FeatureManifest?
 ) {
     val id: String get() = fileName.replace(".zip", "")
@@ -29,7 +29,7 @@ class Feature(
 
     val borderColor: Int
         get() = runCatching { Color.parseColor(manifest?.borderColor) }
-            .getOrDefault(borderColor)
+            .getOrDefault(primaryColor)
 
     val thumbnail: Bitmap?
         get() {
