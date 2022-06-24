@@ -1,7 +1,7 @@
+import { relevantZipEntries } from "@polypoly-eu/poly-analysis";
 import AccessLogEntry from "../entities/access-log-entry";
 import { readCsvFromText } from "./utils/importer-utils";
-
-const accessLogRegex = /\/Access Log Activity\/.*\.csv$/;
+import { matchRegex } from "./utils/lang-constants";
 
 class AccessLogParser {
     constructor() {}
@@ -24,18 +24,35 @@ class AccessLogParser {
         const content = await entry.getContent();
         const text = await new TextDecoder("utf-8").decode(content);
         const data = this._dataFromCsv(text);
-        return data;
+        const pathParts = entry.path.split("/");
+        const fileName = pathParts[pathParts.length - 2];
+
+        return {
+            csvData: data,
+            fileSummary: { size: content.byteLength, fileName },
+        };
     }
 }
 
 export default class AccessLogImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
-        const entries = await zipFile.getEntries();
-        const accessLog = entries.filter(({ path }) =>
-            accessLogRegex.test(path)
+        const entries = await relevantZipEntries(zipFile);
+        const accessLogEntries = entries.filter(({ path }) =>
+            matchRegex(path, this)
         );
-
         const parser = new AccessLogParser();
-        googleAccount.accessLog = await parser.parse(accessLog[0]);
+        const parserOutput = (
+            await Promise.all(
+                accessLogEntries.map((entry) => parser.parse(entry))
+            )
+        ).flat();
+
+        googleAccount.accessLog = parserOutput
+            .map((output) => output.csvData)
+            .flat();
+
+        googleAccount.accessLogSummary = parserOutput.map(
+            (output) => output.fileSummary
+        );
     }
 }

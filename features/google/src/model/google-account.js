@@ -7,6 +7,9 @@ export default class GoogleAccount extends DataAccount {
         this.activitySegments = [];
         this.activities = [];
         this.pathNames = [];
+        this.accessLog = [];
+        this.accessLogSummary = [];
+        this.activityFileInfo = [];
     }
 
     get dataGroups() {
@@ -16,11 +19,15 @@ export default class GoogleAccount extends DataAccount {
                 count: this.placeVisits.length,
             },
             {
+                title: "Access Log",
+                count: this.accessLog.length,
+            },
+            {
                 title: "Activity Segments",
                 count: this.activitySegments.length,
             },
             {
-                title: "Acitivities",
+                title: "Activities",
                 count: this.activities.length,
             },
         ];

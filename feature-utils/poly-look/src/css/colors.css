@@ -30,6 +30,8 @@
   --color-gray-700: #525e72;
   --color-gray-800: #3e495b;
 
+  --color-blue: #3BA6FF;
+
   /* We use this instead of transparent for ios compatibility */
   --transparent: rgba(0, 0, 0, 0);
   --transparent-light: rgba(247, 250, 252, 0);

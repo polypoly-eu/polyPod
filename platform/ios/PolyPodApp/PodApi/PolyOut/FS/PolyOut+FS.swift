@@ -92,7 +92,7 @@ extension PolyOut {
                     size: try calculateFileSize(filePath.path),
                     time: "\(Int(floor(time.timeIntervalSince1970)))",
                     name: name ?? URL(fileURLWithPath: filePath.path).lastPathComponent,
-                    id: idFromPodUrl(url) ?? ""
+                    id: url
                 ), nil)
             }
             catch {
@@ -234,12 +234,17 @@ extension PolyOut {
     
     func removeArchive(fileId: String, completionHandler: (Error?) -> Void) {
         do {
-            let path = fsUriFromId(fileId).path
+            guard let id = idFromPodUrl(fileId) else {
+                throw PolyOutError.failedToParsePath(fileId)
+            }
+            let path = fsUriFromId(id).path
             if FileManager.default.fileExists(atPath: path) {
                 try FileManager.default.removeItem(atPath: path)
             }
         }
-        catch {}
+        catch {
+            completionHandler(error)
+        }
         var fileStore = UserDefaults.standard.value(
             forKey: PolyOut.fsKey
         ) as? [String:[String]] ?? [:]

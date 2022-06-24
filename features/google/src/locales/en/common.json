@@ -1,7 +1,18 @@
 {
     "loading": "Loading...",
+    "your.google.data": "Your Google Data",
+    "source": "Source",
     "source.your.google.data": "Source: Your Google data",
     "total.years": "Years since you joined Google",
     "months.abbreviation": "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec",
-    "details": "Details"
+    "details": "Details",
+    "explore": "Explore",
+    "proceed": "Proceed",
+    "back": "Back",
+    "button.ok": "OK",
+    "format.byte": "1 byte",
+    "format.bytes": "bytes",
+    "format.KB": "KB",
+    "format.MB": "MB",
+    "format.GB": "GB"
 }

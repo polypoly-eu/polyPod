@@ -1,8 +1,7 @@
+import { relevantZipEntries } from "@polypoly-eu/poly-analysis";
 import ActivitySegment from "../entities/activity-segment";
 import PlaceVisit from "../entities/place-visit";
-
-const semanticLocationsRegex =
-    /\/[^/]+\/Semantic Location History\/\d+\/[^.]+\.json$/;
+import { matchRegex } from "./utils/lang-constants";
 
 async function readFullPathJSONFile(entry) {
     const rawContent = await entry.getContent();
@@ -16,7 +15,7 @@ async function readFullPathJSONFile(entry) {
  * - milliseconds: 1394270917000
  * - standard date: "2022-01-19T14:28:16.967Z"
  */
-function extractTimestampFromDuration(duration) {
+function extractStartTimestampFromDuration(duration) {
     if ("startTimestamp" in duration) return new Date(duration.startTimestamp);
     if ("startTimestampMs" in duration)
         return new Date(duration.startTimestampMs);
@@ -24,17 +23,31 @@ function extractTimestampFromDuration(duration) {
         "No start timestamp found in keys: " + Object.keys(duration).toString()
     );
 }
+function extractEndTimestampFromDuration(duration) {
+    if ("endTimestamp" in duration) return new Date(duration.endTimestamp);
+    if ("endTimestampMs" in duration) return new Date(duration.endTimestampMs);
+    throw new Error(
+        "No start timestamp found in keys: " + Object.keys(duration).toString()
+    );
+}
 
 function createPlaceVisit(jsonData) {
     return new PlaceVisit({
-        timestamp: new Date(extractTimestampFromDuration(jsonData.duration)),
+        timestamp: new Date(
+            extractStartTimestampFromDuration(jsonData.duration)
+        ),
+        endTimestamp: new Date(
+            extractEndTimestampFromDuration(jsonData.duration)
+        ),
         locationName: jsonData.location.name,
     });
 }
 
 function createActivitySegment(jsonData) {
     return new ActivitySegment({
-        timestamp: new Date(extractTimestampFromDuration(jsonData.duration)),
+        timestamp: new Date(
+            extractStartTimestampFromDuration(jsonData.duration)
+        ),
         activityType: jsonData.activityType,
     });
 }
@@ -68,9 +81,9 @@ async function parseTimelineObjectsByTypeFromEntry(fileEntry) {
 
 export default class SemanticLocationsImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
-        const entries = await zipFile.getEntries();
+        const entries = await relevantZipEntries(zipFile);
         const semanticLocationEntries = entries.filter(({ path }) =>
-            semanticLocationsRegex.test(path)
+            matchRegex(path, this)
         );
 
         const timelineObjectsByType = await Promise.all(
@@ -78,7 +91,6 @@ export default class SemanticLocationsImporter {
                 parseTimelineObjectsByTypeFromEntry(entry)
             )
         );
-
         let allPlaceVisits = [];
         let allActivitySegments = [];
         timelineObjectsByType.forEach(({ placeVisits, activitySegments }) => {

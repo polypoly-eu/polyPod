@@ -11,12 +11,12 @@
 }
 
 .explore-view .pop-up {
-    width: 100%;
     height: 56px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: calc(var(--gdu) * 5);
+    margin: calc(var(--gdu) * -6) calc(var(--gdu) * -4) 0 calc(var(--gdu) * -4);
     box-sizing: border-box;
 }
 
@@ -40,22 +40,22 @@
     align-items: center;
     color: var(--theme-primary-color);
     background-color: var(--theme-info-button-color);
-    padding: 0px 12px;
+    padding: 0px calc(var(--gdu) * 3);
     margin-left: auto;
-    margin-right: -16px;
-    font-size: 14px;
+    margin-right: calc(var(--gdu) * -4);
+    font-size: var(--font-size-m);
 }
 
 .analysis-card .summary-text {
-    font-size: 16px;
+    font-size: var(--font-size-ml);
     font-weight: 400;
     margin: 0;
 }
 
 .unrecognized-analysis-card {
     background-color: var(--theme-primary-color);
-    padding: 20px;
-    margin: -24px -16px 0 -16px;
+    padding: calc(var(--gdu) * 5);
+    margin: calc(var(--gdu) * -6) calc(var(--gdu) * -4) 0 calc(var(--gdu) * -4);
 }
 
 .unrecognized-analysis-card .unrecognized-analysis-title {
@@ -65,11 +65,11 @@
 .unrecognized-analysis-card .unrecognized-analysis-title h1 {
     font-family: "Jost Medium";
     color: var(--theme-secondary-color);
-    font-size: 24px;
+    font-size: var(--font-size-xl);
     margin: 0;
 }
 
 .unrecognized-analysis-card p {
-    margin: 16px 0;
+    margin: calc(var(--gdu) * 4) 0;
     color: var(--theme-secondary-color);
 }

@@ -8,6 +8,8 @@ import {
     PolyChart,
     INITIAL_HISTORY_STATE,
 } from "@polypoly-eu/poly-look";
+import { L12n } from "@polypoly-eu/silly-i18n";
+
 import { useHistory } from "react-router-dom";
 import i18n from "!silly-i18n";
 import { analyzeFile } from "@polypoly-eu/poly-analysis";
@@ -18,6 +20,8 @@ import {
     BUBBLE_LIGHT_COLOR,
 } from "../../constants/bubbleViz";
 import { GoogleContext } from "../../context/google-context.jsx";
+
+const l12n = new L12n();
 
 const Overview = () => {
     const { account, handleRemoveFile, files, refreshFiles } =
@@ -59,12 +63,32 @@ const Overview = () => {
         return b.value - a.value;
     });
 
+    const formatSize = (size) => {
+        const k = 1024;
+        const decimals = 2;
+        if (size === 1) return i18n.t("common:format.byte");
+        if (size < k) return `${size} ${i18n.t("common:format.bytes")}`;
+        const units = [
+            i18n.t("common:format.KB"),
+            i18n.t("common:format.MB"),
+            i18n.t("common:format.GB"),
+        ];
+        const i = Math.floor(Math.log(size) / Math.log(k));
+        return Math.round(size / Math.pow(k, i), decimals) + " " + units[i - 1];
+    };
+    let fileTime;
+    try {
+        fileTime = l12n.t(new Date(files[0].time));
+    } catch {
+        fileTime = files[0].time;
+    }
     return (
         <Screen className="overview" layout="poly-standard-layout">
-            <h1>Your Google data</h1>
+            <h1>{i18n.t("common:your.google.data")}</h1>
             <p>
-                From all your google data we currently analysed these{" "}
-                {bubbleData.length} categories:
+                {i18n.t("overview:analysed.categories", {
+                    analysed_categories: bubbleData.length,
+                })}
             </p>
             <PolyChart
                 type="bubble-cluster"
@@ -78,19 +102,28 @@ const Overview = () => {
                 }
             />
             {files && files?.[0] && (
-                <p className="poly-small-print">
-                    Imported File: {files[0].name}
-                </p>
+                <>
+                    <p className="poly-small-print">
+                        {i18n.t("overview:imported.file")} {files[0].name}
+                        <br />
+                        {i18n.t("overview:size")} {formatSize(files[0].size)}
+                        <br />
+                        {i18n.t("overview:imported.time")} {fileTime}
+                    </p>
+                </>
             )}
             <PolyButton
-                label="Remove File"
+                label={i18n.t("overview:import.new.file")}
                 onClick={() =>
                     setPopUp({
                         name: "dialog",
-                        title: "Do you really want to delete the file?",
-                        backButton: { text: "Back", onClick: closePopUp },
+                        title: i18n.t("overview:delete.file.confirmation"),
+                        backButton: {
+                            text: i18n.t("common:back"),
+                            onClick: closePopUp,
+                        },
                         proceedButton: {
-                            text: "Proceed",
+                            text: i18n.t("common:proceed"),
                             onClick: onRemoveFile,
                         },
                     })
@@ -98,7 +131,7 @@ const Overview = () => {
                 type="outline"
             ></PolyButton>
             <RoutingWrapper history={history} route="/explore">
-                <PolyButton label="Explore"></PolyButton>
+                <PolyButton label={i18n.t("common:explore")}></PolyButton>
             </RoutingWrapper>
         </Screen>
     );

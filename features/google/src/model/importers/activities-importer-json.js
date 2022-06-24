@@ -1,64 +1,38 @@
 import UserActivity from "../entities/user-activity";
-
-const activityJsonRegex = /\/My Activity\/.*\.json$/;
-
+import ActivityFileInfo from "../entities/activity-file-info";
+import { convertFileSizeUnit } from "./utils/importer-utils";
+import BaseActivitiesImporter from "./base-activities-importer";
 class ActivityJsonParser {
-    constructor() {
-        this._iframe = document.createElement("iframe");
-        this._iframe.style.display = "none";
-        document.body.appendChild(this._iframe);
-    }
-
-    _scrapeTimestamps(contentDocument, productName) {
-        const contentCells = contentDocument.querySelectorAll(
-            ".mdl-grid>.mdl-cell>.mdl-grid>.content-cell:nth-child(2)"
-        );
-        return [...contentCells].map(
-            ({ childNodes }) =>
-                new UserActivity({
-                    timestamp: new Date(
-                        childNodes[childNodes.length - 1].textContent
-                    ),
-                    productName,
-                })
-        );
-    }
-
+    constructor() {}
     async parse(entry) {
         const content = await entry.getContent();
         const text = await new TextDecoder("utf-8").decode(content);
+        const fileSize = convertFileSizeUnit(content.byteLength);
         const jsonObj = JSON.parse(text);
         const pathParts = entry.path.split("/");
         const productName = pathParts[pathParts.length - 2];
-        return jsonObj.map(
-            (entry) =>
-                new UserActivity({
-                    timestamp: new Date(entry.time),
-                    productName,
-                })
-        );
-    }
 
-    release() {
-        document.body.removeChild(this._iframe);
-        this._iframe = null;
+        return {
+            userActivity: jsonObj.map(
+                (entry) =>
+                    new UserActivity({
+                        timestamp: new Date(entry.time),
+                        productName,
+                    })
+            ),
+            fileInfo: new ActivityFileInfo({
+                productName,
+                fileSize,
+            }),
+        };
     }
 }
 
-export default class ActivitiesJsonImporter {
+export default class ActivitiesJsonImporter extends BaseActivitiesImporter {
+    constructor() {
+        super(new ActivityJsonParser());
+    }
     async import({ zipFile, facebookAccount: googleAccount }) {
-        const entries = await zipFile.getEntries();
-        const activityEntries = entries.filter(({ path }) =>
-            activityJsonRegex.test(path)
-        );
-        const parser = new ActivityJsonParser();
-        googleAccount.activities
-            .push(
-                await Promise.all(
-                    activityEntries.map((entry) => parser.parse(entry))
-                )
-            )
-            .flat();
-        parser.release();
+        await super.import({ zipFile, googleAccount });
     }
 }

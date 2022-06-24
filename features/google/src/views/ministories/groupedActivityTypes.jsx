@@ -10,7 +10,7 @@ class GroupedActivityTypesStory extends SingleDataStory {
     }
 
     get title() {
-        return "Grouped Activity Types";
+        return "How you were travelling";
     }
 
     get label() {

@@ -14,7 +14,7 @@ class ActivitiesOverTimeMinistory extends SingleDataStory {
     }
 
     get title() {
-        return i18n.t("activitiesOverTimeStory:title");
+        return i18n.t("activitiesOverTime:title");
     }
 
     _renderSummary() {

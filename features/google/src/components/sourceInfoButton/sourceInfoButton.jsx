@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 
+import i18n from "!silly-i18n";
+
 import { IconButton } from "@polypoly-eu/poly-look";
 import { GoogleContext } from "../../context/google-context.jsx";
 
@@ -10,7 +12,9 @@ const SourceInfoButton = ({ source, className, popUpProps }) => {
 
     return (
         <div className={`source-info-container ${className || ""}`}>
-            <p className="poly-small-print">Source: {source}</p>
+            <p className="poly-small-print">
+                {i18n.t("common:source")}: {source}
+            </p>
             <IconButton
                 icon="question"
                 fillDirection="left"

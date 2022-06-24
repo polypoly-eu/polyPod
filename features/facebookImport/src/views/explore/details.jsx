@@ -1,4 +1,4 @@
-import { PolyImportContext } from "@polypoly-eu/poly-look";
+import { PolyImportContext, Screen } from "@polypoly-eu/poly-look";
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import Story from "../../views/ministories/story.jsx";
@@ -15,10 +15,10 @@ const ExploreDetails = () => {
         mode: Story.MODES.DETAILS,
     });
     return (
-        <div className="details-view">
+        <Screen className="details-view" layout="poly-standard-layout">
             <h1>{activeStory.title}</h1>
             {activeStory.render()}
-        </div>
+        </Screen>
     );
 };
 

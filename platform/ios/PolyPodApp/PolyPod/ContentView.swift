@@ -4,14 +4,14 @@ import LocalAuthentication
 // TODO: This, and other user defaults we use, should move to a central place.
 struct FirstRun {
     static private let key = UserDefaults.Keys.firstRun.rawValue
-    
+
     static func read() -> Bool {
         if UserDefaults.standard.object(forKey: key) == nil {
             return true
         }
         return UserDefaults.standard.bool(forKey: key)
     }
-    
+
     static func write(_ firstRun: Bool) {
         UserDefaults.standard.set(false, forKey: key)
     }
@@ -20,38 +20,45 @@ struct FirstRun {
 struct ContentView: View {
     private struct ViewState {
         let backgroundColor: Color
+        let borderColor: Color
+
         let view: AnyView
-        
-        init(backgroundColor: Color? = nil, _ view: AnyView) {
+
+        init(
+            backgroundColor: Color? = nil,
+            borderColor: Color? = nil,
+            _ view: AnyView
+        ) {
             self.backgroundColor =
                 backgroundColor ?? Color.PolyPod.lightBackground
+            self.borderColor = borderColor ?? Color.PolyPod.grey300Foreground
             self.view = view
         }
     }
-    
+
     @State private var state: ViewState? = nil
     @State private var showUpdateNotification = false
-    @ObservedObject var featureStorage: FeatureStorage
+    var featureStorage: FeatureStorage
     var setStatusBarStyle: ((UIStatusBarStyle) -> Void)? = nil
-    
+
     var body: some View {
         VStack(spacing: 0) {
             let state = initState()
             let safeAreaInsets = UIApplication.shared.windows[0].safeAreaInsets
-            
+
             Rectangle()
                 .fill(state.backgroundColor)
                 .frame(maxWidth: .infinity, maxHeight: safeAreaInsets.top)
-            
+
             state.view
-            
+
             Rectangle()
                 .fill(state.backgroundColor)
                 .frame(maxWidth: .infinity, maxHeight: safeAreaInsets.bottom)
         }
         .edgesIgnoringSafeArea([.top, .bottom])
     }
-    
+
     private func initState() -> ViewState {
         let state = self.state ?? firstRunState()
         setStatusBarStyle?(
@@ -59,14 +66,14 @@ struct ContentView: View {
         )
         return state
     }
-    
+
     private func firstRunState() -> ViewState {
         let notification = UpdateNotification()
         notification.handleStartup()
         if !FirstRun.read() {
             return securityReminderState()
         }
-        
+
         notification.handleFirstRun()
         return ViewState(
             AnyView(
@@ -77,12 +84,27 @@ struct ContentView: View {
             )
         )
     }
-    
+
     private func securityReminderState() -> ViewState {
         if !Authentication.shared.shouldShowPrompt() {
-            return lockedState()
+            return ViewState(
+                AnyView(
+                    UnlockPolyPod(onCompleted: {
+                        // Checking whether a notification needs to be shown
+                        // used to be in featureListState, where it makes more
+                        // sense, but ever since we added a dedicated
+                        // lockedState, they wouldn't show up anymore, the
+                        // state change in featureListState's onAppear did not
+                        // trigger a rerender, even though it should.
+                        // Yet another SwiftUI bug it seems...
+                        showUpdateNotification = UpdateNotification().showInApp
+                        
+                        state = featureListState()
+                    })
+                )
+            )
         }
-        
+
         return ViewState(
             AnyView(
                 OnboardingView(
@@ -94,51 +116,18 @@ struct ContentView: View {
             )
         )
     }
-    
-    private func lockedState() -> ViewState {
-        return ViewState(
-            AnyView(
-                Text("").onAppear {
-                    authenticateRelentlessly {
-                        // Checking whether a notification needs to be shown
-                        // used to be in featureListState, where it makes more
-                        // sense, but ever since we added a dedicated
-                        // lockedState, they wouldn't show up anymore, the
-                        // state change in featureListState's onAppear did not
-                        // trigger a rerender, even though it should.
-                        // Yet another SwiftUI bug it seems...
-                        showUpdateNotification = UpdateNotification().showInApp
-                        
-                        state = featureListState()
-                    }
-                }
-            )
-        )
-    }
-    
-    private func authenticateRelentlessly(
-        _ completeAction: @escaping () -> Void
-    ) {
-        // Apple doesn't want us to close the app programmatically, e.g. in case
-        // authentication fails. Since we don't have a dedicated screen for the
-        // locked state yet, we simply keep asking the user until they stop
-        // cancelling or leave the app.
-        Authentication.shared.authenticate { success in
-            if success {
-                completeAction()
-                return
-            }
-            authenticateRelentlessly(completeAction)
-        }
-    }
-    
+
     private func featureListState() -> ViewState {
         let notification = UpdateNotification()
         return ViewState(
             AnyView(
-                FeatureListView(
-                    featureList: $featureStorage.featuresList,
-                    openFeatureAction: { feature in
+                HomeScreenView(
+                    viewModel: .init(
+                        storage: HomeScreenStorageAdapter(featureStorage: featureStorage)),
+                    openFeatureAction: { featureId in
+                        guard let feature = featureStorage.featureForId(featureId) else {
+                            return
+                        }
                         state = featureState(feature)
                     },
                     openInfoAction: {
@@ -146,6 +135,9 @@ struct ContentView: View {
                     },
                     openSettingsAction: {
                         state = settingsState()
+                    },
+                    openLearnMoreAction: {
+                        // TODO
                     }
                 ).alert(isPresented: $showUpdateNotification) {
                     Alert(
@@ -162,10 +154,11 @@ struct ContentView: View {
             )
         )
     }
-    
+
     private func featureState(_ feature: Feature) -> ViewState {
         ViewState(
             backgroundColor: feature.primaryColor,
+            borderColor: feature.borderColor,
             AnyView(
                 FeatureView(
                     feature: feature,
@@ -176,7 +169,7 @@ struct ContentView: View {
             )
         )
     }
-    
+
     private func infoState() -> ViewState {
         ViewState(
             AnyView(
@@ -186,7 +179,7 @@ struct ContentView: View {
             )
         )
     }
-    
+
     private func settingsState() -> ViewState {
         ViewState(
             AnyView(

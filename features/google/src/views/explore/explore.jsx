@@ -14,6 +14,15 @@ import i18n from "!silly-i18n";
 import "./explore.css";
 import { ministories } from "../ministories/ministories.js";
 import { useHistory } from "react-router-dom";
+import { GoogleContext } from "../../context/google-context.jsx";
+
+const PopUpMessage = ({ children, reportResultAnswer }) => {
+    return (
+        <div className="pop-up-container">
+            <div className={"pop-up" + reportResultAnswer}>{children}</div>
+        </div>
+    );
+};
 
 const ReportCard = () => {
     const history = useHistory();
@@ -21,15 +30,14 @@ const ReportCard = () => {
     return (
         <div className="analysis-card unrecognized-analysis-card poly-theme-light">
             <div className="unrecognized-analysis-title">
-                <h1>{"We need your help!"}</h1>
+                <h1>{i18n.t("explore:reportCard.headline")}</h1>
             </div>
-            <p>
-                {
-                    "If you send us an anonymised report about the structure of your Google data, it would help us improve the Google Data Importer so that it can show you even more insights."
-                }
-            </p>
+            <p>{i18n.t("explore:reportCard.text")}</p>
             <RoutingWrapper route="/report" history={history}>
-                <PolyButton label="Learn more" className="report-button" />
+                <PolyButton
+                    label={i18n.t("explore:reportCard.button")}
+                    className="report-button"
+                />
             </RoutingWrapper>
         </div>
     );
@@ -37,15 +45,49 @@ const ReportCard = () => {
 
 const ExploreView = () => {
     const { account } = useContext(PolyImportContext);
+    const { reportIsSent, handleReportSent } = useContext(GoogleContext);
 
     const history = useHistory();
     const exploreRef = useRef();
+
+    const handleCloseReportResult = () => {
+        handleReportSent(null);
+    };
+
+    const renderReportResult = () =>
+        reportIsSent !== null && (
+            <PopUpMessage
+                reportResultAnswer={
+                    reportIsSent ? " successfully" : " unsuccessfully"
+                }
+            >
+                {reportIsSent ? (
+                    <>
+                        <div>{i18n.t("explore:report.success")}</div>
+                        <img
+                            src="./images/close_green.svg"
+                            alt="close"
+                            onClick={handleCloseReportResult}
+                        />
+                    </>
+                ) : (
+                    <>
+                        <div>{i18n.t("explore:report.error")}</div>
+                        <img
+                            src="./images/close_red.svg"
+                            alt="close"
+                            onClick={handleCloseReportResult}
+                        />
+                    </>
+                )}
+            </PopUpMessage>
+        );
 
     const renderFileAnalyses = () => {
         if (!account) return null;
         return (
             <List>
-                <ReportCard />
+                {!reportIsSent && <ReportCard />}
                 {ministories.map((MinistoryClass, index) => {
                     const ministory = new MinistoryClass({
                         account,
@@ -98,11 +140,12 @@ const ExploreView = () => {
 
     return (
         <Screen
-            className="explore"
+            className="explore-view"
             layout="poly-standard-layout"
             onScroll={saveScrollingProgress}
             scrollingRef={exploreRef}
         >
+            {renderReportResult()}
             {renderFileAnalyses()}
         </Screen>
     );
