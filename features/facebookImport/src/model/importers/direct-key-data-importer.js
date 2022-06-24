@@ -8,10 +8,18 @@ export default class DirectKeyDataImporter {
     }
 
     async import({ zipFile, facebookAccount }) {
-        facebookAccount[this._dataStorageKey] = this.extractData(
+        const storedData = await this._loadStoredData?.();
+        if (storedData) {
+            facebookAccount[this._dataStorageKey] = storedData;
+            console.log("used rdf - " + this._dataStorageKey);
+            return;
+        }
+        const extractedData = this.extractData(
             await readJSONDataArray(this._dataFileName, this._dataKey, zipFile)
         );
+        facebookAccount[this._dataStorageKey] = extractedData;
         facebookAccount.addImportedFileName(this._dataFileName);
+        this._storeData?.(extractedData);
     }
 
     /**
