@@ -118,8 +118,8 @@ open class FeatureFragment : Fragment() {
                 "Inside FeatureFragment, feature to load: '{}'",
                 it.name
             )
-	    }
-	    setupFeature(view)
+        }
+        setupFeature(view)
     }
 
     private fun setupFeature(view: View) {

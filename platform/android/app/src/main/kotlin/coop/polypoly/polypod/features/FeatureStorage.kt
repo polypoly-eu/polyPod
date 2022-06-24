@@ -32,40 +32,40 @@ object FeatureStorage {
     var activeFeatureId: String? = null
 
     val categories: MutableList<FeatureCategoryModel> = ArrayList()
-    
+
     fun importFeatures(context: Context) {
-		val featuresDir = getFeaturesDir(context)
-		logger.warn("Features directory: '{}'", featuresDir.absolutePath)
-		if (!featuresDir.exists()) {
-		    val created = featuresDir.mkdirs()
-		    logger.debug("Directory for Features created: $created")
-		} else {
-		    logger.debug("Directory for Features already exists")
-		}
+        val featuresDir = getFeaturesDir(context)
+        logger.warn("Features directory: '{}'", featuresDir.absolutePath)
+        if (!featuresDir.exists()) {
+            val created = featuresDir.mkdirs()
+            logger.debug("Directory for Features created: $created")
+        } else {
+            logger.debug("Directory for Features already exists")
+        }
 
-		categories.clear()
-		val rawCategories = readCategories(context)
+        categories.clear()
+        val rawCategories = readCategories(context)
 
-		for (rawCategory in rawCategories) {
-		    if (rawCategory.features.isEmpty()) {
-				continue
-		    }
-		    val categoryId = FeatureCategory.valueOf(rawCategory.id)
-		    val features: MutableList<Feature> = ArrayList()
+        for (rawCategory in rawCategories) {
+            if (rawCategory.features.isEmpty()) {
+                continue
+            }
+            val categoryId = FeatureCategory.valueOf(rawCategory.id)
+            val features: MutableList<Feature> = ArrayList()
 
-		    for (featureId in rawCategory.features) {
-				importFeature(context, featureId)
-				features.add(loadFeature(context, featureId))
-		    }
+            for (featureId in rawCategory.features) {
+                importFeature(context, featureId)
+                features.add(loadFeature(context, featureId))
+            }
 
-		    val categoryModel = FeatureCategoryModel(
-				categoryId,
-				rawCategory.name,
-				features
-		    )
+            val categoryModel = FeatureCategoryModel(
+                categoryId,
+                rawCategory.name,
+                features
+            )
 
-		    categories.add(categoryModel)
-		}
+            categories.add(categoryModel)
+        }
     }
 
     fun featureForId(id: String): Feature? {
@@ -76,7 +76,7 @@ object FeatureStorage {
                 }
             }
         }
-		logger.error("No feature '{}' was loaded", id)
+        logger.error("No feature '{}' was loaded", id)
         return null
     }
 
