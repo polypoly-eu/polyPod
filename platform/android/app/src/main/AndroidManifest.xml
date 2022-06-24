@@ -36,6 +36,12 @@
 
         <activity
             android:exported="false"
+            android:name=".PodUnlockActivity"
+            android:label=""
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:exported="false"
             android:name=".settings.SettingsActivity"
             android:label="@string/settings_title"
             android:theme="@style/Theme.AppCompat.Light" />

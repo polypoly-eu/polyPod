@@ -1,0 +1,10 @@
+{
+    "baseInfo.title1": "How to read this?",
+    "baseInfo.title2": "About the data",
+    "bubble.chart": "This diagram is called a <strong>bubble chart</strong>. Each bubble represents one datatype. The number of bubbles shows how many data types there are. The size of each bubble is dependent on the amount of data inside.",
+    "bar.chart": "This diagram is called a <strong>bar chart</strong>. The length of each bar is proportional to the values that it represents.",
+    "infographic.value.category": "(value) category",   
+    "infographic.x.axis": "X-Axis Title (Units)",   
+    "infographic.y.axis": "Y-Axis Title (Units)",
+    "infographic.legend": "Legend"   
+}

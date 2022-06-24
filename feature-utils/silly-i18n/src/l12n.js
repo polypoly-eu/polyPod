@@ -10,7 +10,7 @@ export class L12n {
     /**
      * Class constructor for the localization class. The locale used will be auto-detected (by default)
      * and stored as a private, read-only attribute. This is going to essentially be an encapsulation of
-     * the existing localle, deferring all actual processing to the `Intl` standard library.
+     * the existing locale, deferring all actual processing to the `Intl` standard library.
      *
      * @param {string} [ locale = determineLocale() ] - locale string, in the usual format xx[_YY],
      *     by default locale determined using that function
@@ -55,7 +55,7 @@ export class L12n {
 
     /**
      * Obtains the (translated) string for a `namespace:key` defined in the translations hash.
-     *cd .
+     *
      * @param object - What needs to be translated. For the time being, only translates numbers
      * @returns The locale-formatted string.
      */

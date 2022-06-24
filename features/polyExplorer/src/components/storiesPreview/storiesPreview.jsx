@@ -12,7 +12,7 @@ const StoriesPreview = ({ storiesMetadata }) => {
     const history = useHistory();
 
     return (
-        <List className="poly-theme-light">
+        <List className="poly-theme-light stories-preview">
             {Object.values(storiesMetadata).map((story, index) => (
                 <RoutingWrapper
                     key={index}
