@@ -104,6 +104,14 @@ android {
         }
     }
 
+    buildFeatures {
+        // Enables Jetpack Compose for this module
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.1.1'
+    }
 }
 
 repositories {
@@ -182,6 +190,12 @@ dependencies {
     implementation("androidx.security:security-app-authenticator:1.0.0-alpha02")
     // For App Authentication API testing
     androidTestImplementation("androidx.security:security-app-authenticator:1.0.0-alpha02")
+
+    // Compose
+    implementation 'androidx.compose.material:material:1.1.1'
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    implementation 'com.google.accompanist:accompanist-flowlayout:0.24.10-beta'
 }
 
 task copyRemotePod(type: Copy) {
