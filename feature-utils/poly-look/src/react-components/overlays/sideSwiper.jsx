@@ -207,6 +207,8 @@ const SideSwiper = ({
   }, [step]);
 
   useEffect(() => {
+    console.log("one done", new Date());
+    console.log("state?", step);
     if (animationsDoneCount == 2) {
       if (step == steps.in) updateStep(steps.interactive);
       else if (step == steps.out || step == steps.outUp)
@@ -405,7 +407,12 @@ const SideSwiper = ({
       onTransitionEnd={
         step == steps.interactive
           ? () => {}
-          : () => updateAnimationsStatus(animationsDoneCount + 1)
+          : () =>
+              updateAnimationsStatus(
+                updateAnimationsStatus(
+                  (animationsDoneCount) => animationsDoneCount + 1
+                )
+              )
       }
       style={backdropStyle}
       onClick={() => {
