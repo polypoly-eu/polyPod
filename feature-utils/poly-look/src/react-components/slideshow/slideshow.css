@@ -27,4 +27,5 @@
   height: 250px;
   width: 100%;
   border-radius: calc(var(--gdu) * 2);
+  object-fit: cover;
 }
