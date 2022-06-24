@@ -1,5 +1,16 @@
 import React from "react";
 
+/** Icon containing a dynamic svg representing 4 stages that change color
+ *  based on the stage prop.
+ * @param {Object} props
+ * @param {number} [props.stage] - How many stages to fill in
+ * using activeColor prop.
+ * @param {string} [props.activeColor] - String representing a color to be used
+ * for the active stages.
+ * @param {string} [props.inactiveColor] - String representing a color to be used
+ * for the inactive stages.
+ * @returns {JSX.Element}
+ */
 export function ProgressIcon({
   stage,
   activeColor = "var(--color-indigo-950)",
