@@ -1,36 +1,26 @@
 {
     "progress_banner": {
         "stage": 1,
-        "title": "preview:progress_banner_title",
-        "description": "preview:progress_banner_description"
+        "title": "preview:progress.banner.title",
+        "description": "preview:progress.banner.description"
     },
     "title": "preview:title",
     "sections": [
         {
-            "title": "preview:section1_title",
-            "description": "preview:section1_description",
-            "images": ["./images/test.jpeg", "./images/test.jpeg"]
+            "title": "preview:section.title",
+            "description": "preview:section.description",
+            "images": []
         },
         {
-            "title": "preview:section1_title",
-            "description": "preview:section1_description",
-            "images": ["./images/test.jpeg"]
-        },
-        {
-            "title": "preview:section1_title",
-            "description": "preview:section1_description",
-            "images": ["./images/test.jpeg"]
-        },
-        {
-            "title": "preview:section1_title",
-            "description": "preview:section1_description",
+            "title": "preview:section.title",
+            "description": "preview:section.description",
             "images": []
         }
     ],
     "footer": {
-        "title": "preview:footer_title",
-        "description": "preview:footer_description",
-        "image": "./images/test.jpeg",
-        "buttonTitle": "preview:footer_button_title"
+        "title": "preview:footer.title",
+        "description": "preview:footer.description",
+        "image": "",
+        "buttonTitle": "preview:footer.button.title"
     }
 }

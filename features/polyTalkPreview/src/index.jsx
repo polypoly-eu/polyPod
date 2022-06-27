@@ -48,13 +48,13 @@ const Footer = (props) => {
 const ProgressInfoView = () => {
     return (
         <div>
-            <p className="info">{i18n.t("htrt:text1")}</p>
+            <p className="info">{i18n.t("progressInfo:text1")}</p>
             {[1, 2, 3, 4].map((stage) => (
                 <div key={stage} className="info-stage">
                     <ProgressIcon stage={stage} />
                     <div>
-                        <h3>{i18n.t(`htrt:stage${stage}`)}</h3>
-                        <p>{i18n.t(`htrt:explanation${stage}`)}</p>
+                        <h3>{i18n.t(`progressInfo:stage${stage}`)}</h3>
+                        <p>{i18n.t(`progressInfo:explanation${stage}`)}</p>
                     </div>
                 </div>
             ))}
@@ -70,7 +70,7 @@ const ProgressInfoPopUp = ({ onClose }) => {
             lastChildSelector=".poly-button"
             Component={(props) => (
                 <SideSheet
-                    title={i18n.t("htrt:title")}
+                    title={i18n.t("progressInfo:title")}
                     okLabel={i18n.t("common:button.ok")}
                     {...props}
                     className="poly-theme-light"
@@ -105,6 +105,7 @@ const App = () => {
                     title={i18n.t(content.progress_banner.title)}
                     description={i18n.t(content.progress_banner.description)}
                     onClick={() => {
+                        console.log("Clicked the Progress Banner button");
                         setPopUpVisible(true);
                     }}
                 />
@@ -120,6 +121,7 @@ const App = () => {
                 {popUpVisible && (
                     <ProgressInfoPopUp
                         onClose={() => {
+                            console.log("Clicked the Close button");
                             setPopUpVisible(false);
                         }}
                     />

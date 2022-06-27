@@ -41,6 +41,10 @@ export default {
                     dest: "dist",
                 },
                 {
+                    src: ["src/static/fonts/*"],
+                    dest: "dist/fonts/",
+                },
+                {
                     src: [
                         "node_modules/@polypoly-eu/poly-look/dist/css/poly-look.css",
                     ],
@@ -53,10 +57,6 @@ export default {
                         "node_modules/@polypoly-eu/poly-look/dist/poly-look.js",
                     ],
                     dest: "dist",
-                },
-                {
-                    src: ["src/static/fonts/*"],
-                    dest: "dist/fonts/",
                 },
             ],
             verbose: true,
