@@ -33,21 +33,6 @@ Please change to «features»`);
     exit(1);
 }
 
-function setup(structure) {
-    try {
-        let feature_name = Object.keys(structure)[0];
-
-        if (fs.existsSync(`./${feature_name}`)) {
-            printErrorMsg("Feature already exists in this folder. Aborting!");
-            return;
-        }
-
-        createDirectoryStructure(structure);
-    } catch (error) {
-        printErrorMsg(`${error}`);
-    }
-}
-
 function interactiveSetup() {
     const setup_questions = [
         {
@@ -116,6 +101,7 @@ function interactiveSetup() {
             printErrorMsg(`Error: ${JSON.stringify(error, null, 4)}`);
         });
 }
+
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
     .command(
@@ -169,12 +155,16 @@ yargs(hideBin(process.argv))
     .help().argv;
 
 function handleCreate(arg) {
-    if (arg.what === "feature") {
-        handleCreateFeature(arg);
-    } else {
-        printWarningMsg(
-            "Sorry, I can't create this for you. Try: create feature instead"
-        );
+    try {
+        if (arg.what === "feature") {
+            handleCreateFeature(arg);
+        } else {
+            printWarningMsg(
+                "Sorry, I can't create this for you. Try: create feature instead"
+            );
+        }
+    } catch (error) {
+        printErrorMsg(`${error}`);
     }
 }
 
@@ -265,7 +255,7 @@ function handleCreateEmptyFeature(arg) {
             ),
     };
 
-    setup(structure);
+    createDirectoryStructure(structure);
     execSync(`cd ${feature_name} && npm i && npm run build`);
 }
 
@@ -384,7 +374,7 @@ function handleCreatePreviewFeature(arg) {
             ),
     };
 
-    setup(structure);
+    createDirectoryStructure(structure);
     execSync(
         `cd ${feature_name}/src/static && ln -s ../../../../assets/fonts . && cd ../../ && npm i && npm run build`
     );
@@ -394,20 +384,30 @@ function handleCreateImporterFeature() {
     printUnderConstruction();
 }
 
-function createDirectoryStructure(structure, parent = ".") {
-    for (const key in structure) {
-        if (typeof structure[key] === "object") {
-            let dir = parent + "/" + key;
-            if (!fs.existsSync(dir)) {
-                fs.mkdirSync(dir);
+function createDirectoryStructure(structure) {
+    const recursiveCreate = (structure, parent = ".") => {
+        for (const key in structure) {
+            if (typeof structure[key] === "object") {
+                let dir = parent + "/" + key;
+                if (!fs.existsSync(dir)) {
+                    fs.mkdirSync(dir);
+                }
+                recursiveCreate(structure[key], dir);
+            } else if (structure[key] instanceof Function) {
+                fs.writeFileSync(parent + "/" + key, structure[key]());
+            } else if (typeof structure[key] === "string") {
+                fs.copySync(structure[key], parent + "/" + key);
             }
-            createDirectoryStructure(structure[key], dir);
-        } else if (structure[key] instanceof Function) {
-            fs.writeFileSync(parent + "/" + key, structure[key]());
-        } else if (typeof structure[key] === "string") {
-            fs.copySync(structure[key], parent + "/" + key);
         }
+    };
+
+    let feature_name = Object.keys(structure)[0];
+
+    if (fs.existsSync(`./${feature_name}`)) {
+        throw Error("Feature already exists in this folder. Aborting!");
     }
+
+    recursiveCreate(structure);
 }
 
 function checkIfValueExists(value, obj) {
