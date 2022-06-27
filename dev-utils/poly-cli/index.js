@@ -343,7 +343,7 @@ function handleCreatePreviewFeature(arg) {
                 author,
                 license
             ),
-        "README.md": () => readmeTemplate(feature_name, description),
+        "README.md": () => readmeTemplate(feature_name, description, "preview"),
         "rollup.config.mjs": () =>
             fs.readFileSync(
                 path.resolve(
