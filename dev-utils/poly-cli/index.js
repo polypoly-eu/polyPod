@@ -34,23 +34,34 @@ Please change to «features»`);
 }
 
 function setup(structure) {
-    let feature_name = Object.keys(structure)[0];
+    try {
+        let feature_name = Object.keys(structure)[0];
 
-    if (fs.existsSync(`./${feature_name}`)) {
-        printErrorMsg("Feature already exists in this folder. Aborting!");
-        return;
+        if (fs.existsSync(`./${feature_name}`)) {
+            printErrorMsg("Feature already exists in this folder. Aborting!");
+            return;
+        }
+
+        createDirectoryStructure(structure);
+
+        execSync(`cd ${feature_name} && npm i && npm run build`);
+    } catch (error) {
+        printErrorMsg(`${error}`);
     }
-
-    createDirectoryStructure(structure);
-
-    execSync(`cd ${feature_name} && npm i && npm run build`);
 }
 
 function interactiveSetup() {
     const setup_questions = [
         {
+            type: "list",
+            name: "type",
+            message: "Feature Type:",
+            choices: ["empty", "preview", "importer"],
+            default: "empty",
+        },
+        {
             type: "input",
-            name: "feature_name",
+            name: "name",
             message: "Feature Name:",
             default: "example",
         },
@@ -83,18 +94,25 @@ function interactiveSetup() {
     inquirer
         .prompt(setup_questions)
         .then((answers) => {
-            checkIfValueExists("feature_name", answers);
+            checkIfValueExists("type", answers);
+            checkIfValueExists("name", answers);
             checkIfValueExists("author", answers);
             checkIfValueExists("version", answers);
             checkIfValueExists("description", answers);
             checkIfValueExists("license", answers);
-            setup(
-                answers.feature_name,
-                answers.author,
-                answers.version,
-                answers.description,
-                answers.license
-            );
+
+            if (answers.type === "empty") {
+                handleCreateEmptyFeature(answers);
+            } else if (answers.type === "preview") {
+                handleCreatePreviewFeature(answers);
+            } else if (answers.type === "importer") {
+                handleCreateImporterFeature();
+            } else {
+                printErrorMsg(
+                    `Feature type ${answers.type} not recognized. Aborting!`
+                );
+                throw Error("dev error");
+            }
         })
         .catch((error) => {
             printErrorMsg(`Error: ${JSON.stringify(error, null, 4)}`);
@@ -180,7 +198,7 @@ function handleCreateFeature(arg) {
 function handleCreateEmptyFeature(arg) {
     let feature_name = arg.name;
     let author = arg.author;
-    let version = arg.featureVersion;
+    let version = arg.version;
     let description = arg.description;
     let license = arg.license;
 
@@ -255,7 +273,7 @@ function handleCreateEmptyFeature(arg) {
 function handleCreatePreviewFeature(arg) {
     let feature_name = arg.name;
     let author = arg.author;
-    let version = arg.featureVersion;
+    let version = arg.version;
     let description = arg.description;
     let license = arg.license;
 
