@@ -32,7 +32,8 @@ In general, you just need to run:
 > if you're curious.)
 
 This will build the platform independent code, including all the bundled
-features, as well as [podjs](platform/podjs).
+features, as well as [podjs](platform/podjs), a browser-based implementation of
+the polyPod.
 
 After this you can build the [platform](platform)
 (e.g. [android](platform/android) or [ios](platform/ios)), or try one of the
@@ -44,7 +45,7 @@ To run the tests, just execute:
 
     $ ./build.js test
 
-## Linting
+## Developer tips
 
 Linting is done via tools configured at the top level (root) directory.
 
@@ -76,7 +77,7 @@ reflects the state of the last release we made.
 
 ## Security
 
-Please read the [SECURITY](SECURITY.md) document on how to report potential
+Please read the [`SECURITY`](SECURITY.md) document on how to report potential
 security vulnerabilities in polyPod and where to find polypoly's Vulnerability
 Disclosure Policy.
 

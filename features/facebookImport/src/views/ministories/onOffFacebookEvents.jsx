@@ -32,7 +32,7 @@ class OnOffFacebookEventsMinistory extends Story {
         );
     }
 
-    renderDetails() {
+    _renderDetails() {
         return (
             <OnOffFacebookMiniStoryDetails
                 displayData={

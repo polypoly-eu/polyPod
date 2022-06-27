@@ -11,7 +11,7 @@ let package = Package(
     products: [
         .library(
             name: "PolyPodCoreSwift",
-            targets: ["PolyPodCoreSwift"]),
+            targets: ["PolyPodCoreSwift"])
     ],
     dependencies: [
         .package(url: "https://github.com/polypoly-eu/MessagePack.swift", from: "4.0.0")
@@ -28,6 +28,6 @@ let package = Package(
                       path: "PolyPodCore.xcframework"),
         .testTarget(
             name: "PolyPodCoreSwiftTests",
-            dependencies: ["PolyPodCoreSwift"]),
+            dependencies: ["PolyPodCoreSwift"])
     ]
 )

@@ -25,15 +25,15 @@ export default (commandLineArgs) => {
         },
         plugins: [
             sillyI18n(),
+            genPodjs({
+                build_dir: "./dist",
+                manifestPath: "./src/static/manifest.json",
+            }),
             svg(),
             css({ output: "css/bundle.css" }),
             sucrase({
                 transforms: ["jsx"],
                 production: true,
-            }),
-            genPodjs({
-                build_dir: "./dist",
-                manifestPath: "./src/static/manifest.json",
             }),
             copy({
                 targets: [
@@ -72,7 +72,7 @@ export default (commandLineArgs) => {
             commandLineArgs.configServe ? serve("dist") : null,
         ],
         external: Object.keys(externalPackages),
-        onwarn: (warning) => {
+        onwarn: (warning, warn) => {
             // overwite the default warning function
             if (
                 warning.code === "CIRCULAR_DEPENDENCY" &&
@@ -80,7 +80,7 @@ export default (commandLineArgs) => {
             ) {
                 return;
             } else {
-                console.warn(warning);
+                warn(warning);
             }
         },
     };

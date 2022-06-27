@@ -32,7 +32,6 @@
     padding: calc(var(--gdu) * 6);
     box-sizing: border-box;
     font-family: var(--jost-medium);
-    font-size: var(--font-size-xl);
 }
 
 .import-view .explanation-expandable .head .number {
@@ -44,11 +43,13 @@
     justify-content: center;
     background-color: var(--theme-secondary-color);
     color: var(--theme-primary-color);
+    font-size: var(--font-size-xl);
 }
 
 .import-view .explanation-expandable .head .heading {
     margin-left: 18px;
     flex: 1 1 auto;
+    font-size: var(--font-size-xl);
 }
 
 .import-view .explanation-expandable .head .rotate-180 {
