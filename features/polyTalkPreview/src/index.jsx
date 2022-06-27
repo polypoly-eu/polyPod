@@ -7,6 +7,7 @@ import {
     ProgressBanner,
     SideSwiper,
     SideSheet,
+    ProgressIcon,
 } from "@polypoly-eu/poly-look";
 import content from "./static/content.json";
 import i18n from "!silly-i18n";
@@ -47,7 +48,16 @@ const Footer = (props) => {
 const ProgressInfoView = () => {
     return (
         <div>
-            <h1>Under construction</h1>
+            <p className="info">{i18n.t("htrt:text1")}</p>
+            {[1, 2, 3, 4].map((stage) => (
+                <div key={stage} className="info-stage">
+                    <ProgressIcon stage={stage} />
+                    <div>
+                        <h3>{i18n.t(`htrt:stage${stage}`)}</h3>
+                        <p>{i18n.t(`htrt:explanation${stage}`)}</p>
+                    </div>
+                </div>
+            ))}
         </div>
     );
 };
@@ -60,7 +70,7 @@ const ProgressInfoPopUp = ({ onClose }) => {
             lastChildSelector=".poly-button"
             Component={(props) => (
                 <SideSheet
-                    title={i18n.t("preview:baseInfo.title1")}
+                    title={i18n.t("htrt:title")}
                     okLabel={i18n.t("common:button.ok")}
                     {...props}
                     className="poly-theme-light"
@@ -76,7 +86,7 @@ const ProgressInfoPopUp = ({ onClose }) => {
 
 const App = () => {
     const [pod, setPod] = useState(null);
-    const [popUpVisible, setPopUpVisible] = useState(true);
+    const [popUpVisible, setPopUpVisible] = useState(false);
 
     const initPod = async () => await window.pod;
 
@@ -95,7 +105,6 @@ const App = () => {
                     title={i18n.t(content.progress_banner.title)}
                     description={i18n.t(content.progress_banner.description)}
                     onClick={() => {
-                        console.log("Clicked the Progress Banner button");
                         setPopUpVisible(true);
                     }}
                 />
@@ -111,7 +120,6 @@ const App = () => {
                 {popUpVisible && (
                     <ProgressInfoPopUp
                         onClose={() => {
-                            console.log("Clicked the Close button");
                             setPopUpVisible(false);
                         }}
                     />
