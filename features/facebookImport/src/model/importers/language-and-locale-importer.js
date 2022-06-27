@@ -1,6 +1,6 @@
 import { Status, statusTypes } from "@polypoly-eu/poly-import";
 import { readJSONDataArray } from "./utils/importer-util.js";
-import { readRdfObject, writeRdfObject } from "./utils/rdf.js";
+import { readObjFromFile, writeObjToFile } from "./utils/rdf.js";
 
 export const LANGUAGE_AND_LOCALE_FILE_PATH =
     "preferences/language_and_locale.json";
@@ -65,7 +65,8 @@ export default class LanguageAndLocaleImporter {
     }
 
     async import({ zipFile, facebookAccount }) {
-        const storedLanguage = await readRdfObject(
+        const storedLanguage = await readObjFromFile(
+            facebookAccount.id,
             LANGUAGE_AND_LOCALE_STORED_DATA_KEY
         );
 
@@ -87,6 +88,10 @@ export default class LanguageAndLocaleImporter {
                 message: "Could not extract preferredLanguage",
             });
         }
-        writeRdfObject(LANGUAGE_AND_LOCALE_STORED_DATA_KEY, preferredLanguage);
+        writeObjToFile(
+            facebookAccount.id,
+            LANGUAGE_AND_LOCALE_STORED_DATA_KEY,
+            preferredLanguage
+        );
     }
 }

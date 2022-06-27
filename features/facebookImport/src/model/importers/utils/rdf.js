@@ -3,27 +3,26 @@ const fbNsProperty = `${facebookNs}property:`;
 const rdf = "https://www.w3.org/1999/02/22-rdf-syntax-ns#";
 
 export async function readAttrFromRdf(archiveUri, attr) {
-    const { dataFactory, polyIn } = window.pod;
-    const result = await polyIn.match({
-        subject: dataFactory.namedNode(archiveUri),
-        predicate: dataFactory.namedNode(facebookNs + attr),
+    const { dataFactory: df, polyIn: ds } = window.pod;
+    const result = await ds.match({
+        subject: df.namedNode(archiveUri),
+        predicate: df.namedNode(facebookNs + attr),
     });
-    return result.find(({ object }) => object.value)?.object?.value;
+    return result?.find(({ object }) => object.value)?.object?.value;
 }
 
 export async function writeAttrToRdf(archiveUri, attr, value) {
-    const { dataFactory, polyIn } = window.pod;
-    const quad = dataFactory.quad(
-        dataFactory.namedNode(archiveUri),
-        dataFactory.namedNode(facebookNs + attr),
-        dataFactory.literal(value)
+    const { dataFactory: df, polyIn: ds } = window.pod;
+    const quad = df.quad(
+        df.namedNode(archiveUri),
+        df.namedNode(facebookNs + attr),
+        df.literal(value)
     );
-    polyIn.add(quad);
+    ds.add(quad);
 }
 
-export function writeRdfSeq(id, list) {
+export function writeRdfSeq(subject, list) {
     const { dataFactory: df, polyIn: ds } = window.pod;
-    const subject = df.blankNode(facebookNs + id);
     ds.add(
         df.quad(subject, df.namedNode(`${rdf}type`), df.namedNode(`${rdf}Seq`))
     );
@@ -38,9 +37,9 @@ export function writeRdfSeq(id, list) {
     );
 }
 
-export async function readRdfSeq(id) {
-    const { dataFactory: df, polyIn: ds } = window.pod;
-    const quads = await ds.match({ subject: df.blankNode(facebookNs + id) });
+export async function readRdfSeq(subject) {
+    const { polyIn: ds } = window.pod;
+    const quads = await ds.match({ subject });
     if (
         !quads.some(
             (quad) =>
@@ -63,11 +62,9 @@ export async function readRdfSeq(id) {
         .map(({ value }) => value);
 }
 
-export async function writeRdfObject(id, obj) {
+export async function writeRdfObj(subject, obj) {
     //only strings supported
     const { dataFactory: df, polyIn: ds } = window.pod;
-    const subject = df.blankNode(facebookNs + id);
-
     ds.add(
         df.quad(
             subject,
@@ -87,10 +84,10 @@ export async function writeRdfObject(id, obj) {
     );
 }
 
-export async function readRdfObject(id) {
+export async function readRdfObj(subject) {
     //only strings supported
     const { dataFactory: df, polyIn: ds } = window.pod;
-    const quads = await ds.match({ subject: df.blankNode(facebookNs + id) });
+    const quads = await ds.match({ subject });
     if (
         !quads.some(
             (quad) =>
@@ -107,4 +104,54 @@ export async function readRdfObject(id) {
         obj[property.replace(fbNsProperty, "")] = quad.object.value;
     });
     return obj;
+}
+
+export async function writeSeqToFile(archiveUri, attr, list) {
+    const { dataFactory: df, polyIn: ds } = window.pod;
+    const object = df.blankNode(facebookNs + attr);
+    ds.add(
+        df.quad(
+            df.namedNode(archiveUri),
+            df.namedNode(facebookNs + attr),
+            object
+        )
+    );
+    writeRdfSeq(object, list);
+}
+
+export async function readSeqFromFile(archiveUri, attr) {
+    const { dataFactory: df, polyIn: ds } = window.pod;
+    const quads = await ds.match({
+        subject: df.namedNode(archiveUri),
+        predicate: df.namedNode(facebookNs + attr),
+    });
+    if (!quads.some((quad) => quad?.object?.value?.includes(facebookNs)))
+        return null;
+
+    return readRdfSeq(quads[0].object);
+}
+
+export async function readObjFromFile(archiveUri, attr) {
+    const { dataFactory: df, polyIn: ds } = window.pod;
+    const quads = await ds.match({
+        subject: df.namedNode(archiveUri),
+        predicate: df.namedNode(facebookNs + attr),
+    });
+    if (!quads.some((quad) => quad?.object?.value?.includes(facebookNs)))
+        return null;
+
+    return readRdfObj(quads[0].object);
+}
+
+export async function writeObjToFile(archiveUri, attr, obj) {
+    const { dataFactory: df, polyIn: ds } = window.pod;
+    const object = df.blankNode(facebookNs + attr);
+    ds.add(
+        df.quad(
+            df.namedNode(archiveUri),
+            df.namedNode(facebookNs + attr),
+            object
+        )
+    );
+    writeRdfObj(object, obj);
 }

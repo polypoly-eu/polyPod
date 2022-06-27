@@ -1,5 +1,5 @@
 import DirectKeyDataImporter from "./direct-key-data-importer.js";
-import { readRdfSeq, writeRdfSeq } from "./utils/rdf.js";
+import { readSeqFromFile, writeSeqToFile } from "./utils/rdf.js";
 
 export const AD_INTERESTS_FILE_PATH =
     "other_logged_information/ads_interests.json";
@@ -15,11 +15,11 @@ export default class AdInterestsImporter extends DirectKeyDataImporter {
         );
     }
 
-    async _loadStoredData() {
-        return readRdfSeq(AD_INTERESTS_STORAGE_KEY);
+    async _loadStoredData(archiveUri) {
+        return readSeqFromFile(archiveUri, AD_INTERESTS_STORAGE_KEY);
     }
 
-    async _storeData(adInterests) {
-        writeRdfSeq(AD_INTERESTS_STORAGE_KEY, adInterests);
+    async _storeData(archiveUri, adInterests) {
+        writeSeqToFile(archiveUri, AD_INTERESTS_STORAGE_KEY, adInterests);
     }
 }
