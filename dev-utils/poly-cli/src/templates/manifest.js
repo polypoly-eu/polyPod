@@ -7,6 +7,7 @@ export function manifestTemplate(feature_name, author, version, feature_type) {
         thumbnail: "",
         thumbnailColor: "#ffffff",
         primaryColor: "#ffffff",
+        borderColor: "#ffffff",
         links: {},
         translations: {
             de: {
@@ -20,6 +21,10 @@ export function manifestTemplate(feature_name, author, version, feature_type) {
         base.links = {
             "learn-more": "https://polypoly.org",
         };
+
+        base.thumbnailColor = "#ffffff";
+        base.primaryColor = "#0f1938";
+        base.borderColor = "#cbd5e0";
     }
 
     return JSON.stringify(base, null, 2);
