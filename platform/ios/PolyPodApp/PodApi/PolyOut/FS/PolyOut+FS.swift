@@ -44,8 +44,7 @@ extension PolyOut {
                 for: .documentDirectory,
                 in: .userDomainMask
             ).first!.resolvingSymlinksInPath()
-        return
-            documentDirectory
+        return documentDirectory
             .appendingPathComponent(PolyOut.fsFilesRoot)
             .appendingPathComponent(activeFeature!.id)
     }

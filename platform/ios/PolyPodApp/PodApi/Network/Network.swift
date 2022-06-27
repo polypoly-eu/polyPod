@@ -82,33 +82,34 @@ final class Network: NetworkProtocol {
         let semaphore = DispatchSemaphore(value: 0)
         var fetchError: PodApiError?
         var responseData: Data?
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in defer {
-            semaphore.signal()
-        }
-        guard let response = response as? HTTPURLResponse,
-              error == nil else {
-            semaphore.signal()
-            return
-        }
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+            defer {
+                semaphore.signal()
+            }
+                guard let response = response as? HTTPURLResponse,
+                    error == nil else {
+                    semaphore.signal()
+                    return
+                }
 
-        guard (200 ... 299) ~= response.statusCode else {
-            fetchError = PodApiError.networkError(
-                "http\(type)",
-                message: "Bad response code: \(String(response.statusCode))"
-            )
-            semaphore.signal()
-            return
-        }
+                guard (200 ... 299) ~= response.statusCode else {
+                    fetchError = PodApiError.networkError(
+                        "http\(type)",
+                        message: "Bad response code: \(String(response.statusCode))"
+                    )
+                    semaphore.signal()
+                    return
+                }
 
-        guard let data = data else {
-            fetchError = PodApiError.networkError(
-                "http\(type)",
-                message: "Bad response code: \(String(response.statusCode))"
-            )
-            return
-        }
-        responseData = data
-        semaphore.signal()
+                guard let data = data else {
+                    fetchError = PodApiError.networkError(
+                        "http\(type)",
+                        message: "Bad response code: \(String(response.statusCode))"
+                    )
+                    return
+                }
+                responseData = data
+                semaphore.signal()
         }
         task.resume()
         semaphore.wait()
@@ -129,8 +130,9 @@ final class Network: NetworkProtocol {
     ) -> URLRequest {
         var request = URLRequest(url: requestURL)
         request.httpMethod = type
-        if body != nil {
-            request.httpBody = body!.data(using: .utf8)
+
+        if let body = body {
+            request.httpBody = body.data(using: .utf8)
         }
 
         if let contentType = contentType {

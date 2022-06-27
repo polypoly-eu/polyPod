@@ -358,7 +358,8 @@ struct MyDataSectionView: View {
                 Array(
                     sectionModel.cards.chunked(into: HomeScreenConstants.TileContainer.numberOfColumns).enumerated()
                 ),
-                id: \.offset) { index, chunk in
+                id: \.offset
+            ) { index, chunk in
                 let type = containersConfig[index % containersConfig.count]
                 switch type {
                 case .largeLeft:
@@ -384,7 +385,8 @@ struct DataKnowHowSectionView: View {
                     Array(
                         sectionModel.cards.chunked(into: HomeScreenConstants.TileContainer.numberOfColumns).enumerated()
                     ),
-                    id: \.offset) { _, chunk in
+                    id: \.offset
+                ) { _, chunk in
                     RowContainerView(cards: chunk)
                 }
             }
