@@ -1,12 +1,12 @@
 {
     "title": "How to read this?",
-    "text1": "We are working hard to bring you all the necessary features.We want to keep you up-to-date with our latest developments, so you can expect some change on the homescreen of your polypod. Here is how we categorise our statuses.",
+    "text1": "At polypoly we are building something large and ambitious, one element at a time. And since we are building this with and for our existing and future members and partners, we want to give you a better sense of where this going and what progress we are making.<br><br>Some of the tiles on the home screen show a progress indicator. It gives you a sense of where we are in the process.<br><br>Here is what the four steps mean:",
     "stage1": "Idea",
+    "explanation1": "We are seriously thinking about this, but did not start working on it yet. No idea when this will be ready, but it will come.",
     "stage2": "Concept",
+    "explanation2": "We started working on this, but it is still in the early stages. Don't get too excited - yet.",
     "stage3": "Development",
+    "explanation3": "We are building this for real - and might be looking for beta testers soon.",
     "stage4": "Coming soon",
-    "explanation1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec velit eget felis dignissim maximus in sed lorem. Nullam facilisis laoreet tincidunt.",
-    "explanation2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec velit eget felis dignissim maximus in sed lorem. Nullam facilisis laoreet tincidunt.",
-    "explanation3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec velit eget felis dignissim maximus in sed lorem. Nullam facilisis laoreet tincidunt.",
-    "explanation4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec velit eget felis dignissim maximus in sed lorem. Nullam facilisis laoreet tincidunt."
+    "explanation4": "We are almost ready. The general release date is scheduled. Here are some previews."
 }
