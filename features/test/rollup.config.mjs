@@ -10,8 +10,16 @@ export default {
         name: "testFeature",
     },
     plugins: [
-        genPodjs({ build_dir: "./dist" }),
-        copy({ targets: [{ src: "src/index.html", dest: "dist" }] }),
+        genPodjs({
+            build_dir: "./dist",
+            manifestPath: "./src/manifest.json",
+        }),
+        copy({
+            targets: [
+                { src: "src/index.html", dest: "dist" },
+                { src: "src/manifest.json", dest: "dist" },
+            ],
+        }),
         sucrase({
             exclude: ["node_modules/**"],
             transforms: ["typescript"],
