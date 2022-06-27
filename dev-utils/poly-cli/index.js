@@ -295,6 +295,13 @@ function handleCreatePreviewFeature(arg) {
                                 "./src/static/templates/locales/en/preview.json"
                             )
                         ),
+                    "progressInfo.json": () =>
+                        fs.readFileSync(
+                            path.resolve(
+                                __dirname,
+                                "./src/static/templates/locales/en/progressInfo.json"
+                            )
+                        ),
                 },
                 de: {
                     "common.json": () =>
@@ -309,6 +316,13 @@ function handleCreatePreviewFeature(arg) {
                             path.resolve(
                                 __dirname,
                                 "./src/static/templates/locales/de/preview.json"
+                            )
+                        ),
+                    "progressInfo.json": () =>
+                        fs.readFileSync(
+                            path.resolve(
+                                __dirname,
+                                "./src/static/templates/locales/de/progressInfo.json"
                             )
                         ),
                 },
