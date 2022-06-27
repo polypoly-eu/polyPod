@@ -8,6 +8,7 @@
     "@rdfjs/data-model": "^1.2.0"
   },
   "devDependencies": {
+    "@polypoly-eu/podjs": "file:../../platform/podjs",
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
     "@types/rdf-js": "^4.0.0"
   },
