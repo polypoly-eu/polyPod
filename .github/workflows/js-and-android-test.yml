@@ -2,7 +2,7 @@ name: Test pushes and PRs
 on:
   push:
   pull_request:
-    types: [assigned, opened, ready_for_review]
+    types: [assigned, opened, ready_for_review, closed]
 
 jobs:
   test:
