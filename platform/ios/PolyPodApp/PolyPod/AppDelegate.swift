@@ -152,8 +152,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func scheduleUpdateNotificationCheck() {
+        let updateNotificationCheckIdentifier = Self.updateNotificationCheckIdentifier
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) {_, _ in }
-        let task = BGProcessingTaskRequest(identifier: Self.updateNotificationCheckIdentifier)
+        let task = BGProcessingTaskRequest(identifier: updateNotificationCheckIdentifier)
         task.earliestBeginDate = Date(timeIntervalSinceNow: TimeInterval(UpdateNotification().pushDelay))
         task.requiresExternalPower = false
         task.requiresNetworkConnectivity = false
@@ -161,8 +162,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try BGTaskScheduler.shared.submit(task)
         } catch {
             Log.error(
-                "Failed to schedule task",
-                "\(Self.updateNotificationCheckIdentifier): \(error.localizedDescription)"
+                "Failed to schedule task " +
+                "\(updateNotificationCheckIdentifier): \(error.localizedDescription)"
             )
         }
     }

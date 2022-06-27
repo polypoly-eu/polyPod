@@ -2,11 +2,11 @@ import SwiftUI
 
 struct OnboardingView: View {
     @Environment(\.presentationMode) var presentationMode
-    
+
     @State var activeSlide: Int = 0
     var securityOnly: Bool = false
     var closeAction: () -> Void = {}
-    
+
     var body: some View {
         let slides = createSlides().map { $0.padding(28) }
         return VStack(spacing: 0) {
@@ -15,11 +15,11 @@ struct OnboardingView: View {
                     Image("NavIconCloseDark").renderingMode(.original)
                 }
             )
-            
+
             PageViewController(activeIndex: $activeSlide, views: slides)
-            
+
             Spacer()
-            
+
             if slides.count > 1 {
                 Pagination(active: activeSlide, max: slides.count - 1)
                     .padding(.bottom, 36)
@@ -27,7 +27,7 @@ struct OnboardingView: View {
         }
         .background(Color.PolyPod.lightBackground)
     }
-    
+
     private func createSlides() -> [Slide] {
         let authSlide = Slide(
             headline: "onboarding_slide4_headline",
@@ -38,11 +38,11 @@ struct OnboardingView: View {
             denyLabel: "onboarding_button_do_not_ask",
             denyAction: disableAuthCheck
         )
-        
+
         if securityOnly {
             return [authSlide]
         }
-        
+
         let showSecurity = Authentication.shared.shouldShowPrompt()
         return [
             Slide(
@@ -65,7 +65,7 @@ struct OnboardingView: View {
             showSecurity ? authSlide : nil
         ].compactMap { $0 }
     }
-    
+
     private func setUpAuth() {
         Authentication.shared.setUp(newStatus: true) { success in
             if success {
@@ -73,7 +73,7 @@ struct OnboardingView: View {
             }
         }
     }
-    
+
     private func disableAuthCheck() {
         Authentication.shared.disableCheck()
         closeAction()
@@ -85,7 +85,7 @@ struct OnboardingView_Previews: PreviewProvider {
         ForEach((0...2), id: \.self) { index in
             OnboardingView(activeSlide: index)
         }
-        
+
         OnboardingView(securityOnly: true)
     }
 }
@@ -98,7 +98,7 @@ private struct Slide: View {
     var confirmAction: (() -> Void)?
     var denyLabel: LocalizedStringKey?
     var denyAction: (() -> Void)?
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ParagraphView(
@@ -109,7 +109,7 @@ private struct Slide: View {
                 lineHeightMultiple: 0.83,
                 foregroundColor: Color.PolyPod.darkForeground
             )
-            
+
             ParagraphView(
                 text: subHeadline,
                 fontName: "Jost-Medium",
@@ -118,7 +118,7 @@ private struct Slide: View {
                 lineHeightMultiple: 0.83,
                 foregroundColor: Color.PolyPod.darkForeground
             ).padding(.bottom, 24)
-            
+
             ParagraphView(
                 text: bodyText,
                 fontName: "Jost-Regular",
@@ -127,20 +127,22 @@ private struct Slide: View {
                 lineHeightMultiple: 0.83,
                 foregroundColor: Color.PolyPod.darkForeground
             )
-            
+
             Spacer()
-            
+
             if let confirmLabel = confirmLabel {
                 PrimaryButton(title: confirmLabel,
                               onAction: confirmAction ?? {})
             }
-            
+
             if let denyLabel = denyLabel {
-                Button(action: denyAction ?? {},
+                // swiftlint:disable multiple_closures_with_trailing_closure
+                Button(action: denyAction ?? {}) {
                     Text(denyLabel)
-                )
+                }
                 .padding(.top, 20)
                 .frame(maxWidth: .infinity, alignment: .center)
+                // swiftlint:enable multiple_closures_with_trailing_closure
             }
         }
     }
@@ -149,7 +151,7 @@ private struct Slide: View {
 private struct Pagination: View {
     var active: Int
     var max: Int
-    
+
     var body: some View {
         HStack(spacing: 12) {
             ForEach((0...max), id: \.self) { index in
@@ -157,11 +159,11 @@ private struct Pagination: View {
             }
         }
     }
-    
+
     private struct Item: View {
         var active: Bool
         private let diameter = 12
-        
+
         var body: some View {
             Circle()
                 .strokeBorder(Color.PolyPod.darkForeground, lineWidth: 1.5)
@@ -178,16 +180,16 @@ private struct Pagination: View {
 private struct PageViewController<Content: View>: UIViewControllerRepresentable {
     private let activeIndex: Binding<Int>?
     private let viewControllers: [UIViewController]
-    
+
     init(activeIndex: Binding<Int>? = nil, views: [Content]) {
         self.activeIndex = activeIndex
         viewControllers = views.map { UIHostingController(rootView: $0) }
     }
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
-    
+
     func makeUIViewController(context: Context) -> UIPageViewController {
         let pageViewController = UIPageViewController(
             transitionStyle: .scroll,
@@ -202,21 +204,21 @@ private struct PageViewController<Content: View>: UIViewControllerRepresentable 
         )
         return pageViewController
     }
-    
+
     func updateUIViewController(
         _ pageViewController: UIPageViewController,
         context: Context
     ) {
     }
-    
+
     class Coordinator: NSObject, UIPageViewControllerDataSource,
                        UIPageViewControllerDelegate {
         var parent: PageViewController
-        
+
         init(_ parent: PageViewController) {
             self.parent = parent
         }
-        
+
         func pageViewController(
             _ pageViewController: UIPageViewController,
             viewControllerBefore viewController: UIViewController
@@ -230,7 +232,7 @@ private struct PageViewController<Content: View>: UIViewControllerRepresentable 
             }
             return parent.viewControllers[index - 1]
         }
-        
+
         func pageViewController(
             _ pageViewController: UIPageViewController,
             viewControllerAfter viewController: UIViewController
@@ -244,7 +246,7 @@ private struct PageViewController<Content: View>: UIViewControllerRepresentable 
             }
             return parent.viewControllers[index + 1]
         }
-        
+
         func pageViewController(
             _ pageViewController: UIPageViewController,
             didFinishAnimating finished: Bool,

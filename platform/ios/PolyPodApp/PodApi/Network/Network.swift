@@ -71,7 +71,13 @@ final class Network: NetworkProtocol {
             return .failure(PodApiError.networkSecurityError(type, scheme: requestURL.scheme ?? ""))
         }
 
-        let request = buildRequest(requestURL, type, body, authToken)
+        let request = buildRequest(
+            requestURL: requestURL,
+            type: type,
+            contentType: contentType,
+            body: body,
+            authToken: authToken
+        )
 
         let semaphore = DispatchSemaphore(value: 0)
         var fetchError: PodApiError?
@@ -93,7 +99,7 @@ final class Network: NetworkProtocol {
             semaphore.signal()
             return
         }
-        
+
         guard let data = data else {
             fetchError = PodApiError.networkError(
                 "http\(type)",
@@ -114,7 +120,13 @@ final class Network: NetworkProtocol {
         return fetchError == nil ? .success(responseData!) : .failure(fetchError!)
     }
 
-    private func buildRequest(requestURL: URL, type: String, body: String, authToken: String?): URLRequest {
+    private func buildRequest(
+        requestURL: URL,
+        type: String,
+        contentType: String?,
+        body: String?,
+        authToken: String?
+    ) -> URLRequest {
         var request = URLRequest(url: requestURL)
         request.httpMethod = type
         if body != nil {

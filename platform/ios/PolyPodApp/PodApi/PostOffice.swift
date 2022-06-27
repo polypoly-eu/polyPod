@@ -477,7 +477,8 @@ extension PostOffice {
     
     private func handlePolyNavOpenUrl(args: [Any]) {
         let target = args[0] as! String
-        PodApi.shared.polyNav.openUrl(target: target)
+        PodApi.shared.polyNav.openUrl(target: target) { _, _ in
+        }
     }
     
     private func handlePolyNavPickFile(

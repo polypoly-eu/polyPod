@@ -17,6 +17,7 @@ struct FeatureView: View {
         let lightForeground = !featureColor.isLight
         let iconVariantQualifier = lightForeground ? "Light" : "Dark"
 
+        // swiftlint:disable multiple_closures_with_trailing_closure
         let closeButton = Button(
             action: {
                 if activeActions.contains("back") {
@@ -24,11 +25,12 @@ struct FeatureView: View {
                     return
                 }
                 closeAction()
-            }, {
-                let qualifier = activeActions.contains("back") ? "Back" : "Close"
-                Image("NavIcon\(qualifier)\(iconVariantQualifier)")
-                    .renderingMode(.original)
-            })
+            }) {
+            let qualifier = activeActions.contains("back") ? "Back" : "Close"
+            Image("NavIcon\(qualifier)\(iconVariantQualifier)")
+                .renderingMode(.original)
+        }
+        // swiftlint:enable multiple_closures_with_trailing_closure
 
         let titleLabel = Text(!title.isEmpty ? title : feature.name)
             .foregroundColor(
@@ -42,17 +44,23 @@ struct FeatureView: View {
 
         let actionButtons = HStack(spacing: 12) {
             if activeActions.contains("search") {
-                Button(action: { triggerFeatureAction("search") }, {
+                // swiftlint:disable multiple_closures_with_trailing_closure
+                Button(action: { triggerFeatureAction("search") }) {
                     Image("NavIconSearch\(iconVariantQualifier)")
                         .renderingMode(.original)
-                })
+                }
+                // swiftlint:enable multiple_closures_with_trailing_closure
+
             }
 
             if activeActions.contains("info") {
-                Button(action: { triggerFeatureAction("info") }, {
+                // swiftlint:disable multiple_closures_with_trailing_closure
+                Button(action: { triggerFeatureAction("info")}) {
                     Image("NavIconInfo\(iconVariantQualifier)")
                         .renderingMode(.original)
-                })
+                }
+                // swiftlint:enable multiple_closures_with_trailing_closure
+
             }
         }
 
