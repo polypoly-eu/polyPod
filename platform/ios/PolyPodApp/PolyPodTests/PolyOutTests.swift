@@ -73,7 +73,7 @@ class PolyOutTests: XCTestCase {
             XCTAssertEqual(fetchResponse!.bufferedText, responseText)
 
             expectation.fulfill()
-        })
+        }
 
         wait(for: [expectation], timeout: 1.0)
     }
@@ -165,7 +165,7 @@ class PolyOutTests: XCTestCase {
             XCTAssertNil(fetchResponse, "fetchResponse is not nil")
 
             expectation.fulfill()
-        })
+        }
 
         wait(for: [expectation], timeout: 1.0)
     }
@@ -213,12 +213,12 @@ class PolyOutTests: XCTestCase {
         let url = bundle.url(forResource: "testZip", withExtension: "zip")!
 
         let newUrl = importArchive(url: url.absoluteString, destUrl: nil, polyOut: polyOut)
-        XCTAssertTrue(newUrl != nil && !newUrl.isEmpty, "newUrl is nil or empty")
+        XCTAssertTrue(newUrl != nil && !newUrl!.isEmpty, "newUrl is nil or empty")
 
         let (stuff, error) = readDir(url: newUrl!, polyOut: polyOut)
         XCTAssertNil(error, "error is not nil")
         XCTAssertTrue(stuff != nil && !stuff!.isEmpty, "no files were found")
-        XCTAssertTrue(stuff!.filter { $0["path"] == "testZip/testfile.rtf" }.isNotEmpty, "file not found")
+        XCTAssertTrue(!stuff!.contains { $0["path"] == "testZip/testfile.rtf" }, "file not found")
     }
 
     func testImportMultipleArchives() {
@@ -241,16 +241,16 @@ class PolyOutTests: XCTestCase {
         let url2 = bundle.url(forResource: "multipleZips2", withExtension: "zip")!
 
         let newUrl1 = importArchive(url: url1.absoluteString, destUrl: nil, polyOut: polyOut)
-        XCTAssertTrue(newUrl1 != nil && !newUrl1.isEmpty, "newUrl1 is nil or empty")
+        XCTAssertTrue(newUrl1 != nil && !newUrl1!.isEmpty, "newUrl1 is nil or empty")
 
         let newUrl2 = importArchive(url: url2.absoluteString, destUrl: newUrl1, polyOut: polyOut)
-        XCTAssertTrue(newUrl2 != nil && !newUrl2.isEmpty, "newUrl2 is nil or empty")
+        XCTAssertTrue(newUrl2 != nil && !newUrl2!.isEmpty, "newUrl2 is nil or empty")
         XCTAssertTrue(newUrl1 == newUrl2)
 
         let (stuff, error) = readDir(url: newUrl1!, polyOut: polyOut)
         XCTAssertNil(error, "error is not nil")
         XCTAssertTrue(stuff != nil && !stuff!.isEmpty, "no files were found")
-        XCTAssertTrue(stuff!.filter { $0["path"] == "multipleZips1/file1.rtf" }.isNotEmpty, "file1  not found")
-        XCTAssertTrue(stuff!.filter { $0["path"] == "multipleZips2/file2.rtf" }.isNotEmpty, "file2  not found")
+        XCTAssertTrue(!stuff!.contains { $0["path"] == "multipleZips1/file1.rtf" }, "file1  not found")
+        XCTAssertTrue(!stuff!.contains { $0["path"] == "multipleZips2/file2.rtf" }, "file2  not found")
     }
 }

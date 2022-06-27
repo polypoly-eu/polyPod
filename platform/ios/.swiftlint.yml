@@ -9,7 +9,6 @@ opt_in_rules:
     - empty_string
     - empty_count
     - empty_xctest_method
-    - unused_private_declaration
     - fatal_error_message
     - last_where
     - private_action
@@ -21,11 +20,11 @@ opt_in_rules:
     - fallthrough
     - modifier_order
     - unused_declaration
+    - unused_import
     - toggle_bool
     - yoda_condition
     - prefer_self_in_static_references
     - prefer_self_type_over_type_of_self
-    - private_action
     - private_outlet
     - quick_discouraged_call
     - quick_discouraged_focused_test
@@ -41,7 +40,3 @@ opt_in_rules:
     - contains_over_first_not_nil
     - contains_over_range_nil_comparison
     - literal_expression_end_indentation
-
-analyzer_rules:
-    - unused_declaration
-    - unused_import
