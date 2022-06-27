@@ -43,8 +43,9 @@ func mapFeatureManifest(_ value: MessagePackValue) throws -> FeatureManifest {
                            version: try dictionary["version"]?.getString(),
                            description: try dictionary["description"]?.getString(),
                            thumbnail: try dictionary["thumbnail"]?.getString(),
-                           thumbnailColor: try dictionary["thumbnail_color"]?.getString(),
-                           primaryColor: try dictionary["primary_color"]?.getString(),
+                           thumbnailColor: try dictionary["thumbnailColor"]?.getString(),
+                           primaryColor: try dictionary["primaryColor"]?.getString(),
+                           borderColor: try dictionary["borderColor"]?.getString(),
                            links: try dictionary["links"]?.getDictionary() as? [String: String])
 }
 

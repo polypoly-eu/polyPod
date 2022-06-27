@@ -8,5 +8,6 @@ public struct FeatureManifest {
     public let thumbnail: String?
     public let thumbnailColor: String?
     public let primaryColor: String?
+    public let borderColor: String?
     public let links: [String: String]?
 }
