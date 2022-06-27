@@ -91,10 +91,9 @@ function interactiveSetup() {
             } else if (answers.type === "importer") {
                 handleCreateImporterFeature();
             } else {
-                printErrorMsg(
+                throw Error(
                     `Feature type ${answers.type} not recognized. Aborting!`
                 );
-                throw Error("dev error");
             }
         })
         .catch((error) => {
@@ -125,7 +124,8 @@ yargs(hideBin(process.argv))
                 describe: "→ the type of feature: empty, preview, or importer",
             });
 
-            yargs.option("feature-version", {
+            // version is a reserved keyword in yargs
+            yargs.option("version", {
                 type: "string",
                 default: "0.0.1",
                 describe: "→ Version string for the package.json",
@@ -151,6 +151,7 @@ yargs(hideBin(process.argv))
         },
         handleCreate
     )
+    .version(false)
     .command("*", "Print with empty args", () => {}, interactiveSetup)
     .help().argv;
 
@@ -179,7 +180,7 @@ function handleCreateFeature(arg) {
     } else if (arg.type === "importer") {
         handleCreateImporterFeature();
     } else {
-        printErrorMsg(`Feature type ${arg.type} not recognized. Aborting!`);
+        throw Error(`Feature type ${arg.type} not recognized. Aborting!`);
     }
 }
 
@@ -225,7 +226,8 @@ function handleCreateEmptyFeature(arg) {
                 },
             },
             static: {
-                "manifest.json": () => manifestTemplate(feature_name, author),
+                "manifest.json": () =>
+                    manifestTemplate(feature_name, author, version),
                 "index.html": () =>
                     fs.readFileSync(
                         path.resolve(
@@ -337,7 +339,7 @@ function handleCreatePreviewFeature(arg) {
             static: {
                 images: {},
                 "manifest.json": () =>
-                    manifestTemplate(feature_name, author, "preview"),
+                    manifestTemplate(feature_name, author, version, "preview"),
                 "index.html": () =>
                     fs.readFileSync(
                         path.resolve(
@@ -412,7 +414,6 @@ function createDirectoryStructure(structure) {
 
 function checkIfValueExists(value, obj) {
     if (!(value in obj)) {
-        printErrorMsg(`Developer error: ${value} does not exist!`);
-        throw Error("Dev error");
+        throw Error(`Developer error: ${value} does not exist!`);
     }
 }

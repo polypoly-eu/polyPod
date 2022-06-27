@@ -1,9 +1,11 @@
-export function manifestTemplate(feature_name, author, feature_type) {
+export function manifestTemplate(feature_name, author, version, feature_type) {
     let base = {
         name: feature_name,
         author: author,
+        version: version,
         description: "",
         thumbnail: "",
+        thumbnailColor: "#ffffff",
         primaryColor: "#ffffff",
         links: {},
         translations: {
