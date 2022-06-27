@@ -93,14 +93,6 @@ describe("Report metadata analysis", () => {
             preferedLanguage
         );
     });
-
-    it("has correct polyPod runtime in analysis", async () => {
-        expect(reportData.polyPodRuntime).toBe(MOCKED_POD_RUNTIME);
-    });
-
-    it("has correct polyPod runtime in JSON report", async () => {
-        expect(jsonReport.data.polyPodRuntime).toBe(MOCKED_POD_RUNTIME);
-    });
 });
 
 function getReportNameFromAnalaysis(analysis) {
