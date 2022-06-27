@@ -25,6 +25,8 @@ import { exit } from "process";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const initial_version = "0.0.1";
+
 if (fs.existsSync("../dev-utils/rollup-plugin-copy-watch")) {
     printInfoMsg("✓ Running from the right path!");
 } else {
@@ -47,12 +49,6 @@ function interactiveSetup() {
             name: "name",
             message: "Feature Name:",
             default: "example",
-        },
-        {
-            type: "input",
-            name: "version",
-            message: "Version:",
-            default: "0.0.1",
         },
         {
             type: "input",
@@ -80,7 +76,6 @@ function interactiveSetup() {
             checkIfValueExists("type", answers);
             checkIfValueExists("name", answers);
             checkIfValueExists("author", answers);
-            checkIfValueExists("version", answers);
             checkIfValueExists("description", answers);
             checkIfValueExists("license", answers);
 
@@ -104,7 +99,7 @@ function interactiveSetup() {
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
     .command(
-        'create <what> <name> [--type=empty] [--version=0.0.1] [--author="polypoly poly-cli"] [--license=MIT] [--description="Generated from poly-cli"]',
+        'create <what> <name> [--type=empty] [--author="polypoly poly-cli"] [--license=MIT] [--description="Generated from poly-cli"]',
         "Creates features for now.",
         (yargs) => {
             yargs.positional("what", {
@@ -124,13 +119,6 @@ yargs(hideBin(process.argv))
                 describe: "→ the type of feature: empty, preview, or importer",
             });
 
-            // version is a reserved keyword in yargs
-            yargs.option("version", {
-                type: "string",
-                default: "0.0.1",
-                describe: "→ Version string for the package.json",
-            });
-
             yargs.option("author", {
                 type: "string",
                 default: "polypoly poly-cli",
@@ -146,12 +134,11 @@ yargs(hideBin(process.argv))
             yargs.option("description", {
                 type: "string",
                 default: "Generated from poly-cli; use your own here",
-                describe: "→ Version string for the package.json",
+                describe: "→ Description string for the package.json",
             });
         },
         handleCreate
     )
-    .version(false)
     .command("*", "Print with empty args", () => {}, interactiveSetup)
     .help().argv;
 
@@ -187,7 +174,7 @@ function handleCreateFeature(arg) {
 function handleCreateEmptyFeature(arg) {
     let feature_name = arg.name;
     let author = arg.author;
-    let version = arg.version;
+    let version = initial_version;
     let description = arg.description;
     let license = arg.license;
 
@@ -264,7 +251,7 @@ function handleCreateEmptyFeature(arg) {
 function handleCreatePreviewFeature(arg) {
     let feature_name = arg.name;
     let author = arg.author;
-    let version = arg.version;
+    let version = initial_version;
     let description = arg.description;
     let license = arg.license;
 
