@@ -1,26 +1,26 @@
 {
     "progress_banner": {
         "stage": 1,
-        "title": "preview:progress_banner_title",
-        "description": "preview:progress_banner_description"
+        "title": "preview:progress.banner.title",
+        "description": "preview:progress.banner.description"
     },
     "title": "preview:title",
     "sections": [
         {
-            "title": "preview:section_title",
-            "description": "preview:section_description",
+            "title": "preview:section.title",
+            "description": "preview:section.description",
             "images": []
         },
         {
-            "title": "preview:section_title",
-            "description": "preview:section_description",
+            "title": "preview:section.title",
+            "description": "preview:section.description",
             "images": []
         }
     ],
     "footer": {
-        "title": "preview:footer_title",
-        "description": "preview:footer_description",
+        "title": "preview:footer.title",
+        "description": "preview:footer.description",
         "image": "",
-        "buttonTitle": "preview:footer_button_title"
+        "buttonTitle": "preview:footer.button.title"
     }
 }
