@@ -51,6 +51,7 @@ final class Network: NetworkProtocol {
         )
     }
 
+    // TODO - refactor func with less params
     // swiftlint:disable function_parameter_count
     func httpFetchCall(
         type: String,
@@ -61,26 +62,16 @@ final class Network: NetworkProtocol {
         allowInsecure: Bool
     ) -> Result<Data, PodApiError> {
         // swiftlint:enable function_parameter_count
+        let requestURL = URL(string: url)!
 
-        validateURL(url)
-
-        var request = URLRequest(url: requestURL)
-        request.httpMethod = type
-        if body != nil {
-            request.httpBody = body!.data(using: .utf8)
+        guard requestURL.scheme != nil else {
+            return .failure(PodApiError.networkError(type, message: "Bad URL: \(url)"))
+        }
+        if !allowInsecure && !(requestURL.scheme == "https") {
+            return .failure(PodApiError.networkSecurityError(type, scheme: requestURL.scheme ?? ""))
         }
 
-        if let contentType = contentType {
-            request.setValue(contentType, forHTTPHeaderField: "Content-Type")
-        }
-
-        if let authToken = authToken {
-            let encoded = Data(authToken.utf8).base64EncodedString()
-            request.setValue(
-                "Basic \(encoded)",
-                forHTTPHeaderField: "Authorization"
-            )
-        }
+        let request = buildRequest(requestURL, type, body, authToken)
 
         let semaphore = DispatchSemaphore(value: 0)
         var fetchError: PodApiError?
@@ -102,7 +93,7 @@ final class Network: NetworkProtocol {
             semaphore.signal()
             return
         }
-
+        
         guard let data = data else {
             fetchError = PodApiError.networkError(
                 "http\(type)",
@@ -123,15 +114,25 @@ final class Network: NetworkProtocol {
         return fetchError == nil ? .success(responseData!) : .failure(fetchError!)
     }
 
-    private func validateURL(url: String) -> Result<String, JSONError> {
-        let requestURL = URL(string: url)!
+    private func buildRequest(requestURL: URL, type: String, body: String, authToken: String?): URLRequest {
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = type
+        if body != nil {
+            request.httpBody = body!.data(using: .utf8)
+        }
 
-        guard requestURL.scheme != nil else {
-            return .failure(PodApiError.networkError(type, message: "Bad URL: \(url)"))
+        if let contentType = contentType {
+            request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         }
-        if !allowInsecure && !(requestURL.scheme == "https") {
-            return .failure(PodApiError.networkSecurityError(type, scheme: requestURL.scheme ?? ""))
+
+        if let authToken = authToken {
+            let encoded = Data(authToken.utf8).base64EncodedString()
+            request.setValue(
+                "Basic \(encoded)",
+                forHTTPHeaderField: "Authorization"
+            )
         }
+        return request
     }
 
 }
