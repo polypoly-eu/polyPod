@@ -84,8 +84,10 @@ const Import = () => {
         runWithLoadingScreen(async function () {
             try {
                 setSelectedFile(await polyNav.pickFile("application/zip"));
+                console.log("file - selection worked");
             } catch (error) {
                 setGlobalError(new FileSelectionError(error));
+                console.log("file - selection broke");
             }
         });
     };
@@ -98,8 +100,10 @@ const Import = () => {
                 await polyOut.importArchive(selectedFile.url);
                 refreshFiles();
                 setSelectedFile(null);
+                console.log("importing worked - " + selectedFile.url);
             } catch (error) {
                 setGlobalError(new FileImportError(error));
+                console.log("importing broke - " + selectedFile.url);
             }
         });
     };

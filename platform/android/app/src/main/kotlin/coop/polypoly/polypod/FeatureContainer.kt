@@ -277,6 +277,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             override fun onConsoleMessage(
                 consoleMessage: ConsoleMessage?
             ): Boolean {
+
                 if (consoleMessage == null) {
                     logger.warn(
                         "Unknown message from " +
@@ -292,7 +293,12 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                     ConsoleMessage.MessageLevel.ERROR,
                     ConsoleMessage.MessageLevel.WARNING ->
                         logger.warn(message)
-                    else -> logger.info(message)
+                    else -> {
+                        AlertDialog.Builder(context)
+                            .setMessage(message)
+                            .setPositiveButton("ok") { _, _ -> }
+                            .show()
+                    }
                 }
                 return true
             }
@@ -411,6 +417,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             )
             errorHandler(error)
         }
+
+
 
         @Suppress("unused")
         @JavascriptInterface
