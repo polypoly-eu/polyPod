@@ -10,6 +10,11 @@ export function simpleJavaScriptCall(): void {
     return;
 }
 
+export async function awaitPodObject(): void {
+    console.log("awaitPodObject()");
+    await pod;
+}
+
 export async function canCallPolyInAddWithNoQuads(): Promise<void> {
     console.log("canCallPolyInAddWithNoQuads()");
     await polyIn.add();
