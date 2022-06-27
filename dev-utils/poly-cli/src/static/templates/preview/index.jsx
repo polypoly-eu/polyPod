@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import { Slideshow, Screen, ClickableCard } from "@polypoly-eu/poly-look";
+import {
+    Slideshow,
+    Screen,
+    ClickableCard,
+    ProgressBanner,
+    SideSwiper,
+    SideSheet,
+} from "@polypoly-eu/poly-look";
 import content from "./static/content.json";
 import i18n from "!silly-i18n";
 
@@ -37,8 +44,39 @@ const Footer = (props) => {
     );
 };
 
+const ProgressInfoView = () => {
+    return (
+        <div>
+            <h1>Under construction</h1>
+        </div>
+    );
+};
+
+const ProgressInfoPopUp = ({ onClose }) => {
+    return (
+        <SideSwiper
+            onClose={onClose}
+            open={true}
+            lastChildSelector=".poly-button"
+            Component={(props) => (
+                <SideSheet
+                    title={i18n.t("preview:baseInfo.title1")}
+                    okLabel={i18n.t("common:button.ok")}
+                    {...props}
+                    className="poly-theme-light"
+                >
+                    <div className="base-info-contents">
+                        <ProgressInfoView />
+                    </div>
+                </SideSheet>
+            )}
+        ></SideSwiper>
+    );
+};
+
 const App = () => {
     const [pod, setPod] = useState(null);
+    const [popUpVisible, setPopUpVisible] = useState(true);
 
     const initPod = async () => await window.pod;
 
@@ -52,6 +90,15 @@ const App = () => {
     return (
         <Screen className="poly-theme-light" layout="poly-standard-layout">
             <div className="preview">
+                <ProgressBanner
+                    stage={content.progress_banner.stage}
+                    title={i18n.t(content.progress_banner.title)}
+                    description={i18n.t(content.progress_banner.description)}
+                    onClick={() => {
+                        console.log("Clicked the Progress Banner button");
+                        setPopUpVisible(true);
+                    }}
+                />
                 <h1>{i18n.t(content.title)}</h1>
                 <div>
                     {content.sections.map((s, i) => (
@@ -61,6 +108,14 @@ const App = () => {
                 <div>
                     <Footer model={content.footer} pod={pod} />
                 </div>
+                {popUpVisible && (
+                    <ProgressInfoPopUp
+                        onClose={() => {
+                            console.log("Clicked the Close button");
+                            setPopUpVisible(false);
+                        }}
+                    />
+                )}
             </div>
         </Screen>
     );
