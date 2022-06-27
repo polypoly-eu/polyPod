@@ -5,6 +5,9 @@ let quads: Array<RDF.Quad> = [];
 let pod: Pod;
 let polyIn: PolyIn;
 
+// TODO: Workaround for missing console.debug on iOS
+console.debug = console.debug || console.log;
+
 export function simpleJavaScriptCall(): void {
     console.log("simpleJavaScriptCall()");
     return;
