@@ -145,21 +145,11 @@ class UpdateNotification {
     }
 
     var showPush: Bool {
-        // swiftlint:disable implicit_getter
-        get {
-            return state == .NOT_SEEN
-        }
-        // swiftlint:enable implicit_getter
-
+        return state == .NOT_SEEN
     }
 
     var showInApp: Bool {
-        // swiftlint:disable implicit_getter
-        get {
             return state != .ALL_SEEN
-        }
-        // swiftlint:enable implicit_getter
-
     }
 
     func handleStartup() {
