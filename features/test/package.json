@@ -1,6 +1,8 @@
 {
   "name": "test-feature",
   "scripts": {
+    "eslint": "eslint src --ext .ts",
+    "lint": "npm run eslint",
     "build": "rollup -c"
   },
   "dependencies": {
