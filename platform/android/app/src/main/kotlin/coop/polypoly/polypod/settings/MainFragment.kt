@@ -60,7 +60,6 @@ class MainFragment : PreferenceFragmentCompat() {
             newBiometricState = newValue
         ) {
             onReturn()
-            true
         }
     }
 }

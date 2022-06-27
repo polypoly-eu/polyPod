@@ -52,4 +52,5 @@
 
     <string name="webview_alert_title">Your Chrome version is old!</string>
     <string name="webview_alert_message">You are required to have a Chrome version greater than 53, yours is %1$s. Please, update your Chrome to make use of this feature smoothly.</string>
+    <string name="title_activity_home_screen">HomeScreenActivity</string>
 </resources>

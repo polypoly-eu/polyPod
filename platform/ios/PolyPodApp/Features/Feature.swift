@@ -1,17 +1,20 @@
 import SwiftUI
 import PolyPodCoreSwift
 
+typealias FeatureId = String
+
 class Feature {
     let path: URL
-    let id: String
+    let id: FeatureId
     let name: String
     let author: String?
     let description: String?
     let primaryColor: Color?
     let thumbnailColor: Color?
     let thumbnail: URL?
+    let borderColor: Color?
     private let links: [String: String]
-    
+
     static func load(path: URL) -> Feature? {
         guard let manifest = readManifest(path) else {
             return nil
@@ -21,7 +24,7 @@ class Feature {
             manifest: manifest
         )
     }
-    
+
     init(
         path: URL,
         name: String?,
@@ -30,7 +33,8 @@ class Feature {
         thumbnail: String?,
         thumbnailColor: String?,
         primaryColor: String?,
-        links: [String: String]?
+        links: [String: String]?,
+        borderColor: String?
     ) {
         self.path = path
         let id = path.lastPathComponent
@@ -46,8 +50,9 @@ class Feature {
             thumbnailPath: thumbnail
         )
         self.links = links ?? [:]
+        self.borderColor = parseColor(hexValue: borderColor)
     }
-    
+
     convenience init(path: URL, manifest: FlatbObject<FeatureManifest>) {
         var links: [String: String] = [:]
         for idx in 0..<manifest.linksCount {
@@ -62,9 +67,11 @@ class Feature {
                   thumbnail: manifest.thumbnail,
                   thumbnailColor: manifest.thumbnailColor,
                   primaryColor: manifest.primaryColor,
-                  links: links)
+                  links: links,
+                  borderColor: manifest.borderColor
+        )
     }
-    
+
     func findUrl(target: String) -> String? {
         if let url = links[target] {
             return url
