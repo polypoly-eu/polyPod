@@ -247,7 +247,7 @@ function handleCreateEmptyFeature(arg) {
                     ),
             },
         },
-        test: [],
+        test: {},
         "package.json": () =>
             packageTemplate(
                 feature_name,
@@ -347,6 +347,7 @@ function handleCreatePreviewFeature(arg) {
             },
             static: {
                 fonts: path.resolve(__dirname, "./src/static/fonts"),
+                images: {},
                 "manifest.json": () =>
                     manifestTemplate(feature_name, author, "preview"),
                 "index.html": () =>
@@ -365,7 +366,7 @@ function handleCreatePreviewFeature(arg) {
                     ),
             },
         },
-        test: [],
+        test: {},
         "package.json": () =>
             packageTemplate(
                 feature_name,
