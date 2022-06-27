@@ -25,7 +25,7 @@ const Footer = (props) => {
                 buttonText={i18n.t(props.model.buttonTitle)}
                 onlyButtonClickEvent={true}
                 onClick={() => {
-                    props.pod.polyNav.openUrl(props.model.buttonLink);
+                    props.pod.polyNav.openUrl("learn-more");
                 }}
             >
                 <h3>{i18n.t(props.model.title)}</h3>

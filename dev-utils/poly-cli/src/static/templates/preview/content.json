@@ -16,7 +16,6 @@
         "title": "preview:footer_title",
         "description": "preview:footer_description",
         "image": "",
-        "buttonTitle": "preview:footer_button_title",
-        "buttonLink": "learn-more"
+        "buttonTitle": "preview:footer_button_title"
     }
 }
