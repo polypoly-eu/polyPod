@@ -1,7 +1,7 @@
 import Foundation
 import MessagePack
 
-protocol EndpointProtocol: class {
+protocol EndpointProtocol: AnyObject {
     func send(
         endpointId: String, 
         payload: String, 
@@ -17,7 +17,7 @@ protocol EndpointProtocol: class {
     )
 }
 
-protocol EndpointDelegate: class {
+protocol EndpointDelegate: AnyObject {
     func doHandleApproveEndpointFetch(
         endpointId: String, 
         completion: @escaping (Bool) -> Void
