@@ -15,17 +15,17 @@ import "./progressBanner.css";
 export function ProgressBanner({ stage, title, description, onClick }) {
   return (
     <div className="poly-progress-banner">
-      <ProgressIcon stage={stage} />
-      <div className="contents">
+      <div className="row">
+        <ProgressIcon stage={stage} />
         <p className="title">{title}</p>
-        <p className="description">{description}</p>
+        <IconButton
+          icon="question"
+          fillDirection="left"
+          className="info-button"
+          onClick={onClick}
+        />
       </div>
-      <IconButton
-        icon="question"
-        fillDirection="left"
-        className="info-button"
-        onClick={onClick}
-      />
+      <p className="description">{description}</p>
     </div>
   );
 }
