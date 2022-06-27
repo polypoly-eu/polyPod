@@ -43,8 +43,6 @@ function setup(structure) {
         }
 
         createDirectoryStructure(structure);
-
-        execSync(`cd ${feature_name} && npm i && npm run build`);
     } catch (error) {
         printErrorMsg(`${error}`);
     }
@@ -268,6 +266,7 @@ function handleCreateEmptyFeature(arg) {
     };
 
     setup(structure);
+    execSync(`cd ${feature_name} && npm i && npm run build`);
 }
 
 function handleCreatePreviewFeature(arg) {
@@ -346,7 +345,6 @@ function handleCreatePreviewFeature(arg) {
                 },
             },
             static: {
-                fonts: path.resolve(__dirname, "./src/static/fonts"),
                 images: {},
                 "manifest.json": () =>
                     manifestTemplate(feature_name, author, "preview"),
@@ -387,6 +385,9 @@ function handleCreatePreviewFeature(arg) {
     };
 
     setup(structure);
+    execSync(
+        `cd ${feature_name}/src/static && ln -s ../../../../assets/fonts . && cd ../../ && npm i && npm run build`
+    );
 }
 
 function handleCreateImporterFeature() {
