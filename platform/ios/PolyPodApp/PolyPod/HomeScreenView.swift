@@ -1,5 +1,7 @@
-import SwiftUI
+// swiftlint:disable file_length
+
 import Combine
+import SwiftUI
 
 // MARK: - Model
 
@@ -39,7 +41,7 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
         self.featureStorage = featureStorage
         self.categoriesList = featureStorage
             .categoriesList
-            .map(HomeScreenStorageAdapter.mapCategoryModel)
+            .map(Self.mapCategoryModel)
             .eraseToAnyPublisher()
     }
 
@@ -71,7 +73,7 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
                 image: image,
                 backgroundColor: feature.thumbnailColor ?? .white,
                 borderColor: feature.borderColor ?? .white
-                )
+            )
         }
     }
 }
@@ -186,6 +188,7 @@ struct HomeScreenConstants {
                 .weight(PolyStyle.Font.Weight.medium),
             alignment: PolyStyle.Font.Alignment.left
         )
+
         static let description = Typography(
             font:
                 .custom(PolyStyle.Font.Family.jostRegular, size: PolyStyle.Font.Size.base)
@@ -193,7 +196,10 @@ struct HomeScreenConstants {
             alignment: PolyStyle.Font.Alignment.left
         )
 
+        // swiftlint:disable nesting
         struct Button {
+            // swiftlint:enable nesting
+
             static let title = Typography(
                 font:
                     .custom(PolyStyle.Font.Family.jostMedium, size: PolyStyle.Font.Size.lg)
@@ -348,8 +354,12 @@ struct MyDataSectionView: View {
             Text(sectionModel.title)
                 .font(HomeScreenConstants.Section.title.font)
                 .multilineTextAlignment(HomeScreenConstants.Section.title.alignment)
-            ForEach(Array(sectionModel.cards.chunked(into: HomeScreenConstants.TileContainer.numberOfColumns).enumerated()),
-                    id: \.offset) { index, chunk in
+            ForEach(
+                Array(
+                    sectionModel.cards.chunked(into: HomeScreenConstants.TileContainer.numberOfColumns).enumerated()
+                ),
+                id: \.offset
+            ) { index, chunk in
                 let type = containersConfig[index % containersConfig.count]
                 switch type {
                 case .largeLeft:
@@ -371,7 +381,12 @@ struct DataKnowHowSectionView: View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
             VStack(alignment: .leading, spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
-                ForEach(Array(sectionModel.cards.chunked(into: HomeScreenConstants.TileContainer.numberOfColumns).enumerated()), id: \.offset) { _, chunk in
+                ForEach(
+                    Array(
+                        sectionModel.cards.chunked(into: HomeScreenConstants.TileContainer.numberOfColumns).enumerated()
+                    ),
+                    id: \.offset
+                ) { _, chunk in
                     RowContainerView(cards: chunk)
                 }
             }
@@ -438,7 +453,7 @@ struct RowContainerView: View {
             ForEach(cards) { card in
                 SmallCardView(card: card)
             }
-            if (cards.count < HomeScreenConstants.TileContainer.numberOfColumns) {
+            if cards.count < HomeScreenConstants.TileContainer.numberOfColumns {
                 Spacer()
             }
         }
@@ -628,7 +643,7 @@ struct HomeScreenView_Previews: PreviewProvider {
         .init(title: "Your Data",
               cards: [
                 .init(id: UUID().uuidString,
-                      title: "polyExplorer",
+                      title: "1 polyExplorer",
                       description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
@@ -636,14 +651,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                 ),
                 .init(
                     id: UUID().uuidString,
-                    title: "Big big many big hello there",
-                    description: "nada",
-                    image: UIImage(named: "AppIcon")!,
-                    backgroundColor: .blue,
-                    borderColor: .red
-                ),
-                .init(
-                    id: UUID().uuidString, title: "Amazon Importer",
+                    title: "2 Big big many big hello there",
                     description: "nada",
                     image: UIImage(named: "AppIcon")!,
                     backgroundColor: .blue,
@@ -651,45 +659,42 @@ struct HomeScreenView_Previews: PreviewProvider {
                 ),
                 .init(
                     id: UUID().uuidString,
-                    title: "polyExplorer",
+                    title: "3 Amazon Importer",
+                    description: "nada",
+                    image: UIImage(named: "AppIcon")!,
+                    backgroundColor: .blue,
+                    borderColor: .red
+                ),
+                .init(
+                    id: UUID().uuidString,
+                    title: "4 polyExplorer",
                     description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                     image: UIImage(named: "AppIcon")!,
                     backgroundColor: .blue,
                     borderColor: .red
                 ),
                 .init(id: UUID().uuidString,
-                      title: "Big big many big hello there",
-                      description: "nada",
-                      image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue,
-                      borderColor: .red
-                ),
-                .init(id: UUID().uuidString, title: "Amazon Importer",
+                      title: "5 Big big many big hello there",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
                       borderColor: .red
                 ),
                 .init(id: UUID().uuidString,
-                      title: "polyExplorer",
+                      title: "6 Amazon Importer",
+                      description: "nada",
+                      image: UIImage(named: "AppIcon")!,
+                      backgroundColor: .blue,
+                      borderColor: .red
+                ),
+                .init(id: UUID().uuidString,
+                      title: "7 polyExplorer",
                       description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
                       borderColor: .red
-                ),
-                .init(id: UUID().uuidString,
-                      title: "Big big many big hello there",
-                      description: "nada",
-                      image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue,
-                      borderColor: .red
-                ),
-                .init(id: UUID().uuidString, title: "Amazon Importer",
-                      description: "nada",
-                      image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue,
-                      borderColor: .red
-                )],
+                )
+              ],
               type: .yourData),
         .init(title: "Know how",
               cards: [
@@ -702,12 +707,6 @@ struct HomeScreenView_Previews: PreviewProvider {
                 ),
                 .init(id: UUID().uuidString,
                       title: "Big big many big hello there",
-                      description: "nada",
-                      image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue,
-                      borderColor: .red
-                ),
-                .init(id: UUID().uuidString, title: "Amazon Importer",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
@@ -730,13 +729,8 @@ struct HomeScreenView_Previews: PreviewProvider {
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
                       borderColor: .red
-                ),
-                .init(id: UUID().uuidString, title: "Amazon Importer",
-                      description: "nada",
-                      image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue,
-                      borderColor: .red
-                )],
+                )
+              ],
               type: .tools)
     ]
 

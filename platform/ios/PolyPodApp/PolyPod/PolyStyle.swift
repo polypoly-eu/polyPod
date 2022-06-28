@@ -46,6 +46,8 @@ struct PolyStyle {
     }
 
     struct Font {
+        // swiftlint:disable nesting
+
         struct Family {
             static let jostRegular = "Jost-Regular"
             static let jostMedium = "Jost-Medium"
@@ -70,6 +72,8 @@ struct PolyStyle {
             static let left: TextAlignment = .leading
             static let right: TextAlignment = .trailing
         }
+        // swiftlint:enable nesting
+
     }
 
     struct Border {

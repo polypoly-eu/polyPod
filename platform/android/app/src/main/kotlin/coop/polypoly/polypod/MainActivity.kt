@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             throw ex
         }
 
-        FeatureStorage().installBundledFeatures(this)
+        FeatureStorage.importFeatures(this)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
     }

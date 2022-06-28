@@ -1,5 +1,5 @@
-import Foundation
 import CoreData
+import Foundation
 
 final class CoreDataStack {
     static let shared = CoreDataStack()
@@ -11,17 +11,24 @@ final class CoreDataStack {
     /*
      This is the context to be used to perform all operations.
      
-     Note: It is optional, as persistent stores are not loaded at initialization, but only when protected data is available.
-     When protected data becomes unavailable, context will be saved and nullified, see protectedDataWillBecomeUnavailable.
+     Note: It is optional, as persistent stores are not loaded at initialization, 
+     but only when protected data is available.
+     When protected data becomes unavailable, context will be saved and nullified, 
+     see protectedDataWillBecomeUnavailable.
      */
     private var context: NSManagedObjectContext?
     
     private init() {
         let modelName = "PolyPodModel"
-        let model = NSManagedObjectModel.with(name: modelName, in: Bundle(for: CoreDataStack.self))
-        container = NSPersistentContainer.load(from: NSPersistentContainer.defaultDirectoryURL().appendingPathComponent("\(modelName).sqlite"),
-                                               name: modelName,
-                                               model: model)
+        let model = NSManagedObjectModel.with(
+            name: modelName, 
+            in: Bundle(for: CoreDataStack.self)
+        )
+        container = NSPersistentContainer.load(
+            from: NSPersistentContainer.defaultDirectoryURL().appendingPathComponent("\(modelName).sqlite"),
+            name: modelName,
+            model: model
+        )
     }
     
     // MARK: - Internal API
@@ -57,10 +64,13 @@ final class CoreDataStack {
 extension CoreDataStack {
     
     /// Tell core data stack that protected data is available.
-    /// Persistent stores will be loaded and context will be created. After this setup, operations can be performed.
+    /// Persistent stores will be loaded and context will be created. 
+    /// After this setup, operations can be performed.
     func protectedDataDidBecomeAvailable() {
-        /// protectedDataWillBecomeUnavailable will not be called when the device is locked but PolyPod is not in foreground.
-        /// Therefore the context and persistent stores didn't get a chance to be cleared. Avoid loading the persistent stores twice.
+        /// protectedDataWillBecomeUnavailable will not be called 
+        /// when the device is locked but PolyPod is not in foreground.
+        /// Therefore the context and persistent stores didn't get a 
+        /// chance to be cleared. Avoid loading the persistent stores twice.
         guard context == nil else { return }
         
         var error: Error?
@@ -77,7 +87,8 @@ extension CoreDataStack {
     }
     
     /// Tell core data that protected data is about to become unavailable.
-    /// Context will be saved, after wich persistent stores will be removed along with nullifying the context.
+    /// Context will be saved, after which persistent stores will be removed 
+    /// along with nullifying the context.
     func protectedDataWillBecomeUnavailable() {
         let coordinator = self.container.persistentStoreCoordinator
         perform { context in
@@ -97,12 +108,16 @@ extension CoreDataStack {
 
 fileprivate extension NSPersistentStoreDescription {
     static func make(for persistentStoreURL: URL) -> NSPersistentStoreDescription {
-        let persistentStoreDescription = NSPersistentStoreDescription(url: persistentStoreURL)
+        let persistentStoreDescription = 
+            NSPersistentStoreDescription(url: persistentStoreURL)
         
         persistentStoreDescription.type = NSSQLiteStoreType
         persistentStoreDescription.shouldMigrateStoreAutomatically = true
         persistentStoreDescription.shouldInferMappingModelAutomatically = true
-        persistentStoreDescription.setOption(FileProtectionType.complete as NSObject, forKey: NSPersistentStoreFileProtectionKey)
+        persistentStoreDescription.setOption(
+            FileProtectionType.complete as NSObject, 
+            forKey: NSPersistentStoreFileProtectionKey
+        )
         
         return persistentStoreDescription
     }
