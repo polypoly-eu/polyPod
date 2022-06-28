@@ -20,5 +20,6 @@
             }
         }
     },
-    "borderColor": "#cbd5e0"
+    "borderColor": "#cbd5e0",
+    "textColor": "#ffffff"
 }
