@@ -73,7 +73,7 @@ export const PolyImportProvider = ({
   //when files changed run the importer first and create an account model first.
   //after there is an account the analyses are triggered.
   useEffect(() => {
-    console.log("files" + files[0].id);
+    console.log("files" + files?.[0]?.id);
     if (!files?.[0]) return;
     importData({ dataImporters, zipData: files[0], DataAccount }).then(
       (newAccount) => {
