@@ -9015,6 +9015,7 @@
     "description": "",
     "thumbnail": "",
     "primaryColor": "#ffffff",
+    "borderColor": "#ffffff",
     "links": {
         "learn-more": "https://polypoly.org"
     },
