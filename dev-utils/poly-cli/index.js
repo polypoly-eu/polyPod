@@ -133,7 +133,8 @@ yargs(hideBin(process.argv))
 
             yargs.option("description", {
                 type: "string",
-                default: "Generated from poly-cli; use your own here",
+                default:
+                    "Generated from poly-cli; substitute for your own here",
                 describe: "→ Description string for the package.json",
             });
         },
