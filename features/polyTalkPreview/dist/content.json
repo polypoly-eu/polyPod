@@ -9,7 +9,7 @@
         {
             "title": "preview:section.title",
             "description": "preview:section.description",
-            "images": []
+            "images": ["preview:image1"]
         },
         {
             "title": "preview:section.title",

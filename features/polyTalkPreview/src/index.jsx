@@ -20,7 +20,9 @@ const Section = (props) => {
             <h3 className="section-title">{i18n.t(props.model.title)}</h3>
             <p>{i18n.t(props.model.description)}</p>
             {props.model.images.length > 0 && (
-                <Slideshow images={props.model.images} />
+                <Slideshow
+                    images={props.model.images.map((key) => i18n.t(key))}
+                />
             )}
         </div>
     );

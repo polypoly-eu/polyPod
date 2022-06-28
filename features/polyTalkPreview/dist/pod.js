@@ -9010,21 +9010,22 @@
     const NAV_LIGHT_FOREGROUND_COLOR = "#ffffff";
 
     const MANIFEST_DATA = {
-  "name": "poly-talk-preview",
-  "author": "polypoly poly-cli",
-  "description": "",
-  "thumbnail": "",
-  "primaryColor": "#ffffff",
-  "links": {
-    "learn-more": "https://polypoly.org"
-  },
-  "translations": {
-    "de": {
-      "author": "",
-      "description": ""
+    "name": "poly-talk-preview",
+    "author": "polypoly poly-cli",
+    "description": "",
+    "thumbnail": "",
+    "primaryColor": "#ffffff",
+    "links": {
+        "learn-more": "https://polypoly.org"
+    },
+    "translations": {
+        "de": {
+            "author": "",
+            "description": ""
+        }
     }
-  }
-};
+}
+;
 
     /**
      * It opens a IndexedDB database, creates object stores and indexes for PolyIn and PolyOut storage.
