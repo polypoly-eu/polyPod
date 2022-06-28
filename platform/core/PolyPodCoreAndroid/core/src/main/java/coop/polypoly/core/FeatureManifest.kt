@@ -8,5 +8,6 @@ data  class FeatureManifest(
     val thumbnail: String?,
     val thumbnailColor: String?,
     val primaryColor: String?,
+    val borderColor: String?,
     val links: Map<String, String>?
 )

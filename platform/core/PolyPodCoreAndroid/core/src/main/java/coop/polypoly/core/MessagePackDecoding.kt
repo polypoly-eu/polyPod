@@ -24,7 +24,6 @@ fun mapError(msgObject: Map<Value, Value>): CoreFailure {
         CoreExceptionCode.getByValue(code)?.also {
             return CoreFailure(it, message = message)
         }
-        throw
     }
     throw InvalidCoreErrorFormat(msgObject.toString())
 }
@@ -37,8 +36,9 @@ fun mapFeatureManifest(msgObject: Value): FeatureManifest {
     val version = msgObject[ValueFactory.newString("version")]?.getStringValue()
     val description = msgObject[ValueFactory.newString("description")]?.getStringValue()
     val thumbnail = msgObject[ValueFactory.newString("thumbnail")]?.getStringValue()
-    val thumbnailColor = msgObject[ValueFactory.newString("thumbnail_color")]?.getStringValue()
-    val primaryColor = msgObject[ValueFactory.newString("primary_color")]?.getStringValue()
+    val thumbnailColor = msgObject[ValueFactory.newString("thumbnailColor")]?.getStringValue()
+    val primaryColor = msgObject[ValueFactory.newString("primaryColor")]?.getStringValue()
+    val borderColor = msgObject[ValueFactory.newString("borderColor")]?.getStringValue()
     val links = msgObject[ValueFactory.newString("links")]?.getMapValue()
 
     return FeatureManifest(
@@ -49,6 +49,7 @@ fun mapFeatureManifest(msgObject: Value): FeatureManifest {
         thumbnail,
         thumbnailColor,
         primaryColor,
+        borderColor,
         links?.map { it.key.asStringValue().asString() to it.value.asStringValue().asString() }?.toMap()
     )
 }

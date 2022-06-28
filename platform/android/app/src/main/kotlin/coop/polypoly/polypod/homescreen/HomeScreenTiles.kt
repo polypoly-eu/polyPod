@@ -91,7 +91,7 @@ fun BigTileView(tile: Tile) {
                     )
                 )
                 Text(
-                    text = "",
+                    text = tile.model.description,
                     color = foregroundColor,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = tile.style.descriptionFont!!.weight,

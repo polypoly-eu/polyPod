@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import coop.polypoly.core.Core
 import coop.polypoly.core.CoreFailure
+import coop.polypoly.core.CoreExceptionCode
 import coop.polypoly.polypod.core.UpdateNotification
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             logger.info(ex.message)
             (ex as? CoreFailure)?.also {
                 // Ignore CoreAlreadyBootstrapped error, as it is not breaking.
-                if (it.code == 2) {
+                if (it.code == CoreExceptionCode.CoreAlreadyBootstrapped) {
                     return
                 }
             }
