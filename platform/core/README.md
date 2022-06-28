@@ -9,7 +9,10 @@ Logic shared across polyPod platforms: iOS and Android.
 
 ## Building
 
-It is required to run `make` in a bash terminal which contains the necessary dependencies - curl, make, unzip. MacOS and Linux systems terminal should already have everything needed. On Windows, a terminal like [GitBash](https://gitforwindows.org) is needed.
+It is required to run `make` in a bash terminal which contains the necessary
+dependencies - curl, make, unzip. MacOS and Linux systems terminal should
+already have everything needed. On Windows, a terminal application like
+[GitBash](https://gitforwindows.org) is needed.
 
 - Building rust core:
 ```
@@ -22,7 +25,8 @@ make ios_bindings
 ```
 
 - Building android core:
-```
+
+```shell
 make android_bindings
 ```
 
