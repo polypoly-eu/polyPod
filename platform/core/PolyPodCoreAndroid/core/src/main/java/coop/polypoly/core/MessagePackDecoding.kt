@@ -20,7 +20,7 @@ fun Value.getMapValue(): Map<Value, Value>? {
 }
 
 fun Map<Value, Value>.get(key: String): Value? {
-    this[ValueFactory.newString(key)]
+    return this[ValueFactory.newString(key)]
 }
 
 fun mapError(msgObject: Map<Value, Value>): CoreFailure {

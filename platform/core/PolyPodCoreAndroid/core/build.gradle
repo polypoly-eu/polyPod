@@ -11,9 +11,6 @@ ktlint {
         reporter "checkstyle"
         reporter "plain"
     }
-    filter {
-        exclude("**/FlatbuffersGenerated/**")
-    }
 }
 
 android {
