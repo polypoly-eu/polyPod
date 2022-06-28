@@ -1,5 +1,7 @@
-import SwiftUI
+// swiftlint:disable file_length
+
 import Combine
+import SwiftUI
 
 // MARK: - Model
 
@@ -10,6 +12,7 @@ struct Card: Identifiable {
     let image: UIImage
     let backgroundColor: Color
     let borderColor: Color
+    let textColor: Color
 }
 
 struct HomeScreenSectionModel {
@@ -39,7 +42,7 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
         self.featureStorage = featureStorage
         self.categoriesList = featureStorage
             .categoriesList
-            .map(HomeScreenStorageAdapter.mapCategoryModel)
+            .map(Self.mapCategoryModel)
             .eraseToAnyPublisher()
     }
 
@@ -70,7 +73,8 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
                 description: feature.description ?? "",
                 image: image,
                 backgroundColor: feature.thumbnailColor ?? .white,
-                borderColor: feature.borderColor ?? .white
+                borderColor: feature.borderColor ?? .white,
+                textColor: feature.textColor ?? .black
             )
         }
     }
@@ -352,8 +356,12 @@ struct MyDataSectionView: View {
             Text(sectionModel.title)
                 .font(HomeScreenConstants.Section.title.font)
                 .multilineTextAlignment(HomeScreenConstants.Section.title.alignment)
-            ForEach(Array(sectionModel.cards.chunked(into: HomeScreenConstants.TileContainer.numberOfColumns).enumerated()),
-                    id: \.offset) { index, chunk in
+            ForEach(
+                Array(
+                    sectionModel.cards.chunked(into: HomeScreenConstants.TileContainer.numberOfColumns).enumerated()
+                ),
+                id: \.offset
+            ) { index, chunk in
                 let type = containersConfig[index % containersConfig.count]
                 switch type {
                 case .largeLeft:
@@ -375,7 +383,12 @@ struct DataKnowHowSectionView: View {
         VStack(alignment: .leading) {
             Text(sectionModel.title).fontWeight(.bold)
             VStack(alignment: .leading, spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
-                ForEach(Array(sectionModel.cards.chunked(into: HomeScreenConstants.TileContainer.numberOfColumns).enumerated()), id: \.offset) { _, chunk in
+                ForEach(
+                    Array(
+                        sectionModel.cards.chunked(into: HomeScreenConstants.TileContainer.numberOfColumns).enumerated()
+                    ),
+                    id: \.offset
+                ) { _, chunk in
                     RowContainerView(cards: chunk)
                 }
             }
@@ -442,7 +455,7 @@ struct RowContainerView: View {
             ForEach(cards) { card in
                 SmallCardView(card: card)
             }
-            if (cards.count < HomeScreenConstants.TileContainer.numberOfColumns) {
+            if cards.count < HomeScreenConstants.TileContainer.numberOfColumns {
                 Spacer()
             }
         }
@@ -457,12 +470,6 @@ struct BigCardView: View {
     @Environment(\.homeScreenFeatureSelected) var onFeatureSelected
 
     let card: Card
-    private let foregroundColor: Color
-
-    init(card: Card) {
-        self.card = card
-        self.foregroundColor = card.backgroundColor.isLight ? .black : .white
-    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: HomeScreenConstants.BigTile.verticalSpacing) {
@@ -473,11 +480,11 @@ struct BigCardView: View {
 
             VStack(alignment: .leading, spacing: HomeScreenConstants.BigTile.textVerticalSpacing) {
                 Text(card.title)
-                    .foregroundColor(foregroundColor)
+                    .foregroundColor(card.textColor)
                     .font(HomeScreenConstants.BigTile.title.font)
                     .multilineTextAlignment(HomeScreenConstants.BigTile.title.alignment)
                 Text(card.description)
-                    .foregroundColor(foregroundColor)
+                    .foregroundColor(card.textColor)
                     .font(HomeScreenConstants.BigTile.description.font)
                     .multilineTextAlignment(HomeScreenConstants.BigTile.description.alignment)
             }
@@ -505,12 +512,6 @@ struct MediumCardView: View {
     @Environment(\.homeScreenFeatureSelected) var onFeatureSelected
 
     let card: Card
-    private let foregroundColor: Color
-
-    init(card: Card) {
-        self.card = card
-        self.foregroundColor = card.backgroundColor.isLight ? .black : .white
-    }
 
     var body: some View {
         HStack(spacing: HomeScreenConstants.MediumTile.horizontalSpacing) {
@@ -522,11 +523,11 @@ struct MediumCardView: View {
                        alignment: .center)
             VStack(alignment: .leading, spacing: HomeScreenConstants.MediumTile.textVerticalSpacing) {
                 Text(card.title)
-                    .foregroundColor(foregroundColor)
+                    .foregroundColor(card.textColor)
                     .font(HomeScreenConstants.MediumTile.title.font)
                     .multilineTextAlignment(HomeScreenConstants.MediumTile.title.alignment)
                 Text(card.description)
-                    .foregroundColor(foregroundColor)
+                    .foregroundColor(card.textColor)
                     .font(HomeScreenConstants.MediumTile.description.font)
                     .multilineTextAlignment(HomeScreenConstants.MediumTile.description.alignment)
             }
@@ -555,12 +556,6 @@ struct SmallCardView: View {
     @Environment(\.homeScreenFeatureSelected) var onFeatureSelected
 
     let card: Card
-    private let foregroundColor: Color
-
-    init(card: Card) {
-        self.card = card
-        self.foregroundColor = card.backgroundColor.isLight ? .black : .white
-    }
 
     var body: some View {
         VStack(alignment: .center) {
@@ -569,7 +564,7 @@ struct SmallCardView: View {
                 .aspectRatio(contentMode: .fit)
             Spacer()
             Text(card.title)
-                .foregroundColor(foregroundColor)
+                .foregroundColor(card.textColor)
                 .font(HomeScreenConstants.SmallTile.title.font)
                 .multilineTextAlignment(HomeScreenConstants.SmallTile.title.alignment)
         }
@@ -632,68 +627,65 @@ struct HomeScreenView_Previews: PreviewProvider {
         .init(title: "Your Data",
               cards: [
                 .init(id: UUID().uuidString,
-                      title: "polyExplorer",
+                      title: "1 polyExplorer",
                       description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red
+                      borderColor: .red,
+                      textColor: .white
                 ),
                 .init(
                     id: UUID().uuidString,
-                    title: "Big big many big hello there",
+                    title: "2 Big big many big hello there",
                     description: "nada",
                     image: UIImage(named: "AppIcon")!,
                     backgroundColor: .blue,
-                    borderColor: .red
-                ),
-                .init(
-                    id: UUID().uuidString, title: "Amazon Importer",
-                    description: "nada",
-                    image: UIImage(named: "AppIcon")!,
-                    backgroundColor: .blue,
-                    borderColor: .red
+                    borderColor: .red,
+                    textColor: .white
                 ),
                 .init(
                     id: UUID().uuidString,
-                    title: "polyExplorer",
+                    title: "3 Amazon Importer",
+                    description: "nada",
+                    image: UIImage(named: "AppIcon")!,
+                    backgroundColor: .blue,
+                    borderColor: .red,
+                    textColor: .white
+                ),
+                .init(
+                    id: UUID().uuidString,
+                    title: "4 polyExplorer",
                     description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                     image: UIImage(named: "AppIcon")!,
                     backgroundColor: .blue,
-                    borderColor: .red
+                    borderColor: .red,
+                    textColor: .white
                 ),
                 .init(id: UUID().uuidString,
-                      title: "Big big many big hello there",
+                      title: "5 Big big many big hello there",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red
+                      borderColor: .red,
+                      textColor: .white
                 ),
-                .init(id: UUID().uuidString, title: "Amazon Importer",
+                .init(id: UUID().uuidString,
+                      title: "6 Amazon Importer",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red
+                      borderColor: .red,
+                      textColor: .white
                 ),
                 .init(id: UUID().uuidString,
-                      title: "polyExplorer",
+                      title: "7 polyExplorer",
                       description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red
-                ),
-                .init(id: UUID().uuidString,
-                      title: "Big big many big hello there",
-                      description: "nada",
-                      image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue,
-                      borderColor: .red
-                ),
-                .init(id: UUID().uuidString, title: "Amazon Importer",
-                      description: "nada",
-                      image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue,
-                      borderColor: .red
-                )],
+                      borderColor: .red,
+                      textColor: .white
+                )
+              ],
               type: .yourData),
         .init(title: "Know how",
               cards: [
@@ -702,20 +694,16 @@ struct HomeScreenView_Previews: PreviewProvider {
                       description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red
+                      borderColor: .red,
+                      textColor: .white
                 ),
                 .init(id: UUID().uuidString,
                       title: "Big big many big hello there",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red
-                ),
-                .init(id: UUID().uuidString, title: "Amazon Importer",
-                      description: "nada",
-                      image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue,
-                      borderColor: .red
+                      borderColor: .red,
+                      textColor: .white
                 )
               ],
               type: .knowHow),
@@ -726,21 +714,18 @@ struct HomeScreenView_Previews: PreviewProvider {
                       description: "asdasd asd qwida sdiubwd aid wiuda daiuwd asuidbwad asiudwida diuw",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red
+                      borderColor: .red,
+                      textColor: .white
                 ),
                 .init(id: UUID().uuidString,
                       title: "Big big many big hello there",
                       description: "nada",
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
-                      borderColor: .red
-                ),
-                .init(id: UUID().uuidString, title: "Amazon Importer",
-                      description: "nada",
-                      image: UIImage(named: "AppIcon")!,
-                      backgroundColor: .blue,
-                      borderColor: .red
-                )],
+                      borderColor: .red,
+                      textColor: .white
+                )
+              ],
               type: .tools)
     ]
 

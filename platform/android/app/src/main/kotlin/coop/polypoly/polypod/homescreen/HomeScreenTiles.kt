@@ -29,7 +29,6 @@ fun isLight(color: Color): Boolean {
 
 @Composable
 fun BigTileView(tile: Tile) {
-    val foregroundColor = if (isLight(tile.model.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
     Card(
         modifier = Modifier
             .width(tile.layout.width)
@@ -74,7 +73,7 @@ fun BigTileView(tile: Tile) {
             Column {
                 Text(
                     text = tile.model.title,
-                    color = foregroundColor,
+                    color = tile.model.textColor,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = tile.style.titleFont.weight,
                     fontFamily = FontFamily(
@@ -91,8 +90,8 @@ fun BigTileView(tile: Tile) {
                     )
                 )
                 Text(
-                    text = "",
-                    color = foregroundColor,
+                    text = tile.model.description,
+                    color = tile.model.textColor,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = tile.style.descriptionFont!!.weight,
                     fontFamily = FontFamily(
@@ -109,7 +108,6 @@ fun BigTileView(tile: Tile) {
 
 @Composable
 fun MediumTileView(tile: Tile) {
-    val foregroundColor = if (isLight(tile.model.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
     Card(
         modifier = Modifier
             .width(tile.layout.width)
@@ -148,7 +146,7 @@ fun MediumTileView(tile: Tile) {
             ) {
                 Text(
                     text = tile.model.title,
-                    color = foregroundColor,
+                    color = tile.model.textColor,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = tile.style.titleFont.weight,
                     fontFamily = FontFamily(
@@ -166,7 +164,7 @@ fun MediumTileView(tile: Tile) {
                 )
                 Text(
                     text = tile.model.description,
-                    color = foregroundColor,
+                    color = tile.model.textColor,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = tile.style.descriptionFont!!.weight,
                     fontFamily = FontFamily(
@@ -183,7 +181,6 @@ fun MediumTileView(tile: Tile) {
 
 @Composable
 fun SmallTileView(tile: Tile) {
-    val foregroundColor = if (isLight(tile.model.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
     Card(
         modifier = Modifier
             .width(tile.layout.width)
@@ -228,7 +225,7 @@ fun SmallTileView(tile: Tile) {
             )
             Text(
                 text = tile.model.title,
-                color = foregroundColor,
+                color = tile.model.textColor,
                 overflow = TextOverflow.Ellipsis,
                 fontWeight = tile.style.titleFont.weight,
                 fontFamily = FontFamily(

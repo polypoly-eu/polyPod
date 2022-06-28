@@ -5,6 +5,7 @@
     "primaryColor": "#000000",
     "thumbnail": "images/thumbnail.pdf",
     "borderColor": "#cbd5e0",
+    "textColor": "#ffffff",
     "translations": {
         "de": {
             "author": "polypoly - Die Genossenschaft",

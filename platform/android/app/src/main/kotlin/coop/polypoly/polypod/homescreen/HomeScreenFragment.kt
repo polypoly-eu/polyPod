@@ -284,7 +284,8 @@ fun DefaultPreview() {
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
         image = null,
         backgroundColor = Color.Black,
-        borderColor = Color.Red
+        borderColor = Color.Red,
+        textColor = Color.White
     ) {}
 
     val tileModels: List<TileModel> = listOf(

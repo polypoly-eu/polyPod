@@ -13,6 +13,7 @@ table FeatureManifest {
     primary_color:string;
     links:[Link];
     border_color:string;
+    text_color:string;
 }
 
 root_type FeatureManifest;

@@ -6,6 +6,7 @@
     "primaryColor": "#ffffff",
     "thumbnailColor": "#D94D46",
     "borderColor": "#D94D46",
+    "textColor": "#ffffff",
     "links": {
         "data-download": "https://takeout.google.com/",
         "example-data-download": "https://polypoly.coop/en-de/polypod/example-google-data"
