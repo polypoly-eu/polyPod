@@ -27,7 +27,8 @@ make android_bindings
 ```
 
 - Building for all platforms:
-```
+
+```shell
 make
 ```
 
