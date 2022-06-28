@@ -74,11 +74,9 @@ function interactiveSetup() {
     inquirer
         .prompt(setup_questions)
         .then((answers) => {
-            checkIfValueExists("type", answers);
-            checkIfValueExists("name", answers);
-            checkIfValueExists("author", answers);
-            checkIfValueExists("description", answers);
-            checkIfValueExists("license", answers);
+            ["type","name","author","description","license"].forEach( (value), {
+                checkIfValueExists(value, answers);
+            })
 
             if (answers.type === "empty") {
                 handleCreateEmptyFeature(answers);
