@@ -32,7 +32,6 @@ jobs:
             - 'feature-utils/**'
             - 'features/**'
             - 'platform/android/**'
-            - 'platform/core/**'
             - 'platform/feature-api/**'
             js:
             - '**/*.js'
@@ -44,6 +43,7 @@ jobs:
             - '.eslintrc.cjs'
             apiAndFeatures:
             - 'build/**'
+            - 'platform/core/**'
             - 'dev-utils/dummy-server'
             - 'features/**'
             - 'feature-utils/**'
@@ -55,7 +55,7 @@ jobs:
         if: steps.changes.outputs.js == 'true'
         run: ./build.js lint
       - name: Install JS packages
-        if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.js == 'true')
+        if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.js == 'true' || steps.changes.outputs.android == 'true')
         run: ./build.js offlineInstall
       - name: Build core and features
         if: steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.android == 'true'

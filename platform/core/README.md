@@ -1,6 +1,6 @@
 # PolyPod platform core
 
-Logic shared across polyPod platforms - ios, android, wasm.
+Logic shared across polyPod platforms: iOS and Android.
 
 ## Requirements
 
