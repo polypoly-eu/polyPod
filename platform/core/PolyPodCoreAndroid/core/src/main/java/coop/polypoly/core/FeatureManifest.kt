@@ -1,6 +1,6 @@
 package coop.polypoly.core
 
-data  class FeatureManifest(
+data class FeatureManifest(
     val name: String?,
     val author: String?,
     val version: String?,

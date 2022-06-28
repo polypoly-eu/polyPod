@@ -142,7 +142,6 @@ clean:
 	$(RM) -r target
 	$(RM) -r export
 	$(RM) -r $(swift_core_framework)
-	$(RM) -r $(swift_core)/{.swiftpm}
 	$(RM) -r $(android_core_libraries)
 
 # ============  Utils ============ #

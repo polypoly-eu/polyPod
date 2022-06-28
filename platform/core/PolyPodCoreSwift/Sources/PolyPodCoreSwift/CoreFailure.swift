@@ -20,9 +20,9 @@ public enum DecodingError: Error {
         case .invalidValueType(info: let info):
             return "Invalid value type: \(info)"
         case let .invalidResponse(info):
-            return "Recevied invalid core response: \(String(describing: info))"
+            return "Received invalid core response: \(String(describing: info))"
         case .emptyFeatureManifest:
-            return "Recevied empty feature manifest"
+            return "Received empty feature manifest"
         }
     }
 }
@@ -33,6 +33,8 @@ public enum CoreFailureCode: Int {
     case failedToParseFeatureManifest
     case nullCStringPointer
     case failedToCreateCString
+    case failedToCreateJavaString
+    case failedToConvertJavaString
 }
 
 public struct CoreFailure: Error {

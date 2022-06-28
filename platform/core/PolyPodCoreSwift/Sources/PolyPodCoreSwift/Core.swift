@@ -31,13 +31,19 @@ public final class Core {
         handleCoreResponse(parse_feature_manifest_from_json(json), mapFeatureManifest)
     }
     
-    func handleCoreResponse<T>(_ byte_response: CByteBuffer, _ map: (MessagePackValue) throws -> T) -> Result<T, Error> {
+    func handleCoreResponse<T>(
+        _ byte_response: CByteBuffer,
+        _ map: (MessagePackValue) throws -> T
+    ) -> Result<T, Error> {
         Result {
             defer {
                 free_bytes(byte_response.data)
             }
             
-            let buffer = UnsafeBufferPointer(start: byte_response.data, count: Int(byte_response.length))
+            let buffer = UnsafeBufferPointer(
+                start: byte_response.data,
+                count: Int(byte_response.length)
+            )
             let data = Data(buffer: buffer)
             
             let responseObject = try MessagePack.unpackFirst(data).getDictionary()

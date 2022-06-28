@@ -17,8 +17,11 @@ enum class CoreExceptionCode(val value: Int) {
 data class CoreFailure(
     val code: CoreExceptionCode,
     override val message: String
-    ) : Exception("$code -> $message")
+) : Exception("$code -> $message")
 
-class InvalidCoreResponseFormat : Exception("Received invalid core response format")
-class EmptyFeatureManifest : Exception("Received empty feature manifest response")
-data class InvalidCoreErrorFormat(val info: String) : Exception("Received invalid core failure format: $info")
+class InvalidCoreResponseFormat :
+    Exception("Received invalid core response format")
+class EmptyFeatureManifest :
+    Exception("Received empty feature manifest response")
+data class InvalidCoreErrorFormat(val info: String) :
+    Exception("Received invalid core failure format: $info")
