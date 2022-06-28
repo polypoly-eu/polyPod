@@ -1,3 +1,4 @@
 {
-    "welcome": "Welcome to {{feature}}"
+    "welcome": "Welcome to {{feature}}",
+    "button.ok": "Ok"
 }
