@@ -181,8 +181,7 @@ function removeConnectionToNamedNode(quad) {
 }
 
 async function removeBlankNode(quad) {
-    const { dataFactory: df, polyIn: ds } = window.pod;
-    debugger;
+    const { polyIn: ds } = window.pod;
     const obj = quad.object;
     const blankQuads = await ds.match({
         subject: obj,
