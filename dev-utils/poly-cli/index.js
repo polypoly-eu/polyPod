@@ -105,7 +105,7 @@ yargs(hideBin(process.argv))
             yargs.positional("what", {
                 type: "string",
                 describe:
-                    "→ the kind of thing you want poly-cli to create for you. Options: feature",
+                    "→ The kind of thing you want poly-cli to create for you. Options: feature",
             });
 
             yargs.positional("name", {
@@ -116,7 +116,7 @@ yargs(hideBin(process.argv))
             yargs.option("type", {
                 type: "string",
                 default: "empty",
-                describe: "→ the type of feature: empty, preview, or importer",
+                describe: "→ The type of feature: empty, preview, or importer",
             });
 
             yargs.option("author", {
