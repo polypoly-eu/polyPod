@@ -44,8 +44,8 @@
       "id": "yourData",
       "name": "Your Data",
       "features": [
-        "facebookImport",
-        "google"
+        "google",
+        "facebookImport"
       ]
     },
     {
