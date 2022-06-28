@@ -86,7 +86,7 @@ export async function writeRdfObj(subject, obj) {
 
 export async function readRdfObj(subject) {
     //only strings supported
-    const { dataFactory: df, polyIn: ds } = window.pod;
+    const { polyIn: ds } = window.pod;
     const quads = await ds.match({ subject });
     if (
         !quads.some(
