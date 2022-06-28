@@ -15,6 +15,7 @@ import { analyzeFile } from "@polypoly-eu/poly-analysis";
 import { specificAnalyses } from "../../model/analysis";
 
 import "./overview.css";
+import { removeFileFromRdf } from "../../model/importers/utils/rdf.js";
 
 const Overview = () => {
     const { files, account, handleRemoveFile } = useContext(PolyImportContext);
@@ -64,6 +65,11 @@ const Overview = () => {
         ];
         const i = Math.floor(Math.log(size) / Math.log(k));
         return Math.round(size / Math.pow(k, i), decimals) + " " + units[i - 1];
+    };
+
+    const removeFileAndClearStorage = async () => {
+        await handleRemoveFile(files[0].id);
+        await removeFileFromRdf(files[0].id);
     };
 
     return (
@@ -137,9 +143,7 @@ const Overview = () => {
                     }}
                     proceedButton={{
                         text: i18n.t("overview:new.import.dialog.continue"),
-                        onClick: async () => {
-                            await handleRemoveFile(files[0].id);
-                        },
+                        onClick: removeFileAndClearStorage,
                         route: "/import",
                     }}
                 />

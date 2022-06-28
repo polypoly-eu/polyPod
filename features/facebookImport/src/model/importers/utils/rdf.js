@@ -157,19 +157,38 @@ export async function writeObjToFile(archiveUri, attr, obj) {
 }
 
 const removingByTermType = {
-    Literal: () => removeLiteral(obj),
+    Literal: (quad) => removeLiteral(quad),
+    BlankNode: (quad) => removeBlankNode(quad),
+    NamedNode: (quad) => removeConnectionToNamedNode(quad),
 };
 
 export async function removeFileFromRdf(archiveId) {
     const { dataFactory: df, polyIn: ds } = window.pod;
     const quads = await ds.match({ subject: df.namedNode(archiveId) });
-    console.log(quads);
     for (let quad of quads) {
-        const obj = quad.object;
-        removingByTermType[obj.termType](obj);
+        removingByTermType[quad.object.termType](quad);
     }
 }
 
-function removeLiteral(obj) {
+function removeLiteral(quad) {
+    const { polyIn: ds } = window.pod;
+    ds.delete(quad);
+}
+
+function removeConnectionToNamedNode(quad) {
+    const { polyIn: ds } = window.pod;
+    ds.delete(quad);
+}
+
+async function removeBlankNode(quad) {
     const { dataFactory: df, polyIn: ds } = window.pod;
+    debugger;
+    const obj = quad.object;
+    const blankQuads = await ds.match({
+        subject: obj,
+    });
+    for (let blankQuad of blankQuads) {
+        removingByTermType[blankQuad.object.termType](blankQuad);
+    }
+    ds.delete(quad);
 }
