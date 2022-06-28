@@ -21,6 +21,7 @@ import {
     printInfoMsg,
 } from "./src/msg.js";
 import { exit } from "process";
+import { metaGenerate } from "./src/generate.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -185,10 +186,7 @@ function handleCreateEmptyFeature(arg) {
     // Remember "leaves" before subdirectories, or mkdir will fail
     structure[feature_name] = {
         src: {
-            "index.jsx": () =>
-                fs.readFileSync(
-                    path.resolve(__dirname, "./src/static/templates/index.jsx")
-                ),
+            "index.jsx": metaGenerate("index.jsx", __dirname, "empty"),
             "styles.css": () =>
                 fs.readFileSync(
                     path.resolve(__dirname, "./src/static/templates/styles.css")
