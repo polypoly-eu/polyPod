@@ -254,20 +254,12 @@ function handleCreatePreviewFeature(arg) {
     let description = arg.description;
     let license = arg.license;
 
-    // folders are objects, files are strings.
+    // folders are objects, files will point to a function.
     var structure = {};
 
     // Remember "leaves" before subdirectories, or mkdir will fail
     structure[feature_name] = {
         src: {
-            "index.jsx": metaGenerate("index.jsx", __dirname, "preview"),
-            "styles.css": () =>
-                fs.readFileSync(
-                    path.resolve(
-                        __dirname,
-                        "./src/static/templates/preview/styles.css"
-                    )
-                ),
             locales: {
                 en: {
                     "common.json": () =>
@@ -355,6 +347,14 @@ function handleCreatePreviewFeature(arg) {
                 )
             ),
     };
+
+    ["index.jsx", "styles.css"].forEach((file) => {
+        structure[feature_name]["src"][file] = metaGenerate(
+            file,
+            __dirname,
+            "preview"
+        );
+    });
 
     createDirectoryStructure(structure);
     execSync(
