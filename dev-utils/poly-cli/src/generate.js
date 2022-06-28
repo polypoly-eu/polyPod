@@ -6,9 +6,6 @@ export function metaGenerate(file, dirName, featureName) {
     if (featureName != "empty") {
         templatePath = `${featureName}/`;
     }
-    console.log(
-        resolve(dirName, `./src/static/templates/${templatePath}${file}`)
-    );
     return () =>
         readFileSync(
             resolve(dirName, `./src/static/templates/${templatePath}${file}`)

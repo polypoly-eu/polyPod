@@ -260,54 +260,6 @@ function handleCreatePreviewFeature(arg) {
     // Remember "leaves" before subdirectories, or mkdir will fail
     structure[feature_name] = {
         src: {
-            locales: {
-                en: {
-                    "common.json": () =>
-                        fs.readFileSync(
-                            path.resolve(
-                                __dirname,
-                                "./src/static/templates/locales/en/common.json"
-                            )
-                        ),
-                    "preview.json": () =>
-                        fs.readFileSync(
-                            path.resolve(
-                                __dirname,
-                                "./src/static/templates/locales/en/preview.json"
-                            )
-                        ),
-                    "progressInfo.json": () =>
-                        fs.readFileSync(
-                            path.resolve(
-                                __dirname,
-                                "./src/static/templates/locales/en/progressInfo.json"
-                            )
-                        ),
-                },
-                de: {
-                    "common.json": () =>
-                        fs.readFileSync(
-                            path.resolve(
-                                __dirname,
-                                "./src/static/templates/locales/de/common.json"
-                            )
-                        ),
-                    "preview.json": () =>
-                        fs.readFileSync(
-                            path.resolve(
-                                __dirname,
-                                "./src/static/templates/locales/de/preview.json"
-                            )
-                        ),
-                    "progressInfo.json": () =>
-                        fs.readFileSync(
-                            path.resolve(
-                                __dirname,
-                                "./src/static/templates/locales/de/progressInfo.json"
-                            )
-                        ),
-                },
-            },
             static: {
                 images: {},
                 "manifest.json": () =>
@@ -354,6 +306,21 @@ function handleCreatePreviewFeature(arg) {
             __dirname,
             "preview"
         );
+    });
+
+    structure[feature_name]["src"]["locales"] = {};
+    ["en", "de"].forEach((lang) => {
+        structure[feature_name]["src"]["locales"][lang] = {};
+        ["common", "preview", "progressInfo"].forEach((file) => {
+            const fileName = `${file}.json`;
+            const filePath = `locales/${lang}/${fileName}`;
+            structure[feature_name]["src"]["locales"][lang][fileName] =
+                metaGenerate(
+                    filePath,
+                    __dirname,
+                    "empty" // using this since it's not including "preview" in the template path
+                );
+        });
     });
 
     createDirectoryStructure(structure);
