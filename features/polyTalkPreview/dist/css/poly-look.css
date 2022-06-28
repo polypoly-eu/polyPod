@@ -59,7 +59,38 @@ button:focus {
 
 a {
   text-decoration: none;
-}:root {
+}/*
+    Layouts are used for recurring behaviour of and between elements (eg. margins and spacing, styling of headlines)
+    Right now they are only used with the screen component
+*/
+
+.poly-standard-layout > * {
+  margin-bottom: calc(var(--gdu) * 6);
+}
+
+.poly-standard-layout > :first-child {
+  margin-top: calc(var(--gdu) * 6);
+}
+
+.poly-standard-layout h1 {
+  font-family: var(--jost-medium);
+  font-size: var(--font-size-xl);
+}
+:root {
+  --jost-medium: "Jost Medium";
+  --jost: "Jost";
+  --jost-bold: "Jost Bold";
+
+  --font-weight-regular: 400;
+
+  --font-size-s: 12px;
+  --font-size-m: 14px;
+  --font-size-ml: 16px;
+  --font-size-l: 20px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 36px;
+}
+:root {
   --color-dark: #0f1938;
   --color-white: #ffffff;
   --color-contrast-white: #f7fafc;
@@ -99,36 +130,9 @@ a {
   --transparent-light: rgba(247, 250, 252, 0);
   --transparent-dark: rgba(0, 0, 0, 0);
 }
-/*
-    Layouts are used for recurring behaviour of and between elements (eg. margins and spacing, styling of headlines)
-    Right now they are only used with the screen component
-*/
-
-.poly-standard-layout > * {
-  margin-bottom: calc(var(--gdu) * 6);
-}
-
-.poly-standard-layout > :first-child {
-  margin-top: calc(var(--gdu) * 6);
-}
-
-.poly-standard-layout h1 {
-  font-family: var(--jost-medium);
-  font-size: var(--font-size-xl);
-}
 :root {
-  --jost-medium: "Jost Medium";
-  --jost: "Jost";
-  --jost-bold: "Jost Bold";
-
-  --font-weight-regular: 400;
-
-  --font-size-s: 12px;
-  --font-size-m: 14px;
-  --font-size-ml: 16px;
-  --font-size-l: 20px;
-  --font-size-xl: 24px;
-  --font-size-xxl: 36px;
+  /* grid distance unit*/
+  --gdu: 4px;
 }
 :root,
 .poly-theme {
@@ -199,10 +203,6 @@ a {
   width: 100%;
   height: 1px;
   background-color: var(--color-gray-400);
-}
-:root {
-  /* grid distance unit*/
-  --gdu: 4px;
 }
 /**
  * Swiper 6.8.4
@@ -853,47 +853,6 @@ button.swiper-pagination-bullet {
 .scroll-button img {
     margin-right: 6px;
 }
-.chip {
-  height: 32px;
-  margin: 4px;
-  padding: 0 12px;
-  border: solid 1px var(--theme-secondary-color);
-  border-radius: 16px;
-  background-color: var(--theme-primary-color);
-  color: var(--theme-secondary-color);
-  font-size: 14px;
-}
-
-.chip.selected {
-  background-color: var(--theme-secondary-color);
-  color: var(--theme-primary-color);
-}
-.tabs .tab-buttons {
-  margin: 0 auto;
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-
-.tabs .tab-buttons .tab-button {
-  flex: 1 1 0px;
-  background-color: var(--transparent);
-  border: 4px solid var(--transparent);
-  border-bottom: 1px solid #757575;
-  padding-bottom: 4px;
-  color: #757575;
-  font-size: 14px;
-  font-family: "Jost Medium";
-  line-height: 120%;
-  white-space: nowrap;
-}
-
-.tabs .tab-button.active {
-  padding-bottom: 1px;
-  color: var(--theme-secondary-color) !important;
-  border: 4px solid var(--transparent);
-  border-bottom: 4px solid var(--theme-secondary-color);
-}
 .infobox {
     display: flex;
     flex-direction: row;
@@ -920,13 +879,54 @@ button.swiper-pagination-bullet {
     letter-spacing: -0.01em;
     margin: 0;
 }
+.chip-container {
+    display: inline-block;
+}.tabs .tab-buttons {
+  margin: 0 auto;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.tabs .tab-buttons .tab-button {
+  flex: 1 1 0px;
+  background-color: var(--transparent);
+  border: 4px solid var(--transparent);
+  border-bottom: 1px solid #757575;
+  padding-bottom: 4px;
+  color: #757575;
+  font-size: 14px;
+  font-family: "Jost Medium";
+  line-height: 120%;
+  white-space: nowrap;
+}
+
+.tabs .tab-button.active {
+  padding-bottom: 1px;
+  color: var(--theme-secondary-color) !important;
+  border: 4px solid var(--transparent);
+  border-bottom: 4px solid var(--theme-secondary-color);
+}
+.chip {
+  height: 32px;
+  margin: 4px;
+  padding: 0 12px;
+  border: solid 1px var(--theme-secondary-color);
+  border-radius: 16px;
+  background-color: var(--theme-primary-color);
+  color: var(--theme-secondary-color);
+  font-size: 14px;
+}
+
+.chip.selected {
+  background-color: var(--theme-secondary-color);
+  color: var(--theme-primary-color);
+}
 .list {
   display: flex;
   flex-flow: column;
 }
-.chip-container {
-    display: inline-block;
-}.poly-legend {
+.poly-legend {
   display: flex;
   flex-direction: column;
 }
@@ -1036,6 +1036,81 @@ button.swiper-pagination-bullet {
     color: white;
     font-size: 16px;
 }
+.loading-overlay {
+  background-color: var(--theme-primary-color);
+}
+
+.loading-overlay p {
+  font-family: "Jost Medium";
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.loading-overlay img {
+  margin-bottom: 16px;
+  width: 32px;
+  height: 32px;
+}
+.poly-side-sheet {
+  max-width: var(--max-width);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-gray-100);
+  color: var(--color-dark);
+  overflow: hidden scroll;
+  padding: 18px 16px 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.poly-side-sheet .header {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  position: relative;
+  margin: 0 -16px;
+}
+.poly-side-sheet .close-button-left {
+  position: absolute;
+  left: 0;
+}
+.poly-side-sheet .title {
+  font-size: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: var(--jost-medium);
+}
+.poly-side-sheet .title-center {
+  width: 100%;
+  position: absolute;
+  padding: 0 48px;
+  box-sizing: border-box;
+}
+.poly-side-sheet .button-holder {
+  margin-top: auto;
+  margin-bottom: 32px;
+}
+.base-overlay {
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  position: absolute;
+}
+
+.base-overlay.opaque {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.poly-screen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--theme-primary-color);
+  padding: 0 calc(var(--gdu) * 4);
+  overflow: hidden scroll;
+}
 .poly-infographic {
   display: flex;
   flex-direction: column;
@@ -1116,20 +1191,54 @@ button.swiper-pagination-bullet {
 .poly-infographic-legend .legend-container.tooltip-left .poly-tooltip {
   margin-left: var(--gdu);
 }
-.loading-overlay {
-  background-color: var(--theme-primary-color);
+.poly-button {
+  font-family: var(--theme-font-medium);
+  font-size: 18px;
+  padding: 4px 12px;
+  height: 48px;
+  max-width: var(--max-width);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: none;
 }
 
-.loading-overlay p {
-  font-family: "Jost Medium";
-  margin-bottom: 0;
-  margin-top: 0;
+.poly-button:active {
+  opacity: 0.88;
 }
 
-.loading-overlay img {
-  margin-bottom: 16px;
-  width: 32px;
-  height: 32px;
+.poly-button:disabled {
+  opacity: 0.38;
+}
+
+.poly-button.filled {
+  background-color: var(--theme-secondary-color);
+  color: var(--theme-primary-color);
+}
+
+.poly-button.outline {
+  border: 1px solid var(--theme-secondary-color);
+  color: var(--theme-secondary-color);
+  background-color: var(--transparent);
+}
+.poly-icon-button {
+  border: none;
+  background-color: transparent;
+}
+.poly-icon-filled {
+  border: none;
+  background-color: var(--theme-info-button-color);
+  width: 48px;
+  height: 48px;
+}
+.poly-icon-filled.filled-right {
+  border-radius: 0 50% 50% 0;
+}
+.poly-icon-filled.filled-left {
+  border-radius: 50% 0 0 50%;
 }
 .card {
   display: flex;
@@ -1181,38 +1290,18 @@ button.swiper-pagination-bullet {
   justify-content: end;
   margin-right: -16px;
 }
-.poly-button {
-  font-family: var(--theme-font-medium);
-  font-size: 18px;
-  padding: 4px 12px;
-  height: 48px;
-  max-width: var(--max-width);
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  box-sizing: border-box;
-  border: none;
+.backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow-x: hidden;
+  z-index: 100;
 }
 
-.poly-button:active {
-  opacity: 0.88;
-}
-
-.poly-button:disabled {
-  opacity: 0.38;
-}
-
-.poly-button.filled {
-  background-color: var(--theme-secondary-color);
-  color: var(--theme-primary-color);
-}
-
-.poly-button.outline {
-  border: 1px solid var(--theme-secondary-color);
-  color: var(--theme-secondary-color);
-  background-color: var(--transparent);
+.contents {
+  height: 100%;
 }
 .poly-tooltip {
   color: var(--color-gray-50);
@@ -1260,95 +1349,6 @@ button.swiper-pagination-bullet {
   border-right: 8px solid var(--color-blue);
   border-bottom: 4px solid var(--transparent);
 }
-.poly-icon-button {
-  border: none;
-  background-color: transparent;
-}
-.poly-icon-filled {
-  border: none;
-  background-color: var(--theme-info-button-color);
-  width: 48px;
-  height: 48px;
-}
-.poly-icon-filled.filled-right {
-  border-radius: 0 50% 50% 0;
-}
-.poly-icon-filled.filled-left {
-  border-radius: 50% 0 0 50%;
-}
-.poly-side-sheet {
-  max-width: var(--max-width);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-gray-100);
-  color: var(--color-dark);
-  overflow: hidden scroll;
-  padding: 18px 16px 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-}
-.poly-side-sheet .header {
-  display: flex;
-  align-items: center;
-  min-height: 48px;
-  position: relative;
-  margin: 0 -16px;
-}
-.poly-side-sheet .close-button-left {
-  position: absolute;
-  left: 0;
-}
-.poly-side-sheet .title {
-  font-size: 16px;
-  text-align: center;
-  text-transform: uppercase;
-  font-family: var(--jost-medium);
-}
-.poly-side-sheet .title-center {
-  width: 100%;
-  position: absolute;
-  padding: 0 48px;
-  box-sizing: border-box;
-}
-.poly-side-sheet .button-holder {
-  margin-top: auto;
-  margin-bottom: 32px;
-}
-.base-overlay {
-  height: 100%;
-  width: 100%;
-  z-index: 100;
-  position: absolute;
-}
-
-.base-overlay.opaque {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-.backdrop {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  overflow-x: hidden;
-  z-index: 100;
-}
-
-.contents {
-  height: 100%;
-}
-.poly-screen {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: var(--theme-primary-color);
-  padding: 0 calc(var(--gdu) * 4);
-  overflow: hidden scroll;
-}
 .poly-progress-banner {
   background-color: var(--color-gray-100);
   color: var(--color-indigo-950);
@@ -1389,19 +1389,6 @@ button.swiper-pagination-bullet {
   width: 29px;
   height: 29px;
 }
-.horizontal-bar-chart .axis .tick text {
-  fill: #a9b6c6;
-  font-size: 12px;
-}
-
-.horizontal-bar-chart .domain,
-.horizontal-bar-chart .axis .tick line {
-  visibility: hidden;
-}
-
-.horizontal-bar-chart .axis-grid line {
-  stroke: #8d9caf;
-}
 .vertical-bar-chart .axis .tick text {
   fill: #a9b6c6;
   font-size: 12px;
@@ -1413,6 +1400,19 @@ button.swiper-pagination-bullet {
 }
 
 .vertical-bar-chart .axis-grid line {
+  stroke: #8d9caf;
+}
+.horizontal-bar-chart .axis .tick text {
+  fill: #a9b6c6;
+  font-size: 12px;
+}
+
+.horizontal-bar-chart .domain,
+.horizontal-bar-chart .axis .tick line {
+  visibility: hidden;
+}
+
+.horizontal-bar-chart .axis-grid line {
   stroke: #8d9caf;
 }
 .mirrored-bar-chart .domain {
