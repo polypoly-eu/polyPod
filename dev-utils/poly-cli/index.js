@@ -8,11 +8,6 @@ import inquirer from "inquirer";
 import path from "path";
 import { fileURLToPath } from "url";
 import {
-    packageTemplate,
-    manifestTemplate,
-    readmeTemplate,
-} from "./src/templates/index.js";
-import {
     printErrorMsg,
     printWarningMsg,
     printUnderConstruction,
@@ -224,50 +219,26 @@ function handleCreatePreviewFeature(arg) {
     let license = arg.license;
 
     // folders are objects, files will point to a function.
-    var structure = {};
-
-    // Remember "leaves" before subdirectories, or mkdir will fail
-    structure[feature_name] = {
-        src: {
-            static: {
-                images: {},
-                "manifest.json": () =>
-                    manifestTemplate(feature_name, author, version, "preview"),
-                "index.html": () =>
-                    fs.readFileSync(
-                        path.resolve(
-                            __dirname,
-                            "./src/static/templates/index.html"
-                        )
-                    ),
-                "content.json": () =>
-                    fs.readFileSync(
-                        path.resolve(
-                            __dirname,
-                            "./src/static/templates/preview/content.json"
-                        )
-                    ),
-            },
-        },
-        test: {},
-        "package.json": () =>
-            packageTemplate(
-                feature_name,
-                version,
-                description,
-                "src/index.jsx",
-                author,
-                license
-            ),
-        "README.md": () => readmeTemplate(feature_name, description, "preview"),
-        "rollup.config.mjs": () =>
-            fs.readFileSync(
-                path.resolve(
-                    __dirname,
-                    "./src/static/templates/preview/rollup.config.mjs"
-                )
-            ),
+    var structure = {
+        [feature_name]: generateStructure(
+            __dirname,
+            feature_name,
+            author,
+            version,
+            description,
+            license,
+            "preview"
+        ),
     };
+
+    structure[feature_name]["src"]["static"]["images"] = {};
+    structure[feature_name]["src"]["static"]["content.json"] = () =>
+        fs.readFileSync(
+            path.resolve(
+                __dirname,
+                "./src/static/templates/preview/content.json"
+            )
+        );
 
     ["index.jsx", "styles.css"].forEach((file) => {
         structure[feature_name]["src"][file] = metaGenerate(
