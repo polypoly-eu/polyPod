@@ -3,6 +3,7 @@
   color: var(--color-indigo-950);
   font-family: var(--jost);
   padding: calc(var(--gdu) * 6) calc(var(--gdu) * 4);
+  margin: calc(var(--gdu) * -6) calc(var(--gdu) * -4) 0 calc(var(--gdu) * -4);
 }
 
 .poly-progress-banner .row {
@@ -29,7 +30,7 @@
 
 .poly-progress-banner .row .info-button {
   position: absolute;
-  right: calc(var(--gdu) * 4);
+  right: 0;
   flex-shrink: 0;
 }
 
