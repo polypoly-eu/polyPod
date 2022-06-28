@@ -1,26 +1,42 @@
 disabled_rules:
     - trailing_whitespace
-    - cyclomatic_complexity
-    - colon
-    - control_statement
-    - syntactic_sugar
-    - statement_position
-    - force_cast
+    - force_cast #FIX!
     - todo
-    - unused_closure_parameter
-    - line_length
-    - redundant_optional_initialization
-    - file_length
-    - implicit_getter
     - identifier_name
-    - multiple_closures_with_trailing_closure
-    - empty_parentheses_with_trailing_closure
-    - force_try
-    - opening_brace
-    - private_over_fileprivate
-    - for_where
-    - closure_parameter_position
-    - class_delegate_protocol
-    - redundant_void_return
-    - empty_enum_arguments
-    - function_parameter_count
+    - force_try #FIX!
+
+opt_in_rules:
+    - empty_string
+    - empty_count
+    - empty_xctest_method
+    - fatal_error_message
+    - last_where
+    - private_action
+    - prohibited_interface_builder
+    - return_value_from_void_function
+    - unavailable_function
+    - identical_operands
+    - joined_default_parameter
+    - fallthrough
+    - modifier_order
+    - unused_declaration
+    - unused_import
+    - toggle_bool
+    - yoda_condition
+    - prefer_self_in_static_references
+    - prefer_self_type_over_type_of_self
+    - private_outlet
+    - quick_discouraged_call
+    - quick_discouraged_focused_test
+    - quick_discouraged_pending_test
+    - sorted_imports
+    - static_operator
+    - strong_iboutlet
+    - test_case_accessibility
+    - unowned_variable_capture
+    - array_init
+    - contains_over_filter_count
+    - contains_over_filter_is_empty
+    - contains_over_first_not_nil
+    - contains_over_range_nil_comparison
+    - literal_expression_end_indentation

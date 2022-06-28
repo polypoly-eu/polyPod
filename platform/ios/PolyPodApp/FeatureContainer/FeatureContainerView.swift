@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 import SwiftUI
 import WebKit
 
@@ -41,17 +42,17 @@ struct FeatureContainerView: UIViewRepresentable {
         if !activeActions.contains(action) {
             return
         }
-        
+
         uiView.triggerAction(action: action, dispatchTime: dispatchTime)
     }
 }
 
 class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
-    private var feature: Feature? = nil
+    private var feature: Feature?
     func setFeature(feature: Feature) {
         self.feature = feature
     }
-    
+
     func mimeTypeFromExt(ext: String) -> String {
         switch ext {
         case "html":
@@ -70,48 +71,47 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
             return "application/octet-stream"
         }
     }
-    
+
     func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
         guard let url = urlSchemeTask.request.url,
-            let scheme = url.scheme,
-            scheme == PolyOut.fsProtocol.lowercased() else {
+              let scheme = url.scheme,
+              scheme == PolyOut.fsProtocol.lowercased() else {
             urlSchemeTask.didFailWithError(PolyNavError.protocolError(""))
-                return
+            return
         }
-        
+
         let urlString = url.absoluteString
         let index = urlString.index(urlString.startIndex, offsetBy: PolyOut.fsPrefix.count)
         let file = String(urlString[index..<urlString.endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: "/"))
         let ext = (file as NSString).pathExtension
-        
+
         do {
-            var fileData: Data? = nil
-            if (file.starts(with: PolyOut.fsFilesRoot)) {
+            var fileData: Data?
+            if file.starts(with: PolyOut.fsFilesRoot) {
                 let options: [String: Any] = [:]
                 PodApi.shared.polyOut.fileRead(
                     url: urlString,
                     options: options,
-                    completionHandler: { data, error in
+                    completionHandler: { data, _ in
                         fileData = data as? Data
                     }
                 )
-            }
-            else {
+            } else {
                 var targetUrl = feature?.path
                 targetUrl = targetUrl?.appendingPathComponent(file)
 
                 fileData = try Data(contentsOf: targetUrl!)
             }
-            let headers: [String : String] = [
+            let headers: [String: String] = [
                 "Access-Control-Allow-Origin": PolyOut.fsPrefix,
                 "Access-Control-Allow-Methods": "GET",
                 "Access-Control-Allow-Headers": "*",
                 "Content-Length": String(fileData?.count ?? 0),
                 "Content-Type": mimeTypeFromExt(ext: ext)
             ]
-            
+
             let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "HTTP 1.0", headerFields: headers)
-            
+
             // Fulfill the task.
             urlSchemeTask.didReceive(response!)
             urlSchemeTask.didReceive(fileData ?? Data())
@@ -120,9 +120,9 @@ class FeatureFileHandler: UIViewController, WKURLSchemeHandler {
             urlSchemeTask.didFailWithError(error)
         }
     }
-    
+
     func webView(_ webView: WKWebView, stop urlSchemeTask: WKURLSchemeTask) {
-        
+
     }
 }
 
@@ -162,13 +162,13 @@ class FeatureWebView: WKWebView {
         )
 
         installUserScript(contentController, "polyNav", forMainFrameOnly: false)
-        
+
         installUserScript(
             contentController,
             "disableUserSelect",
             forMainFrameOnly: false
         )
-        
+
         installUserScript(
             contentController,
             "handleErrors",
@@ -199,6 +199,7 @@ class FeatureWebView: WKWebView {
         load(URLRequest(url: components.url!))
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -300,7 +301,7 @@ extension FeatureWebView: WKScriptMessageHandler {
                     let jsExpression = "port1.postMessage(\(responseData));"
                     self?.evaluateJavaScript(
                         jsExpression,
-                        completionHandler: { result, error in
+                        completionHandler: { _, error in
                             if error != nil {
                                 Log.error(
                                     """
@@ -324,7 +325,7 @@ extension FeatureWebView: WKScriptMessageHandler {
 
         Log.info("Message from FeatureContainer: \(text)")
     }
-    
+
     private func doLogError(_ error: [String: Any]) {
         let message = error["message"] as? String ?? "Unknown"
         Log.error("Error from FeatureContainer: \(message)")
@@ -340,18 +341,18 @@ extension FeatureWebView: PolyNavDelegate {
     func doHandleSetActiveActions(actions: [String]) {
         activeActions.wrappedValue = actions
     }
-    
+
     func doHandleOpenUrl(url: String) {
         openUrlHandler(url)
     }
-    
+
     func doHandlePickFile(type: String?, completion: @escaping (ExternalFile?) -> Void) {
         pickFileHandler(type, completion)
     }
 }
 
 extension FeatureWebView: EndpointDelegate {
-    func doHandleApproveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) -> Void {
+    func doHandleApproveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) {
         let viewController =
             UIApplication.shared.windows.first!.rootViewController!
         let alert = UIAlertController(
@@ -370,7 +371,7 @@ extension FeatureWebView: EndpointDelegate {
                                 comment: ""
                             ),
                             style: .default,
-                            handler: { (action: UIAlertAction!) in
+                            handler: { (_: UIAlertAction!) in
                                 completion(true)
                             }))
         alert.addAction(UIAlertAction(
@@ -379,7 +380,7 @@ extension FeatureWebView: EndpointDelegate {
                                 comment: ""
                             ),
                             style: .default,
-                            handler: { (action: UIAlertAction!) in
+                            handler: { (_: UIAlertAction!) in
                                 completion(false)
                             }))
         viewController.present(alert, animated: true, completion: nil)

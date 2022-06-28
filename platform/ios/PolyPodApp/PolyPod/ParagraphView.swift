@@ -65,11 +65,11 @@ struct ParagraphView: View {
 private struct UILabelView: UIViewRepresentable {
     var text: String
     var preferredMaxLayoutWidth: CGFloat
-    var fontName: String? = nil
-    var fontSize: CGFloat? = nil
-    var kerning: CGFloat? = nil
-    var lineHeightMultiple: CGFloat? = nil
-    var textColor: Color? = nil
+    var fontName: String?
+    var fontSize: CGFloat?
+    var kerning: CGFloat?
+    var lineHeightMultiple: CGFloat?
+    var textColor: Color?
     
     func makeUIView(context: Context) -> UILabel {
         let label = UILabel()
