@@ -148,7 +148,7 @@ function handleCreate(arg) {
             handleCreateFeature(arg);
         } else {
             printWarningMsg(
-                "Sorry, I can't create this for you. Try: create feature instead"
+                "Sorry, I can't create this for you. Try: «create feature» instead"
             );
         }
     } catch (error) {
