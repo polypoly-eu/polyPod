@@ -186,26 +186,6 @@ function handleCreateEmptyFeature(arg) {
     // Remember "leaves" before subdirectories, or mkdir will fail
     structure[feature_name] = {
         src: {
-            locales: {
-                en: {
-                    "common.json": () =>
-                        fs.readFileSync(
-                            path.resolve(
-                                __dirname,
-                                "./src/static/templates/locales/en/common.json"
-                            )
-                        ),
-                },
-                de: {
-                    "common.json": () =>
-                        fs.readFileSync(
-                            path.resolve(
-                                __dirname,
-                                "./src/static/templates/locales/de/common.json"
-                            )
-                        ),
-                },
-            },
             static: {
                 "manifest.json": () =>
                     manifestTemplate(feature_name, author, version),
@@ -245,6 +225,18 @@ function handleCreateEmptyFeature(arg) {
             "empty"
         );
     });
+
+    structure[feature_name]["src"]["locales"] = {};
+    ["en", "de"].forEach((lang) => {
+        structure[feature_name]["src"]["locales"][lang] = {
+            "common.json": metaGenerate(
+                `locales/${lang}/common.json`,
+                __dirname,
+                "empty"
+            ),
+        };
+    });
+
     createDirectoryStructure(structure);
     execSync(`cd ${feature_name} && npm i && npm run build`);
 }
