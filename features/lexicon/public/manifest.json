@@ -6,6 +6,7 @@
     "primaryColor": "#ffffff",
     "thumbnailColor": "#FB8A89",
     "borderColor": "#FB8A89",
+    "textColor": "#000000",
     "links": {
         "membership": "https://polypoly.coop/en-de/membership"
     },
@@ -15,7 +16,5 @@
             "author": "polypoly - Die Genossenschaft",
             "description": "Was ist eigentlich \"Data Mining\"? Und wozu brauchen wir Cookies in unseren Computern? Das Lexikon hat die Antworten."
         }
-    },
-    "borderColor": "#FB8A89",
-    "textColor": "#000000"
+    }
 }
