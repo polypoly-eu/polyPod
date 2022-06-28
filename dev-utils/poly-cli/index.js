@@ -186,11 +186,6 @@ function handleCreateEmptyFeature(arg) {
     // Remember "leaves" before subdirectories, or mkdir will fail
     structure[feature_name] = {
         src: {
-            "index.jsx": metaGenerate("index.jsx", __dirname, "empty"),
-            "styles.css": () =>
-                fs.readFileSync(
-                    path.resolve(__dirname, "./src/static/templates/styles.css")
-                ),
             locales: {
                 en: {
                     "common.json": () =>
@@ -243,6 +238,13 @@ function handleCreateEmptyFeature(arg) {
             ),
     };
 
+    ["index.jsx", "styles.css"].forEach((file) => {
+        structure[feature_name]["src"][file] = metaGenerate(
+            file,
+            __dirname,
+            "empty"
+        );
+    });
     createDirectoryStructure(structure);
     execSync(`cd ${feature_name} && npm i && npm run build`);
 }
