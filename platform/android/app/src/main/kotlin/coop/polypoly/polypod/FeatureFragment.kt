@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.os.StatFs
 import android.provider.DocumentsContract
 import android.provider.OpenableColumns
 import android.view.LayoutInflater
@@ -24,6 +25,7 @@ import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import kotlinx.coroutines.CompletableDeferred
+import java.io.File
 
 private const val PICK_FILE_REQUEST_CODE = 1
 
@@ -260,6 +262,28 @@ open class FeatureFragment : Fragment() {
                 }
             }
         }
+        val runtime = Runtime.getRuntime();
+        val usedMemInMB=(runtime.totalMemory() - runtime.freeMemory()) / 1048576L;
+        val maxHeapSizeInMB=runtime.maxMemory() / 1048576L;
+        val availHeapSizeInMB = maxHeapSizeInMB - usedMemInMB;
+
+        // Fetching internal memory information
+        val path: File = Environment.getDataDirectory()
+        val stat = StatFs(path.path)
+        val blockSize = stat.blockSizeLong
+        val availableBlocks =stat.availableBlocksLong
+        val totalBlocks = stat.blockCountLong
+        val availableSpaceMB = (availableBlocks * blockSize) / 1048576L
+        val totalSpaceMB = (totalBlocks * blockSize) / 1048576L
+
+        val message = "Total memory: $totalSpaceMB MB\n" +
+            "Available Memory: $availableSpaceMB MB\n" +
+            "Heap Memory: $availHeapSizeInMB MB"
+
+        AlertDialog.Builder(context)
+            .setMessage(message)
+            .setPositiveButton("ok") { _, _ -> }
+            .show()
         return if (size > 0)
             ExternalFile(url = url, name = name, size = size) else null
     }
