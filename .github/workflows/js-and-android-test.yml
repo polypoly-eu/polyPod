@@ -20,6 +20,7 @@ jobs:
         id: cache
         with:
           path: |
+            node_modules
             **/node_modules
             ~/.cache
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('package-lock.json') }}
