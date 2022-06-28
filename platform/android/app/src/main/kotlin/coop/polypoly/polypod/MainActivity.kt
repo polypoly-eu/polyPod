@@ -5,8 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import coop.polypoly.core.Core
-import coop.polypoly.core.CoreFailure
 import coop.polypoly.core.CoreExceptionCode
+import coop.polypoly.core.CoreFailure
 import coop.polypoly.polypod.core.UpdateNotification
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
