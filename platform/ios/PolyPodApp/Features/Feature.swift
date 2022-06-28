@@ -1,5 +1,5 @@
-import SwiftUI
 import PolyPodCoreSwift
+import SwiftUI
 
 typealias FeatureId = String
 
