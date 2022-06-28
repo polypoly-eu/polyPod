@@ -155,3 +155,21 @@ export async function writeObjToFile(archiveUri, attr, obj) {
     );
     writeRdfObj(object, obj);
 }
+
+const removingByTermType = {
+    Literal: () => removeLiteral(obj),
+};
+
+export async function removeFileFromRdf(archiveId) {
+    const { dataFactory: df, polyIn: ds } = window.pod;
+    const quads = await ds.match({ subject: df.namedNode(archiveId) });
+    console.log(quads);
+    for (let quad of quads) {
+        const obj = quad.object;
+        removingByTermType[obj.termType](obj);
+    }
+}
+
+function removeLiteral(obj) {
+    const { dataFactory: df, polyIn: ds } = window.pod;
+}
