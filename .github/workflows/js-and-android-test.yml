@@ -33,6 +33,7 @@ jobs:
             - 'feature-utils/**'
             - 'features/**'
             - 'platform/android/**'
+            - 'platform/core/**'
             - 'platform/feature-api/**'
             js:
             - '**/*.js'
@@ -44,7 +45,6 @@ jobs:
             - '.eslintrc.cjs'
             apiAndFeatures:
             - 'build/**'
-            - 'platform/core/**'
             - 'dev-utils/dummy-server'
             - 'features/**'
             - 'feature-utils/**'
