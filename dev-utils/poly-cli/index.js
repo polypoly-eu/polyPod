@@ -260,13 +260,7 @@ function handleCreatePreviewFeature(arg) {
     // Remember "leaves" before subdirectories, or mkdir will fail
     structure[feature_name] = {
         src: {
-            "index.jsx": () =>
-                fs.readFileSync(
-                    path.resolve(
-                        __dirname,
-                        "./src/static/templates/preview/index.jsx"
-                    )
-                ),
+            "index.jsx": metaGenerate("index.jsx", __dirname, "preview"),
             "styles.css": () =>
                 fs.readFileSync(
                     path.resolve(
