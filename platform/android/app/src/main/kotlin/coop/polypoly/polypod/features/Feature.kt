@@ -30,6 +30,10 @@ class Feature(
     val borderColor: Int
         get() = runCatching { Color.parseColor(manifest?.borderColor) }
             .getOrDefault(primaryColor)
+    
+    val textColor: Int
+        get() = runCatching { Color.parseColor(manifest?.textColor) }
+            .getOrDefault(0)
 
     val thumbnail: Bitmap?
         get() {
