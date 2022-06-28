@@ -23,6 +23,14 @@ extension MessagePackValue {
             throw DecodingError.invalidValue(info: "Expected string")
         }
     }
+    
+    func getString() throws -> String {
+        if let string = self.stringValue {
+            return string
+        } else {
+            throw DecodingError.invalidValue(info: "Expected string")
+        }
+    }
 }
 
 func mapError(_ dict: [MessagePackValue: MessagePackValue]) throws -> CoreFailure {
@@ -38,6 +46,12 @@ func mapFeatureManifest(_ value: MessagePackValue) throws -> FeatureManifest {
     guard let dictionary = try value.getDictionary() else {
         throw DecodingError.emptyFeatureManifest
     }
+    let links = try dictionary["links"]?
+        .getDictionary()?.reduce(into: [String: String]()) { partialResult, keyValue in
+            let key: String = try keyValue.key.getString()
+            let value: String = try keyValue.value.getString()
+            partialResult[key] = value
+    }
     return FeatureManifest(name: try dictionary["name"]?.getString(),
                            author: try dictionary["author"]?.getString(),
                            version: try dictionary["version"]?.getString(),
@@ -46,6 +60,6 @@ func mapFeatureManifest(_ value: MessagePackValue) throws -> FeatureManifest {
                            thumbnailColor: try dictionary["thumbnailColor"]?.getString(),
                            primaryColor: try dictionary["primaryColor"]?.getString(),
                            borderColor: try dictionary["borderColor"]?.getString(),
-                           links: try dictionary["links"]?.getDictionary() as? [String: String])
+                           links: links)
 }
 
