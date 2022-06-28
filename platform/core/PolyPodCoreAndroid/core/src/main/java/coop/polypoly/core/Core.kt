@@ -3,7 +3,6 @@ package coop.polypoly.core
 import org.msgpack.core.MessagePack
 import org.msgpack.core.MessageUnpacker
 import org.msgpack.value.Value
-import org.msgpack.value.ValueFactory
 
 class Core {
     companion object {
