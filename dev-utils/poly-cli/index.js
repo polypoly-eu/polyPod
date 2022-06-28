@@ -21,7 +21,7 @@ import {
     printInfoMsg,
 } from "./src/msg.js";
 import { exit } from "process";
-import { metaGenerate } from "./src/generate.js";
+import { generateStructure, metaGenerate } from "./src/generate.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -74,9 +74,11 @@ function interactiveSetup() {
     inquirer
         .prompt(setup_questions)
         .then((answers) => {
-            ["type","name","author","description","license"].forEach( (value), {
-                checkIfValueExists(value, answers);
-            })
+            ["type", "name", "author", "description", "license"].forEach(
+                (value) => {
+                    checkIfValueExists(value, answers);
+                }
+            );
 
             if (answers.type === "empty") {
                 handleCreateEmptyFeature(answers);
@@ -178,44 +180,19 @@ function handleCreateEmptyFeature(arg) {
     let description = arg.description;
     let license = arg.license;
 
-    // folders are objects, files are strings.
-    var structure = {};
-
-    // Remember "leaves" before subdirectories, or mkdir will fail
-    structure[feature_name] = {
-        src: {
-            static: {
-                "manifest.json": () =>
-                    manifestTemplate(feature_name, author, version),
-                "index.html": () =>
-                    fs.readFileSync(
-                        path.resolve(
-                            __dirname,
-                            "./src/static/templates/index.html"
-                        )
-                    ),
-            },
-        },
-        test: {},
-        "package.json": () =>
-            packageTemplate(
-                feature_name,
-                version,
-                description,
-                "src/index.jsx",
-                author,
-                license
-            ),
-        "README.md": () => readmeTemplate(feature_name, description),
-        "rollup.config.mjs": () =>
-            fs.readFileSync(
-                path.resolve(
-                    __dirname,
-                    "./src/static/templates/rollup.config.mjs"
-                )
-            ),
+    // folders are objects, files are strings. Remember "leaves" before subdirectories, or mkdir will fail
+    var structure = {
+        [feature_name]: generateStructure(
+            __dirname,
+            feature_name,
+            author,
+            version,
+            description,
+            license
+        ),
     };
 
+    console.log(structure);
     ["index.jsx", "styles.css"].forEach((file) => {
         structure[feature_name]["src"][file] = metaGenerate(
             file,
