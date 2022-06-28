@@ -4,7 +4,7 @@ export function printErrorMsg(msg) {
     console.error(errorMsg(msg));
 }
 
-export function errorMsg(msg) {
+function errorMsg(msg) {
     return chalk.red.bold.underline(`🛑 ${msg} 🛑`);
 }
 
