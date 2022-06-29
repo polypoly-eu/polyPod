@@ -31,7 +31,7 @@ function copyPodJs(dest) {
  */
 function loadManifest(options = {}) {
     if (!options.build_dir || !options.manifestPath) {
-        throw new Error("build_dir not specified");
+        throw new Error("manifestPath build_dir not specified");
     }
     const podJsPath = `${options.build_dir}/pod.js`;
     console.log("Loading", options.manifestPath, "into", podJsPath);
