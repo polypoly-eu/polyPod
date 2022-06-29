@@ -175,6 +175,7 @@ fun Screen(screen: Screen) {
                 end = screen.layout.horizontalPadding,
                 bottom = screen.layout.verticalSpacing
             )
+            .background(Color(0xedf2f7))
     ) {
         screen.sections.forEach {
             Section(it)
