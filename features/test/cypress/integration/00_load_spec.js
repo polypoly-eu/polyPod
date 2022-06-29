@@ -7,6 +7,7 @@ describe("Should work with basic functions", () => {
         });
     });
     it(`should have displayed all buttons`, () => {
+        // Should probably use introspection here...
         [
             "simpleJavaScriptCall",
             "podApiResolves",

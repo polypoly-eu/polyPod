@@ -3,6 +3,7 @@
   "scripts": {
     "eslint": "eslint src --ext .ts",
     "lint": "npm run eslint",
+    "test": "cypress run",
     "build": "rollup -c"
   },
   "dependencies": {
