@@ -397,17 +397,52 @@ async function awaitPodApi(): Promise<Pod> {
     });
 }
 
+function generateControl(name, action): HTMLElement {
+    const button = document.createElement("button");
+    button.id = button.textContent = name;
+    const output = document.createElement("span");
+    button.addEventListener("click", () => action(output));
+    const control = document.createElement("div");
+    control.appendChild(button);
+    control.appendChild(output);
+    return control;
+}
+
 export function generateControls(container: HTMLElement): void {
+    const runAllName = "runAll";
+    container.appendChild(
+        generateControl(runAllName, function (output) {
+            output.textContent = "Running all...";
+            const buttons = [...container.querySelectorAll("button")].filter(
+                ({ textContent }) => textContent !== runAllName
+            );
+            buttons.forEach((button) => button.click());
+
+            let timeout = 2000;
+            const interval = 200;
+            setTimeout(function checkResults() {
+                const success = buttons.every(
+                    ({ parentElement }) =>
+                        parentElement.querySelector("span").textContent === "OK"
+                );
+                if (success) {
+                    output.textContent = "All OK";
+                    return;
+                }
+                if ((timeout -= interval) <= 0) {
+                    output.textContent = "Some failed";
+                    return;
+                }
+                setTimeout(checkResults, interval);
+            }, interval);
+        })
+    );
+
     for (const [name, test] of Object.entries(tests)) {
         if (name.startsWith("_")) continue;
-        const button = document.createElement("button");
-        button.id = button.textContent = name;
-        const output = document.createElement("span");
-        button.addEventListener("click", () => execute(test, output));
-        const control = document.createElement("div");
-        control.appendChild(button);
-        control.appendChild(output);
-        container.appendChild(control);
+        container.appendChild(
+            generateControl(name, (output) => execute(test, output))
+        );
     }
 }
 

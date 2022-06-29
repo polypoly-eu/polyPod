@@ -9,8 +9,7 @@
     "google-feature": "file:../google",
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
-    "poly-preview-feature": "file:../polyPreview",
-    "test-feature": "file:../test"
+    "poly-preview-feature": "file:../polyPreview"
   },
   "private": true,
   "polyPodFeatures": [
@@ -38,11 +37,6 @@
       "archiveName": "lexicon",
       "moduleName": "lexicon-feature",
       "artifactPath": "public"
-    },
-    {
-      "archiveName": "test",
-      "moduleName": "test-feature",
-      "artifactPath": "dist"
     }
   ],
   "polyPodCategories": [
@@ -65,9 +59,7 @@
     {
       "id": "tools",
       "name": "Tools",
-      "features": [
-        "test"
-      ]
+      "features": []
     }
   ]
 }
