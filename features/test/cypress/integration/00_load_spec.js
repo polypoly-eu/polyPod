@@ -26,6 +26,18 @@ describe("Should work with basic functions", () => {
         buttonIds.forEach((buttonId) => cy.get(`#${buttonId}`));
     });
 
-    it("be able to click on all buttons", () =>
-        buttonIds.forEach((buttonId) => cy.get(`#${buttonId}`).click()));
+    it("be able to click on all buttons and get correctly logged", () =>
+        buttonIds.forEach((buttonId) =>
+            cy
+                .get(`#${buttonId}`)
+                .click()
+                .then(() => {
+                    if (buttonId != "addQuadToCollection") {
+                        cy.get("@consoleLog").should(
+                            "be.calledWith",
+                            `${buttonId}()`
+                        );
+                    }
+                })
+        ));
 });
