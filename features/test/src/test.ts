@@ -397,17 +397,41 @@ async function awaitPodApi(): Promise<Pod> {
     });
 }
 
+function generateControl(name, action): HTMLElement {
+    const button = document.createElement("button");
+    button.id = button.textContent = name;
+    const output = document.createElement("span");
+    button.addEventListener("click", () => action(output));
+    const control = document.createElement("div");
+    control.appendChild(button);
+    control.appendChild(output);
+    return control;
+}
+
 export function generateControls(container: HTMLElement): void {
+    const runAllName = "runAll";
+    container.appendChild(
+        generateControl(runAllName, function(output) {
+            output.textContent = "Running all...";
+            const buttons = [...container.querySelectorAll("button")].filter(
+                ({ textContent }) => textContent !== runAllName
+            );
+            buttons.forEach((button) => button.click());
+            setTimeout(function() {
+                const success = buttons.every(
+                    ({ parentElement }) =>
+                        parentElement.querySelector("span").textContent === "OK"
+                );
+                output.textContent = success ? "All OK" : "Some failed";
+            }, 500);
+        })
+    );
+
     for (const [name, test] of Object.entries(tests)) {
         if (name.startsWith("_")) continue;
-        const button = document.createElement("button");
-        button.id = button.textContent = name;
-        const output = document.createElement("span");
-        button.addEventListener("click", () => execute(test, output));
-        const control = document.createElement("div");
-        control.appendChild(button);
-        control.appendChild(output);
-        container.appendChild(control);
+        container.appendChild(
+            generateControl(name, (output) => execute(test, output))
+        );
     }
 }
 
