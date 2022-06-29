@@ -27,8 +27,8 @@ it("Sections are imported", () => {
 
 it("Sections can be clicked", () => {
   const sectionElements = screen.getAllByTestId("section-id");
-  sectionElements.map((button) => {
-    fireEvent.click(button, mockedHandleClick);
+  sectionElements.map((section) => {
+    fireEvent.click(section, mockedHandleClick);
     expect(mockedHandleClick).toHaveBeenCalled();
   });
 });
