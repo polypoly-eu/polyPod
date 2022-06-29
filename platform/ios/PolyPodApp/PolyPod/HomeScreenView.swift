@@ -98,19 +98,33 @@ final class HomeScreenViewModel: ObservableObject {
 
 // MARK: - UI sizes
 
+extension UIFont {
+    convenience init(name: String, size: CGFloat, weight: UIFont.Weight) {
+        var fontDescriptor = UIFontDescriptor(name: name, size: size)
+        fontDescriptor = fontDescriptor.addingAttributes(
+            [UIFontDescriptor.AttributeName.traits: [UIFontDescriptor.TraitKey.weight: weight]]
+        )
+        self.init(descriptor: fontDescriptor, size: size)
+    }
+}
+
 struct HomeScreenConstants {
 
+    static let textLineHeightMultiplier: CGFloat = 1.2
+
     struct Typography {
-        let font: Font
-        let alignment: TextAlignment
+        let font: UIFont 
+        let alignment: NSTextAlignment
     }
 
     struct Section {
         static let verticalSpacing = PolyStyle.Spacing.plSpace8x
         static let title = Typography(
-            font:
-                .custom(PolyStyle.Font.Family.jostMedium, size: PolyStyle.Font.Size.lg)
-                .weight(PolyStyle.Font.Weight.medium),
+            font: .init(
+                name: PolyStyle.Font.Family.jostMedium,
+                size: PolyStyle.Font.Size.lg,
+                weight: PolyStyle.Font.Weight.medium
+            ),
             alignment: PolyStyle.Font.Alignment.left
         )
     }
@@ -134,9 +148,11 @@ struct HomeScreenConstants {
         static let topPadding = 0.0
         static let otherPadding = PolyStyle.Spacing.plSpace2x
         static let title = Typography(
-            font:
-                .custom(PolyStyle.Font.Family.jostMedium, size: PolyStyle.Font.Size.xs)
-                .weight(PolyStyle.Font.Weight.medium),
+            font: .init(
+                name: PolyStyle.Font.Family.jostMedium,
+                size: PolyStyle.Font.Size.xs,
+                weight: PolyStyle.Font.Weight.medium
+            ),
             alignment: PolyStyle.Font.Alignment.center
         )
     }
@@ -148,15 +164,19 @@ struct HomeScreenConstants {
         static let textTrailingPadding = PolyStyle.Spacing.plSpace4x
 
         static let title = Typography(
-            font:
-                .custom(PolyStyle.Font.Family.jostMedium, size: PolyStyle.Font.Size.base)
-                .weight(PolyStyle.Font.Weight.medium),
+            font: .init(
+                name: PolyStyle.Font.Family.jostMedium,
+                size: PolyStyle.Font.Size.base,
+                weight: PolyStyle.Font.Weight.medium
+            ),
             alignment: PolyStyle.Font.Alignment.left
         )
         static let description = Typography(
-            font:
-                .custom(PolyStyle.Font.Family.jostRegular, size: PolyStyle.Font.Size.xs)
-                .weight(PolyStyle.Font.Weight.regular),
+            font: .init(
+                name: PolyStyle.Font.Family.jostRegular,
+                size: PolyStyle.Font.Size.xs,
+                weight: PolyStyle.Font.Weight.regular
+            ),
             alignment: PolyStyle.Font.Alignment.left
         )
     }
@@ -167,15 +187,19 @@ struct HomeScreenConstants {
         static let textVerticalSpacing = PolyStyle.Spacing.plSpace2x
 
         static let title = Typography(
-            font:
-                .custom(PolyStyle.Font.Family.jostMedium, size: PolyStyle.Font.Size.base)
-                .weight(PolyStyle.Font.Weight.medium),
+            font: .init(
+                name: PolyStyle.Font.Family.jostMedium,
+                size: PolyStyle.Font.Size.base,
+                weight: PolyStyle.Font.Weight.medium
+            ),
             alignment: PolyStyle.Font.Alignment.left
         )
         static let description = Typography(
-            font:
-                .custom(PolyStyle.Font.Family.jostRegular, size: PolyStyle.Font.Size.xs)
-                .weight(PolyStyle.Font.Weight.regular),
+            font: .init(
+                name: PolyStyle.Font.Family.jostRegular,
+                size: PolyStyle.Font.Size.xs,
+                weight: UIFont.Weight.regular
+            ),
             alignment: PolyStyle.Font.Alignment.left
         )
     }
@@ -185,16 +209,20 @@ struct HomeScreenConstants {
         static let padding = PolyStyle.Spacing.plSpace6x
 
         static let title = Typography(
-            font:
-                .custom( PolyStyle.Font.Family.jostMedium, size: PolyStyle.Font.Size._2xl)
-                .weight(PolyStyle.Font.Weight.medium),
+            font: .init(
+                name:  PolyStyle.Font.Family.jostMedium,
+                size: PolyStyle.Font.Size._2xl,
+                weight: PolyStyle.Font.Weight.medium
+            ),
             alignment: PolyStyle.Font.Alignment.left
         )
 
         static let description = Typography(
-            font:
-                .custom(PolyStyle.Font.Family.jostRegular, size: PolyStyle.Font.Size.base)
-                .weight(PolyStyle.Font.Weight.regular),
+            font: .init(
+                name: PolyStyle.Font.Family.jostRegular,
+                size: PolyStyle.Font.Size.base,
+                weight: UIFont.Weight.regular
+            ),
             alignment: PolyStyle.Font.Alignment.left
         )
 
@@ -203,9 +231,11 @@ struct HomeScreenConstants {
             // swiftlint:enable nesting
 
             static let title = Typography(
-                font:
-                    .custom(PolyStyle.Font.Family.jostMedium, size: PolyStyle.Font.Size.lg)
-                    .weight(PolyStyle.Font.Weight.medium),
+                font: .init(
+                    name: PolyStyle.Font.Family.jostMedium,
+                    size: PolyStyle.Font.Size.lg,
+                    weight: PolyStyle.Font.Weight.medium
+                ),
                 alignment: PolyStyle.Font.Alignment.center)
         }
     }
@@ -353,9 +383,12 @@ struct MyDataSectionView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
-            Text(sectionModel.title)
-                .font(HomeScreenConstants.Section.title.font)
-                .multilineTextAlignment(HomeScreenConstants.Section.title.alignment)
+            ParagraphView(
+                text: sectionModel.title,
+                font: HomeScreenConstants.Section.title.font,
+                lineHeightMultiple: HomeScreenConstants.lineHeightMultiple,
+                textAlignment: HomeScreenConstants.Section.title.alignment
+            )
             ForEach(
                 Array(
                     sectionModel.cards.chunked(into: HomeScreenConstants.TileContainer.numberOfColumns).enumerated()
@@ -381,7 +414,11 @@ struct DataKnowHowSectionView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(sectionModel.title).fontWeight(.bold)
+            ParagraphView(
+                text: sectionModel.title,
+                font: HomeScreenConstants.Section.title.font,
+                lineHeightMultiple: HomeScreenConstants.lineHeightMultiple,
+                textAlignment: HomeScreenConstants.Section.title.alignment)
             VStack(alignment: .leading, spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
                 ForEach(
                     Array(
@@ -401,7 +438,11 @@ struct ToolsSectionView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(sectionModel.title).fontWeight(.bold)
+            ParagraphView(
+                text: sectionModel.title,
+                font: HomeScreenConstants.Section.title.font,
+                lineHeightMultiple: HomeScreenConstants.lineHeightMultiple,
+                textAlignment: HomeScreenConstants.Section.title.alignment)
             VStack(alignment: .leading, spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
                 ForEach(sectionModel.cards) { card in
                     MediumCardView(card: card)
@@ -479,14 +520,19 @@ struct BigCardView: View {
                 .frame(width: sizes.bigTileWidth - 2 * HomeScreenConstants.BigTile.padding, alignment: .center)
 
             VStack(alignment: .leading, spacing: HomeScreenConstants.BigTile.textVerticalSpacing) {
-                Text(card.title)
-                    .foregroundColor(card.tileTextColor)
-                    .font(HomeScreenConstants.BigTile.title.font)
-                    .multilineTextAlignment(HomeScreenConstants.BigTile.title.alignment)
-                Text(card.description)
-                    .foregroundColor(card.tileTextColor)
-                    .font(HomeScreenConstants.BigTile.description.font)
-                    .multilineTextAlignment(HomeScreenConstants.BigTile.description.alignment)
+                ParagraphView(
+                    text: card.title,
+                    font: HomeScreenConstants.BigTile.title.font,
+                    lineHeightMultiple: HomeScreenConstants.lineHeightMultiple,
+                    foregroundColor: card.tileTextColor,
+                    textAlignment: HomeScreenConstants.BigTile.title.alignment)
+                ParagraphView(
+                    text: card.description,
+                    font: HomeScreenConstants.BigTile.description.font,
+                    lineHeightMultiple: HomeScreenConstants.lineHeightMultiple,
+                    foregroundColor: card.tileTextColor,
+                    textAlignment: HomeScreenConstants.BigTile.description.alignment
+                )
             }
         }
         .padding(HomeScreenConstants.BigTile.padding)
@@ -522,14 +568,19 @@ struct MediumCardView: View {
                        height: sizes.smallTileWidth,
                        alignment: .center)
             VStack(alignment: .leading, spacing: HomeScreenConstants.MediumTile.textVerticalSpacing) {
-                Text(card.title)
-                    .foregroundColor(card.tileTextColor)
-                    .font(HomeScreenConstants.MediumTile.title.font)
-                    .multilineTextAlignment(HomeScreenConstants.MediumTile.title.alignment)
-                Text(card.description)
-                    .foregroundColor(card.tileTextColor)
-                    .font(HomeScreenConstants.MediumTile.description.font)
-                    .multilineTextAlignment(HomeScreenConstants.MediumTile.description.alignment)
+                ParagraphView(
+                    text: card.title,
+                    font: HomeScreenConstants.MediumTile.title.font,
+                    lineHeightMultiple: HomeScreenConstants.lineHeightMultiple,
+                    foregroundColor: card.tileTextColor,
+                    textAlignment: HomeScreenConstants.MediumTile.title.alignment)
+                ParagraphView(
+                    text: card.description,
+                    font: HomeScreenConstants.MediumTile.description.font,
+                    lineHeightMultiple: HomeScreenConstants.lineHeightMultiple, 
+                    foregroundColor: card.tileTextColor,
+                    textAlignment: HomeScreenConstants.MediumTile.description.alignment
+                )
             }
             .padding([.top, .bottom], HomeScreenConstants.MediumTile.textTopBottomPadding)
             .padding([.trailing], HomeScreenConstants.MediumTile.textTrailingPadding)
@@ -563,10 +614,13 @@ struct SmallCardView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             Spacer()
-            Text(card.title)
-                .foregroundColor(card.tileTextColor)
-                .font(HomeScreenConstants.SmallTile.title.font)
-                .multilineTextAlignment(HomeScreenConstants.SmallTile.title.alignment)
+            ParagraphView(
+                text: card.title,
+                font: HomeScreenConstants.SmallTile.title.font,
+                lineHeightMultiple: HomeScreenConstants.lineHeightMultiple,
+                foregroundColor: card.tileTextColor,
+                textAlignment: HomeScreenConstants.SmallTile.title.alignment
+            )
         }
         .padding([.leading, .trailing, .bottom], HomeScreenConstants.SmallTile.otherPadding)
         .padding([.top], HomeScreenConstants.SmallTile.topPadding)
@@ -592,12 +646,18 @@ struct FooterView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: HomeScreenConstants.Footer.verticalSpacing) {
-            Text(model.title)
-                .font(HomeScreenConstants.Footer.title.font)
-                .multilineTextAlignment(HomeScreenConstants.Footer.title.alignment)
-            Text(model.description)
-                .font(HomeScreenConstants.Footer.description.font)
-                .multilineTextAlignment(HomeScreenConstants.Footer.description.alignment)
+            ParagraphView(
+                text: model.title,
+                font: HomeScreenConstants.Footer.title.font,
+                lineHeightMultiple: HomeScreenConstants.lineHeightMultiple,
+                textAlignment: HomeScreenConstants.Footer.title.alignment
+            )
+            ParagraphView(
+                text: model.description,
+                font: HomeScreenConstants.Footer.description.font,
+                lineHeightMultiple: HomeScreenConstants.lineHeightMultiple,
+                textAlignment: HomeScreenConstants.Footer.description.alignment
+            )
             Image(model.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -605,11 +665,9 @@ struct FooterView: View {
             Button(model.buttonTitle) {
                 openLearnMoreAction()
             }
-            .font(HomeScreenConstants.Footer.Button.title.font)
-            .multilineTextAlignment(HomeScreenConstants.Footer.Button.title.alignment)
             .padding()
             .frame(maxWidth: .infinity, alignment: .center)
-            .foregroundColor(model.buttonBackgroundColor.isLight ? .black : .white)
+            .foregroundColor(.white)
             .background(model.buttonBackgroundColor)
             .cornerRadius(HomeScreenConstants.Tile.cornerRadius)
 

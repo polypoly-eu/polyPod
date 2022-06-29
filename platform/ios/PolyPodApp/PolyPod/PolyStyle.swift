@@ -54,8 +54,8 @@ struct PolyStyle {
         }
 
         struct Weight {
-            static let regular = SwiftUI.Font.Weight.regular
-            static let medium = SwiftUI.Font.Weight.medium
+            static let regular = UIFont.Weight.regular
+            static let medium = UIFont.Weight.medium
         }
 
         struct Size {
@@ -68,9 +68,9 @@ struct PolyStyle {
         }
 
         struct Alignment {
-            static let center: TextAlignment = .center
-            static let left: TextAlignment = .leading
-            static let right: TextAlignment = .trailing
+            static let center: NSTextAlignment = .center
+            static let left: NSTextAlignment = .left
+            static let right: NSTextAlignment = .right
         }
         // swiftlint:enable nesting
 

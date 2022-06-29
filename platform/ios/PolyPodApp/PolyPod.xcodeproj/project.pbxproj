@@ -153,7 +153,6 @@
 		E9BE2906264BBAA0003EC8AE /* MessagePack in Frameworks */ = {isa = PBXBuildFile; productRef = E9BE2905264BBAA0003EC8AE /* MessagePack */; };
 		E9BE2909264BBD67003EC8AE /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = E9BE2908264BBD67003EC8AE /* Zip */; };
 		E9CF1B302625866800216B70 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B2F2625866800216B70 /* Feature.swift */; };
-		E9CF1B5D2625CDBB00216B70 /* FeatureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */; };
 		E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B632625EA3200216B70 /* FeatureView.swift */; };
 		E9CF1B722627304800216B70 /* FeatureContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B712627304800216B70 /* FeatureContainerView.swift */; };
 		E9CFFA4A269F4CCE00F7BE65 /* FeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CFFA49269F4CCE00F7BE65 /* FeatureTests.swift */; };
@@ -285,7 +284,6 @@
 		E98D506926F3741100C3FCF4 /* handleErrors.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = handleErrors.js; sourceTree = "<group>"; };
 		E996EBD12756BBE900EAC9F7 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		E9CF1B2F2625866800216B70 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
-		E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureListView.swift; sourceTree = "<group>"; };
 		E9CF1B632625EA3200216B70 /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
 		E9CF1B712627304800216B70 /* FeatureContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureContainerView.swift; sourceTree = "<group>"; };
 		E9CFFA49269F4CCE00F7BE65 /* FeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureTests.swift; sourceTree = "<group>"; };
@@ -439,7 +437,6 @@
 				1AA6DE3D24191C96008DB1B2 /* LaunchScreen.storyboard */,
 				1AA6DE4024191C96008DB1B2 /* Info.plist */,
 				1AB4F37D2508D64600E66BCC /* Settings.bundle */,
-				E9CF1B5C2625CDBB00216B70 /* FeatureListView.swift */,
 				E9CF1B632625EA3200216B70 /* FeatureView.swift */,
 				E989B350269CA6B7000EE977 /* FilePicker.swift */,
 				E92373BE26289FA900D2CFF3 /* Localizable.strings */,
@@ -814,7 +811,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\nENDPOINTS_SOURCE=\"$PROJECT_DIR/../../../../polyPod-config\"\nENDPOINTS_TARGET=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/config\"\nrm -rf \"$ENDPOINTS_TARGET\"\ncp -r \"$ENDPOINTS_SOURCE\" \"$ENDPOINTS_TARGET\"\n";
 		};
-		519ACE372835887C00D56462 /* SwiftLint script */ = {
+		519ACE372835887C00D56462 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -830,7 +827,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./swiftlint.sh";
+			shellScript = ./swiftlint.sh;
 		};
 		E923739E2628228F00D2CFF3 /* Copy polyPod Features */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -974,7 +971,6 @@
 				3B5487E227CD0FF700480CB5 /* Endpoint.swift in Sources */,
 				E9F370E1262EEB2C006254C1 /* ParagraphView.swift in Sources */,
 				1A4C21F424A63E4C006CC1FD /* Variable+CoreDataClass.swift in Sources */,
-				E9CF1B5D2625CDBB00216B70 /* FeatureListView.swift in Sources */,
 				E9CF1B302625866800216B70 /* Feature.swift in Sources */,
 				1A4C21F024A63E4C006CC1FD /* BlankNode+CoreDataClass.swift in Sources */,
 				90E4088227D78E4E006AD362 /* DataProtection.swift in Sources */,
