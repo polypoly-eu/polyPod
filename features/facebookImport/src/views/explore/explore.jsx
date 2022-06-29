@@ -46,6 +46,8 @@ const ExploreView = () => {
         setReportResult(null);
     };
 
+    console.log(account);
+
     const renderReportResult = () =>
         reportResult !== null && (
             <PopUpMessage

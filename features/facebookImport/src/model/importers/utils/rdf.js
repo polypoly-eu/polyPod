@@ -1,6 +1,30 @@
 const facebookNs = "http://polypoly.coop/schema/facebook#";
 const fbNsProperty = `${facebookNs}property:`;
 const rdf = "https://www.w3.org/1999/02/22-rdf-syntax-ns#";
+const xml = "http://www.w3.org/2001/XMLSchema#";
+
+const termTypes = {
+    blankNode: "BlankNode",
+    namedNode: "NamedNode",
+    literal: "Literal",
+};
+
+export function buildLiteral(value) {
+    const { dataFactory: df } = window.pod;
+
+    const literals = {
+        object: () => null,
+        number: (value) =>
+            df.literal(
+                value,
+                `${xml}${Number.isInteger(value) ? "integer" : "decimal"}`
+            ),
+        string: (value) => df.literal(value),
+        boolean: (value) => df.literal(value, `${xml}boolean`),
+    };
+
+    return literals[typeof value](value);
+}
 
 export async function readAttrFromRdf(archiveUri, attr) {
     const { dataFactory: df, polyIn: ds } = window.pod;
@@ -16,7 +40,7 @@ export async function writeAttrToRdf(archiveUri, attr, value) {
     const quad = df.quad(
         df.namedNode(archiveUri),
         df.namedNode(facebookNs + attr),
-        df.literal(value)
+        buildLiteral(value)
     );
     ds.add(quad);
 }
@@ -26,15 +50,50 @@ export function writeRdfSeq(subject, list) {
     ds.add(
         df.quad(subject, df.namedNode(`${rdf}type`), df.namedNode(`${rdf}Seq`))
     );
-    list.forEach((value, index) =>
+    list.forEach((value, index) => {
+        if (typeof value === "object") {
+            const object = df.blankNode(`${rdf}_${index + 1}`);
+            ds.add(
+                df.quad(subject, df.namedNode(`${rdf}_${index + 1}`), object)
+            );
+            Array.isArray(value)
+                ? writeRdfSeq(object, value)
+                : writeRdfObj(object, value);
+            return;
+        }
+
         ds.add(
             df.quad(
                 subject,
                 df.namedNode(`${rdf}_${index + 1}`),
-                df.literal(value)
+                buildLiteral(value)
             )
-        )
-    );
+        );
+    });
+}
+
+async function isBlankNodeObj(node) {
+    const { polyIn: ds, dataFactory: df } = window.pod;
+
+    return (
+        await ds.match({
+            subject: node,
+            predicate: df.namedNode(`${rdf}type`),
+        })
+    ).some((quad) => quad.object.value === `${rdf}object`);
+}
+
+async function parseObjectNode(node) {
+    if (node.termType === termTypes.blankNode) {
+        return (await isBlankNodeObj(node))
+            ? await readRdfObj(node)
+            : await readRdfSeq(node);
+    }
+    if (node.termType === termTypes.namedNode) {
+        //TODO: parse namedNodes
+        return null;
+    }
+    return node.value;
 }
 
 export async function readRdfSeq(subject) {
@@ -48,15 +107,19 @@ export async function readRdfSeq(subject) {
         )
     )
         return null;
-
-    return quads
-        .map((quad) => {
+    const result = await Promise.all(
+        quads.map(async (quad) => {
             const index = quad.predicate.value.match(
                 new RegExp(`${rdf}_([1-9]*)`)
             )?.[1];
             if (!index) return null;
-            return { index: parseInt(index, 10) - 1, value: quad.object.value };
+            return {
+                index: parseInt(index, 10) - 1,
+                value: await parseObjectNode(quad.object),
+            };
         })
+    );
+    return result
         .filter((quad) => !!quad)
         .sort((a, b) => a.index - b.index)
         .map(({ value }) => value);
@@ -69,7 +132,7 @@ export async function writeRdfObj(subject, obj) {
         df.quad(
             subject,
             df.namedNode(`${rdf}type`),
-            df.namedNode(`${facebookNs}Obj`)
+            df.namedNode(`${rdf}object`)
         )
     );
 
@@ -78,7 +141,7 @@ export async function writeRdfObj(subject, obj) {
             df.quad(
                 subject,
                 df.namedNode(`${fbNsProperty}${key}`),
-                df.literal(value)
+                buildLiteral(value)
             )
         )
     );
@@ -92,7 +155,7 @@ export async function readRdfObj(subject) {
         !quads.some(
             (quad) =>
                 quad.predicate.value === `${rdf}type` &&
-                quad.object.value === `${facebookNs}Obj`
+                quad.object.value === `${rdf}object`
         )
     )
         return null;
