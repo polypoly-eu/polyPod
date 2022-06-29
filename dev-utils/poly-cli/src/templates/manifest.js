@@ -1,4 +1,10 @@
+import { convertCamelCaseToHyphen, isCamelCase } from "../utils.js";
+
 export function manifestTemplate(feature_name, author, version, feature_type) {
+    if (isCamelCase(feature_name)) {
+        feature_name = convertCamelCaseToHyphen(feature_name);
+    }
+
     let base = {
         name: feature_name,
         author: author,

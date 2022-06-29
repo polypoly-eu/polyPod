@@ -1,5 +1,7 @@
 const INDENTING_SPACES = 4;
 
+import { convertCamelCaseToHyphen, isCamelCase } from "../utils.js";
+
 // template returns a string that can be written to a file
 export function packageTemplate(
     name,
@@ -9,6 +11,10 @@ export function packageTemplate(
     author,
     license
 ) {
+    if (isCamelCase(name)) {
+        name = convertCamelCaseToHyphen(name);
+    }
+
     return JSON.stringify(
         {
             name: name,
