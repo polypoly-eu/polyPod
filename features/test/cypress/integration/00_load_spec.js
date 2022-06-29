@@ -6,7 +6,17 @@ describe("Should work with basic functions", () => {
             },
         });
     });
-    it(`Should be able co make a simple call`, () => {
-        cy.get("#simpleJavaScriptCall");
+    it(`should have displayed all buttons`, () => {
+        [
+            "simpleJavaScriptCall",
+            "podApiResolves",
+            "canCallPolyInAddWithNoQuads",
+            "addSupportsQuadsWithDefaultGraph",
+            "canPassEmptyMatcherToPolyInMatch",
+            "canPassMatcherWithSubjectToPolyInMatch",
+            "canPassMatcherWithPredicateToPolyInMatch",
+            "canPassMatcherWithObjectToPolyInMatch",
+            "canPassMatcherWithObjectToPolyInMatch",
+        ].forEach((buttonId) => cy.get(`#${buttonId}`));
     });
 });
