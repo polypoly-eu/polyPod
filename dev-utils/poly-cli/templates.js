@@ -62,6 +62,11 @@ export function emptyFeatureTemplates(
     };
 }
 
+// Note: You can also match templates by path. You don't need to pass the entire path.
+// Example: Say you have 2 files with the same name: test.json. These 2 files have different parents.
+// Say we have the following structure: locales/en/test.json and locales/de/test.json
+// You can include the entire path in the key or you can include the first parent in the key: i.e set en/test.json as the key.
+
 export function previewFeatureTemplates(
     feature_name,
     author,
@@ -128,11 +133,18 @@ export function previewFeatureTemplates(
                     "./src/static/templates/locales/preview.json"
                 )
             ),
-        "progressInfo.json": () =>
+        "en/progressInfo.json": () =>
             readFileSync(
                 path.resolve(
                     __dirname,
-                    "./src/static/templates/locales/progressInfo.json"
+                    "./src/static/templates/locales/en/progressInfo.json"
+                )
+            ),
+        "de/progressInfo.json": () =>
+            readFileSync(
+                path.resolve(
+                    __dirname,
+                    "./src/static/templates/locales/de/progressInfo.json"
                 )
             ),
         ".gitignore": () =>

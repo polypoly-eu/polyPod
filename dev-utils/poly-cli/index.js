@@ -268,8 +268,12 @@ function createDirectoryStructure(structure, templates) {
                     recursiveCreate(child, templates, dir);
                 } else if (typeof child === "string") {
                     var content = "";
-                    if (child in templates) {
-                        content = templates[child]();
+                    var matches = keysIncludedIn(
+                        [`${dir}/${child}`, child],
+                        templates
+                    );
+                    if (matches.length > 0) {
+                        content = templates[matches[0]]();
                     }
                     writeFileSync(dir + "/" + child, content);
                 }
@@ -284,6 +288,13 @@ function createDirectoryStructure(structure, templates) {
     }
 
     recursiveCreate(structure, templates);
+}
+
+// checks if any of the keys are included as substrings in the strings.
+function keysIncludedIn(strings, object) {
+    return Object.keys(object).filter((key) =>
+        strings.some((s) => s.includes(key))
+    );
 }
 
 function checkIfValueExists(value, obj) {
