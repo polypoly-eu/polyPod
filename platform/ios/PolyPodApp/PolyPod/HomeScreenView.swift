@@ -210,7 +210,7 @@ struct HomeScreenConstants {
 
         static let title = Typography(
             font: .init(
-                name:  PolyStyle.Font.Family.jostMedium,
+                name: PolyStyle.Font.Family.jostMedium,
                 size: PolyStyle.Font.Size._2xl,
                 weight: PolyStyle.Font.Weight.medium
             ),

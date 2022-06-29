@@ -169,7 +169,7 @@ mod tests {
             "thumbnailColor": "#FFFFFF",
             "primaryColor": "#000000",
             "borderColor": "#000001",
-            "textColor": "#000002",
+            "tileTextColor": "#000002",
             "links": {
                 "link1": "https://example.com/1",
                 "link2": "https://example.com/2"
@@ -219,7 +219,7 @@ mod tests {
             "thumbnailColor": "#FFFFFF",
             "primaryColor": "#000000",
             "borderColor": "#000001",
-            "textColor": "#000002",
+            "tileTextColor": "#000002",
             "links": {
                 "link1": "https://example.com/1",
                 "link2": "https://example.com/2"
