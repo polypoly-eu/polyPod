@@ -369,22 +369,20 @@ const tests = {
     },
 };
 
-async function execute(test: () => void): Promise<void> {
-    setStatus("Running...");
+async function execute(
+    test: () => void,
+    outputElement: HTMLElement
+): Promise<void> {
+    outputElement.textContent = "Running...";
     pod = await awaitPodApi();
     polyIn = pod.polyIn;
     try {
         await test();
-        setStatus("All OK");
+        outputElement.textContent = "OK";
     } catch (e) {
         console.log(`Something went wrong: ${e}`);
-        setStatus(`Failed: ${e.message}`);
+        outputElement.textContent = `Failed: ${e.message}`;
     }
-}
-
-function setStatus(status): void {
-    console.debug(`Setting status: '${status}'`);
-    document.getElementById("status").innerText = status;
 }
 
 async function awaitPodApi(): Promise<Pod> {
@@ -399,13 +397,17 @@ async function awaitPodApi(): Promise<Pod> {
     });
 }
 
-export function generateButtons(container: HTMLElement): void {
+export function generateControls(container: HTMLElement): void {
     for (const [name, test] of Object.entries(tests)) {
         if (name.startsWith("_")) continue;
         const button = document.createElement("button");
         button.id = button.textContent = name;
-        button.addEventListener("click", () => execute(test));
-        container.appendChild(button);
+        const output = document.createElement("span");
+        button.addEventListener("click", () => execute(test, output));
+        const control = document.createElement("div");
+        control.appendChild(button);
+        control.appendChild(output);
+        container.appendChild(control);
     }
 }
 

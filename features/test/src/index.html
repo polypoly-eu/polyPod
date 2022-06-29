@@ -17,7 +17,7 @@
                 overflow: hidden;
             }
 
-            body>h1, body>div {
+            body>div {
                 margin-left: 4px;
             }
 
@@ -26,37 +26,36 @@
                 margin-bottom: 4px;
             }
 
-            div>input, .test-buttons>button {
+            div>input, .test-controls>div {
                 display: block;
                 margin: 4px;
             }
 
-            .test-buttons {
+            .test-controls button {
+                margin-right: 8px;
+            }
+
+            .test-controls {
                 flex-grow: 1;
                 overflow: auto;
             }
         </style>
     </head>
     <body>
-        <h1>Status</h1>
-        <div>
-            <span id="status">Starting</span>
-            <span id="result"></span>
-        </div>
-
-        <h1>Input</h1>
-        <div>
+        <!-- TODO: Figure out if we actually need this, otherwise remove -->
+        <div style="display: none">
+            <h1>Input</h1>
             <input id="input.1" />
             <input id="input.2" />
             <input id="input.3" />
             <input id="input.4" />
         </div>
 
-        <h1>Tests</h1>
-        <div class="test-buttons">
+        <div class="test-controls">
+            <h1>Tests</h1>
         </div>
         <script>
-            testFeature.generateButtons(document.querySelector(".test-buttons"));
+            testFeature.generateControls(document.querySelector(".test-controls"));
         </script>
     </body>
 </html>
