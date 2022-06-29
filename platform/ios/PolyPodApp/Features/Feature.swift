@@ -13,7 +13,7 @@ class Feature {
     let thumbnailColor: Color?
     let thumbnail: URL?
     let borderColor: Color?
-    let textColor: Color?
+    let tileTextColor: Color?
     private let links: [String: String]
 
     static func load(path: URL) -> Feature? {
@@ -36,7 +36,7 @@ class Feature {
         primaryColor: String?,
         links: [String: String]?,
         borderColor: String?,
-        textColor: String?
+        tileTextColor: String?
     ) {
         self.path = path
         let id = path.lastPathComponent
@@ -53,7 +53,7 @@ class Feature {
         )
         self.links = links ?? [:]
         self.borderColor = parseColor(hexValue: borderColor)
-        self.textColor = parseColor(hexValue: textColor)
+        self.tileTextColor = parseColor(hexValue: tileTextColor)
     }
 
     convenience init(path: URL, manifest: FlatbObject<FeatureManifest>) {
@@ -72,7 +72,7 @@ class Feature {
                   primaryColor: manifest.primaryColor,
                   links: links,
                   borderColor: manifest.borderColor,
-                  textColor: manifest.textColor
+                  tileTextColor: manifest.tileTextColor
         )
     }
 

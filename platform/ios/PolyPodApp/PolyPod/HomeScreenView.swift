@@ -12,7 +12,7 @@ struct Card: Identifiable {
     let image: UIImage
     let backgroundColor: Color
     let borderColor: Color
-    let textColor: Color
+    let tileTextColor: Color
 }
 
 struct HomeScreenSectionModel {
@@ -74,7 +74,7 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
                 image: image,
                 backgroundColor: feature.thumbnailColor ?? .white,
                 borderColor: feature.borderColor ?? .white,
-                textColor: feature.textColor ?? .black
+                tileTextColor: feature.tileTextColor ?? .black
             )
         }
     }
@@ -480,11 +480,11 @@ struct BigCardView: View {
 
             VStack(alignment: .leading, spacing: HomeScreenConstants.BigTile.textVerticalSpacing) {
                 Text(card.title)
-                    .foregroundColor(card.textColor)
+                    .foregroundColor(card.tileTextColor)
                     .font(HomeScreenConstants.BigTile.title.font)
                     .multilineTextAlignment(HomeScreenConstants.BigTile.title.alignment)
                 Text(card.description)
-                    .foregroundColor(card.textColor)
+                    .foregroundColor(card.tileTextColor)
                     .font(HomeScreenConstants.BigTile.description.font)
                     .multilineTextAlignment(HomeScreenConstants.BigTile.description.alignment)
             }
@@ -523,11 +523,11 @@ struct MediumCardView: View {
                        alignment: .center)
             VStack(alignment: .leading, spacing: HomeScreenConstants.MediumTile.textVerticalSpacing) {
                 Text(card.title)
-                    .foregroundColor(card.textColor)
+                    .foregroundColor(card.tileTextColor)
                     .font(HomeScreenConstants.MediumTile.title.font)
                     .multilineTextAlignment(HomeScreenConstants.MediumTile.title.alignment)
                 Text(card.description)
-                    .foregroundColor(card.textColor)
+                    .foregroundColor(card.tileTextColor)
                     .font(HomeScreenConstants.MediumTile.description.font)
                     .multilineTextAlignment(HomeScreenConstants.MediumTile.description.alignment)
             }
@@ -564,7 +564,7 @@ struct SmallCardView: View {
                 .aspectRatio(contentMode: .fit)
             Spacer()
             Text(card.title)
-                .foregroundColor(card.textColor)
+                .foregroundColor(card.tileTextColor)
                 .font(HomeScreenConstants.SmallTile.title.font)
                 .multilineTextAlignment(HomeScreenConstants.SmallTile.title.alignment)
         }
@@ -632,7 +632,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
                       borderColor: .red,
-                      textColor: .white
+                      tileTextColor: .white
                 ),
                 .init(
                     id: UUID().uuidString,
@@ -641,7 +641,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                     image: UIImage(named: "AppIcon")!,
                     backgroundColor: .blue,
                     borderColor: .red,
-                    textColor: .white
+                    tileTextColor: .white
                 ),
                 .init(
                     id: UUID().uuidString,
@@ -650,7 +650,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                     image: UIImage(named: "AppIcon")!,
                     backgroundColor: .blue,
                     borderColor: .red,
-                    textColor: .white
+                    tileTextColor: .white
                 ),
                 .init(
                     id: UUID().uuidString,
@@ -659,7 +659,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                     image: UIImage(named: "AppIcon")!,
                     backgroundColor: .blue,
                     borderColor: .red,
-                    textColor: .white
+                    tileTextColor: .white
                 ),
                 .init(id: UUID().uuidString,
                       title: "5 Big big many big hello there",
@@ -667,7 +667,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
                       borderColor: .red,
-                      textColor: .white
+                      tileTextColor: .white
                 ),
                 .init(id: UUID().uuidString,
                       title: "6 Amazon Importer",
@@ -675,7 +675,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
                       borderColor: .red,
-                      textColor: .white
+                      tileTextColor: .white
                 ),
                 .init(id: UUID().uuidString,
                       title: "7 polyExplorer",
@@ -683,7 +683,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
                       borderColor: .red,
-                      textColor: .white
+                      tileTextColor: .white
                 )
               ],
               type: .yourData),
@@ -695,7 +695,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
                       borderColor: .red,
-                      textColor: .white
+                      tileTextColor: .white
                 ),
                 .init(id: UUID().uuidString,
                       title: "Big big many big hello there",
@@ -703,7 +703,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
                       borderColor: .red,
-                      textColor: .white
+                      tileTextColor: .white
                 )
               ],
               type: .knowHow),
@@ -715,7 +715,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
                       borderColor: .red,
-                      textColor: .white
+                      tileTextColor: .white
                 ),
                 .init(id: UUID().uuidString,
                       title: "Big big many big hello there",
@@ -723,7 +723,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                       image: UIImage(named: "AppIcon")!,
                       backgroundColor: .blue,
                       borderColor: .red,
-                      textColor: .white
+                      tileTextColor: .white
                 )
               ],
               type: .tools)

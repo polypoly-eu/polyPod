@@ -39,7 +39,7 @@ private func createFixture(
         "thumbnail": "\(withThumbnail ? thumbnailFileName : "")",
         "primaryColor": "\(color)",
         "borderColor": "\(color)",
-        "textColor": "\(color)",
+        "tileTextColor": "\(color)",
         "links": {
             "example": "https://example.com",
             "uk-example": "https://example.co.uk"
@@ -87,14 +87,14 @@ class FeatureTests: XCTestCase {
         let feature = createFixture()
         XCTAssertEqual(Color(red: 0, green: 0, blue: 1), feature.primaryColor)
         XCTAssertEqual(Color(red: 0, green: 0, blue: 1), feature.borderColor)
-        XCTAssertEqual(Color(red: 0, green: 0, blue: 1), feature.text_color)
+        XCTAssertEqual(Color(red: 0, green: 0, blue: 1), feature.tileTextColor)
     }
 
     func testInvalidColorIgnored() {
         let feature = createFixture(color: "grün!")
         XCTAssertEqual(Color.clear, feature.primaryColor)
         XCTAssertEqual(Color.clear, feature.borderColor)
-        XCTAssertEqual(Color.clear, feature.text_color)
+        XCTAssertEqual(Color.clear, feature.tileTextColor)
     }
     
     func testThumbnailUrlMissing() {

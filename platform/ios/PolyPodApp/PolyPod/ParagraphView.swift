@@ -56,7 +56,7 @@ struct ParagraphView: View {
                 fontSize: fontSize,
                 kerning: kerning,
                 lineHeightMultiple: lineHeightMultiple,
-                textColor: foregroundColor
+                tileTextColor: foregroundColor
             )
         }
     }
@@ -69,7 +69,7 @@ private struct UILabelView: UIViewRepresentable {
     var fontSize: CGFloat?
     var kerning: CGFloat?
     var lineHeightMultiple: CGFloat?
-    var textColor: Color?
+    var tileTextColor: Color?
     
     func makeUIView(context: Context) -> UILabel {
         let label = UILabel()
@@ -82,8 +82,8 @@ private struct UILabelView: UIViewRepresentable {
     func updateUIView(_ label: UILabel, context: Context) {
         label.preferredMaxLayoutWidth = preferredMaxLayoutWidth
         
-        if let textColor = textColor {
-            label.textColor = UIColor.compatInit(textColor)
+        if let tileTextColor = tileTextColor {
+            label.tileTextColor = UIColor.compatInit(tileTextColor)
         }
         
         if let fontName = fontName, let fontSize = fontSize {
