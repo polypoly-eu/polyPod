@@ -131,6 +131,7 @@ struct HomeScreenConstants {
 
     struct View {
         static let horizontalPadding = PolyStyle.Spacing.plSpace4x
+        static let backgroundColor = Color.init(fromHex: "#edf2f7")
     }
 
     struct TileContainer {
@@ -339,7 +340,7 @@ struct HomeScreenView: View {
                         }
                     }
                 }
-            }
+            }.background(HomeScreenConstants.View.backgroundColor)
         }.onAppear {
             viewModel.setup()
         }
