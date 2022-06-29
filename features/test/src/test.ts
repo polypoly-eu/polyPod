@@ -9,6 +9,12 @@ let polyIn: PolyIn;
 console.debug = console.debug || console.log;
 
 const tests = {
+    /*
+      Tests prefixed with _ are disabled, and will not be exposed.  Most of
+      those are disabled because they test functionality we would like to have
+      one day, but don't actually need (and thus, support) yet.
+     */
+
     simpleJavaScriptCall(): void {
         console.log("simpleJavaScriptCall()");
         return;
@@ -24,24 +30,24 @@ const tests = {
         await polyIn.add();
     },
 
-    async canCallPolyInAddWithSingleQuad(): Promise<void> {
+    async _canCallPolyInAddWithSingleQuad(): Promise<void> {
         console.log("canCallPolyInAddWithSingleQuad()");
         const quad = QuadBuilder.fromInputs().build();
         await polyIn.add(quad);
     },
 
-    async canCallPolyInAddWithMultipleQuads(): Promise<void> {
+    async _canCallPolyInAddWithMultipleQuads(): Promise<void> {
         console.log(`canCallPolyInAddWithMultipleQuads(), quads: '${quads}'`);
         await polyIn.add(...quads);
     },
 
-    async addSupportsQuadsWithNamedNodeSubject(): Promise<void> {
+    async _addSupportsQuadsWithNamedNodeSubject(): Promise<void> {
         console.log(`addSupportsQuadsWithNamedNodeSubject()`);
         const quad = QuadBuilder.fromInputs().build();
         await polyIn.add(quad);
     },
 
-    async addSupportsQuadsWithBlankNodeSubject(): Promise<void> {
+    async _addSupportsQuadsWithBlankNodeSubject(): Promise<void> {
         console.log(`addSupportsQuadsWithBlankNodeSubject()`);
         const subject = getInput(1);
         const quad = QuadBuilder.fromInputs()
@@ -50,7 +56,7 @@ const tests = {
         await polyIn.add(quad);
     },
 
-    async addSupportsQuadsWithNamedNodeObject(): Promise<void> {
+    async _addSupportsQuadsWithNamedNodeObject(): Promise<void> {
         console.log(`addSupportsQuadsWithNamedNodeObject()`);
         const object = getInput(3);
         const quad = QuadBuilder.fromInputs()
@@ -59,7 +65,7 @@ const tests = {
         await polyIn.add(quad);
     },
 
-    async addSupportsQuadsWithBlankNodeObject(): Promise<void> {
+    async _addSupportsQuadsWithBlankNodeObject(): Promise<void> {
         console.log(`addSupportsQuadsWithBlankNodeObject()`);
         const object = getInput(3);
         const quad = QuadBuilder.fromInputs()
@@ -68,7 +74,7 @@ const tests = {
         await polyIn.add(quad);
     },
 
-    async addSupportsQuadsWithLiteralObject(): Promise<void> {
+    async _addSupportsQuadsWithLiteralObject(): Promise<void> {
         console.log(`addSupportsQuadsWithLiteralObject()`);
         const object = getInput(3);
         const quad = QuadBuilder.fromInputs()
@@ -77,7 +83,7 @@ const tests = {
         await polyIn.add(quad);
     },
 
-    async addSupportsQuadsWithNamedNodeGraph(): Promise<void> {
+    async _addSupportsQuadsWithNamedNodeGraph(): Promise<void> {
         console.log(`addSupportsQuadsWithNamedNodeGraph()`);
         const graph = getInput(4);
         const quad = QuadBuilder.fromInputs()
@@ -86,7 +92,7 @@ const tests = {
         await polyIn.add(quad);
     },
 
-    async addSupportsQuadsWithBlankNodeGraph(): Promise<void> {
+    async _addSupportsQuadsWithBlankNodeGraph(): Promise<void> {
         console.log(`addSupportsQuadsWithBlankNodeGraph()`);
         const graph = getInput(4);
         const quad = QuadBuilder.fromInputs()
@@ -145,7 +151,7 @@ const tests = {
         await polyIn.match(matcher);
     },
 
-    async canGetEmptyArrayFromPolyInMatch(): Promise<void> {
+    async _canGetEmptyArrayFromPolyInMatch(): Promise<void> {
         console.log("canGetEmptyArrayFromPolyInMatch()");
         const result = await polyIn.match({});
         if (!Array.isArray(result) || result.length !== 0)
@@ -154,7 +160,7 @@ const tests = {
             );
     },
 
-    async canGetArrayWithSingleQuadFromPolyInMatch(): Promise<void> {
+    async _canGetArrayWithSingleQuadFromPolyInMatch(): Promise<void> {
         console.log("canGetArrayWithSingleQuadFromPolyInMatch()");
         const expectedResult = QuadBuilder.fromQuad(quads[0]).build();
         const result = await polyIn.match({});
@@ -170,7 +176,7 @@ const tests = {
             );
     },
 
-    async canGetArrayWithSingleQuadWithNamedNodeSubjectFromPolyInMatch(): Promise<void> {
+    async _canGetArrayWithSingleQuadWithNamedNodeSubjectFromPolyInMatch(): Promise<void> {
         console.log(
             "canGetArrayWithSingleQuadWithNamedNodeSubjectFromPolyInMatch()"
         );
@@ -190,7 +196,7 @@ const tests = {
             );
     },
 
-    async canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInMatch(): Promise<void> {
+    async _canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInMatch(): Promise<void> {
         console.log(
             "canGetArrayWithSingleQuadWithBlankNodeSubjectFromPolyInMatch()"
         );
@@ -210,7 +216,7 @@ const tests = {
             );
     },
 
-    async canGetArrayWithSingleQuadWithNamedNodeObjectFromPolyInMatch(): Promise<void> {
+    async _canGetArrayWithSingleQuadWithNamedNodeObjectFromPolyInMatch(): Promise<void> {
         console.log(
             "canGetArrayWithSingleQuadWithNamedNodeObjectFromPolyInMatch()"
         );
@@ -230,7 +236,7 @@ const tests = {
             );
     },
 
-    async canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInMatch(): Promise<void> {
+    async _canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInMatch(): Promise<void> {
         console.log(
             "canGetArrayWithSingleQuadWithBlankNodeObjectFromPolyInMatch()"
         );
@@ -250,7 +256,7 @@ const tests = {
             );
     },
 
-    async canGetArrayWithSingleQuadWithLiteralObjectFromPolyInMatch(): Promise<void> {
+    async _canGetArrayWithSingleQuadWithLiteralObjectFromPolyInMatch(): Promise<void> {
         console.log(
             "canGetArrayWithSingleQuadWithLiteralObjectFromPolyInMatch()"
         );
@@ -270,7 +276,7 @@ const tests = {
             );
     },
 
-    async canGetArrayWithSingleQuadWithNamedNodeGraphFromPolyInMatch(): Promise<void> {
+    async _canGetArrayWithSingleQuadWithNamedNodeGraphFromPolyInMatch(): Promise<void> {
         console.log(
             "canGetArrayWithSingleQuadWithNamedNodeGraphFromPolyInMatch()"
         );
@@ -290,7 +296,7 @@ const tests = {
             );
     },
 
-    async canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInMatch(): Promise<void> {
+    async _canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInMatch(): Promise<void> {
         console.log(
             "canGetArrayWithSingleQuadWithBlankNodeGraphFromPolyInMatch()"
         );
@@ -310,7 +316,7 @@ const tests = {
             );
     },
 
-    async canGetArrayWithSingleQuadWithDefaultGraphFromPolyInMatch(): Promise<void> {
+    async _canGetArrayWithSingleQuadWithDefaultGraphFromPolyInMatch(): Promise<void> {
         console.log(
             "canGetArrayWithSingleQuadWithDefaultGraphFromPolyInMatch()"
         );
@@ -330,7 +336,7 @@ const tests = {
             );
     },
 
-    async canGetArrayWithMultipleQuadsFromPolyInMatch(): Promise<void> {
+    async _canGetArrayWithMultipleQuadsFromPolyInMatch(): Promise<void> {
         console.log("canGetArrayWithMultipleQuadsFromPolyInMatch()");
         const result = await polyIn.match({});
         if (result.length !== 2)
@@ -395,6 +401,7 @@ async function awaitPodApi(): Promise<Pod> {
 
 export function generateButtons(container: HTMLElement): void {
     for (const [name, test] of Object.entries(tests)) {
+        if (name.startsWith("_")) continue;
         const button = document.createElement("button");
         button.id = button.textContent = name;
         button.addEventListener("click", () => execute(test));
