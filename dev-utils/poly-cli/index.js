@@ -134,7 +134,7 @@ function handleCreate(arg) {
         if (arg.what === "feature") {
             handleCreateFeature(arg);
         } else {
-            printWarningMsg(
+            throw Error(
                 "Sorry, I can't create this for you. Try: «create feature» instead"
             );
         }
