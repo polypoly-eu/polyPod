@@ -2,9 +2,9 @@
 
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import fs from "fs-extra";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
+import { existsSync, mkdirSync, writeFileSync } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import {
@@ -16,14 +16,14 @@ import {
     printInfoMsg,
 } from "./src/msg.js";
 import { exit } from "process";
-import { generateStructure, metaGenerate } from "./src/generate.js";
+import { emptyFeatureTemplates, previewFeatureTemplates } from "./templates.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const initial_version = "0.0.1";
 
-if (fs.existsSync("../dev-utils/rollup-plugin-copy-watch")) {
+if (existsSync("../dev-utils/rollup-plugin-copy-watch")) {
     printInfoMsg("✓ Running from the right path!");
 } else {
     printErrorMsg(`This directory ${__dirname} will make the script fail
@@ -75,17 +75,7 @@ function interactiveSetup() {
                 }
             );
 
-            if (answers.type === "empty") {
-                handleCreateEmptyFeature(answers);
-            } else if (answers.type === "preview") {
-                handleCreatePreviewFeature(answers);
-            } else if (answers.type === "importer") {
-                handleCreateImporterFeature();
-            } else {
-                throw Error(
-                    `Feature type ${answers.type} not recognized. Aborting!`
-                );
-            }
+            handleCreateFeature(answers);
         })
         .catch((error) => {
             printErrorMsg(`Error: ${JSON.stringify(error, null, 4)}`);
@@ -175,39 +165,32 @@ function handleCreateEmptyFeature(arg) {
     let description = arg.description;
     let license = arg.license;
 
-    // folders are objects, files are strings. Remember "leaves" before subdirectories, or mkdir will fail
-    var structure = {
-        [feature_name]: generateStructure(
-            __dirname,
-            feature_name,
-            author,
-            version,
-            description,
-            license
-        ),
-    };
+    // folders are objects, files are strings.
+    var structure = {};
+    structure[feature_name] = [
+        {
+            src: [
+                { static: ["manifest.json", "index.html"] },
+                { locales: [{ en: ["common.json"] }, { de: ["common.json"] }] },
+                "index.jsx",
+                "styles.css",
+            ],
+        },
+        { test: [] },
+        "package.json",
+        "README.md",
+        "rollup.config.mjs",
+    ];
 
-    console.log(structure);
-    ["index.jsx", "styles.css"].forEach((file) => {
-        structure[feature_name]["src"][file] = metaGenerate(
-            file,
-            __dirname,
-            "empty"
-        );
-    });
+    let templates = emptyFeatureTemplates(
+        feature_name,
+        author,
+        version,
+        description,
+        license
+    );
 
-    structure[feature_name]["src"]["locales"] = {};
-    ["en", "de"].forEach((lang) => {
-        structure[feature_name]["src"]["locales"][lang] = {
-            "common.json": metaGenerate(
-                `locales/${lang}/common.json`,
-                __dirname,
-                "empty"
-            ),
-        };
-    });
-
-    createDirectoryStructure(structure);
+    createDirectoryStructure(structure, templates);
     execSync(`cd ${feature_name} && npm i && npm run build`);
 }
 
@@ -218,52 +201,49 @@ function handleCreatePreviewFeature(arg) {
     let description = arg.description;
     let license = arg.license;
 
-    // folders are objects, files will point to a function.
-    var structure = {
-        [feature_name]: generateStructure(
-            __dirname,
-            feature_name,
-            author,
-            version,
-            description,
-            license,
-            "preview"
-        ),
-    };
+    let common_locales = ["common.json", "preview.json", "progressInfo.json"];
 
-    structure[feature_name]["src"]["static"]["images"] = {};
-    structure[feature_name]["src"]["static"]["content.json"] = () =>
-        fs.readFileSync(
-            path.resolve(
-                __dirname,
-                "./src/static/templates/preview/content.json"
-            )
-        );
+    var structure = {};
+    structure[feature_name] = [
+        {
+            src: [
+                {
+                    static: [
+                        "manifest.json",
+                        "index.html",
+                        "content.json",
+                        { images: [] },
+                    ],
+                },
+                {
+                    locales: [
+                        {
+                            en: common_locales,
+                        },
+                        {
+                            de: common_locales,
+                        },
+                    ],
+                },
+                "index.jsx",
+                "styles.css",
+            ],
+        },
+        { test: [] },
+        "package.json",
+        "README.md",
+        "rollup.config.mjs",
+    ];
 
-    ["index.jsx", "styles.css"].forEach((file) => {
-        structure[feature_name]["src"][file] = metaGenerate(
-            file,
-            __dirname,
-            "preview"
-        );
-    });
+    let templates = previewFeatureTemplates(
+        feature_name,
+        author,
+        version,
+        description,
+        license
+    );
 
-    structure[feature_name]["src"]["locales"] = {};
-    ["en", "de"].forEach((lang) => {
-        structure[feature_name]["src"]["locales"][lang] = {};
-        ["common", "preview", "progressInfo"].forEach((file) => {
-            const fileName = `${file}.json`;
-            const filePath = `locales/${lang}/${fileName}`;
-            structure[feature_name]["src"]["locales"][lang][fileName] =
-                metaGenerate(
-                    filePath,
-                    __dirname,
-                    "empty" // using this since it's not including "preview" in the template path
-                );
-        });
-    });
-
-    createDirectoryStructure(structure);
+    createDirectoryStructure(structure, templates);
     execSync(
         `cd ${feature_name}/src/static && ln -s ../../../../assets/fonts . && cd ../../ && npm i && npm run build`
     );
@@ -273,30 +253,36 @@ function handleCreateImporterFeature() {
     printUnderConstruction();
 }
 
-function createDirectoryStructure(structure) {
-    const recursiveCreate = (structure, parent = ".") => {
-        for (const key in structure) {
-            if (typeof structure[key] === "object") {
-                let dir = parent + "/" + key;
-                if (!fs.existsSync(dir)) {
-                    fs.mkdirSync(dir);
+function createDirectoryStructure(structure, templates) {
+    const recursiveCreate = (structure, templates, parent = ".") => {
+        for (let key of Object.keys(structure)) {
+            let dir = parent + "/" + key;
+
+            if (!existsSync(dir)) {
+                mkdirSync(dir);
+            }
+
+            for (let child of structure[key]) {
+                if (typeof child === "object") {
+                    recursiveCreate(child, templates, dir);
+                } else if (typeof child === "string") {
+                    var content = "";
+                    if (child in templates) {
+                        content = templates[child]();
+                    }
+                    writeFileSync(dir + "/" + child, content);
                 }
-                recursiveCreate(structure[key], dir);
-            } else if (structure[key] instanceof Function) {
-                fs.writeFileSync(parent + "/" + key, structure[key]());
-            } else if (typeof structure[key] === "string") {
-                fs.copySync(structure[key], parent + "/" + key);
             }
         }
     };
 
     let feature_name = Object.keys(structure)[0];
 
-    if (fs.existsSync(`./${feature_name}`)) {
+    if (existsSync(`./${feature_name}`)) {
         throw Error("Feature already exists in this folder. Aborting!");
     }
 
-    recursiveCreate(structure);
+    recursiveCreate(structure, templates);
 }
 
 function checkIfValueExists(value, obj) {
