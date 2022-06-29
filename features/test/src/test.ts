@@ -411,19 +411,30 @@ function generateControl(name, action): HTMLElement {
 export function generateControls(container: HTMLElement): void {
     const runAllName = "runAll";
     container.appendChild(
-        generateControl(runAllName, function(output) {
+        generateControl(runAllName, function (output) {
             output.textContent = "Running all...";
             const buttons = [...container.querySelectorAll("button")].filter(
                 ({ textContent }) => textContent !== runAllName
             );
             buttons.forEach((button) => button.click());
-            setTimeout(function() {
+
+            let timeout = 2000;
+            const interval = 200;
+            setTimeout(function checkResults() {
                 const success = buttons.every(
                     ({ parentElement }) =>
                         parentElement.querySelector("span").textContent === "OK"
                 );
-                output.textContent = success ? "All OK" : "Some failed";
-            }, 500);
+                if (success) {
+                    output.textContent = "All OK";
+                    return;
+                }
+                if ((timeout -= interval) <= 0) {
+                    output.textContent = "Some failed";
+                    return;
+                }
+                setTimeout(checkResults, interval);
+            }, interval);
         })
     );
 
