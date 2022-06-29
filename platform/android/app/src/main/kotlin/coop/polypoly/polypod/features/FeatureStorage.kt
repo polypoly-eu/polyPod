@@ -12,19 +12,22 @@ import java.util.zip.ZipFile
 data class RawCategory(
     val id: String,
     val name: String,
-    val features: List<String>
+    val features: List<String>,
+    val visible: Boolean?
 )
 
 enum class FeatureCategory {
     yourData,
     knowHow,
-    tools
+    tools,
+    developer
 }
 
 data class FeatureCategoryModel(
     val category: FeatureCategory,
     val name: String,
-    val features: List<Feature>
+    val features: List<Feature>,
+    val visible: Boolean?
 )
 
 object FeatureStorage {
@@ -61,7 +64,8 @@ object FeatureStorage {
             val categoryModel = FeatureCategoryModel(
                 categoryId,
                 rawCategory.name,
-                features
+                features,
+                rawCategory.visible
             )
 
             categories.add(categoryModel)

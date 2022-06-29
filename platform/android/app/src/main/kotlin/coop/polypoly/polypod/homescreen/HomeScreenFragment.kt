@@ -120,7 +120,9 @@ fun createScreen(sectionModels: List<SectionModel>) {
     val bigTileWidth =
         containerWidth - smallTileWidth - containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
 
-    val sections = sectionModels.map {
+    val sections = sectionModels
+        .filter { it.visible ?: true }
+        .map {
         section(
             model = it,
             layout = SectionLayout.default(),
@@ -259,6 +261,20 @@ fun section(
             style = style
         )
         SectionType.TOOLS -> return Section(
+            model = model,
+            type = model.type,
+            containers = rowContainers(
+                model.tiles,
+                tilesPerContainer = 1,
+                containerLayout,
+                mediumTileLayout,
+                mediumTileStyle,
+                TileType.MEDIUM
+            ),
+            layout = layout,
+            style = style
+        )
+        SectionType.DEVELOPER -> return Section(
             model = model,
             type = model.type,
             containers = rowContainers(
