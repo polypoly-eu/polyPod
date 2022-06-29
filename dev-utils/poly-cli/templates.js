@@ -55,6 +55,10 @@ export function emptyFeatureTemplates(
                     "./src/static/templates/locales/common.json"
                 )
             ),
+        ".gitignore": () =>
+            readFileSync(
+                path.resolve(__dirname, "./src/static/templates/.gitignore")
+            ),
     };
 }
 
@@ -130,6 +134,10 @@ export function previewFeatureTemplates(
                     __dirname,
                     "./src/static/templates/locales/progressInfo.json"
                 )
+            ),
+        ".gitignore": () =>
+            readFileSync(
+                path.resolve(__dirname, "./src/static/templates/.gitignore")
             ),
     };
 }

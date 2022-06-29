@@ -180,6 +180,7 @@ function handleCreateEmptyFeature(arg) {
         "package.json",
         "README.md",
         "rollup.config.mjs",
+        ".gitignore",
     ];
 
     let templates = emptyFeatureTemplates(
@@ -233,6 +234,7 @@ function handleCreatePreviewFeature(arg) {
         "package.json",
         "README.md",
         "rollup.config.mjs",
+        ".gitignore",
     ];
 
     let templates = previewFeatureTemplates(
