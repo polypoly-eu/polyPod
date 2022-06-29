@@ -1,3 +1,17 @@
+const buttonIds = [
+    "simpleJavaScriptCall",
+    "podApiResolves",
+    "canCallPolyInAddWithNoQuads",
+    "addSupportsQuadsWithDefaultGraph",
+    "canPassEmptyMatcherToPolyInMatch",
+    "canPassMatcherWithSubjectToPolyInMatch",
+    "canPassMatcherWithPredicateToPolyInMatch",
+    "canPassMatcherWithObjectToPolyInMatch",
+    "canPassMatcherWithAllThreeFieldsToPolyInMatch",
+    "clearQuadCollection",
+    "addQuadToCollection",
+];
+
 describe("Should work with basic functions", () => {
     beforeEach(() => {
         cy.visit("dist/index.html", {
@@ -6,18 +20,12 @@ describe("Should work with basic functions", () => {
             },
         });
     });
+
     it(`should have displayed all buttons`, () => {
         // Should probably use introspection here...
-        [
-            "simpleJavaScriptCall",
-            "podApiResolves",
-            "canCallPolyInAddWithNoQuads",
-            "addSupportsQuadsWithDefaultGraph",
-            "canPassEmptyMatcherToPolyInMatch",
-            "canPassMatcherWithSubjectToPolyInMatch",
-            "canPassMatcherWithPredicateToPolyInMatch",
-            "canPassMatcherWithObjectToPolyInMatch",
-            "canPassMatcherWithObjectToPolyInMatch",
-        ].forEach((buttonId) => cy.get(`#${buttonId}`));
+        buttonIds.forEach((buttonId) => cy.get(`#${buttonId}`));
     });
+
+    it("be able to click on all buttons", () =>
+        buttonIds.forEach((buttonId) => cy.get(`#${buttonId}`).click()));
 });
