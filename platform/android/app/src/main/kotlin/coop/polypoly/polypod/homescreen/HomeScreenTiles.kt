@@ -73,7 +73,7 @@ fun BigTileView(tile: Tile) {
             Column {
                 Text(
                     text = tile.model.title,
-                    color = tile.model.textColor,
+                    color = tile.model.tileTextColor,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = tile.style.titleFont.weight,
                     fontFamily = FontFamily(
@@ -91,7 +91,7 @@ fun BigTileView(tile: Tile) {
                 )
                 Text(
                     text = tile.model.description,
-                    color = tile.model.textColor,
+                    color = tile.model.tileTextColor,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = tile.style.descriptionFont!!.weight,
                     fontFamily = FontFamily(
@@ -146,7 +146,7 @@ fun MediumTileView(tile: Tile) {
             ) {
                 Text(
                     text = tile.model.title,
-                    color = tile.model.textColor,
+                    color = tile.model.tileTextColor,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = tile.style.titleFont.weight,
                     fontFamily = FontFamily(
@@ -164,7 +164,7 @@ fun MediumTileView(tile: Tile) {
                 )
                 Text(
                     text = tile.model.description,
-                    color = tile.model.textColor,
+                    color = tile.model.tileTextColor,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = tile.style.descriptionFont!!.weight,
                     fontFamily = FontFamily(
@@ -225,7 +225,7 @@ fun SmallTileView(tile: Tile) {
             )
             Text(
                 text = tile.model.title,
-                color = tile.model.textColor,
+                color = tile.model.tileTextColor,
                 overflow = TextOverflow.Ellipsis,
                 fontWeight = tile.style.titleFont.weight,
                 fontFamily = FontFamily(

@@ -285,7 +285,7 @@ fun DefaultPreview() {
         image = null,
         backgroundColor = Color.Black,
         borderColor = Color.Red,
-        textColor = Color.White
+        tileTextColor = Color.White
     ) {}
 
     val tileModels: List<TileModel> = listOf(
