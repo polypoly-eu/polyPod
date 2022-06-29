@@ -18,6 +18,7 @@ struct HomeScreenSectionModel {
     let title: String
     let cards: [Card]
     let type: FeaturesCategoryId
+    var visible: Bool? = nil
 }
 
 struct FooterViewModel {
@@ -49,7 +50,8 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
         categoryModels.map { model in
             HomeScreenSectionModel(title: model.name,
                                    cards: mapToCards(model.features),
-                                   type: model.id)
+                                   type: model.id,
+                                   visible: model.visible)
         }
     }
 
@@ -89,7 +91,9 @@ final class HomeScreenViewModel: ObservableObject {
 
     func setup() {
         storageCancellable = storage.categoriesList.sink { sections in
-            self.sections = sections
+            self.sections = sections.filter {
+                section in section.visible ?? true
+            }
         }
     }
 }
@@ -280,6 +284,8 @@ struct HomeScreenView: View {
                                 DataKnowHowSectionView(sectionModel: sectionModel)
                             case .tools:
                                 ToolsSectionView(sectionModel: sectionModel)
+                            case .developer:
+                                DeveloperSectionView(sectionModel: sectionModel)
                             }
                             Spacer(minLength: HomeScreenConstants.Section.verticalSpacing)
                         }
@@ -395,6 +401,21 @@ struct DataKnowHowSectionView: View {
 }
 
 struct ToolsSectionView: View {
+    let sectionModel: HomeScreenSectionModel
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(sectionModel.title).fontWeight(.bold)
+            VStack(alignment: .leading, spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
+                ForEach(sectionModel.cards) { card in
+                    MediumCardView(card: card)
+                }
+            }
+        }
+    }
+}
+
+struct DeveloperSectionView: View {
     let sectionModel: HomeScreenSectionModel
 
     var body: some View {

@@ -6,18 +6,21 @@ private struct DecodedFeaturesCategory: Decodable {
     let id: String
     let name: String
     let features: [String]
+    let visible: Bool?
 }
 
 enum FeaturesCategoryId: String {
     case yourData
     case knowHow
     case tools
+    case developer
 }
 
 struct FeaturesCategoryModel {
     let id: FeaturesCategoryId
     var name: String
     var features: [Feature]
+    let visible: Bool?
 }
 
 final class FeatureStorage {
@@ -104,7 +107,8 @@ final class FeatureStorage {
             categories.append(
                 FeaturesCategoryModel(id: categoryId,
                                       name: metaCategory.name,
-                                      features: features)
+                                      features: features,
+                                      visible: metaCategory.visible)
             )
         }
 
