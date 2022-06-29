@@ -46,6 +46,10 @@
 
 "auth_prompt_unlock" = "Einloggen in polyPod";
 
+"homescreen_footer_title" = "Gefällt Ihnen, was Sie gesehen haben?";
+"homescreen_footer_description" = "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.";
+"homescreen_footer_button_title" = "Mehr erfahren";
+
 "settings_imprint_text" = "
 <p>Angaben gemäß § 5 TMG</p>
 <p>pc polypoly coop SCE mbH<br/>
