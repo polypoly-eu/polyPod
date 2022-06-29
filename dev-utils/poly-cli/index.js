@@ -9,7 +9,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 import {
     printErrorMsg,
-    printWarningMsg,
     printUnderConstruction,
     printHeadlineMsg,
     printFeatureInfoMsg,
