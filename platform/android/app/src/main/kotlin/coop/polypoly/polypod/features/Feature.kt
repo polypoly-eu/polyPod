@@ -30,7 +30,7 @@ class Feature(
     val borderColor: Int
         get() = runCatching { Color.parseColor(manifest?.borderColor) }
             .getOrDefault(primaryColor)
-    
+
     val tileTextColor: Int
         get() = runCatching { Color.parseColor(manifest?.tileTextColor) }
             .getOrDefault(0)
