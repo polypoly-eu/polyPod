@@ -1,10 +1,11 @@
 {
-    "name": "poly-talk-preview",
+    "name": "polyTalk",
     "author": "polypoly poly-cli",
-    "description": "",
-    "thumbnail": "",
+    "description": "Google knows a lot about you. With the Google Data Importer you can load your data in three steps from Google.",
+    "thumbnail": "images/thumbnail.pdf",
+    "thumbnailColor":"#ffffff",
     "primaryColor": "#ffffff",
-    "borderColor": "#ffffff",
+    "borderColor": "#cbd5e0",
     "links": {
         "learn-more": "https://polypoly.org"
     },
