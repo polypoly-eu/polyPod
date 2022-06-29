@@ -6,7 +6,7 @@
     "primaryColor": "#ffffff",
     "thumbnailColor": "#0F1938",
     "borderColor": "#0F1938",
-    "textColor": "#ffffff",
+    "tileTextColor": "#ffffff",
     "links": {},
     "translations": {
         "de": {

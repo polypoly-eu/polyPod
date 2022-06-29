@@ -6,7 +6,7 @@
     "primaryColor": "#ffffff",
     "thumbnailColor": "#475abb",
     "borderColor": "#475abb",
-    "textColor": "#000000",
+    "tileTextColor": "#000000",
     "links": {
         "data-download": "https://www.facebook.com/dyi",
         "support-email": "mailto:polypod-feedback@polypoly.coop",

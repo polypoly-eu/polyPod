@@ -83,7 +83,7 @@ private struct UILabelView: UIViewRepresentable {
         label.preferredMaxLayoutWidth = preferredMaxLayoutWidth
         
         if let tileTextColor = tileTextColor {
-            label.tileTextColor = UIColor.compatInit(tileTextColor)
+            label.textColor = UIColor.compatInit(tileTextColor)
         }
         
         if let fontName = fontName, let fontSize = fontSize {
