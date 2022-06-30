@@ -18,8 +18,10 @@ import "./banner.css";
 const Banner = ({ icon, title, description, button }) => {
   return (
     <div className="banner poly-theme-light">
-      {icon && <img src={icon} alt="icon" className="banner-icon" />}
-      <h1 className="banner-title">{title}</h1>
+      <div className="banner-header">
+        {icon && <img src={icon} alt="icon" className="banner-icon" />}
+        <h1 className="banner-title">{title}</h1>
+      </div>
       <p className="banner-description">{description}</p>
       {button && (
         <RoutingWrapper route={button.route} history={button.history}>

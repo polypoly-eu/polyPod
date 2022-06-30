@@ -4,6 +4,14 @@
     margin: calc(var(--gdu) * -6) calc(var(--gdu) * -4) 0 calc(var(--gdu) * -4);
 }
 
+.banner .banner-header {
+    display: flex;
+}
+
+.banner .banner-header .banner-icon {
+    margin-right: calc(var(--gdu) * 3);
+}
+
 .banner .banner-title {
     font-family: "Jost Medium";
     color: var(--theme-secondary-color);
