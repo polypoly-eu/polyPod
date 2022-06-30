@@ -20,6 +20,7 @@
 
 .preview p {
     font-size: var(--font-size-ml);
+    white-space: pre-wrap;
 }
 .section {
     margin-bottom: calc(var(--gdu) * 6);
