@@ -1,0 +1,21 @@
+.banner {
+    background-color: var(--color-gray-200);
+    padding: calc(var(--gdu) * 5);
+    margin: calc(var(--gdu) * -6) calc(var(--gdu) * -4) 0 calc(var(--gdu) * -4);
+}
+
+.banner .banner-title {
+    font-family: "Jost Medium";
+    color: var(--theme-secondary-color);
+    font-size: var(--font-size-xl);
+    margin: 0;
+}
+
+.banner .banner-description {
+    margin: calc(var(--gdu) * 4) 0 0 0;
+    color: var(--theme-secondary-color);
+}
+
+.banner .banner-button {
+    margin-top: calc(var(--gdu) * 4);
+}
