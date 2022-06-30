@@ -32,7 +32,9 @@ struct ExtendedData {
 
 class Bubblewrap {
     
+    // swiftlint:disable cyclomatic_complexity
     static func decode(messagePackValue: MessagePackValue) -> Any? {
+    // swiftlint:enable cyclomatic_complexity
         switch messagePackValue {
         case .bool(let value):
             return value
@@ -69,15 +71,18 @@ class Bubblewrap {
         return nil
     }
     
+    // swiftlint:disable cyclomatic_complexity
     static func encode(extendedData: ExtendedData) -> MessagePackValue {
+    // swiftlint:enable cyclomatic_complexity
+
         let classname = extendedData.classname
         let propertyList = extendedData.propertyList
         
         var messagePackPropertyList: [MessagePackValue] = []
         for property in propertyList {
-            let propertyName = property[0] as! String
             let propertyValue = property[1]
             var value: MessagePackValue?
+            
             switch propertyValue {
             case let asBool as Bool:
                 value = .bool(asBool)
@@ -100,10 +105,12 @@ class Bubblewrap {
             default:
                 continue
             }
+
+            let propertyName = property[0] as! String
             messagePackPropertyList.append(.array([.string(propertyName), value!]))
         }
         
-        let endoced = MessagePackValue.array([.string(classname), .array(messagePackPropertyList)])
-        return endoced
+        return MessagePackValue.array([.string(classname), .array(messagePackPropertyList)])
     }
+
 }

@@ -1,5 +1,5 @@
-import Foundation
 import CoreData
+import Foundation
 
 let typeIRI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 
@@ -23,7 +23,11 @@ struct EntityModel {
         for (key, value) in valueModels {
             let subject = DataFactory.namedNode(value: uuid, context: moc)
             let predicate = DataFactory.namedNode(value: schema + key, context: moc)
-            let object = DataFactory.literal(value: entity.value(for: key), languageOrDatatype: DataFactory.namedNode(value: schema + value.type, context: moc), context: moc)
+            let object = DataFactory.literal(
+                value: entity.value(for: key), 
+                languageOrDatatype: DataFactory.namedNode(value: schema + value.type, context: moc), 
+                context: moc
+            )
             
             let quad = DataFactory.quad(subject: subject, predicate: predicate, object: object, context: moc)
             quads.append(quad)

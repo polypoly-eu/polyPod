@@ -1,9 +1,9 @@
-import SwiftUI
 import LocalAuthentication
+import SwiftUI
 
 // TODO: This, and other user defaults we use, should move to a central place.
 struct FirstRun {
-    static private let key = UserDefaults.Keys.firstRun.rawValue
+    private static let key = UserDefaults.Keys.firstRun.rawValue
 
     static func read() -> Bool {
         if UserDefaults.standard.object(forKey: key) == nil {
@@ -36,10 +36,10 @@ struct ContentView: View {
         }
     }
 
-    @State private var state: ViewState? = nil
+    @State private var state: ViewState?
     @State private var showUpdateNotification = false
     var featureStorage: FeatureStorage
-    var setStatusBarStyle: ((UIStatusBarStyle) -> Void)? = nil
+    var setStatusBarStyle: ((UIStatusBarStyle) -> Void)?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -98,7 +98,7 @@ struct ContentView: View {
                         // trigger a rerender, even though it should.
                         // Yet another SwiftUI bug it seems...
                         showUpdateNotification = UpdateNotification().showInApp
-                        
+
                         state = featureListState()
                     })
                 )

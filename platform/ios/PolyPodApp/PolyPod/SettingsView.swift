@@ -75,7 +75,7 @@ private struct MainSection: View {
     @State private var isAuthenticationConfigured = Authentication.shared.isSetUp()
     
     var body: some View {
-        List() {
+        List {
             Section(header: SettingsHeader("settings_about_section")) {
                 SettingsButton(
                     label: "settings_version",
@@ -180,7 +180,7 @@ private struct SettingsButton: View {
 
 private struct SettingsToggleButton: View {
     let label: LocalizedStringKey
-    let isToggled : Binding<Bool>
+    let isToggled: Binding<Bool>
     
     var onChange: ((Bool) -> Void)?
     

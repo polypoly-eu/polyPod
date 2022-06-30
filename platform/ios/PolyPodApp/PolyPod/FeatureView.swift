@@ -9,7 +9,7 @@ struct FeatureView: View {
 
     @State var title: String = ""
     @State var activeActions: [String] = []
-    @State var queuedAction: (String, DispatchTime)? = nil
+    @State var queuedAction: (String, DispatchTime)?
     @State var filePicker = FilePicker()
 
     var body: some View {
@@ -17,6 +17,7 @@ struct FeatureView: View {
         let lightForeground = !featureColor.isLight
         let iconVariantQualifier = lightForeground ? "Light" : "Dark"
 
+        // swiftlint:disable multiple_closures_with_trailing_closure
         let closeButton = Button(
             action: {
                 if activeActions.contains("back") {
@@ -24,14 +25,14 @@ struct FeatureView: View {
                     return
                 }
                 closeAction()
-            }
-        ) {
+            }) {
             let qualifier = activeActions.contains("back") ? "Back" : "Close"
             Image("NavIcon\(qualifier)\(iconVariantQualifier)")
                 .renderingMode(.original)
         }
+        // swiftlint:enable multiple_closures_with_trailing_closure
 
-        let titleLabel = Text(title != "" ? title : feature.name)
+        let titleLabel = Text(!title.isEmpty ? title : feature.name)
             .foregroundColor(
                 lightForeground
                     ? Color.PolyPod.lightForeground
@@ -43,17 +44,23 @@ struct FeatureView: View {
 
         let actionButtons = HStack(spacing: 12) {
             if activeActions.contains("search") {
+                // swiftlint:disable multiple_closures_with_trailing_closure
                 Button(action: { triggerFeatureAction("search") }) {
                     Image("NavIconSearch\(iconVariantQualifier)")
                         .renderingMode(.original)
                 }
+                // swiftlint:enable multiple_closures_with_trailing_closure
+
             }
 
             if activeActions.contains("info") {
-                Button(action: { triggerFeatureAction("info") }) {
+                // swiftlint:disable multiple_closures_with_trailing_closure
+                Button(action: { triggerFeatureAction("info")}) {
                     Image("NavIconInfo\(iconVariantQualifier)")
                         .renderingMode(.original)
                 }
+                // swiftlint:enable multiple_closures_with_trailing_closure
+
             }
         }
 
@@ -92,7 +99,7 @@ struct FeatureView: View {
         alert.addAction(UIAlertAction(
             title: "OK",
             style: .default,
-            handler: { (action: UIAlertAction!) in
+            handler: { _ in
                 closeAction()
             }
         ))
@@ -141,7 +148,7 @@ struct FeatureView: View {
                                 comment: ""
                             ),
                             style: .default,
-                            handler: { (action: UIAlertAction!) in
+                            handler: { _ in
                                 UIApplication.shared.open(url)
                             }))
         alert.addAction(UIAlertAction(

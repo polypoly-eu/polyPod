@@ -29,7 +29,13 @@ class DataFactory {
         return literal
     }
     
-    static func quad(subject: Term, predicate: Term, object: Term, graph: Term? = nil, context moc: NSManagedObjectContext) -> Quad {
+    static func quad(
+        subject: Term, 
+        predicate: Term, 
+        object: Term, 
+        graph: Term? = nil, 
+        context moc: NSManagedObjectContext
+    ) -> Quad {
         let quad = Quad(context: moc)
         if let graph = graph {
             quad.graph = graph
