@@ -11,6 +11,7 @@ import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 import java.lang.Exception
 
+@ExperimentalUnsignedTypes
 class MainActivity : AppCompatActivity() {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
