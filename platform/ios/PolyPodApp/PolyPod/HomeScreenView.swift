@@ -27,6 +27,17 @@ struct FooterViewModel {
     let backgroundColor: Color
     let buttonTitle: LocalizedStringKey
     let buttonBackgroundColor: Color
+
+    var buttonOpenURL: URL {
+        let locale = Locale.current.languageCode
+        switch locale {
+            case "de":
+                return URL(string: "https://polypoly.coop/de-de/becomepart")!
+            default:
+                return URL(string: "https://polypoly.coop/en-de/becomepart")!
+
+        }
+    }
 }
 
 protocol HomeScreenStorage {
@@ -293,7 +304,6 @@ struct HomeScreenView: View {
     var openFeatureAction: OnFeatureSelected = { _ in }
     var openInfoAction: () -> Void = {}
     var openSettingsAction: () -> Void = {}
-    var openLearnMoreAction: () -> Void = {}
 
     var body: some View {
         // Why GeometryReader needs to be on top?
@@ -316,7 +326,7 @@ struct HomeScreenView: View {
                             }
                             Spacer(minLength: HomeScreenConstants.Section.verticalSpacing)
                         }
-                        FooterView(model: footerModel, openLearnMoreAction: openLearnMoreAction)
+                        FooterView(model: footerModel)
                     }
                     .padding([.leading, .trailing], HomeScreenConstants.View.horizontalPadding)
                     .environment(\.homeScreenTileSizes, calculateSize(geo))
@@ -658,7 +668,6 @@ struct SmallCardView: View {
 
 struct FooterView: View {
     let model: FooterViewModel
-    var openLearnMoreAction: () -> Void = { }
 
     var body: some View {
         VStack(alignment: .leading, spacing: HomeScreenConstants.Footer.verticalSpacing) {
@@ -675,7 +684,7 @@ struct FooterView: View {
                 textAlignment: HomeScreenConstants.Footer.description.alignment
             )
             Button(model.buttonTitle) {
-                openLearnMoreAction()
+                UIApplication.shared.open(model.buttonOpenURL)
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .center)

@@ -135,9 +135,6 @@ struct ContentView: View {
                     },
                     openSettingsAction: {
                         state = settingsState()
-                    },
-                    openLearnMoreAction: {
-                        // TODO
                     }
                 ).alert(isPresented: $showUpdateNotification) {
                     Alert(
