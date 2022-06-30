@@ -1,0 +1,26 @@
+{
+  "name": "poly-talk-preview",
+  "description": "Preview for the Poly-Talk feature, a decentralized and secure communication platform.",
+  "main": "src/index.jsx",
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup --watch -c",
+    "test": "echo \"Error: no test specified\""
+  },
+  "devDependencies": {
+    "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
+    "rollup": "*",
+    "@rollup/plugin-json": "*",
+    "@rollup/plugin-node-resolve": "*"
+  },
+  "dependencies": {
+    "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
+    "@polypoly-eu/podjs": "file:../../platform/podjs",
+    "@polypoly-eu/pod-api": "file:../../platform/feature-api/api/pod-api",
+    "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
+    "react": "*",
+    "react-dom": "*"
+  },
+  "author": "polypoly poly-cli",
+  "license": "MIT"
+}

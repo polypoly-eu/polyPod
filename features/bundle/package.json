@@ -10,10 +10,16 @@
     "google-feature": "file:../google",
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
-    "poly-preview-feature": "file:../polyPreview"
+    "poly-preview-feature": "file:../polyPreview",
+    "poly-talk-preview": "file:../polyTalkPreview"
   },
   "private": true,
   "polyPodFeatures": [
+    {
+      "archiveName": "polyTalkPreview",
+      "moduleName": "poly-talk-preview",
+      "artifactPath": "dist"
+    },
     {
       "archiveName": "polyPreview",
       "moduleName": "poly-preview-feature",
@@ -65,7 +71,10 @@
     {
       "id": "tools",
       "name": "Tools",
-      "features": []
+      "features": [
+        "demo",
+        "polyTalkPreview"
+      ]
     },
     {
       "id": "developer",

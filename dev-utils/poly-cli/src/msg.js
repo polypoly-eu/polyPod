@@ -1,7 +1,11 @@
 import chalk from "chalk";
 
 export function printErrorMsg(msg) {
-    console.error(chalk.red.bold.underline(`🛑 ${msg} 🛑`));
+    console.error(errorMsg(msg));
+}
+
+function errorMsg(msg) {
+    return chalk.red.bold.underline(`🛑 ${msg} 🛑`);
 }
 
 export function printWarningMsg(msg) {
