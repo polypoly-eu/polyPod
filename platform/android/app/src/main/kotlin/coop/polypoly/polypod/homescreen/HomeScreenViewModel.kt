@@ -9,7 +9,6 @@ data class SectionModel(
     val title: String,
     val type: SectionType,
     val tiles: List<TileModel>,
-    val visible: Boolean? = null,
 )
 
 enum class SectionType {
@@ -111,8 +110,7 @@ class HomeScreenViewModel {
                     ) {
                         onFeatureSelected(feature.id)
                     }
-                },
-                category.visible
+                }
             )
         }
     }

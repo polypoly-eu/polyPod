@@ -120,9 +120,7 @@ fun createScreen(sectionModels: List<SectionModel>) {
     val bigTileWidth =
         containerWidth - smallTileWidth - containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
 
-    val sections = sectionModels
-        .filter { it.visible ?: true }
-        .map {
+    val sections = sectionModels.map {
         section(
             model = it,
             layout = SectionLayout.default(),

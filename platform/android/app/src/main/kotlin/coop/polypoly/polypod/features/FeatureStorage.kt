@@ -26,8 +26,7 @@ enum class FeatureCategory {
 data class FeatureCategoryModel(
     val category: FeatureCategory,
     val name: String,
-    val features: List<Feature>,
-    val visible: Boolean?
+    val features: List<Feature>
 )
 
 object FeatureStorage {
@@ -54,8 +53,12 @@ object FeatureStorage {
                 continue
             }
             val categoryId = FeatureCategory.valueOf(rawCategory.id)
-            val features: MutableList<Feature> = ArrayList()
+            if (rawCategory.visible == false) {
+                logger.debug("Category $categoryId not visible, ignored")
+                continue
+            }
 
+            val features: MutableList<Feature> = ArrayList()
             for (featureId in rawCategory.features) {
                 importFeature(context, featureId)
                 features.add(loadFeature(context, featureId))
@@ -64,8 +67,7 @@ object FeatureStorage {
             val categoryModel = FeatureCategoryModel(
                 categoryId,
                 rawCategory.name,
-                features,
-                rawCategory.visible
+                features
             )
 
             categories.add(categoryModel)
