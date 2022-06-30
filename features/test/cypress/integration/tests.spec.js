@@ -19,12 +19,13 @@ describe("Should work with basic functions", () => {
 
     it("Missing test", () => {
         cy.get(".test-controls button").each((item) => {
-            cy.wrap(item).invoke("attr", "id").then((id) => {
-                if (id === "runAll") return;
-                expect(testIds).to.include(id);
-            });
+            cy.wrap(item)
+                .invoke("attr", "id")
+                .then((id) => {
+                    if (id === "runAll") return;
+                    expect(testIds).to.include(id);
+                });
         });
-
     });
 
     testIds.forEach((testId) => {
