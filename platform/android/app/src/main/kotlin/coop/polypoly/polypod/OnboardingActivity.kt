@@ -100,7 +100,7 @@ class OnboardingActivity : AppCompatActivity() {
                     if (carousel.currentItem == (carousel.pageCount - 1)) {
                         close()
                     } else {
-                        carousel.setCurrentItem(carousel.currentItem + 1)
+                        carousel.currentItem = carousel.currentItem + 1
                     }
                 }
             }
