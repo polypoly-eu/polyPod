@@ -28,9 +28,9 @@ export function manifestTemplate(feature_name, author, version, feature_type) {
             "learn-more": "https://polypoly.org",
         };
 
-        base.thumbnailColor = "#ffffff";
         base.primaryColor = "#0f1938";
         base.borderColor = "#cbd5e0";
+        base.tileTextColor = "#0f1938";
     }
 
     return JSON.stringify(base, null, 2);
