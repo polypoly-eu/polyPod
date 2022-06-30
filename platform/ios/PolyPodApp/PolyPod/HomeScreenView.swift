@@ -24,7 +24,6 @@ struct HomeScreenSectionModel {
 struct FooterViewModel {
     let title: LocalizedStringKey
     let description: LocalizedStringKey
-    let imageName: String
     let backgroundColor: Color
     let buttonTitle: LocalizedStringKey
     let buttonBackgroundColor: Color
@@ -285,7 +284,6 @@ struct HomeScreenView: View {
     let footerModel = FooterViewModel(
         title: "homescreen_footer_title",
         description: "homescreen_footer_description",
-        imageName: "AppIcon", // TODO: Needs the actual image
         backgroundColor: Color(fromHex: "#fed7d6"),
         buttonTitle: "homescreen_footer_button_title",
         buttonBackgroundColor: Color(fromHex: "#0f1938")
@@ -676,10 +674,6 @@ struct FooterView: View {
                 lineHeightMultiple: HomeScreenConstants.lineHeightMultiple,
                 textAlignment: HomeScreenConstants.Footer.description.alignment
             )
-            Image(model.imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(alignment: .center)
             Button(model.buttonTitle) {
                 openLearnMoreAction()
             }

@@ -42,7 +42,6 @@ data class TileModel(
 data class FooterModel(
     val title: String,
     val description: String,
-    val imageId: Int,
     val buttonTitle: String,
 )
 

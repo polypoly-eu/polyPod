@@ -290,12 +290,6 @@ fun Footer(footer: Footer) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Image(
-                    painter = painterResource(id = footer.model.imageId),
-                    contentDescription = null,
-                    contentScale = ContentScale.Fit,
-                    alignment = Alignment.Center
-                )
                 Button(
                     onClick = { /*TODO*/ },
                     modifier = Modifier.fillMaxWidth(),
