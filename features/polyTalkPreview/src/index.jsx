@@ -30,17 +30,17 @@ const Section = (props) => {
         return getNested(comp, i18n._translations) !== undefined;
     };
 
+    const imagePaths = props.model.images.map((key) =>
+        isTranslationKey(key) ? i18n.t(key) : key
+    );
+
     return (
         <div className="section">
             <h3 className="section-title">{i18n.t(props.model.title)}</h3>
             {props.model.images.length > 0 && props.model.images.length == 1 ? (
-                <img src={i18n.t(props.model.images[0])} />
+                <img src={imagePaths[0]} />
             ) : (
-                <Slideshow
-                    images={props.model.images.map((key) =>
-                        isTranslationKey(key) ? i18n.t(key) : key
-                    )}
-                />
+                <Slideshow images={imagePaths} />
             )}
             <p>{i18n.t(props.model.description)}</p>
         </div>
