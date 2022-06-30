@@ -1,0 +1,14 @@
+{
+    "name": "Test",
+    "author": "polypoly Cooperative",
+    "description": "Semi-automatic testing for the polyPod APIs - please ignore",
+    "thumbnail": "images/thumbnail.pdf",
+    "primaryColor": "#cbd5e0",
+    "borderColor": "#cbd5e0",
+    "links": {},
+    "translations": {
+        "de": {
+            "author": "polypoly - Die Genossenschaft"
+        }
+    }
+}

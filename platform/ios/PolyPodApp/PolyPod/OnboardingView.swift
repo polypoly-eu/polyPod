@@ -103,8 +103,7 @@ private struct Slide: View {
         VStack(alignment: .leading, spacing: 0) {
             ParagraphView(
                 text: headline,
-                fontName: "Jost-Light",
-                fontSize: 34,
+                font: UIFont(name: "Jost-Light", size: 34),
                 kerning: -0.38,
                 lineHeightMultiple: 0.83,
                 foregroundColor: Color.PolyPod.darkForeground
@@ -112,8 +111,7 @@ private struct Slide: View {
 
             ParagraphView(
                 text: subHeadline,
-                fontName: "Jost-Medium",
-                fontSize: 34,
+                font: UIFont(name: "Jost-Medium", size: 34),
                 kerning: -0.38,
                 lineHeightMultiple: 0.83,
                 foregroundColor: Color.PolyPod.darkForeground
@@ -121,8 +119,7 @@ private struct Slide: View {
 
             ParagraphView(
                 text: bodyText,
-                fontName: "Jost-Regular",
-                fontSize: 20,
+                font: UIFont(name: "Jost-Regular", size: 20),
                 kerning: -0.24,
                 lineHeightMultiple: 0.83,
                 foregroundColor: Color.PolyPod.darkForeground

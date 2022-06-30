@@ -14,6 +14,7 @@ pub struct FeatureManifest {
     pub primary_color: Option<String>,
     pub links: Option<HashMap<String, String>>,
     pub border_color: Option<String>,
+    pub tile_text_color: Option<String>,
 }
 
 // Alias for str, probably will be moved to a centralized place to be reused
@@ -67,6 +68,9 @@ impl FeatureManifest {
             border_color: translation
                 .and_then(|manifest| manifest.border_color.clone())
                 .or(full_manifest.border_color),
+            tile_text_color: translation
+                .and_then(|manifest| manifest.tile_text_color.clone())
+                .or(full_manifest.tile_text_color),
         }
     }
 }
@@ -84,6 +88,7 @@ struct FullFeatureManifest {
     links: Option<HashMap<String, String>>,
     translations: Option<HashMap<String, FeatureManifest>>,
     border_color: Option<String>,
+    tile_text_color: Option<String>,
 }
 
 impl TryFrom<&JSONStr> for FullFeatureManifest {
@@ -109,6 +114,7 @@ mod tests {
             primary_color: None,
             links: None,
             border_color: None,
+            tile_text_color: None,
         }
     }
 
@@ -162,7 +168,8 @@ mod tests {
             "thumbnail": "assets/thumbnail.png",
             "thumbnailColor": "#FFFFFF",
             "primaryColor": "#000000",
-            "borderColor": "#000000",
+            "borderColor": "#000001",
+            "tileTextColor": "#000002",
             "links": {
                 "link1": "https://example.com/1",
                 "link2": "https://example.com/2"
@@ -181,7 +188,8 @@ mod tests {
             thumbnail: Some("assets/thumbnail.png".to_string()),
             thumbnail_color: Some("#FFFFFF".to_string()),
             primary_color: Some("#000000".to_string()),
-            border_color: Some("#000000".to_string()),
+            border_color: Some("#000001".to_string()),
+            tile_text_color: Some("#000002".to_string()),
             links: Some(expected_links),
         };
 
@@ -195,6 +203,7 @@ mod tests {
         assert_eq!(parsed.thumbnail_color, expected_manifest.thumbnail_color);
         assert_eq!(parsed.primary_color, expected_manifest.primary_color);
         assert_eq!(parsed.border_color, expected_manifest.border_color);
+        assert_eq!(parsed.tile_text_color, expected_manifest.tile_text_color);
         assert_eq!(parsed.links, expected_manifest.links);
     }
 
@@ -209,7 +218,8 @@ mod tests {
             "thumbnail": "assets/thumbnail.png",
             "thumbnailColor": "#FFFFFF",
             "primaryColor": "#000000",
-            "borderColor": "#000000",
+            "borderColor": "#000001",
+            "tileTextColor": "#000002",
             "links": {
                 "link1": "https://example.com/1",
                 "link2": "https://example.com/2"
@@ -237,7 +247,8 @@ mod tests {
             thumbnail: Some("assets/thumbnail.png".to_string()),
             thumbnail_color: Some("#FFFFFF".to_string()),
             primary_color: Some("#000000".to_string()),
-            border_color: Some("#000000".to_string()),
+            border_color: Some("#000001".to_string()),
+            tile_text_color: Some("#000002".to_string()),
             links: Some(expected_links),
         };
 
@@ -251,6 +262,7 @@ mod tests {
         assert_eq!(parsed.thumbnail_color, expected_manifest.thumbnail_color);
         assert_eq!(parsed.primary_color, expected_manifest.primary_color);
         assert_eq!(parsed.border_color, expected_manifest.border_color);
+        assert_eq!(parsed.tile_text_color, expected_manifest.tile_text_color);
         assert_eq!(parsed.links, expected_manifest.links);
     }
 }

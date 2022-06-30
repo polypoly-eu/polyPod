@@ -14,7 +14,8 @@ data class SectionModel(
 enum class SectionType {
     YOUR_DATA,
     DATA_KNOW_HOW,
-    TOOLS;
+    TOOLS,
+    DEVELOPER;
 
     companion object {
         fun fromCategoryType(type: FeatureCategory): SectionType {
@@ -22,6 +23,7 @@ enum class SectionType {
                 FeatureCategory.yourData -> YOUR_DATA
                 FeatureCategory.knowHow -> DATA_KNOW_HOW
                 FeatureCategory.tools -> TOOLS
+                FeatureCategory.developer -> DEVELOPER
             }
         }
     }
@@ -33,6 +35,7 @@ data class TileModel(
     val image: Bitmap?,
     val backgroundColor: Color,
     val borderColor: Color,
+    val tileTextColor: Color,
     val onSelection: () -> Unit,
 )
 
@@ -105,6 +108,7 @@ class HomeScreenViewModel {
                         feature.thumbnail,
                         Color(feature.thumbnailColor),
                         Color(feature.borderColor),
+                        Color(feature.tileTextColor),
                     ) {
                         onFeatureSelected(feature.id)
                     }

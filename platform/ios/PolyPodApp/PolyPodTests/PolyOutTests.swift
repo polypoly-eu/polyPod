@@ -207,7 +207,8 @@ class PolyOutTests: XCTestCase {
             thumbnailColor: nil,
             primaryColor: nil,
             links: nil,
-            borderColor: nil
+            borderColor: nil,
+            tileTextColor: nil
         )
 
         let url = bundle.url(forResource: "testZip", withExtension: "zip")!
@@ -234,7 +235,8 @@ class PolyOutTests: XCTestCase {
             thumbnailColor: nil,
             primaryColor: nil,
             links: nil,
-            borderColor: nil
+            borderColor: nil,
+            tileTextColor: nil
         )
 
         let url1 = bundle.url(forResource: "multipleZips1", withExtension: "zip")!

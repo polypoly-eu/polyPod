@@ -5,6 +5,7 @@
   },
   "devDependencies": {
     "bestzip": "^2.2.0",
+    "demo-feature": "file:../demo",
     "facebook-import-feature": "file:../facebookImport",
     "google-feature": "file:../google",
     "lexicon-feature": "file:../lexicon",
@@ -43,6 +44,11 @@
       "archiveName": "lexicon",
       "moduleName": "lexicon-feature",
       "artifactPath": "public"
+    },
+    {
+      "archiveName": "demo",
+      "moduleName": "demo-feature",
+      "artifactPath": "dist"
     }
   ],
   "polyPodCategories": [
@@ -50,8 +56,8 @@
       "id": "yourData",
       "name": "Your Data",
       "features": [
-        "facebookImport",
-        "google"
+        "google",
+        "facebookImport"
       ]
     },
     {
@@ -68,6 +74,14 @@
       "features": [
         "demo",
         "polyTalkPreview"
+      ]
+    },
+    {
+      "id": "developer",
+      "name": "Developer",
+      "visible": true,
+      "features": [
+        "demo"
       ]
     }
   ]
