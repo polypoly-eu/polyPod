@@ -3,11 +3,12 @@
     "author": "polypoly poly-cli",
     "description": "The Messenger in polyPod - for you and your privacy.",
     "thumbnail": "images/thumbnail.pdf",
-    "thumbnailColor":"#ffffff",
+    "thumbnailColor": "#ffffff",
     "primaryColor": "#ffffff",
     "borderColor": "#cbd5e0",
     "links": {
-        "learn-more": "https://polypoly.org"
+        "learn-more-en": "https://polypoly.coop/en-de/becomepart",
+        "learn-more-de": "https://polypoly.coop/de-de/becomepart"
     },
     "translations": {
         "de": {
