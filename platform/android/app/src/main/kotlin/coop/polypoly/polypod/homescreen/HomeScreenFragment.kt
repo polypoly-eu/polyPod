@@ -144,9 +144,15 @@ fun createScreen(sectionModels: List<SectionModel>) {
 
     val footer = Footer(
         model = FooterModel(
-            title = stringResource(R.string.homescreen_footer_title),
-            description = stringResource(R.string.homescreen_footer_description),
-            buttonTitle = stringResource(R.string.homescreen_footer_button_title)
+            title = stringResource(
+                R.string.homescreen_footer_title
+            ),
+            description = stringResource(
+                R.string.homescreen_footer_description
+            ),
+            buttonTitle = stringResource(
+                R.string.homescreen_footer_button_title
+            )
         ),
         style = FooterStyle.default(),
         layout = FooterLayout.default()
