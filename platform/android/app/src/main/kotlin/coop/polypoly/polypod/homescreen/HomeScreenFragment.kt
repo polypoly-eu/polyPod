@@ -175,13 +175,14 @@ fun Screen(screen: Screen) {
         ),
         modifier = Modifier
             .width(screen.layout.width)
+            .background(Color(0xFFEDF2F7))
             .verticalScroll(scrollState)
             .padding(
                 start = screen.layout.horizontalPadding,
                 end = screen.layout.horizontalPadding,
                 bottom = screen.layout.verticalSpacing
             )
-            .background(Color(0xedf2f7))
+
     ) {
         screen.sections.forEach {
             Section(it)
