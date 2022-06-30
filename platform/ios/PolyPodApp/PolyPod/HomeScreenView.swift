@@ -349,7 +349,8 @@ struct HomeScreenView: View {
                         }
                     }
                 }
-            }.background(HomeScreenConstants.View.backgroundColor)
+                .background(HomeScreenConstants.View.backgroundColor)
+            }
         }.onAppear {
             viewModel.setup()
         }
@@ -682,12 +683,14 @@ struct FooterView: View {
                 lineHeightMultiple: HomeScreenConstants.lineHeightMultiple,
                 textAlignment: HomeScreenConstants.Footer.description.alignment
             )
+            
             Button(model.buttonTitle) {
                 UIApplication.shared.open(model.buttonOpenURL)
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .center)
             .foregroundColor(.white)
+            .font(Font(HomeScreenConstants.Footer.Button.title.font as CTFont))
             .background(model.buttonBackgroundColor)
             .cornerRadius(HomeScreenConstants.Tile.cornerRadius)
 
