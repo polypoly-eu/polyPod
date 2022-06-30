@@ -1,0 +1,31 @@
+.poly-slideshow .swiper-pagination-bullets {
+  bottom: 0;
+}
+
+.poly-slideshow .swiper-pagination-bullet {
+  width: calc(var(--gdu) * 2);
+  height: calc(var(--gdu) * 2);
+  background: var(--color-gray-300);
+}
+
+.poly-slideshow .swiper-pagination-bullet-active {
+  background: var(--color-gray-600);
+}
+
+.poly-slideshow .swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: calc(var(--gdu) * 3);
+}
+
+.poly-slideshow .swiper-wrapper {
+  margin-bottom: calc(var(--gdu) * 3);
+}
+
+.poly-slideshow img {
+  height: 250px;
+  width: 100%;
+  border-radius: calc(var(--gdu) * 2);
+  object-fit: cover;
+}
