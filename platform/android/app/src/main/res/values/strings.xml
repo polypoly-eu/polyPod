@@ -54,6 +54,6 @@
     <string name="webview_alert_message">You are required to have a Chrome version greater than 53, yours is %1$s. Please, update your Chrome to make use of this feature smoothly.</string>
     <string name="title_activity_home_screen">HomeScreenActivity</string>
 
-    <string name="homescreen_footer_title">Charmed by what we are doing? You can join too!</string>                                                               <string name="homescreen_footer_description">Become a member of the polypoly Cooperative and thus co-owner of the technology – the polyPod. Have a direct
-influence on the development and contribute to a sustainable, social and independent data economy for Europe.</string>                                            <string name="homescreen_footer_button_title">Count me in!</string>
+    <string name="homescreen_footer_title">Charmed by what we are doing? You can join too!</string>                                                           <string name="homescreen_footer_description">Become a member of the polypoly Cooperative and thus co-owner of the technology – the polyPod. Have a direct
+influence on the development and contribute to a sustainable, social and independent data economy for Europe.</string>                                        <string name="homescreen_footer_button_title">Count me in!</string>
 </resources>
