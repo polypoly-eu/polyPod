@@ -15,14 +15,32 @@ import i18n from "!silly-i18n";
 import "./styles.css";
 
 const Section = (props) => {
+    const isTranslationKey = (key) => {
+        let comp = key.split(":");
+        if (comp.length < 1) {
+            return false;
+        }
+
+        const getNested = (path_comp, obj) => {
+            if (obj === undefined) return undefined;
+            if (path_comp.length === 0) return obj;
+            return getNested(path_comp.slice(1), obj[path_comp[0]]);
+        };
+
+        return getNested(comp, i18n._translations) !== undefined;
+    };
+
     return (
         <div className="section">
             <h3 className="section-title">{i18n.t(props.model.title)}</h3>
+            <h2>{"preview:image1".split(":")}</h2>
             {props.model.images.length > 0 && props.model.images.length == 1 ? (
                 <img src={i18n.t(props.model.images[0])} />
             ) : (
                 <Slideshow
-                    images={props.model.images.map((key) => i18n.t(key))}
+                    images={props.model.images.map((key) =>
+                        isTranslationKey(key) ? i18n.t(key) : key
+                    )}
                 />
             )}
             <p>{i18n.t(props.model.description)}</p>
