@@ -280,6 +280,8 @@ struct HomeScreenView: View {
                                 DataKnowHowSectionView(sectionModel: sectionModel)
                             case .tools:
                                 ToolsSectionView(sectionModel: sectionModel)
+                            case .developer:
+                                DeveloperSectionView(sectionModel: sectionModel)
                             }
                             Spacer(minLength: HomeScreenConstants.Section.verticalSpacing)
                         }
@@ -395,6 +397,21 @@ struct DataKnowHowSectionView: View {
 }
 
 struct ToolsSectionView: View {
+    let sectionModel: HomeScreenSectionModel
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(sectionModel.title).fontWeight(.bold)
+            VStack(alignment: .leading, spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
+                ForEach(sectionModel.cards) { card in
+                    MediumCardView(card: card)
+                }
+            }
+        }
+    }
+}
+
+struct DeveloperSectionView: View {
     let sectionModel: HomeScreenSectionModel
 
     var body: some View {

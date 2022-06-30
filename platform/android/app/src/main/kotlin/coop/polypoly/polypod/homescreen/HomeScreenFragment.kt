@@ -272,6 +272,20 @@ fun section(
             layout = layout,
             style = style
         )
+        SectionType.DEVELOPER -> return Section(
+            model = model,
+            type = model.type,
+            containers = rowContainers(
+                model.tiles,
+                tilesPerContainer = 1,
+                containerLayout,
+                mediumTileLayout,
+                mediumTileStyle,
+                TileType.MEDIUM
+            ),
+            layout = layout,
+            style = style
+        )
     }
 }
 
