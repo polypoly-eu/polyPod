@@ -1,12 +1,12 @@
 {
-    "title": "How to read this? (DE)",
-    "text1": "At polypoly we are building something large and ambitious, one element at a time. And since we are building this with and for our existing and future members and partners, we want to give you a better sense of where this going and what progress we are making.<br><br>Some of the tiles on the home screen show a progress indicator. It gives you a sense of where we are in the process.<br><br>Here is what the four steps mean:",
-    "stage1": "Idea",
-    "explanation1": "We are seriously thinking about this, but did not start working on it yet. No idea when this will be ready, but it will come.",
-    "stage2": "Concept",
-    "explanation2": "We started working on this, but it is still in the early stages. Don't get too excited - yet.",
-    "stage3": "Development",
-    "explanation3": "We are building this for real - and might be looking for beta testers soon.",
+    "title": "Wie ist das zu verstehen?",
+    "text1": "Zugegeben, wir bei polypoly bauen etwas sehr Ambitioniertes, etwas Großes auf – aber eben eins nach dem anderen. Und da wir dies mit und für unsere bestehenden und zukünftigen Mitglieder und Partner:innen machen, möchten wir Ihnen ein besseres Gefühl dafür vermitteln, wohin die Reise geht und welche Fortschritte wir machen.\n\nEinige der Kacheln auf dem Startbildschirm zeigen eine Statusleiste an. Diese soll Ihnen ein Gefühl dafür vermitteln, wo wir uns in diesem Prozess befinden.\n\nDiese vier Schritte haben folgende Bedeutung:",
+    "stage1": "Wir haben eine Idee",
+    "explanation1": "Wir denken ernsthaft über eine Umsetzung nach, weiter sind wir aber noch nicht gekommen.",
+    "stage2": "Erster Entwurf",
+    "explanation2": "Wer hätte das gedacht – nachdenken resultiert in Arbeit. Wir sind also dran und arbeiten die Idee bereits aus.",
+    "stage3": "In Bearbeitung",
+    "explanation3": "Es wird ernst. Wir arbeiten bereits an der Umsetzung.",
     "stage4": "Coming soon",
-    "explanation4": "We are almost ready. The general release date is scheduled. Here are some previews."
+    "explanation4": "Fast fertig. Ein Termin steht bereits… sie werden so schnell erwachsen 🥲. Zur Vorschau."
 }
