@@ -33,7 +33,6 @@ const Section = (props) => {
     return (
         <div className="section">
             <h3 className="section-title">{i18n.t(props.model.title)}</h3>
-            <h2>{"preview:image1".split(":")}</h2>
             {props.model.images.length > 0 && props.model.images.length == 1 ? (
                 <img src={i18n.t(props.model.images[0])} />
             ) : (
