@@ -18,10 +18,14 @@ const Section = (props) => {
     return (
         <div className="section">
             <h3 className="section-title">{i18n.t(props.model.title)}</h3>
-            <p>{i18n.t(props.model.description)}</p>
-            {props.model.images.length > 0 && (
-                <Slideshow images={props.model.images} />
+            {props.model.images.length > 0 && props.model.images.length == 1 ? (
+                <img src={i18n.t(props.model.images[0])} />
+            ) : (
+                <Slideshow
+                    images={props.model.images.map((key) => i18n.t(key))}
+                />
             )}
+            <p>{i18n.t(props.model.description)}</p>
         </div>
     );
 };
@@ -98,14 +102,16 @@ const App = () => {
     }, []);
 
     return (
-        <Screen className="poly-theme-light" layout="poly-standard-layout">
+        <Screen
+            className="poly-theme-light background-white"
+            layout="poly-standard-layout"
+        >
             <div className="preview">
                 <ProgressBanner
                     stage={content.progress_banner.stage}
                     title={i18n.t(content.progress_banner.title)}
                     description={i18n.t(content.progress_banner.description)}
                     onClick={() => {
-                        console.log("Clicked the Progress Banner button");
                         setPopUpVisible(true);
                     }}
                 />

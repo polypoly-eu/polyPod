@@ -21,15 +21,30 @@
 .preview p {
     font-size: var(--font-size-ml);
     white-space: pre-wrap;
-}
-.section {
-    margin-bottom: calc(var(--gdu) * 6);
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
-h1 {
+.section {
+    margin-bottom: calc(var(--gdu) * 10);
+}
+
+.section img {
+    object-fit: contain;
+    width: 100%;
+    border-radius: calc(var(--gdu) * 2);
+    margin: calc(var(--gdu) * 4) auto;
+}
+
+.background-white {
+    background-color: var(--color-white);
+}
+
+.preview h1 {
     font-family: var(--jost);
     font-size: var(--font-size-xxl);
     margin-bottom: calc(var(--gdu) * 8);
+    margin-top: calc(var(--gdu) * 8);
     line-height: var(--line-height);
 }
 
@@ -37,7 +52,8 @@ h1 {
     font-family: var(--jost);
     font-size: var(--font-size-xl);
     line-height: var(--line-height);
-    margin-bottom: calc(var(--gdu) * 4);
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 .footer {
@@ -48,13 +64,13 @@ h1 {
 }
 
 .footer h3 {
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-xl);
     margin-bottom: calc(var(--gdu) * 3);
+    margin-top: 0;
     line-height: var(--line-height);
 }
 .footer p {
     margin-top: 0;
-    margin-bottom: calc(var(--gdu) * 6);
 }
 
 .footer .poly-button {
@@ -62,4 +78,46 @@ h1 {
 }
 .footer .card {
     padding: 0;
+}
+
+.base-info-contents {
+    margin-top: calc(var(--gdu) * 6);
+    display: flex;
+    flex-direction: column;
+}
+
+.poly-side-sheet .title {
+    margin: 0 auto;
+    font-family: var(--jost);
+}
+
+.base-info-contents .info {
+    margin-top: 0;
+    margin-bottom: calc(var(--gdu) * 11);
+}
+
+.base-info-contents .info-stage {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: calc(var(--gdu) * 8);
+}
+
+.base-info-contents .info-stage:last-of-type {
+    margin-bottom: calc(var(--gdu) * 11);
+}
+
+.base-info-contents svg {
+    flex-shrink: 0;
+    margin-right: calc(var(--gdu) * 4);
+}
+
+.info-stage h3 {
+    margin-top: 0;
+    font-size: var(--font-size-ml);
+    margin-bottom: var(--gdu);
+}
+
+.info-stage p {
+    margin-top: 0;
+    font-size: var(--font-size-m);
 }
