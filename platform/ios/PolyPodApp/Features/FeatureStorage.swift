@@ -20,7 +20,6 @@ struct FeaturesCategoryModel {
     let id: FeaturesCategoryId
     var name: String
     var features: [Feature]
-    let visible: Bool?
 }
 
 final class FeatureStorage {
@@ -92,6 +91,11 @@ final class FeatureStorage {
                 continue
             }
 
+            if !(metaCategory.visible ?? true) {
+                Log.info("Category \(metaCategory.id) not visible, will be ignored.")
+                continue
+            }
+
             var features: [Feature] = []
             for featureId in metaCategory.features {
                 do {
@@ -107,8 +111,7 @@ final class FeatureStorage {
             categories.append(
                 FeaturesCategoryModel(id: categoryId,
                                       name: metaCategory.name,
-                                      features: features,
-                                      visible: metaCategory.visible)
+                                      features: features)
             )
         }
 
