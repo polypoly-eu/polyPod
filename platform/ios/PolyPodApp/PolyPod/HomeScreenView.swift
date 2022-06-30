@@ -110,7 +110,7 @@ extension UIFont {
 
 struct HomeScreenConstants {
 
-    static let lineHeightMultiple: CGFloat = 1.2
+    static let lineHeightMultiple: CGFloat = 0.83 
 
     struct Typography {
         let font: UIFont 

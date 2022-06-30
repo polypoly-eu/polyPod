@@ -91,9 +91,6 @@ private struct UILabelView: UIViewRepresentable {
             label.font = font
         } 
 
-        if let textAlignment = textAlignment {
-            label.textAlignment = textAlignment
-        } 
         var attributes: [NSAttributedString.Key: Any] = [:]
         
         if let kerning = kerning {
@@ -103,6 +100,9 @@ private struct UILabelView: UIViewRepresentable {
         if let lineHeightMultiple = lineHeightMultiple {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineHeightMultiple = lineHeightMultiple
+            if let textAlignment = textAlignment {
+                paragraphStyle.alignment = textAlignment
+            }
             attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
         }
         
