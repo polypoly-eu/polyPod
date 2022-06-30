@@ -175,6 +175,7 @@ fun Screen(screen: Screen) {
                 end = screen.layout.horizontalPadding,
                 bottom = screen.layout.verticalSpacing
             )
+            .background(Color(0xedf2f7))
     ) {
         screen.sections.forEach {
             Section(it)
@@ -298,7 +299,8 @@ fun DefaultPreview() {
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
         image = null,
         backgroundColor = Color.Black,
-        borderColor = Color.Red
+        borderColor = Color.Red,
+        tileTextColor = Color.White
     ) {}
 
     val tileModels: List<TileModel> = listOf(

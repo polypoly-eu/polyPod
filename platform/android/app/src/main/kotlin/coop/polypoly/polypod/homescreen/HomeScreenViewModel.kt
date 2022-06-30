@@ -35,6 +35,7 @@ data class TileModel(
     val image: Bitmap?,
     val backgroundColor: Color,
     val borderColor: Color,
+    val tileTextColor: Color,
     val onSelection: () -> Unit,
 )
 
@@ -107,6 +108,7 @@ class HomeScreenViewModel {
                         feature.thumbnail,
                         Color(feature.thumbnailColor),
                         Color(feature.borderColor),
+                        Color(feature.tileTextColor),
                     ) {
                         onFeatureSelected(feature.id)
                     }
