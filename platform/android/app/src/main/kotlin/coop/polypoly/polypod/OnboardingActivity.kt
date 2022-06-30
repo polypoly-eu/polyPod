@@ -59,10 +59,9 @@ class OnboardingActivity : AppCompatActivity() {
 
         carousel.pageCount = strings.size
         carousel.setViewListener { requestedPosition ->
-            val position = requestedPosition
 
             val slide = layoutInflater.inflate(R.layout.onboarding_slide, null)
-            strings[position].forEach { (viewId, stringId) ->
+            strings[requestedPosition].forEach { (viewId, stringId) ->
                 slide.findViewById<TextView>(viewId).text = getString(stringId)
             }
             if (slide.findViewById<TextView>(R.id.headline_main).text ==
