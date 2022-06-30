@@ -1,14 +1,14 @@
 {
-    "progress.banner.title": "Idea",
-    "progress.banner.description": "Lorem ipsum dolor sit amet",
-    "title": "Find out what Amazon knows about you!",
-    "section1.title": "Shopping at Amazon not only costs money, but also part of your privacy.",
-    "section1.description": "With the Amazon Data Importer, you can load a copy of your data into your polyPod in just a few steps – easily, quickly and securely. This way, you can find out what data Amazon has actually stored about you and for what purpose.",
-    "image1": "./images/CompanyDataCleaner_visual-1_EN.jpg",
-    "section2.title": "Our solution: Decentralised data storage.",
-    "section2.description": "Amazon ranks as one of the biggest data oligarchs of our time. To weaken such monopolies, we need to bring the data – your data – back into our country. So once you have loaded your data into your polyPod, you take away the sole control from companies like Amazon – and thus weaken their monopoly position. <br><br>In the first step, you download a copy of your data from Amazon to your polyPod to find out what Amazon actually knows about you.<br>In the future, you will then have the option of deleting your data from Amazon and deciding for yourself what data you make available.",
-    "image2": "./images/CompanyDataCleaner_visual-2_EN.jpg",
-    "footer.title": "Footer",
-    "footer.description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "footer.button.title": "Learn More"
+    "progress.banner.title": "We sketch",
+    "progress.banner.description": "Who would have known – brainstorming leads to an idea and this idea needs to get in shape. We’re on it, we shape the idea for development.",
+    "title": "For you and your privacy",
+    "section1.title": "polyTalk and your privacy – a GDPR love story",
+    "section1.description": "You may have already noticed, but privacy is particularly close to our hearts. Something that is always a topic of discussion, especially when it comes to messenger. How secure are our messengers really? We want to create a real alternative – without compromise. \n\npolyTalk is an application within polyPod and therefore GDPR-compliant by default.",
+    "image1": "./images/polyTalk_visual-1.png",
+    "section2.title": "More than a messenger",
+    "section2.description": "As part of the polyPod, the polyTalk feature can also be used as a communication tool for other applications, such as within the polypoly Membership Feature or to reach the polypoly Support Team in the future.",
+    "image2": "./images/polyTalk_visual-2.png",
+    "footer.title": "Actually quite charming, what we are doing? You can do that too!",
+    "footer.description": "Become a member of the polypoly Cooperative and thus co-owner of the technology – the polyPod. Have a direct influence on the development and contribute to a sustainable, social and independent data economy for Europe.",
+    "footer.button.title": "Count me in!"
 }

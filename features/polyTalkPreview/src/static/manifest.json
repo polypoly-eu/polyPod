@@ -1,7 +1,7 @@
 {
     "name": "polyTalk",
     "author": "polypoly poly-cli",
-    "description": "Google knows a lot about you. With the Google Data Importer you can load your data in three steps from Google.",
+    "description": "The Messenger in polyPod - for you and your privacy.",
     "thumbnail": "images/thumbnail.pdf",
     "thumbnailColor":"#ffffff",
     "primaryColor": "#ffffff",
@@ -12,7 +12,7 @@
     "translations": {
         "de": {
             "author": "",
-            "description": ""
+            "description": "Der Messenger im polyPod – für Sie und Ihre Privatsphäre."
         }
     }
 }
