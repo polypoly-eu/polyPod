@@ -44,9 +44,10 @@
 
 "auth_prompt_unlock" = "Log in to your polyPod";
 
-"homescreen_footer_title" = "Like what you have seen?";
-"homescreen_footer_description" = "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.";
-"homescreen_footer_button_title" = "Learn more";
+"homescreen_footer_title" = "Charmed by what we are doing? You can join too!";
+"homescreen_footer_description" = "Become a member of the polypoly Cooperative and thus co-owner of the technology – the polyPod. Have a direct influence on the development and contribute to a sustainable, social and independent data economy for Europe.";
+"homescreen_footer_button_title" = "Count me in!";
+"homescreen_footer_button_open_url" = "https://polypoly.coop/en-de/becomepart";
 
 "settings_imprint_text" = "
 <p>Details according to § 5 TMG</p>

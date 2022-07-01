@@ -5,8 +5,16 @@ var sessionPostData: Data?
 var sessionError: Error?
 
 class NetworkSessionMock: NetworkSession {
-    func loadData(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: "HTTP/1.1", headerFields: request.allHTTPHeaderFields)
+    func loadData(
+        with request: URLRequest,
+        completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void
+    ) {
+        let response = HTTPURLResponse(
+            url: request.url!,
+            statusCode: 200,
+            httpVersion: "HTTP/1.1",
+            headerFields: request.allHTTPHeaderFields
+        )
         if request.httpMethod == "POST" {
             if request.httpBody != nil {
                 completionHandler(sessionPostData, response, sessionError)
@@ -20,6 +28,7 @@ class NetworkSessionMock: NetworkSession {
 }
 
 class PolyOutTests: XCTestCase {
+    // swiftlint:disable empty_xctest_method
     override func setUp() {
         sessionGetData = nil
         sessionPostData = nil
@@ -34,6 +43,7 @@ class PolyOutTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+    // swiftlint:enable empty_xctest_method
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
@@ -51,7 +61,9 @@ class PolyOutTests: XCTestCase {
         sessionGetData = responseText.data(using: .utf8)
 
         let expectation = XCTestExpectation(description: "Test valid response")
-        polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(with: [:]), completionHandler: { (fetchResponse, error) in
+        polyOut.fetch(
+            urlString: URL_STRING,
+            requestInit: FetchRequestInit(with: [:])) { (fetchResponse, _) in
             XCTAssertNotNil(fetchResponse, "fetchResponse is nil")
 
             XCTAssertEqual(fetchResponse!.url, URL_STRING)
@@ -61,7 +73,7 @@ class PolyOutTests: XCTestCase {
             XCTAssertEqual(fetchResponse!.bufferedText, responseText)
 
             expectation.fulfill()
-        })
+        }
 
         wait(for: [expectation], timeout: 1.0)
     }
@@ -74,11 +86,14 @@ class PolyOutTests: XCTestCase {
         sessionError = URLError(.unknown)
 
         let expectation = XCTestExpectation(description: "Test error")
-        polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(with: [:]), completionHandler: { (fetchResponse, error) in
-            XCTAssertNil(fetchResponse, "fetchResponse is not nil")
+        polyOut.fetch(
+            urlString: URL_STRING,
+            requestInit: FetchRequestInit(with: [:]),
+            completionHandler: { (fetchResponse, _) in
+                XCTAssertNil(fetchResponse, "fetchResponse is not nil")
 
-            expectation.fulfill()
-        })
+                expectation.fulfill()
+            })
 
         wait(for: [expectation], timeout: 1.0)
     }
@@ -90,21 +105,24 @@ class PolyOutTests: XCTestCase {
 
         let responseText = "This is the post response"
         sessionPostData = responseText.data(using: .utf8)
-        let requestInitData = ["method" : "post",
-                               "body" : "This is the body"]
+        let requestInitData = ["method": "post",
+                               "body": "This is the body"]
 
         let expectation = XCTestExpectation(description: "Test valid response")
-        polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(with: requestInitData), completionHandler: { (fetchResponse, error) in
-            XCTAssertNotNil(fetchResponse, "fetchResponse is nil")
+        polyOut.fetch(
+            urlString: URL_STRING,
+            requestInit: FetchRequestInit(with: requestInitData),
+            completionHandler: { (fetchResponse, _) in
+                XCTAssertNotNil(fetchResponse, "fetchResponse is nil")
 
-            XCTAssertEqual(fetchResponse!.url, URL_STRING)
+                XCTAssertEqual(fetchResponse!.url, URL_STRING)
 
-            XCTAssertEqual(fetchResponse!.status, 200)
+                XCTAssertEqual(fetchResponse!.status, 200)
 
-            XCTAssertEqual(fetchResponse!.bufferedText, responseText)
+                XCTAssertEqual(fetchResponse!.bufferedText, responseText)
 
-            expectation.fulfill()
-        })
+                expectation.fulfill()
+            })
 
         wait(for: [expectation], timeout: 1.0)
     }
@@ -116,14 +134,17 @@ class PolyOutTests: XCTestCase {
 
         let responseText = "This is the post response"
         sessionPostData = responseText.data(using: .utf8)
-        let requestInitData = ["method" : "post"]
+        let requestInitData = ["method": "post"]
 
         let expectation = XCTestExpectation(description: "Test valid response")
-        polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(with: requestInitData), completionHandler: { (fetchResponse, error) in
-            XCTAssertNil(fetchResponse, "fetchResponse is nil")
+        polyOut.fetch(
+            urlString: URL_STRING,
+            requestInit: FetchRequestInit(with: requestInitData),
+            completionHandler: { (fetchResponse, _) in
+                XCTAssertNil(fetchResponse, "fetchResponse is nil")
 
-            expectation.fulfill()
-        })
+                expectation.fulfill()
+            })
 
         wait(for: [expectation], timeout: 1.0)
     }
@@ -134,20 +155,22 @@ class PolyOutTests: XCTestCase {
         let polyOut = PolyOut(session: NetworkSessionMock())
 
         sessionError = URLError(.unknown)
-        let requestInitData = ["method" : "post",
-                               "body" : "This is the body"]
+        let requestInitData = ["method": "post",
+                               "body": "This is the body"]
 
         let expectation = XCTestExpectation(description: "Test error")
-        polyOut.fetch(urlString: URL_STRING, requestInit: FetchRequestInit(with: requestInitData), completionHandler: { (fetchResponse, error) in
+        polyOut.fetch(
+            urlString: URL_STRING,
+            requestInit: FetchRequestInit(with: requestInitData)) { (fetchResponse, _) in
             XCTAssertNil(fetchResponse, "fetchResponse is not nil")
 
             expectation.fulfill()
-        })
+        }
 
         wait(for: [expectation], timeout: 1.0)
     }
 
-    func importArchive(url: String, destUrl: String? = nil, polyOut: PolyOut) -> String? {
+    private func importArchive(url: String, destUrl: String? = nil, polyOut: PolyOut) -> String? {
         let expectation = expectation(description: "Exp")
         var newURL: String?
         polyOut.importArchive(url: url, destUrl: destUrl) { newUrl in
@@ -158,7 +181,7 @@ class PolyOutTests: XCTestCase {
         return newURL
     }
 
-    func readDir(url: String, polyOut: PolyOut) -> ([[String: String]]?, Error?) {
+    private func readDir(url: String, polyOut: PolyOut) -> ([[String: String]]?, Error?) {
         let expectation = expectation(description: "Exp")
         var _stuff: [[String: String]]?
         var _error: Error?
@@ -175,39 +198,61 @@ class PolyOutTests: XCTestCase {
         let polyOut = PolyOut(session: NetworkSessionMock())
 
         let bundle = Bundle(for: type(of: self))
-        polyOut.activeFeature = Feature(path: URL(string: bundle.bundlePath)!, name: "Test", author: nil, description: nil, thumbnail: nil, thumbnailColor: nil, primaryColor: nil, links: nil, borderColor: nil)
+        polyOut.activeFeature = Feature(
+            path: URL(string: bundle.bundlePath)!,
+            name: "Test",
+            author: nil,
+            description: nil,
+            thumbnail: nil,
+            thumbnailColor: nil,
+            primaryColor: nil,
+            links: nil,
+            borderColor: nil,
+            tileTextColor: nil
+        )
 
         let url = bundle.url(forResource: "testZip", withExtension: "zip")!
 
         let newUrl = importArchive(url: url.absoluteString, destUrl: nil, polyOut: polyOut)
-        XCTAssertTrue(newUrl != nil && newUrl != "", "newUrl is nil or empty")
+        XCTAssertTrue(newUrl != nil && !newUrl!.isEmpty, "newUrl is nil or empty")
 
         let (stuff, error) = readDir(url: newUrl!, polyOut: polyOut)
         XCTAssertNil(error, "error is not nil")
         XCTAssertTrue(stuff != nil && !stuff!.isEmpty, "no files were found")
-        XCTAssertTrue(stuff!.filter{ $0["path"] == "testZip/testfile.rtf" }.count > 0, "file not found")
+        XCTAssertTrue(stuff!.contains { $0["path"] == "testZip/testfile.rtf" }, "file not found")
     }
 
     func testImportMultipleArchives() {
         let polyOut = PolyOut(session: NetworkSessionMock())
 
         let bundle = Bundle(for: type(of: self))
-        polyOut.activeFeature = Feature(path: URL(string: bundle.bundlePath)!, name: "Test", author: nil, description: nil, thumbnail: nil, thumbnailColor: nil, primaryColor: nil, links: nil, borderColor: nil)
+        polyOut.activeFeature = Feature(
+            path: URL(string: bundle.bundlePath)!,
+            name: "Test",
+            author: nil,
+            description: nil,
+            thumbnail: nil,
+            thumbnailColor: nil,
+            primaryColor: nil,
+            links: nil,
+            borderColor: nil,
+            tileTextColor: nil
+        )
 
         let url1 = bundle.url(forResource: "multipleZips1", withExtension: "zip")!
         let url2 = bundle.url(forResource: "multipleZips2", withExtension: "zip")!
 
         let newUrl1 = importArchive(url: url1.absoluteString, destUrl: nil, polyOut: polyOut)
-        XCTAssertTrue(newUrl1 != nil && newUrl1 != "", "newUrl1 is nil or empty")
+        XCTAssertTrue(newUrl1 != nil && !newUrl1!.isEmpty, "newUrl1 is nil or empty")
 
         let newUrl2 = importArchive(url: url2.absoluteString, destUrl: newUrl1, polyOut: polyOut)
-        XCTAssertTrue(newUrl2 != nil && newUrl2 != "", "newUrl2 is nil or empty")
+        XCTAssertTrue(newUrl2 != nil && !newUrl2!.isEmpty, "newUrl2 is nil or empty")
         XCTAssertTrue(newUrl1 == newUrl2)
 
         let (stuff, error) = readDir(url: newUrl1!, polyOut: polyOut)
         XCTAssertNil(error, "error is not nil")
         XCTAssertTrue(stuff != nil && !stuff!.isEmpty, "no files were found")
-        XCTAssertTrue(stuff!.filter{ $0["path"] == "multipleZips1/file1.rtf" }.count > 0, "file1  not found")
-        XCTAssertTrue(stuff!.filter{ $0["path"] == "multipleZips2/file2.rtf" }.count > 0, "file2  not found")
+        XCTAssertTrue(stuff!.contains { $0["path"] == "multipleZips1/file1.rtf" }, "file1  not found")
+        XCTAssertTrue(stuff!.contains { $0["path"] == "multipleZips2/file2.rtf" }, "file2  not found")
     }
 }

@@ -9,42 +9,43 @@ import SwiftUI
  */
 struct ParagraphView: View {
     private let text: String
-    private let fontName: String?
-    private let fontSize: CGFloat?
+    private let font: UIFont?
     private let kerning: CGFloat?
     private let lineHeightMultiple: CGFloat?
     private let foregroundColor: Color?
+    private let textAlignment: NSTextAlignment?
     
     init(
         text: String,
-        fontName: String? = nil,
-        fontSize: CGFloat? = nil,
+        font: UIFont? = nil,
         kerning: CGFloat? = nil,
         lineHeightMultiple: CGFloat? = nil,
-        foregroundColor: Color? = nil
+        foregroundColor: Color? = nil,
+        textAlignment: NSTextAlignment? = nil
     ) {
         self.text = text
-        self.fontName = fontName
-        self.fontSize = fontSize
+        self.font = font
         self.kerning = kerning
         self.lineHeightMultiple = lineHeightMultiple
         self.foregroundColor = foregroundColor
+        self.textAlignment = textAlignment
     }
     
     init(
         text: LocalizedStringKey,
-        fontName: String? = nil,
-        fontSize: CGFloat? = nil,
+        font: UIFont? = nil,
         kerning: CGFloat? = nil,
         lineHeightMultiple: CGFloat? = nil,
-        foregroundColor: Color? = nil
+        foregroundColor: Color? = nil,
+        textAlignment: NSTextAlignment? = nil
     ) {
-        self.text = text.toLocalizedString()
-        self.fontName = fontName
-        self.fontSize = fontSize
-        self.kerning = kerning
-        self.lineHeightMultiple = lineHeightMultiple
-        self.foregroundColor = foregroundColor
+        self.init(
+            text: text.toLocalizedString(),
+            font: font,
+            kerning: kerning,
+            lineHeightMultiple: lineHeightMultiple,
+            foregroundColor: foregroundColor,
+            textAlignment: textAlignment)
     }
     
     var body: some View {
@@ -52,11 +53,11 @@ struct ParagraphView: View {
             UILabelView(
                 text: text,
                 preferredMaxLayoutWidth: width,
-                fontName: fontName,
-                fontSize: fontSize,
                 kerning: kerning,
+                font: font,
                 lineHeightMultiple: lineHeightMultiple,
-                textColor: foregroundColor
+                tileTextColor: foregroundColor,
+                textAlignment: textAlignment
             )
         }
     }
@@ -65,11 +66,11 @@ struct ParagraphView: View {
 private struct UILabelView: UIViewRepresentable {
     var text: String
     var preferredMaxLayoutWidth: CGFloat
-    var fontName: String? = nil
-    var fontSize: CGFloat? = nil
-    var kerning: CGFloat? = nil
-    var lineHeightMultiple: CGFloat? = nil
-    var textColor: Color? = nil
+    var kerning: CGFloat?
+    var font: UIFont?
+    var lineHeightMultiple: CGFloat?
+    var tileTextColor: Color?
+    var textAlignment: NSTextAlignment?
     
     func makeUIView(context: Context) -> UILabel {
         let label = UILabel()
@@ -82,14 +83,14 @@ private struct UILabelView: UIViewRepresentable {
     func updateUIView(_ label: UILabel, context: Context) {
         label.preferredMaxLayoutWidth = preferredMaxLayoutWidth
         
-        if let textColor = textColor {
-            label.textColor = UIColor.compatInit(textColor)
+        if let tileTextColor = tileTextColor {
+            label.textColor = UIColor.compatInit(tileTextColor)
         }
         
-        if let fontName = fontName, let fontSize = fontSize {
-            label.font = UIFont(name: fontName, size: fontSize)
-        }
-        
+        if let font = font {
+            label.font = font
+        } 
+
         var attributes: [NSAttributedString.Key: Any] = [:]
         
         if let kerning = kerning {
@@ -99,6 +100,9 @@ private struct UILabelView: UIViewRepresentable {
         if let lineHeightMultiple = lineHeightMultiple {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineHeightMultiple = lineHeightMultiple
+            if let textAlignment = textAlignment {
+                paragraphStyle.alignment = textAlignment
+            }
             attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
         }
         
