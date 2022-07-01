@@ -48,7 +48,11 @@ data class FooterModel(
     val buttonTitle: String,
 ) {
     fun buttonOpenUri(context: Context): Uri {
-        return Uri.parse(context.getString(R.string.homescreen_footer_button_open_url))
+        return Uri.parse(
+            context.getString(
+                R.string.homescreen_footer_button_open_url
+            )
+        )
     }
 }
 
