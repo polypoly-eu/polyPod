@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -175,7 +176,7 @@ fun Screen(screen: Screen) {
         ),
         modifier = Modifier
             .width(screen.layout.width)
-            .background(Color(0xFFEDF2F7))
+            .background(colorResource(R.color.homescreen_background))
             .verticalScroll(scrollState)
             .padding(
                 start = screen.layout.horizontalPadding,
