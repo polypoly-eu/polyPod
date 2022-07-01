@@ -15,7 +15,7 @@ import "./banner.css";
  * @param {String} [button.label] Text for the button's label
  * @returns jsx
  */
-const Banner = ({ icon, title, description, button }) => {
+export const Banner = ({ icon, title, description, button }) => {
   return (
     <div className="banner poly-theme-light">
       <div className="banner-header">
@@ -31,5 +31,3 @@ const Banner = ({ icon, title, description, button }) => {
     </div>
   );
 };
-
-export default Banner;
