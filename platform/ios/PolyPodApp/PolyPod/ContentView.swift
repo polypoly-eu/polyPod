@@ -120,6 +120,7 @@ struct ContentView: View {
     private func featureListState() -> ViewState {
         let notification = UpdateNotification()
         return ViewState(
+            backgroundColor: HomeScreenConstants.View.backgroundColor,
             AnyView(
                 HomeScreenView(
                     viewModel: .init(
@@ -135,9 +136,6 @@ struct ContentView: View {
                     },
                     openSettingsAction: {
                         state = settingsState()
-                    },
-                    openLearnMoreAction: {
-                        // TODO
                     }
                 ).alert(isPresented: $showUpdateNotification) {
                     Alert(

@@ -24,10 +24,18 @@ struct HomeScreenSectionModel {
 struct FooterViewModel {
     let title: LocalizedStringKey
     let description: LocalizedStringKey
-    let imageName: String
     let backgroundColor: Color
     let buttonTitle: LocalizedStringKey
     let buttonBackgroundColor: Color
+
+    var buttonOpenURL: URL {
+        return URL(
+            string:
+                LocalizedStringKey(
+                    "homescreen_footer_button_open_url"
+                ) .toLocalizedString()
+        )!
+    }
 }
 
 protocol HomeScreenStorage {
@@ -285,7 +293,6 @@ struct HomeScreenView: View {
     let footerModel = FooterViewModel(
         title: "homescreen_footer_title",
         description: "homescreen_footer_description",
-        imageName: "AppIcon", // TODO: Needs the actual image
         backgroundColor: Color(fromHex: "#fed7d6"),
         buttonTitle: "homescreen_footer_button_title",
         buttonBackgroundColor: Color(fromHex: "#0f1938")
@@ -295,7 +302,6 @@ struct HomeScreenView: View {
     var openFeatureAction: OnFeatureSelected = { _ in }
     var openInfoAction: () -> Void = {}
     var openSettingsAction: () -> Void = {}
-    var openLearnMoreAction: () -> Void = {}
 
     var body: some View {
         // Why GeometryReader needs to be on top?
@@ -318,7 +324,7 @@ struct HomeScreenView: View {
                             }
                             Spacer(minLength: HomeScreenConstants.Section.verticalSpacing)
                         }
-                        FooterView(model: footerModel, openLearnMoreAction: openLearnMoreAction)
+                        FooterView(model: footerModel)
                     }
                     .padding([.leading, .trailing], HomeScreenConstants.View.horizontalPadding)
                     .environment(\.homeScreenTileSizes, calculateSize(geo))
@@ -342,7 +348,8 @@ struct HomeScreenView: View {
                         }
                     }
                 }
-            }.background(HomeScreenConstants.View.backgroundColor)
+                .background(HomeScreenConstants.View.backgroundColor)
+            }
         }.onAppear {
             viewModel.setup()
         }
@@ -660,7 +667,6 @@ struct SmallCardView: View {
 
 struct FooterView: View {
     let model: FooterViewModel
-    var openLearnMoreAction: () -> Void = { }
 
     var body: some View {
         VStack(alignment: .leading, spacing: HomeScreenConstants.Footer.verticalSpacing) {
@@ -676,16 +682,14 @@ struct FooterView: View {
                 lineHeightMultiple: HomeScreenConstants.lineHeightMultiple,
                 textAlignment: HomeScreenConstants.Footer.description.alignment
             )
-            Image(model.imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(alignment: .center)
+            
             Button(model.buttonTitle) {
-                openLearnMoreAction()
+                UIApplication.shared.open(model.buttonOpenURL)
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .center)
             .foregroundColor(.white)
+            .font(Font(HomeScreenConstants.Footer.Button.title.font as CTFont))
             .background(model.buttonBackgroundColor)
             .cornerRadius(HomeScreenConstants.Tile.cornerRadius)
 

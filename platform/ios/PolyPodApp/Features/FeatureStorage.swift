@@ -86,6 +86,8 @@ final class FeatureStorage {
 
         var categories: [FeaturesCategoryModel] = []
         for metaCategory in metaCategories {
+            guard !metaCategory.features.isEmpty else { continue }
+
             guard let categoryId = FeaturesCategoryId(rawValue: metaCategory.id) else {
                 Log.info("Unknown category \(metaCategory.id), will be ignored.")
                 continue

@@ -1,7 +1,10 @@
 package coop.polypoly.polypod.homescreen
 
+import android.content.Context
 import android.graphics.Bitmap
+import android.net.Uri
 import androidx.compose.ui.graphics.Color
+import coop.polypoly.polypod.R
 import coop.polypoly.polypod.features.FeatureCategory
 import coop.polypoly.polypod.features.FeatureStorage
 
@@ -42,9 +45,16 @@ data class TileModel(
 data class FooterModel(
     val title: String,
     val description: String,
-    val imageId: Int,
     val buttonTitle: String,
-)
+) {
+    fun buttonOpenUri(context: Context): Uri {
+        return Uri.parse(
+            context.getString(
+                R.string.homescreen_footer_button_open_url
+            )
+        )
+    }
+}
 
 data class Screen(
     val sections: List<Section>,

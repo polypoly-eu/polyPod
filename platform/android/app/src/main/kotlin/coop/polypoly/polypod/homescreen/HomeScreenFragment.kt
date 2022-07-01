@@ -13,7 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
@@ -143,10 +145,15 @@ fun createScreen(sectionModels: List<SectionModel>) {
 
     val footer = Footer(
         model = FooterModel(
-            title = "Like What You Have Seen?",
-            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
-            buttonTitle = "Learn More",
-            imageId = R.drawable.ic_launcher
+            title = stringResource(
+                R.string.homescreen_footer_title
+            ),
+            description = stringResource(
+                R.string.homescreen_footer_description
+            ),
+            buttonTitle = stringResource(
+                R.string.homescreen_footer_button_title
+            )
         ),
         style = FooterStyle.default(),
         layout = FooterLayout.default()
@@ -169,13 +176,14 @@ fun Screen(screen: Screen) {
         ),
         modifier = Modifier
             .width(screen.layout.width)
+            .background(colorResource(R.color.homescreen_background))
             .verticalScroll(scrollState)
             .padding(
                 start = screen.layout.horizontalPadding,
                 end = screen.layout.horizontalPadding,
                 bottom = screen.layout.verticalSpacing
             )
-            .background(Color(0xedf2f7))
+
     ) {
         screen.sections.forEach {
             Section(it)
