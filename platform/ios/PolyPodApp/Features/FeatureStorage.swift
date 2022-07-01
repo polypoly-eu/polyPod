@@ -6,12 +6,14 @@ private struct DecodedFeaturesCategory: Decodable {
     let id: String
     let name: String
     let features: [String]
+    let visible: Bool?
 }
 
 enum FeaturesCategoryId: String {
     case yourData
     case knowHow
     case tools
+    case developer
 }
 
 struct FeaturesCategoryModel {
@@ -84,8 +86,15 @@ final class FeatureStorage {
 
         var categories: [FeaturesCategoryModel] = []
         for metaCategory in metaCategories {
+            guard !metaCategory.features.isEmpty else { continue }
+
             guard let categoryId = FeaturesCategoryId(rawValue: metaCategory.id) else {
                 Log.info("Unknown category \(metaCategory.id), will be ignored.")
+                continue
+            }
+
+            if !(metaCategory.visible ?? true) {
+                Log.info("Category \(metaCategory.id) not visible, will be ignored.")
                 continue
             }
 

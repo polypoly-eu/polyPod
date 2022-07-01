@@ -147,7 +147,7 @@ extension PolyOut {
             forKey: PolyOut.fsKey
         ) as? [String: [String]] ?? [:]
         // List entries of a zip file
-        if url.isEmpty {
+        if !url.isEmpty {
             let cachedEntries = readDirCache[url]
             if cachedEntries != nil {
                 completionHandler(cachedEntries, nil)

@@ -2,9 +2,11 @@
     "name": "Lexicon",
     "author": "polypoly Cooperative",
     "description": "What is \"Data Mining\"? And why do we need Cookies in our computers? The Lexicon has the answers.",
-    "thumbnail": "images/thumbnail-icon.pdf",
+    "thumbnail": "images/thumbnail.pdf",
+    "primaryColor": "#FFF5F5",
     "thumbnailColor": "#FB8A89",
-    "primaryColor": "#ffffff",
+    "borderColor": "#FB8A89",
+    "tileTextColor": "#ffffff",
     "links": {
         "membership": "https://polypoly.coop/en-de/membership"
     },

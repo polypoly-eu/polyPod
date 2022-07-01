@@ -207,7 +207,8 @@ class PolyOutTests: XCTestCase {
             thumbnailColor: nil,
             primaryColor: nil,
             links: nil,
-            borderColor: nil
+            borderColor: nil,
+            tileTextColor: nil
         )
 
         let url = bundle.url(forResource: "testZip", withExtension: "zip")!
@@ -218,7 +219,7 @@ class PolyOutTests: XCTestCase {
         let (stuff, error) = readDir(url: newUrl!, polyOut: polyOut)
         XCTAssertNil(error, "error is not nil")
         XCTAssertTrue(stuff != nil && !stuff!.isEmpty, "no files were found")
-        XCTAssertTrue(!stuff!.contains { $0["path"] == "testZip/testfile.rtf" }, "file not found")
+        XCTAssertTrue(stuff!.contains { $0["path"] == "testZip/testfile.rtf" }, "file not found")
     }
 
     func testImportMultipleArchives() {
@@ -234,7 +235,8 @@ class PolyOutTests: XCTestCase {
             thumbnailColor: nil,
             primaryColor: nil,
             links: nil,
-            borderColor: nil
+            borderColor: nil,
+            tileTextColor: nil
         )
 
         let url1 = bundle.url(forResource: "multipleZips1", withExtension: "zip")!
@@ -250,7 +252,7 @@ class PolyOutTests: XCTestCase {
         let (stuff, error) = readDir(url: newUrl1!, polyOut: polyOut)
         XCTAssertNil(error, "error is not nil")
         XCTAssertTrue(stuff != nil && !stuff!.isEmpty, "no files were found")
-        XCTAssertTrue(!stuff!.contains { $0["path"] == "multipleZips1/file1.rtf" }, "file1  not found")
-        XCTAssertTrue(!stuff!.contains { $0["path"] == "multipleZips2/file2.rtf" }, "file2  not found")
+        XCTAssertTrue(stuff!.contains { $0["path"] == "multipleZips1/file1.rtf" }, "file1  not found")
+        XCTAssertTrue(stuff!.contains { $0["path"] == "multipleZips2/file2.rtf" }, "file2  not found")
     }
 }

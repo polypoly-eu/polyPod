@@ -13,5 +13,6 @@
         "description": "Description_DE"
     }
   },
-  "borderColor": "#000000"
+  "borderColor": "#000000",
+  "textColor": "#ffffff"
 }
