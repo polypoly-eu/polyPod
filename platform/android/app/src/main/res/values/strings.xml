@@ -58,4 +58,5 @@
     <string name="homescreen_footer_description">Become a member of the polypoly Cooperative and thus co-owner of the technology – the polyPod. Have a direct
 	    influence on the development and contribute to a sustainable, social and independent data economy for Europe.</string>                                       
     <string name="homescreen_footer_button_title">Count me in!</string>
+    <string name="homescreen_footer_button_open_url">https://polypoly.coop/en-de/becomepart</string>
 </resources>

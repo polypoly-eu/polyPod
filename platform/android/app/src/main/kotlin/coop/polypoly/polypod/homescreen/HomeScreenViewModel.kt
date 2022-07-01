@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.compose.ui.graphics.Color
-import coop.polypoly.polypod.Language
+import coop.polypoly.polypod.R
 import coop.polypoly.polypod.features.FeatureCategory
 import coop.polypoly.polypod.features.FeatureStorage
 
@@ -48,10 +48,7 @@ data class FooterModel(
     val buttonTitle: String,
 ) {
     fun buttonOpenUri(context: Context): Uri {
-        return when (Language.determine(context)) {
-            "de" -> Uri.parse("https://polypoly.coop/de-de/becomepart")
-            else -> Uri.parse("https://polypoly.coop/en-de/becomepart")
-        }
+        return Uri.parse(context.getString(R.string.homescreen_footer_button_open_url))
     }
 }
 
