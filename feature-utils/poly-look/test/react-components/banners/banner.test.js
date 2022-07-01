@@ -7,24 +7,28 @@ import { Banner } from "../../../src/react-components";
 /**
  * @jest-environment jsdom
  */
+
 it("Banner renders correctly", () => {
+  const title = "Title";
+  const description = "Description";
   const { container, getByText, getByRole } = render(
-    <Banner title="Title" description="Description" icon="icon.svg" />
+    <Banner title={title} description={description} icon="icon.svg" />
   );
 
   expect(container).toBeTruthy();
-  expect(getByText("Title")).toBeTruthy();
-  expect(getByText("Description")).toBeTruthy();
+  expect(getByText(title)).toBeTruthy();
+  expect(getByText(description)).toBeTruthy();
   expect(getByRole("img")).toBeTruthy();
 });
 
 it("Clicking the button leads to the correct route", () => {
   const history = new HistoryStub();
+  const label = "Label";
+  const mockedRoute = "/route";
 
   const { getByText } = render(
-    <Banner button={{ label: "Label", route: "/route", history: history }} />
+    <Banner button={{ label: label, route: mockedRoute, history: history }} />
   );
-  const buttonElement = getByText("Label");
-  fireEvent.click(buttonElement);
-  expect(history.route).toBe("/route");
+  fireEvent.click(getByText(label));
+  expect(history.route).toBe(mockedRoute);
 });
