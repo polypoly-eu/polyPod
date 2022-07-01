@@ -53,9 +53,9 @@ class MainActivity : AppCompatActivity() {
             notification.handleFirstRun()
         }
 
-        val shouldShowOnboarding = firstRun ||
-            Authentication.shouldShowBiometricsPrompt(this)
-        if (!onboardingShown && shouldShowOnboarding) {
+//        val shouldShowOnboarding = firstRun ||
+//            Authentication.shouldShowBiometricsPrompt(this)
+        if (!onboardingShown && firstRun) {
             onboardingShown = true
             startActivity(Intent(this, OnboardingActivity::class.java))
         } else if (Authentication.shouldAuthenticate(this)) {
