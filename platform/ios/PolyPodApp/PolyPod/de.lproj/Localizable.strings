@@ -49,6 +49,7 @@
 "homescreen_footer_title" = "Eigentlich ganz charmant, was wir hier machen? Das können Sie auch!";
 "homescreen_footer_description" = "Werden Sie Mitglied in der polypoly Genossenschaft und somit Miteigentümer:in an der Technologie – dem polyPod. Nehmen Sie direkten Einfluss auf die Entwicklung und tragen Ihren Teil zu einer nachhaltigen, sozialen und unabhängigen Datenökonomie für Europa bei.";
 "homescreen_footer_button_title" = "Ich bin dabei!";
+"homescreen_footer_button_open_url" = "https://polypoly.coop/de-de/becomepart";
 
 "settings_imprint_text" = "
 <p>Angaben gemäß § 5 TMG</p>

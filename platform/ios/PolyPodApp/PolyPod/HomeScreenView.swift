@@ -29,13 +29,12 @@ struct FooterViewModel {
     let buttonBackgroundColor: Color
 
     var buttonOpenURL: URL {
-        let locale = Locale.current.languageCode
-        switch locale {
-        case "de":
-            return URL(string: "https://polypoly.coop/de-de/becomepart")!
-        default:
-            return URL(string: "https://polypoly.coop/en-de/becomepart")!
-        }
+        return URL(
+            string:
+                LocalizedStringKey(
+                    "homescreen_footer_button_open_url"
+                ) .toLocalizedString()
+        )!
     }
 }
 
