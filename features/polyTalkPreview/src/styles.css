@@ -40,6 +40,10 @@
     background-color: var(--color-white);
 }
 
+.margin-top-50 {
+    margin-top: 50px;
+}
+
 .preview h1 {
     font-family: var(--jost);
     font-size: var(--font-size-xxl);
