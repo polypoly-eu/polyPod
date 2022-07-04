@@ -1,0 +1,20 @@
+{
+    "name": "polyTalk",
+    "author": "polypoly poly-cli",
+    "description": "The Messenger in polyPod - for you and your privacy.",
+    "thumbnail": "images/thumbnail.pdf",
+    "thumbnailColor": "#ffffff",
+    "primaryColor": "#ffffff",
+    "borderColor": "#cbd5e0",
+    "tileTextColor": "#0f1938",
+    "links": {
+        "learn-more-en": "https://polypoly.coop/en-de/becomepart",
+        "learn-more-de": "https://polypoly.coop/de-de/becomepart"
+    },
+    "translations": {
+        "de": {
+            "author": "",
+            "description": "Der Messenger im polyPod – für Sie und Ihre Privatsphäre."
+        }
+    }
+}

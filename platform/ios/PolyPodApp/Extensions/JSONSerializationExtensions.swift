@@ -21,7 +21,7 @@ extension JSONSerialization {
     static func save(
         jsonObject: Any,
         toFilename filename: String
-    ) throws -> Bool{
+    ) throws -> Bool {
         let fm = FileManager.default
         let urls = fm.urls(for: .documentDirectory, in: .userDomainMask)
         if let url = urls.first {

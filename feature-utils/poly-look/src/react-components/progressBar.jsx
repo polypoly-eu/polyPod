@@ -10,6 +10,7 @@ const ProgressBar = ({ onUpdateImportStatus, importSections }) => {
           onClick={() => onUpdateImportStatus(section)}
           key={index}
           className={`section`}
+          data-testid="section-id"
         >
           <div className={`line ${section}-progress`}>
             <div className={`number ${section}-number`}>{index + 1}</div>

@@ -1,13 +1,17 @@
 {
   "name": "test-feature",
   "scripts": {
+    "eslint": "eslint src --ext .ts --ext .js",
+    "lint": "npm run eslint",
+    "test": "cypress run",
     "build": "rollup -c"
   },
   "dependencies": {
-    "@polypoly-eu/pod-api": "file:../../platform/feature-api/api/pod-api",
+    "@polypoly-eu/api": "file:../../platform/feature-api/api",
     "@rdfjs/data-model": "^1.2.0"
   },
   "devDependencies": {
+    "@polypoly-eu/podjs": "file:../../platform/podjs",
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
     "@types/rdf-js": "^4.0.0"
   },

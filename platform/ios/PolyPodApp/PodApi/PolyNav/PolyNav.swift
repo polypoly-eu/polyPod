@@ -1,5 +1,5 @@
-import UIKit
 import SwiftUI
+import UIKit
 import Zip
 
 enum PolyNavError: Error {
@@ -22,7 +22,7 @@ protocol PolyNavProtocol {
     func pickFile(type: String?, completionHandler: @escaping (ExternalFile?) -> Void)
 }
 
-protocol PolyNavDelegate {
+protocol PolyNavDelegate: AnyObject {
     func doHandleSetTitle(title: String)
     func doHandleSetActiveActions(actions: [String])
     func doHandleOpenUrl(url: String)
