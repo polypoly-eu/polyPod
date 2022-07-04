@@ -88,7 +88,6 @@ const ProgressInfoPopUp = ({ onClose }) => {
         <SideSwiper
             onClose={onClose}
             open={true}
-            lastChildSelector=".poly-button"
             Component={(props) => (
                 <SideSheet
                     title={i18n.t("progressInfo:title")}
