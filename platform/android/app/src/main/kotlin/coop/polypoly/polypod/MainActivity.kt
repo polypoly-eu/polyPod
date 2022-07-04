@@ -53,12 +53,17 @@ class MainActivity : AppCompatActivity() {
             notification.handleFirstRun()
         }
 
-//        val shouldShowOnboarding = firstRun ||
-//            Authentication.shouldShowBiometricsPrompt(this)
+        val shouldShowOnboarding = firstRun ||
+            Authentication.shouldShowBiometricsPrompt(this)
         if (!onboardingShown && firstRun) {
             onboardingShown = true
             startActivity(Intent(this, OnboardingActivity::class.java))
-        } else if (Authentication.shouldAuthenticate(this)) {
+        }
+        else if (!onboardingShown && shouldShowOnboarding) {
+            onboardingShown = true
+            startActivity(Intent(this, OnboardingActivity::class.java))
+        }
+        else if (Authentication.shouldAuthenticate(this)) {
             startActivity(Intent(this, PodUnlockActivity::class.java))
         }
 
