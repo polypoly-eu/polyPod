@@ -1,14 +1,6 @@
 import fc, { Arbitrary } from "fast-check";
-import {
-    gens,
-    dataFactory,
-    NamedNode,
-    BlankNode,
-    Literal,
-    Variable,
-    DefaultGraph,
-    Quad as polyQuad,
-} from "@polypoly-eu/api";
+import { gens } from "@polypoly-eu/rdf-spec";
+import * as RDF from "@polypoly-eu/rdf";
 import { Bubblewrap, Class, Classes, deserialize, serialize } from "../index";
 
 // TODO export spec
@@ -84,15 +76,15 @@ type Types = {
     A: TestA;
     B: TestB;
     MyError: MyError;
-    "@polypoly-eu/rdf.NamedNode": NamedNode;
-    "@polypoly-eu/rdf.BlankNode": BlankNode;
-    "@polypoly-eu/rdf.Literal": Literal;
-    "@polypoly-eu/rdf.Variable": Variable;
-    "@polypoly-eu/rdf.DefaultGraph": DefaultGraph;
-    "@polypoly-eu/rdf.Quad": polyQuad;
+    "@polypoly-eu/rdf.NamedNode": RDF.NamedNode;
+    "@polypoly-eu/rdf.BlankNode": RDF.BlankNode;
+    "@polypoly-eu/rdf.Literal": RDF.Literal;
+    "@polypoly-eu/rdf.Variable": RDF.Variable;
+    "@polypoly-eu/rdf.DefaultGraph": RDF.DefaultGraph;
+    "@polypoly-eu/rdf.Quad": RDF.Quad;
 };
 
-const gen = gens(dataFactory);
+const gen = gens(RDF.dataFactory);
 
 const infos: TypeInfos<Types> = {
     A: [TestA, fc.fullUnicodeString().map((a) => new TestA(a))],
@@ -103,16 +95,16 @@ const infos: TypeInfos<Types> = {
             .map(([a, b]) => new TestB(a, b)),
     ],
     MyError: [MyError, fc.hexaString().map((m) => new MyError(m))],
-    "@polypoly-eu/rdf.NamedNode": [NamedNode, gen.namedNode],
-    "@polypoly-eu/rdf.BlankNode": [BlankNode, gen.blankNode],
-    "@polypoly-eu/rdf.Literal": [Literal, gen.literal],
+    "@polypoly-eu/rdf.NamedNode": [RDF.NamedNode, gen.namedNode],
+    "@polypoly-eu/rdf.BlankNode": [RDF.BlankNode, gen.blankNode],
+    "@polypoly-eu/rdf.Literal": [RDF.Literal, gen.literal],
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    "@polypoly-eu/rdf.Variable": [Variable, gen.variable!],
+    "@polypoly-eu/rdf.Variable": [RDF.Variable, gen.variable!],
     "@polypoly-eu/rdf.DefaultGraph": [
-        DefaultGraph,
-        fc.constant(dataFactory.defaultGraph()),
+        RDF.DefaultGraph,
+        fc.constant(RDF.dataFactory.defaultGraph()),
     ],
-    "@polypoly-eu/rdf.Quad": [polyQuad, gen.quad],
+    "@polypoly-eu/rdf.Quad": [RDF.Quad, gen.quad],
 };
 
 describe("Bubblewrap", () => {

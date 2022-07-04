@@ -1,14 +1,9 @@
+import { Pod, PolyLifecycle, DefaultPod, FS } from "@polypoly-eu/pod-api";
 import { Volume } from "memfs";
 import factory from "@rdfjs/dataset";
+import { podSpec } from "@polypoly-eu/pod-api/dist/spec";
 import { AsyncPod } from "../../async";
-import {
-    Pod,
-    PolyLifecycle,
-    DefaultPod,
-    FS,
-    DataFactory,
-    podSpec,
-} from "@polypoly-eu/api";
+import { DataFactory } from "@polypoly-eu/rdf";
 
 describe("Async pod", () => {
     const fs = new Volume().promises as unknown as FS;

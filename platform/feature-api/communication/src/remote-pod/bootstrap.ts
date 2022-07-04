@@ -1,5 +1,5 @@
 import { iframeInnerPort } from "../index";
-import { DataFactory } from "@polypoly-eu/api";
+import { DataFactory } from "@polypoly-eu/rdf";
 import { RemoteClientPod } from "./remote";
 import { AsyncPod } from "./async";
 
