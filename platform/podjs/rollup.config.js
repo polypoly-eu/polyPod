@@ -10,16 +10,10 @@ export default [
             {
                 file: "dist/index.es.js",
                 format: "esm",
-                globals: {
-                    "@polypoly-eu/api": "api",
-                },
             },
             {
                 file: "dist/index.js",
                 format: "cjs",
-                globals: {
-                    "@polypoly-eu/api": "api",
-                },
             },
         ],
         plugins: [
@@ -32,7 +26,6 @@ export default [
             }),
         ],
         context: "window",
-        external: ["chai"],
     },
     {
         input: "src/pod.ts",

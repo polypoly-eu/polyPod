@@ -4,27 +4,19 @@ import { join } from "path";
 import { Quad } from "rdf-js";
 import { promises as fs } from "fs";
 import { Bubblewrap, Classes } from "../index";
-import {
-    convert,
-    dataFactory,
-    NamedNode,
-    BlankNode,
-    Literal,
-    Variable,
-    DefaultGraph,
-    Quad as polyQuad,
-} from "@polypoly-eu/api";
+import * as RDF from "@polypoly-eu/rdf";
+import { convert } from "@polypoly-eu/rdf-convert";
 import * as assert from "assert";
 
 const suite = new Suite();
 
 const classes: Classes = {
-    "@polypoly-eu/rdf.NamedNode": NamedNode,
-    "@polypoly-eu/rdf.BlankNode": BlankNode,
-    "@polypoly-eu/rdf.Literal": Literal,
-    "@polypoly-eu/rdf.Variable": Variable,
-    "@polypoly-eu/rdf.DefaultGraph": DefaultGraph,
-    "@polypoly-eu/rdf.Quad": polyQuad,
+    "@polypoly-eu/rdf.NamedNode": RDF.NamedNode,
+    "@polypoly-eu/rdf.BlankNode": RDF.BlankNode,
+    "@polypoly-eu/rdf.Literal": RDF.Literal,
+    "@polypoly-eu/rdf.Variable": RDF.Variable,
+    "@polypoly-eu/rdf.DefaultGraph": RDF.DefaultGraph,
+    "@polypoly-eu/rdf.Quad": RDF.Quad,
 };
 
 const bubblewrap = Bubblewrap.create(classes);
@@ -45,8 +37,8 @@ async function loadDataset(): Promise<Quad[]> {
     return parser.parse(content);
 }
 
-function convertDataset(quads: Quad[]): polyQuad[] {
-    return quads.map((quad) => convert(quad, dataFactory));
+function convertDataset(quads: Quad[]): RDF.Quad[] {
+    return quads.map((quad) => convert(quad, RDF.dataFactory));
 }
 
 async function runBench(): Promise<void> {

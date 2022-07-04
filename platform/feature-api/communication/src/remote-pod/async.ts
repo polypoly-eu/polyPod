@@ -11,7 +11,7 @@ import {
     Matcher,
     Stats,
     Info,
-} from "@polypoly-eu/api";
+} from "@polypoly-eu/pod-api";
 import { DataFactory, Quad } from "rdf-js";
 
 class AsyncPolyOut implements PolyOut {

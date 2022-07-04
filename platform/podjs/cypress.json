@@ -1,5 +1,4 @@
 {
     "pluginsFile": false,
-    "video": false,
-    "defaultCommandTimeout": 20000
+    "video": false
 }
