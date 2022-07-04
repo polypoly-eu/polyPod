@@ -122,7 +122,7 @@ const App = () => {
         <>
             <div className="poly-nav-bar-separator-overlay" />
             <Screen
-                className="poly-theme-light background-white margin-top-50"
+                className="poly-theme-light background-white"
                 layout="poly-standard-layout"
             >
                 <div className="preview">
