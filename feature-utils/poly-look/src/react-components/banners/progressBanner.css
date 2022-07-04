@@ -1,0 +1,41 @@
+.poly-progress-banner {
+  background-color: var(--color-gray-100);
+  color: var(--color-indigo-950);
+  font-family: var(--jost);
+  padding: calc(var(--gdu) * 6) calc(var(--gdu) * 4);
+  margin: calc(var(--gdu) * -6) calc(var(--gdu) * -4) 0 calc(var(--gdu) * -4);
+}
+
+.poly-progress-banner .row {
+  display: flex;
+  align-items: center;
+  margin-bottom: calc(var(--gdu) * 5);
+}
+
+.poly-progress-banner .row .title {
+  flex-grow: 1;
+  font-size: var(--font-size-xl);
+  font-family: var(--jost-medium);
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: calc(var(--gdu) * 3);
+}
+
+.poly-progress-banner .row .description {
+  font-size: var(--font-size-ml);
+  margin-top: var(--gdu);
+  margin-bottom: 0;
+}
+
+.poly-progress-banner .row .info-button {
+  position: absolute;
+  right: 0;
+  flex-shrink: 0;
+}
+
+.poly-progress-banner svg {
+  flex-shrink: 0;
+  width: 29px;
+  height: 29px;
+}

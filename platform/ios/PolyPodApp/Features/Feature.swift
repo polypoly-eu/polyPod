@@ -1,5 +1,5 @@
-import SwiftUI
 import PolyPodCoreSwift
+import SwiftUI
 
 typealias FeatureId = String
 
@@ -13,6 +13,7 @@ class Feature {
     let thumbnailColor: Color?
     let thumbnail: URL?
     let borderColor: Color?
+    let tileTextColor: Color?
     private let links: [String: String]
 
     static func load(path: URL) -> Feature? {
@@ -34,7 +35,8 @@ class Feature {
         thumbnailColor: String?,
         primaryColor: String?,
         links: [String: String]?,
-        borderColor: String?
+        borderColor: String?,
+        tileTextColor: String?
     ) {
         self.path = path
         let id = path.lastPathComponent
@@ -51,6 +53,7 @@ class Feature {
         )
         self.links = links ?? [:]
         self.borderColor = parseColor(hexValue: borderColor)
+        self.tileTextColor = parseColor(hexValue: tileTextColor)
     }
 
     convenience init(path: URL, manifest: FlatbObject<FeatureManifest>) {
@@ -68,7 +71,8 @@ class Feature {
                   thumbnailColor: manifest.thumbnailColor,
                   primaryColor: manifest.primaryColor,
                   links: links,
-                  borderColor: manifest.borderColor
+                  borderColor: manifest.borderColor,
+                  tileTextColor: manifest.tileTextColor
         )
     }
 

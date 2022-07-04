@@ -2,7 +2,7 @@ name: Test pushes and PRs
 on:
   push:
   pull_request:
-    types: [assigned, opened, ready_for_review]
+    types: [assigned, opened, ready_for_review, closed]
 
 jobs:
   test:
@@ -20,10 +20,11 @@ jobs:
         id: cache
         with:
           path: |
+            node_modules
             **/node_modules
             ~/.cache
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('package-lock.json') }}
-      - name: Checks paths to rebuild Android
+      - name: Checks paths to trigger the rest of the steps
         uses: dorny/paths-filter@8c7f485a57f7cad3483dcc0fdf36122a0542f200 #v2.10.2
         id: changes
         with:
@@ -55,7 +56,7 @@ jobs:
         if: steps.changes.outputs.js == 'true'
         run: ./build.js lint
       - name: Install JS packages
-        if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.js == 'true')
+        if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.js == 'true' || steps.changes.outputs.android == 'true')
         run: ./build.js offlineInstall
       - name: Build core and features
         if: steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.android == 'true'
