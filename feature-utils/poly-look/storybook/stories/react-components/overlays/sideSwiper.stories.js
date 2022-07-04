@@ -64,7 +64,6 @@ const Template = (args) => {
           {...args}
           open={open}
           onClose={() => setOpen(false)}
-          lastChildSelector=".last-visible"
           Component={SliderComponent}
         />
       )}
