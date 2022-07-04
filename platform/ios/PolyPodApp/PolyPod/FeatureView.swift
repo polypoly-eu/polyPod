@@ -3,20 +3,21 @@ import SwiftUI
 struct FeatureView: View {
     @Environment(\.presentationMode)
     var presentationMode: Binding<PresentationMode>
-    
+
     let feature: Feature
     var closeAction: () -> Void = {}
-    
+
     @State var title: String = ""
     @State var activeActions: [String] = []
-    @State var queuedAction: (String, DispatchTime)? = nil
+    @State var queuedAction: (String, DispatchTime)?
     @State var filePicker = FilePicker()
-    
+
     var body: some View {
         let featureColor = feature.primaryColor ?? Color.PolyPod.lightBackground
         let lightForeground = !featureColor.isLight
         let iconVariantQualifier = lightForeground ? "Light" : "Dark"
-        
+
+        // swiftlint:disable multiple_closures_with_trailing_closure
         let closeButton = Button(
             action: {
                 if activeActions.contains("back") {
@@ -24,14 +25,14 @@ struct FeatureView: View {
                     return
                 }
                 closeAction()
-            }
-        ) {
+            }) {
             let qualifier = activeActions.contains("back") ? "Back" : "Close"
             Image("NavIcon\(qualifier)\(iconVariantQualifier)")
                 .renderingMode(.original)
         }
-        
-        let titleLabel = Text(title != "" ? title : feature.name)
+        // swiftlint:enable multiple_closures_with_trailing_closure
+
+        let titleLabel = Text(!title.isEmpty ? title : feature.name)
             .foregroundColor(
                 lightForeground
                     ? Color.PolyPod.lightForeground
@@ -40,23 +41,29 @@ struct FeatureView: View {
             .font(.custom("Jost-Medium", size: 16))
             .kerning(-0.16)
             .frame(maxWidth: .infinity, alignment: .center)
-        
+
         let actionButtons = HStack(spacing: 12) {
             if activeActions.contains("search") {
+                // swiftlint:disable multiple_closures_with_trailing_closure
                 Button(action: { triggerFeatureAction("search") }) {
                     Image("NavIconSearch\(iconVariantQualifier)")
                         .renderingMode(.original)
                 }
+                // swiftlint:enable multiple_closures_with_trailing_closure
+
             }
-            
+
             if activeActions.contains("info") {
-                Button(action: { triggerFeatureAction("info") }) {
+                // swiftlint:disable multiple_closures_with_trailing_closure
+                Button(action: { triggerFeatureAction("info")}) {
                     Image("NavIconInfo\(iconVariantQualifier)")
                         .renderingMode(.original)
                 }
+                // swiftlint:enable multiple_closures_with_trailing_closure
+
             }
         }
-        
+
         VStack(spacing: 0) {
             NavigationBar(
                 leading: AnyView(closeButton),
@@ -64,7 +71,7 @@ struct FeatureView: View {
                 trailing: AnyView(actionButtons)
             )
             .background(featureColor)
-            
+
             FeatureContainerView(
                 feature: feature,
                 title: $title,
@@ -76,7 +83,7 @@ struct FeatureView: View {
             )
         }
     }
-    
+
     private func handleError(_ error: String) {
         let alert = UIAlertController(
             title: "",
@@ -92,7 +99,7 @@ struct FeatureView: View {
         alert.addAction(UIAlertAction(
             title: "OK",
             style: .default,
-            handler: { (action: UIAlertAction!) in
+            handler: { _ in
                 closeAction()
             }
         ))
@@ -102,7 +109,7 @@ struct FeatureView: View {
             completion: nil
         )
     }
-    
+
     private func openUrl(target: String) {
         let viewController =
             UIApplication.shared.windows.first!.rootViewController!
@@ -141,7 +148,7 @@ struct FeatureView: View {
                                 comment: ""
                             ),
                             style: .default,
-                            handler: { (action: UIAlertAction!) in
+                            handler: { _ in
                                 UIApplication.shared.open(url)
                             }))
         alert.addAction(UIAlertAction(
@@ -152,11 +159,11 @@ struct FeatureView: View {
                             style: .default))
         viewController.present(alert, animated: true, completion: nil)
     }
-    
+
     private func pickFile(type: String?, completion: @escaping (ExternalFile?) -> Void) {
         filePicker.pick(type: type, completion: completion)
     }
-    
+
     private func triggerFeatureAction(_ action: String) {
         queuedAction = (action, DispatchTime.now())
     }

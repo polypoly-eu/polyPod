@@ -1,5 +1,5 @@
-import Foundation
 import CoreData
+import Foundation
 
 extension DefaultGraph {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<DefaultGraph> {

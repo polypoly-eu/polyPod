@@ -2,9 +2,11 @@
     "name": "Google Data Importer",
     "author": "polypoly Cooperative",
     "description": "Google knows a lot about you. With the Google Data Importer you can load your data in three steps from Google into your polyPod and finally get an overview yourself.",
-    "thumbnail": "images/thumbnail.png",
-    "thumbnailColor": "#f0f1fe",
+    "thumbnail": "images/thumbnail.pdf",
     "primaryColor": "#0f1938",
+    "thumbnailColor": "#D94D46",
+    "borderColor": "#D94D46",
+    "tileTextColor": "#ffffff",
     "links": {
         "data-download": "https://takeout.google.com/",
         "example-data-download": "https://polypoly.coop/en-de/polypod/example-google-data"

@@ -7,7 +7,7 @@ public enum PolyPodCoreError: Error {
     /// Internal Rust Core failure with error code and message
     case internalCoreFailure(context: String, failure: FlatbObject<Failure>)
     /// Rust Core returned an invalid result type for a given operation
-    case invalidResult(context: String, result:String)
+    case invalidResult(context: String, result: String)
     /// Rust Core returned an invalid failure content
     case invalidFailure(context: String)
     

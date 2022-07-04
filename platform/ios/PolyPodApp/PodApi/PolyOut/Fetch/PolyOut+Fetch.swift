@@ -1,7 +1,11 @@
 import Foundation
 
 extension PolyOut {
-    func fetch(urlString: String, requestInit: FetchRequestInit, completionHandler: @escaping (FetchResponse?, Error?) -> Void) {
+    func fetch(
+        urlString: String, 
+        requestInit: FetchRequestInit, 
+        completionHandler: @escaping (FetchResponse?, Error?) -> Void
+    ) {
         guard let url = URL(string: urlString) else {
             completionHandler(nil, PodApiError.parameterMissing)
             return
@@ -18,7 +22,7 @@ extension PolyOut {
             }
         }
         
-        if let body = requestInit.body, body.count > 0 {
+        if let body = requestInit.body, !body.isEmpty {
             let postString = body
             request.httpBody = postString.data(using: .utf8)
         }

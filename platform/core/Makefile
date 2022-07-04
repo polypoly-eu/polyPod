@@ -90,7 +90,7 @@ $(rust_flatbuffers_dir)/%.rs: $(flatbuffer_models_dir)/%.fbs
 	./$(flatc) --rust -o $(rust_flatbuffers_dir) --filename-suffix "" --include-prefix flatbuffers_generated $^
 
 $(rust_flatbuffers_generated_lib): $(rust_flatbuffer_models)
-	$(os_echo) $(foreach model, $^, \
+	@$(os_echo) $(foreach model, $^, \
 		"pub mod $(basename $(notdir $(model))); \n") > $(rust_flatbuffers_generated_lib)
 
 $(target): $(flatc) $(flatbuffers) $(rust_flatbuffers_generated_lib)
@@ -152,7 +152,7 @@ endef
 $(ndk):
 	mkdir -p $(ndk)
 	curl -L $(ndk_download_url) -o $(ndk_archive)
-	unzip -d $(ndk) $(ndk_archive)
+	unzip -q -d $(ndk) $(ndk_archive)
 	rm $(ndk_archive)
 
 $(android_flatbuffers_lib): $(flatbuffers)
@@ -165,9 +165,9 @@ $(kotlin_flatbuffer_models_dir)/%.kt: $(flatbuffer_models_dir)/%.fbs
 $(android_binaries): $(target) $(ndk) $(kotlin_flatbuffer_models) $(android_flatbuffers_lib)
 	cargo install cargo-ndk
 	rustup target add $(android_triples)
-	
-	$(foreach tripple, $(android_triples), \
-		cargo ndk --platform $(android_version) --target $(tripple) build $(cargo_build_flag); \
+
+	$(foreach triple, $(android_triples), \
+		cargo ndk --platform $(android_version) --target $(triple) build $(cargo_build_flag); \
 	)
 
 $(android_core_libraries): $(android_binaries)

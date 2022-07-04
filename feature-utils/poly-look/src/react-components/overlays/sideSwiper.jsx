@@ -14,7 +14,7 @@ import "./sideSwiper.css";
  * @param {callback} [props.onClose] - Called after the exit animations end.
  * @param {string} [props.leftDistance] - Contents distance from the left
  * of the screen. Can be any value that is compatible with CSS calc rule;
- * defaults to 124px.
+ * defaults to 15vw.
  * @param {Array[number]} [props.backdropColor] - The backdrop color as a rgba array;
  * defaults to [0, 0, 0, 0.3].
  * @param {string} [props.screenMaxWidth] - The max width of the screen;
@@ -37,7 +37,7 @@ import "./sideSwiper.css";
 const SideSwiper = ({
   open = false,
   onClose,
-  leftDistance = "124px",
+  leftDistance = "15vw",
   backdropColor = [0, 0, 0, 0.3],
   screenMaxWidth = "var(--max-width)",
   animationDuration = "0.6s",
@@ -405,7 +405,10 @@ const SideSwiper = ({
       onTransitionEnd={
         step == steps.interactive
           ? () => {}
-          : () => updateAnimationsStatus(animationsDoneCount + 1)
+          : () =>
+              updateAnimationsStatus(
+                (animationsDoneCount) => animationsDoneCount + 1
+              )
       }
       style={backdropStyle}
       onClick={() => {
