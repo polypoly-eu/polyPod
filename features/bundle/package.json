@@ -78,7 +78,7 @@
     {
       "id": "developer",
       "name": "Developer",
-      "visible": true,
+      "visible": false,
       "features": [
         "demo"
       ]
