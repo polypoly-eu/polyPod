@@ -1,15 +1,13 @@
 {
     "progress.banner.title": "Idea",
     "progress.banner.description": "Lorem ipsum dolor sit amet",
-    "title": "PolyPoly Preview Feature",
-    "section.title": "Section",
-    "section.description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "section1.title": "Section",
-    "section1.description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "section2.title": "Section",
-    "section2.description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "footer.title": "Footer",
-    "footer.description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "footer.button.title": "Learn More",
-    "cta.link": "learn-more"
+    "title": "Holen Sie sich Ihre Daten zurück",
+    "section1.title": "Gemeinsam schwächen wir die Monopole der „Datenkraken“",
+    "section1.description": "Mit den DSGVO Data Importern können Sie eine Kopie Ihrer Daten von Datenoligarchen auf Ihr Gerät laden – mit anderen Worten: Sie bringen Ihre Daten zurück in Ihr Land. Jeder Datensatz der heruntergeladen wird, steht den „Datenkraken“ nicht mehr exklusiv zur Verfügung, ihre Marktposition wird so empfindlich geschwächt. ",
+    "section2.title": "Erst kopieren, später löschen",
+    "section2.description": "Ihr Datenkapital, also die Menge an Daten über die Sie verfügen können, steigt jedes Mal, wenn Sie einen der DSGVO Data Importer benutzen. Je mehr Datenkapital die polyPod Nutzer:innen besitzen, desto interessanter werden Datenanalysen für Unternehmen. Und je mehr Unternehmen analysieren, desto höher das potentielle Einkommen für Sie, wenn sie Ihre Rechenleistung oder Ihre Daten vermieten wollen.\n\nIn Zukunft wird es nicht nur mehr DSGVO Data Importer geben, auch deren Funktion soll erweitert werden.\n\n\u2022Direkter Download der Daten innerhalb Ihres polyPods.\n\u2022Automatische Anfrage weiterer Daten, sollte ein Daten-Oligarch vergessen haben alle Daten zu übergeben.\n\u2022Automatische Löschung, inkl. Nachhalten ob das Löschen auch wirklich erfolgt ist.",
+    "footer.title": "Lösungen sind oft komplexer, als das Problem selbst!",
+    "footer.description": "In unserem Falle vor allem deswegen, weil die Lösung für ein komplettes Ökosystem eben auch diverse Parteien mit einbezieht und auf unterschiedlichen Ebenen greift, wie zum Beispiel für Bürger:innen und für die Wirtschaft. Mehr über unseren Lösungsansatz, wie er funktioniert und wie wir ihn umsetzen, erfahren Sie hier:",
+    "footer.button.title": "Unsere Lösung",
+    "cta.link": "https://polypoly.coop/de-de/how"
 }
