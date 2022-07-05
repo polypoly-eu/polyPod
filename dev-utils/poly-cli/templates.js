@@ -102,6 +102,13 @@ export function previewFeatureTemplates(
                     "./src/static/templates/preview/styles.css"
                 )
             ),
+        "thumbnail.pdf": () =>
+            readFileSync(
+                path.resolve(
+                    __dirname,
+                    "./src/static/templates/preview/images/thumbnail.pdf"
+                )
+            ),
         "package.json": () =>
             packageTemplate(
                 feature_name,
