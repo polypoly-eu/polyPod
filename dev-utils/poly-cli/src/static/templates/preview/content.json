@@ -7,11 +7,6 @@
     "title": "preview:title",
     "sections": [
         {
-            "title": "preview:section.title",
-            "description": "preview:section.description",
-            "images": []
-        },
-        {
             "title": "preview:section1.title",
             "description": "preview:section1.description",
             "images": []
