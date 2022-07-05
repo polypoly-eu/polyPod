@@ -4,7 +4,6 @@ import {
     Slideshow,
     Screen,
     ClickableCard,
-    ProgressBanner,
     SideSwiper,
     SideSheet,
     ProgressIcon,
