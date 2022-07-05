@@ -8,7 +8,7 @@ export default [
         input: "src/index.ts",
         output: [
             {
-                file: "dist/index.es.js",
+                file: "dist/index.js",
                 format: "esm",
                 globals: {
                     "@polypoly-eu/api": "api",
