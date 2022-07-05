@@ -5,7 +5,7 @@
     "main": "src/index.jsx",
     "scripts": {
         "build": "rollup -c",
-        "watch": "rollup --watch -c",
+        "watch": "rollup --watch -c"
     },
     "devDependencies": {
         "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
