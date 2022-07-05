@@ -14,13 +14,6 @@ export default [
                     "@polypoly-eu/api": "api",
                 },
             },
-            {
-                file: "dist/index.js",
-                format: "cjs",
-                globals: {
-                    "@polypoly-eu/api": "api",
-                },
-            },
         ],
         plugins: [
             json(),

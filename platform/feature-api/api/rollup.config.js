@@ -1,10 +1,14 @@
 import sucrase from "@rollup/plugin-sucrase";
 
 export default {
-    input: ["src/index.ts", "src/pod-api/spec.ts", "src/pod-api/index.ts"],
+    input: "src/index.ts",
     output: [
         {
-            dir: "dist",
+            file: "dist/index.es.js",
+            format: "esm",
+        },
+        {
+            file: "dist/index.js",
             format: "cjs",
         },
     ],
