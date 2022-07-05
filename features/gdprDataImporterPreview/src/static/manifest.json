@@ -1,0 +1,21 @@
+{
+  "name": "GDPR Data Importer",
+  "author": "polypoly poly-cli",
+  "version": "0.0.1",
+  "description": "Take back your data from the Big Data oligarchs of our time and regain control.",
+  "thumbnail": "images/thumbnail.pdf",
+  "thumbnailColor": "#ffffff",
+  "primaryColor": "#0f1938",
+  "borderColor": "#cbd5e0",
+  "links": {
+    "learn-more": "https://polypoly.org"
+  },
+  "translations": {
+    "de": {
+      "name": "DSGVO Daten Importer",
+      "author": "",
+      "description": "Holen Sie sich Ihre Daten von den großen Datenoligarchen unserer Zeit zurück und gewinnen Sie wieder die Kontrolle."
+    }
+  },
+  "tileTextColor": "#0f1938"
+}
