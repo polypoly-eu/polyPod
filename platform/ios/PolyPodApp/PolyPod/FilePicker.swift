@@ -50,8 +50,16 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         }
         currentCompletion = completion
 
-        let supportedTypes: [UTType] = [type.flatMap { UTType(mimeType: $0) }].compactMap { $0 }
-        let documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes)
+        // NOTE: We need to keep this old way of initializing UIDocumentPickerViewController
+        // With the newer way (see below) accessing the file from Files in not allowed.
+        // Getting it to work looks like a pain in the ass. And we need to release tomorrow.
+        // Newer way:
+        // let supportedTypes: [UTType] = [type.flatMap { UTType(mimeType: $0) }].compactMap { $0 }
+        // let documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes)
+        let documentPickerController = UIDocumentPickerViewController(
+            documentTypes: [mimeToUti(type)],
+            in: .import
+        )
         
         documentPickerController.delegate = self
 
