@@ -9,12 +9,12 @@
         {
             "title": "preview:section1.title",
             "description": "preview:section1.description",
-            "images": ["./images"]
+            "images": ["./images/CooperativeMembership_visual-1.svg"]
         },
         {
             "title": "preview:section2.title",
             "description": "preview:section2.description",
-            "images": ["./images"]
+            "images": ["./images/CooperativeMembership_visual-2.svg"]
         }
     ],
     "footer": {

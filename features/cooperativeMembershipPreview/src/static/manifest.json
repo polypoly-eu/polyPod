@@ -1,8 +1,8 @@
 {
-  "name": "cooperative-membership-preview",
+  "name": "Cooperative Membership",
   "author": "polypoly poly-cli",
   "version": "0.0.1",
-  "description": "",
+  "description": "Manage your membership in other cooperatives and associations yourself. Your data remains in the polyPod.",
   "thumbnail": "images/thumbnail.pdf",
   "thumbnailColor": "#ffffff",
   "primaryColor": "#0f1938",
@@ -12,9 +12,8 @@
   },
   "translations": {
     "de": {
-      "name": "cooperative-membership-preview auf Deutsch",
       "author": "",
-      "description": ""
+      "description": "Verwalten Sie Ihre Mitgliedschaft in anderen Genossenschaften und Vereinen selbst. Ihre Daten bleiben im polyPod."
     }
   },
   "tileTextColor": "#0f1938"
