@@ -11,10 +11,16 @@
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
     "poly-preview-feature": "file:../polyPreview",
-    "poly-talk-preview": "file:../polyTalkPreview"
+    "poly-talk-preview": "file:../polyTalkPreview",
+    "polypedia-preview": "file:../polypediaPreview"
   },
   "private": true,
   "polyPodFeatures": [
+    {
+      "archiveName": "polypediaPreview",
+      "moduleName": "polypedia-preview",
+      "artifactPath": "dist"
+    },
     {
       "archiveName": "polyTalkPreview",
       "moduleName": "poly-talk-preview",
@@ -65,7 +71,8 @@
       "name": "Data Know-How",
       "features": [
         "polyExplorer",
-        "lexicon"
+        "lexicon",
+        "polypediaPreview"
       ]
     },
     {

@@ -1,13 +1,13 @@
 {
-    "progress.banner.title": "Idea",
-    "progress.banner.description": "Lorem ipsum dolor sit amet",
-    "title": "PolyPoly Preview Feature",
-    "section1.title": "Section 1",
-    "section1.description": "I'm baby proident mixtape kale chips photo booth eiusmod ennui, tattooed sustainable adaptogen chillwave lorem. Esse veniam humblebrag pork belly fam ad single-origin coffee enamel pin shabby chic tempor roof party intelligentsia pop-up man bun hot chicken. ",
-    "section2.title": "Section 2",
-    "section2.description": "Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead survivor dictum mauris.",
-    "footer.title": "Footer",
-    "footer.description": "Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before. Many say exploration is part of our destiny, but it’s actually our duty to future generations and their quest to ensure the survival of the human species.",
-    "footer.button.title": "Learn More",
-    "cta.link": "learn-more"
+    "progress.banner.title": "We sketch",
+    "progress.banner.description": "Who would have known – brainstorming leads to an idea and this idea needs to get in shape. We’re on it, we shape the idea for development.",
+    "title": "polyPedia – our knowledge database",
+    "section1.title": "So the overall mission of polyPedia is to make the data economy transparent.",
+    "section1.description": "Countless information is stored in polyPedia – researched down to the last detail by experts, who process and make it usable. Some polyPod features and all the many pieces of information contained in the polyPod are fed in from polyPedia.",
+    "section2.title": "The polyPedia as an important component of the polypoly infrastructure.",
+    "section2.description": "polyPedia is a database that stores information about the data behaviour of players in the global data economy. We want to map how data flows of  from individual natural persons who generate data, to legal entities that gather and process it whether they be companies of different kinds, governments or NGOs.\n\npolyPedia will be the place to come and check what a product or service requires a user to give up in terms of data & privacy in order to use that product or service.\n\nLater iterations will enable to submit requests and research to polyPedia, working in a similar way to Wikipedia.",
+    "footer.title": "Satisfy your thirst for knowledge? Oh, we can – with our newsletter!",
+    "footer.description": "Not daily, but regularly. Not intrusive, but engaging. Not content-less, but content-ful. And best of all, we don't even track.\n\nSounds too good to be true. We look forward to convincing you here too. With news about the development status and further features of the polyPod, about upcoming events, cooperations and many other ideas and projects.",
+    "footer.button.title": "Yep! Newsletter to go!",
+    "cta.link": "https://polypoly.coop/en-de/newsletter"
 }

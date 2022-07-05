@@ -1,5 +1,5 @@
 {
-  "name": "polypedia-preview",
+  "name": "polyPedia",
   "author": "polypoly poly-cli",
   "version": "0.0.1",
   "description": "",
@@ -12,7 +12,6 @@
   },
   "translations": {
     "de": {
-      "name": "polypedia-preview auf Deutsch",
       "author": "",
       "description": ""
     }
