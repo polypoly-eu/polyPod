@@ -1,11 +1,13 @@
 {
-    "progress.banner.title": "Idea",
-    "progress.banner.description": "Lorem ipsum dolor sit amet",
-    "title": "PolyPoly Preview Feature",
-    "section.title": "Section",
-    "section.description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "footer.title": "Footer",
-    "footer.description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "footer.button.title": "Learn More",
-    "cta.link": "learn-more"
+    "progress.banner.title": "Erster Entwurf",
+    "progress.banner.description": "Wer hätte das gedacht – nachdenken resultiert in Arbeit. Wir sind also dran und arbeiten die Idee bereits aus.",
+    "title": "Finden Sie heraus, was Amazon über Sie weiß!",
+    "section1.title": "Shoppen bei Amazon kostet nicht nur Geld, sondern auch einen Teil Ihrer Privatsphäre.",
+    "section1.description": "Mit dem Amazon Data Importer können Sie künftig in nur wenigen Schritten eine Kopie Ihrer Daten in Ihren polyPod laden – einfach und sicher. So erfahren Sie, welche Daten Amazon tatsächlich über Sie gespeichert hat und zu welchem Zweck sie verwendet werden.",
+    "section2.title": "Unsere Lösung: Dezentrale Datenspeicherung.",
+    "section2.description": "Amazon zählt als einer der größten Daten-Oligarchen unserer Zeit. Um solche Monopolstellungen zu schwächen, müssen wir die Daten – Ihre Daten – zurück in unser Land holen. Sobald Sie also Ihre Daten in Ihren polyPod geladen haben und sie sich wieder in Ihrem Besitz befinden, entziehen Sie Unternehmen wie Amazon die alleinige Kontrolle darüber – und schwächen somit ihre Monopolstellung.\n\nIm ersten Schritt laden Sie sich eine Kopie Ihrer Daten von Amazon in Ihren polyPod, um zu erfahren, was Amazon tatsächlich alles über Sie weiß.\n\nKünftig haben Sie dann die Möglichkeit, Ihre Daten bei Amazon zu löschen und selbst zu entscheiden, welche Daten Sie zur Verfügung stellen.",
+    "footer.title": "Den polyPod aktiv mit gestalten?\nJetzt Tester:in werden!",
+    "footer.description": "Als Tester:in erhalten Sie exklusiven Zugang, um neue Features und Funktionen des polyPod noch vor dem Release zu testen und so direkten Einfluss auf die Entwicklung zu nehmen. Werden Sie Crowd-Investor:in und somit Miteigentümer:in an der Technologie und melden Sie sich anschließend als Beta-Tester.",
+    "footer.button.title": "Ich bin dabei!",
+    "cta.link": "https://polypoly.coop/de-de/becomepart"
 }

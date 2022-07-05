@@ -1,9 +1,9 @@
 {
-  "name": "amazon-data-importer-preview",
+  "name": "Amazon Data Importer",
   "author": "polypoly poly-cli",
   "version": "0.0.1",
-  "description": "",
-  "thumbnail": "",
+  "description": "What does Amazon know about you? A lot! Import your Amazon data and find out.",
+  "thumbnail": "images/thumbnail.pdf",
   "thumbnailColor": "#ffffff",
   "primaryColor": "#0f1938",
   "borderColor": "#cbd5e0",
@@ -13,7 +13,8 @@
   "translations": {
     "de": {
       "author": "",
-      "description": ""
+      "name":"Amazon Data Importer",
+      "description": "Was weiß Amazon über Sie? Jede Menge! Importieren Sie Ihre Amazon Daten und finden Sie es heraus."
     }
   },
   "tileTextColor": "#0f1938"
