@@ -1,0 +1,15 @@
+:root {
+  --pl-space1x: 4px;
+  --pl-space2x: calc(var(--pl-space1x) * 2);
+  --pl-space3x: calc(var(--pl-space1x) * 3);
+  --pl-space4x: calc(var(--pl-space1x) * 4);
+  --pl-space5x: calc(var(--pl-space1x) * 5);
+  --pl-space6x: calc(var(--pl-space1x) * 6);
+  --pl-space7x: calc(var(--pl-space1x) * 7);
+  --pl-space8x: calc(var(--pl-space1x) * 8);
+  --pl-space9x: calc(var(--pl-space1x) * 9);
+  --pl-space10x: calc(var(--pl-space1x) * 10);
+
+    /* grid distance unit*/
+    --gdu: 4px;
+}
