@@ -11,19 +11,31 @@
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
     "poly-preview-feature": "file:../polyPreview",
-    "poly-talk-preview": "file:../polyTalkPreview",
-    "netflix-data-importer-preview": "file:../netflixDataImporterPreview"
+    "amazon-data-importer-preview": "file:../amazonDataImporterPreview",
+    "feature-store-preview": "file:../featureStorePreview",
+    "netflix-data-importer-preview": "file:../netflixDataImporterPreview",
+    "poly-talk-preview": "file:../polyTalkPreview"
   },
   "private": true,
   "polyPodFeatures": [
     {
-      "archiveName": "polyTalkPreview",
-      "moduleName": "poly-talk-preview",
+      "archiveName": "amazonPreview",
+      "moduleName": "amazon-data-importer-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "featureStorePreview",
+      "moduleName": "feature-store-preview",
       "artifactPath": "dist"
     },
     {
       "archiveName": "NetflixImportPreview",
       "moduleName": "netflix-data-importer-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "polyTalkPreview",
+      "moduleName": "poly-talk-preview",
       "artifactPath": "dist"
     },
     {
@@ -64,6 +76,7 @@
       "features": [
         "google",
         "facebookImport",
+        "amazonPreview",
         "NetflixImportPreview"
       ]
     },
@@ -79,6 +92,7 @@
       "id": "tools",
       "name": "Tools",
       "features": [
+        "featureStorePreview",
         "polyTalkPreview"
       ]
     },
