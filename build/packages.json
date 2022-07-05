@@ -28,6 +28,7 @@
         "features/cooperativeMembershipPreview",
         "features/polypolyMembershipPreview",
         "features/gdprDataImporterPreview",
+        "features/companyDataCleanerPreview",
         "platform/feature-api/api/pod-api",
         "platform/feature-api/api/rdf",
         "platform/feature-api/api/rdf-convert",
