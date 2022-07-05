@@ -42,6 +42,7 @@
 
 .preview h1 {
     font-family: var(--jost);
+    font-weight: var(--poly-font-weight-medium);
     font-size: var(--font-size-xxl);
     margin-bottom: calc(var(--gdu) * 8);
     margin-top: calc(var(--gdu) * 8);
@@ -113,7 +114,7 @@
 
 .info-stage h3 {
     margin-top: 0;
-    font-size: var(--font-size-ml);
+    font-size: var(--font-size-m);
     margin-bottom: var(--gdu);
 }
 
