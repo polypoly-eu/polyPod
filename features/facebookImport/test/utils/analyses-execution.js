@@ -1,4 +1,4 @@
-import { MockPod } from "@polypoly-eu/pod-api";
+import { MockPod } from "@polypoly-eu/api/dist/mock-pod";
 import { importZip } from "@polypoly-eu/poly-import";
 import { dataImporters } from "../../src/model/importer";
 import {
