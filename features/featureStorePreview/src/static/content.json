@@ -1,0 +1,26 @@
+{
+    "progress_banner": {
+        "stage": 2,
+        "title": "preview:progress.banner.title",
+        "description": "preview:progress.banner.description"
+    },
+    "title": "preview:title",
+    "sections": [
+        {
+            "title": "preview:section1.title",
+            "description": "preview:section1.description",
+            "images": ["./images/FeatureStore_visual-1.svg"]
+        },
+        {
+            "title": "preview:section2.title",
+            "description": "preview:section2.description",
+            "images": ["./images/FeatureStore_visual-2.svg"]
+        }
+    ],
+    "footer": {
+        "title": "preview:footer.title",
+        "description": "preview:footer.description",
+        "image": "",
+        "buttonTitle": "preview:footer.button.title"
+    }
+}
