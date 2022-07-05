@@ -11,6 +11,7 @@
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
     "poly-preview-feature": "file:../polyPreview",
+    "polypedia-preview": "file:../polypediaPreview",
     "amazon-data-importer-preview": "file:../amazonDataImporterPreview",
     "cooperative-membership-preview": "file:../cooperativeMembershipPreview",
     "feature-store-preview": "file:../featureStorePreview",
@@ -21,6 +22,11 @@
   },
   "private": true,
   "polyPodFeatures": [
+    {
+      "archiveName": "polypediaPreview",
+      "moduleName": "polypedia-preview",
+      "artifactPath": "dist"
+    },
     {
       "archiveName": "cooperativeMembershipPreview",
       "moduleName": "cooperative-membership-preview",
@@ -106,7 +112,8 @@
       "name": "Data Know-How",
       "features": [
         "polyExplorer",
-        "lexicon"
+        "lexicon",
+        "polypediaPreview"
       ]
     },
     {

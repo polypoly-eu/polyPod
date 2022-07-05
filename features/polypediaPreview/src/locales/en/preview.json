@@ -1,0 +1,13 @@
+{
+    "progress.banner.title": "We sketch",
+    "progress.banner.description": "Who would have known – brainstorming leads to an idea and this idea needs to get in shape. We’re on it, we shape the idea for development.",
+    "title": "polyPedia – our knowledge database",
+    "section1.title": "So the overall mission of polyPedia is to make the data economy transparent.",
+    "section1.description": "Countless information is stored in polyPedia – researched down to the last detail by experts, who process and make it usable. Some polyPod features and all the many pieces of information contained in the polyPod are fed in from polyPedia.",
+    "section2.title": "The polyPedia as an important component of the polypoly infrastructure.",
+    "section2.description": "polyPedia is a database that stores information about the data behaviour of players in the global data economy. We want to map how data flows of  from individual natural persons who generate data, to legal entities that gather and process it whether they be companies of different kinds, governments or NGOs.\n\npolyPedia will be the place to come and check what a product or service requires a user to give up in terms of data & privacy in order to use that product or service.\n\nLater iterations will enable to submit requests and research to polyPedia, working in a similar way to Wikipedia.",
+    "footer.title": "Satisfy your thirst for knowledge? Oh, we can – with our newsletter!",
+    "footer.description": "Not daily, but regularly. Not intrusive, but engaging. Not content-less, but content-ful. And best of all, we don't even track.\n\nSounds too good to be true. We look forward to convincing you here too. With news about the development status and further features of the polyPod, about upcoming events, cooperations and many other ideas and projects.",
+    "footer.button.title": "Yep! Newsletter to go!",
+    "cta.link": "https://polypoly.coop/en-de/newsletter"
+}

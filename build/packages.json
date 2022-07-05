@@ -24,6 +24,7 @@
         "features/featureStorePreview",
         "features/netflixDataImporterPreview",
         "features/polyTalkPreview",
+        "features/polypediaPreview",
         "features/cooperativeMembershipPreview",
         "features/polypolyMembershipPreview",
         "features/gdprDataImporterPreview",
