@@ -41,7 +41,6 @@
 }
 
 .preview h1 {
-    font-family: var(--jost-medium);
     font-size: var(--font-size-xxl);
     margin-bottom: calc(var(--gdu) * 8);
     margin-top: calc(var(--gdu) * 8);
