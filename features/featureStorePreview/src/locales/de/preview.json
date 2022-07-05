@@ -1,0 +1,13 @@
+{
+    "progress.banner.title": "Erster Entwurf",
+    "progress.banner.description": "Wer hätte das gedacht – nachdenken resultiert in Arbeit. Wir sind also dran und arbeiten die Idee bereits aus.",
+    "title": "Was wäre ein Feature Store ohne Feature? ",
+    "section1.title": "Anwendungen direkt über den polypoly Feature Store herunterladen.",
+    "section1.description": "Für den Anfang werden wir selbst einige Feature zur Verfügung stellen, wie beispielsweise die DSGVO Data Importer. Langfristig betrachtet möchten wir allerdings anderen  Entwicklern und Firmen die Möglichkeit bieten, hier eigene Features anzubieten. ",
+    "section2.title": "Wir schieben an, damit andere übernehmen können",
+    "section2.description": "Langfristig betrachtet wollen wir die Bühne anderen überlassen – einzelnen Entwicklern und auch Firmen, die hier Feature zur Verfügung stellen wollen.\n\nWir sind bereits mit verschiedenen Geschäftspartner:innen im Gespräch, die eigene Features basierend auf der polyPod-Infrastruktur bereitstellen möchten. Unsere Infrastruktur ist dabei open source, somit für alle offen zugänglich und kann alle nur denkbaren Anwendungsbereiche abdecken, egal ob Streaming, Versicherungen, Shopping oder Messaging.",
+    "footer.title": "Lösungen sind oft komplexer, als das Problem selbst!",
+    "footer.description": "In unserem Falle vor allem deswegen, weil die Lösung für ein komplettes Ökosystem eben auch diverse Parteien mit einbezieht und auf unterschiedlichen Ebenen greift, wie zum Beispiel für Bürger:innen und für die Wirtschaft. Mehr über unseren Lösungsansatz, wie er funktioniert und wie wir ihn umsetzen, erfahren Sie hier:",
+    "footer.button.title": "Unsere Lösung",
+    "cta.link": "https://polypoly.coop/de-de/how"
+}
