@@ -12,8 +12,13 @@
             "images": []
         },
         {
-            "title": "preview:section.title",
-            "description": "preview:section.description",
+            "title": "preview:section1.title",
+            "description": "preview:section1.description",
+            "images": []
+        },
+        {
+            "title": "preview:section2.title",
+            "description": "preview:section2.description",
             "images": []
         }
     ],
