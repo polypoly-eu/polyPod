@@ -17,6 +17,7 @@ export function manifestTemplate(feature_name, author, version, feature_type) {
         links: {},
         translations: {
             de: {
+                name: ""
                 author: "",
                 description: "",
             },
