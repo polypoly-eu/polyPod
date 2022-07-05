@@ -11,20 +11,32 @@
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
     "poly-preview-feature": "file:../polyPreview",
-    "poly-talk-preview": "file:../polyTalkPreview",
+    "amazon-data-importer-preview": "file:../amazonDataImporterPreview",
     "feature-store-preview": "file:../featureStorePreview",
-    "gdpr-data-importer-preview": "file:../gdprDataImporterPreview"
+    "gdpr-data-importer-preview": "file:../gdprDataImporterPreview",
+    "netflix-data-importer-preview": "file:../netflixDataImporterPreview",
+    "poly-talk-preview": "file:../polyTalkPreview"
   },
   "private": true,
   "polyPodFeatures": [
+    {
+      "archiveName": "amazonPreview",
+      "moduleName": "amazon-data-importer-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "featureStorePreview",
+      "moduleName": "feature-store-preview",
+      "artifactPath": "dist"
+    },
     {
       "archiveName": "gdprImporterPreview",
       "moduleName": "gdpr-data-importer-preview",
       "artifactPath": "dist"
     },
     {
-      "archiveName": "featureStorePreview",
-      "moduleName": "feature-store-preview",
+      "archiveName": "NetflixImportPreview",
+      "moduleName": "netflix-data-importer-preview",
       "artifactPath": "dist"
     },
     {
@@ -70,7 +82,9 @@
       "features": [
         "google",
         "facebookImport",
-        "gdprImporterPreview"
+        "gdprImporterPreview",
+        "amazonPreview",
+        "NetflixImportPreview"
       ]
     },
     {
