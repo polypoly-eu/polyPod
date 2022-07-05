@@ -1,8 +1,8 @@
 {
-  "name": "polypoly-membership-preview",
+  "name": "polypoly Membership",
   "author": "polypoly poly-cli",
   "version": "0.0.1",
-  "description": "",
+  "description": "Manage your membership conveniently via the polypoly Membership Feature.",
   "thumbnail": "images/thumbnail.pdf",
   "thumbnailColor": "#ffffff",
   "primaryColor": "#0f1938",
@@ -12,9 +12,9 @@
   },
   "translations": {
     "de": {
-      "name": "polypoly-membership-preview auf Deutsch",
+      "name": "polypoly Mitgliedschaft",
       "author": "",
-      "description": ""
+      "description": "Verwalten Sie Ihre Mitgliedschaft ganz bequem über das polypoly Membership Feature."
     }
   },
   "tileTextColor": "#0f1938"

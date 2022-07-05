@@ -11,10 +11,21 @@
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
     "poly-preview-feature": "file:../polyPreview",
-    "poly-talk-preview": "file:../polyTalkPreview"
+    "poly-talk-preview": "file:../polyTalkPreview",
+    "polypoly-membership-preview": "file:../polypolyMembershipPreview"
   },
   "private": true,
   "polyPodFeatures": [
+    {
+      "archiveName": "polypolyMembershipPreview",
+      "moduleName": "polypoly-membership-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "polyTalkPreview",
+      "moduleName": "poly-talk-preview",
+      "artifactPath": "dist"
+    },
     {
       "archiveName": "polyTalkPreview",
       "moduleName": "poly-talk-preview",
@@ -57,7 +68,8 @@
       "name": "Your Data",
       "features": [
         "google",
-        "facebookImport"
+        "facebookImport",
+        "polypolyMembershipPreview"
       ]
     },
     {
