@@ -12,6 +12,7 @@
     "poly-explorer-feature": "file:../polyExplorer",
     "poly-preview-feature": "file:../polyPreview",
     "poly-talk-preview": "file:../polyTalkPreview",
+    "feature-store-preview": "file:../featureStorePreview",
     "gdpr-data-importer-preview": "file:../gdprDataImporterPreview"
   },
   "private": true,
@@ -19,6 +20,11 @@
     {
       "archiveName": "gdprImporterPreview",
       "moduleName": "gdpr-data-importer-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "featureStorePreview",
+      "moduleName": "feature-store-preview",
       "artifactPath": "dist"
     },
     {
@@ -79,6 +85,7 @@
       "id": "tools",
       "name": "Tools",
       "features": [
+        "featureStorePreview",
         "polyTalkPreview"
       ]
     },
