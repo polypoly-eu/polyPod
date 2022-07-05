@@ -11,13 +11,19 @@
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
     "poly-preview-feature": "file:../polyPreview",
-    "poly-talk-preview": "file:../polyTalkPreview"
+    "poly-talk-preview": "file:../polyTalkPreview",
+    "netflix-data-importer-preview": "file:../netflixDataImporterPreview"
   },
   "private": true,
   "polyPodFeatures": [
     {
       "archiveName": "polyTalkPreview",
       "moduleName": "poly-talk-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "NetflixImportPreview",
+      "moduleName": "netflix-data-importer-preview",
       "artifactPath": "dist"
     },
     {
@@ -57,7 +63,8 @@
       "name": "Your Data",
       "features": [
         "google",
-        "facebookImport"
+        "facebookImport",
+        "NetflixImportPreview"
       ]
     },
     {

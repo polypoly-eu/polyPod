@@ -1,9 +1,9 @@
 {
-  "name": "netflix-data-importer-preview",
+  "name": "Netflix Data Importer",
   "author": "polypoly poly-cli",
   "version": "0.0.1",
-  "description": "",
-  "thumbnail": "",
+  "description": "Netflix doesn't know much about you? Why not find out by importing your Netflix data now.",
+  "thumbnail": "images/thumbnail.pdf",
   "thumbnailColor": "#ffffff",
   "primaryColor": "#0f1938",
   "borderColor": "#cbd5e0",
@@ -12,8 +12,9 @@
   },
   "translations": {
     "de": {
+      "name": "Netflix Daten Importer",
       "author": "",
-      "description": ""
+      "description": "Netflix weiß nicht viel über Sie? Finden Sie es heraus. Importieren Sie jetzt Ihre Netflix Daten."
     }
   },
   "tileTextColor": "#0f1938"
