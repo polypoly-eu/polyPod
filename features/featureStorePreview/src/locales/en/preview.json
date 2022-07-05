@@ -1,13 +1,13 @@
 {
-    "progress.banner.title": "Idea",
-    "progress.banner.description": "Lorem ipsum dolor sit amet",
-    "title": "PolyPoly Preview Feature",
-    "section1.title": "Section 1",
-    "section1.description": "I'm baby proident mixtape kale chips photo booth eiusmod ennui, tattooed sustainable adaptogen chillwave lorem. Esse veniam humblebrag pork belly fam ad single-origin coffee enamel pin shabby chic tempor roof party intelligentsia pop-up man bun hot chicken. ",
-    "section2.title": "Section 2",
-    "section2.description": "Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead survivor dictum mauris.",
-    "footer.title": "Footer",
-    "footer.description": "Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before. Many say exploration is part of our destiny, but it’s actually our duty to future generations and their quest to ensure the survival of the human species.",
-    "footer.button.title": "Learn More",
-    "cta.link": "learn-more"
+    "progress.banner.title": "We sketch",
+    "progress.banner.description": "Who would have known – brainstorming leads to an idea and this idea needs to get in shape. We’re on it, we shape the idea for development.",
+    "title": "What would a Feature Store be without features?",
+    "section1.title": "Download applications directly from the polypoly Feature Store.",
+    "section1.description": "In the beginning, we will provide some features ourselves, such as the GDPR Data Importer. In the long term, however, we would like to offer other developers and companies the possibility to provide their own features here. ",
+    "section2.title": "First we push so that others can take over",
+    "section2.description": "In the long term, we want to leave the stage to others – individual developers and companies who want to make features available here.\n\nWe are already in discussion with various business partners who would like to provide their own features based on the polyPod infrastructure. Our infrastructure is open source, therefore open to everyone and covers all conceivable areas of application, whether streaming, insurance, shopping or messaging.",
+    "footer.title": "Solutions are often more complex than the problems they solve!",
+    "footer.description": "In our case, this is mainly because the solution for a complete ecosystem involves various parties and is also effective at different levels, such as for citizens and the economy. You can find out more about our approach, how it works and how we implement it here:",
+    "footer.button.title": "Our Solution",
+    "cta.link": "https://polypoly.coop/en-de/how"
 }

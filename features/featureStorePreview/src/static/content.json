@@ -1,6 +1,6 @@
 {
     "progress_banner": {
-        "stage": 1,
+        "stage": 2,
         "title": "preview:progress.banner.title",
         "description": "preview:progress.banner.description"
     },
@@ -9,12 +9,12 @@
         {
             "title": "preview:section1.title",
             "description": "preview:section1.description",
-            "images": ["./images"]
+            "images": ["./images/FeatureStore_visual-1.svg"]
         },
         {
             "title": "preview:section2.title",
             "description": "preview:section2.description",
-            "images": ["./images"]
+            "images": ["./images/FeatureStore_visual-2.svg"]
         }
     ],
     "footer": {

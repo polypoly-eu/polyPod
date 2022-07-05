@@ -1,8 +1,8 @@
 {
-  "name": "feature-store-preview",
+  "name": "Feature Store",
   "author": "polypoly poly-cli",
   "version": "0.0.1",
-  "description": "",
+  "description": "The polyPod is open source: You can download further features from polypoly and third parties via the Feature Store.",
   "thumbnail": "images/thumbnail.pdf",
   "thumbnailColor": "#ffffff",
   "primaryColor": "#0f1938",
@@ -12,9 +12,8 @@
   },
   "translations": {
     "de": {
-      "name": "feature-store-preview auf Deutsch",
       "author": "",
-      "description": ""
+      "description": "Der polyPod ist Open Source: Über den Feature Store können Sie weitere Features von polypoly und Drittanbietern laden."
     }
   },
   "tileTextColor": "#0f1938"
