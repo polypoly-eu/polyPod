@@ -13,6 +13,7 @@
     "poly-preview-feature": "file:../polyPreview",
     "amazon-data-importer-preview": "file:../amazonDataImporterPreview",
     "feature-store-preview": "file:../featureStorePreview",
+    "netflix-data-importer-preview": "file:../netflixDataImporterPreview",
     "poly-talk-preview": "file:../polyTalkPreview"
   },
   "private": true,
@@ -25,6 +26,11 @@
     {
       "archiveName": "featureStorePreview",
       "moduleName": "feature-store-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "NetflixImportPreview",
+      "moduleName": "netflix-data-importer-preview",
       "artifactPath": "dist"
     },
     {
@@ -70,7 +76,8 @@
       "features": [
         "google",
         "facebookImport",
-        "amazonPreview"
+        "amazonPreview",
+        "NetflixImportPreview"
       ]
     },
     {
