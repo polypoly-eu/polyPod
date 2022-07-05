@@ -1,4 +1,5 @@
 :root {
+/* Spacing units for margins, padding, grid, position (top, bottom, right, left) */
   --pl-space1x: 4px;
   --pl-space2x: calc(var(--pl-space1x) * 2);
   --pl-space3x: calc(var(--pl-space1x) * 3);
@@ -10,6 +11,17 @@
   --pl-space9x: calc(var(--pl-space1x) * 9);
   --pl-space10x: calc(var(--pl-space1x) * 10);
 
-    /* grid distance unit*/
+/* Border radius */
+  --pl-radius1x: 4px;
+  --pl-radius2x: calc(var(--pl-radius1x) * 2);
+  --pl-radius3x: calc(var(--pl-radius1x) * 3);
+  --pl-radius4x: calc(var(--pl-radius1x) * 4);
+  --pl-radius5x: calc(var(--pl-radius1x) * 5);
+  --pl-radius6x: calc(var(--pl-radius1x) * 6);
+  --pl-radius7x: calc(var(--pl-radius1x) * 7);
+  --pl-radius8x: calc(var(--pl-radius1x) * 8);
+
+
+    /* grid distance unit: This is the spacing variable that we have been used until now. We need to replace it for the correct variables wherever it is. We keep it until it has been completely replaced. */
     --gdu: 4px;
 }
