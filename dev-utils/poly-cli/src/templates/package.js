@@ -24,6 +24,7 @@ export function packageTemplate(
             scripts: {
                 build: "rollup -c",
                 watch: "rollup --watch -c",
+                test: "🚨: No tests run"
             },
             devDependencies: {
                 "@polypoly-eu/rollup-plugin-copy-watch":
