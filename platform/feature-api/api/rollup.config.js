@@ -18,11 +18,5 @@ export default {
             transforms: ["typescript"],
         }),
     ],
-    external: [
-        "chai",
-        "fast-check",
-        "chai-as-promised",
-        "memfs",
-        "@rdfjs/dataset",
-    ],
+    external: ["chai", "fast-check", "chai-as-promised"],
 };
