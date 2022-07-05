@@ -1,0 +1,21 @@
+{
+  "name": "feature-store-preview",
+  "author": "polypoly poly-cli",
+  "version": "0.0.1",
+  "description": "",
+  "thumbnail": "images/thumbnail.pdf",
+  "thumbnailColor": "#ffffff",
+  "primaryColor": "#0f1938",
+  "borderColor": "#cbd5e0",
+  "links": {
+    "learn-more": "https://polypoly.org"
+  },
+  "translations": {
+    "de": {
+      "name": "feature-store-preview auf Deutsch",
+      "author": "",
+      "description": ""
+    }
+  },
+  "tileTextColor": "#0f1938"
+}
