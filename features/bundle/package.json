@@ -15,10 +15,16 @@
     "feature-store-preview": "file:../featureStorePreview",
     "gdpr-data-importer-preview": "file:../gdprDataImporterPreview",
     "netflix-data-importer-preview": "file:../netflixDataImporterPreview",
+    "polypoly-membership-preview": "file:../polypolyMembershipPreview",
     "poly-talk-preview": "file:../polyTalkPreview"
   },
   "private": true,
   "polyPodFeatures": [
+    {
+      "archiveName": "polypolyMembershipPreview",
+      "moduleName": "polypoly-membership-preview",
+      "artifactPath": "dist"
+    },
     {
       "archiveName": "amazonPreview",
       "moduleName": "amazon-data-importer-preview",
@@ -82,6 +88,7 @@
       "features": [
         "google",
         "facebookImport",
+        "polypolyMembershipPreview",
         "gdprImporterPreview",
         "amazonPreview",
         "NetflixImportPreview"
