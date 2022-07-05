@@ -4,7 +4,6 @@ import {
     Slideshow,
     Screen,
     ClickableCard,
-    ProgressBanner,
     SideSwiper,
     SideSheet,
     ProgressIcon,
@@ -125,16 +124,6 @@ const App = () => {
                 layout="poly-standard-layout"
             >
                 <div className="preview">
-                    <ProgressBanner
-                        stage={content.progress_banner.stage}
-                        title={i18n.t(content.progress_banner.title)}
-                        description={i18n.t(
-                            content.progress_banner.description
-                        )}
-                        onClick={() => {
-                            setPopUpVisible(true);
-                        }}
-                    />
                     <h1>{i18n.t(content.title)}</h1>
                     <div>
                         {content.sections.map((s, i) => (

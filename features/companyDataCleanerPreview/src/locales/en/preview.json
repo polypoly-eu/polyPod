@@ -1,13 +1,15 @@
 {
     "progress.banner.title": "Idea",
     "progress.banner.description": "Lorem ipsum dolor sit amet",
-    "title": "PolyPoly Preview Feature",
-    "section1.title": "Section 1",
-    "section1.description": "I'm baby proident mixtape kale chips photo booth eiusmod ennui, tattooed sustainable adaptogen chillwave lorem. Esse veniam humblebrag pork belly fam ad single-origin coffee enamel pin shabby chic tempor roof party intelligentsia pop-up man bun hot chicken. ",
-    "section2.title": "Section 2",
-    "section2.description": "Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead survivor dictum mauris.",
-    "footer.title": "Footer",
-    "footer.description": "Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before. Many say exploration is part of our destiny, but it’s actually our duty to future generations and their quest to ensure the survival of the human species.",
-    "footer.button.title": "Learn More",
-    "cta.link": "learn-more"
+    "title": "Earn money with your data!",
+    "section1.title": "Your address data is a success factor for companies.",
+    "section1.description": "Important documents like invoices or contracts won't reach you if the contact data a company has from you is incorrect. Even small spelling mistakes force companies to spend a lot of money on correcting their databases. Money you could earn!",
+    "section1.image": "images/CompanyDataCleaner_visual-1_EN.jpg",
+    "section2.title": "Control the data exchange conveniently",
+    "section2.description": "Our idea: An area within the polyPod where you can conveniently exchange your contact details with companies you already have a business relationship with. In return, the company pays you with benefits in the first step, as soon as we are able to handle payment processes with money. We have already developed the concept and the technical basis, and are now talking to companies wanting to implement pilot projects for company data cleaning.",
+    "section2.image": "images/CompanyDataCleaner_visual-2_EN.jpg",
+    "footer.title": "Our solution - for companies!",
+    "footer.description": "If you would like to learn more about how you can minimise the costs of your data management and the risk of data breaches whilst communicating with your customers on eye-level, please feel free to contact us at any time. We have something prepared for you.",
+    "footer.button.title": "Write an e-mail",
+    "cta.link": "mailto:hello@polypoly.com"
 }

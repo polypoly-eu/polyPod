@@ -1,8 +1,8 @@
 {
-  "name": "company-data-cleaner-preview",
+  "name": "Company Data Cleaner",
   "author": "polypoly poly-cli",
   "version": "0.0.1",
-  "description": "",
+  "description": "Correcting your data forces companies to spend a lot of money – money that you can earn.",
   "thumbnail": "images/thumbnail.pdf",
   "thumbnailColor": "#ffffff",
   "primaryColor": "#0f1938",
@@ -12,9 +12,8 @@
   },
   "translations": {
     "de": {
-      "name": "company-data-cleaner-preview auf Deutsch",
       "author": "",
-      "description": ""
+      "description": "Die Korrektur Ihrer Daten zwingt Unternehmen, viel Geld auszugeben – Geld, das Sie verdienen können."
     }
   },
   "tileTextColor": "#0f1938"
