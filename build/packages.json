@@ -21,6 +21,7 @@
         "features/polyPreview",
         "features/test",
         "features/polyTalkPreview",
+        "features/amazonDataImporterPreview",
         "platform/feature-api/api/pod-api",
         "platform/feature-api/api/rdf",
         "platform/feature-api/api/rdf-convert",
