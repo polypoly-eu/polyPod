@@ -11,11 +11,17 @@
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
     "poly-preview-feature": "file:../polyPreview",
-    "poly-talk-preview": "file:../polyTalkPreview",
-    "feature-store-preview": "file:../featureStorePreview"
+    "amazon-data-importer-preview": "file:../amazonDataImporterPreview",
+    "feature-store-preview": "file:../featureStorePreview",
+    "poly-talk-preview": "file:../polyTalkPreview"
   },
   "private": true,
   "polyPodFeatures": [
+    {
+      "archiveName": "amazonPreview",
+      "moduleName": "amazon-data-importer-preview",
+      "artifactPath": "dist"
+    },
     {
       "archiveName": "featureStorePreview",
       "moduleName": "feature-store-preview",
@@ -63,7 +69,8 @@
       "name": "Your Data",
       "features": [
         "google",
-        "facebookImport"
+        "facebookImport",
+        "amazonPreview"
       ]
     },
     {
