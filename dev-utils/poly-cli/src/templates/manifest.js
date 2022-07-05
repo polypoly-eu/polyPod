@@ -17,6 +17,7 @@ export function manifestTemplate(feature_name, author, version, feature_type) {
         links: {},
         translations: {
             de: {
+                name: `${feature_name} auf Deutsch`,
                 author: "",
                 description: "",
             },
@@ -24,6 +25,7 @@ export function manifestTemplate(feature_name, author, version, feature_type) {
     };
 
     if (feature_type === "preview") {
+        base.thumbnail = "images/thumbnail.pdf";
         base.links = {
             "learn-more": "https://polypoly.org",
         };
