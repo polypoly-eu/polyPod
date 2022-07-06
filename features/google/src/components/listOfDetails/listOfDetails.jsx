@@ -17,7 +17,7 @@ const ListOfDetails = ({ list }) => {
         }
     };
     return (
-        <div className="scrollable-list">
+        <div>
             <ul ref={listRef} onScroll={handleScroll}>
                 {list.map((item, index) => {
                     return (
