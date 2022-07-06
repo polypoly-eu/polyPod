@@ -1,25 +1,25 @@
 :root {
 /* Spacing units for margins, padding, grid, position (top, bottom, right, left) */
-  --pl-space1x: 4px;
-  --pl-space2x: calc(var(--pl-space1x) * 2);
-  --pl-space3x: calc(var(--pl-space1x) * 3);
-  --pl-space4x: calc(var(--pl-space1x) * 4);
-  --pl-space5x: calc(var(--pl-space1x) * 5);
-  --pl-space6x: calc(var(--pl-space1x) * 6);
-  --pl-space7x: calc(var(--pl-space1x) * 7);
-  --pl-space8x: calc(var(--pl-space1x) * 8);
-  --pl-space9x: calc(var(--pl-space1x) * 9);
-  --pl-space10x: calc(var(--pl-space1x) * 10);
+  --pl-space-1x: 4px;
+  --pl-space-2x: calc(var(--pl-space-1x) * 2);
+  --pl-space-3x: calc(var(--pl-space-1x) * 3);
+  --pl-space-4x: calc(var(--pl-space-1x) * 4);
+  --pl-space-5x: calc(var(--pl-space-1x) * 5);
+  --pl-space-6x: calc(var(--pl-space-1x) * 6);
+  --pl-space-7x: calc(var(--pl-space-1x) * 7);
+  --pl-space-8x: calc(var(--pl-space-1x) * 8);
+  --pl-space-9x: calc(var(--pl-space-1x) * 9);
+  --pl-space-10x: calc(var(--pl-space-1x) * 10);
 
 /* Border radius */
-  --pl-radius1x: 4px;
-  --pl-radius2x: calc(var(--pl-radius1x) * 2);
-  --pl-radius3x: calc(var(--pl-radius1x) * 3);
-  --pl-radius4x: calc(var(--pl-radius1x) * 4);
-  --pl-radius5x: calc(var(--pl-radius1x) * 5);
-  --pl-radius6x: calc(var(--pl-radius1x) * 6);
-  --pl-radius7x: calc(var(--pl-radius1x) * 7);
-  --pl-radius8x: calc(var(--pl-radius1x) * 8);
+  --pl-radius-1x: 4px;
+  --pl-radius-2x: calc(var(--pl-radius-1x) * 2);
+  --pl-radius-3x: calc(var(--pl-radius-1x) * 3);
+  --pl-radius-4x: calc(var(--pl-radius-1x) * 4);
+  --pl-radius-5x: calc(var(--pl-radius-1x) * 5);
+  --pl-radius-6x: calc(var(--pl-radius-1x) * 6);
+  --pl-radius-7x: calc(var(--pl-radius-1x) * 7);
+  --pl-radius-8x: calc(var(--pl-radius-1x) * 8);
 
 
     /* grid distance unit: This is the spacing variable that we have been used until now. We need to replace it for the correct variables wherever it is. We keep it until it has been completely replaced. */
