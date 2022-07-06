@@ -11,9 +11,6 @@ appstore_api_issuer_id = $(POLYPOD_APPLE_IOS_APPSTORE_API_ISSUER_ID)
 provisioning_profile_dir := ~/Library/MobileDevice/Provisioning\ Profiles
 provisioning_profile_file := cooppolypolypolypod__iOS_App_Store_Distribution.mobileprovision
 
-bundle_identifier := $(shell /usr/libexec/PlistBuddy -c "Print :ApplicationProperties:CFBundleIdentifier" "${archive_path}/Info.plist")
-build_version := $(shell /usr/libexec/PlistBuddy -c "Print :ApplicationProperties:CFBundleShortVersionString" "${archive_path}/Info.plist")
-build_number := $(shell /usr/libexec/PlistBuddy -c "Print :ApplicationProperties:CFBundleVersion" "${archive_path}/Info.plist")
 external_tester_group_ids := e03b0ddc-305d-40d5-8186-4dcc32250054
 app_store_connect_cmd := ../AppStoreConnect
 provisioning_profile_name := "coop.polypoly.polypod - iOS App Store Distribution"
