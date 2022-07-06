@@ -41,7 +41,7 @@
 }
 
 .preview h1 {
-    font-family: var(--jost);
+    font-family: var(--jost-medium);
     font-size: var(--font-size-xxl);
     margin-bottom: calc(var(--gdu) * 8);
     margin-top: calc(var(--gdu) * 8);
@@ -49,7 +49,7 @@
 }
 
 .section-title {
-    font-family: var(--jost);
+    font-family: var(--jost-medium);
     font-size: var(--font-size-xl);
     line-height: var(--line-height);
     margin-bottom: 0;
