@@ -85,9 +85,6 @@ release_to_external_testers:
 	 $(appstore_api_issuer_id) \
 	 $(appstore_api_key_id) \
 	 ~/private_keys/AuthKey_$(appstore_api_key_id).p8 \
-	 $(bundle_identifier) \
-	 $(build_version) \
-	 $(build_number) \
 	 $(foreach group, $(external_tester_group_ids), $(group))
 
 .PHONY: install_distribution_prerequisites
