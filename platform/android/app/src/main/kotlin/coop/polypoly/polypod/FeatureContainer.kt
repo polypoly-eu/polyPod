@@ -288,7 +288,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                     FeatureStorage.activeFeatureId + ": " +
                     consoleMessage.messageLevel() + ": " +
                     consoleMessage.message()
-                when (consoleMessage?.messageLevel()) {
+                when (consoleMessage.messageLevel()) {
                     ConsoleMessage.MessageLevel.ERROR,
                     ConsoleMessage.MessageLevel.WARNING ->
                         logger.warn(message)

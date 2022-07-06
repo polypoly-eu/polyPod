@@ -69,7 +69,7 @@ jobs:
         with:
           java-version: 11
           distribution: "temurin"
-          cache: "maven"
+          cache: "gradle"
       - name: Build core with Android bindings
         if: steps.changes.outputs.android == 'true'
         working-directory: platform/core
