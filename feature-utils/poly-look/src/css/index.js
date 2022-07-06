@@ -3,6 +3,7 @@ import "./colors.css";
 import "./themes.css";
 import "./font.css";
 import "./layout.css";
+import "./radius.css";
 import "./spacing.css";
 import "./utils.css";
 import "swiper/swiper-bundle.css";

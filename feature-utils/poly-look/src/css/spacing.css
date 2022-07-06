@@ -10,18 +10,7 @@
   --pl-space-8x: calc(var(--pl-space-1x) * 8);
   --pl-space-9x: calc(var(--pl-space-1x) * 9);
   --pl-space-10x: calc(var(--pl-space-1x) * 10);
-
-/* Border radius */
-  --pl-radius-1x: 4px;
-  --pl-radius-2x: calc(var(--pl-radius-1x) * 2);
-  --pl-radius-3x: calc(var(--pl-radius-1x) * 3);
-  --pl-radius-4x: calc(var(--pl-radius-1x) * 4);
-  --pl-radius-5x: calc(var(--pl-radius-1x) * 5);
-  --pl-radius-6x: calc(var(--pl-radius-1x) * 6);
-  --pl-radius-7x: calc(var(--pl-radius-1x) * 7);
-  --pl-radius-8x: calc(var(--pl-radius-1x) * 8);
-
-
+  
     /* grid distance unit: This is the spacing variable that we have been used until now. We need to replace it for the correct variables wherever it is. We keep it until it has been completely replaced. */
     --gdu: 4px;
 }
