@@ -64,12 +64,12 @@ jobs:
       - name: Test core and features
         if: steps.changes.outputs.apiAndFeatures == 'true'
         run: xvfb-run --auto-servernum ./build.js test
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v3
         if: steps.changes.outputs.android == 'true'
         with:
           java-version: 11
           distribution: "temurin"
-          cache: "gradle"
+          cache: "maven"
       - name: Build core with Android bindings
         if: steps.changes.outputs.android == 'true'
         working-directory: platform/core
