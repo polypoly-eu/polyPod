@@ -255,6 +255,8 @@ const SideSwiper = ({
   }
 
   function touchEnd() {
+    updateMousePress(false);
+
     switch (axis) {
       case axes.x: {
         if (
@@ -273,7 +275,6 @@ const SideSwiper = ({
   }
 
   function reset() {
-    updateMousePress(false);
     updateContentsStyle({
       ...contentsStyle,
       ...commonStyles.contentsIn,
