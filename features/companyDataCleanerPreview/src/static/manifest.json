@@ -1,20 +1,23 @@
 {
-  "name": "Company Data Cleaner",
-  "author": "polypoly poly-cli",
-  "version": "0.0.1",
-  "description": "Correcting your data forces companies to spend a lot of money – money that you can earn.",
-  "thumbnail": "images/thumbnail.pdf",
-  "thumbnailColor": "#ffffff",
-  "primaryColor": "#0f1938",
-  "borderColor": "#cbd5e0",
-  "links": {
-    "learn-more": "https://polypoly.org"
-  },
-  "translations": {
-    "de": {
-      "author": "",
-      "description": "Die Korrektur Ihrer Daten zwingt Unternehmen, viel Geld auszugeben – Geld, das Sie verdienen können."
-    }
-  },
-  "tileTextColor": "#0f1938"
+    "name": "Company Data Cleaner",
+    "author": "polypoly poly-cli",
+    "version": "0.0.1",
+    "description": "Correcting your data forces companies to spend a lot of money – money that you can earn.",
+    "thumbnail": "images/thumbnail.pdf",
+    "thumbnailColor": "#ffffff",
+    "primaryColor": "#0f1938",
+    "borderColor": "#cbd5e0",
+    "links": {
+        "learn-more": "mailto:hello@polypoly.com"
+    },
+    "translations": {
+        "de": {
+            "author": "",
+            "description": "Die Korrektur Ihrer Daten zwingt Unternehmen, viel Geld auszugeben – Geld, das Sie verdienen können.",
+            "links": {
+                "learn-more": "mailto:hello@polypoly.com"
+            }
+        }
+    },
+    "tileTextColor": "#0f1938"
 }
