@@ -42,6 +42,7 @@ open class Network(val context: Context) {
             connection.disconnect()
             return@withContext response
         }
+        return@withContext response
     }
 
     open suspend fun httpGet(
