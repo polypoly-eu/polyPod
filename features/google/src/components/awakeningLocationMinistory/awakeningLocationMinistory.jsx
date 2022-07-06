@@ -117,24 +117,22 @@ export const AwakeningLocationDetails = ({ dateData }) => {
         });
 
     return (
-        <>
-            <div className="awakening-location-ministory-details ">
-                <p
-                    dangerouslySetInnerHTML={{
-                        __html: i18n.t("awakeningLocation:detail", {
-                            number_dates: Object.keys(dateData).length,
-                        }),
-                    }}
-                />
-                <p>{i18n.t("awakeningLocation:detail2")}</p>
-                <p>{i18n.t("awakeningLocation:detail3")}</p>
-                <p>{i18n.t("awakeningLocation:detail4")}</p>
-                <ListOfDetails list={allDataEntries} />
-                <SourceInfoButton
-                    source={i18n.t("common:your.google.data")}
-                    popUpProps={{ name: "info-awakening-location" }}
-                />
-            </div>
-        </>
+        <div className="awakening-location-ministory-details ">
+            <p
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("awakeningLocation:detail", {
+                        number_dates: Object.keys(dateData).length,
+                    }),
+                }}
+            />
+            <p>{i18n.t("awakeningLocation:detail2")}</p>
+            <p>{i18n.t("awakeningLocation:detail3")}</p>
+            <p>{i18n.t("awakeningLocation:detail4")}</p>
+            <ListOfDetails list={allDataEntries} />
+            <SourceInfoButton
+                source={i18n.t("common:your.google.data")}
+                popUpProps={{ name: "info-awakening-location" }}
+            />
+        </div>
     );
 };
