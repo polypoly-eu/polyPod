@@ -70,6 +70,11 @@ jobs:
           java-version: 11
           distribution: "temurin"
           cache: "gradle"
+      - name: Setup Gradle Dependencies Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle') }}
       - name: Build core with Android bindings
         if: steps.changes.outputs.android == 'true'
         working-directory: platform/core
