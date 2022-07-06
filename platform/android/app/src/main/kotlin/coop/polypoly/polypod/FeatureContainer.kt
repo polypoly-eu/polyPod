@@ -144,7 +144,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
         val regex = """(Chrome)\/(?<major>\d+)[\d\.]""".toRegex()
         val matchResult = regex.find(userAgentString)
-        val (_chrome, chromeVersion) = matchResult!!.destructured
+        val (_, chromeVersion) = matchResult!!.destructured
 
         if (chromeVersion.toInt() <= 53) {
             val message = context.getString(
