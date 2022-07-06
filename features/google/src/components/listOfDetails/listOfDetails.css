@@ -8,11 +8,11 @@
     overflow: hidden scroll;
 }
 
-.scrollable-list ul li {
+.scrollable-list li {
     margin-bottom: 18px;
 }
 
-.scrollable-list ul .items {
+.scrollable-list .items {
     font-family: "Jost Medium";
     font-size: var(--font-size-l);
 }
