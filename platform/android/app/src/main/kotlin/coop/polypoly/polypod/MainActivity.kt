@@ -16,9 +16,8 @@ class MainActivity : AppCompatActivity() {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
+        var onboardingShown = false
     }
-
-    private var onboardingShown = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,30 +52,23 @@ class MainActivity : AppCompatActivity() {
             notification.handleFirstRun()
         }
 
-        val shouldShowOnboarding = firstRun ||
-            Authentication.shouldShowBiometricsPrompt(this)
-        if (!onboardingShown && firstRun) {
+        val shouldShowOnboarding = Authentication.shouldShowBiometricsPrompt(this)
+
+        if (!onboardingShown && (firstRun || shouldShowOnboarding)) {
             onboardingShown = true
             startActivity(Intent(this, OnboardingActivity::class.java))
-        }
-        else if (!onboardingShown && shouldShowOnboarding) {
-            onboardingShown = true
-            startActivity(Intent(this, OnboardingActivity::class.java))
-        }
-        else if (Authentication.shouldAuthenticate(this)) {
+        } else if (Authentication.canAuthenticate(this)) {
             startActivity(Intent(this, PodUnlockActivity::class.java))
         }
-
+        
         if (notification.showInApp) {
             AlertDialog.Builder(this)
-                .setTitle(notification.title)
-                .setMessage(notification.text)
-                .setPositiveButton(
-                    R.string.button_update_notification_close
-                ) { _, _ ->
-                    notification.handleInAppSeen()
-                }
-                .show()
+                    .setTitle(notification.title)
+                    .setMessage(notification.text)
+                    .setPositiveButton(R.string.button_update_notification_close) { _, _ ->
+                        notification.handleInAppSeen()
+                    }
+                    .show()
         }
     }
 }

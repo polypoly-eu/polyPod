@@ -22,7 +22,7 @@ class Authentication {
                 !Preferences.isFirstRun(context)
         }
 
-        fun shouldAuthenticate(context: Context): Boolean {
+        fun canAuthenticate(context: Context): Boolean {
             return biometricsAvailable(context) &&
                 Preferences.isBiometricEnabled(context) &&
                 !isAuthenticated
@@ -62,6 +62,9 @@ class Authentication {
                 authComplete(true)
                 return
             }
+
+            if (!showAuthTexts)
+                MainActivity.onboardingShown = true
 
             val title =
                 if (showAuthTexts)
