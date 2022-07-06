@@ -24,6 +24,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.accompanist.flowlayout.FlowRow
 import coop.polypoly.polypod.R
+import kotlin.math.floor
 
 class HomeScreenFragment : Fragment() {
     private val viewModel = HomeScreenViewModel()
@@ -117,8 +118,9 @@ fun createScreen(sectionModels: List<SectionModel>) {
 
     val interItemSpacing =
         (tilesPerContainer - 1) * containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
-    val smallTileWidth =
-        (containerWidth - interItemSpacing) / tilesPerContainer // ktlint-disable max-line-length
+    val smallTileWidth = floor(
+        (containerWidth - interItemSpacing) / tilesPerContainer
+    )
     val bigTileWidth =
         containerWidth - smallTileWidth - containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
 
@@ -207,7 +209,7 @@ fun Section(section: Section) {
             ),
             fontSize = section.style.titleFont.size,
             lineHeight = section.style.titleFont.lineHeight,
-            textAlign = section.style.titleFont.alignment,
+            textAlign = section.style.titleFont.alignment
         )
         FlowRow(
             crossAxisSpacing = section.layout.verticalSpacing
@@ -301,7 +303,6 @@ fun section(
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-
     val tileModel = TileModel(
         title = "Facebook Import",
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
@@ -315,7 +316,7 @@ fun DefaultPreview() {
         tileModel, tileModel, tileModel,
         tileModel, tileModel, tileModel,
         tileModel, tileModel, tileModel,
-        tileModel, tileModel, tileModel,
+        tileModel, tileModel, tileModel
     )
 
     val sections: List<SectionModel> = listOf(
