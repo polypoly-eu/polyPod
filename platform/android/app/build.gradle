@@ -76,7 +76,7 @@ android {
         main {
             assets.srcDirs += file('build/generated-assets')
             java.srcDirs += file('src/main/kotlin')
-            java.srcDirs += file('src/main/java')
+            // java.srcDirs += file('src/main/java')
         }
         test {
             java.srcDirs += file('src/test/kotlin')
