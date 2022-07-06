@@ -1,11 +1,5 @@
 .scrollable-list {
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-.scrollable-list ul {
-    overflow: hidden scroll;
+    padding-bottom: calc(var(--gdu) * 27);
 }
 
 .scrollable-list li {
