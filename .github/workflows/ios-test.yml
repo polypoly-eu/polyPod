@@ -7,7 +7,6 @@ on:
             - "platform/feature-api/**"
             - "platform/core/**"
             - "platform/ios/**"
-            - "platform/android/**"
     pull_request:
         types: [assigned, opened, ready_for_review]
         paths:
@@ -16,7 +15,6 @@ on:
             - "platform/core/**"
             - "platform/feature-api/**"
             - "platform/ios/**"
-            - "platform/android/**"
 jobs:
     test:
         name: Test polyPod iOS and Android app

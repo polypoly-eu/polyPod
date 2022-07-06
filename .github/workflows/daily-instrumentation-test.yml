@@ -1,7 +1,7 @@
 name: polyPod Android integration test
 on:
     schedule:
-      - cron: '31 23 * * *'
+      - cron: '31 13 * * *'
 
 jobs:
     test:
