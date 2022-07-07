@@ -1,6 +1,6 @@
 import "./styles.css";
 import "./colors.css";
-import "./design.css";
+import "./design-tokens.css";
 import "./themes.css";
 import "./font.css";
 import "./layout.css";
