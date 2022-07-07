@@ -37,11 +37,11 @@ class Endpoint(
         return endpointsJson[endpointId]
     }
 
-    open fun setEndpointObserver(newObserver: EndpointObserver) {
+    fun setEndpointObserver(newObserver: EndpointObserver) {
         observer = newObserver
     }
 
-    open suspend fun send(
+    suspend fun send(
         endpointId: String,
         body: String,
         contentType: String?,
@@ -75,7 +75,7 @@ class Endpoint(
         }
     }
 
-    open suspend fun get(
+    suspend fun get(
         endpointId: String,
         contentType: String?,
         authToken: String?
