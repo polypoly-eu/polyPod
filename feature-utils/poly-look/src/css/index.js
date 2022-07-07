@@ -1,10 +1,11 @@
 import "./styles.css";
 import "./colors.css";
+import "./design.css";
 import "./themes.css";
 import "./font.css";
 import "./layout.css";
-import "./radius.css";
-import "./spacing.css";
+import "./design-system-tokens/radius.css";
+import "./design-system-tokens/spacing.css";
 import "./utils.css";
 import "swiper/swiper-bundle.css";
 
