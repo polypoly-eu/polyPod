@@ -1,5 +1,7 @@
 :root {
-/* Spacing units for margins, padding, grid, position (top, bottom, right, left) */
+/* Spacing units for margins, padding, grid, position (top, bottom, right, left) 
+
+Potencial use for future "Figma tokens" variables. Currectly used in Banner component as example. */
   --pl-space-1x: 4px;
   --pl-space-2x: calc(var(--pl-space-1x) * 2);
   --pl-space-3x: calc(var(--pl-space-1x) * 3);
@@ -10,7 +12,4 @@
   --pl-space-8x: calc(var(--pl-space-1x) * 8);
   --pl-space-9x: calc(var(--pl-space-1x) * 9);
   --pl-space-10x: calc(var(--pl-space-1x) * 10);
-  
-    /* grid distance unit: This is the spacing variable that we have been used until now. We need to replace it for the correct variables wherever it is. We keep it until it has been completely replaced. */
-    --gdu: 4px;
 }
