@@ -3,7 +3,7 @@ import SwiftUI
 struct SettingsView: View {
     var closeAction: () -> Void = {}
     @State private var activeSection = Sections.main
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar(
@@ -11,20 +11,7 @@ struct SettingsView: View {
                     Image("NavIconBackDark").renderingMode(.original)
                 }),
                 center: AnyView(
-                    Text({ () -> String in
-                        switch activeSection {
-                        case .main:
-                            return "settings_title"
-                        case .imprint:
-                            return "settings_imprint_title"
-                        case .privacyPolicy:
-                            return "settings_privacy_policy_title"
-                        case .termsOfUse:
-                            return "settings_terms_of_use_title"
-                        case .licenses:
-                            return "settings_licenses_title"
-                        }
-                    }())
+                    Text(activeSection.title())
                     .foregroundColor(Color.PolyPod.darkForeground)
                     .font(.custom("Jost-Medium", size: 16))
                     .kerning(-0.16)
@@ -60,6 +47,23 @@ struct SettingsView: View {
 
 private enum Sections {
     case main, imprint, privacyPolicy, termsOfUse, licenses
+}
+
+extension Sections {
+    func title() -> LocalizedStringKey {
+        switch self {
+        case .main:
+            return "settings_title"
+        case .imprint:
+            return "settings_imprint_title"
+        case .privacyPolicy:
+            return "settings_privacy_policy_title"
+        case .termsOfUse:
+            return "settings_terms_of_use_title"
+        case .licenses:
+            return "settings_licenses_title"
+        }
+    }
 }
 
 struct SettingsView_Previews: PreviewProvider {
