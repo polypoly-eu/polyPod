@@ -1,22 +1,8 @@
-name: polyPod iOS/Android integration test
+name: polyPod Android integration test
 on:
-    push:
-        paths:
-            - "feature-utils/**"
-            - "features/**"
-            - "platform/feature-api/**"
-            - "platform/core/**"
-            - "platform/ios/**"
-            - "platform/android/**"
-    pull_request:
-        types: [assigned, opened, ready_for_review]
-        paths:
-            - "feature-utils/**"
-            - "features/**"
-            - "platform/core/**"
-            - "platform/feature-api/**"
-            - "platform/ios/**"
-            - "platform/android/**"
+    schedule:
+      - cron: '31 13 * * *'
+
 jobs:
     test:
         name: Test polyPod iOS and Android app
@@ -35,8 +21,6 @@ jobs:
               with:
                   path: "**/node_modules"
                   key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-            - name: Lock xcode version
-              run: cd platform/ios; make lockxcodeversion
             - name: Install modules if needed
               if: steps.cache.outputs.cache-hit != 'true'
               run: ./build.js install
@@ -45,22 +29,13 @@ jobs:
             - name: Build core
               working-directory: platform/core
               run: make
-            - name: Build and test iOS
-              working-directory: platform/ios
-              run: make test
             - uses: actions/setup-java@v2
-              if: |
-                !github.head_ref
-                && ( startsWith(github.ref, 'refs/heads/release') == true || github.ref == 'refs/heads/main' )
               with:
                   distribution: 'zulu'
                   java-version: 11
                   cache: 'gradle'
             - name: Test Android
               uses: ReactiveCircus/android-emulator-runner@76c2bf6f95ed6458fd659a1bdb680a0f8df232dc
-              if: |
-                !github.head_ref
-                && ( startsWith(github.ref, 'refs/heads/release') == true || github.ref == 'refs/heads/main' )
               with:
                 working-directory: platform/android
                 arch: 'x86_64'
