@@ -199,6 +199,7 @@ export class RemoteClientPod implements Pod {
 
     get polyIn(): PolyIn {
         return {
+            store: null,
             add: (...quads) => this.rpcClient.polyIn().add(...quads)(),
             match: (matcher) => this.rpcClient.polyIn().match(matcher)(),
             delete: (...quads) => this.rpcClient.polyIn().delete(...quads)(),

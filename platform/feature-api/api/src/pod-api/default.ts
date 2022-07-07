@@ -12,6 +12,7 @@ import { dataFactory } from "../rdf";
 import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint } from "./api";
 import { EncodingOptions, FS, Stats } from "./fs";
 import { Entry } from ".";
+import { anything } from "fast-check";
 
 /**
  * The _default Pod_ provides the bare minimum implementation to satisfy the [[Pod]] API. It should only be used in
@@ -46,6 +47,7 @@ export class DefaultPod implements Pod {
      */
     get polyIn(): PolyIn {
         return {
+            store: this.store,
             match: async (matcher) =>
                 Array.from(
                     this.store.match(
@@ -55,21 +57,18 @@ export class DefaultPod implements Pod {
                         dataFactory.defaultGraph()
                     )
                 ),
-            add: async (...quads) =>
-                quads.forEach((quad) => {
-                    this.checkQuad(quad);
-                    this.store.add(quad);
-                }),
-            delete: async (...quads) =>
-                quads.forEach((quad) => {
-                    this.checkQuad(quad);
-                    this.store.delete(quad);
-                }),
-            has: async (...quads) =>
-                quads.some((quad) => {
-                    this.checkQuad(quad);
-                    return this.store.has(quad);
-                }),
+            add: async (quad) => {
+                this.checkQuad(quad);
+                this.store.add(quad);
+            },
+            delete: async (quad) => {
+                this.checkQuad(quad);
+                this.store.delete(quad);
+            },
+            has: async (quad) => {
+                this.checkQuad(quad);
+                return this.store.has(quad);
+            },
         };
     }
 

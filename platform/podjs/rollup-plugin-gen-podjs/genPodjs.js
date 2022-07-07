@@ -22,6 +22,10 @@ function copyPodJs(dest) {
     }
 
     fs.copyFileSync("node_modules/@polypoly-eu/podjs/dist/pod.js", `${dest}`);
+    fs.copyFileSync(
+        "node_modules/@polypoly-eu/podjs/dist/01f7ed1f3f7ccab75eb4.wasm",
+        `${destDir + "/01f7ed1f3f7ccab75eb4.wasm"}`
+    );
 }
 
 /**
