@@ -187,6 +187,11 @@ fun Screen(screen: Screen) {
             )
 
     ) {
+        Spacer(
+            modifier = Modifier.defaultMinSize(
+                minWidth = screen.layout.width
+            )
+        )
         screen.sections.forEach {
             Section(it)
         }
