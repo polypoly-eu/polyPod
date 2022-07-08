@@ -52,7 +52,7 @@ class AsyncPolyOut implements PolyOut {
 
 class AsyncPolyIn implements PolyIn {
     constructor(private readonly promise: Promise<PolyIn>) {}
-    store: any;
+    store: unknown;
 
     async match(matcher: Partial<Matcher>): Promise<Quad[]> {
         return (await this.promise).match(matcher);
