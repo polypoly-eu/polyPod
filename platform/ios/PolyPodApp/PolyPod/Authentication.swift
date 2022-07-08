@@ -25,10 +25,11 @@ class Authentication {
     }
 
     private func isAvailable() -> Bool {
-        return !isSimulator() && LAContext().canEvaluatePolicy(
-            .deviceOwnerAuthentication,
-            error: nil
-        )
+        return !isSimulator() && 
+            LAContext().canEvaluatePolicy(
+                .deviceOwnerAuthentication,
+                error: nil
+            )
     }
 
     func disableCheck() {

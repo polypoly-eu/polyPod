@@ -77,10 +77,12 @@ struct ContentView: View {
         notification.handleFirstRun()
         return ViewState(
             AnyView(
-                OnboardingView(closeAction: {
-                    FirstRun.write(false)
-                    state = featureListState()
-                })
+                OnboardingView(
+                    closeAction: {
+                        FirstRun.write(false)
+                        state = featureListState()
+                    }
+                )
             )
         )
     }
@@ -104,17 +106,7 @@ struct ContentView: View {
                 )
             )
         }
-
-        return ViewState(
-            AnyView(
-                OnboardingView(
-                    securityOnly: true,
-                    closeAction: {
-                        state = featureListState()
-                    }
-                )
-            )
-        )
+        return featureListState() 
     }
 
     private func featureListState() -> ViewState {
@@ -171,9 +163,11 @@ struct ContentView: View {
     private func infoState() -> ViewState {
         ViewState(
             AnyView(
-                OnboardingView(closeAction: {
-                    state = featureListState()
-                })
+                OnboardingView(
+                    closeAction: {
+                        state = featureListState()
+                    }
+                )
             )
         )
     }
