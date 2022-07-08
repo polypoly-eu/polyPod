@@ -13,7 +13,6 @@ import type {
 } from "@polypoly-eu/api";
 import { dataFactory } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
-import * as RDFString from "rdf-string";
 import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../../polyPod-config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
@@ -63,8 +62,11 @@ async function openDatabase(): Promise<IDBDatabase> {
 
 let storeInitialized = false;
 
-async function initializeStore() {
-    if (!storeInitialized) await init();
+async function initializeStore(): Promise<oxigraph.Store> {
+    if (!storeInitialized) {
+        await init();
+        storeInitialized = true;
+    }
     return new oxigraph.Store();
 }
 
