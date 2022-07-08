@@ -40,7 +40,7 @@ export interface Matcher {
  * on, except for internal purposes of the Feature.
  */
 export interface PolyIn {
-    store: any;
+    store: unknown;
     /**
      * Queries the Pod for triples matching the given filter. For each property ([[Matcher.subject]],
      * [[Matcher.predicate]], [[Matcher.object]]) that is specified in the argument, the result set is narrowed to only
