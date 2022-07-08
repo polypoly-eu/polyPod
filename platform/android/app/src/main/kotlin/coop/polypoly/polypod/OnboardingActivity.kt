@@ -75,7 +75,7 @@ class OnboardingActivity : AppCompatActivity() {
                 button.setOnClickListener {
                     Authentication.setUp(
                         this,
-                        showAuthTexts = true,
+                        showAuthTexts = false,
                         newBiometricState = true
                     ) {
                         close()
