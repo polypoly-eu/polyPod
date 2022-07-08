@@ -12,7 +12,6 @@ import { dataFactory } from "../rdf";
 import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint } from "./api";
 import { EncodingOptions, FS, Stats } from "./fs";
 import { Entry } from ".";
-import { anything } from "fast-check";
 
 /**
  * The _default Pod_ provides the bare minimum implementation to satisfy the [[Pod]] API. It should only be used in
