@@ -57,7 +57,7 @@ fun mapFeatureManifest(msgObject: Value): FeatureManifest {
         thumbnailColor,
         primaryColor,
         borderColor,
-	tileTextColor,
+        tileTextColor,
         links?.map {
             it.key.asStringValue().asString() to
                 it.value.asStringValue().asString()
