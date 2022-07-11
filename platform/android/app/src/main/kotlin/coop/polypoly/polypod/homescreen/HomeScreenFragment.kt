@@ -25,6 +25,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.accompanist.flowlayout.FlowRow
 import coop.polypoly.polypod.R
 import kotlin.math.floor
+import kotlin.math.max
+import kotlin.math.min
 
 class HomeScreenFragment : Fragment() {
     private val viewModel = HomeScreenViewModel()
@@ -124,6 +126,12 @@ fun createScreen(sectionModels: List<SectionModel>) {
     val bigTileWidth =
         containerWidth - smallTileWidth - containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
 
+    // FIX: Tiles become large on bigger screens. Text remains small
+    // Solution: Scale up the text size.
+    // text fits well when the small tile is 112
+    val baseSmallTileWidth = 112
+    val multiplier = max(1.0f, min(2.0f, smallTileWidth / baseSmallTileWidth))
+
     val sections = sectionModels.map {
         section(
             model = it,
@@ -135,13 +143,14 @@ fun createScreen(sectionModels: List<SectionModel>) {
             ),
             mediumTileLayout = TileLayout.mediumCard(
                 containerWidth,
-                smallTileWidth
+                smallTileWidth,
+                multiplier
             ),
             bigTileLayout = TileLayout.bigCard(bigTileWidth, bigTileWidth),
-            smallTileStyle = TileStyle.smallTileStyle(),
-            mediumTileStyle = TileStyle.mediumTileStyle(),
-            bigTileStyle = TileStyle.bigTileStyle(),
-            style = SectionStyle.default()
+            smallTileStyle = TileStyle.smallTileStyle(multiplier),
+            mediumTileStyle = TileStyle.mediumTileStyle(multiplier),
+            bigTileStyle = TileStyle.bigTileStyle(multiplier),
+            style = SectionStyle.default(multiplier)
         )
     }
 
@@ -157,7 +166,7 @@ fun createScreen(sectionModels: List<SectionModel>) {
                 R.string.homescreen_footer_button_title
             )
         ),
-        style = FooterStyle.default(),
+        style = FooterStyle.default(multiplier),
         layout = FooterLayout.default()
     )
 
