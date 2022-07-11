@@ -12,11 +12,11 @@ data class FontDescription(
     val weight: FontWeight,
     val size: TextUnit,
     val lineHeight: TextUnit,
-    val alignment: TextAlign,
+    val alignment: TextAlign
 )
 
 data class SectionStyle(
-    val titleFont: FontDescription,
+    val titleFont: FontDescription
 ) {
     companion object {
         fun default(multiplier: Float): SectionStyle {
@@ -25,7 +25,7 @@ data class SectionStyle(
                     family = PolyStyle().font.family.jostMedium,
                     weight = PolyStyle().font.weight.medium,
                     size = (multiplier * PolyStyle().font.size.lg.value).sp,
-                    lineHeight = (multiplier * PolyStyle().font.lineHeight.lg.value).sp,
+                    lineHeight = (multiplier * PolyStyle().font.lineHeight.lg.value).sp, // ktlint-disable max-line-length
                     alignment = PolyStyle().font.alignment.left
                 )
             )
@@ -66,7 +66,7 @@ data class TileStyle(
                     size = (multiplier * PolyStyle().font.size.xs.value).sp,
                     lineHeight = (multiplier * PolyStyle().font.lineHeight.xs.value).sp, // ktlint-disable max-line-length
                     alignment = PolyStyle().font.alignment.left
-                ),
+                )
             )
         }
 
@@ -85,7 +85,7 @@ data class TileStyle(
                     size = (multiplier * PolyStyle().font.size.xs.value).sp,
                     lineHeight = (multiplier * PolyStyle().font.lineHeight.xs.value).sp, // ktlint-disable max-line-length
                     alignment = PolyStyle().font.alignment.left
-                ),
+                )
             )
         }
     }
@@ -107,21 +107,21 @@ data class FooterStyle(
                     family = PolyStyle().font.family.jostMedium,
                     weight = PolyStyle().font.weight.medium,
                     size = (multiplier * PolyStyle().font.size._2xl.value).sp,
-                    lineHeight = (multiplier * PolyStyle().font.lineHeight._2xl.value).sp,
+                    lineHeight = (multiplier * PolyStyle().font.lineHeight._2xl.value).sp, // ktlint-disable max-line-length
                     alignment = PolyStyle().font.alignment.left
                 ),
                 descriptionFont = FontDescription(
                     family = PolyStyle().font.family.jostRegular,
                     weight = PolyStyle().font.weight.regular,
                     size = (multiplier * PolyStyle().font.size.base.value).sp,
-                    lineHeight = (multiplier * PolyStyle().font.lineHeight.base.value).sp,
+                    lineHeight = (multiplier * PolyStyle().font.lineHeight.base.value).sp, // ktlint-disable max-line-length
                     alignment = PolyStyle().font.alignment.left
                 ),
                 buttonTitleFont = FontDescription(
                     family = PolyStyle().font.family.jostMedium,
                     weight = PolyStyle().font.weight.medium,
                     size = (multiplier * PolyStyle().font.size.lg.value).sp,
-                    lineHeight = (multiplier * PolyStyle().font.lineHeight.lg.value).sp,
+                    lineHeight = (multiplier * PolyStyle().font.lineHeight.lg.value).sp, // ktlint-disable max-line-length
                     alignment = PolyStyle().font.alignment.center
                 )
             )
