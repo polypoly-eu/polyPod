@@ -405,7 +405,10 @@ const SideSwiper = ({
       onTransitionEnd={
         step == steps.interactive
           ? () => {}
-          : () => updateAnimationsStatus(animationsDoneCount + 1)
+          : () =>
+              updateAnimationsStatus(
+                (animationsDoneCount) => animationsDoneCount + 1
+              )
       }
       style={backdropStyle}
       onClick={() => {

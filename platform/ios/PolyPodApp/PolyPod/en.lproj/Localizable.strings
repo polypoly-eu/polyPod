@@ -44,17 +44,18 @@
 
 "auth_prompt_unlock" = "Log in to your polyPod";
 
-"homescreen_footer_title" = "Like what you have seen?";
-"homescreen_footer_description" = "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.";
-"homescreen_footer_button_title" = "Learn more";
+"homescreen_footer_title" = "Charmed by what we are doing? You can join too!";
+"homescreen_footer_description" = "Become a member of the polypoly Cooperative and thus co-owner of the technology – the polyPod. Have a direct influence on the development and contribute to a sustainable, social and independent data economy for Europe.";
+"homescreen_footer_button_title" = "Count me in!";
+"homescreen_footer_button_open_url" = "https://polypoly.coop/en-de/becomepart";
 
 "settings_imprint_text" = "
 <p>Details according to § 5 TMG</p>
 <p>pc polypoly coop SCE mbH<br/>
  (“The polypoly Cooperative”)</p>
-<p>Reichenberger Straße 121<br/>
- 10999 Berlin<br/>
- Deutschland</p>
+<p>Uhlandstr. 86<br/>
+ 10717 Berlin<br/>
+ Germany</p>
 <h3>Register of Cooperatives:</h3>
 <p>Local Court Berlin Charlottenburg, act. sign GnR 921 B</p>
 <h3>Cooperative Association:</h3>
@@ -70,8 +71,9 @@
 <p>DE 333726820</p>
 <h3>Responsible for the content:</h3>
 <p>Thorsten Dittmar</p>
-<p>Reichenberger Straße 121</p>
-<p>10999 Berlin Deutschland</p>
+<p>Uhlandstraße 86<br/>
+ 10717 Berlin<br/>
+ Germany</p>
 ";
 
 "settings_terms_of_use_text" = '
@@ -101,7 +103,7 @@
 <h2>Acceptance of these terms</h2>
 <p>You acknowledge that you have read this Agreement and agree to all its terms and conditions. By using the Mobile Application or its Services you agree to be bound by this Agreement. If you do not agree to abide by the terms of this Agreement, you are not authorized to use or access the Mobile Application and its Services.</p>
 <h2>Contacting us</h2>
-<p>If you would like to contact us to understand more about this Agreement or wish to contact us concerning any matter relating to it, you may do so by sending an email to hello@polypoly.coop or writing a letter to pc polypoly coop SCE mbH, Reichenberger Straße 121, 10999 Berlin, Deutschland</p>
+<p>If you would like to contact us to understand more about this Agreement or wish to contact us concerning any matter relating to it, you may do so by sending an email to hello@polypoly.coop or writing a letter to pc polypoly coop SCE mbH, Uhlandstr. 86, 10717 Berlin, Germany.</p>
 <p><br></p>
-<p>Last updated: 17 March 202</p></div>
+<p>Last updated: 6 July 2022</p>
 ';

@@ -6,7 +6,7 @@ import {
     Screen,
     RoutingWrapper,
     ClickableCard,
-    PolyButton,
+    Banner,
 } from "@polypoly-eu/poly-look";
 
 import i18n from "!silly-i18n";
@@ -20,25 +20,6 @@ const PopUpMessage = ({ children, reportResultAnswer }) => {
     return (
         <div className="pop-up-container">
             <div className={"pop-up" + reportResultAnswer}>{children}</div>
-        </div>
-    );
-};
-
-const ReportCard = () => {
-    const history = useHistory();
-
-    return (
-        <div className="analysis-card unrecognized-analysis-card poly-theme-light">
-            <div className="unrecognized-analysis-title">
-                <h1>{i18n.t("explore:reportCard.headline")}</h1>
-            </div>
-            <p>{i18n.t("explore:reportCard.text")}</p>
-            <RoutingWrapper route="/report" history={history}>
-                <PolyButton
-                    label={i18n.t("explore:reportCard.button")}
-                    className="report-button"
-                />
-            </RoutingWrapper>
         </div>
     );
 };
@@ -87,7 +68,17 @@ const ExploreView = () => {
         if (!account) return null;
         return (
             <List>
-                {!reportIsSent && <ReportCard />}
+                {!reportIsSent && (
+                    <Banner
+                        title={i18n.t("explore:reportCard.headline")}
+                        description={i18n.t("explore:reportCard.text")}
+                        button={{
+                            label: i18n.t("explore:reportCard.button"),
+                            history: useHistory(),
+                            route: "/report",
+                        }}
+                    />
+                )}
                 {ministories.map((MinistoryClass, index) => {
                     const ministory = new MinistoryClass({
                         account,

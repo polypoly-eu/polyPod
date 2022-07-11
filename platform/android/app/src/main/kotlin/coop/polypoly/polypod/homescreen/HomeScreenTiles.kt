@@ -1,5 +1,6 @@
 package coop.polypoly.polypod.homescreen
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -17,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
@@ -29,7 +30,6 @@ fun isLight(color: Color): Boolean {
 
 @Composable
 fun BigTileView(tile: Tile) {
-    val foregroundColor = if (isLight(tile.model.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
     Card(
         modifier = Modifier
             .width(tile.layout.width)
@@ -74,7 +74,7 @@ fun BigTileView(tile: Tile) {
             Column {
                 Text(
                     text = tile.model.title,
-                    color = foregroundColor,
+                    color = tile.model.tileTextColor,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = tile.style.titleFont.weight,
                     fontFamily = FontFamily(
@@ -92,7 +92,7 @@ fun BigTileView(tile: Tile) {
                 )
                 Text(
                     text = tile.model.description,
-                    color = foregroundColor,
+                    color = tile.model.tileTextColor,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = tile.style.descriptionFont!!.weight,
                     fontFamily = FontFamily(
@@ -109,7 +109,6 @@ fun BigTileView(tile: Tile) {
 
 @Composable
 fun MediumTileView(tile: Tile) {
-    val foregroundColor = if (isLight(tile.model.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
     Card(
         modifier = Modifier
             .width(tile.layout.width)
@@ -148,7 +147,7 @@ fun MediumTileView(tile: Tile) {
             ) {
                 Text(
                     text = tile.model.title,
-                    color = foregroundColor,
+                    color = tile.model.tileTextColor,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = tile.style.titleFont.weight,
                     fontFamily = FontFamily(
@@ -166,7 +165,7 @@ fun MediumTileView(tile: Tile) {
                 )
                 Text(
                     text = tile.model.description,
-                    color = foregroundColor,
+                    color = tile.model.tileTextColor,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = tile.style.descriptionFont!!.weight,
                     fontFamily = FontFamily(
@@ -183,7 +182,6 @@ fun MediumTileView(tile: Tile) {
 
 @Composable
 fun SmallTileView(tile: Tile) {
-    val foregroundColor = if (isLight(tile.model.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
     Card(
         modifier = Modifier
             .width(tile.layout.width)
@@ -228,7 +226,7 @@ fun SmallTileView(tile: Tile) {
             )
             Text(
                 text = tile.model.title,
-                color = foregroundColor,
+                color = tile.model.tileTextColor,
                 overflow = TextOverflow.Ellipsis,
                 fontWeight = tile.style.titleFont.weight,
                 fontFamily = FontFamily(
@@ -244,6 +242,7 @@ fun SmallTileView(tile: Tile) {
 
 @Composable
 fun Footer(footer: Footer) {
+    val context = LocalContext.current
     val foregroundColor = if (isLight(footer.style.backgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
     val buttonForegroundColor = if (isLight(footer.style.buttonBackgroundColor)) Color.Black else Color.White // ktlint-disable max-line-length
     Card(
@@ -293,14 +292,15 @@ fun Footer(footer: Footer) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Image(
-                    painter = painterResource(id = footer.model.imageId),
-                    contentDescription = null,
-                    contentScale = ContentScale.Fit,
-                    alignment = Alignment.Center
-                )
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        context.startActivity(
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                footer.model.buttonOpenUri(context)
+                            )
+                        )
+                    },
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = footer.style.buttonBackgroundColor

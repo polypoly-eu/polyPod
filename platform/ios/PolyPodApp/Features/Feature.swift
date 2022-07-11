@@ -13,6 +13,7 @@ class Feature {
     let thumbnailColor: Color?
     let thumbnail: URL?
     let borderColor: Color?
+    let tileTextColor: Color?
     private let links: [String: String]
 
     static func load(path: URL) -> Feature? {
@@ -31,7 +32,8 @@ class Feature {
         thumbnailColor: String?,
         primaryColor: String?,
         links: [String: String]?,
-        borderColor: String?
+        borderColor: String?,
+        tileTextColor: String?
     ) {
         self.path = path
         let id = path.lastPathComponent
@@ -48,6 +50,7 @@ class Feature {
         )
         self.links = links ?? [:]
         self.borderColor = parseColor(hexValue: borderColor)
+        self.tileTextColor = parseColor(hexValue: tileTextColor)
     }
     
     convenience init(path: URL, manifest: FeatureManifest) {
@@ -58,8 +61,9 @@ class Feature {
                   thumbnail: manifest.thumbnail,
                   thumbnailColor: manifest.thumbnailColor,
                   primaryColor: manifest.primaryColor,
-                  links: manifest.links,
-                  borderColor: manifest.borderColor
+                  links: links,
+                  borderColor: manifest.borderColor,
+                  tileTextColor: manifest.tileTextColor
         )
     }
 

@@ -50,7 +50,7 @@ class FilePicker: NSObject, UIDocumentPickerDelegate {
         }
         currentCompletion = completion
 
-        let supportedTypes: [UTType] = [UTType(type ?? "")!]
+        let supportedTypes: [UTType] = [type.flatMap { UTType(mimeType: $0) }].compactMap { $0 }
         let documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes)
         
         documentPickerController.delegate = self

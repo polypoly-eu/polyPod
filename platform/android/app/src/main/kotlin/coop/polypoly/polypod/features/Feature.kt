@@ -31,6 +31,10 @@ class Feature(
         get() = runCatching { Color.parseColor(manifest?.borderColor) }
             .getOrDefault(primaryColor)
 
+    val tileTextColor: Int
+        get() = runCatching { Color.parseColor(manifest?.tileTextColor) }
+            .getOrDefault(0)
+
     val thumbnail: Bitmap?
         get() {
             if (manifest?.thumbnail == null) return null

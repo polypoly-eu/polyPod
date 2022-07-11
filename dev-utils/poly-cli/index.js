@@ -2,28 +2,25 @@
 
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { existsSync, mkdirSync, writeFileSync, readFileSync } from "fs";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
+import { existsSync, mkdirSync, writeFileSync } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import {
-    packageTemplate,
-    manifestTemplate,
-    readmeTemplate,
-} from "./src/templates/index.js";
-import {
     printErrorMsg,
-    printWarningMsg,
     printUnderConstruction,
     printHeadlineMsg,
     printFeatureInfoMsg,
     printInfoMsg,
 } from "./src/msg.js";
 import { exit } from "process";
+import { emptyFeatureTemplates, previewFeatureTemplates } from "./templates.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const initial_version = "0.0.1";
 
 if (existsSync("../dev-utils/rollup-plugin-copy-watch")) {
     printInfoMsg("✓ Running from the right path!");
@@ -33,95 +30,20 @@ Please change to «features»`);
     exit(1);
 }
 
-function setup(feature_name, author, version, description, license) {
-    // folders are objects, files are strings.
-    var structure = {};
-
-    // Remember "leaves" before subdirectories, or mkdir will fail
-    structure[feature_name] = {
-        src: {
-            "index.jsx": () =>
-                readFileSync(
-                    path.resolve(__dirname, "./src/static/templates/index.jsx")
-                ),
-            "styles.css": () =>
-                readFileSync(
-                    path.resolve(__dirname, "./src/static/templates/styles.css")
-                ),
-            locales: {
-                en: {
-                    "common.json": () =>
-                        readFileSync(
-                            path.resolve(
-                                __dirname,
-                                "./src/static/templates/locales/en/common.json"
-                            )
-                        ),
-                },
-                de: {
-                    "common.json": () =>
-                        readFileSync(
-                            path.resolve(
-                                __dirname,
-                                "./src/static/templates/locales/de/common.json"
-                            )
-                        ),
-                },
-            },
-            static: {
-                "manifest.json": () => manifestTemplate(feature_name, author),
-                "index.html": () =>
-                    readFileSync(
-                        path.resolve(
-                            __dirname,
-                            "./src/static/templates/index.html"
-                        )
-                    ),
-            },
-        },
-        test: [],
-        "package.json": () =>
-            packageTemplate(
-                feature_name,
-                version,
-                description,
-                "src/index.jsx",
-                author,
-                license
-            ),
-        "README.md": () => readmeTemplate(feature_name, description),
-        "rollup.config.mjs": () =>
-            readFileSync(
-                path.resolve(
-                    __dirname,
-                    "./src/static/templates/rollup.config.mjs"
-                )
-            ),
-    };
-
-    if (existsSync(`./${feature_name}`)) {
-        printErrorMsg("Feature already exists in this folder. Aborting!");
-        return;
-    }
-
-    createDirectoryStructure(structure);
-
-    execSync(`cd ${feature_name} && npm i && npm run build`);
-}
-
 function interactiveSetup() {
     const setup_questions = [
         {
-            type: "input",
-            name: "feature_name",
-            message: "Feature Name:",
-            default: "example",
+            type: "list",
+            name: "type",
+            message: "Feature Type:",
+            choices: ["empty", "preview", "importer"],
+            default: "empty",
         },
         {
             type: "input",
-            name: "version",
-            message: "Version:",
-            default: "0.0.1",
+            name: "name",
+            message: "Feature Name:",
+            default: "example",
         },
         {
             type: "input",
@@ -146,33 +68,29 @@ function interactiveSetup() {
     inquirer
         .prompt(setup_questions)
         .then((answers) => {
-            checkIfValueExists("feature_name", answers);
-            checkIfValueExists("author", answers);
-            checkIfValueExists("version", answers);
-            checkIfValueExists("description", answers);
-            checkIfValueExists("license", answers);
-            setup(
-                answers.feature_name,
-                answers.author,
-                answers.version,
-                answers.description,
-                answers.license
+            ["type", "name", "author", "description", "license"].forEach(
+                (value) => {
+                    checkIfValueExists(value, answers);
+                }
             );
+
+            handleCreateFeature(answers);
         })
         .catch((error) => {
             printErrorMsg(`Error: ${JSON.stringify(error, null, 4)}`);
         });
 }
+
 yargs(hideBin(process.argv))
     .scriptName("poly-cli")
     .command(
-        'create <what> <name> [--type=empty] [--version=0.0.1] [--author="polypoly poly-cli"] [--license=MIT] [--description="Generated from poly-cli"]',
+        'create <what> <name> [--type=empty] [--author="polypoly poly-cli"] [--license=MIT] [--description="Generated from poly-cli"]',
         "Creates features for now.",
         (yargs) => {
             yargs.positional("what", {
                 type: "string",
                 describe:
-                    "→ the kind of thing you want poly-cli to create for you. Options: feature",
+                    "→ The kind of thing you want poly-cli to create for you. Options: feature",
             });
 
             yargs.positional("name", {
@@ -183,13 +101,7 @@ yargs(hideBin(process.argv))
             yargs.option("type", {
                 type: "string",
                 default: "empty",
-                describe: "→ the type of feature: empty, preview, or importer",
-            });
-
-            yargs.option("feature-version", {
-                type: "string",
-                default: "0.0.1",
-                describe: "→ Version string for the package.json",
+                describe: "→ The type of feature: empty, preview, or importer",
             });
 
             yargs.option("author", {
@@ -206,8 +118,9 @@ yargs(hideBin(process.argv))
 
             yargs.option("description", {
                 type: "string",
-                default: "Generated from poly-cli; use your own here",
-                describe: "→ Version string for the package.json",
+                default:
+                    "Generated from poly-cli; substitute for your own here",
+                describe: "→ Description string for the package.json",
             });
         },
         handleCreate
@@ -216,12 +129,16 @@ yargs(hideBin(process.argv))
     .help().argv;
 
 function handleCreate(arg) {
-    if (arg.what === "feature") {
-        handleCreateFeature(arg);
-    } else {
-        printWarningMsg(
-            "Sorry, I can't create this for you. Try: create feature instead"
-        );
+    try {
+        if (arg.what === "feature") {
+            handleCreateFeature(arg);
+        } else {
+            throw Error(
+                "Sorry, I can't create this for you. Try: «create feature» instead"
+            );
+        }
+    } catch (error) {
+        printErrorMsg(`${error}`);
     }
 }
 
@@ -232,49 +149,156 @@ function handleCreateFeature(arg) {
     if (arg.type === "empty") {
         handleCreateEmptyFeature(arg);
     } else if (arg.type === "preview") {
-        handleCreatePreviewFeature();
+        handleCreatePreviewFeature(arg);
     } else if (arg.type === "importer") {
         handleCreateImporterFeature();
     } else {
-        printErrorMsg(`Feature type ${arg.type} not recognized. Aborting!`);
+        throw Error(`Feature type ${arg.type} not recognized. Aborting!`);
     }
 }
 
 function handleCreateEmptyFeature(arg) {
-    setup(
-        arg.name,
-        arg.author,
-        arg.featureVersion,
-        arg.description,
-        arg.license
+    let feature_name = arg.name;
+    let author = arg.author;
+    let version = initial_version;
+    let description = arg.description;
+    let license = arg.license;
+
+    // folders are objects, files are strings.
+    var structure = {};
+    structure[feature_name] = [
+        {
+            src: [
+                { static: ["manifest.json", "index.html"] },
+                { locales: [{ en: ["common.json"] }, { de: ["common.json"] }] },
+                "index.jsx",
+                "styles.css",
+            ],
+        },
+        { test: [] },
+        "package.json",
+        "README.md",
+        "rollup.config.mjs",
+        ".gitignore",
+    ];
+
+    let templates = emptyFeatureTemplates(
+        feature_name,
+        author,
+        version,
+        description,
+        license
     );
+
+    createDirectoryStructure(structure, templates);
+    execSync(`cd ${feature_name} && npm i && npm run build`);
 }
 
-function handleCreatePreviewFeature() {
-    printUnderConstruction();
+function handleCreatePreviewFeature(arg) {
+    let feature_name = arg.name;
+    let author = arg.author;
+    let version = initial_version;
+    let description = arg.description;
+    let license = arg.license;
+
+    let common_locales = ["common.json", "preview.json", "progressInfo.json"];
+
+    var structure = {};
+    structure[feature_name] = [
+        {
+            src: [
+                {
+                    static: [
+                        "manifest.json",
+                        "index.html",
+                        "content.json",
+                        { images: ["thumbnail.pdf"] },
+                    ],
+                },
+                {
+                    locales: [
+                        {
+                            en: common_locales,
+                        },
+                        {
+                            de: common_locales,
+                        },
+                    ],
+                },
+                "index.jsx",
+                "styles.css",
+            ],
+        },
+        { test: [] },
+        "package.json",
+        "README.md",
+        "rollup.config.mjs",
+        ".gitignore",
+    ];
+
+    let templates = previewFeatureTemplates(
+        feature_name,
+        author,
+        version,
+        description,
+        license
+    );
+
+    createDirectoryStructure(structure, templates);
+    execSync(
+        `cd ${feature_name}/src/static && ln -s ../../../../assets/fonts . && cd ../../ && npm i && npm run build`
+    );
 }
 
 function handleCreateImporterFeature() {
     printUnderConstruction();
 }
 
-function createDirectoryStructure(structure, parent = ".") {
-    for (const key in structure) {
-        if (typeof structure[key] === "object") {
+function createDirectoryStructure(structure, templates) {
+    const recursiveCreate = (structure, templates, parent = ".") => {
+        for (let key of Object.keys(structure)) {
             let dir = parent + "/" + key;
+
             if (!existsSync(dir)) {
                 mkdirSync(dir);
             }
-            createDirectoryStructure(structure[key], dir);
-        } else if (structure[key] instanceof Function) {
-            writeFileSync(parent + "/" + key, structure[key]());
+
+            for (let child of structure[key]) {
+                if (typeof child === "object") {
+                    recursiveCreate(child, templates, dir);
+                } else if (typeof child === "string") {
+                    var content = "";
+                    var matches = keysIncludedIn(
+                        [`${dir}/${child}`, child],
+                        templates
+                    );
+                    if (matches.length > 0) {
+                        content = templates[matches[0]]();
+                    }
+                    writeFileSync(dir + "/" + child, content);
+                }
+            }
         }
+    };
+
+    let feature_name = Object.keys(structure)[0];
+
+    if (existsSync(`./${feature_name}`)) {
+        throw Error("Feature already exists in this folder. Aborting!");
     }
+
+    recursiveCreate(structure, templates);
+}
+
+// checks if any of the keys are included as substrings in the strings.
+function keysIncludedIn(strings, object) {
+    return Object.keys(object).filter((key) =>
+        strings.some((s) => s.includes(key))
+    );
 }
 
 function checkIfValueExists(value, obj) {
     if (!(value in obj)) {
-        printErrorMsg(`Developer error: ${value} does not exist!`);
-        throw Error("Dev error");
+        throw Error(`Developer error: ${value} does not exist!`);
     }
 }

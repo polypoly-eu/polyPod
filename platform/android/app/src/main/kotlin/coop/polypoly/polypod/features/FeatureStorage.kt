@@ -12,13 +12,15 @@ import java.util.zip.ZipFile
 data class RawCategory(
     val id: String,
     val name: String,
-    val features: List<String>
+    val features: List<String>,
+    val visible: Boolean?
 )
 
 enum class FeatureCategory {
     yourData,
     knowHow,
-    tools
+    tools,
+    developer
 }
 
 data class FeatureCategoryModel(
@@ -51,8 +53,12 @@ object FeatureStorage {
                 continue
             }
             val categoryId = FeatureCategory.valueOf(rawCategory.id)
-            val features: MutableList<Feature> = ArrayList()
+            if (rawCategory.visible == false) {
+                logger.debug("Category $categoryId not visible, ignored")
+                continue
+            }
 
+            val features: MutableList<Feature> = ArrayList()
             for (featureId in rawCategory.features) {
                 importFeature(context, featureId)
                 features.add(loadFeature(context, featureId))

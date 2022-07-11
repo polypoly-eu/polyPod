@@ -1,5 +1,7 @@
 const INDENTING_SPACES = 4;
 
+import { convertCamelCaseToHyphen, isCamelCase } from "../utils.js";
+
 // template returns a string that can be written to a file
 export function packageTemplate(
     name,
@@ -9,6 +11,10 @@ export function packageTemplate(
     author,
     license
 ) {
+    if (isCamelCase(name)) {
+        name = convertCamelCaseToHyphen(name);
+    }
+
     return JSON.stringify(
         {
             name: name,
@@ -17,11 +23,15 @@ export function packageTemplate(
             main: main,
             scripts: {
                 build: "rollup -c",
-                test: 'echo "Error: no test specified" && exit 1',
+                watch: "rollup --watch -c",
+                test: 'echo "🚨: No tests run"',
             },
             devDependencies: {
                 "@polypoly-eu/rollup-plugin-copy-watch":
                     "file:../../dev-utils/rollup-plugin-copy-watch",
+                rollup: "*",
+                "@rollup/plugin-json": "*",
+                "@rollup/plugin-node-resolve": "*",
             },
             dependencies: {
                 "@polypoly-eu/silly-i18n":
@@ -30,10 +40,8 @@ export function packageTemplate(
                 "@polypoly-eu/pod-api":
                     "file:../../platform/feature-api/api/pod-api",
                 "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
-                "@rollup/plugin-node-resolve": "*",
                 react: "*",
                 "react-dom": "*",
-                rollup: "*",
             },
             author: author,
             license: license,

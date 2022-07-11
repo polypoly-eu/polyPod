@@ -1,7 +1,10 @@
 package coop.polypoly.polypod.homescreen
 
+import android.content.Context
 import android.graphics.Bitmap
+import android.net.Uri
 import androidx.compose.ui.graphics.Color
+import coop.polypoly.polypod.R
 import coop.polypoly.polypod.features.FeatureCategory
 import coop.polypoly.polypod.features.FeatureStorage
 
@@ -14,7 +17,8 @@ data class SectionModel(
 enum class SectionType {
     YOUR_DATA,
     DATA_KNOW_HOW,
-    TOOLS;
+    TOOLS,
+    DEVELOPER;
 
     companion object {
         fun fromCategoryType(type: FeatureCategory): SectionType {
@@ -22,6 +26,7 @@ enum class SectionType {
                 FeatureCategory.yourData -> YOUR_DATA
                 FeatureCategory.knowHow -> DATA_KNOW_HOW
                 FeatureCategory.tools -> TOOLS
+                FeatureCategory.developer -> DEVELOPER
             }
         }
     }
@@ -33,15 +38,23 @@ data class TileModel(
     val image: Bitmap?,
     val backgroundColor: Color,
     val borderColor: Color,
+    val tileTextColor: Color,
     val onSelection: () -> Unit,
 )
 
 data class FooterModel(
     val title: String,
     val description: String,
-    val imageId: Int,
     val buttonTitle: String,
-)
+) {
+    fun buttonOpenUri(context: Context): Uri {
+        return Uri.parse(
+            context.getString(
+                R.string.homescreen_footer_button_open_url
+            )
+        )
+    }
+}
 
 data class Screen(
     val sections: List<Section>,
@@ -105,6 +118,7 @@ class HomeScreenViewModel {
                         feature.thumbnail,
                         Color(feature.thumbnailColor),
                         Color(feature.borderColor),
+                        Color(feature.tileTextColor),
                     ) {
                         onFeatureSelected(feature.id)
                     }
