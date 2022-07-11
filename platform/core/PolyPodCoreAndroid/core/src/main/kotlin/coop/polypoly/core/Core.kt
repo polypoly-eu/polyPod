@@ -32,7 +32,7 @@ class Core {
                 throw mapError(it.asMapValue().map())
             }
 
-            throw InvalidCoreResponseFormat()
+            throw InvalidCoreResponseFormat(responseObject.toString())
         }
     }
 }

@@ -45,6 +45,7 @@ fun mapFeatureManifest(msgObject: Value): FeatureManifest {
     val thumbnailColor = msgObject.get("thumbnailColor")?.getStringValue()
     val primaryColor = msgObject.get("primaryColor")?.getStringValue()
     val borderColor = msgObject.get("borderColor")?.getStringValue()
+    val tileTextColor = msgObject.get("tileTextColor")?.getStringValue()
     val links = msgObject.get("links")?.getMapValue()
 
     return FeatureManifest(
@@ -56,6 +57,7 @@ fun mapFeatureManifest(msgObject: Value): FeatureManifest {
         thumbnailColor,
         primaryColor,
         borderColor,
+	tileTextColor,
         links?.map {
             it.key.asStringValue().asString() to
                 it.value.asStringValue().asString()

@@ -9,5 +9,6 @@ data class FeatureManifest(
     val thumbnailColor: String?,
     val primaryColor: String?,
     val borderColor: String?,
+    val tileTextColor: String?,
     val links: Map<String, String>?
 )

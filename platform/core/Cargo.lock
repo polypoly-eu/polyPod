@@ -112,7 +112,6 @@ dependencies = [
  "once_cell",
  "rmp-serde",
  "serde",
- "serde_derive",
  "serde_json",
 ]
 

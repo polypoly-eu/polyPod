@@ -9,7 +9,7 @@ extension MessagePackValue {
         if let dictionary = self.dictionaryValue {
             return dictionary
         } else {
-            throw DecodingError.invalidValue(info: "Expected dictionary")
+            throw DecodingError.invalidValue(info: "Expected dictionary, received \(self)")
         }
     }
     
@@ -20,7 +20,7 @@ extension MessagePackValue {
         if let string = self.stringValue {
             return string
         } else {
-            throw DecodingError.invalidValue(info: "Expected string")
+            throw DecodingError.invalidValue(info: "Expected string, received \(self)")
         }
     }
     
@@ -28,7 +28,7 @@ extension MessagePackValue {
         if let string = self.stringValue {
             return string
         } else {
-            throw DecodingError.invalidValue(info: "Expected string")
+            throw DecodingError.invalidValue(info: "Expected string, received \(self)")
         }
     }
 }
@@ -60,6 +60,7 @@ func mapFeatureManifest(_ value: MessagePackValue) throws -> FeatureManifest {
                            thumbnailColor: try dictionary["thumbnailColor"]?.getString(),
                            primaryColor: try dictionary["primaryColor"]?.getString(),
                            borderColor: try dictionary["borderColor"]?.getString(),
+                           tileTextColor: try dictionary["tileTextColor"]?.getString(),
                            links: links)
 }
 

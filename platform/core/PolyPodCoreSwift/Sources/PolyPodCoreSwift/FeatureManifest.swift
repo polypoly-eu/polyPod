@@ -9,5 +9,6 @@ public struct FeatureManifest {
     public let thumbnailColor: String?
     public let primaryColor: String?
     public let borderColor: String?
+    public let tileTextColor: String?
     public let links: [String: String]?
 }

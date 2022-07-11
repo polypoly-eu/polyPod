@@ -107,7 +107,7 @@ open class PolyOut(
         if (!fileOrDirectory.isDirectory) return fileOrDirectory.length()
         // We previously used FileUtils.sizeOfDirectory here, which had some
         // special cases for symbolic links and negative file sizes. It did,
-        // however, use java.nio.file.Path.toPath(), which does not exist
+        // however, use kotlin.nio.file.Path.toPath(), which does not exist
         // on API 24, so we replaced it with this simpler implementation.
         val files = fileOrDirectory.listFiles() ?: return 0L
         return files.sumOf { determineSize(it) }

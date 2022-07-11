@@ -39,7 +39,7 @@ import org.junit.runner.RunWith
 class FeatureFragmentInstrumentedTest {
 
     @get:Rule
-    val activityRule = ActivityScenarioRule(MainActivity::class.java)
+    val activityRule = ActivityScenarioRule(MainActivity::class.kotlin)
 
     // TODO: Re-enable this test
     // @Test

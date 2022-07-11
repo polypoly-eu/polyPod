@@ -61,7 +61,7 @@ class Feature {
                   thumbnail: manifest.thumbnail,
                   thumbnailColor: manifest.thumbnailColor,
                   primaryColor: manifest.primaryColor,
-                  links: links,
+                  links: manifest.links,
                   borderColor: manifest.borderColor,
                   tileTextColor: manifest.tileTextColor
         )

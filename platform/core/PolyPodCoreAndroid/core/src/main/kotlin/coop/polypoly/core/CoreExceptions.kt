@@ -19,9 +19,9 @@ data class CoreFailure(
     override val message: String
 ) : Exception("$code -> $message")
 
-class InvalidCoreResponseFormat :
-    Exception("Received invalid core response format")
+class InvalidCoreResponseFormat(val info: String) :
+    Exception("Received invalid core response format: $info")
 class EmptyFeatureManifest :
-    Exception("Received empty feature manifest response")
+    Exception("The received feature manifest seems to be empty")
 data class InvalidCoreErrorFormat(val info: String) :
     Exception("Received invalid core failure format: $info")
