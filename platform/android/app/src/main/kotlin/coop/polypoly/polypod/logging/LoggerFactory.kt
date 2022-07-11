@@ -26,6 +26,6 @@ object LoggerFactory {
     }
 
     private fun isAndroid(): Boolean {
-        return System.getProperty("kotlin.vm.name") == "Dalvik"
+        return System.getProperty("java.vm.name") == "Dalvik"
     }
 }

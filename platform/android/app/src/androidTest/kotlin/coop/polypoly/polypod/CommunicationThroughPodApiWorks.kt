@@ -40,7 +40,7 @@ import org.hamcrest.CoreMatchers.`is`
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import kotlin.util.Date
+import java.util.Date
 
 /**
  * Idea - those tests verify that the communication between the Feature and the Pod works.
@@ -67,7 +67,7 @@ class CommunicationThroughPodApiWorks {
     private lateinit var polyIn: PolyInTestDouble
 
     @get:Rule
-    val activityRule = ActivityScenarioRule(MainActivity::class.kotlin)
+    val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     // TODO: fetch instrumentation tests are disabled for now
     // @Test
