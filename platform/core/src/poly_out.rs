@@ -12,8 +12,8 @@ trait PolyOut {
   // If you do, it will write to that resource you specified.
   // We might need some options like appending to the end of a file.
   // write is a combination of create + update
-  fn write(content: Content, dest_resource_id: Optional<ResourceId>) -> Result<ResourceId, &str>;
-  fn unzip(url: String, dest_resource_id: ResourceId) -> Result<ResourceId, &str>;
+  fn write(content: Content, dest_resource_id: Optional<ResourceId>, write_options: Optional<WriteOptions>) -> Result<ResourceId, &str>;
+  fn unzip(url: String, dest_resource_id: Optional<ResourceId>) -> Result<ResourceId, &str>;
   fn remove(resource_id: ResourceId) -> Result<Void, &str>;
 }
 
@@ -27,6 +27,11 @@ struct ResourceId {
   res_type: ResourceType,
   uuid: String, 
   name: String
+}
+
+enum WriteOptions {
+  Append,
+  Override
 }
 
 trait Metadata {}
