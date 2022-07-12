@@ -117,6 +117,7 @@
     margin-top: 0;
     font-size: var(--font-size-l);
     font-family: var(--jost-medium);
+    font-weight: 100;
     margin-bottom: calc(var(--gdu) * 2);
 }
 

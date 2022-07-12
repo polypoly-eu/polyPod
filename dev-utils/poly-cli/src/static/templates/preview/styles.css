@@ -66,6 +66,8 @@
 }
 
 .footer h3 {
+    font-family: var(--jost-medium);
+    font-weight: 100;
     font-size: var(--font-size-xl);
     margin-bottom: calc(var(--gdu) * 3);
     margin-top: 0;
