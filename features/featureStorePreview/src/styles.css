@@ -42,6 +42,7 @@
 
 .preview h1 {
     font-family: var(--jost-medium);
+    font-weight: 100;
     font-size: var(--font-size-xxl);
     margin-bottom: calc(var(--gdu) * 8);
     margin-top: calc(var(--gdu) * 8);
@@ -50,6 +51,7 @@
 
 .section-title {
     font-family: var(--jost-medium);
+    font-weight: 100;
     font-size: var(--font-size-xl);
     line-height: var(--line-height);
     margin-bottom: 0;
@@ -64,6 +66,8 @@
 }
 
 .footer h3 {
+    font-family: var(--jost-medium);
+    font-weight: 100;
     font-size: var(--font-size-xl);
     margin-bottom: calc(var(--gdu) * 3);
     margin-top: 0;
@@ -115,6 +119,7 @@
     margin-top: 0;
     font-size: var(--font-size-l);
     font-family: var(--jost-medium);
+    font-weight: 100;
     margin-bottom: calc(var(--gdu) * 2);
 }
 
