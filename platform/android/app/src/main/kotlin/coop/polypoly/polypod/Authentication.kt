@@ -45,12 +45,12 @@ class Authentication {
                         activity,
                         newBiometricState
                     )
-                   if (newBiometricState) {
-                       Preferences.setUserConfiguredAuthentication(
-                           activity.applicationContext,
-                           true
-                       )
-                   }
+                    if (newBiometricState) {
+                        Preferences.setUserConfiguredAuthentication(
+                            activity.applicationContext,
+                            true
+                        )
+                    }
                 }
                 setupComplete()
             }
@@ -69,9 +69,6 @@ class Authentication {
                 authComplete(true)
                 return
             }
-
-            if (!showAuthTexts)
-                MainActivity.onboardingShown = true
 
             val title =
                 if (showAuthTexts)

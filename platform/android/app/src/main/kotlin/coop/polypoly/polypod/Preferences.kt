@@ -41,7 +41,10 @@ class Preferences {
             edit.commit()
         }
 
-        fun setSecurityDoNotAskAgainCheck(context: Context, shouldCheck: Boolean) {
+        fun setSecurityDoNotAskAgainCheck(
+            context: Context,
+            shouldCheck: Boolean
+        ) {
             val edit = getPrefs(context).edit()
             edit.putBoolean(biometricCheckKey, shouldCheck)
             edit.commit()
@@ -50,7 +53,10 @@ class Preferences {
         fun hasUserConfiguredAuthentication(context: Context): Boolean =
             getPrefs(context).getBoolean(userConfiguredAuth, false)
 
-        fun setUserConfiguredAuthentication(context: Context, shouldCheck: Boolean) {
+        fun setUserConfiguredAuthentication(
+            context: Context,
+            shouldCheck: Boolean
+        ) {
             val edit = getPrefs(context).edit()
             edit.putBoolean(userConfiguredAuth, shouldCheck)
             edit.commit()
