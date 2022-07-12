@@ -1,8 +1,8 @@
 trait PolyOut {
   // list all the resource ids
   fn list() -> Result<[ResourceId], &str>;
-  fn stat(resource_id: ResourceId) -> Result<Stats, &str>;
-  // metadata replaces readDir. The metadata of a folder resource will contain the name of the files and folders inside that folder.
+  // metadata replaces readDir and stats. 
+  // The metadata of a folder resource will contain the name of the files and folders inside that folder plus what stats contains atm.
   fn metadata(resource_id: ResourceId) -> Result<Metadata, &str>;
   // read will return the content of a resource
   // if you read a file, it will return the content
