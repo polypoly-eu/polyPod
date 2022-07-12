@@ -40,7 +40,7 @@ class OnboardingActivity : AppCompatActivity() {
         )
 
         if (!isInfo) {
-            if (Authentication.shouldShowBiometricsPrompt(this)) {
+            if (Authentication.shouldShowAuthOnboarding(this)) {
                 strings = strings.plus(
                     mapOf(
                         R.id.headline_main to
@@ -85,7 +85,7 @@ class OnboardingActivity : AppCompatActivity() {
                 )
                 doNotAskButton.visibility = View.VISIBLE
                 doNotAskButton.setOnClickListener {
-                    Preferences.setBiometricCheck(this, false)
+                    Preferences.setSecurityDoNotAskAgainCheck(this, true)
                     close()
                 }
             }

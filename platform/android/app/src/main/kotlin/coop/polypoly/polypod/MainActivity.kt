@@ -9,7 +9,6 @@ import coop.polypoly.core.CoreAlreadyBootstrappedException
 import coop.polypoly.polypod.core.UpdateNotification
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
-import java.lang.Exception
 
 @ExperimentalUnsignedTypes
 class MainActivity : AppCompatActivity() {
@@ -52,15 +51,13 @@ class MainActivity : AppCompatActivity() {
             notification.handleFirstRun()
         }
 
-        val shouldShowBiometricsPrompt =
-            Authentication.shouldShowBiometricsPrompt(this)
+        val shouldShowAuthOnboarding = firstRun ||
+            Authentication.shouldShowAuthOnboarding(this)
 
-        if (!onboardingShown && (firstRun || shouldShowBiometricsPrompt)) {
+        if (!onboardingShown && shouldShowAuthOnboarding) {
             onboardingShown = true
             startActivity(Intent(this, OnboardingActivity::class.java))
-        } else if (onboardingShown && shouldShowBiometricsPrompt) {
-            startActivity(Intent(this, OnboardingActivity::class.java))
-        } else if (Authentication.canAuthenticate(this)) {
+        }  else if (Authentication.canAuthenticate(this)) {
             startActivity(Intent(this, PodUnlockActivity::class.java))
         }
 
