@@ -12,7 +12,7 @@ class Preferences {
         private const val lastNotificationStateKey = "lastNotificationState"
         private const val biometricCheckKey = "biometricCheck"
         private const val biometricEnabledKey = "biometricEnabledKey"
-        private const val userConfiguredAuth = "userConfiguredAuth "
+        private const val userConfiguredAuth = "userConfiguredAuth"
         private const val fsKey = ""
 
         private fun getPrefs(context: Context) =
@@ -50,6 +50,9 @@ class Preferences {
             edit.commit()
         }
 
+        fun isSecurityDoNotAskAgainEnabled(context: Context): Boolean =
+            getPrefs(context).getBoolean(biometricCheckKey, false)
+
         fun hasUserConfiguredAuthentication(context: Context): Boolean =
             getPrefs(context).getBoolean(userConfiguredAuth, false)
 
@@ -61,9 +64,6 @@ class Preferences {
             edit.putBoolean(userConfiguredAuth, shouldCheck)
             edit.commit()
         }
-
-        fun isSecurityDoNotAskAgainEnabled(context: Context): Boolean =
-            getPrefs(context).getBoolean(biometricCheckKey, false)
 
         fun setBiometricEnabled(context: Context, shouldCheck: Boolean) {
             val edit = getPrefs(context).edit()
