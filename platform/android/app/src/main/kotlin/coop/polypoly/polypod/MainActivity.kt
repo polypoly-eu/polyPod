@@ -9,8 +9,8 @@ import coop.polypoly.core.CoreAlreadyBootstrappedException
 import coop.polypoly.polypod.core.UpdateNotification
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
-import java.lang.Exception
 
+@ExperimentalUnsignedTypes
 class MainActivity : AppCompatActivity() {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
@@ -32,10 +32,7 @@ class MainActivity : AppCompatActivity() {
                 return
             }
 
-            logger.error(
-                "Failed to boostrap core",
-                ex.message
-            )
+            logger.error("Failed to boostrap core", ex.message)
             throw ex
         }
 
@@ -55,23 +52,14 @@ class MainActivity : AppCompatActivity() {
             notification.handleFirstRun()
         }
 
-        val shouldShowOnboarding =
-            firstRun || Authentication.shouldShowBiometricsPrompt(this)
-        if (!onboardingShown && shouldShowOnboarding) {
+        val shouldShowAuthOnboarding = firstRun ||
+            Authentication.shouldShowAuthOnboarding(this)
+
+        if (!onboardingShown && shouldShowAuthOnboarding) {
             onboardingShown = true
-            startActivity(
-                Intent(
-                    this,
-                    OnboardingActivity::class.java
-                )
-            )
-        } else if (Authentication.shouldAuthenticate(this)) {
-            startActivity(
-                Intent(
-                    this,
-                    PodUnlockActivity::class.java
-                )
-            )
+            startActivity(Intent(this, OnboardingActivity::class.java))
+        } else if (Authentication.canAuthenticate(this)) {
+            startActivity(Intent(this, PodUnlockActivity::class.java))
         }
 
         if (notification.showInApp) {
