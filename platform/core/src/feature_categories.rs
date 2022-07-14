@@ -11,6 +11,7 @@ trait FileSystem {
 struct DecodedFeatureCategory {
     id: FeatureCategoryId,
     name: String,
+    visible: Option<bool>,
     features: Vec<String>
 }
 
@@ -55,8 +56,16 @@ fn load_feature_categories(fs: impl FileSystem, features_dir: &str) -> Result<Ve
         )?;
     categories
         .into_iter()
+        .filter(should_display_feature_category)
         .map(map_feature_category)
         .collect()
+}
+
+fn should_display_feature_category(category: &DecodedFeatureCategory) -> bool {
+    match category.visible {
+        Some(visible) => visible,
+        None => false
+    }
 }
 
 fn map_feature_category(raw_category: DecodedFeatureCategory) -> Result<FeatureCategory, CoreFailure> {
@@ -165,5 +174,50 @@ mod tests {
             },
         ];
         assert_eq!(loaded_categories, expexcted_categories)
+    }
+
+    #[test]
+    fn invisible_feature_categories_are_filtered_out() {
+
+        let features_dir = "features";
+        let json = r#"
+        [
+            {
+                "id":"yourData",
+                "name":"Your Data",
+                "visible": true,
+                "features":[]
+            },
+            {
+                "id":"dataKnowHow",
+                "name":"Data Know-How",
+                "visible": false,
+                "features":[]
+            },
+            {
+                "id":"tools",
+                "name":"Tools",
+                "features":[]
+            }
+        ]
+        "#.as_bytes().to_vec();
+        let fs = MockFileSystem {
+            contents_of_file_requests_stub: HashMap::from([
+                (features_dir.to_string() + "/categories.json", Ok(json))
+            ]),
+        };
+        let loaded_categories = load_feature_categories(fs, features_dir).unwrap();
+        let loaded_category_ids: Vec<_> = loaded_categories
+            .into_iter()
+            .map(|category| category.id)
+            .collect();
+
+        let expected_ids = vec![
+            FeatureCategoryId::YourData,
+            FeatureCategoryId::Tools,
+        ];
+        assert_eq!(loaded_category_ids, expected_ids)
+
+
     }
 }
