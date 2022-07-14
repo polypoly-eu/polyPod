@@ -9,6 +9,7 @@ pub enum FailureCode {
     FailedToCreateCString,
     FailedToExtractJavaString,
     FailedToConvertJavaString,
+    FailedToParseFeatureCategoriesJSON
 }
 
 impl FailureCode {
@@ -71,6 +72,13 @@ impl CoreFailure {
     pub fn failed_to_convert_java_string(message: String) -> Self {
         CoreFailure {
             code: FailureCode::FailedToConvertJavaString.value(),
+            message,
+        }
+    }
+    
+    pub fn failed_to_decode_feature_categories_json(message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToParseFeatureCategoriesJSON.value(),
             message,
         }
     }
