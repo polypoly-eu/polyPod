@@ -106,7 +106,20 @@ struct ContentView: View {
                 )
             )
         }
-        return featureListState() 
+        if Authentication.shared.shouldShowOnboardingScreen() {
+            return ViewState(
+                AnyView(
+                    OnboardingView(
+                        securityOnly: true,
+                        closeAction: {
+                            state = featureListState()
+                        }
+                    )
+                )
+            )
+        }
+
+        return featureListState()
     }
 
     private func featureListState() -> ViewState {
