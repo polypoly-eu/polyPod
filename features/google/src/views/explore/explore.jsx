@@ -7,6 +7,7 @@ import {
     RoutingWrapper,
     ClickableCard,
     Banner,
+    PopUpBanner,
 } from "@polypoly-eu/poly-look";
 
 import i18n from "!silly-i18n";
@@ -15,14 +16,6 @@ import "./explore.css";
 import { ministories } from "../ministories/ministories.js";
 import { useHistory } from "react-router-dom";
 import { GoogleContext } from "../../context/google-context.jsx";
-
-const PopUpMessage = ({ children, reportResultAnswer }) => {
-    return (
-        <div className="pop-up-container">
-            <div className={"pop-up" + reportResultAnswer}>{children}</div>
-        </div>
-    );
-};
 
 const ExploreView = () => {
     const { account } = useContext(PolyImportContext);
@@ -37,10 +30,8 @@ const ExploreView = () => {
 
     const renderReportResult = () =>
         reportIsSent !== null && (
-            <PopUpMessage
-                reportResultAnswer={
-                    reportIsSent ? " successfully" : " unsuccessfully"
-                }
+            <PopUpBanner
+                reportType={reportIsSent ? "successful" : "unsuccessful"}
             >
                 {reportIsSent ? (
                     <>
@@ -61,7 +52,7 @@ const ExploreView = () => {
                         />
                     </>
                 )}
-            </PopUpMessage>
+            </PopUpBanner>
         );
 
     const renderFileAnalyses = () => {
