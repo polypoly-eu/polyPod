@@ -1,0 +1,19 @@
+.pop-up-banner {
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calc(var(--gdu) * 4);
+    margin: calc(var(--gdu) * -6) calc(var(--gdu) * -4) calc(var(--gdu) * 6) calc(var(--gdu) * -4);
+    box-sizing: border-box;
+}
+
+.unsuccessful {
+    background-color: var(--color-red-200);
+    color: var(--color-red-900);
+}
+
+.successful {
+    background-color: var(--color-green-200);
+    color: var(--color-green-800);
+}

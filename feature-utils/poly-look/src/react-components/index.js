@@ -6,6 +6,7 @@ import ScrollLabel from "./scrollLabel.jsx";
 import { Tab, Tabs } from "./tabs.jsx";
 import { BlockLegend, LineLegend, CircleLegend } from "./legends.jsx";
 import ErrorPopup from "./popUps/errorPopup/errorPopup.jsx";
+import PopUpBanner from "./popUps/popUpBanner.jsx";
 import { Card, ClickableCard } from "./cards";
 import List from "./list.jsx";
 import { PolyButton, IconButton } from "./buttons";
@@ -35,6 +36,7 @@ export {
   LineLegend,
   CircleLegend,
   ErrorPopup,
+  PopUpBanner,
   Card,
   ClickableCard,
   List,
