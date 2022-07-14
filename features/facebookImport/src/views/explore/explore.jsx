@@ -10,6 +10,7 @@ import {
     ClickableCard,
     Screen,
     Banner,
+    PopUpBanner,
 } from "@polypoly-eu/poly-look";
 
 import i18n from "!silly-i18n";
@@ -34,10 +35,8 @@ const ExploreView = () => {
 
     const renderReportResult = () =>
         reportResult !== null && (
-            <PopUpMessage
-                reportResultAnswer={
-                    reportResult ? " successfully" : " unsuccessfully"
-                }
+            <PopUpBanner
+                reportType={reportResult ? "successful" : "unsuccessful"}
             >
                 {reportResult ? (
                     <>
@@ -58,7 +57,7 @@ const ExploreView = () => {
                         />
                     </>
                 )}
-            </PopUpMessage>
+            </PopUpBanner>
         );
 
     const renderFileAnalyses = () => {
