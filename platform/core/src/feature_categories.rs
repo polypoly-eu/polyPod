@@ -9,11 +9,13 @@ trait FileSystem {
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct DecodedFeatureCategory {
-    id: String,
+    id: FeatureCategoryId,
     name: String,
     features: Vec<String>
 }
 
+#[derive(PartialEq, Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
 enum FeatureCategoryId {
     YourData,
     DataKnowHow,
@@ -21,6 +23,7 @@ enum FeatureCategoryId {
     Developer
 }
 
+#[derive(PartialEq, Debug)]
 struct Feature {
     pub path: String,
     pub id: String,
@@ -36,6 +39,7 @@ struct Feature {
     pub tile_text_color: String,
 }
 
+#[derive(PartialEq, Debug)]
 struct FeatureCategory {
     id: FeatureCategoryId,
     name: String,
@@ -45,8 +49,22 @@ struct FeatureCategory {
 fn load_feature_categories(fs: impl FileSystem, features_dir: &str) -> Result<Vec<FeatureCategory>, CoreFailure> {
     let categories_json_path = format!("{}/{}", features_dir, "categories.json");
     let categories_bytes = fs.read_contents_of_file(categories_json_path.as_str())?;
-    let categories: Vec<DecodedFeatureCategory> = serde_json::from_slice(&categories_bytes).map_err(|err| CoreFailure::failed_to_decode_feature_categories_json(err.to_string()))?;
-    Ok(Vec::new())
+    let categories: Vec<DecodedFeatureCategory> = serde_json::from_slice(&categories_bytes)
+        .map_err(
+            |err| CoreFailure::failed_to_decode_feature_categories_json(err.to_string())
+        )?;
+    categories
+        .into_iter()
+        .map(map_feature_category)
+        .collect()
+}
+
+fn map_feature_category(raw_category: DecodedFeatureCategory) -> Result<FeatureCategory, CoreFailure> {
+    Ok(FeatureCategory {
+        id: raw_category.id,
+        name: raw_category.name,
+        features: Vec::new()
+    })
 }
 
 #[cfg(test)]
@@ -100,7 +118,7 @@ mod tests {
                 "features":[]
             },
             {
-                "id":"knowHow",
+                "id":"dataKnowHow",
                 "name":"Data Know-How",
                 "features":[]
             },
@@ -112,20 +130,40 @@ mod tests {
             {
                 "id":"developer",
                 "name":"Developer",
-                "visible":false,
                 "features":[]
             }
         ]
-        "#;
+        "#.as_bytes().to_vec();
         let fs = MockFileSystem {
             contents_of_file_requests_stub: HashMap::from([
-                (features_dir.to_string() + "/categories.json", Ok(json.as_bytes().to_vec()))
+                (features_dir.to_string() + "/categories.json", Ok(json))
             ]),
         };
-        let result = load_feature_categories(fs, features_dir);
-        // check if result[0].id == FeatureCategoryId.YourData
-        // check if result[1].id == FeatureCategoryId.DataKnowHow
-        // etc...
-        assert_eq!(result.is_err(), true)
+        let loaded_categories = load_feature_categories(fs, features_dir).unwrap();
+
+        let expexcted_categories = vec![
+            FeatureCategory {
+                id: FeatureCategoryId::YourData,
+                name: "Your Data".to_string(),
+                features: Vec::new(),
+            },
+
+            FeatureCategory {
+                id: FeatureCategoryId::DataKnowHow,
+                name: "Data Know-How".to_string(),
+                features: Vec::new(),
+            },
+            FeatureCategory {
+                id: FeatureCategoryId::Tools,
+                name: "Tools".to_string(),
+                features: Vec::new(),
+            },
+            FeatureCategory {
+                id: FeatureCategoryId::Developer,
+                name: "Developer".to_string(),
+                features: Vec::new(),
+            },
+        ];
+        assert_eq!(loaded_categories, expexcted_categories)
     }
 }
