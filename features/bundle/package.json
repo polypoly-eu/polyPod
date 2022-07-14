@@ -106,12 +106,12 @@
       "features": [
         "google",
         "facebookImport",
-        "companyDataCleanerPreview",
-        "cooperativeMembershipPreview",
-        "polypolyMembershipPreview",
-        "gdprImporterPreview",
         "amazonPreview",
-        "NetflixImportPreview"
+        "NetflixImportPreview",
+        "gdprImporterPreview",
+        "companyDataCleanerPreview",
+        "polypolyMembershipPreview",
+        "cooperativeMembershipPreview"
       ]
     },
     {
