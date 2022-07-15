@@ -9,7 +9,7 @@ pub enum FailureCode {
     FailedToCreateCString,
     FailedToExtractJavaString,
     FailedToConvertJavaString,
-    FailedToParseFeatureCategoriesJSON
+    FailedToParseFeatureCategoriesJSON,
 }
 
 impl FailureCode {
