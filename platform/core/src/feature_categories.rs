@@ -6,6 +6,68 @@ trait FileSystem {
     fn read_contents_of_file(&self, path: &str) -> Result<Vec<u8>, CoreFailure>;
 }
 
+#[derive(PartialEq, Debug, Clone)]
+pub struct FeatureCategory {
+    pub id: FeatureCategoryId,
+    pub name: String,
+    pub features: Vec<Feature>
+}
+
+#[derive(PartialEq, Debug, Deserialize, Clone)]
+#[serde(rename_all = "camelCase")]
+pub enum FeatureCategoryId {
+    YourData,
+    DataKnowHow,
+    Tools,
+    Developer
+}
+
+#[derive(PartialEq, Debug, Clone)]
+pub struct Feature {
+    pub path: String,
+    pub id: String,
+    pub name: String,
+    pub author: Option<String>,
+    pub version: Option<String>,
+    pub description: Option<String>,
+    pub thumbnail: Option<String>,
+    pub thumbnail_color: String,
+    pub primary_color: String,
+    pub links: HashMap<String, String>,
+    pub border_color: String,
+    pub tile_text_color: String,
+}
+
+
+pub fn load_feature_categories(fs: impl FileSystem, features_dir: &str, language_code: &str) -> Result<Vec<FeatureCategory>, CoreFailure> {
+    load_raw_categories(&fs, features_dir)?
+        .into_iter()
+        .filter(should_display_feature_category)
+        .map(|raw_category|
+            map_feature_category(&fs, features_dir, language_code, raw_category)
+        )
+        .collect()
+}
+
+fn categories_json_path_format(features_dir: &str) -> String {
+    format!("{}/{}", features_dir, "categories.json")
+}
+
+fn feature_manifest_json_path_format(features_dir: &str, feature_id: &str) -> String {
+    format!("{}/{}/{}", features_dir, feature_id, "manifest.json")
+}
+
+fn feature_thumnail_path_format(features_dir: &str, feature_id: &str, thumbnail: &str) -> String {
+    format!("{}/{}/{}", features_dir, feature_id, thumbnail)
+}
+
+fn feature_path_format(features_dir: &str, feature_id: &str) -> String {
+    format!("{}/{}", features_dir, feature_id)
+}
+
+const DEFAULT_PRIMARY_COLOR: &str = "#ffffff";
+const DEFAULT_TILE_TEXT_COLOR: &str = "#000000";
+
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct DecodedFeatureCategory {
@@ -61,52 +123,16 @@ struct DecodedFeatureManifestTranslation {
     links: Option<HashMap<String, String>>,
 }
 
-#[derive(PartialEq, Debug, Deserialize, Clone)]
-#[serde(rename_all = "camelCase")]
-enum FeatureCategoryId {
-    YourData,
-    DataKnowHow,
-    Tools,
-    Developer
-}
-
-#[derive(PartialEq, Debug, Clone)]
-struct Feature {
-    pub path: String,
-    pub id: String,
-    pub name: String,
-    pub author: Option<String>,
-    pub version: Option<String>,
-    pub description: Option<String>,
-    pub thumbnail: Option<String>,
-    pub thumbnail_color: String,
-    pub primary_color: String,
-    pub links: HashMap<String, String>,
-    pub border_color: String,
-    pub tile_text_color: String,
-}
-
-#[derive(PartialEq, Debug, Clone)]
-struct FeatureCategory {
-    id: FeatureCategoryId,
-    name: String,
-    features: Vec<Feature>
-}
-
-fn load_feature_categories(fs: impl FileSystem, features_dir: &str) -> Result<Vec<FeatureCategory>, CoreFailure> {
-    let categories_json_path = format!("{}/{}", features_dir, "categories.json");
+fn load_raw_categories(
+    fs: &impl FileSystem,
+    features_dir: &str
+) -> Result<Vec<DecodedFeatureCategory>, CoreFailure> {
+    let categories_json_path = categories_json_path_format(features_dir);
     let categories_bytes = fs.read_contents_of_file(categories_json_path.as_str())?;
-    let categories: Vec<DecodedFeatureCategory> = serde_json::from_slice(&categories_bytes)
+    serde_json::from_slice(&categories_bytes)
         .map_err(
             |err| CoreFailure::failed_to_decode_feature_categories_json(err.to_string())
-        )?;
-    categories
-        .into_iter()
-        .filter(should_display_feature_category)
-        .map( |raw_category|
-            map_feature_category(&fs, features_dir, raw_category)
         )
-        .collect()
 }
 
 fn should_display_feature_category(category: &DecodedFeatureCategory) -> bool {
@@ -118,25 +144,46 @@ fn should_display_feature_category(category: &DecodedFeatureCategory) -> bool {
 
 fn map_feature_category(
     fs: &impl FileSystem, 
-    features_dir: &str,
+    features_dir: &str, 
+    language_code: &str,
     raw_category: DecodedFeatureCategory
 ) -> Result<FeatureCategory, CoreFailure> {
     let features: Vec<_> = raw_category
         .features
         .into_iter()
         .map(|feature_id|
-             load_feature_manifest(fs, features_dir, &feature_id)
+             load_feature(fs, features_dir, language_code, &feature_id)
         )
-        .collect::<Result<Vec<DecodedFeatureManifest>, CoreFailure>>()?;
+        .collect::<Result<Vec<Feature>, CoreFailure>>()?;
     Ok(FeatureCategory {
         id: raw_category.id,
         name: raw_category.name,
-        features: Vec::new()
+        features: features,
     })
 }
 
-fn load_feature_manifest(fs: &impl FileSystem, features_dir: &str, id: &str) -> Result<DecodedFeatureManifest, CoreFailure> {
-    let manifest_json_path = format!("{}/{}/{}", features_dir, id, "manifest.json");
+fn load_feature(
+    fs: &impl FileSystem, 
+    features_dir: &str, 
+    language_code: &str,
+    feature_id: &str,
+) -> Result<Feature, CoreFailure> {
+     load_feature_manifest(
+         fs, 
+         features_dir,
+         feature_id
+     )
+     .and_then(|manifest|
+          map_feature(features_dir, &feature_id, language_code, manifest)
+     )
+}
+
+fn load_feature_manifest(
+    fs: &impl FileSystem,
+    features_dir: &str,
+    id: &str
+) -> Result<DecodedFeatureManifest, CoreFailure> {
+    let manifest_json_path = feature_manifest_json_path_format(features_dir, id);
     let manifest_bytes = fs.read_contents_of_file(manifest_json_path .as_str())?;
 
     serde_json::from_slice(&manifest_bytes)
@@ -145,20 +192,37 @@ fn load_feature_manifest(fs: &impl FileSystem, features_dir: &str, id: &str) -> 
         )
 }
 
-fn map_feature(features_dir: &str, id: &str, feature_manifest: DecodedFeatureManifest) -> Result<Feature, CoreFailure> {
+fn map_feature(
+    features_dir: &str,
+    id: &str,
+    language_code: &str,
+    feature_manifest: DecodedFeatureManifest
+) -> Result<Feature, CoreFailure> {
+    let translation = feature_manifest
+        .translations
+        .as_ref()
+        .and_then(|unwrapped| unwrapped.get(language_code));
+
+    let mut links = feature_manifest.links.unwrap_or_default();
+    if let Some(translated_links) = translation.and_then(|manifest| manifest.links.clone()) {
+        links.extend(translated_links.into_iter());
+    }
+    let primary_color = feature_manifest.primary_color.unwrap_or(DEFAULT_PRIMARY_COLOR.to_string());
+    let thumbnail_color = feature_manifest.thumbnail_color.unwrap_or(primary_color.clone());
+    let thumbnail = feature_manifest.thumbnail.map(|thumbnail| feature_thumnail_path_format(features_dir, id, &thumbnail));
     Ok(Feature {
-        path: format!("{}/{}", features_dir, id),
+        path: feature_path_format(features_dir, id),
         id: id.to_string(),
-        name: feature_manifest.name.unwrap(),
+        name: translation.and_then(|tr| tr.name.clone()).or(feature_manifest.name).unwrap_or(id.to_string()),
         author: feature_manifest.author,
         version: feature_manifest.version,
-        description: feature_manifest.description,
-        thumbnail: feature_manifest.thumbnail,
-        thumbnail_color: feature_manifest.thumbnail_color.unwrap(),
-        primary_color: feature_manifest.primary_color.unwrap(),
-        links: feature_manifest.links.unwrap(),
-        border_color: feature_manifest.border_color.unwrap(),
-        tile_text_color: feature_manifest.tile_text_color.unwrap(),
+        description: translation.and_then(|tr| tr.description.clone()).or(feature_manifest.description),
+        thumbnail: thumbnail,
+        thumbnail_color: thumbnail_color.clone(),
+        primary_color: primary_color,
+        links,
+        border_color: feature_manifest.border_color.unwrap_or(thumbnail_color),
+        tile_text_color: feature_manifest.tile_text_color.unwrap_or(DEFAULT_TILE_TEXT_COLOR.to_string()),
     })
 }
 
@@ -186,7 +250,7 @@ mod tests {
                 (features_dir.to_string() + "/categories.json", Err(CoreFailure::null_c_string_pointer()))
             ]),
         };
-        let result = load_feature_categories(fs, features_dir);
+        let result = load_feature_categories(fs, features_dir, "en");
         assert_eq!(result.is_err(), true)
     }
 
@@ -198,7 +262,7 @@ mod tests {
                 (features_dir.to_string() + "/categories.json", Ok("invalid".as_bytes().to_vec()))
             ]),
         };
-        let result = load_feature_categories(fs, features_dir);
+        let result = load_feature_categories(fs, features_dir, "en");
         assert_eq!(result.is_err(), true)
     }
 
@@ -234,7 +298,7 @@ mod tests {
                 (features_dir.to_string() + "/categories.json", Ok(json))
             ]),
         };
-        let loaded_categories = load_feature_categories(fs, features_dir).unwrap();
+        let loaded_categories = load_feature_categories(fs, features_dir, "en").unwrap();
 
         let expexcted_categories = vec![
             FeatureCategory {
@@ -291,7 +355,7 @@ mod tests {
                 (features_dir.to_string() + "/categories.json", Ok(json))
             ]),
         };
-        let loaded_categories = load_feature_categories(fs, features_dir).unwrap();
+        let loaded_categories = load_feature_categories(fs, features_dir, "en").unwrap();
         let loaded_category_ids: Vec<_> = loaded_categories
             .into_iter()
             .map(|category| category.id)
@@ -322,7 +386,7 @@ mod tests {
                 (features_dir.to_string() + "/facebookImporter/manifest.json", Err(any_error()))
             ]),
         };
-        let loaded_categories = load_feature_categories(fs, features_dir);
+        let loaded_categories = load_feature_categories(fs, features_dir, "en");
         assert_eq!(loaded_categories.is_err(), true)
     }
 
@@ -344,8 +408,18 @@ mod tests {
                 (features_dir.to_string() + "/facebookImporter/manifest.json", Ok("invalid".as_bytes().to_vec()))
             ]),
         };
-        let loaded_categories = load_feature_categories(fs, features_dir);
+        let loaded_categories = load_feature_categories(fs, features_dir, "en");
         assert_eq!(loaded_categories.is_err(), true)
+    }
+
+    fn load_categories(features_dir: &str, fs_stub: H) -> Result<Vec<FeatureCategory>, CoreFailure> {
+        let fs = MockFileSystem {
+            contents_of_file_requests_stub: HashMap::from([
+                (features_dir.to_string() + "/categories.json", Ok(json)),
+                (features_dir.to_string() + "/facebookImporter/manifest.json", Ok("invalid".as_bytes().to_vec()))
+            ]),
+        };
+        load_feature_categories(fs, features_dir, "en")
     }
 
     #[test]
@@ -370,23 +444,23 @@ mod tests {
                 (features_dir.to_string() + "/categories.json", Ok(json)),
                 (
                     features_dir.to_string() + "/facebookImporter/manifest.json",
-                    Ok("invalid".as_bytes().to_vec())
+                    Ok("{}".as_bytes().to_vec())
                 ),
                 (
                     features_dir.to_string() + "/lexicon/manifest.json",
-                    Ok("invalid".as_bytes().to_vec())
+                    Ok("{}".as_bytes().to_vec())
                 ),
                 (
                     features_dir.to_string() + "/googleImporter/manifest.json",
-                    Ok("invalid".as_bytes().to_vec())
+                    Ok("{}".as_bytes().to_vec())
                 ),
                 (
                     features_dir.to_string() + "/demo/manifest.json",
-                    Ok("invalid".as_bytes().to_vec())
+                    Ok("{}".as_bytes().to_vec())
                 ),
             ]),
         };
-        let loaded_categories = load_feature_categories(fs, features_dir).unwrap();
+        let loaded_categories = load_feature_categories(fs, features_dir, "en").unwrap();
         let your_data_category_features: Vec<_> = loaded_categories[0].clone().features.into_iter().map(|feature| feature.id).collect(); 
         let tools_category_features: Vec<_> = loaded_categories[1].clone().features.into_iter().map(|feature| feature.id).collect(); 
         assert_eq!(your_data_category_features, vec!["facebookImporter", "lexicon"]);
@@ -398,14 +472,24 @@ mod tests {
         let feature_manifest = DecodedFeatureManifest::default();
         let features_dir = "features";
         let feature_id = "feature_x";
-        let feature = map_feature(features_dir, feature_id, feature_manifest.clone()).unwrap();
+        let feature = map_feature(features_dir, feature_id, "en", feature_manifest.clone()).unwrap();
         assert_eq!(feature.path, format!("{}/{}", features_dir, feature_id));
         assert_eq!(feature.id, feature_id.to_string());
         assert_eq!(feature.name, feature_manifest.name.unwrap());
         assert_eq!(feature.author, feature_manifest.author);
         assert_eq!(feature.version, feature_manifest.version);
         assert_eq!(feature.description, feature_manifest.description);
-        assert_eq!(feature.thumbnail, feature_manifest.thumbnail);
+        assert_eq!(
+            feature.thumbnail,
+            Some(
+                format!(
+                    "{}/{}/{}",
+                    features_dir,
+                    feature_id,
+                    feature_manifest.thumbnail.unwrap()
+                )
+            )
+        );
         assert_eq!(feature.thumbnail_color, feature_manifest.thumbnail_color.unwrap());
         assert_eq!(feature.primary_color, feature_manifest.primary_color.unwrap());
         assert_eq!(feature.links, feature_manifest.links.unwrap());
@@ -413,6 +497,69 @@ mod tests {
         assert_eq!(feature.tile_text_color, feature_manifest.tile_text_color.unwrap());
     }
 
+    #[test]
+    fn map_feature_with_translations() {
+        let language_code = "de";
+        let translation = DecodedFeatureManifestTranslation {
+            name: Some("tr_name".to_string()),
+            description: Some("tr_description".to_string()),
+            links: Some(HashMap::from([
+                     ("some_link".to_string(), "https://some_link_translated.com".to_string()),
+            ])),
+        };
+        let feature_manifest = DecodedFeatureManifest {
+            links: Some(HashMap::from([
+                 ("some_link".to_string(), "https://some_link.com".to_string()),
+                 ("different_link".to_string(), "https://different_link.com".to_string()),
+            ])),
+            translations: Some(HashMap::from([
+                (language_code.to_string(), translation.clone()),
+            ])),
+            ..Default::default()
+        };
+        let features_dir = "features";
+        let feature_id = "feature_x";
+        let feature = map_feature(features_dir, feature_id, language_code, feature_manifest.clone()).unwrap();
+        assert_eq!(feature.path, format!("{}/{}", features_dir, feature_id));
+        assert_eq!(feature.id, feature_id.to_string());
+        assert_eq!(feature.name, translation.name.unwrap());
+        assert_eq!(feature.author, feature_manifest.author);
+        assert_eq!(feature.version, feature_manifest.version);
+        assert_eq!(feature.description, translation.description);
+        assert_eq!(feature.thumbnail, Some(format!("{}/{}/{}", features_dir, feature_id, feature_manifest.thumbnail.unwrap())));
+        assert_eq!(feature.thumbnail_color, feature_manifest.thumbnail_color.unwrap());
+        assert_eq!(feature.primary_color, feature_manifest.primary_color.unwrap());
+        assert_eq!(
+            feature.links, 
+            HashMap::from([
+                 ("some_link".to_string(), "https://some_link_translated.com".to_string()),
+                 ("different_link".to_string(), "https://different_link.com".to_string()),
+            ])
+        );
+        assert_eq!(feature.border_color, feature_manifest.border_color.unwrap());
+        assert_eq!(feature.tile_text_color, feature_manifest.tile_text_color.unwrap());
+    }
+
+    #[test]
+    fn map_feature_sets_correct_defaults() {
+
+        let feature_manifest = DecodedFeatureManifest {
+            name: None,
+            thumbnail_color: None,
+            primary_color: None,
+            border_color: None,
+            tile_text_color: None,
+            ..Default::default()
+        };
+        let features_dir = "features";
+        let feature_id = "feature_x";
+        let feature = map_feature(features_dir, feature_id, "en", feature_manifest.clone()).unwrap();
+        assert_eq!(feature.name, feature_id.to_string());
+        assert_eq!(feature.primary_color, "#ffffff".to_string());
+        assert_eq!(feature.thumbnail_color, feature.primary_color);
+        assert_eq!(feature.border_color, feature.thumbnail_color);
+        assert_eq!(feature.tile_text_color, "#000000".to_string());
+    }
     fn any_error() -> CoreFailure {
         CoreFailure::failed_to_parse_feature_manifest("any".to_string())
     }
