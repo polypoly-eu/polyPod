@@ -52,7 +52,7 @@ export default [
         output: [
             {
                 file: "dist/bootstrap.js",
-                format: "iife",
+                format: "cjs",
             },
         ],
         context: "null",
@@ -65,6 +65,6 @@ export default [
                 transforms: ["typescript"],
             }),
         ],
-        external: ["dist/port-authority/middleware"],
+        external: ["dist/middleware.js"],
     },
 ];
