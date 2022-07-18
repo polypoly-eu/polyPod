@@ -10,7 +10,7 @@
     "url": "git+https://github.com/polypoly-eu/polyPod.git"
   },
   "scripts": {
-    "build": "npx webpack --config webpack.config.js",
+    "build": "webpack",
     "build-downstream": "../../build.js --start @polypoly-eu/podjs",
     "build-rdf": "npx webpack --config webpack.config.js",
     "lint": "eslint src --ext .ts",
