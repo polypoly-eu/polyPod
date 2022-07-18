@@ -9,7 +9,7 @@ export default {
     output: {
         filename: "pod.js",
         path: path.resolve(__dirname, "dist"),
-        publicPath: path.resolve("/"),
+        publicPath: "dist/",
     },
     module: {
         rules: [
