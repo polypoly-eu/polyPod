@@ -1,4 +1,5 @@
 import MessagePack
+import Foundation
 
 extension MessagePackValue {
     func getDictionary() throws -> [MessagePackValue: MessagePackValue]? {
@@ -29,11 +30,8 @@ extension MessagePackValue {
         guard self != nil else {
             return nil
         }
-        if let string = self.stringValue {
-            return string
-        } else {
-            throw DecodingError.invalidValue(info: "Expected string, received \(self)")
-        }
+        let string: String = try getString()
+        return string
     }
     
     func getString() throws -> String {
@@ -85,42 +83,19 @@ func mapFeature(_ value: MessagePackValue) throws -> Feature {
             let value: String = try keyValue.value.getString()
             partialResult[key] = value
     }
-    return Feature(
-        path: try dictionary.get("path").getString(),
-        id: try dictionary.get("id").getString(),
-        name: try dictionary.get("name").getString(),
-        author: try dictionary["author"]?.getString(),
-        version: try dictionary["version"]?.getString(),
-        description: try dictionary["description"]?.getString(),
-        thumbnail: try dictionary["thumbnail"]?.getString(),
-        thumbnailColor: try dictionary.get("thumbnailColor").getString(),
-        primaryColor: try dictionary.get("primaryColor").getString(),
-        borderColor: try dictionary.get("borderColor").getString(),
-        tileTextColor: try dictionary.get("tileTextColor").getString(),
-        links: links
+    return try Feature(
+        path: URL(fileURLWithPath: dictionary.get("path").getString()),
+        id: dictionary.get("id").getString(),
+        name: dictionary.get("name").getString(),
+        author: dictionary["author"]?.getString(),
+        description: dictionary["description"]?.getString(),
+        primaryColor: dictionary.get("primaryColor").getString(),
+        thumbnailColor: dictionary.get("thumbnailColor").getString(),
+        thumbnail: dictionary["thumbnail"]?.getString().map(URL.init(fileURLWithPath:)),
+        borderColor: dictionary.get("borderColor").getString(),
+        tileTextColor: dictionary.get("tileTextColor").getString(),
+        links: links ?? [:]
     )
-}
-
-func mapFeatureManifest(_ value: MessagePackValue) throws -> FeatureManifest {
-    guard let dictionary = try value.getDictionary() else {
-        throw DecodingError.emptyFeatureManifest
-    }
-    let links = try dictionary["links"]?
-        .getDictionary()?.reduce(into: [String: String]()) { partialResult, keyValue in
-            let key: String = try keyValue.key.getString()
-            let value: String = try keyValue.value.getString()
-            partialResult[key] = value
-    }
-    return FeatureManifest(name: try dictionary["name"]?.getString(),
-                           author: try dictionary["author"]?.getString(),
-                           version: try dictionary["version"]?.getString(),
-                           description: try dictionary["description"]?.getString(),
-                           thumbnail: try dictionary["thumbnail"]?.getString(),
-                           thumbnailColor: try dictionary["thumbnailColor"]?.getString(),
-                           primaryColor: try dictionary["primaryColor"]?.getString(),
-                           borderColor: try dictionary["borderColor"]?.getString(),
-                           tileTextColor: try dictionary["tileTextColor"]?.getString(),
-                           links: links)
 }
 
 extension Dictionary {

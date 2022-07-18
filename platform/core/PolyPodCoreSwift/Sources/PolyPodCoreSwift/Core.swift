@@ -23,19 +23,9 @@ public final class Core {
        
         return handleCoreResponse(core_bootstrap(self.languageCode), { _ in })
     }
-    
-    /// Parse the FeatureManifest from the given json
-    /// - Parameter json: Raw JSON to parse the FeatureManifest from
-    /// - Returns: A FeatureManifest if parsing succeded, nil otherwise
-    public func parseFeatureManifest(json: String) -> Result<FeatureManifest, Error> {
-        handleCoreResponse(parse_feature_manifest_from_json(json), mapFeatureManifest)
-    }
-    
-    /// Parse the FeatureManifest from the given json
-    /// - Parameter json: Raw JSON to parse the FeatureManifest from
-    /// - Returns: A FeatureManifest if parsing succeded, nil otherwise
-    public func load_feature_categories(features_dir: String) -> Result<[FeatureCategory], Error> {
-        let features_dir = NSString(string: languageCode).utf8String!
+    /// Loads the feature categories from the give features directory
+    public func loadFeatureCategories(featuresDirectory: String) -> Result<[FeatureCategory], Error> {
+       let features_dir = NSString(string: featuresDirectory).utf8String!
         return handleCoreResponse(load_feature_categories(features_dir), mapFeatureCategories)
     }
 
@@ -54,11 +44,11 @@ public final class Core {
             )
             let data = Data(buffer: buffer)
             
-            let responseObject = try MessagePack.unpackFirst(data).getDictionary()
+            let responseObject: [MessagePackValue: MessagePackValue] = try MessagePack.unpackFirst(data).getDictionary()
             
-            if let responseObject = responseObject?["Ok"] {
+            if let responseObject = responseObject["Ok"] {
                 return try map(responseObject)
-            } else if let failure = try responseObject?["Err"]?.getDictionary() {
+            } else if let failure = try responseObject["Err"]?.getDictionary() {
                 throw try mapError(failure)
             }
             

@@ -14,12 +14,13 @@ pub struct FeatureCategory {
 #[serde(rename_all = "camelCase")]
 pub enum FeatureCategoryId {
     YourData,
-    DataKnowHow,
+    KnowHow,
     Tools,
     Developer
 }
 
 #[derive(PartialEq, Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Feature {
     pub path: String,
     pub id: String,
@@ -284,7 +285,7 @@ mod tests {
                 "features":[]
             },
             {
-                "id":"dataKnowHow",
+                "id":"knowHow",
                 "name":"Data Know-How",
                 "features":[]
             },
@@ -315,7 +316,7 @@ mod tests {
             },
 
             FeatureCategory {
-                id: FeatureCategoryId::DataKnowHow,
+                id: FeatureCategoryId::KnowHow,
                 name: "Data Know-How".to_string(),
                 features: Vec::new(),
             },
@@ -345,7 +346,7 @@ mod tests {
                 "features":[]
             },
             {
-                "id":"dataKnowHow",
+                "id":"knowHow",
                 "name":"Data Know-How",
                 "visible": false,
                 "features":[]

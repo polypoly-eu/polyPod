@@ -143,7 +143,6 @@
 		E98BA80026D3CA2F0039E41E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98BA7FE26D3CA2F0039E41E /* Network.swift */; };
 		E98D506A26F3741100C3FCF4 /* handleErrors.js in Resources */ = {isa = PBXBuildFile; fileRef = E98D506926F3741100C3FCF4 /* handleErrors.js */; };
 		E996EBD22756BBE900EAC9F7 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E996EBD12756BBE900EAC9F7 /* Log.swift */; };
-		E9B2203C263314AD005E8881 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B2F2625866800216B70 /* Feature.swift */; };
 		E9B2203D263314AD005E8881 /* FeatureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4689D2420D5F600E51B6D /* FeatureStorage.swift */; };
 		E9B22041263314DC005E8881 /* JSONSerializationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF46892241FBA7200E51B6D /* JSONSerializationExtensions.swift */; };
 		E9B22042263314DC005E8881 /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */; };
@@ -152,7 +151,6 @@
 		E9B22045263314DC005E8881 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D325526307CE100A5A180 /* ColorExtensions.swift */; };
 		E9BE2906264BBAA0003EC8AE /* MessagePack in Frameworks */ = {isa = PBXBuildFile; productRef = E9BE2905264BBAA0003EC8AE /* MessagePack */; };
 		E9BE2909264BBD67003EC8AE /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = E9BE2908264BBD67003EC8AE /* Zip */; };
-		E9CF1B302625866800216B70 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B2F2625866800216B70 /* Feature.swift */; };
 		E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B632625EA3200216B70 /* FeatureView.swift */; };
 		E9CF1B722627304800216B70 /* FeatureContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B712627304800216B70 /* FeatureContainerView.swift */; };
 		E9CFFA4A269F4CCE00F7BE65 /* FeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CFFA49269F4CCE00F7BE65 /* FeatureTests.swift */; };
@@ -283,7 +281,6 @@
 		E98BA7FE26D3CA2F0039E41E /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		E98D506926F3741100C3FCF4 /* handleErrors.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = handleErrors.js; sourceTree = "<group>"; };
 		E996EBD12756BBE900EAC9F7 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
-		E9CF1B2F2625866800216B70 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		E9CF1B632625EA3200216B70 /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
 		E9CF1B712627304800216B70 /* FeatureContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureContainerView.swift; sourceTree = "<group>"; };
 		E9CFFA49269F4CCE00F7BE65 /* FeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureTests.swift; sourceTree = "<group>"; };
@@ -610,7 +607,6 @@
 		E97D3274263151BC00A5A180 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				E9CF1B2F2625866800216B70 /* Feature.swift */,
 				1AF4689D2420D5F600E51B6D /* FeatureStorage.swift */,
 			);
 			path = Features;
@@ -899,7 +895,6 @@
 				E9B22044263314DC005E8881 /* UIColorExtensions.swift in Sources */,
 				E9B22045263314DC005E8881 /* ColorExtensions.swift in Sources */,
 				901C058C278F34A800BC8364 /* CoreDataStack.swift in Sources */,
-				E9B2203C263314AD005E8881 /* Feature.swift in Sources */,
 				E9B2203D263314AD005E8881 /* FeatureStorage.swift in Sources */,
 				1ABADBD224EBC5D500369791 /* FetchRequestInit.swift in Sources */,
 				E98BA80026D3CA2F0039E41E /* Network.swift in Sources */,
@@ -971,7 +966,6 @@
 				3B5487E227CD0FF700480CB5 /* Endpoint.swift in Sources */,
 				E9F370E1262EEB2C006254C1 /* ParagraphView.swift in Sources */,
 				1A4C21F424A63E4C006CC1FD /* Variable+CoreDataClass.swift in Sources */,
-				E9CF1B302625866800216B70 /* Feature.swift in Sources */,
 				1A4C21F024A63E4C006CC1FD /* BlankNode+CoreDataClass.swift in Sources */,
 				90E4088227D78E4E006AD362 /* DataProtection.swift in Sources */,
 				E97D32A82631BF7700A5A180 /* HTMLView.swift in Sources */,
