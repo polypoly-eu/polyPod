@@ -193,7 +193,7 @@ export class RemoteClientPod implements Pod {
 
     constructor(
         private clientPort: RequestPort<BackendRequest, BackendResponse>,
-        public readonly dataFactory: DataFactory = new DataFactory(false);
+        public readonly dataFactory: DataFactory = new DataFactory(false)
     ) {
         this.rpcClient = backendClient<PodBackend>(client(clientPort));
     }
