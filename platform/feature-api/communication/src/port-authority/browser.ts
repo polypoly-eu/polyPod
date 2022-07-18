@@ -78,7 +78,7 @@ export function iframeInnerPort(secret: string): Promise<Port<any, any>> {
     return new Promise((resolve, reject) => {
         const handler: Handler<MessageEvent> = (event) => {
             if (event.source !== window.parent || event.data !== secret) return;
-
+            console.log("Event", event);
             if (event.ports.length === 1) {
                 event.ports[0].start();
                 const rawPort = fromBrowserMessagePort(event.ports[0]);
@@ -90,6 +90,7 @@ export function iframeInnerPort(secret: string): Promise<Port<any, any>> {
                     )
                 );
             } else {
+                console.log("Some issue with events");
                 reject(`Malformed message`);
             }
 
