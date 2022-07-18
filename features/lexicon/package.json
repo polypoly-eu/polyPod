@@ -20,7 +20,7 @@
     "prismic-dom": "^2.2.5",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-svelte": "^7.1.0",
-    "svelte": "^3.0.0"
+    "svelte": "^3.49.0"
   },
   "dependencies": {
     "@polypoly-eu/silly-i18n": "file:../../feature-utils/silly-i18n",
