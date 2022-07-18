@@ -144,7 +144,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
         val regex = """(Chrome)\/(?<major>\d+)[\d\.]""".toRegex()
         val matchResult = regex.find(userAgentString)
-        val (_chrome, chromeVersion) = matchResult!!.destructured
+        val (_, chromeVersion) = matchResult!!.destructured
 
         if (chromeVersion.toInt() <= 53) {
             val message = context.getString(
@@ -288,7 +288,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                     FeatureStorage.activeFeatureId + ": " +
                     consoleMessage.messageLevel() + ": " +
                     consoleMessage.message()
-                when (consoleMessage?.messageLevel()) {
+                when (consoleMessage.messageLevel()) {
                     ConsoleMessage.MessageLevel.ERROR,
                     ConsoleMessage.MessageLevel.WARNING ->
                         logger.warn(message)

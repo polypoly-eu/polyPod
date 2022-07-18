@@ -1,11 +1,11 @@
 package coop.polypoly.polypod.features
 
-import FeatureManifest
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.util.DisplayMetrics
+import coop.polypoly.core.FeatureManifest
 import coop.polypoly.polypod.PDFBitmap
 import java.util.zip.ZipFile
 
@@ -55,16 +55,9 @@ class Feature(
             }
         }
 
-    fun findUrl(target: String): String? {
-        return manifest?.let {
-            for (index in 0..it.linksLength) {
-                it.links(index)?.let { link ->
-                    if (link.name == target || link.url == target) {
-                        return link.url
-                    }
-                }
-            }
-            return null
-        }
+    fun findUrl(target: String): String? = when (target) {
+        in manifest?.links?.keys ?: listOf() -> manifest?.links?.get(target)
+        in manifest?.links?.values ?: listOf() -> target
+        else -> null
     }
 }
