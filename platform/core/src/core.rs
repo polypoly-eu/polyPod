@@ -1,6 +1,8 @@
 use crate::{
     core_failure::CoreFailure,
     feature_manifest_parsing::{FeatureManifest, JSONStr},
+    feature_categories,
+    io::file_system::DefaultFileSystem,
 };
 use once_cell::sync::OnceCell;
 
@@ -34,4 +36,13 @@ pub fn bootstrap(language_code: String) -> Result<(), CoreFailure> {
 pub fn parse_feature_manifest(json: &JSONStr) -> Result<FeatureManifest, CoreFailure> {
     let core = get_instance()?;
     FeatureManifest::parse(json, &core.language_code)
+}
+
+pub fn load_feature_categories(features_dir: &str) -> Result<Vec<feature_categories::FeatureCategory>, CoreFailure>{
+    let core = get_instance()?;
+    feature_categories::load_feature_categories(
+        DefaultFileSystem {},
+        features_dir, 
+        &core.language_code
+    )
 }

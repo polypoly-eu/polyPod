@@ -1,19 +1,16 @@
 use crate::core_failure::CoreFailure;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+use crate::io::file_system::FileSystem;
 
-trait FileSystem {
-    fn read_contents_of_file(&self, path: &str) -> Result<Vec<u8>, CoreFailure>;
-}
-
-#[derive(PartialEq, Debug, Clone)]
+#[derive(PartialEq, Debug, Clone, Serialize)]
 pub struct FeatureCategory {
     pub id: FeatureCategoryId,
     pub name: String,
     pub features: Vec<Feature>
 }
 
-#[derive(PartialEq, Debug, Deserialize, Clone)]
+#[derive(PartialEq, Debug, Deserialize, Serialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub enum FeatureCategoryId {
     YourData,
@@ -22,7 +19,7 @@ pub enum FeatureCategoryId {
     Developer
 }
 
-#[derive(PartialEq, Debug, Clone)]
+#[derive(PartialEq, Debug, Clone, Serialize)]
 pub struct Feature {
     pub path: String,
     pub id: String,
@@ -410,16 +407,6 @@ mod tests {
         };
         let loaded_categories = load_feature_categories(fs, features_dir, "en");
         assert_eq!(loaded_categories.is_err(), true)
-    }
-
-    fn load_categories(features_dir: &str, fs_stub: H) -> Result<Vec<FeatureCategory>, CoreFailure> {
-        let fs = MockFileSystem {
-            contents_of_file_requests_stub: HashMap::from([
-                (features_dir.to_string() + "/categories.json", Ok(json)),
-                (features_dir.to_string() + "/facebookImporter/manifest.json", Ok("invalid".as_bytes().to_vec()))
-            ]),
-        };
-        load_feature_categories(fs, features_dir, "en")
     }
 
     #[test]

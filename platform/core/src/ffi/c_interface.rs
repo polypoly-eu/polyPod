@@ -3,7 +3,7 @@ use crate::ffi::serialize;
 use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
-use crate::core::{bootstrap, parse_feature_manifest};
+use crate::core;
 use std::os::raw::c_char;
 
 /// # Safety
@@ -20,7 +20,7 @@ pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> CByteBu
     create_byte_buffer(serialize(
         cstring_to_str(&language_code)
             .map(String::from)
-            .and_then(bootstrap),
+            .and_then(core::bootstrap),
     ))
 }
 
@@ -33,7 +33,20 @@ pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> CByteBu
 #[no_mangle]
 pub unsafe extern "C" fn parse_feature_manifest_from_json(json: *const c_char) -> CByteBuffer {
     create_byte_buffer(serialize(
-        cstring_to_str(&json).and_then(parse_feature_manifest),
+        cstring_to_str(&json).and_then(core::parse_feature_manifest),
+    ))
+}
+
+/// # Safety
+/// This function can be unsafe if the json pointer is null or the string is in wrong format.
+///
+/// Parse the given feature maniest json.
+/// - json: Feature manifest json string to be parsed.
+/// Returns a flatbuffer byte array with feature_manifest_response.
+#[no_mangle]
+pub unsafe extern "C" fn load_feature_categories(features_dir: *const c_char) -> CByteBuffer {
+    create_byte_buffer(serialize(
+        cstring_to_str(&features_dir).and_then(core::load_feature_categories),
     ))
 }
 

@@ -10,6 +10,7 @@ pub enum FailureCode {
     FailedToExtractJavaString,
     FailedToConvertJavaString,
     FailedToParseFeatureCategoriesJSON,
+    FailedToReadFile,
 }
 
 impl FailureCode {
@@ -80,6 +81,13 @@ impl CoreFailure {
         CoreFailure {
             code: FailureCode::FailedToParseFeatureCategoriesJSON.value(),
             message,
+        }
+    }
+
+    pub fn failed_to_read_contents_of_file(path: String, message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToParseFeatureCategoriesJSON.value(),
+            message: format!("Failed to read file from path '{}', error: '{}'", path, message),
         }
     }
 }
