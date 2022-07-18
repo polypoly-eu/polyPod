@@ -1,0 +1,10 @@
+version: "Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)"
+options: "8f91f5c080ee05dfa082fbbdc06113a444cc9a4781f02ab54a8aa8fd08142ceb"
+build_start_time: [1658133224, 436642169]
+build_end_time: [1658133226, 704663991]
+inputs:
+  "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/Core.swift": !private [1658133153, 334166049]
+  "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/CoreFailure.swift": !private [1658132943, 741848230]
+  "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/Feature.swift": !private [1658131621, 561684131]
+  "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/FeatureManifest.swift": !private [1657811709, 942229270]
+  "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/MessagePack+Decoding.swift": !private [1658132998, 881726264]

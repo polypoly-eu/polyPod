@@ -1,0 +1,4 @@
+module PolyPodCoreSwift {
+    header "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/PolyPodCoreSwift-Swift.h"
+    requires objc
+}

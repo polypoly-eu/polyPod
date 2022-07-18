@@ -35,7 +35,6 @@ pub struct Feature {
     pub tile_text_color: String,
 }
 
-
 pub fn load_feature_categories(fs: impl FileSystem, features_dir: &str, language_code: &str) -> Result<Vec<FeatureCategory>, CoreFailure> {
     load_raw_categories(&fs, features_dir)?
         .into_iter()
@@ -85,7 +84,7 @@ struct DecodedFeatureManifest {
     thumbnail_color: Option<String>,
     primary_color: Option<String>,
     links: Option<HashMap<String, String>>,
-    translations: Option<HashMap<String, DecodedFeatureManifestTranslation>>,
+    translations: Option<HashMap<String, DecodedFeatureManifest>>,
     border_color: Option<String>,
     tile_text_color: Option<String>
 }
@@ -110,14 +109,6 @@ impl Default for DecodedFeatureManifest {
             tile_text_color: Some("tile_text_color".to_string()),
         }
     }
-}
-
-#[derive(Deserialize, Clone)]
-#[serde(rename_all = "camelCase")]
-struct DecodedFeatureManifestTranslation {
-    name: Option<String>,
-    description: Option<String>,
-    links: Option<HashMap<String, String>>,
 }
 
 fn load_raw_categories(
@@ -204,22 +195,41 @@ fn map_feature(
     if let Some(translated_links) = translation.and_then(|manifest| manifest.links.clone()) {
         links.extend(translated_links.into_iter());
     }
-    let primary_color = feature_manifest.primary_color.unwrap_or(DEFAULT_PRIMARY_COLOR.to_string());
-    let thumbnail_color = feature_manifest.thumbnail_color.unwrap_or(primary_color.clone());
-    let thumbnail = feature_manifest.thumbnail.map(|thumbnail| feature_thumnail_path_format(features_dir, id, &thumbnail));
+    let primary_color = translation
+        .and_then(|tr| tr.primary_color.clone())
+        .or(feature_manifest.primary_color)
+        .unwrap_or(DEFAULT_PRIMARY_COLOR.to_string());
+    let thumbnail_color = translation
+        .and_then(|tr| tr.thumbnail_color.clone())
+        .or(feature_manifest.thumbnail_color)
+        .unwrap_or(primary_color.clone());
+    let thumbnail = translation
+        .and_then(|tr| tr.thumbnail.clone())
+        .or(feature_manifest.thumbnail)
+        .map(|thumbnail| feature_thumnail_path_format(features_dir, id, &thumbnail));
     Ok(Feature {
         path: feature_path_format(features_dir, id),
         id: id.to_string(),
         name: translation.and_then(|tr| tr.name.clone()).or(feature_manifest.name).unwrap_or(id.to_string()),
-        author: feature_manifest.author,
-        version: feature_manifest.version,
+        author: translation
+            .and_then(|tr| tr.author.clone())
+            .or(feature_manifest.author),
+        version: translation
+            .and_then(|tr| tr.version.clone())
+            .or(feature_manifest.version),
         description: translation.and_then(|tr| tr.description.clone()).or(feature_manifest.description),
         thumbnail: thumbnail,
         thumbnail_color: thumbnail_color.clone(),
         primary_color: primary_color,
         links,
-        border_color: feature_manifest.border_color.unwrap_or(thumbnail_color),
-        tile_text_color: feature_manifest.tile_text_color.unwrap_or(DEFAULT_TILE_TEXT_COLOR.to_string()),
+        border_color: translation
+            .and_then(|tr| tr.border_color.clone())
+            .or(feature_manifest.border_color)
+            .unwrap_or(thumbnail_color),
+        tile_text_color: translation
+            .and_then(|tr| tr.tile_text_color.clone())
+            .or(feature_manifest.tile_text_color)
+            .unwrap_or(DEFAULT_TILE_TEXT_COLOR.to_string()),
     })
 }
 
@@ -487,12 +497,21 @@ mod tests {
     #[test]
     fn map_feature_with_translations() {
         let language_code = "de";
-        let translation = DecodedFeatureManifestTranslation {
-            name: Some("tr_name".to_string()),
-            description: Some("tr_description".to_string()),
-            links: Some(HashMap::from([
-                     ("some_link".to_string(), "https://some_link_translated.com".to_string()),
-            ])),
+        let links = HashMap::from([
+            ("some_link".to_string(), "https://example.de/1".to_string()),
+        ]);
+        let translation = DecodedFeatureManifest {
+            name: Some("testManifest_de".to_string()),
+            author: Some("testAuthor".to_string()),
+            version: Some("0.1.2".to_string()),
+            description: Some("testDescription_de".to_string()),
+            thumbnail: Some("assets/thumbnail.png".to_string()),
+            thumbnail_color: Some("#FFFFFF".to_string()),
+            primary_color: Some("#000000".to_string()),
+            border_color: Some("#000001".to_string()),
+            tile_text_color: Some("#000002".to_string()),
+            links: Some(links),
+            translations: None,
         };
         let feature_manifest = DecodedFeatureManifest {
             links: Some(HashMap::from([
@@ -510,21 +529,21 @@ mod tests {
         assert_eq!(feature.path, format!("{}/{}", features_dir, feature_id));
         assert_eq!(feature.id, feature_id.to_string());
         assert_eq!(feature.name, translation.name.unwrap());
-        assert_eq!(feature.author, feature_manifest.author);
-        assert_eq!(feature.version, feature_manifest.version);
+        assert_eq!(feature.author, translation.author);
+        assert_eq!(feature.version, translation.version);
         assert_eq!(feature.description, translation.description);
-        assert_eq!(feature.thumbnail, Some(format!("{}/{}/{}", features_dir, feature_id, feature_manifest.thumbnail.unwrap())));
-        assert_eq!(feature.thumbnail_color, feature_manifest.thumbnail_color.unwrap());
-        assert_eq!(feature.primary_color, feature_manifest.primary_color.unwrap());
+        assert_eq!(feature.thumbnail, Some(format!("{}/{}/{}", features_dir, feature_id, translation.thumbnail.unwrap())));
+        assert_eq!(feature.thumbnail_color, translation.thumbnail_color.unwrap());
+        assert_eq!(feature.primary_color, translation.primary_color.unwrap());
         assert_eq!(
             feature.links, 
             HashMap::from([
-                 ("some_link".to_string(), "https://some_link_translated.com".to_string()),
+                 ("some_link".to_string(), "https://example.de/1".to_string()),
                  ("different_link".to_string(), "https://different_link.com".to_string()),
             ])
         );
-        assert_eq!(feature.border_color, feature_manifest.border_color.unwrap());
-        assert_eq!(feature.tile_text_color, feature_manifest.tile_text_color.unwrap());
+        assert_eq!(feature.border_color, translation.border_color.unwrap());
+        assert_eq!(feature.tile_text_color, translation.tile_text_color.unwrap());
     }
 
     #[test]
@@ -547,6 +566,7 @@ mod tests {
         assert_eq!(feature.border_color, feature.thumbnail_color);
         assert_eq!(feature.tile_text_color, "#000000".to_string());
     }
+
     fn any_error() -> CoreFailure {
         CoreFailure::failed_to_parse_feature_manifest("any".to_string())
     }

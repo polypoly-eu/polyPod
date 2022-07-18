@@ -1,0 +1,19 @@
+version: "Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)"
+options: "8f91f5c080ee05dfa082fbbdc06113a444cc9a4781f02ab54a8aa8fd08142ceb"
+build_start_time: [1658133182, 569277048]
+build_end_time: [1658133185, 980124950]
+inputs:
+  ? "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/ConvenienceInitializers.swift"
+  : [1658133181, 957097291]
+  ? "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/ConvenienceProperties.swift"
+  : [1658133181, 957196712]
+  ? "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/LiteralConvertibles.swift"
+  : [1658133181, 957302331]
+  ? "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/MessagePack.swift"
+  : [1658133181, 957380294]
+  ? "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/Pack.swift"
+  : [1658133181, 957487821]
+  ? "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/Subdata.swift"
+  : [1658133181, 957558155]
+  ? "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/Unpack.swift"
+  : [1658133181, 957665920]

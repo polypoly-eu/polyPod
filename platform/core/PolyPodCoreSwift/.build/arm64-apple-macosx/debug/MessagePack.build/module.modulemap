@@ -1,0 +1,4 @@
+module MessagePack {
+    header "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/MessagePack-Swift.h"
+    requires objc
+}

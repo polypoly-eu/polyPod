@@ -31,6 +31,14 @@ public final class Core {
         handleCoreResponse(parse_feature_manifest_from_json(json), mapFeatureManifest)
     }
     
+    /// Parse the FeatureManifest from the given json
+    /// - Parameter json: Raw JSON to parse the FeatureManifest from
+    /// - Returns: A FeatureManifest if parsing succeded, nil otherwise
+    public func load_feature_categories(features_dir: String) -> Result<[FeatureCategory], Error> {
+        let features_dir = NSString(string: languageCode).utf8String!
+        return handleCoreResponse(load_feature_categories(features_dir), mapFeatureCategories)
+    }
+
     func handleCoreResponse<T>(
         _ byte_response: CByteBuffer,
         _ map: (MessagePackValue) throws -> T

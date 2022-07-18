@@ -1,0 +1,4803 @@
+{
+  "kind": "Root",
+  "name": "TopLevel",
+  "printedName": "TopLevel",
+  "children": [
+    {
+      "kind": "Import",
+      "name": "Foundation",
+      "printedName": "Foundation",
+      "declKind": "Import",
+      "moduleName": "MessagePack"
+    },
+    {
+      "kind": "Import",
+      "name": "Foundation",
+      "printedName": "Foundation",
+      "declKind": "Import",
+      "moduleName": "MessagePack"
+    },
+    {
+      "kind": "Import",
+      "name": "Foundation",
+      "printedName": "Foundation",
+      "declKind": "Import",
+      "moduleName": "MessagePack"
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "MessagePackValue",
+      "printedName": "MessagePackValue",
+      "children": [
+        {
+          "kind": "Var",
+          "name": "nil",
+          "printedName": "nil",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(MessagePack.MessagePackValue.Type) -> MessagePack.MessagePackValue",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackValue",
+                  "printedName": "MessagePack.MessagePackValue",
+                  "usr": "s:11MessagePack0aB5ValueO"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "MessagePack.MessagePackValue.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:11MessagePack0aB5ValueO3nilyA2CmF",
+          "mangledName": "$s11MessagePack0aB5ValueO3nilyA2CmF",
+          "moduleName": "MessagePack",
+          "fixedbinaryorder": 0
+        },
+        {
+          "kind": "Var",
+          "name": "bool",
+          "printedName": "bool",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(MessagePack.MessagePackValue.Type) -> (Swift.Bool) -> MessagePack.MessagePackValue",
+              "children": [
+                {
+                  "kind": "TypeFunc",
+                  "name": "Function",
+                  "printedName": "(Swift.Bool) -> MessagePack.MessagePackValue",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    },
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Bool",
+                      "printedName": "Swift.Bool",
+                      "usr": "s:Sb"
+                    }
+                  ]
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "MessagePack.MessagePackValue.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:11MessagePack0aB5ValueO4boolyACSbcACmF",
+          "mangledName": "$s11MessagePack0aB5ValueO4boolyACSbcACmF",
+          "moduleName": "MessagePack",
+          "fixedbinaryorder": 1
+        },
+        {
+          "kind": "Var",
+          "name": "int",
+          "printedName": "int",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(MessagePack.MessagePackValue.Type) -> (Swift.Int64) -> MessagePack.MessagePackValue",
+              "children": [
+                {
+                  "kind": "TypeFunc",
+                  "name": "Function",
+                  "printedName": "(Swift.Int64) -> MessagePack.MessagePackValue",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    },
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Int64",
+                      "printedName": "Swift.Int64",
+                      "usr": "s:s5Int64V"
+                    }
+                  ]
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "MessagePack.MessagePackValue.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:11MessagePack0aB5ValueO3intyACs5Int64VcACmF",
+          "mangledName": "$s11MessagePack0aB5ValueO3intyACs5Int64VcACmF",
+          "moduleName": "MessagePack",
+          "fixedbinaryorder": 2
+        },
+        {
+          "kind": "Var",
+          "name": "uint",
+          "printedName": "uint",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(MessagePack.MessagePackValue.Type) -> (Swift.UInt64) -> MessagePack.MessagePackValue",
+              "children": [
+                {
+                  "kind": "TypeFunc",
+                  "name": "Function",
+                  "printedName": "(Swift.UInt64) -> MessagePack.MessagePackValue",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    },
+                    {
+                      "kind": "TypeNominal",
+                      "name": "UInt64",
+                      "printedName": "Swift.UInt64",
+                      "usr": "s:s6UInt64V"
+                    }
+                  ]
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "MessagePack.MessagePackValue.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:11MessagePack0aB5ValueO4uintyACs6UInt64VcACmF",
+          "mangledName": "$s11MessagePack0aB5ValueO4uintyACs6UInt64VcACmF",
+          "moduleName": "MessagePack",
+          "fixedbinaryorder": 3
+        },
+        {
+          "kind": "Var",
+          "name": "float",
+          "printedName": "float",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(MessagePack.MessagePackValue.Type) -> (Swift.Float) -> MessagePack.MessagePackValue",
+              "children": [
+                {
+                  "kind": "TypeFunc",
+                  "name": "Function",
+                  "printedName": "(Swift.Float) -> MessagePack.MessagePackValue",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    },
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Float",
+                      "printedName": "Swift.Float",
+                      "usr": "s:Sf"
+                    }
+                  ]
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "MessagePack.MessagePackValue.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:11MessagePack0aB5ValueO5floatyACSfcACmF",
+          "mangledName": "$s11MessagePack0aB5ValueO5floatyACSfcACmF",
+          "moduleName": "MessagePack",
+          "fixedbinaryorder": 4
+        },
+        {
+          "kind": "Var",
+          "name": "double",
+          "printedName": "double",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(MessagePack.MessagePackValue.Type) -> (Swift.Double) -> MessagePack.MessagePackValue",
+              "children": [
+                {
+                  "kind": "TypeFunc",
+                  "name": "Function",
+                  "printedName": "(Swift.Double) -> MessagePack.MessagePackValue",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    },
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Double",
+                      "printedName": "Swift.Double",
+                      "usr": "s:Sd"
+                    }
+                  ]
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "MessagePack.MessagePackValue.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:11MessagePack0aB5ValueO6doubleyACSdcACmF",
+          "mangledName": "$s11MessagePack0aB5ValueO6doubleyACSdcACmF",
+          "moduleName": "MessagePack",
+          "fixedbinaryorder": 5
+        },
+        {
+          "kind": "Var",
+          "name": "string",
+          "printedName": "string",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(MessagePack.MessagePackValue.Type) -> (Swift.String) -> MessagePack.MessagePackValue",
+              "children": [
+                {
+                  "kind": "TypeFunc",
+                  "name": "Function",
+                  "printedName": "(Swift.String) -> MessagePack.MessagePackValue",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    },
+                    {
+                      "kind": "TypeNominal",
+                      "name": "String",
+                      "printedName": "Swift.String",
+                      "usr": "s:SS"
+                    }
+                  ]
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "MessagePack.MessagePackValue.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:11MessagePack0aB5ValueO6stringyACSScACmF",
+          "mangledName": "$s11MessagePack0aB5ValueO6stringyACSScACmF",
+          "moduleName": "MessagePack",
+          "fixedbinaryorder": 6
+        },
+        {
+          "kind": "Var",
+          "name": "binary",
+          "printedName": "binary",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(MessagePack.MessagePackValue.Type) -> (Foundation.Data) -> MessagePack.MessagePackValue",
+              "children": [
+                {
+                  "kind": "TypeFunc",
+                  "name": "Function",
+                  "printedName": "(Foundation.Data) -> MessagePack.MessagePackValue",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    },
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Data",
+                      "printedName": "Foundation.Data",
+                      "usr": "s:10Foundation4DataV"
+                    }
+                  ]
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "MessagePack.MessagePackValue.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:11MessagePack0aB5ValueO6binaryyAC10Foundation4DataVcACmF",
+          "mangledName": "$s11MessagePack0aB5ValueO6binaryyAC10Foundation4DataVcACmF",
+          "moduleName": "MessagePack",
+          "fixedbinaryorder": 7
+        },
+        {
+          "kind": "Var",
+          "name": "array",
+          "printedName": "array",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(MessagePack.MessagePackValue.Type) -> ([MessagePack.MessagePackValue]) -> MessagePack.MessagePackValue",
+              "children": [
+                {
+                  "kind": "TypeFunc",
+                  "name": "Function",
+                  "printedName": "([MessagePack.MessagePackValue]) -> MessagePack.MessagePackValue",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    },
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Array",
+                      "printedName": "[MessagePack.MessagePackValue]",
+                      "children": [
+                        {
+                          "kind": "TypeNominal",
+                          "name": "MessagePackValue",
+                          "printedName": "MessagePack.MessagePackValue",
+                          "usr": "s:11MessagePack0aB5ValueO"
+                        }
+                      ],
+                      "usr": "s:Sa"
+                    }
+                  ]
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "MessagePack.MessagePackValue.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:11MessagePack0aB5ValueO5arrayyACSayACGcACmF",
+          "mangledName": "$s11MessagePack0aB5ValueO5arrayyACSayACGcACmF",
+          "moduleName": "MessagePack",
+          "fixedbinaryorder": 8
+        },
+        {
+          "kind": "Var",
+          "name": "map",
+          "printedName": "map",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(MessagePack.MessagePackValue.Type) -> ([MessagePack.MessagePackValue : MessagePack.MessagePackValue]) -> MessagePack.MessagePackValue",
+              "children": [
+                {
+                  "kind": "TypeFunc",
+                  "name": "Function",
+                  "printedName": "([MessagePack.MessagePackValue : MessagePack.MessagePackValue]) -> MessagePack.MessagePackValue",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    },
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Dictionary",
+                      "printedName": "[MessagePack.MessagePackValue : MessagePack.MessagePackValue]",
+                      "children": [
+                        {
+                          "kind": "TypeNominal",
+                          "name": "MessagePackValue",
+                          "printedName": "MessagePack.MessagePackValue",
+                          "usr": "s:11MessagePack0aB5ValueO"
+                        },
+                        {
+                          "kind": "TypeNominal",
+                          "name": "MessagePackValue",
+                          "printedName": "MessagePack.MessagePackValue",
+                          "usr": "s:11MessagePack0aB5ValueO"
+                        }
+                      ],
+                      "usr": "s:SD"
+                    }
+                  ]
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "MessagePack.MessagePackValue.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:11MessagePack0aB5ValueO3mapyACSDyA2CGcACmF",
+          "mangledName": "$s11MessagePack0aB5ValueO3mapyACSDyA2CGcACmF",
+          "moduleName": "MessagePack",
+          "fixedbinaryorder": 9
+        },
+        {
+          "kind": "Var",
+          "name": "extended",
+          "printedName": "extended",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(MessagePack.MessagePackValue.Type) -> (Swift.Int8, Foundation.Data) -> MessagePack.MessagePackValue",
+              "children": [
+                {
+                  "kind": "TypeFunc",
+                  "name": "Function",
+                  "printedName": "(Swift.Int8, Foundation.Data) -> MessagePack.MessagePackValue",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    },
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Tuple",
+                      "printedName": "(Swift.Int8, Foundation.Data)",
+                      "children": [
+                        {
+                          "kind": "TypeNominal",
+                          "name": "Int8",
+                          "printedName": "Swift.Int8",
+                          "usr": "s:s4Int8V"
+                        },
+                        {
+                          "kind": "TypeNominal",
+                          "name": "Data",
+                          "printedName": "Foundation.Data",
+                          "usr": "s:10Foundation4DataV"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "MessagePack.MessagePackValue.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:11MessagePack0aB5ValueO8extendedyACs4Int8V_10Foundation4DataVtcACmF",
+          "mangledName": "$s11MessagePack0aB5ValueO8extendedyACs4Int8V_10Foundation4DataVtcACmF",
+          "moduleName": "MessagePack",
+          "fixedbinaryorder": 10
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueOACycfc",
+          "mangledName": "$s11MessagePack0aB5ValueOACycfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueOyACSbcfc",
+          "mangledName": "$s11MessagePack0aB5ValueOyACSbcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "GenericTypeParam",
+              "printedName": "τ_0_0"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueOyACxcSZRzlufc",
+          "mangledName": "$s11MessagePack0aB5ValueOyACxcSZRzlufc",
+          "moduleName": "MessagePack",
+          "genericSig": "<τ_0_0 where τ_0_0 : Swift.SignedInteger>",
+          "sugared_genericSig": "<S where S : Swift.SignedInteger>",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "GenericTypeParam",
+              "printedName": "τ_0_0"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueOyACxcSURzlufc",
+          "mangledName": "$s11MessagePack0aB5ValueOyACxcSURzlufc",
+          "moduleName": "MessagePack",
+          "genericSig": "<τ_0_0 where τ_0_0 : Swift.UnsignedInteger>",
+          "sugared_genericSig": "<U where U : Swift.UnsignedInteger>",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Float",
+              "printedName": "Swift.Float",
+              "usr": "s:Sf"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueOyACSfcfc",
+          "mangledName": "$s11MessagePack0aB5ValueOyACSfcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Double",
+              "printedName": "Swift.Double",
+              "usr": "s:Sd"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueOyACSdcfc",
+          "mangledName": "$s11MessagePack0aB5ValueOyACSdcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "String",
+              "printedName": "Swift.String",
+              "usr": "s:SS"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueOyACSScfc",
+          "mangledName": "$s11MessagePack0aB5ValueOyACSScfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Array",
+              "printedName": "[MessagePack.MessagePackValue]",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackValue",
+                  "printedName": "MessagePack.MessagePackValue",
+                  "usr": "s:11MessagePack0aB5ValueO"
+                }
+              ],
+              "usr": "s:Sa"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueOyACSayACGcfc",
+          "mangledName": "$s11MessagePack0aB5ValueOyACSayACGcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Dictionary",
+              "printedName": "[MessagePack.MessagePackValue : MessagePack.MessagePackValue]",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackValue",
+                  "printedName": "MessagePack.MessagePackValue",
+                  "usr": "s:11MessagePack0aB5ValueO"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackValue",
+                  "printedName": "MessagePack.MessagePackValue",
+                  "usr": "s:11MessagePack0aB5ValueO"
+                }
+              ],
+              "usr": "s:SD"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueOyACSDyA2CGcfc",
+          "mangledName": "$s11MessagePack0aB5ValueOyACSDyA2CGcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Data",
+              "printedName": "Foundation.Data",
+              "usr": "s:10Foundation4DataV"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueOyAC10Foundation4DataVcfc",
+          "mangledName": "$s11MessagePack0aB5ValueOyAC10Foundation4DataVcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(type:data:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Int8",
+              "printedName": "Swift.Int8",
+              "usr": "s:s4Int8V"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Data",
+              "printedName": "Foundation.Data",
+              "usr": "s:10Foundation4DataV"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueO4type4dataACs4Int8V_10Foundation4DataVtcfc",
+          "mangledName": "$s11MessagePack0aB5ValueO4type4dataACs4Int8V_10Foundation4DataVtcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Var",
+          "name": "count",
+          "printedName": "count",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.Int?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO5countSiSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO5countSiSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.Int?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Int",
+                      "printedName": "Swift.Int",
+                      "usr": "s:Si"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO5countSiSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO5countSiSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Subscript",
+          "name": "subscript",
+          "printedName": "subscript(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "MessagePack.MessagePackValue?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackValue",
+                  "printedName": "MessagePack.MessagePackValue",
+                  "usr": "s:11MessagePack0aB5ValueO"
+                }
+              ],
+              "usr": "s:Sq"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Subscript",
+          "usr": "s:11MessagePack0aB5ValueOyACSgSicip",
+          "mangledName": "$s11MessagePack0aB5ValueOyACSgSicip",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "MessagePack.MessagePackValue?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueOyACSgSicig",
+              "mangledName": "$s11MessagePack0aB5ValueOyACSgSicig",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Subscript",
+          "name": "subscript",
+          "printedName": "subscript(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "MessagePack.MessagePackValue?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackValue",
+                  "printedName": "MessagePack.MessagePackValue",
+                  "usr": "s:11MessagePack0aB5ValueO"
+                }
+              ],
+              "usr": "s:Sq"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            }
+          ],
+          "declKind": "Subscript",
+          "usr": "s:11MessagePack0aB5ValueOyACSgACcip",
+          "mangledName": "$s11MessagePack0aB5ValueOyACSgACcip",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "MessagePack.MessagePackValue?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackValue",
+                  "printedName": "MessagePack.MessagePackValue",
+                  "usr": "s:11MessagePack0aB5ValueO"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueOyACSgACcig",
+              "mangledName": "$s11MessagePack0aB5ValueOyACSgACcig",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "isNil",
+          "printedName": "isNil",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO5isNilSbvp",
+          "mangledName": "$s11MessagePack0aB5ValueO5isNilSbvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Bool",
+                  "printedName": "Swift.Bool",
+                  "usr": "s:Sb"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO5isNilSbvg",
+              "mangledName": "$s11MessagePack0aB5ValueO5isNilSbvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "integerValue",
+          "printedName": "integerValue",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.Int64?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int64",
+                  "printedName": "Swift.Int64",
+                  "usr": "s:s5Int64V"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO07integerC0s5Int64VSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO07integerC0s5Int64VSgvp",
+          "moduleName": "MessagePack",
+          "deprecated": true,
+          "declAttributes": [
+            "AccessControl",
+            "Available",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.Int64?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Int64",
+                      "printedName": "Swift.Int64",
+                      "usr": "s:s5Int64V"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO07integerC0s5Int64VSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO07integerC0s5Int64VSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "intValue",
+          "printedName": "intValue",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.Int?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO03intC0SiSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO03intC0SiSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.Int?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Int",
+                      "printedName": "Swift.Int",
+                      "usr": "s:Si"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO03intC0SiSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO03intC0SiSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "int8Value",
+          "printedName": "int8Value",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.Int8?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int8",
+                  "printedName": "Swift.Int8",
+                  "usr": "s:s4Int8V"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO04int8C0s4Int8VSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO04int8C0s4Int8VSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.Int8?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Int8",
+                      "printedName": "Swift.Int8",
+                      "usr": "s:s4Int8V"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO04int8C0s4Int8VSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO04int8C0s4Int8VSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "int16Value",
+          "printedName": "int16Value",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.Int16?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int16",
+                  "printedName": "Swift.Int16",
+                  "usr": "s:s5Int16V"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO05int16C0s5Int16VSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO05int16C0s5Int16VSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.Int16?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Int16",
+                      "printedName": "Swift.Int16",
+                      "usr": "s:s5Int16V"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO05int16C0s5Int16VSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO05int16C0s5Int16VSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "int32Value",
+          "printedName": "int32Value",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.Int32?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int32",
+                  "printedName": "Swift.Int32",
+                  "usr": "s:s5Int32V"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO05int32C0s5Int32VSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO05int32C0s5Int32VSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.Int32?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Int32",
+                      "printedName": "Swift.Int32",
+                      "usr": "s:s5Int32V"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO05int32C0s5Int32VSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO05int32C0s5Int32VSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "int64Value",
+          "printedName": "int64Value",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.Int64?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int64",
+                  "printedName": "Swift.Int64",
+                  "usr": "s:s5Int64V"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO05int64C0s5Int64VSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO05int64C0s5Int64VSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.Int64?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Int64",
+                      "printedName": "Swift.Int64",
+                      "usr": "s:s5Int64V"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO05int64C0s5Int64VSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO05int64C0s5Int64VSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "unsignedIntegerValue",
+          "printedName": "unsignedIntegerValue",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.UInt64?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UInt64",
+                  "printedName": "Swift.UInt64",
+                  "usr": "s:s6UInt64V"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO015unsignedIntegerC0s6UInt64VSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO015unsignedIntegerC0s6UInt64VSgvp",
+          "moduleName": "MessagePack",
+          "deprecated": true,
+          "declAttributes": [
+            "AccessControl",
+            "Available",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.UInt64?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "UInt64",
+                      "printedName": "Swift.UInt64",
+                      "usr": "s:s6UInt64V"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO015unsignedIntegerC0s6UInt64VSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO015unsignedIntegerC0s6UInt64VSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "uintValue",
+          "printedName": "uintValue",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.UInt?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UInt",
+                  "printedName": "Swift.UInt",
+                  "usr": "s:Su"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO04uintC0SuSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO04uintC0SuSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.UInt?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "UInt",
+                      "printedName": "Swift.UInt",
+                      "usr": "s:Su"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO04uintC0SuSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO04uintC0SuSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "uint8Value",
+          "printedName": "uint8Value",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.UInt8?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UInt8",
+                  "printedName": "Swift.UInt8",
+                  "usr": "s:s5UInt8V"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO05uint8C0s5UInt8VSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO05uint8C0s5UInt8VSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.UInt8?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "UInt8",
+                      "printedName": "Swift.UInt8",
+                      "usr": "s:s5UInt8V"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO05uint8C0s5UInt8VSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO05uint8C0s5UInt8VSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "uint16Value",
+          "printedName": "uint16Value",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.UInt16?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UInt16",
+                  "printedName": "Swift.UInt16",
+                  "usr": "s:s6UInt16V"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO06uint16C0s6UInt16VSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO06uint16C0s6UInt16VSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.UInt16?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "UInt16",
+                      "printedName": "Swift.UInt16",
+                      "usr": "s:s6UInt16V"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO06uint16C0s6UInt16VSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO06uint16C0s6UInt16VSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "uint32Value",
+          "printedName": "uint32Value",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.UInt32?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UInt32",
+                  "printedName": "Swift.UInt32",
+                  "usr": "s:s6UInt32V"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO06uint32C0s6UInt32VSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO06uint32C0s6UInt32VSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.UInt32?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "UInt32",
+                      "printedName": "Swift.UInt32",
+                      "usr": "s:s6UInt32V"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO06uint32C0s6UInt32VSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO06uint32C0s6UInt32VSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "uint64Value",
+          "printedName": "uint64Value",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.UInt64?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UInt64",
+                  "printedName": "Swift.UInt64",
+                  "usr": "s:s6UInt64V"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO06uint64C0s6UInt64VSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO06uint64C0s6UInt64VSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.UInt64?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "UInt64",
+                      "printedName": "Swift.UInt64",
+                      "usr": "s:s6UInt64V"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO06uint64C0s6UInt64VSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO06uint64C0s6UInt64VSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "arrayValue",
+          "printedName": "arrayValue",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "[MessagePack.MessagePackValue]?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Array",
+                  "printedName": "[MessagePack.MessagePackValue]",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ],
+                  "usr": "s:Sa"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO05arrayC0SayACGSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO05arrayC0SayACGSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "[MessagePack.MessagePackValue]?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Array",
+                      "printedName": "[MessagePack.MessagePackValue]",
+                      "children": [
+                        {
+                          "kind": "TypeNominal",
+                          "name": "MessagePackValue",
+                          "printedName": "MessagePack.MessagePackValue",
+                          "usr": "s:11MessagePack0aB5ValueO"
+                        }
+                      ],
+                      "usr": "s:Sa"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO05arrayC0SayACGSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO05arrayC0SayACGSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "boolValue",
+          "printedName": "boolValue",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.Bool?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Bool",
+                  "printedName": "Swift.Bool",
+                  "usr": "s:Sb"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO04boolC0SbSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO04boolC0SbSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.Bool?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Bool",
+                      "printedName": "Swift.Bool",
+                      "usr": "s:Sb"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO04boolC0SbSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO04boolC0SbSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "floatValue",
+          "printedName": "floatValue",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.Float?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Float",
+                  "printedName": "Swift.Float",
+                  "usr": "s:Sf"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO05floatC0SfSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO05floatC0SfSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.Float?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Float",
+                      "printedName": "Swift.Float",
+                      "usr": "s:Sf"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO05floatC0SfSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO05floatC0SfSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "doubleValue",
+          "printedName": "doubleValue",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.Double?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Double",
+                  "printedName": "Swift.Double",
+                  "usr": "s:Sd"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO06doubleC0SdSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO06doubleC0SdSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.Double?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Double",
+                      "printedName": "Swift.Double",
+                      "usr": "s:Sd"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO06doubleC0SdSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO06doubleC0SdSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "stringValue",
+          "printedName": "stringValue",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.String?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "String",
+                  "printedName": "Swift.String",
+                  "usr": "s:SS"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO06stringC0SSSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO06stringC0SSSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.String?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "String",
+                      "printedName": "Swift.String",
+                      "usr": "s:SS"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO06stringC0SSSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO06stringC0SSSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "dataValue",
+          "printedName": "dataValue",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Foundation.Data?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Data",
+                  "printedName": "Foundation.Data",
+                  "usr": "s:10Foundation4DataV"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO04dataC010Foundation4DataVSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO04dataC010Foundation4DataVSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Foundation.Data?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Data",
+                      "printedName": "Foundation.Data",
+                      "usr": "s:10Foundation4DataV"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO04dataC010Foundation4DataVSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO04dataC010Foundation4DataVSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "extendedValue",
+          "printedName": "extendedValue",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "(Swift.Int8, Foundation.Data)?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Tuple",
+                  "printedName": "(Swift.Int8, Foundation.Data)",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Int8",
+                      "printedName": "Swift.Int8",
+                      "usr": "s:s4Int8V"
+                    },
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Data",
+                      "printedName": "Foundation.Data",
+                      "usr": "s:10Foundation4DataV"
+                    }
+                  ]
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO08extendedC0s4Int8V_10Foundation4DataVtSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO08extendedC0s4Int8V_10Foundation4DataVtSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "(Swift.Int8, Foundation.Data)?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Tuple",
+                      "printedName": "(Swift.Int8, Foundation.Data)",
+                      "children": [
+                        {
+                          "kind": "TypeNominal",
+                          "name": "Int8",
+                          "printedName": "Swift.Int8",
+                          "usr": "s:s4Int8V"
+                        },
+                        {
+                          "kind": "TypeNominal",
+                          "name": "Data",
+                          "printedName": "Foundation.Data",
+                          "usr": "s:10Foundation4DataV"
+                        }
+                      ]
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO08extendedC0s4Int8V_10Foundation4DataVtSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO08extendedC0s4Int8V_10Foundation4DataVtSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "extendedType",
+          "printedName": "extendedType",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.Int8?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int8",
+                  "printedName": "Swift.Int8",
+                  "usr": "s:s4Int8V"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO12extendedTypes4Int8VSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO12extendedTypes4Int8VSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Swift.Int8?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Int8",
+                      "printedName": "Swift.Int8",
+                      "usr": "s:s4Int8V"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO12extendedTypes4Int8VSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO12extendedTypes4Int8VSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "dictionaryValue",
+          "printedName": "dictionaryValue",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "[MessagePack.MessagePackValue : MessagePack.MessagePackValue]?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Dictionary",
+                  "printedName": "[MessagePack.MessagePackValue : MessagePack.MessagePackValue]",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    },
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ],
+                  "usr": "s:SD"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO010dictionaryC0SDyA2CGSgvp",
+          "mangledName": "$s11MessagePack0aB5ValueO010dictionaryC0SDyA2CGSgvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl",
+            "RawDocComment"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "[MessagePack.MessagePackValue : MessagePack.MessagePackValue]?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Dictionary",
+                      "printedName": "[MessagePack.MessagePackValue : MessagePack.MessagePackValue]",
+                      "children": [
+                        {
+                          "kind": "TypeNominal",
+                          "name": "MessagePackValue",
+                          "printedName": "MessagePack.MessagePackValue",
+                          "usr": "s:11MessagePack0aB5ValueO"
+                        },
+                        {
+                          "kind": "TypeNominal",
+                          "name": "MessagePackValue",
+                          "printedName": "MessagePack.MessagePackValue",
+                          "usr": "s:11MessagePack0aB5ValueO"
+                        }
+                      ],
+                      "usr": "s:SD"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO010dictionaryC0SDyA2CGSgvg",
+              "mangledName": "$s11MessagePack0aB5ValueO010dictionaryC0SDyA2CGSgvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(arrayLiteral:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Array",
+              "printedName": "[MessagePack.MessagePackValue]",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackValue",
+                  "printedName": "MessagePack.MessagePackValue",
+                  "usr": "s:11MessagePack0aB5ValueO"
+                }
+              ],
+              "usr": "s:Sa"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueO12arrayLiteralA2Cd_tcfc",
+          "mangledName": "$s11MessagePack0aB5ValueO12arrayLiteralA2Cd_tcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(booleanLiteral:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueO14booleanLiteralACSb_tcfc",
+          "mangledName": "$s11MessagePack0aB5ValueO14booleanLiteralACSb_tcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(dictionaryLiteral:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Array",
+              "printedName": "[(MessagePack.MessagePackValue, MessagePack.MessagePackValue)]",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Tuple",
+                  "printedName": "(MessagePack.MessagePackValue, MessagePack.MessagePackValue)",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    },
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackValue",
+                      "printedName": "MessagePack.MessagePackValue",
+                      "usr": "s:11MessagePack0aB5ValueO"
+                    }
+                  ]
+                }
+              ],
+              "usr": "s:Sa"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueO17dictionaryLiteralA2C_ACtd_tcfc",
+          "mangledName": "$s11MessagePack0aB5ValueO17dictionaryLiteralA2C_ACtd_tcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(extendedGraphemeClusterLiteral:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "String",
+              "printedName": "Swift.String",
+              "usr": "s:SS"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueO30extendedGraphemeClusterLiteralACSS_tcfc",
+          "mangledName": "$s11MessagePack0aB5ValueO30extendedGraphemeClusterLiteralACSS_tcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(floatLiteral:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Double",
+              "printedName": "Swift.Double",
+              "usr": "s:Sd"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueO12floatLiteralACSd_tcfc",
+          "mangledName": "$s11MessagePack0aB5ValueO12floatLiteralACSd_tcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(integerLiteral:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Int64",
+              "printedName": "Swift.Int64",
+              "usr": "s:s5Int64V"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueO14integerLiteralACs5Int64V_tcfc",
+          "mangledName": "$s11MessagePack0aB5ValueO14integerLiteralACs5Int64V_tcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(nilLiteral:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueO10nilLiteralACyt_tcfc",
+          "mangledName": "$s11MessagePack0aB5ValueO10nilLiteralACyt_tcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(stringLiteral:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "String",
+              "printedName": "Swift.String",
+              "usr": "s:SS"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueO13stringLiteralACSS_tcfc",
+          "mangledName": "$s11MessagePack0aB5ValueO13stringLiteralACSS_tcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(unicodeScalarLiteral:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "String",
+              "printedName": "Swift.String",
+              "usr": "s:SS"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack0aB5ValueO20unicodeScalarLiteralACSS_tcfc",
+          "mangledName": "$s11MessagePack0aB5ValueO20unicodeScalarLiteralACSS_tcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Var",
+          "name": "description",
+          "printedName": "description",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "String",
+              "printedName": "Swift.String",
+              "usr": "s:SS"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO11descriptionSSvp",
+          "mangledName": "$s11MessagePack0aB5ValueO11descriptionSSvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "String",
+                  "printedName": "Swift.String",
+                  "usr": "s:SS"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO11descriptionSSvg",
+              "mangledName": "$s11MessagePack0aB5ValueO11descriptionSSvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "name": "==",
+          "printedName": "==(_:_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "s:11MessagePack0aB5ValueO2eeoiySbAC_ACtFZ",
+          "mangledName": "$s11MessagePack0aB5ValueO2eeoiySbAC_ACtFZ",
+          "moduleName": "MessagePack",
+          "static": true,
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "hash",
+          "printedName": "hash(into:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Hasher",
+              "printedName": "Swift.Hasher",
+              "paramValueOwnership": "InOut",
+              "usr": "s:s6HasherV"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "s:11MessagePack0aB5ValueO4hash4intoys6HasherVz_tF",
+          "mangledName": "$s11MessagePack0aB5ValueO4hash4intoys6HasherVz_tF",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Var",
+          "name": "hashValue",
+          "printedName": "hashValue",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ValueO04hashC0Sivp",
+          "mangledName": "$s11MessagePack0aB5ValueO04hashC0Sivp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ValueO04hashC0Sivg",
+              "mangledName": "$s11MessagePack0aB5ValueO04hashC0Sivg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        }
+      ],
+      "declKind": "Enum",
+      "usr": "s:11MessagePack0aB5ValueO",
+      "mangledName": "$s11MessagePack0aB5ValueO",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "AccessControl",
+        "RawDocComment"
+      ],
+      "isEnumExhaustive": true,
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "ExpressibleByArrayLiteral",
+          "printedName": "ExpressibleByArrayLiteral",
+          "children": [
+            {
+              "kind": "TypeWitness",
+              "name": "ArrayLiteralElement",
+              "printedName": "ArrayLiteralElement",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackValue",
+                  "printedName": "MessagePack.MessagePackValue",
+                  "usr": "s:11MessagePack0aB5ValueO"
+                }
+              ]
+            }
+          ],
+          "usr": "s:s25ExpressibleByArrayLiteralP",
+          "mangledName": "$ss25ExpressibleByArrayLiteralP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "ExpressibleByBooleanLiteral",
+          "printedName": "ExpressibleByBooleanLiteral",
+          "children": [
+            {
+              "kind": "TypeWitness",
+              "name": "BooleanLiteralType",
+              "printedName": "BooleanLiteralType",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Bool",
+                  "printedName": "Swift.Bool",
+                  "usr": "s:Sb"
+                }
+              ]
+            }
+          ],
+          "usr": "s:s27ExpressibleByBooleanLiteralP",
+          "mangledName": "$ss27ExpressibleByBooleanLiteralP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "ExpressibleByDictionaryLiteral",
+          "printedName": "ExpressibleByDictionaryLiteral",
+          "children": [
+            {
+              "kind": "TypeWitness",
+              "name": "Key",
+              "printedName": "Key",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackValue",
+                  "printedName": "MessagePack.MessagePackValue",
+                  "usr": "s:11MessagePack0aB5ValueO"
+                }
+              ]
+            },
+            {
+              "kind": "TypeWitness",
+              "name": "Value",
+              "printedName": "Value",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackValue",
+                  "printedName": "MessagePack.MessagePackValue",
+                  "usr": "s:11MessagePack0aB5ValueO"
+                }
+              ]
+            }
+          ],
+          "usr": "s:s30ExpressibleByDictionaryLiteralP",
+          "mangledName": "$ss30ExpressibleByDictionaryLiteralP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "ExpressibleByExtendedGraphemeClusterLiteral",
+          "printedName": "ExpressibleByExtendedGraphemeClusterLiteral",
+          "children": [
+            {
+              "kind": "TypeWitness",
+              "name": "ExtendedGraphemeClusterLiteralType",
+              "printedName": "ExtendedGraphemeClusterLiteralType",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "String",
+                  "printedName": "Swift.String",
+                  "usr": "s:SS"
+                }
+              ]
+            }
+          ],
+          "usr": "s:s43ExpressibleByExtendedGraphemeClusterLiteralP",
+          "mangledName": "$ss43ExpressibleByExtendedGraphemeClusterLiteralP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "ExpressibleByFloatLiteral",
+          "printedName": "ExpressibleByFloatLiteral",
+          "children": [
+            {
+              "kind": "TypeWitness",
+              "name": "FloatLiteralType",
+              "printedName": "FloatLiteralType",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Double",
+                  "printedName": "Swift.Double",
+                  "usr": "s:Sd"
+                }
+              ]
+            }
+          ],
+          "usr": "s:s25ExpressibleByFloatLiteralP",
+          "mangledName": "$ss25ExpressibleByFloatLiteralP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "ExpressibleByIntegerLiteral",
+          "printedName": "ExpressibleByIntegerLiteral",
+          "children": [
+            {
+              "kind": "TypeWitness",
+              "name": "IntegerLiteralType",
+              "printedName": "IntegerLiteralType",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int64",
+                  "printedName": "Swift.Int64",
+                  "usr": "s:s5Int64V"
+                }
+              ]
+            }
+          ],
+          "usr": "s:s27ExpressibleByIntegerLiteralP",
+          "mangledName": "$ss27ExpressibleByIntegerLiteralP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "ExpressibleByNilLiteral",
+          "printedName": "ExpressibleByNilLiteral",
+          "usr": "s:s23ExpressibleByNilLiteralP",
+          "mangledName": "$ss23ExpressibleByNilLiteralP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "ExpressibleByStringLiteral",
+          "printedName": "ExpressibleByStringLiteral",
+          "children": [
+            {
+              "kind": "TypeWitness",
+              "name": "StringLiteralType",
+              "printedName": "StringLiteralType",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "String",
+                  "printedName": "Swift.String",
+                  "usr": "s:SS"
+                }
+              ]
+            }
+          ],
+          "usr": "s:s26ExpressibleByStringLiteralP",
+          "mangledName": "$ss26ExpressibleByStringLiteralP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "ExpressibleByUnicodeScalarLiteral",
+          "printedName": "ExpressibleByUnicodeScalarLiteral",
+          "children": [
+            {
+              "kind": "TypeWitness",
+              "name": "UnicodeScalarLiteralType",
+              "printedName": "UnicodeScalarLiteralType",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "String",
+                  "printedName": "Swift.String",
+                  "usr": "s:SS"
+                }
+              ]
+            }
+          ],
+          "usr": "s:s33ExpressibleByUnicodeScalarLiteralP",
+          "mangledName": "$ss33ExpressibleByUnicodeScalarLiteralP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomStringConvertible",
+          "printedName": "CustomStringConvertible",
+          "usr": "s:s23CustomStringConvertibleP",
+          "mangledName": "$ss23CustomStringConvertibleP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        }
+      ]
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "MessagePackError",
+      "printedName": "MessagePackError",
+      "children": [
+        {
+          "kind": "Var",
+          "name": "invalidArgument",
+          "printedName": "invalidArgument",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(MessagePack.MessagePackError.Type) -> MessagePack.MessagePackError",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackError",
+                  "printedName": "MessagePack.MessagePackError",
+                  "usr": "s:11MessagePack0aB5ErrorO"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "MessagePack.MessagePackError.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackError",
+                      "printedName": "MessagePack.MessagePackError",
+                      "usr": "s:11MessagePack0aB5ErrorO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:11MessagePack0aB5ErrorO15invalidArgumentyA2CmF",
+          "mangledName": "$s11MessagePack0aB5ErrorO15invalidArgumentyA2CmF",
+          "moduleName": "MessagePack",
+          "fixedbinaryorder": 0
+        },
+        {
+          "kind": "Var",
+          "name": "insufficientData",
+          "printedName": "insufficientData",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(MessagePack.MessagePackError.Type) -> MessagePack.MessagePackError",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackError",
+                  "printedName": "MessagePack.MessagePackError",
+                  "usr": "s:11MessagePack0aB5ErrorO"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "MessagePack.MessagePackError.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackError",
+                      "printedName": "MessagePack.MessagePackError",
+                      "usr": "s:11MessagePack0aB5ErrorO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:11MessagePack0aB5ErrorO16insufficientDatayA2CmF",
+          "mangledName": "$s11MessagePack0aB5ErrorO16insufficientDatayA2CmF",
+          "moduleName": "MessagePack",
+          "fixedbinaryorder": 1
+        },
+        {
+          "kind": "Var",
+          "name": "invalidData",
+          "printedName": "invalidData",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(MessagePack.MessagePackError.Type) -> MessagePack.MessagePackError",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackError",
+                  "printedName": "MessagePack.MessagePackError",
+                  "usr": "s:11MessagePack0aB5ErrorO"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "MessagePack.MessagePackError.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "MessagePackError",
+                      "printedName": "MessagePack.MessagePackError",
+                      "usr": "s:11MessagePack0aB5ErrorO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:11MessagePack0aB5ErrorO11invalidDatayA2CmF",
+          "mangledName": "$s11MessagePack0aB5ErrorO11invalidDatayA2CmF",
+          "moduleName": "MessagePack",
+          "fixedbinaryorder": 2
+        },
+        {
+          "kind": "Function",
+          "name": "__derived_enum_equals",
+          "printedName": "__derived_enum_equals(_:_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackError",
+              "printedName": "MessagePack.MessagePackError",
+              "usr": "s:11MessagePack0aB5ErrorO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackError",
+              "printedName": "MessagePack.MessagePackError",
+              "usr": "s:11MessagePack0aB5ErrorO"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "s:11MessagePack0aB5ErrorO21__derived_enum_equalsySbAC_ACtFZ",
+          "mangledName": "$s11MessagePack0aB5ErrorO21__derived_enum_equalsySbAC_ACtFZ",
+          "moduleName": "MessagePack",
+          "static": true,
+          "implicit": true,
+          "declAttributes": [
+            "Implements"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Var",
+          "name": "hashValue",
+          "printedName": "hashValue",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack0aB5ErrorO9hashValueSivp",
+          "mangledName": "$s11MessagePack0aB5ErrorO9hashValueSivp",
+          "moduleName": "MessagePack",
+          "implicit": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack0aB5ErrorO9hashValueSivg",
+              "mangledName": "$s11MessagePack0aB5ErrorO9hashValueSivg",
+              "moduleName": "MessagePack",
+              "implicit": true,
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "name": "hash",
+          "printedName": "hash(into:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Hasher",
+              "printedName": "Swift.Hasher",
+              "paramValueOwnership": "InOut",
+              "usr": "s:s6HasherV"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "s:11MessagePack0aB5ErrorO4hash4intoys6HasherVz_tF",
+          "mangledName": "$s11MessagePack0aB5ErrorO4hash4intoys6HasherVz_tF",
+          "moduleName": "MessagePack",
+          "implicit": true,
+          "funcSelfKind": "NonMutating"
+        }
+      ],
+      "declKind": "Enum",
+      "usr": "s:11MessagePack0aB5ErrorO",
+      "mangledName": "$s11MessagePack0aB5ErrorO",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "AccessControl"
+      ],
+      "isEnumExhaustive": true,
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Error",
+          "printedName": "Error",
+          "usr": "s:s5ErrorP",
+          "mangledName": "$ss5ErrorP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Sendable",
+          "printedName": "Sendable",
+          "usr": "s:s8SendableP",
+          "mangledName": "$ss8SendableP"
+        }
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "Foundation",
+      "printedName": "Foundation",
+      "declKind": "Import",
+      "moduleName": "MessagePack"
+    },
+    {
+      "kind": "Function",
+      "name": "packInteger",
+      "printedName": "packInteger(_:parts:)",
+      "children": [
+        {
+          "kind": "TypeNominal",
+          "name": "Data",
+          "printedName": "Foundation.Data",
+          "usr": "s:10Foundation4DataV"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "UInt64",
+          "printedName": "Swift.UInt64",
+          "usr": "s:s6UInt64V"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Int",
+          "printedName": "Swift.Int",
+          "usr": "s:Si"
+        }
+      ],
+      "declKind": "Func",
+      "usr": "s:11MessagePack11packInteger_5parts10Foundation4DataVs6UInt64V_SitF",
+      "mangledName": "$s11MessagePack11packInteger_5parts10Foundation4DataVs6UInt64V_SitF",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "RawDocComment"
+      ],
+      "funcSelfKind": "NonMutating"
+    },
+    {
+      "kind": "Function",
+      "name": "packPositiveInteger",
+      "printedName": "packPositiveInteger(_:)",
+      "children": [
+        {
+          "kind": "TypeNominal",
+          "name": "Data",
+          "printedName": "Foundation.Data",
+          "usr": "s:10Foundation4DataV"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "UInt64",
+          "printedName": "Swift.UInt64",
+          "usr": "s:s6UInt64V"
+        }
+      ],
+      "declKind": "Func",
+      "usr": "s:11MessagePack19packPositiveIntegery10Foundation4DataVs6UInt64VF",
+      "mangledName": "$s11MessagePack19packPositiveIntegery10Foundation4DataVs6UInt64VF",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "RawDocComment"
+      ],
+      "funcSelfKind": "NonMutating"
+    },
+    {
+      "kind": "Function",
+      "name": "packNegativeInteger",
+      "printedName": "packNegativeInteger(_:)",
+      "children": [
+        {
+          "kind": "TypeNominal",
+          "name": "Data",
+          "printedName": "Foundation.Data",
+          "usr": "s:10Foundation4DataV"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Int64",
+          "printedName": "Swift.Int64",
+          "usr": "s:s5Int64V"
+        }
+      ],
+      "declKind": "Func",
+      "usr": "s:11MessagePack19packNegativeIntegery10Foundation4DataVs5Int64VF",
+      "mangledName": "$s11MessagePack19packNegativeIntegery10Foundation4DataVs5Int64VF",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "RawDocComment"
+      ],
+      "funcSelfKind": "NonMutating"
+    },
+    {
+      "kind": "Function",
+      "name": "pack",
+      "printedName": "pack(_:)",
+      "children": [
+        {
+          "kind": "TypeNominal",
+          "name": "Data",
+          "printedName": "Foundation.Data",
+          "usr": "s:10Foundation4DataV"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "MessagePackValue",
+          "printedName": "MessagePack.MessagePackValue",
+          "usr": "s:11MessagePack0aB5ValueO"
+        }
+      ],
+      "declKind": "Func",
+      "usr": "s:11MessagePack4packy10Foundation4DataVAA0aB5ValueOF",
+      "mangledName": "$s11MessagePack4packy10Foundation4DataVAA0aB5ValueOF",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "AccessControl",
+        "RawDocComment"
+      ],
+      "funcSelfKind": "NonMutating"
+    },
+    {
+      "kind": "Import",
+      "name": "Foundation",
+      "printedName": "Foundation",
+      "declKind": "Import",
+      "moduleName": "MessagePack"
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "Subdata",
+      "printedName": "Subdata",
+      "children": [
+        {
+          "kind": "Var",
+          "name": "base",
+          "printedName": "base",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Data",
+              "printedName": "Foundation.Data",
+              "usr": "s:10Foundation4DataV"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack7SubdataV4base10Foundation4DataVvp",
+          "mangledName": "$s11MessagePack7SubdataV4base10Foundation4DataVvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 0,
+          "isLet": true,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Data",
+                  "printedName": "Foundation.Data",
+                  "usr": "s:10Foundation4DataV"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack7SubdataV4base10Foundation4DataVvg",
+              "mangledName": "$s11MessagePack7SubdataV4base10Foundation4DataVvg",
+              "moduleName": "MessagePack",
+              "implicit": true,
+              "declAttributes": [
+                "Transparent"
+              ],
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "baseStartIndex",
+          "printedName": "baseStartIndex",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack7SubdataV14baseStartIndexSivp",
+          "mangledName": "$s11MessagePack7SubdataV14baseStartIndexSivp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 1,
+          "isLet": true,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack7SubdataV14baseStartIndexSivg",
+              "mangledName": "$s11MessagePack7SubdataV14baseStartIndexSivg",
+              "moduleName": "MessagePack",
+              "implicit": true,
+              "declAttributes": [
+                "Transparent"
+              ],
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "baseEndIndex",
+          "printedName": "baseEndIndex",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack7SubdataV12baseEndIndexSivp",
+          "mangledName": "$s11MessagePack7SubdataV12baseEndIndexSivp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 2,
+          "isLet": true,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack7SubdataV12baseEndIndexSivg",
+              "mangledName": "$s11MessagePack7SubdataV12baseEndIndexSivg",
+              "moduleName": "MessagePack",
+              "implicit": true,
+              "declAttributes": [
+                "Transparent"
+              ],
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(data:startIndex:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Subdata",
+              "printedName": "MessagePack.Subdata",
+              "usr": "s:11MessagePack7SubdataV"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Data",
+              "printedName": "Foundation.Data",
+              "usr": "s:10Foundation4DataV"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "hasDefaultArg": true,
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack7SubdataV4data10startIndexAC10Foundation4DataV_Sitcfc",
+          "mangledName": "$s11MessagePack7SubdataV4data10startIndexAC10Foundation4DataV_Sitcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(data:startIndex:endIndex:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Subdata",
+              "printedName": "MessagePack.Subdata",
+              "usr": "s:11MessagePack7SubdataV"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Data",
+              "printedName": "Foundation.Data",
+              "usr": "s:10Foundation4DataV"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:11MessagePack7SubdataV4data10startIndex03endF0AC10Foundation4DataV_S2itcfc",
+          "mangledName": "$s11MessagePack7SubdataV4data10startIndex03endF0AC10Foundation4DataV_S2itcfc",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Var",
+          "name": "startIndex",
+          "printedName": "startIndex",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack7SubdataV10startIndexSivp",
+          "mangledName": "$s11MessagePack7SubdataV10startIndexSivp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack7SubdataV10startIndexSivg",
+              "mangledName": "$s11MessagePack7SubdataV10startIndexSivg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "endIndex",
+          "printedName": "endIndex",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack7SubdataV8endIndexSivp",
+          "mangledName": "$s11MessagePack7SubdataV8endIndexSivp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack7SubdataV8endIndexSivg",
+              "mangledName": "$s11MessagePack7SubdataV8endIndexSivg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "count",
+          "printedName": "count",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack7SubdataV5countSivp",
+          "mangledName": "$s11MessagePack7SubdataV5countSivp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack7SubdataV5countSivg",
+              "mangledName": "$s11MessagePack7SubdataV5countSivg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "isEmpty",
+          "printedName": "isEmpty",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack7SubdataV7isEmptySbvp",
+          "mangledName": "$s11MessagePack7SubdataV7isEmptySbvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Bool",
+                  "printedName": "Swift.Bool",
+                  "usr": "s:Sb"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack7SubdataV7isEmptySbvg",
+              "mangledName": "$s11MessagePack7SubdataV7isEmptySbvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Subscript",
+          "name": "subscript",
+          "printedName": "subscript(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UInt8",
+              "printedName": "Swift.UInt8",
+              "usr": "s:s5UInt8V"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Subscript",
+          "usr": "s:11MessagePack7SubdataVys5UInt8VSicip",
+          "mangledName": "$s11MessagePack7SubdataVys5UInt8VSicip",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UInt8",
+                  "printedName": "Swift.UInt8",
+                  "usr": "s:s5UInt8V"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack7SubdataVys5UInt8VSicig",
+              "mangledName": "$s11MessagePack7SubdataVys5UInt8VSicig",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "name": "index",
+          "printedName": "index(before:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "s:11MessagePack7SubdataV5index6beforeS2i_tF",
+          "mangledName": "$s11MessagePack7SubdataV5index6beforeS2i_tF",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "index",
+          "printedName": "index(after:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "s:11MessagePack7SubdataV5index5afterS2i_tF",
+          "mangledName": "$s11MessagePack7SubdataV5index5afterS2i_tF",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Subscript",
+          "name": "subscript",
+          "printedName": "subscript(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Subdata",
+              "printedName": "MessagePack.Subdata",
+              "usr": "s:11MessagePack7SubdataV"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Range",
+              "printedName": "Swift.Range<Swift.Int>",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "usr": "s:Sn"
+            }
+          ],
+          "declKind": "Subscript",
+          "usr": "s:11MessagePack7SubdataVyACSnySiGcip",
+          "mangledName": "$s11MessagePack7SubdataVyACSnySiGcip",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Subdata",
+                  "printedName": "MessagePack.Subdata",
+                  "usr": "s:11MessagePack7SubdataV"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Range",
+                  "printedName": "Swift.Range<Swift.Int>",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Int",
+                      "printedName": "Swift.Int",
+                      "usr": "s:Si"
+                    }
+                  ],
+                  "usr": "s:Sn"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack7SubdataVyACSnySiGcig",
+              "mangledName": "$s11MessagePack7SubdataVyACSnySiGcig",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "data",
+          "printedName": "data",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Data",
+              "printedName": "Foundation.Data",
+              "usr": "s:10Foundation4DataV"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:11MessagePack7SubdataV4data10Foundation4DataVvp",
+          "mangledName": "$s11MessagePack7SubdataV4data10Foundation4DataVvp",
+          "moduleName": "MessagePack",
+          "declAttributes": [
+            "AccessControl"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Data",
+                  "printedName": "Foundation.Data",
+                  "usr": "s:10Foundation4DataV"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:11MessagePack7SubdataV4data10Foundation4DataVvg",
+              "mangledName": "$s11MessagePack7SubdataV4data10Foundation4DataVvg",
+              "moduleName": "MessagePack",
+              "accessorKind": "get"
+            }
+          ]
+        }
+      ],
+      "declKind": "Struct",
+      "usr": "s:11MessagePack7SubdataV",
+      "mangledName": "$s11MessagePack7SubdataV",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "AccessControl"
+      ],
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "RandomAccessCollection",
+          "printedName": "RandomAccessCollection",
+          "children": [
+            {
+              "kind": "TypeWitness",
+              "name": "Element",
+              "printedName": "Element",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UInt8",
+                  "printedName": "Swift.UInt8",
+                  "usr": "s:s5UInt8V"
+                }
+              ]
+            },
+            {
+              "kind": "TypeWitness",
+              "name": "Index",
+              "printedName": "Index",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ]
+            },
+            {
+              "kind": "TypeWitness",
+              "name": "SubSequence",
+              "printedName": "SubSequence",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Subdata",
+                  "printedName": "MessagePack.Subdata",
+                  "usr": "s:11MessagePack7SubdataV"
+                }
+              ]
+            },
+            {
+              "kind": "TypeWitness",
+              "name": "Indices",
+              "printedName": "Indices",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Range",
+                  "printedName": "Swift.Range<Swift.Int>",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Int",
+                      "printedName": "Swift.Int",
+                      "usr": "s:Si"
+                    }
+                  ],
+                  "usr": "s:Sn"
+                }
+              ]
+            }
+          ],
+          "usr": "s:Sk",
+          "mangledName": "$sSk"
+        },
+        {
+          "kind": "Conformance",
+          "name": "BidirectionalCollection",
+          "printedName": "BidirectionalCollection",
+          "children": [
+            {
+              "kind": "TypeWitness",
+              "name": "Element",
+              "printedName": "Element",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UInt8",
+                  "printedName": "Swift.UInt8",
+                  "usr": "s:s5UInt8V"
+                }
+              ]
+            },
+            {
+              "kind": "TypeWitness",
+              "name": "Index",
+              "printedName": "Index",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ]
+            },
+            {
+              "kind": "TypeWitness",
+              "name": "SubSequence",
+              "printedName": "SubSequence",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Subdata",
+                  "printedName": "MessagePack.Subdata",
+                  "usr": "s:11MessagePack7SubdataV"
+                }
+              ]
+            },
+            {
+              "kind": "TypeWitness",
+              "name": "Indices",
+              "printedName": "Indices",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Range",
+                  "printedName": "Swift.Range<Swift.Int>",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Int",
+                      "printedName": "Swift.Int",
+                      "usr": "s:Si"
+                    }
+                  ],
+                  "usr": "s:Sn"
+                }
+              ]
+            }
+          ],
+          "usr": "s:SK",
+          "mangledName": "$sSK"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Collection",
+          "printedName": "Collection",
+          "children": [
+            {
+              "kind": "TypeWitness",
+              "name": "Element",
+              "printedName": "Element",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UInt8",
+                  "printedName": "Swift.UInt8",
+                  "usr": "s:s5UInt8V"
+                }
+              ]
+            },
+            {
+              "kind": "TypeWitness",
+              "name": "Index",
+              "printedName": "Index",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ]
+            },
+            {
+              "kind": "TypeWitness",
+              "name": "Iterator",
+              "printedName": "Iterator",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "IndexingIterator",
+                  "printedName": "Swift.IndexingIterator<MessagePack.Subdata>",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Subdata",
+                      "printedName": "MessagePack.Subdata",
+                      "usr": "s:11MessagePack7SubdataV"
+                    }
+                  ],
+                  "usr": "s:s16IndexingIteratorV"
+                }
+              ]
+            },
+            {
+              "kind": "TypeWitness",
+              "name": "SubSequence",
+              "printedName": "SubSequence",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Subdata",
+                  "printedName": "MessagePack.Subdata",
+                  "usr": "s:11MessagePack7SubdataV"
+                }
+              ]
+            },
+            {
+              "kind": "TypeWitness",
+              "name": "Indices",
+              "printedName": "Indices",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Range",
+                  "printedName": "Swift.Range<Swift.Int>",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Int",
+                      "printedName": "Swift.Int",
+                      "usr": "s:Si"
+                    }
+                  ],
+                  "usr": "s:Sn"
+                }
+              ]
+            }
+          ],
+          "usr": "s:Sl",
+          "mangledName": "$sSl"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Sequence",
+          "printedName": "Sequence",
+          "children": [
+            {
+              "kind": "TypeWitness",
+              "name": "Element",
+              "printedName": "Element",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UInt8",
+                  "printedName": "Swift.UInt8",
+                  "usr": "s:s5UInt8V"
+                }
+              ]
+            },
+            {
+              "kind": "TypeWitness",
+              "name": "Iterator",
+              "printedName": "Iterator",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "IndexingIterator",
+                  "printedName": "Swift.IndexingIterator<MessagePack.Subdata>",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Subdata",
+                      "printedName": "MessagePack.Subdata",
+                      "usr": "s:11MessagePack7SubdataV"
+                    }
+                  ],
+                  "usr": "s:s16IndexingIteratorV"
+                }
+              ]
+            }
+          ],
+          "usr": "s:ST",
+          "mangledName": "$sST"
+        }
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "Foundation",
+      "printedName": "Foundation",
+      "declKind": "Import",
+      "moduleName": "MessagePack"
+    },
+    {
+      "kind": "Function",
+      "name": "unpackInteger",
+      "printedName": "unpackInteger(_:count:)",
+      "children": [
+        {
+          "kind": "TypeNominal",
+          "name": "Tuple",
+          "printedName": "(value: Swift.UInt64, remainder: MessagePack.Subdata)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UInt64",
+              "printedName": "Swift.UInt64",
+              "usr": "s:s6UInt64V"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Subdata",
+              "printedName": "MessagePack.Subdata",
+              "usr": "s:11MessagePack7SubdataV"
+            }
+          ]
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Subdata",
+          "printedName": "MessagePack.Subdata",
+          "usr": "s:11MessagePack7SubdataV"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Int",
+          "printedName": "Swift.Int",
+          "usr": "s:Si"
+        }
+      ],
+      "declKind": "Func",
+      "usr": "s:11MessagePack13unpackInteger_5counts6UInt64V5value_AA7SubdataV9remaindertAH_SitKF",
+      "mangledName": "$s11MessagePack13unpackInteger_5counts6UInt64V5value_AA7SubdataV9remaindertAH_SitKF",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "RawDocComment"
+      ],
+      "throwing": true,
+      "funcSelfKind": "NonMutating"
+    },
+    {
+      "kind": "Function",
+      "name": "unpackString",
+      "printedName": "unpackString(_:count:)",
+      "children": [
+        {
+          "kind": "TypeNominal",
+          "name": "Tuple",
+          "printedName": "(value: Swift.String, remainder: MessagePack.Subdata)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "String",
+              "printedName": "Swift.String",
+              "usr": "s:SS"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Subdata",
+              "printedName": "MessagePack.Subdata",
+              "usr": "s:11MessagePack7SubdataV"
+            }
+          ]
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Subdata",
+          "printedName": "MessagePack.Subdata",
+          "usr": "s:11MessagePack7SubdataV"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Int",
+          "printedName": "Swift.Int",
+          "usr": "s:Si"
+        }
+      ],
+      "declKind": "Func",
+      "usr": "s:11MessagePack12unpackString_5countSS5value_AA7SubdataV9remaindertAF_SitKF",
+      "mangledName": "$s11MessagePack12unpackString_5countSS5value_AA7SubdataV9remaindertAF_SitKF",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "RawDocComment"
+      ],
+      "throwing": true,
+      "funcSelfKind": "NonMutating"
+    },
+    {
+      "kind": "Function",
+      "name": "unpackData",
+      "printedName": "unpackData(_:count:)",
+      "children": [
+        {
+          "kind": "TypeNominal",
+          "name": "Tuple",
+          "printedName": "(value: MessagePack.Subdata, remainder: MessagePack.Subdata)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Subdata",
+              "printedName": "MessagePack.Subdata",
+              "usr": "s:11MessagePack7SubdataV"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Subdata",
+              "printedName": "MessagePack.Subdata",
+              "usr": "s:11MessagePack7SubdataV"
+            }
+          ]
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Subdata",
+          "printedName": "MessagePack.Subdata",
+          "usr": "s:11MessagePack7SubdataV"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Int",
+          "printedName": "Swift.Int",
+          "usr": "s:Si"
+        }
+      ],
+      "declKind": "Func",
+      "usr": "s:11MessagePack10unpackData_5countAA7SubdataV5value_AE9remaindertAE_SitKF",
+      "mangledName": "$s11MessagePack10unpackData_5countAA7SubdataV5value_AE9remaindertAE_SitKF",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "RawDocComment"
+      ],
+      "throwing": true,
+      "funcSelfKind": "NonMutating"
+    },
+    {
+      "kind": "Function",
+      "name": "unpackArray",
+      "printedName": "unpackArray(_:count:compatibility:)",
+      "children": [
+        {
+          "kind": "TypeNominal",
+          "name": "Tuple",
+          "printedName": "(value: [MessagePack.MessagePackValue], remainder: MessagePack.Subdata)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Array",
+              "printedName": "[MessagePack.MessagePackValue]",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackValue",
+                  "printedName": "MessagePack.MessagePackValue",
+                  "usr": "s:11MessagePack0aB5ValueO"
+                }
+              ],
+              "usr": "s:Sa"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Subdata",
+              "printedName": "MessagePack.Subdata",
+              "usr": "s:11MessagePack7SubdataV"
+            }
+          ]
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Subdata",
+          "printedName": "MessagePack.Subdata",
+          "usr": "s:11MessagePack7SubdataV"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Int",
+          "printedName": "Swift.Int",
+          "usr": "s:Si"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Bool",
+          "printedName": "Swift.Bool",
+          "usr": "s:Sb"
+        }
+      ],
+      "declKind": "Func",
+      "usr": "s:11MessagePack11unpackArray_5count13compatibilitySayAA0aB5ValueOG5value_AA7SubdataV9remaindertAJ_SiSbtKF",
+      "mangledName": "$s11MessagePack11unpackArray_5count13compatibilitySayAA0aB5ValueOG5value_AA7SubdataV9remaindertAJ_SiSbtKF",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "RawDocComment"
+      ],
+      "throwing": true,
+      "funcSelfKind": "NonMutating"
+    },
+    {
+      "kind": "Function",
+      "name": "unpackMap",
+      "printedName": "unpackMap(_:count:compatibility:)",
+      "children": [
+        {
+          "kind": "TypeNominal",
+          "name": "Tuple",
+          "printedName": "(value: [MessagePack.MessagePackValue : MessagePack.MessagePackValue], remainder: MessagePack.Subdata)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Dictionary",
+              "printedName": "[MessagePack.MessagePackValue : MessagePack.MessagePackValue]",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackValue",
+                  "printedName": "MessagePack.MessagePackValue",
+                  "usr": "s:11MessagePack0aB5ValueO"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "MessagePackValue",
+                  "printedName": "MessagePack.MessagePackValue",
+                  "usr": "s:11MessagePack0aB5ValueO"
+                }
+              ],
+              "usr": "s:SD"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Subdata",
+              "printedName": "MessagePack.Subdata",
+              "usr": "s:11MessagePack7SubdataV"
+            }
+          ]
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Subdata",
+          "printedName": "MessagePack.Subdata",
+          "usr": "s:11MessagePack7SubdataV"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Int",
+          "printedName": "Swift.Int",
+          "usr": "s:Si"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Bool",
+          "printedName": "Swift.Bool",
+          "usr": "s:Sb"
+        }
+      ],
+      "declKind": "Func",
+      "usr": "s:11MessagePack9unpackMap_5count13compatibilitySDyAA0aB5ValueOAFG5value_AA7SubdataV9remaindertAJ_SiSbtKF",
+      "mangledName": "$s11MessagePack9unpackMap_5count13compatibilitySDyAA0aB5ValueOAFG5value_AA7SubdataV9remaindertAJ_SiSbtKF",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "RawDocComment"
+      ],
+      "throwing": true,
+      "funcSelfKind": "NonMutating"
+    },
+    {
+      "kind": "Function",
+      "name": "unpack",
+      "printedName": "unpack(_:compatibility:)",
+      "children": [
+        {
+          "kind": "TypeNominal",
+          "name": "Tuple",
+          "printedName": "(value: MessagePack.MessagePackValue, remainder: MessagePack.Subdata)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Subdata",
+              "printedName": "MessagePack.Subdata",
+              "usr": "s:11MessagePack7SubdataV"
+            }
+          ]
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Subdata",
+          "printedName": "MessagePack.Subdata",
+          "usr": "s:11MessagePack7SubdataV"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Bool",
+          "printedName": "Swift.Bool",
+          "hasDefaultArg": true,
+          "usr": "s:Sb"
+        }
+      ],
+      "declKind": "Func",
+      "usr": "s:11MessagePack6unpack_13compatibilityAA0aB5ValueO5value_AA7SubdataV9remaindertAH_SbtKF",
+      "mangledName": "$s11MessagePack6unpack_13compatibilityAA0aB5ValueO5value_AA7SubdataV9remaindertAH_SbtKF",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "AccessControl",
+        "RawDocComment"
+      ],
+      "throwing": true,
+      "funcSelfKind": "NonMutating"
+    },
+    {
+      "kind": "Function",
+      "name": "unpack",
+      "printedName": "unpack(_:compatibility:)",
+      "children": [
+        {
+          "kind": "TypeNominal",
+          "name": "Tuple",
+          "printedName": "(value: MessagePack.MessagePackValue, remainder: Foundation.Data)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Data",
+              "printedName": "Foundation.Data",
+              "usr": "s:10Foundation4DataV"
+            }
+          ]
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Data",
+          "printedName": "Foundation.Data",
+          "usr": "s:10Foundation4DataV"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Bool",
+          "printedName": "Swift.Bool",
+          "hasDefaultArg": true,
+          "usr": "s:Sb"
+        }
+      ],
+      "declKind": "Func",
+      "usr": "s:11MessagePack6unpack_13compatibilityAA0aB5ValueO5value_10Foundation4DataV9remaindertAI_SbtKF",
+      "mangledName": "$s11MessagePack6unpack_13compatibilityAA0aB5ValueO5value_10Foundation4DataV9remaindertAI_SbtKF",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "AccessControl",
+        "RawDocComment"
+      ],
+      "throwing": true,
+      "funcSelfKind": "NonMutating"
+    },
+    {
+      "kind": "Function",
+      "name": "unpackFirst",
+      "printedName": "unpackFirst(_:compatibility:)",
+      "children": [
+        {
+          "kind": "TypeNominal",
+          "name": "MessagePackValue",
+          "printedName": "MessagePack.MessagePackValue",
+          "usr": "s:11MessagePack0aB5ValueO"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Data",
+          "printedName": "Foundation.Data",
+          "usr": "s:10Foundation4DataV"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Bool",
+          "printedName": "Swift.Bool",
+          "hasDefaultArg": true,
+          "usr": "s:Sb"
+        }
+      ],
+      "declKind": "Func",
+      "usr": "s:11MessagePack11unpackFirst_13compatibilityAA0aB5ValueO10Foundation4DataV_SbtKF",
+      "mangledName": "$s11MessagePack11unpackFirst_13compatibilityAA0aB5ValueO10Foundation4DataV_SbtKF",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "AccessControl",
+        "RawDocComment"
+      ],
+      "throwing": true,
+      "funcSelfKind": "NonMutating"
+    },
+    {
+      "kind": "Function",
+      "name": "unpackAll",
+      "printedName": "unpackAll(_:compatibility:)",
+      "children": [
+        {
+          "kind": "TypeNominal",
+          "name": "Array",
+          "printedName": "[MessagePack.MessagePackValue]",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "MessagePackValue",
+              "printedName": "MessagePack.MessagePackValue",
+              "usr": "s:11MessagePack0aB5ValueO"
+            }
+          ],
+          "usr": "s:Sa"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Data",
+          "printedName": "Foundation.Data",
+          "usr": "s:10Foundation4DataV"
+        },
+        {
+          "kind": "TypeNominal",
+          "name": "Bool",
+          "printedName": "Swift.Bool",
+          "hasDefaultArg": true,
+          "usr": "s:Sb"
+        }
+      ],
+      "declKind": "Func",
+      "usr": "s:11MessagePack9unpackAll_13compatibilitySayAA0aB5ValueOG10Foundation4DataV_SbtKF",
+      "mangledName": "$s11MessagePack9unpackAll_13compatibilitySayAA0aB5ValueOG10Foundation4DataV_SbtKF",
+      "moduleName": "MessagePack",
+      "declAttributes": [
+        "AccessControl",
+        "RawDocComment"
+      ],
+      "throwing": true,
+      "funcSelfKind": "NonMutating"
+    }
+  ],
+  "json_format_version": 6
+}

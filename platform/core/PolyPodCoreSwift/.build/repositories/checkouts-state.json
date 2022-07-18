@@ -1,0 +1,11 @@
+{
+  "object" : {
+    "repositories" : {
+      "https://github.com/polypoly-eu/MessagePack.swift" : {
+        "repositoryURL" : "https://github.com/polypoly-eu/MessagePack.swift",
+        "subpath" : "MessagePack.swift-a040b038"
+      }
+    }
+  },
+  "version" : 1
+}

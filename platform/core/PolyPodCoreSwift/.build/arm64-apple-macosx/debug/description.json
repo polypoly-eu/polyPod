@@ -1,0 +1,313 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwiftPackageTests.xctest/Contents/MacOS/PolyPodCoreSwiftPackageTests",
+      "productName" : "PolyPodCoreSwiftPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.MessagePack-debug.module" : {
+      "executable" : "/Applications/Xcode_13.2.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "importPath" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/ConvenienceInitializers.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/ConvenienceProperties.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/LiteralConvertibles.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/MessagePack.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/Pack.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/Subdata.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/Unpack.swift"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "MessagePack",
+      "moduleOutputPath" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.swiftmodule",
+      "objects" : [
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/ConvenienceInitializers.swift.o",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/ConvenienceProperties.swift.o",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/LiteralConvertibles.swift.o",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/MessagePack.swift.o",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/Pack.swift.o",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/Subdata.swift.o",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/Unpack.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx10.10",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-g",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/MessagePack-Swift.h",
+        "-color-diagnostics",
+        "-sdk",
+        "/Applications/Xcode_13.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
+        "-F",
+        "/Applications/Xcode_13.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode_13.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode_13.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib"
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/ConvenienceInitializers.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/ConvenienceProperties.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/LiteralConvertibles.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/MessagePack.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/Pack.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/Subdata.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build/Unpack.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/ConvenienceInitializers.swift",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/ConvenienceProperties.swift",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/LiteralConvertibles.swift",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/MessagePack.swift",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/Pack.swift",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/Subdata.swift",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/checkouts/MessagePack.swift/Sources/MessagePack/Unpack.swift"
+      ],
+      "tempsPath" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.PolyPodCoreSwift-debug.module" : {
+      "executable" : "/Applications/Xcode_13.2.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "importPath" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/Core.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/CoreFailure.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/Feature.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/FeatureManifest.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/MessagePack+Decoding.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/MessagePack.swiftmodule"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "PolyPodCoreSwift",
+      "moduleOutputPath" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.swiftmodule",
+      "objects" : [
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/Core.swift.o",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/CoreFailure.swift.o",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/Feature.swift.o",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/FeatureManifest.swift.o",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/MessagePack+Decoding.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx10.10",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-g",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/PolyPodCoreSwift-Swift.h",
+        "-color-diagnostics",
+        "-sdk",
+        "/Applications/Xcode_13.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
+        "-F",
+        "/Applications/Xcode_13.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode_13.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode_13.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib"
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/Core.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/CoreFailure.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/Feature.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/FeatureManifest.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/MessagePack+Decoding.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/Core.swift",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/CoreFailure.swift",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/Feature.swift",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/FeatureManifest.swift",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/MessagePack+Decoding.swift"
+      ],
+      "tempsPath" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.PolyPodCoreSwiftTests-debug.module" : {
+      "executable" : "/Applications/Xcode_13.2.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "importPath" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Tests/PolyPodCoreSwiftTests/PolyPodCoreSwiftTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.swiftmodule"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "PolyPodCoreSwiftTests",
+      "moduleOutputPath" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwiftTests.swiftmodule",
+      "objects" : [
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwiftTests.build/PolyPodCoreSwiftTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx11.0",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-g",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-color-diagnostics",
+        "-sdk",
+        "/Applications/Xcode_13.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
+        "-F",
+        "/Applications/Xcode_13.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode_13.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode_13.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib"
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwiftTests.build/PolyPodCoreSwiftTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwiftTests.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Tests/PolyPodCoreSwiftTests/PolyPodCoreSwiftTests.swift"
+      ],
+      "tempsPath" : "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwiftTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "testDiscoveryCommands" : {
+
+  }
+}

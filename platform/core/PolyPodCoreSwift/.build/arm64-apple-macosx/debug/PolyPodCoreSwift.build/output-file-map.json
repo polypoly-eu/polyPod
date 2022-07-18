@@ -1,0 +1,35 @@
+{
+  "": {
+    "swift-dependencies": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/master.swiftdeps"
+  },
+  "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/Core.swift": {
+    "dependencies": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/Core.d",
+    "object": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/Core.swift.o",
+    "swiftmodule": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/Core~partial.swiftmodule",
+    "swift-dependencies": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/Core.swiftdeps"
+  },
+  "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/CoreFailure.swift": {
+    "dependencies": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/CoreFailure.d",
+    "object": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/CoreFailure.swift.o",
+    "swiftmodule": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/CoreFailure~partial.swiftmodule",
+    "swift-dependencies": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/CoreFailure.swiftdeps"
+  },
+  "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/Feature.swift": {
+    "dependencies": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/Feature.d",
+    "object": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/Feature.swift.o",
+    "swiftmodule": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/Feature~partial.swiftmodule",
+    "swift-dependencies": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/Feature.swiftdeps"
+  },
+  "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/FeatureManifest.swift": {
+    "dependencies": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/FeatureManifest.d",
+    "object": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/FeatureManifest.swift.o",
+    "swiftmodule": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/FeatureManifest~partial.swiftmodule",
+    "swift-dependencies": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/FeatureManifest.swiftdeps"
+  },
+  "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/Sources/PolyPodCoreSwift/MessagePack+Decoding.swift": {
+    "dependencies": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/MessagePack+Decoding.d",
+    "object": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/MessagePack+Decoding.swift.o",
+    "swiftmodule": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/MessagePack+Decoding~partial.swiftmodule",
+    "swift-dependencies": "/Users/ghenadiepusca/Work/polypoly/polyPod/platform/core/PolyPodCoreSwift/.build/arm64-apple-macosx/debug/PolyPodCoreSwift.build/MessagePack+Decoding.swiftdeps"
+  }
+}
