@@ -1,8 +1,9 @@
 use crate::core_failure::CoreFailure;
 use serde::Deserialize;
+use serde::Serialize;
 use std::collections::HashMap;
 
-#[derive(Deserialize, PartialEq, Debug, Clone)]
+#[derive(Deserialize, Serialize, PartialEq, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct FeatureManifest {
     pub name: Option<String>,
