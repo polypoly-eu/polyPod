@@ -151,6 +151,28 @@ mod tests {
     }
 
     #[test]
+    fn test_fs_url_from_resource_id() {
+        let fs_id = "8970r10972490710497291".to_string();
+        let res_id = "polypod://FeatureFiles/".to_string() + &fs_id;
+        let result = PolyOut::fs_url_from_resource_id(res_id, PolyOut::feature_name().unwrap());
+        assert!(result.is_ok());
+
+        let fs_url = PolyOut::fs_url_from_fs_id(fs_id, PolyOut::feature_name().unwrap());
+        assert_eq!(result.unwrap(), fs_url);
+    }
+
+    #[test]
+    fn test_resource_id_from_fs_url() {
+        let fs_id = "8970r10972490710497291".to_string();
+        let fs_url = "file://Something/FeatureFiles/Test/".to_string() + &fs_id;
+        let result = PolyOut::resource_id_from_fs_url(fs_url);
+        assert!(result.is_ok());
+
+        let resource_id = PolyOut::resource_id_from_fs_id(fs_id);
+        assert_eq!(result.unwrap(), resource_id);
+    }
+
+    #[test]
     fn test_import_creates_features_dir() {
         let url = env!("CARGO_MANIFEST_DIR").to_string() + "/src/test_files/test.zip";
         let result = PolyOut::import(url, None);
