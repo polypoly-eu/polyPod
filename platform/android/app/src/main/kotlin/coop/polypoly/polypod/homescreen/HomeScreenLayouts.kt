@@ -18,7 +18,7 @@ data class TileLayout(
     val textBottomPadding: Dp,
     val textStartPadding: Dp,
     val textEndPadding: Dp,
-    val borderWidth: Dp,
+    val borderWidth: Dp
 ) {
     companion object {
         fun smallCard(width: Float, height: Float): TileLayout {
@@ -27,9 +27,9 @@ data class TileLayout(
                 height = height.dp,
                 verticalSpacing = 0.dp,
                 topPadding = 0.dp,
-                startPadding = PolyStyle().spacing._1x,
-                endPadding = PolyStyle().spacing._1x,
-                bottomPadding = PolyStyle().spacing._1x,
+                startPadding = PolyStyle().spacing._2x,
+                endPadding = PolyStyle().spacing._2x,
+                bottomPadding = PolyStyle().spacing._2x,
                 cornerRadius = PolyStyle().radius._2x,
                 textVerticalSpacing = 0.dp,
                 textTopPadding = 0.dp,
@@ -40,7 +40,7 @@ data class TileLayout(
             )
         }
 
-        fun mediumCard(width: Float, height: Float): TileLayout {
+        fun mediumCard(width: Float, height: Float, multiplier: Float): TileLayout { // ktlint-disable max-line-length
             return TileLayout(
                 width = width.dp,
                 height = height.dp,
@@ -51,7 +51,7 @@ data class TileLayout(
                 bottomPadding = 0.dp,
                 cornerRadius = PolyStyle().radius._2x,
                 textVerticalSpacing = PolyStyle().spacing._2x,
-                textTopPadding = PolyStyle().spacing._2x,
+                textTopPadding = (multiplier * PolyStyle().spacing._2x.value).dp, // ktlint-disable max-line-length
                 textBottomPadding = PolyStyle().spacing._2x,
                 textStartPadding = PolyStyle().spacing._3x,
                 textEndPadding = PolyStyle().spacing._4x,

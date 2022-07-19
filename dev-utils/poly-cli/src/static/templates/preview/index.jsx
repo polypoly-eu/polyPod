@@ -54,7 +54,7 @@ const Footer = (props) => {
                 buttonText={i18n.t(props.model.buttonTitle)}
                 onlyButtonClickEvent={true}
                 onClick={() => {
-                    props.pod.polyNav.openUrl(i18n.t("preview:cta.link"));
+                    props.pod.polyNav.openUrl("learn-more");
                 }}
             >
                 <h3>{i18n.t(props.model.title)}</h3>
@@ -88,7 +88,6 @@ const ProgressInfoPopUp = ({ onClose }) => {
         <SideSwiper
             onClose={onClose}
             open={true}
-            lastChildSelector=".poly-button"
             Component={(props) => (
                 <SideSheet
                     title={i18n.t("progressInfo:title")}
@@ -119,38 +118,43 @@ const App = () => {
     }, []);
 
     return (
-        <Screen
-            className="poly-theme-light background-white"
-            layout="poly-standard-layout"
-        >
-            <div className="preview">
-                <ProgressBanner
-                    stage={content.progress_banner.stage}
-                    title={i18n.t(content.progress_banner.title)}
-                    description={i18n.t(content.progress_banner.description)}
-                    onClick={() => {
-                        setPopUpVisible(true);
-                    }}
-                />
-                <h1>{i18n.t(content.title)}</h1>
-                <div>
-                    {content.sections.map((s, i) => (
-                        <Section key={i} model={s} />
-                    ))}
-                </div>
-                <div>
-                    <Footer model={content.footer} pod={pod} />
-                </div>
-                {popUpVisible && (
-                    <ProgressInfoPopUp
-                        onClose={() => {
-                            console.log("Clicked the Close button");
-                            setPopUpVisible(false);
+        <>
+            <div className="poly-nav-bar-separator-overlay" />
+            <Screen
+                className="poly-theme-light background-white"
+                layout="poly-standard-layout"
+            >
+                <div className="preview">
+                    <ProgressBanner
+                        stage={content.progress_banner.stage}
+                        title={i18n.t(content.progress_banner.title)}
+                        description={i18n.t(
+                            content.progress_banner.description
+                        )}
+                        onClick={() => {
+                            setPopUpVisible(true);
                         }}
                     />
-                )}
-            </div>
-        </Screen>
+                    <h1>{i18n.t(content.title)}</h1>
+                    <div>
+                        {content.sections.map((s, i) => (
+                            <Section key={i} model={s} />
+                        ))}
+                    </div>
+                    <div>
+                        <Footer model={content.footer} pod={pod} />
+                    </div>
+                    {popUpVisible && (
+                        <ProgressInfoPopUp
+                            onClose={() => {
+                                console.log("Clicked the Close button");
+                                setPopUpVisible(false);
+                            }}
+                        />
+                    )}
+                </div>
+            </Screen>
+        </>
     );
 };
 
