@@ -16,6 +16,12 @@ class Core {
             ) { mapFeatureManifest(it) }
         }
 
+        fun loadFeatureCategories(featuresDir: String): List<FeatureCategory> {
+            return handleCoreResponse(
+                JniApi().loadFeatureCategories(featuresDir)
+            ) { mapFeatureCategories(it) }
+        }
+
         private fun <T> handleCoreResponse(
             byteResponse: ByteArray,
             map: (Value) -> T
