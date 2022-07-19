@@ -201,16 +201,6 @@ mod tests {
 
         std::fs::remove_dir_all(Path::new(&PolyOut::features_path())).unwrap();
     }
-
-    // #[test]
-    // fn test_resource_id_from_fs_id() {
-    //     assert_eq!("", "a");
-    // }
-
-    // #[test]
-    // fn test_file_system_url_from_fs_id() {
-    //     assert_eq!("", "a");
-    // }
 }
 
 trait UrlUtils {
