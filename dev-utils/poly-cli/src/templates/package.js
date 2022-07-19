@@ -15,36 +15,39 @@ export function packageTemplate(
         name = convertCamelCaseToHyphen(name);
     }
 
-    return JSON.stringify(
-        {
-            name: name,
-            version: version,
-            description: description,
-            main: main,
-            scripts: {
-                build: "rollup -c",
-                watch: "rollup --watch -c",
-                test: 'echo "🚨: No tests run"',
+    return (
+        JSON.stringify(
+            {
+                name: name,
+                version: version,
+                description: description,
+                main: main,
+                scripts: {
+                    build: "rollup -c",
+                    watch: "rollup --watch -c",
+                    test: 'echo "🚨: No tests run"',
+                },
+                devDependencies: {
+                    "@polypoly-eu/rollup-plugin-copy-watch":
+                        "file:../../dev-utils/rollup-plugin-copy-watch",
+                    rollup: "*",
+                    "@rollup/plugin-json": "*",
+                    "@rollup/plugin-node-resolve": "*",
+                },
+                dependencies: {
+                    "@polypoly-eu/silly-i18n":
+                        "file:../../feature-utils/silly-i18n",
+                    "@polypoly-eu/podjs": "file:../../platform/podjs",
+                    "@polypoly-eu/poly-look":
+                        "file:../../feature-utils/poly-look",
+                    react: "*",
+                    "react-dom": "*",
+                },
+                author: author,
+                license: license,
             },
-            devDependencies: {
-                "@polypoly-eu/rollup-plugin-copy-watch":
-                    "file:../../dev-utils/rollup-plugin-copy-watch",
-                rollup: "*",
-                "@rollup/plugin-json": "*",
-                "@rollup/plugin-node-resolve": "*",
-            },
-            dependencies: {
-                "@polypoly-eu/silly-i18n":
-                    "file:../../feature-utils/silly-i18n",
-                "@polypoly-eu/podjs": "file:../../platform/podjs",
-                "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
-                react: "*",
-                "react-dom": "*",
-            },
-            author: author,
-            license: license,
-        },
-        null,
-        INDENTING_SPACES
-    ) + "\n";
+            null,
+            INDENTING_SPACES
+        ) + "\n"
+    );
 }
