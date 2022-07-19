@@ -39,7 +39,7 @@ impl PolyOut {
             .map(|c| c.collect::<Vec<_>>())
             .and_then(|segments| segments.last().cloned())
             .map(|id| id.to_string())
-            .ok_or("Could not extract fs id from resource id. No path components".to_string())
+            .ok_or("Could not extract fs id from fs url. No path components".to_string())
     }
 
     fn resource_id_from_fs_id(fs_id: FsId) -> ResourceId {
