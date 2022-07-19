@@ -26,20 +26,12 @@ impl PolyOut {
         if url.scheme() != "polypod" {
             return Err("Not a polypod resource id".to_string());
         }
-        url.path_segments()
-            .map(|c| c.collect::<Vec<_>>())
-            .and_then(|segments| segments.last().cloned())
-            .map(|id| id.to_string())
-            .ok_or("Could not extract fs id from resource id. No path components".to_string())
+        url.last_segment()
     }
 
     fn fs_id_from_fs_url(fs_url: String) -> Result<FsId, String> {
         let url = Url::parse(&fs_url).map_err(|err| err.to_string())?;
-        url.path_segments()
-            .map(|c| c.collect::<Vec<_>>())
-            .and_then(|segments| segments.last().cloned())
-            .map(|id| id.to_string())
-            .ok_or("Could not extract fs id from fs url. No path components".to_string())
+        url.last_segment()
     }
 
     fn resource_id_from_fs_id(fs_id: FsId) -> ResourceId {
@@ -197,4 +189,18 @@ mod tests {
     // fn test_file_system_url_from_fs_id() {
     //     assert_eq!("", "a");
     // }
+}
+
+trait UrlUtils {
+    fn last_segment(&self) -> Result<String, String>;
+}
+
+impl UrlUtils for Url {
+    fn last_segment(&self) -> Result<String, String> {
+        self.path_segments()
+            .map(|c| c.collect::<Vec<_>>())
+            .and_then(|segments| segments.last().cloned())
+            .map(|id| id.to_string())
+            .ok_or("Could not extract fs id from resource id. No path components".to_string())
+    }
 }
