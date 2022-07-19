@@ -39,7 +39,7 @@ fun mapError(msgObject: Map<Value, Value>): CoreFailure {
 }
 
 fun mapFeatureCategories(msgObject: Value): List<FeatureCategory> {
-    msgObject.asArrayValue().map {
+    return msgObject.asArrayValue().map {
         mapFeatureCategory(it)
     }
 }
@@ -75,7 +75,7 @@ fun mapFeature(msgObject: Value): Feature {
         primaryColor = map.getValue("primaryColor").toString(),
         borderColor = map.getValue("borderColor").toString(),
         tileTextColor = map.getValue("tileTextColor").toString(),
-        links = map.getValue("links").getMapValue().map {
+        links = map.getValue("links").asMapValue().map().map {
             it.key.asStringValue().asString() to
                 it.value.asStringValue().asString()
         }.toMap()

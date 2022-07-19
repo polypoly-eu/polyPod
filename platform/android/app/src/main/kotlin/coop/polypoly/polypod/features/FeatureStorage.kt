@@ -72,6 +72,11 @@ object FeatureStorage {
 
             categories.add(categoryModel)
         }
+        copyFeatureCategories(context)
+        val path = getFeaturesDir(context).path
+        val abs = getFeaturesDir(context).absolutePath
+        val can = getFeaturesDir(context).canonicalPath
+        Core.loadFeatureCategories(path)
     }
 
     fun featureForId(id: String): Feature? {
@@ -103,6 +108,22 @@ object FeatureStorage {
         return Gson()
             .fromJson(categoriesJson, Array<RawCategory>::class.java)
             .toList()
+    }
+
+    fun copyFeatureCategories(context: Context) {
+        val source = context.assets.open("features/categories.json")
+        val featuresDir = getFeaturesDir(context)
+        val destination = FileOutputStream(File(featuresDir, "categories.json"))
+        source.copyTo(destination)
+    }
+
+    fun copyFeatures(context: Context) {
+        context
+            .assets
+            .list("features")
+            .forEach {
+
+            }
     }
 
     private fun loadFeature(context: Context, fileName: String): Feature {
