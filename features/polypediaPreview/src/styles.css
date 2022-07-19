@@ -67,6 +67,7 @@
 
 .footer h3 {
     font-size: var(--font-size-xl);
+    font-weight: 100;
     margin-bottom: calc(var(--gdu) * 3);
     margin-top: 0;
     line-height: var(--line-height);
