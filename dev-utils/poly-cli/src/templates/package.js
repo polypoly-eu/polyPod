@@ -37,8 +37,6 @@ export function packageTemplate(
                 "@polypoly-eu/silly-i18n":
                     "file:../../feature-utils/silly-i18n",
                 "@polypoly-eu/podjs": "file:../../platform/podjs",
-                "@polypoly-eu/pod-api":
-                    "file:../../platform/feature-api/api/pod-api",
                 "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
                 react: "*",
                 "react-dom": "*",
