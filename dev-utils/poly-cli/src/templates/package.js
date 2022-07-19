@@ -46,5 +46,5 @@ export function packageTemplate(
         },
         null,
         INDENTING_SPACES
-    );
+    ) + "\n";
 }
