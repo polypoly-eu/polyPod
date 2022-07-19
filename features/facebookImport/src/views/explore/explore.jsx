@@ -18,10 +18,6 @@ import i18n from "!silly-i18n";
 import "./explore.css";
 import { ministories } from "../ministories/ministories.js";
 
-const PopUpMessage = ({ children, reportResultAnswer }) => {
-    return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
-};
-
 const ExploreView = () => {
     const { reportResult, setReportResult } = useContext(ImporterContext);
     const { account } = useContext(PolyImportContext);
