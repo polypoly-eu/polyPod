@@ -21,15 +21,15 @@ data class Feature(
     val version: String?,
     val description: String?,
     val thumbnail: String?,
-    val thumbnailColor: String,
-    val primaryColor: String,
-    val borderColor: String,
-    val tileTextColor: String,
+    val thumbnailColor: Int,
+    val primaryColor: Int,
+    val borderColor: Int,
+    val tileTextColor: Int,
     val links: Map<String, String>
 ) {
     fun findUrl(target: String): String? = when (target) {
-        in links.keys ?: listOf() -> links.get(target)
-        in links.values ?: listOf() -> target
+        in links.keys -> links[target]
+        in links.values -> target
         else -> null
     }
 }

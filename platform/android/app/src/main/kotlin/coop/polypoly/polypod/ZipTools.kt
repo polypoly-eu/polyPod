@@ -82,7 +82,11 @@ class ZipTools {
         }
 
         private fun extractFile(inputStream: InputStream, destFilePath: Path) {
-            BufferedOutputStream(FileOutputStream(destFilePath.absolutePathString())).use { bos ->
+            BufferedOutputStream(
+                FileOutputStream(
+                    destFilePath.absolutePathString()
+                )
+            ).use { bos ->
                 var read: Int
                 val bytesIn = ByteArray(4096)
                 while (inputStream.read(bytesIn).also { read = it } != -1) {

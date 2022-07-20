@@ -1,16 +1,13 @@
 package coop.polypoly.polypod.features
 
 import android.content.Context
-import com.google.gson.Gson
 import coop.polypoly.core.Core
 import coop.polypoly.core.Feature
 import coop.polypoly.core.FeatureCategory
-import coop.polypoly.core.FeatureManifest
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.ZipTools
 import java.io.File
 import java.io.FileOutputStream
-import java.util.zip.ZipFile
 import kotlin.io.path.Path
 
 object FeatureStorage {
@@ -30,8 +27,8 @@ object FeatureStorage {
         }
 
         copyFeatureCategories(context)
-        val path = getFeaturesDir(context).path
-        categories = Core.loadFeatureCategories(path)
+        copyFeatures(context)
+        categories = Core.loadFeatureCategories(getFeaturesDir(context).path)
     }
 
     fun featureForId(id: String): Feature? {
@@ -46,34 +43,37 @@ object FeatureStorage {
         return null
     }
 
-    fun copyFeatureCategories(context: Context) {
-        copyFeatures(context)
+    private fun copyFeatureCategories(context: Context) {
         val source = context.assets.open("features/categories.json")
         val featuresDir = getFeaturesDir(context)
         val destination = FileOutputStream(File(featuresDir, "categories.json"))
         source.copyTo(destination)
     }
 
-    fun copyFeatures(context: Context) {
-        context
+    private fun copyFeatures(context: Context) {
+        val features = context
             .assets
             .list("features")
             ?.filter {
                 it.endsWith("zip")
             }
-            ?.forEach {
-               copyFeature(it, context)
-            }
-    }
 
-    fun copyFeature(zipName: String, context: Context) {
-        val source = context.assets.open("features/$zipName")
-        val featuresDir = getFeaturesDir(context)
-        val destFile = File(featuresDir, zipName)
-        val destination = FileOutputStream(destFile)
-        source.copyTo(destination)
-        val featureName = zipName.removeSuffix(".zip")
-        ZipTools.unzip(destFile, Path(featuresDir.path.plus("/$featureName")))
+        if (features == null || features.isEmpty()) {
+            logger.error("No feature were found")
+        } else {
+            features.forEach { zipName ->
+                val source = context.assets.open("features/$zipName")
+                val featuresDir = getFeaturesDir(context)
+                val destFile = File(featuresDir, zipName)
+                val destination = FileOutputStream(destFile)
+                source.copyTo(destination)
+                val featureName = zipName.removeSuffix(".zip")
+                ZipTools.unzip(
+                    destFile,
+                    Path(featuresDir.path.plus("/$featureName"))
+                )
+            }
+        }
     }
 
     private fun getFeaturesDir(context: Context) =

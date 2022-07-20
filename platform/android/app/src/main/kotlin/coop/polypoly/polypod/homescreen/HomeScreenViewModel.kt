@@ -121,9 +121,9 @@ class HomeScreenViewModel {
                         feature.name,
                         feature.description ?: "",
                         createTileThumbnailBitmap(context, feature.thumbnail),
-                        Color(android.graphics.Color.parseColor(feature.thumbnailColor)),
-                        Color(android.graphics.Color.parseColor(feature.borderColor)),
-                        Color(android.graphics.Color.parseColor(feature.tileTextColor)),
+                        Color(feature.thumbnailColor),
+                        Color(feature.borderColor),
+                        Color(feature.tileTextColor),
                     ) {
                         onFeatureSelected(feature.id)
                     }
@@ -132,7 +132,10 @@ class HomeScreenViewModel {
         }
     }
 
-    fun createTileThumbnailBitmap(context: Context, path: String?): Bitmap? {
+    private fun createTileThumbnailBitmap(
+        context: Context,
+        path: String?
+    ): Bitmap? {
         if (path == null) {
             return null
         }

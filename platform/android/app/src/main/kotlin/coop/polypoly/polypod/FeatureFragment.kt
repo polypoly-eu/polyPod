@@ -125,8 +125,8 @@ open class FeatureFragment : Fragment() {
 
     private fun setupFeature(view: View) {
         foregroundResources =
-            ForegroundResources.fromBackgroundColor(Color.parseColor(feature.primaryColor))
-        activity?.window?.navigationBarColor = Color.parseColor(feature.primaryColor)
+            ForegroundResources.fromBackgroundColor(feature.primaryColor)
+        activity?.window?.navigationBarColor = feature.primaryColor
         setupAppBar(view)
         featureContainer = view.findViewById(R.id.feature_container)
         featureContainer.errorHandler = ::handleError
@@ -136,7 +136,7 @@ open class FeatureFragment : Fragment() {
 
     private fun setupAppBar(view: View) {
         view.findViewById<View>(R.id.app_bar)
-            .setBackgroundColor(Color.parseColor(feature.primaryColor))
+            .setBackgroundColor(feature.primaryColor)
         view.findViewById<TextView>(R.id.feature_title).setTextColor(
             resources.getColor(
                 foregroundResources.color,

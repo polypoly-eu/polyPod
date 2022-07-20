@@ -39,7 +39,6 @@ import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import kotlinx.coroutines.CompletableDeferred
 import java.io.ByteArrayInputStream
 import java.io.File
-import java.util.zip.ZipFile
 
 @SuppressLint("SetJavaScriptEnabled")
 class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
@@ -190,7 +189,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
     }
 
     private fun loadFeature(feature: Feature) {
-        webView.setBackgroundColor(Color.parseColor(feature.primaryColor))
+        webView.setBackgroundColor(feature.primaryColor)
         FeatureStorage.activeFeatureId = feature.id
         api.polyNav.setNavObserver(
             PolyNavObserver(

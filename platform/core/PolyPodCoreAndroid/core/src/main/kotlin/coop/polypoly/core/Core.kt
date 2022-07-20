@@ -10,12 +10,6 @@ class Core {
             return handleCoreResponse(JniApi().bootstrapCore(languageCode)) {}
         }
 
-        fun parseFeatureManifest(json: String): FeatureManifest {
-            return handleCoreResponse(
-                JniApi().parseFeatureManifest(json)
-            ) { mapFeatureManifest(it) }
-        }
-
         fun loadFeatureCategories(featuresDir: String): List<FeatureCategory> {
             return handleCoreResponse(
                 JniApi().loadFeatureCategories(featuresDir)

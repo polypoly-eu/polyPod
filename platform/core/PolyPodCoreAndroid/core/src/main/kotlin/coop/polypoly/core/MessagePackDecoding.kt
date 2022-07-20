@@ -1,5 +1,6 @@
 package coop.polypoly.core
 
+import android.graphics.Color
 import org.msgpack.value.Value
 import org.msgpack.value.ValueFactory
 
@@ -71,44 +72,13 @@ fun mapFeature(msgObject: Value): Feature {
         version = map.get("version")?.toString(),
         description = map.get("description")?.toString(),
         thumbnail = map.get("thumbnail")?.toString(),
-        thumbnailColor = map.getValue("thumbnailColor").toString(),
-        primaryColor = map.getValue("primaryColor").toString(),
-        borderColor = map.getValue("borderColor").toString(),
-        tileTextColor = map.getValue("tileTextColor").toString(),
+        thumbnailColor = Color.parseColor(map.getValue("thumbnailColor").toString()),
+        primaryColor = Color.parseColor(map.getValue("primaryColor").toString()),
+        borderColor = Color.parseColor(map.getValue("borderColor").toString()),
+        tileTextColor = Color.parseColor(map.getValue("tileTextColor").toString()),
         links = map.getValue("links").asMapValue().map().map {
             it.key.asStringValue().asString() to
                 it.value.asStringValue().asString()
         }.toMap()
-    )
-}
-
-fun mapFeatureManifest(msgObject: Value): FeatureManifest {
-    val msgObject = msgObject.asMapValue().map() ?: throw EmptyFeatureManifest()
-
-    val name = msgObject.get("name")?.getStringValue()
-    val author = msgObject.get("author")?.getStringValue()
-    val version = msgObject.get("version")?.getStringValue()
-    val description = msgObject.get("description")?.getStringValue()
-    val thumbnail = msgObject.get("thumbnail")?.getStringValue()
-    val thumbnailColor = msgObject.get("thumbnailColor")?.getStringValue()
-    val primaryColor = msgObject.get("primaryColor")?.getStringValue()
-    val borderColor = msgObject.get("borderColor")?.getStringValue()
-    val tileTextColor = msgObject.get("tileTextColor")?.getStringValue()
-    val links = msgObject.get("links")?.getMapValue()
-
-    return FeatureManifest(
-        name,
-        author,
-        version,
-        description,
-        thumbnail,
-        thumbnailColor,
-        primaryColor,
-        borderColor,
-        tileTextColor,
-        links?.map {
-            it.key.asStringValue().asString() to
-                it.value.asStringValue().asString()
-        }?.toMap()
     )
 }
