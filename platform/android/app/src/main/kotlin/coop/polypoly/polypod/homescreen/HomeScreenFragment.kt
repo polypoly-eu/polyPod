@@ -33,7 +33,7 @@ class HomeScreenFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val sectionModels = viewModel.getSectionModels {
+        val sectionModels = viewModel.getSectionModels(requireContext()) {
             findNavController().navigate(
                 HomeScreenFragmentDirections
                     .actionHomeScreenFragmentToFeatureFragment(it)

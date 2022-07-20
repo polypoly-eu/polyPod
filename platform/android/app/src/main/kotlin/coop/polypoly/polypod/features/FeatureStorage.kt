@@ -3,37 +3,21 @@ package coop.polypoly.polypod.features
 import android.content.Context
 import com.google.gson.Gson
 import coop.polypoly.core.Core
+import coop.polypoly.core.Feature
+import coop.polypoly.core.FeatureCategory
 import coop.polypoly.core.FeatureManifest
 import coop.polypoly.polypod.logging.LoggerFactory
+import coop.polypoly.polypod.polyNav.ZipTools
 import java.io.File
 import java.io.FileOutputStream
 import java.util.zip.ZipFile
-
-data class RawCategory(
-    val id: String,
-    val name: String,
-    val features: List<String>,
-    val visible: Boolean?
-)
-
-enum class FeatureCategory {
-    yourData,
-    knowHow,
-    tools,
-    developer
-}
-
-data class FeatureCategoryModel(
-    val category: FeatureCategory,
-    val name: String,
-    val features: List<Feature>
-)
+import kotlin.io.path.Path
 
 object FeatureStorage {
     private val logger = LoggerFactory.getLogger(FeatureStorage::class.java)
     var activeFeatureId: String? = null
 
-    val categories: MutableList<FeatureCategoryModel> = ArrayList()
+    var categories: List<FeatureCategory> = ArrayList()
 
     fun importFeatures(context: Context) {
         val featuresDir = getFeaturesDir(context)
@@ -45,38 +29,9 @@ object FeatureStorage {
             logger.debug("Directory for Features already exists")
         }
 
-        categories.clear()
-        val rawCategories = readCategories(context)
-
-        for (rawCategory in rawCategories) {
-            if (rawCategory.features.isEmpty()) {
-                continue
-            }
-            val categoryId = FeatureCategory.valueOf(rawCategory.id)
-            if (rawCategory.visible == false) {
-                logger.debug("Category $categoryId not visible, ignored")
-                continue
-            }
-
-            val features: MutableList<Feature> = ArrayList()
-            for (featureId in rawCategory.features) {
-                importFeature(context, featureId)
-                features.add(loadFeature(context, featureId))
-            }
-
-            val categoryModel = FeatureCategoryModel(
-                categoryId,
-                rawCategory.name,
-                features
-            )
-
-            categories.add(categoryModel)
-        }
         copyFeatureCategories(context)
         val path = getFeaturesDir(context).path
-        val abs = getFeaturesDir(context).absolutePath
-        val can = getFeaturesDir(context).canonicalPath
-        Core.loadFeatureCategories(path)
+        categories = Core.loadFeatureCategories(path)
     }
 
     fun featureForId(id: String): Feature? {
@@ -91,26 +46,8 @@ object FeatureStorage {
         return null
     }
 
-    private fun importFeature(context: Context, id: String) {
-        logger.debug("Installing $id from assets")
-        val source = context.assets.open("features/$id.zip")
-        val featuresDir = getFeaturesDir(context)
-        featuresDir.mkdirs()
-        val destination = FileOutputStream(File(featuresDir, "$id.zip"))
-        source.copyTo(destination)
-    }
-
-    private fun readCategories(context: Context): List<RawCategory> {
-        val categoriesJson = context.assets
-            .open("features/categories.json")
-            .reader()
-            .readText()
-        return Gson()
-            .fromJson(categoriesJson, Array<RawCategory>::class.java)
-            .toList()
-    }
-
     fun copyFeatureCategories(context: Context) {
+        copyFeatures(context)
         val source = context.assets.open("features/categories.json")
         val featuresDir = getFeaturesDir(context)
         val destination = FileOutputStream(File(featuresDir, "categories.json"))
@@ -121,34 +58,22 @@ object FeatureStorage {
         context
             .assets
             .list("features")
-            .forEach {
-
+            ?.filter {
+                it.endsWith("zip")
+            }
+            ?.forEach {
+               copyFeature(it, context)
             }
     }
 
-    private fun loadFeature(context: Context, fileName: String): Feature {
-        val content = ZipFile(File(getFeaturesDir(context), "$fileName.zip"))
-        val manifest = readManifest(content)
-        return Feature(fileName, content, context, manifest)
-    }
-
-    private fun readManifest(
-        content: ZipFile
-    ): FeatureManifest? {
-        val manifestEntry = content.getEntry("manifest.json")
-        if (manifestEntry == null) {
-            logger.warn("Missing manifest for '${content.name}'")
-            return null
-        }
-        val manifestString =
-            content.getInputStream(manifestEntry).reader().readText()
-
-        return try {
-            Core.parseFeatureManifest(manifestString)
-        } catch (ex: Exception) {
-            logger.error(ex.message)
-            null
-        }
+    fun copyFeature(zipName: String, context: Context) {
+        val source = context.assets.open("features/$zipName")
+        val featuresDir = getFeaturesDir(context)
+        val destFile = File(featuresDir, zipName)
+        val destination = FileOutputStream(destFile)
+        source.copyTo(destination)
+        val featureName = zipName.removeSuffix(".zip")
+        ZipTools.unzip(destFile, Path(featuresDir.path.plus("/$featureName")))
     }
 
     private fun getFeaturesDir(context: Context) =
