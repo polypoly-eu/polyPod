@@ -28,19 +28,10 @@ jobs:
                   node-version: 16
                   cache: "npm"
                   cache-dependency-path: "**/package-lock.json"
-            - name: Cache JS dependencies
-              uses: actions/cache@v3
-              id: cache
-              with:
-                  path: "**/node_modules"
-                  key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
             - name: Lock xcode version
               run: cd platform/ios; make lockxcodeversion
-            - name: Install modules if needed
-              if: steps.cache.outputs.cache-hit != 'true'
-              run: ./build.js install
-            - name: Build API and features
-              run: ./build.js build
+            - name: Install modules, build API and features
+              run: ./build.js
             - name: Build core
               working-directory: platform/core
               run: make
