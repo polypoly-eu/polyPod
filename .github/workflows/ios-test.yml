@@ -18,7 +18,7 @@ on:
             - "platform/ios/**"
 jobs:
     test:
-        name: Test polyPod iOS and Android app
+        name: Test polyPod iOS app
         runs-on: macOS-latest
         steps:
             - name: Checkout repository
