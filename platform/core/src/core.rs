@@ -1,6 +1,5 @@
 use crate::{
     core_failure::CoreFailure,
-    feature_manifest_parsing::{FeatureManifest, JSONStr},
     feature_categories,
     io::file_system::DefaultFileSystem,
 };
@@ -31,11 +30,6 @@ pub fn bootstrap(language_code: String) -> Result<(), CoreFailure> {
 
     let _ = CORE.set(core);
     Ok(())
-}
-
-pub fn parse_feature_manifest(json: &JSONStr) -> Result<FeatureManifest, CoreFailure> {
-    let core = get_instance()?;
-    FeatureManifest::parse(json, &core.language_code)
 }
 
 pub fn load_feature_categories(features_dir: &str) -> Result<Vec<feature_categories::FeatureCategory>, CoreFailure>{

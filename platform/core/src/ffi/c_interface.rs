@@ -25,24 +25,11 @@ pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> CByteBu
 }
 
 /// # Safety
-/// This function can be unsafe if the json pointer is null or the string is in wrong format.
+/// This function can be unsafe if the features_dir pointer is null or the string is in wrong format.
 ///
-/// Parse the given feature maniest json.
-/// - json: Feature manifest json string to be parsed.
-/// Returns a flatbuffer byte array with feature_manifest_response.
-#[no_mangle]
-pub unsafe extern "C" fn parse_feature_manifest_from_json(json: *const c_char) -> CByteBuffer {
-    create_byte_buffer(serialize(
-        cstring_to_str(&json).and_then(core::parse_feature_manifest),
-    ))
-}
-
-/// # Safety
-/// This function can be unsafe if the json pointer is null or the string is in wrong format.
-///
-/// Parse the given feature maniest json.
-/// - json: Feature manifest json string to be parsed.
-/// Returns a flatbuffer byte array with feature_manifest_response.
+/// Loads the feature categories from from the given features_dir 
+/// - features_dir: Path to directory where feature categories are stored.
+/// Returns Result<Vec<FeatureCategory>, CoreFailure> as MessagePack value.
 #[no_mangle]
 pub unsafe extern "C" fn load_feature_categories(features_dir: *const c_char) -> CByteBuffer {
     create_byte_buffer(serialize(
