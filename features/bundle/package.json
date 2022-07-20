@@ -10,7 +10,6 @@
     "google-feature": "file:../google",
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
-    "poly-preview-feature": "file:../polyPreview",
     "polypedia-preview": "file:../polypediaPreview",
     "amazon-data-importer-preview": "file:../amazonDataImporterPreview",
     "company-data-cleaner-preview": "file:../companyDataCleanerPreview",
@@ -66,11 +65,6 @@
     {
       "archiveName": "polyTalkPreview",
       "moduleName": "poly-talk-preview",
-      "artifactPath": "dist"
-    },
-    {
-      "archiveName": "polyPreview",
-      "moduleName": "poly-preview-feature",
       "artifactPath": "dist"
     },
     {

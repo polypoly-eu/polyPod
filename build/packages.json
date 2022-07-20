@@ -18,7 +18,6 @@
         "features/lexicon",
         "features/polyExplorer",
         "features/polyPinion",
-        "features/polyPreview",
         "features/test",
         "features/amazonDataImporterPreview",
         "features/featureStorePreview",
