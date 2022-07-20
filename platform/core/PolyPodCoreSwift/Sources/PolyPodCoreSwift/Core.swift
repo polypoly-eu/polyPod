@@ -23,11 +23,19 @@ public final class Core {
        
         return handleCoreResponse(core_bootstrap(self.languageCode), { _ in })
     }
+
     /// Loads the feature categories from the give features directory
-    public func loadFeatureCategories(featuresDirectory: String) -> Result<[FeatureCategory], Error> {
-       let features_dir = NSString(string: featuresDirectory).utf8String!
-        return handleCoreResponse(load_feature_categories(features_dir), mapFeatureCategories)
+    public func loadFeatureCategories(
+        featuresDirectory: String
+    ) -> Result<[FeatureCategory], Error> {
+        let features_dir = NSString(string: featuresDirectory).utf8String!
+        return handleCoreResponse(
+            load_feature_categories(features_dir),
+            mapFeatureCategories
+        )
     }
+
+    // MARK: - Internal API
 
     func handleCoreResponse<T>(
         _ byte_response: CByteBuffer,
@@ -44,7 +52,7 @@ public final class Core {
             )
             let data = Data(buffer: buffer)
             
-            let responseObject: [MessagePackValue: MessagePackValue] = try MessagePack.unpackFirst(data).getDictionary()
+            let responseObject: CoreResponseObject = try MessagePack.unpackFirst(data).getDictionary()
             
             if let responseObject = responseObject["Ok"] {
                 return try map(responseObject)

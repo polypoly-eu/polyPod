@@ -90,27 +90,6 @@ struct DecodedFeatureManifest {
     tile_text_color: Option<String>
 }
 
-impl Default for DecodedFeatureManifest {
-    fn default() -> Self {
-        DecodedFeatureManifest {
-            name: Some("name".to_string()),
-            author: Some("author".to_string()),
-            version: Some("version".to_string()),
-            description: Some("description".to_string()),
-            thumbnail: Some("thumbnail".to_string()),
-            thumbnail_color: Some("thumbnail_color".to_string()),
-            primary_color: Some("primary_color".to_string()),
-            links: Some(
-                HashMap::from([
-                      ("some_link".to_string(), "https://some_link.com".to_string()),
-                ])
-            ),
-            translations: None,
-            border_color: Some("border_color".to_string()),
-            tile_text_color: Some("tile_text_color".to_string()),
-        }
-    }
-}
 
 fn load_raw_categories(
     fs: &impl FileSystem,
@@ -211,14 +190,19 @@ fn map_feature(
     Ok(Feature {
         path: feature_path_format(features_dir, id),
         id: id.to_string(),
-        name: translation.and_then(|tr| tr.name.clone()).or(feature_manifest.name).unwrap_or(id.to_string()),
+        name: translation
+            .and_then(|tr| tr.name.clone())
+            .or(feature_manifest.name)
+            .unwrap_or(id.to_string()),
         author: translation
             .and_then(|tr| tr.author.clone())
             .or(feature_manifest.author),
         version: translation
             .and_then(|tr| tr.version.clone())
             .or(feature_manifest.version),
-        description: translation.and_then(|tr| tr.description.clone()).or(feature_manifest.description),
+        description: translation
+            .and_then(|tr| tr.description.clone())
+            .or(feature_manifest.description),
         thumbnail: thumbnail,
         thumbnail_color: thumbnail_color.clone(),
         primary_color: primary_color,
@@ -239,6 +223,28 @@ mod tests {
     use super::*;
     use pretty_assertions::assert_eq;
     use std::collections::HashMap;
+
+    impl Default for DecodedFeatureManifest {
+        fn default() -> Self {
+            DecodedFeatureManifest {
+                name: Some("name".to_string()),
+                author: Some("author".to_string()),
+                version: Some("version".to_string()),
+                description: Some("description".to_string()),
+                thumbnail: Some("thumbnail".to_string()),
+                thumbnail_color: Some("thumbnail_color".to_string()),
+                primary_color: Some("primary_color".to_string()),
+                links: Some(
+                    HashMap::from([
+                          ("some_link".to_string(), "https://some_link.com".to_string()),
+                    ])
+                ),
+                translations: None,
+                border_color: Some("border_color".to_string()),
+                tile_text_color: Some("tile_text_color".to_string()),
+            }
+        }
+    }
 
     struct MockFileSystem {
         contents_of_file_requests_stub: HashMap<String, Result<Vec<u8>, CoreFailure>>,

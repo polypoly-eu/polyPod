@@ -52,6 +52,7 @@ public struct Feature {
     public let tileTextColor: String
     public let links: [String: String]
 }
+
 extension Feature {
     public func findUrl(target: String) -> String? {
         if let url = links[target] {

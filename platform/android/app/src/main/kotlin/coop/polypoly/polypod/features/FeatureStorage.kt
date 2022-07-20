@@ -64,14 +64,14 @@ object FeatureStorage {
             features.forEach { zipName ->
                 val source = context.assets.open("features/$zipName")
                 val featuresDir = getFeaturesDir(context)
-                val destFile = File(featuresDir, zipName)
-                val destination = FileOutputStream(destFile)
-                source.copyTo(destination)
+                val destZipFile = File(featuresDir, zipName)
+                source.copyTo(FileOutputStream(destZipFile))
                 val featureName = zipName.removeSuffix(".zip")
                 ZipTools.unzip(
-                    destFile,
+                    destZipFile,
                     Path(featuresDir.path.plus("/$featureName"))
                 )
+                destZipFile.delete()
             }
         }
     }
