@@ -134,7 +134,7 @@
     {
       "id": "developer",
       "name": "Developer",
-      "visible": false,
+      "visible": true,
       "features": [
         "demo",
         "test"
