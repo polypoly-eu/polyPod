@@ -56,9 +56,9 @@ fun mapFeatureCategory(msgObject: Value): FeatureCategory {
 }
 
 fun mapFeatures(msgObject: Value): List<Feature> {
-   return msgObject.asArrayValue().map {
-       mapFeature(it)
-   }
+    return msgObject.asArrayValue().map {
+        mapFeature(it)
+    }
 }
 
 fun mapFeature(msgObject: Value): Feature {
@@ -72,10 +72,18 @@ fun mapFeature(msgObject: Value): Feature {
         version = map.get("version")?.toString(),
         description = map.get("description")?.toString(),
         thumbnail = map.get("thumbnail")?.toString(),
-        thumbnailColor = Color.parseColor(map.getValue("thumbnailColor").toString()),
-        primaryColor = Color.parseColor(map.getValue("primaryColor").toString()),
-        borderColor = Color.parseColor(map.getValue("borderColor").toString()),
-        tileTextColor = Color.parseColor(map.getValue("tileTextColor").toString()),
+        thumbnailColor = Color.parseColor(
+            map.getValue("thumbnailColor").toString()
+        ),
+        primaryColor = Color.parseColor(
+            map.getValue("primaryColor").toString()
+        ),
+        borderColor = Color.parseColor(
+            map.getValue("borderColor").toString()
+        ),
+        tileTextColor = Color.parseColor(
+            map.getValue("tileTextColor").toString()
+        ),
         links = map.getValue("links").asMapValue().map().map {
             it.key.asStringValue().asString() to
                 it.value.asStringValue().asString()

@@ -11,7 +11,7 @@ data class FeatureCategory(
     val id: FeatureCategoryId,
     val name: String,
     val features: List<Feature>
-    )
+)
 
 data class Feature(
     val path: String,
