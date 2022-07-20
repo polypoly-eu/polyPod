@@ -8,7 +8,12 @@
     box-sizing: border-box;
 }
 
-.unsuccessful {
+.default {
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-900);
+}
+
+.error {
     background-color: var(--color-red-200);
     color: var(--color-red-900);
 }
@@ -16,4 +21,9 @@
 .successful {
     background-color: var(--color-green-200);
     color: var(--color-green-800);
+}
+
+.warning {
+    background-color: var(--color-yellow-200);
+    color: var(--color-yellow-800);
 }

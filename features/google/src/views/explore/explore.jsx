@@ -31,7 +31,7 @@ const ExploreView = () => {
     const renderReportResult = () =>
         reportIsSent !== null && (
             <PopUpBanner
-                reportType={reportIsSent ? "successful" : "unsuccessful"}
+                notificationType={reportIsSent ? "successful" : "error"}
             >
                 {reportIsSent ? (
                     <>

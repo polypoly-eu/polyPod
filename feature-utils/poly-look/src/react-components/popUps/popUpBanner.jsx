@@ -3,14 +3,18 @@ import React from "react";
 import "./popUpBanner.css";
 
 const types = {
+  default: "default",
   successful: "successful",
-  unsuccessful: "unsuccessful",
+  error: "error",
+  warning: "warning",
 };
 
-const PopUpBanner = ({ children, reportType }) => {
+const PopUpBanner = ({ children, notificationType }) => {
   return (
     <div className="pop-up-container">
-      <div className={`pop-up-banner ${types[reportType]}`}>{children}</div>
+      <div className={`pop-up-banner ${types[notificationType]}`}>
+        {children}
+      </div>
     </div>
   );
 };
