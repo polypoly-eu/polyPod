@@ -15,7 +15,7 @@ import java.io.File
 data class SectionModel(
     val title: String,
     val type: SectionType,
-    val tiles: List<TileModel>,
+    val tiles: List<TileModel>
 )
 
 enum class SectionType {
@@ -43,13 +43,13 @@ data class TileModel(
     val backgroundColor: Color,
     val borderColor: Color,
     val tileTextColor: Color,
-    val onSelection: () -> Unit,
+    val onSelection: () -> Unit
 )
 
 data class FooterModel(
     val title: String,
     val description: String,
-    val buttonTitle: String,
+    val buttonTitle: String
 ) {
     fun buttonOpenUri(context: Context): Uri {
         return Uri.parse(

@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.sp
 import coop.polypoly.polypod.luminance
 
 fun isLight(color: Color): Boolean {
@@ -316,6 +317,7 @@ fun Footer(footer: Footer) {
                         fontSize = footer.style.buttonTitleFont.size,
                         lineHeight = footer.style.buttonTitleFont.lineHeight,
                         textAlign = footer.style.buttonTitleFont.alignment,
+                        letterSpacing = 0.sp
                     )
                 }
             }

@@ -768,7 +768,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                 )
               ],
               type: .yourData),
-        .init(title: "Know how",
+        .init(title: "Data Know-How",
               cards: [
                 .init(id: UUID().uuidString,
                       title: "polyExplorer",
