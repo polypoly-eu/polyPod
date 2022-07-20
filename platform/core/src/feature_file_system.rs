@@ -98,7 +98,7 @@ impl FeatureFileSystemTrait for FeatureFileSystem {
     fn import(url: String, dest_resource_url: Option<ResourceUrl>) -> Result<ResourceUrl, String> {
         let feature_name = FeatureFileSystem::feature_name()?;
 
-        //TODO: Transfer to FeatureFileSystem interface in the future.
+        //TODO: Transfer to PlatformFileSystem interface in the future.
         FeatureFileSystem::make_sure_feature_files_dir_exists(feature_name.to_string())?;
 
         let id = match dest_resource_url {
@@ -198,7 +198,7 @@ mod tests {
     }
 
     #[test]
-    fn test_import_creates_unzips_successfully() {
+    fn test_import_unzips_successfully() {
         let url = env!("CARGO_MANIFEST_DIR").to_string() + "/src/test_files/test.zip";
         let result = FeatureFileSystem::import(url, None);
         assert!(result.is_ok());
