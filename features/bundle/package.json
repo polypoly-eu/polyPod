@@ -18,7 +18,8 @@
     "gdpr-data-importer-preview": "file:../gdprDataImporterPreview",
     "netflix-data-importer-preview": "file:../netflixDataImporterPreview",
     "polypoly-membership-preview": "file:../polypolyMembershipPreview",
-    "poly-talk-preview": "file:../polyTalkPreview"
+    "poly-talk-preview": "file:../polyTalkPreview",
+    "test-feature": "file:../test"
   },
   "private": true,
   "polyPodFeatures": [
@@ -91,6 +92,11 @@
       "archiveName": "demo",
       "moduleName": "demo-feature",
       "artifactPath": "dist"
+    },
+    {
+      "archiveName": "test",
+      "moduleName": "test-feature",
+      "artifactPath": "dist"
     }
   ],
   "polyPodCategories": [
@@ -130,7 +136,8 @@
       "name": "Developer",
       "visible": false,
       "features": [
-        "demo"
+        "demo",
+        "test"
       ]
     }
   ]
