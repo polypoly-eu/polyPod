@@ -4,8 +4,8 @@ use url::Url;
 use uuid::Uuid;
 use zip::ZipArchive;
 
+type ResourceUrl = String;
 type ResourceId = String;
-type FsId = String;
 
 struct Metadata {}
 struct Content {}
@@ -15,55 +15,55 @@ struct Content {}
 // Different platforms can have different file systems
 // Different features have the same file system.
 trait FeatureFileSystemTrait {
-    fn metadata(resource_id: ResourceId) -> Result<Metadata, String>;
+    fn metadata(resource_url: ResourceUrl) -> Result<Metadata, String>;
     // if you read a directory it will give you back the files and folders inside of it.
     // if you read a file, it will give you back the contents of that file (as a string?)
     // what will the return type be?
-    fn read(resource_id: ResourceId) -> Result<Content, String>;
+    fn read(resource_url: ResourceUrl) -> Result<Content, String>;
     // removing files or directories is not different from each other.
-    fn remove(resource_id: ResourceId) -> Result<(), String>;
+    fn remove(resource_url: ResourceUrl) -> Result<(), String>;
     // import will decide if it needs to unzip a file. The contents of the url will be extracted and inserted into a database.
-    fn import(url: String, dest_resource_id: Option<ResourceId>) -> Result<ResourceId, String>;
+    fn import(url: String, dest_resource_url: Option<ResourceUrl>) -> Result<ResourceUrl, String>;
 }
 
 // Rename to FeatureFileSystem
 struct FeatureFileSystem {}
 
 impl FeatureFileSystem {
-    fn fs_id_from_resource_id(resource_id: ResourceId) -> Result<FsId, String> {
-        let url = Url::parse(&resource_id).map_err(|err| err.to_string())?;
+    fn id_from_resource_url(resource_url: ResourceUrl) -> Result<ResourceId, String> {
+        let url = Url::parse(&resource_url).map_err(|err| err.to_string())?;
         if url.scheme() != "polypod" {
             return Err("Not a polypod resource id".to_string());
         }
         url.last_segment()
     }
 
-    fn fs_id_from_fs_url(fs_url: String) -> Result<FsId, String> {
+    fn id_from_fs_url(fs_url: String) -> Result<ResourceId, String> {
         let url = Url::parse(&fs_url).map_err(|err| err.to_string())?;
         url.last_segment()
     }
 
-    fn resource_id_from_fs_id(fs_id: FsId) -> ResourceId {
-        return "polypod://FeatureFiles/".to_string() + &fs_id;
+    fn resource_url_from_id(id: ResourceId) -> ResourceUrl {
+        return "polypod://FeatureFiles/".to_string() + &id;
     }
 
-    fn fs_url_from_fs_id(fs_id: FsId, feature_name: String) -> String {
-        return FeatureFileSystem::feature_files_path(feature_name) + "/" + &fs_id;
+    fn fs_url_from_id(id: ResourceId, feature_name: String) -> String {
+        return FeatureFileSystem::feature_files_path(feature_name) + "/" + &id;
     }
 
     #[allow(dead_code)]
-    fn fs_url_from_resource_id(
-        resource_id: ResourceId,
+    fn fs_url_from_resource_url(
+        resource_url: ResourceUrl,
         feature_name: String,
     ) -> Result<String, String> {
-        let fs_id = FeatureFileSystem::fs_id_from_resource_id(resource_id)?;
-        return Ok(FeatureFileSystem::fs_url_from_fs_id(fs_id, feature_name));
+        let id = FeatureFileSystem::id_from_resource_url(resource_url)?;
+        return Ok(FeatureFileSystem::fs_url_from_id(id, feature_name));
     }
 
     #[allow(dead_code)]
-    fn resource_id_from_fs_url(fs_url: String) -> Result<String, String> {
-        let fs_id = FeatureFileSystem::fs_id_from_fs_url(fs_url)?;
-        return Ok(FeatureFileSystem::resource_id_from_fs_id(fs_id));
+    fn resource_url_from_fs_url(fs_url: String) -> Result<String, String> {
+        let id = FeatureFileSystem::id_from_fs_url(fs_url)?;
+        return Ok(FeatureFileSystem::resource_url_from_id(id));
     }
 
     fn features_path() -> String {
@@ -95,19 +95,18 @@ impl FeatureFileSystem {
 }
 
 impl FeatureFileSystemTrait for FeatureFileSystem {
-    fn import(url: String, dest_resource_id: Option<ResourceId>) -> Result<ResourceId, String> {
+    fn import(url: String, dest_resource_url: Option<ResourceUrl>) -> Result<ResourceUrl, String> {
         let feature_name = FeatureFileSystem::feature_name()?;
 
         //TODO: Transfer to FeatureFileSystem interface in the future.
         FeatureFileSystem::make_sure_feature_files_dir_exists(feature_name.to_string())?;
 
-        let fs_id = match dest_resource_id {
-            Some(res_id) => FeatureFileSystem::fs_id_from_resource_id(res_id),
+        let id = match dest_resource_url {
+            Some(res_id) => FeatureFileSystem::id_from_resource_url(res_id),
             None => Ok(Uuid::new_v4().to_string()),
         }?;
 
-        let fs_url =
-            FeatureFileSystem::fs_url_from_fs_id(fs_id.to_string(), feature_name.to_string());
+        let fs_url = FeatureFileSystem::fs_url_from_id(id.to_string(), feature_name.to_string());
 
         let file = File::open(Path::new(&url)).map_err(|err| err.to_string())?;
         let mut archive = ZipArchive::new(file).map_err(|err| err.to_string())?;
@@ -115,17 +114,17 @@ impl FeatureFileSystemTrait for FeatureFileSystem {
             .extract(Path::new(&fs_url))
             .map_err(|err| err.to_string())?;
 
-        let resource_id = FeatureFileSystem::resource_id_from_fs_id(fs_id.to_string());
-        return Ok(resource_id);
+        let resource_url = FeatureFileSystem::resource_url_from_id(id.to_string());
+        return Ok(resource_url);
     }
 
-    fn metadata(resource_id: ResourceId) -> Result<Metadata, String> {
+    fn metadata(resource_url: ResourceUrl) -> Result<Metadata, String> {
         Err("mda".to_string())
     }
-    fn read(resource_id: ResourceId) -> Result<Content, String> {
+    fn read(resource_url: ResourceUrl) -> Result<Content, String> {
         Err("mda".to_string())
     }
-    fn remove(resource_id: ResourceId) -> Result<(), String> {
+    fn remove(resource_url: ResourceUrl) -> Result<(), String> {
         Err("mda".to_string())
     }
 }
@@ -135,52 +134,52 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_fs_id_from_resource_id_valid() {
-        let fs_id = "8970r10972490710497291".to_string();
-        let res_id = "polypod://FeatureFiles/".to_string() + &fs_id;
-        let result = FeatureFileSystem::fs_id_from_resource_id(res_id);
+    fn test_id_from_resource_url_valid() {
+        let id = "8970r10972490710497291".to_string();
+        let res_id = "polypod://FeatureFiles/".to_string() + &id;
+        let result = FeatureFileSystem::id_from_resource_url(res_id);
         assert!(result.is_ok());
-        assert_eq!(result.unwrap(), fs_id);
+        assert_eq!(result.unwrap(), id);
     }
 
     #[test]
-    fn test_fs_id_from_resource_id_invalid_scheme() {
+    fn test_id_from_resource_url_invalid_scheme() {
         let res_id = "hello://FeatureFiles/".to_string();
-        let result = FeatureFileSystem::fs_id_from_resource_id(res_id);
+        let result = FeatureFileSystem::id_from_resource_url(res_id);
         assert!(result.is_err());
     }
 
     #[test]
-    fn test_fs_id_from_resource_id_invalid_path() {
+    fn test_id_from_resource_url_invalid_path() {
         let res_id = "hello://".to_string();
-        let result = FeatureFileSystem::fs_id_from_resource_id(res_id);
+        let result = FeatureFileSystem::id_from_resource_url(res_id);
         assert!(result.is_err());
     }
 
     #[test]
-    fn test_fs_url_from_resource_id() {
-        let fs_id = "8970r10972490710497291".to_string();
-        let res_id = "polypod://FeatureFiles/".to_string() + &fs_id;
-        let result = FeatureFileSystem::fs_url_from_resource_id(
+    fn test_fs_url_from_resource_url() {
+        let id = "8970r10972490710497291".to_string();
+        let res_id = "polypod://FeatureFiles/".to_string() + &id;
+        let result = FeatureFileSystem::fs_url_from_resource_url(
             res_id,
             FeatureFileSystem::feature_name().unwrap(),
         );
         assert!(result.is_ok());
 
         let fs_url =
-            FeatureFileSystem::fs_url_from_fs_id(fs_id, FeatureFileSystem::feature_name().unwrap());
+            FeatureFileSystem::fs_url_from_id(id, FeatureFileSystem::feature_name().unwrap());
         assert_eq!(result.unwrap(), fs_url);
     }
 
     #[test]
-    fn test_resource_id_from_fs_url() {
-        let fs_id = "8970r10972490710497291".to_string();
-        let fs_url = "file://Something/FeatureFiles/Test/".to_string() + &fs_id;
-        let result = FeatureFileSystem::resource_id_from_fs_url(fs_url);
+    fn test_resource_url_from_fs_url() {
+        let id = "8970r10972490710497291".to_string();
+        let fs_url = "file://Something/FeatureFiles/Test/".to_string() + &id;
+        let result = FeatureFileSystem::resource_url_from_fs_url(fs_url);
         assert!(result.is_ok());
 
-        let resource_id = FeatureFileSystem::resource_id_from_fs_id(fs_id);
-        assert_eq!(result.unwrap(), resource_id);
+        let resource_url = FeatureFileSystem::resource_url_from_id(id);
+        assert_eq!(result.unwrap(), resource_url);
     }
 
     #[test]
@@ -204,7 +203,7 @@ mod tests {
         let result = FeatureFileSystem::import(url, None);
         assert!(result.is_ok());
 
-        let file_path = FeatureFileSystem::fs_url_from_resource_id(
+        let file_path = FeatureFileSystem::fs_url_from_resource_url(
             result.unwrap(),
             FeatureFileSystem::feature_name().unwrap(),
         )
