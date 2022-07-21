@@ -38,10 +38,22 @@ struct Metadata {
 }
 struct Content {}
 
+trait FeatureFSConfigTrait {
+    fn features_path(&self) -> String;
+}
+struct FeatureFSConfig {}
+
+impl FeatureFSConfigTrait for FeatureFSConfig {
+    fn features_path(&self) -> String {
+        // TODO: get the path from the platform
+        env!("CARGO_MANIFEST_DIR").to_string() + "/TestFeatures/"
+    }
+}
+
 // Feature File System is exposed to the feature
 // Platform File System is what the Feature File System uses under the hood.
 // Different platforms can have different file systems
-// Different features have the same file system.
+// Different features have the same file system
 
 // Doc
 // fn metadata(resource_url: ResourceUrl) -> Result<Metadata, String>;
@@ -71,17 +83,22 @@ fn resource_url_from_id(id: ResourceId) -> ResourceUrl {
     return "polypod://FeatureFiles/".to_string() + &id;
 }
 
-fn fs_url_from_id(id: ResourceId, feature_name: String) -> String {
-    return feature_files_path(&feature_name) + "/" + &id;
+fn fs_url_from_id(
+    id: ResourceId,
+    feature_name: String,
+    config: &impl FeatureFSConfigTrait,
+) -> String {
+    return feature_files_path(&feature_name, config) + "/" + &id;
 }
 
 #[allow(dead_code)]
 fn fs_url_from_resource_url(
     resource_url: ResourceUrl,
     feature_name: String,
+    config: &impl FeatureFSConfigTrait,
 ) -> Result<String, String> {
     let id = id_from_resource_url(resource_url)?;
-    return Ok(fs_url_from_id(id, feature_name));
+    return Ok(fs_url_from_id(id, feature_name, config));
 }
 
 #[allow(dead_code)]
@@ -90,21 +107,17 @@ fn resource_url_from_fs_url(fs_url: String) -> Result<String, String> {
     return Ok(resource_url_from_id(id));
 }
 
-fn features_path() -> String {
-    // TODO: Create a path that will work on iOS, Android and Web
-    env!("CARGO_MANIFEST_DIR").to_string() + "/TestFeatures/"
-}
-
-fn feature_files_path(feature_name: &str) -> String {
-    let path = features_path() + feature_name;
+fn feature_files_path(feature_name: &str, config: &impl FeatureFSConfigTrait) -> String {
+    let path = config.features_path() + "/" + feature_name;
     return path;
 }
 
 fn make_sure_feature_files_dir_exists(
     feature_name: &str,
     platform_fs: impl PlatformFileSystemTrait,
+    config: &impl FeatureFSConfigTrait,
 ) -> Result<(), String> {
-    let files_path = feature_files_path(feature_name);
+    let files_path = feature_files_path(feature_name, config);
     if platform_fs.exists(&files_path) {
         platform_fs.create_dir_structure(&files_path)?;
     }
@@ -120,17 +133,18 @@ fn import(
     url: String,
     dest_resource_url: Option<ResourceUrl>,
     platform_fs: impl PlatformFileSystemTrait,
+    config: &impl FeatureFSConfigTrait,
 ) -> Result<ResourceUrl, String> {
     let feature_name = feature_name()?;
 
-    make_sure_feature_files_dir_exists(&feature_name, platform_fs)?;
+    make_sure_feature_files_dir_exists(&feature_name, platform_fs, config)?;
 
     let id = match dest_resource_url {
         Some(res_id) => id_from_resource_url(res_id),
         None => Ok(Uuid::new_v4().to_string()),
     }?;
 
-    let fs_url = fs_url_from_id(id.to_string(), feature_name.to_string());
+    let fs_url = fs_url_from_id(id.to_string(), feature_name.to_string(), config);
 
     // Todo: Move unzip to FileSystem
     let file = File::open(Path::new(&url)).map_err(|err| err.to_string())?;
@@ -159,12 +173,38 @@ fn remove(resource_url: ResourceUrl) -> Result<(), String> {
     Err("mda".to_string())
 }
 
-//TODO: Fix flaky tests. Use temp dir to write stuff to.
 #[cfg(test)]
 mod tests {
     use super::*;
 
     use tempdir::TempDir;
+
+    struct MockFSConfig {
+        dir: TempDir,
+    }
+
+    impl MockFSConfig {
+        fn new() -> Self {
+            Self {
+                dir: TempDir::new("my_directory_prefix").unwrap(),
+            }
+        }
+    }
+
+    impl FeatureFSConfigTrait for MockFSConfig {
+        fn features_path(&self) -> String {
+            // Here use the temp dir.
+            // The temp dir will be automatically deleted when the reference to dir is dropped
+            let a = self
+                .dir
+                .path()
+                .to_path_buf()
+                .into_os_string()
+                .into_string()
+                .unwrap();
+            return a;
+        }
+    }
 
     #[test]
     fn test_id_from_resource_url_valid() {
@@ -191,12 +231,14 @@ mod tests {
 
     #[test]
     fn test_fs_url_from_resource_url() {
+        let config = MockFSConfig::new();
+
         let id = "8970r10972490710497291".to_string();
         let res_id = "polypod://FeatureFiles/".to_string() + &id;
-        let result = fs_url_from_resource_url(res_id, feature_name().unwrap());
+        let result = fs_url_from_resource_url(res_id, feature_name().unwrap(), &config);
         assert!(result.is_ok());
 
-        let fs_url = fs_url_from_id(id, feature_name().unwrap());
+        let fs_url = fs_url_from_id(id, feature_name().unwrap(), &config);
         assert_eq!(result.unwrap(), fs_url);
     }
 
@@ -213,27 +255,29 @@ mod tests {
 
     #[test]
     fn test_import_creates_features_dir() {
+        let config = MockFSConfig::new();
+
         let url = env!("CARGO_MANIFEST_DIR").to_string() + "/src/test_files/test.zip";
-        let result = import(url, None, PlatformFileSystem {});
+        let result = import(url, None, PlatformFileSystem {}, &config);
         assert!(result.is_ok());
         assert_eq!(
-            Path::new(&feature_files_path(&feature_name().unwrap())).exists(),
+            Path::new(&feature_files_path(&feature_name().unwrap(), &config)).exists(),
             true
         );
-        std::fs::remove_dir_all(Path::new(&features_path())).unwrap();
     }
 
     #[test]
     fn test_import_unzips_successfully() {
+        let config = MockFSConfig::new();
+
         let url = env!("CARGO_MANIFEST_DIR").to_string() + "/src/test_files/test.zip";
-        let result = import(url, None, PlatformFileSystem {});
+        let result = import(url, None, PlatformFileSystem {}, &config);
         assert!(result.is_ok());
 
-        let file_path =
-            fs_url_from_resource_url(result.unwrap(), feature_name().unwrap()).unwrap() + "/test";
+        let file_path = fs_url_from_resource_url(result.unwrap(), feature_name().unwrap(), &config)
+            .unwrap()
+            + "/test";
         assert_eq!(Path::new(&file_path).exists(), true);
-
-        std::fs::remove_dir_all(Path::new(&features_path())).unwrap();
     }
 }
 
