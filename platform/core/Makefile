@@ -22,7 +22,7 @@ android_architectures := arm64-v8a armeabi-v7a x86_64 x86
 jni_libs_copy_path := $(android_core)/jniLibs
 android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%, $(android_architectures))
 # Need for libgcc.a link
-wflags += -L$(CURDIR)
+wflags += -L$(CURDIR)/ndk_env
 
 ifeq ($(OS),Windows_NT)
 	ndk_download_url = $(google_repo)/$(ndk_lib)-windows-x86_64.zip
