@@ -121,7 +121,7 @@ class HomeScreenViewModel {
         if (file.path.endsWith(".pdf")) {
             return PDFBitmap
                 .bitmapFromPDF(
-                    file.inputStream(),
+                    file,
                     context.resources.displayMetrics.densityDpi
                 )
         } else {
