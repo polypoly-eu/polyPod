@@ -1,3 +1,5 @@
+use lazy_static::lazy_static;
+use regex::Regex;
 use std::fs::{DirBuilder, File};
 use std::path::Path;
 use url::Url;
@@ -108,40 +110,56 @@ impl FeatureFSConfigTrait for FeatureFSConfig {
 // import will decide if it needs to unzip a file. The contents of the url will be extracted and inserted into a database.
 // fn import(url: String, dest_resource_url: Option<ResourceUrl>) -> Result<ResourceUrl, String>;
 
-fn id_from_resource_url(resource_url: ResourceUrl) -> Result<ResourceId, String> {
-    let url = Url::parse(&resource_url).map_err(|err| err.to_string())?;
-    if url.scheme() != "polypod" {
-        return Err("Not a polypod resource id".to_string());
+fn id_from_resource_url(resource_url: &ResourceUrl) -> Result<ResourceId, String> {
+    // resource_url: polypod://FeatureFiles/{id}/{path_to_something}?
+    // check if it starts with polypod
+    if !resource_url.starts_with("polypod://") {
+        return Err("Resource url must have polypod scheme. Valid url looks like this: polypod://FeatureFiles/{id}/{path_to_something}?".to_string());
     }
-    url.last_segment()
+
+    lazy_static! {
+        // dev error if the regex does not compile
+        static ref RE: Regex = Regex::new(r"/FeatureFiles/([^/\n\?&]*)").unwrap();
+    }
+    RE.captures(&resource_url)
+        .and_then(|captures| captures.get(1))
+        .map(|m| m.as_str().to_string())
+        .ok_or("Could not extract id. Format is wrong. Expected format polypod://FeatureFiles/{id}/{path_to_something}?".to_string())
 }
 
-fn id_from_fs_url(fs_url: String) -> Result<ResourceId, String> {
-    let url = Url::parse(&fs_url).map_err(|err| err.to_string())?;
-    url.last_segment()
+fn id_from_fs_url(fs_url: &String) -> Result<ResourceId, String> {
+    // fs_url: file://.../FeatureFiles/{feature_name}/{id}/{path_to_something}?
+    lazy_static! {
+        // dev error if the regex does not compile
+        static ref RE: Regex = Regex::new(r"/FeatureFiles/[^/\n\?&]*/([^/\n\?&]*)").unwrap();
+    }
+    RE.captures(&fs_url)
+        .and_then(|captures| captures.get(1))
+        .map(|m| m.as_str().to_string())
+        .ok_or("Could not extract id. Format is wrong. Expected format: file://.../FeatureFiles/{feature_name}/{id}/{path_to_something}?".to_string())
 }
 
-fn resource_url_from_id(id: ResourceId) -> ResourceUrl {
+fn resource_url_from_id(id: &ResourceId) -> ResourceUrl {
     return "polypod://FeatureFiles/".to_string() + &id;
 }
 
-fn fs_url_from_id(id: ResourceId, config: &impl FeatureFSConfigTrait) -> Result<String, String> {
-    feature_files_path(config).and_then(|path| Ok(path + "/" + &id))
+fn fs_url_from_id(id: &ResourceId, config: &impl FeatureFSConfigTrait) -> Result<String, String> {
+    feature_files_path(config).and_then(|path| Ok("file:/".to_string() + &path + "/" + &id))
 }
 
 #[allow(dead_code)]
 fn fs_url_from_resource_url(
-    resource_url: ResourceUrl,
+    resource_url: &ResourceUrl,
     config: &impl FeatureFSConfigTrait,
 ) -> Result<String, String> {
     let id = id_from_resource_url(resource_url)?;
-    return fs_url_from_id(id, config);
+    return fs_url_from_id(&id, config);
 }
 
 #[allow(dead_code)]
 fn resource_url_from_fs_url(fs_url: String) -> Result<String, String> {
-    let id = id_from_fs_url(fs_url)?;
-    return Ok(resource_url_from_id(id));
+    let id = id_from_fs_url(&fs_url)?;
+    return Ok(resource_url_from_id(&id));
 }
 
 fn feature_files_path(config: &impl FeatureFSConfigTrait) -> Result<String, String> {
@@ -162,7 +180,7 @@ fn make_sure_feature_files_dir_exists(
 }
 
 fn import(
-    url: String,
+    url: &String,
     dest_resource_url: Option<ResourceUrl>,
     platform_fs: &impl PlatformFileSystemTrait,
     config: &impl FeatureFSConfigTrait,
@@ -170,20 +188,20 @@ fn import(
     make_sure_feature_files_dir_exists(platform_fs, config)?;
 
     let id = match dest_resource_url {
-        Some(res_id) => id_from_resource_url(res_id),
+        Some(res_id) => id_from_resource_url(&res_id),
         None => Ok(Uuid::new_v4().to_string()),
     }?;
 
-    let fs_url = fs_url_from_id(id.to_string(), config)?;
+    let fs_url = fs_url_from_id(&id, config)?;
 
     platform_fs.unzip(&url, &fs_url)?;
 
-    let resource_url = resource_url_from_id(id.to_string());
+    let resource_url = resource_url_from_id(&id.to_string());
     return Ok(resource_url);
 }
 
 fn metadata(
-    resource_url: ResourceUrl,
+    resource_url: &ResourceUrl,
     platform_fs: &impl PlatformFileSystemTrait,
     config: &impl FeatureFSConfigTrait,
 ) -> Result<Metadata, String> {
@@ -247,11 +265,60 @@ mod tests {
         }
     }
 
+    fn test_zip_file_path() -> String {
+        env!("CARGO_MANIFEST_DIR").to_string() + "/src/test_files/test.zip"
+    }
+
+    fn test_zip_file_url() -> String {
+        "file://".to_string() + &env!("CARGO_MANIFEST_DIR").to_string() + "/src/test_files/test.zip"
+    }
+
+    fn id_test() -> String {
+        "8970r10972490710497291".to_string()
+    }
+
     #[test]
-    fn test_id_from_resource_url_valid() {
-        let id = "8970r10972490710497291".to_string();
-        let res_id = "polypod://FeatureFiles/".to_string() + &id;
-        let result = id_from_resource_url(res_id);
+    fn test_id_from_resource_dir_url_valid() {
+        let id = id_test();
+        let mut res_id = "polypod://FeatureFiles/".to_string() + &id;
+        let result = id_from_resource_url(&res_id);
+        assert!(result.is_ok());
+        assert_eq!(result.unwrap(), id);
+
+        res_id = "polypod://FeatureFiles/".to_string() + &id + "/";
+        let result = id_from_resource_url(&res_id);
+        assert!(result.is_ok());
+        assert_eq!(result.unwrap(), id);
+    }
+
+    #[test]
+    fn test_id_from_resource_file_url_valid() {
+        let id = id_test();
+        let res_url = "polypod://FeatureFiles/".to_string() + &id + "/test/test.zip";
+        let result = id_from_resource_url(&res_url);
+        assert!(result.is_ok());
+        assert_eq!(result.unwrap(), id);
+    }
+
+    #[test]
+    fn test_id_from_fs_dir_url_valid() {
+        let id = id_test();
+        let mut fs_url = "file://Something/FeatureFiles/Test/".to_string() + &id;
+        let result = id_from_fs_url(&fs_url);
+        assert!(result.is_ok());
+        assert_eq!(result.unwrap(), id);
+
+        fs_url = "file://Something/FeatureFiles/Test/".to_string() + &id + "/";
+        let result = id_from_fs_url(&fs_url);
+        assert!(result.is_ok());
+        assert_eq!(result.unwrap(), id);
+    }
+
+    #[test]
+    fn test_id_from_fs_file_url_valid() {
+        let id = id_test();
+        let fs_url = "file://Something/FeatureFiles/Test/".to_string() + &id + "/test/test.zip";
+        let result = id_from_fs_url(&fs_url);
         assert!(result.is_ok());
         assert_eq!(result.unwrap(), id);
     }
@@ -259,14 +326,14 @@ mod tests {
     #[test]
     fn test_id_from_resource_url_invalid_scheme() {
         let res_id = "hello://FeatureFiles/".to_string();
-        let result = id_from_resource_url(res_id);
+        let result = id_from_resource_url(&res_id);
         assert!(result.is_err());
     }
 
     #[test]
     fn test_id_from_resource_url_invalid_path() {
         let res_id = "hello://".to_string();
-        let result = id_from_resource_url(res_id);
+        let result = id_from_resource_url(&res_id);
         assert!(result.is_err());
     }
 
@@ -274,23 +341,23 @@ mod tests {
     fn test_fs_url_from_resource_url() {
         let config = MockFSConfig::new();
 
-        let id = "8970r10972490710497291".to_string();
+        let id = id_test();
         let res_id = "polypod://FeatureFiles/".to_string() + &id;
-        let result = fs_url_from_resource_url(res_id, &config);
+        let result = fs_url_from_resource_url(&res_id, &config);
         assert!(result.is_ok());
 
-        let fs_url = fs_url_from_id(id, &config).unwrap();
+        let fs_url = fs_url_from_id(&id, &config).unwrap();
         assert_eq!(result.unwrap(), fs_url);
     }
 
     #[test]
     fn test_resource_url_from_fs_url() {
-        let id = "8970r10972490710497291".to_string();
+        let id = id_test();
         let fs_url = "file://Something/FeatureFiles/Test/".to_string() + &id;
         let result = resource_url_from_fs_url(fs_url);
         assert!(result.is_ok());
 
-        let resource_url = resource_url_from_id(id);
+        let resource_url = resource_url_from_id(&id);
         assert_eq!(result.unwrap(), resource_url);
     }
 
@@ -299,8 +366,8 @@ mod tests {
         let config = MockFSConfig::new();
         let fs = PlatformFileSystem {};
 
-        let url = env!("CARGO_MANIFEST_DIR").to_string() + "/src/test_files/test.zip";
-        let result = import(url, None, &fs, &config);
+        let path = test_zip_file_path();
+        let result = import(&path, None, &fs, &config);
         assert!(result.is_ok());
         assert_eq!(
             Path::new(&feature_files_path(&config).unwrap()).exists(),
@@ -313,12 +380,40 @@ mod tests {
         let config = MockFSConfig::new();
         let fs = PlatformFileSystem {};
 
-        let url = env!("CARGO_MANIFEST_DIR").to_string() + "/src/test_files/test.zip";
-        let result = import(url, None, &fs, &config);
+        let path = test_zip_file_path();
+        let result = import(&path, None, &fs, &config);
         assert!(result.is_ok());
 
-        let file_path = fs_url_from_resource_url(result.unwrap(), &config).unwrap() + "/test";
+        let file_path = fs_url_from_resource_url(&result.unwrap(), &config).unwrap() + "/test";
         assert_eq!(Path::new(&file_path).exists(), true);
+    }
+
+    #[test]
+    fn test_metadata_zip_file() {
+        let config = MockFSConfig::new();
+        let fs = PlatformFileSystem {};
+
+        // Create the resource with a certain id on the FS.
+        let id = id_test();
+        let fs_url = fs_url_from_id(&id, &config).unwrap();
+        fs.create_dir_structure(&fs_url).unwrap();
+        // Create zip file at fs_url
+        let file_url = fs_url.to_string() + "/" + "test.zip";
+        let file_path = Path::new(&file_url);
+        match File::create(file_path) {
+            Err(why) => panic!("couldn't create: {}", why),
+            Ok(file) => file,
+        };
+
+        let resource_url = resource_url_from_id(&id) + "/test.zip";
+        let result = metadata(&resource_url, &fs, &config);
+        assert!(result.is_ok());
+
+        let metadata = result.unwrap();
+        assert_eq!(
+            metadata.id,
+            fs_url_from_resource_url(&resource_url, &config).unwrap()
+        );
     }
 }
 
