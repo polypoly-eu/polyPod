@@ -153,7 +153,6 @@
 		E9BE2909264BBD67003EC8AE /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = E9BE2908264BBD67003EC8AE /* Zip */; };
 		E9CF1B642625EA3200216B70 /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B632625EA3200216B70 /* FeatureView.swift */; };
 		E9CF1B722627304800216B70 /* FeatureContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CF1B712627304800216B70 /* FeatureContainerView.swift */; };
-		E9CFFA4A269F4CCE00F7BE65 /* FeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CFFA49269F4CCE00F7BE65 /* FeatureTests.swift */; };
 		E9CFFA4C26A0240300F7BE65 /* ColorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CFFA4B26A0240300F7BE65 /* ColorExtensionsTests.swift */; };
 		E9CFFA4F26A1983700F7BE65 /* UIColorExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CFFA4E26A1983700F7BE65 /* UIColorExtensionsTest.swift */; };
 		E9E6A01C262DB9CC00B6416E /* PreviewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6A01B262DB9CC00B6416E /* PreviewUtils.swift */; };
@@ -283,7 +282,6 @@
 		E996EBD12756BBE900EAC9F7 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		E9CF1B632625EA3200216B70 /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
 		E9CF1B712627304800216B70 /* FeatureContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureContainerView.swift; sourceTree = "<group>"; };
-		E9CFFA49269F4CCE00F7BE65 /* FeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureTests.swift; sourceTree = "<group>"; };
 		E9CFFA4B26A0240300F7BE65 /* ColorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensionsTests.swift; sourceTree = "<group>"; };
 		E9CFFA4E26A1983700F7BE65 /* UIColorExtensionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionsTest.swift; sourceTree = "<group>"; };
 		E9E6A01B262DB9CC00B6416E /* PreviewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewUtils.swift; sourceTree = "<group>"; };
@@ -362,7 +360,6 @@
 				1A66F77E249378E400ED4308 /* PolyOutTests.swift */,
 				1A66F7762493743D00ED4308 /* Info.plist */,
 				E989B352269DDC9E000EE977 /* PolyNavTests.swift */,
-				E9CFFA49269F4CCE00F7BE65 /* FeatureTests.swift */,
 				E9CFFA4B26A0240300F7BE65 /* ColorExtensionsTests.swift */,
 			);
 			path = PolyPodTests;
@@ -923,7 +920,6 @@
 				1ABADBF824EE710B00369791 /* NamedNode+CoreDataProperties.swift in Sources */,
 				1ABADC0524EE710C00369791 /* Term+Additions.swift in Sources */,
 				E9545EB12735412B001E8C7F /* UpdateNotification.swift in Sources */,
-				E9CFFA4A269F4CCE00F7BE65 /* FeatureTests.swift in Sources */,
 				1ABADBF624EE710B00369791 /* DefaultGraph+CoreDataProperties.swift in Sources */,
 				1ABADC0024EE710B00369791 /* Literal+CoreDataClass.swift in Sources */,
 				9C8F6D28285B49D000D44B4E /* URL+Utils.swift in Sources */,
