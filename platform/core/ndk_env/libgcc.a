@@ -1,4 +1,0 @@
-# Link libgcc.a to lunwind. This is needed for compatibility between Rust and newer NDK version (>= r23)
-# Basically it tricks Rust to use lunwind as libgcc.
-# Rust issue ref: https://github.com/rust-lang/rust/pull/85806
-INPUT(-lunwind)
