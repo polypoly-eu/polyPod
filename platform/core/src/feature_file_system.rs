@@ -7,6 +7,7 @@ use zip::ZipArchive;
 trait PlatformFileSystemTrait: Sized {
     fn create_dir_structure(&self, path: &str) -> Result<(), String>;
     fn exists(&self, path: &str) -> bool;
+    fn unzip(&self, from_url: &str, to_url: &str) -> Result<(), String>;
 }
 
 struct PlatformFileSystem {}
@@ -24,6 +25,14 @@ impl PlatformFileSystemTrait for PlatformFileSystem {
         let path = Path::new(path);
         path.exists()
     }
+
+    fn unzip(&self, from_url: &str, to_url: &str) -> Result<(), String> {
+        let file = File::open(Path::new(from_url)).map_err(|err| err.to_string())?;
+        let mut archive = ZipArchive::new(file).map_err(|err| err.to_string())?;
+        archive
+            .extract(Path::new(to_url))
+            .map_err(|err| err.to_string())
+    }
 }
 
 type ResourceUrl = String;
@@ -40,6 +49,7 @@ struct Content {}
 
 trait FeatureFSConfigTrait {
     fn features_path(&self) -> String;
+    fn feature_name(&self) -> Result<String, String>;
 }
 struct FeatureFSConfig {}
 
@@ -47,6 +57,11 @@ impl FeatureFSConfigTrait for FeatureFSConfig {
     fn features_path(&self) -> String {
         // TODO: get the path from the platform
         env!("CARGO_MANIFEST_DIR").to_string() + "/TestFeatures/"
+    }
+
+    fn feature_name(&self) -> Result<String, String> {
+        // TODO: get the feature name from the platform
+        Ok("Test".to_string())
     }
 }
 
@@ -83,22 +98,17 @@ fn resource_url_from_id(id: ResourceId) -> ResourceUrl {
     return "polypod://FeatureFiles/".to_string() + &id;
 }
 
-fn fs_url_from_id(
-    id: ResourceId,
-    feature_name: String,
-    config: &impl FeatureFSConfigTrait,
-) -> String {
-    return feature_files_path(&feature_name, config) + "/" + &id;
+fn fs_url_from_id(id: ResourceId, config: &impl FeatureFSConfigTrait) -> Result<String, String> {
+    feature_files_path(config).and_then(|path| Ok(path + "/" + &id))
 }
 
 #[allow(dead_code)]
 fn fs_url_from_resource_url(
     resource_url: ResourceUrl,
-    feature_name: String,
     config: &impl FeatureFSConfigTrait,
 ) -> Result<String, String> {
     let id = id_from_resource_url(resource_url)?;
-    return Ok(fs_url_from_id(id, feature_name, config));
+    return fs_url_from_id(id, config);
 }
 
 #[allow(dead_code)]
@@ -107,51 +117,39 @@ fn resource_url_from_fs_url(fs_url: String) -> Result<String, String> {
     return Ok(resource_url_from_id(id));
 }
 
-fn feature_files_path(feature_name: &str, config: &impl FeatureFSConfigTrait) -> String {
-    let path = config.features_path() + "/" + feature_name;
-    return path;
+fn feature_files_path(config: &impl FeatureFSConfigTrait) -> Result<String, String> {
+    config
+        .feature_name()
+        .and_then(|name| Ok(config.features_path() + "/" + &name))
 }
 
 fn make_sure_feature_files_dir_exists(
-    feature_name: &str,
-    platform_fs: impl PlatformFileSystemTrait,
+    platform_fs: &impl PlatformFileSystemTrait,
     config: &impl FeatureFSConfigTrait,
 ) -> Result<(), String> {
-    let files_path = feature_files_path(feature_name, config);
+    let files_path = feature_files_path(config)?;
     if platform_fs.exists(&files_path) {
         platform_fs.create_dir_structure(&files_path)?;
     }
     Ok(())
 }
 
-fn feature_name() -> Result<String, String> {
-    // TODO: Ask platform. Note: function also used by tests. We need to mock it.
-    Ok("Test".to_string())
-}
-
 fn import(
     url: String,
     dest_resource_url: Option<ResourceUrl>,
-    platform_fs: impl PlatformFileSystemTrait,
+    platform_fs: &impl PlatformFileSystemTrait,
     config: &impl FeatureFSConfigTrait,
 ) -> Result<ResourceUrl, String> {
-    let feature_name = feature_name()?;
-
-    make_sure_feature_files_dir_exists(&feature_name, platform_fs, config)?;
+    make_sure_feature_files_dir_exists(platform_fs, config)?;
 
     let id = match dest_resource_url {
         Some(res_id) => id_from_resource_url(res_id),
         None => Ok(Uuid::new_v4().to_string()),
     }?;
 
-    let fs_url = fs_url_from_id(id.to_string(), feature_name.to_string(), config);
+    let fs_url = fs_url_from_id(id.to_string(), config)?;
 
-    // Todo: Move unzip to FileSystem
-    let file = File::open(Path::new(&url)).map_err(|err| err.to_string())?;
-    let mut archive = ZipArchive::new(file).map_err(|err| err.to_string())?;
-    archive
-        .extract(Path::new(&fs_url))
-        .map_err(|err| err.to_string())?;
+    platform_fs.unzip(&url, &fs_url)?;
 
     let resource_url = resource_url_from_id(id.to_string());
     return Ok(resource_url);
@@ -204,6 +202,10 @@ mod tests {
                 .unwrap();
             return a;
         }
+
+        fn feature_name(&self) -> Result<String, String> {
+            Ok("Test".to_string())
+        }
     }
 
     #[test]
@@ -235,10 +237,10 @@ mod tests {
 
         let id = "8970r10972490710497291".to_string();
         let res_id = "polypod://FeatureFiles/".to_string() + &id;
-        let result = fs_url_from_resource_url(res_id, feature_name().unwrap(), &config);
+        let result = fs_url_from_resource_url(res_id, &config);
         assert!(result.is_ok());
 
-        let fs_url = fs_url_from_id(id, feature_name().unwrap(), &config);
+        let fs_url = fs_url_from_id(id, &config).unwrap();
         assert_eq!(result.unwrap(), fs_url);
     }
 
@@ -256,12 +258,13 @@ mod tests {
     #[test]
     fn test_import_creates_features_dir() {
         let config = MockFSConfig::new();
+        let fs = PlatformFileSystem {};
 
         let url = env!("CARGO_MANIFEST_DIR").to_string() + "/src/test_files/test.zip";
-        let result = import(url, None, PlatformFileSystem {}, &config);
+        let result = import(url, None, &fs, &config);
         assert!(result.is_ok());
         assert_eq!(
-            Path::new(&feature_files_path(&feature_name().unwrap(), &config)).exists(),
+            Path::new(&feature_files_path(&config).unwrap()).exists(),
             true
         );
     }
@@ -269,14 +272,13 @@ mod tests {
     #[test]
     fn test_import_unzips_successfully() {
         let config = MockFSConfig::new();
+        let fs = PlatformFileSystem {};
 
         let url = env!("CARGO_MANIFEST_DIR").to_string() + "/src/test_files/test.zip";
-        let result = import(url, None, PlatformFileSystem {}, &config);
+        let result = import(url, None, &fs, &config);
         assert!(result.is_ok());
 
-        let file_path = fs_url_from_resource_url(result.unwrap(), feature_name().unwrap(), &config)
-            .unwrap()
-            + "/test";
+        let file_path = fs_url_from_resource_url(result.unwrap(), &config).unwrap() + "/test";
         assert_eq!(Path::new(&file_path).exists(), true);
     }
 }
