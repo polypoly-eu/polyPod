@@ -25,7 +25,7 @@ android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%, $(android_archi
 # This is required due to Rust still using lgcc for NDK,
 # which was made osbsolete starting with NDK r23 in favor of lunwind.
 # The solution is to create a libgcc.a file in every clang architecture, which will link to -ilunwind.
-clang_path = ${NDK_HOME}/*/toolchains/llvm/prebuilt/*/lib64/clang/*/lib/*
+clang_path = ${ANDROID_NDK_HOME}/*/toolchains/llvm/prebuilt/*/lib64/clang/*/lib/*
 ndk_archs = aarch64 arm i386 x86_64
 libgcc_paths = $(patsubst %, $(clang_path)/%/libgcc.a, $(ndk_archs))
 
