@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.accompanist.flowlayout.FlowRow
+import coop.polypoly.core.FeatureCategoryId
 import coop.polypoly.polypod.R
 import kotlin.math.floor
 import kotlin.math.max
@@ -254,10 +255,10 @@ fun section(
     mediumTileStyle: TileStyle,
     bigTileStyle: TileStyle
 ): Section {
-    when (model.type) {
-        SectionType.YOUR_DATA -> return Section(
+    when (model.id) {
+        FeatureCategoryId.yourData-> return Section(
             model = model,
-            type = model.type,
+            id = model.id,
             containers = yourDataContainers(
                 model.tiles,
                 containerLayout,
@@ -269,9 +270,9 @@ fun section(
             layout = layout,
             style = style
         )
-        SectionType.DATA_KNOW_HOW -> return Section(
+        FeatureCategoryId.knowHow -> return Section(
             model = model,
-            type = model.type,
+            id = model.id,
             containers = rowContainers(
                 model.tiles,
                 tilesPerContainer = 3,
@@ -283,9 +284,9 @@ fun section(
             layout = layout,
             style = style
         )
-        SectionType.TOOLS -> return Section(
+        FeatureCategoryId.tools -> return Section(
             model = model,
-            type = model.type,
+            id = model.id,
             containers = rowContainers(
                 model.tiles,
                 tilesPerContainer = 1,
@@ -297,9 +298,9 @@ fun section(
             layout = layout,
             style = style
         )
-        SectionType.DEVELOPER -> return Section(
+        FeatureCategoryId.developer -> return Section(
             model = model,
-            type = model.type,
+            id = model.id,
             containers = rowContainers(
                 model.tiles,
                 tilesPerContainer = 1,
@@ -334,9 +335,9 @@ fun DefaultPreview() {
     )
 
     val sections: List<SectionModel> = listOf(
-        SectionModel("Your Data", SectionType.YOUR_DATA, tileModels),
-        SectionModel("Data know how", SectionType.DATA_KNOW_HOW, tileModels),
-        SectionModel("Tools", SectionType.TOOLS, tileModels)
+        SectionModel("Your Data", FeatureCategoryId.yourData, tileModels),
+        SectionModel("Data know how", FeatureCategoryId.knowHow, tileModels),
+        SectionModel("Tools", FeatureCategoryId.tools, tileModels)
     )
     createScreen(sectionModels = sections)
 }

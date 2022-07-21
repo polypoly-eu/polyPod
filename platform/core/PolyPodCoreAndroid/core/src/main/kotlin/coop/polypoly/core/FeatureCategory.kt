@@ -21,8 +21,8 @@ data class Feature(
     val version: String?,
     val description: String?,
     val thumbnail: String?,
-    val thumbnailColor: Int,
     val primaryColor: Int,
+    val thumbnailColor: Int,
     val borderColor: Int,
     val tileTextColor: Int,
     val links: Map<String, String>

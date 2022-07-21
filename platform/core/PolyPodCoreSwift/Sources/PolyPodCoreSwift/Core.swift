@@ -24,7 +24,9 @@ public final class Core {
         return handleCoreResponse(core_bootstrap(self.languageCode), { _ in })
     }
 
-    /// Loads the feature categories from the give features directory
+    /// Loads the feature categories from the given features directory
+    /// - Parameter featuresDirectory: Directory from which to load the feature categories.
+     /// - Returns: A Result for loading operation.
     public func loadFeatureCategories(
         featuresDirectory: String
     ) -> Result<[FeatureCategory], Error> {

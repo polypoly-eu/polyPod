@@ -341,7 +341,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private class FeaturesPathHandler(
         private val context: Context,
-        private val featureFilePath: String
+        private val featureDirectoryPath: String
     ) : WebViewAssetLoader.PathHandler {
         override fun handle(path: String): WebResourceResponse? {
             logger.debug(
@@ -352,7 +352,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             if (path == podApiFile) {
                 val assetPath = "container/pod.js"
                 logger.debug("$podApiFile requested - returning $assetPath")
-                if (File(featureFilePath.plus("/$podApiFile")).exists()) {
+                if (File(featureDirectoryPath.plus("/$podApiFile")).exists()) {
                     logger.warn(
                         "Feature contains $podApiFile - ignoring in favour of $assetPath"
                     )
@@ -361,7 +361,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                     .handle(assetPath)
             }
 
-            val entry = File(featureFilePath.plus("/$path"))
+            val entry = File(featureDirectoryPath.plus("/$path"))
             if (!entry.exists()) {
                 logger.debug(
                     "FeaturesPathHandler, path '{}' not found, skipping",

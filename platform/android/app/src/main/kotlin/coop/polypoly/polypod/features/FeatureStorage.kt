@@ -59,7 +59,7 @@ object FeatureStorage {
             }
 
         if (features == null || features.isEmpty()) {
-            logger.error("No feature were found")
+            throw Exception("No features were found")
         } else {
             features.forEach { zipName ->
                 val source = context.assets.open("features/$zipName")

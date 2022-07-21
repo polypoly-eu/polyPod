@@ -14,27 +14,9 @@ import java.io.File
 
 data class SectionModel(
     val title: String,
-    val type: SectionType,
+    val id: FeatureCategoryId,
     val tiles: List<TileModel>
 )
-
-enum class SectionType {
-    YOUR_DATA,
-    DATA_KNOW_HOW,
-    TOOLS,
-    DEVELOPER;
-
-    companion object {
-        fun fromCategoryType(type: FeatureCategoryId): SectionType {
-            return when (type) {
-                FeatureCategoryId.yourData -> YOUR_DATA
-                FeatureCategoryId.knowHow -> DATA_KNOW_HOW
-                FeatureCategoryId.tools -> TOOLS
-                FeatureCategoryId.developer -> DEVELOPER
-            }
-        }
-    }
-}
 
 data class TileModel(
     val title: String,
@@ -92,14 +74,12 @@ data class Container(
 )
 
 data class Section(
-    val type: SectionType,
+    val id: FeatureCategoryId,
     val model: SectionModel,
     val containers: List<Container>,
     val layout: SectionLayout,
     val style: SectionStyle
-) {
-    companion object {}
-}
+)
 
 data class Footer(
     val model: FooterModel,
@@ -115,12 +95,14 @@ class HomeScreenViewModel {
         return FeatureStorage.categories.map { category ->
             SectionModel(
                 category.name,
-                SectionType.fromCategoryType(category.id),
+                category.id,
                 category.features.map { feature ->
                     TileModel(
                         feature.name,
                         feature.description ?: "",
-                        createTileThumbnailBitmap(context, feature.thumbnail),
+                        feature.thumbnail?.let {
+                            createTileThumbnailBitmap(context, File(it))
+                        },
                         Color(feature.thumbnailColor),
                         Color(feature.borderColor),
                         Color(feature.tileTextColor),
@@ -134,22 +116,19 @@ class HomeScreenViewModel {
 
     private fun createTileThumbnailBitmap(
         context: Context,
-        path: String?
+        file: File
     ): Bitmap? {
-        if (path == null) {
-            return null
-        }
-        if (path.endsWith(".pdf")) {
+        if (file.path.endsWith(".pdf")) {
             return PDFBitmap
                 .bitmapFromPDF(
-                    File(path).inputStream(),
+                    file.inputStream(),
                     context.resources.displayMetrics.densityDpi
                 )
         } else {
             val options = BitmapFactory.Options()
             // For now, we assume all thumbnails are xhdpi, i.e. 2x scale factor
             options.inDensity = DisplayMetrics.DENSITY_XHIGH
-            File(path).inputStream().use {
+            file.inputStream().use {
                 return BitmapFactory.decodeStream(it, null, options)
             }
         }

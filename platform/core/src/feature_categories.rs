@@ -28,12 +28,12 @@ pub struct Feature {
     pub author: Option<String>,
     pub version: Option<String>,
     pub description: Option<String>,
-    pub thumbnail: Option<String>,
     pub thumbnail_color: String,
+    pub thumbnail: Option<String>,
     pub primary_color: String,
-    pub links: HashMap<String, String>,
     pub border_color: String,
     pub tile_text_color: String,
+    pub links: HashMap<String, String>,
 }
 
 pub fn load_feature_categories(
@@ -84,12 +84,12 @@ struct DecodedFeatureManifest {
     version: Option<String>,
     description: Option<String>,
     thumbnail: Option<String>,
-    thumbnail_color: Option<String>,
     primary_color: Option<String>,
-    links: Option<HashMap<String, String>>,
-    translations: Option<HashMap<String, DecodedFeatureManifest>>,
+    thumbnail_color: Option<String>,
     border_color: Option<String>,
     tile_text_color: Option<String>,
+    links: Option<HashMap<String, String>>,
+    translations: Option<HashMap<String, DecodedFeatureManifest>>,
 }
 
 fn load_raw_categories(
@@ -193,9 +193,8 @@ fn map_feature(
             .and_then(|tr| tr.description.clone())
             .or(feature_manifest.description),
         thumbnail: thumbnail,
-        thumbnail_color: thumbnail_color.clone(),
         primary_color: primary_color,
-        links,
+        thumbnail_color: thumbnail_color.clone(),
         border_color: translation
             .and_then(|tr| tr.border_color.clone())
             .or(feature_manifest.border_color)
@@ -204,6 +203,7 @@ fn map_feature(
             .and_then(|tr| tr.tile_text_color.clone())
             .or(feature_manifest.tile_text_color)
             .unwrap_or(DEFAULT_TILE_TEXT_COLOR.to_string()),
+        links,
     })
 }
 
@@ -221,15 +221,15 @@ mod tests {
                 version: Some("version".to_string()),
                 description: Some("description".to_string()),
                 thumbnail: Some("thumbnail".to_string()),
-                thumbnail_color: Some("thumbnail_color".to_string()),
                 primary_color: Some("primary_color".to_string()),
+                thumbnail_color: Some("thumbnail_color".to_string()),
+                border_color: Some("border_color".to_string()),
+                tile_text_color: Some("tile_text_color".to_string()),
                 links: Some(HashMap::from([(
                     "some_link".to_string(),
                     "https://some_link.com".to_string(),
                 )])),
                 translations: None,
-                border_color: Some("border_color".to_string()),
-                tile_text_color: Some("tile_text_color".to_string()),
             }
         }
     }
@@ -539,8 +539,8 @@ mod tests {
             version: Some("0.1.2".to_string()),
             description: Some("testDescription_de".to_string()),
             thumbnail: Some("assets/thumbnail.png".to_string()),
-            thumbnail_color: Some("#FFFFFF".to_string()),
             primary_color: Some("#000000".to_string()),
+            thumbnail_color: Some("#FFFFFF".to_string()),
             border_color: Some("#000001".to_string()),
             tile_text_color: Some("#000002".to_string()),
             links: Some(links),
@@ -610,8 +610,8 @@ mod tests {
     fn map_feature_sets_correct_defaults() {
         let feature_manifest = DecodedFeatureManifest {
             name: None,
-            thumbnail_color: None,
             primary_color: None,
+            thumbnail_color: None,
             border_color: None,
             tile_text_color: None,
             ..Default::default()
