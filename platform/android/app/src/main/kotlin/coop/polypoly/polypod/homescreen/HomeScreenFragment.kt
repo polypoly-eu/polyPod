@@ -256,7 +256,7 @@ fun section(
     bigTileStyle: TileStyle
 ): Section {
     when (model.id) {
-        FeatureCategoryId.yourData-> return Section(
+        FeatureCategoryId.yourData -> return Section(
             model = model,
             id = model.id,
             containers = yourDataContainers(
