@@ -1,0 +1,2 @@
+# Link libgcc.a to lunwind. This is needed for compatibility between Rust and newer NDK version (>= r23)
+INPUT(-lunwind)

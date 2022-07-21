@@ -15,19 +15,14 @@ ios_targets := iPhone simulator
 tools_dir := tools
 android_core := PolyPodCoreAndroid/core/src/main/
 android_version := 24
-# Rust still uses old-ish r22 version of NDK.
-# For reference https://github.com/rust-lang/rust/pull/85806
-ndk_version := r22b
 google_repo := https://dl.google.com/android/repository
-ndk_lib := android-ndk-$(ndk_version)
-ndk=$(tools_dir)/NDK_$(ndk_version)
-ndk_archive = $(tools_dir)/NDK.zip
-export ANDROID_NDK_HOME := $(ndk)/$(ndk_lib)
 android_triples := aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android
 android_binaries := $(patsubst %, target/%, $(android_triples))
 android_architectures := arm64-v8a armeabi-v7a x86_64 x86
 jni_libs_copy_path := $(android_core)/jniLibs
 android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%, $(android_architectures))
+# Need for libgcc.a link
+wflags += -L$(CURDIR)
 
 ifeq ($(OS),Windows_NT)
 	ndk_download_url = $(google_repo)/$(ndk_lib)-windows-x86_64.zip
@@ -100,13 +95,7 @@ endef
 
 # ============ Android lib ============ #
 
-$(ndk):
-	mkdir -p $(ndk)
-	curl -L $(ndk_download_url) -o $(ndk_archive)
-	unzip -q -d $(ndk) $(ndk_archive)
-	rm $(ndk_archive)
-
-$(android_binaries): $(target) $(ndk)
+$(android_binaries): $(target)
 	cargo install cargo-ndk
 	rustup target add $(android_triples)
 
