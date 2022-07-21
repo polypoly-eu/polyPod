@@ -76,7 +76,7 @@ impl CoreFailure {
             message,
         }
     }
-    
+
     pub fn failed_to_decode_feature_categories_json(message: String) -> Self {
         CoreFailure {
             code: FailureCode::FailedToParseFeatureCategoriesJSON.value(),
@@ -87,7 +87,10 @@ impl CoreFailure {
     pub fn failed_to_read_contents_of_file(path: String, message: String) -> Self {
         CoreFailure {
             code: FailureCode::FailedToReadFile.value(),
-            message: format!("Failed to read file from path '{}', error: '{}'", path, message),
+            message: format!(
+                "Failed to read file from path '{}', error: '{}'",
+                path, message,
+            ),
         }
     }
 }

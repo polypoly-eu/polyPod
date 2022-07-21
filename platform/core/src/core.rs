@@ -1,8 +1,4 @@
-use crate::{
-    core_failure::CoreFailure,
-    feature_categories,
-    io::file_system::DefaultFileSystem,
-};
+use crate::{core_failure::CoreFailure, feature_categories, io::file_system::DefaultFileSystem};
 use once_cell::sync::OnceCell;
 
 // Core is held as a singleton.
@@ -32,11 +28,13 @@ pub fn bootstrap(language_code: String) -> Result<(), CoreFailure> {
     Ok(())
 }
 
-pub fn load_feature_categories(features_dir: &str) -> Result<Vec<feature_categories::FeatureCategory>, CoreFailure>{
+pub fn load_feature_categories(
+    features_dir: &str,
+) -> Result<Vec<feature_categories::FeatureCategory>, CoreFailure> {
     let core = get_instance()?;
     feature_categories::load_feature_categories(
         DefaultFileSystem {},
-        features_dir, 
-        &core.language_code
+        features_dir,
+        &core.language_code,
     )
 }

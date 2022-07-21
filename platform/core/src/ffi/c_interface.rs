@@ -27,7 +27,7 @@ pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> CByteBu
 /// # Safety
 /// This function can be unsafe if the features_dir pointer is null or the string is in wrong format.
 ///
-/// Loads the feature categories from from the given features_dir 
+/// Loads the feature categories from from the given features_dir.
 /// - features_dir: Path to directory where feature categories are stored.
 /// Returns Result<Vec<FeatureCategory>, CoreFailure> as MessagePack value.
 #[no_mangle]
