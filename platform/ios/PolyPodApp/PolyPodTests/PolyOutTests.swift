@@ -1,3 +1,4 @@
+import PolyPodCoreSwift
 import XCTest
 
 var sessionGetData: Data?
@@ -198,18 +199,7 @@ class PolyOutTests: XCTestCase {
         let polyOut = PolyOut(session: NetworkSessionMock())
 
         let bundle = Bundle(for: type(of: self))
-        polyOut.activeFeature = Feature(
-            path: URL(string: bundle.bundlePath)!,
-            name: "Test",
-            author: nil,
-            description: nil,
-            thumbnail: nil,
-            thumbnailColor: nil,
-            primaryColor: nil,
-            links: nil,
-            borderColor: nil,
-            tileTextColor: nil
-        )
+        polyOut.activeFeature = createFeature(path: URL(string: bundle.bundlePath)!)
 
         let url = bundle.url(forResource: "testZip", withExtension: "zip")!
 
@@ -226,19 +216,7 @@ class PolyOutTests: XCTestCase {
         let polyOut = PolyOut(session: NetworkSessionMock())
 
         let bundle = Bundle(for: type(of: self))
-        polyOut.activeFeature = Feature(
-            path: URL(string: bundle.bundlePath)!,
-            name: "Test",
-            author: nil,
-            description: nil,
-            thumbnail: nil,
-            thumbnailColor: nil,
-            primaryColor: nil,
-            links: nil,
-            borderColor: nil,
-            tileTextColor: nil
-        )
-
+        polyOut.activeFeature = createFeature(path: URL(string: bundle.bundlePath)!)
         let url1 = bundle.url(forResource: "multipleZips1", withExtension: "zip")!
         let url2 = bundle.url(forResource: "multipleZips2", withExtension: "zip")!
 
@@ -254,5 +232,21 @@ class PolyOutTests: XCTestCase {
         XCTAssertTrue(stuff != nil && !stuff!.isEmpty, "no files were found")
         XCTAssertTrue(stuff!.contains { $0["path"] == "multipleZips1/file1.rtf" }, "file1  not found")
         XCTAssertTrue(stuff!.contains { $0["path"] == "multipleZips2/file2.rtf" }, "file2  not found")
+    }
+    
+    private func createFeature(path: URL) -> Feature {
+        Feature(
+            path: path,
+            id: "Test",
+            name: "name",
+            author: nil,
+            description: nil,
+            primaryColor: "color",
+            thumbnailColor: "color",
+            thumbnail: nil,
+            borderColor: "color",
+            tileTextColor: "color",
+            links: [:]
+        )
     }
 }

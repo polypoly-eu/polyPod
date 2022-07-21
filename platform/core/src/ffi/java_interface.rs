@@ -1,5 +1,5 @@
 use crate::core::bootstrap;
-use crate::core::parse_feature_manifest;
+use crate::core::load_feature_categories;
 use crate::core_failure::CoreFailure;
 use crate::ffi::serialize;
 use jni::{
@@ -25,17 +25,17 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     .unwrap()
 }
 
-/// Parse the given feature maniest json.
-/// - json: Feature manifest json string to be parsed.
-/// Returns a flatbuffer byte array with feature_manifest_response.
+/// Loads feature categories from the given features dir.
+/// - featuresDir: Path to directory where features are stored.
+/// Returns a Result<Vec<FeatureCategory>, CoreFailure> represent as MessagePack value.
 #[no_mangle]
-pub extern "system" fn Java_coop_polypoly_core_JniApi_parseFeatureManifest(
+pub extern "system" fn Java_coop_polypoly_core_JniApi_loadFeatureCategories(
     env: JNIEnv,
     _: JClass,
-    json: JString,
+    featuresDir: JString,
 ) -> jbyteArray {
     env.byte_array_from_slice(&serialize(
-        read_jni_string(&env, json).and_then(|string| parse_feature_manifest(&string)),
+        read_jni_string(&env, featuresDir).and_then(|string| load_feature_categories(&string)),
     ))
     .unwrap()
 }

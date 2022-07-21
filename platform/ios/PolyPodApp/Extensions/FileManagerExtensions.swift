@@ -4,9 +4,10 @@ extension FileManager {
     func copyBundleFile(
         forResource name: String,
         ofType ext: String,
+        fromSubdirectory subdir: String? = nil,
         toDestinationUrl dest: URL
     ) throws {
-        if let bundlePath = Bundle.main.path(forResource: name, ofType: ext) {
+        if let bundlePath = Bundle.main.path(forResource: name, ofType: ext, inDirectory: subdir) {
             let destPath = findDestinationPath(
                 forResource: name,
                 ofType: ext,
