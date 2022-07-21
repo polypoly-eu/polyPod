@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.util.DisplayMetrics
 import coop.polypoly.core.FeatureManifest
 import coop.polypoly.polypod.PDFBitmap
+import java.io.File
 import java.util.zip.ZipFile
 
 class Feature(
@@ -42,7 +43,7 @@ class Feature(
             if (entry.name.endsWith(".pdf")) {
                 return PDFBitmap
                     .bitmapFromPDF(
-                        content.getInputStream(entry),
+                        File(entry.name),
                         context.resources.displayMetrics.densityDpi
                     )
             } else {

@@ -4,23 +4,16 @@ import android.graphics.Bitmap
 import android.graphics.pdf.PdfRenderer
 import android.os.ParcelFileDescriptor
 import java.io.File
-import java.io.InputStream
 
 class PDFBitmap {
     companion object {
         fun bitmapFromPDF(
-            pdfInputStream: InputStream,
+            pdfInput: File,
             densityDpi: Int
         ): Bitmap {
-            val tempPdf = File(kotlin.io.path.createTempFile().toString())
-            pdfInputStream.use { input ->
-                tempPdf.outputStream().use { output ->
-                    input.copyTo(output)
-                }
-            }
 
             val fileDescriptor = ParcelFileDescriptor.open(
-                tempPdf,
+                pdfInput,
                 ParcelFileDescriptor.MODE_READ_ONLY
             )
             val pdfRenderer = PdfRenderer(fileDescriptor)
