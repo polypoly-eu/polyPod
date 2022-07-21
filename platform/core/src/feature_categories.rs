@@ -103,10 +103,7 @@ fn load_raw_categories(
 }
 
 fn should_display_feature_category(category: &DecodedFeatureCategory) -> bool {
-    match category.visible {
-        Some(visible) => visible,
-        None => true,
-    }
+    category.visible.unwrap_or(true)
 }
 
 fn map_feature_category(
@@ -123,7 +120,7 @@ fn map_feature_category(
     Ok(FeatureCategory {
         id: raw_category.id,
         name: raw_category.name,
-        features: features,
+        features,
     })
 }
 
@@ -134,7 +131,7 @@ fn load_feature(
     feature_id: &str,
 ) -> Result<Feature, CoreFailure> {
     load_feature_manifest(fs, features_dir, feature_id)
-        .and_then(|manifest| map_feature(features_dir, &feature_id, language_code, manifest))
+        .and_then(|manifest| map_feature(features_dir, feature_id, language_code, manifest))
 }
 
 fn load_feature_manifest(
@@ -167,11 +164,11 @@ fn map_feature(
     let primary_color = translation
         .and_then(|tr| tr.primary_color.clone())
         .or(feature_manifest.primary_color)
-        .unwrap_or(DEFAULT_PRIMARY_COLOR.to_string());
+        .unwrap_or_else(|| DEFAULT_PRIMARY_COLOR.to_string());
     let thumbnail_color = translation
         .and_then(|tr| tr.thumbnail_color.clone())
         .or(feature_manifest.thumbnail_color)
-        .unwrap_or(primary_color.clone());
+        .unwrap_or_else(|| primary_color.clone());
     let thumbnail = translation
         .and_then(|tr| tr.thumbnail.clone())
         .or(feature_manifest.thumbnail)
@@ -182,7 +179,7 @@ fn map_feature(
         name: translation
             .and_then(|tr| tr.name.clone())
             .or(feature_manifest.name)
-            .unwrap_or(id.to_string()),
+            .unwrap_or_else(|| id.to_string()),
         author: translation
             .and_then(|tr| tr.author.clone())
             .or(feature_manifest.author),
@@ -192,8 +189,8 @@ fn map_feature(
         description: translation
             .and_then(|tr| tr.description.clone())
             .or(feature_manifest.description),
-        thumbnail: thumbnail,
-        primary_color: primary_color,
+        thumbnail,
+        primary_color,
         thumbnail_color: thumbnail_color.clone(),
         border_color: translation
             .and_then(|tr| tr.border_color.clone())
@@ -202,7 +199,7 @@ fn map_feature(
         tile_text_color: translation
             .and_then(|tr| tr.tile_text_color.clone())
             .or(feature_manifest.tile_text_color)
-            .unwrap_or(DEFAULT_TILE_TEXT_COLOR.to_string()),
+            .unwrap_or_else(|| DEFAULT_TILE_TEXT_COLOR.to_string()),
         links,
     })
 }
