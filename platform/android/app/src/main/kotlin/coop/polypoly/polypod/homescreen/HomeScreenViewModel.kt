@@ -2,35 +2,21 @@ package coop.polypoly.polypod.homescreen
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.util.DisplayMetrics
 import androidx.compose.ui.graphics.Color
+import coop.polypoly.core.FeatureCategoryId
+import coop.polypoly.polypod.PDFBitmap
 import coop.polypoly.polypod.R
-import coop.polypoly.polypod.features.FeatureCategory
 import coop.polypoly.polypod.features.FeatureStorage
+import java.io.File
 
 data class SectionModel(
     val title: String,
-    val type: SectionType,
+    val id: FeatureCategoryId,
     val tiles: List<TileModel>
 )
-
-enum class SectionType {
-    YOUR_DATA,
-    DATA_KNOW_HOW,
-    TOOLS,
-    DEVELOPER;
-
-    companion object {
-        fun fromCategoryType(type: FeatureCategory): SectionType {
-            return when (type) {
-                FeatureCategory.yourData -> YOUR_DATA
-                FeatureCategory.knowHow -> DATA_KNOW_HOW
-                FeatureCategory.tools -> TOOLS
-                FeatureCategory.developer -> DEVELOPER
-            }
-        }
-    }
-}
 
 data class TileModel(
     val title: String,
@@ -88,14 +74,12 @@ data class Container(
 )
 
 data class Section(
-    val type: SectionType,
+    val id: FeatureCategoryId,
     val model: SectionModel,
     val containers: List<Container>,
     val layout: SectionLayout,
     val style: SectionStyle
-) {
-    companion object {}
-}
+)
 
 data class Footer(
     val model: FooterModel,
@@ -105,25 +89,48 @@ data class Footer(
 
 class HomeScreenViewModel {
     fun getSectionModels(
+        context: Context,
         onFeatureSelected: (String) -> Unit
     ): List<SectionModel> {
         return FeatureStorage.categories.map { category ->
             SectionModel(
                 category.name,
-                SectionType.fromCategoryType(category.category),
+                category.id,
                 category.features.map { feature ->
                     TileModel(
                         feature.name,
-                        feature.description,
-                        feature.thumbnail,
+                        feature.description ?: "",
+                        feature.thumbnail?.let {
+                            createTileThumbnailBitmap(context, File(it))
+                        },
                         Color(feature.thumbnailColor),
                         Color(feature.borderColor),
-                        Color(feature.tileTextColor)
+                        Color(feature.tileTextColor),
                     ) {
                         onFeatureSelected(feature.id)
                     }
                 }
             )
+        }
+    }
+
+    private fun createTileThumbnailBitmap(
+        context: Context,
+        file: File
+    ): Bitmap? {
+        if (file.path.endsWith(".pdf")) {
+            return PDFBitmap
+                .bitmapFromPDF(
+                    file.inputStream(),
+                    context.resources.displayMetrics.densityDpi
+                )
+        } else {
+            val options = BitmapFactory.Options()
+            // For now, we assume all thumbnails are xhdpi, i.e. 2x scale factor
+            options.inDensity = DisplayMetrics.DENSITY_XHIGH
+            file.inputStream().use {
+                return BitmapFactory.decodeStream(it, null, options)
+            }
         }
     }
 }

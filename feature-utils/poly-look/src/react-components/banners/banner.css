@@ -1,6 +1,6 @@
 .banner {
-    background-color: var(--color-gray-200);
-    padding: var(--pl-space-5x);
+    background-color: var(--color-gray-100);
+    padding: var(--pl-space-6x) var(--pl-space-4x);
     margin: calc(var(--pl-space-6x) * -1) calc(var(--pl-space-4x) * -1) 0 calc(var(--pl-space-4x) * -1);
 }
 
@@ -20,10 +20,10 @@
 }
 
 .banner .banner-description {
-    margin: var(--pl-space-4x) 0 0 0;
+    margin: var(--pl-space-5x) 0 0 0;
     color: var(--theme-secondary-color);
 }
 
 .banner .banner-button {
-    margin-top: var(--pl-space-4x);
+    margin-top: var(--pl-space-5x);
 }

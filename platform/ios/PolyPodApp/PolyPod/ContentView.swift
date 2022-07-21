@@ -1,4 +1,5 @@
 import LocalAuthentication
+import PolyPodCoreSwift
 import SwiftUI
 
 // TODO: This, and other user defaults we use, should move to a central place.
@@ -160,8 +161,8 @@ struct ContentView: View {
 
     private func featureState(_ feature: Feature) -> ViewState {
         ViewState(
-            backgroundColor: feature.primaryColor,
-            borderColor: feature.borderColor,
+            backgroundColor: Color(fromHex: feature.primaryColor),
+            borderColor: Color(fromHex: feature.borderColor),
             AnyView(
                 FeatureView(
                     feature: feature,

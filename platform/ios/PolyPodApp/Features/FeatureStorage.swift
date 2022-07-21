@@ -1,38 +1,14 @@
 import Combine
 import Foundation
+import PolyPodCoreSwift
 import Zip
 
-private struct DecodedFeaturesCategory: Decodable {
-    let id: String
-    let name: String
-    let features: [String]
-    let visible: Bool?
-}
-
-enum FeaturesCategoryId: String {
-    case yourData
-    case knowHow
-    case tools
-    case developer
-}
-
-struct FeaturesCategoryModel {
-    let id: FeaturesCategoryId
-    var name: String
-    var features: [Feature]
-}
-
 final class FeatureStorage {
-    enum FeatureStorageFailure: Error {
-        case featureForImportNotFound(featureName: String)
-        case missingCategoriesFile
-    }
-
     private let dataProtection: DataProtection
     private var dataProtectionCancellable: AnyCancellable?
-    private let categoriesListSubject: CurrentValueSubject<[FeaturesCategoryModel], Never> = CurrentValueSubject([])
+    private let categoriesListSubject: CurrentValueSubject<[FeatureCategory], Never> = CurrentValueSubject([])
 
-    var categoriesList: AnyPublisher<[FeaturesCategoryModel], Never> {
+    var categoriesList: AnyPublisher<[FeatureCategory], Never> {
         categoriesListSubject.eraseToAnyPublisher()
     }
 
@@ -57,7 +33,7 @@ final class FeatureStorage {
         setup()
     }
 
-    func featureForId(_ id: FeatureId) -> Feature? {
+    func featureForId(_ id: String) -> Feature? {
         for category in categoriesListSubject.value {
             for feature in category.features where feature.id == id {
                 return feature
@@ -82,42 +58,11 @@ final class FeatureStorage {
 
     private func importFeatures() throws {
         try createFeaturesFolder()
-        let metaCategories = try readCategories()
-
-        var categories: [FeaturesCategoryModel] = []
-        for metaCategory in metaCategories {
-            guard !metaCategory.features.isEmpty else { continue }
-
-            guard let categoryId = FeaturesCategoryId(rawValue: metaCategory.id) else {
-                Log.info("Unknown category \(metaCategory.id), will be ignored.")
-                continue
-            }
-
-            if !(metaCategory.visible ?? true) {
-                Log.info("Category \(metaCategory.id) not visible, will be ignored.")
-                continue
-            }
-
-            var features: [Feature] = []
-            for featureId in metaCategory.features {
-                do {
-                    let importPath = try importFeature(featureId)
-                    if let feature = Feature.load(path: importPath) {
-                        features.append(feature)
-                    }
-                } catch {
-                    Log.error("Failed to import feature \(error.localizedDescription)")
-                }
-            }
-
-            categories.append(
-                FeaturesCategoryModel(id: categoryId,
-                                      name: metaCategory.name,
-                                      features: features)
-            )
-        }
-
-        self.categoriesListSubject.value = categories
+        try copyCategories()
+        try copyFeatures()
+        categoriesListSubject.value = try Core
+            .instance
+            .loadFeatureCategories(featuresDirectory: featuresFileUrl.path).get()
     }
 
     private func createFeaturesFolder() throws {
@@ -132,61 +77,58 @@ final class FeatureStorage {
         )
     }
 
-    private func readCategories() throws -> [DecodedFeaturesCategory] {
-        guard let url = Bundle.main.url(
+    private func copyCategories() throws {
+        try FileManager.default.copyBundleFile(
             forResource: "categories",
-            withExtension: "json",
-            subdirectory: "features"
-        ) else { throw FeatureStorageFailure.missingCategoriesFile }
-        return try JSONDecoder().decode([DecodedFeaturesCategory].self, from: Data.init(contentsOf: url))
+            ofType: "json",
+            fromSubdirectory: "features",
+            toDestinationUrl: featuresFileUrl)
     }
-
-    private func importFeature(_ featureName: String) throws -> URL {
-        let featureUrl = featuresFileUrl.appendingPathComponent(featureName)
-
-        guard let filePath = Bundle.main.url(
-            forResource: featureName,
-            withExtension: "zip",
-            subdirectory: "features"
-        ) else {
-            throw FeatureStorageFailure.featureForImportNotFound(featureName: featureName)
-        }
-
-        let unzipDirectory = try Zip.quickUnzipFile(filePath)
+    
+    private func copyFeatures() throws {
+        try Bundle
+                .main
+                .urls(
+                    forResourcesWithExtension: "zip",
+                    subdirectory: "features"
+                )?.forEach(importFeature)
+    }
+    
+    private func importFeature(_ bundleURL: URL) throws {
+        let featureUrl = featuresFileUrl.appendingPathComponent(bundleURL.deletingPathExtension().lastPathComponent)
+        
+        let unzipDirectory = try Zip.quickUnzipFile(bundleURL)
         try FileManager.default.moveItem(at: unzipDirectory, to: featureUrl)
         try FileManager.default.copyBundleFile(forResource: "pod", ofType: "html", toDestinationUrl: featureUrl)
         try FileManager.default.copyBundleFile(forResource: "initIframe", ofType: "js", toDestinationUrl: featureUrl)
-        try importPodJs(toFeature: featureName, atUrl: featuresFileUrl)
-        Log.info("Imported feature: \(featureName)")
-        return featureUrl
+        try importPodJs(destinationURL: featureUrl)
     }
-
-    private func importPodJs(toFeature featureName: String, atUrl url: URL) throws {
+    
+    private func importPodJs(destinationURL: URL) throws {
         let fileManager = FileManager.default
         let resourceName = "pod"
         let resourceType = "js"
-        let destinationUrl = featuresFileUrl.appendingPathComponent(featureName)
 
         if fileManager.hasBundleFile(
             forResource: resourceName,
             ofType: resourceType,
-            atDestinationUrl: destinationUrl
+            atDestinationUrl: destinationURL
         ) {
             Log.info("""
                 Ignoring \(resourceName).\(resourceType) provided by \
-                \(featureName)
+                \(destinationURL.lastPathComponent) feature
                 """)
             try fileManager.removeBundleFile(
                 forResource: resourceName,
                 ofType: resourceType,
-                atDestinationUrl: destinationUrl
+                atDestinationUrl: destinationURL
             )
         }
 
         try fileManager.copyBundleFile(
             forResource: resourceName,
             ofType: resourceType,
-            toDestinationUrl: destinationUrl
+            toDestinationUrl: destinationURL
         )
     }
 }
