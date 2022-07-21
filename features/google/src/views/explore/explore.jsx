@@ -24,33 +24,20 @@ const ExploreView = () => {
     const history = useHistory();
     const exploreRef = useRef();
 
-    const handleCloseReportResult = () => {
+    const handleCloseNotification = () => {
         handleReportSent(null);
     };
 
     const renderReportResult = () =>
         reportIsSent !== null && (
             <PopUpBanner
-                notificationType={reportIsSent ? "successful" : "error"}
+                notificationType={reportIsSent ? "success" : "error"}
+                handleCloseNotification={handleCloseNotification}
             >
                 {reportIsSent ? (
-                    <>
-                        <div>{i18n.t("explore:report.success")}</div>
-                        <img
-                            src="./images/close_green.svg"
-                            alt="close"
-                            onClick={handleCloseReportResult}
-                        />
-                    </>
+                    <div>{i18n.t("explore:report.success")}</div>
                 ) : (
-                    <>
-                        <div>{i18n.t("explore:report.error")}</div>
-                        <img
-                            src="./images/close_red.svg"
-                            alt="close"
-                            onClick={handleCloseReportResult}
-                        />
-                    </>
+                    <div>{i18n.t("explore:report.error")}</div>
                 )}
             </PopUpBanner>
         );

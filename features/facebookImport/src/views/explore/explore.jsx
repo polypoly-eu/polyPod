@@ -33,25 +33,12 @@ const ExploreView = () => {
         reportResult !== null && (
             <PopUpBanner
                 notificationType={reportResult ? "successful" : "error"}
+                handleCloseNotification={handleCloseReportResult}
             >
                 {reportResult ? (
-                    <>
-                        <div>{i18n.t("explore:report.success")}</div>
-                        <img
-                            src="./images/close_green.svg"
-                            alt="close"
-                            onClick={handleCloseReportResult}
-                        />
-                    </>
+                    <div>{i18n.t("explore:report.success")}</div>
                 ) : (
-                    <>
-                        <div>{i18n.t("explore:report.error")}</div>
-                        <img
-                            src="./images/close_red.svg"
-                            alt="close"
-                            onClick={handleCloseReportResult}
-                        />
-                    </>
+                    <div>{i18n.t("explore:report.error")}</div>
                 )}
             </PopUpBanner>
         );
