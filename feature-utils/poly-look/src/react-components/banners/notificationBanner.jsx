@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./popUpBanner.css";
+import "./notificationBanner.css";
 
 import standard from "../../static/images/icons/xmark-standard.svg";
 import success from "../../static/images/icons/xmark-success.svg";
@@ -14,14 +14,14 @@ const types = {
   warning: { class: "warning", icon: warning },
 };
 
-const PopUpBanner = ({
+export function NotificationBanner({
   children,
   notificationType,
   handleCloseNotification,
-}) => {
+}) {
   return (
-    <div className="pop-up-container">
-      <div className={`pop-up-banner ${types[notificationType].class}`}>
+    <div className="notification-pop-up-container">
+      <div className={`notification-banner ${types[notificationType].class}`}>
         {children}
         <img
           src={types[notificationType].icon}
@@ -31,6 +31,4 @@ const PopUpBanner = ({
       </div>
     </div>
   );
-};
-
-export default PopUpBanner;
+}

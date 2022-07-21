@@ -7,7 +7,7 @@ import {
     RoutingWrapper,
     ClickableCard,
     Banner,
-    PopUpBanner,
+    NotificationBanner,
 } from "@polypoly-eu/poly-look";
 
 import i18n from "!silly-i18n";
@@ -30,7 +30,7 @@ const ExploreView = () => {
 
     const renderReportResult = () =>
         reportIsSent !== null && (
-            <PopUpBanner
+            <NotificationBanner
                 notificationType={reportIsSent ? "success" : "error"}
                 handleCloseNotification={handleCloseNotification}
             >
@@ -39,7 +39,7 @@ const ExploreView = () => {
                 ) : (
                     <div>{i18n.t("explore:report.error")}</div>
                 )}
-            </PopUpBanner>
+            </NotificationBanner>
         );
 
     const renderFileAnalyses = () => {

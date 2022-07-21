@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { PopUpBanner } from "../../src/react-components";
+import { NotificationBanner } from "../../react-components";
 
 /**
  * @jest-environment jsdom
@@ -11,9 +11,9 @@ const children = "Pop Up content";
 const reportSuccessful = "successful";
 const reportUnsuccessful = "unsuccessful";
 
-it("PopUpBanner renders correctly", () => {
+it("NotificationBanner renders correctly", () => {
   const { container, getByText } = render(
-    <PopUpBanner>{children}</PopUpBanner>
+    <NotificationBanner>{children}</NotificationBanner>
   );
 
   expect(container).toBeTruthy();
@@ -23,14 +23,18 @@ it("PopUpBanner renders correctly", () => {
 describe("Report type is", () => {
   it("successful", () => {
     const { getByText } = render(
-      <PopUpBanner reportType={reportSuccessful}>{children}</PopUpBanner>
+      <NotificationBanner reportType={reportSuccessful}>
+        {children}
+      </NotificationBanner>
     );
     expect(getByText(children)).toHaveClass("pop-up-banner successful");
   });
 
   it("unsuccessful", () => {
     const { getByText } = render(
-      <PopUpBanner reportType={reportUnsuccessful}>{children}</PopUpBanner>
+      <NotificationBanner reportType={reportUnsuccessful}>
+        {children}
+      </NotificationBanner>
     );
     expect(getByText(children)).toHaveClass("pop-up-banner unsuccessful");
   });

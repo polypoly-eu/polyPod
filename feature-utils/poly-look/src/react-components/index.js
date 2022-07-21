@@ -6,7 +6,6 @@ import ScrollLabel from "./scrollLabel.jsx";
 import { Tab, Tabs } from "./tabs.jsx";
 import { BlockLegend, LineLegend, CircleLegend } from "./legends.jsx";
 import ErrorPopup from "./popUps/errorPopup/errorPopup.jsx";
-import PopUpBanner from "./popUps/popUpBanner.jsx";
 import { Card, ClickableCard } from "./cards";
 import List from "./list.jsx";
 import { PolyButton, IconButton } from "./buttons";
@@ -24,7 +23,12 @@ import {
 import { RoutingWrapper } from "./routing";
 import { Infographic, Tooltip, InfographicLegend } from "./infographic";
 import Slideshow from "./slideshow/slideshow.jsx";
-import { Banner, ProgressIcon, ProgressBanner } from "./banners";
+import {
+  Banner,
+  ProgressIcon,
+  ProgressBanner,
+  NotificationBanner,
+} from "./banners";
 
 export {
   Chip,
@@ -36,7 +40,6 @@ export {
   LineLegend,
   CircleLegend,
   ErrorPopup,
-  PopUpBanner,
   Card,
   ClickableCard,
   List,
@@ -59,4 +62,5 @@ export {
   Slideshow,
   ProgressIcon,
   ProgressBanner,
+  NotificationBanner,
 };
