@@ -60,7 +60,7 @@ jobs:
         run: ./build.js offlineInstall
       - name: Build core and features
         if: steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.android == 'true'
-        run: ls -alt feature-utils/poly-look/node_modules/@polypoly-eu && ./build.js build
+        run: ./build.js build
       - name: Test core and features
         if: steps.changes.outputs.apiAndFeatures == 'true'
         run: xvfb-run --auto-servernum ./build.js test
