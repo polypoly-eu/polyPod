@@ -8,6 +8,9 @@ trait PlatformFileSystemTrait: Sized {
     fn create_dir_structure(&self, path: &str) -> Result<(), String>;
     fn exists(&self, path: &str) -> bool;
     fn unzip(&self, from_url: &str, to_url: &str) -> Result<(), String>;
+    fn is_directory(&self, url: &str) -> bool;
+    fn size(&self, url: &str) -> Result<String, String>;
+    fn time_modified(&self, url: &str) -> Result<String, String>;
 }
 
 struct PlatformFileSystem {}
@@ -32,6 +35,30 @@ impl PlatformFileSystemTrait for PlatformFileSystem {
         archive
             .extract(Path::new(to_url))
             .map_err(|err| err.to_string())
+    }
+
+    fn is_directory(&self, url: &str) -> bool {
+        let path = Path::new(url);
+        path.is_dir()
+    }
+
+    fn size(&self, url: &str) -> Result<String, String> {
+        let path = Path::new(url);
+        let metadata = path.metadata().map_err(|err| err.to_string())?;
+        Ok(metadata.len().to_string())
+    }
+
+    fn time_modified(&self, url: &str) -> Result<String, String> {
+        let path = Path::new(url);
+        let metadata = path.metadata().map_err(|err| err.to_string())?;
+        let time = metadata
+            .modified()
+            .map_err(|err| err.to_string())?
+            .duration_since(std::time::SystemTime::UNIX_EPOCH)
+            .map_err(|err| err.to_string())?
+            .as_secs()
+            .to_string();
+        Ok(time)
     }
 }
 
@@ -155,13 +182,25 @@ fn import(
     return Ok(resource_url);
 }
 
-fn metadata(resource_url: ResourceUrl) -> Result<Metadata, String> {
+fn metadata(
+    resource_url: ResourceUrl,
+    platform_fs: &impl PlatformFileSystemTrait,
+    config: &impl FeatureFSConfigTrait,
+) -> Result<Metadata, String> {
+    let fs_url = fs_url_from_resource_url(resource_url, config)?;
+    let is_dir = platform_fs.is_directory(&fs_url);
+    let size = platform_fs.size(&fs_url)?;
+    let time_mod = platform_fs.time_modified(&fs_url)?;
+    let name = Url::parse(&fs_url)
+        .map_err(|err| err.to_string())?
+        .last_segment()?;
+
     Ok(Metadata {
-        is_directory: true,
-        size: "".to_string(),
-        time: "".to_string(),
-        name: "".to_string(),
-        id: "".to_string(),
+        is_directory: is_dir,
+        size: size,
+        time: time_mod,
+        name: name,
+        id: fs_url,
     })
 }
 fn read(resource_url: ResourceUrl) -> Result<Content, String> {
