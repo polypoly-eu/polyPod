@@ -1,5 +1,6 @@
 use crate::core::bootstrap;
 use crate::core::parse_feature_manifest;
+use crate::core::{exec_rdf_query, exec_rdf_update};
 use crate::core_failure::CoreFailure;
 use crate::ffi::serialize;
 use jni::{
@@ -36,6 +37,30 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_parseFeatureManifest(
 ) -> jbyteArray {
     env.byte_array_from_slice(&serialize(
         read_jni_string(&env, json).and_then(|string| parse_feature_manifest(&string)),
+    ))
+    .unwrap()
+}
+
+#[no_mangle]
+pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfQuery(
+    env: JNIEnv,
+    _: JClass,
+    query: JString,
+) -> jbyteArray {
+    env.byte_array_from_slice(&serialize(
+        read_jni_string(&env, query).and_then(|string| exec_rdf_query(string)),
+    ))
+    .unwrap()
+}
+
+#[no_mangle]
+pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfUpdate(
+    env: JNIEnv,
+    _: JClass,
+    query: JString,
+) -> jbyteArray {
+    env.byte_array_from_slice(&serialize(
+        read_jni_string(&env, query).and_then(|string| exec_rdf_update(string)),
     ))
     .unwrap()
 }

@@ -1,9 +1,9 @@
 use crate::{
     core_failure::CoreFailure,
-    feature_manifest_parsing::{FeatureManifest, JSONStr}, rdf::{SPARQLQuery, rdf_query, rdf_update},
+    feature_manifest_parsing::{FeatureManifest, JSONStr}, rdf::{SPARQLQuery, rdf_query, rdf_update}, rdf_failure::RdfFailure,
+    rdf::QueryResults
 };
 use once_cell::sync::OnceCell;
-use oxigraph::sparql::QueryResults;
 
 // Core is held as a singleton.
 static CORE: OnceCell<Core> = OnceCell::new();
@@ -37,10 +37,10 @@ pub fn parse_feature_manifest(json: &JSONStr) -> Result<FeatureManifest, CoreFai
     FeatureManifest::parse(json, &core.language_code)
 }
 
-pub fn exec_rdf_query(query: SPARQLQuery) -> Result<QueryResults, CoreFailure> {
+pub fn exec_rdf_query(query: SPARQLQuery) -> Result<QueryResults, RdfFailure> {
     rdf_query(query)
 }
 
-pub fn exec_rdf_update(query: SPARQLQuery) -> Result<(), CoreFailure> {
+pub fn exec_rdf_update(query: SPARQLQuery) -> Result<(), RdfFailure> {
     rdf_update(query)
 }
