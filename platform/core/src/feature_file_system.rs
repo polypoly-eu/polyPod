@@ -1,4 +1,4 @@
-use std::fs::{DirBuilder, File};
+use std::fs::{self, DirBuilder, File};
 use std::path::Path;
 use url::Url;
 use uuid::Uuid;
@@ -11,6 +11,7 @@ trait PlatformFileSystemTrait: Sized {
     fn is_directory(&self, url: &str) -> bool;
     fn size(&self, url: &str) -> Result<String, String>;
     fn time_modified(&self, url: &str) -> Result<String, String>;
+    fn remove(&self, url: &str) -> Result<(), String>;
 }
 
 struct PlatformFileSystem {}
@@ -64,6 +65,16 @@ impl PlatformFileSystemTrait for PlatformFileSystem {
             .as_secs()
             .to_string();
         Ok(time)
+    }
+
+    fn remove(&self, url: &str) -> Result<(), String> {
+        let path = Path::new(url);
+        if path.is_dir() {
+            fs::remove_dir_all(path).map_err(|err| err.to_string())?;
+        } else {
+            fs::remove_file(path).map_err(|err| err.to_string())?;
+        }
+        Ok(())
     }
 }
 
@@ -206,11 +217,17 @@ fn metadata(
         id: fs_url,
     })
 }
-fn read(resource_url: ResourceUrl) -> Result<Content, String> {
+fn read(resource_url: &ResourceUrl) -> Result<Content, String> {
     Err("mda".to_string())
 }
-fn remove(resource_url: ResourceUrl) -> Result<(), String> {
-    Err("mda".to_string())
+
+fn remove(
+    resource_url: &ResourceUrl,
+    platform_fs: &impl PlatformFileSystemTrait,
+    config: &impl FeatureFSConfigTrait,
+) -> Result<(), String> {
+    let fs_url = fs_url_from_resource_url(resource_url, config)?;
+    platform_fs.remove(&fs_url)
 }
 
 #[cfg(test)]
@@ -245,7 +262,7 @@ mod tests {
         return fs_url;
     }
 
-    fn create_file_in_fs_dir(dir_path: &str, file_name: &str, file_content: &[u8]) {
+    fn create_file_in_fs_dir(dir_path: &str, file_name: &str, file_content: &[u8]) -> String {
         let file_url = dir_path.to_string() + "/" + file_name;
         let file_path = Path::new(&file_url);
         let mut file = match File::create(file_path) {
@@ -254,6 +271,7 @@ mod tests {
         };
         file.write_all(file_content).unwrap();
         file.sync_all().unwrap();
+        return file_url;
     }
 
     struct MockFSConfig {
@@ -261,6 +279,7 @@ mod tests {
     }
 
     impl MockFSConfig {
+        // Todo: Clear temp dir.
         fn new() -> Self {
             Self {
                 dir: TempDir::new("my_directory_prefix").unwrap(),
@@ -387,6 +406,46 @@ mod tests {
         assert_ne!(metadata.time, "");
         assert_ne!(metadata.size, "");
         assert_ne!(metadata.size, "0");
+    }
+
+    #[test]
+    fn test_remove_dir() {
+        let config = MockFSConfig::new();
+        let fs = PlatformFileSystem {};
+
+        let dir_name = id();
+        let file_name = "test.zip".to_string();
+        let fs_url = create_temp_fs_dir(&dir_name, &fs, &config);
+        create_file_in_fs_dir(&fs_url, &file_name, b"Hello, world!");
+
+        assert_eq!(Path::new(&fs_url).exists(), true);
+
+        let resource_url = resource_url_from_id(&dir_name);
+        let result = remove(&resource_url, &fs, &config);
+        assert!(result.is_ok());
+
+        assert_eq!(Path::new(&fs_url).exists(), false);
+    }
+
+    #[test]
+    fn test_remove_file() {
+        let config = MockFSConfig::new();
+        let fs = PlatformFileSystem {};
+
+        let dir_name = id();
+        let file_name = "test.zip".to_string();
+        let fs_url = create_temp_fs_dir(&dir_name, &fs, &config);
+        let file_url = create_file_in_fs_dir(&fs_url, &file_name, b"Hello, world!");
+
+        assert_eq!(Path::new(&fs_url).exists(), true);
+        assert_eq!(Path::new(&file_url).exists(), true);
+
+        let resource_url = resource_url_from_id(&dir_name) + "/" + &file_name;
+        let result = remove(&resource_url, &fs, &config);
+        assert!(result.is_ok());
+
+        assert_eq!(Path::new(&fs_url).exists(), true);
+        assert_eq!(Path::new(&file_url).exists(), false);
     }
 }
 
