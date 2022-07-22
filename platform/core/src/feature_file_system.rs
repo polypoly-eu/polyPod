@@ -30,7 +30,12 @@ impl PlatformFileSystemTrait for PlatformFileSystem {
     }
 
     fn unzip(&self, from_url: &str, to_url: &str) -> Result<(), String> {
-        let file = File::open(Path::new(from_url)).map_err(|err| err.to_string())?;
+        let from_url_path = Url::parse(from_url)
+            .map_err(|err| err.to_string())?
+            .path()
+            .to_string();
+
+        let file = File::open(Path::new(&from_url_path)).map_err(|err| err.to_string())?;
         let mut archive = ZipArchive::new(file).map_err(|err| err.to_string())?;
         archive
             .extract(Path::new(to_url))
@@ -163,7 +168,7 @@ fn make_sure_feature_files_dir_exists(
 }
 
 fn import(
-    url: &String,
+    url: &Url,
     dest_resource_url: Option<ResourceUrl>,
     platform_fs: &impl PlatformFileSystemTrait,
     config: &impl FeatureFSConfigTrait,
@@ -175,7 +180,7 @@ fn import(
         None => fs_url_from_id(&Uuid::new_v4().to_string(), config),
     }?;
 
-    platform_fs.unzip(&url, &fs_url)?;
+    platform_fs.unzip(&url.as_str(), &fs_url)?;
 
     resource_url_from_fs_url(&fs_url, config)
 }
@@ -216,12 +221,13 @@ mod tests {
 
     use tempdir::TempDir;
 
-    fn zip_file_path() -> String {
-        env!("CARGO_MANIFEST_DIR").to_string() + "/src/test_files/test.zip"
-    }
-
-    fn zip_file_url() -> String {
-        "file://".to_string() + &env!("CARGO_MANIFEST_DIR").to_string() + "/src/test_files/test.zip"
+    fn zip_file_url() -> Url {
+        Url::parse(
+            &("file://".to_string()
+                + &env!("CARGO_MANIFEST_DIR").to_string()
+                + "/src/test_files/test.zip"),
+        )
+        .unwrap()
     }
 
     fn id() -> String {
@@ -309,8 +315,8 @@ mod tests {
         let config = MockFSConfig::new();
         let fs = PlatformFileSystem {};
 
-        let path = zip_file_path();
-        let result = import(&path, None, &fs, &config);
+        let url = zip_file_url();
+        let result = import(&url, None, &fs, &config);
         assert!(result.is_ok());
         assert_eq!(
             Path::new(&feature_files_path(&config).unwrap()).exists(),
@@ -323,8 +329,8 @@ mod tests {
         let config = MockFSConfig::new();
         let fs = PlatformFileSystem {};
 
-        let path = zip_file_path();
-        let result = import(&path, None, &fs, &config);
+        let url = zip_file_url();
+        let result = import(&url, None, &fs, &config);
         assert!(result.is_ok());
 
         let file_path = fs_url_from_resource_url(&result.unwrap(), &config).unwrap() + "/test";
