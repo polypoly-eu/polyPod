@@ -4,6 +4,11 @@ use url::Url;
 use uuid::Uuid;
 use zip::ZipArchive;
 
+// Feature File System is exposed to the feature
+// Platform File System is what the Feature File System uses under the hood.
+// Different platforms can have different file systems
+// Different features have the same file system
+
 trait PlatformFileSystemTrait: Sized {
     fn create_dir_structure(&self, path: &str) -> Result<(), String>;
     fn exists(&self, path: &str) -> bool;
@@ -78,18 +83,6 @@ impl PlatformFileSystemTrait for PlatformFileSystem {
     }
 }
 
-type ResourceUrl = String;
-type ResourceId = String;
-
-struct Metadata {
-    is_directory: bool,
-    size: String,
-    time: String,
-    name: String,
-    id: String,
-}
-struct Content {}
-
 trait FeatureFSConfigTrait {
     fn features_path(&self) -> Result<String, String>;
     fn feature_name(&self) -> Result<String, String>;
@@ -108,27 +101,14 @@ impl FeatureFSConfigTrait for FeatureFSConfig {
     }
 }
 
-// Feature File System is exposed to the feature
-// Platform File System is what the Feature File System uses under the hood.
-// Different platforms can have different file systems
-// Different features have the same file system
-
-// Doc
-// fn metadata(resource_url: ResourceUrl) -> Result<Metadata, String>;
-// if you read a directory it will give you back the files and folders inside of it.
-// if you read a file, it will give you back the contents of that file (as a string?)
-// what will the return type be?
-// fn read(resource_url: ResourceUrl) -> Result<Content, String>;
-// removing files or directories is not different from each other.
-// fn remove(resource_url: ResourceUrl) -> Result<(), String>;
-// import will decide if it needs to unzip a file. The contents of the url will be extracted and inserted into a database.
-// fn import(url: String, dest_resource_url: Option<ResourceUrl>) -> Result<ResourceUrl, String>;
-
 fn feature_files_path(config: &impl FeatureFSConfigTrait) -> Result<String, String> {
     let features_path = config.features_path()?;
     let feature_name = config.feature_name()?;
     Ok("file://".to_string() + &features_path + "/" + &feature_name)
 }
+
+type ResourceUrl = String;
+type ResourceId = String;
 
 fn resource_url_from_id(id: &ResourceId) -> ResourceUrl {
     let res_prefix = "polypod://FeatureFiles".to_string();
@@ -196,6 +176,14 @@ fn import(
     resource_url_from_fs_url(&fs_url, config)
 }
 
+struct Metadata {
+    is_directory: bool,
+    size: String,
+    time: String,
+    name: String,
+    id: String,
+}
+
 fn metadata(
     resource_url: &ResourceUrl,
     platform_fs: &impl PlatformFileSystemTrait,
@@ -217,7 +205,10 @@ fn metadata(
         id: fs_url,
     })
 }
-fn read(resource_url: &ResourceUrl) -> Result<Content, String> {
+
+// if you read a directory it will give you back the files and folders inside of it.
+// if you read a file, it will give you back the contents of that file (as a string?)
+fn read(resource_url: &ResourceUrl) -> Result<String, String> {
     Err("mda".to_string())
 }
 
