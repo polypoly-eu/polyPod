@@ -210,6 +210,8 @@ fn remove(resource_url: ResourceUrl) -> Result<(), String> {
 
 #[cfg(test)]
 mod tests {
+    use std::io::Write;
+
     use super::*;
 
     use tempdir::TempDir;
@@ -307,61 +309,77 @@ mod tests {
         assert_eq!(Path::new(&file_path).exists(), true);
     }
 
-    // #[test]
-    // fn test_metadata_zip_file() {
-    //     let config = MockFSConfig::new();
-    //     let fs = PlatformFileSystem {};
+    #[test]
+    fn test_metadata_file() {
+        let config = MockFSConfig::new();
+        let fs = PlatformFileSystem {};
 
-    //     // Create the resource with a certain id on the FS.
-    //     let id = id_test();
-    //     let fs_url = fs_url_from_id(&id, &config).unwrap();
-    //     fs.create_dir_structure(&fs_url).unwrap();
-    //     // Create zip file at fs_url
-    //     let file_url = fs_url.to_string() + "/" + "test.zip";
-    //     let file_path = Path::new(&file_url);
-    //     match File::create(file_path) {
-    //         Err(why) => panic!("couldn't create: {}", why),
-    //         Ok(file) => file,
-    //     };
+        // Create the resource with a certain id on the FS.
+        let id = id();
+        let fs_url = fs_url_from_id(&id, &config).unwrap();
+        fs.create_dir_structure(&fs_url).unwrap();
+        // Create zip file at fs_url
+        let file_url = fs_url.to_string() + "/" + "test.zip";
+        let file_path = Path::new(&file_url);
+        let mut file = match File::create(file_path) {
+            Err(why) => panic!("couldn't create: {}", why),
+            Ok(file) => file,
+        };
+        // Write some content to the file
+        file.write_all(b"Hello, world!").unwrap();
+        file.sync_all().unwrap();
 
-    //     let resource_url = resource_url_from_id(&id) + "/test.zip";
-    //     let result = metadata(&resource_url, &fs, &config);
-    //     assert!(result.is_ok());
+        let resource_url = resource_url_from_id(&id) + "/test.zip";
+        let result = metadata(&resource_url, &fs, &config);
+        assert!(result.is_ok());
 
-    //     let metadata = result.unwrap();
-    //     assert_eq!(
-    //         metadata.id,
-    //         fs_url_from_resource_url(&resource_url, &config).unwrap()
-    //     );
-    // }
+        let metadata = result.unwrap();
+        assert_eq!(
+            metadata.id,
+            fs_url_from_resource_url(&resource_url, &config).unwrap()
+        );
+        assert_eq!(metadata.name, "test.zip");
+        assert_eq!(metadata.is_directory, false);
+        assert_ne!(metadata.time, "");
+        assert_ne!(metadata.size, "");
+        assert_ne!(metadata.size, "0");
+    }
 
-    // #[test]
-    // fn test_metadata_dir() {
-    //     let config = MockFSConfig::new();
-    //     let fs = PlatformFileSystem {};
+    #[test]
+    fn test_metadata_dir() {
+        let config = MockFSConfig::new();
+        let fs = PlatformFileSystem {};
 
-    //     // Create the resource with a certain id on the FS.
-    //     let id = id_test();
-    //     let fs_url = fs_url_from_id(&id, &config).unwrap();
-    //     fs.create_dir_structure(&fs_url).unwrap();
-    //     // Create zip file at fs_url
-    //     let file_url = fs_url.to_string() + "/" + "test.zip";
-    //     let file_path = Path::new(&file_url);
-    //     match File::create(file_path) {
-    //         Err(why) => panic!("couldn't create: {}", why),
-    //         Ok(file) => file,
-    //     };
+        // Create the resource with a certain id on the FS.
+        let id = id();
+        let fs_url = fs_url_from_id(&id, &config).unwrap();
+        fs.create_dir_structure(&fs_url).unwrap();
+        // Create zip file at fs_url
+        let file_url = fs_url.to_string() + "/" + "test.zip";
+        let file_path = Path::new(&file_url);
+        let mut file = match File::create(file_path) {
+            Err(why) => panic!("couldn't create: {}", why),
+            Ok(file) => file,
+        };
+        // Write some content to the file
+        file.write_all(b"Hello, world!").unwrap();
+        file.sync_all().unwrap();
 
-    //     let resource_url = resource_url_from_id(&id) + "/test.zip";
-    //     let result = metadata(&resource_url, &fs, &config);
-    //     assert!(result.is_ok());
+        let resource_url = resource_url_from_id(&id);
+        let result = metadata(&resource_url, &fs, &config);
+        assert!(result.is_ok());
 
-    //     let metadata = result.unwrap();
-    //     assert_eq!(
-    //         metadata.id,
-    //         fs_url_from_resource_url(&resource_url, &config).unwrap()
-    //     );
-    // }
+        let metadata = result.unwrap();
+        assert_eq!(
+            metadata.id,
+            fs_url_from_resource_url(&resource_url, &config).unwrap()
+        );
+        assert_eq!(metadata.name, id);
+        assert_eq!(metadata.is_directory, true);
+        assert_ne!(metadata.time, "");
+        assert_ne!(metadata.size, "");
+        assert_ne!(metadata.size, "0");
+    }
 }
 
 trait UrlUtils {
