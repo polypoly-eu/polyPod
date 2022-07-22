@@ -88,7 +88,7 @@ describe("Report metadata analysis", () => {
         expect(reportData.preferedLanguage).toStrictEqual(preferedLanguage);
     });
 
-    it("has correct prefered ,anguage in JSON report", async () => {
+    it("has correct prefered language in JSON report", async () => {
         expect(jsonReport.data.preferedLanguage).toStrictEqual(
             preferedLanguage
         );
