@@ -1,5 +1,7 @@
 use serde::Serialize;
 
+use crate::rdf_failure::RdfFailure;
+
 #[derive(Debug, Clone, Serialize)]
 pub enum FailureCode {
     CoreNotBootstrapped = 1,
@@ -56,6 +58,13 @@ impl CoreFailure {
         CoreFailure {
             code: FailureCode::FailedToCreateCString.value(),
             message,
+        }
+    }
+
+    pub fn map_rdf_to_core_failure(error: RdfFailure) -> Self {
+        CoreFailure {
+            code: error.code,
+            message: error.message 
         }
     }
 

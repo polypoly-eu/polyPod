@@ -37,10 +37,10 @@ pub fn parse_feature_manifest(json: &JSONStr) -> Result<FeatureManifest, CoreFai
     FeatureManifest::parse(json, &core.language_code)
 }
 
-pub fn exec_rdf_query(query: SPARQLQuery) -> Result<QueryResults, RdfFailure> {
-    rdf_query(query)
+pub fn exec_rdf_query(query: SPARQLQuery) -> Result<QueryResults, CoreFailure> {
+    rdf_query(query).map_err(|err| CoreFailure::map_rdf_to_core_failure(err))
 }
 
-pub fn exec_rdf_update(query: SPARQLQuery) -> Result<(), RdfFailure> {
-    rdf_update(query)
+pub fn exec_rdf_update(query: SPARQLQuery) -> Result<(), CoreFailure> {
+    rdf_update(query).map_err(|err| CoreFailure::map_rdf_to_core_failure(err))
 }

@@ -22,21 +22,21 @@ pub struct RdfFailure {
 }
 
 impl RdfFailure {
-    pub fn result_serialization_failed() -> RdfFailure {
+    pub fn result_serialization_failed() -> Self {
         RdfFailure {
             code: FailureCode::ResultSerializationError.value(),
             message: String::from("Failed to serialize the query Result")
         }
     }
 
-    pub fn failed_to_initialize_store(error: StorageError) -> RdfFailure {
+    pub fn failed_to_initialize_store(error: StorageError) -> Self {
         RdfFailure {
             code: FailureCode::StorageError.value(),
             message: error.to_string()
         }
     }
 
-    pub fn map_evaluation_error(error: EvaluationError) -> RdfFailure {
+    pub fn map_evaluation_error(error: EvaluationError) -> Self {
         match error {
             EvaluationError::Parsing(error) => RdfFailure {
                 code: FailureCode::ParsingError.value(),
