@@ -228,6 +228,28 @@ mod tests {
         "8970r10972490710497291".to_string()
     }
 
+    fn create_temp_fs_dir(
+        name: &String,
+        fs: &impl PlatformFileSystemTrait,
+        config: &impl FeatureFSConfigTrait,
+    ) -> String {
+        // Temp dir because of test config
+        let fs_url = fs_url_from_id(name, config).unwrap();
+        fs.create_dir_structure(&fs_url).unwrap();
+        return fs_url;
+    }
+
+    fn create_file_in_fs_dir(dir_path: &str, file_name: &str, file_content: &[u8]) {
+        let file_url = dir_path.to_string() + "/" + file_name;
+        let file_path = Path::new(&file_url);
+        let mut file = match File::create(file_path) {
+            Err(why) => panic!("couldn't create: {}", why),
+            Ok(file) => file,
+        };
+        file.write_all(file_content).unwrap();
+        file.sync_all().unwrap();
+    }
+
     struct MockFSConfig {
         dir: TempDir,
     }
@@ -314,22 +336,12 @@ mod tests {
         let config = MockFSConfig::new();
         let fs = PlatformFileSystem {};
 
-        // Create the resource with a certain id on the FS.
-        let id = id();
-        let fs_url = fs_url_from_id(&id, &config).unwrap();
-        fs.create_dir_structure(&fs_url).unwrap();
-        // Create zip file at fs_url
-        let file_url = fs_url.to_string() + "/" + "test.zip";
-        let file_path = Path::new(&file_url);
-        let mut file = match File::create(file_path) {
-            Err(why) => panic!("couldn't create: {}", why),
-            Ok(file) => file,
-        };
-        // Write some content to the file
-        file.write_all(b"Hello, world!").unwrap();
-        file.sync_all().unwrap();
+        let dir_name = id();
+        let file_name = "test.zip".to_string();
+        let fs_url = create_temp_fs_dir(&dir_name, &fs, &config);
+        create_file_in_fs_dir(&fs_url, &file_name, b"Hello, world!");
 
-        let resource_url = resource_url_from_id(&id) + "/test.zip";
+        let resource_url = resource_url_from_id(&dir_name) + "/" + &file_name;
         let result = metadata(&resource_url, &fs, &config);
         assert!(result.is_ok());
 
@@ -338,7 +350,7 @@ mod tests {
             metadata.id,
             fs_url_from_resource_url(&resource_url, &config).unwrap()
         );
-        assert_eq!(metadata.name, "test.zip");
+        assert_eq!(metadata.name, file_name);
         assert_eq!(metadata.is_directory, false);
         assert_ne!(metadata.time, "");
         assert_ne!(metadata.size, "");
@@ -350,22 +362,12 @@ mod tests {
         let config = MockFSConfig::new();
         let fs = PlatformFileSystem {};
 
-        // Create the resource with a certain id on the FS.
-        let id = id();
-        let fs_url = fs_url_from_id(&id, &config).unwrap();
-        fs.create_dir_structure(&fs_url).unwrap();
-        // Create zip file at fs_url
-        let file_url = fs_url.to_string() + "/" + "test.zip";
-        let file_path = Path::new(&file_url);
-        let mut file = match File::create(file_path) {
-            Err(why) => panic!("couldn't create: {}", why),
-            Ok(file) => file,
-        };
-        // Write some content to the file
-        file.write_all(b"Hello, world!").unwrap();
-        file.sync_all().unwrap();
+        let dir_name = id();
+        let file_name = "test.zip".to_string();
+        let fs_url = create_temp_fs_dir(&dir_name, &fs, &config);
+        create_file_in_fs_dir(&fs_url, &file_name, b"Hello, world!");
 
-        let resource_url = resource_url_from_id(&id);
+        let resource_url = resource_url_from_id(&dir_name);
         let result = metadata(&resource_url, &fs, &config);
         assert!(result.is_ok());
 
@@ -374,7 +376,7 @@ mod tests {
             metadata.id,
             fs_url_from_resource_url(&resource_url, &config).unwrap()
         );
-        assert_eq!(metadata.name, id);
+        assert_eq!(metadata.name, dir_name);
         assert_eq!(metadata.is_directory, true);
         assert_ne!(metadata.time, "");
         assert_ne!(metadata.size, "");
