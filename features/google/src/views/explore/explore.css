@@ -45,31 +45,3 @@
     margin-right: calc(var(--gdu) * -4);
     font-size: var(--font-size-m);
 }
-
-.analysis-card .summary-text {
-    font-size: var(--font-size-ml);
-    font-weight: 400;
-    margin: 0;
-}
-
-.unrecognized-analysis-card {
-    background-color: var(--theme-primary-color);
-    padding: calc(var(--gdu) * 5);
-    margin: calc(var(--gdu) * -6) calc(var(--gdu) * -4) 0 calc(var(--gdu) * -4);
-}
-
-.unrecognized-analysis-card .unrecognized-analysis-title {
-    display: flex;
-}
-
-.unrecognized-analysis-card .unrecognized-analysis-title h1 {
-    font-family: "Jost Medium";
-    color: var(--theme-secondary-color);
-    font-size: var(--font-size-xl);
-    margin: 0;
-}
-
-.unrecognized-analysis-card p {
-    margin: calc(var(--gdu) * 4) 0;
-    color: var(--theme-secondary-color);
-}

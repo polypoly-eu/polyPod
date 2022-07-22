@@ -1,3 +1,4 @@
+import PolyPodCoreSwift
 import SwiftUI
 
 struct FeatureView: View {
@@ -13,7 +14,7 @@ struct FeatureView: View {
     @State var filePicker = FilePicker()
 
     var body: some View {
-        let featureColor = feature.primaryColor ?? Color.PolyPod.lightBackground
+        let featureColor = Color(fromHex: feature.primaryColor)
         let lightForeground = !featureColor.isLight
         let iconVariantQualifier = lightForeground ? "Light" : "Dark"
 

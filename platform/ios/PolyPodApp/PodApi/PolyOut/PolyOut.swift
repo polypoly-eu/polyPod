@@ -1,4 +1,5 @@
 import Foundation
+import PolyPodCoreSwift
 
 protocol PolyOutProtocol {
     func fetch(

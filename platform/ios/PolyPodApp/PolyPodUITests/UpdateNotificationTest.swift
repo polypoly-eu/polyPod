@@ -73,7 +73,7 @@ class UpdateNotificationTest: XCTestCase {
             ]
         }
         app.launch()
-        let background = app.wait(for: .runningForeground, timeout: 60)
+        let background = app.wait(for: .runningForeground, timeout: 120)
         XCTAssertTrue(background)
     }
 
