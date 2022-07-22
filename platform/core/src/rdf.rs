@@ -1,7 +1,5 @@
 use std::collections::HashMap;
-
 use oxigraph::store::Store;
-use oxigraph::sparql::{ EvaluationError};
 use serde::Deserialize;
 use serde::Serialize;
 
