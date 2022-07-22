@@ -1,41 +1,48 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { NotificationBanner } from "../../react-components";
+import { NotificationBanner, types } from "../../../src/react-components";
 
 /**
  * @jest-environment jsdom
  */
 
 const children = "Pop Up content";
-const reportSuccessful = "successful";
-const reportUnsuccessful = "unsuccessful";
+const mockedHandleClick = jest.fn();
 
-it("NotificationBanner renders correctly", () => {
-  const { container, getByText } = render(
-    <NotificationBanner>{children}</NotificationBanner>
-  );
-
-  expect(container).toBeTruthy();
-  expect(getByText(children)).toBeTruthy();
-});
-
-describe("Report type is", () => {
-  it("successful", () => {
-    const { getByText } = render(
-      <NotificationBanner reportType={reportSuccessful}>
+describe("NotificationBanner component", () => {
+  beforeEach(() => {
+    render(
+      <NotificationBanner
+        notificationType={types.standard.class}
+        handleCloseNotification={mockedHandleClick}
+      >
         {children}
       </NotificationBanner>
     );
-    expect(getByText(children)).toHaveClass("pop-up-banner successful");
   });
 
-  it("unsuccessful", () => {
-    const { getByText } = render(
-      <NotificationBanner reportType={reportUnsuccessful}>
-        {children}
-      </NotificationBanner>
-    );
-    expect(getByText(children)).toHaveClass("pop-up-banner unsuccessful");
+  it("renders correctly", () => {
+    expect(screen.getByText(children)).toBeTruthy();
+  });
+
+  it("closes when clicking on the icon", () => {
+    fireEvent.click(screen.getByRole("img"), mockedHandleClick);
+    expect(mockedHandleClick).toHaveBeenCalled();
+  });
+});
+
+describe("NotificationBanner styles", () => {
+  it("changes depending on notification type", () => {
+    for (let type in types) {
+      const { getByText } = render(
+        <NotificationBanner notificationType={type}>
+          {children + type}
+        </NotificationBanner>
+      );
+      expect(getByText(children + type)).toHaveClass(
+        `notification-banner ${type}`
+      );
+    }
   });
 });

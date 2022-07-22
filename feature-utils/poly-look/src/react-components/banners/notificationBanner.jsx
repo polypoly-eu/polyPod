@@ -7,7 +7,7 @@ import success from "../../static/images/icons/xmark-success.svg";
 import error from "../../static/images/icons/xmark-error.svg";
 import warning from "../../static/images/icons/xmark-warning.svg";
 
-const types = {
+export const types = {
   standard: { class: "standard", icon: standard },
   success: { class: "success", icon: success },
   error: { class: "error", icon: error },
