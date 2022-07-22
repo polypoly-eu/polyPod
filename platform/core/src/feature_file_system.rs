@@ -1,5 +1,3 @@
-use lazy_static::lazy_static;
-use regex::Regex;
 use std::fs::{DirBuilder, File};
 use std::path::Path;
 use url::Url;
