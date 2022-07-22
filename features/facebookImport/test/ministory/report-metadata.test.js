@@ -93,6 +93,14 @@ describe("Report metadata analysis", () => {
             preferedLanguage
         );
     });
+
+    it("has the same polyPod version in analysis and report", async () => {
+        expect(reportData.polyPodVersion).toBe(jsonReport.data.polyPodVersion);
+    });
+
+    it("has correct polyPod runtime in analysis", async () => {
+        expect(reportData.polyPodRuntime).toBe(jsonReport.data.polyPodRuntime);
+    });
 });
 
 function getReportNameFromAnalaysis(analysis) {
