@@ -115,12 +115,13 @@ fn feature_files_path(config: &impl FeatureFSConfigTrait) -> Result<String, Stri
 }
 
 fn resource_url_from_id(id: &ResourceId) -> ResourceUrl {
-    return "polypod://FeatureFiles/".to_string() + &id;
+    let res_prefix = "polypod://FeatureFiles".to_string();
+    return res_prefix + "/" + &id;
 }
 
 fn fs_url_from_id(id: &ResourceId, config: &impl FeatureFSConfigTrait) -> Result<String, String> {
-    let feature_files_path = feature_files_path(config)?;
-    Ok(feature_files_path + "/" + &id)
+    let fs_prefix = feature_files_path(config)?;
+    Ok(fs_prefix + "/" + &id)
 }
 
 #[allow(dead_code)]
