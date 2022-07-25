@@ -7,7 +7,7 @@ import success from "../../static/images/icons/xmark-success.svg";
 import error from "../../static/images/icons/xmark-error.svg";
 import warning from "../../static/images/icons/xmark-warning.svg";
 
-export const types = {
+export const notificationTypes = {
   standard: { class: "standard", icon: standard },
   success: { class: "success", icon: success },
   error: { class: "error", icon: error },
@@ -20,11 +20,13 @@ export function NotificationBanner({
   handleCloseNotification,
 }) {
   return (
-    <div className="notification-pop-up-container">
-      <div className={`notification-banner ${types[notificationType].class}`}>
+    <div className="notification-container">
+      <div
+        className={`notification-banner ${notificationTypes[notificationType].class}`}
+      >
         {children}
         <img
-          src={types[notificationType].icon}
+          src={notificationTypes[notificationType].icon}
           alt="close"
           onClick={handleCloseNotification}
         />

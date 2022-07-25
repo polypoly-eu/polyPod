@@ -1,7 +1,10 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { NotificationBanner, types } from "../../../src/react-components";
+import {
+  NotificationBanner,
+  notificationTypes,
+} from "../../../src/react-components";
 
 /**
  * @jest-environment jsdom
@@ -14,7 +17,7 @@ describe("NotificationBanner component", () => {
   beforeEach(() => {
     render(
       <NotificationBanner
-        notificationType={types.standard.class}
+        notificationType={notificationTypes.standard.class}
         handleCloseNotification={mockedHandleClick}
       >
         {children}
@@ -34,7 +37,7 @@ describe("NotificationBanner component", () => {
 
 describe("NotificationBanner styles", () => {
   it("changes depending on notification type", () => {
-    for (let type in types) {
+    for (let type in notificationTypes) {
       const { getByText } = render(
         <NotificationBanner notificationType={type}>
           {children + type}

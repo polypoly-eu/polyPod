@@ -28,7 +28,7 @@ import {
   ProgressIcon,
   ProgressBanner,
   NotificationBanner,
-  types,
+  notificationTypes,
 } from "./banners";
 
 export {
@@ -64,5 +64,5 @@ export {
   ProgressIcon,
   ProgressBanner,
   NotificationBanner,
-  types,
+  notificationTypes,
 };
