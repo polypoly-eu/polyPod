@@ -4,6 +4,7 @@ import android.content.Context
 import coop.polypoly.polypod.Preferences
 import coop.polypoly.polypod.R
 
+
 class UpdateNotification(private val context: Context) {
     companion object {
         data class MockData(var id: Int? = null)

@@ -64,3 +64,10 @@ fun mapFeatureManifest(msgObject: Value): FeatureManifest {
         }?.toMap()
     )
 }
+
+fun mapQueryResult(msgObject: Value): QueryResult {
+    val msgObject = msgObject.asMapValue().map()
+
+    System.out.println(msgObject.toString())
+    return QueryResult(null)
+}

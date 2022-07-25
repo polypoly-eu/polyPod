@@ -16,6 +16,18 @@ class Core {
             ) { mapFeatureManifest(it) }
         }
 
+        fun execRdfQuery(query: String): QueryResult {
+            return handleCoreResponse(
+                JniApi().execRdfQuery(query)
+            ) { mapQueryResult(it)}
+        }
+
+        fun execRdfUpdate(query: String) {
+            return handleCoreResponse(
+                JniApi().execRdfUpdate(query)
+            ) {}
+        }
+
         private fun <T> handleCoreResponse(
             byteResponse: ByteArray,
             map: (Value) -> T

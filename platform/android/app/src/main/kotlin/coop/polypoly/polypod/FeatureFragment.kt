@@ -19,6 +19,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import coop.polypoly.core.Core
 import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
@@ -241,6 +242,8 @@ open class FeatureFragment : Fragment() {
                 )
             }
         }
+        Core.execRdfUpdate("INSERT DATA { <http://example.com/you> <http://example.com/are> \"great\" }")
+        Core.execRdfQuery("SELECT ?s ?p ?o WHERE { ?s ?p ?o }")
         startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
         var url: String = ""
         var name: String = ""
