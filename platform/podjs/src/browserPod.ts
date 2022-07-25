@@ -13,7 +13,6 @@ import type {
 } from "@polypoly-eu/api";
 import {
     dataFactory,
-    createUUID,
     PolyUri,
     isPolypodUri,
 } from "@polypoly-eu/api";
