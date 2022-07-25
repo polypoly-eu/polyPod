@@ -14,7 +14,7 @@ export function createUUID(): string {
     );
 }
 
-export function isPolypodUri(uri: string): Boolean {
+export function isPolypodUri(uri: string): boolean {
     return /^polypod:\/\//.test(uri);
 }
 
