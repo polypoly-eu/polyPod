@@ -522,7 +522,43 @@ mod tests {
         let result = read_dir(&resource_url, &fs, &config);
         assert!(result.is_err());
     }
+
+    #[test]
+    fn test_read_file_valid() {
+        let config = MockFSConfig::new();
+        let fs = PlatformFileSystem {};
+
+        let id = id();
+        let file_name = "test.zip".to_string();
+        let fs_url = create_temp_fs_dir(&id, &fs, &config);
+        let file_url = create_file_in_fs_dir(&fs_url, &file_name, b"Hello, world!");
+
+        assert_eq!(Path::new(&fs_url).exists(), true);
+        assert_eq!(Path::new(&file_url).exists(), true);
+
+        let resource_url = resource_url_from_fs_url(&file_url, &config).unwrap();
+        let result = read_file(&resource_url, &fs, &config);
+        assert!(result.is_ok());
+        assert!(result.unwrap().len() > 0);
+    }
+
+    #[test]
+    fn test_read_file_invalid() {
+        let config = MockFSConfig::new();
+        let fs = PlatformFileSystem {};
+
+        let id = id();
+        let fs_url = create_temp_fs_dir(&id, &fs, &config);
+
+        assert_eq!(Path::new(&fs_url).exists(), true);
+
+        let resource_url = resource_url_from_fs_url(&fs_url, &config).unwrap();
+        let result = read_file(&resource_url, &fs, &config);
+        assert!(result.is_err());
+    }
 }
+
+//TODO: Fix temp dir issue where it remains on disk after the tests are run
 
 trait UrlUtils {
     fn last_segment(&self) -> Result<String, String>;
