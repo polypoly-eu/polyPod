@@ -216,9 +216,9 @@ fn metadata(
 
     Ok(Metadata {
         is_directory: is_dir,
-        size: size,
+        size,
         time: time_mod,
-        name: name,
+        name,
         id: fs_url,
     })
 }
@@ -300,6 +300,13 @@ mod tests {
         file.write_all(file_content).unwrap();
         file.sync_all().unwrap();
         return file_url;
+    }
+
+    fn create_dir_in_fs_dir(dir_path: &str, dir_name: &str) -> String {
+        let full_path = dir_path.to_string() + "/" + dir_name;
+        let path = Path::new(&full_path);
+        DirBuilder::new().recursive(true).create(path).unwrap();
+        return full_path;
     }
 
     struct MockFSConfig {
@@ -474,6 +481,46 @@ mod tests {
 
         assert_eq!(Path::new(&fs_url).exists(), true);
         assert_eq!(Path::new(&file_url).exists(), false);
+    }
+
+    #[test]
+    fn test_read_dir_valid() {
+        let config = MockFSConfig::new();
+        let fs = PlatformFileSystem {};
+
+        let id = id();
+        let file_name = "test.zip".to_string();
+        let dir_name = "test".to_string();
+        let fs_url = create_temp_fs_dir(&id, &fs, &config);
+        let file_url = create_file_in_fs_dir(&fs_url, &file_name, b"Hello, world!");
+        let dir_url = create_dir_in_fs_dir(&fs_url, &dir_name);
+
+        assert_eq!(Path::new(&fs_url).exists(), true);
+        assert_eq!(Path::new(&file_url).exists(), true);
+        assert_eq!(Path::new(&dir_url).exists(), true);
+
+        let resource_url = resource_url_from_id(&id);
+        let result = read_dir(&resource_url, &fs, &config);
+        assert!(result.is_ok());
+        assert_eq!(result.unwrap(), vec!["test", "test.zip"]);
+    }
+
+    #[test]
+    fn test_read_dir_invalid() {
+        let config = MockFSConfig::new();
+        let fs = PlatformFileSystem {};
+
+        let id = id();
+        let file_name = "test.zip".to_string();
+        let fs_url = create_temp_fs_dir(&id, &fs, &config);
+        let file_url = create_file_in_fs_dir(&fs_url, &file_name, b"Hello, world!");
+
+        assert_eq!(Path::new(&fs_url).exists(), true);
+        assert_eq!(Path::new(&file_url).exists(), true);
+
+        let resource_url = resource_url_from_fs_url(&file_url, &config).unwrap();
+        let result = read_dir(&resource_url, &fs, &config);
+        assert!(result.is_err());
     }
 }
 
