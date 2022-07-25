@@ -376,10 +376,11 @@ class IDBPolyOut implements PolyOut {
         const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
         const blob = await (await fetch(dataUrl)).blob();
         const db = await openDatabase();
-        if (!isPolypodUri(destUrl)) {
-            reject(`${destUrl} is not a polypod:// URI`);
-        }
+
         return new Promise((resolve, reject) => {
+            if (destUrl && !isPolypodUri(destUrl)) {
+                reject(`${destUrl} is not a polypod:// URI`);
+            }
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
             const id = destUrl || new PolyUri().toString;
 
