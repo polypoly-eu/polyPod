@@ -19,6 +19,7 @@ trait PlatformFileSystemTrait: Sized {
     fn remove(&self, url: &str) -> Result<(), String>;
     fn dir_children(&self, dir_url: &str) -> Result<Vec<String>, String>;
     fn file_content(&self, file_url: &str) -> Result<Vec<u8>, String>;
+    fn name(&self, path: &str) -> Result<String, String>;
 }
 
 struct PlatformFileSystem {}
@@ -97,6 +98,15 @@ impl PlatformFileSystemTrait for PlatformFileSystem {
     fn file_content(&self, file_url: &str) -> Result<Vec<u8>, String> {
         let path = Path::new(&file_url);
         fs::read(path).map_err(|err| err.to_string())
+    }
+
+    fn name(&self, path: &str) -> Result<String, String> {
+        let p = Path::new(&path);
+        p.file_name()
+            .ok_or("Could not get filename from path".to_string())?
+            .to_owned()
+            .into_string()
+            .map_err(|err| err.into_string().unwrap_or_default())
     }
 }
 
@@ -210,10 +220,7 @@ fn metadata(
     let is_dir = platform_fs.is_directory(&fs_url);
     let size = platform_fs.size(&fs_url)?;
     let time_mod = platform_fs.time_modified(&fs_url)?;
-    let name = Url::parse(&fs_url)
-        .map_err(|err| err.to_string())?
-        .last_segment()?;
-
+    let name = platform_fs.name(&fs_url)?;
     Ok(Metadata {
         is_directory: is_dir,
         size,
