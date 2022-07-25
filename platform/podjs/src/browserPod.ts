@@ -11,11 +11,7 @@ import type {
     Stats,
     Entry,
 } from "@polypoly-eu/api";
-import {
-    dataFactory,
-    PolyUri,
-    isPolypodUri,
-} from "@polypoly-eu/api";
+import { dataFactory, PolyUri, isPolypodUri } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
 import * as RDFString from "rdf-string";
 import * as zip from "@zip.js/zip.js";
