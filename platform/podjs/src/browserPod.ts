@@ -11,7 +11,12 @@ import type {
     Stats,
     Entry,
 } from "@polypoly-eu/api";
-import { dataFactory, createUUID, PolyUri } from "@polypoly-eu/api";
+import {
+    dataFactory,
+    createUUID,
+    PolyUri,
+    isPolypodUri,
+} from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
 import * as RDFString from "rdf-string";
 import * as zip from "@zip.js/zip.js";
@@ -371,7 +376,9 @@ class IDBPolyOut implements PolyOut {
         const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
         const blob = await (await fetch(dataUrl)).blob();
         const db = await openDatabase();
-
+        if (!isPolypodUri(destUrl)) {
+            reject(`${destUrl} is not a polypod:// URI`);
+        }
         return new Promise((resolve, reject) => {
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
             const id = destUrl || new PolyUri().toString;
