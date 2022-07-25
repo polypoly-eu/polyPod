@@ -271,7 +271,7 @@ mod tests {
 
     use super::*;
 
-    use tempdir::TempDir;
+    use tempfile::TempDir;
 
     fn zip_file_url() -> Url {
         Url::parse(
@@ -324,7 +324,7 @@ mod tests {
         // Todo: Clear temp dir.
         fn new() -> Self {
             Self {
-                dir: TempDir::new("my_directory_prefix").unwrap(),
+                dir: TempDir::new().unwrap(),
             }
         }
     }
