@@ -17,6 +17,8 @@ trait PlatformFileSystemTrait: Sized {
     fn size(&self, url: &str) -> Result<String, String>;
     fn time_modified(&self, url: &str) -> Result<String, String>;
     fn remove(&self, url: &str) -> Result<(), String>;
+    fn dir_children(&self, dir_url: &str) -> Result<Vec<String>, String>;
+    fn file_content(&self, file_url: &str) -> Result<Vec<u8>, String>;
 }
 
 struct PlatformFileSystem {}
@@ -80,6 +82,21 @@ impl PlatformFileSystemTrait for PlatformFileSystem {
             fs::remove_file(path).map_err(|err| err.to_string())?;
         }
         Ok(())
+    }
+
+    fn dir_children(&self, dir_url: &str) -> Result<Vec<String>, String> {
+        let path = Path::new(dir_url);
+        let contents = fs::read_dir(path).map_err(|err| err.to_string())?;
+        let names: Vec<String> = contents
+            .filter_map(|c| c.ok())
+            .filter_map(|c| c.file_name().into_string().ok())
+            .collect();
+        Ok(names)
+    }
+
+    fn file_content(&self, file_url: &str) -> Result<Vec<u8>, String> {
+        let path = Path::new(&file_url);
+        fs::read(path).map_err(|err| err.to_string())
     }
 }
 
@@ -206,10 +223,30 @@ fn metadata(
     })
 }
 
-// if you read a directory it will give you back the files and folders inside of it.
-// if you read a file, it will give you back the contents of that file (as a string?)
-fn read(resource_url: &ResourceUrl) -> Result<String, String> {
-    Err("mda".to_string())
+fn read_dir(
+    resource_url: &ResourceUrl,
+    platform_fs: &impl PlatformFileSystemTrait,
+    config: &impl FeatureFSConfigTrait,
+) -> Result<Vec<String>, String> {
+    let fs_url = fs_url_from_resource_url(resource_url, config)?;
+    if platform_fs.is_directory(&fs_url) {
+        return platform_fs.dir_children(&fs_url);
+    } else {
+        return Err("resource url is not pointing to a directory.".to_string());
+    }
+}
+
+fn read_file(
+    resource_url: &ResourceUrl,
+    platform_fs: &impl PlatformFileSystemTrait,
+    config: &impl FeatureFSConfigTrait,
+) -> Result<Vec<u8>, String> {
+    let fs_url = fs_url_from_resource_url(resource_url, config)?;
+    if !platform_fs.is_directory(&fs_url) {
+        return platform_fs.file_content(&fs_url);
+    } else {
+        return Err("resource url is not pointing to a file".to_string());
+    }
 }
 
 fn remove(
