@@ -15,17 +15,17 @@ export function createUUID(): string {
 }
 
 export function isPolypodUri(uri: string): Boolean {
-    return uri.test(/^polypod:\/\//);
+    return /^polypod:\/\//.test(uri);
 }
 
-export class polyUri {
+export class PolyUri {
     public readonly Uri: string;
 
     constructor() {
         this.Uri = `polypod://${createUUID()}`;
     }
 
-    method toString(): string {
+    toString(): string {
         return this.Uri;
     }
 }
