@@ -8,10 +8,10 @@ import error from "../../static/images/icons/xmark-error.svg";
 import warning from "../../static/images/icons/xmark-warning.svg";
 
 export const notificationTypes = {
-  standard: { class: "standard", icon: standard },
-  success: { class: "success", icon: success },
-  error: { class: "error", icon: error },
-  warning: { class: "warning", icon: warning },
+  standard: { class: "notification-standard", icon: standard },
+  success: { class: "notification-success", icon: success },
+  error: { class: "notification-error", icon: error },
+  warning: { class: "notification-warning", icon: warning },
 };
 
 export function NotificationBanner({

@@ -1,4 +1,4 @@
-.notification-banner {
+.notification-container .notification-banner {
     height: 56px;
     display: flex;
     justify-content: space-between;
@@ -8,22 +8,22 @@
     box-sizing: border-box;
 }
 
-.standard {
+.notification-container .notification-standard {
     background-color: var(--color-gray-100);
     color: var(--color-gray-900);
 }
 
-.error {
+.notification-container .notification-error {
     background-color: var(--color-red-200);
     color: var(--color-red-900);
 }
 
-.success {
+.notification-container .notification-success {
     background-color: var(--color-green-200);
     color: var(--color-green-950);
 }
 
-.warning {
+.notification-container .notification-warning {
     background-color: var(--color-yellow-200);
     color: var(--color-yellow-800);
 }
