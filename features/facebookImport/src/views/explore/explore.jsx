@@ -11,6 +11,7 @@ import {
     Screen,
     Banner,
     NotificationBanner,
+    notificationTypes,
 } from "@polypoly-eu/poly-look";
 
 import i18n from "!silly-i18n";
@@ -32,7 +33,11 @@ const ExploreView = () => {
     const renderReportResult = () =>
         reportResult !== null && (
             <NotificationBanner
-                notificationType={reportResult ? "successful" : "error"}
+                notificationType={
+                    reportResult
+                        ? Object.keys(notificationTypes)[1]
+                        : Object.keys(notificationTypes)[2]
+                }
                 handleCloseNotification={handleCloseReportResult}
             >
                 {reportResult ? (

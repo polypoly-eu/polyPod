@@ -8,6 +8,7 @@ import {
     ClickableCard,
     Banner,
     NotificationBanner,
+    notificationTypes,
 } from "@polypoly-eu/poly-look";
 
 import i18n from "!silly-i18n";
@@ -31,7 +32,11 @@ const ExploreView = () => {
     const renderReportResult = () =>
         reportIsSent !== null && (
             <NotificationBanner
-                notificationType={reportIsSent ? "success" : "error"}
+                notificationType={
+                    reportIsSent
+                        ? Object.keys(notificationTypes)[1]
+                        : Object.keys(notificationTypes)[2]
+                }
                 handleCloseNotification={handleCloseNotification}
             >
                 {reportIsSent ? (
