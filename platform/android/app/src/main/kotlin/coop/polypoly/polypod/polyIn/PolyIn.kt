@@ -3,6 +3,8 @@ package coop.polypoly.polypod.polyIn
 import android.content.Context
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
+import coop.polypoly.core.Core
+import coop.polypoly.core.QueryResult
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyIn.rdf.BlankNodeObject
 import coop.polypoly.polypod.polyIn.rdf.BlankNodeSubject
@@ -99,6 +101,15 @@ open class PolyIn(
                 quadObjectToResource(quad.`object`)
             )
         }
+    }
+
+
+    open fun query(query: String): QueryResult {
+        return Core.execRdfQuery(query)
+    }
+
+    open fun update(query: String) {
+        return Core.execRdfUpdate(query)
     }
 
     private fun getDatabase(file: File): EncryptedFile {
