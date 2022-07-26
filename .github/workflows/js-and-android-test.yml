@@ -79,7 +79,7 @@ jobs:
         if: steps.changes.outputs.android == 'true'
         working-directory: platform/core
         run: |
-          echo "NDK_HOME=$ANDROID_NDK_LATEST_HOME" >> $GITHUB_ENV
+          echo "ANDROID_NDK_HOME=$ANDROID_NDK_LATEST_HOME" >> $GITHUB_ENV
           make android_bindings
       - name: Test android
         if: steps.changes.outputs.android == 'true'
