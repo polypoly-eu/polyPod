@@ -1,6 +1,6 @@
 import { createUUID, isPolypodUri, PolyUri } from "../uri";
 
-describe("Test functions", () => {
+describe("uri methods", () => {
     it("should generate an UUID in the required format", () => {
         expect(createUUID()).toMatch(/^\w{8}-\w{4}-4\w{3}-\w{4}-\w{12}$/);
     });
