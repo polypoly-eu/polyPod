@@ -16,9 +16,17 @@ describe("createUUID tests", () => {
 });
 
 describe("isPolypodUri()", () => {
-    it("recognizes good and bad URIs", () => {
-        const polyUri: PolyUri = new PolyUri();
-        expect(isPolypodUri(polyUri.toString())).toBe(true);
-        expect(isPolypodUri("foobargaz")).toBe(false);
-    });
+  it.each([
+    [(new PolyUri()).toString(), true],
+    [`${(new PolyUri()).toString()}12313313`, false],
+    ["foobargaz", false],
+    ["badURI", false],
+    ["xxxx-xxxx-xxx-xxxxxx", false],
+    ["", false],
+  ])(
+    `should return proper result when passed Uri is %s`,
+    (x, result) => {
+      expect(isPolypodUri(x)).toEqual(result);
+    }
+  );
 });
