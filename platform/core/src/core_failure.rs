@@ -11,6 +11,9 @@ pub enum FailureCode {
     FailedToConvertJavaString,
     FailedToParseFeatureCategoriesJSON,
     FailedToReadFile,
+    FailedFileSystemOperation,
+    FailedToParseURL,
+    FailedToUnzip,
 }
 
 impl FailureCode {
@@ -90,6 +93,33 @@ impl CoreFailure {
             message: format!(
                 "Failed to read file from path '{}', error: '{}'",
                 path, message,
+            ),
+        }
+    }
+
+    pub fn failed_file_system_operation(path: String, message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedFileSystemOperation.value(),
+            message: format!(
+                "File system failed for path '{}' with error: '{}'",
+                path, message,
+            ),
+        }
+    }
+
+    pub fn failed_to_parse_url(url: String, message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToParseURL.value(),
+            message: format!("Failed to parse url '{}' with error: '{}'", url, message,),
+        }
+    }
+
+    pub fn failed_to_unzip(url: String, message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToUnzip.value(),
+            message: format!(
+                "Failed to unzip resource at url '{}' with error: '{}'",
+                url, message,
             ),
         }
     }
