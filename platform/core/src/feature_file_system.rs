@@ -23,10 +23,10 @@ impl FeatureFSConfigTrait for FeatureFSConfig {
 fn feature_files_path(config: &impl FeatureFSConfigTrait) -> Result<String, CoreFailure> {
     let features_path = config
         .features_path()
-        .map_err(|err| CoreFailure::failed_to_create_feature_files_path(err.to_string()))?;
+        .map_err(CoreFailure::failed_to_create_feature_files_path)?;
     let feature_name = config
         .feature_name()
-        .map_err(|err| CoreFailure::failed_to_create_feature_files_path(err.to_string()))?;
+        .map_err(CoreFailure::failed_to_create_feature_files_path)?;
     Ok(features_path + "/" + &feature_name)
 }
 
