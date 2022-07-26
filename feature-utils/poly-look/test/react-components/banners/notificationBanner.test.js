@@ -37,14 +37,14 @@ describe("NotificationBanner component", () => {
 
 describe("NotificationBanner styles", () => {
   it("changes depending on notification type", () => {
-    for (let type in notificationTypes) {
+    for (let notificationType in notificationTypes) {
       const { getByText } = render(
-        <NotificationBanner notificationType={type}>
-          {children + type}
+        <NotificationBanner notificationType={notificationType}>
+          {children + notificationType}
         </NotificationBanner>
       );
-      expect(getByText(children + type)).toHaveClass(
-        `notification-banner ${type}`
+      expect(getByText(children + notificationType)).toHaveClass(
+        `notification-banner ${notificationType}`
       );
     }
   });
