@@ -103,7 +103,7 @@ impl PlatformFileSystemTrait for PlatformFileSystem {
     fn name(&self, path: &str) -> Result<String, String> {
         let p = Path::new(&path);
         p.file_name()
-            .ok_or("Could not get filename from path".to_string())?
+            .ok_or_else(|| "Could not get filename from path".to_string())?
             .to_owned()
             .into_string()
             .map_err(|err| err.into_string().unwrap_or_default())
@@ -135,16 +135,19 @@ fn feature_files_path(config: &impl FeatureFSConfigTrait) -> Result<String, Stri
 }
 
 type ResourceUrl = String;
+#[allow(dead_code)]
 type ResourceId = String;
 
+#[allow(dead_code)]
 fn resource_url_from_id(id: &ResourceId) -> ResourceUrl {
     let res_prefix = "polypod://FeatureFiles".to_string();
-    return res_prefix + "/" + &id;
+    res_prefix + "/" + id
 }
 
+#[allow(dead_code)]
 fn fs_path_from_id(id: &ResourceId, config: &impl FeatureFSConfigTrait) -> Result<String, String> {
     let fs_prefix = feature_files_path(config)?;
-    Ok(fs_prefix + "/" + &id)
+    Ok(fs_prefix + "/" + id)
 }
 
 #[allow(dead_code)]
@@ -154,26 +157,27 @@ fn fs_path_from_resource_url(
 ) -> Result<String, String> {
     let fs_prefix = feature_files_path(config)?;
     let res_prefix = "polypod://FeatureFiles".to_string();
-    swap_prefix(&resource_url, &res_prefix, &fs_prefix)
+    swap_prefix(resource_url, &res_prefix, &fs_prefix)
 }
 
 #[allow(dead_code)]
 fn resource_url_from_fs_path(
-    fs_path: &String,
+    fs_path: &str,
     config: &impl FeatureFSConfigTrait,
 ) -> Result<String, String> {
     let fs_prefix = feature_files_path(config)?;
     let res_prefix = "polypod://FeatureFiles/".to_string();
-    swap_prefix(&fs_path, &fs_prefix, &res_prefix)
+    swap_prefix(fs_path, &fs_prefix, &res_prefix)
 }
 
 fn swap_prefix(string: &str, from: &str, to: &str) -> Result<String, String> {
     if !string.starts_with(from) {
         return Err(format!("{} does not start with {}", string, from));
     }
-    Ok(string.replace(&from, &to))
+    Ok(string.replace(from, to))
 }
 
+#[allow(dead_code)]
 fn make_sure_feature_files_dir_exists(
     platform_fs: &impl PlatformFileSystemTrait,
     config: &impl FeatureFSConfigTrait,
@@ -185,6 +189,7 @@ fn make_sure_feature_files_dir_exists(
     Ok(())
 }
 
+#[allow(dead_code)]
 fn import(
     url: &Url,
     dest_resource_url: Option<ResourceUrl>,
@@ -198,11 +203,12 @@ fn import(
         None => fs_path_from_id(&Uuid::new_v4().to_string(), config),
     }?;
 
-    platform_fs.unzip(&url.as_str(), &fs_path)?;
+    platform_fs.unzip(url.as_str(), &fs_path)?;
 
     resource_url_from_fs_path(&fs_path, config)
 }
 
+#[allow(dead_code)]
 struct Metadata {
     is_directory: bool,
     size: String,
@@ -211,6 +217,7 @@ struct Metadata {
     id: String,
 }
 
+#[allow(dead_code)]
 fn metadata(
     resource_url: &ResourceUrl,
     platform_fs: &impl PlatformFileSystemTrait,
@@ -230,6 +237,7 @@ fn metadata(
     })
 }
 
+#[allow(dead_code)]
 fn read_dir(
     resource_url: &ResourceUrl,
     platform_fs: &impl PlatformFileSystemTrait,
@@ -237,12 +245,13 @@ fn read_dir(
 ) -> Result<Vec<String>, String> {
     let fs_path = fs_path_from_resource_url(resource_url, config)?;
     if platform_fs.is_directory(&fs_path) {
-        return platform_fs.dir_children(&fs_path);
+        platform_fs.dir_children(&fs_path)
     } else {
-        return Err("resource url is not pointing to a directory.".to_string());
+        Err("resource url is not pointing to a directory.".to_string())
     }
 }
 
+#[allow(dead_code)]
 fn read_file(
     resource_url: &ResourceUrl,
     platform_fs: &impl PlatformFileSystemTrait,
@@ -250,12 +259,13 @@ fn read_file(
 ) -> Result<Vec<u8>, String> {
     let fs_path = fs_path_from_resource_url(resource_url, config)?;
     if !platform_fs.is_directory(&fs_path) {
-        return platform_fs.file_content(&fs_path);
+        platform_fs.file_content(&fs_path)
     } else {
-        return Err("resource url is not pointing to a file".to_string());
+        Err("resource url is not pointing to a file".to_string())
     }
 }
 
+#[allow(dead_code)]
 fn remove(
     resource_url: &ResourceUrl,
     platform_fs: &impl PlatformFileSystemTrait,
@@ -577,6 +587,8 @@ impl UrlUtils for Url {
             .map(|c| c.collect::<Vec<_>>())
             .and_then(|segments| segments.last().cloned())
             .map(|id| id.to_string())
-            .ok_or("Could not extract fs id from resource id. No path components".to_string())
+            .ok_or_else(|| {
+                "Could not extract fs id from resource id. No path components".to_string()
+            })
     }
 }
