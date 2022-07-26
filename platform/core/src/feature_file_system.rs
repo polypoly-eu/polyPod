@@ -9,16 +9,17 @@ use zip::ZipArchive;
 // Different platforms can have different file systems
 // Different features have the same file system
 
+// FS works only with paths
 trait PlatformFileSystemTrait: Sized {
     fn create_dir_structure(&self, path: &str) -> Result<(), String>;
     fn exists(&self, path: &str) -> bool;
-    fn unzip(&self, from_url: &str, to_url: &str) -> Result<(), String>;
-    fn is_directory(&self, url: &str) -> bool;
-    fn size(&self, url: &str) -> Result<String, String>;
-    fn time_modified(&self, url: &str) -> Result<String, String>;
-    fn remove(&self, url: &str) -> Result<(), String>;
-    fn dir_children(&self, dir_url: &str) -> Result<Vec<String>, String>;
-    fn file_content(&self, file_url: &str) -> Result<Vec<u8>, String>;
+    fn unzip(&self, from_url: &str, to_path: &str) -> Result<(), String>;
+    fn is_directory(&self, path: &str) -> bool;
+    fn size(&self, path: &str) -> Result<String, String>;
+    fn time_modified(&self, path: &str) -> Result<String, String>;
+    fn remove(&self, path: &str) -> Result<(), String>;
+    fn dir_children(&self, dir_path: &str) -> Result<Vec<String>, String>;
+    fn file_content(&self, file_path: &str) -> Result<Vec<u8>, String>;
     fn name(&self, path: &str) -> Result<String, String>;
 }
 
@@ -38,7 +39,7 @@ impl PlatformFileSystemTrait for PlatformFileSystem {
         path.exists()
     }
 
-    fn unzip(&self, from_url: &str, to_url: &str) -> Result<(), String> {
+    fn unzip(&self, from_url: &str, to_path: &str) -> Result<(), String> {
         let from_url_path = Url::parse(from_url)
             .map_err(|err| err.to_string())?
             .path()
@@ -47,23 +48,23 @@ impl PlatformFileSystemTrait for PlatformFileSystem {
         let file = File::open(Path::new(&from_url_path)).map_err(|err| err.to_string())?;
         let mut archive = ZipArchive::new(file).map_err(|err| err.to_string())?;
         archive
-            .extract(Path::new(to_url))
+            .extract(Path::new(to_path))
             .map_err(|err| err.to_string())
     }
 
-    fn is_directory(&self, url: &str) -> bool {
-        let path = Path::new(url);
+    fn is_directory(&self, path: &str) -> bool {
+        let path = Path::new(path);
         path.is_dir()
     }
 
-    fn size(&self, url: &str) -> Result<String, String> {
-        let path = Path::new(url);
+    fn size(&self, path: &str) -> Result<String, String> {
+        let path = Path::new(path);
         let metadata = path.metadata().map_err(|err| err.to_string())?;
         Ok(metadata.len().to_string())
     }
 
-    fn time_modified(&self, url: &str) -> Result<String, String> {
-        let path = Path::new(url);
+    fn time_modified(&self, path: &str) -> Result<String, String> {
+        let path = Path::new(path);
         let metadata = path.metadata().map_err(|err| err.to_string())?;
         let time = metadata
             .modified()
@@ -75,8 +76,8 @@ impl PlatformFileSystemTrait for PlatformFileSystem {
         Ok(time)
     }
 
-    fn remove(&self, url: &str) -> Result<(), String> {
-        let path = Path::new(url);
+    fn remove(&self, path: &str) -> Result<(), String> {
+        let path = Path::new(path);
         if path.is_dir() {
             fs::remove_dir_all(path).map_err(|err| err.to_string())?;
         } else {
@@ -85,8 +86,8 @@ impl PlatformFileSystemTrait for PlatformFileSystem {
         Ok(())
     }
 
-    fn dir_children(&self, dir_url: &str) -> Result<Vec<String>, String> {
-        let path = Path::new(dir_url);
+    fn dir_children(&self, dir_path: &str) -> Result<Vec<String>, String> {
+        let path = Path::new(dir_path);
         let contents = fs::read_dir(path).map_err(|err| err.to_string())?;
         let names: Vec<String> = contents
             .filter_map(|c| c.ok())
@@ -95,8 +96,8 @@ impl PlatformFileSystemTrait for PlatformFileSystem {
         Ok(names)
     }
 
-    fn file_content(&self, file_url: &str) -> Result<Vec<u8>, String> {
-        let path = Path::new(&file_url);
+    fn file_content(&self, file_path: &str) -> Result<Vec<u8>, String> {
+        let path = Path::new(&file_path);
         fs::read(path).map_err(|err| err.to_string())
     }
 
