@@ -24,9 +24,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.lifecycleScope
 import androidx.webkit.WebViewAssetLoader
+import coop.polypoly.core.Feature
 import coop.polypoly.polypod.endpoint.Endpoint
 import coop.polypoly.polypod.endpoint.EndpointObserver
-import coop.polypoly.polypod.features.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.info.Info
 import coop.polypoly.polypod.logging.LoggerFactory
@@ -37,7 +37,7 @@ import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
 import kotlinx.coroutines.CompletableDeferred
 import java.io.ByteArrayInputStream
-import java.util.zip.ZipFile
+import java.io.File
 
 @SuppressLint("SetJavaScriptEnabled")
 class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
@@ -208,7 +208,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             .setDomain(PolyOut.fsDomain)
             .addPathHandler(
                 "/features/${feature.name}/",
-                FeaturesPathHandler(context, feature.content)
+                FeaturesPathHandler(context, feature.path)
             )
             .addPathHandler("/", PodPathHandler(context))
             .build()
@@ -341,7 +341,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     private class FeaturesPathHandler(
         private val context: Context,
-        private val featureFile: ZipFile
+        private val featureDirectoryPath: String
     ) : WebViewAssetLoader.PathHandler {
         override fun handle(path: String): WebResourceResponse? {
             logger.debug(
@@ -352,7 +352,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             if (path == podApiFile) {
                 val assetPath = "container/pod.js"
                 logger.debug("$podApiFile requested - returning $assetPath")
-                if (featureFile.getEntry(podApiFile) != null) {
+                if (File(featureDirectoryPath.plus("/$podApiFile")).exists()) {
                     logger.warn(
                         "Feature contains $podApiFile - ignoring in favour of $assetPath"
                     )
@@ -361,8 +361,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
                     .handle(assetPath)
             }
 
-            val entry = featureFile.getEntry(path)
-            if (entry == null) {
+            val entry = File(featureDirectoryPath.plus("/$path"))
+            if (!entry.exists()) {
                 logger.debug(
                     "FeaturesPathHandler, path '{}' not found, skipping",
                     path
@@ -380,7 +380,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             return WebResourceResponse(
                 mimeType,
                 null,
-                featureFile.getInputStream(entry)
+                entry.inputStream()
             )
         }
 

@@ -5,7 +5,8 @@ public enum DecodingError: Error {
     case missingDictionaryKey(info: String)
     case invalidValueType(info: String)
     case invalidResponse(info: String?)
-    case emptyFeatureManifest
+    case invalidFeatureCategoryFormat
+    case unknownFeatureCategoryId(info: String)
     
     var localizedDescription: String {
         switch self {
@@ -21,8 +22,10 @@ public enum DecodingError: Error {
             return "Invalid value type: \(info)"
         case let .invalidResponse(info):
             return "Received invalid core response: \(String(describing: info))"
-        case .emptyFeatureManifest:
-            return "Received empty feature manifest"
+        case .invalidFeatureCategoryFormat:
+            return "Expected dictionary for feature category"
+        case let .unknownFeatureCategoryId(info):
+            return "Unknown FeatureCategoryId: \(info)"
         }
     }
 }
