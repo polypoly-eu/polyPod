@@ -22,7 +22,8 @@
   "dependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "fast-check": "^2.2.1"
+    "fast-check": "^2.2.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@graphy/core.data.factory": "^4.3.4",
