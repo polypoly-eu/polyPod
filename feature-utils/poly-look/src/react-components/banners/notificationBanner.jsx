@@ -14,6 +14,16 @@ export const notificationTypes = {
   warning: { class: "warning", icon: warning },
 };
 
+/**
+ * Notification Banner component - also used as a pop-up.
+ *
+ * @param {jsx} children JSX elements displayed inside the banner as a notification message.
+ * @param {string} notificationType The notification type defines the styles and icon used in the component.
+ * There are currently four notification options: standard, success, error and warning.
+ * @param {callback} handleCloseNotification onClick function to close the notification.
+ * @returns jsx
+ */
+
 export function NotificationBanner({
   children,
   notificationType,
