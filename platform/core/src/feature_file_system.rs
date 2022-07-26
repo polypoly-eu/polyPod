@@ -1,114 +1,6 @@
-use std::fs::{self, DirBuilder, File};
-use std::path::Path;
+use crate::{core_failure::CoreFailure, io::file_system::FileSystem};
 use url::Url;
 use uuid::Uuid;
-use zip::ZipArchive;
-
-// Feature File System is exposed to the feature
-// Platform File System is what the Feature File System uses under the hood.
-// Different platforms can have different file systems
-// Different features have the same file system
-
-trait PlatformFileSystemTrait: Sized {
-    fn create_dir_structure(&self, path: &str) -> Result<(), String>;
-    fn exists(&self, path: &str) -> bool;
-    fn unzip(&self, from_url: &str, to_path: &str) -> Result<(), String>;
-    fn is_directory(&self, path: &str) -> bool;
-    fn size(&self, path: &str) -> Result<String, String>;
-    fn time_modified(&self, path: &str) -> Result<String, String>;
-    fn remove(&self, path: &str) -> Result<(), String>;
-    fn dir_children(&self, dir_path: &str) -> Result<Vec<String>, String>;
-    fn file_content(&self, file_path: &str) -> Result<Vec<u8>, String>;
-    fn name(&self, path: &str) -> Result<String, String>;
-}
-
-struct PlatformFileSystem {}
-
-impl PlatformFileSystemTrait for PlatformFileSystem {
-    fn create_dir_structure(&self, path: &str) -> Result<(), String> {
-        let path = Path::new(path);
-        DirBuilder::new()
-            .recursive(true)
-            .create(path)
-            .map_err(|err| err.to_string())
-    }
-
-    fn exists(&self, path: &str) -> bool {
-        let path = Path::new(path);
-        path.exists()
-    }
-
-    fn unzip(&self, from_url: &str, to_path: &str) -> Result<(), String> {
-        let from_url_path = Url::parse(from_url)
-            .map_err(|err| err.to_string())?
-            .path()
-            .to_string();
-
-        let file = File::open(Path::new(&from_url_path)).map_err(|err| err.to_string())?;
-        let mut archive = ZipArchive::new(file).map_err(|err| err.to_string())?;
-        archive
-            .extract(Path::new(to_path))
-            .map_err(|err| err.to_string())
-    }
-
-    fn is_directory(&self, path: &str) -> bool {
-        let path = Path::new(path);
-        path.is_dir()
-    }
-
-    fn size(&self, path: &str) -> Result<String, String> {
-        let path = Path::new(path);
-        let metadata = path.metadata().map_err(|err| err.to_string())?;
-        Ok(metadata.len().to_string())
-    }
-
-    fn time_modified(&self, path: &str) -> Result<String, String> {
-        let path = Path::new(path);
-        let metadata = path.metadata().map_err(|err| err.to_string())?;
-        let time = metadata
-            .modified()
-            .map_err(|err| err.to_string())?
-            .duration_since(std::time::SystemTime::UNIX_EPOCH)
-            .map_err(|err| err.to_string())?
-            .as_secs()
-            .to_string();
-        Ok(time)
-    }
-
-    fn remove(&self, path: &str) -> Result<(), String> {
-        let path = Path::new(path);
-        if path.is_dir() {
-            fs::remove_dir_all(path).map_err(|err| err.to_string())?;
-        } else {
-            fs::remove_file(path).map_err(|err| err.to_string())?;
-        }
-        Ok(())
-    }
-
-    fn dir_children(&self, dir_path: &str) -> Result<Vec<String>, String> {
-        let path = Path::new(dir_path);
-        let contents = fs::read_dir(path).map_err(|err| err.to_string())?;
-        let names: Vec<String> = contents
-            .filter_map(|c| c.ok())
-            .filter_map(|c| c.file_name().into_string().ok())
-            .collect();
-        Ok(names)
-    }
-
-    fn file_content(&self, file_path: &str) -> Result<Vec<u8>, String> {
-        let path = Path::new(&file_path);
-        fs::read(path).map_err(|err| err.to_string())
-    }
-
-    fn name(&self, path: &str) -> Result<String, String> {
-        let p = Path::new(&path);
-        p.file_name()
-            .ok_or_else(|| "Could not get filename from path".to_string())?
-            .to_owned()
-            .into_string()
-            .map_err(|err| err.into_string().unwrap_or_default())
-    }
-}
 
 trait FeatureFSConfigTrait {
     fn features_path(&self) -> Result<String, String>;
@@ -128,9 +20,13 @@ impl FeatureFSConfigTrait for FeatureFSConfig {
     }
 }
 
-fn feature_files_path(config: &impl FeatureFSConfigTrait) -> Result<String, String> {
-    let features_path = config.features_path()?;
-    let feature_name = config.feature_name()?;
+fn feature_files_path(config: &impl FeatureFSConfigTrait) -> Result<String, CoreFailure> {
+    let features_path = config
+        .features_path()
+        .map_err(|err| CoreFailure::failed_to_create_feature_files_path(err.to_string()))?;
+    let feature_name = config
+        .feature_name()
+        .map_err(|err| CoreFailure::failed_to_create_feature_files_path(err.to_string()))?;
     Ok(features_path + "/" + &feature_name)
 }
 
@@ -145,7 +41,10 @@ fn resource_url_from_id(id: &ResourceId) -> ResourceUrl {
 }
 
 #[allow(dead_code)]
-fn fs_path_from_id(id: &ResourceId, config: &impl FeatureFSConfigTrait) -> Result<String, String> {
+fn fs_path_from_id(
+    id: &ResourceId,
+    config: &impl FeatureFSConfigTrait,
+) -> Result<String, CoreFailure> {
     let fs_prefix = feature_files_path(config)?;
     Ok(fs_prefix + "/" + id)
 }
@@ -154,20 +53,24 @@ fn fs_path_from_id(id: &ResourceId, config: &impl FeatureFSConfigTrait) -> Resul
 fn fs_path_from_resource_url(
     resource_url: &ResourceUrl,
     config: &impl FeatureFSConfigTrait,
-) -> Result<String, String> {
+) -> Result<String, CoreFailure> {
     let fs_prefix = feature_files_path(config)?;
     let res_prefix = "polypod://FeatureFiles".to_string();
-    swap_prefix(resource_url, &res_prefix, &fs_prefix)
+    swap_prefix(resource_url, &res_prefix, &fs_prefix).map_err(|err| {
+        CoreFailure::failed_to_convert_to_fs_path_from_resource_url(resource_url.to_string(), err)
+    })
 }
 
 #[allow(dead_code)]
 fn resource_url_from_fs_path(
     fs_path: &str,
     config: &impl FeatureFSConfigTrait,
-) -> Result<String, String> {
+) -> Result<String, CoreFailure> {
     let fs_prefix = feature_files_path(config)?;
     let res_prefix = "polypod://FeatureFiles/".to_string();
-    swap_prefix(fs_path, &fs_prefix, &res_prefix)
+    swap_prefix(fs_path, &fs_prefix, &res_prefix).map_err(|err| {
+        CoreFailure::failed_to_convert_to_resource_url_from_fs_path(fs_path.to_string(), err)
+    })
 }
 
 fn swap_prefix(string: &str, from: &str, to: &str) -> Result<String, String> {
@@ -179,9 +82,9 @@ fn swap_prefix(string: &str, from: &str, to: &str) -> Result<String, String> {
 
 #[allow(dead_code)]
 fn make_sure_feature_files_dir_exists(
-    platform_fs: &impl PlatformFileSystemTrait,
+    platform_fs: &impl FileSystem,
     config: &impl FeatureFSConfigTrait,
-) -> Result<(), String> {
+) -> Result<(), CoreFailure> {
     let files_path = feature_files_path(config)?;
     if platform_fs.exists(&files_path) {
         platform_fs.create_dir_structure(&files_path)?;
@@ -193,9 +96,9 @@ fn make_sure_feature_files_dir_exists(
 fn import(
     url: &Url,
     dest_resource_url: Option<ResourceUrl>,
-    platform_fs: &impl PlatformFileSystemTrait,
+    platform_fs: &impl FileSystem,
     config: &impl FeatureFSConfigTrait,
-) -> Result<ResourceUrl, String> {
+) -> Result<ResourceUrl, CoreFailure> {
     make_sure_feature_files_dir_exists(platform_fs, config)?;
 
     let fs_path = match dest_resource_url {
@@ -220,9 +123,9 @@ struct Metadata {
 #[allow(dead_code)]
 fn metadata(
     resource_url: &ResourceUrl,
-    platform_fs: &impl PlatformFileSystemTrait,
+    platform_fs: &impl FileSystem,
     config: &impl FeatureFSConfigTrait,
-) -> Result<Metadata, String> {
+) -> Result<Metadata, CoreFailure> {
     let fs_path = fs_path_from_resource_url(resource_url, config)?;
     let is_dir = platform_fs.is_directory(&fs_path);
     let size = platform_fs.size(&fs_path)?;
@@ -240,37 +143,43 @@ fn metadata(
 #[allow(dead_code)]
 fn read_dir(
     resource_url: &ResourceUrl,
-    platform_fs: &impl PlatformFileSystemTrait,
+    platform_fs: &impl FileSystem,
     config: &impl FeatureFSConfigTrait,
-) -> Result<Vec<String>, String> {
+) -> Result<Vec<String>, CoreFailure> {
     let fs_path = fs_path_from_resource_url(resource_url, config)?;
     if platform_fs.is_directory(&fs_path) {
         platform_fs.dir_children(&fs_path)
     } else {
-        Err("resource url is not pointing to a directory.".to_string())
+        Err(CoreFailure::failed_file_system_operation(
+            resource_url.to_string(),
+            "resource url is not pointing to a directory.".to_string(),
+        ))
     }
 }
 
 #[allow(dead_code)]
 fn read_file(
     resource_url: &ResourceUrl,
-    platform_fs: &impl PlatformFileSystemTrait,
+    platform_fs: &impl FileSystem,
     config: &impl FeatureFSConfigTrait,
-) -> Result<Vec<u8>, String> {
+) -> Result<Vec<u8>, CoreFailure> {
     let fs_path = fs_path_from_resource_url(resource_url, config)?;
     if !platform_fs.is_directory(&fs_path) {
         platform_fs.file_content(&fs_path)
     } else {
-        Err("resource url is not pointing to a file".to_string())
+        Err(CoreFailure::failed_file_system_operation(
+            resource_url.to_string(),
+            "resource url is not pointing to a file".to_string(),
+        ))
     }
 }
 
 #[allow(dead_code)]
 fn remove(
     resource_url: &ResourceUrl,
-    platform_fs: &impl PlatformFileSystemTrait,
+    platform_fs: &impl FileSystem,
     config: &impl FeatureFSConfigTrait,
-) -> Result<(), String> {
+) -> Result<(), CoreFailure> {
     let fs_path = fs_path_from_resource_url(resource_url, config)?;
     platform_fs.remove(&fs_path)
 }
@@ -281,9 +190,13 @@ mod tests {
 
     use super::*;
 
+    use crate::io::file_system::DefaultFileSystem;
     use std::collections::HashSet;
+    use std::fs::{DirBuilder, File};
     use std::iter::FromIterator;
+    use std::path::Path;
     use tempfile::TempDir;
+    use url::Url;
 
     fn zip_file_url() -> Url {
         Url::parse(
@@ -300,7 +213,7 @@ mod tests {
 
     fn create_temp_fs_dir(
         name: &String,
-        fs: &impl PlatformFileSystemTrait,
+        fs: &impl FileSystem,
         config: &impl FeatureFSConfigTrait,
     ) -> String {
         // Temp dir because of test config
@@ -386,7 +299,7 @@ mod tests {
     #[test]
     fn test_import_creates_features_dir() {
         let config = MockFSConfig::new();
-        let fs = PlatformFileSystem {};
+        let fs = DefaultFileSystem {};
 
         let url = zip_file_url();
         let result = import(&url, None, &fs, &config);
@@ -400,7 +313,7 @@ mod tests {
     #[test]
     fn test_import_unzips_successfully() {
         let config = MockFSConfig::new();
-        let fs = PlatformFileSystem {};
+        let fs = DefaultFileSystem {};
 
         let url = zip_file_url();
         let result = import(&url, None, &fs, &config);
@@ -413,7 +326,7 @@ mod tests {
     #[test]
     fn test_metadata_file() {
         let config = MockFSConfig::new();
-        let fs = PlatformFileSystem {};
+        let fs = DefaultFileSystem {};
 
         let dir_name = id();
         let file_name = "test.zip".to_string();
@@ -439,7 +352,7 @@ mod tests {
     #[test]
     fn test_metadata_dir() {
         let config = MockFSConfig::new();
-        let fs = PlatformFileSystem {};
+        let fs = DefaultFileSystem {};
 
         let dir_name = id();
         let file_name = "test.zip".to_string();
@@ -465,7 +378,7 @@ mod tests {
     #[test]
     fn test_remove_dir() {
         let config = MockFSConfig::new();
-        let fs = PlatformFileSystem {};
+        let fs = DefaultFileSystem {};
 
         let dir_name = id();
         let file_name = "test.zip".to_string();
@@ -484,7 +397,7 @@ mod tests {
     #[test]
     fn test_remove_file() {
         let config = MockFSConfig::new();
-        let fs = PlatformFileSystem {};
+        let fs = DefaultFileSystem {};
 
         let dir_name = id();
         let file_name = "test.zip".to_string();
@@ -505,7 +418,7 @@ mod tests {
     #[test]
     fn test_read_dir_valid() {
         let config = MockFSConfig::new();
-        let fs = PlatformFileSystem {};
+        let fs = DefaultFileSystem {};
 
         let id = id();
         let file_name = "test.zip".to_string();
@@ -531,7 +444,7 @@ mod tests {
     #[test]
     fn test_read_dir_invalid() {
         let config = MockFSConfig::new();
-        let fs = PlatformFileSystem {};
+        let fs = DefaultFileSystem {};
 
         let id = id();
         let file_name = "test.zip".to_string();
@@ -549,7 +462,7 @@ mod tests {
     #[test]
     fn test_read_file_valid() {
         let config = MockFSConfig::new();
-        let fs = PlatformFileSystem {};
+        let fs = DefaultFileSystem {};
 
         let id = id();
         let file_name = "test.zip".to_string();
@@ -568,7 +481,7 @@ mod tests {
     #[test]
     fn test_read_file_invalid() {
         let config = MockFSConfig::new();
-        let fs = PlatformFileSystem {};
+        let fs = DefaultFileSystem {};
 
         let id = id();
         let fs_path = create_temp_fs_dir(&id, &fs, &config);

@@ -14,6 +14,9 @@ pub enum FailureCode {
     FailedFileSystemOperation,
     FailedToParseURL,
     FailedToUnzip,
+    FailedToCreateFeatureFilesPath,
+    FailedToConvertToFsPath,
+    FailedToConvertToResourceUrl,
 }
 
 impl FailureCode {
@@ -119,6 +122,36 @@ impl CoreFailure {
             code: FailureCode::FailedToUnzip.value(),
             message: format!(
                 "Failed to unzip resource at url '{}' with error: '{}'",
+                url, message,
+            ),
+        }
+    }
+
+    pub fn failed_to_create_feature_files_path(message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToCreateFeatureFilesPath.value(),
+            message: format!(
+                "Failed to create feature files path with error: '{}'",
+                message,
+            ),
+        }
+    }
+
+    pub fn failed_to_convert_to_fs_path_from_resource_url(url: String, message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToConvertToFsPath.value(),
+            message: format!(
+                "Failed to create fs path from resource url {} with error: '{}'",
+                url, message,
+            ),
+        }
+    }
+
+    pub fn failed_to_convert_to_resource_url_from_fs_path(url: String, message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToConvertToResourceUrl.value(),
+            message: format!(
+                "Failed to create fs path from resource url {} with error: '{}'",
                 url, message,
             ),
         }
