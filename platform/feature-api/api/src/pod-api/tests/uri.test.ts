@@ -18,7 +18,7 @@ describe("createUUID tests", () => {
 describe("isPolypodUri()", () => {
     it.each([
         [new PolyUri().toString(), true],
-        [`${new PolyUri().toString()}12313313`, false],
+        [`${new PolyUri().toString()}12313313`, true],
         ["foobargaz", false],
         ["badURI", false],
         ["xxxx-xxxx-xxx-xxxxxx", false],
