@@ -21,13 +21,7 @@ android_binaries := $(patsubst %, target/%, $(android_triples))
 android_architectures := arm64-v8a armeabi-v7a x86_64 x86
 jni_libs_copy_path := $(android_core)/jniLibs
 android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%, $(android_architectures))
-# Android NDK fix
-# This is required due to Rust still using lgcc for NDK,
-# which was made osbsolete starting with NDK r23 in favor of lunwind.
-# The solution is to create a libgcc.a file in every clang architecture, which will link to -ilunwind.
-clang_path = ${ANDROID_NDK_HOME}/*/toolchains/llvm/prebuilt/*/lib64/clang/*/lib/*
-ndk_archs = aarch64 arm i386 x86_64
-libgcc_paths = $(patsubst %, $(clang_path)/%/libgcc.a, $(ndk_archs))
+cargo_ndk_version = 2.10.0
 
 ifeq ($(OS),Windows_NT)
 	ndk_download_url = $(google_repo)/$(ndk_lib)-windows-x86_64.zip
@@ -101,12 +95,8 @@ endef
 
 # ============ Android lib ============ #
 
-$(libgcc_paths):
-	# Create a libgcc.a file that links to lunwind for a given ndk architecture.
-	$(os_echo) "INPUT(-lunwind)" >> $@
-
-$(android_binaries): $(target) $(libgcc_paths)
-	cargo install cargo-ndk
+$(android_binaries): $(target) 
+	cargo install cargo-ndk --version $(cargo_ndk_version)
 	rustup target add $(android_triples)
 
 	$(foreach triple, $(android_triples), \
