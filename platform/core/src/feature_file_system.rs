@@ -281,6 +281,8 @@ mod tests {
 
     use super::*;
 
+    use std::collections::HashSet;
+    use std::iter::FromIterator;
     use tempfile::TempDir;
 
     fn zip_file_url() -> Url {
@@ -519,7 +521,11 @@ mod tests {
         let resource_url = resource_url_from_id(&id);
         let result = read_dir(&resource_url, &fs, &config);
         assert!(result.is_ok());
-        assert_eq!(result.unwrap(), vec!["test", "test.zip"]);
+
+        assert_eq!(
+            HashSet::from_iter(result.unwrap().iter().cloned()),
+            HashSet::from(["test".to_string(), "test.zip".to_string()])
+        );
     }
 
     #[test]
