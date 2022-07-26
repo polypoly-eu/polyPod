@@ -9,7 +9,6 @@ use zip::ZipArchive;
 // Different platforms can have different file systems
 // Different features have the same file system
 
-// FS works only with paths
 trait PlatformFileSystemTrait: Sized {
     fn create_dir_structure(&self, path: &str) -> Result<(), String>;
     fn exists(&self, path: &str) -> bool;
@@ -132,7 +131,7 @@ impl FeatureFSConfigTrait for FeatureFSConfig {
 fn feature_files_path(config: &impl FeatureFSConfigTrait) -> Result<String, String> {
     let features_path = config.features_path()?;
     let feature_name = config.feature_name()?;
-    Ok("file://".to_string() + &features_path + "/" + &feature_name)
+    Ok(features_path + "/" + &feature_name)
 }
 
 type ResourceUrl = String;
@@ -143,13 +142,13 @@ fn resource_url_from_id(id: &ResourceId) -> ResourceUrl {
     return res_prefix + "/" + &id;
 }
 
-fn fs_url_from_id(id: &ResourceId, config: &impl FeatureFSConfigTrait) -> Result<String, String> {
+fn fs_path_from_id(id: &ResourceId, config: &impl FeatureFSConfigTrait) -> Result<String, String> {
     let fs_prefix = feature_files_path(config)?;
     Ok(fs_prefix + "/" + &id)
 }
 
 #[allow(dead_code)]
-fn fs_url_from_resource_url(
+fn fs_path_from_resource_url(
     resource_url: &ResourceUrl,
     config: &impl FeatureFSConfigTrait,
 ) -> Result<String, String> {
@@ -159,13 +158,13 @@ fn fs_url_from_resource_url(
 }
 
 #[allow(dead_code)]
-fn resource_url_from_fs_url(
-    fs_url: &String,
+fn resource_url_from_fs_path(
+    fs_path: &String,
     config: &impl FeatureFSConfigTrait,
 ) -> Result<String, String> {
     let fs_prefix = feature_files_path(config)?;
     let res_prefix = "polypod://FeatureFiles/".to_string();
-    swap_prefix(&fs_url, &fs_prefix, &res_prefix)
+    swap_prefix(&fs_path, &fs_prefix, &res_prefix)
 }
 
 fn swap_prefix(string: &str, from: &str, to: &str) -> Result<String, String> {
@@ -194,14 +193,14 @@ fn import(
 ) -> Result<ResourceUrl, String> {
     make_sure_feature_files_dir_exists(platform_fs, config)?;
 
-    let fs_url = match dest_resource_url {
-        Some(res_url) => fs_url_from_resource_url(&res_url, config),
-        None => fs_url_from_id(&Uuid::new_v4().to_string(), config),
+    let fs_path = match dest_resource_url {
+        Some(res_url) => fs_path_from_resource_url(&res_url, config),
+        None => fs_path_from_id(&Uuid::new_v4().to_string(), config),
     }?;
 
-    platform_fs.unzip(&url.as_str(), &fs_url)?;
+    platform_fs.unzip(&url.as_str(), &fs_path)?;
 
-    resource_url_from_fs_url(&fs_url, config)
+    resource_url_from_fs_path(&fs_path, config)
 }
 
 struct Metadata {
@@ -217,17 +216,17 @@ fn metadata(
     platform_fs: &impl PlatformFileSystemTrait,
     config: &impl FeatureFSConfigTrait,
 ) -> Result<Metadata, String> {
-    let fs_url = fs_url_from_resource_url(resource_url, config)?;
-    let is_dir = platform_fs.is_directory(&fs_url);
-    let size = platform_fs.size(&fs_url)?;
-    let time_mod = platform_fs.time_modified(&fs_url)?;
-    let name = platform_fs.name(&fs_url)?;
+    let fs_path = fs_path_from_resource_url(resource_url, config)?;
+    let is_dir = platform_fs.is_directory(&fs_path);
+    let size = platform_fs.size(&fs_path)?;
+    let time_mod = platform_fs.time_modified(&fs_path)?;
+    let name = platform_fs.name(&fs_path)?;
     Ok(Metadata {
         is_directory: is_dir,
         size,
         time: time_mod,
         name,
-        id: fs_url,
+        id: fs_path,
     })
 }
 
@@ -236,9 +235,9 @@ fn read_dir(
     platform_fs: &impl PlatformFileSystemTrait,
     config: &impl FeatureFSConfigTrait,
 ) -> Result<Vec<String>, String> {
-    let fs_url = fs_url_from_resource_url(resource_url, config)?;
-    if platform_fs.is_directory(&fs_url) {
-        return platform_fs.dir_children(&fs_url);
+    let fs_path = fs_path_from_resource_url(resource_url, config)?;
+    if platform_fs.is_directory(&fs_path) {
+        return platform_fs.dir_children(&fs_path);
     } else {
         return Err("resource url is not pointing to a directory.".to_string());
     }
@@ -249,9 +248,9 @@ fn read_file(
     platform_fs: &impl PlatformFileSystemTrait,
     config: &impl FeatureFSConfigTrait,
 ) -> Result<Vec<u8>, String> {
-    let fs_url = fs_url_from_resource_url(resource_url, config)?;
-    if !platform_fs.is_directory(&fs_url) {
-        return platform_fs.file_content(&fs_url);
+    let fs_path = fs_path_from_resource_url(resource_url, config)?;
+    if !platform_fs.is_directory(&fs_path) {
+        return platform_fs.file_content(&fs_path);
     } else {
         return Err("resource url is not pointing to a file".to_string());
     }
@@ -262,8 +261,8 @@ fn remove(
     platform_fs: &impl PlatformFileSystemTrait,
     config: &impl FeatureFSConfigTrait,
 ) -> Result<(), String> {
-    let fs_url = fs_url_from_resource_url(resource_url, config)?;
-    platform_fs.remove(&fs_url)
+    let fs_path = fs_path_from_resource_url(resource_url, config)?;
+    platform_fs.remove(&fs_path)
 }
 
 #[cfg(test)]
@@ -293,9 +292,9 @@ mod tests {
         config: &impl FeatureFSConfigTrait,
     ) -> String {
         // Temp dir because of test config
-        let fs_url = fs_url_from_id(name, config).unwrap();
-        fs.create_dir_structure(&fs_url).unwrap();
-        return fs_url;
+        let fs_path = fs_path_from_id(name, config).unwrap();
+        fs.create_dir_structure(&fs_path).unwrap();
+        return fs_path;
     }
 
     fn create_file_in_fs_dir(dir_path: &str, file_name: &str, file_content: &[u8]) -> String {
@@ -348,24 +347,24 @@ mod tests {
     }
 
     #[test]
-    fn test_fs_url_from_resource_url() {
+    fn test_fs_path_from_resource_url() {
         let config = MockFSConfig::new();
 
         let id = id();
         let res_id = "polypod://FeatureFiles/".to_string() + &id;
-        let result = fs_url_from_resource_url(&res_id, &config);
+        let result = fs_path_from_resource_url(&res_id, &config);
         assert!(result.is_ok());
 
-        let fs_url = feature_files_path(&config).unwrap() + "/" + &id;
-        assert_eq!(result.unwrap(), fs_url);
+        let fs_path = feature_files_path(&config).unwrap() + "/" + &id;
+        assert_eq!(result.unwrap(), fs_path);
     }
 
     #[test]
-    fn test_resource_url_from_fs_url() {
+    fn test_resource_url_from_fs_path() {
         let config = MockFSConfig::new();
         let id = id();
-        let fs_url = feature_files_path(&config).unwrap() + &id;
-        let result = resource_url_from_fs_url(&fs_url, &config);
+        let fs_path = feature_files_path(&config).unwrap() + &id;
+        let result = resource_url_from_fs_path(&fs_path, &config);
         assert!(result.is_ok());
 
         let resource_url = resource_url_from_id(&id);
@@ -395,7 +394,7 @@ mod tests {
         let result = import(&url, None, &fs, &config);
         assert!(result.is_ok());
 
-        let file_path = fs_url_from_resource_url(&result.unwrap(), &config).unwrap() + "/test";
+        let file_path = fs_path_from_resource_url(&result.unwrap(), &config).unwrap() + "/test";
         assert_eq!(Path::new(&file_path).exists(), true);
     }
 
@@ -406,8 +405,8 @@ mod tests {
 
         let dir_name = id();
         let file_name = "test.zip".to_string();
-        let fs_url = create_temp_fs_dir(&dir_name, &fs, &config);
-        create_file_in_fs_dir(&fs_url, &file_name, b"Hello, world!");
+        let fs_path = create_temp_fs_dir(&dir_name, &fs, &config);
+        create_file_in_fs_dir(&fs_path, &file_name, b"Hello, world!");
 
         let resource_url = resource_url_from_id(&dir_name) + "/" + &file_name;
         let result = metadata(&resource_url, &fs, &config);
@@ -416,7 +415,7 @@ mod tests {
         let metadata = result.unwrap();
         assert_eq!(
             metadata.id,
-            fs_url_from_resource_url(&resource_url, &config).unwrap()
+            fs_path_from_resource_url(&resource_url, &config).unwrap()
         );
         assert_eq!(metadata.name, file_name);
         assert_eq!(metadata.is_directory, false);
@@ -432,8 +431,8 @@ mod tests {
 
         let dir_name = id();
         let file_name = "test.zip".to_string();
-        let fs_url = create_temp_fs_dir(&dir_name, &fs, &config);
-        create_file_in_fs_dir(&fs_url, &file_name, b"Hello, world!");
+        let fs_path = create_temp_fs_dir(&dir_name, &fs, &config);
+        create_file_in_fs_dir(&fs_path, &file_name, b"Hello, world!");
 
         let resource_url = resource_url_from_id(&dir_name);
         let result = metadata(&resource_url, &fs, &config);
@@ -442,7 +441,7 @@ mod tests {
         let metadata = result.unwrap();
         assert_eq!(
             metadata.id,
-            fs_url_from_resource_url(&resource_url, &config).unwrap()
+            fs_path_from_resource_url(&resource_url, &config).unwrap()
         );
         assert_eq!(metadata.name, dir_name);
         assert_eq!(metadata.is_directory, true);
@@ -458,16 +457,16 @@ mod tests {
 
         let dir_name = id();
         let file_name = "test.zip".to_string();
-        let fs_url = create_temp_fs_dir(&dir_name, &fs, &config);
-        create_file_in_fs_dir(&fs_url, &file_name, b"Hello, world!");
+        let fs_path = create_temp_fs_dir(&dir_name, &fs, &config);
+        create_file_in_fs_dir(&fs_path, &file_name, b"Hello, world!");
 
-        assert_eq!(Path::new(&fs_url).exists(), true);
+        assert_eq!(Path::new(&fs_path).exists(), true);
 
         let resource_url = resource_url_from_id(&dir_name);
         let result = remove(&resource_url, &fs, &config);
         assert!(result.is_ok());
 
-        assert_eq!(Path::new(&fs_url).exists(), false);
+        assert_eq!(Path::new(&fs_path).exists(), false);
     }
 
     #[test]
@@ -477,17 +476,17 @@ mod tests {
 
         let dir_name = id();
         let file_name = "test.zip".to_string();
-        let fs_url = create_temp_fs_dir(&dir_name, &fs, &config);
-        let file_url = create_file_in_fs_dir(&fs_url, &file_name, b"Hello, world!");
+        let fs_path = create_temp_fs_dir(&dir_name, &fs, &config);
+        let file_url = create_file_in_fs_dir(&fs_path, &file_name, b"Hello, world!");
 
-        assert_eq!(Path::new(&fs_url).exists(), true);
+        assert_eq!(Path::new(&fs_path).exists(), true);
         assert_eq!(Path::new(&file_url).exists(), true);
 
         let resource_url = resource_url_from_id(&dir_name) + "/" + &file_name;
         let result = remove(&resource_url, &fs, &config);
         assert!(result.is_ok());
 
-        assert_eq!(Path::new(&fs_url).exists(), true);
+        assert_eq!(Path::new(&fs_path).exists(), true);
         assert_eq!(Path::new(&file_url).exists(), false);
     }
 
@@ -499,11 +498,11 @@ mod tests {
         let id = id();
         let file_name = "test.zip".to_string();
         let dir_name = "test".to_string();
-        let fs_url = create_temp_fs_dir(&id, &fs, &config);
-        let file_url = create_file_in_fs_dir(&fs_url, &file_name, b"Hello, world!");
-        let dir_url = create_dir_in_fs_dir(&fs_url, &dir_name);
+        let fs_path = create_temp_fs_dir(&id, &fs, &config);
+        let file_url = create_file_in_fs_dir(&fs_path, &file_name, b"Hello, world!");
+        let dir_url = create_dir_in_fs_dir(&fs_path, &dir_name);
 
-        assert_eq!(Path::new(&fs_url).exists(), true);
+        assert_eq!(Path::new(&fs_path).exists(), true);
         assert_eq!(Path::new(&file_url).exists(), true);
         assert_eq!(Path::new(&dir_url).exists(), true);
 
@@ -520,13 +519,13 @@ mod tests {
 
         let id = id();
         let file_name = "test.zip".to_string();
-        let fs_url = create_temp_fs_dir(&id, &fs, &config);
-        let file_url = create_file_in_fs_dir(&fs_url, &file_name, b"Hello, world!");
+        let fs_path = create_temp_fs_dir(&id, &fs, &config);
+        let file_url = create_file_in_fs_dir(&fs_path, &file_name, b"Hello, world!");
 
-        assert_eq!(Path::new(&fs_url).exists(), true);
+        assert_eq!(Path::new(&fs_path).exists(), true);
         assert_eq!(Path::new(&file_url).exists(), true);
 
-        let resource_url = resource_url_from_fs_url(&file_url, &config).unwrap();
+        let resource_url = resource_url_from_fs_path(&file_url, &config).unwrap();
         let result = read_dir(&resource_url, &fs, &config);
         assert!(result.is_err());
     }
@@ -538,13 +537,13 @@ mod tests {
 
         let id = id();
         let file_name = "test.zip".to_string();
-        let fs_url = create_temp_fs_dir(&id, &fs, &config);
-        let file_url = create_file_in_fs_dir(&fs_url, &file_name, b"Hello, world!");
+        let fs_path = create_temp_fs_dir(&id, &fs, &config);
+        let file_url = create_file_in_fs_dir(&fs_path, &file_name, b"Hello, world!");
 
-        assert_eq!(Path::new(&fs_url).exists(), true);
+        assert_eq!(Path::new(&fs_path).exists(), true);
         assert_eq!(Path::new(&file_url).exists(), true);
 
-        let resource_url = resource_url_from_fs_url(&file_url, &config).unwrap();
+        let resource_url = resource_url_from_fs_path(&file_url, &config).unwrap();
         let result = read_file(&resource_url, &fs, &config);
         assert!(result.is_ok());
         assert!(result.unwrap().len() > 0);
@@ -556,11 +555,11 @@ mod tests {
         let fs = PlatformFileSystem {};
 
         let id = id();
-        let fs_url = create_temp_fs_dir(&id, &fs, &config);
+        let fs_path = create_temp_fs_dir(&id, &fs, &config);
 
-        assert_eq!(Path::new(&fs_url).exists(), true);
+        assert_eq!(Path::new(&fs_path).exists(), true);
 
-        let resource_url = resource_url_from_fs_url(&fs_url, &config).unwrap();
+        let resource_url = resource_url_from_fs_path(&fs_path, &config).unwrap();
         let result = read_file(&resource_url, &fs, &config);
         assert!(result.is_err());
     }
