@@ -22,7 +22,6 @@ google_repo := https://dl.google.com/android/repository
 ndk_lib := android-ndk-$(ndk_version)
 ndk=$(tools_dir)/NDK_$(ndk_version)
 ndk_archive = $(tools_dir)/NDK.zip
-# export ANDROID_NDK_HOME := $(ndk)/$(ndk_lib)
 android_triples := aarch64-linux-android x86_64-linux-android
 android_binaries := $(patsubst %, target/%, $(android_triples))
 android_architectures := arm64-v8a x86_64
@@ -121,6 +120,8 @@ define copy_android_arch
    mkdir -p $(jni_libs_copy_path)/$2
    cp target/$1/$(build_type)/libpolypod_core.so \
 	  $(jni_libs_copy_path)/$2/libpolypod_core.so;
+   cp ${NDK_HOME}/*/sources/cxx-stl/llvm-libc++/libs/$2/libc++_shared.so \
+	   $(jni_libs_copy_path)/$2/libc++_shared.so;
 endef
 
 # ============ Main targets ============ #
