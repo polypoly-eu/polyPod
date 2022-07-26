@@ -580,21 +580,3 @@ mod tests {
         assert!(result.is_err());
     }
 }
-
-//TODO: Fix temp dir issue where it remains on disk after the tests are run
-
-trait UrlUtils {
-    fn last_segment(&self) -> Result<String, String>;
-}
-
-impl UrlUtils for Url {
-    fn last_segment(&self) -> Result<String, String> {
-        self.path_segments()
-            .map(|c| c.collect::<Vec<_>>())
-            .and_then(|segments| segments.last().cloned())
-            .map(|id| id.to_string())
-            .ok_or_else(|| {
-                "Could not extract fs id from resource id. No path components".to_string()
-            })
-    }
-}
