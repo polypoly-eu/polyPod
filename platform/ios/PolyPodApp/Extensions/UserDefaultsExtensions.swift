@@ -10,6 +10,7 @@ extension UserDefaults {
         case updateNotificationMockId
         case disableAuthCheck
         case authSetUp
+        case didConfigureAuth
     }
     
     func reset() {

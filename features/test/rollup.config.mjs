@@ -18,6 +18,7 @@ export default {
             targets: [
                 { src: "src/index.html", dest: "dist" },
                 { src: "src/manifest.json", dest: "dist" },
+                { src: "src/images/*", dest: "dist/images" },
             ],
         }),
         sucrase({

@@ -49,7 +49,7 @@ class UpdateNotificationTest {
         PreferenceManager.getDefaultSharedPreferences(context)
             .edit().clear().commit()
         Preferences.setFirstRun(context, false)
-        Preferences.setBiometricCheck(context, false)
+        Preferences.setSecurityDoNotAskAgainCheck(context, true)
     }
 
     @After

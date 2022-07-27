@@ -62,20 +62,29 @@ fun yourDataContainers(
             ContainerType.LARGERIGHT -> Container(
                 type = type,
                 tiles = tiles.mapIndexed { index, tileModel ->
-                    if (index == tiles.count() - 1) {
-                        Tile(
-                            tileModel,
-                            bigTileStyle,
-                            bigTileLayout,
-                            TileType.BIG
-                        )
-                    } else {
+                    if (tiles.count() < tilesPerContainer) {
                         Tile(
                             tileModel,
                             smallTileStyle,
                             smallTileLayout,
                             TileType.SMALL
                         )
+                    } else {
+                        if (index == tiles.count() - 1) {
+                            Tile(
+                                tileModel,
+                                bigTileStyle,
+                                bigTileLayout,
+                                TileType.BIG
+                            )
+                        } else {
+                            Tile(
+                                tileModel,
+                                smallTileStyle,
+                                smallTileLayout,
+                                TileType.SMALL
+                            )
+                        }
                     }
                 },
                 layout = layout
@@ -105,7 +114,7 @@ fun rowContainers(
                     tileLayout,
                     tileType
                 )
-            },
+            }
         )
     }
 }

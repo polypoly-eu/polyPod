@@ -1,8 +1,12 @@
+
 use crate::{
     core_failure::CoreFailure,
-    feature_manifest_parsing::{FeatureManifest, JSONStr}, rdf::{SPARQLQuery, rdf_query, rdf_update}, rdf_failure::RdfFailure,
-    rdf::QueryResults
+    rdf::{SPARQLQuery, rdf_query, rdf_update, QueryResults},
+    rdf_failure::RdfFailure,
+    feature_categories,
+    io::file_system::DefaultFileSystem
 };
+
 use once_cell::sync::OnceCell;
 
 // Core is held as a singleton.
@@ -32,9 +36,15 @@ pub fn bootstrap(language_code: String) -> Result<(), CoreFailure> {
     Ok(())
 }
 
-pub fn parse_feature_manifest(json: &JSONStr) -> Result<FeatureManifest, CoreFailure> {
+pub fn load_feature_categories(
+    features_dir: &str,
+) -> Result<Vec<feature_categories::FeatureCategory>, CoreFailure> {
     let core = get_instance()?;
-    FeatureManifest::parse(json, &core.language_code)
+    feature_categories::load_feature_categories(
+        DefaultFileSystem {},
+        features_dir,
+        &core.language_code,
+    )
 }
 
 pub fn exec_rdf_query(query: SPARQLQuery) -> Result<QueryResults, CoreFailure> {

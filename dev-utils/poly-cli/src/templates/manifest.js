@@ -29,6 +29,9 @@ export function manifestTemplate(feature_name, author, version, feature_type) {
         base.links = {
             "learn-more": "https://polypoly.org",
         };
+        base.translations.de.links = {
+            "learn-more": "https://polypoly.org",
+        };
 
         base.primaryColor = "#0f1938";
         base.borderColor = "#cbd5e0";
