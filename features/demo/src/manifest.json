@@ -5,11 +5,14 @@
     "primaryColor": "#000000",
     "thumbnail": "images/thumbnail.pdf",
     "borderColor": "#cbd5e0",
+    "thumbnailColor": "#475abb",
     "tileTextColor": "#ffffff",
+    "links": {},
     "translations": {
         "de": {
             "author": "polypoly - Die Genossenschaft",
             "description": "Demonstriert ein paar polyPod-Fähigkeiten für Testzwecke - bitte ignorieren"
-        }
+        },
+        "links": {}
     }
 }
