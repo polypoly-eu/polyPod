@@ -1,10 +1,9 @@
 use crate::core_failure::CoreFailure;
 use crate::ffi::{deserialize, serialize};
+use std::ffi::CStr;
 use std::os::raw::c_uint;
-use std::{ffi::CStr, io::Bytes};
 extern crate rmp_serde;
 use crate::core;
-use serde::{Deserialize, Serialize};
 use std::os::raw::c_char;
 
 /// # Safety
@@ -88,7 +87,7 @@ pub struct BridgeToNative {
 }
 
 impl core::PlatformHookRequest for BridgeToNative {
-    fn perform_request(&self, request: core::NativeRequest) -> NativeResponse {
+    fn perform_request(&self, request: core::NativeRequest) -> core::NativeResponse {
         let request_byte_buffer = unsafe { create_byte_buffer(serialize(request)) };
         let response_byte_buffer = (self.perform_request)(request_byte_buffer);
         let response = unsafe { deserialize(byte_buffer_to_bytes(response_byte_buffer)) };
