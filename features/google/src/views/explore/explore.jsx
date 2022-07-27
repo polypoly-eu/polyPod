@@ -34,8 +34,8 @@ const ExploreView = () => {
             <NotificationBanner
                 notificationType={
                     reportIsSent
-                        ? Object.keys(notificationTypes)[1]
-                        : Object.keys(notificationTypes)[2]
+                        ? notificationTypes.success
+                        : notificationTypes.error
                 }
                 handleCloseNotification={handleCloseNotification}
             >

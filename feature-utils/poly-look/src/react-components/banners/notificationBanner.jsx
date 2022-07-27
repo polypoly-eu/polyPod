@@ -8,10 +8,10 @@ import error from "../../static/images/icons/xmark-error.svg";
 import warning from "../../static/images/icons/xmark-warning.svg";
 
 export const notificationTypes = {
-  standard: { class: "standard", icon: standard },
-  success: { class: "success", icon: success },
-  error: { class: "error", icon: error },
-  warning: { class: "warning", icon: warning },
+  standard: "standard",
+  success: "success",
+  error: "error",
+  warning: "warning",
 };
 
 /**
@@ -29,14 +29,20 @@ export function NotificationBanner({
   notificationType,
   handleCloseNotification,
 }) {
+  const icons = {
+    standard,
+    success,
+    error,
+    warning,
+  };
   return (
     <div className="notification-container">
       <div
-        className={`notification-banner ${notificationTypes[notificationType].class}`}
+        className={`notification-banner ${notificationTypes[notificationType]}`}
       >
         {children}
         <img
-          src={notificationTypes[notificationType].icon}
+          src={icons[notificationType]}
           alt="close"
           onClick={handleCloseNotification}
         />

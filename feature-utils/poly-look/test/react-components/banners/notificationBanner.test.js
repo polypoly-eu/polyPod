@@ -17,7 +17,7 @@ describe("NotificationBanner component", () => {
   beforeEach(() => {
     render(
       <NotificationBanner
-        notificationType={notificationTypes.standard.class}
+        notificationType={notificationTypes.standard}
         handleCloseNotification={mockedHandleClick}
       >
         {children}
