@@ -139,7 +139,6 @@ all: $(android_core_libraries) $(if $(macos),$(swift_core_framework),$(target))
 
 .PHONY: clean
 clean:
-	$(RM) -r target
 	$(RM) -r export
 	$(RM) -r $(swift_core_framework)
 	$(RM) -r $(android_core_libraries)
