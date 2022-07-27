@@ -198,6 +198,10 @@ dependencies {
     implementation 'com.google.accompanist:accompanist-flowlayout:0.24.10-beta'
 }
 
+task buildCore(type: Exec) {
+    commandLine 'make', '-C', '../../core', 'android_bindings'
+}
+
 task copyRemotePod(type: Copy) {
     def path = "../../feature-api/communication/dist/bootstrap.js"
     assert file(path).exists()
@@ -272,6 +276,7 @@ task copyTestFeatureOntoDevice {
 
 tasks.whenTaskAdded { task ->
     if (task.name == "generateDebugAssets" || task.name == "generateReleaseAssets") {
+        task.dependsOn buildCore
         task.dependsOn copyRemotePod
         task.dependsOn copyBundledFeatures
         task.dependsOn copyThirdPartyLicenses
