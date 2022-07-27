@@ -103,7 +103,6 @@ open class PolyIn(
         }
     }
 
-
     open fun query(query: String): QueryResult {
         return Core.execRdfQuery(query)
     }
