@@ -23,9 +23,9 @@ ndk_lib := android-ndk-$(ndk_version)
 ndk=$(tools_dir)/NDK_$(ndk_version)
 ndk_archive = $(tools_dir)/NDK.zip
 export ANDROID_NDK_HOME := $(ndk)/$(ndk_lib)
-android_triples := aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android
+android_triples := aarch64-linux-android x86_64-linux-android
 android_binaries := $(patsubst %, target/%, $(android_triples))
-android_architectures := arm64-v8a armeabi-v7a x86_64 x86
+android_architectures := arm64-v8a x86_64
 jni_libs_copy_path := $(android_core)/jniLibs
 android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%, $(android_architectures))
 
