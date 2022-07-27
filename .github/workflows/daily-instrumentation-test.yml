@@ -29,7 +29,7 @@ jobs:
             - name: Build core
               working-directory: platform/core
               run: |
-                echo "ANDROID_NDK_HOME=$ANDROID_NDK_LATEST_HOME" >> $GITHUB_ENV
+                export NDK_HOME=$ANDROID_NDK_LATEST_HOME
                 make android_bindings
             - uses: actions/setup-java@v2
               with:
