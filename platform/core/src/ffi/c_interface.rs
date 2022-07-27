@@ -1,9 +1,10 @@
 use crate::core_failure::CoreFailure;
-use crate::ffi::serialize;
-use std::ffi::CStr;
+use crate::ffi::{deserialize, serialize};
 use std::os::raw::c_uint;
+use std::{ffi::CStr, io::Bytes};
 extern crate rmp_serde;
 use crate::core;
+use serde::{Deserialize, Serialize};
 use std::os::raw::c_char;
 
 /// # Safety
@@ -16,11 +17,15 @@ use std::os::raw::c_char;
 /// - language_code: User's locale language code.
 /// Returns a flatbuffer byte array with core_bootstrap_response.
 #[no_mangle]
-pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> CByteBuffer {
+pub unsafe extern "C" fn core_bootstrap(
+    language_code: *const c_char,
+    bridge: BridgeToNative,
+) -> CByteBuffer {
+    // TODO: Use bridge to native
     create_byte_buffer(serialize(
         cstring_to_str(&language_code)
             .map(String::from)
-            .and_then(core::bootstrap),
+            .and_then(|language_code| core::bootstrap(language_code, Box::new(bridge))),
     ))
 }
 
@@ -69,5 +74,24 @@ unsafe fn create_byte_buffer(bytes: Vec<u8>) -> CByteBuffer {
     CByteBuffer {
         length: slice.len() as c_uint,
         data: Box::into_raw(slice) as *mut u8,
+    }
+}
+
+unsafe fn byte_buffer_to_bytes(buffer: CByteBuffer) -> Vec<u8> {
+    let slice = std::slice::from_raw_parts(buffer.data, buffer.length.try_into().unwrap());
+    slice.to_vec()
+}
+
+#[repr(C)]
+pub struct BridgeToNative {
+    perform_request: extern "C" fn(request: CByteBuffer) -> CByteBuffer,
+}
+
+impl core::PlatformHookRequest for BridgeToNative {
+    fn perform_request(&self, request: core::NativeRequest) -> NativeResponse {
+        let request_byte_buffer = unsafe { create_byte_buffer(serialize(request)) };
+        let response_byte_buffer = (self.perform_request)(request_byte_buffer);
+        let response = unsafe { deserialize(byte_buffer_to_bytes(response_byte_buffer)) };
+        return response;
     }
 }

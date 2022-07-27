@@ -4,12 +4,22 @@ import MessagePack
 
 typealias CoreResponseObject = [MessagePackValue: MessagePackValue]
 
+//struct BridgeToNative {
+//
+//}
+
+enum NativeResponse {
+    case response(String)
+}
+
 /// Swift wrapper around the Rust Core.
 public final class Core {
     public static let instance = Core()
     
     // MARK: - Private config
     private var languageCode: UnsafePointer<CChar>!
+    
+    var value = [UInt8](MessagePack.pack(.map(["Response": "Hello Back"])))
     
     private init() {}
     
@@ -21,7 +31,18 @@ public final class Core {
         // Force unwrap should be safe
         self.languageCode = NSString(string: languageCode).utf8String!
        
-        return handleCoreResponse(core_bootstrap(self.languageCode), { _ in })
+        return handleCoreResponse(core_bootstrap(self.languageCode, BridgeToNative(perform_request: { in_bytes in
+            let buffer = UnsafeBufferPointer(
+                start: in_bytes.data,
+                count: Int(in_bytes.length)
+            )
+            let data = Data(buffer: buffer)
+            
+            let responseObject: CoreResponseObject? = try? MessagePack.unpackFirst(data).getDictionary()
+            
+            // TODO: transfer bytes from platform to core, and then free bytes. 
+            return CByteBuffer(length: UInt32(self.value.count), data: &self.value)
+        })), { _ in })
     }
 
     /// Loads the feature categories from the given features directory
