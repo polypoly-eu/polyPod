@@ -47,10 +47,10 @@ pub fn load_feature_categories(
     )
 }
 
-pub fn exec_rdf_query(query: SPARQLQuery) -> Result<QueryResults, CoreFailure> {
-    rdf_query(query).map_err(|err| CoreFailure::map_rdf_to_core_failure(err))
+pub fn exec_rdf_query(query: SPARQLQuery, app_path: String) -> Result<QueryResults, CoreFailure> {
+    rdf_query(query, app_path).map_err(|err| CoreFailure::map_rdf_to_core_failure(err))
 }
 
-pub fn exec_rdf_update(query: SPARQLQuery) -> Result<(), CoreFailure> {
-    rdf_update(query).map_err(|err| CoreFailure::map_rdf_to_core_failure(err))
+pub fn exec_rdf_update(query: SPARQLQuery, app_path: String) -> Result<(), CoreFailure> {
+    rdf_update(query, app_path).map_err(|err| CoreFailure::map_rdf_to_core_failure(err))
 }

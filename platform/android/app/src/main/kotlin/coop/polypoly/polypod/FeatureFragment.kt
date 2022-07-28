@@ -242,8 +242,6 @@ open class FeatureFragment : Fragment() {
                 )
             }
         }
-        Core.execRdfUpdate("INSERT DATA { <http://example.com/you> <http://example.com/are> \"great\" }")
-        Core.execRdfQuery("SELECT ?s ?p ?o WHERE { ?s ?p ?o }")
         startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
         var url: String = ""
         var name: String = ""

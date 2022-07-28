@@ -7,7 +7,7 @@ use crate::rdf_failure::RdfFailure;
 
 pub type SPARQLQuery = String;
 
-static DBPATH: &str = "rdf.db";
+static DBPATH: &str = "/rdf.db";
 
 /// A simplified serializable replica of oxigraph::sparql::QuerySolution
 #[derive(Deserialize, Serialize, PartialEq, Debug, Clone)]
@@ -34,14 +34,14 @@ pub enum QueryResults {
     // Graph(QueryTripleIter),
 }
 
-pub fn rdf_query(query: SPARQLQuery) -> Result<QueryResults, RdfFailure> {
-    let store = Store::open(DBPATH).map_err(|err| RdfFailure::failed_to_initialize_store(err))?;
+pub fn rdf_query(query: SPARQLQuery, app_path: String) -> Result<QueryResults, RdfFailure> {
+    let store = Store::open(app_path + DBPATH).map_err(|err| RdfFailure::failed_to_initialize_store(err))?;
     let query_results = store.query(&query).map_err(|err| RdfFailure::map_evaluation_error(err))?;
     to_serializable_format(query_results).map_err(|_| RdfFailure::result_serialization_failed())
 }
 
-pub fn rdf_update(query: SPARQLQuery) -> Result<(), RdfFailure> {
-    let store = Store::open(DBPATH).map_err(|err| RdfFailure::failed_to_initialize_store(err))?;
+pub fn rdf_update(query: SPARQLQuery, app_path: String) -> Result<(), RdfFailure> {
+    let store = Store::open(app_path + DBPATH).map_err(|err| RdfFailure::failed_to_initialize_store(err))?;
     let query_results  = store.update(&query).map_err(|err| RdfFailure::map_evaluation_error(err));
     query_results
 }
@@ -69,13 +69,13 @@ mod tests {
     
     #[test]
     fn test_query_result_mapping_to_serialize() {
-        let _update_result = rdf_update(String::from("INSERT DATA { <http://example.com/you> <http://example.com/are> \"great\" }"));
+        let _update_result = rdf_update(String::from("INSERT DATA { <http://example.com/you> <http://example.com/are> \"great\" }"), String::from("."));
 
         let query_result = rdf_query(String::from("
             SELECT ?s ?p ?o WHERE {
                 ?s ?p ?o
             }
-        ")).unwrap();
+        "), String::from(".")).unwrap();
 
         let test_map = HashMap::from([
             (String::from("?s"), String::from("<http://example.com/you>")),
