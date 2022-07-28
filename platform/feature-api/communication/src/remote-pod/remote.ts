@@ -18,6 +18,7 @@ import {
     DefaultGraph,
     Quad as polyQuad,
     DataFactory,
+    QueryResult,
 } from "@polypoly-eu/api";
 import { Quad } from "rdf-js";
 import { RequestListener } from "http";
@@ -47,6 +48,8 @@ type PolyInBackend = ObjectBackendSpec<{
     add(...quads: Quad[]): ValueBackendSpec<void>;
     delete(...quads: Quad[]): ValueBackendSpec<void>;
     has(...quads: Quad[]): ValueBackendSpec<boolean>;
+    query(query: string): ValueBackendSpec<QueryResult>;
+    update(query: string): ValueBackendSpec<void>;
 }>;
 
 type PolyOutBackend = ObjectBackendSpec<{
@@ -205,6 +208,8 @@ export class RemoteClientPod implements Pod {
             match: (matcher) => this.rpcClient.polyIn().match(matcher)(),
             delete: (...quads) => this.rpcClient.polyIn().delete(...quads)(),
             has: (...quads) => this.rpcClient.polyIn().has(...quads)(),
+            query: (query: string) => this.rpcClient.polyIn().query(query)(),
+            update: (query: string) => this.rpcClient.polyIn().update(query)(),
         };
     }
 

@@ -1,4 +1,12 @@
-use crate::{core_failure::CoreFailure, feature_categories, io::file_system::DefaultFileSystem};
+
+use crate::{
+    core_failure::CoreFailure,
+    rdf::{SPARQLQuery, rdf_query, rdf_update, QueryResults},
+    rdf_failure::RdfFailure,
+    feature_categories,
+    io::file_system::DefaultFileSystem
+};
+
 use once_cell::sync::OnceCell;
 
 // Core is held as a singleton.
@@ -37,4 +45,12 @@ pub fn load_feature_categories(
         features_dir,
         &core.language_code,
     )
+}
+
+pub fn exec_rdf_query(query: SPARQLQuery, app_path: String) -> Result<QueryResults, CoreFailure> {
+    rdf_query(query, app_path).map_err(|err| CoreFailure::map_rdf_to_core_failure(err))
+}
+
+pub fn exec_rdf_update(query: SPARQLQuery, app_path: String) -> Result<(), CoreFailure> {
+    rdf_update(query, app_path).map_err(|err| CoreFailure::map_rdf_to_core_failure(err))
 }

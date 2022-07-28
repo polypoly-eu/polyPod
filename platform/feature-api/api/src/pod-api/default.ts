@@ -12,6 +12,7 @@ import { dataFactory } from "../rdf";
 import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint } from "./api";
 import { EncodingOptions, FS, Stats } from "./fs";
 import { Entry } from ".";
+import oxigraph from "../../node_modules/oxigraph/node.js";
 
 /**
  * The _default Pod_ provides the bare minimum implementation to satisfy the [[Pod]] API. It should only be used in
@@ -22,6 +23,7 @@ import { Entry } from ".";
  *
  * 1. an [RDFJS dataset](https://rdf.js.org/dataset-spec/)
  * 2. a file system that adheres to the [async FS interface of Node.js](https://nodejs.org/api/fs.html)
+ * 3. The *new* used rdf store, which supports SPARQL queries (oxigraph)
  *
  * Depending on the platform (Node.js or browser), there are various implementations of these that may be used.
  * These are found in other core components, such as AsyncPod.
@@ -34,7 +36,8 @@ export class DefaultPod implements Pod {
 
     constructor(
         public readonly store: RDF.DatasetCore,
-        public readonly fs: FS
+        public readonly fs: FS,
+        public readonly oxiStore: oxigraph.Store
     ) {}
 
     private checkQuad(quad: RDF.Quad): void {
@@ -68,6 +71,8 @@ export class DefaultPod implements Pod {
                 this.checkQuad(quad);
                 return this.store.has(quad);
             },
+            query: async (query) => this.oxiStore.query(query),
+            update: async (query) => this.oxiStore.update(query),
         };
     }
 

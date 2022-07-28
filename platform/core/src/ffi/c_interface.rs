@@ -37,6 +37,20 @@ pub unsafe extern "C" fn load_feature_categories(features_dir: *const c_char) ->
     ))
 }
 
+#[no_mangle]
+pub unsafe extern "C" fn exec_rdf_query(query: *const c_char) -> CByteBuffer {
+    create_byte_buffer(serialize(
+        cstring_to_str(&query).and_then(core::exec_rdf_query),
+    ))
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn exec_rdf_update(query: *const c_char) -> CByteBuffer {
+    create_byte_buffer(serialize(
+        cstring_to_str(&query).and_then(core::exec_rdf_update),
+    ))
+}
+
 /// # Safety
 /// This function can be unsafe if trying to deallocate invalid memory.
 ///

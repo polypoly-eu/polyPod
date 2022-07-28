@@ -16,9 +16,9 @@ tools_dir := tools
 android_core := PolyPodCoreAndroid/core/src/main/
 android_version := 24
 google_repo := https://dl.google.com/android/repository
-android_triples := aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android
+android_triples := aarch64-linux-android x86_64-linux-android
 android_binaries := $(patsubst %, target/%, $(android_triples))
-android_architectures := arm64-v8a armeabi-v7a x86_64 x86
+android_architectures := arm64-v8a x86_64
 jni_libs_copy_path := $(android_core)/jniLibs
 android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%, $(android_architectures))
 cargo_ndk_version = 2.10.0
@@ -30,7 +30,7 @@ ifeq ($(OS),Windows_NT)
 else
 	os_echo := echo
 	ifeq ($(shell uname -s),Darwin)
-		ndk_download_url = $(google_repo)/$(ndk_lib)-darwin-x86_64.zip
+		ndk_download_url = $(google_repo)/$(ndk_lib)-darwin.zip
 		macos := true
 	endif
 	ifeq ($(shell uname -s),Linux)
@@ -110,6 +110,8 @@ define copy_android_arch
    mkdir -p $(jni_libs_copy_path)/$2
    cp target/$1/$(build_type)/libpolypod_core.so \
 	  $(jni_libs_copy_path)/$2/libpolypod_core.so;
+   cp ${NDK_HOME}/*/toolchains/llvm/prebuilt/*/sysroot/usr/lib/$1/libc++_shared.so \
+	   $(jni_libs_copy_path)/$2/libc++_shared.so;
 endef
 
 # ============ Main targets ============ #
