@@ -11,7 +11,7 @@ import type {
     Stats,
     Entry,
 } from "@polypoly-eu/api";
-import { dataFactory } from "@polypoly-eu/api";
+import { dataFactory, PolyUri, isPolypodUri } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../../polyPod-config/endpoints.json";
@@ -320,8 +320,11 @@ class IDBPolyOut implements PolyOut {
         const db = await openDatabase();
 
         return new Promise((resolve, reject) => {
+            if (destUrl && !isPolypodUri(destUrl)) {
+                reject(`${destUrl} is not a polypod:// URI`);
+            }
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            const id = destUrl || `polypod://${createUUID()}`;
+            const id = destUrl || new PolyUri().toString;
 
             tx.objectStore(OBJECT_STORE_POLY_OUT).add({
                 id,
@@ -594,22 +597,6 @@ class BrowserEndpoint implements Endpoint {
             throw endpointErrorMessage("get", "Endpoint returned null");
         }
     }
-}
-
-/**
- * Creates a random UUID string with a random hexadecimal value for each character in the string
- * 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx', and returns the result.
- * @returns a string in UUID format
- */
-function createUUID(): string {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-        /[xy]/g,
-        function (c) {
-            const r = (Math.random() * 16) | 0,
-                v = c == "x" ? r : (r & 0x3) | 0x8;
-            return v.toString(16);
-        }
-    );
 }
 
 /**

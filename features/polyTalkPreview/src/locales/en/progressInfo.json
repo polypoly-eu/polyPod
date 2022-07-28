@@ -1,6 +1,6 @@
 {
     "title": "How to read this?",
-    "text1": "At polypoly we are building something large and ambitious, one element at a time. And since we are building this with and for our existing and future members and partners, we want to give you a better sense of where this is going and what progress we are making.\n\nSome of the tiles on the home screen show a progress indicator. It gives you a sense of where we are in the process.\n\nHere is what the four steps mean:",
+    "text1": "At polypoly we are building something large and ambitious, one element at a time. And since we are building this with and for our existing and future members and partners, we want to give you a better sense of where this is going and what progress we are making.\n\nThe status icon show a process indicator.\nThe four steps have the following meaning:",
     "stage1": "We have an idea",
     "explanation1": "Brainstorming leads us here. We are seriously thinking about this, but did not start working on it yet. ",
     "stage2": "We sketch",
@@ -8,5 +8,5 @@
     "stage3": "We implement",
     "explanation3": "Things are getting serious. We’re currently working on bringing this to life.",
     "stage4": "Coming soon",
-    "explanation4": "We are almost ready. The launch date is scheduled… they grow up so fast 🥲. Here are some previews."
+    "explanation4": "We are almost ready. The launch date is scheduled… they grow up so fast. Here are some previews."
 }

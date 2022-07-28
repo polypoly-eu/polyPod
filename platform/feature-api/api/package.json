@@ -4,7 +4,10 @@
   "description": "API for the POD",
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "files": ["dist/*.js", "dist/*.d.ts"],
+  "files": [
+    "dist/*.js",
+    "dist/*.d.ts"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/polypoly-eu/polyPod.git"
@@ -19,7 +22,8 @@
   "dependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "fast-check": "^2.2.1"
+    "fast-check": "^2.2.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@graphy/core.data.factory": "^4.3.4",
@@ -30,8 +34,8 @@
     "@types/chai": "^4.2.14",
     "@types/chai-as-promised": "^7.1.5",
     "@types/n3": "^1.10.3",
-    "@types/node": "^14.17.9",
     "@types/rdfjs__dataset": "^1.0.4",
+    "@types/uuid": "^8.3.4",
     "memfs": "^3.4.1",
     "n3": "^1.8.0",
     "rdf-data-factory": "^1.0.4"

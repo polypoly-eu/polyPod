@@ -1,7 +1,7 @@
 {
     "name": "Google Data Importer",
     "author": "polypoly Cooperative",
-    "description": "Google knows a lot about you. With the Google Data Importer you can load your data in three steps from Google into your polyPod and finally get an overview yourself.",
+    "description": "How does Google harness analysis of your behaviour for its own benefit? Find out! import your Google data now!",
     "thumbnail": "images/thumbnail.pdf",
     "primaryColor": "#0f1938",
     "thumbnailColor": "#D94D46",
@@ -13,9 +13,9 @@
     },
     "translations": {
         "de": {
-            "name": "Google-Daten Importer",
+            "name": "Google Daten Importer",
             "author": "polypoly - Die Genossenschaft",
-            "description": "Google weiß viel über Sie. Mit dem Google-Daten Importer können Sie Ihre Daten in drei Schritten von Google in Ihren polyPod laden, damit auch Sie selbst endlich einen Überblick bekommen.",
+            "description": "Wie Google es schafft, Ihr Verhalten zu analysieren und für sich zu nutzen? Finden Sie es heraus! Jetzt Ihre Google Daten importieren!",
             "links": {
                 "example-data-download": "https://polypoly.coop/de-de/polypod/example-google-data"
             }

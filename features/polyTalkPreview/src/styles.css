@@ -41,7 +41,8 @@
 }
 
 .preview h1 {
-    font-family: var(--jost);
+    font-family: var(--jost-medium);
+    font-weight: 100;
     font-size: var(--font-size-xxl);
     margin-bottom: calc(var(--gdu) * 8);
     margin-top: calc(var(--gdu) * 8);
@@ -49,7 +50,8 @@
 }
 
 .section-title {
-    font-family: var(--jost);
+    font-family: var(--jost-medium);
+    font-weight: 100;
     font-size: var(--font-size-xl);
     line-height: var(--line-height);
     margin-bottom: 0;
@@ -64,6 +66,8 @@
 }
 
 .footer h3 {
+    font-family: var(--jost-medium);
+    font-weight: 100;
     font-size: var(--font-size-xl);
     margin-bottom: calc(var(--gdu) * 3);
     margin-top: 0;
@@ -112,12 +116,13 @@
 }
 
 .info-stage h3 {
+    font-family: var(--jost-medium);
+    font-weight: 100;
     margin-top: 0;
-    font-size: var(--font-size-ml);
-    margin-bottom: var(--gdu);
+    font-size: var(--font-size-l);
+    margin-bottom: calc(var(--gdu) * 2);
 }
 
 .info-stage p {
     margin-top: 0;
-    font-size: var(--font-size-m);
 }

@@ -24,11 +24,16 @@ class Authentication {
         return !(firstRun || isCheckDisabled() || isSetUp()) && isAvailable()
     }
 
+    func shouldShowOnboardingScreen() -> Bool {
+       !isCheckDisabled() && !hasUserConfiguredAuth()
+    }
+
     private func isAvailable() -> Bool {
-        return !isSimulator() && LAContext().canEvaluatePolicy(
-            .deviceOwnerAuthentication,
-            error: nil
-        )
+        return !isSimulator() && 
+            LAContext().canEvaluatePolicy(
+                .deviceOwnerAuthentication,
+                error: nil
+            )
     }
 
     func disableCheck() {
@@ -43,6 +48,9 @@ class Authentication {
             if success {
                 self.authenticated = newStatus
                 UserDefaults.standard.set(newStatus, forKey: Self.setUpKey)
+                if newStatus == true {
+                    UserDefaults.standard.set(true, forKey: UserDefaults.Keys.didConfigureAuth.rawValue)
+                }
             }
             completeAction(success)
         }
@@ -63,6 +71,12 @@ class Authentication {
     private func isCheckDisabled() -> Bool {
         return UserDefaults.standard.bool(
             forKey: Self.disableCheckKey
+        )
+    }
+
+    private func hasUserConfiguredAuth() -> Bool {
+        return UserDefaults.standard.bool(
+            forKey: UserDefaults.Keys.didConfigureAuth.rawValue
         )
     }
 

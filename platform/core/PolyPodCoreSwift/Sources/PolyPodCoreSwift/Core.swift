@@ -1,29 +1,10 @@
 import PolyPodCore
 import Foundation
-import FlatBuffers
+import MessagePack
 
-/// Possible errors that can be thrown by PolyPodCoreSwift
-public enum PolyPodCoreError: Error {
-    /// Internal Rust Core failure with error code and message
-    case internalCoreFailure(context: String, failure: FlatbObject<Failure>)
-    /// Rust Core returned an invalid result type for a given operation
-    case invalidResult(context: String, result: String)
-    /// Rust Core returned an invalid failure content
-    case invalidFailure(context: String)
-    
-    var localizedDescription: String {
-        switch self {
-        case let .internalCoreFailure(context, failure):
-            return "\(context) -> internal Core Failure: \(failure.code) \(String(describing: failure.message))"
-        case let .invalidResult(context, result):
-            return "\(context) -> received invalid result type \(result)"
-        case let .invalidFailure(context):
-            return "\(context) -> recevied failure result type without failure content"
-        }
-    }
-}
+typealias CoreResponseObject = [MessagePackValue: MessagePackValue]
 
-/// Swift wrapper around the Rust Core. Encapsulates specific Pointer and Flabuffer operations.
+/// Swift wrapper around the Rust Core.
 public final class Core {
     public static let instance = Core()
     
@@ -39,49 +20,49 @@ public final class Core {
     public func bootstrap(languageCode: String) -> Result<Void, Error> {
         // Force unwrap should be safe
         self.languageCode = NSString(string: languageCode).utf8String!
-        return Result {
-            let responseBytes = core_bootstrap(languageCode)
-            let byteBuffer = ByteBuffer(cByteBuffer: responseBytes)
-            let response = CoreBootstrapResponse.getRootAsCoreBootstrapResponse(bb: byteBuffer)
-            if let failure = response.failure {
-                throw PolyPodCoreError.internalCoreFailure(context: "Failed to bootstrap core",
-                                                           failure: FlatbObject(responseBytes.data, failure))
-            }
-        }
+       
+        return handleCoreResponse(core_bootstrap(self.languageCode), { _ in })
     }
-    
-    /// Parse the FeatureManifest from the given json
-    /// - Parameter json: Raw JSON to parse the FeatureManifest from
-    /// - Returns: A FeatureManifest if parsing succeded, nil otherwise
-    public func parseFeatureManifest(json: String) -> Result<FlatbObject<FeatureManifest>, Error> {
-        Result {
-            let responseBytes = parse_feature_manifest_from_json(json)
-            let byteBuffer = ByteBuffer(cByteBuffer: responseBytes)
-            let response = FeatureManifestParsingResponse.getRootAsFeatureManifestParsingResponse(bb: byteBuffer)
-            switch response.resultType {
-            case .featuremanifest:
-                return FlatbObject(responseBytes.data, response.result(type: FeatureManifest.self))
-            case .failure:
-                if let failure = response.result(type: Failure.self) {
-                    throw PolyPodCoreError.internalCoreFailure(
-                        context: "Failed to load Feature Manifest",
-                        failure: FlatbObject(responseBytes.data, failure)
-                    )
-                } else {
-                    throw PolyPodCoreError.invalidFailure(context: "Failed to load Feature Manifest")
-                }
-            default:
-                throw PolyPodCoreError.invalidResult(
-                    context: "Failed to load Feature Manifest",
-                    result: "\(response.resultType)"
-                )
-            }
-        }
-    }
-}
 
-extension ByteBuffer {
-    init(cByteBuffer: CByteBuffer) {
-        self.init(assumingMemoryBound: cByteBuffer.data, capacity: Int(cByteBuffer.length))
+    /// Loads the feature categories from the given features directory
+    /// - Parameter featuresDirectory: Directory from which to load the feature categories.
+     /// - Returns: A Result for loading operation.
+    public func loadFeatureCategories(
+        featuresDirectory: String
+    ) -> Result<[FeatureCategory], Error> {
+        let features_dir = NSString(string: featuresDirectory).utf8String!
+        return handleCoreResponse(
+            load_feature_categories(features_dir),
+            mapFeatureCategories
+        )
+    }
+
+    // MARK: - Internal API
+
+    func handleCoreResponse<T>(
+        _ byte_response: CByteBuffer,
+        _ map: (MessagePackValue) throws -> T
+    ) -> Result<T, Error> {
+        Result {
+            defer {
+                free_bytes(byte_response.data)
+            }
+            
+            let buffer = UnsafeBufferPointer(
+                start: byte_response.data,
+                count: Int(byte_response.length)
+            )
+            let data = Data(buffer: buffer)
+            
+            let responseObject: CoreResponseObject = try MessagePack.unpackFirst(data).getDictionary()
+            
+            if let responseObject = responseObject["Ok"] {
+                return try map(responseObject)
+            } else if let failure = try responseObject["Err"]?.getDictionary() {
+                throw try mapError(failure)
+            }
+            
+            throw DecodingError.invalidResponse(info: "\(String(describing: responseObject))")
+        }
     }
 }

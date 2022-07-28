@@ -17,8 +17,12 @@ const ListOfDetails = ({ list }) => {
         }
     };
     return (
-        <div className="scrollable-list">
-            <ul ref={listRef} onScroll={handleScroll}>
+        <>
+            <ul
+                ref={listRef}
+                onScroll={handleScroll}
+                className="scrollable-list"
+            >
                 {list.map((item, index) => {
                     return (
                         <li key={index}>
@@ -33,7 +37,7 @@ const ListOfDetails = ({ list }) => {
                 })}
             </ul>
             <div className="list-gradient gradient" ref={gradient}></div>
-        </div>
+        </>
     );
 };
 

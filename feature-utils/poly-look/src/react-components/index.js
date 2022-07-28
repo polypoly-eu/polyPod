@@ -23,7 +23,13 @@ import {
 import { RoutingWrapper } from "./routing";
 import { Infographic, Tooltip, InfographicLegend } from "./infographic";
 import Slideshow from "./slideshow/slideshow.jsx";
-import { ProgressIcon, ProgressBanner } from "./banners";
+import {
+  Banner,
+  ProgressIcon,
+  ProgressBanner,
+  NotificationBanner,
+  notificationTypes,
+} from "./banners";
 
 export {
   Chip,
@@ -53,7 +59,10 @@ export {
   Infographic,
   Tooltip,
   InfographicLegend,
+  Banner,
   Slideshow,
   ProgressIcon,
   ProgressBanner,
+  NotificationBanner,
+  notificationTypes,
 };

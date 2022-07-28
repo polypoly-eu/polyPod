@@ -10,7 +10,6 @@ const BaseInfoPopUp = ({ onClose, name }) => {
         <SideSwiper
             onClose={onClose}
             open={true}
-            lastChildSelector=".poly-button"
             Component={(props) => (
                 <SideSheet
                     title={i18n.t("commonInfoScreen:baseInfo.title1")}

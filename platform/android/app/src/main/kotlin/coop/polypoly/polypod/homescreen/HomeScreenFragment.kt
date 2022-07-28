@@ -23,7 +23,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.accompanist.flowlayout.FlowRow
+import coop.polypoly.core.FeatureCategoryId
 import coop.polypoly.polypod.R
+import kotlin.math.floor
+import kotlin.math.max
+import kotlin.math.min
 
 class HomeScreenFragment : Fragment() {
     private val viewModel = HomeScreenViewModel()
@@ -33,7 +37,7 @@ class HomeScreenFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val sectionModels = viewModel.getSectionModels {
+        val sectionModels = viewModel.getSectionModels(requireContext()) {
             findNavController().navigate(
                 HomeScreenFragmentDirections
                     .actionHomeScreenFragmentToFeatureFragment(it)
@@ -117,10 +121,17 @@ fun createScreen(sectionModels: List<SectionModel>) {
 
     val interItemSpacing =
         (tilesPerContainer - 1) * containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
-    val smallTileWidth =
-        (containerWidth - interItemSpacing) / tilesPerContainer // ktlint-disable max-line-length
+    val smallTileWidth = floor(
+        (containerWidth - interItemSpacing) / tilesPerContainer
+    )
     val bigTileWidth =
         containerWidth - smallTileWidth - containerLayout.horizontalInterItemSpacing.value // ktlint-disable max-line-length
+
+    // FIX: Tiles become large on bigger screens. Text remains small
+    // Solution: Scale up the text size.
+    // text fits well when the small tile is 112
+    val baseSmallTileWidth = 112
+    val multiplier = max(1.0f, min(2.0f, smallTileWidth / baseSmallTileWidth))
 
     val sections = sectionModels.map {
         section(
@@ -133,13 +144,14 @@ fun createScreen(sectionModels: List<SectionModel>) {
             ),
             mediumTileLayout = TileLayout.mediumCard(
                 containerWidth,
-                smallTileWidth
+                smallTileWidth,
+                multiplier
             ),
             bigTileLayout = TileLayout.bigCard(bigTileWidth, bigTileWidth),
-            smallTileStyle = TileStyle.smallTileStyle(),
-            mediumTileStyle = TileStyle.mediumTileStyle(),
-            bigTileStyle = TileStyle.bigTileStyle(),
-            style = SectionStyle.default()
+            smallTileStyle = TileStyle.smallTileStyle(multiplier),
+            mediumTileStyle = TileStyle.mediumTileStyle(multiplier),
+            bigTileStyle = TileStyle.bigTileStyle(multiplier),
+            style = SectionStyle.default(multiplier)
         )
     }
 
@@ -155,7 +167,7 @@ fun createScreen(sectionModels: List<SectionModel>) {
                 R.string.homescreen_footer_button_title
             )
         ),
-        style = FooterStyle.default(),
+        style = FooterStyle.default(multiplier),
         layout = FooterLayout.default()
     )
 
@@ -185,6 +197,11 @@ fun Screen(screen: Screen) {
             )
 
     ) {
+        Spacer(
+            modifier = Modifier.defaultMinSize(
+                minWidth = screen.layout.width
+            )
+        )
         screen.sections.forEach {
             Section(it)
         }
@@ -207,7 +224,7 @@ fun Section(section: Section) {
             ),
             fontSize = section.style.titleFont.size,
             lineHeight = section.style.titleFont.lineHeight,
-            textAlign = section.style.titleFont.alignment,
+            textAlign = section.style.titleFont.alignment
         )
         FlowRow(
             crossAxisSpacing = section.layout.verticalSpacing
@@ -238,10 +255,10 @@ fun section(
     mediumTileStyle: TileStyle,
     bigTileStyle: TileStyle
 ): Section {
-    when (model.type) {
-        SectionType.YOUR_DATA -> return Section(
+    when (model.id) {
+        FeatureCategoryId.yourData -> return Section(
             model = model,
-            type = model.type,
+            id = model.id,
             containers = yourDataContainers(
                 model.tiles,
                 containerLayout,
@@ -253,9 +270,9 @@ fun section(
             layout = layout,
             style = style
         )
-        SectionType.DATA_KNOW_HOW -> return Section(
+        FeatureCategoryId.knowHow -> return Section(
             model = model,
-            type = model.type,
+            id = model.id,
             containers = rowContainers(
                 model.tiles,
                 tilesPerContainer = 3,
@@ -267,9 +284,9 @@ fun section(
             layout = layout,
             style = style
         )
-        SectionType.TOOLS -> return Section(
+        FeatureCategoryId.tools -> return Section(
             model = model,
-            type = model.type,
+            id = model.id,
             containers = rowContainers(
                 model.tiles,
                 tilesPerContainer = 1,
@@ -281,9 +298,9 @@ fun section(
             layout = layout,
             style = style
         )
-        SectionType.DEVELOPER -> return Section(
+        FeatureCategoryId.developer -> return Section(
             model = model,
-            type = model.type,
+            id = model.id,
             containers = rowContainers(
                 model.tiles,
                 tilesPerContainer = 1,
@@ -301,7 +318,6 @@ fun section(
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-
     val tileModel = TileModel(
         title = "Facebook Import",
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", // ktlint-disable max-line-length
@@ -315,13 +331,13 @@ fun DefaultPreview() {
         tileModel, tileModel, tileModel,
         tileModel, tileModel, tileModel,
         tileModel, tileModel, tileModel,
-        tileModel, tileModel, tileModel,
+        tileModel, tileModel, tileModel
     )
 
     val sections: List<SectionModel> = listOf(
-        SectionModel("Your Data", SectionType.YOUR_DATA, tileModels),
-        SectionModel("Data know how", SectionType.DATA_KNOW_HOW, tileModels),
-        SectionModel("Tools", SectionType.TOOLS, tileModels)
+        SectionModel("Your Data", FeatureCategoryId.yourData, tileModels),
+        SectionModel("Data know how", FeatureCategoryId.knowHow, tileModels),
+        SectionModel("Tools", FeatureCategoryId.tools, tileModels)
     )
     createScreen(sectionModels = sections)
 }

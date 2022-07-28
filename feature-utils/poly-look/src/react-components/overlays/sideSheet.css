@@ -1,6 +1,4 @@
 .poly-side-sheet {
-  max-width: var(--max-width);
-  position: absolute;
   width: 100%;
   height: 100%;
   background-color: var(--color-gray-100);
