@@ -9,8 +9,8 @@ export function createUUID(): string {
     return uuidv4();
 }
 
-const polyProtocol: string = "polypod://";
-const polyProtocolRegex: RegExp = new RegExp(`^${polyProtocol}`);
+const polyProtocol = "polypod://";
+const polyProtocolRegex = new RegExp(`^${polyProtocol}`);
 
 /**
  *
