@@ -1,8 +1,15 @@
 import { podSpec } from "../spec";
-import { MockPod } from "../mock-pod";
+import { MockPod, MockPolyOut } from "../mock-pod";
 import { FS } from "../fs";
 
 import { Volume } from "memfs";
+
+describe("Mock polyOut", () => {
+    let mockPolyOut;
+    beforeAll(() => {
+        mockPolyOut = new MockPolyOut();
+    });
+});
 
 describe("Mock pod with default values", () => {
     podSpec(new MockPod(), "/");

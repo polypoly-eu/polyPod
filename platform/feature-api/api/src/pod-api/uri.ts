@@ -24,3 +24,9 @@ export class PolyUri {
         return this.Uri;
     }
 }
+
+export class PolyPodUriError extends Error {
+    constructor(msg: string) {
+        super(msg);
+    }
+}
