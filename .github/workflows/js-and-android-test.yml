@@ -78,7 +78,9 @@ jobs:
       - name: Build core with Android bindings
         if: steps.changes.outputs.android == 'true'
         working-directory: platform/core
-        run: make android_bindings
+        run: |
+          export NDK_HOME=$ANDROID_NDK_LATEST_HOME
+          make android_bindings
       - name: Test android
         if: steps.changes.outputs.android == 'true'
         working-directory: platform/android
