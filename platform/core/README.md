@@ -26,8 +26,7 @@ make ios_bindings
 
 - Building android core:
 
-Prerequisites:
-- You should install NDK (it is recommended to use Android Studio). A version r24 should be installed.
+    Prerequisite: You should install NDK (it is recommended to use Android Studio for installing it). Version r24 should be installed. Make sure that either `NDK_HOME` or `ANDROID_NDK_HOME`(specifying the path to NDK) is exported as an environment variable on your system.
 
 ```shell
 make android_bindings
