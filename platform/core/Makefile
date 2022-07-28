@@ -24,10 +24,10 @@ ndk=$(tools_dir)/NDK_$(ndk_version)
 ndk_archive = $(tools_dir)/NDK.zip
 export ANDROID_NDK_HOME := $(ndk)/$(ndk_lib)
 android_triples := aarch64-linux-android x86_64-linux-android
-android_binaries := $(patsubst %, target/%, $(android_triples))
+android_binaries := $(patsubst %, target/%/libpolypod_core.so, $(android_triples))
 android_architectures := arm64-v8a x86_64
 jni_libs_copy_path := $(android_core)/jniLibs
-android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%, $(android_architectures))
+android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%/libpolypod_core.so, $(android_architectures))
 
 ifeq ($(OS),Windows_NT)
 	ndk_download_url = $(google_repo)/$(ndk_lib)-windows-x86_64.zip
