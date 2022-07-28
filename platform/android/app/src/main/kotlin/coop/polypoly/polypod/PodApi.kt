@@ -209,8 +209,7 @@ open class PodApi(
             if (it.isStringValue) it.asStringValue().toString()
             else return ValueFactory.newNil()
         }
-        val result = polyIn.query(query)
-        return ValueFactory.newNil()
+        return polyIn.query(query)
     }
 
     private suspend fun handlePolyInUpdate(args: List<Value>): Value {

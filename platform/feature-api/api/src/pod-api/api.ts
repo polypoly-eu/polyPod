@@ -18,6 +18,33 @@ export interface Matcher {
 }
 
 /**
+ * Value map of a query solution with variables from SPARQL query
+ */
+interface QuerySolutionValue {
+    [key: string]: string;
+}
+
+/**
+ * Result of a [SELECT](https://www.w3.org/TR/sparql11-query/#select) query.
+ */
+export interface QuerySolution {
+    values: QuerySolutionValue[];
+}
+
+/**
+ * The result type of a SPARQL query
+ */
+export interface QueryResult {
+    // Results of a [SELECT](https://www.w3.org/TR/sparql11-query/#select) query.
+    solutions: QuerySolution[];
+    // TODO: Implement those when needed
+    // Result of a [ASK](https://www.w3.org/TR/sparql11-query/#ask) query.
+    // Boolean(bool),
+    // Results of a [CONSTRUCT](https://www.w3.org/TR/sparql11-query/#construct) or [DESCRIBE](https://www.w3.org/TR/sparql11-query/#describe) query.
+    // Graph(QueryTripleIter),
+}
+
+/**
  * `PolyIn` specifies the interaction of the Feature with the Pod store. It is concerned with creating and manipulating
  * RDF triples according to the [RDFJS](http://rdf.js.org/) specification.
  *
@@ -95,6 +122,21 @@ export interface PolyIn {
      * @returns a Promise that will be resolved to a boolean.
      */
     has(...quads: RDF.Quad[]): Promise<boolean>;
+
+    /**
+     * SPARQL query (https://www.w3.org/TR/sparql11-query/) against the rdf database
+     *
+     * @param query SPARQL query string
+     * @returns a promise that resolves to a queryResult
+     */
+    query(query: string): Promise<QueryResult>;
+
+    /**
+     * SPARQL update (https://www.w3.org/TR/sparql11-update/) against the rdf database
+     *
+     * @param query SPARQL update query string
+     */
+    update(query: string): Promise<void>;
 }
 
 /**

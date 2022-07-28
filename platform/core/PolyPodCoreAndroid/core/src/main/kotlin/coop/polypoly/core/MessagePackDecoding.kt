@@ -90,10 +90,3 @@ fun mapFeature(msgObject: Value): Feature {
         }.toMap()
     )
 }
-
-fun mapQueryResult(msgObject: Value): QueryResult {
-    val msgObject = msgObject.asMapValue().map()
-
-    System.out.println(msgObject.toString())
-    return QueryResult(null)
-}

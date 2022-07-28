@@ -22,6 +22,7 @@ import org.apache.jena.rdf.model.ModelFactory
 import org.apache.jena.rdf.model.RDFNode
 import org.apache.jena.rdf.model.Resource
 import org.apache.jena.rdf.model.ResourceFactory
+import org.msgpack.value.Value
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.Exception
@@ -103,7 +104,7 @@ open class PolyIn(
         }
     }
 
-    open fun query(query: String): QueryResult {
+    open fun query(query: String): Value {
         return Core.execRdfQuery(query, context?.filesDir.toString())
     }
 

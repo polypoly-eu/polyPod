@@ -242,6 +242,8 @@ open class FeatureFragment : Fragment() {
                 )
             }
         }
+        Core.execRdfUpdate("INSERT DATA { <http://example.com/you> <http://example.com/are> \"great\" }", context?.filesDir.toString())
+        System.out.println(Core.execRdfQuery("SELECT ?s ?p ?o WHERE { ?s ?p ?o }", context?.filesDir.toString()).toString())
         startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
         var url: String = ""
         var name: String = ""
