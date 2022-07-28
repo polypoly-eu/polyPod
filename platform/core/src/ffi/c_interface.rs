@@ -89,10 +89,26 @@ pub struct BridgeToNative {
 }
 
 impl core::PlatformHookRequest for BridgeToNative {
-    fn perform_request(&self, request: core::NativeRequest) -> core::NativeResponse {
+    fn perform_request(
+        &self,
+        request: core::NativeRequest,
+    ) -> Result<core::NativeResponse, String> {
         let request_byte_buffer = unsafe { create_byte_buffer(serialize(request)) };
         let response_byte_buffer = (self.perform_request)(request_byte_buffer);
-        let response = unsafe { deserialize(byte_buffer_to_bytes(&response_byte_buffer)) };
+        let response: Result<NativeResponse, String> =
+            unsafe { deserialize(byte_buffer_to_bytes(&response_byte_buffer)) };
+        // match &response {
+        //     Ok(value) => match value {
+        //         NativeResponse::FeatureName(name) => {
+        //             let x = name.to_owned();
+        //             print!("");
+        //         }
+        //     },
+        //     Err(err) => {
+        //         let x = err.to_owned();
+        //         print!("");
+        //     }
+        // };
         (self.free_bytes)(response_byte_buffer.data);
         return response;
     }

@@ -4,12 +4,65 @@ import MessagePack
 
 typealias CoreResponseObject = [MessagePackValue: MessagePackValue]
 
-//struct BridgeToNative {
-//
-//}
+func unpackBytes(bytes: CByteBuffer) throws -> MessagePackValue {
+    defer {
+        free_bytes(bytes.data)
+    }
+    
+    let buffer = UnsafeBufferPointer(
+        start: bytes.data,
+        count: Int(bytes.length)
+    )
+    let data = Data(buffer: buffer)
+    
+    return try MessagePack.unpackFirst(data)
+}
+
+func mapToNativeRequest(request: MessagePackValue) throws -> NativeRequest {
+    guard let result = NativeRequest.init(rawValue: request.stringValue ?? "") else {
+        throw DecodingError.invalidValue(info: "Could not convert \(request.stringValue ?? "") to NativeRequest. ")
+    }
+    return result
+}
+
+func handle(nativeRequest: NativeRequest) -> NativeResponse {
+    switch nativeRequest {
+    case .FeatureName:
+        return NativeResponse.FeatureName("Test")
+    }
+}
+
+func packNativeResponse(response: Result<NativeResponse, Error>) -> Data {
+    var result: [MessagePackValue: MessagePackValue] = [:]
+    switch response {
+    case .success(let nativeResponse):
+        switch nativeResponse {
+        case .FeatureName(let name):
+            result["Ok"] = .map(["FeatureName": .string(name)])
+        }
+    case .failure(let error):
+        result["Err"] = .string(error.localizedDescription)
+    }
+    
+    return MessagePack.pack(.map(result))
+}
+
+extension Data {
+    var toByteBuffer: CByteBuffer {
+        let ptr = UnsafeMutablePointer<UInt8>.allocate(capacity: count)
+        withUnsafeBytes { (buff) -> Void in
+            ptr.initialize(from: buff.bindMemory(to: UInt8.self).baseAddress!, count: count)
+        }
+        return CByteBuffer(length: UInt32(count), data: ptr)
+    }
+}
+
+enum NativeRequest: String {
+    case FeatureName
+}
 
 enum NativeResponse {
-    case response(String)
+    case FeatureName(String)
 }
 
 /// Swift wrapper around the Rust Core.
@@ -32,21 +85,14 @@ public final class Core {
         return handleCoreResponse(core_bootstrap(self.languageCode, BridgeToNative(free_bytes: {
             $0?.deallocate()
         }, perform_request: { in_bytes in
-            let buffer = UnsafeBufferPointer(
-                start: in_bytes.data,
-                count: Int(in_bytes.length)
-            )
-            let data = Data(buffer: buffer)
-            
-            let responseObject: CoreResponseObject? = try? MessagePack.unpackFirst(data).getDictionary()
-            
-            let value = MessagePack.pack(.map(["Response": "Hello Back"]))
-            let ptr = UnsafeMutablePointer<UInt8>.allocate(capacity: value.count)
-            value.withUnsafeBytes { (buff) -> Void in
-                ptr.initialize(from: buff.bindMemory(to: UInt8.self).baseAddress!, count: value.count)
+            let response = Result<NativeResponse, Error> {
+                let request_from_core = try unpackBytes(bytes: in_bytes)
+                let nativeRequest = try mapToNativeRequest(request: request_from_core)
+                return handle(nativeRequest: nativeRequest)
             }
-
-            return CByteBuffer(length: UInt32(value.count), data: ptr)
+            
+            // TODO: Use CoreFailure for failures.
+            return packNativeResponse(response: response).toByteBuffer
         })), { _ in })
     }
 

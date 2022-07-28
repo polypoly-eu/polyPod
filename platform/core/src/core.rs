@@ -7,16 +7,16 @@ static CORE: OnceCell<Core> = OnceCell::new();
 
 #[derive(Debug, Clone, Serialize)]
 pub enum NativeRequest {
-    ExecuteSmth(String),
+    FeatureName,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum NativeResponse {
-    Response(String),
+    FeatureName(String),
 }
 
 pub trait PlatformHookRequest: Sync + Send {
-    fn perform_request(&self, request: NativeRequest) -> NativeResponse;
+    fn perform_request(&self, request: NativeRequest) -> Result<NativeResponse, String>;
 }
 
 // The Core would act as a composition root, containing any global configuration
@@ -50,7 +50,7 @@ pub fn bootstrap(
     let core_2 = get_instance().unwrap();
     let response = core_2
         .platform_hook
-        .perform_request(NativeRequest::ExecuteSmth("Hello".to_string()));
+        .perform_request(NativeRequest::FeatureName);
     Ok(())
 }
 
