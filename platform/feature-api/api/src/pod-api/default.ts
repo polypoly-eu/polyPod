@@ -86,14 +86,12 @@ export class DefaultPolyOut implements PolyOut {
  */
 export class DefaultPod implements Pod {
     public readonly dataFactory: RDF.DataFactory = dataFactory;
-    public readonly polyOut: PolyOut;
 
     constructor(
         public readonly store: RDF.DatasetCore,
-        public readonly fs: FS
-    ) {
-        this.polyOut = new DefaultPolyOut(fs);
-    }
+        public readonly fs: FS,
+        public readonly polyOut: PolyOut = new DefaultPolyOut(fs)
+    ) {}
 
     private checkQuad(quad: RDF.Quad): void {
         if (!quad.graph.equals(dataFactory.defaultGraph()))
