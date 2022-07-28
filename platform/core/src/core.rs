@@ -1,5 +1,3 @@
-use std::borrow::{Borrow, BorrowMut};
-
 use crate::{core_failure::CoreFailure, feature_categories, io::file_system::DefaultFileSystem};
 use once_cell::sync::OnceCell;
 use serde::{Deserialize, Serialize};
@@ -12,7 +10,7 @@ pub enum NativeRequest {
     ExecuteSmth(String),
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum NativeResponse {
     Response(String),
 }

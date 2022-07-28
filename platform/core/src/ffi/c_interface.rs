@@ -1,9 +1,10 @@
 use crate::core_failure::CoreFailure;
 use crate::ffi::{deserialize, serialize};
+use std::collections::HashMap;
 use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
-use crate::core;
+use crate::core::{self, NativeResponse};
 use std::os::raw::c_char;
 
 /// # Safety
@@ -76,13 +77,14 @@ unsafe fn create_byte_buffer(bytes: Vec<u8>) -> CByteBuffer {
     }
 }
 
-unsafe fn byte_buffer_to_bytes(buffer: CByteBuffer) -> Vec<u8> {
+unsafe fn byte_buffer_to_bytes(buffer: &CByteBuffer) -> Vec<u8> {
     let slice = std::slice::from_raw_parts(buffer.data, buffer.length.try_into().unwrap());
     slice.to_vec()
 }
 
 #[repr(C)]
 pub struct BridgeToNative {
+    free_bytes: extern "C" fn(bytes: *mut u8),
     perform_request: extern "C" fn(request: CByteBuffer) -> CByteBuffer,
 }
 
@@ -90,7 +92,8 @@ impl core::PlatformHookRequest for BridgeToNative {
     fn perform_request(&self, request: core::NativeRequest) -> core::NativeResponse {
         let request_byte_buffer = unsafe { create_byte_buffer(serialize(request)) };
         let response_byte_buffer = (self.perform_request)(request_byte_buffer);
-        let response = unsafe { deserialize(byte_buffer_to_bytes(response_byte_buffer)) };
+        let response = unsafe { deserialize(byte_buffer_to_bytes(&response_byte_buffer)) };
+        (self.free_bytes)(response_byte_buffer.data);
         return response;
     }
 }

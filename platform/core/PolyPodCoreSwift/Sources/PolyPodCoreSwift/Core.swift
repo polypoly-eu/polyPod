@@ -19,8 +19,6 @@ public final class Core {
     // MARK: - Private config
     private var languageCode: UnsafePointer<CChar>!
     
-    var value = [UInt8](MessagePack.pack(.map(["Response": "Hello Back"])))
-    
     private init() {}
     
     // MARK: - Public API
@@ -31,7 +29,9 @@ public final class Core {
         // Force unwrap should be safe
         self.languageCode = NSString(string: languageCode).utf8String!
        
-        return handleCoreResponse(core_bootstrap(self.languageCode, BridgeToNative(perform_request: { in_bytes in
+        return handleCoreResponse(core_bootstrap(self.languageCode, BridgeToNative(free_bytes: {
+            $0?.deallocate()
+        }, perform_request: { in_bytes in
             let buffer = UnsafeBufferPointer(
                 start: in_bytes.data,
                 count: Int(in_bytes.length)
@@ -40,8 +40,13 @@ public final class Core {
             
             let responseObject: CoreResponseObject? = try? MessagePack.unpackFirst(data).getDictionary()
             
-            // TODO: transfer bytes from platform to core, and then free bytes. 
-            return CByteBuffer(length: UInt32(self.value.count), data: &self.value)
+            let value = MessagePack.pack(.map(["Response": "Hello Back"]))
+            let ptr = UnsafeMutablePointer<UInt8>.allocate(capacity: value.count)
+            value.withUnsafeBytes { (buff) -> Void in
+                ptr.initialize(from: buff.bindMemory(to: UInt8.self).baseAddress!, count: value.count)
+            }
+
+            return CByteBuffer(length: UInt32(value.count), data: ptr)
         })), { _ in })
     }
 
