@@ -1,0 +1,12 @@
+{
+  "name": "@polypoly-eu/poly-sparql",
+  "main": "src/index.js",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c rollup.config.js"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
+  }
+}
