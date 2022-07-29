@@ -47,7 +47,7 @@ endif
 
 # ============  Rust core ============ #
 
-$(target):
+$(target): $(wildcard src/*.rs)
 # Check rustup is installed
 ifeq (,$(shell which rustup))
 	$(error "Rust not installed, check https://www.rust-lang.org/tools/install to install rust on your system")
