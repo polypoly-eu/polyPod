@@ -16,11 +16,11 @@ tools_dir := tools
 android_core := PolyPodCoreAndroid/core/src/main/
 android_version := 24
 google_repo := https://dl.google.com/android/repository
-android_triples := aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android
-android_binaries := $(patsubst %, target/%, $(android_triples))
-android_architectures := arm64-v8a armeabi-v7a x86_64 x86
+android_triples := aarch64-linux-android x86_64-linux-android
+android_binaries := $(patsubst %, target/%/libpolypod_core.so, $(android_triples))
+android_architectures := arm64-v8a x86_64
 jni_libs_copy_path := $(android_core)/jniLibs
-android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%, $(android_architectures))
+android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%/libpolypod_core.so, $(android_architectures))
 cargo_ndk_version = 2.10.0
 
 ifeq ($(OS),Windows_NT)
@@ -42,7 +42,7 @@ endif
 
 # ============  Rust core ============ #
 
-$(target):
+$(target): $(wildcard src/*.rs)
 # Check rustup is installed
 ifeq (,$(shell which rustup))
 	$(error "Rust not installed, check https://www.rust-lang.org/tools/install to install rust on your system")
@@ -128,7 +128,7 @@ all: $(android_core_libraries) $(if $(macos),$(swift_core_framework),$(target))
 
 .PHONY: clean
 clean:
-	$(RM) -r target
+	cargo clean
 	$(RM) -r export
 	$(RM) -r $(swift_core_framework)
 	$(RM) -r $(android_core_libraries)
