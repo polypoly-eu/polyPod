@@ -24,7 +24,6 @@ module.exports = {
     },
     ignorePatterns: [
         "*.conf.*",
-        "*.config.*",
         "*.bundled.*",
         "**/dist/*",
         "**/docs/*",
