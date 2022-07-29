@@ -6,8 +6,5 @@
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "test": "jest --coverage"
-  },
-  "devDependencies": {
-    "@polypoly-eu/pod-api": "file:../../platform/feature-api/api/pod-api"
   }
 }
