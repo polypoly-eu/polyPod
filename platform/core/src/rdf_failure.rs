@@ -22,10 +22,10 @@ pub struct RdfFailure {
 }
 
 impl RdfFailure {
-    pub fn result_serialization_failed() -> Self {
+    pub fn result_serialization_failed(error: EvaluationError) -> Self {
         RdfFailure {
             code: FailureCode::ResultSerializationError.value(),
-            message: String::from("Failed to serialize the query Result")
+            message: String::from("Failed to serialize the query Result: ") + &error.to_string()
         }
     }
 

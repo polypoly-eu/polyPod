@@ -37,14 +37,14 @@ fn init_store(app_path: String) -> Result<Store, StorageError> {
 }
 
 pub fn rdf_query(query: SPARQLQuery, app_path: String) -> Result<QueryResults, RdfFailure> {
-    let store = init_store(app_path).map_err(|err| RdfFailure::failed_to_initialize_store(err))?;
-    let query_results = store.query(&query).map_err(|err| RdfFailure::map_evaluation_error(err))?;
-    to_serializable_format(query_results).map_err(|_| RdfFailure::result_serialization_failed())
+    let store = init_store(app_path).map_err(RdfFailure::failed_to_initialize_store)?;
+    let query_results = store.query(&query).map_err( RdfFailure::map_evaluation_error)?;
+    to_serializable_format(query_results)
 }
 
 pub fn rdf_update(query: SPARQLQuery, app_path: String) -> Result<(), RdfFailure> {
-    let store = init_store(app_path).map_err(|err| RdfFailure::failed_to_initialize_store(err))?;
-    let query_results  = store.update(&query).map_err(|err| RdfFailure::map_evaluation_error(err));
+    let store = init_store(app_path).map_err(RdfFailure::failed_to_initialize_store)?;
+    let query_results  = store.update(&query).map_err(RdfFailure::map_evaluation_error);
     query_results
 }
 
@@ -53,9 +53,16 @@ fn to_serializable_format(query_results: oxigraph::sparql::QueryResults) -> Resu
     if let oxigraph::sparql::QueryResults::Solutions(query_solutions) = query_results {
         for query_solution_result in query_solutions {
             let mut map: HashMap<String, String> = HashMap::new();
-            let query_solution = query_solution_result.unwrap();
+            let query_solution = match query_solution_result {
+                Ok(val) => val,
+                Err(err) => return Err(RdfFailure::result_serialization_failed(err))
+            };
             for var in query_solution.variables().iter() {
-                map.insert(var.to_string(), query_solution.get(var).unwrap().to_string());
+                let query_solution_value = match query_solution.get(var) {
+                    Some(val) => val,
+                    None => break
+                };
+                map.insert(var.to_string(), query_solution_value.to_string());
             }
             solutions.push(QuerySolution::new(map))
         }
