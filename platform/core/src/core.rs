@@ -2,7 +2,6 @@
 use crate::{
     core_failure::CoreFailure,
     rdf::{SPARQLQuery, rdf_query, rdf_update, QueryResults},
-    rdf_failure::RdfFailure,
     feature_categories,
     io::file_system::DefaultFileSystem
 };

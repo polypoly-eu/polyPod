@@ -1,13 +1,11 @@
 use std::collections::HashMap;
-use oxigraph::store::Store;
+use oxigraph::store::{Store, StorageError};
 use serde::Deserialize;
 use serde::Serialize;
 
 use crate::rdf_failure::RdfFailure;
 
 pub type SPARQLQuery = String;
-
-static DBPATH: &str = "/rdf.db";
 
 /// A simplified serializable replica of oxigraph::sparql::QuerySolution
 #[derive(Deserialize, Serialize, PartialEq, Debug, Clone)]
@@ -34,14 +32,18 @@ pub enum QueryResults {
     // Graph(QueryTripleIter),
 }
 
+fn init_store(app_path: String) -> Result<Store, StorageError> {
+    Store::open(app_path + env!("RDF_DB_PATH"))
+}
+
 pub fn rdf_query(query: SPARQLQuery, app_path: String) -> Result<QueryResults, RdfFailure> {
-    let store = Store::open(app_path + DBPATH).map_err(|err| RdfFailure::failed_to_initialize_store(err))?;
+    let store = init_store(app_path).map_err(|err| RdfFailure::failed_to_initialize_store(err))?;
     let query_results = store.query(&query).map_err(|err| RdfFailure::map_evaluation_error(err))?;
     to_serializable_format(query_results).map_err(|_| RdfFailure::result_serialization_failed())
 }
 
 pub fn rdf_update(query: SPARQLQuery, app_path: String) -> Result<(), RdfFailure> {
-    let store = Store::open(app_path + DBPATH).map_err(|err| RdfFailure::failed_to_initialize_store(err))?;
+    let store = init_store(app_path).map_err(|err| RdfFailure::failed_to_initialize_store(err))?;
     let query_results  = store.update(&query).map_err(|err| RdfFailure::map_evaluation_error(err));
     query_results
 }
