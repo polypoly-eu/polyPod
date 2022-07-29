@@ -9,9 +9,6 @@ import svg from "rollup-plugin-svg";
 import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
 import sillyI18n from "@polypoly-eu/silly-i18n/rollup-plugin.js";
 
-const fallbackURL = "http://localhost:8000";
-const fallbackAuthorization = "username:password";
-
 const externalPackages = {
     "@polypoly-eu/poly-look": "polyLook",
     react: "React",

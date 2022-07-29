@@ -3,12 +3,15 @@
     "author": "polypoly Cooperative",
     "description": "Semi-automatic testing for the polyPod APIs - please ignore",
     "thumbnail": "images/thumbnail.pdf",
-    "primaryColor": "#cbd5e0",
+    "primaryColor": "#000000",
     "borderColor": "#cbd5e0",
+    "tileTextColor": "#ffffff",
+    "thumbnailColor": "#475abb",
     "links": {},
     "translations": {
         "de": {
             "author": "polypoly - Die Genossenschaft"
-        }
+        },
+        "links": {}
     }
 }

@@ -1,5 +1,6 @@
 import BackgroundTasks
 import CoreData
+import MessagePack
 import PolyPodCoreSwift
 import UIKit
 
@@ -20,15 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Log.info("Core bootstraped!")
         case let .failure(content):
             Log.error(content.localizedDescription)
-            switch content as? PolyPodCoreError {
-            case .internalCoreFailure(_, let failure)
-                    where failure.code == .corealreadybootstrapped:
-                // Ignore already bootstrapped error, this code path might be
-                // called multiple times during testing
-                break
-            default:
-                fatalError(content.localizedDescription)
+            if let coreFailure = content as? CoreFailure {
+                if coreFailure.code == .coreAlreadyBootstrapped {
+                    break
+                }
             }
+            fatalError(content.localizedDescription)
         }
 
         let defaults = UserDefaults.standard

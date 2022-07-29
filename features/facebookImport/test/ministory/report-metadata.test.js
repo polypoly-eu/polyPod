@@ -7,10 +7,6 @@ import ReportMetadataReport from "../../src/views/ministories/reportMetadata";
 import { createInteractedWithAdvertisersDataset } from "../datasets/interacted-with-advertisers-data";
 import { createLanguageSettingsData } from "../datasets/language-and-locale-data";
 import { createOffFacebookEventsSimpleData } from "../datasets/off-facebook-events-data";
-import {
-    MOCKED_POD_RUNTIME,
-    MOCKED_POD_RUNTIME_VERSION,
-} from "../mocks/pod-mock";
 import { MINIMUM_FILE_SIZE } from "../mocks/zipfile-mock";
 import { runAnalysisForExport } from "../utils/analyses-execution";
 import {
@@ -92,26 +88,18 @@ describe("Report metadata analysis", () => {
         expect(reportData.preferedLanguage).toStrictEqual(preferedLanguage);
     });
 
-    it("has correct prefered ,anguage in JSON report", async () => {
+    it("has correct prefered language in JSON report", async () => {
         expect(jsonReport.data.preferedLanguage).toStrictEqual(
             preferedLanguage
         );
     });
 
-    it("has correct polyPod version in analysis", async () => {
-        expect(reportData.polyPodVersion).toBe(MOCKED_POD_RUNTIME_VERSION);
-    });
-
-    it("has correct polyPod version in JSON report", async () => {
-        expect(jsonReport.data.polyPodVersion).toBe(MOCKED_POD_RUNTIME_VERSION);
+    it("has the same polyPod version in analysis and report", async () => {
+        expect(reportData.polyPodVersion).toBe(jsonReport.data.polyPodVersion);
     });
 
     it("has correct polyPod runtime in analysis", async () => {
-        expect(reportData.polyPodRuntime).toBe(MOCKED_POD_RUNTIME);
-    });
-
-    it("has correct polyPod runtime in JSON report", async () => {
-        expect(jsonReport.data.polyPodRuntime).toBe(MOCKED_POD_RUNTIME);
+        expect(reportData.polyPodRuntime).toBe(jsonReport.data.polyPodRuntime);
     });
 });
 

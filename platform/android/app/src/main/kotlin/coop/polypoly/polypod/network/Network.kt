@@ -137,14 +137,15 @@ open class Network(val context: Context) {
                 "Content-Length",
                 encodedBody.size.toString()
             )
+            val outputStream = DataOutputStream(connection.outputStream)
             try {
-                val outputStream: DataOutputStream =
-                    DataOutputStream(connection.outputStream)
                 outputStream.write(encodedBody)
                 outputStream.flush()
             } catch (exception: Exception) {
                 logger.error("network.httpPost failed: $exception")
                 return null
+            } finally {
+                outputStream.close()
             }
         }
 

@@ -5,12 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import coop.polypoly.core.Core
-import coop.polypoly.core.CoreAlreadyBootstrappedException
+import coop.polypoly.core.CoreExceptionCode
+import coop.polypoly.core.CoreFailure
 import coop.polypoly.polypod.core.UpdateNotification
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
-import java.lang.Exception
 
+@ExperimentalUnsignedTypes
 class MainActivity : AppCompatActivity() {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
@@ -27,15 +28,13 @@ class MainActivity : AppCompatActivity() {
             Core.bootstrapCore(language)
             logger.info("Core is bootstrapped!")
         } catch (ex: Exception) {
-            if (ex is CoreAlreadyBootstrappedException) {
-                logger.info(ex.message)
-                return
+            logger.info(ex.message)
+            (ex as? CoreFailure)?.also {
+                // Ignore CoreAlreadyBootstrapped error, as it is not breaking.
+                if (it.code == CoreExceptionCode.CoreAlreadyBootstrapped) {
+                    return
+                }
             }
-
-            logger.error(
-                "Failed to boostrap core",
-                ex.message
-            )
             throw ex
         }
 
@@ -55,23 +54,14 @@ class MainActivity : AppCompatActivity() {
             notification.handleFirstRun()
         }
 
-        val shouldShowOnboarding =
-            firstRun || Authentication.shouldShowBiometricsPrompt(this)
-        if (!onboardingShown && shouldShowOnboarding) {
+        val shouldShowAuthOnboarding = firstRun ||
+            Authentication.shouldShowAuthOnboarding(this)
+
+        if (!onboardingShown && shouldShowAuthOnboarding) {
             onboardingShown = true
-            startActivity(
-                Intent(
-                    this,
-                    OnboardingActivity::class.java
-                )
-            )
-        } else if (Authentication.shouldAuthenticate(this)) {
-            startActivity(
-                Intent(
-                    this,
-                    PodUnlockActivity::class.java
-                )
-            )
+            startActivity(Intent(this, OnboardingActivity::class.java))
+        } else if (Authentication.canAuthenticate(this)) {
+            startActivity(Intent(this, PodUnlockActivity::class.java))
         }
 
         if (notification.showInApp) {

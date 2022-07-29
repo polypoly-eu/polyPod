@@ -276,8 +276,7 @@ open class PodApi(
         }
         val data = endpoint
             .get(endpointId, contentType, authorization)
-        return if (data == null) ValueFactory.newNil()
-        else ValueFactory.newString(data)
+        return ValueFactory.newString(data)
     }
 
     private fun decodePolyOutFetchCallArgs(args: Value): FetchInit {

@@ -1,4 +1,5 @@
 // swiftlint:disable file_length
+import PolyPodCoreSwift
 import SwiftUI
 import WebKit
 
@@ -21,10 +22,9 @@ struct FeatureContainerView: UIViewRepresentable {
             pickFileHandler: pickFileHandler
         )
 
-        if let featureColor = feature.primaryColor {
-            featureWebView.backgroundColor = UIColor.compatInit(featureColor)
-            featureWebView.isOpaque = false
-        }
+        let featureColor = Color(fromHex: feature.primaryColor)
+        featureWebView.backgroundColor = UIColor.compatInit(featureColor)
+        featureWebView.isOpaque = false
 
         PodApi.shared.polyNav.delegate  = featureWebView
         PodApi.shared.endpoint.delegate  = featureWebView

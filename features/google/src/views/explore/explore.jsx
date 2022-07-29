@@ -6,7 +6,9 @@ import {
     Screen,
     RoutingWrapper,
     ClickableCard,
-    PolyButton,
+    Banner,
+    NotificationBanner,
+    notificationTypes,
 } from "@polypoly-eu/poly-look";
 
 import i18n from "!silly-i18n";
@@ -16,33 +18,6 @@ import { ministories } from "../ministories/ministories.js";
 import { useHistory } from "react-router-dom";
 import { GoogleContext } from "../../context/google-context.jsx";
 
-const PopUpMessage = ({ children, reportResultAnswer }) => {
-    return (
-        <div className="pop-up-container">
-            <div className={"pop-up" + reportResultAnswer}>{children}</div>
-        </div>
-    );
-};
-
-const ReportCard = () => {
-    const history = useHistory();
-
-    return (
-        <div className="analysis-card unrecognized-analysis-card poly-theme-light">
-            <div className="unrecognized-analysis-title">
-                <h1>{i18n.t("explore:reportCard.headline")}</h1>
-            </div>
-            <p>{i18n.t("explore:reportCard.text")}</p>
-            <RoutingWrapper route="/report" history={history}>
-                <PolyButton
-                    label={i18n.t("explore:reportCard.button")}
-                    className="report-button"
-                />
-            </RoutingWrapper>
-        </div>
-    );
-};
-
 const ExploreView = () => {
     const { account } = useContext(PolyImportContext);
     const { reportIsSent, handleReportSent } = useContext(GoogleContext);
@@ -50,44 +25,43 @@ const ExploreView = () => {
     const history = useHistory();
     const exploreRef = useRef();
 
-    const handleCloseReportResult = () => {
+    const handleCloseNotification = () => {
         handleReportSent(null);
     };
 
     const renderReportResult = () =>
         reportIsSent !== null && (
-            <PopUpMessage
-                reportResultAnswer={
-                    reportIsSent ? " successfully" : " unsuccessfully"
+            <NotificationBanner
+                notificationType={
+                    reportIsSent
+                        ? notificationTypes.success
+                        : notificationTypes.error
                 }
+                handleCloseNotification={handleCloseNotification}
             >
                 {reportIsSent ? (
-                    <>
-                        <div>{i18n.t("explore:report.success")}</div>
-                        <img
-                            src="./images/close_green.svg"
-                            alt="close"
-                            onClick={handleCloseReportResult}
-                        />
-                    </>
+                    <div>{i18n.t("explore:report.success")}</div>
                 ) : (
-                    <>
-                        <div>{i18n.t("explore:report.error")}</div>
-                        <img
-                            src="./images/close_red.svg"
-                            alt="close"
-                            onClick={handleCloseReportResult}
-                        />
-                    </>
+                    <div>{i18n.t("explore:report.error")}</div>
                 )}
-            </PopUpMessage>
+            </NotificationBanner>
         );
 
     const renderFileAnalyses = () => {
         if (!account) return null;
         return (
             <List>
-                {!reportIsSent && <ReportCard />}
+                {!reportIsSent && (
+                    <Banner
+                        title={i18n.t("explore:reportCard.headline")}
+                        description={i18n.t("explore:reportCard.text")}
+                        button={{
+                            label: i18n.t("explore:reportCard.button"),
+                            history: useHistory(),
+                            route: "/report",
+                        }}
+                    />
+                )}
                 {ministories.map((MinistoryClass, index) => {
                     const ministory = new MinistoryClass({
                         account,

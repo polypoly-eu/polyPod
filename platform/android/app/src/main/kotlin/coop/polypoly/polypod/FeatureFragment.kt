@@ -19,7 +19,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import coop.polypoly.polypod.features.Feature
+import coop.polypoly.core.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.PolyNavObserver

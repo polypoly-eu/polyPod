@@ -212,7 +212,7 @@ function handleCreatePreviewFeature(arg) {
                         "manifest.json",
                         "index.html",
                         "content.json",
-                        { images: [] },
+                        { images: ["thumbnail.pdf"] },
                     ],
                 },
                 {
