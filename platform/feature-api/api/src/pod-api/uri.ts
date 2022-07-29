@@ -9,18 +9,32 @@ export function createUUID(): string {
     return uuidv4();
 }
 
+const polyProtocol = "polypod://";
+const polyProtocolRegex = new RegExp(`^${polyProtocol}`);
+
+/**
+ *
+ * @param uri a string that is going to be checked for the format
+ * @returns true if it follows the "protocol"
+ */
 export function isPolypodUri(uri: string): boolean {
-    return /^polypod:\/\//.test(uri);
+    return polyProtocolRegex.test(uri);
 }
 
 export class PolyUri {
     public readonly Uri: string;
 
     constructor() {
-        this.Uri = `polypod://${createUUID()}`;
+        this.Uri = `${polyProtocol}${createUUID()}`;
     }
 
     toString(): string {
         return this.Uri;
+    }
+}
+
+export class PolyPodUriError extends Error {
+    constructor(msg: string) {
+        super(msg);
     }
 }
