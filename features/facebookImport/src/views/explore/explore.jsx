@@ -10,16 +10,14 @@ import {
     ClickableCard,
     Screen,
     Banner,
+    NotificationBanner,
+    notificationTypes,
 } from "@polypoly-eu/poly-look";
 
 import i18n from "!silly-i18n";
 
 import "./explore.css";
 import { ministories } from "../ministories/ministories.js";
-
-const PopUpMessage = ({ children, reportResultAnswer }) => {
-    return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
-};
 
 const ExploreView = () => {
     const { reportResult, setReportResult } = useContext(ImporterContext);
@@ -34,31 +32,20 @@ const ExploreView = () => {
 
     const renderReportResult = () =>
         reportResult !== null && (
-            <PopUpMessage
-                reportResultAnswer={
-                    reportResult ? " successfully" : " unsuccessfully"
+            <NotificationBanner
+                notificationType={
+                    reportResult
+                        ? notificationTypes.success
+                        : notificationTypes.error
                 }
+                handleCloseNotification={handleCloseReportResult}
             >
                 {reportResult ? (
-                    <>
-                        <div>{i18n.t("explore:report.success")}</div>
-                        <img
-                            src="./images/close_green.svg"
-                            alt="close"
-                            onClick={handleCloseReportResult}
-                        />
-                    </>
+                    <div>{i18n.t("explore:report.success")}</div>
                 ) : (
-                    <>
-                        <div>{i18n.t("explore:report.error")}</div>
-                        <img
-                            src="./images/close_red.svg"
-                            alt="close"
-                            onClick={handleCloseReportResult}
-                        />
-                    </>
+                    <div>{i18n.t("explore:report.error")}</div>
                 )}
-            </PopUpMessage>
+            </NotificationBanner>
         );
 
     const renderFileAnalyses = () => {

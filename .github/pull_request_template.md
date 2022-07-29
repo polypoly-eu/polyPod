@@ -25,7 +25,7 @@
  -->
 
 <!-- Link here the related JIRA issue in case of a bug / feature -->
-### 🏗️ Fixes #(jira-issue-number)
+### 🏗️ Fixes (#jira-issue-number or link)
 
 
 <!-- Optional -->
@@ -36,5 +36,7 @@
     of how the app looked before and how it looks after the change.
 -->
 
+
+<!-- Please, delete comments when you are done -->
 
 ♥️ Thank you!
