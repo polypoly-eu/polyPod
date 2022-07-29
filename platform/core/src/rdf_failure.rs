@@ -1,5 +1,6 @@
 use oxigraph::{sparql::EvaluationError, store::StorageError};
 use serde::Serialize;
+use spargebra::ParseError;
 
 #[derive(Debug, Clone, Serialize)]
 pub enum FailureCode {
@@ -32,6 +33,13 @@ impl RdfFailure {
     pub fn failed_to_initialize_store(error: StorageError) -> Self {
         RdfFailure {
             code: FailureCode::StorageError.value(),
+            message: error.to_string()
+        }
+    }
+
+    pub fn map_query_parse_error(error: ParseError) -> Self {
+        RdfFailure {
+            code: FailureCode::ParsingError.value(),
             message: error.to_string()
         }
     }

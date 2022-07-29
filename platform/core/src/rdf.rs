@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 use oxigraph::store::{Store, StorageError};
+use spargebra::{Query, Update};
 use serde::Deserialize;
 use serde::Serialize;
 
@@ -36,16 +37,37 @@ fn init_store(app_path: String) -> Result<Store, StorageError> {
     Store::open(app_path + env!("RDF_DB_PATH"))
 }
 
+fn check_query(query: SPARQLQuery) -> Result<Query, RdfFailure> {
+    return match Query::parse(&query, None) {
+        Ok(query) => Ok(query),
+        Err(error) => Err(RdfFailure::map_query_parse_error(error))
+    };
+}
+
+fn check_update(query: SPARQLQuery) -> Result<Update, RdfFailure> {
+    return match Update::parse(&query, None) {
+        Ok(query) => Ok(query),
+        Err(error) => Err(RdfFailure::map_query_parse_error(error))
+    };
+}
+
 pub fn rdf_query(query: SPARQLQuery, app_path: String) -> Result<QueryResults, RdfFailure> {
     let store = init_store(app_path).map_err(RdfFailure::failed_to_initialize_store)?;
-    let query_results = store.query(&query).map_err( RdfFailure::map_evaluation_error)?;
-    to_serializable_format(query_results)
+    match check_query(query.to_string()) {
+        Ok(_) => {
+            let query_results = store.query(&query).map_err( RdfFailure::map_evaluation_error)?;
+            return to_serializable_format(query_results)
+        },
+        Err(error) => return Err(error)
+    }
 }
 
 pub fn rdf_update(query: SPARQLQuery, app_path: String) -> Result<(), RdfFailure> {
     let store = init_store(app_path).map_err(RdfFailure::failed_to_initialize_store)?;
-    let query_results  = store.update(&query).map_err(RdfFailure::map_evaluation_error);
-    query_results
+    match check_update(query.to_string()) {
+        Ok(_) => return store.update(&query).map_err(RdfFailure::map_evaluation_error),
+        Err(error) => return Err(error)
+    }
 }
 
 fn to_serializable_format(query_results: oxigraph::sparql::QueryResults) -> Result<QueryResults, RdfFailure> {
