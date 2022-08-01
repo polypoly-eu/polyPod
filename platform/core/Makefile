@@ -17,11 +17,7 @@ android_core := PolyPodCoreAndroid/core/src/main/
 android_version := 24
 google_repo := https://dl.google.com/android/repository
 android_triples := aarch64-linux-android x86_64-linux-android
-<<<<<<< HEAD
-android_binaries := $(patsubst %, target/%, $(android_triples))
-=======
 android_binaries := $(patsubst %, target/%/libpolypod_core.so, $(android_triples))
->>>>>>> rdf
 android_architectures := arm64-v8a x86_64
 jni_libs_copy_path := $(android_core)/jniLibs
 android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%/libpolypod_core.so, $(android_architectures))
