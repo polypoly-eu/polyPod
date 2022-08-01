@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "rollup -c rollup.config.js"
+    "build": "rollup -c rollup.config.js",
+    "test": "jest --coverage tests/*"
   },
   "dependencies": {
     "uuid": "^8.3.2"
