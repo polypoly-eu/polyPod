@@ -16,7 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Log.bootstrap()
         Log.info("Application initialized")
 
-        switch Core.instance.bootstrap(languageCode: Language.current) {
+        let documentsUrl = try! FileManager.default.url(
+            for: .documentDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: false
+        )
+        switch Core.instance.bootstrap(languageCode: Language.current, workDir: documentsUrl.path) {
         case .success:
             Log.info("Core bootstraped!")
         case let .failure(content):
@@ -28,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             fatalError(content.localizedDescription)
         }
-
+        
         let defaults = UserDefaults.standard
         defaults.disableDataProtection()
         if defaults.bool(forKey: UserDefaults.Keys.resetUserDefaults.rawValue) {

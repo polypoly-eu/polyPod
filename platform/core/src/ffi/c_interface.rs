@@ -1,10 +1,10 @@
 use crate::core_failure::CoreFailure;
-use crate::ffi::serialize;
 use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
 use crate::core;
 use std::os::raw::c_char;
+use crate::common::serialization::message_pack_serialize;
 
 /// # Safety
 /// This function can be unsafe if the language_code pointer is null or the string is in wrong format.
@@ -16,11 +16,14 @@ use std::os::raw::c_char;
 /// - language_code: User's locale language code.
 /// Returns a flatbuffer byte array with core_bootstrap_response.
 #[no_mangle]
-pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> CByteBuffer {
-    create_byte_buffer(serialize(
-        cstring_to_str(&language_code)
-            .map(String::from)
-            .and_then(core::bootstrap),
+pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char, work_dir: *const c_char) -> CByteBuffer {
+    fn bootstrap(language_code: *const c_char, work_dir: *const c_char) -> Result<(), CoreFailure> {
+        let language_code = unsafe { cstring_to_str(&language_code).map(String::from)? };
+        let work_dir = unsafe { cstring_to_str(&work_dir).map(String::from)? };
+        core::bootstrap(language_code, work_dir)
+    }
+    create_byte_buffer(message_pack_serialize(
+        bootstrap(language_code, work_dir)
     ))
 }
 
@@ -32,8 +35,23 @@ pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> CByteBu
 /// Returns Result<Vec<FeatureCategory>, CoreFailure> as MessagePack value.
 #[no_mangle]
 pub unsafe extern "C" fn load_feature_categories(features_dir: *const c_char) -> CByteBuffer {
-    create_byte_buffer(serialize(
+    create_byte_buffer(message_pack_serialize(
         cstring_to_str(&features_dir).and_then(core::load_feature_categories),
+    ))
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn is_session_expired() -> CByteBuffer {
+    create_byte_buffer(message_pack_serialize(
+       core::is_user_session_expired() 
+    ))
+}
+
+
+#[no_mangle]
+pub unsafe extern "C" fn app_did_become_inactive() -> CByteBuffer {
+    create_byte_buffer(message_pack_serialize(
+       core::app_did_become_inactive() 
     ))
 }
 
