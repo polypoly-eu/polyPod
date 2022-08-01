@@ -37,7 +37,7 @@ export function jsArrayToTriplesString(
     predicate: string,
     arr: unknown[]
 ) {
-    let triplesString: string = `${subject} ${predicate} `;
+    let triplesString = "";
     const objectsToStore: Object[] = [];
     const elementsToJoin: unknown[] = [];
     for (let element of arr) {
@@ -55,9 +55,16 @@ export function jsArrayToTriplesString(
             typeof element === "string" ? `"${element}"` : element
         );
     }
-    triplesString += elementsToJoin.join(", ");
-    for (let obj of objectsToStore)
-        triplesString += jsObjectToTriplesString(subject, predicate, obj);
+    if (elementsToJoin.length > 0) {
+        triplesString += `${subject} ${predicate} ` + elementsToJoin.join(", ");
+    }
+
+    if (elementsToJoin.length > 0 && objectsToStore.length > 0)
+        triplesString += " ";
+
+    triplesString += objectsToStore
+        .map((obj) => jsObjectToTriplesString(subject, predicate, obj))
+        .join(" ");
 
     return triplesString;
 }
