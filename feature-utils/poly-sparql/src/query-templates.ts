@@ -2,7 +2,7 @@ import { polyNs, rdfNs, rdfsNs, xmlNs } from "./namespaces";
 
 export function sparqleInsertTemplate({ graph, triples }): string {
     let tripleString = "";
-    triples.forEach((triple) => (tripleString += triple + " . "));
+    triples.forEach((triple) => (tripleString += triple));
     return `\
     PREFIX poly: ${polyNs} .\
     PREFIX rdf: ${rdfNs} .\
@@ -16,7 +16,7 @@ export function sparqleInsertTemplate({ graph, triples }): string {
 
 export function sparqleDeleteTemplate({ graph, triples }): string {
     let tripleString = "";
-    triples.forEach((triple) => (tripleString += triple + " . "));
+    triples.forEach((triple) => (tripleString += triple));
     return `\
     PREFIX poly: ${polyNs} .\
     PREFIX rdf: ${rdfNs} .\

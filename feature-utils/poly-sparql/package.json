@@ -1,6 +1,6 @@
 {
   "name": "@polypoly-eu/poly-sparql",
-  "main": "src/index.js",
+  "main": "src/index.ts",
   "private": true,
   "type": "module",
   "scripts": {

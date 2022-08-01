@@ -9,6 +9,7 @@
         "feature-utils/poly-import",
         "feature-utils/poly-analysis",
         "feature-utils/poly-look",
+        "feature-utils/poly-sparql",
         "feature-utils/silly-i18n",
         "features/bundle",
         "features/demo",
