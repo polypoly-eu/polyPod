@@ -243,6 +243,10 @@ mod tests {
                 .clone()
         }
         #[allow(unused_variables)]
+        fn copy(&self, from_file_path: &str, to_file_path: &str) -> Result<(), CoreFailure> {
+            Ok(())
+        }
+        #[allow(unused_variables)]
         fn create_dir_structure(&self, path: &str) -> Result<(), CoreFailure> {
             Ok(())
         }

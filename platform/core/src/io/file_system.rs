@@ -4,6 +4,7 @@ use std::path::Path;
 use url::Url;
 use zip::ZipArchive;
 
+// I think the error should not be of type core failure. How is a platform going to know about CoreFailure?
 pub trait FileSystem {
     fn create_dir_structure(&self, path: &str) -> Result<(), CoreFailure>;
     fn exists(&self, path: &str) -> bool;
@@ -14,6 +15,7 @@ pub trait FileSystem {
     fn remove(&self, path: &str) -> Result<(), CoreFailure>;
     fn dir_children(&self, dir_path: &str) -> Result<Vec<String>, CoreFailure>;
     fn file_content(&self, file_path: &str) -> Result<Vec<u8>, CoreFailure>;
+    fn copy(&self, from_file_path: &str, to_file_path: &str) -> Result<(), CoreFailure>;
     fn name(&self, path: &str) -> Result<String, CoreFailure>;
 }
 
@@ -117,7 +119,18 @@ impl FileSystem for DefaultFileSystem {
         })
     }
 
-    //"Could not get filename from path".to_string()
+    fn copy(&self, from_file_path: &str, to_file_path: &str) -> Result<(), CoreFailure> {
+        let from = Path::new(from_file_path);
+        let to = Path::new(to_file_path);
+        fs::copy(from, to).map_err(|err| {
+            CoreFailure::failed_file_system_operation(
+                from_file_path.to_string() + " and " + &to_file_path,
+                err.to_string(),
+            )
+        })?;
+        Ok(())
+    }
+
     fn name(&self, path: &str) -> Result<String, CoreFailure> {
         let _path = Path::new(&path);
         _path

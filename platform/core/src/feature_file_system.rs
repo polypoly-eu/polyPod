@@ -27,7 +27,7 @@ fn feature_files_path(config: &impl FeatureFSConfigTrait) -> Result<String, Core
     let feature_name = config
         .feature_name()
         .map_err(CoreFailure::failed_to_create_feature_files_path)?;
-    Ok(features_path + "/" + &feature_name)
+    Ok(features_path + "/" + &feature_name + "/")
 }
 
 type ResourceUrl = String;
@@ -36,8 +36,8 @@ type ResourceId = String;
 
 #[allow(dead_code)]
 fn resource_url_from_id(id: &ResourceId) -> ResourceUrl {
-    let res_prefix = "polypod://FeatureFiles".to_string();
-    res_prefix + "/" + id
+    let res_prefix = "polypod://FeatureFiles/".to_string();
+    res_prefix + id
 }
 
 #[allow(dead_code)]
@@ -46,7 +46,7 @@ fn fs_path_from_id(
     config: &impl FeatureFSConfigTrait,
 ) -> Result<String, CoreFailure> {
     let fs_prefix = feature_files_path(config)?;
-    Ok(fs_prefix + "/" + id)
+    Ok(fs_prefix + id)
 }
 
 #[allow(dead_code)]
@@ -55,7 +55,7 @@ fn fs_path_from_resource_url(
     config: &impl FeatureFSConfigTrait,
 ) -> Result<String, CoreFailure> {
     let fs_prefix = feature_files_path(config)?;
-    let res_prefix = "polypod://FeatureFiles".to_string();
+    let res_prefix = "polypod://FeatureFiles/".to_string();
     swap_prefix(resource_url, &res_prefix, &fs_prefix).map_err(|err| {
         CoreFailure::failed_to_convert_to_fs_path_from_resource_url(resource_url.to_string(), err)
     })
@@ -92,8 +92,9 @@ fn make_sure_feature_files_dir_exists(
     Ok(())
 }
 
+// if no dest_resource_url is provided, it creates one and returns it.
 #[allow(dead_code)]
-fn import(
+fn import_archive(
     url: &Url,
     dest_resource_url: Option<ResourceUrl>,
     platform_fs: &impl FileSystem,
@@ -109,6 +110,42 @@ fn import(
     platform_fs.unzip(url.as_str(), &fs_path)?;
 
     resource_url_from_fs_path(&fs_path, config)
+}
+
+// if no dest_resource_url is provided, it creates one and returns it.
+// it returns the path of the folder in which the file was written
+#[allow(dead_code)]
+fn write_file(
+    url: &Url,
+    dest_resource_url: Option<ResourceUrl>,
+    platform_fs: &impl FileSystem,
+    config: &impl FeatureFSConfigTrait,
+) -> Result<ResourceUrl, CoreFailure> {
+    make_sure_feature_files_dir_exists(platform_fs, config)?;
+
+    let dir_path = match dest_resource_url {
+        Some(res_url) => fs_path_from_resource_url(&res_url, config),
+        None => fs_path_from_id(&Uuid::new_v4().to_string(), config),
+    }?;
+
+    // get contents from that url. Should I use fetch? Should this be platform specific?
+    // assume a file url for now
+    let url_path = url
+        .to_file_path()
+        .map_err(|()| CoreFailure::failed_to_get_file_path(url.to_owned(), "".to_string()))?
+        .to_str()
+        .unwrap_or_default()
+        .to_owned();
+
+    let file_name = url.last_segment().map_err(|err| {
+        CoreFailure::failed_to_get_last_segment_from_url(url.to_owned(), err.to_string())
+    })?;
+
+    let file_path = dir_path.to_string() + "/" + &file_name;
+
+    platform_fs.copy(&url_path, &file_path)?;
+
+    resource_url_from_fs_path(&file_path, config)
 }
 
 #[allow(dead_code)]
@@ -280,7 +317,7 @@ mod tests {
         let result = fs_path_from_resource_url(&res_id, &config);
         assert!(result.is_ok());
 
-        let fs_path = feature_files_path(&config).unwrap() + "/" + &id;
+        let fs_path = feature_files_path(&config).unwrap() + &id;
         assert_eq!(result.unwrap(), fs_path);
     }
 
@@ -302,7 +339,7 @@ mod tests {
         let fs = DefaultFileSystem {};
 
         let url = zip_file_url();
-        let result = import(&url, None, &fs, &config);
+        let result = import_archive(&url, None, &fs, &config);
         assert!(result.is_ok());
         assert_eq!(
             Path::new(&feature_files_path(&config).unwrap()).exists(),
@@ -316,7 +353,7 @@ mod tests {
         let fs = DefaultFileSystem {};
 
         let url = zip_file_url();
-        let result = import(&url, None, &fs, &config);
+        let result = import_archive(&url, None, &fs, &config);
         assert!(result.is_ok());
 
         let file_path = fs_path_from_resource_url(&result.unwrap(), &config).unwrap() + "/test";
@@ -491,5 +528,48 @@ mod tests {
         let resource_url = resource_url_from_fs_path(&fs_path, &config).unwrap();
         let result = read_file(&resource_url, &fs, &config);
         assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_write_file_valid() {
+        let config = MockFSConfig::new();
+        let fs = DefaultFileSystem {};
+
+        let id = id();
+        let fs_path = create_temp_fs_dir(&id, &fs, &config);
+
+        assert_eq!(Path::new(&fs_path).exists(), true);
+
+        let url = zip_file_url();
+        let file_name = url.last_segment().unwrap();
+        let resource_url = resource_url_from_fs_path(&fs_path, &config).unwrap();
+
+        let result = write_file(&url, Some(resource_url), &fs, &config);
+        let expected_fs_path = fs_path.to_string() + "/" + &file_name;
+
+        //"File system failed for path '/Users/paladetimotei/Documents/Developer/polypoly/polyPod/platform/core/src/test_files/test.zip' with error: 'Is a directory (os error 21)'"
+        // "File system failed for path '/Users/paladetimotei/Documents/Developer/polypoly/polyPod/platform/core/src/test_files/test.zip | /var/folders/4s/3dpn90nx3_s8fh6v2lyyq9380000gn/T/.tmpc9p9Nw/Test//8970r10972490710497291' with error: 'Is a directory (os error 21)'"
+        assert!(result.is_ok());
+        let result_path = result.unwrap();
+        let expected_resource_url = resource_url_from_fs_path(&expected_fs_path, &config).unwrap();
+
+        assert_eq!(result_path, expected_resource_url);
+        assert_eq!(Path::new(&expected_fs_path).exists(), true);
+    }
+}
+
+trait UrlUtils {
+    fn last_segment(&self) -> Result<String, String>;
+}
+
+impl UrlUtils for Url {
+    fn last_segment(&self) -> Result<String, String> {
+        self.path_segments()
+            .map(|c| c.collect::<Vec<_>>())
+            .and_then(|segments| segments.last().cloned())
+            .map(|id| id.to_string())
+            .ok_or_else(|| {
+                "Could not extract fs id from resource id. No path components".to_string()
+            })
     }
 }

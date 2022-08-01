@@ -1,4 +1,5 @@
 use serde::Serialize;
+use url::Url;
 
 #[derive(Debug, Clone, Serialize)]
 pub enum FailureCode {
@@ -17,6 +18,8 @@ pub enum FailureCode {
     FailedToCreateFeatureFilesPath,
     FailedToConvertToFsPath,
     FailedToConvertToResourceUrl,
+    FailedToGetFilePath,
+    FailedToGetLastSegmentFromUrl,
 }
 
 impl FailureCode {
@@ -152,6 +155,26 @@ impl CoreFailure {
             code: FailureCode::FailedToConvertToResourceUrl.value(),
             message: format!(
                 "Failed to create fs path from resource url {} with error: '{}'",
+                url, message,
+            ),
+        }
+    }
+
+    pub fn failed_to_get_file_path(url: Url, message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToGetFilePath.value(),
+            message: format!(
+                "Failed to get file path from url {} with error: '{}'",
+                url, message,
+            ),
+        }
+    }
+
+    pub fn failed_to_get_last_segment_from_url(url: Url, message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToGetLastSegmentFromUrl.value(),
+            message: format!(
+                "Failed to get last segment from url {} with error: '{}'",
                 url, message,
             ),
         }
