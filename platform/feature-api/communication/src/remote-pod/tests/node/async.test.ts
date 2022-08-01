@@ -9,15 +9,10 @@ import {
     DataFactory,
     podSpec,
 } from "@polypoly-eu/api";
-import oxigraph from "../../../../node_modules/oxigraph/node.js";
 
 describe("Async pod", () => {
     const fs = new Volume().promises as unknown as FS;
-    const underlying = new DefaultPod(
-        factory.dataset(),
-        fs,
-        new oxigraph.Store()
-    );
+    const underlying = new DefaultPod(factory.dataset(), fs);
 
     describe("Resolved promise", () => {
         podSpec(
