@@ -124,7 +124,7 @@ impl FileSystem for DefaultFileSystem {
         let to = Path::new(to_file_path);
         fs::copy(from, to).map_err(|err| {
             CoreFailure::failed_file_system_operation(
-                from_file_path.to_string() + " and " + &to_file_path,
+                from_file_path.to_string() + " and " + to_file_path,
                 err.to_string(),
             )
         })?;
