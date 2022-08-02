@@ -1,11 +1,11 @@
 import { v4 as uuid } from "uuid";
 
 export function jsObjectToTriplesString(
-    subject: string,
-    predicate: string,
-    jsObj: Object,
-    blankNodeString: string = "_:" + uuid()
-): string {
+    subject,
+    predicate,
+    jsObj,
+    blankNodeString = "_:" + uuid()
+) {
     let triplesString = `${subject} ${predicate} ${blankNodeString} `;
     for (let [key, value] of Object.entries(jsObj)) {
         const keyPredicate = "poly:" + key;
@@ -32,14 +32,10 @@ export function jsObjectToTriplesString(
     return triplesString;
 }
 
-export function jsArrayToTriplesString(
-    subject: string,
-    predicate: string,
-    arr: unknown[]
-) {
+export function jsArrayToTriplesString(subject, predicate, arr) {
     let triplesString = "";
-    const objectsToStore: Object[] = [];
-    const elementsToJoin: unknown[] = [];
+    const objectsToStore = [];
+    const elementsToJoin = [];
     for (let element of arr) {
         if (!element) continue;
         if (typeof element === "object") {

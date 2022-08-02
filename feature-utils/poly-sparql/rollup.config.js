@@ -1,15 +1,11 @@
-import sucrase from "@rollup/plugin-sucrase";
+import resolve from "@rollup/plugin-node-resolve";
 
 export default {
-    input: "src/index.ts",
+    input: "src/index.js",
     output: {
         file: "dist/index.js",
-        format: "cjs",
+        format: "iife",
         name: "polySparql",
     },
-    plugins: [
-        sucrase({
-            transforms: ["typescript"],
-        }),
-    ],
+    plugins: [resolve()],
 };

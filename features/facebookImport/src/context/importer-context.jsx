@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import i18n from "!silly-i18n";
 import { useHistory, useLocation } from "react-router-dom";
+import {
+    sparqleInsertTemplate,
+    jsObjectToTriplesString,
+} from "@polypoly-eu/poly-sparql";
 
 import popUps from "../popUps";
 
@@ -61,7 +65,28 @@ export const ImporterProvider = ({ children }) => {
 
     //on startup
     useEffect(() => {
-        initPod().then((newPod) => setPod(newPod));
+        initPod().then(async (newPod) => {
+            setPod(newPod);
+            const a = {
+                a: 1,
+                b: "b",
+                c: 3.5,
+            };
+            const { polyIn } = window.pod;
+            const query = sparqleInsertTemplate({
+                triples: jsObjectToTriplesString(
+                    "<file://123>",
+                    "poly:test",
+                    a
+                ),
+            });
+            console.log(query);
+            await polyIn.update(query);
+            const triples = await polyIn.query(
+                "SELECT ?s ?p ?o WHERE { ?s ?p ?o }"
+            );
+            console.log(triples);
+        });
     }, []);
 
     //on history change
