@@ -118,7 +118,7 @@ const App = () => {
     }, []);
 
     return (
-        <div className="feature-store-preview">
+        <div className="preview-screen-container">
             <div className="poly-nav-bar-separator-overlay" />
             <Screen
                 className="poly-theme-light background-white"
