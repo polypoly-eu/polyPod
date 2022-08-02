@@ -377,7 +377,7 @@ class IDBPolyOut implements PolyOut {
                 reject(`${destUrl} is not a polypod:// URI`);
             }
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            const id = destUrl || new PolyUri().toString;
+            const id = destUrl || new PolyUri().toString();
 
             tx.objectStore(OBJECT_STORE_POLY_OUT).add({
                 id,
@@ -569,7 +569,7 @@ type EndpointKeyId = keyof EndpointJSON;
  * @returns EndpointInfo | null
  */
 function getEndpoint(endpointId: EndpointKeyId): EndpointInfo | null {
-    return (endpointsJson as EndpointJSON)[endpointId] || null;
+    return (endpointsJson as unknown as EndpointJSON)[endpointId] || null;
 }
 
 /**
@@ -792,7 +792,7 @@ function luminance(featureColor: string): number {
 /**
  * It determines the foreground and background colors for the navbar based on the primary color of the
  * app.
- * @param {Manifest} file
+ * @param {Manifest} manifest
  * @returns { fg: string; bg: string } object
  */
 function determineNavBarColors(manifest: Manifest): { fg: string; bg: string } {
@@ -815,8 +815,6 @@ function createNavBarFrame(title: string): HTMLElement {
     frame.style.display = "block";
     frame.style.width = "100%";
     frame.style.height = "50px";
-    frame.frameBorder = "0";
-    frame.scrolling = "no";
     frame.id = NAV_FRAME_ID;
 
     const navBarColors = determineNavBarColors(window.manifest);

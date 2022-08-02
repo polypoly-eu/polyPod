@@ -1,0 +1,29 @@
+.notification-container .notification-banner {
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calc(var(--gdu) * 4);
+    margin: calc(var(--gdu) * -6) calc(var(--gdu) * -4) calc(var(--gdu) * 6) calc(var(--gdu) * -4);
+    box-sizing: border-box;
+}
+
+.notification-container .standard {
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-900);
+}
+
+.notification-container .error {
+    background-color: var(--color-red-200);
+    color: var(--color-red-900);
+}
+
+.notification-container .success {
+    background-color: var(--color-green-200);
+    color: var(--color-green-950);
+}
+
+.notification-container .warning {
+    background-color: var(--color-yellow-200);
+    color: var(--color-yellow-800);
+}

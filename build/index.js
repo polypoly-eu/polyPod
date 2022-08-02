@@ -64,7 +64,7 @@ async function main() {
         return exitCode;
     }
 
-    const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx", "."];
+    const eslintOptions = ["--ext", ".ts,.js,.tsx,.jsx,.mjs", "."];
 
     if (
         (!existsSync("node_modules") &&

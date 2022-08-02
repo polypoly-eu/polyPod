@@ -11,23 +11,3 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
-
-.explore-view .pop-up {
-    width: 100%;
-    height: 56px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.explore-view .unsuccessfully {
-    background-color: var(--color-red-200);
-    color: var(--color-red-900);
-}
-
-.explore-view .successfully {
-    background-color: var(--color-green-200);
-    color: var(--color-green-800);
-}
