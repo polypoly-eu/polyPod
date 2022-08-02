@@ -1,4 +1,5 @@
 use serde::Serialize;
+use url::Url;
 
 #[derive(Debug, Clone, Serialize)]
 pub enum FailureCode {
@@ -11,6 +12,14 @@ pub enum FailureCode {
     FailedToConvertJavaString,
     FailedToParseFeatureCategoriesJSON,
     FailedToReadFile,
+    FailedFileSystemOperation,
+    FailedToParseURL,
+    FailedToUnzip,
+    FailedToCreateFeatureFilesPath,
+    FailedToConvertToFsPath,
+    FailedToConvertToResourceUrl,
+    FailedToGetFilePath,
+    FailedToGetLastSegmentFromUrl,
 }
 
 impl FailureCode {
@@ -90,6 +99,83 @@ impl CoreFailure {
             message: format!(
                 "Failed to read file from path '{}', error: '{}'",
                 path, message,
+            ),
+        }
+    }
+
+    pub fn failed_file_system_operation(path: String, message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedFileSystemOperation.value(),
+            message: format!(
+                "File system failed for path '{}' with error: '{}'",
+                path, message,
+            ),
+        }
+    }
+
+    pub fn failed_to_parse_url(url: String, message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToParseURL.value(),
+            message: format!("Failed to parse url '{}' with error: '{}'", url, message,),
+        }
+    }
+
+    pub fn failed_to_unzip(url: String, message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToUnzip.value(),
+            message: format!(
+                "Failed to unzip resource at url '{}' with error: '{}'",
+                url, message,
+            ),
+        }
+    }
+
+    pub fn failed_to_create_feature_files_path(message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToCreateFeatureFilesPath.value(),
+            message: format!(
+                "Failed to create feature files path with error: '{}'",
+                message,
+            ),
+        }
+    }
+
+    pub fn failed_to_convert_to_fs_path_from_resource_url(url: String, message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToConvertToFsPath.value(),
+            message: format!(
+                "Failed to create fs path from resource url {} with error: '{}'",
+                url, message,
+            ),
+        }
+    }
+
+    pub fn failed_to_convert_to_resource_url_from_fs_path(url: String, message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToConvertToResourceUrl.value(),
+            message: format!(
+                "Failed to create fs path from resource url {} with error: '{}'",
+                url, message,
+            ),
+        }
+    }
+
+    pub fn failed_to_get_file_path(url: Url, message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToGetFilePath.value(),
+            message: format!(
+                "Failed to get file path from url {} with error: '{}'",
+                url, message,
+            ),
+        }
+    }
+
+    pub fn failed_to_get_last_segment_from_url(url: Url, message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToGetLastSegmentFromUrl.value(),
+            message: format!(
+                "Failed to get last segment from url {} with error: '{}'",
+                url, message,
             ),
         }
     }
