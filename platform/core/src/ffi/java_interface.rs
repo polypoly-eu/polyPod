@@ -1,11 +1,12 @@
 use crate::core::bootstrap;
 use crate::core::load_feature_categories;
+use crate::core::{self, NativeRequest, NativeResponse};
 use crate::core_failure::CoreFailure;
 use crate::ffi::serialize;
 use jni::{
-    objects::{JClass, JString},
-    sys::jbyteArray,
-    JNIEnv,
+    objects::{GlobalRef, JClass, JObject, JString, JValue},
+    sys::{jbyteArray, jint, jlong, jstring},
+    JNIEnv, JavaVM,
 };
 
 /// Bootstrap core with the given configuration:
@@ -16,13 +17,65 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     env: JNIEnv,
     _: JClass,
     language_code: JString,
+    callback: JObject,
 ) -> jbyteArray {
+    let bridge = BridgeToNative {
+        callback: env.new_global_ref(callback).unwrap(),
+        java_vm: env.get_java_vm().unwrap(),
+    };
     env.byte_array_from_slice(&serialize(
         read_jni_string(&env, language_code)
             .map(String::from)
-            .and_then(bootstrap),
+            .and_then(|language_code| core::bootstrap(language_code, Box::new(bridge))),
     ))
     .unwrap()
+}
+
+struct BridgeToNative {
+    // The callback passed from Android is a local reference: only valid during the method call.
+    // To store it, we need to put it in a global reference.
+    // See https://developer.android.com/training/articles/perf-jni#local-and-global-references
+    callback: GlobalRef,
+
+    // We need JNIEnv to call the callback.
+    // JNIEnv is valid only in the same thread, so we have to store the vm instead, and use it to get
+    // a JNIEnv for the current thread.
+    // See https://developer.android.com/training/articles/perf-jni#javavm-and-jnienvb
+    java_vm: JavaVM,
+}
+
+impl core::PlatformHookRequest for BridgeToNative {
+    fn perform_request(&self, request: NativeRequest) -> Result<NativeResponse, String> {
+        match self.java_vm.attach_current_thread() {
+            Ok(env) => {
+                let request_bytes = env.byte_array_from_slice(&serialize(request)).unwrap();
+                let result = env.call_method(
+                    self.callback.as_obj(),
+                    "performRequest",
+                    "([B)[B",
+                    &[JValue::Object(JObject::from(request_bytes))],
+                );
+                // TODO: convert result to Native Response
+            }
+            // The Android LogCat will not show this, but for consistency or testing with non-Android JNI.
+            // Note that if we panic, LogCat will also not show a message, or location.
+            // TODO consider writing to file. Otherwise it's impossible to notice this.
+            Err(e) => println!("Couldn't get env::",),
+        }
+
+        Err("Failed miserably".to_string())
+    }
+}
+
+#[no_mangle]
+pub extern "system" fn Java_coop_polypoly_core_JniApi_native(
+    env: JNIEnv,
+    _class: JClass,
+    n: jint,
+    callback: JObject,
+) {
+    env.call_method(callback, "methodB", "(I)V", &[1.into()])
+        .unwrap();
 }
 
 /// Loads feature categories from the given features dir.
@@ -39,6 +92,44 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_loadFeatureCategories(
     ))
     .unwrap()
 }
+
+// pub struct BridgeToNative {
+//     env: JNIEnv,
+// }
+
+// /*
+// jclass testClass = (*env) -> FindClass(env, "test/Test");
+// jmethodID methodB = (*env) -> GetStaticMethodID(env, testClass, "methodB", "()V");
+// (*env) -> CallStaticVoidMethod(env, testClass, methodB, NULL);
+// */
+// impl core::PlatformHookRequest for BridgeToNative {
+//     fn perform_request(
+//         &self,
+//         request: core::NativeRequest,
+//     ) -> Result<core::NativeResponse, String> {
+//         let class = self.env.find_class("coop/polypoly/core/JniApi").unwrap();
+//         let result = class.call_static_method(class, "methodB", "()V", &[]);
+
+//         let request_byte_buffer = unsafe { create_byte_buffer(serialize(request)) };
+//         let response_byte_buffer = (self.perform_request)(request_byte_buffer);
+//         let response: Result<NativeResponse, String> =
+//             unsafe { deserialize(byte_buffer_to_bytes(&response_byte_buffer)) };
+//         // match &response {
+//         //     Ok(value) => match value {
+//         //         NativeResponse::FeatureName(name) => {
+//         //             let x = name.to_owned();
+//         //             print!("");
+//         //         }
+//         //     },
+//         //     Err(err) => {
+//         //         let x = err.to_owned();
+//         //         print!("");
+//         //     }
+//         // };
+//         (self.free_bytes)(response_byte_buffer.data);
+//         return response;
+//     }
+// }
 
 fn read_jni_string(env: &JNIEnv, field: JString) -> Result<String, CoreFailure> {
     env.get_string(field)
