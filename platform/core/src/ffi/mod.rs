@@ -18,10 +18,10 @@ fn serialize<T: Serialize>(input: T) -> Vec<u8> {
     buf
 }
 
-fn deserialize<T>(input: Vec<u8>) -> T
+fn deserialize<T>(input: Vec<u8>) -> Result<T, String>
 where
     T: DeserializeOwned,
 {
     let mut de = Deserializer::new(Cursor::new(&input[..]));
-    Deserialize::deserialize(&mut de).unwrap()
+    Deserialize::deserialize(&mut de).map_err(|err| err.to_string())
 }
