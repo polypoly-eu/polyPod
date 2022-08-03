@@ -76,9 +76,13 @@ unsafe fn create_byte_buffer(bytes: Vec<u8>) -> CByteBuffer {
     }
 }
 
-unsafe fn byte_buffer_to_bytes(buffer: &CByteBuffer) -> Vec<u8> {
-    let slice = std::slice::from_raw_parts(buffer.data, buffer.length.try_into().unwrap());
-    slice.to_vec()
+unsafe fn byte_buffer_to_bytes(buffer: &CByteBuffer) -> Result<Vec<u8>, String> {
+    let length: usize = buffer
+        .length
+        .try_into()
+        .map_err(|_| "Could not get buffer length".to_string())?;
+    let slice = std::slice::from_raw_parts(buffer.data, length);
+    Ok(slice.to_vec())
 }
 
 #[repr(C)]
@@ -91,8 +95,8 @@ impl core::PlatformHookRequest for BridgeToNative {
     fn perform_request(&self, request: NativeRequest) -> Result<NativeResponse, String> {
         let request_byte_buffer = unsafe { create_byte_buffer(serialize(request)) };
         let response_byte_buffer = (self.perform_request)(request_byte_buffer);
-        let response: Result<NativeResponse, String> =
-            unsafe { deserialize(byte_buffer_to_bytes(&response_byte_buffer)) };
+        let response_bytes = unsafe { byte_buffer_to_bytes(&response_byte_buffer)? };
+        let response: Result<NativeResponse, String> = deserialize(response_bytes);
         // match &response {
         //     Ok(value) => match value {
         //         NativeResponse::FeatureName(name) => {
