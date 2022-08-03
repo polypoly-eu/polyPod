@@ -77,6 +77,10 @@ mod tests {
         "), String::from(".")).unwrap();
 
         print!("{:?}", query_result);
-        assert!(false)
+
+        let store = init_store(".".to_string()).unwrap();
+        let _ = store.clear();
+
+        assert_eq!(query_result, "{\"head\":{\"vars\":[\"s\",\"p\",\"o\"]},\"results\":{\"bindings\":[{\"s\":{\"type\":\"uri\",\"value\":\"http://example.com/you\"},\"p\":{\"type\":\"uri\",\"value\":\"http://example.com/are\"},\"o\":{\"type\":\"literal\",\"value\":\"great\"}}]}}".to_string())
     }
 }
