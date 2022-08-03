@@ -1,6 +1,7 @@
 use oxigraph::{sparql::EvaluationError, store::StorageError};
 use serde::Serialize;
 use spargebra::ParseError;
+use std::str::Utf8Error;
 
 #[derive(Debug, Clone, Serialize)]
 pub enum FailureCode {
@@ -60,4 +61,12 @@ impl RdfFailure {
             }
         }
     }
+
+    pub fn map_utf8_error(error: Utf8Error) -> Self {
+        RdfFailure {
+            code: FailureCode::ResultSerializationError.value(),
+            message: String::from("Failed to serialize the query Result: ") + &error.to_string()
+        }
+    }
+
 }

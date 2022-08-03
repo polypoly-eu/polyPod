@@ -670,6 +670,7 @@ dependencies = [
  "rmp-serde",
  "serde",
  "serde_json",
+ "sparesults",
  "spargebra",
 ]
 

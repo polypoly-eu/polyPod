@@ -1,7 +1,7 @@
 
 use crate::{
     core_failure::CoreFailure,
-    rdf::{SPARQLQuery, rdf_query, rdf_update, QueryResults},
+    rdf::{SPARQLQuery, rdf_query, rdf_update},
     feature_categories,
     io::file_system::DefaultFileSystem
 };
@@ -46,7 +46,7 @@ pub fn load_feature_categories(
     )
 }
 
-pub fn exec_rdf_query(query: SPARQLQuery, app_path: String) -> Result<QueryResults, CoreFailure> {
+pub fn exec_rdf_query(query: SPARQLQuery, app_path: String) -> Result<String, CoreFailure> {
     rdf_query(query, app_path).map_err(CoreFailure::map_rdf_to_core_failure)
 }
 
