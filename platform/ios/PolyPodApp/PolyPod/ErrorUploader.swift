@@ -14,7 +14,7 @@ class ErrorUploader {
             completionHandler("uploadToServer", MessagePackValue("\(#function): No endpoint found for \(endpointId)"))
             return
         }
-        let payload = jsonStringify(["errorMsg"])
+        let payload = jsonStringify([errorMsg])
 
         PodApi.shared.endpoint.send(
             endpointId: endpointId,
