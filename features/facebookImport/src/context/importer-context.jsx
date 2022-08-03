@@ -65,28 +65,7 @@ export const ImporterProvider = ({ children }) => {
 
     //on startup
     useEffect(() => {
-        initPod().then(async (newPod) => {
-            setPod(newPod);
-            const a = {
-                a: 1,
-                b: "b",
-                c: 3.5,
-            };
-            const { polyIn } = window.pod;
-            const query = sparqleInsertTemplate({
-                triples: jsObjectToTriplesString(
-                    "<file://123>",
-                    "poly:test",
-                    a
-                ),
-            });
-            console.log(query);
-            await polyIn.update(query);
-            const triples = await polyIn.query(
-                "SELECT ?s ?p ?o WHERE { ?s ?p ?o }"
-            );
-            console.log(triples);
-        });
+        initPod().then(async (newPod) => setPod(newPod));
     }, []);
 
     //on history change
