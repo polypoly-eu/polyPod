@@ -79,17 +79,6 @@ impl core::PlatformHookRequest for BridgeToNative {
     }
 }
 
-#[no_mangle]
-pub extern "system" fn Java_coop_polypoly_core_JniApi_native(
-    env: JNIEnv,
-    _class: JClass,
-    n: jint,
-    callback: JObject,
-) {
-    env.call_method(callback, "methodB", "(I)V", &[1.into()])
-        .unwrap();
-}
-
 /// Loads feature categories from the given features dir.
 /// - featuresDir: Path to directory where features are stored.
 /// Returns a Result<Vec<FeatureCategory>, CoreFailure> represent as MessagePack value.
