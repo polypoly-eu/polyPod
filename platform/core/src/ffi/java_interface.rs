@@ -2,7 +2,7 @@ use crate::core::bootstrap;
 use crate::core::load_feature_categories;
 use crate::core::{self, NativeRequest, NativeResponse};
 use crate::core_failure::CoreFailure;
-use crate::ffi::serialize;
+use crate::ffi::{deserialize, serialize};
 use jni::{
     objects::{GlobalRef, JClass, JObject, JString, JValue},
     sys::{jbyteArray, jint, jlong, jstring},
@@ -46,24 +46,36 @@ struct BridgeToNative {
 
 impl core::PlatformHookRequest for BridgeToNative {
     fn perform_request(&self, request: NativeRequest) -> Result<NativeResponse, String> {
-        match self.java_vm.attach_current_thread() {
+        return match self.java_vm.attach_current_thread() {
             Ok(env) => {
-                let request_bytes = env.byte_array_from_slice(&serialize(request)).unwrap();
-                let result = env.call_method(
-                    self.callback.as_obj(),
-                    "performRequest",
-                    "([B)[B",
-                    &[JValue::Object(JObject::from(request_bytes))],
-                );
-                // TODO: convert result to Native Response
+                let request_byte_array = env
+                    .byte_array_from_slice(&serialize(request))
+                    .map_err(|err| err.to_string())?;
+                let response_byte_array_as_jvalue = env
+                    .call_method(
+                        self.callback.as_obj(),
+                        "performRequest",
+                        "([B)[B",
+                        &[JValue::Object(JObject::from(request_byte_array))],
+                    )
+                    .map_err(|err| err.to_string())?;
+                let response_byte_array = response_byte_array_as_jvalue
+                    .l()
+                    .map_err(|err| err.to_string())?
+                    .into_inner();
+                let response_bytes: Vec<u8> = env
+                    .convert_byte_array(response_byte_array)
+                    .map_err(|err| err.to_string())?;
+                deserialize(response_bytes)
             }
             // The Android LogCat will not show this, but for consistency or testing with non-Android JNI.
             // Note that if we panic, LogCat will also not show a message, or location.
             // TODO consider writing to file. Otherwise it's impossible to notice this.
-            Err(e) => println!("Couldn't get env::",),
-        }
-
-        Err("Failed miserably".to_string())
+            Err(e) => {
+                println!("Couldn't get env::",);
+                Err(e.to_string())
+            }
+        };
     }
 }
 
