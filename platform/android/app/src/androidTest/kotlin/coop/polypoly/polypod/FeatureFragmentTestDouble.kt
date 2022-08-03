@@ -1,8 +1,10 @@
 package coop.polypoly.polypod
-
 import android.webkit.WebView
+import kotlinx.coroutines.CoroutineScope
 
-class FeatureFragmentTestDouble : FeatureFragment() {
+class FeatureFragmentTestDouble(
+    lifecycleScope: CoroutineScope
+) : FeatureFragment(lifecycleScope) {
     fun overridePodApi(podApi: PodApi) {
         featureContainer.api = podApi
     }

@@ -2,6 +2,7 @@ package coop.polypoly.polypod
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -24,6 +25,8 @@ import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 private const val PICK_FILE_REQUEST_CODE = 1
 
@@ -79,7 +82,9 @@ data class ExternalFile(val url: String, val name: String, val size: Long)
 /**
  * A [Fragment] that is responsible for handling a single Feature
  */
-open class FeatureFragment : Fragment() {
+open class FeatureFragment(
+    private val coroutineScope: CoroutineScope
+) : Fragment() {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
@@ -94,11 +99,6 @@ open class FeatureFragment : Fragment() {
 
     private val errorDialog: AlertDialog by lazy {
         AlertDialog.Builder(context)
-            .setPositiveButton(
-                context?.getString(R.string.button_feature_error_close)
-            ) { _, _ ->
-                close()
-            }
             .create()
     }
 
@@ -162,13 +162,26 @@ open class FeatureFragment : Fragment() {
 
     @Suppress("unused")
     private fun handleError(error: String) {
+        if (errorDialog.isShowing || context == null) return
+
         val featureErrorMessage = context?.getString(
             R.string.message_feature_error,
             feature.name,
             error
         )
-        if (errorDialog.isShowing) return
         errorDialog.setMessage(featureErrorMessage)
+        errorDialog.setButton(
+            Dialog.BUTTON_POSITIVE,
+            context?.getString(R.string.button_feature_error_close)
+        ) { _, _ ->
+            close()
+            coroutineScope.launch {
+                ErrorUploader.uploadToServer(
+                    context!!,
+                    featureErrorMessage!!
+                )
+            }
+        }
         errorDialog.show()
     }
 
