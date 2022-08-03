@@ -5,7 +5,7 @@ use crate::core_failure::CoreFailure;
 use crate::ffi::{deserialize, serialize};
 use jni::{
     objects::{GlobalRef, JClass, JObject, JString, JValue},
-    sys::{jbyteArray, jint, jlong, jstring},
+    sys::jbyteArray,
     JNIEnv, JavaVM,
 };
 
@@ -26,7 +26,7 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     env.byte_array_from_slice(&serialize(
         read_jni_string(&env, language_code)
             .map(String::from)
-            .and_then(|language_code| core::bootstrap(language_code, Box::new(bridge))),
+            .and_then(|language_code| bootstrap(language_code, Box::new(bridge))),
     ))
     .unwrap()
 }
