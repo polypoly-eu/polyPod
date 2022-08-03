@@ -48,7 +48,7 @@ pub fn bootstrap(
 
     let _ = CORE.set(core);
     let core_2 = get_instance().unwrap();
-    let response = core_2
+    let _response = core_2
         .platform_hook
         .perform_request(NativeRequest::FeatureName);
     Ok(())

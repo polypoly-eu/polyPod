@@ -34,7 +34,9 @@ class JniApi {
             mutableMapOf(
                 ValueFactory.newString("Ok") to ValueFactory.newMap(
                     mutableMapOf(
-                        ValueFactory.newString("FeatureName") to ValueFactory.newString("Test") // ktlint-disable max-line-length
+                        ValueFactory.newString("FeatureName") to ValueFactory.newString( // ktlint-disable max-line-length
+                            "Test"
+                        )
                     )
                 )
             )
@@ -73,6 +75,6 @@ class JniApi {
         }
     }
 
-    external fun bootstrapCore(languageCode: String, callback: JniApi): ByteArray
+    external fun bootstrapCore(languageCode: String, callback: JniApi): ByteArray // ktlint-disable max-line-length
     external fun loadFeatureCategories(featuresDir: String): ByteArray
 }
