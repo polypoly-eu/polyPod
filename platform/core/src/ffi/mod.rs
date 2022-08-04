@@ -23,5 +23,7 @@ where
     T: DeserializeOwned,
 {
     let mut de = Deserializer::new(Cursor::new(&input[..]));
-    Deserialize::deserialize(&mut de).map_err(|err| err.to_string())
+    // make it deserialze to T. If you try to return the result of deserialize directly, it will try to deserialize to a Result<T, String>
+    let result: T = Deserialize::deserialize(&mut de).map_err(|err| err.to_string())?;
+    Ok(result)
 }

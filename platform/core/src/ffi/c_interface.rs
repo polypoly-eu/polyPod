@@ -95,8 +95,10 @@ impl core::PlatformHookRequest for BridgeToNative {
     fn perform_request(&self, request: NativeRequest) -> Result<NativeResponse, String> {
         let request_byte_buffer = unsafe { create_byte_buffer(serialize(request)) };
         let response_byte_buffer = (self.perform_request)(request_byte_buffer);
-        let response_bytes = unsafe { byte_buffer_to_bytes(&response_byte_buffer)? };
-        let response: Result<NativeResponse, String> = deserialize(response_bytes);
+        let bytes = unsafe { byte_buffer_to_bytes(&response_byte_buffer)? };
+        // deserialize returns Result<Result<NativeResponse, String>>
+        // so don't forget the ? at the end in the next line.
+        let response: Result<NativeResponse, String> = deserialize(bytes)?;
         // match &response {
         //     Ok(value) => match value {
         //         NativeResponse::FeatureName(name) => {
