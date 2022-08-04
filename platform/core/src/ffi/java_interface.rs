@@ -9,6 +9,8 @@ use jni::{
     JNIEnv, JavaVM,
 };
 
+use log::{error, trace};
+
 /// Bootstrap core with the given configuration:
 /// - language_code: User's locale language code.
 /// Returns a flatbuffer byte array with core_bootstrap_response.
@@ -46,11 +48,14 @@ struct BridgeToNative {
 
 impl core::PlatformHookRequest for BridgeToNative {
     fn perform_request(&self, request: NativeRequest) -> Result<NativeResponse, String> {
-        return match self.java_vm.attach_current_thread() {
+        trace!("Rust:java_interface:perform_request => Entered Function!");
+        let result: Result<NativeResponse, String> = match self.java_vm.attach_current_thread() {
             Ok(env) => {
-                let request_byte_array = env
-                    .byte_array_from_slice(&serialize(request))
-                    .map_err(|err| err.to_string())?;
+                trace!("Rust:java_interface:perform_request => attach_current_thread:Ok");
+                let request_byte_array = env.byte_array_from_slice(&serialize(request)).unwrap();
+                //.map_err(|err| err.to_string())?;
+
+                trace!("Rust:java_interface:perform_request => attach_current_thread:Ok => request_byte_array:Ok");
                 let response_byte_array_as_jvalue = env
                     .call_method(
                         self.callback.as_obj(),
@@ -58,24 +63,43 @@ impl core::PlatformHookRequest for BridgeToNative {
                         "([B)[B",
                         &[JValue::Object(JObject::from(request_byte_array))],
                     )
-                    .map_err(|err| err.to_string())?;
+                    .unwrap();
+                //.map_err(|err| err.to_string())?;
+                trace!("Rust:java_interface:perform_request => attach_current_thread:Ok => response_byte_array_as_jvalue:Ok");
+
                 let response_byte_array = response_byte_array_as_jvalue
                     .l()
-                    .map_err(|err| err.to_string())?
+                    .unwrap()
+                    //.map_err(|err| err.to_string())?
                     .into_inner();
-                let response_bytes: Vec<u8> = env
-                    .convert_byte_array(response_byte_array)
-                    .map_err(|err| err.to_string())?;
-                deserialize(response_bytes)
+                trace!("Rust:java_interface:perform_request => attach_current_thread:Ok => response_byte_array:Ok");
+
+                let response_bytes: Vec<u8> = env.convert_byte_array(response_byte_array).unwrap();
+                //.map_err(|err| err.to_string())?;
+                trace!("Rust:java_interface:perform_request => attach_current_thread:Ok => response_bytes:Ok");
+                // Problem is here
+                let deserialized: Result<String, String> = deserialize(response_bytes);
+                if deserialized.is_err() {
+                    trace!("Rust:java_interface:perform_request => attach_current_thread:Ok => deserialized:Err:{}", deserialized.err().unwrap());
+                } else {
+                    trace!("Rust:java_interface:perform_request => attach_current_thread:Ok => deserialized:Ok");
+                }
+
+                Ok(NativeResponse::FeatureName("Test".to_string()))
+
+                // let res = deserialized.to_owned().unwrap();
+                // trace!("Rust:java_interface:perform_request => attach_current_thread:Ok => res:Ok");
+                // deserialized
             }
             // The Android LogCat will not show this, but for consistency or testing with non-Android JNI.
             // Note that if we panic, LogCat will also not show a message, or location.
             // TODO consider writing to file. Otherwise it's impossible to notice this.
             Err(e) => {
-                println!("Couldn't get env::",);
+                error!("Rust:java_interface => Couldn't get env::");
                 Err(e.to_string())
             }
         };
+        result
     }
 }
 

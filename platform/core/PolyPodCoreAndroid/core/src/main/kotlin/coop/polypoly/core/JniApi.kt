@@ -30,20 +30,21 @@ class JniApi {
 
     // TODO: Find the right format for NativeResponse. An enum does not work like it does in swift.
     private fun packOk(response: NativeResponse): ByteArray {
-        val map = ValueFactory.newMap(
-            mutableMapOf(
-                ValueFactory.newString("Ok") to ValueFactory.newMap(
-                    mutableMapOf(
-                        ValueFactory.newString("FeatureName") to ValueFactory.newString( // ktlint-disable max-line-length
-                            "Test"
-                        )
-                    )
-                )
-            )
-        )
+//        val map = ValueFactory.newMap(
+//            mutableMapOf(
+//                ValueFactory.newString("Ok") to ValueFactory.newMap(
+//                    mutableMapOf(
+//                        ValueFactory.newString("FeatureName") to ValueFactory.newString( // ktlint-disable max-line-length
+//                            "Test"
+//                        )
+//                    )
+//                )
+//            )
+//        )
         val output = ByteArrayOutputStream()
         val packer = MessagePack.newDefaultPacker(output)
-        packer.packValue(map)
+//        packer.packValue(map)
+        packer.packValue(ValueFactory.newString("Test"))
         return output.toByteArray()
     }
 

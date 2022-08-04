@@ -2,6 +2,11 @@ use crate::{core_failure::CoreFailure, feature_categories, io::file_system::Defa
 use once_cell::sync::OnceCell;
 use serde::{Deserialize, Serialize};
 
+#[cfg(target_os = "android")]
+use android_logger::Config;
+#[cfg(target_os = "android")]
+use log::{trace, Level};
+
 // Core is held as a singleton.
 static CORE: OnceCell<Core> = OnceCell::new();
 
@@ -40,6 +45,11 @@ pub fn bootstrap(
     if CORE.get().is_some() {
         return Err(CoreFailure::core_already_bootstrapped());
     }
+
+    #[cfg(target_os = "android")]
+    android_logger::init_once(Config::default().with_min_level(Level::Trace));
+    #[cfg(target_os = "android")]
+    trace!("Rust:core => Bootstrapped!");
 
     let core = Core {
         language_code,
