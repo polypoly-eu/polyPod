@@ -15,8 +15,10 @@ export default {
         auth: polyPediaReportAuth || fallbackAuth,
     },
     polyApiErrorReport: {
-        url: process.env.POLYPOD_ERROR_REPORT_URL,
-        auth: process.env.POLYPOD_ERROR_REPORT_AUTHORIZATION || "",
+        url:
+            process.env.POLYPOD_ERROR_REPORT_URL ||
+            fallbackURL + "/errorReport",
+        auth: process.env.POLYPOD_ERROR_REPORT_AUTHORIZATION || fallbackAuth,
     },
     demoTest: {
         url: "",
