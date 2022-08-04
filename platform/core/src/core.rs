@@ -48,9 +48,13 @@ pub fn bootstrap(
 
     let _ = CORE.set(core);
     let core_2 = get_instance().unwrap();
-    let _response = core_2
+    let response = core_2
         .platform_hook
-        .perform_request(NativeRequest::FeatureName);
+        .perform_request(NativeRequest::FeatureName)
+        .unwrap();
+    match response {
+        NativeResponse::FeatureName(a) => assert_eq!("Test".to_string(), a),
+    }
     Ok(())
 }
 
