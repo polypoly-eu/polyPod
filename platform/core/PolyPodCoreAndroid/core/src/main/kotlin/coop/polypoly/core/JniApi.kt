@@ -2,6 +2,7 @@ package coop.polypoly.core
 
 import org.msgpack.core.MessagePack
 import org.msgpack.core.MessageUnpacker
+import org.msgpack.value.Value
 import org.msgpack.value.ValueFactory
 import java.io.ByteArrayOutputStream
 
@@ -9,35 +10,25 @@ enum class NativeRequest {
     Example
 }
 
-sealed interface NativeResponse<T> {
-    fun response(): T
-    fun messagePackedAsOk(): ByteArray
+sealed interface NativeResponse {
+    fun messageValue(): Value
 }
 
-object Example : NativeResponse<String> {
-    override fun response(): String {
+object Example : NativeResponse {
+    private fun response(): String {
         return "Test"
     }
 
-    override fun messagePackedAsOk(): ByteArray {
-        val map = ValueFactory.newMap(
+    override fun messageValue(): Value {
+        return ValueFactory.newMap(
             mutableMapOf(
-                ValueFactory.newString("Ok") to ValueFactory.newMap(
-                    mutableMapOf(
-                        ValueFactory.newString(
-                            "Example"
-                        ) to ValueFactory.newString(
-                            response()
-                        )
-                    )
+                ValueFactory.newString(
+                    "Example"
+                ) to ValueFactory.newString(
+                    response()
                 )
             )
         )
-        val output = ByteArrayOutputStream()
-        val packer = MessagePack.newDefaultPacker(output)
-        packer.packValue(map)
-        packer.close()
-        return output.toByteArray()
     }
 }
 
@@ -50,20 +41,20 @@ class JniApi {
         return NativeRequest.valueOf(request)
     }
 
-    private fun handle(nativeRequest: NativeRequest): NativeResponse<Any> {
+    private fun handle(nativeRequest: NativeRequest): NativeResponse {
         when (nativeRequest) {
-            NativeRequest.Example -> return Example as NativeResponse<Any> // ktlint-disable max-line-length
+            NativeRequest.Example -> return Example
         }
     }
 
-    private fun packExp(exception: Exception): ByteArray {
-        val map = ValueFactory.newMap(
-            mutableMapOf(
-                ValueFactory.newString("Err") to ValueFactory.newString(
-                    exception.toString()
+    private fun pack(value: Value, isOk: Boolean): ByteArray {
+        val okOrError = if (isOk) "Ok" else "Err"
+        val map =
+            ValueFactory.newMap(
+                mutableMapOf(
+                    ValueFactory.newString(okOrError) to value
                 )
             )
-        )
         val output = ByteArrayOutputStream()
         val packer = MessagePack.newDefaultPacker(output)
         packer.packValue(map)
@@ -79,9 +70,9 @@ class JniApi {
             val request = unpacker.unpackValue().asStringValue().toString()
             val nativeRequest = mapToNativeRequest(request)
             val response = handle(nativeRequest)
-            response.messagePackedAsOk()
+            pack(response.messageValue(), true)
         } catch (exp: Exception) {
-            packExp(exp)
+            pack(ValueFactory.newString(exp.toString()), false)
         }
     }
 
