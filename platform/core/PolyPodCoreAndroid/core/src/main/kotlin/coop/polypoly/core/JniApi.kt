@@ -37,7 +37,11 @@ class JniApi {
         System.loadLibrary("polypod_core")
     }
 
-    private fun mapToPlatformRequest(request: String): PlatformRequest {
+    private fun mapToPlatformRequest(value: Value): PlatformRequest {
+        // TODO: This only handles the simple case where a string from core
+        // But a map might be sent, for example: PlatformRequest.Example(String)
+        // This needs to become more robust.
+        val request = value.asStringValue().toString()
         return PlatformRequest.valueOf(request)
     }
 
@@ -67,8 +71,7 @@ class JniApi {
             val unpacker: MessageUnpacker = MessagePack.newDefaultUnpacker(
                 input
             )
-            val request = unpacker.unpackValue().asStringValue().toString()
-            val platformRequest = mapToPlatformRequest(request)
+            val platformRequest = mapToPlatformRequest(unpacker.unpackValue())
             val response = handle(platformRequest)
             pack(response.messageValue(), true)
         } catch (exp: Exception) {
