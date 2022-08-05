@@ -53,7 +53,7 @@ final class Endpoint: EndpointProtocol {
         approveEndpointFetch(endpointId: endpointId) { approved in
             guard approved else {
                 Log.error("endpoint.send failed: Permission for endpoint \(endpointId) denied")
-                completionHandler(PodApiError.endpointError("send"))
+                completionHandler(PodApiError.endpointError("send - permission not given"))
                 return
             }
 
@@ -89,7 +89,7 @@ final class Endpoint: EndpointProtocol {
         approveEndpointFetch(endpointId: endpointId) { approved in
             guard approved else {
                 Log.error("endpoint.get failed: Permission for endpoint \(endpointId) denied")
-                completionHandler(nil, PodApiError.endpointError("get"))
+                completionHandler(nil, PodApiError.endpointError("get - permission not given"))
                 return
             }
 

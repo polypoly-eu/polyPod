@@ -25,9 +25,9 @@ class ErrorUploader {
             Log.debug("uploadToServer(): error in POST to \(endpointId)")
             
             completionHandler(
-                .nil,
+                "uploadToServer",
                 error == nil ? nil :
-                    MessagePackValue("\(#function): \(String(describing: error?.localizedDescription))")
+                    MessagePackValue("\(#function): failed with \(String(describing: error?.localizedDescription))")
             )
         }
     }
