@@ -28,6 +28,7 @@ pub trait PlatformHookRequest: Sync + Send {
 // to be shared between components, as well managing components lifetime.
 struct Core {
     language_code: String,
+    #[allow(dead_code)]
     platform_hook: Box<dyn PlatformHookRequest>,
 }
 
