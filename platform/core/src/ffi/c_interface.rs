@@ -3,7 +3,7 @@ use crate::ffi::{deserialize, serialize};
 use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
-use crate::core::{self, NativeRequest, NativeResponse};
+use crate::core::{self, PlatformRequest, PlatformResponse};
 use std::os::raw::c_char;
 
 /// # Safety
@@ -18,9 +18,9 @@ use std::os::raw::c_char;
 #[no_mangle]
 pub unsafe extern "C" fn core_bootstrap(
     language_code: *const c_char,
-    bridge: BridgeToNative,
+    bridge: BridgeToPlatform,
 ) -> CByteBuffer {
-    // TODO: Use bridge to native
+    // TODO: Use bridge to Platform
     create_byte_buffer(serialize(
         cstring_to_str(&language_code)
             .map(String::from)
@@ -86,19 +86,19 @@ unsafe fn byte_buffer_to_bytes(buffer: &CByteBuffer) -> Result<Vec<u8>, String> 
 }
 
 #[repr(C)]
-pub struct BridgeToNative {
+pub struct BridgeToPlatform {
     free_bytes: extern "C" fn(bytes: *mut u8),
     perform_request: extern "C" fn(request: CByteBuffer) -> CByteBuffer,
 }
 
-impl core::PlatformHookRequest for BridgeToNative {
-    fn perform_request(&self, request: NativeRequest) -> Result<NativeResponse, String> {
+impl core::PlatformHookRequest for BridgeToPlatform {
+    fn perform_request(&self, request: PlatformRequest) -> Result<PlatformResponse, String> {
         let request_byte_buffer = unsafe { create_byte_buffer(serialize(request)) };
         let response_byte_buffer = (self.perform_request)(request_byte_buffer);
         let bytes = unsafe { byte_buffer_to_bytes(&response_byte_buffer)? };
-        // deserialize returns Result<Result<NativeResponse, String>>
+        // deserialize returns Result<Result<PlatformResponse, String>>
         // so don't forget the ? at the end in the next line.
-        let response: Result<NativeResponse, String> = deserialize(bytes)?;
+        let response: Result<PlatformResponse, String> = deserialize(bytes)?;
         (self.free_bytes)(response_byte_buffer.data);
         return response;
     }

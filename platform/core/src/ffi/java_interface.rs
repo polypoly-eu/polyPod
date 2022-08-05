@@ -1,6 +1,6 @@
 use crate::core::bootstrap;
 use crate::core::load_feature_categories;
-use crate::core::{self, NativeRequest, NativeResponse};
+use crate::core::{self, PlatformRequest, PlatformResponse};
 use crate::core_failure::CoreFailure;
 use crate::ffi::{deserialize, serialize};
 use jni::{
@@ -21,7 +21,7 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     language_code: JString,
     callback: JObject,
 ) -> jbyteArray {
-    let bridge = BridgeToNative {
+    let bridge = BridgeToPlatform {
         callback: env.new_global_ref(callback).unwrap(),
         java_vm: env.get_java_vm().unwrap(),
     };
@@ -33,7 +33,7 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     .unwrap()
 }
 
-struct BridgeToNative {
+struct BridgeToPlatform {
     // The callback passed from Android is a local reference: only valid during the method call.
     // To store it, we need to put it in a global reference.
     // See https://developer.android.com/training/articles/perf-jni#local-and-global-references
@@ -46,9 +46,9 @@ struct BridgeToNative {
     java_vm: JavaVM,
 }
 
-impl core::PlatformHookRequest for BridgeToNative {
-    fn perform_request(&self, request: NativeRequest) -> Result<NativeResponse, String> {
-        let result: Result<NativeResponse, String> = match self.java_vm.attach_current_thread() {
+impl core::PlatformHookRequest for BridgeToPlatform {
+    fn perform_request(&self, request: PlatformRequest) -> Result<PlatformResponse, String> {
+        let result: Result<PlatformResponse, String> = match self.java_vm.attach_current_thread() {
             Ok(env) => {
                 let request_byte_array = env
                     .byte_array_from_slice(&serialize(request))
@@ -72,7 +72,7 @@ impl core::PlatformHookRequest for BridgeToNative {
                     .convert_byte_array(response_byte_array)
                     .map_err(|err| err.to_string())?;
 
-                let deserialized: Result<NativeResponse, String> = deserialize(response_bytes)?;
+                let deserialized: Result<PlatformResponse, String> = deserialize(response_bytes)?;
                 deserialized
             }
             Err(e) => {

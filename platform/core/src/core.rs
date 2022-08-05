@@ -11,17 +11,17 @@ use log::{trace, Level};
 static CORE: OnceCell<Core> = OnceCell::new();
 
 #[derive(Debug, Clone, Serialize)]
-pub enum NativeRequest {
+pub enum PlatformRequest {
     Example,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum NativeResponse {
+pub enum PlatformResponse {
     Example(String),
 }
 
 pub trait PlatformHookRequest: Sync + Send {
-    fn perform_request(&self, request: NativeRequest) -> Result<NativeResponse, String>;
+    fn perform_request(&self, request: PlatformRequest) -> Result<PlatformResponse, String>;
 }
 
 // The Core would act as a composition root, containing any global configuration
@@ -58,16 +58,17 @@ pub fn bootstrap(
     };
 
     let _ = CORE.set(core);
-    // let core_2 = get_instance().unwrap();
-    // let response = core_2
-    //     .platform_hook
-    //     .perform_request(NativeRequest::Example)
-    //     .unwrap();
-    // match response {
-    //     NativeResponse::Example(a) => assert_eq!("Test".to_string(), a),
-    // }
-    // #[cfg(target_os = "android")]
-    // trace!("Rust:core => Native response is fine!");
+    // For testing purposes
+    let core_2 = get_instance().unwrap();
+    let response = core_2
+        .platform_hook
+        .perform_request(PlatformRequest::Example)
+        .unwrap();
+    match response {
+        PlatformResponse::Example(a) => assert_eq!("Test".to_string(), a),
+    }
+    #[cfg(target_os = "android")]
+    trace!("Rust:core => Platform response is fine!");
     Ok(())
 }
 

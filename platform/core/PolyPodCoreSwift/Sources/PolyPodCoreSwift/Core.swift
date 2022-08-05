@@ -18,25 +18,25 @@ func unpackBytes(bytes: CByteBuffer) throws -> MessagePackValue {
     return try MessagePack.unpackFirst(data)
 }
 
-func mapToNativeRequest(request: MessagePackValue) throws -> NativeRequest {
-    guard let result = NativeRequest.init(rawValue: request.stringValue ?? "") else {
-        throw DecodingError.invalidValue(info: "Could not convert \(request.stringValue ?? "") to NativeRequest. ")
+func mapToPlatformRequest(request: MessagePackValue) throws -> PlatformRequest {
+    guard let result = PlatformRequest.init(rawValue: request.stringValue ?? "") else {
+        throw DecodingError.invalidValue(info: "Could not convert \(request.stringValue ?? "") to PlatformRequest. ")
     }
     return result
 }
 
-func handle(nativeRequest: NativeRequest) -> NativeResponse {
-    switch nativeRequest {
+func handle(platformRequest: PlatformRequest) -> PlatformResponse {
+    switch platformRequest {
     case .Example:
-        return NativeResponse.Example("Test")
+        return PlatformResponse.Example("Test")
     }
 }
 
-func packNativeResponse(response: Result<NativeResponse, Error>) -> Data {
+func packPlatformResponse(response: Result<PlatformResponse, Error>) -> Data {
     var result: [MessagePackValue: MessagePackValue] = [:]
     switch response {
-    case .success(let nativeResponse):
-        switch nativeResponse {
+    case .success(let platformResponse):
+        switch platformResponse {
         case .Example(let name):
             result["Ok"] = .map(["Example": .string(name)])
         }
@@ -57,11 +57,11 @@ extension Data {
     }
 }
 
-enum NativeRequest: String {
+enum PlatformRequest: String {
     case Example
 }
 
-enum NativeResponse {
+enum PlatformResponse {
     case Example(String)
 }
 
@@ -82,17 +82,17 @@ public final class Core {
         // Force unwrap should be safe
         self.languageCode = NSString(string: languageCode).utf8String!
        
-        return handleCoreResponse(core_bootstrap(self.languageCode, BridgeToNative(free_bytes: {
+        return handleCoreResponse(core_bootstrap(self.languageCode, BridgeToPlatform(free_bytes: {
             $0?.deallocate()
         }, perform_request: { in_bytes in
-            let response = Result<NativeResponse, Error> {
+            let response = Result<PlatformResponse, Error> {
                 let request_from_core = try unpackBytes(bytes: in_bytes)
-                let nativeRequest = try mapToNativeRequest(request: request_from_core)
-                return handle(nativeRequest: nativeRequest)
+                let platformRequest = try mapToPlatformRequest(request: request_from_core)
+                return handle(platformRequest: platformRequest)
             }
             
             // TODO: Use CoreFailure for failures.
-            return packNativeResponse(response: response).toByteBuffer
+            return packPlatformResponse(response: response).toByteBuffer
         })), { _ in })
     }
 
