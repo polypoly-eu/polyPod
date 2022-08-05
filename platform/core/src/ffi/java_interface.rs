@@ -46,7 +46,6 @@ struct BridgeToNative {
     java_vm: JavaVM,
 }
 
-// TODO: check bytes that come from android?
 impl core::PlatformHookRequest for BridgeToNative {
     fn perform_request(&self, request: NativeRequest) -> Result<NativeResponse, String> {
         let result: Result<NativeResponse, String> = match self.java_vm.attach_current_thread() {
@@ -106,44 +105,6 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_loadFeatureCategories(
     ))
     .unwrap()
 }
-
-// pub struct BridgeToNative {
-//     env: JNIEnv,
-// }
-
-// /*
-// jclass testClass = (*env) -> FindClass(env, "test/Test");
-// jmethodID methodB = (*env) -> GetStaticMethodID(env, testClass, "methodB", "()V");
-// (*env) -> CallStaticVoidMethod(env, testClass, methodB, NULL);
-// */
-// impl core::PlatformHookRequest for BridgeToNative {
-//     fn perform_request(
-//         &self,
-//         request: core::NativeRequest,
-//     ) -> Result<core::NativeResponse, String> {
-//         let class = self.env.find_class("coop/polypoly/core/JniApi").unwrap();
-//         let result = class.call_static_method(class, "methodB", "()V", &[]);
-
-//         let request_byte_buffer = unsafe { create_byte_buffer(serialize(request)) };
-//         let response_byte_buffer = (self.perform_request)(request_byte_buffer);
-//         let response: Result<NativeResponse, String> =
-//             unsafe { deserialize(byte_buffer_to_bytes(&response_byte_buffer)) };
-//         // match &response {
-//         //     Ok(value) => match value {
-//         //         NativeResponse::FeatureName(name) => {
-//         //             let x = name.to_owned();
-//         //             print!("");
-//         //         }
-//         //     },
-//         //     Err(err) => {
-//         //         let x = err.to_owned();
-//         //         print!("");
-//         //     }
-//         // };
-//         (self.free_bytes)(response_byte_buffer.data);
-//         return response;
-//     }
-// }
 
 fn read_jni_string(env: &JNIEnv, field: JString) -> Result<String, CoreFailure> {
     env.get_string(field)

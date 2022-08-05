@@ -12,12 +12,12 @@ static CORE: OnceCell<Core> = OnceCell::new();
 
 #[derive(Debug, Clone, Serialize)]
 pub enum NativeRequest {
-    FeatureName,
+    Example,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum NativeResponse {
-    FeatureName(String),
+    Example(String),
 }
 
 pub trait PlatformHookRequest: Sync + Send {
@@ -60,10 +60,10 @@ pub fn bootstrap(
     let core_2 = get_instance().unwrap();
     let response = core_2
         .platform_hook
-        .perform_request(NativeRequest::FeatureName)
+        .perform_request(NativeRequest::Example)
         .unwrap();
     match response {
-        NativeResponse::FeatureName(a) => assert_eq!("Test".to_string(), a),
+        NativeResponse::Example(a) => assert_eq!("Test".to_string(), a),
     }
     #[cfg(target_os = "android")]
     trace!("Rust:core => Native response is fine!");

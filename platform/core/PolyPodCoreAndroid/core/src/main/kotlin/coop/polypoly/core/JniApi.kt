@@ -2,12 +2,11 @@ package coop.polypoly.core
 
 import org.msgpack.core.MessagePack
 import org.msgpack.core.MessageUnpacker
-import org.msgpack.value.Value
 import org.msgpack.value.ValueFactory
 import java.io.ByteArrayOutputStream
 
 enum class NativeRequest {
-    FeatureName
+    Example
 }
 
 sealed interface NativeResponse<T> {
@@ -15,7 +14,7 @@ sealed interface NativeResponse<T> {
     fun messagePackedAsOk(): ByteArray
 }
 
-object FeatureName : NativeResponse<String> {
+object Example : NativeResponse<String> {
     override fun response(): String {
         return "Test"
     }
@@ -26,7 +25,7 @@ object FeatureName : NativeResponse<String> {
                 ValueFactory.newString("Ok") to ValueFactory.newMap(
                     mutableMapOf(
                         ValueFactory.newString(
-                            "FeatureName"
+                            "Example"
                         ) to ValueFactory.newString(
                             response()
                         )
@@ -53,7 +52,7 @@ class JniApi {
 
     private fun handle(nativeRequest: NativeRequest): NativeResponse<Any> {
         when (nativeRequest) {
-            NativeRequest.FeatureName -> return FeatureName as NativeResponse<Any> // ktlint-disable max-line-length
+            NativeRequest.Example -> return Example as NativeResponse<Any> // ktlint-disable max-line-length
         }
     }
 

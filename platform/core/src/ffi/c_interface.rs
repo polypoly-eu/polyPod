@@ -99,18 +99,6 @@ impl core::PlatformHookRequest for BridgeToNative {
         // deserialize returns Result<Result<NativeResponse, String>>
         // so don't forget the ? at the end in the next line.
         let response: Result<NativeResponse, String> = deserialize(bytes)?;
-        // match &response {
-        //     Ok(value) => match value {
-        //         NativeResponse::FeatureName(name) => {
-        //             let x = name.to_owned();
-        //             print!("");
-        //         }
-        //     },
-        //     Err(err) => {
-        //         let x = err.to_owned();
-        //         print!("");
-        //     }
-        // };
         (self.free_bytes)(response_byte_buffer.data);
         return response;
     }

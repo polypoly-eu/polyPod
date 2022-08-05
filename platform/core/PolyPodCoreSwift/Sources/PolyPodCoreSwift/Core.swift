@@ -27,8 +27,8 @@ func mapToNativeRequest(request: MessagePackValue) throws -> NativeRequest {
 
 func handle(nativeRequest: NativeRequest) -> NativeResponse {
     switch nativeRequest {
-    case .FeatureName:
-        return NativeResponse.FeatureName("Test")
+    case .Example:
+        return NativeResponse.Example("Test")
     }
 }
 
@@ -37,8 +37,8 @@ func packNativeResponse(response: Result<NativeResponse, Error>) -> Data {
     switch response {
     case .success(let nativeResponse):
         switch nativeResponse {
-        case .FeatureName(let name):
-            result["Ok"] = .map(["FeatureName": .string(name)])
+        case .Example(let name):
+            result["Ok"] = .map(["Example": .string(name)])
         }
     case .failure(let error):
         result["Err"] = .string(error.localizedDescription)
@@ -58,11 +58,11 @@ extension Data {
 }
 
 enum NativeRequest: String {
-    case FeatureName
+    case Example
 }
 
 enum NativeResponse {
-    case FeatureName(String)
+    case Example(String)
 }
 
 /// Swift wrapper around the Rust Core.
