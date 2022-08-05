@@ -3,9 +3,10 @@ use once_cell::sync::OnceCell;
 use serde::{Deserialize, Serialize};
 
 #[cfg(target_os = "android")]
-use android_logger::Config;
-#[cfg(target_os = "android")]
-use log::{trace, Level};
+use {
+    android_logger::Config,
+    log::{trace, Level},
+};
 
 // Core is held as a singleton.
 static CORE: OnceCell<Core> = OnceCell::new();
@@ -48,9 +49,10 @@ pub fn bootstrap(
     }
 
     #[cfg(target_os = "android")]
-    android_logger::init_once(Config::default().with_min_level(Level::Trace));
-    #[cfg(target_os = "android")]
-    trace!("Rust:core => Bootstrapped!");
+    {
+        android_logger::init_once(Config::default().with_min_level(Level::Trace));
+        trace!("Rust:core => Bootstrapped!");
+    }
 
     let core = Core {
         language_code,
