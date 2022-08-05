@@ -21,13 +21,16 @@ object ErrorUploader {
 
         val payload = JsonParser().parse(errorMsg).asString
 
-        endpoint.send(
-            endpointId,
-            payload,
-            "application/json",
-            endpointInfo.auth
-        )
-
-        logger.debug("uploadToServer() -> endpoint.post")
+        try {
+            endpoint.send(
+                endpointId,
+                payload,
+                "application/json",
+                endpointInfo.auth
+            )
+            logger.debug("uploadToServer() - endpoint.post")
+        } catch (e: PodApiError) {
+            logger.error("uploadToServer: Failed ${e}")
+        }
     }
 }
