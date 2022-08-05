@@ -2,6 +2,7 @@ package coop.polypoly.core
 
 import org.msgpack.core.MessagePack
 import org.msgpack.core.MessageUnpacker
+import org.msgpack.value.Value
 import org.msgpack.value.ValueFactory
 import java.io.ByteArrayOutputStream
 
@@ -9,8 +10,36 @@ enum class NativeRequest {
     FeatureName
 }
 
-enum class NativeResponse(String: String.Companion) {
-    FeatureName(String)
+sealed interface NativeResponse<T> {
+    fun response(): T
+    fun messagePackedAsOk(): ByteArray
+}
+
+object FeatureName : NativeResponse<String> {
+    override fun response(): String {
+        return "Test"
+    }
+
+    override fun messagePackedAsOk(): ByteArray {
+        val map = ValueFactory.newMap(
+            mutableMapOf(
+                ValueFactory.newString("Ok") to ValueFactory.newMap(
+                    mutableMapOf(
+                        ValueFactory.newString(
+                            "FeatureName"
+                        ) to ValueFactory.newString(
+                            response()
+                        )
+                    )
+                )
+            )
+        )
+        val output = ByteArrayOutputStream()
+        val packer = MessagePack.newDefaultPacker(output)
+        packer.packValue(map)
+        packer.close()
+        return output.toByteArray()
+    }
 }
 
 class JniApi {
@@ -22,30 +51,10 @@ class JniApi {
         return NativeRequest.valueOf(request)
     }
 
-    private fun handle(nativeRequest: NativeRequest): NativeResponse {
+    private fun handle(nativeRequest: NativeRequest): NativeResponse<Any> {
         when (nativeRequest) {
-            NativeRequest.FeatureName -> return NativeResponse.FeatureName
+            NativeRequest.FeatureName -> return FeatureName as NativeResponse<Any> // ktlint-disable max-line-length
         }
-    }
-
-    // TODO: Find the right format for NativeResponse. An enum does not work like it does in swift.
-    private fun packOk(response: NativeResponse): ByteArray {
-        val map = ValueFactory.newMap(
-            mutableMapOf(
-                ValueFactory.newString("Ok") to ValueFactory.newMap(
-                    mutableMapOf(
-                        ValueFactory.newString("FeatureName") to ValueFactory.newString( // ktlint-disable max-line-length
-                            "Test"
-                        )
-                    )
-                )
-            )
-        )
-        val output = ByteArrayOutputStream()
-        val packer = MessagePack.newDefaultPacker(output)
-        packer.packValue(map)
-        packer.close()
-        return output.toByteArray()
     }
 
     private fun packExp(exception: Exception): ByteArray {
@@ -71,7 +80,7 @@ class JniApi {
             val request = unpacker.unpackValue().asStringValue().toString()
             val nativeRequest = mapToNativeRequest(request)
             val response = handle(nativeRequest)
-            packOk(response)
+            response.messagePackedAsOk()
         } catch (exp: Exception) {
             packExp(exp)
         }
