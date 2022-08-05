@@ -26,14 +26,6 @@ public final class Core {
         return handleCoreResponse(core_bootstrap(self.languageCode, self.workDir), { _ in })
     }
     
-    public func isUserSessionExpired() -> Result<Bool, Error> {
-        handleCoreResponse(is_session_expired()) { value in
-            value.boolValue!
-        }
-    }
-    
-    public func appDidBecomeInactive() -> Result<Void, Error> {
-        handleCoreResponse(app_did_become_inactive(), { _ in })
     }
 
     /// Loads the feature categories from the given features directory

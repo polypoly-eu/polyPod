@@ -1,16 +1,16 @@
-use crate::io::key_value_store::KeyValueStorage;
+use crate::io::key_value_store::KeyValueStore;
 use serde::de::DeserializeOwned;
-use serde::{ Serialize, Deserialize };
+use serde::Serialize;
 use crate::common::serialization::{message_pack_serialize, message_pack_deserialize};
 use crate::user_session::{ TimeoutOptionStore, TimeoutOption };
 
-#[derive(Debug, PartialEq, Serialize)]
+#[derive(Serialize)]
 enum PreferenceKey {
     UserSessionTimeoutOption,
 }
 
 pub struct Preferences {
-    pub store: Box<dyn KeyValueStorage>
+    pub store: Box<dyn KeyValueStore>
 }
 
 impl Preferences {

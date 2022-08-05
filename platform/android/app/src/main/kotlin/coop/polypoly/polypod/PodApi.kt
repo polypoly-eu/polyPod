@@ -15,43 +15,6 @@ import org.msgpack.value.StringValue
 import org.msgpack.value.Value
 import org.msgpack.value.ValueFactory
 
-sealed interface NativeResponse {
-    fun name(): String // Or Value
-    fun okContent(): Value
-}
-
-fun NativeResponse.pack(): ByteArray {
-    val map = ValueFactory.newMap(
-        mutableMapOf(
-            ValueFactory.newString("Ok") to ValueFactory.newMap(
-                mutableMapOf(
-                    ValueFactory.newString(
-                        name()
-                    ) to okContent()
-                )
-            )
-        )
-    )
-    val output = ByteArrayOutputStream()
-    val packer = MessagePack.newDefaultPacker(output)
-    packer.packValue(map)
-    packer.close()
-    return output.toByteArray()
-}
-
-object Example: NativeResponse {
-    override fun name(): String {
-        TODO("Not yet implemented")
-    }
-
-    override fun okContent(): Value {
-        TODO("Not yet implemented")
-    }
-}
-
-val x = Example.pack()
-
-
 open class PodApi(
     open val polyOut: PolyOut,
     open val polyIn: PolyIn,

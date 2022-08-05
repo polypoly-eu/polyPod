@@ -27,12 +27,12 @@ fn get_instance() -> Result<MutexGuard<'static, Core<'static>>, CoreFailure> {
     }
 }
 
-pub fn bootstrap(language_code: String, work_dir: String) -> Result<(), CoreFailure> {
+pub fn bootstrap(language_code: String) -> Result<(), CoreFailure> {
     if CORE.get().is_some() {
         return Err(CoreFailure::core_already_bootstrapped());
     }
     let preferences = Arc::new(Preferences {
-       store: Box::new(DefaultKeyValueStore { db_path: work_dir + "/preferences.store" }), 
+       store: Box::new(DefaultKeyValueStore::new("platofrm_path/preferences.store".to_string())), 
     });
     let builder = Box::new(Instant::now);
 
@@ -47,6 +47,8 @@ pub fn bootstrap(language_code: String, work_dir: String) -> Result<(), CoreFail
     Ok(())
 }
 
+// Features
+
 pub fn load_feature_categories(
     features_dir: &str,
 ) -> Result<Vec<feature_categories::FeatureCategory>, CoreFailure> {
@@ -58,6 +60,16 @@ pub fn load_feature_categories(
     )
 }
 
+// App events
+
+pub fn app_did_become_inactive() -> Result<(), CoreFailure> {
+    let mut instance = get_instance()?;
+    let session = instance.user_session.get_mut().unwrap();
+    session.did_become_inactive();
+    Ok(())
+}
+
+// User Session
 pub fn is_user_session_expired() -> Result<bool, CoreFailure> {
     let instance = get_instance()?;
     let session = &instance.user_session.lock().unwrap();
@@ -77,12 +89,6 @@ pub fn get_user_session_timeout_option() -> Result<TimeoutOption, CoreFailure> {
     Ok(session.get_timeout_option())
 }
 
-pub fn app_did_become_inactive() -> Result<(), CoreFailure> {
-    let mut instance = get_instance()?;
-    let session = instance.user_session.get_mut().unwrap();
-    session.did_become_inactive();
-    Ok(())
-}
 
 pub fn user_session_timeout_config() -> Vec<UserSessionTimeout> {
     TimeoutOption::all_option_timeouts()

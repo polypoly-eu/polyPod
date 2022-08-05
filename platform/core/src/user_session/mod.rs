@@ -50,6 +50,7 @@ pub trait TimeoutOptionStore: Sync + Send {
 }
 
 type TimeStampBuilder<'a> = Box<dyn Fn() -> Instant + Sync + Send + 'a>;
+
 pub struct UserSession<'a> {
     inactive_timestamp: Option<Instant>,
     timestamp_builder: TimeStampBuilder<'a>, 
@@ -92,7 +93,6 @@ impl<'a> UserSession<'a> {
         self.store.get_timeout_option().unwrap_or_else(TimeoutOption::default_option)
     }
 }
-
 
 #[cfg(test)]
 mod tests {

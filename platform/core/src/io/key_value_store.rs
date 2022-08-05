@@ -1,34 +1,39 @@
-pub trait KeyValueStorage: Send + Sync {
+pub trait KeyValueStore: Send + Sync {
     fn read(&self, key: Vec<u8>) -> Option<Vec<u8>>;
     fn write(&self, key: Vec<u8>, value: Vec<u8>);
     fn remove(&self, key: Vec<u8>);
 }
 
+extern crate sled;
 pub struct DefaultKeyValueStore {
-    pub db_path: String
+    db: sled::Db
 }
 
-extern crate sled;
-
 impl DefaultKeyValueStore {
-    fn open_db(&self) -> sled::Db {
-        sled::open(self.db_path.clone()).unwrap()
+    pub fn new(db_path: String) -> DefaultKeyValueStore {
+        DefaultKeyValueStore { 
+            // Note: As per sled docs, it is adviced to keep the db open
+            //       for the duration of the process's lifespan, therefore there is no close option.
+            // We are ok with crashing the app here, as it will end in undefined behaviour if db cannot be opened.
+            db: sled::open(db_path).unwrap()
+        }
     }
 }
 
-impl KeyValueStorage for DefaultKeyValueStore {
+impl KeyValueStore for DefaultKeyValueStore {
     fn read(&self, key: Vec<u8>) -> Option<Vec<u8>> {
-        let db = self.open_db();
-        let res = db.get(key);
-        let unwr = res.unwrap().map(|x| x.to_vec());
-        unwr
+        self.db
+            .get(key)
+            .ok()
+            .flatten()
+            .map(|x| x.to_vec())
     }
 
     fn write(&self, key: Vec<u8>, value: Vec<u8>) {
-        self.open_db().insert(key, value).unwrap();
+        self.db.insert(key, value).unwrap();
     }
 
     fn remove(&self, key: Vec<u8>) {
-        self.open_db().remove(key).unwrap();
+        _ = self.db.remove(key);
     }
 }
