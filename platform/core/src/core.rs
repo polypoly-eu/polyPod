@@ -65,6 +65,8 @@ pub fn bootstrap(
     match response {
         NativeResponse::FeatureName(a) => assert_eq!("Test".to_string(), a),
     }
+    #[cfg(target_os = "android")]
+    trace!("Rust:core => Native response is fine!");
     Ok(())
 }
 
