@@ -57,16 +57,16 @@ pub fn bootstrap(
     };
 
     let _ = CORE.set(core);
-    let core_2 = get_instance().unwrap();
-    let response = core_2
-        .platform_hook
-        .perform_request(NativeRequest::Example)
-        .unwrap();
-    match response {
-        NativeResponse::Example(a) => assert_eq!("Test".to_string(), a),
-    }
-    #[cfg(target_os = "android")]
-    trace!("Rust:core => Native response is fine!");
+    // let core_2 = get_instance().unwrap();
+    // let response = core_2
+    //     .platform_hook
+    //     .perform_request(NativeRequest::Example)
+    //     .unwrap();
+    // match response {
+    //     NativeResponse::Example(a) => assert_eq!("Test".to_string(), a),
+    // }
+    // #[cfg(target_os = "android")]
+    // trace!("Rust:core => Native response is fine!");
     Ok(())
 }
 
