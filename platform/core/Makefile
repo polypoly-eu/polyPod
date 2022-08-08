@@ -24,6 +24,7 @@ android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%/libpolypod_core.
 cargo_ndk_version = 2.10.0
 
 ifeq ($(OS),Windows_NT)
+    # Need on Windows, to allow interpreting escaping characters
 	os_echo := echo -e
 else
 	os_echo := echo
