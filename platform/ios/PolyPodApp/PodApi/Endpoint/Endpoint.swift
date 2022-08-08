@@ -52,14 +52,14 @@ final class Endpoint: EndpointProtocol {
     ) {
         approveEndpointFetch(endpointId: endpointId) { approved in
             guard approved else {
-                Log.error("endpoint.send failed: Permission for endpoint \(endpointId) denied")
-                completionHandler(PodApiError.endpointError("send - permission not given"))
+                Log.error("endpoint.post failed: Permission for endpoint \(endpointId) denied")
+                completionHandler(PodApiError.endpointPermissionDenied("post"))
                 return
             }
 
             guard let endpointInfo = self.endpointInfoFromId(endpointId: endpointId) else {
-                Log.error("endpoint.send failed: No endpoint found for: \(endpointId)")
-                completionHandler(PodApiError.endpointError("send"))
+                Log.error("endpoint.post failed: No endpoint found for: \(endpointId)")
+                completionHandler(PodApiError.endpointError("post"))
                 return
             }
 
@@ -70,10 +70,12 @@ final class Endpoint: EndpointProtocol {
                 authToken: endpointInfo.auth,
                 allowInsecure: endpointInfo.allowInsecure
             )
+
             switch response {
             case .failure(let error):
-                Log.error(error.localizedDescription)
-                completionHandler(PodApiError.endpointError("send"))
+                Log.error("endpoint.post failed: \(error.localizedDescription)")
+                let errorCode = response.map { "failed with code \($0)" }
+                completionHandler(PodApiError.endpointError("post \(errorCode)"))
             case .success:
                 completionHandler(nil)
             }
@@ -89,7 +91,7 @@ final class Endpoint: EndpointProtocol {
         approveEndpointFetch(endpointId: endpointId) { approved in
             guard approved else {
                 Log.error("endpoint.get failed: Permission for endpoint \(endpointId) denied")
-                completionHandler(nil, PodApiError.endpointError("get - permission not given"))
+                completionHandler(nil, PodApiError.endpointPermissionDenied("get"))
                 return
             }
 

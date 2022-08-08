@@ -111,7 +111,7 @@ struct FeatureView: View {
                 closeAction()
                 ErrorUploader.shared.uploadToServer(errorMsg, completionHandler: { _, error in
                         if error != nil {
-                            Log.error("Error upload failed: \(error)")
+                            Log.error("Upload failed: \(error!.description)")
                             return
                         }
                         Log.debug("Error uploaded successfully")
