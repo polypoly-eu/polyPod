@@ -18,7 +18,15 @@ impl Preferences {
         self.store
             .as_ref()
             .read(message_pack_serialize(key))
-            .and_then(|bytes| message_pack_deserialize(bytes).ok())
+            .and_then(|bytes|
+                match message_pack_deserialize(bytes) {
+                    Ok(decoded) => decoded,
+                    Err(error) => {
+                        println!("Failed to decoded the store preference value, {:?}", error.message);
+                        None
+                    }
+                }
+            )
     }
 
     fn write<Value: Serialize>(&self, key: PreferenceKey, value: Value) {
