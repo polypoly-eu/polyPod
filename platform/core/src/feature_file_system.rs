@@ -2,9 +2,6 @@ use crate::{core_failure::CoreFailure, io::file_system::FileSystem};
 use url::Url;
 use uuid::Uuid;
 
-// NOTE: feature_folder_path must have this format features_path + "/" + feature_name + "/"
-// The / at the end is important
-
 type ResourceUrl = String;
 #[allow(dead_code)]
 type ResourceId = String;
@@ -17,7 +14,8 @@ fn resource_url_from_id(id: &ResourceId) -> ResourceUrl {
 
 #[allow(dead_code)]
 fn fs_path_from_id(id: &ResourceId, feature_folder_path: &str) -> Result<String, CoreFailure> {
-    Ok(feature_folder_path.to_string() + id)
+    let fs_path = add_slash_at_end_if_necessary(feature_folder_path);
+    Ok(fs_path + id)
 }
 
 #[allow(dead_code)]
@@ -25,9 +23,9 @@ fn fs_path_from_resource_url(
     resource_url: &ResourceUrl,
     feature_folder_path: &str,
 ) -> Result<String, CoreFailure> {
-    // assumes feature_folder_path ends in '/'
+    let fs_prefix = add_slash_at_end_if_necessary(feature_folder_path);
     let res_prefix = "polypod://FeatureFiles/".to_string();
-    swap_prefix(resource_url, &res_prefix, feature_folder_path).map_err(|err| {
+    swap_prefix(resource_url, &res_prefix, &fs_prefix).map_err(|err| {
         CoreFailure::failed_to_convert_to_fs_path_from_resource_url(resource_url.to_string(), err)
     })
 }
@@ -37,9 +35,9 @@ fn resource_url_from_fs_path(
     fs_path: &str,
     feature_folder_path: &str,
 ) -> Result<String, CoreFailure> {
-    // assumes feature_folder_path ends in '/'
+    let fs_prefix = add_slash_at_end_if_necessary(feature_folder_path);
     let res_prefix = "polypod://FeatureFiles/".to_string();
-    swap_prefix(fs_path, feature_folder_path, &res_prefix).map_err(|err| {
+    swap_prefix(fs_path, &fs_prefix, &res_prefix).map_err(|err| {
         CoreFailure::failed_to_convert_to_resource_url_from_fs_path(fs_path.to_string(), err)
     })
 }
@@ -51,13 +49,22 @@ fn swap_prefix(string: &str, from: &str, to: &str) -> Result<String, String> {
     Ok(string.replace(from, to))
 }
 
+fn add_slash_at_end_if_necessary(string: &str) -> String {
+    if !string.chars().last().unwrap_or_default().eq(&'/') {
+        string.to_string() + "/"
+    } else {
+        string.to_string()
+    }
+}
+
 #[allow(dead_code)]
 fn make_sure_feature_files_dir_exists(
     platform_fs: &impl FileSystem,
     feature_folder_path: &str,
 ) -> Result<(), CoreFailure> {
-    if platform_fs.exists(feature_folder_path) {
-        platform_fs.create_dir_structure(feature_folder_path)?;
+    let fs_path = add_slash_at_end_if_necessary(feature_folder_path);
+    if platform_fs.exists(&fs_path) {
+        platform_fs.create_dir_structure(&fs_path)?;
     }
     Ok(())
 }
@@ -265,9 +272,7 @@ mod tests {
                 .map_err(|err| err.into_string().unwrap())
                 .unwrap()
                 + "/"
-                + "Test"
-                + "/";
-
+                + "Test";
             Self {
                 dir: temp,
                 features_folder_path: feature_folder_path,
@@ -284,20 +289,31 @@ mod tests {
         let result = fs_path_from_resource_url(&res_id, &config.features_folder_path);
         assert!(result.is_ok());
 
-        let fs_path = config.features_folder_path + &id;
+        let fs_path = config.features_folder_path.to_owned() + "/" + &id;
         assert_eq!(result.unwrap(), fs_path);
+
+        let result_w_slash =
+            fs_path_from_resource_url(&res_id, &(config.features_folder_path.to_owned() + "/"));
+
+        assert!(result_w_slash.is_ok());
+        assert_eq!(result_w_slash.unwrap(), fs_path);
     }
 
     #[test]
     fn test_resource_url_from_fs_path() {
         let config = MockFSConfig::new();
         let id = id();
-        let fs_path = config.features_folder_path.to_owned() + &id;
+        let fs_path = config.features_folder_path.to_owned() + "/" + &id;
         let result = resource_url_from_fs_path(&fs_path, &config.features_folder_path);
         assert!(result.is_ok());
 
         let resource_url = resource_url_from_id(&id);
         assert_eq!(result.unwrap(), resource_url);
+
+        let result_w_slash =
+            resource_url_from_fs_path(&fs_path, &(config.features_folder_path.to_owned() + "/"));
+        assert!(result_w_slash.is_ok());
+        assert_eq!(result_w_slash.unwrap(), resource_url);
     }
 
     #[test]
