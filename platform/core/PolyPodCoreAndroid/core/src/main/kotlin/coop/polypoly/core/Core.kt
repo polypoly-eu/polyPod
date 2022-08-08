@@ -4,15 +4,23 @@ import org.msgpack.core.MessagePack
 import org.msgpack.core.MessageUnpacker
 import org.msgpack.value.Value
 
+object JniApiSingleton {
+    val value: JniApi = JniApi()
+}
 class Core {
     companion object {
         fun bootstrapCore(languageCode: String) {
-            return handleCoreResponse(JniApi().bootstrapCore(languageCode)) {}
+            return handleCoreResponse(
+                JniApiSingleton.value.bootstrapCore(
+                    languageCode,
+                    JniApiSingleton.value
+                )
+            ) {}
         }
 
         fun loadFeatureCategories(featuresDir: String): List<FeatureCategory> {
             return handleCoreResponse(
-                JniApi().loadFeatureCategories(featuresDir)
+                JniApiSingleton.value.loadFeatureCategories(featuresDir)
             ) { mapFeatureCategories(it) }
         }
 

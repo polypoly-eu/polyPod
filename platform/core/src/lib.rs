@@ -1,3 +1,7 @@
+#[cfg(target_os = "android")]
+extern crate android_logger;
+#[cfg(target_os = "android")]
+extern crate log;
 pub mod core;
 pub mod core_failure;
 pub mod feature_categories;
