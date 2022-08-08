@@ -5,13 +5,16 @@ class ErrorUploader {
     static let shared = ErrorUploader()
 
     func uploadToServer(_ errorMsg: String,
-                        completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
+                        completionHandler: @escaping (String?, String?) -> Void
     ) {
         let endpointId = "polyApiErrorReport"
-        
+
         guard let endpointInfo = PodApi.shared.endpoint.endpointInfoFromId(endpointId: endpointId) else {
             Log.error("uploadToServer failed: No endpoint found for: \(endpointId)")
-            completionHandler("uploadToServer", MessagePackValue("\(#function): No endpoint found for \(endpointId)"))
+            completionHandler(
+                "uploadToServer",
+                "\(#function): No endpoint found for \(endpointId)"
+            )
             return
         }
         let payload = jsonStringify([errorMsg])
@@ -22,12 +25,12 @@ class ErrorUploader {
             contentType: "application/json",
             authToken: endpointInfo.auth
         ) { error in
-            Log.debug("uploadToServer(): error in POST to \(endpointId)")
             
+            Log.debug("uploadToServer(): error in POST to \(endpointId), \(error!.localizedDescription)")
+                        
             completionHandler(
                 "uploadToServer",
-                error == nil ? nil :
-                    MessagePackValue("\(#function): failed with \(String(describing: error?.localizedDescription))")
+                "Request to \(endpointId) failed: \(error!.localizedDescription)"
             )
         }
     }
