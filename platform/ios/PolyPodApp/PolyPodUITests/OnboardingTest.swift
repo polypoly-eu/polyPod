@@ -1,9 +1,10 @@
 import XCTest
 
 class OnboardingTest: XCTestCase {
-    let app = XCUIApplication()
+    private let app = XCUIApplication()
     
     override func setUp() {
+        super.setUp()
         continueAfterFailure = false
     }
     
@@ -21,7 +22,7 @@ class OnboardingTest: XCTestCase {
         typealias Keys = UserDefaults.Keys
         app.launchArguments = [
             "-\(Keys.firstRun.rawValue)",
-            "\(firstRun)",
+            "\(firstRun)"
         ]
         if resetDefaults {
             app.launchArguments += [
