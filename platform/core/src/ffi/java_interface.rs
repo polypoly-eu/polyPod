@@ -1,11 +1,14 @@
-use crate::core;
+use crate::common::serialization::{message_pack_deserialize, message_pack_serialize};
+use crate::core::{self, PlatformRequest, PlatformResponse};
 use crate::core_failure::CoreFailure;
-use crate::common::serialization::message_pack_serialize; 
+use crate::core_failure::CoreFailure;
 use jni::{
-    objects::{JClass, JString},
+    objects::{GlobalRef, JClass, JObject, JString, JValue},
     sys::jbyteArray,
-    JNIEnv,
+    JNIEnv, JavaVM,
 };
+
+use log::error;
 
 /// Bootstrap core with the given configuration:
 /// - language_code: User's locale language code.
@@ -16,20 +19,89 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     _: JClass,
     language_code: JString,
     fs_root: JString,
+    callback: JObject,
 ) -> jbyteArray {
     fn bootstrap(
         env: JNIEnv,
         language_code: JString,
         fs_root: JString,
+        plaftorm_bridge: BridgeToPlatform,
     ) -> Result<(), CoreFailure> {
         let language_code = String::from(read_jni_string(&env, language_code)?);
         let fs_root = String::from(read_jni_string(&env, fs_root)?);
-        core::bootstrap(language_code, fs_root)
+        core::bootstrap(language_code, fs_root, Box::new(plaftorm_bridge))
     }
-    env.byte_array_from_slice(&message_pack_serialize(
-        bootstrap(env, language_code, fs_root)
-    ))
+
+    let bridge = BridgeToPlatform {
+        callback: env.new_global_ref(callback).unwrap(),
+        java_vm: env.get_java_vm().unwrap(),
+    };
+
+    env.byte_array_from_slice(&message_pack_serialize(bootstrap(
+        env,
+        language_code,
+        fs_root,
+        bridge,
+    )))
     .unwrap()
+}
+
+struct BridgeToPlatform {
+    // The callback passed from Android is a local reference: only valid during the method call.
+    // To store it, we need to put it in a global reference.
+    // See https://developer.android.com/training/articles/perf-jni#local-and-global-references
+    callback: GlobalRef,
+
+    // We need JNIEnv to call the callback.
+    // JNIEnv is valid only in the same thread, so we have to store the vm instead, and use it to get
+    // a JNIEnv for the current thread.
+    // See https://developer.android.com/training/articles/perf-jni#javavm-and-jnienvb
+    java_vm: JavaVM,
+}
+
+impl core::PlatformHookRequest for BridgeToPlatform {
+    fn perform_request(&self, request: PlatformRequest) -> Result<PlatformResponse, String> {
+        let result: Result<PlatformResponse, String> = match self.java_vm.attach_current_thread() {
+            Ok(env) => {
+                let request_byte_array = env
+                    .byte_array_from_slice(&serialize(request))
+                    .map_err(|err| err.to_string())?;
+
+                let response_byte_array_as_jvalue = env
+                    .call_method(
+                        self.callback.as_obj(),
+                        "performRequest",
+                        "([B)[B",
+                        &[JValue::Object(JObject::from(request_byte_array))],
+                    )
+                    .map_err(|err| err.to_string())?;
+
+                let response_byte_array = response_byte_array_as_jvalue
+                    .l()
+                    .map_err(|err| err.to_string())?
+                    .into_inner();
+
+                let response_bytes: Vec<u8> = env
+                    .convert_byte_array(response_byte_array)
+                    .map_err(|err| err.to_string())?;
+
+                let deserialized: Result<PlatformResponse, String> = deserialize(response_bytes)?;
+                deserialized
+            }
+            Err(e) => {
+                error!("Rust:java_interface => attach_current_thread:Err => Couldn't get env::");
+                Err(e.to_string())
+            }
+        };
+
+        if result.is_err() {
+            let err = result.err().unwrap();
+            error!("Rust:java_interface:perform_request => result:Err {}", err);
+            return Err(err);
+        } else {
+            return result;
+        }
+    }
 }
 
 /// Loads feature categories from the given features dir.
@@ -42,7 +114,8 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_loadFeatureCategories(
     featuresDir: JString,
 ) -> jbyteArray {
     env.byte_array_from_slice(&message_pack_serialize(
-        read_jni_string(&env, featuresDir).and_then(|string| core::load_feature_categories(&string)),
+        read_jni_string(&env, featuresDir)
+            .and_then(|string| core::load_feature_categories(&string)),
     ))
     .unwrap()
 }

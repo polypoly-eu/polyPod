@@ -1,9 +1,9 @@
+use crate::common::serialization::{message_pack_deserialize, message_pack_serialize};
 use crate::core_failure::CoreFailure;
-use crate::common::serialization::message_pack_serialize; 
 use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
-use crate::core;
+use crate::core::{self, PlatformRequest, PlatformResponse};
 use std::os::raw::c_char;
 
 /// # Safety
@@ -18,21 +18,21 @@ use std::os::raw::c_char;
 #[no_mangle]
 pub unsafe extern "C" fn core_bootstrap(
     language_code: *const c_char,
-    fs_root: *const c_char
+    fs_root: *const c_char,
+    bridge: BridgeToPlatform,
 ) -> CByteBuffer {
     fn bootstrap(
         language_code: *const c_char,
-        fs_root: *const c_char
+        fs_root: *const c_char,
+        bridge: BridgeToPlatform,
     ) -> Result<(), CoreFailure> {
         unsafe {
             let language_code = String::from(cstring_to_str(&language_code)?);
             let fs_root = String::from(cstring_to_str(&fs_root)?);
-            core::bootstrap(language_code, fs_root)
+            core::bootstrap(language_code, fs_root, Box::new(bridge))
         }
     }
-    create_byte_buffer(message_pack_serialize(
-        bootstrap(language_code, fs_root)
-    ))
+    create_byte_buffer(message_pack_serialize(bootstrap(language_code, fs_root)))
 }
 
 /// # Safety
@@ -80,5 +80,33 @@ unsafe fn create_byte_buffer(bytes: Vec<u8>) -> CByteBuffer {
     CByteBuffer {
         length: slice.len() as c_uint,
         data: Box::into_raw(slice) as *mut u8,
+    }
+}
+
+unsafe fn byte_buffer_to_bytes(buffer: &CByteBuffer) -> Result<Vec<u8>, String> {
+    let length: usize = buffer
+        .length
+        .try_into()
+        .map_err(|_| "Could not get buffer length".to_string())?;
+    let slice = std::slice::from_raw_parts(buffer.data, length);
+    Ok(slice.to_vec())
+}
+
+#[repr(C)]
+pub struct BridgeToPlatform {
+    free_bytes: extern "C" fn(bytes: *mut u8),
+    perform_request: extern "C" fn(request: CByteBuffer) -> CByteBuffer,
+}
+
+impl core::PlatformHookRequest for BridgeToPlatform {
+    fn perform_request(&self, request: PlatformRequest) -> Result<PlatformResponse, String> {
+        let request_byte_buffer = unsafe { create_byte_buffer(message_pack_serialize(request)) };
+        let response_byte_buffer = (self.perform_request)(request_byte_buffer);
+        let bytes = unsafe { byte_buffer_to_bytes(&response_byte_buffer)? };
+        // deserialize returns Result<Result<PlatformResponse, String>>
+        // so don't forget the ? at the end in the next line.
+        let response: Result<PlatformResponse, String> = message_pack_deserialize(bytes)?;
+        (self.free_bytes)(response_byte_buffer.data);
+        return response;
     }
 }

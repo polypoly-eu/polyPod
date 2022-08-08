@@ -1,6 +1,7 @@
 use rmp_serde::{ Serializer, Deserializer };
 use serde::{ Serialize, Deserialize, de::DeserializeOwned };
 use std::io::Cursor;
+use crate::core_failure::CoreFailure;
 
 pub fn message_pack_serialize<T: Serialize>(input: T) -> Vec<u8> {
     let mut buf = Vec::new();
@@ -8,10 +9,14 @@ pub fn message_pack_serialize<T: Serialize>(input: T) -> Vec<u8> {
     buf
 }
 
-pub fn message_pack_deserialize<T>(input: Vec<u8>) -> T
+pub fn message_pack_deserialize<T>(input: Vec<u8>) -> Result<T, CoreFailure>
 where
     T: DeserializeOwned,
 {
     let mut de = Deserializer::new(Cursor::new(&input[..]));
-    Deserialize::deserialize(&mut de).unwrap()
+    let result: T = Deserialize::deserialize(&mut de)
+        .map_err(|err| 
+            CoreFailure::failed_to_decode_byte_array(err.to_string())
+        )?;
+    Ok(result)
 }

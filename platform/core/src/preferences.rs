@@ -18,7 +18,7 @@ impl Preferences {
         self.store
             .as_ref()
             .read(message_pack_serialize(key))
-            .map(message_pack_deserialize)
+            .and_then(|bytes| message_pack_deserialize(bytes).ok())
     }
 
     fn write<Value: Serialize>(&self, key: PreferenceKey, value: Value) {

@@ -4,6 +4,14 @@ import MessagePack
 
 typealias CoreResponseObject = [MessagePackValue: MessagePackValue]
 
+enum PlatformRequest: String {
+    case Example
+}
+
+enum PlatformResponse {
+    case Example(String)
+}
+
 /// Swift wrapper around the Rust Core.
 public final class Core {
     public static let instance = Core()
@@ -22,8 +30,28 @@ public final class Core {
         // Force unwrap should be safe
         self.languageCode = NSString(string: languageCode).utf8String!
         self.fsRoot = NSString(string: fsRoot).utf8String!
-       
-        return handleCoreResponse(core_bootstrap(self.languageCode, self.fsRoot), { _ in })
+
+        let bridge = BridgeToPlatform(free_bytes: {
+            $0?.deallocate()
+        }, perform_request: { in_bytes in
+            let response = Result<PlatformResponse, Error> {
+                let request_from_core = try unpackBytes(bytes: in_bytes)
+                let platformRequest = try mapToPlatformRequest(request: request_from_core)
+                return handle(platformRequest: platformRequest)
+            }
+            
+            // TODO: Use CoreFailure for failures.
+            return packPlatformResponse(response: response).toByteBuffer
+        })
+
+        return handleCoreResponse(
+            core_bootstrap(
+                self.languageCode, 
+                self.fsRoot, 
+                bridge
+            ), 
+            { _ in }
+        )
     }
 
     /// Loads the feature categories from the given features directory
