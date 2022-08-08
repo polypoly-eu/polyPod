@@ -1,9 +1,9 @@
 use crate::core_failure::CoreFailure;
-use crate::ffi::serialize;
+use crate::ffi::{deserialize, serialize};
 use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
-use crate::core;
+use crate::core::{self, PlatformRequest, PlatformResponse};
 use std::os::raw::c_char;
 
 /// # Safety
@@ -16,11 +16,15 @@ use std::os::raw::c_char;
 /// - language_code: User's locale language code.
 /// Returns a flatbuffer byte array with core_bootstrap_response.
 #[no_mangle]
-pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> CByteBuffer {
+pub unsafe extern "C" fn core_bootstrap(
+    language_code: *const c_char,
+    bridge: BridgeToPlatform,
+) -> CByteBuffer {
+    // TODO: Use bridge to Platform
     create_byte_buffer(serialize(
         cstring_to_str(&language_code)
             .map(String::from)
-            .and_then(core::bootstrap),
+            .and_then(|language_code| core::bootstrap(language_code, Box::new(bridge))),
     ))
 }
 
@@ -34,20 +38,6 @@ pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> CByteBu
 pub unsafe extern "C" fn load_feature_categories(features_dir: *const c_char) -> CByteBuffer {
     create_byte_buffer(serialize(
         cstring_to_str(&features_dir).and_then(core::load_feature_categories),
-    ))
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn exec_rdf_query(query: *const c_char) -> CByteBuffer {
-    create_byte_buffer(serialize(
-        cstring_to_str(&query).and_then(core::exec_rdf_query),
-    ))
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn exec_rdf_update(query: *const c_char) -> CByteBuffer {
-    create_byte_buffer(serialize(
-        cstring_to_str(&query).and_then(core::exec_rdf_update),
     ))
 }
 
@@ -83,5 +73,33 @@ unsafe fn create_byte_buffer(bytes: Vec<u8>) -> CByteBuffer {
     CByteBuffer {
         length: slice.len() as c_uint,
         data: Box::into_raw(slice) as *mut u8,
+    }
+}
+
+unsafe fn byte_buffer_to_bytes(buffer: &CByteBuffer) -> Result<Vec<u8>, String> {
+    let length: usize = buffer
+        .length
+        .try_into()
+        .map_err(|_| "Could not get buffer length".to_string())?;
+    let slice = std::slice::from_raw_parts(buffer.data, length);
+    Ok(slice.to_vec())
+}
+
+#[repr(C)]
+pub struct BridgeToPlatform {
+    free_bytes: extern "C" fn(bytes: *mut u8),
+    perform_request: extern "C" fn(request: CByteBuffer) -> CByteBuffer,
+}
+
+impl core::PlatformHookRequest for BridgeToPlatform {
+    fn perform_request(&self, request: PlatformRequest) -> Result<PlatformResponse, String> {
+        let request_byte_buffer = unsafe { create_byte_buffer(serialize(request)) };
+        let response_byte_buffer = (self.perform_request)(request_byte_buffer);
+        let bytes = unsafe { byte_buffer_to_bytes(&response_byte_buffer)? };
+        // deserialize returns Result<Result<PlatformResponse, String>>
+        // so don't forget the ? at the end in the next line.
+        let response: Result<PlatformResponse, String> = deserialize(bytes)?;
+        (self.free_bytes)(response_byte_buffer.data);
+        return response;
     }
 }
