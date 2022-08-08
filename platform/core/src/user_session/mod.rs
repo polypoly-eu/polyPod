@@ -1,6 +1,6 @@
-use std::time::{Duration, Instant};
-use serde::{ Serialize, Deserialize };
+use serde::{Deserialize, Serialize};
 use std::sync::Arc;
+use std::time::{Duration, Instant};
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
 
@@ -10,12 +10,12 @@ pub struct UserSessionTimeout {
     duration: Option<u8>,
 }
 
-#[derive(Debug, PartialEq, Clone, Serialize, Deserialize, EnumIter )]
+#[derive(Debug, PartialEq, Clone, Serialize, Deserialize, EnumIter)]
 pub enum TimeoutOption {
     Option1,
     Option2,
     Option3,
-    NoTimeout
+    NoTimeout,
 }
 
 const ONE_MINUTE_IN_SECONDS: u8 = 60;
@@ -23,7 +23,7 @@ const ONE_MINUTE_IN_SECONDS: u8 = 60;
 impl TimeoutOption {
     pub fn duration(&self) -> Option<u8> {
         match self {
-            Option1=> Some(5 * ONE_MINUTE_IN_SECONDS),
+            Option1 => Some(5 * ONE_MINUTE_IN_SECONDS),
             Option2 => Some(15 * ONE_MINUTE_IN_SECONDS),
             Option3 => Some(60 * ONE_MINUTE_IN_SECONDS),
             NoTimeout => None,
@@ -36,12 +36,10 @@ impl TimeoutOption {
 
     pub fn all_option_timeouts() -> Vec<UserSessionTimeout> {
         TimeoutOption::iter()
-            .map(|option|
-                 UserSessionTimeout { 
-                     option: option.clone(), 
-                     duration: option.duration() 
-                 }
-            )
+            .map(|option| UserSessionTimeout {
+                option: option.clone(),
+                duration: option.duration(),
+            })
             .collect()
     }
 }
@@ -55,16 +53,16 @@ type TimeStampBuilder<'a> = Box<dyn Fn() -> Instant + Sync + Send + 'a>;
 
 pub struct UserSession<'a> {
     inactive_timestamp: Option<Instant>,
-    timestamp_builder: TimeStampBuilder<'a>, 
-    store: Arc<dyn TimeoutOptionStore>, 
+    timestamp_builder: TimeStampBuilder<'a>,
+    store: Arc<dyn TimeoutOptionStore>,
 }
 
 impl<'a> UserSession<'a> {
-    pub fn new(     
-        timestamp_builder: TimeStampBuilder<'a>, 
-        store: Arc<dyn TimeoutOptionStore>, 
+    pub fn new(
+        timestamp_builder: TimeStampBuilder<'a>,
+        store: Arc<dyn TimeoutOptionStore>,
     ) -> Self {
-        UserSession { 
+        UserSession {
             inactive_timestamp: None,
             timestamp_builder,
             store,
@@ -72,19 +70,20 @@ impl<'a> UserSession<'a> {
     }
 
     pub fn is_session_expired(&self) -> bool {
-        match (self.inactive_timestamp, self.get_timeout_option().duration()) {
+        match (
+            self.inactive_timestamp,
+            self.get_timeout_option().duration(),
+        ) {
             (Some(timestamp), Some(interval)) => {
                 let now = (self.timestamp_builder)();
                 timestamp + Duration::new(interval.into(), 0) <= now
-            },
-            _ => false
+            }
+            _ => false,
         }
     }
 
     pub fn did_become_inactive(&mut self) {
-        self.inactive_timestamp = Some(
-            (self.timestamp_builder)()
-        );
+        self.inactive_timestamp = Some((self.timestamp_builder)());
     }
 
     pub fn set_timeout_option(&self, option: TimeoutOption) {
@@ -92,7 +91,9 @@ impl<'a> UserSession<'a> {
     }
 
     pub fn get_timeout_option(&self) -> TimeoutOption {
-        self.store.get_timeout_option().unwrap_or_else(TimeoutOption::default_option)
+        self.store
+            .get_timeout_option()
+            .unwrap_or_else(TimeoutOption::default_option)
     }
 }
 
@@ -102,13 +103,13 @@ mod tests {
     use std::sync::Mutex;
 
     struct MockStore {
-        timeout_option: Arc<Mutex<Option<TimeoutOption>>>
+        timeout_option: Arc<Mutex<Option<TimeoutOption>>>,
     }
 
     impl MockStore {
         fn new(option: Option<TimeoutOption>) -> MockStore {
             MockStore {
-                timeout_option: Arc::new(Mutex::from(option))
+                timeout_option: Arc::new(Mutex::from(option)),
             }
         }
     }
@@ -127,10 +128,7 @@ mod tests {
 
     #[test]
     fn get_timeout_option_no_stored_option_returns_default() {
-        let session = UserSession::new(
-            Box::new(Instant::now),
-            Arc::new(MockStore::new(None)),
-        );
+        let session = UserSession::new(Box::new(Instant::now), Arc::new(MockStore::new(None)));
 
         assert_eq!(
             session.get_timeout_option(),
@@ -146,58 +144,49 @@ mod tests {
             Arc::new(MockStore::new(Some(stored_option.clone()))),
         );
 
-        assert_eq!(
-            session.get_timeout_option(),
-            stored_option
-        )
+        assert_eq!(session.get_timeout_option(), stored_option)
     }
 
     #[test]
     fn app_becomes_inactive_saves_the_timestamp() {
         let timestamp = Instant::now();
-        let mut session = UserSession::new(
-            Box::new(|| timestamp),
-            Arc::new(MockStore::new(None)),
-        );
+        let mut session = UserSession::new(Box::new(|| timestamp), Arc::new(MockStore::new(None)));
 
         session.did_become_inactive();
-        assert_eq!(
-            session.inactive_timestamp, 
-            Some(timestamp)
-        )
+        assert_eq!(session.inactive_timestamp, Some(timestamp))
     }
-    
+
     #[test]
     fn app_becomes_active_returns_correct_expired_state() {
         let timestamp = Mutex::from(Instant::now());
         let stored_option = TimeoutOption::Option1;
         let timeout_interval = Duration::new(stored_option.duration().unwrap().into(), 0);
         let one_second = Duration::new(1, 0);
-    
+
         let mut session = UserSession::new(
             Box::new(|| *timestamp.lock().unwrap()),
             Arc::new(MockStore::new(Some(stored_option))),
         );
-        
+
         assert!(
             !session.is_session_expired(),
             "The session should not be expired by default",
         );
-        
+
         session.did_become_inactive();
-        
+
         *timestamp.lock().unwrap() += timeout_interval - one_second;
         assert!(
             !session.is_session_expired(),
             "The session should not be expired when timeout did not yet passed!"
         );
-        
+
         *timestamp.lock().unwrap() += one_second;
         assert!(
             session.is_session_expired(),
             "The session should be expired when timeout just passed!"
         );
-        
+
         *timestamp.lock().unwrap() += one_second;
         assert!(
             session.is_session_expired(),

@@ -184,10 +184,7 @@ impl CoreFailure {
     pub fn failed_to_decode_byte_array(message: String) -> Self {
         CoreFailure {
             code: FailureCode::FailedToDecodeByteArray.value(),
-            message: format!(
-                "Failed to decode bytearray, info  '{}'",
-                message,
-            ),
+            message: format!("Failed to decode bytearray, info  '{}'", message),
         }
     }
 }
