@@ -88,9 +88,9 @@ private struct FeatureCard: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            if let thumbnail = feature.thumbnail {
+            if let thumbnail = feature.thumbnail, let uiImage = UIImage(contentsOfFile: thumbnail.path) {
                 Image(
-                    uiImage: UIImage(contentsOfFile: thumbnail.path)!
+                    uiImage: uiImage
                 )
                 .resizable()
                 .aspectRatio(contentMode: .fit)

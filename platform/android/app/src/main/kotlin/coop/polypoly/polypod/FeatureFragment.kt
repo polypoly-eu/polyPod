@@ -19,7 +19,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import coop.polypoly.polypod.features.Feature
+import coop.polypoly.core.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.PolyNavObserver
@@ -27,7 +27,7 @@ import kotlinx.coroutines.CompletableDeferred
 
 private const val PICK_FILE_REQUEST_CODE = 1
 
-private fun luminance(color: Int): Double =
+fun luminance(color: Int): Double =
     Color.red(color) * 0.2126 +
         Color.green(color) * 0.7152 +
         Color.blue(color) * 0.0722
@@ -64,7 +64,7 @@ private enum class ForegroundResources(
 
     companion object {
         fun fromBackgroundColor(color: Int): ForegroundResources =
-            if (luminance(color) > 80) DARK else LIGHT
+            if (luminance(color) > 100) DARK else LIGHT
     }
 }
 
@@ -85,12 +85,11 @@ open class FeatureFragment : Fragment() {
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    private val args: FeatureFragmentArgs by navArgs()
-
     private lateinit var feature: Feature
     private lateinit var foregroundResources: ForegroundResources
     // Public for test purposes
     lateinit var featureContainer: FeatureContainer
+    private val args: FeatureFragmentArgs by navArgs()
 
     private val errorDialog: AlertDialog by lazy {
         AlertDialog.Builder(context)
@@ -112,15 +111,15 @@ open class FeatureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (view.findViewById(R.id.feature_title) as TextView).text =
-            args.featureName
-        logger.debug(
-            "Inside FeatureFragment, feature to load: '{}'",
-            args.featureName
-        )
-        feature =
-            FeatureStorage().loadFeature(requireContext(), args.featureFile)
 
+        FeatureStorage.featureForId(args.featureId)?.let {
+            (view.findViewById(R.id.feature_title) as TextView).text = it.name
+            logger.debug(
+                "Inside FeatureFragment, feature to load: '{}'",
+                it.name
+            )
+            feature = it
+        }
         setupFeature(view)
     }
 

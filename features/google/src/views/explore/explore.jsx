@@ -6,7 +6,9 @@ import {
     Screen,
     RoutingWrapper,
     ClickableCard,
-    PolyButton,
+    Banner,
+    NotificationBanner,
+    notificationTypes,
 } from "@polypoly-eu/poly-look";
 
 import i18n from "!silly-i18n";
@@ -16,37 +18,50 @@ import { ministories } from "../ministories/ministories.js";
 import { useHistory } from "react-router-dom";
 import { GoogleContext } from "../../context/google-context.jsx";
 
-const ReportCard = () => {
-    const history = useHistory();
-
-    return (
-        <div className="analysis-card unrecognized-analysis-card poly-theme-light">
-            <div className="unrecognized-analysis-title">
-                <h1>{i18n.t("explore:reportCard.headline")}</h1>
-            </div>
-            <p>{i18n.t("explore:reportCard.text")}</p>
-            <RoutingWrapper route="/report" history={history}>
-                <PolyButton
-                    label={i18n.t("explore:reportCard.button")}
-                    className="report-button"
-                />
-            </RoutingWrapper>
-        </div>
-    );
-};
-
 const ExploreView = () => {
     const { account } = useContext(PolyImportContext);
-    const { reportIsSent } = useContext(GoogleContext);
+    const { reportIsSent, handleReportSent } = useContext(GoogleContext);
 
     const history = useHistory();
     const exploreRef = useRef();
+
+    const handleCloseNotification = () => {
+        handleReportSent(null);
+    };
+
+    const renderReportResult = () =>
+        reportIsSent !== null && (
+            <NotificationBanner
+                notificationType={
+                    reportIsSent
+                        ? notificationTypes.success
+                        : notificationTypes.error
+                }
+                handleCloseNotification={handleCloseNotification}
+            >
+                {reportIsSent ? (
+                    <div>{i18n.t("explore:report.success")}</div>
+                ) : (
+                    <div>{i18n.t("explore:report.error")}</div>
+                )}
+            </NotificationBanner>
+        );
 
     const renderFileAnalyses = () => {
         if (!account) return null;
         return (
             <List>
-                {!reportIsSent && <ReportCard />}
+                {!reportIsSent && (
+                    <Banner
+                        title={i18n.t("explore:reportCard.headline")}
+                        description={i18n.t("explore:reportCard.text")}
+                        button={{
+                            label: i18n.t("explore:reportCard.button"),
+                            history: useHistory(),
+                            route: "/report",
+                        }}
+                    />
+                )}
                 {ministories.map((MinistoryClass, index) => {
                     const ministory = new MinistoryClass({
                         account,
@@ -99,11 +114,12 @@ const ExploreView = () => {
 
     return (
         <Screen
-            className="explore"
+            className="explore-view"
             layout="poly-standard-layout"
             onScroll={saveScrollingProgress}
             scrollingRef={exploreRef}
         >
+            {renderReportResult()}
             {renderFileAnalyses()}
         </Screen>
     );

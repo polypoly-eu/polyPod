@@ -1,0 +1,14 @@
+:root {
+    /* Border radius 
+    
+    Potencial use for future "Figma tokens" variables. Currectly used in PolyButton component as example. */
+      --pl-radius-1x: 4px;
+      --pl-radius-2x: calc(var(--pl-radius-1x) * 2);
+      --pl-radius-3x: calc(var(--pl-radius-1x) * 3);
+      --pl-radius-4x: calc(var(--pl-radius-1x) * 4);
+      --pl-radius-5x: calc(var(--pl-radius-1x) * 5);
+      --pl-radius-6x: calc(var(--pl-radius-1x) * 6);
+      --pl-radius-7x: calc(var(--pl-radius-1x) * 7);
+      --pl-radius-8x: calc(var(--pl-radius-1x) * 8);
+    }
+    

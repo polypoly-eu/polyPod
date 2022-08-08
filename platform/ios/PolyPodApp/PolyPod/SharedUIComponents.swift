@@ -32,4 +32,3 @@ struct PrimaryButton: View {
         .frame(maxWidth: .infinity, alignment: .center)
     }
 }
-

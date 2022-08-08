@@ -8,13 +8,11 @@ extension Color {
         static var darkForeground = Color(fromHex: "#0F1938")
         static var lightBackground = Color(fromHex: "#FFFFFF")
         static var semiLightBackground = Color(fromHex: "#EDF2F7")
+        static var grey300Foreground = Color(fromHex: "#cbd5e0")
     }
     
     var compatCgColor: CGColor? {
-        if #available(iOS 14, *) {
-            return cgColor
-        }
-        return UIColor.compatInit(self).cgColor
+        return cgColor
     }
     
     var luminance: Double {
@@ -27,7 +25,7 @@ extension Color {
         return Double(red * 0.2126 + green * 0.7152 + blue * 0.0722)
     }
     
-    var isLight: Bool { luminance * 255 > 80 }
+    var isLight: Bool { luminance * 255 > 100 }
     
     init(fromHex hexValue: String) {
         let scanner = Scanner(string: hexValue)

@@ -2,7 +2,6 @@
 xcuserdata/
 *.xcworkspacedata
 IDEWorkspaceChecks.plist
-
+.build/
 # Generated files
-FlatbuffersGenerated/
 PolyPodCore.xcframework

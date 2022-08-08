@@ -15,14 +15,15 @@ class Authentication {
             BiometricManager.Authenticators.BIOMETRIC_WEAK or
                 BiometricManager.Authenticators.DEVICE_CREDENTIAL
 
-        fun shouldShowBiometricsPrompt(context: Context): Boolean {
+        fun shouldShowAuthOnboarding(context: Context): Boolean {
             return biometricsAvailable(context) &&
-                Preferences.isBiometricCheck(context) &&
+                !Preferences.hasUserConfiguredAuthentication(context) &&
+                !Preferences.isSecurityDoNotAskAgainEnabled(context) &&
                 !Preferences.isBiometricEnabled(context) &&
                 !Preferences.isFirstRun(context)
         }
 
-        fun shouldAuthenticate(context: Context): Boolean {
+        fun canAuthenticate(context: Context): Boolean {
             return biometricsAvailable(context) &&
                 Preferences.isBiometricEnabled(context) &&
                 !isAuthenticated
@@ -30,15 +31,26 @@ class Authentication {
 
         fun setUp(
             activity: FragmentActivity,
-            newStatus: Boolean,
+            showAuthTexts: Boolean = false,
+            newBiometricState: Boolean = false,
             setupComplete: () -> Unit
         ) {
-            authenticate(activity, newStatus) { success ->
+            authenticate(
+                activity,
+                showAuthTexts,
+                newBiometricState
+            ) { success ->
                 if (success) {
                     Preferences.setBiometricEnabled(
                         activity,
-                        newStatus
+                        newBiometricState
                     )
+                    if (newBiometricState) {
+                        Preferences.setUserConfiguredAuthentication(
+                            activity.applicationContext,
+                            true
+                        )
+                    }
                 }
                 setupComplete()
             }
@@ -46,28 +58,29 @@ class Authentication {
 
         fun authenticate(
             activity: FragmentActivity,
-            newStatus: Boolean = false,
+            showAuthTexts: Boolean = false,
+            newBiometricState: Boolean = false,
             authComplete: ((Boolean) -> Unit)
         ) {
             val isBiometricEnabled = Preferences.isBiometricEnabled(activity)
             if (!biometricsAvailable(activity) ||
-                (!newStatus && !isBiometricEnabled)
+                (!newBiometricState && !isBiometricEnabled)
             ) {
                 authComplete(true)
                 return
             }
 
             val title =
-                if (isBiometricEnabled)
-                    activity.getString(R.string.re_auth_prompt_title)
-                else
+                if (showAuthTexts)
                     activity.getString(R.string.auth_prompt_title)
+                else
+                    activity.getString(R.string.re_auth_prompt_title)
 
             val subtitle =
-                if (isBiometricEnabled)
-                    activity.getString(R.string.re_auth_prompt_subtitle)
-                else
+                if (showAuthTexts)
                     activity.getString(R.string.auth_prompt_subtitle)
+                else
+                    activity.getString(R.string.re_auth_prompt_subtitle)
 
             val promptInfo = BiometricPrompt.PromptInfo.Builder()
                 .setTitle(title)

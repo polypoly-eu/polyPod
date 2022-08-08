@@ -5,17 +5,67 @@
   },
   "devDependencies": {
     "bestzip": "^2.2.0",
+    "demo-feature": "file:../demo",
     "facebook-import-feature": "file:../facebookImport",
     "google-feature": "file:../google",
     "lexicon-feature": "file:../lexicon",
     "poly-explorer-feature": "file:../polyExplorer",
-    "poly-preview-feature": "file:../polyPreview"
+    "polypedia-preview": "file:../polypediaPreview",
+    "amazon-data-importer-preview": "file:../amazonDataImporterPreview",
+    "company-data-cleaner-preview": "file:../companyDataCleanerPreview",
+    "cooperative-membership-preview": "file:../cooperativeMembershipPreview",
+    "feature-store-preview": "file:../featureStorePreview",
+    "gdpr-data-importer-preview": "file:../gdprDataImporterPreview",
+    "netflix-data-importer-preview": "file:../netflixDataImporterPreview",
+    "polypoly-membership-preview": "file:../polypolyMembershipPreview",
+    "poly-talk-preview": "file:../polyTalkPreview",
+    "test-feature": "file:../test"
   },
   "private": true,
   "polyPodFeatures": [
     {
-      "archiveName": "polyPreview",
-      "moduleName": "poly-preview-feature",
+      "archiveName": "polypediaPreview",
+      "moduleName": "polypedia-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "cooperativeMembershipPreview",
+      "moduleName": "cooperative-membership-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "polypolyMembershipPreview",
+      "moduleName": "polypoly-membership-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "amazonPreview",
+      "moduleName": "amazon-data-importer-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "companyDataCleanerPreview",
+      "moduleName": "company-data-cleaner-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "featureStorePreview",
+      "moduleName": "feature-store-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "gdprImporterPreview",
+      "moduleName": "gdpr-data-importer-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "NetflixImportPreview",
+      "moduleName": "netflix-data-importer-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "polyTalkPreview",
+      "moduleName": "poly-talk-preview",
       "artifactPath": "dist"
     },
     {
@@ -37,6 +87,58 @@
       "archiveName": "lexicon",
       "moduleName": "lexicon-feature",
       "artifactPath": "public"
+    },
+    {
+      "archiveName": "demo",
+      "moduleName": "demo-feature",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "test",
+      "moduleName": "test-feature",
+      "artifactPath": "dist"
+    }
+  ],
+  "polyPodCategories": [
+    {
+      "id": "yourData",
+      "name": "Your Data",
+      "features": [
+        "google",
+        "facebookImport",
+        "amazonPreview",
+        "NetflixImportPreview",
+        "gdprImporterPreview",
+        "companyDataCleanerPreview",
+        "polypolyMembershipPreview",
+        "cooperativeMembershipPreview"
+      ]
+    },
+    {
+      "id": "knowHow",
+      "name": "Data Know-How",
+      "features": [
+        "polyExplorer",
+        "lexicon",
+        "polypediaPreview"
+      ]
+    },
+    {
+      "id": "tools",
+      "name": "Tools",
+      "features": [
+        "featureStorePreview",
+        "polyTalkPreview"
+      ]
+    },
+    {
+      "id": "developer",
+      "name": "Developer",
+      "visible": true,
+      "features": [
+        "demo",
+        "test"
+      ]
     }
   ]
 }

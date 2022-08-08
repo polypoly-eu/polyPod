@@ -1,0 +1,28 @@
+.awakening-location-ministory-summary h2,
+.awakening-location-ministory-summary h2 {
+    margin-top: 50px;
+    margin-bottom: 28px;
+}
+.date-browser {
+    justify-content: center;
+}
+
+.awakening-location-ministory-details {
+    display: flex;
+    flex-direction: column;
+    height: 100% ;
+    position: relative;
+}
+
+.awakening-location-ministory-details .source-info-container {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding-bottom: calc(var(--gdu) * 4);
+    background-color: var(--theme-primary-color);
+}
+
+.awakening-location-ministory-details .source-info-container .poly-small-print {
+    margin-left: calc(var(--gdu) * 4);
+}

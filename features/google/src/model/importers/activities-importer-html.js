@@ -1,7 +1,7 @@
-import { relevantZipEntries } from "@polypoly-eu/poly-analysis";
 import UserActivity from "../entities/user-activity";
-import { matchRegex } from "./utils/lang-constants";
-
+import ActivityFileInfo from "../entities/activity-file-info";
+import { convertFileSizeUnit } from "./utils/importer-utils";
+import BaseActivitiesImporter from "./base-activities-importer";
 class ActivityHtmlParser {
     constructor() {
         this._iframe = document.createElement("iframe");
@@ -39,10 +39,16 @@ class ActivityHtmlParser {
         const { contentDocument } = this._iframe;
         contentDocument.write(text);
         contentDocument.close();
-
+        const fileSize = convertFileSizeUnit(content.byteLength);
         const pathParts = entry.path.split("/");
         const productName = pathParts[pathParts.length - 2];
-        return this._scrapeTimestamps(contentDocument, productName);
+        return {
+            userActivity: this._scrapeTimestamps(contentDocument, productName),
+            fileInfo: new ActivityFileInfo({
+                productName,
+                fileSize,
+            }),
+        };
     }
 
     release() {
@@ -51,20 +57,12 @@ class ActivityHtmlParser {
     }
 }
 
-export default class ActivitiesHtmlImporter {
+export default class ActivitiesHtmlImporter extends BaseActivitiesImporter {
+    constructor() {
+        super(new ActivityHtmlParser());
+    }
     async import({ zipFile, facebookAccount: googleAccount }) {
-        const entries = await relevantZipEntries(zipFile);
-        const activityEntries = entries.filter(({ path }) =>
-            matchRegex(path, this)
-        );
-        const parser = new ActivityHtmlParser();
-        googleAccount.activities.push(
-            ...(
-                await Promise.all(
-                    activityEntries.map((entry) => parser.parse(entry))
-                )
-            ).flat()
-        );
-        parser.release();
+        await super.import({ zipFile, googleAccount });
+        this._parser.release();
     }
 }

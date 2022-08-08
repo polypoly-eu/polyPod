@@ -14,11 +14,9 @@ import "./sideSwiper.css";
  * @param {callback} [props.onClose] - Called after the exit animations end.
  * @param {string} [props.leftDistance] - Contents distance from the left
  * of the screen. Can be any value that is compatible with CSS calc rule;
- * defaults to 124px.
+ * defaults to 15vw.
  * @param {Array[number]} [props.backdropColor] - The backdrop color as a rgba array;
  * defaults to [0, 0, 0, 0.3].
- * @param {string} [props.screenMaxWidth] - The max width of the screen;
- * defaults to the value of --max-width.
  * @param {string} [props.animationDuration] - The duration of the animations.
  * Can be any value that is compatible with CSS transition-duration rule;
  * defaults to 0.6s.
@@ -28,21 +26,16 @@ import "./sideSwiper.css";
  * If it has clickable elements, then Event.stopPropagation()
  * must be called in the event's handler function, otherwise the Slider will close.
  * If the component has vertical scroll then it must accept custom styles.
- * @param {string} [props.lastChildSelector] - CSS selector for the last child of
- * the Component prop. Use it if you think the Component might have
- * a vertical scroll, unnecessary otherwise.
  * @returns {JSX.Element}
  */
 
 const SideSwiper = ({
   open = false,
   onClose,
-  leftDistance = "124px",
+  leftDistance = "15vw",
   backdropColor = [0, 0, 0, 0.3],
-  screenMaxWidth = "var(--max-width)",
   animationDuration = "0.6s",
   Component,
-  lastChildSelector,
 }) => {
   let [red, green, blue, alpha] = backdropColor;
   let commonStyles = {
@@ -54,7 +47,7 @@ const SideSwiper = ({
       backgroundColor: `rgba(${red}, ${green}, ${blue}, ${alpha})`,
     },
     contentsIn: { transform: `translateX(${leftDistance})` },
-    contentsOutRight: { transform: `translateX(${screenMaxWidth})` },
+    contentsOutRight: { transform: `translateX(${window.innerWidth}px)` },
     backgroundTransition: { transition: "background-color" },
     contentsTransition: { transition: "transform" },
     noScroll: { overflowY: "hidden" },
@@ -63,7 +56,6 @@ const SideSwiper = ({
     in: "in",
     interactive: "interactive",
     out: "out",
-    outUp: "outUp",
     outDone: "outDone",
   };
   const axes = {
@@ -83,45 +75,21 @@ const SideSwiper = ({
     commonStyles.contentsOutRight
   );
   const [backdropStyle, updateBackdropStyle] = useState({});
-  const [verticalGesture, updateVerticalGesture] = useState("scroll");
   const [childScroll, updateChildScroll] = useState({});
   const [movement, updateMovement] = useState({
     startX: null,
     startY: null,
     currentX: null,
     currentY: null,
-    swipeY: null,
     direction: null,
   });
   const [axis, updateAxis] = useState("");
   const [animationsDoneCount, updateAnimationsStatus] = useState(0);
   const [contentsDOMRect, updateContentsDOMRect] = useState();
-  const [observer, updateObserver] = useState();
-  const [alphaIncDist, updateAlphaIncDist] = useState({
-    x: null,
-    y: null,
-  });
+  const [alphaIncDist, updateAlphaIncDist] = useState(null);
   let contentsRef = useRef();
 
   useEffect(() => {
-    let lastChild = contentsRef.current.querySelector(lastChildSelector);
-    if (lastChild)
-      updateObserver(
-        new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) {
-              updateVerticalGesture("swipe");
-            } else {
-              updateVerticalGesture("scroll");
-            }
-          },
-          {
-            threshold: [1],
-          }
-        )
-      );
-    else updateVerticalGesture("swipe");
-
     updateContentsStyle({
       ...contentsStyle,
       width: `calc(${window.innerWidth}px - ${leftDistance})`,
@@ -129,11 +97,6 @@ const SideSwiper = ({
 
     updateBackdropStyle(commonStyles.backdropOut);
   }, []);
-
-  useEffect(() => {
-    let lastChild = contentsRef.current.querySelector(lastChildSelector);
-    if (observer) observer.observe(lastChild);
-  }, [observer]);
 
   useEffect(() => {
     if (open) {
@@ -161,10 +124,7 @@ const SideSwiper = ({
       if (!contentsDOMRect) {
         let boundingRect = contentsRef.current.getBoundingClientRect();
         updateContentsDOMRect(boundingRect);
-        updateAlphaIncDist({
-          x: boundingRect.width / ((1 - alpha) * 100),
-          y: boundingRect.height / ((1 - alpha) * 100),
-        });
+        updateAlphaIncDist(boundingRect.width / ((1 - alpha) * 100));
       }
       updateAnimationsStatus(0);
       updateBackdropStyle({
@@ -187,22 +147,6 @@ const SideSwiper = ({
       });
     }
 
-    if (step == steps.outUp) {
-      updateContentsStyle({
-        ...contentsStyle,
-        ...commonStyles.duration,
-        transform: `translate(${leftDistance},${
-          -1 * contentsDOMRect.height
-        }px)`,
-      });
-      updateBackdropStyle({
-        ...commonStyles.backdropOut,
-        ...commonStyles.backgroundTransition,
-        ...commonStyles.duration,
-        ...commonStyles.noInteraction,
-      });
-    }
-
     if (step == steps.outDone) onClose();
   }, [step]);
 
@@ -215,16 +159,6 @@ const SideSwiper = ({
   }, [animationsDoneCount]);
 
   useEffect(() => {
-    if (axis == axes.x) return;
-
-    if (verticalGesture == "swipe") {
-      updateMovement({ ...movement, swipeY: movement.currentY });
-      if (isPressing) updateChildScroll(commonStyles.noScroll);
-      else updateChildScroll({});
-    } else updateMovement({ ...movement, swipeY: null });
-  }, [verticalGesture]);
-
-  useEffect(() => {
     if (isPressing)
       applyStyle(
         movement.startX - movement.currentX,
@@ -234,14 +168,13 @@ const SideSwiper = ({
       );
   }, [movement]);
 
-  function applyStyle(distanceX, distanceY) {
+  function applyStyle(distanceX) {
     let xValue = -1 * distanceX + contentsDOMRect.x;
-    let yValue = -1 * distanceY;
 
     switch (axis) {
       case axes.x: {
         updateChildScroll(commonStyles.noScroll);
-        let alphaIncX = Math.floor(distanceX / alphaIncDist.x) * 0.1;
+        let alphaIncX = Math.floor(distanceX / alphaIncDist) * 0.1;
         updateContentsStyle({
           ...contentsStyle,
           transform: `translateX(${clamp(
@@ -262,29 +195,6 @@ const SideSwiper = ({
         break;
       }
       case axes.y: {
-        if (verticalGesture == "scroll") return;
-        if (movement.direction == directions.up)
-          updateChildScroll(commonStyles.noScroll);
-
-        let alphaIncY = Math.floor(distanceY / alphaIncDist.y) * -0.1;
-
-        updateContentsStyle({
-          ...contentsStyle,
-          transform: `translate(${leftDistance},${clamp(
-            yValue,
-            -1 * contentsDOMRect.height,
-            0
-          )}px)`,
-          transitionDuration: "0ms",
-        });
-        updateBackdropStyle({
-          backgroundColor: `rgba(${red}, ${green}, ${blue},${clamp(
-            alpha + alphaIncY,
-            0.1,
-            alpha
-          )})`,
-          transitionDuration: "10ms",
-        });
         break;
       }
     }
@@ -293,12 +203,6 @@ const SideSwiper = ({
   function clamp(val, min, max) {
     return Math.min(Math.max(val, min), max);
   }
-
-  useEffect(() => {
-    return () => {
-      if (observer) observer.disconnect();
-    };
-  }, []);
 
   function touchStart(ev) {
     updateMovement({
@@ -351,6 +255,8 @@ const SideSwiper = ({
   }
 
   function touchEnd() {
+    updateMousePress(false);
+
     switch (axis) {
       case axes.x: {
         if (
@@ -362,21 +268,13 @@ const SideSwiper = ({
         break;
       }
       case axes.y: {
-        if (
-          verticalGesture == "swipe" &&
-          movement.direction == directions.up &&
-          Math.abs(movement.currentY - (movement.swipeY || movement.startY)) >
-            contentsDOMRect.height / 2
-        ) {
-          updateStep(steps.outUp);
-        } else reset();
+        reset();
         break;
       }
     }
   }
 
   function reset() {
-    updateMousePress(false);
     updateContentsStyle({
       ...contentsStyle,
       ...commonStyles.contentsIn,
@@ -394,7 +292,6 @@ const SideSwiper = ({
       startY: null,
       currentX: null,
       currentY: null,
-      swipeY: null,
       direction: null,
     });
   }
@@ -405,7 +302,10 @@ const SideSwiper = ({
       onTransitionEnd={
         step == steps.interactive
           ? () => {}
-          : () => updateAnimationsStatus(animationsDoneCount + 1)
+          : () =>
+              updateAnimationsStatus(
+                (animationsDoneCount) => animationsDoneCount + 1
+              )
       }
       style={backdropStyle}
       onClick={() => {

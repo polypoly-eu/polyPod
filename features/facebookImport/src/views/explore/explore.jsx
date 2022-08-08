@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import RouteButton from "../../components/buttons/routeButton.jsx";
 import { ImporterContext } from "../../context/importer-context.jsx";
 import {
     List,
@@ -10,30 +9,15 @@ import {
     RoutingWrapper,
     ClickableCard,
     Screen,
+    Banner,
+    NotificationBanner,
+    notificationTypes,
 } from "@polypoly-eu/poly-look";
 
 import i18n from "!silly-i18n";
 
 import "./explore.css";
 import { ministories } from "../ministories/ministories.js";
-
-const PopUpMessage = ({ children, reportResultAnswer }) => {
-    return <div className={"pop-up" + reportResultAnswer}>{children}</div>;
-};
-
-const ReportCard = () => {
-    return (
-        <div className="analysis-card unrecognized-analysis-card">
-            <div className="unrecognized-analysis-title">
-                <h1>{i18n.t("explore:reportCard.headline")}</h1>
-            </div>
-            <p>{i18n.t("explore:reportCard.text")}</p>
-            <RouteButton route="/report" className="report-button">
-                {i18n.t("explore:reportCard.button")}
-            </RouteButton>
-        </div>
-    );
-};
 
 const ExploreView = () => {
     const { reportResult, setReportResult } = useContext(ImporterContext);
@@ -48,31 +32,20 @@ const ExploreView = () => {
 
     const renderReportResult = () =>
         reportResult !== null && (
-            <PopUpMessage
-                reportResultAnswer={
-                    reportResult ? " successfully" : " unsuccessfully"
+            <NotificationBanner
+                notificationType={
+                    reportResult
+                        ? notificationTypes.success
+                        : notificationTypes.error
                 }
+                handleCloseNotification={handleCloseReportResult}
             >
                 {reportResult ? (
-                    <>
-                        <div>{i18n.t("explore:report.success")}</div>
-                        <img
-                            src="./images/close_green.svg"
-                            alt="close"
-                            onClick={handleCloseReportResult}
-                        />
-                    </>
+                    <div>{i18n.t("explore:report.success")}</div>
                 ) : (
-                    <>
-                        <div>{i18n.t("explore:report.error")}</div>
-                        <img
-                            src="./images/close_red.svg"
-                            alt="close"
-                            onClick={handleCloseReportResult}
-                        />
-                    </>
+                    <div>{i18n.t("explore:report.error")}</div>
                 )}
-            </PopUpMessage>
+            </NotificationBanner>
         );
 
     const renderFileAnalyses = () => {
@@ -85,7 +58,15 @@ const ExploreView = () => {
             );
         return (
             <List>
-                <ReportCard />
+                <Banner
+                    title={i18n.t("explore:reportCard.headline")}
+                    description={i18n.t("explore:reportCard.text")}
+                    button={{
+                        label: i18n.t("explore:reportCard.button"),
+                        history: history,
+                        route: "/report",
+                    }}
+                />
                 {ministories.map((MinistoryClass, index) => {
                     const ministory = new MinistoryClass({
                         account,

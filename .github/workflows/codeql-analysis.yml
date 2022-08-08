@@ -48,7 +48,7 @@ jobs:
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
+      uses: github/codeql-action/init@v2
       with:
         queries: security-extended
         languages: ${{ matrix.language }}
@@ -56,10 +56,11 @@ jobs:
     - if: matrix.language == 'java'
       name: Build Android
       run: |
+        export NDK_HOME=$ANDROID_NDK_LATEST_HOME
         ./build.js
         cd platform/android
         make -C ../core android_bindings
         ./gradlew compileDebugJavaWithJavac
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+      uses: github/codeql-action/analyze@v2

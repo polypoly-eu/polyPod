@@ -2,8 +2,11 @@
     "name": "polyExplorer",
     "author": "polypoly Cooperative",
     "description": "Have you ever wondered what data companies collect, which third parties they share it with, and what that means for you? polyExplorer sheds some light on that.",
-    "thumbnail": "images/thumbnail.png",
+    "thumbnail": "images/thumbnail.pdf",
     "primaryColor": "#0f1938",
+    "thumbnailColor": "#0F1938",
+    "borderColor": "#0F1938",
+    "tileTextColor": "#ffffff",
     "links": {},
     "translations": {
         "de": {

@@ -40,7 +40,7 @@ class OnboardingActivity : AppCompatActivity() {
         )
 
         if (!isInfo) {
-            if (Authentication.shouldShowBiometricsPrompt(this)) {
+            if (Authentication.shouldShowAuthOnboarding(this)) {
                 strings = strings.plus(
                     mapOf(
                         R.id.headline_main to
@@ -59,10 +59,9 @@ class OnboardingActivity : AppCompatActivity() {
 
         carousel.pageCount = strings.size
         carousel.setViewListener { requestedPosition ->
-            val position = requestedPosition
 
             val slide = layoutInflater.inflate(R.layout.onboarding_slide, null)
-            strings[position].forEach { (viewId, stringId) ->
+            strings[requestedPosition].forEach { (viewId, stringId) ->
                 slide.findViewById<TextView>(viewId).text = getString(stringId)
             }
             if (slide.findViewById<TextView>(R.id.headline_main).text ==
@@ -73,7 +72,11 @@ class OnboardingActivity : AppCompatActivity() {
                 )
                 button.visibility = View.VISIBLE
                 button.setOnClickListener {
-                    Authentication.setUp(this, newStatus = true) {
+                    Authentication.setUp(
+                        this,
+                        showAuthTexts = false,
+                        newBiometricState = true
+                    ) {
                         close()
                     }
                 }
@@ -82,7 +85,7 @@ class OnboardingActivity : AppCompatActivity() {
                 )
                 doNotAskButton.visibility = View.VISIBLE
                 doNotAskButton.setOnClickListener {
-                    Preferences.setBiometricCheck(this, false)
+                    Preferences.setSecurityDoNotAskAgainCheck(this, true)
                     close()
                 }
             }
@@ -97,7 +100,7 @@ class OnboardingActivity : AppCompatActivity() {
                     if (carousel.currentItem == (carousel.pageCount - 1)) {
                         close()
                     } else {
-                        carousel.setCurrentItem(carousel.currentItem + 1)
+                        carousel.currentItem = carousel.currentItem + 1
                     }
                 }
             }

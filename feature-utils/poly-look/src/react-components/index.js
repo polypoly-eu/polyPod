@@ -22,6 +22,15 @@ import {
 } from "./contexts/poly-import.jsx";
 import { RoutingWrapper } from "./routing";
 import { Infographic, Tooltip, InfographicLegend } from "./infographic";
+import Slideshow from "./slideshow/slideshow.jsx";
+import {
+  Banner,
+  ProgressIcon,
+  ProgressBanner,
+  NotificationBanner,
+  notificationTypes,
+} from "./banners";
+
 export {
   Chip,
   InfoBox,
@@ -50,4 +59,10 @@ export {
   Infographic,
   Tooltip,
   InfographicLegend,
+  Banner,
+  Slideshow,
+  ProgressIcon,
+  ProgressBanner,
+  NotificationBanner,
+  notificationTypes,
 };

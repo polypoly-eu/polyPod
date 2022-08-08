@@ -1,6 +1,6 @@
 # PolyPod platform core
 
-Logic shared across polyPod platforms - ios, android, wasm.
+Logic shared across polyPod platforms: iOS and Android.
 
 ## Requirements
 
@@ -9,7 +9,10 @@ Logic shared across polyPod platforms - ios, android, wasm.
 
 ## Building
 
-It is required to run `make` in a bash terminal which contains the necessary dependencies - curl, make, unzip. MacOS and Linux systems terminal should already have everything needed. On Windows, a terminal like [GitBash](https://gitforwindows.org) is needed.
+It is required to run `make` in a bash terminal which contains the necessary
+dependencies - curl, make, unzip. MacOS and Linux systems terminal should
+already have everything needed. On Windows, a terminal application like
+[GitBash](https://gitforwindows.org) is needed.
 
 - Building rust core:
 ```
@@ -22,12 +25,16 @@ make ios_bindings
 ```
 
 - Building android core:
-```
+
+    Prerequisite: You should install NDK (it is recommended to use Android Studio for installing it). Version r24 should be installed. Make sure that either `NDK_HOME` or `ANDROID_NDK_HOME`(specifying the path to NDK) is exported as an environment variable on your system.
+
+```shell
 make android_bindings
 ```
 
 - Building for all platforms:
-```
+
+```shell
 make
 ```
 

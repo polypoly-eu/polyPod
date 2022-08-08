@@ -1,11 +1,18 @@
 {
+    "name": "Demo preview",
     "author": "polypoly Cooperative",
     "description": "Demonstrates some polyPod capabilities for testing purposes - please ignore",
     "primaryColor": "#000000",
+    "thumbnail": "images/thumbnail.pdf",
+    "borderColor": "#cbd5e0",
+    "thumbnailColor": "#475abb",
+    "tileTextColor": "#ffffff",
+    "links": {},
     "translations": {
         "de": {
             "author": "polypoly - Die Genossenschaft",
             "description": "Demonstriert ein paar polyPod-Fähigkeiten für Testzwecke - bitte ignorieren"
-        }
+        },
+        "links": {}
     }
 }

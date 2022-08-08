@@ -1,19 +1,19 @@
+@testable import PolyPod
 import XCTest
 import Zip
-@testable import PolyPod
 
 private class PolyNavDelegateStub: PolyNavDelegate {
     var pickFileResult: ExternalFile?
     func doHandleOpenUrl(url: String) {
     }
-    
+
     func doHandlePickFile(type: String?, completion: @escaping (ExternalFile?) -> Void) {
         completion(pickFileResult)
     }
-    
+
     func doHandleSetTitle(title: String) {
     }
-    
+
     func doHandleSetActiveActions(actions: [String]) {
     }
 }
@@ -40,37 +40,36 @@ private func createTestFile() {
     let zipFilePath = try! Zip.quickZipFiles([testFilePath], fileName: "testFile")
     do {
         try FileManager.default.moveItem(at: zipFilePath, to: testZipFilePath)
-    }
-    catch (_) {
-    
+    } catch _ {
+
     }
 }
 
 class PolyNavTests: XCTestCase {
-    let polyNav = PolyNav()
-    
+    private let polyNav = PolyNav()
+
     override class func setUp() {
         createTestFile()
     }
-    
+
     override class func tearDown() {
         removeTestFile()
     }
-    
+
     func testPickFileReturnsFileSelectedByUser() {
         let delegateStub = PolyNavDelegateStub()
         delegateStub.pickFileResult = testExternalFile
         polyNav.delegate = delegateStub
         expectPickFileResult(testExternalFile)
     }
-    
+
     func testPickFileReturnsNullIfUserCancelled() {
         let delegateStub = PolyNavDelegateStub()
         delegateStub.pickFileResult = nil
         polyNav.delegate = delegateStub
         expectPickFileResult(nil)
     }
-    
+
     private func expectPickFileResult(_ expected: ExternalFile?) {
         let expectation = XCTestExpectation()
         polyNav.pickFile(type: zipMimeType) { actual in

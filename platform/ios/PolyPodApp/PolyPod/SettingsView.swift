@@ -3,7 +3,7 @@ import SwiftUI
 struct SettingsView: View {
     var closeAction: () -> Void = {}
     @State private var activeSection = Sections.main
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             NavigationBar(
@@ -11,29 +11,16 @@ struct SettingsView: View {
                     Image("NavIconBackDark").renderingMode(.original)
                 }),
                 center: AnyView(
-                    Text({ () -> String in
-                        switch activeSection {
-                        case .main:
-                            return "settings_title"
-                        case .imprint:
-                            return "settings_imprint_title"
-                        case .privacyPolicy:
-                            return "settings_privacy_policy_title"
-                        case .termsOfUse:
-                            return "settings_terms_of_use_title"
-                        case .licenses:
-                            return "settings_licenses_title"
-                        }
-                    }())
+                    Text(activeSection.title())
                     .foregroundColor(Color.PolyPod.darkForeground)
                     .font(.custom("Jost-Medium", size: 16))
                     .kerning(-0.16)
                 )
             )
             .background(Color.PolyPod.lightBackground)
-            
+
             Divider()
-            
+
             switch activeSection {
             case .main:
                 MainSection(activeSection: $activeSection)
@@ -48,7 +35,7 @@ struct SettingsView: View {
             }
         }
     }
-    
+
     private func back() {
         if activeSection == .main {
             closeAction()
@@ -62,6 +49,23 @@ private enum Sections {
     case main, imprint, privacyPolicy, termsOfUse, licenses
 }
 
+extension Sections {
+    func title() -> LocalizedStringKey {
+        switch self {
+        case .main:
+            return "settings_title"
+        case .imprint:
+            return "settings_imprint_title"
+        case .privacyPolicy:
+            return "settings_privacy_policy_title"
+        case .termsOfUse:
+            return "settings_terms_of_use_title"
+        case .licenses:
+            return "settings_licenses_title"
+        }
+    }
+}
+
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
@@ -73,9 +77,9 @@ private struct MainSection: View {
     @State private var showVersion = false
     @State private var shareLogs = false
     @State private var isAuthenticationConfigured = Authentication.shared.isSetUp()
-    
+
     var body: some View {
-        List() {
+        List {
             Section(header: SettingsHeader("settings_about_section")) {
                 SettingsButton(
                     label: "settings_version",
@@ -91,8 +95,7 @@ private struct MainSection: View {
             .listRowInsets(
                 EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             )
-            
-            
+
             Section(header: SettingsHeader("settings_sec_section")) {
                 SettingsToggleButton(
                     label: "settings_auth",
@@ -109,7 +112,7 @@ private struct MainSection: View {
             .listRowInsets(
                 EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             )
-            
+
             Section(header: SettingsHeader("settings_legal_section")) {
                 SettingsButton(
                     label: "settings_imprint_title",
@@ -130,8 +133,8 @@ private struct MainSection: View {
                 if !RuntimeInfo.isProduction {
                     SettingsButton(label: "settings_export_logs",
                                    action: {
-                        shareLogs = true
-                    })
+                                    shareLogs = true
+                                   })
                 }
             }
             .listRowInsets(
@@ -145,11 +148,11 @@ private struct MainSection: View {
 
 private struct SettingsHeader: View {
     private let text: LocalizedStringKey
-    
+
     init(_ text: LocalizedStringKey) {
         self.text = text
     }
-    
+
     var body: some View {
         Text(text)
             .foregroundColor(Color(fromHex: "#3E495B"))
@@ -168,7 +171,7 @@ private struct SettingsHeader: View {
 private struct SettingsButton: View {
     let label: LocalizedStringKey
     let action: () -> Void
-    
+
     var body: some View {
         Button(action: action) {
             Text(label)
@@ -179,13 +182,12 @@ private struct SettingsButton: View {
     }
 }
 
-
 private struct SettingsToggleButton: View {
     let label: LocalizedStringKey
-    let isToggled : Binding<Bool>;
-    
+    let isToggled: Binding<Bool>
+
     var onChange: ((Bool) -> Void)?
-    
+
     var body: some View {
         VStack {
             Toggle(isOn: isToggled.onChange(toggleChange)) {
@@ -197,21 +199,20 @@ private struct SettingsToggleButton: View {
             .padding(.trailing, 32)
         }.padding(.leading, 32)
     }
-    
+
     func toggleChange(_ value: Bool) {
         if let action = self.onChange {
             action(value)
         }
     }
-    
-}
 
+}
 
 private struct PrivacyPolicyView: View {
     var body: some View {
         HTMLView(content: loadPrivacyPolicyText())
     }
-    
+
     private func loadPrivacyPolicyText() -> String {
         let url = Bundle.main.bundleURL
             .appendingPathComponent("legal")
@@ -237,7 +238,7 @@ private struct LicensesView: View {
             alignment: .topLeading
         )
     }
-    
+
     private func loadLicenseText() -> String {
         let licenseFiles = ["ios-licenses.txt", "js-licenses.txt"]
         let licensesUrl = Bundle.main.bundleURL

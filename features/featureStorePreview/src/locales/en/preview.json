@@ -1,0 +1,12 @@
+{
+    "progress.banner.title": "We sketch",
+    "progress.banner.description": "Who would have known – brainstorming leads to an idea and this idea needs to get in shape. We’re on it, we shape the idea for development.",
+    "title": "What would a Feature Store be without features?",
+    "section1.title": "Download applications directly from the polypoly Feature Store.",
+    "section1.description": "In the beginning, we will provide some features ourselves, such as the GDPR Data Importer. In the long term, however, we would like to offer other developers and companies the possibility to provide their own features here. ",
+    "section2.title": "First we push so that others can take over",
+    "section2.description": "In the long term, we want to leave the stage to others – individual developers and companies who want to make features available here.\n\nWe are already in discussion with various business partners who would like to provide their own features based on the polyPod infrastructure. Our infrastructure is open source, therefore open to everyone and covers all conceivable areas of application, whether streaming, insurance, shopping or messaging.",
+    "footer.title": "Solutions are often more complex than the problems they solve!",
+    "footer.description": "In our case, this is mainly because the solution for a complete ecosystem involves various parties and is also effective at different levels, such as for citizens and the economy. You can find out more about our approach, how it works and how we implement it here:",
+    "footer.button.title": "Our Solution"
+}
