@@ -1,7 +1,6 @@
 use crate::common::serialization::{message_pack_deserialize, message_pack_serialize};
 use crate::core::{self, PlatformRequest, PlatformResponse};
 use crate::core_failure::CoreFailure;
-use crate::core_failure::CoreFailure;
 use jni::{
     objects::{GlobalRef, JClass, JObject, JString, JValue},
     sys::jbyteArray,
@@ -64,7 +63,7 @@ impl core::PlatformHookRequest for BridgeToPlatform {
         let result: Result<PlatformResponse, String> = match self.java_vm.attach_current_thread() {
             Ok(env) => {
                 let request_byte_array = env
-                    .byte_array_from_slice(&serialize(request))
+                    .byte_array_from_slice(&message_pack_serialize(request))
                     .map_err(|err| err.to_string())?;
 
                 let response_byte_array_as_jvalue = env
@@ -85,8 +84,7 @@ impl core::PlatformHookRequest for BridgeToPlatform {
                     .convert_byte_array(response_byte_array)
                     .map_err(|err| err.to_string())?;
 
-                let deserialized: Result<PlatformResponse, String> = deserialize(response_bytes)?;
-                deserialized
+                message_pack_deserialize(response_bytes).map_err(|err| err.message)?
             }
             Err(e) => {
                 error!("Rust:java_interface => attach_current_thread:Err => Couldn't get env::");

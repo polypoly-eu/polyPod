@@ -32,7 +32,7 @@ pub unsafe extern "C" fn core_bootstrap(
             core::bootstrap(language_code, fs_root, Box::new(bridge))
         }
     }
-    create_byte_buffer(message_pack_serialize(bootstrap(language_code, fs_root)))
+    create_byte_buffer(message_pack_serialize(bootstrap(language_code, fs_root, bridge)))
 }
 
 /// # Safety
@@ -105,7 +105,8 @@ impl core::PlatformHookRequest for BridgeToPlatform {
         let bytes = unsafe { byte_buffer_to_bytes(&response_byte_buffer)? };
         // deserialize returns Result<Result<PlatformResponse, String>>
         // so don't forget the ? at the end in the next line.
-        let response: Result<PlatformResponse, String> = message_pack_deserialize(bytes)?;
+        let response: Result<PlatformResponse, String> = 
+            message_pack_deserialize(bytes).map_err(|err| err.message)?;
         (self.free_bytes)(response_byte_buffer.data);
         return response;
     }
