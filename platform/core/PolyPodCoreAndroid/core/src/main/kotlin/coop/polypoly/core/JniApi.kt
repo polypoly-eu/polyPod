@@ -32,8 +32,8 @@ object Example : PlatformResponse {
     }
 }
 
-class JniApi {
-    external fun bootstrapCore(languageCode: String, , fsRoot: String, callback: JniApi): ByteArray // ktlint-disable max-line-length
+object JniApi {
+    external fun bootstrapCore(languageCode: String, fsRoot: String, callback: JniApi): ByteArray // ktlint-disable max-line-length
     external fun loadFeatureCategories(featuresDir: String): ByteArray
 
     init {
