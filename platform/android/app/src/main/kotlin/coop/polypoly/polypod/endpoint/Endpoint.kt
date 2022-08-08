@@ -50,7 +50,7 @@ class Endpoint(
         observer?.approveEndpointFetch?.invoke(endpointId) {
             if (!it) {
                 logger.error("endpoint.send: User denied request")
-                throw PodApiError("")
+                throw PodApiError().endpointPermissionDenied()
             }
             val endpointInfo =
                 endpointInfofromId(endpointId)
@@ -84,7 +84,7 @@ class Endpoint(
             observer?.approveEndpointFetch?.invoke(endpointId) {
                 if (!it) {
                     logger.error("endpoint.get: User denied request")
-                    throw PodApiError().endpointError()
+                    throw PodApiError().endpointPermissionDenied()
                 }
                 val endpointInfo =
                     endpointInfofromId(endpointId)

@@ -30,7 +30,7 @@ object ErrorUploader {
             )
             logger.debug("uploadToServer() - endpoint.post")
         } catch (e: PodApiError) {
-            logger.error("uploadToServer: Failed ${e}")
+            logger.error("uploadToServer - Failed: ${e}")
         }
     }
 }
