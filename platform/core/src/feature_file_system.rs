@@ -533,8 +533,6 @@ mod tests {
         let result = write_file(&url, Some(resource_url), &fs, &config.features_folder_path);
         let expected_fs_path = fs_path.to_string() + "/" + &file_name;
 
-        // "File system failed for path '/Users/paladetimotei/Documents/Developer/polypoly/polyPod/platform/core/src/test_files/test.zip' with error: 'Is a directory (os error 21)'"
-        // "File system failed for path '/Users/paladetimotei/Documents/Developer/polypoly/polyPod/platform/core/src/test_files/test.zip | /var/folders/4s/3dpn90nx3_s8fh6v2lyyq9380000gn/T/.tmpc9p9Nw/Test//8970r10972490710497291' with error: 'Is a directory (os error 21)'"
         assert!(result.is_ok());
         let result_path = result.unwrap();
         let expected_resource_url =
