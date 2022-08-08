@@ -26,7 +26,7 @@ impl KeyValueStore for DefaultKeyValueStore {
             .get(key)
             .ok()
             .flatten()
-            .map(|x| x.to_vec())
+            .map(|ivec| ivec.to_vec())
     }
 
     fn write(&self, key: Vec<u8>, value: Vec<u8>) {

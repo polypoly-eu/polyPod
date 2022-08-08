@@ -18,12 +18,14 @@ pub enum TimeoutOption {
     NoTimeout
 }
 
+const ONE_MINUTE_IN_SECONDS: u8 = 60;
+
 impl TimeoutOption {
     pub fn duration(&self) -> Option<u8> {
         match self {
-            Option1=> Some(5),
-            Option2 => Some(15),
-            Option3 => Some(60),
+            Option1=> Some(5 * ONE_MINUTE_IN_SECONDS),
+            Option2 => Some(15 * ONE_MINUTE_IN_SECONDS),
+            Option3 => Some(60 * ONE_MINUTE_IN_SECONDS),
             NoTimeout => None,
         }
     }
