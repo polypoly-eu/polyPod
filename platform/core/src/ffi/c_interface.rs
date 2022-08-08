@@ -1,5 +1,5 @@
 use crate::core_failure::CoreFailure;
-use crate::ffi::serialize;
+use crate::common::serialization::message_pack_serialize; 
 use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
@@ -16,11 +16,22 @@ use std::os::raw::c_char;
 /// - language_code: User's locale language code.
 /// Returns a flatbuffer byte array with core_bootstrap_response.
 #[no_mangle]
-pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> CByteBuffer {
-    create_byte_buffer(serialize(
-        cstring_to_str(&language_code)
-            .map(String::from)
-            .and_then(core::bootstrap),
+pub unsafe extern "C" fn core_bootstrap(
+    language_code: *const c_char,
+    fs_root: *const c_char
+) -> CByteBuffer {
+    fn bootstrap(
+        language_code: *const c_char,
+        fs_root: *const c_char
+    ) -> Result<(), CoreFailure> {
+        unsafe {
+            let language_code = String::from(cstring_to_str(&language_code)?);
+            let fs_root = String::from(cstring_to_str(&fs_root)?);
+            core::bootstrap(language_code, fs_root)
+        }
+    }
+    create_byte_buffer(message_pack_serialize(
+        bootstrap(language_code, fs_root)
     ))
 }
 
@@ -32,7 +43,7 @@ pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> CByteBu
 /// Returns Result<Vec<FeatureCategory>, CoreFailure> as MessagePack value.
 #[no_mangle]
 pub unsafe extern "C" fn load_feature_categories(features_dir: *const c_char) -> CByteBuffer {
-    create_byte_buffer(serialize(
+    create_byte_buffer(message_pack_serialize(
         cstring_to_str(&features_dir).and_then(core::load_feature_categories),
     ))
 }

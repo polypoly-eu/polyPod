@@ -1,3 +1,4 @@
+
 use crate::{
     core_failure::CoreFailure, 
     feature_categories, 
@@ -5,6 +6,7 @@ use crate::{
     preferences::Preferences,
     user_session::{ UserSession, UserSessionTimeout, TimeoutOption },
 };
+
 use once_cell::sync::OnceCell;
 use std::{time::Instant, sync::MutexGuard};
 use std::sync::{Arc, Mutex};
@@ -16,6 +18,7 @@ static CORE: OnceCell<Mutex<Core>> = OnceCell::new();
 // to be shared between components, as well managing components lifetime.
 struct Core<'a> {
     language_code: String,
+    #[allow(dead_code)]
     preferences: Arc<Preferences>,
     user_session: Mutex<UserSession<'a>>,
 }
@@ -27,12 +30,12 @@ fn get_instance() -> Result<MutexGuard<'static, Core<'static>>, CoreFailure> {
     }
 }
 
-pub fn bootstrap(language_code: String) -> Result<(), CoreFailure> {
+pub fn bootstrap(language_code: String, fs_root: String) -> Result<(), CoreFailure> {
     if CORE.get().is_some() {
         return Err(CoreFailure::core_already_bootstrapped());
     }
     let preferences = Arc::new(Preferences {
-       store: Box::new(DefaultKeyValueStore::new("platofrm_path/preferences.store".to_string())), 
+       store: Box::new(DefaultKeyValueStore::new(fs_root + "preferences.store")), 
     });
     let builder = Box::new(Instant::now);
 

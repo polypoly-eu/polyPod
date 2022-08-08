@@ -1,7 +1,6 @@
-use crate::core::bootstrap;
-use crate::core::load_feature_categories;
+use crate::core;
 use crate::core_failure::CoreFailure;
-use crate::ffi::serialize;
+use crate::common::serialization::message_pack_serialize; 
 use jni::{
     objects::{JClass, JString},
     sys::jbyteArray,
@@ -16,11 +15,19 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     env: JNIEnv,
     _: JClass,
     language_code: JString,
+    fs_root: JString,
 ) -> jbyteArray {
-    env.byte_array_from_slice(&serialize(
-        read_jni_string(&env, language_code)
-            .map(String::from)
-            .and_then(bootstrap),
+    fn bootstrap(
+        env: JNIEnv,
+        language_code: JString,
+        fs_root: JString,
+    ) -> Result<(), CoreFailure> {
+        let language_code = String::from(read_jni_string(&env, language_code)?);
+        let fs_root = String::from(read_jni_string(&env, fs_root)?);
+        core::bootstrap(language_code, fs_root)
+    }
+    env.byte_array_from_slice(&message_pack_serialize(
+        bootstrap(env, language_code, fs_root)
     ))
     .unwrap()
 }
@@ -34,8 +41,8 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_loadFeatureCategories(
     _: JClass,
     featuresDir: JString,
 ) -> jbyteArray {
-    env.byte_array_from_slice(&serialize(
-        read_jni_string(&env, featuresDir).and_then(|string| load_feature_categories(&string)),
+    env.byte_array_from_slice(&message_pack_serialize(
+        read_jni_string(&env, featuresDir).and_then(|string| core::load_feature_categories(&string)),
     ))
     .unwrap()
 }

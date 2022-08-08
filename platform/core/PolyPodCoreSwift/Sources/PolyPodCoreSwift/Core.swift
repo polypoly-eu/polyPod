@@ -10,7 +10,7 @@ public final class Core {
     
     // MARK: - Private config
     private var languageCode: UnsafePointer<CChar>!
-    private var workDir: UnsafePointer<CChar>!
+    private var fsRoot: UnsafePointer<CChar>!
     
     private init() {}
     
@@ -18,14 +18,12 @@ public final class Core {
     
     /// Prepares the core to be used
     /// Should be called before invoking any other API
-    public func bootstrap(languageCode: String, workDir: String) -> Result<Void, Error> {
+    public func bootstrap(languageCode: String, fsRoot: String) -> Result<Void, Error> {
         // Force unwrap should be safe
         self.languageCode = NSString(string: languageCode).utf8String!
-        self.workDir = NSString(string: workDir).utf8String!
+        self.fsRoot = NSString(string: fsRoot).utf8String!
        
-        return handleCoreResponse(core_bootstrap(self.languageCode, self.workDir), { _ in })
-    }
-    
+        return handleCoreResponse(core_bootstrap(self.languageCode, self.fsRoot), { _ in })
     }
 
     /// Loads the feature categories from the given features directory
