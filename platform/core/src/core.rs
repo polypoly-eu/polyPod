@@ -41,6 +41,7 @@ struct Core<'a> {
     #[allow(dead_code)]
     preferences: Arc<Preferences>,
     user_session: Mutex<UserSession<'a>>,
+    #[allow(dead_code)]
     platform_hook: Box<dyn PlatformHookRequest>,
 }
 

@@ -7,7 +7,7 @@ use strum_macros::EnumIter;
 #[derive(Serialize)]
 pub struct UserSessionTimeout {
     option: TimeoutOption,
-    duration: Option<u8>,
+    duration: Option<u16>,
 }
 
 #[derive(Debug, PartialEq, Clone, Serialize, Deserialize, EnumIter)]
@@ -18,15 +18,15 @@ pub enum TimeoutOption {
     NoTimeout,
 }
 
-const ONE_MINUTE_IN_SECONDS: u8 = 60;
+const ONE_MINUTE_IN_SECONDS: u16 = 60;
 
 impl TimeoutOption {
-    pub fn duration(&self) -> Option<u8> {
+    pub fn duration(&self) -> Option<u16> {
         match self {
-            Option1 => Some(5 * ONE_MINUTE_IN_SECONDS),
-            Option2 => Some(15 * ONE_MINUTE_IN_SECONDS),
-            Option3 => Some(60 * ONE_MINUTE_IN_SECONDS),
-            NoTimeout => None,
+            TimeoutOption::Option1 => Some(5 * ONE_MINUTE_IN_SECONDS),
+            TimeoutOption::Option2 => Some(15 * ONE_MINUTE_IN_SECONDS),
+            TimeoutOption::Option3 => Some(60 * ONE_MINUTE_IN_SECONDS),
+            TimeoutOption::NoTimeout => None,
         }
     }
 
