@@ -164,6 +164,7 @@
 		E9F370DD262EE9EE006254C1 /* WidthReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370DC262EE9EE006254C1 /* WidthReader.swift */; };
 		E9F370E1262EEB2C006254C1 /* ParagraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370E0262EEB2C006254C1 /* ParagraphView.swift */; };
 		E9F370E7262EEF13006254C1 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F370E6262EEF13006254C1 /* UIColorExtensions.swift */; };
+		E9F45D9D28A13B0F00FDBE70 /* XCUIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F45D9B28A13AE700FDBE70 /* XCUIApplicationExtensions.swift */; };
 		E9F68ED227580A0B009ED2C1 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E996EBD12756BBE900EAC9F7 /* Log.swift */; };
 /* End PBXBuildFile section */
 
@@ -294,6 +295,7 @@
 		E9F370DC262EE9EE006254C1 /* WidthReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthReader.swift; sourceTree = "<group>"; };
 		E9F370E0262EEB2C006254C1 /* ParagraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParagraphView.swift; sourceTree = "<group>"; };
 		E9F370E6262EEF13006254C1 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		E9F45D9B28A13AE700FDBE70 /* XCUIApplicationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUIApplicationExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -581,6 +583,7 @@
 		E9545EB7273542CC001E8C7F /* PolyPodUITests */ = {
 			isa = PBXGroup;
 			children = (
+				E9F45D9B28A13AE700FDBE70 /* XCUIApplicationExtensions.swift */,
 				E9545EAF27353F78001E8C7F /* UpdateNotificationTest.swift */,
 				E92FE9BC276759E900A0885E /* OnboardingTest.swift */,
 			);
@@ -1037,6 +1040,7 @@
 				E92FE9BD276759E900A0885E /* OnboardingTest.swift in Sources */,
 				E9545EC1273542F5001E8C7F /* UpdateNotificationTest.swift in Sources */,
 				E9545EC927359C34001E8C7F /* UserDefaultsExtensions.swift in Sources */,
+				E9F45D9D28A13B0F00FDBE70 /* XCUIApplicationExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

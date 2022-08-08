@@ -9,28 +9,13 @@ class OnboardingTest: XCTestCase {
     }
     
     func testOnboardingShowsUpOnFirstRun() {
-        launchApp(firstRun: true)
+        app.launchWithArgs(firstRun: true)
         assertOnboardingIsShown()
     }
     
     func testOnboardingNotShownOnSubsequentRun() {
-        launchApp()
+        app.launchWithArgs()
         assertOnboardingIsNotShown()
-    }
-    
-    private func launchApp(firstRun: Bool = false, resetDefaults: Bool = true) {
-        typealias Keys = UserDefaults.Keys
-        app.launchArguments = [
-            "-\(Keys.firstRun.rawValue)",
-            "\(firstRun)"
-        ]
-        if resetDefaults {
-            app.launchArguments += [
-                "-\(Keys.resetUserDefaults.rawValue)",
-                "true"
-            ]
-        }
-        app.launch()
     }
     
     private func assertOnboardingIsShown() {
