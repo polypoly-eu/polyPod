@@ -56,7 +56,6 @@ jobs:
     - if: matrix.language == 'java'
       name: Build Android
       run: |
-        export NDK_HOME=$ANDROID_NDK_LATEST_HOME
         ./build.js
         cd platform/android
         make -C ../core android_bindings

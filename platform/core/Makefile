@@ -24,21 +24,13 @@ android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%/libpolypod_core.
 cargo_ndk_version = 2.10.0
 
 ifeq ($(OS),Windows_NT)
-	ndk_download_url = $(google_repo)/$(ndk_lib)-windows-x86_64.zip
-	# Need on Windows, to allow interpreting escaping characters
 	os_echo := echo -e
 else
 	os_echo := echo
 	ifeq ($(shell uname -s),Darwin)
-		ndk_download_url = $(google_repo)/$(ndk_lib)-darwin-x86_64.zip
 		macos := true
 	endif
-	ifeq ($(shell uname -s),Linux)
-		ndk_download_url = $(google_repo)/$(ndk_lib)-linux-x86_64.zip
-	endif
 endif
-
-
 
 # ============  Rust core ============ #
 
