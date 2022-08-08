@@ -105,7 +105,7 @@ impl core::PlatformHookRequest for BridgeToPlatform {
         let bytes = unsafe { byte_buffer_to_bytes(&response_byte_buffer)? };
         // deserialize returns Result<Result<PlatformResponse, String>>
         // so don't forget the ? at the end in the next line.
-        let response: Result<PlatformResponse, String> = 
+        let response: Result<PlatformResponse, String> =
             message_pack_deserialize(bytes).map_err(|err| err.message)?;
         (self.free_bytes)(response_byte_buffer.data);
         return response;
