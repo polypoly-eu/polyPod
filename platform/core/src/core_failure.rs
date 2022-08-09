@@ -21,6 +21,7 @@ pub enum FailureCode {
     FailedToGetFilePath,
     FailedToGetLastSegmentFromUrl,
     FailedToDecodeByteArray,
+    FailedToAccessUserSession,
 }
 
 impl FailureCode {
@@ -185,6 +186,13 @@ impl CoreFailure {
         CoreFailure {
             code: FailureCode::FailedToDecodeByteArray.value(),
             message: format!("Failed to decode bytearray, info  '{}'", message),
+        }
+    }
+
+    pub fn failed_to_acess_user_usession(message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToAccessUserSession.value(),
+            message: format!("Failed to access user_session, info  '{}'", message),
         }
     }
 }

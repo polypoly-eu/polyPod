@@ -32,7 +32,11 @@ pub unsafe extern "C" fn core_bootstrap(
             core::bootstrap(language_code, fs_root, Box::new(bridge))
         }
     }
-    create_byte_buffer(message_pack_serialize(bootstrap(language_code, fs_root, bridge)))
+    create_byte_buffer(message_pack_serialize(bootstrap(
+        language_code,
+        fs_root,
+        bridge,
+    )))
 }
 
 /// # Safety

@@ -34,6 +34,8 @@ pub trait PlatformHookRequest: Sync + Send {
     fn perform_request(&self, request: PlatformRequest) -> Result<PlatformResponse, String>;
 }
 
+const PREFERENCES_DB: &str = "preferences_db";
+
 // The Core would act as a composition root, containing any global configuration
 // to be shared between components, as well managing components lifetime.
 struct Core<'a> {
@@ -63,15 +65,15 @@ pub fn bootstrap(
         return Err(CoreFailure::core_already_bootstrapped());
     }
     let preferences = Arc::new(Preferences {
-        store: Box::new(DefaultKeyValueStore::new(fs_root + "preferences.store")),
+        store: Box::new(DefaultKeyValueStore::new(fs_root + PREFERENCES_DB)),
     });
 
     let builder = Box::new(Instant::now);
-    let user_session = UserSession::new(builder, preferences.clone());
+    let user_session = Mutex::from(UserSession::new(builder, preferences.clone()));
     let core = Core {
         language_code,
         preferences,
-        user_session: Mutex::from(user_session),
+        user_session,
         platform_hook,
     };
 
@@ -114,7 +116,10 @@ pub fn load_feature_categories(
 
 pub fn app_did_become_inactive() -> Result<(), CoreFailure> {
     let mut instance = get_instance()?;
-    let session = instance.user_session.get_mut().unwrap();
+    let session = instance
+        .user_session
+        .get_mut()
+        .map_err(|err| CoreFailure::failed_to_acess_user_usession(err.to_string()))?;
     session.did_become_inactive();
     Ok(())
 }
@@ -122,20 +127,29 @@ pub fn app_did_become_inactive() -> Result<(), CoreFailure> {
 // User Session
 pub fn is_user_session_expired() -> Result<bool, CoreFailure> {
     let instance = get_instance()?;
-    let session = &instance.user_session.lock().unwrap();
+    let session = &instance
+        .user_session
+        .lock()
+        .map_err(|err| CoreFailure::failed_to_acess_user_usession(err.to_string()))?;
     Ok((&session.is_session_expired()).to_owned())
 }
 
 pub fn set_user_session_timeout_option(option: TimeoutOption) -> Result<(), CoreFailure> {
     let instance = get_instance()?;
-    let session = &instance.user_session.lock().unwrap();
+    let session = &instance
+        .user_session
+        .lock()
+        .map_err(|err| CoreFailure::failed_to_acess_user_usession(err.to_string()))?;
     session.set_timeout_option(option);
     Ok(())
 }
 
 pub fn get_user_session_timeout_option() -> Result<TimeoutOption, CoreFailure> {
     let instance = get_instance()?;
-    let session = &instance.user_session.lock().unwrap();
+    let session = &instance
+        .user_session
+        .lock()
+        .map_err(|err| CoreFailure::failed_to_acess_user_usession(err.to_string()))?;
     Ok(session.get_timeout_option())
 }
 

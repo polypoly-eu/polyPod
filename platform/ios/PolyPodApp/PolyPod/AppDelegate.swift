@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Log.bootstrap()
         Log.info("Application initialized")
 
-
         let fsRoot = try! FileManager.default.url(
             for: .documentDirectory,
             in: .userDomainMask,
