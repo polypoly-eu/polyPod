@@ -11,7 +11,6 @@ import {
     Matcher,
     Stats,
     Info,
-    QueryResult,
 } from "@polypoly-eu/api";
 import { DataFactory, Quad } from "rdf-js";
 
@@ -70,7 +69,7 @@ class AsyncPolyIn implements PolyIn {
         return (await this.promise).has(...quads);
     }
 
-    async query(query: string): Promise<QueryResult> {
+    async query(query: string): Promise<string> {
         return (await this.promise).query(query);
     }
 

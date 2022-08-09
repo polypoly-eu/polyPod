@@ -18,7 +18,6 @@ import {
     DefaultGraph,
     Quad as polyQuad,
     DataFactory,
-    QueryResult,
 } from "@polypoly-eu/api";
 import { Quad } from "rdf-js";
 import { RequestListener } from "http";
@@ -48,7 +47,7 @@ type PolyInBackend = ObjectBackendSpec<{
     add(...quads: Quad[]): ValueBackendSpec<void>;
     delete(...quads: Quad[]): ValueBackendSpec<void>;
     has(...quads: Quad[]): ValueBackendSpec<boolean>;
-    query(query: string): ValueBackendSpec<QueryResult>;
+    query(query: string): ValueBackendSpec<string>;
     update(query: string): ValueBackendSpec<void>;
 }>;
 

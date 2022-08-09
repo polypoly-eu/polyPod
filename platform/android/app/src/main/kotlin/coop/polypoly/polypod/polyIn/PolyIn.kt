@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
 import coop.polypoly.core.Core
-import coop.polypoly.core.QueryResult
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyIn.rdf.BlankNodeObject
 import coop.polypoly.polypod.polyIn.rdf.BlankNodeSubject
