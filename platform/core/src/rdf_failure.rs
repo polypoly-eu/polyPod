@@ -27,21 +27,21 @@ impl RdfFailure {
     pub fn result_serialization_failed(error: EvaluationError) -> Self {
         RdfFailure {
             code: FailureCode::ResultSerializationError.value(),
-            message: String::from("Failed to serialize the query Result: ") + &error.to_string()
+            message: String::from("Failed to serialize the query Result: ") + &error.to_string(),
         }
     }
 
     pub fn failed_to_initialize_store(error: StorageError) -> Self {
         RdfFailure {
             code: FailureCode::StorageError.value(),
-            message: error.to_string()
+            message: error.to_string(),
         }
     }
 
     pub fn map_query_parse_error(error: ParseError) -> Self {
         RdfFailure {
             code: FailureCode::ParsingError.value(),
-            message: error.to_string()
+            message: error.to_string(),
         }
     }
 
@@ -49,15 +49,15 @@ impl RdfFailure {
         match error {
             EvaluationError::Parsing(error) => RdfFailure {
                 code: FailureCode::ParsingError.value(),
-                message: error.to_string()
+                message: error.to_string(),
             },
             EvaluationError::Storage(error) => RdfFailure { 
                 code: FailureCode::StorageError.value(),
-                 message: error.to_string() 
+                 message: error.to_string(),
             },
             _ => RdfFailure {
                 code: FailureCode::EvaluationError.value(),
-                message: error.to_string() 
+                message: error.to_string(),
             }
         }
     }
@@ -65,7 +65,7 @@ impl RdfFailure {
     pub fn map_utf8_error(error: Utf8Error) -> Self {
         RdfFailure {
             code: FailureCode::ResultSerializationError.value(),
-            message: String::from("Failed to serialize the query Result: ") + &error.to_string()
+            message: String::from("Failed to serialize the query Result: ") + &error.to_string(),
         }
     }
 
