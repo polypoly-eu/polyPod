@@ -41,6 +41,22 @@ extension MessagePackValue {
             throw DecodingError.invalidValue(info: "Expected string, received \(self)")
         }
     }
+
+    func getBool() throws -> Bool {
+        if let bool = self.boolValue {
+            return bool
+        } else {
+            throw DecodingError.invalidValue(info: "Expected bool, received \(self)")
+        }
+    }
+    
+    func getInt() throws -> Int {
+        if let int = self.intValue {
+            return int
+        } else {
+            throw DecodingError.invalidValue(info: "Expected int, received \(self)")
+        }
+    }
 }
 
 func mapError(_ dict: [MessagePackValue: MessagePackValue]) throws -> CoreFailure {

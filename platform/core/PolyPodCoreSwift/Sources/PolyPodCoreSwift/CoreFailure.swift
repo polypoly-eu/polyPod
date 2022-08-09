@@ -7,6 +7,7 @@ public enum DecodingError: Error {
     case invalidResponse(info: String?)
     case invalidFeatureCategoryFormat
     case unknownFeatureCategoryId(info: String)
+    case unknownUserSessionTimeoutOption(info: String)
     
     var localizedDescription: String {
         switch self {
@@ -26,6 +27,19 @@ public enum DecodingError: Error {
             return "Expected dictionary for feature category"
         case let .unknownFeatureCategoryId(info):
             return "Unknown FeatureCategoryId: \(info)"
+        case let .unknownUserSessionTimeoutOption(info):
+            return "Unknown UserSessionTimeoutOption: \(info)"
+        }
+    }
+}
+
+public enum EncodingError: Error {
+    case failedToCreateData
+    
+    var localizedDescription: String {
+        switch self {
+        case .failedToCreateData:
+            return "Failed to create data from source"
         }
     }
 }

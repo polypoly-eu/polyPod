@@ -66,6 +66,34 @@ public final class Core {
             mapFeatureCategories
         )
     }
+    
+    public func appDidBecomeInactive() -> Result<Void, Error> {
+        handleCoreResponse(app_did_become_inactive(), { _ in })
+    }
+    
+    public func isUserSessionExpired() -> Result<Bool, Error> {
+        handleCoreResponse(is_user_session_expired()) { try $0.getBool() }
+    }
+    
+    public func setUserSessionTimeout(option: UserSessionTimeoutOption) -> Result<Void, Error> {
+        guard let data = option.messagePackValue.data(using: .utf8) else {
+            return .failure(EncodingError.failedToCreateData)
+        }
+        return handleCoreResponse(
+            set_user_session_timeout_option(
+                data.toByteBuffer,
+                { $0?.deallocate() }
+            )
+        ) { _ in }
+    }
+    
+    public func getUserSessionTimeoutOption() -> Result<UserSessionTimeoutOption, Error> {
+        handleCoreResponse(get_user_session_timeout_option(), UserSessionTimeoutOption.from(msgPackValue:))
+    }
+    
+    public func getUserSessionTimeoutOptionsConfig() -> Result<[UserSessionTimeoutOptionConfig], Error> {
+        handleCoreResponse(get_user_session_timeout_options_config(), UserSessionTimeoutOptionConfig.mapUserSessionTimeoutOptionsConfig(_:))
+    }
 
     // MARK: - Internal API
 
