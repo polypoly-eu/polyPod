@@ -12,7 +12,7 @@ import { dataFactory } from "../rdf";
 import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint } from "./api";
 import { EncodingOptions, FS, Stats } from "./fs";
 import { Entry } from ".";
-import oxigraph from "../../node_modules/oxigraph/node.js";
+import { MockStore } from "./mock-store";
 
 export const DEFAULT_POD_RUNTIME = "podjs-default";
 export const DEFAULT_POD_RUNTIME_VERSION = "podjs-default-version";
@@ -93,7 +93,7 @@ export class DefaultPod implements Pod {
         public readonly store: RDF.DatasetCore,
         public readonly fs: FS,
         public readonly polyOut: PolyOut = new DefaultPolyOut(fs),
-        public readonly oxiStore: oxigraph.Store = new oxigraph.Store()
+        public readonly rdfStore: MockStore = new MockStore()
     ) {}
 
     private checkQuad(quad: RDF.Quad): void {
@@ -129,8 +129,8 @@ export class DefaultPod implements Pod {
                     this.checkQuad(quad);
                     return this.store.has(quad);
                 }),
-            query: async (query) => this.oxiStore.query(query),
-            update: async (query) => this.oxiStore.update(query),
+            query: async (query) => this.rdfStore.query(query),
+            update: async (query) => this.rdfStore.update(query),
         };
     }
 
