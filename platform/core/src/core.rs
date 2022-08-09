@@ -31,7 +31,7 @@ pub enum PlatformResponse {
 }
 
 pub trait PlatformHookRequest: Sync + Send {
-    fn perform_request(&self, request: PlatformRequest) -> Result<PlatformResponse, String>;
+    fn perform_request(&self, request: PlatformRequest) -> Result<PlatformResponse, CoreFailure>;
 }
 
 const PREFERENCES_DB: &str = "preferences_db";
@@ -153,6 +153,6 @@ pub fn get_user_session_timeout_option() -> Result<TimeoutOption, CoreFailure> {
     Ok(session.get_timeout_option())
 }
 
-pub fn user_session_timeout_config() -> Vec<UserSessionTimeout> {
+pub fn get_user_session_timeout_options_config() -> Vec<UserSessionTimeout> {
     TimeoutOption::all_option_timeouts()
 }

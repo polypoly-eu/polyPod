@@ -1,4 +1,4 @@
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use url::Url;
 
 #[derive(Debug, Clone, Serialize)]
@@ -21,7 +21,13 @@ pub enum FailureCode {
     FailedToGetFilePath,
     FailedToGetLastSegmentFromUrl,
     FailedToDecodeByteArray,
+    FailedToReadByteBufferLength,
+    FailedToExtractJObject,
+    FailedToExtractBytes,
+    FailedToCallJNIMethod,
+    FailedToConvertBytes,
     FailedToAccessUserSession,
+    FailedToAttachJVM,
 }
 
 impl FailureCode {
@@ -30,7 +36,7 @@ impl FailureCode {
     }
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct CoreFailure {
     pub code: i32,
     pub message: String,
@@ -189,6 +195,47 @@ impl CoreFailure {
         }
     }
 
+    pub fn failed_to_read_byte_buffer_length() -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToReadByteBufferLength.value(),
+            message: "Failed to read byte buffer length".to_string(),
+        }
+    }
+
+    pub fn failed_to_extract_jobject(message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToExtractJObject.value(),
+            message: format!("Failed to extract jobject, info  '{}'", message),
+        }
+    }
+
+    pub fn failed_to_extract_bytes(message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToExtractBytes.value(),
+            message: format!("Failed to extract bytes, info  '{}'", message),
+        }
+    }
+
+    pub fn failed_to_call_jni_method(message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToCallJNIMethod.value(),
+            message: format!("Failed to call jni method, info  '{}'", message),
+        }
+    }
+
+    pub fn failed_to_convert_bytes(message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToConvertBytes.value(),
+            message: format!("Failed to convert bytes, info  '{}'", message),
+        }
+    }
+
+    pub fn failed_to_attach_jvm(message: String) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToAttachJVM.value(),
+            message: format!("Failed to attach JVM, info  '{}'", message),
+        }
+    }
     pub fn failed_to_acess_user_usession(message: String) -> Self {
         CoreFailure {
             code: FailureCode::FailedToAccessUserSession.value(),

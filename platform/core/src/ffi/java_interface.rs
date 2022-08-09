@@ -45,63 +45,6 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     .unwrap()
 }
 
-struct BridgeToPlatform {
-    // The callback passed from Android is a local reference: only valid during the method call.
-    // To store it, we need to put it in a global reference.
-    // See https://developer.android.com/training/articles/perf-jni#local-and-global-references
-    callback: GlobalRef,
-
-    // We need JNIEnv to call the callback.
-    // JNIEnv is valid only in the same thread, so we have to store the vm instead, and use it to get
-    // a JNIEnv for the current thread.
-    // See https://developer.android.com/training/articles/perf-jni#javavm-and-jnienvb
-    java_vm: JavaVM,
-}
-
-impl core::PlatformHookRequest for BridgeToPlatform {
-    fn perform_request(&self, request: PlatformRequest) -> Result<PlatformResponse, String> {
-        let result: Result<PlatformResponse, String> = match self.java_vm.attach_current_thread() {
-            Ok(env) => {
-                let request_byte_array = env
-                    .byte_array_from_slice(&message_pack_serialize(request))
-                    .map_err(|err| err.to_string())?;
-
-                let response_byte_array_as_jvalue = env
-                    .call_method(
-                        self.callback.as_obj(),
-                        "performRequest",
-                        "([B)[B",
-                        &[JValue::Object(JObject::from(request_byte_array))],
-                    )
-                    .map_err(|err| err.to_string())?;
-
-                let response_byte_array = response_byte_array_as_jvalue
-                    .l()
-                    .map_err(|err| err.to_string())?
-                    .into_inner();
-
-                let response_bytes: Vec<u8> = env
-                    .convert_byte_array(response_byte_array)
-                    .map_err(|err| err.to_string())?;
-
-                message_pack_deserialize(response_bytes).map_err(|err| err.message)?
-            }
-            Err(e) => {
-                error!("Rust:java_interface => attach_current_thread:Err => Couldn't get env::");
-                Err(e.to_string())
-            }
-        };
-
-        if result.is_err() {
-            let err = result.err().unwrap();
-            error!("Rust:java_interface:perform_request => result:Err {}", err);
-            return Err(err);
-        } else {
-            return result;
-        }
-    }
-}
-
 /// Loads feature categories from the given features dir.
 /// - featuresDir: Path to directory where features are stored.
 /// Returns a Result<Vec<FeatureCategory>, CoreFailure> represent as MessagePack value.
@@ -118,6 +61,73 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_loadFeatureCategories(
     .unwrap()
 }
 
+/// Notify that app did become inactive.
+/// Returns Result<(), CoreFailure> as MessagePack value.
+#[no_mangle]
+pub extern "system" fn Java_coop_polypoly_core_JniApi_appDidBecomeInactive(
+    env: JNIEnv,
+    _: JClass,
+) -> jbyteArray {
+    env.byte_array_from_slice(&message_pack_serialize(core::app_did_become_inactive()))
+        .unwrap()
+}
+
+/// Ask if user session is expired.
+/// Returns Result<bool, CoreFailure> as MessagePack value.
+#[no_mangle]
+pub extern "system" fn Java_coop_polypoly_core_JniApi_isUserSessionExpired(
+    env: JNIEnv,
+    _: JClass,
+) -> jbyteArray {
+    env.byte_array_from_slice(&message_pack_serialize(core::is_user_session_expired()))
+        .unwrap()
+}
+
+/// Set the user session timeout option to a given one.
+/// - option: Timeout Option as MessagePack value.
+/// Returns Result<(), CoreFailure> as MessagePack value.
+#[no_mangle]
+pub extern "system" fn Java_coop_polypoly_core_JniApi_setTimeoutOption(
+    env: JNIEnv,
+    _: JClass,
+    option: jbyteArray,
+) -> jbyteArray {
+    fn set_timeout_option(env: JNIEnv, option: jbyteArray) -> Result<(), CoreFailure> {
+        let bytes = env
+            .convert_byte_array(option)
+            .map_err(|err| CoreFailure::failed_to_extract_bytes(err.to_string()))?;
+        core::set_user_session_timeout_option(message_pack_deserialize(bytes)?)
+    }
+    env.byte_array_from_slice(&message_pack_serialize(set_timeout_option(env, option)))
+        .unwrap()
+}
+
+/// Get the currently configured user session timeout option.
+/// Returns Result<TimeoutOption, CoreFailure> as MessagePack value.
+#[no_mangle]
+pub extern "system" fn Java_coop_polypoly_core_JniApi_getUserSessionTimeoutOption(
+    env: JNIEnv,
+    _: JClass,
+) -> jbyteArray {
+    env.byte_array_from_slice(&message_pack_serialize(
+        core::get_user_session_timeout_option(),
+    ))
+    .unwrap()
+}
+
+/// Get the user session timeout config options.
+/// Returns Result<Vec<UserSessionTimeout>, CoreFailure> as MessagePack value.
+#[no_mangle]
+pub extern "system" fn Java_coop_polypoly_core_JniApi_getUserSessionTimeoutOptionsConfig(
+    env: JNIEnv,
+    _: JClass,
+) -> jbyteArray {
+    env.byte_array_from_slice(&message_pack_serialize(
+        core::get_user_session_timeout_options_config(),
+    ))
+    .unwrap()
+}
+
 fn read_jni_string(env: &JNIEnv, field: JString) -> Result<String, CoreFailure> {
     env.get_string(field)
         .map_err(|err| CoreFailure::failed_to_extract_java_string(err.to_string()))
@@ -127,4 +137,67 @@ fn read_jni_string(env: &JNIEnv, field: JString) -> Result<String, CoreFailure> 
                 .map(String::from)
                 .map_err(|err| CoreFailure::failed_to_convert_java_string(err.to_string()))
         })
+}
+
+struct BridgeToPlatform {
+    // The callback passed from Android is a local reference: only valid during the method call.
+    // To store it, we need to put it in a global reference.
+    // See https://developer.android.com/training/articles/perf-jni#local-and-global-references
+    callback: GlobalRef,
+
+    // We need JNIEnv to call the callback.
+    // JNIEnv is valid only in the same thread, so we have to store the vm instead, and use it to get
+    // a JNIEnv for the current thread.
+    // See https://developer.android.com/training/articles/perf-jni#javavm-and-jnienvb
+    java_vm: JavaVM,
+}
+
+impl core::PlatformHookRequest for BridgeToPlatform {
+    fn perform_request(&self, request: PlatformRequest) -> Result<PlatformResponse, CoreFailure> {
+        let result: Result<PlatformResponse, CoreFailure> = match self
+            .java_vm
+            .attach_current_thread()
+        {
+            Ok(env) => {
+                let request_byte_array = env
+                    .byte_array_from_slice(&message_pack_serialize(request))
+                    .map_err(|err| CoreFailure::failed_to_convert_bytes(err.to_string()))?;
+
+                let response_byte_array_as_jvalue = env
+                    .call_method(
+                        self.callback.as_obj(),
+                        "performRequest",
+                        "([B)[B",
+                        &[JValue::Object(JObject::from(request_byte_array))],
+                    )
+                    .map_err(|err| CoreFailure::failed_to_call_jni_method(err.to_string()))?;
+
+                let response_byte_array = response_byte_array_as_jvalue
+                    .l()
+                    .map_err(|err| CoreFailure::failed_to_extract_jobject(err.to_string()))?
+                    .into_inner();
+
+                let response_bytes: Vec<u8> = env
+                    .convert_byte_array(response_byte_array)
+                    .map_err(|err| CoreFailure::failed_to_extract_bytes(err.to_string()))?;
+
+                message_pack_deserialize(response_bytes)?
+            }
+            Err(e) => {
+                error!("Rust:java_interface => attach_current_thread:Err => Couldn't get env::");
+                Err(CoreFailure::failed_to_attach_jvm(e.to_string()))
+            }
+        };
+
+        if result.is_err() {
+            let err = result.err().unwrap();
+            error!(
+                "Rust:java_interface:perform_request => result:Err {}",
+                err.message
+            );
+            return Err(err);
+        } else {
+            return result;
+        }
+    }
 }
