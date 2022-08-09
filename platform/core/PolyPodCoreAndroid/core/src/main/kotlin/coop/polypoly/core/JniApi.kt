@@ -32,7 +32,14 @@ object Example : PlatformResponse {
     }
 }
 
-class JniApi {
+object JniApi {
+    external fun bootstrapCore(
+        languageCode: String,
+        fsRoot: String,
+        callback: JniApi
+    ): ByteArray
+    external fun loadFeatureCategories(featuresDir: String): ByteArray
+
     init {
         System.loadLibrary("polypod_core")
     }
@@ -78,7 +85,4 @@ class JniApi {
             pack(ValueFactory.newString(exp.toString()), false)
         }
     }
-
-    external fun bootstrapCore(languageCode: String, callback: JniApi): ByteArray // ktlint-disable max-line-length
-    external fun loadFeatureCategories(featuresDir: String): ByteArray
 }
