@@ -8,7 +8,7 @@ pub enum FailureCode {
     ParsingError,
     StorageError,
     EvaluationError,
-    ResultSerializationError
+    ResultSerializationError,
 }
 
 impl FailureCode {
@@ -51,14 +51,14 @@ impl RdfFailure {
                 code: FailureCode::ParsingError.value(),
                 message: error.to_string(),
             },
-            EvaluationError::Storage(error) => RdfFailure { 
+            EvaluationError::Storage(error) => RdfFailure {
                 code: FailureCode::StorageError.value(),
-                 message: error.to_string(),
+                message: error.to_string(),
             },
             _ => RdfFailure {
                 code: FailureCode::EvaluationError.value(),
                 message: error.to_string(),
-            }
+            },
         }
     }
 
@@ -68,5 +68,4 @@ impl RdfFailure {
             message: String::from("Failed to serialize the query Result: ") + &error.to_string(),
         }
     }
-
 }

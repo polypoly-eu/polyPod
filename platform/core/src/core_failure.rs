@@ -77,7 +77,7 @@ impl CoreFailure {
     pub fn map_rdf_to_core_failure(error: RdfFailure) -> Self {
         CoreFailure {
             code: error.code,
-            message: error.message 
+            message: error.message,
         }
     }
 

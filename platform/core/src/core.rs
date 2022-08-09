@@ -1,18 +1,12 @@
-
-use crate::{
-    core_failure::CoreFailure,
-    feature_categories,
-    io::file_system::DefaultFileSystem
-};
-
+use crate::{core_failure::CoreFailure, feature_categories, io::file_system::DefaultFileSystem};
 use once_cell::sync::OnceCell;
 use serde::{Deserialize, Serialize};
 
 #[cfg(target_os = "android")]
 use {
+    crate::rdf::{rdf_query, rdf_update, SPARQLQuery},
     android_logger::Config,
     log::{trace, Level},
-    crate::rdf::{SPARQLQuery, rdf_query, rdf_update},
 };
 
 // Core is held as a singleton.
