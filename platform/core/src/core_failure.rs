@@ -236,7 +236,8 @@ impl CoreFailure {
             message: format!("Failed to attach JVM, info  '{}'", message),
         }
     }
-    pub fn failed_to_acess_user_usession(message: String) -> Self {
+
+    pub fn failed_to_acess_user_session(message: String) -> Self {
         CoreFailure {
             code: FailureCode::FailedToAccessUserSession.value(),
             message: format!("Failed to access user_session, info  '{}'", message),

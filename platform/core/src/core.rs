@@ -119,7 +119,7 @@ pub fn app_did_become_inactive() -> Result<(), CoreFailure> {
     let session = instance
         .user_session
         .get_mut()
-        .map_err(|err| CoreFailure::failed_to_acess_user_usession(err.to_string()))?;
+        .map_err(|err| CoreFailure::failed_to_acess_user_session(err.to_string()))?;
     session.did_become_inactive();
     Ok(())
 }
@@ -130,7 +130,7 @@ pub fn is_user_session_expired() -> Result<bool, CoreFailure> {
     let session = &instance
         .user_session
         .lock()
-        .map_err(|err| CoreFailure::failed_to_acess_user_usession(err.to_string()))?;
+        .map_err(|err| CoreFailure::failed_to_acess_user_session(err.to_string()))?;
     Ok((&session.is_session_expired()).to_owned())
 }
 
@@ -139,7 +139,7 @@ pub fn set_user_session_timeout_option(option: TimeoutOption) -> Result<(), Core
     let session = &instance
         .user_session
         .lock()
-        .map_err(|err| CoreFailure::failed_to_acess_user_usession(err.to_string()))?;
+        .map_err(|err| CoreFailure::failed_to_acess_user_session(err.to_string()))?;
     session.set_timeout_option(option);
     Ok(())
 }
@@ -149,7 +149,7 @@ pub fn get_user_session_timeout_option() -> Result<TimeoutOption, CoreFailure> {
     let session = &instance
         .user_session
         .lock()
-        .map_err(|err| CoreFailure::failed_to_acess_user_usession(err.to_string()))?;
+        .map_err(|err| CoreFailure::failed_to_acess_user_session(err.to_string()))?;
     Ok(session.get_timeout_option())
 }
 
