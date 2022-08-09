@@ -111,7 +111,8 @@ pub unsafe extern "C" fn get_user_session_timeout_options_config() -> CByteBuffe
 }
 
 /// Imports an archive
-/// dest_resource_url is optional. Pass an empty string if you don't want to pass a value for it.
+/// If dest_resource_url is an empty string then it unzips the archive and returns the location of the folder.
+/// If dest_resource_url is not empty then it unzips to dest_resource_url. In this case dest_resource_url must point to a folder.
 #[no_mangle]
 pub unsafe extern "C" fn import_archive(
     url: *const c_char,
@@ -145,8 +146,9 @@ pub unsafe extern "C" fn import_archive(
     )))
 }
 
-/// Imports an archive
-/// dest_resource_url is optional. Pass an empty string if you don't want to pass a value for it.
+/// Writes file from url to dest_resource_url
+/// If dest_resource_url is an empty string then it writes the file and returns the location of the file.
+/// If dest_resource_url is not empty then it writes the file to dest_resource_url. In this case dest_resource_url must point to a folder.
 #[no_mangle]
 pub unsafe extern "C" fn write_file(
     url: *const c_char,
@@ -181,16 +183,6 @@ pub unsafe extern "C" fn write_file(
 }
 
 /*
-pub fn write_file(
-    url: &Url,
-    dest_resource_url: Option<ResourceUrl>,
-    feature_name: String,
-) -> Result<ResourceUrl, CoreFailure> {
-    let feature_folder_path = feature_folder_path(&feature_name)?;
-    let platform_fs = DefaultFileSystem {};
-    feature_file_system::write_file(url, dest_resource_url, &platform_fs, &feature_folder_path)
-}
-
 pub fn metadata(resource_url: &ResourceUrl, feature_name: String) -> Result<Metadata, CoreFailure> {
     let feature_folder_path = feature_folder_path(&feature_name)?;
     let platform_fs = DefaultFileSystem {};
