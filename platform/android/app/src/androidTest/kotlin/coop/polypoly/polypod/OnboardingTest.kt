@@ -6,7 +6,6 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -16,16 +15,15 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-private class OnboardingActivity {
+private class Onboarding {
     companion object {
         fun checkNotShown() {
-            onView(withText(R.string.update_notification_title))
+            onView(withText(R.string.onboarding_slide1_headline))
                 .check(doesNotExist())
         }
 
         fun checkShown() {
-            onView(withText(R.string.update_notification_title))
-                .inRoot(isDialog())
+            onView(withText(R.string.onboarding_slide1_headline))
                 .check(matches(isDisplayed()))
         }
     }
@@ -39,9 +37,9 @@ class OnboardingTest {
     @Before
     fun preparePreferences() {
         context = InstrumentationRegistry.getInstrumentation().targetContext
-        PreferenceManager.getDefaultSharedPreferences(context)
+        PreferenceManager.getDefaultSharedPreferences(context!!)
             .edit().clear().commit()
-        Preferences.setBiometricCheck(context!!, false)
+        Preferences.setSecurityDoNotAskAgainCheck(context!!, true)
     }
 
     @After
@@ -53,13 +51,13 @@ class OnboardingTest {
     @Test
     fun onboardingShownOnFirstRun() {
         relaunchActivity(true)
-        OnboardingActivity.checkShown()
+        Onboarding.checkShown()
     }
 
     @Test
     fun onboardingNotShownOnSubsequentRun() {
         relaunchActivity(false)
-        OnboardingActivity.checkNotShown()
+        Onboarding.checkNotShown()
     }
 
     private fun relaunchActivity(firstRun: Boolean) {
