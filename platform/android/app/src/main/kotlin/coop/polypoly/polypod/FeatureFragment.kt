@@ -18,6 +18,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coop.polypoly.core.Feature
@@ -25,7 +26,6 @@ import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 private const val PICK_FILE_REQUEST_CODE = 1
@@ -82,9 +82,7 @@ data class ExternalFile(val url: String, val name: String, val size: Long)
 /**
  * A [Fragment] that is responsible for handling a single Feature
  */
-open class FeatureFragment(
-    private val coroutineScope: CoroutineScope
-) : Fragment() {
+open class FeatureFragment : Fragment() {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
@@ -175,7 +173,7 @@ open class FeatureFragment(
             context?.getString(R.string.button_feature_error_close)
         ) { _, _ ->
             close()
-            coroutineScope.launch {
+            lifecycleScope.launch {
                 ErrorUploader.uploadToServer(
                     context!!,
                     featureErrorMessage!!
