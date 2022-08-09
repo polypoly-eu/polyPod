@@ -12,7 +12,7 @@ import { dataFactory } from "../rdf";
 import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint } from "./api";
 import { EncodingOptions, FS, Stats } from "./fs";
 import { Entry } from ".";
-import * as oxigraph from "../../node_modules/oxigraph/web.js";
+import oxigraph from "../../node_modules/oxigraph/node.js";
 
 export const DEFAULT_POD_RUNTIME = "podjs-default";
 export const DEFAULT_POD_RUNTIME_VERSION = "podjs-default-version";
