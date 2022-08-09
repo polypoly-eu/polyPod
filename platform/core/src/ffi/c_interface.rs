@@ -1,5 +1,8 @@
+use url::Url;
+
 use crate::common::serialization::{message_pack_deserialize, message_pack_serialize};
 use crate::core_failure::CoreFailure;
+use crate::feature_file_system::ResourceUrl;
 use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
@@ -106,6 +109,90 @@ pub unsafe extern "C" fn get_user_session_timeout_options_config() -> CByteBuffe
         core::get_user_session_timeout_options_config(),
     ))
 }
+
+/// Imports an archive
+/// dest_resource_url is optional. Pass an empty string if you don't want to pass a value for it.
+#[no_mangle]
+pub unsafe extern "C" fn import_archive(
+    url: *const c_char,
+    dest_resource_url: *const c_char,
+    feature_name: *const c_char,
+) -> CByteBuffer {
+    fn internal(
+        url: *const c_char,
+        dest_resource_url: *const c_char,
+        feature_name: *const c_char,
+    ) -> Result<ResourceUrl, CoreFailure> {
+        unsafe {
+            let url_str = cstring_to_str(&url)?;
+            let url = Url::parse(url_str).map_err(|err| {
+                CoreFailure::failed_to_parse_url(url_str.to_owned(), err.to_string())
+            })?;
+            let dest_resource_url_str = cstring_to_str(&dest_resource_url)?;
+            let dest_resource_url = if dest_resource_url_str == "" {
+                None
+            } else {
+                Some(String::from(dest_resource_url_str))
+            };
+            let feature_name = String::from(cstring_to_str(&feature_name)?);
+            core::import_archive(url, dest_resource_url, feature_name)
+        }
+    }
+    create_byte_buffer(message_pack_serialize(internal(
+        url,
+        dest_resource_url,
+        feature_name,
+    )))
+}
+
+/*
+pub fn import_archive(
+    url: &Url,
+    dest_resource_url: Option<ResourceUrl>,
+    feature_name: String,
+) -> Result<ResourceUrl, CoreFailure> {
+    let feature_folder_path = feature_folder_path(&feature_name)?;
+    // TODO: Filesystem should be passed from outside. Maybe the core should keep an instance of this.
+    let platform_fs = DefaultFileSystem {};
+    feature_file_system::import_archive(url, dest_resource_url, &platform_fs, &feature_folder_path)
+}
+
+pub fn write_file(
+    url: &Url,
+    dest_resource_url: Option<ResourceUrl>,
+    feature_name: String,
+) -> Result<ResourceUrl, CoreFailure> {
+    let feature_folder_path = feature_folder_path(&feature_name)?;
+    let platform_fs = DefaultFileSystem {};
+    feature_file_system::write_file(url, dest_resource_url, &platform_fs, &feature_folder_path)
+}
+
+pub fn metadata(resource_url: &ResourceUrl, feature_name: String) -> Result<Metadata, CoreFailure> {
+    let feature_folder_path = feature_folder_path(&feature_name)?;
+    let platform_fs = DefaultFileSystem {};
+    feature_file_system::metadata(resource_url, &platform_fs, &feature_folder_path)
+}
+
+pub fn read_dir(
+    resource_url: &ResourceUrl,
+    feature_name: String,
+) -> Result<Vec<String>, CoreFailure> {
+    let feature_folder_path = feature_folder_path(&feature_name)?;
+    let platform_fs = DefaultFileSystem {};
+    feature_file_system::read_dir(resource_url, &platform_fs, &feature_folder_path)
+}
+
+pub fn read_file(resource_url: &ResourceUrl, feature_name: String) -> Result<Vec<u8>, CoreFailure> {
+    let feature_folder_path = feature_folder_path(&feature_name)?;
+    let platform_fs = DefaultFileSystem {};
+    feature_file_system::read_file(resource_url, &platform_fs, &feature_folder_path)
+}
+
+pub fn remove(resource_url: &ResourceUrl, feature_name: String) -> Result<(), CoreFailure> {
+    let feature_folder_path = feature_folder_path(&feature_name)?;
+    let platform_fs = DefaultFileSystem {};
+    feature_file_system::remove(resource_url, &platform_fs, &feature_folder_path)
+} */
 
 /// # Safety
 /// This function can be unsafe if trying to deallocate invalid memory.

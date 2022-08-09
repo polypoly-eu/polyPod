@@ -166,51 +166,51 @@ pub fn get_user_session_timeout_options_config() -> Vec<UserSessionTimeout> {
 // Feature file system
 
 pub fn import_archive(
-    url: &Url,
+    url: Url,
     dest_resource_url: Option<ResourceUrl>,
     feature_name: String,
 ) -> Result<ResourceUrl, CoreFailure> {
     let feature_folder_path = feature_folder_path(&feature_name)?;
     // TODO: Filesystem should be passed from outside. Maybe the core should keep an instance of this.
     let platform_fs = DefaultFileSystem {};
-    feature_file_system::import_archive(url, dest_resource_url, &platform_fs, &feature_folder_path)
+    feature_file_system::import_archive(&url, dest_resource_url, &platform_fs, &feature_folder_path)
 }
 
 pub fn write_file(
-    url: &Url,
+    url: Url,
     dest_resource_url: Option<ResourceUrl>,
     feature_name: String,
 ) -> Result<ResourceUrl, CoreFailure> {
     let feature_folder_path = feature_folder_path(&feature_name)?;
     let platform_fs = DefaultFileSystem {};
-    feature_file_system::write_file(url, dest_resource_url, &platform_fs, &feature_folder_path)
+    feature_file_system::write_file(&url, dest_resource_url, &platform_fs, &feature_folder_path)
 }
 
-pub fn metadata(resource_url: &ResourceUrl, feature_name: String) -> Result<Metadata, CoreFailure> {
+pub fn metadata(resource_url: ResourceUrl, feature_name: String) -> Result<Metadata, CoreFailure> {
     let feature_folder_path = feature_folder_path(&feature_name)?;
     let platform_fs = DefaultFileSystem {};
-    feature_file_system::metadata(resource_url, &platform_fs, &feature_folder_path)
+    feature_file_system::metadata(&resource_url, &platform_fs, &feature_folder_path)
 }
 
 pub fn read_dir(
-    resource_url: &ResourceUrl,
+    resource_url: ResourceUrl,
     feature_name: String,
 ) -> Result<Vec<String>, CoreFailure> {
     let feature_folder_path = feature_folder_path(&feature_name)?;
     let platform_fs = DefaultFileSystem {};
-    feature_file_system::read_dir(resource_url, &platform_fs, &feature_folder_path)
+    feature_file_system::read_dir(&resource_url, &platform_fs, &feature_folder_path)
 }
 
-pub fn read_file(resource_url: &ResourceUrl, feature_name: String) -> Result<Vec<u8>, CoreFailure> {
+pub fn read_file(resource_url: ResourceUrl, feature_name: String) -> Result<Vec<u8>, CoreFailure> {
     let feature_folder_path = feature_folder_path(&feature_name)?;
     let platform_fs = DefaultFileSystem {};
-    feature_file_system::read_file(resource_url, &platform_fs, &feature_folder_path)
+    feature_file_system::read_file(&resource_url, &platform_fs, &feature_folder_path)
 }
 
-pub fn remove(resource_url: &ResourceUrl, feature_name: String) -> Result<(), CoreFailure> {
+pub fn remove(resource_url: ResourceUrl, feature_name: String) -> Result<(), CoreFailure> {
     let feature_folder_path = feature_folder_path(&feature_name)?;
     let platform_fs = DefaultFileSystem {};
-    feature_file_system::remove(resource_url, &platform_fs, &feature_folder_path)
+    feature_file_system::remove(&resource_url, &platform_fs, &feature_folder_path)
 }
 
 fn feature_folder_path(feature_name: &str) -> Result<String, CoreFailure> {
