@@ -3,7 +3,6 @@
   font-size: 18px;
   padding: 4px 12px;
   height: 48px;
-  max-width: var(--max-width);
   width: 100%;
   display: flex;
   justify-content: center;
