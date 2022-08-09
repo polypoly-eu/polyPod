@@ -1,6 +1,7 @@
 use crate::{
     core_failure::CoreFailure,
     feature_categories,
+    feature_file_system::{self, Metadata, ResourceUrl},
     io::{file_system::DefaultFileSystem, key_value_store::DefaultKeyValueStore},
     preferences::Preferences,
     user_session::{TimeoutOption, UserSession, UserSessionTimeout},
@@ -10,6 +11,7 @@ use once_cell::sync::OnceCell;
 use serde::{Deserialize, Serialize};
 use std::sync::{Arc, Mutex};
 use std::{sync::MutexGuard, time::Instant};
+use url::Url;
 
 #[cfg(target_os = "android")]
 use {
@@ -40,6 +42,7 @@ const PREFERENCES_DB: &str = "preferences_db";
 // to be shared between components, as well managing components lifetime.
 struct Core<'a> {
     language_code: String,
+    fs_root: String,
     #[allow(dead_code)]
     preferences: Arc<Preferences>,
     user_session: Mutex<UserSession<'a>>,
@@ -65,13 +68,16 @@ pub fn bootstrap(
         return Err(CoreFailure::core_already_bootstrapped());
     }
     let preferences = Arc::new(Preferences {
-        store: Box::new(DefaultKeyValueStore::new(fs_root + PREFERENCES_DB)),
+        store: Box::new(DefaultKeyValueStore::new(
+            fs_root.to_owned() + PREFERENCES_DB,
+        )),
     });
 
     let builder = Box::new(Instant::now);
     let user_session = Mutex::from(UserSession::new(builder, preferences.clone()));
     let core = Core {
         language_code,
+        fs_root,
         preferences,
         user_session,
         platform_hook,
@@ -155,4 +161,60 @@ pub fn get_user_session_timeout_option() -> Result<TimeoutOption, CoreFailure> {
 
 pub fn get_user_session_timeout_options_config() -> Vec<UserSessionTimeout> {
     TimeoutOption::all_option_timeouts()
+}
+
+// Feature file system
+
+pub fn import_archive(
+    url: &Url,
+    dest_resource_url: Option<ResourceUrl>,
+    feature_name: String,
+) -> Result<ResourceUrl, CoreFailure> {
+    let feature_folder_path = feature_folder_path(&feature_name)?;
+    // TODO: Filesystem should be passed from outside. Maybe the core should keep an instance of this.
+    let platform_fs = DefaultFileSystem {};
+    feature_file_system::import_archive(url, dest_resource_url, &platform_fs, &feature_folder_path)
+}
+
+pub fn write_file(
+    url: &Url,
+    dest_resource_url: Option<ResourceUrl>,
+    feature_name: String,
+) -> Result<ResourceUrl, CoreFailure> {
+    let feature_folder_path = feature_folder_path(&feature_name)?;
+    let platform_fs = DefaultFileSystem {};
+    feature_file_system::write_file(url, dest_resource_url, &platform_fs, &feature_folder_path)
+}
+
+pub fn metadata(resource_url: &ResourceUrl, feature_name: String) -> Result<Metadata, CoreFailure> {
+    let feature_folder_path = feature_folder_path(&feature_name)?;
+    let platform_fs = DefaultFileSystem {};
+    feature_file_system::metadata(resource_url, &platform_fs, &feature_folder_path)
+}
+
+pub fn read_dir(
+    resource_url: &ResourceUrl,
+    feature_name: String,
+) -> Result<Vec<String>, CoreFailure> {
+    let feature_folder_path = feature_folder_path(&feature_name)?;
+    let platform_fs = DefaultFileSystem {};
+    feature_file_system::read_dir(resource_url, &platform_fs, &feature_folder_path)
+}
+
+pub fn read_file(resource_url: &ResourceUrl, feature_name: String) -> Result<Vec<u8>, CoreFailure> {
+    let feature_folder_path = feature_folder_path(&feature_name)?;
+    let platform_fs = DefaultFileSystem {};
+    feature_file_system::read_file(resource_url, &platform_fs, &feature_folder_path)
+}
+
+pub fn remove(resource_url: &ResourceUrl, feature_name: String) -> Result<(), CoreFailure> {
+    let feature_folder_path = feature_folder_path(&feature_name)?;
+    let platform_fs = DefaultFileSystem {};
+    feature_file_system::remove(resource_url, &platform_fs, &feature_folder_path)
+}
+
+fn feature_folder_path(feature_name: &str) -> Result<String, CoreFailure> {
+    let instance = get_instance()?;
+    let feature_folder_path = instance.fs_root.to_owned() + "/" + feature_name;
+    Ok(feature_folder_path)
 }

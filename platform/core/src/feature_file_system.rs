@@ -2,7 +2,7 @@ use crate::{core_failure::CoreFailure, io::file_system::FileSystem};
 use url::Url;
 use uuid::Uuid;
 
-type ResourceUrl = String;
+pub type ResourceUrl = String;
 #[allow(dead_code)]
 type ResourceId = String;
 
@@ -71,7 +71,7 @@ fn make_sure_feature_files_dir_exists(
 
 // if no dest_resource_url is provided, it creates one and returns it.
 #[allow(dead_code)]
-fn import_archive(
+pub fn import_archive(
     url: &Url,
     dest_resource_url: Option<ResourceUrl>,
     platform_fs: &impl FileSystem,
@@ -92,7 +92,7 @@ fn import_archive(
 // if no dest_resource_url is provided, it creates one and returns it.
 // it returns the path of the folder in which the file was written
 #[allow(dead_code)]
-fn write_file(
+pub fn write_file(
     url: &Url,
     dest_resource_url: Option<ResourceUrl>,
     platform_fs: &impl FileSystem,
@@ -126,7 +126,7 @@ fn write_file(
 }
 
 #[allow(dead_code)]
-struct Metadata {
+pub struct Metadata {
     is_directory: bool,
     size: String,
     time: String,
@@ -135,7 +135,7 @@ struct Metadata {
 }
 
 #[allow(dead_code)]
-fn metadata(
+pub fn metadata(
     resource_url: &ResourceUrl,
     platform_fs: &impl FileSystem,
     feature_folder_path: &str,
@@ -155,7 +155,7 @@ fn metadata(
 }
 
 #[allow(dead_code)]
-fn read_dir(
+pub fn read_dir(
     resource_url: &ResourceUrl,
     platform_fs: &impl FileSystem,
     feature_folder_path: &str,
@@ -172,7 +172,7 @@ fn read_dir(
 }
 
 #[allow(dead_code)]
-fn read_file(
+pub fn read_file(
     resource_url: &ResourceUrl,
     platform_fs: &impl FileSystem,
     feature_folder_path: &str,
@@ -189,7 +189,7 @@ fn read_file(
 }
 
 #[allow(dead_code)]
-fn remove(
+pub fn remove(
     resource_url: &ResourceUrl,
     platform_fs: &impl FileSystem,
     feature_folder_path: &str,
