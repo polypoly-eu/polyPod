@@ -1,5 +1,5 @@
-use oxigraph::store::{Store, StorageError};
-use sparesults::{QueryResultsFormat};
+use oxigraph::store::{StorageError, Store};
+use sparesults::QueryResultsFormat;
 use spargebra::{Query, Update};
 use std::str;
 
@@ -14,14 +14,14 @@ fn init_store(app_path: String) -> Result<Store, StorageError> {
 fn check_query(query: SPARQLQuery) -> Result<Query, RdfFailure> {
     return match Query::parse(&query, None) {
         Ok(query) => Ok(query),
-        Err(error) => Err(RdfFailure::map_query_parse_error(error))
+        Err(error) => Err(RdfFailure::map_query_parse_error(error)),
     };
 }
 
 fn check_update(query: SPARQLQuery) -> Result<Update, RdfFailure> {
     return match Update::parse(&query, None) {
         Ok(query) => Ok(query),
-        Err(error) => Err(RdfFailure::map_query_parse_error(error))
+        Err(error) => Err(RdfFailure::map_query_parse_error(error)),
     };
 }
 
@@ -29,18 +29,22 @@ pub fn rdf_query(query: SPARQLQuery, app_path: String) -> Result<String, RdfFail
     let store = init_store(app_path).map_err(RdfFailure::failed_to_initialize_store)?;
     match check_query(query.to_string()) {
         Ok(_) => {
-            let query_results = store.query(&query).map_err( RdfFailure::map_evaluation_error)?;
+            let query_results = store
+                .query(&query)
+                .map_err(RdfFailure::map_evaluation_error)?;
             bytes_to_string(to_json_bytes(query_results)?)
-        },
-        Err(error) => Err(error)
+        }
+        Err(error) => Err(error),
     }
 }
 
 pub fn rdf_update(query: SPARQLQuery, app_path: String) -> Result<(), RdfFailure> {
     let store = init_store(app_path).map_err(RdfFailure::failed_to_initialize_store)?;
     match check_update(query.to_string()) {
-        Ok(_) => store.update(&query).map_err(RdfFailure::map_evaluation_error),
-        Err(error) => Err(error)
+        Ok(_) => store
+            .update(&query)
+            .map_err(RdfFailure::map_evaluation_error),
+        Err(error) => Err(error),
     }
 }
 
@@ -48,33 +52,42 @@ fn to_json_bytes(query_results: oxigraph::sparql::QueryResults) -> Result<Vec<u8
     let mut results = Vec::new();
     match query_results.write(&mut results, QueryResultsFormat::Json) {
         Ok(_) => Ok(results),
-        Err(error) => Err(RdfFailure::map_evaluation_error(error))
+        Err(error) => Err(RdfFailure::map_evaluation_error(error)),
     }
 }
 
 fn bytes_to_string(utf8_byte_array: Vec<u8>) -> Result<String, RdfFailure> {
     match str::from_utf8(&utf8_byte_array) {
         Ok(result) => Ok(result.to_string()),
-        Err(error) => Err(RdfFailure::map_utf8_error(error))
+        Err(error) => Err(RdfFailure::map_utf8_error(error)),
     }
-
 }
-
 
 #[cfg(test)]
 mod tests {
 
     use super::*;
-    
+
     #[test]
     fn test_query_result_mapping_to_serialize() {
-        let _update_result = rdf_update(String::from("INSERT DATA { <http://example.com/you> <http://example.com/are> \"great\" }"), String::from("."));
+        let _update_result = rdf_update(
+            String::from(
+                "INSERT DATA { <http://example.com/you> <http://example.com/are> \"great\" }",
+            ),
+            String::from("."),
+        );
 
-        let query_result = rdf_query(String::from("
+        let query_result = rdf_query(
+            String::from(
+                "
             SELECT ?s ?p ?o WHERE {
                 ?s ?p ?o
             }
-        "), String::from(".")).unwrap();
+        ",
+            ),
+            String::from("."),
+        )
+        .unwrap();
 
         print!("{:?}", query_result);
 
