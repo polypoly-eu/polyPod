@@ -101,9 +101,9 @@ pub unsafe extern "C" fn get_user_session_timeout_option() -> CByteBuffer {
 /// Get the user session timeout config options.
 /// Returns Result<Vec<UserSessionTimeout>, CoreFailure> as MessagePack value.
 #[no_mangle]
-pub unsafe extern "C" fn get_user_session_timeout_config() -> CByteBuffer {
+pub unsafe extern "C" fn get_user_session_timeout_options_config() -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
-        core::get_user_session_timeout_config(),
+        core::get_user_session_timeout_options_config(),
     ))
 }
 
