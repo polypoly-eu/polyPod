@@ -97,5 +97,6 @@ class UpdateNotificationTest: XCTestCase {
 
     private func closeInAppNotification() {
         findInAppNotificationCloseButton().tap()
+        sleep(1)
     }
 }
