@@ -37,7 +37,7 @@ object JniApi {
         languageCode: String,
         fsRoot: String,
         callback: JniApi
-    ): ByteArray // ktlint-disable max-line-length
+    ): ByteArray
     external fun loadFeatureCategories(featuresDir: String): ByteArray
 
     init {
