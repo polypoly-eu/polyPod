@@ -83,10 +83,6 @@ impl<'a> UserSession<'a> {
         ) {
             (Some(timestamp), Some(interval)) => {
                 let now = (self.timestamp_builder)();
-                println!("Now {:?}", now);
-                println!("Timestamp {:?}", timestamp);
-                println!("Interval {:?}", interval);
-                println!("Elapsed {:?}", now.duration_since(timestamp));
                 now.duration_since(timestamp) >= interval
             }
             _ => false,
