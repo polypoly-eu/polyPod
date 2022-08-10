@@ -1,5 +1,9 @@
+use serde::{Deserialize, Serialize};
+
 use crate::common::serialization::{message_pack_deserialize, message_pack_serialize};
 use crate::core_failure::CoreFailure;
+use std::any::Any;
+use std::collections::HashMap;
 use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
@@ -157,6 +161,7 @@ pub struct BridgeToPlatform {
     perform_request: extern "C" fn(request: CByteBuffer) -> CByteBuffer,
 }
 
+// Core -> Platform
 impl core::PlatformHookRequest for BridgeToPlatform {
     fn perform_request(&self, request: PlatformRequest) -> Result<PlatformResponse, CoreFailure> {
         let request_byte_buffer = unsafe { create_byte_buffer(message_pack_serialize(request)) };
@@ -168,4 +173,31 @@ impl core::PlatformHookRequest for BridgeToPlatform {
         (self.free_bytes)(response_byte_buffer.data);
         return response;
     }
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum CoreRequest {
+    Example(String, Option<String>),
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum CoreResponse {
+    Example(Result<String, CoreFailure>),
+}
+
+fn handle(core_request: CoreRequest) -> Result<CoreResponse, CoreFailure> {
+    Ok(CoreResponse::Example(Ok("Test".to_string())))
+}
+
+// Platform -> Core
+#[no_mangle]
+pub unsafe extern "C" fn perform_request(core_request_byte_buffer: CByteBuffer) -> CByteBuffer {
+    // Don't forget to release bytes if necessary
+    let core_request_bytes = byte_buffer_to_bytes(&core_request_byte_buffer);
+    let response_result = core_request_bytes
+        .and_then(|bytes| -> Result<CoreRequest, CoreFailure> { message_pack_deserialize(bytes) })
+        .and_then(|core_request| -> Result<CoreResponse, CoreFailure> { handle(core_request) });
+    //convert Result<CoreResponse, CoreFailure> to CByteBuffer
+    // I will try to convert Result directly and see what happens, if not I will convert it to a Map: {"Ok": serialize(CoreResponse)}
+    create_byte_buffer(message_pack_serialize(response_result))
 }
