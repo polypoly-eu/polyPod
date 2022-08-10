@@ -153,6 +153,8 @@ pub fn get_user_session_timeout_option() -> Result<TimeoutOption, CoreFailure> {
     Ok(session.get_timeout_option())
 }
 
-pub fn get_user_session_timeout_options_config() -> Vec<UserSessionTimeout> {
-    TimeoutOption::all_option_timeouts()
+pub fn get_user_session_timeout_options_config() -> Result<Vec<UserSessionTimeout>, CoreFailure> {
+    // The current contract between platform and core requires that core responds with a Result type.
+    // Embeed in Result type, until further clarifications.
+    Ok(TimeoutOption::all_option_timeouts())
 }

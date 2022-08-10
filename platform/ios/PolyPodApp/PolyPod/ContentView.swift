@@ -139,9 +139,6 @@ struct ContentView: View {
                     },
                     openInfoAction: {
                         state = infoState()
-                    },
-                    openSettingsAction: {
-                        state = settingsState()
                     }
                 ).alert(isPresented: $showUpdateNotification) {
                     Alert(
@@ -182,16 +179,6 @@ struct ContentView: View {
                         state = featureListState()
                     }
                 )
-            )
-        )
-    }
-
-    private func settingsState() -> ViewState {
-        ViewState(
-            AnyView(
-                SettingsView(closeAction: {
-                    state = featureListState()
-                })
             )
         )
     }

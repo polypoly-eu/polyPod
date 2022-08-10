@@ -76,12 +76,10 @@ public final class Core {
     }
     
     public func setUserSessionTimeout(option: UserSessionTimeoutOption) -> Result<Void, Error> {
-        guard let data = option.messagePackValue.data(using: .utf8) else {
-            return .failure(EncodingError.failedToCreateData)
-        }
+        let data = MessagePack.pack(option.messagePackValue).toByteBuffer
         return handleCoreResponse(
             set_user_session_timeout_option(
-                data.toByteBuffer,
+                data,
                 { $0?.deallocate() }
             )
         ) { _ in }

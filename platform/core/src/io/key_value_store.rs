@@ -27,6 +27,7 @@ impl KeyValueStore for DefaultKeyValueStore {
 
     fn write(&self, key: Vec<u8>, value: Vec<u8>) {
         self.db.insert(key, value).unwrap();
+        _ = self.db.flush()
     }
 
     fn remove(&self, key: Vec<u8>) {

@@ -1,6 +1,6 @@
 import MessagePack
 
-public enum UserSessionTimeoutOption: String {
+public enum UserSessionTimeoutOption: String, CaseIterable {
     case option1
     case option2
     case option3
@@ -8,13 +8,13 @@ public enum UserSessionTimeoutOption: String {
 }
 
 public struct UserSessionTimeoutOptionConfig {
-    let option: UserSessionTimeoutOption
-    let duration: Int
+    public let option: UserSessionTimeoutOption
+    public let duration: UInt?
 }
 
 extension UserSessionTimeoutOption {
-    var messagePackValue: String {
-        self.rawValue
+    var messagePackValue: MessagePackValue {
+        MessagePackValue(self.rawValue)
     }
     
     static func from(msgPackValue value: MessagePackValue) throws -> UserSessionTimeoutOption {
@@ -31,7 +31,7 @@ extension UserSessionTimeoutOptionConfig {
         let object: CoreResponseObject = try value.getDictionary()
         return try UserSessionTimeoutOptionConfig(
             option: UserSessionTimeoutOption.from(msgPackValue: object.get("option")),
-            duration: object.get("duration").getInt())
+            duration: object.get("duration").getUInt())
     }
     
     static func mapUserSessionTimeoutOptionsConfig(_ value: MessagePackValue) throws -> [UserSessionTimeoutOptionConfig] {

@@ -50,11 +50,14 @@ extension MessagePackValue {
         }
     }
     
-    func getInt() throws -> Int {
-        if let int = self.intValue {
-            return int
+    func getUInt() throws -> UInt? {
+        guard self != nil else {
+            return nil
+        }
+        if let uint = self.uintValue {
+            return uint
         } else {
-            throw DecodingError.invalidValue(info: "Expected int, received \(self)")
+            throw DecodingError.invalidValue(info: "Expected uint, received \(self)")
         }
     }
 }

@@ -5,12 +5,14 @@ use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
 
 #[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct UserSessionTimeout {
     option: TimeoutOption,
-    duration: Option<u16>,
+    duration: Option<u32>,
 }
 
 #[derive(Debug, PartialEq, Clone, Serialize, Deserialize, EnumIter)]
+#[serde(rename_all = "camelCase")]
 pub enum TimeoutOption {
     Option1,
     Option2,
@@ -18,16 +20,21 @@ pub enum TimeoutOption {
     NoTimeout,
 }
 
-const ONE_MINUTE_IN_SECONDS: u16 = 60;
+const ONE_MINUTE_IN_SECONDS: u32 = 60;
 
 impl TimeoutOption {
-    pub fn duration(&self) -> Option<u16> {
+    pub fn duration_in_minutes(&self) -> Option<u32> {
         match self {
-            TimeoutOption::Option1 => Some(5 * ONE_MINUTE_IN_SECONDS),
-            TimeoutOption::Option2 => Some(15 * ONE_MINUTE_IN_SECONDS),
-            TimeoutOption::Option3 => Some(60 * ONE_MINUTE_IN_SECONDS),
+            TimeoutOption::Option1 => Some(5),
+            TimeoutOption::Option2 => Some(15),
+            TimeoutOption::Option3 => Some(60),
             TimeoutOption::NoTimeout => None,
         }
+    }
+
+    pub fn duration_in_seconds(&self) -> Option<Duration> {
+        self.duration_in_minutes()
+            .map(|minutes| Duration::new((minutes * ONE_MINUTE_IN_SECONDS).into(), 0))
     }
 
     pub fn default_option() -> Self {
@@ -38,7 +45,7 @@ impl TimeoutOption {
         TimeoutOption::iter()
             .map(|option| UserSessionTimeout {
                 option: option.clone(),
-                duration: option.duration(),
+                duration: option.duration_in_minutes(),
             })
             .collect()
     }
@@ -72,11 +79,11 @@ impl<'a> UserSession<'a> {
     pub fn is_session_expired(&self) -> bool {
         match (
             self.inactive_timestamp,
-            self.get_timeout_option().duration(),
+            self.get_timeout_option().duration_in_seconds(),
         ) {
             (Some(timestamp), Some(interval)) => {
                 let now = (self.timestamp_builder)();
-                timestamp + Duration::new(interval.into(), 0) <= now
+                timestamp + interval <= now
             }
             _ => false,
         }
@@ -160,7 +167,7 @@ mod tests {
     fn app_becomes_active_returns_correct_expired_state() {
         let timestamp = Mutex::from(Instant::now());
         let stored_option = TimeoutOption::Option1;
-        let timeout_interval = Duration::new(stored_option.duration().unwrap().into(), 0);
+        let timeout_interval = stored_option.duration_in_seconds().unwrap();
         let one_second = Duration::new(1, 0);
 
         let mut session = UserSession::new(
