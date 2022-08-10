@@ -1,5 +1,6 @@
 import SwiftUI
 import UIKit
+import PolyPodCoreSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
@@ -44,10 +45,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This may occur due to temporary interruptions (ex. an incoming phone call).
     }
     
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
-    }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
@@ -57,5 +54,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         (UIApplication.shared.delegate as! AppDelegate).scheduleUpdateNotificationCheck()
         Authentication.shared.clear()
+        _ = Core.instance.appDidBecomeInactive()
     }
 }
