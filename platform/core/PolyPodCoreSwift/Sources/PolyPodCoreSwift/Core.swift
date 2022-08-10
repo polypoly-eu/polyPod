@@ -12,6 +12,14 @@ enum PlatformResponse {
     case Example(String)
 }
 
+enum CoreRequest {
+    case example(String, Optional<String>)
+}
+
+enum CoreResponse {
+    case example(Result<String, CoreFailure>)
+}
+
 /// Swift wrapper around the Rust Core.
 public final class Core {
     public static let instance = Core()
@@ -23,6 +31,28 @@ public final class Core {
     private init() {}
     
     // MARK: - Public API
+    
+    /*
+     
+     #[derive(Debug, Clone, Serialize, Deserialize)]
+     pub enum CoreRequest {
+         Example(String, Option<String>),
+     }
+
+     #[derive(Debug, Clone, Serialize, Deserialize)]
+     pub enum CoreResponse {
+         Example(Result<String, CoreFailure>),
+     }
+     
+     */
+    
+    public func testPerformRequest() {
+        // create the enums
+        // serialize a request
+        // deserialize a response
+        
+        //perform_request(<#T##core_request_byte_buffer: CByteBuffer##CByteBuffer#>)
+    }
     
     /// Prepares the core to be used
     /// Should be called before invoking any other API
