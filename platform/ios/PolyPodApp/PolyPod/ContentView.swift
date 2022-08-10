@@ -19,7 +19,6 @@ struct FirstRun {
 }
 
 struct ContentView: View {
-    @Environment(\.scenePhase) var scenePhase
     private struct ViewState {
         let backgroundColor: Color
         let borderColor: Color
@@ -51,7 +50,7 @@ struct ContentView: View {
             Rectangle()
                 .fill(state.backgroundColor)
                 .frame(maxWidth: .infinity, maxHeight: safeAreaInsets.top)
-            
+
             state.view
 
             Rectangle()
@@ -71,7 +70,7 @@ struct ContentView: View {
             checkIfUserSessionDidExpire()
         }
     }
-    
+
     private func checkIfUserSessionDidExpire() {
         if !Authentication.shared.shouldShowPrompt() {
             let isExpired = Core
@@ -100,8 +99,8 @@ struct ContentView: View {
                 )
             }
         }
-        
     }
+
     private func initState() -> ViewState {
         let state = self.state ?? firstRunState()
         setStatusBarStyle?(

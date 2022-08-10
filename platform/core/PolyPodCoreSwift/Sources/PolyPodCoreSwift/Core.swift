@@ -86,7 +86,10 @@ public final class Core {
     }
     
     public func getUserSessionTimeoutOption() -> Result<UserSessionTimeoutOption, Error> {
-        handleCoreResponse(get_user_session_timeout_option(), UserSessionTimeoutOption.from(msgPackValue:))
+        handleCoreResponse(
+            get_user_session_timeout_option(),
+            UserSessionTimeoutOption.from(msgPackValue:)
+        )
     }
     
     public func getUserSessionTimeoutOptionsConfig() -> Result<[UserSessionTimeoutOptionConfig], Error> {

@@ -33,17 +33,6 @@ public enum DecodingError: Error {
     }
 }
 
-public enum EncodingError: Error {
-    case failedToCreateData
-    
-    var localizedDescription: String {
-        switch self {
-        case .failedToCreateData:
-            return "Failed to create data from source"
-        }
-    }
-}
-
 public enum CoreFailureCode: Int {
     case coreNotBootstrapped = 1
     case coreAlreadyBootstrapped

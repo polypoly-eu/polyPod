@@ -1,5 +1,4 @@
 import LocalAuthentication
-import PolyPodCoreSwift
 
 private func isSimulator() -> Bool {
     #if targetEnvironment(simulator)
@@ -68,7 +67,7 @@ class Authentication {
             completeAction(success)
         }
     }
-    
+
     private func isCheckDisabled() -> Bool {
         return UserDefaults.standard.bool(
             forKey: Self.disableCheckKey
