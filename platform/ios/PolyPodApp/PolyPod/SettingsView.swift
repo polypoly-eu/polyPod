@@ -126,14 +126,22 @@ struct SettingsView: View {
                     )
                     if self.isAuthenticationConfigured {
                         Picker(
-                            "Screen lock inactivity timeout",
+                            "screen_lock_inactivity_timeout_entry",
                             selection: $viewModel.userSessionTimeoutOption
                         ) {
                             ForEach(viewModel.userSessionTimeoutOptions) { option in
                                 if let duration = option.duration {
-                                    Text("\(duration) minutes").tag(option.option)
+                                    Text(
+                                        String.localizedStringWithFormat(
+                                            NSLocalizedString(
+                                                "screen_lock_inactivity_timeout_duration %d",
+                                                comment: ""
+                                            ),
+                                            duration
+                                        )
+                                    ).tag(option.option)
                                 } else {
-                                    Text("No Timeout").tag(option.option)
+                                    Text("screen_lock_inactivity_no_timeout").tag(option.option)
                                 }
                             }
                         }
