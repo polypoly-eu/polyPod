@@ -100,7 +100,7 @@ $(android_binaries): $(target)
 	rustup target add $(android_triples)
 
 	$(foreach triple, $(android_triples), \
-		cargo ndk --platform $(android_version) --target $(triple) build $(cargo_build_flag); \
+		cargo ndk --platform $(android_version) --target $(triple) --bindgen build $(cargo_build_flag); \
 	)
 
 $(android_core_libraries): $(android_binaries)
