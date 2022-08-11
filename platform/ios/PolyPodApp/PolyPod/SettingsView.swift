@@ -1,6 +1,6 @@
 import SwiftUI
-import PolyPodCoreSwift
 import Combine
+import PolyPodCoreSwift
 
 private enum Sections {
     case main, imprint, privacyPolicy, termsOfUse, licenses
@@ -39,24 +39,7 @@ extension UserSessionTimeoutOptionConfig: Identifiable {
     }
 }
 
-extension Result {
-    func inspectError(_ inspect: (Error) -> Void) -> Self {
-        if case let.failure(error) = self {
-            inspect(error)
-        }
-        return self
-    }
-    
-    func unwrapOr(_ fallback: Success) -> Success {
-        if let value = try? self.get() {
-            return value
-        }
-        
-        return fallback
-    }
-}
-
-class SettingsViewModel: ObservableObject {
+final class SettingsViewModel: ObservableObject {
     @Published var userSessionTimeoutOption: UserSessionTimeoutOption = .option1
     @Published private(set) var userSessionTimeoutOptions: [UserSessionTimeoutOptionConfig] = []
     private var cancellables: Set<AnyCancellable> = []
@@ -203,7 +186,7 @@ struct SettingsView: View {
             ActivityViewController(activityItems: Log.logFiles)
         }
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("Settings")
+        .navigationTitle("settings_title")
         .onAppear {
             viewModel.load()
         }
