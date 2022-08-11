@@ -121,6 +121,7 @@ pub fn app_did_become_inactive() -> Result<(), CoreFailure> {
         .get_mut()
         .map_err(|err| CoreFailure::failed_to_acess_user_session(err.to_string()))?;
     session.did_become_inactive();
+    instance.preferences.as_ref().save();
     Ok(())
 }
 
