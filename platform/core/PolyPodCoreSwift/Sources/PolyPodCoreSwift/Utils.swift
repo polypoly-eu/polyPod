@@ -46,36 +46,19 @@ func packPlatformResponse(response: Result<PlatformResponse, Error>) -> Data {
     return MessagePack.pack(.map(result))
 }
 
-// How do I make it detect the type automatically. I don't want to say, here make a map every time, here make a string, etc
+func packCoreRequest(request: CoreRequest) -> Data {
+    return MessagePack.pack(serialize(request))
+}
 
-// Test: [Optional]
-// Test: Optional
-// Test: ["Key": Optional]
-// Test: Result<Optional, Error>
-
-// Todo: Rust does not know how to decode optionals in this format yet
-// If you don't know how to convert a Swift type to a MessagePackValue that Rust can decode
-// serialize the closest type to your swift type in Rust and send it to Swift.
-// Then see what Rust sent you and if you can deserialize
-
-
-// Note: decoding and encoding of Option is not the same
-// Rust sends:
-// map([string(Ok): nil]) for None
-// map([string(Ok): string(Test)]) for Some(Test)
-// From Swift we send
-// string(Test) for Some(Test)
-// nil for None
-
-func mpValue(_ opt: Any?) -> MessagePackValue {
+func serialize(_ opt: Any?) -> MessagePackValue {
     if let val = opt {
-        return mpValue(val)
+        return serialize(val)
     } else {
         return .nil
     }
 }
 
-func mpValue(_ value: Any) -> MessagePackValue {
+func serialize(_ value: Any) -> MessagePackValue {
     // What is case extended(Int8, Data) for?
     switch value.self {
     case is Bool:
@@ -92,6 +75,14 @@ func mpValue(_ value: Any) -> MessagePackValue {
         return .int(value as! Int64)
     case is UInt:
         return .uint(UInt64(value as! UInt))
+    case is UInt8:
+        return .uint(UInt64(value as! UInt8))
+    case is UInt16:
+        return .uint(UInt64(value as! UInt16))
+    case is UInt32:
+        return .uint(UInt64(value as! UInt32))
+    case is UInt64:
+        return .uint(value as! UInt64)
     case is String:
         return .string(value as! String)
     case is Data:
@@ -102,11 +93,11 @@ func mpValue(_ value: Any) -> MessagePackValue {
         return .float(value as! Float)
     case is Array<Any>:
         return .array((value as! Array<Any>).map({ child in
-            return mpValue(child)
+            return serialize(child)
         }))
     case is Dictionary<AnyHashable, Any>:
         let dict = value as! Dictionary<AnyHashable, Any>
-        return .map(dict.transform(keyTransform: { mpValue($0) }, valueTransform: { mpValue($0) }))
+        return .map(dict.transform(keyTransform: { serialize($0) }, valueTransform: { serialize($0) }))
     case is Error:
         let err = value as! Error
         return .string(err.localizedDescription)
@@ -114,24 +105,148 @@ func mpValue(_ value: Any) -> MessagePackValue {
         let result = value as! Result<Any, Error>
         switch result {
         case .success(let resValue):
-            return .map(["Ok": mpValue(resValue)])
+            return .map(["Ok": serialize(resValue)])
         case .failure(let err):
-            return .map(["Err": mpValue(err)])
+            return .map(["Err": serialize(err)])
         }
+    // TODO: Handle all the other types, like CoreFailure for example
+    // Maybe see if you can serialize any enum or struct ;)
     case is CoreRequest:
         let req = value as! CoreRequest
         switch req {
         case .example(let arg1, let arg2):
-            return .map(["Example" : .array([mpValue(arg1), mpValue(arg2)])])
+            return .map(["Example" : .array([serialize(arg1), serialize(arg2)])])
         }
     default:
+        // Handle this a better way
         fatalError("Good luck buddy!")
     }
 }
 
-func packCoreRequest(request: CoreRequest) -> Data {
-    let val = mpValue(request)
-    return MessagePack.pack(val)
+// deserialize
+
+// Note: Nesting types need to have their own methods.
+// For example
+// Optional<T> is a nesting type
+// Result<T, Error> is a nesting type
+// It is all because the type system in Swift is not exactly the best.
+
+func deserialize<T>(value: MessagePackValue) throws -> Optional<T> {
+    if value == .nil {
+        return nil
+    } else {
+        let deserialized: T = try deserialize(value: value)
+        return deserialized
+    }
+}
+
+func deserialize<T>(value: MessagePackValue) throws -> Result<T, Error> {
+    switch value {
+    case .map(let val):
+        if let okay = val[.string("Ok")] {
+            return Result.success(try deserialize(value: okay))
+        } else if let err = val[.string("Err")] {
+            return Result.failure(try deserialize(value: err))
+        } else {
+            throw DecodingError.invalidValue(info: "Expected Result<\(T.self), Error>, received \(value)")
+        }
+    default:
+        throw DecodingError.invalidValue(info: "Expected .map, received \(value)")
+    }
+}
+
+func deserialize(value: MessagePackValue) throws -> CoreResponse {
+    switch value {
+    case .map(let val):
+        if let example = val[.string("Example")] {
+            let result: Result<Optional<String>, CoreFailure> = try deserialize(value: example)
+            return CoreResponse.example(result)
+        } else {
+            throw DecodingError.invalidValue(info: "Expected CoreResponse case, received \(value)")
+        }
+    default:
+        throw DecodingError.invalidValue(info: "Expected .map, received \(value)")
+    }
+}
+
+// Example of CoreFailure from core
+// map([string(code): uint(10), string(message): string(File system failed for path 'path' with error: 'message')]
+func deserialize(value: MessagePackValue) throws -> CoreFailure {
+    switch value {
+    case .map(let val):
+        guard let codeVal = val["code"],
+              let messageVal = val["message"] else {
+            throw DecodingError.invalidValue(info: "Expected code and message, received \(val)")
+        }
+        
+        let code: UInt = try deserialize(value: codeVal)
+        let message: String = try deserialize(value: messageVal)
+        
+        guard let codeCase = CoreFailureCode(rawValue: Int(code)) else {
+            throw DecodingError.invalidValue(info: "No error found for code: \(code), received \(val)")
+        }
+        
+        return CoreFailure(code: codeCase, message: message)
+    default:
+        throw DecodingError.invalidValue(info: "Expected .map, received \(value)")
+    }
+}
+
+func deserialize<T>(value: MessagePackValue) throws -> T {
+    switch value {
+    case .nil:
+        throw DecodingError.invalidValue(info: "Expected \(T.self), received Optional")
+    case .bool(let val):
+        if T.self != type(of: val) {
+            throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
+        }
+        return val as! T
+    case .int(let val):
+        if T.self != type(of: val) {
+            throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
+        }
+        return val as! T
+    case .uint(let val):
+        if T.self != type(of: val) {
+            throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
+        }
+        return val as! T
+    case .float(let val):
+        if T.self != type(of: val) {
+            throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
+        }
+        return val as! T
+    case .double(let val):
+        if T.self != type(of: val) {
+            throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
+        }
+        return val as! T
+    case .string(let val):
+        if T.self != type(of: val) {
+            throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
+        }
+        return val as! T
+    case .binary(let val):
+        if T.self != type(of: val) {
+            throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
+        }
+        return val as! T
+    case .array(let val):
+        if T.self != type(of: val) {
+            throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
+        }
+        return val as! T
+    case .map(let val):
+        if T.self != type(of: val) {
+            throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
+        }
+        return val as! T
+    case .extended(_, let val):
+        if T.self != type(of: val) {
+            throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
+        }
+        return val as! T
+    }
 }
 
 extension Data {

@@ -30,6 +30,7 @@ public enum DecodingError: Error {
     }
 }
 
+#warning("Out of date. Needs to be updated.")
 public enum CoreFailureCode: Int {
     case coreNotBootstrapped = 1
     case coreAlreadyBootstrapped

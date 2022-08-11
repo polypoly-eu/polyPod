@@ -17,8 +17,11 @@ enum CoreRequest {
 }
 
 enum CoreResponse {
-    case example(Result<String, CoreFailure>)
+    case example(Result<Optional<String>, CoreFailure>)
 }
+
+// Deserialize
+// 1. Start by deserializing a result. If that is too hard, start with a string. 
 
 /// Swift wrapper around the Rust Core.
 public final class Core {
@@ -58,6 +61,7 @@ public final class Core {
             result_bytes,
             { responseValue in
                 // todo: Map the response value to smth useful.
+                // map([string(Example): map([string(Ok): nil])])
                 print(responseValue)
             }
         )
