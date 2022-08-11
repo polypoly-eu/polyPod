@@ -31,18 +31,7 @@ func handle(platformRequest: PlatformRequest) -> PlatformResponse {
 }
 
 func packPlatformResponse(response: Result<PlatformResponse, Error>) -> Data {
-    var result: [MessagePackValue: MessagePackValue] = [:]
-    switch response {
-    case .success(let platformResponse):
-        switch platformResponse {
-        case .Example(let name):
-            result["Ok"] = .map(["Example": .string(name)])
-        }
-    case .failure(let error):
-        result["Err"] = .string(error.localizedDescription)
-    }
-    
-    return MessagePack.pack(.map(result))
+    return MessagePack.pack(serialize(response))
 }
 
 func packCoreRequest(request: CoreRequest) -> Data {
