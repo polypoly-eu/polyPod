@@ -39,6 +39,11 @@ object JniApi {
         callback: JniApi
     ): ByteArray
     external fun loadFeatureCategories(featuresDir: String): ByteArray
+    external fun appDidBecomeInactive(): ByteArray
+    external fun isUserSessionExpired(): ByteArray
+    external fun setUserSessionTimeoutOption(option: ByteArray): ByteArray
+    external fun getUserSessionTimeoutOption(): ByteArray
+    external fun getUserSessionTimeoutOptionsConfig(): ByteArray
 
     init {
         System.loadLibrary("polypod_core")
