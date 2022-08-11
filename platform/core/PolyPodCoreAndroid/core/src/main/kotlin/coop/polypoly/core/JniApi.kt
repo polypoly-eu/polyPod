@@ -63,21 +63,6 @@ object JniApi {
         }
     }
 
-    private fun pack(value: Value, isOk: Boolean): ByteArray {
-        val okOrError = if (isOk) "Ok" else "Err"
-        val map =
-            ValueFactory.newMap(
-                mutableMapOf(
-                    ValueFactory.newString(okOrError) to value
-                )
-            )
-        val output = ByteArrayOutputStream()
-        val packer = MessagePack.newDefaultPacker(output)
-        packer.packValue(map)
-        packer.close()
-        return output.toByteArray()
-    }
-
     fun performRequest(input: ByteArray): ByteArray {
         return try {
             val unpacker: MessageUnpacker = MessagePack.newDefaultUnpacker(
@@ -85,9 +70,9 @@ object JniApi {
             )
             val platformRequest = mapToPlatformRequest(unpacker.unpackValue())
             val response = handle(platformRequest)
-            pack(response.messageValue(), true)
+            response.messageValue().asOk().pack()
         } catch (exp: Exception) {
-            pack(ValueFactory.newString(exp.toString()), false)
+            exp.asValue().asErr().pack()
         }
     }
 }
