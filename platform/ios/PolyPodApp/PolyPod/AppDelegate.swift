@@ -35,6 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             fatalError(content.localizedDescription)
         }
+        
+        Core.instance.testPerformRequest()
 
         let defaults = UserDefaults.standard
         defaults.disableDataProtection()

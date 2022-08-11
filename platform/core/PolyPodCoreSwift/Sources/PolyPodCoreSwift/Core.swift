@@ -46,12 +46,21 @@ public final class Core {
      
      */
     
-    public func testPerformRequest() {
+    public func testPerformRequest() -> Result<Void, Error> {
         // create the enums
         // serialize a request
         // deserialize a response
+        let request = CoreRequest.example("Hello1", nil)
+        let result_bytes = perform_request(packCoreRequest(request: request).toByteBuffer)
         
-        //perform_request(<#T##core_request_byte_buffer: CByteBuffer##CByteBuffer#>)
+        //TODO: Decode Core Response successfully
+        return handleCoreResponse(
+            result_bytes,
+            { responseValue in
+                // todo: Map the response value to smth useful.
+                print(responseValue)
+            }
+        )
     }
     
     /// Prepares the core to be used

@@ -182,11 +182,11 @@ pub enum CoreRequest {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum CoreResponse {
-    Example(Result<String, CoreFailure>),
+    Example(Result<Option<String>, CoreFailure>),
 }
 
 fn handle(core_request: CoreRequest) -> Result<CoreResponse, CoreFailure> {
-    Ok(CoreResponse::Example(Ok("Test".to_string())))
+    Ok(CoreResponse::Example(Ok(None)))
 }
 
 // Platform -> Core
@@ -199,5 +199,20 @@ pub unsafe extern "C" fn perform_request(core_request_byte_buffer: CByteBuffer) 
         .and_then(|core_request| -> Result<CoreResponse, CoreFailure> { handle(core_request) });
     //convert Result<CoreResponse, CoreFailure> to CByteBuffer
     // I will try to convert Result directly and see what happens, if not I will convert it to a Map: {"Ok": serialize(CoreResponse)}
+
+    // Problem: Cannot deserialize map([string(Example): array([string(Hello), map([string(Some): string(Optional String)])])])
+    // I probably need to add some custom deserialization for CoreRequest
+
+    // TODO: Add ability to inspect response_result from Xcode
+    match &response_result {
+        Ok(x) => {
+            let y = x;
+            print!("");
+        }
+        Err(err) => {
+            print!("")
+        }
+    }
+
     create_byte_buffer(message_pack_serialize(response_result))
 }

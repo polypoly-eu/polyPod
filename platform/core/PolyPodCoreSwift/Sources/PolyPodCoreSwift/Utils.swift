@@ -1,6 +1,7 @@
 import PolyPodCore
 import Foundation
 import MessagePack
+import SwiftUI
 
 func unpackBytes(bytes: CByteBuffer) throws -> MessagePackValue {
     defer {
@@ -52,11 +53,25 @@ func packPlatformResponse(response: Result<PlatformResponse, Error>) -> Data {
 // Test: ["Key": Optional]
 // Test: Result<Optional, Error>
 
-func mpValue(_ opt: Optional<Any>) -> MessagePackValue {
+// Todo: Rust does not know how to decode optionals in this format yet
+// If you don't know how to convert a Swift type to a MessagePackValue that Rust can decode
+// serialize the closest type to your swift type in Rust and send it to Swift.
+// Then see what Rust sent you and if you can deserialize
+
+
+// Note: decoding and encoding of Option is not the same
+// Rust sends:
+// map([string(Ok): nil]) for None
+// map([string(Ok): string(Test)]) for Some(Test)
+// From Swift we send
+// string(Test) for Some(Test)
+// nil for None
+
+func mpValue(_ opt: Any?) -> MessagePackValue {
     if let val = opt {
-        return .map([.string("Some") : mpValue(val)])
+        return mpValue(val)
     } else {
-        return .map([.string("None") : .string("")])
+        return .nil
     }
 }
 
@@ -99,24 +114,24 @@ func mpValue(_ value: Any) -> MessagePackValue {
         let result = value as! Result<Any, Error>
         switch result {
         case .success(let resValue):
-            return .map([.string("Ok"): mpValue(resValue)])
+            return .map(["Ok": mpValue(resValue)])
         case .failure(let err):
-            return .map([.string("Err"): mpValue(err)])
+            return .map(["Err": mpValue(err)])
+        }
+    case is CoreRequest:
+        let req = value as! CoreRequest
+        switch req {
+        case .example(let arg1, let arg2):
+            return .map(["Example" : .array([mpValue(arg1), mpValue(arg2)])])
         }
     default:
         fatalError("Good luck buddy!")
     }
 }
 
-func mpValue(req: CoreRequest) -> MessagePackValue {
-    switch req {
-    case .example(let arg1, let arg2):
-        return .map([.string("Example") : .array([mpValue(arg1), mpValue(arg2)])])
-    }
-}
-
 func packCoreRequest(request: CoreRequest) -> Data {
-    return MessagePack.pack(mpValue(request))
+    let val = mpValue(request)
+    return MessagePack.pack(val)
 }
 
 extension Data {
