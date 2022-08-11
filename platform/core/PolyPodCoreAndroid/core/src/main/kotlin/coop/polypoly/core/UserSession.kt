@@ -1,6 +1,5 @@
 package coop.polypoly.core
 
-import org.msgpack.core.MessagePack
 import org.msgpack.value.Value
 import org.msgpack.value.ValueFactory
 
@@ -8,7 +7,7 @@ enum class UserSessionTimeoutOption {
     option1,
     option2,
     option3,
-    noTimeout
+    noTimeout;
 
     companion object {
         fun from(msgPackValue: Value): UserSessionTimeoutOption {
