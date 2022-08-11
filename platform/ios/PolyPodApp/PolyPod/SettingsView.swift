@@ -1,6 +1,6 @@
-import SwiftUI
 import Combine
 import PolyPodCoreSwift
+import SwiftUI
 
 private enum Sections {
     case main, imprint, privacyPolicy, termsOfUse, licenses
