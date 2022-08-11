@@ -77,7 +77,7 @@ struct SettingsView: View {
     @State private var showVersion = false
     @State private var shareLogs = false
     @State private var isAuthenticationConfigured = Authentication.shared.isSetUp()
-    
+
     var body: some View {
         VStack(spacing: 0) {
             Divider()
@@ -94,7 +94,7 @@ struct SettingsView: View {
                         )
                     }
                 }
-                
+
                 Section(header: SettingsHeader("settings_sec_section")) {
                     SettingsToggleButton(
                         label: "settings_auth",
@@ -195,11 +195,11 @@ struct SettingsView: View {
 
 private struct SettingsHeader: View {
     private let text: LocalizedStringKey
-    
+
     init(_ text: LocalizedStringKey) {
         self.text = text
     }
-    
+
     var body: some View {
         Text(text)
             .foregroundColor(Color(fromHex: "#3E495B"))
@@ -237,9 +237,9 @@ private struct SettingsButton: View {
 private struct SettingsToggleButton: View {
     let label: LocalizedStringKey
     let isToggled: Binding<Bool>
-    
+
     var onChange: ((Bool) -> Void)?
-    
+
     var body: some View {
         VStack {
             Toggle(isOn: isToggled.onChange(toggleChange)) {
@@ -250,13 +250,12 @@ private struct SettingsToggleButton: View {
             }
         }
     }
-    
+
     func toggleChange(_ value: Bool) {
         if let action = self.onChange {
             action(value)
         }
     }
-    
 }
 
 private struct PrivacyPolicyView: View {
@@ -266,7 +265,7 @@ private struct PrivacyPolicyView: View {
             HTMLView(content: loadPrivacyPolicyText())
         }
     }
-    
+
     private func loadPrivacyPolicyText() -> String {
         let url = Bundle.main.bundleURL
             .appendingPathComponent("legal")
@@ -295,7 +294,7 @@ private struct LicensesView: View {
             )
         }
     }
-    
+
     private func loadLicenseText() -> String {
         let licenseFiles = ["ios-licenses.txt", "js-licenses.txt"]
         let licensesUrl = Bundle.main.bundleURL
