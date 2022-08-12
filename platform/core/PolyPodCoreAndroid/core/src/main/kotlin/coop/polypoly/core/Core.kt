@@ -28,7 +28,7 @@ class Core {
             ) {}
         }
 
-        fun isUserSessionExpired() {
+        fun isUserSessionExpired(): Boolean {
             return handleCoreResponse(
                 JniApi.isUserSessionExpired()
             ) { it.asBooleanValue().boolean }

@@ -39,24 +39,12 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
             }
             throw ex
         }
+
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+
         FeatureStorage.importFeatures(this)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
-    }
-
-    override fun onStateChanged(
-        source: LifecycleOwner,
-        event: Lifecycle.Event
-    ) {
-        when (event) {
-            Lifecycle.Event.ON_STOP, Lifecycle.Event.ON_DESTROY -> Core.appDidBecomeInactive()
-            else -> {}
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
 
         val notification = UpdateNotification(this)
         notification.handleStartup()
@@ -86,6 +74,27 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
                     notification.handleInAppSeen()
                 }
                 .show()
+        }
+    }
+
+    override fun onStateChanged(
+        source: LifecycleOwner,
+        event: Lifecycle.Event
+    ) {
+        when (event) {
+            Lifecycle.Event.ON_STOP, Lifecycle.Event.ON_DESTROY -> Core.appDidBecomeInactive()
+            Lifecycle.Event.ON_RESUME -> {
+               if (
+                   Authentication.canAuthenticate(this) &&
+                   Core.isUserSessionExpired()
+               )  {
+                   startActivity(Intent(
+                       this,
+                       PodUnlockActivity::class.java)
+                   )
+               }
+            }
+            else -> {}
         }
     }
 }
