@@ -89,7 +89,7 @@ func deserialize<T, C, E: Error> (
         if T.self == CoreResponse.self {
             // TODO: Make sure that the Compiler checks that all cases on CoreResponse are handled
             if let example = val[.string("Example")] {
-                let result: Result<Optional<String>, CoreFailure> = try deserialize(value: example)
+                let result: Result<Optional<String>, CoreFailure> = try deserialize(value: example, C.self, E.self)
                 return CoreResponse.example(result) as! T
             } else {
                 throw DecodingError.invalidValue(info: "Expected CoreResponse case, received \(value)")
