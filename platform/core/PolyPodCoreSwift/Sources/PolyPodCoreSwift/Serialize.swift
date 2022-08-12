@@ -60,14 +60,16 @@ func serialize(_ value: Any) -> MessagePackValue {
         case .failure(let err):
             return .map(["Err": serialize(err)])
         }
-    // TODO: Handle all the other types, like CoreFailure for example
-    // Maybe see if you can serialize any enum or struct ;)
     case is CoreRequest:
         let req = value as! CoreRequest
         switch req {
         case .example(let arg1, let arg2):
             return .map(["Example" : .array([serialize(arg1), serialize(arg2)])])
         }
+    // map([string(code): uint(10), string(message): string(File system failed for path 'path' with error: 'message')]
+    case is CoreFailure:
+        let err = value as! CoreFailure
+        return .map(["code": serialize(UInt(err.code.rawValue)), "message": serialize(err.message)])
     default:
         // Handle this a better way
         fatalError("Good luck buddy!")

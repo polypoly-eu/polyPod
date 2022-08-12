@@ -16,7 +16,7 @@ enum CoreRequest {
     case example(String, Optional<String>)
 }
 
-enum CoreResponse {
+public enum CoreResponse {
     case example(Result<Optional<String>, CoreFailure>)
 }
 
@@ -49,22 +49,22 @@ public final class Core {
      
      */
     
-    public func testPerformRequest() -> Result<Void, Error> {
+    public func testPerformRequest() -> Result<CoreResponse, Error> {
         // create the enums
         // serialize a request
         // deserialize a response
         let request = CoreRequest.example("Hello1", nil)
         let result_bytes = perform_request(packCoreRequest(request: request).toByteBuffer)
         
-        //TODO: Decode Core Response successfully
-        return handleCoreResponse(
+        let res = handleCoreResponse(
             result_bytes,
-            { responseValue in
-                // todo: Map the response value to smth useful.
-                // map([string(Example): map([string(Ok): nil])])
-                print(responseValue)
+            { responseValue -> CoreResponse in
+                let coreResponse: CoreResponse = try deserialize(value: responseValue)
+                return coreResponse
             }
         )
+        
+        return res
     }
     
     /// Prepares the core to be used
