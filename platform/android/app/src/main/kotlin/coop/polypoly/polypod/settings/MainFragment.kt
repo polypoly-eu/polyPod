@@ -22,18 +22,6 @@ class MainFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.settings, rootKey)
         findPreference<Preference>("version")?.summary = RuntimeInfo.VERSION
 
-        findPreference<Preference>("biometricEnabledKey")
-            ?.onPreferenceChangeListener =
-            Preference.OnPreferenceChangeListener { _, newValue ->
-                onAuthRequest(newValue as Boolean) {
-                    val pref =
-                        findPreference<SwitchPreference>("biometricEnabledKey")
-                    pref?.isChecked =
-                        Preferences.isBiometricEnabled(requireContext())
-                }
-                false
-            }
-
         val timeoutOptionsConfig = Core.getUserSessionTimeoutOptionsConfig()
         val selectedOption = Core.getUserSessionTimeoutOption()
         val timeoutDurationsMap: LinkedHashMap<String, String> = linkedMapOf()
@@ -41,7 +29,7 @@ class MainFragment : PreferenceFragmentCompat() {
             val duration = if (it.duration != null) {
                 "${it.duration} minutes"
             } else {
-               "No Timeout"
+                "No Timeout"
             }
             timeoutDurationsMap[it.option.name] = duration
         }
@@ -55,16 +43,26 @@ class MainFragment : PreferenceFragmentCompat() {
             true
         }
         dropDownPreference?.summary = timeoutDurationsMap[selectedOption.name]
+        dropDownPreference?.isVisible =
+            Preferences.isBiometricEnabled(requireContext())
+
+        findPreference<Preference>("biometricEnabledKey")
+            ?.onPreferenceChangeListener =
+            Preference.OnPreferenceChangeListener { _, newValue ->
+                onAuthRequest(newValue as Boolean) {
+                    val pref =
+                        findPreference<SwitchPreference>("biometricEnabledKey")
+                    pref?.isChecked =
+                        Preferences.isBiometricEnabled(requireContext())
+                    dropDownPreference?.isVisible =
+                        Preferences.isBiometricEnabled(requireContext())
+                }
+                false
+            }
 
         findPreference<Preference>("imprint")?.onPreferenceClickListener =
             Preference.OnPreferenceClickListener {
-                AlertDialog.Builder(requireContext())
-                    .setSingleChoiceItems(
-                        arrayOf("1","2","3","4"),
-                        1) { dInterface, i ->
-                        dInterface.dismiss()
-                    }.show()
-                //view?.findNavController()?.navigate(R.id.ImprintFragment)
+                view?.findNavController()?.navigate(R.id.ImprintFragment)
                 true
             }
         findPreference<Preference>("privacy_policy")
