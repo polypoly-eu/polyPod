@@ -11,7 +11,7 @@ pub struct UserSessionTimeout {
     duration: Option<u32>,
 }
 
-#[derive(Debug, PartialEq, Clone, Serialize, Deserialize, EnumIter)]
+#[derive(Debug, PartialEq, Eq, Clone, Serialize, Deserialize, EnumIter)]
 #[serde(rename_all = "camelCase")]
 pub enum TimeoutOption {
     Option1,

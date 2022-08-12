@@ -54,11 +54,10 @@ extension MessagePackValue {
         guard self != nil else {
             return nil
         }
-        if let uint = self.uintValue {
-            return uint
-        } else {
+        guard let uint = self.uintValue else {
             throw DecodingError.invalidValue(info: "Expected uint, received \(self)")
         }
+        return uint
     }
 }
 
