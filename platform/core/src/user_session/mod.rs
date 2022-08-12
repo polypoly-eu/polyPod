@@ -3,10 +3,15 @@ use std::sync::Arc;
 use std::time::{Duration, Instant};
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
-use std::collections::HashMap;
-use std::iter::FromIterator;
 
-#[derive(Hash, Debug, Eq, PartialEq, Clone, Serialize, Deserialize, EnumIter)]
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct UserSessionTimeout {
+    option: TimeoutOption,
+    duration: Option<u32>,
+}
+
+#[derive(Debug, PartialEq, Clone, Serialize, Deserialize, EnumIter)]
 #[serde(rename_all = "camelCase")]
 pub enum TimeoutOption {
     Option1,
@@ -36,14 +41,13 @@ impl TimeoutOption {
         Self::Option2
     }
 
-    pub fn all_option_timeouts() -> HashMap<TimeoutOption, u32> {
-        HashMap::from_iter(TimeoutOption::iter()
-            .filter_map(|option|
-                option.duration_in_minutes().map(|duration|
-                     (option, duration)
-                )
-            )
-        )
+    pub fn all_option_timeouts() -> Vec<UserSessionTimeout> {
+        TimeoutOption::iter()
+            .map(|option| UserSessionTimeout {
+                option: option.clone(),
+                duration: option.duration_in_minutes(),
+            })
+            .collect()
     }
 }
 

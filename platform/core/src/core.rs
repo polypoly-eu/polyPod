@@ -3,12 +3,11 @@ use crate::{
     feature_categories,
     io::{file_system::DefaultFileSystem, key_value_store::DefaultKeyValueStore},
     preferences::Preferences,
-    user_session::{TimeoutOption, UserSession},
+    user_session::{TimeoutOption, UserSession, UserSessionTimeout},
 };
 
 use once_cell::sync::OnceCell;
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::{sync::MutexGuard, time::Instant};
 
@@ -155,7 +154,7 @@ pub fn get_user_session_timeout_option() -> Result<TimeoutOption, CoreFailure> {
     Ok(session.get_timeout_option())
 }
 
-pub fn get_user_session_timeout_options_config() -> Result<HashMap<TimeoutOption, u32>, CoreFailure> {
+pub fn get_user_session_timeout_options_config() -> Result<Vec<UserSessionTimeout>, CoreFailure> {
     // The current contract between platform and core requires that core responds with a Result type.
     // Embeed in Result type, until further clarifications.
     Ok(TimeoutOption::all_option_timeouts())

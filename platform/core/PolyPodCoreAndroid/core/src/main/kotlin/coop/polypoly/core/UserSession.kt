@@ -29,7 +29,7 @@ data class UserSessionTimeoutOptionConfig(
             val map = msgPackValue.asMapValue().map()
             return UserSessionTimeoutOptionConfig(
                 UserSessionTimeoutOption.from(map.getValue("option")),
-                map.get("duration")?.asIntegerValue()?.toInt()
+                map.get("duration")?.getIntValue()
             )
         }
 

@@ -20,8 +20,16 @@ fun Value.getMapValue(): Map<Value, Value>? {
     return asMapValue().map()
 }
 
+fun Value.getIntValue(): Int? {
+    if (isNilValue) {
+        return null
+    }
+
+    return asIntegerValue().asInt()
+}
+
 fun Map<Value, Value>.get(key: String): Value? {
-    return this[ValueFactory.newString(key)]
+     return this[ValueFactory.newString(key)]
 }
 
 fun Map<Value, Value>.getValue(key: String): Value {
