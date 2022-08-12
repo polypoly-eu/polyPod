@@ -1,18 +1,18 @@
 package coop.polypoly.polypod.settings
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.preference.DropDownPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
+import coop.polypoly.core.Core
+import coop.polypoly.core.UserSessionTimeoutOption
 import coop.polypoly.polypod.Authentication
 import coop.polypoly.polypod.Preferences
 import coop.polypoly.polypod.R
 import coop.polypoly.polypod.RuntimeInfo
-import org.apache.jena.reasoner.rulesys.builtins.Drop
 
 class MainFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(
@@ -34,14 +34,27 @@ class MainFragment : PreferenceFragmentCompat() {
                 false
             }
 
+        val timeoutOptionsConfig = Core.getUserSessionTimeoutOptionsConfig()
+        val selectedOption = Core.getUserSessionTimeoutOption()
+        val timeoutDurationsMap: LinkedHashMap<String, String> = linkedMapOf()
+        timeoutOptionsConfig.forEach {
+            val duration = if (it.duration != null) {
+                "${it.duration} minutes"
+            } else {
+               "No Timeout"
+            }
+            timeoutDurationsMap[it.option.name] = duration
+        }
+
         val dropDownPreference = findPreference<DropDownPreference>("sessionTimeout")
-        dropDownPreference?.entries = arrayOf("5 minutes", "15 minutes", "60 minutes", "No Timeout")
-        dropDownPreference?.entryValues = arrayOf("5 minutes", "15 minutes", "60 minutes", "No Timeout")
+        dropDownPreference?.entries = timeoutDurationsMap.values.toTypedArray()
+        dropDownPreference?.entryValues = timeoutDurationsMap.keys.toTypedArray()
         dropDownPreference?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { pref, newValue ->
-            (pref as DropDownPreference).summary = newValue.toString()
+            (pref as DropDownPreference).summary = timeoutDurationsMap[newValue.toString()]
+            Core.setUserSessionTimeoutOption(UserSessionTimeoutOption.valueOf(newValue.toString()))
             true
         }
-        dropDownPreference?.summary = "5 minutes"
+        dropDownPreference?.summary = timeoutDurationsMap[selectedOption.name]
 
         findPreference<Preference>("imprint")?.onPreferenceClickListener =
             Preference.OnPreferenceClickListener {
