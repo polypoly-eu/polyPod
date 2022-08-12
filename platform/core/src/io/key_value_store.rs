@@ -2,6 +2,7 @@ pub trait KeyValueStore: Send + Sync {
     fn read(&self, key: Vec<u8>) -> Option<Vec<u8>>;
     fn write(&self, key: Vec<u8>, value: Vec<u8>);
     fn remove(&self, key: Vec<u8>);
+    fn save(&self);
 }
 
 extern crate sled;
@@ -31,5 +32,9 @@ impl KeyValueStore for DefaultKeyValueStore {
 
     fn remove(&self, key: Vec<u8>) {
         _ = self.db.remove(key);
+    }
+
+    fn save(&self) {
+        _ = self.db.flush()
     }
 }

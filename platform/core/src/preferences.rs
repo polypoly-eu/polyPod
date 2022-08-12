@@ -35,6 +35,10 @@ impl Preferences {
             .as_ref()
             .write(message_pack_serialize(key), message_pack_serialize(value))
     }
+
+    pub fn save(&self) {
+        self.store.as_ref().save()
+    }
 }
 
 impl TimeoutOptionStore for Preferences {

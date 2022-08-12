@@ -65,7 +65,7 @@ pub fn bootstrap(
         return Err(CoreFailure::core_already_bootstrapped());
     }
     let preferences = Arc::new(Preferences {
-        store: Box::new(DefaultKeyValueStore::new(fs_root + PREFERENCES_DB)),
+        store: Box::new(DefaultKeyValueStore::new(fs_root + "/" + PREFERENCES_DB)),
     });
 
     let builder = Box::new(Instant::now);
@@ -121,6 +121,7 @@ pub fn app_did_become_inactive() -> Result<(), CoreFailure> {
         .get_mut()
         .map_err(|err| CoreFailure::failed_to_acess_user_session(err.to_string()))?;
     session.did_become_inactive();
+    instance.preferences.as_ref().save();
     Ok(())
 }
 
@@ -153,6 +154,8 @@ pub fn get_user_session_timeout_option() -> Result<TimeoutOption, CoreFailure> {
     Ok(session.get_timeout_option())
 }
 
-pub fn get_user_session_timeout_options_config() -> Vec<UserSessionTimeout> {
-    TimeoutOption::all_option_timeouts()
+pub fn get_user_session_timeout_options_config() -> Result<Vec<UserSessionTimeout>, CoreFailure> {
+    // The current contract between platform and core requires that core responds with a Result type.
+    // Embeed in Result type, until further clarifications.
+    Ok(TimeoutOption::all_option_timeouts())
 }
