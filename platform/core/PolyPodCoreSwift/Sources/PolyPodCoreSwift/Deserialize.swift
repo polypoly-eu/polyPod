@@ -8,96 +8,93 @@ import MessagePack
 
 // TODO: Add arrays and dict functions with Optional and NonOptional Types
 
-func deserializeOpt<T>(value: MessagePackValue) throws -> Optional<T> {
-    if value == .nil {
-        return nil
-    } else {
-        let deserialized: T = try deserialize(value: value)
-        return deserialized
-    }
-}
-
-func deserializeResult<T>(value: MessagePackValue) throws -> Result<T, Error> {
-    switch value {
-    case .map(let val):
-        if let okay = val[.string("Ok")] {
-            return Result.success(try deserialize(value: okay))
-        } else if let err = val[.string("Err")] {
-            return Result.failure(try deserialize(value: err))
-        } else {
-            throw DecodingError.invalidValue(info: "Expected Result<\(T.self), Error>, received \(value)")
-        }
-    default:
-        throw DecodingError.invalidValue(info: "Expected .map, received \(value)")
-    }
-}
-
-func deserializeResultWithCoreFailure<T>(value: MessagePackValue) throws -> Result<T, CoreFailure> {
-    switch value {
-    case .map(let val):
-        if let okay = val[.string("Ok")] {
-            return Result.success(try deserialize(value: okay))
-        } else if let err = val[.string("Err")] {
-            return Result.failure(try deserialize(value: err))
-        } else {
-            throw DecodingError.invalidValue(info: "Expected Result<\(T.self), Error>, received \(value)")
-        }
-    default:
-        throw DecodingError.invalidValue(info: "Expected .map, received \(value)")
-    }
-}
-
-
-func deserializeResultWithOptional<T>(value: MessagePackValue) throws -> Result<T?, Error> {
-    switch value {
-    case .map(let val):
-        if let okay = val[.string("Ok")] {
-            return Result.success(try deserializeOpt(value: okay))
-        } else if let err = val[.string("Err")] {
-            return Result.failure(try deserialize(value: err))
-        } else {
-            throw DecodingError.invalidValue(info: "Expected Result<\(T.self), Error>, received \(value)")
-        }
-    default:
-        throw DecodingError.invalidValue(info: "Expected .map, received \(value)")
-    }
-}
-
-func deserializeResultWithOptionalAndCoreFailure<T>(value: MessagePackValue) throws -> Result<T?, CoreFailure> {
-    switch value {
-    case .map(let val):
-        if let okay = val[.string("Ok")] {
-            return Result.success(try deserializeOpt(value: okay))
-        } else if let err = val[.string("Err")] {
-            return Result.failure(try deserialize(value: err))
-        } else {
-            throw DecodingError.invalidValue(info: "Expected Result<\(T.self), Error>, received \(value)")
-        }
-    default:
-        throw DecodingError.invalidValue(info: "Expected .map, received \(value)")
-    }
-}
+//func deserialize<T>(value: MessagePackValue) throws -> Optional<T> {
+//    if value == .nil {
+//        return nil
+//    } else {
+//        let deserialized: T = try deserialize(value: value, Void.self, Error.self)
+//        return deserialized
+//    }
+//}
 
 // Example of CoreFailure from core
 // map([string(code): uint(10), string(message): string(File system failed for path 'path' with error: 'message')]
 
 // T is not a generic type
 func deserialize<T>(value: MessagePackValue) throws -> T {
-    if T.self == CoreResponse.self {
-        switch value {
-        case .map(let val):
+    return try deserialize(
+        value: value,
+        Void.self,
+        Error.self
+    )
+}
+
+func deserialize<T, C, E: Error> (
+    value: MessagePackValue,
+    _ childType: C.Type,
+    _ childErrorType: E.Type
+) throws -> T {
+    switch value {
+    case .nil:
+        if !(T.self == Optional<C>.self) {
+            throw DecodingError.invalidValue(info: "Expected type \(T.self), does not match \(value)")
+        }
+        return Optional<C>.init(nilLiteral: ()) as! T
+    case .bool(let val):
+        if !(T.self == Bool.self || T.self == Optional<Bool>.self) {
+            throw DecodingError.invalidValue(info: "Expected type \(T.self), does not match \(type(of: val))")
+        }
+        return val as! T
+    case .int(let val):
+        if !(T.self == Int64.self || T.self == Optional<Int64>.self) {
+            throw DecodingError.invalidValue(info: "Expected type \(T.self), does not match \(type(of: val))")
+        }
+        return val as! T
+    case .uint(let val):
+        if !(T.self == UInt64.self || T.self == Optional<UInt64>.self) {
+            throw DecodingError.invalidValue(info: "Expected type \(T.self), does not match \(type(of: val))")
+        }
+        return val as! T
+    case .float(let val):
+        if !(T.self == Float.self || T.self == Optional<Float>.self) {
+            throw DecodingError.invalidValue(info: "Expected type \(T.self), does not match \(type(of: val))")
+        }
+        return val as! T
+    case .double(let val):
+        if !(T.self == Double.self || T.self == Optional<Double>.self) {
+            throw DecodingError.invalidValue(info: "Expected type \(T.self), does not match \(type(of: val))")
+        }
+        return val as! T
+    case .string(let val):
+        if !(T.self == String.self || T.self == Optional<String>.self) {
+            throw DecodingError.invalidValue(info: "Expected type \(T.self), does not match \(type(of: val))")
+        }
+        return val as! T
+    case .binary(let val):
+        if !(T.self == Data.self || T.self == Optional<Data>.self) {
+            throw DecodingError.invalidValue(info: "Expected type \(T.self), does not match \(type(of: val))")
+        }
+        return val as! T
+    case .array(let val):
+        if !(T.self == Array<C>.self || T.self == Optional<Array<C>>.self) {
+            throw DecodingError.invalidValue(info: "Expected type \(T.self), does not match Array<\(C.self)> or Optional<Array<\(C.self)>>")
+        }
+        
+        let mapped = try val.map { v in
+            return try deserialize(value: v, C.self, E.self)
+        } as Array<C>
+        
+        return mapped as! T
+    case .map(let val):
+        if T.self == CoreResponse.self {
+            // TODO: Make sure that the Compiler checks that all cases on CoreResponse are handled
             if let example = val[.string("Example")] {
-                let result: Result<Optional<String>, CoreFailure> = try deserializeResultWithOptionalAndCoreFailure(value: example)
+                let result: Result<Optional<String>, CoreFailure> = try deserialize(value: example)
                 return CoreResponse.example(result) as! T
             } else {
                 throw DecodingError.invalidValue(info: "Expected CoreResponse case, received \(value)")
             }
-        default:
-            throw DecodingError.invalidValue(info: "Expected .map, received \(value)")
-        }
-    } else if T.self == CoreFailure.self {
-        switch value {
-        case .map(let val):
+        } else if T.self == CoreFailure.self {
             guard let codeVal = val["code"],
                   let messageVal = val["message"] else {
                 throw DecodingError.invalidValue(info: "Expected code and message, received \(val)")
@@ -111,70 +108,21 @@ func deserialize<T>(value: MessagePackValue) throws -> T {
             }
             
             return CoreFailure(code: codeCase, message: message) as! T
-        default:
-            throw DecodingError.invalidValue(info: "Expected .map, received \(value)")
+        } else if T.self == Result<C, E>.self {
+            if let okay = val[.string("Ok")] {
+                return Result<C, E>.success(try deserialize(value: okay, C.self, E.self)) as! T
+            } else if let err = val[.string("Err")] {
+                return Result<C, E>.failure(try deserialize(value: err, C.self, E.self)) as! T
+            } else {
+                throw DecodingError.invalidValue(info: "Expected Result<\(T.self), Error>, received \(value)")
+            }
         }
-    } else {
-        switch value {
-        case .nil:
-            throw DecodingError.invalidValue(info: "Expected \(T.self), received Optional")
-        case .bool(let val):
-            if T.self != type(of: val) {
-                throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
-            }
-            return val as! T
-        case .int(let val):
-            if T.self != type(of: val) {
-                throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
-            }
-            return val as! T
-        case .uint(let val):
-            // T needs to be UInt64
-            if T.self != type(of: val) {
-                throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
-            }
-            return val as! T
-        case .float(let val):
-            if T.self != type(of: val) {
-                throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
-            }
-            return val as! T
-        case .double(let val):
-            if T.self != type(of: val) {
-                throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
-            }
-            return val as! T
-        case .string(let val):
-            if T.self != type(of: val) {
-                throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
-            }
-            return val as! T
-        case .binary(let val):
-            if T.self != type(of: val) {
-                throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
-            }
-            return val as! T
-        case .array(let val):
-            throw DecodingError.invalidValue(info: "Array deserialization missing or you have called deserialize instead of deserializeArray.")
-//            return val.map { v in
-//                return try! deserialize(value: v) as Any
-//            } as! T
-        case .map(let val):
-            // This should always fail because maps are generic types in swift
-            throw DecodingError.invalidValue(info: "Dict deserialization missing or you have called deserialize instead of deserializeDict.")
-        case .extended(_, let val):
-            if T.self != type(of: val) {
-                throw DecodingError.invalidValue(info: "Expected \(T.self), received \(type(of: val))")
-            }
-            return val as! T
+        // TODO: Handle dictionary.
+        throw DecodingError.invalidValue(info: "Map deserialization failed for \(T.self). Make sure you passed a child type and error type to deserialize. Example: deserialize(value: v, String.self, CoreFailure.self)")
+    case .extended(_, let val):
+        if !(T.self == Data.self || T.self == Optional<Data>.self) {
+            throw DecodingError.invalidValue(info: "Expected type \(T.self), does not match \(type(of: val))")
         }
+        return val as! T
     }
 }
-
-/*
- if T.self == CoreResponse.self {
-     
- } else if T.self == Result<Any, Error>.self {
-     
- }
- */

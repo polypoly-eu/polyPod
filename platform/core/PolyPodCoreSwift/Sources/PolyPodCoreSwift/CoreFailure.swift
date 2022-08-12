@@ -41,7 +41,7 @@ public enum CoreFailureCode: Int {
     case failedToConvertJavaString
 }
 
-public struct CoreFailure: Error {
+public struct CoreFailure: Error, Equatable {
     public let code: CoreFailureCode
     public let message: String
 }
