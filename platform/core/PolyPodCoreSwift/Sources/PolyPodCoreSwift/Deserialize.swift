@@ -2,25 +2,9 @@ import PolyPodCore
 import Foundation
 import MessagePack
 
-// Note: You need a different deserialize functions for each generic type
-// If you say T, T does not stand for a generic type like Optional or Result or Array or Dict
-// All of those need their own deserialize functions
-
-// TODO: Add arrays and dict functions with Optional and NonOptional Types
-
-//func deserialize<T>(value: MessagePackValue) throws -> Optional<T> {
-//    if value == .nil {
-//        return nil
-//    } else {
-//        let deserialized: T = try deserialize(value: value, Void.self, Error.self)
-//        return deserialized
-//    }
-//}
-
 // Example of CoreFailure from core
 // map([string(code): uint(10), string(message): string(File system failed for path 'path' with error: 'message')]
 
-// T is not a generic type
 func deserialize<T>(value: MessagePackValue) throws -> T {
     return try deserialize(
         value: value,
