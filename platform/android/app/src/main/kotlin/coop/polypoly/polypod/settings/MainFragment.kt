@@ -27,9 +27,14 @@ class MainFragment : PreferenceFragmentCompat() {
         val timeoutDurationsMap: LinkedHashMap<String, String> = linkedMapOf()
         timeoutOptionsConfig.forEach {
             val duration = if (it.duration != null) {
-                "${it.duration} minutes"
+                requireContext().getString(
+                    R.string.screen_lock_inactivity_timeout_duration,
+                    it.duration
+                )
             } else {
-                "No Timeout"
+                requireContext().getString(
+                    R.string.screen_lock_inactivity_no_timeout
+                )
             }
             timeoutDurationsMap[it.option.name] = duration
         }
