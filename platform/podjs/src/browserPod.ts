@@ -17,6 +17,7 @@ import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../../polyPod-config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
 import init, * as oxigraph from "../node_modules/oxigraph/web.js";
+import compileOxigraphWasmModule from "oxigraph/web_bg.wasm";
 
 const DB_PREFIX = "polypod:";
 const DB_VERSION = 1;
@@ -64,7 +65,8 @@ let storeInitialized = false;
 
 async function initializeStore(): Promise<oxigraph.Store> {
     if (!storeInitialized) {
-        await init();
+        type wasmModuleType = () => Promise<WebAssembly.Module>;
+        await init((compileOxigraphWasmModule as unknown as wasmModuleType)());
         storeInitialized = true;
     }
     return new oxigraph.Store();
