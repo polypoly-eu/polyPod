@@ -247,11 +247,67 @@ class KeyedContainer<Key>: KeyedEncodingContainerProtocol where Key: CodingKey {
         self.codingPath = codingPath
         self.userInfo = userInfo
     }
+    
+    var storage: [String: MessagePackEncodingContainer] = [:]
+    
+    private func nestedCodingPath(forKey key: CodingKey) -> [CodingKey] {
+        return self.codingPath + [key]
+    }
+    
+    func nestedUnkeyedContainer(forKey key: Key) -> UnkeyedEncodingContainer {
+        let container = UnkeyedContainer(
+            codingPath: self.nestedCodingPath(forKey: key),
+            userInfo: self.userInfo
+        )
+        self.storage[key.stringValue] = container
+        return container
+    }
+    
+    func nestedContainer<NestedKey>(
+        keyedBy keyType: NestedKey.Type,
+        forKey key: Key
+    ) -> KeyedEncodingContainer<NestedKey> where NestedKey : CodingKey {
+        let container = KeyedContainer<NestedKey>(
+            codingPath: self.nestedCodingPath(forKey: key),
+            userInfo: self.userInfo
+        )
+        self.storage[key.stringValue] = container
+        return KeyedEncodingContainer(container)
+    }
+    
+    private func nestedSingleValueContainer(forKey key: Key) -> SingleValueEncodingContainer {
+        let container = SingleValueContainer(
+            codingPath: self.nestedCodingPath(forKey: key),
+            userInfo: self.userInfo
+        )
+        self.storage[key.stringValue] = container
+        return container
+    }
+    
+    func encode<T>(_ value: T, forKey key: Key) throws where T : Encodable {
+        var container = self.nestedSingleValueContainer(forKey: key)
+        try container.encode(value)
+    }
+    
+    func encodeNil(forKey key: Key) throws {
+        var container = self.nestedSingleValueContainer(forKey: key)
+        try container.encodeNil()
+    }
+    
+    func superEncoder() -> Encoder {
+        _MessagePackEncoder(codingPath: codingPath, userInfo: userInfo)
+    }
+    
+    func superEncoder(forKey key: Key) -> Encoder {
+        _MessagePackEncoder(codingPath: nestedCodingPath(forKey: key), userInfo: userInfo)
+    }
 }
 
 extension KeyedContainer: MessagePackEncodingContainer {
     var value: MessagePackValue {
-        // TODO
+        let map = self.storage.transform(keyTransform: { MessagePackValue.string($0) },
+                                         valueTransform: { $0.value })
+        return .map(map)
     }
 }
 
