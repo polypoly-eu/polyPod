@@ -4,8 +4,18 @@ import MessagePack
 
 public class MessagePackEncoder  {
     public func encode<T>(_ value: T) throws -> MessagePackValue where T : Encodable {
-        // TODO
         let encoder = _MessagePackEncoder()
+        
+        if _isOptional(T.self) {
+            let opt = value as Optional<Encodable>
+            if let notNil = opt {
+                try notNil.encode(to: encoder)
+                return encoder.value
+            } else {
+                return .nil
+            }
+        }
+       
         try value.encode(to: encoder)
         return encoder.value
     }
@@ -43,95 +53,39 @@ class SingleValueContainer: SingleValueEncodingContainer {
         storage = .nil
     }
     
-    func encode(_ value: Bool) throws {
-        try checkCanEncode(value: nil)
-        defer { self.canEncodeNewValue = false }
-        storage = .bool(value)
-    }
-    
-    func encode(_ value: String) throws {
-        try checkCanEncode(value: nil)
-        defer { self.canEncodeNewValue = false }
-        storage = .string(value)
-    }
-    
-    func encode(_ value: Double) throws {
-        try checkCanEncode(value: nil)
-        defer { self.canEncodeNewValue = false }
-        storage = .double(value)
-    }
-    
-    func encode(_ value: Float) throws {
-        try checkCanEncode(value: nil)
-        defer { self.canEncodeNewValue = false }
-        storage = .float(value)
-    }
-    
-    func encode(_ value: Int) throws {
-        try checkCanEncode(value: nil)
-        defer { self.canEncodeNewValue = false }
-        storage = .int(Int64(value))
-    }
-    
-    func encode(_ value: Int8) throws {
-        try checkCanEncode(value: nil)
-        defer { self.canEncodeNewValue = false }
-        storage = .int(Int64(value))
-    }
-    
-    func encode(_ value: Int16) throws {
-        try checkCanEncode(value: nil)
-        defer { self.canEncodeNewValue = false }
-        storage = .int(Int64(value))
-    }
-    
-    func encode(_ value: Int32) throws {
-        try checkCanEncode(value: nil)
-        defer { self.canEncodeNewValue = false }
-        storage = .int(Int64(value))
-    }
-    
-    func encode(_ value: Int64) throws {
-        try checkCanEncode(value: nil)
-        defer { self.canEncodeNewValue = false }
-        storage = .int(value)
-    }
-    
-    func encode(_ value: UInt) throws {
-        try checkCanEncode(value: nil)
-        defer { self.canEncodeNewValue = false }
-        storage = .uint(UInt64(value))
-    }
-    
-    func encode(_ value: UInt8) throws {
-        try checkCanEncode(value: nil)
-        defer { self.canEncodeNewValue = false }
-        storage = .uint(UInt64(value))
-    }
-    
-    func encode(_ value: UInt16) throws {
-        try checkCanEncode(value: nil)
-        defer { self.canEncodeNewValue = false }
-        storage = .uint(UInt64(value))
-    }
-    
-    func encode(_ value: UInt32) throws {
-        try checkCanEncode(value: nil)
-        defer { self.canEncodeNewValue = false }
-        storage = .uint(UInt64(value))
-    }
-    
-    func encode(_ value: UInt64) throws {
-        try checkCanEncode(value: nil)
-        defer { self.canEncodeNewValue = false }
-        storage = .uint(value)
-    }
-    
     func encode<T>(_ value: T) throws where T : Encodable {
         try checkCanEncode(value: nil)
         defer { self.canEncodeNewValue = false }
         
-        if T.self == Data.self {
+        if T.self == Bool.self {
+            storage = .bool(value as! Bool)
+        } else if T.self == String.self {
+            storage = .string(value as! String)
+        } else if T.self == Double.self {
+            storage = .double(value as! Double)
+        } else if T.self == Float.self {
+            storage = .float(value as! Float)
+        } else if T.self == Int.self {
+            storage = .int(Int64(value as! Int))
+        } else if T.self == Int8.self {
+            storage = .int(Int64(value as! Int8))
+        } else if T.self == Int16.self {
+            storage = .int(Int64(value as! Int16))
+        } else if T.self == Int32.self {
+            storage = .int(Int64(value as! Int32))
+        } else if T.self == Int64.self {
+            storage = .int(value as! Int64)
+        } else if T.self == UInt.self {
+            storage = .uint(UInt64(value as! UInt))
+        } else if T.self == UInt8.self {
+            storage = .uint(UInt64(value as! UInt8))
+        } else if T.self == UInt16.self {
+            storage = .uint(UInt64(value as! UInt16))
+        } else if T.self == UInt32.self {
+            storage = .uint(UInt64(value as! UInt32))
+        } else if T.self == UInt64.self {
+            storage = .uint(value as! UInt64)
+        } else if T.self == Data.self {
             let data = value as! Data
             storage = .binary(data)
         } else {
