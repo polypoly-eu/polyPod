@@ -2,6 +2,152 @@ import PolyPodCore
 import Foundation
 import MessagePack
 
+public class MessagePackEncoder  {
+    public func encode<T>(_ value: T) throws -> MessagePackValue
+    where T : Encodable {
+        // TODO
+        return .nil
+    }
+}
+
+protocol MessagePackEncodingContainer {
+    var value: MessagePackValue { get }
+}
+
+class SingleValueContainer: SingleValueEncodingContainer {
+    var codingPath: [CodingKey]
+    var userInfo: [CodingUserInfoKey: Any]
+    
+    init(codingPath: [CodingKey],
+         userInfo: [CodingUserInfoKey : Any]) {
+        self.codingPath = codingPath
+        self.userInfo = userInfo
+    }
+    
+    private var storage: MessagePackValue = MessagePackValue()
+    fileprivate var canEncodeNewValue = true
+    
+    fileprivate func checkCanEncode(value: Any?) throws {
+        guard self.canEncodeNewValue else {
+            let context = EncodingError.Context(
+                codingPath: self.codingPath,
+                debugDescription: "Cannot encode multiple values")
+            throw EncodingError.invalidValue(value as Any, context)
+        }
+    }
+    
+    func encodeNil() throws {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        storage = .nil
+    }
+    
+    func encode(_ value: Bool) throws {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        storage = .bool(value)
+    }
+    
+    func encode(_ value: String) throws {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        storage = .string(value)
+    }
+    
+    func encode(_ value: Double) throws {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        storage = .double(value)
+    }
+    
+    func encode(_ value: Float) throws {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        storage = .float(value)
+    }
+    
+    func encode(_ value: Int) throws {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        storage = .int(Int64(value))
+    }
+    
+    func encode(_ value: Int8) throws {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        storage = .int(Int64(value))
+    }
+    
+    func encode(_ value: Int16) throws {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        storage = .int(Int64(value))
+    }
+    
+    func encode(_ value: Int32) throws {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        storage = .int(Int64(value))
+    }
+    
+    func encode(_ value: Int64) throws {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        storage = .int(value)
+    }
+    
+    func encode(_ value: UInt) throws {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        storage = .uint(UInt64(value))
+    }
+    
+    func encode(_ value: UInt8) throws {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        storage = .uint(UInt64(value))
+    }
+    
+    func encode(_ value: UInt16) throws {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        storage = .uint(UInt64(value))
+    }
+    
+    func encode(_ value: UInt32) throws {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        storage = .uint(UInt64(value))
+    }
+    
+    func encode(_ value: UInt64) throws {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        storage = .uint(value)
+    }
+    
+    func encode<T>(_ value: T) throws where T : Encodable {
+        try checkCanEncode(value: nil)
+        defer { self.canEncodeNewValue = false }
+        
+        if T.self == Data.self {
+            let data = value as! Data
+            storage = .binary(data)
+        } else {
+            let context = EncodingError.Context(
+                codingPath: self.codingPath,
+                debugDescription: "Cannot encode type \(T.self)")
+            throw EncodingError.invalidValue(value as Any, context)
+        }
+    }
+}
+
+//class _MessagePackEncoder: Encoder {
+////    class UnkeyedContainer: UnkeyedEncodingContainer
+////    class KeyedContainer<Key>: KeyedEncodingContainerProtocol where Key: CodingKey
+//}
+
+
 func serialize(_ opt: Any?) -> MessagePackValue {
     if let val = opt {
         return serialize(val)
@@ -62,6 +208,15 @@ func serialize(_ value: Any) -> MessagePackValue {
         }
     case is CoreRequest:
         let req = value as! CoreRequest
+        let mirror = Mirror(reflecting: req)
+        print(mirror.children.count)
+        for child in mirror.children {
+            print("\(String(describing: child.label)) is \(child.value)")
+            let childMirror = Mirror(reflecting: child.value)
+            for a in childMirror.children {
+                print("\(String(describing: a.label)) is \(a.value)")
+            }
+        }
         switch req {
         case .example(let arg1, let arg2):
             return .map(["Example" : .array([serialize(arg1), serialize(arg2)])])
@@ -73,5 +228,7 @@ func serialize(_ value: Any) -> MessagePackValue {
     default:
         // Handle this a better way
         fatalError("Good luck buddy!")
+        
+        //Maybe do a mirror here, and return a map
     }
 }
