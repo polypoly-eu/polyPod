@@ -176,8 +176,8 @@ class MessagePackEncoderTests: XCTestCase {
         XCTAssertEqual(try MessagePackEncoder().encode(value), MessagePackValue.array([.int(1), .int(2), .int(3)]))
     }
     
-    func testArrayOfNils() throws {
-        let value: [Int?] = [nil, nil, nil]
-        XCTAssertEqual(try MessagePackEncoder().encode(value), MessagePackValue.array([.nil, .nil, .nil]))
+    func testArrayWithNils() throws {
+        let value: [Int?] = [1, nil, nil]
+        XCTAssertEqual(try MessagePackEncoder().encode(value), MessagePackValue.array([.int(1), .nil, .nil]))
     }
 }
