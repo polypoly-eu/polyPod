@@ -5,17 +5,6 @@ import MessagePack
 public class MessagePackEncoder  {
     public func encode<T>(_ value: T) throws -> MessagePackValue where T : Encodable {
         let encoder = _MessagePackEncoder()
-        
-        if _isOptional(T.self) {
-            let opt = value as Optional<Encodable>
-            if let notNil = opt {
-                try notNil.encode(to: encoder)
-                return encoder.value
-            } else {
-                return .nil
-            }
-        }
-       
         try value.encode(to: encoder)
         return encoder.value
     }
@@ -54,10 +43,12 @@ class SingleValueContainer: SingleValueEncodingContainer {
     }
     
     func encode<T>(_ value: T) throws where T : Encodable {
-        try checkCanEncode(value: nil)
+        try checkCanEncode(value: value)
         defer { self.canEncodeNewValue = false }
         
-        if T.self == Bool.self {
+        if T.self == Data.self {
+            storage = .binary(value as! Data)
+        } else if T.self == Bool.self {
             storage = .bool(value as! Bool)
         } else if T.self == String.self {
             storage = .string(value as! String)
@@ -85,9 +76,6 @@ class SingleValueContainer: SingleValueEncodingContainer {
             storage = .uint(UInt64(value as! UInt32))
         } else if T.self == UInt64.self {
             storage = .uint(value as! UInt64)
-        } else if T.self == Data.self {
-            let data = value as! Data
-            storage = .binary(data)
         } else {
             let context = EncodingError.Context(
                 codingPath: self.codingPath,
