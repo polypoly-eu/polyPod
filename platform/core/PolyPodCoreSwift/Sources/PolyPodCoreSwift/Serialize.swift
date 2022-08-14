@@ -142,10 +142,143 @@ class SingleValueContainer: SingleValueEncodingContainer {
     }
 }
 
-//class _MessagePackEncoder: Encoder {
-////    class UnkeyedContainer: UnkeyedEncodingContainer
-////    class KeyedContainer<Key>: KeyedEncodingContainerProtocol where Key: CodingKey
-//}
+extension SingleValueContainer: MessagePackEncodingContainer {
+    var value: MessagePackValue {
+        return self.storage
+    }
+}
+
+class UnkeyedContainer: UnkeyedEncodingContainer {
+    var codingPath: [CodingKey]
+    var userInfo: [CodingUserInfoKey: Any]
+    
+    init(codingPath: [CodingKey],
+         userInfo: [CodingUserInfoKey : Any]) {
+        self.codingPath = codingPath
+        self.userInfo = userInfo
+    }
+    
+    struct Index: CodingKey {
+        var intValue: Int?
+
+        var stringValue: String {
+            return "\(self.intValue!)"
+        }
+
+        init?(intValue: Int) {
+            self.intValue = intValue
+        }
+
+        init?(stringValue: String) {
+            return nil
+        }
+    }
+    
+    var storage: [MessagePackEncodingContainer] = []
+    var count: Int {
+        return storage.count
+    }
+
+    private var nestedCodingPath: [CodingKey] {
+        return self.codingPath + [Index(intValue: self.count)!]
+    }
+    
+    func nestedUnkeyedContainer() -> UnkeyedEncodingContainer {
+        let container = UnkeyedContainer(
+            codingPath: self.nestedCodingPath,
+            userInfo: self.userInfo
+        )
+        self.storage.append(container)
+        return container
+    }
+    
+    func nestedContainer<NestedKey>(keyedBy keyType: NestedKey.Type) -> KeyedEncodingContainer<NestedKey>
+    where NestedKey : CodingKey
+    {
+        let container = KeyedContainer<NestedKey>(
+            codingPath: self.nestedCodingPath,
+            userInfo: self.userInfo
+        )
+        self.storage.append(container)
+        return KeyedEncodingContainer(container)
+    }
+    
+    func nestedSingleValueContainer() -> SingleValueEncodingContainer
+    {
+        let container = SingleValueContainer(
+            codingPath: self.nestedCodingPath,
+            userInfo: self.userInfo
+        )
+        self.storage.append(container)
+        return container
+    }
+    
+    func encode<T>(_ value: T) throws where T : Encodable {
+        var container = self.nestedSingleValueContainer()
+        try container.encode(value)
+    }
+    
+    func encodeNil() throws {
+        var container = self.nestedSingleValueContainer()
+        try container.encodeNil()
+    }
+    
+    func superEncoder() -> Encoder {
+        _MessagePackEncoder(codingPath: codingPath, userInfo: userInfo)
+    }
+}
+
+extension UnkeyedContainer: MessagePackEncodingContainer {
+    var value: MessagePackValue {
+        var array: [MessagePackValue] = []
+        for container in self.storage {
+            array.append(container.value)
+        }
+        return .array(array)
+    }
+}
+
+class KeyedContainer<Key>: KeyedEncodingContainerProtocol where Key: CodingKey {
+    var codingPath: [CodingKey]
+    var userInfo: [CodingUserInfoKey: Any]
+    
+    init(codingPath: [CodingKey],
+         userInfo: [CodingUserInfoKey : Any]) {
+        self.codingPath = codingPath
+        self.userInfo = userInfo
+    }
+}
+
+extension KeyedContainer: MessagePackEncodingContainer {
+    var value: MessagePackValue {
+        // TODO
+    }
+}
+
+class _MessagePackEncoder: Encoder {
+    
+    var codingPath: [CodingKey]
+    var userInfo: [CodingUserInfoKey : Any]
+    
+    init(codingPath: [CodingKey],
+         userInfo: [CodingUserInfoKey : Any]) {
+        self.codingPath = codingPath
+        self.userInfo = userInfo
+    }
+
+    func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key> where Key : CodingKey {
+        <#code#>
+    }
+
+    func unkeyedContainer() -> UnkeyedEncodingContainer {
+        <#code#>
+    }
+
+    func singleValueContainer() -> SingleValueEncodingContainer {
+        <#code#>
+    }
+    
+}
 
 
 func serialize(_ opt: Any?) -> MessagePackValue {
