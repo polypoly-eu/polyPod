@@ -16,14 +16,13 @@ import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../../polyPod-config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
-import init, * as oxigraph from "../node_modules/oxigraph/web.js";
-import compileOxigraphWasmModule from "oxigraph/web_bg.wasm";
+import initOxigraph, * as oxigraph from "../node_modules/oxigraph/web.js";
+import oxigraphWasmModule from "oxigraph/web_bg.wasm";
 
 const DB_PREFIX = "polypod:";
 const DB_VERSION = 1;
 const OBJECT_STORE_POLY_IN = "poly-in";
 const OBJECT_STORE_POLY_OUT = "poly-out";
-const QUAD_KEYS = ["subject", "predicate", "object"];
 
 const NAV_FRAME_ID = "polyNavFrame";
 const NAV_DEFAULT_BACKGROUND_COLOR = "#ffffff";
@@ -43,13 +42,7 @@ async function openDatabase(): Promise<IDBDatabase> {
 
         request.onupgradeneeded = () => {
             const db = request.result;
-            const polyInStore = db.createObjectStore(OBJECT_STORE_POLY_IN, {
-                keyPath: QUAD_KEYS,
-            });
-            for (let mask = 1; mask < (1 << QUAD_KEYS.length) - 1; mask++) {
-                const keyPath = QUAD_KEYS.filter((_, idx) => (mask >> idx) & 1);
-                polyInStore.createIndex(keyPath.join("-"), keyPath);
-            }
+            db.createObjectStore(OBJECT_STORE_POLY_IN);
             const polyOutStore = db.createObjectStore(OBJECT_STORE_POLY_OUT, {
                 autoIncrement: true,
             });
@@ -61,25 +54,61 @@ async function openDatabase(): Promise<IDBDatabase> {
     });
 }
 
-let storeInitialized = false;
-
-async function initializeStore(): Promise<oxigraph.Store> {
-    if (!storeInitialized) {
-        type wasmModuleType = () => Promise<WebAssembly.Module>;
-        await init((compileOxigraphWasmModule as unknown as wasmModuleType)());
-        storeInitialized = true;
-    }
-    return new oxigraph.Store();
-}
-
 /**
- *  It implements the `PolyIn` interface by storing quads in an IndexedDB database
- *  @class IDBPolyIn
+ * It implements the `PolyIn` interface by storing quads using Oxigraph
+ * and syncing the storage to IndexedDB
+ * @class IDBPolyIn
  */
-class StorePolyIn implements PolyIn {
-    store: Promise<oxigraph.Store>;
+class OxigraphPolyIn implements PolyIn {
+    private store: Promise<oxigraph.Store>;
+    private pendingSync: Promise<void> | null;
+
     constructor() {
-        this.store = initializeStore();
+        this.store = this.init();
+        this.pendingSync = null;
+    }
+
+    private async init(): Promise<oxigraph.Store> {
+        type wasmModule = () => Promise<WebAssembly.Module>;
+        const [, data] = (await Promise.all([
+            initOxigraph((oxigraphWasmModule as unknown as wasmModule)()),
+            openDatabase().then(
+                (db) =>
+                    new Promise((resolve, reject) => {
+                        const tx = db.transaction(
+                            [OBJECT_STORE_POLY_IN],
+                            "readonly"
+                        );
+                        const store = tx.objectStore(OBJECT_STORE_POLY_IN);
+                        const request = store.get(0);
+                        request.onsuccess = () => resolve(request.result);
+                        tx.onerror = tx.onabort = () => reject(request.error);
+                    })
+            ),
+        ])) as [unknown, string];
+        const store = new oxigraph.Store();
+        if (data) store.load(data, "application/n-quads", undefined, undefined);
+        return store;
+    }
+
+    private async sync(store: oxigraph.Store): Promise<void> {
+        return (this.pendingSync ||= (async (): Promise<void> => {
+            try {
+                const db = await openDatabase();
+                return new Promise((resolve, reject) => {
+                    const tx = db.transaction(
+                        [OBJECT_STORE_POLY_IN],
+                        "readwrite"
+                    );
+                    const data = store.dump("application/n-quads", undefined);
+                    tx.objectStore(OBJECT_STORE_POLY_IN).put(data, 0);
+                    tx.oncomplete = () => resolve(undefined);
+                    tx.onerror = tx.onabort = () => reject(tx.error);
+                });
+            } finally {
+                this.pendingSync = null;
+            }
+        })());
     }
 
     async match(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
@@ -92,11 +121,15 @@ class StorePolyIn implements PolyIn {
     }
 
     async add(quad: RDF.Quad): Promise<void> {
-        (await this.store).add(quad);
+        const store = await this.store;
+        store.add(quad);
+        await this.sync(store);
     }
 
     async delete(quad: RDF.Quad): Promise<void> {
-        (await this.store).add(quad);
+        const store = await this.store;
+        store.delete(quad);
+        await this.sync(store);
     }
 
     async has(quad: RDF.Quad): Promise<boolean> {
@@ -804,7 +837,7 @@ function createNavBarFrame(title: string): HTMLElement {
  */
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
-    public readonly polyIn = new StorePolyIn();
+    public readonly polyIn = new OxigraphPolyIn();
     public readonly polyOut = new IDBPolyOut();
     public readonly polyNav = new BrowserPolyNav();
     public readonly info = new PodJsInfo();
