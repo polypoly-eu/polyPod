@@ -43,6 +43,7 @@ class MainFragment : PreferenceFragmentCompat() {
         dropDownPreference?.entries = timeoutDurationsMap.values.toTypedArray()
         dropDownPreference?.entryValues =
             timeoutDurationsMap.keys.toTypedArray()
+        dropDownPreference?.value = selectedOption.name
         dropDownPreference?.onPreferenceChangeListener =
             Preference.OnPreferenceChangeListener { pref, newValue ->
 
