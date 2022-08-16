@@ -203,21 +203,6 @@ impl core::PlatformHookRequest for BridgeToPlatform {
     }
 }
 
-/// Loads feature categories from the given features dir.
-/// - featuresDir: Path to directory where features are stored.
-/// Returns a Result<Vec<FeatureCategory>, CoreFailure> represent as MessagePack value.
-#[no_mangle]
-pub extern "system" fn Java_coop_polypoly_core_JniApi_loadFeatureCategories(
-    env: JNIEnv,
-    _: JClass,
-    featuresDir: JString,
-) -> jbyteArray {
-    env.byte_array_from_slice(&serialize(
-        read_jni_string(&env, featuresDir).and_then(|string| load_feature_categories(&string)),
-    ))
-    .unwrap()
-}
-
 #[no_mangle]
 pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfQuery(
     env: JNIEnv,
