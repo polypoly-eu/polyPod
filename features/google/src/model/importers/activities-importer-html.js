@@ -34,6 +34,7 @@ class ActivityHtmlParser {
     }
 
     async parse(entry) {
+        console.log(`ActivityHtmlParser: Decoding entry at path: ${entry.path}`);
         const content = await entry.getContent();
         const text = await new TextDecoder("utf-8").decode(content);
         const { contentDocument } = this._iframe;
@@ -42,6 +43,7 @@ class ActivityHtmlParser {
         const fileSize = convertFileSizeUnit(content.byteLength);
         const pathParts = entry.path.split("/");
         const productName = pathParts[pathParts.length - 2];
+        console.log(`ActivityHtmlParser: Decoded entry at path: ${entry.path}, fileSize: ${fileSize}`);
         return {
             userActivity: this._scrapeTimestamps(contentDocument, productName),
             fileInfo: new ActivityFileInfo({
