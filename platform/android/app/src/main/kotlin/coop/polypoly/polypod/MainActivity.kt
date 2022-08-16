@@ -24,8 +24,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val language = Language.determine(this@MainActivity)
+        val fsRoot = this@MainActivity.filesDir
         try {
-            Core.bootstrapCore(language)
+            Core.bootstrapCore(language, fsRoot.path)
             logger.info("Core is bootstrapped!")
         } catch (ex: Exception) {
             logger.info(ex.message)

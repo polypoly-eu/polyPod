@@ -3,14 +3,14 @@ use crate::io::file_system::FileSystem;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-#[derive(PartialEq, Debug, Clone, Serialize)]
+#[derive(PartialEq, Eq, Debug, Clone, Serialize)]
 pub struct FeatureCategory {
     pub id: FeatureCategoryId,
     pub name: String,
     pub features: Vec<Feature>,
 }
 
-#[derive(PartialEq, Debug, Deserialize, Serialize, Clone)]
+#[derive(PartialEq, Eq, Debug, Deserialize, Serialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub enum FeatureCategoryId {
     YourData,
@@ -19,7 +19,7 @@ pub enum FeatureCategoryId {
     Developer,
 }
 
-#[derive(PartialEq, Debug, Clone, Serialize)]
+#[derive(PartialEq, Eq, Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Feature {
     pub path: String,

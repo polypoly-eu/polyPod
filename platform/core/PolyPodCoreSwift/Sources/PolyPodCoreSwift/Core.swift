@@ -18,6 +18,7 @@ public final class Core {
     
     // MARK: - Private config
     private var languageCode: UnsafePointer<CChar>!
+    private var fsRoot: UnsafePointer<CChar>!
     
     private init() {}
     
@@ -25,11 +26,12 @@ public final class Core {
     
     /// Prepares the core to be used
     /// Should be called before invoking any other API
-    public func bootstrap(languageCode: String) -> Result<Void, Error> {
+    public func bootstrap(languageCode: String, fsRoot: String) -> Result<Void, Error> {
         // Force unwrap should be safe
         self.languageCode = NSString(string: languageCode).utf8String!
-       
-        return handleCoreResponse(core_bootstrap(self.languageCode, BridgeToPlatform(free_bytes: {
+        self.fsRoot = NSString(string: fsRoot).utf8String!
+
+        let bridge = BridgeToPlatform(free_bytes: {
             $0?.deallocate()
         }, perform_request: { in_bytes in
             let response = Result<PlatformResponse, Error> {
@@ -40,7 +42,16 @@ public final class Core {
             
             // TODO: Use CoreFailure for failures.
             return packPlatformResponse(response: response).toByteBuffer
-        })), { _ in })
+        })
+
+        return handleCoreResponse(
+            core_bootstrap(
+                self.languageCode, 
+                self.fsRoot, 
+                bridge
+            ), 
+            { _ in }
+        )
     }
 
     /// Loads the feature categories from the given features directory
@@ -54,6 +65,35 @@ public final class Core {
             load_feature_categories(features_dir),
             mapFeatureCategories
         )
+    }
+    
+    public func appDidBecomeInactive() -> Result<Void, Error> {
+        handleCoreResponse(app_did_become_inactive(), { _ in })
+    }
+    
+    public func isUserSessionExpired() -> Result<Bool, Error> {
+        handleCoreResponse(is_user_session_expired()) { try $0.getBool() }
+    }
+    
+    public func setUserSessionTimeout(option: UserSessionTimeoutOption) -> Result<Void, Error> {
+        let data = MessagePack.pack(option.messagePackValue).toByteBuffer
+        return handleCoreResponse(
+            set_user_session_timeout_option(
+                data,
+                { $0?.deallocate() }
+            )
+        ) { _ in }
+    }
+    
+    public func getUserSessionTimeoutOption() -> Result<UserSessionTimeoutOption, Error> {
+        handleCoreResponse(
+            get_user_session_timeout_option(),
+            UserSessionTimeoutOption.from(msgPackValue:)
+        )
+    }
+    
+    public func getUserSessionTimeoutOptionsConfig() -> Result<[UserSessionTimeoutOptionConfig], Error> {
+        handleCoreResponse(get_user_session_timeout_options_config(), UserSessionTimeoutOptionConfig.mapUserSessionTimeoutOptionsConfig(_:))
     }
 
     // MARK: - Internal API

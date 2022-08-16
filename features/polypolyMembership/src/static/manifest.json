@@ -1,0 +1,18 @@
+{
+  "name": "polypoly-membership",
+  "author": "polypoly poly-cli",
+  "version": "0.0.1",
+  "description": "",
+  "thumbnail": "",
+  "thumbnailColor": "#ffffff",
+  "primaryColor": "#ffffff",
+  "borderColor": "#ffffff",
+  "links": {},
+  "translations": {
+    "de": {
+      "name": "polypoly-membership auf Deutsch",
+      "author": "",
+      "description": ""
+    }
+  }
+}
