@@ -116,20 +116,29 @@ class OxigraphPolyIn implements PolyIn {
         );
     }
 
+    private checkQuad(quad: RDF.Quad): void {
+        if (quad.graph.termType != "DefaultGraph")
+            throw new Error("Only default graph allowed");
+    }
+
     async add(quad: RDF.Quad): Promise<void> {
         const store = await this.store;
+        this.checkQuad(quad);
         store.add(quad);
         await this.sync(store);
     }
 
     async delete(quad: RDF.Quad): Promise<void> {
         const store = await this.store;
+        this.checkQuad(quad);
         store.delete(quad);
         await this.sync(store);
     }
 
     async has(quad: RDF.Quad): Promise<boolean> {
-        return (await this.store).has(quad);
+        const store = await this.store;
+        this.checkQuad(quad);
+        return store.has(quad);
     }
 
     async query(query: string): Promise<SPARQLQueryResult> {
