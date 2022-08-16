@@ -46,7 +46,6 @@ export class DefaultPod implements Pod {
      */
     get polyIn(): PolyIn {
         return {
-            store: this.store,
             match: async (matcher) =>
                 Array.from(
                     this.store.match(
