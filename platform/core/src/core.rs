@@ -121,6 +121,7 @@ pub fn exec_rdf_query(query: SPARQLQuery, app_path: String) -> Result<String, Co
 #[cfg(target_os = "android")]
 pub fn exec_rdf_update(query: SPARQLQuery, app_path: String) -> Result<(), CoreFailure> {
     rdf_update(query, app_path).map_err(CoreFailure::map_rdf_to_core_failure)
+}
 
 // App events
 pub fn app_did_become_inactive() -> Result<(), CoreFailure> {
