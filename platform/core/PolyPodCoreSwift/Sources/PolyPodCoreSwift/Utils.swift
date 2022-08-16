@@ -54,3 +54,13 @@ extension Data {
         return CByteBuffer(length: UInt32(count), data: ptr)
     }
 }
+
+extension Dictionary {
+    func transform<K: Hashable, V>(keyTransform: (Key) -> K, valueTransform: (Value) -> V) -> Dictionary<K, V> {
+        var new = [K: V]()
+        self.forEach { key, value in
+            new[keyTransform(key)] = valueTransform(value)
+        }
+        return new
+    }
+}
