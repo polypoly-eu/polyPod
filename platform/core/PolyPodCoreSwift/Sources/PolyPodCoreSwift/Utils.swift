@@ -36,7 +36,8 @@ func handle(platformRequest: PlatformRequest) -> PlatformResponse {
 }
 
 func packPlatformResponse(response: Result<PlatformResponse, CoreFailure>) -> Data {
-    return MessagePack.pack(try! MessagePackEncoder().encode(response))
+    let response = try! MessagePackEncoder().encode(response)
+    return MessagePack.pack(response)
 }
 
 extension Data {
