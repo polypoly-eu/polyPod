@@ -2,25 +2,30 @@ import PolyPodCore
 import Foundation
 import MessagePack
 
-func unpackBytes(bytes: CByteBuffer) throws -> MessagePackValue {
+func unpackBytes(bytes: CByteBuffer) -> Result<MessagePackValue, CoreFailure> {
     defer {
         free_bytes(bytes.data)
     }
     
-    let buffer = UnsafeBufferPointer(
-        start: bytes.data,
-        count: Int(bytes.length)
-    )
-    let data = Data(buffer: buffer)
-    
-    return try MessagePack.unpackFirst(data)
+    do {
+        let buffer = UnsafeBufferPointer(
+            start: bytes.data,
+            count: Int(bytes.length)
+        )
+        let data = Data(buffer: buffer)
+
+        return .success(try MessagePack.unpackFirst(data))
+    } catch {
+        return .failure(CoreFailure.init(code: .FailedToExtractBytes, message: error.localizedDescription))
+    }
 }
 
-func mapToPlatformRequest(request: MessagePackValue) throws -> PlatformRequest {
+func mapToPlatformRequest(request: MessagePackValue) -> Result<PlatformRequest, CoreFailure> {
     guard let result = PlatformRequest.init(rawValue: request.stringValue ?? "") else {
-        throw DecodingError.invalidValue(info: "Could not convert \(request.stringValue ?? "") to PlatformRequest. ")
+        let decodingError = DecodingError.invalidValue(info: "Could not convert \(request.stringValue ?? "") to PlatformRequest. ")
+        return .failure(CoreFailure.init(code: .FailedToDecode, message: decodingError.localizedDescription))
     }
-    return result
+    return .success(result)
 }
 
 func handle(platformRequest: PlatformRequest) -> PlatformResponse {
@@ -30,19 +35,8 @@ func handle(platformRequest: PlatformRequest) -> PlatformResponse {
     }
 }
 
-func packPlatformResponse(response: Result<PlatformResponse, Error>) -> Data {
-    var result: [MessagePackValue: MessagePackValue] = [:]
-    switch response {
-    case .success(let platformResponse):
-        switch platformResponse {
-        case .Example(let name):
-            result["Ok"] = .map(["Example": .string(name)])
-        }
-    case .failure(let error):
-        result["Err"] = .string(error.localizedDescription)
-    }
-    
-    return MessagePack.pack(.map(result))
+func packPlatformResponse(response: Result<PlatformResponse, CoreFailure>) -> Data {
+    return MessagePack.pack(try! MessagePackEncoder().encode(response))
 }
 
 extension Data {
@@ -62,5 +56,23 @@ extension Dictionary {
             new[keyTransform(key)] = valueTransform(value)
         }
         return new
+    }
+}
+
+extension Result: Encodable where Success : Encodable, Failure : Encodable {
+    
+    private enum CodingKeys: String, CodingKey {
+        case success = "Ok"
+        case failure = "Err"
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: Result.CodingKeys.self)
+        switch self {
+        case .success(let value):
+            try container.encode(value, forKey: .success)
+        case .failure(let error):
+            try container.encode(error, forKey: .failure)
+        }
     }
 }
