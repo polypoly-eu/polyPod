@@ -10,6 +10,7 @@ import type {
     EncodingOptions,
     Stats,
     Entry,
+    SPARQLQueryResult,
 } from "@polypoly-eu/api";
 import { dataFactory } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
@@ -60,13 +61,8 @@ async function openDatabase(): Promise<IDBDatabase> {
  * @class IDBPolyIn
  */
 class OxigraphPolyIn implements PolyIn {
-    private store: Promise<oxigraph.Store>;
-    private pendingSync: Promise<void> | null;
-
-    constructor() {
-        this.store = this.init();
-        this.pendingSync = null;
-    }
+    private store: Promise<oxigraph.Store> = this.init();
+    private pendingSync: Promise<void> | null = null;
 
     private async init(): Promise<oxigraph.Store> {
         type wasmModule = () => Promise<WebAssembly.Module>;
@@ -134,6 +130,16 @@ class OxigraphPolyIn implements PolyIn {
 
     async has(quad: RDF.Quad): Promise<boolean> {
         return (await this.store).has(quad);
+    }
+
+    async query(query: string): Promise<SPARQLQueryResult> {
+        return (await this.store).query(query);
+    }
+
+    async update(query: string): Promise<void> {
+        const store = await this.store;
+        store.update(query);
+        await this.sync(store);
     }
 }
 

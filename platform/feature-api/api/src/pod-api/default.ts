@@ -67,6 +67,12 @@ export class DefaultPod implements Pod {
                 this.checkQuad(quad);
                 return this.store.has(quad);
             },
+            query: async () => {
+                throw new Error("Not implemented");
+            },
+            update: async () => {
+                throw new Error("Not implemented");
+            },
         };
     }
 
