@@ -176,6 +176,7 @@ struct ContentView: View {
                         guard let feature = featureStorage.featureForId(featureId) else {
                             return
                         }
+                        Log.info("Navigation: Opened \(featureId) feature.")
                         state = featureState(feature)
                     },
                     openInfoAction: {
