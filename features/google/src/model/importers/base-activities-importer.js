@@ -28,6 +28,6 @@ export default class BaseActivitiesImporter {
                 null, 
                 4
             )}`
-        )
+        );
     }
 }
