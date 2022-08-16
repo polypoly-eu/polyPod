@@ -27,7 +27,7 @@ class AccessLogParser {
         const data = this._dataFromCsv(text);
         const pathParts = entry.path.split("/");
         const fileName = pathParts[pathParts.length - 2];
-        console.log(`AccessLogParser: Decoded entry at path: ${entry.path}, fileSize: ${fileSize}`);
+        console.log(`AccessLogParser: Decoded entry at path: ${entry.path}`);
 
         return {
             csvData: data,
