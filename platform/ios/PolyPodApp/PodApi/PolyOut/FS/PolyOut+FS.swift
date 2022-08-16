@@ -114,8 +114,8 @@ extension PolyOut {
             guard let filePath = fsUriFromPodUrl(url) else {
                 throw PodApiError.noSuchFile(url)
             }
-
-            if options["encoding"] == "utf-8" as? String {
+            let utf = "utf-8"
+            if utf == options["encoding"] as? String {
                 let content = try String(contentsOf: filePath, encoding: String.Encoding.utf8)
                 completionHandler(content, nil)
             } else {
