@@ -24,8 +24,8 @@ export default class BaseActivitiesImporter {
 
         console.log(
             `Imported zip into GoogleAccount: ${JSON.stringify(
-                googleAccount.dataGroups, 
-                null, 
+                googleAccount.dataGroups,
+                null,
                 4
             )}`
         );
