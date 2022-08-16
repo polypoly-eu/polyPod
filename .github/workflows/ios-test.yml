@@ -34,7 +34,7 @@ jobs:
               run: ./build.js
             - name: Build core
               working-directory: platform/core
-              run: make
+              run: make ios_bindings
             - name: Build and test iOS
               working-directory: platform/ios
               run: make test

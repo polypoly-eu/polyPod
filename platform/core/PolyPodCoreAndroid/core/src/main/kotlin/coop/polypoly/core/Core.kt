@@ -6,13 +6,19 @@ import org.msgpack.value.Value
 
 class Core {
     companion object {
-        fun bootstrapCore(languageCode: String) {
-            return handleCoreResponse(JniApi().bootstrapCore(languageCode)) {}
+        fun bootstrapCore(languageCode: String, fsRoot: String) {
+            return handleCoreResponse(
+                JniApi.bootstrapCore(
+                    languageCode,
+                    fsRoot,
+                    JniApi
+                )
+            ) {}
         }
 
         fun loadFeatureCategories(featuresDir: String): List<FeatureCategory> {
             return handleCoreResponse(
-                JniApi().loadFeatureCategories(featuresDir)
+                JniApi.loadFeatureCategories(featuresDir)
             ) { mapFeatureCategories(it) }
         }
 

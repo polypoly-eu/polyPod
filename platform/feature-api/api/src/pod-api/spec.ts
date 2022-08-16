@@ -102,6 +102,23 @@ export class PodSpec {
                     fc.pre(cont);
                 }
 
+                it("write/readDir", async () => {
+                    assert.isFulfilled(polyOut.readDir(this.path));
+                    /* This part actually needs writeFile
+                    await fc.assert(
+                        fc.asyncProperty(pathGen, fc.fullUnicodeString(), async (path, content) => {
+                            await skipIfExists(path);
+
+                            await polyOut.writeFile(path, content, { encoding: "utf-8" });
+                            const filesWithPath = (await polyOut.readDir(this.path)).map(
+                                (path) => this.path + "/" + path["path"]
+                            );
+                            assert.include(filesWithPath, path);
+                        })
+                    );
+                    */
+                });
+
                 it("stat/read", async () => {
                     await fc.assert(
                         fc.asyncProperty(pathGen, async (path) => {
@@ -142,9 +159,20 @@ export class PodSpec {
         });
     }
 
+    info(): void {
+        const { info } = this.pod;
+        describe("info", () => {
+            it("includes runtime and version info", async () => {
+                await assert.isOk(await info.getRuntime());
+                await assert.isOk(await info.getVersion());
+            });
+        });
+    }
+
     run(): void {
         this.polyIn();
         this.polyOut();
+        this.info();
     }
 }
 

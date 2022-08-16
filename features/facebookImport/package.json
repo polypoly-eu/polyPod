@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
+    "@polypoly-eu/api": "file:../../platform/feature-api/api",
     "@polypoly-eu/podjs": "file:../../platform/podjs",
     "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",

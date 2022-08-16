@@ -302,7 +302,6 @@ struct HomeScreenView: View {
     @ObservedObject var viewModel: HomeScreenViewModel
     var openFeatureAction: OnFeatureSelected = { _ in }
     var openInfoAction: () -> Void = {}
-    var openSettingsAction: () -> Void = {}
 
     var body: some View {
         // Why GeometryReader needs to be on top?
@@ -343,9 +342,12 @@ struct HomeScreenView: View {
                         }
 
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            Image("NavIconSettingsDark")
-                                .renderingMode(.original)
-                                .onTapGesture(perform: openSettingsAction)
+                            NavigationLink {
+                                SettingsView()
+                            } label: {
+                                Image("NavIconSettingsDark")
+                                    .renderingMode(.original)
+                            }
                         }
                     }
                 }
