@@ -210,12 +210,12 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfQuery(
     query: JString,
     appPath: JString,
 ) -> jbyteArray {
-    env.byte_array_from_slice(&serialize(read_jni_string(&env, query).and_then(
-        |queryString| {
+    env.byte_array_from_slice(&message_pack_serialize(
+        read_jni_string(&env, query).and_then(|queryString| {
             read_jni_string(&env, appPath)
                 .and_then(|appPathString| exec_rdf_query(queryString, appPathString))
-        },
-    )))
+        }),
+    ))
     .unwrap()
 }
 
@@ -226,11 +226,11 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfUpdate(
     query: JString,
     appPath: JString,
 ) -> jbyteArray {
-    env.byte_array_from_slice(&serialize(read_jni_string(&env, query).and_then(
-        |queryString| {
+    env.byte_array_from_slice(&message_pack_serialize(
+        read_jni_string(&env, query).and_then(|queryString| {
             read_jni_string(&env, appPath)
                 .and_then(|appPathString| exec_rdf_update(queryString, appPathString))
-        },
-    )))
+        }),
+    ))
     .unwrap()
 }
