@@ -4,6 +4,9 @@ import MessagePack
 
 public class MessagePackEncoder  {
     public func encode<T>(_ value: T) throws -> MessagePackValue where T : Encodable {
+        if T.self == Data.self {
+            return .binary(value as! Data)
+        }
         let encoder = _MessagePackEncoder()
         try value.encode(to: encoder)
         return encoder.value
@@ -42,110 +45,11 @@ class SingleValueContainer: SingleValueEncodingContainer {
         storage = .nil
     }
     
-    func _encodeOptional<T>(_ value: T?) throws {
-        if T.self == Data?.self {
-            guard let value = value as? Data else {
-                storage = .nil
-                return
-            }
-            storage = .binary(value)
-        } else if T.self == Bool?.self {
-            guard let value = value as? Bool else {
-                storage = .nil
-                return
-            }
-            storage = .bool(value)
-        } else if T.self == String?.self {
-            guard let value = value as? String else {
-                storage = .nil
-                return
-            }
-            storage = .string(value)
-        } else if T.self == Double?.self {
-            guard let value = value as? Double else {
-                storage = .nil
-                return
-            }
-            storage = .double(value)
-        } else if T.self == Float?.self {
-            guard let value = value as? Float else {
-                storage = .nil
-                return
-            }
-            storage = .float(value)
-        } else if T.self == Int?.self {
-            guard let value = value as? Int else {
-                storage = .nil
-                return
-            }
-            storage = .int(Int64(value))
-        } else if T.self == Int8?.self {
-            guard let value = value as? Int8 else {
-                storage = .nil
-                return
-            }
-            storage = .int(Int64(value))
-        } else if T.self == Int16?.self {
-            guard let value = value as? Int16 else {
-                storage = .nil
-                return
-            }
-            storage = .int(Int64(value))
-        } else if T.self == Int32?.self {
-            guard let value = value as? Int32 else {
-                storage = .nil
-                return
-            }
-            storage = .int(Int64(value))
-        } else if T.self == Int64?.self {
-            guard let value = value as? Int64 else {
-                storage = .nil
-                return
-            }
-            storage = .int(value)
-        } else if T.self == UInt?.self {
-            guard let value = value as? UInt else {
-                storage = .nil
-                return
-            }
-            storage = .uint(UInt64(value))
-        } else if T.self == UInt8?.self {
-            guard let value = value as? UInt8 else {
-                storage = .nil
-                return
-            }
-            storage = .uint(UInt64(value))
-        } else if T.self == UInt16?.self {
-            guard let value = value as? UInt16 else {
-                storage = .nil
-                return
-            }
-            storage = .uint(UInt64(value))
-        } else if T.self == UInt32?.self {
-            guard let value = value as? UInt32 else {
-                storage = .nil
-                return
-            }
-            storage = .uint(UInt64(value))
-        } else if T.self == UInt64?.self {
-            guard let value = value as? UInt64 else {
-                storage = .nil
-                return
-            }
-            storage = .uint(value)
-        } else {
-            let context = EncodingError.Context(
-                codingPath: self.codingPath,
-                debugDescription: "Cannot encode type \(T.self)")
-            throw EncodingError.invalidValue(value as Any, context)
-        }
-    }
-    
-    func _encode<T>(_ value: T)  throws {
-        // An array can arrive here. WTF?
-        if T.self == Data.self {
-            storage = .binary(value as! Data)
-        } else if T.self == Bool.self {
+    func encode<T>(_ value: T) throws where T : Encodable {
+        try checkCanEncode(value: value)
+        defer { self.canEncodeNewValue = false }
+        
+        if T.self == Bool.self {
             storage = .bool(value as! Bool)
         } else if T.self == String.self {
             storage = .string(value as! String)
@@ -174,22 +78,8 @@ class SingleValueContainer: SingleValueEncodingContainer {
         } else if T.self == UInt64.self {
             storage = .uint(value as! UInt64)
         } else {
-            let context = EncodingError.Context(
-                codingPath: self.codingPath,
-                debugDescription: "Cannot encode type \(T.self)")
-            throw EncodingError.invalidValue(value as Any, context)
-        }
-    }
-    
-    
-    func encode<T>(_ value: T) throws where T : Encodable {
-        try checkCanEncode(value: value)
-        defer { self.canEncodeNewValue = false }
-        
-        if _isOptional(T.self) {
-            try _encodeOptional(value)
-        } else {
-            try _encode(value)
+            let encoder = MessagePackEncoder()
+            storage = try encoder.encode(value)
         }
     }
 }
