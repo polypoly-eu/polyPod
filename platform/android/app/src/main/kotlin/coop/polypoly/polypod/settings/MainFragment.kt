@@ -1,6 +1,5 @@
 package coop.polypoly.polypod.settings
 
-import android.app.AlertDialog
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.preference.DropDownPreference
@@ -39,14 +38,22 @@ class MainFragment : PreferenceFragmentCompat() {
             timeoutDurationsMap[it.option.name] = duration
         }
 
-        val dropDownPreference = findPreference<DropDownPreference>("sessionTimeout")
+        val dropDownPreference =
+            findPreference<DropDownPreference>("sessionTimeout")
         dropDownPreference?.entries = timeoutDurationsMap.values.toTypedArray()
-        dropDownPreference?.entryValues = timeoutDurationsMap.keys.toTypedArray()
-        dropDownPreference?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { pref, newValue ->
-            (pref as DropDownPreference).summary = timeoutDurationsMap[newValue.toString()]
-            Core.setUserSessionTimeoutOption(UserSessionTimeoutOption.valueOf(newValue.toString()))
-            true
-        }
+        dropDownPreference?.entryValues =
+            timeoutDurationsMap.keys.toTypedArray()
+        dropDownPreference?.onPreferenceChangeListener =
+            Preference.OnPreferenceChangeListener { pref, newValue ->
+
+                (pref as DropDownPreference).summary =
+                    timeoutDurationsMap[newValue.toString()]
+                Core.setUserSessionTimeoutOption(
+                    UserSessionTimeoutOption.valueOf(newValue.toString())
+                )
+
+                true
+            }
         dropDownPreference?.summary = timeoutDurationsMap[selectedOption.name]
         dropDownPreference?.isVisible =
             Preferences.isBiometricEnabled(requireContext())

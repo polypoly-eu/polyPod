@@ -4,7 +4,6 @@ import org.msgpack.core.MessagePack
 import org.msgpack.core.MessageUnpacker
 import org.msgpack.value.Value
 import org.msgpack.value.ValueFactory
-import java.io.ByteArrayOutputStream
 
 enum class PlatformRequest {
     Example

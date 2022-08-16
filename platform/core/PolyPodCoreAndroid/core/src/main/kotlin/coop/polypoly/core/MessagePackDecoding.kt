@@ -29,7 +29,7 @@ fun Value.getIntValue(): Int? {
 }
 
 fun Map<Value, Value>.get(key: String): Value? {
-     return this[ValueFactory.newString(key)]
+    return this[ValueFactory.newString(key)]
 }
 
 fun Map<Value, Value>.getValue(key: String): Value {

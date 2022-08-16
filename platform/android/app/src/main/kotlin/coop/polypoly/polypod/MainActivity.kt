@@ -4,7 +4,10 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ProcessLifecycleOwner
 import coop.polypoly.core.Core
 import coop.polypoly.core.CoreExceptionCode
 import coop.polypoly.core.CoreFailure
@@ -82,17 +85,20 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
         event: Lifecycle.Event
     ) {
         when (event) {
-            Lifecycle.Event.ON_STOP, Lifecycle.Event.ON_DESTROY -> Core.appDidBecomeInactive()
+            Lifecycle.Event.ON_STOP,
+            Lifecycle.Event.ON_DESTROY -> Core.appDidBecomeInactive()
             Lifecycle.Event.ON_RESUME -> {
-               if (
-                   Authentication.canAuthenticate(this) &&
-                   Core.isUserSessionExpired()
-               )  {
-                   startActivity(Intent(
-                       this,
-                       PodUnlockActivity::class.java)
-                   )
-               }
+                if (
+                    Authentication.canAuthenticate(this) &&
+                    Core.isUserSessionExpired()
+                ) {
+                    startActivity(
+                        Intent(
+                            this,
+                            PodUnlockActivity::class.java
+                        )
+                    )
+                }
             }
             else -> {}
         }

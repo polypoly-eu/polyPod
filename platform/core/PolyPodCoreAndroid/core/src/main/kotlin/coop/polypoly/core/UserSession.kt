@@ -33,14 +33,11 @@ data class UserSessionTimeoutOptionConfig(
             )
         }
 
-        fun mapConfigs(msgPackValue: Value): List<UserSessionTimeoutOptionConfig> {
+        fun mapConfigs(msgPackValue: Value):
+            List<UserSessionTimeoutOptionConfig> {
             return msgPackValue.asArrayValue().map {
                 from(it)
             }
         }
     }
 }
-
-
-
-

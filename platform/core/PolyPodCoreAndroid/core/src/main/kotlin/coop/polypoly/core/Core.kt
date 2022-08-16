@@ -40,7 +40,8 @@ class Core {
             ) { UserSessionTimeoutOption.from(it) }
         }
 
-        fun getUserSessionTimeoutOptionsConfig(): List<UserSessionTimeoutOptionConfig> {
+        fun getUserSessionTimeoutOptionsConfig():
+            List<UserSessionTimeoutOptionConfig> {
             return handleCoreResponse(
                 JniApi.getUserSessionTimeoutOptionsConfig()
             ) { UserSessionTimeoutOptionConfig.mapConfigs(it) }
