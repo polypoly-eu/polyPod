@@ -157,7 +157,7 @@ class MessagePackEncoderTests: XCTestCase {
     }
     
     func testData() throws {
-        let value: Data = Data("Hello, world!".utf8)
+        let value: Data = Data([1, 2, 3])
         XCTAssertEqual(try MessagePackEncoder().encode(value), MessagePackValue.binary(Data([1, 2, 3])))
     }
     
@@ -179,5 +179,38 @@ class MessagePackEncoderTests: XCTestCase {
     func testArrayWithNils() throws {
         let value: [Int?] = [1, nil, nil]
         XCTAssertEqual(try MessagePackEncoder().encode(value), MessagePackValue.array([.int(1), .nil, .nil]))
+    }
+    
+    func testSet() throws {
+        let value: Set<Int> = Set([1, 2, 3])
+        let result = try MessagePackEncoder().encode(value).getArray()
+        XCTAssertEqual(Set(result), Set([.int(1), .int(2), .int(3)]))
+    }
+    
+    func testOptionalSet() throws {
+        let value: Set<Int>? = Set([1, 2, 3])
+        let result = try MessagePackEncoder().encode(value).getArray()
+        XCTAssertEqual(Set(result), Set([.int(1), .int(2), .int(3)]))
+    }
+    
+    func testSetWithNils() throws {
+        let value: Set<Int?> = Set([1, nil, nil])
+        let result = try MessagePackEncoder().encode(value).getArray()
+        XCTAssertEqual(Set(result), Set([.int(1), .nil, .nil]))
+    }
+    
+    func testDictionary() throws {
+        let value: Dictionary<String, Int> = ["1": 1, "2": 2, "3": 3]
+        XCTAssertEqual(try MessagePackEncoder().encode(value), MessagePackValue.map(["1": .int(1), "2": .int(2), "3": .int(3)]))
+    }
+    
+    func testOptionalDictionary() throws {
+        let value: Dictionary<String, Int>? = ["1": 1, "2": 2, "3": 3]
+        XCTAssertEqual(try MessagePackEncoder().encode(value), MessagePackValue.map(["1": .int(1), "2": .int(2), "3": .int(3)]))
+    }
+    
+    func testDictionaryWithNils() throws {
+        let value: Dictionary<String, Int?> = ["1": 1, "2": nil, "3": nil]
+        XCTAssertEqual(try MessagePackEncoder().encode(value), MessagePackValue.map(["1": .int(1), "2": .nil, "3": .nil]))
     }
 }
