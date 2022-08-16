@@ -6,6 +6,8 @@ public class MessagePackEncoder  {
     public func encode<T>(_ value: T) throws -> MessagePackValue where T : Encodable {
         if T.self == Data.self {
             return .binary(value as! Data)
+        } else if T.self == Date.self {
+            return .string(ISO8601DateFormatter().string(from: value as! Date))
         }
         let encoder = _MessagePackEncoder()
         try value.encode(to: encoder)

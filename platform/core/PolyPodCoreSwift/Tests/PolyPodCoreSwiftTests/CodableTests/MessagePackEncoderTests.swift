@@ -156,6 +156,18 @@ class MessagePackEncoderTests: XCTestCase {
         XCTAssertEqual(try MessagePackEncoder().encode(value), MessagePackValue.uint(1))
     }
     
+    func testDate() throws {
+        let value: Date = Date()
+        let string = ISO8601DateFormatter().string(from: value)
+        XCTAssertEqual(try MessagePackEncoder().encode(value), MessagePackValue.string(string))
+    }
+    
+    func testOptionalDate() throws {
+        let value: Date? = Date()
+        let string = ISO8601DateFormatter().string(from: value!)
+        XCTAssertEqual(try MessagePackEncoder().encode(value), MessagePackValue.string(string))
+    }
+    
     func testData() throws {
         let value: Data = Data([1, 2, 3])
         XCTAssertEqual(try MessagePackEncoder().encode(value), MessagePackValue.binary(Data([1, 2, 3])))
