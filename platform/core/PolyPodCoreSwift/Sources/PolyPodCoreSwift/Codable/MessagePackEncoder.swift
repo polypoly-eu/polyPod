@@ -51,35 +51,36 @@ class SingleValueContainer: SingleValueEncodingContainer {
         try checkCanEncode(value: value)
         defer { self.canEncodeNewValue = false }
         
-        if T.self == Bool.self {
-            storage = .bool(value as! Bool)
-        } else if T.self == String.self {
-            storage = .string(value as! String)
-        } else if T.self == Double.self {
-            storage = .double(value as! Double)
-        } else if T.self == Float.self {
-            storage = .float(value as! Float)
-        } else if T.self == Int.self {
-            storage = .int(Int64(value as! Int))
-        } else if T.self == Int8.self {
-            storage = .int(Int64(value as! Int8))
-        } else if T.self == Int16.self {
-            storage = .int(Int64(value as! Int16))
-        } else if T.self == Int32.self {
-            storage = .int(Int64(value as! Int32))
-        } else if T.self == Int64.self {
-            storage = .int(value as! Int64)
-        } else if T.self == UInt.self {
-            storage = .uint(UInt64(value as! UInt))
-        } else if T.self == UInt8.self {
-            storage = .uint(UInt64(value as! UInt8))
-        } else if T.self == UInt16.self {
-            storage = .uint(UInt64(value as! UInt16))
-        } else if T.self == UInt32.self {
-            storage = .uint(UInt64(value as! UInt32))
-        } else if T.self == UInt64.self {
-            storage = .uint(value as! UInt64)
-        } else {
+        switch value {
+        case let val as Bool:
+            storage = .bool(val)
+        case let val as String:
+            storage = .string(val)
+        case let val as Double:
+            storage = .double(val)
+        case let val as Float:
+            storage = .float(val)
+        case let val as Int:
+            storage = .int(Int64(val))
+        case let val as Int8:
+            storage = .int(Int64(val))
+        case let val as Int16:
+            storage = .int(Int64(val))
+        case let val as Int32:
+            storage = .int(Int64(val))
+        case let val as Int64:
+            storage = .int(val)
+        case let val as UInt:
+            storage = .uint(UInt64(val))
+        case let val as UInt8:
+            storage = .uint(UInt64(val))
+        case let val as UInt16:
+            storage = .uint(UInt64(val))
+        case let val as UInt32:
+            storage = .uint(UInt64(val))
+        case let val as UInt64:
+            storage = .uint(val)
+        default:
             let encoder = MessagePackEncoder()
             storage = try encoder.encode(value)
         }
