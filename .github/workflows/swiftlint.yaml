@@ -26,9 +26,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: Runs swiftlint
         working-directory: platform/ios
-        run: |
-          echo "Begin lint"
-          swiftlint lint
-          echo "Complete lint"
-          echo $?
-          echo "Done"
+        run: swiftlint lint --reporter github-actions-logging --strict
