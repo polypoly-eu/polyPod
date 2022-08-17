@@ -27,7 +27,7 @@ pub enum PlatformRequest {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum PlatformResponse {
-    Example(String),
+    Example { name: String },
 }
 
 pub trait PlatformHookRequest: Sync + Send {

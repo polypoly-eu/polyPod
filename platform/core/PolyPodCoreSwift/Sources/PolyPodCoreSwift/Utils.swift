@@ -31,7 +31,7 @@ func mapToPlatformRequest(request: MessagePackValue) -> Result<PlatformRequest, 
 func handle(platformRequest: PlatformRequest) -> PlatformResponse {
     switch platformRequest {
     case .Example:
-        return PlatformResponse.Example("Test")
+        return PlatformResponse.Example(name: "Test")
     }
 }
 

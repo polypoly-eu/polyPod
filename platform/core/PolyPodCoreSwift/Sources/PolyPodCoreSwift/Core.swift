@@ -8,23 +8,8 @@ enum PlatformRequest: String {
     case Example
 }
 
-enum PlatformResponse {
-    case Example(String)
-}
-
-extension PlatformResponse: Encodable {
-    
-    private enum CodingKeys: String, CodingKey {
-        case Example
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        switch self {
-        case .Example(let string):
-            try container.encode(string, forKey: .Example)
-        }
-    }
+enum PlatformResponse: Codable {
+    case Example(name: String)
 }
 
 /// Swift wrapper around the Rust Core.
