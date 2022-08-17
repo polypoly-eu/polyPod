@@ -134,7 +134,7 @@ class HomeScreenViewModel {
                     return BitmapFactory.decodeStream(it, null, options)
                 }
             }
-        } catch (ex: Exception){
+        } catch (ex: Exception) {
             Log.error(file, "Failed to create thumbnail for the feature $file")
             return null
         }
