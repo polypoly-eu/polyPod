@@ -20,10 +20,10 @@ jobs:
   swiftlint:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/realm/swiftlint:latest
+      image: ghcr.io/realm/swiftlint:5.5-0.48.0
 
     steps:
       - uses: actions/checkout@v2
       - name: Runs swiftlint
-        run: |
-          cd platform/ios && swiftlint lint --reporter github-actions-logging --strict
+        working-directory: platform/ios
+        run: swiftlint lint --config .swiftlint.yml --reporter github-actions-logging --strict
