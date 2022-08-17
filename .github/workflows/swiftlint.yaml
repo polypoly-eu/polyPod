@@ -20,7 +20,7 @@ jobs:
   swiftlint:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/realm/swiftlint:latest
+      image: ghcr.io/realm/swiftlint:0.48.0
 
     steps:
       - uses: actions/checkout@v2
@@ -28,7 +28,7 @@ jobs:
         working-directory: platform/ios
         run: |
           echo "Begin lint"
-          swiftlint lint 2> /dev/null
+          swiftlint lint
           echo "Complete lint"
           echo $?
           echo "Done"
