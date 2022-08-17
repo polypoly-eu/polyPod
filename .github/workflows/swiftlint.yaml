@@ -26,4 +26,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Runs swiftlint
         working-directory: platform/ios
-        run: swiftlint
+        run: |
+          set -eo
+          swiftlint
