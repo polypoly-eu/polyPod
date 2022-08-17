@@ -19,6 +19,13 @@ export interface Matcher {
 }
 
 /**
+ * For SELECT queries an array of Map objects which keys are the
+ * bound variables and values are the values the result is bound to,
+ * for CONSTRUCT and ÐESCRIBE queries an array of quads, for ASK queries a boolean.
+ */
+export type SPARQLQueryResult = Map<string, RDF.Term>[] | RDF.Quad[] | boolean;
+
+/**
  * `PolyIn` specifies the interaction of the Feature with the Pod store. It is concerned with creating and manipulating
  * RDF triples according to the [RDFJS](http://rdf.js.org/) specification.
  *
@@ -96,6 +103,19 @@ export interface PolyIn {
      * @returns a Promise that will be resolved to a boolean.
      */
     has(quad: RDF.Quad): Promise<boolean>;
+
+    /**
+     * Executes a SPARQL 1.1 SELECT, CONSTRUCT, DESCRIBE, or ASK query.
+     * @returns a Promise that will be resolved with the result of the query.
+     */
+    query(query: string): Promise<SPARQLQueryResult>;
+
+    /**
+     * Executes a SPARQL 1.1 UPDATE query.
+     * @returns a Promise that will be resolved with undefined when the changes
+     *          have been applied and written to disk
+     */
+    update(query: string): Promise<void>;
 }
 
 /**
