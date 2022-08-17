@@ -10,6 +10,7 @@ import coop.polypoly.core.FeatureCategoryId
 import coop.polypoly.polypod.PDFBitmap
 import coop.polypoly.polypod.R
 import coop.polypoly.polypod.features.FeatureStorage
+import org.apache.jena.atlas.logging.Log
 import java.io.File
 
 data class SectionModel(
@@ -118,19 +119,24 @@ class HomeScreenViewModel {
         context: Context,
         file: File
     ): Bitmap? {
-        if (file.path.endsWith(".pdf")) {
-            return PDFBitmap
-                .bitmapFromPDF(
-                    file,
-                    context.resources.displayMetrics.densityDpi
-                )
-        } else {
-            val options = BitmapFactory.Options()
-            // For now, we assume all thumbnails are xhdpi, i.e. 2x scale factor
-            options.inDensity = DisplayMetrics.DENSITY_XHIGH
-            file.inputStream().use {
-                return BitmapFactory.decodeStream(it, null, options)
+        try {
+            if (file.path.endsWith(".pdf")) {
+                return PDFBitmap
+                    .bitmapFromPDF(
+                        file,
+                        context.resources.displayMetrics.densityDpi
+                    )
+            } else {
+                val options = BitmapFactory.Options()
+                // For now, we assume all thumbnails are xhdpi, i.e. 2x scale factor
+                options.inDensity = DisplayMetrics.DENSITY_XHIGH
+                file.inputStream().use {
+                    return BitmapFactory.decodeStream(it, null, options)
+                }
             }
+        } catch (ex: Exception){
+            Log.error(file, "Failed to create thumbnail for the feature $file")
+            return null
         }
     }
 }
