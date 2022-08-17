@@ -29,3 +29,4 @@ jobs:
         run: |
           set -eo
           swiftlint
+          exit 1
