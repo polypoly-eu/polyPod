@@ -10,72 +10,50 @@ class UpdateNotificationTest: XCTestCase {
     // swiftlint:enable empty_xctest_method
 
     func testIgnoredNotification() {
-        launchApp(0)
+        app.launchWithArgs(mockNotificationId: 0)
 
         assertInAppNotificationNotShown()
     }
 
     func testFirstNotificationShown() {
-        launchApp(1)
+        app.launchWithArgs(mockNotificationId: 1)
 
         assertInAppNotificationShown()
     }
 
     func testNotificationShownOnlyOnce() {
-        launchApp(1)
+        app.launchWithArgs(mockNotificationId: 1)
 
         assertInAppNotificationShown()
 
         closeInAppNotification()
-        launchApp(1, resetDefaults: false)
+        app.launchWithArgs(resetDefaults: false, mockNotificationId: 1)
 
         assertInAppNotificationNotShown()
     }
 
     func testNotificationShownAgainIfNotClosed() {
-        launchApp(1)
+        app.launchWithArgs(mockNotificationId: 1)
 
         assertInAppNotificationShown()
 
-        launchApp(1, resetDefaults: false)
+        app.launchWithArgs(resetDefaults: false, mockNotificationId: 1)
 
         assertInAppNotificationShown()
     }
 
     func testNotificationWithDifferentIdShown() {
-        launchApp(1)
+        app.launchWithArgs(mockNotificationId: 1)
 
         assertInAppNotificationShown()
 
         closeInAppNotification()
-        launchApp(2, resetDefaults: false)
+        app.launchWithArgs(resetDefaults: false, mockNotificationId: 2)
 
         assertInAppNotificationShown()
     }
 
     // TODO: Add tests that verify that the push notification shows up.
-
-    private func launchApp(
-        _ mockNotificationId: Int,
-        resetDefaults: Bool = true
-    ) {
-        typealias Keys = UserDefaults.Keys
-        app.launchArguments = [
-            "-\(Keys.firstRun.rawValue)",
-            "false",
-            "-\(Keys.updateNotificationMockId.rawValue)",
-            "\(mockNotificationId)"
-        ]
-        if resetDefaults {
-            app.launchArguments += [
-                "-\(Keys.resetUserDefaults.rawValue)",
-                "true"
-            ]
-        }
-        app.launch()
-        let background = app.wait(for: .runningForeground, timeout: 120)
-        XCTAssertTrue(background)
-    }
 
     private func assertInAppNotificationShown() {
         XCTAssertTrue(
@@ -97,5 +75,6 @@ class UpdateNotificationTest: XCTestCase {
 
     private func closeInAppNotification() {
         findInAppNotificationCloseButton().tap()
+        sleep(1)
     }
 }

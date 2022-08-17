@@ -95,6 +95,21 @@ export interface PolyIn {
      * @returns a Promise that will be resolved to a boolean.
      */
     has(...quads: RDF.Quad[]): Promise<boolean>;
+
+    /**
+     * SPARQL query (https://www.w3.org/TR/sparql11-query/) against the rdf database
+     *
+     * @param query SPARQL query string
+     * @returns a promise that resolves to a string
+     */
+    query(query: string): Promise<string>;
+
+    /**
+     * SPARQL update (https://www.w3.org/TR/sparql11-update/) against the rdf database
+     *
+     * @param query SPARQL update query string
+     */
+    update(query: string): Promise<void>;
 }
 
 /**

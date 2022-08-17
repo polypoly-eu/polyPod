@@ -68,6 +68,14 @@ class AsyncPolyIn implements PolyIn {
     async has(...quads: Quad[]): Promise<boolean> {
         return (await this.promise).has(...quads);
     }
+
+    async query(query: string): Promise<string> {
+        return (await this.promise).query(query);
+    }
+
+    async update(query: string): Promise<void> {
+        return (await this.promise).update(query);
+    }
 }
 
 class AsyncPolyNav implements PolyNav {
