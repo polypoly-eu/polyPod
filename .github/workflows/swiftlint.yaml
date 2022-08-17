@@ -26,4 +26,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: Runs swiftlint
         run: |
-          cd platform/ios && swiftlint lint --reporter github-actions-logging --strict
+          cd platform/ios && swiftlint lint --strict
