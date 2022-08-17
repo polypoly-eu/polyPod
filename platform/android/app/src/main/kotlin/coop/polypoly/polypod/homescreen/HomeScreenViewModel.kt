@@ -10,7 +10,6 @@ import coop.polypoly.core.FeatureCategoryId
 import coop.polypoly.polypod.PDFBitmap
 import coop.polypoly.polypod.R
 import coop.polypoly.polypod.features.FeatureStorage
-import org.apache.jena.atlas.logging.Log
 import java.io.File
 
 data class SectionModel(
@@ -135,7 +134,6 @@ class HomeScreenViewModel {
                 }
             }
         } catch (ex: Exception) {
-            Log.error(file, "Failed to create thumbnail for the feature $file")
             return null
         }
     }
