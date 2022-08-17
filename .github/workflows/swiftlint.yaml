@@ -27,5 +27,4 @@ jobs:
       - name: Runs swiftlint
         working-directory: platform/ios
         run: |
-          echo "Test"
-          exit 1
+          set -o pipefail && swiftlint
