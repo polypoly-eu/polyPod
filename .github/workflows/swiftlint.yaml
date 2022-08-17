@@ -25,5 +25,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Runs swiftlint
-        run: |
-          cd platform/ios && swiftlint lint
+        working-directory: platform/ios
+        run: swiftlint lint
