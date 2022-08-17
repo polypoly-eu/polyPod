@@ -27,4 +27,4 @@ jobs:
       - name: Runs swiftlint
         working-directory: platform/ios
         run: |
-          set -e && swiftlint; exit 0
+          set -o && swiftlint; exit 0
