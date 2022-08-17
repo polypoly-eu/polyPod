@@ -28,7 +28,7 @@ jobs:
         working-directory: platform/ios
         run: |
           echo "Begin lint"
-          swiftlint lint
+          swiftlint lint 2> /dev/null
           echo "Complete lint"
           echo $?
           echo "Done"
