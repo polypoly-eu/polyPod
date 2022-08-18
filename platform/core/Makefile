@@ -29,7 +29,6 @@ ifeq ($(OS),Windows_NT)
 else
 	os_echo := echo
 	ifeq ($(shell uname -s),Darwin)
-		ndk_download_url = $(google_repo)/$(ndk_lib)-darwin.zip
 		macos := true
 	endif
 endif

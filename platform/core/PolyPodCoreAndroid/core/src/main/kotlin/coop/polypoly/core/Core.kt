@@ -22,15 +22,46 @@ class Core {
             ) { mapFeatureCategories(it) }
         }
 
-        fun execRdfQuery(query: String, appPath: String): Value {
+        fun execRdfQuery(query: String): Value {
             return handleCoreResponse(
-                JniApi().execRdfQuery(query, appPath)
+                JniApi.execRdfQuery(query)
             ) { it }
         }
 
-        fun execRdfUpdate(query: String, appPath: String) {
+        fun execRdfUpdate(query: String) {
             return handleCoreResponse(
-                JniApi().execRdfUpdate(query, appPath)
+                JniApi.execRdfUpdate(query)
+            ) {}
+        }
+
+        fun appDidBecomeInactive() {
+            return handleCoreResponse(
+                JniApi.appDidBecomeInactive()
+            ) {}
+        }
+
+        fun isUserSessionExpired(): Boolean {
+            return handleCoreResponse(
+                JniApi.isUserSessionExpired()
+            ) { it.asBooleanValue().boolean }
+        }
+
+        fun getUserSessionTimeoutOption(): UserSessionTimeoutOption {
+            return handleCoreResponse(
+                JniApi.getUserSessionTimeoutOption()
+            ) { UserSessionTimeoutOption.from(it) }
+        }
+
+        fun getUserSessionTimeoutOptionsConfig():
+            List<UserSessionTimeoutOptionConfig> {
+            return handleCoreResponse(
+                JniApi.getUserSessionTimeoutOptionsConfig()
+            ) { UserSessionTimeoutOptionConfig.mapConfigs(it) }
+        }
+
+        fun setUserSessionTimeoutOption(option: UserSessionTimeoutOption) {
+            return handleCoreResponse(
+                JniApi.setUserSessionTimeoutOption(option.asValue().pack())
             ) {}
         }
 
