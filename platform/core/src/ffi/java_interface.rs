@@ -87,7 +87,7 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_isUserSessionExpired(
 /// - option: Timeout Option as MessagePack value.
 /// Returns Result<(), CoreFailure> as MessagePack value.
 #[no_mangle]
-pub extern "system" fn Java_coop_polypoly_core_JniApi_setTimeoutOption(
+pub extern "system" fn Java_coop_polypoly_core_JniApi_setUserSessionTimeoutOption(
     env: JNIEnv,
     _: JClass,
     option: jbyteArray,

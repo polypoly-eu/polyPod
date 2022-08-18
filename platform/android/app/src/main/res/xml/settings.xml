@@ -13,6 +13,9 @@
         <SwitchPreference
             android:key="biometricEnabledKey"
             android:title="Authentication"/>
+        <DropDownPreference
+            android:key="sessionTimeout"
+            android:title="@string/screen_lock_inactivity_timeout_entry"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_legal_section">

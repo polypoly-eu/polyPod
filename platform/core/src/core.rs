@@ -128,6 +128,7 @@ pub fn exec_rdf_update(query: SPARQLQuery) -> Result<(), CoreFailure> {
 }
 
 // App events
+
 pub fn app_did_become_inactive() -> Result<(), CoreFailure> {
     let mut instance = get_instance()?;
     let session = instance
