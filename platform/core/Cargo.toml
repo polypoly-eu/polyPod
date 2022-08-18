@@ -20,6 +20,7 @@ sled = "0.34.7"
 url="2.2.2"
 zip = "0.6.2"
 tempfile = "3.3.0"
+poly_rdf = { path = "poly_rdf"}
 [dependencies.uuid]
 version = "1.1.2"
 features = [
@@ -35,6 +36,3 @@ pretty_assertions = "1.2.1"
 jni = { version = "0.19.0", default-features = false }
 android_logger = "0.11"
 log = "0.4.17"
-oxigraph = "0.3.4"
-spargebra = "0.2.1"
-sparesults = "0.1.1"

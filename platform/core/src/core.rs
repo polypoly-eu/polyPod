@@ -7,13 +7,13 @@ use crate::{
 };
 
 use once_cell::sync::OnceCell;
+use poly_rdf::rdf::{rdf_query, rdf_update, SPARQLQuery};
 use serde::{Deserialize, Serialize};
 use std::sync::{Arc, Mutex};
 use std::{sync::MutexGuard, time::Instant};
 
 #[cfg(target_os = "android")]
 use {
-    crate::rdf::{rdf_query, rdf_update, SPARQLQuery},
     android_logger::Config,
     log::{trace, Level},
 };
@@ -113,12 +113,10 @@ pub fn load_feature_categories(
     )
 }
 
-#[cfg(target_os = "android")]
 pub fn exec_rdf_query(query: SPARQLQuery, app_path: String) -> Result<String, CoreFailure> {
     rdf_query(query, app_path).map_err(CoreFailure::map_rdf_to_core_failure)
 }
 
-#[cfg(target_os = "android")]
 pub fn exec_rdf_update(query: SPARQLQuery, app_path: String) -> Result<(), CoreFailure> {
     rdf_update(query, app_path).map_err(CoreFailure::map_rdf_to_core_failure)
 }
