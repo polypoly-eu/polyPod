@@ -42,11 +42,7 @@ class ActivityHtmlParser {
         console.log(
             `ActivityHtmlParser: Decoding entry at path: ${entry.path}`
         );
-        const promise = entry.getContent();
-        promise.catch((err) => {
-            console.log(err);
-        });
-        const content = await promise;
+        const content = await entry.getContent();
         const text = await new TextDecoder("utf-8").decode(content);
         const { contentDocument } = this._iframe;
         contentDocument.write(text);
