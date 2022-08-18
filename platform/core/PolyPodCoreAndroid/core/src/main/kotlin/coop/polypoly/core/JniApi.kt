@@ -39,6 +39,8 @@ object JniApi {
         callback: JniApi
     ): ByteArray
     external fun loadFeatureCategories(featuresDir: String): ByteArray
+    external fun execRdfQuery(query: String): ByteArray
+    external fun execRdfUpdate(query: String): ByteArray
 
     init {
         System.loadLibrary("polypod_core")
@@ -85,8 +87,4 @@ object JniApi {
             pack(ValueFactory.newString(exp.toString()), false)
         }
     }
-    external fun bootstrapCore(languageCode: String, callback: JniApi): ByteArray // ktlint-disable max-line-length
-    external fun loadFeatureCategories(featuresDir: String): ByteArray
-    external fun execRdfQuery(query: String, appPath: String): ByteArray
-    external fun execRdfUpdate(query: String, appPath: String): ByteArray
 }
