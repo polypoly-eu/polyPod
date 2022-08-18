@@ -107,7 +107,7 @@ pub unsafe extern "C" fn get_user_session_timeout_options_config() -> CByteBuffe
     ))
 }
 
-/// Executes the given RDF query 
+/// Executes the given RDF query.
 /// Returns Result<String, CoreFailure> as MessagePack value.
 #[no_mangle]
 pub unsafe extern "C" fn exec_rdf_query(query: *const c_char) -> CByteBuffer {
@@ -118,7 +118,7 @@ pub unsafe extern "C" fn exec_rdf_query(query: *const c_char) -> CByteBuffer {
     ))
 }
 
-/// Executes the given RDF update. 
+/// Executes the given RDF update.
 /// Returns Result<Void, CoreFailure> as MessagePack value.
 #[no_mangle]
 pub unsafe extern "C" fn exec_rdf_update(update: *const c_char) -> CByteBuffer {
