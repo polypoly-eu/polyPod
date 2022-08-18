@@ -13,8 +13,13 @@ class ActivityHtmlParser {
         // Ignoring the timestamp for now - we don't need hourly accuracy at the
         // time of writing this.
         const datePattern =
-            /[0-9]{1,2} [A-Z][a-z][a-z] [0-9]{4,4}, [0-9:]{8,8}/;
-        const dateString = text.match(datePattern)?.[0];
+            /([A-Z][a-z][a-z]) ([0-9]{1,2}), ([0-9]{4,4}), ([0-9:]{7,8} [A|P]M) ([A-Z]{3,4})/;
+        const match = text.match(datePattern);
+        const month = match?.[1];
+        const day = match?.[2];
+        const year = match?.[3];
+
+        const dateString = `${day} ${month} ${year}`;
         return dateString ? new Date(dateString) : null;
     }
 
