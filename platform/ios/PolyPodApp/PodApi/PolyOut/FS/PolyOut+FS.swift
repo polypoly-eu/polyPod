@@ -110,7 +110,6 @@ extension PolyOut {
     }
 
     func fileRead(url: String, options: [String: Any], completionHandler: @escaping (Any?, Error?) -> Void) {
-        print("LOGY: file read - url: \(url)")
         do {
             guard let filePath = fsUriFromPodUrl(url) else {
                 throw PodApiError.noSuchFile(url)
@@ -171,7 +170,6 @@ extension PolyOut {
                     ).replacingOccurrences(of: "%20", with: " ")
 
                     let fileId = url + "/" + relativePath
-                    print("LOGY: readDir - entry url: \(fileId)")
                     entries.append(["id": fileId, "path": relativePath])
                 }
             }
