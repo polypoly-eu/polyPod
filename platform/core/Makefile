@@ -69,7 +69,7 @@ endif
 
 	# Generated module map and C header
 	cargo install cbindgen
-	cbindgen --config cbindgen.toml --cpp-compat -o $(export_dir_ios)/headers/polypod-core.h
+	cbindgen --config cbindgen.toml -o $(export_dir_ios)/headers/polypod-core.h
 	@$(os_echo) "module PolyPodCore { header \"polypod-core.h\" export * }" >> $(export_dir_ios)/headers/module.modulemap
 
 	# Package xcframework

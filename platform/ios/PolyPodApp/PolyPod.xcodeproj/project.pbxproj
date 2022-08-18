@@ -247,7 +247,6 @@
 		9000F69928589A7D00241B27 /* SharedUIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedUIComponents.swift; sourceTree = "<group>"; };
 		901C0587278EE58700BC8364 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		901C0589278F2AF800BC8364 /* CoreData+PolyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+PolyIn.swift"; sourceTree = "<group>"; };
-		90338EB528AE4F5900C86968 /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
 		90338EB628AE4F5900C86968 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		90497562284DF42300EF9C6B /* PolyStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyStyle.swift; sourceTree = "<group>"; };
 		904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchToMainQueue.swift; sourceTree = "<group>"; };
@@ -550,7 +549,6 @@
 			isa = PBXGroup;
 			children = (
 				90338EB628AE4F5900C86968 /* libc++.tbd */,
-				90338EB528AE4F5900C86968 /* libc++abi.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

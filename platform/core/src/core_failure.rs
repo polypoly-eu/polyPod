@@ -1,6 +1,6 @@
+use crate::rdf_failure::RdfFailure;
 use serde::{Deserialize, Serialize};
 use url::Url;
-use crate::rdf_failure::RdfFailure;
 
 #[derive(Debug, Clone, Serialize)]
 pub enum FailureCode {

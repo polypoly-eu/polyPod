@@ -1,6 +1,6 @@
 use oxigraph::{
-    sparql::{ EvaluationError, ParseError },
-    store::StorageError
+    sparql::{EvaluationError, ParseError},
+    store::StorageError,
 };
 use serde::Serialize;
 use std::str::Utf8Error;

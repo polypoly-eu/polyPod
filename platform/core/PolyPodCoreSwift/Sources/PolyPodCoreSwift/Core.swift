@@ -98,17 +98,11 @@ public final class Core {
 
     public func executeRdfQuery(_ query: String) -> Result<MessagePackValue, Error> {
         let query = NSString(string: query).utf8String!
-        defer {
-            query.deallocate()
-        }
         return handleCoreResponse(exec_rdf_query(query), { $0 })
     }
 
     public func executeRdfUpdate(_ update: String) -> Result<MessagePackValue, Error> {
         let update = NSString(string: update).utf8String!
-        defer {
-            update.deallocate()
-        }
         return handleCoreResponse(exec_rdf_update(update), { $0 })
     }
 

@@ -67,7 +67,9 @@ pub fn bootstrap(
         return Err(CoreFailure::core_already_bootstrapped());
     }
     let preferences = Arc::new(Preferences {
-        store: Box::new(DefaultKeyValueStore::new(fs_root.clone() + "/" + PREFERENCES_DB)),
+        store: Box::new(DefaultKeyValueStore::new(
+            fs_root.clone() + "/" + PREFERENCES_DB,
+        )),
     });
 
     let builder = Box::new(Instant::now);

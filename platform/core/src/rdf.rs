@@ -1,5 +1,5 @@
-use oxigraph::store::{ StorageError, Store };
-use oxigraph::sparql::{ QueryResultsFormat, Query, Update };
+use oxigraph::sparql::{Query, QueryResultsFormat, Update};
+use oxigraph::store::{StorageError, Store};
 use std::str;
 
 use crate::rdf_failure::RdfFailure;

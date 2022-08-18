@@ -112,7 +112,9 @@ pub unsafe extern "C" fn get_user_session_timeout_options_config() -> CByteBuffe
 #[no_mangle]
 pub unsafe extern "C" fn exec_rdf_query(query: *const c_char) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
-        cstring_to_str(&query).map(String::from).and_then(core::exec_rdf_query),
+        cstring_to_str(&query)
+            .map(String::from)
+            .and_then(core::exec_rdf_query),
     ))
 }
 
@@ -121,7 +123,9 @@ pub unsafe extern "C" fn exec_rdf_query(query: *const c_char) -> CByteBuffer {
 #[no_mangle]
 pub unsafe extern "C" fn exec_rdf_update(update: *const c_char) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
-        cstring_to_str(&update).map(String::from).and_then(core::exec_rdf_update),
+        cstring_to_str(&update)
+            .map(String::from)
+            .and_then(core::exec_rdf_update),
     ))
 }
 
