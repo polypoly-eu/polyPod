@@ -107,8 +107,8 @@ pub unsafe extern "C" fn get_user_session_timeout_options_config() -> CByteBuffe
     ))
 }
 
-/// Get the user session timeout config options.
-/// Returns Result<Vec<UserSessionTimeout>, CoreFailure> as MessagePack value.
+/// Executes the given RDF query 
+/// Returns Result<String, CoreFailure> as MessagePack value.
 #[no_mangle]
 pub unsafe extern "C" fn exec_rdf_query(query: *const c_char) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
@@ -118,8 +118,8 @@ pub unsafe extern "C" fn exec_rdf_query(query: *const c_char) -> CByteBuffer {
     ))
 }
 
-/// Get the user session timeout config options.
-/// Returns Result<Vec<UserSessionTimeout>, CoreFailure> as MessagePack value.
+/// Executes the given RDF update. 
+/// Returns Result<Void, CoreFailure> as MessagePack value.
 #[no_mangle]
 pub unsafe extern "C" fn exec_rdf_update(update: *const c_char) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
