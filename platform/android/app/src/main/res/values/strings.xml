@@ -59,4 +59,8 @@
 	    influence on the development and contribute to a sustainable, social and independent data economy for Europe.</string>                                       
     <string name="homescreen_footer_button_title">Count me in!</string>
     <string name="homescreen_footer_button_open_url">https://polypoly.coop/en-de/becomepart</string>
+
+    <string name="screen_lock_inactivity_timeout_entry">"Screen lock inactivity timeout"</string>
+    <string name="screen_lock_inactivity_no_timeout">"No timeout"</string>;
+    <string name="screen_lock_inactivity_timeout_duration">"%d minutes"</string>
 </resources>
