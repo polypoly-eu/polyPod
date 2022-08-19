@@ -41,7 +41,6 @@ const PREFERENCES_DB: &str = "preferences_db";
 // to be shared between components, as well managing components lifetime.
 struct Core<'a> {
     language_code: String,
-    fs_root: String,
     #[allow(dead_code)]
     preferences: Arc<Preferences>,
     user_session: Mutex<UserSession<'a>>,
@@ -67,16 +66,13 @@ pub fn bootstrap(
         return Err(CoreFailure::core_already_bootstrapped());
     }
     let preferences = Arc::new(Preferences {
-        store: Box::new(DefaultKeyValueStore::new(
-            fs_root.clone() + "/" + PREFERENCES_DB,
-        )),
+        store: Box::new(DefaultKeyValueStore::new(fs_root + "/" + PREFERENCES_DB)),
     });
 
     let builder = Box::new(Instant::now);
     let user_session = Mutex::from(UserSession::new(builder, preferences.clone()));
     let core = Core {
         language_code,
-        fs_root,
         preferences,
         user_session,
         platform_hook,
@@ -117,18 +113,15 @@ pub fn load_feature_categories(
     )
 }
 
-pub fn exec_rdf_query(query: SPARQLQuery) -> Result<String, CoreFailure> {
-    let instance = get_instance()?;
-    rdf_query(query, instance.fs_root.clone()).map_err(CoreFailure::map_rdf_to_core_failure)
+pub fn exec_rdf_query(query: SPARQLQuery, app_path: String) -> Result<String, CoreFailure> {
+    rdf_query(query, app_path).map_err(CoreFailure::map_rdf_to_core_failure)
 }
 
-pub fn exec_rdf_update(query: SPARQLQuery) -> Result<(), CoreFailure> {
-    let instance = get_instance()?;
-    rdf_update(query, instance.fs_root.clone()).map_err(CoreFailure::map_rdf_to_core_failure)
+pub fn exec_rdf_update(query: SPARQLQuery, app_path: String) -> Result<(), CoreFailure> {
+    rdf_update(query, app_path).map_err(CoreFailure::map_rdf_to_core_failure)
 }
 
 // App events
-
 pub fn app_did_become_inactive() -> Result<(), CoreFailure> {
     let mut instance = get_instance()?;
     let session = instance

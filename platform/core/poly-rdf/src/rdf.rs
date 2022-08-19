@@ -1,5 +1,6 @@
-use oxigraph::sparql::{Query, QueryResultsFormat, Update};
 use oxigraph::store::{StorageError, Store};
+use sparesults::QueryResultsFormat;
+use spargebra::{Query, Update};
 use std::str;
 
 use crate::rdf_failure::RdfFailure;
@@ -11,17 +12,17 @@ fn init_store(app_path: String) -> Result<Store, StorageError> {
 }
 
 fn check_query(query: SPARQLQuery) -> Result<Query, RdfFailure> {
-    match Query::parse(&query, None) {
+    return match Query::parse(&query, None) {
         Ok(query) => Ok(query),
         Err(error) => Err(RdfFailure::map_query_parse_error(error)),
-    }
+    };
 }
 
 fn check_update(query: SPARQLQuery) -> Result<Update, RdfFailure> {
-    match Update::parse(&query, None) {
+    return match Update::parse(&query, None) {
         Ok(query) => Ok(query),
         Err(error) => Err(RdfFailure::map_query_parse_error(error)),
-    }
+    };
 }
 
 pub fn rdf_query(query: SPARQLQuery, app_path: String) -> Result<String, RdfFailure> {

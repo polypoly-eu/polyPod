@@ -4,6 +4,7 @@ import org.msgpack.core.MessagePack
 import org.msgpack.core.MessageUnpacker
 import org.msgpack.value.Value
 import org.msgpack.value.ValueFactory
+import java.io.ByteArrayOutputStream
 
 enum class PlatformRequest {
     Example
@@ -38,13 +39,6 @@ object JniApi {
         callback: JniApi
     ): ByteArray
     external fun loadFeatureCategories(featuresDir: String): ByteArray
-    external fun execRdfQuery(query: String): ByteArray
-    external fun execRdfUpdate(query: String): ByteArray
-    external fun appDidBecomeInactive(): ByteArray
-    external fun isUserSessionExpired(): ByteArray
-    external fun setUserSessionTimeoutOption(option: ByteArray): ByteArray
-    external fun getUserSessionTimeoutOption(): ByteArray
-    external fun getUserSessionTimeoutOptionsConfig(): ByteArray
 
     init {
         System.loadLibrary("polypod_core")
@@ -64,6 +58,21 @@ object JniApi {
         }
     }
 
+    private fun pack(value: Value, isOk: Boolean): ByteArray {
+        val okOrError = if (isOk) "Ok" else "Err"
+        val map =
+            ValueFactory.newMap(
+                mutableMapOf(
+                    ValueFactory.newString(okOrError) to value
+                )
+            )
+        val output = ByteArrayOutputStream()
+        val packer = MessagePack.newDefaultPacker(output)
+        packer.packValue(map)
+        packer.close()
+        return output.toByteArray()
+    }
+
     fun performRequest(input: ByteArray): ByteArray {
         return try {
             val unpacker: MessageUnpacker = MessagePack.newDefaultUnpacker(
@@ -71,9 +80,13 @@ object JniApi {
             )
             val platformRequest = mapToPlatformRequest(unpacker.unpackValue())
             val response = handle(platformRequest)
-            response.messageValue().asOk().pack()
+            pack(response.messageValue(), true)
         } catch (exp: Exception) {
-            exp.asValue().asErr().pack()
+            pack(ValueFactory.newString(exp.toString()), false)
         }
     }
+    external fun bootstrapCore(languageCode: String, callback: JniApi): ByteArray // ktlint-disable max-line-length
+    external fun loadFeatureCategories(featuresDir: String): ByteArray
+    external fun execRdfQuery(query: String, appPath: String): ByteArray
+    external fun execRdfUpdate(query: String, appPath: String): ByteArray
 }

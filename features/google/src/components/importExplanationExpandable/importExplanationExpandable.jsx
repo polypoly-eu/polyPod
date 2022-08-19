@@ -109,7 +109,7 @@ const ImportExplanationExpandable = ({
                 );
                 for (const { url } of selectedFiles.slice(1))
                     await polyOut.importArchive(url, destUrl);
-                await refreshFiles();
+                refreshFiles();
                 setSelectedFiles([]);
             } catch (error) {
                 setGlobalError(new FileImportError(error));

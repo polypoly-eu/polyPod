@@ -26,7 +26,7 @@ class Authentication {
         fun canAuthenticate(context: Context): Boolean {
             return biometricsAvailable(context) &&
                 Preferences.isBiometricEnabled(context) &&
-                Preferences.hasUserConfiguredAuthentication(context)
+                !isAuthenticated
         }
 
         fun setUp(

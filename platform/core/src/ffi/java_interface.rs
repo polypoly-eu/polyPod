@@ -1,5 +1,6 @@
 use crate::common::serialization::{message_pack_deserialize, message_pack_serialize};
 use crate::core::{self, PlatformRequest, PlatformResponse};
+use crate::core::{exec_rdf_query, exec_rdf_update};
 use crate::core_failure::CoreFailure;
 use jni::{
     objects::{GlobalRef, JClass, JObject, JString, JValue},
@@ -87,7 +88,7 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_isUserSessionExpired(
 /// - option: Timeout Option as MessagePack value.
 /// Returns Result<(), CoreFailure> as MessagePack value.
 #[no_mangle]
-pub extern "system" fn Java_coop_polypoly_core_JniApi_setUserSessionTimeoutOption(
+pub extern "system" fn Java_coop_polypoly_core_JniApi_setTimeoutOption(
     env: JNIEnv,
     _: JClass,
     option: jbyteArray,
@@ -207,9 +208,13 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfQuery(
     env: JNIEnv,
     _: JClass,
     query: JString,
+    appPath: JString,
 ) -> jbyteArray {
     env.byte_array_from_slice(&message_pack_serialize(
-        read_jni_string(&env, query).and_then(core::exec_rdf_query),
+        read_jni_string(&env, query).and_then(|queryString| {
+            read_jni_string(&env, appPath)
+                .and_then(|appPathString| exec_rdf_query(queryString, appPathString))
+        }),
     ))
     .unwrap()
 }
@@ -219,9 +224,13 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfUpdate(
     env: JNIEnv,
     _: JClass,
     query: JString,
+    appPath: JString,
 ) -> jbyteArray {
     env.byte_array_from_slice(&message_pack_serialize(
-        read_jni_string(&env, query).and_then(core::exec_rdf_update),
+        read_jni_string(&env, query).and_then(|queryString| {
+            read_jni_string(&env, appPath)
+                .and_then(|appPathString| exec_rdf_update(queryString, appPathString))
+        }),
     ))
     .unwrap()
 }

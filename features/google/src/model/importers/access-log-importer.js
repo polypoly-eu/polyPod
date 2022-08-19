@@ -21,13 +21,11 @@ class AccessLogParser {
     }
 
     async parse(entry) {
-        console.log(`AccessLogParser: Decoding entry at path: ${entry.path}`);
         const content = await entry.getContent();
         const text = await new TextDecoder("utf-8").decode(content);
         const data = this._dataFromCsv(text);
         const pathParts = entry.path.split("/");
         const fileName = pathParts[pathParts.length - 2];
-        console.log(`AccessLogParser: Decoded entry at path: ${entry.path}`);
 
         return {
             csvData: data,

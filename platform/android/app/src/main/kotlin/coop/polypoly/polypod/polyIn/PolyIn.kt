@@ -104,11 +104,11 @@ open class PolyIn(
     }
 
     open fun query(query: String): Value {
-        return Core.execRdfQuery(query)
+        return Core.execRdfQuery(query, context?.filesDir.toString())
     }
 
     open fun update(query: String) {
-        return Core.execRdfUpdate(query)
+        return Core.execRdfUpdate(query, context?.filesDir.toString())
     }
 
     private fun getDatabase(file: File): EncryptedFile {
