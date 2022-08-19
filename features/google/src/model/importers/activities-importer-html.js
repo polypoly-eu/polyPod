@@ -18,6 +18,14 @@ class ActivityHtmlParser {
         // Feb 3, 2001, 4:05:06 PM UTC
         // 03.02.2001, 16:05:06 UTC
 
+        let date = new Date(text);
+
+        if (date && date !== null && date.toString() !== "Invalid Date") {
+            return date;
+        }
+
+        date = null;
+
         const datePatterns = [
             /([A-Z][a-z][a-z]) ([0-9]{1,2}), ([0-9]{4,4}), ([0-9:]{7,8} [A|P]M) ([A-Z]{3,4})/,
             /([0-9]{1,2}) ([A-Z][a-z][a-z]) ([0-9]{4,4}), ([0-9:]{8,8}) ([A-Z]{3,4})/,
@@ -72,8 +80,6 @@ class ActivityHtmlParser {
             11: "Nov",
             12: "Dec",
         };
-
-        let date = null;
 
         for (let index = 0; index < datePatterns.length; index++) {
             const match = text.match(datePatterns[index]);
