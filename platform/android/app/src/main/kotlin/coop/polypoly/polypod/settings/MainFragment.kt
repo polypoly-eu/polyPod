@@ -2,8 +2,8 @@ package coop.polypoly.polypod.settings
 
 import android.os.Bundle
 import androidx.navigation.findNavController
-import androidx.preference.Preference
 import androidx.preference.DropDownPreference
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import coop.polypoly.core.Core
@@ -21,7 +21,7 @@ class MainFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.settings, rootKey)
         findPreference<Preference>("version")?.summary = RuntimeInfo.VERSION
 
-   val timeoutOptionsConfig = Core.getUserSessionTimeoutOptionsConfig()
+        val timeoutOptionsConfig = Core.getUserSessionTimeoutOptionsConfig()
         val selectedOption = Core.getUserSessionTimeoutOption()
         val timeoutDurationsMap: LinkedHashMap<String, String> = linkedMapOf()
         timeoutOptionsConfig.forEach {

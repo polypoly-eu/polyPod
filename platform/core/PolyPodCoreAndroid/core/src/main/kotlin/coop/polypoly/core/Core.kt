@@ -31,8 +31,6 @@ class Core {
         fun execRdfUpdate(query: String, appPath: String) {
             return handleCoreResponse(
                 JniApi().execRdfUpdate(query, appPath)
-<<<<<<< HEAD
-=======
             )
         }
 
@@ -64,7 +62,6 @@ class Core {
         fun setUserSessionTimeoutOption(option: UserSessionTimeoutOption) {
             return handleCoreResponse(
                 JniApi.setUserSessionTimeoutOption(option.asValue().pack())
->>>>>>> rdf
             ) {}
         }
 

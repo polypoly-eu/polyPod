@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
         FeatureStorage.importFeatures(this)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
-    
+
         val notification = UpdateNotification(this)
         notification.handleStartup()
 
