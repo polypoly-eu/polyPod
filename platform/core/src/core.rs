@@ -113,10 +113,6 @@ pub fn load_feature_categories(
     )
 }
 
-<<<<<<< HEAD
-=======
-#[cfg(target_os = "android")]
->>>>>>> rdf
 pub fn exec_rdf_query(query: SPARQLQuery, app_path: String) -> Result<String, CoreFailure> {
     rdf_query(query, app_path).map_err(CoreFailure::map_rdf_to_core_failure)
 }
