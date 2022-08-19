@@ -118,19 +118,23 @@ class HomeScreenViewModel {
         context: Context,
         file: File
     ): Bitmap? {
-        if (file.path.endsWith(".pdf")) {
-            return PDFBitmap
-                .bitmapFromPDF(
-                    file,
-                    context.resources.displayMetrics.densityDpi
-                )
-        } else {
-            val options = BitmapFactory.Options()
-            // For now, we assume all thumbnails are xhdpi, i.e. 2x scale factor
-            options.inDensity = DisplayMetrics.DENSITY_XHIGH
-            file.inputStream().use {
-                return BitmapFactory.decodeStream(it, null, options)
+        try {
+            if (file.path.endsWith(".pdf")) {
+                return PDFBitmap
+                    .bitmapFromPDF(
+                        file,
+                        context.resources.displayMetrics.densityDpi
+                    )
+            } else {
+                val options = BitmapFactory.Options()
+                // For now, we assume all thumbnails are xhdpi, i.e. 2x scale factor
+                options.inDensity = DisplayMetrics.DENSITY_XHIGH
+                file.inputStream().use {
+                    return BitmapFactory.decodeStream(it, null, options)
+                }
             }
+        } catch (ex: Exception) {
+            return null
         }
     }
 }
