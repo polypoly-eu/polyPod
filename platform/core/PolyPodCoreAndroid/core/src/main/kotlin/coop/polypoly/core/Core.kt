@@ -31,6 +31,40 @@ class Core {
         fun execRdfUpdate(query: String, appPath: String) {
             return handleCoreResponse(
                 JniApi().execRdfUpdate(query, appPath)
+<<<<<<< HEAD
+=======
+            )
+        }
+
+        fun appDidBecomeInactive() {
+            return handleCoreResponse(
+                JniApi.appDidBecomeInactive()
+            ) {}
+        }
+
+        fun isUserSessionExpired(): Boolean {
+            return handleCoreResponse(
+                JniApi.isUserSessionExpired()
+            ) { it.asBooleanValue().boolean }
+        }
+
+        fun getUserSessionTimeoutOption(): UserSessionTimeoutOption {
+            return handleCoreResponse(
+                JniApi.getUserSessionTimeoutOption()
+            ) { UserSessionTimeoutOption.from(it) }
+        }
+
+        fun getUserSessionTimeoutOptionsConfig():
+            List<UserSessionTimeoutOptionConfig> {
+            return handleCoreResponse(
+                JniApi.getUserSessionTimeoutOptionsConfig()
+            ) { UserSessionTimeoutOptionConfig.mapConfigs(it) }
+        }
+
+        fun setUserSessionTimeoutOption(option: UserSessionTimeoutOption) {
+            return handleCoreResponse(
+                JniApi.setUserSessionTimeoutOption(option.asValue().pack())
+>>>>>>> rdf
             ) {}
         }
 
