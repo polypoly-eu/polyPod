@@ -1,8 +1,6 @@
+use crate::rdf_failure::RdfFailure;
 use serde::{Deserialize, Serialize};
 use url::Url;
-
-#[cfg(target_os = "android")]
-use crate::rdf_failure::RdfFailure;
 
 #[derive(Debug, Clone, Serialize)]
 pub enum FailureCode {
@@ -81,7 +79,6 @@ impl CoreFailure {
         }
     }
 
-    #[cfg(target_os = "android")]
     pub fn map_rdf_to_core_failure(error: RdfFailure) -> Self {
         CoreFailure {
             code: error.code,

@@ -11,8 +11,6 @@ pub mod feature_file_system;
 pub mod ffi;
 mod io;
 mod preferences;
-#[cfg(target_os = "android")]
 pub mod rdf;
-#[cfg(target_os = "android")]
 pub mod rdf_failure;
 mod user_session;

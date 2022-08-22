@@ -1,6 +1,8 @@
-use oxigraph::{sparql::EvaluationError, store::StorageError};
+use oxigraph::{
+    sparql::{EvaluationError, ParseError},
+    store::StorageError,
+};
 use serde::Serialize;
-use spargebra::ParseError;
 use std::str::Utf8Error;
 
 #[derive(Debug, Clone, Serialize)]
