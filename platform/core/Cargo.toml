@@ -20,9 +20,7 @@ sled = "0.34.7"
 url="2.2.2"
 zip = "0.6.2"
 tempfile = "3.3.0"
-oxigraph = { git = "https://github.com/oxigraph/oxigraph", version = "0.3.6" }
-spargebra = "0.2.1"
-sparesults = "0.1.1"
+poly_rdf = { path = "poly-rdf"}
 [dependencies.uuid]
 version = "1.1.2"
 features = [

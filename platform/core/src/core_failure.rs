@@ -1,4 +1,4 @@
-use crate::rdf_failure::RdfFailure;
+use poly_rdf::rdf_failure::RdfFailure;
 use serde::{Deserialize, Serialize};
 use url::Url;
 

@@ -11,6 +11,4 @@ pub mod feature_file_system;
 pub mod ffi;
 mod io;
 mod preferences;
-pub mod rdf;
-pub mod rdf_failure;
 mod user_session;

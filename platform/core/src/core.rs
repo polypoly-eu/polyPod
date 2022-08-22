@@ -3,11 +3,11 @@ use crate::{
     feature_categories,
     io::{file_system::DefaultFileSystem, key_value_store::DefaultKeyValueStore},
     preferences::Preferences,
-    rdf::{rdf_query, rdf_update, SPARQLQuery},
     user_session::{TimeoutOption, UserSession, UserSessionTimeout},
 };
 
 use once_cell::sync::OnceCell;
+use poly_rdf::rdf::{rdf_query, rdf_update, SPARQLQuery};
 use serde::{Deserialize, Serialize};
 use std::sync::{Arc, Mutex};
 use std::{sync::MutexGuard, time::Instant};
