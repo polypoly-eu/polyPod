@@ -104,7 +104,7 @@ define copy_android_arch
    mkdir -p $(jni_libs_copy_path)/$2
    cp target/$1/$(build_type)/libpolypod_core.so \
 	  $(jni_libs_copy_path)/$2/libpolypod_core.so;
-   cp ${NDK_HOME}/toolchains/llvm/prebuilt/*/sysroot/usr/lib/$1/libc++_shared.so \
+   cp ${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/*/sysroot/usr/lib/$1/libc++_shared.so \
 	   $(jni_libs_copy_path)/$2/libc++_shared.so;
 endef
 
