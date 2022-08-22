@@ -18,6 +18,13 @@
     "poly-explorer-feature": "file:../polyExplorer",
     "poly-talk-preview": "file:../polyTalkPreview",
     "polypedia-preview": "file:../polypediaPreview",
+    "amazon-data-importer-preview": "file:../amazonDataImporterPreview",
+    "company-data-cleaner-preview": "file:../companyDataCleanerPreview",
+    "cooperative-membership-preview": "file:../cooperativeMembershipPreview",
+    "feature-store-preview": "file:../featureStorePreview",
+    "gdpr-data-importer-preview": "file:../gdprDataImporterPreview",
+    "netflix-data-importer-preview": "file:../netflixDataImporterPreview",
+    "polypoly-membership-feature": "file:../polypolyMembership",
     "polypoly-membership-preview": "file:../polypolyMembershipPreview",
     "test-feature": "file:../test"
   },
@@ -31,6 +38,11 @@
     {
       "archiveName": "cooperativeMembershipPreview",
       "moduleName": "cooperative-membership-preview",
+      "artifactPath": "dist"
+    },
+    {
+      "archiveName": "polypolyMembership",
+      "moduleName": "polypoly-membership-feature",
       "artifactPath": "dist"
     },
     {
@@ -106,6 +118,7 @@
       "features": [
         "google",
         "facebookImport",
+        "polypolyMembership",
         "amazonPreview",
         "NetflixImportPreview",
         "gdprImporterPreview",

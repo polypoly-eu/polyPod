@@ -96,7 +96,7 @@ const Import = () => {
         runWithLoadingScreen(async function () {
             try {
                 await polyOut.importArchive(selectedFile.url);
-                refreshFiles();
+                await refreshFiles();
                 setSelectedFile(null);
             } catch (error) {
                 setGlobalError(new FileImportError(error));

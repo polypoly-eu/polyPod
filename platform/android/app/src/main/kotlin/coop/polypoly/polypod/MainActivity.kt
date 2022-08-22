@@ -4,6 +4,10 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ProcessLifecycleOwner
 import coop.polypoly.core.Core
 import coop.polypoly.core.CoreExceptionCode
 import coop.polypoly.core.CoreFailure
@@ -12,7 +16,7 @@ import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 
 @ExperimentalUnsignedTypes
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), LifecycleEventObserver {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
@@ -24,8 +28,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val language = Language.determine(this@MainActivity)
+        val fsRoot = this@MainActivity.filesDir
         try {
-            Core.bootstrapCore(language)
+            Core.bootstrapCore(language, fsRoot.path)
             logger.info("Core is bootstrapped!")
         } catch (ex: Exception) {
             logger.info(ex.message)
@@ -38,13 +43,11 @@ class MainActivity : AppCompatActivity() {
             throw ex
         }
 
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+
         FeatureStorage.importFeatures(this)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
-    }
-
-    override fun onResume() {
-        super.onResume()
 
         val notification = UpdateNotification(this)
         notification.handleStartup()
@@ -74,6 +77,30 @@ class MainActivity : AppCompatActivity() {
                     notification.handleInAppSeen()
                 }
                 .show()
+        }
+    }
+
+    override fun onStateChanged(
+        source: LifecycleOwner,
+        event: Lifecycle.Event
+    ) {
+        when (event) {
+            Lifecycle.Event.ON_STOP,
+            Lifecycle.Event.ON_DESTROY -> Core.appDidBecomeInactive()
+            Lifecycle.Event.ON_RESUME -> {
+                if (
+                    Authentication.canAuthenticate(this) &&
+                    Core.isUserSessionExpired()
+                ) {
+                    startActivity(
+                        Intent(
+                            this,
+                            PodUnlockActivity::class.java
+                        )
+                    )
+                }
+            }
+            else -> {}
         }
     }
 }

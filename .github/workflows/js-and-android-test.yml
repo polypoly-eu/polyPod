@@ -79,7 +79,6 @@ jobs:
         if: steps.changes.outputs.android == 'true'
         working-directory: platform/core
         run: |
-          export NDK_HOME=$ANDROID_NDK_LATEST_HOME
           make android_bindings
       - name: Test android
         if: steps.changes.outputs.android == 'true'

@@ -12,10 +12,97 @@ class ActivityHtmlParser {
     _extractDate(text) {
         // Ignoring the timestamp for now - we don't need hourly accuracy at the
         // time of writing this.
-        const datePattern =
-            /[0-9]{1,2} [A-Z][a-z][a-z] [0-9]{4,4}, [0-9:]{8,8}/;
-        const dateString = text.match(datePattern)?.[0];
-        return dateString ? new Date(dateString) : null;
+
+        // Known formats:
+        // 3 Feb 2001, 16:05:06 UTC
+        // Feb 3, 2001, 4:05:06 PM UTC
+        // 03.02.2001, 16:05:06 UTC
+
+        let date = new Date(text);
+
+        if (date && date !== null && date.toString() !== "Invalid Date") {
+            return date;
+        }
+
+        date = null;
+
+        const datePatterns = [
+            /([A-Z][a-z][a-z]) ([0-9]{1,2}), ([0-9]{4,4}), ([0-9:]{7,8} [A|P]M) ([A-Z]{3,4})/,
+            /([0-9]{1,2}) ([A-Z][a-z][a-z]) ([0-9]{4,4}), ([0-9:]{8,8}) ([A-Z]{3,4})/,
+            /([0-9]{1,2}).([0-9]{1,2}).([0-9]{4,4}), ([0-9:]{8,8}) ([A-Z]{3,4})/,
+        ];
+
+        // Add +1 to the index because the entire matched string will be at index 0 in match.
+        const dateMaps = [
+            {
+                day: 2,
+                month: 1,
+                year: 3,
+                time: 4,
+                timezone: 5,
+            },
+            {
+                day: 1,
+                month: 2,
+                year: 3,
+                time: 4,
+                timezone: 5,
+            },
+            {
+                day: 1,
+                month: 2,
+                year: 3,
+                time: 4,
+                timezone: 5,
+            },
+        ];
+
+        const month2Name = {
+            "01": "Jan",
+            1: "Jan",
+            "02": "Feb",
+            2: "Feb",
+            "03": "Mar",
+            3: "Mar",
+            "04": "Apr",
+            0: "Apr",
+            "05": "May",
+            5: "May",
+            "06": "Jun",
+            6: "Jun",
+            "07": "Jul",
+            7: "Jul",
+            "08": "Aug",
+            8: "Aug",
+            "09": "Sep",
+            9: "Sep",
+            10: "Oct",
+            11: "Nov",
+            12: "Dec",
+        };
+
+        for (let index = 0; index < datePatterns.length; index++) {
+            const match = text.match(datePatterns[index]);
+            if (match && match.length > 0) {
+                const day = match[dateMaps[index]["day"]];
+                let month = match[dateMaps[index]["month"]];
+                const year = match[dateMaps[index]["year"]];
+
+                if (!isNaN(parseInt(month))) {
+                    month = month2Name[month];
+                }
+
+                const dateString = `${day} ${month} ${year}`;
+                date = new Date(dateString);
+                break;
+            }
+        }
+
+        if (!date || date === null || date.toString() === "Invalid Date") {
+            console.log(`Error: Unable to parse date format ${text}`);
+        }
+
+        return date;
     }
 
     _scrapeTimestamps(contentDocument, productName) {
@@ -34,6 +121,9 @@ class ActivityHtmlParser {
     }
 
     async parse(entry) {
+        console.log(
+            `ActivityHtmlParser: Decoding entry at path: ${entry.path}`
+        );
         const content = await entry.getContent();
         const text = await new TextDecoder("utf-8").decode(content);
         const { contentDocument } = this._iframe;
@@ -42,6 +132,9 @@ class ActivityHtmlParser {
         const fileSize = convertFileSizeUnit(content.byteLength);
         const pathParts = entry.path.split("/");
         const productName = pathParts[pathParts.length - 2];
+        console.log(
+            `ActivityHtmlParser: Decoded entry at path: ${entry.path}, fileSize: ${fileSize}`
+        );
         return {
             userActivity: this._scrapeTimestamps(contentDocument, productName),
             fileInfo: new ActivityFileInfo({

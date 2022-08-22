@@ -45,6 +45,9 @@
 "re_auth_prompt_set_up" = "Bitte authentifizieren Sie sich erneut";
 
 "auth_prompt_unlock" = "Einloggen in polyPod";
+"screen_lock_inactivity_timeout_entry" = "Inaktivitätszeit für Sperrbildschirm";
+"screen_lock_inactivity_no_timeout" = "kein Zeitlimit";
+"screen_lock_inactivity_timeout_duration %d" = "%d Minuten";
 
 "homescreen_footer_title" = "Eigentlich ganz charmant, was wir hier machen? Das können Sie auch!";
 "homescreen_footer_description" = "Werden Sie Mitglied in der polypoly Genossenschaft und somit Miteigentümer:in an der Technologie – dem polyPod. Nehmen Sie direkten Einfluss auf die Entwicklung und tragen Ihren Teil zu einer nachhaltigen, sozialen und unabhängigen Datenökonomie für Europa bei.";

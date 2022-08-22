@@ -377,7 +377,7 @@ class IDBPolyOut implements PolyOut {
                 reject(`${destUrl} is not a polypod:// URI`);
             }
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            const id = destUrl || new PolyUri().toString;
+            const id = destUrl || new PolyUri().toString();
 
             tx.objectStore(OBJECT_STORE_POLY_OUT).add({
                 id,

@@ -25,6 +25,7 @@
         "features/polyTalkPreview",
         "features/polypediaPreview",
         "features/cooperativeMembershipPreview",
+        "features/polypolyMembership",
         "features/polypolyMembershipPreview",
         "features/gdprDataImporterPreview",
         "features/companyDataCleanerPreview",

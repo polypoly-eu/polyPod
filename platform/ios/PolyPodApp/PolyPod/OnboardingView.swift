@@ -26,6 +26,7 @@ struct OnboardingView: View {
             }
         }
         .background(Color.PolyPod.lightBackground)
+        .accessibilityIdentifier("onboarding_view")
     }
 
     private func createSlides() -> [Slide] {

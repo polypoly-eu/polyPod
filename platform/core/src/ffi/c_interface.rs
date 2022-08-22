@@ -1,9 +1,9 @@
+use crate::common::serialization::{message_pack_deserialize, message_pack_serialize};
 use crate::core_failure::CoreFailure;
-use crate::ffi::serialize;
 use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
-use crate::core;
+use crate::core::{self, PlatformRequest, PlatformResponse};
 use std::os::raw::c_char;
 
 /// # Safety
@@ -16,12 +16,27 @@ use std::os::raw::c_char;
 /// - language_code: User's locale language code.
 /// Returns a flatbuffer byte array with core_bootstrap_response.
 #[no_mangle]
-pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> CByteBuffer {
-    create_byte_buffer(serialize(
-        cstring_to_str(&language_code)
-            .map(String::from)
-            .and_then(core::bootstrap),
-    ))
+pub unsafe extern "C" fn core_bootstrap(
+    language_code: *const c_char,
+    fs_root: *const c_char,
+    bridge: BridgeToPlatform,
+) -> CByteBuffer {
+    fn bootstrap(
+        language_code: *const c_char,
+        fs_root: *const c_char,
+        bridge: BridgeToPlatform,
+    ) -> Result<(), CoreFailure> {
+        unsafe {
+            let language_code = String::from(cstring_to_str(&language_code)?);
+            let fs_root = String::from(cstring_to_str(&fs_root)?);
+            core::bootstrap(language_code, fs_root, Box::new(bridge))
+        }
+    }
+    create_byte_buffer(message_pack_serialize(bootstrap(
+        language_code,
+        fs_root,
+        bridge,
+    )))
 }
 
 /// # Safety
@@ -32,8 +47,63 @@ pub unsafe extern "C" fn core_bootstrap(language_code: *const c_char) -> CByteBu
 /// Returns Result<Vec<FeatureCategory>, CoreFailure> as MessagePack value.
 #[no_mangle]
 pub unsafe extern "C" fn load_feature_categories(features_dir: *const c_char) -> CByteBuffer {
-    create_byte_buffer(serialize(
+    create_byte_buffer(message_pack_serialize(
         cstring_to_str(&features_dir).and_then(core::load_feature_categories),
+    ))
+}
+
+/// Notify that app did become inactive.
+/// Returns Result<(), CoreFailure> as MessagePack value.
+#[no_mangle]
+pub unsafe extern "C" fn app_did_become_inactive() -> CByteBuffer {
+    create_byte_buffer(message_pack_serialize(core::app_did_become_inactive()))
+}
+
+/// Ask if user session is expired.
+/// Returns Result<bool, CoreFailure> as MessagePack value.
+#[no_mangle]
+pub unsafe extern "C" fn is_user_session_expired() -> CByteBuffer {
+    create_byte_buffer(message_pack_serialize(core::is_user_session_expired()))
+}
+
+/// Set the user session timeout option to a given one.
+/// - option: Timeout Option as MessagePack value.
+/// - free_bytes: A callback function to be used to free bytes.
+/// Returns Result<(), CoreFailure> as MessagePack value.
+#[no_mangle]
+pub unsafe extern "C" fn set_user_session_timeout_option(
+    option: CByteBuffer,
+    free_bytes: extern "C" fn(bytes: *mut u8),
+) -> CByteBuffer {
+    fn set_timeout_option(
+        option: CByteBuffer,
+        free_bytes: extern "C" fn(bytes: *mut u8),
+    ) -> Result<(), CoreFailure> {
+        let bytes = unsafe { byte_buffer_to_bytes(&option)? };
+        free_bytes(option.data);
+        core::set_user_session_timeout_option(message_pack_deserialize(bytes)?)?;
+        Ok(())
+    }
+    create_byte_buffer(message_pack_serialize(set_timeout_option(
+        option, free_bytes,
+    )))
+}
+
+/// Get the currently configured user session timeout option.
+/// Returns Result<TimeoutOption, CoreFailure> as MessagePack value.
+#[no_mangle]
+pub unsafe extern "C" fn get_user_session_timeout_option() -> CByteBuffer {
+    create_byte_buffer(message_pack_serialize(
+        core::get_user_session_timeout_option(),
+    ))
+}
+
+/// Get the user session timeout config options.
+/// Returns Result<Vec<UserSessionTimeout>, CoreFailure> as MessagePack value.
+#[no_mangle]
+pub unsafe extern "C" fn get_user_session_timeout_options_config() -> CByteBuffer {
+    create_byte_buffer(message_pack_serialize(
+        core::get_user_session_timeout_options_config(),
     ))
 }
 
@@ -69,5 +139,33 @@ unsafe fn create_byte_buffer(bytes: Vec<u8>) -> CByteBuffer {
     CByteBuffer {
         length: slice.len() as c_uint,
         data: Box::into_raw(slice) as *mut u8,
+    }
+}
+
+unsafe fn byte_buffer_to_bytes(buffer: &CByteBuffer) -> Result<Vec<u8>, CoreFailure> {
+    let length: usize = buffer
+        .length
+        .try_into()
+        .map_err(|_| CoreFailure::failed_to_read_byte_buffer_length())?;
+    let slice = std::slice::from_raw_parts(buffer.data, length);
+    Ok(slice.to_vec())
+}
+
+#[repr(C)]
+pub struct BridgeToPlatform {
+    free_bytes: extern "C" fn(bytes: *mut u8),
+    perform_request: extern "C" fn(request: CByteBuffer) -> CByteBuffer,
+}
+
+impl core::PlatformHookRequest for BridgeToPlatform {
+    fn perform_request(&self, request: PlatformRequest) -> Result<PlatformResponse, CoreFailure> {
+        let request_byte_buffer = unsafe { create_byte_buffer(message_pack_serialize(request)) };
+        let response_byte_buffer = (self.perform_request)(request_byte_buffer);
+        let bytes = unsafe { byte_buffer_to_bytes(&response_byte_buffer)? };
+        // deserialize returns Result<Result<PlatformResponse, String>>
+        // so don't forget the ? at the end in the next line.
+        let response: Result<PlatformResponse, CoreFailure> = message_pack_deserialize(bytes)?;
+        (self.free_bytes)(response_byte_buffer.data);
+        return response;
     }
 }

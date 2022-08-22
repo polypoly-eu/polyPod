@@ -3,14 +3,14 @@ use crate::io::file_system::FileSystem;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-#[derive(PartialEq, Debug, Clone, Serialize)]
+#[derive(PartialEq, Eq, Debug, Clone, Serialize)]
 pub struct FeatureCategory {
     pub id: FeatureCategoryId,
     pub name: String,
     pub features: Vec<Feature>,
 }
 
-#[derive(PartialEq, Debug, Deserialize, Serialize, Clone)]
+#[derive(PartialEq, Eq, Debug, Deserialize, Serialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub enum FeatureCategoryId {
     YourData,
@@ -19,7 +19,7 @@ pub enum FeatureCategoryId {
     Developer,
 }
 
-#[derive(PartialEq, Debug, Clone, Serialize)]
+#[derive(PartialEq, Eq, Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Feature {
     pub path: String,
@@ -97,7 +97,7 @@ fn load_raw_categories(
     features_dir: &str,
 ) -> Result<Vec<DecodedFeatureCategory>, CoreFailure> {
     let categories_json_path = categories_json_path_format(features_dir);
-    let categories_bytes = fs.read_contents_of_file(categories_json_path.as_str())?;
+    let categories_bytes = fs.file_content(categories_json_path.as_str())?;
     serde_json::from_slice(&categories_bytes)
         .map_err(|err| CoreFailure::failed_to_decode_feature_categories_json(err.to_string()))
 }
@@ -140,7 +140,7 @@ fn load_feature_manifest(
     id: &str,
 ) -> Result<DecodedFeatureManifest, CoreFailure> {
     let manifest_json_path = feature_manifest_json_path_format(features_dir, id);
-    let manifest_bytes = fs.read_contents_of_file(manifest_json_path.as_str())?;
+    let manifest_bytes = fs.file_content(manifest_json_path.as_str())?;
 
     serde_json::from_slice(&manifest_bytes)
         .map_err(|err| CoreFailure::failed_to_parse_feature_manifest(err.to_string()))
@@ -236,11 +236,51 @@ mod tests {
     }
 
     impl FileSystem for MockFileSystem {
-        fn read_contents_of_file(&self, path: &str) -> Result<Vec<u8>, CoreFailure> {
+        fn file_content(&self, path: &str) -> Result<Vec<u8>, CoreFailure> {
             self.contents_of_file_requests_stub
                 .get(path)
                 .unwrap()
                 .clone()
+        }
+        #[allow(unused_variables)]
+        fn copy(&self, from_file_path: &str, to_file_path: &str) -> Result<(), CoreFailure> {
+            Ok(())
+        }
+        #[allow(unused_variables)]
+        fn create_dir_structure(&self, path: &str) -> Result<(), CoreFailure> {
+            Ok(())
+        }
+        #[allow(unused_variables)]
+        fn exists(&self, path: &str) -> bool {
+            true
+        }
+        #[allow(unused_variables)]
+        fn unzip(&self, from_url: &str, to_path: &str) -> Result<(), CoreFailure> {
+            Ok(())
+        }
+        #[allow(unused_variables)]
+        fn is_directory(&self, path: &str) -> bool {
+            true
+        }
+        #[allow(unused_variables)]
+        fn size(&self, path: &str) -> Result<String, CoreFailure> {
+            Ok("0".to_string())
+        }
+        #[allow(unused_variables)]
+        fn time_modified(&self, path: &str) -> Result<String, CoreFailure> {
+            Ok("0".to_string())
+        }
+        #[allow(unused_variables)]
+        fn remove(&self, path: &str) -> Result<(), CoreFailure> {
+            Ok(())
+        }
+        #[allow(unused_variables)]
+        fn dir_children(&self, dir_path: &str) -> Result<Vec<String>, CoreFailure> {
+            Ok(vec!["".to_string()])
+        }
+        #[allow(unused_variables)]
+        fn name(&self, path: &str) -> Result<String, CoreFailure> {
+            Ok("".to_string())
         }
     }
 

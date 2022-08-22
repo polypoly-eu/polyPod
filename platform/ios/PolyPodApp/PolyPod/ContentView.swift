@@ -58,6 +58,47 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity, maxHeight: safeAreaInsets.bottom)
         }
         .edgesIgnoringSafeArea([.top, .bottom])
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
+            _ = Core
+                .instance
+                .appDidBecomeInactive()
+                .inspectError({ error in
+                    Log.error("Failed to notify core that app did become inactive \(error)")
+                })
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+            checkIfUserSessionDidExpire()
+        }
+    }
+
+    private func checkIfUserSessionDidExpire() {
+        if !Authentication.shared.shouldShowPrompt() {
+            let isExpired = Core
+                .instance
+                .isUserSessionExpired()
+                .inspectError({ error in
+                    Log.error("Failed to retrieve user session status \(error)")
+                })
+                .unwrapOr(true)
+            if isExpired {
+                self.state = ViewState(
+                    AnyView(
+                        UnlockPolyPod(onCompleted: {
+                            // Checking whether a notification needs to be shown
+                            // used to be in featureListState, where it makes more
+                            // sense, but ever since we added a dedicated
+                            // lockedState, they wouldn't show up anymore, the
+                            // state change in featureListState's onAppear did not
+                            // trigger a rerender, even though it should.
+                            // Yet another SwiftUI bug it seems...
+                            showUpdateNotification = UpdateNotification().showInApp
+
+                            state = featureListState()
+                        })
+                    )
+                )
+            }
+        }
     }
 
     private func initState() -> ViewState {
@@ -135,13 +176,11 @@ struct ContentView: View {
                         guard let feature = featureStorage.featureForId(featureId) else {
                             return
                         }
+                        Log.info("Navigation: Opened \(featureId) feature.")
                         state = featureState(feature)
                     },
                     openInfoAction: {
                         state = infoState()
-                    },
-                    openSettingsAction: {
-                        state = settingsState()
                     }
                 ).alert(isPresented: $showUpdateNotification) {
                     Alert(
@@ -182,16 +221,6 @@ struct ContentView: View {
                         state = featureListState()
                     }
                 )
-            )
-        )
-    }
-
-    private func settingsState() -> ViewState {
-        ViewState(
-            AnyView(
-                SettingsView(closeAction: {
-                    state = featureListState()
-                })
             )
         )
     }

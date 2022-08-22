@@ -43,6 +43,9 @@
 "re_auth_prompt_set_up" = "Re-authorize authentication";
 
 "auth_prompt_unlock" = "Log in to your polyPod";
+"screen_lock_inactivity_timeout_entry" = "Screen lock inactivity timeout";
+"screen_lock_inactivity_no_timeout" = "No timeout";
+"screen_lock_inactivity_timeout_duration %d" = "%d minutes";
 
 "homescreen_footer_title" = "Charmed by what we are doing? You can join too!";
 "homescreen_footer_description" = "Become a member of the polypoly Cooperative and thus co-owner of the technology – the polyPod. Have a direct influence on the development and contribute to a sustainable, social and independent data economy for Europe.";
