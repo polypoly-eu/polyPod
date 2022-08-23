@@ -6,14 +6,63 @@ import org.msgpack.value.Value
 
 class Core {
     companion object {
-        fun bootstrapCore(languageCode: String) {
-            return handleCoreResponse(JniApi().bootstrapCore(languageCode)) {}
+        fun bootstrapCore(languageCode: String, fsRoot: String) {
+            return handleCoreResponse(
+                JniApi.bootstrapCore(
+                    languageCode,
+                    fsRoot,
+                    JniApi
+                )
+            ) {}
         }
 
-        fun parseFeatureManifest(json: String): FeatureManifest {
+        fun loadFeatureCategories(featuresDir: String): List<FeatureCategory> {
             return handleCoreResponse(
-                JniApi().parseFeatureManifest(json)
-            ) { mapFeatureManifest(it) }
+                JniApi.loadFeatureCategories(featuresDir)
+            ) { mapFeatureCategories(it) }
+        }
+
+        fun execRdfQuery(query: String): Value {
+            return handleCoreResponse(
+                JniApi.execRdfQuery(query)
+            ) { it }
+        }
+
+        fun execRdfUpdate(query: String) {
+            return handleCoreResponse(
+                JniApi.execRdfUpdate(query)
+            ) {}
+        }
+
+        fun appDidBecomeInactive() {
+            return handleCoreResponse(
+                JniApi.appDidBecomeInactive()
+            ) {}
+        }
+
+        fun isUserSessionExpired(): Boolean {
+            return handleCoreResponse(
+                JniApi.isUserSessionExpired()
+            ) { it.asBooleanValue().boolean }
+        }
+
+        fun getUserSessionTimeoutOption(): UserSessionTimeoutOption {
+            return handleCoreResponse(
+                JniApi.getUserSessionTimeoutOption()
+            ) { UserSessionTimeoutOption.from(it) }
+        }
+
+        fun getUserSessionTimeoutOptionsConfig():
+            List<UserSessionTimeoutOptionConfig> {
+            return handleCoreResponse(
+                JniApi.getUserSessionTimeoutOptionsConfig()
+            ) { UserSessionTimeoutOptionConfig.mapConfigs(it) }
+        }
+
+        fun setUserSessionTimeoutOption(option: UserSessionTimeoutOption) {
+            return handleCoreResponse(
+                JniApi.setUserSessionTimeoutOption(option.asValue().pack())
+            ) {}
         }
 
         private fun <T> handleCoreResponse(

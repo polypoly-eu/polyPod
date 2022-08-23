@@ -2,7 +2,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
-import { wasm } from '@rollup/plugin-wasm';
+import { wasm } from "@rollup/plugin-wasm";
 
 const common = {
     plugins: [
@@ -13,7 +13,7 @@ const common = {
             exclude: ["node_modules/**"],
             transforms: ["typescript"],
         }),
-        wasm({targetEnv: "auto-inline"}),
+        wasm({ targetEnv: "auto-inline" }),
     ],
     context: "window",
 };
@@ -41,6 +41,6 @@ export default [
                 file: "dist/pod.js",
                 format: "iife",
             },
-        ]
+        ],
     },
 ];

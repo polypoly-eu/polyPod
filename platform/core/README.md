@@ -4,7 +4,7 @@ Logic shared across polyPod platforms: iOS and Android.
 
 ## Requirements
 
--   [Rust toolchain](https://www.rust-lang.org/tools/install). Core is built with Rust 1.58.1.
+-   [Rust toolchain](https://www.rust-lang.org/tools/install). Core is built with Rust 1.63.0.
 -   The build prerequisites for [FlatBuffers](https://github.com/google/flatbuffers), currently primarily a C++ toolchain.
 
 ## Building
@@ -25,6 +25,8 @@ make ios_bindings
 ```
 
 - Building android core:
+
+    Prerequisite: You should install NDK (it is recommended to use Android Studio for installing it). Version r25 should be installed. Make sure that either `NDK_HOME` or `ANDROID_NDK_HOME`(specifying the path to NDK) is exported as an environment variable on your system.
 
 ```shell
 make android_bindings

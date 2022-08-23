@@ -59,4 +59,8 @@
     <string name="homescreen_footer_description">Werden Sie Mitglied in der polypoly Genossenschaft und somit Miteigentümer:in an der Technologie – dem polyPod. Nehmen Sie direkten Einfluss auf die Entwicklung und tragen Ihren Teil zu einer nachhaltigen, sozialen und unabhängigen Datenökonomie für Europa bei.</string>
     <string name="homescreen_footer_button_title">Ich bin dabei!</string>
     <string name="homescreen_footer_button_open_url">https://polypoly.coop/de-de/becomepart</string>
+
+    <string name="screen_lock_inactivity_timeout_entry">"Inaktivitätszeit für Sperrbildschirm"</string>
+    <string name="screen_lock_inactivity_no_timeout">"kein Zeitlimit"</string>;
+    <string name="screen_lock_inactivity_timeout_duration">"%d Minuten"</string>
 </resources>

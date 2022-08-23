@@ -15,17 +15,18 @@ class Authentication {
             BiometricManager.Authenticators.BIOMETRIC_WEAK or
                 BiometricManager.Authenticators.DEVICE_CREDENTIAL
 
-        fun shouldShowBiometricsPrompt(context: Context): Boolean {
+        fun shouldShowAuthOnboarding(context: Context): Boolean {
             return biometricsAvailable(context) &&
-                Preferences.isBiometricCheck(context) &&
+                !Preferences.hasUserConfiguredAuthentication(context) &&
+                !Preferences.isSecurityDoNotAskAgainEnabled(context) &&
                 !Preferences.isBiometricEnabled(context) &&
                 !Preferences.isFirstRun(context)
         }
 
-        fun shouldAuthenticate(context: Context): Boolean {
+        fun canAuthenticate(context: Context): Boolean {
             return biometricsAvailable(context) &&
                 Preferences.isBiometricEnabled(context) &&
-                !isAuthenticated
+                Preferences.hasUserConfiguredAuthentication(context)
         }
 
         fun setUp(
@@ -44,6 +45,12 @@ class Authentication {
                         activity,
                         newBiometricState
                     )
+                    if (newBiometricState) {
+                        Preferences.setUserConfiguredAuthentication(
+                            activity.applicationContext,
+                            true
+                        )
+                    }
                 }
                 setupComplete()
             }

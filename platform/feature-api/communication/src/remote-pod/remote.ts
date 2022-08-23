@@ -17,9 +17,10 @@ import {
     Variable,
     DefaultGraph,
     Quad as polyQuad,
+    DataFactory,
     SPARQLQueryResult,
 } from "@polypoly-eu/api";
-import { DataFactory, Quad } from "rdf-js";
+import { Quad } from "rdf-js";
 import { RequestListener } from "http";
 import {
     ResponsePort,
@@ -195,7 +196,7 @@ export class RemoteClientPod implements Pod {
 
     constructor(
         private clientPort: RequestPort<BackendRequest, BackendResponse>,
-        public readonly dataFactory: DataFactory = dataFactory
+        public readonly dataFactory: DataFactory = new DataFactory(false)
     ) {
         this.rpcClient = backendClient<PodBackend>(client(clientPort));
     }

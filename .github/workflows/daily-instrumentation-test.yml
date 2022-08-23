@@ -28,7 +28,8 @@ jobs:
               run: ./build.js build
             - name: Build core
               working-directory: platform/core
-              run: make
+              run: |
+                make android_bindings
             - uses: actions/setup-java@v2
               with:
                   distribution: 'zulu'

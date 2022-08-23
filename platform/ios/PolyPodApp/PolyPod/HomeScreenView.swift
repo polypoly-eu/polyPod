@@ -1,12 +1,13 @@
 // swiftlint:disable file_length
 
 import Combine
+import PolyPodCoreSwift
 import SwiftUI
 
 // MARK: - Model
 
 struct Card: Identifiable {
-    let id: FeatureId
+    let id: String
     let title: String
     let description: String
     let image: UIImage
@@ -18,7 +19,7 @@ struct Card: Identifiable {
 struct HomeScreenSectionModel {
     let title: String
     let cards: [Card]
-    let type: FeaturesCategoryId
+    let type: FeatureCategoryId
 }
 
 struct FooterViewModel {
@@ -54,7 +55,7 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
             .eraseToAnyPublisher()
     }
 
-    static func mapCategoryModel(_ categoryModels: [FeaturesCategoryModel]) -> [HomeScreenSectionModel] {
+    static func mapCategoryModel(_ categoryModels: [FeatureCategory]) -> [HomeScreenSectionModel] {
         categoryModels.map { model in
             HomeScreenSectionModel(title: model.name,
                                    cards: mapToCards(model.features),
@@ -80,9 +81,9 @@ final class HomeScreenStorageAdapter: HomeScreenStorage {
                 title: feature.name,
                 description: feature.description ?? "",
                 image: image,
-                backgroundColor: feature.thumbnailColor ?? .white,
-                borderColor: feature.borderColor ?? .white,
-                tileTextColor: feature.tileTextColor ?? .black
+                backgroundColor: Color(fromHex: feature.thumbnailColor),
+                borderColor: Color(fromHex: feature.borderColor),
+                tileTextColor: Color(fromHex: feature.tileTextColor)
             )
         }
     }
@@ -287,7 +288,7 @@ extension EnvironmentValues {
 
 // MARK: - Root View
 
-typealias OnFeatureSelected = (FeatureId) -> Void
+typealias OnFeatureSelected = (String) -> Void
 struct HomeScreenView: View {
 
     let footerModel = FooterViewModel(
@@ -301,7 +302,6 @@ struct HomeScreenView: View {
     @ObservedObject var viewModel: HomeScreenViewModel
     var openFeatureAction: OnFeatureSelected = { _ in }
     var openInfoAction: () -> Void = {}
-    var openSettingsAction: () -> Void = {}
 
     var body: some View {
         // Why GeometryReader needs to be on top?
@@ -342,9 +342,12 @@ struct HomeScreenView: View {
                         }
 
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            Image("NavIconSettingsDark")
-                                .renderingMode(.original)
-                                .onTapGesture(perform: openSettingsAction)
+                            NavigationLink {
+                                SettingsView()
+                            } label: {
+                                Image("NavIconSettingsDark")
+                                    .renderingMode(.original)
+                            }
                         }
                     }
                 }
@@ -767,7 +770,7 @@ struct HomeScreenView_Previews: PreviewProvider {
                 )
               ],
               type: .yourData),
-        .init(title: "Know how",
+        .init(title: "Data Know-How",
               cards: [
                 .init(id: UUID().uuidString,
                       title: "polyExplorer",

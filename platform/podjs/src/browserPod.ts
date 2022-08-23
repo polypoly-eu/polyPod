@@ -12,7 +12,7 @@ import type {
     Entry,
     SPARQLQueryResult,
 } from "@polypoly-eu/api";
-import { dataFactory } from "@polypoly-eu/api";
+import { dataFactory, PolyUri, isPolypodUri } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../../polyPod-config/endpoints.json";
@@ -370,8 +370,11 @@ class IDBPolyOut implements PolyOut {
         const db = await openDatabase();
 
         return new Promise((resolve, reject) => {
+            if (destUrl && !isPolypodUri(destUrl)) {
+                reject(`${destUrl} is not a polypod:// URI`);
+            }
             const tx = db.transaction([OBJECT_STORE_POLY_OUT], "readwrite");
-            const id = destUrl || `polypod://${createUUID()}`;
+            const id = destUrl || new PolyUri().toString();
 
             tx.objectStore(OBJECT_STORE_POLY_OUT).add({
                 id,
@@ -647,22 +650,6 @@ class BrowserEndpoint implements Endpoint {
 }
 
 /**
- * Creates a random UUID string with a random hexadecimal value for each character in the string
- * 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx', and returns the result.
- * @returns a string in UUID format
- */
-function createUUID(): string {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-        /[xy]/g,
-        function (c) {
-            const r = (Math.random() * 16) | 0,
-                v = c == "x" ? r : (r & 0x3) | 0x8;
-            return v.toString(16);
-        }
-    );
-}
-
-/**
  * @class `BrowserPolyNavPolyNav`
  */
 class BrowserPolyNav implements PolyNav {
@@ -802,7 +789,7 @@ function luminance(featureColor: string): number {
 /**
  * It determines the foreground and background colors for the navbar based on the primary color of the
  * app.
- * @param {Manifest} file
+ * @param {Manifest} manifest
  * @returns { fg: string; bg: string } object
  */
 function determineNavBarColors(manifest: Manifest): { fg: string; bg: string } {
@@ -825,8 +812,6 @@ function createNavBarFrame(title: string): HTMLElement {
     frame.style.display = "block";
     frame.style.width = "100%";
     frame.style.height = "50px";
-    frame.frameBorder = "0";
-    frame.scrolling = "no";
     frame.id = NAV_FRAME_ID;
 
     const navBarColors = determineNavBarColors(window.manifest);

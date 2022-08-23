@@ -15,39 +15,28 @@ ios_targets := iPhone simulator
 tools_dir := tools
 android_core := PolyPodCoreAndroid/core/src/main/
 android_version := 24
-# Rust still uses old-ish r22 version of NDK.
-# For reference https://github.com/rust-lang/rust/pull/85806
-ndk_version := r22b
 google_repo := https://dl.google.com/android/repository
-ndk_lib := android-ndk-$(ndk_version)
-ndk=$(tools_dir)/NDK_$(ndk_version)
-ndk_archive = $(tools_dir)/NDK.zip
-export ANDROID_NDK_HOME := $(ndk)/$(ndk_lib)
-android_triples := aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android
-android_binaries := $(patsubst %, target/%, $(android_triples))
-android_architectures := arm64-v8a armeabi-v7a x86_64 x86
+android_triples := aarch64-linux-android x86_64-linux-android
+android_binaries := $(patsubst %, target/%/libpolypod_core.so, $(android_triples))
+android_architectures := arm64-v8a x86_64
 jni_libs_copy_path := $(android_core)/jniLibs
-android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%, $(android_architectures))
+android_core_libraries := $(patsubst %, $(jni_libs_copy_path)/%/libpolypod_core.so, $(android_architectures))
+cargo_ndk_version = 2.10.0
 
 ifeq ($(OS),Windows_NT)
-	ndk_download_url = $(google_repo)/$(ndk_lib)-windows-x86_64.zip
-	# Need on Windows, to allow interpreting escaping characters
+    # Need on Windows, to allow interpreting escaping characters
 	os_echo := echo -e
 else
 	os_echo := echo
 	ifeq ($(shell uname -s),Darwin)
-		ndk_download_url = $(google_repo)/$(ndk_lib)-darwin-x86_64.zip
+		ndk_download_url = $(google_repo)/$(ndk_lib)-darwin.zip
 		macos := true
-	endif
-	ifeq ($(shell uname -s),Linux)
-		ndk_download_url = $(google_repo)/$(ndk_lib)-linux-x86_64.zip
 	endif
 endif
 
-
 # ============  Rust core ============ #
 
-$(target):
+$(target): $(wildcard src/*.rs)
 # Check rustup is installed
 ifeq (,$(shell which rustup))
 	$(error "Rust not installed, check https://www.rust-lang.org/tools/install to install rust on your system")
@@ -100,18 +89,12 @@ endef
 
 # ============ Android lib ============ #
 
-$(ndk):
-	mkdir -p $(ndk)
-	curl -L $(ndk_download_url) -o $(ndk_archive)
-	unzip -q -d $(ndk) $(ndk_archive)
-	rm $(ndk_archive)
-
-$(android_binaries): $(target) $(ndk)
-	cargo install cargo-ndk
+$(android_binaries): $(target) 
+	cargo install cargo-ndk --version $(cargo_ndk_version)
 	rustup target add $(android_triples)
 
 	$(foreach triple, $(android_triples), \
-		cargo ndk --platform $(android_version) --target $(triple) build $(cargo_build_flag); \
+		cargo ndk --platform $(android_version) --target $(triple) --bindgen build $(cargo_build_flag); \
 	)
 
 $(android_core_libraries): $(android_binaries)
@@ -121,6 +104,8 @@ define copy_android_arch
    mkdir -p $(jni_libs_copy_path)/$2
    cp target/$1/$(build_type)/libpolypod_core.so \
 	  $(jni_libs_copy_path)/$2/libpolypod_core.so;
+   cp ${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/*/sysroot/usr/lib/$1/libc++_shared.so \
+	   $(jni_libs_copy_path)/$2/libc++_shared.so;
 endef
 
 # ============ Main targets ============ #
@@ -139,7 +124,7 @@ all: $(android_core_libraries) $(if $(macos),$(swift_core_framework),$(target))
 
 .PHONY: clean
 clean:
-	$(RM) -r target
+	cargo clean
 	$(RM) -r export
 	$(RM) -r $(swift_core_framework)
 	$(RM) -r $(android_core_libraries)

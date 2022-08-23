@@ -12,6 +12,62 @@ import { dataFactory } from "../rdf";
 import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint } from "./api";
 import { EncodingOptions, FS, Stats } from "./fs";
 import { Entry } from ".";
+import { MockStore } from "./mock-store";
+
+export const DEFAULT_POD_RUNTIME = "podjs-default";
+export const DEFAULT_POD_RUNTIME_VERSION = "podjs-default-version";
+
+/**
+ * The [[PolyOut]] interface. See [[PolyOut]] for the description.
+ */
+export class DefaultPolyOut implements PolyOut {
+    constructor(public readonly fs: FS) {}
+
+    readFile(path: string, options: EncodingOptions): Promise<string>;
+    readFile(path: string): Promise<Uint8Array>;
+    readFile(
+        path: string,
+        options?: EncodingOptions
+    ): Promise<string | Uint8Array> {
+        if (options === undefined) return this.fs.readFile(path);
+        else return this.fs.readFile(path, options);
+    }
+
+    readDir(path: string): Promise<Entry[]> {
+        const newFiles = this.fs.readdir(path).then((files) => {
+            const objectFiles = files.map((file) => ({
+                id: path + "/" + file,
+                path: file,
+            }));
+            return new Promise<Entry[]>((resolve) => {
+                resolve(objectFiles);
+            });
+        });
+        return newFiles;
+    }
+
+    stat(path: string): Promise<Stats> {
+        return this.fs.stat(path);
+    }
+
+    writeFile(
+        path: string,
+        content: string,
+        options: EncodingOptions
+    ): Promise<void> {
+        return this.fs.writeFile(path, content, options);
+    }
+
+    async importArchive(url: string, destUrl?: string): Promise<string> {
+        throw new Error(
+            `Called with ${url} and ${destUrl}, but not implemented`
+        );
+    }
+
+    async removeArchive(fileId: string): Promise<void> {
+        throw new Error(`Called with ${fileId}, but not implemented`);
+    }
+}
 
 /**
  * The _default Pod_ provides the bare minimum implementation to satisfy the [[Pod]] API. It should only be used in
@@ -22,6 +78,7 @@ import { Entry } from ".";
  *
  * 1. an [RDFJS dataset](https://rdf.js.org/dataset-spec/)
  * 2. a file system that adheres to the [async FS interface of Node.js](https://nodejs.org/api/fs.html)
+ * 3. The *new* used rdf store, which supports SPARQL queries (oxigraph)
  *
  * Depending on the platform (Node.js or browser), there are various implementations of these that may be used.
  * These are found in other core components, such as AsyncPod.
@@ -34,7 +91,9 @@ export class DefaultPod implements Pod {
 
     constructor(
         public readonly store: RDF.DatasetCore,
-        public readonly fs: FS
+        public readonly fs: FS,
+        public readonly polyOut: PolyOut = new DefaultPolyOut(fs),
+        public readonly rdfStore: MockStore = new MockStore()
     ) {}
 
     private checkQuad(quad: RDF.Quad): void {
@@ -67,68 +126,11 @@ export class DefaultPod implements Pod {
                 this.checkQuad(quad);
                 return this.store.has(quad);
             },
-            query: async () => {
-                throw new Error("Not implemented");
-            },
-            update: async () => {
-                throw new Error("Not implemented");
-            },
+            query: async (query) => this.rdfStore.query(query),
+            update: async (query) => this.rdfStore.update(query),
         };
     }
 
-    /**
-     * The [[PolyOut]] interface. See [[PolyOut]] for the description.
-     */
-    get polyOut(): PolyOut {
-        const fs = this.fs;
-
-        return new (class implements PolyOut {
-            readFile(path: string, options: EncodingOptions): Promise<string>;
-            readFile(path: string): Promise<Uint8Array>;
-            readFile(
-                path: string,
-                options?: EncodingOptions
-            ): Promise<string | Uint8Array> {
-                if (options === undefined) return fs.readFile(path);
-                else return fs.readFile(path, options);
-            }
-
-            readDir(path: string): Promise<Entry[]> {
-                const newFiles = fs.readdir(path).then((files) => {
-                    const objectFiles = files.map((file) => ({
-                        id: path + "/" + file,
-                        path: file,
-                    }));
-                    return new Promise<Entry[]>((resolve) => {
-                        resolve(objectFiles);
-                    });
-                });
-                return newFiles;
-            }
-
-            stat(path: string): Promise<Stats> {
-                return fs.stat(path);
-            }
-
-            writeFile(
-                path: string,
-                content: string,
-                options: EncodingOptions
-            ): Promise<void> {
-                return fs.writeFile(path, content, options);
-            }
-
-            importArchive(url: string, destUrl?: string): Promise<string> {
-                throw new Error(
-                    `Called with ${url} and ${destUrl}, but not implemented`
-                );
-            }
-
-            removeArchive(fileId: string): Promise<void> {
-                throw new Error(`Called with ${fileId}, but not implemented`);
-            }
-        })();
-    }
     /**
      * The [[PolyNav]] interface. See [[PolyNav]] for the description.
      */
@@ -153,11 +155,11 @@ export class DefaultPod implements Pod {
      */
     get info(): Info {
         return {
-            getRuntime() {
-                throw new Error("Not implemented");
+            async getRuntime() {
+                return DEFAULT_POD_RUNTIME;
             },
-            getVersion() {
-                throw new Error("Not implemented");
+            async getVersion() {
+                return DEFAULT_POD_RUNTIME_VERSION;
             },
         };
     }
