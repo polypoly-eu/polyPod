@@ -11,6 +11,7 @@ import {
     Matcher,
     Stats,
     Info,
+    SPARQLQueryResult,
 } from "@polypoly-eu/api";
 import { DataFactory, Quad } from "rdf-js";
 
@@ -57,19 +58,19 @@ class AsyncPolyIn implements PolyIn {
         return (await this.promise).match(matcher);
     }
 
-    async add(...quads: Quad[]): Promise<void> {
-        return (await this.promise).add(...quads);
+    async add(quad: Quad): Promise<void> {
+        return (await this.promise).add(quad);
     }
 
-    async delete(...quads: Quad[]): Promise<void> {
-        return (await this.promise).delete(...quads);
+    async delete(quad: Quad): Promise<void> {
+        return (await this.promise).delete(quad);
     }
 
-    async has(...quads: Quad[]): Promise<boolean> {
-        return (await this.promise).has(...quads);
+    async has(quad: Quad): Promise<boolean> {
+        return (await this.promise).has(quad);
     }
 
-    async query(query: string): Promise<string> {
+    async query(query: string): Promise<SPARQLQueryResult> {
         return (await this.promise).query(query);
     }
 

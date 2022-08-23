@@ -1,6 +1,8 @@
+import { SPARQLQueryResult } from "./api";
+
 export interface MockStore {
     update(query: string): Promise<void>;
-    query(query: string): Promise<string>;
+    query(query: string): Promise<SPARQLQueryResult>;
 }
 
 export class MockStore implements MockStore {
@@ -8,7 +10,7 @@ export class MockStore implements MockStore {
         return new Promise(() => null);
     }
 
-    query(_query: string): Promise<string> {
-        return new Promise(() => "");
+    query(_query: string): Promise<SPARQLQueryResult> {
+        return new Promise(() => false);
     }
 }
