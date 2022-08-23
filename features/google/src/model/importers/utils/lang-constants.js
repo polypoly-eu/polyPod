@@ -15,5 +15,6 @@ export const langConstants = {
 export function matchRegex(path, importer) {
     const importerName = importer.constructor.name;
     const normalizedPath = path.normalize("NFC");
+    console.log(`matchRegex normalized path: ${normalizedPath}`);
     return langConstants[importerName].regex.test(normalizedPath);
 }
