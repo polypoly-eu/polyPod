@@ -1,11 +1,11 @@
 use common::serialization::{message_pack_deserialize, message_pack_serialize};
 use failure::CoreFailure;
-use lib::core::{self, PlatformRequest, PlatformResponse};
 use jni::{
     objects::{GlobalRef, JClass, JObject, JString, JValue},
     sys::jbyteArray,
     JNIEnv, JavaVM,
 };
+use lib::core::{self, PlatformRequest, PlatformResponse};
 
 use log::error;
 

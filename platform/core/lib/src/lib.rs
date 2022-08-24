@@ -30,7 +30,10 @@ pub mod core {
     }
 
     pub trait PlatformHookRequest: Sync + Send {
-        fn perform_request(&self, request: PlatformRequest) -> Result<PlatformResponse, CoreFailure>;
+        fn perform_request(
+            &self,
+            request: PlatformRequest,
+        ) -> Result<PlatformResponse, CoreFailure>;
     }
 
     const PREFERENCES_DB: &str = "preferences_db";
@@ -153,7 +156,8 @@ pub mod core {
         Ok(session.get_timeout_option())
     }
 
-    pub fn get_user_session_timeout_options_config() -> Result<Vec<UserSessionTimeout>, CoreFailure> {
+    pub fn get_user_session_timeout_options_config() -> Result<Vec<UserSessionTimeout>, CoreFailure>
+    {
         // The current contract between platform and core requires that core responds with a Result type.
         // Embeed in Result type, until further clarifications.
         Ok(TimeoutOption::all_option_timeouts())
