@@ -6,5 +6,6 @@ function initIframe(el) {
         // incoming msgpack-encoded events:
         webkit.messageHandlers.event.postMessage(event.data);
     };
+    // This is transferring ownership of port2 to the content window
     el.contentWindow.postMessage("", "*", [port2]);
 }
