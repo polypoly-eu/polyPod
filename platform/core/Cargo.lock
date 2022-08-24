@@ -197,6 +197,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "feature_categories"
+version = "0.1.0"
+dependencies = [
+ "failure",
+ "io",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "flate2"
 version = "1.0.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
