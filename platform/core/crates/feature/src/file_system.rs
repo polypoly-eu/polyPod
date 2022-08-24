@@ -228,7 +228,7 @@ mod tests {
 
     use super::*;
 
-    use crate::io::file_system::DefaultFileSystem;
+    use io::file_system::DefaultFileSystem;
     use std::collections::HashSet;
     use std::fs::{DirBuilder, File};
     use std::iter::FromIterator;
@@ -340,7 +340,9 @@ mod tests {
         let fs = DefaultFileSystem {};
 
         let url = zip_file_url();
+        println!("{}", format!("{:?}", url));
         let result = import_archive(&url, None, &fs, &config);
+        println!("{}", format!("{:?}", result));
         assert!(result.is_ok());
         assert_eq!(
             Path::new(&feature_files_path(&config).unwrap()).exists(),
