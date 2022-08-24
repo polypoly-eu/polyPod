@@ -1,4 +1,4 @@
-const { port1, port2 } = new MessageChannel();
+const { port1 } = new MessageChannel();
 
 function initIframe(el) {
     port1.start();
@@ -7,5 +7,5 @@ function initIframe(el) {
         webkit.messageHandlers.event.postMessage(event.data);
     };
     // This is transferring ownership of port2 to the content window
-    el.contentWindow.postMessage("", "*", [port2]);
+    // el.contentWindow.postMessage("", "*", [port2]);
 }
