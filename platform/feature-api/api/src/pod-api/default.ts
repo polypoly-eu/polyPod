@@ -10,7 +10,8 @@
 import * as RDF from "rdf-js";
 import { dataFactory } from "../rdf";
 import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint } from "./api";
-import { EncodingOptions, FS, Stats } from "./fs";
+import { EncodingOptions, Stats } from "./fs";
+import { IFs } from "memfs";
 import { Entry } from ".";
 
 export const DEFAULT_POD_RUNTIME = "podjs-default";
@@ -20,7 +21,7 @@ export const DEFAULT_POD_RUNTIME_VERSION = "podjs-default-version";
  * The [[PolyOut]] interface. See [[PolyOut]] for the description.
  */
 export class DefaultPolyOut implements PolyOut {
-    constructor(public readonly fs: FS) {}
+    constructor(public readonly fs: IFs["promises"]) {}
 
     readFile(path: string, options: EncodingOptions): Promise<string>;
     readFile(path: string): Promise<Uint8Array>;
@@ -36,7 +37,7 @@ export class DefaultPolyOut implements PolyOut {
         const newFiles = this.fs.readdir(path).then((files) => {
             const objectFiles = files.map((file) => ({
                 id: path + "/" + file,
-                path: file,
+                path: file as string,
             }));
             return new Promise<Entry[]>((resolve) => {
                 resolve(objectFiles);
@@ -45,8 +46,15 @@ export class DefaultPolyOut implements PolyOut {
         return newFiles;
     }
 
-    stat(path: string): Promise<Stats> {
-        return this.fs.stat(path);
+    async stat(path: string): Promise<Stats> {
+        const stats = await this.fs.stat(path);
+        return {
+            id: stats.ino.toString(),
+            size: stats.size as number,
+            time: stats.ctime.toISOString(),
+            name: path,
+            directory: stats.isDirectory(),
+        };
     }
 
     writeFile(
@@ -89,7 +97,7 @@ export class DefaultPod implements Pod {
 
     constructor(
         public readonly store: RDF.DatasetCore,
-        public readonly fs: FS,
+        public readonly fs: IFs["promises"],
         public readonly polyOut: PolyOut = new DefaultPolyOut(fs)
     ) {}
 

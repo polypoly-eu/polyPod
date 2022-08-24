@@ -5,14 +5,12 @@ import {
     Pod,
     PolyLifecycle,
     DefaultPod,
-    FS,
     DataFactory,
     podSpec,
 } from "@polypoly-eu/api";
 
 describe("Async pod", () => {
-    const fs = new Volume().promises as unknown as FS;
-    const underlying = new DefaultPod(factory.dataset(), fs);
+    const underlying = new DefaultPod(factory.dataset(), new Volume().promises);
 
     describe("Resolved promise", () => {
         podSpec(
