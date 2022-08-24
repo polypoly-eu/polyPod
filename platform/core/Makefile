@@ -15,7 +15,6 @@ ios_targets := iPhone simulator
 tools_dir := tools
 android_core := PolyPodCoreAndroid/core/src/main/
 android_version := 24
-google_repo := https://dl.google.com/android/repository
 android_triples := aarch64-linux-android x86_64-linux-android
 android_binaries := $(patsubst %, target/%/libpolypod_core.so, $(android_triples))
 android_architectures := arm64-v8a x86_64
