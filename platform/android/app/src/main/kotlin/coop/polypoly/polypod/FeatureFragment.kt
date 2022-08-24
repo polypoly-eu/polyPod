@@ -172,8 +172,9 @@ open class FeatureFragment : Fragment() {
             Dialog.BUTTON_POSITIVE,
             context?.getString(R.string.button_feature_error_close)
         ) { _, _ ->
-            close()
             lifecycleScope.launch {
+                close()
+
                 ErrorUploader.uploadToServer(
                     context!!,
                     featureErrorMessage!!
