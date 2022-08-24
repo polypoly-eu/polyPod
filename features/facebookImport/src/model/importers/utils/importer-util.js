@@ -6,11 +6,16 @@ import {
 
 async function relevantZipEntries(zipFile) {
     const entries = await zipFile.getEntries();
-    return entries.filter(
-        (entry) =>
-            !entry.path.includes(".DS_Store") &&
-            !entry.path.includes("__MACOSX")
-    );
+    return entries
+        .filter(
+            (entry) =>
+                !entry.path.includes(".DS_Store") &&
+                !entry.path.includes("__MACOSX")
+        )
+        .map((entry) => {
+            entry.path = decodeURI(path);
+            return entry;
+        });
 }
 
 async function readJSONFile(relativeFilePath, zipFile) {
