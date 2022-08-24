@@ -10,5 +10,3 @@
 # VSCode files and directories
 .project
 .settings
-
-jniLibs/
