@@ -327,6 +327,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "lib"
+version = "0.1.0"
+dependencies = [
+ "failure",
+ "feature_categories",
+ "io",
+ "once_cell",
+ "preferences",
+ "serde",
+ "serde_json",
+ "user_session",
+]
+
+[[package]]
 name = "libc"
 version = "0.2.132"
 source = "registry+https://github.com/rust-lang/crates.io-index"
