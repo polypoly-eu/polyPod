@@ -1,0 +1,14 @@
+*.iml
+**/.gradle
+/local.properties
+.idea
+**/build
+/captures
+.externalNativeBuild
+.cxx
+
+# VSCode files and directories
+.project
+.settings
+
+jniLibs/

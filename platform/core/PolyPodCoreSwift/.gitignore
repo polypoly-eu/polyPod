@@ -1,0 +1,7 @@
+# Xcode
+xcuserdata/
+*.xcworkspacedata
+IDEWorkspaceChecks.plist
+.build/
+# Generated files
+PolyPodCore.xcframework
