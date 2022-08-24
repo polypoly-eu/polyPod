@@ -1,6 +1,5 @@
 package coop.polypoly.polypod
 import android.content.Context
-import com.google.gson.JsonParser
 import coop.polypoly.polypod.endpoint.Endpoint
 import coop.polypoly.polypod.logging.LoggerFactory
 
