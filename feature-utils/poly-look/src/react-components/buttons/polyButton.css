@@ -1,4 +1,5 @@
 .poly-button {
+  position: relative;
   font-family: var(--theme-font-medium);
   font-size: 18px;
   padding: 4px 12px;
@@ -12,9 +13,29 @@
   border: none;
 }
 
-.poly-button:active {
-  opacity: 0.88;
+.poly-button .active-layer-container {
+  position: absolute;
+  top: 0;
+  border-radius: var(--pl-radius-1x);
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-gray-50);
+  opacity: 0;
+  z-index: 1;
+} 
+
+.poly-button .active-layer-container:active {
+  opacity: 0.16;
 }
+
+/* .poly-button .active-layer {
+  position: relative;
+  z-index: 2;
+} */
+
+/* .poly-button:active {
+  opacity: 0.86;
+} */
 
 .poly-button:disabled {
   opacity: 0.38;
@@ -29,4 +50,11 @@
   border: 1px solid var(--theme-secondary-color);
   color: var(--theme-secondary-color);
   background-color: var(--transparent);
+}
+
+/* .poly-button.outline:active {
+} */
+
+.poly-button.outline .active-layer-container:active {
+  background-color: var(--theme-secondary-color);
 }

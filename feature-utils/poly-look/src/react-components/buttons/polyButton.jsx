@@ -24,6 +24,7 @@ const PolyButton = ({ label, type = "filled", ...otherProps }) => {
         otherProps.className || ""
       }`.trim()}
     >
+      <span className="active-layer-container"></span>
       {label}
     </button>
   );
