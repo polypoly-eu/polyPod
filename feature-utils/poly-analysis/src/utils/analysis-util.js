@@ -10,16 +10,11 @@ export async function jsonDataEntities(zipFile) {
 //repeated in import-utils, used in both importer & analysis package
 export async function relevantZipEntries(zipFile) {
     const entries = await zipFile.getEntries();
-    return entries
-        .filter(
-            (entry) =>
-                !entry.path.includes(".DS_Store") &&
-                !entry.path.includes("__MACOSX")
-        )
-        .map((entry) => {
-            entry.path = decodeURI(path);
-            return entry;
-        });
+    return entries.filter(
+        (entry) =>
+            !entry.path.includes(".DS_Store") &&
+            !entry.path.includes("__MACOSX")
+    );
 }
 
 export function groupActivitiesByTime(activityDates) {
