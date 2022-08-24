@@ -26,6 +26,14 @@ export default [
         ],
         context: "window",
         external: ["chai"],
+        onwarn: (warning) => {
+            if (
+                warning.code === "CIRCULAR_DEPENDENCY" &&
+                warning.cycle[0].match(/fast-check/)
+            ) {
+                return;
+            }
+        },
     },
     {
         input: "src/pod.ts",
@@ -45,5 +53,13 @@ export default [
             }),
         ],
         context: "window",
+        onwarn: (warning) => {
+            if (
+                warning.code === "CIRCULAR_DEPENDENCY" &&
+                warning.cycle[0].match(/fast-check/)
+            ) {
+                return;
+            }
+        },
     },
 ];
