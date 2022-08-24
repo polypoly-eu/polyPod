@@ -44,7 +44,7 @@ endif
 
 # ============  Swift framework ============ #
 
-$(swift_core_framework): $(target)
+$(swift_core_framework):
 # Ensure correct OS is used
 ifeq ($(macos),)
 	@$(os_echo) "xcframework can only be built on macOS"
@@ -88,7 +88,7 @@ endef
 
 # ============ Android lib ============ #
 
-$(android_binaries): $(target) 
+$(android_binaries):
 	cargo install cargo-ndk --version $(cargo_ndk_version)
 	rustup target add $(android_triples)
 

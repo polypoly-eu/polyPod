@@ -1,11 +1,7 @@
 [workspace]
 members = ["lib", "ffi", "crates/*"]
 
-[workspace.dependencies]
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-
 [profile.dev]
 # Disabling debug info speeds up builds a bunch,
-# and we don't rely on it for debugging that much.
+# If you want to be able to debug core, then consider incresing this value appropriately.
 debug = 0
