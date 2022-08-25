@@ -5,6 +5,7 @@ use std::os::raw::c_uint;
 extern crate rmp_serde;
 use crate::core::{self, PlatformRequest, PlatformResponse};
 use std::os::raw::c_char;
+use crate::rdf_result_conversion::{to_json_bytes, bytes_to_string};
 
 /// # Safety
 /// This function can be unsafe if the language_code pointer is null or the string is in wrong format.
@@ -114,7 +115,7 @@ pub unsafe extern "C" fn exec_rdf_query(query: *const c_char) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
         cstring_to_str(&query)
             .map(String::from)
-            .and_then(core::exec_rdf_query),
+            .and_then(|query| bytes_to_string(to_json_bytes(core::exec_rdf_query(query)))),
     ))
 }
 
@@ -125,7 +126,29 @@ pub unsafe extern "C" fn exec_rdf_update(update: *const c_char) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
         cstring_to_str(&update)
             .map(String::from)
-            .and_then(core::exec_rdf_update),
+            .and_then(|query| bytes_to_string(to_json_bytes(core::exec_rdf_update(query)))),
+    ))
+}
+
+/// Executes the given RDF query in the feature RDF store.
+/// Returns Result<String, CoreFailure> as MessagePack value.
+#[no_mangle]
+pub unsafe extern "C" fn exec_feature_rdf_query(update: *const c_char) -> CByteBuffer {
+    create_byte_buffer(message_pack_serialize(
+        cstring_to_str(&update)
+            .map(String::from)
+            .and_then(|query| bytes_to_string(to_json_bytes(core::exec_feature_rdf_query(query)))),
+    ))
+}
+
+/// Executes the given RDF update in the feature store.
+/// Returns Result<Void, CoreFailure> as MessagePack value.
+#[no_mangle]
+pub unsafe extern "C" fn exec_feature_rdf_update(update: *const c_char) -> CByteBuffer {
+    create_byte_buffer(message_pack_serialize(
+        cstring_to_str(&update)
+            .map(String::from)
+            .and_then(|query| bytes_to_string(to_json_bytes(core::exec_feature_rdf_update(query)))),
     ))
 }
 
