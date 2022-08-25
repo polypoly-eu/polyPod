@@ -1,7 +1,11 @@
 use crate::common::serialization::{message_pack_deserialize, message_pack_serialize};
 use crate::core::{self, PlatformRequest, PlatformResponse};
 use crate::core::{
-    exec_feature_rdf_query, exec_feature_rdf_update, exec_rdf_query, exec_rdf_update,
+    exec_feature_rdf_query,
+    exec_feature_rdf_update,
+    exec_rdf_query,
+    exec_rdf_update,
+    open_feature_rdf_store,
 };
 use crate::core_failure::CoreFailure;
 use crate::rdf_result_conversion::{bytes_to_string, to_json_bytes};
@@ -10,7 +14,6 @@ use jni::{
     sys::jbyteArray,
     JNIEnv, JavaVM,
 };
-
 use log::error;
 
 /// Bootstrap core with the given configuration:
@@ -258,3 +261,15 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfUpdate(
     ))
     .unwrap()
 }
+
+#[no_mangle]
+pub extern "system" fn Java_coop_polypoly_core_JniApi_openFeatureRdfStore(
+    env: JNIEnv,
+    _: JClass,
+) -> jbyteArray {
+    env.byte_array_from_slice(&message_pack_serialize(
+        read_jni_string(&env, query).and_then(open_feature_rdf_store()))
+    .unwrap()
+}
+
+
