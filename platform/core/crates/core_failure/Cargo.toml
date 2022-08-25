@@ -1,5 +1,5 @@
 [package]
-name = "failure"
+name = "core_failure"
 version = "0.1.0"
 edition = "2021"
 

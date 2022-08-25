@@ -1,4 +1,4 @@
-use failure::CoreFailure;
+use core_failure::CoreFailure;
 use rmp_serde::{Deserializer, Serializer};
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use std::io::Cursor;

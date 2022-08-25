@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 url = "2.2.2"
 io = { path = "../io" }
-failure = { path = "../failure" }
+core_failure = { path = "../core_failure" }
 
 [dependencies.uuid]
 version = "1.1.2"
