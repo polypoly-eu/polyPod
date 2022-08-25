@@ -170,7 +170,7 @@ open class FeatureFragment : Fragment() {
         errorDialog.setMessage(featureErrorMessage)
         errorDialog.setButton(
             Dialog.BUTTON_POSITIVE,
-            context?.getString(R.string.button_feature_error_close)
+            context?.getString(R.string.button_feature_allow_report)
         ) { _, _ ->
             lifecycleScope.launch {
                 close()
@@ -181,6 +181,13 @@ open class FeatureFragment : Fragment() {
                 )
             }
         }
+        errorDialog.setButton(
+            Dialog.BUTTON_NEGATIVE,
+            context?.getString(R.string.button_feature_deny_report)
+        ) { _, _ ->
+            close()
+        }
+
         errorDialog.show()
     }
 
