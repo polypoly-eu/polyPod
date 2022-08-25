@@ -4,6 +4,7 @@ use crate::core::{
     exec_feature_rdf_query, exec_feature_rdf_update, exec_rdf_query, exec_rdf_update,
 };
 use crate::core_failure::CoreFailure;
+use crate::rdf_result_conversion::{bytes_to_string, to_json_bytes};
 use jni::{
     objects::{GlobalRef, JClass, JObject, JString, JValue},
     sys::jbyteArray,
@@ -210,13 +211,10 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_execFeatureRdfQuery(
     env: JNIEnv,
     _: JClass,
     query: JString,
-    featureName: JString,
 ) -> jbyteArray {
     env.byte_array_from_slice(&message_pack_serialize(
-        read_jni_string(&env, query).and_then(|queryString| {
-            read_jni_string(&env, appPath)
-                .and_then(|featureName| exec_feature_rdf_query(queryString, featureName))
-        }),
+        read_jni_string(&env, query).and_then(|queryString|
+                bytes_to_string(to_json_bytes(exec_feature_rdf_query(queryString, featureName))))
     ))
     .unwrap()
 }
@@ -229,10 +227,8 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_execFeatureRdfUpdate(
     featureName: JString,
 ) -> jbyteArray {
     env.byte_array_from_slice(&message_pack_serialize(
-        read_jni_string(&env, query).and_then(|queryString| {
-            read_jni_string(&env, appPath)
-                .and_then(|featureName| exec_feature_rdf_update(queryString, featureName))
-        }),
+        read_jni_string(&env, query).and_then(|queryString|
+                bytes_to_string(to_json_bytes(exec_feature_rdf_update(queryString, featureName))))
     ))
     .unwrap()
 }
@@ -244,9 +240,8 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfQuery(
     query: JString,
 ) -> jbyteArray {
     env.byte_array_from_slice(&message_pack_serialize(
-        read_jni_string(&env, query).and_then(|queryString| {
-            read_jni_string(&env, appPath).and_then(|appPathString| exec_rdf_query(queryString))
-        }),
+        read_jni_string(&env, query).and_then(|queryString|
+                bytes_to_string(to_json_bytes(exec_rdf_query(queryString, featureName))))
     ))
     .unwrap()
 }
@@ -258,9 +253,8 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfUpdate(
     query: JString,
 ) -> jbyteArray {
     env.byte_array_from_slice(&message_pack_serialize(
-        read_jni_string(&env, query).and_then(|queryString| {
-            read_jni_string(&env, appPath).and_then(|appPathString| exec_rdf_update(queryString))
-        }),
+        read_jni_string(&env, query).and_then(|queryString|
+                bytes_to_string(to_json_bytes(exec_rdf_update(queryString, featureName))))
     ))
     .unwrap()
 }
