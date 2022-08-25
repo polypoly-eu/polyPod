@@ -15,7 +15,6 @@ ios_targets := iPhone simulator
 tools_dir := tools
 android_core := PolyPodCoreAndroid/core/src/main/
 android_version := 24
-google_repo := https://dl.google.com/android/repository
 android_triples := aarch64-linux-android x86_64-linux-android
 android_binaries := $(patsubst %, target/%/libpolypod_core.so, $(android_triples))
 android_architectures := arm64-v8a x86_64
@@ -45,7 +44,7 @@ endif
 
 # ============  Swift framework ============ #
 
-$(swift_core_framework): $(target)
+$(swift_core_framework):
 # Ensure correct OS is used
 ifeq ($(macos),)
 	@$(os_echo) "xcframework can only be built on macOS"
@@ -69,7 +68,7 @@ endif
 
 	# Generated module map and C header
 	cargo install cbindgen
-	cbindgen --config cbindgen.toml -o $(export_dir_ios)/headers/polypod-core.h
+	cbindgen --lang c --crate ffi -o $(export_dir_ios)/headers/polypod-core.h
 	@$(os_echo) "module PolyPodCore { header \"polypod-core.h\" export * }" >> $(export_dir_ios)/headers/module.modulemap
 
 	# Package xcframework
@@ -82,19 +81,19 @@ endif
 
 define build_for_architecture
 	rustup target add $(1)
-	cargo build \
+	cargo build -p ffi \
 		$(cargo_build_flag) \
 		--lib --target $(1)
 endef
 
 # ============ Android lib ============ #
 
-$(android_binaries): $(target) 
+$(android_binaries):
 	cargo install cargo-ndk --version $(cargo_ndk_version)
 	rustup target add $(android_triples)
 
 	$(foreach triple, $(android_triples), \
-		cargo ndk --platform $(android_version) --target $(triple) --bindgen build $(cargo_build_flag); \
+		cargo ndk --platform $(android_version) --target $(triple) build $(cargo_build_flag) -p ffi; \
 	)
 
 $(android_core_libraries): $(android_binaries)

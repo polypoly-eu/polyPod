@@ -32,6 +32,14 @@ export default [
             },
         ],
         external: ["chai"],
+        onwarn: (warning) => {
+            if (
+                warning.code === "CIRCULAR_DEPENDENCY" &&
+                warning.cycle[0].match(/fast-check/)
+            ) {
+                return;
+            }
+        },
     },
     {
         ...common,
@@ -42,5 +50,23 @@ export default [
                 format: "iife",
             },
         ],
+        plugins: [
+            json(),
+            resolve(),
+            commonjs(),
+            sucrase({
+                exclude: ["node_modules/**"],
+                transforms: ["typescript"],
+            }),
+        ],
+        context: "window",
+        onwarn: (warning) => {
+            if (
+                warning.code === "CIRCULAR_DEPENDENCY" &&
+                warning.cycle[0].match(/fast-check/)
+            ) {
+                return;
+            }
+        },
     },
 ];
