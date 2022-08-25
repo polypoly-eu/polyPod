@@ -152,6 +152,13 @@ pub unsafe extern "C" fn exec_feature_rdf_update(update: *const c_char) -> CByte
     ))
 }
 
+/// Opens / initializes the feature rdf store.
+/// Returns Result<(), CoreFailure> as MessagePack value.
+#[no_mangle]
+pub unsafe extern "C" fn open_feature_rdf_store() -> CByteBuffer {
+    create_byte_buffer(message_pack_serialize(core::open_feature_rdf_store))
+}
+
 /// # Safety
 /// This function can be unsafe if trying to deallocate invalid memory.
 ///
