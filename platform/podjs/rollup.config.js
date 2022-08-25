@@ -2,9 +2,25 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
+import { wasm } from "@rollup/plugin-wasm";
+
+const common = {
+    plugins: [
+        json(),
+        resolve(),
+        commonjs(),
+        sucrase({
+            exclude: ["node_modules/**"],
+            transforms: ["typescript"],
+        }),
+        wasm({ targetEnv: "auto-inline" }),
+    ],
+    context: "window",
+};
 
 export default [
     {
+        ...common,
         input: "src/index.ts",
         output: [
             {
@@ -15,19 +31,10 @@ export default [
                 },
             },
         ],
-        plugins: [
-            json(),
-            resolve(),
-            commonjs(),
-            sucrase({
-                exclude: ["node_modules/**"],
-                transforms: ["typescript"],
-            }),
-        ],
-        context: "window",
         external: ["chai"],
     },
     {
+        ...common,
         input: "src/pod.ts",
         output: [
             {
@@ -35,15 +42,5 @@ export default [
                 format: "iife",
             },
         ],
-        plugins: [
-            json(),
-            resolve(),
-            commonjs(),
-            sucrase({
-                exclude: ["node_modules/**"],
-                transforms: ["typescript"],
-            }),
-        ],
-        context: "window",
     },
 ];

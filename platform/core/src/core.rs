@@ -46,6 +46,7 @@ const PREFERENCES_DB: &str = "preferences_db";
 // to be shared between components, as well managing components lifetime.
 struct Core<'a> {
     language_code: String,
+    fs_root: String,
     #[allow(dead_code)]
     preferences: Arc<Preferences>,
     user_session: Mutex<UserSession<'a>>,
@@ -74,13 +75,16 @@ pub fn bootstrap(
         return Err(CoreFailure::core_already_bootstrapped());
     }
     let preferences = Arc::new(Preferences {
-        store: Box::new(DefaultKeyValueStore::new(fs_root.to_string() + "/" + PREFERENCES_DB)),
+        store: Box::new(DefaultKeyValueStore::new(
+            fs_root.clone() + "/" + PREFERENCES_DB,
+        )),
     });
 
     let builder = Box::new(Instant::now);
     let user_session = Mutex::from(UserSession::new(builder, preferences.clone()));
     let core = Core {
         language_code,
+        fs_root,
         preferences,
         user_session,
         platform_hook,

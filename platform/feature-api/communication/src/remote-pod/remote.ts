@@ -18,6 +18,7 @@ import {
     DefaultGraph,
     Quad as polyQuad,
     DataFactory,
+    SPARQLQueryResult,
 } from "@polypoly-eu/api";
 import { Quad } from "rdf-js";
 import { RequestListener } from "http";
@@ -44,10 +45,10 @@ import {
 
 type PolyInBackend = ObjectBackendSpec<{
     match(matcher: Partial<Matcher>): ValueBackendSpec<Quad[]>;
-    add(...quads: Quad[]): ValueBackendSpec<void>;
-    delete(...quads: Quad[]): ValueBackendSpec<void>;
-    has(...quads: Quad[]): ValueBackendSpec<boolean>;
-    query(query: string): ValueBackendSpec<string>;
+    add(quad: Quad): ValueBackendSpec<void>;
+    delete(quad: Quad): ValueBackendSpec<void>;
+    has(quad: Quad): ValueBackendSpec<boolean>;
+    query(query: string): ValueBackendSpec<SPARQLQueryResult>;
     update(query: string): ValueBackendSpec<void>;
 }>;
 
@@ -202,12 +203,12 @@ export class RemoteClientPod implements Pod {
 
     get polyIn(): PolyIn {
         return {
-            add: (...quads) => this.rpcClient.polyIn().add(...quads)(),
+            add: (quad) => this.rpcClient.polyIn().add(quad)(),
             match: (matcher) => this.rpcClient.polyIn().match(matcher)(),
-            delete: (...quads) => this.rpcClient.polyIn().delete(...quads)(),
-            has: (...quads) => this.rpcClient.polyIn().has(...quads)(),
-            query: (query: string) => this.rpcClient.polyIn().query(query)(),
-            update: (query: string) => this.rpcClient.polyIn().update(query)(),
+            delete: (quad) => this.rpcClient.polyIn().delete(quad)(),
+            has: (quad) => this.rpcClient.polyIn().has(quad)(),
+            query: (query) => this.rpcClient.polyIn().query(query)(),
+            update: (query) => this.rpcClient.polyIn().update(query)(),
         };
     }
 

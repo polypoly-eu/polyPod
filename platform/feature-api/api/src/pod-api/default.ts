@@ -114,21 +114,18 @@ export class DefaultPod implements Pod {
                         dataFactory.defaultGraph()
                     )
                 ),
-            add: async (...quads) =>
-                quads.forEach((quad) => {
-                    this.checkQuad(quad);
-                    this.store.add(quad);
-                }),
-            delete: async (...quads) =>
-                quads.forEach((quad) => {
-                    this.checkQuad(quad);
-                    this.store.delete(quad);
-                }),
-            has: async (...quads) =>
-                quads.some((quad) => {
-                    this.checkQuad(quad);
-                    return this.store.has(quad);
-                }),
+            add: async (quad) => {
+                this.checkQuad(quad);
+                this.store.add(quad);
+            },
+            delete: async (quad) => {
+                this.checkQuad(quad);
+                this.store.delete(quad);
+            },
+            has: async (quad) => {
+                this.checkQuad(quad);
+                return this.store.has(quad);
+            },
             query: async (query) => this.rdfStore.query(query),
             update: async (query) => this.rdfStore.update(query),
         };

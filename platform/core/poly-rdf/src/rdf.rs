@@ -27,6 +27,7 @@ pub fn rdf_query(query: SPARQLQuery, app_path: String) -> Result<QueryResults, R
     let store = init_store(app_path).map_err(RdfFailure::failed_to_initialize_store)?;
     match check_query(query.to_string()) {
         Ok(_) => store.query(&query).map_err(RdfFailure::map_evaluation_error),
+
         Err(error) => Err(error),
     }
 }

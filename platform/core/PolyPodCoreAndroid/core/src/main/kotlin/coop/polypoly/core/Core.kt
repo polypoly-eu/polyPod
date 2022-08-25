@@ -22,16 +22,16 @@ class Core {
             ) { mapFeatureCategories(it) }
         }
 
-        fun execRdfQuery(query: String, appPath: String): Value {
+        fun execRdfQuery(query: String): Value {
             return handleCoreResponse(
-                JniApi().execRdfQuery(query, appPath)
+                JniApi.execRdfQuery(query)
             ) { it }
         }
 
-        fun execRdfUpdate(query: String, appPath: String) {
+        fun execRdfUpdate(query: String) {
             return handleCoreResponse(
-                JniApi().execRdfUpdate(query, appPath)
-            )
+                JniApi.execRdfUpdate(query)
+            ) {}
         }
 
         fun appDidBecomeInactive() {
