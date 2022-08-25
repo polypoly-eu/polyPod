@@ -166,7 +166,7 @@ pub fn exec_feature_rdf_update (
     }
 }
 
-pub fn exec_rdf_query(query: SPARQLQuery) -> Result<String, CoreFailure> {
+pub fn exec_rdf_query(query: SPARQLQuery) -> Result<QueryResults, CoreFailure> {
     let instance = get_instance()?;
     rdf_query(query, instance.fs_root.clone()).map_err(CoreFailure::map_rdf_to_core_failure)
 }
