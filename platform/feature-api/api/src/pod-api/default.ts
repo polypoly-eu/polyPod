@@ -9,8 +9,16 @@
 
 import * as RDF from "rdf-js";
 import { dataFactory } from "../rdf";
-import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint } from "./api";
-import { EncodingOptions, Stats } from "./fs";
+import {
+    Pod,
+    PolyIn,
+    PolyOut,
+    PolyNav,
+    Info,
+    Endpoint,
+    EncodingOptions,
+    Stats,
+} from "./api";
 import { IFs } from "memfs";
 import { Entry } from ".";
 
