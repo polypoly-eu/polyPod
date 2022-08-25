@@ -1,9 +1,9 @@
-use crate::common::serialization::{message_pack_deserialize, message_pack_serialize};
-use crate::core_failure::CoreFailure;
+use common::serialization::{message_pack_deserialize, message_pack_serialize};
+use core_failure::CoreFailure;
 use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
-use crate::core::{self, PlatformRequest, PlatformResponse};
+use lib::core::{self, PlatformRequest, PlatformResponse};
 use std::os::raw::c_char;
 
 /// # Safety

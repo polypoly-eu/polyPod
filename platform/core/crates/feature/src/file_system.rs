@@ -1,4 +1,5 @@
-use crate::{core_failure::CoreFailure, io::file_system::FileSystem};
+use core_failure::CoreFailure;
+use io::file_system::FileSystem;
 use url::Url;
 use uuid::Uuid;
 
@@ -227,7 +228,7 @@ mod tests {
 
     use super::*;
 
-    use crate::io::file_system::DefaultFileSystem;
+    use io::file_system::DefaultFileSystem;
     use std::collections::HashSet;
     use std::fs::{DirBuilder, File};
     use std::iter::FromIterator;
