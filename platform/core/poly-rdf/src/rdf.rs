@@ -10,14 +10,14 @@ fn init_store(app_path: String) -> Result<Store, StorageError> {
 }
 
 fn check_query(query: SPARQLQuery) -> Result<Query, RdfFailure> {
-    return match Query::parse(&query, None) {
+    match Query::parse(&query, None) {
         Ok(query) => Ok(query),
         Err(error) => Err(RdfFailure::map_query_parse_error(error)),
     };
 }
 
 fn check_update(query: SPARQLQuery) -> Result<Update, RdfFailure> {
-    return match Update::parse(&query, None) {
+    match Update::parse(&query, None) {
         Ok(query) => Ok(query),
         Err(error) => Err(RdfFailure::map_query_parse_error(error)),
     };
