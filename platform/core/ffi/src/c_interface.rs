@@ -1,5 +1,5 @@
 use common::serialization::{message_pack_deserialize, message_pack_serialize};
-use failure::CoreFailure;
+use core_failure::CoreFailure;
 use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;

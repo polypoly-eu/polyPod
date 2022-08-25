@@ -1,4 +1,4 @@
-use failure::CoreFailure;
+use core_failure::CoreFailure;
 use io::file_system::FileSystem;
 use url::Url;
 use uuid::Uuid;

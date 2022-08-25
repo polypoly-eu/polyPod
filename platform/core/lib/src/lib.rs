@@ -1,5 +1,5 @@
 pub mod core {
-    use failure::CoreFailure;
+    use core_failure::CoreFailure;
     use feature_categories;
     use io::{file_system::DefaultFileSystem, key_value_store::DefaultKeyValueStore};
     use preferences::Preferences;

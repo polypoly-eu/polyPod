@@ -1,4 +1,4 @@
-use failure::CoreFailure;
+use core_failure::CoreFailure;
 use std::fs::{self, DirBuilder, File};
 use std::path::Path;
 use url::Url;
