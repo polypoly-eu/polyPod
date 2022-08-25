@@ -13,8 +13,19 @@ export const langConstants = {
     },
 };
 export function matchRegex(path, importer) {
+    // There can be non standard spaces in the path. Replace them with a normal space.
+    const sanitizedPath = path.replace(
+        /[\u00a0\u1680\u2000-\u200b\u202f\u205f\u3000\ufeff]/,
+        " "
+    );
     const importerName = importer.constructor.name;
-    const normalizedPath = path.normalize("NFC");
+    const normalizedPath = sanitizedPath.normalize("NFC");
+    const normalizedRegex = RegExp(
+        langConstants[importerName].regex
+            .toString()
+            .normalize("NFC")
+            .slice(1, -1)
+    );
     console.log(`matchRegex normalized path: ${normalizedPath}`);
-    return langConstants[importerName].regex.test(normalizedPath);
+    return normalizedRegex.test(normalizedPath);
 }
