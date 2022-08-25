@@ -9,16 +9,7 @@
 
 import * as RDF from "rdf-js";
 import { dataFactory } from "../rdf";
-import {
-    Pod,
-    PolyIn,
-    PolyOut,
-    PolyNav,
-    Info,
-    Endpoint,
-    EncodingOptions,
-    Stats,
-} from "./api";
+import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint, Stats } from "./api";
 import { IFs } from "memfs";
 import { Entry } from ".";
 
@@ -31,14 +22,8 @@ export const DEFAULT_POD_RUNTIME_VERSION = "podjs-default-version";
 export class DefaultPolyOut implements PolyOut {
     constructor(public readonly fs: IFs["promises"]) {}
 
-    readFile(path: string, options: EncodingOptions): Promise<string>;
-    readFile(path: string): Promise<Uint8Array>;
-    readFile(
-        path: string,
-        options?: EncodingOptions
-    ): Promise<string | Uint8Array> {
-        if (options === undefined) return this.fs.readFile(path);
-        else return this.fs.readFile(path, options);
+    async readFile(path: string): Promise<Buffer> {
+        return (await this.fs.readFile(path)) as Buffer;
     }
 
     readDir(path: string): Promise<Entry[]> {
@@ -65,12 +50,8 @@ export class DefaultPolyOut implements PolyOut {
         };
     }
 
-    writeFile(
-        path: string,
-        content: string,
-        options: EncodingOptions
-    ): Promise<void> {
-        return this.fs.writeFile(path, content, options);
+    writeFile(path: string, content: string): Promise<void> {
+        return this.fs.writeFile(path, content);
     }
 
     async importArchive(url: string, destUrl?: string): Promise<string> {

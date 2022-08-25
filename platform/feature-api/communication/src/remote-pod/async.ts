@@ -6,7 +6,6 @@ import {
     PolyNav,
     ExternalFile,
     Endpoint,
-    EncodingOptions,
     Entry,
     Matcher,
     Stats,
@@ -17,22 +16,12 @@ import { DataFactory, Quad } from "rdf-js";
 class AsyncPolyOut implements PolyOut {
     constructor(private readonly promise: Promise<PolyOut>) {}
 
-    readFile(path: string, options: EncodingOptions): Promise<string>;
-    readFile(path: string): Promise<Uint8Array>;
-    async readFile(
-        path: string,
-        options?: EncodingOptions
-    ): Promise<string | Uint8Array> {
-        if (options) return (await this.promise).readFile(path, options);
-        else return (await this.promise).readFile(path);
+    async readFile(path: string): Promise<Uint8Array> {
+        return (await this.promise).readFile(path);
     }
 
-    async writeFile(
-        path: string,
-        content: string,
-        options: EncodingOptions
-    ): Promise<void> {
-        return (await this.promise).writeFile(path, content, options);
+    async writeFile(path: string, content: string): Promise<void> {
+        return (await this.promise).writeFile(path, content);
     }
     async stat(path: string): Promise<Stats> {
         return (await this.promise).stat(path);

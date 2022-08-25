@@ -105,10 +105,6 @@ export interface Entry {
     path: string;
 }
 
-export interface EncodingOptions {
-    encoding: BufferEncoding;
-}
-
 export interface Stats {
     id: string;
     size: number;
@@ -125,13 +121,8 @@ export interface Stats {
  * - [[FS]] for Node.js-style file-system access
  */
 export interface PolyOut {
-    readFile(path: string, options: EncodingOptions): Promise<string>;
     readFile(path: string): Promise<Uint8Array>;
-    writeFile(
-        path: string,
-        content: string,
-        options: EncodingOptions
-    ): Promise<void>;
+    writeFile(path: string, content: string): Promise<void>;
     stat(path: string): Promise<Stats>;
     importArchive(url: string, destUrl?: string): Promise<string>;
     removeArchive(fileId: string): Promise<void>;

@@ -276,18 +276,8 @@ class IDBPolyOut implements PolyOut {
         };
     }
 
-    readFile(path: string, options: EncodingOptions): Promise<string>;
-
-    readFile(path: string): Promise<Uint8Array>;
-
-    readFile(
-        id: string,
-        options?: EncodingOptions
-    ): Promise<string | Uint8Array | undefined> {
-        if (options) {
-            throw new Error("Not implemented: readFile with options");
-        }
-        return this.getFile(id).then((file) => file.read());
+    async readFile(id: string): Promise<Uint8Array> {
+        return (await this.getFile(id)).read();
     }
 
     async stat(id: string): Promise<Stats> {
