@@ -1,0 +1,3 @@
+# PolyPodCore root crate
+
+This the root crate for PolyPodCore, which acts as a Facade exposing a bundle of different functionalities.
