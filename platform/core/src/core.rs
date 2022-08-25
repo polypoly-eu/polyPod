@@ -6,6 +6,11 @@ use crate::{
     user_session::{TimeoutOption, UserSession, UserSessionTimeout},
 };
 
+use std::path::Path;
+use oxigraph::{
+    store::Store,
+    sparql::QueryResults
+};
 use once_cell::sync::OnceCell;
 use poly_rdf::rdf::{rdf_query, rdf_update, SPARQLQuery};
 use serde::{Deserialize, Serialize};
@@ -46,6 +51,9 @@ struct Core<'a> {
     user_session: Mutex<UserSession<'a>>,
     #[allow(dead_code)]
     platform_hook: Box<dyn PlatformHookRequest>,
+    fs_root: String,
+    active_feature_id: Option<String>,
+    feature_rdf_store: Option<Store>,
 }
 
 fn get_instance() -> Result<MutexGuard<'static, Core<'static>>, CoreFailure> {
@@ -66,7 +74,7 @@ pub fn bootstrap(
         return Err(CoreFailure::core_already_bootstrapped());
     }
     let preferences = Arc::new(Preferences {
-        store: Box::new(DefaultKeyValueStore::new(fs_root + "/" + PREFERENCES_DB)),
+        store: Box::new(DefaultKeyValueStore::new(fs_root.to_string() + "/" + PREFERENCES_DB)),
     });
 
     let builder = Box::new(Instant::now);
@@ -76,6 +84,9 @@ pub fn bootstrap(
         preferences,
         user_session,
         platform_hook,
+        fs_root,
+        active_feature_id: None,
+        feature_rdf_store: None,
     };
 
     let _ = CORE.set(Mutex::from(core));
@@ -113,12 +124,56 @@ pub fn load_feature_categories(
     )
 }
 
-pub fn exec_rdf_query(query: SPARQLQuery, app_path: String) -> Result<String, CoreFailure> {
-    rdf_query(query, app_path).map_err(CoreFailure::map_rdf_to_core_failure)
+fn open_store(fs_root: String, active_feature_id: String) -> Result<Store, CoreFailure> {
+    Store::open(Path::new(&format!("{}/{}/{}", fs_root, active_feature_id, env!("RDF_DB_PATH")))).map_err(CoreFailure::map_storage_error)
 }
 
-pub fn exec_rdf_update(query: SPARQLQuery, app_path: String) -> Result<(), CoreFailure> {
-    rdf_update(query, app_path).map_err(CoreFailure::map_rdf_to_core_failure)
+pub fn open_feature_rdf_store() -> Result<(), CoreFailure> {
+    let mut instance = get_instance()?;
+    if instance.active_feature_id == None {
+        return Err(CoreFailure::no_active_feature("Open feature rdf store".to_string()))
+    }
+    match &instance.active_feature_id {
+        Some(id) => match open_store(instance.fs_root.to_string(), id.to_string()) {
+            Ok(store) => {
+                instance.feature_rdf_store = Some(store);
+                Ok(())
+            },
+            Err(error) => Err(error)
+        },
+        _ => Err(CoreFailure::no_active_feature("Open feature rdf store".to_string()))
+    }
+}
+
+pub fn exec_feature_rdf_query (
+    query: SPARQLQuery,
+) -> Result<QueryResults, CoreFailure> {
+    let instance = get_instance()?;
+    match &instance.feature_rdf_store {
+        Some(store) => store.query(&query).map_err(CoreFailure::map_sparql_evaluation_error),
+        _ => Err(CoreFailure::feature_store_not_initialized()) 
+    }
+}
+
+
+pub fn exec_feature_rdf_update (
+    query: SPARQLQuery,
+) -> Result<(), CoreFailure> {
+    let instance = get_instance()?;
+    match &instance.feature_rdf_store {
+        Some(store) => store.update(&query).map_err(CoreFailure::map_sparql_evaluation_error),
+        _ => Err(CoreFailure::feature_store_not_initialized()) 
+    }
+}
+
+pub fn exec_rdf_query(query: SPARQLQuery) -> Result<String, CoreFailure> {
+    let instance = get_instance()?;
+    rdf_query(query, instance.fs_root.clone()).map_err(CoreFailure::map_rdf_to_core_failure)
+}
+
+pub fn exec_rdf_update(query: SPARQLQuery) -> Result<(), CoreFailure> {
+    let instance = get_instance()?;
+    rdf_update(query, instance.fs_root.clone()).map_err(CoreFailure::map_rdf_to_core_failure)
 }
 
 // App events

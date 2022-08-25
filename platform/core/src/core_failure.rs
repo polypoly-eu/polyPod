@@ -1,5 +1,6 @@
 use poly_rdf::rdf_failure::RdfFailure;
 use serde::{Deserialize, Serialize};
+use oxigraph::{store::StorageError, sparql::EvaluationError};
 use url::Url;
 
 #[derive(Debug, Clone, Serialize)]
@@ -29,6 +30,10 @@ pub enum FailureCode {
     FailedToConvertBytes,
     FailedToAccessUserSession,
     FailedToAttachJVM,
+    NoActiveFeature,
+    FailedToOpenFeatureRdfStore,
+    FeatureStoreNotInitialized,
+    MapEvaluationError,
 }
 
 impl FailureCode {
@@ -249,6 +254,34 @@ impl CoreFailure {
         CoreFailure {
             code: FailureCode::FailedToAccessUserSession.value(),
             message: format!("Failed to access user_session, info  '{}'", message),
+        }
+    }
+
+    pub fn map_storage_error(error: StorageError) -> Self {
+        CoreFailure {
+            code: FailureCode::FailedToOpenFeatureRdfStore.value(),
+            message: error.to_string(),
+        }
+    } 
+
+    pub fn no_active_feature(action: String) -> Self {
+        CoreFailure {
+            code: FailureCode::NoActiveFeature.value(),
+            message: format!("Failed to conduct action: {}. No feature active", action),
+        }
+    }
+
+    pub fn feature_store_not_initialized() -> Self {
+        CoreFailure {
+            code: FailureCode::FeatureStoreNotInitialized.value(),
+            message: "Failed to access feature store: Not initialized. Create a store session first before querying it!".to_string(),
+        }
+    } 
+
+    pub fn map_sparql_evaluation_error(error: EvaluationError) -> Self {
+        CoreFailure {
+            code: FailureCode::MapEvaluationError.value(),
+            message: error.to_string()
         }
     }
 }

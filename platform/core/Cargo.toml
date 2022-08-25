@@ -21,6 +21,7 @@ url="2.2.2"
 zip = "0.6.2"
 tempfile = "3.3.0"
 poly_rdf = { path = "poly-rdf"}
+oxigraph = "0.3.4"
 [dependencies.uuid]
 version = "1.1.2"
 features = [
