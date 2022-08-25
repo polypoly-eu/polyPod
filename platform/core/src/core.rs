@@ -88,7 +88,6 @@ pub fn bootstrap(
         preferences,
         user_session,
         platform_hook,
-        fs_root,
         active_feature_id: None,
         feature_rdf_store: None,
     };
