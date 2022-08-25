@@ -52,7 +52,6 @@ struct Core<'a> {
     user_session: Mutex<UserSession<'a>>,
     #[allow(dead_code)]
     platform_hook: Box<dyn PlatformHookRequest>,
-    fs_root: String,
     active_feature_id: Option<String>,
     feature_rdf_store: Option<Store>,
 }
