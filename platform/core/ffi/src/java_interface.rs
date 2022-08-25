@@ -1,5 +1,5 @@
 use common::serialization::{message_pack_deserialize, message_pack_serialize};
-use failure::CoreFailure;
+use core_failure::CoreFailure;
 use jni::{
     objects::{GlobalRef, JClass, JObject, JString, JValue},
     sys::jbyteArray,
