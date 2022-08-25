@@ -1,4 +1,4 @@
-use crate::core_failure::CoreFailure;
+use failure::CoreFailure;
 use std::fs::{self, DirBuilder, File};
 use std::path::Path;
 use url::Url;

@@ -1,0 +1,19 @@
+[package]
+name = "ffi"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "polypod_core"
+crate-type = ["staticlib", "cdylib"]
+
+[dependencies]
+rmp-serde = "1.1.0"
+common = { path = "../crates/common" }
+lib = { path = "../lib" }
+failure = { path = "../crates/failure" }
+
+[target.'cfg(target_os = "android")'.dependencies]
+jni = { version = "0.19.0", default-features = false }
+android_logger = "0.11"
+log = "0.4.17"

@@ -1,11 +1,11 @@
-use crate::common::serialization::{message_pack_deserialize, message_pack_serialize};
-use crate::core::{self, PlatformRequest, PlatformResponse};
-use crate::core_failure::CoreFailure;
+use common::serialization::{message_pack_deserialize, message_pack_serialize};
+use failure::CoreFailure;
 use jni::{
     objects::{GlobalRef, JClass, JObject, JString, JValue},
     sys::jbyteArray,
     JNIEnv, JavaVM,
 };
+use lib::core::{self, PlatformRequest, PlatformResponse};
 
 use log::error;
 
