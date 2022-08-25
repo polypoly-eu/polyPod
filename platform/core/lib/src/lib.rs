@@ -87,17 +87,6 @@ pub mod core {
             trace!("Rust:core => Bootstrapped!");
         }
 
-        // For testing purposes
-        // let core_2 = get_instance().unwrap();
-        // let response = core_2
-        //     .platform_hook
-        //     .perform_request(PlatformRequest::Example)
-        //     .unwrap();
-        // match response {
-        //     PlatformResponse::Example(a) => assert_eq!("Test".to_string(), a),
-        // }
-        // #[cfg(target_os = "android")]
-        // trace!("Rust:core => Platform response is fine!");
         Ok(())
     }
 

@@ -9,7 +9,7 @@ This crate implements the necessary functionality to export the `core` API to pl
 
 ## Building
 
-This crate is meant to be build for spefic architectures. Currently supported are iOS and Android.
+This crate is meant to be built for specific architectures. Currently supported are iOS and Android.
 
 - Building for iOS:
 ```shell
