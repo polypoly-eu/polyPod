@@ -103,6 +103,36 @@ pub mod core {
 
     // RDF
 
+    pub fn open_feature_rdf_store() -> Result<(), CoreFailure> {
+        let mut core = get_instance()?;
+        let mut feature = &core.active_feature;
+        match feature {
+            Some(feature) => feature.open_rdf_store(),
+            _ => Err(CoreFailure::no_active_feature("Open feature rdf store".to_string()))
+        }
+    }
+
+    pub fn exec_feature_rdf_query (
+        query: SPARQLQuery,
+    ) -> Result<QueryResults, CoreFailure> {
+        let instance = get_instance()?;
+        match &instance.active_feature {
+            Some(feature) => feature.exec_rdf_query(query),
+            _ => Err(CoreFailure::feature_store_not_initialized()) 
+        }
+    }
+
+
+    pub fn exec_feature_rdf_update (
+        query: SPARQLQuery,
+    ) -> Result<(), CoreFailure> {
+        let instance = get_instance()?;
+        match &instance.active_feature {
+            Some(feature) =>feature.exec_rdf_update(query),
+            _ => Err(CoreFailure::feature_store_not_initialized()) 
+        }
+    }
+
     pub fn exec_rdf_query(query: SPARQLQuery) -> Result<QueryResults, CoreFailure> {
         let instance = get_instance()?;
         rdf_query(query, instance.fs_root.clone()).map_err(CoreFailure::map_rdf_to_core_failure)
