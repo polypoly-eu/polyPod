@@ -20,12 +20,17 @@
   opacity: 0.38;
 }
 
-.poly-button.filled {
-  background-color: var(--theme-secondary-color);
-  color: var(--theme-primary-color);
+.poly-button.primary {
+  background-color: var(--pl-button-color-fill-primary);
+  color: var(--pl-button-color-color-primary);
 }
 
-.poly-button.outline {
+.poly-button.primary-medium {
+  background-color: var(--theme-tertiary-color);
+  color: var(--color-indigo-950);
+}
+
+.poly-button.secondary {
   border: 1px solid var(--theme-secondary-color);
   color: var(--theme-secondary-color);
   background-color: var(--transparent);

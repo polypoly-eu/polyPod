@@ -13,7 +13,7 @@ const Dialog = ({ title, message, backButton, proceedButton }) => {
                     <PolyButton
                         onClick={backButton.onClick}
                         label={backButton.text}
-                        type="outline"
+                        type="secondary"
                     />
                 ) : null}
                 <PolyButton

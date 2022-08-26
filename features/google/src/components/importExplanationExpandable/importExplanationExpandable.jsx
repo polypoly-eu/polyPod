@@ -145,12 +145,12 @@ const ImportExplanationExpandable = ({
                 ></p>
                 <InfoBox textContent={i18n.t("import:request.info.2")} />
                 <PolyButton
-                    className="bg-red"
+                    type="medium"
                     onClick={() => handleRequestStatus()}
                     label={i18n.t("import:request.button")}
                 ></PolyButton>
                 <PolyButton
-                    type="outline"
+                    type="secondary"
                     onClick={() => handleExampleDataRequest()}
                     label={i18n.t("import:request.example.data")}
                 ></PolyButton>
@@ -172,12 +172,12 @@ const ImportExplanationExpandable = ({
                 <img src="./images/download.svg" alt="document" />
                 <p>{i18n.t("import:download.3")}</p>
                 <PolyButton
-                    className="bg-red"
+                    type="medium"
                     onClick={() => handleDownloadDataLinkClick()}
                     label={i18n.t("import:download.button.1")}
                 ></PolyButton>
                 <PolyButton
-                    type="outline"
+                    type="secondary"
                     onClick={() => onUpdateImportStatus(importSteps.import)}
                     label={i18n.t("import:download.button.2")}
                 ></PolyButton>
@@ -219,7 +219,7 @@ const ImportExplanationExpandable = ({
                     )}
                 </div>
                 <PolyButton
-                    type="outline"
+                    type="secondary"
                     onClick={handleSelectFile}
                     label={
                         selectedFiles.length
@@ -228,7 +228,7 @@ const ImportExplanationExpandable = ({
                     }
                 ></PolyButton>
                 <PolyButton
-                    className="bg-red"
+                    type="medium"
                     onClick={handleImportFile}
                     label={i18n.t(
                         selectedFiles.length > 1
@@ -251,14 +251,14 @@ const ImportExplanationExpandable = ({
                     <>
                         <RoutingWrapper history={history} route="/overview">
                             <PolyButton
-                                className="bg-red"
+                                type="medium"
                                 label={i18n.t("import:explore.button")}
                             ></PolyButton>
                         </RoutingWrapper>
                     </>
                 ) : (
                     <PolyButton
-                        className="bg-red"
+                        type="medium"
                         label={i18n.t("import:explore.button")}
                         disabled="disabled"
                     ></PolyButton>
