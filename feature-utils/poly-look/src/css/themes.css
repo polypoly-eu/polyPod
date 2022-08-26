@@ -36,6 +36,9 @@
   --pl-button-color-fill-primary: var(--theme-secondary-color);
   --pl-button-color-color-primary: var(--theme-primary-color);
   --theme-info-button-color: var(--color-gray-300);
+  --pl-button-color-fill-secondary: var(--transparent);
+  --pl-button-color-border-secondary: var(--theme-secondary-color);
+  --pl-button-color-text-secondary: var(--theme-secondary-color);
 }
 
 .poly-theme-coop {
@@ -46,6 +49,9 @@
   --theme-info-button-color: var(--color-gray-300);
   --pl-button-color-fill-primary: var(--theme-tertiary-color);
   --pl-button-color-color-primary: var(--theme-secondary-color);
+  --pl-button-color-fill-secondary: var(--transparent);
+  --pl-button-color-border-secondary: var(--theme-secondary-color);
+  --pl-button-color-text-secondary: var(--theme-secondary-color);
 }
 
 .poly-theme h1,
