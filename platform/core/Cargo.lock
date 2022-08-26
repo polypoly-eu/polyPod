@@ -418,6 +418,7 @@ version = "0.1.0"
 dependencies = [
  "core_failure",
  "io",
+ "oxigraph",
  "tempfile",
  "url",
  "uuid",
@@ -685,6 +686,7 @@ version = "0.1.0"
 dependencies = [
  "android_logger",
  "core_failure",
+ "feature",
  "feature_categories",
  "io",
  "log",

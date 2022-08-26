@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 url = "2.2.2"
+oxigraph = { git = "https://github.com/oxigraph/oxigraph", version = "0.3.6" }
 io = { path = "../io" }
 core_failure = { path = "../core_failure" }
 

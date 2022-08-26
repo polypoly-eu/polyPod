@@ -1,12 +1,15 @@
 use oxigraph::{store::{StorageError, Store}, sparql::QueryResults};
+use std::path::PathBuf;
 use spargebra::{Query, Update};
 
 use crate::rdf_failure::RdfFailure;
 
 pub type SPARQLQuery = String;
 
-fn init_store(app_path: String) -> Result<Store, StorageError> {
-    Store::open(app_path + env!("RDF_DB_PATH"))
+fn init_store(app_path: PathBuf) -> Result<Store, StorageError> {
+    let mut store_path = app_path;
+    store_path.push(env!("RDF_DB_PATH"));
+    Store::open(store_path)
 }
 
 fn check_query(query: SPARQLQuery) -> Result<Query, RdfFailure> {
@@ -23,7 +26,7 @@ fn check_update(query: SPARQLQuery) -> Result<Update, RdfFailure> {
     }
 }
 
-pub fn rdf_query(query: SPARQLQuery, app_path: String) -> Result<QueryResults, RdfFailure> {
+pub fn rdf_query(query: SPARQLQuery, app_path: PathBuf) -> Result<QueryResults, RdfFailure> {
     let store = init_store(app_path).map_err(RdfFailure::failed_to_initialize_store)?;
     match check_query(query.to_string()) {
         Ok(_) => store.query(&query).map_err(RdfFailure::map_evaluation_error),
@@ -32,7 +35,7 @@ pub fn rdf_query(query: SPARQLQuery, app_path: String) -> Result<QueryResults, R
     }
 }
 
-pub fn rdf_update(query: SPARQLQuery, app_path: String) -> Result<(), RdfFailure> {
+pub fn rdf_update(query: SPARQLQuery, app_path: PathBuf) -> Result<(), RdfFailure> {
     let store = init_store(app_path).map_err(RdfFailure::failed_to_initialize_store)?;
     match check_update(query.to_string()) {
         Ok(_) => store

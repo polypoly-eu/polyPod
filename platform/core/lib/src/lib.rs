@@ -1,6 +1,7 @@
 pub mod core {
     use core_failure::CoreFailure;
     use feature_categories;
+    use feature::feature::Feature;
     use io::{file_system::DefaultFileSystem, key_value_store::DefaultKeyValueStore};
     use preferences::Preferences;
     use poly_rdf::rdf::{rdf_query, rdf_update, SPARQLQuery};
@@ -10,10 +11,9 @@ pub mod core {
     use serde::{Deserialize, Serialize};
     use std::sync::{Arc, Mutex};
     use std::{sync::MutexGuard, time::Instant};
+    use std::path::PathBuf;
 
-    use std::path::Path;
     use oxigraph::{
-        store::Store,
         sparql::QueryResults
     };
 
@@ -49,14 +49,13 @@ pub mod core {
     // to be shared between components, as well managing components lifetime.
     struct Core<'a> {
         language_code: String,
-        fs_root: String,
+        fs_root: PathBuf,
         #[allow(dead_code)]
         preferences: Arc<Preferences>,
         user_session: Mutex<UserSession<'a>>,
         #[allow(dead_code)]
         platform_hook: Box<dyn PlatformHookRequest>,
-        active_feature_id: Option<String>,
-        feature_rdf_store: Option<Store>,
+        active_feature: Option<Feature>,
     }
 
     fn get_instance() -> Result<MutexGuard<'static, Core<'static>>, CoreFailure> {
@@ -72,7 +71,7 @@ pub mod core {
         language_code: String,
         fs_root: String,
         platform_hook: Box<dyn PlatformHookRequest>,
-    ) -> Result<(), CoreFailure> {
+    ) -> Result<(), CoreFailure> { 
         if CORE.get().is_some() {
             return Err(CoreFailure::core_already_bootstrapped());
         }
@@ -84,12 +83,11 @@ pub mod core {
         let user_session = Mutex::from(UserSession::new(builder, preferences.clone()));
         let core = Core {
             language_code,
-            fs_root,
+            fs_root: PathBuf::from(fs_root),
             preferences,
             user_session,
             platform_hook,
-            active_feature_id: None,
-            feature_rdf_store: None,
+            active_feature: None,
         };
 
         let _ = CORE.set(Mutex::from(core));
@@ -104,48 +102,6 @@ pub mod core {
     }
 
     // RDF
-
-    fn open_store(fs_root: String, active_feature_id: String) -> Result<Store, CoreFailure> {
-        Store::open(Path::new(&format!("{}/{}/{}", fs_root, active_feature_id, env!("RDF_DB_PATH")))).map_err(CoreFailure::map_storage_error)
-    }
-
-    pub fn open_feature_rdf_store() -> Result<(), CoreFailure> {
-        let mut instance = get_instance()?;
-        if instance.active_feature_id == None {
-            return Err(CoreFailure::no_active_feature("Open feature rdf store".to_string()))
-        }
-        match &instance.active_feature_id {
-            Some(id) => match open_store(instance.fs_root.to_string(), id.to_string()) {
-                Ok(store) => {
-                    instance.feature_rdf_store = Some(store);
-                    Ok(())
-                },
-                Err(error) => Err(error)
-            },
-            _ => Err(CoreFailure::no_active_feature("Open feature rdf store".to_string()))
-        }
-    }
-
-    pub fn exec_feature_rdf_query (
-        query: SPARQLQuery,
-    ) -> Result<QueryResults, CoreFailure> {
-        let instance = get_instance()?;
-        match &instance.feature_rdf_store {
-            Some(store) => store.query(&query).map_err(CoreFailure::map_sparql_evaluation_error),
-            _ => Err(CoreFailure::feature_store_not_initialized()) 
-        }
-    }
-
-
-    pub fn exec_feature_rdf_update (
-        query: SPARQLQuery,
-    ) -> Result<(), CoreFailure> {
-        let instance = get_instance()?;
-        match &instance.feature_rdf_store {
-            Some(store) => store.update(&query).map_err(CoreFailure::map_sparql_evaluation_error),
-            _ => Err(CoreFailure::feature_store_not_initialized()) 
-        }
-    }
 
     pub fn exec_rdf_query(query: SPARQLQuery) -> Result<QueryResults, CoreFailure> {
         let instance = get_instance()?;
@@ -171,6 +127,17 @@ pub mod core {
     }
 
     // App events
+
+    pub fn did_open_feature(id: String) -> Result<(), CoreFailure>{
+        let mut core = get_instance()?;
+        let mut feature_path = core.fs_root.clone();
+        feature_path.push(id);
+        core.active_feature = Some(
+            Feature::new(feature_path)
+        );
+
+        Ok(())
+    }
 
     pub fn app_did_become_inactive() -> Result<(), CoreFailure> {
         let mut instance = get_instance()?;
