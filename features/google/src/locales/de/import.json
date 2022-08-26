@@ -13,7 +13,7 @@
     "how.it.works": "So geht's",
     "request.2": "Gehen Sie zu https://takeout.google.com/",
     "request.3": "Um Ihre Daten korrekt zu analysieren müssen Sie die Vorauswahl über 'Auswahl aufheben' verändern. Dann wählen Sie maximal vier Produkte aus, zum Beispiel <strong>ZUGRIFFSPROTOKOLLAKTIVITÄTEN</strong>, <strong>MEINE AKTIVITÄTEN</strong>, <strong>STANDORTVERLAUF</strong> oder <strong>PROFIL</strong>.",
-    "request.4": "Bei <strong>MEINE AKTIVITÄTEN</strong> oder <strong>PROFIL</strong> wäre es hilfreich wenn Sie das Datenformat von 'HTML' (Standard) zu 'JSON' ändern, indem Sie auf die Format-Schaltfläche tippen und dann die entsprechende Option auswählen. Fordern Sie dann die Datei an. Sie erhalten eine Bestätigung per E-Mail.",
+    "request.4": "Bei <strong>MEINE AKTIVITÄTEN</strong> oder <strong>PROFIL</strong> wäre es hilfreich wenn Sie das Datenformat von 'HTML' (Standard) zu 'JSON' ändern. Dazu klicken Sie auf die Schaltfläche 'Multiple Formate' und ändern wo immer möglich HTML zu JSON. Fordern Sie dann die Datei an. Sie erhalten eine Bestätigung per E-Mail.",
     "request.info.2": "WICHTIG: Es kann bis zu 24 Stunden dauern bis Ihre Daten bereitstehen. Sobald Google Ihre Daten bereitstellt, sind sie sieben Tage lang zum Herunterladen verfügbar.",
     "request.button": "Anfrage starten",
     "request.example.data": "Beispieldaten verwenden",

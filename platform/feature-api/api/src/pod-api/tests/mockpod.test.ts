@@ -1,6 +1,5 @@
 import { podSpec } from "../spec";
 import { MockPod, MockPolyOut } from "../mock-pod";
-import { FS } from "../fs";
 import { PolyPodUriError } from "../uri";
 import { Volume } from "memfs";
 
@@ -21,6 +20,5 @@ describe("Mock pod with default values", () => {
 });
 
 describe("Mock pod with existing fs", () => {
-    const fs = new Volume().promises as unknown as FS;
-    podSpec(new MockPod(fs), "/");
+    podSpec(new MockPod(new Volume().promises), "/");
 });
