@@ -39,9 +39,14 @@ class AccessLogParser {
 export default class AccessLogImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await relevantZipEntries(zipFile);
-        const accessLogEntries = entries.filter(({ path }) =>
-            matchRegex(path, this)
+        console.log(
+            `AccessLogImporter: Relevant entries count ${entries.length}`
         );
+        const accessLogEntries = entries.filter(({ path }) => {
+            console.log(`Entry path about to be filtered by regex: ${path}`);
+            return matchRegex(path, this);
+        });
+        console.log(`Access Logs count ${accessLogEntries.length}`);
         const parser = new AccessLogParser();
         const parserOutput = (
             await Promise.all(
