@@ -103,7 +103,7 @@ struct FeatureView: View {
         )
         alert.addAction(UIAlertAction(
             title: NSLocalizedString(
-                "button_error_report",
+                "button_error_report_allow",
                 comment: ""
             ),
             style: .default,
@@ -117,6 +117,16 @@ struct FeatureView: View {
                         Log.debug("Error uploaded successfully")
                     }
                 )
+            }
+        ))
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString(
+                "button_error_report_deny",
+                comment: ""
+            ),
+            style: .default,
+            handler: { _ in
+                closeAction()
             }
         ))
 
