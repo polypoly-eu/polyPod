@@ -100,7 +100,6 @@
 		9049ECA427BCE8B70059605A /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9049ECA327BCE8B70059605A /* CocoaLumberjackSwift */; };
 		904D4A7027905D5B00A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
 		904D4A712790633000A75AED /* DispatchToMainQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */; };
-		905C687F27F1EA26005A2819 /* PolyPodCoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 905C687E27F1EA26005A2819 /* PolyPodCoreSwift */; };
 		906E406C27A82C7F009015B7 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E406B27A82C7F009015B7 /* ActivityViewController.swift */; };
 		90716ACC283F7AFA00F7445A /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90716ACB283F7AFA00F7445A /* Array+Utils.swift */; };
 		90716ACD283F7AFA00F7445A /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90716ACB283F7AFA00F7445A /* Array+Utils.swift */; };
@@ -109,6 +108,7 @@
 		90DD12F628A4E6C800526F54 /* Result+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DD12F428A4E6C800526F54 /* Result+Utils.swift */; };
 		90E4088227D78E4E006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
 		90E4088327D79382006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
+		90F8BA0028B6375000D73776 /* PolyPodCoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 90F8B9FF28B6375000D73776 /* PolyPodCoreSwift */; };
 		9C856C20282E5126004DF92F /* multipleZips1.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C856C1D282E5126004DF92F /* multipleZips1.zip */; };
 		9C856C21282E5126004DF92F /* multipleZips2.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C856C1E282E5126004DF92F /* multipleZips2.zip */; };
 		9C856C22282E5126004DF92F /* testZip.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C856C1F282E5126004DF92F /* testZip.zip */; };
@@ -250,12 +250,12 @@
 		90338EB628AE4F5900C86968 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		90497562284DF42300EF9C6B /* PolyStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyStyle.swift; sourceTree = "<group>"; };
 		904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchToMainQueue.swift; sourceTree = "<group>"; };
-		905C687C27F1E9C9005A2819 /* PolyPodCoreSwift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PolyPodCoreSwift; path = ../../core/PolyPodCoreSwift; sourceTree = "<group>"; };
 		906E406B27A82C7F009015B7 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		90716ACB283F7AFA00F7445A /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
 		9075BAB9283B69FD00909E06 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		90DD12F428A4E6C800526F54 /* Result+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Utils.swift"; sourceTree = "<group>"; };
 		90E4088127D78E4E006AD362 /* DataProtection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtection.swift; sourceTree = "<group>"; };
+		90F8B9FD28B6374000D73776 /* PolyPodCoreSwift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PolyPodCoreSwift; path = ../../core/PolyPodCoreSwift; sourceTree = "<group>"; };
 		9C856C1D282E5126004DF92F /* multipleZips1.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = multipleZips1.zip; sourceTree = "<group>"; };
 		9C856C1E282E5126004DF92F /* multipleZips2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = multipleZips2.zip; sourceTree = "<group>"; };
 		9C856C1F282E5126004DF92F /* testZip.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = testZip.zip; sourceTree = "<group>"; };
@@ -317,7 +317,7 @@
 			files = (
 				90338EB828AE4F5900C86968 /* libc++.tbd in Frameworks */,
 				E9BE2909264BBD67003EC8AE /* Zip in Frameworks */,
-				905C687F27F1EA26005A2819 /* PolyPodCoreSwift in Frameworks */,
+				90F8BA0028B6375000D73776 /* PolyPodCoreSwift in Frameworks */,
 				E9BE2906264BBAA0003EC8AE /* MessagePack in Frameworks */,
 				9049ECA427BCE8B70059605A /* CocoaLumberjackSwift in Frameworks */,
 			);
@@ -403,6 +403,7 @@
 		1AA6DE2624191C94008DB1B2 = {
 			isa = PBXGroup;
 			children = (
+				90F8B9FC28B6374000D73776 /* Packages */,
 				904D4A6E27905D4C00A75AED /* Utils */,
 				E9018EDF276370B500FDF34A /* Core */,
 				E97D3274263151BC00A5A180 /* Features */,
@@ -414,7 +415,6 @@
 				1AA6DE3124191C94008DB1B2 /* PolyPod */,
 				1A66F7732493743D00ED4308 /* PolyPodTests */,
 				E9545EB7273542CC001E8C7F /* PolyPodUITests */,
-				9063A7B427EB6DDB00955E49 /* Packages */,
 				1AA6DE3024191C94008DB1B2 /* Products */,
 				90338EB428AE4F5900C86968 /* Frameworks */,
 			);
@@ -562,10 +562,10 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		9063A7B427EB6DDB00955E49 /* Packages */ = {
+		90F8B9FC28B6374000D73776 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				905C687C27F1E9C9005A2819 /* PolyPodCoreSwift */,
+				90F8B9FD28B6374000D73776 /* PolyPodCoreSwift */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -692,7 +692,7 @@
 				E9BE2905264BBAA0003EC8AE /* MessagePack */,
 				E9BE2908264BBD67003EC8AE /* Zip */,
 				9049ECA327BCE8B70059605A /* CocoaLumberjackSwift */,
-				905C687E27F1EA26005A2819 /* PolyPodCoreSwift */,
+				90F8B9FF28B6375000D73776 /* PolyPodCoreSwift */,
 			);
 			productName = PolyPod;
 			productReference = 1AA6DE2F24191C94008DB1B2 /* PolyPod.app */;
@@ -1447,7 +1447,7 @@
 			package = 9049ECA227BCE8B70059605A /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
 			productName = CocoaLumberjackSwift;
 		};
-		905C687E27F1EA26005A2819 /* PolyPodCoreSwift */ = {
+		90F8B9FF28B6375000D73776 /* PolyPodCoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PolyPodCoreSwift;
 		};
