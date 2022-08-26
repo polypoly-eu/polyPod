@@ -2,6 +2,7 @@
 .poly-theme {
   --theme-font-base: var(--jost);
   --theme-font-medium: var(--jost-medium);
+  --theme-info-button-color: var(--color-gray-300);
   color: var(--theme-secondary-color);
   font-family: var(--jost);
   font-weight: 400;
@@ -21,15 +22,24 @@
 .poly-theme-light {
   --theme-primary-color: var(--color-gray-50);
   --theme-secondary-color: var(--color-indigo-950);
+  --theme-tertiary-color: var(--color-red-300);
   --theme-small-print-color: var(--color-gray-500);
-  --theme-info-button-color: var(--color-gray-300);
 }
 
 .poly-theme-dark {
   --theme-primary-color: var(--color-indigo-950);
   --theme-secondary-color: var(--color-gray-50);
+  --theme-tertiary-color: var(--color-red-300);
   --theme-small-print-color: var(--color-gray-400);
-  --theme-info-button-color: var(--color-gray-300);
+}
+
+
+
+.poly-theme-coop {
+  --theme-primary-color: var(--color-red-50);
+  --theme-secondary-color: var(--color-indigo-950);
+  --theme-tertiary-color: var(--color-red-300);
+  --theme-small-print-color: var(--color-gray-500);
 }
 
 .poly-theme h1,
