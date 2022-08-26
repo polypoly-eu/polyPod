@@ -22,7 +22,7 @@
 
 .poly-button.primary {
   background-color: var(--pl-button-color-fill-primary);
-  color: var(--pl-button-color-color-primary);
+  color: var(--pl-button-color-text-primary);
 }
 
 .poly-button.primary-medium {
