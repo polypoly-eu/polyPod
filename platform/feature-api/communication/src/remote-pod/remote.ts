@@ -106,10 +106,11 @@ export const podBubblewrapClasses: Classes = {
     "@polypoly-eu/rdf.Quad": polyQuad,
 };
 
+export const podBubblewrap = Bubblewrap.create(podBubblewrapClasses);
+
 function bubblewrapPort(
     rawPort: Port<Uint8Array, Uint8Array>
 ): Port<Uint8Array, Uint8Array> {
-    const podBubblewrap = Bubblewrap.create(podBubblewrapClasses);
     return mapPort(
         rawPort,
         (buf) => podBubblewrap.decode(buf),
@@ -259,12 +260,9 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
         const { bubblewrapMiddlewarePort } = await import(
             "../port-authority/middleware"
         );
-        const [middleware, port] = bubblewrapMiddlewarePort(
-            Bubblewrap.create(podBubblewrapClasses),
-            {
-                limit: "10mb",
-            }
-        );
+        const [middleware, port] = bubblewrapMiddlewarePort(podBubblewrap, {
+            limit: "10mb",
+        });
         this.listen(port);
         return middleware;
     }
