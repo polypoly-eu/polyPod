@@ -42,6 +42,14 @@ class AsyncPolyOut implements PolyOut {
     }
 }
 
+class AsyncTriplestore implements Triplestore {
+    constructor(private readonly promise: Promise<Triplestore>) {}
+
+    async openStore(): Promise<TriplestoreDB> {
+        return (await this.promise).openStore();
+    }
+}
+
 class AsyncPolyIn implements PolyIn {
     constructor(private readonly promise: Promise<PolyIn>) {}
 

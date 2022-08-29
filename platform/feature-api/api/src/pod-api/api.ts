@@ -102,7 +102,12 @@ export interface PolyIn {
      * @returns a Promise that will be resolved to a boolean.
      */
     has(quad: RDF.Quad): Promise<boolean>;
+}
 
+/**
+ * `TriplestoreDB` is the interface with which one can query the SPARQL-RDF triplestore instance
+ */
+export interface TriplestoreDB {
     /**
      * Executes a SPARQL 1.1 SELECT, CONSTRUCT, DESCRIBE, or ASK query.
      * @returns a Promise that will be resolved with the result of the query.
@@ -115,8 +120,24 @@ export interface PolyIn {
      *          have been applied and written to disk
      */
     update(query: string): Promise<void>;
+
+    /**
+     * Close the store instance
+     * @returns a Promise that resolves to undefined when the store is closed successfully
+     */
+    close(): Promise<void>;
 }
 
+/*
+ * `Triplestore` is used to access the features own RDF-SPARQL database and get the interface to operate on it
+ */
+export interface Triplestore {
+    /**
+     * Open a triplestore instance for tghe respective feature
+     * @returns a Promise that resolves to TriplestoreDB
+     */
+    openStore(): Promise<TriplestoreDB>;
+}
 /**
  * `Entry` is used to store filesystem directory entries in a (roughly)
  * platform independent way.

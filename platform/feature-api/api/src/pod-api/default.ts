@@ -9,10 +9,18 @@
 
 import * as RDF from "rdf-js";
 import { dataFactory } from "../rdf";
-import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint, Stats } from "./api";
+import {
+    Pod,
+    PolyIn,
+    PolyOut,
+    PolyNav,
+    Info,
+    Endpoint,
+    Stats,
+    Triplestore,
+} from "./api";
 import { IFs } from "memfs";
 import { Entry } from ".";
-import { MockStore } from "./mock-store";
 
 export const DEFAULT_POD_RUNTIME = "podjs-default";
 export const DEFAULT_POD_RUNTIME_VERSION = "podjs-default-version";
@@ -121,6 +129,17 @@ export class DefaultPod implements Pod {
             has: async (quad) => {
                 this.checkQuad(quad);
                 return this.store.has(quad);
+            },
+        };
+    }
+
+    /**
+     * The [[Triplestore]] interface. See [[Triplestore]] for the description
+     */
+    get triplestore(): Triplestore {
+        return {
+            openStore: async () => {
+                throw new Error(`Called, but not implemented`);
             },
         };
     }
