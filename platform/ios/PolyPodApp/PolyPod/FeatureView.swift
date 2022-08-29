@@ -106,6 +106,10 @@ struct FeatureView: View {
                 closeAction()
             }
         ))
+
+        alert.view.isAccessibilityElement = true
+        alert.view.accessibilityIdentifier = "feature_error_popup"
+
         UIApplication.shared.windows.first!.rootViewController!.present(
             alert,
             animated: true,

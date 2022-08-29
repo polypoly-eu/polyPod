@@ -49,6 +49,10 @@ class SmokeTest: XCTestCase {
     private func featureCloseButton() -> XCUIElement {
         app.otherElements["feature_close_button"]
     }
+    
+    private func featureErrorPopup() -> XCUIElement {
+        app.alerts["feature_error_popup"]
+    }
 
     private func featureTileView(index: Int, indentifier: String) -> XCUIElement {
         app.otherElements.matching(identifier: indentifier).element(boundBy: index)
@@ -68,8 +72,9 @@ class SmokeTest: XCTestCase {
             }
         }
         
-        // TODO: check for existence of error popup
-        sleep(1)
+        let errorPopUpVisible = featureErrorPopup().waitForExistence(timeout: 5)
+        // TODO: Add feature title. You can get it from the nav bar.
+        XCTAssertFalse(errorPopUpVisible, "Error popup shown after opening feature")
         
         let closeButton = featureCloseButton()
         _ = closeButton.waitForExistence(timeout: 1)

@@ -197,6 +197,8 @@ class FeatureWebView: WKWebView {
         components.path = "/pod.html"
         components.host = ""
         load(URLRequest(url: components.url!))
+        
+        errorHandler("")
     }
 
     @available(*, unavailable)
