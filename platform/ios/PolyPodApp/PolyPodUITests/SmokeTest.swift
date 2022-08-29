@@ -55,13 +55,30 @@ class SmokeTest: XCTestCase {
     }
     
     private func openFeatureAndCheckForErrorPopup(tile: XCUIElement) {
-        tile.tap()
-        _ = featureView().waitForExistence(timeout: 2)
+        var featureViewVisible = false
+        var swipeDownCount = 0
+        
+        while !featureViewVisible {
+            tile.tap()
+            featureViewVisible = featureView().waitForExistence(timeout: 1)
+            if !featureViewVisible {
+                // Need to swipe up so that the tile becomes visible and the tap succeeds
+                homeScreenView().swipeUp()
+                swipeDownCount += 1
+            }
+        }
+        
         // TODO: check for existence of error popup
         sleep(1)
+        
         let closeButton = featureCloseButton()
-        _ = closeButton.waitForExistence(timeout: 2)
+        _ = closeButton.waitForExistence(timeout: 1)
         closeButton.tap()
-        _ = homeScreenView().waitForExistence(timeout: 2)
+        _ = homeScreenView().waitForExistence(timeout: 1)
+        
+        // Reset
+        for _ in 0..<swipeDownCount {
+            homeScreenView().swipeDown()
+        }
     }
 }
