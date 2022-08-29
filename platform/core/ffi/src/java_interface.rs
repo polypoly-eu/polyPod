@@ -75,6 +75,21 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_appDidBecomeInactive(
         .unwrap()
 }
 
+/// Notify that app did become inactive.
+/// Returns Result<(), CoreFailure> as MessagePack value.
+#[no_mangle]
+pub extern "system" fn Java_coop_polypoly_core_JniApi_didOpenFeature(
+    env: JNIEnv,
+    _: JClass,
+    feature_id: JString,
+) -> jbyteArray {
+    env.byte_array_from_slice(&message_pack_serialize(
+        read_jni_string(&env, feature_id)
+            .and_then(|string| core::did_open_feature(string)),
+    ))
+    .unwrap()
+}
+
 /// Ask if user session is expired.
 /// Returns Result<bool, CoreFailure> as MessagePack value.
 #[no_mangle]

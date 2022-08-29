@@ -60,6 +60,15 @@ pub unsafe extern "C" fn app_did_become_inactive() -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(core::app_did_become_inactive()))
 }
 
+/// Notify that app did become inactive.
+/// Returns Result<(), CoreFailure> as MessagePack value.
+#[no_mangle]
+pub unsafe extern "C" fn did_open_feature(feature_id: *const c_char) -> CByteBuffer {
+    create_byte_buffer(message_pack_serialize(
+        cstring_to_str(&feature_id).map(String::from).and_then(core::did_open_feature),
+    ))
+}
+
 /// Ask if user session is expired.
 /// Returns Result<bool, CoreFailure> as MessagePack value.
 #[no_mangle]
