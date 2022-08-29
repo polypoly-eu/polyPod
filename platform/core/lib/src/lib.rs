@@ -55,7 +55,7 @@ pub mod core {
         user_session: Mutex<UserSession<'a>>,
         #[allow(dead_code)]
         platform_hook: Box<dyn PlatformHookRequest>,
-        active_feature: Option<Feature>,
+        active_feature: Option<Mutex<Feature>>,
     }
 
     fn get_instance() -> Result<MutexGuard<'static, Core<'static>>, CoreFailure> {
@@ -81,13 +81,14 @@ pub mod core {
 
         let builder = Box::new(Instant::now);
         let user_session = Mutex::from(UserSession::new(builder, preferences.clone()));
+        let fs = PathBuf::from(fs_root);
         let core = Core {
             language_code,
-            fs_root: PathBuf::from(fs_root),
+            fs_root: fs.clone(),
             preferences,
             user_session,
             platform_hook,
-            active_feature: None,
+            active_feature: None, 
         };
 
         let _ = CORE.set(Mutex::from(core));
@@ -104,33 +105,38 @@ pub mod core {
     // RDF
 
     pub fn open_feature_rdf_store() -> Result<(), CoreFailure> {
-        let mut core = get_instance()?;
-        let mut feature = &core.active_feature;
-        match feature {
-            Some(feature) => feature.open_rdf_store(),
-            _ => Err(CoreFailure::no_active_feature("Open feature rdf store".to_string()))
-        }
+        get_instance()?
+            .active_feature
+            .as_mut()
+            .expect("No active feature is set")
+            .get_mut()
+            .expect("Cannot access active feature")
+            .open_rdf_store()
     }
 
     pub fn exec_feature_rdf_query (
         query: SPARQLQuery,
     ) -> Result<QueryResults, CoreFailure> {
-        let instance = get_instance()?;
-        match &instance.active_feature {
-            Some(feature) => feature.exec_rdf_query(query),
-            _ => Err(CoreFailure::feature_store_not_initialized()) 
-        }
+        get_instance()?
+            .active_feature
+            .as_ref()
+            .expect("No active feature is set")
+            .lock()
+            .expect("Cannot access active feature")
+            .exec_rdf_query(query)
     }
 
 
     pub fn exec_feature_rdf_update (
         query: SPARQLQuery,
     ) -> Result<(), CoreFailure> {
-        let instance = get_instance()?;
-        match &instance.active_feature {
-            Some(feature) =>feature.exec_rdf_update(query),
-            _ => Err(CoreFailure::feature_store_not_initialized()) 
-        }
+        get_instance()?
+            .active_feature
+            .as_ref()
+            .expect("No active feature is set")
+            .lock()
+            .expect("Cannot access active feature")
+            .exec_rdf_update(query)
     }
 
     pub fn exec_rdf_query(query: SPARQLQuery) -> Result<QueryResults, CoreFailure> {
@@ -163,7 +169,7 @@ pub mod core {
         let mut feature_path = core.fs_root.clone();
         feature_path.push(id);
         core.active_feature = Some(
-            Feature::new(feature_path)
+            Mutex::from(Feature::new(feature_path))
         );
 
         Ok(())
