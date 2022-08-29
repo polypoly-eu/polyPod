@@ -1,3 +1,11 @@
-.your-style {
-    position: absolute;
-}
+.poly-theme-coop {
+    --theme-primary-color: var(--color-red-300);
+    --theme-secondary-color: var(--color-indigo-950);
+    --theme-tertiary-color: var(--color-gray-50);
+    --theme-small-print-color: var(--color-gray-500);
+    --pl-button-color-fill-primary: var(--theme-primary-color);
+    --pl-button-color-text-primary: var(--theme-secondary-color);
+    --pl-button-color-fill-secondary: var(--transparent);
+    --pl-button-color-border-secondary: var(--theme-secondary-color);
+    --pl-button-color-text-secondary: var(--theme-secondary-color);
+  }
