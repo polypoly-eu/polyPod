@@ -329,6 +329,12 @@ export interface Pod {
      * definition.
      */
     readonly endpoint: Endpoint;
+
+    /**
+     * `triplestore` is an interface to interact with the SPARQL-RDF database
+     */
+    readonly triplestore: Triplestore;
+
     /**
      * @hidden
      */

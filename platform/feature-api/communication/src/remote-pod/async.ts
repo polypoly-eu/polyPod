@@ -11,6 +11,8 @@ import {
     Stats,
     Info,
     SPARQLQueryResult,
+    Triplestore,
+    TriplestoreDB,
 } from "@polypoly-eu/api";
 import { DataFactory, Quad } from "rdf-js";
 
@@ -57,14 +59,6 @@ class AsyncPolyIn implements PolyIn {
 
     async has(quad: Quad): Promise<boolean> {
         return (await this.promise).has(quad);
-    }
-
-    async query(query: string): Promise<SPARQLQueryResult> {
-        return (await this.promise).query(query);
-    }
-
-    async update(query: string): Promise<void> {
-        return (await this.promise).update(query);
     }
 }
 
@@ -150,6 +144,7 @@ export class AsyncPod implements Pod {
     readonly polyNav: PolyNav;
     readonly info: Info;
     readonly endpoint: Endpoint;
+    readonly triplestore: Triplestore;
     readonly polyLifecycle: PolyLifecycle;
 
     constructor(
@@ -161,6 +156,9 @@ export class AsyncPod implements Pod {
         this.polyNav = new AsyncPolyNav(promise.then((pod) => pod.polyNav));
         this.info = new AsyncInfo(promise.then((pod) => pod.info));
         this.endpoint = new AsyncEndpoint(promise.then((pod) => pod.endpoint));
+        this.triplestore = new AsyncTriplestore(
+            promise.then((pod) => pod.triplestore)
+        );
         this.polyLifecycle = new AsyncPolyLifecycle(
             promise.then((pod) => pod.polyLifecycle)
         );
