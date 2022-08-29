@@ -43,6 +43,8 @@ struct FeatureView: View {
             .font(.custom("Jost-Medium", size: 16))
             .kerning(-0.16)
             .frame(maxWidth: .infinity, alignment: .center)
+            .accessibilityElement()
+            .accessibilityIdentifier("feature_title_text")
 
         let actionButtons = HStack(spacing: 12) {
             if activeActions.contains("search") {
