@@ -71,7 +71,7 @@ extension PolyOut {
         return id.removingPercentEncoding
     }
 
-    func stat(url: String, completionHandler: @escaping (FileStats?, Error?) -> Void) {
+    func stat(url: String, completionHandler: @escaping (Stats?, Error?) -> Void) {
         let targetPath = fsUriFromPodUrl(url)
         guard let filePath = targetPath else {
             completionHandler(nil, PodApiError.noSuchFile(url))
@@ -93,8 +93,8 @@ extension PolyOut {
                         acc.isEmpty ? x : acc + "," + x
                     }
                 }
-                completionHandler(FileStats(
-                    isDirectory: isDir.boolValue,
+                completionHandler(Stats(
+                    directory: isDir.boolValue,
                     size: try calculateFileSize(filePath.path),
                     time: "\(Int(floor(time.timeIntervalSince1970)))",
                     name: name ?? URL(fileURLWithPath: filePath.path).lastPathComponent,
