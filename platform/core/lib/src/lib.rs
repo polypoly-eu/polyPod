@@ -1,6 +1,6 @@
 pub mod core {
     use core_failure::CoreFailure;
-    use feature_categories;
+    pub use feature_categories;
     use io::{file_system::DefaultFileSystem, key_value_store::DefaultKeyValueStore};
     use preferences::Preferences;
     use user_session::{TimeoutOption, UserSession, UserSessionTimeout};
@@ -49,6 +49,12 @@ pub mod core {
         platform_hook: Box<dyn PlatformHookRequest>,
     }
 
+    #[derive(Deserialize)]
+    pub struct LoadFeatureCategoriesArguments {
+        features_dir: String,
+        force_show: Vec<feature_categories::FeatureCategoryId>,
+    }
+
     fn get_instance() -> Result<MutexGuard<'static, Core<'static>>, CoreFailure> {
         match CORE.get() {
             Some(core) => core
@@ -93,13 +99,14 @@ pub mod core {
     // Features
 
     pub fn load_feature_categories(
-        features_dir: &str,
+        args: LoadFeatureCategoriesArguments,
     ) -> Result<Vec<feature_categories::FeatureCategory>, CoreFailure> {
         let core = get_instance()?;
         feature_categories::load_feature_categories(
             DefaultFileSystem {},
-            features_dir,
+            args.features_dir.as_str(),
             &core.language_code,
+            args.force_show,
         )
     }
 

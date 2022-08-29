@@ -42,13 +42,14 @@ pub unsafe extern "C" fn core_bootstrap(
 /// # Safety
 /// This function can be unsafe if the features_dir pointer is null or the string is in wrong format.
 ///
-/// Loads the feature categories from from the given features_dir.
-/// - features_dir: Path to directory where feature categories are stored.
+/// Loads the feature categories from from the given features dir.
+/// - args: Function arguments as MessagePack value.
 /// Returns Result<Vec<FeatureCategory>, CoreFailure> as MessagePack value.
 #[no_mangle]
-pub unsafe extern "C" fn load_feature_categories(features_dir: *const c_char) -> CByteBuffer {
+pub unsafe extern "C" fn load_feature_categories(args: CByteBuffer) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
-        cstring_to_str(&features_dir).and_then(core::load_feature_categories),
+        message_pack_deserialize(byte_buffer_to_bytes(&args).unwrap())
+            .and_then(core::load_feature_categories),
     ))
 }
 
