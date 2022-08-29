@@ -8,16 +8,15 @@ import "./polyButton.css";
  * @param {Object} props
  * @param {string} [props.label] - Button text
  * @param {boolean} [props.centered] - If the button should center itself.
- * @param {string} [props.type = "primary"] - Type of the button
+ * @param {string} [props.type = "filled"] - Type of the button
  */
 
 const types = {
-  primary: "primary",
-  medium: "primary-medium",
-  secondary: "secondary",
+  filled: "filled",
+  outlined: "outlined",
 };
 
-const PolyButton = ({ label, type = "primary", ...otherProps }) => {
+const PolyButton = ({ label, type = "filled", ...otherProps }) => {
   return (
     <button
       {...otherProps}

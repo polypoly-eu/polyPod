@@ -13,7 +13,7 @@ const App = () => {
         >
             <h1>{i18n.t("common:welcome", { feature: "This feature" })}</h1>
             <PolyButton label="example" />
-            <PolyButton type="secondary" label="example secondary button" />
+            <PolyButton type="outlined" label="example secondary button" />
         </Screen>
     );
 };
