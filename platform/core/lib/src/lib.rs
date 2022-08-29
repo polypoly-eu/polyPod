@@ -1,21 +1,19 @@
 pub mod core {
     use core_failure::CoreFailure;
-    use feature_categories;
     use feature::feature::Feature;
+    use feature_categories;
     use io::{file_system::DefaultFileSystem, key_value_store::DefaultKeyValueStore};
-    use preferences::Preferences;
     use poly_rdf::rdf::{rdf_query, rdf_update, SPARQLQuery};
+    use preferences::Preferences;
     use user_session::{TimeoutOption, UserSession, UserSessionTimeout};
 
     use once_cell::sync::OnceCell;
     use serde::{Deserialize, Serialize};
+    use std::path::PathBuf;
     use std::sync::{Arc, Mutex};
     use std::{sync::MutexGuard, time::Instant};
-    use std::path::PathBuf;
 
-    use oxigraph::{
-        sparql::QueryResults
-    };
+    use oxigraph::sparql::QueryResults;
 
     #[cfg(target_os = "android")]
     use {
@@ -71,12 +69,14 @@ pub mod core {
         language_code: String,
         fs_root: String,
         platform_hook: Box<dyn PlatformHookRequest>,
-    ) -> Result<(), CoreFailure> { 
+    ) -> Result<(), CoreFailure> {
         if CORE.get().is_some() {
             return Err(CoreFailure::core_already_bootstrapped());
         }
         let preferences = Arc::new(Preferences {
-            store: Box::new(DefaultKeyValueStore::new(fs_root.clone() + "/" + PREFERENCES_DB)),
+            store: Box::new(DefaultKeyValueStore::new(
+                fs_root.clone() + "/" + PREFERENCES_DB,
+            )),
         });
 
         let builder = Box::new(Instant::now);
@@ -88,7 +88,7 @@ pub mod core {
             preferences,
             user_session,
             platform_hook,
-            active_feature: None, 
+            active_feature: None,
         };
 
         let _ = CORE.set(Mutex::from(core));
@@ -114,9 +114,7 @@ pub mod core {
             .open_rdf_store()
     }
 
-    pub fn exec_feature_rdf_query (
-        query: SPARQLQuery,
-    ) -> Result<QueryResults, CoreFailure> {
+    pub fn exec_feature_rdf_query(query: SPARQLQuery) -> Result<QueryResults, CoreFailure> {
         get_instance()?
             .active_feature
             .as_ref()
@@ -126,10 +124,7 @@ pub mod core {
             .exec_rdf_query(query)
     }
 
-
-    pub fn exec_feature_rdf_update (
-        query: SPARQLQuery,
-    ) -> Result<(), CoreFailure> {
+    pub fn exec_feature_rdf_update(query: SPARQLQuery) -> Result<(), CoreFailure> {
         get_instance()?
             .active_feature
             .as_ref()
@@ -164,13 +159,11 @@ pub mod core {
 
     // App events
 
-    pub fn did_open_feature(id: String) -> Result<(), CoreFailure>{
+    pub fn did_open_feature(id: String) -> Result<(), CoreFailure> {
         let mut core = get_instance()?;
         let mut feature_path = core.fs_root.clone();
         feature_path.push(id);
-        core.active_feature = Some(
-            Mutex::from(Feature::new(feature_path))
-        );
+        core.active_feature = Some(Mutex::from(Feature::new(feature_path)));
 
         Ok(())
     }

@@ -3,9 +3,9 @@ use core_failure::CoreFailure;
 use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
+use crate::rdf_result_conversion::{bytes_to_string, to_json_bytes};
 use lib::core::{self, PlatformRequest, PlatformResponse};
 use std::os::raw::c_char;
-use crate::rdf_result_conversion::{to_json_bytes, bytes_to_string};
 
 /// # Safety
 /// This function can be unsafe if the language_code pointer is null or the string is in wrong format.
@@ -128,7 +128,7 @@ pub unsafe extern "C" fn exec_rdf_update(update: *const c_char) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
         cstring_to_str(&update)
             .map(String::from)
-            .and_then(core::exec_rdf_update)
+            .and_then(core::exec_rdf_update),
     ))
 }
 
@@ -141,7 +141,7 @@ pub unsafe extern "C" fn exec_feature_rdf_query(update: *const c_char) -> CByteB
             .map(String::from)
             .and_then(core::exec_feature_rdf_query)
             .and_then(to_json_bytes)
-            .and_then(bytes_to_string)
+            .and_then(bytes_to_string),
     ))
 }
 

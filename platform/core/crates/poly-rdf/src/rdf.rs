@@ -1,6 +1,9 @@
-use oxigraph::{store::{StorageError, Store}, sparql::QueryResults};
-use std::path::PathBuf;
+use oxigraph::{
+    sparql::QueryResults,
+    store::{StorageError, Store},
+};
 use spargebra::{Query, Update};
+use std::path::PathBuf;
 
 use crate::rdf_failure::RdfFailure;
 
@@ -29,7 +32,9 @@ fn check_update(query: SPARQLQuery) -> Result<Update, RdfFailure> {
 pub fn rdf_query(query: SPARQLQuery, app_path: PathBuf) -> Result<QueryResults, RdfFailure> {
     let store = init_store(app_path).map_err(RdfFailure::failed_to_initialize_store)?;
     match check_query(query.to_string()) {
-        Ok(_) => store.query(&query).map_err(RdfFailure::map_evaluation_error),
+        Ok(_) => store
+            .query(&query)
+            .map_err(RdfFailure::map_evaluation_error),
 
         Err(error) => Err(error),
     }

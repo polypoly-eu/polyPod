@@ -1,6 +1,6 @@
+use oxigraph::{sparql::EvaluationError, store::StorageError};
 use poly_rdf::rdf_failure::RdfFailure;
 use serde::{Deserialize, Serialize};
-use oxigraph::{store::StorageError, sparql::EvaluationError};
 use std::str::Utf8Error;
 use url::Url;
 
@@ -264,7 +264,7 @@ impl CoreFailure {
             code: FailureCode::FailedToOpenFeatureRdfStore.value(),
             message: error.to_string(),
         }
-    } 
+    }
 
     pub fn no_active_feature(action: String) -> Self {
         CoreFailure {
@@ -278,19 +278,19 @@ impl CoreFailure {
             code: FailureCode::FeatureStoreNotInitialized.value(),
             message: "Failed to access feature store: Not initialized. Create a store session first before querying it!".to_string(),
         }
-    } 
+    }
 
     pub fn map_sparql_evaluation_error(error: EvaluationError) -> Self {
         CoreFailure {
             code: FailureCode::SparqlEvaluationError.value(),
-            message: error.to_string()
+            message: error.to_string(),
         }
     }
 
     pub fn utf8_conversion_error(error: Utf8Error) -> Self {
         CoreFailure {
             code: FailureCode::FailedToConvertToUtf8.value(),
-            message: error.to_string()
+            message: error.to_string(),
         }
     }
 }

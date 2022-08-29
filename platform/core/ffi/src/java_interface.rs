@@ -7,14 +7,8 @@ use jni::{
     JNIEnv, JavaVM,
 };
 use lib::core::{
-    self,
-    exec_feature_rdf_query,
-    exec_feature_rdf_update,
-    exec_rdf_query,
-    exec_rdf_update,
-    open_feature_rdf_store,
-    PlatformRequest, 
-    PlatformResponse
+    self, exec_feature_rdf_query, exec_feature_rdf_update, exec_rdf_query, exec_rdf_update,
+    open_feature_rdf_store, PlatformRequest, PlatformResponse,
 };
 use log::error;
 
@@ -221,7 +215,7 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_execFeatureRdfQuery(
         read_jni_string(&env, query)
             .and_then(exec_feature_rdf_query)
             .and_then(to_json_bytes)
-            .and_then(bytes_to_string)
+            .and_then(bytes_to_string),
     ))
     .unwrap()
 }
@@ -233,7 +227,7 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_execFeatureRdfUpdate(
     query: JString,
 ) -> jbyteArray {
     env.byte_array_from_slice(&message_pack_serialize(
-        read_jni_string(&env, query).and_then(exec_feature_rdf_update)
+        read_jni_string(&env, query).and_then(exec_feature_rdf_update),
     ))
     .unwrap()
 }
@@ -248,7 +242,7 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfQuery(
         read_jni_string(&env, query)
             .and_then(exec_rdf_query)
             .and_then(to_json_bytes)
-            .and_then(bytes_to_string)
+            .and_then(bytes_to_string),
     ))
     .unwrap()
 }
@@ -260,7 +254,7 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfUpdate(
     query: JString,
 ) -> jbyteArray {
     env.byte_array_from_slice(&message_pack_serialize(
-        read_jni_string(&env, query).and_then(exec_rdf_update)
+        read_jni_string(&env, query).and_then(exec_rdf_update),
     ))
     .unwrap()
 }
@@ -270,8 +264,6 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_openFeatureRdfStore(
     env: JNIEnv,
     _: JClass,
 ) -> jbyteArray {
-    env.byte_array_from_slice(&message_pack_serialize(
-        open_feature_rdf_store()
-    ))
-    .unwrap()
+    env.byte_array_from_slice(&message_pack_serialize(open_feature_rdf_store()))
+        .unwrap()
 }

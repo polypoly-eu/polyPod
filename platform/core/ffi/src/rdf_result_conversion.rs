@@ -1,5 +1,5 @@
-use oxigraph::sparql::{QueryResults, QueryResultsFormat};
 use core_failure::CoreFailure;
+use oxigraph::sparql::{QueryResults, QueryResultsFormat};
 
 pub fn to_json_bytes(query_results: QueryResults) -> Result<Vec<u8>, CoreFailure> {
     let mut results = Vec::new();
