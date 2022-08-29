@@ -46,7 +46,7 @@
 		1ABADBD324EBC5D900369791 /* FetchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66F76A2490DFA000ED4308 /* FetchResponse.swift */; };
 		1ABADBD424EBC5EF00369791 /* PolyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468AF242A34CF00E51B6D /* PolyIn.swift */; };
 		1ABADBD724EBC5F700369791 /* PolyOut+FS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1179524C1A4A80063EE37 /* PolyOut+FS.swift */; };
-		1ABADBD824EBC5F900369791 /* FileStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178524BE22D50063EE37 /* FileStats.swift */; };
+		1ABADBD824EBC5F900369791 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178524BE22D50063EE37 /* Stats.swift */; };
 		1ABADBD924EBC5FC00369791 /* PolyOut+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1179124C1A20E0063EE37 /* PolyOut+Fetch.swift */; };
 		1ABADBEF24ED282A00369791 /* PodApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A183E9124AF1E860025F6BB /* PodApiError.swift */; };
 		1ABADBF124EE6FB700369791 /* DataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABADBF024EE6FB700369791 /* DataFactory.swift */; };
@@ -72,7 +72,7 @@
 		1ABADC0724EE717000369791 /* Bubblewrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A57E65524A4C4110043E3AD /* Bubblewrap.swift */; };
 		1ABADC0E24EFB9F300369791 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABADC0A24EFB80900369791 /* Models.swift */; };
 		1ABADC0F24EFB9F300369791 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABADC0A24EFB80900369791 /* Models.swift */; };
-		1AF1178624BE22D50063EE37 /* FileStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178524BE22D50063EE37 /* FileStats.swift */; };
+		1AF1178624BE22D50063EE37 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178524BE22D50063EE37 /* Stats.swift */; };
 		1AF1178C24C1740D0063EE37 /* Quad+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178B24C1740D0063EE37 /* Quad+Additions.swift */; };
 		1AF1178E24C174A00063EE37 /* Term+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178D24C174A00063EE37 /* Term+Additions.swift */; };
 		1AF1179024C178990063EE37 /* Literal+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1178F24C178990063EE37 /* Literal+Additions.swift */; };
@@ -226,7 +226,7 @@
 		1ABADBCA24E2E06600369791 /* initIframe.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = initIframe.js; sourceTree = "<group>"; };
 		1ABADBF024EE6FB700369791 /* DataFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFactory.swift; sourceTree = "<group>"; };
 		1ABADC0A24EFB80900369791 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		1AF1178524BE22D50063EE37 /* FileStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStats.swift; sourceTree = "<group>"; };
+		1AF1178524BE22D50063EE37 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		1AF1178B24C1740D0063EE37 /* Quad+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quad+Additions.swift"; sourceTree = "<group>"; };
 		1AF1178D24C174A00063EE37 /* Term+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Term+Additions.swift"; sourceTree = "<group>"; };
 		1AF1178F24C178990063EE37 /* Literal+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Literal+Additions.swift"; sourceTree = "<group>"; };
@@ -521,7 +521,7 @@
 			isa = PBXGroup;
 			children = (
 				1AF1179524C1A4A80063EE37 /* PolyOut+FS.swift */,
-				1AF1178524BE22D50063EE37 /* FileStats.swift */,
+				1AF1178524BE22D50063EE37 /* Stats.swift */,
 			);
 			path = FS;
 			sourceTree = "<group>";
@@ -926,7 +926,7 @@
 				E989B354269DDE4A000EE977 /* PolyNav.swift in Sources */,
 				1ABADC0624EE712F00369791 /* PolyPodModel.xcdatamodeld in Sources */,
 				1A66F7802493793D00ED4308 /* PolyOut.swift in Sources */,
-				1ABADBD824EBC5F900369791 /* FileStats.swift in Sources */,
+				1ABADBD824EBC5F900369791 /* Stats.swift in Sources */,
 				E9CFFA4F26A1983700F7BE65 /* UIColorExtensionsTest.swift in Sources */,
 				1ABADBF224EE70B500369791 /* DataFactory.swift in Sources */,
 				1ABADBFC24EE710B00369791 /* Quad+CoreDataProperties.swift in Sources */,
@@ -995,7 +995,7 @@
 				1AF1179024C178990063EE37 /* Literal+Additions.swift in Sources */,
 				906E406C27A82C7F009015B7 /* ActivityViewController.swift in Sources */,
 				1A8F4875247E40C600089217 /* PostOffice.swift in Sources */,
-				1AF1178624BE22D50063EE37 /* FileStats.swift in Sources */,
+				1AF1178624BE22D50063EE37 /* Stats.swift in Sources */,
 				1A00DFFB245AAC3F0049F3F7 /* MessageName.swift in Sources */,
 				E97D3260263084C500A5A180 /* SettingsView.swift in Sources */,
 				90DD12F528A4E6C800526F54 /* Result+Utils.swift in Sources */,

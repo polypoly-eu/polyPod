@@ -4,7 +4,6 @@ import {
     PolyIn,
     PolyOut,
     PolyNav,
-    EncodingOptions,
     ExternalFile,
     Stats,
     Matcher,
@@ -51,15 +50,8 @@ type PolyInBackend = ObjectBackendSpec<{
 
 type PolyOutBackend = ObjectBackendSpec<{
     readDir(path: string): ValueBackendSpec<Entry[]>;
-    readFile(
-        path: string,
-        options?: EncodingOptions
-    ): ValueBackendSpec<string | Uint8Array>;
-    writeFile(
-        path: string,
-        content: string,
-        options: EncodingOptions
-    ): ValueBackendSpec<void>;
+    readFile(path: string): ValueBackendSpec<Uint8Array>;
+    writeFile(path: string, content: string): ValueBackendSpec<void>;
     stat(path: string): ValueBackendSpec<Stats>;
     importArchive(url: string, destUrl?: string): ValueBackendSpec<string>;
     removeArchive(fileId: string): ValueBackendSpec<void>;
@@ -154,15 +146,8 @@ export class RemoteClientPod implements Pod {
         const { rpcClient } = this;
 
         return new (class implements PolyOut {
-            readFile(path: string, options: EncodingOptions): Promise<string>;
-            readFile(path: string): Promise<Uint8Array>;
-            readFile(
-                path: string,
-                options?: EncodingOptions
-            ): Promise<string | Uint8Array> {
-                if (options)
-                    return rpcClient.polyOut().readFile(path, options)();
-                else if (typeof fetch === "undefined")
+            readFile(path: string): Promise<Uint8Array> {
+                if (typeof fetch === "undefined")
                     return rpcClient.polyOut().readFile(path)();
                 else
                     return new Promise<Uint8Array>((resolve, reject) => {
@@ -181,12 +166,8 @@ export class RemoteClientPod implements Pod {
                 return rpcClient.polyOut().stat(path)();
             }
 
-            writeFile(
-                path: string,
-                content: string,
-                options: EncodingOptions
-            ): Promise<void> {
-                return rpcClient.polyOut().writeFile(path, content, options)();
+            writeFile(path: string, content: string): Promise<void> {
+                return rpcClient.polyOut().writeFile(path, content)();
             }
 
             importArchive(url: string, destUrl?: string): Promise<string> {
@@ -295,14 +276,10 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
         // the only difference is that `fetch` needs to return a slightly modified response
 
         return {
-            readFile: (path, options?) => {
-                if (options === undefined) return polyOut.readFile(path);
-                else return polyOut.readFile(path, options);
-            },
+            readFile: (path) => polyOut.readFile(path),
             readDir: (path) => polyOut.readDir(path),
             stat: (path) => polyOut.stat(path),
-            writeFile: (path, content, options) =>
-                polyOut.writeFile(path, content, options),
+            writeFile: (path, content) => polyOut.writeFile(path, content),
             importArchive: (url, destUrl) =>
                 polyOut.importArchive(url, destUrl),
             removeArchive: (fileId) => polyOut.removeArchive(fileId),
