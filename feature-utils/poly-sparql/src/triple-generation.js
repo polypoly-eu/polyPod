@@ -53,10 +53,9 @@ export function jsArrayToTriplesString(subject, predicate, arr) {
     }
     if (elementsToJoin.length > 0) {
         triplesString += `${subject} ${predicate} ` + elementsToJoin.join(", ");
+        if (objectsToStore.length > 0)
+            triplesString += " "
     }
-
-    if (elementsToJoin.length > 0 && objectsToStore.length > 0)
-        triplesString += " ";
 
     triplesString += objectsToStore
         .map((obj) => jsObjectToTriplesString(subject, predicate, obj))
