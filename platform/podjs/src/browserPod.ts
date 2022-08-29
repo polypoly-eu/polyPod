@@ -7,7 +7,6 @@ import type {
     PolyIn,
     PolyOut,
     PolyNav,
-    EncodingOptions,
     Stats,
     Entry,
 } from "@polypoly-eu/api";
