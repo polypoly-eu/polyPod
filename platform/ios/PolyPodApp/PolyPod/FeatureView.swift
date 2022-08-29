@@ -27,10 +27,11 @@ struct FeatureView: View {
                 }
                 closeAction()
             }) {
-            let qualifier = activeActions.contains("back") ? "Back" : "Close"
-            Image("NavIcon\(qualifier)\(iconVariantQualifier)")
-                .renderingMode(.original)
-        }
+                let qualifier = activeActions.contains("back") ? "Back" : "Close"
+                Image("NavIcon\(qualifier)\(iconVariantQualifier)")
+                    .renderingMode(.original)
+            }.accessibilityElement()
+            .accessibilityIdentifier("feature_close_button")
         // swiftlint:enable multiple_closures_with_trailing_closure
 
         let titleLabel = Text(!title.isEmpty ? title : feature.name)
@@ -82,7 +83,8 @@ struct FeatureView: View {
                 openUrlHandler: openUrl,
                 pickFileHandler: pickFile
             )
-        }
+        }.accessibilityElement()
+        .accessibilityIdentifier("feature_view")
     }
 
     private func handleError(_ error: String) {

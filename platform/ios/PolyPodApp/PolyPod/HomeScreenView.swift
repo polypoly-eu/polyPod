@@ -355,7 +355,7 @@ struct HomeScreenView: View {
             }
         }.onAppear {
             viewModel.setup()
-        }
+        }.accessibilityIdentifier("homescreen_view")
     }
 
     func calculateSize(_ geo: GeometryProxy) -> Sizes {
@@ -578,6 +578,8 @@ struct BigCardView: View {
         .onTapGesture {
             onFeatureSelected(card.id)
         }
+        .accessibilityElement()
+        .accessibilityIdentifier("big_card_view")
     }
 }
 
@@ -627,6 +629,8 @@ struct MediumCardView: View {
         .onTapGesture {
             onFeatureSelected(card.id)
         }
+        .accessibilityElement()
+        .accessibilityIdentifier("medium_card_view")
     }
 }
 
@@ -665,6 +669,8 @@ struct SmallCardView: View {
         .onTapGesture {
             onFeatureSelected(card.id)
         }
+        .accessibilityElement()
+        .accessibilityIdentifier("small_card_view")
     }
 }
 
