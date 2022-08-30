@@ -169,6 +169,17 @@ pub mod core {
         let mut feature_path = core.fs_root.clone();
         feature_path.push("FeatureFiles".to_string());
         feature_path.push(id);
+        core.file_system
+            .as_ref()
+            .create_dir_structure(
+                // This conversion will go away when FileSystem will be migrated
+                // to use Paths instead of raw strings.
+                feature_path.clone()
+                            .into_os_string()
+                            .into_string()
+                            .unwrap()
+                            .as_str()
+            )?;
         core.active_feature = Some(Mutex::from(Feature::new(feature_path)));
 
         Ok(())
