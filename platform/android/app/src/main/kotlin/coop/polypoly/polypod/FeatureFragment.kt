@@ -122,7 +122,6 @@ open class FeatureFragment : Fragment() {
             feature = it
         }
         Core.didOpenFeature(args.featureId)
-        Core.openFeatureRdfStore()
         setupFeature(view)
     }
 
