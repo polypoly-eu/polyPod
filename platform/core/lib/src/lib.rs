@@ -2,7 +2,10 @@ pub mod core {
     use core_failure::CoreFailure;
     use feature::feature::Feature;
     use feature_categories;
-    use io::{file_system::DefaultFileSystem, key_value_store::DefaultKeyValueStore};
+    use io::{
+        file_system::{ DefaultFileSystem, FileSystem },
+        key_value_store::DefaultKeyValueStore,
+    };
     use poly_rdf::rdf::{rdf_query, rdf_update, SPARQLQuery};
     use preferences::Preferences;
     use user_session::{TimeoutOption, UserSession, UserSessionTimeout};
@@ -48,6 +51,7 @@ pub mod core {
     struct Core<'a> {
         language_code: String,
         fs_root: PathBuf,
+        file_system: Box<dyn FileSystem>,
         #[allow(dead_code)]
         preferences: Arc<Preferences>,
         user_session: Mutex<UserSession<'a>>,
@@ -85,6 +89,7 @@ pub mod core {
         let core = Core {
             language_code,
             fs_root: fs.clone(),
+            file_system: Box::new(DefaultFileSystem {}),
             preferences,
             user_session,
             platform_hook,
@@ -151,7 +156,7 @@ pub mod core {
     ) -> Result<Vec<feature_categories::FeatureCategory>, CoreFailure> {
         let core = get_instance()?;
         feature_categories::load_feature_categories(
-            DefaultFileSystem {},
+            core.file_system.as_ref(),
             features_dir,
             &core.language_code,
         )

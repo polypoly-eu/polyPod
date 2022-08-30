@@ -34,9 +34,33 @@ class Core {
             ) {}
         }
 
+        fun execFeatureRdfQuery(query: String): Value {
+            return handleCoreResponse(
+                JniApi.execFeatureRdfQuery(query)
+            ) { it }
+        }
+
+        fun execFeatureRdfUpdate(query: String) {
+            return handleCoreResponse(
+                JniApi.execFeatureRdfUpdate(query)
+            ) {}
+        }
+
+        fun openFeatureRdfStore() {
+            return handleCoreResponse(
+                JniApi.openFeatureRdfStore()
+            ) {}
+        }
+
         fun appDidBecomeInactive() {
             return handleCoreResponse(
                 JniApi.appDidBecomeInactive()
+            ) {}
+        }
+
+        fun didOpenFeature(featureId: String) {
+            return handleCoreResponse(
+                JniApi.didOpenFeature(featureId)
             ) {}
         }
 

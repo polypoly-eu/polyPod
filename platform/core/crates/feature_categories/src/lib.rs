@@ -37,14 +37,14 @@ pub struct Feature {
 }
 
 pub fn load_feature_categories(
-    fs: impl FileSystem,
+    fs: &dyn FileSystem,
     features_dir: &str,
     language_code: &str,
 ) -> Result<Vec<FeatureCategory>, CoreFailure> {
-    load_raw_categories(&fs, features_dir)?
+    load_raw_categories(fs, features_dir)?
         .into_iter()
         .filter(should_display_feature_category)
-        .map(|raw_category| map_feature_category(&fs, features_dir, language_code, raw_category))
+        .map(|raw_category| map_feature_category(fs, features_dir, language_code, raw_category))
         .collect()
 }
 
@@ -93,7 +93,7 @@ struct DecodedFeatureManifest {
 }
 
 fn load_raw_categories(
-    fs: &impl FileSystem,
+    fs: &dyn FileSystem,
     features_dir: &str,
 ) -> Result<Vec<DecodedFeatureCategory>, CoreFailure> {
     let categories_json_path = categories_json_path_format(features_dir);
@@ -107,7 +107,7 @@ fn should_display_feature_category(category: &DecodedFeatureCategory) -> bool {
 }
 
 fn map_feature_category(
-    fs: &impl FileSystem,
+    fs: &dyn FileSystem,
     features_dir: &str,
     language_code: &str,
     raw_category: DecodedFeatureCategory,
@@ -125,7 +125,7 @@ fn map_feature_category(
 }
 
 fn load_feature(
-    fs: &impl FileSystem,
+    fs: &dyn FileSystem,
     features_dir: &str,
     language_code: &str,
     feature_id: &str,
@@ -135,7 +135,7 @@ fn load_feature(
 }
 
 fn load_feature_manifest(
-    fs: &impl FileSystem,
+    fs: &dyn FileSystem,
     features_dir: &str,
     id: &str,
 ) -> Result<DecodedFeatureManifest, CoreFailure> {
@@ -293,7 +293,7 @@ mod tests {
                 Err(CoreFailure::null_c_string_pointer()),
             )]),
         };
-        let result = load_feature_categories(fs, features_dir, "en");
+        let result = load_feature_categories(&fs, features_dir, "en");
         assert_eq!(result.is_err(), true)
     }
 
@@ -306,7 +306,7 @@ mod tests {
                 Ok("invalid".as_bytes().to_vec()),
             )]),
         };
-        let result = load_feature_categories(fs, features_dir, "en");
+        let result = load_feature_categories(&fs, features_dir, "en");
         assert_eq!(result.is_err(), true)
     }
 
@@ -345,7 +345,7 @@ mod tests {
                 Ok(json),
             )]),
         };
-        let loaded_categories = load_feature_categories(fs, features_dir, "en").unwrap();
+        let loaded_categories = load_feature_categories(&fs, features_dir, "en").unwrap();
 
         let expexcted_categories = vec![
             FeatureCategory {
@@ -404,7 +404,7 @@ mod tests {
                 Ok(json),
             )]),
         };
-        let loaded_categories = load_feature_categories(fs, features_dir, "en").unwrap();
+        let loaded_categories = load_feature_categories(&fs, features_dir, "en").unwrap();
         let loaded_category_ids: Vec<_> = loaded_categories
             .into_iter()
             .map(|category| category.id)
@@ -437,7 +437,7 @@ mod tests {
                 ),
             ]),
         };
-        let loaded_categories = load_feature_categories(fs, features_dir, "en");
+        let loaded_categories = load_feature_categories(&fs, features_dir, "en");
         assert_eq!(loaded_categories.is_err(), true)
     }
 
@@ -464,7 +464,7 @@ mod tests {
                 ),
             ]),
         };
-        let loaded_categories = load_feature_categories(fs, features_dir, "en");
+        let loaded_categories = load_feature_categories(&fs, features_dir, "en");
         assert_eq!(loaded_categories.is_err(), true)
     }
 
@@ -508,7 +508,7 @@ mod tests {
                 ),
             ]),
         };
-        let loaded_categories = load_feature_categories(fs, features_dir, "en").unwrap();
+        let loaded_categories = load_feature_categories(&fs, features_dir, "en").unwrap();
         let your_data_category_features: Vec<_> = loaded_categories[0]
             .clone()
             .features

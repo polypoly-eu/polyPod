@@ -5,7 +5,7 @@ use url::Url;
 use zip::ZipArchive;
 
 // I think the error should not be of type core failure. How is a platform going to know about CoreFailure?
-pub trait FileSystem {
+pub trait FileSystem: Sync + Send {
     fn create_dir_structure(&self, path: &str) -> Result<(), CoreFailure>;
     fn exists(&self, path: &str) -> bool;
     fn unzip(&self, from_url: &str, to_path: &str) -> Result<(), CoreFailure>;

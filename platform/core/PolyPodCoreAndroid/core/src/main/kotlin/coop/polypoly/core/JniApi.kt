@@ -40,7 +40,11 @@ object JniApi {
     external fun loadFeatureCategories(featuresDir: String): ByteArray
     external fun execRdfQuery(query: String): ByteArray
     external fun execRdfUpdate(query: String): ByteArray
+    external fun execFeatureRdfQuery(query: String): ByteArray
+    external fun execFeatureRdfUpdate(query: String): ByteArray
+    external fun openFeatureRdfStore(): ByteArray
     external fun appDidBecomeInactive(): ByteArray
+    external fun didOpenFeature(featureId: String): ByteArray
     external fun isUserSessionExpired(): ByteArray
     external fun setUserSessionTimeoutOption(option: ByteArray): ByteArray
     external fun getUserSessionTimeoutOption(): ByteArray
