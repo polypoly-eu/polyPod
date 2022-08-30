@@ -4,7 +4,8 @@ extension XCUIApplication {
     func launchWithArgs(
         resetDefaults: Bool = true,
         firstRun: Bool = false,
-        mockNotificationId: Int? = nil
+        mockNotificationId: Int? = 0,
+        showDeveloperFeatures: Bool? = false
     ) {
         typealias Keys = UserDefaults.Keys
         launchArguments = [
@@ -21,6 +22,12 @@ extension XCUIApplication {
             launchArguments += [
                 "-\(Keys.updateNotificationMockId.rawValue)",
                 "\(mockNotificationId)"
+            ]
+        }
+        if let showDeveloperFeatures = showDeveloperFeatures {
+            launchArguments += [
+                "-\(Keys.showDeveloperFeaturesId.rawValue)",
+                "\(showDeveloperFeatures)"
             ]
         }
         launch()
