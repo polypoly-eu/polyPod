@@ -28,14 +28,30 @@ class Endpoint(
 
     private val endpointNetwork = Network(context)
 
+    private fun endpointInfoFromId(endpointId: String): EndpointInfo? {
+        val endpointsPath = "config-assets/endpoints.json"
+        val endpointsJsonString = context.assets.readFile(endpointsPath)
+        val endpointInfoJsonType = object : HashMap<String, EndpointInfo>() {}
+        val endpointsJson: HashMap<String, EndpointInfo> = Gson()
+            .fromJson(endpointsJsonString, endpointInfoJsonType::class.java)
+        return endpointsJson[endpointId]
+    }
+
     suspend fun uploadToServer(
         context: Context,
         endpointId: String,
         errorMsg: String
     ) {
+        if (errorMsg == null) {
+            logger.error(
+                "uploadToServer: No payload found."
+            )
+            throw PodApiError().endpointError()
+        }
+
         val endpoint = Endpoint(context)
 
-        val endpointInfo = endpoint.endpointInfofromId(endpointId)
+        val endpointInfo = endpoint.endpointInfoFromId(endpointId)
         if (endpointInfo == null) {
             logger.error(
                 "uploadToServer: No endpoint found under that endpointId"
@@ -43,7 +59,7 @@ class Endpoint(
             throw PodApiError().endpointError()
         }
 
-        try{
+        try {
             endpointNetwork
                 .httpPost(
                     endpointInfo.url,
@@ -58,14 +74,6 @@ class Endpoint(
         }
     }
 
-    fun endpointInfofromId(endpointId: String): EndpointInfo? {
-        val endpointsPath = "config-assets/endpoints.json"
-        val endpointsJsonString = context.assets.readFile(endpointsPath)
-        val endpointInfoJsonType = object : HashMap<String, EndpointInfo>() {}
-        val endpointsJson: HashMap<String, EndpointInfo> = Gson()
-            .fromJson(endpointsJsonString, endpointInfoJsonType::class.java)
-        return endpointsJson[endpointId]
-    }
 
     fun setEndpointObserver(newObserver: EndpointObserver) {
         observer = newObserver
@@ -83,7 +91,7 @@ class Endpoint(
                 throw PodApiError().endpointPermissionDenied()
             }
             val endpointInfo =
-                endpointInfofromId(endpointId)
+                endpointInfoFromId(endpointId)
             if (endpointInfo == null) {
                 logger.error(
                     "endpoint.send: No endpoint found under that endpointId"
@@ -117,7 +125,7 @@ class Endpoint(
                     throw PodApiError().endpointPermissionDenied()
                 }
                 val endpointInfo =
-                    endpointInfofromId(endpointId)
+                    endpointInfoFromId(endpointId)
                 if (endpointInfo == null) {
                     logger.error(
                         "endpoint.get: No endpoint found under that endpointId"
