@@ -74,7 +74,6 @@ class Endpoint(
         }
     }
 
-
     fun setEndpointObserver(newObserver: EndpointObserver) {
         observer = newObserver
     }

@@ -70,7 +70,7 @@ final class Endpoint: EndpointProtocol {
         if payload.isEmpty {
             completionHandler(PodApiError.endpointError("Empty payload!"))
         }
-        
+
         let response = self.network.httpPost(
             url: endpointInfo.url,
             body: payload,
@@ -89,7 +89,6 @@ final class Endpoint: EndpointProtocol {
         }
 
     }
-
 
     func send(
         endpointId: String,
