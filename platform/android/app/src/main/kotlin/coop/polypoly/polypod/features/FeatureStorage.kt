@@ -28,7 +28,10 @@ object FeatureStorage {
 
         copyFeatureCategories(context)
         copyFeatures(context)
-        categories = Core.loadFeatureCategories(getFeaturesDir(context).path)
+        categories = Core.loadFeatureCategories(
+            getFeaturesDir(context).path,
+            emptyList()
+        )
     }
 
     fun featureForId(id: String): Feature? {

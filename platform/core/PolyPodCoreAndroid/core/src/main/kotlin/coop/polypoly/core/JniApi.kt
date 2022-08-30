@@ -37,7 +37,7 @@ object JniApi {
         fsRoot: String,
         callback: JniApi
     ): ByteArray
-    external fun loadFeatureCategories(featuresDir: String): ByteArray
+    external fun loadFeatureCategories(args: ByteArray): ByteArray
     external fun appDidBecomeInactive(): ByteArray
     external fun isUserSessionExpired(): ByteArray
     external fun setUserSessionTimeoutOption(option: ByteArray): ByteArray

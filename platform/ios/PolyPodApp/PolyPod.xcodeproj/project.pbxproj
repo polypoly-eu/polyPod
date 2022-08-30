@@ -108,6 +108,7 @@
 		90E4088227D78E4E006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
 		90E4088327D79382006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
 		90F8BA0028B6375000D73776 /* PolyPodCoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 90F8B9FF28B6375000D73776 /* PolyPodCoreSwift */; };
+		9C2B849A28BCD037004693FA /* FeatureSmokeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2B849928BCD037004693FA /* FeatureSmokeTest.swift */; };
 		9C856C20282E5126004DF92F /* multipleZips1.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C856C1D282E5126004DF92F /* multipleZips1.zip */; };
 		9C856C21282E5126004DF92F /* multipleZips2.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C856C1E282E5126004DF92F /* multipleZips2.zip */; };
 		9C856C22282E5126004DF92F /* testZip.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C856C1F282E5126004DF92F /* testZip.zip */; };
@@ -117,6 +118,7 @@
 		9C8F6D2B285B49DD00D44B4E /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8F6D29285B49DD00D44B4E /* UIImage+Utils.swift */; };
 		E9040D4726F0A30E00A88593 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4626F0A30E00A88593 /* Info.swift */; };
 		E9040D4926F0B2B400A88593 /* RuntimeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */; };
+		E9052B4B28BCA93700E9FF51 /* FeatureTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9052B4A28BCA93700E9FF51 /* FeatureTest.swift */; };
 		E90F89EA2629822400AD7D96 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89E92629822400AD7D96 /* OnboardingView.swift */; };
 		E90F89EE2629C0C000AD7D96 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90F89ED2629C0C000AD7D96 /* ContentView.swift */; };
 		E92373BC26289FA900D2CFF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E92373BE26289FA900D2CFF3 /* Localizable.strings */; };
@@ -254,6 +256,7 @@
 		90DD12F428A4E6C800526F54 /* Result+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Utils.swift"; sourceTree = "<group>"; };
 		90E4088127D78E4E006AD362 /* DataProtection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtection.swift; sourceTree = "<group>"; };
 		90F8B9FD28B6374000D73776 /* PolyPodCoreSwift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PolyPodCoreSwift; path = ../../core/PolyPodCoreSwift; sourceTree = "<group>"; };
+		9C2B849928BCD037004693FA /* FeatureSmokeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureSmokeTest.swift; sourceTree = "<group>"; };
 		9C856C1D282E5126004DF92F /* multipleZips1.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = multipleZips1.zip; sourceTree = "<group>"; };
 		9C856C1E282E5126004DF92F /* multipleZips2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = multipleZips2.zip; sourceTree = "<group>"; };
 		9C856C1F282E5126004DF92F /* testZip.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = testZip.zip; sourceTree = "<group>"; };
@@ -261,6 +264,7 @@
 		9C8F6D29285B49DD00D44B4E /* UIImage+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
 		E9040D4626F0A30E00A88593 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		E9040D4826F0B2B400A88593 /* RuntimeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeInfo.swift; sourceTree = "<group>"; };
+		E9052B4A28BCA93700E9FF51 /* FeatureTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureTest.swift; sourceTree = "<group>"; };
 		E90F89E92629822400AD7D96 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		E90F89ED2629C0C000AD7D96 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E92373B526289EA300D2CFF3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -598,6 +602,8 @@
 				E9F45D9B28A13AE700FDBE70 /* XCUIApplicationExtensions.swift */,
 				E9545EAF27353F78001E8C7F /* UpdateNotificationTest.swift */,
 				E92FE9BC276759E900A0885E /* OnboardingTest.swift */,
+				9C2B849928BCD037004693FA /* FeatureSmokeTest.swift */,
+				E9052B4A28BCA93700E9FF51 /* FeatureTest.swift */,
 			);
 			path = PolyPodUITests;
 			sourceTree = "<group>";
@@ -708,6 +714,8 @@
 				E9545EBD273542CC001E8C7F /* PBXTargetDependency */,
 			);
 			name = PolyPodUITests;
+			packageProductDependencies = (
+			);
 			productName = PolyPodUITests;
 			productReference = E9545EB6273542CC001E8C7F /* PolyPodUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -1054,7 +1062,9 @@
 				E92FE9BD276759E900A0885E /* OnboardingTest.swift in Sources */,
 				E9545EC1273542F5001E8C7F /* UpdateNotificationTest.swift in Sources */,
 				E9545EC927359C34001E8C7F /* UserDefaultsExtensions.swift in Sources */,
+				9C2B849A28BCD037004693FA /* FeatureSmokeTest.swift in Sources */,
 				E9F45D9D28A13B0F00FDBE70 /* XCUIApplicationExtensions.swift in Sources */,
+				E9052B4B28BCA93700E9FF51 /* FeatureTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
