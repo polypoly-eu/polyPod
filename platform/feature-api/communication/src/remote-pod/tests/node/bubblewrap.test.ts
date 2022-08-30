@@ -22,7 +22,7 @@ const testInstances = [
     [DefaultGraph, "https://polypoly.coop/CDS"],
 ];
 
-function testRoundtrip(anObject: any, aClass: any, msg: string) {
+function testRoundtrip(anObject, aClass, msg: string): void {
     test(msg, () => {
         const encoded = podBubblewrap.encode(anObject);
         expect(encoded).toBeTruthy();
@@ -34,7 +34,8 @@ function testRoundtrip(anObject: any, aClass: any, msg: string) {
 
 describe("Test different kinds of nodes", () => {
     testInstances.forEach((instance) => {
-        let aClass: any = instance[0];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const aClass: any = instance[0];
         const arg = instance[1];
         const aNode = new aClass(arg);
         testRoundtrip(
