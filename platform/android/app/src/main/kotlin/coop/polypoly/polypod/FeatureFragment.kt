@@ -19,6 +19,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import coop.polypoly.core.Core
 import coop.polypoly.core.Feature
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
@@ -120,6 +121,8 @@ open class FeatureFragment : Fragment() {
             )
             feature = it
         }
+        Core.didOpenFeature(args.featureId)
+        Core.openFeatureRdfStore()
         setupFeature(view)
     }
 

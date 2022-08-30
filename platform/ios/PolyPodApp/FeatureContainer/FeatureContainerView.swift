@@ -143,6 +143,13 @@ class FeatureWebView: WKWebView {
         pickFileHandler: @escaping (String?, @escaping (ExternalFile?) -> Void) -> Void
     ) {
         PodApi.shared.polyOut.activeFeature = feature
+        _ = try! Core.instance
+            .didOpenFeature(featureId: feature.id)
+            .inspectError { err in
+                Log.error("Core failed to handle open feature event \(err)")
+            }
+            .get()
+        _ = try! Core.instance.openFeatureRdfStore().get()
         self.featureTitle = title
         self.activeActions = activeActions
         self.errorHandler = errorHandler

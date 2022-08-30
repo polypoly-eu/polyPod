@@ -27,7 +27,7 @@ open class PolyOut(
         val fsFilesRoot = "FeatureFiles"
 
         fun filesPath(context: Context) =
-            context.filesDir.absolutePath + "/featureFiles"
+            context.filesDir.absolutePath + "/$fsFilesRoot"
 
         fun pureId(id: String) = id
             // Previous polyPod builds used polypod:// URLs for files

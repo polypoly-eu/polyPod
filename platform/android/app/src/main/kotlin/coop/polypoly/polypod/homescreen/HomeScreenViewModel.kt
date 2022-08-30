@@ -118,6 +118,7 @@ class HomeScreenViewModel {
         context: Context,
         file: File
     ): Bitmap? {
+        return null
         if (file.path.endsWith(".pdf")) {
             return PDFBitmap
                 .bitmapFromPDF(

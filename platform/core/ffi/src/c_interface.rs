@@ -65,7 +65,9 @@ pub unsafe extern "C" fn app_did_become_inactive() -> CByteBuffer {
 #[no_mangle]
 pub unsafe extern "C" fn did_open_feature(feature_id: *const c_char) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
-        cstring_to_str(&feature_id).map(String::from).and_then(core::did_open_feature),
+        cstring_to_str(&feature_id)
+            .map(String::from)
+            .and_then(core::did_open_feature),
     ))
 }
 
