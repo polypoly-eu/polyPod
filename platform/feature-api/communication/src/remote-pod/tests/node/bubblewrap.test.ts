@@ -5,6 +5,7 @@ import {
     Literal,
     Variable,
     DefaultGraph,
+    Quad,
 } from "@polypoly-eu/api";
 
 describe("Bubblewrap sanity check", () => {
@@ -21,21 +22,34 @@ const testInstances = [
     [DefaultGraph, "https://polypoly.coop/CDS"],
 ];
 
-describe("Test different kind of nodes", () => {
+function testRoundtrip(anObject: any, aClass: any, msg: string) {
+    test(msg, () => {
+        const encoded = podBubblewrap.encode(anObject);
+        expect(encoded).toBeTruthy();
+        const decoded = podBubblewrap.decode(encoded);
+        expect(decoded).toBeInstanceOf(aClass);
+        expect(decoded).toStrictEqual(anObject);
+    });
+}
+
+describe("Test different kinds of nodes", () => {
     testInstances.forEach((instance) => {
         let aClass: any = instance[0];
         const arg = instance[1];
         const aNode = new aClass(arg);
-
-        test(`should roundtrip ${aNode.constructor.name}`, () => {
-            const encoded = podBubblewrap.encode(aNode);
-
-            expect(encoded).toBeTruthy();
-
-            const decoded = podBubblewrap.decode(encoded);
-
-            expect(decoded).toBeInstanceOf(aClass);
-            expect(decoded).toStrictEqual(aNode);
-        });
+        testRoundtrip(
+            aNode,
+            aClass,
+            `should roundtrip ${aNode.constructor.name}`
+        );
     });
+});
+
+describe("Test roundtripping for a Quad", () => {
+    const subject = new NamedNode("https://polypoly.coop/subject");
+    const predicate = new NamedNode("https://polypoly.coop/predicate");
+    const object = new Literal("A value");
+    const graph = new BlankNode();
+    const aQuad = new Quad(subject, predicate, object, graph);
+    testRoundtrip(aQuad, Quad, "should roundtrip");
 });
