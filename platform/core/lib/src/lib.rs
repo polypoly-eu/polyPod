@@ -113,9 +113,9 @@ pub mod core {
         get_instance()?
             .active_feature
             .as_mut()
-            .expect("No active feature is set")
+            .ok_or(CoreFailure::no_active_feature())?
             .get_mut()
-            .expect("Cannot access active feature")
+            .map_err(|err| CoreFailure::cannot_access_active_feature(err.to_string()))?
             .open_rdf_store()
     }
 
@@ -123,9 +123,9 @@ pub mod core {
         get_instance()?
             .active_feature
             .as_ref()
-            .expect("No active feature is set")
+            .ok_or(CoreFailure::no_active_feature())?
             .lock()
-            .expect("Cannot access active feature")
+            .map_err(|err| CoreFailure::cannot_access_active_feature(err.to_string()))?
             .exec_rdf_query(query)
     }
 
@@ -133,9 +133,9 @@ pub mod core {
         get_instance()?
             .active_feature
             .as_ref()
-            .expect("No active feature is set")
+            .ok_or(CoreFailure::no_active_feature())?
             .lock()
-            .expect("Cannot access active feature")
+            .map_err(|err| CoreFailure::cannot_access_active_feature(err.to_string()))?
             .exec_rdf_update(query)
     }
 

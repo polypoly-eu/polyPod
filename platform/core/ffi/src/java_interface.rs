@@ -84,7 +84,7 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_didOpenFeature(
     feature_id: JString,
 ) -> jbyteArray {
     env.byte_array_from_slice(&message_pack_serialize(
-        read_jni_string(&env, feature_id).and_then(|string| core::did_open_feature(string)),
+        read_jni_string(&env, feature_id).and_then(core::did_open_feature),
     ))
     .unwrap()
 }

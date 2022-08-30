@@ -32,6 +32,7 @@ pub enum FailureCode {
     FailedToAccessUserSession,
     FailedToAttachJVM,
     NoActiveFeature,
+    CannotAccesActiveFeature,
     FailedToOpenFeatureRdfStore,
     FeatureStoreNotInitialized,
     SparqlEvaluationError,
@@ -266,10 +267,17 @@ impl CoreFailure {
         }
     }
 
-    pub fn no_active_feature(action: String) -> Self {
+    pub fn no_active_feature() -> Self {
         CoreFailure {
             code: FailureCode::NoActiveFeature.value(),
-            message: format!("Failed to conduct action: {}. No feature active", action),
+            message: "No feature active was set".to_string(),
+        }
+    }
+    
+    pub fn cannot_access_active_feature(info: String) -> Self {
+        CoreFailure {
+            code: FailureCode::CannotAccesActiveFeature.value(),
+            message: format!("Active feature is not available for use: {}", info),
         }
     }
 
