@@ -26,7 +26,37 @@ class Endpoint(
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    val endpointNetwork = Network(context)
+    private val endpointNetwork = Network(context)
+
+    suspend fun uploadToServer(
+        context: Context,
+        endpointId: String,
+        errorMsg: String
+    ) {
+        val endpoint = Endpoint(context)
+
+        val endpointInfo = endpoint.endpointInfofromId(endpointId)
+        if (endpointInfo == null) {
+            logger.error(
+                "uploadToServer: No endpoint found under that endpointId"
+            )
+            throw PodApiError().endpointError()
+        }
+
+        try{
+            endpointNetwork
+                .httpPost(
+                    endpointInfo.url,
+                    errorMsg,
+                    "application/json",
+                    endpointInfo.auth,
+                    endpointInfo.allowInsecure
+                )
+        } catch (e: PodApiError) {
+            logger.error("uploadToServer - Failed: $e")
+            throw PodApiError().endpointError()
+        }
+    }
 
     fun endpointInfofromId(endpointId: String): EndpointInfo? {
         val endpointsPath = "config-assets/endpoints.json"
