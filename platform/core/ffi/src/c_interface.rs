@@ -48,7 +48,8 @@ pub unsafe extern "C" fn core_bootstrap(
 #[no_mangle]
 pub unsafe extern "C" fn load_feature_categories(args: CByteBuffer) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
-        message_pack_deserialize(byte_buffer_to_bytes(&args).unwrap())
+        byte_buffer_to_bytes(&args)
+            .and_then(message_pack_deserialize)
             .and_then(core::load_feature_categories),
     ))
 }
