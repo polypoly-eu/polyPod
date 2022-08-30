@@ -3,7 +3,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
 
-function supressSomeWarnings(warning, warn, code, regex) {
+function suppressSomeWarnings(warning, warn, code, regex) {
     if (warning.code === code && warning.cycle[0].match(regex)) {
         return;
     } else {
@@ -35,7 +35,7 @@ export default [
         context: "window",
         external: ["chai"],
         onwarn: (warning, warn) =>
-            supressSomeWarnings(
+            suppressSomeWarnings(
                 warning,
                 warn,
                 "CIRCULAR_DEPENDENCY",
@@ -61,7 +61,7 @@ export default [
         ],
         context: "window",
         onwarn: (warning, warn) =>
-            supressSomeWarnings(
+            suppressSomeWarnings(
                 warning,
                 warn,
                 "CIRCULAR_DEPENDENCY",
