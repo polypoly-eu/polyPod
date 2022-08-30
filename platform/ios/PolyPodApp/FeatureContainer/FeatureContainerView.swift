@@ -133,7 +133,8 @@ class FeatureWebView: WKWebView {
     private let openUrlHandler: (String) -> Void
     private let pickFileHandler: (String?, @escaping (ExternalFile?) -> Void) -> Void
     private var lastActionDispatch: DispatchTime = DispatchTime.now()
-
+    
+    // swiftlint:disable function_body_length
     init(
         feature: Feature,
         title: Binding<String>,
@@ -147,7 +148,9 @@ class FeatureWebView: WKWebView {
         _ = try! Core.instance
             .didOpenFeature(featureId: feature.id)
             .inspectError { err in
-                Log.error("Core failed to handle open feature event \(err)")
+                Log.error(
+                    "Core failed to handle open feature event \(err)"
+                )
             }
             .get()
         self.featureTitle = title
