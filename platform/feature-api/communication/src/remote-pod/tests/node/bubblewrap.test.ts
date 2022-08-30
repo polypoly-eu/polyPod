@@ -1,38 +1,35 @@
 import { podBubblewrapClasses, podBubblewrap } from "../../remote";
 import { NamedNode, BlankNode } from "@polypoly-eu/api";
 
-describe("Bubblewrap", () => {
-    describe("when create()", () => {
-        test("should have the right number of classes", () => {
-            expect(Object.keys(podBubblewrapClasses).length).toBe(6);
-        });
+describe("Bubblewrap sanity check", () => {
+    test("should have the right number of classes", () => {
+        expect(Object.keys(podBubblewrapClasses).length).toBe(6);
     });
+});
 
-    describe("when NamedNode() is called", () => {
-        test("should generate roundtrip classes correctly", () => {
-            const namedNode = new NamedNode("https://example.org/n");
-            const encoded = podBubblewrap.encode(namedNode);
+const testInstances = [
+    [NamedNode, "https://example.org/n"],
+    [BlankNode, "https://example.org/n"],
+];
 
-            expect(encoded).toBeTruthy();
+describe("Test different kind of nodes", () => {
+    testInstances.forEach((instance) => {
+        let aClass: any = instance[0];
+        const arg = instance[1];
+        describe(`round-tripping ${aClass.constructor.name}`, () => {
+            test("should roundtrip ${aClass.constructor.name}", () => {
+                if (aClass.hasOwnProperty("new")) {
+                    const aNode = new aClass(arg);
+                    const encoded = podBubblewrap.encode(aNode);
 
-            const decoded = podBubblewrap.decode(encoded);
+                    expect(encoded).toBeTruthy();
 
-            expect(decoded).toBeInstanceOf(NamedNode);
-            expect(decoded).toStrictEqual(namedNode);
-        });
-    });
+                    const decoded = podBubblewrap.decode(encoded);
 
-    describe("when BlankNode() is called", () => {
-        test("should generate roundtrip classes correctly", () => {
-            const blankNode = new BlankNode();
-            const encoded = podBubblewrap.encode(blankNode);
-
-            expect(encoded).toBeTruthy();
-
-            const decoded = podBubblewrap.decode(encoded);
-
-            expect(decoded).toBeInstanceOf(BlankNode);
-            expect(decoded).toStrictEqual(blankNode);
+                    expect(decoded).toBeInstanceOf(aClass);
+                    expect(decoded).toStrictEqual(aNode);
+                }
+            });
         });
     });
 });
