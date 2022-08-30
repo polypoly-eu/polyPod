@@ -66,7 +66,7 @@ class FeatureSmokeTest: XCTestCase {
         
         while !featureViewVisible && swipeDownCount < 20 {
             tile.tap()
-            featureViewVisible = featureView().waitForExistence(timeout: 1)
+            featureViewVisible = featureView().waitForExistence(timeout: 5)
             if !featureViewVisible {
                 // Need to swipe up so that the tile becomes visible and the tap succeeds
                 homeScreenView().swipeUp()
@@ -79,13 +79,23 @@ class FeatureSmokeTest: XCTestCase {
         XCTAssertFalse(errorPopUpVisible, "Error popup shown after opening feature: \(featureTitle)")
         
         let closeButton = featureCloseButton()
-        guard closeButton.waitForExistence(timeout: 10) else {
+        guard closeButton.waitForExistence(timeout: 5) else {
             XCTAssert(false, "Close button not found after tapping the feature.")
             return
         }
-        closeButton.tap()
         
-        guard homeScreenView().waitForExistence(timeout: 10) else {
+        // Sometimes there is an overlay preventing the close button from being pressed.
+        // Tapping once on the close button will dismiss the overlay
+        // Tapping another time will close the feature.
+        var homeScreenVisible = false
+        var count = 0
+        while !homeScreenVisible && count < 4 {
+            closeButton.tap()
+            homeScreenVisible = homeScreenView().waitForExistence(timeout: 5)
+            count += 1
+        }
+        
+        if !homeScreenVisible {
             XCTAssert(false, "Home screen not found after tapping the close button.")
             return
         }
