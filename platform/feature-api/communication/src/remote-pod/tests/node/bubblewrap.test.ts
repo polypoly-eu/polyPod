@@ -22,7 +22,8 @@ const testInstances = [
     [DefaultGraph, "https://polypoly.coop/CDS"],
 ];
 
-function testRoundtrip(anObject, aClass, msg: string): void {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function testRoundtrip(anObject: any, aClass: any, msg: string): void {
     test(msg, () => {
         const encoded = podBubblewrap.encode(anObject);
         expect(encoded).toBeTruthy();
