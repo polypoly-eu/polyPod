@@ -81,10 +81,16 @@ class FeatureSmokeTest: XCTestCase {
         XCTAssertFalse(errorPopUpVisible, "Error popup shown after opening feature: \(featureTitle)")
         
         let closeButton = featureCloseButton()
-        _ = closeButton.waitForExistence(timeout: 1)
+        guard closeButton.waitForExistence(timeout: 10) else {
+            XCTAssert(false, "Close button not found after tapping the feature.")
+            return
+        }
         closeButton.tap()
-        _ = homeScreenView().waitForExistence(timeout: 1)
         
+        guard homeScreenView().waitForExistence(timeout: 10) else {
+            XCTAssert(false, "Home screen not found after tapping the close button.")
+            return
+        }
         // Reset
         for _ in 0..<swipeDownCount {
             homeScreenView().swipeDown()
