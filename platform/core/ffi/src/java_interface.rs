@@ -201,3 +201,27 @@ impl core::PlatformHookRequest for BridgeToPlatform {
         }
     }
 }
+
+#[no_mangle]
+pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfQuery(
+    env: JNIEnv,
+    _: JClass,
+    query: JString,
+) -> jbyteArray {
+    env.byte_array_from_slice(&message_pack_serialize(
+        read_jni_string(&env, query).and_then(core::exec_rdf_query),
+    ))
+    .unwrap()
+}
+
+#[no_mangle]
+pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfUpdate(
+    env: JNIEnv,
+    _: JClass,
+    query: JString,
+) -> jbyteArray {
+    env.byte_array_from_slice(&message_pack_serialize(
+        read_jni_string(&env, query).and_then(core::exec_rdf_update),
+    ))
+    .unwrap()
+}

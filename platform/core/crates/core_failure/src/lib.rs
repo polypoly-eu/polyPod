@@ -1,3 +1,4 @@
+use poly_rdf::rdf_failure::RdfFailure;
 use serde::{Deserialize, Serialize};
 use url::Url;
 
@@ -75,6 +76,13 @@ impl CoreFailure {
         CoreFailure {
             code: FailureCode::FailedToCreateCString.value(),
             message,
+        }
+    }
+
+    pub fn map_rdf_to_core_failure(error: RdfFailure) -> Self {
+        CoreFailure {
+            code: error.code,
+            message: error.message,
         }
     }
 

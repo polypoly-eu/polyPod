@@ -12,6 +12,7 @@ import { dataFactory } from "../rdf";
 import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint, Stats } from "./api";
 import { IFs } from "memfs";
 import { Entry } from ".";
+import { MockStore } from "./mock-store";
 
 export const DEFAULT_POD_RUNTIME = "podjs-default";
 export const DEFAULT_POD_RUNTIME_VERSION = "podjs-default-version";
@@ -74,6 +75,7 @@ export class DefaultPolyOut implements PolyOut {
  *
  * 1. an [RDFJS dataset](https://rdf.js.org/dataset-spec/)
  * 2. a file system that adheres to the [async FS interface of Node.js](https://nodejs.org/api/fs.html)
+ * 3. The *new* used rdf store, which supports SPARQL queries (oxigraph)
  *
  * Depending on the platform (Node.js or browser), there are various implementations of these that may be used.
  * These are found in other core components, such as AsyncPod.
@@ -108,21 +110,18 @@ export class DefaultPod implements Pod {
                         dataFactory.defaultGraph()
                     )
                 ),
-            add: async (...quads) =>
-                quads.forEach((quad) => {
-                    this.checkQuad(quad);
-                    this.store.add(quad);
-                }),
-            delete: async (...quads) =>
-                quads.forEach((quad) => {
-                    this.checkQuad(quad);
-                    this.store.delete(quad);
-                }),
-            has: async (...quads) =>
-                quads.some((quad) => {
-                    this.checkQuad(quad);
-                    return this.store.has(quad);
-                }),
+            add: async (quad) => {
+                this.checkQuad(quad);
+                this.store.add(quad);
+            },
+            delete: async (quad) => {
+                this.checkQuad(quad);
+                this.store.delete(quad);
+            },
+            has: async (quad) => {
+                this.checkQuad(quad);
+                return this.store.has(quad);
+            },
         };
     }
 
