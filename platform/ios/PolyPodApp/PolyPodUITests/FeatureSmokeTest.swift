@@ -2,7 +2,7 @@
 
 import XCTest
 
-class SmokeTest: XCTestCase {
+class FeatureSmokeTest: XCTestCase {
     private let app = XCUIApplication()
     
     override func setUpWithError() throws {
