@@ -34,7 +34,7 @@ class SmokeTest: XCTestCase {
     private func assertHomeScreenIsShown() {
         XCTAssertTrue(
             homeScreenView().exists,
-            "Onboarding was supposed to be shown"
+            "Homescreen was supposed to be shown"
         )
     }
 
