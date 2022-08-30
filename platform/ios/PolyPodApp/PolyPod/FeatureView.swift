@@ -109,10 +109,14 @@ struct FeatureView: View {
             style: .default,
             handler: { _ in
                 closeAction()
-                ErrorUploader.shared.uploadToServer(errorMsg, completionHandler: { _, error in
+                PodApi.shared.endpoint.uploadToServer(
+                    errorMsg: errorMsg,
+                    endpointId: "polyApiErrorReport",
+                    completionHandler: { error in
                         if error != nil {
-                            Log.error("Upload failed: \(error!.description)")
+                            Log.error("Upload failed: \(error!.localizedDescription)")
                             return
+                            
                         }
                         Log.debug("Error uploaded successfully")
                     }

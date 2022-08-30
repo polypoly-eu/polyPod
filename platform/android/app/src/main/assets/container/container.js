@@ -54,12 +54,6 @@ function initErrorHandling(window) {
         window.podInternal.reportError(
             "Unhandled error:\n\n" + errorToString(error)
         );
-        window.pod.endpoint.send(
-            "polyApiErrorReport",
-            errorToString(error),
-            "application/json",
-            process.env["POLYPOD_ERROR_REPORT_AUTHORIZATION"]
-        );
         return true;
     });
     window.addEventListener("unhandledrejection", (event) => {

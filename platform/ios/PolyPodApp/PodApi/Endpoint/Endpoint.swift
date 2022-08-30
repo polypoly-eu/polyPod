@@ -43,6 +43,54 @@ final class Endpoint: EndpointProtocol {
         delegate?.doHandleApproveEndpointFetch(endpointId: endpointId, completion: completion)
     }
 
+    private func jsonStringify(_ objectToConvert: Any) -> String {
+        var resultJson = ""
+        if let json = try? JSONSerialization.data(withJSONObject: objectToConvert) {
+            if let content = String(data: json, encoding: String.Encoding.utf8) {
+                // here `content` is the JSON dictionary containing the String
+                resultJson = content
+            }
+        }
+        return resultJson
+    }
+
+    func uploadToServer(
+        errorMsg: String,
+        endpointId: String,
+        completionHandler: @escaping (Error?) -> Void
+    ) {
+        guard let endpointInfo = self.endpointInfoFromId(endpointId: endpointId) else {
+            Log.error("uploadToServer failed: No endpoint found for: \(endpointId)")
+            completionHandler(
+                PodApiError.endpointError("post, No endpoint found for: \(endpointId)")
+            )
+            return
+        }
+        let payload = jsonStringify([errorMsg])
+        if payload.isEmpty {
+            completionHandler(PodApiError.endpointError("Empty payload!"))
+        }
+        
+        let response = self.network.httpPost(
+            url: endpointInfo.url,
+            body: payload,
+            contentType: "application/json",
+            authToken: endpointInfo.auth,
+            allowInsecure: endpointInfo.allowInsecure
+        )
+
+        switch response {
+        case .failure(let error):
+            Log.error("uploadToServer(): endpoint.post to \(endpointId) failed with: \(error.localizedDescription)")
+            let errorCode = response.map { "failed with code \($0)" }
+            completionHandler(PodApiError.endpointError("post \(errorCode)"))
+        case .success:
+            completionHandler(nil)
+        }
+
+    }
+
+
     func send(
         endpointId: String,
         payload: String,
