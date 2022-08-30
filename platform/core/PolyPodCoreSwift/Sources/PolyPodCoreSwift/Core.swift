@@ -71,6 +71,10 @@ public final class Core {
         handleCoreResponse(app_did_become_inactive(), { _ in })
     }
     
+    public func didOpenFeature(featureId: String) -> Result<Void, Error> {
+        return handleCoreResponse(did_open_feature(featureId)) { _ in }
+    }
+    
     public func isUserSessionExpired() -> Result<Bool, Error> {
         handleCoreResponse(is_user_session_expired()) { try $0.getBool() }
     }
@@ -94,6 +98,18 @@ public final class Core {
     
     public func getUserSessionTimeoutOptionsConfig() -> Result<[UserSessionTimeoutOptionConfig], Error> {
         handleCoreResponse(get_user_session_timeout_options_config(), UserSessionTimeoutOptionConfig.mapUserSessionTimeoutOptionsConfig(_:))
+    }
+
+    public func executeFeatureRdfQuery(_ query: String) -> Result<MessagePackValue, Error> {
+        return handleCoreResponse(exec_feature_rdf_query(query), { $0 })
+    }
+
+    public func executeFeatureRdfUpdate(_ update: String) -> Result<MessagePackValue, Error> {
+        return handleCoreResponse(exec_feature_rdf_update(update), { $0 })
+    }
+
+    public func openFeatureRdfStore() -> Result<Void, Error> {
+        return handleCoreResponse(open_feature_rdf_store()) { _ in }
     }
 
     public func executeRdfQuery(_ query: String) -> Result<MessagePackValue, Error> {

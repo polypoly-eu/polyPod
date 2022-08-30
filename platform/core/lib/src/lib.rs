@@ -162,6 +162,7 @@ pub mod core {
     pub fn did_open_feature(id: String) -> Result<(), CoreFailure> {
         let mut core = get_instance()?;
         let mut feature_path = core.fs_root.clone();
+        feature_path.push("FeatureFiles".to_string());
         feature_path.push(id);
         core.active_feature = Some(Mutex::from(Feature::new(feature_path)));
 
