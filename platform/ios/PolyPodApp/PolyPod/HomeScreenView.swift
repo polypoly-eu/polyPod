@@ -474,6 +474,7 @@ struct DeveloperSectionView: View {
             VStack(alignment: .leading, spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
                 ForEach(sectionModel.cards) { card in
                     MediumCardView(card: card)
+                        .accessibilityElement()
                         .accessibilityIdentifier("\(card.id)_feature")
                 }
             }
