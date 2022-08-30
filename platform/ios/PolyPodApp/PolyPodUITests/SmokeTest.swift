@@ -14,21 +14,21 @@ class SmokeTest: XCTestCase {
         app.launchWithArgs()
         assertHomeScreenIsShown()
         
-        let tile_identifiers = ["big_card_view", "medium_card_view", "small_card_view"]
+        let identifier = "feature_tile_view"
+        var count = 0
         
-        for identifier in tile_identifiers {
-            var count = 0
-            var exists = true
-            while exists {
-                let tile = featureTileView(index: count, indentifier: identifier)
-                exists = tile.exists
-                count += 1
-                if exists {
-                    print("\(identifier) - \(count)")
-                    openFeatureAndCheckForErrorPopup(tile: tile)
-                }
+        while true {
+            let tile = featureTileView(index: count, indentifier: identifier)
+            count += 1
+            
+            if tile.exists {
+                print("\(identifier) - \(count)")
+                openFeatureAndCheckForErrorPopup(tile: tile)
+            } else {
+                break
             }
         }
+        
     }
 
     private func assertHomeScreenIsShown() {

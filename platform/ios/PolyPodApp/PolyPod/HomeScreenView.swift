@@ -579,7 +579,7 @@ struct BigCardView: View {
             onFeatureSelected(card.id)
         }
         .accessibilityElement()
-        .accessibilityIdentifier("big_card_view")
+        .accessibilityIdentifier("feature_tile_view")
     }
 }
 
@@ -630,7 +630,7 @@ struct MediumCardView: View {
             onFeatureSelected(card.id)
         }
         .accessibilityElement()
-        .accessibilityIdentifier("medium_card_view")
+        .accessibilityIdentifier("feature_tile_view")
     }
 }
 
@@ -670,7 +670,7 @@ struct SmallCardView: View {
             onFeatureSelected(card.id)
         }
         .accessibilityElement()
-        .accessibilityIdentifier("small_card_view")
+        .accessibilityIdentifier("feature_tile_view")
     }
 }
 
