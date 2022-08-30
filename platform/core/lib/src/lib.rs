@@ -45,6 +45,7 @@ pub mod core {
     }
 
     const PREFERENCES_DB: &str = "preferences_db";
+    const FEATURE_FILES: &str = "FeatureFiles";
 
     // The Core would act as a composition root, containing any global configuration
     // to be shared between components, as well managing components lifetime.
@@ -167,7 +168,7 @@ pub mod core {
     pub fn did_open_feature(id: String) -> Result<(), CoreFailure> {
         let mut core = get_instance()?;
         let mut feature_path = core.fs_root.clone();
-        feature_path.push("FeatureFiles".to_string());
+        feature_path.push(FEATURE_FILES.to_string());
         feature_path.push(id);
         core.file_system.as_ref().create_dir_structure(
             // This conversion will go away when FileSystem will be migrated

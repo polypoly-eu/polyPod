@@ -273,7 +273,7 @@ impl CoreFailure {
             message: "No feature active was set".to_string(),
         }
     }
-    
+
     pub fn cannot_access_active_feature(info: String) -> Self {
         CoreFailure {
             code: FailureCode::CannotAccesActiveFeature.value(),
