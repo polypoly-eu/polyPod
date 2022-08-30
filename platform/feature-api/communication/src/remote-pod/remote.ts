@@ -17,7 +17,8 @@ import {
     DefaultGraph,
     Quad as polyQuad,
     DataFactory,
-    SPARQLQueryResult,
+    Triplestore,
+    TriplestoreDB,
 } from "@polypoly-eu/api";
 import { Quad } from "rdf-js";
 import { RequestListener } from "http";
@@ -47,8 +48,10 @@ type PolyInBackend = ObjectBackendSpec<{
     add(quad: Quad): ValueBackendSpec<void>;
     delete(quad: Quad): ValueBackendSpec<void>;
     has(quad: Quad): ValueBackendSpec<boolean>;
-    query(query: string): ValueBackendSpec<SPARQLQueryResult>;
-    update(query: string): ValueBackendSpec<void>;
+}>;
+
+type TriplestoreBackend = ObjectBackendSpec<{
+    openStore(): ValueBackendSpec<TriplestoreDB>;
 }>;
 
 type PolyOutBackend = ObjectBackendSpec<{
@@ -98,6 +101,7 @@ type PodBackend = ObjectBackendSpec<{
     polyNav(): PolyNavBackend;
     info(): InfoBackend;
     endpoint(): EndpointBackend;
+    triplestore(): TriplestoreBackend;
 }>;
 
 export const podBubblewrapClasses: Classes = {
@@ -142,8 +146,12 @@ export class RemoteClientPod implements Pod {
             match: (matcher) => this.rpcClient.polyIn().match(matcher)(),
             delete: (quad) => this.rpcClient.polyIn().delete(quad)(),
             has: (quad) => this.rpcClient.polyIn().has(quad)(),
-            query: (query) => this.rpcClient.polyIn().query(query)(),
-            update: (query) => this.rpcClient.polyIn().update(query)(),
+        };
+    }
+
+    get triplestore(): Triplestore {
+        return {
+            openStore: () => this.rpcClient.triplestore().openStore()(),
         };
     }
 
@@ -293,6 +301,10 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
 
     polyIn(): ServerOf<PolyInBackend> {
         return this.pod.polyIn;
+    }
+
+    triplestore(): ServerOf<TriplestoreBackend> {
+        return this.pod.triplestore;
     }
 
     polyLifecycle(): ServerOf<PolyLifecycleBackend> {
