@@ -1,5 +1,5 @@
 import { podBubblewrapClasses, podBubblewrap } from "../../remote";
-import { NamedNode } from "@polypoly-eu/api";
+import { NamedNode, BlankNode } from "@polypoly-eu/api";
 
 describe("Bubblewrap", () => {
     describe("when create()", () => {
@@ -19,6 +19,20 @@ describe("Bubblewrap", () => {
 
             expect(decoded).toBeInstanceOf(NamedNode);
             expect(decoded).toStrictEqual(namedNode);
+        });
+    });
+
+    describe("when BlankNode() is called", () => {
+        test("should generate roundtrip classes correctly", () => {
+            const blankNode = new BlankNode();
+            const encoded = podBubblewrap.encode(blankNode);
+
+            expect(encoded).toBeTruthy();
+
+            const decoded = podBubblewrap.decode(encoded);
+
+            expect(decoded).toBeInstanceOf(BlankNode);
+            expect(decoded).toStrictEqual(blankNode);
         });
     });
 });
