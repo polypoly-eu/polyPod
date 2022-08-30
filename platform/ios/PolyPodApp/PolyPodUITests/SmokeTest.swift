@@ -18,7 +18,7 @@ class SmokeTest: XCTestCase {
         var count = 0
         
         while true {
-            let tile = featureTileView(index: count, indentifier: identifier)
+            let tile = featureTileView(index: count, identifier: identifier)
             count += 1
             
             if tile.exists {
@@ -58,8 +58,8 @@ class SmokeTest: XCTestCase {
         app.otherElements["feature_title_text"]
     }
 
-    private func featureTileView(index: Int, indentifier: String) -> XCUIElement {
-        app.otherElements.matching(identifier: indentifier).element(boundBy: index)
+    private func featureTileView(index: Int, identifier: String) -> XCUIElement {
+        app.otherElements.matching(identifier: identifier).element(boundBy: index)
     }
     
     private func openFeatureAndCheckForErrorPopup(tile: XCUIElement) {
