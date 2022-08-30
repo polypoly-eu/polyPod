@@ -355,8 +355,7 @@ struct HomeScreenView: View {
             }
         }.onAppear {
             viewModel.setup()
-        }.accessibilityElement()
-        .accessibilityIdentifier("homescreen_view")
+        }.accessibilityIdentifier("homescreen_view")
     }
 
     func calculateSize(_ geo: GeometryProxy) -> Sizes {
