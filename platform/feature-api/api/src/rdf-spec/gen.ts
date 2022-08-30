@@ -44,19 +44,31 @@ export function gens<Q extends RDF.BaseQuad = RDF.Quad>(
           fc.hexaString().map((id) => factory.variable(id))
         : undefined;
 
-    const term = fc.oneof(namedNode, blankNode, literal);
-    const subject = fc.oneof(namedNode, blankNode);
+    const variables = variable ? [variable] : [];
+
+    const term = fc.oneof(
+        namedNode,
+        blankNode,
+        literal,
+        fc.constant(factory.defaultGraph()),
+        ...variables
+    );
+
+    const subject = fc.oneof(namedNode, blankNode, ...variables);
+    const predicate = fc.oneof(namedNode, ...variables);
+    const object = fc.oneof(namedNode, literal, blankNode, ...variables);
     const graph = fc.oneof(
         fc.constant(factory.defaultGraph()),
         namedNode,
-        blankNode
+        blankNode,
+        ...variables
     );
 
     const triple = fc
-        .tuple(subject, namedNode, term)
+        .tuple(subject, predicate, object)
         .map(([s, p, o]) => factory.quad(s, p, o));
     const quad = fc
-        .tuple(subject, namedNode, term, graph)
+        .tuple(subject, predicate, object, graph)
         .map(([s, p, o, g]) => factory.quad(s, p, o, g));
 
     return {

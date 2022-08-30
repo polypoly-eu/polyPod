@@ -8,15 +8,15 @@ function Quad({ quad }) {
                 <tbody>
                     <tr>
                         <th>Subject</th>
-                        <td>{quad.subject.toString()}</td>
+                        <td>{JSON.stringify(quad.subject)}</td>
                     </tr>
                     <tr>
                         <th>Predicate</th>
-                        <td>{quad.predicate.toString()}</td>
+                        <td>{JSON.stringify(quad.predicate)}</td>
                     </tr>
                     <tr>
                         <th>Object</th>
-                        <td>{quad.object.toString()}</td>
+                        <td>{JSON.stringify(quad.object)}</td>
                     </tr>
                 </tbody>
             </table>

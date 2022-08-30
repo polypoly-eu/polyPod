@@ -25,6 +25,11 @@ const tests = {
         await pod;
     },
 
+    async canCallPolyInAddWithNoQuads(): Promise<void> {
+        console.log("canCallPolyInAddWithNoQuads()");
+        await polyIn.add();
+    },
+
     async _canCallPolyInAddWithSingleQuad(): Promise<void> {
         console.log("canCallPolyInAddWithSingleQuad()");
         const quad = QuadBuilder.fromInputs().build();

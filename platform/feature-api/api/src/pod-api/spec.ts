@@ -55,12 +55,14 @@ export class PodSpec {
             it("add/match", async () => {
                 const { triple } = gens(dataFactory);
                 await fc.assert(
-                    fc.asyncProperty(triple, async (quad) => {
-                        await polyIn.add(quad);
-                        const selected = await polyIn.match(quad);
-                        assert.lengthOf(selected, 1);
-                        assert.ok(quad.equals(selected[0]));
-                        assert.ok(await polyIn.has(quad));
+                    fc.asyncProperty(fc.array(triple), async (quads) => {
+                        await polyIn.add(...quads);
+                        for (const quad of quads) {
+                            const selected = await polyIn.match(quad);
+                            assert.lengthOf(selected, 1);
+                            assert.ok(quad.equals(selected[0]));
+                            assert.ok(await polyIn.has(quad));
+                        }
                     })
                 );
             });
@@ -68,10 +70,12 @@ export class PodSpec {
             it("add/delete", async () => {
                 const { triple } = gens(dataFactory);
                 await fc.assert(
-                    fc.asyncProperty(triple, async (quad) => {
-                        await polyIn.add(quad);
-                        await polyIn.delete(quad);
-                        assert.notOk(await polyIn.has(quad));
+                    fc.asyncProperty(fc.array(triple), async (quads) => {
+                        await polyIn.add(...quads);
+                        for (const quad of quads) {
+                            await polyIn.delete(quad);
+                            assert.notOk(await polyIn.has(quad));
+                        }
                     })
                 );
             });

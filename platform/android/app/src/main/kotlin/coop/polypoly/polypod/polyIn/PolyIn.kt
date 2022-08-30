@@ -3,7 +3,6 @@ package coop.polypoly.polypod.polyIn
 import android.content.Context
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
-import coop.polypoly.core.Core
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyIn.rdf.BlankNodeObject
 import coop.polypoly.polypod.polyIn.rdf.BlankNodeSubject
@@ -21,7 +20,6 @@ import org.apache.jena.rdf.model.ModelFactory
 import org.apache.jena.rdf.model.RDFNode
 import org.apache.jena.rdf.model.Resource
 import org.apache.jena.rdf.model.ResourceFactory
-import org.msgpack.value.Value
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.Exception
@@ -101,14 +99,6 @@ open class PolyIn(
                 quadObjectToResource(quad.`object`)
             )
         }
-    }
-
-    open fun query(query: String): Value {
-        return Core.execRdfQuery(query)
-    }
-
-    open fun update(query: String) {
-        return Core.execRdfUpdate(query)
     }
 
     private fun getDatabase(file: File): EncryptedFile {

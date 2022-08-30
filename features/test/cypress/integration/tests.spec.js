@@ -1,6 +1,7 @@
 const testIds = [
     "simpleJavaScriptCall",
     "podApiResolves",
+    "canCallPolyInAddWithNoQuads",
     "addSupportsQuadsWithDefaultGraph",
     "canPassEmptyMatcherToPolyInMatch",
     "canPassMatcherWithSubjectToPolyInMatch",

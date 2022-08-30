@@ -28,8 +28,7 @@
     "@types/body-parser": "^1.19.2",
     "@types/connect": "^3.4.35",
     "body-parser": "^1.20.0",
-    "connect": "^3.7.0",
-    "oxigraph": "^0.3.4"
+    "connect": "^3.7.0"
   },
   "devDependencies": {
     "@polypoly-eu/api": "file:../api",
@@ -43,6 +42,7 @@
     "fast-check": "^2.11.0",
     "memfs": "^3.4.1",
     "node-fetch": "~2",
+
     "ts-mocha": "^9.0.2"
   },
   "private": true

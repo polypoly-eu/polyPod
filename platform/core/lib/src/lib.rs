@@ -3,7 +3,6 @@ pub mod core {
     use feature_categories;
     use io::{file_system::DefaultFileSystem, key_value_store::DefaultKeyValueStore};
     use preferences::Preferences;
-    use poly_rdf::rdf::{rdf_query, rdf_update, SPARQLQuery};
     use user_session::{TimeoutOption, UserSession, UserSessionTimeout};
 
     use once_cell::sync::OnceCell;
@@ -43,7 +42,6 @@ pub mod core {
     // to be shared between components, as well managing components lifetime.
     struct Core<'a> {
         language_code: String,
-        fs_root: String,
         #[allow(dead_code)]
         preferences: Arc<Preferences>,
         user_session: Mutex<UserSession<'a>>,
@@ -69,14 +67,13 @@ pub mod core {
             return Err(CoreFailure::core_already_bootstrapped());
         }
         let preferences = Arc::new(Preferences {
-            store: Box::new(DefaultKeyValueStore::new(fs_root.clone() + "/" + PREFERENCES_DB)),
+            store: Box::new(DefaultKeyValueStore::new(fs_root + "/" + PREFERENCES_DB)),
         });
 
         let builder = Box::new(Instant::now);
         let user_session = Mutex::from(UserSession::new(builder, preferences.clone()));
         let core = Core {
             language_code,
-            fs_root,
             preferences,
             user_session,
             platform_hook,
@@ -91,18 +88,6 @@ pub mod core {
         }
 
         Ok(())
-    }
-
-    // RDF
-
-    pub fn exec_rdf_query(query: SPARQLQuery) -> Result<String, CoreFailure> {
-        let instance = get_instance()?;
-        rdf_query(query, instance.fs_root.clone()).map_err(CoreFailure::map_rdf_to_core_failure)
-    }
-
-    pub fn exec_rdf_update(query: SPARQLQuery) -> Result<(), CoreFailure> {
-        let instance = get_instance()?;
-        rdf_update(query, instance.fs_root.clone()).map_err(CoreFailure::map_rdf_to_core_failure)
     }
 
     // Features

@@ -28,7 +28,6 @@ ifeq ($(OS),Windows_NT)
 else
 	os_echo := echo
 	ifeq ($(shell uname -s),Darwin)
-		ndk_download_url = $(google_repo)/$(ndk_lib)-darwin.zip
 		macos := true
 	endif
 endif
@@ -103,8 +102,6 @@ define copy_android_arch
    mkdir -p $(jni_libs_copy_path)/$2
    cp target/$1/$(build_type)/libpolypod_core.so \
 	  $(jni_libs_copy_path)/$2/libpolypod_core.so;
-   cp ${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/*/sysroot/usr/lib/$1/libc++_shared.so \
-	   $(jni_libs_copy_path)/$2/libc++_shared.so;
 endef
 
 # ============ Main targets ============ #
