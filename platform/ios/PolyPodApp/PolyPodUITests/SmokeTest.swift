@@ -66,7 +66,7 @@ class SmokeTest: XCTestCase {
         var featureViewVisible = false
         var swipeDownCount = 0
         
-        while !featureViewVisible {
+        while !featureViewVisible && swipeDownCount < 20 {
             tile.tap()
             featureViewVisible = featureView().waitForExistence(timeout: 1)
             if !featureViewVisible {
