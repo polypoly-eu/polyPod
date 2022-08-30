@@ -11,6 +11,7 @@ extension UserDefaults {
         case disableAuthCheck
         case authSetUp
         case didConfigureAuth
+        case showDeveloperFeaturesId
     }
     
     func reset() {
