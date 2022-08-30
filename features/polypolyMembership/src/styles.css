@@ -8,4 +8,5 @@
     --pl-button-color-fill-secondary: var(--transparent);
     --pl-button-color-border-secondary: var(--theme-secondary-color);
     --pl-button-color-text-secondary: var(--theme-secondary-color);
+    --pl-screen-color-fill: var(--theme-tertiary-color);
   }
