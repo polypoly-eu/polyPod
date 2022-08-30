@@ -1,8 +1,6 @@
 import React from "react";
 import { Infographic } from "../../../src/react-components";
 
-import "../../../src/css/index.js";
-import "./fontFamily.css";
 import svg from "!!raw-loader!../../assets/images/nodes.svg";
 
 export default {

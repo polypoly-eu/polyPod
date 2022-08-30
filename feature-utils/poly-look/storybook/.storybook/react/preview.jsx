@@ -1,3 +1,5 @@
+import { withDesign } from "storybook-addon-designs";
+
 import "../../../src/css/index.js";
 import "../../stories/react-components/demo.css";
 import "../../stories/react-components/fontFamily.css";
@@ -27,7 +29,7 @@ const withTheme = (Story, context) => {
   }
 };
 
-export const decorators = [withTheme];
+export const decorators = [withTheme, withDesign];
 
 export const globalTypes = {
   theme: {
