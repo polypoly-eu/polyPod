@@ -85,7 +85,7 @@ class FeatureSmokeTest: XCTestCase {
         }
         closeButton.tap()
         
-        guard homeScreenView().waitForExistence(timeout: 20) else {
+        guard homeScreenView().waitForExistence(timeout: 10) else {
             XCTAssert(false, "Home screen not found after tapping the close button.")
             return
         }
