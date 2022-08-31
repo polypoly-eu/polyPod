@@ -62,7 +62,7 @@ final class Endpoint: EndpointProtocol {
         guard let endpointInfo = self.endpointInfoFromId(endpointId: endpointId) else {
             Log.error("uploadError failed: No endpoint found for: \(endpointId)")
             completionHandler(
-                PodApiError.endpointError("post, No endpoint found for: \(endpointId)")
+                PodApiError.endpointError("post, no endpoint found for: \(endpointId)")
             )
             return
         }
@@ -99,7 +99,7 @@ final class Endpoint: EndpointProtocol {
     ) {
         approveEndpointFetch(endpointId: endpointId) { approved in
             guard approved else {
-                Log.error("endpoint.post failed: Permission for endpoint \(endpointId) denied")
+                Log.error("Permission to send information to endpoint \(endpointId) denied by the user.")
                 completionHandler(PodApiError.userDeniedPermission("post"))
                 return
             }
@@ -137,7 +137,7 @@ final class Endpoint: EndpointProtocol {
     ) {
         approveEndpointFetch(endpointId: endpointId) { approved in
             guard approved else {
-                Log.error("endpoint.get failed: Permission for endpoint \(endpointId) denied")
+                Log.error("Permission to get information from endpoint \(endpointId) denied by the user.")
                 completionHandler(nil, PodApiError.userDeniedPermission("get"))
                 return
             }
