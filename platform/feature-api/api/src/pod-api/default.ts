@@ -138,8 +138,11 @@ export class DefaultPod implements Pod {
      */
     get triplestore(): Triplestore {
         return {
-            openStore: async () => {
-                throw new Error(`Called, but not implemented`);
+            query: async (query: string) => {
+                throw new Error(`Called with ${query}, but not implemented`);
+            },
+            update: async (query: string) => {
+                throw new Error(`Called with ${query}, but not implemented`);
             },
         };
     }

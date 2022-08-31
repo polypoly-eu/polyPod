@@ -18,7 +18,7 @@ import {
     Quad as polyQuad,
     DataFactory,
     Triplestore,
-    TriplestoreDB,
+    SPARQLQueryResult,
 } from "@polypoly-eu/api";
 import { Quad } from "rdf-js";
 import { RequestListener } from "http";
@@ -51,7 +51,8 @@ type PolyInBackend = ObjectBackendSpec<{
 }>;
 
 type TriplestoreBackend = ObjectBackendSpec<{
-    openStore(): ValueBackendSpec<TriplestoreDB>;
+    query(query: string): ValueBackendSpec<SPARQLQueryResult>;
+    update(query: string): ValueBackendSpec<void>;
 }>;
 
 type PolyOutBackend = ObjectBackendSpec<{
@@ -151,7 +152,10 @@ export class RemoteClientPod implements Pod {
 
     get triplestore(): Triplestore {
         return {
-            openStore: () => this.rpcClient.triplestore().openStore()(),
+            query: (query: string) =>
+                this.rpcClient.triplestore().query(query)(),
+            update: (query: string) =>
+                this.rpcClient.triplestore().update(query)(),
         };
     }
 

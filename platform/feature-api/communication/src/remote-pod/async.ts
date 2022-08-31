@@ -12,7 +12,6 @@ import {
     Info,
     SPARQLQueryResult,
     Triplestore,
-    TriplestoreDB,
 } from "@polypoly-eu/api";
 import { DataFactory, Quad } from "rdf-js";
 
@@ -45,8 +44,12 @@ class AsyncPolyOut implements PolyOut {
 class AsyncTriplestore implements Triplestore {
     constructor(private readonly promise: Promise<Triplestore>) {}
 
-    async openStore(): Promise<TriplestoreDB> {
-        return (await this.promise).openStore();
+    async query(query: string): Promise<SPARQLQueryResult> {
+        return (await this.promise).query(query);
+    }
+
+    async update(query: string): Promise<void> {
+        return (await this.promise).update(query);
     }
 }
 
