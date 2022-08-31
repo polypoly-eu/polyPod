@@ -27,10 +27,11 @@ struct FeatureView: View {
                 }
                 closeAction()
             }) {
-            let qualifier = activeActions.contains("back") ? "Back" : "Close"
-            Image("NavIcon\(qualifier)\(iconVariantQualifier)")
-                .renderingMode(.original)
-        }
+                let qualifier = activeActions.contains("back") ? "Back" : "Close"
+                Image("NavIcon\(qualifier)\(iconVariantQualifier)")
+                    .renderingMode(.original)
+            }.accessibilityElement()
+            .accessibilityIdentifier("feature_close_button")
         // swiftlint:enable multiple_closures_with_trailing_closure
 
         let titleLabel = Text(!title.isEmpty ? title : feature.name)
@@ -42,6 +43,8 @@ struct FeatureView: View {
             .font(.custom("Jost-Medium", size: 16))
             .kerning(-0.16)
             .frame(maxWidth: .infinity, alignment: .center)
+            .accessibilityElement()
+            .accessibilityIdentifier("feature_title_text")
 
         let actionButtons = HStack(spacing: 12) {
             if activeActions.contains("search") {
@@ -82,7 +85,8 @@ struct FeatureView: View {
                 openUrlHandler: openUrl,
                 pickFileHandler: pickFile
             )
-        }
+        }.accessibilityElement()
+        .accessibilityIdentifier("feature_view")
     }
 
     private func handleError(_ error: String) {
@@ -104,6 +108,10 @@ struct FeatureView: View {
                 closeAction()
             }
         ))
+
+        alert.view.isAccessibilityElement = true
+        alert.view.accessibilityIdentifier = "feature_error_popup"
+
         UIApplication.shared.windows.first!.rootViewController!.present(
             alert,
             animated: true,

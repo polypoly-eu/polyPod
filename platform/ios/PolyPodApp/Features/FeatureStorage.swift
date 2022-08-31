@@ -62,7 +62,10 @@ final class FeatureStorage {
         try copyFeatures()
         categoriesListSubject.value = try Core
             .instance
-            .loadFeatureCategories(featuresDirectory: featuresFileUrl.path).get()
+            .loadFeatureCategories(
+                featuresDirectory: featuresFileUrl.path,
+                forceShow: readShowDeveloperFeatures() ? [.developer] : []
+            ).get()
     }
 
     private func createFeaturesFolder() throws {
@@ -130,5 +133,14 @@ final class FeatureStorage {
             ofType: resourceType,
             toDestinationUrl: destinationURL
         )
+    }
+    
+    private func readShowDeveloperFeatures() -> Bool {
+        let key = UserDefaults.Keys.showDeveloperFeaturesId.rawValue
+        let defaults = UserDefaults.standard
+        if defaults.object(forKey: key) == nil {
+            return false
+        }
+        return defaults.bool(forKey: key)
     }
 }
