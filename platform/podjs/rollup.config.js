@@ -4,12 +4,21 @@ import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
 
 function suppressSomeWarnings(warning, warn, code, regex) {
-    if (warning.code === code && warning.cycle[0].match(regex)) {
-        return;
-    } else {
-        warn(warning);
-    }
+    if (warning.code != code || !warning.cycle[0].match(regex)) warn(warning);
 }
+
+const common = {
+    plugins: [
+        json(),
+        resolve(),
+        commonjs(),
+        sucrase({
+            exclude: ["node_modules/**"],
+            transforms: ["typescript"],
+        }),
+    ],
+    context: "window",
+};
 
 export default [
     {
@@ -23,16 +32,7 @@ export default [
                 },
             },
         ],
-        plugins: [
-            json(),
-            resolve(),
-            commonjs(),
-            sucrase({
-                exclude: ["node_modules/**"],
-                transforms: ["typescript"],
-            }),
-        ],
-        context: "window",
+        ...common,
         external: ["chai"],
         onwarn: (warning, warn) =>
             suppressSomeWarnings(
@@ -50,16 +50,7 @@ export default [
                 format: "iife",
             },
         ],
-        plugins: [
-            json(),
-            resolve(),
-            commonjs(),
-            sucrase({
-                exclude: ["node_modules/**"],
-                transforms: ["typescript"],
-            }),
-        ],
-        context: "window",
+        ...common,
         onwarn: (warning, warn) =>
             suppressSomeWarnings(
                 warning,
