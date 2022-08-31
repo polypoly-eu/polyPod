@@ -1,5 +1,5 @@
 use core_failure::CoreFailure;
-use poly_rdf::{rdf::{QueryResults, QueryResultsFormat}, rdf_failure::RdfFailure};
+use lib::core::{QueryResults, QueryResultsFormat, RdfFailure};
 
 pub fn to_json_bytes(query_results: QueryResults) -> Result<Vec<u8>, CoreFailure> {
     let mut results = Vec::new();

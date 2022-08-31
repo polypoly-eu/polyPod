@@ -6,4 +6,5 @@ pub mod c_interface;
 /// cbindgen:ignore
 pub mod java_interface;
 
+#[cfg(feature = "rdf")]
 mod rdf_result_conversion;

@@ -5,6 +5,7 @@ use std::os::raw::c_uint;
 extern crate rmp_serde;
 use lib::core::{self, PlatformRequest, PlatformResponse};
 use std::os::raw::c_char;
+#[cfg(feature = "rdf")]
 use crate::rdf_result_conversion::{bytes_to_string, to_json_bytes};
 
 /// # Safety
@@ -113,6 +114,7 @@ pub unsafe extern "C" fn get_user_session_timeout_options_config() -> CByteBuffe
 /// Executes the given RDF query.
 /// Returns Result<String, CoreFailure> as MessagePack value.
 #[no_mangle]
+#[cfg(feature = "rdf")]
 pub unsafe extern "C" fn exec_rdf_query(query: *const c_char) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
         cstring_to_str(&query)
@@ -126,6 +128,7 @@ pub unsafe extern "C" fn exec_rdf_query(query: *const c_char) -> CByteBuffer {
 /// Executes the given RDF update.
 /// Returns Result<Void, CoreFailure> as MessagePack value.
 #[no_mangle]
+#[cfg(feature = "rdf")]
 pub unsafe extern "C" fn exec_rdf_update(update: *const c_char) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
         cstring_to_str(&update)
