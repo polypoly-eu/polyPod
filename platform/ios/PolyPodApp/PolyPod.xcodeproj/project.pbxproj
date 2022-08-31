@@ -85,6 +85,8 @@
 		1AF468DC24349E6B00E51B6D /* PodApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DB24349E6B00E51B6D /* PodApi.swift */; };
 		1AF468DE24361D9D00E51B6D /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */; };
 		3B3CEDFA274FC37C000C3E6E /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989B350269CA6B7000EE977 /* FilePicker.swift */; };
+		3B45E0B128BF94810005B8EF /* Triplestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B45E0B028BF94810005B8EF /* Triplestore.swift */; };
+		3B45E0B228BF94810005B8EF /* Triplestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B45E0B028BF94810005B8EF /* Triplestore.swift */; };
 		3B5487E227CD0FF700480CB5 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5487E127CD0FF700480CB5 /* Endpoint.swift */; };
 		5105EA05281ACEEC0040AE0D /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */; };
 		5105EA07281AFDBB0040AE0D /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */; };
@@ -239,6 +241,7 @@
 		1AF468B1242A34D700E51B6D /* PolyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyOut.swift; sourceTree = "<group>"; };
 		1AF468DB24349E6B00E51B6D /* PodApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodApi.swift; sourceTree = "<group>"; };
 		1AF468DD24361D9D00E51B6D /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
+		3B45E0B028BF94810005B8EF /* Triplestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triplestore.swift; sourceTree = "<group>"; };
 		3B5487E127CD0FF700480CB5 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		5105EA04281ACEEC0040AE0D /* BindingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtensions.swift; sourceTree = "<group>"; };
 		5B0F7B5F26A924DF00F4EFF4 /* PolyPod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PolyPod.entitlements; sourceTree = "<group>"; };
@@ -471,6 +474,7 @@
 		1AA6DE4624192079008DB1B2 /* PodApi */ = {
 			isa = PBXGroup;
 			children = (
+				3B45E0AF28BF946C0005B8EF /* Triplestore */,
 				3B5487E027CD0FE600480CB5 /* Endpoint */,
 				E9040D4526F0A2FB00A88593 /* Info */,
 				E98BA80126D3CA400039E41E /* Network */,
@@ -527,6 +531,14 @@
 				1AF1178524BE22D50063EE37 /* Stats.swift */,
 			);
 			path = FS;
+			sourceTree = "<group>";
+		};
+		3B45E0AF28BF946C0005B8EF /* Triplestore */ = {
+			isa = PBXGroup;
+			children = (
+				3B45E0B028BF94810005B8EF /* Triplestore.swift */,
+			);
+			path = Triplestore;
 			sourceTree = "<group>";
 		};
 		3B5487E027CD0FE600480CB5 /* Endpoint */ = {
@@ -964,6 +976,7 @@
 				90716ACD283F7AFA00F7445A /* Array+Utils.swift in Sources */,
 				90DD12F628A4E6C800526F54 /* Result+Utils.swift in Sources */,
 				1ABADBD324EBC5D900369791 /* FetchResponse.swift in Sources */,
+				3B45E0B228BF94810005B8EF /* Triplestore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -998,6 +1011,7 @@
 				1A4C21F324A63E4C006CC1FD /* Quad+CoreDataProperties.swift in Sources */,
 				1AF1179024C178990063EE37 /* Literal+Additions.swift in Sources */,
 				906E406C27A82C7F009015B7 /* ActivityViewController.swift in Sources */,
+				3B45E0B128BF94810005B8EF /* Triplestore.swift in Sources */,
 				1A8F4875247E40C600089217 /* PostOffice.swift in Sources */,
 				1AF1178624BE22D50063EE37 /* Stats.swift in Sources */,
 				1A00DFFB245AAC3F0049F3F7 /* MessageName.swift in Sources */,

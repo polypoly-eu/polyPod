@@ -22,4 +22,8 @@ class PodApi {
     lazy var endpoint: Endpoint = {
         return Endpoint()
     }()
+
+    lazy var triplestore: Triplestore = {
+        return Triplestore()
+    }()
 }
