@@ -3,10 +3,10 @@ use core_failure::CoreFailure;
 use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
-use lib::core::{self, PlatformRequest, PlatformResponse};
-use std::os::raw::c_char;
 #[cfg(feature = "rdf")]
 use crate::rdf_result_conversion::{bytes_to_string, to_json_bytes};
+use lib::core::{self, PlatformRequest, PlatformResponse};
+use std::os::raw::c_char;
 
 /// # Safety
 /// This function can be unsafe if the language_code pointer is null or the string is in wrong format.

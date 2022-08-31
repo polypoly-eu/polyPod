@@ -7,7 +7,10 @@ pub mod core {
     #[cfg(feature = "rdf")]
     use poly_rdf::rdf::{RDFStore, SPARQLQuery, SPARQLUpdate};
     #[cfg(feature = "rdf")]
-    pub use poly_rdf::{rdf::{QueryResults, QueryResultsFormat}, rdf_failure::RdfFailure};
+    pub use poly_rdf::{
+        rdf::{QueryResults, QueryResultsFormat},
+        rdf_failure::RdfFailure,
+    };
 
     use user_session::{TimeoutOption, UserSession, UserSessionTimeout};
 
@@ -85,7 +88,9 @@ pub mod core {
             return Err(CoreFailure::core_already_bootstrapped());
         }
         let preferences = Arc::new(Preferences {
-            store: Box::new(DefaultKeyValueStore::new(fs_root.clone() + "/" + PREFERENCES_DB)),
+            store: Box::new(DefaultKeyValueStore::new(
+                fs_root.clone() + "/" + PREFERENCES_DB,
+            )),
         });
 
         let builder = Box::new(Instant::now);
@@ -98,7 +103,7 @@ pub mod core {
             platform_hook,
             #[cfg(feature = "rdf")]
             rdf_store: RDFStore::new(PathBuf::from(fs_root.clone() + "/" + RDF_DB))
-                                .map_err(CoreFailure::map_rdf_to_core_failure)?,
+                .map_err(CoreFailure::map_rdf_to_core_failure)?,
         };
 
         let _ = CORE.set(Mutex::from(core));

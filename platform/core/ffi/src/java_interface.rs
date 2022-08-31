@@ -1,7 +1,7 @@
-use common::serialization::{message_pack_deserialize, message_pack_serialize};
-use core_failure::CoreFailure;
 #[cfg(feature = "rdf")]
 use crate::rdf_result_conversion::{bytes_to_string, to_json_bytes};
+use common::serialization::{message_pack_deserialize, message_pack_serialize};
+use core_failure::CoreFailure;
 use jni::{
     objects::{GlobalRef, JClass, JObject, JString, JValue},
     sys::jbyteArray,
