@@ -443,6 +443,7 @@ dependencies = [
  "jni",
  "lib",
  "log",
+ "poly_rdf",
  "rmp-serde",
 ]
 

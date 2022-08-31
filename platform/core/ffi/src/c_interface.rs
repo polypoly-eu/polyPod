@@ -5,6 +5,7 @@ use std::os::raw::c_uint;
 extern crate rmp_serde;
 use lib::core::{self, PlatformRequest, PlatformResponse};
 use std::os::raw::c_char;
+use crate::rdf_result_conversion::{bytes_to_string, to_json_bytes};
 
 /// # Safety
 /// This function can be unsafe if the language_code pointer is null or the string is in wrong format.
@@ -116,7 +117,9 @@ pub unsafe extern "C" fn exec_rdf_query(query: *const c_char) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
         cstring_to_str(&query)
             .map(String::from)
-            .and_then(core::exec_rdf_query),
+            .and_then(core::exec_rdf_query)
+            .and_then(to_json_bytes)
+            .and_then(bytes_to_string),
     ))
 }
 

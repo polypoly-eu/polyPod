@@ -5,3 +5,5 @@ pub mod c_interface;
 #[allow(non_snake_case)]
 /// cbindgen:ignore
 pub mod java_interface;
+
+mod rdf_result_conversion;

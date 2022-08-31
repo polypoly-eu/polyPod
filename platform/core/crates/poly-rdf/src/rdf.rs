@@ -2,7 +2,7 @@ use oxigraph::store::Store;
 use std::path::PathBuf;
 use crate::rdf_failure::RdfFailure;
 
-pub use oxigraph::sparql::QueryResults;
+pub use oxigraph::sparql::{QueryResults, QueryResultsFormat};
 pub type SPARQLQuery = String;
 pub type SPARQLUpdate = String;
 

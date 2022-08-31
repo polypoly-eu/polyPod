@@ -3,11 +3,12 @@ pub mod core {
     pub use feature_categories;
     use io::{file_system::DefaultFileSystem, key_value_store::DefaultKeyValueStore};
     use preferences::Preferences;
-    use poly_rdf::rdf::{rdf_query, rdf_update, SPARQLQuery};
+    use poly_rdf::rdf::{RDFStore, SPARQLQuery, SPARQLUpdate, QueryResults};
     use user_session::{TimeoutOption, UserSession, UserSessionTimeout};
 
     use once_cell::sync::OnceCell;
     use serde::{Deserialize, Serialize};
+    use std::path::PathBuf;
     use std::sync::{Arc, Mutex};
     use std::{sync::MutexGuard, time::Instant};
 
@@ -38,17 +39,18 @@ pub mod core {
     }
 
     const PREFERENCES_DB: &str = "preferences_db";
+    const RDF_DB: &str = "rdf_db";
 
     // The Core would act as a composition root, containing any global configuration
     // to be shared between components, as well managing components lifetime.
     struct Core<'a> {
         language_code: String,
-        fs_root: String,
         #[allow(dead_code)]
         preferences: Arc<Preferences>,
         user_session: Mutex<UserSession<'a>>,
         #[allow(dead_code)]
         platform_hook: Box<dyn PlatformHookRequest>,
+        rdf_store: RDFStore,
     }
 
     #[derive(Deserialize)]
@@ -80,12 +82,14 @@ pub mod core {
 
         let builder = Box::new(Instant::now);
         let user_session = Mutex::from(UserSession::new(builder, preferences.clone()));
+        let rdf_store = RDFStore::new(PathBuf::from(fs_root.clone() + "/" + RDF_DB))
+            .map_err(CoreFailure::map_rdf_to_core_failure)?;
         let core = Core {
             language_code,
-            fs_root,
             preferences,
             user_session,
             platform_hook,
+            rdf_store,
         };
 
         let _ = CORE.set(Mutex::from(core));
@@ -101,14 +105,18 @@ pub mod core {
 
     // RDF
 
-    pub fn exec_rdf_query(query: SPARQLQuery) -> Result<String, CoreFailure> {
-        let instance = get_instance()?;
-        rdf_query(query, instance.fs_root.clone()).map_err(CoreFailure::map_rdf_to_core_failure)
+    pub fn exec_rdf_query(query: SPARQLQuery) -> Result<QueryResults, CoreFailure> {
+        get_instance()?
+            .rdf_store
+            .query(query)
+            .map_err(CoreFailure::map_rdf_to_core_failure)
     }
 
-    pub fn exec_rdf_update(query: SPARQLQuery) -> Result<(), CoreFailure> {
-        let instance = get_instance()?;
-        rdf_update(query, instance.fs_root.clone()).map_err(CoreFailure::map_rdf_to_core_failure)
+    pub fn exec_rdf_update(update: SPARQLUpdate) -> Result<(), CoreFailure> {
+        get_instance()?
+            .rdf_store
+            .update(update)
+            .map_err(CoreFailure::map_rdf_to_core_failure)
     }
 
     // Features
