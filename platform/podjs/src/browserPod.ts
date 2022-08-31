@@ -11,7 +11,6 @@ import type {
     Entry,
     SPARQLQueryResult,
     Triplestore,
-    TriplestoreDB,
 } from "@polypoly-eu/api";
 import { dataFactory, PolyUri, isPolypodUri } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
@@ -142,7 +141,8 @@ class OxigraphPolyIn implements PolyIn {
         return store.has(quad);
     }
 }
-class BrowserTripleStoreDB implements TriplestoreDB {
+
+class BrowserTriplestore implements Triplestore {
     private store: Promise<oxigraph.Store> = this.init();
     private pendingSync: Promise<void> | null = null;
 
@@ -197,16 +197,6 @@ class BrowserTripleStoreDB implements TriplestoreDB {
         const store = await this.store;
         store.update(query);
         await this.sync(store);
-    }
-
-    async close(): Promise<void> {
-        //TODO implement close or flush
-    }
-}
-
-class BrowserTriplestore implements Triplestore {
-    async openStore(): Promise<TriplestoreDB> {
-        return new BrowserTripleStoreDB();
     }
 }
 
