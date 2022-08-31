@@ -42,23 +42,16 @@ final class Endpoint: EndpointProtocol {
     private func approveEndpointFetch(endpointId: String, completion: @escaping (Bool) -> Void) {
         delegate?.doHandleApproveEndpointFetch(endpointId: endpointId, completion: completion)
     }
-
-    private func jsonStringify(_ objectToConvert: Any) -> String {
-        var resultJson = ""
-        if let json = try? JSONSerialization.data(withJSONObject: objectToConvert) {
-            if let content = String(data: json, encoding: String.Encoding.utf8) {
-                // here `content` is the JSON dictionary containing the String
-                resultJson = content
-            }
-        }
-        return resultJson
-    }
-
+    
     func uploadError(
         errorMsg: String,
         endpointId: String,
         completionHandler: @escaping (Error?) -> Void
     ) {
+        if errorMsg.isEmpty {
+            completionHandler(PodApiError.endpointError("Empty payload!"))
+        }
+
         guard let endpointInfo = self.endpointInfoFromId(endpointId: endpointId) else {
             Log.error("uploadError failed: No endpoint found for: \(endpointId)")
             completionHandler(
@@ -66,10 +59,8 @@ final class Endpoint: EndpointProtocol {
             )
             return
         }
-        let payload = jsonStringify([errorMsg])
-        if payload.isEmpty {
-            completionHandler(PodApiError.endpointError("Empty payload!"))
-        }
+        
+        let payload = "{ \"error\": \"\(errorMsg)\" }"
 
         let response = self.network.httpPost(
             url: endpointInfo.url,

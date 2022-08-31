@@ -58,11 +58,13 @@ class Endpoint(
             throw PodApiError().endpointError()
         }
 
+        val payload = "{ \"error\": \"${errorMsg}\" }"
+
         try {
             endpointNetwork
                 .httpPost(
                     endpointInfo.url,
-                    errorMsg,
+                    payload,
                     "application/json",
                     endpointInfo.auth,
                     endpointInfo.allowInsecure
