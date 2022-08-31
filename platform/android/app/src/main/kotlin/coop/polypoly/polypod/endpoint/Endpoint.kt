@@ -37,14 +37,13 @@ class Endpoint(
         return endpointsJson[endpointId]
     }
 
-    suspend fun uploadToServer(
-        context: Context,
+    suspend fun uploadError(
         endpointId: String,
         errorMsg: String
     ) {
-        if (errorMsg == null) {
+        if (errorMsg.isEmpty()) {
             logger.error(
-                "uploadToServer: No payload found."
+                "uploadError: No payload found."
             )
             throw PodApiError().endpointError()
         }
@@ -54,7 +53,7 @@ class Endpoint(
         val endpointInfo = endpoint.endpointInfoFromId(endpointId)
         if (endpointInfo == null) {
             logger.error(
-                "uploadToServer: No endpoint found under that endpointId"
+                "uploadError: No endpoint found under that endpointId"
             )
             throw PodApiError().endpointError()
         }
@@ -69,7 +68,7 @@ class Endpoint(
                     endpointInfo.allowInsecure
                 )
         } catch (e: PodApiError) {
-            logger.error("uploadToServer - Failed: $e")
+            logger.error("uploadError - Failed: $e")
             throw PodApiError().endpointError()
         }
     }
@@ -87,7 +86,7 @@ class Endpoint(
         observer?.approveEndpointFetch?.invoke(endpointId) {
             if (!it) {
                 logger.error("endpoint.send: User denied request")
-                throw PodApiError().endpointPermissionDenied()
+                throw PodApiError().userDeniedPermission()
             }
             val endpointInfo =
                 endpointInfoFromId(endpointId)
@@ -121,7 +120,7 @@ class Endpoint(
             observer?.approveEndpointFetch?.invoke(endpointId) {
                 if (!it) {
                     logger.error("endpoint.get: User denied request")
-                    throw PodApiError().endpointPermissionDenied()
+                    throw PodApiError().userDeniedPermission()
                 }
                 val endpointInfo =
                     endpointInfoFromId(endpointId)

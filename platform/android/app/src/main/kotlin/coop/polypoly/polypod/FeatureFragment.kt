@@ -175,8 +175,7 @@ open class FeatureFragment : Fragment() {
             lifecycleScope.launch {
                 close()
 
-                featureContainer.api.endpoint.uploadToServer(
-                    context!!,
+                featureContainer.api.endpoint.uploadError(
                     "polyApiErrorReport",
                     featureErrorMessage!!
                 )

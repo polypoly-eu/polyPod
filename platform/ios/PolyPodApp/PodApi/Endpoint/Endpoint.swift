@@ -54,13 +54,13 @@ final class Endpoint: EndpointProtocol {
         return resultJson
     }
 
-    func uploadToServer(
+    func uploadError(
         errorMsg: String,
         endpointId: String,
         completionHandler: @escaping (Error?) -> Void
     ) {
         guard let endpointInfo = self.endpointInfoFromId(endpointId: endpointId) else {
-            Log.error("uploadToServer failed: No endpoint found for: \(endpointId)")
+            Log.error("uploadError failed: No endpoint found for: \(endpointId)")
             completionHandler(
                 PodApiError.endpointError("post, No endpoint found for: \(endpointId)")
             )
@@ -81,7 +81,7 @@ final class Endpoint: EndpointProtocol {
 
         switch response {
         case .failure(let error):
-            Log.error("uploadToServer(): endpoint.post to \(endpointId) failed with: \(error.localizedDescription)")
+            Log.error("uploadError(): endpoint.post to \(endpointId) failed with: \(error.localizedDescription)")
             let errorCode = response.map { "failed with code \($0)" }
             completionHandler(PodApiError.endpointError("post \(errorCode)"))
         case .success:
@@ -100,7 +100,7 @@ final class Endpoint: EndpointProtocol {
         approveEndpointFetch(endpointId: endpointId) { approved in
             guard approved else {
                 Log.error("endpoint.post failed: Permission for endpoint \(endpointId) denied")
-                completionHandler(PodApiError.endpointPermissionDenied("post"))
+                completionHandler(PodApiError.userDeniedPermission("post"))
                 return
             }
 
@@ -138,7 +138,7 @@ final class Endpoint: EndpointProtocol {
         approveEndpointFetch(endpointId: endpointId) { approved in
             guard approved else {
                 Log.error("endpoint.get failed: Permission for endpoint \(endpointId) denied")
-                completionHandler(nil, PodApiError.endpointPermissionDenied("get"))
+                completionHandler(nil, PodApiError.userDeniedPermission("get"))
                 return
             }
 
