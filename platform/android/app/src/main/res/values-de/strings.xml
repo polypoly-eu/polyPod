@@ -50,8 +50,8 @@
 
     <string name="message_feature_error">Leider gab es einen Fehler in \'%1$s\':\n\n%2$s\n\nIch beende es.</string>
 
-    <string name="button_feature_allow_report">TODO IN GERMAN-Send error report to polyPoly</string>
-    <string name="button_feature_deny_report">TODO IN GERMAN-Cancel</string>
+    <string name="button_feature_allow_report">Fehlerbericht an polyPoly senden</string>
+    <string name="button_feature_deny_report">Kündigen</string>
 
     <string name="webview_alert_title">TODO</string>
     <string name="webview_alert_message">TODO %1$s</string>
@@ -62,6 +62,6 @@
     <string name="homescreen_footer_button_open_url">https://polypoly.coop/de-de/becomepart</string>
 
     <string name="screen_lock_inactivity_timeout_entry">"Inaktivitätszeit für Sperrbildschirm"</string>
-    <string name="screen_lock_inactivity_no_timeout">"kein Zeitlimit"</string>;
+    <string name="screen_lock_inactivity_no_timeout">"kein Zeitlimit"</string>
     <string name="screen_lock_inactivity_timeout_duration">"%d Minuten"</string>
 </resources>
