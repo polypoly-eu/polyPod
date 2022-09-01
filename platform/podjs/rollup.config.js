@@ -3,10 +3,6 @@ import resolve from "@rollup/plugin-node-resolve";
 import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
 
-function suppressMatchingWarnings(warning, warn, code, regex) {
-    if (warning.code != code || !warning.cycle[0].match(regex)) warn(warning);
-}
-
 const common = {
     plugins: [
         json(),
@@ -18,6 +14,13 @@ const common = {
         }),
     ],
     context: "window",
+    onwarn: (warning, warn) => {
+        if (
+            warning.code != "CIRCULAR_DEPENDENCY" ||
+            !warning.cycle[0].match(/fast-check|chai\.js/)
+        )
+            warn(warning);
+    },
 };
 
 export default [
@@ -34,13 +37,6 @@ export default [
         ],
         ...common,
         external: ["chai"],
-        onwarn: (warning, warn) =>
-            suppressMatchingWarnings(
-                warning,
-                warn,
-                "CIRCULAR_DEPENDENCY",
-                /fast-check/
-            ),
     },
     {
         input: "src/pod.ts",
@@ -51,12 +47,5 @@ export default [
             },
         ],
         ...common,
-        onwarn: (warning, warn) =>
-            suppressMatchingWarnings(
-                warning,
-                warn,
-                "CIRCULAR_DEPENDENCY",
-                /fast-check|chai\.js/
-            ),
     },
 ];
