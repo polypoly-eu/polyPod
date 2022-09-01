@@ -1,13 +1,23 @@
 pub mod core {
     use core_failure::CoreFailure;
-    use feature_categories;
+    pub use feature_categories;
     use io::{file_system::DefaultFileSystem, key_value_store::DefaultKeyValueStore};
     use preferences::Preferences;
-    use poly_rdf::rdf::{rdf_query, rdf_update, SPARQLQuery};
+
+    #[cfg(feature = "rdf")]
+    use poly_rdf::rdf::{RDFStore, SPARQLQuery, SPARQLUpdate};
+    #[cfg(feature = "rdf")]
+    pub use poly_rdf::{
+        rdf::{QueryResults, QueryResultsFormat},
+        rdf_failure::RdfFailure,
+    };
+
     use user_session::{TimeoutOption, UserSession, UserSessionTimeout};
 
     use once_cell::sync::OnceCell;
     use serde::{Deserialize, Serialize};
+    #[allow(dead_code)]
+    use std::path::PathBuf;
     use std::sync::{Arc, Mutex};
     use std::{sync::MutexGuard, time::Instant};
 
@@ -38,17 +48,26 @@ pub mod core {
     }
 
     const PREFERENCES_DB: &str = "preferences_db";
+    #[cfg(feature = "rdf")]
+    const RDF_DB: &str = "rdf_db";
 
     // The Core would act as a composition root, containing any global configuration
     // to be shared between components, as well managing components lifetime.
     struct Core<'a> {
         language_code: String,
-        fs_root: String,
         #[allow(dead_code)]
         preferences: Arc<Preferences>,
         user_session: Mutex<UserSession<'a>>,
         #[allow(dead_code)]
         platform_hook: Box<dyn PlatformHookRequest>,
+        #[cfg(feature = "rdf")]
+        rdf_store: RDFStore,
+    }
+
+    #[derive(Deserialize)]
+    pub struct LoadFeatureCategoriesArguments {
+        features_dir: String,
+        force_show: Vec<feature_categories::FeatureCategoryId>,
     }
 
     fn get_instance() -> Result<MutexGuard<'static, Core<'static>>, CoreFailure> {
@@ -69,17 +88,22 @@ pub mod core {
             return Err(CoreFailure::core_already_bootstrapped());
         }
         let preferences = Arc::new(Preferences {
-            store: Box::new(DefaultKeyValueStore::new(fs_root.clone() + "/" + PREFERENCES_DB)),
+            store: Box::new(DefaultKeyValueStore::new(
+                fs_root.clone() + "/" + PREFERENCES_DB,
+            )),
         });
 
         let builder = Box::new(Instant::now);
         let user_session = Mutex::from(UserSession::new(builder, preferences.clone()));
+
         let core = Core {
             language_code,
-            fs_root,
             preferences,
             user_session,
             platform_hook,
+            #[cfg(feature = "rdf")]
+            rdf_store: RDFStore::new(PathBuf::from(fs_root.clone() + "/" + RDF_DB))
+                .map_err(CoreFailure::map_rdf_to_core_failure)?,
         };
 
         let _ = CORE.set(Mutex::from(core));
@@ -95,26 +119,33 @@ pub mod core {
 
     // RDF
 
-    pub fn exec_rdf_query(query: SPARQLQuery) -> Result<String, CoreFailure> {
-        let instance = get_instance()?;
-        rdf_query(query, instance.fs_root.clone()).map_err(CoreFailure::map_rdf_to_core_failure)
+    #[cfg(feature = "rdf")]
+    pub fn exec_rdf_query(query: SPARQLQuery) -> Result<QueryResults, CoreFailure> {
+        get_instance()?
+            .rdf_store
+            .query(query)
+            .map_err(CoreFailure::map_rdf_to_core_failure)
     }
 
-    pub fn exec_rdf_update(query: SPARQLQuery) -> Result<(), CoreFailure> {
-        let instance = get_instance()?;
-        rdf_update(query, instance.fs_root.clone()).map_err(CoreFailure::map_rdf_to_core_failure)
+    #[cfg(feature = "rdf")]
+    pub fn exec_rdf_update(update: SPARQLUpdate) -> Result<(), CoreFailure> {
+        get_instance()?
+            .rdf_store
+            .update(update)
+            .map_err(CoreFailure::map_rdf_to_core_failure)
     }
 
     // Features
 
     pub fn load_feature_categories(
-        features_dir: &str,
+        args: LoadFeatureCategoriesArguments,
     ) -> Result<Vec<feature_categories::FeatureCategory>, CoreFailure> {
         let core = get_instance()?;
         feature_categories::load_feature_categories(
             DefaultFileSystem {},
-            features_dir,
+            args.features_dir.as_str(),
             &core.language_code,
+            args.force_show,
         )
     }
 

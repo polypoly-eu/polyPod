@@ -3,6 +3,8 @@ use core_failure::CoreFailure;
 use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
+#[cfg(feature = "rdf")]
+use crate::rdf_result_conversion::{bytes_to_string, to_json_bytes};
 use lib::core::{self, PlatformRequest, PlatformResponse};
 use std::os::raw::c_char;
 
@@ -42,13 +44,15 @@ pub unsafe extern "C" fn core_bootstrap(
 /// # Safety
 /// This function can be unsafe if the features_dir pointer is null or the string is in wrong format.
 ///
-/// Loads the feature categories from from the given features_dir.
-/// - features_dir: Path to directory where feature categories are stored.
+/// Loads the feature categories from from the given features dir.
+/// - args: Function arguments as MessagePack value.
 /// Returns Result<Vec<FeatureCategory>, CoreFailure> as MessagePack value.
 #[no_mangle]
-pub unsafe extern "C" fn load_feature_categories(features_dir: *const c_char) -> CByteBuffer {
+pub unsafe extern "C" fn load_feature_categories(args: CByteBuffer) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
-        cstring_to_str(&features_dir).and_then(core::load_feature_categories),
+        byte_buffer_to_bytes(&args)
+            .and_then(message_pack_deserialize)
+            .and_then(core::load_feature_categories),
     ))
 }
 
@@ -110,17 +114,21 @@ pub unsafe extern "C" fn get_user_session_timeout_options_config() -> CByteBuffe
 /// Executes the given RDF query.
 /// Returns Result<String, CoreFailure> as MessagePack value.
 #[no_mangle]
+#[cfg(feature = "rdf")]
 pub unsafe extern "C" fn exec_rdf_query(query: *const c_char) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
         cstring_to_str(&query)
             .map(String::from)
-            .and_then(core::exec_rdf_query),
+            .and_then(core::exec_rdf_query)
+            .and_then(to_json_bytes)
+            .and_then(bytes_to_string),
     ))
 }
 
 /// Executes the given RDF update.
 /// Returns Result<Void, CoreFailure> as MessagePack value.
 #[no_mangle]
+#[cfg(feature = "rdf")]
 pub unsafe extern "C" fn exec_rdf_update(update: *const c_char) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
         cstring_to_str(&update)

@@ -1,3 +1,5 @@
+#[cfg(feature = "rdf")]
+use crate::rdf_result_conversion::{bytes_to_string, to_json_bytes};
 use common::serialization::{message_pack_deserialize, message_pack_serialize};
 use core_failure::CoreFailure;
 use jni::{
@@ -46,19 +48,25 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
 }
 
 /// Loads feature categories from the given features dir.
-/// - featuresDir: Path to directory where features are stored.
+/// - args: Function arguments as MessagePack value.
 /// Returns a Result<Vec<FeatureCategory>, CoreFailure> represent as MessagePack value.
 #[no_mangle]
 pub extern "system" fn Java_coop_polypoly_core_JniApi_loadFeatureCategories(
     env: JNIEnv,
     _: JClass,
-    featuresDir: JString,
+    args: jbyteArray,
 ) -> jbyteArray {
-    env.byte_array_from_slice(&message_pack_serialize(
-        read_jni_string(&env, featuresDir)
-            .and_then(|string| core::load_feature_categories(&string)),
-    ))
-    .unwrap()
+    fn load_feature_categories(
+        env: JNIEnv,
+        args: jbyteArray,
+    ) -> Result<Vec<core::feature_categories::FeatureCategory>, CoreFailure> {
+        let bytes = env
+            .convert_byte_array(args)
+            .map_err(|err| CoreFailure::failed_to_extract_bytes(err.to_string()))?;
+        core::load_feature_categories(message_pack_deserialize(bytes)?)
+    }
+    env.byte_array_from_slice(&message_pack_serialize(load_feature_categories(env, args)))
+        .unwrap()
 }
 
 /// Notify that app did become inactive.
@@ -203,18 +211,23 @@ impl core::PlatformHookRequest for BridgeToPlatform {
 }
 
 #[no_mangle]
+#[cfg(feature = "rdf")]
 pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfQuery(
     env: JNIEnv,
     _: JClass,
     query: JString,
 ) -> jbyteArray {
     env.byte_array_from_slice(&message_pack_serialize(
-        read_jni_string(&env, query).and_then(core::exec_rdf_query),
+        read_jni_string(&env, query)
+            .and_then(core::exec_rdf_query)
+            .and_then(to_json_bytes)
+            .and_then(bytes_to_string),
     ))
     .unwrap()
 }
 
 #[no_mangle]
+#[cfg(feature = "rdf")]
 pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfUpdate(
     env: JNIEnv,
     _: JClass,
