@@ -3,6 +3,26 @@ import resolve from "@rollup/plugin-node-resolve";
 import sucrase from "@rollup/plugin-sucrase";
 import json from "@rollup/plugin-json";
 
+const common = {
+    plugins: [
+        json(),
+        resolve(),
+        commonjs(),
+        sucrase({
+            exclude: ["node_modules/**"],
+            transforms: ["typescript"],
+        }),
+    ],
+    context: "window",
+    onwarn: (warning, warn) => {
+        if (
+            warning.code != "CIRCULAR_DEPENDENCY" ||
+            !warning.cycle[0].match(/fast-check|chai\.js/)
+        )
+            warn(warning);
+    },
+};
+
 export default [
     {
         input: "src/index.ts",
@@ -15,25 +35,8 @@ export default [
                 },
             },
         ],
-        plugins: [
-            json(),
-            resolve(),
-            commonjs(),
-            sucrase({
-                exclude: ["node_modules/**"],
-                transforms: ["typescript"],
-            }),
-        ],
-        context: "window",
+        ...common,
         external: ["chai"],
-        onwarn: (warning) => {
-            if (
-                warning.code === "CIRCULAR_DEPENDENCY" &&
-                warning.cycle[0].match(/fast-check/)
-            ) {
-                return;
-            }
-        },
     },
     {
         input: "src/pod.ts",
@@ -43,23 +46,6 @@ export default [
                 format: "iife",
             },
         ],
-        plugins: [
-            json(),
-            resolve(),
-            commonjs(),
-            sucrase({
-                exclude: ["node_modules/**"],
-                transforms: ["typescript"],
-            }),
-        ],
-        context: "window",
-        onwarn: (warning) => {
-            if (
-                warning.code === "CIRCULAR_DEPENDENCY" &&
-                warning.cycle[0].match(/fast-check/)
-            ) {
-                return;
-            }
-        },
+        ...common,
     },
 ];
