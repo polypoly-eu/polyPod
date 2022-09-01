@@ -13,27 +13,6 @@ const common = {
             exclude: ["node_modules/**"],
             transforms: ["typescript"],
         }),
-        wasm({ targetEnv: "auto-inline" }),
-    ],
-    context: "window",
-    onwarn: (warning) => {
-        if (
-            warning.code === "CIRCULAR_DEPENDENCY" &&
-            warning.cycle[0].match(/fast-check/)
-        )
-            return;
-    },
-};
-
-const common = {
-    plugins: [
-        json(),
-        resolve(),
-        commonjs(),
-        sucrase({
-            exclude: ["node_modules/**"],
-            transforms: ["typescript"],
-        }),
     ],
     context: "window",
     onwarn: (warning, warn) => {
