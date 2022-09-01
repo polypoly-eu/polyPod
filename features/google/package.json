@@ -13,7 +13,8 @@
     "@babel/preset-react": "^7.14.5",
     "@polypoly-eu/poly-look": "file:../../feature-utils/poly-look",
     "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
-    "rollup-plugin-serve": "^1.1.0"
+    "rollup-plugin-serve": "^1.1.0",
+    "@rollup/plugin-json": "*"
   },
   "private": true,
   "dependencies": {
