@@ -103,14 +103,6 @@ open class PolyIn(
         }
     }
 
-    open fun query(query: String): Value {
-        return Core.execRdfQuery(query)
-    }
-
-    open fun update(query: String) {
-        return Core.execRdfUpdate(query)
-    }
-
     private fun getDatabase(file: File): EncryptedFile {
         val mainKey = MasterKey.Builder(context)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
