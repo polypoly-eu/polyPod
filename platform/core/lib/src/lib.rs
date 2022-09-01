@@ -1,4 +1,6 @@
+mod core_request;
 pub mod core {
+    use crate::core_request::LoadFeatureCategoriesArguments;
     use core_failure::CoreFailure;
     pub use feature_categories;
     use io::{file_system::DefaultFileSystem, key_value_store::DefaultKeyValueStore};
@@ -49,10 +51,7 @@ pub mod core {
         platform_hook: Box<dyn PlatformHookRequest>,
     }
 
-    #[derive(Deserialize)]
-    pub struct LoadFeatureCategoriesArguments {
-        features_dir: String,
-        force_show: Vec<feature_categories::FeatureCategoryId>,
+    impl Core<'_> {
     }
 
     fn get_instance() -> Result<MutexGuard<'static, Core<'static>>, CoreFailure> {
