@@ -25,6 +25,26 @@ const common = {
     },
 };
 
+const common = {
+    plugins: [
+        json(),
+        resolve(),
+        commonjs(),
+        sucrase({
+            exclude: ["node_modules/**"],
+            transforms: ["typescript"],
+        }),
+    ],
+    context: "window",
+    onwarn: (warning, warn) => {
+        if (
+            warning.code != "CIRCULAR_DEPENDENCY" ||
+            !warning.cycle[0].match(/fast-check|chai\.js/)
+        )
+            warn(warning);
+    },
+};
+
 export default [
     {
         ...common,
@@ -38,6 +58,7 @@ export default [
                 },
             },
         ],
+        ...common,
         external: ["chai"],
     },
     {
@@ -49,5 +70,6 @@ export default [
                 format: "iife",
             },
         ],
+        ...common,
     },
 ];
