@@ -10,7 +10,7 @@ const App = () => {
         <Screen className="membership" layout="poly-standard-layout">
             <h1>{i18n.t("common:welcome", { feature: "This feature" })}</h1>
             <PolyButton label="example" />
-            <PolyButton type="outlined" label="example secondary button" />
+            <PolyButton type="outline" label="example secondary button" />
         </Screen>
     );
 };

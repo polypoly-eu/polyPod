@@ -128,7 +128,7 @@ const Overview = () => {
                         },
                     })
                 }
-                type="outlined"
+                type="outline"
             ></PolyButton>
             <RoutingWrapper history={history} route="/explore">
                 <PolyButton label={i18n.t("common:explore")}></PolyButton>

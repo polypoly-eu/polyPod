@@ -150,7 +150,7 @@ const ImportExplanationExpandable = ({
                     label={i18n.t("import:request.button")}
                 ></PolyButton>
                 <PolyButton
-                    type="outlined"
+                    type="outline"
                     onClick={() => handleExampleDataRequest()}
                     label={i18n.t("import:request.example.data")}
                 ></PolyButton>
@@ -177,7 +177,7 @@ const ImportExplanationExpandable = ({
                     label={i18n.t("import:download.button.1")}
                 ></PolyButton>
                 <PolyButton
-                    type="outlined"
+                    type="outline"
                     onClick={() => onUpdateImportStatus(importSteps.import)}
                     label={i18n.t("import:download.button.2")}
                 ></PolyButton>
@@ -219,7 +219,7 @@ const ImportExplanationExpandable = ({
                     )}
                 </div>
                 <PolyButton
-                    type="outlined"
+                    type="outline"
                     onClick={handleSelectFile}
                     label={
                         selectedFiles.length

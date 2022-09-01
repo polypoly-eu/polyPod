@@ -13,7 +13,7 @@ import "./polyButton.css";
 
 const types = {
   filled: "filled",
-  outlined: "outlined",
+  outline: "outline",
 };
 
 const PolyButton = ({ label, type = "filled", ...otherProps }) => {
