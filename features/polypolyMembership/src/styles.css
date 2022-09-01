@@ -1,4 +1,4 @@
-.poly-theme-coop {
+:root {
     --theme-primary-color: var(--color-red-300);
     --theme-secondary-color: var(--color-indigo-950);
     --theme-tertiary-color: var(--color-gray-50);
