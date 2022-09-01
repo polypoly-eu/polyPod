@@ -95,8 +95,32 @@ pub mod core {
         Ok(())
     }
 
-    // Features
+    enum CoreRequest {
+        LoadFeatureCategories(LoadFeatureCategoriesArguments)
+    }
 
+    fn exec_request(request: CoreRequest) -> Result<impl Serialize, CoreFailure> {
+        let instance = get_instance()?;
+        match request {
+            CoreRequest::LoadFeatureCategories(args) => instance.load_feature_categories(args)
+        }
+    }
+    // features_dir
+
+    impl Core<'_> {
+        pub fn load_feature_categories(
+            &self,
+            args: LoadFeatureCategoriesArguments,
+        ) -> Result<Vec<feature_categories::FeatureCategory>, CoreFailure> {
+            feature_categories::load_feature_categories(
+                DefaultFileSystem {},
+                args.features_dir.as_str(),
+                &self.language_code,
+                args.force_show,
+            )
+        }
+
+    }
     pub fn load_feature_categories(
         args: LoadFeatureCategoriesArguments,
     ) -> Result<Vec<feature_categories::FeatureCategory>, CoreFailure> {
