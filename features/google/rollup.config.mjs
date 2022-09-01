@@ -8,6 +8,7 @@ import svg from "rollup-plugin-svg";
 import replace from "@rollup/plugin-replace";
 import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
 import sillyI18n from "@polypoly-eu/silly-i18n/rollup-plugin.js";
+import json from "@rollup/plugin-json";
 
 const externalPackages = {
     "@polypoly-eu/poly-look": "polyLook",
@@ -29,6 +30,7 @@ export default (commandLineArgs) => {
                 build_dir: "./dist",
                 manifestPath: "./src/static/manifest.json",
             }),
+            json(),
             svg(),
             css({ output: "css/bundle.css" }),
             sucrase({
