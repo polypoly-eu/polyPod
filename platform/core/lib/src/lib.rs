@@ -103,7 +103,7 @@ pub mod core {
             platform_hook,
             #[cfg(feature = "rdf")]
             rdf_store: RDFStore::new(PathBuf::from(fs_root.clone() + "/" + RDF_DB))
-                .map_err(CoreFailure::map_rdf_to_core_failure)?,
+                .map_err(|failure| failure.to_core_failure())?,
         };
 
         let _ = CORE.set(Mutex::from(core));
@@ -124,7 +124,7 @@ pub mod core {
         get_instance()?
             .rdf_store
             .query(query)
-            .map_err(CoreFailure::map_rdf_to_core_failure)
+            .map_err(|failure| failure.to_core_failure())
     }
 
     #[cfg(feature = "rdf")]
@@ -132,7 +132,7 @@ pub mod core {
         get_instance()?
             .rdf_store
             .update(update)
-            .map_err(CoreFailure::map_rdf_to_core_failure)
+            .map_err(|failure| failure.to_core_failure())
     }
 
     // Features

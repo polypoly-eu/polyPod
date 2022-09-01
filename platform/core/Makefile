@@ -3,6 +3,7 @@
 build_type := $(if $(filter $(MODE), release),release,debug)
 cargo_build_flag := $(if $(filter $(build_type), release), --release)
 target := target/$(build_type)
+cargo_features := $(if $(FEATURES),--features $(FEATURES),)
 
 # iOS export
 export_dir_ios := export/ios
@@ -40,7 +41,7 @@ $(target): $(wildcard src/*.rs)
 ifeq (,$(shell which rustup))
 	$(error "Rust not installed, check https://www.rust-lang.org/tools/install to install rust on your system")
 endif
-	cargo build $(cargo_build_flag)
+	cargo build $(cargo_build_flag) $(cargo_features)
 
 # ============  Swift framework ============ #
 
@@ -83,7 +84,8 @@ define build_for_architecture
 	rustup target add $(1)
 	cargo build -p ffi \
 		$(cargo_build_flag) \
-		--lib --target $(1)
+		--lib --target $(1) \
+		$(cargo_features)
 endef
 
 # ============ Android lib ============ #
@@ -93,7 +95,7 @@ $(android_binaries):
 	rustup target add $(android_triples)
 
 	$(foreach triple, $(android_triples), \
-		cargo ndk --platform $(android_version) --target $(triple) build $(cargo_build_flag) -p ffi; \
+		cargo ndk --platform $(android_version) --target $(triple) build $(cargo_build_flag) -p ffi $(cargo_features); \
 	)
 
 $(android_core_libraries): $(android_binaries)

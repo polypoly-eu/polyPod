@@ -19,4 +19,4 @@ android_logger = "0.11"
 log = "0.4.17"
 
 [features]
-rdf = ["lib/rdf"]
+poly_rdf = ["lib/poly_rdf"]
