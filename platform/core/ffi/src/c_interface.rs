@@ -1,10 +1,14 @@
 use common::serialization::{message_pack_deserialize, message_pack_serialize};
 use core_failure::CoreFailure;
-use std::ffi::CStr;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
 use lib::core::{self, PlatformRequest, PlatformResponse};
-use std::os::raw::c_char;
+
+#[repr(C)]
+pub struct BridgeToPlatform {
+    free_bytes: extern "C" fn(bytes: *mut u8),
+    perform_request: extern "C" fn(request: CByteBuffer) -> CByteBuffer,
+}
 
 /// # Safety
 /// This function can be unsafe if the language_code pointer is null or the string is in wrong format.
@@ -17,26 +21,14 @@ use std::os::raw::c_char;
 /// Returns a flatbuffer byte array with core_bootstrap_response.
 #[no_mangle]
 pub unsafe extern "C" fn core_bootstrap(
-    language_code: *const c_char,
-    fs_root: *const c_char,
+    args: CByteBuffer,
     bridge: BridgeToPlatform,
 ) -> CByteBuffer {
-    fn bootstrap(
-        language_code: *const c_char,
-        fs_root: *const c_char,
-        bridge: BridgeToPlatform,
-    ) -> Result<(), CoreFailure> {
-        unsafe {
-            let language_code = String::from(cstring_to_str(&language_code)?);
-            let fs_root = String::from(cstring_to_str(&fs_root)?);
-            core::bootstrap(language_code, fs_root, Box::new(bridge))
-        }
-    }
-    create_byte_buffer(message_pack_serialize(bootstrap(
-        language_code,
-        fs_root,
-        bridge,
-    )))
+    create_byte_buffer(message_pack_serialize(
+        byte_buffer_to_bytes(&args)
+            .and_then(message_pack_deserialize)
+            .and_then(|args| core::bootstrap(args, Box::new(bridge)))
+    ))
 }
 
 #[no_mangle]
@@ -55,18 +47,6 @@ pub unsafe extern "C" fn execute_request(core_request: CByteBuffer) -> CByteBuff
 #[no_mangle]
 pub unsafe extern "C" fn free_bytes(bytes: *mut u8) {
     drop(Box::from_raw(bytes))
-}
-
-// Disabled the clippy false positive, https://github.com/rust-lang/rust-clippy/issues/5787
-#[allow(clippy::needless_lifetimes)]
-unsafe fn cstring_to_str<'a>(cstring: &'a *const c_char) -> Result<&str, CoreFailure> {
-    if cstring.is_null() {
-        return Err(CoreFailure::null_c_string_pointer());
-    }
-
-    CStr::from_ptr(*cstring)
-        .to_str()
-        .map_err(|err| CoreFailure::failed_to_create_c_str(err.to_string()))
 }
 
 #[repr(C)]
@@ -90,12 +70,6 @@ unsafe fn byte_buffer_to_bytes(buffer: &CByteBuffer) -> Result<Vec<u8>, CoreFail
         .map_err(|_| CoreFailure::failed_to_read_byte_buffer_length())?;
     let slice = std::slice::from_raw_parts(buffer.data, length);
     Ok(slice.to_vec())
-}
-
-#[repr(C)]
-pub struct BridgeToPlatform {
-    free_bytes: extern "C" fn(bytes: *mut u8),
-    perform_request: extern "C" fn(request: CByteBuffer) -> CByteBuffer,
 }
 
 impl core::PlatformHookRequest for BridgeToPlatform {
