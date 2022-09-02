@@ -28,6 +28,8 @@ pub enum FailureCode {
     FailedToConvertBytes,
     FailedToAccessUserSession,
     FailedToAttachJVM,
+    FailedToDecode,
+    FailedToEncode,
 }
 
 impl FailureCode {

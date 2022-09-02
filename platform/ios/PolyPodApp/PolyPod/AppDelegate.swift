@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case let .failure(content):
             Log.error(content.localizedDescription)
             if let coreFailure = content as? CoreFailure {
-                if coreFailure.code == .coreAlreadyBootstrapped {
+                if coreFailure.code == .CoreAlreadyBootstrapped {
                     break
                 }
             }

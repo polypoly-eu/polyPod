@@ -8,8 +8,8 @@ enum PlatformRequest: String {
     case Example
 }
 
-enum PlatformResponse {
-    case Example(String)
+enum PlatformResponse: Codable {
+    case Example(name: String)
 }
 
 /// Swift wrapper around the Rust Core.
@@ -34,13 +34,10 @@ public final class Core {
         let bridge = BridgeToPlatform(free_bytes: {
             $0?.deallocate()
         }, perform_request: { in_bytes in
-            let response = Result<PlatformResponse, Error> {
-                let request_from_core = try unpackBytes(bytes: in_bytes)
-                let platformRequest = try mapToPlatformRequest(request: request_from_core)
-                return handle(platformRequest: platformRequest)
-            }
+            let response: Result<PlatformResponse, CoreFailure> = unpackBytes(bytes: in_bytes)
+                .flatMap(mapToPlatformRequest(request:))
+                .map(handle(platformRequest:))
             
-            // TODO: Use CoreFailure for failures.
             return packPlatformResponse(response: response).toByteBuffer
         })
 

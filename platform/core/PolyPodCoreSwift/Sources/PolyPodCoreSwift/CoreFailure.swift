@@ -33,17 +33,37 @@ public enum DecodingError: Error {
     }
 }
 
-public enum CoreFailureCode: Int {
-    case coreNotBootstrapped = 1
-    case coreAlreadyBootstrapped
-    case failedToParseFeatureManifest
-    case nullCStringPointer
-    case failedToCreateCString
-    case failedToCreateJavaString
-    case failedToConvertJavaString
+public enum CoreFailureCode: Int, Codable {
+    case CoreNotBootstrapped = 1
+    case CoreAlreadyBootstrapped
+    case FailedToParseFeatureManifest
+    case NullCStringPointer
+    case FailedToCreateCString
+    case FailedToExtractJavaString
+    case FailedToConvertJavaString
+    case FailedToParseFeatureCategoriesJSON
+    case FailedToReadFile
+    case FailedFileSystemOperation
+    case FailedToParseURL
+    case FailedToUnzip
+    case FailedToCreateFeatureFilesPath
+    case FailedToConvertToFsPath
+    case FailedToConvertToResourceUrl
+    case FailedToGetFilePath
+    case FailedToGetLastSegmentFromUrl
+    case FailedToDecodeByteArray
+    case FailedToReadByteBufferLength
+    case FailedToExtractJObject
+    case FailedToExtractBytes
+    case FailedToCallJNIMethod
+    case FailedToConvertBytes
+    case FailedToAccessUserSession
+    case FailedToAttachJVM
+    case FailedToDecode
+    case FailedToEncode
 }
 
-public struct CoreFailure: Error {
+public struct CoreFailure: Error, Codable {
     public let code: CoreFailureCode
     public let message: String
 }
