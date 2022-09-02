@@ -53,36 +53,36 @@ class PostOffice {
         case "polyIn":
             handlePolyIn(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(
-                    messageId: messageId,
+                    messageId: messageId, 
                     response: response,
-                    error: error,
+                    error: error, 
                     completionHandler: completionHandler
                 )
             })
         case "polyOut":
             handlePolyOut(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(
-                    messageId: messageId,
+                    messageId: messageId, 
                     response: response,
-                    error: error,
+                    error: error, 
                     completionHandler: completionHandler
                 )
             })
         case "polyNav":
             handlePolyNav(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(
-                    messageId: messageId,
+                    messageId: messageId, 
                     response: response,
-                    error: error,
+                    error: error, 
                     completionHandler: completionHandler
                 )
             })
         case "info":
             handleInfo(method: method, completionHandler: { response, error in
                 self.completeEvent(
-                    messageId: messageId,
+                    messageId: messageId, 
                     response: response,
-                    error: error,
+                    error: error, 
                     completionHandler: completionHandler
                 )
             })
@@ -110,9 +110,9 @@ class PostOffice {
     }
     
     private func completeEvent(
-        messageId: UInt64,
-        response: MessagePackValue?,
-        error: MessagePackValue?,
+        messageId: UInt64, 
+        response: MessagePackValue?, 
+        error: MessagePackValue?, 
         completionHandler: @escaping ([UInt8]) -> Void
     ) {
         var dict: [MessagePackValue: MessagePackValue] = [:]
@@ -135,8 +135,8 @@ class PostOffice {
 
 extension PostOffice {
     private func handlePolyIn(
-        method: String,
-        args: [Any],
+        method: String, 
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         switch method {
@@ -177,7 +177,7 @@ extension PostOffice {
     }
     
     private func handlePolyInAdd(
-        args: [Any],
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         let extendedDataSet: [ExtendedData]
@@ -198,7 +198,7 @@ extension PostOffice {
     }
     
     private func handlePolyInMatch(
-        args: [Any],
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         guard let extendedData = extractMatcher(args[0]) else {
@@ -226,7 +226,7 @@ extension PostOffice {
     }
     
     private func handlePolyInDelete(
-        args: [Any],
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         let extendedDataSet: [ExtendedData]
@@ -247,7 +247,7 @@ extension PostOffice {
     }
     
     private func handlePolyInHas(
-        args: [Any],
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         let extendedDataSet: [ExtendedData]
@@ -281,8 +281,8 @@ extension PostOffice {
 
 extension PostOffice {
     private func handlePolyOut(
-        method: String,
-        args: [Any],
+        method: String, 
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         switch method {
@@ -306,7 +306,7 @@ extension PostOffice {
     }
     
     private func handlePolyOutFetch(
-        args: [Any],
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         let url = args[0] as! String
@@ -333,7 +333,7 @@ extension PostOffice {
     }
     
     private func handlePolyOutStat(
-        args: [Any],
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         let path = args[0] as! String
@@ -352,7 +352,7 @@ extension PostOffice {
     }
     
     private func handlePolyOutReadFile(
-        args: [Any],
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         let path = args[0] as? String ?? ""
@@ -379,7 +379,7 @@ extension PostOffice {
     }
     
     private func handlePolyOutWriteFile(
-        args: [Any],
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         let path = args[0] as! String
@@ -395,7 +395,7 @@ extension PostOffice {
     }
     
     private func handlePolyOutReadDir(
-        args: [Any],
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         let path = args[0] as! String
@@ -418,7 +418,7 @@ extension PostOffice {
     }
     
     private func handlePolyOutImportArchive(
-        args: [Any],
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         let url = args[0] as! String
@@ -438,7 +438,7 @@ extension PostOffice {
     }
     
     private func handlePolyOutRemoveArchive(
-        args: [Any],
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         let fileId = args[0] as! String
@@ -450,8 +450,8 @@ extension PostOffice {
 
 extension PostOffice {
     private func handlePolyNav(
-        method: String,
-        args: [Any],
+        method: String, 
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         switch method {
@@ -487,7 +487,7 @@ extension PostOffice {
     }
     
     private func handlePolyNavPickFile(
-        args: [Any],
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         let type = args[0] as? String
@@ -499,7 +499,7 @@ extension PostOffice {
 
 extension PostOffice {
     private func handleInfo(
-        method: String,
+        method: String, 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         switch method {
@@ -527,8 +527,8 @@ extension PostOffice {
 
 extension PostOffice {
     private func handleEndpoint(
-        method: String,
-        args: [Any],
+        method: String, 
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         switch method {
@@ -536,13 +536,13 @@ extension PostOffice {
             handleEndpointSend(args: args, completionHandler: completionHandler)
         case "get":
             handleEndpointGet(args: args, completionHandler: completionHandler)
-        default:
+        default: 
             Log.error("Endpoint method unknown: \(method)")
         }
     }
     
     private func handleEndpointSend(
-        args: [Any],
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         guard let endpointId = args[0] as? String else {
@@ -554,7 +554,7 @@ extension PostOffice {
         }
         guard let payload = args[1] as? String else {
             completionHandler(
-                nil,
+                nil, 
                 createErrorResponse(#function, PodApiError.badArgumentType(args[1], type: "String"))
             )
             return
@@ -562,21 +562,21 @@ extension PostOffice {
         let contentType = args[2] as? String
         let authToken = args[3] as? String
         PodApi.shared.endpoint.send(
-            endpointId: endpointId,
-            payload: payload,
-            contentType: contentType,
+            endpointId: endpointId, 
+            payload: payload, 
+            contentType: contentType, 
             authToken: authToken) { error in
                 completionHandler(.nil, error == nil ? nil : createErrorResponse(#function, error!))
-            }
+        }
     }
     
     private func handleEndpointGet(
-        args: [Any],
+        args: [Any], 
         completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
     ) {
         guard let endpointId = args[0] as? String else {
             completionHandler(
-                nil,
+                nil, 
                 createErrorResponse(#function, PodApiError.badArgumentType(args[0], type: "String"))
             )
             return
