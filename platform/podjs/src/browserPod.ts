@@ -10,6 +10,7 @@ import type {
     Stats,
     Entry,
     SPARQLQueryResult,
+    Triplestore,
 } from "@polypoly-eu/api";
 import { dataFactory, PolyUri, isPolypodUri } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
@@ -138,6 +139,54 @@ class OxigraphPolyIn implements PolyIn {
         const store = await this.store;
         this.checkQuad(quad);
         return store.has(quad);
+    }
+}
+
+class BrowserTriplestore implements Triplestore {
+    private store: Promise<oxigraph.Store> = this.init();
+    private pendingSync: Promise<void> | null = null;
+
+    private async init(): Promise<oxigraph.Store> {
+        type wasmModule = () => Promise<WebAssembly.Module>;
+        const [, data] = (await Promise.all([
+            initOxigraph((oxigraphWasmModule as unknown as wasmModule)()),
+            openDatabase().then(
+                (db) =>
+                    new Promise((resolve, reject) => {
+                        const tx = db.transaction(
+                            [OBJECT_STORE_POLY_IN],
+                            "readonly"
+                        );
+                        const store = tx.objectStore(OBJECT_STORE_POLY_IN);
+                        const request = store.get(0);
+                        request.onsuccess = () => resolve(request.result);
+                        tx.onerror = tx.onabort = () => reject(request.error);
+                    })
+            ),
+        ])) as [unknown, string];
+        const store = new oxigraph.Store();
+        if (data) store.load(data, "application/n-quads", undefined, undefined);
+        return store;
+    }
+
+    private async sync(store: oxigraph.Store): Promise<void> {
+        return (this.pendingSync ||= (async (): Promise<void> => {
+            try {
+                const db = await openDatabase();
+                return new Promise((resolve, reject) => {
+                    const tx = db.transaction(
+                        [OBJECT_STORE_POLY_IN],
+                        "readwrite"
+                    );
+                    const data = store.dump("application/n-quads", undefined);
+                    tx.objectStore(OBJECT_STORE_POLY_IN).put(data, 0);
+                    tx.oncomplete = () => resolve(undefined);
+                    tx.onerror = tx.onabort = () => reject(tx.error);
+                });
+            } finally {
+                this.pendingSync = null;
+            }
+        })());
     }
 
     async query(query: string): Promise<SPARQLQueryResult> {
@@ -782,6 +831,7 @@ export class BrowserPod implements Pod {
     public readonly polyNav = new BrowserPolyNav();
     public readonly info = new PodJsInfo();
     public readonly endpoint = new BrowserEndpoint();
+    public readonly triplestore = new BrowserTriplestore();
 
     /** Creates a navigation bar for the app. */
     constructor() {

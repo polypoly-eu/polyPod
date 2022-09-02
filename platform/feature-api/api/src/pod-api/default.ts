@@ -9,10 +9,18 @@
 
 import * as RDF from "rdf-js";
 import { dataFactory } from "../rdf";
-import { Pod, PolyIn, PolyOut, PolyNav, Info, Endpoint, Stats } from "./api";
+import {
+    Pod,
+    PolyIn,
+    PolyOut,
+    PolyNav,
+    Info,
+    Endpoint,
+    Stats,
+    Triplestore,
+} from "./api";
 import { IFs } from "memfs";
 import { Entry } from ".";
-import { MockStore } from "./mock-store";
 
 export const DEFAULT_POD_RUNTIME = "podjs-default";
 export const DEFAULT_POD_RUNTIME_VERSION = "podjs-default-version";
@@ -89,8 +97,7 @@ export class DefaultPod implements Pod {
     constructor(
         public readonly store: RDF.DatasetCore,
         public readonly fs: IFs["promises"],
-        public readonly polyOut: PolyOut = new DefaultPolyOut(fs),
-        public readonly rdfStore: MockStore = new MockStore()
+        public readonly polyOut: PolyOut = new DefaultPolyOut(fs)
     ) {}
 
     private checkQuad(quad: RDF.Quad): void {
@@ -123,8 +130,20 @@ export class DefaultPod implements Pod {
                 this.checkQuad(quad);
                 return this.store.has(quad);
             },
-            query: async (query) => this.rdfStore.query(query),
-            update: async (query) => this.rdfStore.update(query),
+        };
+    }
+
+    /**
+     * The [[Triplestore]] interface. See [[Triplestore]] for the description
+     */
+    get triplestore(): Triplestore {
+        return {
+            query: async (query: string) => {
+                throw new Error(`Called with ${query}, but not implemented`);
+            },
+            update: async (query: string) => {
+                throw new Error(`Called with ${query}, but not implemented`);
+            },
         };
     }
 

@@ -102,7 +102,12 @@ export interface PolyIn {
      * @returns a Promise that will be resolved to a boolean.
      */
     has(quad: RDF.Quad): Promise<boolean>;
+}
 
+/*
+ * `Triplestore` is used to access the features own RDF-SPARQL database and get the interface to operate on it
+ */
+export interface Triplestore {
     /**
      * Executes a SPARQL 1.1 SELECT, CONSTRUCT, DESCRIBE, or ASK query.
      * @returns a Promise that will be resolved with the result of the query.
@@ -329,6 +334,12 @@ export interface Pod {
      * definition.
      */
     readonly endpoint: Endpoint;
+
+    /**
+     * `triplestore` is an interface to interact with the SPARQL-RDF database
+     */
+    readonly triplestore: Triplestore;
+
     /**
      * @hidden
      */

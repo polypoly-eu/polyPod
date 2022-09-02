@@ -9,6 +9,7 @@ import coop.polypoly.polypod.polyIn.rdf.Matcher
 import coop.polypoly.polypod.polyIn.rdf.Quad
 import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyOut.PolyOut
+import coop.polypoly.polypod.triplestore.Triplestore
 import eu.polypoly.pod.android.polyOut.FetchInit
 import org.msgpack.value.MapValue
 import org.msgpack.value.StringValue
@@ -20,7 +21,8 @@ open class PodApi(
     open val polyIn: PolyIn,
     open val polyNav: PolyNav,
     open val info: Info,
-    open val endpoint: Endpoint
+    open val endpoint: Endpoint,
+    open val triplestore: Triplestore
 ) {
 
     companion object {
@@ -60,8 +62,6 @@ open class PodApi(
                     "match" -> return handlePolyInMatch(args)
                     "delete" -> return handlePolyInDelete(args)
                     "has" -> return handlePolyInHas(args)
-                    "query" -> return handlePolyInQuery(args)
-                    "update" -> return handlePolyInUpdate(args)
                 }
             }
             "polyNav" -> {
@@ -83,6 +83,12 @@ open class PodApi(
                 when (inner) {
                     "send" -> return handleEndpointSend(args)
                     "get" -> return handleEndpointGet(args)
+                }
+            }
+            "triplestore" -> {
+                when (inner) {
+                    "query" -> return handleTriplestoreQuery(args)
+                    "update" -> return handleTriplestoreUpdate(args)
                 }
             }
         }
@@ -203,22 +209,22 @@ open class PodApi(
             return ValueFactory.newBoolean(false)
     }
 
-    private suspend fun handlePolyInQuery(args: List<Value>): Value {
-        logger.debug("dispatch() -> polyIn.query")
+    private fun handleTriplestoreQuery(args: List<Value>): Value {
+        logger.debug("dispatch() -> triplestore.query")
         val query = args[0].let {
             if (it.isStringValue) it.asStringValue().toString()
             else return ValueFactory.newNil()
         }
-        return polyIn.query(query)
+        return triplestore.query(query)
     }
 
-    private suspend fun handlePolyInUpdate(args: List<Value>): Value {
-        logger.debug("dispatch() -> polyIn.update")
+    private fun handleTriplestoreUpdate(args: List<Value>): Value {
+        logger.debug("dispatch() -> triplestore.update")
         val query = args[0].let {
             if (it.isStringValue) it.asStringValue().toString()
             else return ValueFactory.newNil()
         }
-        polyIn.update(query)
+        triplestore.update(query)
         return ValueFactory.newNil()
     }
 
