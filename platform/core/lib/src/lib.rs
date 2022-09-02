@@ -106,7 +106,7 @@ pub mod core {
         GetUserSessionTimeoutOptionsConfig,
     }
 
-    enum CoreResponse {
+    pub enum CoreResponse {
         LoadFeatureCategories(Vec<FeatureCategory>),
         AppDidBecomeInactive(()),
         IsUserSessionExpired(bool),
@@ -114,7 +114,7 @@ pub mod core {
         GetUserSessionTimeoutOption(TimeoutOption),
         GetUserSessionTimeoutOptionsConfig(Vec<UserSessionTimeout>),
     }
-    
+
     pub fn exec_request(request: CoreRequest) -> Result<CoreResponse, CoreFailure> {
         let mut instance = get_instance()?;
         match request {
@@ -123,10 +123,9 @@ pub mod core {
             CoreRequest::IsUserSessionExpired => instance.is_user_session_expired().map(CoreResponse::IsUserSessionExpired),
             CoreRequest::SetUserSessionTimeout(option) => instance.set_user_session_timeout_option(option).map(CoreResponse::SetUserSessionTimeout),
             CoreRequest::GetUserSessionTimeoutOption => instance.get_user_session_timeout_option().map(CoreResponse::GetUserSessionTimeoutOption),
-            CoreRequest::GetUserSessionTimeoutOptionsConfig => instance.get_user_session_timeout_options_config().map(CoreResponse::GetUserSessionTimeoutOptionsConfig),
+            CoreRequest::GetUserSessionTimeoutOptionsConfig => Core::get_user_session_timeout_options_config().map(CoreResponse::GetUserSessionTimeoutOptionsConfig),
         }
     }
-    // features_dir
 
     impl Core<'_> {
         fn load_feature_categories(
@@ -171,7 +170,7 @@ pub mod core {
                 .map(|session| session.get_timeout_option())
         }
 
-        fn get_user_session_timeout_options_config(&self) -> Result<Vec<UserSessionTimeout>, CoreFailure>
+        fn get_user_session_timeout_options_config() -> Result<Vec<UserSessionTimeout>, CoreFailure>
         {
             // The current contract between platform and core requires that core responds with a Result type.
             // Embeed in Result type, until further clarifications.
