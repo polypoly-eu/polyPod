@@ -12,4 +12,3 @@ open class Triplestore() {
         return Core.execRdfUpdate(query)
     }
 }
-
