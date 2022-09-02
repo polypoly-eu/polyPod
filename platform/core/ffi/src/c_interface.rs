@@ -39,73 +39,12 @@ pub unsafe extern "C" fn core_bootstrap(
     )))
 }
 
-/// # Safety
-/// This function can be unsafe if the features_dir pointer is null or the string is in wrong format.
-///
-/// Loads the feature categories from from the given features dir.
-/// - args: Function arguments as MessagePack value.
-/// Returns Result<Vec<FeatureCategory>, CoreFailure> as MessagePack value.
 #[no_mangle]
-pub unsafe extern "C" fn load_feature_categories(args: CByteBuffer) -> CByteBuffer {
+pub unsafe extern "C" fn execute_request(core_request: CByteBuffer) -> CByteBuffer {
     create_byte_buffer(message_pack_serialize(
-        byte_buffer_to_bytes(&args)
+        byte_buffer_to_bytes(&core_request)
             .and_then(message_pack_deserialize)
-            .and_then(core::load_feature_categories),
-    ))
-}
-
-/// Notify that app did become inactive.
-/// Returns Result<(), CoreFailure> as MessagePack value.
-#[no_mangle]
-pub unsafe extern "C" fn app_did_become_inactive() -> CByteBuffer {
-    create_byte_buffer(message_pack_serialize(core::app_did_become_inactive()))
-}
-
-/// Ask if user session is expired.
-/// Returns Result<bool, CoreFailure> as MessagePack value.
-#[no_mangle]
-pub unsafe extern "C" fn is_user_session_expired() -> CByteBuffer {
-    create_byte_buffer(message_pack_serialize(core::is_user_session_expired()))
-}
-
-/// Set the user session timeout option to a given one.
-/// - option: Timeout Option as MessagePack value.
-/// - free_bytes: A callback function to be used to free bytes.
-/// Returns Result<(), CoreFailure> as MessagePack value.
-#[no_mangle]
-pub unsafe extern "C" fn set_user_session_timeout_option(
-    option: CByteBuffer,
-    free_bytes: extern "C" fn(bytes: *mut u8),
-) -> CByteBuffer {
-    fn set_timeout_option(
-        option: CByteBuffer,
-        free_bytes: extern "C" fn(bytes: *mut u8),
-    ) -> Result<(), CoreFailure> {
-        let bytes = unsafe { byte_buffer_to_bytes(&option)? };
-        free_bytes(option.data);
-        core::set_user_session_timeout_option(message_pack_deserialize(bytes)?)?;
-        Ok(())
-    }
-    create_byte_buffer(message_pack_serialize(set_timeout_option(
-        option, free_bytes,
-    )))
-}
-
-/// Get the currently configured user session timeout option.
-/// Returns Result<TimeoutOption, CoreFailure> as MessagePack value.
-#[no_mangle]
-pub unsafe extern "C" fn get_user_session_timeout_option() -> CByteBuffer {
-    create_byte_buffer(message_pack_serialize(
-        core::get_user_session_timeout_option(),
-    ))
-}
-
-/// Get the user session timeout config options.
-/// Returns Result<Vec<UserSessionTimeout>, CoreFailure> as MessagePack value.
-#[no_mangle]
-pub unsafe extern "C" fn get_user_session_timeout_options_config() -> CByteBuffer {
-    create_byte_buffer(message_pack_serialize(
-        core::get_user_session_timeout_options_config(),
+            .and_then(core::exec_request)
     ))
 }
 
