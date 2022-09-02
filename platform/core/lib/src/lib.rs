@@ -56,6 +56,12 @@ pub mod core {
         force_show: Vec<feature_categories::FeatureCategoryId>,
     }
 
+    #[derive(Deserialize)]
+    pub struct BoostrapArgs {
+        language_code: String,
+        fs_root: String,
+    }
+
     fn get_instance() -> Result<MutexGuard<'static, Core<'static>>, CoreFailure> {
         match CORE.get() {
             Some(core) => core
@@ -66,21 +72,20 @@ pub mod core {
     }
 
     pub fn bootstrap(
-        language_code: String,
-        fs_root: String,
+        args: BoostrapArgs,
         platform_hook: Box<dyn PlatformHookRequest>,
     ) -> Result<(), CoreFailure> {
         if CORE.get().is_some() {
             return Err(CoreFailure::core_already_bootstrapped());
         }
         let preferences = Arc::new(Preferences {
-            store: Box::new(DefaultKeyValueStore::new(fs_root + "/" + PREFERENCES_DB)),
+            store: Box::new(DefaultKeyValueStore::new(args.fs_root + "/" + PREFERENCES_DB)),
         });
 
         let builder = Box::new(Instant::now);
         let user_session = Mutex::from(UserSession::new(builder, preferences.clone()));
         let core = Core {
-            language_code,
+            language_code: args.language_code,
             preferences,
             user_session,
             platform_hook,
@@ -97,6 +102,7 @@ pub mod core {
         Ok(())
     }
 
+    #[derive(Deserialize)]
     pub enum CoreRequest {
         LoadFeatureCategories(LoadFeatureCategoriesArguments),
         AppDidBecomeInactive,
@@ -106,6 +112,7 @@ pub mod core {
         GetUserSessionTimeoutOptionsConfig,
     }
 
+    #[derive(Serialize)]
     pub enum CoreResponse {
         LoadFeatureCategories(Vec<FeatureCategory>),
         AppDidBecomeInactive(()),
