@@ -16,7 +16,7 @@
   font-size: var(--font-size-xl);
 }
 
-.preview-screen-container {
+.feature-container {
   position: absolute;
   z-index: 99;
   width: 100%;
