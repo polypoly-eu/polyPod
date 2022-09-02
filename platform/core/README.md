@@ -24,6 +24,7 @@ This Rust repository follows the [Cargo Workspace](https://doc.rust-lang.org/car
 
 ## Building
 
+Note: RDF functionality is disabled until fully developed, to build core with RDF pass `--features "poly_rdf"` to `cargo build`.
 
 - Building the whole workspace:
 ```shell
@@ -36,6 +37,9 @@ cargo build -p <crate name>
 ```
 
 ## Building for platforms
+
+
+Note: RDF functionality is disabled until fully developed, to build core with RDF pass `FEATURES="poly_rdf"` to `make`.
 
 It is required to run `make` in a bash terminal. MacOS and Linux systems terminal should
 already have everything needed. On Windows, a terminal application like

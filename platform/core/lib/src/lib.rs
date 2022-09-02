@@ -87,8 +87,11 @@ pub mod core {
         if CORE.get().is_some() {
             return Err(CoreFailure::core_already_bootstrapped());
         }
+        #[allow(clippy::redundant_clone)] // allowed until RDF is fully enabled
         let preferences = Arc::new(Preferences {
-            store: Box::new(DefaultKeyValueStore::new(fs_root + "/" + PREFERENCES_DB)),
+            store: Box::new(DefaultKeyValueStore::new(
+                fs_root.clone() + "/" + PREFERENCES_DB,
+            )),
         });
 
         let builder = Box::new(Instant::now);
