@@ -1,9 +1,5 @@
 import React from "react";
-import { withDesign } from "storybook-addon-designs";
 import { SideSheet } from "../../../../src/react-components";
-
-import "../../../../src/css/index.js";
-import "../fontFamily.css";
 
 const textFiller = `Lorem ipsum dolor sit amet, consectetur adipiscing
 elit.Morbi volutpat, lectus vitae facilisis mattis, leo sem fringilla tortor,
@@ -22,7 +18,6 @@ eros. Donec luctus purus enim, sit amet sagittis leo vulputate at.`;
 export default {
   component: SideSheet,
   title: "Visuals/Molecules/SideSheet",
-  decorators: [withDesign],
   argTypes: {
     okLabel: { control: "text" },
     onOk: { action: "clicked" },
