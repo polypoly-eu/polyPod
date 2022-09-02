@@ -13,6 +13,7 @@ const common = {
             exclude: ["node_modules/**"],
             transforms: ["typescript"],
         }),
+        wasm({ targetEnv: "auto-inline" }),
     ],
     context: "window",
     onwarn: (warning, warn) => {
@@ -26,7 +27,6 @@ const common = {
 
 export default [
     {
-        ...common,
         input: "src/index.ts",
         output: [
             {
@@ -41,7 +41,6 @@ export default [
         external: ["chai"],
     },
     {
-        ...common,
         input: "src/pod.ts",
         output: [
             {
