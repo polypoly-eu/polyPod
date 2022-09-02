@@ -27,10 +27,10 @@ pub struct RdfFailure {
 }
 
 impl RdfFailure {
-    pub fn to_core_failure(&self) -> Self {
+    pub fn to_core_failure(&self) -> CoreFailure {
         CoreFailure {
             code: self.code,
-            message: self.message,
+            message: self.message.clone(),
         }
     }
 

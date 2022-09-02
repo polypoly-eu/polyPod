@@ -4,9 +4,9 @@ pub mod core {
     use io::{file_system::DefaultFileSystem, key_value_store::DefaultKeyValueStore};
     use preferences::Preferences;
 
-    #[cfg(feature = "rdf")]
+    #[cfg(feature = "poly_rdf")]
     use poly_rdf::rdf::{RDFStore, SPARQLQuery, SPARQLUpdate};
-    #[cfg(feature = "rdf")]
+    #[cfg(feature = "poly_rdf")]
     pub use poly_rdf::{
         rdf::{QueryResults, QueryResultsFormat},
         rdf_failure::RdfFailure,
@@ -16,7 +16,7 @@ pub mod core {
 
     use once_cell::sync::OnceCell;
     use serde::{Deserialize, Serialize};
-    #[allow(dead_code)]
+    #[allow(unused_imports)]
     use std::path::PathBuf;
     use std::sync::{Arc, Mutex};
     use std::{sync::MutexGuard, time::Instant};
@@ -48,7 +48,7 @@ pub mod core {
     }
 
     const PREFERENCES_DB: &str = "preferences_db";
-    #[cfg(feature = "rdf")]
+    #[cfg(feature = "poly_rdf")]
     const RDF_DB: &str = "rdf_db";
 
     // The Core would act as a composition root, containing any global configuration
@@ -60,7 +60,7 @@ pub mod core {
         user_session: Mutex<UserSession<'a>>,
         #[allow(dead_code)]
         platform_hook: Box<dyn PlatformHookRequest>,
-        #[cfg(feature = "rdf")]
+        #[cfg(feature = "poly_rdf")]
         rdf_store: RDFStore,
     }
 
@@ -88,9 +88,7 @@ pub mod core {
             return Err(CoreFailure::core_already_bootstrapped());
         }
         let preferences = Arc::new(Preferences {
-            store: Box::new(DefaultKeyValueStore::new(
-                fs_root.clone() + "/" + PREFERENCES_DB,
-            )),
+            store: Box::new(DefaultKeyValueStore::new(fs_root + "/" + PREFERENCES_DB)),
         });
 
         let builder = Box::new(Instant::now);
@@ -101,7 +99,7 @@ pub mod core {
             preferences,
             user_session,
             platform_hook,
-            #[cfg(feature = "rdf")]
+            #[cfg(feature = "poly_rdf")]
             rdf_store: RDFStore::new(PathBuf::from(fs_root.clone() + "/" + RDF_DB))
                 .map_err(|failure| failure.to_core_failure())?,
         };
@@ -119,7 +117,7 @@ pub mod core {
 
     // RDF
 
-    #[cfg(feature = "rdf")]
+    #[cfg(feature = "poly_rdf")]
     pub fn exec_rdf_query(query: SPARQLQuery) -> Result<QueryResults, CoreFailure> {
         get_instance()?
             .rdf_store
@@ -127,7 +125,7 @@ pub mod core {
             .map_err(|failure| failure.to_core_failure())
     }
 
-    #[cfg(feature = "rdf")]
+    #[cfg(feature = "poly_rdf")]
     pub fn exec_rdf_update(update: SPARQLUpdate) -> Result<(), CoreFailure> {
         get_instance()?
             .rdf_store
