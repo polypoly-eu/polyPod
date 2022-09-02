@@ -1,4 +1,5 @@
 import Foundation
+import PolyPodCoreSwift
 
 class PodApi {
     static let shared = PodApi()
@@ -24,6 +25,6 @@ class PodApi {
     }()
 
     lazy var triplestore: Triplestore = {
-        return Triplestore()
+        return Core.instance
     }()
 }

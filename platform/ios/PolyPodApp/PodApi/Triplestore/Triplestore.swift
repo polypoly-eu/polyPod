@@ -2,7 +2,7 @@ import Foundation
 import MessagePack
 import PolyPodCoreSwift
 
-protocol TriplestoreProtocol: AnyObject {
+protocol Triplestore {
     func query(
         query: String,
         completionHandler: @escaping (MessagePackValue, Error?) -> Void
@@ -13,14 +13,12 @@ protocol TriplestoreProtocol: AnyObject {
     )
 }
 
-final class Triplestore: TriplestoreProtocol {
-    
+extension Core: Triplestore {
     func query(
         query: String,
         completionHandler: @escaping (MessagePackValue, Error?) -> Void
     ) {
-        switch Core.instance
-            .executeRdfQuery(query) {
+        switch executeRdfQuery(query) {
         case .success(let result):
             completionHandler(result, nil)
         case .failure(let error):
@@ -32,8 +30,7 @@ final class Triplestore: TriplestoreProtocol {
         query: String,
         completionHandler: @escaping (Error?) -> Void
     ) {
-        switch Core.instance
-            .executeRdfUpdate(query) {
+        switch executeRdfUpdate(query) {
         case .success:
             completionHandler(nil)
         case .failure(let error):
