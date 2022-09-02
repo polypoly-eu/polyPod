@@ -1,3 +1,4 @@
+use core_failure::CoreFailure;
 use oxigraph::{
     sparql::{EvaluationError, ParseError},
     store::StorageError,
@@ -26,6 +27,13 @@ pub struct RdfFailure {
 }
 
 impl RdfFailure {
+    pub fn to_core_failure(&self) -> CoreFailure {
+        CoreFailure {
+            code: self.code,
+            message: self.message.clone(),
+        }
+    }
+
     pub fn result_serialization_failed(error: EvaluationError) -> Self {
         RdfFailure {
             code: FailureCode::ResultSerializationError.value(),

@@ -16,18 +16,17 @@ const common = {
         wasm({ targetEnv: "auto-inline" }),
     ],
     context: "window",
-    onwarn: (warning) => {
+    onwarn: (warning, warn) => {
         if (
-            warning.code === "CIRCULAR_DEPENDENCY" &&
-            warning.cycle[0].match(/fast-check/)
+            warning.code != "CIRCULAR_DEPENDENCY" ||
+            !warning.cycle[0].match(/fast-check|chai\.js/)
         )
-            return;
+            warn(warning);
     },
 };
 
 export default [
     {
-        ...common,
         input: "src/index.ts",
         output: [
             {
@@ -38,10 +37,10 @@ export default [
                 },
             },
         ],
+        ...common,
         external: ["chai"],
     },
     {
-        ...common,
         input: "src/pod.ts",
         output: [
             {
@@ -49,5 +48,6 @@ export default [
                 format: "iife",
             },
         ],
+        ...common,
     },
 ];
