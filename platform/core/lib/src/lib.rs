@@ -1,8 +1,7 @@
-mod core_request;
 pub mod core {
-    use crate::core_request::LoadFeatureCategoriesArguments;
     use core_failure::CoreFailure;
     pub use feature_categories;
+    use feature_categories::FeatureCategory;
     use io::{file_system::DefaultFileSystem, key_value_store::DefaultKeyValueStore};
     use preferences::Preferences;
     use user_session::{TimeoutOption, UserSession, UserSessionTimeout};
@@ -51,7 +50,10 @@ pub mod core {
         platform_hook: Box<dyn PlatformHookRequest>,
     }
 
-    impl Core<'_> {
+    #[derive(Deserialize)]
+    pub struct LoadFeatureCategoriesArguments {
+        features_dir: String,
+        force_show: Vec<feature_categories::FeatureCategoryId>,
     }
 
     fn get_instance() -> Result<MutexGuard<'static, Core<'static>>, CoreFailure> {
@@ -95,20 +97,39 @@ pub mod core {
         Ok(())
     }
 
-    enum CoreRequest {
-        LoadFeatureCategories(LoadFeatureCategoriesArguments)
+    pub enum CoreRequest {
+        LoadFeatureCategories(LoadFeatureCategoriesArguments),
+        AppDidBecomeInactive,
+        IsUserSessionExpired,
+        SetUserSessionTimeout(TimeoutOption),
+        GetUserSessionTimeoutOption,
+        GetUserSessionTimeoutOptionsConfig,
     }
 
-    fn exec_request(request: CoreRequest) -> Result<impl Serialize, CoreFailure> {
-        let instance = get_instance()?;
+    enum CoreResponse {
+        LoadFeatureCategories(Vec<FeatureCategory>),
+        AppDidBecomeInactive(()),
+        IsUserSessionExpired(bool),
+        SetUserSessionTimeout(()),
+        GetUserSessionTimeoutOption(TimeoutOption),
+        GetUserSessionTimeoutOptionsConfig(Vec<UserSessionTimeout>),
+    }
+    
+    pub fn exec_request(request: CoreRequest) -> Result<CoreResponse, CoreFailure> {
+        let mut instance = get_instance()?;
         match request {
-            CoreRequest::LoadFeatureCategories(args) => instance.load_feature_categories(args)
+            CoreRequest::LoadFeatureCategories(args) => instance.load_feature_categories(args).map(CoreResponse::LoadFeatureCategories),
+            CoreRequest::AppDidBecomeInactive => instance.app_did_become_inactive().map(CoreResponse::AppDidBecomeInactive),
+            CoreRequest::IsUserSessionExpired => instance.is_user_session_expired().map(CoreResponse::IsUserSessionExpired),
+            CoreRequest::SetUserSessionTimeout(option) => instance.set_user_session_timeout_option(option).map(CoreResponse::SetUserSessionTimeout),
+            CoreRequest::GetUserSessionTimeoutOption => instance.get_user_session_timeout_option().map(CoreResponse::GetUserSessionTimeoutOption),
+            CoreRequest::GetUserSessionTimeoutOptionsConfig => instance.get_user_session_timeout_options_config().map(CoreResponse::GetUserSessionTimeoutOptionsConfig),
         }
     }
     // features_dir
 
     impl Core<'_> {
-        pub fn load_feature_categories(
+        fn load_feature_categories(
             &self,
             args: LoadFeatureCategoriesArguments,
         ) -> Result<Vec<feature_categories::FeatureCategory>, CoreFailure> {
@@ -120,65 +141,41 @@ pub mod core {
             )
         }
 
-    }
-    pub fn load_feature_categories(
-        args: LoadFeatureCategoriesArguments,
-    ) -> Result<Vec<feature_categories::FeatureCategory>, CoreFailure> {
-        let core = get_instance()?;
-        feature_categories::load_feature_categories(
-            DefaultFileSystem {},
-            args.features_dir.as_str(),
-            &core.language_code,
-            args.force_show,
-        )
-    }
+        fn app_did_become_inactive(&mut self) -> Result<(), CoreFailure> {
+            self.user_session
+                .get_mut()
+                .map_err(|err| CoreFailure::failed_to_acess_user_session(err.to_string()))?
+                .did_become_inactive();
+            self.preferences.as_ref().save();
+            Ok(())
+        }
 
-    // App events
+        fn is_user_session_expired(&self) -> Result<bool, CoreFailure> {
+            self.user_session
+                .lock()
+                .map_err(|err| CoreFailure::failed_to_acess_user_session(err.to_string()))
+                .map(|session| session.is_session_expired())
+        }
 
-    pub fn app_did_become_inactive() -> Result<(), CoreFailure> {
-        let mut instance = get_instance()?;
-        let session = instance
-            .user_session
-            .get_mut()
-            .map_err(|err| CoreFailure::failed_to_acess_user_session(err.to_string()))?;
-        session.did_become_inactive();
-        instance.preferences.as_ref().save();
-        Ok(())
-    }
+        fn set_user_session_timeout_option(&self, option: TimeoutOption) -> Result<(), CoreFailure> {
+            self.user_session
+                .lock()
+                .map_err(|err| CoreFailure::failed_to_acess_user_session(err.to_string()))
+                .map(|session| session.set_timeout_option(option))
+        }
 
-    // User Session
-    pub fn is_user_session_expired() -> Result<bool, CoreFailure> {
-        let instance = get_instance()?;
-        let session = &instance
-            .user_session
-            .lock()
-            .map_err(|err| CoreFailure::failed_to_acess_user_session(err.to_string()))?;
-        Ok((&session.is_session_expired()).to_owned())
-    }
+        fn get_user_session_timeout_option(&self) -> Result<TimeoutOption, CoreFailure> {
+            self.user_session
+                .lock()
+                .map_err(|err| CoreFailure::failed_to_acess_user_session(err.to_string()))
+                .map(|session| session.get_timeout_option())
+        }
 
-    pub fn set_user_session_timeout_option(option: TimeoutOption) -> Result<(), CoreFailure> {
-        let instance = get_instance()?;
-        let session = &instance
-            .user_session
-            .lock()
-            .map_err(|err| CoreFailure::failed_to_acess_user_session(err.to_string()))?;
-        session.set_timeout_option(option);
-        Ok(())
-    }
-
-    pub fn get_user_session_timeout_option() -> Result<TimeoutOption, CoreFailure> {
-        let instance = get_instance()?;
-        let session = &instance
-            .user_session
-            .lock()
-            .map_err(|err| CoreFailure::failed_to_acess_user_session(err.to_string()))?;
-        Ok(session.get_timeout_option())
-    }
-
-    pub fn get_user_session_timeout_options_config() -> Result<Vec<UserSessionTimeout>, CoreFailure>
-    {
-        // The current contract between platform and core requires that core responds with a Result type.
-        // Embeed in Result type, until further clarifications.
-        Ok(TimeoutOption::all_option_timeouts())
+        fn get_user_session_timeout_options_config(&self) -> Result<Vec<UserSessionTimeout>, CoreFailure>
+        {
+            // The current contract between platform and core requires that core responds with a Result type.
+            // Embeed in Result type, until further clarifications.
+            Ok(TimeoutOption::all_option_timeouts())
+        }
     }
 }
