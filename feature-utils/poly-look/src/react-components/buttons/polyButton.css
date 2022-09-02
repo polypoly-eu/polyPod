@@ -21,12 +21,12 @@
 }
 
 .poly-button.filled {
-  background-color: var(--theme-secondary-color);
-  color: var(--theme-primary-color);
+  background-color: var(--pl-button-color-fill-primary);
+  color: var(--pl-button-color-text-primary);
 }
 
 .poly-button.outline {
-  border: 1px solid var(--theme-secondary-color);
-  color: var(--theme-secondary-color);
-  background-color: var(--transparent);
+  border: 1px solid var(--pl-button-color-border-secondary);
+  color: var(--pl-button-color-text-secondary);
+  background-color: var(--pl-button-color-fill-secondary);
 }

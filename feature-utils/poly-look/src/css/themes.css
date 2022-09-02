@@ -7,6 +7,7 @@
   font-weight: 400;
   line-height: 120%;
   letter-spacing: -0.01em;
+  --theme-info-button-color: var(--color-gray-300);
 }
 
 .poly-theme text {
@@ -21,15 +22,24 @@
 .poly-theme-light {
   --theme-primary-color: var(--color-gray-50);
   --theme-secondary-color: var(--color-indigo-950);
+  --theme-tertiary-color: var(--color-red-300);
   --theme-small-print-color: var(--color-gray-500);
-  --theme-info-button-color: var(--color-gray-300);
 }
 
 .poly-theme-dark {
   --theme-primary-color: var(--color-indigo-950);
   --theme-secondary-color: var(--color-gray-50);
+  --theme-tertiary-color: var(--color-red-300);
   --theme-small-print-color: var(--color-gray-400);
-  --theme-info-button-color: var(--color-gray-300);
+}
+
+.poly-theme-light, .poly-theme-dark {
+  --pl-button-color-fill-primary: var(--theme-secondary-color);
+  --pl-button-color-text-primary: var(--theme-primary-color);
+  --pl-button-color-fill-secondary: var(--transparent);
+  --pl-button-color-border-secondary: var(--theme-secondary-color);
+  --pl-button-color-text-secondary: var(--theme-secondary-color);
+  --pl-screen-color-fill: var(--theme-primary-color);
 }
 
 .poly-theme h1,
