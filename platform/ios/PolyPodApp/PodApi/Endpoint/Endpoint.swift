@@ -43,6 +43,16 @@ final class Endpoint: EndpointProtocol {
         delegate?.doHandleApproveEndpointFetch(endpointId: endpointId, completion: completion)
     }
     
+    private func jsonStringify(_ objectToConvert: Any) -> Any {
+        if let jsonData = try? JSONSerialization.data(withJSONObject: objectToConvert, options: []) {
+             if let content = String(data: jsonData, encoding: String.Encoding.utf8) {
+                // here `content` is the JSON dictionary containing the String
+                return content
+            }
+        }
+        return ""
+    }
+    
     func uploadError(
         errorMsg: String,
         endpointId: String,
@@ -60,12 +70,12 @@ final class Endpoint: EndpointProtocol {
             return
         }
         
-        let payload = "{ \"error\": \"\(errorMsg)\" }"
-
+        let payload = "{ \"error\": \(jsonStringify([errorMsg])) }"
+    
         let response = self.network.httpPost(
             url: endpointInfo.url,
             body: payload,
-            contentType: "application/json",
+            contentType: "application/json; charset=utf-8",
             authToken: endpointInfo.auth,
             allowInsecure: endpointInfo.allowInsecure
         )
