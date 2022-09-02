@@ -3,6 +3,8 @@ package coop.polypoly.polypod.endpoint
 import android.content.Context
 import android.content.res.AssetManager
 import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import coop.polypoly.polypod.PodApiError
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.network.Network
@@ -58,14 +60,15 @@ class Endpoint(
             throw PodApiError().endpointError()
         }
 
-        val payload = "{ \"error\": \"${errorMsg}\" }"
+        val jsonString = "{ \"error\": \"$errorMsg\" }"
+        val payload = Gson().toJson(jsonString)
 
         try {
             endpointNetwork
                 .httpPost(
                     endpointInfo.url,
                     payload,
-                    "application/json",
+                    "application/json; charset=utf-8",
                     endpointInfo.auth,
                     endpointInfo.allowInsecure
                 )
