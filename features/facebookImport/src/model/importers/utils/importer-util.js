@@ -29,14 +29,14 @@ function decode(s) {
 
 async function readFullPathJSONFile(entry) {
     const rawContent = await entry.getContent();
-    const fileContent = decode(new TextDecoder().decode(rawContent));
+    const fileContent = new TextDecoder().decode(rawContent);
     if (!fileContent) {
         throw new MissingContentImportException(entry._id);
     }
 
     return JSON.parse(fileContent, (key, value) => {
         if (typeof value === "string") {
-            return decodeURIComponent(value);
+            return decodeURIComponent(decode(value));
         }
         return value;
     });
