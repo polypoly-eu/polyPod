@@ -60,6 +60,7 @@ class FeatureSmokeTest {
             for (i in 0 until nodeCount) {
                 this[i].performClick()
                 Thread.sleep(1000)
+                onView(withId(R.id.close_button)).perform(click())
             }
         }
         Thread.sleep(1000)
