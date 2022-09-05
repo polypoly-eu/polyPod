@@ -35,7 +35,7 @@
 "message_approve_endpoint_fetch_request %@ %@" = "%@-feature wants to share data with this endpoint from your polyPod:\n\n%@\n\nAllow?";
 "message_security_warning_title" = "Security warning";
 "message_security_warning_text" = "To ensure your data is secured, we recommend using your device screen lock.";
-"button_error_report_allow" = "Send error report to polyPoly";
+"button_error_report_allow" = "Send error report to polypoly";
 "button_error_report_deny" = "Cancel";
 
 "button_confirm" = "Yes";

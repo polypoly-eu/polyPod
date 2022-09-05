@@ -50,7 +50,7 @@
 
     <string name="message_feature_error">Leider gab es einen Fehler in \'%1$s\':\n\n%2$s\n\nIch beende es.</string>
 
-    <string name="button_feature_allow_report">Fehlerbericht an polyPoly senden</string>
+    <string name="button_feature_allow_report">Fehlerbericht an polypoly senden</string>
     <string name="button_feature_deny_report">Kündigen</string>
 
     <string name="webview_alert_title">TODO</string>
