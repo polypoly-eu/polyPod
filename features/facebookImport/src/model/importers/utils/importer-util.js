@@ -34,7 +34,7 @@ async function readFullPathJSONFile(entry) {
         throw new MissingContentImportException(entry._id);
     }
 
-    return JSON.parse(fileContent, (key, value) => {
+    return JSON.parse(fileContent, (_key, value) => {
         if (typeof value === "string") {
             return decodeURIComponent(decode(value));
         }
