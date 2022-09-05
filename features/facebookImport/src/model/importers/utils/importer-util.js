@@ -21,10 +21,16 @@ async function readJSONFile(relativeFilePath, zipFile) {
     return readFullPathJSONFile(entry);
 }
 
+function decode(s) {
+    let d = new TextDecoder();
+    let a = s.split("").map((r) => r.charCodeAt());
+    return d.decode(new Uint8Array(a));
+}
+
 async function readFullPathJSONFile(entry) {
     const rawContent = await entry.getContent();
-    const fileContent = new TextDecoder("utf-8").decode(rawContent);
-
+    const fileContent = decode(new TextDecoder().decode(rawContent));
+    console.log(fileContent);
     if (!fileContent) {
         throw new MissingContentImportException(entry._id);
     }
