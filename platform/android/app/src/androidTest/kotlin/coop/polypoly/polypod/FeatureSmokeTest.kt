@@ -34,7 +34,7 @@ class FeatureSmokeTest {
     }
 
     @Test
-    fun onboardingShownOnFirstRun() {
+    fun openFeaturesAndCheckForErrorDialog() {
         Thread.sleep(1000)
         val nodeInteractionCollection = composeTestRule.onAllNodesWithTag(
             "Tile"
