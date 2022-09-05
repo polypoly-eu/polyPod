@@ -3,8 +3,6 @@ package coop.polypoly.polypod.endpoint
 import android.content.Context
 import android.content.res.AssetManager
 import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import coop.polypoly.polypod.PodApiError
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.network.Network
