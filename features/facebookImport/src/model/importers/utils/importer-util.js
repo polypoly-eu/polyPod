@@ -31,7 +31,7 @@ async function readFullPathJSONFile(entry) {
 
     return JSON.parse(fileContent, (key, value) => {
         if (typeof value === "string") {
-            return decodeURIComponent(escape(value));
+            return decodeURIComponent(value);
         }
         return value;
     });
