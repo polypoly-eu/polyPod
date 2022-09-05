@@ -9,6 +9,8 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Rule
@@ -35,7 +37,6 @@ class FeatureSmokeTest {
 
     @Test
     fun openFeaturesAndCheckForErrorDialog() {
-        Thread.sleep(1000)
         val nodeInteractionCollection = composeTestRule.onAllNodesWithTag(
             "Tile"
         )
@@ -46,10 +47,13 @@ class FeatureSmokeTest {
                 val nodeInter = this[i]
                 nodeInter.performScrollTo()
                 nodeInter.performClick()
-                Thread.sleep(1000)
+                Thread.sleep(5000)
+                onView(withId(android.R.id.message)).check(
+                    doesNotExist()
+                )
                 while (!nodeIsDisplayed(homeScreen())) {
                     onView(withId(R.id.close_button)).perform(click())
-                    Thread.sleep(100)
+                    Thread.sleep(500)
                 }
             }
         }
