@@ -2,6 +2,7 @@ package coop.polypoly.polypod
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -17,6 +18,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coop.polypoly.core.Feature
@@ -24,6 +26,7 @@ import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.launch
 
 private const val PICK_FILE_REQUEST_CODE = 1
 
@@ -94,11 +97,6 @@ open class FeatureFragment : Fragment() {
 
     private val errorDialog: AlertDialog by lazy {
         AlertDialog.Builder(context)
-            .setPositiveButton(
-                context?.getString(R.string.button_feature_error_close)
-            ) { _, _ ->
-                close()
-            }
             .create()
     }
 
@@ -162,13 +160,34 @@ open class FeatureFragment : Fragment() {
 
     @Suppress("unused")
     private fun handleError(error: String) {
+        if (errorDialog.isShowing || context == null) return
+
         val featureErrorMessage = context?.getString(
             R.string.message_feature_error,
             feature.name,
             error
         )
-        if (errorDialog.isShowing) return
         errorDialog.setMessage(featureErrorMessage)
+        errorDialog.setButton(
+            Dialog.BUTTON_POSITIVE,
+            context?.getString(R.string.button_feature_allow_report)
+        ) { _, _ ->
+            lifecycleScope.launch {
+                close()
+
+                featureContainer.api.endpoint.uploadError(
+                    "polyApiErrorReport",
+                    featureErrorMessage!!
+                )
+            }
+        }
+        errorDialog.setButton(
+            Dialog.BUTTON_NEGATIVE,
+            context?.getString(R.string.button_feature_deny_report)
+        ) { _, _ ->
+            close()
+        }
+
         errorDialog.show()
     }
 
