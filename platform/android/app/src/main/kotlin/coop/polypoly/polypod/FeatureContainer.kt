@@ -300,6 +300,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
         /* ktlint-disable max-line-length */
         webView.loadUrl("${PolyOut.fsPrefix}assets/container/container.html?featureName=${feature.name}")
+        // TODO: Remove
+        errorHandler?.invoke("Error")
     }
 
     private fun initPostOffice(view: WebView) {
