@@ -30,7 +30,6 @@ function decode(s) {
 async function readFullPathJSONFile(entry) {
     const rawContent = await entry.getContent();
     const fileContent = decode(new TextDecoder().decode(rawContent));
-    console.log(fileContent);
     if (!fileContent) {
         throw new MissingContentImportException(entry._id);
     }
