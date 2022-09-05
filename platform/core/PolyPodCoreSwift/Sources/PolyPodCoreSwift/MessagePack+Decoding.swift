@@ -70,51 +70,82 @@ func mapError(_ dict: [MessagePackValue: MessagePackValue]) throws -> CoreFailur
     return CoreFailure(code: code, message: message)
 }
 
-func mapFeatureCategories(_ value: MessagePackValue) throws -> [FeatureCategory] {
-    try value.getArray().map(mapFeatureCategory)
+public protocol MessagePackDecodable {
+    init(from value: MessagePackValue) throws
 }
 
-func mapFeatureCategory(_ value: MessagePackValue) throws -> FeatureCategory {
-    let dictionary: [MessagePackValue: MessagePackValue] = try value.getDictionary()
-
-    return FeatureCategory(
-        id: try mapFeatureCategoryId(dictionary.get("id").getString()),
-        name: try dictionary.get("name").getString(),
-        features: try dictionary.get("features").getArray().map(mapFeature)
-    )
-}
-
-func mapFeatureCategoryId(_ value: String) throws -> FeatureCategoryId {
-    guard let id = FeatureCategoryId(rawValue: value) else {
-        throw DecodingError.unknownFeatureCategoryId(info: "\(value)")
+extension UserSessionTimeoutOption: MessagePackDecodable {
+    public init(from value: MessagePackValue) throws {
+        guard let option = UserSessionTimeoutOption(rawValue: try value.getString()) else {
+            throw DecodingError
+                .unknownUserSessionTimeoutOption(info: "Received msgPackValue \(value)")
+        }
+        self = option
     }
-    return id
 }
 
-func mapFeature(_ value: MessagePackValue) throws -> Feature {
-    let dictionary: CoreResponseObject = try value.getDictionary()
-    
-    let links = try dictionary["links"]?
-        .getDictionary().reduce(into: [String: String]()) { partialResult, keyValue in
-            let key: String = try keyValue.key.getString()
-            let value: String = try keyValue.value.getString()
-            partialResult[key] = value
+extension UserSessionTimeoutOptionConfig: MessagePackDecodable {
+    public init(from value: MessagePackValue) throws {
+        let object: CoreResponseObject = try value.getDictionary()
+        self.option = try UserSessionTimeoutOption(from: object.get("option"))
+        self.duration = try object.get("duration").getUInt()
     }
-    return try Feature(
-        path: URL(fileURLWithPath: dictionary.get("path").getString()),
-        id: dictionary.get("id").getString(),
-        name: dictionary.get("name").getString(),
-        author: dictionary["author"]?.getString(),
-        description: dictionary["description"]?.getString(),
-        primaryColor: dictionary.get("primaryColor").getString(),
-        thumbnailColor: dictionary.get("thumbnailColor").getString(),
-        thumbnail: dictionary["thumbnail"]?
+}
+
+extension Array: MessagePackDecodable where Element: MessagePackDecodable {
+    public init(from value: MessagePackValue) throws {
+        self = try value.getArray().map(Element.init(from:))
+    }
+}
+
+extension FeatureCategory: MessagePackDecodable {
+    public init(from value: MessagePackValue) throws {
+        let dictionary: [MessagePackValue: MessagePackValue] = try value.getDictionary()
+        self.id = try FeatureCategoryId.init(from: dictionary.get("id"))
+        self.name = try dictionary.get("name").getString()
+        self.features = try [Feature].init(from: dictionary.get("features"))
+    }
+}
+
+extension FeatureCategoryId: MessagePackDecodable {
+    public init(from value: MessagePackValue) throws {
+        guard let id = FeatureCategoryId(rawValue: try value.getString()) else {
+            throw DecodingError.unknownFeatureCategoryId(info: "\(value)")
+        }
+        self = id
+    }
+}
+
+extension Feature: MessagePackDecodable {
+    public init(from value: MessagePackValue) throws {
+        let dictionary: CoreResponseObject = try value.getDictionary()
+        
+        let links = try dictionary["links"]?
+            .getDictionary().reduce(into: [String: String]()) { partialResult, keyValue in
+                let key: String = try keyValue.key.getString()
+                let value: String = try keyValue.value.getString()
+                partialResult[key] = value
+            }
+        path = try URL(fileURLWithPath: dictionary.get("path").getString())
+        id = try dictionary.get("id").getString()
+        name = try dictionary.get("name").getString()
+        author = try dictionary["author"]?.getString()
+        description = try dictionary["description"]?.getString()
+        primaryColor = try dictionary.get("primaryColor").getString()
+        thumbnailColor = try dictionary.get("thumbnailColor").getString()
+        thumbnail = try dictionary["thumbnail"]?
             .getString()
-            .map(URL.init(fileURLWithPath:)),
-        borderColor: dictionary.get("borderColor").getString(),
-        tileTextColor: dictionary.get("tileTextColor").getString(),
-        links: links ?? [:]
-    )
+            .map(URL.init(fileURLWithPath:))
+        borderColor = try dictionary.get("borderColor").getString()
+        tileTextColor = try dictionary.get("tileTextColor").getString()
+        self.links = links ?? [:]
+    }
+}
+
+extension Bool: MessagePackDecodable {
+    public init(from value: MessagePackValue) throws {
+        self = try value.getBool()
+    }
 }
 
 extension Dictionary {

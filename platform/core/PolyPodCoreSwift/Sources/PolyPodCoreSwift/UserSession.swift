@@ -1,6 +1,6 @@
 import MessagePack
 
-public enum UserSessionTimeoutOption: String, CaseIterable {
+public enum UserSessionTimeoutOption: String, CaseIterable, Encodable {
     case option1
     case option2
     case option3

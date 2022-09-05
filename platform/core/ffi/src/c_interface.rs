@@ -27,17 +27,18 @@ pub unsafe extern "C" fn core_bootstrap(
     create_byte_buffer(message_pack_serialize(
         byte_buffer_to_bytes(&args)
             .and_then(message_pack_deserialize)
-            .and_then(|args| core::bootstrap(args, Box::new(bridge)))
+            .and_then(|args| core::bootstrap(args, Box::new(bridge))),
     ))
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn execute_request(core_request: CByteBuffer) -> CByteBuffer {
-    create_byte_buffer(message_pack_serialize(
-        byte_buffer_to_bytes(&core_request)
-            .and_then(message_pack_deserialize)
-            .and_then(core::exec_request)
-    ))
+    create_byte_buffer(
+        match byte_buffer_to_bytes(&core_request).and_then(message_pack_deserialize) {
+            Ok(request) => core::exec_request(request),
+            Err(err) => message_pack_serialize(Err::<(), _>(err)),
+        }
+    )
 }
 
 /// # Safety

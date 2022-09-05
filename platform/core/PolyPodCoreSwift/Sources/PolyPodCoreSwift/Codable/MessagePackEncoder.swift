@@ -250,6 +250,12 @@ class KeyedContainer<Key>: KeyedEncodingContainerProtocol where Key: CodingKey {
 
 extension KeyedContainer: MessagePackEncodingContainer {
     var value: MessagePackValue {
+        if storage.count == 1 {
+            let (key, container) = storage.first!
+            if container.value.count == 0 {
+                return .string(key)
+            }
+        }
         let map = self.storage.transform(keyTransform: { MessagePackValue.string($0) },
                                          valueTransform: { $0.value })
         return .map(map)

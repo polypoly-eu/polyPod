@@ -1,6 +1,6 @@
 import Foundation
 
-public enum FeatureCategoryId: String {
+public enum FeatureCategoryId: String, Encodable {
     case yourData
     case knowHow
     case tools

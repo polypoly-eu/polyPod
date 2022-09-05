@@ -47,7 +47,7 @@ final class SettingsViewModel: ObservableObject {
     func load() {
         self.userSessionTimeoutOption = Core
             .instance
-            .getUserSessionTimeoutOption()
+            .exec(request: .getUserSessionTimeoutOption)
             .inspectError {
                 Log.error("Failed to load user session timeout option, \($0.localizedDescription)")
             }
@@ -55,16 +55,16 @@ final class SettingsViewModel: ObservableObject {
         
         self.userSessionTimeoutOptions = Core
             .instance
-            .getUserSessionTimeoutOptionsConfig()
+            .exec(request: .getUserSessionTimeoutOptionsConfig)
             .inspectError {
                 Log.error("Failed to load user session timeout options config, \($0.localizedDescription)")
             }
             .unwrapOr([])
         
         $userSessionTimeoutOption.dropFirst().sink { option in
-            _ = Core
+            let result: Result<Void, Error> = Core
                 .instance
-                .setUserSessionTimeout(option: option)
+                .exec(request: .setUserSessionTimeout(args: option))
                 .inspectError {
                     Log.error("Failed to set user session timeout, \($0.localizedDescription)")
                 }

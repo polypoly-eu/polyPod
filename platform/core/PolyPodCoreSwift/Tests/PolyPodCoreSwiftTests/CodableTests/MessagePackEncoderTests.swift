@@ -233,9 +233,13 @@ class MessagePackEncoderTests: XCTestCase {
         case optionalArguments(s: String?, i: Int?, bin: Data?, date: Date?)
     }
     
+    enum Example: Codable {
+        case sample
+    }
+    
     func testEnumSimple() throws {
-        let value: TestEnum = TestEnum.simple
-        XCTAssertEqual(try MessagePackEncoder().encode(value), .map([.string("simple"): .map([:])]))
+        let value = TestEnum.simple
+        XCTAssertEqual(try MessagePackEncoder().encode(value), .string("simple"))
     }
     
     func testOptionalEnumSimple() throws {

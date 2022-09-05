@@ -1,6 +1,7 @@
 import PolyPodCore
 import Foundation
 import MessagePack
+import UIKit
 
 func unpackBytes(bytes: CByteBuffer) -> Result<MessagePackValue, CoreFailure> {
     defer {
@@ -35,9 +36,11 @@ func handle(platformRequest: PlatformRequest) -> PlatformResponse {
     }
 }
 
-func packPlatformResponse(response: Result<PlatformResponse, CoreFailure>) -> Data {
-    let response = try! MessagePackEncoder().encode(response)
-    return MessagePack.pack(response)
+extension Encodable {
+    func pack() -> Data {
+        let encoded = try! MessagePackEncoder().encode(self)
+        return MessagePack.pack(encoded)
+    }
 }
 
 extension Data {
