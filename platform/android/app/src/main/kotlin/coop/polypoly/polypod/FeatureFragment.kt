@@ -87,6 +87,7 @@ open class FeatureFragment : Fragment() {
 
     private lateinit var feature: Feature
     private lateinit var foregroundResources: ForegroundResources
+
     // Public for test purposes
     lateinit var featureContainer: FeatureContainer
     private val args: FeatureFragmentArgs by navArgs()
@@ -150,10 +151,11 @@ open class FeatureFragment : Fragment() {
                 foregroundResources.icons.getValue(actionButton.action)
             )
             buttonView.setOnClickListener {
-                if (actionButton == ActionButton.CLOSE)
+                if (actionButton == ActionButton.CLOSE) {
                     navigateBack()
-                else
+                } else {
                     featureContainer.triggerNavAction(actionButton.action.id)
+                }
             }
         }
     }
@@ -195,8 +197,9 @@ open class FeatureFragment : Fragment() {
     }
 
     private fun navigateBack() {
-        if (!featureContainer.triggerNavAction("back"))
+        if (!featureContainer.triggerNavAction("back")) {
             close()
+        }
     }
 
     private fun close() {
@@ -226,8 +229,9 @@ open class FeatureFragment : Fragment() {
     }
 
     private suspend fun pickFile(type: String?): ExternalFile? {
-        if (pickFileResult?.isActive == true)
+        if (pickFileResult?.isActive == true) {
             return null
+        }
         pickFileResult = CompletableDeferred()
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
@@ -242,8 +246,8 @@ open class FeatureFragment : Fragment() {
             }
         }
         startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
-        var url: String = ""
-        var name: String = ""
+        var url = ""
+        var name = ""
         var size: Long = 0
         (pickFileResult?.await())?.let {
             it.let { returnUri ->
@@ -260,8 +264,9 @@ open class FeatureFragment : Fragment() {
                 }
             }
         }
-        return if (size > 0)
-            ExternalFile(url = url, name = name, size = size) else null
+        return if (size > 0) {
+            ExternalFile(url = url, name = name, size = size)
+        } else null
     }
 
     override fun onActivityResult(
@@ -270,8 +275,9 @@ open class FeatureFragment : Fragment() {
         data: Intent?
     ) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_FILE_REQUEST_CODE)
+        if (requestCode == PICK_FILE_REQUEST_CODE) {
             handlePickFileResult(resultCode, data)
+        }
     }
 
     private fun handlePickFileResult(resultCode: Int, data: Intent?) {
