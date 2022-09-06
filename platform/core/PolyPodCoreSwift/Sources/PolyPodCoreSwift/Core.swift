@@ -39,6 +39,8 @@ public enum CoreRequest: Encodable {
     case setUserSessionTimeout(args: UserSessionTimeoutOption)
     case getUserSessionTimeoutOption
     case getUserSessionTimeoutOptionsConfig
+    case executeRdfQuery(args: String)
+    case executeRdfUpdate(args: String)
 }
 
 /// Swift wrapper around the Rust Core.
@@ -79,18 +81,6 @@ public final class Core {
     
     public func exec(request: CoreRequest) -> Result<Void, Error> {
         handleCoreResponse(execute_request(request.pack().toByteBuffer), { _ in })
-    }
-
-    public func executeRdfQuery(_ query: String) -> Result<MessagePackValue, Error> {
-        fatalError("RDF disabled. Enable the code below after building core with RDF")
-//        let query = NSString(string: query).utf8String!
-//        return handleCoreResponse(exec_rdf_query(query), { $0 })
-    }
-
-    public func executeRdfUpdate(_ update: String) -> Result<MessagePackValue, Error> {
-        fatalError("RDF disabled. Enable the code below after building core with RDF")
-//        let update = NSString(string: update).utf8String!
-//        return handleCoreResponse(exec_rdf_update(update), { $0 })
     }
 
     // MARK: - Internal API

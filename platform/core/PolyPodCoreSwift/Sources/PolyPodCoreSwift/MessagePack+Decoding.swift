@@ -74,6 +74,12 @@ public protocol MessagePackDecodable {
     init(from value: MessagePackValue) throws
 }
 
+extension MessagePackValue: MessagePackDecodable {
+    public init(from value: MessagePackValue) throws {
+        self = value
+    }
+}
+
 extension UserSessionTimeoutOption: MessagePackDecodable {
     public init(from value: MessagePackValue) throws {
         guard let option = UserSessionTimeoutOption(rawValue: try value.getString()) else {

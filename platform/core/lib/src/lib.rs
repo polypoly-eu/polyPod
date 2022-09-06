@@ -141,6 +141,10 @@ pub mod core {
         },
         GetUserSessionTimeoutOption,
         GetUserSessionTimeoutOptionsConfig,
+        #[cfg(feature = "poly_rdf")]
+        ExecuteRdfQuery { args: String },
+        #[cfg(feature = "poly_rdf")]
+        ExecuteRdfUpdate { args: String },
     }
 
     pub fn exec_request(request: CoreRequest) -> MessagePackBytes {
@@ -158,27 +162,16 @@ pub mod core {
             CoreRequest::GetUserSessionTimeoutOption => instance.get_user_session_timeout_option(),
             CoreRequest::GetUserSessionTimeoutOptionsConfig => {
                 Core::get_user_session_timeout_options_config()
-            }
+            },
+            #[cfg(feature = "poly_rdf")]
+            CoreRequest::ExecuteRdfQuery { args } => instance.exec_rdf_query(args),
+            #[cfg(feature = "poly_rdf")]
+            CoreRequest::ExecuteRdfUpdate { args } => instance.exec_rdf_update(args),
         }
     }
 
     // RDF
 
-    #[cfg(feature = "poly_rdf")]
-    pub fn exec_rdf_query(query: SPARQLQuery) -> Result<QueryResults, CoreFailure> {
-        get_instance()?
-            .rdf_store
-            .query(query)
-            .map_err(|failure| failure.to_core_failure())
-    }
-
-    #[cfg(feature = "poly_rdf")]
-    pub fn exec_rdf_update(update: SPARQLUpdate) -> Result<(), CoreFailure> {
-        get_instance()?
-            .rdf_store
-            .update(update)
-            .map_err(|failure| failure.to_core_failure())
-    }
 
     impl Core<'_> {
         fn load_feature_categories(
@@ -235,6 +228,24 @@ pub mod core {
             // The current contract between platform and core requires that core responds with a Result type.
             // Embeed in Result type, until further clarifications.
             message_pack_serialize(Ok::<_, CoreFailure>(TimeoutOption::all_option_timeouts()))
+        }
+
+        #[cfg(feature = "poly_rdf")]
+        pub fn exec_rdf_query(&self, query: SPARQLQuery) -> MessagePackBytes {
+            message_pack_serialize(
+                self.rdf_store
+                    .query(query)
+                    .map_err(|failure| failure.to_core_failure())
+            )
+        }
+
+        #[cfg(feature = "poly_rdf")]
+        pub fn exec_rdf_update(&self, update: SPARQLUpdate) -> MessagePackBytes {
+            message_pack_serialize(
+                self.rdf_store
+                    .update(update)
+                    .map_err(|failure| failure.to_core_failure())
+            ) 
         }
     }
 }

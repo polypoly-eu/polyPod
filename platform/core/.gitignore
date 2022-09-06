@@ -1,3 +1,2 @@
 target/
-!export/ios/headers/
-export/
+/export/
