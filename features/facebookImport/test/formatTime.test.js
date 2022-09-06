@@ -27,31 +27,31 @@ describe("Testing time formatting", () => {
     //seconds in android/ios
     const dateTime = date.getTime() / 1000;
 
-    it("correctly formats to british english format correctly", () => {
+    it("correctly converts to British English format", () => {
         expect(formatTime(date, englishFormat, longMonthsOption)).toBe(
             "26 October 2021"
         );
     });
 
-    it("correctly formats to german format correctly", () => {
+    it("correctly converts to German format", () => {
         expect(formatTime(date, germanFormat, longMonthsOption)).toBe(
             "26. Oktober 2021"
         );
     });
 
-    it("correctly formats to weekday format correctly", () => {
+    it("correctly converts to weekday format", () => {
         expect(formatTime(date, englishFormat, weekdayOption)).toBe(
             "Tuesday, 26 October 2021"
         );
     });
 
-    it("correctly formats to short weekday format correctly", () => {
+    it("correctly converts to short weekday format", () => {
         expect(formatTime(date, englishFormat, weekdayShortOption)).toBe(
             "Tue, 26 October 2021"
         );
     });
 
-    it("correctly formats to numeric date correctly", () => {
+    it("correctly formats to numeric date", () => {
         expect(formatTime(date, englishFormat, longMonthsOption)).toBe(
             "26 October 2021"
         );
