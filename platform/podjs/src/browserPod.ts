@@ -542,6 +542,7 @@ interface EndpointInfo {
 
 interface EndpointJSON {
     polyPediaReport: EndpointInfo;
+    polyApiErrorReport: EndpointInfo;
     demoTest: EndpointInfo;
 }
 

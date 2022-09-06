@@ -2,7 +2,7 @@
 // port1 - bootstrap's end of a channel with the Feature
 // port2 - Feature's end of a channel with the bootstrap
 //
-// Pod <-> innerPort <-> outerPort <-> boostrap <-> port1 <-> port2 <-> Feature
+// Pod <-> innerPort <-> outerPort <-> bootstrap <-> port1 <-> port2 <-> Feature
 const { port1, port2 } = new MessageChannel();
 let outerPort;
 

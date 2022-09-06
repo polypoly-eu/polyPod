@@ -144,7 +144,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         // Chrome/18.0.1025.133 Mobile Safari/535.19"""
         val userAgentString = webView.settings.userAgentString
 
-        val regex = """(Chrome)\/(?<major>\d+)[\d\.]""".toRegex()
+        val regex = """(Chrome)/(?<major>\d+)[\d.]""".toRegex()
         val matchResult = regex.find(userAgentString)
         val (_, chromeVersion) = matchResult!!.destructured
 
@@ -165,7 +165,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         endpointId: String?,
         completion: suspend (Boolean) -> String?
     ): String? {
-        var fetchApproval: CompletableDeferred<Boolean?>? =
+        val fetchApproval: CompletableDeferred<Boolean?> =
             CompletableDeferred()
         val featureName = feature?.name ?: throw PodApiError().endpointError()
         val message = context?.getString(
@@ -177,13 +177,13 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         AlertDialog.Builder(context)
             .setMessage(message)
             .setPositiveButton(confirmLabel) { _, _ ->
-                fetchApproval?.complete(true)
+                fetchApproval.complete(true)
             }
             .setNegativeButton(rejectLabel) { _, _ ->
-                fetchApproval?.complete(false)
+                fetchApproval.complete(false)
             }
             .show()
-        (fetchApproval?.await())?.let {
+        (fetchApproval.await())?.let {
             return completion(it)
         }
         throw PodApiError().endpointError()
@@ -417,7 +417,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         @Suppress("unused")
         @JavascriptInterface
         fun copyToClipboard(text: String?) {
-            var clipboard: ClipboardManager =
+            val clipboard: ClipboardManager =
                 context.getSystemService(ClipboardManager::class.java)
             val clip = ClipData.newPlainText("nativeClipboardText", text)
             clipboard.setPrimaryClip(clip)

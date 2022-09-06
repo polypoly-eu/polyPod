@@ -1,6 +1,5 @@
 package coop.polypoly.polypod
 
-import coop.polypoly.polypod.bubblewrap.FetchResponseCodec
 import coop.polypoly.polypod.endpoint.Endpoint
 import coop.polypoly.polypod.info.Info
 import coop.polypoly.polypod.logging.LoggerFactory
@@ -29,8 +28,6 @@ open class PodApi(
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
-
-    private val fetchResponseCodec = FetchResponseCodec()
 
     private fun decodeCall(value: Value): Pair<String, List<Value>> {
         val map = value.asMapValue().keyValueArray

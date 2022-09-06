@@ -6,7 +6,7 @@ import "./styles.css";
 
 const App = () => {
     return (
-        <div>
+        <div className="feature-container">
             <h1>{i18n.t("common:welcome", { feature: "This feature" })}</h1>
         </div>
     );

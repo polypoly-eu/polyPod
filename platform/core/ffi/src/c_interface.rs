@@ -16,7 +16,7 @@ use std::os::raw::c_char;
 ///
 /// Bootstrap core with the given configuration:
 /// - language_code: User's locale language code.
-/// Returns a flatbuffer byte array with core_bootstrap_response.
+/// Returns a MessagePack byte array with core_bootstrap_response.
 #[no_mangle]
 pub unsafe extern "C" fn core_bootstrap(
     language_code: *const c_char,
