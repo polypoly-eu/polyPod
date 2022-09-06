@@ -251,8 +251,19 @@ final class KeyedContainer<Key>: KeyedEncodingContainerProtocol where Key: Codin
 
 extension KeyedContainer: MessagePackEncodingContainer {
     var value: MessagePackValue {
-        let map = self.storage.transform(keyTransform: { MessagePackValue.string($0) },
-                                         valueTransform: { $0.value })
+        // Check for special case when an enum case without associated value is encoded.
+        // Swift Codable, instead of encoding it with a SingleValueContainer, will use KeyedContainer
+        // even though there is only the key to be encoded, without any value.
+        // For this case, encode the enum case name as a `string`, not as a `map`
+        if storage.count == 1 {
+            let (key, container) = storage.first!
+            if container.value.count == 0 {
+                return .string(key)
+            }
+        }
+
+        let map = storage.transform(keyTransform: { MessagePackValue.string($0) },
+                                    valueTransform: { $0.value })
         return .map(map)
     }
 }
@@ -305,5 +316,4 @@ final class _MessagePackEncoder: Encoder {
         self.container = container
         return container
     }
-    
 }

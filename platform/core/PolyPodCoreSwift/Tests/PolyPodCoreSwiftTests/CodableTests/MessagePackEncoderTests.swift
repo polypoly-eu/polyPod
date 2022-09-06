@@ -235,12 +235,12 @@ class MessagePackEncoderTests: XCTestCase {
     
     func testEnumSimple() throws {
         let value: TestEnum = TestEnum.simple
-        XCTAssertEqual(try MessagePackEncoder().encode(value), .map([.string("simple"): .map([:])]))
+        XCTAssertEqual(try MessagePackEncoder().encode(value), .string("simple"))
     }
     
     func testOptionalEnumSimple() throws {
         let value: TestEnum? = TestEnum.simple
-        XCTAssertEqual(try MessagePackEncoder().encode(value), .map([.string("simple"): .map([:])]))
+        XCTAssertEqual(try MessagePackEncoder().encode(value), .string("simple"))
     }
     
     func testEnumNamedArguments() throws {
