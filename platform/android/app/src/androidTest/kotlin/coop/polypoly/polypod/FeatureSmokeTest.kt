@@ -32,8 +32,22 @@ class FeatureSmokeTest {
         return composeTestRule.onNode(hasTestTag("HomeScreen"))
     }
 
+    private fun pressCloseUntilHomeScreenIsDisplayed() {
+        var retryCount = 0
+        while (!nodeIsDisplayed(homeScreen()) && retryCount < 10) {
+            retryCount += 1
+            onView(withId(R.id.close_button)).perform(click())
+            Thread.sleep(500)
+        }
+    }
+
     @Test
     fun openFeaturesAndCheckForErrorDialog() {
+        Thread.sleep(1000)
+
+        // Onboarding might show up. Close it.
+        pressCloseUntilHomeScreenIsDisplayed()
+
         val nodeInteractionCollection = composeTestRule.onAllNodesWithTag(
             "Tile"
         )
@@ -44,16 +58,12 @@ class FeatureSmokeTest {
                 val nodeInter = this[i]
                 nodeInter.performScrollTo()
                 nodeInter.performClick()
-                Thread.sleep(5000)
+                Thread.sleep(1000)
                 onView(withId(android.R.id.message)).check(
                     doesNotExist()
                 )
-                while (!nodeIsDisplayed(homeScreen())) {
-                    onView(withId(R.id.close_button)).perform(click())
-                    Thread.sleep(500)
-                }
+                pressCloseUntilHomeScreenIsDisplayed()
             }
         }
-        Thread.sleep(1000)
     }
 }
