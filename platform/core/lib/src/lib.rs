@@ -3,10 +3,21 @@ pub mod core {
     pub use feature_categories;
     use io::{file_system::DefaultFileSystem, key_value_store::DefaultKeyValueStore};
     use preferences::Preferences;
+
+    #[cfg(feature = "poly_rdf")]
+    use poly_rdf::rdf::{RDFStore, SPARQLQuery, SPARQLUpdate};
+    #[cfg(feature = "poly_rdf")]
+    pub use poly_rdf::{
+        rdf::{QueryResults, QueryResultsFormat},
+        rdf_failure::RdfFailure,
+    };
+
     use user_session::{TimeoutOption, UserSession, UserSessionTimeout};
 
     use once_cell::sync::OnceCell;
     use serde::{Deserialize, Serialize};
+    #[allow(unused_imports)]
+    use std::path::PathBuf;
     use std::sync::{Arc, Mutex};
     use std::{sync::MutexGuard, time::Instant};
 
@@ -20,13 +31,15 @@ pub mod core {
     static CORE: OnceCell<Mutex<Core>> = OnceCell::new();
 
     #[derive(Debug, Clone, Serialize)]
+    #[serde(rename_all = "camelCase")]
     pub enum PlatformRequest {
         Example,
     }
 
     #[derive(Debug, Clone, Serialize, Deserialize)]
+    #[serde(rename_all = "camelCase")]
     pub enum PlatformResponse {
-        Example(String),
+        Example { name: String },
     }
 
     pub trait PlatformHookRequest: Sync + Send {
@@ -37,6 +50,8 @@ pub mod core {
     }
 
     const PREFERENCES_DB: &str = "preferences_db";
+    #[cfg(feature = "poly_rdf")]
+    const RDF_DB: &str = "rdf_db";
 
     // The Core would act as a composition root, containing any global configuration
     // to be shared between components, as well managing components lifetime.
@@ -47,6 +62,8 @@ pub mod core {
         user_session: Mutex<UserSession<'a>>,
         #[allow(dead_code)]
         platform_hook: Box<dyn PlatformHookRequest>,
+        #[cfg(feature = "poly_rdf")]
+        rdf_store: RDFStore,
     }
 
     #[derive(Deserialize)]
@@ -72,17 +89,24 @@ pub mod core {
         if CORE.get().is_some() {
             return Err(CoreFailure::core_already_bootstrapped());
         }
+        #[allow(clippy::redundant_clone)] // allowed until RDF is fully enabled
         let preferences = Arc::new(Preferences {
-            store: Box::new(DefaultKeyValueStore::new(fs_root + "/" + PREFERENCES_DB)),
+            store: Box::new(DefaultKeyValueStore::new(
+                fs_root.clone() + "/" + PREFERENCES_DB,
+            )),
         });
 
         let builder = Box::new(Instant::now);
         let user_session = Mutex::from(UserSession::new(builder, preferences.clone()));
+
         let core = Core {
             language_code,
             preferences,
             user_session,
             platform_hook,
+            #[cfg(feature = "poly_rdf")]
+            rdf_store: RDFStore::new(PathBuf::from(fs_root.clone() + "/" + RDF_DB))
+                .map_err(|failure| failure.to_core_failure())?,
         };
 
         let _ = CORE.set(Mutex::from(core));
@@ -94,6 +118,24 @@ pub mod core {
         }
 
         Ok(())
+    }
+
+    // RDF
+
+    #[cfg(feature = "poly_rdf")]
+    pub fn exec_rdf_query(query: SPARQLQuery) -> Result<QueryResults, CoreFailure> {
+        get_instance()?
+            .rdf_store
+            .query(query)
+            .map_err(|failure| failure.to_core_failure())
+    }
+
+    #[cfg(feature = "poly_rdf")]
+    pub fn exec_rdf_update(update: SPARQLUpdate) -> Result<(), CoreFailure> {
+        get_instance()?
+            .rdf_store
+            .update(update)
+            .map_err(|failure| failure.to_core_failure())
     }
 
     // Features

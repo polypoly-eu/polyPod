@@ -3,6 +3,7 @@
 build_type := $(if $(filter $(MODE), release),release,debug)
 cargo_build_flag := $(if $(filter $(build_type), release), --release)
 target := target/$(build_type)
+cargo_features := $(if $(FEATURES),--features $(FEATURES),)
 
 # iOS export
 export_dir_ios := export/ios
@@ -28,6 +29,7 @@ ifeq ($(OS),Windows_NT)
 else
 	os_echo := echo
 	ifeq ($(shell uname -s),Darwin)
+		ndk_download_url = $(google_repo)/$(ndk_lib)-darwin.zip
 		macos := true
 	endif
 endif
@@ -39,7 +41,7 @@ $(target): $(wildcard src/*.rs)
 ifeq (,$(shell which rustup))
 	$(error "Rust not installed, check https://www.rust-lang.org/tools/install to install rust on your system")
 endif
-	cargo build $(cargo_build_flag)
+	cargo build $(cargo_build_flag) $(cargo_features)
 
 # ============  Swift framework ============ #
 
@@ -82,7 +84,8 @@ define build_for_architecture
 	rustup target add $(1)
 	cargo build -p ffi \
 		$(cargo_build_flag) \
-		--lib --target $(1)
+		--lib --target $(1) \
+		$(cargo_features)
 endef
 
 # ============ Android lib ============ #
@@ -92,7 +95,7 @@ $(android_binaries):
 	rustup target add $(android_triples)
 
 	$(foreach triple, $(android_triples), \
-		cargo ndk --platform $(android_version) --target $(triple) build $(cargo_build_flag) -p ffi; \
+		cargo ndk --platform $(android_version) --target $(triple) build $(cargo_build_flag) -p ffi $(cargo_features); \
 	)
 
 $(android_core_libraries): $(android_binaries)
@@ -102,6 +105,8 @@ define copy_android_arch
    mkdir -p $(jni_libs_copy_path)/$2
    cp target/$1/$(build_type)/libpolypod_core.so \
 	  $(jni_libs_copy_path)/$2/libpolypod_core.so;
+   cp ${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/*/sysroot/usr/lib/$1/libc++_shared.so \
+	   $(jni_libs_copy_path)/$2/libc++_shared.so;
 endef
 
 # ============ Main targets ============ #
