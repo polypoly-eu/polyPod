@@ -4,13 +4,6 @@ import MessagePack
 
 typealias CoreResponseObject = [MessagePackValue: MessagePackValue]
 
-enum PlatformRequest: String {
-    case example
-}
-
-enum PlatformResponse: Codable {
-    case example(name: String)
-}
 
 public struct LoadFeatureArguments: Encodable {
     public init(featuresDir: String, forceShow: [FeatureCategoryId]) {
@@ -57,11 +50,21 @@ public final class Core {
         let bridge = BridgeToPlatform(free_bytes: {
             $0?.deallocate()
         }, perform_request: { in_bytes in
-            return unpackBytes(bytes: in_bytes)
-                .flatMap(mapToPlatformRequest(request:))
-                .map(handle(platformRequest:))
-                .pack()
-                .toByteBuffer
+            do {
+                let request = try unpackBytes(bytes: in_bytes)
+                    .flatMap(PlatformRequest.from)
+                    .get()
+                
+                return Core
+                    .handle(request: request)
+                    .pack()
+                    .toByteBuffer
+            } catch {
+                return Result<String, CoreFailure>
+                    .failure(error as! CoreFailure)
+                    .pack()
+                    .toByteBuffer
+            }
         })
         
         return handleCoreResponse(

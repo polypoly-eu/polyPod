@@ -5,6 +5,34 @@ import org.msgpack.value.Value
 import org.msgpack.value.ValueFactory
 import java.io.ByteArrayOutputStream
 
+fun Value.getStringValue(): String? {
+    if (isNilValue) {
+        return null
+    }
+
+    return asStringValue().asString()
+}
+
+fun Value.getIntValue(): Int? {
+    if (isNilValue) {
+        return null
+    }
+
+    return asIntegerValue().asInt()
+}
+
+fun Map<Value, Value>.get(key: String): Value? {
+    return this[ValueFactory.newString(key)]
+}
+
+fun Map<Value, Value>.getValue(key: String): Value {
+    return getValue(ValueFactory.newString(key))
+}
+
+fun Boolean.Companion.fromValue(value: Value): Boolean {
+    return value.asBooleanValue().boolean
+}
+
 fun Value.pack(): ByteArray {
     val output = ByteArrayOutputStream()
     val packer = MessagePack.newDefaultPacker(output)

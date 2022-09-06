@@ -23,8 +23,13 @@ class MainFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.settings, rootKey)
         findPreference<Preference>("version")?.summary = RuntimeInfo.VERSION
 
-        val timeoutOptionsConfig = Core.executeRequest(CoreRequest.GetUserSessionTimeoutOptionsConfig()) { it.asArrayValue().map(UserSessionTimeoutOptionConfig::from)}
-        val selectedOption = Core.executeRequest(CoreRequest.GetUserSessionTimeoutOption(), UserSessionTimeoutOption::from)
+        val timeoutOptionsConfig = Core.executeRequest(
+            CoreRequest.GetUserSessionTimeoutOptionsConfig()
+        ) { it.asArrayValue().map(UserSessionTimeoutOptionConfig::from) }
+        val selectedOption = Core.executeRequest(
+            CoreRequest.GetUserSessionTimeoutOption(),
+            UserSessionTimeoutOption::from
+        )
         val timeoutDurationsMap: LinkedHashMap<String, String> = linkedMapOf()
         timeoutOptionsConfig.forEach {
             val duration = if (it.duration != null) {

@@ -8,7 +8,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
-import coop.polypoly.core.*
+import coop.polypoly.core.Core
+import coop.polypoly.core.CoreExceptionCode
+import coop.polypoly.core.CoreFailure
+import coop.polypoly.core.BootstrapArgs
+import coop.polypoly.core.CoreRequest
+import coop.polypoly.core.fromValue
 import coop.polypoly.polypod.core.UpdateNotification
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory

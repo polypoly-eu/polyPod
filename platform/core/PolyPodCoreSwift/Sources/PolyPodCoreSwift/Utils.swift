@@ -29,13 +29,6 @@ func mapToPlatformRequest(request: MessagePackValue) -> Result<PlatformRequest, 
     return .success(result)
 }
 
-func handle(platformRequest: PlatformRequest) -> PlatformResponse {
-    switch platformRequest {
-    case .example:
-        return PlatformResponse.example(name: "Test")
-    }
-}
-
 extension Encodable {
     func pack() -> Data {
         let encoded = try! MessagePackEncoder.encode(self)
@@ -63,7 +56,7 @@ extension Dictionary {
     }
 }
 
-extension Result: Encodable where Success : Encodable, Failure : Encodable {
+extension Result: Encodable where Success: Encodable, Failure: Encodable {
     
     private enum CodingKeys: String, CodingKey {
         case success = "Ok"

@@ -1,5 +1,3 @@
-#[cfg(feature = "poly_rdf")]
-use crate::rdf_result_conversion::{bytes_to_string, to_json_bytes};
 use common::serialization::{message_pack_deserialize, message_pack_serialize};
 use core_failure::CoreFailure;
 use jni::{
@@ -7,7 +5,7 @@ use jni::{
     sys::jbyteArray,
     JNIEnv, JavaVM,
 };
-use lib::core::{self, PlatformRequest, PlatformResponse};
+use lib::core::{self, PlatformRequest};
 
 use log::error;
 
@@ -27,7 +25,9 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     };
 
     env.byte_array_from_slice(&message_pack_serialize(
-        get_bytes(env, args).and_then(message_pack_deserialize).and_then(|args| core::bootstrap(args, Box::new(bridge)))
+        get_bytes(env, args)
+            .and_then(message_pack_deserialize)
+            .and_then(|args| core::bootstrap(args, Box::new(bridge))),
     ))
     .unwrap()
 }
@@ -44,9 +44,10 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_executeRequest(
     env.byte_array_from_slice(
         &(match get_bytes(env, request).and_then(message_pack_deserialize) {
             Ok(request) => core::exec_request(request),
-            Err(err) => message_pack_serialize(Err::<(), _>(err)) 
-        })
-    ).unwrap()
+            Err(err) => message_pack_serialize(Err::<(), _>(err)),
+        }),
+    )
+    .unwrap()
 }
 
 fn get_bytes(env: JNIEnv, byte_array: jbyteArray) -> Result<Vec<u8>, CoreFailure> {
@@ -68,11 +69,8 @@ struct BridgeToPlatform {
 }
 
 impl core::PlatformHookRequest for BridgeToPlatform {
-    fn perform_request(&self, request: PlatformRequest) -> Result<PlatformResponse, CoreFailure> {
-        let result: Result<PlatformResponse, CoreFailure> = match self
-            .java_vm
-            .attach_current_thread()
-        {
+    fn perform_request(&self, request: PlatformRequest) -> Result<Vec<u8>, CoreFailure> {
+        let result: Result<Vec<u8>, CoreFailure> = match self.java_vm.attach_current_thread() {
             Ok(env) => {
                 let request_byte_array = env
                     .byte_array_from_slice(&message_pack_serialize(request))
@@ -92,11 +90,8 @@ impl core::PlatformHookRequest for BridgeToPlatform {
                     .map_err(|err| CoreFailure::failed_to_extract_jobject(err.to_string()))?
                     .into_inner();
 
-                let response_bytes: Vec<u8> = env
-                    .convert_byte_array(response_byte_array)
-                    .map_err(|err| CoreFailure::failed_to_extract_bytes(err.to_string()))?;
-
-                message_pack_deserialize(response_bytes)?
+                env.convert_byte_array(response_byte_array)
+                    .map_err(|err| CoreFailure::failed_to_extract_bytes(err.to_string()))
             }
             Err(e) => {
                 error!("Rust:java_interface => attach_current_thread:Err => Couldn't get env::");
@@ -115,33 +110,4 @@ impl core::PlatformHookRequest for BridgeToPlatform {
             return result;
         }
     }
-}
-
-#[no_mangle]
-#[cfg(feature = "poly_rdf")]
-pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfQuery(
-    env: JNIEnv,
-    _: JClass,
-    query: JString,
-) -> jbyteArray {
-    env.byte_array_from_slice(&message_pack_serialize(
-        read_jni_string(&env, query)
-            .and_then(core::exec_rdf_query)
-            .and_then(to_json_bytes)
-            .and_then(bytes_to_string),
-    ))
-    .unwrap()
-}
-
-#[no_mangle]
-#[cfg(feature = "poly_rdf")]
-pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfUpdate(
-    env: JNIEnv,
-    _: JClass,
-    query: JString,
-) -> jbyteArray {
-    env.byte_array_from_slice(&message_pack_serialize(
-        read_jni_string(&env, query).and_then(core::exec_rdf_update),
-    ))
-    .unwrap()
 }
