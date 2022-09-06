@@ -1,6 +1,6 @@
 use crate::{
     core::{Core, CORE},
-    platform_request::PlatformHookRequest,
+    platform_request::PlatformCallback,
 };
 use core_failure::CoreFailure;
 use io::key_value_store::DefaultKeyValueStore;
@@ -35,7 +35,7 @@ pub struct BoostrapArgs {
 
 pub fn bootstrap(
     args: BoostrapArgs,
-    platform_hook: Box<dyn PlatformHookRequest>,
+    platform_callback: Box<dyn PlatformCallback>,
 ) -> Result<(), CoreFailure> {
     if CORE.get().is_some() {
         return Err(CoreFailure::core_already_bootstrapped());
@@ -54,7 +54,7 @@ pub fn bootstrap(
         language_code: args.language_code,
         preferences,
         user_session,
-        platform_hook,
+        platform_callback,
         #[cfg(feature = "poly_rdf")]
         rdf_store: RDFStore::new(PathBuf::from(args.fs_root.clone() + "/" + RDF_DB))
             .map_err(|failure| failure.to_core_failure())?,

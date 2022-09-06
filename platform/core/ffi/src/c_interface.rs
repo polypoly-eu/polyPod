@@ -2,7 +2,9 @@ use common::serialization::{message_pack_deserialize, message_pack_serialize};
 use core_failure::CoreFailure;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
-use lib::core::{self, PlatformRequest};
+use lib::platform_request::{PlatformRequest, PlatformCallback};
+use lib::bootstrap::bootstrap;
+use lib::core_request::exec_request;
 
 #[repr(C)]
 pub struct BridgeToPlatform {
@@ -10,11 +12,11 @@ pub struct BridgeToPlatform {
     perform_request: extern "C" fn(request: CByteBuffer) -> CByteBuffer,
 }
 
-impl core::PlatformHookRequest for BridgeToPlatform {
-    fn perform_request(&self, request: PlatformRequest) -> Vec<u8> {
+impl PlatformCallback for BridgeToPlatform {
+    fn perform_request(&self, request: PlatformRequest) -> Result<Vec<u8>, CoreFailure> {
         let request_byte_buffer = unsafe { create_byte_buffer(message_pack_serialize(request)) };
         let response_byte_buffer = (self.perform_request)(request_byte_buffer);
-        let bytes = unsafe { byte_buffer_to_bytes(&response_byte_buffer)? };
+        let bytes = unsafe { byte_buffer_to_bytes(&response_byte_buffer) };
         (self.free_bytes)(response_byte_buffer.data);
         return bytes;
     }
@@ -28,7 +30,7 @@ pub unsafe extern "C" fn core_bootstrap(
     create_byte_buffer(message_pack_serialize(
         byte_buffer_to_bytes(&args)
             .and_then(message_pack_deserialize)
-            .and_then(|args| core::bootstrap(args, Box::new(bridge))),
+            .and_then(|args| bootstrap(args, Box::new(bridge))),
     ))
 }
 
@@ -36,7 +38,7 @@ pub unsafe extern "C" fn core_bootstrap(
 pub unsafe extern "C" fn execute_request(core_request: CByteBuffer) -> CByteBuffer {
     create_byte_buffer(
         match byte_buffer_to_bytes(&core_request).and_then(message_pack_deserialize) {
-            Ok(request) => core::exec_request(request),
+            Ok(request) => exec_request(request),
             Err(err) => message_pack_serialize(Err::<(), _>(err)),
         },
     )

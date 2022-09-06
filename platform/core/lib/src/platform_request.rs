@@ -4,8 +4,8 @@ use serde::{de::DeserializeOwned, Serialize};
 
 use crate::core::Core;
 
-pub trait PlatformHookRequest: Sync + Send {
-    fn perform_request(&self, request: PlatformRequest) -> Vec<u8>;
+pub trait PlatformCallback: Sync + Send {
+    fn perform_request(&self, request: PlatformRequest) -> Result<Vec<u8>, CoreFailure>;
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -19,6 +19,6 @@ impl Core<'_> {
         &self,
         request: PlatformRequest,
     ) -> Result<Response, CoreFailure> {
-        message_pack_deserialize(self.platform_hook.perform_request(request))
+        message_pack_deserialize(self.platform_callback.perform_request(request)?)
     }
 }

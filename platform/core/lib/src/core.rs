@@ -1,4 +1,4 @@
-use crate::platform_request::PlatformHookRequest;
+use crate::platform_request::PlatformCallback;
 use core_failure::CoreFailure;
 use once_cell::sync::OnceCell;
 #[cfg(feature = "poly_rdf")]
@@ -19,7 +19,7 @@ pub struct Core<'a> {
     pub preferences: Arc<Preferences>,
     pub user_session: Mutex<UserSession<'a>>,
     #[allow(dead_code)]
-    pub platform_hook: Box<dyn PlatformHookRequest>,
+    pub platform_callback: Box<dyn PlatformCallback>,
     #[cfg(feature = "poly_rdf")]
     pub rdf_store: RDFStore,
 }

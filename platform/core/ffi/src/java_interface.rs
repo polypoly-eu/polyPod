@@ -5,7 +5,9 @@ use jni::{
     sys::jbyteArray,
     JNIEnv, JavaVM,
 };
-use lib::core::{self, PlatformRequest};
+use lib::platform_request::{PlatformRequest, PlatformCallback};
+use lib::bootstrap::bootstrap;
+use lib::core_request::exec_request;
 
 use log::error;
 
@@ -27,7 +29,7 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     env.byte_array_from_slice(&message_pack_serialize(
         get_bytes(env, args)
             .and_then(message_pack_deserialize)
-            .and_then(|args| core::bootstrap(args, Box::new(bridge))),
+            .and_then(|args| bootstrap(args, Box::new(bridge))),
     ))
     .unwrap()
 }
@@ -43,7 +45,7 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_executeRequest(
 ) -> jbyteArray {
     env.byte_array_from_slice(
         &(match get_bytes(env, request).and_then(message_pack_deserialize) {
-            Ok(request) => core::exec_request(request),
+            Ok(request) => exec_request(request),
             Err(err) => message_pack_serialize(Err::<(), _>(err)),
         }),
     )
@@ -68,7 +70,7 @@ struct BridgeToPlatform {
     java_vm: JavaVM,
 }
 
-impl core::PlatformHookRequest for BridgeToPlatform {
+impl PlatformCallback for BridgeToPlatform {
     fn perform_request(&self, request: PlatformRequest) -> Result<Vec<u8>, CoreFailure> {
         let result: Result<Vec<u8>, CoreFailure> = match self.java_vm.attach_current_thread() {
             Ok(env) => {
