@@ -21,15 +21,14 @@ async function readJSONFile(relativeFilePath, zipFile) {
     return readFullPathJSONFile(entry);
 }
 
-function decode(s) {
-    let d = new TextDecoder();
-    let a = s.split("").map((r) => r.charCodeAt());
-    return d.decode(new Uint8Array(a));
+function decode(str) {
+    const reArrayed = str.split("").map((r) => r.charCodeAt());
+    return new TextDecoder().decode(new Uint8Array(reArrayed));
 }
 
 async function readFullPathJSONFile(entry) {
     const rawContent = await entry.getContent();
-    const fileContent = new TextDecoder().decode(rawContent);
+    const fileContent = new TextDecoder("utf-8").decode(rawContent);
     if (!fileContent) {
         throw new MissingContentImportException(entry._id);
     }
