@@ -10,7 +10,7 @@ on:
 
 jobs:
     test:
-        name: Test polyPod iOS and Android app
+        name: Test Android app
         runs-on: macOS-latest
         steps:
             - name: Checkout repository
