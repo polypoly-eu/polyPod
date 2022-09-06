@@ -149,26 +149,15 @@ export class Quad implements RDF.Quad {
 }
 
 const prototypes = {
-    subject: [
-        NamedNode.prototype,
-        BlankNode.prototype,
-        Variable.prototype,
-        Quad.prototype,
-    ],
-    predicate: [NamedNode.prototype, Variable.prototype],
+    subject: [NamedNode.prototype, BlankNode.prototype, Quad.prototype],
+    predicate: [NamedNode.prototype],
     object: [
         NamedNode.prototype,
         Literal.prototype,
         BlankNode.prototype,
-        Variable.prototype,
         Quad.prototype,
     ],
-    graph: [
-        DefaultGraph.prototype,
-        NamedNode.prototype,
-        BlankNode.prototype,
-        Variable.prototype,
-    ],
+    graph: [DefaultGraph.prototype, NamedNode.prototype, BlankNode.prototype],
 };
 
 /**

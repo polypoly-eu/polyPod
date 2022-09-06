@@ -103,6 +103,18 @@ public final class Core {
         handleCoreResponse(get_user_session_timeout_options_config(), UserSessionTimeoutOptionConfig.mapUserSessionTimeoutOptionsConfig(_:))
     }
 
+    public func executeRdfQuery(_ query: String) -> Result<MessagePackValue, Error> {
+        fatalError("RDF disabled. Enable the code below after building core with RDF")
+//        let query = NSString(string: query).utf8String!
+//        return handleCoreResponse(exec_rdf_query(query), { $0 })
+    }
+
+    public func executeRdfUpdate(_ update: String) -> Result<MessagePackValue, Error> {
+        fatalError("RDF disabled. Enable the code below after building core with RDF")
+//        let update = NSString(string: update).utf8String!
+//        return handleCoreResponse(exec_rdf_update(update), { $0 })
+    }
+
     // MARK: - Internal API
 
     func handleCoreResponse<T>(
