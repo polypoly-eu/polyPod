@@ -5,11 +5,11 @@ import MessagePack
 typealias CoreResponseObject = [MessagePackValue: MessagePackValue]
 
 enum PlatformRequest: String {
-    case Example
+    case example
 }
 
 enum PlatformResponse: Codable {
-    case Example(name: String)
+    case example(name: String)
 }
 
 /// Swift wrapper around the Rust Core.

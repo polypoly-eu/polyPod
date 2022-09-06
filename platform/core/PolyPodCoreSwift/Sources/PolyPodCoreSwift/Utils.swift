@@ -6,17 +6,16 @@ func unpackBytes(bytes: CByteBuffer) -> Result<MessagePackValue, CoreFailure> {
     defer {
         free_bytes(bytes.data)
     }
-    
-    do {
+    return Result {
         let buffer = UnsafeBufferPointer(
             start: bytes.data,
             count: Int(bytes.length)
         )
         let data = Data(buffer: buffer)
 
-        return .success(try MessagePack.unpackFirst(data))
-    } catch {
-        return .failure(CoreFailure.init(code: .FailedToExtractBytes, message: error.localizedDescription))
+        return try MessagePack.unpackFirst(data)
+    }.mapError { error in
+        CoreFailure.init(code: .FailedToExtractBytes, message: error.localizedDescription)
     }
 }
 
@@ -30,13 +29,13 @@ func mapToPlatformRequest(request: MessagePackValue) -> Result<PlatformRequest, 
 
 func handle(platformRequest: PlatformRequest) -> PlatformResponse {
     switch platformRequest {
-    case .Example:
-        return PlatformResponse.Example(name: "Test")
+    case .example:
+        return PlatformResponse.example(name: "Test")
     }
 }
 
 func packPlatformResponse(response: Result<PlatformResponse, CoreFailure>) -> Data {
-    let response = try! MessagePackEncoder().encode(response)
+    let response = try! MessagePackEncoder.encode(response)
     return MessagePack.pack(response)
 }
 
