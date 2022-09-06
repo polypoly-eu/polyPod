@@ -5,66 +5,84 @@ import org.msgpack.core.MessageUnpacker
 import org.msgpack.value.Value
 import org.msgpack.value.ValueFactory
 
+
+data class BootstrapArgs(
+    val languageCode: String,
+    val fsRoot: String
+) {
+    fun asValue(): Value {
+        return mapOf(
+            "languageCode".asValue() to languageCode.asValue(),
+            "fsRoot".asValue() to fsRoot.asValue()
+        ).asValue()
+    }
+}
+
+data class LoadFeatureCategoriesArguments(
+    val featuresDir: String,
+    val forceShow: List<FeatureCategoryId>
+) {
+    fun asValue(): Value {
+        return mapOf(
+            "featuresDir".asValue() to featuresDir.asValue(),
+            "forceShow".asValue() to
+                forceShow.map { it.toString().asValue() }.asValue()
+        ).asValue()
+    }
+}
+
+sealed class CoreRequest {
+    class LoadFeatureCategories(val args: LoadFeatureCategoriesArguments): CoreRequest()
+    class AppDidBecomeInactive(): CoreRequest()
+    class IsUserSessionExpired(): CoreRequest()
+    class SetUserSessionTimeout(val args: UserSessionTimeoutOption): CoreRequest()
+    class GetUserSessionTimeoutOption(): CoreRequest()
+    class GetUserSessionTimeoutOptionsConfig(): CoreRequest()
+
+    fun asValue(): Value {
+        return when (this) {
+            is CoreRequest.LoadFeatureCategories -> mapOf(
+                "loadFeatureCategories".asValue() to
+                    mapOf("args".asValue() to args.asValue()).asValue()
+            ).asValue()
+            is CoreRequest.AppDidBecomeInactive -> "appDidBecomeInactive".asValue()
+            is CoreRequest.IsUserSessionExpired -> "isUserSessionExpired".asValue()
+            is CoreRequest.SetUserSessionTimeout -> mapOf(
+                "setUserSessionTimeout".asValue() to
+                    mapOf("args".asValue() to args.asValue()).asValue()
+            ).asValue()
+            is CoreRequest.GetUserSessionTimeoutOption -> "getUserSessionTimeoutOption".asValue()
+            is CoreRequest.GetUserSessionTimeoutOptionsConfig -> "getUserSessionTimeoutOptionsConfig".asValue()
+        }
+    }
+}
+
+interface MessagepackDecoder<T> {
+    fun from(value: Value): T
+}
+
 class Core {
     companion object {
-        fun bootstrapCore(languageCode: String, fsRoot: String) {
+        fun bootstrapCore(args: BootstrapArgs) {
             return handleCoreResponse(
                 JniApi.bootstrapCore(
-                    languageCode,
-                    fsRoot,
+                    args.asValue().pack(),
                     JniApi
                 )
             ) {}
         }
 
-        fun loadFeatureCategories(
-            featuresDir: String,
-            forceShow: List<FeatureCategoryId>
-        ): List<FeatureCategory> {
-            val args = mutableMapOf<Value, Value>()
-            args[ValueFactory.newString("features_dir")] =
-                ValueFactory.newString(featuresDir)
-            args[ValueFactory.newString("force_show")] =
-                ValueFactory.newArray(
-                    forceShow.map { ValueFactory.newString(it.toString()) }
-                )
-            val bytes = ValueFactory.newMap(args).pack()
-            return handleCoreResponse(JniApi.loadFeatureCategories(bytes)) {
-                mapFeatureCategories(
-                    it
-                )
-            }
+        fun <CoreResponse> executeRequest(
+            request: CoreRequest,
+            decoder: (Value) -> CoreResponse
+        ): CoreResponse {
+            return handleCoreResponse(JniApi.executeRequest(request.asValue().pack())) { decoder(it) }
         }
 
-        fun appDidBecomeInactive() {
-            return handleCoreResponse(
-                JniApi.appDidBecomeInactive()
-            ) {}
-        }
-
-        fun isUserSessionExpired(): Boolean {
-            return handleCoreResponse(
-                JniApi.isUserSessionExpired()
-            ) { it.asBooleanValue().boolean }
-        }
-
-        fun getUserSessionTimeoutOption(): UserSessionTimeoutOption {
-            return handleCoreResponse(
-                JniApi.getUserSessionTimeoutOption()
-            ) { UserSessionTimeoutOption.from(it) }
-        }
-
-        fun getUserSessionTimeoutOptionsConfig():
-            List<UserSessionTimeoutOptionConfig> {
-            return handleCoreResponse(
-                JniApi.getUserSessionTimeoutOptionsConfig()
-            ) { UserSessionTimeoutOptionConfig.mapConfigs(it) }
-        }
-
-        fun setUserSessionTimeoutOption(option: UserSessionTimeoutOption) {
-            return handleCoreResponse(
-                JniApi.setUserSessionTimeoutOption(option.asValue().pack())
-            ) {}
+        fun executeRequest(
+            request: CoreRequest
+        ) {
+            return handleCoreResponse(JniApi.executeRequest(request.asValue().pack())) {  }
         }
 
         private fun <T> handleCoreResponse(
@@ -80,7 +98,7 @@ class Core {
             }
 
             responseObject.get("Err")?.also {
-                throw mapError(it.asMapValue().map())
+                throw CoreFailure.from(it)
             }
 
             throw InvalidCoreResponseFormat(responseObject.toString())

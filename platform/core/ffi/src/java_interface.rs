@@ -1,7 +1,7 @@
 use common::serialization::{message_pack_deserialize, message_pack_serialize};
 use core_failure::CoreFailure;
 use jni::{
-    objects::{GlobalRef, JClass, JObject, JString, JValue},
+    objects::{GlobalRef, JClass, JObject, JValue},
     sys::jbyteArray,
     JNIEnv, JavaVM,
 };
@@ -16,32 +16,17 @@ use log::error;
 pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
     env: JNIEnv,
     _: JClass,
-    language_code: JString,
-    fs_root: JString,
+    args: jbyteArray,
     callback: JObject,
 ) -> jbyteArray {
-    fn bootstrap(
-        env: JNIEnv,
-        language_code: JString,
-        fs_root: JString,
-        plaftorm_bridge: BridgeToPlatform,
-    ) -> Result<(), CoreFailure> {
-        let language_code = String::from(read_jni_string(&env, language_code)?);
-        let fs_root = String::from(read_jni_string(&env, fs_root)?);
-        core::bootstrap(language_code, fs_root, Box::new(plaftorm_bridge))
-    }
-
     let bridge = BridgeToPlatform {
         callback: env.new_global_ref(callback).unwrap(),
         java_vm: env.get_java_vm().unwrap(),
     };
 
-    env.byte_array_from_slice(&message_pack_serialize(bootstrap(
-        env,
-        language_code,
-        fs_root,
-        bridge,
-    )))
+    env.byte_array_from_slice(&message_pack_serialize(
+        get_bytes(env, args).and_then(message_pack_deserialize).and_then(|args| core::bootstrap(args, Box::new(bridge)))
+    ))
     .unwrap()
 }
 
@@ -49,100 +34,22 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_bootstrapCore(
 /// - args: Function arguments as MessagePack value.
 /// Returns a Result<Vec<FeatureCategory>, CoreFailure> represent as MessagePack value.
 #[no_mangle]
-pub extern "system" fn Java_coop_polypoly_core_JniApi_loadFeatureCategories(
+pub extern "system" fn Java_coop_polypoly_core_JniApi_executeRequest(
     env: JNIEnv,
     _: JClass,
-    args: jbyteArray,
+    request: jbyteArray,
 ) -> jbyteArray {
-    fn load_feature_categories(
-        env: JNIEnv,
-        args: jbyteArray,
-    ) -> Result<Vec<core::feature_categories::FeatureCategory>, CoreFailure> {
-        let bytes = env
-            .convert_byte_array(args)
-            .map_err(|err| CoreFailure::failed_to_extract_bytes(err.to_string()))?;
-        core::load_feature_categories(message_pack_deserialize(bytes)?)
-    }
-    env.byte_array_from_slice(&message_pack_serialize(load_feature_categories(env, args)))
-        .unwrap()
-}
-
-/// Notify that app did become inactive.
-/// Returns Result<(), CoreFailure> as MessagePack value.
-#[no_mangle]
-pub extern "system" fn Java_coop_polypoly_core_JniApi_appDidBecomeInactive(
-    env: JNIEnv,
-    _: JClass,
-) -> jbyteArray {
-    env.byte_array_from_slice(&message_pack_serialize(core::app_did_become_inactive()))
-        .unwrap()
-}
-
-/// Ask if user session is expired.
-/// Returns Result<bool, CoreFailure> as MessagePack value.
-#[no_mangle]
-pub extern "system" fn Java_coop_polypoly_core_JniApi_isUserSessionExpired(
-    env: JNIEnv,
-    _: JClass,
-) -> jbyteArray {
-    env.byte_array_from_slice(&message_pack_serialize(core::is_user_session_expired()))
-        .unwrap()
-}
-
-/// Set the user session timeout option to a given one.
-/// - option: Timeout Option as MessagePack value.
-/// Returns Result<(), CoreFailure> as MessagePack value.
-#[no_mangle]
-pub extern "system" fn Java_coop_polypoly_core_JniApi_setUserSessionTimeoutOption(
-    env: JNIEnv,
-    _: JClass,
-    option: jbyteArray,
-) -> jbyteArray {
-    fn set_timeout_option(env: JNIEnv, option: jbyteArray) -> Result<(), CoreFailure> {
-        let bytes = env
-            .convert_byte_array(option)
-            .map_err(|err| CoreFailure::failed_to_extract_bytes(err.to_string()))?;
-        core::set_user_session_timeout_option(message_pack_deserialize(bytes)?)
-    }
-    env.byte_array_from_slice(&message_pack_serialize(set_timeout_option(env, option)))
-        .unwrap()
-}
-
-/// Get the currently configured user session timeout option.
-/// Returns Result<TimeoutOption, CoreFailure> as MessagePack value.
-#[no_mangle]
-pub extern "system" fn Java_coop_polypoly_core_JniApi_getUserSessionTimeoutOption(
-    env: JNIEnv,
-    _: JClass,
-) -> jbyteArray {
-    env.byte_array_from_slice(&message_pack_serialize(
-        core::get_user_session_timeout_option(),
-    ))
-    .unwrap()
-}
-
-/// Get the user session timeout config options.
-/// Returns Result<Vec<UserSessionTimeout>, CoreFailure> as MessagePack value.
-#[no_mangle]
-pub extern "system" fn Java_coop_polypoly_core_JniApi_getUserSessionTimeoutOptionsConfig(
-    env: JNIEnv,
-    _: JClass,
-) -> jbyteArray {
-    env.byte_array_from_slice(&message_pack_serialize(
-        core::get_user_session_timeout_options_config(),
-    ))
-    .unwrap()
-}
-
-fn read_jni_string(env: &JNIEnv, field: JString) -> Result<String, CoreFailure> {
-    env.get_string(field)
-        .map_err(|err| CoreFailure::failed_to_extract_java_string(err.to_string()))
-        .and_then(|java_string| {
-            java_string
-                .to_str()
-                .map(String::from)
-                .map_err(|err| CoreFailure::failed_to_convert_java_string(err.to_string()))
+    env.byte_array_from_slice(
+        &(match get_bytes(env, request).and_then(message_pack_deserialize) {
+            Ok(request) => core::exec_request(request),
+            Err(err) => message_pack_serialize(Err::<(), _>(err)) 
         })
+    ).unwrap()
+}
+
+fn get_bytes(env: JNIEnv, byte_array: jbyteArray) -> Result<Vec<u8>, CoreFailure> {
+    env.convert_byte_array(byte_array)
+        .map_err(|err| CoreFailure::failed_to_extract_bytes(err.to_string()))
 }
 
 struct BridgeToPlatform {

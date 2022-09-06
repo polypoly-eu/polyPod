@@ -31,18 +31,13 @@ object Example : PlatformResponse {
     }
 }
 
+
 object JniApi {
     external fun bootstrapCore(
-        languageCode: String,
-        fsRoot: String,
+        args: ByteArray,
         callback: JniApi
     ): ByteArray
-    external fun loadFeatureCategories(args: ByteArray): ByteArray
-    external fun appDidBecomeInactive(): ByteArray
-    external fun isUserSessionExpired(): ByteArray
-    external fun setUserSessionTimeoutOption(option: ByteArray): ByteArray
-    external fun getUserSessionTimeoutOption(): ByteArray
-    external fun getUserSessionTimeoutOptionsConfig(): ByteArray
+    external fun executeRequest(request: ByteArray): ByteArray
 
     init {
         System.loadLibrary("polypod_core")

@@ -1,9 +1,7 @@
 package coop.polypoly.polypod.features
 
 import android.content.Context
-import coop.polypoly.core.Core
-import coop.polypoly.core.Feature
-import coop.polypoly.core.FeatureCategory
+import coop.polypoly.core.*
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.ZipTools
 import java.io.File
@@ -28,10 +26,11 @@ object FeatureStorage {
 
         copyFeatureCategories(context)
         copyFeatures(context)
-        categories = Core.loadFeatureCategories(
-            getFeaturesDir(context).path,
-            emptyList()
-        )
+        categories = Core.executeRequest(
+            CoreRequest.LoadFeatureCategories(
+            LoadFeatureCategoriesArguments(getFeaturesDir(context).path,
+                emptyList()))
+        ) { it.asArrayValue().map(FeatureCategory::from)  }
     }
 
     fun featureForId(id: String): Feature? {

@@ -30,5 +30,17 @@ fun Value.asErr(): Value {
 }
 
 fun Exception.asValue(): Value {
-    return ValueFactory.newString(this.toString())
+    return this.toString().asValue()
+}
+
+fun String.asValue(): Value {
+    return ValueFactory.newString(this)
+}
+
+fun <K: Value, V: Value>Map<K, V>.asValue(): Value {
+    return ValueFactory.newMap(this)
+}
+
+fun <E: Value>List<E>.asValue(): Value {
+    return ValueFactory.newArray(this)
 }

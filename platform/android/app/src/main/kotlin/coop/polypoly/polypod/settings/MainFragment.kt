@@ -7,7 +7,9 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import coop.polypoly.core.Core
+import coop.polypoly.core.CoreRequest
 import coop.polypoly.core.UserSessionTimeoutOption
+import coop.polypoly.core.UserSessionTimeoutOptionConfig
 import coop.polypoly.polypod.Authentication
 import coop.polypoly.polypod.Preferences
 import coop.polypoly.polypod.R
@@ -21,8 +23,8 @@ class MainFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.settings, rootKey)
         findPreference<Preference>("version")?.summary = RuntimeInfo.VERSION
 
-        val timeoutOptionsConfig = Core.getUserSessionTimeoutOptionsConfig()
-        val selectedOption = Core.getUserSessionTimeoutOption()
+        val timeoutOptionsConfig = Core.executeRequest(CoreRequest.GetUserSessionTimeoutOptionsConfig()) { it.asArrayValue().map(UserSessionTimeoutOptionConfig::from)}
+        val selectedOption = Core.executeRequest(CoreRequest.GetUserSessionTimeoutOption(), UserSessionTimeoutOption::from)
         val timeoutDurationsMap: LinkedHashMap<String, String> = linkedMapOf()
         timeoutOptionsConfig.forEach {
             val duration = if (it.duration != null) {
@@ -49,8 +51,10 @@ class MainFragment : PreferenceFragmentCompat() {
 
                 (pref as DropDownPreference).summary =
                     timeoutDurationsMap[newValue.toString()]
-                Core.setUserSessionTimeoutOption(
-                    UserSessionTimeoutOption.valueOf(newValue.toString())
+                Core.executeRequest(
+                    CoreRequest.SetUserSessionTimeout(
+                        UserSessionTimeoutOption.valueOf(newValue.toString())
+                    )
                 )
 
                 true

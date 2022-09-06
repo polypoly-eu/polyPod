@@ -8,9 +8,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
-import coop.polypoly.core.Core
-import coop.polypoly.core.CoreExceptionCode
-import coop.polypoly.core.CoreFailure
+import coop.polypoly.core.*
 import coop.polypoly.polypod.core.UpdateNotification
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
@@ -30,7 +28,7 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
         val language = Language.determine(this@MainActivity)
         val fsRoot = this@MainActivity.filesDir
         try {
-            Core.bootstrapCore(language, fsRoot.path)
+            Core.bootstrapCore(BootstrapArgs(language, fsRoot.path))
             logger.info("Core is bootstrapped!")
         } catch (ex: Exception) {
             logger.info(ex.message)
@@ -86,11 +84,14 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
     ) {
         when (event) {
             Lifecycle.Event.ON_STOP,
-            Lifecycle.Event.ON_DESTROY -> Core.appDidBecomeInactive()
+            Lifecycle.Event.ON_DESTROY -> Core.executeRequest(CoreRequest.AppDidBecomeInactive())
             Lifecycle.Event.ON_RESUME -> {
                 if (
                     Authentication.canAuthenticate(this) &&
-                    Core.isUserSessionExpired()
+                    Core.executeRequest(
+                        CoreRequest.IsUserSessionExpired(),
+                        Boolean::fromValue
+                    )
                 ) {
                     startActivity(
                         Intent(
