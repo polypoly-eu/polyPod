@@ -1,17 +1,18 @@
-import PolyPodCore
 import Foundation
 import MessagePack
 
-public class MessagePackEncoder  {
-    public func encode<T>(_ value: T) throws -> MessagePackValue where T : Encodable {
-        if T.self == Data.self {
-            return .binary(value as! Data)
-        } else if T.self == Date.self {
-            return .string(ISO8601DateFormatter().string(from: value as! Date))
+enum MessagePackEncoder  {
+    static func encode<T>(_ value: T) throws -> MessagePackValue where T : Encodable {
+        switch value {
+        case let val as Data:
+            return .binary(val)
+        case let val as Date:
+            return .string(ISO8601DateFormatter().string(from: val))
+        default:
+            let encoder = _MessagePackEncoder()
+            try value.encode(to: encoder)
+            return encoder.value
         }
-        let encoder = _MessagePackEncoder()
-        try value.encode(to: encoder)
-        return encoder.value
     }
 }
 
@@ -19,7 +20,7 @@ protocol MessagePackEncodingContainer {
     var value: MessagePackValue { get }
 }
 
-class SingleValueContainer: SingleValueEncodingContainer {
+final class SingleValueContainer: SingleValueEncodingContainer {
     var codingPath: [CodingKey]
     var userInfo: [CodingUserInfoKey: Any]
     
@@ -81,8 +82,7 @@ class SingleValueContainer: SingleValueEncodingContainer {
         case let val as UInt64:
             storage = .uint(val)
         default:
-            let encoder = MessagePackEncoder()
-            storage = try encoder.encode(value)
+            storage = try MessagePackEncoder.encode(value)
         }
     }
 }
@@ -93,7 +93,7 @@ extension SingleValueContainer: MessagePackEncodingContainer {
     }
 }
 
-class UnkeyedContainer: UnkeyedEncodingContainer {
+final class UnkeyedContainer: UnkeyedEncodingContainer {
     var codingPath: [CodingKey]
     var userInfo: [CodingUserInfoKey: Any]
     
@@ -183,7 +183,7 @@ extension UnkeyedContainer: MessagePackEncodingContainer {
     }
 }
 
-class KeyedContainer<Key>: KeyedEncodingContainerProtocol where Key: CodingKey {
+final class KeyedContainer<Key>: KeyedEncodingContainerProtocol where Key: CodingKey {
     var codingPath: [CodingKey]
     var userInfo: [CodingUserInfoKey: Any]
     
@@ -250,26 +250,31 @@ class KeyedContainer<Key>: KeyedEncodingContainerProtocol where Key: CodingKey {
 
 extension KeyedContainer: MessagePackEncodingContainer {
     var value: MessagePackValue {
+        // Check for special case when an enum case without associated value is encoded.
+        // Swift Codable, instead of encoding it with a SingleValueContainer, will use KeyedContainer
+        // even though there is only the key to be encoded, without any value.
+        // For this case, encode the enum case name as a `string`, not as a `map`
         if storage.count == 1 {
             let (key, container) = storage.first!
             if container.value.count == 0 {
                 return .string(key)
             }
         }
-        let map = self.storage.transform(keyTransform: { MessagePackValue.string($0) },
-                                         valueTransform: { $0.value })
+
+        let map = storage.transform(keyTransform: { MessagePackValue.string($0) },
+                                    valueTransform: { $0.value })
         return .map(map)
     }
 }
 
-class _MessagePackEncoder: Encoder {
+final class _MessagePackEncoder: Encoder {
     
     var codingPath: [CodingKey]
     var userInfo: [CodingUserInfoKey : Any]
     
-    init(codingPath: [CodingKey]? = nil, userInfo: [CodingUserInfoKey : Any]? = nil) {
-        self.codingPath = codingPath ?? []
-        self.userInfo = userInfo ?? [:]
+    init(codingPath: [CodingKey] = [], userInfo: [CodingUserInfoKey : Any] = [:]) {
+        self.codingPath = codingPath
+        self.userInfo = userInfo
     }
     
     fileprivate var container: MessagePackEncodingContainer? {
@@ -282,7 +287,9 @@ class _MessagePackEncoder: Encoder {
         return container?.value ?? .nil
     }
 
-    func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key> where Key : CodingKey {
+    func container<Key>(
+        keyedBy type: Key.Type
+    ) -> KeyedEncodingContainer<Key> where Key : CodingKey {
         let container = KeyedContainer<Key>(
             codingPath: self.codingPath,
             userInfo: self.userInfo
@@ -308,5 +315,4 @@ class _MessagePackEncoder: Encoder {
         self.container = container
         return container
     }
-    
 }

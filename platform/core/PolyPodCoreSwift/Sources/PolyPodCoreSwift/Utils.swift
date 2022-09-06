@@ -7,38 +7,38 @@ func unpackBytes(bytes: CByteBuffer) -> Result<MessagePackValue, CoreFailure> {
     defer {
         free_bytes(bytes.data)
     }
-    
-    do {
+
+    return Result {
         let buffer = UnsafeBufferPointer(
             start: bytes.data,
             count: Int(bytes.length)
         )
         let data = Data(buffer: buffer)
 
-        return .success(try MessagePack.unpackFirst(data))
-    } catch {
-        return .failure(CoreFailure.init(code: .FailedToExtractBytes, message: error.localizedDescription))
+        return try MessagePack.unpackFirst(data)
+    }.mapError { error in
+        CoreFailure.init(code: .failedToExtractBytes, message: error.localizedDescription)
     }
 }
 
 func mapToPlatformRequest(request: MessagePackValue) -> Result<PlatformRequest, CoreFailure> {
     guard let result = PlatformRequest.init(rawValue: request.stringValue ?? "") else {
         let decodingError = DecodingError.invalidValue(info: "Could not convert \(request.stringValue ?? "") to PlatformRequest. ")
-        return .failure(CoreFailure.init(code: .FailedToDecode, message: decodingError.localizedDescription))
+        return .failure(CoreFailure.init(code: .failedToDecode, message: decodingError.localizedDescription))
     }
     return .success(result)
 }
 
 func handle(platformRequest: PlatformRequest) -> PlatformResponse {
     switch platformRequest {
-    case .Example:
-        return PlatformResponse.Example(name: "Test")
+    case .example:
+        return PlatformResponse.example(name: "Test")
     }
 }
 
 extension Encodable {
     func pack() -> Data {
-        let encoded = try! MessagePackEncoder().encode(self)
+        let encoded = try! MessagePackEncoder.encode(self)
         return MessagePack.pack(encoded)
     }
 }

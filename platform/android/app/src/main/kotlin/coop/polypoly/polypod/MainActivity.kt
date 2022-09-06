@@ -32,13 +32,11 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
             logger.info("Core is bootstrapped!")
         } catch (ex: Exception) {
             logger.info(ex.message)
-            (ex as? CoreFailure)?.also {
-                // Ignore CoreAlreadyBootstrapped error, as it is not breaking.
-                if (it.code == CoreExceptionCode.CoreAlreadyBootstrapped) {
-                    return
-                }
-            }
-            throw ex
+            // Ignore CoreAlreadyBootstrapped error, as it is not breaking.
+            if ((ex as? CoreFailure)?.code
+                != CoreExceptionCode.CoreAlreadyBootstrapped
+            )
+                throw ex
         }
 
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)

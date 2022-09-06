@@ -2,6 +2,8 @@ use common::serialization::{message_pack_deserialize, message_pack_serialize};
 use core_failure::CoreFailure;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
+#[cfg(feature = "poly_rdf")]
+use crate::rdf_result_conversion::{bytes_to_string, to_json_bytes};
 use lib::core::{self, PlatformRequest, PlatformResponse};
 
 #[repr(C)]
@@ -18,7 +20,7 @@ pub struct BridgeToPlatform {
 ///
 /// Bootstrap core with the given configuration:
 /// - language_code: User's locale language code.
-/// Returns a flatbuffer byte array with core_bootstrap_response.
+/// Returns a MessagePack byte array with core_bootstrap_response.
 #[no_mangle]
 pub unsafe extern "C" fn core_bootstrap(
     args: CByteBuffer,
@@ -39,6 +41,32 @@ pub unsafe extern "C" fn execute_request(core_request: CByteBuffer) -> CByteBuff
             Err(err) => message_pack_serialize(Err::<(), _>(err)),
         }
     )
+}
+
+/// Executes the given RDF query.
+/// Returns Result<String, CoreFailure> as MessagePack value.
+#[no_mangle]
+#[cfg(feature = "poly_rdf")]
+pub unsafe extern "C" fn exec_rdf_query(query: *const c_char) -> CByteBuffer {
+    create_byte_buffer(message_pack_serialize(
+        cstring_to_str(&query)
+            .map(String::from)
+            .and_then(core::exec_rdf_query)
+            .and_then(to_json_bytes)
+            .and_then(bytes_to_string),
+    ))
+}
+
+/// Executes the given RDF update.
+/// Returns Result<Void, CoreFailure> as MessagePack value.
+#[no_mangle]
+#[cfg(feature = "poly_rdf")]
+pub unsafe extern "C" fn exec_rdf_update(update: *const c_char) -> CByteBuffer {
+    create_byte_buffer(message_pack_serialize(
+        cstring_to_str(&update)
+            .map(String::from)
+            .and_then(core::exec_rdf_update),
+    ))
 }
 
 /// # Safety

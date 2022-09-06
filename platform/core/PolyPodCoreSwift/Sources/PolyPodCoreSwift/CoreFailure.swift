@@ -34,33 +34,33 @@ public enum DecodingError: Error {
 }
 
 public enum CoreFailureCode: Int, Codable {
-    case CoreNotBootstrapped = 1
-    case CoreAlreadyBootstrapped
-    case FailedToParseFeatureManifest
-    case NullCStringPointer
-    case FailedToCreateCString
-    case FailedToExtractJavaString
-    case FailedToConvertJavaString
-    case FailedToParseFeatureCategoriesJSON
-    case FailedToReadFile
-    case FailedFileSystemOperation
-    case FailedToParseURL
-    case FailedToUnzip
-    case FailedToCreateFeatureFilesPath
-    case FailedToConvertToFsPath
-    case FailedToConvertToResourceUrl
-    case FailedToGetFilePath
-    case FailedToGetLastSegmentFromUrl
-    case FailedToDecodeByteArray
-    case FailedToReadByteBufferLength
-    case FailedToExtractJObject
-    case FailedToExtractBytes
-    case FailedToCallJNIMethod
-    case FailedToConvertBytes
-    case FailedToAccessUserSession
-    case FailedToAttachJVM
-    case FailedToDecode
-    case FailedToEncode
+    case coreNotBootstrapped = 1
+    case coreAlreadyBootstrapped
+    case failedToParseFeatureManifest
+    case nullCStringPointer
+    case failedToCreateCString
+    case failedToExtractJavaString
+    case failedToConvertJavaString
+    case failedToParseFeatureCategoriesJSON
+    case failedToReadFile
+    case failedFileSystemOperation
+    case failedToParseURL
+    case failedToUnzip
+    case failedToCreateFeatureFilesPath
+    case failedToConvertToFsPath
+    case failedToConvertToResourceUrl
+    case failedToGetFilePath
+    case failedToGetLastSegmentFromUrl
+    case failedToDecodeByteArray
+    case failedToReadByteBufferLength
+    case failedToExtractJObject
+    case failedToExtractBytes
+    case failedToCallJNIMethod
+    case failedToConvertBytes
+    case failedToAccessUserSession
+    case failedToAttachJVM
+    case failedToDecode
+    case failedToEncode
 }
 
 public struct CoreFailure: Error, Codable {
