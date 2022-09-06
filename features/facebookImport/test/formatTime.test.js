@@ -27,13 +27,13 @@ describe("Testing time formatting", () => {
     //seconds in android/ios
     const dateTime = date.getTime() / 1000;
 
-    it("correctly formats to british english format correctly", () => {
+    it("correctly formats to British English format correctly", () => {
         expect(formatTime(date, englishFormat, longMonthsOption)).toBe(
             "26 October 2021"
         );
     });
 
-    it("correctly formats to german format correctly", () => {
+    it("correctly formats to German format correctly", () => {
         expect(formatTime(date, germanFormat, longMonthsOption)).toBe(
             "26. Oktober 2021"
         );
