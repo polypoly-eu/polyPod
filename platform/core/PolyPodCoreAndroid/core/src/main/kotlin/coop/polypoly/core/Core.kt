@@ -38,6 +38,8 @@ sealed class CoreRequest {
     class SetUserSessionTimeout(val args: UserSessionTimeoutOption): CoreRequest()
     class GetUserSessionTimeoutOption(): CoreRequest()
     class GetUserSessionTimeoutOptionsConfig(): CoreRequest()
+    class ExecuteRdfQuery(val args: String): CoreRequest()
+    class ExecuteRdfUpdate(val args: String): CoreRequest()
 
     fun asValue(): Value {
         return when (this) {
@@ -53,12 +55,18 @@ sealed class CoreRequest {
             ).asValue()
             is CoreRequest.GetUserSessionTimeoutOption -> "getUserSessionTimeoutOption".asValue()
             is CoreRequest.GetUserSessionTimeoutOptionsConfig -> "getUserSessionTimeoutOptionsConfig".asValue()
+            is CoreRequest.ExecuteRdfQuery -> mapOf(
+                "executeRdfQuery".asValue() to mapOf(
+                    "args".asValue() to args.asValue()
+                ).asValue()
+            ).asValue()
+            is CoreRequest.ExecuteRdfUpdate -> mapOf(
+                "executedRdfUpdate".asValue() to mapOf(
+                    "args".asValue() to args.asValue()
+                ).asValue()
+            ).asValue()
         }
     }
-}
-
-interface MessagepackDecoder<T> {
-    fun from(value: Value): T
 }
 
 class Core {
