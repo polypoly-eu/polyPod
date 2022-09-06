@@ -20,13 +20,15 @@ pub mod core {
     static CORE: OnceCell<Mutex<Core>> = OnceCell::new();
 
     #[derive(Debug, Clone, Serialize)]
+    #[serde(rename_all = "camelCase")]
     pub enum PlatformRequest {
         Example,
     }
 
     #[derive(Debug, Clone, Serialize, Deserialize)]
+    #[serde(rename_all = "camelCase")]
     pub enum PlatformResponse {
-        Example(String),
+        Example { name: String },
     }
 
     pub trait PlatformHookRequest: Sync + Send {

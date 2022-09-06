@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 use url::Url;
 
 #[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub enum FailureCode {
     CoreNotBootstrapped = 1,
     CoreAlreadyBootstrapped,

@@ -15,14 +15,14 @@ func unpackBytes(bytes: CByteBuffer) -> Result<MessagePackValue, CoreFailure> {
 
         return try MessagePack.unpackFirst(data)
     }.mapError { error in
-        CoreFailure.init(code: .FailedToExtractBytes, message: error.localizedDescription)
+        CoreFailure.init(code: .failedToExtractBytes, message: error.localizedDescription)
     }
 }
 
 func mapToPlatformRequest(request: MessagePackValue) -> Result<PlatformRequest, CoreFailure> {
     guard let result = PlatformRequest.init(rawValue: request.stringValue ?? "") else {
         let decodingError = DecodingError.invalidValue(info: "Could not convert \(request.stringValue ?? "") to PlatformRequest. ")
-        return .failure(CoreFailure.init(code: .FailedToDecode, message: decodingError.localizedDescription))
+        return .failure(CoreFailure.init(code: .failedToDecode, message: decodingError.localizedDescription))
     }
     return .success(result)
 }
