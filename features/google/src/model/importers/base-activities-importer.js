@@ -8,9 +8,12 @@ export default class BaseActivitiesImporter {
 
     async import({ zipFile, googleAccount }) {
         const entries = await relevantZipEntries(zipFile);
-        const activityEntries = entries.filter(({ path }) =>
-            matchRegex(path, this)
-        );
+        //console.log(`Relevant entries count ${entries.length}`);
+        const activityEntries = entries.filter(({ path }) => {
+            //console.log(`Entry path about to be filtered by regex: ${path}`);
+            return matchRegex(path, this);
+        });
+        //console.log(`Activity entries count ${activityEntries.length}`);
 
         const parserOutput = await Promise.all(
             activityEntries.map((entry) => this._parser.parse(entry))

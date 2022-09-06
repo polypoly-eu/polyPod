@@ -6,7 +6,6 @@
  */
 
 import * as RDF from "rdf-js";
-import { ExternalFile, FS } from "./fs";
 
 /**
  * A _matcher_ specifies a filter for querying the Pod store.
@@ -106,6 +105,14 @@ export interface Entry {
     path: string;
 }
 
+export interface Stats {
+    id: string;
+    size: number;
+    time: string;
+    name: string;
+    directory: boolean;
+}
+
 /**
  * `PolyOut` specifies the interaction of the Feature with the environment. It is concerned with file system operations
  * and HTTP requests.
@@ -113,12 +120,24 @@ export interface Entry {
  * Both of these aspects are separated out into their own modules:
  * - [[FS]] for Node.js-style file-system access
  */
-export interface PolyOut extends Omit<FS, "readdir"> {
+export interface PolyOut {
+    readFile(path: string): Promise<Uint8Array>;
+    writeFile(path: string, content: string): Promise<void>;
+    stat(path: string): Promise<Stats>;
+    importArchive(url: string, destUrl?: string): Promise<string>;
+    removeArchive(fileId: string): Promise<void>;
+
     /**
      * @param pathToDir system-dependent path to read.
      * @returns a Promise with id-path pairs [[Entry]] as payload.
      */
     readDir(pathToDir: string): Promise<Entry[]>;
+}
+
+export interface ExternalFile {
+    name: string;
+    url: string;
+    size: number;
 }
 
 /**

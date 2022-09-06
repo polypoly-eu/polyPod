@@ -19,7 +19,7 @@ export default [
                 transforms: ["typescript"],
             }),
         ],
-        external: ["chai", "fast-check", "chai-as-promised"],
+        external: ["chai", "fast-check", "chai-as-promised", "uuid"],
     },
     {
         input: "src/pod-api/mock-pod.ts",
@@ -45,6 +45,7 @@ export default [
             "chai-as-promised",
             "memfs",
             "@rdfjs/dataset",
+            "uuid",
         ],
     },
 ];

@@ -117,7 +117,7 @@ const App = () => {
     }, []);
 
     return (
-        <>
+        <div className="feature-container">
             <div className="poly-nav-bar-separator-overlay" />
             <Screen
                 className="poly-theme-light background-white"
@@ -143,7 +143,7 @@ const App = () => {
                     )}
                 </div>
             </Screen>
-        </>
+        </div>
     );
 };
 

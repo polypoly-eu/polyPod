@@ -55,11 +55,18 @@ public final class Core {
     /// - Parameter featuresDirectory: Directory from which to load the feature categories.
      /// - Returns: A Result for loading operation.
     public func loadFeatureCategories(
-        featuresDirectory: String
+        featuresDirectory: String,
+        forceShow: [FeatureCategoryId]
     ) -> Result<[FeatureCategory], Error> {
-        let features_dir = NSString(string: featuresDirectory).utf8String!
+        var messagePackMap: [MessagePackValue: MessagePackValue] = [:]
+        messagePackMap["features_dir"] = .string(featuresDirectory)
+        messagePackMap["force_show"] =
+            .array(forceShow.map { .string($0.rawValue) })
+        let bytes = MessagePack.pack(MessagePackValue.map(messagePackMap))
+            .toByteBuffer
+        defer { bytes.data.deallocate() }
         return handleCoreResponse(
-            load_feature_categories(features_dir),
+            load_feature_categories(bytes),
             mapFeatureCategories
         )
     }

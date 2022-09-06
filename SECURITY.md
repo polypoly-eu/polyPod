@@ -18,5 +18,5 @@ Potential security vulnerabilities should *not* be reported via GitHub.
 Please use the [official channels] defined in the polypoly [Vulnerability Disclosure Policy].
 
 
-[Vulnerability Disclosure Policy]: https://polypoly.coop/en-de/security/vdp/
-[official channels]: https://polypoly.coop/en-de/security/vdp#Official%20Channels
+[Vulnerability Disclosure Policy]: https://polypoly.net/en/security/vdp/
+[official channels]: https://polypoly.net/en/security/vdp#Official%20Channels

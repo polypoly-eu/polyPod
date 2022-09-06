@@ -11,14 +11,14 @@ function errorToString(error) {
 
 window.addEventListener("error", ({ error }) => {
     window.webkit.messageHandlers.error.postMessage({
-        message: "Unhandled error:\n\n" + errorToString(error)
+        message: "Unhandled error:\n\n" + errorToString(error),
     });
     return true;
 });
 
 window.addEventListener("unhandledrejection", (event) => {
     window.webkit.messageHandlers.error.postMessage({
-        message: "Unhandled rejection:\n\n" + errorToString(event.reason)
+        message: "Unhandled rejection:\n\n" + errorToString(event.reason),
     });
     event.preventDefault();
 });

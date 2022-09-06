@@ -4,7 +4,6 @@ import {
     PolyIn,
     PolyOut,
     PolyNav,
-    EncodingOptions,
     ExternalFile,
     Stats,
     Matcher,
@@ -51,15 +50,8 @@ type PolyInBackend = ObjectBackendSpec<{
 
 type PolyOutBackend = ObjectBackendSpec<{
     readDir(path: string): ValueBackendSpec<Entry[]>;
-    readFile(
-        path: string,
-        options?: EncodingOptions
-    ): ValueBackendSpec<string | Uint8Array>;
-    writeFile(
-        path: string,
-        content: string,
-        options: EncodingOptions
-    ): ValueBackendSpec<void>;
+    readFile(path: string): ValueBackendSpec<Uint8Array>;
+    writeFile(path: string, content: string): ValueBackendSpec<void>;
     stat(path: string): ValueBackendSpec<Stats>;
     importArchive(url: string, destUrl?: string): ValueBackendSpec<string>;
     removeArchive(fileId: string): ValueBackendSpec<void>;
@@ -105,64 +97,7 @@ type PodBackend = ObjectBackendSpec<{
     endpoint(): EndpointBackend;
 }>;
 
-class FileStats implements Stats {
-    static of(stats: Stats): FileStats {
-        if (
-            stats.getSize !== undefined &&
-            stats.getName !== undefined &&
-            stats.getTime !== undefined &&
-            stats.getId !== undefined
-        ) {
-            return new FileStats(
-                stats.isFile(),
-                stats.isDirectory(),
-                stats.getTime(),
-                stats.getSize(),
-                stats.getName(),
-                stats.getId()
-            );
-        } else {
-            return new FileStats(
-                stats.isFile(),
-                stats.isDirectory(),
-                "",
-                0,
-                "",
-                ""
-            );
-        }
-    }
-
-    constructor(
-        readonly file: boolean,
-        readonly directory: boolean,
-        readonly time: string,
-        readonly size: number,
-        readonly name: string,
-        readonly id: string
-    ) {}
-    isFile(): boolean {
-        return this.file;
-    }
-    isDirectory(): boolean {
-        return this.directory;
-    }
-    getTime(): string {
-        return this.time;
-    }
-    getSize(): number {
-        return this.size;
-    }
-    getName(): string {
-        return this.name;
-    }
-    getId(): string {
-        return this.id;
-    }
-}
-
 export const podBubblewrapClasses: Classes = {
-    "@polypoly-eu/remote-pod.FileStats": FileStats,
     "@polypoly-eu/rdf.NamedNode": NamedNode,
     "@polypoly-eu/rdf.BlankNode": BlankNode,
     "@polypoly-eu/rdf.Literal": Literal,
@@ -211,15 +146,8 @@ export class RemoteClientPod implements Pod {
         const { rpcClient } = this;
 
         return new (class implements PolyOut {
-            readFile(path: string, options: EncodingOptions): Promise<string>;
-            readFile(path: string): Promise<Uint8Array>;
-            readFile(
-                path: string,
-                options?: EncodingOptions
-            ): Promise<string | Uint8Array> {
-                if (options)
-                    return rpcClient.polyOut().readFile(path, options)();
-                else if (typeof fetch === "undefined")
+            readFile(path: string): Promise<Uint8Array> {
+                if (typeof fetch === "undefined")
                     return rpcClient.polyOut().readFile(path)();
                 else
                     return new Promise<Uint8Array>((resolve, reject) => {
@@ -238,12 +166,8 @@ export class RemoteClientPod implements Pod {
                 return rpcClient.polyOut().stat(path)();
             }
 
-            writeFile(
-                path: string,
-                content: string,
-                options: EncodingOptions
-            ): Promise<void> {
-                return rpcClient.polyOut().writeFile(path, content, options)();
+            writeFile(path: string, content: string): Promise<void> {
+                return rpcClient.polyOut().writeFile(path, content)();
             }
 
             importArchive(url: string, destUrl?: string): Promise<string> {
@@ -352,17 +276,10 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
         // the only difference is that `fetch` needs to return a slightly modified response
 
         return {
-            readFile: (path, options?) => {
-                if (options === undefined) return polyOut.readFile(path);
-                else return polyOut.readFile(path, options);
-            },
+            readFile: (path) => polyOut.readFile(path),
             readDir: (path) => polyOut.readDir(path),
-            stat: async (path) => {
-                const stats = await polyOut.stat(path);
-                return FileStats.of(stats);
-            },
-            writeFile: (path, content, options) =>
-                polyOut.writeFile(path, content, options),
+            stat: (path) => polyOut.stat(path),
+            writeFile: (path, content) => polyOut.writeFile(path, content),
             importArchive: (url, destUrl) =>
                 polyOut.importArchive(url, destUrl),
             removeArchive: (fileId) => polyOut.removeArchive(fileId),

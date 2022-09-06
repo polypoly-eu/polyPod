@@ -329,20 +329,16 @@ extension PostOffice {
     ) {
         let path = args[0] as! String
         
-        PodApi.shared.polyOut.stat(url: path) { fileStats, error in
+        PodApi.shared.polyOut.stat(url: path) { stats, error in
             if let error = error {
                 completionHandler(nil, createErrorResponse(#function, error))
                 return
             }
-            guard let fileStats = fileStats else {
+            guard let stats = stats else {
                 completionHandler(nil, createErrorResponse(#function, PodApiError.unknown))
                 return
             }
-            let object = fileStats.messagePackObject
-            
-            let packedData = pack(object)
-            
-            completionHandler(MessagePackValue(type: 2, data: packedData), nil)
+            completionHandler(stats.messagePackObject, nil)
         }
     }
     
