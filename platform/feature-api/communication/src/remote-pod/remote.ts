@@ -17,6 +17,8 @@ import {
     DefaultGraph,
     Quad as polyQuad,
     DataFactory,
+    Triplestore,
+    SPARQLQueryResult,
 } from "@polypoly-eu/api";
 import { Quad } from "rdf-js";
 import { RequestListener } from "http";
@@ -43,9 +45,14 @@ import {
 
 type PolyInBackend = ObjectBackendSpec<{
     match(matcher: Partial<Matcher>): ValueBackendSpec<Quad[]>;
-    add(...quads: Quad[]): ValueBackendSpec<void>;
-    delete(...quads: Quad[]): ValueBackendSpec<void>;
-    has(...quads: Quad[]): ValueBackendSpec<boolean>;
+    add(quad: Quad): ValueBackendSpec<void>;
+    delete(quad: Quad): ValueBackendSpec<void>;
+    has(quad: Quad): ValueBackendSpec<boolean>;
+}>;
+
+type TriplestoreBackend = ObjectBackendSpec<{
+    query(query: string): ValueBackendSpec<SPARQLQueryResult>;
+    update(query: string): ValueBackendSpec<void>;
 }>;
 
 type PolyOutBackend = ObjectBackendSpec<{
@@ -95,6 +102,7 @@ type PodBackend = ObjectBackendSpec<{
     polyNav(): PolyNavBackend;
     info(): InfoBackend;
     endpoint(): EndpointBackend;
+    triplestore(): TriplestoreBackend;
 }>;
 
 export const podBubblewrapClasses: Classes = {
@@ -135,10 +143,19 @@ export class RemoteClientPod implements Pod {
 
     get polyIn(): PolyIn {
         return {
-            add: (...quads) => this.rpcClient.polyIn().add(...quads)(),
+            add: (quad) => this.rpcClient.polyIn().add(quad)(),
             match: (matcher) => this.rpcClient.polyIn().match(matcher)(),
-            delete: (...quads) => this.rpcClient.polyIn().delete(...quads)(),
-            has: (...quads) => this.rpcClient.polyIn().has(...quads)(),
+            delete: (quad) => this.rpcClient.polyIn().delete(quad)(),
+            has: (quad) => this.rpcClient.polyIn().has(quad)(),
+        };
+    }
+
+    get triplestore(): Triplestore {
+        return {
+            query: (query: string) =>
+                this.rpcClient.triplestore().query(query)(),
+            update: (query: string) =>
+                this.rpcClient.triplestore().update(query)(),
         };
     }
 
@@ -288,6 +305,10 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
 
     polyIn(): ServerOf<PolyInBackend> {
         return this.pod.polyIn;
+    }
+
+    triplestore(): ServerOf<TriplestoreBackend> {
+        return this.pod.triplestore;
     }
 
     polyLifecycle(): ServerOf<PolyLifecycleBackend> {

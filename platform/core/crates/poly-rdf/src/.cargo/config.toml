@@ -1,0 +1,2 @@
+[env]
+RDF_DB_PATH = "/rdf.db"

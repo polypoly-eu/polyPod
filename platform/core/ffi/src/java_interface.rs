@@ -1,3 +1,5 @@
+#[cfg(feature = "poly_rdf")]
+use crate::rdf_result_conversion::{bytes_to_string, to_json_bytes};
 use common::serialization::{message_pack_deserialize, message_pack_serialize};
 use core_failure::CoreFailure;
 use jni::{
@@ -206,4 +208,33 @@ impl core::PlatformHookRequest for BridgeToPlatform {
             return result;
         }
     }
+}
+
+#[no_mangle]
+#[cfg(feature = "poly_rdf")]
+pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfQuery(
+    env: JNIEnv,
+    _: JClass,
+    query: JString,
+) -> jbyteArray {
+    env.byte_array_from_slice(&message_pack_serialize(
+        read_jni_string(&env, query)
+            .and_then(core::exec_rdf_query)
+            .and_then(to_json_bytes)
+            .and_then(bytes_to_string),
+    ))
+    .unwrap()
+}
+
+#[no_mangle]
+#[cfg(feature = "poly_rdf")]
+pub extern "system" fn Java_coop_polypoly_core_JniApi_execRdfUpdate(
+    env: JNIEnv,
+    _: JClass,
+    query: JString,
+) -> jbyteArray {
+    env.byte_array_from_slice(&message_pack_serialize(
+        read_jni_string(&env, query).and_then(core::exec_rdf_update),
+    ))
+    .unwrap()
 }
