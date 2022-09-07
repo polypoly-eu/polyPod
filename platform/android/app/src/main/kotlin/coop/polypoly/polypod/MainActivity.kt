@@ -8,10 +8,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
+import coop.polypoly.core.BootstrapArgs
 import coop.polypoly.core.Core
 import coop.polypoly.core.CoreExceptionCode
 import coop.polypoly.core.CoreFailure
-import coop.polypoly.core.BootstrapArgs
 import coop.polypoly.core.CoreRequest
 import coop.polypoly.core.fromValue
 import coop.polypoly.polypod.core.UpdateNotification
@@ -87,7 +87,8 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
     ) {
         when (event) {
             Lifecycle.Event.ON_STOP,
-            Lifecycle.Event.ON_DESTROY -> Core.executeRequest(CoreRequest.AppDidBecomeInactive())
+            Lifecycle.Event.ON_DESTROY ->
+                Core.executeRequest(CoreRequest.AppDidBecomeInactive())
             Lifecycle.Event.ON_RESUME -> {
                 if (
                     Authentication.canAuthenticate(this) &&

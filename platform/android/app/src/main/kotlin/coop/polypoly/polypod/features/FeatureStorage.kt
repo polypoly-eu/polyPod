@@ -2,9 +2,9 @@ package coop.polypoly.polypod.features
 
 import android.content.Context
 import coop.polypoly.core.Core
+import coop.polypoly.core.CoreRequest
 import coop.polypoly.core.Feature
 import coop.polypoly.core.FeatureCategory
-import coop.polypoly.core.CoreRequest
 import coop.polypoly.core.LoadFeatureCategoriesArguments
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.ZipTools
@@ -37,7 +37,7 @@ object FeatureStorage {
                     emptyList()
                 )
             )
-        ) { it.asArrayValue().map(FeatureCategory::from)  }
+        ) { it.asArrayValue().map(FeatureCategory::from) }
     }
 
     fun featureForId(id: String): Feature? {
