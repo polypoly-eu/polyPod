@@ -2,9 +2,9 @@ use common::serialization::{message_pack_deserialize, message_pack_serialize};
 use core_failure::CoreFailure;
 use std::os::raw::c_uint;
 extern crate rmp_serde;
-use lib::platform_request::{PlatformRequest, PlatformCallback};
 use lib::bootstrap::bootstrap;
 use lib::core_request::{self};
+use lib::platform_request::{PlatformCallback, PlatformRequest};
 
 #[repr(C)]
 pub struct BridgeToPlatform {

@@ -5,9 +5,9 @@ use jni::{
     sys::jbyteArray,
     JNIEnv, JavaVM,
 };
-use lib::platform_request::{PlatformRequest, PlatformCallback};
 use lib::bootstrap::bootstrap;
 use lib::core_request::{self};
+use lib::platform_request::{PlatformCallback, PlatformRequest};
 use log::error;
 
 /// Bootstrap core with the given configuration:
