@@ -1,4 +1,4 @@
-const { port1, port2 } = new MessageChannel();
+const { port1 } = new MessageChannel();
 
 function initIframe(el) {
     port1.start();
@@ -6,5 +6,4 @@ function initIframe(el) {
         // incoming msgpack-encoded events:
         webkit.messageHandlers.event.postMessage(event.data);
     };
-    el.contentWindow.postMessage("", "*", [port2]);
 }
