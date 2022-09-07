@@ -12,6 +12,7 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -63,7 +64,10 @@ class FeatureSmokeTest {
 
         // Sometimes there's a dialog saying there's new data in the pod, or smth like that.
         if (viewIsDisplayed(withId(android.R.id.message))) {
-            onView(withId(android.R.id.message)).perform(click())
+            onView(withId(android.R.id.button1))
+                .inRoot(isDialog())
+                .check(matches(isDisplayed()))
+                .perform(click())
         }
 
         val nodeInteractionCollection = composeTestRule.onAllNodesWithTag(
