@@ -2,7 +2,6 @@ package coop.polypoly.core
 
 import org.msgpack.core.MessagePack
 import org.msgpack.core.MessageUnpacker
-import org.msgpack.value.Value
 
 object JniApi {
     external fun bootstrapCore(
@@ -20,9 +19,9 @@ object JniApi {
             val unpacker: MessageUnpacker = MessagePack.newDefaultUnpacker(
                 input
             )
-            val platformRequest = PlatformRequest.fromValue(unpacker.unpackValue())
-            val response = handle(platformRequest)
-            response.messageValue().asOk().pack()
+            val platformRequest =
+                PlatformRequest.fromValue(unpacker.unpackValue())
+            return handlePlatformRequest(platformRequest).pack()
         } catch (exp: Exception) {
             exp.asValue().asErr().pack()
         }

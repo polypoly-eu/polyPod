@@ -1,12 +1,12 @@
 package coop.polypoly.core
 
 import org.msgpack.value.Value
-import org.msgpack.value.ValueFactory
 
 enum class PlatformRequest {
     Example;
 
     companion object {
+        // TODO: Investigate the option of doing automatic decoding
         fun fromValue(value: Value): PlatformRequest {
             // TODO: This only handles the simple case where a string from core
             // But a map might be sent, for example: PlatformRequest.Example(String)
@@ -17,24 +17,8 @@ enum class PlatformRequest {
     }
 }
 
-sealed interface PlatformResponse {
-    fun messageValue(): Value
-}
-
-object Example : PlatformResponse {
-    private fun response(): String {
-        return "Test"
-    }
-
-    override fun messageValue(): Value {
-        return ValueFactory.newMap(
-            mutableMapOf(
-                ValueFactory.newString(
-                    "Example"
-                ) to ValueFactory.newString(
-                    response()
-                )
-            )
-        )
+fun JniApi.handlePlatformRequest(request: PlatformRequest): Value {
+    return when (request) {
+        PlatformRequest.Example -> "Test".asValue().asOk()
     }
 }

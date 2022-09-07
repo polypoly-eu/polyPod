@@ -10,9 +10,9 @@ enum class FeatureCategoryId {
     developer;
 
     companion object {
-       fun from(value: Value): FeatureCategoryId {
-           return FeatureCategoryId.valueOf(value.toString())
-       }
+        fun from(value: Value): FeatureCategoryId {
+            return FeatureCategoryId.valueOf(value.toString())
+        }
     }
 }
 
@@ -79,7 +79,7 @@ data class Feature(
             )
         }
     }
-    
+
     fun findUrl(target: String): String? = when (target) {
         in links.keys -> links[target]
         in links.values -> target

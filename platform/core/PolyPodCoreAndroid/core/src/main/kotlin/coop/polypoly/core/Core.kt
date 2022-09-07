@@ -17,15 +17,20 @@ class Core {
 
         fun <CoreResponse> executeRequest(
             request: CoreRequest,
+            // TODO: Investigate the option of doing automatic decoding instead of asking for a decoder.
             decoder: (Value) -> CoreResponse
         ): CoreResponse {
-            return handleCoreResponse(JniApi.executeRequest(request.asValue().pack())) { decoder(it) }
+            return handleCoreResponse(
+                JniApi.executeRequest(request.asValue().pack())
+            ) { decoder(it) }
         }
 
         fun executeRequest(
             request: CoreRequest
         ) {
-            return handleCoreResponse(JniApi.executeRequest(request.asValue().pack())) {  }
+            return handleCoreResponse(
+                JniApi.executeRequest(request.asValue().pack())
+            ) { }
         }
 
         private fun <T> handleCoreResponse(

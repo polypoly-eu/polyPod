@@ -65,10 +65,10 @@ fun String.asValue(): Value {
     return ValueFactory.newString(this)
 }
 
-fun <K: Value, V: Value>Map<K, V>.asValue(): Value {
+fun <K : Value, V : Value> Map<K, V>.asValue(): Value {
     return ValueFactory.newMap(this)
 }
 
-fun <E: Value>List<E>.asValue(): Value {
+fun <E : Value> List<E>.asValue(): Value {
     return ValueFactory.newArray(this)
 }
