@@ -29,6 +29,62 @@ class ActivityHtmlParser {
 
         let date = dayjs(text).$d;
 
+        // dayjs cannot parse 03.02.2001, 16:05:06 UTC
+        if (date.toString() === "Invalid Date") {
+            // fallback to patterns
+            const datePatterns = [
+                {
+                    regex: /([0-9]{1,2}).([0-9]{1,2}).([0-9]{4,4}), ([0-9:]{8,8}) ([A-Z]{3,4})/,
+                    day: 1,
+                    month: 2,
+                    year: 3,
+                    time: 4,
+                    timezone: 5,
+                },
+            ];
+
+            const month2Name = {
+                "01": "Jan",
+                1: "Jan",
+                "02": "Feb",
+                2: "Feb",
+                "03": "Mar",
+                3: "Mar",
+                "04": "Apr",
+                0: "Apr",
+                "05": "May",
+                5: "May",
+                "06": "Jun",
+                6: "Jun",
+                "07": "Jul",
+                7: "Jul",
+                "08": "Aug",
+                8: "Aug",
+                "09": "Sep",
+                9: "Sep",
+                10: "Oct",
+                11: "Nov",
+                12: "Dec",
+            };
+
+            for (const pattern of datePatterns) {
+                const match = text.match(pattern.regex);
+                if (match && match.length > 0) {
+                    const day = match[pattern.day];
+                    let month = match[pattern.month];
+                    const year = match[pattern.year];
+
+                    if (!isNaN(parseInt(month))) {
+                        month = month2Name[month];
+                    }
+
+                    const dateString = `${day} ${month} ${year}`;
+                    date = dayjs(dateString).$d;
+                    break;
+                }
+            }
+        }
+
         if (!date || date === null || date.toString() === "Invalid Date") {
             console.log(`Error: Unable to parse date format ${text}`);
         }
