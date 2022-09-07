@@ -5,7 +5,7 @@ ipa_path = ./build/PolyPod.ipa
 project_path = PolyPodApp/PolyPod.xcodeproj
 scheme_name = PolyPod
 export_options_plist = exportOptions.plist
-destination = 15.2
+destination = 15.5
 
 ifneq ($(shell which xcpretty),)
 xcodebuild := set -o pipefail && xcodebuild
