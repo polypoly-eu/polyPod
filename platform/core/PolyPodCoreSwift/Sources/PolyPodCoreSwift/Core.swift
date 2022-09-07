@@ -34,14 +34,16 @@ public final class Core {
         )
     }
     
-    public func exec<T: MessagePackDecodable>(request: CoreRequest) -> Result<T, Error> {
+    public func executeRequest<T: MessagePackDecodable>(_ request: CoreRequest) -> Result<T, Error> {
         let bytes = request.pack().toByteBuffer;
         defer { bytes.data.deallocate() }
         return handleCoreResponse(execute_request(bytes), T.init(from:))
     }
     
-    public func exec(request: CoreRequest) -> Result<Void, Error> {
-        handleCoreResponse(execute_request(request.pack().toByteBuffer), { _ in })
+    public func executeRequest(_ request: CoreRequest) -> Result<Void, Error> {
+        let bytes = request.pack().toByteBuffer;
+        defer { bytes.data.deallocate() }
+        return handleCoreResponse(execute_request(bytes), { _ in })
     }
 
     // MARK: - Internal API

@@ -18,7 +18,7 @@ extension Core: Triplestore {
         query: String,
         completionHandler: @escaping (MessagePackValue, Error?) -> Void
     ) {
-        let result: Result<MessagePackValue, Error> = exec(request: .executeRdfQuery(args: query))
+        let result: Result<MessagePackValue, Error> = executeRequest(.executeRdfQuery(args: query))
         switch result {
         case .success(let result):
             completionHandler(result, nil)
@@ -31,7 +31,7 @@ extension Core: Triplestore {
         query: String,
         completionHandler: @escaping (Error?) -> Void
     ) {
-        switch exec(request: .executeRdfUpdate(args: query)) {
+        switch executeRequest(.executeRdfUpdate(args: query)) {
         case .success:
             completionHandler(nil)
         case .failure(let error):

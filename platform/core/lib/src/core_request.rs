@@ -52,7 +52,7 @@ pub enum CoreRequest {
     },
 }
 
-pub fn exec_request(request: CoreRequest) -> MessagePackBytes {
+pub fn execute_request(request: CoreRequest) -> MessagePackBytes {
     let mut instance = match get_instance() {
         Ok(instance) => instance,
         Err(err) => return message_pack_serialize(Err::<(), CoreFailure>(err)),

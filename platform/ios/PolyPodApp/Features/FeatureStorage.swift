@@ -62,8 +62,8 @@ final class FeatureStorage {
         try copyFeatures()
         categoriesListSubject.value = Core
             .instance
-            .exec(
-                request: .loadFeatureCategories(
+            .executeRequest(
+                .loadFeatureCategories(
                     args: .init(
                         featuresDir: featuresFileUrl.path,
                         forceShow: readShowDeveloperFeatures() ? [.developer] : []

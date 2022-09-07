@@ -61,7 +61,7 @@ struct ContentView: View {
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
             _ = Core
                 .instance
-                .exec(request: .appDidBecomeInactive)
+                .executeRequest(.appDidBecomeInactive)
                 .inspectError({ error in
                     Log.error("Failed to notify core that app did become inactive \(error)")
                 })
@@ -75,7 +75,7 @@ struct ContentView: View {
         if !Authentication.shared.shouldShowPrompt() {
             let isExpired = Core
                 .instance
-                .exec(request: .isUserSessionExpired)
+                .executeRequest(.isUserSessionExpired)
                 .inspectError({ error in
                     Log.error("Failed to retrieve user session status \(error)")
                 })

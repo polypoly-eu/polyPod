@@ -7,8 +7,7 @@ use jni::{
 };
 use lib::platform_request::{PlatformRequest, PlatformCallback};
 use lib::bootstrap::bootstrap;
-use lib::core_request::exec_request;
-
+use lib::core_request::{self};
 use log::error;
 
 /// Bootstrap core with the given configuration:
@@ -45,7 +44,7 @@ pub extern "system" fn Java_coop_polypoly_core_JniApi_executeRequest(
 ) -> jbyteArray {
     env.byte_array_from_slice(
         &(match get_bytes(env, request).and_then(message_pack_deserialize) {
-            Ok(request) => exec_request(request),
+            Ok(request) => core_request::execute_request(request),
             Err(err) => message_pack_serialize(Err::<(), _>(err)),
         }),
     )

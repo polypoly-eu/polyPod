@@ -4,7 +4,7 @@ use std::os::raw::c_uint;
 extern crate rmp_serde;
 use lib::platform_request::{PlatformRequest, PlatformCallback};
 use lib::bootstrap::bootstrap;
-use lib::core_request::exec_request;
+use lib::core_request::{self};
 
 #[repr(C)]
 pub struct BridgeToPlatform {
@@ -38,7 +38,7 @@ pub unsafe extern "C" fn core_bootstrap(
 pub unsafe extern "C" fn execute_request(core_request: CByteBuffer) -> CByteBuffer {
     create_byte_buffer(
         match byte_buffer_to_bytes(&core_request).and_then(message_pack_deserialize) {
-            Ok(request) => exec_request(request),
+            Ok(request) => core_request::execute_request(request),
             Err(err) => message_pack_serialize(Err::<(), _>(err)),
         },
     )
