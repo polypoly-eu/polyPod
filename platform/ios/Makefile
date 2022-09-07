@@ -16,7 +16,7 @@ endif
 
 .PHONY: lockxcodeversion
 lockxcodeversion:
-	sudo xcode-select -switch /Applications/Xcode_13.2.1.app
+	sudo xcode-select -switch /Applications/Xcode_13.4.1.app
 
 .PHONY: build
 build:
