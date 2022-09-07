@@ -2,6 +2,7 @@ import "./styles.css";
 import "./colors.css";
 import "./design-tokens.css";
 import "./themes.css";
+import "./icons.css";
 import "./font.css";
 import "./layout.css";
 import "./design-system-tokens/radius.css";
