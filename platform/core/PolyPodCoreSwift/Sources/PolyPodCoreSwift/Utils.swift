@@ -3,7 +3,7 @@ import Foundation
 import MessagePack
 import UIKit
 
-func unpackBytes(bytes: CByteBuffer) -> Result<MessagePackValue, CoreFailure> {
+func unpackBytes(bytes: CByteBuffer) -> Result<MessagePackValue, Error> {
     defer {
         free_bytes(bytes.data)
     }
@@ -18,21 +18,6 @@ func unpackBytes(bytes: CByteBuffer) -> Result<MessagePackValue, CoreFailure> {
         return try MessagePack.unpackFirst(data)
     }.mapError { error in
         CoreFailure.init(code: .failedToExtractBytes, message: error.localizedDescription)
-    }
-}
-
-func mapToPlatformRequest(request: MessagePackValue) -> Result<PlatformRequest, CoreFailure> {
-    guard let result = PlatformRequest.init(rawValue: request.stringValue ?? "") else {
-        let decodingError = DecodingError.invalidValue(info: "Could not convert \(request.stringValue ?? "") to PlatformRequest. ")
-        return .failure(CoreFailure.init(code: .failedToDecode, message: decodingError.localizedDescription))
-    }
-    return .success(result)
-}
-
-extension Encodable {
-    func pack() -> Data {
-        let encoded = try! MessagePackEncoder.encode(self)
-        return MessagePack.pack(encoded)
     }
 }
 
@@ -56,20 +41,3 @@ extension Dictionary {
     }
 }
 
-extension Result: Encodable where Success: Encodable, Failure: Encodable {
-    
-    private enum CodingKeys: String, CodingKey {
-        case success = "Ok"
-        case failure = "Err"
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: Result.CodingKeys.self)
-        switch self {
-        case .success(let value):
-            try container.encode(value, forKey: .success)
-        case .failure(let error):
-            try container.encode(error, forKey: .failure)
-        }
-    }
-}

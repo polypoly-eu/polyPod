@@ -3,20 +3,14 @@ import MessagePack
 enum PlatformRequest: String {
     case example
     
-    static func from(value: MessagePackValue) -> Result<Self, CoreFailure> {
-        Result {
-            guard let result = try PlatformRequest.init(rawValue: value.getString()) else {
-                throw DecodingError.invalidValue(
-                    info: "Could not convert \(value) to PlatformRequest."
-                )
-            }
-            return result
-        }.mapError { error in
-            CoreFailure(
+    init(from value: MessagePackValue) throws {
+        guard let result = try PlatformRequest(rawValue: value.getString()) else {
+            throw CoreFailure(
                 code: .failedToDecode,
-                message: error.localizedDescription
+                message: "Could not convert \(value) to PlatformRequest"
             )
         }
+        self = result
     }
 }
 

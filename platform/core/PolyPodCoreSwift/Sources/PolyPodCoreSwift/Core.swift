@@ -4,17 +4,6 @@ import MessagePack
 
 typealias CoreResponseObject = [MessagePackValue: MessagePackValue]
 
-
-public struct LoadFeatureArguments: Encodable {
-    public init(featuresDir: String, forceShow: [FeatureCategoryId]) {
-        self.featuresDir = featuresDir
-        self.forceShow = forceShow
-    }
-    
-    let featuresDir: String
-    let forceShow: [FeatureCategoryId]
-}
-
 public struct BootstrapArgs: Encodable {
     public init(languageCode: String, fsRoot: String) {
         self.languageCode = languageCode
@@ -23,17 +12,6 @@ public struct BootstrapArgs: Encodable {
     
     let languageCode: String
     let fsRoot: String
-}
-
-public enum CoreRequest: Encodable {
-    case loadFeatureCategories(args: LoadFeatureArguments)
-    case appDidBecomeInactive
-    case isUserSessionExpired
-    case setUserSessionTimeout(args: UserSessionTimeoutOption)
-    case getUserSessionTimeoutOption
-    case getUserSessionTimeoutOptionsConfig
-    case executeRdfQuery(args: String)
-    case executeRdfUpdate(args: String)
 }
 
 /// Swift wrapper around the Rust Core.
@@ -47,30 +25,10 @@ public final class Core {
     /// Prepares the core to be used
     /// Should be called before invoking any other API
     public func bootstrap(args: BootstrapArgs) -> Result<Void, Error> {
-        let bridge = BridgeToPlatform(free_bytes: {
-            $0?.deallocate()
-        }, perform_request: { in_bytes in
-            do {
-                let request = try unpackBytes(bytes: in_bytes)
-                    .flatMap(PlatformRequest.from)
-                    .get()
-                
-                return Core
-                    .handle(request: request)
-                    .pack()
-                    .toByteBuffer
-            } catch {
-                return Result<String, CoreFailure>
-                    .failure(error as! CoreFailure)
-                    .pack()
-                    .toByteBuffer
-            }
-        })
-        
         return handleCoreResponse(
             core_bootstrap(
                 args.pack().toByteBuffer,
-                bridge
+                BridgeToPlatform.make()
             ), 
             { _ in }
         )
@@ -107,11 +65,37 @@ public final class Core {
             
             if let responseObject = responseObject["Ok"] {
                 return try map(responseObject)
-            } else if let failure = try responseObject["Err"]?.getDictionary() {
-                throw try mapError(failure)
+            } else if let failure = responseObject["Err"] {
+                throw try CoreFailure(from: failure)
             }
             
             throw DecodingError.invalidResponse(info: "\(String(describing: responseObject))")
         }
+    }
+}
+
+extension BridgeToPlatform {
+    static func make() -> Self {
+        BridgeToPlatform(free_bytes: {
+            $0?.deallocate()
+        }, perform_request: { in_bytes in
+            do {
+                let request = try unpackBytes(bytes: in_bytes)
+                    .flatMap { value in
+                        Result { try PlatformRequest(from: value) }
+                    }
+                    .get()
+                
+                return Core
+                    .handle(request: request)
+                    .pack()
+                    .toByteBuffer
+            } catch {
+                return Result<String, CoreFailure>
+                    .failure(error as! CoreFailure)
+                    .pack()
+                    .toByteBuffer
+            }
+        })
     }
 }

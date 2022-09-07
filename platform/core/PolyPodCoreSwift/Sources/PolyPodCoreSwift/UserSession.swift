@@ -28,7 +28,6 @@ extension UserSessionTimeoutOption {
     }
 }
 
-
 extension UserSessionTimeoutOptionConfig {
     static func from(msgPackValue value: MessagePackValue) throws -> UserSessionTimeoutOptionConfig {
         let object: CoreResponseObject = try value.getDictionary()
@@ -42,5 +41,23 @@ extension UserSessionTimeoutOptionConfig {
         _ value: MessagePackValue
     ) throws -> [UserSessionTimeoutOptionConfig] {
         try value.getArray().map(UserSessionTimeoutOptionConfig.from(msgPackValue:))
+    }
+}
+
+extension UserSessionTimeoutOption: MessagePackDecodable {
+    public init(from value: MessagePackValue) throws {
+        guard let option = UserSessionTimeoutOption(rawValue: try value.getString()) else {
+            throw DecodingError
+                .unknownUserSessionTimeoutOption(info: "Received msgPackValue \(value)")
+        }
+        self = option
+    }
+}
+
+extension UserSessionTimeoutOptionConfig: MessagePackDecodable {
+    public init(from value: MessagePackValue) throws {
+        let object: CoreResponseObject = try value.getDictionary()
+        self.option = try UserSessionTimeoutOption(from: object.get("option"))
+        self.duration = try object.get("duration").getUInt()
     }
 }

@@ -1,3 +1,4 @@
+import MessagePack
 public enum DecodingError: Error {
     case invalidValue(info: String)
     case invalidCoreFailure(info: String)
@@ -61,9 +62,27 @@ public enum CoreFailureCode: Int, Codable {
     case failedToAttachJVM
     case failedToDecode
     case failedToEncode
+    
+    init(from value: MessagePackValue) throws {
+        guard let code = CoreFailureCode.init(rawValue: try value.getInt()) else {
+            throw DecodingError.invalidCoreFailure(info: "Received \(value)")
+        }
+        self = code
+    }
 }
 
 public struct CoreFailure: Error, Codable {
     public let code: CoreFailureCode
     public let message: String
+    
+    public init(code: CoreFailureCode, message: String) {
+        self.code = code
+        self.message = message
+    }
+    
+    init(from value: MessagePackValue) throws {
+        let dict: [MessagePackValue: MessagePackValue] = try value.getDictionary()
+        code = try CoreFailureCode(from: dict.get("code"))
+        message = try dict.get("message").getString()
+    }
 }
