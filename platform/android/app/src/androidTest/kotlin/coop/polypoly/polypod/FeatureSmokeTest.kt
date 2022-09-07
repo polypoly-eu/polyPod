@@ -1,5 +1,6 @@
 package coop.polypoly.polypod
 
+import android.view.View
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasTestTag
@@ -10,8 +11,12 @@ import androidx.compose.ui.test.performScrollTo
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.RootMatchers.isDialog
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.hamcrest.Matcher
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -26,6 +31,15 @@ class FeatureSmokeTest {
         return nodeInteraction.runCatching {
             nodeInteraction.assertIsDisplayed()
         }.isSuccess
+    }
+
+    private fun viewIsDisplayed(viewMatcher: Matcher<View>): Boolean {
+        return try {
+            onView(viewMatcher).check(matches(isDisplayed()))
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
 
     private fun homeScreen(): SemanticsNodeInteraction {
@@ -47,6 +61,14 @@ class FeatureSmokeTest {
 
         // Onboarding might show up. Close it.
         pressCloseUntilHomeScreenIsDisplayed()
+
+        // Sometimes there's a dialog saying there's new data in the pod, or smth like that.
+        if (viewIsDisplayed(withId(android.R.id.message))) {
+            onView(withId(android.R.id.button1))
+                .inRoot(isDialog())
+                .check(matches(isDisplayed()))
+                .perform(click())
+        }
 
         val nodeInteractionCollection = composeTestRule.onAllNodesWithTag(
             "Tile"
