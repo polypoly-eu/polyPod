@@ -5,7 +5,7 @@ ipa_path = ./build/PolyPod.ipa
 project_path = PolyPodApp/PolyPod.xcodeproj
 scheme_name = PolyPod
 export_options_plist = exportOptions.plist
-destination = 15.2
+destination = 15.5
 
 ifneq ($(shell which xcpretty),)
 xcodebuild := set -o pipefail && xcodebuild
@@ -16,7 +16,7 @@ endif
 
 .PHONY: lockxcodeversion
 lockxcodeversion:
-	sudo xcode-select -switch /Applications/Xcode_13.3.app
+	sudo xcode-select -switch /Applications/Xcode_13.4.1.app
 
 .PHONY: build
 build:
