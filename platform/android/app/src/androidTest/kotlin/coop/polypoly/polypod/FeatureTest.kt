@@ -19,21 +19,21 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+private typealias MainTestRule =
+    AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>
+
 @RunWith(AndroidJUnit4::class)
 class FeatureTest {
     @get:Rule
-    val composeTestRule = createMainActivityComposeRule()
-
-    // TODO: Consider alternatives - at least a static function
-    private fun createMainActivityComposeRule(): AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity> { // ktlint-disable max-line-length
+    val composeTestRule: MainTestRule by lazy {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
-        PreferenceManager.getDefaultSharedPreferences(context)
-            .edit().clear().commit()
+        PreferenceManager.getDefaultSharedPreferences(context).edit().clear()
+            .commit()
         Preferences.setFirstRun(context, false)
         Preferences.setSecurityDoNotAskAgainCheck(context, true)
         UpdateNotification.mockData.id = 0
         FeatureStorage.forceShowCategories = listOf(FeatureCategoryId.developer)
-        return createAndroidComposeRule()
+        createAndroidComposeRule()
     }
 
     @Test
