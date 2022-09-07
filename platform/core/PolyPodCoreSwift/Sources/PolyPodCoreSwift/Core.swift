@@ -5,11 +5,11 @@ import MessagePack
 typealias CoreResponseObject = [MessagePackValue: MessagePackValue]
 
 enum PlatformRequest: String {
-    case Example
+    case example
 }
 
-enum PlatformResponse {
-    case Example(String)
+enum PlatformResponse: Codable {
+    case example(name: String)
 }
 
 /// Swift wrapper around the Rust Core.
@@ -34,13 +34,10 @@ public final class Core {
         let bridge = BridgeToPlatform(free_bytes: {
             $0?.deallocate()
         }, perform_request: { in_bytes in
-            let response = Result<PlatformResponse, Error> {
-                let request_from_core = try unpackBytes(bytes: in_bytes)
-                let platformRequest = try mapToPlatformRequest(request: request_from_core)
-                return handle(platformRequest: platformRequest)
-            }
+            let response: Result<PlatformResponse, CoreFailure> = unpackBytes(bytes: in_bytes)
+                .flatMap(mapToPlatformRequest(request:))
+                .map(handle(platformRequest:))
             
-            // TODO: Use CoreFailure for failures.
             return packPlatformResponse(response: response).toByteBuffer
         })
 
@@ -58,11 +55,18 @@ public final class Core {
     /// - Parameter featuresDirectory: Directory from which to load the feature categories.
      /// - Returns: A Result for loading operation.
     public func loadFeatureCategories(
-        featuresDirectory: String
+        featuresDirectory: String,
+        forceShow: [FeatureCategoryId]
     ) -> Result<[FeatureCategory], Error> {
-        let features_dir = NSString(string: featuresDirectory).utf8String!
+        var messagePackMap: [MessagePackValue: MessagePackValue] = [:]
+        messagePackMap["features_dir"] = .string(featuresDirectory)
+        messagePackMap["force_show"] =
+            .array(forceShow.map { .string($0.rawValue) })
+        let bytes = MessagePack.pack(MessagePackValue.map(messagePackMap))
+            .toByteBuffer
+        defer { bytes.data.deallocate() }
         return handleCoreResponse(
-            load_feature_categories(features_dir),
+            load_feature_categories(bytes),
             mapFeatureCategories
         )
     }
@@ -94,6 +98,18 @@ public final class Core {
     
     public func getUserSessionTimeoutOptionsConfig() -> Result<[UserSessionTimeoutOptionConfig], Error> {
         handleCoreResponse(get_user_session_timeout_options_config(), UserSessionTimeoutOptionConfig.mapUserSessionTimeoutOptionsConfig(_:))
+    }
+
+    public func executeRdfQuery(_ query: String) -> Result<MessagePackValue, Error> {
+        fatalError("RDF disabled. Enable the code below after building core with RDF")
+//        let query = NSString(string: query).utf8String!
+//        return handleCoreResponse(exec_rdf_query(query), { $0 })
+    }
+
+    public func executeRdfUpdate(_ update: String) -> Result<MessagePackValue, Error> {
+        fatalError("RDF disabled. Enable the code below after building core with RDF")
+//        let update = NSString(string: update).utf8String!
+//        return handleCoreResponse(exec_rdf_update(update), { $0 })
     }
 
     // MARK: - Internal API

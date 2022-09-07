@@ -3,6 +3,7 @@
 build_type := $(if $(filter $(MODE), release),release,debug)
 cargo_build_flag := $(if $(filter $(build_type), release), --release)
 target := target/$(build_type)
+cargo_features := $(if $(FEATURES),--features $(FEATURES),)
 
 # iOS export
 export_dir_ios := export/ios
@@ -15,7 +16,6 @@ ios_targets := iPhone simulator
 tools_dir := tools
 android_core := PolyPodCoreAndroid/core/src/main/
 android_version := 24
-google_repo := https://dl.google.com/android/repository
 android_triples := aarch64-linux-android x86_64-linux-android
 android_binaries := $(patsubst %, target/%/libpolypod_core.so, $(android_triples))
 android_architectures := arm64-v8a x86_64
@@ -29,6 +29,7 @@ ifeq ($(OS),Windows_NT)
 else
 	os_echo := echo
 	ifeq ($(shell uname -s),Darwin)
+		ndk_download_url = $(google_repo)/$(ndk_lib)-darwin.zip
 		macos := true
 	endif
 endif
@@ -40,11 +41,11 @@ $(target): $(wildcard src/*.rs)
 ifeq (,$(shell which rustup))
 	$(error "Rust not installed, check https://www.rust-lang.org/tools/install to install rust on your system")
 endif
-	cargo build $(cargo_build_flag)
+	cargo build $(cargo_build_flag) $(cargo_features)
 
 # ============  Swift framework ============ #
 
-$(swift_core_framework): $(target)
+$(swift_core_framework):
 # Ensure correct OS is used
 ifeq ($(macos),)
 	@$(os_echo) "xcframework can only be built on macOS"
@@ -68,7 +69,7 @@ endif
 
 	# Generated module map and C header
 	cargo install cbindgen
-	cbindgen --config cbindgen.toml -o $(export_dir_ios)/headers/polypod-core.h
+	cbindgen --lang c --crate ffi -o $(export_dir_ios)/headers/polypod-core.h
 	@$(os_echo) "module PolyPodCore { header \"polypod-core.h\" export * }" >> $(export_dir_ios)/headers/module.modulemap
 
 	# Package xcframework
@@ -81,19 +82,20 @@ endif
 
 define build_for_architecture
 	rustup target add $(1)
-	cargo build \
+	cargo build -p ffi \
 		$(cargo_build_flag) \
-		--lib --target $(1)
+		--lib --target $(1) \
+		$(cargo_features)
 endef
 
 # ============ Android lib ============ #
 
-$(android_binaries): $(target) 
+$(android_binaries):
 	cargo install cargo-ndk --version $(cargo_ndk_version)
 	rustup target add $(android_triples)
 
 	$(foreach triple, $(android_triples), \
-		cargo ndk --platform $(android_version) --target $(triple) build $(cargo_build_flag); \
+		cargo ndk --platform $(android_version) --target $(triple) build $(cargo_build_flag) -p ffi $(cargo_features); \
 	)
 
 $(android_core_libraries): $(android_binaries)
@@ -103,6 +105,8 @@ define copy_android_arch
    mkdir -p $(jni_libs_copy_path)/$2
    cp target/$1/$(build_type)/libpolypod_core.so \
 	  $(jni_libs_copy_path)/$2/libpolypod_core.so;
+   cp ${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/*/sysroot/usr/lib/$1/libc++_shared.so \
+	   $(jni_libs_copy_path)/$2/libc++_shared.so;
 endef
 
 # ============ Main targets ============ #

@@ -71,7 +71,7 @@ extension PolyOut {
         return id.removingPercentEncoding
     }
 
-    func stat(url: String, completionHandler: @escaping (FileStats?, Error?) -> Void) {
+    func stat(url: String, completionHandler: @escaping (Stats?, Error?) -> Void) {
         let targetPath = fsUriFromPodUrl(url)
         guard let filePath = targetPath else {
             completionHandler(nil, PodApiError.noSuchFile(url))
@@ -93,8 +93,8 @@ extension PolyOut {
                         acc.isEmpty ? x : acc + "," + x
                     }
                 }
-                completionHandler(FileStats(
-                    isDirectory: isDir.boolValue,
+                completionHandler(Stats(
+                    directory: isDir.boolValue,
                     size: try calculateFileSize(filePath.path),
                     time: "\(Int(floor(time.timeIntervalSince1970)))",
                     name: name ?? URL(fileURLWithPath: filePath.path).lastPathComponent,
@@ -167,10 +167,12 @@ extension PolyOut {
                     let relativePath = fileURL.resolvingSymlinksInPath().absoluteString.replacingOccurrences(
                         of: targetUrl.absoluteString,
                         with: ""
-                    ).replacingOccurrences(of: "%20", with: " ")
+                    )
+                    let decodedPath = relativePath.removingPercentEncoding
+                    let path = decodedPath ?? relativePath
 
-                    let fileId = url + "/" + relativePath
-                    entries.append(["id": fileId, "path": relativePath])
+                    let fileId = url + "/" + path
+                    entries.append(["id": fileId, "path": path])
                 }
             }
             readDirCache[url] = entries
@@ -188,10 +190,15 @@ extension PolyOut {
             return FileManager.default.fileExists(atPath: path)
         }
         let idPrefix = "\(PolyOut.fsPrefix)\(PolyOut.fsFilesRoot)/"
-        let entries = storedFiles.map {[
-            "id": $0,
-            "path": $0.replacingOccurrences(of: idPrefix, with: "")
-        ]}
+        let entries = storedFiles.map { key -> [String: String] in
+            let relativePath = key.replacingOccurrences(of: idPrefix, with: "")
+            let decodedPath = relativePath.removingPercentEncoding
+            let path = decodedPath ?? relativePath
+            return [
+                "id": key,
+                "path": path
+            ]
+        }
         completionHandler(entries, nil)
     }
 

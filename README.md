@@ -101,4 +101,4 @@ License information of 3rd party components is available in the
 - polyPod® is a registered trademark of pc polypoly coop SCE mbH
 - polyPedia® is a registered trademark of polypoly Foundation gGmbH
 
-[1]: https://polypoly.coop/static/polypoly_Whitepaper_polyPod.pdf
+[1]: https://polypoly.net/en/blog/whitepaper-in-pod-we-trust-our-technological-centrepiece/

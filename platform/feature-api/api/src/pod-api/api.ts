@@ -6,16 +6,23 @@
  */
 
 import * as RDF from "rdf-js";
-import { ExternalFile, FS } from "./fs";
 
 /**
  * A _matcher_ specifies a filter for querying the Pod store.
  */
 export interface Matcher {
+    graph: RDF.Quad_Graph;
     subject: RDF.Quad_Subject;
     predicate: RDF.Quad_Predicate;
     object: RDF.Quad_Object;
 }
+
+/**
+ * For SELECT queries an array of Map objects which keys are the
+ * bound variables and values are the values the result is bound to,
+ * for CONSTRUCT and ÐESCRIBE queries an array of quads, for ASK queries a boolean.
+ */
+export type SPARQLQueryResult = Map<string, RDF.Term>[] | RDF.Quad[] | boolean;
 
 /**
  * `PolyIn` specifies the interaction of the Feature with the Pod store. It is concerned with creating and manipulating
@@ -62,13 +69,13 @@ export interface PolyIn {
     match(matcher: Partial<Matcher>): Promise<RDF.Quad[]>;
 
     /**
-     * Instructs the Pod to add triples to the store. Successful storage is not guaranteed, as that may be contingent
+     * Instructs the Pod to add a triple to the store. Successful storage is not guaranteed, as that may be contingent
      * on other constraints, e.g. access restrictions or synchronization across multiple machines.
      *
      * In general, (synchronous) storage errors _should_ be propagated by the Pod to the Feature, resulting in this
      * method throwing an exception or returning a failed promise. Causes for this include, but are not limited to:
      *
-     * - any of the triples is malformed, e.g. not using the default graph
+     * - the triple is malformed, e.g. not using the default graph
      * - internal storage error, e.g. disk not writable
      * - permission violation
      *
@@ -76,25 +83,43 @@ export interface PolyIn {
      * option or some form of UI to inform the user of the failure. Other errors are handled by the Pod directly, for
      * example failure of synchronization across multiple devices.
      *
-     * @param quads the triples that should be stored in the Pod
+     * @param quad the triple that should be stored in the Pod
      */
-    add(...quads: RDF.Quad[]): Promise<void>;
+    add(quad: RDF.Quad): Promise<void>;
 
     /**
      * Deletes the indicated triples
      *
-     * @param quads the triples that should be removed from the Pod
+     * @param quad the triple that should be removed from the Pod
      */
-    delete(...quads: RDF.Quad[]): Promise<void>;
+    delete(quad: RDF.Quad): Promise<void>;
 
     /**
-     * Checks whether the set of triples (called quads because they include the graph or namespace)
-     * are included in the pod. Returns true if they do.
+     * Checks whether the set of triple (called quads because they include the graph or namespace)
+     * is included in the pod. Returns true if they do.
      *
-     * @param quads the triples that should be removed from the Pod
+     * @param quad the triple that should be removed from the Pod
      * @returns a Promise that will be resolved to a boolean.
      */
-    has(...quads: RDF.Quad[]): Promise<boolean>;
+    has(quad: RDF.Quad): Promise<boolean>;
+}
+
+/*
+ * `Triplestore` is used to access the features own RDF-SPARQL database and get the interface to operate on it
+ */
+export interface Triplestore {
+    /**
+     * Executes a SPARQL 1.1 SELECT, CONSTRUCT, DESCRIBE, or ASK query.
+     * @returns a Promise that will be resolved with the result of the query.
+     */
+    query(query: string): Promise<SPARQLQueryResult>;
+
+    /**
+     * Executes a SPARQL 1.1 UPDATE query.
+     * @returns a Promise that will be resolved with undefined when the changes
+     *          have been applied and written to disk
+     */
+    update(query: string): Promise<void>;
 }
 
 /**
@@ -106,6 +131,14 @@ export interface Entry {
     path: string;
 }
 
+export interface Stats {
+    id: string;
+    size: number;
+    time: string;
+    name: string;
+    directory: boolean;
+}
+
 /**
  * `PolyOut` specifies the interaction of the Feature with the environment. It is concerned with file system operations
  * and HTTP requests.
@@ -113,12 +146,24 @@ export interface Entry {
  * Both of these aspects are separated out into their own modules:
  * - [[FS]] for Node.js-style file-system access
  */
-export interface PolyOut extends Omit<FS, "readdir"> {
+export interface PolyOut {
+    readFile(path: string): Promise<Uint8Array>;
+    writeFile(path: string, content: string): Promise<void>;
+    stat(path: string): Promise<Stats>;
+    importArchive(url: string, destUrl?: string): Promise<string>;
+    removeArchive(fileId: string): Promise<void>;
+
     /**
      * @param pathToDir system-dependent path to read.
      * @returns a Promise with id-path pairs [[Entry]] as payload.
      */
     readDir(pathToDir: string): Promise<Entry[]>;
+}
+
+export interface ExternalFile {
+    name: string;
+    url: string;
+    size: number;
 }
 
 /**
@@ -289,6 +334,12 @@ export interface Pod {
      * definition.
      */
     readonly endpoint: Endpoint;
+
+    /**
+     * `triplestore` is an interface to interact with the SPARQL-RDF database
+     */
+    readonly triplestore: Triplestore;
+
     /**
      * @hidden
      */

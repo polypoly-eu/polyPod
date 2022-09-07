@@ -147,6 +147,6 @@ h5 {
 }
 
 .import-view .explanation-expandable button.bg-red {
-    background-color: var(--color-red-300);
+    background-color: var(--theme-tertiary-color);
     color: var(--theme-secondary-color);
 }

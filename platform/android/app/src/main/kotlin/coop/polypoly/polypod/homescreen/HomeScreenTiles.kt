@@ -19,6 +19,8 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
@@ -33,6 +35,7 @@ fun isLight(color: Color): Boolean {
 fun BigTileView(tile: Tile) {
     Card(
         modifier = Modifier
+            .semantics { testTag = "Tile" }
             .width(tile.layout.width)
             .height(tile.layout.height)
             .clickable {
@@ -112,6 +115,7 @@ fun BigTileView(tile: Tile) {
 fun MediumTileView(tile: Tile) {
     Card(
         modifier = Modifier
+            .semantics { testTag = "Tile" }
             .width(tile.layout.width)
             .height(tile.layout.height)
             .clickable {
@@ -185,6 +189,7 @@ fun MediumTileView(tile: Tile) {
 fun SmallTileView(tile: Tile) {
     Card(
         modifier = Modifier
+            .semantics { testTag = "Tile" }
             .width(tile.layout.width)
             .height(tile.layout.height)
             .clickable {

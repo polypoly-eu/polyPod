@@ -7,7 +7,6 @@
 
 export * from "./api";
 export * from "./default";
-export * from "./fs";
 export * from "./feature";
 export * from "./spec";
 export * from "./uri";

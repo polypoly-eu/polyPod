@@ -4,7 +4,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: var(--theme-primary-color);
+  background-color: var(--pl-screen-color-fill);
   padding: 0 calc(var(--gdu) * 4);
   overflow: hidden scroll;
 }

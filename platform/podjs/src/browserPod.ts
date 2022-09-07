@@ -7,22 +7,23 @@ import type {
     PolyIn,
     PolyOut,
     PolyNav,
-    EncodingOptions,
     Stats,
     Entry,
+    SPARQLQueryResult,
+    Triplestore,
 } from "@polypoly-eu/api";
 import { dataFactory, PolyUri, isPolypodUri } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
-import * as RDFString from "rdf-string";
 import * as zip from "@zip.js/zip.js";
 import endpointsJson from "../../../../polyPod-config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
+import initOxigraph, * as oxigraph from "../node_modules/oxigraph/web.js";
+import oxigraphWasmModule from "oxigraph/web_bg.wasm";
 
 const DB_PREFIX = "polypod:";
 const DB_VERSION = 1;
 const OBJECT_STORE_POLY_IN = "poly-in";
 const OBJECT_STORE_POLY_OUT = "poly-out";
-const QUAD_KEYS = ["subject", "predicate", "object"];
 
 const NAV_FRAME_ID = "polyNavFrame";
 const NAV_DEFAULT_BACKGROUND_COLOR = "#ffffff";
@@ -42,13 +43,7 @@ async function openDatabase(): Promise<IDBDatabase> {
 
         request.onupgradeneeded = () => {
             const db = request.result;
-            const polyInStore = db.createObjectStore(OBJECT_STORE_POLY_IN, {
-                keyPath: QUAD_KEYS,
-            });
-            for (let mask = 1; mask < (1 << QUAD_KEYS.length) - 1; mask++) {
-                const keyPath = QUAD_KEYS.filter((_, idx) => (mask >> idx) & 1);
-                polyInStore.createIndex(keyPath.join("-"), keyPath);
-            }
+            db.createObjectStore(OBJECT_STORE_POLY_IN);
             const polyOutStore = db.createObjectStore(OBJECT_STORE_POLY_OUT, {
                 autoIncrement: true,
             });
@@ -61,97 +56,147 @@ async function openDatabase(): Promise<IDBDatabase> {
 }
 
 /**
- *  It implements the `PolyIn` interface by storing quads in an IndexedDB database
- *  @class IDBPolyIn
+ * It implements the `PolyIn` interface by storing quads using Oxigraph
+ * and syncing the storage to IndexedDB
+ * @class IDBPolyIn
  */
-class IDBPolyIn implements PolyIn {
+class OxigraphPolyIn implements PolyIn {
+    private store: Promise<oxigraph.Store> = this.init();
+    private pendingSync: Promise<void> | null = null;
+
+    private async init(): Promise<oxigraph.Store> {
+        type wasmModule = () => Promise<WebAssembly.Module>;
+        const [, data] = (await Promise.all([
+            initOxigraph((oxigraphWasmModule as unknown as wasmModule)()),
+            openDatabase().then(
+                (db) =>
+                    new Promise((resolve, reject) => {
+                        const tx = db.transaction(
+                            [OBJECT_STORE_POLY_IN],
+                            "readonly"
+                        );
+                        const store = tx.objectStore(OBJECT_STORE_POLY_IN);
+                        const request = store.get(0);
+                        request.onsuccess = () => resolve(request.result);
+                        tx.onerror = tx.onabort = () => reject(request.error);
+                    })
+            ),
+        ])) as [unknown, string];
+        const store = new oxigraph.Store();
+        if (data) store.load(data, "application/n-quads", undefined, undefined);
+        return store;
+    }
+
+    private async sync(store: oxigraph.Store): Promise<void> {
+        return (this.pendingSync ||= (async (): Promise<void> => {
+            try {
+                const db = await openDatabase();
+                return new Promise((resolve, reject) => {
+                    const tx = db.transaction(
+                        [OBJECT_STORE_POLY_IN],
+                        "readwrite"
+                    );
+                    const data = store.dump("application/n-quads", undefined);
+                    tx.objectStore(OBJECT_STORE_POLY_IN).put(data, 0);
+                    tx.oncomplete = () => resolve(undefined);
+                    tx.onerror = tx.onabort = () => reject(tx.error);
+                });
+            } finally {
+                this.pendingSync = null;
+            }
+        })());
+    }
+
     async match(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
-        const db = await openDatabase();
-        return new Promise((resolve, reject) => {
-            const index = [];
-            const query = [];
-            for (const key of QUAD_KEYS) {
-                const value = matcher[key as keyof Matcher];
-                if (value) {
-                    index.push(key);
-                    query.push(RDFString.termToString(value));
-                }
-            }
-
-            const tx = db.transaction([OBJECT_STORE_POLY_IN], "readonly");
-            const store = tx.objectStore(OBJECT_STORE_POLY_IN);
-            const request =
-                index.length > 0
-                    ? (index.length < QUAD_KEYS.length
-                          ? store.index(index.join("-"))
-                          : store
-                      ).getAll(query)
-                    : store.getAll();
-
-            request.onsuccess = () =>
-                resolve(
-                    request.result.map((quad: RDFString.IStringQuad) =>
-                        RDFString.stringQuadToQuad(quad)
-                    )
-                );
-
-            tx.onerror = tx.onabort = () => reject(tx.error);
-        });
-    }
-
-    private checkQuad(quad: RDF.Quad): void {
-        if (!quad.graph.equals(dataFactory.defaultGraph()))
-            throw new Error("Only default graph allowed");
-    }
-
-    async add(...quads: RDF.Quad[]): Promise<void> {
-        const db = await openDatabase();
-        return new Promise((resolve, reject) => {
-            const tx = db.transaction([OBJECT_STORE_POLY_IN], "readwrite");
-            const store = tx.objectStore(OBJECT_STORE_POLY_IN);
-            for (const quad of quads) {
-                this.checkQuad(quad);
-                store.put(RDFString.quadToStringQuad(quad));
-            }
-            tx.oncomplete = () => resolve();
-            tx.onerror = tx.onabort = () => reject(tx.error);
-        });
-    }
-
-    private serializeKeys(quad: RDF.Quad): string[] {
-        this.checkQuad(quad);
-        return QUAD_KEYS.map((key) =>
-            RDFString.termToString(quad[key as keyof RDF.Quad] as RDF.Term)
+        return (await this.store).match(
+            matcher.subject,
+            matcher.predicate,
+            matcher.object,
+            matcher.graph
         );
     }
 
-    async delete(...quads: RDF.Quad[]): Promise<void> {
-        const db = await openDatabase();
-        return new Promise((resolve, reject) => {
-            const tx = db.transaction([OBJECT_STORE_POLY_IN], "readwrite");
-            const store = tx.objectStore(OBJECT_STORE_POLY_IN);
-            for (const quad of quads) store.delete(this.serializeKeys(quad));
-            tx.oncomplete = () => resolve();
-            tx.onerror = tx.onabort = () => reject(tx.error);
-        });
+    private checkQuad(quad: RDF.Quad): void {
+        if (quad.graph.termType != "DefaultGraph")
+            throw new Error("Only default graph allowed");
     }
 
-    async has(...quads: RDF.Quad[]): Promise<boolean> {
-        const db = await openDatabase();
-        return new Promise((resolve, reject) => {
-            const tx = db.transaction([OBJECT_STORE_POLY_IN], "readonly");
-            const store = tx.objectStore(OBJECT_STORE_POLY_IN);
-            const lookupQuad = (i: number): void => {
-                if (i >= quads.length) resolve(false);
-                else {
-                    const request = store.count(this.serializeKeys(quads[i]));
-                    request.onsuccess = () =>
-                        request.result > 0 ? resolve(true) : lookupQuad(i + 1);
-                }
-            };
-            lookupQuad(0);
-            tx.onerror = tx.onabort = () => reject(tx.error);
-        });
+    async add(quad: RDF.Quad): Promise<void> {
+        const store = await this.store;
+        this.checkQuad(quad);
+        store.add(quad);
+        await this.sync(store);
+    }
+
+    async delete(quad: RDF.Quad): Promise<void> {
+        const store = await this.store;
+        this.checkQuad(quad);
+        store.delete(quad);
+        await this.sync(store);
+    }
+
+    async has(quad: RDF.Quad): Promise<boolean> {
+        const store = await this.store;
+        this.checkQuad(quad);
+        return store.has(quad);
+    }
+}
+
+class BrowserTriplestore implements Triplestore {
+    private store: Promise<oxigraph.Store> = this.init();
+    private pendingSync: Promise<void> | null = null;
+
+    private async init(): Promise<oxigraph.Store> {
+        type wasmModule = () => Promise<WebAssembly.Module>;
+        const [, data] = (await Promise.all([
+            initOxigraph((oxigraphWasmModule as unknown as wasmModule)()),
+            openDatabase().then(
+                (db) =>
+                    new Promise((resolve, reject) => {
+                        const tx = db.transaction(
+                            [OBJECT_STORE_POLY_IN],
+                            "readonly"
+                        );
+                        const store = tx.objectStore(OBJECT_STORE_POLY_IN);
+                        const request = store.get(0);
+                        request.onsuccess = () => resolve(request.result);
+                        tx.onerror = tx.onabort = () => reject(request.error);
+                    })
+            ),
+        ])) as [unknown, string];
+        const store = new oxigraph.Store();
+        if (data) store.load(data, "application/n-quads", undefined, undefined);
+        return store;
+    }
+
+    private async sync(store: oxigraph.Store): Promise<void> {
+        return (this.pendingSync ||= (async (): Promise<void> => {
+            try {
+                const db = await openDatabase();
+                return new Promise((resolve, reject) => {
+                    const tx = db.transaction(
+                        [OBJECT_STORE_POLY_IN],
+                        "readwrite"
+                    );
+                    const data = store.dump("application/n-quads", undefined);
+                    tx.objectStore(OBJECT_STORE_POLY_IN).put(data, 0);
+                    tx.oncomplete = () => resolve(undefined);
+                    tx.onerror = tx.onabort = () => reject(tx.error);
+                });
+            } finally {
+                this.pendingSync = null;
+            }
+        })());
+    }
+
+    async query(query: string): Promise<SPARQLQueryResult> {
+        return (await this.store).query(query);
+    }
+
+    async update(query: string): Promise<void> {
+        const store = await this.store;
+        store.update(query);
+        await this.sync(store);
     }
 }
 
@@ -204,57 +249,6 @@ interface FileInfo {
 }
 
 /**
- * A variant of Stats that maintains compatibility with other polyPod
- * implementations by exposing value properties.
- *
- * TODO: Eliminate the need for this, either by adding the value properties to
- *       the Stats interface, or by eliminating them in all other polyPod
- *       implementations, and their usages in all features.
- */
-class CompatStats implements Stats {
-    constructor(
-        readonly id: string,
-        readonly size: number,
-        readonly time: string,
-        readonly name: string,
-        readonly directory: boolean
-    ) {}
-
-    get file(): boolean {
-        return !this.directory;
-    }
-
-    getId(): string {
-        return this.id;
-    }
-
-    getSize(): number {
-        return this.size;
-    }
-
-    getTime(): string {
-        return this.time;
-    }
-
-    getName(): string {
-        return this.name;
-    }
-
-    isFile(): boolean {
-        return this.file;
-    }
-
-    isDirectory(): boolean {
-        return this.directory;
-    }
-}
-
-interface File {
-    read(): Promise<Uint8Array>;
-    stat(): CompatStats;
-}
-
-/**
  * It implements the PolyOut interface by storing files in IndexedDB
  * @class IDBPolyOut
  */
@@ -282,7 +276,9 @@ class IDBPolyOut implements PolyOut {
         return entries;
     }
 
-    private async getFile(id: string): Promise<File> {
+    private async getFile(
+        id: string
+    ): Promise<{ read(): Promise<Uint8Array>; stat(): Stats }> {
         const match = /^(.*?:\/\/.*?)\/(.*)/.exec(id);
         if (match) {
             const [, zipId, filename] = match;
@@ -297,13 +293,13 @@ class IDBPolyOut implements PolyOut {
                     return entry.getData(new zip.Uint8ArrayWriter());
                 },
                 stat() {
-                    return new CompatStats(
+                    return {
                         id,
-                        entry.uncompressedSize,
-                        entry.lastModDate.toISOString(),
-                        filename,
-                        entry.directory
-                    );
+                        size: entry.uncompressedSize,
+                        time: entry.lastModDate.toISOString(),
+                        name: filename,
+                        directory: entry.directory,
+                    };
                 },
             };
         }
@@ -314,34 +310,24 @@ class IDBPolyOut implements PolyOut {
                 return new Uint8Array(await file.blob.arrayBuffer());
             },
             stat() {
-                return new CompatStats(
+                return {
                     id,
-                    file.blob.size,
-                    file.time.toISOString(),
-                    file.name,
-                    false
-                );
+                    size: file.blob.size,
+                    time: file.time.toISOString(),
+                    name: file.name,
+                    directory: false,
+                };
             },
         };
     }
 
-    readFile(path: string, options: EncodingOptions): Promise<string>;
-
-    readFile(path: string): Promise<Uint8Array>;
-
-    readFile(
-        id: string,
-        options?: EncodingOptions
-    ): Promise<string | Uint8Array | undefined> {
-        if (options) {
-            throw new Error("Not implemented: readFile with options");
-        }
-        return this.getFile(id).then((file) => file.read());
+    async readFile(id: string): Promise<Uint8Array> {
+        return (await this.getFile(id)).read();
     }
 
-    async stat(id: string): Promise<CompatStats> {
+    async stat(id: string): Promise<Stats> {
         if (id != "") return (await this.getFile(id)).stat();
-        return new CompatStats("", 0, "", "", true);
+        return { id: "", size: 0, time: "", name: "", directory: true };
     }
 
     async readDir(id: string): Promise<Entry[]> {
@@ -556,6 +542,7 @@ interface EndpointInfo {
 
 interface EndpointJSON {
     polyPediaReport: EndpointInfo;
+    polyApiErrorReport: EndpointInfo;
     demoTest: EndpointInfo;
 }
 
@@ -840,11 +827,12 @@ function createNavBarFrame(title: string): HTMLElement {
  */
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
-    public readonly polyIn = new IDBPolyIn();
+    public readonly polyIn = new OxigraphPolyIn();
     public readonly polyOut = new IDBPolyOut();
     public readonly polyNav = new BrowserPolyNav();
     public readonly info = new PodJsInfo();
     public readonly endpoint = new BrowserEndpoint();
+    public readonly triplestore = new BrowserTriplestore();
 
     /** Creates a navigation bar for the app. */
     constructor() {

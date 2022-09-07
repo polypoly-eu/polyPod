@@ -3,6 +3,7 @@ package coop.polypoly.core
 import org.msgpack.core.MessagePack
 import org.msgpack.core.MessageUnpacker
 import org.msgpack.value.Value
+import org.msgpack.value.ValueFactory
 
 class Core {
     companion object {
@@ -16,10 +17,35 @@ class Core {
             ) {}
         }
 
-        fun loadFeatureCategories(featuresDir: String): List<FeatureCategory> {
+        fun loadFeatureCategories(
+            featuresDir: String,
+            forceShow: List<FeatureCategoryId>
+        ): List<FeatureCategory> {
+            val args = mutableMapOf<Value, Value>()
+            args[ValueFactory.newString("features_dir")] =
+                ValueFactory.newString(featuresDir)
+            args[ValueFactory.newString("force_show")] =
+                ValueFactory.newArray(
+                    forceShow.map { ValueFactory.newString(it.toString()) }
+                )
+            val bytes = ValueFactory.newMap(args).pack()
+            return handleCoreResponse(JniApi.loadFeatureCategories(bytes)) {
+                mapFeatureCategories(
+                    it
+                )
+            }
+        }
+
+        fun execRdfQuery(query: String): Value {
             return handleCoreResponse(
-                JniApi.loadFeatureCategories(featuresDir)
-            ) { mapFeatureCategories(it) }
+                JniApi.execRdfQuery(query)
+            ) { it }
+        }
+
+        fun execRdfUpdate(query: String) {
+            return handleCoreResponse(
+                JniApi.execRdfUpdate(query)
+            ) {}
         }
 
         fun appDidBecomeInactive() {
