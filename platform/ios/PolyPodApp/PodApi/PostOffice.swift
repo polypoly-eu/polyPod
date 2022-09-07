@@ -15,8 +15,8 @@ class PostOffice {
     
     // swiftlint:disable cyclomatic_complexity function_body_length
     func handleIncomingEvent(eventData: [String: Any], completionHandler: @escaping ([UInt8]) -> Void) {
-    // swiftlint:enable cyclomatic_complexity function_body_length
-
+        // swiftlint:enable cyclomatic_complexity function_body_length
+        
         guard let bytes = eventData as? [String: NSNumber] else { return }
         
         let sortedBytes = bytes.sorted(by: { $0.0.compare($1.0, options: .numeric) == .orderedAscending })
@@ -89,9 +89,18 @@ class PostOffice {
         case "endpoint":
             handleEndpoint(method: method, args: args, completionHandler: { response, error in
                 self.completeEvent(
-                    messageId: messageId, 
+                    messageId: messageId,
                     response: response,
-                    error: error, 
+                    error: error,
+                    completionHandler: completionHandler
+                )
+            })
+        case "triplestore":
+            handleTriplestore(method: method, args: args, completionHandler: { response, error in
+                self.completeEvent(
+                    messageId: messageId,
+                    response: response,
+                    error: error,
                     completionHandler: completionHandler
                 )
             })
@@ -575,15 +584,68 @@ extension PostOffice {
         let contentType = args[1] as? String
         let authToken = args[2] as? String
         PodApi.shared.endpoint.get(
-            endpointId: endpointId, 
-            contentType: contentType, 
+            endpointId: endpointId,
+            contentType: contentType,
             authToken: authToken
-            ) { data, error in
-                if error == nil {
-                    completionHandler(data.map(MessagePackValue.string), nil)
-                    return
-                }
-                completionHandler(nil, createErrorResponse(#function, error!))
+        ) { data, error in
+            if error == nil {
+                completionHandler(data.map(MessagePackValue.string), nil)
+                return
+            }
+            completionHandler(nil, createErrorResponse(#function, error!))
+        }
+    }
+}
+
+extension PostOffice {
+    private func handleTriplestore(
+        method: String,
+        args: [Any],
+        completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
+    ) {
+        switch method {
+        case "query":
+            handleTripleStoreQuery(args: args, completionHandler: completionHandler)
+        case "update":
+            handleTripleStoreUpdate(args: args, completionHandler: completionHandler)
+        default:
+            Log.error("Triplestore method unknown: \(method)")
+        }
+    }
+    
+    private func handleTripleStoreQuery(
+        args: [Any],
+        completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
+    ) {
+        guard let query = args[0] as? String else {
+            completionHandler(
+                nil,
+                createErrorResponse(#function, PodApiError.badArgumentType(args[0], type: "String"))
+            )
+            return
+        }
+        PodApi.shared.triplestore.query(query: query) { data, error in
+            if error == nil {
+                completionHandler(data, nil)
+                return
+            }
+            completionHandler(nil, createErrorResponse(#function, error!))
+        }
+    }
+    
+    private func handleTripleStoreUpdate(
+        args: [Any],
+        completionHandler: @escaping (MessagePackValue?, MessagePackValue?) -> Void
+    ) {
+        guard let query = args[0] as? String else {
+            completionHandler(
+                nil,
+                createErrorResponse(#function, PodApiError.badArgumentType(args[0], type: "String"))
+            )
+            return
+        }
+        PodApi.shared.triplestore.update(query: query) { error in
+            completionHandler(.nil, error == nil ? nil : createErrorResponse(#function, error!))
         }
     }
 }
