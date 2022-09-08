@@ -31,7 +31,7 @@ sealed class CoreRequest {
     class LoadFeatureCategories(
         val args: LoadFeatureCategoriesArguments
     ) : CoreRequest()
-    class AppDidBecomeInactive() : CoreRequest()
+    class HandleAppDidBecomeInactive() : CoreRequest()
     class IsUserSessionExpired() : CoreRequest()
     class SetUserSessionTimeout(
         val args: UserSessionTimeoutOption
@@ -48,8 +48,8 @@ sealed class CoreRequest {
                 "loadFeatureCategories".asValue() to
                     mapOf("args".asValue() to args.asValue()).asValue()
             ).asValue()
-            is CoreRequest.AppDidBecomeInactive ->
-                "appDidBecomeInactive".asValue()
+            is CoreRequest.HandleAppDidBecomeInactive ->
+                "handleAppDidBecomeInactive".asValue()
             is CoreRequest.IsUserSessionExpired ->
                 "isUserSessionExpired".asValue()
             is CoreRequest.SetUserSessionTimeout -> mapOf(

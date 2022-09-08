@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
         when (event) {
             Lifecycle.Event.ON_STOP,
             Lifecycle.Event.ON_DESTROY ->
-                Core.executeRequest(CoreRequest.AppDidBecomeInactive())
+                Core.executeRequest(CoreRequest.HandleAppDidBecomeInactive())
             Lifecycle.Event.ON_RESUME -> {
                 if (
                     Authentication.canAuthenticate(this) &&

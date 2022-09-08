@@ -61,7 +61,7 @@ struct ContentView: View {
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
             _ = Core
                 .instance
-                .executeRequest(.appDidBecomeInactive)
+                .executeRequest(.handleAppDidBecomeInactive)
                 .inspectError({ error in
                     Log.error("Failed to notify core that app did become inactive \(error)")
                 })

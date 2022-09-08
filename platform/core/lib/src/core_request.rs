@@ -35,7 +35,7 @@ pub enum CoreRequest {
     LoadFeatureCategories {
         args: LoadFeatureCategoriesArguments,
     },
-    AppDidBecomeInactive,
+    HandleAppDidBecomeInactive,
     IsUserSessionExpired,
     SetUserSessionTimeout {
         args: TimeoutOption,
@@ -59,7 +59,7 @@ pub fn execute_request(request: CoreRequest) -> MessagePackBytes {
     };
     match request {
         CoreRequest::LoadFeatureCategories { args } => instance.load_feature_categories(args),
-        CoreRequest::AppDidBecomeInactive => instance.app_did_become_inactive(),
+        CoreRequest::HandleAppDidBecomeInactive => instance.handle_app_did_become_inactive(),
         CoreRequest::IsUserSessionExpired => instance.is_user_session_expired(),
         CoreRequest::SetUserSessionTimeout { args } => {
             instance.set_user_session_timeout_option(args)
@@ -85,7 +85,7 @@ impl Core<'_> {
         ))
     }
 
-    fn app_did_become_inactive(&mut self) -> MessagePackBytes {
+    fn handle_app_did_become_inactive(&mut self) -> MessagePackBytes {
         message_pack_serialize((|| -> Result<(), CoreFailure> {
             self.user_session
                 .get_mut()

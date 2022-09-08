@@ -10,7 +10,7 @@ public struct LoadFeatureArguments: Encodable {
 
 public enum CoreRequest: Encodable {
     case loadFeatureCategories(args: LoadFeatureArguments)
-    case appDidBecomeInactive
+    case handleAppDidBecomeInactive
     case isUserSessionExpired
     case setUserSessionTimeout(args: UserSessionTimeoutOption)
     case getUserSessionTimeoutOption

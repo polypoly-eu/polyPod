@@ -19,7 +19,7 @@ enum class CoreExceptionCode(val value: Int) {
 data class CoreFailure(
     val code: CoreExceptionCode,
     override val message: String
-) : Exception("$code -> $message") {
+) : Exception("$code → $message") {
     companion object {
         fun from(value: Value): CoreFailure {
             val msgObject = value.asMapValue().map()

@@ -15,6 +15,7 @@ pub enum PlatformRequest {
 }
 
 impl Core<'_> {
+    #[allow(dead_code)]
     pub fn send_platform_request<Response: DeserializeOwned>(
         &self,
         request: PlatformRequest,
