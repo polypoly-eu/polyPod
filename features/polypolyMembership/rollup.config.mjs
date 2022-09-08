@@ -14,7 +14,7 @@ const externalPackages = {
 };
 
 export default {
-    input: "src/index.jsx",
+    input: "src/polypolyMembership.jsx",
     output: {
         file: "dist/index.js",
         format: "iife",
