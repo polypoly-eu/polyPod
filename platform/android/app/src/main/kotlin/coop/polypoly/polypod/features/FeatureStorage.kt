@@ -6,6 +6,7 @@ import coop.polypoly.core.CoreRequest
 import coop.polypoly.core.Feature
 import coop.polypoly.core.FeatureCategory
 import coop.polypoly.core.LoadFeatureCategoriesArguments
+import coop.polypoly.core.FeatureCategoryId
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.ZipTools
 import java.io.File
@@ -17,6 +18,7 @@ object FeatureStorage {
     var activeFeatureId: String? = null
 
     var categories: List<FeatureCategory> = ArrayList()
+    var forceShowCategories: List<FeatureCategoryId> = emptyList()
 
     fun importFeatures(context: Context) {
         val featuresDir = getFeaturesDir(context)
@@ -34,7 +36,7 @@ object FeatureStorage {
             CoreRequest.LoadFeatureCategories(
                 LoadFeatureCategoriesArguments(
                     getFeaturesDir(context).path,
-                    emptyList()
+                    forceShowCategories
                 )
             )
         ) { it.asArrayValue().map(FeatureCategory::from) }
