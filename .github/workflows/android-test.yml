@@ -2,11 +2,12 @@ name: polyPod Android integration test
 on:
     push:
         paths:
-            - "features/test/*"
+            - "feature-utils/**"
+            - "features/**"
             - "platform/feature-api/**"
             - "platform/core/**"
             - "platform/android/**"
-            - ".github/workflows/instrumentation-test.yml"
+            - ".github/workflows/android-test.yml"
 
 jobs:
     test:
