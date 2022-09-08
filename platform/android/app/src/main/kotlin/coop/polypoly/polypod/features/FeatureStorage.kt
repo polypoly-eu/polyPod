@@ -5,8 +5,8 @@ import coop.polypoly.core.Core
 import coop.polypoly.core.CoreRequest
 import coop.polypoly.core.Feature
 import coop.polypoly.core.FeatureCategory
-import coop.polypoly.core.LoadFeatureCategoriesArguments
 import coop.polypoly.core.FeatureCategoryId
+import coop.polypoly.core.LoadFeatureCategoriesArguments
 import coop.polypoly.polypod.logging.LoggerFactory
 import coop.polypoly.polypod.polyNav.ZipTools
 import java.io.File

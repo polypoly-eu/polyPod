@@ -1,6 +1,5 @@
 package coop.polypoly.core
 
-import android.graphics.Color
 import org.msgpack.value.Value
 
 enum class FeatureCategoryId {
@@ -53,25 +52,17 @@ data class Feature(
             val map = value.asMapValue().map()
 
             return Feature(
-                map.getValue("path").toString(),
-                id = map.getValue("id").toString(),
-                name = map.getValue("name").toString(),
-                author = map.get("author")?.toString(),
-                version = map.get("version")?.toString(),
-                description = map.get("description")?.toString(),
-                thumbnail = map.get("thumbnail")?.toString(),
-                thumbnailColor = Color.parseColor(
-                    map.getValue("thumbnailColor").toString()
-                ),
-                primaryColor = Color.parseColor(
-                    map.getValue("primaryColor").toString()
-                ),
-                borderColor = Color.parseColor(
-                    map.getValue("borderColor").toString()
-                ),
-                tileTextColor = Color.parseColor(
-                    map.getValue("tileTextColor").toString()
-                ),
+                map.getString("path"),
+                id = map.getString("id"),
+                name = map.getString("name"),
+                author = map.getOptionalString("author"),
+                version = map.getOptionalString("version"),
+                description = map.getOptionalString("description"),
+                thumbnail = map.getOptionalString("thumbnail"),
+                thumbnailColor = map.getColor("thumbnailColor"),
+                primaryColor = map.getColor("primaryColor"),
+                borderColor = map.getColor("borderColor"),
+                tileTextColor = map.getColor("tileTextColor"),
                 links = map.getValue("links").asMapValue().map().map {
                     it.key.asStringValue().asString() to
                         it.value.asStringValue().asString()

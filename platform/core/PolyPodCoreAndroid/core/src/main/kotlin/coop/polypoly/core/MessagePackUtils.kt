@@ -1,24 +1,33 @@
 package coop.polypoly.core
 
+import android.graphics.Color
 import org.msgpack.core.MessagePack
 import org.msgpack.value.Value
 import org.msgpack.value.ValueFactory
 import java.io.ByteArrayOutputStream
 
-fun Value.getStringValue(): String? {
+fun Value.asOptionalString(): String? {
     if (isNilValue) {
         return null
     }
 
-    return asStringValue().asString()
+    return asString()
 }
 
-fun Value.getIntValue(): Int? {
+fun Value.asOptionalInt(): Int? {
     if (isNilValue) {
         return null
     }
 
     return asIntegerValue().asInt()
+}
+
+fun Value.asString(): String {
+    return asStringValue().asString()
+}
+
+fun Value.asColor(): Int {
+    return Color.parseColor(asString())
 }
 
 fun Map<Value, Value>.get(key: String): Value? {
@@ -27,6 +36,18 @@ fun Map<Value, Value>.get(key: String): Value? {
 
 fun Map<Value, Value>.getValue(key: String): Value {
     return getValue(ValueFactory.newString(key))
+}
+
+fun Map<Value, Value>.getOptionalString(key: String): String? {
+    return getValue(key).asOptionalString()
+}
+
+fun Map<Value, Value>.getString(key: String): String {
+    return getValue(key).asString()
+}
+
+fun Map<Value, Value>.getColor(key: String): Int {
+    return getValue(key).asColor()
 }
 
 fun Boolean.Companion.fromValue(value: Value): Boolean {
