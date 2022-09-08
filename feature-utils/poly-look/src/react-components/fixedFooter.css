@@ -1,0 +1,18 @@
+.fixed-footer::before {
+    content: "";
+    height: 40px;
+    position: absolute;
+    top: -40px;
+    right: 0;
+    left: 0;
+    background: linear-gradient(var(--transparent), var(--pl-screen-color-fill));
+}
+
+.fixed-footer {
+    text-align: center;
+    padding: 16px 16px 0 16px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}

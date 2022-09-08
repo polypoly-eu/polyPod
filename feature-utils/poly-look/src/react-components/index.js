@@ -3,6 +3,7 @@ import FilterChips from "./filterChips.jsx";
 import InfoBox from "./infoBox.jsx";
 import ProgressBar from "./progressBar.jsx";
 import ScrollLabel from "./scrollLabel.jsx";
+import FixedFooter from "./fixedFooter.jsx";
 import { Tab, Tabs } from "./tabs.jsx";
 import { BlockLegend, LineLegend, CircleLegend } from "./legends.jsx";
 import ErrorPopup from "./popUps/errorPopup/errorPopup.jsx";
@@ -65,4 +66,5 @@ export {
   ProgressBanner,
   NotificationBanner,
   notificationTypes,
+  FixedFooter,
 };
