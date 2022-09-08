@@ -22,6 +22,21 @@ import org.junit.runner.RunWith
 private typealias MainTestRule =
     AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>
 
+private fun waitFor(timeout: Long, f: () -> Unit) {
+    val interval = 100L
+    val startTime = System.currentTimeMillis()
+    while (true) {
+        Thread.sleep(interval)
+        try {
+            f()
+            break
+        } catch (e: Exception) {
+            if (System.currentTimeMillis() - startTime > timeout)
+                throw RuntimeException("Timeout after ${timeout}ms", e)
+        }
+    }
+}
+
 @RunWith(AndroidJUnit4::class)
 class FeatureTest {
     @get:Rule
@@ -42,20 +57,21 @@ class FeatureTest {
             performScrollTo()
             performClick()
         }
-        // TODO: Get rid of all these sleeps
-        Thread.sleep(1000)
+
         onFeature()
             .withElement(findElement(Locator.ID, "runAll"))
             .perform(webClick())
-        Thread.sleep(1000)
+
         val successStatus = "All OK"
         try {
-            onFeature().withElement(
-                findElement(
-                    Locator.XPATH,
-                    "//span[text()='$successStatus']"
+            waitFor(10000) {
+                onFeature().withElement(
+                    findElement(
+                        Locator.XPATH,
+                        "//span[text()='$successStatus']"
+                    )
                 )
-            )
+            }
         } catch (e: Exception) {
             throw RuntimeException("Status not '$successStatus'", e)
         }
