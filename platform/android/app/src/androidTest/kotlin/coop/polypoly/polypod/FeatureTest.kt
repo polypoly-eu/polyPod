@@ -48,13 +48,17 @@ class FeatureTest {
             .withElement(findElement(Locator.ID, "runAll"))
             .perform(webClick())
         Thread.sleep(1000)
-        // TODO: Custom failure message
-        onFeature().withElement(
-            findElement(
-                Locator.XPATH,
-                "//span[text()='All OK']"
+        val successStatus = "All OK"
+        try {
+            onFeature().withElement(
+                findElement(
+                    Locator.XPATH,
+                    "//span[text()='$successStatus']"
+                )
             )
-        )
+        } catch (e: Exception) {
+            throw RuntimeException("Status not '$successStatus'", e)
+        }
         Thread.sleep(1000)
     }
 
