@@ -7,7 +7,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.preference.PreferenceManager
 import androidx.test.espresso.web.sugar.Web.onWebView
-import androidx.test.espresso.web.webdriver.DriverAtoms.* // ktlint-disable no-wildcard-imports
+import androidx.test.espresso.web.webdriver.DriverAtoms
 import androidx.test.espresso.web.webdriver.Locator
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -59,14 +59,14 @@ class FeatureTest {
         }
 
         onFeature()
-            .withElement(findElement(Locator.ID, "runAll"))
-            .perform(webClick())
+            .withElement(DriverAtoms.findElement(Locator.ID, "runAll"))
+            .perform(DriverAtoms.webClick())
 
         val successStatus = "All OK"
         try {
             waitFor(10000) {
                 onFeature().withElement(
-                    findElement(
+                    DriverAtoms.findElement(
                         Locator.XPATH,
                         "//span[text()='$successStatus']"
                     )
@@ -77,5 +77,6 @@ class FeatureTest {
         }
     }
 
-    private fun onFeature() = onWebView().inWindow(selectFrameByIndex(0))
+    private fun onFeature() =
+        onWebView().inWindow(DriverAtoms.selectFrameByIndex(0))
 }
