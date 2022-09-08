@@ -59,7 +59,6 @@ class FeatureTest {
         } catch (e: Exception) {
             throw RuntimeException("Status not '$successStatus'", e)
         }
-        Thread.sleep(1000)
     }
 
     private fun onFeature() = onWebView().inWindow(selectFrameByIndex(0))
