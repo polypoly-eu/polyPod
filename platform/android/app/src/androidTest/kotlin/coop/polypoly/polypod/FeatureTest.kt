@@ -22,6 +22,9 @@ import org.junit.runner.RunWith
 private typealias MainTestRule =
     AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>
 
+private fun onFeature() =
+    onWebView().inWindow(DriverAtoms.selectFrameByIndex(0))
+
 private fun waitFor(timeout: Long, f: () -> Unit) {
     val interval = 100L
     val startTime = System.currentTimeMillis()
@@ -76,7 +79,4 @@ class FeatureTest {
             throw RuntimeException("Status not '$successStatus'", e)
         }
     }
-
-    private fun onFeature() =
-        onWebView().inWindow(DriverAtoms.selectFrameByIndex(0))
 }
