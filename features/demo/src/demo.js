@@ -77,4 +77,43 @@ window.addEventListener("DOMContentLoaded", () => {
                 this.disabled = false;
             });
     })();
+
+    (function () {});
+
+    document
+        .querySelector(".submit-rdf-form")
+        .addEventListener("click", async function () {
+            const personData = {
+                firstname: document.querySelector(".firstname").value,
+                lastname: document.querySelector(".lastname").value,
+                street: document.querySelector(".street").value,
+                number: document.querySelector(".number").value,
+                city: document.querySelector(".city").value,
+                birthday: document.querySelector(".birthday").value,
+            };
+            for (let [key, value] of Object.entries(personData)) {
+                const { triplestore } = await window.pod;
+                console.log(value, key);
+                try {
+                    await triplestore.update(
+                        "prefix example: <https://example.org/> insert data {example:a example:b 1}"
+                    );
+                    await triplestore.update(`
+                        prefix example: <https://example.org/>
+                        delete {
+                            example:person1 example:${key} ?o
+                        }
+                        insert { 
+                            example:person1 example:${key} "${value}" .
+                        }
+                        where {}
+                        `);
+                    console.log(
+                        await triplestore.query("select * where {?s ?p ?o}")
+                    );
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+        });
 });
