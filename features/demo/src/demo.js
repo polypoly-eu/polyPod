@@ -78,42 +78,84 @@ window.addEventListener("DOMContentLoaded", () => {
             });
     })();
 
-    (function () {});
+    (async function () {
+        const { triplestore } = await window.pod;
 
-    document
-        .querySelector(".submit-rdf-form")
-        .addEventListener("click", async function () {
-            const personData = {
-                firstname: document.querySelector(".firstname").value,
-                lastname: document.querySelector(".lastname").value,
-                street: document.querySelector(".street").value,
-                number: document.querySelector(".number").value,
-                city: document.querySelector(".city").value,
-                birthday: document.querySelector(".birthday").value,
-            };
-            for (let [key, value] of Object.entries(personData)) {
-                const { triplestore } = await window.pod;
-                console.log(value, key);
-                try {
-                    await triplestore.update(
-                        "prefix example: <https://example.org/> insert data {example:a example:b 1}"
-                    );
-                    await triplestore.update(`
+        const personAttr = [
+            "firstname",
+            "lastname",
+            "street",
+            "number",
+            "city",
+            "birthday",
+        ];
+
+        const personData = () => {
+            return Object.fromEntries(
+                personAttr.map((attr) => [
+                    attr,
+                    document.querySelector(`.${attr}`).value,
+                ])
+            );
+        };
+        const results = await triplestore.query(`
+                prefix example: <https://example.org/>
+                select ?p ?o where {
+                    example:person1 ?p ?o .
+                }
+            `);
+
+        let personAttrToAddToStore = personAttr;
+        for (let result of results) {
+            const pred = result.get("p").value;
+            const predSplitArr = pred.split("/");
+            const predAttr = predSplitArr[predSplitArr.length - 1];
+            if (!personAttr.includes(predAttr)) continue;
+            const obj = result.get("o").value;
+            document.querySelector(`.${predAttr}`).value = obj;
+            personAttrToAddToStore = personAttrToAddToStore.filter(
+                (e) => e !== predAttr
+            );
+        }
+        if (personAttrToAddToStore.length > 0) {
+            let tripleString = `
+                prefix example: <https://example.org/>
+                insert data { example:person1
+            `;
+            const attrStrings = [];
+            for (let attrToAdd of personAttrToAddToStore) {
+                attrStrings.push(` example:${attrToAdd} "" `);
+            }
+            tripleString += attrStrings.join(";") + "}";
+            console.log(tripleString);
+            await triplestore.update(tripleString);
+        }
+
+        document
+            .querySelector(".submit-rdf-form")
+            .addEventListener("click", async function () {
+                for (let [key, value] of Object.entries(personData())) {
+                    console.log(value, key);
+                    try {
+                        await triplestore.update(`
                         prefix example: <https://example.org/>
                         delete {
-                            example:person1 example:${key} ?o
+                            example:person1 example:${key} ?o .
                         }
                         insert { 
                             example:person1 example:${key} "${value}" .
                         }
-                        where {}
+                        where {
+                            example:person1 example:${key} ?o .
+                        }
                         `);
-                    console.log(
-                        await triplestore.query("select * where {?s ?p ?o}")
-                    );
-                } catch (e) {
-                    console.error(e);
+                        console.log(
+                            await triplestore.query("select * where {?s ?p ?o}")
+                        );
+                    } catch (e) {
+                        console.error(e);
+                    }
                 }
-            }
-        });
+            });
+    })();
 });
