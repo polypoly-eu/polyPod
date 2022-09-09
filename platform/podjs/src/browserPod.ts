@@ -22,7 +22,7 @@ import oxigraphWasmModule from "oxigraph/web_bg.wasm";
 
 const DB_PREFIX = "polypod:";
 const DB_VERSION = 1;
-const OBJECT_STORE_POLY_IN = "poly-in";
+const OBJECT_STORE_QUADS = "quads";
 const OBJECT_STORE_POLY_OUT = "poly-out";
 
 const NAV_FRAME_ID = "polyNavFrame";
@@ -43,7 +43,7 @@ async function openDatabase(): Promise<IDBDatabase> {
 
         request.onupgradeneeded = () => {
             const db = request.result;
-            db.createObjectStore(OBJECT_STORE_POLY_IN);
+            db.createObjectStore(OBJECT_STORE_QUADS);
             const polyOutStore = db.createObjectStore(OBJECT_STORE_POLY_OUT, {
                 autoIncrement: true,
             });
@@ -63,9 +63,9 @@ const oxigraphStore = (async () => {
             openDatabase().then(
                 (db) =>
                     new Promise((resolve, reject) => {
-                        const objectStores = [OBJECT_STORE_POLY_IN];
+                        const objectStores = [OBJECT_STORE_QUADS];
                         const tx = db.transaction(objectStores, "readonly");
-                        const store = tx.objectStore(OBJECT_STORE_POLY_IN);
+                        const store = tx.objectStore(OBJECT_STORE_QUADS);
                         const request = store.get(0);
                         request.onsuccess = () => resolve(request.result);
                         tx.onerror = tx.onabort = () => reject(request.error);
@@ -85,9 +85,9 @@ async function writeOxigraphStore(store: oxigraph.Store): Promise<void> {
         try {
             const db = await openDatabase();
             return new Promise((resolve, reject) => {
-                const tx = db.transaction([OBJECT_STORE_POLY_IN], "readwrite");
+                const tx = db.transaction([OBJECT_STORE_QUADS], "readwrite");
                 const data = store.dump("application/n-quads", undefined);
-                tx.objectStore(OBJECT_STORE_POLY_IN).put(data, 0);
+                tx.objectStore(OBJECT_STORE_QUADS).put(data, 0);
                 tx.oncomplete = () => resolve(undefined);
                 tx.onerror = tx.onabort = () => reject(tx.error);
             });
