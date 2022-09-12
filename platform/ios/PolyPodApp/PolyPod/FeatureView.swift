@@ -89,7 +89,7 @@ struct FeatureView: View {
         .accessibilityIdentifier("feature_view")
     }
 
-    private func handleError(_ error: String) {
+    private func handleError(_ errorMsg: String) {
         let alert = UIAlertController(
             title: "",
             message: String.localizedStringWithFormat(
@@ -97,12 +97,36 @@ struct FeatureView: View {
                     "message_feature_error %@ %@",
                     comment: ""
                 ),
-                feature.name, error
+                feature.name, errorMsg
             ),
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(
-            title: "OK",
+            title: NSLocalizedString(
+                "button_error_report_allow",
+                comment: ""
+            ),
+            style: .default,
+            handler: { _ in
+                closeAction()
+                PodApi.shared.endpoint.uploadError(
+                    errorMsg: errorMsg,
+                    endpointId: "polyApiErrorReport",
+                    completionHandler: { error in
+                        if error != nil {
+                            Log.error("Upload failed: \(error!.localizedDescription)")
+                            return
+                        }
+                        Log.debug("Error uploaded successfully")
+                    }
+                )
+            }
+        ))
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString(
+                "button_error_report_deny",
+                comment: ""
+            ),
             style: .default,
             handler: { _ in
                 closeAction()

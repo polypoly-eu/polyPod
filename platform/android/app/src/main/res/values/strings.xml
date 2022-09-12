@@ -48,7 +48,8 @@
     <string name="re_auth_prompt_success">Authentication successful</string>
 
     <string name="message_feature_error">Unfortunately, \'%1$s\' had an error:\n\n%2$s\n\nI will close it for you.</string>
-    <string name="button_feature_error_close">OK</string>
+    <string name="button_feature_allow_report">Send error report to polypoly</string>
+    <string name="button_feature_deny_report">Cancel</string>
 
     <string name="webview_alert_title">Your Chrome version is old!</string>
     <string name="webview_alert_message">You are required to have a Chrome version greater than 53, yours is %1$s. Please, update your Chrome to make use of this feature smoothly.</string>
@@ -61,6 +62,7 @@
     <string name="homescreen_footer_button_open_url">https://polypoly.coop/en-de/becomepart</string>
 
     <string name="screen_lock_inactivity_timeout_entry">"Screen lock inactivity timeout"</string>
-    <string name="screen_lock_inactivity_no_timeout">"No timeout"</string>;
+    <string name="screen_lock_inactivity_no_timeout">"No timeout"</string>
+
     <string name="screen_lock_inactivity_timeout_duration">"%d minutes"</string>
 </resources>

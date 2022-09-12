@@ -11,14 +11,13 @@ browser into the `dist` folder.
 
 ## Testing the reporting backend
 
-To test the reporting backend, you will need to start two services:
+1. Change the `polyPediaReport/facebook` endpoint in
+   `platform/utils/endpoints-generator` and rebuild.
+2. Start the polyPedia report backend stub: `npm run serve-polypedia-stub`
+3. Launch the feature and attempt to send a report.
 
-1. The polyPedia report backend stub: `npm run serve-polypedia-stub`
-2. A HTTP server for the feature (which is the only way to allow network
-   requests in the pod.js environment): `npm run serve`
-
-Then navigate to the URL shown by the latter command. The console output of the
-first command will show any reports that are being submitted.
+The console output of the backend stub will show any reports that would be
+submitted.
 
 ## Generating documentation
 

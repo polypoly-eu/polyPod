@@ -14,6 +14,8 @@ preferences = { path = "../crates/preferences" }
 user_session = { path = "../crates/user_session" }
 core_failure = { path = "../crates/core_failure" }
 feature_categories = { path = "../crates/feature_categories" }
+common = { path = "../crates/common" }
+poly_rdf = { path = "../crates/poly-rdf", optional = true }
 
 [target.'cfg(target_os = "android")'.dependencies]
 android_logger = "0.11"

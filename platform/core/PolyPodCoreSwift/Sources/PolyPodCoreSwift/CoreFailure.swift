@@ -1,3 +1,4 @@
+import MessagePack
 public enum DecodingError: Error {
     case invalidValue(info: String)
     case invalidCoreFailure(info: String)
@@ -33,17 +34,55 @@ public enum DecodingError: Error {
     }
 }
 
-public enum CoreFailureCode: Int {
+public enum CoreFailureCode: Int, Codable {
     case coreNotBootstrapped = 1
     case coreAlreadyBootstrapped
     case failedToParseFeatureManifest
     case nullCStringPointer
     case failedToCreateCString
-    case failedToCreateJavaString
+    case failedToExtractJavaString
     case failedToConvertJavaString
+    case failedToParseFeatureCategoriesJSON
+    case failedToReadFile
+    case failedFileSystemOperation
+    case failedToParseURL
+    case failedToUnzip
+    case failedToCreateFeatureFilesPath
+    case failedToConvertToFsPath
+    case failedToConvertToResourceUrl
+    case failedToGetFilePath
+    case failedToGetLastSegmentFromUrl
+    case failedToDecodeByteArray
+    case failedToReadByteBufferLength
+    case failedToExtractJObject
+    case failedToExtractBytes
+    case failedToCallJNIMethod
+    case failedToConvertBytes
+    case failedToAccessUserSession
+    case failedToAttachJVM
+    case failedToDecode
+    case failedToEncode
+    
+    init(from value: MessagePackValue) throws {
+        guard let code = CoreFailureCode.init(rawValue: try value.getInt()) else {
+            throw DecodingError.invalidCoreFailure(info: "Received \(value)")
+        }
+        self = code
+    }
 }
 
-public struct CoreFailure: Error {
+public struct CoreFailure: Error, Codable {
     public let code: CoreFailureCode
     public let message: String
+    
+    public init(code: CoreFailureCode, message: String) {
+        self.code = code
+        self.message = message
+    }
+    
+    init(from value: MessagePackValue) throws {
+        let dict: [MessagePackValue: MessagePackValue] = try value.getDictionary()
+        code = try CoreFailureCode(from: dict.get("code"))
+        message = try dict.get("message").getString()
+    }
 }

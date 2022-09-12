@@ -35,6 +35,7 @@ import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
+import coop.polypoly.polypod.triplestore.Triplestore
 import kotlinx.coroutines.CompletableDeferred
 import java.io.ByteArrayInputStream
 import java.io.File
@@ -58,7 +59,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             webView = webView
         ),
         Info(),
-        Endpoint(context)
+        Endpoint(context),
+        Triplestore()
     )
 
     var feature: Feature? = null
