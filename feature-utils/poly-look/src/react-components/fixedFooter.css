@@ -9,8 +9,10 @@
 }
 
 .fixed-footer {
+    background-color: var(--pl-screen-color-fill);
     text-align: center;
-    padding: 16px 16px 0 16px;
+    padding: 16px 16px 24px 16px;
+    margin-bottom: 0;
     position: fixed;
     bottom: 0;
     right: 0;
