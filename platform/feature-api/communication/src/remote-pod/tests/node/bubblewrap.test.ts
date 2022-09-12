@@ -8,12 +8,6 @@ import {
     Quad,
 } from "@polypoly-eu/api";
 
-describe("Bubblewrap sanity check", () => {
-    test("should have the right number of classes", () => {
-        expect(Object.keys(podBubblewrapClasses).length).toBe(6);
-    });
-});
-
 const testInstances = [
     [NamedNode, "https://example.org/n"],
     [BlankNode, "https://example.org/n"],
@@ -23,7 +17,7 @@ const testInstances = [
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function testRoundtrip(anObject: any, aClass: any, msg: string): void {
+function assertRoundtrip(anObject: any, aClass: any, msg: string): void {
     test(msg, () => {
         const encoded = podBubblewrap.encode(anObject);
         expect(encoded).toBeTruthy();
@@ -39,7 +33,7 @@ describe("Test different kinds of nodes", () => {
         const aClass: any = instance[0];
         const arg = instance[1];
         const aNode = new aClass(arg);
-        testRoundtrip(
+        assertRoundtrip(
             aNode,
             aClass,
             `should roundtrip ${aNode.constructor.name}`
@@ -53,5 +47,5 @@ describe("Test roundtripping for a Quad", () => {
     const object = new Literal("A value");
     const graph = new BlankNode();
     const aQuad = new Quad(subject, predicate, object, graph);
-    testRoundtrip(aQuad, Quad, "should roundtrip");
+    assertRoundtrip(aQuad, Quad, "should roundtrip");
 });
