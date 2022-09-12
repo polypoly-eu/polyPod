@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             create: false
         )
 
-        switch Core.instance.bootstrap(languageCode: Language.current, fsRoot: fsRoot.path) {
+        switch Core.instance.bootstrap(args: .init(languageCode: Language.current, fsRoot: fsRoot.path)) {
         case .success:
             Log.info("Core bootstraped!")
         case let .failure(content):

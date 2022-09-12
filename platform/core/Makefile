@@ -67,17 +67,12 @@ endif
 		target/aarch64-apple-ios-sim/$(build_type)/libpolypod_core.a \
 		-output $(export_dir_ios)/simulator/libpolypod_core.a
 
-	# Generated module map and C header
-	cargo install cbindgen
-	cbindgen --lang c --crate ffi -o $(export_dir_ios)/headers/polypod-core.h
-	@$(os_echo) "module PolyPodCore { header \"polypod-core.h\" export * }" >> $(export_dir_ios)/headers/module.modulemap
-
 	# Package xcframework
 	rm -rf $(swift_core_framework)
 	xcodebuild -create-xcframework \
 	    $(foreach target, $(ios_targets), \
 			-library $(export_dir_ios)/$(target)/libpolypod_core.a \
-			-headers $(export_dir_ios)/headers) \
+			-headers ffi/export/ios_headers) \
 		-output $(swift_core_framework)
 
 define build_for_architecture

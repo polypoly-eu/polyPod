@@ -671,6 +671,7 @@ name = "lib"
 version = "0.1.0"
 dependencies = [
  "android_logger",
+ "common",
  "core_failure",
  "feature_categories",
  "io",

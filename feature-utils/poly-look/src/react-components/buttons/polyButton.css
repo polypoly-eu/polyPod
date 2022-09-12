@@ -3,7 +3,6 @@
   font-size: 18px;
   padding: 4px 12px;
   height: 48px;
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,3 +29,25 @@
   color: var(--pl-button-color-text-secondary);
   background-color: var(--pl-button-color-fill-secondary);
 }
+
+.poly-button.small {
+  padding: var(--pl-small-button-spacing-padding-vert)
+    var(--pl-small-button-spacing-padding-hor);
+}
+
+.poly-button .icon {
+  display: inherit;
+}
+
+.poly-button .icon-left {
+  margin-right: var(--pl-small-button-spacing-gap);
+}
+
+.poly-button .icon-right {
+  margin-left: var(--pl-small-button-spacing-gap);
+}
+
+.poly-button.large {
+  width: 100%;
+}
+
