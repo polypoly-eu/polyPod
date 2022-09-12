@@ -12,7 +12,4 @@ const console = {
     error(msg) {
         postLogMessage(msg);
     },
-    dir(object) {
-        postLogMessage(object);
-    },
 };
