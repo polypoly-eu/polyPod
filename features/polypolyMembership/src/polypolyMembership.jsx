@@ -1,15 +1,6 @@
 import React from "react";
-import * as ReactDOM from "react-dom";
-import {
-    MemoryRouter as Router,
-    Switch,
-    Redirect,
-    Route,
-    useHistory,
-} from "react-router-dom";
-import { INITIAL_HISTORY_STATE } from "@polypoly-eu/poly-look";
+import { createRoot } from "react-dom/client";
 import Onboarding from "./views/onboarding.jsx";
-import Overview from "./views/onboarding.jsx";
 
 import "./styles.css";
 
@@ -24,4 +15,5 @@ const PolypolyMembership = () => {
     );
 };
 
-ReactDOM.render(<PolypolyMembership />, document.getElementById("feature"));
+const root = createRoot(document.getElementById("feature"));
+root.render(<PolypolyMembership />);
