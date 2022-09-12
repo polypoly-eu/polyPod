@@ -40,10 +40,11 @@ pub fn load_feature_categories(
     fs: impl FileSystem,
     features_dir: &str,
     language_code: &str,
+    force_show: Vec<FeatureCategoryId>,
 ) -> Result<Vec<FeatureCategory>, CoreFailure> {
     load_raw_categories(&fs, features_dir)?
         .into_iter()
-        .filter(should_display_feature_category)
+        .filter(|category| force_show.contains(&category.id) || category.visible.unwrap_or(true))
         .map(|raw_category| map_feature_category(&fs, features_dir, language_code, raw_category))
         .collect()
 }
@@ -100,10 +101,6 @@ fn load_raw_categories(
     let categories_bytes = fs.file_content(categories_json_path.as_str())?;
     serde_json::from_slice(&categories_bytes)
         .map_err(|err| CoreFailure::failed_to_decode_feature_categories_json(err.to_string()))
-}
-
-fn should_display_feature_category(category: &DecodedFeatureCategory) -> bool {
-    category.visible.unwrap_or(true)
 }
 
 fn map_feature_category(
@@ -293,7 +290,7 @@ mod tests {
                 Err(CoreFailure::null_c_string_pointer()),
             )]),
         };
-        let result = load_feature_categories(fs, features_dir, "en");
+        let result = load_feature_categories(fs, features_dir, "en", Vec::new());
         assert_eq!(result.is_err(), true)
     }
 
@@ -306,7 +303,7 @@ mod tests {
                 Ok("invalid".as_bytes().to_vec()),
             )]),
         };
-        let result = load_feature_categories(fs, features_dir, "en");
+        let result = load_feature_categories(fs, features_dir, "en", Vec::new());
         assert_eq!(result.is_err(), true)
     }
 
@@ -345,7 +342,8 @@ mod tests {
                 Ok(json),
             )]),
         };
-        let loaded_categories = load_feature_categories(fs, features_dir, "en").unwrap();
+        let loaded_categories =
+            load_feature_categories(fs, features_dir, "en", Vec::new()).unwrap();
 
         let expexcted_categories = vec![
             FeatureCategory {
@@ -404,13 +402,47 @@ mod tests {
                 Ok(json),
             )]),
         };
-        let loaded_categories = load_feature_categories(fs, features_dir, "en").unwrap();
+        let loaded_categories =
+            load_feature_categories(fs, features_dir, "en", Vec::new()).unwrap();
         let loaded_category_ids: Vec<_> = loaded_categories
             .into_iter()
             .map(|category| category.id)
             .collect();
 
         let expected_ids = vec![FeatureCategoryId::YourData, FeatureCategoryId::Tools];
+        assert_eq!(loaded_category_ids, expected_ids)
+    }
+
+    #[test]
+    fn invisible_feature_categories_are_force_shown() {
+        let features_dir = "features";
+        let json = r#"
+        [
+            {
+                "id":"knowHow",
+                "name":"Data Know-How",
+                "visible": false,
+                "features":[]
+            }
+        ]
+        "#
+        .as_bytes()
+        .to_vec();
+        let fs = MockFileSystem {
+            contents_of_file_requests_stub: HashMap::from([(
+                features_dir.to_string() + "/categories.json",
+                Ok(json),
+            )]),
+        };
+        let loaded_categories =
+            load_feature_categories(fs, features_dir, "en", vec![FeatureCategoryId::KnowHow])
+                .unwrap();
+        let loaded_category_ids: Vec<_> = loaded_categories
+            .into_iter()
+            .map(|category| category.id)
+            .collect();
+
+        let expected_ids = vec![FeatureCategoryId::KnowHow];
         assert_eq!(loaded_category_ids, expected_ids)
     }
 
@@ -437,7 +469,7 @@ mod tests {
                 ),
             ]),
         };
-        let loaded_categories = load_feature_categories(fs, features_dir, "en");
+        let loaded_categories = load_feature_categories(fs, features_dir, "en", Vec::new());
         assert_eq!(loaded_categories.is_err(), true)
     }
 
@@ -464,7 +496,7 @@ mod tests {
                 ),
             ]),
         };
-        let loaded_categories = load_feature_categories(fs, features_dir, "en");
+        let loaded_categories = load_feature_categories(fs, features_dir, "en", Vec::new());
         assert_eq!(loaded_categories.is_err(), true)
     }
 
@@ -508,7 +540,8 @@ mod tests {
                 ),
             ]),
         };
-        let loaded_categories = load_feature_categories(fs, features_dir, "en").unwrap();
+        let loaded_categories =
+            load_feature_categories(fs, features_dir, "en", Vec::new()).unwrap();
         let your_data_category_features: Vec<_> = loaded_categories[0]
             .clone()
             .features
