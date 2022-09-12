@@ -78,6 +78,19 @@ window.addEventListener("DOMContentLoaded", () => {
             });
     })();
 
+    async function initializeVarsArray(arr) {
+        let tripleString = `
+                prefix example: <https://example.org/>
+                insert data { example:person1
+            `;
+        const attrStrings = [];
+        for (let attrToAdd of arr) {
+            attrStrings.push(` example:${attrToAdd} "" `);
+        }
+        tripleString += attrStrings.join(";") + "}";
+        await window.pod.triplestore.update(tripleString);
+    }
+
     (async function () {
         const { triplestore } = await window.pod;
 
@@ -118,17 +131,7 @@ window.addEventListener("DOMContentLoaded", () => {
             );
         }
         if (personAttrToAddToStore.length > 0) {
-            let tripleString = `
-                prefix example: <https://example.org/>
-                insert data { example:person1
-            `;
-            const attrStrings = [];
-            for (let attrToAdd of personAttrToAddToStore) {
-                attrStrings.push(` example:${attrToAdd} "" `);
-            }
-            tripleString += attrStrings.join(";") + "}";
-            console.log(tripleString);
-            await triplestore.update(tripleString);
+            initializeVarsArray(personAttrToAddToStore);
         }
 
         document
