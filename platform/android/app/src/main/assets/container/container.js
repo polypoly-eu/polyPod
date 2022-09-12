@@ -23,8 +23,6 @@ function initMessaging() {
         }
         outerPort = event.ports[0];
         outerPort.onmessage = (event) => {
-            // console.log(`Data coming from Pod to the Feature`);
-            // console.dir(event.data);
             const bytes = Uint8Array.from(atob(event.data), (c) =>
                 c.charCodeAt(0)
             );
