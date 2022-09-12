@@ -7,7 +7,9 @@
   "thumbnailColor": "#ffffff",
   "primaryColor": "#ffffff",
   "borderColor": "#ffffff",
-  "links": {},
+  "links": {
+    "coop-become-part": "https://polypoly-citizens.eu/en/becomepart"
+  },
   "translations": {
     "de": {
       "name": "polypoly-membership auf Deutsch",
