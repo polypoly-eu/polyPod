@@ -1,4 +1,4 @@
-import matchRegex from "../src/model/importers/utils/lang-constants";
+import { matchRegex } from "../src/model/importers/utils/lang-constants";
 
 describe("Test MatchRegex for File Paths", () => {
     let german_paths = [
