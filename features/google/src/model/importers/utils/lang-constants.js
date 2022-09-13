@@ -12,12 +12,11 @@ export const langConstants = {
         regex: /\/[^/]+\/(Semantic Location History)\/\d+\/[^.]+\.json$/u,
     },
 };
-export function matchRegex(path, importer) {
+export function matchRegex(path, importerName) {
     // There can be non standard spaces in the path. Replace them with a normal space.
     const sanitizedPath = path.replace(
         /[\u00a0\u1680\u2000-\u200b\u202f\u205f\u3000\ufeff]/g,
         " "
     );
-    const importerName = importer.constructor.name;
     return langConstants[importerName].regex.test(sanitizedPath);
 }
