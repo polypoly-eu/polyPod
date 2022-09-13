@@ -17,9 +17,6 @@ describe("Test MatchRegex for File Paths", () => {
         for (const path of german_paths) {
             it(`it should match for ${path}`, () => {
                 const result = matchRegex(path, "ActivitiesHtmlImporter");
-                if (!result) {
-                    console.log(path);
-                }
                 expect(result).toBe(true);
             });
         }
@@ -29,9 +26,6 @@ describe("Test MatchRegex for File Paths", () => {
         for (const path of german_paths) {
             it(`it should match for ${path}`, () => {
                 const result = matchRegex(path, "ActivitiesJsonImporter");
-                if (!result) {
-                    console.log(path);
-                }
                 expect(result).toBe(true);
             });
         }
