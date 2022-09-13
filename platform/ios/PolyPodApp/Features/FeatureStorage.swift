@@ -60,12 +60,20 @@ final class FeatureStorage {
         try createFeaturesFolder()
         try copyCategories()
         try copyFeatures()
-        categoriesListSubject.value = try Core
+        categoriesListSubject.value = Core
             .instance
-            .loadFeatureCategories(
-                featuresDirectory: featuresFileUrl.path,
-                forceShow: readShowDeveloperFeatures() ? [.developer] : []
-            ).get()
+            .executeRequest(
+                .loadFeatureCategories(
+                    args: .init(
+                        featuresDir: featuresFileUrl.path,
+                        forceShow: readShowDeveloperFeatures() ? [.developer] : []
+                    )
+                )
+            )
+            .inspectError { err in
+                Log.error("Failed to read categories \(err)")
+            }
+            .unwrapOr([])
     }
 
     private func createFeaturesFolder() throws {

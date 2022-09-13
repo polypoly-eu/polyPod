@@ -1,6 +1,7 @@
 import Foundation
+import MessagePack
 
-public enum FeatureCategoryId: String {
+public enum FeatureCategoryId: String, Encodable {
     case yourData
     case knowHow
     case tools
@@ -62,5 +63,49 @@ extension Feature {
             return target
         }
         return nil
+    }
+}
+
+extension FeatureCategory: MessagePackDecodable {
+    public init(from value: MessagePackValue) throws {
+        let dictionary: [MessagePackValue: MessagePackValue] = try value.getDictionary()
+        self.id = try FeatureCategoryId.init(from: dictionary.get("id"))
+        self.name = try dictionary.get("name").getString()
+        self.features = try [Feature].init(from: dictionary.get("features"))
+    }
+}
+
+extension FeatureCategoryId: MessagePackDecodable {
+    public init(from value: MessagePackValue) throws {
+        guard let id = FeatureCategoryId(rawValue: try value.getString()) else {
+            throw DecodingError.unknownFeatureCategoryId(info: "\(value)")
+        }
+        self = id
+    }
+}
+
+extension Feature: MessagePackDecodable {
+    public init(from value: MessagePackValue) throws {
+        let dictionary: CoreResponseObject = try value.getDictionary()
+        
+        let links = try dictionary["links"]?
+            .getDictionary().reduce(into: [String: String]()) { partialResult, keyValue in
+                let key: String = try keyValue.key.getString()
+                let value: String = try keyValue.value.getString()
+                partialResult[key] = value
+            }
+        path = try URL(fileURLWithPath: dictionary.get("path").getString())
+        id = try dictionary.get("id").getString()
+        name = try dictionary.get("name").getString()
+        author = try dictionary["author"]?.getString()
+        description = try dictionary["description"]?.getString()
+        primaryColor = try dictionary.get("primaryColor").getString()
+        thumbnailColor = try dictionary.get("thumbnailColor").getString()
+        thumbnail = try dictionary["thumbnail"]?
+            .getString()
+            .map(URL.init(fileURLWithPath:))
+        borderColor = try dictionary.get("borderColor").getString()
+        tileTextColor = try dictionary.get("tileTextColor").getString()
+        self.links = links ?? [:]
     }
 }

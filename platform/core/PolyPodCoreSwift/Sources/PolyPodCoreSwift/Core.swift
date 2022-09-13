@@ -4,21 +4,19 @@ import MessagePack
 
 typealias CoreResponseObject = [MessagePackValue: MessagePackValue]
 
-enum PlatformRequest: String {
-    case Example
-}
-
-enum PlatformResponse {
-    case Example(String)
+public struct BootstrapArgs: Encodable {
+    public init(languageCode: String, fsRoot: String) {
+        self.languageCode = languageCode
+        self.fsRoot = fsRoot
+    }
+    
+    let languageCode: String
+    let fsRoot: String
 }
 
 /// Swift wrapper around the Rust Core.
 public final class Core {
     public static let instance = Core()
-    
-    // MARK: - Private config
-    private var languageCode: UnsafePointer<CChar>!
-    private var fsRoot: UnsafePointer<CChar>!
     
     private init() {}
     
@@ -26,81 +24,26 @@ public final class Core {
     
     /// Prepares the core to be used
     /// Should be called before invoking any other API
-    public func bootstrap(languageCode: String, fsRoot: String) -> Result<Void, Error> {
-        // Force unwrap should be safe
-        self.languageCode = NSString(string: languageCode).utf8String!
-        self.fsRoot = NSString(string: fsRoot).utf8String!
-
-        let bridge = BridgeToPlatform(free_bytes: {
-            $0?.deallocate()
-        }, perform_request: { in_bytes in
-            let response = Result<PlatformResponse, Error> {
-                let request_from_core = try unpackBytes(bytes: in_bytes)
-                let platformRequest = try mapToPlatformRequest(request: request_from_core)
-                return handle(platformRequest: platformRequest)
-            }
-            
-            // TODO: Use CoreFailure for failures.
-            return packPlatformResponse(response: response).toByteBuffer
-        })
-
+    public func bootstrap(args: BootstrapArgs) -> Result<Void, Error> {
         return handleCoreResponse(
             core_bootstrap(
-                self.languageCode, 
-                self.fsRoot, 
-                bridge
+                args.pack().toByteBuffer,
+                BridgeToPlatform.make()
             ), 
             { _ in }
         )
     }
-
-    /// Loads the feature categories from the given features directory
-    /// - Parameter featuresDirectory: Directory from which to load the feature categories.
-     /// - Returns: A Result for loading operation.
-    public func loadFeatureCategories(
-        featuresDirectory: String,
-        forceShow: [FeatureCategoryId]
-    ) -> Result<[FeatureCategory], Error> {
-        var messagePackMap: [MessagePackValue: MessagePackValue] = [:]
-        messagePackMap["features_dir"] = .string(featuresDirectory)
-        messagePackMap["force_show"] =
-            .array(forceShow.map { .string($0.rawValue) })
-        let bytes = MessagePack.pack(MessagePackValue.map(messagePackMap))
-            .toByteBuffer
+    
+    public func executeRequest<T: MessagePackDecodable>(_ request: CoreRequest) -> Result<T, Error> {
+        let bytes = request.pack().toByteBuffer;
         defer { bytes.data.deallocate() }
-        return handleCoreResponse(
-            load_feature_categories(bytes),
-            mapFeatureCategories
-        )
+        return handleCoreResponse(execute_request(bytes), T.init(from:))
     }
     
-    public func appDidBecomeInactive() -> Result<Void, Error> {
-        handleCoreResponse(app_did_become_inactive(), { _ in })
-    }
-    
-    public func isUserSessionExpired() -> Result<Bool, Error> {
-        handleCoreResponse(is_user_session_expired()) { try $0.getBool() }
-    }
-    
-    public func setUserSessionTimeout(option: UserSessionTimeoutOption) -> Result<Void, Error> {
-        let data = MessagePack.pack(option.messagePackValue).toByteBuffer
-        return handleCoreResponse(
-            set_user_session_timeout_option(
-                data,
-                { $0?.deallocate() }
-            )
-        ) { _ in }
-    }
-    
-    public func getUserSessionTimeoutOption() -> Result<UserSessionTimeoutOption, Error> {
-        handleCoreResponse(
-            get_user_session_timeout_option(),
-            UserSessionTimeoutOption.from(msgPackValue:)
-        )
-    }
-    
-    public func getUserSessionTimeoutOptionsConfig() -> Result<[UserSessionTimeoutOptionConfig], Error> {
-        handleCoreResponse(get_user_session_timeout_options_config(), UserSessionTimeoutOptionConfig.mapUserSessionTimeoutOptionsConfig(_:))
+    public func executeRequest(_ request: CoreRequest) -> Result<Void, Error> {
+        let bytes = request.pack().toByteBuffer;
+        defer { bytes.data.deallocate() }
+        return handleCoreResponse(execute_request(bytes), { _ in })
     }
 
     // MARK: - Internal API
@@ -124,11 +67,37 @@ public final class Core {
             
             if let responseObject = responseObject["Ok"] {
                 return try map(responseObject)
-            } else if let failure = try responseObject["Err"]?.getDictionary() {
-                throw try mapError(failure)
+            } else if let failure = responseObject["Err"] {
+                throw try CoreFailure(from: failure)
             }
             
             throw DecodingError.invalidResponse(info: "\(String(describing: responseObject))")
         }
+    }
+}
+
+extension BridgeToPlatform {
+    static func make() -> Self {
+        BridgeToPlatform(free_bytes: {
+            $0?.deallocate()
+        }, perform_request: { in_bytes in
+            do {
+                let request = try unpackBytes(bytes: in_bytes)
+                    .flatMap { value in
+                        Result { try PlatformRequest(from: value) }
+                    }
+                    .get()
+                
+                return Core
+                    .handle(request: request)
+                    .pack()
+                    .toByteBuffer
+            } catch {
+                return Result<String, CoreFailure>
+                    .failure(error as! CoreFailure)
+                    .pack()
+                    .toByteBuffer
+            }
+        })
     }
 }
