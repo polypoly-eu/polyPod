@@ -1,8 +1,6 @@
-import matchRegex from "../src/model/importers/utils/lang-constants";
-import {
-    ActivitiesHtmlImporter,
-    ActivitiesJsonImporter,
-} from "../src/model/importer.js";
+import matchRegex from "../src/model/importers/utils/lang-constants.js";
+import ActivitiesHtmlImporter from "../src/model/importers/activities-importer-html";
+import ActivitiesJsonImporter from "../src/model/importers/activities-importer-json";
 
 describe("Test MatchRegex for File Paths", () => {
     let german_paths = [
