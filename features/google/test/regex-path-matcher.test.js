@@ -1,4 +1,8 @@
 import matchRegex from "../src/model/importers/utils/lang-constants";
+import {
+    ActivitiesHtmlImporter,
+    ActivitiesJsonImporter,
+} from "../src/model/importer.js";
 
 describe("Test MatchRegex for File Paths", () => {
     let german_paths = [
@@ -16,7 +20,7 @@ describe("Test MatchRegex for File Paths", () => {
     describe("should match all german paths with ActivitiesHtmlImporter", () => {
         for (const path of german_paths) {
             it(`it should match for ${path}`, () => {
-                const result = matchRegex(path, "ActivitiesHtmlImporter");
+                const result = matchRegex(path, ActivitiesHtmlImporter);
                 expect(result).toBe(true);
             });
         }
@@ -25,7 +29,7 @@ describe("Test MatchRegex for File Paths", () => {
     describe("should match all german paths with ActivitiesJsonImporter", () => {
         for (const path of german_paths) {
             it(`it should match for ${path}`, () => {
-                const result = matchRegex(path, "ActivitiesJsonImporter");
+                const result = matchRegex(path, ActivitiesJsonImporter);
                 expect(result).toBe(true);
             });
         }
