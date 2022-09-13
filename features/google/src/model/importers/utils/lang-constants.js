@@ -18,7 +18,6 @@ export function matchRegex(path, importerName) {
         /[\u00a0\u1680\u2000-\u200b\u202f\u205f\u3000\ufeff]/g,
         " "
     );
-    const importerName = importer.constructor.name;
     const normalizedPath = sanitizedPath.normalize("NFC");
     const normalizedRegex = RegExp(
         langConstants[importerName].regex
