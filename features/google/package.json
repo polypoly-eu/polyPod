@@ -7,7 +7,8 @@
     "build-downstream": "../../build.js --start google-feature",
     "watch": "rollup --watch -c",
     "serve": "rollup --watch --configServe -c",
-    "doc": "jsdoc -r src/ -d ./docs"
+    "doc": "jsdoc -r src/ -d ./docs",
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
