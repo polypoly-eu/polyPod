@@ -1,5 +1,5 @@
 import DirectKeyDataImporter from "./direct-key-data-importer.js";
-import { PAGES_DIRECTORY as OLD_PAGES_DIRECTORY } from "./paths.js";
+import { OLD_PAGES_DIRECTORY } from "./paths.js";
 
 export const FOLLOWED_PAGES_FILE_PATH = `${OLD_PAGES_DIRECTORY}/pages_you_follow.json`;
 export const FOLLOWED_PAGES_DATA_KEY = "pages_followed_v2";
