@@ -106,6 +106,8 @@
 		90716ACC283F7AFA00F7445A /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90716ACB283F7AFA00F7445A /* Array+Utils.swift */; };
 		90716ACD283F7AFA00F7445A /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90716ACB283F7AFA00F7445A /* Array+Utils.swift */; };
 		9075BABA283B69FD00909E06 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075BAB9283B69FD00909E06 /* HomeScreenView.swift */; };
+		909BD36128CF45630024A725 /* AppAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 909BD36028CF45630024A725 /* AppAuth */; };
+		909BD36428CF45BA0024A725 /* OAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BD36328CF45BA0024A725 /* OAuth.swift */; };
 		90DD12F528A4E6C800526F54 /* Result+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DD12F428A4E6C800526F54 /* Result+Utils.swift */; };
 		90DD12F628A4E6C800526F54 /* Result+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DD12F428A4E6C800526F54 /* Result+Utils.swift */; };
 		90E4088227D78E4E006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
@@ -258,6 +260,7 @@
 		906E406B27A82C7F009015B7 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		90716ACB283F7AFA00F7445A /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
 		9075BAB9283B69FD00909E06 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
+		909BD36328CF45BA0024A725 /* OAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth.swift; sourceTree = "<group>"; };
 		90DD12F428A4E6C800526F54 /* Result+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Utils.swift"; sourceTree = "<group>"; };
 		90E4088127D78E4E006AD362 /* DataProtection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtection.swift; sourceTree = "<group>"; };
 		90F8B9FD28B6374000D73776 /* PolyPodCoreSwift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PolyPodCoreSwift; path = ../../core/PolyPodCoreSwift; sourceTree = "<group>"; };
@@ -322,6 +325,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				909BD36128CF45630024A725 /* AppAuth in Frameworks */,
 				90338EB828AE4F5900C86968 /* libc++.tbd in Frameworks */,
 				E9BE2909264BBD67003EC8AE /* Zip in Frameworks */,
 				90F8BA0028B6375000D73776 /* PolyPodCoreSwift in Frameworks */,
@@ -410,6 +414,7 @@
 		1AA6DE2624191C94008DB1B2 = {
 			isa = PBXGroup;
 			children = (
+				909BD36228CF45A10024A725 /* OAuth */,
 				90F8B9FC28B6374000D73776 /* Packages */,
 				904D4A6E27905D4C00A75AED /* Utils */,
 				E9018EDF276370B500FDF34A /* Core */,
@@ -578,6 +583,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		909BD36228CF45A10024A725 /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				909BD36328CF45BA0024A725 /* OAuth.swift */,
+			);
+			path = OAuth;
+			sourceTree = "<group>";
+		};
 		90F8B9FC28B6374000D73776 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
@@ -711,6 +724,7 @@
 				E9BE2908264BBD67003EC8AE /* Zip */,
 				9049ECA327BCE8B70059605A /* CocoaLumberjackSwift */,
 				90F8B9FF28B6375000D73776 /* PolyPodCoreSwift */,
+				909BD36028CF45630024A725 /* AppAuth */,
 			);
 			productName = PolyPod;
 			productReference = 1AA6DE2F24191C94008DB1B2 /* PolyPod.app */;
@@ -773,6 +787,7 @@
 				E9BE2904264BBA9F003EC8AE /* XCRemoteSwiftPackageReference "MessagePack" */,
 				E9BE2907264BBD67003EC8AE /* XCRemoteSwiftPackageReference "Zip" */,
 				9049ECA227BCE8B70059605A /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
+				909BD35F28CF45630024A725 /* XCRemoteSwiftPackageReference "AppAuth-iOS" */,
 			);
 			productRefGroup = 1AA6DE3024191C94008DB1B2 /* Products */;
 			projectDirPath = "";
@@ -1019,6 +1034,7 @@
 				1A4C21F324A63E4C006CC1FD /* Quad+CoreDataProperties.swift in Sources */,
 				1AF1179024C178990063EE37 /* Literal+Additions.swift in Sources */,
 				906E406C27A82C7F009015B7 /* ActivityViewController.swift in Sources */,
+				909BD36428CF45BA0024A725 /* OAuth.swift in Sources */,
 				3B45E0B128BF94810005B8EF /* Triplestore.swift in Sources */,
 				1A8F4875247E40C600089217 /* PostOffice.swift in Sources */,
 				1AF1178624BE22D50063EE37 /* Stats.swift in Sources */,
@@ -1447,6 +1463,14 @@
 				minimumVersion = 3.7.4;
 			};
 		};
+		909BD35F28CF45630024A725 /* XCRemoteSwiftPackageReference "AppAuth-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/openid/AppAuth-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.0;
+			};
+		};
 		E9BE2904264BBA9F003EC8AE /* XCRemoteSwiftPackageReference "MessagePack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/polypoly-eu/MessagePack.swift";
@@ -1470,6 +1494,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9049ECA227BCE8B70059605A /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
 			productName = CocoaLumberjackSwift;
+		};
+		909BD36028CF45630024A725 /* AppAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 909BD35F28CF45630024A725 /* XCRemoteSwiftPackageReference "AppAuth-iOS" */;
+			productName = AppAuth;
 		};
 		90F8B9FF28B6375000D73776 /* PolyPodCoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
