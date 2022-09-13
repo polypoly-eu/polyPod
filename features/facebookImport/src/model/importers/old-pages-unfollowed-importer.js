@@ -1,7 +1,7 @@
 import DirectKeyDataImporter from "./direct-key-data-importer.js";
-import { PAGES_DIRECTORY } from "./paths.js";
+import { OLD_PAGES_DIRECTORY } from "./paths.js";
 
-export const UNFOLLOWED_PAGES_FILE_PATH = `${PAGES_DIRECTORY}/pages_you've_unfollowed.json`;
+export const UNFOLLOWED_PAGES_FILE_PATH = `${OLD_PAGES_DIRECTORY}/pages_you've_unfollowed.json`;
 export const UNFOLLOWED_PAGES_DATA_KEY = "pages_unfollowed_v2";
 export const UNFOLLOWED_PAGES_STORAGE_KEY = "unfollowedPages";
 
