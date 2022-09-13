@@ -26,6 +26,5 @@ export function matchRegex(path, importer) {
             .normalize("NFC")
             .slice(1, -1)
     );
-    console.log(`matchRegex normalized path: ${normalizedPath}`);
     return normalizedRegex.test(normalizedPath);
 }
