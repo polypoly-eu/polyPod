@@ -72,6 +72,12 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
 
     var errorHandler: ((String) -> Unit)? = null
 
+    // It appears WebMessagePort keeps weak references to message callbacks,
+    // which causes them to be garbage collected after a while, causing a
+    // communication breakdown between platform and feature.
+    // Therefore, this is a field.
+    var postOfficeMessageCallback: WebMessagePort.WebMessageCallback? = null
+
     init {
         webView.layoutParams =
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
@@ -308,13 +314,12 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         val channel: Array<WebMessagePort> = view.createWebMessageChannel()
         val outerPort = channel[0]
         val innerPort = channel[1]
-        outerPort.setWebMessageCallback(
-            PostOfficeMessageCallback(
-                lifecycleScope,
-                outerPort,
-                api
-            )
+        postOfficeMessageCallback = PostOfficeMessageCallback(
+            lifecycleScope,
+            outerPort,
+            api
         )
+        outerPort.setWebMessageCallback(postOfficeMessageCallback)
         view.postWebMessage(
             WebMessage("", arrayOf(innerPort)), Uri.parse("*")
         )
