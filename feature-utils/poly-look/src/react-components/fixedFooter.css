@@ -1,4 +1,4 @@
-.poly-fixed-footer::before {
+.poly-fixed-footer-gradient::before {
     content: "";
     height: 40px;
     position: absolute;
