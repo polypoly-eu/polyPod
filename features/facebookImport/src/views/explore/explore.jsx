@@ -56,6 +56,45 @@ const ExploreView = () => {
                     message={i18n.t("explore:loading")}
                 />
             );
+
+        function renderMinistory(ministory, index) {
+            const content = (
+                <>
+                    <h1>{ministory.title}</h1>
+                    {ministory.label !== null && (
+                        <label>
+                            {i18n.t(
+                                `explore:analysis.label.${ministory.label}`
+                            )}
+                        </label>
+                    )}
+                    {ministory.render()}
+                </>
+            );
+            return ministory.hasDetails() ? (
+                <RoutingWrapper
+                    key={index}
+                    history={history}
+                    route="/explore/details"
+                    stateChange={{
+                        ActiveStoryClass: ministory.constructor.name,
+                    }}
+                >
+                    <ClickableCard
+                        key={index}
+                        buttonText={i18n.t("explore:details.button")}
+                    >
+                        {content}
+                    </ClickableCard>
+                </RoutingWrapper>
+            ) : (
+                <Card key={index}>{content}</Card>
+            );
+        }
+
+        const activeMinistories = ministories
+            .map((MinistoryClass) => new MinistoryClass({ account }))
+            .filter(({ active }) => active);
         return (
             <List>
                 <Banner
@@ -67,42 +106,11 @@ const ExploreView = () => {
                         route: "/report",
                     }}
                 />
-                {ministories.map((MinistoryClass, index) => {
-                    const ministory = new MinistoryClass({
-                        account,
-                    });
-                    if (!ministory.active) return;
-                    const content = (
-                        <>
-                            <h1>{ministory.title}</h1>
-                            {ministory.label !== null && (
-                                <label>
-                                    {i18n.t(
-                                        `explore:analysis.label.${ministory.label}`
-                                    )}
-                                </label>
-                            )}
-                            {ministory.render()}
-                        </>
-                    );
-                    return ministory.hasDetails() ? (
-                        <RoutingWrapper
-                            key={index}
-                            history={history}
-                            route="/explore/details"
-                            stateChange={{ ActiveStoryClass: MinistoryClass }}
-                        >
-                            <ClickableCard
-                                key={index}
-                                buttonText={i18n.t("explore:details.button")}
-                            >
-                                {content}
-                            </ClickableCard>
-                        </RoutingWrapper>
-                    ) : (
-                        <Card key={index}>{content}</Card>
-                    );
-                })}
+                {!activeMinistories.length ? (
+                    <Card>{i18n.t("explore:details.noAnalyses")}</Card>
+                ) : (
+                    activeMinistories.map(renderMinistory)
+                )}
             </List>
         );
     };
