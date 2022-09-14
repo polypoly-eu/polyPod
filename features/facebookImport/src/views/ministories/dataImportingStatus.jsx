@@ -7,7 +7,7 @@ import i18n from "!silly-i18n";
 class DataImportingStatusReport extends ReportStory {
     constructor(props) {
         super(props);
-        this._neededReports = [analysisKeys.importersData];
+        this.neededReports = [analysisKeys.importersData];
     }
     get title() {
         return i18n.t("report:status");

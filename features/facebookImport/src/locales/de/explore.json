@@ -9,5 +9,6 @@
     "reportCard.button": "Mehr erfahren",
     "details.button": "Details ansehen",
     "analysis.label.techDemo": "Tech Demo",
-    "scroll": "Scrollen Sie weiter, um mehr zu sehen"
+    "scroll": "Scrollen Sie weiter, um mehr zu sehen",
+    "details.noAnalyses": "Leider können wir auf Grundlage Ihrer Daten keine Erkenntnisse präsentieren. Wenn Sie glauben, dass es sich um einen Fehler handelt, nehmen Sie bitte Kontakt mit uns auf und helfen Sie uns weiter."
 }
