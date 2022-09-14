@@ -2,6 +2,7 @@ import { matchRegex } from "../src/model/importers/utils/lang-constants";
 
 describe("Test MatchRegex for File Paths", () => {
     const german_activities_paths_html = [
+        // eslint-disable-next-line no-irregular-whitespace
         "Takeout/Meine Aktivitäten/Maps/MeineAktivitäten.html",
         "Takeout/Meine\u00A0Aktivitäten/Google Play Store/MeineAktivitäten.html",
         "Takeout/Meine Aktivitäten/YouTube/MeineAktivitäten.html",
@@ -14,7 +15,8 @@ describe("Test MatchRegex for File Paths", () => {
     ];
 
     const german_activities_paths_json = [
-        `Takeout/Meine Aktivitäten/Maps/MeineAktivitäten.json`,
+        // eslint-disable-next-line no-irregular-whitespace
+        "Takeout/Meine Aktivitäten/Maps/MeineAktivitäten.json",
         "Takeout/Meine\u00A0Aktivitäten/Google Play Store/MeineAktivitäten.json",
         "Takeout/Meine Aktivitäten/YouTube/MeineAktivitäten.json",
         "Takeout/Meine Aktivitäten/Shopping/MeineAktivitäten.json",
@@ -26,7 +28,9 @@ describe("Test MatchRegex for File Paths", () => {
     ];
 
     const german_access_log_paths_csv = [
+        // eslint-disable-next-line no-irregular-whitespace
         "Takeout/Zugriffsprotokollaktivitäten/Aktivitäten – eine Liste der Google-Dienste, auf d.csv",
+        // eslint-disable-next-line no-irregular-whitespace
         "Takeout/Zugriffsprotokollaktivitäten/Aktivitäten\u00A0– eine Liste der Google-Dienste, auf d.csv",
     ];
 
