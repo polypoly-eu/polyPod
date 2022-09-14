@@ -23,7 +23,11 @@ class OAuth {
                 redirectUri
             )
 
-             return requestBuilder.setScope("email openid").build()
+             return requestBuilder
+                 .setScope("email openid")
+                 .setState(null)
+                 .setNonce(null)
+                 .build()
         }
     }
 }
