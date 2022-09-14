@@ -14,7 +14,7 @@ const externalPackages = {
 };
 
 export default {
-    input: "src/index.jsx",
+    input: "src/polypolyMembership.jsx",
     output: {
         file: "dist/index.js",
         format: "iife",
@@ -37,8 +37,12 @@ export default {
         copy({
             targets: [
                 {
-                    src: ["./src/static/*"],
+                    src: ["./src/static/*", "!src/static/fonts"],
                     dest: "dist",
+                },
+                {
+                    src: ["src/static/fonts/*"],
+                    dest: "dist/fonts/",
                 },
                 {
                     src: [

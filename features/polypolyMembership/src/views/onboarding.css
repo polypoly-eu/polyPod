@@ -1,0 +1,7 @@
+.onboarding {
+    --pl-screen-color-fill: var(--color-red-50);
+}
+
+.onboarding .secondary-link {
+    margin-top: 20px;
+}
