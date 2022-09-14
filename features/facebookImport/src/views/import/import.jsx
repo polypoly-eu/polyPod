@@ -81,7 +81,7 @@ const Import = () => {
 
     const handleSelectFile = async () => {
         const { polyNav } = pod;
-        runWithLoadingScreen(async function () {
+        runWithLoadingScreen(async () => {
             try {
                 setSelectedFile(await polyNav.pickFile("application/zip"));
             } catch (error) {

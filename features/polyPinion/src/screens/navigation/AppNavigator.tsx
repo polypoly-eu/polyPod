@@ -1,11 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { QuestionnaireListContext } from "../../context/questionnaire-list-context";
-import {
-    getStoredLanguage,
-    storeLanguage,
-    getStoredOrPhoneLanguageCode,
-} from "../language/language-utils";
+import { getStoredLanguage, getStoredOrPhoneLanguageCode } from "../language/language-utils";
 import AsyncStorage from "../../util/async-storage";
 import React from "react";
 import LoadingScreen from "../loading/LoadingScreen";
@@ -79,17 +75,20 @@ export default function AppNavigator() {
         }
     }, [questionaireInitializationStatus, languageInitialized, questionnaireList]);
 
-    useEffect(() => {
-        async function getOnboardingShown() {
-            let wasShown = await AsyncStorage.getItem("onboardingshown");
-            if (wasShown == null) {
-                // TODO - bug - we assign a boolean to a string!
-                wasShown = false;
+    useEffect(
+        async function () {
+            async function getOnboardingShown() {
+                let wasShown = await AsyncStorage.getItem("onboardingshown");
+                if (wasShown == null) {
+                    // TODO - bug - we assign a boolean to a string!
+                    wasShown = false;
+                }
+                setOnboardingShown(wasShown);
             }
-            setOnboardingShown(wasShown);
-        }
-        getOnboardingShown();
-    }, [onboardingShown]);
+            await getOnboardingShown();
+        },
+        [onboardingShown]
+    );
 
     // Wait for various parts of the app to read data from storage and initialize.
     if (

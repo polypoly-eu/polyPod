@@ -101,4 +101,4 @@ async function runBench(): Promise<void> {
         .run();
 }
 
-runBench();
+await runBench();
