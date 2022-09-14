@@ -1,11 +1,15 @@
 package coop.polypoly.polypod
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.synnapps.carouselview.CarouselView
+import coop.polypoly.polypod.oauth.OAuth
+import net.openid.appauth.AuthorizationService
+
 
 class OnboardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,9 +113,14 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun close() {
-        if (Preferences.isFirstRun(baseContext)) {
-            Preferences.setFirstRun(baseContext, false)
-        }
-        finish()
+        val request = OAuth.startAuth()
+        val authService = AuthorizationService(this)
+        val authIntent: Intent =
+            authService.getAuthorizationRequestIntent(request)
+        startActivity(authIntent)
+//        if (Preferences.isFirstRun(baseContext)) {
+//            Preferences.setFirstRun(baseContext, false)
+//        }
+//        finish()
     }
 }
