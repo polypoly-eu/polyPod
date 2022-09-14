@@ -43,14 +43,15 @@ module.exports = {
     },
     overrides: [
         {
-            files: ["*.ts", "*.tsx"],
+            files: ["*.ts", "*.tsx", ".js", ".jsx"],
             extends: [
                 "plugin:@typescript-eslint/eslint-recommended",
                 "plugin:@typescript-eslint/recommended",
             ],
             parser: "@typescript-eslint/parser",
-            plugins: ["@typescript-eslint"],
+            plugins: ["@typescript-eslint", "no-floating-promise"],
             rules: {
+                "no-floating-promise/no-floating-promise": 2,
                 "@typescript-eslint/camelcase": "off",
                 "@typescript-eslint/no-explicit-any": "error",
                 "@typescript-eslint/no-non-null-assertion": "error",
@@ -69,7 +70,7 @@ module.exports = {
             },
         },
         {
-            files: ["*.jsx"],
+            files: ["*.jsx", ".js"],
             parserOptions: {
                 ecmaFeatures: {
                     jsx: true,
