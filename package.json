@@ -19,6 +19,7 @@
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-cypress": "^2.11.3",
+    "eslint-plugin-no-floating-promise": "^1.0.2",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-svelte3": "^3.2.0",
