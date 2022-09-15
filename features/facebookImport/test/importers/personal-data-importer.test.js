@@ -73,7 +73,6 @@ test("PersonalData importer - name with special characters", async () => {
     const { result, facebookAccount } = await runPersonalDataImporter(zipFile);
 
     expectImportSuccess(result);
-    console.log(facebookAccount.personalData);
     expect(facebookAccount.personalData.name.givenName).toBe("John🦊 José");
     expect(facebookAccount.personalData.name.lastName).toBe("Döe");
 });
