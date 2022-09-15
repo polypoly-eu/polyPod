@@ -1,5 +1,6 @@
 import MessagesImporter from "../../src/model/importers/messages-importer.js";
 import NameImporter from "../../src/model/importers/name-importer.js";
+import PersonalDataImporter from "../../src/model/importers/personal-data-importer.js";
 import FacebookAccount from "../../src/model/entities/facebook-account.js";
 import { runImporter, runImporters } from "@polypoly-eu/poly-import";
 import RecentlyViewedAdsImporter, {
@@ -53,6 +54,10 @@ export async function runLanguageAndLocaleImporter(zipFile) {
 
 export async function runNameImporter(zipFile) {
     return runSingleImporter(NameImporter, zipFile);
+}
+
+export async function runPersonalDataImporter(zipFile) {
+    return runSingleImporter(PersonalDataImporter, zipFile);
 }
 
 export async function runMessagesImporter(zipFile) {
