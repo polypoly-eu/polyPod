@@ -17,7 +17,11 @@ final class OAuth {
         }
         return flow.resumeExternalUserAgentFlow(with: url)
     }
-
+    
+    func clearAuthState() {
+        // keychain clear
+    }
+    
     func startAuth(clientId: String = clientId,
                    redirectURL: URL = redirectURL,
                    _ completion: @escaping (Result<OIDAuthState, Error>) -> Void) {

@@ -1,6 +1,7 @@
 import Combine
 import PolyPodCoreSwift
 import SwiftUI
+import AppAuth
 
 private enum Sections {
     case main, imprint, privacyPolicy, termsOfUse, licenses
@@ -178,6 +179,15 @@ struct SettingsView: View {
                                        action: {
                             shareLogs = true
                         })
+                        NavigationLink {
+                            FeatureAuthView()
+                                .navigationTitle("Feature Auth test")
+                        } label: {
+                            SettingsButton(
+                                label: "Feature Auth test"
+                            )
+                        }
+                        
                     }
                 }
             }
@@ -305,5 +315,47 @@ private struct LicensesView: View {
             return content.trimmingCharacters(in: .whitespacesAndNewlines)
         }
         return licenses.joined(separator: "\n\n\n")
+    }
+}
+
+struct FeatureAuthView: View {
+    @State var authState: OIDAuthState?
+    
+    var body: some View {
+        List {
+            Button(authState == nil ? "Login" : "Logout") {
+                if let authState = authState {
+                    
+                } else {
+                    OAuth.instance.startAuth { result in
+                        switch result {
+                        case let .success(state):
+                            authState = state
+                        case let .failure(error):
+                            break
+                        }
+                    }
+                }
+            }
+
+            if let authState = authState {
+                Button("Refresh token") {
+                    
+                }
+                NavigationLink {
+                    Text(authState.lastTokenResponse!.accessToken!)
+                        .font(.footnote)
+                } label: {
+                    Text("Token")
+                }
+                
+                NavigationLink {
+                    Text(authState.lastTokenResponse!.refreshToken!)
+                        .font(.footnote)
+                } label: {
+                    Text("Refresh Token")
+                }
+            }
+        }
     }
 }
