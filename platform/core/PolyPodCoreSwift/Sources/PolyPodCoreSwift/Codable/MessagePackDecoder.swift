@@ -329,38 +329,18 @@ extension _MessagePackDecoder {
         var nestedCodingPath: [CodingKey] {
             return self.codingPath + [AnyCodingKey(intValue: self.count ?? 0)!]
         }
-        
+
         var userInfo: [CodingUserInfoKey: Any]
-        
         var value: MessagePackValue
-        
-        lazy var count: Int? = {
-            do {
-                let format = try self.readByte()
-                switch format {
-                case 0x90...0x9f:
-                    return Int(format & 0x0F)
-                case 0xdc:
-                    return Int(try read(UInt16.self))
-                case 0xdd:
-                    return Int(try read(UInt32.self))
-                default:
-                    return nil
-                }
-            } catch {
-                return nil
-            }
-        }()
-        
         var currentIndex: Int = 0
         
         lazy var nestedContainers: [MessagePackDecodingContainer] = {
             guard let count = self.count else {
                 return []
             }
-            
+
             var nestedContainers: [MessagePackDecodingContainer] = []
-            
+
             do {
                 for _ in 0..<count {
                     let container = try self.decodeContainer()
@@ -369,9 +349,9 @@ extension _MessagePackDecoder {
             } catch {
                 fatalError("\(error)") // FIXME
             }
-            
+
             self.currentIndex = 0
-            
+
             return nestedContainers
         }()
         
@@ -380,26 +360,26 @@ extension _MessagePackDecoder {
             self.userInfo = userInfo
             self.value = value
         }
-        
-        var isAtEnd: Bool {
-            guard let count = self.count else {
-                return true
-            }
-            
-            return currentIndex >= count
-        }
-        
-        func checkCanDecodeValue() throws {
-            guard !self.isAtEnd else {
-                throw DecodingError.dataCorruptedError(in: self, debugDescription: "Unexpected end of data")
-            }
-        }
     }
 }
 
 extension _MessagePackDecoder.UnkeyedContainer: UnkeyedDecodingContainer {
+    var count: Int? {
+        if let array = self.value.arrayValue {
+            return array.count
+        }
+        return nil
+    }
+    
+    var isAtEnd: Bool {
+        guard let count = self.count else {
+            return true
+        }
+        
+        return currentIndex >= count
+    }
+    
     func decodeNil() throws -> Bool {
-        try checkCanDecodeValue()
         defer { self.currentIndex += 1 }
 
         let nestedContainer = self.nestedContainers[self.currentIndex]
@@ -411,105 +391,88 @@ extension _MessagePackDecoder.UnkeyedContainer: UnkeyedDecodingContainer {
              is _MessagePackDecoder.KeyedContainer<AnyCodingKey>:
             return false
         default:
-            let context = DecodingError.Context(codingPath: self.codingPath, debugDescription: "cannot decode nil for index: \(self.currentIndex)")
-                       throw DecodingError.typeMismatch(Any?.self, context)
+            throw DecodingError.invalidValue(info: "Cannot decode nil for \(self.value) at index \(self.currentIndex)")
         }
     }
     
     func decode<T>(_ type: T.Type) throws -> T where T : Decodable {
-        try checkCanDecodeValue()
         defer { self.currentIndex += 1 }
-        
+
         let container = self.nestedContainers[self.currentIndex]
         let decoder = MessagePackDecoder()
-        let value = try decoder.decode(T.self, from: container.data)
+        let value = try decoder.decode(T.self, from: container.value)
 
         return value
     }
     
     func nestedUnkeyedContainer() throws -> UnkeyedDecodingContainer {
-        try checkCanDecodeValue()
         defer { self.currentIndex += 1 }
-
         let container = self.nestedContainers[self.currentIndex] as! _MessagePackDecoder.UnkeyedContainer
-        
         return container
     }
-    
-    func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type) throws -> KeyedDecodingContainer<NestedKey> where NestedKey : CodingKey {
-        try checkCanDecodeValue()
-        defer { self.currentIndex += 1 }
 
+    func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type) throws -> KeyedDecodingContainer<NestedKey> where NestedKey : CodingKey {
+        defer { self.currentIndex += 1 }
         let container = self.nestedContainers[self.currentIndex] as! _MessagePackDecoder.KeyedContainer<NestedKey>
-        
         return KeyedDecodingContainer(container)
     }
 
     func superDecoder() throws -> Decoder {
-        return _MessagePackDecoder(data: self.data)
+        return _MessagePackDecoder(value: self.value)
     }
 }
 
 extension _MessagePackDecoder.UnkeyedContainer {
     func decodeContainer() throws -> MessagePackDecodingContainer {
-        try checkCanDecodeValue()
         defer { self.currentIndex += 1 }
         
-        let startIndex = self.index
-        
-        let length: Int
-        let format = try self.readByte()
-        switch format {
-        case 0x00...0x7f,
-             0xc0, 0xc2, 0xc3,
-             0xe0...0xff:
-            length = 0
-        case 0xcc, 0xd0, 0xd4:
-            length = 1
-        case 0xcd, 0xd1, 0xd5:
-            length = 2
-        case 0xca, 0xce, 0xd2:
-            length = 4
-        case 0xcb, 0xcf, 0xd3:
-            length = 8
-        case 0xd6:
-            length = 5
-        case 0xd7:
-            length = 9
-        case 0xd8:
-            length = 16
-        case 0xa0...0xbf:
-            length = Int(format - 0xa0)
-        case 0xc4, 0xc7, 0xd9:
-            length = Int(try read(UInt8.self))
-        case 0xc5, 0xc8, 0xda:
-            length = Int(try read(UInt16.self))
-        case 0xc6, 0xc9, 0xdb:
-            length = Int(try read(UInt32.self))
-        case 0x80...0x8f, 0xde, 0xdf:
-            let container = _MessagePackDecoder.KeyedContainer<AnyCodingKey>(data: self.data.suffix(from: startIndex), codingPath: self.nestedCodingPath, userInfo: self.userInfo)
-            _ = container.nestedContainers // FIXME
-            self.index = container.index
-            
-            return container
-        case 0x90...0x9f, 0xdc, 0xdd:
-            let container = _MessagePackDecoder.UnkeyedContainer(data: self.data.suffix(from: startIndex), codingPath: self.nestedCodingPath, userInfo: self.userInfo)
-            _ = container.nestedContainers // FIXME
-
-            self.index = container.index
-            
-            return container
-        default:
-            throw DecodingError.dataCorruptedError(in: self, debugDescription: "Invalid format: \(format)")
+        guard let array = self.value.arrayValue else {
+            throw DecodingError.invalidValue(info: "Could not get array value from \(self.value).")
         }
         
-        let range: Range<Data.Index> = startIndex..<self.index.advanced(by: length)
-        self.index = range.upperBound
+        guard currentIndex < array.count else {
+            throw DecodingError.invalidValue(info: "UnkeyedContainer: currentIndex < array.count")
+        }
         
-        let container = _MessagePackDecoder.SingleValueContainer(data: self.data.subdata(in: range), codingPath: self.codingPath, userInfo: self.userInfo)
-
-        return container
+        let current = array[currentIndex]
+        
+        if let _ = current.arrayValue {
+            return _MessagePackDecoder.UnkeyedContainer(value: current, codingPath: self.nestedCodingPath, userInfo: self.userInfo)
+        } else if let _ = current.dictionaryValue {
+            return _MessagePackDecoder.KeyedContainer<AnyCodingKey>(value: current, codingPath: self.nestedCodingPath, userInfo: self.userInfo)
+        } else {
+            return _MessagePackDecoder.SingleValueContainer(value: current, codingPath: self.codingPath, userInfo: self.userInfo)
+        }
     }
 }
 
 extension _MessagePackDecoder.UnkeyedContainer: MessagePackDecodingContainer {}
+
+struct AnyCodingKey: CodingKey, Equatable {
+    var stringValue: String
+    var intValue: Int?
+    
+    init?(stringValue: String) {
+        self.stringValue = stringValue
+        self.intValue = nil
+    }
+    
+    init?(intValue: Int) {
+        self.stringValue = "\(intValue)"
+        self.intValue = intValue
+    }
+    
+    init<Key>(_ base: Key) where Key : CodingKey {
+        if let intValue = base.intValue {
+            self.init(intValue: intValue)!
+        } else {
+            self.init(stringValue: base.stringValue)!
+        }
+    }
+}
+
+extension AnyCodingKey: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.stringValue)
+    }
+}
