@@ -35,6 +35,30 @@ const ReportCard = () => {
     );
 };
 
+function NoStoriesCard() {
+    const message = useRef(null);
+
+    useEffect(() => {
+        const link = message.current.querySelector("a");
+        link.style.textDecoration = "underline";
+        link.href = "#";
+        link.addEventListener("click", () => {
+            window.pod.polyNav.openUrl("support-email");
+        });
+    });
+
+    return (
+        <Card>
+            <div
+                ref={message}
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("explore:details.noAnalyses"),
+                }}
+            />
+        </Card>
+    );
+}
+
 const ExploreView = () => {
     const { reportResult, setReportResult } = useContext(ImporterContext);
     const { account } = useContext(PolyImportContext);
@@ -126,7 +150,7 @@ const ExploreView = () => {
             <List>
                 <ReportCard />
                 {!activeMinistories.length ? (
-                    <Card>{i18n.t("explore:details.noAnalyses")}</Card>
+                    <NoStoriesCard />
                 ) : (
                     activeMinistories.map(renderMinistory)
                 )}
