@@ -37,8 +37,8 @@ final class OAuth {
 }
 
 extension OIDAuthorizationRequest {
-    static let authEndpoint = URL(string: "https://keycloak.stage.polypoly.tech/realms/le-test/protocol/openid-connect/auth")!
-    static let tokenEndpoint = URL(string: "https://keycloak.stage.polypoly.tech/realms/le-test/protocol/openid-connect/token")!
+    static let authEndpoint = URL(string: "https://keycloak.stage.polypoly.tech/realms/eu-members/protocol/openid-connect/auth")!
+    static let tokenEndpoint = URL(string: "https://keycloak.stage.polypoly.tech/realms/eu-members/protocol/openid-connect/token")!
     
     static func `default`(clientId: String, redirectURL: URL) -> OIDAuthorizationRequest {
         let config = OIDServiceConfiguration(authorizationEndpoint: authEndpoint,
