@@ -59,6 +59,97 @@ extension MessagePackValue {
         }
     }
     
+    func getInt8() throws -> Int8 {
+        if let int = self.int8Value {
+            return int
+        } else {
+            throw DecodingError.invalidValue(info: "Expected int8, received \(self)")
+        }
+    }
+    
+    func getInt16() throws -> Int16 {
+        if let int = self.int16Value {
+            return int
+        } else {
+            throw DecodingError.invalidValue(info: "Expected int16, received \(self)")
+        }
+    }
+    
+    func getInt32() throws -> Int32 {
+        if let int = self.int32Value {
+            return int
+        } else {
+            throw DecodingError.invalidValue(info: "Expected int32, received \(self)")
+        }
+    }
+    
+    func getInt64() throws -> Int64 {
+        if let int = self.int64Value {
+            return int
+        } else {
+            throw DecodingError.invalidValue(info: "Expected int64, received \(self)")
+        }
+    }
+    
+    func getDouble() throws -> Double {
+        if let value = self.doubleValue {
+            return value
+        } else {
+            throw DecodingError.invalidValue(info: "Expected double, received \(self)")
+        }
+    }
+    
+    func getFloat() throws -> Float {
+        if let value = self.floatValue {
+            return value
+        } else {
+            throw DecodingError.invalidValue(info: "Expected float, received \(self)")
+        }
+    }
+    
+    func getData() throws -> Data {
+        if let value = self.dataValue {
+            return value
+        } else {
+            throw DecodingError.invalidValue(info: "Expected data, received \(self)")
+        }
+    }
+    
+    func getUInt() throws -> UInt {
+        guard let uint = self.uintValue else {
+            throw DecodingError.invalidValue(info: "Expected uint, received \(self)")
+        }
+        return uint
+    }
+    
+    func getUInt8() throws -> UInt8 {
+        guard let uint = self.uint8Value else {
+            throw DecodingError.invalidValue(info: "Expected uint8, received \(self)")
+        }
+        return uint
+    }
+    
+    func getUInt16() throws -> UInt16 {
+        guard let uint = self.uint16Value else {
+            throw DecodingError.invalidValue(info: "Expected uint16, received \(self)")
+        }
+        return uint
+    }
+    
+    func getUInt32() throws -> UInt32 {
+        guard let uint = self.uint32Value else {
+            throw DecodingError.invalidValue(info: "Expected uint32, received \(self)")
+        }
+        return uint
+    }
+    
+    func getUInt64() throws -> UInt64 {
+        guard let uint = self.uint64Value else {
+            throw DecodingError.invalidValue(info: "Expected uint64, received \(self)")
+        }
+        return uint
+    }
+    
     func getUInt() throws -> UInt? {
         guard self != nil else {
             return nil
