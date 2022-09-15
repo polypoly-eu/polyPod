@@ -10,5 +10,5 @@
     "details.button": "View details",
     "analysis.label.techDemo": "Tech demo",
     "scroll": "Scroll to view more",
-    "details.noAnalyses": "Unfortunately, we were unable to present any insights based on the data you imported. If you think this is a bug, please get in touch and help us out."
+    "details.noAnalyses": "Unfortunately, we were unable to present any insights based on the data you imported. If you think this is a bug, <a>please get in touch and help us out</a>."
 }
