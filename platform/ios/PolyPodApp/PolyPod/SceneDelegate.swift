@@ -21,7 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = ContentViewHost()
-            OAuth.instance.externalUserAgent = OIDExternalUserAgentIOS(presenting: window.rootViewController!)
             self.window = window
             window.makeKeyAndVisible()
         }
@@ -32,7 +31,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         
-        OAuth.instance.handleDeeplinkURL(openURL)
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

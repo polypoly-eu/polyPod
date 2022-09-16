@@ -110,6 +110,9 @@
 		909BD36428CF45BA0024A725 /* OAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BD36328CF45BA0024A725 /* OAuth.swift */; };
 		90DD12F528A4E6C800526F54 /* Result+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DD12F428A4E6C800526F54 /* Result+Utils.swift */; };
 		90DD12F628A4E6C800526F54 /* Result+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DD12F428A4E6C800526F54 /* Result+Utils.swift */; };
+		90E1CD2128D33692001937D3 /* FeatureTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1CD2028D33692001937D3 /* FeatureTokenStorage.swift */; };
+		90E1CD2328D37213001937D3 /* FeatureAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1CD2228D37213001937D3 /* FeatureAuthTests.swift */; };
+		90E1CD2528D373BF001937D3 /* NetworkRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1CD2428D373BF001937D3 /* NetworkRequestInterceptor.swift */; };
 		90E4088227D78E4E006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
 		90E4088327D79382006AD362 /* DataProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4088127D78E4E006AD362 /* DataProtection.swift */; };
 		90F8BA0028B6375000D73776 /* PolyPodCoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 90F8B9FF28B6375000D73776 /* PolyPodCoreSwift */; };
@@ -262,6 +265,9 @@
 		9075BAB9283B69FD00909E06 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		909BD36328CF45BA0024A725 /* OAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth.swift; sourceTree = "<group>"; };
 		90DD12F428A4E6C800526F54 /* Result+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Utils.swift"; sourceTree = "<group>"; };
+		90E1CD2028D33692001937D3 /* FeatureTokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureTokenStorage.swift; sourceTree = "<group>"; };
+		90E1CD2228D37213001937D3 /* FeatureAuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureAuthTests.swift; sourceTree = "<group>"; };
+		90E1CD2428D373BF001937D3 /* NetworkRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestInterceptor.swift; sourceTree = "<group>"; };
 		90E4088127D78E4E006AD362 /* DataProtection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtection.swift; sourceTree = "<group>"; };
 		90F8B9FD28B6374000D73776 /* PolyPodCoreSwift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PolyPodCoreSwift; path = ../../core/PolyPodCoreSwift; sourceTree = "<group>"; };
 		9C2B849928BCD037004693FA /* FeatureSmokeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureSmokeTest.swift; sourceTree = "<group>"; };
@@ -382,6 +388,8 @@
 				1A66F7762493743D00ED4308 /* Info.plist */,
 				E989B352269DDC9E000EE977 /* PolyNavTests.swift */,
 				E9CFFA4B26A0240300F7BE65 /* ColorExtensionsTests.swift */,
+				90E1CD2228D37213001937D3 /* FeatureAuthTests.swift */,
+				90E1CD2428D373BF001937D3 /* NetworkRequestInterceptor.swift */,
 			);
 			path = PolyPodTests;
 			sourceTree = "<group>";
@@ -587,6 +595,7 @@
 			isa = PBXGroup;
 			children = (
 				909BD36328CF45BA0024A725 /* OAuth.swift */,
+				90E1CD2028D33692001937D3 /* FeatureTokenStorage.swift */,
 			);
 			path = OAuth;
 			sourceTree = "<group>";
@@ -971,6 +980,7 @@
 				1ABADBFC24EE710B00369791 /* Quad+CoreDataProperties.swift in Sources */,
 				E9545ECA27359C38001E8C7F /* UserDefaultsExtensions.swift in Sources */,
 				E9F68ED227580A0B009ED2C1 /* Log.swift in Sources */,
+				90E1CD2328D37213001937D3 /* FeatureAuthTests.swift in Sources */,
 				90E4088327D79382006AD362 /* DataProtection.swift in Sources */,
 				1ABADBF724EE710B00369791 /* NamedNode+CoreDataClass.swift in Sources */,
 				1ABADC0724EE717000369791 /* Bubblewrap.swift in Sources */,
@@ -978,6 +988,7 @@
 				1ABADC0524EE710C00369791 /* Term+Additions.swift in Sources */,
 				E9545EB12735412B001E8C7F /* UpdateNotification.swift in Sources */,
 				1ABADBF624EE710B00369791 /* DefaultGraph+CoreDataProperties.swift in Sources */,
+				90E1CD2528D373BF001937D3 /* NetworkRequestInterceptor.swift in Sources */,
 				1ABADC0024EE710B00369791 /* Literal+CoreDataClass.swift in Sources */,
 				9C8F6D28285B49D000D44B4E /* URL+Utils.swift in Sources */,
 				1ABADBFB24EE710B00369791 /* Quad+CoreDataClass.swift in Sources */,
@@ -1061,6 +1072,7 @@
 				90716ACC283F7AFA00F7445A /* Array+Utils.swift in Sources */,
 				E9040D4926F0B2B400A88593 /* RuntimeInfo.swift in Sources */,
 				1AF1179224C1A20E0063EE37 /* PolyOut+Fetch.swift in Sources */,
+				90E1CD2128D33692001937D3 /* FeatureTokenStorage.swift in Sources */,
 				1A4C21ED24A63E4B006CC1FD /* DefaultGraph+CoreDataProperties.swift in Sources */,
 				1A4C21F524A63E4C006CC1FD /* Variable+CoreDataProperties.swift in Sources */,
 				E90F89EA2629822400AD7D96 /* OnboardingView.swift in Sources */,

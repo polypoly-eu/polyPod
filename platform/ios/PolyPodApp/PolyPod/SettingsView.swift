@@ -319,23 +319,26 @@ private struct LicensesView: View {
 }
 
 struct FeatureAuthView: View {
-    @State var authState: OIDAuthState?
+    @State var authState: OIDAuthState? = try? FeatureTokenStorage.getAuthState(
+        forService: "members-eu").get()
+
     
     var body: some View {
         List {
             Button(authState == nil ? "Login" : "Logout") {
-                if let authState = authState {
-                    
-                } else {
-                    OAuth.instance.startAuth { result in
-                        switch result {
-                        case let .success(state):
-                            authState = state
-                        case let .failure(error):
-                            break
-                        }
-                    }
-                }
+//                if authState == nil {
+//                    OAuth.instance.startAuth { result in
+//                        switch result {
+//                        case let .success(state):
+//                            authState = state
+//                            FeatureTokenStorage.storeAuthState(state, forService: "members-eu")
+//                        case let .failure(error):
+//                            break
+//                        }
+//                    }
+//                } else {
+//                    FeatureTokenStorage.removeAuthState(forService: "members-eu")
+//                }
             }
 
             if let authState = authState {

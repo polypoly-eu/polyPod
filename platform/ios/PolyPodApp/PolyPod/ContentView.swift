@@ -180,10 +180,7 @@ struct ContentView: View {
                         state = featureState(feature)
                     },
                     openInfoAction: {
-                        OAuth.instance.startAuth { result in
-                            
-                        }
-                        //state = infoState()
+                        state = infoState()
                     }
                 ).alert(isPresented: $showUpdateNotification) {
                     Alert(
