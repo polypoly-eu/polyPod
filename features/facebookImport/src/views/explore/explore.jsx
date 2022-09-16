@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import { ImporterContext } from "../../context/importer-context.jsx";
+import { FacebookContext } from "../../context/facebook-context.jsx";
 import {
     List,
     Card,
@@ -44,7 +44,7 @@ function NoStoriesCard() {
 }
 
 const ExploreView = () => {
-    const { reportResult, setReportResult } = useContext(ImporterContext);
+    const { reportResult, setReportResult } = useContext(FacebookContext);
     const { account } = useContext(PolyImportContext);
 
     const history = useHistory();
