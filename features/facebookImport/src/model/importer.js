@@ -17,7 +17,7 @@ import OldUnfollowedPagesImporter from "./importers/old-pages-unfollowed-importe
 import MessagesImporter from "./importers/messages-importer.js";
 import AdminRecordsImporter from "./importers/admin-records-importer.js";
 import AccountSessionActivitiesImporter from "./importers/account-session-activities-importer.js";
-import NameImporter from "./importers/name-importer.js";
+import PersonalDataImporter from "./importers/personal-data-importer.js";
 import LanguageAndLocaleImporter from "./importers/language-and-locale-importer.js";
 import RecentlyViewedAdsImporter from "./importers/recently-viewed-ads-importer.js";
 import CommentsImporter from "./importers/comments-importer.js";
@@ -44,7 +44,7 @@ export const dataImporters = [
     MessagesImporter,
     AdminRecordsImporter,
     AccountSessionActivitiesImporter,
-    NameImporter,
+    PersonalDataImporter,
     LanguageAndLocaleImporter,
     RecentlyViewedAdsImporter,
     CommentsImporter,
