@@ -22,13 +22,15 @@ const Overview = () => {
     const [showNewImportDialog, setShowNewImportDialog] = useState(false);
     const history = useHistory();
 
-    useEffect(() => {
+    useEffect(async () => {
         if (!account) return;
         analyzeFile({
             zipData: files[0],
             dataAccount: account,
             specificAnalyses,
         });
+        console.log(await account.personalData);
+        console.log(account);
     }, [account]);
 
     if (account === null || files === null)
@@ -42,15 +44,6 @@ const Overview = () => {
     const bubbleVizWidth = 400;
     const bubbleVizHeight = 400;
     const dataBubblesLightColor = "#f7fafc";
-
-    const bubbleData = account.dataGroups.filter(({ count }) => count > 0);
-
-    bubbleData.forEach((d) => {
-        d.value = d.count;
-    });
-    bubbleData.sort(function (a, b) {
-        return b.value - a.value;
-    });
 
     const formatSize = (size) => {
         const k = 1024;
@@ -77,20 +70,9 @@ const Overview = () => {
                     <p
                         dangerouslySetInnerHTML={{
                             __html: i18n.t("overview:above.chart.text", {
-                                number_categories: bubbleData.length,
+                                number_categories: [].length,
                             }),
                         }}
-                    />
-                    <PolyChart
-                        type="bubble-cluster"
-                        data={bubbleData}
-                        width={bubbleVizWidth}
-                        height={bubbleVizHeight}
-                        bubbleColor={dataBubblesLightColor}
-                        onBubbleClick={() =>
-                            history.push("/explore", INITIAL_HISTORY_STATE)
-                        }
-                        text=""
                     />
                     <div className="details">
                         <p>

@@ -1,5 +1,4 @@
 import { FeatureFileStorage, ZipFile, ZipFileEntry } from "./storage";
-import { importData, importZip, runImporter, runImporters } from "./importer";
 import {
     FileImportError,
     RefreshFilesError,
@@ -9,10 +8,6 @@ import DataAccount from "./entities/data-account";
 import { Status, statusTypes } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
 export {
-    importZip,
-    importData,
-    runImporter,
-    runImporters,
     Status,
     ZipFile,
     Telemetry,

@@ -1,9 +1,8 @@
 import { Status, statusTypes } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
-import { ZipFile } from "./storage";
 
-class ImporterExecutionResult {
-    constructor(importer, status, executionTime) {
+class ImporterExecutionReport {
+    constructor({ importer, status, executionTime }) {
         this._importer = importer;
         this._status = status || new Status({ name: statusTypes.success });
         this._executionTime = executionTime;
@@ -40,59 +39,31 @@ class ImporterExecutionResult {
     }
 }
 
-export async function runImporter(
-    importerClass,
-    zipFile,
-    facebookAccount,
-    pod
-) {
+export async function runImporter({ importerClass, zipFile, pod }) {
     const importer = new importerClass();
 
     const telemetry = new Telemetry();
 
     try {
-        const status = await importer.import({
+        const { result, status } = await importer.import({
             zipFile,
-            facebookAccount,
             pod,
         });
-        return new ImporterExecutionResult(
-            importer,
-            status,
-            telemetry.elapsedTime()
-        );
+        return {
+            report: new ImporterExecutionReport({
+                importer,
+                status,
+                elapsedTime: telemetry.elapsedTime(),
+            }),
+            result,
+        };
     } catch (error) {
-        return new ImporterExecutionResult(
-            importer,
-            new Status({ name: statusTypes.error, message: error }),
-            telemetry.elapsedTime()
-        );
+        return {
+            report: new ImporterExecutionReport({
+                importer,
+                status: new Status({ name: statusTypes.error, message: error }),
+                elapsedTime: telemetry.elapsedTime(),
+            }),
+        };
     }
-}
-
-export async function runImporters(importerClasses, zipFile, dataAccount, pod) {
-    return await Promise.all(
-        importerClasses.map(async (importerClass) => {
-            return runImporter(importerClass, zipFile, dataAccount, pod);
-        })
-    );
-}
-
-export async function importZip({ dataImporters, zipFile, pod, DataAccount }) {
-    const dataAccount = new DataAccount();
-    const importingResults = await runImporters(
-        dataImporters,
-        zipFile,
-        dataAccount,
-        pod
-    );
-
-    dataAccount.importingResults = importingResults;
-
-    return dataAccount;
-}
-
-export async function importData({ dataImporters, zipData, DataAccount }) {
-    const zipFile = await ZipFile.createWithCache(zipData, window.pod);
-    return importZip({ dataImporters, zipFile, pod: window.pod, DataAccount });
 }

@@ -20,28 +20,8 @@ import CommentsImporter from "./importers/comments-importer.js";
 import PostReactionsImporter from "./importers/post-reactions-importer.js";
 import PostsImporter from "./importers/posts-importer.js";
 
-export const dataImporters = [
-    AdInterestsImporter,
-    ConnectedAdvertisersImporter,
-    ConnectedAdvertisersAllTypesImporter,
-    OffFacebookEventsImporter,
-    InteractedWithAdvertisersImporter,
-    FriendsImporter,
-    FollowedPagesImporter,
-    LikedPagesImporter,
-    ReceivedFriendRequestsImporter,
-    RecommendedPagesImporter,
-    SearchesImporter,
-    UnfollowedPagesImporter,
-    MessagesImporter,
-    AdminRecordsImporter,
-    AccountSessionActivitiesImporter,
-    PersonalDataImporter,
-    LanguageAndLocaleImporter,
-    RecentlyViewedAdsImporter,
-    CommentsImporter,
-    PostReactionsImporter,
-    PostsImporter,
-];
+export const dataImporters = {
+    personalData: PersonalDataImporter,
+};
 
 export const NUMBER_OF_IMPORTERS = dataImporters.length;
