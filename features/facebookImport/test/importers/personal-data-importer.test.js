@@ -62,7 +62,8 @@ test("PersonalData importer - name with no special characters", async () => {
     const { result, facebookAccount } = await runPersonalDataImporter(zipFile);
 
     expectImportSuccess(result);
-    expect(facebookAccount.personalData.name.givenName).toBe("John Peter");
+    expect(facebookAccount.personalData.name.givenName).toBe("John");
+    expect(facebookAccount.personalData.name.additionalName).toBe("Peter");
     expect(facebookAccount.personalData.name.lastName).toBe("Doe");
 });
 
@@ -73,6 +74,7 @@ test("PersonalData importer - name with special characters", async () => {
     const { result, facebookAccount } = await runPersonalDataImporter(zipFile);
 
     expectImportSuccess(result);
-    expect(facebookAccount.personalData.name.givenName).toBe("John🦊 José");
+    expect(facebookAccount.personalData.name.givenName).toBe("John🦊");
+    expect(facebookAccount.personalData.name.additionalName).toBe("José");
     expect(facebookAccount.personalData.name.lastName).toBe("Döe");
 });
