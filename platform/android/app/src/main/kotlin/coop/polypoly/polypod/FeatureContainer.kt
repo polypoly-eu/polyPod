@@ -98,7 +98,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         webView.setOnLongClickListener { true }
         webView.isHapticFeedbackEnabled = false
 
-        WebView.setWebContentsDebuggingEnabled(true)
+        WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG)
 
         checkWebViewVersion()
 
