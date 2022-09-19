@@ -486,13 +486,10 @@
 				1ABADC1024EFBCBF00369791 /* Models */,
 				1A66F76D2493719B00ED4308 /* PolyIn */,
 				1A66F76C2493715400ED4308 /* PolyOut */,
-				1AA6DE5924192463008DB1B2 /* domConsole.js */,
-				1A00DFF8245961FB0049F3F7 /* messagePort.js */,
 				1A00DFFA245AAC3E0049F3F7 /* MessageName.swift */,
 				1AF468DB24349E6B00E51B6D /* PodApi.swift */,
 				1A8F4874247E40C600089217 /* PostOffice.swift */,
 				1A183E9124AF1E860025F6BB /* PodApiError.swift */,
-				E923AAF6261E155500E0A2A8 /* polyNav.js */,
 			);
 			path = PodApi;
 			sourceTree = "<group>";
@@ -505,6 +502,9 @@
 				1ABADBCA24E2E06600369791 /* initIframe.js */,
 				E97D32AF2631E68700A5A180 /* disableUserSelect.js */,
 				E98D506926F3741100C3FCF4 /* handleErrors.js */,
+				1AA6DE5924192463008DB1B2 /* domConsole.js */,
+				1A00DFF8245961FB0049F3F7 /* messagePort.js */,
+				E923AAF6261E155500E0A2A8 /* polyNav.js */,
 			);
 			path = FeatureContainer;
 			sourceTree = "<group>";
