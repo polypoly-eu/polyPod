@@ -43,7 +43,6 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-
             android:name=".settings.SettingsActivity"
             android:exported="false"
             android:label="@string/settings_title"
