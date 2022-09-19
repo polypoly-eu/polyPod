@@ -25,6 +25,7 @@ import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.lifecycleScope
 import androidx.webkit.WebViewAssetLoader
 import coop.polypoly.core.Feature
+import coop.polypoly.polypod.BuildConfig
 import coop.polypoly.polypod.endpoint.Endpoint
 import coop.polypoly.polypod.endpoint.EndpointObserver
 import coop.polypoly.polypod.features.FeatureStorage
@@ -98,7 +99,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         webView.setOnLongClickListener { true }
         webView.isHapticFeedbackEnabled = false
 
-        WebView.setWebContentsDebuggingEnabled(true)
+        WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG)
 
         checkWebViewVersion()
 
