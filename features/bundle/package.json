@@ -4,19 +4,12 @@
     "build": "node index.js"
   },
   "devDependencies": {
-    "amazon-data-importer-preview": "file:../amazonDataImporterPreview",
     "bestzip": "^2.2.0",
-    "company-data-cleaner-preview": "file:../companyDataCleanerPreview",
-    "cooperative-membership-preview": "file:../cooperativeMembershipPreview",
     "demo-feature": "file:../demo",
     "facebook-import-feature": "file:../facebookImport",
-    "feature-store-preview": "file:../featureStorePreview",
-    "gdpr-data-importer-preview": "file:../gdprDataImporterPreview",
     "google-feature": "file:../google",
     "lexicon-feature": "file:../lexicon",
-    "netflix-data-importer-preview": "file:../netflixDataImporterPreview",
     "poly-explorer-feature": "file:../polyExplorer",
-    "poly-talk-preview": "file:../polyTalkPreview",
     "polypedia-preview": "file:../polypediaPreview",
     "amazon-data-importer-preview": "file:../amazonDataImporterPreview",
     "company-data-cleaner-preview": "file:../companyDataCleanerPreview",
@@ -26,6 +19,7 @@
     "netflix-data-importer-preview": "file:../netflixDataImporterPreview",
     "polypoly-membership-feature": "file:../polypolyMembership",
     "polypoly-membership-preview": "file:../polypolyMembershipPreview",
+    "poly-talk-preview": "file:../polyTalkPreview",
     "test-feature": "file:../test"
   },
   "private": true,
