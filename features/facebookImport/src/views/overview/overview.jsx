@@ -31,8 +31,6 @@ const Overview = () => {
         });
     }, [account]);
 
-    console.log(account);
-
     if (account === null || files === null)
         return (
             <LoadingOverlay
