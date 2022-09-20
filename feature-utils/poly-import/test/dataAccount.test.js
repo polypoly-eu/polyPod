@@ -2,6 +2,7 @@ import { DataAccount } from "../src";
 
 describe("DataAccount has the correct attributes", () => {
     let dataAccount = new DataAccount();
+
     it("Attributes have the correct type", () => {
         [
             "importingResults",
@@ -15,6 +16,7 @@ describe("DataAccount has the correct attributes", () => {
         });
         expect(dataAccount.personalData.name.familyName).toStrictEqual("");
     });
+
     it("Adds imported filenames successfully", () => {
         dataAccount.addImportedFileName("Foo");
         expect(dataAccount.importedFileNames.length).toBeGreaterThanOrEqual(1);
