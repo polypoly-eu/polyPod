@@ -1,6 +1,6 @@
 export class FeatureFileStorage {
     constructor(pod) {
-        this.changeListener = () => { };
+        this.changeListener = () => {};
         this._files = null;
         this._pod = pod;
     }
@@ -105,7 +105,7 @@ export class ZipFile {
     }
 }
 
-ZipFile.createWithCache = async function(zipData, pod) {
+ZipFile.createWithCache = async function (zipData, pod) {
     let zipFile = new ZipFile(zipData, pod);
     await zipFile._ensureCachedEntries();
     return zipFile;
