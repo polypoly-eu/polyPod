@@ -13,7 +13,7 @@ describe("DataAccount has the correct attributes", () => {
         ["analyses", "reports"].forEach((attribute) => {
             expect(dataAccount[attribute]).toBeInstanceOf(Object);
         });
-        expect(dataAccount.name).toStrictEqual("");
+        expect(dataAccount.personalData.name.familyName).toStrictEqual("");
     });
     it("Adds imported filenames successfully", () => {
         dataAccount.addImportedFileName("Foo");
