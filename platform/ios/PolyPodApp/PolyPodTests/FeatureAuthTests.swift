@@ -5,8 +5,11 @@ import AppAuth
 import Security
 @testable import PolyPod
 
-class CustomUserAgent: NSObject, OIDExternalUserAgent {
-    var performedRequests = [OIDExternalUserAgentRequest]()
+private final class OIDExternalUserAgentSpy: NSObject, OIDExternalUserAgent {
+    
+    /// The requests that were performed
+    private(set) var performedRequests = [OIDExternalUserAgentRequest]()
+    
     func present(_ request: OIDExternalUserAgentRequest, session: OIDExternalUserAgentSession) -> Bool {
         performedRequests.append(request)
         return true
@@ -17,61 +20,48 @@ class CustomUserAgent: NSObject, OIDExternalUserAgent {
     }
 }
 
-final class FeatureAuthTests: XCTestCase {
-    func testStartsUserAgentWithCorrectRequest() {
-        // Arrange
-        let service = "testFeature"
-        let config = OIDAuthConfig(authEndpoint: URL(string: "https://authEndpoint")!,
-                                   tokenEndpoint: URL(string: "https://tokenEndpoint")!,
-                                   clientId: "testClientId",
-                                   redirectURL: URL(string: "coop.polypodtest.com://redirect")!)
-        let auth = FeatureOIDAuth(service: service, config: config)
-        let userAgent = CustomUserAgent()
-        auth.externalUserAgent = userAgent
-        
-        // Act
-        let expectation = expectation(description: "wait for completion")
-        auth.getAuthState { _ in
-            expectation.fulfill()
-        }
-        
-        auth.handleAuthRedirect(URL(string: "coop.polypodtest.com://redirect?code=1234")!)
-        wait(for: [expectation], timeout: 1.0)
 
-        // Assert
-        // Just assert that the proper AuthorizationRequest was sent to the UserAgent,
-        // the rest should be properly handled by AppAuth SDK
-        let performedRequest = userAgent.performedRequests.first! as! OIDAuthorizationRequest
-        XCTAssertEqual(
-            performedRequest.configuration.tokenEndpoint,
-            config.tokenEndpoint
-        )
-        XCTAssertEqual(
-            performedRequest.configuration.authorizationEndpoint,
-            config.authEndpoint
-        )
-        XCTAssertEqual(performedRequest.clientID, config.clientId)
-        XCTAssertNil(performedRequest.clientSecret)
-        XCTAssertEqual(
-            performedRequest.scope,
-            OIDScopeUtilities.scopes(with: [OIDScopeEmail, OIDScopeOpenID])
-        )
-        XCTAssertEqual(performedRequest.redirectURL, config.redirectURL)
-        XCTAssertEqual(performedRequest.responseType, OIDResponseTypeCode)
-        XCTAssertNil(performedRequest.state)
-        XCTAssertNil(performedRequest.nonce)
-        XCTAssertNotNil(performedRequest.codeVerifier)
-        XCTAssertNotNil(performedRequest.codeChallenge)
-        XCTAssertEqual(performedRequest.codeChallengeMethod, OIDOAuthorizationRequestCodeChallengeMethodS256)
-        XCTAssertEqual(performedRequest.additionalParameters, [:])
+final class OIDAuthTests: XCTestCase {
+    lazy var redirectURL = URL(string: "coop.polypod.com://redirect")!
+    lazy var deepLinkURL = URL(string: redirectURL.absoluteString + "?code=1234")!
+    lazy var authRequest = OIDAuthorizationRequest(
+        configuration: .init(
+            authorizationEndpoint: URL(string: "https://anyAuth.com")!,
+            tokenEndpoint: URL(string: "https://anyToken.com")!
+        ),
+        clientId: "clientId",
+        clientSecret: nil,
+        scope: nil,
+        redirectURL: redirectURL,
+        responseType: OIDResponseTypeCode,
+        state: nil,
+        nonce: nil,
+        codeVerifier: nil,
+        codeChallenge: nil,
+        codeChallengeMethod: nil,
+        additionalParameters: nil)
+    
+    override func setUp() {
+        super.setUp()
+        clearTokenStorage()
     }
     
-    func testReturnsOAuthState() throws {
+    override func tearDown() {
+        super.tearDown()
+        clearTokenStorage()
+    }
+    
+    func clearTokenStorage() {
+        let query = [kSecAttrService: authRequest.clientID,
+                           kSecClass: kSecClassGenericPassword
+                     ] as CFDictionary
+        SecItemDelete(query)
+    }
+
+    func testStartsUserAgentWithCorrectRequest() throws {
         // Arrange
-        let auth = anyConfigFeatureAuth()
-        auth.urlSession = URLSession(
-            configuration: NetworkRequestInterceptor.sessionConfigForIterception()
-        )
+        let userAgent = OIDExternalUserAgentSpy()
+        let auth = OIDAuth(authorizationRequest: authRequest, oidExternalUserAgent: userAgent)
         
         let response: [String: Any] = [
             "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIi",
@@ -85,19 +75,49 @@ final class FeatureAuthTests: XCTestCase {
             data: encoded,
             response: HTTPURLResponse.any200Response)
         )
-        NetworkRequestInterceptor.startInterceptingRequests()
+        interceptRequests()
+        // Act
+        let expectation = expectation(description: "wait for completion")
+        auth.loadAuthState { _ in
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1.0)
+        auth.handleAuthRedirect(deepLinkURL)
+        
+        // Assert
+        // Just assert that the proper AuthorizationRequest was sent to the UserAgent,
+        // the rest should be properly handled by AppAuth SDK
+        let performedRequest = userAgent.performedRequests.first! as! OIDAuthorizationRequest
+        XCTAssertEqual(performedRequest, authRequest)
+    }
+    
+    func testReturnsOAuthState() throws {
+        // Arrange
+        let auth = anyConfigFeatureAuth()
+
+        let response: [String: Any] = [
+            "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIi",
+            "refresh_token": "SF3HYFQDHp90KKa4dqCAtNqQcAxs",
+            "scope": "email audience",
+            "token_type": "Bearer"
+        ]
+        
+        let encoded = try JSONSerialization.data(withJSONObject: response)
+        NetworkRequestInterceptor.stub(.init(
+            data: encoded,
+            response: HTTPURLResponse.any200Response)
+        )
+        interceptRequests()
 
         // Act
         let expectation = expectation(description: "wait for completion")
-        var capturedResult: Result<OIDAuthState, Error>!
-        auth.getAuthState { result in
-            capturedResult = result
+        auth.loadAuthState { result in
             expectation.fulfill()
         }
         
-        auth.handleAuthRedirect(URL(string: "coop.polypodtest.com://redirect?code=1234")!)
+        auth.handleAuthRedirect(redirectURL)
         wait(for: [expectation], timeout: 1.0)
-        let state = try capturedResult.get()
+        let state = auth.state!
         XCTAssertEqual(state.lastTokenResponse?.accessToken, response["access_token"] as? String)
         XCTAssertEqual(state.lastTokenResponse?.refreshToken, response["refresh_token"] as? String)
         XCTAssertEqual(state.scope, response["scope"] as? String)
@@ -107,9 +127,6 @@ final class FeatureAuthTests: XCTestCase {
     func testStoresAuthState() throws {
         // Arrange
         let auth = anyConfigFeatureAuth()
-        auth.urlSession = URLSession(
-            configuration: NetworkRequestInterceptor.sessionConfigForIterception()
-        )
         
         let response: [String: Any] = [
             "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIi",
@@ -123,15 +140,15 @@ final class FeatureAuthTests: XCTestCase {
             data: encoded,
             response: HTTPURLResponse.any200Response)
         )
-        NetworkRequestInterceptor.startInterceptingRequests()
+        interceptRequests()
 
         // Act
         let expectation = expectation(description: "wait for completion")
-        auth.getAuthState { _ in
+        auth.loadAuthState { _ in
             expectation.fulfill()
         }
         
-        auth.handleAuthRedirect(URL(string: "coop.polypodtest.com://redirect?code=1234")!)
+        auth.handleAuthRedirect(redirectURL)
         wait(for: [expectation], timeout: 1.0)
         
         let query = [kSecAttrService: "testFeature",
@@ -149,15 +166,17 @@ final class FeatureAuthTests: XCTestCase {
         XCTAssertEqual(authState?.lastTokenResponse?.tokenType, response["token_type"] as? String)
     }
     
-    func anyConfigFeatureAuth() -> FeatureOIDAuth {
-        let service = "testFeature"
-        let config = OIDAuthConfig(authEndpoint: URL(string: "https://authEndpoint")!,
-                                   tokenEndpoint: URL(string: "https://tokenEndpoint")!,
-                                   clientId: "testClientId",
-                                   redirectURL: URL(string: "coop.polypodtest.com://redirect")!)
-        let auth = FeatureOIDAuth(service: service, config: config)
-        auth.externalUserAgent = CustomUserAgent()
-        return auth
+    private func anyConfigFeatureAuth() -> OIDAuth {
+        OIDAuth(authorizationRequest: authRequest, oidExternalUserAgent: OIDExternalUserAgentSpy())
+    }
+    
+    private func interceptRequests() {
+        OIDURLSessionProvider.setSession(
+            URLSession(configuration:
+                        NetworkRequestInterceptor.sessionConfigForIterception()
+                      )
+        )
+        NetworkRequestInterceptor.startInterceptingRequests()
     }
 }
 

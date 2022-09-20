@@ -4,7 +4,7 @@ import Foundation
 import Security
 import AppAuth
 
-enum FeatureTokenStorage {
+enum OIDTokenStorage {
     enum Error: Swift.Error {
         case keychainAccessFailed(OSStatus)
         case failedToSetAuthState(OSStatus)

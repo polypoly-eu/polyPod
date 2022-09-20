@@ -5,6 +5,7 @@ import AppAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
+    var authFlow: OIDExternalUserAgentSession? = nil
     
     func scene(
         _ scene: UIScene, 
@@ -30,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let openURL = URLContexts.first?.url else {
             return
         }
-        
+        _ = authFlow?.resumeExternalUserAgentFlow(with: openURL)
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

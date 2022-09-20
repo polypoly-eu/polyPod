@@ -319,7 +319,7 @@ private struct LicensesView: View {
 }
 
 struct FeatureAuthView: View {
-    @State var authState: OIDAuthState? = try? FeatureTokenStorage.getAuthState(
+    @State var authState: OIDAuthState? = try? OIDTokenStorage.getAuthState(
         forService: "members-eu").get()
 
     

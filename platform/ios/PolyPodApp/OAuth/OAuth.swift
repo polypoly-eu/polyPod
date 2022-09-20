@@ -1,95 +1,112 @@
 import AppAuth
 import Foundation
 
-protocol FeatureOIDAuthStateStorage {
-    func saveState(_ state: OIDAuthState, service: String)
-    func readState(service: String) -> Result<OIDAuthState?, Error>
-    func clearState(service: String) -> Result<Void, Error>
-}
+final class OIDAuth: NSObject {
+    struct InvalidAuthResponseRepresentation: Error {}
 
-struct OIDAuthConfig {
-    let authEndpoint: URL
-    let tokenEndpoint: URL
-    let clientId: String
-    let redirectURL: URL
-}
-extension OIDAuthConfig {
-    static var membership: OIDAuthConfig {
-        OIDAuthConfig(
-            authEndpoint: URL(string: "https://keycloak.stage.polypoly.tech/realms/eu-members/protocol/openid-connect/auth")!,
-            tokenEndpoint: URL(string: "https://keycloak.stage.polypoly.tech/realms/eu-members/protocol/openid-connect/token")!,
-            clientId: "pmf",
-            redirectURL: URL(string: "coop.polypoly.polypod://oauth/redirect")!)
+    private(set) var state: OIDAuthState? {
+        didSet {
+            if let state = state {
+                _ = OIDTokenStorage
+                    .storeAuthState(state, forService: authorizationRequest.clientID)
+                    .inspectError { err in
+                        Log.error("Failed to store auth state \(err)")
+                    }
+                state.stateChangeDelegate = self
+            }
+        }
     }
-}
-
-final class FeatureOIDAuth {
-    let config: OIDAuthConfig
-    var externalUserAgent: OIDExternalUserAgent?
-    private var state: OIDAuthState?
-    private let service: String
     private var currentAuthFlow: OIDExternalUserAgentSession?
-    var urlSession: URLSession = .shared
-    
-    init(service: String, config: OIDAuthConfig) {
-        self.service = service
-        self.config = config
-        self.state = try? FeatureTokenStorage.getAuthState(forService: service).get()
-        OIDURLSessionProvider.setSession(urlSession)
+    private let oidExternalUserAgent: OIDExternalUserAgent
+    private let authorizationRequest: OIDAuthorizationRequest
+
+    init(authorizationRequest: OIDAuthorizationRequest, oidExternalUserAgent: OIDExternalUserAgent) {
+        self.authorizationRequest = authorizationRequest
+        self.oidExternalUserAgent = oidExternalUserAgent
     }
-    
-    func clearAuthState() {
+
+    func logout() {
         self.state = nil
-        FeatureTokenStorage.removeAuthState(forService: service)
+        _ = OIDTokenStorage
+            .removeAuthState(forService: authorizationRequest.clientID)
+            .inspectError { err in
+                Log.error("Failed to remove auth state \(err)")
+            }
     }
-    
-    func getAuthState(completion: @escaping (Result<OIDAuthState, Error>) -> Void) {
-        if let state = self.state {
-            return completion(.success(state))
+
+    func loadAuthState(completion: @escaping (Result<Void, Error>) -> Void) {
+        if let state = try? OIDTokenStorage.getAuthState(forService: authorizationRequest.clientID).get() {
+            self.state = state
+            completion(.success(()))
+            return
         }
         
-        if let state = try? FeatureTokenStorage.getAuthState(forService: service).get() {
-            self.state = state
-            return completion(.success(state))
+        self.currentAuthFlow = OIDAuthState.authState(
+            byPresenting: authorizationRequest,
+            externalUserAgent: oidExternalUserAgent) { state, error in
+            completion(Result {
+                switch (state, error) {
+                case let (state?, nil):
+                    self.state = state
+                case let (nil, error?):
+                    throw error
+                default:
+                    throw InvalidAuthResponseRepresentation()
+                }
+            })
         }
-        currentAuthFlow = OIDAuthState.authState(byPresenting: makeAuthorizationRequest(),
-                                                 externalUserAgent: externalUserAgent!,
-                                                 callback: { state, error in
-            switch (state, error) {
-            case let (state?, nil):
-                self.state = state
-                FeatureTokenStorage.storeAuthState(state, forService: self.service)
-                completion(.success(state))
-            case let (nil, error?):
-                completion(.failure(error))
-            default:
-                fatalError("Invalid response")
-            }
-        })
     }
-    
+
     func handleAuthRedirect(_ url: URL) {
         currentAuthFlow?.resumeExternalUserAgentFlow(with: url)
+        currentAuthFlow = nil
+    }
+}
+
+extension OIDAuth: OIDAuthStateChangeDelegate {
+    func didChange(_ state: OIDAuthState) {
+        self.state = state
+    }
+}
+
+
+extension OIDAuth {
+    /// An user agent which does not trigger any actual authorization flow.
+    /// Meant to be used when the first part of the usual OAuth2.0 flow happens on the backend side,
+    /// and the Auth flow just needs to handle the code/token exchange.
+    private final class OIDExternalUserAgentNoOp: NSObject, OIDExternalUserAgent {
+        
+        /// The requests that were performed
+        private(set) var performedRequests = [OIDExternalUserAgentRequest]()
+        
+        func present(_ request: OIDExternalUserAgentRequest, session: OIDExternalUserAgentSession) -> Bool {
+            performedRequests.append(request)
+            return true
+        }
+        
+        func dismiss(animated: Bool, completion: @escaping () -> Void) {
+            completion()
+        }
     }
     
-    private func makeAuthorizationRequest() -> OIDAuthorizationRequest {
-        let oidConfig = OIDServiceConfiguration(authorizationEndpoint: config.authEndpoint,
-                                             tokenEndpoint: config.tokenEndpoint)
-        
-        let verifier = OIDAuthorizationRequest.generateCodeVerifier()
-        let challenge = OIDAuthorizationRequest.codeChallengeS256(forVerifier: verifier)
-        let scope = OIDScopeUtilities.scopes(with: [OIDScopeEmail, OIDScopeOpenID])
-        return OIDAuthorizationRequest(configuration: oidConfig,
-                                       clientId: config.clientId,
-                                       clientSecret: nil,
-                                       scope: scope,
-                                       redirectURL: config.redirectURL,
-                                       responseType: OIDResponseTypeCode,
-                                       state: nil,
-                                       nonce: nil,
-                                       codeVerifier: verifier,
-                                       codeChallenge: challenge,
-                                       codeChallengeMethod: OIDOAuthorizationRequestCodeChallengeMethodS256,
-                                       additionalParameters: nil)
+    static func membershipFeatureAuth() -> OIDAuth {
+        let serviceConfig = OIDServiceConfiguration(
+            authorizationEndpoint: URL(string: "")!,
+            tokenEndpoint: URL(string: "https://keycloak.stage.polypoly.tech/realms/eu-members/protocol/openid-connect/token")!
+        )
+        let request = OIDAuthorizationRequest(configuration: serviceConfig,
+                                              clientId: "pmf",
+                                              clientSecret: nil,
+                                              scope: nil,
+                                              redirectURL: nil,
+                                              responseType: OIDResponseTypeCode,
+                                              state: nil,
+                                              nonce: nil,
+                                              codeVerifier: nil,
+                                              codeChallenge: nil,
+                                              codeChallengeMethod: nil,
+                                              additionalParameters: nil)
+        return OIDAuth(authorizationRequest: request,
+                       oidExternalUserAgent: OIDExternalUserAgentNoOp())
     }
 }
