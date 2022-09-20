@@ -48,12 +48,7 @@ class ImporterExecutionResult {
     }
 }
 
-export async function runImporter(
-    importerClass,
-    zipFile,
-    facebookAccount,
-    pod
-) {
+export async function runImporter(importerClass, zipFile, facebookAccount) {
     const importer = new importerClass();
 
     const telemetry = new Telemetry();
@@ -62,7 +57,6 @@ export async function runImporter(
         const status = await importer.import({
             zipFile,
             facebookAccount,
-            pod,
         });
         return new ImporterExecutionResult(
             importer,
@@ -78,21 +72,20 @@ export async function runImporter(
     }
 }
 
-export async function runImporters(importerClasses, zipFile, dataAccount, pod) {
+export async function runImporters(importerClasses, zipFile, dataAccount) {
     return await Promise.all(
         importerClasses.map(async (importerClass) => {
-            return runImporter(importerClass, zipFile, dataAccount, pod);
+            return runImporter(importerClass, zipFile, dataAccount);
         })
     );
 }
 
-export async function importZip({ dataImporters, zipFile, pod, DataAccount }) {
+export async function importZip({ dataImporters, zipFile, DataAccount }) {
     const dataAccount = new DataAccount();
     const importingResults = await runImporters(
         dataImporters,
         zipFile,
-        dataAccount,
-        pod
+        dataAccount
     );
 
     dataAccount.importingResults = importingResults;
@@ -102,5 +95,5 @@ export async function importZip({ dataImporters, zipFile, pod, DataAccount }) {
 
 export async function importData({ dataImporters, zipData, DataAccount }) {
     const zipFile = await ZipFile.createWithCache(zipData, window.pod);
-    return importZip({ dataImporters, zipFile, pod: window.pod, DataAccount });
+    return importZip({ dataImporters, zipFile, DataAccount });
 }
