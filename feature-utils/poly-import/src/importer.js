@@ -57,7 +57,7 @@ export async function runImporter({ importerClass, zipFile, pod, account }) {
             report: new ImporterExecutionReport({
                 importer,
                 status,
-                elapsedTime: telemetry.elapsedTime(),
+                executionTime: telemetry.elapsedTime(),
             }),
             result,
         };
@@ -66,7 +66,7 @@ export async function runImporter({ importerClass, zipFile, pod, account }) {
             report: new ImporterExecutionReport({
                 importer,
                 status: new Status({ name: statusTypes.error, message: error }),
-                elapsedTime: telemetry.elapsedTime(),
+                executionTime: telemetry.elapsedTime(),
             }),
         };
     }
