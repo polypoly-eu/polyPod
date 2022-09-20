@@ -124,6 +124,8 @@ open class Network(val context: Context) {
             connection.disconnect()
             return@withContext response
         }
+        @Suppress("UNREACHABLE_CODE")
+        return@withContext response // unreachable code needed for return type inference
     }
 
     open suspend fun httpGet(
@@ -148,5 +150,7 @@ open class Network(val context: Context) {
             connection.disconnect()
             return@withContext response
         }
+        @Suppress("UNREACHABLE_CODE")
+        return@withContext response // unreachable code needed for return type inference
     }
 }
