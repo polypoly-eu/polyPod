@@ -18,7 +18,9 @@ describe("DataAccount has the correct attributes", () => {
     });
 
     it("Adds imported filenames successfully", () => {
-        dataAccount.addImportedFileName("Foo");
+        const IMPORTED_FILE_NAME = "Foo";
+        dataAccount.addImportedFileName(IMPORTED_FILE_NAME);
         expect(dataAccount.importedFileNames.length).toBeGreaterThanOrEqual(1);
+        expect(dataAccount.importedFileNames[0]).toBe(IMPORTED_FILE_NAME);
     });
 });
