@@ -5,7 +5,7 @@ import ReportStory from "./reportStory.jsx";
 class ReportMetadataReport extends ReportStory {
     constructor(props) {
         super(props);
-        this._neededReports = [analysisKeys.reportMetadata];
+        this.neededReports = [analysisKeys.reportMetadata];
     }
     get title() {
         return "Report Metadata";

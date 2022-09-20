@@ -31,4 +31,8 @@ class PodUnlockActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onBackPressed() {
+        // Disable back navigation.
+    }
 }

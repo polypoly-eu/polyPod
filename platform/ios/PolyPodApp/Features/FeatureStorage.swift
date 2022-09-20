@@ -60,9 +60,20 @@ final class FeatureStorage {
         try createFeaturesFolder()
         try copyCategories()
         try copyFeatures()
-        categoriesListSubject.value = try Core
+        categoriesListSubject.value = Core
             .instance
-            .loadFeatureCategories(featuresDirectory: featuresFileUrl.path).get()
+            .executeRequest(
+                .loadFeatureCategories(
+                    args: .init(
+                        featuresDir: featuresFileUrl.path,
+                        forceShow: readShowDeveloperFeatures() ? [.developer] : []
+                    )
+                )
+            )
+            .inspectError { err in
+                Log.error("Failed to read categories \(err)")
+            }
+            .unwrapOr([])
     }
 
     private func createFeaturesFolder() throws {
@@ -130,5 +141,14 @@ final class FeatureStorage {
             ofType: resourceType,
             toDestinationUrl: destinationURL
         )
+    }
+    
+    private func readShowDeveloperFeatures() -> Bool {
+        let key = UserDefaults.Keys.showDeveloperFeaturesId.rawValue
+        let defaults = UserDefaults.standard
+        if defaults.object(forKey: key) == nil {
+            return false
+        }
+        return defaults.bool(forKey: key)
     }
 }

@@ -1,9 +1,6 @@
 import React from "react";
 import { Tooltip } from "../../../src/react-components";
 
-import "../../../src/css/index.js";
-import "./fontFamily.css";
-
 export default {
   title: "Visuals/Molecules/Tooltip",
   component: Tooltip,

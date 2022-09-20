@@ -355,7 +355,7 @@ struct HomeScreenView: View {
             }
         }.onAppear {
             viewModel.setup()
-        }
+        }.accessibilityIdentifier("homescreen_view")
     }
 
     func calculateSize(_ geo: GeometryProxy) -> Sizes {
@@ -474,6 +474,8 @@ struct DeveloperSectionView: View {
             VStack(alignment: .leading, spacing: HomeScreenConstants.TileContainer.verticalSpacing) {
                 ForEach(sectionModel.cards) { card in
                     MediumCardView(card: card)
+                        .accessibilityElement()
+                        .accessibilityIdentifier("\(card.id)_feature")
                 }
             }
         }
@@ -578,6 +580,8 @@ struct BigCardView: View {
         .onTapGesture {
             onFeatureSelected(card.id)
         }
+        .accessibilityElement()
+        .accessibilityIdentifier("feature_tile_view")
     }
 }
 
@@ -627,6 +631,8 @@ struct MediumCardView: View {
         .onTapGesture {
             onFeatureSelected(card.id)
         }
+        .accessibilityElement()
+        .accessibilityIdentifier("feature_tile_view")
     }
 }
 
@@ -665,6 +671,8 @@ struct SmallCardView: View {
         .onTapGesture {
             onFeatureSelected(card.id)
         }
+        .accessibilityElement()
+        .accessibilityIdentifier("feature_tile_view")
     }
 }
 

@@ -1,3 +1,50 @@
-.your-style {
-    position: absolute;
+@font-face {
+  font-family: "Jost";
+  src: url("../fonts/jost_regular.ttf");
 }
+
+@font-face {
+  font-family: "Jost Light";
+  src: url("../fonts/jost_light.ttf");
+}
+
+@font-face {
+  font-family: "Jost Medium";
+  src: url("../fonts/jost_medium.ttf");
+}
+
+@font-face {
+  font-family: "Jost Bold";
+  src: url("../fonts/jost_bold.ttf");
+}
+
+:root {
+    --theme-primary-color: var(--color-red-300);
+    --theme-secondary-color: var(--color-indigo-950);
+    --theme-tertiary-color: var(--color-gray-50);
+    --theme-small-print-color: var(--color-gray-500);
+    --pl-button-color-fill-primary: var(--theme-primary-color);
+    --pl-button-color-text-primary: var(--theme-secondary-color);
+    --pl-button-color-fill-secondary: var(--transparent);
+    --pl-button-color-border-secondary: var(--theme-secondary-color);
+    --pl-button-color-text-secondary: var(--theme-secondary-color);
+    --pl-screen-color-fill: var(--theme-tertiary-color);
+    --theme-info-button-color: var(--color-gray-300);
+  }
+
+  .membership {
+    color: var(--theme-secondary-color);
+  }
+
+  .membership p {
+    font-weight: 400;
+    line-height: 120%;
+    letter-spacing: -0.01em;
+  }
+
+  .membership h1 {
+    font-size: var(--font-size-xxl);
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: -0.01em;
+  }

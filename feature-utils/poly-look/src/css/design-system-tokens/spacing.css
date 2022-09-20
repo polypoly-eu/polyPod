@@ -1,7 +1,7 @@
 :root {
 /* Spacing units for margins, padding, grid, position (top, bottom, right, left) 
 
-Potencial use for future "Figma tokens" variables. Currectly used in Banner component as example. */
+Potential use for future "Figma tokens" variables. Currently used in Banner and PolyButton component as example. */
   --pl-space-1x: 4px;
   --pl-space-2x: calc(var(--pl-space-1x) * 2);
   --pl-space-3x: calc(var(--pl-space-1x) * 3);
@@ -12,4 +12,8 @@ Potencial use for future "Figma tokens" variables. Currectly used in Banner comp
   --pl-space-8x: calc(var(--pl-space-1x) * 8);
   --pl-space-9x: calc(var(--pl-space-1x) * 9);
   --pl-space-10x: calc(var(--pl-space-1x) * 10);
+
+  --pl-small-button-spacing-gap: var(--pl-space-1x);
+  --pl-small-button-spacing-padding-vert: var(--pl-space-2x);
+  --pl-small-button-spacing-padding-hor: var(--pl-space-3x);
 }

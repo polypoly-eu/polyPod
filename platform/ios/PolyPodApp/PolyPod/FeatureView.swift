@@ -27,10 +27,11 @@ struct FeatureView: View {
                 }
                 closeAction()
             }) {
-            let qualifier = activeActions.contains("back") ? "Back" : "Close"
-            Image("NavIcon\(qualifier)\(iconVariantQualifier)")
-                .renderingMode(.original)
-        }
+                let qualifier = activeActions.contains("back") ? "Back" : "Close"
+                Image("NavIcon\(qualifier)\(iconVariantQualifier)")
+                    .renderingMode(.original)
+            }.accessibilityElement()
+            .accessibilityIdentifier("feature_close_button")
         // swiftlint:enable multiple_closures_with_trailing_closure
 
         let titleLabel = Text(!title.isEmpty ? title : feature.name)
@@ -42,6 +43,8 @@ struct FeatureView: View {
             .font(.custom("Jost-Medium", size: 16))
             .kerning(-0.16)
             .frame(maxWidth: .infinity, alignment: .center)
+            .accessibilityElement()
+            .accessibilityIdentifier("feature_title_text")
 
         let actionButtons = HStack(spacing: 12) {
             if activeActions.contains("search") {
@@ -82,10 +85,11 @@ struct FeatureView: View {
                 openUrlHandler: openUrl,
                 pickFileHandler: pickFile
             )
-        }
+        }.accessibilityElement()
+        .accessibilityIdentifier("feature_view")
     }
 
-    private func handleError(_ error: String) {
+    private func handleError(_ errorMsg: String) {
         let alert = UIAlertController(
             title: "",
             message: String.localizedStringWithFormat(
@@ -93,17 +97,45 @@ struct FeatureView: View {
                     "message_feature_error %@ %@",
                     comment: ""
                 ),
-                feature.name, error
+                feature.name, errorMsg
             ),
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(
-            title: "OK",
+            title: NSLocalizedString(
+                "button_error_report_allow",
+                comment: ""
+            ),
+            style: .default,
+            handler: { _ in
+                closeAction()
+                PodApi.shared.endpoint.uploadError(
+                    errorMsg: errorMsg,
+                    endpointId: "polyApiErrorReport",
+                    completionHandler: { error in
+                        if error != nil {
+                            Log.error("Upload failed: \(error!.localizedDescription)")
+                            return
+                        }
+                        Log.debug("Error uploaded successfully")
+                    }
+                )
+            }
+        ))
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString(
+                "button_error_report_deny",
+                comment: ""
+            ),
             style: .default,
             handler: { _ in
                 closeAction()
             }
         ))
+
+        alert.view.isAccessibilityElement = true
+        alert.view.accessibilityIdentifier = "feature_error_popup"
+
         UIApplication.shared.windows.first!.rootViewController!.present(
             alert,
             animated: true,

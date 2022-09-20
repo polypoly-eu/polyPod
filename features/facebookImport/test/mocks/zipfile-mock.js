@@ -85,7 +85,7 @@ export class ZipFileMock {
     }
 
     addTextEntry(fileName, stringContent) {
-        const escapedString = unescape(encodeURIComponent(stringContent));
+        const escapedString = decodeURI(encodeURIComponent(stringContent));
         this.addEncodingEntry(fileName, escapedString);
     }
 

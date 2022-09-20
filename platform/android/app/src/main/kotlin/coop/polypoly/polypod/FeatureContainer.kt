@@ -35,6 +35,7 @@ import coop.polypoly.polypod.polyNav.PolyNav
 import coop.polypoly.polypod.polyNav.PolyNavObserver
 import coop.polypoly.polypod.polyOut.PolyOut
 import coop.polypoly.polypod.postoffice.PostOfficeMessageCallback
+import coop.polypoly.polypod.triplestore.Triplestore
 import kotlinx.coroutines.CompletableDeferred
 import java.io.ByteArrayInputStream
 import java.io.File
@@ -58,7 +59,8 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
             webView = webView
         ),
         Info(),
-        Endpoint(context)
+        Endpoint(context),
+        Triplestore()
     )
 
     var feature: Feature? = null
@@ -69,6 +71,12 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         }
 
     var errorHandler: ((String) -> Unit)? = null
+
+    // It appears WebMessagePort keeps weak references to message callbacks,
+    // which causes them to be garbage collected after a while, causing a
+    // communication breakdown between platform and feature.
+    // Therefore, this is a field.
+    var postOfficeMessageCallback: WebMessagePort.WebMessageCallback? = null
 
     init {
         webView.layoutParams =
@@ -90,7 +98,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         webView.setOnLongClickListener { true }
         webView.isHapticFeedbackEnabled = false
 
-        WebView.setWebContentsDebuggingEnabled(true)
+        WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG)
 
         checkWebViewVersion()
 
@@ -142,7 +150,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         // Chrome/18.0.1025.133 Mobile Safari/535.19"""
         val userAgentString = webView.settings.userAgentString
 
-        val regex = """(Chrome)\/(?<major>\d+)[\d\.]""".toRegex()
+        val regex = """(Chrome)/(?<major>\d+)[\d.]""".toRegex()
         val matchResult = regex.find(userAgentString)
         val (_, chromeVersion) = matchResult!!.destructured
 
@@ -163,7 +171,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         endpointId: String?,
         completion: suspend (Boolean) -> String?
     ): String? {
-        var fetchApproval: CompletableDeferred<Boolean?>? =
+        val fetchApproval: CompletableDeferred<Boolean?> =
             CompletableDeferred()
         val featureName = feature?.name ?: throw PodApiError().endpointError()
         val message = context?.getString(
@@ -175,13 +183,13 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         AlertDialog.Builder(context)
             .setMessage(message)
             .setPositiveButton(confirmLabel) { _, _ ->
-                fetchApproval?.complete(true)
+                fetchApproval.complete(true)
             }
             .setNegativeButton(rejectLabel) { _, _ ->
-                fetchApproval?.complete(false)
+                fetchApproval.complete(false)
             }
             .show()
-        (fetchApproval?.await())?.let {
+        (fetchApproval.await())?.let {
             return completion(it)
         }
         throw PodApiError().endpointError()
@@ -306,13 +314,12 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         val channel: Array<WebMessagePort> = view.createWebMessageChannel()
         val outerPort = channel[0]
         val innerPort = channel[1]
-        outerPort.setWebMessageCallback(
-            PostOfficeMessageCallback(
-                lifecycleScope,
-                outerPort,
-                api
-            )
+        postOfficeMessageCallback = PostOfficeMessageCallback(
+            lifecycleScope,
+            outerPort,
+            api
         )
+        outerPort.setWebMessageCallback(postOfficeMessageCallback)
         view.postWebMessage(
             WebMessage("", arrayOf(innerPort)), Uri.parse("*")
         )
@@ -415,7 +422,7 @@ class FeatureContainer(context: Context, attrs: AttributeSet? = null) :
         @Suppress("unused")
         @JavascriptInterface
         fun copyToClipboard(text: String?) {
-            var clipboard: ClipboardManager =
+            val clipboard: ClipboardManager =
                 context.getSystemService(ClipboardManager::class.java)
             val clip = ClipData.newPlainText("nativeClipboardText", text)
             clipboard.setPrimaryClip(clip)

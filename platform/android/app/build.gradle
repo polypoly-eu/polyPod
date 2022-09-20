@@ -183,6 +183,7 @@ dependencies {
     //noinspection FragmentGradleConfiguration
     androidTestImplementation 'androidx.fragment:fragment-testing:1.2.5'
     androidTestImplementation 'androidx.test.espresso:espresso-web:3.4.0'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
 
     // Encryption related imports
     implementation("androidx.security:security-crypto:1.1.0-alpha03")

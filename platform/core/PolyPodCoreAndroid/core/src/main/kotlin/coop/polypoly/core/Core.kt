@@ -6,51 +6,31 @@ import org.msgpack.value.Value
 
 class Core {
     companion object {
-        fun bootstrapCore(languageCode: String, fsRoot: String) {
+        fun bootstrapCore(args: BootstrapArgs) {
             return handleCoreResponse(
                 JniApi.bootstrapCore(
-                    languageCode,
-                    fsRoot,
+                    args.asValue().pack(),
                     JniApi
                 )
             ) {}
         }
 
-        fun loadFeatureCategories(featuresDir: String): List<FeatureCategory> {
+        fun <CoreResponse> executeRequest(
+            request: CoreRequest,
+            // TODO: Investigate the option of doing automatic decoding instead of asking for a decoder.
+            decoder: (Value) -> CoreResponse
+        ): CoreResponse {
             return handleCoreResponse(
-                JniApi.loadFeatureCategories(featuresDir)
-            ) { mapFeatureCategories(it) }
+                JniApi.executeRequest(request.asValue().pack())
+            ) { decoder(it) }
         }
 
-        fun appDidBecomeInactive() {
+        fun executeRequest(
+            request: CoreRequest
+        ) {
             return handleCoreResponse(
-                JniApi.appDidBecomeInactive()
-            ) {}
-        }
-
-        fun isUserSessionExpired(): Boolean {
-            return handleCoreResponse(
-                JniApi.isUserSessionExpired()
-            ) { it.asBooleanValue().boolean }
-        }
-
-        fun getUserSessionTimeoutOption(): UserSessionTimeoutOption {
-            return handleCoreResponse(
-                JniApi.getUserSessionTimeoutOption()
-            ) { UserSessionTimeoutOption.from(it) }
-        }
-
-        fun getUserSessionTimeoutOptionsConfig():
-            List<UserSessionTimeoutOptionConfig> {
-            return handleCoreResponse(
-                JniApi.getUserSessionTimeoutOptionsConfig()
-            ) { UserSessionTimeoutOptionConfig.mapConfigs(it) }
-        }
-
-        fun setUserSessionTimeoutOption(option: UserSessionTimeoutOption) {
-            return handleCoreResponse(
-                JniApi.setUserSessionTimeoutOption(option.asValue().pack())
-            ) {}
+                JniApi.executeRequest(request.asValue().pack())
+            ) { }
         }
 
         private fun <T> handleCoreResponse(
@@ -66,7 +46,7 @@ class Core {
             }
 
             responseObject.get("Err")?.also {
-                throw mapError(it.asMapValue().map())
+                throw CoreFailure.from(it)
             }
 
             throw InvalidCoreResponseFormat(responseObject.toString())
