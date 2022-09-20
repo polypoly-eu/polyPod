@@ -3,7 +3,7 @@ import { Telemetry } from "../utils/performance-telemetry";
 import { ZipFile } from "./storage";
 
 export class Importer {
-    async import({ zipFile, dataAccount, pod }) {
+    async import({ zipFile, dataAccount }) {
         throw new Error(
             `Calling abstract base class with ${zipFile}, ${dataAccount}, ${pod}`
         );
