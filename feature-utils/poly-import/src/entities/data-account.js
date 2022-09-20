@@ -2,7 +2,7 @@ import { ZipFile } from "../storage";
 import { runImporter } from "../importer";
 
 export default class DataAccount {
-    constructor({ importers, zipData, pod, dataGroups }) {
+    constructor({ importers, zipData, pod }) {
         this.importingReports = [];
         this.importedFileNames = [];
         this.analyses = {};
@@ -11,7 +11,6 @@ export default class DataAccount {
         this.importers = importers;
         this.zipFile = ZipFile.createWithCache(zipData, pod);
         this.pod = pod;
-        this._dataGroupsCallback = dataGroups;
     }
 
     async import() {
@@ -31,13 +30,5 @@ export default class DataAccount {
 
     addImportedFileName(fileName) {
         this.importedFileNames.push(fileName);
-    }
-
-    //This is a relict where this was part of the child facebookAccount
-    //Has to stay here for now as its used by the common dataBubbleAnalysis
-    //TODO: get rid of this - implement it differently
-    //View imformation should not be part of the model
-    get dataGroups() {
-        return this._dataGroupsCallback(this);
     }
 }
