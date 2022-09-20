@@ -1,24 +1,20 @@
-import { ZipFile } from "../storage";
 import { runImporter } from "../importer";
 
 export default class DataAccount {
-    constructor({ importers, zipData, pod }) {
+    constructor() {
         this.importingReports = [];
         this.importedFileNames = [];
         this.analyses = {};
         this.reports = {};
         this.analysesExecutionResults = [];
-        this.importers = importers;
-        this.zipFile = ZipFile.createWithCache(zipData, pod);
-        this.pod = pod;
     }
 
-    async import() {
-        for (let [attr, importerClass] of Object.entries(this.importers)) {
+    async import({ importers, zipFile, pod }) {
+        for (let [attr, importerClass] of Object.entries(importers)) {
             let { result, report } = await runImporter({
                 importerClass,
-                zipFile: await this.zipFile,
-                pod: this.pod,
+                zipFile,
+                pod,
                 //account is kept in here for now so we can support the old importer structure
                 account: this,
             });

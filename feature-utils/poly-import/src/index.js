@@ -1,4 +1,5 @@
 import { FeatureFileStorage, ZipFile, ZipFileEntry } from "./storage";
+import { runImporter, runImporters } from "./importer";
 import {
     FileImportError,
     RefreshFilesError,
@@ -9,6 +10,8 @@ import { Status, statusTypes } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
 export {
     Status,
+    runImporter,
+    runImporters,
     ZipFile,
     Telemetry,
     ZipFileEntry,

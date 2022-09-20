@@ -45,7 +45,7 @@ export async function runImporter({ importerClass, zipFile, pod, account }) {
     const telemetry = new Telemetry();
 
     try {
-        const { result, status } = await importer.import({
+        const response = await importer.import({
             zipFile,
             pod,
             //this is to support old importers without needing to change all at once
@@ -53,13 +53,23 @@ export async function runImporter({ importerClass, zipFile, pod, account }) {
             account,
             facebookAccount: account,
         });
+        //Currently we have to do this check as not all importers return a result even when
+        //executing successfully. We can go back to destructuring after all importers have been changed
+        if (response?.result)
+            return {
+                report: new ImporterExecutionReport({
+                    importer,
+                    status,
+                    executionTime: telemetry.elapsedTime(),
+                }),
+                result: response.result,
+            };
         return {
             report: new ImporterExecutionReport({
                 importer,
-                status,
+                status: response?.status,
                 executionTime: telemetry.elapsedTime(),
             }),
-            result,
         };
     } catch (error) {
         return {
@@ -70,4 +80,12 @@ export async function runImporter({ importerClass, zipFile, pod, account }) {
             }),
         };
     }
+}
+
+export async function runImporters(importerClasses, zipFile, account, pod) {
+    return await Promise.all(
+        importerClasses.map(async (importerClass) => {
+            return runImporter({ importerClass, zipFile, account, pod });
+        })
+    );
 }

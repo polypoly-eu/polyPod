@@ -4,8 +4,8 @@ import MessageThreadsGroup from "./message-threads-group.js";
 import RelatedAccountsGroup from "./related-accounts-group.js";
 
 class FacebookAccount extends DataAccount {
-    constructor({ importers, zipData, pod }) {
-        super({ importers, zipData, pod });
+    constructor() {
+        super();
         this.offFacebookCompanies = [];
         this.adInterests = [];
         this.connectedAdvertisers = [];
