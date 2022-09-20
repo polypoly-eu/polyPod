@@ -14,7 +14,6 @@ async function relevantZipEntries(zipFile) {
 }
 
 async function readJSONFile(relativeFilePath, zipFile) {
-    debugger;
     if (!(await zipFile.hasEntryPath(relativeFilePath))) {
         throw new MissingFileImportException(relativeFilePath);
     }

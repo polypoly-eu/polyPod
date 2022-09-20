@@ -22,6 +22,26 @@ import PostsImporter from "./importers/posts-importer.js";
 
 export const dataImporters = {
     personalData: PersonalDataImporter,
+    offFacebookEvents: OffFacebookEventsImporter,
+    adInterests: AdInterestsImporter,
+    connectedAdvertisers: ConnectedAdvertisersImporter,
+    connectedAdvertisersAllTypes: ConnectedAdvertisersAllTypesImporter,
+    interactedWithAdvertisers: InteractedWithAdvertisersImporter,
+    friends: FriendsImporter,
+    followedPages: FollowedPagesImporter,
+    receivedFriendRequests: ReceivedFriendRequestsImporter,
+    likedPages: LikedPagesImporter,
+    recommendedPages: RecommendedPagesImporter,
+    searches: SearchesImporter,
+    unfollowedPages: UnfollowedPagesImporter,
+    messages: MessagesImporter,
+    adminRecords: AdminRecordsImporter,
+    accountSessionActivities: AccountSessionActivitiesImporter,
+    languageAndLocale: LanguageAndLocaleImporter,
+    recentlyViewedAds: RecentlyViewedAdsImporter,
+    comments: CommentsImporter,
+    postReactions: PostReactionsImporter,
+    posts: PostsImporter,
 };
 
 export const NUMBER_OF_IMPORTERS = dataImporters.length;

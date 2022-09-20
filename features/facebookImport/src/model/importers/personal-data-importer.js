@@ -14,7 +14,6 @@ export default class PersonalDataImporter {
     }
 
     async import({ zipFile }) {
-        debugger;
         const profileData = await this._readLanguageData(zipFile);
         const name = {};
         name.givenName = [

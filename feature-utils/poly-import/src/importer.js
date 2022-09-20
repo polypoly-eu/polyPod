@@ -39,7 +39,7 @@ class ImporterExecutionReport {
     }
 }
 
-export async function runImporter({ importerClass, zipFile, pod }) {
+export async function runImporter({ importerClass, zipFile, pod, account }) {
     const importer = new importerClass();
 
     const telemetry = new Telemetry();
@@ -48,6 +48,10 @@ export async function runImporter({ importerClass, zipFile, pod }) {
         const { result, status } = await importer.import({
             zipFile,
             pod,
+            //this is to support old importers without needing to change all at once
+            //TODO: change all importers so this can go
+            account,
+            facebookAccount: account,
         });
         return {
             report: new ImporterExecutionReport({
