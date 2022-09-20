@@ -48,3 +48,9 @@
     line-height: 120%;
     letter-spacing: -0.01em;
   }
+
+  .membership .link-button {
+    display: block;
+    text-decoration: underline;
+    margin-top: 20px;
+}
