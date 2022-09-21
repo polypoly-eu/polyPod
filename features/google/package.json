@@ -7,7 +7,8 @@
     "build-downstream": "../../build.js --start google-feature",
     "watch": "rollup --watch -c",
     "serve": "rollup --watch --configServe -c",
-    "doc": "jsdoc -r src/ -d ./docs"
+    "doc": "jsdoc -r src/ -d ./docs",
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
@@ -28,5 +29,24 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0"
   },
-  "type": "module"
+  "type": "module",
+  "jest": {
+    "verbose": true,
+    "moduleNameMapper": {
+      "\\.(css|scss)$": "identity-obj-proxy",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy",
+      "^!silly-i18n$": "<rootDir>/test/mocks/i18n-mock.js"
+    },
+    "transform": {
+      "^.+\\.(js|jsx)$": [
+        "babel-jest",
+        {
+          "rootMode": "upward"
+        }
+      ]
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(.*))"
+    ]
+  }
 }

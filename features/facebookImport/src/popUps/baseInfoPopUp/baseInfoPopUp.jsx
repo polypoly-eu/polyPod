@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { ImporterContext } from "../../context/importer-context.jsx";
+import { FacebookContext } from "../../context/facebook-context.jsx";
 
 import i18n from "!silly-i18n";
 
 import "./baseInfoPopUp.css";
 
 const BaseInfoPopUp = ({ infoChildren }) => {
-    const { closePopUp } = useContext(ImporterContext);
+    const { closePopUp } = useContext(FacebookContext);
 
     return (
         <div className="base-info">

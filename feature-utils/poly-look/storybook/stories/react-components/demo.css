@@ -18,7 +18,9 @@
   bottom: 0;
   overflow: auto;
   box-sizing: border-box;
+  background-color: var(--pl-screen-color-fill);
 }
+
 .holder-left {
   left: 0;
   right: 50vh;
@@ -26,4 +28,9 @@
 .holder-right {
   left: 50vw;
   right: 0;
+}
+
+.single-holder {
+  left: 0;
+  width: 100%;
 }

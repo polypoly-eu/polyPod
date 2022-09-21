@@ -5,7 +5,7 @@ import { useHistory, useLocation } from "react-router-dom";
 
 import popUps from "../popUps";
 
-export const ImporterContext = React.createContext();
+export const FacebookContext = React.createContext();
 
 function updatePodNavigation(pod, history, handleBack, location) {
     pod.polyNav.actions = {
@@ -28,7 +28,7 @@ function updateTitle(pod, location, popUp) {
     );
 }
 
-export const ImporterProvider = ({ children }) => {
+export const FacebookProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [globalError, setGlobalError] = useState(null);
@@ -72,7 +72,7 @@ export const ImporterProvider = ({ children }) => {
     });
 
     return (
-        <ImporterContext.Provider
+        <FacebookContext.Provider
             value={{
                 pod,
                 handleBack,
@@ -89,6 +89,6 @@ export const ImporterProvider = ({ children }) => {
             }}
         >
             {children}
-        </ImporterContext.Provider>
+        </FacebookContext.Provider>
     );
 };

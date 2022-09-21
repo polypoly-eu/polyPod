@@ -21,7 +21,9 @@ const withTheme = (Story, context) => {
     }
     default: {
       return (
-        <div className={`poly-theme poly-theme-${theme}`}>
+        <div
+          className={`poly-theme poly-theme-${theme} theme-holder single-holder`}
+        >
           <Story />
         </div>
       );

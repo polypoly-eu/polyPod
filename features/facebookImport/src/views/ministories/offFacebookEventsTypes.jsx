@@ -6,7 +6,7 @@ import ReportStory from "./reportStory.jsx";
 class OffFacebookEventsTypesReport extends ReportStory {
     constructor(props) {
         super(props);
-        this._neededReports = [analysisKeys.offFacebookEventTypes];
+        this.neededReports = [analysisKeys.offFacebookEventTypes];
     }
 
     get title() {
