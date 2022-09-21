@@ -6,7 +6,6 @@ import {
   MockParentContext,
   MockParentContextProvider,
 } from "./mocks/parent-context-mock";
-import MockDataAccount from "./mocks/data-account-mock";
 import PolyImportComponentFixture from "./mocks/poly-import-component-mock";
 import { mockDataImporters } from "./mocks/data-importers-mock";
 import { mockFiles } from "./mocks/pod-mock";
