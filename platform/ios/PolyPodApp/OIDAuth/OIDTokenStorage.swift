@@ -8,9 +8,9 @@ enum OIDTokenStorage {
         case failedToReadAuthState(OSStatus)
         case failedToDeleteAuthState(OSStatus)
     }
-    
+
     static func storeAuthState(_ authState: OIDAuthState, forService service: String) -> Result<Void, Swift.Error> {
-        return Result {
+        Result {
             let encodedState = try authState.encode()
             if try containsAuthState(forService: service) {
                 let query: [CFString: Any] = [
@@ -35,7 +35,7 @@ enum OIDTokenStorage {
             return .failure(Error.failedToSetAuthState(status))
         }
     }
-    
+
     static func getAuthState(forService service: String) -> Result<OIDAuthState?, Swift.Error> {
         Result {
             let query = [kSecAttrService: service,
@@ -50,33 +50,33 @@ enum OIDTokenStorage {
             return try (result as? Data).map(OIDAuthState.decoded(from:))
         }
     }
-    
+
     static func removeAuthState(forService service: String) -> Result<Void, Swift.Error> {
         Result {
             let query = [kSecAttrService: service,
                                kSecClass: kSecClassGenericPassword
-                         ] as CFDictionary
+            ] as CFDictionary
             let status = SecItemDelete(query)
             guard status == errSecSuccess else {
                 throw Error.failedToDeleteAuthState(status)
             }
         }
     }
-    
+
     static func containsAuthState(forService service: String) throws -> Bool {
-            let query = [
-                kSecAttrService: service,
-                kSecClass: kSecClassGenericPassword
-            ] as CFDictionary
-            let status = SecItemCopyMatching(query, nil)
-            switch status {
-            case errSecSuccess, errSecInteractionNotAllowed:
-                return true
-            case errSecItemNotFound:
-                return false
-            default:
-                throw Error.keychainAccessFailed(status)
-            }
+        let query = [
+            kSecAttrService: service,
+            kSecClass: kSecClassGenericPassword
+        ] as CFDictionary
+        let status = SecItemCopyMatching(query, nil)
+        switch status {
+        case errSecSuccess, errSecInteractionNotAllowed:
+            return true
+        case errSecItemNotFound:
+            return false
+        default:
+            throw Error.keychainAccessFailed(status)
+        }
     }
 }
 
