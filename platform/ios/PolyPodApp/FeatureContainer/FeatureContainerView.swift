@@ -11,7 +11,6 @@ struct FeatureContainerView: UIViewRepresentable {
     let errorHandler: (String) -> Void
     let openUrlHandler: (String) -> Void
     let pickFileHandler: (String?, @escaping (ExternalFile?) -> Void) -> Void
-    var auth: OIDAuth?
 
     func makeUIView(context: Context) -> FeatureWebView {
         let featureWebView = FeatureWebView(

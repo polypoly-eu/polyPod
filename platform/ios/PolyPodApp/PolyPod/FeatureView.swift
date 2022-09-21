@@ -86,9 +86,6 @@ struct FeatureView: View {
                 pickFileHandler: pickFile
             )
         }
-        .onOpenURL(perform: { url in
-            
-        })
         .accessibilityElement()
         .accessibilityIdentifier("feature_view")
     }

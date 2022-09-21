@@ -91,7 +91,9 @@ extension OIDAuth {
         let serviceConfig = OIDServiceConfiguration(
             // No authorization endpoint, as it happens directly on backend side
             authorizationEndpoint: URL(string: "")!,
-            tokenEndpoint: URL(string: "https://keycloak.stage.polypoly.tech/realms/eu-members/protocol/openid-connect/token")!
+            tokenEndpoint: URL(
+                string: "https://keycloak.stage.polypoly.tech/realms/eu-members/protocol/openid-connect/token"
+            )!
             // TBD endSessionEndpoint
         )
         let request = OIDAuthorizationRequest(configuration: serviceConfig,

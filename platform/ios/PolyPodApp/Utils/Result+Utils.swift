@@ -13,6 +13,4 @@ extension Result {
         
         return fallback
     }
-    
-    func consume() {}
 }

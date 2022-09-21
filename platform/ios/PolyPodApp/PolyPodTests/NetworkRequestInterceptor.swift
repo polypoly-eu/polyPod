@@ -63,7 +63,7 @@ final class NetworkRequestInterceptor: URLProtocol {
     }
 
     override func startLoading() {
-        guard let stub = NetworkRequestInterceptor.stub else {
+        guard let stub = Self.stub else {
             client?.urlProtocolDidFinishLoading(self)
             return
         }

@@ -3,7 +3,6 @@ import CoreData
 import MessagePack
 import PolyPodCoreSwift
 import UIKit
-import AppAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
