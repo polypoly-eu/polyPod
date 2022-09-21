@@ -46,6 +46,10 @@ export const dataImporters = {
     comments: CommentsImporter,
     postReactions: PostReactionsImporter,
     posts: PostsImporter,
+    oldFollowedPagesImporter: OldFollowedPagesImporter,
+    oldLikedPagesImporter: OldLikedPagesImporter,
+    oldUnfollowedPagesImporter: OldUnfollowedPagesImporter,
+    oldRecommendedPagesImporter: OldRecommendedPagesImporter,
 };
 
 export const NUMBER_OF_IMPORTERS = Object.keys(dataImporters).length;

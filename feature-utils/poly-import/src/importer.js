@@ -74,7 +74,7 @@ export async function runImporter({ importerClass, zipFile, pod, account }) {
     }
 }
 
-export async function runImporters(importerClasses, zipFile, account, pod) {
+export async function runImporters({ importerClasses, zipFile, account, pod }) {
     return await Promise.all(
         importerClasses.map(async (importerClass) => {
             return runImporter({ importerClass, zipFile, account, pod });

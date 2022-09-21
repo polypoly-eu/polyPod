@@ -28,11 +28,12 @@ import ConnectedAdvertisersAllTypesImporter from "../../src/model/importers/conn
 
 export async function runMultipleImporters(importerClasses, zipFile) {
     const facebookAccount = new FacebookAccount();
-    const results = await runImporters(
+    const results = await runImporters({
         importerClasses,
         zipFile,
-        facebookAccount
-    );
+        facebookAccount,
+        pod: new MockPod(),
+    });
     return { facebookAccount, results };
 }
 
