@@ -22,7 +22,10 @@ const Onboarding = () => {
             <h1>{i18n.t("onboarding:title")}</h1>
             <p>{i18n.t("onboarding:text")}</p>
             <FixedFooter>
-                <PolyButton label={i18n.t("onboarding:primary.button")} />
+                <PolyButton
+                    label={i18n.t("onboarding:primary.button")}
+                    onClick={handleNavigation}
+                />
                 <a className="link-button" onClick={handleOpenUrl()}>
                     {i18n.t("onboarding:secondary.button")}
                 </a>
