@@ -1,8 +1,5 @@
-// Please remove this line and the empty one after it
-
-import Foundation
-import Security
 import AppAuth
+import Security
 
 enum OIDTokenStorage {
     enum Error: Swift.Error {
@@ -16,18 +13,18 @@ enum OIDTokenStorage {
         return Result {
             let encodedState = try authState.encode()
             if try containsAuthState(forService: service) {
-                let query = [
+                let query: [CFString: Any] = [
                     kSecAttrService: service,
                     kSecClass: kSecClassGenericPassword
-                ] as CFDictionary
+                ]
                 
                 let attributesToUpdate = [kSecValueData: encodedState] as CFDictionary
-                return SecItemUpdate(query, attributesToUpdate)
+                return SecItemUpdate(query as CFDictionary, attributesToUpdate)
             } else {
                 let query = [
                     kSecValueData: encodedState,
                     kSecClass: kSecClassGenericPassword,
-                    kSecAttrService: service,
+                    kSecAttrService: service
                 ] as CFDictionary
                 return SecItemAdd(query, nil)
             }

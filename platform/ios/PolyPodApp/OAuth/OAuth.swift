@@ -25,13 +25,14 @@ final class OIDAuth: NSObject {
         self.oidExternalUserAgent = oidExternalUserAgent
     }
 
-    func logout() {
+    func clearAuthState() {
         self.state = nil
         _ = OIDTokenStorage
             .removeAuthState(forService: authorizationRequest.clientID)
             .inspectError { err in
                 Log.error("Failed to remove auth state \(err)")
             }
+        // TBD end session request
     }
 
     func loadAuthState(completion: @escaping (Result<Void, Error>) -> Void) {
@@ -64,23 +65,18 @@ final class OIDAuth: NSObject {
 }
 
 extension OIDAuth: OIDAuthStateChangeDelegate {
+    // Handle state changes when token is refreshed or invalidated.
     func didChange(_ state: OIDAuthState) {
         self.state = state
     }
 }
 
-
 extension OIDAuth {
     /// An user agent which does not trigger any actual authorization flow.
-    /// Meant to be used when the first part of the usual OAuth2.0 flow happens on the backend side,
-    /// and the Auth flow just needs to handle the code/token exchange.
+    /// Meant to be used when the authorization flow happens on the backend side,
+    /// while the app "just" needs to handle the code/token exchange.
     private final class OIDExternalUserAgentNoOp: NSObject, OIDExternalUserAgent {
-        
-        /// The requests that were performed
-        private(set) var performedRequests = [OIDExternalUserAgentRequest]()
-        
         func present(_ request: OIDExternalUserAgentRequest, session: OIDExternalUserAgentSession) -> Bool {
-            performedRequests.append(request)
             return true
         }
         
@@ -89,16 +85,20 @@ extension OIDAuth {
         }
     }
     
+    /// Membership feature Atuh configuration
     static func membershipFeatureAuth() -> OIDAuth {
+        let redirectURL = URL(string: "coop.polypoly.polypod://membership_feature/oauth")!
         let serviceConfig = OIDServiceConfiguration(
+            // No authorization endpoint, as it happens directly on backend side
             authorizationEndpoint: URL(string: "")!,
             tokenEndpoint: URL(string: "https://keycloak.stage.polypoly.tech/realms/eu-members/protocol/openid-connect/token")!
+            // TBD endSessionEndpoint
         )
         let request = OIDAuthorizationRequest(configuration: serviceConfig,
                                               clientId: "pmf",
                                               clientSecret: nil,
                                               scope: nil,
-                                              redirectURL: nil,
+                                              redirectURL: redirectURL,
                                               responseType: OIDResponseTypeCode,
                                               state: nil,
                                               nonce: nil,
