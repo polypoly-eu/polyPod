@@ -1,6 +1,14 @@
 import { Status, statusTypes } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
 
+export class Importer {
+    async import({ zipFile, dataAccount }) {
+        throw new Error(
+            `Calling abstract base class with ${zipFile}, ${dataAccount}`
+        );
+    }
+}
+
 class ImporterExecutionReport {
     constructor({ importer, status, executionTime }) {
         this._importer = importer;
