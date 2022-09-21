@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import i18n from "!silly-i18n";
 
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -11,6 +12,12 @@ function updatePodNavigation(pod, navigate, handleBack, location) {
     navigate.length > 1 && location.pathname !== "/onboarding"
         ? pod.polyNav.setActiveActions(["back"])
         : pod.polyNav.setActiveActions([]);
+}
+
+function updateTitle(pod, location) {
+    console.log(location);
+    const screenTitle = i18n.t(`navbarTitles:overview`);
+    pod.polyNav.setTitle(screenTitle);
 }
 
 export const MembershipContextProvider = ({ children }) => {
@@ -35,6 +42,7 @@ export const MembershipContextProvider = ({ children }) => {
     useEffect(() => {
         if (!pod) return;
         updatePodNavigation(pod, navigate, handleBack, location);
+        updateTitle(pod, location);
     });
 
     return (
