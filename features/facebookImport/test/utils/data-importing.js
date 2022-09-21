@@ -93,6 +93,10 @@ export async function runPersonalDataImporter(zipFile) {
     return runImporter({ importerClass: PersonalDataImporter, zipFile, pod: new MockPod() });
 }
 
+export async function runPersonalDataImporter(zipFile) {
+    return runSingleImporter(PersonalDataImporter, zipFile);
+}
+
 export async function runMessagesImporter(zipFile) {
     return runSingleOutdatedImporter(MessagesImporter, zipFile);
 }

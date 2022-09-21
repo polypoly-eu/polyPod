@@ -2,7 +2,7 @@
     "name": "polypoly-membership-feature",
     "version": "0.0.1",
     "description": "Generated from poly-cli; substitute for your own here",
-    "main": "src/index.jsx",
+    "main": "src/polypolyMembership.jsx",
     "scripts": {
         "build": "rollup -c",
         "watch": "rollup --watch -c",

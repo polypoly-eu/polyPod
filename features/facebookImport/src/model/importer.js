@@ -5,11 +5,15 @@ import ConnectedAdvertisersAllTypesImporter from "./importers/connected-advertis
 import InteractedWithAdvertisersImporter from "./importers/interacted-with-advertisers-importer.js";
 import FriendsImporter from "./importers/friends-importer.js";
 import FollowedPagesImporter from "./importers/pages-followed-importer.js";
+import OldFollowedPagesImporter from "./importers/old-pages-followed-importer.js";
 import ReceivedFriendRequestsImporter from "./importers/friend-requests-received-importer.js";
 import LikedPagesImporter from "./importers/pages-liked-importer.js";
+import OldLikedPagesImporter from "./importers/old-pages-liked-importer.js";
 import RecommendedPagesImporter from "./importers/pages-recommended-importer.js";
+import OldRecommendedPagesImporter from "./importers/old-pages-recommended-importer.js";
 import SearchesImporter from "./importers/searches-importer.js";
 import UnfollowedPagesImporter from "./importers/pages-unfollowed-importer.js";
+import OldUnfollowedPagesImporter from "./importers/old-pages-unfollowed-importer.js";
 import MessagesImporter from "./importers/messages-importer.js";
 import AdminRecordsImporter from "./importers/admin-records-importer.js";
 import AccountSessionActivitiesImporter from "./importers/account-session-activities-importer.js";

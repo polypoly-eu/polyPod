@@ -6,7 +6,7 @@ import ReportStory from "./reportStory.jsx";
 class UnknownTopLevelFoldersReport extends ReportStory {
     constructor(props) {
         super(props);
-        this._neededReports = [analysisKeys.unknownFolderNames];
+        this.neededReports = [analysisKeys.unknownFolderNames];
     }
     get title() {
         return "Unknown top-level folders";

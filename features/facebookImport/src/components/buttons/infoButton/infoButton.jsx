@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { ImporterContext } from "../../../context/importer-context.jsx";
+import { FacebookContext } from "../../../context/facebook-context.jsx";
 
 import "./infoButton.css";
 
 const InfoButton = ({ infoScreen }) => {
-    const { createPopUp } = useContext(ImporterContext);
+    const { createPopUp } = useContext(FacebookContext);
 
     const handleClick = () => {
         createPopUp({ type: infoScreen });

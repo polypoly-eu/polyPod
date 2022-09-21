@@ -3,80 +3,34 @@ package coop.polypoly.core
 import org.msgpack.core.MessagePack
 import org.msgpack.core.MessageUnpacker
 import org.msgpack.value.Value
-import org.msgpack.value.ValueFactory
 
 class Core {
     companion object {
-        fun bootstrapCore(languageCode: String, fsRoot: String) {
+        fun bootstrapCore(args: BootstrapArgs) {
             return handleCoreResponse(
                 JniApi.bootstrapCore(
-                    languageCode,
-                    fsRoot,
+                    args.asValue().pack(),
                     JniApi
                 )
             ) {}
         }
 
-        fun loadFeatureCategories(
-            featuresDir: String,
-            forceShow: List<FeatureCategoryId>
-        ): List<FeatureCategory> {
-            val args = mutableMapOf<Value, Value>()
-            args[ValueFactory.newString("features_dir")] =
-                ValueFactory.newString(featuresDir)
-            args[ValueFactory.newString("force_show")] =
-                ValueFactory.newArray(
-                    forceShow.map { ValueFactory.newString(it.toString()) }
-                )
-            val bytes = ValueFactory.newMap(args).pack()
-            return handleCoreResponse(JniApi.loadFeatureCategories(bytes)) {
-                mapFeatureCategories(
-                    it
-                )
-            }
+        fun <CoreResponse> executeRequest(
+            request: CoreRequest,
+            // TODO: Investigate the option of doing automatic decoding instead of asking for a decoder.
+            decoder: (Value) -> CoreResponse
+        ): CoreResponse {
+            return handleCoreResponse(
+                JniApi.executeRequest(request.asValue().pack())
+            ) { decoder(it) }
         }
 
-        fun execRdfQuery(query: String): Value {
+        fun executeRequest(
+            request: CoreRequest
+        ) {
             return handleCoreResponse(
-                JniApi.execRdfQuery(query)
-            ) { it }
-        }
-
-        fun execRdfUpdate(query: String) {
-            return handleCoreResponse(
-                JniApi.execRdfUpdate(query)
-            ) {}
-        }
-
-        fun appDidBecomeInactive() {
-            return handleCoreResponse(
-                JniApi.appDidBecomeInactive()
-            ) {}
-        }
-
-        fun isUserSessionExpired(): Boolean {
-            return handleCoreResponse(
-                JniApi.isUserSessionExpired()
-            ) { it.asBooleanValue().boolean }
-        }
-
-        fun getUserSessionTimeoutOption(): UserSessionTimeoutOption {
-            return handleCoreResponse(
-                JniApi.getUserSessionTimeoutOption()
-            ) { UserSessionTimeoutOption.from(it) }
-        }
-
-        fun getUserSessionTimeoutOptionsConfig():
-            List<UserSessionTimeoutOptionConfig> {
-            return handleCoreResponse(
-                JniApi.getUserSessionTimeoutOptionsConfig()
-            ) { UserSessionTimeoutOptionConfig.mapConfigs(it) }
-        }
-
-        fun setUserSessionTimeoutOption(option: UserSessionTimeoutOption) {
-            return handleCoreResponse(
-                JniApi.setUserSessionTimeoutOption(option.asValue().pack())
-            ) {}
+                JniApi.executeRequest(request.asValue().pack())
+            ) { }
         }
 
         private fun <T> handleCoreResponse(
@@ -92,7 +46,7 @@ class Core {
             }
 
             responseObject.get("Err")?.also {
-                throw mapError(it.asMapValue().map())
+                throw CoreFailure.from(it)
             }
 
             throw InvalidCoreResponseFormat(responseObject.toString())

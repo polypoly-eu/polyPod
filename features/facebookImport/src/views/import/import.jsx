@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ImporterContext } from "../../context/importer-context.jsx";
+import { FacebookContext } from "../../context/facebook-context.jsx";
 import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
 import { PolyImportContext, ProgressBar, Screen } from "@polypoly-eu/poly-look";
 import ImportExplanationExpandable from "../../components/importExplanationExpandable/importExplanationExpandable.jsx";
@@ -60,7 +60,7 @@ async function writeImportStatus(pod, status) {
 
 const Import = () => {
     const { pod, setGlobalError, runWithLoadingScreen } =
-        useContext(ImporterContext);
+        useContext(FacebookContext);
     const { files, handleRemoveFile, refreshFiles } =
         useContext(PolyImportContext);
     const [importStatus, setImportStatus] = useState(importSteps.beginning);
