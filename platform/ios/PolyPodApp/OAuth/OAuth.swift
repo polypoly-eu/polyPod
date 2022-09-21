@@ -85,11 +85,11 @@ extension OIDAuth {
         }
     }
     
-    /// Membership feature Atuh configuration
+    /// Membership feature Auth configuration
     static func membershipFeatureAuth() -> OIDAuth {
         let redirectURL = URL(string: "coop.polypoly.polypod://membership_feature/oauth")!
         let serviceConfig = OIDServiceConfiguration(
-            // No authorization endpoint, as it happens directly on backend side
+            // No authorization endpoint, as auhorization it happens directly on backend side
             authorizationEndpoint: URL(string: "")!,
             tokenEndpoint: URL(
                 string: "https://keycloak.stage.polypoly.tech/realms/eu-members/protocol/openid-connect/token"

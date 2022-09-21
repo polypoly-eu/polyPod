@@ -24,8 +24,8 @@ final class OIDAuthTests: XCTestCase {
         additionalParameters: nil)
     
     private lazy var tokenResponse: [String: Any] = [
-        "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIi",
-        "refresh_token": "SF3HYFQDHp90KKa4dqCAtNqQcAxs",
+        "access_token": UUID().uuidString,
+        "refresh_token": UUID().uuidString,
         "scope": "email audience",
         "token_type": "Bearer"
     ]
@@ -90,7 +90,7 @@ final class OIDAuthTests: XCTestCase {
         // Act
         loadAuthState(auth)
         
-        let query = [kSecAttrService: "testFeature",
+        let query = [kSecAttrService: authRequest.clientID,
                            kSecClass: kSecClassGenericPassword,
                       kSecReturnData: true] as [CFString: Any]
         
