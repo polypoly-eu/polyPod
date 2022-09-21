@@ -110,7 +110,7 @@ extension OIDAuth {
     
     /// Membership feature Auth configuration
     static func membershipFeatureAuth() -> OIDAuth {
-        let redirectURL = URL(string: "coop.polypoly.polypod://membership_feature/oauth")!
+        let redirectURL = URL(string: "\(Bundle.main.bundleIdentifier!)://membership_feature/oauth")!
         let serviceConfig = OIDServiceConfiguration(
             // No authorization endpoint, as auhorization it happens directly on backend side
             authorizationEndpoint: URL(string: "")!,

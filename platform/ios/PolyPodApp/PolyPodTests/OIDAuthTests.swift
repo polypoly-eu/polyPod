@@ -4,7 +4,7 @@ import Security
 import XCTest
 
 final class OIDAuthTests: XCTestCase {
-    private lazy var redirectURL = URL(string: "coop.polypod.com://redirect")!
+    private lazy var redirectURL = URL(string: "\(Bundle.main.bundleIdentifier!)://redirect")!
     private lazy var deepLinkURL = URL(string: redirectURL.absoluteString + "?code=1234")!
     private lazy var authRequest = OIDAuthorizationRequest(
         configuration: .init(
