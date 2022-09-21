@@ -38,10 +38,6 @@ android {
         versionCode polyEpoch()
         versionName "1.7.2"
 
-        android.defaultConfig.manifestPlaceholders = [
-            'appAuthRedirectScheme': 'coop.polypoly.polypod'
-        ]
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -124,7 +120,6 @@ repositories {
 }
 
 dependencies {
-    implementation 'net.openid:appauth:0.11.1'
     implementation project(":polyOut")
     implementation project(":core")
     implementation 'org.msgpack:msgpack-core:0.8.20'

@@ -1,50 +1,15 @@
 package coop.polypoly.polypod
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.synnapps.carouselview.CarouselView
-import coop.polypoly.polypod.oauth.OAuth
-import net.openid.appauth.AuthorizationException
-import net.openid.appauth.AuthorizationResponse
-import net.openid.appauth.AuthorizationService
-import net.openid.appauth.AuthorizationService.TokenResponseCallback
-
 
 class OnboardingActivity : AppCompatActivity() {
-    lateinit var startForResult: ActivityResultLauncher<Intent>
-    lateinit var authService: AuthorizationService
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        authService = AuthorizationService(this)
-
-        startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == Activity.RESULT_OK) {
-                val data: Intent = it.data!!
-                val resp = AuthorizationResponse.fromIntent(data)
-                val ex = AuthorizationException.fromIntent(data)
-
-                authService.performTokenRequest(
-                    resp!!.createTokenExchangeRequest(),
-                    TokenResponseCallback { resp, ex ->
-                        if (resp != null) {
-                            println("Received token")
-                            // exchange succeeded
-                        } else {
-                            // authorization failed, check ex for more details
-                        }
-                    })
-                // There are no request codes
-            }
-        }
-
         var isInfo = false
         if (this.intent?.data?.toString() == "info") {
             isInfo = true
@@ -144,14 +109,9 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun close() {
-        val request = OAuth.startAuth()
-        val authIntent: Intent =
-            authService.getAuthorizationRequestIntent(request)
-        startForResult.launch(authIntent)
-
-//        if (Preferences.isFirstRun(baseContext)) {
-//            Preferences.setFirstRun(baseContext, false)
-//        }
-//        finish()
+        if (Preferences.isFirstRun(baseContext)) {
+            Preferences.setFirstRun(baseContext, false)
+        }
+        finish()
     }
 }
