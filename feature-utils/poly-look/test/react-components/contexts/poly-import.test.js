@@ -27,13 +27,11 @@ const mockComponent = (
 describe("Context Testing ", () => {
   let container;
 
-  console.log(mockComponent);
   beforeEach(async () => {
     container = await waitFor(() => render(mockComponent).container);
   });
 
   it("renders correctly with a component", () => {
-    console.log(container);
     expect(container).toBeTruthy();
     const elements = container.getElementsByTagName("p");
     mockFiles.forEach((file, i) =>
