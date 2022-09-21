@@ -85,8 +85,7 @@ struct FeatureView: View {
                 openUrlHandler: openUrl,
                 pickFileHandler: pickFile
             )
-        }
-        .accessibilityElement()
+        }.accessibilityElement()
         .accessibilityIdentifier("feature_view")
     }
 

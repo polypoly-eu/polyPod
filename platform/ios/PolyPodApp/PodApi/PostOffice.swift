@@ -12,7 +12,6 @@ private func createErrorResponse(_ origin: String, _ error: Error) -> MessagePac
 
 class PostOffice {
     static let shared = PostOffice()
-    var oidAuth: OIDAuth?
     
     // swiftlint:disable cyclomatic_complexity function_body_length
     func handleIncomingEvent(eventData: [String: Any], completionHandler: @escaping ([UInt8]) -> Void) {
