@@ -24,6 +24,8 @@ final class OIDAuthTests: XCTestCase {
         additionalParameters: nil)
     
     private lazy var tokenResponse: [String: Any] = [
+        // Note: Token values are not actual secrets,
+        //       random values are used for the means testing
         "access_token": UUID().uuidString,
         "refresh_token": UUID().uuidString,
         "scope": "email audience",
