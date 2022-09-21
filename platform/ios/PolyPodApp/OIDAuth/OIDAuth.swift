@@ -3,7 +3,12 @@ import Foundation
 
 final class OIDAuth: NSObject {
     struct InvalidAuthResponseRepresentation: Error {}
+    
+    // MARK: - Properties
 
+    /// State to be used to authorize requests.
+    /// Use `state.performAction(freshTokens:)` to make any authorized requests,
+    /// this will make sure that tokens are refreshed accordingly.
     private(set) var state: OIDAuthState? {
         didSet {
             if let state = state {
@@ -20,11 +25,19 @@ final class OIDAuth: NSObject {
     private let oidExternalUserAgent: OIDExternalUserAgent
     private let authorizationRequest: OIDAuthorizationRequest
 
+    // MARK: - Initializer
+    
+    /// Creates a  new instace.
+    /// - Parameters:
+    ///   - authorizationRequest: The authorization request that contains all of the necessary information to start the auth flow.
+    ///                           All the required information - clientId, redirectURL... will be derived from this argument.
+    ///   - oidExternalUserAgent: User agent meant to be used to start auth flow.
     init(authorizationRequest: OIDAuthorizationRequest, oidExternalUserAgent: OIDExternalUserAgent) {
         self.authorizationRequest = authorizationRequest
         self.oidExternalUserAgent = oidExternalUserAgent
     }
-
+    
+    /// Ends user session by clearing the auth state
     func clearAuthState() {
         self.state = nil
         _ = OIDTokenStorage
@@ -34,7 +47,10 @@ final class OIDAuth: NSObject {
             }
         // TBD end session request
     }
-
+    
+    /// Loads the Auth state.
+    /// - Parameter completion: The result of the load operation.
+    ///                         After a successful load, the `state` peroperty will be initialized.
     func loadAuthState(completion: @escaping (Result<Void, Error>) -> Void) {
         if let state = try? OIDTokenStorage.getAuthState(forService: authorizationRequest.clientID).get() {
             self.state = state
@@ -57,7 +73,11 @@ final class OIDAuth: NSObject {
             })
         }
     }
-
+    
+    /// Handles Auth redirect to complete the Auth flow.
+    /// After redirect was handled, any subsequent calls to this function will be ignored,
+    /// unless a new auth flow is started.
+    /// - Parameter url: The auth redirect URL
     func handleAuthRedirect(_ url: URL) {
         currentAuthFlow?.resumeExternalUserAgentFlow(with: url)
         currentAuthFlow = nil
@@ -75,6 +95,7 @@ extension OIDAuth {
     /// An user agent which does not trigger any actual authorization flow.
     /// Meant to be used when the authorization flow happens on the backend side,
     /// while the app "just" needs to handle the code/token exchange.
+    /// This is necessary to "trick" AppAuth that a full OAuth2.0 flow is happening form the client side.
     private final class OIDExternalUserAgentNoOp: NSObject, OIDExternalUserAgent {
         func present(_ request: OIDExternalUserAgentRequest, session: OIDExternalUserAgentSession) -> Bool {
             return true

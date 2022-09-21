@@ -105,7 +105,7 @@ final class OIDAuthTests: XCTestCase {
         XCTAssertEqual(authState?.lastTokenResponse?.tokenType, tokenResponse["token_type"] as? String)
     }
     
-    func testUsesStoredToken() throws {
+    func testUsesStoredAuthState() throws {
         let state = OIDAuthState.any
         let encoded = try state.encode()
         let query = [
@@ -141,6 +141,33 @@ final class OIDAuthTests: XCTestCase {
         var result: AnyObject?
         _ = SecItemCopyMatching(query as CFDictionary, &result)
         XCTAssertNil(result)
+    }
+    
+    func testAuthStateChangesAreStored() throws {
+        // Arrange
+        let auth = anyConfigFeatureAuth()
+        try stubTokenResponse()
+        interceptRequests()
+
+        // Act
+        loadAuthState(auth)
+        
+        let newState = OIDAuthState.any
+        auth.didChange(newState)
+        
+        let query = [kSecAttrService: authRequest.clientID,
+                           kSecClass: kSecClassGenericPassword,
+                      kSecReturnData: true] as [CFString: Any]
+        
+        var result: AnyObject?
+        _ = SecItemCopyMatching(query as CFDictionary, &result)
+        
+        let storedAuthState = try (result as? Data).map(OIDAuthState.decoded(from:))
+        XCTAssertNotNil(storedAuthState)
+        XCTAssertEqual(storedAuthState?.scope, newState.scope)
+        XCTAssertEqual(storedAuthState?.lastTokenResponse?.accessToken, newState.lastTokenResponse?.accessToken)
+        XCTAssertEqual(storedAuthState?.lastTokenResponse?.refreshToken, newState.lastTokenResponse?.refreshToken)
+        XCTAssertEqual(storedAuthState?.lastTokenResponse?.request.clientID, newState.lastTokenResponse?.request.clientID)
     }
     
     private func anyConfigFeatureAuth() -> OIDAuth {
