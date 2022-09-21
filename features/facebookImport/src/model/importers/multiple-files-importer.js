@@ -1,4 +1,4 @@
-import { Status, statusTypes } from "@polypoly-eu/poly-import";
+import { Importer, Status, statusTypes } from "@polypoly-eu/poly-import";
 import { MissingFilesException } from "./utils/failed-import-exception";
 import {
     readFullPathJSONFile,
@@ -6,7 +6,7 @@ import {
     sliceIntoChunks,
 } from "./utils/importer-util";
 
-export default class MultipleFilesImporter {
+export default class MultipleFilesImporter extends Importer {
     // eslint-disable-next-line no-unused-vars
     _isTargetPostFile(entryName) {
         return false;

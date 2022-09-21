@@ -22,13 +22,10 @@ const Onboarding = () => {
             <h1>{i18n.t("onboarding:title")}</h1>
             <p>{i18n.t("onboarding:text")}</p>
             <FixedFooter>
-                <PolyButton
-                    onClick={handleNavigation}
-                    label={i18n.t("onboarding:primary.button")}
-                />
-                <div className="secondary-link" onClick={handleOpenUrl()}>
-                    <u>{i18n.t("onboarding:secondary.button")}</u>
-                </div>
+                <PolyButton label={i18n.t("onboarding:primary.button")} />
+                <a className="link-button" onClick={handleOpenUrl()}>
+                    {i18n.t("onboarding:secondary.button")}
+                </a>
             </FixedFooter>
         </Screen>
     );
