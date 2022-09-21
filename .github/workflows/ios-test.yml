@@ -9,7 +9,7 @@ on:
             - "platform/ios/**"
             - ".github/workflows/ios-test.yml"
     pull_request:
-        types: [assigned, opened, ready_for_review]
+        types: [opened]
         paths:
             - "feature-utils/**"
             - "features/**"

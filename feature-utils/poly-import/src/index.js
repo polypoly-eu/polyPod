@@ -4,6 +4,7 @@ import {
     runImporters,
     runOutdatedImporter,
     runOutdatedImporters,
+    Importer,
 } from "./importer";
 import {
     FileImportError,
@@ -15,6 +16,7 @@ import { Status, statusTypes } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
 export {
     Status,
+    Importer,
     runImporter,
     runImporters,
     runOutdatedImporter,
