@@ -167,7 +167,8 @@ final class OIDAuthTests: XCTestCase {
         XCTAssertEqual(storedAuthState?.scope, newState.scope)
         XCTAssertEqual(storedAuthState?.lastTokenResponse?.accessToken, newState.lastTokenResponse?.accessToken)
         XCTAssertEqual(storedAuthState?.lastTokenResponse?.refreshToken, newState.lastTokenResponse?.refreshToken)
-        XCTAssertEqual(storedAuthState?.lastTokenResponse?.request.clientID, newState.lastTokenResponse?.request.clientID)
+        XCTAssertEqual(storedAuthState?.lastTokenResponse?.request.clientID,
+                       newState.lastTokenResponse?.request.clientID)
     }
     
     private func anyConfigFeatureAuth() -> OIDAuth {

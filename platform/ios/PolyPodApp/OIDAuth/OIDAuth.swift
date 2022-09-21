@@ -29,8 +29,10 @@ final class OIDAuth: NSObject {
     
     /// Creates a  new instace.
     /// - Parameters:
-    ///   - authorizationRequest: The authorization request that contains all of the necessary information to start the auth flow.
-    ///                           All the required information - clientId, redirectURL... will be derived from this argument.
+    ///   - authorizationRequest: The authorization request that contains all of the necessary
+    ///                           information to start the auth flow.
+    ///                           All the required information - clientId, redirectURL...
+    ///                           will be derived from this argument.
     ///   - oidExternalUserAgent: User agent meant to be used to start auth flow.
     init(authorizationRequest: OIDAuthorizationRequest, oidExternalUserAgent: OIDExternalUserAgent) {
         self.authorizationRequest = authorizationRequest
