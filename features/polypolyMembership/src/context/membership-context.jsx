@@ -15,7 +15,6 @@ function updatePodNavigation(pod, navigate, handleBack, location) {
 }
 
 function updateTitle(pod, location) {
-    console.log(location);
     let screenTitle;
     try {
         screenTitle = i18n.t(`navbarTitles:${location.pathname.substring(1)}`);
