@@ -87,7 +87,7 @@ export default class ActivitiesHtmlImporter extends BaseActivitiesImporter {
     constructor() {
         super(new ActivityHtmlParser());
     }
-    async import({ zipFile, account: googleAccount }) {
+    async import({ zipFile, facebookAccount: googleAccount }) {
         await super.import({ zipFile, googleAccount });
         this._parser.release();
     }
