@@ -90,7 +90,11 @@ export async function runNameImporter(zipFile) {
 }
 
 export async function runPersonalDataImporter(zipFile) {
-    return runImporter({ importerClass: PersonalDataImporter, zipFile, pod: new MockPod() });
+    return runImporter({
+        importerClass: PersonalDataImporter,
+        zipFile,
+        pod: new MockPod(),
+    });
 }
 
 export async function runPersonalDataImporter(zipFile) {
