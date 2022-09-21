@@ -5,6 +5,7 @@ import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
 import sucrase from "@rollup/plugin-sucrase";
 import resolve from "@rollup/plugin-node-resolve";
 import json from "@rollup/plugin-json";
+import replace from "@rollup/plugin-replace";
 
 const externalPackages = {
     "@polypoly-eu/poly-look": "polyLook",
@@ -60,6 +61,10 @@ export default {
                 },
             ],
             verbose: true,
+        }),
+        replace({
+            preventAssignment: true,
+            "process.env.NODE_ENV": JSON.stringify("development"),
         }),
     ],
 };

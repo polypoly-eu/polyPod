@@ -12,7 +12,8 @@
         "@polypoly-eu/rollup-plugin-copy-watch": "file:../../dev-utils/rollup-plugin-copy-watch",
         "@rollup/plugin-json": "*",
         "@rollup/plugin-node-resolve": "*",
-        "rollup": "*"
+        "rollup": "*",
+        "@rollup/plugin-replace": "*"
     },
     "dependencies": {
         "@polypoly-eu/podjs": "file:../../platform/podjs",
