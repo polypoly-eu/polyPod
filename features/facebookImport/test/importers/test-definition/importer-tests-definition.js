@@ -46,10 +46,8 @@ export const defineEventImportersTestsForDatasets = (targetDatasets) => {
                 dataKey,
                 { zipFile, expectedValues }
             ) => {
-                const { result, facebookAccount } = await runSingleOutdatedImporter(
-                    importerClass,
-                    zipFile
-                );
+                const { result, facebookAccount } =
+                    await runSingleOutdatedImporter(importerClass, zipFile);
 
                 expectImportSuccess(result);
 
