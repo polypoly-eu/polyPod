@@ -16,7 +16,12 @@ function updatePodNavigation(pod, navigate, handleBack, location) {
 
 function updateTitle(pod, location) {
     console.log(location);
-    const screenTitle = i18n.t(`navbarTitles:overview`);
+    let screenTitle;
+    try {
+        screenTitle = i18n.t(`navbarTitles:${location.pathname.substring(1)}`);
+    } catch {
+        screenTitle = i18n.t("navbarTitles:overview");
+    }
     pod.polyNav.setTitle(screenTitle);
 }
 
