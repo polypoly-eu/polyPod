@@ -5,7 +5,7 @@ describe("DataAccount has the correct attributes", () => {
 
     it("Attributes have the correct type", () => {
         [
-            "importingResults",
+            "importingReports",
             "importedFileNames",
             "analysesExecutionResults",
         ].forEach((attribute) => {
@@ -14,7 +14,6 @@ describe("DataAccount has the correct attributes", () => {
         ["analyses", "reports"].forEach((attribute) => {
             expect(dataAccount[attribute]).toBeInstanceOf(Object);
         });
-        expect(dataAccount.personalData.name.familyName).toStrictEqual("");
     });
 
     it("Adds imported filenames successfully", () => {
