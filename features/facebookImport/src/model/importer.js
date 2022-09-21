@@ -44,4 +44,4 @@ export const dataImporters = {
     posts: PostsImporter,
 };
 
-export const NUMBER_OF_IMPORTERS = dataImporters.length;
+export const NUMBER_OF_IMPORTERS = Object.keys(dataImporters).length;

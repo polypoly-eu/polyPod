@@ -1,5 +1,10 @@
 import { FeatureFileStorage, ZipFile, ZipFileEntry } from "./storage";
-import { runImporter, runImporters } from "./importer";
+import {
+    runImporter,
+    runImporters,
+    runOutdatedImporter,
+    runOutdatedImporters,
+} from "./importer";
 import {
     FileImportError,
     RefreshFilesError,
@@ -12,6 +17,8 @@ export {
     Status,
     runImporter,
     runImporters,
+    runOutdatedImporter,
+    runOutdatedImporters,
     ZipFile,
     Telemetry,
     ZipFileEntry,
