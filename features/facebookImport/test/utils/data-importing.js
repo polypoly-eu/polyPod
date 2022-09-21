@@ -38,11 +38,12 @@ export async function runMultipleImporters(importerClasses, zipFile) {
 
 export async function runSingleImporter(importerClass, zipFile) {
     const facebookAccount = new FacebookAccount();
-    const { report, result } = await runImporter(
+    const { report, result } = await runImporter({
         importerClass,
         zipFile,
-        facebookAccount
-    );
+        facebookAccount,
+        pod: new MockPod(),
+    });
     return { facebookAccount, result, report };
 }
 
@@ -95,10 +96,6 @@ export async function runPersonalDataImporter(zipFile) {
         zipFile,
         pod: new MockPod(),
     });
-}
-
-export async function runPersonalDataImporter(zipFile) {
-    return runSingleImporter(PersonalDataImporter, zipFile);
 }
 
 export async function runMessagesImporter(zipFile) {
