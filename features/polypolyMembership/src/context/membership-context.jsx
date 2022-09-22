@@ -42,12 +42,12 @@ export const MembershipContextProvider = ({ children }) => {
         });
     }, []);
 
-    //on history change
+    //on navigation change
     useEffect(() => {
         if (!pod) return;
         updatePodNavigation(pod, navigate, handleBack, location);
         updateTitle(pod, location);
-    });
+    }, [pod, location]);
 
     return (
         <MembershipContext.Provider
