@@ -61,6 +61,7 @@ export async function runImporter({ importerClass, zipFile, pod, account }) {
             account,
             facebookAccount: account,
         });
+
         //Currently we have to do this check as not all importers return a result even when
         //executing successfully. We can go back to destructuring after all importers have been changed
         return {
@@ -70,6 +71,7 @@ export async function runImporter({ importerClass, zipFile, pod, account }) {
                 executionTime: telemetry.elapsedTime(),
             }),
             result: response?.result,
+            importedFileNames: response?.importedFileNames,
         };
     } catch (error) {
         return {
