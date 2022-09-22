@@ -11,6 +11,7 @@ import { extractAccountDataFromUrl } from "./utils/url-processing";
 export const RECENTLY_VIEWED_FILE_PATH =
     "your_interactions_on_facebook/recently_viewed.json";
 export const RECENTLY_VIEWED_DATA_KEY = "recently_viewed";
+export const RECENTLY_VIEWED_STORAGE_KEY = "recentlyViewedAds";
 
 /**
  * Extract ad views from the export.

@@ -4,6 +4,7 @@ import { readJSONDataArray } from "./utils/importer-util.js";
 export const LANGUAGE_AND_LOCALE_FILE_PATH =
     "preferences/language_and_locale.json";
 export const LANGUAGE_AND_LOCALE_DATA_KEY = "language_and_locale_v2";
+export const LANGUAGE_AND_LOCALE_STORAGE_KEY = "languageAndLocale";
 
 /**
  * Attempt to extract the language set by the user in the profile.

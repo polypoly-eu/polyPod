@@ -3,6 +3,7 @@ import { readJSONDataObject } from "./utils/importer-util.js";
 export const PROFILE_INFORMATION_FILE_PATH =
     "profile_information/profile_information.json";
 export const PROFILE_INFORMATION_DATA_KEY = "profile_v2";
+export const PERSONAL_DATA_STORAGE_KEY = "personalData";
 
 export default class PersonalDataImporter {
     async _readLanguageData(zipFile) {

@@ -10,7 +10,7 @@ export default class DataAccount {
     }
 
     async import({ importers, zipFile, pod }) {
-        for (let [attr, importerClass] of Object.entries(importers)) {
+        for (let { storageKey, importerClass } of importers) {
             let { result, report, importedFileNames } = await runImporter({
                 importerClass,
                 zipFile,
@@ -21,7 +21,7 @@ export default class DataAccount {
             this.importingReports.push(report);
             for (let name of importedFileNames || [])
                 this.addImportedFileName(name);
-            if (result) this[attr] = result;
+            if (result) this[storageKey] = result;
         }
         return this;
     }
