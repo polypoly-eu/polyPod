@@ -26,7 +26,7 @@ function updateTitle(pod, location) {
 
 export const MembershipContextProvider = ({ children }) => {
     const [pod, setPod] = useState(null);
-    const location = useLocation();
+    const podLocation = useLocation();
     const navigate = useNavigate();
 
     function handleBack() {
@@ -45,9 +45,9 @@ export const MembershipContextProvider = ({ children }) => {
     //on history change
     useEffect(() => {
         if (!pod) return;
-        updatePodNavigation(pod, navigate, handleBack, location);
-        updateTitle(pod, location);
-    });
+        updatePodNavigation(pod, navigate, handleBack, podLocation);
+        updateTitle(pod, podLocation);
+    }, [pod, podLocation]);
 
     return (
         <MembershipContext.Provider
