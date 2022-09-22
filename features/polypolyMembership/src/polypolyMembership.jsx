@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { MemoryRouter as Router, Routes, Route } from "react-router-dom";
+import { MemoryRouter, Routes, Route } from "react-router-dom";
 
 import Onboarding from "./views/onboarding.jsx";
 import Overview from "./views/overview.jsx";
@@ -11,7 +11,7 @@ import "./styles.css";
 
 const PolypolyMembership = () => {
     return (
-        <Router>
+        <MemoryRouter>
             <MembershipContextProvider>
                 <div className="poly-nav-bar-separator-overlay" />
                 <div className="feature-container membership">
@@ -22,7 +22,7 @@ const PolypolyMembership = () => {
                     </Routes>
                 </div>
             </MembershipContextProvider>
-        </Router>
+        </MemoryRouter>
     );
 };
 
