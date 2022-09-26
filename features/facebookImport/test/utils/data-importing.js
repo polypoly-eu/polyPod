@@ -73,7 +73,7 @@ export async function runAdInterestsImporter(zipFile) {
 }
 
 export async function runConnectedAdvertisersImporter(zipFile) {
-    return runSingleOutdatedImporter(ConnectedAdvertisersImporter, zipFile);
+    return runSingleImporter(ConnectedAdvertisersImporter, zipFile);
 }
 
 export async function runConnectedAdvertisersWithAllTypesImporter(zipFile) {
