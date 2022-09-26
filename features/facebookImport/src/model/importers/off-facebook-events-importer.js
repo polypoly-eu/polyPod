@@ -17,11 +17,12 @@ export default class OffFacebookEventsImporter extends DirectKeyDataImporter {
         );
     }
 
-    async import({ zipFile, facebookAccount }) {
-        await super.import({ zipFile, facebookAccount });
+    async import({ zipFile }) {
+        const response = await super.import({ zipFile });
+        if (!response) return;
 
-        const rawData = facebookAccount.offFacebookCompanies;
-        let uknonwnKeys = new Set();
+        const rawData = response.result;
+        let unknownKeys = new Set();
         // TODO: expand this check; The current one is just a toy example
         for (const companyRawData of rawData) {
             for (const eventRawData of companyRawData.events) {
@@ -29,19 +30,23 @@ export default class OffFacebookEventsImporter extends DirectKeyDataImporter {
                     (each) => !OffFacebookEventFields.includes(each)
                 );
                 for (const unexpectedKey of unexpectedKeys) {
-                    uknonwnKeys.add(unexpectedKey);
+                    unknownKeys.add(unexpectedKey);
                 }
             }
         }
 
-        if (uknonwnKeys.size > 0) {
-            return new Status({
-                name: statusTypes.warning,
-                message: `Unexpected keys: ${Array.from(uknonwnKeys).join(
-                    " "
-                )}`,
-            });
+        if (unknownKeys.size > 0) {
+            return {
+                ...response,
+                status: new Status({
+                    name: statusTypes.warning,
+                    message: `Unexpected keys: ${Array.from(unknownKeys).join(
+                        " "
+                    )}`,
+                }),
+            };
         }
+        return response;
     }
 }
 
