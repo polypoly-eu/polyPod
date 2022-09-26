@@ -128,7 +128,7 @@ export async function runInteractedWithAdvertisersImporter(zipFile) {
 }
 
 export async function runCommentsImporter(zipFile) {
-    return runSingleOutdatedImporter(CommentsImporter, zipFile);
+    return runSingleImporter(CommentsImporter, zipFile);
 }
 
 export async function runPostReactionsImporter(zipFile) {

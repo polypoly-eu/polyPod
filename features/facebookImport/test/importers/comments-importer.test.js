@@ -21,8 +21,8 @@ describe("Import comments from empty export", () => {
     });
 
     it("triggers missing files error", async () => {
-        const { result } = await runCommentsImporter(zipFile);
-        expectMissingFileError(result, CommentsImporter);
+        const { report } = await runCommentsImporter(zipFile);
+        expectMissingFileError(report, CommentsImporter);
     });
 });
 
@@ -33,24 +33,22 @@ describe("Import searches from empty export with wrong data key", () => {
     });
 
     it("triggers missing data key error", async () => {
-        const { result } = await runCommentsImporter(zipFile);
-        expectInvalidContentError(result, CommentsImporter);
+        const { report } = await runCommentsImporter(zipFile);
+        expectInvalidContentError(report, CommentsImporter);
     });
 });
 
 describe("Import comments", () => {
     let result = null;
-    let facebookAccount = null;
+    let report = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithComments();
-        ({ result, facebookAccount } = await runCommentsImporter(zipFile));
+        ({ result, report } = await runCommentsImporter(zipFile));
     });
 
-    it("returns success status", () => expectImportSuccess(result));
+    it("returns success status", () => expectImportSuccess(report));
 
     it("has correct number of entities", () =>
-        expect(facebookAccount.comments.length).toBe(
-            DATASET_EXPECTED_VALUES.numberOfComments
-        ));
+        expect(result.length).toBe(DATASET_EXPECTED_VALUES.numberOfComments));
 });
