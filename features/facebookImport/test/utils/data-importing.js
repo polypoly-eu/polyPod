@@ -121,10 +121,7 @@ export async function runSearchesImporter(zipFile) {
 }
 
 export async function runInteractedWithAdvertisersImporter(zipFile) {
-    return runSingleOutdatedImporter(
-        InteractedWithAdvertisersImporter,
-        zipFile
-    );
+    return runSingleImporter(InteractedWithAdvertisersImporter, zipFile);
 }
 
 export async function runCommentsImporter(zipFile) {
