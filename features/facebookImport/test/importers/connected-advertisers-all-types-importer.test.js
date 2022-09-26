@@ -22,10 +22,10 @@ describe("Import connected advertisers with all types from empty export", () => 
     });
 
     it("triggers missing files error", async () => {
-        const { result } = await runConnectedAdvertisersWithAllTypesImporter(
+        const { report } = await runConnectedAdvertisersWithAllTypesImporter(
             zipFile
         );
-        expectMissingFileError(result, ConnectedAdvertisersAllTypesImporter);
+        expectMissingFileError(report, ConnectedAdvertisersAllTypesImporter);
     });
 });
 
@@ -38,39 +38,38 @@ describe("Import connected advertisers with all types from empty export with wro
     });
 
     it("triggers missing data key error", async () => {
-        const { result } = await runConnectedAdvertisersWithAllTypesImporter(
+        const { report } = await runConnectedAdvertisersWithAllTypesImporter(
             zipFile
         );
-        expectInvalidContentError(result, ConnectedAdvertisersAllTypesImporter);
+        expectInvalidContentError(report, ConnectedAdvertisersAllTypesImporter);
     });
 });
 
 describe("Import connected advertisers with all types", () => {
     let result = null;
-    let facebookAccount = null;
+    let report = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithConnectedAdvertisersAllTypes();
-        ({ result, facebookAccount } =
-            await runConnectedAdvertisersWithAllTypesImporter(zipFile));
+        ({ result, report } = await runConnectedAdvertisersWithAllTypesImporter(
+            zipFile
+        ));
     });
 
-    it("returns success status", () => expectImportSuccess(result));
+    it("returns success status", () => expectImportSuccess(report));
 
     it("has correct number of entities", () =>
-        expect(facebookAccount.connectedAdvertisers.length).toBe(
+        expect(result.length).toBe(
             DATASET_EXPECTED_VALUES.numberOfConnectedAdvertisers
         ));
 
     it("has correct properties in entities", () => {
-        const obtainedData = facebookAccount.connectedAdvertisers.map(
-            (connectedAdvertiser) => [
-                connectedAdvertiser.name,
-                connectedAdvertiser.hasDataFileCustomAudience,
-                connectedAdvertiser.hasRemarketingCustomAudience,
-                connectedAdvertiser.hasInPersonStoreVisitme,
-            ]
-        );
+        const obtainedData = result.map((connectedAdvertiser) => [
+            connectedAdvertiser.name,
+            connectedAdvertiser.hasDataFileCustomAudience,
+            connectedAdvertiser.hasRemarketingCustomAudience,
+            connectedAdvertiser.hasInPersonStoreVisitme,
+        ]);
         expect(obtainedData).toStrictEqual(
             CONNECTED_ADVERTISERS_DATA_SPECIFICATION
         );

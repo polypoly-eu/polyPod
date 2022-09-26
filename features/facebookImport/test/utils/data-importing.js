@@ -77,10 +77,7 @@ export async function runConnectedAdvertisersImporter(zipFile) {
 }
 
 export async function runConnectedAdvertisersWithAllTypesImporter(zipFile) {
-    return runSingleOutdatedImporter(
-        ConnectedAdvertisersAllTypesImporter,
-        zipFile
-    );
+    return runSingleImporter(ConnectedAdvertisersAllTypesImporter, zipFile);
 }
 
 export async function runLanguageAndLocaleImporter(zipFile) {
@@ -108,7 +105,7 @@ export async function runRecentlyViewedAdsImporter(zipFile) {
 }
 
 export async function runOffFacebookEventsImporter(zipFile) {
-    return runSingleOutdatedImporter(OffFacebookEventsImporter, zipFile);
+    return runSingleImporter(OffFacebookEventsImporter, zipFile);
 }
 
 export async function runFriendsImporter(zipFile) {
@@ -135,7 +132,7 @@ export async function runCommentsImporter(zipFile) {
 }
 
 export async function runPostReactionsImporter(zipFile) {
-    return runSingleOutdatedImporter(PostReactionsImporter, zipFile);
+    return runSingleImporter(PostReactionsImporter, zipFile);
 }
 
 export async function runPostsImporter(zipFile) {
