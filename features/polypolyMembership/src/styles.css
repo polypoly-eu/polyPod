@@ -53,7 +53,7 @@
   }
 
   .membership h1 {
-    font-family: "PolyDisplay SemiSharp";
+    font-family: var(--poly-display);
     font-size: var(--font-size-xxl);
     font-weight: 600;
     line-height: 120%;
