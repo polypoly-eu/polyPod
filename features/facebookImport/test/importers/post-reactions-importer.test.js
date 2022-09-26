@@ -21,9 +21,9 @@ describe("Import post reactions from empty export", () => {
     });
 
     it("triggers missing files error", async () => {
-        const { result } = await runPostReactionsImporter(zipFile);
+        const { report } = await runPostReactionsImporter(zipFile);
 
-        expectMissingFileError(result, PostReactionsImporter);
+        expectMissingFileError(report, PostReactionsImporter);
     });
 });
 
@@ -35,24 +35,24 @@ describe("Import post reactions from export with wrong data key", () => {
     });
 
     it("triggers missing data key error", async () => {
-        const { result } = await runPostReactionsImporter(zipFile);
-        expectInvalidContentError(result, PostReactionsImporter);
+        const { report } = await runPostReactionsImporter(zipFile);
+        expectInvalidContentError(report, PostReactionsImporter);
     });
 });
 
 describe("Import post reactions", () => {
     let result = null;
-    let facebookAccount = null;
+    let report = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithPostReactions();
-        ({ facebookAccount, result } = await runPostReactionsImporter(zipFile));
+        ({ report, result } = await runPostReactionsImporter(zipFile));
     });
 
-    it("returns success status", () => expectImportSuccess(result));
+    it("returns success status", () => expectImportSuccess(report));
 
     it("has corrent number of entities", () =>
-        expect(facebookAccount.postReactions.length).toBe(
+        expect(result.length).toBe(
             DATASET_EXPECTED_VALUES.numberOfPostsReactions
         ));
 });

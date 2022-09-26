@@ -1,6 +1,6 @@
 import { ZipFileMock } from "../../mocks/zipfile-mock";
 import { zipWithWrongDatasetKey } from "../../utils/data-creation";
-import { runSingleOutdatedImporter } from "../../utils/data-importing";
+import { runSingleImporter } from "../../utils/data-importing";
 import {
     expectImportSuccess,
     expectInvalidContentError,
@@ -13,11 +13,11 @@ export const defineEventImportersTestsForDatasets = (targetDatasets) => {
             "using importer %s",
             async (importerName, importerClass) => {
                 const zipFile = new ZipFileMock();
-                const { result } = await runSingleOutdatedImporter(
+                const { report } = await runSingleImporter(
                     importerClass,
                     zipFile
                 );
-                expectMissingFileError(result, importerClass);
+                expectMissingFileError(report, importerClass);
             }
         );
     });
@@ -27,11 +27,11 @@ export const defineEventImportersTestsForDatasets = (targetDatasets) => {
             "using importer %s",
             async (importerName, importerClass, dataFileName) => {
                 const zipFile = zipWithWrongDatasetKey(dataFileName);
-                const { result } = await runSingleOutdatedImporter(
+                const { report } = await runSingleImporter(
                     importerClass,
                     zipFile
                 );
-                expectInvalidContentError(result, importerClass);
+                expectInvalidContentError(report, importerClass);
             }
         );
     });
@@ -46,14 +46,14 @@ export const defineEventImportersTestsForDatasets = (targetDatasets) => {
                 dataKey,
                 { zipFile, expectedValues }
             ) => {
-                const { result, facebookAccount } =
-                    await runSingleOutdatedImporter(importerClass, zipFile);
-
-                expectImportSuccess(result);
-
-                expect(facebookAccount[dataKey].length).toBe(
-                    expectedValues.totalEventsCount
+                const { result, report } = await runSingleImporter(
+                    importerClass,
+                    zipFile
                 );
+
+                expectImportSuccess(report);
+
+                expect(result.length).toBe(expectedValues.totalEventsCount);
             }
         );
     });
