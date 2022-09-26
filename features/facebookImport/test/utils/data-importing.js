@@ -69,7 +69,7 @@ export async function runSingleOutdatedImporter(importerClass, zipFile) {
 }
 
 export async function runAdInterestsImporter(zipFile) {
-    return runSingleOutdatedImporter(AdInterestsImporter, zipFile);
+    return runSingleImporter(AdInterestsImporter, zipFile);
 }
 
 export async function runConnectedAdvertisersImporter(zipFile) {
