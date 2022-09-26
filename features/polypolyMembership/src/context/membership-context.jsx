@@ -9,7 +9,7 @@ function updatePodNavigation(pod, handleBack, location) {
     pod.polyNav.actions = {
         back: () => handleBack(),
     };
-    location.pathname !== "/onboarding"
+    location.pathname !== "/onboarding" && location.pathname !== "/"
         ? pod.polyNav.setActiveActions(["back"])
         : pod.polyNav.setActiveActions([]);
 }
