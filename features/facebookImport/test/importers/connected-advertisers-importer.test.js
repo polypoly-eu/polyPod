@@ -47,9 +47,7 @@ describe("Import connected advertisers", () => {
 
     beforeAll(async () => {
         const zipFile = zipFileWithConnectedAdvertisers();
-        ({ result, report } = await runConnectedAdvertisersImporter(
-            zipFile
-        ));
+        ({ result, report } = await runConnectedAdvertisersImporter(zipFile));
     });
 
     it("returns success status", () => expectImportSuccess(report));
