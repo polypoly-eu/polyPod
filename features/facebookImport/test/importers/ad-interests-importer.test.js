@@ -21,8 +21,8 @@ describe("Import ad interests from empty export", () => {
     });
 
     it("triggers missing files error", async () => {
-        const { result } = await runAdInterestsImporter(zipFile);
-        expectMissingFileError(result, AdInterestsImporter);
+        const { report } = await runAdInterestsImporter(zipFile);
+        expectMissingFileError(report, AdInterestsImporter);
     });
 });
 
@@ -33,24 +33,22 @@ describe("Import ad interests from empty export with wrong data key", () => {
     });
 
     it("triggers missing data key error", async () => {
-        const { result } = await runAdInterestsImporter(zipFile);
-        expectInvalidContentError(result, AdInterestsImporter);
+        const { report } = await runAdInterestsImporter(zipFile);
+        expectInvalidContentError(report, AdInterestsImporter);
     });
 });
 
 describe("Import ad interests", () => {
     let result = null;
-    let facebookAccount = null;
+    let report = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithAdInterests();
-        ({ result, facebookAccount } = await runAdInterestsImporter(zipFile));
+        ({ result, report } = await runAdInterestsImporter(zipFile));
     });
 
-    it("returns success status", () => expectImportSuccess(result));
+    it("returns success status", () => expectImportSuccess(report));
 
     it("has correct number of entities", () =>
-        expect(facebookAccount.adInterests.length).toBe(
-            DATASET_EXPECTED_VALUES.numberOfInterests
-        ));
+        expect(result.length).toBe(DATASET_EXPECTED_VALUES.numberOfInterests));
 });
