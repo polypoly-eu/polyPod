@@ -20,12 +20,12 @@
 
 @font-face {
   font-family: "PolyDisplay Semi";
-  src: url("../fonts/polyDisplay-Semi10.ttf");
+  src: url("../fonts/polydisplay_semi.ttf");
 }
 
 @font-face {
   font-family: "PolyDisplay SemiSharp";
-  src: url("../fonts/polyDisplay-SemiSharp10.ttf");
+  src: url("../fonts/polydisplay_semisharp.ttf");
 }
 
 :root {
