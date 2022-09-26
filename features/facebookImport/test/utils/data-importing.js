@@ -117,7 +117,7 @@ export async function runLikedPagesImporter(zipFile) {
 }
 
 export async function runSearchesImporter(zipFile) {
-    return runSingleOutdatedImporter(SearchesImporter, zipFile);
+    return runSingleImporter(SearchesImporter, zipFile);
 }
 
 export async function runInteractedWithAdvertisersImporter(zipFile) {
