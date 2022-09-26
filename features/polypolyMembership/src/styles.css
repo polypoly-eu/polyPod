@@ -40,6 +40,8 @@
     --pl-button-color-text-secondary: var(--theme-secondary-color);
     --pl-screen-color-fill: var(--theme-tertiary-color);
     --theme-info-button-color: var(--color-gray-300);
+    --poly-display: "PolyDisplay Semi";
+    --poly-display-sharp: "PolyDisplay SemiSharp";
   }
 
   .membership {
