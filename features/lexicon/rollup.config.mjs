@@ -81,7 +81,7 @@ export default {
                     dest: "public",
                 },
                 {
-                    src: ["src/static/fonts/*"],
+                    src: ["src/static/fonts/jost*"],
                     dest: "public/fonts",
                 },
             ],
