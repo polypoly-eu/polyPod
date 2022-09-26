@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 export const MembershipContext = React.createContext();
 
-function updatePodNavigation(pod, navigate, handleBack, location) {
+function updatePodNavigation(pod, handleBack, location) {
     pod.polyNav.actions = {
         back: () => handleBack(),
     };
@@ -45,7 +45,7 @@ export const MembershipContextProvider = ({ children }) => {
     //on navigation change
     useEffect(() => {
         if (!pod) return;
-        updatePodNavigation(pod, navigate, handleBack, location);
+        updatePodNavigation(pod, handleBack, location);
         updateTitle(pod, location);
     }, [pod, location]);
 
