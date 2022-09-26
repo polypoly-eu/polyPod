@@ -18,6 +18,16 @@
   src: url("../fonts/jost_bold.ttf");
 }
 
+@font-face {
+  font-family: "PolyDisplay Semi";
+  src: url("../fonts/polyDisplay-Semi10.woff");
+}
+
+@font-face {
+  font-family: "PolyDisplay SemiSharp";
+  src: url("../fonts/polyDisplay-SemiSharp10.woff");
+}
+
 :root {
     --theme-primary-color: var(--color-red-300);
     --theme-secondary-color: var(--color-indigo-950);
@@ -43,6 +53,7 @@
   }
 
   .membership h1 {
+    font-family: "PolyDisplay SemiSharp";
     font-size: var(--font-size-xxl);
     font-weight: 600;
     line-height: 120%;
