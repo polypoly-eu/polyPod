@@ -9,7 +9,7 @@ function updatePodNavigation(pod, navigate, handleBack, location) {
     pod.polyNav.actions = {
         back: () => handleBack(),
     };
-    navigate.length > 1 && location.pathname !== "/onboarding"
+    location.pathname !== "/onboarding"
         ? pod.polyNav.setActiveActions(["back"])
         : pod.polyNav.setActiveActions([]);
 }
@@ -30,7 +30,7 @@ export const MembershipContextProvider = ({ children }) => {
     const navigate = useNavigate();
 
     function handleBack() {
-        navigate.length > 1 && navigate(-1);
+        navigate(-1);
     }
 
     const initPod = async () => await window.pod;
