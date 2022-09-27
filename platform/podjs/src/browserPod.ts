@@ -15,7 +15,7 @@ import type {
 import { dataFactory, PolyUri, isPolypodUri } from "@polypoly-eu/api";
 import * as RDF from "rdf-js";
 import * as zip from "@zip.js/zip.js";
-import endpointsJson from "../../../../polyPod-config/endpoints.json";
+import endpointsJson from "../../../assets/config/endpoints.json";
 import { Manifest, readManifest } from "./manifest";
 import initOxigraph, * as oxigraph from "../node_modules/oxigraph/web.js";
 import oxigraphWasmModule from "oxigraph/web_bg.wasm";

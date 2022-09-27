@@ -6,7 +6,7 @@
     ],
     "target": "es6",
     "outDir": "./dist",
-    "rootDirs": ["./src",  "../../../polyPod-config/*.json"],
+    "rootDirs": ["./src",  "../../assets/config/*.json"],
     "module": "commonjs",
     "declaration": true,
     "strict": true,
