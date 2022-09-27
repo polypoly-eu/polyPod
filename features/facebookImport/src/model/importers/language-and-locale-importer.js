@@ -76,3 +76,5 @@ export default class LanguageAndLocaleImporter {
         }
     }
 }
+
+LanguageAndLocaleImporter.STORAGE_KEY = "languageAndLocale";

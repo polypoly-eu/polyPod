@@ -14,3 +14,5 @@ export default class LikedPagesImporter extends DirectKeyDataImporter {
         );
     }
 }
+
+LikedPagesImporter.STORAGE_KEY = "likedPages";

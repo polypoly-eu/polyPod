@@ -9,3 +9,5 @@ export default class FriendsImporter extends DirectKeyDataImporter {
         super(FRIENDS_FILE_PATH, FRIENDS_DATA_KEY, FRIENDS_STORAGE_KEY);
     }
 }
+
+FriendsImporter.STORAGE_KEY = "friends";

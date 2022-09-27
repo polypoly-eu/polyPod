@@ -28,3 +28,5 @@ export default class PersonalDataImporter {
         };
     }
 }
+
+PersonalDataImporter.STORAGE_KEY = "personalData";

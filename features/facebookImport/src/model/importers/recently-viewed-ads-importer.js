@@ -133,3 +133,5 @@ export default class RecentlyViewedAdsImporter {
         facebookAccount.addRelatedAccounts(this._accountsByUrl.values());
     }
 }
+
+RecentlyViewedAdsImporter.STORAGE_KEY = "recentlyViewedAds";
