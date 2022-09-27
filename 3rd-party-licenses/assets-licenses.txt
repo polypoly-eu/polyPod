@@ -490,7 +490,7 @@ public licenses.
 Creative Commons may be contacted at creativecommons.org.
 
 --------------------------------------------------------------------------------
-polyDisplay (polyDisplay-Semi1.0) and polyDisplay Sharp (polyDisplay-SemiSharp1.0)
+polyDisplay (polydisplay_semi) and polyDisplay Sharp (polydisplay_semisharp)
 --------------------------------------------------------------------------------
 
 Design: polypoly, Nicolas Bourquin \ www.polypoly.com
