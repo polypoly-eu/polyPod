@@ -1564,6 +1564,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "update_notification"
+version = "0.1.0"
+
+[[package]]
 name = "url"
 version = "2.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
