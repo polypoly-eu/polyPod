@@ -95,13 +95,14 @@ const ExploreView = () => {
                     {ministory.render()}
                 </>
             );
+
             return ministory.hasDetails() ? (
                 <RoutingWrapper
                     key={index}
                     history={history}
                     route="/explore/details"
                     stateChange={{
-                        ActiveStoryClass: ministory.constructor.name,
+                        activeStory: ministory,
                     }}
                 >
                     <ClickableCard
