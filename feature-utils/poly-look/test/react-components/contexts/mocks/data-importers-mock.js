@@ -3,6 +3,4 @@ class MockImporter {
     return true;
   }
 }
-export const mockDataImporters = [
-  { importerClass: MockImporter, storageKey: "mock" },
-];
+export const mockDataImporters = [MockImporter];
