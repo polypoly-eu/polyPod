@@ -122,10 +122,8 @@ open class Network(val context: Context) {
                 connection.inputStream.bufferedReader().use { it.readText() }
         } finally {
             connection.disconnect()
-            return@withContext response
         }
-        @Suppress("UNREACHABLE_CODE")
-        return@withContext response // unreachable code needed for return type inference
+        return@withContext response
     }
 
     open suspend fun httpGet(
