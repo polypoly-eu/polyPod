@@ -3,13 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Screen, PolyButton, FixedFooter } from "@polypoly-eu/poly-look";
 import i18n from "!silly-i18n";
 
-import "./onboarding.css";
-
 const Onboarding = () => {
     const navigate = useNavigate();
 
     const handleNavigation = () => {
-        navigate("/overview");
+        navigate("/login");
     };
 
     const handleOpenUrl = () => {

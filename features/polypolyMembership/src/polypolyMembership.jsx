@@ -4,6 +4,7 @@ import { MemoryRouter, Routes, Route } from "react-router-dom";
 
 import Onboarding from "./views/onboarding.jsx";
 import Overview from "./views/overview.jsx";
+import Login from "./views/login.jsx";
 
 import { MembershipContextProvider } from "./context/membership-context.jsx";
 
@@ -18,6 +19,7 @@ const PolypolyMembership = () => {
                     <Routes>
                         <Route path="/" exact element={<Onboarding />} />
                         <Route path="/onboarding" element={<Onboarding />} />
+                        <Route path="/login" element={<Login />} />
                         <Route path="/overview" element={<Overview />} />
                     </Routes>
                 </div>
