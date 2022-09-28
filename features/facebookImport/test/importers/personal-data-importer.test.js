@@ -89,7 +89,6 @@ test("PersonalDataImporter - importedFileName returned correctly", async () => {
         zipFile
     );
 
-    console.log(report);
     expectImportSuccess(report);
     expect(importedFileNames).toStrictEqual([PROFILE_INFORMATION_FILE_PATH]);
 });
