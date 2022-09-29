@@ -6,7 +6,7 @@ export const CONNECTED_ADVERTISERS_ALL_TYPES_FILE_PATH =
 export const CONNECTED_ADVERTISERS_ALL_TYPES_DATA_KEY =
     "custom_audiences_all_types_v2";
 export const CONNECTED_ADVERTISERS_ALL_TYPES_STORAGE_KEY =
-    "connectedAdvertisersAllTypes";
+    "connectedAdvertisers";
 
 export default class ConnectedAdvertisersAllTypesImporter extends DirectKeyDataImporter {
     constructor() {
