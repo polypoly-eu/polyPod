@@ -37,13 +37,16 @@ export default class OffFacebookEventsImporter extends DirectKeyDataImporter {
 
         if (unknownKeys.size > 0) {
             return {
-                ...response,
-                status: new Status({
-                    name: statusTypes.warning,
-                    message: `Unexpected keys: ${Array.from(unknownKeys).join(
-                        " "
-                    )}`,
-                }),
+                result: response?.result,
+                report: {
+                    ...response?.report,
+                    status: new Status({
+                        name: statusTypes.warning,
+                        message: `Unexpected keys: ${Array.from(
+                            unknownKeys
+                        ).join(" ")}`,
+                    }),
+                },
             };
         }
         return response;
