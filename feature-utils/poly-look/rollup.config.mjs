@@ -26,7 +26,7 @@ export default {
     copy({
       targets: [
         {
-          src: ["src/static/fonts/*"],
+          src: ["src/static/fonts/jost*"],
           dest: "dist/fonts",
         },
       ],
