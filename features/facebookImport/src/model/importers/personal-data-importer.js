@@ -13,7 +13,7 @@ export default class PersonalDataImporter {
         );
     }
 
-    async import({ zipFile, facebookAccount }) {
+    async import({ zipFile }) {
         const profileData = await this._readLanguageData(zipFile);
         const name = {
             givenName: profileData.name.first_name,
@@ -21,7 +21,6 @@ export default class PersonalDataImporter {
             lastName: profileData.name.last_name,
         };
 
-        const personalData = { name };
-        facebookAccount.personalData = personalData;
+        return { result: { name } };
     }
 }

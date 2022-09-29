@@ -1,6 +1,6 @@
 import { ZipFileMock } from "../../mocks/zipfile-mock";
 import { zipWithWrongDatasetKey } from "../../utils/data-creation";
-import { runSingleImporter } from "../../utils/data-importing";
+import { runSingleOutdatedImporter } from "../../utils/data-importing";
 import {
     expectImportSuccess,
     expectInvalidContentError,
@@ -13,7 +13,7 @@ export const defineEventImportersTestsForDatasets = (targetDatasets) => {
             "using importer %s",
             async (importerName, importerClass) => {
                 const zipFile = new ZipFileMock();
-                const { result } = await runSingleImporter(
+                const { result } = await runSingleOutdatedImporter(
                     importerClass,
                     zipFile
                 );
@@ -27,7 +27,7 @@ export const defineEventImportersTestsForDatasets = (targetDatasets) => {
             "using importer %s",
             async (importerName, importerClass, dataFileName) => {
                 const zipFile = zipWithWrongDatasetKey(dataFileName);
-                const { result } = await runSingleImporter(
+                const { result } = await runSingleOutdatedImporter(
                     importerClass,
                     zipFile
                 );
@@ -46,10 +46,8 @@ export const defineEventImportersTestsForDatasets = (targetDatasets) => {
                 dataKey,
                 { zipFile, expectedValues }
             ) => {
-                const { result, facebookAccount } = await runSingleImporter(
-                    importerClass,
-                    zipFile
-                );
+                const { result, facebookAccount } =
+                    await runSingleOutdatedImporter(importerClass, zipFile);
 
                 expectImportSuccess(result);
 

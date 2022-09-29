@@ -3,8 +3,8 @@ import OffFacebookEventsImporter from "../src/model/importers/off-facebook-event
 import RecentlyViewedAdsImporter from "../src/model/importers/recently-viewed-ads-importer";
 import { toUnixTimestamp } from "../src/model/importers/utils/timestamps";
 import { zipFileWithOnOffFacebookCompanyMatches } from "./datasets/on-off-events-comparison-data";
-import { runMultipleImporters } from "./utils/data-importing";
-import { expectAllResultsSuccess } from "./utils/importer-assertions";
+import { runMultipleOutdatedImporters } from "./utils/data-importing";
+import { expectAllReportsSuccess } from "./utils/importer-assertions";
 
 describe("Matching on and off facebook event data", () => {
     let zipFile = null;
@@ -15,7 +15,7 @@ describe("Matching on and off facebook event data", () => {
     beforeAll(async () => {
         zipFile = zipFileWithOnOffFacebookCompanyMatches();
 
-        const importingResult = await runMultipleImporters(
+        const importingResult = await runMultipleOutdatedImporters(
             [OffFacebookEventsImporter, RecentlyViewedAdsImporter],
             zipFile
         );
@@ -25,7 +25,7 @@ describe("Matching on and off facebook event data", () => {
             linkRelatedAccountsWithOffFacebookCompanies(facebookAccount);
     });
 
-    it("imports all data correctly", () => expectAllResultsSuccess(results));
+    it("imports all data correctly", () => expectAllReportsSuccess(results));
 
     it("has correct number of related accounts", () =>
         expect(facebookAccount.relatedAccountsCount).toBe(6));
