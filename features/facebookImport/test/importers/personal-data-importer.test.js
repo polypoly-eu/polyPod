@@ -85,11 +85,10 @@ test("PersonalDataImporter - importedFileName returned correctly", async () => {
     const profileData = createProfileData("John🦊", "José", "Döe");
     zipFile.addJsonEntry(profileInformationFileName, profileData);
 
-    const { report, importedFileNames } = await runPersonalDataImporter(
+    const { report } = await runPersonalDataImporter(
         zipFile
     );
 
-    console.log(report);
     expectImportSuccess(report);
-    expect(importedFileNames).toStrictEqual([PROFILE_INFORMATION_FILE_PATH]);
+    expect(report.importedFileNames).toStrictEqual([PROFILE_INFORMATION_FILE_PATH]);
 });

@@ -23,7 +23,7 @@ export default class PersonalDataImporter {
 
         return {
             result: { name },
-            importedFileNames: [PROFILE_INFORMATION_FILE_PATH],
+            report: { importedFileNames: [PROFILE_INFORMATION_FILE_PATH] },
         };
     }
 }
