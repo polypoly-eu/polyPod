@@ -21,6 +21,9 @@ export default class PersonalDataImporter {
             lastName: profileData.name.last_name,
         };
 
-        return { result: { name } };
+        return {
+            result: { name },
+            report: { importedFileNames: [PROFILE_INFORMATION_FILE_PATH] },
+        };
     }
 }

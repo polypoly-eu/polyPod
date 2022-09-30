@@ -19,6 +19,8 @@ export default class DataAccount {
                 account: this,
             });
             this.importingReports.push(report);
+            for (let name of report?.importedFileNames || [])
+                this.addImportedFileName(name);
             if (result) this[attr] = result;
         }
         return this;

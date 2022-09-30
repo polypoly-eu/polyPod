@@ -10,10 +10,11 @@ export class Importer {
 }
 
 class ImporterExecutionReport {
-    constructor({ importer, status, executionTime }) {
+    constructor({ importer, status, executionTime, importedFileNames }) {
         this._importer = importer;
         this._status = status || new Status({ name: statusTypes.success });
         this._executionTime = executionTime;
+        this._importedFileNames = importedFileNames;
     }
 
     get importer() {
@@ -26,6 +27,10 @@ class ImporterExecutionReport {
 
     get executionTime() {
         return this._executionTime;
+    }
+
+    get importedFileNames() {
+        return this._importedFileNames;
     }
 
     _extractDataFromStatus(status) {
@@ -61,13 +66,15 @@ export async function runImporter({ importerClass, zipFile, pod, account }) {
             account,
             facebookAccount: account,
         });
+
         //Currently we have to do this check as not all importers return a result even when
         //executing successfully. We can go back to destructuring after all importers have been changed
         return {
             report: new ImporterExecutionReport({
                 importer,
-                status: response?.status,
+                status: response?.report?.status,
                 executionTime: telemetry.elapsedTime(),
+                importedFileNames: response?.report?.importedFileNames,
             }),
             result: response?.result,
         };
