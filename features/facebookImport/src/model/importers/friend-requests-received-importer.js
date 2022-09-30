@@ -14,3 +14,5 @@ export default class ReceivedFriendRequestsImporter extends DirectKeyDataImporte
         );
     }
 }
+
+ReceivedFriendRequestsImporter.STORAGE_KEY = "receivedFriendRequests";

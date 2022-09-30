@@ -14,3 +14,5 @@ export default class UnfollowedPagesImporter extends DirectKeyDataImporter {
         );
     }
 }
+
+UnfollowedPagesImporter.STORAGE_KEY = "unfollowedPages";

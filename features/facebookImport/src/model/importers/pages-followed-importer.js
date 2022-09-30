@@ -14,3 +14,5 @@ export default class FollowedPagesImporter extends DirectKeyDataImporter {
         );
     }
 }
+
+FollowedPagesImporter.STORAGE_KEY = "followedPages";

@@ -27,3 +27,5 @@ export default class ConnectedAdvertisersImporter extends DirectKeyDataImporter 
         );
     }
 }
+
+ConnectedAdvertisersImporter.STORAGE_KEY = "connectedAdvertisers";

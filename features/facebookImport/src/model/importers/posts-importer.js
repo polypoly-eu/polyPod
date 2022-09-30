@@ -14,3 +14,5 @@ export default class PostsImporter extends MultipleFilesImporter {
         });
     }
 }
+
+PostsImporter.STORAGE_KEY = "posts";
