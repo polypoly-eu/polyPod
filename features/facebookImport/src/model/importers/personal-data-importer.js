@@ -16,14 +16,14 @@ export default class PersonalDataImporter {
 
     async import({ zipFile }) {
         const profileData = await this._readLanguageData(zipFile);
-
+        const name = {
+            givenName: profileData.name.first_name,
+            additionalName: profileData.name.middle_name,
+            lastName: profileData.name.last_name,
+        };
         return {
-            result: {
-                givenName: profileData.name.first_name,
-                additionalName: profileData.name.middle_name,
-                lastName: profileData.name.last_name,
-            },
-            importedFileNames: [PROFILE_INFORMATION_FILE_PATH],
+            result: { name },
+            report: { importedFileNames: [PROFILE_INFORMATION_FILE_PATH] },
         };
     }
 }

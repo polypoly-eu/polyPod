@@ -52,7 +52,7 @@ export default (commandLineArgs) => {
                         dest: "dist",
                     },
                     {
-                        src: ["src/static/fonts/*"],
+                        src: ["src/static/fonts/jost*"],
                         dest: "dist/fonts",
                     },
                 ],

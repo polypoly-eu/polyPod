@@ -18,6 +18,16 @@
   src: url("../fonts/jost_bold.ttf");
 }
 
+@font-face {
+  font-family: "PolyDisplay Semi";
+  src: url("../fonts/polydisplay_semi.ttf");
+}
+
+@font-face {
+  font-family: "PolyDisplay SemiSharp";
+  src: url("../fonts/polydisplay_semisharp.ttf");
+}
+
 :root {
     --theme-primary-color: var(--color-red-300);
     --theme-secondary-color: var(--color-indigo-950);
@@ -30,6 +40,8 @@
     --pl-button-color-text-secondary: var(--theme-secondary-color);
     --pl-screen-color-fill: var(--theme-tertiary-color);
     --theme-info-button-color: var(--color-gray-300);
+    --poly-display: "PolyDisplay Semi";
+    --poly-display-sharp: "PolyDisplay SemiSharp";
   }
 
   .membership {
@@ -43,6 +55,7 @@
   }
 
   .membership h1 {
+    font-family: var(--poly-display);
     font-size: var(--font-size-xxl);
     font-weight: 600;
     line-height: 120%;

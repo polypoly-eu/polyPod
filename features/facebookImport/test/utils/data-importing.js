@@ -69,15 +69,18 @@ export async function runSingleOutdatedImporter(importerClass, zipFile) {
 }
 
 export async function runAdInterestsImporter(zipFile) {
-    return runSingleImporter(AdInterestsImporter, zipFile);
+    return runSingleOutdatedImporter(AdInterestsImporter, zipFile);
 }
 
 export async function runConnectedAdvertisersImporter(zipFile) {
-    return runSingleImporter(ConnectedAdvertisersImporter, zipFile);
+    return runSingleOutdatedImporter(ConnectedAdvertisersImporter, zipFile);
 }
 
 export async function runConnectedAdvertisersWithAllTypesImporter(zipFile) {
-    return runSingleImporter(ConnectedAdvertisersAllTypesImporter, zipFile);
+    return runSingleOutdatedImporter(
+        ConnectedAdvertisersAllTypesImporter,
+        zipFile
+    );
 }
 
 export async function runLanguageAndLocaleImporter(zipFile) {
@@ -105,7 +108,7 @@ export async function runRecentlyViewedAdsImporter(zipFile) {
 }
 
 export async function runOffFacebookEventsImporter(zipFile) {
-    return runSingleImporter(OffFacebookEventsImporter, zipFile);
+    return runSingleOutdatedImporter(OffFacebookEventsImporter, zipFile);
 }
 
 export async function runFriendsImporter(zipFile) {
@@ -117,19 +120,22 @@ export async function runLikedPagesImporter(zipFile) {
 }
 
 export async function runSearchesImporter(zipFile) {
-    return runSingleImporter(SearchesImporter, zipFile);
+    return runSingleOutdatedImporter(SearchesImporter, zipFile);
 }
 
 export async function runInteractedWithAdvertisersImporter(zipFile) {
-    return runSingleImporter(InteractedWithAdvertisersImporter, zipFile);
+    return runSingleOutdatedImporter(
+        InteractedWithAdvertisersImporter,
+        zipFile
+    );
 }
 
 export async function runCommentsImporter(zipFile) {
-    return runSingleImporter(CommentsImporter, zipFile);
+    return runSingleOutdatedImporter(CommentsImporter, zipFile);
 }
 
 export async function runPostReactionsImporter(zipFile) {
-    return runSingleImporter(PostReactionsImporter, zipFile);
+    return runSingleOutdatedImporter(PostReactionsImporter, zipFile);
 }
 
 export async function runPostsImporter(zipFile) {

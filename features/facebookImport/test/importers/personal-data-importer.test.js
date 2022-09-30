@@ -64,9 +64,9 @@ test("PersonalData importer - name with no special characters", async () => {
     const { report, result } = await runPersonalDataImporter(zipFile);
 
     expectImportSuccess(report);
-    expect(result.givenName).toBe("John");
-    expect(result.additionalName).toBe("Peter");
-    expect(result.lastName).toBe("Doe");
+    expect(result.name.givenName).toBe("John");
+    expect(result.name.additionalName).toBe("Peter");
+    expect(result.name.lastName).toBe("Doe");
 });
 
 test("PersonalData importer - name with special characters", async () => {
@@ -76,19 +76,19 @@ test("PersonalData importer - name with special characters", async () => {
     const { report, result } = await runPersonalDataImporter(zipFile);
 
     expectImportSuccess(report);
-    expect(result.givenName).toBe("John🦊");
-    expect(result.additionalName).toBe("José");
-    expect(result.lastName).toBe("Döe");
+    expect(result.name.givenName).toBe("John🦊");
+    expect(result.name.additionalName).toBe("José");
+    expect(result.name.lastName).toBe("Döe");
 });
 
 test("PersonalDataImporter - importedFileName returned correctly", async () => {
     const profileData = createProfileData("John🦊", "José", "Döe");
     zipFile.addJsonEntry(profileInformationFileName, profileData);
 
-    const { report, importedFileNames } = await runPersonalDataImporter(
-        zipFile
-    );
+    const { report } = await runPersonalDataImporter(zipFile);
 
     expectImportSuccess(report);
-    expect(importedFileNames).toStrictEqual([PROFILE_INFORMATION_FILE_PATH]);
+    expect(report.importedFileNames).toStrictEqual([
+        PROFILE_INFORMATION_FILE_PATH,
+    ]);
 });

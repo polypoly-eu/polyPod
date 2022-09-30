@@ -224,7 +224,7 @@ task copyThirdPartyLicenses(type: Copy) {
 }
 
 task copyEndpoints(type: Copy) {
-    def path = "../../../../polyPod-config"
+    def path = "../../../assets/config"
     assert file(path).exists()
     from path
     into "build/generated-assets/config-assets"

@@ -26,6 +26,7 @@ export const PolyImportProvider = ({
   const [storage, setStorage] = useState(fakeStorage);
   const [files, setFiles] = useState(null);
   const [account, setAccount] = useState(null);
+  console.log(account);
 
   function refreshFiles() {
     setIsLoading(true);
