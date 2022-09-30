@@ -1,4 +1,6 @@
-import PersonalDataImporter, {PROFILE_INFORMATION_FILE_PATH} from "../../src/model/importers/personal-data-importer";
+import PersonalDataImporter, {
+    PROFILE_INFORMATION_FILE_PATH,
+} from "../../src/model/importers/personal-data-importer";
 import { ZipFileMock } from "../mocks/zipfile-mock";
 import { runPersonalDataImporter } from "../utils/data-importing";
 import {
@@ -83,10 +85,10 @@ test("PersonalDataImporter - importedFileName returned correctly", async () => {
     const profileData = createProfileData("John🦊", "José", "Döe");
     zipFile.addJsonEntry(profileInformationFileName, profileData);
 
-    const { report } = await runPersonalDataImporter(
-        zipFile
-    );
+    const { report } = await runPersonalDataImporter(zipFile);
 
     expectImportSuccess(report);
-    expect(report.importedFileNames).toStrictEqual([PROFILE_INFORMATION_FILE_PATH]);
+    expect(report.importedFileNames).toStrictEqual([
+        PROFILE_INFORMATION_FILE_PATH,
+    ]);
 });
