@@ -25,6 +25,7 @@ import PostReactionsImporter from "../../src/model/importers/post-reactions-impo
 import CommentsImporter from "../../src/model/importers/comments-importer.js";
 import PostsImporter from "../../src/model/importers/posts-importer.js";
 import ConnectedAdvertisersAllTypesImporter from "../../src/model/importers/connected-advertisers-all-types-importer.js";
+import RelatedAccountsGroup from "../../src/model/entities/related-accounts-group.js";
 
 export async function runMultipleImporters(importerClasses, zipFile) {
     const facebookAccount = new FacebookAccount();
@@ -101,7 +102,7 @@ export async function runMessagesImporter(zipFile) {
 }
 
 export async function runRecentlyViewedAdsImporter(zipFile) {
-    return runSingleOutdatedImporter(RecentlyViewedAdsImporter, zipFile);
+    return runSingleImporter(RecentlyViewedAdsImporter, zipFile);
 }
 
 export async function runOffFacebookEventsImporter(zipFile) {
@@ -140,14 +141,16 @@ export async function runImportForDataset(importerClass, filePath, dataset) {
     const zipFile = new ZipFileMock();
     zipFile.addJsonEntry(filePath, dataset);
 
-    return await runSingleOutdatedImporter(importerClass, zipFile);
+    return await runSingleImporter(importerClass, zipFile);
 }
 
 export async function runAdsImportForDataset(dataset) {
-    const { result, facebookAccount } = await runImportForDataset(
+    const { result, report } = await runImportForDataset(
         RecentlyViewedAdsImporter,
         RECENTLY_VIEWED_FILE_PATH,
         dataset
     );
-    return { result, relatedAccounts: facebookAccount.relatedAccounts };
+    const relatedAccounts = new RelatedAccountsGroup();
+    if (result) relatedAccounts.addAll(result);
+    return { relatedAccounts, report };
 }
