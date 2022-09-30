@@ -1,0 +1,8 @@
+.login input {
+    width: 100%;
+}
+
+.login .helper {
+    font-size: var( --font-size-s);
+    margin: 8px 16px;
+}

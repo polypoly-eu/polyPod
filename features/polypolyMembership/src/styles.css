@@ -67,3 +67,7 @@
     text-decoration: underline;
     margin-top: 20px;
 }
+
+.membership input {
+  display: block;
+}

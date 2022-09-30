@@ -1,6 +1,13 @@
 {
-    "title": "Connect your membership",
+    "title.verify": "Connect your membership",
     "text.1": "To download and synchronise your information with polypoly's server we need you to verify that you are a member of the cooperative.",
     "text.2": "We will send you an email with an activation link that expires after 15 minutes.",
-    "primary.button": "Verify"
+    "email": "Email",
+    "membership.id": "Membership ID",
+    "legend.1": "The e-mail address used to buy shares.",
+    "legend.2": "The membership ID was given to you in the first email we sent you after you bought shares.",
+    "button.verify": "Verify",
+    "title.email": "Check your email!",
+    "text.3": "To connect your membership click on the link in the email we have sent to {{email}}.",
+    "button.email": "Open email app"
 }
