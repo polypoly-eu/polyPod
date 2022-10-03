@@ -9,12 +9,13 @@ const classData = [
 describe("Errors have the right API ", () => {
     it("throws correctly", () => {
         classData.forEach((err) => {
-            const thrower = () => {
+            try {
                 throw new err[0]("test");
-            };
-
-            expect(thrower).toThrow(err[0]);
-            expect(thrower).toThrow(new RegExp(err[1]));
+            } catch (error) {
+                expect(error).toBeInstanceOf(err[0]);
+                expect(error.message).toMatch(new RegExp(err[1]));
+                expect(error.name).toBe(new err[0]().constructor.name);
+            }
         });
     });
 });
