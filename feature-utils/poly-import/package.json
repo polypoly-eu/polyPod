@@ -13,5 +13,8 @@
       "\\.[jt]sx?$": "babel-jest"
     },
     "testEnvironment": "jsdom"
+  },
+  "devDependencies": {
+    "@polypoly-eu/api": "file:../../platform/feature-api/api"
   }
 }
