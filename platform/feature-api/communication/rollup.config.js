@@ -5,7 +5,7 @@ import json from "@rollup/plugin-json";
 
 const common = {
     plugins: [
-        nodeResolve(),
+        nodeResolve({ preferBuiltins: true }),
         json(),
         commonjs(),
         sucrase({
@@ -16,7 +16,7 @@ const common = {
     onwarn: (warning, warn) => {
         if (
             warning.code != "CIRCULAR_DEPENDENCY" ||
-            !warning.cycle[0].match(/fast-check|chai\.js/)
+            !warning.cycle[0].match(/fast-check|chai\.js|index\.ts/)
         )
             warn(warning);
     },
