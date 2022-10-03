@@ -3,7 +3,27 @@ import commonjs from "@rollup/plugin-commonjs";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import json from "@rollup/plugin-json";
 
+const common = {
+    plugins: [
+        nodeResolve(),
+        json(),
+        commonjs(),
+        sucrase({
+            exclude: ["node_modules/**"],
+            transforms: ["typescript"],
+        }),
+    ],
+    onwarn: (warning, warn) => {
+        if (
+            warning.code != "CIRCULAR_DEPENDENCY" ||
+            !warning.cycle[0].match(/fast-check|chai\.js/)
+        )
+            warn(warning);
+    },
+};
+
 const communicationFileName = "src/index.ts";
+
 export default [
     {
         input: communicationFileName,
@@ -13,15 +33,7 @@ export default [
                 format: "esm",
             },
         ],
-        plugins: [
-            nodeResolve({ preferBuiltins: true }),
-            json(),
-            commonjs(),
-            sucrase({
-                exclude: ["node_modules/**"],
-                transforms: ["typescript"],
-            }),
-        ],
+        ...common,
         context: "window",
     },
     {
@@ -56,15 +68,7 @@ export default [
             },
         ],
         context: "null",
-        plugins: [
-            nodeResolve(),
-            json(),
-            commonjs(),
-            sucrase({
-                exclude: ["node_modules/**"],
-                transforms: ["typescript"],
-            }),
-        ],
+        ...common,
         external: ["dist/middleware.js"],
     },
 ];
