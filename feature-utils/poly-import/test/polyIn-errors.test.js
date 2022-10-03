@@ -15,6 +15,7 @@ describe("Errors have the right API ", () => {
                 expect(error).toBeInstanceOf(err[0]);
                 expect(error.message).toMatch(new RegExp(err[1]));
                 expect(error.name).toBe(new err[0]().constructor.name);
+                expect(error.cause).toBe("test");
             }
         });
     });
