@@ -30,7 +30,7 @@ export const MessagesMiniStorySummary = ({
     return (
         <div className="render-summary">
             <p className="highlighted-number">
-                {messagesCount.toLocaleString("de-DE")}
+                {i18n.l12n.t(messagesCount)}
             </p>
             <SummaryText
                 messagesCount={messagesCount}
