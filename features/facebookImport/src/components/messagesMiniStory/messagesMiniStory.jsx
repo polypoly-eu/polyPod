@@ -29,9 +29,7 @@ export const MessagesMiniStorySummary = ({
 }) => {
     return (
         <div className="render-summary">
-            <p className="highlighted-number">
-                {i18n.l12n.t(messagesCount)}
-            </p>
+            <p className="highlighted-number">{i18n.l12n.t(messagesCount)}</p>
             <SummaryText
                 messagesCount={messagesCount}
                 messagesThreadsData={messagesThreadsData}
