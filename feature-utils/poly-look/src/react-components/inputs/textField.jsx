@@ -5,7 +5,7 @@ import "./common.css";
 
 function getBodyClass(disabled, error, focused) {
   if (disabled) return "body-disabled";
-  if (error && focused) return "body-focused";
+  if ((error && focused) || focused) return "body-focused";
   else if (error) return "body-error";
 }
 
