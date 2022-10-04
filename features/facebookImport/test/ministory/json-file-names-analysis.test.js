@@ -9,7 +9,7 @@ describe("Missing common JSON files analysis for empty zip", () => {
 
     beforeAll(async () => {
         let zipFile = new ZipFileMock();
-        const { _, analysisResult } = await runAnalysisForExport(
+        const { analysisResult } = await runAnalysisForExport(
             JSONFileNamesAnalysis,
             zipFile
         );
@@ -34,7 +34,7 @@ describe("Missing common JSON files analysis for non-empty zip", () => {
         commonJsonFiles.forEach((jsonPath) => {
             zipFile.addJsonEntry(jsonPath, { foo: "bar" });
         });
-        const { _, analysisResult } = await runAnalysisForExport(
+        const { analysisResult } = await runAnalysisForExport(
             JSONFileNamesAnalysis,
             zipFile
         );
