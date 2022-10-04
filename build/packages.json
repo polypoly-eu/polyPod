@@ -29,6 +29,7 @@
         "features/polypolyMembershipPreview",
         "features/gdprDataImporterPreview",
         "features/companyDataCleanerPreview",
+        "platform/core",
         "platform/feature-api/api",
         "platform/feature-api/communication",
         "platform/podjs"

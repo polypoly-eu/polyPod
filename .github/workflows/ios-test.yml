@@ -30,11 +30,8 @@ jobs:
                   cache-dependency-path: "**/package-lock.json"
             - name: Lock xcode version
               run: cd platform/ios; make lockxcodeversion
-            - name: Install modules, build API and features
+            - name: Build prerequisites
               run: ./build.js
-            - name: Build core
-              working-directory: platform/core
-              run: make ios_bindings
             - name: Build and test iOS
               working-directory: platform/ios
               run: make test
