@@ -1,4 +1,4 @@
-import JSONFileNamesAnalysis from "../../src/model/analyses/report/missing-common-json-files";
+import JSONFileNamesAnalysis from "../../src/model/analyses/report/json-file-names-analysis";
 import commonStructure from "../../src/static/commonStructure";
 import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { runAnalysisForExport } from "../utils/analyses-execution";
