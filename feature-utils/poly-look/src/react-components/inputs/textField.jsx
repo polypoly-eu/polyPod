@@ -20,7 +20,7 @@ function getBodyClass(disabled, error, focused) {
  * focus/blur internal logic works
  * @param {boolean} [props.error] - indicates if the input is in an error
  * state or not
- * @param {disabled} [props.disabled] - indicates if the input is disabled
+ * @param {boolean} [props.disabled] - indicates if the input is disabled
  * @returns {JSX.Element}
  */
 export function TextField({
