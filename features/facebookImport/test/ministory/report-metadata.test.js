@@ -7,7 +7,7 @@ import ReportMetadataReport from "../../src/views/ministories/reportMetadata";
 import { createInteractedWithAdvertisersDataset } from "../datasets/interacted-with-advertisers-data";
 import { createLanguageSettingsData } from "../datasets/language-and-locale-data";
 import { createOffFacebookEventsSimpleData } from "../datasets/off-facebook-events-data";
-import { MINIMUM_FILE_SIZE } from "../mocks/zipfile-mock";
+import { MINIMUM_FILE_SIZE } from "@polypoly-eu/poly-import";
 import { runAnalysisForExport } from "../utils/analyses-execution";
 import {
     expectActiveAnalysis,
