@@ -31,7 +31,7 @@ import {
   NotificationBanner,
   notificationTypes,
 } from "./banners";
-import { TextField } from "./inputs";
+import { TextField, Dropdown } from "./inputs";
 export {
   Chip,
   InfoBox,
@@ -68,4 +68,5 @@ export {
   notificationTypes,
   FixedFooter,
   TextField,
+  Dropdown,
 };

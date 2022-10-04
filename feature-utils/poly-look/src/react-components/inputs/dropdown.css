@@ -1,0 +1,25 @@
+.poly-dropdown .icon-up {
+  transform: rotateX(180deg);
+}
+
+.poly-dropdown .list-holder {
+  position: absolute;
+  top: 102%;
+  width: 100%;
+  background-color: var(--color-white);
+  left: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 50vh;
+  overflow: hidden scroll;
+  
+}
+.poly-dropdown .list-holder .option {
+  padding: 12px;
+}
+.poly-dropdown .list-holder .option:hover {
+  background-color: var(--color-gray-100);
+  font-family: var(--theme-font-medium);
+}

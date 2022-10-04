@@ -7,6 +7,7 @@ import "./font.css";
 import "./layout.css";
 import "./design-system-tokens/radius.css";
 import "./design-system-tokens/spacing.css";
+import "./design-system-tokens/colors.css";
 import "./utils.css";
 import "swiper/swiper-bundle.css";
 
