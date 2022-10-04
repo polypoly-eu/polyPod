@@ -1,0 +1,101 @@
+.poly-input-field {
+  display: flex;
+  flex-direction: column;
+  
+  --pl-field-color-text: var(--theme-primary-color);
+  --pl-color-field-error: var(--color-red-600);
+  
+  --pl-field-color-fill-enabled: var(--color-white);
+  --pl-field-color-border-enabled: var(--color-gray-400);
+
+  --pl-field-color-fill-focused: var(--color-white);
+  --pl-field-color-border-focused: var(--theme-secondary-color);
+  --pl-field-trailing-icon-color: var(--theme-secondary-color);
+
+  --pl-field-color-fill-error: var(--color-white);
+  --pl-field-color-border-error: var(--pl-color-field-error);
+  --pl-field-color-text-error: var(--pl-color-field-error);
+  --pl-field-trailing-icon-color-error: var(--pl-color-field-error);
+
+  --pl-field-color-fill-disabled:var(--color-gray-50);
+  --pl-field-color-border-disabled:var(--color-gray-400);
+  --pl-field-color-text-disabled:var(--color-gray-600);
+  
+}
+
+.poly-input-field .body {
+  height: 56px;
+  border: 1px solid var(--pl-field-color-border-enabled);
+  padding: var(--pl-field-spacing-padding-hor)
+    var(--pl-field-spacing-padding-vert);
+  border-radius: var(--pl-radius-1x);
+  display: flex;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  background-color: var(--pl-field-color-fill-enabled);
+  font-size: var(--font-size-ml);
+}
+
+.poly-input-field .body-focused {
+  background-color: var(--pl-field-color-fill-focused);
+  border-color: var(--pl-field-color-border-focused);
+}
+
+.poly-input-field .body-error {
+  background-color: var(--pl-field-color-fill-error);
+  border-color: var(--pl-field-color-border-error);
+}
+
+.poly-input-field .body-error+.helper-text {
+  color: var(--pl-field-color-text-error);
+}
+
+.poly-input-field .body-disabled {
+  pointer-events: none;
+  background-color: var(--pl-field-color-fill-disabled);
+  border-color: var(--pl-field-color-border-disabled);
+}
+
+.poly-input-field .body-disabled+.helper-text {
+  color: var(--pl-field-color-text-disabled);
+}
+
+.poly-input-field input {
+  flex: 1;
+  outline: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  background-color: inherit;
+  margin-right: var(--pl-field-spacing-gap);
+}
+
+.poly-input-field label {
+  position: absolute;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  left: var(--pl-field-spacing-padding-vert);
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.2s, font-size 0.2s;
+}
+
+.poly-input-field .label-up {
+  font-size: var(--font-size-s);
+  transform: translateY(-125%);
+}
+
+.poly-input-field .poly-icon-small {
+  flex-shrink: 1;
+}
+
+.poly-input-field .helper-text {
+  padding-top: var(--pl-space-2x);
+  padding-bottom: var(--pl-space-1x);
+  padding-left: var(--pl-field-spacing-padding-vert);
+  font-size: var(--font-size-s);
+}
