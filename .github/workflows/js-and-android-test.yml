@@ -61,6 +61,8 @@ jobs:
       - name: Build platform and features
         if: steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.android == 'true'
         run: ./build.js build
+        env:
+          POLYPOD_BUILD_PLATFORMS: android
       - name: Test platform and features
         if: steps.changes.outputs.apiAndFeatures == 'true'
         run: xvfb-run --auto-servernum ./build.js test

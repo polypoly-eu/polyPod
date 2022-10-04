@@ -23,6 +23,8 @@ jobs:
                   cache-dependency-path: "**/package-lock.json"
             - name: Build prerequisites
               run: ./build.js
+              env:
+                POLYPOD_BUILD_PLATFORMS: android
             - uses: actions/setup-java@v2
               with:
                   distribution: 'zulu'
