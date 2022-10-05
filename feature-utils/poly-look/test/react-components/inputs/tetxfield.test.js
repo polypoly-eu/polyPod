@@ -20,8 +20,17 @@ describe("TextField", () => {
       expect(document.querySelector("input")).toHaveAttribute("value", "test");
     });
 
+    it("focused state", () => {
+      render(<TextField tabIndex={1} />);
+      const inputBody = screen.getByTestId("input-focusable");
+
+      expect(inputBody).not.toHaveClass("body-focused");
+      inputBody.focus();
+      expect(inputBody).toHaveClass("body-focused");
+    });
+
     it("error state", () => {
-      render(<TextField error={true} tabIndex={1} />);
+      render(<TextField error={true} />);
       const inputBody = screen.getByTestId("input-focusable");
       const errorIcon = screen.getByTestId("triangle-exclamation");
       const clearIcon = screen.getByTestId("circle-xmark");
