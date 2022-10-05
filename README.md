@@ -68,6 +68,10 @@ To run the tests, just execute:
 
 ## Developer tips
 
+We've defined some helpful aliases you might enjoy:
+
+    $ . dev-utils/scripts/env.sh
+
 Linting is done via tools configured at the top level (root) directory.
 
 To run the linter:
