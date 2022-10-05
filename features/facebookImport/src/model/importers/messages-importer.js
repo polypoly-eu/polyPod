@@ -13,3 +13,5 @@ export default class MessagesImporter extends MultipleFilesImporter {
         );
     }
 }
+
+MessagesImporter.STORAGE_KEY = "messages";

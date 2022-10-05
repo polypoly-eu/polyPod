@@ -1,5 +1,4 @@
 import { MockPod } from "@polypoly-eu/api/dist/mock-pod";
-import { importZip } from "@polypoly-eu/poly-import";
 import { dataImporters } from "../../src/model/importer";
 import {
     runAnalysis,
@@ -17,10 +16,11 @@ export async function runAnalysisForExport(
     zipFile,
     pod = new MockPod()
 ) {
-    const facebookAccount = await importZip({
-        dataImporters,
+    const facebookAccount = new FacebookAccount();
+    await facebookAccount.import({
+        importers: dataImporters,
         zipFile,
-        DataAccount: FacebookAccount,
+        pod: new MockPod(),
     });
     const enrichedData = {
         ...zipFile.enrichedData(),
@@ -41,11 +41,11 @@ export async function runAnalysisForAccount(
 }
 
 export async function runAnalysesForZip(zipFile) {
-    const facebookAccount = await importZip({
-        dataImporters,
+    const facebookAccount = new FacebookAccount();
+    await facebookAccount.import({
+        importers: dataImporters,
         zipFile,
         pod: new MockPod(),
-        DataAccount: FacebookAccount,
     });
     await analyzeZip({
         zipData: zipFile.enrichedFileData(),

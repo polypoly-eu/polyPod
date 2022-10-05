@@ -1,10 +1,10 @@
 import { FeatureFileStorage, ZipFile, ZipFileEntry } from "./storage";
 import {
-    Importer,
-    importData,
-    importZip,
     runImporter,
     runImporters,
+    runOutdatedImporter,
+    runOutdatedImporters,
+    Importer,
 } from "./importer";
 import {
     FileImportError,
@@ -15,12 +15,12 @@ import DataAccount from "./entities/data-account";
 import { Status, statusTypes } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
 export {
+    Status,
     Importer,
-    importZip,
-    importData,
     runImporter,
     runImporters,
-    Status,
+    runOutdatedImporter,
+    runOutdatedImporters,
     ZipFile,
     Telemetry,
     ZipFileEntry,

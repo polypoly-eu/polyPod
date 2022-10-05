@@ -21,3 +21,5 @@ export default class CommentsImporter extends DirectKeyDataImporter {
         );
     }
 }
+
+CommentsImporter.STORAGE_KEY = "comments";

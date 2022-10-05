@@ -6,10 +6,10 @@ import {
   MockParentContext,
   MockParentContextProvider,
 } from "./mocks/parent-context-mock";
-import MockDataAccount from "./mocks/data-account-mock";
 import PolyImportComponentFixture from "./mocks/poly-import-component-mock";
 import { mockDataImporters } from "./mocks/data-importers-mock";
 import { mockFiles } from "./mocks/pod-mock";
+import { DataAccount } from "@polypoly-eu/poly-import";
 /**
  * @jest-environment jsdom
  */
@@ -18,7 +18,7 @@ const mockComponent = (
     <PolyImportProvider
       parentContext={MockParentContext}
       dataImporters={mockDataImporters}
-      DataAccount={MockDataAccount}
+      DataAccount={DataAccount}
     >
       <PolyImportComponentFixture />
     </PolyImportProvider>

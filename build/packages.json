@@ -5,6 +5,7 @@
         "build",
         "platform/utils/endpoints-generator",
         "dev-utils/dummy-server",
+        "dev-utils/poly-cli",
         "dev-utils/rollup-plugin-copy-watch",
         "feature-utils/poly-import",
         "feature-utils/poly-analysis",
@@ -29,6 +30,7 @@
         "features/polypolyMembershipPreview",
         "features/gdprDataImporterPreview",
         "features/companyDataCleanerPreview",
+        "platform/core",
         "platform/feature-api/api",
         "platform/feature-api/communication",
         "platform/podjs"

@@ -14,3 +14,5 @@ export default class RecommendedPagesImporter extends DirectKeyDataImporter {
         );
     }
 }
+
+RecommendedPagesImporter.STORAGE_KEY = "recommendedPages";

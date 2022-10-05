@@ -1,6 +1,5 @@
 import { Status, statusTypes } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
-import { ZipFile } from "./storage";
 
 export class Importer {
     async import({ zipFile, dataAccount }) {
@@ -10,11 +9,12 @@ export class Importer {
     }
 }
 
-class ImporterExecutionResult {
-    constructor(importer, status, executionTime) {
+class ImporterExecutionReport {
+    constructor({ importer, status, executionTime, importedFileNames }) {
         this._importer = importer;
         this._status = status || new Status({ name: statusTypes.success });
         this._executionTime = executionTime;
+        this._importedFileNames = importedFileNames;
     }
 
     get importer() {
@@ -27,6 +27,10 @@ class ImporterExecutionResult {
 
     get executionTime() {
         return this._executionTime;
+    }
+
+    get importedFileNames() {
+        return this._importedFileNames;
     }
 
     _extractDataFromStatus(status) {
@@ -48,7 +52,58 @@ class ImporterExecutionResult {
     }
 }
 
-export async function runImporter(importerClass, zipFile, facebookAccount) {
+export async function runImporter({ importerClass, zipFile, pod, account }) {
+    const importer = new importerClass();
+
+    const telemetry = new Telemetry();
+
+    try {
+        const response = await importer.import({
+            zipFile,
+            pod,
+            //this is to support old importers without needing to change all at once
+            //TODO: change all importers so this can go
+            account,
+            facebookAccount: account,
+        });
+
+        //Currently we have to do this check as not all importers return a result even when
+        //executing successfully. We can go back to destructuring after all importers have been changed
+        return {
+            report: new ImporterExecutionReport({
+                importer,
+                status: response?.report?.status,
+                executionTime: telemetry.elapsedTime(),
+                importedFileNames: response?.report?.importedFileNames,
+            }),
+            result: response?.result,
+        };
+    } catch (error) {
+        return {
+            report: new ImporterExecutionReport({
+                importer,
+                status: new Status({ name: statusTypes.error, message: error }),
+                executionTime: telemetry.elapsedTime(),
+            }),
+        };
+    }
+}
+
+export async function runImporters({ importerClasses, zipFile, account, pod }) {
+    return await Promise.all(
+        importerClasses.map(async (importerClass) => {
+            return runImporter({ importerClass, zipFile, account, pod });
+        })
+    );
+}
+
+//We need this to support the tests for the previous importer model
+export async function runOutdatedImporter(
+    importerClass,
+    zipFile,
+    account,
+    pod
+) {
     const importer = new importerClass();
 
     const telemetry = new Telemetry();
@@ -56,44 +111,35 @@ export async function runImporter(importerClass, zipFile, facebookAccount) {
     try {
         const status = await importer.import({
             zipFile,
-            facebookAccount,
+            pod,
+            //this is to support old importers without needing to change all at once
+            //TODO: change all importers so this can go
+            account,
+            facebookAccount: account,
         });
-        return new ImporterExecutionResult(
+        return new ImporterExecutionReport({
             importer,
             status,
-            telemetry.elapsedTime()
-        );
+            executionTime: telemetry.elapsedTime(),
+        });
     } catch (error) {
-        return new ImporterExecutionResult(
+        return new ImporterExecutionReport({
             importer,
-            new Status({ name: statusTypes.error, message: error }),
-            telemetry.elapsedTime()
-        );
+            status: new Status({ name: statusTypes.error, message: error }),
+            executionTime: telemetry.elapsedTime(),
+        });
     }
 }
 
-export async function runImporters(importerClasses, zipFile, dataAccount) {
+export async function runOutdatedImporters(
+    importerClasses,
+    zipFile,
+    account,
+    pod
+) {
     return await Promise.all(
         importerClasses.map(async (importerClass) => {
-            return runImporter(importerClass, zipFile, dataAccount);
+            return runOutdatedImporter(importerClass, zipFile, account, pod);
         })
     );
-}
-
-export async function importZip({ dataImporters, zipFile, DataAccount }) {
-    const dataAccount = new DataAccount();
-    const importingResults = await runImporters(
-        dataImporters,
-        zipFile,
-        dataAccount
-    );
-
-    dataAccount.importingResults = importingResults;
-
-    return dataAccount;
-}
-
-export async function importData({ dataImporters, zipData, DataAccount }) {
-    const zipFile = await ZipFile.createWithCache(zipData, window.pod);
-    return importZip({ dataImporters, zipFile, DataAccount });
 }

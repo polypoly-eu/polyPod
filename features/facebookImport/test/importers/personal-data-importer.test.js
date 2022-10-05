@@ -1,4 +1,6 @@
-import PersonalDataImporter from "../../src/model/importers/personal-data-importer";
+import PersonalDataImporter, {
+    PROFILE_INFORMATION_FILE_PATH,
+} from "../../src/model/importers/personal-data-importer";
 import { ZipFileMock } from "../mocks/zipfile-mock";
 import { runPersonalDataImporter } from "../utils/data-importing";
 import {
@@ -32,49 +34,61 @@ beforeEach(() => {
 });
 
 test("PersonalData importer - missing file", async () => {
-    const { result } = await runPersonalDataImporter(zipFile);
+    const { report } = await runPersonalDataImporter(zipFile);
 
-    expectMissingFileError(result, PersonalDataImporter);
+    expectMissingFileError(report, PersonalDataImporter);
 });
 
 test("PersonalData importer - wrong data key", async () => {
     const profileData = { profile_v1: { name: "PersonalData" } };
     zipFile.addJsonEntry(profileInformationFileName, profileData);
 
-    const { result } = await runPersonalDataImporter(zipFile);
+    const { report } = await runPersonalDataImporter(zipFile);
 
-    expectInvalidContentError(result, PersonalDataImporter);
+    expectInvalidContentError(report, PersonalDataImporter);
 });
 
 test("PersonalData importer - correct data key without correct data", async () => {
     const profileData = { profile_v2: { name2: "PersonalData" } };
     zipFile.addJsonEntry(profileInformationFileName, profileData);
 
-    const { result } = await runPersonalDataImporter(zipFile);
+    const { report } = await runPersonalDataImporter(zipFile);
 
-    expectError(result, TypeError, PersonalDataImporter);
+    expectError(report, TypeError, PersonalDataImporter);
 });
 
 test("PersonalData importer - name with no special characters", async () => {
     const profileData = createProfileData("John", "Peter", "Doe");
     zipFile.addJsonEntry(profileInformationFileName, profileData);
 
-    const { result, facebookAccount } = await runPersonalDataImporter(zipFile);
+    const { report, result } = await runPersonalDataImporter(zipFile);
 
-    expectImportSuccess(result);
-    expect(facebookAccount.personalData.name.givenName).toBe("John");
-    expect(facebookAccount.personalData.name.additionalName).toBe("Peter");
-    expect(facebookAccount.personalData.name.lastName).toBe("Doe");
+    expectImportSuccess(report);
+    expect(result.name.givenName).toBe("John");
+    expect(result.name.additionalName).toBe("Peter");
+    expect(result.name.lastName).toBe("Doe");
 });
 
 test("PersonalData importer - name with special characters", async () => {
     const profileData = createProfileData("John🦊", "José", "Döe");
     zipFile.addJsonEntry(profileInformationFileName, profileData);
 
-    const { result, facebookAccount } = await runPersonalDataImporter(zipFile);
+    const { report, result } = await runPersonalDataImporter(zipFile);
 
-    expectImportSuccess(result);
-    expect(facebookAccount.personalData.name.givenName).toBe("John🦊");
-    expect(facebookAccount.personalData.name.additionalName).toBe("José");
-    expect(facebookAccount.personalData.name.lastName).toBe("Döe");
+    expectImportSuccess(report);
+    expect(result.name.givenName).toBe("John🦊");
+    expect(result.name.additionalName).toBe("José");
+    expect(result.name.lastName).toBe("Döe");
+});
+
+test("PersonalDataImporter - importedFileName returned correctly", async () => {
+    const profileData = createProfileData("John🦊", "José", "Döe");
+    zipFile.addJsonEntry(profileInformationFileName, profileData);
+
+    const { report } = await runPersonalDataImporter(zipFile);
+
+    expectImportSuccess(report);
+    expect(report.importedFileNames).toStrictEqual([
+        PROFILE_INFORMATION_FILE_PATH,
+    ]);
 });

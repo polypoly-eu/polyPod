@@ -6,11 +6,9 @@ This directory contains the source for the polyPod app for Android devices.
 
 ### Prerequisites
 
-The main prerequisite you need are the polyPod features built -
-simply follow the build instructions in [../../README.md](../../README.md).
-
-In addition, you will need to build the shared core code manually (for now), see
-[../core/README.md](../core/README.md).
+Before building for Android, you need to build the shared components and
+features - simply follow the build instructions in
+[../../README.md](../../README.md).
 
 ### Android Studio
 

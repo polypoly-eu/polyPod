@@ -1,7 +1,7 @@
 import endpoints from "./endpoints.js";
 import fs from "fs";
 
-const configPath = "../../../../polyPod-config";
+const configPath = "../../../assets/config";
 
 const endpointsWithFallback = Object.fromEntries(
     Object.entries(endpoints).map(([key, endpoint]) => [

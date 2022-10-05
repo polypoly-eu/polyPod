@@ -13,3 +13,5 @@ export default class SearchesImporter extends DirectKeyDataImporter {
         );
     }
 }
+
+SearchesImporter.STORAGE_KEY = "searches";

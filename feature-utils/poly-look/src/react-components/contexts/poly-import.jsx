@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import {
-  importData,
   RefreshFilesError,
   FeatureFileStorage,
+  ZipFile,
 } from "@polypoly-eu/poly-import";
 
 //used until real storage is loaded
@@ -72,12 +72,15 @@ export const PolyImportProvider = ({
   //on file change
   //when files changed run the importer first and create an account model first.
   //after there is an account the analyses are triggered.
-  useEffect(() => {
+  useEffect(async () => {
     if (!files?.[0]) return;
-    importData({ dataImporters, zipData: files[0], DataAccount }).then(
-      (newAccount) => {
-        setAccount(newAccount);
-      }
+    const zipFile = await ZipFile.createWithCache(files[0], pod);
+    setAccount(
+      await new DataAccount().import({
+        importers: dataImporters,
+        zipFile,
+        pod,
+      })
     );
   }, [files]);
 
