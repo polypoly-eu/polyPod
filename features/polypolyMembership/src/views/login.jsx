@@ -4,38 +4,40 @@ import {
     Screen,
     PolyButton,
     FixedFooter,
-    // NotificationBanner,
-    // notificationTypes,
+    NotificationBanner,
+    notificationTypes,
 } from "@polypoly-eu/poly-look";
 import i18n from "!silly-i18n";
 
 import "./login.css";
 
 const Login = () => {
-    const [login, setLogin] = useState("false");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    // const [error, setError] = useState("false");
+    const [error, setError] = useState(false);
     const navigate = useNavigate();
 
     function handleLogin(e) {
         e.preventDefault();
         if (email === "example@polypoly.net" && password === "000") {
-            setLogin("true");
             navigate("/email", { state: { email: email } });
         } else {
-            setLogin("false");
+            setError(true);
         }
     }
 
+    console.log(error);
+
     return (
         <Screen className="login" layout="poly-standard-layout">
-            {/* <NotificationBanner
-                notificationType={notificationTypes.error}
-                handleCloseNotification={() => setError("false")}
-            >
-                There was an error
-            </NotificationBanner> */}
+            {error && (
+                <NotificationBanner
+                    notificationType={notificationTypes.error}
+                    handleCloseNotification={() => setError(false)}
+                >
+                    Email or Membership ID are not correct
+                </NotificationBanner>
+            )}
             <div id="verify-id">
                 <h1>{i18n.t("login:title.verify")}</h1>
                 <p>{i18n.t("login:text.1")}</p>
