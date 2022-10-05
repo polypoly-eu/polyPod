@@ -3,6 +3,7 @@ import React from "react";
 export function CircleXMark({ fill, ...rest }) {
   return (
     <svg
+      data-testid="circle-xmark"
       {...rest}
       width="24"
       height="25"

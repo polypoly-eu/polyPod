@@ -3,6 +3,7 @@ import React from "react";
 export function ChevronDown({ fill, ...rest }) {
   return (
     <svg
+      data-testid="chevron-down"
       {...rest}
       width="24"
       height="25"

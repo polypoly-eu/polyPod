@@ -3,6 +3,7 @@ import React from "react";
 export function TriangleExclamation({ fill, ...rest }) {
   return (
     <svg
+      data-testid="triangle-exclamation"
       {...rest}
       width="24"
       height="25"

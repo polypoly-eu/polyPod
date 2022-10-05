@@ -9,6 +9,11 @@ function getBodyClass(disabled, error, focused) {
   else if (error) return "body-error";
 }
 
+const labelPosition = {
+  up: "label-up",
+  inside: "",
+};
+
 /** Text field input with clear icon.
  * @param {Object} props
  * @param {string} [props.value] - input value
@@ -35,24 +40,29 @@ export function TextField({
 }) {
   const [isIconVisible, setIconVisibility] = useState(false);
   const [errorIcon, setErrorIcon] = useState(error);
+  const [labelClass, setLabelClass] = useState(
+    value ? labelPosition.up : labelPosition.inside
+  );
   const inputRef = useRef();
-  let labelClass = value || isIconVisible ? "label-up" : "";
   let bodyClass = getBodyClass(disabled, error, isIconVisible);
-
   return (
     <div className="poly-input-field">
       <div
         className={`body ${bodyClass}`}
         onFocus={() => {
-          setIconVisibility(true);
+          setLabelClass(labelPosition.up);
+          if (value) setIconVisibility(true);
+          else setIconVisibility(false);
           setErrorIcon(false);
           inputRef.current.focus();
         }}
         onBlur={() => {
+          if (!value) setLabelClass(labelPosition.inside);
           setIconVisibility(false);
           if (error) setErrorIcon(true);
         }}
         tabIndex={tabIndex}
+        data-testid="input-focusable"
       >
         <label htmlFor={name} className={labelClass}>
           {label}
@@ -63,6 +73,7 @@ export function TextField({
           ref={inputRef}
           value={value}
           onChange={(e) => {
+            if (e.target.value) setIconVisibility(true);
             onChange({ value: e.target.value, name });
           }}
           name={name}
@@ -79,7 +90,7 @@ export function TextField({
           style={{ display: isIconVisible ? "block" : "none" }}
           className="poly-icon-small"
           onClick={() => {
-            console.log("clicky");
+            setIconVisibility(false);
             onChange({ value: "", name });
             inputRef.current.focus();
           }}
