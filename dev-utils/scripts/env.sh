@@ -2,11 +2,11 @@
 
 if [ -n "$ZSH_VERSION" ]; then
     script_path="${(%):-%N}"
-    rc_file=".zshrc"
+    rc_file="~/.zshrc"
 else
     # We'll just assume people use either zsh or bash... :)
     script_path="${BASH_SOURCE[0]}"
-    rc_file=".bashrc"
+    rc_file="~/.bashrc"
 fi
 
 echo "Setting up some aliases to make polyPod development more convenient."
