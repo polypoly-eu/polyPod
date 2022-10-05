@@ -23,7 +23,7 @@ jobs:
             node_modules
             **/node_modules
             ~/.cache
-          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json', 'build/packages.json') }}-${{ hashFiles('package-lock.json', 'build/packages.json') }}
       - name: Checks paths to trigger the rest of the steps
         uses: dorny/paths-filter@8c7f485a57f7cad3483dcc0fdf36122a0542f200 #v2.10.2
         id: changes
