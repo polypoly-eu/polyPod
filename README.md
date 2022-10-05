@@ -17,7 +17,13 @@ But it will be much more than that. For more information please read the
 
 ## Requirements
 
-Just [Node.js](https://nodejs.org/) version 16.x or newer.
+The main thing you need is [Node.js](https://nodejs.org/) version 16.x or newer.
+
+In order to build for Android or iOS (see below), have a look at the
+requirements in [platform/core/README.md](platform/core/README.md), which is
+needed for both, and then
+[platform/android/README.md](platform/android/README.md) or
+[platform/ios/README.ms](platform/ios/README.md) respectively.
 
 ## Setting the target platform
 
