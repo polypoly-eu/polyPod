@@ -1,0 +1,7 @@
+{
+  "name": "@polypoly-eu/platform-core",
+  "scripts": {
+    "build": "make",
+    "clean": "make clean"
+  }
+}

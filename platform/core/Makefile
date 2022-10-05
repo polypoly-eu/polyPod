@@ -34,6 +34,15 @@ else
 	endif
 endif
 
+ifeq ($(POLYPOD_BUILD_PLATFORMS), all)
+	build_android := true
+	build_ios := $(if $(macos),true)
+else ifeq ($(POLYPOD_BUILD_PLATFORMS), android)
+	build_android := true
+else ifeq ($(POLYPOD_BUILD_PLATFORMS), ios)
+	build_ios := $(if $(macos),true)
+endif
+
 # ============  Rust core ============ #
 
 $(target): $(wildcard src/*.rs)
@@ -116,7 +125,7 @@ android_bindings: $(android_core_libraries)
 ios_bindings: $(swift_core_framework)
 
 .PHONY: all
-all: $(android_core_libraries) $(if $(macos),$(swift_core_framework),$(target))
+all: $(if $(build_android),$(android_core_libraries),) $(if $(build_ios),$(swift_core_framework),)
 
 .PHONY: clean
 clean:
@@ -124,6 +133,7 @@ clean:
 	$(RM) -r export
 	$(RM) -r $(swift_core_framework)
 	$(RM) -r $(android_core_libraries)
+	$(RM) -r $(jni_libs_copy_path)
 
 # ============  Utils ============ #
 

@@ -19,6 +19,21 @@ But it will be much more than that. For more information please read the
 
 Just [Node.js](https://nodejs.org/) version 16.x or newer.
 
+## Setting the target platform
+
+The polyPod runs on several platforms. You can control which platforms to build
+for using the `POLYPOD_BUILD_PLATFORMS` environment variable.
+
+Regardless of what you set it to, even if you don't set it, _podjs_ will always
+be built - which is sufficient to run and develop features.
+
+In order to build the polyPod for other platforms, set `POLYPOD_BUILD_PLATFORMS`
+to one of the following values:
+
+- `all`
+- `android`
+- `ios`
+
 ## Building
 
 If you're on Windows, please follow the steps in
