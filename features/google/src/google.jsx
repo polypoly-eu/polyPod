@@ -65,18 +65,14 @@ const Google = () => {
                     <Route exact path="/">
                         {determineRoute()}
                     </Route>
-                    <Route exact path="/overview">
-                        <Overview />
-                    </Route>
-                    <Route exact path="/import">
-                        <ImportView />
-                    </Route>
-                    <Route exact path="/explore">
-                        <ExploreView />
-                    </Route>
-                    <Route exact path="/explore/details">
-                        <DetailsView />
-                    </Route>
+                    <Route exact path="/overview" element={<Overview />} />
+                    <Route exact path="/import" element={<ImportView />} />
+                    <Route exact path="/explore" element={<ExploreView />} />
+                    <Route
+                        exact
+                        path="/explore/details"
+                        element={<DetailsView />}
+                    />
                     <ReportWrapper />
                 </Routes>
             )}
