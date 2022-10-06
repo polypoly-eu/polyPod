@@ -1,6 +1,6 @@
 # The polyPod
 
-At the moment, the polyPod is essentially a runtime for _features_; small,
+The polyPod aims to become a personal data store and secure execution environment for privacy-conscious computations. THe current iteration still lacks some of the desired functionality and is essentially a runtime for _Features_; small,
 sandboxed JavaScript applications that can be launched from the polyPod app.
 
 But it will be much more than that. For more information please read the
