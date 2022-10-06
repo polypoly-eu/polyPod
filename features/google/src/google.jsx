@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import * as ReactDOM from "react-dom";
 import {
     MemoryRouter as Router,
-    Switch,
+    Routes,
     Redirect,
     Route,
     useHistory,
@@ -61,7 +61,7 @@ const Google = () => {
     return (
         <div className="google poly-theme poly-theme-dark">
             {pod && files && (
-                <Switch>
+                <Routes>
                     <Route exact path="/">
                         {determineRoute()}
                     </Route>
@@ -78,7 +78,7 @@ const Google = () => {
                         <DetailsView />
                     </Route>
                     <ReportWrapper />
-                </Switch>
+                </Routes>
             )}
             {isLoading && (
                 <LoadingOverlay
