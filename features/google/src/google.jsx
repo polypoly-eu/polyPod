@@ -39,14 +39,23 @@ const Google = () => {
     function determineRoute() {
         if (files.length > 0)
             return (
-                <Redirect
-                    to={{
-                        pathname: "/overview",
-                        state: INITIAL_HISTORY_STATE,
-                    }}
+                <Route
+                    render={() => (
+                        <Redirect
+                            to={{
+                                pathname: "/overview",
+                                state: INITIAL_HISTORY_STATE,
+                            }}
+                        />
+                    )}
                 />
             );
-        else return <Redirect to={{ pathname: "/import" }} />;
+        else
+            return (
+                <Route
+                    render={() => <Redirect to={{ pathname: "/import" }} />}
+                />
+            );
     }
 
     return (
