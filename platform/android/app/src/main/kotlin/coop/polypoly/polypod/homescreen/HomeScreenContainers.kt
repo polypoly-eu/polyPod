@@ -28,8 +28,8 @@ fun yourDataContainers(
         when (val type = containersConfig[index % containersConfig.count()]) {
             ContainerType.LARGELEFT -> Container(
                 type = type,
-                tiles = theseTiles.mapIndexed { idx, tileModel ->
-                    if (idx == 0) {
+                tiles = theseTiles.mapIndexed { tileIndex, tileModel ->
+                    if (tileIndex == 0) {
                         Tile(
                             tileModel,
                             bigTileStyle,
@@ -61,7 +61,7 @@ fun yourDataContainers(
             )
             ContainerType.LARGERIGHT -> Container(
                 type = type,
-                tiles = theseTiles.mapIndexed { idx, tileModel ->
+                tiles = theseTiles.mapIndexed { tileIndex, tileModel ->
                     if (theseTiles.count() < tilesPerContainer) {
                         Tile(
                             tileModel,
@@ -70,7 +70,7 @@ fun yourDataContainers(
                             TileType.SMALL
                         )
                     } else {
-                        if (idx == theseTiles.count() - 1) {
+                        if (tileIndex == theseTiles.count() - 1) {
                             Tile(
                                 tileModel,
                                 bigTileStyle,
