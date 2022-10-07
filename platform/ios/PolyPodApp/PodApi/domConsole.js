@@ -6,10 +6,6 @@ function postLogMessage(message) {
 }
 
 const console = {
-    log(msg) {
-        postLogMessage(msg);
-    },
-    error(msg) {
-        postLogMessage(msg);
-    },
+    log: postLogMessage,
+    error: postLogMessage,
 };
