@@ -2,7 +2,7 @@ window.addEventListener("message", receiveMessage, false);
 
 function receiveMessage({ data }) {
     if (data.command === "log") {
-        webkit.messageHandlers[data.command].postMessage(data.text);
+        webkit.messageHandlers[data.command].postMessage(data);
     }
 }
 
