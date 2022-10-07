@@ -43,7 +43,6 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-
             android:name=".settings.SettingsActivity"
             android:exported="false"
             android:label="@string/settings_title"
@@ -51,7 +50,7 @@
 
         <receiver
             android:name=".AppUpdateReceiver"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>

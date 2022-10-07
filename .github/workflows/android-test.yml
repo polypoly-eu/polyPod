@@ -21,12 +21,10 @@ jobs:
                   node-version: 16
                   cache: "npm"
                   cache-dependency-path: "**/package-lock.json"
-            - name: Install and build API and features
+            - name: Build prerequisites
               run: ./build.js
-            - name: Build core
-              working-directory: platform/core
-              run: |
-                make android_bindings
+              env:
+                POLYPOD_BUILD_PLATFORMS: android
             - uses: actions/setup-java@v2
               with:
                   distribution: 'zulu'

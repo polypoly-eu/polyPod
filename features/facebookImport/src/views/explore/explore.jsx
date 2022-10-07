@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import { ImporterContext } from "../../context/importer-context.jsx";
+import { FacebookContext } from "../../context/facebook-context.jsx";
 import {
     List,
     Card,
@@ -19,8 +19,32 @@ import i18n from "!silly-i18n";
 import "./explore.css";
 import { ministories } from "../ministories/ministories.js";
 
+function NoStoriesCard() {
+    const message = useRef(null);
+
+    useEffect(() => {
+        const link = message.current.querySelector("a");
+        link.style.textDecoration = "underline";
+        link.href = "#";
+        link.addEventListener("click", () => {
+            window.pod.polyNav.openUrl("support-email");
+        });
+    });
+
+    return (
+        <Card>
+            <div
+                ref={message}
+                dangerouslySetInnerHTML={{
+                    __html: i18n.t("explore:details.noAnalyses"),
+                }}
+            />
+        </Card>
+    );
+}
+
 const ExploreView = () => {
-    const { reportResult, setReportResult } = useContext(ImporterContext);
+    const { reportResult, setReportResult } = useContext(FacebookContext);
     const { account } = useContext(PolyImportContext);
 
     const history = useHistory();
@@ -56,6 +80,46 @@ const ExploreView = () => {
                     message={i18n.t("explore:loading")}
                 />
             );
+
+        function renderMinistory(ministory, index) {
+            const content = (
+                <>
+                    <h1>{ministory.title}</h1>
+                    {ministory.label !== null && (
+                        <label>
+                            {i18n.t(
+                                `explore:analysis.label.${ministory.label}`
+                            )}
+                        </label>
+                    )}
+                    {ministory.render()}
+                </>
+            );
+
+            return ministory.hasDetails() ? (
+                <RoutingWrapper
+                    key={index}
+                    history={history}
+                    route="/explore/details"
+                    stateChange={{
+                        activeStory: ministory,
+                    }}
+                >
+                    <ClickableCard
+                        key={index}
+                        buttonText={i18n.t("explore:details.button")}
+                    >
+                        {content}
+                    </ClickableCard>
+                </RoutingWrapper>
+            ) : (
+                <Card key={index}>{content}</Card>
+            );
+        }
+
+        const activeMinistories = ministories
+            .map((MinistoryClass) => new MinistoryClass({ account }))
+            .filter(({ active }) => active);
         return (
             <List>
                 <Banner
@@ -67,42 +131,11 @@ const ExploreView = () => {
                         route: "/report",
                     }}
                 />
-                {ministories.map((MinistoryClass, index) => {
-                    const ministory = new MinistoryClass({
-                        account,
-                    });
-                    if (!ministory.active) return;
-                    const content = (
-                        <>
-                            <h1>{ministory.title}</h1>
-                            {ministory.label !== null && (
-                                <label>
-                                    {i18n.t(
-                                        `explore:analysis.label.${ministory.label}`
-                                    )}
-                                </label>
-                            )}
-                            {ministory.render()}
-                        </>
-                    );
-                    return ministory.hasDetails() ? (
-                        <RoutingWrapper
-                            key={index}
-                            history={history}
-                            route="/explore/details"
-                            stateChange={{ ActiveStoryClass: MinistoryClass }}
-                        >
-                            <ClickableCard
-                                key={index}
-                                buttonText={i18n.t("explore:details.button")}
-                            >
-                                {content}
-                            </ClickableCard>
-                        </RoutingWrapper>
-                    ) : (
-                        <Card key={index}>{content}</Card>
-                    );
-                })}
+                {!activeMinistories.length ? (
+                    <NoStoriesCard />
+                ) : (
+                    activeMinistories.map(renderMinistory)
+                )}
             </List>
         );
     };

@@ -17,7 +17,28 @@ But it will be much more than that. For more information please read the
 
 ## Requirements
 
-Just [Node.js](https://nodejs.org/) version 16.x or newer.
+The main thing you need is [Node.js](https://nodejs.org/) version 16.x or newer.
+
+In order to build for Android or iOS (see below), have a look at the
+requirements in [platform/core/README.md](platform/core/README.md), which is
+needed for both, and then
+[platform/android/README.md](platform/android/README.md) or
+[platform/ios/README.ms](platform/ios/README.md) respectively.
+
+## Setting the target platform
+
+The polyPod runs on several platforms. You can control which platforms to build
+for using the `POLYPOD_BUILD_PLATFORMS` environment variable.
+
+Regardless of what you set it to, even if you don't set it, _podjs_ will always
+be built - which is sufficient to run and develop features.
+
+In order to build the polyPod for other platforms, set `POLYPOD_BUILD_PLATFORMS`
+to one of the following values:
+
+- `all`
+- `android`
+- `ios`
 
 ## Building
 
@@ -46,6 +67,10 @@ To run the tests, just execute:
     $ ./build.js test
 
 ## Developer tips
+
+We've defined some helpful aliases you might enjoy:
+
+    $ . dev-utils/scripts/env.sh
 
 Linting is done via tools configured at the top level (root) directory.
 

@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import RouteButton from "../../components/buttons/routeButton.jsx";
-import { ImporterContext } from "../../context/importer-context.jsx";
+import { FacebookContext } from "../../context/facebook-context.jsx";
 
 import i18n from "!silly-i18n";
 
 import "./report.css";
 
 const ReportView = ({ reportStories }) => {
-    const { setReportResult, handleBack } = useContext(ImporterContext);
+    const { setReportResult, handleBack } = useContext(FacebookContext);
     const [loading, setLoading] = useState(false);
 
     const handleSendReport = async () => {

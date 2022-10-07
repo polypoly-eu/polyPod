@@ -39,4 +39,4 @@
 
 <!-- Please, delete comments when you are done -->
 
-♥️ Thank you!
+<!-- ♥️ Thank you! -->

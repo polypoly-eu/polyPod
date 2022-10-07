@@ -58,8 +58,9 @@ jobs:
       run: |
         ./build.js
         cd platform/android
-        make -C ../core android_bindings
         ./gradlew compileDebugJavaWithJavac
+      env:
+        POLYPOD_BUILD_PLATFORMS: android
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2

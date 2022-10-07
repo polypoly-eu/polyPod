@@ -1,10 +1,11 @@
 import { readJSONDataObject } from "./utils/importer-util.js";
+import { Importer } from "@polypoly-eu/poly-import";
 
 export const PROFILE_INFORMATION_FILE_PATH =
     "profile_information/profile_information.json";
 export const PROFILE_INFORMATION_DATA_KEY = "profile_v2";
 
-export default class NameImporter {
+export default class NameImporter extends Importer {
     async _readLanguageData(zipFile) {
         return readJSONDataObject(
             PROFILE_INFORMATION_FILE_PATH,

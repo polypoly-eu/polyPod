@@ -5,6 +5,7 @@ import genPodjs from "@polypoly-eu/podjs/rollup-plugin-gen-podjs/genPodjs.js";
 import sucrase from "@rollup/plugin-sucrase";
 import resolve from "@rollup/plugin-node-resolve";
 import json from "@rollup/plugin-json";
+import replace from "@rollup/plugin-replace";
 
 const externalPackages = {
     "@polypoly-eu/poly-look": "polyLook",
@@ -14,7 +15,7 @@ const externalPackages = {
 };
 
 export default {
-    input: "src/index.jsx",
+    input: "src/polypolyMembership.jsx",
     output: {
         file: "dist/index.js",
         format: "iife",
@@ -37,8 +38,12 @@ export default {
         copy({
             targets: [
                 {
-                    src: ["./src/static/*"],
+                    src: ["./src/static/*", "!src/static/fonts"],
                     dest: "dist",
+                },
+                {
+                    src: ["src/static/fonts/*"],
+                    dest: "dist/fonts/",
                 },
                 {
                     src: [
@@ -56,6 +61,10 @@ export default {
                 },
             ],
             verbose: true,
+        }),
+        replace({
+            preventAssignment: true,
+            "process.env.NODE_ENV": JSON.stringify("development"),
         }),
     ],
 };

@@ -36,7 +36,7 @@ android {
         minSdkVersion 24 // as long as we use the system WebView, going lower would mean a lot of limitations for feature developers
         targetSdkVersion 32
         versionCode polyEpoch()
-        versionName "1.7.1"
+        versionName "1.7.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -224,7 +224,7 @@ task copyThirdPartyLicenses(type: Copy) {
 }
 
 task copyEndpoints(type: Copy) {
-    def path = "../../../../polyPod-config"
+    def path = "../../../assets/config"
     assert file(path).exists()
     from path
     into "build/generated-assets/config-assets"

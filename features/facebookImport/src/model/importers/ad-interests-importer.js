@@ -14,3 +14,5 @@ export default class AdInterestsImporter extends DirectKeyDataImporter {
         );
     }
 }
+
+AdInterestsImporter.STORAGE_KEY = "adInterests";

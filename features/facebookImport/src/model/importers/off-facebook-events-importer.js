@@ -44,3 +44,5 @@ export default class OffFacebookEventsImporter extends DirectKeyDataImporter {
         }
     }
 }
+
+OffFacebookEventsImporter.STORAGE_KEY = "offFacebookCompanies";

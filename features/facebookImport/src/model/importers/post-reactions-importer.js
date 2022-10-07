@@ -37,3 +37,5 @@ export default class PostReactionsImporter extends DirectKeyDataImporter {
         );
     }
 }
+
+PostReactionsImporter.STORAGE_KEY = "postReactions";

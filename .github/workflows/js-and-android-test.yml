@@ -2,7 +2,7 @@ name: Test pushes and PRs
 on:
   push:
   pull_request:
-    types: [assigned, opened, ready_for_review, closed]
+    types: [opened]
 
 jobs:
   test:
@@ -23,7 +23,7 @@ jobs:
             node_modules
             **/node_modules
             ~/.cache
-          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json', 'build/packages.json') }}-${{ hashFiles('package-lock.json', 'build/packages.json') }}
       - name: Checks paths to trigger the rest of the steps
         uses: dorny/paths-filter@8c7f485a57f7cad3483dcc0fdf36122a0542f200 #v2.10.2
         id: changes
@@ -52,16 +52,18 @@ jobs:
             - 'platform/podjs/**'
             swift:
             - 'platform/ios/**'
-      - name: Lint core and features
+      - name: Lint platform and features
         if: steps.changes.outputs.js == 'true'
         run: ./build.js lint
       - name: Install JS packages
         if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.js == 'true' || steps.changes.outputs.android == 'true')
         run: ./build.js offlineInstall
-      - name: Build core and features
+      - name: Build platform and features
         if: steps.changes.outputs.apiAndFeatures == 'true' || steps.changes.outputs.android == 'true'
         run: ./build.js build
-      - name: Test core and features
+        env:
+          POLYPOD_BUILD_PLATFORMS: android
+      - name: Test platform and features
         if: steps.changes.outputs.apiAndFeatures == 'true'
         run: xvfb-run --auto-servernum ./build.js test
       - uses: actions/setup-java@v3
@@ -75,11 +77,6 @@ jobs:
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle') }}
-      - name: Build core with Android bindings
-        if: steps.changes.outputs.android == 'true'
-        working-directory: platform/core
-        run: |
-          make android_bindings
       - name: Test android
         if: steps.changes.outputs.android == 'true'
         working-directory: platform/android

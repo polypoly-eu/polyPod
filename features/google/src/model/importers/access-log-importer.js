@@ -40,7 +40,7 @@ export default class AccessLogImporter {
     async import({ zipFile, facebookAccount: googleAccount }) {
         const entries = await relevantZipEntries(zipFile);
         const accessLogEntries = entries.filter(({ path }) => {
-            return matchRegex(path, this);
+            return matchRegex(path, this.constructor.name);
         });
         const parser = new AccessLogParser();
         const parserOutput = (

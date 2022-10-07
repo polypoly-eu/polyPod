@@ -52,7 +52,7 @@ export default (commandLineArgs) => {
                         dest: "dist",
                     },
                     {
-                        src: ["src/static/fonts/*"],
+                        src: ["src/static/fonts/jost*"],
                         dest: "dist/fonts",
                     },
                 ],
@@ -76,7 +76,7 @@ export default (commandLineArgs) => {
             // overwite the default warning function
             if (
                 warning.code === "CIRCULAR_DEPENDENCY" &&
-                warning.cycle[0].match(/(d3-|importer-context)/)
+                warning.cycle[0].match(/(d3-|facebook-context)/)
             ) {
                 return;
             } else {

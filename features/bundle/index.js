@@ -18,7 +18,7 @@ function packageFeature({ archiveName, moduleName, artifactPath }, targetDir) {
         destination: targetArchive,
         cwd: sourceDir,
     }).catch((error) => {
-        console.error(error.stack);
+        console.error(`Failed to package ${archiveName}:`, error.stack);
         process.exit(1);
     });
 }
