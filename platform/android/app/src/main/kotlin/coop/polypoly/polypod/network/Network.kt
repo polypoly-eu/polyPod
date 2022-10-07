@@ -147,6 +147,6 @@ open class Network(val context: Context) {
         } finally {
             connection.disconnect()
         }
-        return@withContext response // unreachable code needed for return type inference
+        return@withContext response
     }
 }
