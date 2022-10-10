@@ -48,7 +48,7 @@ export const PolyImportProvider = ({
 
   const handleRemoveFile = (fileID) => {
     setAccount(null);
-    return storage.removeFile(fileID);
+    storage.removeFile(fileID);
   };
 
   useEffect(() => {
