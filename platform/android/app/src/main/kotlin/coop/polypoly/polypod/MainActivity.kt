@@ -8,13 +8,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
-import coop.polypoly.core.BootstrapArgs
-import coop.polypoly.core.Core
-import coop.polypoly.core.CoreExceptionCode
-import coop.polypoly.core.CoreFailure
-import coop.polypoly.core.CoreRequest
-import coop.polypoly.core.fromValue
-import coop.polypoly.polypod.core.UpdateNotification
+import coop.polypoly.core.*
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 
@@ -50,7 +44,8 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        val notification = UpdateNotification(this)
+        val storage = UpdateNotificationStorage.getInstance(this)
+        val notification = UpdateNotification(storage)
         notification.handleStartup()
 
         val firstRun = Preferences.isFirstRun(this)
@@ -70,8 +65,8 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
 
         if (notification.showInApp) {
             AlertDialog.Builder(this)
-                .setTitle(notification.title)
-                .setMessage(notification.text)
+                .setTitle(storage.readTitle())
+                .setMessage(storage.readText())
                 .setPositiveButton(
                     R.string.button_update_notification_close
                 ) { _, _ ->

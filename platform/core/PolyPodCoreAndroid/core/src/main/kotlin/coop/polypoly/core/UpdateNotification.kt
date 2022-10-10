@@ -1,13 +1,14 @@
-package coop.polypoly.polypod.core
+package coop.polypoly.core
 
-import android.content.Context
-import coop.polypoly.polypod.Preferences
-import coop.polypoly.polypod.R
-
-class UpdateNotification(private val context: Context) {
-    companion object {
-        data class MockData(var id: Int? = null)
-        val mockData = MockData()
+class UpdateNotification(private val storage: Storage) {
+    interface Storage {
+        fun readId(): Int
+        fun readTitle(): String
+        fun readText(): String
+        fun readPushDelay(): Int
+        fun writeLast(id: Int, name: String)
+        fun readLastId(): Int?
+        fun readLastState(): String?
     }
 
     private enum class State {
@@ -21,15 +22,7 @@ class UpdateNotification(private val context: Context) {
         }
     }
 
-    val id = mockData.id
-        ?: context.resources.getInteger(R.integer.update_notification_id)
-
-    val title = context.getString(R.string.update_notification_title)
-
-    val text = context.getString(R.string.update_notification_text)
-
-    val pushDelay =
-        context.resources.getInteger(R.integer.update_notification_push_delay)
+    val id = storage.readId()
 
     val showPush: Boolean
         get() = state == State.NOT_SEEN
@@ -40,11 +33,12 @@ class UpdateNotification(private val context: Context) {
     private var state: State = loadLastState()
         set(value) {
             field = value
-            Preferences.setLastNotification(context, id, state.name)
+            storage.writeLast(id, state.name)
         }
 
     private fun loadLastState(): State {
-        val (lastId, lastState) = Preferences.getLastNotification(context)
+        val lastId = storage.readLastId() ?: 0
+        val lastState = storage.readLastState()
         return when {
             id == 0 -> State.ALL_SEEN
             id < lastId -> State.ALL_SEEN

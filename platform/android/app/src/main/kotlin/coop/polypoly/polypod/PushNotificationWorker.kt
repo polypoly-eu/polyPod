@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import coop.polypoly.polypod.core.UpdateNotification
+import coop.polypoly.core.UpdateNotification
 
 private const val CHANNEL_ID = "coop.polypoly.polypod.update"
 private const val CHANNEL_NAME = "polyPod updates"
@@ -24,15 +24,19 @@ class PushNotificationWorker(
     private val context = appContext
 
     override fun doWork(): Result {
-        val notification = UpdateNotification(context)
+        val notification =
+            UpdateNotification(UpdateNotificationStorage.getInstance(context))
         if (!notification.showPush)
             return Result.success()
         notification.handlePushSeen()
-        showPushNotification(notification)
+        showPushNotification()
         return Result.success()
     }
 
-    private fun showPushNotification(notification: UpdateNotification) {
+    private fun showPushNotification() {
+        // TODO: Maybe don't call these "read" functions here... At least
+        //       combine it into "notification data"?
+        val storage = UpdateNotificationStorage.getInstance(context)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
@@ -55,15 +59,15 @@ class PushNotificationWorker(
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setAutoCancel(true)
-                .setContentTitle(notification.title)
-                .setContentText(notification.text)
+                .setContentTitle(storage.readTitle())
+                .setContentText(storage.readText())
                 .setStyle(
-                    NotificationCompat.BigTextStyle().bigText(notification.text)
+                    NotificationCompat.BigTextStyle().bigText(storage.readText())
                 )
                 .setContentIntent(mainPendingIntent)
                 .build()
 
         NotificationManagerCompat.from(context)
-            .notify(notification.id, pushNotification)
+            .notify(storage.readId(), pushNotification)
     }
 }
