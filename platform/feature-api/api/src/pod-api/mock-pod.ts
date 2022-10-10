@@ -20,9 +20,13 @@ export class MockPolyOut extends DefaultPolyOut {
             throw new PolyPodUriError(`${destUri} is not a polyPod URI`);
         }
 
-        const data = await this.fs.readFile(path, { encoding: "binary" });
+        const data: Buffer = (await this.fs.readFile(path, {
+            encoding: "binary",
+        })) as Buffer;
 
-        const zipReader = new zip.ZipReader(new zip.BlobReader(data));
+        const zipReader = new zip.ZipReader(
+            new zip.BlobReader(new Blob([data]))
+        );
         this.entries[destUri] = await zipReader.getEntries();
         return destUri;
     }
