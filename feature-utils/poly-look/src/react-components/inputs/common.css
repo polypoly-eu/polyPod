@@ -35,6 +35,7 @@
   pointer-events: none;
   background-color: var(--pl-field-color-fill-disabled);
   border-color: var(--pl-field-color-border-disabled);
+  color: var(--pl-field-color-text-disabled);
 }
 
 .poly-input-field .body-disabled+.helper-text {
