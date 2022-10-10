@@ -21,10 +21,10 @@
   },
   "dependencies": {
     "@types/zip.js": "^2.0.29",
-    "@zip.js/zip.js": "^2.6.41",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "fast-check": "^2.2.1",
+    "jszip": "^3.10.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -43,9 +43,14 @@
     "rdf-data-factory": "^1.0.4"
   },
   "private": true,
-  "jest" : {
-    "roots": ["<rootDir>/src"],
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
     "preset": "ts-jest",
-    "testPathIgnorePatterns": ["node_modules/", "<rootDir>/src/pod-api/spec.ts"]
+    "testPathIgnorePatterns": [
+      "node_modules/",
+      "<rootDir>/src/pod-api/spec.ts"
+    ]
   }
 }
