@@ -20,6 +20,8 @@
     "docs": "typedoc"
   },
   "dependencies": {
+    "@types/zip.js": "^2.0.29",
+    "@zip.js/zip.js": "^2.6.41",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "fast-check": "^2.2.1",

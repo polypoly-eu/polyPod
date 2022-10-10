@@ -12,16 +12,17 @@ export class MockPolyOut extends DefaultPolyOut {
         this.entries = { "": [] };
     }
 
-    async importArchive(path: string, destUri?: string): Promise<string> {
-        if (!destUri) {
-            destUri = new PolyUri().toString();
-        } else {
-            if (!isPolypodUri(destUri)) {
-                throw new PolyPodUriError(`${destUri} is not a polyPod URI`);
-            }
+    async importArchive(
+        path: string,
+        destUri: string = new PolyUri().toString()
+    ): Promise<string> {
+        if (!isPolypodUri(destUri)) {
+            throw new PolyPodUriError(`${destUri} is not a polyPod URI`);
         }
-        const blob = this.fs.readFile(path);
-        const zipReader = new zip.ZipReader(new zip.BlobReader(blob));
+
+        const data = await this.fs.readFile(path, { encoding: "binary" });
+
+        const zipReader = new zip.ZipReader(new zip.BlobReader(data));
         this.entries[destUri] = await zipReader.getEntries();
         return destUri;
     }
