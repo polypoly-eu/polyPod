@@ -46,6 +46,7 @@ export default [
             "memfs",
             "@rdfjs/dataset",
             "uuid",
+            "@zip.js/zip.js",
         ],
     },
 ];
