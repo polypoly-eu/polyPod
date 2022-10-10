@@ -42,5 +42,10 @@
     "n3": "^1.8.0",
     "rdf-data-factory": "^1.0.4"
   },
-  "private": true
+  "private": true,
+  "jest" : {
+    "roots": ["<rootDir>/src"],
+    "preset": "ts-jest",
+    "testPathIgnorePatterns": ["node_modules/", "<rootDir>/src/pod-api/spec.ts"]
+  }
 }
