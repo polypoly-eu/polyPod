@@ -39,17 +39,19 @@ export function TextField({
   disabled,
 }) {
   const [isIconVisible, setIconVisibility] = useState(false);
+  const [isFocused, setFocus] = useState(false);
   const [errorIcon, setErrorIcon] = useState(error);
   const [labelClass, setLabelClass] = useState(
     value ? labelPosition.up : labelPosition.inside
   );
   const inputRef = useRef();
-  let bodyClass = getBodyClass(disabled, error, isIconVisible);
+  let bodyClass = getBodyClass(disabled, error, isFocused);
   return (
     <div className="poly-input-field">
       <div
         className={`body ${bodyClass}`}
         onFocus={() => {
+          setFocus(true);
           setLabelClass(labelPosition.up);
           if (value) setIconVisibility(true);
           else setIconVisibility(false);
@@ -60,6 +62,7 @@ export function TextField({
           if (!value) setLabelClass(labelPosition.inside);
           setIconVisibility(false);
           if (error) setErrorIcon(true);
+          setFocus(false);
         }}
         tabIndex={tabIndex}
         data-testid="input-focusable"

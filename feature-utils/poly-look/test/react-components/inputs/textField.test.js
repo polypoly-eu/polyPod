@@ -25,20 +25,19 @@ describe("TextField", () => {
       const inputBody = screen.getByTestId("input-focusable");
 
       expect(inputBody).not.toHaveClass("body-focused");
-      inputBody.focus();
+      document.querySelector("input").focus();
       expect(inputBody).toHaveClass("body-focused");
     });
 
     it("error state", () => {
-      render(<TextField error={true} />);
-      const inputBody = screen.getByTestId("input-focusable");
+      render(<TextField error={true} tabIndex={1} value="test" />);
       const errorIcon = screen.getByTestId("triangle-exclamation");
       const clearIcon = screen.getByTestId("circle-xmark");
 
       expect(errorIcon).toBeVisible();
       expect(clearIcon).not.toBeVisible();
 
-      inputBody.focus();
+      document.querySelector("input").focus();
       expect(errorIcon).not.toBeVisible();
       expect(clearIcon).toBeVisible();
     });
