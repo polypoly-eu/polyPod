@@ -1,4 +1,4 @@
-import { podBubblewrapClasses, podBubblewrap } from "../../remote";
+import { podBubblewrap } from "../../remote";
 import {
     NamedNode,
     BlankNode,
