@@ -3,6 +3,13 @@ import { TextField } from "../../../../src/react-components";
 
 export default {
   title: "Visuals/Molecules/TextField",
+  component: TextField,
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/file/qIrr4QJrmYGqVQHQoCECux/polylook?node-id=4282%3A3355",
+    },
+  },
 };
 
 const Template = (args) => {
