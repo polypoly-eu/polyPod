@@ -38,7 +38,7 @@ export const PolyImportProvider = ({
           return;
         }
         for (const file of storage.files) {
-          resolvedFiles.push(await file);
+          resolvedFiles.push(file);
         }
         setFiles(resolvedFiles);
         setIsLoading(false);
