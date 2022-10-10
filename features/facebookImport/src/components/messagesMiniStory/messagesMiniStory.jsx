@@ -2,11 +2,12 @@ import React from "react";
 
 import i18n from "!silly-i18n";
 
+const l12nt = (o) => i18n.l12n.t(o);
+
 import BarChart from "../dataViz/barChart.jsx";
 import InfoButton from "../buttons/infoButton/infoButton.jsx";
 
 import "./messagesMiniStory.css";
-import { formatTime } from "../../utils/formatTime";
 
 const SummaryText = ({
     messagesCount,
@@ -29,9 +30,7 @@ export const MessagesMiniStorySummary = ({
 }) => {
     return (
         <div className="render-summary">
-            <p className="highlighted-number">
-                {messagesCount.toLocaleString("de-DE")}
-            </p>
+            <p className="highlighted-number">{l12nt(messagesCount)}</p>
             <SummaryText
                 messagesCount={messagesCount}
                 messagesThreadsData={messagesThreadsData}
@@ -63,7 +62,7 @@ export const MessagesMiniStoryDetails = ({
                         <div className="bar-extra-info">
                             <p>{i18n.t("messagesMiniStory:first.chat")}</p>
                             {extraData.firstChatDate
-                                ? formatTime(extraData.firstChatDate)
+                                ? l12nt(extraData.firstChatDate)
                                 : "unknown"}
                         </div>
                         <div className="bar-extra-info">
@@ -71,7 +70,7 @@ export const MessagesMiniStoryDetails = ({
                                 {i18n.t("messagesMiniStory:last.interaction")}
                             </p>
                             {extraData.lastChatDate
-                                ? formatTime(extraData.lastChatDate)
+                                ? l12nt(extraData.lastChatDate)
                                 : "unknown"}
                         </div>
                     </>
