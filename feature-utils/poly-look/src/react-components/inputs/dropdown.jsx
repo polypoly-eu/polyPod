@@ -61,6 +61,7 @@ export function Dropdown({
   return (
     <div className="poly-input-field poly-dropdown">
       <div
+        data-testid="input-focusable"
         className={`body ${bodyClass}`}
         onFocus={() => {
           setOpen(true);
