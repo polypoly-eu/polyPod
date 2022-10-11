@@ -213,13 +213,6 @@ export interface Info {
 }
 
 /**
- * @hidden
- */
-export interface PolyLifecycle {
-    startFeature(id: string, background: boolean): Promise<void>;
-}
-
-/**
  * @class Endpoint is the API features communicate with in order to perform fetch requests
  */
 export interface Endpoint {
