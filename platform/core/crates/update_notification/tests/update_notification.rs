@@ -1,39 +1,26 @@
-use std::cell::RefCell;
-use std::rc::Rc;
+use std::sync::Arc;
+use std::sync::Mutex;
 use update_notification::update_notification::*;
 
-struct MockUpdateNotificationStorage {
-    mock_id: Option<u32>,
-    last_id: Option<u32>,
-    last_state: Option<Seen>,
+struct MockStore {
+    last_notification: Option<LastNotification>,
 }
 
-impl MockUpdateNotificationStorage {
-    fn new() -> MockUpdateNotificationStorage {
-        MockUpdateNotificationStorage {
-            mock_id: None,
-            last_id: None,
-            last_state: None,
+impl MockStore {
+    fn new() -> MockStore {
+        MockStore {
+            last_notification: None,
         }
     }
 }
 
-impl UpdateNotificationStorage for MockUpdateNotificationStorage {
-    fn read_id(&self) -> u32 {
-        self.mock_id.unwrap()
+impl UpdateNotificationStore for MockStore {
+    fn get_last_notification(&self) -> Option<LastNotification> {
+        self.last_notification
     }
 
-    fn read_last_id(&self) -> Option<u32> {
-        self.last_id
-    }
-
-    fn read_last_state(&self) -> Option<Seen> {
-        self.last_state.clone()
-    }
-
-    fn write_last(&mut self, id: u32, state: Seen) {
-        self.last_id = Some(id);
-        self.last_state = Some(state);
+    fn set_last_notification(&mut self, last_notification: LastNotification) {
+        self.last_notification = Some(last_notification)
     }
 }
 
@@ -91,64 +78,60 @@ macro_rules! assert_all_showing {
     };
 }
 
-fn create_storage() -> Rc<RefCell<MockUpdateNotificationStorage>> {
-    Rc::new(RefCell::new(MockUpdateNotificationStorage::new()))
+fn create_store() -> Arc<Mutex<MockStore>> {
+    Arc::new(Mutex::from(MockStore::new()))
 }
 
-fn create_notification(
-    storage: &Rc<RefCell<MockUpdateNotificationStorage>>,
-    mock_id: u32,
-) -> UpdateNotification {
-    storage.borrow_mut().mock_id = Some(mock_id);
-    UpdateNotification::new(storage.clone())
+fn create_notification(mock_id: u32, store: &Arc<Mutex<MockStore>>) -> UpdateNotification {
+    UpdateNotification::new(mock_id, store.clone())
 }
 
 #[test]
 fn notification_with_id_0_seen() {
-    let storage = create_storage();
-    let notification = create_notification(&storage, 0);
+    let store = create_store();
+    let notification = create_notification(0, &store);
     assert_none_showing!(notification);
 }
 
 #[test]
 fn first_notification_not_seen() {
-    let storage = create_storage();
-    let notification = create_notification(&storage, 1);
+    let store = create_store();
+    let notification = create_notification(1, &store);
     assert_all_showing!(notification);
 }
 
 #[test]
 fn previously_seen_notification_seen() {
-    let storage = create_storage();
-    let mut notification = create_notification(&storage, 1);
+    let store = create_store();
+    let mut notification = create_notification(1, &store);
     notification.handle_in_app_seen();
     assert_none_showing!(notification);
 }
 
 #[test]
 fn additional_notification_not_seen() {
-    let storage = create_storage();
-    let mut notification = create_notification(&storage, 1);
+    let store = create_store();
+    let mut notification = create_notification(1, &store);
     notification.handle_in_app_seen();
 
-    let second_notification = create_notification(&storage, 2);
+    let second_notification = create_notification(2, &store);
     assert_all_showing!(second_notification);
 }
 
 #[test]
 fn additonal_notification_with_lower_id_seen() {
-    let storage = create_storage();
-    let mut notification = create_notification(&storage, 2);
+    let store = create_store();
+    let mut notification = create_notification(2, &store);
     notification.handle_in_app_seen();
 
-    let second_notification = create_notification(&storage, 1);
+    let second_notification = create_notification(1, &store);
     assert_none_showing!(second_notification);
 }
 
 #[test]
 fn push_notification_seen_after_startup() {
-    let storage = create_storage();
-    let mut notification = create_notification(&storage, 1);
+    let store = create_store();
+    let mut notification = create_notification(1, &store);
     notification.handle_startup();
     assert_in_app_showing!(notification);
     assert_push_not_showing!(notification);
@@ -156,8 +139,8 @@ fn push_notification_seen_after_startup() {
 
 #[test]
 fn in_app_not_seen_after_push_seen() {
-    let storage = create_storage();
-    let mut notification = create_notification(&storage, 1);
+    let store = create_store();
+    let mut notification = create_notification(1, &store);
     notification.handle_push_seen();
     assert_in_app_showing!(notification);
     assert_push_not_showing!(notification);
@@ -165,8 +148,8 @@ fn in_app_not_seen_after_push_seen() {
 
 #[test]
 fn all_seen_after_first_run() {
-    let storage = create_storage();
-    let mut notification = create_notification(&storage, 1);
+    let store = create_store();
+    let mut notification = create_notification(1, &store);
     notification.handle_first_run();
     assert_none_showing!(notification);
 }

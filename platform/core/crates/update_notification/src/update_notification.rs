@@ -1,5 +1,5 @@
-use std::cell::RefCell;
-use std::rc::Rc;
+use std::sync::Arc;
+use std::sync::Mutex;
 
 #[derive(Eq, PartialEq, Copy, Clone)]
 #[repr(C)]
@@ -9,30 +9,28 @@ pub enum Seen {
     ALL,
 }
 
-pub trait UpdateNotificationStorage {
-    fn read_id(&self) -> u32;
-    fn read_last_id(&self) -> Option<u32>;
-    fn read_last_state(&self) -> Option<Seen>;
-    fn write_last(&mut self, id: u32, state: Seen);
+#[derive(Copy, Clone)]
+pub struct LastNotification {
+    id: u32,
+    state: Seen,
+}
+
+pub trait UpdateNotificationStore {
+    fn get_last_notification(&self) -> Option<LastNotification>;
+    fn set_last_notification(&mut self, last_notification: LastNotification);
 }
 
 #[repr(C)]
 pub struct UpdateNotification {
-    storage: Rc<RefCell<dyn UpdateNotificationStorage>>,
     id: u32,
-    last_id: u32,
-    last_state: Seen,
+    store: Arc<Mutex<dyn UpdateNotificationStore>>,
 }
 
 impl UpdateNotification {
-    // Would be ideal if the storage instance could just be passed in as a
-    // reference, or anything simpler than Rc<RefCell<>>.
-    pub fn new(storage: Rc<RefCell<dyn UpdateNotificationStorage>>) -> Self {
+    pub fn new(id: u32, store: Arc<Mutex<dyn UpdateNotificationStore>>) -> Self {
         Self {
-            storage: storage.clone(),
-            id: storage.borrow().read_id(),
-            last_id: storage.borrow().read_last_id().unwrap_or(0),
-            last_state: storage.borrow().read_last_state().unwrap_or(Seen::NOT),
+            id: id,
+            store: store.clone(),
         }
     }
 
@@ -40,14 +38,26 @@ impl UpdateNotification {
         self.id
     }
 
+    fn get_last_notification(&self) -> LastNotification {
+        self.store
+            .lock()
+            .unwrap()
+            .get_last_notification()
+            .unwrap_or(LastNotification {
+                id: 0,
+                state: Seen::NOT,
+            })
+    }
+
     fn show<F: Fn(Seen) -> bool>(&self, show_for_last_state: F) -> bool {
-        if self.id == 0 || self.id < self.last_id {
+        let last_notification = self.get_last_notification();
+        if self.id == 0 || self.id < last_notification.id {
             return false;
         }
-        if self.id > self.last_id {
+        if self.id > last_notification.id {
             return true;
         }
-        show_for_last_state(self.last_state)
+        show_for_last_state(last_notification.state)
     }
 
     pub fn handle_first_run(&mut self) {
@@ -67,11 +77,13 @@ impl UpdateNotification {
     }
 
     fn update_last(&mut self, state: Seen) {
-        self.last_id = self.id;
-        self.last_state = state;
-        self.storage
-            .borrow_mut()
-            .write_last(self.last_id, self.last_state);
+        self.store
+            .lock()
+            .unwrap()
+            .set_last_notification(LastNotification {
+                id: self.id,
+                state: state,
+            });
     }
 
     pub fn handle_in_app_seen(&mut self) {
@@ -79,7 +91,7 @@ impl UpdateNotification {
     }
 
     pub fn handle_push_seen(&mut self) {
-        if self.last_state != Seen::NOT {
+        if self.get_last_notification().state != Seen::NOT {
             return;
         }
         self.update_last(Seen::PUSH);
