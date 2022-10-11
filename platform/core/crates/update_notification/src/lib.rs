@@ -29,7 +29,7 @@ pub struct UpdateNotification {
 impl UpdateNotification {
     pub fn new(id: u32, store: Arc<dyn UpdateNotificationStore>) -> Self {
         Self {
-            id: id,
+            id,
             store: store.clone(),
         }
     }
@@ -71,10 +71,8 @@ impl UpdateNotification {
     }
 
     fn update_last(&mut self, state: Seen) {
-        self.store.set_last_notification(LastNotification {
-            id: self.id,
-            state: state,
-        });
+        self.store
+            .set_last_notification(LastNotification { id: self.id, state });
     }
 
     pub fn handle_in_app_seen(&mut self) {
