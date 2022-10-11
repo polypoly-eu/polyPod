@@ -304,8 +304,6 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
     }
 
     polyLifecycle(): ServerOf<PolyLifecycleBackend> {
-        if (this.pod.polyLifecycle) return this.pod.polyLifecycle;
-
         return new DummyPolyLifecycle();
     }
 

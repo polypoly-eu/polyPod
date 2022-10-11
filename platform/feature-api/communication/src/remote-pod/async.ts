@@ -166,8 +166,5 @@ export class AsyncPod implements Pod {
         this.triplestore = new AsyncTriplestore(
             promise.then((pod) => pod.triplestore)
         );
-        this.polyLifecycle = new AsyncPolyLifecycle(
-            promise.then((pod) => pod.polyLifecycle)
-        );
     }
 }
