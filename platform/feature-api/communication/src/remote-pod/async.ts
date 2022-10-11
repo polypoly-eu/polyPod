@@ -140,10 +140,6 @@ class AsyncPolyLifecycle implements PolyLifecycle {
         throw new Error("Lifecycle is not implemented");
     }
 
-    async listFeatures(): Promise<Record<string, boolean>> {
-        return (await this.force()).listFeatures();
-    }
-
     async startFeature(id: string, background: boolean): Promise<void> {
         return (await this.force()).startFeature(id, background);
     }

@@ -38,10 +38,6 @@ describe("Async pod", () => {
                 startFeature: async (...args) => {
                     log.push(args);
                 },
-                listFeatures: async () => ({
-                    "test-on": true,
-                    "test-off": false,
-                }),
             };
             Object.assign(underlying, { polyLifecycle });
             pod = new AsyncPod(

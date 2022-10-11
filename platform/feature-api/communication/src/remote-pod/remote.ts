@@ -65,7 +65,6 @@ type PolyOutBackend = ObjectBackendSpec<{
 }>;
 
 type PolyLifecycleBackend = ObjectBackendSpec<{
-    listFeatures(): ValueBackendSpec<Record<string, boolean>>;
     startFeature(id: string, background: boolean): ValueBackendSpec<void>;
 }>;
 
@@ -200,7 +199,6 @@ export class RemoteClientPod implements Pod {
 
     get polyLifecycle(): PolyLifecycle {
         return {
-            listFeatures: () => this.rpcClient.polyLifecycle().listFeatures()(),
             startFeature: (id, background) =>
                 this.rpcClient.polyLifecycle().startFeature(id, background)(),
         };
@@ -251,10 +249,6 @@ export class RemoteClientPod implements Pod {
 // TODO move to pod-api?
 // TODO should this throw instead?
 class DummyPolyLifecycle implements PolyLifecycle {
-    async listFeatures(): Promise<Record<string, boolean>> {
-        return {};
-    }
-
     async startFeature(): Promise<void> {
         return;
     }
