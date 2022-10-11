@@ -1,7 +1,6 @@
 import {
     Pod,
     PolyOut,
-    PolyLifecycle,
     PolyIn,
     PolyNav,
     ExternalFile,
