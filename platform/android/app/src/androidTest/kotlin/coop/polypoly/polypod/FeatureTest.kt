@@ -13,7 +13,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import coop.polypoly.core.FeatureCategoryId
-import coop.polypoly.polypod.core.UpdateNotification
 import coop.polypoly.polypod.features.FeatureStorage
 import org.junit.Rule
 import org.junit.Test
@@ -49,7 +48,7 @@ class FeatureTest {
             .commit()
         Preferences.setFirstRun(context, false)
         Preferences.setSecurityDoNotAskAgainCheck(context, true)
-        UpdateNotification.mockData.id = 0
+        UpdateNotificationStorage.mockData.id = 0
         FeatureStorage.forceShowCategories = listOf(FeatureCategoryId.developer)
         createAndroidComposeRule()
     }

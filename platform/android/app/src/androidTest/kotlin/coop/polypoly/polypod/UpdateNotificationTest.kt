@@ -11,7 +11,6 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import coop.polypoly.polypod.core.UpdateNotification
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -101,7 +100,7 @@ class UpdateNotificationTest {
 
     private fun relaunchActivity(notificationId: Int) {
         closeActivity()
-        UpdateNotification.mockData.id = notificationId
+        UpdateNotificationStorage.mockData.id = notificationId
         activityScenario = ActivityScenario.launch(MainActivity::class.java)
     }
 }
