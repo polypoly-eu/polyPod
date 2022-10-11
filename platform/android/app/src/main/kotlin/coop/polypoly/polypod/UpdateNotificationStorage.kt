@@ -3,12 +3,6 @@ package coop.polypoly.polypod
 import android.content.Context
 import coop.polypoly.core.UpdateNotification
 
-// TODO:
-//val title = context.getString(R.string.update_notification_title)
-//val text = context.getString(R.string.update_notification_text)
-//val pushDelay =
-//    context.resources.getInteger(R.integer.update_notification_push_delay)
-
 class UpdateNotificationStorage(private val context: Context) :
     UpdateNotification.Storage {
     companion object {
