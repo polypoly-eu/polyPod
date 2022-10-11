@@ -21,8 +21,7 @@ class AppUpdateReceiver : BroadcastReceiver() {
             )
             return
         }
-        val delay = UpdateNotificationStorage.getInstance(context)
-            .readPushDelay().toLong()
+        val delay = UpdateNotificationStorage(context).pushDelay.toLong()
         val request =
             OneTimeWorkRequest.Builder(PushNotificationWorker::class.java)
                 .setInitialDelay(delay, TimeUnit.SECONDS).build()

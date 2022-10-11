@@ -25,7 +25,7 @@ class PushNotificationWorker(
 
     override fun doWork(): Result {
         val notification =
-            UpdateNotification(UpdateNotificationStorage.getInstance(context))
+            UpdateNotification(UpdateNotificationStorage(context))
         if (!notification.showPush)
             return Result.success()
         notification.handlePushSeen()
@@ -34,9 +34,7 @@ class PushNotificationWorker(
     }
 
     private fun showPushNotification() {
-        // TODO: Maybe don't call these "read" functions here... At least
-        //       combine it into "notification data"?
-        val storage = UpdateNotificationStorage.getInstance(context)
+        val storage = UpdateNotificationStorage(context)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
@@ -59,10 +57,10 @@ class PushNotificationWorker(
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setAutoCancel(true)
-                .setContentTitle(storage.readTitle())
-                .setContentText(storage.readText())
+                .setContentTitle(storage.title)
+                .setContentText(storage.text)
                 .setStyle(
-                    NotificationCompat.BigTextStyle().bigText(storage.readText())
+                    NotificationCompat.BigTextStyle().bigText(storage.text)
                 )
                 .setContentIntent(mainPendingIntent)
                 .build()

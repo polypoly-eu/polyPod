@@ -3,9 +3,6 @@ package coop.polypoly.core
 class UpdateNotification(private val storage: Storage) {
     interface Storage {
         fun readId(): Int
-        fun readTitle(): String
-        fun readText(): String
-        fun readPushDelay(): Int
         fun writeLast(id: Int, name: String)
         fun readLastId(): Int?
         fun readLastState(): String?
