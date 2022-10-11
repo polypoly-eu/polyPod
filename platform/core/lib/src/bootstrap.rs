@@ -14,6 +14,7 @@ use std::{
     sync::{Arc, Mutex},
     time::Instant,
 };
+use update_notification::UpdateNotification;
 use user_session::UserSession;
 
 #[cfg(target_os = "android")]
@@ -31,6 +32,7 @@ const RDF_DB: &str = "rdf_db";
 pub struct BoostrapArgs {
     language_code: String,
     fs_root: String,
+    update_notification_id: u32,
 }
 
 pub fn bootstrap(
@@ -50,10 +52,16 @@ pub fn bootstrap(
     let builder = Box::new(Instant::now);
     let user_session = Mutex::from(UserSession::new(builder, preferences.clone()));
 
+    let update_notification = Mutex::from(UpdateNotification::new(
+        args.update_notification_id,
+        preferences.clone(),
+    ));
+
     let core = Core {
         language_code: args.language_code,
         preferences,
         user_session,
+        update_notification,
         platform_callback,
         #[cfg(feature = "poly_rdf")]
         rdf_store: RDFStore::new(PathBuf::from(args.fs_root.clone() + "/" + RDF_DB))

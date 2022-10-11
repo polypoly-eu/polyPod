@@ -2,11 +2,13 @@ use common::serialization::{message_pack_deserialize, message_pack_serialize};
 use io::key_value_store::KeyValueStore;
 use serde::de::DeserializeOwned;
 use serde::Serialize;
+use update_notification::{LastNotification, UpdateNotificationStore};
 use user_session::{TimeoutOption, TimeoutOptionStore};
 
 #[derive(Serialize)]
 enum PreferenceKey {
     UserSessionTimeoutOption,
+    LastNotification,
 }
 
 pub struct Preferences {
@@ -48,5 +50,15 @@ impl TimeoutOptionStore for Preferences {
 
     fn set_timeout_option(&self, option: TimeoutOption) {
         self.write(PreferenceKey::UserSessionTimeoutOption, option)
+    }
+}
+
+impl UpdateNotificationStore for Preferences {
+    fn get_last_notification(&self) -> Option<LastNotification> {
+        self.read(PreferenceKey::LastNotification)
+    }
+
+    fn set_last_notification(&self, last_notification: LastNotification) {
+        self.write(PreferenceKey::LastNotification, last_notification)
     }
 }

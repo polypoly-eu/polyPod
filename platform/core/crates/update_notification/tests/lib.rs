@@ -1,25 +1,26 @@
 use std::sync::{Arc, Mutex};
-use update_notification::update_notification::*;
+use update_notification::*;
 
 struct MockStore {
-    last_notification: Option<LastNotification>,
+    last_notification: Arc<Mutex<Option<LastNotification>>>,
 }
 
 impl MockStore {
     fn new() -> MockStore {
         MockStore {
-            last_notification: None,
+            last_notification: Arc::new(Mutex::from(None)),
         }
     }
 }
 
 impl UpdateNotificationStore for MockStore {
     fn get_last_notification(&self) -> Option<LastNotification> {
-        self.last_notification
+        self.last_notification.lock().unwrap().clone()
     }
 
-    fn set_last_notification(&mut self, last_notification: LastNotification) {
-        self.last_notification = Some(last_notification)
+    fn set_last_notification(&self, last_notification: LastNotification) {
+        let mut old_last_notification = self.last_notification.lock().unwrap();
+        *old_last_notification = Some(last_notification)
     }
 }
 
@@ -77,11 +78,11 @@ macro_rules! assert_all_showing {
     };
 }
 
-fn create_store() -> Arc<Mutex<MockStore>> {
-    Arc::new(Mutex::from(MockStore::new()))
+fn create_store() -> Arc<MockStore> {
+    Arc::new(MockStore::new())
 }
 
-fn create_notification(mock_id: u32, store: &Arc<Mutex<MockStore>>) -> UpdateNotification {
+fn create_notification(mock_id: u32, store: &Arc<MockStore>) -> UpdateNotification {
     UpdateNotification::new(mock_id, store.clone())
 }
 

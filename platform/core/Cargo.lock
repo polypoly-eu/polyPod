@@ -681,6 +681,7 @@ dependencies = [
  "preferences",
  "serde",
  "serde_json",
+ "update_notification",
  "user_session",
 ]
 
@@ -1038,6 +1039,7 @@ dependencies = [
  "io",
  "serde",
  "serde_json",
+ "update_notification",
  "user_session",
 ]
 
@@ -1566,6 +1568,9 @@ dependencies = [
 [[package]]
 name = "update_notification"
 version = "0.1.0"
+dependencies = [
+ "serde",
+]
 
 [[package]]
 name = "url"
