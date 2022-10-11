@@ -152,7 +152,6 @@ export class AsyncPod implements Pod {
     readonly info: Info;
     readonly endpoint: Endpoint;
     readonly triplestore: Triplestore;
-    readonly polyLifecycle: PolyLifecycle;
 
     constructor(
         private readonly promise: Promise<Pod>,
