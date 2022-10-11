@@ -216,7 +216,6 @@ export interface Info {
  * @hidden
  */
 export interface PolyLifecycle {
-    listFeatures(): Promise<Record<string, boolean>>;
     startFeature(id: string, background: boolean): Promise<void>;
 }
 
