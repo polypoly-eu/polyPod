@@ -338,9 +338,4 @@ export interface Pod {
      * `triplestore` is an interface to interact with the SPARQL-RDF database
      */
     readonly triplestore: Triplestore;
-
-    /**
-     * @hidden
-     */
-    readonly polyLifecycle?: PolyLifecycle;
 }
