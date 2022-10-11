@@ -26,34 +26,4 @@ describe("Async pod", () => {
 
         podSpec(new AsyncPod(delayed, new DataFactory(false)), "/");
     });
-
-    // TODO move to api, duplicated code
-    describe("Lifecycle", () => {
-        let pod: Pod;
-        let log: Array<(string | boolean)[]>;
-
-        beforeEach(() => {
-            log = [];
-            const polyLifecycle: PolyLifecycle = {
-                startFeature: async (...args) => {
-                    log.push(args);
-                },
-            };
-            Object.assign(underlying, { polyLifecycle });
-            pod = new AsyncPod(
-                Promise.resolve(underlying),
-                new DataFactory(false)
-            );
-        });
-
-        it("Starts feature", async () => {
-            await pod.polyLifecycle?.startFeature("hi", false);
-            await pod.polyLifecycle?.startFeature("yo", true);
-
-            expect(log).toEqual([
-                ["hi", false],
-                ["yo", true],
-            ]);
-        });
-    });
 });
