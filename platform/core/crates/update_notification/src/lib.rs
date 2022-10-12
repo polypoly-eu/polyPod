@@ -10,7 +10,7 @@ pub enum Seen {
     All,
 }
 
-#[derive(Copy, Clone, Serialize, Deserialize, Debug)]
+#[derive(Copy, Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LastNotification {
     id: u32,
