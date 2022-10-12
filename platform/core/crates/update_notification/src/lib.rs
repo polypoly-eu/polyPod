@@ -34,6 +34,10 @@ impl UpdateNotification {
         }
     }
 
+    pub fn id(&self) -> u32 {
+        self.id
+    }
+
     fn get_last_notification(&self) -> LastNotification {
         self.store
             .get_last_notification()
