@@ -48,7 +48,7 @@ class FeatureTest {
             .commit()
         Preferences.setFirstRun(context, false)
         Preferences.setSecurityDoNotAskAgainCheck(context, true)
-        UpdateNotificationStorage.mockData.id = 0
+        UpdateNotificationData.mockData.id = 0
         FeatureStorage.forceShowCategories = listOf(FeatureCategoryId.developer)
         createAndroidComposeRule()
     }

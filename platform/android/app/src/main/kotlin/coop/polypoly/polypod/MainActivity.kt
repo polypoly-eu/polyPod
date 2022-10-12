@@ -32,8 +32,15 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
 
         val language = Language.determine(this@MainActivity)
         val fsRoot = this@MainActivity.filesDir
+        val notificationData = UpdateNotificationData(this)
         try {
-            Core.bootstrapCore(BootstrapArgs(language, fsRoot.path))
+            Core.bootstrapCore(
+                BootstrapArgs(
+                    language,
+                    fsRoot.path,
+                    notificationData.id
+                )
+            )
             logger.info("Core is bootstrapped!")
         } catch (ex: Exception) {
             logger.info(ex.message)
@@ -50,8 +57,9 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        val notificationStorage = UpdateNotificationStorage(this)
-        val notification = UpdateNotification(notificationStorage)
+        initUpdateNotification(notificationData)
+
+        val notification = UpdateNotification()
         notification.handleStartup()
 
         val firstRun = Preferences.isFirstRun(this)
@@ -71,8 +79,8 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
 
         if (notification.showInApp) {
             AlertDialog.Builder(this)
-                .setTitle(notificationStorage.title)
-                .setMessage(notificationStorage.text)
+                .setTitle(notificationData.title)
+                .setMessage(notificationData.text)
                 .setPositiveButton(
                     R.string.button_update_notification_close
                 ) { _, _ ->
@@ -80,6 +88,19 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
                 }
                 .show()
         }
+    }
+
+    private fun initUpdateNotification(data: UpdateNotificationData) {
+        val notificationStorage = object : UpdateNotification.Storage {
+            override fun readId() = data.id
+            override fun readLastId() =
+                Preferences.getLastNotification(this@MainActivity).first
+            override fun readLastState() =
+                Preferences.getLastNotification(this@MainActivity).second
+            override fun writeLast(id: Int, state: String) =
+                Preferences.setLastNotification(this@MainActivity, id, state)
+        }
+        UpdateNotification.storage = notificationStorage
     }
 
     override fun onStateChanged(

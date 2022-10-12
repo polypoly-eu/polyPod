@@ -24,8 +24,7 @@ class PushNotificationWorker(
     private val context = appContext
 
     override fun doWork(): Result {
-        val notification =
-            UpdateNotification(UpdateNotificationStorage(context))
+        val notification = UpdateNotification()
         if (!notification.showPush)
             return Result.success()
         notification.handlePushSeen()
@@ -34,7 +33,7 @@ class PushNotificationWorker(
     }
 
     private fun showPushNotification() {
-        val storage = UpdateNotificationStorage(context)
+        val data = UpdateNotificationData(context)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
@@ -57,15 +56,15 @@ class PushNotificationWorker(
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setAutoCancel(true)
-                .setContentTitle(storage.title)
-                .setContentText(storage.text)
+                .setContentTitle(data.title)
+                .setContentText(data.text)
                 .setStyle(
-                    NotificationCompat.BigTextStyle().bigText(storage.text)
+                    NotificationCompat.BigTextStyle().bigText(data.text)
                 )
                 .setContentIntent(mainPendingIntent)
                 .build()
 
         NotificationManagerCompat.from(context)
-            .notify(storage.readId(), pushNotification)
+            .notify(data.id, pushNotification)
     }
 }

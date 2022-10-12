@@ -4,12 +4,14 @@ import org.msgpack.value.Value
 
 data class BootstrapArgs(
     val languageCode: String,
-    val fsRoot: String
+    val fsRoot: String,
+    val updateNotificationId: Int,
 ) {
     fun asValue(): Value {
         return mapOf(
             "languageCode".asValue() to languageCode.asValue(),
-            "fsRoot".asValue() to fsRoot.asValue()
+            "fsRoot".asValue() to fsRoot.asValue(),
+            "updateNotificationId".asValue() to updateNotificationId.asValue()
         ).asValue()
     }
 }

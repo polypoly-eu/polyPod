@@ -1,9 +1,9 @@
 package coop.polypoly.core
 
-class UpdateNotification(private val storage: Storage) {
+class UpdateNotification() {
     interface Storage {
         fun readId(): Int
-        fun writeLast(id: Int, name: String)
+        fun writeLast(id: Int, state: String)
         fun readLastId(): Int?
         fun readLastState(): String?
     }
@@ -19,7 +19,11 @@ class UpdateNotification(private val storage: Storage) {
         }
     }
 
-    val id = storage.readId()
+    companion object {
+        var storage: Storage? = null
+    }
+
+    val id = storage!!.readId()
 
     val showPush: Boolean
         get() = state == State.NOT_SEEN
@@ -30,12 +34,12 @@ class UpdateNotification(private val storage: Storage) {
     private var state: State = loadLastState()
         set(value) {
             field = value
-            storage.writeLast(id, state.name)
+            storage!!.writeLast(id, state.name)
         }
 
     private fun loadLastState(): State {
-        val lastId = storage.readLastId() ?: 0
-        val lastState = storage.readLastState()
+        val lastId = storage!!.readLastId() ?: 0
+        val lastState = storage!!.readLastState()
         return when {
             id == 0 -> State.ALL_SEEN
             id < lastId -> State.ALL_SEEN

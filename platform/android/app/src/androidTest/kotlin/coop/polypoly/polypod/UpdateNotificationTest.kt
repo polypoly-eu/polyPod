@@ -100,7 +100,7 @@ class UpdateNotificationTest {
 
     private fun relaunchActivity(notificationId: Int) {
         closeActivity()
-        UpdateNotificationStorage.mockData.id = notificationId
+        UpdateNotificationData.mockData.id = notificationId
         activityScenario = ActivityScenario.launch(MainActivity::class.java)
     }
 }
