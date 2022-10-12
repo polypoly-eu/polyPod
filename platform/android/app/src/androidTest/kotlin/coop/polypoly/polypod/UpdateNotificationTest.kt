@@ -49,6 +49,7 @@ class UpdateNotificationTest {
             .edit().clear().commit()
         Preferences.setFirstRun(context, false)
         Preferences.setSecurityDoNotAskAgainCheck(context, true)
+        Preferences.setClearCorePreferences(context, true)
     }
 
     @After
@@ -102,5 +103,9 @@ class UpdateNotificationTest {
         closeActivity()
         UpdateNotificationData.mockData.id = notificationId
         activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        Preferences.setClearCorePreferences(
+            InstrumentationRegistry.getInstrumentation().targetContext,
+            false
+        )
     }
 }

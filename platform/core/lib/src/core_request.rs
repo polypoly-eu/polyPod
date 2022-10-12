@@ -50,6 +50,13 @@ pub enum CoreRequest {
     ExecuteRdfUpdate {
         args: String,
     },
+    HandleStartup,
+    HandleFirstRun,
+    HandleInAppNotificationSeen,
+    HandlePushNotificationSeen,
+    GetShowInAppNotification,
+    GetShowPushNotification,
+    ClearPreferences,
 }
 
 pub fn execute_request(request: CoreRequest) -> MessagePackBytes {
@@ -72,6 +79,13 @@ pub fn execute_request(request: CoreRequest) -> MessagePackBytes {
         CoreRequest::ExecuteRdfQuery { args } => instance.exec_rdf_query(args),
         #[cfg(feature = "poly_rdf")]
         CoreRequest::ExecuteRdfUpdate { args } => instance.exec_rdf_update(args),
+        CoreRequest::HandleStartup => instance.handle_startup(),
+        CoreRequest::HandleFirstRun => instance.handle_first_run(),
+        CoreRequest::HandleInAppNotificationSeen => instance.handle_in_app_notification_seen(),
+        CoreRequest::HandlePushNotificationSeen => instance.handle_push_notification_seen(),
+        CoreRequest::GetShowInAppNotification => instance.get_show_in_app_notification(),
+        CoreRequest::GetShowPushNotification => instance.get_show_push_notification(),
+        CoreRequest::ClearPreferences => instance.clear_preferences(),
     }
 }
 
@@ -147,6 +161,44 @@ impl Core<'_> {
                 .update(update)
                 .map_err(|failure| failure.to_core_failure()),
         )
+    }
+
+    pub fn handle_startup(&self) -> MessagePackBytes {
+        self.update_notification.lock().unwrap().handle_startup();
+        message_pack_serialize(Ok(()) as Result<(), CoreFailure>)
+    }
+
+    pub fn handle_first_run(&self) -> MessagePackBytes {
+        self.update_notification.lock().unwrap().handle_first_run();
+        message_pack_serialize(Ok(()) as Result<(), CoreFailure>)
+    }
+
+    pub fn handle_in_app_notification_seen(&self) -> MessagePackBytes {
+        self.update_notification
+            .lock()
+            .unwrap()
+            .handle_in_app_seen();
+        message_pack_serialize(Ok(()) as Result<(), CoreFailure>)
+    }
+
+    pub fn handle_push_notification_seen(&self) -> MessagePackBytes {
+        self.update_notification.lock().unwrap().handle_push_seen();
+        message_pack_serialize(Ok(()) as Result<(), CoreFailure>)
+    }
+
+    pub fn get_show_in_app_notification(&self) -> MessagePackBytes {
+        let show = self.update_notification.lock().unwrap().show_in_app();
+        message_pack_serialize(Ok(show) as Result<bool, CoreFailure>)
+    }
+
+    pub fn get_show_push_notification(&self) -> MessagePackBytes {
+        let show = self.update_notification.lock().unwrap().show_push();
+        message_pack_serialize(Ok(show) as Result<bool, CoreFailure>)
+    }
+
+    pub fn clear_preferences(&self) -> MessagePackBytes {
+        self.preferences.clear();
+        message_pack_serialize(Ok(()) as Result<(), CoreFailure>)
     }
 }
 

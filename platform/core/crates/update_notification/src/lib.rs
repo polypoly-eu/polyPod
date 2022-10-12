@@ -13,8 +13,8 @@ pub enum Seen {
 #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LastNotification {
-    id: u32,
-    state: Seen,
+    pub id: u32,
+    pub state: Seen,
 }
 
 pub trait UpdateNotificationStore: Send + Sync {
@@ -23,7 +23,7 @@ pub trait UpdateNotificationStore: Send + Sync {
 }
 
 pub struct UpdateNotification {
-    id: u32,
+    pub id: u32,
     store: Arc<dyn UpdateNotificationStore>,
 }
 

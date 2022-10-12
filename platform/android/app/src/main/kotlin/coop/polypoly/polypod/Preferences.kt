@@ -8,12 +8,11 @@ import org.json.JSONObject
 class Preferences {
     companion object {
         private const val firstRunKey = "firstRun"
-        private const val lastNotificationIdKey = "lastNotificationId"
-        private const val lastNotificationStateKey = "lastNotificationState"
         private const val biometricCheckKey = "biometricCheck"
         private const val biometricEnabledKey = "biometricEnabledKey"
         private const val userConfiguredAuth = "userConfiguredAuth"
         private const val fsKey = ""
+        private const val clearCorePreferencesKey = "clearCorePreferences"
 
         private fun getPrefs(context: Context) =
             PreferenceManager.getDefaultSharedPreferences(context)
@@ -24,20 +23,6 @@ class Preferences {
         fun setFirstRun(context: Context, firstRun: Boolean) {
             val edit = getPrefs(context).edit()
             edit.putBoolean(firstRunKey, firstRun)
-            edit.commit()
-        }
-
-        fun getLastNotification(context: Context) = getPrefs(context).let {
-            Pair(
-                it.getInt(lastNotificationIdKey, 0),
-                it.getString(lastNotificationStateKey, null)
-            )
-        }
-
-        fun setLastNotification(context: Context, id: Int, state: String) {
-            val edit = getPrefs(context).edit()
-            edit.putInt(lastNotificationIdKey, id)
-            edit.putString(lastNotificationStateKey, state)
             edit.commit()
         }
 
@@ -103,5 +88,14 @@ class Preferences {
             }
             return outputMap
         }
+
+        fun setClearCorePreferences(context: Context, clear: Boolean) {
+            val edit = getPrefs(context).edit()
+            edit.putBoolean(clearCorePreferencesKey, clear)
+            edit.commit()
+        }
+
+        fun getClearCorePreferences(context: Context) =
+            getPrefs(context).getBoolean(clearCorePreferencesKey, false)
     }
 }

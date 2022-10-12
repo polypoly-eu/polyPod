@@ -42,6 +42,13 @@ sealed class CoreRequest {
     class GetUserSessionTimeoutOptionsConfig() : CoreRequest()
     class ExecuteRdfQuery(val args: String) : CoreRequest()
     class ExecuteRdfUpdate(val args: String) : CoreRequest()
+    class HandleStartup : CoreRequest()
+    class HandleFirstRun : CoreRequest()
+    class HandleInAppNotificationSeen : CoreRequest()
+    class HandlePushNotificationSeen : CoreRequest()
+    class GetShowInAppNotification : CoreRequest()
+    class GetShowPushNotification : CoreRequest()
+    class ClearPreferences : CoreRequest()
 
     // TODO: Investigate the option of doing automatic encoding
     fun asValue(): Value {
@@ -72,6 +79,13 @@ sealed class CoreRequest {
                     "args".asValue() to args.asValue()
                 ).asValue()
             ).asValue()
+            is HandleStartup -> "handleStartup".asValue()
+            is HandleFirstRun -> "handleFirstRun".asValue()
+            is HandleInAppNotificationSeen -> "handleInAppNotificationSeen".asValue()
+            is HandlePushNotificationSeen -> "handlePushNotificationSeen".asValue()
+            is GetShowInAppNotification -> "getShowInAppNotification".asValue()
+            is GetShowPushNotification -> "getShowPushNotification".asValue()
+            is ClearPreferences -> "clearPreferences".asValue()
         }
     }
 }

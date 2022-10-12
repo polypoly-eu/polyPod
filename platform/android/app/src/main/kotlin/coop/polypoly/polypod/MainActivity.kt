@@ -30,6 +30,46 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initCore()
+
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+
+        FeatureStorage.importFeatures(this)
+        setContentView(R.layout.activity_main)
+        setSupportActionBar(findViewById(R.id.toolbar))
+
+        Core.executeRequest(CoreRequest.HandleStartup())
+
+        val firstRun = Preferences.isFirstRun(this)
+        if (firstRun) {
+            Core.executeRequest(CoreRequest.HandleFirstRun())
+        }
+
+        val shouldShowAuthOnboarding = firstRun ||
+            Authentication.shouldShowAuthOnboarding(this)
+
+        if (!onboardingShown && shouldShowAuthOnboarding) {
+            onboardingShown = true
+            startActivity(Intent(this, OnboardingActivity::class.java))
+        } else if (Authentication.canAuthenticate(this)) {
+            startActivity(Intent(this, PodUnlockActivity::class.java))
+        }
+
+        val notificationData = UpdateNotificationData(this)
+        if (UpdateNotification.showInApp) {
+            AlertDialog.Builder(this)
+                .setTitle(notificationData.title)
+                .setMessage(notificationData.text)
+                .setPositiveButton(
+                    R.string.button_update_notification_close
+                ) { _, _ ->
+                    UpdateNotification.handleInAppSeen()
+                }
+                .show()
+        }
+    }
+
+    private fun initCore() {
         val language = Language.determine(this@MainActivity)
         val fsRoot = this@MainActivity.filesDir
         val notificationData = UpdateNotificationData(this)
@@ -51,56 +91,10 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
                 throw ex
         }
 
-        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
-
-        FeatureStorage.importFeatures(this)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.toolbar))
-
-        initUpdateNotification(notificationData)
-
-        val notification = UpdateNotification()
-        notification.handleStartup()
-
-        val firstRun = Preferences.isFirstRun(this)
-        if (firstRun) {
-            notification.handleFirstRun()
+        if (Preferences.getClearCorePreferences(this)) {
+            logger.info("Clearing core preferences")
+            Core.executeRequest(CoreRequest.ClearPreferences())
         }
-
-        val shouldShowAuthOnboarding = firstRun ||
-            Authentication.shouldShowAuthOnboarding(this)
-
-        if (!onboardingShown && shouldShowAuthOnboarding) {
-            onboardingShown = true
-            startActivity(Intent(this, OnboardingActivity::class.java))
-        } else if (Authentication.canAuthenticate(this)) {
-            startActivity(Intent(this, PodUnlockActivity::class.java))
-        }
-
-        if (notification.showInApp) {
-            AlertDialog.Builder(this)
-                .setTitle(notificationData.title)
-                .setMessage(notificationData.text)
-                .setPositiveButton(
-                    R.string.button_update_notification_close
-                ) { _, _ ->
-                    notification.handleInAppSeen()
-                }
-                .show()
-        }
-    }
-
-    private fun initUpdateNotification(data: UpdateNotificationData) {
-        val notificationStorage = object : UpdateNotification.Storage {
-            override fun readId() = data.id
-            override fun readLastId() =
-                Preferences.getLastNotification(this@MainActivity).first
-            override fun readLastState() =
-                Preferences.getLastNotification(this@MainActivity).second
-            override fun writeLast(id: Int, state: String) =
-                Preferences.setLastNotification(this@MainActivity, id, state)
-        }
-        UpdateNotification.storage = notificationStorage
     }
 
     override fun onStateChanged(

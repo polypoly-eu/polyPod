@@ -40,6 +40,16 @@ pub fn bootstrap(
     platform_callback: Box<dyn PlatformCallback>,
 ) -> Result<(), CoreFailure> {
     if CORE.get().is_some() {
+        // For testing purposes, we set update_notification_id even if it was
+        // previously initialised.
+        CORE.get()
+            .unwrap()
+            .lock()
+            .unwrap()
+            .update_notification
+            .lock()
+            .unwrap()
+            .id = args.update_notification_id;
         return Err(CoreFailure::core_already_bootstrapped());
     }
     #[allow(clippy::redundant_clone)] // allowed until RDF is fully enabled
