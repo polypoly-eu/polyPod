@@ -81,8 +81,10 @@ sealed class CoreRequest {
             ).asValue()
             is HandleStartup -> "handleStartup".asValue()
             is HandleFirstRun -> "handleFirstRun".asValue()
-            is HandleInAppNotificationSeen -> "handleInAppNotificationSeen".asValue()
-            is HandlePushNotificationSeen -> "handlePushNotificationSeen".asValue()
+            is HandleInAppNotificationSeen ->
+                "handleInAppNotificationSeen".asValue()
+            is HandlePushNotificationSeen ->
+                "handlePushNotificationSeen".asValue()
             is GetShowInAppNotification -> "getShowInAppNotification".asValue()
             is GetShowPushNotification -> "getShowPushNotification".asValue()
             is ClearPreferences -> "clearPreferences".asValue()
