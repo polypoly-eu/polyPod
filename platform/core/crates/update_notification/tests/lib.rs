@@ -28,7 +28,7 @@ macro_rules! assert_in_app_showing {
     ($notification: expr) => {
         assert!(
             $notification.show_in_app(),
-            "Expected in app notification '{}' to show",
+            "Expected in app notification '{:?}' to show",
             $notification
         );
     };
@@ -38,7 +38,7 @@ macro_rules! assert_in_app_not_showing {
     ($notification: expr) => {
         assert!(
             !$notification.show_in_app(),
-            "Expected in app notification '{}' to not show",
+            "Expected in app notification '{:?}' to not show",
             $notification
         );
     };
@@ -48,7 +48,7 @@ macro_rules! assert_push_showing {
     ($notification: expr) => {
         assert!(
             $notification.show_push(),
-            "Expected push notification '{}' to show",
+            "Expected push notification '{:?}' to show",
             $notification
         );
     };
@@ -58,7 +58,7 @@ macro_rules! assert_push_not_showing {
     ($notification: expr) => {
         assert!(
             !$notification.show_push(),
-            "Expected push notification '{}' to not show",
+            "Expected push notification '{:?}' to not show",
             $notification
         );
     };

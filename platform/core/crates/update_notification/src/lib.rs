@@ -88,8 +88,10 @@ impl UpdateNotification {
     }
 }
 
-impl fmt::Display for UpdateNotification {
+impl fmt::Debug for UpdateNotification {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "(id = {})", self.id)
+        f.debug_struct("UpdateNotification")
+            .field("id", &self.id)
+            .finish()
     }
 }
