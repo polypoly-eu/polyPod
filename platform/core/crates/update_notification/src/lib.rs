@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::fmt;
 use std::sync::Arc;
 
 #[derive(Eq, PartialEq, Copy, Clone, Debug, Serialize, Deserialize)]
@@ -32,10 +33,6 @@ impl UpdateNotification {
             id,
             store: store.clone(),
         }
-    }
-
-    pub fn get_id(&self) -> u32 {
-        self.id
     }
 
     fn get_last_notification(&self) -> LastNotification {
@@ -88,5 +85,11 @@ impl UpdateNotification {
             return;
         }
         self.update_last(Seen::Push);
+    }
+}
+
+impl fmt::Display for UpdateNotification {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "(id = {})", self.id)
     }
 }
