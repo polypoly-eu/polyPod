@@ -34,7 +34,7 @@ impl UpdateNotification {
         }
     }
 
-    pub fn id(&self) -> u32 {
+    pub fn get_id(&self) -> u32 {
         self.id
     }
 

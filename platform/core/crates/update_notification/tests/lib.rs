@@ -29,7 +29,7 @@ macro_rules! assert_in_app_showing {
         assert!(
             $notification.show_in_app(),
             "Expected in app notification with id '{}' to show",
-            $notification.id()
+            $notification.get_id()
         );
     };
 }
@@ -39,7 +39,7 @@ macro_rules! assert_in_app_not_showing {
         assert!(
             !$notification.show_in_app(),
             "Expected in app notification with id '{}' to not show",
-            $notification.id()
+            $notification.get_id()
         );
     };
 }
@@ -49,7 +49,7 @@ macro_rules! assert_push_showing {
         assert!(
             $notification.show_push(),
             "Expected push notification with id '{}' to show",
-            $notification.id()
+            $notification.get_id()
         );
     };
 }
@@ -59,7 +59,7 @@ macro_rules! assert_push_not_showing {
         assert!(
             !$notification.show_push(),
             "Expected push notification with id '{}' to not show",
-            $notification.id()
+            $notification.get_id()
         );
     };
 }
