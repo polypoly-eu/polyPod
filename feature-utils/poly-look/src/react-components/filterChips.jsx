@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Chip from "./chip.jsx";
 
 import "./filterChips.css";
