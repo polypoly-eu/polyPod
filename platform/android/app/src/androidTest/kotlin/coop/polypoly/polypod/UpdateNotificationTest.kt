@@ -103,9 +103,5 @@ class UpdateNotificationTest {
         closeActivity()
         UpdateNotificationData.mockData.id = notificationId
         activityScenario = ActivityScenario.launch(MainActivity::class.java)
-        Preferences.setClearCorePreferences(
-            InstrumentationRegistry.getInstrumentation().targetContext,
-            false
-        )
     }
 }

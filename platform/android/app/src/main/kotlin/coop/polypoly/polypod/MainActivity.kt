@@ -94,6 +94,7 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
         if (Preferences.getClearCorePreferences(this)) {
             logger.info("Clearing core preferences")
             Core.executeRequest(CoreRequest.ClearPreferences())
+            Preferences.setClearCorePreferences(this, false)
         }
     }
 
