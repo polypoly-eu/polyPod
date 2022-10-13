@@ -61,26 +61,9 @@ const FilterChips = ({
         )
   );
 
-  const isFirstRender = useRef(true);
-  const initialActiveChips = useRef(defaultActiveChips);
-
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    if (
-      !(
-        initialActiveChips.current.length === defaultActiveChips.length &&
-        initialActiveChips.current.every(
-          (value, index) => value === defaultActiveChips[index]
-        )
-      )
-    ) {
-      initialActiveChips.current = defaultActiveChips;
-      setActiveChips(defaultActiveChips);
-    }
-  }, [defaultActiveChips]);
+    setActiveChips(defaultActiveChips);
+  }, [JSON.stringify(defaultActiveChips)]);
 
   const isChipActive = (id) => activeChips.indexOf(id) !== -1;
 
