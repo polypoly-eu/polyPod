@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Chip from "./chip.jsx";
 
 import "./filterChips.css";
@@ -61,13 +61,9 @@ const FilterChips = ({
         )
   );
 
-  const [initialDefaultChips, setInitialDefaultChips] =
-    useState(defaultActiveChips);
-
-  if (defaultActiveChips !== initialDefaultChips) {
+  useEffect(() => {
     setActiveChips(defaultActiveChips);
-    setInitialDefaultChips(defaultActiveChips);
-  }
+  }, [JSON.stringify(defaultActiveChips)]);
 
   const isChipActive = (id) => activeChips.indexOf(id) !== -1;
 
