@@ -8,4 +8,5 @@ function postLogMessage(message) {
 const console = {
     log: postLogMessage,
     error: postLogMessage,
+    dir: postLogMessage,
 };
