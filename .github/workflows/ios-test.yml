@@ -22,7 +22,7 @@ jobs:
         runs-on: macOS-12
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
             - uses: actions/setup-node@v3
               with:
                   node-version: 18
@@ -30,11 +30,10 @@ jobs:
                   cache-dependency-path: "**/package-lock.json"
             - name: Lock xcode version
               run: cd platform/ios; make lockxcodeversion
-            - name: Install modules, build API and features
+            - name: Build prerequisites
               run: ./build.js
-            - name: Build core
-              working-directory: platform/core
-              run: make ios_bindings
+              env:
+                POLYPOD_BUILD_PLATFORMS: ios
             - name: Build and test iOS
               working-directory: platform/ios
               run: make test
