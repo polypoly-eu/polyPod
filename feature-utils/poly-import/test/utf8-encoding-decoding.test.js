@@ -25,7 +25,7 @@ describe("JSON encode", () => {
 
     it("passes through non-string data", () => {
         const foo42 = { foo: 42 };
-        expect(jsonStringifyWithUtfEscape(foo42)).toBe('{"foo":42}');
+        expect(jsonStringifyWithUtfEscape(foo42)).toBe(JSON.stringify(foo42));
     });
 });
 

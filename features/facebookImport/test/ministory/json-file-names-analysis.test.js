@@ -8,7 +8,7 @@ describe("JSON files analysis for empty zip", () => {
     let status = null;
 
     beforeAll(async () => {
-        let zipFile = new ZipFileMock();
+        const zipFile = new ZipFileMock();
         const { analysisResult } = await runAnalysisForExport(
             JSONFileNamesAnalysis,
             zipFile
