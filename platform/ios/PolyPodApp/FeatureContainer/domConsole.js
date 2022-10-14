@@ -1,11 +1,12 @@
+function postLogMessage(message) {
+    window.parent.postMessage(
+        { command: "log", text: JSON.stringify(message) },
+        "*"
+    );
+}
+
 const console = {
-    log(msg) {
-        window.parent.postMessage({ command: "log", text: JSON.stringify(msg) }, "*");
-    },
-    error(msg) {
-        window.parent.postMessage({ command: "log", text: JSON.stringify(msg) }, "*");
-    },
-    dir(object) {
-        window.parent.postMessage({ command: "log", text: JSON.stringify(object) }, "*");
-    }
+    log: postLogMessage,
+    error: postLogMessage,
+    dir: postLogMessage,
 };

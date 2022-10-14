@@ -11,7 +11,7 @@ import {
     zipFileWithTwoFileErrors,
     zipFileWithTwoPostsFiles,
 } from "../datasets/posts-data";
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { runPostsImporter } from "../utils/data-importing";
 import {
     expectError,

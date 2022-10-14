@@ -5,7 +5,7 @@ import {
     DATASET_EXPECTED_VALUES,
     zipFileWithComments,
 } from "../datasets/comments-data";
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { zipWithWrongDatasetKey } from "../utils/data-creation";
 import { runCommentsImporter } from "../utils/data-importing";
 import {
