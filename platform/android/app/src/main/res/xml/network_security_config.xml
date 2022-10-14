@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <domain-config cleartextTrafficPermitted="false">
-        <!--Even if cleartextTrafficPermitted is false it still forces me to add a domain. It does not make sense, But I am trying to make it build for release-->
-        <domain includeSubdomains="false" />
-    </domain-config>
+    <base-config cleartextTrafficPermitted="false"/>
 </network-security-config>
