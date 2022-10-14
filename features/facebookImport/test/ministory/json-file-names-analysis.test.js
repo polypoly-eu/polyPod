@@ -10,57 +10,57 @@ const commonJsonFiles = commonStructure
         return jsonPath.substring(1);
     });
 
-const zipFile = new ZipFileMock();
-commonJsonFiles.forEach((jsonPath) => {
-    zipFile.addJsonEntry(jsonPath, { foo: "bar" });
-});
-let status = null;
-let analysisResult;
-let result = null;
-
-beforeAll(async () => {
-    ({ analysisResult } = await runAnalysisForExport(
+async function analyzeZipWithFiles(files) {
+    const zipFile = new ZipFileMock();
+    if (files.length > 0) {
+        files.forEach((jsonPath) => {
+            zipFile.addJsonEntry(jsonPath, { foo: "bar" });
+        });
+    }
+    const { analysisResult } = await runAnalysisForExport(
         JSONFileNamesAnalysis,
         zipFile
-    ));
-    result = analysisResult.analysis;
-    status = analysisResult.status;
-});
+    );
+    return analysisResult;
+}
 
 describe("JSON files analysis for empty zip", () => {
+    let status;
+    beforeAll(async () => {
+        ({ status } = await analyzeZipWithFiles([]));
+    });
     it("has success status", async () => {
         expectAnalysisSuccessStatus(status);
     });
 });
 
 describe("JSON files analysis for non-empty zip", () => {
+    let status;
+    let analysis;
+
+    beforeAll(async () => {
+        ({ status, analysis } = await analyzeZipWithFiles(commonJsonFiles));
+    });
     it("has the right name", () => {
-        expect(result.reportData).toStrictEqual(commonJsonFiles);
+        expect(analysis.reportData).toStrictEqual(commonJsonFiles);
     });
 
     it("has the right title", () => {
-        expect(result.title).toBe("JSON file names");
+        expect(analysis.title).toBe("JSON file names");
     });
 });
 
 describe("JSON files analysis with anonymized path", () => {
+    let analysis;
     beforeAll(async () => {
         commonJsonFiles.push(
             "messages/archived_threads/facebookuser_gktxomrifg/message_1.json"
         );
-        const zipFile = new ZipFileMock();
-        commonJsonFiles.forEach((jsonPath) => {
-            zipFile.addJsonEntry(jsonPath, { foo: "bar" });
-        });
-        ({ analysisResult } = await runAnalysisForExport(
-            JSONFileNamesAnalysis,
-            zipFile
-        ));
-        result = analysisResult.analysis;
+        ({ analysis } = await analyzeZipWithFiles(commonJsonFiles));
     });
 
     it("has anonymized file", () => {
-        expect(result.reportData).toContain(
+        expect(analysis.reportData).toContain(
             "messages/archived_threads/uniqueid_hash/message_1.json"
         );
     });
