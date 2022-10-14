@@ -41,6 +41,11 @@ describe("JSON files analysis for non-empty zip", () => {
     beforeAll(async () => {
         ({ status, analysis } = await analyzeZipWithFiles(commonJsonFiles));
     });
+
+    it("reports successful status", () => {
+        expect(status.isSuccess).toBe(true);
+    });
+
     it("has the right name", () => {
         expect(analysis.reportData).toStrictEqual(commonJsonFiles);
     });
