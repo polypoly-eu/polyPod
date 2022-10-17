@@ -26,6 +26,7 @@ const labelPosition = {
  * @param {boolean} [props.error] - indicates if the input is in an error
  * state or not
  * @param {boolean} [props.disabled] - indicates if the input is disabled
+ * @param {boolean} [props.type] - input field type
  * @returns {JSX.Element}
  */
 export function TextField({
@@ -37,6 +38,7 @@ export function TextField({
   tabIndex,
   error,
   disabled,
+  type,
 }) {
   const [isIconVisible, setIconVisibility] = useState(false);
   const [isFocused, setFocus] = useState(false);
@@ -75,6 +77,7 @@ export function TextField({
           autoComplete="off"
           ref={inputRef}
           value={value}
+          type={type}
           onChange={(e) => {
             if (e.target.value) setIconVisibility(true);
             onChange({ value: e.target.value, name });

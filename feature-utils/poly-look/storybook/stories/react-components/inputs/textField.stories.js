@@ -31,6 +31,7 @@ export const Default = Template.bind({});
 
 Default.args = {
   label: "Label",
+  type: "text",
   helperText: "Helper text",
   disabled: false,
   tabIndex: 1,
