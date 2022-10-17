@@ -18,7 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let defaults = UserDefaults.standard
         defaults.disableDataProtection()
-        if defaults.bool(forKey: UserDefaults.Keys.resetUserDefaults.rawValue) {
+        let resetDefaults = defaults.bool(
+            forKey: UserDefaults.Keys.resetUserDefaults.rawValue
+        )
+        if resetDefaults {
             Log.info("Resetting all user defaults")
             UserDefaults.standard.reset()
         }
@@ -49,10 +52,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError(content.localizedDescription)
         }
 
-        UpdateNotification.initialize(
-            id: UpdateNotificationData().id,
-            store: UpdateNotificationStore()
-        )
+        if resetDefaults {
+            Log.info("Clearing core preferences")
+            _ = Core.instance.executeRequest(.clearPreferences).inspectError {
+                Log.error("clearPreferences request failed: \($0.localizedDescription)")
+            }
+        }
+
+        _ = Core.instance.executeRequest(.handleStartup).inspectError {
+            Log.error("handleStartup request failed: \($0.localizedDescription)")
+        }
 
         CoreDataStack.shared.isProtectedDataAvailable = { completion in
             dispatchToMainQueue {

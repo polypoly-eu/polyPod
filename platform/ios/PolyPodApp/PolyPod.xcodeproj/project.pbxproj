@@ -131,10 +131,8 @@
 		E92FE9BD276759E900A0885E /* OnboardingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92FE9BC276759E900A0885E /* OnboardingTest.swift */; };
 		E93EC98C273D65D400E20512 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93EC98B273D65D400E20512 /* Authentication.swift */; };
 		E942C77E28F8284C00C81A37 /* UpdateNotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942C77D28F8284C00C81A37 /* UpdateNotificationData.swift */; };
-		E942C78028F8450E00C81A37 /* UpdateNotificationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942C77F28F8450E00C81A37 /* UpdateNotificationStore.swift */; };
 		E942C78828F84A3700C81A37 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96817F0274D032A00206602 /* Language.swift */; };
 		E942C78928F84A5600C81A37 /* UpdateNotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942C77D28F8284C00C81A37 /* UpdateNotificationData.swift */; };
-		E942C78A28F84A7F00C81A37 /* UpdateNotificationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942C77F28F8450E00C81A37 /* UpdateNotificationStore.swift */; };
 		E9545EC1273542F5001E8C7F /* UpdateNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EAF27353F78001E8C7F /* UpdateNotificationTest.swift */; };
 		E9545EC827359A34001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
 		E9545EC927359C34001E8C7F /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */; };
@@ -281,7 +279,6 @@
 		E92FE9BC276759E900A0885E /* OnboardingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTest.swift; sourceTree = "<group>"; };
 		E93EC98B273D65D400E20512 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		E942C77D28F8284C00C81A37 /* UpdateNotificationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNotificationData.swift; sourceTree = "<group>"; };
-		E942C77F28F8450E00C81A37 /* UpdateNotificationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNotificationStore.swift; sourceTree = "<group>"; };
 		E9545EAF27353F78001E8C7F /* UpdateNotificationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNotificationTest.swift; sourceTree = "<group>"; };
 		E9545EB6273542CC001E8C7F /* PolyPodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PolyPodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9545EC727359A34001E8C7F /* UserDefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensions.swift; sourceTree = "<group>"; };
@@ -472,7 +469,6 @@
 				9000F696285894B500241B27 /* UnlockPolyPod.swift */,
 				9000F69928589A7D00241B27 /* SharedUIComponents.swift */,
 				E942C77D28F8284C00C81A37 /* UpdateNotificationData.swift */,
-				E942C77F28F8450E00C81A37 /* UpdateNotificationStore.swift */,
 			);
 			path = PolyPod;
 			sourceTree = "<group>";
@@ -963,7 +959,6 @@
 				1ABADC0724EE717000369791 /* Bubblewrap.swift in Sources */,
 				1ABADBF824EE710B00369791 /* NamedNode+CoreDataProperties.swift in Sources */,
 				1ABADC0524EE710C00369791 /* Term+Additions.swift in Sources */,
-				E942C78A28F84A7F00C81A37 /* UpdateNotificationStore.swift in Sources */,
 				1ABADBF624EE710B00369791 /* DefaultGraph+CoreDataProperties.swift in Sources */,
 				1ABADC0024EE710B00369791 /* Literal+CoreDataClass.swift in Sources */,
 				9C8F6D28285B49D000D44B4E /* URL+Utils.swift in Sources */,
@@ -1071,7 +1066,6 @@
 				5105EA05281ACEEC0040AE0D /* BindingExtensions.swift in Sources */,
 				1A66F76B2490DFA000ED4308 /* FetchResponse.swift in Sources */,
 				9C8F6D27285B49D000D44B4E /* URL+Utils.swift in Sources */,
-				E942C78028F8450E00C81A37 /* UpdateNotificationStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

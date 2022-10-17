@@ -67,6 +67,6 @@ impl UpdateNotificationStore for Preferences {
     }
 
     fn set_last_notification(&self, last_notification: LastNotification) {
-        self.write(PreferenceKey::LastNotification, last_notification)
+        self.write(PreferenceKey::LastNotification, last_notification);
     }
 }

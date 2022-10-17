@@ -17,4 +17,11 @@ public enum CoreRequest: Encodable {
     case getUserSessionTimeoutOptionsConfig
     case executeRdfQuery(args: String)
     case executeRdfUpdate(args: String)
+    case handleStartup
+    case handleFirstRun
+    case handleInAppNotificationSeen
+    case handlePushNotificationSeen
+    case getShowInAppNotification
+    case getShowPushNotification
+    case clearPreferences
 }

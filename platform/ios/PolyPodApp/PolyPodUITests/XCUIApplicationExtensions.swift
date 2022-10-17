@@ -30,6 +30,11 @@ extension XCUIApplication {
                 "\(showDeveloperFeatures)"
             ]
         }
+
+        // This makes sure an already running app is first made inactive
+        XCUIDevice.shared.press(.home)
+        sleep(1)
+
         launch()
         let background = wait(for: .runningForeground, timeout: 120)
         XCTAssertTrue(background)

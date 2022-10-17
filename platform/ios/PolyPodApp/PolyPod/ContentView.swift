@@ -110,12 +110,13 @@ struct ContentView: View {
     }
 
     private func firstRunState() -> ViewState {
-        UpdateNotification.handleStartup()
         if !FirstRun.read() {
             return securityReminderState()
         }
 
-        UpdateNotification.handleFirstRun()
+        _ = Core.instance.executeRequest(.handleFirstRun).inspectError {
+            Log.error("handleFirstRun request failed: \($0.localizedDescription)")
+        }
         return ViewState(
             AnyView(
                 OnboardingView(
