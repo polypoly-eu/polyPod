@@ -2,6 +2,7 @@ import React from "react";
 
 import { BubbleCluster } from "@polypoly-eu/poly-look";
 import { RootAnalysis, jsonDataEntities } from "@polypoly-eu/poly-analysis";
+import { json } from "d3";
 
 export default class JsonFilesBubblesAnalysis extends RootAnalysis {
     get title() {
@@ -9,8 +10,9 @@ export default class JsonFilesBubblesAnalysis extends RootAnalysis {
     }
 
     async _contentLinesForEntry(zipFile, jsonEntry) {
+        console.log(jsonEntry.getContent());
         const fileContent = new TextDecoder("utf-8").decode(
-            await zipFile.getContent(jsonEntry)
+            await jsonEntry.getContent()
         );
         const linesCount = fileContent
             .split("\n")
