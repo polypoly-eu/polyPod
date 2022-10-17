@@ -37,6 +37,7 @@ describe("JSON files analysis for non-empty zip", () => {
     });
 
     it("has the right title", () => {
+        expect(analysis).toBeInstanceOf(JSONFilesBubblesAnalysis);
         expect(analysis.title).toBe("Files Bubbles");
     });
 });
