@@ -20,7 +20,6 @@ async function analyzeZipWithFiles(files) {
         JSONFilesBubblesAnalysis,
         zipFile
     );
-    console.log(analysisResult);
     return analysisResult;
 }
 
@@ -36,8 +35,13 @@ describe("JSON files analysis for non-empty zip", () => {
         expect(status.isSuccess).toBe(true);
     });
 
-    it("has the right title", () => {
+    it("has the right type and title", () => {
         expect(analysis).toBeInstanceOf(JSONFilesBubblesAnalysis);
         expect(analysis.title).toBe("Files Bubbles");
     });
+
+    it("has the right message count", () => {
+        expect(analysis.filesMessagesCount).toHaveLength(8)M
+    });
+
 });
