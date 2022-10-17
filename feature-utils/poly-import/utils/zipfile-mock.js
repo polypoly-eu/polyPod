@@ -1,4 +1,4 @@
-import { jsonStringifyWithUtfEscape } from "../../src/model/importers/utils/json-encoding";
+import { jsonStringifyWithUtfEscape } from "./json-encoding";
 
 //The minimum size of a .ZIP file is 22 bytes
 export const MINIMUM_FILE_SIZE = 22;

@@ -1,3 +1,3 @@
-# feature bundle
+# Feature bundle
 
-Packages all the features that are meant to be bundled with the polyPod
+Packages all the Features that are meant to be bundled with the polyPod

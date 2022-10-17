@@ -1,6 +1,6 @@
 # poly-cli
 
-Generates stuff for us. Currently only generates the structure for a feature.
+Generates stuff for us. Currently only generates the structure for a Feature.
 
 ## Use
 

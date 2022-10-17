@@ -1,7 +1,7 @@
 import PersonalDataImporter, {
     PROFILE_INFORMATION_FILE_PATH,
 } from "../../src/model/importers/personal-data-importer";
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { runPersonalDataImporter } from "../utils/data-importing";
 import {
     expectError,

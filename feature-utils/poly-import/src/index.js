@@ -14,7 +14,16 @@ import {
 import DataAccount from "./entities/data-account";
 import { Status, statusTypes } from "../utils/status";
 import { Telemetry } from "../utils/performance-telemetry";
+import {
+    MINIMUM_FILE_SIZE,
+    ZipFileEntryMock,
+    ZipFileMock,
+} from "../utils/zipfile-mock";
+import { jsonStringifyWithUtfEscape } from "../utils/json-encoding";
+
 export {
+    MINIMUM_FILE_SIZE,
+    jsonStringifyWithUtfEscape,
     Status,
     Importer,
     runImporter,
@@ -22,8 +31,10 @@ export {
     runOutdatedImporter,
     runOutdatedImporters,
     ZipFile,
+    ZipFileMock,
     Telemetry,
     ZipFileEntry,
+    ZipFileEntryMock,
     FileImportError,
     RefreshFilesError,
     FileSelectionError,

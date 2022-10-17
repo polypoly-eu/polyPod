@@ -1,6 +1,6 @@
 import AboutPicturesDataAnalysis from "../../src/model/analyses/ministories/about-pictures-data-analysis";
 import AboutPicturesMinistory from "../../src/views/ministories/aboutPictures";
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { runAnalysisForExport } from "../utils/analyses-execution";
 import {
     expectInactiveAnalysis,

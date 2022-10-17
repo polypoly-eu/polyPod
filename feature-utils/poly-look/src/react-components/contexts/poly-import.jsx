@@ -53,14 +53,13 @@ export const PolyImportProvider = ({
 
   useEffect(() => {
     if (!pod) return;
-    const storage = new FeatureFileStorage(pod);
-    storage.changeListener = async () => {
+    const storage = new FeatureFileStorage(pod, async () => {
       const resolvedFiles = [];
       for (const file of storage.files) {
         resolvedFiles.push(await file);
       }
       setFiles(Object.values(resolvedFiles));
-    };
+    });
     setStorage(storage);
   }, [pod]);
 
