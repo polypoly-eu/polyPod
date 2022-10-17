@@ -26,6 +26,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.reset()
         }
 
+        initCore(resetPreferences: resetDefaults)
+
+        CoreDataStack.shared.isProtectedDataAvailable = { completion in
+            dispatchToMainQueue {
+                completion(UIApplication.shared.isProtectedDataAvailable)
+            }
+        }
+
+        if application.isProtectedDataAvailable {
+            CoreDataStack.shared.protectedDataDidBecomeAvailable()
+            CoreDataStack.shared.perform { context in
+                let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
+                let count = try! context.get().count(for: fetchRequest)
+                Log.debug("Initialised triple store. Number of quads in Core Data: \(count)")
+            }
+        }
+
+        self.registerUpdateNotificationCheck()
+
+        return true
+    }
+
+    private func initCore(resetPreferences: Bool) {
         let fsRoot = try! FileManager.default.url(
             for: .documentDirectory,
             in: .userDomainMask,
@@ -52,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError(content.localizedDescription)
         }
 
-        if resetDefaults {
+        if resetPreferences {
             Log.info("Clearing core preferences")
             _ = Core.instance.executeRequest(.clearPreferences).inspectError {
                 Log.error("clearPreferences request failed: \($0.localizedDescription)")
@@ -62,25 +85,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = Core.instance.executeRequest(.handleStartup).inspectError {
             Log.error("handleStartup request failed: \($0.localizedDescription)")
         }
-
-        CoreDataStack.shared.isProtectedDataAvailable = { completion in
-            dispatchToMainQueue {
-                completion(UIApplication.shared.isProtectedDataAvailable)
-            }
-        }
-
-        if application.isProtectedDataAvailable {
-            CoreDataStack.shared.protectedDataDidBecomeAvailable()
-            CoreDataStack.shared.perform { context in
-                let fetchRequest: NSFetchRequest<Quad> = Quad.fetchRequest()
-                let count = try! context.get().count(for: fetchRequest)
-                Log.debug("Initialised triple store. Number of quads in Core Data: \(count)")
-            }
-        }
-
-        self.registerUpdateNotificationCheck()
-
-        return true
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
