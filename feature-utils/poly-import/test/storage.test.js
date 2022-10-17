@@ -12,7 +12,7 @@ describe("File storage ", () => {
     });
 });
 
-describe("Can remove archives ", () => {
+describe("File storage", () => {
     let fileStorage;
     let fileUri;
     beforeAll(async () => {
@@ -20,7 +20,8 @@ describe("Can remove archives ", () => {
         fileUri = await pod.polyOut.importArchive("noRealFile.zip");
         fileStorage = new FeatureFileStorage(pod);
     });
-    it("was instantiated", () => {
+    it("ignores non-existent archives", () => {
+        expect(fileUri).toBeInstanceOf(string);
         expect(fileStorage.files).toBeNull;
     });
 });
