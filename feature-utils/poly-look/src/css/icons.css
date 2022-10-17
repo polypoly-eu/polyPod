@@ -1,8 +1,14 @@
 :root {
   --pl-icon-small: 16px;
+  --pl-icon-medium: 24px;
 }
 
 .poly-icon-small {
   width: var(--pl-icon-small);
   height: var(--pl-icon-small);
+}
+
+.poly-icon-medium {
+  width: var(--pl-icon-medium);
+  height: var(--pl-icon-medium);
 }

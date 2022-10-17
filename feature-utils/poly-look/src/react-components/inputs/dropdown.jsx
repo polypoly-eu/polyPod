@@ -88,7 +88,7 @@ export function Dropdown({
         />
         <ChevronDown
           fill="var(--pl-field-trailing-icon-color)"
-          className={`poly-icon-small icon-${open ? "up" : "down"}`}
+          className={`poly-icon-medium icon-${open ? "up" : "down"}`}
         />
         <div
           className="list-holder"

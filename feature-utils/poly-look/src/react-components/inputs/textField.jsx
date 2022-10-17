@@ -86,12 +86,12 @@ export function TextField({
         <TriangleExclamation
           style={{ display: errorIcon ? "block" : "none" }}
           fill="var(--pl-field-trailing-icon-color-error)"
-          className="poly-icon-small"
+          className="poly-icon-medium"
         />
         <CircleXMark
           fill="var(--pl-field-trailing-icon-color)"
           style={{ display: isIconVisible ? "block" : "none" }}
-          className="poly-icon-small"
+          className="poly-icon-medium"
           onClick={() => {
             setIconVisibility(false);
             onChange({ value: "", name });

@@ -6,8 +6,8 @@
 .poly-input-field .body {
   height: 56px;
   border: 1px solid var(--pl-field-color-border-enabled);
-  padding: var(--pl-field-spacing-padding-hor)
-    var(--pl-field-spacing-padding-vert);
+  padding: var(--pl-field-spacing-padding-vert)
+    var(--pl-field-spacing-padding-hor);
   border-radius: var(--pl-radius-1x);
   display: flex;
   align-items: center;
@@ -59,7 +59,7 @@
   font: inherit;
   line-height: inherit;
   letter-spacing: inherit;
-  left: var(--pl-field-spacing-padding-vert);
+  left: var(--pl-field-spacing-padding-hor);
   top: 50%;
   transform: translateY(-50%);
   transition: transform 0.2s, font-size 0.2s;
@@ -70,13 +70,17 @@
   transform: translateY(-125%);
 }
 
-.poly-input-field .poly-icon-small {
+.poly-input-field .label-up+input {
+  margin-bottom: calc(-1 * calc(56px/4))
+}
+
+.poly-input-field .poly-icon-medium {
   flex-shrink: 1;
 }
 
 .poly-input-field .helper-text {
   padding-top: var(--pl-space-2x);
   padding-bottom: var(--pl-space-1x);
-  padding-left: var(--pl-field-spacing-padding-vert);
+  padding-left: var(--pl-field-spacing-padding-hor);
   font-size: var(--font-size-s);
 }
