@@ -12,7 +12,7 @@ import RecentlyViewedAdsImporter, {
     RECENTLY_VIEWED_FILE_PATH,
 } from "../../src/model/importers/recently-viewed-ads-importer.js";
 import OffFacebookEventsImporter from "../../src/model/importers/off-facebook-events-importer.js";
-import { ZipFileMock } from "../mocks/zipfile-mock.js";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { MockPod } from "@polypoly-eu/api/dist/mock-pod";
 import LanguageAndLocaleImporter from "../../src/model/importers/language-and-locale-importer.js";
 import FriendsImporter from "../../src/model/importers/friends-importer.js";

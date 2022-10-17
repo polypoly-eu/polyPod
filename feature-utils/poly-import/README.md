@@ -13,4 +13,4 @@ Create an instance of FeatureFileStorage after pod has loaded. With it you can u
 
 For dealing with ZipFiles this includes a ZipFile storing implementation.
 
-Create an instance of Importer in the feature's local importer file to manage the importers, import files from a ZipFile and load them to a feature-Account (i.e. FacebookAccount).
+Create an instance of Importer in the Feature's local importer file to manage the importers, import files from a ZipFile and load them to a Feature account (e.g. FacebookAccount).

@@ -1,6 +1,6 @@
-# example feature
+# example Feature
 
-A simple feature with basic level usage of the polyPod.
+A simple Feature with basic level usage of the polyPod.
 
 ## Building
 
@@ -12,7 +12,7 @@ Follow the [top-level build instructions](../../README.md).
 $ npm run serve
 ```
 
-This will open the feature in your default browser.
+This will open the Feature in your default browser.
 
 ## Automated tests
 

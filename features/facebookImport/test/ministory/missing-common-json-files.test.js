@@ -1,7 +1,7 @@
 import MissingCommonJSONFilesAnalysis from "../../src/model/analyses/report/missing-common-json-files";
 import commonStructure from "../../src/static/commonStructure";
 import MissingCommonJSONFilesReport from "../../src/views/ministories/missingCommonJsonFiles";
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { runAnalysisForExport } from "../utils/analyses-execution";
 import {
     expectActiveAnalysis,

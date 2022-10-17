@@ -1,11 +1,11 @@
 # lexicon
 
-A feature that lets you look up terms and words used in the polypoly ecosystem.
+A Feature that lets you look up terms and words used in the polypoly ecosystem.
 
 ## Building
 
 Follow the build instructions in the [top-level README](../../README.md) -
-Lexicon feature is being built as a part of this.
+Lexicon Feature is being built as a part of this.
 
 You can build it individually by running:
 

@@ -1,4 +1,4 @@
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { createMockedZip } from "../utils/data-creation";
 export const DATASET_EXPECTED_VALUES = {
     numberOfMessageThreads: 2,
