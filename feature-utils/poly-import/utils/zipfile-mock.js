@@ -3,8 +3,7 @@ import { jsonStringifyWithUtfEscape } from "./json-encoding";
 //The minimum size of a .ZIP file is 22 bytes
 export const MINIMUM_FILE_SIZE = 22;
 export class ZipFileEntryMock {
-    constructor(zipFile, id, path, content) {
-        this.zipFile = zipFile;
+    constructor(id, path, content) {
         this._id = id;
         this._path = path;
         this.content = content;
@@ -18,12 +17,11 @@ export class ZipFileEntryMock {
     }
 
     async stat() {
-        const entryContent = this.zipFile.entries[this._id];
         return {
             getId: () => this._id,
             getTime: () => "",
-            getName: () => this._id.substr(this.zipFile.id.length),
-            getSize: () => entryContent.length,
+            getName: () => this._path,
+            getSize: () => this.content.length,
             isFile: () => true,
             isDirectory: () => false,
         };
@@ -76,12 +74,7 @@ export class ZipFileMock {
 
     addNamedEntry(fileName, stringContent) {
         const entryId = this.id + "/" + fileName;
-        const entry = new ZipFileEntryMock(
-            this,
-            entryId,
-            fileName,
-            stringContent
-        );
+        const entry = new ZipFileEntryMock(entryId, fileName, stringContent);
         this._entriesPathHash.set(fileName, entry);
     }
 
