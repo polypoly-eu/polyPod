@@ -3,7 +3,6 @@
  *
  * @class
  */
-
 export class Telemetry {
     constructor() {
         this._creationTime = performance.now();
