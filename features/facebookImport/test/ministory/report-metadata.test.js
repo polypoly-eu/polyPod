@@ -7,7 +7,7 @@ import ReportMetadataReport from "../../src/views/ministories/reportMetadata";
 import { createInteractedWithAdvertisersDataset } from "../datasets/interacted-with-advertisers-data";
 import { createLanguageSettingsData } from "../datasets/language-and-locale-data";
 import { createOffFacebookEventsSimpleData } from "../datasets/off-facebook-events-data";
-import { MINIMUM_FILE_SIZE } from "@polypoly-eu/poly-import";
+import { MINIMUM_FILE_SIZE, ZipFileMock } from "@polypoly-eu/poly-import";
 import { runAnalysisForExport } from "../utils/analyses-execution";
 import {
     expectActiveAnalysis,
@@ -26,7 +26,7 @@ describe("Report metadata analysis", () => {
     let jsonReport = null;
 
     beforeAll(async () => {
-        const zipFile = createMockedZip([
+        const zipFile = new ZipFileMock([
             [
                 OFF_FACEBOOK_EVENTS_FILE_PATH,
                 createOffFacebookEventsSimpleData(),
