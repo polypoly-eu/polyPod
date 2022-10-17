@@ -1,4 +1,4 @@
-# test feature
+# test Feature
 
-A feature to run automated tests against, for system testing polyPod
+A Feature to run automated tests against, for system testing polyPod
 implementations

@@ -1,6 +1,6 @@
 export class FeatureFileStorage {
-    constructor(pod) {
-        this.changeListener = () => {};
+    constructor(pod, changeListener = () => {}) {
+        this._changeListener = changeListener;
         this._files = null;
         this._pod = pod;
     }
@@ -29,7 +29,7 @@ export class FeatureFileStorage {
         const { polyOut } = this._pod;
         await polyOut.removeArchive(file);
         await this.refreshFiles();
-        this.changeListener();
+        this._changeListener();
     }
 }
 

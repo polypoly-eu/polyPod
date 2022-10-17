@@ -1,10 +1,10 @@
 # facebookImport
 
-A feature that lets you import and explore your Facebook data.
+A Feature that lets you import and explore your Facebook data.
 
 ## Building
 
-`npm run build` generates a version of the feature that can be tested in a web
+`npm run build` generates a version of the Feature that can be tested in a web
 browser into the `dist` folder.
 
 `npm run watch` automatically rebuilds it when any source files change.
@@ -14,7 +14,7 @@ browser into the `dist` folder.
 1. Change the `polyPediaReport/facebook` endpoint in
    `platform/utils/endpoints-generator` and rebuild.
 2. Start the polyPedia report backend stub: `npm run serve-polypedia-stub`
-3. Launch the feature and attempt to send a report.
+3. Launch the Feature and attempt to send a report.
 
 The console output of the backend stub will show any reports that would be
 submitted.

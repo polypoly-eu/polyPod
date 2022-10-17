@@ -20,7 +20,7 @@ Run `./build.js --help` for other available commands.
 
 ## Background
 
-The polyPod core code, as well as all the bundled features, are separated into
+The polyPod core code, as well as all the bundled Features, are separated into
 several NPM packages that include each other via file URLs. Unfortunately, NPM
 does, at the time of writing, not support building a tree of dependent packages,
 it's up to us to build everything in the right order.

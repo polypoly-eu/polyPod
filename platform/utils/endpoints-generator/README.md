@@ -10,5 +10,5 @@ To generate an endpoints.json file outside the polyPod directory run:
 
 To add an endpoint just add endpointId and an object with the the URL and auth to endpoints.js
 
-If you want to use the demo feature to test the API add the URL you want to test with under "demoTest".
+If you want to use the demo Feature to test the API add the URL you want to test with under "demoTest".
 ("auth" can be left out)

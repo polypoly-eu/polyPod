@@ -83,9 +83,7 @@ const EmbeddedSankey = ({ links, groups }) => {
             <p>{groups.source.label}</p>
             <FilterChips
                 chipsContent={sources}
-                defaultActiveChips={
-                    activeSources.length > 1 ? ["allChip"] : activeSources
-                }
+                defaultActiveChips={sources.length > 1 ? ["allChip"] : sources}
                 onChipClick={handleActiveSourceChange}
                 exclusive={false}
                 allChip={groups.source.all ? { translation: "All" } : null}

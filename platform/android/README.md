@@ -7,7 +7,7 @@ This directory contains the source for the polyPod app for Android devices.
 ### Prerequisites
 
 Before building for Android, you need to build the shared components and
-features - simply follow the build instructions in
+Features - simply follow the build instructions in
 [../../README.md](../../README.md).
 
 ### Android Studio
@@ -57,13 +57,13 @@ Additionally, a `gradle` target for linting has been added; use
 
 to check the report.
 
-## Installing features at runtime
+## Installing Features at runtime
 
-The polyPod already bundles all the features it ships with, but it will also load
-additional feature packages from the `files/features/` directory on the device's
-internal storage. You can manually push a feature there by using `adb push` to
+The polyPod already bundles all the Features it ships with, but it will also load
+additional Feature packages from the `files/features/` directory on the device's
+internal storage. You can manually push a Feature there by using `adb push` to
 get it on the device, and `adb shell run-as coop.polypoly.polypod` to copy it
-into the polyPod's internal file storage. Please note that features installed
+into the polyPod's internal file storage. Please note that Features installed
 this way will be automatically deleted when the polyPod app is being
 uninstalled.
 

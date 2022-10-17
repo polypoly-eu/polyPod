@@ -1,4 +1,4 @@
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 
 export function createMockedZip(datasets) {
     let zipFile = new ZipFileMock();

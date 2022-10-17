@@ -1,4 +1,4 @@
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { createMockedZip } from "../utils/data-creation";
 
 const POSTS_FILE_PATH = "posts/your_posts_X.json";
