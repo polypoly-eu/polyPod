@@ -35,12 +35,18 @@ export class ZipFileEntryMock {
 }
 
 export class ZipFileMock {
-    constructor() {
+    constructor(
+        dataFilePairs = [{ "foo.json": { foo: "bar" } }],
+        name = "facebook-facebookuser.zip"
+    ) {
         this.id = "polypod://de71f571-d90a-45e0-b007-d8f059e0541b";
         this.time = new Date("2021-09-20T16:37:36.243Z");
-        this.name = "facebook-facebookuser.zip";
+        this.name = name;
         this.size = MINIMUM_FILE_SIZE;
         this._entriesPathHash = new Map();
+        dataFilePairs.forEach(([path, dataset]) =>
+            this.addJsonEntry(path, dataset)
+        );
     }
 
     async getEntries() {
