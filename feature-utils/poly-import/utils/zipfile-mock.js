@@ -36,7 +36,7 @@ export class ZipFileEntryMock {
 
 export class ZipFileMock {
     constructor(
-        dataFilePairs = [{ "foo.json": { foo: "bar" } }],
+        dataFilePairs = [["foo.json", { foo: "bar" }]],
         name = "facebook-facebookuser.zip"
     ) {
         this.id = "polypod://de71f571-d90a-45e0-b007-d8f059e0541b";
