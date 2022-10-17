@@ -21,7 +21,7 @@ describe("File storage", () => {
         fileStorage = new FeatureFileStorage(pod);
     });
     it("ignores non-existent archives", () => {
-        expect(fileUri).toBeInstanceOf(string);
+        expect(fileUri).toMatch(/^polypod:/);
         expect(fileStorage.files).toBeNull;
     });
 });
