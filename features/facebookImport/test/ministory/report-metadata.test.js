@@ -13,7 +13,6 @@ import {
     expectActiveAnalysis,
     expectAnalysisSuccessStatus,
 } from "../utils/analysis-assertions";
-import { createMockedZip } from "../utils/data-creation";
 
 describe("Report metadata analysis", () => {
     const preferedLanguage = {
