@@ -31,7 +31,11 @@ extension XCUIApplication {
             ]
         }
 
-        // This makes sure an already running app is first made inactive
+        // This makes sure an already running app is first made inactive.
+        // Apparently, we don't trigger any inactive/termination events by
+        // calling XCUIApplication.launch (as opposed to production).
+        // If we were to save core preferences on write, not on
+        // inactive/terminate, we shouldn't need this.
         XCUIDevice.shared.press(.home)
         sleep(1)
 
