@@ -306,7 +306,6 @@ mod tests {
         }
     }
 
-
     #[test]
     fn test_fs_path_from_resource_url() {
         let config = MockFSConfig::new();
