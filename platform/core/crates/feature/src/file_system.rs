@@ -244,7 +244,7 @@ mod tests {
         .unwrap()
     }
 
-    const ID: &str = "8970r10972490710497291";
+    const ID: &'static str = "8970r10972490710497291";
 
     fn create_temp_fs_dir(
         name: &str,
