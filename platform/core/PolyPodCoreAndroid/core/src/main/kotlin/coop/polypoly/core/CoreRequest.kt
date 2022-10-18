@@ -101,8 +101,11 @@ sealed class CoreRequest {
             is GetShowInAppNotification -> "getShowInAppNotification".asValue()
             is GetShowPushNotification -> "getShowPushNotification".asValue()
             is ClearPreferences -> "clearPreferences".asValue()
-            is SetPreference -> mapOf("setPreference".asValue() to
-                mapOf("args".asValue() to args.asValue()).asValue()).asValue()
+            is SetPreference -> mapOf(
+                "setPreference".asValue() to mapOf(
+                    "args".asValue() to args.asValue()
+                ).asValue()
+            ).asValue()
         }
     }
 }
