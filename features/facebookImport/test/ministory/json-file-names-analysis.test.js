@@ -11,7 +11,7 @@ const commonJsonFiles = commonStructure
     });
 
 async function analyzeZipWithFiles(files) {
-    let dataFilePairs = [];
+    const dataFilePairs = [];
     if (files.length > 0) {
         files.forEach((jsonPath) => {
             dataFilePairs.push([jsonPath, { foo: "bar" }]);
