@@ -1,7 +1,6 @@
 import {
     Pod,
     PolyOut,
-    PolyLifecycle,
     PolyIn,
     PolyNav,
     ExternalFile,
@@ -131,24 +130,6 @@ class AsyncEndpoint implements Endpoint {
     }
 }
 
-class AsyncPolyLifecycle implements PolyLifecycle {
-    constructor(private readonly promise: Promise<PolyLifecycle | undefined>) {}
-
-    private async force(): Promise<PolyLifecycle> {
-        const lifecycle = await this.promise;
-        if (lifecycle) return lifecycle;
-        throw new Error("Lifecycle is not implemented");
-    }
-
-    async listFeatures(): Promise<Record<string, boolean>> {
-        return (await this.force()).listFeatures();
-    }
-
-    async startFeature(id: string, background: boolean): Promise<void> {
-        return (await this.force()).startFeature(id, background);
-    }
-}
-
 export class AsyncPod implements Pod {
     readonly polyOut: PolyOut;
     readonly polyIn: PolyIn;
@@ -156,7 +137,6 @@ export class AsyncPod implements Pod {
     readonly info: Info;
     readonly endpoint: Endpoint;
     readonly triplestore: Triplestore;
-    readonly polyLifecycle: PolyLifecycle;
 
     constructor(
         private readonly promise: Promise<Pod>,
@@ -169,9 +149,6 @@ export class AsyncPod implements Pod {
         this.endpoint = new AsyncEndpoint(promise.then((pod) => pod.endpoint));
         this.triplestore = new AsyncTriplestore(
             promise.then((pod) => pod.triplestore)
-        );
-        this.polyLifecycle = new AsyncPolyLifecycle(
-            promise.then((pod) => pod.polyLifecycle)
         );
     }
 }
