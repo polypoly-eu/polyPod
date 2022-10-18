@@ -35,10 +35,11 @@ type ResourceUrl = String;
 #[allow(dead_code)]
 type ResourceId = String;
 
+static RES_PREFIX: &str = "polypod://FeatureFiles/";
+
 #[allow(dead_code)]
 fn resource_url_from_id(id: &ResourceId) -> ResourceUrl {
-    let res_prefix = "polypod://FeatureFiles/".to_string();
-    res_prefix + id
+    String::from(RES_PREFIX) + id
 }
 
 #[allow(dead_code)]
@@ -56,8 +57,7 @@ fn fs_path_from_resource_url(
     config: &impl FeatureFSConfigTrait,
 ) -> Result<String, CoreFailure> {
     let fs_prefix = feature_files_path(config)?;
-    let res_prefix = "polypod://FeatureFiles/".to_string();
-    swap_prefix(resource_url, &res_prefix, &fs_prefix).map_err(|err| {
+    swap_prefix(resource_url, RES_PREFIX, &fs_prefix).map_err(|err| {
         CoreFailure::failed_to_convert_to_fs_path_from_resource_url(resource_url.to_string(), err)
     })
 }
@@ -68,8 +68,7 @@ fn resource_url_from_fs_path(
     config: &impl FeatureFSConfigTrait,
 ) -> Result<String, CoreFailure> {
     let fs_prefix = feature_files_path(config)?;
-    let res_prefix = "polypod://FeatureFiles/".to_string();
-    swap_prefix(fs_path, &fs_prefix, &res_prefix).map_err(|err| {
+    swap_prefix(fs_path, &fs_prefix, RES_PREFIX).map_err(|err| {
         CoreFailure::failed_to_convert_to_resource_url_from_fs_path(fs_path.to_string(), err)
     })
 }
