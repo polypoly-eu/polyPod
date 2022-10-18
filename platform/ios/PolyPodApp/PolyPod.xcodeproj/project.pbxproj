@@ -412,7 +412,6 @@
 			children = (
 				90F8B9FC28B6374000D73776 /* Packages */,
 				904D4A6E27905D4C00A75AED /* Utils */,
-				E9018EDF276370B500FDF34A /* Core */,
 				E97D3274263151BC00A5A180 /* Features */,
 				E97D326726308BC700A5A180 /* Extensions */,
 				1A57E65424A4C3FB0043E3AD /* Bubblewrap */,
@@ -595,13 +594,6 @@
 				9C856C1F282E5126004DF92F /* testZip.zip */,
 			);
 			path = TestFiles;
-			sourceTree = "<group>";
-		};
-		E9018EDF276370B500FDF34A /* Core */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Core;
 			sourceTree = "<group>";
 		};
 		E9040D4526F0A2FB00A88593 /* Info */ = {
