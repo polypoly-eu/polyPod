@@ -32,15 +32,8 @@ fn feature_files_path(config: &impl FeatureFSConfigTrait) -> Result<String, Core
 }
 
 type ResourceUrl = String;
-#[allow(dead_code)]
 type ResourceId = str;
-
 const RES_PREFIX: &str = "polypod://FeatureFiles/";
-
-#[allow(dead_code)]
-fn resource_url_from_id(id: &ResourceId) -> ResourceUrl {
-    String::from(RES_PREFIX) + id
-}
 
 #[allow(dead_code)]
 fn fs_path_from_id(
@@ -304,6 +297,10 @@ mod tests {
         fn feature_name(&self) -> Result<String, String> {
             Ok("Test".to_string())
         }
+    }
+
+    fn resource_url_from_id(id: &ResourceId) -> ResourceUrl {
+        String::from(RES_PREFIX) + id
     }
 
     #[test]
