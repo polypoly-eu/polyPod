@@ -31,6 +31,13 @@ pub struct LoadFeatureCategoriesArguments {
 
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
+pub struct SetPreferenceArguments {
+    key: String,
+    value: String,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub enum CoreRequest {
     LoadFeatureCategories {
         args: LoadFeatureCategoriesArguments,
@@ -57,6 +64,9 @@ pub enum CoreRequest {
     GetShowInAppNotification,
     GetShowPushNotification,
     ClearPreferences,
+    SetPreference {
+        args: SetPreferenceArguments,
+    },
 }
 
 pub fn execute_request(request: CoreRequest) -> MessagePackBytes {
@@ -86,6 +96,7 @@ pub fn execute_request(request: CoreRequest) -> MessagePackBytes {
         CoreRequest::GetShowInAppNotification => instance.get_show_in_app_notification(),
         CoreRequest::GetShowPushNotification => instance.get_show_push_notification(),
         CoreRequest::ClearPreferences => instance.clear_preferences(),
+        CoreRequest::SetPreference { args } => instance.set_preference(args),
     }
 }
 
@@ -198,6 +209,27 @@ impl Core<'_> {
 
     pub fn clear_preferences(&self) -> MessagePackBytes {
         self.preferences.clear();
+        message_pack_serialize(Ok(()) as Result<(), CoreFailure>)
+    }
+
+    pub fn set_preference(&self, args: SetPreferenceArguments) -> MessagePackBytes {
+        match args.key.as_str() {
+            "lastUpdateNotificationId" => self
+                .update_notification
+                .lock()
+                .unwrap()
+                .migrate_last_id(args.value),
+            "lastUpdateNotificationState" => self
+                .update_notification
+                .lock()
+                .unwrap()
+                .migrate_last_state(args.value),
+            &_ => {
+                return message_pack_serialize(
+                    Err(CoreFailure::failed_to_set_preference(args.key)) as Result<(), CoreFailure>,
+                );
+            }
+        }
         message_pack_serialize(Ok(()) as Result<(), CoreFailure>)
     }
 }

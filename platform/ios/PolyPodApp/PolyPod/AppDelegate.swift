@@ -82,6 +82,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
+        UserDefaults.standard.migrateToCore()
+
         _ = Core.instance.executeRequest(.handleStartup).inspectError {
             Log.error("handleStartup request failed: \($0.localizedDescription)")
         }

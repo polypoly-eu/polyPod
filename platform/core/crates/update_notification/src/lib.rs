@@ -86,6 +86,22 @@ impl UpdateNotification {
         }
         self.update_last(Seen::Push);
     }
+
+    pub fn migrate_last_id(&self, id: String) {
+        let mut last_notification = self.get_last_notification();
+        last_notification.id = id.parse::<u32>().unwrap();
+        self.store.set_last_notification(last_notification);
+    }
+
+    pub fn migrate_last_state(&self, state: String) {
+        let mut last_notification = self.get_last_notification();
+        last_notification.state = match state.as_str() {
+            "NOT_SEEN" => Seen::Not,
+            "PUSH_SEEN" => Seen::Push,
+            _ => Seen::All,
+        };
+        self.store.set_last_notification(last_notification);
+    }
 }
 
 impl fmt::Debug for UpdateNotification {

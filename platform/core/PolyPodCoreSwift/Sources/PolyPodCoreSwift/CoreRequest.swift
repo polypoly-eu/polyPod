@@ -8,6 +8,16 @@ public struct LoadFeatureArguments: Encodable {
     let forceShow: [FeatureCategoryId]
 }
 
+public struct SetPreferenceArguments: Encodable {
+    let key: String
+    let value: String
+    
+    public init(key: String, value: String) {
+        self.key = key
+        self.value = value
+    }
+}
+
 public enum CoreRequest: Encodable {
     case loadFeatureCategories(args: LoadFeatureArguments)
     case handleAppDidBecomeInactive
@@ -24,4 +34,5 @@ public enum CoreRequest: Encodable {
     case getShowInAppNotification
     case getShowPushNotification
     case clearPreferences
+    case setPreference(args: SetPreferenceArguments)
 }

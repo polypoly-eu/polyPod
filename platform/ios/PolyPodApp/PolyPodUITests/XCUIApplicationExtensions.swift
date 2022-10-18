@@ -5,7 +5,8 @@ extension XCUIApplication {
         resetDefaults: Bool = true,
         firstRun: Bool = false,
         mockNotificationId: Int? = 0,
-        showDeveloperFeatures: Bool? = false
+        showDeveloperFeatures: Bool? = false,
+        extraDefaults: [String: String] = [:]
     ) {
         typealias Keys = UserDefaults.Keys
         launchArguments = [
@@ -29,6 +30,10 @@ extension XCUIApplication {
                 "-\(Keys.showDeveloperFeaturesId.rawValue)",
                 "\(showDeveloperFeatures)"
             ]
+        }
+
+        for (key, value) in extraDefaults {
+            launchArguments += ["-\(key)", value]
         }
 
         // This makes sure an already running app is first made inactive.
