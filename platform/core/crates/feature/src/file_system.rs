@@ -81,42 +81,6 @@ fn make_sure_feature_files_dir_exists(
     Ok(())
 }
 
-// if no dest_resource_url is provided, it creates one and returns it.
-// it returns the path of the folder in which the file was written
-#[allow(dead_code)]
-fn write_file(
-    url: &Url,
-    dest_resource_url: Option<ResourceUrl>,
-    platform_fs: &impl FileSystem,
-    config: &impl FeatureFSConfigTrait,
-) -> Result<ResourceUrl, CoreFailure> {
-    make_sure_feature_files_dir_exists(platform_fs, config)?;
-
-    let dir_path = match dest_resource_url {
-        Some(res_url) => fs_path_from_resource_url(&res_url, config),
-        None => fs_path_from_id(&Uuid::new_v4().to_string(), config),
-    }?;
-
-    // get contents from that url. Should I use fetch? Should this be platform specific?
-    // assume a file url for now
-    let url_path = url
-        .to_file_path()
-        .map_err(|()| CoreFailure::failed_to_get_file_path(url.to_owned(), "".to_string()))?
-        .to_str()
-        .unwrap_or_default()
-        .to_owned();
-
-    let file_name = url
-        .last_segment()
-        .map_err(|err| CoreFailure::failed_to_get_last_segment_from_url(url.to_owned(), err))?;
-
-    let file_path = dir_path + "/" + &file_name;
-
-    platform_fs.copy(&url_path, &file_path)?;
-
-    resource_url_from_fs_path(&file_path, config)
-}
-
 #[allow(dead_code)]
 struct Metadata {
     is_directory: bool,
@@ -263,6 +227,42 @@ mod tests {
         platform_fs.unzip(url.as_str(), &fs_path)?;
 
         resource_url_from_fs_path(&fs_path, config)
+    }
+
+    // if no dest_resource_url is provided, it creates one and returns it.
+    // it returns the path of the folder in which the file was written
+    #[allow(dead_code)]
+    fn write_file(
+        url: &Url,
+        dest_resource_url: Option<ResourceUrl>,
+        platform_fs: &impl FileSystem,
+        config: &impl FeatureFSConfigTrait,
+    ) -> Result<ResourceUrl, CoreFailure> {
+        make_sure_feature_files_dir_exists(platform_fs, config)?;
+
+        let dir_path = match dest_resource_url {
+            Some(res_url) => fs_path_from_resource_url(&res_url, config),
+            None => fs_path_from_id(&Uuid::new_v4().to_string(), config),
+        }?;
+
+        // get contents from that url. Should I use fetch? Should this be platform specific?
+        // assume a file url for now
+        let url_path = url
+            .to_file_path()
+            .map_err(|()| CoreFailure::failed_to_get_file_path(url.to_owned(), "".to_string()))?
+            .to_str()
+            .unwrap_or_default()
+            .to_owned();
+
+        let file_name = url
+            .last_segment()
+            .map_err(|err| CoreFailure::failed_to_get_last_segment_from_url(url.to_owned(), err))?;
+
+        let file_path = dir_path + "/" + &file_name;
+
+        platform_fs.copy(&url_path, &file_path)?;
+
+        resource_url_from_fs_path(&file_path, config)
     }
 
     struct MockFSConfig {
