@@ -82,26 +82,6 @@ fn make_sure_feature_files_dir_exists(
 }
 
 // if no dest_resource_url is provided, it creates one and returns it.
-#[allow(dead_code)]
-fn import_archive(
-    url: &Url,
-    dest_resource_url: Option<ResourceUrl>,
-    platform_fs: &impl FileSystem,
-    config: &impl FeatureFSConfigTrait,
-) -> Result<ResourceUrl, CoreFailure> {
-    make_sure_feature_files_dir_exists(platform_fs, config)?;
-
-    let fs_path = match dest_resource_url {
-        Some(res_url) => fs_path_from_resource_url(&res_url, config),
-        None => fs_path_from_id(&Uuid::new_v4().to_string(), config),
-    }?;
-
-    platform_fs.unzip(url.as_str(), &fs_path)?;
-
-    resource_url_from_fs_path(&fs_path, config)
-}
-
-// if no dest_resource_url is provided, it creates one and returns it.
 // it returns the path of the folder in which the file was written
 #[allow(dead_code)]
 fn write_file(
@@ -263,6 +243,26 @@ mod tests {
         let path = Path::new(&full_path);
         DirBuilder::new().recursive(true).create(path).unwrap();
         return full_path;
+    }
+
+    // if no dest_resource_url is provided, it creates one and returns it.
+    #[allow(dead_code)]
+    fn import_archive(
+        url: &Url,
+        dest_resource_url: Option<ResourceUrl>,
+        platform_fs: &impl FileSystem,
+        config: &impl FeatureFSConfigTrait,
+    ) -> Result<ResourceUrl, CoreFailure> {
+        make_sure_feature_files_dir_exists(platform_fs, config)?;
+
+        let fs_path = match dest_resource_url {
+            Some(res_url) => fs_path_from_resource_url(&res_url, config),
+            None => fs_path_from_id(&Uuid::new_v4().to_string(), config),
+        }?;
+
+        platform_fs.unzip(url.as_str(), &fs_path)?;
+
+        resource_url_from_fs_path(&fs_path, config)
     }
 
     struct MockFSConfig {
