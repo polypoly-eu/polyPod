@@ -17,19 +17,19 @@ const datasets = [
 
 datasets.forEach(([language, dataset]) =>
     describe(`Import ad views from ${language} dataset`, () => {
-        let result = null;
+        let report = null;
         let relatedAccounts = null;
         let firstRelatedAccount = null;
         let secondRelatedAccount = null;
 
         beforeAll(async () => {
             const importingResult = await runAdsImportForDataset(dataset);
-            result = importingResult.result;
+            report = importingResult.report;
             relatedAccounts = importingResult.relatedAccounts;
             [firstRelatedAccount, secondRelatedAccount] = relatedAccounts.items;
         });
 
-        it("returns success status", () => expectImportSuccess(result));
+        it("returns success status", () => expectImportSuccess(report));
 
         it("has two related accounts", () =>
             expect(relatedAccounts.count).toBe(
