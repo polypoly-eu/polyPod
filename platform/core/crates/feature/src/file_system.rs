@@ -339,7 +339,6 @@ mod tests {
         let fs = DefaultFileSystem {};
 
         let url = zip_file_url();
-        println!( "{}", url );
         let result = import_archive(&url, None, &fs, &config);
         assert!(result.is_ok());
         assert_eq!(
