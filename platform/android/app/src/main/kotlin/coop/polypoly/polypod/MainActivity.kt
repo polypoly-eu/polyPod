@@ -96,6 +96,8 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
             Core.executeRequest(CoreRequest.ClearPreferences())
             Preferences.setClearCorePreferences(this, false)
         }
+
+        Preferences.migrateToCore(this)
     }
 
     override fun onStateChanged(

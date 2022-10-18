@@ -96,6 +96,27 @@ class UpdateNotificationTest {
         InAppNotification.checkShown()
     }
 
+    @Test
+    fun seenLastNotificationMigrated() {
+        setLastNotificationPreference(1, "ALL_SEEN")
+        relaunchActivity(1)
+        InAppNotification.checkNotShown()
+    }
+
+    @Test
+    fun partlySeenLastNotificationMigrated() {
+        setLastNotificationPreference(1, "PUSH_SEEN")
+        relaunchActivity(1)
+        InAppNotification.checkShown()
+    }
+
+    @Test
+    fun unseenLastNotificationMigrated() {
+        setLastNotificationPreference(1, "NOT_SEEN")
+        relaunchActivity(1)
+        InAppNotification.checkShown()
+    }
+
     // TODO: Add tests that verify that the push notification shows up as
     //       expected. That should be possible with UiAutomator.
 
@@ -103,5 +124,14 @@ class UpdateNotificationTest {
         closeActivity()
         UpdateNotificationData.mockData.id = notificationId
         activityScenario = ActivityScenario.launch(MainActivity::class.java)
+    }
+
+    private fun setLastNotificationPreference(id: Int, state: String) {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val prefs =
+            PreferenceManager.getDefaultSharedPreferences(context).edit()
+        prefs.putInt("lastNotificationId", id)
+        prefs.putString("lastNotificationState", state)
+        prefs.commit()
     }
 }
