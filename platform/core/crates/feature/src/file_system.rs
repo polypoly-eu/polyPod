@@ -33,8 +33,10 @@ fn feature_files_path(config: &impl FeatureFSConfigTrait) -> Result<String, Core
 
 type ResourceUrl = String;
 type ResourceId = str;
+
 const RES_PREFIX: &str = "polypod://FeatureFiles/";
 
+#[allow(dead_code)]
 fn fs_path_from_id(
     id: &ResourceId,
     config: &impl FeatureFSConfigTrait,
@@ -43,6 +45,7 @@ fn fs_path_from_id(
     Ok(fs_prefix + id)
 }
 
+#[allow(dead_code)]
 fn fs_path_from_resource_url(
     resource_url: &ResourceUrl,
     config: &impl FeatureFSConfigTrait,
@@ -53,6 +56,7 @@ fn fs_path_from_resource_url(
     })
 }
 
+#[allow(dead_code)]
 fn resource_url_from_fs_path(
     fs_path: &str,
     config: &impl FeatureFSConfigTrait,
@@ -70,6 +74,7 @@ fn swap_prefix(string: &str, from: &str, to: &str) -> Result<String, String> {
     Ok(string.replace(from, to))
 }
 
+#[allow(dead_code)]
 fn make_sure_feature_files_dir_exists(
     platform_fs: &impl FileSystem,
     config: &impl FeatureFSConfigTrait,
@@ -79,6 +84,62 @@ fn make_sure_feature_files_dir_exists(
         platform_fs.create_dir_structure(&files_path)?;
     }
     Ok(())
+}
+
+// if no dest_resource_url is provided, it creates one and returns it.
+#[allow(dead_code)]
+fn import_archive(
+    url: &Url,
+    dest_resource_url: Option<ResourceUrl>,
+    platform_fs: &impl FileSystem,
+    config: &impl FeatureFSConfigTrait,
+) -> Result<ResourceUrl, CoreFailure> {
+    make_sure_feature_files_dir_exists(platform_fs, config)?;
+
+    let fs_path = match dest_resource_url {
+        Some(res_url) => fs_path_from_resource_url(&res_url, config),
+        None => fs_path_from_id(&Uuid::new_v4().to_string(), config),
+    }?;
+
+    platform_fs.unzip(url.as_str(), &fs_path)?;
+
+    resource_url_from_fs_path(&fs_path, config)
+}
+
+// if no dest_resource_url is provided, it creates one and returns it.
+// it returns the path of the folder in which the file was written
+#[allow(dead_code)]
+fn write_file(
+    url: &Url,
+    dest_resource_url: Option<ResourceUrl>,
+    platform_fs: &impl FileSystem,
+    config: &impl FeatureFSConfigTrait,
+) -> Result<ResourceUrl, CoreFailure> {
+    make_sure_feature_files_dir_exists(platform_fs, config)?;
+
+    let dir_path = match dest_resource_url {
+        Some(res_url) => fs_path_from_resource_url(&res_url, config),
+        None => fs_path_from_id(&Uuid::new_v4().to_string(), config),
+    }?;
+
+    // get contents from that url. Should I use fetch? Should this be platform specific?
+    // assume a file url for now
+    let url_path = url
+        .to_file_path()
+        .map_err(|()| CoreFailure::failed_to_get_file_path(url.to_owned(), "".to_string()))?
+        .to_str()
+        .unwrap_or_default()
+        .to_owned();
+
+    let file_name = url
+        .last_segment()
+        .map_err(|err| CoreFailure::failed_to_get_last_segment_from_url(url.to_owned(), err))?;
+
+    let file_path = dir_path + "/" + &file_name;
+
+    platform_fs.copy(&url_path, &file_path)?;
+
+    resource_url_from_fs_path(&file_path, config)
 }
 
 #[allow(dead_code)]
@@ -207,62 +268,6 @@ mod tests {
         let path = Path::new(&full_path);
         DirBuilder::new().recursive(true).create(path).unwrap();
         return full_path;
-    }
-
-    // if no dest_resource_url is provided, it creates one and returns it.
-    #[allow(dead_code)]
-    fn import_archive(
-        url: &Url,
-        dest_resource_url: Option<ResourceUrl>,
-        platform_fs: &impl FileSystem,
-        config: &impl FeatureFSConfigTrait,
-    ) -> Result<ResourceUrl, CoreFailure> {
-        make_sure_feature_files_dir_exists(platform_fs, config)?;
-
-        let fs_path = match dest_resource_url {
-            Some(res_url) => fs_path_from_resource_url(&res_url, config),
-            None => fs_path_from_id(&Uuid::new_v4().to_string(), config),
-        }?;
-
-        platform_fs.unzip(url.as_str(), &fs_path)?;
-
-        resource_url_from_fs_path(&fs_path, config)
-    }
-
-    // if no dest_resource_url is provided, it creates one and returns it.
-    // it returns the path of the folder in which the file was written
-    #[allow(dead_code)]
-    fn write_file(
-        url: &Url,
-        dest_resource_url: Option<ResourceUrl>,
-        platform_fs: &impl FileSystem,
-        config: &impl FeatureFSConfigTrait,
-    ) -> Result<ResourceUrl, CoreFailure> {
-        make_sure_feature_files_dir_exists(platform_fs, config)?;
-
-        let dir_path = match dest_resource_url {
-            Some(res_url) => fs_path_from_resource_url(&res_url, config),
-            None => fs_path_from_id(&Uuid::new_v4().to_string(), config),
-        }?;
-
-        // get contents from that url. Should I use fetch? Should this be platform specific?
-        // assume a file url for now
-        let url_path = url
-            .to_file_path()
-            .map_err(|()| CoreFailure::failed_to_get_file_path(url.to_owned(), "".to_string()))?
-            .to_str()
-            .unwrap_or_default()
-            .to_owned();
-
-        let file_name = url
-            .last_segment()
-            .map_err(|err| CoreFailure::failed_to_get_last_segment_from_url(url.to_owned(), err))?;
-
-        let file_path = dir_path + "/" + &file_name;
-
-        platform_fs.copy(&url_path, &file_path)?;
-
-        resource_url_from_fs_path(&file_path, config)
     }
 
     struct MockFSConfig {
