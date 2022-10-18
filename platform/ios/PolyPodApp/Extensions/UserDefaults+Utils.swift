@@ -44,7 +44,7 @@ extension UserDefaults {
                     removeObject(forKey: key)
                     Log.info("Migrated user default \(key)")
                 case .failure(let error):
-                    Log.error("Failed to migrate user default \(key): \(error.localizedDescription)")
+                    Log.error("Failed to migrate user default '\(key)': \(error.localizedDescription)")
                 }
             }
         }
