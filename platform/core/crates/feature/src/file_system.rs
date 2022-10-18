@@ -43,7 +43,6 @@ fn fs_path_from_id(
     Ok(fs_prefix + id)
 }
 
-#[allow(dead_code)]
 fn fs_path_from_resource_url(
     resource_url: &ResourceUrl,
     config: &impl FeatureFSConfigTrait,
@@ -54,7 +53,6 @@ fn fs_path_from_resource_url(
     })
 }
 
-#[allow(dead_code)]
 fn resource_url_from_fs_path(
     fs_path: &str,
     config: &impl FeatureFSConfigTrait,
@@ -72,7 +70,6 @@ fn swap_prefix(string: &str, from: &str, to: &str) -> Result<String, String> {
     Ok(string.replace(from, to))
 }
 
-#[allow(dead_code)]
 fn make_sure_feature_files_dir_exists(
     platform_fs: &impl FileSystem,
     config: &impl FeatureFSConfigTrait,
