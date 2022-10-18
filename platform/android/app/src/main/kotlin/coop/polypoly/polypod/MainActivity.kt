@@ -87,8 +87,9 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
             // Ignore CoreAlreadyBootstrapped error, as it is not breaking.
             if ((ex as? CoreFailure)?.code
                 != CoreExceptionCode.CoreAlreadyBootstrapped
-            )
+            ) {
                 throw ex
+            }
         }
 
         if (Preferences.getClearCorePreferences(this)) {
