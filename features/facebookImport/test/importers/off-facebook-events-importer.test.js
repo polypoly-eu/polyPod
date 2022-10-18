@@ -7,7 +7,7 @@ import {
     zipFileWithOffFacebookEvents,
     DATASET_EXPECTED_VALUES,
 } from "../datasets/off-facebook-events-data";
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { zipWithWrongDatasetKey } from "../utils/data-creation";
 import { runOffFacebookEventsImporter } from "../utils/data-importing";
 import {

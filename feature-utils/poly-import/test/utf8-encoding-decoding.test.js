@@ -1,6 +1,6 @@
 "use strict";
 
-import { jsonStringifyWithUtfEscape } from "../src/model/importers/utils/json-encoding";
+import { jsonStringifyWithUtfEscape } from "../utils/json-encoding";
 
 const jsonData1 = "🦊";
 const jsonData2 = "🦊🤗😍";
@@ -21,6 +21,11 @@ describe("JSON encode", () => {
 
     it("Various characters", () => {
         expect(jsonStringifyWithUtfEscape(jsonData3)).toBe(decodedData3);
+    });
+
+    it("passes through non-string data", () => {
+        const foo42 = { foo: 42 };
+        expect(jsonStringifyWithUtfEscape(foo42)).toBe(JSON.stringify(foo42));
     });
 });
 

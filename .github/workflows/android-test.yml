@@ -15,19 +15,17 @@ jobs:
         runs-on: macOS-latest
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v2
-            - uses: actions/setup-node@v2
+              uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
               with:
                   node-version: 16
                   cache: "npm"
                   cache-dependency-path: "**/package-lock.json"
-            - name: Install and build API and features
+            - name: Build prerequisites
               run: ./build.js
-            - name: Build core
-              working-directory: platform/core
-              run: |
-                make android_bindings
-            - uses: actions/setup-java@v2
+              env:
+                POLYPOD_BUILD_PLATFORMS: android
+            - uses: actions/setup-java@v3
               with:
                   distribution: 'zulu'
                   java-version: 11

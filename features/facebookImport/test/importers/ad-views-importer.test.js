@@ -9,7 +9,7 @@ import {
     createEnglishDatasetWithMissingAdsCategory,
     createIncompleteEnglishAdViewsData,
 } from "../datasets/ad-views-data";
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { zipWithWrongDatasetKey } from "../utils/data-creation";
 import {
     runAdsImportForDataset,

@@ -5,7 +5,7 @@ import {
     DATASET_EXPECTED_VALUES,
     zipFileWithSearches,
 } from "../datasets/searches-data";
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { zipWithWrongDatasetKey } from "../utils/data-creation";
 import { runSearchesImporter } from "../utils/data-importing";
 import {

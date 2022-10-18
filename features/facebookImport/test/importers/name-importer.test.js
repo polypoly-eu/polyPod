@@ -1,7 +1,7 @@
 "use strict";
 
 import NameImporter from "../../src/model/importers/name-importer";
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { runNameImporter } from "../utils/data-importing";
 import {
     expectError,

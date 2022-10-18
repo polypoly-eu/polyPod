@@ -24,8 +24,7 @@ function jsonStringifyWithUtfEscape(jsonData) {
         }
         return value;
     });
-    const escapedString = jsonStringEscapeUtfCharacters(serializedString);
-    return escapedString;
+    return jsonStringEscapeUtfCharacters(serializedString);
 }
 
 export { jsonStringEscapeUtfCharacters, jsonStringifyWithUtfEscape };
