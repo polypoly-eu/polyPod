@@ -36,6 +36,7 @@
     "@types/n3": "^1.10.3",
     "@types/rdfjs__dataset": "^1.0.4",
     "@types/uuid": "^8.3.4",
+    "jszip": "^3.10.1",
     "memfs": "^3.4.1",
     "n3": "^1.8.0",
     "rdf-data-factory": "^1.0.4"

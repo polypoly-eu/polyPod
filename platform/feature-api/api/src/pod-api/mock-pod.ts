@@ -2,6 +2,7 @@ import { DefaultPod, DefaultPolyOut } from "./default";
 import { dataset } from "@rdfjs/dataset";
 import { Volume } from "memfs";
 import { isPolypodUri, PolyUri, PolyPodUriError } from "./uri";
+import JSZip from "jszip";
 
 export class MockPolyOut extends DefaultPolyOut {
     constructor(fs = new Volume().promises) {
@@ -16,6 +17,12 @@ export class MockPolyOut extends DefaultPolyOut {
                 throw new PolyPodUriError(`${destUri} is not a polyPod URI`);
             }
         }
+
+        this.readFile(path).then((data) => {
+            JSZip.loadAsync(data).then((zip) => {
+                console.log(zip.files);
+            });
+        });
         return destUri;
     }
 }
