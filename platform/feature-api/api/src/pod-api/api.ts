@@ -213,14 +213,6 @@ export interface Info {
 }
 
 /**
- * @hidden
- */
-export interface PolyLifecycle {
-    listFeatures(): Promise<Record<string, boolean>>;
-    startFeature(id: string, background: boolean): Promise<void>;
-}
-
-/**
  * @class Endpoint is the API features communicate with in order to perform fetch requests
  */
 export interface Endpoint {
@@ -339,9 +331,4 @@ export interface Pod {
      * `triplestore` is an interface to interact with the SPARQL-RDF database
      */
     readonly triplestore: Triplestore;
-
-    /**
-     * @hidden
-     */
-    readonly polyLifecycle?: PolyLifecycle;
 }

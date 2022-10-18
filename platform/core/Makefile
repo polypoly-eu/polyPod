@@ -54,6 +54,7 @@ endif
 
 # ============  Swift framework ============ #
 
+.PHONY: $(swift_core_framework)
 $(swift_core_framework):
 # Ensure correct OS is used
 ifeq ($(macos),)

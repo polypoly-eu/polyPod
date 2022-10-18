@@ -15,8 +15,8 @@ jobs:
         runs-on: macOS-latest
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v2
-            - uses: actions/setup-node@v2
+              uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
               with:
                   node-version: 16
                   cache: "npm"
@@ -25,7 +25,7 @@ jobs:
               run: ./build.js
               env:
                 POLYPOD_BUILD_PLATFORMS: android
-            - uses: actions/setup-java@v2
+            - uses: actions/setup-java@v3
               with:
                   distribution: 'zulu'
                   java-version: 11

@@ -1,7 +1,7 @@
 import PostReactionsTypesAnalysis from "../../src/model/analyses/ministories/post-reactions-types-analysis";
 import PostReactionTypesMinistory from "../../src/views/ministories/postReactionsTypes";
 import { zipFileWithPostReactions } from "../datasets/post-reactions-data";
-import { ZipFileMock } from "../mocks/zipfile-mock";
+import { ZipFileMock } from "@polypoly-eu/poly-import";
 import { runAnalysisForExport } from "../utils/analyses-execution";
 import {
     expectActiveAnalysis,

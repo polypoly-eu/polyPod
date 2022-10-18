@@ -1,7 +1,7 @@
-# Visualise (the) UI hierarchy (of polyPod features)
+# Visualise (the) UI hierarchy (of polyPod Features)
 
 An experimental setup for analysing and visualising UI component hierarchy and
-reuse in polyPod features.
+reuse in polyPod Features.
 
 ## Requirements
 
@@ -46,14 +46,14 @@ but we could at least filter those.
 ### Incomplete hierarchy
 
 Even with fhd's improvements, the react-component-hierarchy tool can't seem to
-handle all edge cases, e.g. the analysis views in the facebookImport feature are
+handle all edge cases, e.g. the analysis views in the facebookImport Feature are
 not detected.
 
 ### Merged hierarchy
 
-While our individual features are currently somewhat separate, later on it could
+While our individual Features are currently somewhat separate, later on it could
 become interesting to generate a single dot file that captures them all. At the
-moment, we generate one dot file, and hence visualisation, per feature.
+moment, we generate one dot file, and hence visualisation, per Feature.
 
 ### Beyond React
 
