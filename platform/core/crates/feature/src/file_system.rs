@@ -418,9 +418,8 @@ mod tests {
         let fs = DefaultFileSystem {};
 
         let dir_name = id();
-        let file_name = "test.zip".to_string();
         let fs_path = create_temp_fs_dir(&dir_name, &fs, &config);
-        create_file_in_fs_dir(&fs_path, &file_name, b"Hello, world!");
+        create_file_in_fs_dir(&fs_path, TEST_FILE_NAME, b"Hello, world!");
 
         assert_eq!(Path::new(&fs_path).exists(), true);
 
