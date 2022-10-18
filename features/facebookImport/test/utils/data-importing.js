@@ -1,5 +1,4 @@
 import MessagesImporter from "../../src/model/importers/messages-importer.js";
-import NameImporter from "../../src/model/importers/name-importer.js";
 import PersonalDataImporter from "../../src/model/importers/personal-data-importer.js";
 import FacebookAccount from "../../src/model/entities/facebook-account.js";
 import {
@@ -81,11 +80,7 @@ export async function runConnectedAdvertisersWithAllTypesImporter(zipFile) {
 }
 
 export async function runLanguageAndLocaleImporter(zipFile) {
-    return runSingleOutdatedImporter(LanguageAndLocaleImporter, zipFile);
-}
-
-export async function runNameImporter(zipFile) {
-    return runSingleOutdatedImporter(NameImporter, zipFile);
+    return runSingleImporter(LanguageAndLocaleImporter, zipFile);
 }
 
 export async function runPersonalDataImporter(zipFile) {
@@ -109,11 +104,11 @@ export async function runOffFacebookEventsImporter(zipFile) {
 }
 
 export async function runFriendsImporter(zipFile) {
-    return runSingleOutdatedImporter(FriendsImporter, zipFile);
+    return runSingleImporter(FriendsImporter, zipFile);
 }
 
 export async function runLikedPagesImporter(zipFile) {
-    return runSingleOutdatedImporter(LikedPagesImporter, zipFile);
+    return runSingleImporter(LikedPagesImporter, zipFile);
 }
 
 export async function runSearchesImporter(zipFile) {
