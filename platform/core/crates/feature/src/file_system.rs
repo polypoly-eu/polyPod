@@ -35,7 +35,6 @@ type ResourceUrl = String;
 type ResourceId = str;
 const RES_PREFIX: &str = "polypod://FeatureFiles/";
 
-#[allow(dead_code)]
 fn fs_path_from_id(
     id: &ResourceId,
     config: &impl FeatureFSConfigTrait,
