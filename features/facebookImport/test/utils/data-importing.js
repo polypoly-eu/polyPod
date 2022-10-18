@@ -29,13 +29,12 @@ import RelatedAccountsGroup from "../../src/model/entities/related-accounts-grou
 
 export async function runMultipleImporters(importerClasses, zipFile) {
     const facebookAccount = new FacebookAccount();
-    const results = await runImporters({
+    return await runImporters({
         importerClasses,
         zipFile,
         facebookAccount,
         pod: new MockPod(),
     });
-    return { facebookAccount, results };
 }
 
 export async function runSingleImporter(importerClass, zipFile) {

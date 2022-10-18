@@ -1,40 +1,55 @@
-import { linkRelatedAccountsWithOffFacebookCompanies } from "../src/model/analyses/utils/on-off-events-matching";
+import {
+    linkRelatedAccountsWithOffFacebookCompanies,
+    offFacebookEventsLatestTimestamp,
+} from "../src/model/analyses/utils/on-off-events-matching";
+import RelatedAccountsGroup from "../src/model/entities/related-accounts-group";
 import OffFacebookEventsImporter from "../src/model/importers/off-facebook-events-importer";
 import RecentlyViewedAdsImporter from "../src/model/importers/recently-viewed-ads-importer";
 import { toUnixTimestamp } from "../src/model/importers/utils/timestamps";
 import { zipFileWithOnOffFacebookCompanyMatches } from "./datasets/on-off-events-comparison-data";
-import { runMultipleOutdatedImporters } from "./utils/data-importing";
+import { runMultipleImporters } from "./utils/data-importing";
 import { expectAllReportsSuccess } from "./utils/importer-assertions";
 
 describe("Matching on and off facebook event data", () => {
     let zipFile = null;
+    let responses = null;
     let results = null;
-    let facebookAccount = null;
+    let reports = null;
+    let relatedAccounts = null;
+    let offFacebookCompanies = null;
     let matchedCompanies = null;
 
     beforeAll(async () => {
         zipFile = zipFileWithOnOffFacebookCompanyMatches();
 
-        const importingResult = await runMultipleOutdatedImporters(
+        responses = await runMultipleImporters(
             [OffFacebookEventsImporter, RecentlyViewedAdsImporter],
             zipFile
         );
-        results = importingResult.results;
-        facebookAccount = importingResult.facebookAccount;
-        matchedCompanies =
-            linkRelatedAccountsWithOffFacebookCompanies(facebookAccount);
+
+        results = responses.map((response) => response.result);
+        reports = responses.map((response) => response.report);
+
+        offFacebookCompanies = results[0];
+        relatedAccounts = new RelatedAccountsGroup();
+        relatedAccounts.addAll(results[1]);
+
+        matchedCompanies = linkRelatedAccountsWithOffFacebookCompanies(
+            relatedAccounts,
+            offFacebookCompanies
+        );
     });
 
-    it("imports all data correctly", () => expectAllReportsSuccess(results));
+    it("imports all data correctly", () => expectAllReportsSuccess(reports));
 
     it("has correct number of related accounts", () =>
-        expect(facebookAccount.relatedAccountsCount).toBe(6));
+        expect(relatedAccounts.count).toBe(6));
 
     it("has correct number of advertiser accounts", () =>
-        expect(facebookAccount.relatedAccounts.advertisers().length).toBe(6));
+        expect(relatedAccounts.advertisers().length).toBe(6));
 
     it("has correct number of off-Facebook companies", () =>
-        expect(facebookAccount.offFacebookCompaniesCount).toBe(7));
+        expect(offFacebookCompanies.length).toBe(7));
 
     it("has four on-off Facebook matches", () =>
         expect(matchedCompanies.length).toBe(5));
@@ -78,12 +93,12 @@ describe("Matching on and off facebook event data", () => {
         ).toBe(4));
 
     it("has correct latest off-facebook event timestamp", () =>
-        expect(facebookAccount.offFacebookEventsLatestTimestamp).toBe(
+        expect(offFacebookEventsLatestTimestamp(offFacebookCompanies)).toBe(
             toUnixTimestamp("29 August 2021 16:55:00 GMT+00:00")
         ));
 
     it("has correct latest ad-view event timestamp", () =>
-        expect(facebookAccount.relatedAccountEventLatestTimestamp).toBe(
+        expect(relatedAccounts.latestEventTimestamp).toBe(
             toUnixTimestamp("29 August 2021 16:50:00 GMT+00:00")
         ));
 });
