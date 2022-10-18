@@ -35,7 +35,7 @@ type ResourceUrl = String;
 #[allow(dead_code)]
 type ResourceId = str;
 
-static RES_PREFIX: &str = "polypod://FeatureFiles/";
+const RES_PREFIX: &str = "polypod://FeatureFiles/";
 
 #[allow(dead_code)]
 fn resource_url_from_id(id: &ResourceId) -> ResourceUrl {
