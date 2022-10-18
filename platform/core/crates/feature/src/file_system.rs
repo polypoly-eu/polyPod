@@ -436,14 +436,13 @@ mod tests {
         let fs = DefaultFileSystem {};
 
         let dir_name = id();
-        let file_name = "test.zip".to_string();
         let fs_path = create_temp_fs_dir(&dir_name, &fs, &config);
-        let file_url = create_file_in_fs_dir(&fs_path, &file_name, b"Hello, world!");
+        let file_url = create_file_in_fs_dir(&fs_path, TEST_FILE_NAME, b"Hello, world!");
 
         assert_eq!(Path::new(&fs_path).exists(), true);
         assert_eq!(Path::new(&file_url).exists(), true);
 
-        let resource_url = resource_url_from_id(&dir_name) + "/" + &file_name;
+        let resource_url = resource_url_from_id(&dir_name) + "/" + TEST_FILE_NAME;
         let result = remove(&resource_url, &fs, &config);
         assert!(result.is_ok());
 
@@ -457,10 +456,9 @@ mod tests {
         let fs = DefaultFileSystem {};
 
         let id = id();
-        let file_name = "test.zip".to_string();
         let dir_name = "test".to_string();
         let fs_path = create_temp_fs_dir(&id, &fs, &config);
-        let file_url = create_file_in_fs_dir(&fs_path, &file_name, b"Hello, world!");
+        let file_url = create_file_in_fs_dir(&fs_path, TEST_FILE_NAME, b"Hello, world!");
         let dir_url = create_dir_in_fs_dir(&fs_path, &dir_name);
 
         assert_eq!(Path::new(&fs_path).exists(), true);
@@ -473,7 +471,7 @@ mod tests {
 
         assert_eq!(
             HashSet::from_iter(result.unwrap().iter().cloned()),
-            HashSet::from(["test".to_string(), "test.zip".to_string()])
+            HashSet::from(["test".to_string(), String::from(TEST_FILE_NAME)])
         );
     }
 
