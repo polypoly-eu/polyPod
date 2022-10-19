@@ -20,7 +20,7 @@ impl UpdateNotificationStore for MockStore {
 
     fn set_last_notification(&self, last_notification: LastNotification) {
         let mut old_last_notification = self.last_notification.lock().unwrap();
-        *old_last_notification = Some(last_notification)
+        *old_last_notification = Some(last_notification);
     }
 }
 
