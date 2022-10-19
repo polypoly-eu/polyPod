@@ -16,7 +16,6 @@ export default class ReportMetadataAnalysis extends ReportAnalysis {
         dataAccount.reports[analysisKeys.reportMetadata].filesCount =
             entries.length;
 
-        console.log(dataAccount);
         dataAccount.reports[analysisKeys.reportMetadata].preferedLanguage =
             dataAccount.languageAndLocale?.preferredLanguage
                 ? {
