@@ -17,6 +17,9 @@ unrefined. For more on the vision please read the [polyPod whitepaper][1].
 - [build](build): The build logic
 - [dev-utils](dev-utils): Utilities used at build time
 
+To better understand the architecture, have a look at
+[docs/architecture.md](docs/architecture.md).
+
 ## Requirements
 
 The main thing you need is [Node.js](https://nodejs.org/) version 16.x or newer.
