@@ -61,8 +61,8 @@ pub enum CoreRequest {
     HandleFirstRun,
     HandleInAppNotificationSeen,
     HandlePushNotificationSeen,
-    GetShowInAppNotification,
-    GetShowPushNotification,
+    ShouldShowInAppNotification,
+    ShouldShowPushNotification,
     ClearPreferences,
     SetPreference {
         args: SetPreferenceArguments,
@@ -93,8 +93,8 @@ pub fn execute_request(request: CoreRequest) -> MessagePackBytes {
         CoreRequest::HandleFirstRun => instance.handle_first_run(),
         CoreRequest::HandleInAppNotificationSeen => instance.handle_in_app_notification_seen(),
         CoreRequest::HandlePushNotificationSeen => instance.handle_push_notification_seen(),
-        CoreRequest::GetShowInAppNotification => instance.get_show_in_app_notification(),
-        CoreRequest::GetShowPushNotification => instance.get_show_push_notification(),
+        CoreRequest::ShouldShowInAppNotification => instance.should_show_in_app_notification(),
+        CoreRequest::ShouldShowPushNotification => instance.should_show_push_notification(),
         CoreRequest::ClearPreferences => instance.clear_preferences(),
         CoreRequest::SetPreference { args } => instance.set_preference(args),
     }
@@ -197,13 +197,17 @@ impl Core<'_> {
         message_pack_serialize(Ok(()) as Result<(), CoreFailure>)
     }
 
-    pub fn get_show_in_app_notification(&self) -> MessagePackBytes {
-        let show = self.update_notification.lock().unwrap().show_in_app();
+    pub fn should_show_in_app_notification(&self) -> MessagePackBytes {
+        let show = self
+            .update_notification
+            .lock()
+            .unwrap()
+            .should_show_in_app();
         message_pack_serialize(Ok(show) as Result<bool, CoreFailure>)
     }
 
-    pub fn get_show_push_notification(&self) -> MessagePackBytes {
-        let show = self.update_notification.lock().unwrap().show_push();
+    pub fn should_show_push_notification(&self) -> MessagePackBytes {
+        let show = self.update_notification.lock().unwrap().should_show_push();
         message_pack_serialize(Ok(show) as Result<bool, CoreFailure>)
     }
 

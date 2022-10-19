@@ -27,7 +27,7 @@ impl UpdateNotificationStore for MockStore {
 macro_rules! assert_in_app_showing {
     ($notification: expr) => {
         assert!(
-            $notification.show_in_app(),
+            $notification.should_show_in_app(),
             "Expected in app notification '{:?}' to show",
             $notification
         );
@@ -37,7 +37,7 @@ macro_rules! assert_in_app_showing {
 macro_rules! assert_in_app_not_showing {
     ($notification: expr) => {
         assert!(
-            !$notification.show_in_app(),
+            !$notification.should_show_in_app(),
             "Expected in app notification '{:?}' to not show",
             $notification
         );
@@ -47,7 +47,7 @@ macro_rules! assert_in_app_not_showing {
 macro_rules! assert_push_showing {
     ($notification: expr) => {
         assert!(
-            $notification.show_push(),
+            $notification.should_show_push(),
             "Expected push notification '{:?}' to show",
             $notification
         );
@@ -57,7 +57,7 @@ macro_rules! assert_push_showing {
 macro_rules! assert_push_not_showing {
     ($notification: expr) => {
         assert!(
-            !$notification.show_push(),
+            !$notification.should_show_push(),
             "Expected push notification '{:?}' to not show",
             $notification
         );

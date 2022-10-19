@@ -31,8 +31,8 @@ public enum CoreRequest: Encodable {
     case handleFirstRun
     case handleInAppNotificationSeen
     case handlePushNotificationSeen
-    case getShowInAppNotification
-    case getShowPushNotification
+    case shouldShowInAppNotification
+    case shouldShowPushNotification
     case clearPreferences
     case setPreference(args: SetPreferenceArguments)
 }

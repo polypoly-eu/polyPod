@@ -58,8 +58,8 @@ sealed class CoreRequest {
     class HandleFirstRun : CoreRequest()
     class HandleInAppNotificationSeen : CoreRequest()
     class HandlePushNotificationSeen : CoreRequest()
-    class GetShowInAppNotification : CoreRequest()
-    class GetShowPushNotification : CoreRequest()
+    class ShouldShowInAppNotification : CoreRequest()
+    class ShouldShowPushNotification : CoreRequest()
     class ClearPreferences : CoreRequest()
     class SetPreference(val args: SetPreferenceArguments) : CoreRequest()
 
@@ -98,8 +98,10 @@ sealed class CoreRequest {
                 "handleInAppNotificationSeen".asValue()
             is HandlePushNotificationSeen ->
                 "handlePushNotificationSeen".asValue()
-            is GetShowInAppNotification -> "getShowInAppNotification".asValue()
-            is GetShowPushNotification -> "getShowPushNotification".asValue()
+            is ShouldShowInAppNotification ->
+                "shouldShowInAppNotification".asValue()
+            is ShouldShowPushNotification ->
+                "shouldShowPushNotification".asValue()
             is ClearPreferences -> "clearPreferences".asValue()
             is SetPreference -> mapOf(
                 "setPreference".asValue() to mapOf(

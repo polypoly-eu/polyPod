@@ -2,23 +2,23 @@ import Foundation
 
 public class UpdateNotification {
     public static var showPush: Bool {
-        let result: Result<Bool, Error> = Core.instance.executeRequest(.getShowPushNotification)
+        let result: Result<Bool, Error> = Core.instance.executeRequest(.shouldShowPushNotification)
         switch result {
         case .success(let value):
             return value
         case .failure(let error):
-            print("getShowPushNotification request failed: \(error.localizedDescription)")
+            print("shouldShowPushNotification request failed: \(error.localizedDescription)")
             return false
         }
     }
 
     public static var showInApp: Bool {
-        let result: Result<Bool, Error> = Core.instance.executeRequest(.getShowInAppNotification)
+        let result: Result<Bool, Error> = Core.instance.executeRequest(.shouldShowInAppNotification)
         switch result {
         case .success(let value):
             return value
         case .failure(let error):
-            print("getShowInAppNotification request failed: \(error.localizedDescription)")
+            print("shouldShowInAppNotification request failed: \(error.localizedDescription)")
             return false
         }
     }

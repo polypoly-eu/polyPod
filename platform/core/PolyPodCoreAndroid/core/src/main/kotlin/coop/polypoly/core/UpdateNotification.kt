@@ -3,12 +3,12 @@ package coop.polypoly.core
 class UpdateNotification {
     companion object {
         val showInApp get() = Core.executeRequest(
-            CoreRequest.GetShowInAppNotification(),
+            CoreRequest.ShouldShowInAppNotification(),
             Boolean::fromValue
         )
 
         val showPush get() = Core.executeRequest(
-            CoreRequest.GetShowPushNotification(),
+            CoreRequest.ShouldShowPushNotification(),
             Boolean::fromValue
         )
 

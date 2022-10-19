@@ -44,7 +44,7 @@ impl UpdateNotification {
             })
     }
 
-    fn show<F: Fn(State) -> bool>(&self, show_for_last_state: F) -> bool {
+    fn should_show<F: Fn(State) -> bool>(&self, show_for_last_state: F) -> bool {
         let last_notification = self.get_last_notification();
         if self.id == 0 || self.id < last_notification.id {
             return false;
@@ -63,12 +63,12 @@ impl UpdateNotification {
         self.handle_push_seen();
     }
 
-    pub fn show_in_app(&self) -> bool {
-        self.show(|state| state != State::AllSeen)
+    pub fn should_show_in_app(&self) -> bool {
+        self.should_show(|state| state != State::AllSeen)
     }
 
-    pub fn show_push(&self) -> bool {
-        self.show(|state| state == State::NotSeen)
+    pub fn should_show_push(&self) -> bool {
+        self.should_show(|state| state == State::NotSeen)
     }
 
     fn update_last(&mut self, state: State) {
