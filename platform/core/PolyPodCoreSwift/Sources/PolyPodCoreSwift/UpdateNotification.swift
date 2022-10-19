@@ -1,6 +1,6 @@
 import Foundation
 
-public class UpdateNotification {
+public enum UpdateNotification {
     public static var showPush: Bool {
         Core.instance
             .executeRequest(.shouldShowPushNotification)
