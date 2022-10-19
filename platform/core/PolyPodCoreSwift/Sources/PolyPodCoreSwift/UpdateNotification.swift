@@ -2,42 +2,36 @@ import Foundation
 
 public class UpdateNotification {
     public static var showPush: Bool {
-        let result: Result<Bool, Error> = Core.instance.executeRequest(.shouldShowPushNotification)
-        switch result {
-        case .success(let value):
-            return value
-        case .failure(let error):
-            print("shouldShowPushNotification request failed: \(error.localizedDescription)")
-            return false
-        }
+        Core.instance
+            .executeRequest(.shouldShowPushNotification)
+            .inspectError {
+                Log.error("shouldShowPushNotification request failed: \($0.localizedDescription)")
+            }
+            .unwrapOr(false)
     }
 
     public static var showInApp: Bool {
-        let result: Result<Bool, Error> = Core.instance.executeRequest(.shouldShowInAppNotification)
-        switch result {
-        case .success(let value):
-            return value
-        case .failure(let error):
-            print("shouldShowInAppNotification request failed: \(error.localizedDescription)")
-            return false
-        }
+        Core.instance
+            .executeRequest(.shouldShowInAppNotification)
+            .inspectError {
+                Log.error("shouldShowInAppNotification request failed: \($0.localizedDescription)")
+            }
+            .unwrapOr(false)
     }
 
     public static func handlePushSeen() {
-        switch Core.instance.executeRequest(.handlePushNotificationSeen) {
-        case .success:
-            break
-        case .failure(let error):
-            print("handlePushNotification request failed: \(error.localizedDescription)")
-        }
+        _ = Core.instance
+            .executeRequest(.handlePushNotificationSeen)
+            .inspectError {
+                Log.error("handlePushNotificationSeen request failed: \($0.localizedDescription)")
+            }
     }
 
     public static func handleInAppSeen() {
-        switch Core.instance.executeRequest(.handleInAppNotificationSeen) {
-        case .success:
-            break
-        case .failure(let error):
-            print("handleInAppNotificationSeen request failed: \(error.localizedDescription)")
-        }
+        _ = Core.instance
+            .executeRequest(.handleInAppNotificationSeen)
+            .inspectError {
+                Log.error("handleInAppNotificationSeen request failed: \($0.localizedDescription)")
+            }
     }
 }

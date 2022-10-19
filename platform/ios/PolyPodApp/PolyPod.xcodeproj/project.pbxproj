@@ -108,8 +108,6 @@
 		9075BABA283B69FD00909E06 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075BAB9283B69FD00909E06 /* HomeScreenView.swift */; };
 		909BD36128CF45630024A725 /* AppAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 909BD36028CF45630024A725 /* AppAuth */; };
 		909BD36428CF45BA0024A725 /* OIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BD36328CF45BA0024A725 /* OIDAuth.swift */; };
-		90DD12F528A4E6C800526F54 /* Result+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DD12F428A4E6C800526F54 /* Result+Utils.swift */; };
-		90DD12F628A4E6C800526F54 /* Result+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DD12F428A4E6C800526F54 /* Result+Utils.swift */; };
 		90E1CD2128D33692001937D3 /* OIDTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1CD2028D33692001937D3 /* OIDTokenStorage.swift */; };
 		90E1CD2328D37213001937D3 /* OIDAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1CD2228D37213001937D3 /* OIDAuthTests.swift */; };
 		90E1CD2528D373BF001937D3 /* NetworkRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1CD2428D373BF001937D3 /* NetworkRequestInterceptor.swift */; };
@@ -265,7 +263,6 @@
 		90716ACB283F7AFA00F7445A /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
 		9075BAB9283B69FD00909E06 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		909BD36328CF45BA0024A725 /* OIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OIDAuth.swift; sourceTree = "<group>"; };
-		90DD12F428A4E6C800526F54 /* Result+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Utils.swift"; sourceTree = "<group>"; };
 		90E1CD2028D33692001937D3 /* OIDTokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OIDTokenStorage.swift; sourceTree = "<group>"; };
 		90E1CD2228D37213001937D3 /* OIDAuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OIDAuthTests.swift; sourceTree = "<group>"; };
 		90E1CD2428D373BF001937D3 /* NetworkRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestInterceptor.swift; sourceTree = "<group>"; };
@@ -586,7 +583,6 @@
 			isa = PBXGroup;
 			children = (
 				904D4A6F27905D5B00A75AED /* DispatchToMainQueue.swift */,
-				90DD12F428A4E6C800526F54 /* Result+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1001,7 +997,6 @@
 				E97B6E4828FEE232006D25AD /* UserDefaults+Utils.swift in Sources */,
 				1ABADBF524EE710B00369791 /* DefaultGraph+CoreDataClass.swift in Sources */,
 				90716ACD283F7AFA00F7445A /* Array+Utils.swift in Sources */,
-				90DD12F628A4E6C800526F54 /* Result+Utils.swift in Sources */,
 				1ABADBD324EBC5D900369791 /* FetchResponse.swift in Sources */,
 				3B45E0B228BF94810005B8EF /* Triplestore.swift in Sources */,
 			);
@@ -1046,7 +1041,6 @@
 				1AF1178624BE22D50063EE37 /* Stats.swift in Sources */,
 				1A00DFFB245AAC3F0049F3F7 /* MessageName.swift in Sources */,
 				E97D3260263084C500A5A180 /* SettingsView.swift in Sources */,
-				90DD12F528A4E6C800526F54 /* Result+Utils.swift in Sources */,
 				1A4C21F624A63E4C006CC1FD /* Literal+CoreDataClass.swift in Sources */,
 				E96817F1274D032A00206602 /* Language.swift in Sources */,
 				1A4C21DE24A63DD4006CC1FD /* Term+CoreDataClass.swift in Sources */,
