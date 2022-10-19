@@ -8,6 +8,16 @@ public struct LoadFeatureArguments: Encodable {
     let forceShow: [FeatureCategoryId]
 }
 
+public struct SetPreferenceArguments: Encodable {
+    let key: String
+    let value: String
+    
+    public init(key: String, value: String) {
+        self.key = key
+        self.value = value
+    }
+}
+
 public enum CoreRequest: Encodable {
     case loadFeatureCategories(args: LoadFeatureArguments)
     case handleAppDidBecomeInactive
@@ -17,4 +27,12 @@ public enum CoreRequest: Encodable {
     case getUserSessionTimeoutOptionsConfig
     case executeRdfQuery(args: String)
     case executeRdfUpdate(args: String)
+    case handleStartup
+    case handleFirstRun
+    case handleInAppNotificationSeen
+    case handlePushNotificationSeen
+    case shouldShowInAppNotification
+    case shouldShowPushNotification
+    case clearPreferences
+    case setPreference(args: SetPreferenceArguments)
 }

@@ -13,8 +13,8 @@ import coop.polypoly.core.Core
 import coop.polypoly.core.CoreExceptionCode
 import coop.polypoly.core.CoreFailure
 import coop.polypoly.core.CoreRequest
+import coop.polypoly.core.UpdateNotification
 import coop.polypoly.core.fromValue
-import coop.polypoly.polypod.core.UpdateNotification
 import coop.polypoly.polypod.features.FeatureStorage
 import coop.polypoly.polypod.logging.LoggerFactory
 
@@ -30,20 +30,7 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val language = Language.determine(this@MainActivity)
-        val fsRoot = this@MainActivity.filesDir
-        try {
-            Core.bootstrapCore(BootstrapArgs(language, fsRoot.path))
-            logger.info("Core is bootstrapped!")
-        } catch (ex: Exception) {
-            logger.info(ex.message)
-            // Ignore CoreAlreadyBootstrapped error, as it is not breaking.
-            if ((ex as? CoreFailure)?.code
-                != CoreExceptionCode.CoreAlreadyBootstrapped
-            ) {
-                throw ex
-            }
-        }
+        initCore()
 
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
 
@@ -51,12 +38,11 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        val notification = UpdateNotification(this)
-        notification.handleStartup()
+        Core.executeRequest(CoreRequest.HandleStartup())
 
         val firstRun = Preferences.isFirstRun(this)
         if (firstRun) {
-            notification.handleFirstRun()
+            Core.executeRequest(CoreRequest.HandleFirstRun())
         }
 
         val shouldShowAuthOnboarding = firstRun ||
@@ -69,17 +55,50 @@ class MainActivity : AppCompatActivity(), LifecycleEventObserver {
             startActivity(Intent(this, PodUnlockActivity::class.java))
         }
 
-        if (notification.showInApp) {
+        val notificationData = UpdateNotificationData(this)
+        if (UpdateNotification.showInApp) {
             AlertDialog.Builder(this)
-                .setTitle(notification.title)
-                .setMessage(notification.text)
+                .setTitle(notificationData.title)
+                .setMessage(notificationData.text)
                 .setPositiveButton(
                     R.string.button_update_notification_close
                 ) { _, _ ->
-                    notification.handleInAppSeen()
+                    UpdateNotification.handleInAppSeen()
                 }
                 .show()
         }
+    }
+
+    private fun initCore() {
+        val language = Language.determine(this@MainActivity)
+        val fsRoot = this@MainActivity.filesDir
+        val notificationData = UpdateNotificationData(this)
+        try {
+            Core.bootstrapCore(
+                BootstrapArgs(
+                    language,
+                    fsRoot.path,
+                    notificationData.id
+                )
+            )
+            logger.info("Core is bootstrapped!")
+        } catch (ex: Exception) {
+            logger.info(ex.message)
+            // Ignore CoreAlreadyBootstrapped error, as it is not breaking.
+            if ((ex as? CoreFailure)?.code
+                != CoreExceptionCode.CoreAlreadyBootstrapped
+            ) {
+                throw ex
+            }
+        }
+
+        if (Preferences.getClearCorePreferences(this)) {
+            logger.info("Clearing core preferences")
+            Core.executeRequest(CoreRequest.ClearPreferences())
+            Preferences.setClearCorePreferences(this, false)
+        }
+
+        Preferences.migrateToCore(this)
     }
 
     override fun onStateChanged(
