@@ -16,11 +16,14 @@ export default class ReportMetadataAnalysis extends ReportAnalysis {
         dataAccount.reports[analysisKeys.reportMetadata].filesCount =
             entries.length;
 
+        console.log(dataAccount);
         dataAccount.reports[analysisKeys.reportMetadata].preferedLanguage =
-            dataAccount.preferredLanguage
+            dataAccount.languageAndLocale?.preferredLanguage
                 ? {
-                      name: dataAccount.preferredLanguage.name,
-                      code: dataAccount.preferredLanguage.code,
+                      name: dataAccount.languageAndLocale?.preferredLanguage
+                          .name,
+                      code: dataAccount.languageAndLocale?.preferredLanguage
+                          .code,
                   }
                 : null;
     }

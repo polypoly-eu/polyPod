@@ -28,6 +28,7 @@ export async function runAnalysisForExport(
         pod,
     };
     const analysisResult = await runAnalysis(analysisClass, enrichedData);
+    console.log(analysisResult);
     return { analysisResult, facebookAccount };
 }
 
