@@ -24,6 +24,7 @@ Potential use for future "Figma tokens" variables. Currently used in Banner, Pol
 
   /* Text field */
   --pl-field-spacing-gap:var(--pl-space-1x);
-  --pl-field-spacing-padding-vert: var(--pl-space-3x);
+  --pl-field-spacing-padding-vert: var(--pl-space-2x);
   --pl-field-spacing-padding-hor: var(--pl-space-4x);
+  --pl-field-body-line-height: var(--pl-space-5x);
 }

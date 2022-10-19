@@ -15,6 +15,7 @@
   box-sizing: border-box;
   background-color: var(--pl-field-color-fill-enabled);
   font-size: var(--font-size-ml);
+  line-height: var(--pl-field-body-line-height);
 }
 
 .poly-input-field .body-focused {
@@ -67,7 +68,7 @@
 
 .poly-input-field .label-up {
   font-size: var(--font-size-s);
-  transform: translateY(-125%);
+  transform: translateY(calc(-1 * var(--pl-field-body-line-height)));
 }
 
 .poly-input-field .label-up + input {
@@ -84,5 +85,6 @@
   padding-top: var(--pl-space-2x);
   padding-bottom: var(--pl-space-1x);
   padding-left: var(--pl-field-spacing-padding-hor);
+  padding-right: var(--pl-field-spacing-padding-hor);
   font-size: var(--font-size-s);
 }
