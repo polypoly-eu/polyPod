@@ -53,6 +53,7 @@
   letter-spacing: inherit;
   background-color: inherit;
   margin-right: var(--pl-field-spacing-gap);
+  align-self: flex-end;
 }
 
 .poly-input-field label {
@@ -69,10 +70,6 @@
 .poly-input-field .label-up {
   font-size: var(--font-size-s);
   transform: translateY(calc(-1 * var(--pl-field-body-line-height)));
-}
-
-.poly-input-field .label-up + input {
-  margin-bottom: calc(-1 * calc(56px / 4));
 }
 
 .poly-input-field .icon {
