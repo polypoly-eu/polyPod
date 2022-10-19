@@ -1,0 +1,35 @@
+@startuml
+
+[Feature]
+
+package "Feature utils" as FeatureUtils {
+        [polyLook]
+        [polyImport]
+        [polyAnalysis]
+}
+note left of FeatureUtils : There are more utilities than shown here
+
+Feature .> polyLook : User interface
+Feature .> polyImport : Data parsing
+Feature .> polyAnalysis : Data analysis
+
+[External server] as ExternalServer
+
+package Platform {
+        database Triplestore
+        database "File system" as FileSystem
+        interface "RDF/JS" as RDFJS
+        RDFJS - Triplestore
+        FS - FileSystem
+        Endpoint - ExternalServer
+        [User interface]
+        [Runtime]
+}
+note bottom of Platform : There are more interfaces than illustrated here
+
+Feature ..> RDFJS : Data storage / sharing
+Feature ..> FS : Data storage
+Feature ..> Endpoint : External communication
+Feature ..> Runtime : User interface
+
+@enduml

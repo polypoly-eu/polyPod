@@ -1,5 +1,7 @@
 # polyPod architecture
 
+![](diagrams/architecture.png)
+
 ## How it works
 
 You can think about the polyPod as a special purpose web browser, with some
