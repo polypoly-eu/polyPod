@@ -69,6 +69,17 @@ that is an implementation detail Features aren't exposed to, because every
 platform implementation provides the same JavaScript file Features merely need
 to load, with the same functions they can call.
 
+### Data storage
+
+The main way for Features to store data is the _Triplestore_, a [Linked data][1]
+store all Features have access to - as long as the platform, and by extension
+the user, allows it.
+
+Another way for Features to store data is the file system, but since each
+Feature has their own root, it is not possible to share data between Features
+this way. It is currently mainly being used for storing raw user data and
+caching.
+
 ### [Core](../platform/core)
 
 Since there are a number of different implementations of the platform, there is
@@ -100,5 +111,7 @@ Feature utilities.
 
 These are essentially regular JavaScript libraries and tools, some of which use
 the Feature API directly, to make it easier for Features to implement common use
-cases, or, in the case of [poly-look](../feature-utils/poly-look), their user
+cases, or, in the case of [polyLook](../feature-utils/poly-look), their user
 interface.
+
+[1]: https://en.wikipedia.org/wiki/Linked_data
