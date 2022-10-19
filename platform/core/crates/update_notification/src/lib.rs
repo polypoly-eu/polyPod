@@ -4,17 +4,17 @@ use std::sync::Arc;
 
 #[derive(Eq, PartialEq, Copy, Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub enum Seen {
-    Not,
-    Push,
-    All,
+pub enum State {
+    NotSeen,
+    PushSeen,
+    AllSeen,
 }
 
 #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LastNotification {
     pub id: u32,
-    pub state: Seen,
+    pub state: State,
 }
 
 pub trait UpdateNotificationStore: Send + Sync {
@@ -40,11 +40,11 @@ impl UpdateNotification {
             .get_last_notification()
             .unwrap_or(LastNotification {
                 id: 0,
-                state: Seen::Not,
+                state: State::NotSeen,
             })
     }
 
-    fn show<F: Fn(Seen) -> bool>(&self, show_for_last_state: F) -> bool {
+    fn show<F: Fn(State) -> bool>(&self, show_for_last_state: F) -> bool {
         let last_notification = self.get_last_notification();
         if self.id == 0 || self.id < last_notification.id {
             return false;
@@ -64,27 +64,27 @@ impl UpdateNotification {
     }
 
     pub fn show_in_app(&self) -> bool {
-        self.show(|state| state != Seen::All)
+        self.show(|state| state != State::AllSeen)
     }
 
     pub fn show_push(&self) -> bool {
-        self.show(|state| state == Seen::Not)
+        self.show(|state| state == State::NotSeen)
     }
 
-    fn update_last(&mut self, state: Seen) {
+    fn update_last(&mut self, state: State) {
         self.store
             .set_last_notification(LastNotification { id: self.id, state });
     }
 
     pub fn handle_in_app_seen(&mut self) {
-        self.update_last(Seen::All);
+        self.update_last(State::AllSeen);
     }
 
     pub fn handle_push_seen(&mut self) {
-        if self.get_last_notification().state != Seen::Not {
+        if self.get_last_notification().state != State::NotSeen {
             return;
         }
-        self.update_last(Seen::Push);
+        self.update_last(State::PushSeen);
     }
 
     pub fn migrate_last_id(&self, id: String) {
@@ -96,9 +96,9 @@ impl UpdateNotification {
     pub fn migrate_last_state(&self, state: String) {
         let mut last_notification = self.get_last_notification();
         last_notification.state = match state.as_str() {
-            "NOT_SEEN" => Seen::Not,
-            "PUSH_SEEN" => Seen::Push,
-            _ => Seen::All,
+            "NOT_SEEN" => State::NotSeen,
+            "PUSH_SEEN" => State::PushSeen,
+            _ => State::AllSeen,
         };
         self.store.set_last_notification(last_notification);
     }
