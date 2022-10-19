@@ -80,6 +80,7 @@ export default class LanguageAndLocaleImporter {
 
         return {
             result: { preferredLanguage },
+            report: { importedFileNames: [LANGUAGE_AND_LOCALE_FILE_PATH] },
         };
     }
 }
