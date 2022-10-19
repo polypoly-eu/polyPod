@@ -7,12 +7,12 @@
 You can think about the polyPod as a special purpose web browser, with some
 important differences:
 
-1. Features are, unlike websites, *installed*, from a trusted source - not
+1. Features are, unlike websites, **installed**, from a trusted source - not
    directly loaded from servers.
-2. Features are highly *restricted* in what they can do without user approval:
+2. Features are highly **restricted** in what they can do without user approval:
    Something as basic as network communication can easily be denied by the user.
-3. Unlike web browsers, the polyPod offers a *central store* for all data, that
-   Features can read and write based on shared schemas, governed by the
+3. Unlike web browsers, the polyPod offers a **central store** for all data,
+   that Features can read and write based on shared schemas, governed by the
    polyPod's permission system - and ultimately user consent. This store exists
    solely on the user's own device - there is no server-side.
 
