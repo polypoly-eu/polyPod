@@ -8,7 +8,7 @@ import {
     InfoBox,
 } from "@polypoly-eu/poly-look";
 import { GoogleContext } from "../../context/google-context.jsx";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FileSelectionError, FileImportError } from "@polypoly-eu/poly-import";
 import "./importExplanationExpandable.css";
 import i18n from "!silly-i18n";
@@ -42,7 +42,7 @@ const ImportExplanationExpandable = ({
         explore: "explore",
     };
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const expandableRef = useRef();
     const expandableId = "expandable";
@@ -249,7 +249,7 @@ const ImportExplanationExpandable = ({
                 <p>{i18n.t("import:explore.1")}</p>
                 {files?.length > 0 ? (
                     <>
-                        <RoutingWrapper history={history} route="/overview">
+                        <RoutingWrapper navigate={navigate} route="/overview">
                             <PolyButton
                                 className="bg-red"
                                 label={i18n.t("import:explore.button")}

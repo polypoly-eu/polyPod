@@ -15,14 +15,15 @@ import i18n from "!silly-i18n";
 
 import "./explore.css";
 import { ministories } from "../ministories/ministories.js";
-import { useHistory } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { GoogleContext } from "../../context/google-context.jsx";
 
 const ExploreView = () => {
     const { account } = useContext(PolyImportContext);
     const { reportIsSent, handleReportSent } = useContext(GoogleContext);
 
-    const history = useHistory();
+    const navigate = useNavigate();
+    const location = useLocation();
     const exploreRef = useRef();
 
     const handleCloseNotification = () => {
@@ -57,7 +58,7 @@ const ExploreView = () => {
                         description={i18n.t("explore:reportCard.text")}
                         button={{
                             label: i18n.t("explore:reportCard.button"),
-                            history: useHistory(),
+                            navigate: useNavigate(),
                             route: "/report",
                         }}
                     />
@@ -79,7 +80,7 @@ const ExploreView = () => {
                     return ministory.hasDetails() ? (
                         <RoutingWrapper
                             key={index}
-                            history={history}
+                            navigate={navigate}
                             route="/explore/details"
                             stateChange={{
                                 ActiveStoryClass: MinistoryClass,
@@ -101,15 +102,12 @@ const ExploreView = () => {
     };
 
     const saveScrollingProgress = (e) => {
-        history.location.state.scrollingProgress = e.target.scrollTop;
+        location.state.scrollingProgress = e.target.scrollTop;
     };
 
     //on start-up
     useEffect(() => {
-        exploreRef.current.scrollTo(
-            0,
-            history.location?.state?.scrollingProgress || 0
-        );
+        exploreRef.current.scrollTo(0, location?.state?.scrollingProgress || 0);
     }, []);
 
     return (

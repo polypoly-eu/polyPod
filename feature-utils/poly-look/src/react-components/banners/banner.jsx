@@ -11,7 +11,7 @@ import "./banner.css";
  * @param {String} [description] Text for the banner's description
  * @param {Object} [button] Content of the button. Also, displays the PolyButton at the bottom if passed.
  * @param {String} [button.route] String to route to ("back" leads back)
- * @param {History} [button.history] React router dom history for the RoutingWrapper component
+ * @param {Navigate} [button.navigate] React router dom navigate for the RoutingWrapper component
  * @param {String} [button.label] Text for the button's label
  * @returns jsx
  */
@@ -24,7 +24,7 @@ export const Banner = ({ icon, title, description, button }) => {
       </div>
       <p className="banner-description">{description}</p>
       {button && (
-        <RoutingWrapper route={button.route} history={button.history}>
+        <RoutingWrapper route={button.route} navigate={button.navigate}>
           <PolyButton label={button.label} className="banner-button" />
         </RoutingWrapper>
       )}

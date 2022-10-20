@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import i18n from "!silly-i18n";
 
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const GoogleContext = React.createContext();
 
-function updatePodNavigation(pod, history, handleBack, location) {
+function updatePodNavigation(pod, navigate, handleBack, location) {
+    console.log(navigate);
     pod.polyNav.actions = {
         back: () => handleBack(),
     };
-    history.length > 1 &&
+    navigate > 1 &&
     location.pathname !== "/overview" &&
     location.pathname !== "/import"
         ? pod.polyNav.setActiveActions(["back"])
@@ -34,7 +35,7 @@ export const GoogleContextProvider = ({ children }) => {
     const [reportIsSent, setReportIsSent] = useState(null);
 
     const location = useLocation();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const closePopUp = () => {
         setPopUp({});
@@ -42,7 +43,7 @@ export const GoogleContextProvider = ({ children }) => {
 
     function handleBack() {
         if (popUp?.name) return closePopUp();
-        history.length > 1 && history.goBack();
+        navigate > 1 && navigate(-1);
     }
 
     async function runWithLoadingScreen(task) {
@@ -64,10 +65,10 @@ export const GoogleContextProvider = ({ children }) => {
         });
     }, []);
 
-    //on history change
+    //on navigate change
     useEffect(() => {
         if (!pod) return;
-        updatePodNavigation(pod, history, handleBack, location);
+        updatePodNavigation(pod, navigate, handleBack, location);
         updateTitle(pod, location);
     });
 

@@ -1,6 +1,6 @@
 import { RoutingWrapper } from "@polypoly-eu/poly-look";
 import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { GoogleContext } from "../../context/google-context.jsx";
 import i18n from "!silly-i18n";
 
@@ -9,7 +9,7 @@ import "./report.css";
 const ReportView = ({ reportStories }) => {
     const { handleBack, handleReportSent } = useContext(GoogleContext);
     const [loading, setLoading] = useState(false);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleSendReport = async () => {
         setLoading(true);
@@ -39,7 +39,7 @@ const ReportView = ({ reportStories }) => {
                 })}
             </p>
             <div className={"button-area" + (loading ? " disabled" : "")}>
-                <RoutingWrapper history={history} route="/report/details">
+                <RoutingWrapper navigate={navigate} route="/report/details">
                     <div className="view-details">{viewDetailsLabel}</div>
                 </RoutingWrapper>
                 <button className="send-later" onClick={handleBack}>

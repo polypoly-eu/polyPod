@@ -10,7 +10,7 @@ import {
 } from "@polypoly-eu/poly-look";
 import { L12n } from "@polypoly-eu/silly-i18n";
 
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import i18n from "!silly-i18n";
 import { analyzeFile } from "@polypoly-eu/poly-analysis";
 import { specificAnalyses } from "../../model/analyses/analyses";
@@ -27,13 +27,13 @@ const Overview = () => {
     const { account, handleRemoveFile, files, refreshFiles } =
         useContext(PolyImportContext);
     const { setPopUp, closePopUp } = useContext(GoogleContext);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const onRemoveFile = () => {
         if (!files && files.length > 0) return;
         handleRemoveFile(files[0]?.id);
         refreshFiles();
-        history.push("/import");
+        navigate("/import");
         closePopUp();
     };
     useEffect(() => {
@@ -98,7 +98,7 @@ const Overview = () => {
                 bubbleColor={BUBBLE_LIGHT_COLOR}
                 textColor={BUBBLE_LIGHT_COLOR}
                 onBubbleClick={() =>
-                    history.push("/explore", INITIAL_HISTORY_STATE)
+                    navigate("/explore", INITIAL_HISTORY_STATE)
                 }
             />
             {files && files?.[0] && (
@@ -130,7 +130,7 @@ const Overview = () => {
                 }
                 type="outline"
             ></PolyButton>
-            <RoutingWrapper history={history} route="/explore">
+            <RoutingWrapper navigate={navigate} route="/explore">
                 <PolyButton label={i18n.t("common:explore")}></PolyButton>
             </RoutingWrapper>
         </Screen>

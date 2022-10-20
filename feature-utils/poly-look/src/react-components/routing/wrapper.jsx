@@ -8,15 +8,15 @@ import { INITIAL_HISTORY_STATE } from "../../constants";
  * This does not add any divs or ther HTML elements
  *
  * @param {jsx} children - React children in jsx format
- * @param {History} history - React router dom history
+ * @param {Navigate} navigate - React router dom navigate
  * @param {String} route - String to route to ("back" leads back)
  * @param {Object} [stateChange] - Initial state overriding INITIAL_HISTORY_STATE property to which it defaults
  * @returns
  */
-const RoutingWrapper = ({ children, history, route, stateChange }) => {
+const RoutingWrapper = ({ children, navigate, route, stateChange }) => {
   const onRoute = () => {
-    if (route == "back") history.goBack();
-    else history.push(route, { ...INITIAL_HISTORY_STATE, ...stateChange });
+    if (route == "back") navigate(-1);
+    else navigate(route, { ...INITIAL_HISTORY_STATE, ...stateChange });
   };
   const generateOnClick = (child) => {
     if (!child.props.onClick) return onRoute;

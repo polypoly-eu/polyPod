@@ -5,7 +5,7 @@ import {
     Routes,
     Redirect,
     Route,
-    useHistory,
+    useNavigate,
 } from "react-router-dom";
 
 import {
@@ -89,11 +89,8 @@ const Google = () => {
 
 //Router and context
 const GoogleApp = () => {
-    //global history object
-    const history = useHistory();
-
     return (
-        <Router history={history}>
+        <Router>
             <GoogleContextProvider>
                 <PolyImportProvider
                     parentContext={GoogleContext}

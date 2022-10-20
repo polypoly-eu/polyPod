@@ -38,12 +38,18 @@ const ReportWrapper = () => {
 
     return (
         <>
-            <Route exact path="/report">
-                <ReportView reportStories={computedReportStories} />
-            </Route>
-            <Route exact path="/report/details">
-                <ReportDetails reportStories={computedReportStories} />
-            </Route>
+            <Route
+                exact
+                path="/report"
+                element={<ReportView reportStories={computedReportStories} />}
+            />
+            <Route
+                exact
+                path="/report/details"
+                element={
+                    <ReportDetails reportStories={computedReportStories} />
+                }
+            />
         </>
     );
 };
