@@ -76,9 +76,8 @@ export default class MultipleFilesImporter extends Importer {
                     new Status({
                         name: statusTypes.error,
                         message: `${
-                            (responses.length - successfulResponses.length) /
-                            responses.length
-                        } files importing failes`,
+                            successfulResponses.length + "/" + responses.length
+                        } files imported successfully`,
                     }),
                 statuses: responses.map(({ status }) => status),
                 importedFileNames,

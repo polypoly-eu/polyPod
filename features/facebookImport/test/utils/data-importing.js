@@ -128,7 +128,7 @@ export async function runPostReactionsImporter(zipFile) {
 }
 
 export async function runPostsImporter(zipFile) {
-    return runSingleOutdatedImporter(PostsImporter, zipFile);
+    return runSingleImporter(PostsImporter, zipFile);
 }
 
 export async function runImportForDataset(importerClass, filePath, dataset) {

@@ -26,86 +26,85 @@ describe("Import posts from empty export", () => {
     });
 
     it("triggers missing files error", async () => {
-        const { result } = await runPostsImporter(zipFile);
-        expectError(result, MissingFilesException, PostsImporter);
+        const { report } = await runPostsImporter(zipFile);
+        expectError(report, MissingFilesException, PostsImporter);
     });
 });
 
 describe("Import posts from export with one file error", () => {
     let result = null;
-    let facebookAccount = null;
+    let report = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithFileError();
-        ({ result, facebookAccount } = await runPostsImporter(zipFile));
+        ({ result, report } = await runPostsImporter(zipFile));
     });
 
     it("has one error status", async () => {
-        expect(result.status.length).toBe(1);
+        expect(
+            report.statuses.filter((status) => !status.isSuccess).length
+        ).toBe(1);
     });
 
     it("triggers syntax error", async () => {
-        expectErrorStatus(result.status[0], SyntaxError);
+        expectErrorStatus(report.statuses[1], SyntaxError);
     });
 
     it("has correct number of entities from file one", () =>
-        expect(facebookAccount.posts.length).toBe(
-            DATASET_ONE_EXPECTED_VALUES.numberOfPosts
-        ));
+        expect(result.length).toBe(DATASET_ONE_EXPECTED_VALUES.numberOfPosts));
 });
 
 describe("Import posts from export with two file errors", () => {
     let result = null;
-    let facebookAccount = null;
+    let report = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithTwoFileErrors();
-        ({ result, facebookAccount } = await runPostsImporter(zipFile));
+        ({ result, report } = await runPostsImporter(zipFile));
     });
 
     it("has two error status", async () => {
-        expect(result.status.length).toBe(2);
+        expect(
+            report.statuses.filter((status) => !status.isSuccess).length
+        ).toBe(2);
     });
 
     it("triggers syntax error", async () => {
-        expectErrorStatus(result.status[0], MissingContentImportException);
-        expectErrorStatus(result.status[1], SyntaxError);
+        expectErrorStatus(report.statuses[0], MissingContentImportException);
+        expectErrorStatus(report.statuses[1], SyntaxError);
     });
 
-    it("has no imported posts", () =>
-        expect(facebookAccount.posts.length).toBe(0));
+    it("has no imported posts", () => expect(result.length).toBe(0));
 });
 
 describe("Import posts from export with one file", () => {
     let result = null;
-    let facebookAccount = null;
+    let report = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithOnePostsFiles();
-        ({ result, facebookAccount } = await runPostsImporter(zipFile));
+        ({ result, report } = await runPostsImporter(zipFile));
     });
 
-    it("returns success status", () => expectImportSuccess(result));
+    it("returns success status", () => expectImportSuccess(report));
 
     it("has correct number of entities", () =>
-        expect(facebookAccount.posts.length).toBe(
-            DATASET_ONE_EXPECTED_VALUES.numberOfPosts
-        ));
+        expect(result.length).toBe(DATASET_ONE_EXPECTED_VALUES.numberOfPosts));
 });
 
 describe("Import posts from export with two files", () => {
     let result = null;
-    let facebookAccount = null;
+    let report = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithTwoPostsFiles();
-        ({ result, facebookAccount } = await runPostsImporter(zipFile));
+        ({ result, report } = await runPostsImporter(zipFile));
     });
 
-    it("returns success status", () => expectImportSuccess(result));
+    it("returns success status", () => expectImportSuccess(report));
 
     it("has correct number of entities", () =>
-        expect(facebookAccount.posts.length).toBe(
+        expect(result.length).toBe(
             DATASET_ONE_EXPECTED_VALUES.numberOfPosts +
                 DATASET_TWO_EXPECTED_VALUES.numberOfPosts
         ));
