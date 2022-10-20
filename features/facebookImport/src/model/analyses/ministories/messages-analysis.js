@@ -7,11 +7,11 @@ export default class MessagesAnalysis extends RootAnalysis {
     }
 
     async analyze({ dataAccount }) {
-        let messagesCount = dataAccount.messagesCount;
+        let messagesCount = dataAccount.messages?.messagesCount || 0;
         let messagesThreadsData = [];
         const usernames = new Set();
 
-        dataAccount.forEachMessageThread((messageThread) => {
+        dataAccount.messages?.forEachMessageThread((messageThread) => {
             var firstChatTimestamp = 0;
             var lastChatTimestamp = 0;
 
