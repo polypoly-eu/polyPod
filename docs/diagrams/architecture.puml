@@ -14,28 +14,38 @@ package "polyPod" {
                 note bottom of FeatureUtils : There are more utilities than shown here
 
                 package Platform {
-                        interface RDF
-                        database Triplestore
-                        RDF - Triplestore
-                        interface FS
-                        database "File system" as FileSystem
-                        FS - FileSystem
+                        together {
+                                interface RDF
+                                database Triplestore
+                                RDF - Triplestore
+                        }
+
+                        together {
+                                interface FS
+                                database "File system" as FileSystem
+                                FS - FileSystem
+                        }
+
                         [User interface]
+                        database "Feature storage" as FeatureStorage
+                        [User interface] .> FeatureStorage
+
                         [Runtime]
                         interface Endpoint
                 }
-                note bottom of Platform : There are more interfaces than illustrated here
+                note bottom of Platform : There are more interfaces and components than illustrated here
         }
+
+        Feature .> polyLook : User interface
+        Feature .> polyImport : Data parsing
+        Feature .> polyAnalysis : Data analysis
+
+        Feature ..> RDF : Data storage / sharing
+        Feature ..> FS : Data storage
+        Feature ..> Runtime : User interface / execution environment
+        Feature ..> Endpoint : External communication
 }
 
-Feature .> polyLook : User interface
-Feature .> polyImport : Data parsing
-Feature .> polyAnalysis : Data analysis
-
-Feature ..> RDF : Data storage / sharing
-Feature ..> FS : Data storage
-Feature ..> Runtime : User interface / execution environment
-Feature ..> Endpoint : External communication
 Endpoint -- ExternalServer
 
 @enduml
