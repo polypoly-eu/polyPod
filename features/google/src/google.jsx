@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import * as ReactDOM from "react-dom";
 import {
-    MemoryRouter as Router,
+    BrowserRouter as Router,
     Routes,
-    Redirect,
+    Navigate,
     Route,
     useNavigate,
 } from "react-router-dom";
@@ -36,35 +36,31 @@ const Google = () => {
 
     const { files } = useContext(PolyImportContext);
 
+    const navigate = useNavigate();
+
     function determineRoute() {
-        if (files.length > 0)
-            return (
-                <Route
-                    render={() => (
-                        <Redirect
-                            to={{
-                                pathname: "/overview",
-                                state: INITIAL_HISTORY_STATE,
-                            }}
-                        />
-                    )}
-                />
-            );
-        else
-            return (
-                <Route
-                    render={() => <Redirect to={{ pathname: "/import" }} />}
-                />
-            );
+        if (files.length > 0) return navigate("/overview");
+        // <Route
+        //     render={() => (
+        //         <Navigate
+        //             to={{
+        //                 pathname: "/overview",
+        //                 state: INITIAL_HISTORY_STATE,
+        //             }}
+        //         />
+        //     )}
+        // />
+        else return navigate("/import");
+        // <Route
+        //     render={() => <Navigate to={{ pathname: "/import" }} />}
+        // />
     }
 
     return (
         <div className="google poly-theme poly-theme-dark">
             {pod && files && (
                 <Routes>
-                    <Route exact path="/">
-                        {determineRoute()}
-                    </Route>
+                    <Route index element={determineRoute()} />
                     <Route exact path="/overview" element={<Overview />} />
                     <Route exact path="/import" element={<ImportView />} />
                     <Route exact path="/explore" element={<ExploreView />} />
@@ -73,7 +69,7 @@ const Google = () => {
                         path="/explore/details"
                         element={<DetailsView />}
                     />
-                    <ReportWrapper />
+                    {/* <ReportWrapper /> */}
                 </Routes>
             )}
             {isLoading && (
