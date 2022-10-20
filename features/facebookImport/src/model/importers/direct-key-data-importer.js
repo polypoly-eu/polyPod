@@ -15,7 +15,6 @@ export default class DirectKeyDataImporter extends Importer {
             this._dataKey,
             zipFile
         );
-        console.log(this._dataFileName);
 
         return {
             result:
