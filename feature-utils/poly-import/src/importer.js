@@ -10,9 +10,16 @@ export class Importer {
 }
 
 class ImporterExecutionReport {
-    constructor({ importer, status, executionTime, importedFileNames }) {
+    constructor({
+        importer,
+        status,
+        statuses,
+        executionTime,
+        importedFileNames,
+    }) {
         this._importer = importer;
         this._status = status || new Status({ name: statusTypes.success });
+        this._statuses = statuses;
         this._executionTime = executionTime;
         this._importedFileNames = importedFileNames;
     }
@@ -23,6 +30,10 @@ class ImporterExecutionReport {
 
     get status() {
         return this._status;
+    }
+
+    get statuses() {
+        return this._statuses;
     }
 
     get executionTime() {
@@ -73,6 +84,7 @@ export async function runImporter({ importerClass, zipFile, pod, account }) {
             report: new ImporterExecutionReport({
                 importer,
                 status: response?.report?.status,
+                statuses: response?.report?.statuses,
                 executionTime: telemetry.elapsedTime(),
                 importedFileNames: response?.report?.importedFileNames,
             }),
