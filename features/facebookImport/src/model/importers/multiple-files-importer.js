@@ -3,17 +3,16 @@ import { MissingFilesException } from "./utils/failed-import-exception";
 import {
     readFullPathJSONFile,
     relevantZipEntries,
-    sliceIntoChunks,
 } from "./utils/importer-util";
 
 export default class MultipleFilesImporter extends Importer {
     // eslint-disable-next-line no-unused-vars
-    _isTargetPostFile(entryName) {
+    _isTargetPostFile() {
         return false;
     }
 
     // eslint-disable-next-line no-unused-vars
-    _importRawDataResults(facebookAccount, dataResults) {}
+    _processRawDataResults() {}
 
     async _extractTargetEntries(zipFile) {
         const entries = await relevantZipEntries(zipFile);
@@ -41,51 +40,49 @@ export default class MultipleFilesImporter extends Importer {
             });
     }
 
-    async _importDataFromFiles(targetEntries, zipFile, facebookAccount) {
-        const fileDataWithResults = await Promise.all(
-            targetEntries.map((targetEntry) =>
-                this._readJSONFileWithStatus(targetEntry, zipFile)
-            )
-        );
-
-        const successfullResults = fileDataWithResults.filter(
-            (result) => result.status.isSuccess
-        );
-
-        for (const each of successfullResults) {
-            facebookAccount.addImportedFileName(each.targetEntry.path);
-        }
-        const dataResults = successfullResults.map((result) => result.data);
-        this._importRawDataResults(facebookAccount, dataResults);
-
-        return fileDataWithResults
-            .filter((result) => !result.status.isSuccess)
-            .map(({ status }) => status);
-    }
-
     _createMissingFilesError() {
         return new MissingFilesException();
     }
 
-    async import({ zipFile, facebookAccount }) {
+    async import({ zipFile }) {
         const targetEntries = await this._extractTargetEntries(zipFile);
         if (targetEntries.length === 0) {
             throw this._createMissingFilesError();
         }
 
-        const entryChunks = sliceIntoChunks(targetEntries, 5);
-        const failedStatusChunks = [];
-        for (let currentChunk of entryChunks) {
-            const chunkStatuses = await this._importDataFromFiles(
-                currentChunk,
-                zipFile,
-                facebookAccount
-            );
+        const responses = await Promise.all(
+            targetEntries.map((entry) =>
+                this._readJSONFileWithStatus(entry, zipFile)
+            )
+        );
 
-            failedStatusChunks.push(chunkStatuses);
-        }
-        const failedStatuses = failedStatusChunks.flat();
+        const successfulResponses = responses.filter(
+            ({ status }) => status.isSuccess
+        );
 
-        return failedStatuses.length > 0 ? failedStatuses : null;
+        const importedDataResults = this._processRawDataResults(
+            successfulResponses.map(({ data }) => data)
+        );
+
+        const importedFileNames = responses
+            .filter(({ status }) => status.isSuccess)
+            .map(({ targetEntry }) => targetEntry.path);
+
+        return {
+            result: importedDataResults,
+            report: {
+                status:
+                    responses.length !== successfulResponses.length &&
+                    new Status({
+                        name: statusTypes.error,
+                        message: `${
+                            (responses.length - successfulResponses.length) /
+                            responses.length
+                        } files importing failes`,
+                    }),
+                statuses: responses.map(({ status }) => status),
+                importedFileNames,
+            },
+        };
     }
 }

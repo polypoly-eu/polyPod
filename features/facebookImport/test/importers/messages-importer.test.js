@@ -25,62 +25,62 @@ describe("Import messages from empty export", () => {
     });
 
     it("triggers missing files error", async () => {
-        const { result } = await runMessagesImporter(zipFile);
-        expectError(result, MissingFilesException, MessagesImporter);
+        const { report } = await runMessagesImporter(zipFile);
+        expectError(report, MissingFilesException, MessagesImporter);
     });
 });
 
 describe("Import message from export with three file errors", () => {
     let result = null;
-    let facebookAccount = null;
+    let report = null;
 
     beforeAll(async () => {
         const zipFile = zipFileWithThreeFileErrors();
-        ({ result, facebookAccount } = await runMessagesImporter(zipFile));
+        ({ report, result } = await runMessagesImporter(zipFile));
     });
 
     it("has two error status", async () => {
-        expect(result.status.length).toBe(3);
+        expect(report.statuses.length).toBe(3);
     });
 
     it("triggers syntax error", async () => {
-        expectErrorStatus(result.status[0], MissingContentImportException);
-        expectErrorStatus(result.status[1], SyntaxError);
-        expectErrorStatus(result.status[2], TypeError);
+        expectErrorStatus(report.statuses[0], MissingContentImportException);
+        expectErrorStatus(report.statuses[1], SyntaxError);
+        expectErrorStatus(report.statuses[2], TypeError);
     });
 
     it("has no imported messages", () => {
-        expect(facebookAccount.messageThreadsCount).toBe(0);
-        expect(facebookAccount.messagesCount).toBe(0);
+        expect(result.messageThreadsCount).toBe(0);
+        expect(result.messagesCount).toBe(0);
     });
 });
 
 describe("Import inbox messages", () => {
     let zipFile = null;
-    let result = null;
-    let facebookAccount = null;
+    let report = null;
+    let messageThreadsGroup = null;
     let firstMessageThread = null;
     let secondMessageThread = null;
 
     beforeAll(async () => {
         zipFile = zipFileWithMessageThreads();
 
-        const importingResult = await runMessagesImporter(zipFile);
-        result = importingResult.result;
-        facebookAccount = importingResult.facebookAccount;
+        const importingResponse = await runMessagesImporter(zipFile);
+        report = importingResponse.report;
+        messageThreadsGroup = importingResponse.result;
         [firstMessageThread, secondMessageThread] =
-            facebookAccount.messageThreadsGroup.messagesThreads;
+            messageThreadsGroup.messagesThreads;
     });
 
-    it("returns success status", () => expectImportSuccess(result));
+    it("returns success status", () => expectImportSuccess(report));
 
     it("has correct number of message threads", () =>
-        expect(facebookAccount.messageThreadsCount).toBe(
+        expect(messageThreadsGroup.messageThreadsCount).toBe(
             DATASET_EXPECTED_VALUES.numberOfMessageThreads
         ));
 
     it("has correct number of message", () =>
-        expect(facebookAccount.messagesCount).toBe(
+        expect(messageThreadsGroup.messagesCount).toBe(
             DATASET_EXPECTED_VALUES.numberOfMessages
         ));
 

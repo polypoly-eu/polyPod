@@ -1,3 +1,4 @@
+import MessageThreadsGroup from "../entities/message-threads-group.js";
 import MultipleFilesImporter from "./multiple-files-importer.js";
 
 export default class MessagesImporter extends MultipleFilesImporter {
@@ -7,10 +8,11 @@ export default class MessagesImporter extends MultipleFilesImporter {
         );
     }
 
-    _importRawDataResults(facebookAccount, dataResults) {
-        facebookAccount.messageThreadsGroup.addMessageThreadsFromData(
-            dataResults
-        );
+    _processRawDataResults(dataResults) {
+        const messageGroup = new MessageThreadsGroup();
+        if (dataResults.length > 0)
+            messageGroup.addMessageThreadsFromData(dataResults);
+        return messageGroup;
     }
 }
 

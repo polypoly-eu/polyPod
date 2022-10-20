@@ -92,7 +92,7 @@ export async function runPersonalDataImporter(zipFile) {
 }
 
 export async function runMessagesImporter(zipFile) {
-    return runSingleOutdatedImporter(MessagesImporter, zipFile);
+    return runSingleImporter(MessagesImporter, zipFile);
 }
 
 export async function runRecentlyViewedAdsImporter(zipFile) {
