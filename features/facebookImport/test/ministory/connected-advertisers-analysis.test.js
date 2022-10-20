@@ -54,7 +54,6 @@ describe("Connected advertisers analysis from account with connected advertisers
             ConnectedAdvertisersAnalysis,
             zipFile
         );
-        console.log(analysisResult);
         ({ status } = analysisResult);
         analysisStory = new ConnectedAdvertisersMinistory({
             account: facebookAccount,
