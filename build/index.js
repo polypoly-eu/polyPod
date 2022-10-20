@@ -68,9 +68,14 @@ async function main() {
 
     if (
         (!existsSync("node_modules") &&
-            ["lint", "lintfix", "clean", "build", "offlineInstall"].includes(
-                command
-            )) ||
+            [
+                "lint",
+                "lintfix",
+                "clean",
+                "build",
+                "offlineInstall",
+                "docs",
+            ].includes(command)) ||
         ["install", "installAndBuild"].includes(command)
     ) {
         await runCommand("root-install", "👷👷‍♀️", async () => {

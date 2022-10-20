@@ -87,6 +87,10 @@ class Pkg {
         await this.sync();
     }
 
+    async docs() {
+        await this.npmRun("doc");
+    }
+
     async executeCommand(command) {
         const oldPath = process.cwd();
         try {
