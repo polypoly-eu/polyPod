@@ -107,7 +107,7 @@
     },
     {
       "archiveName": "messenger",
-      "moduleName": "messenger-feature",
+      "moduleName": "messenger",
       "artifactPath": "dist"
     }
   ],
