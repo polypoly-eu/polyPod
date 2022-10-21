@@ -1,16 +1,18 @@
 {
-    "name": "polyTalk",
+    "name": "Messenger Demo",
     "author": "polypoly Cooperative",
-    "description": "Chat outta here",
-    "thumbnail": "images/thumbnail.png",
-    "thumbnailColor": "#f0f1fe",
+    "description": "Demo of the polypoly messenger app",
+    "thumbnail": "images/thumbnail.pdf",
     "primaryColor": "#0f1938",
+    "thumbnailColor": "#475abb",
+    "borderColor": "#475abb",
+    "tileTextColor": "#ffffff",
     "links": {},
     "translations": {
         "de": {
-            "name": "polyTalk",
+            "name": "Messenger Demo",
             "author": "polypoly - Die Genossenschaft",
-            "description": "",
+            "description": "Demo der polypoly Messenger App",
             "links": {}
         }
     }
