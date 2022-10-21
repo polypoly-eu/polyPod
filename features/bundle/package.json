@@ -20,7 +20,8 @@
     "polypoly-membership-feature": "file:../polypolyMembership",
     "polypoly-membership-preview": "file:../polypolyMembershipPreview",
     "poly-talk-preview": "file:../polyTalkPreview",
-    "test-feature": "file:../test"
+    "test-feature": "file:../test",
+    "messenger": "file:../messenger"
   },
   "private": true,
   "polyPodFeatures": [
@@ -103,6 +104,11 @@
       "archiveName": "test",
       "moduleName": "test-feature",
       "artifactPath": "dist"
+    },
+    {
+      "archiveName": "messenger",
+      "moduleName": "messenger-feature",
+      "artifactPath": "dist"
     }
   ],
   "polyPodCategories": [
@@ -144,7 +150,8 @@
       "visible": true,
       "features": [
         "demo",
-        "test"
+        "test",
+        "messenger"
       ]
     }
   ]
