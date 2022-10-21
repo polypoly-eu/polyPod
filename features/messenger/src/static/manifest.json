@@ -1,0 +1,17 @@
+{
+    "name": "polyTalk",
+    "author": "polypoly Cooperative",
+    "description": "Chat outta here",
+    "thumbnail": "images/thumbnail.png",
+    "thumbnailColor": "#f0f1fe",
+    "primaryColor": "#0f1938",
+    "links": {},
+    "translations": {
+        "de": {
+            "name": "polyTalk",
+            "author": "polypoly - Die Genossenschaft",
+            "description": "",
+            "links": {}
+        }
+    }
+}
