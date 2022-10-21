@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import * as ReactDOM from "react-dom";
 import {
     MemoryRouter as Router,
@@ -9,10 +9,7 @@ import {
 } from "react-router-dom";
 import Home from "./views/home.jsx";
 import "./styles.css";
-import {
-    MessagesContext,
-    MessagesContextProvider,
-} from "./context/messages.jsx";
+import { MessagesContextProvider } from "./context/messages.jsx";
 import Room from "./views/room.jsx";
 
 const Messenger = () => {
