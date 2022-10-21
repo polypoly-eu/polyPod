@@ -27,7 +27,7 @@ const Home = () => {
                         onClick={() => handleSelectRoom(room)}
                     >
                         <Avatar
-                            src={`images/${name.toLowercase()}.png`}
+                            src={`images/${name.toLowerCase()}.png`}
                             name={name}
                         />
                     </Conversation>

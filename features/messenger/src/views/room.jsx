@@ -61,7 +61,7 @@ const Room = () => {
         <Screen className="poly-theme-light room">
             <ConversationHeader>
                 <Avatar
-                    src={`images/${activeRoom.name.toLowercase()}.png`}
+                    src={`images/${activeRoom.name.toLowerCase()}.png`}
                     name={activeRoom.name}
                 />
                 <ConversationHeader.Content
