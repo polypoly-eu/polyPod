@@ -74,7 +74,7 @@ async function main() {
                 "clean",
                 "build",
                 "offlineInstall",
-                "docs",
+                "doc",
             ].includes(command)) ||
         ["install", "installAndBuild"].includes(command)
     ) {

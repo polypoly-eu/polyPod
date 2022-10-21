@@ -13,7 +13,7 @@ const validCommands = [
     "offlineInstall",
     "syncdeps",
     "test",
-    "docs",
+    "doc",
 ];
 
 function parseCommandLine() {

@@ -87,7 +87,7 @@ class Pkg {
         await this.sync();
     }
 
-    async docs() {
+    async doc() {
         await this.npmRun("doc");
     }
 
