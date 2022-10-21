@@ -26,7 +26,10 @@ const Home = () => {
                         info={room.lastMessage.message}
                         onClick={() => handleSelectRoom(room)}
                     >
-                        <Avatar src={`images/${name}.png`} name="Thorsten" />
+                        <Avatar
+                            src={`images/${name.toLowercase()}.png`}
+                            name={name}
+                        />
                     </Conversation>
                 ))}
             </ConversationList>

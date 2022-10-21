@@ -60,7 +60,10 @@ const Room = () => {
     return (
         <Screen className="poly-theme-light room">
             <ConversationHeader>
-                <Avatar src={`images/${activeRoom.name}.png`} name="Thorsten" />
+                <Avatar
+                    src={`images/${activeRoom.name.toLowercase()}.png`}
+                    name={activeRoom.name}
+                />
                 <ConversationHeader.Content
                     userName={otherPersonsName}
                     info="Active 10 mins ago"
