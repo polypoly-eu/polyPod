@@ -18,7 +18,11 @@ const Home = () => {
                     <Conversation
                         key={i}
                         name={name}
-                        lastSenderName={room.lastMessage.sender}
+                        lastSenderName={
+                            room.lastMessage.sender !== "self"
+                                ? room.lastMessage.sender
+                                : null
+                        }
                         info={room.lastMessage.message}
                         onClick={() => handleSelectRoom(room)}
                     >
