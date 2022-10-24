@@ -45,7 +45,7 @@ function findOrCreateRoom(rooms, name) {
 
 export async function initializeClient(rooms, setRooms) {
     const client = matrix.createClient("https://matrix.polypoly.tech");
-    client.on("Room.timeline", function (event, room, toStartOfTimeline) {
+    client.on("Room.timeline", function (event, room) {
         if (event.getType() !== "m.room.message") {
             return; // only use messages
         }
@@ -59,7 +59,7 @@ export async function initializeClient(rooms, setRooms) {
         setRooms({ ...rooms });
     });
     await client.startClient({ initialSyncLimit: 10 });
-    const { state, prevState, res } = await client.once("sync");
+    const { state } = await client.once("sync");
     if (state !== "PREPARED")
         throw `Failed to initialise Matrix client, state is ${state}`;
 }
