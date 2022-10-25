@@ -31,6 +31,8 @@ class PrivacyPolicyFragment : Fragment() {
     private fun loadPrivacyPolicyText(): String {
         val locale = Language.determine(requireContext())
         val path = "legal/$locale/privacy-policy.html"
-        return context?.assets?.open(path)?.reader()?.readText()?.trim() ?: ""
+        val enPath = "legal/en/privacy-policy.html"
+        return context?.assets?.open(path)?.reader()?.readText()?.trim() ?:
+            context?.assets?.open(enPath)?.reader()?.readText()?.trim() ?: ""
     }
 }
