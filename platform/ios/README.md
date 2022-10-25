@@ -10,6 +10,8 @@ Before building for iOS, you need to build the shared components and
 Features - simply follow the build instructions in
 [../../README.md](../../README.md).
 
+The polyPod core and features are written in JavaScript. You will need to build and bundle them by running `./build.js` from the root directory of this repository. Please follow instructions [there](../../README.md) to install all needed prerrequisites. 
+
 ### Xcode
 
 Just open the _PolyPodApp_ project in Xcode and build, test or archive it there.
