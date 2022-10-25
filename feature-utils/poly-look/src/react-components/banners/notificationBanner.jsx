@@ -28,10 +28,14 @@ export const notificationTypes = {
  * @param {JSX} [props.children] JSX elements displayed inside the banner as a notification message.
  * @param {String} [props.notificationType] The notification type defines the styles and icon used in the component.
  * There are currently four notification options: standard, success, error and warning.
- * @param {notificationCallback} [props.onClick] onClick function to close the notification.
+ * @param {notificationCallback} [props.handleCloseNotification] onClick function to close the notification.
  * @returns {JSX.Element}
  */
-export function NotificationBanner({ children, notificationType, onClick }) {
+export function NotificationBanner({
+  children,
+  notificationType,
+  handleCloseNotification,
+}) {
   const icons = {
     standard,
     success,
@@ -44,7 +48,11 @@ export function NotificationBanner({ children, notificationType, onClick }) {
         className={`notification-banner ${notificationTypes[notificationType]}`}
       >
         {children}
-        <img src={icons[notificationType]} alt="close" onClick={onClick} />
+        <img
+          src={icons[notificationType]}
+          alt="close"
+          onClick={handleCloseNotification}
+        />
       </div>
     </div>
   );
