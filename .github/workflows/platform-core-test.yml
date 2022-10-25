@@ -1,4 +1,4 @@
-name: Lint and Test Rust code
+name: Lint and test platform core
 on:
   push:
     paths:

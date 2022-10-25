@@ -62,6 +62,7 @@ public enum CoreFailureCode: Int, Codable {
     case failedToAttachJVM
     case failedToDecode
     case failedToEncode
+    case failedToSetPreference
     
     init(from value: MessagePackValue) throws {
         guard let code = CoreFailureCode.init(rawValue: try value.getInt()) else {

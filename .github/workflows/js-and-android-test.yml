@@ -1,4 +1,7 @@
-name: Test pushes and PRs
+# For historical reasons, this workflow covers a bit too much, and should be
+# broken up - the Android parts potentially merged with android-test.yml.
+
+name: Lint and test JavaScript code and run Android unit tests
 on:
   push:
   pull_request:

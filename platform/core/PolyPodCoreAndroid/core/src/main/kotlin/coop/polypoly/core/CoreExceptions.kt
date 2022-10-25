@@ -9,7 +9,8 @@ enum class CoreExceptionCode(val value: Int) {
     NullCStringPointer(4),
     FailedToCreateCString(5),
     FailedToExtractJavaString(6),
-    FailedToConvertJavaString(7);
+    FailedToConvertJavaString(7),
+    FailedToSetPreference(28);
 
     companion object {
         fun getByValue(value: Int) = values().firstOrNull { it.value == value }

@@ -32,14 +32,11 @@ export const PolyImportProvider = ({
     storage
       .refreshFiles()
       .then(async () => {
-        const resolvedFiles = [];
         if (!storage.files) {
           setFiles(null);
           return;
         }
-        for (const file of storage.files) {
-          resolvedFiles.push(await file);
-        }
+        const resolvedFiles = await Promise.all(storage.files);
         setFiles(resolvedFiles);
         setIsLoading(false);
       })
@@ -54,11 +51,8 @@ export const PolyImportProvider = ({
   useEffect(() => {
     if (!pod) return;
     const storage = new FeatureFileStorage(pod, async () => {
-      const resolvedFiles = [];
-      for (const file of storage.files) {
-        resolvedFiles.push(await file);
-      }
-      setFiles(Object.values(resolvedFiles));
+      const resolvedFiles = await Promise.all(storage.files);
+      setFiles(resolvedFiles);
     });
     setStorage(storage);
   }, [pod]);

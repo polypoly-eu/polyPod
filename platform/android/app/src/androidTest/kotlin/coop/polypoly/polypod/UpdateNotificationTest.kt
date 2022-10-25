@@ -11,7 +11,6 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import coop.polypoly.polypod.core.UpdateNotification
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -50,6 +49,7 @@ class UpdateNotificationTest {
             .edit().clear().commit()
         Preferences.setFirstRun(context, false)
         Preferences.setSecurityDoNotAskAgainCheck(context, true)
+        Preferences.setClearCorePreferences(context, true)
     }
 
     @After
@@ -96,12 +96,42 @@ class UpdateNotificationTest {
         InAppNotification.checkShown()
     }
 
+    @Test
+    fun seenLastNotificationMigrated() {
+        setLastNotificationPreference(1, "ALL_SEEN")
+        relaunchActivity(1)
+        InAppNotification.checkNotShown()
+    }
+
+    @Test
+    fun partlySeenLastNotificationMigrated() {
+        setLastNotificationPreference(1, "PUSH_SEEN")
+        relaunchActivity(1)
+        InAppNotification.checkShown()
+    }
+
+    @Test
+    fun unseenLastNotificationMigrated() {
+        setLastNotificationPreference(1, "NOT_SEEN")
+        relaunchActivity(1)
+        InAppNotification.checkShown()
+    }
+
     // TODO: Add tests that verify that the push notification shows up as
     //       expected. That should be possible with UiAutomator.
 
     private fun relaunchActivity(notificationId: Int) {
         closeActivity()
-        UpdateNotification.mockData.id = notificationId
+        UpdateNotificationData.mockData.id = notificationId
         activityScenario = ActivityScenario.launch(MainActivity::class.java)
+    }
+
+    private fun setLastNotificationPreference(id: Int, state: String) {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val prefs =
+            PreferenceManager.getDefaultSharedPreferences(context).edit()
+        prefs.putInt("lastNotificationId", id)
+        prefs.putString("lastNotificationState", state)
+        prefs.commit()
     }
 }

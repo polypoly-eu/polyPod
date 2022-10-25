@@ -91,7 +91,7 @@ struct ContentView: View {
                             // state change in featureListState's onAppear did not
                             // trigger a rerender, even though it should.
                             // Yet another SwiftUI bug it seems...
-                            showUpdateNotification = UpdateNotification().showInApp
+                            showUpdateNotification = UpdateNotification.showInApp
 
                             state = featureListState()
                         })
@@ -110,13 +110,13 @@ struct ContentView: View {
     }
 
     private func firstRunState() -> ViewState {
-        let notification = UpdateNotification()
-        notification.handleStartup()
         if !FirstRun.read() {
             return securityReminderState()
         }
 
-        notification.handleFirstRun()
+        _ = Core.instance.executeRequest(.handleFirstRun).inspectError {
+            Log.error("handleFirstRun request failed: \($0.localizedDescription)")
+        }
         return ViewState(
             AnyView(
                 OnboardingView(
@@ -141,7 +141,7 @@ struct ContentView: View {
                         // state change in featureListState's onAppear did not
                         // trigger a rerender, even though it should.
                         // Yet another SwiftUI bug it seems...
-                        showUpdateNotification = UpdateNotification().showInApp
+                        showUpdateNotification = UpdateNotification.showInApp
 
                         state = featureListState()
                     })
@@ -165,7 +165,7 @@ struct ContentView: View {
     }
 
     private func featureListState() -> ViewState {
-        let notification = UpdateNotification()
+        let notificationData = UpdateNotificationData()
         return ViewState(
             backgroundColor: HomeScreenConstants.View.backgroundColor,
             AnyView(
@@ -184,13 +184,13 @@ struct ContentView: View {
                     }
                 ).alert(isPresented: $showUpdateNotification) {
                     Alert(
-                        title: Text(notification.title),
-                        message: Text(notification.text),
+                        title: Text(notificationData.title),
+                        message: Text(notificationData.text),
                         dismissButton: .default(
                             Text("button_update_notification_close")
                         ) {
-                            notification.handleInAppSeen()
-                            showUpdateNotification = notification.showInApp
+                            UpdateNotification.handleInAppSeen()
+                            showUpdateNotification = UpdateNotification.showInApp
                         }
                     )
                 }

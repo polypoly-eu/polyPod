@@ -28,6 +28,7 @@
         "features/polypediaPreview",
         "features/polypolyMembership",
         "features/polypolyMembershipPreview",
+        "features/messenger",
         "features/test",
         "platform/core",
         "platform/feature-api/api",

@@ -17,7 +17,6 @@ export class FeatureFileStorage {
             statResults[file.id] = await polyOut.stat(file.id);
         }
         this._files = statResults;
-        return files;
     }
 
     async readFile(path) {
