@@ -122,11 +122,8 @@ const bubbleFontSize = (d) => {
 
 /**
  * Visualizes data as a cluster of bubbles where the value of the bubble is represented as the radius.
- *
  * The bubbles are being added in a spiral starting in the center of the cluster meaning sorted data will lead to all small bubbles in the middle or outside.
- *
- * Adding svg icons to a data point will load the svg instead of a bubble
- *
+ * Adding svg icons to a data point will load the svg instead of a bubble.
  * @class
  * @extends Chart
  * @param {CSS-selector} selector - A CSS selector, where the svg will be attached to

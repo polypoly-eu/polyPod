@@ -7,14 +7,16 @@ import filter from "../../static/images/icons/filter.svg";
 import "./iconButton.css";
 
 /**
- * Icon button. Has a filled variant.
- * Any valid button HTML attributes are allowed.
+ * It takes an icon name and returns a button with that icon.
+ * Has a filled variant. Any valid button HTML attributes are allowed.
+ * @component
  * @param {Object} props
- * @param {string} [props.icon] - Button icon
+ * @param {string} props.icon - Button icon
  * Currently implemented options are: angleRight, question, filter.
  * @param {string} [props.fillDirection] - This option adds a background color
  * and a border radius to the direction specified.
  * Available options are left and right.
+ * @returns A button with an image inside of it.
  */
 const IconButton = ({ icon, fillDirection = "", ...otherProps }) => {
   const icons = {
@@ -41,4 +43,5 @@ const IconButton = ({ icon, fillDirection = "", ...otherProps }) => {
     </button>
   );
 };
+
 export default IconButton;

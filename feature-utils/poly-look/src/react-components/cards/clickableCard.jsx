@@ -3,13 +3,21 @@ import { PolyButton } from "../buttons";
 import "./card.css";
 
 /**
- * Clickable Card component
+ * Callback for handling the click event to close notification.
  *
- * @param {jsx} children JSX elements displayed inside the card
- * @param {Callback} onClick onClick function
- * @param {String} [buttonText] displays a button with the string at the bottom if passed
- * @param {String} [onlyButtonClickEvent] if a button is active, makes the button the only clickable part
- * @returns jsx
+ * @callback onClickCallback
+ * @param {React.MouseEventHandler<HTMLDivElement>} clickEvent - mouse event action.
+ */
+
+/**
+ * Clickable Card with a button component
+ * @component
+ * @param {Object} props
+ * @param {JSX.Element} [props.children] JSX elements displayed inside the card
+ * @param {onClickCallback} [props.onClick] onClick function
+ * @param {string} [props.buttonText] displays a button with the string at the bottom if passed
+ * @param {string} [props.onlyButtonClickEvent] if a button is active, makes the button the only clickable part
+ * @returns {JSX.Element}  A function that returns a div
  */
 const ClickableCard = ({
   children,

@@ -2,16 +2,19 @@ import React from "react";
 import { INITIAL_HISTORY_STATE } from "../../constants";
 
 /**
- * Component that makes any children that have onClick properties a router onClick
+ * It takes a React component and returns a new React component that
+ * wraps the original component and adds a new onClick function to it
+ * for any children that have already onClick properties.
  * This will not override the onClick property of the children but give them a new one combining routing
- * and the previous onClick
- * This does not add any divs or ther HTML elements
- *
- * @param {jsx} children - React children in jsx format
- * @param {History} history - React router dom history
- * @param {String} route - String to route to ("back" leads back)
- * @param {Object} [stateChange] - Initial state overriding INITIAL_HISTORY_STATE property to which it defaults
- * @returns
+ * and the previous onClick.
+ * This does not add any divs or ther HTML elements.
+ * @component
+ * @param {Object} props
+ * @param {JSX.Element} [props.children] - React children in jsx format
+ * @param {Object} [props.history] - React router dom history
+ * @param {string} [props.route] - String to route to ("back" leads back)
+ * @param {Object} [props.stateChange] - Initial state overriding INITIAL_HISTORY_STATE property to which it defaults
+ * @returns A React component that takes in children, history, route, and stateChange as props.
  */
 const RoutingWrapper = ({ children, history, route, stateChange }) => {
   const onRoute = () => {

@@ -5,7 +5,7 @@ import {
   ZipFile,
 } from "@polypoly-eu/poly-import";
 
-//used until real storage is loaded
+// used until real storage is loaded
 const fakeStorage = {
   files: null,
   refreshFiles: async () => null,
@@ -15,6 +15,17 @@ const fakeStorage = {
 
 export const PolyImportContext = createContext();
 
+/**
+ * It takes a list of files, runs them through a list of importers, and returns an account.
+ * @const
+ * @callback PolyImportProvider
+ * @param {Object} props
+ * @param {Object} props.children
+ * @param {Object} props.parentContext
+ * @param {Object} props.dataImporters
+ * @param {Object} props.DataAccount
+ * @returns A function that returns a component.
+ */
 export const PolyImportProvider = ({
   children,
   parentContext,

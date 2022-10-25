@@ -15,10 +15,8 @@ const barValueMargin = 4;
 const gridXMargin = 12;
 
 /**
- * Visualizes data as a bar chart with vertically arrranged bars
- *
- * The scales are on the left and the bottom
- *
+ * Visualizes data as a bar chart with vertically arrranged bars.
+ * The scales are on the left and the bottom.
  * @class
  * @extends Chart
  * @param {CSS-selector} selector - A CSS selector, where the svg will be attached to

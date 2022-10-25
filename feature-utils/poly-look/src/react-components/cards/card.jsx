@@ -4,9 +4,11 @@ import "./card.css";
 
 /**
  * Card component
- *
- * @param {jsx} children JSX elements displayed inside the card
- * @returns jsx
+ * It takes in children and returns a div with the class of card and the children
+ * inside of it.
+ * @component
+ * @param {JSX.Element} children JSX elements displayed inside the card
+ * @returns  {JSX.Element} A card component
  */
 const Card = ({ children }) => {
   return <div className="card">{children}</div>;

@@ -12,11 +12,19 @@ const Tab = () => {
 };
 
 /**
+ * Callback for handling the click event to tab button.
  *
- * Group of tabs, that might include a swiper
- * @param { Object[] } tabList -  a list of elements that are going to be used as tabs
- * @param {boolean} swipe - Use a Swiper component or not within the tab
- * @param {function()} onTabChange - called when a tab changes
+ * @callback onTabCallback
+ * @param {React.MouseEventHandler<HTMLDivElement>} clickEvent - mouse onClick action.
+ */
+
+/**
+ * Group of tabs, that might include a swiper.
+ * @component
+ * @param {Object} props
+ * @param {Array.<Object>} [props.tabList] -  a list of elements that are going to be used as tabs
+ * @param {boolean} [props.swipe] - Use a Swiper component or not within the tab
+ * @param {onTabCallback} [props.onTabChange] - called when a tab changes
  */
 const Tabs = ({ children: tabList, swipe = true, onTabChange }) => {
   const [activeTabId, setActiveTabId] = useState(tabList[0].props.id);

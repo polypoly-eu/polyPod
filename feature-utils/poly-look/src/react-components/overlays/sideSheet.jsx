@@ -4,19 +4,25 @@ import { PolyButton, IconButton } from "../buttons";
 import "./sideSheet.css";
 
 /**
+ * Callback for handling the click event to close button.
  *
+ * @callback onCloseCallback
+ * @param {React.MouseEventHandler<HTMLDivElement>} clickEvent - mouse event action.
+ */
+
+/**
  * Generic container for HTRT content with close button(s).
+ * It renders a side sheet with a title, children, and an ok button.
  * Meant to be used in combination with SideSwiper.
  * @param {Object} props
- * @param {node} [props.children] - HTRT content.
- * @param {string} [props.okLabel] - Label used for the close button.
- * @param {callback} [props.onClose] - onClick event handler for the
+ * @param {Node} [props.children] - HTRT content.
+ * @param {String} [props.okLabel] - Label used for the close button.
+ * @param {onCloseCallback} [props.onClose] - onClick event handler for the
  * close buttons.
- * @param {string} [props.title = ""] - Optional title.
+ * @param {String} [props.title = ""] - Optional title.
  * Defaults to empty string;
  * @param {React.CSSProperties} [props.style] - Additional styles for
- * the component.
- * Defaults to empty object;
+ * the component. Defaults to empty object;
  * @returns {JSX.Element}
  */
 const SideSheet = ({
