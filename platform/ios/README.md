@@ -10,7 +10,10 @@ Before building for iOS, you need to build the shared components and
 Features - simply follow the build instructions in
 [../../README.md](../../README.md).
 
-The polyPod core and features are written in JavaScript. You will need to build and bundle them by running `./build.js` from the root directory of this repository. Please follow instructions [there](../../README.md) to install all needed prerrequisites. 
+As a summary, you will need to:
+
+* Build the shared components in [`core`](../../core). You will probably be interested only in the `iOS` part
+* The polyPod core and features are written in JavaScript. You will need to build and bundle them by running `./build.js` from the root directory of this repository. Please follow instructions [there](../../README.md) to install all needed prerrequisites. 
 
 ### Xcode
 
