@@ -22,9 +22,9 @@ const Tab = () => {
  * Group of tabs, that might include a swiper.
  * @component
  * @param {Object} props
- * @param {Array.<Object>} [props.tabList] -  a list of elements that are going to be used as tabs
+ * @param {Array.<Object>} props.tabList -  a list of elements that are going to be used as tabs
  * @param {boolean} [props.swipe] - Use a Swiper component or not within the tab
- * @param {onTabCallback} [props.onTabChange] - called when a tab changes
+ * @param {onTabCallback} props.onTabChange - called when a tab changes
  */
 const Tabs = ({ children: tabList, swipe = true, onTabChange }) => {
   const [activeTabId, setActiveTabId] = useState(tabList[0].props.id);

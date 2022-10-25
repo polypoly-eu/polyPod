@@ -15,14 +15,15 @@ import "./sideSheet.css";
  * It renders a side sheet with a title, children, and an ok button.
  * Meant to be used in combination with SideSwiper.
  * @param {Object} props
- * @param {Node} [props.children] - HTRT content.
- * @param {String} [props.okLabel] - Label used for the close button.
- * @param {onCloseCallback} [props.onClose] - onClick event handler for the
+ * @param {Node} props.children - HTRT content.
+ * @param {string} props.okLabel - Label used for the close button.
+ * @param {onCloseCallback} props.onClose - onClick event handler for the
  * close buttons.
- * @param {String} [props.title = ""] - Optional title.
+ * @param {string} [props.title = ""] - Optional title.
  * Defaults to empty string;
  * @param {React.CSSProperties} [props.style] - Additional styles for
  * the component. Defaults to empty object;
+ * @param {string} props.className - classname given
  * @returns {JSX.Element}
  */
 const SideSheet = ({

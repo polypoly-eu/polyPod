@@ -7,10 +7,10 @@ import "./chip.css";
  * when clicked, it calls the handleClick function with the id prop as an argument
  * @component
  * @param {Object} props
- * @param {string} [props.id] - Text in chip's label, which is also acting as an if for the chip.
- * @param {string} [props.translation] - Translation for the text in chip's label.
- * @param {callback} [props.handleClick] - Chip's handleClick function (id of clicked chip).
- * @param {boolean} [props.active] - Indicates whether the chip is selected (active) or not.
+ * @param {string} props.id - Text in chip's label, which is also acting as an if for the chip.
+ * @param {string} props.translation - Translation for the text in chip's label.
+ * @param {callback} props.handleClick - Chip's handleClick function (id of clicked chip).
+ * @param {boolean} props.active - Indicates whether the chip is selected (active) or not.
  * @returns A React component
  */
 const Chip = ({ id, translation, handleClick, active }) => {

@@ -10,10 +10,10 @@ import { INITIAL_HISTORY_STATE } from "../../constants";
  * This does not add any divs or ther HTML elements.
  * @component
  * @param {Object} props
- * @param {JSX.Element} [props.children] - React children in jsx format
- * @param {Object} [props.history] - React router dom history
- * @param {string} [props.route] - String to route to ("back" leads back)
- * @param {Object} [props.stateChange] - Initial state overriding INITIAL_HISTORY_STATE property to which it defaults
+ * @param {JSX.Element} props.children - React children in jsx format
+ * @param {Object} props.history - React router dom history
+ * @param {string} props.route - String to route to ("back" leads back)
+ * @param {Object} props.stateChange - Initial state overriding INITIAL_HISTORY_STATE property to which it defaults
  * @returns A React component that takes in children, history, route, and stateChange as props.
  */
 const RoutingWrapper = ({ children, history, route, stateChange }) => {
