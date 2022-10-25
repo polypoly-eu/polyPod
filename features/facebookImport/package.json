@@ -9,7 +9,7 @@
     "serve": "rollup --watch --configServe -c",
     "serve-polypedia-stub": "node scripts/serve-polypedia-stub.js",
     "test": "jest --coverage",
-    "doc": "jsdoc -r src/ -d ./docs"
+    "doc": "jsdoc -c jsdoc.conf.json"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
