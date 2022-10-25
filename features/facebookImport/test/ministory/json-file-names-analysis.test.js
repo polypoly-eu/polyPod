@@ -11,12 +11,13 @@ const commonJsonFiles = commonStructure
     });
 
 async function analyzeZipWithFiles(files) {
-    const zipFile = new ZipFileMock();
+    const dataFilePairs = [];
     if (files.length > 0) {
         files.forEach((jsonPath) => {
-            zipFile.addJsonEntry(jsonPath, { foo: "bar" });
+            dataFilePairs.push([jsonPath, { foo: "bar" }]);
         });
     }
+    const zipFile = new ZipFileMock(dataFilePairs);
     const { analysisResult } = await runAnalysisForExport(
         JSONFileNamesAnalysis,
         zipFile
