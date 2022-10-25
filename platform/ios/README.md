@@ -6,7 +6,7 @@ The polyPod app for iOS devices
 
 ### Prerequisites
 
-Before building for Android, you need to build the shared components and
+Before building for iOS, you need to build the shared components and
 Features - simply follow the build instructions in
 [../../README.md](../../README.md).
 
