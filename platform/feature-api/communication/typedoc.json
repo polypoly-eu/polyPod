@@ -1,7 +1,7 @@
 {
   "entryPoints": ["./src"],
   "exclude": ["**/tests/*.ts", "**/benchmarks/*.ts"],
-  "out": "docs",
+  "out": "../../../docs/platform/feature-api/communication",
   "validation": {
     "notExported": false
   }
