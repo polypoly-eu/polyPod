@@ -27,6 +27,3 @@ android/app/local.properties
 
 # Debug Logs
 debug.log
-
-# Generated documentation
-docs/
