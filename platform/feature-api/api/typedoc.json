@@ -1,7 +1,7 @@
 {
   "entryPoints": ["./src"],
   "exclude": ["**/tests/*.ts"],
-  "out": "../../../docs/platform/feature-api/api",
+  "out": "../../../docs/documentation/platform/feature-api/api",
   "validation": {
     "notExported": false
   }

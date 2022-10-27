@@ -16,7 +16,7 @@
     },
     "opts": {
       "template": "../../node_modules/better-docs",
-      "destination": "../../docs/features/facebookImport",
+      "destination": "../../docs/documentation/features/facebookImport",
       "recurse": true,
       "verbose": true,
       "readme": "README.md"

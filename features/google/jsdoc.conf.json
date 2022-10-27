@@ -16,7 +16,7 @@
     },
     "opts": {
       "template": "../../node_modules/better-docs",
-      "destination": "../../docs/features/google",
+      "destination": "../../docs/documentation/features/google",
       "recurse": true,
       "verbose": true,
       "readme": "README.md"

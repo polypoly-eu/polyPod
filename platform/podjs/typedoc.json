@@ -1,7 +1,7 @@
 {
   "entryPoints": ["./src"],
   "exclude": ["**/tests/*.ts"],
-  "out": "../../docs/platform/podjs",
+  "out": "../../docs/documentation/platform/podjs",
   "validation": {
     "notExported": false
   }
