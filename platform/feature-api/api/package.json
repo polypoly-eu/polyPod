@@ -17,7 +17,7 @@
     "dev": "tsc --watch --incremental",
     "eslint": "eslint src --ext .ts",
     "test": "jest --coverage",
-    "docs": "typedoc"
+    "doc": "typedoc"
   },
   "dependencies": {
     "chai": "^4.2.0",

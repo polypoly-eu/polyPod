@@ -21,7 +21,7 @@
     "eslint": "eslint src --ext .ts",
     "lint": "npm run eslint",
     "test": "jest",
-    "docs": "typedoc"
+    "doc": "typedoc"
   },
   "dependencies": {
     "@msgpack/msgpack": "^2.6.0",

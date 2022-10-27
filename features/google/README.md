@@ -1,6 +1,6 @@
-# facebookImport
+# google Import
 
-A Feature that lets you import and explore your Facebook data.
+A Feature that lets you import and explore your Google data.
 
 ## Building
 
@@ -11,7 +11,7 @@ browser into the `dist` folder.
 
 ## Testing the reporting backend
 
-1. Change the `polyPediaReport/facebook` endpoint in
+1. Change the `polyPediaReport/google` endpoint in
    `platform/utils/endpoints-generator` and rebuild.
 2. Start the polyPedia report backend stub: `npm run serve-polypedia-stub`
 3. Launch the Feature and attempt to send a report.
