@@ -5,7 +5,6 @@
 export class Telemetry {
     /**
      * Creates a new object with a creation time property set to the current time.
-     * @constructor
      * @methodof Telemetry
      */
     constructor() {
