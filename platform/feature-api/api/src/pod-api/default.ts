@@ -29,12 +29,27 @@ export const DEFAULT_POD_RUNTIME_VERSION = "podjs-default-version";
  * The [[PolyOut]] interface. See [[PolyOut]] for the description.
  */
 export class DefaultPolyOut implements PolyOut {
+    /**
+     * It creates a new instance of the class [[DefaultPolyOut]].
+     * @param {IFs["promises"]} fs - IFs["promises"]
+     */
     constructor(public readonly fs: IFs["promises"]) {}
 
+    /**
+     * It reads the file of the `path` given and returns its buffer.
+     * @param {string} path - The path to the file you want to read.
+     * @returns A promise that resolves to a buffer.
+     */
     async readFile(path: string): Promise<Buffer> {
         return (await this.fs.readFile(path)) as Buffer;
     }
 
+    /**
+     * It reads the directory at the given path, and returns a promise that resolves to an array of
+     * objects, each of which has an id and a path
+     * @param {string} path - The path to the directory you want to read.
+     * @returns A promise that resolves to an array of Entry objects.
+     */
     readDir(path: string): Promise<Entry[]> {
         const newFiles = this.fs.readdir(path).then((files) => {
             const objectFiles = files.map((file) => ({
@@ -48,6 +63,12 @@ export class DefaultPolyOut implements PolyOut {
         return newFiles;
     }
 
+    /**
+     * It returns the stats of the file's id, size, time, name, and
+     * whether or not it's a directory
+     * @param {string} path - The path to the file or directory.
+     * @returns {Stats} A promise that resolves to an Stats object
+     */
     async stat(path: string): Promise<Stats> {
         const stats = await this.fs.stat(path);
         return {
@@ -59,6 +80,12 @@ export class DefaultPolyOut implements PolyOut {
         };
     }
 
+    /**
+     * Write the given content to the given file path.
+     * @param {string} path - The path to the file to write to.
+     * @param {string} content - The content to write to the file.
+     * @returns A promise that resolves to a string.
+     */
     writeFile(path: string, content: string): Promise<void> {
         return this.fs.writeFile(path, content);
     }
@@ -94,18 +121,32 @@ export class DefaultPolyOut implements PolyOut {
 export class DefaultPod implements Pod {
     public readonly dataFactory: RDF.DataFactory = dataFactory;
 
+    /**
+     * It creates a new [[DefaultPod]] instance.
+     * @param {RDF.DatasetCore} store - The RDF store that contains the data.
+     * @param {IFs["promises"]} fs - The filesystem to use.
+     * @param {PolyOut} polyOut - PolyOut = new DefaultPolyOut(fs)
+     */
     constructor(
         public readonly store: RDF.DatasetCore,
         public readonly fs: IFs["promises"],
         public readonly polyOut: PolyOut = new DefaultPolyOut(fs)
     ) {}
 
+    /**
+     * If the graph of the quad is not the default graph, throw an error.
+     *
+     * @param quad - The quad to be added to the store.
+     * @throws Error
+     */
     private checkQuad(quad: RDF.Quad): void {
         if (!quad.graph.equals(dataFactory.defaultGraph()))
             throw new Error("Only default graph allowed");
     }
+
     /**
      * The [[PolyIn]] interface. See [[PolyIn]] for the description.
+     * @returns {PolyIn} Triplestore
      */
     get polyIn(): PolyIn {
         return {
@@ -135,6 +176,7 @@ export class DefaultPod implements Pod {
 
     /**
      * The [[Triplestore]] interface. See [[Triplestore]] for the description
+     * @returns {Triplestore} Triplestore
      */
     get triplestore(): Triplestore {
         return {
@@ -149,6 +191,7 @@ export class DefaultPod implements Pod {
 
     /**
      * The [[PolyNav]] interface. See [[PolyNav]] for the description.
+     * @returns {PolyNav} PolyNav
      */
     get polyNav(): PolyNav {
         return {
@@ -168,6 +211,7 @@ export class DefaultPod implements Pod {
     }
     /**
      * The [[Info]] interface. See [[Info]] for the description.
+     * @returns {Info} info of the pod
      */
     get info(): Info {
         return {
@@ -181,6 +225,7 @@ export class DefaultPod implements Pod {
     }
     /**
      * The [[Endpoint]] interface. See [[Endpoint]] for the description.
+     * @returns {Endpoint} endpoint of the pod
      */
     get endpoint(): Endpoint {
         return {
