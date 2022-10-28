@@ -540,7 +540,7 @@ function endpointErrorMessage(fetchType: string, errorlog: string): string {
 }
 
 /**
- * @class BrowserEndpoint
+ * @class BrowserEndpoint @implements [[Endpoint]]
  */
 class BrowserEndpoint implements Endpoint {
     endpointNetwork = new BrowserNetwork();
@@ -596,7 +596,7 @@ class BrowserEndpoint implements Endpoint {
 }
 
 /**
- * @class `BrowserPolyNavPolyNav`
+ * @class `BrowserPolyNavPolyNav` @implements [[PolyNav]]
  */
 class BrowserPolyNav implements PolyNav {
     actions?: { [key: string]: () => void };
@@ -779,7 +779,8 @@ function createNavBarFrame(title: string): HTMLElement {
 }
 
 /**
- * The @class BrowserPod is a Pod that uses the browser's local storage to store polyIn and polyOut data
+ * The @class BrowserPod @implements a [[Pod]]
+ * that uses the browser's local storage to store polyIn and polyOut data
  */
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;
