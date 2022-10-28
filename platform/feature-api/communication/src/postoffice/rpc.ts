@@ -46,7 +46,9 @@ import {
 } from "./protocol";
 
 /**
- * Turns the implementation of a backend endpoint specification into a plain function.
+ * It turns a backend endpoint specification implementation into a backend plain procedure.
+ * @param {ServerOf<Spec>} impl - The implementation of the backend.
+ * @returns {BackendProcedure} - A function that takes a request and returns a promise of a response.
  */
 export function backendServer<Spec extends BackendSpec>(
     impl: ServerOf<Spec>
@@ -81,6 +83,10 @@ type RequestBuilder = Callable<any> &
 
 /**
  * @hidden
+ * It returns a proxy object that, when called, calls the client function with the current state
+ * @param {BackendProcedure} client - BackendProcedure
+ * @param {BackendRequest} state - BackendRequest
+ * @returns A proxy object that is a function that returns a promise.
  */
 function requestBuilder(
     client: BackendProcedure,
@@ -112,7 +118,10 @@ function requestBuilder(
 }
 
 /**
- * Constructs a proxy object that turns a function call chain into a plain function call.
+ * It takes a client [[BackendProcedure]] and returns a proxy client object
+ * that turns a function call chain into a plain function call.
+ * @param {BackendProcedure} client - The backend procedure that will be called.
+ * @returns {ClientOf<Spec>} - A function that takes a spec and returns a client.
  */
 export function backendClient<Spec extends BackendSpec>(
     client: BackendProcedure
