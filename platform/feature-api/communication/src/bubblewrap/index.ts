@@ -102,8 +102,7 @@ function isSerializable(t: MaybeSerializable): t is Serializable {
  * In the simplest case, a class' author does not have to implement any additional methods. Encoding will still use
  * `Object.entries`, but will additionally include the object's prototype.
  *
- * Applied to the above example, the object will be encoded as follows:
- *
+ * @example <caption>Applied to the above example, the object will be encoded as follows:</caption>
  * ```
  * encode(new MyCoolClass("World")) ≡ encode(["MyCoolClass", { subject: "World" }])
  * ```
@@ -115,13 +114,12 @@ function isSerializable(t: MaybeSerializable): t is Serializable {
  * decode(encoded) ≡ Object.create(MyCoolClass.prototype, { subject: "World" })
  * ```
  *
- * In some situations, this default logic is not sufficient. It may not work when complex class hierarchies are
+ * @example <caption>In some situations, this default logic is not sufficient. It may not work when complex class hierarchies are
  * involved.
  *
  * The logic can be further tweaked by providing additional methods. These methods must have well-known names that are
  * specified by the [[serialize]] and [[deserialize]] symbols. The following class illustrates this using a subclass
- * of `Error`:
- *
+ * of `Error`: </caption>
  * ```
  * class MyError extends Error {
  *    constructor(
@@ -159,7 +157,7 @@ function isSerializable(t: MaybeSerializable): t is Serializable {
  *
  * It is not possible to customize this behaviour for arrays, raw objects, or `undefined` values nested below objects
  * of registered classes.
- * @class A class that can be registered to [[Bubblewrap]].
+ * @alias Class A class that can be registered to [[Bubblewrap]].
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Class<T extends MaybeSerializable> = Function & {
@@ -171,9 +169,8 @@ export type Class<T extends MaybeSerializable> = Function & {
 /**
  * A dictionary of known classes.
  *
- * The keys in this record serve as class identifiers. Consequently, it is strongly recommended to qualify the keys, for
- * example with the npm package name:
- *
+ * @example <caption>The keys in this record serve as class identifiers. Consequently, it is strongly recommended to qualify the keys, for
+ * example with the npm package name:</caption>
  * ```
  * import {MyDomainClass} from "@myorg/pkg";
  *
@@ -188,6 +185,8 @@ export type Class<T extends MaybeSerializable> = Function & {
  * brittle.
  *
  * See [[Bubblewrap]] for how to register classes.
+ *
+ * @alias Classes
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Classes = Record<string, Class<any>>;

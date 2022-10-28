@@ -81,8 +81,7 @@ export type Procedure<Req, Res> = (req: Req) => Promise<Res>;
  * This function creates a new `Promise` for each request and uses the constructs the callbacks as described in
  * [[PromiseResolvers]].
  *
- * Example usage:
- *
+ * @example <caption>Usage:</caption>
  * ```
  * declare const clientPort: RequestPort<string, string>;
  * const clientProc: Procedure<string, string> = client(clientPort);

@@ -8,6 +8,7 @@
  * A handler for type `T` is a function accepting a `T` and returning `void`.
  *
  * Handlers are expected to return without throwing an error.
+ * @alias Handler<T>
  */
 export type Handler<T> = (t: T) => void;
 

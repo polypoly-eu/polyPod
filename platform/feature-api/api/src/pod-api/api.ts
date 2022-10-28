@@ -21,6 +21,7 @@ export interface Matcher {
  * For SELECT queries an array of Map objects which keys are the
  * bound variables and values are the values the result is bound to,
  * for CONSTRUCT and ÐESCRIBE queries an array of quads, for ASK queries a boolean.
+ * @alias SPARQLQueryResult
  */
 export type SPARQLQueryResult = Map<string, RDF.Term>[] | RDF.Quad[] | boolean;
 
