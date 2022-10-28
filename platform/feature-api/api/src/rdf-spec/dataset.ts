@@ -18,7 +18,8 @@ import { assert } from "chai";
 import { namespace } from "./namespace";
 
 /**
- * Class containing test cases data factories. Use [[DatasetSpec.run]] to execute all tests.
+ * It's a class that runs tests on a Dataset implementation
+ * Use [[DatasetSpec.run]] to execute all tests.
  *
  * This class requires both a dataset factory and a data factory.
  *
@@ -29,6 +30,11 @@ export class DatasetSpec<
     OutQuad extends BaseQuad = Quad,
     D extends DatasetCore<OutQuad> = DatasetCore<OutQuad>
 > {
+    /**
+     * It creates a new instance of the class DatasetSpec
+     * @param {DatasetCoreFactory} datasetFactory - This is the factory that will be used to create the dataset.
+     * @param {DataFactory} dataFactory - The factory that will be used to create the data.
+     */
     constructor(
         private readonly datasetFactory: DatasetCoreFactory<
             OutQuad,
@@ -38,6 +44,9 @@ export class DatasetSpec<
         private readonly dataFactory: DataFactory<OutQuad>
     ) {}
 
+    /**
+     * It creates a new dataset with the given quads
+     */
     factory(): void {
         const ex = namespace("http://example.org/", this.dataFactory);
 
@@ -69,6 +78,9 @@ export class DatasetSpec<
         });
     }
 
+    /**
+     * `size` should be a number property that is equal to the number of Quads in the Dataset
+     */
     size(): void {
         const ex = namespace("http://example.org/", this.dataFactory);
 
@@ -103,6 +115,9 @@ export class DatasetSpec<
         });
     }
 
+    /**
+     * It adds the given Quad to the Dataset
+     */
     add(): void {
         const ex = namespace("http://example.org/", this.dataFactory);
 
@@ -147,6 +162,9 @@ export class DatasetSpec<
         });
     }
 
+    /**
+     * It removes the given Quad from the Dataset
+     */
     delete(): void {
         const ex = namespace("http://example.org/", this.dataFactory);
 
@@ -210,6 +228,9 @@ export class DatasetSpec<
         });
     }
 
+    /**
+     * It returns true if the given Quad is in the Dataset, and false otherwise
+     */
     has(): void {
         const ex = namespace("http://example.org/", this.dataFactory);
 
@@ -254,6 +275,10 @@ export class DatasetSpec<
         });
     }
 
+    /**
+     * It returns a Dataset containing all the Quads in the given Dataset that match the given subject,
+     * predicate, object, and graph
+     */
     match(): void {
         const ex = namespace("http://example.org/", this.dataFactory);
 
@@ -362,6 +387,10 @@ export class DatasetSpec<
         });
     }
 
+    /**
+     * It tests whether the dataset implements the Symbol.iterator function, and whether it returns an
+     * iterator that iterates over all quads in the dataset
+     */
     iterator(): void {
         const ex = namespace("http://example.org/", this.dataFactory);
 
@@ -423,6 +452,9 @@ export class DatasetSpec<
         });
     }
 
+    /**
+     * It runs the tests for the DatasetSpec class.
+     */
     run(): void {
         this.factory();
         this.size();
