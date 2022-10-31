@@ -5,7 +5,8 @@ extension XCUIApplication {
         resetDefaults: Bool = true,
         firstRun: Bool = false,
         mockNotificationId: Int? = 0,
-        showDeveloperFeatures: Bool? = false
+        showDeveloperFeatures: Bool? = false,
+        extraDefaults: [String: String] = [:]
     ) {
         typealias Keys = UserDefaults.Keys
         launchArguments = [
@@ -30,6 +31,19 @@ extension XCUIApplication {
                 "\(showDeveloperFeatures)"
             ]
         }
+
+        for (key, value) in extraDefaults {
+            launchArguments += ["-\(key)", value]
+        }
+
+        // This makes sure an already running app is first made inactive.
+        // Apparently, we don't trigger any inactive/termination events by
+        // calling XCUIApplication.launch (as opposed to production).
+        // If we were to save core preferences on write, not on
+        // inactive/terminate, we shouldn't need this.
+        XCUIDevice.shared.press(.home)
+        sleep(1)
+
         launch()
         let background = wait(for: .runningForeground, timeout: 120)
         XCTAssertTrue(background)

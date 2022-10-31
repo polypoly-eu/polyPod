@@ -14,7 +14,7 @@
     "build-downstream": "../../build.js --start @polypoly-eu/podjs",
     "lint": "eslint src --ext .ts",
     "test": "jest && cypress run",
-    "docs": "typedoc"
+    "doc": "typedoc"
   },
   "dependencies": {
     "@polypoly-eu/api": "file:../feature-api/api",

@@ -13,7 +13,7 @@
     "test:watch": "web-test-runner --watch",
     "build": "rollup -c rollup.config.mjs",
     "build-downstream": "../../build.js --start @polypoly-eu/poly-look",
-    "doc": "jsdoc -R README.md -r src -d ./docs"
+    "doc": "jsdoc -c jsdoc.conf.json"
   },
   "dependencies": {
     "@polypoly-eu/silly-i18n": "file:../silly-i18n",

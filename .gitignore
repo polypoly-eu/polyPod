@@ -22,11 +22,11 @@ android/app/local.properties
 # Cypress directories
 **/cypress/support
 
-# Generated docs
-docs/
-
 # Android stuff
 .dccache
 
 # Debug Logs
 debug.log
+
+# Generated documentation
+docs/documentation/

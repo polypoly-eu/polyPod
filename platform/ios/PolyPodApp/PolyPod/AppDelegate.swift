@@ -16,32 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Log.bootstrap()
         Log.info("Application initialized")
 
-        let fsRoot = try! FileManager.default.url(
-            for: .documentDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: false
-        )
-
-        switch Core.instance.bootstrap(args: .init(languageCode: Language.current, fsRoot: fsRoot.path)) {
-        case .success:
-            Log.info("Core bootstraped!")
-        case let .failure(content):
-            Log.error(content.localizedDescription)
-            if let coreFailure = content as? CoreFailure {
-                if coreFailure.code == .coreAlreadyBootstrapped {
-                    break
-                }
-            }
-            fatalError(content.localizedDescription)
-        }
-
         let defaults = UserDefaults.standard
         defaults.disableDataProtection()
-        if defaults.bool(forKey: UserDefaults.Keys.resetUserDefaults.rawValue) {
+        let resetDefaults = defaults.bool(
+            forKey: UserDefaults.Keys.resetUserDefaults.rawValue
+        )
+        if resetDefaults {
             Log.info("Resetting all user defaults")
             UserDefaults.standard.reset()
         }
+
+        initCore(resetPreferences: resetDefaults)
 
         CoreDataStack.shared.isProtectedDataAvailable = { completion in
             dispatchToMainQueue {
@@ -63,6 +48,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    private func initCore(resetPreferences: Bool) {
+        let fsRoot = try! FileManager.default.url(
+            for: .documentDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: false
+        )
+
+        switch Core.instance.bootstrap(
+            args: .init(
+                languageCode: Language.current,
+                fsRoot: fsRoot.path,
+                updateNotificationId: UpdateNotificationData().id
+            )
+        ) {
+        case .success:
+            Log.info("Core bootstraped!")
+        case let .failure(content):
+            Log.error(content.localizedDescription)
+            if let coreFailure = content as? CoreFailure {
+                if coreFailure.code == .coreAlreadyBootstrapped {
+                    break
+                }
+            }
+            fatalError(content.localizedDescription)
+        }
+
+        if resetPreferences {
+            Log.info("Clearing core preferences")
+            _ = Core.instance.executeRequest(.clearPreferences).inspectError {
+                Log.error("clearPreferences request failed: \($0.localizedDescription)")
+            }
+        }
+
+        UserDefaults.standard.migrateToCore()
+
+        _ = Core.instance.executeRequest(.handleStartup).inspectError {
+            Log.error("handleStartup request failed: \($0.localizedDescription)")
+        }
+    }
+
     func applicationWillTerminate(_ application: UIApplication) {
         Log.info("Application terminated")
     }
@@ -82,9 +108,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             task.setTaskCompleted(success: false)
         }
 
-        let notification = UpdateNotification()
-        if notification.showPush {
-            notification.handlePushSeen()
+        if UpdateNotification.showPush {
+            UpdateNotification.handlePushSeen()
             showUpdateNotification()
         }
         task.setTaskCompleted(success: true)
@@ -95,9 +120,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let identifier = UUID().uuidString
 
         let content = UNMutableNotificationContent()
-        let notification = UpdateNotification()
-        content.title = notification.title
-        content.body = notification.text
+        let notificationData = UpdateNotificationData()
+        content.title = notificationData.title
+        content.body = notificationData.text
 
         // We show the notification with a delay to make debugging easier:
         // It won't show up if the app has focus.
@@ -160,7 +185,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let updateNotificationCheckIdentifier = Self.updateNotificationCheckIdentifier
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) {_, _ in }
         let task = BGProcessingTaskRequest(identifier: updateNotificationCheckIdentifier)
-        task.earliestBeginDate = Date(timeIntervalSinceNow: TimeInterval(UpdateNotification().pushDelay))
+        task.earliestBeginDate = Date(timeIntervalSinceNow: TimeInterval(UpdateNotificationData().pushDelay))
         task.requiresExternalPower = false
         task.requiresNetworkConnectivity = false
         do {

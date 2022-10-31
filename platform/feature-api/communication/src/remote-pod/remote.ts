@@ -1,6 +1,5 @@
 import {
     Pod,
-    PolyLifecycle,
     PolyIn,
     PolyOut,
     PolyNav,
@@ -64,11 +63,6 @@ type PolyOutBackend = ObjectBackendSpec<{
     removeArchive(fileId: string): ValueBackendSpec<void>;
 }>;
 
-type PolyLifecycleBackend = ObjectBackendSpec<{
-    listFeatures(): ValueBackendSpec<Record<string, boolean>>;
-    startFeature(id: string, background: boolean): ValueBackendSpec<void>;
-}>;
-
 type PolyNavBackend = ObjectBackendSpec<{
     openUrl(url: string): ValueBackendSpec<void>;
     setActiveActions(actions: string[]): ValueBackendSpec<void>;
@@ -98,7 +92,6 @@ type EndpointBackend = ObjectBackendSpec<{
 type PodBackend = ObjectBackendSpec<{
     polyIn(): PolyInBackend;
     polyOut(): PolyOutBackend;
-    polyLifecycle(): PolyLifecycleBackend;
     polyNav(): PolyNavBackend;
     info(): InfoBackend;
     endpoint(): EndpointBackend;
@@ -198,14 +191,6 @@ export class RemoteClientPod implements Pod {
         })();
     }
 
-    get polyLifecycle(): PolyLifecycle {
-        return {
-            listFeatures: () => this.rpcClient.polyLifecycle().listFeatures()(),
-            startFeature: (id, background) =>
-                this.rpcClient.polyLifecycle().startFeature(id, background)(),
-        };
-    }
-
     get polyNav(): PolyNav {
         return {
             openUrl: (url: string) => this.rpcClient.polyNav().openUrl(url)(),
@@ -245,18 +230,6 @@ export class RemoteClientPod implements Pod {
                     .endpoint()
                     .get(endpointId, contentType, authToken)(),
         };
-    }
-}
-
-// TODO move to pod-api?
-// TODO should this throw instead?
-class DummyPolyLifecycle implements PolyLifecycle {
-    async listFeatures(): Promise<Record<string, boolean>> {
-        return {};
-    }
-
-    async startFeature(): Promise<void> {
-        return;
     }
 }
 
@@ -307,12 +280,6 @@ export class RemoteServerPod implements ServerOf<PodBackend> {
 
     triplestore(): ServerOf<TriplestoreBackend> {
         return this.pod.triplestore;
-    }
-
-    polyLifecycle(): ServerOf<PolyLifecycleBackend> {
-        if (this.pod.polyLifecycle) return this.pod.polyLifecycle;
-
-        return new DummyPolyLifecycle();
     }
 
     polyNav(): ServerOf<PolyNavBackend> {

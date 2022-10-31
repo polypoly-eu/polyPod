@@ -11,3 +11,4 @@ This folder contains all of the sub component crates which do make up the PolyPo
 - [io](io): Contains the IO specific operations.
 - [preferences](preferences): Contains the functionality for the Preferences storage.
 - [user_session](user_session): Contains the functionality related to managing the user session.
+- [update_notification](update_notification): Contains the logic for showing update notifications to the user.

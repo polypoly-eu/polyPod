@@ -1,0 +1,87 @@
+.poly-input-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.poly-input-field .body {
+  height: 56px;
+  border: 1px solid var(--pl-field-color-border-enabled);
+  padding: var(--pl-field-spacing-padding-vert)
+    var(--pl-field-spacing-padding-hor);
+  border-radius: var(--pl-radius-1x);
+  display: flex;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  background-color: var(--pl-field-color-fill-enabled);
+  font-size: var(--font-size-ml);
+  line-height: var(--pl-field-body-line-height);
+}
+
+.poly-input-field .body-focused {
+  background-color: var(--pl-field-color-fill-focused);
+  border-color: var(--pl-field-color-border-focused);
+}
+
+.poly-input-field .body-error {
+  background-color: var(--pl-field-color-fill-error);
+  border-color: var(--pl-field-color-border-error);
+}
+
+.poly-input-field .body-error + .helper-text {
+  color: var(--pl-field-color-text-error);
+}
+
+.poly-input-field .body-disabled {
+  pointer-events: none;
+  background-color: var(--pl-field-color-fill-disabled);
+  border-color: var(--pl-field-color-border-disabled);
+  color: var(--pl-field-color-text-disabled);
+}
+
+.poly-input-field .body-disabled + .helper-text {
+  color: var(--pl-field-color-text-disabled);
+}
+
+.poly-input-field input {
+  flex: 1;
+  outline: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  background-color: inherit;
+  margin-right: var(--pl-field-spacing-gap);
+  align-self: flex-end;
+}
+
+.poly-input-field label {
+  position: absolute;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  left: var(--pl-field-spacing-padding-hor);
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.2s, font-size 0.2s;
+}
+
+.poly-input-field .label-up {
+  font-size: var(--font-size-s);
+  transform: translateY(calc(-1 * var(--pl-field-body-line-height)));
+}
+
+.poly-input-field .icon {
+  flex-shrink: 1;
+  width: var(--pl-field-icon-size);
+  height: var(--pl-field-icon-size);
+}
+
+.poly-input-field .helper-text {
+  padding-top: var(--pl-space-2x);
+  padding-bottom: var(--pl-space-1x);
+  padding-left: var(--pl-field-spacing-padding-hor);
+  padding-right: var(--pl-field-spacing-padding-hor);
+  font-size: var(--font-size-s);
+}
