@@ -1,4 +1,8 @@
 {
   "entryPoints": ["./src"],
-  "out": "docs"
+  "exclude": ["**/tests/*.ts"],
+  "out": "../../../docs/documentation/platform/feature-api/api",
+  "validation": {
+    "notExported": false
+  }
 }
