@@ -8,7 +8,7 @@ describe("File storage ", () => {
         const pod = new MockPod();
         fileStorage = new FeatureFileStorage(pod);
     });
-    it("can be instantiated", () => {
+    it("when instantiated there are no files stored", () => {
         expect(fileStorage.files).toBeNull;
     });
 });
