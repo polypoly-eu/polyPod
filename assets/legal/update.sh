@@ -1,3 +1,7 @@
 #!/bin/sh
-curl https://polypoly.coop/en-de/privacy-policy-polypod-plain/ > en/privacy-policy.html
-curl https://polypoly.coop/de-de/privacy-policy-polypod-plain/ > de/privacy-policy.html
+
+for i in en de da
+do
+    curl https://polypoly-citizens.eu/${i}/privacy-policy-polypod-plain/ > ${i}/privacy-policy.html
+done
+
