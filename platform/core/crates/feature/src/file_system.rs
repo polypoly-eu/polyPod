@@ -233,7 +233,7 @@ mod tests {
         Url::parse(
             &("file://".to_string()
                 + &env!("CARGO_MANIFEST_DIR").to_string()
-                + "../../../../../assets/test_files/test.zip"),
+                + "../../../../../dev-utils/test_files/test.zip"),
         )
         .unwrap()
     }
