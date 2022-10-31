@@ -7,7 +7,7 @@ const classData = [
 ];
 
 describe("Errors have the right API ", () => {
-    it("throws correctly", () => {
+    it("throw correctly their type errors", () => {
         classData.forEach(([testClass, testMsg]) => {
             const testCause = "test";
             try {
