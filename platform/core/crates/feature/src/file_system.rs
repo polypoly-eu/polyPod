@@ -308,7 +308,7 @@ mod tests {
     fn test_fs_path_from_resource_url() {
         let config = MockFSConfig::new();
 
-        let res_id = "polypod://FeatureFiles/".to_string() + ID;
+        let res_id = resource_url_from_id(ID);
         let result = fs_path_from_resource_url(&res_id, &config);
         assert!(result.is_ok());
 
