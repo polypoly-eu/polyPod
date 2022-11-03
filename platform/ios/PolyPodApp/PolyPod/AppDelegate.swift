@@ -6,6 +6,20 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    private class LogAdapter: CoreLog {
+        func debug(_ message: String) {
+            Log.debug(message)
+        }
+
+        func info(_ message: String) {
+            Log.info(message)
+        }
+
+        func error(_ message: String) {
+            Log.error(message)
+        }
+    }
+
     private static let updateNotificationCheckIdentifier = "coop.polypoly.polypod.updateNotificationCheck"
 
     func application(
@@ -56,6 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             create: false
         )
 
+        Core.instance.log = LogAdapter()
         switch Core.instance.bootstrap(
             args: .init(
                 languageCode: Language.current,

@@ -23,6 +23,7 @@ public struct BootstrapArgs: Encodable {
 /// Swift wrapper around the Rust Core.
 public final class Core {
     public static let instance = Core()
+    public var log: CoreLog?
     
     private init() {}
     
