@@ -4,9 +4,11 @@ import { LineLegend, BlockLegend, CircleLegend } from "../legends.jsx";
 
 import "./infographicLegend.css";
 
-/** Augments the different legend components with tooltips.
+/**
+ * Augments the different legend components with tooltips.
+ * @component
  * @param {Object} props
- * @param {Array[Object]} [props.legend] - an array of objects that combines the different
+ * @param {Array.<Object>} [props.legend] - an array of objects that combines the different
  * props for the legend components and the Tooltip component.
  * @returns {JSX.Element}
  */

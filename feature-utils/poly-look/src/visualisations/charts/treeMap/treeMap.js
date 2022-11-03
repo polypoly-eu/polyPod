@@ -12,10 +12,8 @@ const defaultPadding = 2,
   defaultOnUnfittingText = "";
 
 /**
- * Visualizes data as a tree map
- *
- * The data can be infinitely nested to visualize grouping
- *
+ * Visualizes data as a tree map.
+ * The data can be infinitely nested to visualize grouping.
  * @class
  * @extends Chart
  * @param {CSS-selector} selector - A CSS selector, where the svg will be attached to

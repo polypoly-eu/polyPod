@@ -18,18 +18,18 @@ function filterOptions(options, text) {
  * @param {Object} props
  * @param {Object} [props.initialSelection] - input value, has to contain
  * an id and value, leave empty if the dropdown is not pre-populated
- * @param {callback} [props.onChange] - onChange event handler
- * @param {string} [props.name] - input name, also acts as id
- * @param {string} [props.helperText] - input helper text
- * @param {string} [props.label] - input label
- * @param {number} [props.tabIndex] - input tabIndex, needed to make sure the
+ * @param {callback} props.onChange - onChange event handler
+ * @param {string} props.name - input name, also acts as id
+ * @param {string} props.helperText - input helper text
+ * @param {string} props.label - input label
+ * @param {number} props.tabIndex - input tabIndex, needed to make sure the
  * focus/blur internal logic works
- * @param {boolean} [props.error] - indicates if the input is in an error
+ * @param {boolean} props.error - indicates if the input is in an error
  * state or not
- * @param {boolean} [props.disabled] - indicates if the input is disabled
- * @param {Array[Object]} [props.options] - array containing the dropdown options,
+ * @param {boolean} props.disabled - indicates if the input is disabled
+ * @param {Array.<Object>} props.options - array containing the dropdown options,
  * an option should have an id and a value
- * @param {string} [props.noMatch] - text to be shown when there is no match
+ * @param {string} props.noMatch - text to be shown when there is no match
  * @returns {JSX.Element}
  */
 

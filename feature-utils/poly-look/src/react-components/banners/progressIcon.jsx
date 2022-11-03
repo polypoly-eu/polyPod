@@ -1,7 +1,10 @@
 import React from "react";
 
-/** Icon containing a dynamic svg representing 4 stages that change color
- *  based on the stage prop.
+/**
+ * Renders a progress icon containing a dynamic svg with
+ * a number of segments equal to the number of stages in the process
+ * that change color based on the stage prop.
+ * @component
  * @param {Object} props
  * @param {number} [props.stage] - How many stages to fill in
  * using activeColor prop.

@@ -2,11 +2,27 @@ import React from "react";
 import { linkRelatedAccountsWithOffFacebookCompanies } from "../utils/on-off-events-matching.js";
 import { RootAnalysis } from "@polypoly-eu/poly-analysis";
 
+/**
+ * It looks for advertisers that have both on- and off-Facebook events in the data
+ * @class OnOffFacebookAdvertisersAnalysis
+ */
 export default class OnOffFacebookAdvertisersAnalysis extends RootAnalysis {
+    /**
+     * It returns the title of the page.
+     * @methodof OnOffFacebookAdvertisersAnalysis
+     * @returns The title of the page.
+     */
     get title() {
         return "On and Off-Facebook Advertisers";
     }
 
+    /**
+     * It takes a data account, finds all the advertisers that have both on- and off-Facebook data, and
+     * returns a list of those advertisers
+     * @methodof OnOffFacebookAdvertisersAnalysis
+     * @param {dataAccount} - A data account of user
+     * @returns A list of advertisers
+     */
     async analyze({ dataAccount }) {
         const advertiserMatches =
             linkRelatedAccountsWithOffFacebookCompanies(dataAccount);
@@ -20,6 +36,11 @@ export default class OnOffFacebookAdvertisersAnalysis extends RootAnalysis {
         this.active = this._commonAdvertisersData.length > 0;
     }
 
+    /**
+     * It returns a React component that renders a paragraph and a table
+     * @methodof OnOffFacebookAdvertisersAnalysis
+     * @returns A React fragment.
+     */
     renderSummary() {
         return (
             <>

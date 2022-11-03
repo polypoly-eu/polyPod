@@ -6,7 +6,7 @@ import React from "react";
  *
  * I provide the same API as an analysis that should be included in a report.
  *
- * @class
+ * @class MinistoriesStatusReport
  */
 export default class MinistoriesStatusReport {
     constructor({ ministories, title, description }) {

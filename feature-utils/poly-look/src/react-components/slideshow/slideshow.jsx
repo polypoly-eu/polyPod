@@ -4,9 +4,11 @@ import SwiperCore, { Pagination } from "swiper";
 
 import "./slideshow.css";
 
-/** Slideshow used to display images.
+/**
+ * It takes in an array of images and returns a slideshow.
+ * @component
  * @param {Object} props
- * @param {Array[string]} [props.images] - Array that contains the urls of the
+ * @param {Array.<String>} [props.images] - Array that contains the urls of the
  * images that will be displayed.
  * @returns {JSX.Element}
  */

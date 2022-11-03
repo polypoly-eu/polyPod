@@ -362,13 +362,16 @@ class PodJsInfo implements Info {
     }
 }
 
+/**
+ * @interface NetworkResponse
+ */
 interface NetworkResponse {
     payload?: string;
     error?: string;
 }
 
 /**
- * BrowserNetwork makes network requests using XMLHttpRequest
+ * BrowserNetwork makes network requests using XMLHttpRequest.
  * @class BrowserNetwork
  */
 class BrowserNetwork {
@@ -377,6 +380,7 @@ class BrowserNetwork {
      * And returns the network response as a promise.
      * @param {string} url - The URL to which the request is sent.
      * @param {string} body - The body of the request.
+     * @param {boolean} allowInsecure - The boolean value whether allow insecure.
      * @param {string} [contentType] - The content type of the request.
      * @param {string} [authToken] - The token to use for authentication.
      * @returns A Promise of the Network Response of the call that was executed.
@@ -401,9 +405,10 @@ class BrowserNetwork {
     /**
      * It makes a GET request to the specified URL, and returns the response
      * @param {string} url - The URL to fetch.
+     * @param {boolean} allowInsecure - The boolean value whether allow insecure.
      * @param {string} [contentType] - The content type of the request.
      * @param {string} [authToken] - The token to use for authentication.
-     * @returns A promise.
+     * @returns A promise that resolves to the NetworkResponse
      */
     async httpGet(
         url: string,
@@ -421,13 +426,14 @@ class BrowserNetwork {
     }
 
     /**
-     * It makes a network request of type @type and returns the response
+     * It makes a network request of type passed and returns the response [[NetworkResponse]]
      * @param {string} type - The HTTP method to use.
      * @param {string} url - The URL to fetch.
+     * @param {boolean} allowInsecure - The boolean value whether allow insecure.
      * @param {string} [body] - The body of the request.
      * @param {string} [contentType] - The content type of the request.
      * @param {string} [authToken] - The token to use for authentication.
-     * @returns The promise is resolved with a NetworkResponse object.
+     * @returns {Promise<NetworkResponse>} The promise is resolved with a NetworkResponse object.
      */
     private async httpFetchRequest(
         type: string,
@@ -534,7 +540,7 @@ function endpointErrorMessage(fetchType: string, errorlog: string): string {
 }
 
 /**
- * @class BrowserEndpoint
+ * @class BrowserEndpoint @implements [[Endpoint]]
  */
 class BrowserEndpoint implements Endpoint {
     endpointNetwork = new BrowserNetwork();
@@ -590,7 +596,7 @@ class BrowserEndpoint implements Endpoint {
 }
 
 /**
- * @class `BrowserPolyNavPolyNav`
+ * @class `BrowserPolyNavPolyNav` @implements [[PolyNav]]
  */
 class BrowserPolyNav implements PolyNav {
     actions?: { [key: string]: () => void };
@@ -773,7 +779,8 @@ function createNavBarFrame(title: string): HTMLElement {
 }
 
 /**
- * The @class BrowserPod is a Pod that uses the browser's local storage to store polyIn and polyOut data
+ * The @class BrowserPod @implements a [[Pod]]
+ * that uses the browser's local storage to store polyIn and polyOut data
  */
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;

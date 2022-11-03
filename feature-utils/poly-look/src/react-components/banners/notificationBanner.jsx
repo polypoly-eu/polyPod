@@ -15,15 +15,22 @@ export const notificationTypes = {
 };
 
 /**
- * Notification Banner component - also used as a pop-up.
+ * Callback for handling the click event to close notification.
  *
- * @param {jsx} children JSX elements displayed inside the banner as a notification message.
- * @param {string} notificationType The notification type defines the styles and icon used in the component.
- * There are currently four notification options: standard, success, error and warning.
- * @param {callback} handleCloseNotification onClick function to close the notification.
- * @returns jsx
+ * @callback notificationCallback
+ * @param {React.MouseEventHandler<HTMLImageElement>} clickEvent - mouse event action.
  */
 
+/**
+ * Notification Banner component - also used as a pop-up.
+ * @component
+ * @param {Object} props
+ * @param {JSX} [props.children] JSX elements displayed inside the banner as a notification message.
+ * @param {String} [props.notificationType] The notification type defines the styles and icon used in the component.
+ * There are currently four notification options: standard, success, error and warning.
+ * @param {notificationCallback} [props.handleCloseNotification] onClick function to close the notification.
+ * @returns {JSX.Element}
+ */
 export function NotificationBanner({
   children,
   notificationType,
