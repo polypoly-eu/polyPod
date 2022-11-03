@@ -121,6 +121,7 @@ class PostOffice {
         if response != nil {
             dict["response"] = response
         }
+        
         if error != nil {
             dict["error"] = error
         }
@@ -566,7 +567,7 @@ extension PostOffice {
             payload: payload, 
             contentType: contentType, 
             authToken: authToken) { error in
-                completionHandler(.nil, error == nil ? nil : createErrorResponse(#function, error!))
+                completionHandler(MessagePackValue.nil, error == nil ? .none : .some(createErrorResponse(#function, error!)))
         }
     }
     
