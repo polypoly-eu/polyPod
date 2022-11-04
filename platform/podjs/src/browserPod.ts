@@ -126,6 +126,7 @@ class BrowserPolyIn implements PolyIn {
         await writeOxigraphStore(store);
     }
 
+    /** @inheritdoc */
     async delete(quad: RDF.Quad): Promise<void> {
         const store = await oxigraphStore;
         this.checkQuad(quad);
@@ -133,6 +134,7 @@ class BrowserPolyIn implements PolyIn {
         await writeOxigraphStore(store);
     }
 
+    /** @inheritdoc */
     async has(quad: RDF.Quad): Promise<boolean> {
         const store = await oxigraphStore;
         this.checkQuad(quad);
@@ -145,10 +147,12 @@ class BrowserPolyIn implements PolyIn {
  * @class BrowserTriplestore
  */
 class BrowserTriplestore implements Triplestore {
+    /** @inheritdoc */
     async query(query: string): Promise<SPARQLQueryResult> {
         return (await oxigraphStore).query(query);
     }
 
+    /** @inheritdoc */
     async update(query: string): Promise<void> {
         const store = await oxigraphStore;
         store.update(query);
@@ -197,6 +201,9 @@ class FileUrl {
     }
 }
 
+/**
+ * @interface FileInfo
+ */
 interface FileInfo {
     id: string;
     name: string;
@@ -207,6 +214,7 @@ interface FileInfo {
 /**
  * It implements the PolyOut interface by storing files in IndexedDB
  * @class IDBPolyOut
+ * @implements PolyOut
  */
 class BrowserPolyOut implements PolyOut {
     private async getFileInfos(id: string): Promise<FileInfo[]> {
@@ -277,15 +285,18 @@ class BrowserPolyOut implements PolyOut {
         };
     }
 
+    /** @inheritdoc */
     async readFile(id: string): Promise<Uint8Array> {
         return (await this.getFile(id)).read();
     }
 
+    /** @inheritdoc */
     async stat(id: string): Promise<Stats> {
         if (id != "") return (await this.getFile(id)).stat();
         return { id: "", size: 0, time: "", name: "", directory: true };
     }
 
+    /** @inheritdoc */
     async readDir(id: string): Promise<Entry[]> {
         if (id != "") {
             const entries = await this.getZipEntries(id);
@@ -305,10 +316,12 @@ class BrowserPolyOut implements PolyOut {
         });
     }
 
+    /** @inheritdoc */
     writeFile(): Promise<void> {
         throw "Not implemented: writeFile";
     }
 
+    /** @inheritdoc */
     async importArchive(url: string, destUrl?: string): Promise<string> {
         const { data: dataUrl, fileName } = FileUrl.fromUrl(url);
         const blob = await (await fetch(dataUrl)).blob();
@@ -333,6 +346,7 @@ class BrowserPolyOut implements PolyOut {
         });
     }
 
+    /** @inheritdoc */
     async removeArchive(id: string): Promise<void> {
         const db = await openDatabase();
         return new Promise((resolve, reject) => {
@@ -357,12 +371,15 @@ class BrowserPolyOut implements PolyOut {
 /**
  * PodJsInfo is used to return the runtime name and a version of PodJs
  * @class PodJsInfo
+ * @implements Info
  */
 class PodJsInfo implements Info {
+    /** @inheritdoc */
     async getRuntime(): Promise<string> {
         return "podjs";
     }
 
+    /** @inheritdoc */
     async getVersion(): Promise<string> {
         return "¯\\_(ツ)_/¯";
     }
@@ -496,18 +513,21 @@ class BrowserNetwork {
     }
 }
 
+/** @interface EndpointInfo */
 interface EndpointInfo {
     url: string;
     auth: string;
     allowInsecure: boolean;
 }
 
+/** @interface EndpointJSON */
 interface EndpointJSON {
     polyPediaReport: EndpointInfo;
     polyApiErrorReport: EndpointInfo;
     demoTest: EndpointInfo;
 }
 
+/** @alias EndpointKeyId */
 type EndpointKeyId = keyof EndpointJSON;
 
 /**
@@ -515,7 +535,7 @@ type EndpointKeyId = keyof EndpointJSON;
  * found.
  *
  * @param {EndpointKeyId} endpointId - The endpoint ID that you want to get the endpoint info for.
- * @returns EndpointInfo | null
+ * @returns {EndpointInfo} - EndpointInfo or null
  */
 function getEndpoint(endpointId: EndpointKeyId): EndpointInfo | null {
     return (endpointsJson as unknown as EndpointJSON)[endpointId] || null;
@@ -551,6 +571,7 @@ function endpointErrorMessage(fetchType: string, errorlog: string): string {
 class BrowserEndpoint implements Endpoint {
     endpointNetwork = new BrowserNetwork();
 
+    /** @inheritdoc */
     async send(
         endpointId: EndpointKeyId,
         payload: string,
@@ -575,6 +596,7 @@ class BrowserEndpoint implements Endpoint {
         }
     }
 
+    /** @inheritdoc */
     async get(
         endpointId: EndpointKeyId,
         contentType?: string,
@@ -613,8 +635,8 @@ class BrowserPolyNav implements PolyNav {
     private popStateListener: // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ((this: Window, ev: PopStateEvent) => any) | undefined;
 
+    /** @inheritdoc */
     async openUrl(url: string): Promise<void> {
-        console.log(`polyNav: Attempt to open URL: ${url}`);
         const targetLink = (window.manifest?.links as Record<string, string>)[
             url
         ];
@@ -626,6 +648,7 @@ class BrowserPolyNav implements PolyNav {
         }
     }
 
+    /** @inheritdoc */
     async setActiveActions(actions: string[]): Promise<void> {
         if (actions.includes("back"))
             window.history.pushState(document.title, document.title);
@@ -663,6 +686,7 @@ can also navigate backwards using the browser's back functionality.`
         window.addEventListener("popstate", this.popStateListener);
     }
 
+    /** @inheritdoc */
     async setTitle(title: string): Promise<void> {
         window.currentTitle = title;
         const injection = document.getElementById(
@@ -671,6 +695,7 @@ can also navigate backwards using the browser's back functionality.`
         injection?.contentWindow?.postMessage(title, "*");
     }
 
+    /** @inheritdoc */
     async pickFile(type?: string): Promise<ExternalFile | null> {
         return new Promise((resolve) => {
             const fileInput = document.createElement("input");
@@ -757,7 +782,7 @@ function determineNavBarColors(manifest: Manifest): { fg: string; bg: string } {
 /**
  * Create a new iframe with a title and a background color
  * @param {string} title - The title of the page.
- * @returns A promise that resolves to a DOM element.
+ * @returns {HTMLElement} - The new DOM element.
  */
 function createNavBarFrame(title: string): HTMLElement {
     const frame = document.createElement("iframe");
@@ -785,8 +810,9 @@ function createNavBarFrame(title: string): HTMLElement {
 }
 
 /**
- * The @class BrowserPod @implements a [[Pod]]
- * that uses the browser's local storage to store polyIn and polyOut data
+ * @class BrowserPod
+ * @implements a [[Pod]]
+ * @classdesc It uses the browser's local storage to store polyIn and polyOut data
  */
 export class BrowserPod implements Pod {
     public readonly dataFactory = dataFactory;

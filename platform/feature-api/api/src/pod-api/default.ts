@@ -35,21 +35,12 @@ export class DefaultPolyOut implements PolyOut {
      */
     constructor(public readonly fs: IFs["promises"]) {}
 
-    /**
-     * It reads the file of the `path` given and returns its buffer.
-     * @param {string} path - The path to the file you want to read.
-     * @returns A promise that resolves to a buffer.
-     */
+    /** @inheritdoc */
     async readFile(path: string): Promise<Buffer> {
         return (await this.fs.readFile(path)) as Buffer;
     }
 
-    /**
-     * It reads the directory at the given path, and returns a promise that resolves to an array of
-     * objects, each of which has an id and a path
-     * @param {string} path - The path to the directory you want to read.
-     * @returns A promise that resolves to an array of Entry objects.
-     */
+    /** @inheritdoc */
     readDir(path: string): Promise<Entry[]> {
         const newFiles = this.fs.readdir(path).then((files) => {
             const objectFiles = files.map((file) => ({
@@ -63,12 +54,7 @@ export class DefaultPolyOut implements PolyOut {
         return newFiles;
     }
 
-    /**
-     * It returns the stats of the file's id, size, time, name, and
-     * whether or not it's a directory
-     * @param {string} path - The path to the file or directory.
-     * @returns {Stats} A promise that resolves to an Stats object
-     */
+    /** @inheritdoc */
     async stat(path: string): Promise<Stats> {
         const stats = await this.fs.stat(path);
         return {
@@ -80,22 +66,19 @@ export class DefaultPolyOut implements PolyOut {
         };
     }
 
-    /**
-     * Write the given content to the given file path.
-     * @param {string} path - The path to the file to write to.
-     * @param {string} content - The content to write to the file.
-     * @returns A promise that resolves to a string.
-     */
-    writeFile(path: string, content: string): Promise<void> {
+    /** @inheritdoc */
+    async writeFile(path: string, content: string): Promise<void> {
         return this.fs.writeFile(path, content);
     }
 
+    /** @inheritdoc */
     async importArchive(url: string, destUrl?: string): Promise<string> {
         throw new Error(
             `Called with ${url} and ${destUrl}, but not implemented`
         );
     }
 
+    /** @inheritdoc */
     async removeArchive(fileId: string): Promise<void> {
         throw new Error(`Called with ${fileId}, but not implemented`);
     }
@@ -146,7 +129,7 @@ export class DefaultPod implements Pod {
 
     /**
      * The [[PolyIn]] interface. See [[PolyIn]] for the description.
-     * @returns {PolyIn} Triplestore
+     * @returns {PolyIn} the PolyIn interface
      */
     get polyIn(): PolyIn {
         return {
@@ -176,13 +159,16 @@ export class DefaultPod implements Pod {
 
     /**
      * The [[Triplestore]] interface. See [[Triplestore]] for the description
-     * @returns {Triplestore} Triplestore
+     * @returns {Triplestore} the Triplestore interface
      */
     get triplestore(): Triplestore {
         return {
+            /** @inheritdoc */
             query: async (query: string) => {
                 throw new Error(`Called with ${query}, but not implemented`);
             },
+
+            /** @inheritdoc */
             update: async (query: string) => {
                 throw new Error(`Called with ${query}, but not implemented`);
             },
@@ -191,7 +177,7 @@ export class DefaultPod implements Pod {
 
     /**
      * The [[PolyNav]] interface. See [[PolyNav]] for the description.
-     * @returns {PolyNav} PolyNav
+     * @returns {PolyNav} the PolyNav interface
      */
     get polyNav(): PolyNav {
         return {
@@ -209,6 +195,7 @@ export class DefaultPod implements Pod {
             },
         };
     }
+
     /**
      * The [[Info]] interface. See [[Info]] for the description.
      * @returns {Info} info of the pod
@@ -223,6 +210,7 @@ export class DefaultPod implements Pod {
             },
         };
     }
+
     /**
      * The [[Endpoint]] interface. See [[Endpoint]] for the description.
      * @returns {Endpoint} endpoint of the pod

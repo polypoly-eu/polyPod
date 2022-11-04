@@ -48,7 +48,10 @@ export abstract class Model {
 }
 
 /**
- * `NamedNode` is a class that represents an [[RDF.NamedNode]].
+ * @class `NamedNode`
+ * @classdesc It is a class that represents an [[RDF.NamedNode]].
+ * @implements RDF.NamedNode
+ * @extends Model
  */
 export class NamedNode<Iri extends string = string>
     extends Model
@@ -95,6 +98,10 @@ export class BlankNode extends Model implements RDF.BlankNode {
  * A representation of a string with an optional language tag or datatype
  */
 export class Literal extends Model implements RDF.Literal {
+    language: string;
+    datatype: RDF.NamedNode;
+    termType: "Literal" = "Literal";
+
     static readonly langStringDatatype = new NamedNode(
         "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
     );
@@ -102,16 +109,13 @@ export class Literal extends Model implements RDF.Literal {
         "http://www.w3.org/2001/XMLSchema#string"
     );
 
-    language: string;
-    datatype: RDF.NamedNode;
-    termType: "Literal" = "Literal";
-
     /**
      * It creates a new Literal instance.
      * If the languageOrDatatype parameter is a string, then it's either a language tag or a datatype URI.
      * If it's a language tag, then set the language property to the language tag and the datatype property
-     * to the language string datatype. If it's a datatype URI, then set the language property to an empty
-     * string and the datatype property to a new NamedNode with the datatype URI.
+     * to the language string datatype.
+     * If it's a datatype URI, then set the language property to an empty string and the datatype property
+     * to a new NamedNode with the datatype URI.
      * If the languageOrDatatype parameter is not a string, then set the language property to an empty string
      * and the datatype property to the languageOrDatatype parameter or the string datatype if the languageOrDatatype
      * parameter is undefined.
@@ -199,12 +203,7 @@ export class Quad implements RDF.Quad {
         Object.freeze(this);
     }
 
-    /**
-     * `equals` returns true if `other` is a quad with the same subject, predicate, object, and graph as
-     * `this`
-     * @param {RDF.Term | null | undefined} other - the other object to compare against `this`
-     * @returns A boolean value.
-     */
+    /** @inheritdoc */
     equals(other: RDF.Term | null | undefined): boolean {
         // `|| !other.termType` is for backwards-compatibility with old factories without RDF* support.
         return (
@@ -289,21 +288,12 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
         return new BlankNode(value);
     }
 
-    /**
-     * It returns the instance of the singleton.
-     * @returns {DefaultGraph} DefaultGraph.instance
-     */
+    /** @inheritdoc */
     defaultGraph(): DefaultGraph {
         return DefaultGraph.instance;
     }
 
-    /**
-     * It creates a new Literal object, and if the strict flag is set, it checks the input parameters for
-     * type correctness
-     * @param {string} value - The value of the literal.
-     * @param {string | NamedNode} [languageOrDatatype] - The language or datatype of the literal.
-     * @returns {Literal} - A new Literal object.
-     */
+    /** @inheritdoc */
     literal(value: string, languageOrDatatype?: string | NamedNode): Literal {
         if (this.strict) {
             if (typeof value !== "string")
@@ -323,13 +313,7 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
         return new Literal(value, languageOrDatatype);
     }
 
-    /**
-     * It returns a new NamedNode of the `value` passed.
-     *
-     * @param {Iri} value - The value of the node.
-     * @throws Error If the strict flag is set and the value is not a string
-     * @returns A new instance of the NamedNode class.
-     */
+    /** @inheritdoc */
     namedNode<Iri extends string = string>(value: Iri): NamedNode<Iri> {
         if (this.strict) {
             if (typeof value !== "string") throw new Error("Expected string");
@@ -338,14 +322,7 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
         return new NamedNode(value);
     }
 
-    /**
-     * It creates a new [[Quad]]
-     * @param {RDF.Quad_Subject} subject - The subject of the quad.
-     * @param {RDF.Quad_Predicate} predicate - RDF.Quad_Predicate
-     * @param {RDF.Quad_Object} object - RDF.Quad_Object
-     * @param {RDF.Quad_Graph} [graph] - The graph of the quad.
-     * @returns {Quad} A new Quad object.
-     */
+    /** @inheritdoc */
     quad(
         subject: RDF.Quad_Subject,
         predicate: RDF.Quad_Predicate,
@@ -376,13 +353,7 @@ export class DataFactory implements RDF.DataFactory<Quad, Quad> {
         );
     }
 
-    /**
-     * It returns a new [[Variable]] object with the `value`.
-     *
-     * @param {string} value - The value of the variable.
-     * @throws Error If the stict flag is on and `value` is not a string
-     * @returns A new instance of the Variable class.
-     */
+    /** @inheritdoc */
     variable(value: string): Variable {
         if (this.strict) {
             if (typeof value !== "string") throw new Error("Expected string");
