@@ -103,6 +103,12 @@ async function writeOxigraphStore(store: oxigraph.Store): Promise<void> {
  * @class IDBPolyIn
  */
 class BrowserPolyIn implements PolyIn {
+    private checkQuad(quad: RDF.Quad): void {
+        if (quad.graph.termType != "DefaultGraph")
+            throw new Error("Only default graph allowed");
+    }
+
+    /** @inheritdoc */
     async match(matcher: Partial<Matcher>): Promise<RDF.Quad[]> {
         return (await oxigraphStore).match(
             matcher.subject,
@@ -112,11 +118,7 @@ class BrowserPolyIn implements PolyIn {
         );
     }
 
-    private checkQuad(quad: RDF.Quad): void {
-        if (quad.graph.termType != "DefaultGraph")
-            throw new Error("Only default graph allowed");
-    }
-
+    /** @inheritdoc */
     async add(quad: RDF.Quad): Promise<void> {
         const store = await oxigraphStore;
         this.checkQuad(quad);
@@ -138,6 +140,10 @@ class BrowserPolyIn implements PolyIn {
     }
 }
 
+/**
+ * It implements the `Triplestore` interface for Browser
+ * @class BrowserTriplestore
+ */
 class BrowserTriplestore implements Triplestore {
     async query(query: string): Promise<SPARQLQueryResult> {
         return (await oxigraphStore).query(query);
@@ -376,56 +382,6 @@ interface NetworkResponse {
  */
 class BrowserNetwork {
     /**
-     * It makes a POST request to the specified URL, with a body, a content type, and an auth token.
-     * And returns the network response as a promise.
-     * @param {string} url - The URL to which the request is sent.
-     * @param {string} body - The body of the request.
-     * @param {boolean} allowInsecure - The boolean value whether allow insecure.
-     * @param {string} [contentType] - The content type of the request.
-     * @param {string} [authToken] - The token to use for authentication.
-     * @returns A Promise of the Network Response of the call that was executed.
-     */
-    async httpPost(
-        url: string,
-        body: string,
-        allowInsecure: boolean,
-        contentType?: string,
-        authToken?: string
-    ): Promise<NetworkResponse> {
-        return await this.httpFetchRequest(
-            "Post",
-            url,
-            allowInsecure,
-            body,
-            contentType,
-            authToken
-        );
-    }
-
-    /**
-     * It makes a GET request to the specified URL, and returns the response
-     * @param {string} url - The URL to fetch.
-     * @param {boolean} allowInsecure - The boolean value whether allow insecure.
-     * @param {string} [contentType] - The content type of the request.
-     * @param {string} [authToken] - The token to use for authentication.
-     * @returns A promise that resolves to the NetworkResponse
-     */
-    async httpGet(
-        url: string,
-        allowInsecure: boolean,
-        contentType?: string,
-        authToken?: string
-    ): Promise<NetworkResponse> {
-        return await this.httpFetchRequest(
-            "GET",
-            url,
-            allowInsecure,
-            contentType,
-            authToken
-        );
-    }
-
-    /**
      * It makes a network request of type passed and returns the response [[NetworkResponse]]
      * @param {string} type - The HTTP method to use.
      * @param {string} url - The URL to fetch.
@@ -487,6 +443,56 @@ class BrowserNetwork {
             // Request.send must be executed, so this works even if body is null
             request.send(body);
         });
+    }
+
+    /**
+     * It makes a POST request to the specified URL, with a body, a content type, and an auth token.
+     * And returns the network response as a promise.
+     * @param {string} url - The URL to which the request is sent.
+     * @param {string} body - The body of the request.
+     * @param {boolean} allowInsecure - The boolean value whether allow insecure.
+     * @param {string} [contentType] - The content type of the request.
+     * @param {string} [authToken] - The token to use for authentication.
+     * @returns A Promise of the Network Response of the call that was executed.
+     */
+    async httpPost(
+        url: string,
+        body: string,
+        allowInsecure: boolean,
+        contentType?: string,
+        authToken?: string
+    ): Promise<NetworkResponse> {
+        return await this.httpFetchRequest(
+            "Post",
+            url,
+            allowInsecure,
+            body,
+            contentType,
+            authToken
+        );
+    }
+
+    /**
+     * It makes a GET request to the specified URL, and returns the response
+     * @param {string} url - The URL to fetch.
+     * @param {boolean} allowInsecure - The boolean value whether allow insecure.
+     * @param {string} [contentType] - The content type of the request.
+     * @param {string} [authToken] - The token to use for authentication.
+     * @returns A promise that resolves to the NetworkResponse
+     */
+    async httpGet(
+        url: string,
+        allowInsecure: boolean,
+        contentType?: string,
+        authToken?: string
+    ): Promise<NetworkResponse> {
+        return await this.httpFetchRequest(
+            "GET",
+            url,
+            allowInsecure,
+            contentType,
+            authToken
+        );
     }
 }
 
