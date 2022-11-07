@@ -3,7 +3,7 @@ import { Telemetry } from "../utils/performance-telemetry";
 
 export class Importer {
     async import({ zipFile, dataAccount }) {
-        throw new Error(
+        throw new TypeError(
             `Calling abstract base class with ${zipFile}, ${dataAccount}`
         );
     }

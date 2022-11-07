@@ -43,6 +43,7 @@ describe("Report metadata analysis", () => {
                 ),
             ],
         ]);
+        console.log(zipFile);
         const { facebookAccount, analysisResult } = await runAnalysisForExport(
             ReportMetadataAnalysis,
             zipFile

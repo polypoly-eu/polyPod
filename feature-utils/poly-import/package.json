@@ -6,5 +6,15 @@
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "test": "jest --coverage"
+  },
+  "jest": {
+    "verbose": true,
+    "transform": {
+      "\\.[jt]sx?$": "babel-jest"
+    },
+    "testEnvironment": "jsdom"
+  },
+  "devDependencies": {
+    "@polypoly-eu/api": "file:../../platform/feature-api/api"
   }
 }
