@@ -96,6 +96,14 @@ sources for this configuration:
 * [`.editorconfig`](.editorconfig) for general editor configuration.
 * [`.eslintrc.cjs`](.eslintrc.cjs) for specific JS/TS linting rules.
 
+## Documentation
+
+To generate the source code documentation, run:
+
+    $ ./build.js doc
+
+For a complete overview, see [docs/README.md](docs/README.md).
+
 ## Branches
 
 Ongoing development is happening in the `main` branch. We aim to keep it stable
