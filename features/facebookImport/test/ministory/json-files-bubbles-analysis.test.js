@@ -41,6 +41,6 @@ describe("JSON files analysis for non-empty zip", () => {
     });
 
     it("has the right message count", () => {
-        expect(analysis._filesMessagesCount).toHaveLength(10);
+        expect(analysis._filesMessagesCount).toHaveLength(11);
     });
 });
