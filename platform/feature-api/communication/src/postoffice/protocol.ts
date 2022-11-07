@@ -12,7 +12,9 @@
  */
 
 /**
- * A function call representing the name of a method (of type string) and an array of arguments (of any type).
+ * A function call representing the name of a method (of type string)
+ * and an array of arguments (of any type).
+ * @interface BackendRequestPart
  */
 export interface BackendRequestPart {
     readonly method: string;
@@ -22,17 +24,21 @@ export interface BackendRequestPart {
 
 /**
  * A request comprising a chain of function calls.
+ * @alias BackendRequest
  */
 export type BackendRequest = BackendRequestPart[];
 
 /**
  * A response representing the return value of a function call.
+ * @alias BackendResponse
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type BackendResponse = any;
 
 /**
- * Function type representing the protocol: [[BackendRequest]] comes in, [[BackendResponse]] goes out.
+ * Function type representing the protocol:
+ * [[BackendRequest]] comes in, [[BackendResponse]] goes out.
+ * @alias BackendProcedure
  */
 export type BackendProcedure = (
     req: BackendRequest

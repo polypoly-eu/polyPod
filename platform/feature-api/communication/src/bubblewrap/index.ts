@@ -20,6 +20,7 @@
  *    for subclasses of `Error`
  *
  * @packageDocumentation
+ * @module Bubblewrap
  */
 
 import { encode, decode, ExtensionCodec } from "@msgpack/msgpack";
@@ -27,23 +28,40 @@ import { encode, decode, ExtensionCodec } from "@msgpack/msgpack";
 /**
  * Symbol for static class methods that provide custom deserialization logic. See [[Class]] for an example.
  * Making them a symbol excludes from conversion, that's the whole point of it.
+ * @const deserialize
  */
 export const deserialize: unique symbol = Symbol();
 
 /**
  * Symbol for class methods that provide custom serialization logic. See [[Class]] for an example.
+ * @const serialize
  */
 export const serialize: unique symbol = Symbol();
 
+/**
+ * Defining an interface that has a method called serialize.
+ * @interface MaybeSerializable
+ */
 interface MaybeSerializable<TS = unknown> {
     [serialize]?: () => TS;
 }
 
+/**
+ * Defining an interface called Serializable. It is extending the MaybeSerializable interface.
+ * It is defining a method called serialize.
+ * @interface Serializable
+ */
 interface Serializable<TS = unknown> extends MaybeSerializable {
     [serialize]: () => TS;
 }
 
-// Type guard for Serializable
+/**
+ * Type guard for Serializable.
+ * If the object has a serialize method, then it is a Serializable object.
+ * @param {MaybeSerializable} t - MaybeSerializable - this is the type of the parameter that we're
+ * checking.
+ * @returns A function that takes a MaybeSerializable and returns a boolean.
+ */
 function isSerializable(t: MaybeSerializable): t is Serializable {
     return t[serialize] !== undefined;
 }
@@ -84,8 +102,7 @@ function isSerializable(t: MaybeSerializable): t is Serializable {
  * In the simplest case, a class' author does not have to implement any additional methods. Encoding will still use
  * `Object.entries`, but will additionally include the object's prototype.
  *
- * Applied to the above example, the object will be encoded as follows:
- *
+ * @example <caption>Applied to the above example, the object will be encoded as follows:</caption>
  * ```
  * encode(new MyCoolClass("World")) ≡ encode(["MyCoolClass", { subject: "World" }])
  * ```
@@ -97,13 +114,12 @@ function isSerializable(t: MaybeSerializable): t is Serializable {
  * decode(encoded) ≡ Object.create(MyCoolClass.prototype, { subject: "World" })
  * ```
  *
- * In some situations, this default logic is not sufficient. It may not work when complex class hierarchies are
+ * @example <caption>In some situations, this default logic is not sufficient. It may not work when complex class hierarchies are
  * involved.
  *
  * The logic can be further tweaked by providing additional methods. These methods must have well-known names that are
  * specified by the [[serialize]] and [[deserialize]] symbols. The following class illustrates this using a subclass
- * of `Error`:
- *
+ * of `Error`: </caption>
  * ```
  * class MyError extends Error {
  *    constructor(
@@ -141,6 +157,7 @@ function isSerializable(t: MaybeSerializable): t is Serializable {
  *
  * It is not possible to customize this behaviour for arrays, raw objects, or `undefined` values nested below objects
  * of registered classes.
+ * @alias Class A class that can be registered to [[Bubblewrap]].
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Class<T extends MaybeSerializable> = Function & {
@@ -152,9 +169,8 @@ export type Class<T extends MaybeSerializable> = Function & {
 /**
  * A dictionary of known classes.
  *
- * The keys in this record serve as class identifiers. Consequently, it is strongly recommended to qualify the keys, for
- * example with the npm package name:
- *
+ * @example <caption>The keys in this record serve as class identifiers. Consequently, it is strongly recommended to qualify the keys, for
+ * example with the npm package name:</caption>
  * ```
  * import {MyDomainClass} from "@myorg/pkg";
  *
@@ -169,6 +185,8 @@ export type Class<T extends MaybeSerializable> = Function & {
  * brittle.
  *
  * See [[Bubblewrap]] for how to register classes.
+ *
+ * @alias Classes
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Classes = Record<string, Class<any>>;
@@ -181,11 +199,14 @@ export const msgPackEtypeError = 0x03;
  * Sentinel class used to represent `undefined` in the MessagePack data model.
  *
  * This class has no properties.
+ * @class Undefined
  */
 export class Undefined {}
 
 /**
- * Encoding and decoding of JavaScript values to and from byte arrays.
+ * It's a wrapper around the msgpack-lite library that
+ * allows you to encode and decode JavaScript objects with custom prototypes
+ * to and from byte arrays.
  *
  * An instance of this class manages two pieces of state:
  *
@@ -201,11 +222,18 @@ export class Undefined {}
  *
  * It is crucial that in any given application, class keys are not reused. They are required for identifying custom
  * (de)serialization logic. Keys of registered classes are stored
+ * @class Bubblewrap
  */
 export class Bubblewrap {
     codec: ExtensionCodec;
     knownPrototypes: Array<unknown>;
 
+    /**
+     * It creates a new instance of the `Codec` class, and registers it with the `Codec` class itself
+     * @param {Classes} classes - This is a map of all the classes that you want to be able to serialize
+     * and deserialize.
+     * @param {boolean} strict - boolean
+     */
     private constructor(
         private readonly classes: Classes,
         private readonly strict: boolean
@@ -220,23 +248,28 @@ export class Bubblewrap {
     }
 
     /**
-     * Creates a new instance of [[Bubblewrap]] with the specified dictionary of registered classes.
-     *
+     * Creates a new instance of [[Bubblewrap]] with the specified dictionary of registered classes, and return it.
      * If no dictionary is specified, no classes are registered.
      * Classes will need to be added later via [[addClasses]]
-     *
-     * @param strict if `true`, then `encode` will throw an exception when encountering any object with an unknown
-     * prototype; this is only recommended for testing purposes
+     * @static
+     * @param {Classes} [classes] - An object containing the classes you want to use.
+     * @param  [strict=false] - If `true`, then Bubblewrap `encode` will throw an exception
+     * when encountering any object with an unknown prototype (adding class that doesn't exist).
+     * this is only recommended for testing purposes.
+     * @returns A new instance of Bubblewrap.
      */
     static create(classes?: Classes, strict = false): Bubblewrap {
         return new Bubblewrap(classes || {}, strict);
     }
 
     /**
-     * Constructs a new, independent [[Bubblewrap]] instance with additional registered classes.
+     * It takes a dictionary of classes and constructs a new, independent [[Bubblewrap]] instance
+     * with the new additional registered classes.
      * TODO: Find out why this creates an additional object
      *
-     * This method throws an exception if there is a duplicate class identifier.
+     * @param {Classes} more - Classes
+     * @returns A new Bubblewrap object with the new classes added to the existing classes.
+     * @throws {Error} if there is a duplicate class identifier.
      */
     addClasses(more: Classes): Bubblewrap {
         const thisKeys = Object.keys(this.classes);
@@ -247,6 +280,18 @@ export class Bubblewrap {
         return new Bubblewrap({ ...this.classes, ...more }, this.strict);
     }
 
+    /**
+     * It creates a new `ExtensionCodec` and registers three extensions:
+     *
+     * - `msgPackEtypeUndef`: for encoding and decoding `undefined` values
+     * - `msgPackEtypeClass`: for encoding and decoding instances of classes that have a `serialize` and
+     * `deserialize` static method
+     * - `msgPackEtypeError`: for encoding and decoding `Error` instances
+     *
+     * The `msgPackEtypeUndef` extension is used to encode and decode `undefined` values
+     *
+     * @returns {ExtensionCodec} the new `ExtensionCodec`
+     */
     private makeAndRegisterCodec(): ExtensionCodec {
         const codec = new ExtensionCodec();
         codec.register({
@@ -312,6 +357,11 @@ export class Bubblewrap {
         return codec;
     }
 
+    /**
+     * It takes a value and returns an encoded Uint8Array of this value.
+     * @param {unknown} value - The value to encode.
+     * @returns A Uint8Array
+     */
     encode(value: unknown): Uint8Array {
         if (
             this.strict &&
@@ -327,6 +377,11 @@ export class Bubblewrap {
         return encode(value, { extensionCodec: this.codec });
     }
 
+    /**
+     * It decodes the buffer and returns the decoded object.
+     * @param {ArrayLike<number> | ArrayBuffer} _buffer - The buffer to decode.
+     * @returns The decoded message.
+     */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     decode(_buffer: ArrayLike<number> | ArrayBuffer): any {
         const buffer = new Uint8Array(_buffer);

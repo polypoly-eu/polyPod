@@ -15,8 +15,8 @@ import { ResponsePort, WithResolvers } from "./procedure";
 import { triedPromise, Try } from "./util";
 
 /**
- * Creates a [[ResponsePort]] and an accompanying middleware that reacts on any `POST` request and responds with an
- * arbitrary object. Sending a `GET` request will act as a status check.
+ * Creates a [[ResponsePort]] and an accompanying middleware that reacts on any `POST` request
+ * and responds with an arbitrary object. Sending a `GET` request will act as a status check.
  *
  * The request's body type can be chosen freely by users. Ensure that
  * [body-parser](https://www.npmjs.com/package/body-parser) middleware or similar middleware is set up for the
@@ -37,8 +37,10 @@ import { triedPromise, Try } from "./util";
  *
  * The resulting [[ResponsePort]] only calls the first handler that has been added. This is similar to [[liftServer]].
  *
- * @param contentType the HTTP content type of the response
- * @param format a function that converts a successful response or an error into a body; it should never throw
+ * @param {string} contentType - the HTTP content type of the request body
+ * @param format - (result: Try<T>) => Body - a function that converts a successful response or
+ * an error into a body; it should never throw
+ * @returns {[HandleFunction, ResponsePort<Body, T>]} A tuple of two elements.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function middlewarePort<T, Body = any>(
@@ -90,11 +92,16 @@ export function middlewarePort<T, Body = any>(
 }
 
 /**
- * Wrapper around [[middlewarePort]] set up for JSON communication. The content type is set to `application/json`.
+ * Wrapper around [[middlewarePort]] set up for JSON communication.
+ * It creates a server that parses JSON requests and returns JSON responses.
+ * The content type is set to `application/json`.
  *
  * The formatting uses `JSON.stringify` to convert
  * the [[Try]] representing the outcome of the promise to a string. Conversely, incoming requests are parsed using
  * `JSON.parse`.
+ *
+ * @param {OptionsJson} [options] - OptionsJson
+ * @returns {[RequestListener, ResponsePort<any, any>]} A tuple of two elements.
  */
 export function jsonMiddlewarePort(
     options?: OptionsJson
@@ -124,12 +131,18 @@ export function jsonMiddlewarePort(
 }
 
 /**
- * Wrapper around [[middlewarePort]] set up for raw byte stream communication. The content type is set to
- * `application/octet-stream`.
+ * Wrapper around [[middlewarePort]] set up for raw byte stream communication.
+ * It takes a `Bubblewrap` instance and returns a `RequestListener` and a `ResponsePort`
+ * that can be used to send and receive messages.
+ * The content type is set to `application/octet-stream`.
  *
- * The formatting uses standard Bubblewrap
- * encoding to convert the [[Try]] representing the outcome of the promise to a string. Conversely, incoming requests
+ * The formatting uses standard Bubblewrap encoding to convert the [[Try]]
+ * representing the outcome of the promise to a string. Conversely, incoming requests
  * are decoded using standard Bubblewrap decoding.
+ *
+ * @param {Bubblewrap} bubblewrap - Bubblewrap
+ * @param {Options} [options] - Options
+ * @returns {[RequestListener, ResponsePort<any, any>]} - A tuple of two values.
  */
 export function bubblewrapMiddlewarePort(
     bubblewrap: Bubblewrap,

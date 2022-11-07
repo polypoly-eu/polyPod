@@ -6,6 +6,7 @@
 
 /**
  * An interface representing a successful computation.
+ * @interface Success
  */
 export interface Success<T> {
     value: T;
@@ -13,6 +14,7 @@ export interface Success<T> {
 
 /**
  * An interface representing a failed computation.
+ * @interface Failure
  */
 export interface Failure {
     err: unknown;
@@ -23,6 +25,7 @@ export interface Failure {
  *
  * This type can be imagined to be equivalent to a `Promise` that has been resolved or rejected, i.e., where the
  * resulting state is known and not pending.
+ * @alias Try
  */
 export type Try<T> = Success<T> | Failure;
 
@@ -30,6 +33,7 @@ export type Try<T> = Success<T> | Failure;
  * Transforms a [[Try]] into a promise that is resolved or rejected depending on [[Success]] or [[Failure]] state.
  *
  * See [[triedPromise]] for the inverse operation.
+ * @param {Try<T>} t - [[Try]] to be transformed
  */
 export async function rethrowPromise<T>(t: Try<T>): Promise<T> {
     if ("value" in t) return t.value;
@@ -41,6 +45,7 @@ export async function rethrowPromise<T>(t: Try<T>): Promise<T> {
  * the returned promise is resolved with a `Failure` containing the error.
  *
  * See [[rethrowPromise]] for the inverse operation.
+ * @param {Promise<T>} p - promise to be transformed
  */
 export async function triedPromise<T>(p: Promise<T>): Promise<Try<T>> {
     try {
